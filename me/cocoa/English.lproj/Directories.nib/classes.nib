@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>addiTunes</key>
+				<string>id</string>
+				<key>askForDirectory</key>
+				<string>id</string>
+				<key>changeDirectoryState</key>
+				<string>id</string>
+				<key>popupAddDirectoryMenu</key>
+				<string>id</string>
+				<key>removeSelectedDirectory</key>
+				<string>id</string>
+				<key>toggleVisible</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>DirectoryPanel</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>addButtonPopUp</key>
+				<string>NSPopUpButton</string>
+				<key>directories</key>
+				<string>NSOutlineView</string>
+				<key>removeButton</key>
+				<string>NSButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>DirectoryPanelBase</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>OutlineView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>py</key>
+				<string>PyApp</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSOutlineView</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

@@ -1,0 +1,548 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CE073F6309CAE1A3005C1D2F /* dupeguru_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_help */; };
+		CE0D67640ABC2D3E00E2FFD9 /* dg.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE0D67620ABC2D3E00E2FFD9 /* dg.xsl */; };
+		CE0D67650ABC2D3E00E2FFD9 /* hardcoded.css in Resources */ = {isa = PBXBuildFile; fileRef = CE0D67630ABC2D3E00E2FFD9 /* hardcoded.css */; };
+		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
+		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
+		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE3AA46509DB207900DB3A21 /* Directories.nib */; };
+		CE45579B0AE3BC2B005A9546 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
+		CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
+		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
+		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
+		CECA899909DB12CA00A3D774 /* Details.nib in Resources */ = {isa = PBXBuildFile; fileRef = CECA899709DB12CA00A3D774 /* Details.nib */; };
+		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
+		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
+		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
+		CEF7823809C8AA0200EF38FF /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7823709C8AA0200EF38FF /* gear.png */; };
+		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
+		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
+		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
+		CEFC295E09C8A0B000D9F998 /* dg_logo32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295D09C8A0B000D9F998 /* dg_logo32.png */; };
+		CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8B0FC9517500CD5728 /* Dialogs.m */; };
+		CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */; };
+		CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8F0FC9517500CD5728 /* Outline.m */; };
+		CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F910FC9517500CD5728 /* ProgressController.m */; };
+		CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F950FC9517500CD5728 /* RecentDirectories.m */; };
+		CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */; };
+		CEFC7FA40FC9517500CD5728 /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F990FC9517500CD5728 /* Table.m */; };
+		CEFC7FA50FC9517500CD5728 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F9B0FC9517500CD5728 /* Utils.m */; };
+		CEFC7FA60FC9517500CD5728 /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F9D0FC9517500CD5728 /* ValueTransformers.m */; };
+		CEFC7FAD0FC9518A00CD5728 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFC7FA70FC9518A00CD5728 /* ErrorReportWindow.xib */; };
+		CEFC7FAE0FC9518A00CD5728 /* progress.nib in Resources */ = {isa = PBXBuildFile; fileRef = CEFC7FA90FC9518A00CD5728 /* progress.nib */; };
+		CEFC7FAF0FC9518A00CD5728 /* registration.nib in Resources */ = {isa = PBXBuildFile; fileRef = CEFC7FAB0FC9518A00CD5728 /* registration.nib */; };
+		CEFC7FB90FC951A700CD5728 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7FB20FC951A700CD5728 /* AppDelegate.m */; };
+		CEFC7FBA0FC951A700CD5728 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7FB50FC951A700CD5728 /* DirectoryPanel.m */; };
+		CEFC7FBB0FC951A700CD5728 /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7FB80FC951A700CD5728 /* ResultWindow.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CECC02B709A36E8200CC0A94 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */,
+				CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */,
+				CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		8D1107320486CEB800E47090 /* dupeGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dupeGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE073F5409CAE1A3005C1D2F /* dupeguru_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_help; path = help/dupeguru_help; sourceTree = "<group>"; };
+		CE0D67620ABC2D3E00E2FFD9 /* dg.xsl */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xml; name = dg.xsl; path = w3/dg.xsl; sourceTree = SOURCE_ROOT; };
+		CE0D67630ABC2D3E00E2FFD9 /* hardcoded.css */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; name = hardcoded.css; path = w3/hardcoded.css; sourceTree = SOURCE_ROOT; };
+		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
+		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
+		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dg_cocoa.plugin; path = py/dist/dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE3AA46609DB207900DB3A21 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Directories.nib; sourceTree = "<group>"; };
+		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
+		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
+		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
+		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+		CECA899809DB12CA00A3D774 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Details.nib; sourceTree = "<group>"; };
+		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
+		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
+		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
+		CEF7823709C8AA0200EF38FF /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = images/gear.png; sourceTree = "<group>"; };
+		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
+		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = images/details32.png; sourceTree = SOURCE_ROOT; };
+		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = images/preferences32.png; sourceTree = SOURCE_ROOT; };
+		CEFC295D09C8A0B000D9F998 /* dg_logo32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dg_logo32.png; path = images/dg_logo32.png; sourceTree = SOURCE_ROOT; };
+		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSErrorReportWindow.m; path = cocoalib/HSErrorReportWindow.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F8E0FC9517500CD5728 /* Outline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outline.h; path = cocoalib/Outline.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F8F0FC9517500CD5728 /* Outline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Outline.m; path = cocoalib/Outline.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F900FC9517500CD5728 /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F910FC9517500CD5728 /* ProgressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController.m; path = cocoalib/ProgressController.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F920FC9517500CD5728 /* PyApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyApp.h; path = cocoalib/PyApp.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F930FC9517500CD5728 /* PyRegistrable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyRegistrable.h; path = cocoalib/PyRegistrable.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F940FC9517500CD5728 /* RecentDirectories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecentDirectories.h; path = cocoalib/RecentDirectories.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F950FC9517500CD5728 /* RecentDirectories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecentDirectories.m; path = cocoalib/RecentDirectories.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F960FC9517500CD5728 /* RegistrationInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistrationInterface.h; path = cocoalib/RegistrationInterface.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistrationInterface.m; path = cocoalib/RegistrationInterface.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F980FC9517500CD5728 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Table.h; path = cocoalib/Table.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F990FC9517500CD5728 /* Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Table.m; path = cocoalib/Table.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F9A0FC9517500CD5728 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = cocoalib/Utils.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F9B0FC9517500CD5728 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = cocoalib/Utils.m; sourceTree = SOURCE_ROOT; };
+		CEFC7F9C0FC9517500CD5728 /* ValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueTransformers.h; path = cocoalib/ValueTransformers.h; sourceTree = SOURCE_ROOT; };
+		CEFC7F9D0FC9517500CD5728 /* ValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValueTransformers.m; path = cocoalib/ValueTransformers.m; sourceTree = SOURCE_ROOT; };
+		CEFC7FA80FC9518A00CD5728 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = cocoalib/English.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
+		CEFC7FAA0FC9518A00CD5728 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = cocoalib/English.lproj/progress.nib; sourceTree = "<group>"; };
+		CEFC7FAC0FC9518A00CD5728 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = cocoalib/English.lproj/registration.nib; sourceTree = "<group>"; };
+		CEFC7FB10FC951A700CD5728 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = dgbase/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		CEFC7FB20FC951A700CD5728 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = dgbase/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		CEFC7FB30FC951A700CD5728 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = dgbase/Consts.h; sourceTree = SOURCE_ROOT; };
+		CEFC7FB40FC951A700CD5728 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectoryPanel.h; path = dgbase/DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
+		CEFC7FB50FC951A700CD5728 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectoryPanel.m; path = dgbase/DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
+		CEFC7FB60FC951A700CD5728 /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDupeGuru.h; path = dgbase/PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
+		CEFC7FB70FC951A700CD5728 /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultWindow.h; path = dgbase/ResultWindow.h; sourceTree = SOURCE_ROOT; };
+		CEFC7FB80FC951A700CD5728 /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = dgbase/ResultWindow.m; sourceTree = SOURCE_ROOT; };
+		CEFF18A009A4D387005E6321 /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				CE45579B0AE3BC2B005A9546 /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* DGSE */ = {
+			isa = PBXGroup;
+			children = (
+				CE381C9509914ACE003581CE /* AppDelegate.h */,
+				CE381C9409914ACE003581CE /* AppDelegate.m */,
+				CE848A1809DD85810004CB44 /* Consts.h */,
+				CECA899A09DB132E00A3D774 /* DetailsPanel.h */,
+				CECA899B09DB132E00A3D774 /* DetailsPanel.m */,
+				CE68EE6509ABC48000971085 /* DirectoryPanel.h */,
+				CE68EE6609ABC48000971085 /* DirectoryPanel.m */,
+				CEFF18A009A4D387005E6321 /* PyDupeGuru.h */,
+				CE381C9B09914ADF003581CE /* ResultWindow.h */,
+				CE381C9A09914ADF003581CE /* ResultWindow.m */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = DGSE;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE45579A0AE3BC2B005A9546 /* Sparkle.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* dupeGuru.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* dupeguru */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* DGSE */,
+				CEFC7FB00FC9518F00CD5728 /* dgbase */,
+				CEFC7F890FC9513600CD5728 /* cocoalib */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = dupeguru;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE073F5409CAE1A3005C1D2F /* dupeguru_help */,
+				CE381CF509915304003581CE /* dg_cocoa.plugin */,
+				CEFC294309C89E0000D9F998 /* images */,
+				CE0D67610ABC2D3E00E2FFD9 /* w3 */,
+				CEEB135109C837A2004D2330 /* dupeguru.icns */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				CECA899709DB12CA00A3D774 /* Details.nib */,
+				CE3AA46509DB207900DB3A21 /* Directories.nib */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE0D67610ABC2D3E00E2FFD9 /* w3 */ = {
+			isa = PBXGroup;
+			children = (
+				CE0D67620ABC2D3E00E2FFD9 /* dg.xsl */,
+				CE0D67630ABC2D3E00E2FFD9 /* hardcoded.css */,
+			);
+			path = w3;
+			sourceTree = "<group>";
+		};
+		CEFC294309C89E0000D9F998 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CEF7823709C8AA0200EF38FF /* gear.png */,
+				CEFC295D09C8A0B000D9F998 /* dg_logo32.png */,
+				CEFC295309C89FF200D9F998 /* details32.png */,
+				CEFC295409C89FF200D9F998 /* preferences32.png */,
+				CEFC294509C89E3D00D9F998 /* folder32.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		CEFC7F890FC9513600CD5728 /* cocoalib */ = {
+			isa = PBXGroup;
+			children = (
+				CEFC7FA70FC9518A00CD5728 /* ErrorReportWindow.xib */,
+				CEFC7FA90FC9518A00CD5728 /* progress.nib */,
+				CEFC7FAB0FC9518A00CD5728 /* registration.nib */,
+				CEFC7F8A0FC9517500CD5728 /* Dialogs.h */,
+				CEFC7F8B0FC9517500CD5728 /* Dialogs.m */,
+				CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */,
+				CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */,
+				CEFC7F8E0FC9517500CD5728 /* Outline.h */,
+				CEFC7F8F0FC9517500CD5728 /* Outline.m */,
+				CEFC7F900FC9517500CD5728 /* ProgressController.h */,
+				CEFC7F910FC9517500CD5728 /* ProgressController.m */,
+				CEFC7F920FC9517500CD5728 /* PyApp.h */,
+				CEFC7F930FC9517500CD5728 /* PyRegistrable.h */,
+				CEFC7F940FC9517500CD5728 /* RecentDirectories.h */,
+				CEFC7F950FC9517500CD5728 /* RecentDirectories.m */,
+				CEFC7F960FC9517500CD5728 /* RegistrationInterface.h */,
+				CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */,
+				CEFC7F980FC9517500CD5728 /* Table.h */,
+				CEFC7F990FC9517500CD5728 /* Table.m */,
+				CEFC7F9A0FC9517500CD5728 /* Utils.h */,
+				CEFC7F9B0FC9517500CD5728 /* Utils.m */,
+				CEFC7F9C0FC9517500CD5728 /* ValueTransformers.h */,
+				CEFC7F9D0FC9517500CD5728 /* ValueTransformers.m */,
+			);
+			name = cocoalib;
+			sourceTree = "<group>";
+		};
+		CEFC7FB00FC9518F00CD5728 /* dgbase */ = {
+			isa = PBXGroup;
+			children = (
+				CEFC7FB10FC951A700CD5728 /* AppDelegate.h */,
+				CEFC7FB20FC951A700CD5728 /* AppDelegate.m */,
+				CEFC7FB30FC951A700CD5728 /* Consts.h */,
+				CEFC7FB40FC951A700CD5728 /* DirectoryPanel.h */,
+				CEFC7FB50FC951A700CD5728 /* DirectoryPanel.m */,
+				CEFC7FB60FC951A700CD5728 /* PyDupeGuru.h */,
+				CEFC7FB70FC951A700CD5728 /* ResultWindow.h */,
+				CEFC7FB80FC951A700CD5728 /* ResultWindow.m */,
+			);
+			name = dgbase;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* dupeguru */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dupeguru" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				CECC02B709A36E8200CC0A94 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = dupeguru;
+			productInstallPath = "$(HOME)/Applications";
+			productName = dupeguru;
+			productReference = 8D1107320486CEB800E47090 /* dupeGuru.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = NO;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* dupeguru */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */,
+				CE073F6309CAE1A3005C1D2F /* dupeguru_help in Resources */,
+				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
+				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
+				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
+				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
+				CEFC295E09C8A0B000D9F998 /* dg_logo32.png in Resources */,
+				CEF7823809C8AA0200EF38FF /* gear.png in Resources */,
+				CECA899909DB12CA00A3D774 /* Details.nib in Resources */,
+				CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */,
+				CE0D67640ABC2D3E00E2FFD9 /* dg.xsl in Resources */,
+				CE0D67650ABC2D3E00E2FFD9 /* hardcoded.css in Resources */,
+				CEFC7FAD0FC9518A00CD5728 /* ErrorReportWindow.xib in Resources */,
+				CEFC7FAE0FC9518A00CD5728 /* progress.nib in Resources */,
+				CEFC7FAF0FC9518A00CD5728 /* registration.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				CE381C9609914ACE003581CE /* AppDelegate.m in Sources */,
+				CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */,
+				CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */,
+				CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */,
+				CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */,
+				CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */,
+				CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */,
+				CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */,
+				CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */,
+				CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */,
+				CEFC7FA40FC9517500CD5728 /* Table.m in Sources */,
+				CEFC7FA50FC9517500CD5728 /* Utils.m in Sources */,
+				CEFC7FA60FC9517500CD5728 /* ValueTransformers.m in Sources */,
+				CEFC7FB90FC951A700CD5728 /* AppDelegate.m in Sources */,
+				CEFC7FBA0FC951A700CD5728 /* DirectoryPanel.m in Sources */,
+				CEFC7FBB0FC951A700CD5728 /* ResultWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE3AA46509DB207900DB3A21 /* Directories.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE3AA46609DB207900DB3A21 /* English */,
+			);
+			name = Directories.nib;
+			sourceTree = "<group>";
+		};
+		CECA899709DB12CA00A3D774 /* Details.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CECA899809DB12CA00A3D774 /* English */,
+			);
+			name = Details.nib;
+			sourceTree = "<group>";
+		};
+		CEFC7FA70FC9518A00CD5728 /* ErrorReportWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEFC7FA80FC9518A00CD5728 /* English */,
+			);
+			name = ErrorReportWindow.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CEFC7FA90FC9518A00CD5728 /* progress.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEFC7FAA0FC9518A00CD5728 /* English */,
+			);
+			name = progress.nib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CEFC7FAB0FC9518A00CD5728 /* registration.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEFC7FAC0FC9518A00CD5728 /* English */,
+			);
+			name = registration.nib;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(SRCROOT)/../../../cocoalib/build/Release",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../base/cocoa/build/Release\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = dupeGuru;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(SRCROOT)/../../../cocoalib/build/Release",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../base/cocoa/build/Release\"";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = dupeGuru;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = "@executable_path/../Frameworks";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dupeguru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

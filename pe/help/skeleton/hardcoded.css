@@ -1,0 +1,409 @@
+/*****************************************************
+	General settings
+*****************************************************/
+
+BODY
+{
+	background-color:white;
+}
+
+BODY,A,P,UL,TABLE,TR,TD
+{
+	font-family:Tahoma,Arial,sans-serif;
+	font-size:10pt;
+	color: #4477AA;/*darker than 5588bb for the sake of the eyes*/
+}
+
+/*****************************************************
+	"A" settings
+*****************************************************/
+
+A   
+{
+	color: #ae322b;
+	text-decoration:underline;
+    font-weight:bold;
+}
+
+A.glossaryword {color:#A0A0A0;}
+
+A.noline
+{
+    text-decoration: none;
+}
+
+
+/*****************************************************
+	Menu and mainframe settings
+*****************************************************/
+
+.maincontainer
+{
+	display:block;
+	margin-left:7%;
+	margin-right:7%;
+	padding-left:5px;
+	padding-right:0px;
+	border-color:#CCCCCC;
+	border-style:solid;
+	border-width:2px;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	border-top-color:#ae322b;
+	vertical-align:top;
+}
+
+TD.menuframe
+{
+	width:30%;
+}
+
+.menu
+{
+	margin:4px 4px 4px 4px;
+	margin-top:   16pt;
+	border-color:gray;
+	border-width:1px;
+	border-style:dotted;
+	padding-top:10pt;
+	padding-bottom:10pt;
+	padding-right:6pt;
+}
+
+.submenu
+{
+  list-style-type: none;
+  margin-left:26pt;
+  margin-top:0pt;
+  margin-bottom:0pt;
+  padding-left:0pt;
+}
+
+A.menuitem,A.menuitem_selected
+{
+	font-size:14pt;
+	font-family:Tahoma,Arial,sans-serif;
+	font-weight:normal;
+	padding-left:10pt;
+	color:#5588bb;
+	margin-right:2pt;
+	margin-left:4pt;
+	text-decoration:none;	
+}
+
+A.menuitem_selected
+{
+	font-weight:bold;
+}
+
+A.submenuitem
+{
+	font-family:Tahoma,Arial,sans-serif;
+    font-weight:normal;
+	color:#5588bb;
+	text-decoration:none;
+}
+
+.titleline
+{
+	border-width:3px;
+	border-style:solid;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-top-width:0px;
+	border-color:#CCCCCC;
+	margin-left:28pt;
+	margin-right:2pt;
+	line-height:1px;
+	padding-top:0px;
+	margin-top:0px;
+	display:block;
+}
+
+.titledescrip
+{
+	text-align:left;
+	display:block;
+	margin-left:26pt;
+	color:#ae322b;
+}
+
+.mainlogo
+{
+	display:block;
+	margin-left:8%;
+	margin-top:4pt;
+    margin-bottom:4pt;
+}
+
+/*****************************************************
+	IMG settings
+*****************************************************/
+
+IMG 
+{ 
+	border-style:none;
+}
+
+IMG.smallbutton
+{
+	margin-right: 20px;
+	float:none;
+}
+
+IMG.floating
+{
+	float:left;
+	margin-right: 4pt;
+	margin-bottom: 4pt;
+}
+
+IMG.lefticon
+{
+    vertical-align: middle;
+    padding-right: 2pt;
+}
+
+IMG.righticon
+{
+    vertical-align: middle;
+    padding-left: 2pt;
+}
+
+/*****************************************************
+	TABLE settings
+*****************************************************/
+
+TABLE
+{
+	border-style:none;
+}
+
+TABLE.box
+{
+	width: 90%;
+	margin-left:5%;
+}
+
+TABLE.centered
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+TABLE.hardcoded
+{
+	background-color: #225588;
+	margin-left: auto;
+  	margin-right: auto;
+	width: 90%;
+}
+
+TR { background-color: transparent; }
+
+TABLE.hardcoded TR { background-color: white }
+
+TABLE.hardcoded TR.header 
+{ 
+	font-weight: bold; 
+	color: black;
+	background-color: #C8D6E5;
+}
+
+TABLE.hardcoded TR.header TD {color:black;}
+
+TABLE.hardcoded TD { padding-left: 2pt; }
+
+TD.minimelem { 
+	padding-right:0px;
+	padding-left:0px;
+	text-align:center;
+}
+
+TD.rightelem
+{
+	text-align:right;
+	/*padding-left:0pt;*/
+	padding-right: 2pt;
+	width: 17%;
+}
+
+/*****************************************************
+	P settings
+*****************************************************/
+
+p,.sub{text-align:justify;}
+.centered{text-align:center;}
+.sub
+{
+    padding-left: 16pt;
+    padding-right:16pt;
+}
+
+.Note, .ContactInfo 
+{
+	border-color: #ae322b;
+  	border-width: 1pt;
+  	border-style: dashed;
+  	text-align:justify;
+  	padding: 2pt 2pt 2pt 2pt;
+  	margin-bottom:4pt;
+    margin-top:8pt;
+  	list-style-position:inside;
+}
+
+.ContactInfo
+{
+  width:60%;
+  margin-left:5%;
+}
+
+.NewsItem
+{
+	border-color:#ae322b;
+	border-style: solid;
+	border-right:none;
+	border-top:none;
+	border-left:none;
+	border-bottom-width:1px;
+	text-align:justify;
+	padding-left:4pt;
+	padding-right:4pt;
+	padding-bottom:8pt;
+}
+
+/*****************************************************
+	Lists settings
+*****************************************************/
+UL.plain
+{
+  list-style-type: none;
+  padding-left:0px;
+  margin-left:0px;
+}
+
+LI.plain 
+{
+    list-style-type: none;
+}
+
+LI.section
+{
+    padding-top: 6pt;
+}
+
+UL.longtext LI
+{
+    border-color: #ae322b;
+    border-width:0px;
+    border-top-width:1px;
+    border-style:solid;
+    margin-top:12px;
+}
+
+/*
+    with UL.longtext LI, there can be anything between 
+    the UL and the LI, and it will still make the 
+    lontext thing, I must break it with this hack
+*/
+UL.longtext UL LI
+{
+	border-style:none;
+    margin-top:2px;
+}
+
+
+/*****************************************************
+	Titles settings 
+*****************************************************/
+
+H1,H2,H3
+{
+	font-family:"Courier New",monospace;
+	color:#5588bb;
+}
+
+H1
+{
+    font-size:18pt; 
+	color: #ae322b;
+	border-color: #70A0CF;
+	border-width: 1pt;
+	border-style: solid;
+	margin-top:   16pt;
+	margin-left:  5%;
+	margin-right: 5%;
+	padding-top:  2pt;
+	padding-bottom:2pt;
+	text-align:   center;
+}
+
+H2 
+{
+	border-color: #ae322b;
+	border-bottom-width: 2px;
+	border-top-width: 0pt;
+	border-left-width: 2px;
+	border-right-width: 0pt;
+	border-bottom-color: #cccccc;
+	border-style: solid;
+	margin-top:   16pt;
+	margin-left:  0pt;
+	margin-right: 0pt;
+	padding-bottom:3pt;
+	padding-left:5pt;
+	text-align: left;
+	font-size:16pt; 
+}
+
+H3
+{
+	display:block;
+	color:#ae322b;
+	border-color: #70A0CF;
+	border-bottom-width: 2px;
+	border-top-width: 0pt;
+	border-left-width: 0pt;
+	border-right-width: 0pt;
+	border-style: dashed;
+	margin-top:   12pt;
+	margin-left:  0pt;
+	margin-bottom: 4pt;
+	width:auto;
+	padding-bottom:3pt;
+	padding-right:2pt;
+	padding-left:2pt;
+	text-align: left;
+	font-weight:bold;
+}
+
+
+/*****************************************************
+	Misc. classes
+*****************************************************/
+.longtext:first-letter {font-size: 150%}
+
+.price, .loweredprice, .specialprice {font-weight:bold;}
+
+.loweredprice {text-decoration:line-through}
+
+.specialprice {color:red}
+
+form
+{
+	margin:0px;
+}
+
+.program_summary
+{
+    float:right;
+    margin: 32pt;
+    margin-top:0pt;
+    margin-bottom:0pt;
+}
+
+.screenshot
+{
+    float:left;
+    margin: 8pt;
+}
