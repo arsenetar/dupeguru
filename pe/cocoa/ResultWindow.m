@@ -39,7 +39,7 @@
 /* Overrides */
 - (NSString *)logoImageName
 {
-    return @"dgpe_logo32";
+    return @"dgpe_logo_32";
 }
 
 /* Actions */
