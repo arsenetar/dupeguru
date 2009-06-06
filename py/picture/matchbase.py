@@ -14,7 +14,7 @@ from Queue import Empty
 from collections import defaultdict
 
 from hsutil import job
-from hs.utils.misc import dedupe
+from hsutil.misc import dedupe
 
 from dupeguru.engine import Match
 from block import avgdiff, DifferentBlockCountError, NoBlocksError
