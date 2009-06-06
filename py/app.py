@@ -19,9 +19,7 @@ from hsutil.reg import RegistrableApplication, RegistrationRequired
 from hsutil.misc import flatten, first
 from hsutil.str import escape
 
-import directories
-import results
-import scanner
+from . import directories, results, scanner
 
 JOB_SCAN = 'job_scan'
 JOB_LOAD = 'job_load'

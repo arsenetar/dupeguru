@@ -133,6 +133,8 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     def _create_iphoto_library(self):
         ud = NSUserDefaults.standardUserDefaults()
         prefs = ud.persistentDomainForName_('com.apple.iApps')
+        if 'iPhotoRecentDatabases' not in prefs:
+            raise directories.InvalidPathError
         plisturl = NSURL.URLWithString_(prefs['iPhotoRecentDatabases'][0])
         plistpath = Path(plisturl.path())
         return IPhotoLibrary(plistpath)
@@ -185,13 +187,10 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                 return result
     
     def AddDirectory(self, d):
-        try:
-            added = self.directories.add_path(Path(d))
-            if d == 'iPhoto Library':
-                added.update()
-            return 0
-        except directories.AlreadyThereError:
-            return 1
+        result = app_cocoa.DupeGuru.AddDirectory(self, d)
+        if (result == 0) and (d == 'iPhoto Library'):
+            added.update()
+        return result
     
     def CopyOrMove(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, IPhoto):
