@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 import objc
 from AppKit import *
-from PyObjCTools import NibClassBuilder
-
-NibClassBuilder.extractClasses("MainMenu", bundle=NSBundle.mainBundle())
 
 from dupeguru import app_pe_cocoa, scanner
 
-class PyApp(NibClassBuilder.AutoBaseClass):
+# Fix py2app imports which chokes on relative imports
+from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
+from dupeguru.picture import block, cache, matchbase
+from hsfs import auto, manual, stats, tree, utils
+
+class PyApp(NSObject):
     pass #fake class
 
 class PyDupeGuru(PyApp):

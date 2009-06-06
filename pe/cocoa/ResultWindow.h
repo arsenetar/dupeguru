@@ -6,14 +6,9 @@
 @interface ResultWindow : ResultWindowBase
 {
     IBOutlet NSPopUpButton *actionMenu;
-    IBOutlet NSView *actionMenuView;
-    IBOutlet id app;
     IBOutlet NSMenu *columnsMenu;
-    IBOutlet NSView *deltaSwitchView;
     IBOutlet NSSearchField *filterField;
-    IBOutlet NSView *filterFieldView;
     IBOutlet NSSegmentedControl *pmSwitch;
-    IBOutlet NSView *pmSwitchView;
     IBOutlet NSWindow *preferencesPanel;
     IBOutlet NSTextField *stats;
     

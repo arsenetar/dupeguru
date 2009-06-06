@@ -1,11 +1,14 @@
 #!/usr/bin/env python
-from setuptools import setup
 
-from hs.build import set_buildenv
+from distutils.core import setup
+import py2app
 
-set_buildenv()
+from hsutil.build import move_testdata_out, put_testdata_back
 
-setup(
-    plugin=['dg_cocoa.py'],
-    setup_requires=['py2app'],
-)
+move_log = move_testdata_out()
+try:
+    setup(
+        plugin = ['dg_cocoa.py'],
+    )
+finally:
+    put_testdata_back(move_log)

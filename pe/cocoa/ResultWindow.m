@@ -6,15 +6,6 @@
 #import "AppDelegate.h"
 #import "Consts.h"
 
-static NSString* tbbDirectories = @"tbbDirectories";
-static NSString* tbbDetails     = @"tbbDetail";
-static NSString* tbbPreferences = @"tbbPreferences";
-static NSString* tbbPowerMarker = @"tbbPowerMarker";
-static NSString* tbbScan        = @"tbbScan";
-static NSString* tbbAction      = @"tbbAction";
-static NSString* tbbDelta       = @"tbbDelta";
-static NSString* tbbFilter      = @"tbbFilter";
-
 @implementation ResultWindow
 /* Override */
 - (void)awakeFromNib
@@ -39,10 +30,16 @@ static NSString* tbbFilter      = @"tbbFilter";
     
     NSToolbar *t = [[[NSToolbar alloc] initWithIdentifier:@"ResultWindowToolbar"] autorelease];
     [t setAllowsUserCustomization:YES];
-    [t setAutosavesConfiguration:NO];
+    [t setAutosavesConfiguration:YES];
     [t setDisplayMode:NSToolbarDisplayModeIconAndLabel];
     [t setDelegate:self];
     [[self window] setToolbar:t];
+}
+
+/* Overrides */
+- (NSString *)logoImageName
+{
+    return @"dgpe_logo32";
 }
 
 /* Actions */
@@ -465,105 +462,4 @@ static NSString* tbbFilter      = @"tbbFilter";
     [self refreshStats];
 }
 
-/* Toolbar */
-
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
-{
-    NSToolbarItem *tbi = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
-    if (itemIdentifier == tbbDirectories)
-    {
-        [tbi setLabel: @"Directories"];
-        [tbi setToolTip: @"Show/Hide the directories panel."];
-        [tbi setImage: [NSImage imageNamed: @"folder32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(toggleDirectories:)];
-    }
-    else if (itemIdentifier == tbbDetails)
-    {
-        [tbi setLabel: @"Details"];
-        [tbi setToolTip: @"Show/Hide the details panel."];
-        [tbi setImage: [NSImage imageNamed: @"details32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(toggleDetailsPanel:)];
-    }
-    else if (itemIdentifier == tbbPreferences)
-    {
-        [tbi setLabel: @"Preferences"];
-        [tbi setToolTip: @"Show the preferences panel."];
-        [tbi setImage: [NSImage imageNamed: @"preferences32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(showPreferencesPanel:)];
-    }
-    else if (itemIdentifier == tbbPowerMarker)
-    {
-        [tbi setLabel: @"Power Marker"];
-        [tbi setToolTip: @"When enabled, only the duplicates are shown, not the references."];
-        [tbi setView:pmSwitchView];
-        [tbi setMinSize:[pmSwitchView frame].size];
-        [tbi setMaxSize:[pmSwitchView frame].size];
-    }
-    else if (itemIdentifier == tbbScan)
-    {
-        [tbi setLabel: @"Start Scanning"];
-        [tbi setToolTip: @"Start scanning for duplicates in the selected diectories."];
-        [tbi setImage: [NSImage imageNamed: @"dgpe_logo_32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(startDuplicateScan:)];
-    }
-    else if (itemIdentifier == tbbAction)
-    {
-        [tbi setLabel: @"Action"];
-        [tbi setView:actionMenuView];
-        [tbi setMinSize:[actionMenuView frame].size];
-        [tbi setMaxSize:[actionMenuView frame].size];
-    }
-    else if (itemIdentifier == tbbDelta)
-    {
-        [tbi setLabel: @"Delta Values"];
-        [tbi setToolTip: @"When enabled, this option makes dupeGuru display, where applicable, delta values instead of absolute values."];
-        [tbi setView:deltaSwitchView];
-        [tbi setMinSize:[deltaSwitchView frame].size];
-        [tbi setMaxSize:[deltaSwitchView frame].size];
-    }
-    else if (itemIdentifier == tbbFilter)
-    {
-        [tbi setLabel: @"Filter"];
-        [tbi setToolTip: @"Filters the results using regular expression."];
-        [tbi setView:filterFieldView];
-        [tbi setMinSize:[filterFieldView frame].size];
-        [tbi setMaxSize:NSMakeSize(1000, [filterFieldView frame].size.height)];
-    }
-    [tbi setPaletteLabel: [tbi label]];
-    return tbi;
-}
-
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-        tbbDirectories,
-        tbbDetails,
-        tbbPreferences,
-        tbbPowerMarker,
-        tbbScan,
-        tbbAction,
-        tbbDelta,
-        tbbFilter,
-        NSToolbarSeparatorItemIdentifier,
-        NSToolbarSpaceItemIdentifier, 
-        NSToolbarFlexibleSpaceItemIdentifier,
-        nil];
-}
-
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-        tbbScan,
-        tbbAction,
-        tbbDirectories,
-        tbbDetails,
-        tbbPowerMarker,
-        tbbDelta,
-        tbbFilter,
-        nil];
-}
 @end
