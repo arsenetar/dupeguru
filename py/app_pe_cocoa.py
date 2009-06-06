@@ -147,10 +147,10 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if any(isinstance(dupe, IPhoto) for dupe in marked):
             j = j.start_subjob([6, 4], "Probing iPhoto. Don\'t touch it during the operation!")
             a = app('iPhoto')
-            a.select(a.photo_library_album())
+            a.select(a.photo_library_album(timeout=0), timeout=0)
             photos = as_fetch(a.photo_library_album().photos, k.item)
             for photo in j.iter_with_progress(photos):
-                self.path2iphoto[unicode(photo.image_path())] = photo
+                self.path2iphoto[unicode(photo.image_path(timeout=0))] = photo
         j.start_job(self.results.mark_count, "Sending dupes to the Trash")
         self.last_op_error_count = self.results.perform_on_marked(op, True)
         del self.path2iphoto
