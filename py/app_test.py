@@ -57,7 +57,7 @@ class TCDupeGuru(TestCase):
         call = app.results.apply_filter.calls[5]
         self.assertEqual('(abc)', call['filter_str'])
     
-    def test_CopyOrMove(self):
+    def test_copy_or_move(self):
         # The goal here is just to have a test for a previous blowup I had. I know my test coverage
         # for this unit is pathetic. What's done is done. My approach now is to add tests for
         # every change I want to make. The blowup was caused by a missing import.
@@ -68,13 +68,13 @@ class TCDupeGuru(TestCase):
         self.mock(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
         self.mock(fs.phys, 'Directory', fs.Directory) # We don't want an error because makedirs didn't work
         app = DupeGuru()
-        app.CopyOrMove(dupe, True, 'some_destination', 0)
+        app.copy_or_move(dupe, True, 'some_destination', 0)
         self.assertEqual(1, len(hsutil.files.copy.calls))
         call = hsutil.files.copy.calls[0]
         self.assertEqual('some_destination', call['dest_path'])
         self.assertEqual(dupe.path, call['source_path'])
     
-    def test_CopyOrMove_clean_empty_dirs(self):
+    def test_copy_or_move_clean_empty_dirs(self):
         tmppath = Path(self.tmpdir())
         sourcepath = tmppath + 'source'
         io.mkdir(sourcepath)
@@ -83,7 +83,7 @@ class TCDupeGuru(TestCase):
         myfile = tmpdir['source']['myfile']
         app = DupeGuru()
         self.mock(app, 'clean_empty_dirs', log_calls(lambda path: None))
-        app.CopyOrMove(myfile, False, tmppath + 'dest', 0)
+        app.copy_or_move(myfile, False, tmppath + 'dest', 0)
         calls = app.clean_empty_dirs.calls
         self.assertEqual(1, len(calls))
         self.assertEqual(sourcepath, calls[0]['path'])

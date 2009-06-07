@@ -193,10 +193,10 @@ class DupeGuruPE(app_cocoa.DupeGuru):
             iphotolib.update()
         return result
     
-    def CopyOrMove(self, dupe, copy, destination, dest_type):
+    def copy_or_move(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, IPhoto):
             copy = True
-        return app_cocoa.DupeGuru.CopyOrMove(self, dupe, copy, destination, dest_type)
+        return app_cocoa.DupeGuru.copy_or_move(self, dupe, copy, destination, dest_type)
     
     def start_scanning(self):
         for directory in self.directories:

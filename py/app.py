@@ -131,7 +131,7 @@ class DupeGuru(RegistrableApplication):
             while files.delete_if_empty(path, ['.DS_Store']):
                 path = path[:-1]
     
-    def CopyOrMove(self, dupe, copy, destination, dest_type):
+    def copy_or_move(self, dupe, copy, destination, dest_type):
         """
             copy: True = Copy False = Move
             destination: string.
@@ -164,7 +164,7 @@ class DupeGuru(RegistrableApplication):
         def do(j):
             def op(dupe):
                 j.add_progress()
-                return self.CopyOrMove(dupe, copy, destination, recreate_path)
+                return self.copy_or_move(dupe, copy, destination, recreate_path)
             
             j.start_job(self.results.mark_count)
             self.last_op_error_count = self.results.perform_on_marked(op, not copy)
