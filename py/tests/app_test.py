@@ -1,14 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.app
-Created By: Virgil Dupras
-Created On: 2007-06-23
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:02:48 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4388 $
-Copyright 2007 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.app_test
+# Created By: Virgil Dupras
+# Created On: 2007-06-23
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import os
 
 from hsutil.testcase import TestCase
@@ -20,8 +15,8 @@ import hsfs.phys
 import hsutil.files
 from hsutil.job import nulljob
 
-from . import data, app
-from .app import DupeGuru as DupeGuruBase
+from .. import data, app
+from ..app import DupeGuru as DupeGuruBase
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -132,6 +127,3 @@ class TCDupeGuru_clean_empty_dirs(TestCase):
         self.assertEqual(Path('not-empty/empty'), calls[1]['path'])
         self.assertEqual(Path('not-empty'), calls[2]['path'])
     
-
-if __name__ == '__main__':
-    unittest.main()

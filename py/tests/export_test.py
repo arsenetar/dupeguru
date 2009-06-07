@@ -1,21 +1,16 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.export
-Created By: Virgil Dupras
-Created On: 2006/09/16
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.export_test
+# Created By: Virgil Dupras
+# Created On: 2006/09/16
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 from xml.dom import minidom
 from StringIO import StringIO
 
 from hsutil.testcase import TestCase
 
-from .export import *
-from . import export
+from .. import export
+from ..export import *
 
 class TCoutput_columns_xml(TestCase):
     def test_empty_columns(self):
@@ -86,6 +81,3 @@ class TCmerge_css_into_xhtml(TestCase):
         xhtml.seek(0)
         self.assert_(not merge_css_into_xhtml(xhtml,StringIO()))
     
-
-if __name__ == "__main__":
-    unittest.main()

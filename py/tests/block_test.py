@@ -1,17 +1,13 @@
-#!/usr/bin/env python
-"""
-Unit Name: tests.picture.block
-Created By: Virgil Dupras
-Created On: 2006/09/01
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: tests.picture.block
+# Created By: Virgil Dupras
+# Created On: 2006/09/01
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
 # The commented out tests are tests for function that have been converted to pure C for speed
+
 import unittest
 
-from .block import *
+from ..picture.block import *
 
 def my_avgdiff(first, second, limit=768, min_iter=3): # this is so I don't have to re-write every call
     return avgdiff(first, second, limit, min_iter)
@@ -308,6 +304,3 @@ class TCavgdiff(unittest.TestCase):
 #         expected2 = 0 + 250 + 10
 #         self.assertEqual(expected1,maxdiff(blocks1,blocks2,expected1 - 1))
 #     
-
-if __name__ == "__main__":
-    unittest.main()

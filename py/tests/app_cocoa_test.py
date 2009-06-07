@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.app_cocoa
-Created By: Virgil Dupras
-Created On: 2006/11/11
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-29 17:51:41 +0200 (Fri, 29 May 2009) $
-                 $Revision: 4409 $
-Copyright 2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru.tests.app_cocoa_test
+# Created By: Virgil Dupras
+# Created On: 2006/11/11
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import tempfile
 import shutil
 import logging
@@ -18,13 +14,13 @@ from hsutil.decorators import log_calls
 import hsfs.phys
 import os.path as op
 
-from . import engine, data
+from .results_test import GetTestGroups
+from .. import engine, data
 try:
-    from .app_cocoa import DupeGuru as DupeGuruBase, DGDirectory
+    from ..app_cocoa import DupeGuru as DupeGuruBase, DGDirectory
 except ImportError:
     from nose.plugins.skip import SkipTest
     raise SkipTest("These tests can only be run on OS X")
-from .results_test import GetTestGroups
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):

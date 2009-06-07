@@ -1,14 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.directories
-Created By: Virgil Dupras
-Created On: 2006/02/27
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-29 08:51:14 +0200 (Fri, 29 May 2009) $
-                 $Revision: 4398 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.directories_test
+# Created By: Virgil Dupras
+# Created On: 2006/02/27
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import os.path as op
 import os
 import time
@@ -20,7 +15,7 @@ from hsutil.testcase import TestCase
 import hsfs.phys
 from hsfs.phys import phys_test
 
-from directories import *
+from ..directories import *
 
 testpath = Path(TestCase.datadirpath())
 
@@ -275,6 +270,3 @@ class TCDirectories(TestCase):
         self.assert_(isinstance(d.add_path(p2), hsfs.phys.Directory))
         self.assert_(isinstance(d.add_path(p1), MySpecialDirclass))
     
-
-if __name__ == "__main__":
-    unittest.main()

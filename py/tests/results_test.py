@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.results
-Created By: Virgil Dupras
-Created On: 2006/02/23
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru.tests.results_test
+# Created By: Virgil Dupras
+# Created On: 2006/02/23
+# $Id$                                  
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import unittest
 import StringIO
 import xml.dom.minidom
@@ -18,9 +14,8 @@ from hsutil.testcase import TestCase
 from hsutil.misc import first
 
 from . import engine_test
-from . import data
-from . import engine
-from .results import *
+from .. import data, engine
+from ..results import *
 
 class NamedObject(engine_test.NamedObject):
     size = 1
@@ -715,7 +710,7 @@ class TCResultsFilter(TestCase):
         self.assertEqual(expected, self.results.stat_line)
     
 
-class TCResultsRefFile(unittest.TestCase):
+class TCResultsRefFile(TestCase):
     def setUp(self):
         self.results = Results(data)
         self.objects, self.matches, self.groups = GetTestGroups()
@@ -737,6 +732,3 @@ class TCResultsRefFile(unittest.TestCase):
         expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked.'
         self.assertEqual(expected, self.results.stat_line)
     
-
-if __name__ == "__main__":
-    unittest.main()

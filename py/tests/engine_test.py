@@ -1,22 +1,17 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.engine_test
-Created By: Virgil Dupras
-Created On: 2006/01/29
-Last modified by:$Author: virgil $
-Last modified on:$Date: $
-                 $Revision: $
-Copyright 2004-2008 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.engine_test
+# Created By: Virgil Dupras
+# Created On: 2006/01/29
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import sys
 
 from hsutil import job
 from hsutil.decorators import log_calls
 from hsutil.testcase import TestCase
 
-from . import engine
-from .engine import *
+from .. import engine
+from ..engine import *
 
 class NamedObject(object):
     def __init__(self, name="foobar", with_words=False):
@@ -817,6 +812,3 @@ class TCget_groups(TestCase):
         self.assertEqual(0,self.log[0])
         self.assertEqual(100,self.log[-1])
     
-
-if __name__ == "__main__":
-    unittest.main()

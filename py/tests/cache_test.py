@@ -1,23 +1,19 @@
-#!/usr/bin/env python
-"""
-Unit Name: tests.picture.cache
-Created By: Virgil Dupras
-Created On: 2006/09/14
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.cache_test
+# Created By: Virgil Dupras
+# Created On: 2006/09/14
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 from StringIO import StringIO
 import os.path as op
 import os
 import threading
 
 from hsutil.testcase import TestCase
-from .cache import *
 
-class TCcolors_to_string(unittest.TestCase):
+from ..picture.cache import *
+
+class TCcolors_to_string(TestCase):
     def test_no_color(self):
         self.assertEqual('',colors_to_string([]))
     
@@ -30,7 +26,7 @@ class TCcolors_to_string(unittest.TestCase):
         self.assertEqual('000102030405',colors_to_string([(0,1,2),(3,4,5)]))
     
 
-class TCstring_to_colors(unittest.TestCase):
+class TCstring_to_colors(TestCase):
     def test_empty(self):
         self.assertEqual([],string_to_colors(''))
     
@@ -118,7 +114,7 @@ class TCCache(TestCase):
         self.assertEqual(c[foo_id], b)
     
 
-class TCCacheSQLEscape(unittest.TestCase):
+class TCCacheSQLEscape(TestCase):
     def test_contains(self):
         c = Cache()
         self.assert_("foo'bar" not in c)
@@ -140,7 +136,7 @@ class TCCacheSQLEscape(unittest.TestCase):
             self.fail()
     
 
-class TCCacheThreaded(unittest.TestCase):
+class TCCacheThreaded(TestCase):
     def test_access_cache(self):
         def thread_run():
             try:
@@ -154,6 +150,3 @@ class TCCacheThreaded(unittest.TestCase):
         t.join()
         self.assertEqual([(1,2,3)], c['foo']) 
     
-
-if __name__ == "__main__":
-    unittest.main()

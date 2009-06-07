@@ -1,22 +1,16 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.tests.scanner
-Created By: Virgil Dupras
-Created On: 2006/03/03
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
-import unittest
+# Unit Name: dupeguru.tests.scanner_test
+# Created By: Virgil Dupras
+# Created On: 2006/03/03
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
 
 from hsutil import job
 from hsutil.path import Path
 from hsutil.testcase import TestCase
 
-from .engine import getwords, Match
-from .ignore import IgnoreList
-from .scanner import *
+from ..engine import getwords, Match
+from ..ignore import IgnoreList
+from ..scanner import *
 
 class NamedObject(object):
     def __init__(self, name="foobar", size=1):
@@ -463,6 +457,3 @@ class TCScannerME(TestCase):
         [group] = s.GetDupeGroups([o1, o2])
         self.assertTrue(group.ref is o2)
     
-
-if __name__ == "__main__":
-    unittest.main()
