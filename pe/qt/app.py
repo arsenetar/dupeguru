@@ -10,9 +10,8 @@ import os.path as op
 from PyQt4.QtGui import QImage
 import PIL.Image
 
-from hs import fs
-from hs.fs import phys
-from hs.utils.str import get_file_ext
+from hsfs import phys, IT_ATTRS, IT_MD5, IT_EXTRA
+from hsutil.str import get_file_ext
 
 from dupeguru import data_pe
 from dupeguru.picture.cache import Cache
@@ -27,24 +26,24 @@ from preferences_dialog import PreferencesDialog
 
 class File(phys.File):
     cls_info_map = {
-        'size': fs.IT_ATTRS,
-        'ctime': fs.IT_ATTRS,
-        'mtime': fs.IT_ATTRS,
-        'md5': fs.IT_MD5,
-        'md5partial': fs.IT_MD5,
-        'dimensions': fs.IT_EXTRA,
+        'size': IT_ATTRS,
+        'ctime': IT_ATTRS,
+        'mtime': IT_ATTRS,
+        'md5': IT_MD5,
+        'md5partial': IT_MD5,
+        'dimensions': IT_EXTRA,
     }
     
     def _initialize_info(self, section):
         super(File, self)._initialize_info(section)
-        if section == fs.IT_EXTRA:
+        if section == IT_EXTRA:
             self._info.update({
                 'dimensions': (0,0),
             })
     
     def _read_info(self, section):
         super(File, self)._read_info(section)
-        if section == fs.IT_EXTRA:
+        if section == IT_EXTRA:
             im = PIL.Image.open(unicode(self.path))
             self._info['dimensions'] = im.size
     
@@ -66,7 +65,7 @@ class Directory(phys.Directory):
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_pe'
     NAME = 'dupeGuru Picture Edition'
-    VERSION = '1.7.2'
+    VERSION = '1.7.3'
     DELTA_COLUMNS = frozenset([2, 5, 6])
     
     def __init__(self):

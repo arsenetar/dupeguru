@@ -30,9 +30,9 @@ os.chdir('..')
 
 os.chdir(op.join('modules', 'block'))
 os.system('python setup.py build_ext --inplace')
-move(op.join('modules', 'block', '_block.so'), op.join('picture', '_block.so'))
-move(op.join('modules', 'block', '_block.pyd'), op.join('picture', '_block.pyd'))
 os.chdir(op.join('..', '..'))
+move(op.join('modules', 'block', '_block.so'), op.join('.', '_block.so'))
+move(op.join('modules', 'block', '_block.pyd'), op.join('.', '_block.pyd'))
 
 print_and_do("pyuic4 details_dialog.ui > details_dialog_ui.py")
 print_and_do("pyuic4 preferences_dialog.ui > preferences_dialog_ui.py")

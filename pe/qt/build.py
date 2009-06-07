@@ -9,6 +9,7 @@
 # The release version is outdated. Use at least r672 on http://svn.pyinstaller.org/trunk
 
 import os
+import os.path as op
 import shutil
 from app import DupeGuru
 
@@ -17,8 +18,10 @@ def print_and_do(cmd):
     os.system(cmd)
 
 # Removing build and dist
-shutil.rmtree('build')
-shutil.rmtree('dist')
+if op.exists('build'):
+    shutil.rmtree('build')
+if op.exists('dist'):
+    shutil.rmtree('dist')
 
 version = DupeGuru.VERSION
 versioncomma = version.replace('.', ', ') + ', 0'
