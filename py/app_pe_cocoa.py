@@ -189,7 +189,8 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     def AddDirectory(self, d):
         result = app_cocoa.DupeGuru.AddDirectory(self, d)
         if (result == 0) and (d == 'iPhoto Library'):
-            added.update()
+            [iphotolib] = [dir for dir in self.directories if dir.path == d]
+            iphotolib.update()
         return result
     
     def CopyOrMove(self, dupe, copy, destination, dest_type):
