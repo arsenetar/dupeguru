@@ -1,3 +1,8 @@
+- date: 2009-06-07
+  version: 1.7.3
+  description: |
+    * Fixed an occasional crash on Copy/Move operations.
+    * Fixed bugs with iPhoto integration.
 - date: 2009-05-27
   version: 1.7.2
   description: |
