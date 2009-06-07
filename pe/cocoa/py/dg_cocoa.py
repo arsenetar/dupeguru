@@ -42,7 +42,7 @@ class PyDupeGuru(PyApp):
         return self.app.ExportToXHTML(column_ids,xslt_path,css_path)
     
     def loadIgnoreList(self):
-        self.app.LoadIgnoreList()
+        self.app.load_ignore_list()
     
     def loadResults(self):
         self.app.load()

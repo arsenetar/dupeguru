@@ -179,9 +179,9 @@ class DupeGuru(RegistrableApplication):
     
     def load(self):
         self._start_job(JOB_LOAD, self._do_load)
-        self.LoadIgnoreList()
+        self.load_ignore_list()
     
-    def LoadIgnoreList(self):
+    def load_ignore_list(self):
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.load_from_xml(p)
     
