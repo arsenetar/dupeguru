@@ -146,9 +146,9 @@ class DupeGuru(RegistrableApplication):
             dest_path = dest_path + source_path[1:-1] #Remove drive letter and filename
         elif dest_type == 1:
             dest_path = dest_path + source_path[location_path:-1]
-        if not io.exists(dest_path):
-            io.makedirs(dest_path)
         try:
+            if not io.exists(dest_path):
+                io.makedirs(dest_path)
             if copy:
                 files.copy(source_path, dest_path)
             else:
