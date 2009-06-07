@@ -156,7 +156,7 @@ class DupeGuru(DupeGuruBase, QObject):
     #--- Public
     def add_dupes_to_ignore_list(self, duplicates):
         for dupe in duplicates:
-            self.AddToIgnoreList(dupe)
+            self.add_to_ignore_list(dupe)
         self.remove_duplicates(duplicates)
     
     def ApplyFilter(self, filter):

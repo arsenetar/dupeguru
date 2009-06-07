@@ -127,7 +127,7 @@ class DupeGuru(app.DupeGuru):
     #---Public
     def AddSelectedToIgnoreList(self):
         for dupe in self.selected_dupes:
-            self.AddToIgnoreList(dupe)
+            self.add_to_ignore_list(dupe)
     
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)

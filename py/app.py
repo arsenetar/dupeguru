@@ -113,7 +113,7 @@ class DupeGuru(RegistrableApplication):
         except directories.InvalidPathError:
             return 2
     
-    def AddToIgnoreList(self, dupe):
+    def add_to_ignore_list(self, dupe):
         g = self.results.get_group_of_duplicate(dupe)
         for other in g:
             if other is not dupe:
