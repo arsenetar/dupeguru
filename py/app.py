@@ -119,7 +119,7 @@ class DupeGuru(RegistrableApplication):
             if other is not dupe:
                 self.scanner.ignore_list.Ignore(unicode(other.path), unicode(dupe.path))
     
-    def ApplyFilter(self, filter):
+    def apply_filter(self, filter):
         self.results.apply_filter(None)
         if self.options['escape_filter_regexp']:
             filter = escape(filter, '()[]\\.|+?^')

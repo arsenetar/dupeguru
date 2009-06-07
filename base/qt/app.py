@@ -159,8 +159,8 @@ class DupeGuru(DupeGuruBase, QObject):
             self.add_to_ignore_list(dupe)
         self.remove_duplicates(duplicates)
     
-    def ApplyFilter(self, filter):
-        DupeGuruBase.ApplyFilter(self, filter)
+    def apply_filter(self, filter):
+        DupeGuruBase.apply_filter(self, filter)
         self.emit(SIGNAL('resultsChanged()'))
     
     def ask_for_reg_code(self):

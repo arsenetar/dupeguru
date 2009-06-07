@@ -156,11 +156,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not ok:
             return
         answer = unicode(answer)
-        self.app.ApplyFilter(answer)
+        self.app.apply_filter(answer)
         self._last_filter = answer
     
     def cancelFilterTriggered(self):
-        self.app.ApplyFilter('')
+        self.app.apply_filter('')
     
     def checkForUpdateTriggered(self):
         QProcess.execute('updater.exe', ['/checknow'])

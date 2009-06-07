@@ -80,7 +80,7 @@ class PyDupeGuru(PyApp):
         self.app.AddSelectedToIgnoreList()
     
     def applyFilter_(self, filter):
-        self.app.ApplyFilter(filter)
+        self.app.apply_filter(filter)
     
     def deleteMarked(self):
         self.app.delete_marked()

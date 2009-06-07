@@ -33,27 +33,27 @@ class DupeGuru(DupeGuruBase):
 
 class TCDupeGuru(TestCase):
     cls_tested_module = app
-    def test_ApplyFilter_calls_results_apply_filter(self):
+    def test_apply_filter_calls_results_apply_filter(self):
         app = DupeGuru()
         self.mock(app.results, 'apply_filter', log_calls(app.results.apply_filter))
-        app.ApplyFilter('foo')
+        app.apply_filter('foo')
         self.assertEqual(2, len(app.results.apply_filter.calls))
         call = app.results.apply_filter.calls[0]
         self.assert_(call['filter_str'] is None)
         call = app.results.apply_filter.calls[1]
         self.assertEqual('foo', call['filter_str'])
     
-    def test_ApplyFilter_escapes_regexp(self):
+    def test_apply_filter_escapes_regexp(self):
         app = DupeGuru()
         self.mock(app.results, 'apply_filter', log_calls(app.results.apply_filter))
-        app.ApplyFilter('()[]\\.|+?^abc')
+        app.apply_filter('()[]\\.|+?^abc')
         call = app.results.apply_filter.calls[1]
         self.assertEqual('\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc', call['filter_str'])
-        app.ApplyFilter('(*)') # In "simple mode", we want the * to behave as a wilcard
+        app.apply_filter('(*)') # In "simple mode", we want the * to behave as a wilcard
         call = app.results.apply_filter.calls[3]
         self.assertEqual('\(.*\)', call['filter_str'])
         app.options['escape_filter_regexp'] = False
-        app.ApplyFilter('(abc)')
+        app.apply_filter('(abc)')
         call = app.results.apply_filter.calls[5]
         self.assertEqual('(abc)', call['filter_str'])
     

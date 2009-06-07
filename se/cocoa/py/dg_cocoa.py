@@ -82,7 +82,7 @@ class PyDupeGuru(PyApp):
         self.app.delete_marked()
     
     def applyFilter_(self, filter):
-        self.app.ApplyFilter(filter)
+        self.app.apply_filter(filter)
     
     def makeSelectedReference(self):
         self.app.MakeSelectedReference()
