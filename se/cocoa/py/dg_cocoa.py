@@ -60,7 +60,7 @@ class PyDupeGuru(PyApp):
         self.app.ToggleSelectedMarkState()
     
     def saveIgnoreList(self):
-        self.app.SaveIgnoreList()
+        self.app.save_ignore_list()
     
     def saveResults(self):
         self.app.Save()
