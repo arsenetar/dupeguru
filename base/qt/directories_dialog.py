@@ -55,7 +55,7 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         dirpath = unicode(QFileDialog.getExistingDirectory(self, title, '', flags))
         if not dirpath:
             return
-        self.app.AddDirectory(dirpath)
+        self.app.add_directory(dirpath)
         self.directoriesModel.reset()
     
     def directoriesChanged(self):

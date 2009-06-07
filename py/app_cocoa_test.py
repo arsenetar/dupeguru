@@ -206,17 +206,17 @@ class TCDupeGuru(TestCase):
     
     def test_addDirectory_simple(self):
         app = self.app
-        self.assertEqual(0,app.AddDirectory(self.datadirpath()))
+        self.assertEqual(0,app.add_directory(self.datadirpath()))
         self.assertEqual(1,len(app.directories))
     
     def test_addDirectory_already_there(self):
         app = self.app
-        self.assertEqual(0,app.AddDirectory(self.datadirpath()))
-        self.assertEqual(1,app.AddDirectory(self.datadirpath()))
+        self.assertEqual(0,app.add_directory(self.datadirpath()))
+        self.assertEqual(1,app.add_directory(self.datadirpath()))
     
     def test_addDirectory_does_not_exist(self):
         app = self.app
-        self.assertEqual(2,app.AddDirectory('/does_not_exist'))
+        self.assertEqual(2,app.add_directory('/does_not_exist'))
     
     def test_ignore(self):
         app = self.app

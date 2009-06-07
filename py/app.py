@@ -104,7 +104,7 @@ class DupeGuru(RegistrableApplication):
         # func(j)
         raise NotImplementedError()
     
-    def AddDirectory(self, d):
+    def add_directory(self, d):
         try:
             self.directories.add_path(Path(d))
             return 0

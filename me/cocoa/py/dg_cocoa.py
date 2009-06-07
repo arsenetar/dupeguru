@@ -21,7 +21,7 @@ class PyDupeGuru(PyApp):
     
     #---Directories
     def addDirectory_(self,directory):
-        return self.app.AddDirectory(directory)
+        return self.app.add_directory(directory)
     
     def removeDirectory_(self,index):
         self.app.RemoveDirectory(index)
