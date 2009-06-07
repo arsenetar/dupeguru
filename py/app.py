@@ -193,7 +193,7 @@ class DupeGuru(RegistrableApplication):
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
     
-    def Save(self):
+    def save(self):
         self.directories.SaveToFile(op.join(self.appdata, 'last_directories.xml'))
         self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
     

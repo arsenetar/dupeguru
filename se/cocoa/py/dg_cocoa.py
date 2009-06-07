@@ -63,7 +63,7 @@ class PyDupeGuru(PyApp):
         self.app.save_ignore_list()
     
     def saveResults(self):
-        self.app.Save()
+        self.app.save()
     
     def refreshDetailsWithSelected(self):
         self.app.RefreshDetailsWithSelected()

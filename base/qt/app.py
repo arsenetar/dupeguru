@@ -256,7 +256,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     #--- Events
     def application_will_terminate(self):
-        self.Save()
+        self.save()
         self.save_ignore_list()
     
     def job_finished(self, jobid):
