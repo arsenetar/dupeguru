@@ -25,12 +25,14 @@
 		CECA899909DB12CA00A3D774 /* Details.nib in Resources */ = {isa = PBXBuildFile; fileRef = CECA899709DB12CA00A3D774 /* Details.nib */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
+		CEDD92DA0FDD01640031C7B7 /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */; };
+		CEDD92DB0FDD01640031C7B7 /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD92D90FDD01640031C7B7 /* NSCharacterSet_Extensions.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEF7823809C8AA0200EF38FF /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7823709C8AA0200EF38FF /* gear.png */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
-		CEFC295E09C8A0B000D9F998 /* dg_logo32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295D09C8A0B000D9F998 /* dg_logo32.png */; };
+		CEFC295E09C8A0B000D9F998 /* dgse_logo_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */; };
 		CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8B0FC9517500CD5728 /* Dialogs.m */; };
 		CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */; };
 		CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8F0FC9517500CD5728 /* Outline.m */; };
@@ -89,12 +91,16 @@
 		CECA899809DB12CA00A3D774 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Details.nib; sourceTree = "<group>"; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
+		CEDD92D60FDD01640031C7B7 /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
+		CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
+		CEDD92D80FDD01640031C7B7 /* NSCharacterSet_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSCharacterSet_Extensions.h; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.h; sourceTree = SOURCE_ROOT; };
+		CEDD92D90FDD01640031C7B7 /* NSCharacterSet_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSCharacterSet_Extensions.m; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.m; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEF7823709C8AA0200EF38FF /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = images/gear.png; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = images/details32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = images/preferences32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295D09C8A0B000D9F998 /* dg_logo32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dg_logo32.png; path = images/dg_logo32.png; sourceTree = SOURCE_ROOT; };
+		CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dgse_logo_32.png; path = images/dgse_logo_32.png; sourceTree = "<group>"; };
 		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -235,11 +241,23 @@
 			path = w3;
 			sourceTree = "<group>";
 		};
+		CEDD92D50FDD01640031C7B7 /* brsinglelineformatter */ = {
+			isa = PBXGroup;
+			children = (
+				CEDD92D60FDD01640031C7B7 /* BRSingleLineFormatter.h */,
+				CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */,
+				CEDD92D80FDD01640031C7B7 /* NSCharacterSet_Extensions.h */,
+				CEDD92D90FDD01640031C7B7 /* NSCharacterSet_Extensions.m */,
+			);
+			name = brsinglelineformatter;
+			path = cocoalib/brsinglelineformatter;
+			sourceTree = SOURCE_ROOT;
+		};
 		CEFC294309C89E0000D9F998 /* images */ = {
 			isa = PBXGroup;
 			children = (
 				CEF7823709C8AA0200EF38FF /* gear.png */,
-				CEFC295D09C8A0B000D9F998 /* dg_logo32.png */,
+				CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */,
 				CEFC295309C89FF200D9F998 /* details32.png */,
 				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
@@ -250,6 +268,7 @@
 		CEFC7F890FC9513600CD5728 /* cocoalib */ = {
 			isa = PBXGroup;
 			children = (
+				CEDD92D50FDD01640031C7B7 /* brsinglelineformatter */,
 				CEFC7FA70FC9518A00CD5728 /* ErrorReportWindow.xib */,
 				CEFC7FA90FC9518A00CD5728 /* progress.nib */,
 				CEFC7FAB0FC9518A00CD5728 /* registration.nib */,
@@ -347,7 +366,7 @@
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
-				CEFC295E09C8A0B000D9F998 /* dg_logo32.png in Resources */,
+				CEFC295E09C8A0B000D9F998 /* dgse_logo_32.png in Resources */,
 				CEF7823809C8AA0200EF38FF /* gear.png in Resources */,
 				CECA899909DB12CA00A3D774 /* Details.nib in Resources */,
 				CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */,
@@ -383,6 +402,8 @@
 				CEFC7FB90FC951A700CD5728 /* AppDelegate.m in Sources */,
 				CEFC7FBA0FC951A700CD5728 /* DirectoryPanel.m in Sources */,
 				CEFC7FBB0FC951A700CD5728 /* ResultWindow.m in Sources */,
+				CEDD92DA0FDD01640031C7B7 /* BRSingleLineFormatter.m in Sources */,
+				CEDD92DB0FDD01640031C7B7 /* NSCharacterSet_Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

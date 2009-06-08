@@ -36,6 +36,12 @@
     [[self window] setToolbar:t];
 }
 
+/* Override */
+- (NSString *)logoImageName
+{
+    return @"dgse_logo_32";
+}
+
 /* Actions */
 
 - (IBAction)changePowerMarker:(id)sender
