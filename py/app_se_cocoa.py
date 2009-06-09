@@ -8,6 +8,7 @@
 from hsfs.phys import Directory as DirectoryBase
 from hsfs.phys.bundle import Bundle
 from hsutil.path import Path
+from hsutil.misc import extract
 from hsutil.str import get_file_ext
 
 
@@ -15,13 +16,19 @@ from . import app_cocoa, data
 from .directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
 class DGDirectory(DirectoryBase):
-    def _create_sub_dir(self, name, with_parent = True):
+    def _create_sub_file(self, name, with_parent=True):
         ext = get_file_ext(name)
         if ext == 'app':
             parent = self if with_parent else None
             return Bundle(parent, name)
         else:
-            return super(DGDirectory, self)._create_sub_dir(name, with_parent)
+            return super(DGDirectory, self)._create_sub_file(name, with_parent)
+    
+    def _fetch_subitems(self):
+        subdirs, subfiles = super(DGDirectory, self)._fetch_subitems()
+        apps, normal_dirs = extract(lambda name: get_file_ext(name) == 'app', subdirs)
+        subfiles += apps
+        return normal_dirs, subfiles
     
 
 class Directories(DirectoriesBase):

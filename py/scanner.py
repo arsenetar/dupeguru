@@ -54,7 +54,11 @@ class Scanner(object):
             SCAN_TYPE_CONTENT_AUDIO: lambda f: [str(f.audiosize)]
         }[self.scan_type]
         for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
+            if self.size_threshold:
+                f.size # pre-read, makes a smoother progress if read here (especially for bundles)
             f.words = func(f)
+        if self.size_threshold:
+            files = [f for f in files if f.size >= self.size_threshold]
         return mf.getmatches(files, j)
     
     @staticmethod
@@ -75,8 +79,6 @@ class Scanner(object):
         j = j.start_subjob([8, 2])
         for f in [f for f in files if not hasattr(f, 'is_ref')]:
             f.is_ref = False
-        if self.size_threshold:
-            files = [f for f in files if f.size >= self.size_threshold]
         logging.info('Getting matches')
         if self.match_factory is None:
             matches = self._getmatches(files, j)
