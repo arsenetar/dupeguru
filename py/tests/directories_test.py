@@ -9,11 +9,13 @@ import os
 import time
 import shutil
 
+from nose.tools import eq_
+
 from hsutil import job, io
 from hsutil.path import Path
 from hsutil.testcase import TestCase
 import hsfs.phys
-from hsfs.phys import phys_test
+from hsfs.tests import phys_test
 
 from ..directories import *
 
@@ -269,4 +271,26 @@ class TCDirectories(TestCase):
         d.special_dirclasses[p1] = MySpecialDirclass
         self.assert_(isinstance(d.add_path(p2), hsfs.phys.Directory))
         self.assert_(isinstance(d.add_path(p1), MySpecialDirclass))
+    
+    def test_default_path_state_override(self):
+        # It's possible for a subclass to override the default state of a path
+        class MyDirectories(Directories):
+            def _default_state_for_path(self, path):
+                if 'foobar' in path:
+                    return STATE_EXCLUDED
+        
+        d = MyDirectories()
+        p1 = self.tmppath()
+        io.mkdir(p1 + 'foobar')
+        io.open(p1 + 'foobar/somefile', 'w').close()
+        io.mkdir(p1 + 'foobaz')
+        io.open(p1 + 'foobaz/somefile', 'w').close()
+        d.add_path(p1)
+        eq_(d.GetState(p1 + 'foobaz'), STATE_NORMAL)
+        eq_(d.GetState(p1 + 'foobar'), STATE_EXCLUDED)
+        eq_(len(list(d.get_files())), 1) # only the 'foobaz' file is there
+        # However, the default state can be changed
+        d.SetState(p1 + 'foobar', STATE_NORMAL)
+        eq_(d.GetState(p1 + 'foobar'), STATE_NORMAL)
+        eq_(len(list(d.get_files())), 2)
     

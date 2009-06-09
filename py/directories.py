@@ -49,11 +49,23 @@ class Directories(object):
         return len(self._dirs)
     
     #---Private
-    def _get_files(self, from_dir, state=STATE_NORMAL):
-        state = self.states.get(from_dir.path, state)
+    def _default_state_for_path(self, path):
+        # Override this in subclasses to specify the state of some special folders.
+        if path[-1].startswith('.'): # hidden
+            return STATE_EXCLUDED
+    
+    def _get_files(self, from_dir):
+        from_path = from_dir.path
+        state = self.GetState(from_path)
+        if state == STATE_EXCLUDED:
+            # Recursively get files from folders with lots of subfolder is expensive. However, there
+            # might be a subfolder in this path that is not excluded. What we want to do is to skim
+            # through self.states and see if we must continue, or we can stop right here to save time
+            if not any(p[:len(from_path)] == from_path for p in self.states):
+                return
         result = []
         for subdir in from_dir.dirs:
-            for file in self._get_files(subdir, state):
+            for file in self._get_files(subdir):
                 yield file
         if state != STATE_EXCLUDED:
             for file in from_dir.files:
@@ -103,8 +115,9 @@ class Directories(object):
         try:
             return self.states[path]
         except KeyError:
-            if path[-1].startswith('.'): # hidden
-                return STATE_EXCLUDED
+            default_state = self._default_state_for_path(path)
+            if default_state is not None:
+                return default_state
             parent = path[:-1]
             if parent in self:
                 return self.GetState(parent)
@@ -153,9 +166,13 @@ class Directories(object):
         try:
             if self.GetState(path) == state:
                 return
-            self.states[path] = state
-            if (self.GetState(path[:-1]) == state) and (not path[-1].startswith('.')):
+            # we don't want to needlessly fill self.states. if GetState returns the same thing
+            # without an explicit entry, remove that entry
+            if path in self.states:
                 del self.states[path]
+                if self.GetState(path) == state: # no need for an entry
+                    return
+            self.states[path] = state
         except LookupError:
             pass
     

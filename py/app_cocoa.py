@@ -13,9 +13,7 @@ import logging
 import os.path as op
 
 import hsfs as fs
-from hsfs.phys.bundle import Bundle
 from hsutil.cocoa import install_exception_hook
-from hsutil.str import get_file_ext
 from hsutil import io, cocoa, job
 from hsutil.reg import RegistrationRequired
 
@@ -28,19 +26,6 @@ JOBID2TITLE = {
     app.JOB_COPY: "Copying",
     app.JOB_DELETE: "Sending to Trash",
 }
-
-class DGDirectory(fs.phys.Directory):
-    def _create_sub_dir(self,name,with_parent = True):
-        ext = get_file_ext(name)
-        if ext == 'app':
-            if with_parent:
-                parent = self
-            else:
-                parent = None
-            return Bundle(parent,name)
-        else:
-            return super(DGDirectory,self)._create_sub_dir(name,with_parent)
-    
 
 def demo_method(method):
     def wrapper(self, *args, **kwargs):
@@ -62,7 +47,6 @@ class DupeGuru(app.DupeGuru):
         appdata = op.expanduser(op.join('~', '.hsoftdata', appdata_subdir))
         app.DupeGuru.__init__(self, data_module, appdata, appid)
         self.progress = cocoa.ThreadedJobPerformer()
-        self.directories.dirclass = DGDirectory
         self.display_delta_values = False
         self.selected_dupes = []
         self.RefreshDetailsTable(None,None)
