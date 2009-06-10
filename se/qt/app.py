@@ -6,11 +6,21 @@
 # Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
 
 from dupeguru import data
+from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
 from base.app import DupeGuru as DupeGuruBase
 from details_dialog import DetailsDialog
 from preferences import Preferences
 from preferences_dialog import PreferencesDialog
+
+class Directories(DirectoriesBase):
+    ROOT_PATH_TO_EXCLUDE = frozenset(['windows', 'program files'])
+    def _default_state_for_path(self, path):
+        result = DirectoriesBase._default_state_for_path(self, path)
+        if result is not None:
+            return result
+        if len(path) == 2 and path[1].lower() in self.ROOT_PATH_TO_EXCLUDE:
+            return STATE_EXCLUDED
 
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_se'
@@ -20,6 +30,10 @@ class DupeGuru(DupeGuruBase):
     
     def __init__(self):
         DupeGuruBase.__init__(self, data, appid=4)
+    
+    def _setup(self):
+        self.directories = Directories()
+        DupeGuruBase._setup(self)
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
