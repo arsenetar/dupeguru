@@ -1,6 +1,6 @@
 # -*- mode: python -*-
 a = Analysis([os.path.join(HOMEPATH,'support\\_mountzlib.py'), os.path.join(HOMEPATH,'support\\useUnicode.py'), 'start.py'],
-             pathex=['C:\\src\\dupeguru\\se\\qt'])
+             pathex=['C:\\src\\dupeguru\\se'])
 pyz = PYZ(a.pure)
 exe = EXE(pyz,
           a.scripts,
@@ -9,7 +9,9 @@ exe = EXE(pyz,
           debug=False,
           strip=False,
           upx=True,
-          console=False , icon='base\\images\\dgse_logo.ico', version='verinfo_tmp')
+          console=False,
+          icon='base\\images\\dgse_logo.ico',
+          version='verinfo_tmp')
 coll = COLLECT( exe,
                a.binaries,
                a.zipfiles,
