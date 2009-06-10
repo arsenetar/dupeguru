@@ -36,11 +36,12 @@ class DupeGuruME(app_cocoa.DupeGuru):
     def remove_dead_tracks(self):
         def do(j):
             a = app('iTunes')
+            a.activate(timeout=0)
             for index, track in enumerate(j.iter_with_progress(self.dead_tracks)):
                 if index % 100 == 0:
                     time.sleep(.1)
                 try:
-                    track.delete()
+                    track.delete(timeout=0)
                 except CommandError as e:
                     logging.warning('Error while trying to remove a track from iTunes: %s' % unicode(e))
         
@@ -49,9 +50,10 @@ class DupeGuruME(app_cocoa.DupeGuru):
     def scan_dead_tracks(self):
         def do(j):
             a = app('iTunes')
+            a.activate(timeout=0)
             try:
-                [source] = [s for s in a.sources() if s.kind() == k.library]
-                [library] = source.library_playlists()
+                [source] = [s for s in a.sources(timeout=0) if s.kind(timeout=0) == k.library]
+                [library] = source.library_playlists(timeout=0)
             except ValueError:
                 logging.warning('Some unexpected iTunes configuration encountered')
                 return
@@ -60,7 +62,7 @@ class DupeGuruME(app_cocoa.DupeGuru):
             for index, track in enumerate(j.iter_with_progress(tracks)):
                 if index % 100 == 0:
                     time.sleep(.1)
-                if track.location() == k.missing_value:
+                if track.location(timeout=0) == k.missing_value:
                     self.dead_tracks.append(track)
             logging.info('Found %d dead tracks' % len(self.dead_tracks))
         
