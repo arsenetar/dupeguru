@@ -9,9 +9,9 @@ BODY
 
 BODY,A,P,UL,TABLE,TR,TD
 {
-	font-family:Tahoma,Arial,sans-serif;
+	font-family: "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
 	font-size:10pt;
-	color: #4477AA;/*darker than 5588bb for the sake of the eyes*/
+	color: #336699;/*darker than 5588bb for the sake of the eyes*/
 }
 
 /*****************************************************
@@ -82,7 +82,6 @@ TD.menuframe
 A.menuitem,A.menuitem_selected
 {
 	font-size:14pt;
-	font-family:Tahoma,Arial,sans-serif;
 	font-weight:normal;
 	padding-left:10pt;
 	color:#5588bb;
@@ -98,7 +97,6 @@ A.menuitem_selected
 
 A.submenuitem
 {
-	font-family:Tahoma,Arial,sans-serif;
     font-weight:normal;
 	color:#5588bb;
 	text-decoration:none;

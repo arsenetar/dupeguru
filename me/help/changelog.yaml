@@ -1,3 +1,8 @@
+- date: 2009-06-10
+  version: 5.6.2
+  description: |
+    * Fixed an occasional crash on Copy/Move operations.
+    * Fixed bugs with iTunes integration.
 - date: 2009-05-30
   version: 5.6.1
   description: |
