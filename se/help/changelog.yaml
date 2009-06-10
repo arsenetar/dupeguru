@@ -1,3 +1,9 @@
+- date: 2009-06-10
+  version: 2.7.2
+  description: |
+    * Fixed an occasional crash on Copy/Move operations.
+    * Added automatic exclusion for sensible folders (like system folders).
+    * Fixed an occasional crash when application files were part of the results (Mac OS X).
 - date: 2009-05-29
   version: 2.7.1
   description: |
