@@ -22,13 +22,22 @@
     BOOL _powerMode;
     BOOL _displayDelta;
 }
+/* Override */
 - (NSString *)logoImageName;
+
+/* Helpers */
+- (NSArray *)getSelected:(BOOL)aDupesOnly;
+- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
+- (void)performPySelection:(NSArray *)aIndexPaths;
+
 /* Actions */
 - (IBAction)changeDelta:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
 - (IBAction)expandAll:(id)sender;
 - (IBAction)moveMarked:(id)sender;
+- (IBAction)switchSelected:(id)sender;
+
 /* Notifications */
 - (void)jobCompleted:(NSNotification *)aNotification;
 @end

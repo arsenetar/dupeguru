@@ -63,6 +63,44 @@
     return @"dg_logo32";
 }
 
+/* Helpers */
+- (NSArray *)getSelected:(BOOL)aDupesOnly
+{
+    if (_powerMode)
+        aDupesOnly = NO;
+    NSIndexSet *indexes = [matches selectedRowIndexes];
+    NSMutableArray *nodeList = [NSMutableArray array];
+    OVNode *node;
+    int i = [indexes firstIndex];
+    while (i != NSNotFound)
+    {
+        node = [matches itemAtRow:i];
+        if (!aDupesOnly || ([node level] > 1))
+            [nodeList addObject:node];
+        i = [indexes indexGreaterThanIndex:i];
+    }
+    return nodeList;
+}
+
+- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
+{
+    NSMutableArray *r = [NSMutableArray array];
+    NSArray *selected = [self getSelected:aDupesOnly];
+    NSEnumerator *e = [selected objectEnumerator];
+    OVNode *node;
+    while (node = [e nextObject])
+        [r addObject:p2a([node indexPath])];
+    return r;
+}
+
+- (void)performPySelection:(NSArray *)aIndexPaths
+{
+    if (_powerMode)
+        [py selectPowerMarkerNodePaths:aIndexPaths];
+    else
+        [py selectResultNodePaths:aIndexPaths];
+}
+
 /* Actions */
 - (IBAction)changeDelta:(id)sender
 {
@@ -127,6 +165,13 @@
         [py setRemoveEmptyFolders:[ud objectForKey:@"removeEmptyFolders"]];
         [py copyOrMove:b2n(NO) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
     }
+}
+
+- (IBAction)switchSelected:(id)sender
+{
+    [self performPySelection:[self getSelectedPaths:YES]];
+    [py makeSelectedReference];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 /* Delegate */
