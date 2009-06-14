@@ -18,6 +18,7 @@
     IBOutlet NSView *filterFieldView;
     IBOutlet MatchesView *matches;
     IBOutlet NSView *pmSwitchView;
+	IBOutlet NSTextField *stats;
     
     BOOL _powerMode;
     BOOL _displayDelta;
@@ -29,6 +30,7 @@
 - (NSArray *)getSelected:(BOOL)aDupesOnly;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)performPySelection:(NSArray *)aIndexPaths;
+- (void)refreshStats;
 
 /* Actions */
 - (IBAction)changeDelta:(id)sender;

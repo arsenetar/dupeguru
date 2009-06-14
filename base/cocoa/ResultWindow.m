@@ -53,8 +53,11 @@
 {
     [self window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
 }
 
 /* Virtual */
@@ -99,6 +102,11 @@
         [py selectPowerMarkerNodePaths:aIndexPaths];
     else
         [py selectResultNodePaths:aIndexPaths];
+}
+
+- (void)refreshStats
+{
+    [stats setStringValue:[py getStatLine]];
 }
 
 /* Actions */
@@ -171,7 +179,7 @@
 {
     [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
 }
 
 /* Delegate */
@@ -246,6 +254,19 @@
 {
     NSString *msg = @"This is a demo version, which only allows you 10 delete/copy/move actions per session. You cannot continue.";
     [Dialogs showMessage:msg];
+}
+
+- (void)resultsChanged:(NSNotification *)aNotification
+{
+    [matches reloadData];
+    [self expandAll:nil];
+    [self outlineViewSelectionDidChange:nil];
+    [self refreshStats];
+}
+
+- (void)resultsUpdated:(NSNotification *)aNotification
+{
+	[matches invalidateBuffers];
 }
 
 /* Toolbar */
