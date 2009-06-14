@@ -223,13 +223,7 @@
         [Dialogs showMessage:@"The selected directories contain no scannable file."];
         [app toggleDirectories:nil];
     }
-}
 
-- (IBAction)switchSelected:(id)sender
-{
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py makeSelectedReference];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)toggleColumn:(id)sender
@@ -323,43 +317,6 @@
         [result setObject:width forKey:colId];
     }
     return result;
-}
-
-- (NSArray *)getSelected:(BOOL)aDupesOnly
-{
-    if (_powerMode)
-        aDupesOnly = NO;
-    NSIndexSet *indexes = [matches selectedRowIndexes];
-    NSMutableArray *nodeList = [NSMutableArray array];
-    OVNode *node;
-    int i = [indexes firstIndex];
-    while (i != NSNotFound)
-    {
-        node = [matches itemAtRow:i];
-        if (!aDupesOnly || ([node level] > 1))
-            [nodeList addObject:node];
-        i = [indexes indexGreaterThanIndex:i];
-    }
-    return nodeList;
-}
-
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
-{
-    NSMutableArray *r = [NSMutableArray array];
-    NSArray *selected = [self getSelected:aDupesOnly];
-    NSEnumerator *e = [selected objectEnumerator];
-    OVNode *node;
-    while (node = [e nextObject])
-        [r addObject:p2a([node indexPath])];
-    return r;
-}
-
-- (void)performPySelection:(NSArray *)aIndexPaths
-{
-    if (_powerMode)
-        [py selectPowerMarkerNodePaths:aIndexPaths];
-    else
-        [py selectResultNodePaths:aIndexPaths];
 }
 
 - (void)initResultColumns
