@@ -25,8 +25,6 @@
     [self refreshStats];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duplicateSelectionChanged:) name:DuplicateSelectionChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     
     NSToolbar *t = [[[NSToolbar alloc] initWithIdentifier:@"ResultWindowToolbar"] autorelease];
     [t setAllowsUserCustomization:YES];
@@ -334,11 +332,6 @@
     [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Dupe Count" width:80 refCol:refCol]];
 }
 
--(void)refreshStats
-{
-    [stats setStringValue:[py getStatLine]];
-}
-
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
 {
     NSTableColumn *col;
@@ -405,14 +398,6 @@
     [self performPySelection:[self getSelectedPaths:NO]];
     [py refreshDetailsWithSelected];
     [[NSNotificationCenter defaultCenter] postNotificationName:DuplicateSelectionChangedNotification object:self];
-}
-
-- (void)resultsChanged:(NSNotification *)aNotification
-{
-    [matches reloadData];
-    [self expandAll:nil];
-    [self outlineViewSelectionDidChange:nil];
-    [self refreshStats];
 }
 
 - (void)resultsMarkingChanged:(NSNotification *)aNotification

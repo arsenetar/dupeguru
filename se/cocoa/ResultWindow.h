@@ -11,7 +11,6 @@
     IBOutlet NSSearchField *filterField;
     IBOutlet NSSegmentedControl *pmSwitch;
     IBOutlet NSWindow *preferencesPanel;
-    IBOutlet NSTextField *stats;
     
     NSString *_lastAction;
     DetailsPanel *_detailsPanel;
@@ -46,6 +45,5 @@
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
 - (void)initResultColumns;
-- (void)refreshStats;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 @end
