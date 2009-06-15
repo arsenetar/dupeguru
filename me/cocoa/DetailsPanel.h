@@ -1,13 +1,6 @@
 #import <Cocoa/Cocoa.h>
-#import "cocoalib/PyApp.h"
-#import "cocoalib/Table.h"
+#import "dgbase/DetailsPanel.h"
 
 
-@interface DetailsPanel : NSWindowController
-{
-    IBOutlet TableView *detailsTable;
-}
-- (id)initWithPy:(PyApp *)aPy;
-
-- (void)refresh;
+@interface DetailsPanel : DetailsPanelBase
 @end

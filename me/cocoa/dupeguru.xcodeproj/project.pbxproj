@@ -49,6 +49,7 @@
 		CE515E1D0FC6C19300EC695D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E160FC6C19300EC695D /* AppDelegate.m */; };
 		CE515E1E0FC6C19300EC695D /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E190FC6C19300EC695D /* DirectoryPanel.m */; };
 		CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E1C0FC6C19300EC695D /* ResultWindow.m */; };
+		CE6032C00FE6784C007E33FF /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6032BF0FE6784C007E33FF /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CEA7D2C50FDFED340037CD8C /* dgme_logo_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA7D2C40FDFED340037CD8C /* dgme_logo_32.png */; };
@@ -132,6 +133,8 @@
 		CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDupeGuru.h; path = dgbase/PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
 		CE515E1B0FC6C19300EC695D /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultWindow.h; path = dgbase/ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE515E1C0FC6C19300EC695D /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = dgbase/ResultWindow.m; sourceTree = SOURCE_ROOT; };
+		CE6032BE0FE6784C007E33FF /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = dgbase/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
+		CE6032BF0FE6784C007E33FF /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				CE515E150FC6C19300EC695D /* AppDelegate.h */,
 				CE515E160FC6C19300EC695D /* AppDelegate.m */,
 				CE515E170FC6C19300EC695D /* Consts.h */,
+				CE6032BE0FE6784C007E33FF /* DetailsPanel.h */,
+				CE6032BF0FE6784C007E33FF /* DetailsPanel.m */,
 				CE515E180FC6C19300EC695D /* DirectoryPanel.h */,
 				CE515E190FC6C19300EC695D /* DirectoryPanel.m */,
 				CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */,
@@ -424,6 +429,7 @@
 				CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */,
 				CE49DEF60FDFEB810098617B /* BRSingleLineFormatter.m in Sources */,
 				CE49DEF70FDFEB810098617B /* NSCharacterSet_Extensions.m in Sources */,
+				CE6032C00FE6784C007E33FF /* DetailsPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
