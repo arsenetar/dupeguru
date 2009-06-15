@@ -102,6 +102,30 @@ class ResultsModel(TreeModel):
         nodes = [index.internalPointer() for index in indexes]
         return [node.dupe for node in nodes]
     
+    def indexesForDupes(self, dupes):
+        def index(dupe):
+            try:
+                if self.power_marker:
+                    row = self._results.dupes.index(dupe)
+                    node = self.nodes[row]
+                    assert node.dupe is dupe
+                    return self.createIndex(row, 0, node)
+                else:
+                    group = self._results.get_group_of_duplicate(dupe)
+                    row = self._results.groups.index(group)
+                    node = self.nodes[row]
+                    if dupe is group.ref:
+                        assert node.dupe is dupe
+                        return self.createIndex(row, 0, node)
+                    subrow = group.dupes.index(dupe)
+                    subnode = node.children[subrow]
+                    assert subnode.dupe is dupe
+                    return self.createIndex(subrow, 0, subnode)
+            except ValueError: # the dupe is not there anymore
+                return QModelIndex()
+        
+        return map(index, dupes)
+    
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled

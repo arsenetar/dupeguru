@@ -48,6 +48,8 @@ class DetailsModel(QAbstractTableModel):
     #--- Events
     def duplicateSelected(self):
         dupe = self._app.selected_dupe
+        if dupe is None:
+            return
         group = self._app.results.get_group_of_duplicate(dupe)
         ref = group.ref
         self._dupe_data = self._data.GetDisplayInfo(dupe, group)

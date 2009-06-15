@@ -7,7 +7,7 @@
 
 from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL
 from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
-    QMessageBox, QInputDialog, QLineEdit)
+    QMessageBox, QInputDialog, QLineEdit, QItemSelectionModel)
 
 from hsutil.misc import nonone
 
@@ -292,6 +292,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def resultsChanged(self):
         self.resultsView.model().reset()
+        dupe = self.app.selected_dupe
+        if dupe is not None:
+            [modelIndex] = self.resultsModel.indexesForDupes([dupe])
+            if modelIndex.isValid():
+                flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
+                self.resultsView.selectionModel().select(modelIndex, flags)
     
     def resultsReset(self):
         self.resultsView.expandAll()
