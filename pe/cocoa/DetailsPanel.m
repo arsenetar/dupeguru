@@ -11,7 +11,6 @@
     self = [super initWithPy:aPy];
     py = aPy;
     _needsRefresh = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duplicateSelectionChanged:) name:DuplicateSelectionChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageLoaded:) name:ImageLoadedNotification object:self];
     return self;
 }
@@ -55,8 +54,7 @@
 - (void)duplicateSelectionChanged:(NSNotification *)aNotification
 {
     _needsRefresh = YES;
-    if ([[self window] isVisible])
-        [self refresh];
+	[super duplicateSelectionChanged:aNotification];
 }
 
 - (void)imageLoaded:(NSNotification *)aNotification

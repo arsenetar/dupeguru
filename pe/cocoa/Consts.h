@@ -1,4 +1,4 @@
 #import "dgbase/Consts.h"
 
-extern NSString *ImageLoadedNotification;
-extern NSString *APPNAME;
+#define APPNAME @"dupeGuru PE"
+#define ImageLoadedNotification @"ImageLoadedNotification"

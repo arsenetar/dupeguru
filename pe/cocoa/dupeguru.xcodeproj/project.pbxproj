@@ -47,7 +47,6 @@
 		CEDA432E0B07C6E600B3091A /* dg.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEDA432C0B07C6E600B3091A /* dg.xsl */; };
 		CEDA432F0B07C6E600B3091A /* hardcoded.css in Resources */ = {isa = PBXBuildFile; fileRef = CEDA432D0B07C6E600B3091A /* hardcoded.css */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
-		CEF4112B0A11069600E7F110 /* Consts.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4112A0A11069600E7F110 /* Consts.m */; };
 		CEF7823809C8AA0200EF38FF /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7823709C8AA0200EF38FF /* gear.png */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
@@ -139,7 +138,6 @@
 		CEDA432C0B07C6E600B3091A /* dg.xsl */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xml; name = dg.xsl; path = w3/dg.xsl; sourceTree = SOURCE_ROOT; };
 		CEDA432D0B07C6E600B3091A /* hardcoded.css */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; name = hardcoded.css; path = w3/hardcoded.css; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
-		CEF4112A0A11069600E7F110 /* Consts.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = Consts.m; sourceTree = SOURCE_ROOT; };
 		CEF7823709C8AA0200EF38FF /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = images/gear.png; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = images/details32.png; sourceTree = SOURCE_ROOT; };
@@ -169,7 +167,6 @@
 				CE381C9509914ACE003581CE /* AppDelegate.h */,
 				CE381C9409914ACE003581CE /* AppDelegate.m */,
 				CE848A1809DD85810004CB44 /* Consts.h */,
-				CEF4112A0A11069600E7F110 /* Consts.m */,
 				CECA899A09DB132E00A3D774 /* DetailsPanel.h */,
 				CECA899B09DB132E00A3D774 /* DetailsPanel.m */,
 				CE68EE6509ABC48000971085 /* DirectoryPanel.h */,
@@ -416,7 +413,6 @@
 				CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */,
 				CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */,
 				CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */,
-				CEF4112B0A11069600E7F110 /* Consts.m in Sources */,
 				CE0C46AA0FA0647E000BE99B /* PictureBlocks.m in Sources */,
 				CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */,
 				CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */,

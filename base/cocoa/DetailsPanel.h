@@ -10,4 +10,7 @@
 - (id)initWithPy:(PyApp *)aPy;
 
 - (void)refresh;
+
+/* Notifications */
+- (void)duplicateSelectionChanged:(NSNotification *)aNotification;
 @end
