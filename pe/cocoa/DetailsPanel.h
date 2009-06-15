@@ -1,11 +1,8 @@
 #import <Cocoa/Cocoa.h>
-#import "PyApp.h"
-#import "Table.h"
+#import "dgbase/DetailsPanel.h"
 
-
-@interface DetailsPanel : NSWindowController
+@interface DetailsPanel : DetailsPanelBase
 {
-    IBOutlet TableView *detailsTable;
     IBOutlet NSImageView *dupeImage;
     IBOutlet NSProgressIndicator *dupeProgressIndicator;
     IBOutlet NSImageView *refImage;
@@ -16,6 +13,4 @@
     NSString *_dupePath;
     NSString *_refPath;
 }
-- (id)initWithPy:(PyApp *)aPy;
-- (void)refresh;
 @end

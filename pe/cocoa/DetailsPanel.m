@@ -8,9 +8,7 @@
 @implementation DetailsPanel
 - (id)initWithPy:(PyApp *)aPy
 {
-    self = [super initWithWindowNibName:@"Details"];
-    [self window]; //So the detailsTable is initialized.
-    [detailsTable setPy:aPy];
+    self = [super initWithPy:aPy];
     py = aPy;
     _needsRefresh = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duplicateSelectionChanged:) name:DuplicateSelectionChangedNotification object:nil];

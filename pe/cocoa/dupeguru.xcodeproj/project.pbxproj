@@ -19,6 +19,7 @@
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
 		CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE3AA46509DB207900DB3A21 /* Directories.nib */; };
+		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
@@ -89,6 +90,8 @@
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dg_cocoa.plugin; path = py/dist/dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
 		CE3AA46609DB207900DB3A21 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Directories.nib; sourceTree = "<group>"; };
+		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = dgbase/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
+		CE6044EB0FE6796200B71262 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
@@ -293,6 +296,8 @@
 				CE80DB820FC1951C0086DCA6 /* AppDelegate.h */,
 				CE80DB830FC1951C0086DCA6 /* AppDelegate.m */,
 				CE80DB840FC1951C0086DCA6 /* Consts.h */,
+				CE6044EA0FE6796200B71262 /* DetailsPanel.h */,
+				CE6044EB0FE6796200B71262 /* DetailsPanel.m */,
 				CE80DB850FC1951C0086DCA6 /* DirectoryPanel.h */,
 				CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */,
 				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
@@ -429,6 +434,7 @@
 				CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */,
 				CEBAE4270FDA97E000B7887D /* BRSingleLineFormatter.m in Sources */,
 				CEBAE4280FDA97E000B7887D /* NSCharacterSet_Extensions.m in Sources */,
+				CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
