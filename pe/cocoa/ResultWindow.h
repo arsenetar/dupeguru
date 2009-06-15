@@ -10,7 +10,6 @@
     IBOutlet NSSearchField *filterField;
     IBOutlet NSSegmentedControl *pmSwitch;
     IBOutlet NSWindow *preferencesPanel;
-    IBOutlet NSTextField *stats;
     
     NSMutableArray *_resultColumns;
     NSMutableIndexSet *_deltaColumns;
@@ -35,7 +34,6 @@
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
-- (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;
 - (IBAction)toggleDelta:(id)sender;
 - (IBAction)toggleDetailsPanel:(id)sender;
@@ -45,10 +43,6 @@
 - (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
-- (NSArray *)getSelected:(BOOL)aDupesOnly;
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
-- (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)initResultColumns;
-- (void)refreshStats;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 @end

@@ -25,8 +25,6 @@
     [self initResultColumns];
     [self refreshStats];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     
     NSToolbar *t = [[[NSToolbar alloc] initWithIdentifier:@"ResultWindowToolbar"] autorelease];
     [t setAllowsUserCustomization:YES];
@@ -229,13 +227,6 @@
     }
 }
 
-- (IBAction)switchSelected:(id)sender
-{
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py makeSelectedReference];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
 - (IBAction)toggleColumn:(id)sender
 {
     NSMenuItem *mi = sender;
@@ -330,43 +321,6 @@
     return result;
 }
 
-- (NSArray *)getSelected:(BOOL)aDupesOnly
-{
-    if (_powerMode)
-        aDupesOnly = NO;
-    NSIndexSet *indexes = [matches selectedRowIndexes];
-    NSMutableArray *nodeList = [NSMutableArray array];
-    OVNode *node;
-    int i = [indexes firstIndex];
-    while (i != NSNotFound)
-    {
-        node = [matches itemAtRow:i];
-        if (!aDupesOnly || ([node level] > 1))
-            [nodeList addObject:node];
-        i = [indexes indexGreaterThanIndex:i];
-    }
-    return nodeList;
-}
-
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
-{
-    NSMutableArray *r = [NSMutableArray array];
-    NSArray *selected = [self getSelected:aDupesOnly];
-    NSEnumerator *e = [selected objectEnumerator];
-    OVNode *node;
-    while (node = [e nextObject])
-        [r addObject:p2a([node indexPath])];
-    return r;
-}
-
-- (void)performPySelection:(NSArray *)aIndexPaths
-{
-    if (_powerMode)
-        [py selectPowerMarkerNodePaths:aIndexPaths];
-    else
-        [py selectResultNodePaths:aIndexPaths];
-}
-
 - (void)initResultColumns
 {
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
@@ -380,11 +334,6 @@
     [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Modification" width:120 refCol:refCol]];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"7"]]; // Match %
     [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Dupe Count" width:80 refCol:refCol]];
-}
-
--(void)refreshStats
-{
-    [stats setStringValue:[py getStatLine]];
 }
 
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
@@ -446,14 +395,6 @@
     [self performPySelection:[self getSelectedPaths:NO]];
     [py refreshDetailsWithSelected];
     [[NSNotificationCenter defaultCenter] postNotificationName:DuplicateSelectionChangedNotification object:self];
-}
-
-- (void)resultsChanged:(NSNotification *)aNotification
-{
-    [matches reloadData];
-    [self expandAll:nil];
-    [self outlineViewSelectionDidChange:nil];
-    [self refreshStats];
 }
 
 - (void)resultsMarkingChanged:(NSNotification *)aNotification
