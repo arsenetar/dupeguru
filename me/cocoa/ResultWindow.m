@@ -25,7 +25,6 @@
     [self initResultColumns];
     [self refreshStats];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duplicateSelectionChanged:) name:DuplicateSelectionChangedNotification object:nil];
     
     NSToolbar *t = [[[NSToolbar alloc] initWithIdentifier:@"ResultWindowToolbar"] autorelease];
     [t setAllowsUserCustomization:YES];
@@ -405,12 +404,6 @@
 }
 
 /* Notifications */
-- (void)duplicateSelectionChanged:(NSNotification *)aNotification
-{
-    if (_detailsPanel)
-        [_detailsPanel refresh];
-}
-
 - (void)jobCompleted:(NSNotification *)aNotification
 {
     [super jobCompleted:aNotification];
