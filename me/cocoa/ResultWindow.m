@@ -41,18 +41,6 @@
 }
 
 /* Actions */
-
-- (IBAction)changePowerMarker:(id)sender
-{
-    _powerMode = [pmSwitch selectedSegment] == 1;
-    if (_powerMode)
-        [matches setTag:2];
-    else
-        [matches setTag:0];
-    [self expandAll:nil];
-    [self outlineView:matches didClickTableColumn:nil];
-}
-
 - (IBAction)clearIgnoreList:(id)sender
 {
     int i = n2i([py getIgnoreListCount]);
@@ -268,15 +256,6 @@
         [[_detailsPanel window] close];
     else
         [[_detailsPanel window] orderFront:nil];
-}
-
-- (IBAction)togglePowerMarker:(id)sender
-{
-    if ([pmSwitch selectedSegment] == 1)
-        [pmSwitch setSelectedSegment:0];
-    else
-        [pmSwitch setSelectedSegment:1];
-    [self changePowerMarker:sender];
 }
 
 /* Public */
