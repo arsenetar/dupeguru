@@ -9,7 +9,6 @@
     IBOutlet NSPopUpButton *actionMenu;
     IBOutlet NSMenu *columnsMenu;
     IBOutlet NSSearchField *filterField;
-    IBOutlet NSSegmentedControl *pmSwitch;
     IBOutlet NSWindow *preferencesPanel;
     
     NSString *_lastAction;
@@ -17,7 +16,6 @@
     NSMutableArray *_resultColumns;
     NSMutableIndexSet *_deltaColumns;
 }
-- (IBAction)changePowerMarker:(id)sender;
 - (IBAction)clearIgnoreList:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
@@ -39,7 +37,6 @@
 - (IBAction)toggleColumn:(id)sender;
 - (IBAction)toggleDelta:(id)sender;
 - (IBAction)toggleDetailsPanel:(id)sender;
-- (IBAction)togglePowerMarker:(id)sender;
 
 - (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
