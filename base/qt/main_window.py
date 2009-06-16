@@ -292,15 +292,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def resultsChanged(self):
         self.resultsView.model().reset()
+    
+    def resultsReset(self):
+        self.resultsView.expandAll()
         dupe = self.app.selected_dupe
         if dupe is not None:
             [modelIndex] = self.resultsModel.indexesForDupes([dupe])
             if modelIndex.isValid():
                 flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
-                self.resultsView.selectionModel().select(modelIndex, flags)
-    
-    def resultsReset(self):
-        self.resultsView.expandAll()
+                self.resultsView.selectionModel().setCurrentIndex(modelIndex, flags)
         self._update_status_line()
     
     def selectionChanged(self, selected, deselected):
