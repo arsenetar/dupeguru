@@ -17,6 +17,7 @@
     IBOutlet NSView *deltaSwitchView;
     IBOutlet NSView *filterFieldView;
     IBOutlet MatchesView *matches;
+	IBOutlet NSSegmentedControl *pmSwitch;
     IBOutlet NSView *pmSwitchView;
 	IBOutlet NSTextField *stats;
     
@@ -34,11 +35,13 @@
 
 /* Actions */
 - (IBAction)changeDelta:(id)sender;
+- (IBAction)changePowerMarker:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
 - (IBAction)expandAll:(id)sender;
 - (IBAction)moveMarked:(id)sender;
 - (IBAction)switchSelected:(id)sender;
+- (IBAction)togglePowerMarker:(id)sender;
 
 /* Notifications */
 - (void)jobCompleted:(NSNotification *)aNotification;

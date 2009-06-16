@@ -118,6 +118,17 @@
     [self expandAll:nil];
 }
 
+- (IBAction)changePowerMarker:(id)sender
+{
+    _powerMode = [pmSwitch selectedSegment] == 1;
+    if (_powerMode)
+        [matches setTag:2];
+    else
+        [matches setTag:0];
+    [self expandAll:nil];
+    [self outlineView:matches didClickTableColumn:nil];
+}
+
 - (IBAction)copyMarked:(id)sender
 {
     int mark_count = [[py getMarkCount] intValue];
@@ -180,6 +191,15 @@
     [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
     [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
+}
+
+- (IBAction)togglePowerMarker:(id)sender
+{
+    if ([pmSwitch selectedSegment] == 1)
+        [pmSwitch setSelectedSegment:0];
+    else
+        [pmSwitch setSelectedSegment:1];
+    [self changePowerMarker:sender];
 }
 
 /* Delegate */
