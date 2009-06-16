@@ -30,6 +30,7 @@
 /* Helpers */
 - (NSArray *)getSelected:(BOOL)aDupesOnly;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
+- (void)updatePySelection;
 - (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)refreshStats;
 

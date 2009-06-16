@@ -16,7 +16,9 @@
 
 - (NSNumber *)doScan;
 
+- (NSArray *)selectedPowerMarkerNodePaths;
 - (void)selectPowerMarkerNodePaths:(NSArray *)aIndexPaths;
+- (NSArray *)selectedResultNodePaths;
 - (void)selectResultNodePaths:(NSArray *)aIndexPaths;
 
 - (void)toggleSelectedMark;

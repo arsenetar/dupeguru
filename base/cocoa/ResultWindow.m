@@ -96,6 +96,16 @@
     return r;
 }
 
+- (void)updatePySelection
+{
+	NSArray *selection;
+    if (_powerMode)
+		selection = [py selectedPowerMarkerNodePaths];
+    else
+		selection = [py selectedResultNodePaths];
+	[matches selectNodePaths:selection];
+}
+
 - (void)performPySelection:(NSArray *)aIndexPaths
 {
     if (_powerMode)
@@ -127,6 +137,7 @@
         [matches setTag:0];
     [self expandAll:nil];
     [self outlineView:matches didClickTableColumn:nil];
+	[self updatePySelection];
 }
 
 - (IBAction)copyMarked:(id)sender
