@@ -69,8 +69,14 @@ class PyDupeGuru(PyApp):
     def refreshDetailsWithSelected(self):
         self.app.RefreshDetailsWithSelected()
     
+    def selectedResultNodePaths(self):
+        return self.app.selected_result_node_paths()
+    
     def selectResultNodePaths_(self,node_paths):
         self.app.SelectResultNodePaths(node_paths)
+    
+    def selectedPowerMarkerNodePaths(self):
+        return self.app.selected_powermarker_node_paths()
     
     def selectPowerMarkerNodePaths_(self,node_paths):
         self.app.SelectPowerMarkerNodePaths(node_paths)
