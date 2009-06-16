@@ -13,8 +13,9 @@ import logging
 import os.path as op
 
 import hsfs as fs
-from hsutil.cocoa import install_exception_hook
 from hsutil import io, cocoa, job
+from hsutil.cocoa import install_exception_hook
+from hsutil.misc import stripnone
 from hsutil.reg import RegistrationRequired
 
 import export, app, data
@@ -178,6 +179,32 @@ class DupeGuru(app.DupeGuru):
             return 3
         except app.AllFilesAreRefError:
             return 1
+    
+    def selected_result_node_paths(self):
+        def get_path(dupe):
+            try:
+                group = self.results.get_group_of_duplicate(dupe)
+                groupindex = self.results.groups.index(group)
+                if dupe is group.ref:
+                    return [groupindex]
+                dupeindex = group.dupes.index(dupe)
+                return [groupindex, dupeindex]
+            except ValueError: # dupe not in there
+                return None
+        
+        dupes = self.selected_dupes
+        return stripnone(get_path(dupe) for dupe in dupes)
+    
+    def selected_powermarker_node_paths(self):
+        def get_path(dupe):
+            try:
+                dupeindex = self.results.dupes.index(dupe)
+                return [dupeindex]
+            except ValueError: # dupe not in there
+                return None
+        
+        dupes = self.selected_dupes
+        return stripnone(get_path(dupe) for dupe in dupes)
     
     def SelectResultNodePaths(self,node_paths):
         def extract_dupe(t):

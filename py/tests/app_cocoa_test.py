@@ -7,17 +7,19 @@
 import tempfile
 import shutil
 import logging
+import os.path as op
+
+from nose.tools import eq_
 
 from hsutil.path import Path
 from hsutil.testcase import TestCase
 from hsutil.decorators import log_calls
 import hsfs.phys
-import os.path as op
 
 from .results_test import GetTestGroups
 from .. import engine, data
 try:
-    from ..app_cocoa import DupeGuru as DupeGuruBase, DGDirectory
+    from ..app_cocoa import DupeGuru as DupeGuruBase
 except ImportError:
     from nose.plugins.skip import SkipTest
     raise SkipTest("These tests can only be run on OS X")
@@ -70,6 +72,24 @@ class TCDupeGuru(TestCase):
         self.assertEqual((None,None),app.GetObjects([]))
         self.assertEqual((None,None),app.GetObjects([1,2]))
     
+    def test_selected_result_node_paths(self):
+        # app.selected_dupes is correctly converted into node paths
+        app = self.app
+        objects = self.objects
+        paths = [[0, 0], [0, 1], [1]]
+        app.SelectResultNodePaths(paths)
+        eq_(app.selected_result_node_paths(), paths)
+    
+    def test_selected_result_node_paths_after_deletion(self):
+        # cases where the selected dupes aren't there are correctly handled
+        app = self.app
+        objects = self.objects
+        paths = [[0, 0], [0, 1], [1]]
+        app.SelectResultNodePaths(paths)
+        app.RemoveSelected()
+        # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
+        eq_(app.selected_result_node_paths(), [[0]]) # no exception
+    
     def test_selectResultNodePaths(self):
         app = self.app
         objects = self.objects
@@ -107,6 +127,23 @@ class TCDupeGuru(TestCase):
         app = self.app
         app.SelectResultNodePaths([[0,0],[0,1],[1],[1,1],[2]])
         self.assertEqual(3,len(app.selected_dupes))
+    
+    def test_selected_powermarker_node_paths(self):
+        # app.selected_dupes is correctly converted into paths
+        app = self.app
+        objects = self.objects
+        paths = r2np([0, 1, 2])
+        app.SelectPowerMarkerNodePaths(paths)
+        eq_(app.selected_powermarker_node_paths(), paths)
+    
+    def test_selected_powermarker_node_paths_after_deletion(self):
+        # cases where the selected dupes aren't there are correctly handled
+        app = self.app
+        objects = self.objects
+        paths = r2np([0, 1, 2])
+        app.SelectPowerMarkerNodePaths(paths)
+        app.RemoveSelected()
+        eq_(app.selected_powermarker_node_paths(), []) # no exception
     
     def test_selectPowerMarkerRows(self):
         app = self.app
@@ -248,9 +285,6 @@ class TCDupeGuru(TestCase):
         app.scanner.ignore_list.Ignore = FakeIgnore
         app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
         app.AddSelectedToIgnoreList()
-    
-    def test_dirclass(self):
-        self.assert_(self.app.directories.dirclass is DGDirectory)
     
 
 class TCDupeGuru_renameSelected(TestCase):
