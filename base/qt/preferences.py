@@ -30,8 +30,13 @@ def variant_to_py(v):
     elif t in (QVariant.List, QVariant.StringList):
         value, ok = map(variant_to_py, v.toList()), True
     if not ok:
-        raise TypeError()
+        raise TypeError(u"Can't convert {0} of type {1}".format(repr(v), v.type()))
     return value    
+
+def py_to_variant(v):
+    if isinstance(v, (list, tuple)):
+        return QVariant(map(py_to_variant, v))
+    return QVariant(v)
 
 class Preferences(object):
     # (width, is_visible)
@@ -94,7 +99,7 @@ class Preferences(object):
     def save(self):
         settings = QSettings()
         def set_(name, value):
-            settings.setValue(name, QVariant(value))
+            settings.setValue(name, py_to_variant(value))
         
         set_('FilterHardness', self.filter_hardness)
         set_('MixFileKind', self.mix_file_kind)
