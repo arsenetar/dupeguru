@@ -1,4 +1,4 @@
-# Unit Name: tests.picture.block
+# Unit Name: dupeguru_pe.tests.block_test
 # Created By: Virgil Dupras
 # Created On: 2006/09/01
 # $Id$
@@ -7,7 +7,7 @@
 
 import unittest
 
-from ..picture.block import *
+from ..block import *
 
 def my_avgdiff(first, second, limit=768, min_iter=3): # this is so I don't have to re-write every call
     return avgdiff(first, second, limit, min_iter)

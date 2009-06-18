@@ -1,4 +1,4 @@
-# Unit Name: dupeguru.tests.cache_test
+# Unit Name: dupeguru_pe.tests.cache_test
 # Created By: Virgil Dupras
 # Created On: 2006/09/14
 # $Id$
@@ -11,7 +11,7 @@ import threading
 
 from hsutil.testcase import TestCase
 
-from ..picture.cache import *
+from ..cache import *
 
 class TCcolors_to_string(TestCase):
     def test_no_color(self):
