@@ -2,11 +2,11 @@
 import objc
 from AppKit import *
 
-from dupeguru import app_pe_cocoa, scanner
+from dupeguru_pe import app_cocoa as app_pe_cocoa
 
 # Fix py2app imports which chokes on relative imports
 from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
-from dupeguru.picture import block, cache, matchbase
+from dupeguru_pe import block, cache, matchbase
 from hsfs import auto, manual, stats, tree, utils
 
 class PyApp(NSObject):

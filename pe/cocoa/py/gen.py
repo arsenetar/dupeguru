@@ -6,7 +6,7 @@ import shutil
 
 from hsutil.build import print_and_do
 
-os.chdir('dupeguru')
+os.chdir('dupeguru_pe')
 print_and_do('python gen.py')
 os.chdir('..')
 
@@ -15,4 +15,4 @@ if op.exists('build'):
 if op.exists('dist'):
     shutil.rmtree('dist')
 
-print_and_do('python -u setup.py py2app')
+print_and_do('python -u setup.py py2app -A')
