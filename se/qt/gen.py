@@ -11,10 +11,6 @@ def print_and_do(cmd):
     print cmd
     os.system(cmd)
 
-os.chdir('dupeguru')
-print_and_do('python gen.py')
-os.chdir('..')
-
 os.chdir('base')
 print_and_do('python gen.py')
 os.chdir('..')
