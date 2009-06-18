@@ -13,9 +13,9 @@ import PIL.Image
 from hsfs import phys, IT_ATTRS, IT_MD5, IT_EXTRA
 from hsutil.str import get_file_ext
 
-from dupeguru import data_pe
-from dupeguru.picture.cache import Cache
-from dupeguru.picture.matchbase import AsyncMatchFactory
+from dupeguru_pe import data as data_pe
+from dupeguru_pe.cache import Cache
+from dupeguru_pe.matchbase import AsyncMatchFactory
 
 from block import getblocks
 from base.app import DupeGuru as DupeGuruBase

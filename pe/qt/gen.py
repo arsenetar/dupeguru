@@ -20,7 +20,7 @@ def move(src, dst):
     print 'Moving %s --> %s' % (src, dst)
     os.rename(src, dst)
 
-os.chdir('dupeguru')
+os.chdir('dupeguru_pe')
 print_and_do('python gen.py')
 os.chdir('..')
 
