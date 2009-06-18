@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.app_pe_cocoa
-Created By: Virgil Dupras
-Created On: 2006/11/13
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:33:32 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4392 $
-Copyright 2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru_pe.app_cocoa
+# Created By: Virgil Dupras
+# Created On: 2006/11/13
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import os
 import os.path as op
 import logging
@@ -26,8 +22,9 @@ from hsutil.str import get_file_ext
 from hsutil.path import Path
 from hsutil.cocoa import as_fetch
 
-import app_cocoa, data_pe, directories, picture.matchbase
-from picture.cache import string_to_colors, Cache
+from dupeguru import app_cocoa, directories
+from . import data, matchbase
+from .cache import string_to_colors, Cache
 
 mainBundle = NSBundle.mainBundle()
 PictureBlocks = mainBundle.classNamed_('PictureBlocks')
@@ -123,8 +120,8 @@ class IPhotoLibrary(fs.Directory):
 
 class DupeGuruPE(app_cocoa.DupeGuru):
     def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data_pe, 'dupeguru_pe', appid=5)
-        self.scanner.match_factory = picture.matchbase.AsyncMatchFactory()
+        app_cocoa.DupeGuru.__init__(self, data, 'dupeguru_pe', appid=5)
+        self.scanner.match_factory = matchbase.AsyncMatchFactory()
         self.directories.dirclass = Directory
         self.directories.special_dirclasses[Path('iPhoto Library')] = lambda _, __: self._create_iphoto_library()
         p = op.join(self.appdata, 'cached_pictures.db')

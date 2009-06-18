@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: hs.picture.block
-Created By: Virgil Dupras
-Created On: 2006/09/01
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-26 18:12:39 +0200 (Tue, 26 May 2009) $
-                 $Revision: 4365 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru_pe.block
+# Created By: Virgil Dupras
+# Created On: 2006/09/01
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 from _block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 
 # Converted to Cython

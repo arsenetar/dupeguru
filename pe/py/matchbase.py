@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: hs.picture._match
-Created By: Virgil Dupras
-Created On: 2007/02/25
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:02:48 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4388 $
-Copyright 2007 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru_pe.matchbase
+# Created By: Virgil Dupras
+# Created On: 2007/02/25
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import logging
 import multiprocessing
 from Queue import Empty
@@ -17,8 +13,8 @@ from hsutil import job
 from hsutil.misc import dedupe
 
 from dupeguru.engine import Match
-from block import avgdiff, DifferentBlockCountError, NoBlocksError
-from cache import Cache
+from .block import avgdiff, DifferentBlockCountError, NoBlocksError
+from .cache import Cache
 
 MIN_ITERATIONS = 3
 

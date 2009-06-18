@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: hs.picture.cache
-Created By: Virgil Dupras
-Created On: 2006/09/14
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:33:32 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4392 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru_pe.cache
+# Created By: Virgil Dupras
+# Created On: 2006/09/14
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import os
 import logging
 import sqlite3 as sqlite

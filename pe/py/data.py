@@ -1,15 +1,11 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.data
-Created By: Virgil Dupras
-Created On: 2006/03/15
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru_pe.data
+# Created By: Virgil Dupras
+# Created On: 2006/03/15
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 from hsutil.str import format_size
-from .data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value
+from dupeguru.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value
 
 def format_dimensions(dimensions):
     return '%d x %d' % (dimensions[0], dimensions[1])
