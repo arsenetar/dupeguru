@@ -72,11 +72,11 @@ class DirectoriesModel(TreeModel):
             if index.column() == 0:
                 return QVariant(node.ref.name)
             else:
-                return QVariant(STATES[self._dirs.GetState(node.ref.path)])
+                return QVariant(STATES[self._dirs.get_state(node.ref.path)])
         elif role == Qt.EditRole and index.column() == 1:
-            return QVariant(self._dirs.GetState(node.ref.path))
+            return QVariant(self._dirs.get_state(node.ref.path))
         elif role == Qt.ForegroundRole:
-            state = self._dirs.GetState(node.ref.path)
+            state = self._dirs.get_state(node.ref.path)
             if state == 1:
                 return QVariant(QBrush(Qt.blue))
             elif state == 2:
@@ -103,6 +103,6 @@ class DirectoriesModel(TreeModel):
         node = index.internalPointer()
         state, ok = value.toInt()
         assert ok
-        self._dirs.SetState(node.ref.path, state)
+        self._dirs.set_state(node.ref.path, state)
         return True
     
