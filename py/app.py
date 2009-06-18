@@ -80,7 +80,7 @@ class DupeGuru(RegistrableApplication):
         return False
     
     def _do_load(self, j):
-        self.directories.LoadFromFile(op.join(self.appdata, 'last_directories.xml'))
+        self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
         j = j.start_subjob([1, 9])
         self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
         files = flatten(g[:] for g in self.results.groups)
@@ -194,7 +194,7 @@ class DupeGuru(RegistrableApplication):
                 changed_groups.add(g)
     
     def save(self):
-        self.directories.SaveToFile(op.join(self.appdata, 'last_directories.xml'))
+        self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
         self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
     
     def save_ignore_list(self):

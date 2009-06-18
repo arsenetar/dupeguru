@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.directories
-Created By: Virgil Dupras
-Created On: 2006/02/27
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:02:48 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4388 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Unit Name: dupeguru.directories
+# Created By: Virgil Dupras
+# Created On: 2006/02/27
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+
 import xml.dom.minidom
 
 from hsfs import phys
@@ -56,7 +52,7 @@ class Directories(object):
     
     def _get_files(self, from_dir):
         from_path = from_dir.path
-        state = self.GetState(from_path)
+        state = self.get_state(from_path)
         if state == STATE_EXCLUDED:
             # Recursively get files from folders with lots of subfolder is expensive. However, there
             # might be a subfolder in this path that is not excluded. What we want to do is to skim
@@ -90,7 +86,7 @@ class Directories(object):
             self._dirs.append(d)
             return d
         except fs.InvalidPath:
-            raise InvalidPathError
+            raise InvalidPathError()
     
     def get_files(self):
         """Returns a list of all files that are not excluded.
@@ -105,22 +101,21 @@ class Directories(object):
             except fs.InvalidPath:
                 pass
     
-    def GetState(self, path):
+    def get_state(self, path):
         """Returns the state of 'path' (One of the STATE_* const.)
         """
-        try:
+        if path in self.states:
             return self.states[path]
-        except KeyError:
-            default_state = self._default_state_for_path(path)
-            if default_state is not None:
-                return default_state
-            parent = path[:-1]
-            if parent in self:
-                return self.GetState(parent)
-            else:
-                return STATE_NORMAL
+        default_state = self._default_state_for_path(path)
+        if default_state is not None:
+            return default_state
+        parent = path[:-1]
+        if parent in self:
+            return self.get_state(parent)
+        else:
+            return STATE_NORMAL
     
-    def LoadFromFile(self,infile):
+    def load_from_file(self, infile):
         try:
             doc = xml.dom.minidom.parse(infile)
         except:
@@ -128,11 +123,11 @@ class Directories(object):
         root_dir_nodes = doc.getElementsByTagName('root_directory')
         for rdn in root_dir_nodes:
             if not rdn.getAttributeNode('path'):
-                    continue
+                continue
             path = rdn.getAttributeNode('path').nodeValue
             try:
                 self.add_path(Path(path))
-            except (AlreadyThereError,InvalidPathError):
+            except (AlreadyThereError, InvalidPathError):
                 pass
         state_nodes = doc.getElementsByTagName('state')
         for sn in state_nodes:
@@ -140,32 +135,29 @@ class Directories(object):
                 continue
             path = sn.getAttributeNode('path').nodeValue
             state = sn.getAttributeNode('value').nodeValue
-            self.SetState(Path(path), int(state))
+            self.set_state(Path(path), int(state))
     
-    def Remove(self,directory):
-        self._dirs.remove(directory)
-    
-    def SaveToFile(self,outfile):
+    def save_to_file(self,outfile):
         with FileOrPath(outfile, 'wb') as fp:
             doc = xml.dom.minidom.Document()
             root = doc.appendChild(doc.createElement('directories'))
             for root_dir in self:
                 root_dir_node = root.appendChild(doc.createElement('root_directory'))
                 root_dir_node.setAttribute('path', unicode(root_dir.path).encode('utf-8'))
-            for path,state in self.states.iteritems():
+            for path, state in self.states.iteritems():
                 state_node = root.appendChild(doc.createElement('state'))
                 state_node.setAttribute('path', unicode(path).encode('utf-8'))
                 state_node.setAttribute('value', str(state))
-            doc.writexml(fp,'\t','\t','\n',encoding='utf-8')
+            doc.writexml(fp, '\t', '\t', '\n', encoding='utf-8')
     
-    def SetState(self,path,state):
-        if self.GetState(path) == state:
+    def set_state(self, path, state):
+        if self.get_state(path) == state:
             return
-        # we don't want to needlessly fill self.states. if GetState returns the same thing
+        # we don't want to needlessly fill self.states. if get_state returns the same thing
         # without an explicit entry, remove that entry
         if path in self.states:
             del self.states[path]
-            if self.GetState(path) == state: # no need for an entry
+            if self.get_state(path) == state: # no need for an entry
                 return
         self.states[path] = state
     

@@ -169,7 +169,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
             return app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
     
     def _do_load(self, j):
-        self.directories.LoadFromFile(op.join(self.appdata, 'last_directories.xml'))
+        self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
         for d in self.directories:
             if isinstance(d, IPhotoLibrary):
                 d.update()
@@ -201,7 +201,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     def start_scanning(self):
         for directory in self.directories:
             if isinstance(directory, IPhotoLibrary):
-                self.directories.SetState(directory.refpath, directories.STATE_EXCLUDED)
+                self.directories.set_state(directory.refpath, directories.STATE_EXCLUDED)
         return app_cocoa.DupeGuru.start_scanning(self)
     
     def selected_dupe_path(self):

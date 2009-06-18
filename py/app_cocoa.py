@@ -226,7 +226,7 @@ class DupeGuru(app.DupeGuru):
     
     def SetDirectoryState(self,node_path,state):
         d = self.GetDirectory(node_path)
-        self.directories.SetState(d.path,state)
+        self.directories.set_state(d.path,state)
     
     def sort_dupes(self,key,asc):
         self.results.sort_dupes(key,asc,self.display_delta_values)
@@ -279,7 +279,7 @@ class DupeGuru(app.DupeGuru):
             d = self.GetDirectory(node_path)
             return [
                 d.name,
-                self.directories.GetState(d.path)
+                self.directories.get_state(d.path)
             ]
     
     def GetOutlineViewMarked(self, tag, node_path):
