@@ -93,9 +93,10 @@ class TCDirectories(TestCase):
         self.assertEqual(STATE_REFERENCE,d.states[p])
     
     def test_GetState_with_path_not_there(self):
+        # When the path's not there, just return STATE_NORMAL
         d = Directories()
         d.add_path(testpath + 'utils')
-        self.assertRaises(LookupError,d.GetState,testpath)
+        eq_(d.GetState(testpath), STATE_NORMAL)
     
     def test_states_remain_when_larger_directory_eat_smaller_ones(self):
         d = Directories()

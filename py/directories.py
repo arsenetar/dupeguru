@@ -107,11 +107,7 @@ class Directories(object):
     
     def GetState(self, path):
         """Returns the state of 'path' (One of the STATE_* const.)
-        
-        Raises LookupError if 'path' is not in self.
         """
-        if path not in self:
-            raise LookupError("The path '%s' is not in the directory list." % str(path))
         try:
             return self.states[path]
         except KeyError:
@@ -163,16 +159,13 @@ class Directories(object):
             doc.writexml(fp,'\t','\t','\n',encoding='utf-8')
     
     def SetState(self,path,state):
-        try:
-            if self.GetState(path) == state:
+        if self.GetState(path) == state:
+            return
+        # we don't want to needlessly fill self.states. if GetState returns the same thing
+        # without an explicit entry, remove that entry
+        if path in self.states:
+            del self.states[path]
+            if self.GetState(path) == state: # no need for an entry
                 return
-            # we don't want to needlessly fill self.states. if GetState returns the same thing
-            # without an explicit entry, remove that entry
-            if path in self.states:
-                del self.states[path]
-                if self.GetState(path) == state: # no need for an entry
-                    return
-            self.states[path] = state
-        except LookupError:
-            pass
+        self.states[path] = state
     
