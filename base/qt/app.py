@@ -12,6 +12,7 @@ import traceback
 from PyQt4.QtCore import Qt, QTimer, QObject, QCoreApplication, QUrl, SIGNAL
 from PyQt4.QtGui import QProgressDialog, QDesktopServices, QFileDialog, QDialog, QMessageBox
 
+import hsfs as fs
 from hsutil import job
 from hsutil.reg import RegistrationRequired
 

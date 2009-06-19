@@ -39,6 +39,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self.resultsModel, SIGNAL('modelReset()'), self.resultsReset)
+        self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -292,6 +293,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def resultsChanged(self):
         self.resultsView.model().reset()
+    
+    def resultsDoubleClicked(self):
+        self.app.open_selected()
     
     def resultsReset(self):
         self.resultsView.expandAll()

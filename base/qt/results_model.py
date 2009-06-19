@@ -189,6 +189,10 @@ class ResultsView(QTreeView):
             return
         QTreeView.keyPressEvent(self, event)
     
+    def mouseDoubleClickEvent(self, event):
+        self.emit(SIGNAL('doubleClicked()'))
+        # We don't call the superclass' method because the default behavior is to rename the cell.
+    
     def setModel(self, model):
         assert isinstance(model, ResultsModel)
         QTreeView.setModel(self, model)
