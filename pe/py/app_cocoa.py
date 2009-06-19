@@ -103,7 +103,11 @@ class IPhotoLibrary(fs.Directory):
                 subdir = subdir[element]
             except KeyError:
                 subdir = fs.Directory(subdir, element)
-        IPhoto(subdir, photo_path)
+        try:
+            IPhoto(subdir, photo_path)
+        except fs.AlreadyExistsError:
+            # it's possible for 2 entries in the plist to point to the same path. Ignore one of them.
+            pass
     
     def update(self):
         self.clear()
