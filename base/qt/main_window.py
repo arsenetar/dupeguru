@@ -287,6 +287,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             h.setSectionHidden(colid, not h.isSectionHidden(colid))
         self._update_column_actions_status()
     
+    def contextMenuEvent(self, event):
+        self.actionActions.menu().exec_(event.globalPos())
+    
     def dupeMarkingChanged(self):
         self._redraw_results()
         self._update_status_line()
