@@ -95,14 +95,15 @@ class AsyncMatchFactory(MatchFactory):
         cache = self.cached_blocks
         id2picture = {}
         dimensions2pictures = defaultdict(set)
-        for picture in pictures[:]:
+        for picture in pictures:
             try:
                 picture.cache_id = cache.get_id(picture.unicode_path)
                 id2picture[picture.cache_id] = picture
+                if not self.match_scaled:
+                    dimensions2pictures[picture.dimensions].add(picture)
             except ValueError:
-                pictures.remove(picture)
-            if not self.match_scaled:
-                dimensions2pictures[picture.dimensions].add(picture)
+                pass
+        pictures = [p for p in pictures if hasattr(p, 'cache_id')]
         pool = multiprocessing.Pool()
         async_results = []
         pictures_copy = set(pictures)
