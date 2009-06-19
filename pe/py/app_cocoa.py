@@ -150,6 +150,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if any(isinstance(dupe, IPhoto) for dupe in marked):
             j = j.start_subjob([6, 4], "Probing iPhoto. Don\'t touch it during the operation!")
             a = app('iPhoto')
+            a.activate(timeout=0)
             a.select(a.photo_library_album(timeout=0), timeout=0)
             photos = as_fetch(a.photo_library_album().photos, k.item)
             for photo in j.iter_with_progress(photos):
@@ -162,7 +163,8 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if isinstance(dupe, IPhoto):
             if unicode(dupe.path) in self.path2iphoto:
                 photo = self.path2iphoto[unicode(dupe.path)]
-                app('iPhoto').remove(photo)
+                a = app('iPhoto')
+                a.remove(photo, timeout=0)
                 return True
             else:
                 logging.warning("Could not find photo {0} in iPhoto Library", unicode(dupe.path))
