@@ -1,3 +1,11 @@
+- date: 2009-06-20
+  version: 2.7.3
+  description: |
+    * Fixed bugs with selection being jumpy during "Make Reference" actions and Power Marker
+        switches.
+    * Fixed crash happening when a file with non-roman characters couldn't be analyzed.
+    * Fixed crash sometimes happening during the file collection phase in scanning.
+    * Restored double-click and right-click behavior lost in the PyQt move (Windows).
 - date: 2009-06-10
   version: 2.7.2
   description: |
