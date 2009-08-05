@@ -1,0 +1,11 @@
+WARNING ABOUT THE HS LICENSE AND PyQt
+
+Although Qt is now LGPL licensed, PyQt still is dual licensed. Until Nokia buys Riverbank and
+releases PyQt as LGPL, users of this part of the code (The PyQt-based GUI code) have to use the
+GPL version of PyQt, unless they possess a commercial license to it.
+
+There is no problem to this AS LONG AS YOU DON'T REDISTRIBUTE HS LICENSED CODE. The GPL license, from the point of view of the user, is very permissive. You can do WHATEVER you want with the GPLed version of PyQt, as long as you don't redistribute any of the code, or code dependent on it. When you do, the code you distribute has to be GPL compliant. The HS license is NOT, I repeat, NOT compliant with the GPL.
+
+So, what does it all mean? You have no restriction on the usage of the PyQt-dependent-HS-licensed code, but unless you possess a commercial PyQt license, Hardcoded Software (or anyone) cannot accept any contribution from you for this part of the code.
+
+Note that this only affects the PyQt dependent code, and not any other part of HS licensed code (if it has "import PyQt4" in it, it's PyQt dependent code). For the rest of the code, the only restrictions that apply are the ones from the HS license.
