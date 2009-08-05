@@ -1,9 +1,11 @@
-#!/usr/bin/env python
-# Unit Name: details_table
 # Created By: Virgil Dupras
 # Created On: 2009-05-17
 # $Id$
 # Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
 
 from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel, QVariant
 from PyQt4.QtGui import QHeaderView, QTableView

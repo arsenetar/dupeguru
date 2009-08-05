@@ -1,13 +1,12 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.scanner
-Created By: Virgil Dupras
-Created On: 2006/03/03
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 15:22:39 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4385 $
-Copyright 2004-2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Created By: Virgil Dupras
+# Created On: 2006/03/03
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
+
 import logging
 
 from ignore import IgnoreList

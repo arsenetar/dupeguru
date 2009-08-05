@@ -1,13 +1,12 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.app_cocoa
-Created By: Virgil Dupras
-Created On: 2006/11/11
-Last modified by:$Author: virgil $
-Last modified on:$Date: 2009-05-28 16:33:32 +0200 (Thu, 28 May 2009) $
-                 $Revision: 4392 $
-Copyright 2006 Hardcoded Software (http://www.hardcoded.net)
-"""
+# Created By: Virgil Dupras
+# Created On: 2006/11/11
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
+
 from AppKit import *
 import logging
 import os.path as op

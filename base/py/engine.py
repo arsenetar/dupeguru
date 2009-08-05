@@ -1,13 +1,12 @@
-#!/usr/bin/env python
-"""
-Unit Name: dupeguru.engine
-Created By: Virgil Dupras
-Created On: 2006/01/29
-Last modified by:$Author: virgil $
-Last modified on:$Date: $
-                 $Revision: $
-Copyright 2007 Hardcoded Software (http://www.hardcoded.net) 
-"""
+# Created By: Virgil Dupras
+# Created On: 2006/01/29
+# $Id$
+# Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
+
 from __future__ import division
 import difflib
 import logging

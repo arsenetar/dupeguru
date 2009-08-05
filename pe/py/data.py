@@ -1,8 +1,11 @@
-# Unit Name: dupeguru_pe.data
 # Created By: Virgil Dupras
 # Created On: 2006/03/15
 # $Id$
 # Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
 
 from hsutil.str import format_size
 from dupeguru.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value

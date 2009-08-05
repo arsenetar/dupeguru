@@ -2,6 +2,10 @@
 # Created On: 2009-04-23
 # $Id$
 # Copyright 2009 Hardcoded Software (http://www.hardcoded.net)
+# 
+# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# which should be included with this package. The terms are also available at 
+# http://www.hardcoded.net/licenses/hs_license
 
 cdef extern from "stdlib.h":
     int abs(int n) # required so that abs() is applied on ints, not python objects
