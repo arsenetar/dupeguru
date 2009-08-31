@@ -7,6 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import logging
 import re
 from xml.sax import handler, make_parser, SAXException
 from xml.sax.saxutils import XMLGenerator
@@ -164,7 +165,20 @@ class Results(Markable):
     def load_from_xml(self, infile, get_file, j=nulljob):
         self.apply_filter(None)
         handler = _ResultsHandler(get_file)
-        parser = make_parser()
+        try:
+            parser = make_parser()
+        except Exception as e:
+            # This special handling is to try to figure out the cause of #47
+            # We don't silently return, because we want the user to send error report.
+            logging.exception(e)
+            try:
+                import xml.parsers.expat
+                logging.warning('importing xml.parsers.expat went ok, WTF?')
+            except Exception as e:
+                # This log should give a little more details about the cause of this all
+                logging.exception(e)
+                raise
+            raise
         parser.setContentHandler(handler)
         try:
             infile, must_close = open_if_filename(infile)
