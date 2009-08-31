@@ -9,6 +9,7 @@
 
 import logging
 import os.path as op
+import sys
 import traceback
 
 from PyQt4.QtCore import Qt, QTimer, QObject, QCoreApplication, QUrl, SIGNAL
@@ -20,6 +21,13 @@ from hsutil.reg import RegistrationRequired
 
 from dupeguru.app import (DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, 
     JOB_DELETE)
+    
+if sys.platform == 'win32':
+    from .win import recycle_file
+elif sys.platform == 'darwin':
+    from .osx import recycle_file
+else:
+    logging.warning("Unsupported Platform!!!")
 
 from main_window import MainWindow
 from directories_dialog import DirectoriesDialog
@@ -146,6 +154,10 @@ class DupeGuru(DupeGuruBase, QObject):
         raise NotImplementedError()
     
     #--- Override
+    @staticmethod
+    def _recycle_dupe(dupe):
+        recycle_file(dupe.path)
+    
     def _start_job(self, jobid, func):
         title = JOBID2TITLE[jobid]
         try:

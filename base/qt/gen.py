@@ -9,6 +9,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import os
+import sys
 
 def print_and_do(cmd):
     print cmd
@@ -21,3 +22,9 @@ print_and_do("pyuic4 reg_submit_dialog.ui > reg_submit_dialog_ui.py")
 print_and_do("pyuic4 reg_demo_dialog.ui > reg_demo_dialog_ui.py")
 print_and_do("pyuic4 error_report_dialog.ui > error_report_dialog_ui.py")
 print_and_do("pyrcc4 dg.qrc > dg_rc.py")
+
+if sys.platform == 'darwin':
+    os.chdir('osx/SendToTrashProject')
+    print_and_do('xcodebuild')
+    print_and_do('cp build/Release/SendToTrash ../')
+    os.chdir('../..')
