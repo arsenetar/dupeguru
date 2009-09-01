@@ -252,7 +252,7 @@ class Results(Markable):
             group.clean_matches()
         self.__dupes = None
     
-    def save_to_xml(self, outfile, with_data=False):
+    def save_to_xml(self, outfile):
         self.apply_filter(None)
         outfile, must_close = open_if_filename(outfile, 'wb')
         writer = XMLGenerator(outfile, 'utf-8')
@@ -275,14 +275,6 @@ class Results(Markable):
                     'marked': cond(self.is_marked(d), 'y', 'n')
                 })
                 writer.startElement('file', attrs)
-                if with_data:
-                    data_list = self.data.GetDisplayInfo(d, g)
-                    for data in data_list:
-                        attrs = AttributesImpl({
-                            'value': data,
-                        })
-                        writer.startElement('data', attrs)
-                        writer.endElement('data')
                 writer.endElement('file')
             for match in g.matches:
                 attrs = AttributesImpl({

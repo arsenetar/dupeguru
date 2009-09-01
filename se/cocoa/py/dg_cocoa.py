@@ -41,8 +41,8 @@ class PyDupeGuru(PyApp):
     def doScan(self):
         return self.app.start_scanning()
     
-    def exportToXHTMLwithColumns_xslt_css_(self,column_ids,xslt_path,css_path):
-        return self.app.ExportToXHTML(column_ids,xslt_path,css_path)
+    def exportToXHTMLwithColumns_(self, column_ids):
+        return self.app.export_to_xhtml(column_ids)
     
     def loadIgnoreList(self):
         self.app.load_ignore_list()

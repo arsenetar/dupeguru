@@ -36,6 +36,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSString *)logoImageName;
 
 /* Helpers */
+- (NSArray *)getColumnsOrder;
+- (NSDictionary *)getColumnsWidth;
 - (NSArray *)getSelected:(BOOL)aDupesOnly;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)updatePySelection;
@@ -48,6 +50,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
 - (IBAction)expandAll:(id)sender;
+- (IBAction)exportToXHTML:(id)sender;
 - (IBAction)moveMarked:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;

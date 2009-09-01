@@ -17,7 +17,7 @@ from hsutil.cocoa import install_exception_hook
 from hsutil.misc import stripnone
 from hsutil.reg import RegistrationRequired
 
-import export, app, data
+import app, data
 
 JOBID2TITLE = {
     app.JOB_SCAN: "Scanning for duplicates",
@@ -116,16 +116,6 @@ class DupeGuru(app.DupeGuru):
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
 
-    def ExportToXHTML(self,column_ids,xslt_path,css_path):
-        columns = []
-        for index,column in enumerate(self.data.COLUMNS):
-            display = column['display']
-            enabled = str(index) in column_ids
-            columns.append((display,enabled))
-        xml_path = op.join(self.appdata,'results_export.xml')
-        self.results.save_to_xml(xml_path,self.data.GetDisplayInfo)
-        return export.export_to_xhtml(xml_path,xslt_path,css_path,columns)
-    
     def MakeSelectedReference(self):
         self.make_reference(self.selected_dupes)
     

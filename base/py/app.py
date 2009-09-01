@@ -19,7 +19,7 @@ from hsutil.reg import RegistrableApplication, RegistrationRequired
 from hsutil.misc import flatten, first
 from hsutil.str import escape
 
-from . import directories, results, scanner
+from . import directories, results, scanner, export
 
 JOB_SCAN = 'job_scan'
 JOB_LOAD = 'job_load'
@@ -176,6 +176,20 @@ class DupeGuru(RegistrableApplication):
     def delete_marked(self):
         self._demo_check()
         self._start_job(JOB_DELETE, self._do_delete)
+    
+    def export_to_xhtml(self, column_ids):
+        column_ids = [colid for colid in column_ids if colid.isdigit()]
+        column_ids = map(int, column_ids)
+        column_ids.sort()
+        colnames = [col['display'] for i, col in enumerate(self.data.COLUMNS) if i in column_ids]
+        rows = []
+        for group in self.results.groups:
+            for dupe in group:
+                data = self.data.GetDisplayInfo(dupe, group)
+                row = [data[colid] for colid in column_ids]
+                row.insert(0, dupe is not group.ref)
+                rows.append(row)
+        return export.export_to_xhtml(colnames, rows)
     
     def load(self):
         self._start_job(JOB_LOAD, self._do_load)

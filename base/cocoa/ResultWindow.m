@@ -75,6 +75,37 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Helpers */
+//Returns an array of identifiers, in order.
+- (NSArray *)getColumnsOrder
+{
+    NSTableColumn *col;
+    NSString *colId;
+    NSMutableArray *result = [NSMutableArray array];
+    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
+    while (col = [e nextObject])
+    {
+        colId = [col identifier];
+        [result addObject:colId];
+    }
+    return result;
+}
+
+- (NSDictionary *)getColumnsWidth
+{
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    NSTableColumn *col;
+    NSString *colId;
+    NSNumber *width;
+    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
+    while (col = [e nextObject])
+    {
+        colId = [col identifier];
+        width = [NSNumber numberWithFloat:[col width]];
+        [result setObject:width forKey:colId];
+    }
+    return result;
+}
+
 - (NSArray *)getSelected:(BOOL)aDupesOnly
 {
     if (_powerMode)
@@ -183,6 +214,12 @@ http://www.hardcoded.net/licenses/hs_license
 {
     for (int i=0;i < [matches numberOfRows];i++)
         [matches expandItem:[matches itemAtRow:i]];
+}
+
+- (IBAction)exportToXHTML:(id)sender
+{
+    NSString *exported = [py exportToXHTMLwithColumns:[self getColumnsOrder]];
+    [[NSWorkspace sharedWorkspace] openFile:exported];
 }
 
 - (IBAction)moveMarked:(id)sender

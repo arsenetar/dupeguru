@@ -7,60 +7,132 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from xml.dom import minidom
 import tempfile
 import os.path as op
-import os
-from StringIO import StringIO
+from tempfile import mkdtemp
 
-from hsutil.files import FileOrPath
+# Yes, this is a very low-tech solution, but at least it doesn't have all these annoying dependency
+# and resource problems.
 
-def output_column_xml(outfile, columns):
-    """Creates a xml file outfile with the supplied columns.
-    
-    outfile can be a filename or a file object.
-    columns is a list of 2 sized tuples (display,enabled)
-    """
-    doc = minidom.Document()
-    root = doc.appendChild(doc.createElement('columns'))
-    for display,enabled in columns:
-        col_node = root.appendChild(doc.createElement('column'))
-        col_node.setAttribute('display', display)
-        col_node.setAttribute('enabled', {True:'y',False:'n'}[enabled])
-    with FileOrPath(outfile, 'wb') as fp:
-        doc.writexml(fp, '\t','\t','\n', encoding='utf-8')
+MAIN_TEMPLATE = u"""
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<title>dupeGuru Results</title>
+	<style type="text/css">
+BODY
+{
+	background-color:white;
+}
 
-def merge_css_into_xhtml(xhtml, css):
-    with FileOrPath(xhtml, 'r+') as xhtml:
-        with FileOrPath(css) as css:
-            try:
-                doc = minidom.parse(xhtml)
-            except Exception:
-                return False
-            head = doc.getElementsByTagName('head')[0]
-            links = head.getElementsByTagName('link')
-            for link in links:
-                if link.getAttribute('rel') == 'stylesheet':
-                    head.removeChild(link)
-            style = head.appendChild(doc.createElement('style'))
-            style.setAttribute('type','text/css')
-            style.appendChild(doc.createTextNode(css.read()))
-            xhtml.truncate(0)
-            doc.writexml(xhtml, '\t','\t','\n', encoding='utf-8')
-            xhtml.seek(0)
-    return True
+BODY,A,P,UL,TABLE,TR,TD
+{
+	font-family:Tahoma,Arial,sans-serif;
+	font-size:10pt;
+	color: #4477AA;
+}
 
-def export_to_xhtml(xml, xslt, css, columns, cmd='xsltproc --path "%(folder)s" "%(xslt)s" "%(xml)s"'):
-    folder = op.split(xml)[0]
-    output_column_xml(op.join(folder,'columns.xml'),columns)
-    html = StringIO()
-    cmd = cmd % {'folder': folder, 'xslt': xslt, 'xml': xml}
-    html.write(os.popen(cmd).read())
-    html.seek(0)
-    merge_css_into_xhtml(html,css)
-    html.seek(0)
-    html_path = op.join(folder,'export.htm')
-    html_file = open(html_path,'w')
-    html_file.write(html.read().encode('utf-8'))
-    html_file.close()
-    return html_path
+TABLE
+{
+	background-color: #225588;
+	margin-left: auto;
+  	margin-right: auto;
+	width: 90%;
+}
+
+TR 
+{
+    background-color: white;
+}
+
+TH 
+{ 
+	font-weight: bold; 
+	color: black;
+	background-color: #C8D6E5;
+}
+
+TH TD 
+{
+    color:black;
+}
+
+TD 
+{
+    padding-left: 2pt;
+}
+
+TD.rightelem
+{
+	text-align:right;
+	/*padding-left:0pt;*/
+	padding-right: 2pt;
+	width: 17%;
+}
+
+TD.indented
+{
+    padding-left: 12pt;
+}
+
+H1
+{
+	font-family:&quot;Courier New&quot;,monospace;
+	color:#6699CC;
+    font-size:18pt; 
+	color:#6da500;
+	border-color: #70A0CF;
+	border-width: 1pt;
+	border-style: solid;
+	margin-top:   16pt;
+	margin-left:  5%;
+	margin-right: 5%;
+	padding-top:  2pt;
+	padding-bottom:2pt;
+	text-align:   center;
+}
+</style>
+</head>
+<body>
+<h1>dupeGuru Results</h1>
+<table>
+<tr>$colheaders</tr>
+$rows
+</table>
+</body>
+</html>
+"""
+
+COLHEADERS_TEMPLATE = u"<th>{name}</th>"
+
+ROW_TEMPLATE = u"""
+<tr>
+    <td class="{indented}">{filename}</td>{cells}
+</tr>
+"""
+
+CELL_TEMPLATE = u"""<td>{value}</td>"""
+
+def export_to_xhtml(colnames, rows):
+    # a row is a list of values with the first value being a flag indicating if the row should be indented
+    if rows:
+        assert len(rows[0]) == len(colnames) + 1 # + 1 is for the "indented" flag
+    colheaders = u''.join(COLHEADERS_TEMPLATE.format(name=name) for name in colnames)
+    rendered_rows = []
+    for row in rows:
+        # [2:] is to remove the indented flag + filename
+        indented = u'indented' if row[0] else u''
+        filename = row[1]
+        cells = u''.join(CELL_TEMPLATE.format(value=value) for value in row[2:])
+        rendered_rows.append(ROW_TEMPLATE.format(indented=indented, filename=filename, cells=cells))
+    rendered_rows = u''.join(rendered_rows)
+    # The main template can't use format because the css code uses {}
+    content = MAIN_TEMPLATE.replace('$colheaders', colheaders).replace('$rows', rendered_rows)
+    folder = mkdtemp()
+    destpath = op.join(folder, u'export.htm')
+    fp = open(destpath, 'w')
+    fp.write(content.encode('utf-8'))
+    fp.close()
+    return destpath

@@ -395,30 +395,6 @@ class TCResultsXML(TestCase):
         self.assertEqual('ibabtu',d1.getAttributeNode('words').nodeValue)
         self.assertEqual('ibabtu',d2.getAttributeNode('words').nodeValue)
     
-    def test_save_to_xml_with_columns(self):
-        class FakeDataModule:
-            def GetDisplayInfo(self,dupe,group):
-                return [str(dupe.size),dupe.foo.upper()]
-        
-        for i,object in enumerate(self.objects):
-            object.size = i
-            object.foo = u'bar\u00e9'
-        f = StringIO.StringIO()
-        self.results.data = FakeDataModule()
-        self.results.save_to_xml(f,True)
-        f.seek(0)
-        doc = xml.dom.minidom.parse(f)
-        root = doc.documentElement
-        g1,g2 = root.getElementsByTagName('group')
-        d1,d2,d3 = g1.getElementsByTagName('file')
-        d4,d5 = g2.getElementsByTagName('file')
-        self.assertEqual('0',d1.getElementsByTagName('data')[0].getAttribute('value'))
-        self.assertEqual(u'BAR\u00c9',d1.getElementsByTagName('data')[1].getAttribute('value')) #\u00c9 is upper of \u00e9
-        self.assertEqual('1',d2.getElementsByTagName('data')[0].getAttribute('value'))
-        self.assertEqual('2',d3.getElementsByTagName('data')[0].getAttribute('value'))
-        self.assertEqual('3',d4.getElementsByTagName('data')[0].getAttribute('value'))
-        self.assertEqual('4',d5.getElementsByTagName('data')[0].getAttribute('value'))
-    
     def test_LoadXML(self):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
