@@ -253,8 +253,11 @@ class DupeGuru(app.DupeGuru):
             assert not node_path # no other value is possible
             return [len(g.dupes) for g in self.results.groups]
         elif tag == 1: #Directories
-            dirs = self.GetDirectory(node_path).dirs if node_path else self.directories
-            return [d.dircount for d in dirs]
+            try:
+                dirs = self.GetDirectory(node_path).dirs if node_path else self.directories
+                return [d.dircount for d in dirs]
+            except IndexError: # node_path out of range
+                return []
         else: #Power Marker
             assert not node_path # no other value is possible
             return [0 for d in self.results.dupes]
@@ -275,11 +278,11 @@ class DupeGuru(app.DupeGuru):
             result = self.data.GetDisplayInfo(d, g, self.display_delta_values)
             return result
         elif tag == 1: #Directories
-            d = self.GetDirectory(node_path)
-            return [
-                d.name,
-                self.directories.get_state(d.path)
-            ]
+            try:
+                d = self.GetDirectory(node_path)
+                return [d.name, self.directories.get_state(d.path)]
+            except IndexError: # node_path out of range
+                return []
     
     def GetOutlineViewMarked(self, tag, node_path):
         # 0=unmarked 1=marked 2=unmarkable

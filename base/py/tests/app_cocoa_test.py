@@ -17,6 +17,7 @@ from nose.tools import eq_
 from hsutil.path import Path
 from hsutil.testcase import TestCase
 from hsutil.decorators import log_calls
+from hsutil import io
 import hsfs.phys
 
 from .results_test import GetTestGroups
@@ -44,6 +45,10 @@ class TCDupeGuru(TestCase):
         self.app = DupeGuru()
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
+        tmppath = self.tmppath()
+        io.mkdir(tmppath + 'foo')
+        io.mkdir(tmppath + 'bar')
+        self.app.directories.add_path(tmppath)
     
     def test_GetObjects(self):
         app = self.app
@@ -241,9 +246,10 @@ class TCDupeGuru(TestCase):
         self.assertEqual(0,len(app.results.dupes))
     
     def test_addDirectory_simple(self):
+        # There's already a directory in self.app, so adding another once makes 2 of em
         app = self.app
-        self.assertEqual(0,app.add_directory(self.datadirpath()))
-        self.assertEqual(1,len(app.directories))
+        eq_(app.add_directory(self.datadirpath()), 0)
+        eq_(len(app.directories), 2)
     
     def test_addDirectory_already_there(self):
         app = self.app
@@ -288,6 +294,18 @@ class TCDupeGuru(TestCase):
         app.scanner.ignore_list.Ignore = FakeIgnore
         app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
         app.AddSelectedToIgnoreList()
+    
+    def test_GetOutlineViewChildCounts_out_of_range(self):
+        # Out of range requests don't crash and return an empty value
+        app = self.app
+        # [0, 2] is out of range
+        eq_(app.GetOutlineViewChildCounts(1, [0, 2]), []) # no crash
+    
+    def test_GetOutlineViewValues_out_of_range(self):
+        # Out of range requests don't crash and return an empty value
+        app = self.app
+        # [0, 2] is out of range
+        eq_(app.GetOutlineViewValues(1, [0, 2]), []) # no crash
     
 
 class TCDupeGuru_renameSelected(TestCase):
