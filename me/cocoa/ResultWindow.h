@@ -25,7 +25,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSMutableIndexSet *_deltaColumns;
 }
 - (IBAction)clearIgnoreList:(id)sender;
-- (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;
 - (IBAction)markAll:(id)sender;
@@ -48,8 +47,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)toggleDetailsPanel:(id)sender;
 
 - (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn;
-- (NSArray *)getColumnsOrder;
-- (NSDictionary *)getColumnsWidth;
 - (void)initResultColumns;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 @end

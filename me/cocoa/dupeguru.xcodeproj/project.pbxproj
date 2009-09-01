@@ -24,8 +24,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_me_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */; };
-		CE12149E0AC86DB900E93983 /* dg.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE12149C0AC86DB900E93983 /* dg.xsl */; };
-		CE12149F0AC86DB900E93983 /* hardcoded.css in Resources */ = {isa = PBXBuildFile; fileRef = CE12149D0AC86DB900E93983 /* hardcoded.css */; };
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -90,8 +88,6 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dupeGuru ME.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_me_help; path = help/dupeguru_me_help; sourceTree = "<group>"; };
-		CE12149C0AC86DB900E93983 /* dg.xsl */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xml; name = dg.xsl; path = w3/dg.xsl; sourceTree = SOURCE_ROOT; };
-		CE12149D0AC86DB900E93983 /* hardcoded.css */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; name = hardcoded.css; path = w3/hardcoded.css; sourceTree = SOURCE_ROOT; };
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -236,7 +232,6 @@
 				CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
-				CE12149B0AC86DB900E93983 /* w3 */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -255,15 +250,6 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
-		};
-		CE12149B0AC86DB900E93983 /* w3 */ = {
-			isa = PBXGroup;
-			children = (
-				CE12149C0AC86DB900E93983 /* dg.xsl */,
-				CE12149D0AC86DB900E93983 /* hardcoded.css */,
-			);
-			path = w3;
-			sourceTree = SOURCE_ROOT;
 		};
 		CE49DEF10FDFEB810098617B /* brsinglelineformatter */ = {
 			isa = PBXGroup;
@@ -394,8 +380,6 @@
 				CECA899909DB12CA00A3D774 /* Details.nib in Resources */,
 				CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */,
 				CED2A6880A05102700AC4C3F /* power_marker32.png in Resources */,
-				CE12149E0AC86DB900E93983 /* dg.xsl in Resources */,
-				CE12149F0AC86DB900E93983 /* hardcoded.css in Resources */,
 				CE515E020FC6C13E00EC695D /* ErrorReportWindow.xib in Resources */,
 				CE515E030FC6C13E00EC695D /* progress.nib in Resources */,
 				CE515E040FC6C13E00EC695D /* registration.nib in Resources */,
@@ -548,12 +532,11 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;

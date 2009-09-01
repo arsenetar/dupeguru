@@ -59,14 +59,6 @@ http://www.hardcoded.net/licenses/hs_license
     [py clearIgnoreList];
 }
 
-- (IBAction)exportToXHTML:(id)sender
-{
-    NSString *xsltPath = [[NSBundle mainBundle] pathForResource:@"dg" ofType:@"xsl"];
-    NSString *cssPath = [[NSBundle mainBundle] pathForResource:@"hardcoded" ofType:@"css"];
-    NSString *exported = [py exportToXHTMLwithColumns:[self getColumnsOrder] xslt:xsltPath css:cssPath];
-    [[NSWorkspace sharedWorkspace] openFile:exported];
-}
-
 - (IBAction)filter:(id)sender
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -278,37 +270,6 @@ http://www.hardcoded.net/licenses/hs_license
     [col setResizingMask:NSTableColumnUserResizingMask];
     [col setSortDescriptorPrototype:[[NSSortDescriptor alloc] initWithKey:[n stringValue] ascending:YES]];
     return col;
-}
-
-//Returns an array of identifiers, in order.
-- (NSArray *)getColumnsOrder
-{
-    NSTableColumn *col;
-    NSString *colId;
-    NSMutableArray *result = [NSMutableArray array];
-    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
-    while (col = [e nextObject])
-    {
-        colId = [col identifier];
-        [result addObject:colId];
-    }
-    return result;
-}
-
-- (NSDictionary *)getColumnsWidth
-{
-    NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    NSTableColumn *col;
-    NSString *colId;
-    NSNumber *width;
-    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
-    while (col = [e nextObject])
-    {
-        colId = [col identifier];
-        width = [NSNumber numberWithFloat:[col width]];
-        [result setObject:width forKey:colId];
-    }
-    return result;
 }
 
 - (void)initResultColumns
