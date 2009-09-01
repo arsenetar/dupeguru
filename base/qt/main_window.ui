@@ -121,6 +121,7 @@
     </property>
     <addaction name="actionScan"/>
     <addaction name="separator"/>
+    <addaction name="actionExport"/>
     <addaction name="actionClearIgnoreList"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -414,6 +415,11 @@
   <action name="actionCheckForUpdate">
    <property name="text">
     <string>Check for Update</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export To XHTML</string>
    </property>
   </action>
  </widget>
@@ -876,6 +882,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionExport</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exportTriggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>directoriesTriggered()</slot>
@@ -907,5 +929,6 @@
   <slot>aboutTriggered()</slot>
   <slot>registerTrigerred()</slot>
   <slot>checkForUpdateTriggered()</slot>
+  <slot>exportTriggered()</slot>
  </slots>
 </ui>

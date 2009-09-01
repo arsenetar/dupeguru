@@ -7,9 +7,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL
+from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL, QUrl
 from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
-    QMessageBox, QInputDialog, QLineEdit, QItemSelectionModel)
+    QMessageBox, QInputDialog, QLineEdit, QItemSelectionModel, QDesktopServices)
 
 from hsutil.misc import nonone
 
@@ -200,7 +200,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def directoriesTriggered(self):
         self.app.show_directories()
-        
+    
+    def exportTriggered(self):
+        h = self.resultsView.header()
+        column_ids = []
+        for i in range(len(self.app.data.COLUMNS)):
+            if not h.isSectionHidden(i):
+                column_ids.append(str(i))
+        exported_path = self.app.export_to_xhtml(column_ids)
+        url = QUrl.fromLocalFile(exported_path)
+        QDesktopServices.openUrl(url)
+    
     def makeReferenceTriggered(self):
         self.app.make_reference(self.resultsView.selectedDupes())
     
