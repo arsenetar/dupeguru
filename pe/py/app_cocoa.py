@@ -19,7 +19,7 @@ from appscript import app, k
 
 from hsutil import job, io
 import hsfs as fs
-from hsfs import phys
+from hsfs import phys, InvalidPath
 from hsutil import files
 from hsutil.str import get_file_ext
 from hsutil.path import Path
@@ -94,6 +94,8 @@ class IPhotoLibrary(fs.Directory):
         self.refpath = plistpath[:-1]
         # the AlbumData.xml file lives right in the library path
         super(IPhotoLibrary, self).__init__(None, 'iPhoto Library')
+        if not io.exists(plistpath):
+            raise InvalidPath(self)
     
     def _update_photo(self, photo_data):
         if photo_data['MediaType'] != 'Image':
