@@ -87,6 +87,15 @@ class DupeGuru(RegistrableApplication):
         for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
             file._read_all_info(sections=[IT_ATTRS, IT_EXTRA])
     
+    def _get_display_info(self, dupe, group, delta=False):
+        if (dupe is None) or (group is None):
+            return ['---'] * len(self.data.COLUMNS)
+        try:
+            return self.data.GetDisplayInfo(dupe, group, delta)
+        except Exception as e:
+            logging.warning(u'Exception on GetDisplayInfo for %s: %s', unicode(dupe.path), unicode(e))
+            return ['---'] * len(self.data.COLUMNS)
+    
     def _get_file(self, str_path):
         p = Path(str_path)
         for d in self.directories:
@@ -185,7 +194,7 @@ class DupeGuru(RegistrableApplication):
         rows = []
         for group in self.results.groups:
             for dupe in group:
-                data = self.data.GetDisplayInfo(dupe, group)
+                data = self._get_display_info(dupe, group)
                 row = [data[colid] for colid in column_ids]
                 row.insert(0, dupe is not group.ref)
                 rows.append(row)

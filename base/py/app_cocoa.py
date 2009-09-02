@@ -100,9 +100,9 @@ class DupeGuru(app.DupeGuru):
         return self.GetDirectory(node_path[1:],d)
     
     def RefreshDetailsTable(self,dupe,group):
-        l1 = self.data.GetDisplayInfo(dupe,group,False)
+        l1 = self._get_display_info(dupe, group, False)
         if group is not None:
-            l2 = self.data.GetDisplayInfo(group.ref,group,False)
+            l2 = self._get_display_info(group.ref, group, False)
         else:
             l2 = l1 #To have a list of empty '---' values
         names = [c['display'] for c in self.data.COLUMNS]
@@ -265,7 +265,7 @@ class DupeGuru(app.DupeGuru):
             else:
                 d = self.results.dupes[node_path[0]]
                 g = self.results.get_group_of_duplicate(d)
-            result = self.data.GetDisplayInfo(d, g, self.display_delta_values)
+            result = self._get_display_info(d, g, self.display_delta_values)
             return result
         elif tag == 1: #Directories
             try:

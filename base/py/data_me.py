@@ -33,9 +33,7 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
-def GetDisplayInfo(dupe, group, delta=False):
-    if (dupe is None) or (group is None):
-        return ['---'] * len(COLUMNS)
+def GetDisplayInfo(dupe, group, delta):
     size = dupe.size
     duration = dupe.duration
     bitrate = dupe.bitrate
