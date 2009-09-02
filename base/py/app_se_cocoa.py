@@ -7,20 +7,30 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import logging
+
+from AppKit import *
+
 from hsfs.phys import Directory as DirectoryBase
 from hsfs.phys.bundle import Bundle
 from hsutil.path import Path
 from hsutil.misc import extract
 from hsutil.str import get_file_ext
 
-
 from . import app_cocoa, data
 from .directories import Directories as DirectoriesBase, STATE_EXCLUDED
+
+def is_bundle(path):
+    sw = NSWorkspace.sharedWorkspace()
+    uti, error = sw.typeOfFile_error_(path)
+    if error is not None:
+        logging.warning(u'There was an error trying to detect the UTI of %s', path)
+    return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
 
 class DGDirectory(DirectoryBase):
     def _create_sub_file(self, name, with_parent=True):
         ext = get_file_ext(name)
-        if ext == 'app':
+        if is_bundle(unicode(self.path + name)):
             parent = self if with_parent else None
             return Bundle(parent, name)
         else:
@@ -28,7 +38,7 @@ class DGDirectory(DirectoryBase):
     
     def _fetch_subitems(self):
         subdirs, subfiles = super(DGDirectory, self)._fetch_subitems()
-        apps, normal_dirs = extract(lambda name: get_file_ext(name) == 'app', subdirs)
+        apps, normal_dirs = extract(lambda name: is_bundle(unicode(self.path + name)), subdirs)
         subfiles += apps
         return normal_dirs, subfiles
     
