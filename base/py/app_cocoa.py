@@ -101,10 +101,9 @@ class DupeGuru(app.DupeGuru):
     
     def RefreshDetailsTable(self,dupe,group):
         l1 = self._get_display_info(dupe, group, False)
-        if group is not None:
-            l2 = self._get_display_info(group.ref, group, False)
-        else:
-            l2 = l1 #To have a list of empty '---' values
+        # we don't want the two sides of the table to display the stats for the same file
+        ref = group.ref if group is not None and group.ref is not dupe else None
+        l2 = self._get_display_info(ref, group, False)
         names = [c['display'] for c in self.data.COLUMNS]
         self.details_table = zip(names,l1,l2)
     
