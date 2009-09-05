@@ -86,9 +86,9 @@ def test_content_scan():
     s = Scanner()
     s.scan_type = SCAN_TYPE_CONTENT
     f = [no('foo'), no('bar'), no('bleh')]
-    f[0].md5 = 'foobar'
-    f[1].md5 = 'foobar'
-    f[2].md5 = 'bleh'
+    f[0].md5 = f[0].md5partial = 'foobar'
+    f[1].md5 = f[1].md5partial = 'foobar'
+    f[2].md5 = f[2].md5partial = 'bleh'
     r = s.GetDupeGroups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
@@ -109,9 +109,9 @@ def test_min_match_perc_doesnt_matter_for_content_scan():
     s = Scanner()
     s.scan_type = SCAN_TYPE_CONTENT
     f = [no('foo'), no('bar'), no('bleh')]
-    f[0].md5 = 'foobar'
-    f[1].md5 = 'foobar'
-    f[2].md5 = 'bleh'
+    f[0].md5 = f[0].md5partial = 'foobar'
+    f[1].md5 = f[1].md5partial = 'foobar'
+    f[2].md5 = f[2].md5partial = 'bleh'
     s.min_match_percentage = 101
     r = s.GetDupeGroups(f)
     eq_(len(r), 1)
@@ -121,12 +121,12 @@ def test_min_match_perc_doesnt_matter_for_content_scan():
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
 
-def test_content_scan_puts_md5_in_words_at_the_end():
+def test_content_scan_doesnt_put_md5_in_words_at_the_end():
     s = Scanner()
     s.scan_type = SCAN_TYPE_CONTENT
     f = [no('foo'),no('bar')]
-    f[0].md5 = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
-    f[1].md5 = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
+    f[0].md5 = f[0].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
+    f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     r = s.GetDupeGroups(f)
     g = r[0]
     eq_(g.ref.words, ['--'])

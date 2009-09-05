@@ -31,6 +31,16 @@ class Scanner(object):
         self.ignore_list = IgnoreList()
         self.discarded_file_count = 0
     
+    @staticmethod
+    def _filter_matches_by_content(matches, partial, j):
+        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
+        md5attrname = 'md5partial' if partial else 'md5'
+        md5 = lambda f: getattr(f, md5attrname)
+        for matched_file in j.iter_with_progress(matched_files, 'Analyzed %d/%d matching files'):
+            md5(matched_file)
+        j.set_progress(100, 'Removing false matches')
+        return [m for m in matches if md5(m.first) == md5(m.second)]
+    
     def _getmatches(self, files, j):
         j = j.start_subjob(2)
         mf = engine.MatchFactory()
@@ -88,19 +98,14 @@ class Scanner(object):
             iter_matches = j.iter_with_progress(matches, 'Processed %d/%d matches against the ignore list')
             matches = [m for m in iter_matches 
                 if not self.ignore_list.AreIgnored(unicode(m.first.path), unicode(m.second.path))]
-        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
         if self.scan_type in (SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO):
-            md5attrname = 'md5partial' if self.scan_type == SCAN_TYPE_CONTENT_AUDIO else 'md5'
-            md5 = lambda f: getattr(f, md5attrname)
-            j = j.start_subjob(2)
-            for matched_file in j.iter_with_progress(matched_files, 'Analyzed %d/%d matching files'):
-                md5(matched_file)
-            j.set_progress(100, 'Removing false matches')
-            matches = [m for m in matches if md5(m.first) == md5(m.second)]
-            words_for_content = ['--'] # We compared md5. No words were involved.
+            j = j.start_subjob(3 if self.scan_type == SCAN_TYPE_CONTENT else 2)
+            matches = self._filter_matches_by_content(matches, partial=True, j=j)
+            if self.scan_type == SCAN_TYPE_CONTENT:
+                matches = self._filter_matches_by_content(matches, partial=False, j=j)
+            # We compared md5. No words were involved.
             for m in matches:
-                m.first.words = words_for_content
-                m.second.words = words_for_content
+                m.first.words = m.second.words = ['--']
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
         groups = [g for g in groups if any(not f.is_ref for f in g)]
