@@ -9,21 +9,20 @@
 
 import logging
 
-from ignore import IgnoreList
 
 from hsutil import job
 from hsutil.misc import dedupe
 from hsutil.str import get_file_ext, rem_file_ext
 
 from . import engine
+from .ignore import IgnoreList
 
 (SCAN_TYPE_FILENAME,
 SCAN_TYPE_FIELDS,
 SCAN_TYPE_FIELDS_NO_ORDER,
 SCAN_TYPE_TAG,
-SCAN_TYPE_TAG_WITH_ALBUM, # Obsolete
 SCAN_TYPE_CONTENT,
-SCAN_TYPE_CONTENT_AUDIO) = range(7)
+SCAN_TYPE_CONTENT_AUDIO) = range(6)
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 
@@ -42,9 +41,6 @@ class Scanner(object):
         if self.scan_type == SCAN_TYPE_FIELDS_NO_ORDER:
             self.scan_type = SCAN_TYPE_FIELDS
             mf.no_field_order = True
-        if self.scan_type == SCAN_TYPE_TAG_WITH_ALBUM:
-            self.scan_type = SCAN_TYPE_TAG
-            self.scanned_tags = set(['artist', 'album', 'title'])
         func = {
             SCAN_TYPE_FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
             SCAN_TYPE_FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
