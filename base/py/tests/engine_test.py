@@ -9,6 +9,8 @@
 
 import sys
 
+from nose.tools import eq_
+
 from hsutil import job
 from hsutil.decorators import log_calls
 from hsutil.testcase import TestCase
@@ -719,12 +721,12 @@ class TCGroup(TestCase):
         self.assert_(g[0] is o1)
         self.assert_(g[1] is o2)
     
-    def test_clean_matches(self):
+    def test_discard_matches(self):
         g = Group()
         o1,o2,o3 = (NamedObject("foo",True),NamedObject("bar",True),NamedObject("baz",True))
         g.add_match(get_match(o1,o2))
         g.add_match(get_match(o1,o3))
-        g.clean_matches()
+        g.discard_matches()
         self.assertEqual(1,len(g.matches))
         self.assertEqual(0,len(g.candidates))
     
@@ -814,4 +816,21 @@ class TCget_groups(TestCase):
         get_groups([m1,m2,m3,m4],j)
         self.assertEqual(0,self.log[0])
         self.assertEqual(100,self.log[-1])
+    
+    def test_group_admissible_discarded_dupes(self):
+        # If, with a (A, B, C, D) set, all match with A, but C and D don't match with B and that the
+        # (A, B) match is the highest (thus resulting in an (A, B) group), still match C and D
+        # in a separate group instead of discarding them.
+        A, B, C, D = [NamedObject() for _ in range(4)]
+        m1 = Match(A, B, 90) # This is the strongest "A" match
+        m2 = Match(A, C, 80) # Because C doesn't match with B, it won't be in the group
+        m3 = Match(A, D, 80) # Same thing for D
+        m4 = Match(C, D, 70) # However, because C and D match, they should have their own group.
+        groups = get_groups([m1, m2, m3, m4])
+        eq_(len(groups), 2)
+        g1, g2 = groups
+        assert A in g1
+        assert B in g1
+        assert C in g2
+        assert D in g2
     

@@ -14,6 +14,7 @@ import string
 from collections import defaultdict, namedtuple
 from unicodedata import normalize
 
+from hsutil.misc import flatten
 from hsutil.str import multi_replace
 from hsutil import job
 
@@ -260,9 +261,11 @@ class Group(object):
         self._percentage = None
         self._matches_for_ref = None
     
-    def clean_matches(self):
-        self.matches = set(m for m in self.matches if (m.first in self.unordered) and (m.second in self.unordered))
+    def discard_matches(self):
+        discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
+        self.matches -= discarded
         self.candidates = defaultdict(set)
+        return discarded
     
     def get_match_of(self, item):
         if item is self.ref:
@@ -286,14 +289,14 @@ class Group(object):
         if ref is not self.ref:
             self.switch_ref(ref)
     
-    def remove_dupe(self, item, clean_matches=True):
+    def remove_dupe(self, item, discard_matches=True):
         try:
             self.ordered.remove(item)
             self.unordered.remove(item)
             self._percentage = None
             self._matches_for_ref = None
             if (len(self) > 1) and any(not getattr(item, 'is_ref', False) for item in self):
-                if clean_matches:
+                if discard_matches:
                     self.matches = set(m for m in self.matches if item not in m)
             else:
                 self._clear()
@@ -354,6 +357,13 @@ def get_groups(matches, j=job.nulljob):
                 dupe2group[first] = target_group
                 dupe2group[second] = target_group
         target_group.add_match(match)
+    # Now that we have a group, we have to discard groups' matches and see if there're any "orphan"
+    # matches, that is, matches that were candidate in a group but that none of their 2 files were
+    # accepted in the group. With these orphan groups, it's safe to build additional groups
+    matched_files = set(flatten(groups))
+    orphan_matches = []
     for group in groups:
-        group.clean_matches()
+        orphan_matches += set(m for m in group.discard_matches() if not any(obj in matched_files for obj in [m.first, m.second]))
+    if groups and orphan_matches:
+        groups += get_groups(orphan_matches) # no job, as it isn't supposed to take a long time
     return groups

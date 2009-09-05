@@ -249,7 +249,7 @@ class Results(Markable):
             else:
                 affected_groups.add(group)
         for group in affected_groups:
-            group.clean_matches()
+            group.discard_matches()
         self.__dupes = None
     
     def save_to_xml(self, outfile):
