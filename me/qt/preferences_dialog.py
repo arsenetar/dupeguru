@@ -33,6 +33,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         self._setupUi()
         
         self.connect(self.buttonBox, SIGNAL('clicked(QAbstractButton*)'), self.buttonClicked)
+        self.connect(self.scanTypeComboBox, SIGNAL('currentIndexChanged(int)'), self.scanTypeChanged)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -84,4 +85,19 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         role = self.buttonBox.buttonRole(button)
         if role == QDialogButtonBox.ResetRole:
             self.resetToDefaults()
+    
+    def scanTypeChanged(self, index):
+        scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        word_based = scan_type in [SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
+            SCAN_TYPE_TAG]
+        tag_based = scan_type == SCAN_TYPE_TAG
+        self.filterHardnessSlider.setEnabled(word_based)
+        self.matchSimilarBox.setEnabled(word_based)
+        self.wordWeightingBox.setEnabled(word_based)
+        self.tagTrackBox.setEnabled(tag_based)
+        self.tagArtistBox.setEnabled(tag_based)
+        self.tagAlbumBox.setEnabled(tag_based)
+        self.tagTitleBox.setEnabled(tag_based)
+        self.tagGenreBox.setEnabled(tag_based)
+        self.tagYearBox.setEnabled(tag_based)
     
