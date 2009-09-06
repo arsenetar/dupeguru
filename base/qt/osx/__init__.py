@@ -12,7 +12,6 @@ import os
 import os.path as op
 
 CMD = unicode(op.join(op.dirname(__file__), 'SendToTrash'))
-print CMD
 
 def recycle_file(path):
     print u'%s "%s"' % (CMD, unicode(path))
