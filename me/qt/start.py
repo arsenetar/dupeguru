@@ -12,10 +12,7 @@ from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
 import base.dg_rc
 
-if sys.platform == 'win32':
-    from app_win import DupeGuru
-else:
-    from app import DupeGuru
+from app import DupeGuru
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
