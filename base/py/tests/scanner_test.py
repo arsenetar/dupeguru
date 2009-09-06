@@ -62,12 +62,15 @@ def test_simple_with_lower_min_match():
     eq_(len(g), 3)
 
 def test_trim_all_ref_groups():
+    # When all files of a group are ref, don't include that group in the results, but also don't
+    # count the files from that group as discarded.
     s = Scanner()
     f = [no('foo'), no('foo'), no('bar'), no('bar')]
     f[2].is_ref = True
     f[3].is_ref = True
     r = s.GetDupeGroups(f)
     eq_(len(r), 1)
+    eq_(s.discarded_file_count, 0)
 
 def test_priorize():
     s = Scanner()

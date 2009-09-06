@@ -109,13 +109,13 @@ class Scanner(object):
                 m.first.words = m.second.words = ['--']
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
+        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
+        self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         groups = [g for g in groups if any(not f.is_ref for f in g)]
         logging.info('Created %d groups' % len(groups))
         j.set_progress(100, 'Doing group prioritization')
         for g in groups:
             g.prioritize(self._key_func, self._tie_breaker)
-        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
-        self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         return groups
     
     match_factory        = None
