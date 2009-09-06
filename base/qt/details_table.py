@@ -16,7 +16,6 @@ class DetailsModel(QAbstractTableModel):
     def __init__(self, app):
         QAbstractTableModel.__init__(self)
         self._app = app
-        self._data = app.data
         self._dupe_data = None
         self._ref_data = None
         self.connect(app, SIGNAL('duplicateSelected()'), self.duplicateSelected)
@@ -32,7 +31,7 @@ class DetailsModel(QAbstractTableModel):
         column = index.column()
         row = index.row()
         if column == 0:
-            return QVariant(self._data.COLUMNS[row]['display'])
+            return QVariant(self._app.data.COLUMNS[row]['display'])
         elif column == 1 and self._dupe_data:
             return QVariant(self._dupe_data[row])
         elif column == 2 and self._ref_data:
@@ -45,7 +44,7 @@ class DetailsModel(QAbstractTableModel):
         return QVariant()
     
     def rowCount(self, parent):
-        return len(self._data.COLUMNS)
+        return len(self._app.data.COLUMNS)
     
     #--- Events
     def duplicateSelected(self):
@@ -56,8 +55,8 @@ class DetailsModel(QAbstractTableModel):
         else:
             group = self._app.results.get_group_of_duplicate(dupe)
             ref = group.ref if group.ref is not dupe else None
-        self._dupe_data = self._data.GetDisplayInfo(dupe, group)
-        self._ref_data = self._data.GetDisplayInfo(ref, group)
+        self._dupe_data = self._app._get_display_info(dupe, group)
+        self._ref_data = self._app._get_display_info(ref, group)
         self.reset()
     
 

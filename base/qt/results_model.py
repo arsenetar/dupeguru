@@ -35,13 +35,13 @@ class ResultNode(TreeNode):
     @property
     def normalData(self):
         if self._normalData is None:
-            self._normalData = self.model._data.GetDisplayInfo(self.dupe, self.group, delta=False)
+            self._normalData = self.model._app._get_display_info(self.dupe, self.group, delta=False)
         return self._normalData
     
     @property
     def deltaData(self):
         if self._deltaData is None:
-            self._deltaData = self.model._data.GetDisplayInfo(self.dupe, self.group, delta=True)
+            self._deltaData = self.model._app._get_display_info(self.dupe, self.group, delta=True)
         return self._deltaData
     
 
