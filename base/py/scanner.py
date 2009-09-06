@@ -21,8 +21,9 @@ from .ignore import IgnoreList
 SCAN_TYPE_FIELDS,
 SCAN_TYPE_FIELDS_NO_ORDER,
 SCAN_TYPE_TAG,
+UNUSED, # Must not be removed. Constants here are what scan_type in the prefs are.
 SCAN_TYPE_CONTENT,
-SCAN_TYPE_CONTENT_AUDIO) = range(6)
+SCAN_TYPE_CONTENT_AUDIO) = range(7)
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 
