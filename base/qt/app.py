@@ -24,8 +24,6 @@ from dupeguru.app import (DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE
     
 if sys.platform == 'win32':
     from .win import recycle_file
-elif sys.platform == 'darwin':
-    from .osx import recycle_file
 else:
     logging.warning("Unsupported Platform!!!")
 
