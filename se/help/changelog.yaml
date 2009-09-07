@@ -1,3 +1,13 @@
+- date: 2009-09-07
+  version: 2.8.0
+  description: |
+    * Added support for all kinds of bundle (not just applications) (Mac OS X)
+    * Re-introduced the Export to XHTML feature to Windows.
+    * Improved Export to XHTML speed.
+    * Improved Contents scanning speed for large files.
+    * Improved the grouping algorithm to reduce the number of discarded files in non-exact scans.
+    * Stopped showing the same file on the 2 sides of the details panel when a ref file is selected.
+    * Fixed crashes in the Directories panel.
 - date: 2009-06-20
   version: 2.7.3
   description: |
