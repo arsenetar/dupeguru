@@ -20,16 +20,19 @@ from hsutil.str import get_file_ext
 from . import app_cocoa, data
 from .directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
-def is_bundle(path):
-    sw = NSWorkspace.sharedWorkspace()
-    uti, error = sw.typeOfFile_error_(path)
-    if error is not None:
-        logging.warning(u'There was an error trying to detect the UTI of %s', path)
-    return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
+if NSWorkspace.sharedWorkspace().respondsToSelector_('typeOfFile:error:'): # Only from 10.5
+    def is_bundle(str_path):
+        sw = NSWorkspace.sharedWorkspace()
+        uti, error = sw.typeOfFile_error_(str_path)
+        if error is not None:
+            logging.warning(u'There was an error trying to detect the UTI of %s', str_path)
+        return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
+else: # Tiger
+    def is_bundle(str_path): # just return a list of a few known bundle extensions.
+        return get_file_ext(str_path) in ('app', 'pages', 'numbers')
 
 class DGDirectory(DirectoryBase):
     def _create_sub_file(self, name, with_parent=True):
-        ext = get_file_ext(name)
         if is_bundle(unicode(self.path + name)):
             parent = self if with_parent else None
             return Bundle(parent, name)
