@@ -49,6 +49,7 @@
 		CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E1C0FC6C19300EC695D /* ResultWindow.m */; };
 		CE6032C00FE6784C007E33FF /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6032BF0FE6784C007E33FF /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
+		CE6E0E9F1054EB97008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CEA7D2C50FDFED340037CD8C /* dgme_logo_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA7D2C40FDFED340037CD8C /* dgme_logo_32.png */; };
 		CECA899909DB12CA00A3D774 /* Details.nib in Resources */ = {isa = PBXBuildFile; fileRef = CECA899709DB12CA00A3D774 /* Details.nib */; };
@@ -133,6 +134,7 @@
 		CE6032BF0FE6784C007E33FF /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
+		CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = dgbase/dsa_pub.pem; sourceTree = "<group>"; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		CEA7D2C40FDFED340037CD8C /* dgme_logo_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dgme_logo_32.png; path = images/dgme_logo_32.png; sourceTree = SOURCE_ROOT; };
 		CECA899809DB12CA00A3D774 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Details.nib; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */,
 				CECA899709DB12CA00A3D774 /* Details.nib */,
 				CE3AA46509DB207900DB3A21 /* Directories.nib */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -384,6 +387,7 @@
 				CE515E030FC6C13E00EC695D /* progress.nib in Resources */,
 				CE515E040FC6C13E00EC695D /* registration.nib in Resources */,
 				CEA7D2C50FDFED340037CD8C /* dgme_logo_32.png in Resources */,
+				CE6E0E9F1054EB97008D9390 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
