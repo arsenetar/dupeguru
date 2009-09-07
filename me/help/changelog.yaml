@@ -1,3 +1,11 @@
+- date: 2009-09-07
+  version: 5.6.4
+  description: |
+    * Re-introduced the Export to XHTML feature to Windows.
+    * Improved Export to XHTML speed.
+    * Improved the grouping algorithm to reduce the number of discarded files in non-exact scans.
+    * Stopped showing the same file on the 2 sides of the details panel when a ref file is selected.
+    * Fixed crashes in the Directories panel.
 - date: 2009-06-19
   version: 5.6.3
   description: |
