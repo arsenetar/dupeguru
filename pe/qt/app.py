@@ -67,7 +67,7 @@ class Directory(phys.Directory):
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_pe'
     NAME = 'dupeGuru Picture Edition'
-    VERSION = '1.7.4'
+    VERSION = '1.7.5'
     DELTA_COLUMNS = frozenset([2, 5, 6])
     
     def __init__(self):
