@@ -27,7 +27,7 @@ class Directories(DirectoriesBase):
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_se'
     NAME = 'dupeGuru'
-    VERSION = '2.7.3'
+    VERSION = '2.8.0'
     DELTA_COLUMNS = frozenset([2, 4, 5])
     
     def __init__(self):
