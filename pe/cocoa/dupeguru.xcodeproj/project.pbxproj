@@ -21,6 +21,7 @@
 		CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE3AA46509DB207900DB3A21 /* Directories.nib */; };
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
+		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
 		CE80DB300FC192D60086DCA6 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB200FC192D60086DCA6 /* Outline.m */; };
@@ -91,6 +92,7 @@
 		CE6044EB0FE6796200B71262 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
+		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = dgbase/dsa_pub.pem; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -232,6 +234,7 @@
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
 				CECA899709DB12CA00A3D774 /* Details.nib */,
 				CE3AA46509DB207900DB3A21 /* Directories.nib */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -382,6 +385,7 @@
 				CE80DB760FC194760086DCA6 /* ErrorReportWindow.xib in Resources */,
 				CE80DB770FC194760086DCA6 /* progress.nib in Resources */,
 				CE80DB780FC194760086DCA6 /* registration.nib in Resources */,
+				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
