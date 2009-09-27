@@ -11,9 +11,11 @@
 import os
 import os.path as op
 
-def print_and_do(cmd):
-    print cmd
-    os.system(cmd)
+from hsutil.build import print_and_do, build_all_qt_ui
+
+build_all_qt_ui(op.join('qtlib', 'ui'))
+build_all_qt_ui('base')
+build_all_qt_ui('.')
 
 def move(src, dst):
     if not op.exists(src):
@@ -27,18 +29,13 @@ os.chdir('dupeguru_pe')
 print_and_do('python gen.py')
 os.chdir('..')
 
-os.chdir('base')
-print_and_do('python gen.py')
-os.chdir('..')
-
+# The CC=gcc-4.0 thing is because, in Snow Leopard, gcc-4.2 can't compile these units.
+os.environ['CC'] = 'gcc-4.0'
 os.chdir(op.join('modules', 'block'))
 os.system('python setup.py build_ext --inplace')
 os.chdir(op.join('..', '..'))
 move(op.join('modules', 'block', '_block.so'), op.join('.', '_block.so'))
 move(op.join('modules', 'block', '_block.pyd'), op.join('.', '_block.pyd'))
-
-print_and_do("pyuic4 details_dialog.ui > details_dialog_ui.py")
-print_and_do("pyuic4 preferences_dialog.ui > preferences_dialog_ui.py")
 
 os.chdir('help')
 print_and_do('python gen.py')

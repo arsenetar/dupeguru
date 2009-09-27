@@ -12,7 +12,7 @@ import os.path as op
 from PyQt4.QtGui import QImage
 import PIL.Image
 
-from hsfs import phys, IT_ATTRS, IT_MD5, IT_EXTRA
+from hsfs import phys
 from hsutil.str import get_file_ext
 
 from dupeguru_pe import data as data_pe
@@ -27,27 +27,16 @@ from preferences import Preferences
 from preferences_dialog import PreferencesDialog
 
 class File(phys.File):
-    cls_info_map = {
-        'size': IT_ATTRS,
-        'ctime': IT_ATTRS,
-        'mtime': IT_ATTRS,
-        'md5': IT_MD5,
-        'md5partial': IT_MD5,
-        'dimensions': IT_EXTRA,
-    }
+    INITIAL_INFO = phys.File.INITIAL_INFO.copy()
+    INITIAL_INFO.update({
+        'dimensions': (0,0),
+    })
     
-    def _initialize_info(self, section):
-        super(File, self)._initialize_info(section)
-        if section == IT_EXTRA:
-            self._info.update({
-                'dimensions': (0,0),
-            })
-    
-    def _read_info(self, section):
-        super(File, self)._read_info(section)
-        if section == IT_EXTRA:
+    def _read_info(self, field):
+        super(File, self)._read_info(field)
+        if field == 'dimensions':
             im = PIL.Image.open(unicode(self.path))
-            self._info['dimensions'] = im.size
+            self.dimensions = im.size
     
     def get_blocks(self, block_count_per_side):
         image = QImage(unicode(self.path))
