@@ -7,6 +7,8 @@
 
 import os
 
-from hsdocgen import generate_help
+from hsdocgen import generate_help, filters
 
-generate_help.main('.', 'dupeguru_pe_help', force_render=True)
+tix = filters.tixgen("https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}")
+
+generate_help.main('.', 'dupeguru_pe_help', force_render=True, tix=tix)
