@@ -85,7 +85,7 @@ class DupeGuru(RegistrableApplication):
         self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
         files = flatten(g[:] for g in self.results.groups)
         for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
-            file._read_all_info(sections=[IT_ATTRS, IT_EXTRA])
+            file._read_all_info(attrnames=self.data.METADATA_TO_READ)
     
     def _get_display_info(self, dupe, group, delta=False):
         if (dupe is None) or (group is None):

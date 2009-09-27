@@ -53,6 +53,8 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
+METADATA_TO_READ = ['size', 'ctime', 'mtime']
+
 def GetDisplayInfo(dupe, group, delta):
     size = dupe.size
     ctime = dupe.ctime
@@ -98,4 +100,3 @@ def GetGroupSortKey(group, key):
     if key == 8:
         return len(group)
     return cmp_value(getattr(group.ref, COLUMNS[key]['attr']))
-

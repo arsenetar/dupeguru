@@ -33,6 +33,9 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
+METADATA_TO_READ = ['size', 'ctime', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
+    'album', 'genre', 'year', 'track', 'comment']
+
 def GetDisplayInfo(dupe, group, delta):
     size = dupe.size
     duration = dupe.duration
