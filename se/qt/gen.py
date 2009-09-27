@@ -9,17 +9,13 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import os
+import os.path as op
 
-def print_and_do(cmd):
-    print cmd
-    os.system(cmd)
+from hsutil.build import print_and_do, build_all_qt_ui
 
-os.chdir('base')
-print_and_do('python gen.py')
-os.chdir('..')
-
-print_and_do("pyuic4 details_dialog.ui > details_dialog_ui.py")
-print_and_do("pyuic4 preferences_dialog.ui > preferences_dialog_ui.py")
+build_all_qt_ui(op.join('qtlib', 'ui'))
+build_all_qt_ui('base')
+build_all_qt_ui('.')
 
 os.chdir('help')
 print_and_do('python gen.py')
