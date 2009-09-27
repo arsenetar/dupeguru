@@ -7,30 +7,29 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import SIGNAL, Qt, QAbstractItemModel, QVariant, QModelIndex, QRect
+from PyQt4.QtCore import SIGNAL, Qt, QAbstractItemModel, QModelIndex, QRect
 from PyQt4.QtGui import QBrush, QStyledItemDelegate, QFont, QTreeView, QColor
 
-from tree_model import TreeNode, TreeModel
+from qtlib.tree_model import TreeNode, TreeModel
 
 class ResultNode(TreeNode):
     def __init__(self, model, parent, row, dupe, group):
-        TreeNode.__init__(self, parent, row)
-        self.model = model
+        TreeNode.__init__(self, model, parent, row)
         self.dupe = dupe
         self.group = group
         self._normalData = None
         self._deltaData = None
     
-    def _get_children(self):
-        children = []
-        if self.dupe is self.group.ref:
-            for index, dupe in enumerate(self.group.dupes):
-                children.append(ResultNode(self.model, self, index, dupe, self.group))
-        return children
+    def _createNode(self, ref, row):
+        return ResultNode(self.model, self, row, ref, self.group)
     
-    def reset(self):
+    def _getChildren(self):
+        return self.group.dupes if self.dupe is self.group.ref else []
+    
+    def invalidate(self):
         self._normalData = None
         self._deltaData = None
+        TreeNode.invalidate(self)
     
     @property
     def normalData(self):
@@ -65,40 +64,41 @@ class ResultsModel(TreeModel):
         self._power_marker = False
         TreeModel.__init__(self)
     
-    def _root_nodes(self):
-        nodes = []
+    def _createNode(self, ref, row):
         if self.power_marker:
-            for index, dupe in enumerate(self._results.dupes):
-                group = self._results.get_group_of_duplicate(dupe)
-                nodes.append(ResultNode(self, None, index, dupe, group))
+            # ref is a dupe
+            group = self._results.get_group_of_duplicate(ref)
+            return ResultNode(self, None, row, ref, group)
         else:
-            for index, group in enumerate(self._results.groups):
-                nodes.append(ResultNode(self, None, index, group.ref, group))
-        return nodes
+            # ref is a group
+            return ResultNode(self, None, row, ref.ref, ref)
+    
+    def _getChildren(self):
+        return self._results.dupes if self.power_marker else self._results.groups
     
     def columnCount(self, parent):
         return len(self._data.COLUMNS)
     
     def data(self, index, role):
         if not index.isValid():
-            return QVariant()
+            return None
         node = index.internalPointer()
         if role == Qt.DisplayRole:
             data = node.deltaData if self.delta else node.normalData
-            return QVariant(data[index.column()])
+            return data[index.column()]
         elif role == Qt.CheckStateRole:
             if index.column() == 0 and node.dupe is not node.group.ref:
                 state = Qt.Checked if self._results.is_marked(node.dupe) else Qt.Unchecked
-                return QVariant(state)
+                return state
         elif role == Qt.ForegroundRole:
             if node.dupe is node.group.ref or node.dupe.is_ref:
-                return QVariant(QBrush(Qt.blue))
+                return QBrush(Qt.blue)
             elif self.delta and index.column() in self._delta_columns:
-                return QVariant(QBrush(QColor(255, 142, 40))) # orange
+                return QBrush(QColor(255, 142, 40)) # orange
         elif role == Qt.EditRole:
             if index.column() == 0:
-                return QVariant(node.normalData[index.column()])
-        return QVariant()
+                return node.normalData[index.column()]
+        return None
     
     def dupesForIndexes(self, indexes):
         nodes = [index.internalPointer() for index in indexes]
@@ -138,9 +138,8 @@ class ResultsModel(TreeModel):
     
     def headerData(self, section, orientation, role):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(self._data.COLUMNS):
-            return QVariant(self._data.COLUMNS[section]['display'])
-        
-        return QVariant()
+            return self._data.COLUMNS[section]['display']
+        return None
     
     def setData(self, index, value, role):
         if not index.isValid():

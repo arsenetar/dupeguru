@@ -7,10 +7,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import QVariant, QModelIndex, Qt, QRect, QEvent, QPoint
+from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint
 from PyQt4.QtGui import QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush
 
-from tree_model import TreeNode, TreeModel
+from qtlib.tree_model import TreeNode, TreeModel
 
 HEADERS = ['Name', 'State']
 STATES = ['Normal', 'Reference', 'Excluded']
@@ -22,8 +22,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
         return editor
     
     def setEditorData(self, editor, index):
-        value, ok = index.model().data(index, Qt.EditRole).toInt()
-        assert ok
+        value = index.model().data(index, Qt.EditRole)
         editor.setCurrentIndex(value);
         press = QMouseEvent(QEvent.MouseButtonPress, QPoint(0, 0), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
         release = QMouseEvent(QEvent.MouseButtonRelease, QPoint(0, 0), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
@@ -32,7 +31,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
         # editor.showPopup() # this causes a weird glitch. the ugly workaround is above.
     
     def setModelData(self, editor, model, index):
-        value = QVariant(editor.currentIndex())
+        value = editor.currentIndex()
         model.setData(index, value, Qt.EditRole)
     
     def updateEditorGeometry(self, editor, option, index):
@@ -40,16 +39,15 @@ class DirectoriesDelegate(QStyledItemDelegate):
     
 
 class DirectoryNode(TreeNode):
-    def __init__(self, parent, ref, row):
-        TreeNode.__init__(self, parent, row)
+    def __init__(self, model, parent, ref, row):
+        TreeNode.__init__(self, model, parent, row)
         self.ref = ref
     
-    def _get_children(self):
-        children = []
-        for index, directory in enumerate(self.ref.dirs):
-            node = DirectoryNode(self, directory, index)
-            children.append(node)
-        return children
+    def _createNode(self, ref, row):
+        return DirectoryNode(self.model, self, ref, row)
+    
+    def _getChildren(self):
+        return self.ref.dirs
     
 
 class DirectoriesModel(TreeModel):
@@ -57,33 +55,33 @@ class DirectoriesModel(TreeModel):
         self._dirs = app.directories
         TreeModel.__init__(self)
     
-    def _root_nodes(self):
-        nodes = []
-        for index, directory in enumerate(self._dirs):
-            nodes.append(DirectoryNode(None, directory, index))
-        return nodes
+    def _createNode(self, ref, row):
+        return DirectoryNode(self, None, ref, row)
+    
+    def _getChildren(self):
+        return self._dirs
     
     def columnCount(self, parent):
         return 2
     
     def data(self, index, role):
         if not index.isValid():
-            return QVariant()
+            return None
         node = index.internalPointer()
         if role == Qt.DisplayRole:
             if index.column() == 0:
-                return QVariant(node.ref.name)
+                return node.ref.name
             else:
-                return QVariant(STATES[self._dirs.get_state(node.ref.path)])
+                return STATES[self._dirs.get_state(node.ref.path)]
         elif role == Qt.EditRole and index.column() == 1:
-            return QVariant(self._dirs.get_state(node.ref.path))
+            return self._dirs.get_state(node.ref.path)
         elif role == Qt.ForegroundRole:
             state = self._dirs.get_state(node.ref.path)
             if state == 1:
-                return QVariant(QBrush(Qt.blue))
+                return QBrush(Qt.blue)
             elif state == 2:
-                return QVariant(QBrush(Qt.red))
-        return QVariant()
+                return QBrush(Qt.red)
+        return None
     
     def flags(self, index):
         if not index.isValid():
@@ -96,15 +94,13 @@ class DirectoriesModel(TreeModel):
     def headerData(self, section, orientation, role):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole and section < len(HEADERS):
-                return QVariant(HEADERS[section])
-        return QVariant()
+                return HEADERS[section]
+        return None
     
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
             return False
         node = index.internalPointer()
-        state, ok = value.toInt()
-        assert ok
-        self._dirs.set_state(node.ref.path, state)
+        self._dirs.set_state(node.ref.path, value)
         return True
     
