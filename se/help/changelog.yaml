@@ -1,27 +1,27 @@
 - date: 2009-09-07
   version: 2.8.0
   description: |
-    * Added support for all kinds of bundle (not just applications) (Mac OS X)
-    * Re-introduced the Export to XHTML feature to Windows.
-    * Improved Export to XHTML speed.
-    * Improved Contents scanning speed for large files.
-    * Improved the grouping algorithm to reduce the number of discarded files in non-exact scans.
-    * Stopped showing the same file on the 2 sides of the details panel when a ref file is selected.
-    * Fixed crashes in the Directories panel.
+    * Added support for all kinds of bundle (not just applications) (Mac OS X) (#11)
+    * Re-introduced the Export to XHTML feature to Windows. (#14)
+    * Improved Export to XHTML speed. (#14)
+    * Improved Contents scanning speed for large files. (#33)
+    * Improved the grouping algorithm to reduce the number of discarded files in non-exact scans. (#51)
+    * Stopped showing the same file on the 2 sides of the details panel when a ref file is selected. (#50)
+    * Fixed crashes in the Directories panel. (#46)
 - date: 2009-06-20
   version: 2.7.3
   description: |
     * Fixed bugs with selection being jumpy during "Make Reference" actions and Power Marker
-        switches.
-    * Fixed crash happening when a file with non-roman characters couldn't be analyzed.
-    * Fixed crash sometimes happening during the file collection phase in scanning.
-    * Restored double-click and right-click behavior lost in the PyQt move (Windows).
+        switches. (#3)
+    * Fixed crash happening when a file with non-roman characters couldn't be analyzed. (#30)
+    * Fixed crash sometimes happening during the file collection phase in scanning. (#38)
+    * Restored double-click and right-click behavior lost in the PyQt move (Windows). (#34 #35)
 - date: 2009-06-10
   version: 2.7.2
   description: |
-    * Fixed an occasional crash on Copy/Move operations.
-    * Added automatic exclusion for sensible folders (like system folders).
-    * Fixed an occasional crash when application files were part of the results (Mac OS X).
+    * Fixed an occasional crash on Copy/Move operations. (#16)
+    * Added automatic exclusion for sensible folders (like system folders). (#20)
+    * Fixed an occasional crash when application files were part of the results (Mac OS X). (#25)
 - date: 2009-05-29
   version: 2.7.1
   description: |
