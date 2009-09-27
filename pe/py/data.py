@@ -25,6 +25,8 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
+METADATA_TO_READ = ['size', 'ctime', 'mtime', 'dimensions']
+
 def GetDisplayInfo(dupe,group,delta=False):
     if (dupe is None) or (group is None):
         return ['---'] * len(COLUMNS)
