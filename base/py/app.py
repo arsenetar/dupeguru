@@ -12,7 +12,6 @@ import os
 import os.path as op
 import logging
 
-from hsfs import IT_ATTRS, IT_EXTRA
 from hsutil import job, io, files
 from hsutil.path import Path
 from hsutil.reg import RegistrableApplication, RegistrationRequired
