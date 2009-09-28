@@ -12,9 +12,10 @@ from dupeguru import app_me_cocoa, scanner
 
 # Fix py2app imports which chokes on relative imports
 from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
-from hsfs import auto, manual, stats, tree, utils, music
+from hsfs import auto, stats, tree, music
 from hsfs.phys import music
 from hsmedia import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
+from hsutil import conflict
 
 class PyApp(NSObject):
     pass #fake class
