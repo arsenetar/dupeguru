@@ -47,7 +47,7 @@ class DGDirectory(DirectoryBase):
     
 
 class Directories(DirectoriesBase):
-    ROOT_PATH_TO_EXCLUDE = map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private'])
+    ROOT_PATH_TO_EXCLUDE = map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev'])
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
         DirectoriesBase.__init__(self)
