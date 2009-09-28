@@ -34,31 +34,20 @@ PictureBlocks = mainBundle.classNamed_('PictureBlocks')
 assert PictureBlocks is not None
 
 class Photo(phys.File):
-    cls_info_map = {
-        'size': fs.IT_ATTRS,
-        'ctime': fs.IT_ATTRS,
-        'mtime': fs.IT_ATTRS,
-        'md5': fs.IT_MD5,
-        'md5partial': fs.IT_MD5,
-        'dimensions': fs.IT_EXTRA,
-    }
+    INITIAL_INFO = phys.File.INITIAL_INFO.copy()
+    INITIAL_INFO.update({
+        'dimensions': (0,0),
+    })
     
-    def _initialize_info(self,section):
-        super(Photo, self)._initialize_info(section)
-        if section == fs.IT_EXTRA:
-            self._info.update({
-                'dimensions': (0,0),
-            })
-    
-    def _read_info(self,section):
-        super(Photo, self)._read_info(section)
-        if section == fs.IT_EXTRA:
+    def _read_info(self, field):
+        super(Photo, self)._read_info(field)
+        if field == 'dimensions':
             size = PictureBlocks.getImageSize_(unicode(self.path))
-            self._info['dimensions'] = (size.width, size.height)
+            self.dimensions = (size.width, size.height)
     
     def get_blocks(self, block_count_per_side):
         try:
-            blocks = PictureBlocks.getBlocksFromImagePath_blockCount_scanArea_(unicode(self.path), block_count_per_side, 0)
+            blocks = PictureBlocks.getBlocksFromImagePath_blockCount_(unicode(self.path), block_count_per_side)
         except Exception, e:
             raise IOError('The reading of "%s" failed with "%s"' % (unicode(self.path), unicode(e)))
         if not blocks:

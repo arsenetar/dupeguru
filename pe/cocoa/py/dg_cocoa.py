@@ -12,7 +12,7 @@ from dupeguru_pe import app_cocoa as app_pe_cocoa
 # Fix py2app imports which chokes on relative imports
 from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
 from dupeguru_pe import block, cache, matchbase, data
-from hsfs import auto, manual, stats, tree, utils
+from hsfs import auto, stats, tree
 
 class PyApp(NSObject):
     pass #fake class
