@@ -11,9 +11,9 @@ http://www.hardcoded.net/licenses/hs_license
 
 @interface PictureBlocks : NSObject {
 }
-+ (NSString *)getBlocksFromImagePath:(NSString *)imagePath blockCount:(NSNumber *)blockCount scanArea:(NSNumber *)scanArea;
++ (NSString *)getBlocksFromImagePath:(NSString *)imagePath blockCount:(NSNumber *)blockCount;
 + (NSSize)getImageSize:(NSString *)imagePath;
 @end
 
 
-NSString* GetBlocks(NSString *filePath, int blockCount, int scanSize);
+NSString* GetBlocks(NSString *filePath, int blockCount);

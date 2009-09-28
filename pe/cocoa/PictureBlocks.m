@@ -9,11 +9,10 @@ http://www.hardcoded.net/licenses/hs_license
 #import "PictureBlocks.h"
 #import "Utils.h"
 
-
 @implementation PictureBlocks
-+ (NSString *)getBlocksFromImagePath:(NSString *)imagePath blockCount:(NSNumber *)blockCount scanArea:(NSNumber *)scanArea
++ (NSString *)getBlocksFromImagePath:(NSString *)imagePath blockCount:(NSNumber *)blockCount
 {
-    return GetBlocks(imagePath, n2i(blockCount), n2i(scanArea));
+    return GetBlocks(imagePath, n2i(blockCount));
 }
 
 + (NSSize)getImageSize:(NSString *)imagePath
@@ -47,7 +46,11 @@ http://www.hardcoded.net/licenses/hs_license
      
      colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
      
-     bitmapData = malloc( bitmapByteCount );
+     // calloc() must be used to allocate bitmapData here because the buffer has to be zeroed.
+     // If it's not zeroes, when images with transparency are drawn in the context, this buffer
+     // will stay with undefined pixels, which means that two pictures with the same pixels will
+     // most likely have different blocks (which is not supposed to happen).
+     bitmapData = calloc(bitmapByteCount, 1);
      if (bitmapData == NULL) 
      {
          fprintf (stderr, "Memory not allocated!");
@@ -90,7 +93,7 @@ http://www.hardcoded.net/licenses/hs_license
      return result;
  }
  
- NSString* GetBlocks (NSString* filePath, int blockCount, int scanSize) 
+ NSString* GetBlocks (NSString* filePath, int blockCount) 
  {
      CFURLRef fileURL = CFURLCreateWithFileSystemPath(NULL, (CFStringRef)filePath, kCFURLPOSIXPathStyle, FALSE);
      CGImageSourceRef source = CGImageSourceCreateWithURL(fileURL, NULL);
@@ -101,10 +104,6 @@ http://www.hardcoded.net/licenses/hs_license
          return NULL;
      size_t width = CGImageGetWidth(image);
      size_t height = CGImageGetHeight(image);
-     if ((scanSize > 0) && (width > scanSize))
-         width = scanSize;
-     if ((scanSize > 0) && (height > scanSize))
-         height = scanSize;
      CGContextRef myContext = MyCreateBitmapContext(width, height);
      CGRect myBoundingBox = CGRectMake (0, 0, width, height);
      CGContextDrawImage(myContext, myBoundingBox, image);
