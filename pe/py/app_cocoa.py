@@ -11,6 +11,7 @@ import os
 import os.path as op
 import logging
 import plistlib
+import re
 
 import objc
 from Foundation import *
@@ -108,6 +109,12 @@ class IPhotoLibrary(fs.Directory):
         s = open(unicode(self.plistpath)).read()
         # There was a case where a guy had 0x10 chars in his plist, causing expat errors on loading
         s = s.replace('\x10', '')
+        # It seems that iPhoto sometimes doesn't properly escape & chars. The regexp below is to find
+        # any & char that is not a &-based entity (&amp;, &quot;, etc.). based on TextMate's XML
+        # bundle's regexp
+        s, count = re.subn(r'&(?![a-zA-Z0-9_-]+|#[0-9]+|#x[0-9a-fA-F]+;)', '', s)
+        if count:
+            logging.warning("%d invalid XML entities replacement made", count)
         plist = plistlib.readPlistFromString(s)
         for photo_data in plist['Master Image List'].values():
             self._update_photo(photo_data)
