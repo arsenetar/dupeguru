@@ -7,6 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from Foundation import *
 from AppKit import *
 import logging
 import os.path as op
@@ -44,7 +45,8 @@ class DupeGuru(app.DupeGuru):
         install_exception_hook()
         if data_module is None:
             data_module = data
-        appdata = op.expanduser(op.join('~', '.hsoftdata', appdata_subdir))
+        appsupport = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
+        appdata = op.join(appsupport, appdata_subdir)
         app.DupeGuru.__init__(self, data_module, appdata, appid)
         self.progress = cocoa.ThreadedJobPerformer()
         self.display_delta_values = False
