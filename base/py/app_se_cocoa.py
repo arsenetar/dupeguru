@@ -65,6 +65,6 @@ class Directories(DirectoriesBase):
 
 class DupeGuru(app_cocoa.DupeGuru):
     def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data, 'dupeguru', appid=4)
+        app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru', appid=4)
         self.directories = Directories()
     

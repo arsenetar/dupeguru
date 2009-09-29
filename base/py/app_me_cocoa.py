@@ -27,7 +27,7 @@ app_cocoa.JOBID2TITLE.update({
 
 class DupeGuruME(app_cocoa.DupeGuru):
     def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data_me, 'dupeguru_me', appid=1)
+        app_cocoa.DupeGuru.__init__(self, data_me, 'dupeGuru Music Edition', appid=1)
         self.scanner = scanner.ScannerME()
         self.directories.dirclass = hsfs.phys.music.Directory
         self.dead_tracks = []
