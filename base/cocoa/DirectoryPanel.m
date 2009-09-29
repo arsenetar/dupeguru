@@ -58,6 +58,7 @@ http://www.hardcoded.net/licenses/hs_license
     OVNode *node = [directories itemAtRow:[directories clickedRow]];
     [_py setDirectory:p2a([node indexPath]) state:i2n([sender tag])]; 
     [node resetAllBuffers];
+    [directories reloadItem:node reloadChildren:YES];
     [directories display];
 }
 
