@@ -142,8 +142,11 @@ class Results(Markable):
         else:
             if not self.__filters:
                 self.__filters = []
+            try:
+                filter_re = re.compile(filter_str, re.IGNORECASE)
+            except re.error:
+                return # don't apply this filter.
             self.__filters.append(filter_str)
-            filter_re = re.compile(filter_str, re.IGNORECASE)
             if self.__filtered_dupes is None:
                 self.__filtered_dupes = flatten(g[:] for g in self.groups)
             self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(dupe.name))

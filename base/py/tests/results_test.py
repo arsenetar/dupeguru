@@ -48,6 +48,11 @@ class TCResultsEmpty(TestCase):
     def setUp(self):
         self.results = Results(data)
     
+    def test_apply_invalid_filter(self):
+        # If the applied filter is an invalid regexp, just ignore the filter.
+        self.results.apply_filter('[') # invalid
+        self.test_stat_line() # make sure that the stats line isn't saying we applied a '[' filter
+    
     def test_stat_line(self):
         self.assertEqual("0 / 0 (0.00 B / 0.00 B) duplicates marked.",self.results.stat_line)
     
