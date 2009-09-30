@@ -244,9 +244,19 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)switchSelected:(id)sender
 {
+    // It might look like a complicated way to get the length of the current dupe list on the py side
+    // but after a lot of fussing around, believe it or not, it actually is.
+    int matchesTag = _powerMode ? 2 : 0;
+    int startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
     [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
+    // In some cases (when in a filtered view in Power Marker mode, it's possible that the demoted
+    // ref is not a part of the filter, making the table smaller. In those cases, we want to do a
+    // complete reload of the table to avoid a crash.
+    if ([[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count] == startLen)
+        [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
+    else
+        [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)togglePowerMarker:(id)sender
