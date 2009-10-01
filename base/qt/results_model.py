@@ -109,13 +109,13 @@ class ResultsModel(TreeModel):
             try:
                 if self.power_marker:
                     row = self._results.dupes.index(dupe)
-                    node = self.nodes[row]
+                    node = self.subnodes[row]
                     assert node.dupe is dupe
                     return self.createIndex(row, 0, node)
                 else:
                     group = self._results.get_group_of_duplicate(dupe)
                     row = self._results.groups.index(group)
-                    node = self.nodes[row]
+                    node = self.subnodes[row]
                     if dupe is group.ref:
                         assert node.dupe is dupe
                         return self.createIndex(row, 0, node)
