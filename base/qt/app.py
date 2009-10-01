@@ -74,7 +74,13 @@ class DupeGuru(DupeGuruBase, QObject):
         self.reg = Registration(self)
         self.set_registration(self.prefs.registration_code, self.prefs.registration_email)
         if not self.registered:
-            self.reg.show_nag()
+            # The timer scheme is because if the nag is not shown before the application is 
+            # completely initialized, the nag will be shown before the app shows up in the task bar
+            # In some circumstances, the nag is hidden by other window, which may make the user think
+            # that the application haven't launched.
+            self._nagTimer = QTimer()
+            self.connect(self._nagTimer, SIGNAL('timeout()'), self.mustShowNag)
+            self._nagTimer.start(0)
         self.main_window.show()
         self.load()
         
@@ -225,6 +231,10 @@ class DupeGuru(DupeGuruBase, QObject):
     def application_will_terminate(self):
         self.save()
         self.save_ignore_list()
+    
+    def mustShowNag(self):
+        self._nagTimer.stop() # must be shown only once
+        self.reg.show_nag()
     
     def job_finished(self, jobid):
         self.emit(SIGNAL('resultsChanged()'))
