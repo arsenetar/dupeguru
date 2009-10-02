@@ -230,6 +230,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def moveTriggered(self):
         self.app.copy_or_move_marked(False)
     
+    def openDebugLogTriggered(self):
+        self.app.openDebugLog()
+    
     def openTriggered(self):
         self.app.open_selected()
     

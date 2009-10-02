@@ -7,6 +7,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from __future__ import unicode_literals
+
 import logging
 import os.path as op
 
@@ -54,6 +56,8 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def __init__(self, data_module, appid):
         appdata = unicode(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
+        # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
+        logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING)
         DupeGuruBase.__init__(self, data_module, appdata, appid)
         QObject.__init__(self)
         self._setup()
@@ -168,6 +172,11 @@ class DupeGuru(DupeGuruBase, QObject):
     def mark_none(self):
         self.results.mark_none()
         self.emit(SIGNAL('dupeMarkingChanged()'))
+    
+    def openDebugLog(self):
+        debugLogPath = op.join(self.appdata, 'debug.log')
+        url = QUrl.fromLocalFile(debugLogPath)
+        QDesktopServices.openUrl(url)
     
     def open_selected(self):
         if self.selected_dupe is None:

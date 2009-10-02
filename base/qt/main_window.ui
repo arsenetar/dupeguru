@@ -113,6 +113,7 @@
     <addaction name="actionShowHelp"/>
     <addaction name="actionRegister"/>
     <addaction name="actionCheckForUpdate"/>
+    <addaction name="actionOpenDebugLog"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuFile">
@@ -420,6 +421,11 @@
   <action name="actionExport">
    <property name="text">
     <string>Export To XHTML</string>
+   </property>
+  </action>
+  <action name="actionOpenDebugLog">
+   <property name="text">
+    <string>Open Debug Log</string>
    </property>
   </action>
  </widget>
@@ -898,6 +904,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionOpenDebugLog</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openDebugLogTriggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>directoriesTriggered()</slot>
@@ -930,5 +952,6 @@
   <slot>registerTrigerred()</slot>
   <slot>checkForUpdateTriggered()</slot>
   <slot>exportTriggered()</slot>
+  <slot>openDebugLogTriggered()</slot>
  </slots>
 </ui>

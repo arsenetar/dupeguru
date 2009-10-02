@@ -14,4 +14,4 @@ import sys
 if sys.platform == 'win32':
     from platform_win import *
 else:
-    logging.warning("Unsupported Platform!!")
+    pass # unsupported platform
