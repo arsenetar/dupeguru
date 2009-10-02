@@ -1,3 +1,10 @@
+- date: 2009-10-02
+  version: 2.8.1
+  description: |
+    * Fixed crash with filtering when regular expressions were enabled. (#60)
+    * Fixed crash when setting directories' state. (Mac OS X) (#66)
+    * Fixed crash with Make Reference when certain filters are applied. (Mac OS X) (#55)
+    * Improved error handling during delete/move/copy actions. (#62 #65)
 - date: 2009-09-07
   version: 2.8.0
   description: |
