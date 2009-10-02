@@ -8,6 +8,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from __future__ import unicode_literals
+
 import os
 import os.path as op
 import logging
@@ -75,7 +77,7 @@ class DupeGuru(RegistrableApplication):
         if not io.exists(dupe.path):
             dupe.parent = None
             return True
-        logging.warning(u"Could not send {0} to trash.".format(unicode(dupe.path)))
+        logging.warning("Could not send {0} to trash.".format(unicode(dupe.path)))
         return False
     
     def _do_load(self, j):
@@ -92,7 +94,7 @@ class DupeGuru(RegistrableApplication):
         try:
             return self.data.GetDisplayInfo(dupe, group, delta)
         except Exception as e:
-            logging.warning(u'Exception on GetDisplayInfo for %s: %s', unicode(dupe.path), unicode(e))
+            logging.warning("Exception on GetDisplayInfo for %s: %s", unicode(dupe.path), unicode(e))
             return ['---'] * len(self.data.COLUMNS)
     
     def _get_file(self, str_path):
@@ -162,7 +164,7 @@ class DupeGuru(RegistrableApplication):
             else:
                 files.move(source_path, dest_path)
                 self.clean_empty_dirs(source_path[:-1])
-        except (IOError, OSError) as e:
+        except EnvironmentError as e:
             operation = 'Copy' if copy else 'Move'
             logging.warning('%s operation failed on %s. Error: %s' % (operation, unicode(dupe.path), unicode(e)))
             return False
