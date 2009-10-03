@@ -120,7 +120,7 @@ class ResultsModel(TreeModel):
                         assert node.dupe is dupe
                         return self.createIndex(row, 0, node)
                     subrow = group.dupes.index(dupe)
-                    subnode = node.children[subrow]
+                    subnode = node.subnodes[subrow]
                     assert subnode.dupe is dupe
                     return self.createIndex(subrow, 0, subnode)
             except ValueError: # the dupe is not there anymore
