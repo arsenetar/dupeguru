@@ -1,7 +1,7 @@
 - date: 2009-10-03
   version: 1.7.6
   description: |
-    * Fixed a bug preventing some duplicates to be found if transparency was involved. (Mac OS X) (#64)
+    * Fixed bugs preventing some duplicates to be found. (#64 #67)
     * Fixed a bug preventing some iPhoto Libraries to be read. (Mac OS X) (#61)
     * Fixed crash with filtering when regular expressions were enabled. (#60)
     * Fixed crash when setting directories' state. (Mac OS X) (#66)

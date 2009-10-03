@@ -33,7 +33,7 @@ class DetailsDialog(QDialog, Ui_DetailsDialog):
         
         self.selectedPixmap = QPixmap(unicode(dupe.path))
         if ref is dupe:
-            self.referencePixmap = self.selectedPixmap
+            self.referencePixmap = None
         else:
             self.referencePixmap = QPixmap(unicode(ref.path))
         self._updateImages()
@@ -43,10 +43,14 @@ class DetailsDialog(QDialog, Ui_DetailsDialog):
             target_size = self.selectedImage.size()
             scaledPixmap = self.selectedPixmap.scaled(target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.selectedImage.setPixmap(scaledPixmap)
+        else:
+            self.selectedImage.setPixmap(QPixmap())
         if self.referencePixmap is not None:
             target_size = self.referenceImage.size()
             scaledPixmap = self.referencePixmap.scaled(target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.referenceImage.setPixmap(scaledPixmap)
+        else:
+            self.referenceImage.setPixmap(QPixmap())
     
     #--- Override
     def resizeEvent(self, event):
