@@ -10,6 +10,7 @@
 from __future__ import unicode_literals
 
 import logging
+import os
 import os.path as op
 
 from PyQt4.QtCore import Qt, QTimer, QObject, QCoreApplication, QUrl, SIGNAL
@@ -56,6 +57,8 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def __init__(self, data_module, appid):
         appdata = unicode(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
+        if not op.exists(appdata):
+            os.makedirs(appdata)
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
         logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING)
         DupeGuruBase.__init__(self, data_module, appdata, appid)
