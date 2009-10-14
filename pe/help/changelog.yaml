@@ -1,3 +1,9 @@
+- date: 2009-10-14
+  version: 1.7.7
+  description: |
+    * Improved directory selection in the Directories panel (Windows). (#56)
+    * Fixed a bug preventing dupeGuru from starting on certain machines (Windows). (#68)
+    * Fixed a crash during very big scans. (#70)
 - date: 2009-10-03
   version: 1.7.6
   description: |
