@@ -14,6 +14,8 @@ import logging
 
 import winshell
 
+INITIAL_FOLDER_IN_DIALOGS = 'C:\\'
+
 def recycle_file(path):
     try:
         winshell.delete_file(unicode(path), no_confirm=True, silent=True)

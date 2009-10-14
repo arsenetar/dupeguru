@@ -10,14 +10,16 @@
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QDialog, QFileDialog, QHeaderView
 
-from directories_dialog_ui import Ui_DirectoriesDialog
-from directories_model import DirectoriesModel, DirectoriesDelegate
+from . import platform
+from .directories_dialog_ui import Ui_DirectoriesDialog
+from .directories_model import DirectoriesModel, DirectoriesDelegate
 
 class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
     def __init__(self, parent, app):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         QDialog.__init__(self, parent, flags)
         self.app = app
+        self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self._setupUi()
         self._updateRemoveButton()
         
@@ -54,9 +56,10 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
     def addButtonClicked(self):
         title = u"Select a directory to add to the scanning list"
         flags = QFileDialog.ShowDirsOnly
-        dirpath = unicode(QFileDialog.getExistingDirectory(self, title, '', flags))
+        dirpath = unicode(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
         if not dirpath:
             return
+        self.lastAddedFolder = dirpath
         self.app.add_directory(dirpath)
         self.directoriesModel.reset()
     
