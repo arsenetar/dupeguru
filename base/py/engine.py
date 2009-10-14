@@ -334,29 +334,35 @@ def get_groups(matches, j=job.nulljob):
     matches.sort(key=lambda match: -match.percentage)
     dupe2group = {}
     groups = []
-    for match in j.iter_with_progress(matches, 'Grouped %d/%d matches', JOB_REFRESH_RATE):
-        first, second, _ = match
-        first_group = dupe2group.get(first)
-        second_group = dupe2group.get(second)
-        if first_group:
-            if second_group:
-                if first_group is second_group:
-                    target_group = first_group
+    try:
+        for match in j.iter_with_progress(matches, 'Grouped %d/%d matches', JOB_REFRESH_RATE):
+            first, second, _ = match
+            first_group = dupe2group.get(first)
+            second_group = dupe2group.get(second)
+            if first_group:
+                if second_group:
+                    if first_group is second_group:
+                        target_group = first_group
+                    else:
+                        continue
                 else:
-                    continue
+                    target_group = first_group
+                    dupe2group[second] = target_group
             else:
-                target_group = first_group
-                dupe2group[second] = target_group
-        else:
-            if second_group:
-                target_group = second_group
-                dupe2group[first] = target_group
-            else:
-                target_group = Group()
-                groups.append(target_group)
-                dupe2group[first] = target_group
-                dupe2group[second] = target_group
-        target_group.add_match(match)
+                if second_group:
+                    target_group = second_group
+                    dupe2group[first] = target_group
+                else:
+                    target_group = Group()
+                    groups.append(target_group)
+                    dupe2group[first] = target_group
+                    dupe2group[second] = target_group
+            target_group.add_match(match)
+    except MemoryError:
+        del dupe2group
+        del matches
+        # should free enough memory to continue
+        logging.warning('Memory Overflow. Groups: {0}'.format(len(groups)))
     # Now that we have a group, we have to discard groups' matches and see if there're any "orphan"
     # matches, that is, matches that were candidate in a group but that none of their 2 files were
     # accepted in the group. With these orphan groups, it's safe to build additional groups
