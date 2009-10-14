@@ -34,7 +34,7 @@ fp.close()
 print_and_do("python C:\\Python26\\pyinstaller\\Build.py dgme.spec")
 os.remove('verinfo_tmp')
 
-print_and_do("xcopy /Y C:\\src\\vs_comp\\msvcrt dist")
+print_and_do("del *90.dll") # They're in vcredist, no need to include them
 print_and_do("xcopy /Y /S /I help\\dupeguru_me_help dist\\help")
 
 aicom = '"\\Program Files\\Caphyon\\Advanced Installer\\AdvancedInstaller.com"'

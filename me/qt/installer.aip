@@ -230,7 +230,11 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
+    <ROW PrereqKey="0" DisplayName="Visual C++ 2008 SP1 Redistributable" SetupFileUrl="http://download.hardcoded.net/vcredist_90sp1_x86.exe" Location="1" ExactSize="4216840" MinWin9xVer="37" MinWinNTVer="17" Operator="1" ComLine="/q" Sequence="1" MD5="5689d43c3b201dd3810fa3bba4a6476a"/>
     <ATTRIBUTE name="ExtractionFolder" value="[AppDataFolder][|Manufacturer]\[|ProductName]\install"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
+    <ROW Prereq="0" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\DevDiv\VC\Servicing\9.0\RED\1033\SP" RefContent="M1" Order="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.SynchronizedFolderComponent">
     <ROW Directory_="APPDIR" SourcePath="dist" ExcludePattern="*~|#*#|%*%|._|CVS|.cvsignore|SCCS|vssver.scc|mssccprj.scc|vssver2.scc|.svn|.DS_Store|*.pdb|*.vshost.*" ExcludeFlags="6"/>
