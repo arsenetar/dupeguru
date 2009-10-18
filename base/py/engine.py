@@ -9,6 +9,7 @@
 
 from __future__ import division
 import difflib
+import itertools
 import logging
 import string
 from collections import defaultdict, namedtuple
@@ -156,58 +157,69 @@ def get_match(first, second, flags=()):
     percentage = compare(first.words, second.words, flags)
     return Match(first, second, percentage)
 
-class MatchFactory(object):
-    common_word_threshold = 50
-    match_similar_words = False
-    min_match_percentage = 0
-    weight_words = False
-    no_field_order = False
-    limit = 5000000
-    
-    def getmatches(self, objects, j=job.nulljob):
-        j = j.start_subjob(2)
-        sj = j.start_subjob(2)
-        for o in objects:
-            if not hasattr(o, 'words'):
-                o.words = getwords(o.name)
-        word_dict = build_word_dict(objects, sj)
-        reduce_common_words(word_dict, self.common_word_threshold)
-        if self.match_similar_words:
-            merge_similar_words(word_dict)
-        match_flags = []
-        if self.weight_words:
-            match_flags.append(WEIGHT_WORDS)
-        if self.match_similar_words:
-            match_flags.append(MATCH_SIMILAR_WORDS)
-        if self.no_field_order:
-            match_flags.append(NO_FIELD_ORDER)
-        j.start_job(len(word_dict), '0 matches found')
-        compared = defaultdict(set)
-        result = []
-        try:
-            # This whole 'popping' thing is there to avoid taking too much memory at the same time.
-            while word_dict:
-                items = word_dict.popitem()[1]
-                while items:
-                    ref = items.pop()
-                    compared_already = compared[ref]
-                    to_compare = items - compared_already
-                    compared_already |= to_compare
-                    for other in to_compare:
-                        m = get_match(ref, other, match_flags)
-                        if m.percentage >= self.min_match_percentage:
-                            result.append(m)
-                            if len(result) >= self.limit:
-                                return result
-                j.add_progress(desc='%d matches found' % len(result))
-        except MemoryError:
-            # This is the place where the memory usage is at its peak during the scan.
-            # Just continue the process with an incomplete list of matches.
-            del compared # This should give us enough room to call logging.
-            logging.warning('Memory Overflow. Matches: %d. Word dict: %d' % (len(result), len(word_dict)))
-            return result
+def getmatches(objects, min_match_percentage=0, match_similar_words=False, weight_words=False, 
+    no_field_order=False, j=job.nulljob):
+    COMMON_WORD_THRESHOLD = 50
+    LIMIT = 5000000
+    j = j.start_subjob(2)
+    sj = j.start_subjob(2)
+    for o in objects:
+        if not hasattr(o, 'words'):
+            o.words = getwords(o.name)
+    word_dict = build_word_dict(objects, sj)
+    reduce_common_words(word_dict, COMMON_WORD_THRESHOLD)
+    if match_similar_words:
+        merge_similar_words(word_dict)
+    match_flags = []
+    if weight_words:
+        match_flags.append(WEIGHT_WORDS)
+    if match_similar_words:
+        match_flags.append(MATCH_SIMILAR_WORDS)
+    if no_field_order:
+        match_flags.append(NO_FIELD_ORDER)
+    j.start_job(len(word_dict), '0 matches found')
+    compared = defaultdict(set)
+    result = []
+    try:
+        # This whole 'popping' thing is there to avoid taking too much memory at the same time.
+        while word_dict:
+            items = word_dict.popitem()[1]
+            while items:
+                ref = items.pop()
+                compared_already = compared[ref]
+                to_compare = items - compared_already
+                compared_already |= to_compare
+                for other in to_compare:
+                    m = get_match(ref, other, match_flags)
+                    if m.percentage >= min_match_percentage:
+                        result.append(m)
+                        if len(result) >= LIMIT:
+                            return result
+            j.add_progress(desc='%d matches found' % len(result))
+    except MemoryError:
+        # This is the place where the memory usage is at its peak during the scan.
+        # Just continue the process with an incomplete list of matches.
+        del compared # This should give us enough room to call logging.
+        logging.warning('Memory Overflow. Matches: %d. Word dict: %d' % (len(result), len(word_dict)))
         return result
-    
+    return result
+
+def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob):
+    j = j.start_subjob([2, 8])
+    size2files = defaultdict(set)
+    for file in j.iter_with_progress(files, 'Read size of %d/%d files'):
+        size2files[getattr(file, sizeattr)].add(file)
+    possible_matches = [files for files in size2files.values() if len(files) > 1]
+    del size2files
+    result = []
+    j.start_job(len(possible_matches), '0 matches found')
+    for group in possible_matches:
+        for first, second in itertools.combinations(group, 2):
+            if first.md5partial == second.md5partial:
+                if partial or first.md5 == second.md5:
+                    result.append(Match(first, second, 100))
+        j.add_progress(desc='%d matches found' % len(result))
+    return result
 
 class Group(object):
     #---Override

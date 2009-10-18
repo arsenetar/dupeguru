@@ -76,7 +76,7 @@ def GetDisplayInfo(dupe, group, delta):
         str(dupe.track),
         dupe.comment,
         format_perc(percentage),
-        format_words(dupe.words),
+        format_words(dupe.words) if hasattr(dupe, 'words') else '',
         format_dupe_count(dupe_count)
     ]
 

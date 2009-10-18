@@ -340,21 +340,13 @@ class TCget_match(TestCase):
         self.assertEqual(int((6.0 / 13.0) * 100),get_match(NamedObject("foo bar",True),NamedObject("bar bleh",True),(WEIGHT_WORDS,)).percentage)
     
 
-class TCMatchFactory(TestCase):
+class GetMatches(TestCase):
     def test_empty(self):
-        self.assertEqual([],MatchFactory().getmatches([]))
-    
-    def test_defaults(self):
-        mf = MatchFactory()
-        self.assertEqual(50,mf.common_word_threshold)
-        self.assertEqual(False,mf.weight_words)
-        self.assertEqual(False,mf.match_similar_words)
-        self.assertEqual(False,mf.no_field_order)
-        self.assertEqual(0,mf.min_match_percentage)
+        eq_(getmatches([]), [])
     
     def test_simple(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("a b c foo")]
-        r = MatchFactory().getmatches(l)
+        r = getmatches(l)
         self.assertEqual(2,len(r))
         seek = [m for m in r if m.percentage == 50] #"foo bar" and "bar bleh"
         m = seek[0]
@@ -367,7 +359,7 @@ class TCMatchFactory(TestCase):
     
     def test_null_and_unrelated_objects(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject(""),NamedObject("unrelated object")]
-        r = MatchFactory().getmatches(l)
+        r = getmatches(l)
         self.assertEqual(1,len(r))
         m = r[0]
         self.assertEqual(50,m.percentage)
@@ -376,34 +368,33 @@ class TCMatchFactory(TestCase):
     
     def test_twice_the_same_word(self):
         l = [NamedObject("foo foo bar"),NamedObject("bar bleh")]
-        r = MatchFactory().getmatches(l)
+        r = getmatches(l)
         self.assertEqual(1,len(r))
     
     def test_twice_the_same_word_when_preworded(self):
         l = [NamedObject("foo foo bar",True),NamedObject("bar bleh",True)]
-        r = MatchFactory().getmatches(l)
+        r = getmatches(l)
         self.assertEqual(1,len(r))
     
     def test_two_words_match(self):
         l = [NamedObject("foo bar"),NamedObject("foo bar bleh")]
-        r = MatchFactory().getmatches(l)
+        r = getmatches(l)
         self.assertEqual(1,len(r))
     
     def test_match_files_with_only_common_words(self):
         #If a word occurs more than 50 times, it is excluded from the matching process
         #The problem with the common_word_threshold is that the files containing only common
         #words will never be matched together. We *should* match them.
-        mf = MatchFactory()
-        mf.common_word_threshold = 50
+        # This test assumes that the common word threashold const is 50
         l = [NamedObject("foo") for i in range(50)]
-        r = mf.getmatches(l)
+        r = getmatches(l)
         self.assertEqual(1225,len(r))
     
     def test_use_words_already_there_if_there(self):
         o1 = NamedObject('foo')
         o2 = NamedObject('bar')
         o2.words = ['foo']
-        self.assertEqual(1,len(MatchFactory().getmatches([o1,o2])))
+        eq_(1, len(getmatches([o1,o2])))
     
     def test_job(self):
         def do_progress(p,d=''):
@@ -413,75 +404,62 @@ class TCMatchFactory(TestCase):
         j = job.Job(1,do_progress)
         self.log = []
         s = "foo bar"
-        MatchFactory().getmatches([NamedObject(s),NamedObject(s),NamedObject(s)],j)
+        getmatches([NamedObject(s), NamedObject(s), NamedObject(s)], j=j)
         self.assert_(len(self.log) > 2)
         self.assertEqual(0,self.log[0])
         self.assertEqual(100,self.log[-1])
     
     def test_weight_words(self):
-        mf = MatchFactory()
-        mf.weight_words = True
         l = [NamedObject("foo bar"),NamedObject("bar bleh")]
-        m = mf.getmatches(l)[0]
+        m = getmatches(l, weight_words=True)[0]
         self.assertEqual(int((6.0 / 13.0) * 100),m.percentage)
     
     def test_similar_word(self):
-        mf = MatchFactory()
-        mf.match_similar_words = True
         l = [NamedObject("foobar"),NamedObject("foobars")]
-        self.assertEqual(1,len(mf.getmatches(l)))
-        self.assertEqual(100,mf.getmatches(l)[0].percentage)
+        eq_(len(getmatches(l, match_similar_words=True)), 1)
+        eq_(getmatches(l, match_similar_words=True)[0].percentage, 100)
         l = [NamedObject("foobar"),NamedObject("foo")]
-        self.assertEqual(0,len(mf.getmatches(l))) #too far
+        eq_(len(getmatches(l, match_similar_words=True)), 0) #too far
         l = [NamedObject("bizkit"),NamedObject("bizket")]
-        self.assertEqual(1,len(mf.getmatches(l)))
+        eq_(len(getmatches(l, match_similar_words=True)), 1)
         l = [NamedObject("foobar"),NamedObject("foosbar")]
-        self.assertEqual(1,len(mf.getmatches(l)))
+        eq_(len(getmatches(l, match_similar_words=True)), 1)
     
     def test_single_object_with_similar_words(self):
-        mf = MatchFactory()
-        mf.match_similar_words = True
         l = [NamedObject("foo foos")]
-        self.assertEqual(0,len(mf.getmatches(l)))
+        eq_(len(getmatches(l, match_similar_words=True)), 0)
     
     def test_double_words_get_counted_only_once(self):
-        mf = MatchFactory()
         l = [NamedObject("foo bar foo bleh"),NamedObject("foo bar bleh bar")]
-        m = mf.getmatches(l)[0]
+        m = getmatches(l)[0]
         self.assertEqual(75,m.percentage)
     
     def test_with_fields(self):
-        mf = MatchFactory()
         o1 = NamedObject("foo bar - foo bleh")
         o2 = NamedObject("foo bar - bleh bar")
         o1.words = getfields(o1.name)
         o2.words = getfields(o2.name)
-        m = mf.getmatches([o1, o2])[0]
+        m = getmatches([o1, o2])[0]
         self.assertEqual(50, m.percentage)
     
     def test_with_fields_no_order(self):
-        mf = MatchFactory()
-        mf.no_field_order = True
         o1 = NamedObject("foo bar - foo bleh")
         o2 = NamedObject("bleh bang - foo bar")
         o1.words = getfields(o1.name)
         o2.words = getfields(o2.name)
-        m = mf.getmatches([o1, o2])[0]
-        self.assertEqual(50 ,m.percentage)
+        m = getmatches([o1, o2], no_field_order=True)[0]
+        eq_(m.percentage, 50)
     
     def test_only_match_similar_when_the_option_is_set(self):
-        mf = MatchFactory()
-        mf.match_similar_words = False
         l = [NamedObject("foobar"),NamedObject("foobars")]
-        self.assertEqual(0,len(mf.getmatches(l)))
+        eq_(len(getmatches(l, match_similar_words=False)), 0)
     
     def test_dont_recurse_do_match(self):
         # with nosetests, the stack is increased. The number has to be high enough not to be failing falsely
         sys.setrecursionlimit(100)
-        mf = MatchFactory()
         files = [NamedObject('foo bar') for i in range(101)]
         try:
-            mf.getmatches(files)
+            getmatches(files)
         except RuntimeError:
             self.fail()
         finally:
@@ -489,17 +467,8 @@ class TCMatchFactory(TestCase):
     
     def test_min_match_percentage(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("a b c foo")]
-        mf = MatchFactory()
-        mf.min_match_percentage = 50
-        r = mf.getmatches(l)
+        r = getmatches(l, min_match_percentage=50)
         self.assertEqual(1,len(r)) #Only "foo bar" / "bar bleh" should match
-    
-    def test_limit(self):
-        l = [NamedObject(),NamedObject(),NamedObject()]
-        mf = MatchFactory()
-        mf.limit = 2
-        r = mf.getmatches(l)
-        self.assertEqual(2,len(r))
     
     def test_MemoryError(self):
         @log_calls
@@ -510,9 +479,8 @@ class TCMatchFactory(TestCase):
         
         objects = [NamedObject() for i in range(10)] # results in 45 matches
         self.mock(engine, 'get_match', mocked_match)
-        mf = MatchFactory()
         try:
-            r = mf.getmatches(objects)
+            r = getmatches(objects)
         except MemoryError:
             self.fail('MemorryError must be handled')
         self.assertEqual(42, len(r))
@@ -738,7 +706,7 @@ class TCget_groups(TestCase):
     
     def test_simple(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh")]
-        matches = MatchFactory().getmatches(l)
+        matches = getmatches(l)
         m = matches[0]
         r = get_groups(matches)
         self.assertEqual(1,len(r))
@@ -749,7 +717,7 @@ class TCget_groups(TestCase):
     def test_group_with_multiple_matches(self):
         #This results in 3 matches
         l = [NamedObject("foo"),NamedObject("foo"),NamedObject("foo")]
-        matches = MatchFactory().getmatches(l)
+        matches = getmatches(l)
         r = get_groups(matches)
         self.assertEqual(1,len(r))
         g = r[0]
@@ -759,7 +727,7 @@ class TCget_groups(TestCase):
         l = [NamedObject("a b"),NamedObject("a b"),NamedObject("b c"),NamedObject("c d"),NamedObject("c d")]
         #There will be 2 groups here: group "a b" and group "c d"
         #"b c" can go either of them, but not both.
-        matches = MatchFactory().getmatches(l)
+        matches = getmatches(l)
         r = get_groups(matches)
         self.assertEqual(2,len(r))
         self.assertEqual(5,len(r[0])+len(r[1]))
@@ -768,7 +736,7 @@ class TCget_groups(TestCase):
         l = [NamedObject("a b"),NamedObject("a b"),NamedObject("a b"),NamedObject("a b")]
         #There will be 2 groups here: group "a b" and group "c d"
         #"b c" can fit in both, but it must be in only one of them
-        matches = MatchFactory().getmatches(l)
+        matches = getmatches(l)
         r = get_groups(matches)
         self.assertEqual(1,len(r))
     
@@ -788,7 +756,7 @@ class TCget_groups(TestCase):
     
     def test_four_sized_group(self):
         l = [NamedObject("foobar") for i in xrange(4)]
-        m = MatchFactory().getmatches(l)
+        m = getmatches(l)
         r = get_groups(m)
         self.assertEqual(1,len(r))
         self.assertEqual(4,len(r[0]))

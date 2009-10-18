@@ -79,7 +79,7 @@ def GetDisplayInfo(dupe, group, delta):
         format_timestamp(ctime, delta and m),
         format_timestamp(mtime, delta and m),
         format_perc(percentage),
-        format_words(dupe.words),
+        format_words(dupe.words) if hasattr(dupe, 'words') else '',
         format_dupe_count(dupe_count)
     ]
 

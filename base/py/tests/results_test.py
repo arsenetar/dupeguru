@@ -37,7 +37,7 @@ class NamedObject(engine_test.NamedObject):
 def GetTestGroups():
     objects = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("foo bleh"),NamedObject("ibabtu"),NamedObject("ibabtu")]
     objects[1].size = 1024
-    matches = engine.MatchFactory().getmatches(objects) #we should have 5 matches
+    matches = engine.getmatches(objects) #we should have 5 matches
     groups = engine.get_groups(matches) #We should have 2 groups
     for g in groups:
         g.prioritize(lambda x:objects.index(x)) #We want the dupes to be in the same order as the list is
@@ -505,7 +505,7 @@ class TCResultsXML(TestCase):
                 return objects[1]
         
         objects = [NamedObject(u"\xe9foo bar",True),NamedObject("bar bleh",True)]
-        matches = engine.MatchFactory().getmatches(objects) #we should have 5 matches
+        matches = engine.getmatches(objects) #we should have 5 matches
         groups = engine.get_groups(matches) #We should have 2 groups
         for g in groups:
             g.prioritize(lambda x:objects.index(x)) #We want the dupes to be in the same order as the list is

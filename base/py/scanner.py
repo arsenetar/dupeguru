@@ -32,40 +32,32 @@ class Scanner(object):
         self.ignore_list = IgnoreList()
         self.discarded_file_count = 0
     
-    @staticmethod
-    def _filter_matches_by_content(matches, partial, j):
-        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
-        md5attrname = 'md5partial' if partial else 'md5'
-        md5 = lambda f: getattr(f, md5attrname)
-        for matched_file in j.iter_with_progress(matched_files, 'Analyzed %d/%d matching files'):
-            md5(matched_file)
-        j.set_progress(100, 'Removing false matches')
-        return [m for m in matches if md5(m.first) == md5(m.second)]
-    
     def _getmatches(self, files, j):
-        j = j.start_subjob(2)
-        mf = engine.MatchFactory()
-        if self.scan_type != SCAN_TYPE_CONTENT:
-            mf.match_similar_words = self.match_similar_words
-            mf.weight_words = self.word_weighting
-            mf.min_match_percentage = self.min_match_percentage
-        if self.scan_type == SCAN_TYPE_FIELDS_NO_ORDER:
-            self.scan_type = SCAN_TYPE_FIELDS
-            mf.no_field_order = True
-        func = {
-            SCAN_TYPE_FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
-            SCAN_TYPE_FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
-            SCAN_TYPE_TAG: lambda f: [engine.getwords(unicode(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
-            SCAN_TYPE_CONTENT: lambda f: [str(f.size)],
-            SCAN_TYPE_CONTENT_AUDIO: lambda f: [str(f.audiosize)]
-        }[self.scan_type]
-        for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
-            if self.size_threshold:
+        if not self.size_threshold:
+            j = j.start_subjob([2, 8])
+            for f in j.iter_with_progress(files, 'Read size of %d/%d files'):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
-            f.words = func(f)
-        if self.size_threshold:
             files = [f for f in files if f.size >= self.size_threshold]
-        return mf.getmatches(files, j)
+        if self.scan_type in (SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO):
+            sizeattr = 'size' if self.scan_type == SCAN_TYPE_CONTENT else 'audiosize'
+            return engine.getmatches_by_contents(files, sizeattr, partial=self.scan_type==SCAN_TYPE_CONTENT_AUDIO, j=j)
+        else:
+            j = j.start_subjob([2, 8])
+            kw = {}
+            kw['match_similar_words'] = self.match_similar_words
+            kw['weight_words'] = self.word_weighting
+            kw['min_match_percentage'] = self.min_match_percentage
+            if self.scan_type == SCAN_TYPE_FIELDS_NO_ORDER:
+                self.scan_type = SCAN_TYPE_FIELDS
+                kw['no_field_order'] = True
+            func = {
+                SCAN_TYPE_FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
+                SCAN_TYPE_FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
+                SCAN_TYPE_TAG: lambda f: [engine.getwords(unicode(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
+            }[self.scan_type]
+            for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
+                f.words = func(f)
+            return engine.getmatches(files, j=j, **kw)
     
     @staticmethod
     def _key_func(dupe):
@@ -86,10 +78,7 @@ class Scanner(object):
         for f in [f for f in files if not hasattr(f, 'is_ref')]:
             f.is_ref = False
         logging.info('Getting matches')
-        if self.match_factory is None:
-            matches = self._getmatches(files, j)
-        else:
-            matches = self.match_factory.getmatches(files, j)
+        matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
         if not self.mix_file_kind:
             j.set_progress(100, 'Removing false matches')
@@ -99,14 +88,6 @@ class Scanner(object):
             iter_matches = j.iter_with_progress(matches, 'Processed %d/%d matches against the ignore list')
             matches = [m for m in iter_matches 
                 if not self.ignore_list.AreIgnored(unicode(m.first.path), unicode(m.second.path))]
-        if self.scan_type in (SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO):
-            j = j.start_subjob(3 if self.scan_type == SCAN_TYPE_CONTENT else 2)
-            matches = self._filter_matches_by_content(matches, partial=True, j=j)
-            if self.scan_type == SCAN_TYPE_CONTENT:
-                matches = self._filter_matches_by_content(matches, partial=False, j=j)
-            # We compared md5. No words were involved.
-            for m in matches:
-                m.first.words = m.second.words = ['--']
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
         matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])

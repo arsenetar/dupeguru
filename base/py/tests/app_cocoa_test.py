@@ -318,7 +318,7 @@ class TCDupeGuru_renameSelected(TestCase):
         fp = open(str(p + 'foo bar 3'),mode='w')
         fp.close()
         refdir = hsfs.phys.Directory(None,str(p))
-        matches = engine.MatchFactory().getmatches(refdir.files)
+        matches = engine.getmatches(refdir.files)
         groups = engine.get_groups(matches)
         g = groups[0]
         g.prioritize(lambda x:x.name)

@@ -369,23 +369,6 @@ def test_ignore_list_checks_for_unicode():
     assert f2 in g
     assert f3 in g
 
-def test_custom_match_factory():
-    class MatchFactory(object):
-        def getmatches(self, objects, j=None):
-            return [Match(objects[0], objects[1], 420)]
-        
-    
-    s = Scanner()
-    s.match_factory = MatchFactory()
-    o1, o2 = no('foo'), no('bar')
-    groups = s.GetDupeGroups([o1, o2])
-    eq_(len(groups), 1)
-    g = groups[0]
-    eq_(len(g), 2)
-    g.switch_ref(o1)
-    m = g.get_match_of(o2)
-    eq_(m, (o1, o2, 420))
-
 def test_file_evaluates_to_false():
     # A very wrong way to use any() was added at some point, causing resulting group list
     # to be empty.
