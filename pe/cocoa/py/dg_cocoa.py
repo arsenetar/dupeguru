@@ -39,7 +39,7 @@ class PyDupeGuru(PyApp):
         self.app.scanner.ignore_list.Clear()
     
     def clearPictureCache(self):
-        self.app.scanner.match_factory.cached_blocks.clear()
+        self.app.scanner.cached_blocks.clear()
     
     def doScan(self):
         return self.app.start_scanning()
@@ -172,10 +172,10 @@ class PyDupeGuru(PyApp):
     
     #---Properties
     def setMatchScaled_(self,match_scaled):
-        self.app.scanner.match_factory.match_scaled = match_scaled
+        self.app.scanner.match_scaled = match_scaled
     
     def setMinMatchPercentage_(self,percentage):
-        self.app.scanner.match_factory.threshold = int(percentage)
+        self.app.scanner.threshold = int(percentage)
     
     def setMixFileKind_(self,mix_file_kind):
         self.app.scanner.mix_file_kind = mix_file_kind
