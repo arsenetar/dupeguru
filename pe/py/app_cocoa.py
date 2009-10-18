@@ -27,8 +27,9 @@ from hsutil.path import Path
 from hsutil.cocoa import as_fetch
 
 from dupeguru import app_cocoa, directories
-from . import data, matchbase
+from . import data
 from .cache import string_to_colors, Cache
+from .scanner import ScannerPE
 
 mainBundle = NSBundle.mainBundle()
 PictureBlocks = mainBundle.classNamed_('PictureBlocks')
@@ -126,11 +127,11 @@ class IPhotoLibrary(fs.Directory):
 class DupeGuruPE(app_cocoa.DupeGuru):
     def __init__(self):
         app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru Picture Edition', appid=5)
-        self.scanner.match_factory = matchbase.AsyncMatchFactory()
+        self.scanner = ScannerPE()
         self.directories.dirclass = Directory
         self.directories.special_dirclasses[Path('iPhoto Library')] = lambda _, __: self._create_iphoto_library()
         p = op.join(self.appdata, 'cached_pictures.db')
-        self.scanner.match_factory.cached_blocks = Cache(p)
+        self.scanner.cached_blocks = Cache(p)
     
     def _create_iphoto_library(self):
         ud = NSUserDefaults.standardUserDefaults()

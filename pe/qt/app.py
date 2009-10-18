@@ -17,7 +17,7 @@ from hsutil.str import get_file_ext
 
 from dupeguru_pe import data as data_pe
 from dupeguru_pe.cache import Cache
-from dupeguru_pe.matchbase import AsyncMatchFactory
+from dupeguru_pe.scanner import ScannerPE
 
 from block import getblocks
 from base.app import DupeGuru as DupeGuruBase
@@ -63,15 +63,15 @@ class DupeGuru(DupeGuruBase):
         DupeGuruBase.__init__(self, data_pe, appid=5)
     
     def _setup(self):
-        self.scanner.match_factory = AsyncMatchFactory()
+        self.scanner = ScannerPE()
         self.directories.dirclass = Directory
-        self.scanner.match_factory.cached_blocks = Cache(op.join(self.appdata, 'cached_pictures.db'))
+        self.scanner.cached_blocks = Cache(op.join(self.appdata, 'cached_pictures.db'))
         DupeGuruBase._setup(self)
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.scanner.match_factory.match_scaled = self.prefs.match_scaled
-        self.scanner.match_factory.threshold = self.prefs.filter_hardness
+        self.scanner.match_scaled = self.prefs.match_scaled
+        self.scanner.threshold = self.prefs.filter_hardness
     
     def _create_details_dialog(self, parent):
         return DetailsDialog(parent, self)

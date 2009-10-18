@@ -99,7 +99,6 @@ class Scanner(object):
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
     
-    match_factory        = None
     match_similar_words  = False
     min_match_percentage = 80
     mix_file_kind        = True

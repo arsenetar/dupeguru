@@ -23,6 +23,6 @@ class MainWindow(MainWindowBase):
         title = "Clear Picture Cache"
         msg = "Do you really want to remove all your cached picture analysis?"
         if self._confirm(title, msg, QMessageBox.No):
-            self.app.scanner.match_factory.cached_blocks.clear()
+            self.app.scanner.cached_blocks.clear()
             QMessageBox.information(self, title, "Picture cache cleared.")
     
