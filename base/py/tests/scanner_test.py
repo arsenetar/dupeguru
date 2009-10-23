@@ -132,8 +132,6 @@ def test_content_scan_doesnt_put_md5_in_words_at_the_end():
     f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     r = s.GetDupeGroups(f)
     g = r[0]
-    eq_(g.ref.words, ['--'])
-    eq_(g.dupes[0].words, ['--'])
 
 def test_extension_is_not_counted_in_filename_scan():
     s = Scanner()

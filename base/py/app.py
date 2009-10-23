@@ -14,13 +14,13 @@ import os
 import os.path as op
 import logging
 
-from hsutil import job, io, files
+from hsutil import io, files
 from hsutil.path import Path
 from hsutil.reg import RegistrableApplication, RegistrationRequired
 from hsutil.misc import flatten, first
 from hsutil.str import escape
 
-from . import directories, results, scanner, export
+from . import directories, results, scanner, export, fs
 
 JOB_SCAN = 'job_scan'
 JOB_LOAD = 'job_load'
@@ -98,13 +98,8 @@ class DupeGuru(RegistrableApplication):
             return ['---'] * len(self.data.COLUMNS)
     
     def _get_file(self, str_path):
-        p = Path(str_path)
-        for d in self.directories:
-            if p not in d.path:
-                continue
-            result = d.find_path(p[d.path:])
-            if result is not None:
-                return result
+        path = Path(str_path)
+        return fs.get_file(path, self.directories.fileclasses)    
     
     @staticmethod
     def _recycle_dupe(dupe):
@@ -150,7 +145,7 @@ class DupeGuru(RegistrableApplication):
                        2 = absolute re-creation.
         """
         source_path = dupe.path
-        location_path = dupe.root.path
+        location_path = first(p for p in self.directories if dupe.path in p)
         dest_path = Path(destination)
         if dest_type == 2:
             dest_path = dest_path + source_path[1:-1] #Remove drive letter and filename

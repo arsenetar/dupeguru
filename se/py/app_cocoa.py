@@ -11,12 +11,11 @@ import logging
 
 from AppKit import *
 
-from hsfs.phys import Directory as DirectoryBase
-from hsfs.phys.bundle import Bundle
+from hsutil import io
 from hsutil.path import Path
-from hsutil.misc import extract
 from hsutil.str import get_file_ext
 
+from dupeguru import fs
 from dupeguru.app_cocoa import DupeGuru as DupeGuruBase
 from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 from . import data
@@ -32,27 +31,17 @@ else: # Tiger
     def is_bundle(str_path): # just return a list of a few known bundle extensions.
         return get_file_ext(str_path) in ('app', 'pages', 'numbers')
 
-class DGDirectory(DirectoryBase):
-    def _create_sub_file(self, name, with_parent=True):
-        if is_bundle(unicode(self.path + name)):
-            parent = self if with_parent else None
-            return Bundle(parent, name)
-        else:
-            return super(DGDirectory, self)._create_sub_file(name, with_parent)
-    
-    def _fetch_subitems(self):
-        subdirs, subfiles = super(DGDirectory, self)._fetch_subitems()
-        apps, normal_dirs = extract(lambda name: is_bundle(unicode(self.path + name)), subdirs)
-        subfiles += apps
-        return normal_dirs, subfiles
+class Bundle(BundleBase):
+    @classmethod
+    def can_handle(cls, path):
+        return not io.islink(path) and io.isdir(path) and is_bundle(unicode(path))
     
 
 class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev'])
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
-        DirectoriesBase.__init__(self)
-        self.dirclass = DGDirectory
+        DirectoriesBase.__init__(self, fileclasses=[Bundle, fs.File])
     
     def _default_state_for_path(self, path):
         result = DirectoriesBase._default_state_for_path(self, path)

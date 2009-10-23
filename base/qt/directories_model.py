@@ -47,7 +47,14 @@ class DirectoryNode(TreeNode):
         return DirectoryNode(self.model, self, ref, row)
     
     def _getChildren(self):
-        return self.ref.dirs
+        return self.model._dirs.get_subfolders(self.ref)
+    
+    @property
+    def name(self):
+        if self.parent is not None:
+            return self.ref[-1]
+        else:
+            return unicode(self.ref)
     
 
 class DirectoriesModel(TreeModel):
@@ -70,13 +77,13 @@ class DirectoriesModel(TreeModel):
         node = index.internalPointer()
         if role == Qt.DisplayRole:
             if index.column() == 0:
-                return node.ref.name
+                return node.name
             else:
-                return STATES[self._dirs.get_state(node.ref.path)]
+                return STATES[self._dirs.get_state(node.ref)]
         elif role == Qt.EditRole and index.column() == 1:
-            return self._dirs.get_state(node.ref.path)
+            return self._dirs.get_state(node.ref)
         elif role == Qt.ForegroundRole:
-            state = self._dirs.get_state(node.ref.path)
+            state = self._dirs.get_state(node.ref)
             if state == 1:
                 return QBrush(Qt.blue)
             elif state == 2:
@@ -101,6 +108,6 @@ class DirectoriesModel(TreeModel):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
             return False
         node = index.internalPointer()
-        self._dirs.set_state(node.ref.path, value)
+        self._dirs.set_state(node.ref, value)
         return True
     

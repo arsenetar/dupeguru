@@ -19,7 +19,7 @@ import hashlib
 import logging
 
 from hsutil import io
-from hsutil.misc import nonone
+from hsutil.misc import nonone, flatten
 from hsutil.str import get_file_ext
 
 class FSError(Exception):
@@ -129,47 +129,21 @@ class File(object):
     #--- Public
     @classmethod
     def can_handle(cls, path):
-        return io.isfile(path)
+        return not io.islink(path) and io.isfile(path)
     
-    def copy(self, destpath, newname=None, force=False):
-        if newname is None:
-            newname = self.name
-        destpath = destpath + newname
-        if (not force) and (io.exists(destpath)):
-            raise AlreadyExistsError(self, destpath[:-1])
-        try:
-            io.copy(self.path, destpath)
-        except EnvironmentError:
-            raise OperationError(self)
-        if not io.exists(destpath):
-            raise OperationError(self)
-    
-    def move(self, destpath, newname=None, force=False):
-        if newname is None:
-            newname = self.name
-        destpath = destpath + newname
+    def rename(self, newname):
+        if newname == self.name:
+            return
+        destpath = self.path[:-1] + newname
         if io.exists(destpath):
-            if force:
-                io.remove(destpath)
-            else:
-                raise AlreadyExistsError(self, destpath[:-1])
+            raise AlreadyExistsError(newname, self.path[:-1])
         try:
-            io.move(self.path, destpath)
+            io.rename(self.path, destpath)
         except EnvironmentError:
             raise OperationError(self)
         if not io.exists(destpath):
             raise OperationError(self)
         self.path = destpath
-    
-    def rename(self, newname):
-        newpath = self.path[:-1] + newname
-        if io.exists(newpath):
-            raise AlreadyExistsError(newname, self.path[:-1])
-        try:
-            io.rename(self.path, newpath)
-        except OSError:
-            raise OperationError(self)
-        self.path = newpath
     
     #--- Properties
     @property
@@ -181,10 +155,25 @@ class File(object):
         return self.path[-1]
     
 
-def get_files(path, fileclass=File):
-    assert issubclass(fileclass, File)
+def get_file(path, fileclasses=[File]):
+    for fileclass in fileclasses:
+        if fileclass.can_handle(path):
+            return fileclass(path)
+
+def get_files(path, fileclasses=[File]):
+    assert all(issubclass(fileclass, File) for fileclass in fileclasses)
     try:
         paths = [path + name for name in io.listdir(path)]
-        return [fileclass(path) for path in paths if not io.islink(path) and io.isfile(path)]
+        result = []
+        for path in paths:
+            file = get_file(path, fileclasses=fileclasses)
+            if file is not None:
+                result.append(file)
+        return result
     except EnvironmentError:
         raise InvalidPath(path)
+
+def get_all_files(path, fileclasses=[File]):
+    subfolders = [path + name for name in io.listdir(path) if not io.islink(path + name) and io.isdir(path + name)]
+    subfiles = flatten(get_all_files(subpath, fileclasses=fileclasses) for subpath in subfolders)
+    return subfiles + get_files(path, fileclasses=fileclasses)

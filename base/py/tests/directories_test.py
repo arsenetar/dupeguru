@@ -10,19 +10,42 @@
 import os.path as op
 import os
 import time
-import shutil
 
 from nose.tools import eq_
 
-from hsutil import job, io
+from hsutil import io
 from hsutil.path import Path
 from hsutil.testcase import TestCase
-import hsfs.phys
-from hsfs.tests import phys_test
 
 from ..directories import *
 
 testpath = Path(TestCase.datadirpath())
+
+def create_fake_fs(rootpath):
+    rootpath = rootpath + 'fs'
+    io.mkdir(rootpath)
+    io.mkdir(rootpath + 'dir1')
+    io.mkdir(rootpath + 'dir2')
+    io.mkdir(rootpath + 'dir3')
+    fp = io.open(rootpath + 'file1.test', 'w')
+    fp.write('1')
+    fp.close()
+    fp = io.open(rootpath + 'file2.test', 'w')
+    fp.write('12')
+    fp.close()
+    fp = io.open(rootpath + 'file3.test', 'w')
+    fp.write('123')
+    fp.close()
+    fp = io.open(rootpath + ('dir1', 'file1.test'), 'w')
+    fp.write('1')
+    fp.close()
+    fp = io.open(rootpath + ('dir2', 'file2.test'), 'w')
+    fp.write('12')
+    fp.close()
+    fp = io.open(rootpath + ('dir3', 'file3.test'), 'w')
+    fp.write('123')
+    fp.close()
+    return rootpath
 
 class TCDirectories(TestCase):
     def test_empty(self):
@@ -33,13 +56,11 @@ class TCDirectories(TestCase):
     def test_add_path(self):
         d = Directories()
         p = testpath + 'utils'
-        added = d.add_path(p)
+        d.add_path(p)
         self.assertEqual(1,len(d))
         self.assert_(p in d)
         self.assert_((p + 'foobar') in d)
         self.assert_(p[:-1] not in d)
-        self.assertEqual(p,added.path)
-        self.assert_(d[0] is added)
         p = self.tmppath()
         d.add_path(p)
         self.assertEqual(2,len(d))
@@ -53,13 +74,13 @@ class TCDirectories(TestCase):
         self.assertRaises(AlreadyThereError, d.add_path, p + 'foobar')
         self.assertEqual(1, len(d))
     
-    def test_AddPath_containing_paths_already_there(self):
+    def test_add_path_containing_paths_already_there(self):
         d = Directories()
         d.add_path(testpath + 'utils')
         self.assertEqual(1, len(d))
-        added = d.add_path(testpath)
-        self.assertEqual(1, len(d))
-        self.assert_(added is d[0])
+        d.add_path(testpath)
+        eq_(len(d), 1)
+        eq_(d[0], testpath)
     
     def test_AddPath_non_latin(self):
     	p = Path(self.tmpdir())
@@ -114,7 +135,7 @@ class TCDirectories(TestCase):
     
     def test_set_state_keep_state_dict_size_to_minimum(self):
         d = Directories()
-        p = Path(phys_test.create_fake_fs(self.tmpdir()))
+        p = create_fake_fs(self.tmppath())
         d.add_path(p)
         d.set_state(p,STATE_REFERENCE)
         d.set_state(p + 'dir1',STATE_REFERENCE)
@@ -129,7 +150,7 @@ class TCDirectories(TestCase):
     
     def test_get_files(self):
         d = Directories()
-        p = Path(phys_test.create_fake_fs(self.tmpdir()))
+        p = create_fake_fs(self.tmppath())
         d.add_path(p)
         d.set_state(p + 'dir1',STATE_REFERENCE)
         d.set_state(p + 'dir2',STATE_EXCLUDED)
@@ -177,44 +198,20 @@ class TCDirectories(TestCase):
         except LookupError:
             self.fail()
     
-    def test_default_dirclass(self):
-        self.assert_(Directories().dirclass is hsfs.phys.Directory)
-    
-    def test_dirclass(self):
-        class MySpecialDirclass(hsfs.phys.Directory): pass
-        d = Directories()
-        d.dirclass = MySpecialDirclass
-        d.add_path(testpath)
-        self.assert_(isinstance(d[0], MySpecialDirclass))
-    
     def test_load_from_file_with_invalid_path(self):
         #This test simulates a load from file resulting in a
         #InvalidPath raise. Other directories must be loaded.
         d1 = Directories()
         d1.add_path(testpath + 'utils')
         #Will raise InvalidPath upon loading
-        d1.add_path(self.tmppath()).name = 'does_not_exist'
+        p = self.tmppath()
+        d1.add_path(p)
+        io.rmdir(p)
         tmpxml = op.join(self.tmpdir(), 'directories_testunit.xml')
         d1.save_to_file(tmpxml)
         d2 = Directories()
         d2.load_from_file(tmpxml)
         self.assertEqual(1, len(d2))
-    
-    def test_load_from_file_with_same_paths(self):
-        #This test simulates a load from file resulting in a
-        #AlreadyExists raise. Other directories must be loaded.
-        d1 = Directories()
-        p1 = self.tmppath()
-        p2 = self.tmppath()
-        d1.add_path(p1)
-        d1.add_path(p2)
-        #Will raise AlreadyExists upon loading
-        d1.add_path(self.tmppath()).name = unicode(p1)
-        tmpxml = op.join(self.tmpdir(), 'directories_testunit.xml')
-        d1.save_to_file(tmpxml)
-        d2 = Directories()
-        d2.load_from_file(tmpxml)
-        self.assertEqual(2, len(d2))
     
     def test_unicode_save(self):
         d = Directories()
@@ -222,7 +219,7 @@ class TCDirectories(TestCase):
         io.mkdir(p1)
         io.mkdir(p1 + u'foo\xe9')
         d.add_path(p1)
-        d.set_state(d[0][0].path, STATE_EXCLUDED)
+        d.set_state(p1 + u'foo\xe9', STATE_EXCLUDED)
         tmpxml = op.join(self.tmpdir(), 'directories_testunit.xml')
         try:
             d.save_to_file(tmpxml)
@@ -231,7 +228,7 @@ class TCDirectories(TestCase):
     
     def test_get_files_refreshes_its_directories(self):
         d = Directories()
-        p = Path(phys_test.create_fake_fs(self.tmpdir()))
+        p = create_fake_fs(self.tmppath())
         d.add_path(p)
         files = d.get_files()
         self.assertEqual(6, len(list(files)))
@@ -257,16 +254,6 @@ class TCDirectories(TestCase):
         # But it can be overriden
         d.set_state(hidden_dir_path, STATE_NORMAL)
         self.assertEqual(d.get_state(hidden_dir_path), STATE_NORMAL)
-    
-    def test_special_dirclasses(self):
-        # if a path is in special_dirclasses, use this class instead
-        class MySpecialDirclass(hsfs.phys.Directory): pass
-        d = Directories()
-        p1 = self.tmppath()
-        p2 = self.tmppath()
-        d.special_dirclasses[p1] = MySpecialDirclass
-        self.assert_(isinstance(d.add_path(p2), hsfs.phys.Directory))
-        self.assert_(isinstance(d.add_path(p1), MySpecialDirclass))
     
     def test_default_path_state_override(self):
         # It's possible for a subclass to override the default state of a path

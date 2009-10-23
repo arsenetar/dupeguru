@@ -9,10 +9,11 @@
 
 import xml.dom.minidom
 
-from hsfs import phys
-import hsfs as fs
+from hsutil import io
 from hsutil.files import FileOrPath
 from hsutil.path import Path
+
+from . import fs
 
 (STATE_NORMAL,
 STATE_REFERENCE,
@@ -26,15 +27,14 @@ class InvalidPathError(Exception):
 
 class Directories(object):
     #---Override
-    def __init__(self):
+    def __init__(self, fileclasses=[fs.File]):
         self._dirs = []
         self.states = {}
-        self.dirclass = phys.Directory
-        self.special_dirclasses = {}
+        self.fileclasses = fileclasses
     
-    def __contains__(self,path):
-        for d in self._dirs:
-            if path in d.path:
+    def __contains__(self, path):
+        for p in self._dirs:
+            if path in p:
                 return True
         return False
     
@@ -53,8 +53,7 @@ class Directories(object):
         if path[-1].startswith('.'): # hidden
             return STATE_EXCLUDED
     
-    def _get_files(self, from_dir):
-        from_path = from_dir.path
+    def _get_files(self, from_path):
         state = self.get_state(from_path)
         if state == STATE_EXCLUDED:
             # Recursively get files from folders with lots of subfolder is expensive. However, there
@@ -62,14 +61,17 @@ class Directories(object):
             # through self.states and see if we must continue, or we can stop right here to save time
             if not any(p[:len(from_path)] == from_path for p in self.states):
                 return
-        result = []
-        for subdir in from_dir.dirs:
-            for file in self._get_files(subdir):
-                yield file
-        if state != STATE_EXCLUDED:
-            for file in from_dir.files:
-                file.is_ref = state == STATE_REFERENCE
-                yield file
+        try:
+            subdir_paths = [from_path + name for name in io.listdir(from_path) if io.isdir(from_path + name)]
+            for subdir_path in subdir_paths:
+                for file in self._get_files(subdir_path):
+                    yield file
+            if state != STATE_EXCLUDED:
+                for file in fs.get_files(from_path, fileclasses=self.fileclasses):
+                    file.is_ref = state == STATE_REFERENCE
+                    yield file
+        except (EnvironmentError, fs.InvalidPath):
+            pass
     
     #---Public
     def add_path(self, path):
@@ -80,29 +82,30 @@ class Directories(object):
         under it will be removed. Can also raise InvalidPathError if 'path' does not exist.
         """
         if path in self:
-            raise AlreadyThereError
-        self._dirs = [d for d in self._dirs if d.path not in path]
-        try:
-            dirclass = self.special_dirclasses.get(path, self.dirclass)
-            d = dirclass(None, unicode(path))
-            d[:] #If an InvalidPath exception has to be raised, it will be raised here
-            self._dirs.append(d)
-            return d
-        except fs.InvalidPath:
+            raise AlreadyThereError()
+        if not io.exists(path):
             raise InvalidPathError()
+        self._dirs = [p for p in self._dirs if p not in path]
+        self._dirs.append(path)
+    
+    @staticmethod
+    def get_subfolders(path):
+        """returns a sorted list of paths corresponding to subfolders in `path`"""
+        try:
+            names = [name for name in io.listdir(path) if io.isdir(path + name)]
+            names.sort(key=lambda x:x.lower())
+            return [path + name for name in names]
+        except EnvironmentError:
+            return []
     
     def get_files(self):
         """Returns a list of all files that are not excluded.
         
         Returned files also have their 'is_ref' attr set.
         """
-        for d in self._dirs:
-            d.force_update()
-            try:
-                for file in self._get_files(d):
-                    yield file
-            except fs.InvalidPath:
-                pass
+        for path in self._dirs:
+            for file in self._get_files(path):
+                yield file
     
     def get_state(self, path):
         """Returns the state of 'path' (One of the STATE_* const.)
@@ -123,8 +126,8 @@ class Directories(object):
             doc = xml.dom.minidom.parse(infile)
         except:
             return
-        root_dir_nodes = doc.getElementsByTagName('root_directory')
-        for rdn in root_dir_nodes:
+        root_path_nodes = doc.getElementsByTagName('root_directory')
+        for rdn in root_path_nodes:
             if not rdn.getAttributeNode('path'):
                 continue
             path = rdn.getAttributeNode('path').nodeValue
@@ -144,9 +147,9 @@ class Directories(object):
         with FileOrPath(outfile, 'wb') as fp:
             doc = xml.dom.minidom.Document()
             root = doc.appendChild(doc.createElement('directories'))
-            for root_dir in self:
-                root_dir_node = root.appendChild(doc.createElement('root_directory'))
-                root_dir_node.setAttribute('path', unicode(root_dir.path).encode('utf-8'))
+            for root_path in self:
+                root_path_node = root.appendChild(doc.createElement('root_directory'))
+                root_path_node.setAttribute('path', unicode(root_path).encode('utf-8'))
             for path, state in self.states.iteritems():
                 state_node = root.appendChild(doc.createElement('state'))
                 state_node.setAttribute('path', unicode(path).encode('utf-8'))

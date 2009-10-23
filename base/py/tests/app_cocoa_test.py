@@ -18,10 +18,10 @@ from hsutil.path import Path
 from hsutil.testcase import TestCase
 from hsutil.decorators import log_calls
 from hsutil import io
-import hsfs.phys
 
+from . import data
 from .results_test import GetTestGroups
-from .. import engine, data
+from .. import engine, fs
 try:
     from ..app_cocoa import DupeGuru as DupeGuruBase
 except ImportError:
@@ -35,7 +35,6 @@ class DupeGuru(DupeGuruBase):
     def _start_job(self, jobid, func):
         func(nulljob)
     
-
 def r2np(rows):
     #Transforms a list of rows [1,2,3] into a list of node paths [[1],[2],[3]]
     return [[i] for i in rows]
@@ -310,15 +309,15 @@ class TCDupeGuru(TestCase):
 
 class TCDupeGuru_renameSelected(TestCase):
     def setUp(self):
-        p = Path(tempfile.mkdtemp())
-        fp = open(str(p + 'foo bar 1'),mode='w')
+        p = self.tmppath()
+        fp = open(unicode(p + 'foo bar 1'),mode='w')
         fp.close()
-        fp = open(str(p + 'foo bar 2'),mode='w')
+        fp = open(unicode(p + 'foo bar 2'),mode='w')
         fp.close()
-        fp = open(str(p + 'foo bar 3'),mode='w')
+        fp = open(unicode(p + 'foo bar 3'),mode='w')
         fp.close()
-        refdir = hsfs.phys.Directory(None,str(p))
-        matches = engine.getmatches(refdir.files)
+        files = fs.get_files(p)
+        matches = engine.getmatches(files)
         groups = engine.get_groups(matches)
         g = groups[0]
         g.prioritize(lambda x:x.name)
@@ -327,45 +326,41 @@ class TCDupeGuru_renameSelected(TestCase):
         self.app = app
         self.groups = groups
         self.p = p
-        self.refdir = refdir
-    
-    def tearDown(self):
-        shutil.rmtree(str(self.p))
+        self.files = files
     
     def test_simple(self):
         app = self.app
-        refdir = self.refdir
         g = self.groups[0]
         app.SelectPowerMarkerNodePaths(r2np([0]))
-        self.assert_(app.RenameSelected('renamed'))
-        self.assert_('renamed' in refdir)
-        self.assert_('foo bar 2' not in refdir)
-        self.assert_(g.dupes[0] is refdir['renamed'])
-        self.assert_(g.dupes[0] in refdir)
+        assert app.RenameSelected('renamed')
+        names = io.listdir(self.p)
+        assert 'renamed' in names
+        assert 'foo bar 2' not in names
+        eq_(g.dupes[0].name, 'renamed')
     
     def test_none_selected(self):
         app = self.app
-        refdir = self.refdir
         g = self.groups[0]
         app.SelectPowerMarkerNodePaths([])
         self.mock(logging, 'warning', log_calls(lambda msg: None))
-        self.assert_(not app.RenameSelected('renamed'))
+        assert not app.RenameSelected('renamed')
         msg = logging.warning.calls[0]['msg']
-        self.assertEqual('dupeGuru Warning: list index out of range', msg)
-        self.assert_('renamed' not in refdir)
-        self.assert_('foo bar 2' in refdir)
-        self.assert_(g.dupes[0] is refdir['foo bar 2'])
+        eq_('dupeGuru Warning: list index out of range', msg)
+        names = io.listdir(self.p)
+        assert 'renamed' not in names
+        assert 'foo bar 2' in names
+        eq_(g.dupes[0].name, 'foo bar 2')
     
     def test_name_already_exists(self):
         app = self.app
-        refdir = self.refdir
         g = self.groups[0]
         app.SelectPowerMarkerNodePaths(r2np([0]))
         self.mock(logging, 'warning', log_calls(lambda msg: None))
-        self.assert_(not app.RenameSelected('foo bar 1'))
+        assert not app.RenameSelected('foo bar 1')
         msg = logging.warning.calls[0]['msg']
-        self.assert_(msg.startswith('dupeGuru Warning: \'foo bar 2\' already exists in'))
-        self.assert_('foo bar 1' in refdir)
-        self.assert_('foo bar 2' in refdir)
-        self.assert_(g.dupes[0] is refdir['foo bar 2'])
+        assert msg.startswith('dupeGuru Warning: \'foo bar 1\' already exists in')
+        names = io.listdir(self.p)
+        assert 'foo bar 1' in names
+        assert 'foo bar 2' in names
+        eq_(g.dupes[0].name, 'foo bar 2')
     

@@ -16,8 +16,8 @@ from hsutil.path import Path
 from hsutil.testcase import TestCase
 from hsutil.misc import first
 
-from . import engine_test
-from .. import data, engine
+from . import engine_test, data
+from .. import engine
 from ..results import *
 
 class NamedObject(engine_test.NamedObject):

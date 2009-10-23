@@ -12,13 +12,12 @@ from AppKit import *
 import logging
 import os.path as op
 
-import hsfs as fs
 from hsutil import io, cocoa, job
 from hsutil.cocoa import install_exception_hook
 from hsutil.misc import stripnone
 from hsutil.reg import RegistrationRequired
 
-import app, data
+from . import app, fs
 
 JOBID2TITLE = {
     app.JOB_SCAN: "Scanning for duplicates",
@@ -43,8 +42,6 @@ class DupeGuru(app.DupeGuru):
         logging.basicConfig(level=LOGGING_LEVEL, format='%(levelname)s %(message)s')
         logging.debug('started in debug mode')
         install_exception_hook()
-        if data_module is None:
-            data_module = data
         appsupport = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
         appdata = op.join(appsupport, appdata_subdir)
         app.DupeGuru.__init__(self, data_module, appdata, appid)
@@ -91,15 +88,15 @@ class DupeGuru(app.DupeGuru):
         except IndexError:
             return (None,None)
     
-    def GetDirectory(self,node_path,curr_dir=None):
+    def get_folder_path(self, node_path, curr_path=None):
         if not node_path:
-            return curr_dir
-        if curr_dir is not None:
-            l = curr_dir.dirs
+            return curr_path
+        current_index = node_path[0]
+        if curr_path is None:
+            curr_path = self.directories[current_index]
         else:
-            l = self.directories
-        d = l[node_path[0]]
-        return self.GetDirectory(node_path[1:],d)
+            curr_path = self.directories.get_subfolders(curr_path)[current_index]
+        return self.get_folder_path(node_path[1:], curr_path)
     
     def RefreshDetailsTable(self,dupe,group):
         l1 = self._get_display_info(dupe, group, False)
@@ -146,13 +143,13 @@ class DupeGuru(app.DupeGuru):
     def RemoveSelected(self):
         self.results.remove_duplicates(self.selected_dupes)
     
-    def RenameSelected(self,newname):
+    def RenameSelected(self, newname):
         try:
             d = self.selected_dupes[0]
-            d = d.move(d.parent,newname)
+            d.rename(newname)
             return True
-        except (IndexError,fs.FSError),e:
-            logging.warning("dupeGuru Warning: %s" % str(e))
+        except (IndexError, fs.FSError) as e:
+            logging.warning("dupeGuru Warning: %s" % unicode(e))
         return False
     
     def RevealSelected(self):
@@ -214,9 +211,9 @@ class DupeGuru(app.DupeGuru):
             self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))
         ]
     
-    def SetDirectoryState(self,node_path,state):
-        d = self.GetDirectory(node_path)
-        self.directories.set_state(d.path,state)
+    def SetDirectoryState(self, node_path, state):
+        p = self.get_folder_path(node_path)
+        self.directories.set_state(p, state)
     
     def sort_dupes(self,key,asc):
         self.results.sort_dupes(key,asc,self.display_delta_values)
@@ -245,8 +242,9 @@ class DupeGuru(app.DupeGuru):
             return [len(g.dupes) for g in self.results.groups]
         elif tag == 1: #Directories
             try:
-                dirs = self.GetDirectory(node_path).dirs if node_path else self.directories
-                return [d.dircount for d in dirs]
+                path = self.get_folder_path(node_path)
+                subfolders = self.directories.get_subfolders(path)
+                return [len(self.directories.get_subfolders(path)) for path in subfolders]
             except IndexError: # node_path out of range
                 return []
         else: #Power Marker
@@ -270,8 +268,8 @@ class DupeGuru(app.DupeGuru):
             return result
         elif tag == 1: #Directories
             try:
-                d = self.GetDirectory(node_path)
-                return [d.name, self.directories.get_state(d.path)]
+                path = self.get_folder_path(node_path)
+                return [path[-1], self.directories.get_state(path)]
             except IndexError: # node_path out of range
                 return []
     

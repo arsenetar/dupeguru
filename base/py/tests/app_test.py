@@ -13,12 +13,11 @@ from hsutil.testcase import TestCase
 from hsutil import io
 from hsutil.path import Path
 from hsutil.decorators import log_calls
-import hsfs as fs
-import hsfs.phys
 import hsutil.files
 from hsutil.job import nulljob
 
-from .. import data, app
+from . import data
+from .. import app, fs
 from ..app import DupeGuru as DupeGuruBase
 
 class DupeGuru(DupeGuruBase):
@@ -59,27 +58,27 @@ class TCDupeGuru(TestCase):
         # The goal here is just to have a test for a previous blowup I had. I know my test coverage
         # for this unit is pathetic. What's done is done. My approach now is to add tests for
         # every change I want to make. The blowup was caused by a missing import.
-        dupe_parent = fs.Directory(None, 'foo')
-        dupe = fs.File(dupe_parent, 'bar')
-        dupe.copy = log_calls(lambda dest, newname: None)
+        p = self.tmppath()
+        io.open(p + 'foo', 'w').close()
         self.mock(hsutil.files, 'copy', log_calls(lambda source_path, dest_path: None))
         self.mock(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
-        self.mock(fs.phys, 'Directory', fs.Directory) # We don't want an error because makedirs didn't work
         app = DupeGuru()
-        app.copy_or_move(dupe, True, 'some_destination', 0)
+        app.directories.add_path(p)
+        [f] = app.directories.get_files()
+        app.copy_or_move(f, True, 'some_destination', 0)
         self.assertEqual(1, len(hsutil.files.copy.calls))
         call = hsutil.files.copy.calls[0]
         self.assertEqual('some_destination', call['dest_path'])
-        self.assertEqual(dupe.path, call['source_path'])
+        self.assertEqual(f.path, call['source_path'])
     
     def test_copy_or_move_clean_empty_dirs(self):
         tmppath = Path(self.tmpdir())
         sourcepath = tmppath + 'source'
         io.mkdir(sourcepath)
         io.open(sourcepath + 'myfile', 'w')
-        tmpdir = hsfs.phys.Directory(None, unicode(tmppath))
-        myfile = tmpdir['source']['myfile']
         app = DupeGuru()
+        app.directories.add_path(tmppath)
+        [myfile] = app.directories.get_files()
         self.mock(app, 'clean_empty_dirs', log_calls(lambda path: None))
         app.copy_or_move(myfile, False, tmppath + 'dest', 0)
         calls = app.clean_empty_dirs.calls
@@ -87,9 +86,14 @@ class TCDupeGuru(TestCase):
         self.assertEqual(sourcepath, calls[0]['path'])
     
     def test_Scan_with_objects_evaluating_to_false(self):
+        class FakeFile(fs.File):
+            def __nonzero__(self):
+                return False
+            
+        
         # At some point, any() was used in a wrong way that made Scan() wrongly return 1
         app = DupeGuru()
-        f1, f2 = [fs.File(None, 'foo') for i in range(2)]
+        f1, f2 = [FakeFile('foo') for i in range(2)]
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
         app.directories.get_files = lambda: [f1, f2]

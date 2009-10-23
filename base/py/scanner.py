@@ -33,7 +33,7 @@ class Scanner(object):
         self.discarded_file_count = 0
     
     def _getmatches(self, files, j):
-        if not self.size_threshold:
+        if self.size_threshold:
             j = j.start_subjob([2, 8])
             for f in j.iter_with_progress(files, 'Read size of %d/%d files'):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
