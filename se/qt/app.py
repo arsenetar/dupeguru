@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from dupeguru import data
+from dupeguru_se import data
 from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
 from base.app import DupeGuru as DupeGuruBase
