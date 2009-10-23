@@ -110,11 +110,6 @@ class File(object):
             except Exception:
                 pass
     
-    def _invalidate_info(self):
-        for attrname in self.INITIAL_INFO:
-            if attrname in self.__dict__:
-                delattr(self, attrname)
-    
     def _read_all_info(self, attrnames=None):
         """Cache all possible info.
         

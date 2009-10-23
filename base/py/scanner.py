@@ -106,9 +106,3 @@ class Scanner(object):
     scanned_tags         = set(['artist', 'title'])
     size_threshold       = 0
     word_weighting       = False
-
-class ScannerME(Scanner): # Scanner for Music Edition
-    @staticmethod
-    def _key_func(dupe):
-        return (not dupe.is_ref, -dupe.bitrate, -dupe.size)
-    

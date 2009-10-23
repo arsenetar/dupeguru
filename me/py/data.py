@@ -8,7 +8,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 from hsutil.str import format_time, FT_MINUTES, format_size
-from .data import (format_path, format_timestamp, format_words, format_perc, 
+from dupeguru.data import (format_path, format_timestamp, format_words, format_perc, 
     format_dupe_count, cmp_value)
 
 COLUMNS = [

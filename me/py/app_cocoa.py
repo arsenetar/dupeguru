@@ -7,29 +7,29 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import os.path as op
 import logging
 from appscript import app, k, CommandError
 import time
 
 from hsutil.cocoa import as_fetch
-import hsfs.phys.music
 
-import app_cocoa, data_me, scanner
+from dupeguru.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
+
+from . import data, scanner, fs
 
 JOB_REMOVE_DEAD_TRACKS = 'jobRemoveDeadTracks'
 JOB_SCAN_DEAD_TRACKS = 'jobScanDeadTracks'
 
-app_cocoa.JOBID2TITLE.update({
+JOBID2TITLE.update({
     JOB_REMOVE_DEAD_TRACKS: "Removing dead tracks from your iTunes Library",
     JOB_SCAN_DEAD_TRACKS: "Scanning the iTunes Library",
 })
 
-class DupeGuruME(app_cocoa.DupeGuru):
+class DupeGuruME(DupeGuruBase):
     def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data_me, 'dupeGuru Music Edition', appid=1)
+        DupeGuruBase.__init__(self, data, 'dupeGuru Music Edition', appid=1)
         self.scanner = scanner.ScannerME()
-        self.directories.dirclass = hsfs.phys.music.Directory
+        self.directories.fileclasses = [fs.Mp3File, fs.Mp4File, fs.WmaFile, fs.OggFile, fs.FlacFile, fs.AiffFile]
         self.dead_tracks = []
     
     def remove_dead_tracks(self):

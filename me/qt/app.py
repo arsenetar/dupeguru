@@ -7,9 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import hsfs.phys.music
-
-from dupeguru import data_me, scanner
+from dupeguru_me import data, scanner, fs
 
 from base.app import DupeGuru as DupeGuruBase
 from details_dialog import DetailsDialog
@@ -23,11 +21,11 @@ class DupeGuru(DupeGuruBase):
     DELTA_COLUMNS = frozenset([2, 3, 4, 5, 7, 8])
     
     def __init__(self):
-        DupeGuruBase.__init__(self, data_me, appid=1)
+        DupeGuruBase.__init__(self, data, appid=1)
     
     def _setup(self):
         self.scanner = scanner.ScannerME()
-        self.directories.dirclass = hsfs.phys.music.Directory
+        self.directories.fileclasses = [fs.Mp3File, fs.Mp4File, fs.WmaFile, fs.OggFile, fs.FlacFile, fs.AiffFile]
         DupeGuruBase._setup(self)
     
     def _update_options(self):

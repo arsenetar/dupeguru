@@ -436,15 +436,3 @@ def test_partial_group_match():
     assert o2 in group
     assert o3 not in group
     eq_(s.discarded_file_count, 1)
-
-
-#--- Scanner ME
-def test_priorize_me():
-    # in ScannerME, bitrate goes first (right after is_ref) in priorization
-    s = ScannerME()
-    o1, o2 = no('foo'), no('foo')
-    o1.bitrate = 1
-    o2.bitrate = 2
-    [group] = s.GetDupeGroups([o1, o2])
-    assert group.ref is o2
-
