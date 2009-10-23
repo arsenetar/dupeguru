@@ -12,9 +12,9 @@ import os.path as op
 from PyQt4.QtGui import QImage
 import PIL.Image
 
-from hsfs import phys
 from hsutil.str import get_file_ext
 
+from dupeguru import fs
 from dupeguru_pe import data as data_pe
 from dupeguru_pe.cache import Cache
 from dupeguru_pe.scanner import ScannerPE
@@ -26,14 +26,19 @@ from main_window import MainWindow
 from preferences import Preferences
 from preferences_dialog import PreferencesDialog
 
-class File(phys.File):
-    INITIAL_INFO = phys.File.INITIAL_INFO.copy()
+class File(fs.File):
+    INITIAL_INFO = fs.File.INITIAL_INFO.copy()
     INITIAL_INFO.update({
         'dimensions': (0,0),
     })
+    HANDLED_EXTS = set(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff'])
+    
+    @classmethod
+    def can_handle(cls, path):
+        return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
     
     def _read_info(self, field):
-        super(File, self)._read_info(field)
+        fs.File._read_info(self, field)
         if field == 'dimensions':
             im = PIL.Image.open(unicode(self.path))
             self.dimensions = im.size
@@ -42,15 +47,6 @@ class File(phys.File):
         image = QImage(unicode(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
         return getblocks(image, block_count_per_side)
-    
-
-class Directory(phys.Directory):
-    cls_file_class = File
-    cls_supported_exts = ('png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff')
-    
-    def _fetch_subitems(self):
-        subdirs, subfiles = super(Directory, self)._fetch_subitems() 
-        return subdirs, [name for name in subfiles if get_file_ext(name) in self.cls_supported_exts]
     
 
 class DupeGuru(DupeGuruBase):
@@ -64,7 +60,7 @@ class DupeGuru(DupeGuruBase):
     
     def _setup(self):
         self.scanner = ScannerPE()
-        self.directories.dirclass = Directory
+        self.directories.fileclasses = [File]
         self.scanner.cached_blocks = Cache(op.join(self.appdata, 'cached_pictures.db'))
         DupeGuruBase._setup(self)
     
