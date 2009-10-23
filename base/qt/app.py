@@ -145,6 +145,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def ask_for_reg_code(self):
         if self.reg.ask_for_code():
+            #XXX bug???
             self._setup_ui_as_registered()
     
     @demo_method

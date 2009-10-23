@@ -17,8 +17,9 @@ from hsutil.path import Path
 from hsutil.misc import extract
 from hsutil.str import get_file_ext
 
-from . import app_cocoa, data
-from .directories import Directories as DirectoriesBase, STATE_EXCLUDED
+from dupeguru.app_cocoa import DupeGuru as DupeGuruBase
+from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
+from . import data
 
 if NSWorkspace.sharedWorkspace().respondsToSelector_('typeOfFile:error:'): # Only from 10.5
     def is_bundle(str_path):
@@ -63,7 +64,7 @@ class Directories(DirectoriesBase):
             return STATE_EXCLUDED
     
 
-class DupeGuru(app_cocoa.DupeGuru):
+class DupeGuru(DupeGuruBase):
     def __init__(self):
         app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru', appid=4)
         self.directories = Directories()
