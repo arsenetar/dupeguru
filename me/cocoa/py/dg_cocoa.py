@@ -8,12 +8,13 @@
 import objc
 from AppKit import *
 
-from dupeguru import app_me_cocoa, scanner
+from dupeguru_me.app_cocoa import DupeGuruME
+from dupeguru.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
+    SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
 
 # Fix py2app imports which chokes on relative imports
-from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
-from hsfs import auto, stats, tree, music
-from hsfs.phys import music
+from dupeguru_me import app_cocoa, data, fs, scanner
+from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner, fs
 from hsmedia import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
 from hsutil import conflict
 
@@ -23,7 +24,7 @@ class PyApp(NSObject):
 class PyDupeGuru(PyApp):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.app = app_me_cocoa.DupeGuruME()
+        self.app = DupeGuruME()
         return self
     
     #---Directories
@@ -180,12 +181,12 @@ class PyDupeGuru(PyApp):
     def setScanType_(self, scan_type):
         try:
             self.app.scanner.scan_type = [
-                scanner.SCAN_TYPE_FILENAME,
-                scanner.SCAN_TYPE_FIELDS,
-                scanner.SCAN_TYPE_FIELDS_NO_ORDER,
-                scanner.SCAN_TYPE_TAG,
-                scanner.SCAN_TYPE_CONTENT,
-                scanner.SCAN_TYPE_CONTENT_AUDIO
+                SCAN_TYPE_FILENAME,
+                SCAN_TYPE_FIELDS,
+                SCAN_TYPE_FIELDS_NO_ORDER,
+                SCAN_TYPE_TAG,
+                SCAN_TYPE_CONTENT,
+                SCAN_TYPE_CONTENT_AUDIO
             ][scan_type]
         except IndexError:
             pass
