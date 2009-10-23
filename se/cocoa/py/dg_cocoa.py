@@ -8,12 +8,12 @@
 import objc
 from AppKit import *
 
-from dupeguru import app_se_cocoa, scanner
+from dupeguru_se.app_cocoa import DupeGuru
+from dupeguru import scanner
 
 # Fix py2app imports with chokes on relative imports
-from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner
-from hsfs import auto, stats, tree
-from hsfs.phys import bundle
+from dupeguru_se import fs, data
+from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, fs
 from hsutil import conflict
 
 class PyApp(NSObject):
@@ -22,7 +22,7 @@ class PyApp(NSObject):
 class PyDupeGuru(PyApp):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.app = app_se_cocoa.DupeGuru()
+        self.app = DupeGuru()
         return self
     
     #---Directories

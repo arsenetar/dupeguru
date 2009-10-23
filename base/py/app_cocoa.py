@@ -242,8 +242,11 @@ class DupeGuru(app.DupeGuru):
             return [len(g.dupes) for g in self.results.groups]
         elif tag == 1: #Directories
             try:
-                path = self.get_folder_path(node_path)
-                subfolders = self.directories.get_subfolders(path)
+                if node_path:
+                    path = self.get_folder_path(node_path)
+                    subfolders = self.directories.get_subfolders(path)
+                else:
+                    subfolders = self.directories
                 return [len(self.directories.get_subfolders(path)) for path in subfolders]
             except IndexError: # node_path out of range
                 return []
@@ -269,7 +272,8 @@ class DupeGuru(app.DupeGuru):
         elif tag == 1: #Directories
             try:
                 path = self.get_folder_path(node_path)
-                return [path[-1], self.directories.get_state(path)]
+                name = unicode(path) if len(node_path) == 1 else path[-1]
+                return [name, self.directories.get_state(path)]
             except IndexError: # node_path out of range
                 return []
     

@@ -174,6 +174,10 @@ def get_files(path, fileclasses=[File]):
         raise InvalidPath(path)
 
 def get_all_files(path, fileclasses=[File]):
-    subfolders = [path + name for name in io.listdir(path) if not io.islink(path + name) and io.isdir(path + name)]
+    files = get_files(path, fileclasses=fileclasses)
+    filepaths = set(f.path for f in files)
+    subpaths = [path + name for name in io.listdir(path)]
+    # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
+    subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p) and p not in filepaths]
     subfiles = flatten(get_all_files(subpath, fileclasses=fileclasses) for subpath in subfolders)
-    return subfiles + get_files(path, fileclasses=fileclasses)
+    return subfiles + files

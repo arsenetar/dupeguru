@@ -62,13 +62,17 @@ class Directories(object):
             if not any(p[:len(from_path)] == from_path for p in self.states):
                 return
         try:
-            subdir_paths = [from_path + name for name in io.listdir(from_path) if io.isdir(from_path + name)]
-            for subdir_path in subdir_paths:
-                for file in self._get_files(subdir_path):
-                    yield file
+            filepaths = set()
             if state != STATE_EXCLUDED:
                 for file in fs.get_files(from_path, fileclasses=self.fileclasses):
                     file.is_ref = state == STATE_REFERENCE
+                    filepaths.add(file.path)
+                    yield file
+            subpaths = [from_path + name for name in io.listdir(from_path)]
+            # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
+            subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p) and p not in filepaths]
+            for subfolder in subfolders:
+                for file in self._get_files(subfolder):
                     yield file
         except (EnvironmentError, fs.InvalidPath):
             pass
