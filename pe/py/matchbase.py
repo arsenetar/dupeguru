@@ -111,6 +111,8 @@ def getmatches(pictures, cached_blocks, threshold=75, match_scaled=False, j=job.
         if len(async_results) > RESULTS_QUEUE_LIMIT:
             result = async_results.pop(0)
             matches.extend(result.get())
+    for result in async_results: # process the rest of the results
+        matches.extend(result.get())
     
     result = []
     for ref_id, other_id, percentage in j.iter_with_progress(matches, 'Verified %d/%d matches', every=10):
