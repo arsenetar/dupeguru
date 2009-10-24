@@ -14,6 +14,9 @@ import base.dg_rc
 
 from app import DupeGuru
 
+# This is a workaround for a pyinstaller problem where compiled dupeguru can't read tiff files
+from PIL import TiffImagePlugin, TiffTags
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(QPixmap(":/logo_pe")))

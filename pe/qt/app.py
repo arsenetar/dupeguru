@@ -31,7 +31,7 @@ class File(fs.File):
     INITIAL_INFO.update({
         'dimensions': (0,0),
     })
-    HANDLED_EXTS = set(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff'])
+    HANDLED_EXTS = set(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'])
     
     @classmethod
     def can_handle(cls, path):
