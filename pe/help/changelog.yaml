@@ -1,3 +1,7 @@
+- date: 2009-10-24
+  version: 1.7.8
+  description: |
+    * Fixed a bug sometimes causing some duplicates to be ignored during the scans. (#73)
 - date: 2009-10-14
   version: 1.7.7
   description: |
