@@ -14,7 +14,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 @interface ResultWindow : ResultWindowBase
 {
-    IBOutlet NSPopUpButton *actionMenu;
     IBOutlet NSMenu *columnsMenu;
     IBOutlet NSSearchField *filterField;
     IBOutlet NSWindow *preferencesPanel;

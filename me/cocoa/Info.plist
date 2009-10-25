@@ -28,6 +28,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© Hardcoded Software, 2009</string>
 	<key>SUFeedURL</key>
 	<string>http://www.hardcoded.net/updates/dupeguru_me.appcast</string>
 	<key>SUPublicDSAKeyFile</key>
