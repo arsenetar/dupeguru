@@ -14,15 +14,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import "AppDelegate.h"
 #import "Consts.h"
 
-#define tbbDirectories @"tbbDirectories"
-#define tbbDetails @"tbbDetail"
-#define tbbPreferences @"tbbPreferences"
-#define tbbPowerMarker @"tbbPowerMarker"
-#define tbbScan @"tbbScan"
-#define tbbAction @"tbbAction"
-#define tbbDelta @"tbbDelta"
-#define tbbFilter @"tbbFilter"
-
 @implementation MatchesView
 - (void)keyDown:(NSEvent *)theEvent
 {
@@ -66,12 +57,6 @@ http://www.hardcoded.net/licenses/hs_license
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
-}
-
-/* Virtual */
-- (NSString *)logoImageName
-{
-    return @"dg_logo32";
 }
 
 /* Helpers */
@@ -353,107 +338,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)resultsUpdated:(NSNotification *)aNotification
 {
 	[matches invalidateBuffers];
-}
-
-/* Toolbar */
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
-{
-    NSToolbarItem *tbi = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
-    if ([itemIdentifier isEqualTo:tbbDirectories])
-    {
-        [tbi setLabel: @"Directories"];
-        [tbi setToolTip: @"Show/Hide the directories panel."];
-        [tbi setImage: [NSImage imageNamed: @"folder32"]];
-        [tbi setTarget: app];
-        [tbi setAction: @selector(toggleDirectories:)];
-    }
-    else if ([itemIdentifier isEqualTo:tbbDetails])
-    {
-        [tbi setLabel: @"Details"];
-        [tbi setToolTip: @"Show/Hide the details panel."];
-        [tbi setImage: [NSImage imageNamed: @"details32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(toggleDetailsPanel:)];
-    }
-    else if ([itemIdentifier isEqualTo:tbbPreferences])
-    {
-        [tbi setLabel: @"Preferences"];
-        [tbi setToolTip: @"Show the preferences panel."];
-        [tbi setImage: [NSImage imageNamed: @"preferences32"]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(showPreferencesPanel:)];
-    }
-    else if ([itemIdentifier isEqualTo:tbbPowerMarker])
-    {
-        [tbi setLabel: @"Power Marker"];
-        [tbi setToolTip: @"When enabled, only the duplicates are shown, not the references."];
-        [tbi setView:pmSwitchView];
-        [tbi setMinSize:[pmSwitchView frame].size];
-        [tbi setMaxSize:[pmSwitchView frame].size];        
-    }
-    else if ([itemIdentifier isEqualTo:tbbScan])
-    {
-        [tbi setLabel: @"Start Scanning"];
-        [tbi setToolTip: @"Start scanning for duplicates in the selected directories."];
-        [tbi setImage: [NSImage imageNamed:[self logoImageName]]];
-        [tbi setTarget: self];
-        [tbi setAction: @selector(startDuplicateScan:)];
-    }
-    else if ([itemIdentifier isEqualTo:tbbAction])
-    {
-        [tbi setLabel: @"Action"];
-        [tbi setView:actionMenuView];
-        [tbi setMinSize:[actionMenuView frame].size];
-        [tbi setMaxSize:[actionMenuView frame].size];
-    }
-    else if ([itemIdentifier isEqualTo:tbbDelta])
-    {
-        [tbi setLabel: @"Delta Values"];
-        [tbi setToolTip: @"When enabled, this option makes dupeGuru display, where applicable, delta values instead of absolute values."];
-        [tbi setView:deltaSwitchView];
-        [tbi setMinSize:[deltaSwitchView frame].size];
-        [tbi setMaxSize:[deltaSwitchView frame].size];
-    }
-    else if ([itemIdentifier isEqualTo:tbbFilter])
-    {
-        [tbi setLabel: @"Filter"];
-        [tbi setToolTip: @"Filters the results using regular expression."];
-        [tbi setView:filterFieldView];
-        [tbi setMinSize:[filterFieldView frame].size];
-        [tbi setMaxSize:NSMakeSize(1000, [filterFieldView frame].size.height)];
-    }
-    [tbi setPaletteLabel: [tbi label]];
-    return tbi;
-}
-
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-        tbbDirectories,
-        tbbDetails,
-        tbbPreferences,
-        tbbPowerMarker,
-        tbbScan,
-        tbbAction,
-        tbbDelta,
-        tbbFilter,
-        NSToolbarSeparatorItemIdentifier,
-        NSToolbarSpaceItemIdentifier, 
-        NSToolbarFlexibleSpaceItemIdentifier,
-        nil];
-}
-
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-        tbbScan,
-        tbbAction,
-        tbbDirectories,
-        tbbDetails,
-        tbbPowerMarker,
-        tbbDelta,
-        tbbFilter,
-        nil];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem

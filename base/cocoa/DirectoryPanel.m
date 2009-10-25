@@ -14,7 +14,7 @@ http://www.hardcoded.net/licenses/hs_license
 @implementation DirectoryPanelBase
 - (id)initWithParentApp:(id)aParentApp
 {
-    self = [super initWithWindowNibName:@"Directories"];
+    self = [super initWithWindowNibName:@"DirectoryPanel"];
     [self window];
     AppDelegateBase *app = aParentApp;
     _py = [app py];

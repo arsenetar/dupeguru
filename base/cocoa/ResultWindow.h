@@ -20,21 +20,14 @@ http://www.hardcoded.net/licenses/hs_license
 @protected
     IBOutlet PyDupeGuruBase *py;
     IBOutlet id app;
-    IBOutlet NSView *actionMenuView;
     IBOutlet NSSegmentedControl *deltaSwitch;
-    IBOutlet NSView *deltaSwitchView;
-    IBOutlet NSView *filterFieldView;
     IBOutlet MatchesView *matches;
 	IBOutlet NSSegmentedControl *pmSwitch;
-    IBOutlet NSView *pmSwitchView;
 	IBOutlet NSTextField *stats;
     
     BOOL _powerMode;
     BOOL _displayDelta;
 }
-/* Override */
-- (NSString *)logoImageName;
-
 /* Helpers */
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;

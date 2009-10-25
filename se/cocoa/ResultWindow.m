@@ -32,19 +32,6 @@ http://www.hardcoded.net/licenses/hs_license
     [self initResultColumns];
     [self refreshStats];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
-    
-    NSToolbar *t = [[[NSToolbar alloc] initWithIdentifier:@"ResultWindowToolbar"] autorelease];
-    [t setAllowsUserCustomization:YES];
-    [t setAutosavesConfiguration:YES];
-    [t setDisplayMode:NSToolbarDisplayModeIconAndLabel];
-    [t setDelegate:self];
-    [[self window] setToolbar:t];
-}
-
-/* Override */
-- (NSString *)logoImageName
-{
-    return @"dgse_logo_32";
 }
 
 /* Actions */

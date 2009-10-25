@@ -12,7 +12,7 @@ http://www.hardcoded.net/licenses/hs_license
 @implementation DetailsPanelBase
 - (id)initWithPy:(PyApp *)aPy
 {
-    self = [super initWithWindowNibName:@"Details"];
+    self = [super initWithWindowNibName:@"DetailsPanel"];
     [self window]; //So the detailsTable is initialized.
     [detailsTable setPy:aPy];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(duplicateSelectionChanged:) name:DuplicateSelectionChangedNotification object:nil];
