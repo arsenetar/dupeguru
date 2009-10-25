@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_pe_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */; };
@@ -18,10 +16,12 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
-		CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE3AA46509DB207900DB3A21 /* Directories.nib */; };
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
+		CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */; };
+		CE77C8A110946C840078B0DB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A010946C840078B0DB /* MainMenu.xib */; };
+		CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A710946CE20078B0DB /* DetailsPanel.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
 		CE80DB300FC192D60086DCA6 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB200FC192D60086DCA6 /* Outline.m */; };
@@ -42,11 +42,9 @@
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CEBAE4270FDA97E000B7887D /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */; };
 		CEBAE4280FDA97E000B7887D /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAE4260FDA97E000B7887D /* NSCharacterSet_Extensions.m */; };
-		CECA899909DB12CA00A3D774 /* Details.nib in Resources */ = {isa = PBXBuildFile; fileRef = CECA899709DB12CA00A3D774 /* Details.nib */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
-		CEF7823809C8AA0200EF38FF /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7823709C8AA0200EF38FF /* gear.png */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
@@ -69,11 +67,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -87,12 +83,14 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dg_cocoa.plugin; path = py/dist/dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
-		CE3AA46609DB207900DB3A21 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Directories.nib; sourceTree = "<group>"; };
 		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = dgbase/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE6044EB0FE6796200B71262 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = dgbase/dsa_pub.pem; sourceTree = "<group>"; };
+		CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DirectoryPanel.xib; sourceTree = "<group>"; };
+		CE77C8A010946C840078B0DB /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../xib/MainMenu.xib; sourceTree = "<group>"; };
+		CE77C8A710946CE20078B0DB /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsPanel.xib; path = ../../xib/DetailsPanel.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -132,11 +130,9 @@
 		CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
 		CEBAE4250FDA97E000B7887D /* NSCharacterSet_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSCharacterSet_Extensions.h; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.h; sourceTree = SOURCE_ROOT; };
 		CEBAE4260FDA97E000B7887D /* NSCharacterSet_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSCharacterSet_Extensions.m; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.m; sourceTree = SOURCE_ROOT; };
-		CECA899809DB12CA00A3D774 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Details.nib; sourceTree = "<group>"; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
-		CEF7823709C8AA0200EF38FF /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = images/gear.png; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = images/details32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = images/preferences32.png; sourceTree = SOURCE_ROOT; };
@@ -228,16 +224,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE77C89A10946C6D0078B0DB /* xib */,
 				CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
-				CECA899709DB12CA00A3D774 /* Details.nib */,
-				CE3AA46509DB207900DB3A21 /* Directories.nib */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -249,6 +242,17 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE77C89A10946C6D0078B0DB /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				CE77C8A010946C840078B0DB /* MainMenu.xib */,
+				CE77C8A710946CE20078B0DB /* DetailsPanel.xib */,
+				CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */,
+			);
+			name = xib;
+			path = dgbase/xib;
 			sourceTree = "<group>";
 		};
 		CE80DB1A0FC192AB0086DCA6 /* cocoalib */ = {
@@ -318,7 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				CEFCDE2C0AB0418600C33A93 /* dgpe_logo_32.png */,
-				CEF7823709C8AA0200EF38FF /* gear.png */,
 				CEFC295309C89FF200D9F998 /* details32.png */,
 				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
@@ -354,7 +357,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -370,22 +373,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */,
 				CE073F6309CAE1A3005C1D2F /* dupeguru_pe_help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
-				CEF7823809C8AA0200EF38FF /* gear.png in Resources */,
-				CECA899909DB12CA00A3D774 /* Details.nib in Resources */,
-				CE3AA46709DB207900DB3A21 /* Directories.nib in Resources */,
 				CEFCDE2D0AB0418600C33A93 /* dgpe_logo_32.png in Resources */,
 				CE80DB760FC194760086DCA6 /* ErrorReportWindow.xib in Resources */,
 				CE80DB770FC194760086DCA6 /* progress.nib in Resources */,
 				CE80DB780FC194760086DCA6 /* registration.nib in Resources */,
 				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
+				CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */,
+				CE77C8A110946C840078B0DB /* MainMenu.xib in Resources */,
+				CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,30 +426,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
-			);
-			name = MainMenu.nib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE3AA46509DB207900DB3A21 /* Directories.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE3AA46609DB207900DB3A21 /* English */,
-			);
-			name = Directories.nib;
-			sourceTree = "<group>";
-		};
 		CE80DB700FC194760086DCA6 /* ErrorReportWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -473,39 +450,9 @@
 			name = registration.nib;
 			sourceTree = SOURCE_ROOT;
 		};
-		CECA899709DB12CA00A3D774 /* Details.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CECA899809DB12CA00A3D774 /* English */,
-			);
-			name = Details.nib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C01FCF4B08A954540054247B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS)",
-					"$(SRCROOT)/cocoalib/build/Release",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/dgbase/build/Release\"";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = dupeGuru;
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -526,31 +473,15 @@
 			};
 			name = Release;
 		};
-		C01FCF4F08A954540054247B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = Debug;
-		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
-				FRAMEWORK_SEARCH_PATHS = "";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};
@@ -560,7 +491,6 @@
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dupeguru" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C01FCF4B08A954540054247B /* Debug */,
 				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -569,7 +499,6 @@
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

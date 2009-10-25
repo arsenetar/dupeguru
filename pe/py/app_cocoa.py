@@ -188,5 +188,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if not self.selected_dupes:
             return None
         ref = self.results.get_group_of_duplicate(self.selected_dupes[0]).ref
+        if ref is self.selected_dupes[0]: # we don't want the same pic to be displayed on both sides
+            return None
         return ref.path
     
