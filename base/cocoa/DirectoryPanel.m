@@ -11,6 +11,48 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Utils.h"
 #import "AppDelegate.h"
 
+@implementation DirectoryOutline
+- (void)doInit
+{
+    [super doInit];
+    [self registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+    sourceDragMask = [info draggingSourceOperationMask];
+    pboard = [info draggingPasteboard];
+    if ([[pboard types] containsObject:NSFilenamesPboardType])
+    {
+        if (sourceDragMask & NSDragOperationLink)
+            return NSDragOperationLink;
+    }
+    return NSDragOperationNone;    
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id < NSDraggingInfo >)info item:(id)item childIndex:(NSInteger)index
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask; 
+    sourceDragMask = [info draggingSourceOperationMask];
+    pboard = [info draggingPasteboard];
+    if ( [[pboard types] containsObject:NSFilenamesPboardType] )
+    {
+        NSArray *filenames = [pboard propertyListForType:NSFilenamesPboardType];
+        if (!(sourceDragMask & NSDragOperationLink))
+            return NO;
+        if (([self delegate] == nil) || (![[self delegate] respondsToSelector:@selector(outlineView:addDirectory:)]))
+            return NO;
+        for (NSString *filename in filenames)
+            [[self delegate] outlineView:self addDirectory:filename];
+    }
+    return YES;
+}
+
+@end
+
 @implementation DirectoryPanelBase
 - (id)initWithParentApp:(id)aParentApp
 {
@@ -104,10 +146,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)toggleVisible:(id)sender
 {
-    if ([[self window] isVisible])
-        [[self window] close];
-    else
-        [[self window] makeKeyAndOrderFront:nil];
+    [[self window] makeKeyAndOrderFront:nil];
 }
 
 /* Public */
@@ -153,6 +192,11 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Delegate */
+
+- (void)outlineView:(NSOutlineView *)outlineView addDirectory:(NSString *)directory
+{
+    [self addDirectory:directory];
+}
 
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 { 

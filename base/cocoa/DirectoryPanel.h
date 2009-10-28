@@ -11,10 +11,19 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Outline.h"
 #import "PyDupeGuru.h"
 
+@interface DirectoryOutline : OutlineView
+{
+}
+@end
+
+@protocol DirectoryOutlineDelegate
+- (void)outlineView:(NSOutlineView *)outlineView addDirectory:(NSString *)directory;
+@end
+
 @interface DirectoryPanelBase : NSWindowController
 {
     IBOutlet NSPopUpButton *addButtonPopUp;
-    IBOutlet OutlineView *directories;
+    IBOutlet DirectoryOutline *directories;
     IBOutlet NSButton *removeButton;
     
     PyDupeGuruBase *_py;
