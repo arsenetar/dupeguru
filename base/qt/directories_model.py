@@ -7,7 +7,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint
+import urllib
+
+from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
 from PyQt4.QtGui import QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush
 
 from qtlib.tree_model import TreeNode, TreeModel
@@ -47,7 +49,7 @@ class DirectoryNode(TreeNode):
         return DirectoryNode(self.model, self, ref, row)
     
     def _getChildren(self):
-        return self.model._dirs.get_subfolders(self.ref)
+        return self.model.dirs.get_subfolders(self.ref)
     
     @property
     def name(self):
@@ -59,14 +61,15 @@ class DirectoryNode(TreeNode):
 
 class DirectoriesModel(TreeModel):
     def __init__(self, app):
-        self._dirs = app.directories
+        self.app = app
+        self.dirs = app.directories
         TreeModel.__init__(self)
     
     def _createNode(self, ref, row):
         return DirectoryNode(self, None, ref, row)
     
     def _getChildren(self):
-        return self._dirs
+        return self.dirs
     
     def columnCount(self, parent):
         return 2
@@ -79,21 +82,35 @@ class DirectoriesModel(TreeModel):
             if index.column() == 0:
                 return node.name
             else:
-                return STATES[self._dirs.get_state(node.ref)]
+                return STATES[self.dirs.get_state(node.ref)]
         elif role == Qt.EditRole and index.column() == 1:
-            return self._dirs.get_state(node.ref)
+            return self.dirs.get_state(node.ref)
         elif role == Qt.ForegroundRole:
-            state = self._dirs.get_state(node.ref)
+            state = self.dirs.get_state(node.ref)
             if state == 1:
                 return QBrush(Qt.blue)
             elif state == 2:
                 return QBrush(Qt.red)
         return None
     
+    def dropMimeData(self, mimeData, action, row, column, parentIndex):
+        # the data in mimeData is urlencoded **in utf-8**!!! which means that urllib.unquote has
+        # to be called on the utf-8 encoded string, and *only then*, decoded to unicode.
+        if not mimeData.hasFormat('text/uri-list'):
+            return False
+        data = str(mimeData.data('text/uri-list'))
+        unquoted = urllib.unquote(data)
+        urls = unicode(unquoted, 'utf-8').split('\r\n')
+        paths = [unicode(QUrl(url).toLocalFile()) for url in urls if url]
+        for path in paths:
+            self.app.add_directory(path)
+        self.reset()
+        return True
+    
     def flags(self, index):
         if not index.isValid():
-            return 0
-        result = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+            return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
+        result = Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDropEnabled
         if index.column() == 1:
             result |= Qt.ItemIsEditable
         return result
@@ -104,10 +121,18 @@ class DirectoriesModel(TreeModel):
                 return HEADERS[section]
         return None
     
+    def mimeTypes(self):
+        return ['text/uri-list']
+    
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
             return False
         node = index.internalPointer()
-        self._dirs.set_state(node.ref, value)
+        self.dirs.set_state(node.ref, value)
         return True
+    
+    def supportedDropActions(self):
+        # Normally, the correct action should be ActionLink, but the drop doesn't work. It doesn't
+        # work with ActionMove either. So screw that, and accept anything.
+        return Qt.ActionMask
     
