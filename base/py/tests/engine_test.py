@@ -15,15 +15,20 @@ from hsutil import job
 from hsutil.decorators import log_calls
 from hsutil.testcase import TestCase
 
-from .. import engine
+from .. import engine, fs
 from ..engine import *
 
 class NamedObject(object):
-    def __init__(self, name="foobar", with_words=False):
+    def __init__(self, name="foobar", with_words=False, size=1):
         self.name = name
+        self.size = size
+        self.md5partial = name
+        self.md5 = name
         if with_words:
             self.words = getwords(name)
     
+
+no = NamedObject
 
 def get_match_triangle():
     o1 = NamedObject(with_words=True)
@@ -484,6 +489,12 @@ class GetMatches(TestCase):
         except MemoryError:
             self.fail('MemorryError must be handled')
         self.assertEqual(42, len(r))
+    
+
+class GetMatchesByContents(TestCase):
+    def test_dont_compare_empty_files(self):
+        o1, o2 = no(size=0), no(size=0)
+        assert not getmatches_by_contents([o1, o2])
     
 
 class TCGroup(TestCase):

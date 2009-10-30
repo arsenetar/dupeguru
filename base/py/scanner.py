@@ -10,7 +10,7 @@
 import logging
 
 
-from hsutil import job
+from hsutil import job, io
 from hsutil.misc import dedupe
 from hsutil.str import get_file_ext, rem_file_ext
 
@@ -80,9 +80,10 @@ class Scanner(object):
         logging.info('Getting matches')
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
+        j.set_progress(100, 'Removing false matches')
         if not self.mix_file_kind:
-            j.set_progress(100, 'Removing false matches')
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
+        matches = [m for m in matches if io.exists(m.first.path) and io.exists(m.second.path)]
         if self.ignore_list:
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, 'Processed %d/%d matches against the ignore list')

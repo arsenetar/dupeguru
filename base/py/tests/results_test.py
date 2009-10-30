@@ -21,7 +21,6 @@ from .. import engine
 from ..results import *
 
 class NamedObject(engine_test.NamedObject):
-    size = 1
     path = property(lambda x:Path('basepath') + x.name)
     is_ref = False
     

@@ -208,7 +208,9 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
     j = j.start_subjob([2, 8])
     size2files = defaultdict(set)
     for file in j.iter_with_progress(files, 'Read size of %d/%d files'):
-        size2files[getattr(file, sizeattr)].add(file)
+        filesize = getattr(file, sizeattr)
+        if filesize:
+            size2files[filesize].add(file)
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
     result = []
