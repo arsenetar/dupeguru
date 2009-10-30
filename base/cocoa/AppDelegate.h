@@ -9,12 +9,14 @@ http://www.hardcoded.net/licenses/hs_license
 #import <Cocoa/Cocoa.h>
 #import "RecentDirectories.h"
 #import "PyDupeGuru.h"
+#import "ResultWindow.h"
 
 @interface AppDelegateBase : NSObject
 {
     IBOutlet PyDupeGuruBase *py;
     IBOutlet RecentDirectories *recentDirectories;
     IBOutlet NSMenuItem *unlockMenuItem;
+    IBOutlet ResultWindowBase *result;
     
     NSString *_appName;
 }

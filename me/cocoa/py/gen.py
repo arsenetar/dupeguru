@@ -16,4 +16,5 @@ if op.exists('build'):
 if op.exists('dist'):
     shutil.rmtree('dist')
 
+os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.5'
 print_and_do('python -u setup.py py2app')

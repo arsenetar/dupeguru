@@ -19,6 +19,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    [[self window] setTitle:@"dupeGuru Music Edition"];
     _detailsPanel = nil;
     _displayDelta = NO;
     _powerMode = NO;
@@ -29,7 +30,6 @@ http://www.hardcoded.net/licenses/hs_license
     [py setDisplayDeltaValues:b2n(_displayDelta)];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openSelected:)];
-    [self initResultColumns];
     [self refreshStats];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
 }
@@ -168,11 +168,6 @@ http://www.hardcoded.net/licenses/hs_license
     [py revealSelected];
 }
 
-- (IBAction)showPreferencesPanel:(id)sender
-{
-    [preferencesPanel makeKeyAndOrderFront:sender];
-}
-
 - (IBAction)startDuplicateScan:(id)sender
 {
     if ([matches numberOfRows] > 0)
@@ -205,26 +200,6 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
-- (IBAction)toggleColumn:(id)sender
-{
-    NSMenuItem *mi = sender;
-    NSString *colId = [NSString stringWithFormat:@"%d",[mi tag]];
-    NSTableColumn *col = [matches tableColumnWithIdentifier:colId];
-    if (col == nil)
-    {
-        //Add Column
-        col = [_resultColumns objectAtIndex:[mi tag]];
-        [matches addTableColumn:col];
-        [mi setState:NSOnState];
-    }
-    else
-    {
-        //Remove column
-        [matches removeTableColumn:col];
-        [mi setState:NSOffState];
-    }
-}
-
 - (IBAction)toggleDelta:(id)sender
 {
     if ([deltaSwitch selectedSegment] == 1)
@@ -245,28 +220,21 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Public */
-- (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn
-{
-    NSNumber *n = [NSNumber numberWithInt:aIdentifier];
-    NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:[n stringValue]];
-    [col setWidth:aWidth];
-    [col setEditable:NO];
-    [[col dataCell] setFont:[[aColumn dataCell] font]];
-    [[col headerCell] setStringValue:aTitle];
-    [col setResizingMask:NSTableColumnUserResizingMask];
-    [col setSortDescriptorPrototype:[[NSSortDescriptor alloc] initWithKey:[n stringValue] ascending:YES]];
-    return col;
-}
-
 - (void)initResultColumns
 {
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
     [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"2"]]; // Size
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"3"]]; // Time
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"4"]]; // Bitrate
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (MB)" width:63 refCol:refCol];
+    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:sizeCol];
+    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:@"Time" width:50 refCol:refCol];
+    [[timeCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:timeCol];
+    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:@"Bitrate" width:50 refCol:refCol];
+    [[brCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:brCol];
     [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Sample Rate" width:60 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Kind" width:40 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Creation" width:120 refCol:refCol]];
@@ -278,38 +246,9 @@ http://www.hardcoded.net/licenses/hs_license
     [_resultColumns addObject:[self getColumnForIdentifier:13 title:@"Year" width:40 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:14 title:@"Track Number" width:40 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:15 title:@"Comment" width:120 refCol:refCol]];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"16"]]; // Match %
+    [_resultColumns addObject:[self getColumnForIdentifier:16 title:@"Match %" width:57 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:17 title:@"Words Used" width:120 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:18 title:@"Dupe Count" width:80 refCol:refCol]];
-}
-
-- (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
-{
-    NSTableColumn *col;
-    NSString *colId;
-    NSNumber *width;
-    NSMenuItem *mi;
-    //Remove all columns
-    NSEnumerator *e = [[columnsMenu itemArray] objectEnumerator];
-    while (mi = [e nextObject])
-    {
-        if ([mi state] == NSOnState)
-            [self toggleColumn:mi];
-    }
-    //Add columns and set widths
-    e = [aColumnsOrder objectEnumerator];
-    while (colId = [e nextObject])
-    {
-        if (![colId isEqual:@"mark"])
-        {
-            col = [_resultColumns objectAtIndex:[colId intValue]];
-            width = [aColumnsWidth objectForKey:[col identifier]];
-            mi = [columnsMenu itemWithTag:[colId intValue]];
-            if (width)
-                [col setWidth:[width floatValue]];
-            [self toggleColumn:mi];
-        }
-    }
 }
 
 /* Delegate */

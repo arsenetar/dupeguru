@@ -27,7 +27,7 @@ http://www.hardcoded.net/licenses/hs_license
     RegistrationInterface *ri = [[RegistrationInterface alloc] initWithApp:[self py] name:_appName limitDescription:LIMIT_DESC];
     if ([ri enterCode] == NSOKButton)
     {
-        NSString *menuTitle = [NSString stringWithFormat:@"Thanks for buying %@",_appName];
+        NSString *menuTitle = [NSString stringWithFormat:@"Thanks for buying %@!",_appName];
         [unlockMenuItem setTitle:menuTitle];
     }
     [ri release];
@@ -35,4 +35,24 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (PyDupeGuruBase *)py { return py; }
 - (RecentDirectories *)recentDirectories { return recentDirectories; }
+
+/* Delegate */
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    [[ProgressController mainProgressController] setWorker:py];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    //Restore Columns
+    NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
+    NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
+    if ([columnsOrder count])
+        [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
+    else
+        [result resetColumnsToDefault:nil];
+    //Reg stuff
+    if ([RegistrationInterface showNagWithApp:[self py] name:_appName limitDescription:LIMIT_DESC])
+        [unlockMenuItem setTitle:[NSString stringWithFormat:@"Thanks for buying %@!",_appName]];
+    //Restore results
+    [py loadIgnoreList];
+    [py loadResults];
+}
 @end

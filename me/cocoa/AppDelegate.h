@@ -13,17 +13,11 @@ http://www.hardcoded.net/licenses/hs_license
 #import "PyDupeGuru.h"
 
 @interface AppDelegate : AppDelegateBase
-{
-    IBOutlet NSButton *presetsButton;
-    IBOutlet NSPopUpButton *presetsPopup;
-    IBOutlet ResultWindow *result;
-    
+{   
     DirectoryPanel *_directoryPanel;
 }
 - (IBAction)openWebsite:(id)sender;
-- (IBAction)popupPresets:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
-- (IBAction)usePreset:(id)sender;
 
 - (DirectoryPanel *)directoryPanel;
 - (PyDupeGuru *)py;

@@ -60,50 +60,9 @@ http://www.hardcoded.net/licenses/hs_license
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.hardcoded.net/dupeguru_me"]];
 }
 
-- (IBAction)popupPresets:(id)sender
-{
-    [presetsPopup selectItem: nil];
-    [[presetsPopup cell] performClickWithFrame:[sender frame] inView:[sender superview]];
-}
-
 - (IBAction)toggleDirectories:(id)sender
 {
     [[self directoryPanel] toggleVisible:sender];
-}
-
-- (IBAction)usePreset:(id)sender
-{
-    NSUserDefaultsController *ud = [NSUserDefaultsController sharedUserDefaultsController];
-    [ud revertToInitialValues:nil];
-    NSUserDefaults *d = [ud defaults];
-    switch ([sender tag])
-    {
-        case 0:
-        {
-            [d setInteger:5 forKey:@"scanType"];
-            break;
-        }
-        //case 1 is defaults
-        case 2:
-        {
-            [d setInteger:2 forKey:@"scanType"];
-            break;
-        }
-        case 3:
-        {
-            [d setInteger:0 forKey:@"scanType"];
-            [d setInteger:50 forKey:@"minMatchPercentage"];
-            break;
-        }
-        case 4:
-        {
-            [d setInteger:0 forKey:@"scanType"];
-            [d setInteger:50 forKey:@"minMatchPercentage"];
-            [d setBool:YES forKey:@"matchSimilarWords"];
-            [d setBool:YES forKey:@"wordWeighting"];
-            break;
-        }
-    }
 }
 
 - (DirectoryPanel *)directoryPanel
@@ -115,23 +74,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    [[ProgressController mainProgressController] setWorker:py];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    //Restore Columns
-    NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
-    NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
-    if ([columnsOrder count])
-        [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
-    //Reg stuff
-    if ([RegistrationInterface showNagWithApp:[self py] name:APPNAME limitDescription:LIMIT_DESC])
-        [unlockMenuItem setTitle:@"Thanks for buying dupeGuru ME!"];
-    //Restore results
-    [py loadIgnoreList];
-    [py loadResults];
-}
-
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
     if (![[result window] isVisible])

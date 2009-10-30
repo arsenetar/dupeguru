@@ -299,6 +299,11 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
+- (IBAction)resetColumnsToDefault:(id)sender
+{
+    // Virtual
+}
+
 - (IBAction)showPreferencesPanel:(id)sender
 {
     [preferencesPanel showWindow:sender];

@@ -52,6 +52,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)expandAll:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)moveMarked:(id)sender;
+- (IBAction)resetColumnsToDefault:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;
