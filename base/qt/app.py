@@ -23,14 +23,14 @@ from dupeguru import fs
 from dupeguru.app import (DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, 
     JOB_DELETE)
     
+from qtlib.about_box import AboutBox
 from qtlib.progress import Progress
+from qtlib.reg import Registration
 
 from . import platform
 
 from .main_window import MainWindow
 from .directories_dialog import DirectoriesDialog
-from .about_box import AboutBox
-from .reg import Registration
 
 JOBID2TITLE = {
     JOB_SCAN: "Scanning for duplicates",
@@ -54,6 +54,7 @@ class DupeGuru(DupeGuruBase, QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
     DELTA_COLUMNS = frozenset()
+    DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
     
     def __init__(self, data_module, appid):
         appdata = unicode(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
