@@ -216,12 +216,14 @@ http://www.hardcoded.net/licenses/hs_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"1"]]; // Directory
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"2"]]; // Size
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
+    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:sizeCol];
     [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Creation" width:120 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"6"]]; // Match %
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Match %" width:60 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Words Used" width:120 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Dupe Count" width:80 refCol:refCol]];
 }

@@ -65,23 +65,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    [[ProgressController mainProgressController] setWorker:py];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    //Restore Columns
-    NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
-    NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
-    if ([columnsOrder count])
-        [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
-    //Reg stuff
-    if ([RegistrationInterface showNagWithApp:[self py] name:APPNAME limitDescription:LIMIT_DESC])
-        [unlockMenuItem setTitle:@"Thanks for buying dupeGuru!"];
-    //Restore results
-    [py loadIgnoreList];
-    [py loadResults];
-}
-
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
     if (![[result window] isVisible])
