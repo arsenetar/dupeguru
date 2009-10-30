@@ -76,11 +76,9 @@
 							<string key="NSToolbarItemPaletteLabel">Action</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSPopUpButton" key="NSToolbarItemView" id="327904117">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{0, 14}, {58, 26}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="103970942">
 									<int key="NSCellFlags">-2076049856</int>
@@ -91,12 +89,8 @@
 										<int key="NSfFlags">1044</int>
 									</object>
 									<reference key="NSControlView" ref="327904117"/>
-									<int key="NSButtonFlags">109068543</int>
+									<int key="NSButtonFlags">109199615</int>
 									<int key="NSButtonFlags2">1</int>
-									<object class="NSCustomResource" key="NSNormalImage" id="950711681">
-										<string key="NSClassName">NSImage</string>
-										<string key="NSResourceName">NSActionTemplate</string>
-									</object>
 									<string key="NSAlternateContents"/>
 									<object class="NSMutableString" key="NSKeyEquivalent">
 										<characters key="NS.bytes"/>
@@ -111,7 +105,10 @@
 										<int key="NSKeyEquivModMask">1048576</int>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<int key="NSState">1</int>
-										<reference key="NSImage" ref="950711681"/>
+										<object class="NSCustomResource" key="NSImage" id="106124952">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSActionTemplate</string>
+										</object>
 										<object class="NSCustomResource" key="NSOnImage" id="1009533651">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">NSMenuCheckmark</string>
@@ -267,7 +264,7 @@
 									<int key="NSArrowPosition">1</int>
 								</object>
 							</object>
-							<reference key="NSToolbarItemImage" ref="950711681"/>
+							<reference key="NSToolbarItemImage" ref="106124952"/>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
 							<string key="NSToolbarItemMinSize">{58, 26}</string>
@@ -286,11 +283,9 @@
 							<string key="NSToolbarItemPaletteLabel">Power Marker</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="358942561">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{7, 14}, {67, 24}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="508387344">
 									<int key="NSCellFlags">67239424</int>
@@ -402,11 +397,9 @@
 							<string key="NSToolbarItemPaletteLabel">Filter</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSearchField" key="NSToolbarItemView" id="532545249">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">258</int>
 								<string key="NSFrame">{{0, 14}, {81, 22}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSearchFieldCell" key="NSCell" id="524370731">
 									<int key="NSCellFlags">343014976</int>
@@ -490,11 +483,9 @@
 							<string key="NSToolbarItemPaletteLabel">Delta Values</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="162455683">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{4, 14}, {67, 24}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="873967747">
 									<int key="NSCellFlags">67239424</int>
@@ -949,6 +940,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{340, 418}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSFrameAutosaveName">MainWindow</string>
 			</object>
 			<object class="NSMenu" id="626030015">
 				<string key="NSTitle">MainMenu</string>
@@ -4295,9 +4287,6 @@
 				<boolean value="YES" key="1100.IBShouldRemoveOnLegacySave"/>
 				<string key="1101.IBEditorWindowLastContentRect">{{58, 789}, {617, 0}}</string>
 				<string key="1101.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1104.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1106.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1107.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1109.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1109.designableToolbarItemIdentifier">tbbScan</string>
 				<string key="111.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4308,9 +4297,13 @@
 				<string key="1111.designableToolbarItemIdentifier">tbbDetail</string>
 				<string key="1112.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1112.designableToolbarItemIdentifier">tbbPreferences</string>
+				<string key="1113.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1113.designableToolbarItemIdentifier">tbbAction</string>
+				<string key="1114.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1114.designableToolbarItemIdentifier">tbbPowerMarker</string>
+				<string key="1115.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1115.designableToolbarItemIdentifier">tbbDelta</string>
+				<string key="1116.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1116.designableToolbarItemIdentifier">tbbFilter</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="134.ImportedFromIB2"/>
