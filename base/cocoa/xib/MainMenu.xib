@@ -11,7 +11,7 @@
 			<string key="NS.object.0">740</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="619"/>
+			<integer value="598"/>
 			<integer value="220"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -1168,7 +1168,7 @@
 								<object class="NSMenuItem" id="747820446">
 									<reference key="NSMenu" ref="600111647"/>
 									<string key="NSTitle">Remove Selected from Results</string>
-									<string key="NSKeyEquiv">R</string>
+									<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="852972005"/>
@@ -2458,7 +2458,6 @@
 							<reference ref="798897608"/>
 							<reference ref="733607971"/>
 							<reference ref="477370537"/>
-							<reference ref="747820446"/>
 							<reference ref="1033973689"/>
 							<reference ref="305600396"/>
 							<reference ref="616313144"/>
@@ -2468,6 +2467,7 @@
 							<reference ref="189815600"/>
 							<reference ref="564101661"/>
 							<reference ref="630362403"/>
+							<reference ref="747820446"/>
 						</array>
 						<reference key="parent" ref="528113253"/>
 					</object>
@@ -2499,11 +2499,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">604</int>
 						<reference key="object" ref="477370537"/>
-						<reference key="parent" ref="600111647"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">605</int>
-						<reference key="object" ref="747820446"/>
 						<reference key="parent" ref="600111647"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2985,6 +2980,11 @@
 						<reference key="object" ref="484816507"/>
 						<reference key="parent" ref="1013657232"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">605</int>
+						<reference key="object" ref="747820446"/>
+						<reference key="parent" ref="600111647"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3110,7 +3110,7 @@
 				<boolean value="YES" key="58.ImportedFromIB2"/>
 				<string key="597.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="597.ImportedFromIB2"/>
-				<string key="598.IBEditorWindowLastContentRect">{{286, 475}, {359, 293}}</string>
+				<string key="598.IBEditorWindowLastContentRect">{{286, 475}, {361, 293}}</string>
 				<string key="598.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="598.ImportedFromIB2"/>
 				<string key="599.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3246,10 +3246,6 @@
 						<string key="openWebsite:">id</string>
 						<string key="toggleDirectories:">id</string>
 					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">result</string>
-						<string key="NS.object.0">ResultWindow</string>
-					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">AppDelegate.h</string>
@@ -3282,6 +3278,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="py">PyDupeGuruBase</string>
 						<string key="recentDirectories">RecentDirectories</string>
+						<string key="result">ResultWindowBase</string>
 						<string key="unlockMenuItem">NSMenuItem</string>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -3382,6 +3379,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">PyRegistrable</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">cocoalib/PyRegistrable.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">RecentDirectories</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -3419,7 +3424,6 @@
 						<string key="markToggle:">id</string>
 						<string key="openSelected:">id</string>
 						<string key="refresh:">id</string>
-						<string key="removeDeadTracks:">id</string>
 						<string key="removeMarked:">id</string>
 						<string key="removeSelected:">id</string>
 						<string key="renameSelected:">id</string>
@@ -3481,6 +3485,7 @@
 						<string key="expandAll:">id</string>
 						<string key="exportToXHTML:">id</string>
 						<string key="moveMarked:">id</string>
+						<string key="resetColumnsToDefault:">id</string>
 						<string key="showPreferencesPanel:">id</string>
 						<string key="switchSelected:">id</string>
 						<string key="toggleColumn:">id</string>
