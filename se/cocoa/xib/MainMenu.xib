@@ -13,7 +13,7 @@
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<integer value="524"/>
 			<integer value="598"/>
-			<integer value="721"/>
+			<integer value="21"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -60,6 +60,7 @@
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{7, 14}, {67, 24}}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="431579725">
 									<int key="NSCellFlags">67239424</int>
@@ -153,6 +154,7 @@
 								<int key="NSvFlags">258</int>
 								<string key="NSFrame">{{0, 14}, {81, 22}}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSearchFieldCell" key="NSCell" id="484816507">
 									<int key="NSCellFlags">343014976</int>
@@ -288,6 +290,7 @@
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{0, 14}, {58, 26}}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="436420677">
 									<int key="NSCellFlags">-2076049856</int>
@@ -493,6 +496,7 @@
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{4, 14}, {67, 24}}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="211272396">
 									<int key="NSCellFlags">67239424</int>
@@ -947,6 +951,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{340, 418}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSFrameAutosaveName">MainWindow</string>
 			</object>
 			<object class="NSMenu" id="133452984">
 				<string key="NSTitle">MainMenu</string>
@@ -2771,14 +2776,6 @@
 						<reference key="destination" ref="28253718"/>
 					</object>
 					<int key="connectionID">718</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">actionMenu</string>
-						<reference key="source" ref="339936126"/>
-						<reference key="destination" ref="165812138"/>
-					</object>
-					<int key="connectionID">726</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -4669,7 +4666,7 @@
 				<boolean value="YES" key="1145.IBShouldRemoveOnLegacySave"/>
 				<string key="1146.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="1146.IBShouldRemoveOnLegacySave"/>
-				<string key="1147.IBEditorWindowLastContentRect">{{79, 539}, {617, 227}}</string>
+				<string key="1147.IBEditorWindowLastContentRect">{{79, 766}, {617, 0}}</string>
 				<string key="1147.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1156.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1156.designableToolbarItemIdentifier">tbbScan</string>
@@ -5165,7 +5162,6 @@
 						<string key="toggleDetailsPanel:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="actionMenu">NSPopUpButton</string>
 						<string key="columnsMenu">NSMenu</string>
 						<string key="filterField">NSSearchField</string>
 						<string key="preferencesPanel">NSWindow</string>
