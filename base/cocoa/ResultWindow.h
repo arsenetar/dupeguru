@@ -24,18 +24,25 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet MatchesView *matches;
 	IBOutlet NSSegmentedControl *pmSwitch;
 	IBOutlet NSTextField *stats;
+	IBOutlet NSMenu *columnsMenu;
     
     BOOL _powerMode;
     BOOL _displayDelta;
+    NSMutableArray *_resultColumns;
+    NSWindowController *preferencesPanel;
 }
 /* Helpers */
+- (void)fillColumnsMenu;
+- (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
 - (NSArray *)getSelected:(BOOL)aDupesOnly;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
+- (void)initResultColumns;
 - (void)updatePySelection;
 - (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)refreshStats;
+- (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 
 /* Actions */
 - (IBAction)changeDelta:(id)sender;
@@ -45,7 +52,9 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)expandAll:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)moveMarked:(id)sender;
+- (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)switchSelected:(id)sender;
+- (IBAction)toggleColumn:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;
 
 /* Notifications */

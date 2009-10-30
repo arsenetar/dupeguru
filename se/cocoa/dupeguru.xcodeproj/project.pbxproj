@@ -18,6 +18,7 @@
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0DFE1054E9EF008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0DFD1054E9EF008D9390 /* dsa_pub.pem */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
+		CEAC6811109B0B7E00B43C85 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAC6810109B0B7E00B43C85 /* Preferences.xib */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEDD92DA0FDD01640031C7B7 /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */; };
@@ -30,7 +31,6 @@
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
-		CEFC295E09C8A0B000D9F998 /* dgse_logo_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */; };
 		CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8B0FC9517500CD5728 /* Dialogs.m */; };
 		CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */; };
 		CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8F0FC9517500CD5728 /* Outline.m */; };
@@ -82,6 +82,7 @@
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0DFD1054E9EF008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = dgbase/dsa_pub.pem; sourceTree = "<group>"; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+		CEAC6810109B0B7E00B43C85 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Preferences.xib; path = xib/Preferences.xib; sourceTree = "<group>"; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CEDD92D60FDD01640031C7B7 /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
@@ -97,7 +98,6 @@
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = images/details32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = images/preferences32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dgse_logo_32.png; path = images/dgse_logo_32.png; sourceTree = "<group>"; };
 		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -241,6 +241,7 @@
 		CEEFC0CA10943849001F3A39 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				CEAC6810109B0B7E00B43C85 /* Preferences.xib */,
 				CEEFC0EE10944EDD001F3A39 /* MainMenu.xib */,
 				CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */,
 				CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */,
@@ -251,7 +252,6 @@
 		CEFC294309C89E0000D9F998 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CEFC295D09C8A0B000D9F998 /* dgse_logo_32.png */,
 				CEFC295309C89FF200D9F998 /* details32.png */,
 				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
@@ -360,7 +360,6 @@
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
-				CEFC295E09C8A0B000D9F998 /* dgse_logo_32.png in Resources */,
 				CEFC7FAD0FC9518A00CD5728 /* ErrorReportWindow.xib in Resources */,
 				CEFC7FAE0FC9518A00CD5728 /* progress.nib in Resources */,
 				CEFC7FAF0FC9518A00CD5728 /* registration.nib in Resources */,
@@ -368,6 +367,7 @@
 				CEEFC0EF10944EDD001F3A39 /* MainMenu.xib in Resources */,
 				CEEFC0F810945D9F001F3A39 /* DirectoryPanel.xib in Resources */,
 				CEEFC0FB10945E37001F3A39 /* DetailsPanel.xib in Resources */,
+				CEAC6811109B0B7E00B43C85 /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

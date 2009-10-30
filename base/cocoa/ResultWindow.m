@@ -51,6 +51,9 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [self window];
+    preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
+    [self initResultColumns];
+    [self fillColumnsMenu];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
@@ -59,7 +62,42 @@ http://www.hardcoded.net/licenses/hs_license
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
 }
 
+- (void)dealloc
+{
+    [preferencesPanel release];
+    [super dealloc];
+}
+
 /* Helpers */
+- (void)fillColumnsMenu
+{
+    // The columns menu is supposed to be empty and initResultColumns must have been called
+    for (NSTableColumn *col in _resultColumns)
+    {
+        NSMenuItem *mi = [columnsMenu addItemWithTitle:[[col headerCell] stringValue] action:@selector(toggleColumn:) keyEquivalent:@""];
+        [mi setTag:[[col identifier] integerValue]];
+        [mi setTarget:self];
+        if ([[matches tableColumns] containsObject:col])
+            [mi setState:NSOnState];
+    }
+    [columnsMenu addItem:[NSMenuItem separatorItem]];
+    NSMenuItem *mi = [columnsMenu addItemWithTitle:@"Reset to Default" action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
+    [mi setTarget:self];
+}
+
+- (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn
+{
+    NSNumber *n = [NSNumber numberWithInt:aIdentifier];
+    NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:[n stringValue]];
+    [col setWidth:aWidth];
+    [col setEditable:NO];
+    [[col dataCell] setFont:[[aColumn dataCell] font]];
+    [[col headerCell] setStringValue:aTitle];
+    [col setResizingMask:NSTableColumnUserResizingMask];
+    [col setSortDescriptorPrototype:[[NSSortDescriptor alloc] initWithKey:[n stringValue] ascending:YES]];
+    return col;
+}
+
 //Returns an array of identifiers, in order.
 - (NSArray *)getColumnsOrder
 {
@@ -118,6 +156,40 @@ http://www.hardcoded.net/licenses/hs_license
     while (node = [e nextObject])
         [r addObject:p2a([node indexPath])];
     return r;
+}
+
+- (void)initResultColumns
+{
+    // Virtual
+}
+
+- (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
+{
+    NSTableColumn *col;
+    NSString *colId;
+    NSNumber *width;
+    NSMenuItem *mi;
+    //Remove all columns
+    NSEnumerator *e = [[columnsMenu itemArray] objectEnumerator];
+    while (mi = [e nextObject])
+    {
+        if ([mi state] == NSOnState)
+            [self toggleColumn:mi];
+    }
+    //Add columns and set widths
+    e = [aColumnsOrder objectEnumerator];
+    while (colId = [e nextObject])
+    {
+        if (![colId isEqual:@"mark"])
+        {
+            col = [_resultColumns objectAtIndex:[colId intValue]];
+            width = [aColumnsWidth objectForKey:[col identifier]];
+            mi = [columnsMenu itemWithTag:[colId intValue]];
+            if (width)
+                [col setWidth:[width floatValue]];
+            [self toggleColumn:mi];
+        }
+    }
 }
 
 - (void)updatePySelection
@@ -227,6 +299,11 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
+- (IBAction)showPreferencesPanel:(id)sender
+{
+    [preferencesPanel showWindow:sender];
+}
+
 - (IBAction)switchSelected:(id)sender
 {
     // It might look like a complicated way to get the length of the current dupe list on the py side
@@ -242,6 +319,26 @@ http://www.hardcoded.net/licenses/hs_license
         [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
     else
         [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
+}
+
+- (IBAction)toggleColumn:(id)sender
+{
+    NSMenuItem *mi = sender;
+    NSString *colId = [NSString stringWithFormat:@"%d",[mi tag]];
+    NSTableColumn *col = [matches tableColumnWithIdentifier:colId];
+    if (col == nil)
+    {
+        //Add Column
+        col = [_resultColumns objectAtIndex:[mi tag]];
+        [matches addTableColumn:col];
+        [mi setState:NSOnState];
+    }
+    else
+    {
+        //Remove column
+        [matches removeTableColumn:col];
+        [mi setState:NSOffState];
+    }
 }
 
 - (IBAction)togglePowerMarker:(id)sender
