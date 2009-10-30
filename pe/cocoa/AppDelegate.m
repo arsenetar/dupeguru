@@ -75,19 +75,12 @@ http://www.hardcoded.net/licenses/hs_license
 //Delegate
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[ProgressController mainProgressController] setWorker:py];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    //Restore Columns
-    NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
-    NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
-    if ([columnsOrder count])
-        [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
-    //Reg stuff
-    if ([RegistrationInterface showNagWithApp:[self py] name:APPNAME limitDescription:LIMIT_DESC])
-        [unlockMenuItem setTitle:@"Thanks for buying dupeGuru Picture Edition!"];
-    //Restore results
-    [py loadIgnoreList];
-    [py loadResults];
+    NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
+    // index 2 is just after "Clear Ingore List"
+    NSMenuItem *mi = [actionsMenu insertItemWithTitle:@"Clear Picture Cache" action:@selector(clearPictureCache:) keyEquivalent:@"P" atIndex:2];
+    [mi setTarget:result];
+    [mi setKeyEquivalentModifierMask:NSCommandKeyMask|NSShiftKeyMask];
+    [super applicationDidFinishLaunching:aNotification];
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification

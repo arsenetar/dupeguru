@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CE031751109B340A00517EE6 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031750109B340A00517EE6 /* Preferences.xib */; };
+		CE031754109B345200517EE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031753109B345200517EE6 /* MainMenu.xib */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_pe_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */; };
 		CE0C46AA0FA0647E000BE99B /* PictureBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C46A90FA0647E000BE99B /* PictureBlocks.m */; };
 		CE15C8A80ADEB8B50061D4A5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
@@ -20,7 +22,6 @@
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
 		CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */; };
-		CE77C8A110946C840078B0DB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A010946C840078B0DB /* MainMenu.xib */; };
 		CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A710946CE20078B0DB /* DetailsPanel.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
@@ -74,6 +75,8 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru PE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dupeGuru PE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE031750109B340A00517EE6 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Preferences.xib; path = ../../xib/Preferences.xib; sourceTree = "<group>"; };
+		CE031753109B345200517EE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_pe_help; path = help/dupeguru_pe_help; sourceTree = SOURCE_ROOT; };
 		CE0C46A80FA0647E000BE99B /* PictureBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureBlocks.h; sourceTree = "<group>"; };
 		CE0C46A90FA0647E000BE99B /* PictureBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureBlocks.m; sourceTree = "<group>"; };
@@ -89,7 +92,6 @@
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = dgbase/dsa_pub.pem; sourceTree = "<group>"; };
 		CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DirectoryPanel.xib; sourceTree = "<group>"; };
-		CE77C8A010946C840078B0DB /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../xib/MainMenu.xib; sourceTree = "<group>"; };
 		CE77C8A710946CE20078B0DB /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsPanel.xib; path = ../../xib/DetailsPanel.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
@@ -247,9 +249,10 @@
 		CE77C89A10946C6D0078B0DB /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				CE77C8A010946C840078B0DB /* MainMenu.xib */,
+				CE031753109B345200517EE6 /* MainMenu.xib */,
 				CE77C8A710946CE20078B0DB /* DetailsPanel.xib */,
 				CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */,
+				CE031750109B340A00517EE6 /* Preferences.xib */,
 			);
 			name = xib;
 			path = dgbase/xib;
@@ -385,8 +388,9 @@
 				CE80DB780FC194760086DCA6 /* registration.nib in Resources */,
 				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
 				CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */,
-				CE77C8A110946C840078B0DB /* MainMenu.xib in Resources */,
 				CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */,
+				CE031751109B340A00517EE6 /* Preferences.xib in Resources */,
+				CE031754109B345200517EE6 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

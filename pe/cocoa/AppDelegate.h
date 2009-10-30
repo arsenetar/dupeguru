@@ -8,15 +8,12 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 #import "dgbase/AppDelegate.h"
-#import "ResultWindow.h"
 #import "DirectoryPanel.h"
 #import "DetailsPanel.h"
 #import "PyDupeGuru.h"
 
 @interface AppDelegate : AppDelegateBase
 {
-    IBOutlet ResultWindow *result;
-    
     DetailsPanel *_detailsPanel;
     DirectoryPanel *_directoryPanel;
 }
