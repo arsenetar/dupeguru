@@ -154,13 +154,13 @@ class TCDirectories(TestCase):
         d.add_path(p)
         d.set_state(p + 'dir1',STATE_REFERENCE)
         d.set_state(p + 'dir2',STATE_EXCLUDED)
-        files = d.get_files()
-        self.assertEqual(5, len(list(files)))
+        files = list(d.get_files())
+        self.assertEqual(5, len(files))
         for f in files:
-            if f.parent.path == p + 'dir1':
-                self.assert_(f.is_ref)
+            if f.path[:-1] == p + 'dir1':
+                assert f.is_ref
             else:
-                self.assert_(not f.is_ref)
+                assert not f.is_ref
     
     def test_get_files_with_inherited_exclusion(self):
         d = Directories()

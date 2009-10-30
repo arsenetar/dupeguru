@@ -7,6 +7,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from __future__ import unicode_literals
+
 import logging
 
 from AppKit import *
@@ -21,16 +23,12 @@ from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 from . import data
 from .fs import Bundle as BundleBase
 
-if NSWorkspace.sharedWorkspace().respondsToSelector_('typeOfFile:error:'): # Only from 10.5
-    def is_bundle(str_path):
-        sw = NSWorkspace.sharedWorkspace()
-        uti, error = sw.typeOfFile_error_(str_path)
-        if error is not None:
-            logging.warning(u'There was an error trying to detect the UTI of %s', str_path)
-        return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
-else: # Tiger
-    def is_bundle(str_path): # just return a list of a few known bundle extensions.
-        return get_file_ext(str_path) in ('app', 'pages', 'numbers')
+def is_bundle(str_path):
+    sw = NSWorkspace.sharedWorkspace()
+    uti, error = sw.typeOfFile_error_(str_path, None)
+    if error is not None:
+        logging.warning(u'There was an error trying to detect the UTI of %s', str_path)
+    return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
 
 class Bundle(BundleBase):
     @classmethod

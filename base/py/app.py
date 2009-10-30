@@ -70,12 +70,10 @@ class DupeGuru(RegistrableApplication):
     
     def _do_delete_dupe(self, dupe):
         if not io.exists(dupe.path):
-            dupe.parent = None
             return True
         self._recycle_dupe(dupe)
         self.clean_empty_dirs(dupe.path[:-1])
         if not io.exists(dupe.path):
-            dupe.parent = None
             return True
         logging.warning("Could not send {0} to trash.".format(unicode(dupe.path)))
         return False

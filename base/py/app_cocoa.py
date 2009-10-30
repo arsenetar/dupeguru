@@ -53,18 +53,10 @@ class DupeGuru(app.DupeGuru):
     #--- Override
     @staticmethod
     def _recycle_dupe(dupe):
-        if not io.exists(dupe.path):
-            dupe.parent = None
-            return True
-        directory = unicode(dupe.parent.path)
+        directory = unicode(dupe.path[:-1])
         filename = dupe.name
         result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
-            NSWorkspaceRecycleOperation, directory, '', [filename])
-        if not io.exists(dupe.path):
-            dupe.parent = None
-            return True
-        logging.warning('Could not send %s to trash. tag: %d' % (unicode(dupe.path), tag))
-        return False
+            NSWorkspaceRecycleOperation, directory, '', [filename], None)
     
     def _start_job(self, jobid, func):
         try:
