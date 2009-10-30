@@ -13,6 +13,7 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE3A46FA109B212E002ABFD5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3A46F9109B212E002ABFD5 /* MainMenu.xib */; };
 		CE45579B0AE3BC2B005A9546 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
@@ -25,7 +26,6 @@
 		CEDD92DB0FDD01640031C7B7 /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD92D90FDD01640031C7B7 /* NSCharacterSet_Extensions.m */; };
 		CEE7EA130FE675C80004E467 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7EA120FE675C80004E467 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
-		CEEFC0EF10944EDD001F3A39 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC0EE10944EDD001F3A39 /* MainMenu.xib */; };
 		CEEFC0F810945D9F001F3A39 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */; };
 		CEEFC0FB10945E37001F3A39 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
@@ -77,6 +77,7 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dg_cocoa.plugin; path = py/dist/dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE3A46F9109B212E002ABFD5 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = dgbase/xib/MainMenu.xib; sourceTree = "<group>"; };
 		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
@@ -92,7 +93,6 @@
 		CEE7EA110FE675C80004E467 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = dgbase/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CEE7EA120FE675C80004E467 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = dgbase/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
-		CEEFC0EE10944EDD001F3A39 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = xib/MainMenu.xib; sourceTree = "<group>"; };
 		CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = dgbase/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsPanel.xib; path = dgbase/xib/DetailsPanel.xib; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = images/folder32.png; sourceTree = SOURCE_ROOT; };
@@ -241,8 +241,8 @@
 		CEEFC0CA10943849001F3A39 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				CE3A46F9109B212E002ABFD5 /* MainMenu.xib */,
 				CEAC6810109B0B7E00B43C85 /* Preferences.xib */,
-				CEEFC0EE10944EDD001F3A39 /* MainMenu.xib */,
 				CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */,
 				CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */,
 			);
@@ -364,10 +364,10 @@
 				CEFC7FAE0FC9518A00CD5728 /* progress.nib in Resources */,
 				CEFC7FAF0FC9518A00CD5728 /* registration.nib in Resources */,
 				CE6E0DFE1054E9EF008D9390 /* dsa_pub.pem in Resources */,
-				CEEFC0EF10944EDD001F3A39 /* MainMenu.xib in Resources */,
 				CEEFC0F810945D9F001F3A39 /* DirectoryPanel.xib in Resources */,
 				CEEFC0FB10945E37001F3A39 /* DetailsPanel.xib in Resources */,
 				CEAC6811109B0B7E00B43C85 /* Preferences.xib in Resources */,
+				CE3A46FA109B212E002ABFD5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
