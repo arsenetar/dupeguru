@@ -153,7 +153,7 @@ class ResultsModel(TreeModel):
             if index.column() == 0:
                 value = unicode(value.toString())
                 if self._app.rename_dupe(node.dupe, value):
-                    node.reset()
+                    node.invalidate()
                     return True
         return False
     

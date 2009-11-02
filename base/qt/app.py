@@ -199,7 +199,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def rename_dupe(self, dupe, newname):
         try:
-            dupe.move(dupe.parent, newname)
+            dupe.rename(newname)
             return True
         except (IndexError, fs.FSError) as e:
             logging.warning("dupeGuru Warning: %s" % unicode(e))
