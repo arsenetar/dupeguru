@@ -9,7 +9,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import <Cocoa/Cocoa.h>
 #import "cocoalib/Outline.h"
 #import "dgbase/ResultWindow.h"
-#import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 
 @interface ResultWindow : ResultWindowBase
@@ -17,7 +16,6 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet NSSearchField *filterField;
     
     NSString *_lastAction;
-    DetailsPanel *_detailsPanel;
     NSMutableIndexSet *_deltaColumns;
 }
 - (IBAction)clearIgnoreList:(id)sender;
@@ -37,5 +35,4 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)toggleDelta:(id)sender;
-- (IBAction)toggleDetailsPanel:(id)sender;
 @end

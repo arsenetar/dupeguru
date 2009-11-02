@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "cocoalib/Utils.h"
 #import "cocoalib/ValueTransformers.h"
 #import "cocoalib/Dialogs.h"
+#import "DetailsPanel.h"
 #import "Consts.h"
 
 @implementation AppDelegate
@@ -63,6 +64,14 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)toggleDirectories:(id)sender
 {
     [[self directoryPanel] toggleVisible:sender];
+}
+
+
+- (DetailsPanelBase *)detailsPanel
+{
+    if (!_detailsPanel)
+        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+    return _detailsPanel;
 }
 
 - (DirectoryPanel *)directoryPanel
