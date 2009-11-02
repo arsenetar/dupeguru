@@ -145,9 +145,7 @@ class DupeGuru(DupeGuruBase, QObject):
         self.emit(SIGNAL('resultsChanged()'))
     
     def ask_for_reg_code(self):
-        if self.reg.ask_for_code():
-            #XXX bug???
-            self._setup_ui_as_registered()
+        self.reg.ask_for_code()
     
     @demo_method
     def copy_or_move_marked(self, copy):
