@@ -8,7 +8,6 @@
     <file alias="logo_se">images/dgse_logo_32.png</file>
     <file alias="logo_se_big">images/dgse_logo_128.png</file>
     <file alias="folder">images/folderwin32.png</file>
-    <file alias="gear">images/gear.png</file>
     <file alias="preferences">images/preferences32.png</file>
     <file alias="actions">images/actions32.png</file>
     <file alias="delta">images/delta32.png</file>
