@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Utils.h"
 #import "ValueTransformers.h"
 #import "Consts.h"
+#import "DetailsPanel.h"
 
 @implementation AppDelegate
 + (void)initialize
@@ -36,27 +37,20 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super init];
     _directoryPanel = nil;
-    _detailsPanel = nil;
     _appName = APPNAME;
     return self;
+}
+
+- (DetailsPanelBase *)detailsPanel
+{
+    if (!_detailsPanel)
+        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+    return _detailsPanel;
 }
 
 - (IBAction)openWebsite:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.hardcoded.net/dupeguru_pe"]];
-}
-
-- (IBAction)toggleDetailsPanel:(id)sender
-{
-    if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
-    if ([[_detailsPanel window] isVisible])
-        [[_detailsPanel window] close];
-    else
-    {
-        [[_detailsPanel window] orderFront:nil];
-        [_detailsPanel refresh];
-    }
 }
 
 - (IBAction)toggleDirectories:(id)sender

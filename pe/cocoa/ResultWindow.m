@@ -205,12 +205,6 @@ http://www.hardcoded.net/licenses/hs_license
     [self changeDelta:sender];
 }
 
-
-- (IBAction)toggleDetailsPanel:(id)sender
-{
-    [(AppDelegate *)app toggleDetailsPanel:sender];
-}
-
 - (IBAction)toggleDirectories:(id)sender
 {
     [(AppDelegate *)app toggleDirectories:sender];

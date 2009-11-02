@@ -33,6 +33,5 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)toggleDelta:(id)sender;
-- (IBAction)toggleDetailsPanel:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
 @end
