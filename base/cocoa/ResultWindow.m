@@ -440,6 +440,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)resultsUpdated:(NSNotification *)aNotification
 {
 	[matches invalidateBuffers];
+    [matches invalidateMarkings];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
