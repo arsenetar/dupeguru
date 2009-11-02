@@ -1,3 +1,9 @@
+- date: 2009-11-02
+  version: 2.9.0
+  description: |
+    * Significantly improved speed and memory usage of big scans.
+    * Added drag & drop support in the Directories panel. (#9)
+    * Fixed a bug causing dupeGuru to be confused if a scanned file was moved during the scan. (#72)
 - date: 2009-10-14
   version: 2.8.2
   description: |
