@@ -10,6 +10,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "RecentDirectories.h"
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
+#import "DetailsPanel.h"
 
 @interface AppDelegateBase : NSObject
 {
@@ -19,9 +20,11 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet ResultWindowBase *result;
     
     NSString *_appName;
+    DetailsPanelBase *_detailsPanel;
 }
 - (IBAction)unlockApp:(id)sender;
 
 - (PyDupeGuruBase *)py;
 - (RecentDirectories *)recentDirectories;
+- (DetailsPanelBase *)detailsPanel; // Virtual
 @end

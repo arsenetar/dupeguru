@@ -346,6 +346,11 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
+- (IBAction)toggleDetailsPanel:(id)sender
+{
+    [[(AppDelegateBase *)app detailsPanel] toggleVisibility];
+}
+
 - (IBAction)togglePowerMarker:(id)sender
 {
     if ([pmSwitch selectedSegment] == 1)

@@ -24,6 +24,17 @@ http://www.hardcoded.net/licenses/hs_license
     [detailsTable reloadData];
 }
 
+- (void)toggleVisibility
+{
+    if ([[self window] isVisible])
+        [[self window] close];
+    else
+    {
+        [self refresh]; // selection might have changed since last time
+        [[self window] orderFront:nil];
+    }
+}
+
 /* Notifications */
 - (void)duplicateSelectionChanged:(NSNotification *)aNotification
 {

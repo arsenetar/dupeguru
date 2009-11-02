@@ -35,6 +35,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (PyDupeGuruBase *)py { return py; }
 - (RecentDirectories *)recentDirectories { return recentDirectories; }
+- (DetailsPanelBase *)detailsPanel { return nil; } // Virtual
 
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

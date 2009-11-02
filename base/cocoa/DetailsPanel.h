@@ -18,6 +18,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (id)initWithPy:(PyApp *)aPy;
 
 - (void)refresh;
+- (void)toggleVisibility;
 
 /* Notifications */
 - (void)duplicateSelectionChanged:(NSNotification *)aNotification;

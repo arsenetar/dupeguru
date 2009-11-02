@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "cocoalib/RegistrationInterface.h"
 #import "cocoalib/Utils.h"
 #import "cocoalib/ValueTransformers.h"
+#import "DetailsPanel.h"
 #import "Consts.h"
 
 @implementation AppDelegate
@@ -62,6 +63,14 @@ http://www.hardcoded.net/licenses/hs_license
         _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
     return _directoryPanel;
 }
+
+- (DetailsPanelBase *)detailsPanel
+{
+    if (!_detailsPanel)
+        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+    return _detailsPanel;
+}
+
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate

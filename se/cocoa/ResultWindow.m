@@ -18,7 +18,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    _detailsPanel = nil;
     _displayDelta = NO;
     _powerMode = NO;
     _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,4)] retain];
@@ -198,16 +197,6 @@ http://www.hardcoded.net/licenses/hs_license
     else
         [deltaSwitch setSelectedSegment:1];
     [self changeDelta:sender];
-}
-
-- (IBAction)toggleDetailsPanel:(id)sender
-{
-    if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
-    if ([[_detailsPanel window] isVisible])
-        [[_detailsPanel window] close];
-    else
-        [[_detailsPanel window] orderFront:nil];
 }
 
 /* Public */

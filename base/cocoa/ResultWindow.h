@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 #import "Outline.h"
-#import "DirectoryPanel.h"
 #import "PyDupeGuru.h"
 
 @interface MatchesView : OutlineView
@@ -56,6 +55,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;
+- (IBAction)toggleDetailsPanel:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;
 
 /* Notifications */
