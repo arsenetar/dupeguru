@@ -1,9 +1,10 @@
-- date: 2009-11-02
+- date: 2009-11-03
   version: 2.9.0
   description: |
-    * Significantly improved speed and memory usage of big scans.
+    * Significantly improved speed and memory usage of big contents-based scans.
     * Added drag & drop support in the Directories panel. (#9)
     * Fixed a bug causing dupeGuru to be confused if a scanned file was moved during the scan. (#72)
+    * Dropped support for Mac OS X 10.4 (Tiger)
 - date: 2009-10-14
   version: 2.8.2
   description: |
