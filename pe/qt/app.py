@@ -8,6 +8,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import os.path as op
+import logging
 
 from PyQt4.QtGui import QImage
 import PIL.Image
@@ -40,8 +41,12 @@ class File(fs.File):
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field == 'dimensions':
-            im = PIL.Image.open(unicode(self.path))
-            self.dimensions = im.size
+            try:
+                im = PIL.Image.open(unicode(self.path))
+                self.dimensions = im.size
+            except IOError:
+                self.dimensions = (0, 0)
+                logging.warning(u"Could not read image '%s'", unicode(self.path))
     
     def get_blocks(self, block_count_per_side):
         image = QImage(unicode(self.path))
