@@ -403,7 +403,11 @@ http://www.hardcoded.net/licenses/hs_license
     if ([lastAction isEqualTo:jobDelete])
     {
         if (r > 0)
-            [Dialogs showMessage:[NSString stringWithFormat:@"%d file(s) couldn't be sent to Trash. They were kept in the results, and still are marked.",r]];
+        {
+            NSString *msg = @"%d file(s) couldn't be sent to Trash. They were kept in the results, "\
+                "and still are marked. See the F.A.Q. section in the help file for details.";
+            [Dialogs showMessage:[NSString stringWithFormat:msg,r]];
+        }
         else
             [Dialogs showMessage:@"All marked files were sucessfully sent to Trash."];
     }

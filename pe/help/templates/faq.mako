@@ -61,4 +61,14 @@ Enable the [Power Marker](power_marker.htm) mode and click on the Directory colu
 * **Windows**: Click on **Actions --> Apply Filter**, then type "copy", then click OK.
 * **Mac OS X**: Type "copy" in the "Filter" field in the toolbar.
 * Click on **Mark --> Mark All**.
+
+### I tried to send my duplicates to Trash, but dupeGuru is telling me it can't do it. Why? What can I do?
+
+Most of the time, the reason why dupeGuru can't send files to Trash is because of file permissions. You need *write* permissions on files you want to send to Trash. If you're not familiar with the command line, you can use utilities such as [BatChmod](http://macchampion.com/arbysoft/BatchMod) to fix your permissions.
+
+If dupeGuru still gives you troubles after fixing your permissions, there have been some cases where using "Move Marked to..." as a workaround did the trick. So instead of sending your files to Trash, you send them to a temporary folder with the "Move Marked to..." action, and then you delete that temporary folder manually.
+
+If you're trying to delete *iPhoto* pictures, then the reason for the failure is different. The deletion fails because dupeGuru can't communicate with iPhoto. Be aware that for the deletion to work correctly, you're not supposed to play around iPhoto while dupeGuru is working. Also, sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
+
+If all of this fail, [contact HS support](http://www.hardcoded.net/support), we'll figure it out.
 </%text>

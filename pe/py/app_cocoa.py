@@ -14,7 +14,7 @@ import re
 
 from Foundation import *
 from AppKit import *
-from appscript import app, k
+from appscript import app, k, CommandError
 
 from hsutil import io
 from hsutil.str import get_file_ext
@@ -142,12 +142,18 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         self.path2iphoto = {}
         if any(isinstance(dupe, IPhoto) for dupe in marked):
             j = j.start_subjob([6, 4], "Probing iPhoto. Don\'t touch it during the operation!")
-            a = app('iPhoto')
-            a.activate(timeout=0)
-            a.select(a.photo_library_album(timeout=0), timeout=0)
-            photos = as_fetch(a.photo_library_album().photos, k.item)
-            for photo in j.iter_with_progress(photos):
-                self.path2iphoto[unicode(photo.image_path(timeout=0))] = photo
+            try:
+                a = app('iPhoto')
+                a.activate(timeout=0)
+                a.select(a.photo_library_album(timeout=0), timeout=0)
+                photos = as_fetch(a.photo_library_album().photos, k.item)
+                for photo in j.iter_with_progress(photos):
+                    try:
+                        self.path2iphoto[unicode(photo.image_path(timeout=0))] = photo
+                    except CommandError:
+                        pass
+            except (CommandError, RuntimeError):
+                pass
         j.start_job(self.results.mark_count, "Sending dupes to the Trash")
         self.last_op_error_count = self.results.perform_on_marked(op, True)
         del self.path2iphoto
@@ -156,11 +162,15 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if isinstance(dupe, IPhoto):
             if unicode(dupe.path) in self.path2iphoto:
                 photo = self.path2iphoto[unicode(dupe.path)]
-                a = app('iPhoto')
-                a.remove(photo, timeout=0)
-                return True
+                try:
+                    a = app('iPhoto')
+                    a.remove(photo, timeout=0)
+                    return True
+                except (CommandError, RuntimeError):
+                    return False
             else:
-                logging.warning("Could not find photo {0} in iPhoto Library", unicode(dupe.path))
+                logging.warning(u"Could not find photo %s in iPhoto Library", unicode(dupe.path))
+                return False
         else:
             return app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
     
