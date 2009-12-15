@@ -144,7 +144,7 @@ class DupeGuru(DupeGuruBase, QObject):
         DupeGuruBase.apply_filter(self, filter)
         self.emit(SIGNAL('resultsChanged()'))
     
-    def ask_for_reg_code(self):
+    def askForRegCode(self):
         self.reg.ask_for_code()
     
     @demo_method
