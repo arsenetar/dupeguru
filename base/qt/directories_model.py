@@ -10,7 +10,8 @@
 import urllib
 
 from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
-from PyQt4.QtGui import QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush
+from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
+    QStyleOptionComboBox, QStyleOptionViewItemV4)
 
 from qtlib.tree_model import TreeNode, TreeModel
 
@@ -22,6 +23,24 @@ class DirectoriesDelegate(QStyledItemDelegate):
         editor = QComboBox(parent);
         editor.addItems(STATES)
         return editor
+    
+    def paint(self, painter, option, index):
+        self.initStyleOption(option, index)
+        # No idea why, but this cast is required if we want to have access to the V4 valuess
+        option = QStyleOptionViewItemV4(option)
+        if (index.column() == 1) and (option.state & QStyle.State_Selected):
+            cboption = QStyleOptionComboBox()
+            cboption.rect = option.rect
+            # On OS X (with Qt4.6.0), adding State_Enabled to the flags causes the whole drawing to
+            # fail (draw nothing), but it's an OS X only glitch. On Windows, it works alright.
+            cboption.state |= QStyle.State_Enabled
+            QApplication.style().drawComplexControl(QStyle.CC_ComboBox, cboption, painter)
+            painter.setBrush(option.palette.text())
+            rect = QRect(option.rect)
+            rect.setLeft(rect.left()+4)
+            painter.drawText(rect, Qt.AlignLeft, option.text)
+        else:
+            QStyledItemDelegate.paint(self, painter, option, index)
     
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
