@@ -5,10 +5,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import os
-
 from hsdocgen import generate_help, filters
 
-tix = filters.tixgen("https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}")
-
-generate_help.main('.', 'dupeguru_pe_help', force_render=True, tix=tix)
+def generate(windows=False):
+    tix = filters.tixgen("https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}")
+    generate_help.main('.', 'dupeguru_pe_help', force_render=True, tix=tix, windows=windows)
