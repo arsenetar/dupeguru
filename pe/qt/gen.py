@@ -13,10 +13,14 @@ import os.path as op
 
 from hsutil.build import print_and_do, build_all_qt_ui
 
+from help import gen
+
 build_all_qt_ui(op.join('qtlib', 'ui'))
 build_all_qt_ui('base')
 build_all_qt_ui('.')
-print_and_do("pyrcc4 base\\dg.qrc > base\\dg_rc.py")
+os.chdir('base')
+print_and_do("pyrcc4 dg.qrc > dg_rc.py")
+os.chdir('..')
 
 def move(src, dst):
     if not op.exists(src):
@@ -39,5 +43,5 @@ move(op.join('modules', 'block', '_block.so'), op.join('.', '_block.so'))
 move(op.join('modules', 'block', '_block.pyd'), op.join('.', '_block.pyd'))
 
 os.chdir('help')
-print_and_do('python gen.py')
+gen.generate(windows=True)
 os.chdir('..')
