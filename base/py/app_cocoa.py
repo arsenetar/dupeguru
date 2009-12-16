@@ -7,6 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import objc
 from Foundation import *
 from AppKit import *
 import logging
@@ -55,8 +56,12 @@ class DupeGuru(app.DupeGuru):
     def _recycle_dupe(dupe):
         directory = unicode(dupe.path[:-1])
         filename = dupe.name
-        result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
-            NSWorkspaceRecycleOperation, directory, '', [filename], None)
+        if objc.__version__ == '1.4': # For a while, we have to support this.
+            result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
+                NSWorkspaceRecycleOperation, directory, '', [filename])
+        else:
+            result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
+                NSWorkspaceRecycleOperation, directory, '', [filename], None)
     
     def _start_job(self, jobid, func):
         try:
