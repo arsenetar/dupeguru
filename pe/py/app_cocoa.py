@@ -66,6 +66,8 @@ class IPhoto(Photo):
 def get_iphoto_database_path():
     ud = NSUserDefaults.standardUserDefaults()
     prefs = ud.persistentDomainForName_('com.apple.iApps')
+    if prefs is None:
+        raise directories.InvalidPathError()
     if 'iPhotoRecentDatabases' not in prefs:
         raise directories.InvalidPathError()
     plisturl = NSURL.URLWithString_(prefs['iPhotoRecentDatabases'][0])
@@ -96,11 +98,16 @@ def get_iphoto_pictures(plistpath):
 class Directories(directories.Directories):
     def __init__(self):
         directories.Directories.__init__(self, fileclasses=[Photo])
-        self.iphoto_libpath = get_iphoto_database_path()
-        self.set_state(self.iphoto_libpath[:-1], directories.STATE_EXCLUDED)
+        try:
+            self.iphoto_libpath = get_iphoto_database_path()
+            self.set_state(self.iphoto_libpath[:-1], directories.STATE_EXCLUDED)
+        except directories.InvalidPathError:
+            self.iphoto_libpath = None
     
     def _get_files(self, from_path):
         if from_path == Path('iPhoto Library'):
+            if self.iphoto_libpath is None:
+                return []
             is_ref = self.get_state(from_path) == directories.STATE_REFERENCE
             photos = get_iphoto_pictures(self.iphoto_libpath)
             for photo in photos:
@@ -180,7 +187,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     
     def _get_file(self, str_path):
         p = Path(str_path)
-        if p in self.directories.iphoto_libpath[:-1]:
+        if (self.iphoto_libpath is not None) and (p in self.directories.iphoto_libpath[:-1]):
             return IPhoto(p)
         return app_cocoa.DupeGuru._get_file(self, str_path)
     
