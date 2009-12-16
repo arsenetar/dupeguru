@@ -187,7 +187,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     
     def _get_file(self, str_path):
         p = Path(str_path)
-        if (self.iphoto_libpath is not None) and (p in self.directories.iphoto_libpath[:-1]):
+        if (self.directories.iphoto_libpath is not None) and (p in self.directories.iphoto_libpath[:-1]):
             return IPhoto(p)
         return app_cocoa.DupeGuru._get_file(self, str_path)
     
