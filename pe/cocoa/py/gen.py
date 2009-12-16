@@ -20,4 +20,4 @@ if op.exists('build'):
 if op.exists('dist'):
     shutil.rmtree('dist')
 
-print_and_do('python -u setup.py py2app -A')
+print_and_do('python -u setup.py py2app')
