@@ -11,6 +11,7 @@ from __future__ import unicode_literals
 
 import logging
 
+import objc
 from AppKit import *
 
 from hsutil import io
@@ -25,7 +26,10 @@ from .fs import Bundle as BundleBase
 
 def is_bundle(str_path):
     sw = NSWorkspace.sharedWorkspace()
-    uti, error = sw.typeOfFile_error_(str_path, None)
+    if objc.__version__ == '1.4': # For a while, we have to support this.
+        uti, error = sw.typeOfFile_error_(str_path)
+    else:
+        uti, error = sw.typeOfFile_error_(str_path, None)
     if error is not None:
         logging.warning(u'There was an error trying to detect the UTI of %s', str_path)
     return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
