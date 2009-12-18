@@ -16,6 +16,7 @@ from hsutil.build import print_and_do, build_all_qt_ui
 build_all_qt_ui(op.join('qtlib', 'ui'))
 build_all_qt_ui('base')
 build_all_qt_ui('.')
+print_and_do("pyrcc4 base\\dg.qrc > base\\dg_rc.py")
 
 os.chdir('help')
 print_and_do('python gen.py')

@@ -64,4 +64,12 @@ If your comparison threshold is low enough, you will probably end up with live a
 * **Mac OS X**: Type "[*]" in the "Filter" field in the toolbar.
 * Click on **Mark --> Mark All**.
 * Click on **Actions --> Remove Selected from Results**.
+
+### I tried to send my duplicates to Trash, but dupeGuru is telling me it can't do it. Why? What can I do?
+
+Most of the time, the reason why dupeGuru can't send files to Trash is because of file permissions. You need *write* permissions on files you want to send to Trash. If you're not familiar with the command line, you can use utilities such as [BatChmod](http://macchampion.com/arbysoft/BatchMod) to fix your permissions.
+
+If dupeGuru still gives you troubles after fixing your permissions, there have been some cases where using "Move Marked to..." as a workaround did the trick. So instead of sending your files to Trash, you send them to a temporary folder with the "Move Marked to..." action, and then you delete that temporary folder manually.
+
+If all of this fail, [contact HS support](http://www.hardcoded.net/support), we'll figure it out.
 </%text>
