@@ -5,13 +5,15 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import sys
+sys.path.insert(0, 'py') # for hsutil and hsdocgen
 import os
 
+from help import gen
+
 print "Generating help"
-os.chdir('help')
-os.system('python -u gen.py')
-os.system('/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer dupeguru_me_help')
-os.chdir('..')
+gen.generate()
+os.system('/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer help/dupeguru_me_help')
 
 print "Generating py plugin"
 os.chdir('py')
