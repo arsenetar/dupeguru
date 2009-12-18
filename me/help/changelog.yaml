@@ -1,3 +1,12 @@
+- date: 2009-12-18
+  version: 5.7.0
+  description: |
+    * Added drag & drop support in the Directories panel. (#9)
+    * Fixed a bug causing dupeGuru to be confused if a scanned file was moved during the scan. (#72)
+    * Clarified how directories' state are set by painting a combo box in the state cells. [Windows]
+      (#76)
+    * Fixed some crashes. (#78 and #79)
+    * Dropped Mac OS X Tiger support.
 - date: 2009-10-14
   version: 5.6.6
   description: |
