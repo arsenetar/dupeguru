@@ -1,0 +1,68 @@
+Contents
+=====
+
+This package contains the source for dupeGuru. To learns how to build it, refer to the "Build dupeGuru" section. Below is the description of the various subfolders:
+
+- core: Contains the core logic code for dupeGuru. It's Python code written in TDD style.
+- core_*: Edition-specific-cross-toolkit code written in Python.
+- cocoa: UI code for the Cocoa toolkit. It's Objective-C code.
+- qt: UI code for the Qt toolkit. It's written in Python and uses PyQt. Before redistributing changes in this part of the code, read the "qt/WARNING" file.
+- images: Images used by the different UI codebases.
+
+There are also other sub-folder that comes from external repositories (automatically checked out
+with svn:externals):
+
+- hsutil: A collection of helpers used across HS applications.
+- hsdocgen: An ad-hoc document generation used across HS project (used for help files)
+- hsmedia: A library to read audio file metadata, used in dupeGuru ME.
+- cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
+- qtlib: A collection of helpers used across Qt UI codebases of HS applications.
+
+dupeGuru Dependencies
+=====
+
+Before being able to build dupeGuru, a few dependencies have to be installed:
+
+General dependencies
+-----
+
+- Python 2.6 (http://www.python.org)
+- Mako, to generate help files. (http://www.makotemplates.org/)
+- PyYaml, for help files and the build system. (http://pyyaml.org/)
+- Nose, to run unit tests. (http://somethingaboutorange.com/mrl/projects/nose/)
+- Cython to compile a few optimized bottlenecks. (http://www.cython.org/)
+- Python Imaging Library for dupeGuru PE. (http://www.pythonware.com/products/pil/)
+
+OS X prerequisites
+-----
+
+- XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
+- Sparkle (http://sparkle.andymatuschak.org/)
+- PyObjC. Although Tiger support has been dropped with dupeGuru 1.7, I still use PyObjC 1.4 because funky stuff happens with newer releases. However, it's mostly related to packaging with py2app. (http://pyobjc.sourceforge.net/)
+- py2app (http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html)
+
+Windows prerequisites
+---
+
+- Visual Studio 2008 (Express is enough) is needed to build the Cython extensions. (http://www.microsoft.com/Express/)
+- PyQt 4.6 (http://www.riverbankcomputing.co.uk/news)
+- PyInstaller, if you want to build a exe. You don't need it if you just want to run dupeGuru. (http://www.pyinstaller.org/)
+- Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)
+
+Building dupeGuru
+=====
+
+First, make sure you meet the dependencies listed in the section above. Then you need to configure your build with:
+
+	python configure.py
+	
+If you want, you can specify a UI to use with the `--ui` option. So, if you want to build dupeGuru with Qt on OS X, then you have to type `python configure.py --ui=qt`. You can also use the `--dev` flag to indicate a dev build (it will build `mg_cocoa.plugin` in alias mode).
+
+Then, just build the thing and then run it with:
+
+	python build.py
+	python run.py
+
+If you want to create ready-to-upload package, run:
+
+	python package.py
