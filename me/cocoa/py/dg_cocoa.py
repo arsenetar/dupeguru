@@ -8,13 +8,13 @@
 import objc
 from AppKit import *
 
-from dupeguru_me.app_cocoa import DupeGuruME
-from dupeguru.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
+from core_me.app_cocoa import DupeGuruME
+from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
     SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
 
 # Fix py2app imports which chokes on relative imports
-from dupeguru_me import app_cocoa, data, fs, scanner
-from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, scanner, fs
+from core_me import app_cocoa, data, fs, scanner
+from core import app, app_cocoa, data, directories, engine, export, ignore, results, scanner, fs
 from hsmedia import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
 from hsutil import conflict
 

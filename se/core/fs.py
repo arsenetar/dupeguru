@@ -13,7 +13,7 @@ import hashlib
 from hsutil import io
 from hsutil.misc import nonone
 
-from dupeguru import fs
+from core import fs
 
 class Bundle(fs.File):
     """This class is for Mac OSX bundles (.app). Bundles are seen by the OS as

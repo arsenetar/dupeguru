@@ -10,7 +10,7 @@
 
 from hsmedia import mpeg, wma, mp4, ogg, flac, aiff
 from hsutil.str import get_file_ext
-from dupeguru import fs
+from core import fs
 
 TAG_FIELDS = ['audiosize', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
     'album', 'genre', 'year', 'track', 'comment']

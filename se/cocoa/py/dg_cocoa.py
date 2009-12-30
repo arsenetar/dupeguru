@@ -8,12 +8,12 @@
 import objc
 from AppKit import *
 
-from dupeguru_se.app_cocoa import DupeGuru
-from dupeguru import scanner
+from core_se.app_cocoa import DupeGuru
+from core import scanner
 
 # Fix py2app imports with chokes on relative imports
-from dupeguru_se import fs, data
-from dupeguru import app, app_cocoa, data, directories, engine, export, ignore, results, fs
+from core_se import fs, data
+from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs
 from hsutil import conflict
 
 class PyApp(NSObject):

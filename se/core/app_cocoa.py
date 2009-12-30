@@ -18,9 +18,9 @@ from hsutil import io
 from hsutil.path import Path
 from hsutil.str import get_file_ext
 
-from dupeguru import fs
-from dupeguru.app_cocoa import DupeGuru as DupeGuruBase
-from dupeguru.directories import Directories as DirectoriesBase, STATE_EXCLUDED
+from core import fs
+from core.app_cocoa import DupeGuru as DupeGuruBase
+from core.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 from . import data
 from .fs import Bundle as BundleBase
 

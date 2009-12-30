@@ -11,7 +11,7 @@
 # data module for tests
 
 from hsutil.str import format_size
-from dupeguru.data import format_path, cmp_value
+from ..data import format_path, cmp_value
 
 COLUMNS = [
     {'attr':'name','display':'Filename'},

@@ -13,7 +13,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel
 
 from hsutil.misc import nonone
 
-from dupeguru.app import NoScannableFileError, AllFilesAreRefError
+from core.app import NoScannableFileError, AllFilesAreRefError
 
 import dg_rc
 from main_window_ui import Ui_MainWindow

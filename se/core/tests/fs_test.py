@@ -13,8 +13,8 @@ import hashlib
 from nose.tools import eq_
 
 from hsutil.testcase import TestCase
-from dupeguru.fs import File
-from dupeguru.tests.directories_test import create_fake_fs
+from core.fs import File
+from core.tests.directories_test import create_fake_fs
 
 from .. import fs
 

@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from dupeguru.scanner import SCAN_TYPE_FILENAME, SCAN_TYPE_CONTENT
+from core.scanner import SCAN_TYPE_FILENAME, SCAN_TYPE_CONTENT
 
 from base.preferences import Preferences as PreferencesBase
 

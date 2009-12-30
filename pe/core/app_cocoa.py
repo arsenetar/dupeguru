@@ -21,8 +21,8 @@ from hsutil.str import get_file_ext
 from hsutil.path import Path
 from hsutil.cocoa import as_fetch
 
-from dupeguru import fs
-from dupeguru import app_cocoa, directories
+from core import fs
+from core import app_cocoa, directories
 from . import data
 from .cache import string_to_colors, Cache
 from .scanner import ScannerPE

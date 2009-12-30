@@ -8,7 +8,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 from hsutil.str import format_size
-from dupeguru.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value
+from core.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value
 
 def format_dimensions(dimensions):
     return '%d x %d' % (dimensions[0], dimensions[1])

@@ -10,7 +10,7 @@
 
 from hsutil.path import Path
 
-from dupeguru.engine import getwords
+from core.engine import getwords
 from ..scanner import *
 
 class NamedObject(object):

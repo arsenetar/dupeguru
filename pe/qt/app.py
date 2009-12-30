@@ -15,10 +15,10 @@ import PIL.Image
 
 from hsutil.str import get_file_ext
 
-from dupeguru import fs
-from dupeguru_pe import data as data_pe
-from dupeguru_pe.cache import Cache
-from dupeguru_pe.scanner import ScannerPE
+from core import fs
+from core_pe import data as data_pe
+from core_pe.cache import Cache
+from core_pe.scanner import ScannerPE
 
 from block import getblocks
 from base.app import DupeGuru as DupeGuruBase

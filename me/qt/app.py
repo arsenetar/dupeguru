@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from dupeguru_me import data, scanner, fs
+from core_me import data, scanner, fs
 
 from base.app import DupeGuru as DupeGuruBase
 from details_dialog import DetailsDialog

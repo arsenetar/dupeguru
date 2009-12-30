@@ -15,7 +15,7 @@ from collections import defaultdict
 from hsutil import job
 from hsutil.misc import dedupe
 
-from dupeguru.engine import Match
+from core.engine import Match
 from .block import avgdiff, DifferentBlockCountError, NoBlocksError
 from .cache import Cache
 

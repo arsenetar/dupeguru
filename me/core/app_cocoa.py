@@ -13,7 +13,7 @@ import time
 
 from hsutil.cocoa import as_fetch
 
-from dupeguru.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
+from core.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
 
 from . import data, scanner, fs
 

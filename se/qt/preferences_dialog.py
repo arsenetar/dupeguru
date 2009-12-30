@@ -12,7 +12,7 @@ from PyQt4.QtGui import QDialog, QDialogButtonBox
 
 from hsutil.misc import tryint
 
-from dupeguru.scanner import SCAN_TYPE_FILENAME, SCAN_TYPE_CONTENT
+from core.scanner import SCAN_TYPE_FILENAME, SCAN_TYPE_CONTENT
 
 from preferences_dialog_ui import Ui_PreferencesDialog
 import preferences

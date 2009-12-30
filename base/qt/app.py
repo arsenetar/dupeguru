@@ -19,9 +19,8 @@ from PyQt4.QtGui import QProgressDialog, QDesktopServices, QFileDialog, QDialog,
 from hsutil import job
 from hsutil.reg import RegistrationRequired
 
-from dupeguru import fs
-from dupeguru.app import (DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, 
-    JOB_DELETE)
+from core import fs
+from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     
 from qtlib.about_box import AboutBox
 from qtlib.progress import Progress
