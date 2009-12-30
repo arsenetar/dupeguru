@@ -42,7 +42,6 @@
 		CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB890FC1951C0086DCA6 /* ResultWindow.m */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CEBAE4270FDA97E000B7887D /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */; };
-		CEBAE4280FDA97E000B7887D /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAE4260FDA97E000B7887D /* NSCharacterSet_Extensions.m */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -130,8 +129,6 @@
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		CEBAE4230FDA97E000B7887D /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
-		CEBAE4250FDA97E000B7887D /* NSCharacterSet_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSCharacterSet_Extensions.h; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.h; sourceTree = SOURCE_ROOT; };
-		CEBAE4260FDA97E000B7887D /* NSCharacterSet_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSCharacterSet_Extensions.m; path = cocoalib/brsinglelineformatter/NSCharacterSet_Extensions.m; sourceTree = SOURCE_ROOT; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
@@ -314,8 +311,6 @@
 			children = (
 				CEBAE4230FDA97E000B7887D /* BRSingleLineFormatter.h */,
 				CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */,
-				CEBAE4250FDA97E000B7887D /* NSCharacterSet_Extensions.h */,
-				CEBAE4260FDA97E000B7887D /* NSCharacterSet_Extensions.m */,
 			);
 			name = brsinglelineformatter;
 			path = cocoalib/brsinglelineformatter;
@@ -422,7 +417,6 @@
 				CE80DB8B0FC1951C0086DCA6 /* DirectoryPanel.m in Sources */,
 				CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */,
 				CEBAE4270FDA97E000B7887D /* BRSingleLineFormatter.m in Sources */,
-				CEBAE4280FDA97E000B7887D /* NSCharacterSet_Extensions.m in Sources */,
 				CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
