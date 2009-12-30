@@ -37,9 +37,10 @@ def main():
             print "Qt packaging only works under Windows."
             return
         add_to_pythonpath('.')
-        os.chdir('qt')
+        add_to_pythonpath('qt')
+        os.chdir(op.join('qt', edition))
         os.system('python build.py')
-        os.chdir('..')
+        os.chdir(op.join('..', '..'))
 
 if __name__ == '__main__':
     main()

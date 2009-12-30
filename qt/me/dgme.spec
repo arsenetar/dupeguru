@@ -9,7 +9,7 @@ exe = EXE(pyz,
           debug=False,
           strip=False,
           upx=True,
-          console=False , icon='..\\base\\images\\dgme_logo.ico', version='verinfo_tmp')
+          console=False , icon='..\\..\\images\\dgme_logo.ico', version='verinfo_tmp')
 coll = COLLECT( exe,
                a.binaries,
                a.zipfiles,

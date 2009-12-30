@@ -10,7 +10,7 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False,
-          icon='..\\base\\images\\dgse_logo.ico',
+          icon='..\\..\\images\\dgse_logo.ico',
           version='verinfo_tmp')
 coll = COLLECT( exe,
                a.binaries,
