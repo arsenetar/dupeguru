@@ -1,0 +1,274 @@
+- date: 2009-11-03
+  version: 2.9.0
+  description: |
+    * Significantly improved speed and memory usage of big contents-based scans.
+    * Added drag & drop support in the Directories panel. (#9)
+    * Fixed a bug causing dupeGuru to be confused if a scanned file was moved during the scan. (#72)
+    * Dropped support for Mac OS X 10.4 (Tiger)
+- date: 2009-10-14
+  version: 2.8.2
+  description: |
+    * Improved directory selection in the Directories panel (Windows). (#56)
+    * Fixed a bug preventing dupeGuru from starting on certain machines (Windows). (#68)
+    * Fixed a crash during very big scans. (#70)
+- date: 2009-10-02
+  version: 2.8.1
+  description: |
+    * Fixed crash with filtering when regular expressions were enabled. (#60)
+    * Fixed crash when setting directories' state. (Mac OS X) (#66)
+    * Fixed crash with Make Reference when certain filters are applied. (Mac OS X) (#55)
+    * Improved error handling during delete/move/copy actions. (#62 #65)
+- date: 2009-09-07
+  version: 2.8.0
+  description: |
+    * Added support for all kinds of bundle (not just applications) (Mac OS X) (#11)
+    * Re-introduced the Export to XHTML feature to Windows. (#14)
+    * Improved Export to XHTML speed. (#14)
+    * Improved Contents scanning speed for large files. (#33)
+    * Improved the grouping algorithm to reduce the number of discarded files in non-exact scans. (#51)
+    * Stopped showing the same file on the 2 sides of the details panel when a ref file is selected. (#50)
+    * Fixed crashes in the Directories panel. (#46)
+- date: 2009-06-20
+  version: 2.7.3
+  description: |
+    * Fixed bugs with selection being jumpy during "Make Reference" actions and Power Marker
+        switches. (#3)
+    * Fixed crash happening when a file with non-roman characters couldn't be analyzed. (#30)
+    * Fixed crash sometimes happening during the file collection phase in scanning. (#38)
+    * Restored double-click and right-click behavior lost in the PyQt move (Windows). (#34 #35)
+- date: 2009-06-10
+  version: 2.7.2
+  description: |
+    * Fixed an occasional crash on Copy/Move operations. (#16)
+    * Added automatic exclusion for sensible folders (like system folders). (#20)
+    * Fixed an occasional crash when application files were part of the results (Mac OS X). (#25)
+- date: 2009-05-29
+  version: 2.7.1
+  description: |
+    * Fixed a bug causing crashes when having application files in the results.
+    * Fixed a bug causing a GUI freeze at the beginning of a scan with a lot of files.
+    * Fixed a bug that sometimes caused a crash when an action was cancelled, and then started again.
+- date: 2009-05-25
+  version: 2.7.0
+  description: |
+    * Converted the Windows GUI to Qt.
+    * Improved the reliability of the scanning process.
+- date: 2009-03-27
+  version: 2.6.1
+  description: |
+    * **Fixed** an occasional crash caused by permission issues.
+    * **Fixed** a bug where the "X discarded" notice would show a too large number of discarded 
+      duplicates.
+- date: 2008-09-10
+  description: "* **Added** a small file threshold preference.\r\n* **Added** a notice\
+    \ in the status bar when matches were discarded during the scan.\r\n* **Improved**\
+    \ duplicate prioritization (smartly chooses which file you will keep).\r\n* **Improved**\
+    \ scan progress feedback.\r\n* **Improved** responsiveness of the user interface\
+    \ for certain actions."
+  version: 2.6.0
+- date: 2008-08-10
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> the speed of results loading\
+    \ and saving.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a crash sometimes occurring during\
+    \ duplicate deletion.</li>\n\t\t            </ul>"
+  version: 2.5.4
+- date: 2008-07-08
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> unicode handling for filenames.\
+    \ dupeGuru will now find a lot more duplicates if your files have non-ascii characters\
+    \ in it.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> \"Clear Ignore List\" crash in Windows.</li>\n\
+    \t\t            </ul>"
+  version: 2.5.3
+- date: 2008-01-10
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> the handling of low memory situations.</li>\n\
+    \t\t\t\t\t\t<li><b>Improved</b> the directory panel. The \"Remove\" button changes\
+    \ to \"Put Back\" when an excluded directory is selected.</li>\n\t\t\t\t\t\t<li><b>Improved</b>\
+    \ scan, delete and move speed in situations where there were a lot of duplicates.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> occasional crashes when moving bundles (such as .app\
+    \ files).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> occasional crashes when moving a\
+    \ lot of files at once.</li>\n\t\t            </ul>"
+  version: 2.5.2
+- date: 2007-11-22
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> the \"Remove empty folders\" option.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> results load/save issues.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
+    \ occasional status bar inaccuracies when the results are filtered.</li>\n\t\t\
+    \            </ul>"
+  version: 2.5.1
+- date: 2007-09-15
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> post scan filtering.</li>\n\t\t\
+    \t\t\t\t<li><b>Fixed</b> issues with the rename feature under Windows</li>\n\t\
+    \t\t\t\t\t<li><b>Fixed</b> some user interface annoyances under Windows</li>\n\
+    \t\t            </ul>"
+  version: 2.5.0
+- date: 2007-04-14
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> UI responsiveness (using threads)\
+    \ under Mac OS X.</li>\n\t\t\t\t\t\t<li><b>Improved</b> result load/save speed\
+    \ and memory usage.</li>\n\t\t            </ul>"
+  version: 2.4.8
+- date: 2007-03-10
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a \"bad file descriptor\" error\
+    \ occasionally popping up.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with non-latin\
+    \ directory names.</li>\n\t\t            </ul>"
+  version: 2.4.7
+- date: 2007-02-10
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> Re-orderable columns. In fact,\
+    \ I re-added the feature which was lost in the C# conversion in 2.4.0 (Windows).</li>\n\
+    \t\t\t\t\t\t<li><b>Changed</b> the behavior of the scanning engine when setting\
+    \ the hardness to 100. It will now only match files that have their words in the\
+    \ same order.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with all the Delete/Move/Copy\
+    \ actions with certain kinds of files.</li>\n\t\t            </ul>"
+  version: 2.4.6
+- date: 2007-01-11
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with the Move action.</li>\n\
+    \t\t            </ul>"
+  version: 2.4.5
+- date: 2007-01-07
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a \"ghosting\" bug. Dupes deleted\
+    \ by dupeGuru would sometimes come back in subsequent scans (Windows).</li>\n\t\
+    \t\t\t\t\t<li><b>Fixed</b> bugs sometimes making dupeGuru crash when marking a\
+    \ dupe (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> some minor visual glitches\
+    \ (Windows).</li>\n\t\t            </ul>"
+  version: 2.4.4
+- date: 2006-12-08
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a mishandling of \".app\" files\
+    \ (OS X).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug preventing files from \"reference\"\
+    \ directories to be displayed in blue in the results (Windows).</li>\n\t\t\t\t\
+    \t\t<li><b>Fixed</b> a bug preventing some files to be sent to the recycle bin\
+    \ (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug in the packaging preventing\
+    \ certain Windows configurations to start dupeGuru at all.</li>\n\t\t        \
+    \    </ul>"
+  version: 2.4.3
+- date: 2006-11-18
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with directory states.</li>\n\
+    \t\t            </ul>"
+  version: 2.4.2
+- date: 2006-11-15
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug causing the ignore list not\
+    \ to be saved.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug sometimes making delete\
+    \ and move operations stall.</li>\n\t\t            </ul>"
+  version: 2.4.1
+- date: 2006-11-10
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Changed</b> the Windows interface. It is\
+    \ now .NET based.</li>\n\t\t\t\t\t\t<li><b>Added</b> an auto-update feature to\
+    \ the windows version.</li>\n\t\t\t\t\t\t<li><b>Changed</b> the way power marking\
+    \ works. It is now a mode instead of a separate window.</li>\n\t\t\t\t\t\t<li><b>Changed</b>\
+    \ the \"Size (MB)\" column for a \"Size (KB)\" column. The values are now \"ceiled\"\
+    \ instead of rounded. Therefore, a size \"0\" is now really 0 bytes, not just\
+    \ a value too small to be rounded up. It is also the case for delta values.</li>\n\
+    \t\t\t\t\t\t<li><b>Removed</b> the min word length/count options. These came from\
+    \ Mp3 Filter, and just aren't used anymore. Word weighting does pretty much the\
+    \ same job.</li>\n\t\t            </ul>"
+  version: 2.4.0
+- date: 2006-11-07
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> speed and memory usage of the\
+    \ scanning engine, again. Does it mean there was a lot of improvements to be made?\
+    \ Nah...</li>\n\t\t            </ul>"
+  version: 2.3.4
+- date: 2006-11-02
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> speed and memory usage of the\
+    \ scanning engine, especially when the scan results in a lot of duplicates.</li>\n\
+    \t\t\t\t\t\t<li>Now I wonder if Sparkle is going to work well...</li>\n\t\t  \
+    \          </ul>"
+  version: 2.3.3
+- date: 2006-10-16
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> an auto-update feature in the Mac\
+    \ OS X version (with Sparkle).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug preventing\
+    \ some duplicate reports to be created correctly under Windows.</li>\n\t\t   \
+    \         </ul>"
+  version: 2.3.2
+- date: 2006-10-02
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug preventing some duplicates\
+    \ to be found, especially when scanning lots of files.</li>\n\t\t            </ul>"
+  version: 2.3.1
+- date: 2006-09-22
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> XHTML export feature.</li>\n\t\t\
+    \            </ul>"
+  version: 2.3.0
+- date: 2006-08-31
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> sticky columns.</li>\n\t\t\t\t\t\
+    \t<li><b>Fixed</b> an issue with file caching between scans.</li>\n\t\t\t\t\t\t\
+    <li><b>Fixed</b> an issue preventing some duplicates from being deleted/moved/copied.</li>\n\
+    \t\t            </ul>"
+  version: 2.2.10
+- date: 2006-08-27
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> an issue with ignore list and unicode.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> an issue with file attribute fetching sometimes causing\
+    \ dupeGuru to crash.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> an issue in the directories\
+    \ panel under Windows.</li>\n\t\t            </ul>"
+  version: 2.2.9
+- date: 2006-08-17
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> an issue in the duplicate seeking\
+    \ engine preventing some duplicates to be found.</li>\n\t\t            </ul>"
+  version: 2.2.8
+- date: 2006-08-12
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> unicode support.</li>\n\t\t\t\
+    \t\t\t<li><b>Improved</b> the \"Reveal in Finder\" (\"Open Containing Folder\"\
+    \ in Windows) feature so it selects the file in the folder it opens.</li>\n\t\t\
+    \            </ul>"
+  version: 2.2.7
+- date: 2006-08-07
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> the ignore list system.</li>\n\
+    \t\t\t\t\t\t<li>dupeGuru is now a Universal application on Mac OS X.</li>\n\t\t\
+    \            </ul>"
+  version: 2.2.6
+- date: 2006-07-26
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> application (.app) dupe detection\
+    \ on Mac OS X.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> an issue that occasionally made\
+    \ dupeGuru crash on startup.</li>\n\t\t            </ul>"
+  version: 2.2.5
+- date: 2006-06-27
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> an issue with Move and Copy features.</li>\n\
+    \t\t            </ul>"
+  version: 2.2.4
+- date: 2006-06-15
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> duplicate scanning speed.</li>\n\
+    \t\t\t\t\t\t<li><b>Added</b> a warning that a file couldn't be renamed if a file\
+    \ with the same name already exists.</li>\n\t\t            </ul>"
+  version: 2.2.3
+- date: 2006-06-07
+  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> \"Rename Selected\" feature.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> some minor issues with \"Reload Last Results\" feature.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> ignore list issues.</li>\n\t\t            </ul>"
+  version: 2.2.2
+- date: 2006-05-22
+  description: "<ul>\n\t\t            \t<li><b>Fixed</b> occasional progress bar woes\
+    \ under Windows.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug in the registration\
+    \ system under Windows.</li>\n\t\t\t\t\t\t<li>Nothing has been changed in the\
+    \ Mac OS X version, but I want to keep version in sync.</li>\n\t\t           \
+    \ </ul>"
+  version: 2.2.1
+- date: 2006-05-10
+  description: "<ul>\n\t\t            \t<li><b>Added</b> destination path re-creation\
+    \ options.</li>\n\t\t\t\t\t\t<li><b>Added</b> an ignore list.</li>\n\t\t\t\t\t\
+    \t<li><b>Changed</b> the main icon.</li>\n\t\t\t\t\t\t<li><b>Improved</b> dramatically\
+    \ the delta values feature.</li>\n\t\t            </ul>"
+  version: 2.2.0
+- date: 2006-04-18
+  description: "<ul>\n\t\t            \t<li><b>Added</b> the \"Match similar words\"\
+    \ option.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> Power marking issues under Mac.</li>\n\
+    \t\t            </ul>"
+  version: 2.1.2
+- date: 2006-04-14
+  description: "<ul>\n\t\t            \t<li><b>Added</b> the \"Display delta values\"\
+    \ option.</li>\n\t\t\t\t\t\t<li><b>Improved</b> Power marking sorting speed under\
+    \ Mac.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> Power marking sorting issues.</li>\n\
+    \t\t            </ul>"
+  version: 2.1.1
+- date: 2006-04-03
+  description: "<ul>\n\t\t            \t<li><b>Added</b> the Power Marker feature.</li>\n\
+    \t\t\t\t\t\t<li><b>Fixed</b> a column sorting bug. The results would sometimes\
+    \ lose their sort order.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with the Make\
+    \ Reference feature. The results sometimes wasn't correctly refreshed after the\
+    \ reference switch.</li>\n\t\t            </ul>"
+  version: 2.1.0
+- date: 2006-03-23
+  description: "<ul>\n\t\t            \t<li><b>Fixed</b> an issue occasionally occurring\
+    \ when trying to reload results from removable media that is no longer present.</li>\n\
+    \t\t            </ul>"
+  version: 2.0.1
+- date: 2006-03-17
+  description: "<ul>\n\t\t            \t<li>Complete rewrite.</li>\n\t\t         \
+    \   \t<li>Now runs on Mac OS X.</li>\n\t\t            </ul>"
+  version: 2.0.0
+- date: 2004-09-24
+  description: "<ul>\n\t\t            \t<li>Initial release.</li>\n\t\t          \
+    \  </ul>"
+  version: 1.0.0
