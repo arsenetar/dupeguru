@@ -1,0 +1,22 @@
+syntax: glob
+
+*.pyc
+conf.yaml
+cocoa/se/Info.plist
+cocoa/me/Info.plist
+cocoa/pe/Info.plist
+cocoa/se/build
+cocoa/me/build
+cocoa/pe/build
+cocoa/se/py/build
+cocoa/me/py/build
+cocoa/pe/py/build
+cocoa/se/py/dist
+cocoa/me/py/dist
+cocoa/pe/py/dist
+qt/base/*_rc.py
+qt/base/*_ui.py
+qt/se/*_ui.py
+help_se/dupeguru_help
+help_me/dupeguru_me_help
+help_pe/dupeguru_pe_help
