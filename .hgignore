@@ -1,19 +1,15 @@
 syntax: glob
 
+.DS_Store
 *.pyc
+*.so
 conf.yaml
-cocoa/se/Info.plist
-cocoa/me/Info.plist
-cocoa/pe/Info.plist
-cocoa/se/build
-cocoa/me/build
-cocoa/pe/build
-cocoa/se/py/build
-cocoa/me/py/build
-cocoa/pe/py/build
-cocoa/se/py/dist
-cocoa/me/py/dist
-cocoa/pe/py/dist
+build
+core_pe/modules/block/block.c
+core_pe/modules/cache/cache.c
+cocoa/*/Info.plist
+cocoa/*/build
+cocoa/*/dg_cocoa.plugin
 qt/base/*_rc.py
 qt/base/*_ui.py
 qt/se/*_ui.py

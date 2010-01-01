@@ -11,10 +11,13 @@
 import sys
 import os
 import os.path as op
+import shutil
 
+from setuptools import setup
 import yaml
 
-from hsutil.build import move_testdata_out, put_testdata_back, add_to_pythonpath
+from hsdocgen import generate_help, filters
+from hsutil.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
 def main():
     conf = yaml.load(open('conf.yaml'))
@@ -22,20 +25,17 @@ def main():
     ui = conf['ui']
     dev = conf['dev']
     print "Building dupeGuru {0} with UI {1}".format(edition.upper(), ui)
-    add_to_pythonpath('.')
     if dev:
         print "Building in Dev mode"
+    add_to_pythonpath('.')
     print "Generating Help"
-    windows = sys.platform=='win32'
-    if edition == 'se':
-        import help_se.gen
-        help_se.gen.generate(windows=windows, force_render=not dev)
-    elif edition == 'me':
-        import help_me.gen
-        help_me.gen.generate(windows=windows, force_render=not dev)
-    elif edition == 'pe':
-        import help_pe.gen
-        help_pe.gen.generate(windows=windows, force_render=not dev)
+    windows = sys.platform == 'win32'
+    tix = filters.tixgen("https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}")
+    help_dir = 'help_{0}'.format(edition)
+    dest_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
+    help_basepath = op.abspath(help_dir)
+    help_destpath = op.abspath(op.join(help_dir, dest_dir))
+    generate_help.main(help_basepath, help_destpath, force_render=not dev, tix=tix, windows=windows)
     
     print "Building dupeGuru"
     if edition == 'pe':
@@ -43,16 +43,44 @@ def main():
         os.system('python gen.py')
         os.chdir('..')
     if ui == 'cocoa':
-        move_log = move_testdata_out()
-        try:
-            os.chdir(op.join('cocoa', edition))
-            if dev:
-                os.system('python gen.py --dev')
-            else:
-                os.system('python gen.py')
-            os.chdir(op.join('..', '..'))
-        finally:
-            put_testdata_back(move_log)
+        if not dev:
+            print "Building help index"
+            os.system('open /Developer/Applications/Utilities/Help\\ Indexer.app --args {0}'.format(help_destpath))
+        
+        print "Building dg_cocoa.plugin"
+        if op.exists('build'):
+            shutil.rmtree('build')
+        os.mkdir('build')
+        if not dev:
+            specific_packages = {
+                'se': ['core_se'],
+                'me': ['core_me', 'hsmedia'],
+                'pe': ['core_pe'],
+            }[edition]
+            copy_packages(['core', 'hsutil'] + specific_packages, 'build')
+        cocoa_project_path = 'cocoa/{0}'.format(edition)
+        shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
+        os.chdir('build')
+        script_args = ['py2app', '-A'] if dev else ['py2app']
+        setup(
+            script_args = script_args,
+            plugin = ['dg_cocoa.py'],
+            setup_requires = ['py2app'],
+        )
+        os.chdir('..')
+        pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
+        if op.exists(pluginpath):
+            shutil.rmtree(pluginpath)
+        shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
+        if dev:
+            # In alias mode, the tweakings we do to the pythonpath aren't counted in. We have to
+            # manually put a .pth in the plugin
+            pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
+            open(pthpath, 'w').write(op.abspath('.'))
+        os.chdir(cocoa_project_path)
+        print "Building the XCode project"
+        os.system('xcodebuild')
+        os.chdir('..')
     elif ui == 'qt':
         os.chdir(op.join('qt', edition))
         os.system('python gen.py')
