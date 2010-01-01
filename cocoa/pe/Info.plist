@@ -29,7 +29,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© Hardcoded Software, 2009</string>
+	<string>© Hardcoded Software, 2010</string>
 	<key>SUFeedURL</key>
 	<string>http://www.hardcoded.net/updates/dupeguru_pe.appcast</string>
 	<key>SUPublicDSAKeyFile</key>
