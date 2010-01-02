@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-08-31
-# $Id$
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
 # 
 # This software is licensed under the "HS" License as described in the "LICENSE" file, 
