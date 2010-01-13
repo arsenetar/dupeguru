@@ -103,6 +103,9 @@ def getmatches(pictures, cached_blocks, threshold=75, match_scaled=False, j=job.
     for ref in j.iter_with_progress(pictures, 'Matched %d/%d pictures'):
         others = pictures_copy if match_scaled else dimensions2pictures[ref.dimensions]
         others.remove(ref)
+        if ref.is_ref:
+            # Don't spend time comparing two ref pics together.
+            others = [pic for pic in others if not pic.is_ref]
         if others:
             cache_ids = [f.cache_id for f in others]
             args = (ref.cache_id, cache_ids, cached_blocks.dbname, threshold)

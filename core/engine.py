@@ -216,6 +216,8 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
     j.start_job(len(possible_matches), '0 matches found')
     for group in possible_matches:
         for first, second in itertools.combinations(group, 2):
+            if first.is_ref and second.is_ref:
+                continue # Don't spend time comparing two ref pics together.
             if first.md5partial == second.md5partial:
                 if partial or first.md5 == second.md5:
                     result.append(Match(first, second, 100))
