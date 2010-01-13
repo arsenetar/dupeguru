@@ -36,7 +36,7 @@ print_and_do("python C:\\Python26\\pyinstaller\\Build.py dgse.spec")
 os.remove('verinfo_tmp')
 
 print_and_do("del dist\\*90.dll") # They're in vcredist, no need to include them
-print_and_do("xcopy /Y /S /I help\\dupeguru_help dist\\help")
+print_and_do("xcopy /Y /S /I ..\\..\\help_se\\dupeguru_help dist\\help")
 
 aicom = '"\\Program Files\\Caphyon\\Advanced Installer\\AdvancedInstaller.com"'
 shutil.copy('installer.aip', 'installer_tmp.aip') # this is so we don'a have to re-commit installer.aip at every version change
