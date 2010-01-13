@@ -102,8 +102,12 @@ class File(object):
         elif field == 'md5':
             try:
                 fp = io.open(self.path, 'rb')
-                filedata = fp.read()
-                md5 = hashlib.md5(filedata)
+                md5 = hashlib.md5()
+                CHUNK_SIZE = 8192
+                filedata = fp.read(CHUNK_SIZE)
+                while filedata:
+                    md5.update(filedata)
+                    filedata = fp.read(CHUNK_SIZE)
                 self.md5 = md5.digest()
                 fp.close()
             except Exception:
