@@ -386,24 +386,20 @@ http://www.hardcoded.net/licenses/hs_license
     [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
     int r = n2i([py getOperationalErrorCount]);
     id lastAction = [[ProgressController mainProgressController] jobId];
-    if ([lastAction isEqualTo:jobCopy])
-    {
+    if ([lastAction isEqualTo:jobCopy]) {
         if (r > 0)
             [Dialogs showMessage:[NSString stringWithFormat:@"%d file(s) couldn't be copied.",r]];
         else
             [Dialogs showMessage:@"All marked files were copied sucessfully."];
     }
-    if ([lastAction isEqualTo:jobMove])
-    {
+    else if ([lastAction isEqualTo:jobMove]) {
         if (r > 0)
             [Dialogs showMessage:[NSString stringWithFormat:@"%d file(s) couldn't be moved. They were kept in the results, and still are marked.",r]];
         else
             [Dialogs showMessage:@"All marked files were moved sucessfully."];
     }
-    if ([lastAction isEqualTo:jobDelete])
-    {
-        if (r > 0)
-        {
+    else if ([lastAction isEqualTo:jobDelete]) {
+        if (r > 0) {
             NSString *msg = @"%d file(s) couldn't be sent to Trash. They were kept in the results, "\
                 "and still are marked. See the F.A.Q. section in the help file for details.";
             [Dialogs showMessage:[NSString stringWithFormat:msg,r]];
@@ -411,6 +407,12 @@ http://www.hardcoded.net/licenses/hs_license
         else
             [Dialogs showMessage:@"All marked files were sucessfully sent to Trash."];
     }
+    else if ([lastAction isEqualTo:jobScan]) {
+        NSInteger groupCount = [[py getOutlineView:0 childCountsForPath:[NSArray array]] count];
+        if (groupCount == 0)
+            [Dialogs showMessage:@"No duplicates found."];
+    }
+    
     // Re-activate toolbar items right after the progress bar stops showing instead of waiting until
     // a mouse-over is performed
     [[[self window] toolbar] validateVisibleItems];
