@@ -52,7 +52,6 @@ http://www.hardcoded.net/licenses/hs_license
     VTIsIntIn *vtScanTypeIsTag = [[[VTIsIntIn alloc] initWithValues:[NSIndexSet indexSetWithIndex:3] reverse:NO] autorelease];
     [NSValueTransformer setValueTransformer:vtScanTypeIsTag forName:@"vtScanTypeIsTag"];
     _directoryPanel = nil;
-    _appName = APPNAME;
     return self;
 }
 

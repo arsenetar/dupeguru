@@ -34,6 +34,8 @@ class AllFilesAreRefError(Exception):
     pass
 
 class DupeGuru(RegistrableApplication):
+    DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
+    
     def __init__(self, data_module, appdata, appid):
         RegistrableApplication.__init__(self, appid)
         self.appdata = appdata

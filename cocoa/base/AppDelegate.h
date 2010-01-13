@@ -19,7 +19,6 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet NSMenuItem *unlockMenuItem;
     IBOutlet ResultWindowBase *result;
     
-    NSString *_appName;
     DetailsPanelBase *_detailsPanel;
 }
 - (IBAction)unlockApp:(id)sender;

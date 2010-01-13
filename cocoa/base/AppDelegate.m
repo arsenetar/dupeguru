@@ -13,21 +13,14 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Consts.h"
 
 @implementation AppDelegateBase
-- (id)init
-{
-    self = [super init];
-    _appName = @"";
-    return self;
-}
-
 - (IBAction)unlockApp:(id)sender
 {
     if ([[self py] isRegistered])
         return;
-    RegistrationInterface *ri = [[RegistrationInterface alloc] initWithApp:[self py] name:_appName limitDescription:LIMIT_DESC];
+    RegistrationInterface *ri = [[RegistrationInterface alloc] initWithApp:[self py]];
     if ([ri enterCode] == NSOKButton)
     {
-        NSString *menuTitle = [NSString stringWithFormat:@"Thanks for buying %@!",_appName];
+        NSString *menuTitle = [NSString stringWithFormat:@"Thanks for buying %@!",[py appName]];
         [unlockMenuItem setTitle:menuTitle];
     }
     [ri release];
@@ -50,8 +43,8 @@ http://www.hardcoded.net/licenses/hs_license
     else
         [result resetColumnsToDefault:nil];
     //Reg stuff
-    if ([RegistrationInterface showNagWithApp:[self py] name:_appName limitDescription:LIMIT_DESC])
-        [unlockMenuItem setTitle:[NSString stringWithFormat:@"Thanks for buying %@!",_appName]];
+    if ([RegistrationInterface showNagWithApp:[self py]])
+        [unlockMenuItem setTitle:[NSString stringWithFormat:@"Thanks for buying %@!",[py appName]]];
     //Restore results
     [py loadIgnoreList];
     [py loadResults];

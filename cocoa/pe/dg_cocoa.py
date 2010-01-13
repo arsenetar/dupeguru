@@ -199,6 +199,12 @@ class PyDupeGuru(PyApp):
         self.app.progress.job_cancelled = True
     
     #---Registration
+    def appName(self):
+        return "dupeGuru Picture Edition"
+    
+    def demoLimitDescription(self):
+        return self.app.DEMO_LIMIT_DESC
+    
     @objc.signature('i@:')
     def isRegistered(self):
         return self.app.registered

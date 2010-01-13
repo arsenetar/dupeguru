@@ -52,7 +52,6 @@ class DupeGuru(DupeGuruBase, QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
     DELTA_COLUMNS = frozenset()
-    DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
     
     def __init__(self, data_module, appid):
         appdata = unicode(QDesktopServices.storageLocation(QDesktopServices.DataLocation))

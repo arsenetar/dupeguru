@@ -37,7 +37,6 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super init];
     _directoryPanel = nil;
-    _appName = APPNAME;
     return self;
 }
 

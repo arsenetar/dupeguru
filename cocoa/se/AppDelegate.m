@@ -43,7 +43,6 @@ http://www.hardcoded.net/licenses/hs_license
     VTIsIntIn *vt = [[[VTIsIntIn alloc] initWithValues:[NSIndexSet indexSetWithIndex:1] reverse:YES] autorelease];
     [NSValueTransformer setValueTransformer:vt forName:@"vtScanTypeIsNotContent"];
     _directoryPanel = nil;
-    _appName = APPNAME;
     return self;
 }
 

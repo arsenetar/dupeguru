@@ -8,5 +8,4 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import "../base/Consts.h"
 
-#define APPNAME @"dupeGuru PE"
 #define ImageLoadedNotification @"ImageLoadedNotification"

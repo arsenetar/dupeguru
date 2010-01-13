@@ -3,6 +3,9 @@ syntax: glob
 .DS_Store
 *.pyc
 *.so
+*.mode1v3
+*.pbxuser
+*.tm_build_errors
 conf.yaml
 build
 core_pe/modules/block/block.c
