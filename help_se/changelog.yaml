@@ -1,3 +1,10 @@
+- date: 2010-01-13
+  version: 2.9.1
+  description: |
+    * Improved memory usage for Contents scans. (#75)
+    * Improved scanning speed when ref directories are involved. (#77)
+    * Show a message dialog at the end of the scan if no duplicates are found. (#81)
+    * Fixed a bug sometimes causing the small files threshold pref to be ignored. [Mac OS X] (#75)
 - date: 2009-11-03
   version: 2.9.0
   description: |
