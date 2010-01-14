@@ -11,8 +11,7 @@ import logging
 import plistlib
 import re
 
-from Foundation import *
-from AppKit import *
+from AppKit import NSBundle, NSUserDefaults, NSURL
 from appscript import app, k, CommandError
 
 from hsutil import io
@@ -23,7 +22,7 @@ from hsutil.cocoa import as_fetch
 from core import fs
 from core import app_cocoa, directories
 from . import data
-from .cache import string_to_colors, Cache
+from .cache import string_to_colors
 from .scanner import ScannerPE
 
 mainBundle = NSBundle.mainBundle()
@@ -74,7 +73,7 @@ def get_iphoto_database_path():
 
 def get_iphoto_pictures(plistpath):
     if not io.exists(plistpath):
-        raise InvalidPath(self)
+        return []
     s = io.open(plistpath).read()
     # There was a case where a guy had 0x10 chars in his plist, causing expat errors on loading
     s = s.replace('\x10', '')
@@ -124,9 +123,8 @@ class Directories(directories.Directories):
     
     def add_path(self, path):
         if path == Path('iPhoto Library'):
-            if path in self:
-                raise AlreadyThereError()
-            self._dirs.append(path)
+            if path not in self:
+                self._dirs.append(path)
         else:
             directories.Directories.add_path(self, path)
     
