@@ -10,8 +10,6 @@ import os
 import logging
 import sqlite3 as sqlite
 
-import hsutil.sqlite
-
 from _cache import string_to_colors
 
 def colors_to_string(colors):
@@ -35,31 +33,10 @@ def colors_to_string(colors):
 class Cache(object):
     """A class to cache picture blocks.
     """
-    def __init__(self, db=':memory:', threaded=True):
-        def create_tables():
-            sql = "create table pictures(path TEXT, blocks TEXT)"
-            self.con.execute(sql);
-            sql = "create index idx_path on pictures (path)"
-            self.con.execute(sql)
-        
+    def __init__(self, db=':memory:'):
         self.dbname = db
-        if threaded:
-            self.con = hsutil.sqlite.ThreadedConn(db, True)
-        else:
-            self.con = sqlite.connect(db, isolation_level=None)
-        try:
-            self.con.execute("select * from pictures where 1=2")
-        except sqlite.OperationalError: # new db
-            create_tables()
-        except sqlite.DatabaseError, e: # corrupted db
-            logging.warning('Could not create picture cache because of an error: %s', str(e))
-            self.con.close()
-            os.remove(db)
-            if threaded:
-                self.con = hsutil.sqlite.ThreadedConn(db, True)
-            else:
-                self.con = sqlite.connect(db, isolation_level=None)
-            create_tables()
+        self.con = None
+        self._create_con()
     
     def __contains__(self, key):
         sql = "select count(*) from pictures where path = ?"
@@ -108,9 +85,36 @@ class Cache(object):
         except sqlite.DatabaseError, e:
             logging.warning('DatabaseError while setting %r for key %r: %s', value, key, str(e))
     
+    def _create_con(self, second_try=False):
+        def create_tables():
+            sql = "create table pictures(path TEXT, blocks TEXT)"
+            self.con.execute(sql);
+            sql = "create index idx_path on pictures (path)"
+            self.con.execute(sql)
+        
+        self.con = sqlite.connect(self.dbname, isolation_level=None)
+        try:
+            self.con.execute("select * from pictures where 1=2")
+        except sqlite.OperationalError: # new db
+            create_tables()
+        except sqlite.DatabaseError, e: # corrupted db
+            if second_try:
+                raise # Something really strange is happening
+            logging.warning('Could not create picture cache because of an error: %s', str(e))
+            self.con.close()
+            os.remove(self.dbname)
+            self._create_con(second_try=True)
+    
     def clear(self):
-        sql = "delete from pictures"
-        self.con.execute(sql)
+        self.close()
+        if self.dbname != ':memory:':
+            os.remove(self.dbname)
+        self._create_con()
+    
+    def close(self):
+        if self.con is not None:
+            self.con.close()
+        self.con = None
     
     def filter(self, func):
         to_delete = [key for key in self if not func(key)]

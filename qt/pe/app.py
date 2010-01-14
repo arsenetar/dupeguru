@@ -65,7 +65,7 @@ class DupeGuru(DupeGuruBase):
     def _setup(self):
         self.scanner = ScannerPE()
         self.directories.fileclasses = [File]
-        self.scanner.cached_blocks = Cache(op.join(self.appdata, 'cached_pictures.db'))
+        self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
         DupeGuruBase._setup(self)
     
     def _update_options(self):

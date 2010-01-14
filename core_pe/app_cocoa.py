@@ -136,8 +136,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru Picture Edition', appid=5)
         self.scanner = ScannerPE()
         self.directories = Directories()
-        p = op.join(self.appdata, 'cached_pictures.db')
-        self.scanner.cached_blocks = Cache(p)
+        self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     
     def _do_delete(self, j):
         def op(dupe):

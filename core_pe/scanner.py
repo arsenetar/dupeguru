@@ -10,12 +10,18 @@
 from core.scanner import Scanner
 
 from . import matchbase
+from .cache import Cache
 
 class ScannerPE(Scanner):
-    cached_blocks = None
+    cache_path = None
     match_scaled = False
     threshold = 75
     
     def _getmatches(self, files, j):
-        return matchbase.getmatches(files, self.cached_blocks, self.threshold, self.match_scaled, j)
+        return matchbase.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
+    
+    def clear_picture_cache(self):
+        cache = Cache(self.cache_path)
+        cache.clear()
+        cache.close()
     

@@ -38,7 +38,7 @@ class PyDupeGuru(PyApp):
         self.app.scanner.ignore_list.Clear()
     
     def clearPictureCache(self):
-        self.app.scanner.cached_blocks.clear()
+        self.app.scanner.clear_picture_cache()
     
     def doScan(self):
         return self.app.start_scanning()
