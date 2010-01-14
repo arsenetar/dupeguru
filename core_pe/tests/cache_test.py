@@ -137,18 +137,3 @@ class TCCacheSQLEscape(TestCase):
         except KeyError:
             self.fail()
     
-
-class TCCacheThreaded(TestCase):
-    def test_access_cache(self):
-        def thread_run():
-            try:
-                c['foo'] = [(1,2,3)]
-            except sqlite.ProgrammingError:
-                self.fail()
-        
-        c = Cache()
-        t = threading.Thread(target=thread_run)
-        t.start()
-        t.join()
-        self.assertEqual([(1,2,3)], c['foo']) 
-    
