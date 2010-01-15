@@ -32,7 +32,7 @@ http://www.hardcoded.net/licenses/hs_license
 }
 /* Helpers */
 - (void)fillColumnsMenu;
-- (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn;
+- (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
 - (NSArray *)getSelected:(BOOL)aDupesOnly;

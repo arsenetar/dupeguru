@@ -66,7 +66,7 @@ http://www.hardcoded.net/licenses/hs_license
     [cell addItemWithTitle:@"Normal"];
     [cell addItemWithTitle:@"Reference"];
     [cell addItemWithTitle:@"Excluded"];
-    for (int i=0;i<[[cell itemArray] count];i++)
+    for (NSInteger i=0;i<[[cell itemArray] count];i++)
     {
         NSMenuItem *mi = [[cell itemArray] objectAtIndex:i];
         [mi setTarget:self];
@@ -135,8 +135,8 @@ http://www.hardcoded.net/licenses/hs_license
     }
     else
     {
-        int state = n2i([[node buffer] objectAtIndex:1]);
-        int newState = state == 2 ? 0 : 2; // If excluded, put it back
+        NSInteger state = n2i([[node buffer] objectAtIndex:1]);
+        NSInteger newState = state == 2 ? 0 : 2; // If excluded, put it back
         [_py setDirectory:p2a([node indexPath]) state:i2n(newState)];
         [node resetAllBuffers];
         [directories display];
@@ -153,7 +153,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)addDirectory:(NSString *)directory
 {
-    int r = [[_py addDirectory:directory] intValue];
+    NSInteger r = [[_py addDirectory:directory] intValue];
     if (r)
     {
         NSString *m;
@@ -186,7 +186,7 @@ http://www.hardcoded.net/licenses/hs_license
     }
     [removeButton setEnabled:YES];
     OVNode *node = [directories itemAtRow:[directories selectedRow]];
-    int state = n2i([[node buffer] objectAtIndex:1]);
+    NSInteger state = n2i([[node buffer] objectAtIndex:1]);
     NSString *buttonText = state == 2 ? @"Put Back" : @"Remove";
     [removeButton setTitle:buttonText];
 }
@@ -201,7 +201,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 { 
     OVNode *node = item;
-    int state = n2i([[node buffer] objectAtIndex:1]);
+    NSInteger state = n2i([[node buffer] objectAtIndex:1]);
     if ([cell isKindOfClass:[NSTextFieldCell class]])
     {
         NSTextFieldCell *textCell = cell;

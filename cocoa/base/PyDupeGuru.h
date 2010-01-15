@@ -62,5 +62,5 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)setDisplayDeltaValues:(NSNumber *)display_delta_values;
 - (void)setEscapeFilterRegexp:(NSNumber *)escape_filter_regexp;
 - (void)setRemoveEmptyFolders:(NSNumber *)remove_empty_folders;
-- (void)setSizeThreshold:(int)size_threshold;
+- (void)setSizeThreshold:(NSInteger)size_threshold;
 @end

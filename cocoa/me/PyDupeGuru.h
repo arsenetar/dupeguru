@@ -19,5 +19,5 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)enable:(NSNumber *)enable scanForTag:(NSString *)tag;
 - (void)scanDeadTracks;
 - (void)removeDeadTracks;
-- (int)deadTrackCount;
+- (NSInteger)deadTrackCount;
 @end

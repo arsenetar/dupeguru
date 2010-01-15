@@ -19,7 +19,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
     // get flags and strip the lower 16 (device dependant) bits
-    unsigned int flags = ( [theEvent modifierFlags] & 0x00FF );
+    NSUInteger flags = ( [theEvent modifierFlags] & 0x00FF );
     if (((key == NSDeleteFunctionKey) || (key == NSDeleteCharacter)) && (flags == 0))
         [self sendAction:@selector(removeSelected:) to:[self delegate]];
     else
@@ -85,9 +85,9 @@ http://www.hardcoded.net/licenses/hs_license
     [mi setTarget:self];
 }
 
-- (NSTableColumn *)getColumnForIdentifier:(int)aIdentifier title:(NSString *)aTitle width:(int)aWidth refCol:(NSTableColumn *)aColumn
+- (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn
 {
-    NSNumber *n = [NSNumber numberWithInt:aIdentifier];
+    NSNumber *n = [NSNumber numberWithInteger:aIdentifier];
     NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:[n stringValue]];
     [col setWidth:aWidth];
     [col setEditable:NO];
@@ -123,7 +123,7 @@ http://www.hardcoded.net/licenses/hs_license
     while (col = [e nextObject])
     {
         colId = [col identifier];
-        width = [NSNumber numberWithFloat:[col width]];
+        width = [NSNumber numberWithDouble:[col width]];
         [result setObject:width forKey:colId];
     }
     return result;
@@ -136,7 +136,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSIndexSet *indexes = [matches selectedRowIndexes];
     NSMutableArray *nodeList = [NSMutableArray array];
     OVNode *node;
-    int i = [indexes firstIndex];
+    NSInteger i = [indexes firstIndex];
     while (i != NSNotFound)
     {
         node = [matches itemAtRow:i];
@@ -238,7 +238,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)copyMarked:(id)sender
 {
-    int mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [[py getMarkCount] intValue];
     if (!mark_count)
         return;
     NSOpenPanel *op = [NSOpenPanel openPanel];
@@ -257,7 +257,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)deleteMarked:(id)sender
 {
-    int mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [[py getMarkCount] intValue];
     if (!mark_count)
         return;
     if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to send %d files to Trash. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
@@ -269,7 +269,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)expandAll:(id)sender
 {
-    for (int i=0;i < [matches numberOfRows];i++)
+    for (NSInteger i=0;i < [matches numberOfRows];i++)
         [matches expandItem:[matches itemAtRow:i]];
 }
 
@@ -281,7 +281,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)moveMarked:(id)sender
 {
-    int mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [[py getMarkCount] intValue];
     if (!mark_count)
         return;
     NSOpenPanel *op = [NSOpenPanel openPanel];
@@ -313,8 +313,8 @@ http://www.hardcoded.net/licenses/hs_license
 {
     // It might look like a complicated way to get the length of the current dupe list on the py side
     // but after a lot of fussing around, believe it or not, it actually is.
-    int matchesTag = _powerMode ? 2 : 0;
-    int startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
+    NSInteger matchesTag = _powerMode ? 2 : 0;
+    NSInteger startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
     [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
     // In some cases (when in a filtered view in Power Marker mode, it's possible that the demoted
@@ -384,7 +384,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)jobCompleted:(NSNotification *)aNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-    int r = n2i([py getOperationalErrorCount]);
+    NSInteger r = n2i([py getOperationalErrorCount]);
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobCopy]) {
         if (r > 0)

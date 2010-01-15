@@ -36,7 +36,7 @@ http://www.hardcoded.net/licenses/hs_license
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
-    int i = n2i([py getIgnoreListCount]);
+    NSInteger i = n2i([py getIgnoreListCount]);
     if (!i)
         return;
     if ([Dialogs askYesNo:[NSString stringWithFormat:@"Do you really want to remove all %d items from the ignore list?",i]] == NSAlertSecondButtonReturn) // NO
@@ -139,8 +139,8 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)renameSelected:(id)sender
 {
-    int col = [matches columnWithIdentifier:@"0"];
-    int row = [matches selectedRow];
+    NSInteger col = [matches columnWithIdentifier:@"0"];
+    NSInteger row = [matches selectedRow];
     [matches editColumn:col row:row withEvent:[NSApp currentEvent] select:YES];
 }
 
@@ -187,7 +187,7 @@ http://www.hardcoded.net/licenses/hs_license
     [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
     [_py setMixFileKind:[ud objectForKey:@"mixFileKind"]];
     [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
-    int r = n2i([py doScan]);
+    NSInteger r = n2i([py doScan]);
     [matches reloadData];
     [self refreshStats];
     if (r == 1)
@@ -272,7 +272,7 @@ http://www.hardcoded.net/licenses/hs_license
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobScanDeadTracks])
     {
-        int deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
+        NSInteger deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
         if (deadTrackCount > 0)
         {
             NSString *msg = @"Your iTunes Library contains %d dead tracks ready to be removed. Continue?";

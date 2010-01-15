@@ -95,7 +95,7 @@ http://www.hardcoded.net/licenses/hs_license
     [ud setObject: [result getColumnsWidth] forKey:@"columnsWidth"];
     [py saveIgnoreList];
     [py saveResults];
-    int sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
+    NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
     if (sc >= 10)
     {
         sc = -1;
