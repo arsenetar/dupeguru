@@ -11,11 +11,10 @@ from __future__ import unicode_literals
 import logging
 
 import objc
-from AppKit import *
+from AppKit import NSWorkspace
 
 from hsutil import io
 from hsutil.path import Path
-from hsutil.str import get_file_ext
 
 from core import fs
 from core.app_cocoa import DupeGuru as DupeGuruBase

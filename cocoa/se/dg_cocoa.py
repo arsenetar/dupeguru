@@ -5,7 +5,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import objc
-from AppKit import *
+from Foundation import NSObject
 
 from core_se.app_cocoa import DupeGuru
 from core import scanner

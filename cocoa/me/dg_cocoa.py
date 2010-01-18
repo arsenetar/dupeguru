@@ -5,7 +5,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import objc
-from AppKit import *
+from Foundation import NSObject
 
 from core_me.app_cocoa import DupeGuruME
 from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,

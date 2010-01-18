@@ -5,7 +5,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import objc
-from AppKit import *
+from Foundation import NSObject
 
 from core_pe import app_cocoa as app_pe_cocoa
 

@@ -11,7 +11,7 @@ import logging
 import plistlib
 import re
 
-from AppKit import NSBundle, NSUserDefaults, NSURL
+from Foundation import NSBundle, NSUserDefaults, NSURL
 from appscript import app, k, CommandError
 
 from hsutil import io
