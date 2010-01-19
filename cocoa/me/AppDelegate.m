@@ -82,6 +82,16 @@ http://www.hardcoded.net/licenses/hs_license
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
+    // index 3 is just after "Export Results to XHTML"
+    NSMenuItem *mi = [actionsMenu insertItemWithTitle:@"Remove Dead Tracks in iTunes" 
+        action:@selector(removeDeadTracks:) keyEquivalent:@"" atIndex:3];
+    [mi setTarget:result];
+    [super applicationDidFinishLaunching:aNotification];
+}
+
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
     if (![[result window] isVisible])

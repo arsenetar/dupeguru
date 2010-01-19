@@ -7,6 +7,8 @@
 import objc
 from Foundation import NSObject
 
+from hsutil.cocoa import signature
+
 from core_me.app_cocoa import DupeGuruME
 from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
     SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
@@ -133,7 +135,7 @@ class PyDupeGuru(PyApp):
         self.app.sort_groups(key,asc)
     
     #---Information
-    @objc.signature('i@:')
+    @signature('i@:')
     def deadTrackCount(self):
         return len(self.app.dead_tracks)
     
@@ -150,11 +152,11 @@ class PyDupeGuru(PyApp):
         return self.app.last_op_error_count
     
     #---Data
-    @objc.signature('i@:i')
+    @signature('i@:i')
     def getOutlineViewMaxLevel_(self, tag):
         return self.app.GetOutlineViewMaxLevel(tag)
     
-    @objc.signature('@@:i@')
+    @signature('@@:i@')
     def getOutlineView_childCountsForPath_(self, tag, node_path):
         return self.app.GetOutlineViewChildCounts(tag, node_path)
     
@@ -231,11 +233,11 @@ class PyDupeGuru(PyApp):
     def demoLimitDescription(self):
         return self.app.DEMO_LIMIT_DESC
     
-    @objc.signature('i@:')
+    @signature('i@:')
     def isRegistered(self):
         return self.app.registered
     
-    @objc.signature('i@:@@')
+    @signature('i@:@@')
     def isCodeValid_withEmail_(self, code, email):
         return self.app.is_code_valid(code, email)
     
