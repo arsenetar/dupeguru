@@ -16,7 +16,7 @@ from preferences_dialog import PreferencesDialog
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_me'
     NAME = 'dupeGuru Music Edition'
-    VERSION = '5.7.0'
+    VERSION = '5.7.1'
     DELTA_COLUMNS = frozenset([2, 3, 4, 5, 7, 8])
     
     def __init__(self):

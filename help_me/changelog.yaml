@@ -1,3 +1,11 @@
+- date: 2010-01-19
+  version: 5.7.1
+  description: |
+    * The Mac OS X version of dupeGuru ME is now 64-bit!
+    * Improved memory usage for Contents scans. (#75)
+    * Improved scanning speed when ref directories are involved. (#77)
+    * Show a message dialog at the end of the scan if no duplicates are found. (#81)
+    * Re-added the "Remove Dead Tracks in iTunes" menu item which got lost in 5.7.0.
 - date: 2009-12-18
   version: 5.7.0
   description: |
