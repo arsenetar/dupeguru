@@ -38,7 +38,7 @@ if __name__ == '__main__':
         help="Type of UI to build. 'qt' or 'cocoa'. Default is determined by your system.")
     parser.add_option('--dev', action='store_true', dest='dev', default=False,
         help="If this flag is set, will configure for dev builds.")
-    parser.add_option('--64bit', action='store_false', dest='build64', default=False,
+    parser.add_option('--64bit', action='store_true', dest='build64', default=False,
         help="Build 64-bit app if possible.")
     (options, args) = parser.parse_args()
     main(options.edition, options.ui, options.dev, options.build64)
