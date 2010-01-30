@@ -4,14 +4,37 @@
  */
 #include "Python.h"
 #include "structmember.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+/* I know that there strtol out there, but it requires a pointer to
+ * a char, which would in turn require me to buffer my chars around,
+ * making the whole process slower.
+ */
+static inline long
+xchar_to_long(char c)
+{
+    if ((c >= 48) && (c <= 57)) { /* 0-9 */
+        return c - 48;
+    }
+    else if ((c >= 65) && (c <= 70)) { /* A-F */
+        return c - 55;
+    }
+    else if ((c >= 97) && (c <= 102)) { /* a-f */
+        return c - 87;
+    }
+    return 0;
+}
 
 static PyObject*
 cache_string_to_colors(PyObject *self, PyObject *args)
 {
     char *s;
+    Py_ssize_t char_count;
     PyObject *result;
+    int i;
 
-    if (!PyArg_ParseTuple(args, "s", &s)) {
+    if (!PyArg_ParseTuple(args, "s#", &s, &char_count)) {
         return NULL;
     }
     
@@ -20,21 +43,15 @@ cache_string_to_colors(PyObject *self, PyObject *args)
         return NULL;
     }
     
-    while (*s) {
-        long r, g, b, whole_color;
-        char buffer[7];
+    char_count = (char_count / 6) * 6;
+    for (i=0; i<char_count; i+=6) {
+        long r, g, b;
         PyObject *color_tuple;
         PyObject *pi;
         
-        strncpy(buffer, s, 6);
-        if (strlen(buffer) < 6) { /* incomplete color, terminate loop */
-            break;
-        }
-        s += 6;
-        whole_color = strtol(buffer, NULL, 16);
-        r = whole_color >> 16;
-        g = (whole_color >> 8) & 0xff;
-        b = whole_color & 0xff;
+        r = (xchar_to_long(s[i]) << 4) + xchar_to_long(s[i+1]);
+        g = (xchar_to_long(s[i+2]) << 4) + xchar_to_long(s[i+3]);
+        b = (xchar_to_long(s[i+4]) << 4) + xchar_to_long(s[i+5]);
         
         color_tuple = PyTuple_New(3);
         pi = PyInt_FromLong(r);
