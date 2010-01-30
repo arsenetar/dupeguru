@@ -2,6 +2,7 @@
  * Created On: 2010-01-30
  * Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
  */
+#define PY_SSIZE_T_CLEAN
 #include "Python.h"
 #include "structmember.h"
 #include "stdio.h"
@@ -11,7 +12,7 @@
  * a char, which would in turn require me to buffer my chars around,
  * making the whole process slower.
  */
-static inline long
+static long
 xchar_to_long(char c)
 {
     if ((c >= 48) && (c <= 57)) { /* 0-9 */
@@ -30,53 +31,45 @@ static PyObject*
 cache_string_to_colors(PyObject *self, PyObject *args)
 {
     char *s;
-    Py_ssize_t char_count;
+    Py_ssize_t char_count, color_count, i;
     PyObject *result;
-    int i;
-
     if (!PyArg_ParseTuple(args, "s#", &s, &char_count)) {
         return NULL;
     }
     
-    result = PyList_New(0);
+    color_count = (char_count / 6);
+    result = PyList_New(color_count);
     if (result == NULL) {
         return NULL;
     }
     
-    char_count = (char_count / 6) * 6;
-    for (i=0; i<char_count; i+=6) {
+    for (i=0; i<color_count; i++) {
         long r, g, b;
+        Py_ssize_t ci;
         PyObject *color_tuple;
-        PyObject *pi;
+        PyObject *pr, *pg, *pb;
         
-        r = (xchar_to_long(s[i]) << 4) + xchar_to_long(s[i+1]);
-        g = (xchar_to_long(s[i+2]) << 4) + xchar_to_long(s[i+3]);
-        b = (xchar_to_long(s[i+4]) << 4) + xchar_to_long(s[i+5]);
+        ci = i * 6;
+        r = (xchar_to_long(s[ci]) << 4) + xchar_to_long(s[ci+1]);
+        g = (xchar_to_long(s[ci+2]) << 4) + xchar_to_long(s[ci+3]);
+        b = (xchar_to_long(s[ci+4]) << 4) + xchar_to_long(s[ci+5]);
         
-        color_tuple = PyTuple_New(3);
-        pi = PyInt_FromLong(r);
-        if (pi == NULL) {
+        pr = PyInt_FromLong(r);
+        pg = PyInt_FromLong(g);
+        pb = PyInt_FromLong(b);
+        if (pb == NULL) {
             Py_DECREF(result);
             return NULL;
         }
-        PyTuple_SET_ITEM(color_tuple, 0, pi);
-        pi = PyInt_FromLong(g);
-        if (pi == NULL) {
+        color_tuple = PyTuple_Pack(3, pr, pg, pb);
+        if (color_tuple == NULL) {
+            Py_DECREF(pr);
+            Py_DECREF(pg);
+            Py_DECREF(pb);
             Py_DECREF(result);
             return NULL;
         }
-        PyTuple_SET_ITEM(color_tuple, 1, pi);
-        pi = PyInt_FromLong(b);
-        if (pi == NULL) {
-            Py_DECREF(result);
-            return NULL;
-        }
-        PyTuple_SET_ITEM(color_tuple, 2, pi);
-        
-        if (PyList_Append(result, color_tuple) < 0) {
-            Py_DECREF(result);
-            return NULL;
-        }
+        PyList_SET_ITEM(result, i, color_tuple);
     }
     
     return result;
