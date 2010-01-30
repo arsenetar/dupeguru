@@ -9,7 +9,6 @@ syntax: glob
 conf.yaml
 build
 core_pe/modules/block/block.c
-core_pe/modules/cache/cache.c
 cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/dg_cocoa.plugin
