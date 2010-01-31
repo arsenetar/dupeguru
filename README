@@ -30,7 +30,6 @@ General dependencies
 - Mako, to generate help files. (http://www.makotemplates.org/)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
 - Nose, to run unit tests. (http://somethingaboutorange.com/mrl/projects/nose/)
-- Cython to compile a few optimized bottlenecks. (http://www.cython.org/)
 - Python Imaging Library for dupeGuru PE. (http://www.pythonware.com/products/pil/)
 
 OS X prerequisites
@@ -44,7 +43,7 @@ OS X prerequisites
 Windows prerequisites
 ---
 
-- Visual Studio 2008 (Express is enough) is needed to build the Cython extensions. (http://www.microsoft.com/Express/)
+- Visual Studio 2008 (Express is enough) is needed to build C extensions. (http://www.microsoft.com/Express/)
 - PyQt 4.6 (http://www.riverbankcomputing.co.uk/news)
 - PyInstaller, if you want to build a exe. You don't need it if you just want to run dupeGuru. (http://www.pyinstaller.org/)
 - Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)

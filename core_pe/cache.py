@@ -20,7 +20,7 @@ def colors_to_string(colors):
     """
     return ''.join(['%02x%02x%02x' % (r,g,b) for r,g,b in colors])
 
-# This function is an important bottleneck of dupeGuru PE. It has been converted to Cython.
+# This function is an important bottleneck of dupeGuru PE. It has been converted to C.
 # def string_to_colors(s):
 #     """Transform the string 's' in a list of 3 sized tuples.
 #     """

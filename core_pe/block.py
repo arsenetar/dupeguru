@@ -8,7 +8,7 @@
 
 from _block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 
-# Converted to Cython
+# Converted to C
 # def getblock(image):
 #     """Returns a 3 sized tuple containing the mean color of 'image'.
 #     
@@ -43,7 +43,7 @@ from _block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 #             result.append(getblock(crop))
 #     return result
 
-# Converted to Cython
+# Converted to C
 # def getblocks2(image,block_count_per_side):
 #     """Returns a list of blocks (3 sized tuples).
 #     
@@ -70,7 +70,7 @@ from _block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 #             result.append(getblock(crop))
 #     return result
 
-# Converted to Cython
+# Converted to C
 # def diff(first, second):
 #     """Returns the difference between the first block and the second.
 #     
@@ -80,7 +80,7 @@ from _block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 #     r2, g2, b2 = second
 #     return abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2)
 
-# Converted to Cython
+# Converted to C
 # def avgdiff(first, second, limit=768, min_iterations=1):
 #     """Returns the average diff between first blocks and seconds.
 #     

@@ -8,7 +8,7 @@
 
 from _block import getblocks
 
-# Converted to Cython
+# Converted to C
 # def getblock(image):
 #     width = image.width()
 #     height = image.height()
