@@ -25,10 +25,8 @@ def move(src, dst):
     print 'Moving %s --> %s' % (src, dst)
     os.rename(src, dst)
 
-# The CC=gcc-4.0 thing is because, in Snow Leopard, gcc-4.2 can't compile these units.
-os.environ['CC'] = 'gcc-4.0'
-os.chdir(op.join('modules', 'block'))
+os.chdir('modules')
 os.system('python setup.py build_ext --inplace')
-os.chdir(op.join('..', '..'))
-move(op.join('modules', 'block', '_block.so'), op.join('.', '_block.so'))
-move(op.join('modules', 'block', '_block.pyd'), op.join('.', '_block.pyd'))
+os.chdir('..')
+move(op.join('modules', '_block.so'), op.join('.', '_block.so'))
+move(op.join('modules', '_block.pyd'), op.join('.', '_block.pyd'))
