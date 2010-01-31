@@ -10,5 +10,8 @@ from distutils.core import setup
 from distutils.extension import Extension
 
 setup(
-    ext_modules = [Extension("_block", ["block.c"])]
+    ext_modules = [
+        Extension("_block", ["block.c"]),
+        Extension("_cache", ["cache.c"]),
+    ]
 )
