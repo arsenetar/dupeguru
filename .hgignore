@@ -8,7 +8,6 @@ syntax: glob
 *.tm_build_errors
 conf.yaml
 build
-core_pe/modules/block/block.c
 cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/dg_cocoa.plugin
