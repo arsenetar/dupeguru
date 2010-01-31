@@ -10,6 +10,8 @@
 #define PY_SSIZE_T_CLEAN
 #include "Python.h"
 
+/* It seems like MS VC defines min/max already */
+#ifndef _MSC_VER
 static int
 max(int a, int b)
 {
@@ -21,6 +23,7 @@ min(int a, int b)
 {
     return b < a ? b : a;
 }
+#endif
 
 static PyObject*
 getblock(PyObject *image)

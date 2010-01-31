@@ -15,6 +15,8 @@ static PyObject *NoBlocksError;
 /* avgdiff/maxdiff has been called with 2 block lists of different size. */
 static PyObject *DifferentBlockCountError;
 
+/* It seems like MS VC defines min/max already */
+#ifndef _MSC_VER
 static int
 max(int a, int b)
 {
@@ -26,6 +28,7 @@ min(int a, int b)
 {
     return b < a ? b : a;
 }
+#endif
 
 /* Create a tuple out of an array of integers. */
 static PyObject*
