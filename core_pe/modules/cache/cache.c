@@ -33,6 +33,7 @@ cache_string_to_colors(PyObject *self, PyObject *args)
     char *s;
     Py_ssize_t char_count, color_count, i;
     PyObject *result;
+    
     if (!PyArg_ParseTuple(args, "s#", &s, &char_count)) {
         return NULL;
     }
@@ -62,10 +63,10 @@ cache_string_to_colors(PyObject *self, PyObject *args)
             return NULL;
         }
         color_tuple = PyTuple_Pack(3, pr, pg, pb);
+        Py_DECREF(pr);
+        Py_DECREF(pg);
+        Py_DECREF(pb);
         if (color_tuple == NULL) {
-            Py_DECREF(pr);
-            Py_DECREF(pg);
-            Py_DECREF(pb);
             Py_DECREF(result);
             return NULL;
         }
