@@ -10,19 +10,19 @@
 #define PY_SSIZE_T_CLEAN
 #include "Python.h"
 
-static inline int
+static int
 max(int a, int b)
 {
     return b > a ? b : a;
 }
 
-static inline int
+static int
 min(int a, int b)
 {
     return b < a ? b : a;
 }
 
-static inline PyObject*
+static PyObject*
 getblock(PyObject *image)
 {
     int width, height, pixel_count, red, green, blue, bytes_per_line;

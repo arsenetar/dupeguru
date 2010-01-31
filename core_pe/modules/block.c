@@ -15,13 +15,13 @@ static PyObject *NoBlocksError;
 /* avgdiff/maxdiff has been called with 2 block lists of different size. */
 static PyObject *DifferentBlockCountError;
 
-static inline int
+static int
 max(int a, int b)
 {
     return b > a ? b : a;
 }
 
-static inline int
+static int
 min(int a, int b)
 {
     return b < a ? b : a;
@@ -100,7 +100,7 @@ getblock(PyObject *image)
 /* Returns the difference between the first block and the second.
  * It returns an absolute sum of the 3 differences (RGB).
  */
-static inline int
+static int
 diff(PyObject *first, PyObject *second)
 {
     Py_ssize_t r1, g1, b1, r2, b2, g2;
