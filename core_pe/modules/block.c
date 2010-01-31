@@ -32,16 +32,18 @@ min(int a, int b)
 
 /* Create a tuple out of an array of integers. */
 static PyObject*
-inttuple(int numbers[], int count)
+inttuple(int n, ...)
 {
     int i;
     PyObject *pnumber;
     PyObject *result;
+    va_list numbers;
     
-    result = PyTuple_New(count);
+    va_start(numbers, n);
+    result = PyTuple_New(n);
     
-    for (i=0; i<count; i++) {
-        pnumber = PyInt_FromLong(numbers[i]);
+    for (i=0; i<n; i++) {
+        pnumber = PyInt_FromLong(va_arg(numbers, int));
         if (pnumber == NULL) {
             Py_DECREF(result);
             return NULL;
@@ -49,6 +51,7 @@ inttuple(int numbers[], int count)
         PyTuple_SET_ITEM(result, i, pnumber);
     }
     
+    va_end(numbers);
     return result;
 }
 
@@ -58,10 +61,11 @@ inttuple(int numbers[], int count)
 static PyObject*
 getblock(PyObject *image)
 {
-    int i, totals[3] = {0, 0, 0};
+    int i, totr, totg, totb;
     Py_ssize_t pixel_count;
     PyObject *ppixels;
     
+    totr = totg = totb = 0;
     ppixels = PyObject_CallMethod(image, "getdata", NULL);
     if (ppixels == NULL) {
         return NULL;
@@ -84,20 +88,20 @@ getblock(PyObject *image)
         Py_DECREF(pg);
         Py_DECREF(pb);
         
-        totals[0] += r;
-        totals[1] += g;
-        totals[2] += b;
+        totr += r;
+        totg += g;
+        totb += b;
     }
     
     Py_DECREF(ppixels);
     
     if (pixel_count) {
-        totals[0] /= pixel_count;
-        totals[1] /= pixel_count;
-        totals[2] /= pixel_count;
+        totr /= pixel_count;
+        totg /= pixel_count;
+        totb /= pixel_count;
     }
     
-    return inttuple(totals, 3);
+    return inttuple(3, totr, totg, totb);
 }
 
 /* Returns the difference between the first block and the second.
@@ -178,7 +182,7 @@ block_getblocks2(PyObject *self, PyObject *args)
         top = min(ih*block_height, height-block_height);
         bottom = top + block_height;
         for (iw=0; iw<block_count_per_side; iw++) {
-            int left, right, box[4];
+            int left, right;
             PyObject *pbox;
             PyObject *pmethodname;
             PyObject *pcrop;
@@ -186,11 +190,7 @@ block_getblocks2(PyObject *self, PyObject *args)
             
             left = min(iw*block_width, width-block_width);
             right = left + block_width;
-            box[0] = left;
-            box[1] = top;
-            box[2] = right;
-            box[3] = bottom;
-            pbox = inttuple(box, 4);
+            pbox = inttuple(4, left, top, right, bottom);
             pmethodname = PyString_FromString("crop");
             pcrop = PyObject_CallMethodObjArgs(image, pmethodname, pbox);
             Py_DECREF(pmethodname);
