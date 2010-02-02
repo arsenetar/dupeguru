@@ -133,7 +133,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="397705219">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Less results</string>
+								<string key="NSContents">Fewer results</string>
 								<reference key="NSSupport" ref="649492068"/>
 								<reference key="NSControlView" ref="171701149"/>
 								<reference key="NSBackgroundColor" ref="71910056"/>
