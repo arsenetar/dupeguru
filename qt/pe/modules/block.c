@@ -5,7 +5,7 @@
  * This software is licensed under the "HS" License as described in the "LICENSE" file, 
  * which should be included with this package. The terms are also available at 
  * http://www.hardcoded.net/licenses/hs_license
- */
+**/
 
 #define PY_SSIZE_T_CLEAN
 #include "Python.h"
@@ -26,22 +26,16 @@ min(int a, int b)
 #endif
 
 static PyObject*
-getblock(PyObject *image)
+getblock(PyObject *image, int width, int height)
 {
-    int width, height, pixel_count, red, green, blue, bytes_per_line;
-    PyObject *pi, *pred, *pgreen, *pblue;
+    int pixel_count, red, green, blue, bytes_per_line;
+    PyObject *pred, *pgreen, *pblue;
     PyObject *result;
     
     red = green = blue = 0;
-    pi = PyObject_CallMethod(image, "width", NULL);
-    width = PyInt_AsSsize_t(pi);
-    Py_DECREF(pi);
-    pi = PyObject_CallMethod(image, "height", NULL);
-    height = PyInt_AsSsize_t(pi);
-    Py_DECREF(pi);
     pixel_count = width * height;
     if (pixel_count) {
-        PyObject *sipptr;
+        PyObject *sipptr, *pi;
         char *s;
         int i;
         
@@ -50,6 +44,7 @@ getblock(PyObject *image)
         Py_DECREF(pi);
         
         sipptr = PyObject_CallMethod(image, "bits", NULL);
+        /* int(sipptr) returns the address of the pointer */
         pi = PyObject_CallMethod(sipptr, "__int__", NULL);
         Py_DECREF(sipptr);
         s = (char *)PyInt_AsSsize_t(pi);
@@ -90,6 +85,15 @@ getblock(PyObject *image)
     return result;
 }
 
+/* block_getblocks(QImage image, int block_count_per_side) -> [(int r, int g, int b), ...]
+ *
+ * Compute blocks out of `image`. Note the use of min/max when compes the time of computing widths
+ * and heights and positions. This is to cover the case where the width or height of the image is
+ * smaller than `block_count_per_side`. In these cases, blocks will be, of course, 1 pixel big. But
+ * also, because all compared block lists are required to be of the same size, any block that has
+ * no pixel to be assigned to will simply be assigned the last pixel. This is why we have
+ * min(..., height-block_height-1) and stuff like that.
+**/
 static PyObject*
 block_getblocks(PyObject *self, PyObject *args)
 {
@@ -135,7 +139,7 @@ block_getblocks(PyObject *self, PyObject *args)
                 Py_DECREF(result);
                 return NULL;
             }
-            pblock = getblock(pcrop);
+            pblock = getblock(pcrop, block_width, block_height);
             Py_DECREF(pcrop);
             if (pblock == NULL) {
                 Py_DECREF(result);
