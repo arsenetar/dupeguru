@@ -23,6 +23,9 @@
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
 		CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */; };
 		CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A710946CE20078B0DB /* DetailsPanel.xib */; };
+		CE7AC9181119911200D02F6C /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */; };
+		CE7AC9191119911200D02F6C /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9161119911200D02F6C /* progress.xib */; };
+		CE7AC91A1119911200D02F6C /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9171119911200D02F6C /* registration.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
 		CE80DB300FC192D60086DCA6 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB200FC192D60086DCA6 /* Outline.m */; };
@@ -34,9 +37,6 @@
 		CE80DB360FC192D60086DCA6 /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB2D0FC192D60086DCA6 /* ValueTransformers.m */; };
 		CE80DB470FC193650086DCA6 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB460FC193650086DCA6 /* NSNotificationAdditions.m */; };
 		CE80DB4A0FC193770086DCA6 /* NSImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB490FC193770086DCA6 /* NSImageAdditions.m */; };
-		CE80DB760FC194760086DCA6 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE80DB700FC194760086DCA6 /* ErrorReportWindow.xib */; };
-		CE80DB770FC194760086DCA6 /* progress.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE80DB720FC194760086DCA6 /* progress.nib */; };
-		CE80DB780FC194760086DCA6 /* registration.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE80DB740FC194760086DCA6 /* registration.nib */; };
 		CE80DB8A0FC1951C0086DCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB830FC1951C0086DCA6 /* AppDelegate.m */; };
 		CE80DB8B0FC1951C0086DCA6 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */; };
 		CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB890FC1951C0086DCA6 /* ResultWindow.m */; };
@@ -84,7 +84,7 @@
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
-		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dg_cocoa.plugin; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
 		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE6044EB0FE6796200B71262 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = ../base/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
@@ -92,6 +92,9 @@
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
 		CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = ../../base/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE77C8A710946CE20078B0DB /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPanel.xib; sourceTree = "<group>"; };
+		CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
+		CE7AC9161119911200D02F6C /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
+		CE7AC9171119911200D02F6C /* registration.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = registration.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -115,9 +118,6 @@
 		CE80DB460FC193650086DCA6 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNotificationAdditions.m; path = ../../cocoalib/NSNotificationAdditions.m; sourceTree = SOURCE_ROOT; };
 		CE80DB480FC193770086DCA6 /* NSImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSImageAdditions.h; path = ../../cocoalib/NSImageAdditions.h; sourceTree = SOURCE_ROOT; };
 		CE80DB490FC193770086DCA6 /* NSImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSImageAdditions.m; path = ../../cocoalib/NSImageAdditions.m; sourceTree = SOURCE_ROOT; };
-		CE80DB710FC194760086DCA6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../../cocoalib/English.lproj/ErrorReportWindow.xib; sourceTree = SOURCE_ROOT; };
-		CE80DB730FC194760086DCA6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../../cocoalib/English.lproj/progress.nib; sourceTree = SOURCE_ROOT; };
-		CE80DB750FC194760086DCA6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../../cocoalib/English.lproj/registration.nib; sourceTree = SOURCE_ROOT; };
 		CE80DB820FC1951C0086DCA6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../base/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE80DB830FC1951C0086DCA6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../base/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE80DB840FC1951C0086DCA6 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = ../base/Consts.h; sourceTree = SOURCE_ROOT; };
@@ -254,13 +254,22 @@
 			path = xib;
 			sourceTree = "<group>";
 		};
+		CE7AC9141119911200D02F6C /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */,
+				CE7AC9161119911200D02F6C /* progress.xib */,
+				CE7AC9171119911200D02F6C /* registration.xib */,
+			);
+			name = xib;
+			path = ../../cocoalib/xib;
+			sourceTree = SOURCE_ROOT;
+		};
 		CE80DB1A0FC192AB0086DCA6 /* cocoalib */ = {
 			isa = PBXGroup;
 			children = (
+				CE7AC9141119911200D02F6C /* xib */,
 				CEBAE4220FDA97E000B7887D /* brsinglelineformatter */,
-				CE80DB700FC194760086DCA6 /* ErrorReportWindow.xib */,
-				CE80DB720FC194760086DCA6 /* progress.nib */,
-				CE80DB740FC194760086DCA6 /* registration.nib */,
 				CE80DB480FC193770086DCA6 /* NSImageAdditions.h */,
 				CE80DB490FC193770086DCA6 /* NSImageAdditions.m */,
 				CE80DB450FC193650086DCA6 /* NSNotificationAdditions.h */,
@@ -377,14 +386,14 @@
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
 				CEFCDE2D0AB0418600C33A93 /* dgpe_logo_32.png in Resources */,
-				CE80DB760FC194760086DCA6 /* ErrorReportWindow.xib in Resources */,
-				CE80DB770FC194760086DCA6 /* progress.nib in Resources */,
-				CE80DB780FC194760086DCA6 /* registration.nib in Resources */,
 				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
 				CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */,
 				CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */,
 				CE031751109B340A00517EE6 /* Preferences.xib in Resources */,
 				CE031754109B345200517EE6 /* MainMenu.xib in Resources */,
+				CE7AC9181119911200D02F6C /* ErrorReportWindow.xib in Resources */,
+				CE7AC9191119911200D02F6C /* progress.xib in Resources */,
+				CE7AC91A1119911200D02F6C /* registration.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,33 +430,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CE80DB700FC194760086DCA6 /* ErrorReportWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE80DB710FC194760086DCA6 /* English */,
-			);
-			name = ErrorReportWindow.xib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE80DB720FC194760086DCA6 /* progress.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE80DB730FC194760086DCA6 /* English */,
-			);
-			name = progress.nib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE80DB740FC194760086DCA6 /* registration.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE80DB750FC194760086DCA6 /* English */,
-			);
-			name = registration.nib;
-			sourceTree = SOURCE_ROOT;
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4C08A954540054247B /* Release */ = {

@@ -30,6 +30,9 @@
 		CE3FBDD31094637800B72D77 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3FBDD11094637800B72D77 /* DetailsPanel.xib */; };
 		CE3FBDD41094637800B72D77 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3FBDD21094637800B72D77 /* DirectoryPanel.xib */; };
 		CE49DEF60FDFEB810098617B /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */; };
+		CE4B59C81119919700C06C9E /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */; };
+		CE4B59C91119919700C06C9E /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C61119919700C06C9E /* progress.xib */; };
+		CE4B59CA1119919700C06C9E /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C71119919700C06C9E /* registration.xib */; };
 		CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE10FC6C12E00EC695D /* Dialogs.m */; };
 		CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */; };
 		CE515DF50FC6C12E00EC695D /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE50FC6C12E00EC695D /* Outline.m */; };
@@ -39,9 +42,6 @@
 		CE515DF90FC6C12E00EC695D /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DEE0FC6C12E00EC695D /* Table.m */; };
 		CE515DFA0FC6C12E00EC695D /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DF00FC6C12E00EC695D /* Utils.m */; };
 		CE515DFB0FC6C12E00EC695D /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DF20FC6C12E00EC695D /* ValueTransformers.m */; };
-		CE515E020FC6C13E00EC695D /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE515DFC0FC6C13E00EC695D /* ErrorReportWindow.xib */; };
-		CE515E030FC6C13E00EC695D /* progress.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE515DFE0FC6C13E00EC695D /* progress.nib */; };
-		CE515E040FC6C13E00EC695D /* registration.nib in Resources */ = {isa = PBXBuildFile; fileRef = CE515E000FC6C13E00EC695D /* registration.nib */; };
 		CE515E1D0FC6C19300EC695D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E160FC6C19300EC695D /* AppDelegate.m */; };
 		CE515E1E0FC6C19300EC695D /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E190FC6C19300EC695D /* DirectoryPanel.m */; };
 		CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E1C0FC6C19300EC695D /* ResultWindow.m */; };
@@ -93,6 +93,9 @@
 		CE3FBDD21094637800B72D77 /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = ../../base/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE49DEF20FDFEB810098617B /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
+		CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
+		CE4B59C61119919700C06C9E /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
+		CE4B59C71119919700C06C9E /* registration.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = registration.xib; sourceTree = "<group>"; };
 		CE515DE00FC6C12E00EC695D /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE515DE10FC6C12E00EC695D /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE515DE20FC6C12E00EC695D /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -112,9 +115,6 @@
 		CE515DF00FC6C12E00EC695D /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = ../../cocoalib/Utils.m; sourceTree = SOURCE_ROOT; };
 		CE515DF10FC6C12E00EC695D /* ValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueTransformers.h; path = ../../cocoalib/ValueTransformers.h; sourceTree = SOURCE_ROOT; };
 		CE515DF20FC6C12E00EC695D /* ValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValueTransformers.m; path = ../../cocoalib/ValueTransformers.m; sourceTree = SOURCE_ROOT; };
-		CE515DFD0FC6C13E00EC695D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../../cocoalib/English.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
-		CE515DFF0FC6C13E00EC695D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../../cocoalib/English.lproj/progress.nib; sourceTree = "<group>"; };
-		CE515E010FC6C13E00EC695D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../../cocoalib/English.lproj/registration.nib; sourceTree = "<group>"; };
 		CE515E150FC6C19300EC695D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../base/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE515E160FC6C19300EC695D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../base/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE515E170FC6C19300EC695D /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = ../base/Consts.h; sourceTree = SOURCE_ROOT; };
@@ -263,13 +263,22 @@
 			path = ../../cocoalib/brsinglelineformatter;
 			sourceTree = SOURCE_ROOT;
 		};
+		CE4B59C41119919700C06C9E /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */,
+				CE4B59C61119919700C06C9E /* progress.xib */,
+				CE4B59C71119919700C06C9E /* registration.xib */,
+			);
+			name = xib;
+			path = ../../cocoalib/xib;
+			sourceTree = SOURCE_ROOT;
+		};
 		CE515DDD0FC6C09400EC695D /* cocoalib */ = {
 			isa = PBXGroup;
 			children = (
+				CE4B59C41119919700C06C9E /* xib */,
 				CE49DEF10FDFEB810098617B /* brsinglelineformatter */,
-				CE515DFC0FC6C13E00EC695D /* ErrorReportWindow.xib */,
-				CE515DFE0FC6C13E00EC695D /* progress.nib */,
-				CE515E000FC6C13E00EC695D /* registration.nib */,
 				CE515DE00FC6C12E00EC695D /* Dialogs.h */,
 				CE515DE10FC6C12E00EC695D /* Dialogs.m */,
 				CE515DE20FC6C12E00EC695D /* HSErrorReportWindow.h */,
@@ -371,14 +380,14 @@
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
-				CE515E020FC6C13E00EC695D /* ErrorReportWindow.xib in Resources */,
-				CE515E030FC6C13E00EC695D /* progress.nib in Resources */,
-				CE515E040FC6C13E00EC695D /* registration.nib in Resources */,
 				CE6E0E9F1054EB97008D9390 /* dsa_pub.pem in Resources */,
 				CE3FBDD31094637800B72D77 /* DetailsPanel.xib in Resources */,
 				CE3FBDD41094637800B72D77 /* DirectoryPanel.xib in Resources */,
 				CE900AD2109B238600754048 /* Preferences.xib in Resources */,
 				CE900AD7109B2A9B00754048 /* MainMenu.xib in Resources */,
+				CE4B59C81119919700C06C9E /* ErrorReportWindow.xib in Resources */,
+				CE4B59C91119919700C06C9E /* progress.xib in Resources */,
+				CE4B59CA1119919700C06C9E /* registration.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,33 +421,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CE515DFC0FC6C13E00EC695D /* ErrorReportWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE515DFD0FC6C13E00EC695D /* English */,
-			);
-			name = ErrorReportWindow.xib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE515DFE0FC6C13E00EC695D /* progress.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE515DFF0FC6C13E00EC695D /* English */,
-			);
-			name = progress.nib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE515E000FC6C13E00EC695D /* registration.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE515E010FC6C13E00EC695D /* English */,
-			);
-			name = registration.nib;
-			sourceTree = SOURCE_ROOT;
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4C08A954540054247B /* Release */ = {
