@@ -8,7 +8,7 @@ from core.app_cocoa_inter import PyDupeGuruBase
 from core_pe import app_cocoa as app_pe_cocoa
 
 # Fix py2app imports which chokes on relative imports
-from core_pe import block, cache, matchbase, data
+from core_pe import block, cache, matchbase, data, _block_osx
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
