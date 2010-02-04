@@ -7,59 +7,17 @@
  * http://www.hardcoded.net/licenses/hs_license
  */
 
-#define PY_SSIZE_T_CLEAN
-#include "Python.h"
+#include "common.h"
 
 /* avgdiff/maxdiff has been called with empty lists */
 static PyObject *NoBlocksError;
 /* avgdiff/maxdiff has been called with 2 block lists of different size. */
 static PyObject *DifferentBlockCountError;
 
-/* It seems like MS VC defines min/max already */
-#ifndef _MSC_VER
-static int
-max(int a, int b)
-{
-    return b > a ? b : a;
-}
-
-static int
-min(int a, int b)
-{
-    return b < a ? b : a;
-}
-#endif
-
-/* Create a tuple out of an array of integers. */
-static PyObject*
-inttuple(int n, ...)
-{
-    int i;
-    PyObject *pnumber;
-    PyObject *result;
-    va_list numbers;
-    
-    va_start(numbers, n);
-    result = PyTuple_New(n);
-    
-    for (i=0; i<n; i++) {
-        pnumber = PyInt_FromLong(va_arg(numbers, int));
-        if (pnumber == NULL) {
-            Py_DECREF(result);
-            return NULL;
-        }
-        PyTuple_SET_ITEM(result, i, pnumber);
-    }
-    
-    va_end(numbers);
-    return result;
-}
-
 /* Returns a 3 sized tuple containing the mean color of 'image'.    
  * image: a PIL image or crop.
  */
-static PyObject*
-getblock(PyObject *image)
+static PyObject* getblock(PyObject *image)
 {
     int i, totr, totg, totb;
     Py_ssize_t pixel_count;
@@ -107,8 +65,7 @@ getblock(PyObject *image)
 /* Returns the difference between the first block and the second.
  * It returns an absolute sum of the 3 differences (RGB).
  */
-static int
-diff(PyObject *first, PyObject *second)
+static int diff(PyObject *first, PyObject *second)
 {
     Py_ssize_t r1, g1, b1, r2, b2, g2;
     PyObject *pr, *pg, *pb;
@@ -144,8 +101,7 @@ If it is 10, for example, 100 blocks will be returns (10 width, 10 height). The 
 necessarely cover square areas. The area covered by each block will be proportional to the image\n\
 itself.\n");
 
-static PyObject*
-block_getblocks2(PyObject *self, PyObject *args)
+static PyObject* block_getblocks2(PyObject *self, PyObject *args)
 {
     int block_count_per_side, width, height, block_width, block_height, ih;
     PyObject *image;
@@ -218,8 +174,7 @@ PyDoc_STRVAR(block_avgdiff_doc,
 If the result surpasses limit, limit + 1 is returned, except if less than min_iterations\n\
 iterations have been made in the blocks.\n");
 
-static PyObject*
-block_avgdiff(PyObject *self, PyObject *args)
+static PyObject* block_avgdiff(PyObject *self, PyObject *args)
 {
     PyObject *first, *second;
     int limit, min_iterations;

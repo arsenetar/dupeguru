@@ -12,7 +12,6 @@
 		CE031751109B340A00517EE6 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031750109B340A00517EE6 /* Preferences.xib */; };
 		CE031754109B345200517EE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031753109B345200517EE6 /* MainMenu.xib */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_pe_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */; };
-		CE0C46AA0FA0647E000BE99B /* PictureBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C46A90FA0647E000BE99B /* PictureBlocks.m */; };
 		CE15C8A80ADEB8B50061D4A5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE15C8C00ADEB8D40061D4A5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -77,8 +76,6 @@
 		CE031750109B340A00517EE6 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		CE031753109B345200517EE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_pe_help; path = ../../help_pe/dupeguru_pe_help; sourceTree = SOURCE_ROOT; };
-		CE0C46A80FA0647E000BE99B /* PictureBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureBlocks.h; sourceTree = "<group>"; };
-		CE0C46A90FA0647E000BE99B /* PictureBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureBlocks.m; sourceTree = "<group>"; };
 		CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -155,8 +152,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CE0C46A80FA0647E000BE99B /* PictureBlocks.h */,
-				CE0C46A90FA0647E000BE99B /* PictureBlocks.m */,
 				CE381C9509914ACE003581CE /* AppDelegate.h */,
 				CE381C9409914ACE003581CE /* AppDelegate.m */,
 				CE848A1809DD85810004CB44 /* Consts.h */,
@@ -409,7 +404,6 @@
 				CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */,
 				CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */,
 				CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */,
-				CE0C46AA0FA0647E000BE99B /* PictureBlocks.m in Sources */,
 				CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */,
 				CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */,
 				CE80DB300FC192D60086DCA6 /* Outline.m in Sources */,

@@ -6,8 +6,8 @@
  * which should be included with this package. The terms are also available at 
  * http://www.hardcoded.net/licenses/hs_license
  */
-#define PY_SSIZE_T_CLEAN
-#include "Python.h"
+
+#include "common.h"
 
 /* I know that there strtol out there, but it requires a pointer to
  * a char, which would in turn require me to buffer my chars around,
@@ -49,24 +49,13 @@ cache_string_to_colors(PyObject *self, PyObject *args)
         long r, g, b;
         Py_ssize_t ci;
         PyObject *color_tuple;
-        PyObject *pr, *pg, *pb;
         
         ci = i * 6;
         r = (xchar_to_long(s[ci]) << 4) + xchar_to_long(s[ci+1]);
         g = (xchar_to_long(s[ci+2]) << 4) + xchar_to_long(s[ci+3]);
         b = (xchar_to_long(s[ci+4]) << 4) + xchar_to_long(s[ci+5]);
         
-        pr = PyInt_FromLong(r);
-        pg = PyInt_FromLong(g);
-        pb = PyInt_FromLong(b);
-        if (pb == NULL) {
-            Py_DECREF(result);
-            return NULL;
-        }
-        color_tuple = PyTuple_Pack(3, pr, pg, pb);
-        Py_DECREF(pr);
-        Py_DECREF(pg);
-        Py_DECREF(pb);
+        color_tuple = inttuple(3, r, g, b);
         if (color_tuple == NULL) {
             Py_DECREF(result);
             return NULL;

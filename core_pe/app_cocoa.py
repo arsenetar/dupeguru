@@ -11,7 +11,7 @@ import logging
 import plistlib
 import re
 
-from Foundation import NSBundle, NSUserDefaults, NSURL
+from Foundation import NSUserDefaults, NSURL
 from appscript import app, k, CommandError
 
 from hsutil import io
@@ -21,13 +21,8 @@ from hsutil.cocoa import as_fetch
 
 from core import fs
 from core import app_cocoa, directories
-from . import data
-from .cache import string_to_colors
+from . import data, _block_osx
 from .scanner import ScannerPE
-
-mainBundle = NSBundle.mainBundle()
-PictureBlocks = mainBundle.classNamed_('PictureBlocks')
-assert PictureBlocks is not None
 
 class Photo(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
@@ -43,17 +38,16 @@ class Photo(fs.File):
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field == 'dimensions':
-            size = PictureBlocks.getImageSize_(unicode(self.path))
-            self.dimensions = (size.width, size.height)
+            self.dimensions = _block_osx.get_image_size(unicode(self.path))
     
     def get_blocks(self, block_count_per_side):
         try:
-            blocks = PictureBlocks.getBlocksFromImagePath_blockCount_(unicode(self.path), block_count_per_side)
+            blocks = _block_osx.getblocks(unicode(self.path), block_count_per_side)
         except Exception as e:
             raise IOError('The reading of "%s" failed with "%s"' % (unicode(self.path), unicode(e)))
         if not blocks:
             raise IOError('The picture %s could not be read' % unicode(self.path))
-        return string_to_colors(blocks)
+        return blocks
     
 
 class IPhoto(Photo):

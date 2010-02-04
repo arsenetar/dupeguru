@@ -6,12 +6,25 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import sys
+
 from distutils.core import setup
 from distutils.extension import Extension
 
+exts = []
+
+exts.append(Extension("_block", ["block.c", "common.c"]))
+exts.append(Extension("_cache", ["cache.c", "common.c"]))
+
+if sys.platform == 'darwin':
+    exts.append(Extension(
+        "_block_osx", ["block_osx.m", "common.c"],
+        extra_link_args=[
+            "-framework", "CoreFoundation",
+            "-framework", "Foundation",
+            "-framework", "ApplicationServices",
+        ]))
+
 setup(
-    ext_modules = [
-        Extension("_block", ["block.c"]),
-        Extension("_cache", ["cache.c"]),
-    ]
+    ext_modules = exts,
 )
