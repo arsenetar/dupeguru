@@ -26,9 +26,9 @@ def main():
     print "Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui)
     if ui == 'cocoa':
         app_path = {
-            'se': 'cocoa/se/build/Release/dupeGuru.app',
-            'me': 'cocoa/me/build/Release/dupeGuru ME.app',
-            'pe': 'cocoa/pe/build/Release/dupeGuru PE.app',
+            'se': 'cocoa/se/build/release/dupeGuru.app',
+            'me': 'cocoa/me/build/release/dupeGuru ME.app',
+            'pe': 'cocoa/pe/build/release/dupeGuru PE.app',
         }[edition]
         build_dmg(app_path, '.')
     elif ui == 'qt':
