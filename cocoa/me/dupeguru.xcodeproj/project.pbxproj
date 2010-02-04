@@ -427,7 +427,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "dupeGuru ME";
@@ -466,8 +465,6 @@
 		CED596C6111AF56D00C0CF2B /* dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "dupeGuru ME";
