@@ -9,8 +9,7 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-import objc
-from Foundation import NSObject
+from hsutil.cocoa.objcmin import NSObject
 
 from hsutil.cocoa import signature
 from hsutil.reg import InvalidCodeError

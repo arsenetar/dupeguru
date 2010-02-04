@@ -11,13 +11,13 @@ import logging
 import plistlib
 import re
 
-from Foundation import NSUserDefaults, NSURL
 from appscript import app, k, CommandError
 
 from hsutil import io
 from hsutil.str import get_file_ext
 from hsutil.path import Path
 from hsutil.cocoa import as_fetch
+from hsutil.cocoa.objcmin import NSUserDefaults, NSURL
 
 from core import fs
 from core import app_cocoa, directories

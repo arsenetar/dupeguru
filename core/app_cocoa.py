@@ -6,14 +6,14 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import objc
-from Foundation import (NSNotificationCenter, NSUserDefaults, NSSearchPathForDirectoriesInDomains,
-    NSApplicationSupportDirectory, NSUserDomainMask)
 import logging
 import os.path as op
 
 from hsutil import cocoa, job
 from hsutil.cocoa import install_exception_hook
+from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
+    NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
+    NSWorkspace, NSWorkspaceRecycleOperation)
 from hsutil.misc import stripnone
 from hsutil.reg import RegistrationRequired
 
@@ -54,15 +54,10 @@ class DupeGuru(app.DupeGuru):
     @staticmethod
     def _recycle_dupe(dupe):
         # local import because first appkit import takes a lot of memory. we want to avoid it.
-        from AppKit import NSWorkspace, NSWorkspaceRecycleOperation
         directory = unicode(dupe.path[:-1])
         filename = dupe.name
-        if objc.__version__ == '1.4': # For a while, we have to support this.
-            result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
-                NSWorkspaceRecycleOperation, directory, '', [filename])
-        else:
-            result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
-                NSWorkspaceRecycleOperation, directory, '', [filename], None)
+        result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
+            NSWorkspaceRecycleOperation, directory, '', [filename], None)
     
     def _start_job(self, jobid, func):
         try:
@@ -117,7 +112,6 @@ class DupeGuru(app.DupeGuru):
     
     def OpenSelected(self):
         # local import because first appkit import takes a lot of memory. we want to avoid it.
-        from AppKit import NSWorkspace
         if self.selected_dupes:
             path = unicode(self.selected_dupes[0].path)
             NSWorkspace.sharedWorkspace().openFile_(path)
@@ -154,7 +148,6 @@ class DupeGuru(app.DupeGuru):
     
     def RevealSelected(self):
         # local import because first appkit import takes a lot of memory. we want to avoid it.
-        from AppKit import NSWorkspace
         if self.selected_dupes:
             path = unicode(self.selected_dupes[0].path)
             NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(path,'')
