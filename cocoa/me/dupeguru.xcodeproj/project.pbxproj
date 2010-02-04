@@ -423,7 +423,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C01FCF4C08A954540054247B /* Release */ = {
+		C01FCF4C08A954540054247B /* release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -433,21 +433,47 @@
 				PRODUCT_NAME = "dupeGuru ME";
 				WRAPPER_EXTENSION = app;
 			};
-			name = Release;
+			name = release;
 		};
-		C01FCF5008A954540054247B /* Release */ = {
+		C01FCF5008A954540054247B /* release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				ARCHS = (
+					i386,
+					x86_64,
+					ppc,
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
-			name = Release;
+			name = release;
+		};
+		CED596C5111AF56D00C0CF2B /* dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = dev;
+		};
+		CED596C6111AF56D00C0CF2B /* dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = "dupeGuru ME";
+				WRAPPER_EXTENSION = app;
+			};
+			name = dev;
 		};
 /* End XCBuildConfiguration section */
 
@@ -455,18 +481,20 @@
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dupeguru" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C01FCF4C08A954540054247B /* Release */,
+				C01FCF4C08A954540054247B /* release */,
+				CED596C6111AF56D00C0CF2B /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C01FCF5008A954540054247B /* Release */,
+				C01FCF5008A954540054247B /* release */,
+				CED596C5111AF56D00C0CF2B /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = release;
 		};
 /* End XCConfigurationList section */
 	};

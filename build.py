@@ -23,10 +23,7 @@ def main():
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
-    build64 = conf['build64']
     print "Building dupeGuru {0} with UI {1}".format(edition.upper(), ui)
-    if build64:
-        print "If possible, 64-bit builds will be made"
     if dev:
         print "Building in Dev mode"
     add_to_pythonpath('.')
@@ -82,8 +79,10 @@ def main():
         os.chdir(cocoa_project_path)
         print "Building the XCode project"
         args = []
-        if build64:
-            args.append('ARCHS="x86_64 i386 ppc"')
+        if dev:
+            args.append('-configuration dev')
+        else:
+            args.append('-configuration release')
         args = ' '.join(args)
         os.system('xcodebuild {0}'.format(args))
         os.chdir('..')

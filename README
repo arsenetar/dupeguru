@@ -30,14 +30,13 @@ General dependencies
 - Mako, to generate help files. (http://www.makotemplates.org/)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
 - Nose, to run unit tests. (http://somethingaboutorange.com/mrl/projects/nose/)
-- Python Imaging Library for dupeGuru PE. (http://www.pythonware.com/products/pil/)
 
 OS X prerequisites
 -----
 
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
-- PyObjC. Although Tiger support has been dropped with dupeGuru 1.7, I still use PyObjC 1.4 because funky stuff happens with newer releases. However, it's mostly related to packaging with py2app. (http://pyobjc.sourceforge.net/)
+- PyObjC 2.2. (http://pyobjc.sourceforge.net/)
 - py2app (http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html)
 
 Windows prerequisites
@@ -45,6 +44,7 @@ Windows prerequisites
 
 - Visual Studio 2008 (Express is enough) is needed to build C extensions. (http://www.microsoft.com/Express/)
 - PyQt 4.6 (http://www.riverbankcomputing.co.uk/news)
+- Python Imaging Library for dupeGuru PE. (http://www.pythonware.com/products/pil/)
 - PyInstaller, if you want to build a exe. You don't need it if you just want to run dupeGuru. (http://www.pyinstaller.org/)
 - Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)
 
@@ -55,7 +55,7 @@ First, make sure you meet the dependencies listed in the section above. Then you
 
 	python configure.py
 	
-If you want, you can specify a UI to use with the `--ui` option. So, if you want to build dupeGuru with Qt on OS X, then you have to type `python configure.py --ui=qt`. You can also use the `--dev` flag to indicate a dev build (it will build `mg_cocoa.plugin` in alias mode).
+If you want, you can specify a UI to use with the `--ui` option. So, if you want to build dupeGuru with Qt on OS X, then you have to type `python configure.py --ui=qt`. You can also use the `--dev` flag to indicate a dev build (it will build `dg_cocoa.plugin` in alias mode and use the "dev" config in XCode).
 
 Then, just build the thing and then run it with:
 
@@ -65,3 +65,8 @@ Then, just build the thing and then run it with:
 If you want to create ready-to-upload package, run:
 
 	python package.py
+
+64-bit on OS X
+---
+
+The "release" configuration of dupeGuru's XCode project build with archs "i386 x86_64 ppc". However there are currently problems with py2app and 64 bit. If you want to correctly build 64-bit apps, refer to http://www.hardcoded.net/articles/building-64-bit-pyobjc-applications-with-py2app.htm .

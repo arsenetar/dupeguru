@@ -19,13 +19,15 @@ def main():
     conf = yaml.load(open('conf.yaml'))
     edition = conf['edition']
     ui = conf['ui']
+    dev = conf['dev']
     print "Running dupeGuru {0} with UI {1}".format(edition.upper(), ui)
     if ui == 'cocoa':
+        subfolder = 'dev' if dev else 'release'
         app_path = {
-            'se': 'cocoa/se/build/Release/dupeGuru.app',
-            'me': 'cocoa/me/build/Release/dupeGuru\\ ME.app',
-            'pe': 'cocoa/pe/build/Release/dupeGuru\\ PE.app',
-        }[edition]
+            'se': 'cocoa/se/build/{0}/dupeGuru.app',
+            'me': 'cocoa/me/build/{0}/dupeGuru\\ ME.app',
+            'pe': 'cocoa/pe/build/{0}/dupeGuru\\ PE.app',
+        }[edition].format(subfolder)
         os.system('open {0}'.format(app_path))
     elif ui == 'qt':
         add_to_pythonpath('.')
