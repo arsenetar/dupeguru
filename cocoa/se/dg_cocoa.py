@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import objc
+from hsutil.cocoa import signature
 
 from core import scanner
 from core.app_cocoa_inter import PyDupeGuruBase
@@ -38,7 +38,7 @@ class PyDupeGuru(PyDupeGuruBase):
     def setMatchSimilarWords_(self,match_similar_words):
         self.app.scanner.match_similar_words = match_similar_words
     
-    @objc.signature('v@:i')
+    @signature('v@:i')
     def setSizeThreshold_(self, size_threshold):
         self.app.scanner.size_threshold = size_threshold
     
