@@ -22,6 +22,6 @@
 
 * **Right in destination:** All files will be sent directly in the selected destination, without trying to recreate the source path at all.
 * **Recreate relative path:** The source file's path will be re-created in the destination directory up to the root selection in the Directories panel. For example, if you added "/Users/foobar/Music" to your Directories panel and you move "/Users/foobar/Music/Artist/Album/the_song.mp3" to the destination "/Users/foobar/MyDestination", the final destination for the file will be "/Users/foobar/MyDestination/Artist/Album" ("/Users/foobar/Music" has been trimmed from source's path in the final destination.).
-* **Recreate absolute path:** The source file's path will be re-created in the destination directory in it's entirety. For example, if you move "/Users/foobar/Music/Artist/Album/the_song.mp3" to the destination "/Users/foobar/MyDestination", the final destination for the file will be "/Users/foobar/MyDestination/Users/foobar/Music/Artist/Album".</li>
+* **Recreate absolute path:** The source file's path will be re-created in the destination directory in it's entirety. For example, if you move "/Users/foobar/Music/Artist/Album/the_song.mp3" to the destination "/Users/foobar/MyDestination", the final destination for the file will be "/Users/foobar/MyDestination/Users/foobar/Music/Artist/Album".
 
 In all cases, dupeGuru nicely handles naming conflicts by prepending a number to the destination filename if the filename already exists in the destination.
