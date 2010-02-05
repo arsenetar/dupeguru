@@ -303,7 +303,10 @@ class TCDupeGuru(TestCase):
         # Out of range requests don't crash and return an empty value
         app = self.app
         # [0, 2] is out of range
+        # Directories
         eq_(app.GetOutlineViewValues(1, [0, 2]), []) # no crash
+        # Normal results
+        app.GetOutlineViewValues(0, [42, 0]) # no crash
     
 
 class TCDupeGuru_renameSelected(TestCase):

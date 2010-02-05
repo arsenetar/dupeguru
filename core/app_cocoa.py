@@ -257,7 +257,7 @@ class DupeGuru(app.DupeGuru):
         if tag in (0,2): #Normal results / Power Marker
             if tag == 0:
                 g, d = self.GetObjects(node_path)
-                if d is None:
+                if (d is None) and (g is not None):
                     d = g.ref
             else:
                 d = self.results.dupes[node_path[0]]
