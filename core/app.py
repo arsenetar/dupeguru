@@ -212,13 +212,8 @@ class DupeGuru(RegistrableApplication):
                 changed_groups.add(g)
     
     def save(self):
-        try:
-            self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
-            self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
-        except LookupError:
-            # This is that weird issue from #39 that sometimes happens when auto-updating with
-            # Sparkle. Just ignore it.
-            pass
+        self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
+        self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
     
     def save_ignore_list(self):
         p = op.join(self.appdata, 'ignore_list.xml')

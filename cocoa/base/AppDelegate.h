@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
 #import "DetailsPanel.h"
+#import "DirectoryPanel.h"
 
 @interface AppDelegateBase : NSObject
 {
@@ -19,11 +20,15 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet NSMenuItem *unlockMenuItem;
     IBOutlet ResultWindowBase *result;
     
+    DirectoryPanelBase *_directoryPanel;
     DetailsPanelBase *_detailsPanel;
+    BOOL _savedResults;
 }
 - (IBAction)unlockApp:(id)sender;
 
 - (PyDupeGuruBase *)py;
 - (RecentDirectories *)recentDirectories;
+- (DirectoryPanelBase *)directoryPanel; // Virtual
 - (DetailsPanelBase *)detailsPanel; // Virtual
+- (void)saveResults;
 @end

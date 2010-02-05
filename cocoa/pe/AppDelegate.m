@@ -13,6 +13,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "ValueTransformers.h"
 #import "Consts.h"
 #import "DetailsPanel.h"
+#import "DirectoryPanel.h"
 
 @implementation AppDelegate
 + (void)initialize
@@ -57,7 +58,7 @@ http://www.hardcoded.net/licenses/hs_license
     [[self directoryPanel] toggleVisible:sender];
 }
 
-- (DirectoryPanel *)directoryPanel
+- (DirectoryPanelBase *)directoryPanel
 {
     if (!_directoryPanel)
         _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];

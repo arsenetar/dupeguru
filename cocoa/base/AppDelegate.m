@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "RegistrationInterface.h"
 #import "Utils.h"
 #import "Consts.h"
+#import <Sparkle/SUUpdater.h>
 
 @implementation AppDelegateBase
 - (IBAction)unlockApp:(id)sender
@@ -28,7 +29,18 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (PyDupeGuruBase *)py { return py; }
 - (RecentDirectories *)recentDirectories { return recentDirectories; }
+- (DirectoryPanelBase *)directoryPanel {return nil; } // Virtual
 - (DetailsPanelBase *)detailsPanel { return nil; } // Virtual
+
+- (void)saveResults
+{
+    if (_savedResults) {
+        return;
+    }
+    [py saveIgnoreList];
+    [py saveResults];
+    _savedResults = YES;
+}
 
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -48,6 +60,7 @@ http://www.hardcoded.net/licenses/hs_license
     //Restore results
     [py loadIgnoreList];
     [py loadResults];
+    _savedResults = NO;
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
@@ -61,8 +74,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject: [result getColumnsOrder] forKey:@"columnsOrder"];
     [ud setObject: [result getColumnsWidth] forKey:@"columnsWidth"];
-    [py saveIgnoreList];
-    [py saveResults];
+    [self saveResults];
     NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
     if (sc >= 10)
     {
@@ -80,5 +92,15 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)recentDirecoryClicked:(NSString *)directory
 {
     [[self directoryPanel] addDirectory:directory];
+}
+
+/* SUUpdater delegate */
+
+- (BOOL)updater:(SUUpdater *)updater shouldPostponeRelaunchForUpdate:(SUAppcastItem *)update untilInvoking:(NSInvocation *)invocation;
+{
+    /* If results aren't saved now, we might get a weird utf-8 lookup error when saving later.
+    **/
+    [self saveResults];
+    return NO;
 }
 @end

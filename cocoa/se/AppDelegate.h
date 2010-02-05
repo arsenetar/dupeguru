@@ -8,16 +8,11 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 #import "../base/AppDelegate.h"
-#import "DirectoryPanel.h"
 #import "PyDupeGuru.h"
 
-@interface AppDelegate : AppDelegateBase
-{
-    DirectoryPanel *_directoryPanel;
-}
+@interface AppDelegate : AppDelegateBase {}
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
 
-- (DirectoryPanel *)directoryPanel;
 - (PyDupeGuru *)py;
 @end
