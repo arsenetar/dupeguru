@@ -9,7 +9,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import <Cocoa/Cocoa.h>
 #import "../base/DirectoryPanel.h"
 
-@interface DirectoryPanel : DirectoryPanelBase
+@interface DirectoryPanelPE : DirectoryPanel
 {
 }
 - (IBAction)addiPhoto:(id)sender;

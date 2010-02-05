@@ -11,7 +11,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 static NSString* jobAddIPhoto = @"jobAddIPhoto";
 
-@implementation DirectoryPanel
+@implementation DirectoryPanelPE
 - (id)initWithParentApp:(id)aParentApp
 {
     self = [super initWithParentApp:aParentApp];

@@ -836,7 +836,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">DirectoryPanel</string>
-					<string key="superclassName">DirectoryPanelBase</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">DirectoryPanel.h</string>
@@ -844,7 +844,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">DirectoryPanel</string>
-					<string key="superclassName">DirectoryPanelBase</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -885,7 +885,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">DirectoryPanelBase</string>
+					<string key="className">DirectoryPanel</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>

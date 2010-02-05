@@ -74,10 +74,10 @@ http://www.hardcoded.net/licenses/hs_license
     return _detailsPanel;
 }
 
-- (DirectoryPanelBase *)directoryPanel
+- (DirectoryPanel *)directoryPanel
 {
     if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
+        _directoryPanel = [[DirectoryPanelME alloc] initWithParentApp:self];
     return _directoryPanel;
 }
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }

@@ -53,7 +53,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 @end
 
-@implementation DirectoryPanelBase
+@implementation DirectoryPanel
 - (id)initWithParentApp:(id)aParentApp
 {
     self = [super initWithWindowNibName:@"DirectoryPanel"];

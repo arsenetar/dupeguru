@@ -29,7 +29,13 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (PyDupeGuruBase *)py { return py; }
 - (RecentDirectories *)recentDirectories { return recentDirectories; }
-- (DirectoryPanelBase *)directoryPanel {return nil; } // Virtual
+- (DirectoryPanel *)directoryPanel
+{
+    if (!_directoryPanel)
+        _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
+    return _directoryPanel;
+}
+
 - (DetailsPanelBase *)detailsPanel { return nil; } // Virtual
 
 - (void)saveResults

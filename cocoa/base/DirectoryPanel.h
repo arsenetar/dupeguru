@@ -20,7 +20,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)outlineView:(NSOutlineView *)outlineView addDirectory:(NSString *)directory;
 @end
 
-@interface DirectoryPanelBase : NSWindowController
+@interface DirectoryPanel : NSWindowController
 {
     IBOutlet NSPopUpButton *addButtonPopUp;
     IBOutlet DirectoryOutline *directories;

@@ -8,7 +8,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import "DirectoryPanel.h"
 
-@implementation DirectoryPanel
+@implementation DirectoryPanelME
 - (IBAction)addiTunes:(id)sender
 {
     [self addDirectory:[@"~/Music/iTunes/iTunes Music" stringByExpandingTildeInPath]];

@@ -57,13 +57,6 @@ http://www.hardcoded.net/licenses/hs_license
     [[self directoryPanel] toggleVisible:sender];
 }
 
-- (DirectoryPanelBase *)directoryPanel
-{
-    if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
-    return _directoryPanel;
-}
-
 - (DetailsPanelBase *)detailsPanel
 {
     if (!_detailsPanel)

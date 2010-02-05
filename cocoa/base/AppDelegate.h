@@ -20,7 +20,7 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet NSMenuItem *unlockMenuItem;
     IBOutlet ResultWindowBase *result;
     
-    DirectoryPanelBase *_directoryPanel;
+    DirectoryPanel *_directoryPanel;
     DetailsPanelBase *_detailsPanel;
     BOOL _savedResults;
 }
@@ -28,7 +28,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (PyDupeGuruBase *)py;
 - (RecentDirectories *)recentDirectories;
-- (DirectoryPanelBase *)directoryPanel; // Virtual
+- (DirectoryPanel *)directoryPanel;
 - (DetailsPanelBase *)detailsPanel; // Virtual
 - (void)saveResults;
 @end

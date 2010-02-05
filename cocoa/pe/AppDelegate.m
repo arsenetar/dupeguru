@@ -58,10 +58,10 @@ http://www.hardcoded.net/licenses/hs_license
     [[self directoryPanel] toggleVisible:sender];
 }
 
-- (DirectoryPanelBase *)directoryPanel
+- (DirectoryPanel *)directoryPanel
 {
     if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
+        _directoryPanel = [[DirectoryPanelPE alloc] initWithParentApp:self];
     return _directoryPanel;
 }
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
