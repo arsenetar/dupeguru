@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 
-#define DuplicateSelectionChangedNotification @"DuplicateSelectionChangedNotification"
 /* ResultsChangedNotification happens on major changes, which requires a complete reload of the data*/
 #define ResultsChangedNotification @"ResultsChangedNotification"
 /* ResultsChangedNotification happens on minor changes, which requires buffer flush*/

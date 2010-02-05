@@ -50,7 +50,6 @@ class DupeGuru(app.DupeGuru, Broadcaster):
         self.progress = cocoa.ThreadedJobPerformer()
         self.display_delta_values = False
         self.selected_dupes = []
-        self.RefreshDetailsWithSelected()
     
     #--- Override
     @staticmethod
@@ -93,6 +92,12 @@ class DupeGuru(app.DupeGuru, Broadcaster):
             curr_path = self.directories.get_subfolders(curr_path)[current_index]
         return self.get_folder_path(node_path[1:], curr_path)
     
+    def _select_dupes(self, dupes):
+        if dupes == self.selected_dupes:
+            return
+        self.selected_dupes = dupes
+        self.notify('dupes_selected')
+    
     #---Public
     def AddSelectedToIgnoreList(self):
         for dupe in self.selected_dupes:
@@ -112,9 +117,6 @@ class DupeGuru(app.DupeGuru, Broadcaster):
     
     def PurgeIgnoreList(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
-    
-    def RefreshDetailsWithSelected(self):
-        self.notify('details_table_changed')
     
     def RemoveDirectory(self,index):
         try:
@@ -141,8 +143,7 @@ class DupeGuru(app.DupeGuru, Broadcaster):
             NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(path,'')
     
     def start_scanning(self):
-        self.selected_dupes = []
-        self.RefreshDetailsWithSelected()
+        self._select_dupes([])
         try:
             app.DupeGuru.start_scanning(self)
             return 0
@@ -187,13 +188,12 @@ class DupeGuru(app.DupeGuru, Broadcaster):
                     return g.ref
         
         selected = [extract_dupe(self.GetObjects(p)) for p in node_paths]
-        self.selected_dupes = [dupe for dupe in selected if dupe is not None]
+        self._select_dupes([dupe for dupe in selected if dupe is not None])
     
     def SelectPowerMarkerNodePaths(self,node_paths):
         rows = [p[0] for p in node_paths]
-        self.selected_dupes = [
-            self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))
-        ]
+        dupes = [self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))]
+        self._select_dupes(dupes)
     
     def SetDirectoryState(self, node_path, state):
         p = self.get_folder_path(node_path)

@@ -253,11 +253,9 @@ class TCDupeGuru(TestCase):
     
     def test_refreshDetailsWithSelected(self):
         self.app.SelectPowerMarkerNodePaths(r2np([0,2]))
-        self.app.RefreshDetailsWithSelected()
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
         self.app.SelectPowerMarkerNodePaths([])
-        self.app.RefreshDetailsWithSelected()
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
     

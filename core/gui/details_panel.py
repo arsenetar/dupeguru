@@ -41,7 +41,7 @@ class DetailsPanel(Listener):
         return self._table[row_index]
     
     #--- Event Handlers
-    def details_table_changed(self):
+    def dupes_selected(self):
         self._refresh()
         self.view.refresh()
     

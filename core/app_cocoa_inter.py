@@ -71,9 +71,6 @@ class PyDupeGuruBase(PyApp):
     def saveResults(self):
         self.app.save()
     
-    def refreshDetailsWithSelected(self):
-        self.app.RefreshDetailsWithSelected()
-    
     def selectedResultNodePaths(self):
         return self.app.selected_result_node_paths()
     

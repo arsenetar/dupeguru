@@ -317,6 +317,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSInteger startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
     [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
+    [self performPySelection:[self getSelectedPaths:NO]];
     // In some cases (when in a filtered view in Power Marker mode, it's possible that the demoted
     // ref is not a part of the filter, making the table smaller. In those cases, we want to do a
     // complete reload of the table to avoid a crash.
@@ -443,8 +444,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     [self performPySelection:[self getSelectedPaths:NO]];
-    [py refreshDetailsWithSelected];
-    [[NSNotificationCenter defaultCenter] postNotificationName:DuplicateSelectionChangedNotification object:self];
 }
 
 - (void)resultsChanged:(NSNotification *)aNotification

@@ -35,7 +35,6 @@
 		CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F910FC9517500CD5728 /* ProgressController.m */; };
 		CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F950FC9517500CD5728 /* RecentDirectories.m */; };
 		CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */; };
-		CEFC7FA40FC9517500CD5728 /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F990FC9517500CD5728 /* Table.m */; };
 		CEFC7FA50FC9517500CD5728 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F9B0FC9517500CD5728 /* Utils.m */; };
 		CEFC7FA60FC9517500CD5728 /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F9D0FC9517500CD5728 /* ValueTransformers.m */; };
 		CEFC7FB90FC951A700CD5728 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7FB20FC951A700CD5728 /* AppDelegate.m */; };
@@ -102,8 +101,6 @@
 		CEFC7F950FC9517500CD5728 /* RecentDirectories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecentDirectories.m; path = ../../cocoalib/RecentDirectories.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F960FC9517500CD5728 /* RegistrationInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistrationInterface.h; path = ../../cocoalib/RegistrationInterface.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistrationInterface.m; path = ../../cocoalib/RegistrationInterface.m; sourceTree = SOURCE_ROOT; };
-		CEFC7F980FC9517500CD5728 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Table.h; path = ../../cocoalib/Table.h; sourceTree = SOURCE_ROOT; };
-		CEFC7F990FC9517500CD5728 /* Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Table.m; path = ../../cocoalib/Table.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F9A0FC9517500CD5728 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../../cocoalib/Utils.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F9B0FC9517500CD5728 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = ../../cocoalib/Utils.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F9C0FC9517500CD5728 /* ValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueTransformers.h; path = ../../cocoalib/ValueTransformers.h; sourceTree = SOURCE_ROOT; };
@@ -269,8 +266,6 @@
 				CEFC7F950FC9517500CD5728 /* RecentDirectories.m */,
 				CEFC7F960FC9517500CD5728 /* RegistrationInterface.h */,
 				CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */,
-				CEFC7F980FC9517500CD5728 /* Table.h */,
-				CEFC7F990FC9517500CD5728 /* Table.m */,
 				CEFC7F9A0FC9517500CD5728 /* Utils.h */,
 				CEFC7F9B0FC9517500CD5728 /* Utils.m */,
 				CEFC7F9C0FC9517500CD5728 /* ValueTransformers.h */,
@@ -377,7 +372,6 @@
 				CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */,
 				CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */,
 				CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */,
-				CEFC7FA40FC9517500CD5728 /* Table.m in Sources */,
 				CEFC7FA50FC9517500CD5728 /* Utils.m in Sources */,
 				CEFC7FA60FC9517500CD5728 /* ValueTransformers.m in Sources */,
 				CEFC7FB90FC951A700CD5728 /* AppDelegate.m in Sources */,
