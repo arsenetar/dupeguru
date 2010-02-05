@@ -75,36 +75,4 @@ http://www.hardcoded.net/licenses/hs_license
     [mi setKeyEquivalentModifierMask:NSCommandKeyMask|NSShiftKeyMask];
     [super applicationDidFinishLaunching:aNotification];
 }
-
-- (void)applicationWillBecomeActive:(NSNotification *)aNotification
-{
-    if (![[result window] isVisible])
-        [result showWindow:NSApp];
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification
-{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject: [result getColumnsOrder] forKey:@"columnsOrder"];
-    [ud setObject: [result getColumnsWidth] forKey:@"columnsWidth"];
-    [py saveIgnoreList];
-    [py saveResults];
-    int sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
-    if (sc >= 10)
-    {
-        sc = -1;
-        [py purgeIgnoreList];
-    }
-    sc++;
-    [ud setInteger:sc forKey:@"sessionCountSinceLastIgnorePurge"];
-    // NSApplication does not release nib instances objects, we must do it manually
-    // Well, it isn't needed because the memory is freed anyway (we are quitting the application
-    // But I need to release RecentDirectories so it saves the user defaults
-    [recentDirectories release];
-}
-
-- (void)recentDirecoryClicked:(NSString *)directory
-{
-    [[self directoryPanel] addDirectory:directory];
-}
 @end
