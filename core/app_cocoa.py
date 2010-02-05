@@ -15,7 +15,6 @@ from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace, NSWorkspaceRecycleOperation)
 from hsutil.misc import stripnone
-from hsutil.notify import Broadcaster
 from hsutil.reg import RegistrationRequired
 
 from . import app, fs
@@ -37,9 +36,8 @@ def demo_method(method):
     
     return wrapper
 
-class DupeGuru(app.DupeGuru, Broadcaster):
+class DupeGuru(app.DupeGuru):
     def __init__(self, data_module, appdata_subdir, appid):
-        Broadcaster.__init__(self)
         LOGGING_LEVEL = logging.DEBUG if NSUserDefaults.standardUserDefaults().boolForKey_('debug') else logging.WARNING
         logging.basicConfig(level=LOGGING_LEVEL, format='%(levelname)s %(message)s')
         logging.debug('started in debug mode')
@@ -49,7 +47,6 @@ class DupeGuru(app.DupeGuru, Broadcaster):
         app.DupeGuru.__init__(self, data_module, appdata, appid)
         self.progress = cocoa.ThreadedJobPerformer()
         self.display_delta_values = False
-        self.selected_dupes = []
     
     #--- Override
     @staticmethod
@@ -91,12 +88,6 @@ class DupeGuru(app.DupeGuru, Broadcaster):
         else:
             curr_path = self.directories.get_subfolders(curr_path)[current_index]
         return self.get_folder_path(node_path[1:], curr_path)
-    
-    def _select_dupes(self, dupes):
-        if dupes == self.selected_dupes:
-            return
-        self.selected_dupes = dupes
-        self.notify('dupes_selected')
     
     #---Public
     def AddSelectedToIgnoreList(self):

@@ -6,16 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QDialog
-
-from base.details_table import DetailsModel
+from base.details_dialog import DetailsDialog as DetailsDialogBase
 from details_dialog_ui import Ui_DetailsDialog
 
-class DetailsDialog(QDialog, Ui_DetailsDialog):
-    def __init__(self, parent, app):
-        QDialog.__init__(self, parent, Qt.Tool)
-        self.app = app
+class DetailsDialog(DetailsDialogBase, Ui_DetailsDialog):
+    def _setupUi(self):
         self.setupUi(self)
-        self.model = DetailsModel(app)
-        self.tableView.setModel(self.model)
+    

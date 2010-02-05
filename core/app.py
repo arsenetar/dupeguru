@@ -17,6 +17,7 @@ from hsutil import io, files
 from hsutil.path import Path
 from hsutil.reg import RegistrableApplication, RegistrationRequired
 from hsutil.misc import flatten, first
+from hsutil.notify import Broadcaster
 from hsutil.str import escape
 
 from . import directories, results, scanner, export, fs
@@ -33,11 +34,12 @@ class NoScannableFileError(Exception):
 class AllFilesAreRefError(Exception):
     pass
 
-class DupeGuru(RegistrableApplication):
+class DupeGuru(RegistrableApplication, Broadcaster):
     DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
     
     def __init__(self, data_module, appdata, appid):
         RegistrableApplication.__init__(self, appid)
+        Broadcaster.__init__(self)
         self.appdata = appdata
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
@@ -51,6 +53,7 @@ class DupeGuru(RegistrableApplication):
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
         }
+        self.selected_dupes = []
     
     def _demo_check(self):
         if self.registered:
@@ -103,6 +106,12 @@ class DupeGuru(RegistrableApplication):
     @staticmethod
     def _recycle_dupe(dupe):
         raise NotImplementedError()
+    
+    def _select_dupes(self, dupes):
+        if dupes == self.selected_dupes:
+            return
+        self.selected_dupes = dupes
+        self.notify('dupes_selected')
     
     def _start_job(self, jobid, func):
         # func(j)

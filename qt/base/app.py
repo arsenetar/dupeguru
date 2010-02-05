@@ -65,7 +65,6 @@ class DupeGuru(DupeGuruBase, QObject):
     
     #--- Private
     def _setup(self):
-        self.selected_dupe = None
         self.prefs = self._create_preferences()
         self.prefs.load()
         self._update_options()
@@ -179,9 +178,9 @@ class DupeGuru(DupeGuruBase, QObject):
         QDesktopServices.openUrl(url)
     
     def open_selected(self):
-        if self.selected_dupe is None:
+        if not self.selected_dupes:
             return
-        url = QUrl.fromLocalFile(unicode(self.selected_dupe.path))
+        url = QUrl.fromLocalFile(unicode(self.selected_dupes[0].path))
         QDesktopServices.openUrl(url)
     
     def remove_duplicates(self, duplicates):
@@ -201,14 +200,13 @@ class DupeGuru(DupeGuruBase, QObject):
         return False
     
     def reveal_selected(self):
-        if self.selected_dupe is None:
+        if not self.selected_dupes:
             return
-        url = QUrl.fromLocalFile(unicode(self.selected_dupe.path[:-1]))
+        url = QUrl.fromLocalFile(unicode(self.selected_dupe[0].path[:-1]))
         QDesktopServices.openUrl(url)
     
     def select_duplicate(self, dupe):
-        self.selected_dupe = dupe
-        self.emit(SIGNAL('duplicateSelected()'))
+        self._select_dupes([dupe])
     
     def show_about_box(self):
         self.about_box.show()

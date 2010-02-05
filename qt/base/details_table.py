@@ -6,57 +6,35 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel, QVariant
+from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel
 from PyQt4.QtGui import QHeaderView, QTableView
 
 HEADER = ['Attribute', 'Selected', 'Reference']
 
 class DetailsModel(QAbstractTableModel):
-    def __init__(self, app):
+    def __init__(self, model):
         QAbstractTableModel.__init__(self)
-        self._app = app
-        self._dupe_data = None
-        self._ref_data = None
-        self.connect(app, SIGNAL('duplicateSelected()'), self.duplicateSelected)
+        self.model = model
     
     def columnCount(self, parent):
         return len(HEADER)
     
     def data(self, index, role):
         if not index.isValid():
-            return QVariant()
+            return None
         if role != Qt.DisplayRole:
-            return QVariant()
+            return None
         column = index.column()
         row = index.row()
-        if column == 0:
-            return QVariant(self._app.data.COLUMNS[row]['display'])
-        elif column == 1 and self._dupe_data:
-            return QVariant(self._dupe_data[row])
-        elif column == 2 and self._ref_data:
-            return QVariant(self._ref_data[row])
-        return QVariant()
+        return self.model.row(row)[column]
     
     def headerData(self, section, orientation, role):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(HEADER):
-            return QVariant(HEADER[section])
-        return QVariant()
+            return HEADER[section]
+        return None
     
     def rowCount(self, parent):
-        return len(self._app.data.COLUMNS)
-    
-    #--- Events
-    def duplicateSelected(self):
-        dupe = self._app.selected_dupe
-        if dupe is None:
-            group = None
-            ref = None
-        else:
-            group = self._app.results.get_group_of_duplicate(dupe)
-            ref = group.ref if group.ref is not dupe else None
-        self._dupe_data = self._app._get_display_info(dupe, group)
-        self._ref_data = self._app._get_display_info(ref, group)
-        self.reset()
+        return self.model.row_count()
     
 
 class DetailsTable(QTableView):

@@ -6,27 +6,25 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel, QVariant
-from PyQt4.QtGui import QDialog, QHeaderView, QPixmap
+from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QPixmap
 
-from base.details_table import DetailsModel
+from base.details_dialog import DetailsDialog as DetailsDialogBase
 from details_dialog_ui import Ui_DetailsDialog
 
-class DetailsDialog(QDialog, Ui_DetailsDialog):
+class DetailsDialog(DetailsDialogBase, Ui_DetailsDialog):
     def __init__(self, parent, app):
-        QDialog.__init__(self, parent, Qt.Tool)
-        self.app = app
+        DetailsDialogBase.__init__(self, parent, app)
         self.selectedPixmap = None
         self.referencePixmap = None
+    
+    def _setupUi(self):
         self.setupUi(self)
-        self.model = DetailsModel(app)
-        self.tableView.setModel(self.model)
-        self.connect(app, SIGNAL('duplicateSelected()'), self.duplicateSelected)
     
     def _update(self):
-        dupe = self.app.selected_dupe
-        if dupe is None:
+        if not self.app.selected_dupes:
             return
+        dupe = self.app.selected_dupes[0]
         group = self.app.results.get_group_of_duplicate(dupe)
         ref = group.ref
         
@@ -56,11 +54,12 @@ class DetailsDialog(QDialog, Ui_DetailsDialog):
         self._updateImages()
     
     def show(self):
-        QDialog.show(self)
+        DetailsDialogBase.show(self)
         self._update()
     
-    #--- Events
-    def duplicateSelected(self):
+    # model --> view
+    def refresh(self):
+        DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
     

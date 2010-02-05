@@ -316,9 +316,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def resultsReset(self):
         self.resultsView.expandAll()
-        dupe = self.app.selected_dupe
-        if dupe is not None:
-            [modelIndex] = self.resultsModel.indexesForDupes([dupe])
+        if self.app.selected_dupes:
+            [modelIndex] = self.resultsModel.indexesForDupes(self.app.selected_dupes[:1])
             if modelIndex.isValid():
                 flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
                 self.resultsView.selectionModel().setCurrentIndex(modelIndex, flags)
