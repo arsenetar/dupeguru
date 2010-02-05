@@ -160,8 +160,16 @@ def get_file(path, fileclasses=[File]):
 
 def get_files(path, fileclasses=[File]):
     assert all(issubclass(fileclass, File) for fileclass in fileclasses)
+    def combine_paths(p1, p2):
+        try:
+            return p1 + p2
+        except Exception:
+            # This is temporary debug logging for #84.
+            logging.warning("Failed to combine %r and %r.", p1, p2)
+            raise
+    
     try:
-        paths = [path + name for name in io.listdir(path)]
+        paths = [combine_paths(path, name) for name in io.listdir(path)]
         result = []
         for path in paths:
             file = get_file(path, fileclasses=fileclasses)
