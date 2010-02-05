@@ -9,7 +9,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import <Cocoa/Cocoa.h>
 #import "../base/DetailsPanel.h"
 
-@interface DetailsPanel : DetailsPanelBase
+@interface DetailsPanelPE : DetailsPanel
 {
     IBOutlet NSImageView *dupeImage;
     IBOutlet NSProgressIndicator *dupeProgressIndicator;

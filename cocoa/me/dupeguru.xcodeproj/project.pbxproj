@@ -51,8 +51,6 @@
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CE900AD2109B238600754048 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD1109B238600754048 /* Preferences.xib */; };
 		CE900AD7109B2A9B00754048 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD6109B2A9B00754048 /* MainMenu.xib */; };
-		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
-		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
@@ -67,7 +65,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */,
-				CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */,
 				CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,7 +399,6 @@
 				CE381C9609914ACE003581CE /* AppDelegate.m in Sources */,
 				CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */,
 				CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */,
-				CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */,
 				CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */,
 				CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */,
 				CE515DF50FC6C12E00EC695D /* Outline.m in Sources */,

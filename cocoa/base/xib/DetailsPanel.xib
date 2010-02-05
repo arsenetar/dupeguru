@@ -516,7 +516,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">DetailsPanel</string>
-					<string key="superclassName">DetailsPanelBase</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">DetailsPanel.h</string>
@@ -524,7 +524,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">DetailsPanel</string>
-					<string key="superclassName">DetailsPanelBase</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailsTable</string>
 						<string key="NS.object.0">NSTableView</string>
@@ -535,7 +535,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">DetailsPanelBase</string>
+					<string key="className">DetailsPanel</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailsTable</string>

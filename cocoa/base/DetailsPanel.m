@@ -9,7 +9,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "DetailsPanel.h"
 #import "Consts.h"
 
-@implementation DetailsPanelBase
+@implementation DetailsPanel
 - (id)initWithPy:(PyApp *)aPy
 {
     self = [super initWithWindowNibName:@"DetailsPanel"];

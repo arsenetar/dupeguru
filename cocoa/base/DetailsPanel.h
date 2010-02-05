@@ -11,7 +11,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Table.h"
 
 
-@interface DetailsPanelBase : NSWindowController
+@interface DetailsPanel : NSWindowController
 {
     IBOutlet TableView *detailsTable;
 }

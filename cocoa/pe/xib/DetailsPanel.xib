@@ -30,7 +30,7 @@
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="433298071">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSCustomObject" id="449950342">
-				<string key="NSClassName">DetailsPanel</string>
+				<string key="NSClassName">DetailsPanelPE</string>
 			</object>
 			<object class="NSCustomObject" id="175405098">
 				<string key="NSClassName">FirstResponder</string>
@@ -854,8 +854,8 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">DetailsPanel</string>
-					<string key="superclassName">DetailsPanelBase</string>
+					<string key="className">DetailsPanelPE</string>
+					<string key="superclassName">DetailsPanel</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -879,8 +879,8 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">DetailsPanel</string>
-					<string key="superclassName">DetailsPanelBase</string>
+					<string key="className">DetailsPanelPE</string>
+					<string key="superclassName">DetailsPanel</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailsTable</string>
 						<string key="NS.object.0">NSTableView</string>
@@ -891,7 +891,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">DetailsPanelBase</string>
+					<string key="className">DetailsPanel</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailsTable</string>

@@ -41,10 +41,10 @@ http://www.hardcoded.net/licenses/hs_license
     return self;
 }
 
-- (DetailsPanelBase *)detailsPanel
+- (DetailsPanel *)detailsPanel
 {
     if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+        _detailsPanel = [[DetailsPanelPE alloc] initWithPy:py];
     return _detailsPanel;
 }
 

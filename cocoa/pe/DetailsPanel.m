@@ -13,7 +13,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "DetailsPanel.h"
 #import "Consts.h"
 
-@implementation DetailsPanel
+@implementation DetailsPanelPE
 - (id)initWithPy:(PyApp *)aPy
 {
     self = [super initWithPy:aPy];

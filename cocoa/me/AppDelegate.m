@@ -66,14 +66,6 @@ http://www.hardcoded.net/licenses/hs_license
     [[self directoryPanel] toggleVisible:sender];
 }
 
-
-- (DetailsPanelBase *)detailsPanel
-{
-    if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
-    return _detailsPanel;
-}
-
 - (DirectoryPanel *)directoryPanel
 {
     if (!_directoryPanel)

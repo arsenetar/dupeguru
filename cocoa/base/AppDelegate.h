@@ -21,7 +21,7 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet ResultWindowBase *result;
     
     DirectoryPanel *_directoryPanel;
-    DetailsPanelBase *_detailsPanel;
+    DetailsPanel *_detailsPanel;
     BOOL _savedResults;
 }
 - (IBAction)unlockApp:(id)sender;
@@ -29,6 +29,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (PyDupeGuruBase *)py;
 - (RecentDirectories *)recentDirectories;
 - (DirectoryPanel *)directoryPanel;
-- (DetailsPanelBase *)detailsPanel; // Virtual
+- (DetailsPanel *)detailsPanel;
 - (void)saveResults;
 @end

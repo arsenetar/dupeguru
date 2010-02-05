@@ -36,7 +36,12 @@ http://www.hardcoded.net/licenses/hs_license
     return _directoryPanel;
 }
 
-- (DetailsPanelBase *)detailsPanel { return nil; } // Virtual
+- (DetailsPanel *)detailsPanel
+{
+    if (!_detailsPanel)
+        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+    return _detailsPanel;
+}
 
 - (void)saveResults
 {
