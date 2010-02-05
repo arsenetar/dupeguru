@@ -58,9 +58,9 @@ def GetDupeSortKey(dupe, get_group, key, delta):
         return m.percentage
     if key == 8:
         return 0
-    r = cmp_value(getattr(dupe, COLUMNS[key]['attr']))
+    r = cmp_value(getattr(dupe, COLUMNS[key]['attr'], ''))
     if delta and (key in (2, 4, 5)):
-        r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr']))
+        r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr'], ''))
     return r
 
 def GetGroupSortKey(group, key):
@@ -68,4 +68,4 @@ def GetGroupSortKey(group, key):
         return group.percentage
     if key == 8:
         return len(group)
-    return cmp_value(getattr(group.ref, COLUMNS[key]['attr']))
+    return cmp_value(getattr(group.ref, COLUMNS[key]['attr'], ''))
