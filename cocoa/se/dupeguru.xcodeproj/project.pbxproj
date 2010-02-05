@@ -76,6 +76,7 @@
 		CE3A46F9109B212E002ABFD5 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../base/xib/MainMenu.xib; sourceTree = "<group>"; };
 		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE6E0DFD1054E9EF008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
+		CE6E7407111C997500C350E3 /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CEAC6810109B0B7E00B43C85 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Preferences.xib; path = xib/Preferences.xib; sourceTree = "<group>"; };
 		CEDD92D60FDD01640031C7B7 /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
@@ -289,6 +290,7 @@
 				CEFC7FB40FC951A700CD5728 /* DirectoryPanel.h */,
 				CEFC7FB50FC951A700CD5728 /* DirectoryPanel.m */,
 				CEFC7FB60FC951A700CD5728 /* PyDupeGuru.h */,
+				CE6E7407111C997500C350E3 /* PyDetailsPanel.h */,
 				CEFC7FB70FC951A700CD5728 /* ResultWindow.h */,
 				CEFC7FB80FC951A700CD5728 /* ResultWindow.m */,
 			);

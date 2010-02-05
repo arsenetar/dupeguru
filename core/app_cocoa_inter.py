@@ -14,6 +14,8 @@ from hsutil.cocoa.objcmin import NSObject
 from hsutil.cocoa import signature
 from hsutil.reg import InvalidCodeError
 
+from .gui.details_panel import DetailsPanel
+
 # Fix py2app's problems on relative imports
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
 from hsutil import conflict
@@ -199,4 +201,24 @@ class PyDupeGuruBase(PyApp):
     
     def setRegisteredCode_andEmail_(self, code, email):
         self.app.set_registration(code, email)
+    
+
+class PyDetailsPanel(NSObject):
+    def initWithCocoa_pyParent_(self, cocoa, pyparent):
+        super(PyDetailsPanel, self).init()
+        self.cocoa = cocoa
+        self.py = DetailsPanel(self, pyparent.app)
+        return self
+    
+    @signature('i@:')
+    def numberOfRows(self):
+        return self.py.row_count()
+    
+    @signature('@@:@i')
+    def valueForColumn_row_(self, column, row):
+        return self.py.row(row)[int(column)]
+    
+    # python --> cocoa
+    def refresh(self):
+        self.cocoa.refresh()
     

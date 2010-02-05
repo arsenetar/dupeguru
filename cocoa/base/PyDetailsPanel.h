@@ -7,19 +7,9 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "PyApp.h"
-#import "PyDetailsPanel.h"
 
-@interface DetailsPanel : NSWindowController
-{
-    IBOutlet NSTableView *detailsTable;
-    
-    PyDetailsPanel *py;
-}
-- (id)initWithPy:(PyApp *)aPy;
-
-- (void)toggleVisibility;
-
-/* Python --> Cocoa */
-- (void)refresh;
+@interface PyDetailsPanel : NSObject
+- (id)initWithCocoa:(id)cocoa pyParent:(id)pyParent;
+- (NSInteger)numberOfRows;
+- (id)valueForColumn:(NSString *)column row:(NSInteger)row;
 @end

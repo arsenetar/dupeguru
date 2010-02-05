@@ -77,6 +77,7 @@
 		CE031753109B345200517EE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_pe_help; path = ../../help_pe/dupeguru_pe_help; sourceTree = SOURCE_ROOT; };
 		CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
+		CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -303,6 +304,7 @@
 				CE80DB850FC1951C0086DCA6 /* DirectoryPanel.h */,
 				CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */,
 				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
+				CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */,
 				CE80DB880FC1951C0086DCA6 /* ResultWindow.h */,
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
 			);

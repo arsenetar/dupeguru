@@ -7,10 +7,12 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import "Utils.h"
 
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    [Utils setPluginName:@"dg_cocoa"];
     NSString *pluginPath = [[NSBundle mainBundle]
                                 pathForResource:@"dg_cocoa"
                                          ofType:@"plugin"];

@@ -16,7 +16,7 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet NSImageView *refImage;
     IBOutlet NSProgressIndicator *refProgressIndicator;
     
-    PyApp *py;
+    PyApp *pyApp;
     BOOL _needsRefresh;
     NSString *_dupePath;
     NSString *_refPath;

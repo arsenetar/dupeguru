@@ -31,7 +31,7 @@ def GetDisplayInfo(dupe, group, delta):
         dupe.name,
         format_path(dupe.path),
         format_size(size, 0, 1, False),
-        dupe.extension,
+        dupe.extension if hasattr(dupe, 'extension') else '---',
     ]
 
 def GetDupeSortKey(dupe, get_group, key, delta):

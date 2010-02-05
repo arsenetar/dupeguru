@@ -26,6 +26,7 @@ try:
 except ImportError:
     from nose.plugins.skip import SkipTest
     raise SkipTest("These tests can only be run on OS X")
+from ..gui.details_panel import DetailsPanel
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -38,15 +39,72 @@ def r2np(rows):
     #Transforms a list of rows [1,2,3] into a list of node paths [[1],[2],[3]]
     return [[i] for i in rows]
 
+class CallLogger(object):
+    """This is a dummy object that logs all calls made to it.
+    
+    It is used to simulate the GUI layer.
+    """
+    def __init__(self):
+        self.calls = []
+    
+    def __getattr__(self, func_name):
+        def func(*args, **kw):
+            self.calls.append(func_name)
+        return func
+    
+    def clear_calls(self):
+        del self.calls[:]
+    
+
 class TCDupeGuru(TestCase):
     def setUp(self):
         self.app = DupeGuru()
+        self.dpanel_gui = CallLogger()
+        self.dpanel = DetailsPanel(self.dpanel_gui, self.app)
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
         tmppath = self.tmppath()
         io.mkdir(tmppath + 'foo')
         io.mkdir(tmppath + 'bar')
         self.app.directories.add_path(tmppath)
+    
+    def check_gui_calls(self, gui, expected, verify_order=False):
+        """Checks that the expected calls have been made to 'gui', then clears the log.
+        
+        `expected` is an iterable of strings representing method names.
+        If `verify_order` is True, the order of the calls matters.
+        """
+        if verify_order:
+            eq_(gui.calls, expected)
+        else:
+            eq_(set(gui.calls), set(expected))
+        gui.clear_calls()
+    
+    def check_gui_calls_partial(self, gui, expected=None, not_expected=None):
+        """Checks that the expected calls have been made to 'gui', then clears the log.
+        
+        `expected` is an iterable of strings representing method names. Order doesn't matter.
+        Moreover, if calls have been made that are not in expected, no failure occur.
+        `not_expected` can be used for a more explicit check (rather than calling `check_gui_calls`
+        with an empty `expected`) to assert that calls have *not* been made.
+        """
+        calls = set(gui.calls)
+        if expected is not None:
+            expected = set(expected)
+            not_called = expected - calls
+            assert not not_called, u"These calls haven't been made: {0}".format(not_called)
+        if not_expected is not None:
+            not_expected = set(not_expected)
+            called = not_expected & calls
+            assert not called, u"These calls shouldn't have been made: {0}".format(called)
+        gui.clear_calls()
+    
+    def clear_gui_calls(self):
+        for attr in dir(self):
+            if attr.endswith('_gui'):
+                gui = getattr(self, attr)
+                if hasattr(gui, 'calls'): # We might have test methods ending with '_gui'
+                    gui.clear_calls()
     
     def test_GetObjects(self):
         app = self.app
@@ -194,24 +252,14 @@ class TCDupeGuru(TestCase):
         self.assert_(app.results.is_marked(objects[4]))
     
     def test_refreshDetailsWithSelected(self):
-        def mock_refresh(dupe,group):
-            self.called = True
-            if self.app.selected_dupes:
-                self.assert_(dupe is self.app.selected_dupes[0])
-                self.assert_(group is self.app.results.get_group_of_duplicate(dupe))
-            else:
-                self.assert_(dupe is None)
-                self.assert_(group is None)
-        
-        self.app.RefreshDetailsTable = mock_refresh
-        self.called = False
         self.app.SelectPowerMarkerNodePaths(r2np([0,2]))
         self.app.RefreshDetailsWithSelected()
-        self.assert_(self.called)
-        self.called = False
+        eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
+        self.check_gui_calls(self.dpanel_gui, ['refresh'])
         self.app.SelectPowerMarkerNodePaths([])
         self.app.RefreshDetailsWithSelected()
-        self.assert_(self.called)
+        eq_(self.dpanel.row(0), ('Filename', '---', '---'))
+        self.check_gui_calls(self.dpanel_gui, ['refresh'])
     
     def test_makeSelectedReference(self):
         app = self.app

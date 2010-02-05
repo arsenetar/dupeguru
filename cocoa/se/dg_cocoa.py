@@ -7,7 +7,7 @@
 from hsutil.cocoa import signature
 
 from core import scanner
-from core.app_cocoa_inter import PyDupeGuruBase
+from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
 
 # Fix py2app imports with chokes on relative imports

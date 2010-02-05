@@ -6,7 +6,7 @@
 
 from hsutil.cocoa import signature
 
-from core.app_cocoa_inter import PyDupeGuruBase
+from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
 from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
     SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)

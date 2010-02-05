@@ -17,7 +17,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (id)initWithPy:(PyApp *)aPy
 {
     self = [super initWithPy:aPy];
-    py = aPy;
+    pyApp = aPy;
     _needsRefresh = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageLoaded:) name:ImageLoadedNotification object:self];
     return self;
@@ -36,18 +36,18 @@ http://www.hardcoded.net/licenses/hs_license
     [pool release];
 }
 
-- (void)refresh
+- (void)refreshDetails
 {
     if (!_needsRefresh)
         return;
     [detailsTable reloadData];
     
-    NSString *refPath = [(PyDupeGuru *)py getSelectedDupeRefPath];
+    NSString *refPath = [(PyDupeGuru *)pyApp getSelectedDupeRefPath];
     if (_refPath != nil)
         [_refPath autorelease];
     _refPath = [refPath retain];
     [NSThread detachNewThreadSelector:@selector(loadImageAsync:) toTarget:self withObject:refPath];
-    NSString *dupePath = [(PyDupeGuru *)py getSelectedDupePath];
+    NSString *dupePath = [(PyDupeGuru *)pyApp getSelectedDupePath];
     if (_dupePath != nil)
         [_dupePath autorelease];
     _dupePath = [dupePath retain];
@@ -59,12 +59,6 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Notifications */
-- (void)duplicateSelectionChanged:(NSNotification *)aNotification
-{
-    _needsRefresh = YES;
-	[super duplicateSelectionChanged:aNotification];
-}
-
 - (void)imageLoaded:(NSNotification *)aNotification
 {
     NSString *imagePath = [[aNotification userInfo] valueForKey:@"imagePath"];
@@ -79,5 +73,12 @@ http://www.hardcoded.net/licenses/hs_license
         [dupeImage setImage:image];
         [dupeProgressIndicator stopAnimation:nil];
     }
+}
+
+/* Python --> Cocoa */
+- (void)refresh
+{
+    _needsRefresh = YES;
+    [super refresh];
 }
 @end

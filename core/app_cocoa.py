@@ -15,6 +15,7 @@ from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace, NSWorkspaceRecycleOperation)
 from hsutil.misc import stripnone
+from hsutil.notify import Broadcaster
 from hsutil.reg import RegistrationRequired
 
 from . import app, fs
@@ -36,8 +37,9 @@ def demo_method(method):
     
     return wrapper
 
-class DupeGuru(app.DupeGuru):
+class DupeGuru(app.DupeGuru, Broadcaster):
     def __init__(self, data_module, appdata_subdir, appid):
+        Broadcaster.__init__(self)
         LOGGING_LEVEL = logging.DEBUG if NSUserDefaults.standardUserDefaults().boolForKey_('debug') else logging.WARNING
         logging.basicConfig(level=LOGGING_LEVEL, format='%(levelname)s %(message)s')
         logging.debug('started in debug mode')
@@ -48,7 +50,7 @@ class DupeGuru(app.DupeGuru):
         self.progress = cocoa.ThreadedJobPerformer()
         self.display_delta_values = False
         self.selected_dupes = []
-        self.RefreshDetailsTable(None,None)
+        self.RefreshDetailsWithSelected()
     
     #--- Override
     @staticmethod
@@ -91,14 +93,6 @@ class DupeGuru(app.DupeGuru):
             curr_path = self.directories.get_subfolders(curr_path)[current_index]
         return self.get_folder_path(node_path[1:], curr_path)
     
-    def RefreshDetailsTable(self,dupe,group):
-        l1 = self._get_display_info(dupe, group, False)
-        # we don't want the two sides of the table to display the stats for the same file
-        ref = group.ref if group is not None and group.ref is not dupe else None
-        l2 = self._get_display_info(ref, group, False)
-        names = [c['display'] for c in self.data.COLUMNS]
-        self.details_table = zip(names,l1,l2)
-    
     #---Public
     def AddSelectedToIgnoreList(self):
         for dupe in self.selected_dupes:
@@ -120,13 +114,7 @@ class DupeGuru(app.DupeGuru):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
     
     def RefreshDetailsWithSelected(self):
-        if self.selected_dupes:
-            self.RefreshDetailsTable(
-                self.selected_dupes[0],
-                self.results.get_group_of_duplicate(self.selected_dupes[0])
-            )
-        else:
-            self.RefreshDetailsTable(None,None)
+        self.notify('details_table_changed')
     
     def RemoveDirectory(self,index):
         try:
@@ -153,7 +141,8 @@ class DupeGuru(app.DupeGuru):
             NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(path,'')
     
     def start_scanning(self):
-        self.RefreshDetailsTable(None, None)
+        self.selected_dupes = []
+        self.RefreshDetailsWithSelected()
         try:
             app.DupeGuru.start_scanning(self)
             return 0
@@ -291,15 +280,3 @@ class DupeGuru(app.DupeGuru):
         else:
             return 0
     
-    def GetTableViewCount(self, tag):
-        if self.progress._job_running:
-            return 0
-        return len(self.details_table)
-    
-    def GetTableViewMarkedIndexes(self,tag):
-        return []
-    
-    def GetTableViewValues(self,tag,row):
-        return self.details_table[row]
-    
-
