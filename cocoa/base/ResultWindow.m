@@ -440,11 +440,24 @@ http://www.hardcoded.net/licenses/hs_license
     [Dialogs showMessage:msg];
 }
 
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+    [self performPySelection:[self getSelectedPaths:NO]];
+    [py refreshDetailsWithSelected];
+    [[NSNotificationCenter defaultCenter] postNotificationName:DuplicateSelectionChangedNotification object:self];
+}
+
 - (void)resultsChanged:(NSNotification *)aNotification
 {
     [matches reloadData];
     [self expandAll:nil];
     [self outlineViewSelectionDidChange:nil];
+    [self refreshStats];
+}
+
+- (void)resultsMarkingChanged:(NSNotification *)aNotification
+{
+    [matches invalidateMarkings];
     [self refreshStats];
 }
 
