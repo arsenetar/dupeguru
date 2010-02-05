@@ -212,10 +212,14 @@ class DupeGuru(RegistrableApplication):
                 changed_groups.add(g)
     
     def save(self):
+        if not op.exists(self.appdata):
+            os.makedirs(self.appdata)
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
         self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
     
     def save_ignore_list(self):
+        if not op.exists(self.appdata):
+            os.makedirs(self.appdata)
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.save_to_xml(p)
     
