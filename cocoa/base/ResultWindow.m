@@ -425,7 +425,6 @@ http://www.hardcoded.net/licenses/hs_license
     // but after a lot of fussing around, believe it or not, it actually is.
     NSInteger matchesTag = _powerMode ? 2 : 0;
     NSInteger startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
-    [self performPySelection:[self getSelectedPaths:YES]];
     [py makeSelectedReference];
     [self performPySelection:[self getSelectedPaths:NO]];
     // In some cases (when in a filtered view in Power Marker mode, it's possible that the demoted

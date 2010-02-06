@@ -92,9 +92,6 @@ class DupeGuru(app.DupeGuru):
     #---Public
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
-
-    def MakeSelectedReference(self):
-        self.make_reference(self.selected_dupes)
     
     def OpenSelected(self):
         # local import because first appkit import takes a lot of memory. we want to avoid it.

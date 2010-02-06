@@ -215,9 +215,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.load_from_xml(p)
     
-    def make_reference(self, duplicates):
+    def make_selected_reference(self):
+        dupes = self.without_ref(self.selected_dupes)
         changed_groups = set()
-        for dupe in duplicates:
+        for dupe in dupes:
             g = self.results.get_group_of_duplicate(dupe)
             if g not in changed_groups:
                 self.results.make_ref(dupe)

@@ -156,8 +156,8 @@ class DupeGuru(DupeGuruBase, QObject):
     
     delete_marked = demo_method(DupeGuruBase.delete_marked)
     
-    def make_reference(self, duplicates):
-        DupeGuruBase.make_reference(self, duplicates)
+    def make_selected_reference(self):
+        DupeGuruBase.make_selected_reference(self)
         self.emit(SIGNAL('resultsChanged()'))
     
     def remove_duplicates(self, duplicates):

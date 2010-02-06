@@ -94,7 +94,7 @@ class PyDupeGuruBase(PyApp):
         self.app.apply_filter(filter)
     
     def makeSelectedReference(self):
-        self.app.MakeSelectedReference()
+        self.app.make_selected_reference()
     
     def copyOrMove_markedTo_recreatePath_(self, copy, destination, recreate_path):
         self.app.copy_or_move_marked(copy, destination, recreate_path)

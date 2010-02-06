@@ -264,9 +264,9 @@ class TCDupeGuru(TestCase):
         objects = self.objects
         groups = self.groups
         app.SelectPowerMarkerNodePaths(r2np([0,2]))
-        app.MakeSelectedReference()
-        self.assert_(groups[0].ref is objects[1])
-        self.assert_(groups[1].ref is objects[4])
+        app.make_selected_reference()
+        assert groups[0].ref is objects[1]
+        assert groups[1].ref is objects[4]
     
     def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(self):
         app = self.app
@@ -274,9 +274,9 @@ class TCDupeGuru(TestCase):
         groups = self.groups
         app.SelectPowerMarkerNodePaths(r2np([0,1,2]))
         #Only 0 and 2 must go ref, not 1 because it is a part of the same group
-        app.MakeSelectedReference()
-        self.assert_(groups[0].ref is objects[1])
-        self.assert_(groups[1].ref is objects[4])
+        app.make_selected_reference()
+        assert groups[0].ref is objects[1]
+        assert groups[1].ref is objects[4]
     
     def test_removeSelected(self):
         app = self.app

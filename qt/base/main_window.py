@@ -205,7 +205,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QDesktopServices.openUrl(url)
     
     def makeReferenceTriggered(self):
-        self.app.make_reference(self.resultsView.selectedDupes())
+        self.app.make_selected_reference()
     
     def markAllTriggered(self):
         self.app.mark_all()
