@@ -38,8 +38,8 @@ os.remove('verinfo_tmp')
 print_and_do("del dist\\*90.dll") # They're in vcredist, no need to include them
 print_and_do("xcopy /Y /S /I ..\\..\\help_se\\dupeguru_help dist\\help")
 
-aicom = '"\\Program Files\\Caphyon\\Advanced Installer\\AdvancedInstaller.com"'
+# AdvancedInstaller.com has to be in your PATH
 shutil.copy('installer.aip', 'installer_tmp.aip') # this is so we don'a have to re-commit installer.aip at every version change
-print_and_do('%s /edit installer_tmp.aip /SetVersion %s' % (aicom, version))
-print_and_do('%s /build installer_tmp.aip -force' % aicom)
+print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % version)
+print_and_do('AdvancedInstaller.com /build installer_tmp.aip -force')
 os.remove('installer_tmp.aip')
