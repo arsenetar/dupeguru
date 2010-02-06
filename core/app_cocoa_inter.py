@@ -100,7 +100,7 @@ class PyDupeGuruBase(PyApp):
         self.app.copy_or_move_marked(copy, destination, recreate_path)
     
     def openSelected(self):
-        self.app.OpenSelected()
+        self.app.open_selected()
     
     def removeMarked(self):
         self.app.results.perform_on_marked(lambda x:True, True)

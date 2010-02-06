@@ -118,6 +118,11 @@ class DupeGuru(DupeGuruBase, QObject):
     
     #--- Override
     @staticmethod
+    def _open_path(path):
+        url = QUrl.fromLocalFile(unicode(path))
+        QDesktopServices.openUrl(url)
+    
+    @staticmethod
     def _recycle_dupe(dupe):
         platform.recycle_file(dupe.path)
     
@@ -182,14 +187,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def openDebugLog(self):
         debugLogPath = op.join(self.appdata, 'debug.log')
-        url = QUrl.fromLocalFile(debugLogPath)
-        QDesktopServices.openUrl(url)
-    
-    def open_selected(self):
-        if not self.selected_dupes:
-            return
-        url = QUrl.fromLocalFile(unicode(self.selected_dupes[0].path))
-        QDesktopServices.openUrl(url)
+        self._open_path(debugLogPath)
     
     def remove_marked_duplicates(self):
         marked = [d for d in self.results.dupes if self.results.is_marked(d)]

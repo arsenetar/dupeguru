@@ -50,6 +50,10 @@ class DupeGuru(app.DupeGuru):
     
     #--- Override
     @staticmethod
+    def _open_path(path):
+        NSWorkspace.sharedWorkspace().openFile_(unicode(path))
+    
+    @staticmethod
     def _recycle_dupe(dupe):
         # local import because first appkit import takes a lot of memory. we want to avoid it.
         directory = unicode(dupe.path[:-1])
@@ -92,12 +96,6 @@ class DupeGuru(app.DupeGuru):
     #---Public
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
-    
-    def OpenSelected(self):
-        # local import because first appkit import takes a lot of memory. we want to avoid it.
-        if self.selected_dupes:
-            path = unicode(self.selected_dupes[0].path)
-            NSWorkspace.sharedWorkspace().openFile_(path)
     
     def PurgeIgnoreList(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))

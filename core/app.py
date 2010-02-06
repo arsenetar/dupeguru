@@ -104,6 +104,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return fs.get_file(path, self.directories.fileclasses)    
     
     @staticmethod
+    def _open_path(path):
+        raise NotImplementedError()
+    
+    @staticmethod
     def _recycle_dupe(dupe):
         raise NotImplementedError()
     
@@ -223,6 +227,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if g not in changed_groups:
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
+    
+    def open_selected(self):
+        if self.selected_dupes:
+            self._open_path(self.selected_dupes[0].path)
     
     def remove_duplicates(self, duplicates):
         self.results.remove_duplicates(duplicates)
