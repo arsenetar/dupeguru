@@ -142,13 +142,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionsButton.showMenu()
     
     def addToIgnoreListTriggered(self):
-        dupes = self.resultsView.selectedDupes()
-        if not dupes:
-            return
-        title = "Add to Ignore List"
-        msg = "All selected {0} matches are going to be ignored in all subsequent scans. Continue?".format(len(dupes))
-        if self._confirm(title, msg):
-            self.app.add_dupes_to_ignore_list(dupes)
+        self.app.add_selected_to_ignore_list()
     
     def applyFilterTriggered(self):
         title = "Apply Filter"
@@ -324,7 +318,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._update_status_line()
     
     def selectionChanged(self, selected, deselected):
-        index = self.resultsView.selectionModel().currentIndex()
-        dupe = index.internalPointer().dupe if index.isValid() else None
-        self.app.select_duplicate(dupe)
+        self.app.select_dupes(self.resultsView.selectedDupes())
     

@@ -302,11 +302,10 @@ http://www.hardcoded.net/licenses/hs_license
     NSArray *nodeList = [self getSelected:YES];
     if (![nodeList count])
         return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[nodeList count]]] == NSAlertSecondButtonReturn) // NO
+    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[nodeList count]];
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [self performPySelection:[self getSelectedPaths:YES]];
     [py addSelectedToIgnoreList];
-    [py removeSelected];
     [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 

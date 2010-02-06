@@ -130,18 +130,18 @@ class DupeGuru(DupeGuruBase, QObject):
             msg = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
             QMessageBox.information(self.main_window, 'Action in progress', msg)
     
-    #--- Public
-    def add_dupes_to_ignore_list(self, duplicates):
-        for dupe in duplicates:
-            self.add_to_ignore_list(dupe)
-        self.remove_duplicates(duplicates)
+    def add_selected_to_ignore_list(self):
+        dupes = self.without_ref(self.selected_dupes)
+        if not dupes:
+            return
+        title = "Add to Ignore List"
+        msg = "All selected {0} matches are going to be ignored in all subsequent scans. Continue?".format(len(dupes))
+        if self.main_window._confirm(title, msg):
+            DupeGuruBase.add_selected_to_ignore_list(self)
     
     def apply_filter(self, filter):
         DupeGuruBase.apply_filter(self, filter)
         self.emit(SIGNAL('resultsChanged()'))
-    
-    def askForRegCode(self):
-        self.reg.ask_for_code()
     
     @demo_method
     def copy_or_move_marked(self, copy):
@@ -159,6 +159,14 @@ class DupeGuru(DupeGuruBase, QObject):
     def make_reference(self, duplicates):
         DupeGuruBase.make_reference(self, duplicates)
         self.emit(SIGNAL('resultsChanged()'))
+    
+    def remove_duplicates(self, duplicates):
+        DupeGuruBase.remove_duplicates(self, duplicates)
+        self.emit(SIGNAL('resultsChanged()'))
+    
+    #--- Public
+    def askForRegCode(self):
+        self.reg.ask_for_code()
     
     def mark_all(self):
         self.results.mark_all()
@@ -183,10 +191,6 @@ class DupeGuru(DupeGuruBase, QObject):
         url = QUrl.fromLocalFile(unicode(self.selected_dupes[0].path))
         QDesktopServices.openUrl(url)
     
-    def remove_duplicates(self, duplicates):
-        self.results.remove_duplicates(duplicates)
-        self.emit(SIGNAL('resultsChanged()'))
-    
     def remove_marked_duplicates(self):
         marked = [d for d in self.results.dupes if self.results.is_marked(d)]
         self.remove_duplicates(marked)
@@ -205,8 +209,8 @@ class DupeGuru(DupeGuruBase, QObject):
         url = QUrl.fromLocalFile(unicode(self.selected_dupe[0].path[:-1]))
         QDesktopServices.openUrl(url)
     
-    def select_duplicate(self, dupe):
-        self._select_dupes([dupe])
+    def select_dupes(self, dupes):
+        self._select_dupes(dupes)
     
     def show_about_box(self):
         self.about_box.show()

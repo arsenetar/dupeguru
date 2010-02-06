@@ -132,6 +132,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if other is not dupe:
                 self.scanner.ignore_list.Ignore(unicode(other.path), unicode(dupe.path))
     
+    def add_selected_to_ignore_list(self):
+        dupes = self.without_ref(self.selected_dupes)
+        for dupe in dupes:
+            self.add_to_ignore_list(dupe)
+        self.remove_duplicates(dupes)
+    
     def apply_filter(self, filter):
         self.results.apply_filter(None)
         if self.options['escape_filter_regexp']:
@@ -220,6 +226,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
     
+    def remove_duplicates(self, duplicates):
+        self.results.remove_duplicates(duplicates)
+    
     def save(self):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
@@ -247,6 +256,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             raise AllFilesAreRefError()
         self.results.groups = []
         self._start_job(JOB_SCAN, do)
+    
+    def without_ref(self, dupes):
+        return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
     
     #--- Properties
     @property

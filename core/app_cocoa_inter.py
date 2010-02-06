@@ -85,7 +85,7 @@ class PyDupeGuruBase(PyApp):
     
     #---Actions
     def addSelectedToIgnoreList(self):
-        self.app.AddSelectedToIgnoreList()
+        self.app.add_selected_to_ignore_list()
     
     def deleteMarked(self):
         self.app.delete_marked()

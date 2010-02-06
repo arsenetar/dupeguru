@@ -90,10 +90,6 @@ class DupeGuru(app.DupeGuru):
         return self.get_folder_path(node_path[1:], curr_path)
     
     #---Public
-    def AddSelectedToIgnoreList(self):
-        for dupe in self.selected_dupes:
-            self.add_to_ignore_list(dupe)
-    
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
 

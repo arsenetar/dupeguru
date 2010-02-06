@@ -307,10 +307,10 @@ class TCDupeGuru(TestCase):
     def test_ignore(self):
         app = self.app
         app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
-        app.AddSelectedToIgnoreList()
+        app.add_selected_to_ignore_list()
         self.assertEqual(1,len(app.scanner.ignore_list))
         app.SelectPowerMarkerNodePaths(r2np([0])) #first dupe of the 3 dupes group
-        app.AddSelectedToIgnoreList()
+        app.add_selected_to_ignore_list()
         #BOTH the ref and the other dupe should have been added
         self.assertEqual(3,len(app.scanner.ignore_list))
     
@@ -337,7 +337,7 @@ class TCDupeGuru(TestCase):
         app = self.app
         app.scanner.ignore_list.Ignore = FakeIgnore
         app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
-        app.AddSelectedToIgnoreList()
+        app.add_selected_to_ignore_list()
     
     def test_GetOutlineViewChildCounts_out_of_range(self):
         # Out of range requests don't crash and return an empty value
