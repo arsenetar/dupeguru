@@ -63,6 +63,7 @@
     <ROW Component="qmng4.dll" ComponentId="{5E3A9C7B-F545-4EF5-B083-2A29E54784BE}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qmng4.dll"/>
     <ROW Component="qsvg4.dll" ComponentId="{590998F6-2A55-48DC-A83A-AABC75EF7F99}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qsvg4.dll"/>
     <ROW Component="qsvgicon4.dll" ComponentId="{0440300E-1BAE-49C5-8575-AF43C2557271}" Directory_="iconengines_DIR" Attributes="0" KeyPath="qsvgicon4.dll"/>
+    <ROW Component="qtaccessiblecompatwidgets4.dll" ComponentId="{217EE5AA-868E-4DDA-B374-E1007D54C1CF}" Directory_="accessible_DIR" Attributes="0" KeyPath="qtaccessiblecompatwidgets4.dll"/>
     <ROW Component="qtaccessiblewidgets4.dll" ComponentId="{74F17E1E-D2BC-4C85-A5B9-A093D4AFC840}" Directory_="accessible_DIR" Attributes="0" KeyPath="qtaccessiblewidgets4.dll"/>
     <ROW Component="qtiff4.dll" ComponentId="{545FB567-9E3A-4E44-85A0-74446ABB8FC8}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qtiff4.dll"/>
     <ROW Component="qtwcodecs4.dll" ComponentId="{59FB6978-93A0-4DD6-A617-FE6460CDE4DB}" Directory_="codecs_DIR" Attributes="0" KeyPath="qtwcodecs4.dll"/>
@@ -70,7 +71,7 @@
     <ROW Component="updater.exe" ComponentId="{D1DDB6CB-B336-4112-BC40-1ABD36C3ABDA}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_PE.exe AIShRegAnswer SHORTCUTDIR bz2.pyd POWRPROF.dll python26.dll pythoncom26.dll PyWinTypes26.dll qtaccessiblewidgets4.dll qcncodecs4.dll qjpcodecs4.dll qkrcodecs4.dll qtwcodecs4.dll qsvgicon4.dll qgif4.dll qico4.dll qjpeg4.dll qmng4.dll qsvg4.dll qtiff4.dll QtCore4.dll QtGui4.dll SHLWAPI.dll sqlite3.dll AI_ExePath credits.htm hs_title.png init_.py"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_PE.exe AIShRegAnswer SHORTCUTDIR bz2.pyd POWRPROF.dll python26.dll pythoncom26.dll PyWinTypes26.dll qtaccessiblewidgets4.dll qcncodecs4.dll qjpcodecs4.dll qkrcodecs4.dll qtwcodecs4.dll qsvgicon4.dll qgif4.dll qico4.dll qjpeg4.dll qmng4.dll qsvg4.dll qtiff4.dll QtCore4.dll QtGui4.dll SHLWAPI.dll sqlite3.dll AI_ExePath credits.htm hs_title.png init_.py qtaccessiblecompatwidgets4.dll"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -111,6 +112,7 @@
     <ROW File="qmng4.dll" Component_="qmng4.dll" FileName="qmng4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qmng4.dll" SelfReg="false" Sequence="21"/>
     <ROW File="qsvg4.dll" Component_="qsvg4.dll" FileName="qsvg4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qsvg4.dll" SelfReg="false" Sequence="22"/>
     <ROW File="qsvgicon4.dll" Component_="qsvgicon4.dll" FileName="qsvgic~1.dll|qsvgicon4.dll" Attributes="0" SourcePath="dist\qt4_plugins\iconengines\qsvgicon4.dll" SelfReg="false" Sequence="17"/>
+    <ROW File="qtaccessiblecompatwidgets4.dll" Component_="qtaccessiblecompatwidgets4.dll" FileName="qtacce~1.dll|qtaccessiblecompatwidgets4.dll" Attributes="0" SourcePath="dist\qt4_plugins\accessible\qtaccessiblecompatwidgets4.dll" SelfReg="false" Sequence="57"/>
     <ROW File="qtaccessiblewidgets4.dll" Component_="qtaccessiblewidgets4.dll" FileName="qtacce~2.dll|qtaccessiblewidgets4.dll" Attributes="0" SourcePath="dist\qt4_plugins\accessible\qtaccessiblewidgets4.dll" SelfReg="false" Sequence="12"/>
     <ROW File="qtiff4.dll" Component_="qtiff4.dll" FileName="qtiff4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qtiff4.dll" SelfReg="false" Sequence="23"/>
     <ROW File="qtwcodecs4.dll" Component_="qtwcodecs4.dll" FileName="qtwcod~1.dll|qtwcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qtwcodecs4.dll" SelfReg="false" Sequence="16"/>
@@ -169,6 +171,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
     <ATTRIBUTE name="FixedSizeBitmaps" value="0"/>
+    <ATTRIBUTE name="MultiBuildFixedSizeBitmaps" value="DefaultBuild:1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlConditionComponent">
     <ROW Dialog_="ShortcutsDlg" Control_="QuickLaunchShorcutsCheckBox" Action="Hide" Condition="(Not Installed) AND (VersionNT&lt;&quot;601&quot;)"/>
