@@ -112,7 +112,7 @@ class PyDupeGuruBase(PyApp):
         return self.app.RenameSelected(newname)
     
     def revealSelected(self):
-        self.app.RevealSelected()
+        self.app.reveal_selected()
     
     #---Misc
     def sortDupesBy_ascending_(self, key, asc):

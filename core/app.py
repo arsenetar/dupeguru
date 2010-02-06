@@ -111,6 +111,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _recycle_dupe(dupe):
         raise NotImplementedError()
     
+    @staticmethod
+    def _reveal_path(path):
+        raise NotImplementedError()
+    
     def _select_dupes(self, dupes):
         if dupes == self.selected_dupes:
             return
@@ -237,6 +241,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def remove_selected(self):
         self.remove_duplicates(self.selected_dupes)
+    
+    def reveal_selected(self):
+        if self.selected_dupes:
+            self._reveal_path(self.selected_dupes[0].path)
     
     def save(self):
         if not op.exists(self.appdata):

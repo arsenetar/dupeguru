@@ -61,6 +61,10 @@ class DupeGuru(app.DupeGuru):
         result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
             NSWorkspaceRecycleOperation, directory, '', [filename], None)
     
+    @staticmethod
+    def _reveal_path(path):
+        NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(unicode(path), '')
+    
     def _start_job(self, jobid, func):
         try:
             j = self.progress.create_job()
@@ -114,12 +118,6 @@ class DupeGuru(app.DupeGuru):
         except (IndexError, fs.FSError) as e:
             logging.warning("dupeGuru Warning: %s" % unicode(e))
         return False
-    
-    def RevealSelected(self):
-        # local import because first appkit import takes a lot of memory. we want to avoid it.
-        if self.selected_dupes:
-            path = unicode(self.selected_dupes[0].path)
-            NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(path,'')
     
     def start_scanning(self):
         self._select_dupes([])

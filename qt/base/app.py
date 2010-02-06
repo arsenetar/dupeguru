@@ -126,6 +126,10 @@ class DupeGuru(DupeGuruBase, QObject):
     def _recycle_dupe(dupe):
         platform.recycle_file(dupe.path)
     
+    @staticmethod
+    def _reveal_path(path):
+        self._open_path(path[:-1])
+    
     def _start_job(self, jobid, func):
         title = JOBID2TITLE[jobid]
         try:
@@ -209,12 +213,6 @@ class DupeGuru(DupeGuruBase, QObject):
         except (IndexError, fs.FSError) as e:
             logging.warning("dupeGuru Warning: %s" % unicode(e))
         return False
-    
-    def reveal_selected(self):
-        if not self.selected_dupes:
-            return
-        url = QUrl.fromLocalFile(unicode(self.selected_dupe[0].path[:-1]))
-        QDesktopServices.openUrl(url)
     
     def select_dupes(self, dupes):
         self._select_dupes(dupes)
