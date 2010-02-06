@@ -150,7 +150,7 @@ class TCDupeGuru(TestCase):
         objects = self.objects
         paths = [[0, 0], [0, 1], [1]]
         app.SelectResultNodePaths(paths)
-        app.RemoveSelected()
+        app.remove_selected()
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
         eq_(app.selected_result_node_paths(), [[0]]) # no exception
     
@@ -206,7 +206,7 @@ class TCDupeGuru(TestCase):
         objects = self.objects
         paths = r2np([0, 1, 2])
         app.SelectPowerMarkerNodePaths(paths)
-        app.RemoveSelected()
+        app.remove_selected()
         eq_(app.selected_powermarker_node_paths(), []) # no exception
     
     def test_selectPowerMarkerRows(self):
@@ -281,13 +281,13 @@ class TCDupeGuru(TestCase):
     def test_removeSelected(self):
         app = self.app
         app.SelectPowerMarkerNodePaths(r2np([0,2]))
-        app.RemoveSelected()
-        self.assertEqual(1,len(app.results.dupes))
-        app.RemoveSelected()
-        self.assertEqual(1,len(app.results.dupes))
+        app.remove_selected()
+        eq_(len(app.results.dupes), 1)
+        app.remove_selected()
+        eq_(len(app.results.dupes), 1)
         app.SelectPowerMarkerNodePaths(r2np([0,2]))
-        app.RemoveSelected()
-        self.assertEqual(0,len(app.results.dupes))
+        app.remove_selected()
+        eq_(len(app.results.dupes), 0)
     
     def test_addDirectory_simple(self):
         # There's already a directory in self.app, so adding another once makes 2 of em

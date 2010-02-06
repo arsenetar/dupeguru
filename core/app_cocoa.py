@@ -106,9 +106,6 @@ class DupeGuru(app.DupeGuru):
         except IndexError:
             pass
     
-    def RemoveSelected(self):
-        self.results.remove_duplicates(self.selected_dupes)
-    
     def RenameSelected(self, newname):
         try:
             d = self.selected_dupes[0]

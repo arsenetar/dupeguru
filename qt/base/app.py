@@ -169,6 +169,15 @@ class DupeGuru(DupeGuruBase, QObject):
         DupeGuruBase.remove_duplicates(self, duplicates)
         self.emit(SIGNAL('resultsChanged()'))
     
+    def remove_selected(self):
+        dupes = self.without_ref(self.selected_dupes)
+        if not dupes:
+            return
+        title = "Remove duplicates"
+        msg = "You are about to remove {0} files from results. Continue?".format(len(dupes))
+        if self.main_window._confirm(title, msg):
+            DupeGuruBase.remove_selected(self)
+    
     #--- Public
     def askForRegCode(self):
         self.reg.ask_for_code()

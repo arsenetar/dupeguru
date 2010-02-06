@@ -235,6 +235,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def remove_duplicates(self, duplicates):
         self.results.remove_duplicates(duplicates)
     
+    def remove_selected(self):
+        self.remove_duplicates(self.selected_dupes)
+    
     def save(self):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)

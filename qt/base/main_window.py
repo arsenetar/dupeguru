@@ -248,13 +248,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.app.remove_marked_duplicates()
     
     def removeSelectedTriggered(self):
-        dupes = self.resultsView.selectedDupes()
-        if not dupes:
-            return
-        title = "Remove duplicates"
-        msg = "You are about to remove {0} files from results. Continue?".format(len(dupes))
-        if self._confirm(title, msg):
-            self.app.remove_duplicates(dupes)
+        self.app.remove_selected()
     
     def renameTriggered(self):
         self.resultsView.edit(self.resultsView.selectionModel().currentIndex())

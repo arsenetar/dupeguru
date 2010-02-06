@@ -106,7 +106,7 @@ class PyDupeGuruBase(PyApp):
         self.app.results.perform_on_marked(lambda x:True, True)
     
     def removeSelected(self):
-        self.app.RemoveSelected()
+        self.app.remove_selected()
     
     def renameSelected_(self,newname):
         return self.app.RenameSelected(newname)
