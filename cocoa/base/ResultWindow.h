@@ -24,10 +24,12 @@ http://www.hardcoded.net/licenses/hs_license
 	IBOutlet NSSegmentedControl *pmSwitch;
 	IBOutlet NSTextField *stats;
 	IBOutlet NSMenu *columnsMenu;
+	IBOutlet NSSearchField *filterField;
     
     BOOL _powerMode;
     BOOL _displayDelta;
     NSMutableArray *_resultColumns;
+    NSMutableIndexSet *_deltaColumns;
     NSWindowController *preferencesPanel;
 }
 /* Helpers */
@@ -44,17 +46,30 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 
 /* Actions */
+- (IBAction)clearIgnoreList:(id)sender;
 - (IBAction)changeDelta:(id)sender;
 - (IBAction)changePowerMarker:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
 - (IBAction)expandAll:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
+- (IBAction)filter:(id)sender;
+- (IBAction)ignoreSelected:(id)sender;
+- (IBAction)markAll:(id)sender;
+- (IBAction)markInvert:(id)sender;
+- (IBAction)markNone:(id)sender;
+- (IBAction)markSelected:(id)sender;
+- (IBAction)markToggle:(id)sender;
 - (IBAction)moveMarked:(id)sender;
+- (IBAction)removeMarked:(id)sender;
+- (IBAction)removeSelected:(id)sender;
+- (IBAction)renameSelected:(id)sender;
 - (IBAction)resetColumnsToDefault:(id)sender;
+- (IBAction)revealSelected:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;
+- (IBAction)toggleDelta:(id)sender;
 - (IBAction)toggleDetailsPanel:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;
 

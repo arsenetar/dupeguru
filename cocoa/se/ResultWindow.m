@@ -32,111 +32,6 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Actions */
-- (IBAction)clearIgnoreList:(id)sender
-{
-    int i = n2i([py getIgnoreListCount]);
-    if (!i)
-        return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"Do you really want to remove all %d items from the ignore list?",i]] == NSAlertSecondButtonReturn) // NO
-        return;
-    [py clearIgnoreList];
-}
-
-- (IBAction)filter:(id)sender
-{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setEscapeFilterRegexp:b2n(!n2b([ud objectForKey:@"useRegexpFilter"]))];
-    [py applyFilter:[filterField stringValue]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
-- (IBAction)ignoreSelected:(id)sender
-{
-    NSArray *nodeList = [self getSelected:YES];
-    if (![nodeList count])
-        return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[nodeList count]]] == NSAlertSecondButtonReturn) // NO
-        return;
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py addSelectedToIgnoreList];
-    [py removeSelected];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
-- (IBAction)markAll:(id)sender
-{
-    [py markAll];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
-}
-
-- (IBAction)markInvert:(id)sender
-{
-    [py markInvert];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
-}
-
-- (IBAction)markNone:(id)sender
-{
-    [py markNone];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
-}
-
-- (IBAction)markSelected:(id)sender
-{
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py toggleSelectedMark];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
-}
-
-- (IBAction)markToggle:(id)sender
-{
-    OVNode *node = [matches itemAtRow:[matches clickedRow]];
-    [self performPySelection:[NSArray arrayWithObject:p2a([node indexPath])]];
-    [py toggleSelectedMark];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
-}
-
-- (IBAction)openSelected:(id)sender
-{
-    [self performPySelection:[self getSelectedPaths:NO]];
-    [py openSelected];
-}
-
-- (IBAction)refresh:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
-- (IBAction)removeMarked:(id)sender
-{
-    int mark_count = [[py getMarkCount] intValue];
-    if (!mark_count)
-        return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
-        return;
-    [py removeMarked];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
-- (IBAction)removeSelected:(id)sender
-{
-    NSArray *nodeList = [self getSelected:YES];
-    if (![nodeList count])
-        return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",[nodeList count]]] == NSAlertSecondButtonReturn) // NO
-        return;
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py removeSelected];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
-- (IBAction)renameSelected:(id)sender
-{
-    int col = [matches columnWithIdentifier:@"0"];
-    int row = [matches selectedRow];
-    [matches editColumn:col row:row withEvent:[NSApp currentEvent] select:YES];
-}
-
 - (IBAction)resetColumnsToDefault:(id)sender
 {
     NSMutableArray *columnsOrder = [NSMutableArray array];
@@ -150,12 +45,6 @@ http://www.hardcoded.net/licenses/hs_license
     [columnsWidth setObject:i2n(63) forKey:@"2"];
     [columnsWidth setObject:i2n(60) forKey:@"6"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
-}
-
-- (IBAction)revealSelected:(id)sender
-{
-    [self performPySelection:[self getSelectedPaths:NO]];
-    [py revealSelected];
 }
 
 - (IBAction)startDuplicateScan:(id)sender
@@ -188,15 +77,6 @@ http://www.hardcoded.net/licenses/hs_license
         [app toggleDirectories:nil];
     }
 
-}
-
-- (IBAction)toggleDelta:(id)sender
-{
-    if ([deltaSwitch selectedSegment] == 1)
-        [deltaSwitch setSelectedSegment:0];
-    else
-        [deltaSwitch setSelectedSegment:1];
-    [self changeDelta:sender];
 }
 
 /* Public */

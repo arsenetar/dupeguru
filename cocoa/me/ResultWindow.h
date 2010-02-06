@@ -13,26 +13,8 @@ http://www.hardcoded.net/licenses/hs_license
 
 @interface ResultWindow : ResultWindowBase
 {
-    IBOutlet NSSearchField *filterField;
-    
     NSString *_lastAction;
-    NSMutableIndexSet *_deltaColumns;
 }
-- (IBAction)clearIgnoreList:(id)sender;
-- (IBAction)filter:(id)sender;
-- (IBAction)ignoreSelected:(id)sender;
-- (IBAction)markAll:(id)sender;
-- (IBAction)markInvert:(id)sender;
-- (IBAction)markNone:(id)sender;
-- (IBAction)markSelected:(id)sender;
-- (IBAction)markToggle:(id)sender;
-- (IBAction)openSelected:(id)sender;
-- (IBAction)refresh:(id)sender;
 - (IBAction)removeDeadTracks:(id)sender;
-- (IBAction)removeMarked:(id)sender;
-- (IBAction)removeSelected:(id)sender;
-- (IBAction)renameSelected:(id)sender;
-- (IBAction)revealSelected:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
-- (IBAction)toggleDelta:(id)sender;
 @end
