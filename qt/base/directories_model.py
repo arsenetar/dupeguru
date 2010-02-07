@@ -12,7 +12,9 @@ from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
-from qtlib.tree_model import TreeNode, TreeModel
+from qtlib.tree_model import RefNode, TreeModel
+
+from core.gui.directory_tree import DirectoryTree
 
 HEADERS = ['Name', 'State']
 STATES = ['Normal', 'Reference', 'Excluded']
@@ -58,36 +60,16 @@ class DirectoriesDelegate(QStyledItemDelegate):
         editor.setGeometry(option.rect)
     
 
-class DirectoryNode(TreeNode):
-    def __init__(self, model, parent, ref, row):
-        TreeNode.__init__(self, model, parent, row)
-        self.ref = ref
-    
-    def _createNode(self, ref, row):
-        return DirectoryNode(self.model, self, ref, row)
-    
-    def _getChildren(self):
-        return self.model.dirs.get_subfolders(self.ref)
-    
-    @property
-    def name(self):
-        if self.parent is not None:
-            return self.ref[-1]
-        else:
-            return unicode(self.ref)
-    
-
 class DirectoriesModel(TreeModel):
     def __init__(self, app):
-        self.app = app
-        self.dirs = app.directories
         TreeModel.__init__(self)
+        self.model = DirectoryTree(self, app)
     
     def _createNode(self, ref, row):
-        return DirectoryNode(self, None, ref, row)
+        return RefNode(self, None, ref, row)
     
     def _getChildren(self):
-        return self.dirs
+        return list(self.model)
     
     def columnCount(self, parent):
         return 2
@@ -96,15 +78,16 @@ class DirectoriesModel(TreeModel):
         if not index.isValid():
             return None
         node = index.internalPointer()
+        ref = node.ref
         if role == Qt.DisplayRole:
             if index.column() == 0:
-                return node.name
+                return ref.name
             else:
-                return STATES[self.dirs.get_state(node.ref)]
+                return STATES[ref.state]
         elif role == Qt.EditRole and index.column() == 1:
-            return self.dirs.get_state(node.ref)
+            return ref.state
         elif role == Qt.ForegroundRole:
-            state = self.dirs.get_state(node.ref)
+            state = ref.state
             if state == 1:
                 return QBrush(Qt.blue)
             elif state == 2:
@@ -121,7 +104,7 @@ class DirectoriesModel(TreeModel):
         urls = unicode(unquoted, 'utf-8').split('\r\n')
         paths = [unicode(QUrl(url).toLocalFile()) for url in urls if url]
         for path in paths:
-            self.app.add_directory(path)
+            self.model.add_directory(path)
         self.reset()
         return True
     
@@ -146,11 +129,16 @@ class DirectoriesModel(TreeModel):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
             return False
         node = index.internalPointer()
-        self.dirs.set_state(node.ref, value)
+        ref = node.ref
+        ref.state = value
         return True
     
     def supportedDropActions(self):
         # Normally, the correct action should be ActionLink, but the drop doesn't work. It doesn't
         # work with ActionMove either. So screw that, and accept anything.
         return Qt.ActionMask
+    
+    #--- model --> view
+    def refresh(self):
+        self.reset()
     

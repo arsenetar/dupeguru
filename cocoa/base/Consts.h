@@ -22,5 +22,3 @@ http://www.hardcoded.net/licenses/hs_license
 #define jobCopy @"job_copy"
 #define jobMove @"job_move"
 #define jobDelete @"job_delete"
-
-#define DEMO_MAX_ACTION_COUNT 10

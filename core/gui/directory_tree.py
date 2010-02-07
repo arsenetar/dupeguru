@@ -23,18 +23,17 @@ class DirectoryNode(Node):
         self._loaded = False
         self._state = STATE_ORDER.index(self._app.directories.get_state(path))
     
+    def __len__(self):
+        if not self._loaded:
+            self._load()
+        return Node.__len__(self)
+    
     def _load(self):
         self.clear()
         subpaths = self._app.directories.get_subfolders(self._directory_path)
         for path in subpaths:
             self.append(DirectoryNode(self._app, path, path[-1]))
         self._loaded = True
-    
-    @property
-    def children_count(self):
-        if not self._loaded:
-            self._load()
-        return len(self)
     
     # The state propery is an index to the combobox
     @property

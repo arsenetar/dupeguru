@@ -254,9 +254,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def job_finished(self, jobid):
         self.emit(SIGNAL('resultsChanged()'))
-        if jobid == JOB_LOAD:
-            self.emit(SIGNAL('directoriesChanged()'))
-        elif jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE) and self.last_op_error_count > 0:
+        if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE) and self.last_op_error_count > 0:
             msg = "{0} files could not be processed.".format(self.results.mark_count)
             QMessageBox.warning(self.main_window, 'Warning', msg)
         elif jobid == JOB_SCAN:

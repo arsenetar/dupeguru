@@ -26,7 +26,6 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         self.connect(self.addButton, SIGNAL('clicked()'), self.addButtonClicked)
         self.connect(self.removeButton, SIGNAL('clicked()'), self.removeButtonClicked)
         self.connect(self.treeView.selectionModel(), SIGNAL('selectionChanged(QItemSelection,QItemSelection)'), self.selectionChanged)
-        self.connect(self.app, SIGNAL('directoriesChanged()'), self.directoriesChanged)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -60,10 +59,6 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
             return
         self.lastAddedFolder = dirpath
         self.app.add_directory(dirpath)
-        self.directoriesModel.reset()
-    
-    def directoriesChanged(self):
-        self.directoriesModel.reset()
     
     def doneButtonClicked(self):
         self.hide()
@@ -76,8 +71,7 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         node = index.internalPointer()
         if node.parent is None:
             row = index.row()
-            del self.app.directories[row]
-            self.directoriesModel.reset()
+            self.app.remove_directory(row)
     
     def selectionChanged(self, selected, deselected):
         self._updateRemoveButton()
