@@ -13,7 +13,6 @@ http://www.hardcoded.net/licenses/hs_license
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)removeDirectory:(NSNumber *)index;
-- (void)setDirectory:(NSArray *)indexPath state:(NSNumber *)state;
 - (void)loadResults;
 - (void)saveResults;
 - (void)loadIgnoreList;

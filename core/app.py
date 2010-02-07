@@ -84,6 +84,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def _do_load(self, j):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
+        self.notify('directories_changed')
         j = j.start_subjob([1, 9])
         self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
         files = flatten(g[:] for g in self.results.groups)
@@ -128,6 +129,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def add_directory(self, d):
         try:
             self.directories.add_path(Path(d))
+            self.notify('directories_changed')
             return 0
         except directories.AlreadyThereError:
             return 1
@@ -235,6 +237,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def open_selected(self):
         if self.selected_dupes:
             self._open_path(self.selected_dupes[0].path)
+    
+    def remove_directory(self,index):
+        try:
+            del self.directories[index]
+            self.notify('directories_changed')
+        except IndexError:
+            pass
     
     def remove_duplicates(self, duplicates):
         self.results.remove_duplicates(duplicates)

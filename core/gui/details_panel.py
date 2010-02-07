@@ -7,13 +7,11 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.notify import Listener
+from .base import GUIObject
 
-class DetailsPanel(Listener):
+class DetailsPanel(GUIObject):
     def __init__(self, view, app):
-        Listener.__init__(self, app)
-        self.app = app
-        self.view = view
+        GUIObject.__init__(self, view, app)
         self._table = []
         self._refresh()
         self.connect()

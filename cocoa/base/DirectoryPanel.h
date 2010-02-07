@@ -8,31 +8,23 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 #import "RecentDirectories.h"
-#import "Outline.h"
+#import "HSOutlineView.h"
+#import "DirectoryOutline.h"
 #import "PyDupeGuru.h"
-
-@interface DirectoryOutline : OutlineView
-{
-}
-@end
-
-@protocol DirectoryOutlineDelegate
-- (void)outlineView:(NSOutlineView *)outlineView addDirectory:(NSString *)directory;
-@end
 
 @interface DirectoryPanel : NSWindowController
 {
     IBOutlet NSPopUpButton *addButtonPopUp;
-    IBOutlet DirectoryOutline *directories;
+    IBOutlet HSOutlineView *outlineView;
     IBOutlet NSButton *removeButton;
     
     PyDupeGuruBase *_py;
     RecentDirectories *_recentDirectories;
+    DirectoryOutline *outline;
 }
 - (id)initWithParentApp:(id)aParentApp;
 
 - (IBAction)askForDirectory:(id)sender;
-- (IBAction)changeDirectoryState:(id)sender;
 - (IBAction)popupAddDirectoryMenu:(id)sender;
 - (IBAction)removeSelectedDirectory:(id)sender;
 - (IBAction)toggleVisible:(id)sender;

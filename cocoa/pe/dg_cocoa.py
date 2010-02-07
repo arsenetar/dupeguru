@@ -13,25 +13,25 @@ from core_pe import block, cache, matchbase, data, _block_osx
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru, self).init()
-        self.app = app_pe_cocoa.DupeGuruPE()
+        self.py = app_pe_cocoa.DupeGuruPE()
         return self
     
     def clearPictureCache(self):
-        self.app.scanner.clear_picture_cache()
+        self.py.scanner.clear_picture_cache()
     
     #---Information    
     def getSelectedDupePath(self):
-        return unicode(self.app.selected_dupe_path())
+        return unicode(self.py.selected_dupe_path())
     
     def getSelectedDupeRefPath(self):
-        return unicode(self.app.selected_dupe_ref_path())
+        return unicode(self.py.selected_dupe_ref_path())
     
     #---Properties
     def setMatchScaled_(self,match_scaled):
-        self.app.scanner.match_scaled = match_scaled
+        self.py.scanner.match_scaled = match_scaled
     
     def setMinMatchPercentage_(self,percentage):
-        self.app.scanner.threshold = int(percentage)
+        self.py.scanner.threshold = int(percentage)
     
     #---Registration
     def appName(self):

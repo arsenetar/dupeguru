@@ -18,27 +18,27 @@ from hsmedia import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.app = DupeGuruME()
+        self.py = DupeGuruME()
         return self
     
     def removeDeadTracks(self):
-        self.app.remove_dead_tracks()
+        self.py.remove_dead_tracks()
     
     def scanDeadTracks(self):
-        self.app.scan_dead_tracks()
+        self.py.scan_dead_tracks()
     
     #---Information
     @signature('i@:')
     def deadTrackCount(self):
-        return len(self.app.dead_tracks)
+        return len(self.py.dead_tracks)
     
     #---Properties
     def setMinMatchPercentage_(self, percentage):
-        self.app.scanner.min_match_percentage = int(percentage)
+        self.py.scanner.min_match_percentage = int(percentage)
     
     def setScanType_(self, scan_type):
         try:
-            self.app.scanner.scan_type = [
+            self.py.scanner.scan_type = [
                 SCAN_TYPE_FILENAME,
                 SCAN_TYPE_FIELDS,
                 SCAN_TYPE_FIELDS_NO_ORDER,
@@ -50,16 +50,16 @@ class PyDupeGuru(PyDupeGuruBase):
             pass
     
     def setWordWeighting_(self, words_are_weighted):
-        self.app.scanner.word_weighting = words_are_weighted
+        self.py.scanner.word_weighting = words_are_weighted
     
     def setMatchSimilarWords_(self, match_similar_words):
-        self.app.scanner.match_similar_words = match_similar_words
+        self.py.scanner.match_similar_words = match_similar_words
     
     def enable_scanForTag_(self, enable, scan_tag):
         if enable:
-            self.app.scanner.scanned_tags.add(scan_tag)
+            self.py.scanner.scanned_tags.add(scan_tag)
         else:
-            self.app.scanner.scanned_tags.discard(scan_tag)
+            self.py.scanner.scanned_tags.discard(scan_tag)
     
     #---Registration
     def appName(self):

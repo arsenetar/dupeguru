@@ -11,10 +11,11 @@
 
 from hsutil.cocoa.objcmin import NSObject
 
-from hsutil.cocoa import signature
+from hsutil.cocoa.inter import signature, PyOutline
 from hsutil.reg import InvalidCodeError
 
 from .gui.details_panel import DetailsPanel
+from .gui.directory_tree import DirectoryTree
 
 # Fix py2app's problems on relative imports
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
@@ -26,185 +27,182 @@ class PyApp(NSObject):
 class PyDupeGuruBase(PyApp):
     #---Directories
     def addDirectory_(self, directory):
-        return self.app.add_directory(directory)
+        return self.py.add_directory(directory)
     
     def removeDirectory_(self, index):
-        self.app.RemoveDirectory(index)
-    
-    def setDirectory_state_(self, node_path, state):
-        self.app.SetDirectoryState(node_path, state)
+        self.py.remove_directory(index)
     
     #---Results
     def clearIgnoreList(self):
-        self.app.scanner.ignore_list.Clear()
+        self.py.scanner.ignore_list.Clear()
     
     def doScan(self):
-        return self.app.start_scanning()
+        return self.py.start_scanning()
     
     def exportToXHTMLwithColumns_(self, column_ids):
-        return self.app.export_to_xhtml(column_ids)
+        return self.py.export_to_xhtml(column_ids)
     
     def loadIgnoreList(self):
-        self.app.load_ignore_list()
+        self.py.load_ignore_list()
     
     def loadResults(self):
-        self.app.load()
+        self.py.load()
     
     def markAll(self):
-        self.app.results.mark_all()
+        self.py.results.mark_all()
     
     def markNone(self):
-        self.app.results.mark_none()
+        self.py.results.mark_none()
     
     def markInvert(self):
-        self.app.results.mark_invert()
+        self.py.results.mark_invert()
     
     def purgeIgnoreList(self):
-        self.app.PurgeIgnoreList()
+        self.py.PurgeIgnoreList()
     
     def toggleSelectedMark(self):
-        self.app.ToggleSelectedMarkState()
+        self.py.ToggleSelectedMarkState()
     
     def saveIgnoreList(self):
-        self.app.save_ignore_list()
+        self.py.save_ignore_list()
     
     def saveResults(self):
-        self.app.save()
+        self.py.save()
     
     def selectedResultNodePaths(self):
-        return self.app.selected_result_node_paths()
+        return self.py.selected_result_node_paths()
     
     def selectResultNodePaths_(self,node_paths):
-        self.app.SelectResultNodePaths(node_paths)
+        self.py.SelectResultNodePaths(node_paths)
     
     def selectedPowerMarkerNodePaths(self):
-        return self.app.selected_powermarker_node_paths()
+        return self.py.selected_powermarker_node_paths()
     
     def selectPowerMarkerNodePaths_(self,node_paths):
-        self.app.SelectPowerMarkerNodePaths(node_paths)
+        self.py.SelectPowerMarkerNodePaths(node_paths)
     
     #---Actions
     def addSelectedToIgnoreList(self):
-        self.app.add_selected_to_ignore_list()
+        self.py.add_selected_to_ignore_list()
     
     def deleteMarked(self):
-        self.app.delete_marked()
+        self.py.delete_marked()
     
     def applyFilter_(self, filter):
-        self.app.apply_filter(filter)
+        self.py.apply_filter(filter)
     
     def makeSelectedReference(self):
-        self.app.make_selected_reference()
+        self.py.make_selected_reference()
     
     def copyOrMove_markedTo_recreatePath_(self, copy, destination, recreate_path):
-        self.app.copy_or_move_marked(copy, destination, recreate_path)
+        self.py.copy_or_move_marked(copy, destination, recreate_path)
     
     def openSelected(self):
-        self.app.open_selected()
+        self.py.open_selected()
     
     def removeMarked(self):
-        self.app.results.perform_on_marked(lambda x:True, True)
+        self.py.results.perform_on_marked(lambda x:True, True)
     
     def removeSelected(self):
-        self.app.remove_selected()
+        self.py.remove_selected()
     
     def renameSelected_(self,newname):
-        return self.app.RenameSelected(newname)
+        return self.py.RenameSelected(newname)
     
     def revealSelected(self):
-        self.app.reveal_selected()
+        self.py.reveal_selected()
     
     #---Misc
     def sortDupesBy_ascending_(self, key, asc):
-        self.app.sort_dupes(key, asc)
+        self.py.sort_dupes(key, asc)
     
     def sortGroupsBy_ascending_(self, key, asc):
-        self.app.sort_groups(key, asc)
+        self.py.sort_groups(key, asc)
     
     #---Information
     def getIgnoreListCount(self):
-        return len(self.app.scanner.ignore_list)
+        return len(self.py.scanner.ignore_list)
     
     def getMarkCount(self):
-        return self.app.results.mark_count
+        return self.py.results.mark_count
     
     def getStatLine(self):
-        return self.app.stat_line
+        return self.py.stat_line
     
     def getOperationalErrorCount(self):
-        return self.app.last_op_error_count
+        return self.py.last_op_error_count
     
     #---Data
     @signature('i@:i')
     def getOutlineViewMaxLevel_(self, tag):
-        return self.app.GetOutlineViewMaxLevel(tag)
+        return self.py.GetOutlineViewMaxLevel(tag)
     
     @signature('@@:i@')
     def getOutlineView_childCountsForPath_(self, tag, node_path):
-        return self.app.GetOutlineViewChildCounts(tag, node_path)
+        return self.py.GetOutlineViewChildCounts(tag, node_path)
     
     def getOutlineView_valuesForIndexes_(self, tag, node_path):
-        return self.app.GetOutlineViewValues(tag, node_path)
+        return self.py.GetOutlineViewValues(tag, node_path)
     
     def getOutlineView_markedAtIndexes_(self, tag, node_path):
-        return self.app.GetOutlineViewMarked(tag, node_path)
+        return self.py.GetOutlineViewMarked(tag, node_path)
     
     def getTableViewCount_(self, tag):
-        return self.app.GetTableViewCount(tag)
+        return self.py.GetTableViewCount(tag)
     
     def getTableViewMarkedIndexes_(self, tag):
-        return self.app.GetTableViewMarkedIndexes(tag)
+        return self.py.GetTableViewMarkedIndexes(tag)
     
     def getTableView_valuesForRow_(self, tag, row):
-        return self.app.GetTableViewValues(tag, row)
+        return self.py.GetTableViewValues(tag, row)
     
     #---Properties
     def setMixFileKind_(self, mix_file_kind):
-        self.app.scanner.mix_file_kind = mix_file_kind
+        self.py.scanner.mix_file_kind = mix_file_kind
     
     def setDisplayDeltaValues_(self, display_delta_values):
-        self.app.display_delta_values= display_delta_values
+        self.py.display_delta_values= display_delta_values
     
     def setEscapeFilterRegexp_(self, escape_filter_regexp):
-        self.app.options['escape_filter_regexp'] = escape_filter_regexp
+        self.py.options['escape_filter_regexp'] = escape_filter_regexp
     
     def setRemoveEmptyFolders_(self, remove_empty_folders):
-        self.app.options['clean_empty_dirs'] = remove_empty_folders
+        self.py.options['clean_empty_dirs'] = remove_empty_folders
     
     #---Worker
     def getJobProgress(self):
-        return self.app.progress.last_progress
+        return self.py.progress.last_progress
     
     def getJobDesc(self):
-        return self.app.progress.last_desc
+        return self.py.progress.last_desc
     
     def cancelJob(self):
-        self.app.progress.job_cancelled = True
+        self.py.progress.job_cancelled = True
     
     #---Registration
     def demoLimitDescription(self):
-        return self.app.DEMO_LIMIT_DESC
+        return self.py.DEMO_LIMIT_DESC
     
     @signature('i@:')
     def isRegistered(self):
-        return self.app.registered
+        return self.py.registered
     
     def isCodeValid_withEmail_(self, code, email):
         try:
-            self.app.validate_code(code, email)
+            self.py.validate_code(code, email)
             return None
         except InvalidCodeError as e:
             return unicode(e)
     
     def setRegisteredCode_andEmail_(self, code, email):
-        self.app.set_registration(code, email)
+        self.py.set_registration(code, email)
     
 
 class PyDetailsPanel(NSObject):
     def initWithCocoa_pyParent_(self, cocoa, pyparent):
         super(PyDetailsPanel, self).init()
         self.cocoa = cocoa
-        self.py = DetailsPanel(self, pyparent.app)
+        self.py = DetailsPanel(self, pyparent.py)
         return self
     
     @signature('i@:')
@@ -218,4 +216,11 @@ class PyDetailsPanel(NSObject):
     # python --> cocoa
     def refresh(self):
         self.cocoa.refresh()
+    
+
+class PyDirectoryOutline(PyOutline):
+    py_class = DirectoryTree
+    
+    def addDirectory_(self, path):
+        self.py.add_directory(path)
     

@@ -87,28 +87,12 @@ class DupeGuru(app.DupeGuru):
         except IndexError:
             return (None,None)
     
-    def get_folder_path(self, node_path, curr_path=None):
-        if not node_path:
-            return curr_path
-        current_index = node_path[0]
-        if curr_path is None:
-            curr_path = self.directories[current_index]
-        else:
-            curr_path = self.directories.get_subfolders(curr_path)[current_index]
-        return self.get_folder_path(node_path[1:], curr_path)
-    
     #---Public
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
     
     def PurgeIgnoreList(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
-    
-    def RemoveDirectory(self,index):
-        try:
-            del self.directories[index]
-        except IndexError:
-            pass
     
     def RenameSelected(self, newname):
         try:
@@ -172,10 +156,6 @@ class DupeGuru(app.DupeGuru):
         dupes = [self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))]
         self._select_dupes(dupes)
     
-    def SetDirectoryState(self, node_path, state):
-        p = self.get_folder_path(node_path)
-        self.directories.set_state(p, state)
-    
     def sort_dupes(self,key,asc):
         self.results.sort_dupes(key,asc,self.display_delta_values)
     
@@ -190,8 +170,6 @@ class DupeGuru(app.DupeGuru):
     def GetOutlineViewMaxLevel(self, tag):
         if tag == 0:
             return 2
-        elif tag == 1:
-            return 0
         elif tag == 2:
             return 1
     
@@ -201,16 +179,6 @@ class DupeGuru(app.DupeGuru):
         if tag == 0: #Normal results
             assert not node_path # no other value is possible
             return [len(g.dupes) for g in self.results.groups]
-        elif tag == 1: #Directories
-            try:
-                if node_path:
-                    path = self.get_folder_path(node_path)
-                    subfolders = self.directories.get_subfolders(path)
-                else:
-                    subfolders = self.directories
-                return [len(self.directories.get_subfolders(path)) for path in subfolders]
-            except IndexError: # node_path out of range
-                return []
         else: #Power Marker
             assert not node_path # no other value is possible
             return [0 for d in self.results.dupes]
@@ -230,21 +198,12 @@ class DupeGuru(app.DupeGuru):
                 g = self.results.get_group_of_duplicate(d)
             result = self._get_display_info(d, g, self.display_delta_values)
             return result
-        elif tag == 1: #Directories
-            try:
-                path = self.get_folder_path(node_path)
-                name = unicode(path) if len(node_path) == 1 else path[-1]
-                return [name, self.directories.get_state(path)]
-            except IndexError: # node_path out of range
-                return []
     
     def GetOutlineViewMarked(self, tag, node_path):
         # 0=unmarked 1=marked 2=unmarkable
         if self.progress._job_running:
             return
         if not node_path:
-            return 2
-        if tag == 1: #Directories
             return 2
         if tag == 0: #Normal results
             g, d = self.GetObjects(node_path)

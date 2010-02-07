@@ -27,6 +27,7 @@ except ImportError:
     from nose.plugins.skip import SkipTest
     raise SkipTest("These tests can only be run on OS X")
 from ..gui.details_panel import DetailsPanel
+from ..gui.directory_tree import DirectoryTree
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -61,6 +62,8 @@ class TCDupeGuru(TestCase):
         self.app = DupeGuru()
         self.dpanel_gui = CallLogger()
         self.dpanel = DetailsPanel(self.dpanel_gui, self.app)
+        self.dtree_gui = CallLogger()
+        self.dtree = DirectoryTree(self.dtree_gui, self.app)
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
         tmppath = self.tmppath()
@@ -338,21 +341,6 @@ class TCDupeGuru(TestCase):
         app.scanner.ignore_list.Ignore = FakeIgnore
         app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
         app.add_selected_to_ignore_list()
-    
-    def test_GetOutlineViewChildCounts_out_of_range(self):
-        # Out of range requests don't crash and return an empty value
-        app = self.app
-        # [0, 2] is out of range
-        eq_(app.GetOutlineViewChildCounts(1, [0, 2]), []) # no crash
-    
-    def test_GetOutlineViewValues_out_of_range(self):
-        # Out of range requests don't crash and return an empty value
-        app = self.app
-        # [0, 2] is out of range
-        # Directories
-        eq_(app.GetOutlineViewValues(1, [0, 2]), []) # no crash
-        # Normal results
-        app.GetOutlineViewValues(0, [42, 0]) # no crash
     
 
 class TCDupeGuru_renameSelected(TestCase):

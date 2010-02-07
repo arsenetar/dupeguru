@@ -16,16 +16,16 @@ from core_se import fs, data
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.app = DupeGuru()
+        self.py = DupeGuru()
         return self
     
     #---Properties
     def setMinMatchPercentage_(self,percentage):
-        self.app.scanner.min_match_percentage = int(percentage)
+        self.py.scanner.min_match_percentage = int(percentage)
     
     def setScanType_(self,scan_type):
         try:
-            self.app.scanner.scan_type = [
+            self.py.scanner.scan_type = [
                 scanner.SCAN_TYPE_FILENAME,
                 scanner.SCAN_TYPE_CONTENT
             ][scan_type]
@@ -33,14 +33,14 @@ class PyDupeGuru(PyDupeGuruBase):
             pass
     
     def setWordWeighting_(self,words_are_weighted):
-        self.app.scanner.word_weighting = words_are_weighted
+        self.py.scanner.word_weighting = words_are_weighted
     
     def setMatchSimilarWords_(self,match_similar_words):
-        self.app.scanner.match_similar_words = match_similar_words
+        self.py.scanner.match_similar_words = match_similar_words
     
     @signature('v@:i')
     def setSizeThreshold_(self, size_threshold):
-        self.app.scanner.size_threshold = size_threshold
+        self.py.scanner.size_threshold = size_threshold
     
     #---Registration
     def appName(self):
