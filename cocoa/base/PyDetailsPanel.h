@@ -7,9 +7,9 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import "PyGUI.h"
 
-@interface PyDetailsPanel : NSObject
-- (id)initWithCocoa:(id)cocoa pyParent:(id)pyParent;
+@interface PyDetailsPanel : PyGUI
 - (NSInteger)numberOfRows;
 - (id)valueForColumn:(NSString *)column row:(NSInteger)row;
 @end

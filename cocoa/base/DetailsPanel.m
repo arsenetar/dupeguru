@@ -12,17 +12,14 @@ http://www.hardcoded.net/licenses/hs_license
 @implementation DetailsPanel
 - (id)initWithPy:(PyApp *)aPy
 {
-    self = [super initWithWindowNibName:@"DetailsPanel"];
+    self = [super initWithNibName:@"DetailsPanel" pyClassName:@"PyDetailsPanel" pyParent:aPy];
     [self window]; //So the detailsTable is initialized.
-    Class pyClass = [Utils classNamed:@"PyDetailsPanel"];
-    py = [[pyClass alloc] initWithCocoa:self pyParent:aPy];
     return self;
 }
 
-- (void)dealloc
+- (PyDetailsPanel *)py
 {
-    [py release];
-    [super dealloc];
+    return (PyDetailsPanel *)py;
 }
 
 - (void)refreshDetails
@@ -44,12 +41,12 @@ http://www.hardcoded.net/licenses/hs_license
 /* NSTableView Delegate */
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [py numberOfRows];
+    return [[self py] numberOfRows];
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
-    return [py valueForColumn:[column identifier] row:row];
+    return [[self py] valueForColumn:[column identifier] row:row];
 }
 
 /* Python --> Cocoa */

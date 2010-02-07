@@ -11,7 +11,7 @@
 
 from hsutil.cocoa.objcmin import NSObject
 
-from hsutil.cocoa.inter import signature, PyOutline
+from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject
 from hsutil.reg import InvalidCodeError
 
 from .gui.details_panel import DetailsPanel
@@ -21,10 +21,7 @@ from .gui.directory_tree import DirectoryTree
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
 from hsutil import conflict
 
-class PyApp(NSObject):
-    pass #fake class
-
-class PyDupeGuruBase(PyApp):
+class PyDupeGuruBase(NSObject):
     #---Directories
     def addDirectory_(self, directory):
         return self.py.add_directory(directory)
@@ -198,13 +195,8 @@ class PyDupeGuruBase(PyApp):
         self.py.set_registration(code, email)
     
 
-class PyDetailsPanel(NSObject):
-    def initWithCocoa_pyParent_(self, cocoa, pyparent):
-        super(PyDetailsPanel, self).init()
-        self.cocoa = cocoa
-        self.py = DetailsPanel(self, pyparent.py)
-        return self
-    
+class PyDetailsPanel(PyGUIObject):
+    py_class = DetailsPanel
     @signature('i@:')
     def numberOfRows(self):
         return self.py.row_count()
@@ -212,10 +204,6 @@ class PyDetailsPanel(NSObject):
     @signature('@@:@i')
     def valueForColumn_row_(self, column, row):
         return self.py.row(row)[int(column)]
-    
-    # python --> cocoa
-    def refresh(self):
-        self.cocoa.refresh()
     
 
 class PyDirectoryOutline(PyOutline):
