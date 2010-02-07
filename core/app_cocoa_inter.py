@@ -9,10 +9,7 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-from hsutil.cocoa.objcmin import NSObject
-
-from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject
-from hsutil.reg import InvalidCodeError
+from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject, PyRegistrable
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -21,7 +18,7 @@ from .gui.directory_tree import DirectoryTree
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
 from hsutil import conflict
 
-class PyDupeGuruBase(NSObject):
+class PyDupeGuruBase(PyRegistrable):
     #---Directories
     def addDirectory_(self, directory):
         return self.py.add_directory(directory)
@@ -144,15 +141,6 @@ class PyDupeGuruBase(NSObject):
     def getOutlineView_markedAtIndexes_(self, tag, node_path):
         return self.py.GetOutlineViewMarked(tag, node_path)
     
-    def getTableViewCount_(self, tag):
-        return self.py.GetTableViewCount(tag)
-    
-    def getTableViewMarkedIndexes_(self, tag):
-        return self.py.GetTableViewMarkedIndexes(tag)
-    
-    def getTableView_valuesForRow_(self, tag, row):
-        return self.py.GetTableViewValues(tag, row)
-    
     #---Properties
     def setMixFileKind_(self, mix_file_kind):
         self.py.scanner.mix_file_kind = mix_file_kind
@@ -175,24 +163,6 @@ class PyDupeGuruBase(NSObject):
     
     def cancelJob(self):
         self.py.progress.job_cancelled = True
-    
-    #---Registration
-    def demoLimitDescription(self):
-        return self.py.DEMO_LIMIT_DESC
-    
-    @signature('i@:')
-    def isRegistered(self):
-        return self.py.registered
-    
-    def isCodeValid_withEmail_(self, code, email):
-        try:
-            self.py.validate_code(code, email)
-            return None
-        except InvalidCodeError as e:
-            return unicode(e)
-    
-    def setRegisteredCode_andEmail_(self, code, email):
-        self.py.set_registration(code, email)
     
 
 class PyDetailsPanel(PyGUIObject):
