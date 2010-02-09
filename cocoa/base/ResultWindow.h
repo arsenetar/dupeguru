@@ -43,6 +43,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)updatePySelection;
 - (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)refreshStats;
+- (void)reloadMatches;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 
 /* Actions */
@@ -51,7 +52,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)changePowerMarker:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
-- (IBAction)expandAll:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;

@@ -101,13 +101,9 @@ http://www.hardcoded.net/licenses/hs_license
 //Returns an array of identifiers, in order.
 - (NSArray *)getColumnsOrder
 {
-    NSTableColumn *col;
-    NSString *colId;
     NSMutableArray *result = [NSMutableArray array];
-    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
-    while (col = [e nextObject])
-    {
-        colId = [col identifier];
+    for (NSTableColumn *col in [matches tableColumns]) {
+        NSString *colId = [col identifier];
         [result addObject:colId];
     }
     return result;
@@ -116,14 +112,9 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSDictionary *)getColumnsWidth
 {
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    NSTableColumn *col;
-    NSString *colId;
-    NSNumber *width;
-    NSEnumerator *e = [[matches tableColumns] objectEnumerator];
-    while (col = [e nextObject])
-    {
-        colId = [col identifier];
-        width = [NSNumber numberWithDouble:[col width]];
+    for (NSTableColumn *col in [matches tableColumns]) {
+        NSString *colId = [col identifier];
+        NSNumber *width = [NSNumber numberWithDouble:[col width]];
         [result setObject:width forKey:colId];
     }
     return result;
@@ -151,10 +142,9 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSMutableArray *r = [NSMutableArray array];
     NSArray *selected = [self getSelected:aDupesOnly];
-    NSEnumerator *e = [selected objectEnumerator];
-    OVNode *node;
-    while (node = [e nextObject])
+    for (OVNode *node in selected) {
         [r addObject:p2a([node indexPath])];
+    }
     return r;
 }
 
@@ -165,54 +155,61 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
 {
-    NSTableColumn *col;
-    NSString *colId;
-    NSNumber *width;
-    NSMenuItem *mi;
-    //Remove all columns
-    NSEnumerator *e = [[columnsMenu itemArray] objectEnumerator];
-    while (mi = [e nextObject])
-    {
-        if ([mi state] == NSOnState)
-            [self toggleColumn:mi];
-    }
-    //Add columns and set widths
-    e = [aColumnsOrder objectEnumerator];
-    while (colId = [e nextObject])
-    {
-        if (![colId isEqual:@"mark"])
-        {
-            col = [_resultColumns objectAtIndex:[colId intValue]];
-            width = [aColumnsWidth objectForKey:[col identifier]];
-            mi = [columnsMenu itemWithTag:[colId intValue]];
-            if (width)
-                [col setWidth:[width floatValue]];
+    for (NSMenuItem *mi in [columnsMenu itemArray]) {
+        if ([mi state] == NSOnState) {
             [self toggleColumn:mi];
         }
+    }
+    //Add columns and set widths
+    for (NSString *colId in aColumnsOrder) {
+        if ([colId isEqual:@"mark"]) {
+            continue;
+        }
+        NSTableColumn *col = [_resultColumns objectAtIndex:[colId intValue]];
+        NSNumber *width = [aColumnsWidth objectForKey:[col identifier]];
+        NSMenuItem *mi = [columnsMenu itemWithTag:[colId intValue]];
+        if (width) {
+            [col setWidth:[width floatValue]];
+        }
+        [self toggleColumn:mi];
     }
 }
 
 - (void)updatePySelection
 {
 	NSArray *selection;
-    if (_powerMode)
+    if (_powerMode) {
 		selection = [py selectedPowerMarkerNodePaths];
-    else
+	}
+    else {
 		selection = [py selectedResultNodePaths];
+	}
 	[matches selectNodePaths:selection];
 }
 
 - (void)performPySelection:(NSArray *)aIndexPaths
 {
-    if (_powerMode)
+    if (_powerMode) {
         [py selectPowerMarkerNodePaths:aIndexPaths];
-    else
+    }
+    else {
         [py selectResultNodePaths:aIndexPaths];
+    }
 }
 
 - (void)refreshStats
 {
     [stats setStringValue:[py getStatLine]];
+}
+
+/* Reload the matches outline and restore selection from py */
+- (void)reloadMatches
+{
+    [matches setDelegate:nil];
+    [matches reloadData];
+    [matches expandItem:nil expandChildren:YES];
+    [matches setDelegate:self];
+    [self updatePySelection];
 }
 
 /* Actions */
@@ -230,8 +227,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     _displayDelta = [deltaSwitch selectedSegment] == 1;
     [py setDisplayDeltaValues:b2n(_displayDelta)];
-    [matches reloadData];
-    [self expandAll:nil];
+    [self reloadMatches];
 }
 
 - (IBAction)changePowerMarker:(id)sender
@@ -241,7 +237,7 @@ http://www.hardcoded.net/licenses/hs_license
         [matches setTag:2];
     else
         [matches setTag:0];
-    [self expandAll:nil];
+    [matches expandItem:nil expandChildren:YES];
     [self outlineView:matches didClickTableColumn:nil];
 	[self updatePySelection];
 }
@@ -275,12 +271,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [py setRemoveEmptyFolders:[ud objectForKey:@"removeEmptyFolders"]];
     [py deleteMarked];
-}
-
-- (IBAction)expandAll:(id)sender
-{
-    for (NSInteger i=0;i < [matches numberOfRows];i++)
-        [matches expandItem:[matches itemAtRow:i]];
 }
 
 - (IBAction)exportToXHTML:(id)sender
@@ -480,7 +470,6 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Delegate */
-
 - (void)outlineView:(NSOutlineView *)outlineView didClickTableColumn:(NSTableColumn *)tableColumn
 {
     if ([[outlineView sortDescriptors] count] < 1)
@@ -490,8 +479,7 @@ http://www.hardcoded.net/licenses/hs_license
         [py sortDupesBy:i2n([[sd key] intValue]) ascending:b2n([sd ascending])];
     else
         [py sortGroupsBy:i2n([[sd key] intValue]) ascending:b2n([sd ascending])];
-    [matches reloadData];
-    [self expandAll:nil];
+    [self reloadMatches];
 }
 
 /* Notifications */
@@ -548,7 +536,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSString *desc = [ui valueForKey:@"desc"];
     [[ProgressController mainProgressController] setJobDesc:desc];
     NSString *jobid = [ui valueForKey:@"jobid"];
-    // NSLog(jobid);
     [[ProgressController mainProgressController] setJobId:jobid];
     [[ProgressController mainProgressController] showSheetForParent:[self window]];
 }
@@ -566,9 +553,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)resultsChanged:(NSNotification *)aNotification
 {
-    [matches reloadData];
-    [self expandAll:nil];
-    [self outlineViewSelectionDidChange:nil];
+    [self reloadMatches];
     [self refreshStats];
 }
 
