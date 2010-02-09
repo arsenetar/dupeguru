@@ -18,6 +18,62 @@ import yaml
 from hsdocgen import generate_help, filters
 from hsutil.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
+def build_cocoa(edition, dev):
+    if not dev:
+        print "Building help index"
+        os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
+    
+    print "Building dg_cocoa.plugin"
+    if op.exists('build'):
+        shutil.rmtree('build')
+    os.mkdir('build')
+    if not dev:
+        specific_packages = {
+            'se': ['core_se'],
+            'me': ['core_me', 'hsmedia'],
+            'pe': ['core_pe'],
+        }[edition]
+        copy_packages(['core', 'hsutil'] + specific_packages, 'build')
+    cocoa_project_path = 'cocoa/{0}'.format(edition)
+    shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
+    os.chdir('build')
+    script_args = ['py2app', '-A'] if dev else ['py2app']
+    setup(
+        script_args = script_args,
+        plugin = ['dg_cocoa.py'],
+        setup_requires = ['py2app'],
+    )
+    os.chdir('..')
+    pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
+    if op.exists(pluginpath):
+        shutil.rmtree(pluginpath)
+    shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
+    if dev:
+        # In alias mode, the tweakings we do to the pythonpath aren't counted in. We have to
+        # manually put a .pth in the plugin
+        pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
+        open(pthpath, 'w').write(op.abspath('.'))
+    os.chdir(cocoa_project_path)
+    print "Building the XCode project"
+    args = []
+    if dev:
+        args.append('-configuration dev')
+    else:
+        args.append('-configuration release')
+    args = ' '.join(args)
+    os.system('xcodebuild {0}'.format(args))
+    os.chdir('..')
+
+def build_qt(edition, dev):
+    build_all_qt_ui(op.join('qtlib', 'ui'))
+    build_all_qt_ui(op.join('qt', 'base'))
+    build_all_qt_ui(op.join('qt', edition))
+    print_and_do("pyrcc4 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
+    if edition == 'pe':
+        os.chdir(op.join('qt', edition))
+        os.system('python gen.py')
+        os.chdir(op.join('..', '..'))
+
 def main():
     conf = yaml.load(open('conf.yaml'))
     edition = conf['edition']
@@ -42,54 +98,9 @@ def main():
         os.system('python gen.py')
         os.chdir('..')
     if ui == 'cocoa':
-        if not dev:
-            print "Building help index"
-            os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
-        
-        print "Building dg_cocoa.plugin"
-        if op.exists('build'):
-            shutil.rmtree('build')
-        os.mkdir('build')
-        if not dev:
-            specific_packages = {
-                'se': ['core_se'],
-                'me': ['core_me', 'hsmedia'],
-                'pe': ['core_pe'],
-            }[edition]
-            copy_packages(['core', 'hsutil'] + specific_packages, 'build')
-        cocoa_project_path = 'cocoa/{0}'.format(edition)
-        shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
-        os.chdir('build')
-        script_args = ['py2app', '-A'] if dev else ['py2app']
-        setup(
-            script_args = script_args,
-            plugin = ['dg_cocoa.py'],
-            setup_requires = ['py2app'],
-        )
-        os.chdir('..')
-        pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
-        if op.exists(pluginpath):
-            shutil.rmtree(pluginpath)
-        shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
-        if dev:
-            # In alias mode, the tweakings we do to the pythonpath aren't counted in. We have to
-            # manually put a .pth in the plugin
-            pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
-            open(pthpath, 'w').write(op.abspath('.'))
-        os.chdir(cocoa_project_path)
-        print "Building the XCode project"
-        args = []
-        if dev:
-            args.append('-configuration dev')
-        else:
-            args.append('-configuration release')
-        args = ' '.join(args)
-        os.system('xcodebuild {0}'.format(args))
-        os.chdir('..')
+        build_cocoa(edition, dev)
     elif ui == 'qt':
-        os.chdir(op.join('qt', edition))
-        os.system('python gen.py')
-        os.chdir(op.join('..', '..'))
+        build_qt(edition, dev)
 
 if __name__ == '__main__':
     main()

@@ -10,13 +10,6 @@
 import os
 import os.path as op
 
-from hsutil.build import print_and_do, build_all_qt_ui
-
-build_all_qt_ui(op.join('..', '..', 'qtlib', 'ui'))
-build_all_qt_ui(op.join('..', 'base'))
-build_all_qt_ui('.')
-print_and_do("pyrcc4 {0} > {1}".format(op.join('..', 'base', 'dg.qrc'), op.join('..', 'base', 'dg_rc.py')))
-
 def move(src, dst):
     if not op.exists(src):
         return
