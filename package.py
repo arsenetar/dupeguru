@@ -10,6 +10,7 @@
 import sys
 import os
 import os.path as op
+import shutil
 
 import yaml
 
@@ -31,6 +32,7 @@ def package_qt(edition):
         return
     add_to_pythonpath('.')
     add_to_pythonpath('qt')
+    add_to_pythonpath(op.join('qt', edition))
     os.chdir(op.join('qt', edition))
     from app import DupeGuru
     
