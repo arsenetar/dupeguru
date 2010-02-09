@@ -501,6 +501,30 @@ http://www.hardcoded.net/licenses/hs_license
     [self reloadMatches];
 }
 
+- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{ 
+    OVNode *node = item;
+    if ([[tableColumn identifier] isEqual:@"mark"]) {
+        [cell setEnabled: [node isMarkable]];
+    }
+    if ([cell isKindOfClass:[NSTextFieldCell class]]) {
+        // Determine if the text color will be blue due to directory being reference.
+        NSTextFieldCell *textCell = cell;
+        if ([node isMarkable]) {
+            [textCell setTextColor:[NSColor blackColor]];
+        }
+        else {
+            [textCell setTextColor:[NSColor blueColor]];
+        }
+        if ((_displayDelta) && (_powerMode || ([node level] > 1))) {
+            NSInteger i = [[tableColumn identifier] integerValue];
+            if ([_deltaColumns containsIndex:i]) {
+                [textCell setTextColor:[NSColor orangeColor]];
+            }
+        }
+    }
+}
+
 /* Notifications */
 - (void)windowWillClose:(NSNotification *)aNotification
 {

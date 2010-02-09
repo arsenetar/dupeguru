@@ -87,29 +87,4 @@ http://www.hardcoded.net/licenses/hs_license
     [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Words Used" width:120 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Dupe Count" width:80 refCol:refCol]];
 }
-
-/* Delegate */
-- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{ 
-    OVNode *node = item;
-    if ([[tableColumn identifier] isEqual:@"mark"])
-    {
-        [cell setEnabled: [node isMarkable]];
-    }
-    if ([cell isKindOfClass:[NSTextFieldCell class]])
-    {
-        // Determine if the text color will be blue due to directory being reference.
-        NSTextFieldCell *textCell = cell;
-        if ([node isMarkable])
-            [textCell setTextColor:[NSColor blackColor]];
-        else
-            [textCell setTextColor:[NSColor blueColor]];
-        if ((_displayDelta) && (_powerMode || ([node level] > 1)))
-        {
-            int i = [[tableColumn identifier] intValue];
-            if ([_deltaColumns containsIndex:i])
-                [textCell setTextColor:[NSColor orangeColor]];
-        }
-    }
-}
 @end
