@@ -50,16 +50,26 @@ http://www.hardcoded.net/licenses/hs_license
 @implementation ResultWindowBase
 - (void)awakeFromNib
 {
+    _displayDelta = NO;
+    _powerMode = NO;
     [self window];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     [self initResultColumns];
     [self fillColumnsMenu];
+    [deltaSwitch setSelectedSegment:0];
+    [pmSwitch setSelectedSegment:0];
+    [py setDisplayDeltaValues:b2n(_displayDelta)];
+    [matches setTarget:self];
+    [matches setDoubleAction:@selector(openSelected:)];
+    [self refreshStats];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
 }
 
 - (void)dealloc
@@ -177,14 +187,14 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)updatePySelection
 {
-	NSArray *selection;
+    NSArray *selection;
     if (_powerMode) {
-		selection = [py selectedPowerMarkerNodePaths];
-	}
+        selection = [py selectedPowerMarkerNodePaths];
+    }
     else {
-		selection = [py selectedResultNodePaths];
-	}
-	[matches selectNodePaths:selection];
+        selection = [py selectedResultNodePaths];
+    }
+    [matches selectNodePaths:selection];
 }
 
 - (void)performPySelection:(NSArray *)aIndexPaths
@@ -239,7 +249,7 @@ http://www.hardcoded.net/licenses/hs_license
         [matches setTag:0];
     [matches expandItem:nil expandChildren:YES];
     [self outlineView:matches didClickTableColumn:nil];
-	[self updatePySelection];
+    [self updatePySelection];
 }
 
 - (IBAction)copyMarked:(id)sender
@@ -565,7 +575,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)resultsUpdated:(NSNotification *)aNotification
 {
-	[matches invalidateBuffers];
+    [matches invalidateBuffers];
     [matches invalidateMarkings];
 }
 

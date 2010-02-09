@@ -18,17 +18,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    _displayDelta = NO;
-    _powerMode = NO;
     _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,4)] retain];
     [_deltaColumns removeIndex:3];
-    [deltaSwitch setSelectedSegment:0];
-    [pmSwitch setSelectedSegment:0];
-    [py setDisplayDeltaValues:b2n(_displayDelta)];
-    [matches setTarget:self];
-    [matches setDoubleAction:@selector(openSelected:)];
-    [self refreshStats];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
 }
 
 /* Actions */

@@ -20,18 +20,9 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [super awakeFromNib];
     [[self window] setTitle:@"dupeGuru Picture Edition"];
-    _displayDelta = NO;
-    _powerMode = NO;
     _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,5)] retain];
     [_deltaColumns removeIndex:3];
     [_deltaColumns removeIndex:4];
-    [deltaSwitch setSelectedSegment:0];
-    [pmSwitch setSelectedSegment:0];
-    [py setDisplayDeltaValues:b2n(_displayDelta)];
-    [matches setTarget:self];
-    [matches setDoubleAction:@selector(openSelected:)];
-    [self refreshStats];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
 }
 
 /* Actions */
