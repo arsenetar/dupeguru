@@ -60,7 +60,7 @@ http://www.hardcoded.net/licenses/hs_license
     [pmSwitch setSelectedSegment:0];
     [py setDisplayDeltaValues:b2n(_displayDelta)];
     [matches setTarget:self];
-    [matches setDoubleAction:@selector(openSelected:)];
+    [matches setDoubleAction:@selector(openClicked:)];
     [self refreshStats];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
@@ -360,6 +360,15 @@ http://www.hardcoded.net/licenses/hs_license
         [py setRemoveEmptyFolders:[ud objectForKey:@"removeEmptyFolders"]];
         [py copyOrMove:b2n(NO) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
     }
+}
+
+- (IBAction)openClicked:(id)sender
+{
+    if ([matches clickedRow] < 0) {
+        return;
+    }
+    [matches selectRowIndexes:[NSIndexSet indexSetWithIndex:[matches clickedRow]] byExtendingSelection:NO];
+    [py openSelected];
 }
 
 - (IBAction)openSelected:(id)sender

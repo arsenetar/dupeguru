@@ -61,6 +61,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)markSelected:(id)sender;
 - (IBAction)markToggle:(id)sender;
 - (IBAction)moveMarked:(id)sender;
+- (IBAction)openClicked:(id)sender;
+- (IBAction)openSelected:(id)sender;
 - (IBAction)removeMarked:(id)sender;
 - (IBAction)removeSelected:(id)sender;
 - (IBAction)renameSelected:(id)sender;
