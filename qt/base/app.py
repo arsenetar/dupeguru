@@ -128,7 +128,7 @@ class DupeGuru(DupeGuruBase, QObject):
     
     @staticmethod
     def _reveal_path(path):
-        self._open_path(path[:-1])
+        DupeGuru._open_path(path[:-1])
     
     def _start_job(self, jobid, func):
         title = JOBID2TITLE[jobid]
