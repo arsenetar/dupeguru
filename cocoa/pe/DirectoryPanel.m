@@ -44,9 +44,8 @@ static NSString* jobAddIPhoto = @"jobAddIPhoto";
 
 - (void)jobCompleted:(NSNotification *)aNotification
 {
-    if ([[ProgressController mainProgressController] jobId] == jobAddIPhoto)
-    {
-        [directories reloadData];
+    if ([[ProgressController mainProgressController] jobId] == jobAddIPhoto) {
+        [outlineView reloadData];
     }
 }
 @end
