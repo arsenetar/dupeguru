@@ -1,3 +1,10 @@
+- date: 2010-02-10
+  version: 2.9.2
+  description: |
+    * dupeGuru is now 64-bit on Mac OS X!
+    * Fixed a crash upon quitting when support folder is not present. (#83)
+    * Fixed a crash during sorting. (#85)
+    * Fixed selection glitches, especially while renaming. (#93)
 - date: 2010-01-13
   version: 2.9.1
   description: |
