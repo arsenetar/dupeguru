@@ -18,7 +18,7 @@ import yaml
 from hsdocgen import generate_help, filters
 from hsutil.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
-def build_cocoa(edition, dev):
+def build_cocoa(edition, dev, help_destpath):
     if not dev:
         print "Building help index"
         os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
@@ -98,7 +98,7 @@ def main():
         os.system('python gen.py')
         os.chdir('..')
     if ui == 'cocoa':
-        build_cocoa(edition, dev)
+        build_cocoa(edition, dev, help_destpath)
     elif ui == 'qt':
         build_qt(edition, dev)
 
