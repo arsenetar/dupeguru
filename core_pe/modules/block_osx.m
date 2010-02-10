@@ -150,7 +150,7 @@ static PyObject* block_osx_getblocks(PyObject *self, PyObject *args)
     CGImageSourceRef source;
     CGImageRef image;
     size_t width, height;
-    int block_count, block_width, block_height, block_xcount, block_ycount, i;
+    int block_count, block_width, block_height, i;
     
     width = 0;
     height = 0;
@@ -192,23 +192,24 @@ static PyObject* block_osx_getblocks(PyObject *self, PyObject *args)
     
     block_width = max(width/block_count, 1);
     block_height = max(height/block_count, 1);
-    /* block_count might have changed */
-    block_xcount = (width / block_width);
-    block_ycount = (height / block_height);
     
-    result = PyList_New(block_xcount * block_ycount);
+    result = PyList_New(block_count * block_count);
     if (result == NULL) {
         return NULL;
     }
     
-    for(i=0; i<block_ycount; i++)
-    {
-        int j;
-        for(j=0; j<block_xcount; j++)
-        {
-            PyObject *block = getblock(bitmapData, width, height, j*block_width, i*block_height,
-                block_width, block_height);
-            PyList_SET_ITEM(result, i*block_ycount+j, block);
+    for(i=0; i<block_count; i++) {
+        int j, top;
+        top = min(i*block_height, height-block_height);
+        for(j=0; j<block_count; j++) {
+            int left;
+            left = min(j*block_width, width-block_width);
+            PyObject *block = getblock(bitmapData, width, height, left, top, block_width, block_height);
+            if (block == NULL) {
+                Py_DECREF(result);
+                return NULL;
+            }
+            PyList_SET_ITEM(result, i*block_count+j, block);
         }
     }
     
