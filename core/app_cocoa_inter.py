@@ -108,22 +108,12 @@ class PyDupeGuruBase(PyRegistrable):
     def revealSelected(self):
         self.py.reveal_selected()
     
-    #---Misc
-    def sortDupesBy_ascending_(self, key, asc):
-        self.py.sort_dupes(key, asc)
-    
-    def sortGroupsBy_ascending_(self, key, asc):
-        self.py.sort_groups(key, asc)
-    
     #---Information
     def getIgnoreListCount(self):
         return len(self.py.scanner.ignore_list)
     
     def getMarkCount(self):
         return self.py.results.mark_count
-    
-    def getStatLine(self):
-        return self.py.stat_line
     
     def getOperationalErrorCount(self):
         return self.py.last_op_error_count
@@ -197,6 +187,7 @@ class PyResultOutline(PyOutline):
     def renameSelected_(self, newname):
         return self.py.app.RenameSelected(newname)
     
+    @signature('v@:ic')
     def sortBy_ascending_(self, key, asc):
         self.py.sort(key, asc)
     

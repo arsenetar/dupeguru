@@ -35,6 +35,7 @@ class ResultTree(GUIObject, Tree):
         Tree.__init__(self)
         self._power_marker = False
         self._delta_values = False
+        self._sort_descriptors = (0, True)
         self.connect()
         self._refresh()
         self.view.refresh()
@@ -71,6 +72,9 @@ class ResultTree(GUIObject, Tree):
             self.app.results.sort_dupes(key, asc, self.delta_values)
         else:
             self.app.results.sort_groups(key, asc)
+        self._sort_descriptors = (key, asc)
+        self._refresh()
+        self.view.refresh()
     
     @property
     def power_marker(self):
@@ -81,6 +85,8 @@ class ResultTree(GUIObject, Tree):
         if value == self._power_marker:
             return
         self._power_marker = value
+        key, asc = self._sort_descriptors
+        self.sort(key, asc)
         self._refresh()
         self.view.refresh()
     

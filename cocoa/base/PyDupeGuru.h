@@ -40,9 +40,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)makeSelectedReference;
 - (void)applyFilter:(NSString *)filter;
 
-- (void)sortGroupsBy:(NSNumber *)aIdentifier ascending:(NSNumber *)aAscending;
-- (void)sortDupesBy:(NSNumber *)aIdentifier ascending:(NSNumber *)aAscending;
-
 - (void)copyOrMove:(NSNumber *)aCopy markedTo:(NSString *)destination recreatePath:(NSNumber *)aRecreateType;
 - (void)deleteMarked;
 - (void)removeMarked;
@@ -50,7 +47,6 @@ http://www.hardcoded.net/licenses/hs_license
 //Data
 - (NSNumber *)getIgnoreListCount;
 - (NSNumber *)getMarkCount;
-- (NSString *)getStatLine;
 - (NSNumber *)getOperationalErrorCount;
 
 //Scanning options

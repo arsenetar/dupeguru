@@ -17,7 +17,7 @@ class StatsLabel(GUIObject):
     
     @property
     def display(self):
-        return self.app.results.stat_line
+        return self.app.stat_line
     
     def results_changed(self):
         self.view.refresh()
