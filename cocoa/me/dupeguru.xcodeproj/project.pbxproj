@@ -58,6 +58,7 @@
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CE900AD2109B238600754048 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD1109B238600754048 /* Preferences.xib */; };
 		CE900AD7109B2A9B00754048 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD6109B2A9B00754048 /* MainMenu.xib */; };
+		CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF07A2112493B200EE5BC0 /* StatsLabel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
@@ -157,6 +158,9 @@
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
+		CEDF07A0112493B200EE5BC0 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CEDF07A1112493B200EE5BC0 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CEDF07A2112493B200EE5BC0 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = ../../images/details32.png; sourceTree = SOURCE_ROOT; };
@@ -383,9 +387,12 @@
 				CE515E1C0FC6C19300EC695D /* ResultWindow.m */,
 				CE0B3D6511243F83009A7A30 /* ResultOutline.h */,
 				CE0B3D6611243F83009A7A30 /* ResultOutline.m */,
+				CEDF07A1112493B200EE5BC0 /* StatsLabel.h */,
+				CEDF07A2112493B200EE5BC0 /* StatsLabel.m */,
 				CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */,
 				CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */,
 				CE0B3D6411243F83009A7A30 /* PyResultTree.h */,
+				CEDF07A0112493B200EE5BC0 /* PyStatsLabel.h */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -494,6 +501,7 @@
 				CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */,
 				CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */,
 				CE0B3D6711243F83009A7A30 /* ResultOutline.m in Sources */,
+				CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

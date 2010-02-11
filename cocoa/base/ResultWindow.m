@@ -36,20 +36,18 @@ http://www.hardcoded.net/licenses/hs_license
     [self window];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     outline = [[ResultOutline alloc] initWithPyParent:py view:matches];
+    statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
     [self initResultColumns];
     [self fillColumnsMenu];
     [deltaSwitch setSelectedSegment:0];
     [pmSwitch setSelectedSegment:0];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
-    [self refreshStats];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
 }
 
 - (void)dealloc
@@ -176,17 +174,6 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
-- (void)refreshStats
-{
-    [stats setStringValue:[py getStatLine]];
-}
-
-/* Reload the matches outline and restore selection from py */
-- (void)reloadMatches
-{
-    [outline refresh];
-}
-
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
@@ -251,7 +238,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [py setEscapeFilterRegexp:b2n(!n2b([ud objectForKey:@"useRegexpFilter"]))];
     [py applyFilter:[filterField stringValue]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)ignoreSelected:(id)sender
@@ -263,32 +249,27 @@ http://www.hardcoded.net/licenses/hs_license
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py addSelectedToIgnoreList];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)markAll:(id)sender
 {
     [py markAll];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
 
 - (IBAction)markInvert:(id)sender
 {
     [py markInvert];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
 
 - (IBAction)markNone:(id)sender
 {
     [py markNone];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
 
 - (IBAction)markSelected:(id)sender
 {
     [self performPySelection:[self getSelectedPaths:YES]];
     [py toggleSelectedMark];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
 
 - (IBAction)markToggle:(id)sender
@@ -296,7 +277,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSIndexPath *path = [matches itemAtRow:[matches clickedRow]];
     [self performPySelection:[NSArray arrayWithObject:p2a(path)]];
     [py toggleSelectedMark];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
 
 - (IBAction)moveMarked:(id)sender
@@ -334,11 +314,6 @@ http://www.hardcoded.net/licenses/hs_license
     [py openSelected];
 }
 
-- (IBAction)refresh:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-}
-
 - (IBAction)removeMarked:(id)sender
 {
     int mark_count = [[py getMarkCount] intValue];
@@ -347,7 +322,6 @@ http://www.hardcoded.net/licenses/hs_license
     if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
         return;
     [py removeMarked];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)removeSelected:(id)sender
@@ -359,7 +333,6 @@ http://www.hardcoded.net/licenses/hs_license
         return;
     [self performPySelection:[self getSelectedPaths:YES]];
     [py removeSelected];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)renameSelected:(id)sender
@@ -499,16 +472,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     [self performPySelection:[self getSelectedPaths:NO]];
-}
-
-- (void)resultsChanged:(NSNotification *)aNotification
-{
-    [self refreshStats];
-}
-
-- (void)resultsMarkingChanged:(NSNotification *)aNotification
-{
-    [self refreshStats];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem

@@ -8,6 +8,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 #import "HSOutlineView.h"
+#import "StatsLabel.h"
 #import "ResultOutline.h"
 #import "PyDupeGuru.h"
 
@@ -30,6 +31,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSMutableArray *_resultColumns;
     NSWindowController *preferencesPanel;
     ResultOutline *outline;
+    StatsLabel *statsLabel;
 }
 /* Helpers */
 - (void)fillColumnsMenu;
@@ -39,8 +41,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)initResultColumns;
 - (void)performPySelection:(NSArray *)aIndexPaths;
-- (void)refreshStats;
-- (void)reloadMatches;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 
 /* Actions */

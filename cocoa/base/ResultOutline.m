@@ -89,10 +89,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSString *newName = object;
     if (![newName isEqual:oldName]) {
         BOOL renamed = [[self py] renameSelected:newName];
-        if (renamed) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-        }
-        else {
+        if (!renamed) {
             [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.", newName]];
         }
     }

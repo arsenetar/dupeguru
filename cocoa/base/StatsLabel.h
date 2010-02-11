@@ -7,13 +7,13 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import "HSGUIController.h"
+#import "PyStatsLabel.h"
 
-#define RegistrationRequired @"RegistrationRequired"
-#define JobStarted @"JobStarted"
-#define JobInProgress @"JobInProgress"
-
-#define jobLoad @"job_load"
-#define jobScan @"job_scan"
-#define jobCopy @"job_copy"
-#define jobMove @"job_move"
-#define jobDelete @"job_delete"
+@interface StatsLabel : HSGUIController
+{
+    NSTextField *labelView;
+}
+- (id)initWithPyParent:(id)aPyParent labelView:(NSTextField *)aLabelView;
+- (PyStatsLabel *)py;
+@end

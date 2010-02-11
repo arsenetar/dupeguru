@@ -14,6 +14,7 @@ from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject, PyRegistrable
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.result_tree import ResultTree
+from .gui.stats_label import StatsLabel
 
 # Fix py2app's problems on relative imports
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
@@ -201,4 +202,11 @@ class PyResultOutline(PyOutline):
     
     def markSelected(self):
         self.py.app.toggle_selected_mark_state()
+    
+
+class PyStatsLabel(PyGUIObject):
+    py_class = StatsLabel
+    
+    def display(self):
+        return self.py.display
     

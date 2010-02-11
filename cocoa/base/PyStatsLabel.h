@@ -7,13 +7,8 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import "PyGUI.h"
 
-#define RegistrationRequired @"RegistrationRequired"
-#define JobStarted @"JobStarted"
-#define JobInProgress @"JobInProgress"
-
-#define jobLoad @"job_load"
-#define jobScan @"job_scan"
-#define jobCopy @"job_copy"
-#define jobMove @"job_move"
-#define jobDelete @"job_delete"
+@interface PyStatsLabel : PyGUI
+- (NSString *)display;
+@end
