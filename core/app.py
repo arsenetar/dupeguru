@@ -104,6 +104,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         path = Path(str_path)
         return fs.get_file(path, self.directories.fileclasses)    
     
+    def _job_completed(self, jobid):
+        # Must be called by subclasses when they detect that an async job is completed.
+        if jobid in (JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_DELETE):
+            self.notify('results_changed')
+    
     @staticmethod
     def _open_path(path):
         raise NotImplementedError()
@@ -233,6 +238,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if g not in changed_groups:
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
+        self.notify('results_changed')
     
     def open_selected(self):
         if self.selected_dupes:
@@ -282,6 +288,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             raise AllFilesAreRefError()
         self.results.groups = []
         self._start_job(JOB_SCAN, do)
+    
+    def toggle_selected_mark_state(self):
+        for dupe in self.selected_dupes:
+            self.results.mark_toggle(dupe)
+        self.notify('results_changed')
     
     def without_ref(self, dupes):
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]

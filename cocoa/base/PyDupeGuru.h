@@ -36,7 +36,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)addSelectedToIgnoreList;
 - (void)removeSelected;
 - (void)openSelected;
-- (NSNumber *)renameSelected:(NSString *)aNewName;
 - (void)revealSelected;
 - (void)makeSelectedReference;
 - (void)applyFilter:(NSString *)filter;

@@ -7,10 +7,11 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "Outline.h"
+#import "HSOutlineView.h"
+#import "ResultOutline.h"
 #import "PyDupeGuru.h"
 
-@interface MatchesView : OutlineView
+@interface MatchesView : HSOutlineView
 - (void)keyDown:(NSEvent *)theEvent;
 @end
 
@@ -31,16 +32,15 @@ http://www.hardcoded.net/licenses/hs_license
     NSMutableArray *_resultColumns;
     NSMutableIndexSet *_deltaColumns;
     NSWindowController *preferencesPanel;
+    ResultOutline *outline;
 }
 /* Helpers */
 - (void)fillColumnsMenu;
 - (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
-- (NSArray *)getSelected:(BOOL)aDupesOnly;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)initResultColumns;
-- (void)updatePySelection;
 - (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)refreshStats;
 - (void)reloadMatches;

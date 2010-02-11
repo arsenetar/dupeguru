@@ -13,6 +13,7 @@ from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject, PyRegistrable
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
+from .gui.result_tree import ResultTree
 
 # Fix py2app's problems on relative imports
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
@@ -55,7 +56,7 @@ class PyDupeGuruBase(PyRegistrable):
         self.py.PurgeIgnoreList()
     
     def toggleSelectedMark(self):
-        self.py.ToggleSelectedMarkState()
+        self.py.toggle_selected_mark_state()
     
     def saveIgnoreList(self):
         self.py.save_ignore_list()
@@ -126,21 +127,6 @@ class PyDupeGuruBase(PyRegistrable):
     def getOperationalErrorCount(self):
         return self.py.last_op_error_count
     
-    #---Data
-    @signature('i@:i')
-    def getOutlineViewMaxLevel_(self, tag):
-        return self.py.GetOutlineViewMaxLevel(tag)
-    
-    @signature('@@:i@')
-    def getOutlineView_childCountsForPath_(self, tag, node_path):
-        return self.py.GetOutlineViewChildCounts(tag, node_path)
-    
-    def getOutlineView_valuesForIndexes_(self, tag, node_path):
-        return self.py.GetOutlineViewValues(tag, node_path)
-    
-    def getOutlineView_markedAtIndexes_(self, tag, node_path):
-        return self.py.GetOutlineViewMarked(tag, node_path)
-    
     #---Properties
     def setMixFileKind_(self, mix_file_kind):
         self.py.scanner.mix_file_kind = mix_file_kind
@@ -164,6 +150,9 @@ class PyDupeGuruBase(PyRegistrable):
     def cancelJob(self):
         self.py.progress.job_cancelled = True
     
+    def jobCompleted_(self, jobid):
+        self.py._job_completed(jobid)
+    
 
 class PyDetailsPanel(PyGUIObject):
     py_class = DetailsPanel
@@ -181,4 +170,26 @@ class PyDirectoryOutline(PyOutline):
     
     def addDirectory_(self, path):
         self.py.add_directory(path)
+    
+
+class PyResultOutline(PyOutline):
+    py_class = ResultTree
+    
+    @signature('v@:c')
+    def setPowerMarkerMode_(self, value):
+        self.py.power_marker = value
+    
+    @signature('@@:@i')
+    def valueForPath_column_(self, path, column):
+        return self.py.get_node_value(path, column)
+    
+    @signature('c@:@')
+    def renameSelected_(self, newname):
+        return self.py.app.RenameSelected(newname)
+    
+    def sortBy_ascending_(self, key, asc):
+        self.py.sort(key, asc)
+    
+    def markSelected(self):
+        self.py.app.toggle_selected_mark_state()
     

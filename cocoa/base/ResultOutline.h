@@ -7,13 +7,15 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "../base/ResultWindow.h"
-#import "DirectoryPanel.h"
+#import "HSOutline.h"
+#import "PyResultTree.h"
 
-@interface ResultWindow : ResultWindowBase
+@interface ResultOutline : HSOutline
 {
-    NSString *_lastAction;
+    NSMutableIndexSet *_deltaColumns;
 }
-- (IBAction)removeDeadTracks:(id)sender;
-- (IBAction)startDuplicateScan:(id)sender;
-@end
+- (PyResultTree *)py;
+- (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
+
+- (IBAction)markSelected:(id)sender;
+@end;

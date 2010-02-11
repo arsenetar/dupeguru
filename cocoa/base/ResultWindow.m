@@ -28,23 +28,6 @@ http://www.hardcoded.net/licenses/hs_license
     else
         [super keyDown:theEvent];
 }
-
-- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{
-    if (![[tableColumn identifier] isEqual:@"0"])
-        return; //We only want to cover renames.
-    OVNode *node = item;
-    NSString *oldName = [[node buffer] objectAtIndex:0];
-    NSString *newName = object;
-    if (![newName isEqual:oldName])
-    {
-        BOOL renamed = n2b([(PyDupeGuruBase *)py renameSelected:newName]);
-        if (renamed)
-            [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
-        else
-            [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.",newName]];
-    }
-}
 @end
 
 @implementation ResultWindowBase
@@ -54,6 +37,7 @@ http://www.hardcoded.net/licenses/hs_license
     _powerMode = NO;
     [self window];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
+    outline = [[ResultOutline alloc] initWithPyParent:py view:matches];
     [self initResultColumns];
     [self fillColumnsMenu];
     [deltaSwitch setSelectedSegment:0];
@@ -69,11 +53,11 @@ http://www.hardcoded.net/licenses/hs_license
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsMarkingChanged:) name:ResultsMarkingChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsChanged:) name:ResultsChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultsUpdated:) name:ResultsUpdatedNotification object:nil];
 }
 
 - (void)dealloc
 {
+    [outline release];
     [preferencesPanel release];
     [super dealloc];
 }
@@ -130,32 +114,20 @@ http://www.hardcoded.net/licenses/hs_license
     return result;
 }
 
-- (NSArray *)getSelected:(BOOL)aDupesOnly
+- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
 {
     if (_powerMode)
         aDupesOnly = NO;
     NSIndexSet *indexes = [matches selectedRowIndexes];
     NSMutableArray *nodeList = [NSMutableArray array];
-    OVNode *node;
     NSInteger i = [indexes firstIndex];
-    while (i != NSNotFound)
-    {
-        node = [matches itemAtRow:i];
-        if (!aDupesOnly || ([node level] > 1))
-            [nodeList addObject:node];
+    while (i != NSNotFound) {
+        NSIndexPath *path = [matches itemAtRow:i];
+        if (!aDupesOnly || ([path length] > 1))
+            [nodeList addObject:p2a(path)];
         i = [indexes indexGreaterThanIndex:i];
     }
     return nodeList;
-}
-
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
-{
-    NSMutableArray *r = [NSMutableArray array];
-    NSArray *selected = [self getSelected:aDupesOnly];
-    for (OVNode *node in selected) {
-        [r addObject:p2a([node indexPath])];
-    }
-    return r;
 }
 
 - (void)initResultColumns
@@ -185,17 +157,17 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
-- (void)updatePySelection
-{
-    NSArray *selection;
-    if (_powerMode) {
-        selection = [py selectedPowerMarkerNodePaths];
-    }
-    else {
-        selection = [py selectedResultNodePaths];
-    }
-    [matches selectNodePaths:selection];
-}
+// - (void)updatePySelection
+// {
+//     NSArray *selection;
+//     if (_powerMode) {
+//         selection = [py selectedPowerMarkerNodePaths];
+//     }
+//     else {
+//         selection = [py selectedResultNodePaths];
+//     }
+//     [matches selectNodePaths:selection];
+// }
 
 - (void)performPySelection:(NSArray *)aIndexPaths
 {
@@ -215,11 +187,7 @@ http://www.hardcoded.net/licenses/hs_license
 /* Reload the matches outline and restore selection from py */
 - (void)reloadMatches
 {
-    [matches setDelegate:nil];
-    [matches reloadData];
-    [matches expandItem:nil expandChildren:YES];
-    [matches setDelegate:self];
-    [self updatePySelection];
+    [outline refresh];
 }
 
 /* Actions */
@@ -243,13 +211,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)changePowerMarker:(id)sender
 {
     _powerMode = [pmSwitch selectedSegment] == 1;
-    if (_powerMode)
-        [matches setTag:2];
-    else
-        [matches setTag:0];
-    [matches expandItem:nil expandChildren:YES];
-    [self outlineView:matches didClickTableColumn:nil];
-    [self updatePySelection];
+    [outline setPowerMarkerMode:_powerMode];
+    // [self outlineView:matches didClickTableColumn:nil];
 }
 
 - (IBAction)copyMarked:(id)sender
@@ -299,10 +262,10 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)ignoreSelected:(id)sender
 {
-    NSArray *nodeList = [self getSelected:YES];
-    if (![nodeList count])
+    NSArray *pathList = [self getSelectedPaths:YES];
+    if (![pathList count])
         return;
-    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[nodeList count]];
+    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[pathList count]];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py addSelectedToIgnoreList];
@@ -336,8 +299,8 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)markToggle:(id)sender
 {
-    OVNode *node = [matches itemAtRow:[matches clickedRow]];
-    [self performPySelection:[NSArray arrayWithObject:p2a([node indexPath])]];
+    NSIndexPath *path = [matches itemAtRow:[matches clickedRow]];
+    [self performPySelection:[NSArray arrayWithObject:p2a(path)]];
     [py toggleSelectedMark];
     [[NSNotificationCenter defaultCenter] postNotificationName:ResultsMarkingChangedNotification object:self];
 }
@@ -395,10 +358,10 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)removeSelected:(id)sender
 {
-    NSArray *nodeList = [self getSelected:YES];
-    if (![nodeList count])
+    NSArray *pathList = [self getSelectedPaths:YES];
+    if (![pathList count])
         return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",[nodeList count]]] == NSAlertSecondButtonReturn) // NO
+    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",[pathList count]]] == NSAlertSecondButtonReturn) // NO
         return;
     [self performPySelection:[self getSelectedPaths:YES]];
     [py removeSelected];
@@ -430,19 +393,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)switchSelected:(id)sender
 {
-    // It might look like a complicated way to get the length of the current dupe list on the py side
-    // but after a lot of fussing around, believe it or not, it actually is.
-    NSInteger matchesTag = _powerMode ? 2 : 0;
-    NSInteger startLen = [[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count];
     [py makeSelectedReference];
-    [self performPySelection:[self getSelectedPaths:NO]];
-    // In some cases (when in a filtered view in Power Marker mode, it's possible that the demoted
-    // ref is not a part of the filter, making the table smaller. In those cases, we want to do a
-    // complete reload of the table to avoid a crash.
-    if ([[py getOutlineView:matchesTag childCountsForPath:[NSArray array]] count] == startLen)
-        [[NSNotificationCenter defaultCenter] postNotificationName:ResultsUpdatedNotification object:self];
-    else
-        [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
 }
 
 - (IBAction)toggleColumn:(id)sender
@@ -488,43 +439,6 @@ http://www.hardcoded.net/licenses/hs_license
     [self changePowerMarker:sender];
 }
 
-/* Delegate */
-- (void)outlineView:(NSOutlineView *)outlineView didClickTableColumn:(NSTableColumn *)tableColumn
-{
-    if ([[outlineView sortDescriptors] count] < 1)
-        return;
-    NSSortDescriptor *sd = [[outlineView sortDescriptors] objectAtIndex:0];
-    if (_powerMode)
-        [py sortDupesBy:i2n([[sd key] intValue]) ascending:b2n([sd ascending])];
-    else
-        [py sortGroupsBy:i2n([[sd key] intValue]) ascending:b2n([sd ascending])];
-    [self reloadMatches];
-}
-
-- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{ 
-    OVNode *node = item;
-    if ([[tableColumn identifier] isEqual:@"mark"]) {
-        [cell setEnabled: [node isMarkable]];
-    }
-    if ([cell isKindOfClass:[NSTextFieldCell class]]) {
-        // Determine if the text color will be blue due to directory being reference.
-        NSTextFieldCell *textCell = cell;
-        if ([node isMarkable]) {
-            [textCell setTextColor:[NSColor blackColor]];
-        }
-        else {
-            [textCell setTextColor:[NSColor blueColor]];
-        }
-        if ((_displayDelta) && (_powerMode || ([node level] > 1))) {
-            NSInteger i = [[tableColumn identifier] integerValue];
-            if ([_deltaColumns containsIndex:i]) {
-                [textCell setTextColor:[NSColor orangeColor]];
-            }
-        }
-    }
-}
-
 /* Notifications */
 - (void)windowWillClose:(NSNotification *)aNotification
 {
@@ -533,7 +447,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)jobCompleted:(NSNotification *)aNotification
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ResultsChangedNotification object:self];
     NSInteger r = n2i([py getOperationalErrorCount]);
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobCopy]) {
@@ -558,7 +471,7 @@ http://www.hardcoded.net/licenses/hs_license
             [Dialogs showMessage:@"All marked files were sucessfully sent to Trash."];
     }
     else if ([lastAction isEqualTo:jobScan]) {
-        NSInteger groupCount = [[py getOutlineView:0 childCountsForPath:[NSArray array]] count];
+        NSInteger groupCount = [outline intProperty:@"children_count" valueAtPath:nil];
         if (groupCount == 0)
             [Dialogs showMessage:@"No duplicates found."];
     }
@@ -602,14 +515,8 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)resultsMarkingChanged:(NSNotification *)aNotification
 {
-    [matches invalidateMarkings];
+    [self reloadMatches];
     [self refreshStats];
-}
-
-- (void)resultsUpdated:(NSNotification *)aNotification
-{
-    [matches invalidateBuffers];
-    [matches invalidateMarkings];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem

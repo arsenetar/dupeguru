@@ -243,16 +243,16 @@ class TCDupeGuru(TestCase):
     def test_toggleSelectedMark(self):
         app = self.app
         objects = self.objects
-        app.ToggleSelectedMarkState()
-        self.assertEqual(0,app.results.mark_count)
+        app.toggle_selected_mark_state()
+        eq_(app.results.mark_count, 0)
         app.SelectPowerMarkerNodePaths(r2np([0,2]))
-        app.ToggleSelectedMarkState()
-        self.assertEqual(2,app.results.mark_count)
-        self.assert_(not app.results.is_marked(objects[0]))
-        self.assert_(app.results.is_marked(objects[1]))
-        self.assert_(not app.results.is_marked(objects[2]))
-        self.assert_(not app.results.is_marked(objects[3]))
-        self.assert_(app.results.is_marked(objects[4]))
+        app.toggle_selected_mark_state()
+        eq_(app.results.mark_count, 2)
+        assert not app.results.is_marked(objects[0])
+        assert app.results.is_marked(objects[1])
+        assert not app.results.is_marked(objects[2])
+        assert not app.results.is_marked(objects[3])
+        assert app.results.is_marked(objects[4])
     
     def test_refreshDetailsWithSelected(self):
         self.app.SelectPowerMarkerNodePaths(r2np([0,2]))

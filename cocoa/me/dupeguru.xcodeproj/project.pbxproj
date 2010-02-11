@@ -30,6 +30,7 @@
 		CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC511242D00004B0AA7 /* NSTableViewAdditions.m */; };
 		CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_me_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */; };
+		CE0B3D6711243F83009A7A30 /* ResultOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B3D6611243F83009A7A30 /* ResultOutline.m */; };
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -43,7 +44,6 @@
 		CE4B59CA1119919700C06C9E /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C71119919700C06C9E /* registration.xib */; };
 		CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE10FC6C12E00EC695D /* Dialogs.m */; };
 		CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */; };
-		CE515DF50FC6C12E00EC695D /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE50FC6C12E00EC695D /* Outline.m */; };
 		CE515DF60FC6C12E00EC695D /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE70FC6C12E00EC695D /* ProgressController.m */; };
 		CE515DF70FC6C12E00EC695D /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DEA0FC6C12E00EC695D /* RecentDirectories.m */; };
 		CE515DF80FC6C12E00EC695D /* RegistrationInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DEC0FC6C12E00EC695D /* RegistrationInterface.m */; };
@@ -107,6 +107,9 @@
 		CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectoryOutline.m; path = ../base/DirectoryOutline.m; sourceTree = SOURCE_ROOT; };
 		CE003CCF11242D2C004B0AA7 /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDirectoryOutline.h; path = ../base/PyDirectoryOutline.h; sourceTree = SOURCE_ROOT; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_me_help; path = ../../help_me/dupeguru_me_help; sourceTree = "<group>"; };
+		CE0B3D6411243F83009A7A30 /* PyResultTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTree.h; path = ../base/PyResultTree.h; sourceTree = SOURCE_ROOT; };
+		CE0B3D6511243F83009A7A30 /* ResultOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultOutline.h; path = ../base/ResultOutline.h; sourceTree = SOURCE_ROOT; };
+		CE0B3D6611243F83009A7A30 /* ResultOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultOutline.m; path = ../base/ResultOutline.m; sourceTree = SOURCE_ROOT; };
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -124,8 +127,6 @@
 		CE515DE10FC6C12E00EC695D /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE515DE20FC6C12E00EC695D /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
 		CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSErrorReportWindow.m; path = ../../cocoalib/HSErrorReportWindow.m; sourceTree = SOURCE_ROOT; };
-		CE515DE40FC6C12E00EC695D /* Outline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outline.h; path = ../../cocoalib/Outline.h; sourceTree = SOURCE_ROOT; };
-		CE515DE50FC6C12E00EC695D /* Outline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Outline.m; path = ../../cocoalib/Outline.m; sourceTree = SOURCE_ROOT; };
 		CE515DE60FC6C12E00EC695D /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = ../../cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
 		CE515DE70FC6C12E00EC695D /* ProgressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController.m; path = ../../cocoalib/ProgressController.m; sourceTree = SOURCE_ROOT; };
 		CE515DE80FC6C12E00EC695D /* PyApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyApp.h; path = ../../cocoalib/PyApp.h; sourceTree = SOURCE_ROOT; };
@@ -349,8 +350,6 @@
 				CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */,
 				CE003CB911242D00004B0AA7 /* NSEventAdditions.h */,
 				CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */,
-				CE515DE40FC6C12E00EC695D /* Outline.h */,
-				CE515DE50FC6C12E00EC695D /* Outline.m */,
 				CE515DE60FC6C12E00EC695D /* ProgressController.h */,
 				CE515DE70FC6C12E00EC695D /* ProgressController.m */,
 				CE515DE80FC6C12E00EC695D /* PyApp.h */,
@@ -380,10 +379,13 @@
 				CE6032BF0FE6784C007E33FF /* DetailsPanel.m */,
 				CE515E180FC6C19300EC695D /* DirectoryPanel.h */,
 				CE515E190FC6C19300EC695D /* DirectoryPanel.m */,
-				CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */,
-				CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */,
 				CE515E1B0FC6C19300EC695D /* ResultWindow.h */,
 				CE515E1C0FC6C19300EC695D /* ResultWindow.m */,
+				CE0B3D6511243F83009A7A30 /* ResultOutline.h */,
+				CE0B3D6611243F83009A7A30 /* ResultOutline.m */,
+				CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */,
+				CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */,
+				CE0B3D6411243F83009A7A30 /* PyResultTree.h */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -473,7 +475,6 @@
 				CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */,
 				CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */,
 				CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */,
-				CE515DF50FC6C12E00EC695D /* Outline.m in Sources */,
 				CE515DF60FC6C12E00EC695D /* ProgressController.m in Sources */,
 				CE515DF70FC6C12E00EC695D /* RecentDirectories.m in Sources */,
 				CE515DF80FC6C12E00EC695D /* RegistrationInterface.m in Sources */,
@@ -492,6 +493,7 @@
 				CE003CCB11242D00004B0AA7 /* NSIndexPathAdditions.m in Sources */,
 				CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */,
 				CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */,
+				CE0B3D6711243F83009A7A30 /* ResultOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
