@@ -21,6 +21,14 @@
 /* Begin PBXBuildFile section */
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CE003CC611242D00004B0AA7 /* HSGUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CB411242D00004B0AA7 /* HSGUIController.m */; };
+		CE003CC711242D00004B0AA7 /* HSOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CB611242D00004B0AA7 /* HSOutline.m */; };
+		CE003CC811242D00004B0AA7 /* HSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CB811242D00004B0AA7 /* HSWindowController.m */; };
+		CE003CC911242D00004B0AA7 /* NSEventAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */; };
+		CE003CCA11242D00004B0AA7 /* HSOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC111242D00004B0AA7 /* HSOutlineView.m */; };
+		CE003CCB11242D00004B0AA7 /* NSIndexPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC311242D00004B0AA7 /* NSIndexPathAdditions.m */; };
+		CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC511242D00004B0AA7 /* NSTableViewAdditions.m */; };
+		CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */; };
 		CE073F6309CAE1A3005C1D2F /* dupeguru_me_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */; };
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
@@ -78,6 +86,26 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dupeGuru ME.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE003CB311242D00004B0AA7 /* HSGUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSGUIController.h; sourceTree = "<group>"; };
+		CE003CB411242D00004B0AA7 /* HSGUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSGUIController.m; sourceTree = "<group>"; };
+		CE003CB511242D00004B0AA7 /* HSOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSOutline.h; sourceTree = "<group>"; };
+		CE003CB611242D00004B0AA7 /* HSOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSOutline.m; sourceTree = "<group>"; };
+		CE003CB711242D00004B0AA7 /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
+		CE003CB811242D00004B0AA7 /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
+		CE003CB911242D00004B0AA7 /* NSEventAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSEventAdditions.h; path = ../../cocoalib/NSEventAdditions.h; sourceTree = SOURCE_ROOT; };
+		CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSEventAdditions.m; path = ../../cocoalib/NSEventAdditions.m; sourceTree = SOURCE_ROOT; };
+		CE003CBC11242D00004B0AA7 /* PyGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyGUI.h; sourceTree = "<group>"; };
+		CE003CBD11242D00004B0AA7 /* PyOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyOutline.h; sourceTree = "<group>"; };
+		CE003CBE11242D00004B0AA7 /* PyRegistrable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyRegistrable.h; path = ../../cocoalib/PyRegistrable.h; sourceTree = SOURCE_ROOT; };
+		CE003CC011242D00004B0AA7 /* HSOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSOutlineView.h; sourceTree = "<group>"; };
+		CE003CC111242D00004B0AA7 /* HSOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSOutlineView.m; sourceTree = "<group>"; };
+		CE003CC211242D00004B0AA7 /* NSIndexPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSIndexPathAdditions.h; sourceTree = "<group>"; };
+		CE003CC311242D00004B0AA7 /* NSIndexPathAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSIndexPathAdditions.m; sourceTree = "<group>"; };
+		CE003CC411242D00004B0AA7 /* NSTableViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTableViewAdditions.h; sourceTree = "<group>"; };
+		CE003CC511242D00004B0AA7 /* NSTableViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTableViewAdditions.m; sourceTree = "<group>"; };
+		CE003CCD11242D2C004B0AA7 /* DirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectoryOutline.h; path = ../base/DirectoryOutline.h; sourceTree = SOURCE_ROOT; };
+		CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectoryOutline.m; path = ../base/DirectoryOutline.m; sourceTree = SOURCE_ROOT; };
+		CE003CCF11242D2C004B0AA7 /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDirectoryOutline.h; path = ../base/PyDirectoryOutline.h; sourceTree = SOURCE_ROOT; };
 		CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_me_help; path = ../../help_me/dupeguru_me_help; sourceTree = "<group>"; };
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -237,6 +265,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE003CB211242D00004B0AA7 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE003CB311242D00004B0AA7 /* HSGUIController.h */,
+				CE003CB411242D00004B0AA7 /* HSGUIController.m */,
+				CE003CB511242D00004B0AA7 /* HSOutline.h */,
+				CE003CB611242D00004B0AA7 /* HSOutline.m */,
+				CE003CB711242D00004B0AA7 /* HSWindowController.h */,
+				CE003CB811242D00004B0AA7 /* HSWindowController.m */,
+			);
+			name = controllers;
+			path = ../../cocoalib/controllers;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE003CBB11242D00004B0AA7 /* proxies */ = {
+			isa = PBXGroup;
+			children = (
+				CE003CBC11242D00004B0AA7 /* PyGUI.h */,
+				CE003CBD11242D00004B0AA7 /* PyOutline.h */,
+			);
+			name = proxies;
+			path = ../../cocoalib/proxies;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE003CBF11242D00004B0AA7 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CE003CC011242D00004B0AA7 /* HSOutlineView.h */,
+				CE003CC111242D00004B0AA7 /* HSOutlineView.m */,
+				CE003CC211242D00004B0AA7 /* NSIndexPathAdditions.h */,
+				CE003CC311242D00004B0AA7 /* NSIndexPathAdditions.m */,
+				CE003CC411242D00004B0AA7 /* NSTableViewAdditions.h */,
+				CE003CC511242D00004B0AA7 /* NSTableViewAdditions.m */,
+			);
+			name = views;
+			path = ../../cocoalib/views;
+			sourceTree = SOURCE_ROOT;
+		};
 		CE3FBDD01094637800B72D77 /* xib */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,17 +338,23 @@
 		CE515DDD0FC6C09400EC695D /* cocoalib */ = {
 			isa = PBXGroup;
 			children = (
+				CE003CB211242D00004B0AA7 /* controllers */,
+				CE003CBB11242D00004B0AA7 /* proxies */,
+				CE003CBF11242D00004B0AA7 /* views */,
 				CE4B59C41119919700C06C9E /* xib */,
 				CE49DEF10FDFEB810098617B /* brsinglelineformatter */,
 				CE515DE00FC6C12E00EC695D /* Dialogs.h */,
 				CE515DE10FC6C12E00EC695D /* Dialogs.m */,
 				CE515DE20FC6C12E00EC695D /* HSErrorReportWindow.h */,
 				CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */,
+				CE003CB911242D00004B0AA7 /* NSEventAdditions.h */,
+				CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */,
 				CE515DE40FC6C12E00EC695D /* Outline.h */,
 				CE515DE50FC6C12E00EC695D /* Outline.m */,
 				CE515DE60FC6C12E00EC695D /* ProgressController.h */,
 				CE515DE70FC6C12E00EC695D /* ProgressController.m */,
 				CE515DE80FC6C12E00EC695D /* PyApp.h */,
+				CE003CBE11242D00004B0AA7 /* PyRegistrable.h */,
 				CE515DE90FC6C12E00EC695D /* RecentDirectories.h */,
 				CE515DEA0FC6C12E00EC695D /* RecentDirectories.m */,
 				CE515DEB0FC6C12E00EC695D /* RegistrationInterface.h */,
@@ -298,6 +370,9 @@
 		CE515E140FC6C17900EC695D /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CE003CCD11242D2C004B0AA7 /* DirectoryOutline.h */,
+				CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */,
+				CE003CCF11242D2C004B0AA7 /* PyDirectoryOutline.h */,
 				CE515E150FC6C19300EC695D /* AppDelegate.h */,
 				CE515E160FC6C19300EC695D /* AppDelegate.m */,
 				CE515E170FC6C19300EC695D /* Consts.h */,
@@ -409,6 +484,14 @@
 				CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */,
 				CE49DEF60FDFEB810098617B /* BRSingleLineFormatter.m in Sources */,
 				CE6032C00FE6784C007E33FF /* DetailsPanel.m in Sources */,
+				CE003CC611242D00004B0AA7 /* HSGUIController.m in Sources */,
+				CE003CC711242D00004B0AA7 /* HSOutline.m in Sources */,
+				CE003CC811242D00004B0AA7 /* HSWindowController.m in Sources */,
+				CE003CC911242D00004B0AA7 /* NSEventAdditions.m in Sources */,
+				CE003CCA11242D00004B0AA7 /* HSOutlineView.m in Sources */,
+				CE003CCB11242D00004B0AA7 /* NSIndexPathAdditions.m in Sources */,
+				CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */,
+				CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
