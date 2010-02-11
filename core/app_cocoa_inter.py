@@ -44,13 +44,13 @@ class PyDupeGuruBase(PyRegistrable):
         self.py.load()
     
     def markAll(self):
-        self.py.results.mark_all()
+        self.py.mark_all()
     
     def markNone(self):
-        self.py.results.mark_none()
+        self.py.mark_none()
     
     def markInvert(self):
-        self.py.results.mark_invert()
+        self.py.mark_invert()
     
     def purgeIgnoreList(self):
         self.py.PurgeIgnoreList()

@@ -156,6 +156,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             filter = escape(filter, '()[]\\.|+?^')
             filter = escape(filter, '*', '.')
         self.results.apply_filter(filter)
+        self.notify('results_changed')
     
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
@@ -240,6 +241,18 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 changed_groups.add(g)
         self.notify('results_changed')
     
+    def mark_all(self):
+        self.results.mark_all()
+        self.notify('results_changed')
+    
+    def mark_none(self):
+        self.results.mark_none()
+        self.notify('results_changed')
+    
+    def mark_invert(self):
+        self.results.mark_invert()
+        self.notify('results_changed')
+    
     def open_selected(self):
         if self.selected_dupes:
             self._open_path(self.selected_dupes[0].path)
@@ -253,6 +266,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def remove_duplicates(self, duplicates):
         self.results.remove_duplicates(duplicates)
+        self.notify('results_changed')
     
     def remove_selected(self):
         self.remove_duplicates(self.selected_dupes)

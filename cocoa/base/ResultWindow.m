@@ -509,13 +509,11 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)resultsChanged:(NSNotification *)aNotification
 {
-    [self reloadMatches];
     [self refreshStats];
 }
 
 - (void)resultsMarkingChanged:(NSNotification *)aNotification
 {
-    [self reloadMatches];
     [self refreshStats];
 }
 

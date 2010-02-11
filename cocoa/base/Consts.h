@@ -10,8 +10,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 /* ResultsChangedNotification happens on major changes, which requires a complete reload of the data*/
 #define ResultsChangedNotification @"ResultsChangedNotification"
-/* ResultsChangedNotification happens on minor changes, which requires buffer flush*/
-#define ResultsUpdatedNotification @"ResultsUpdatedNotification"
 #define ResultsMarkingChangedNotification @"ResultsMarkingChangedNotification"
 #define RegistrationRequired @"RegistrationRequired"
 #define JobStarted @"JobStarted"
