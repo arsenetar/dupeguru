@@ -10,10 +10,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "../base/ResultWindow.h"
 #import "DirectoryPanel.h"
 
-@interface ResultWindow : ResultWindowBase
-{
-    NSString *_lastAction;
-}
+@interface ResultWindow : ResultWindowBase {}
 - (IBAction)removeDeadTracks:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
 @end

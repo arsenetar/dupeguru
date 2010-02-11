@@ -33,8 +33,6 @@ http://www.hardcoded.net/licenses/hs_license
 @implementation ResultWindowBase
 - (void)awakeFromNib
 {
-    _displayDelta = NO;
-    _powerMode = NO;
     [self window];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     outline = [[ResultOutline alloc] initWithPyParent:py view:matches];
@@ -42,7 +40,6 @@ http://www.hardcoded.net/licenses/hs_license
     [self fillColumnsMenu];
     [deltaSwitch setSelectedSegment:0];
     [pmSwitch setSelectedSegment:0];
-    [py setDisplayDeltaValues:b2n(_displayDelta)];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
     [self refreshStats];
@@ -116,7 +113,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
 {
-    if (_powerMode)
+    if ([outline powerMarkerMode])
         aDupesOnly = NO;
     NSIndexSet *indexes = [matches selectedRowIndexes];
     NSMutableArray *nodeList = [NSMutableArray array];
@@ -171,7 +168,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)performPySelection:(NSArray *)aIndexPaths
 {
-    if (_powerMode) {
+    if ([outline powerMarkerMode]) {
         [py selectPowerMarkerNodePaths:aIndexPaths];
     }
     else {
@@ -203,15 +200,12 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)changeDelta:(id)sender
 {
-    _displayDelta = [deltaSwitch selectedSegment] == 1;
-    [py setDisplayDeltaValues:b2n(_displayDelta)];
-    [self reloadMatches];
+    [outline setDeltaValuesMode:[deltaSwitch selectedSegment] == 1];
 }
 
 - (IBAction)changePowerMarker:(id)sender
 {
-    _powerMode = [pmSwitch selectedSegment] == 1;
-    [outline setPowerMarkerMode:_powerMode];
+    [outline setPowerMarkerMode:[pmSwitch selectedSegment] == 1];
     // [self outlineView:matches didClickTableColumn:nil];
 }
 

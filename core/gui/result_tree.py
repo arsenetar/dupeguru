@@ -34,6 +34,7 @@ class ResultTree(GUIObject, Tree):
         GUIObject.__init__(self, view, app)
         Tree.__init__(self)
         self._power_marker = False
+        self._delta_values = False
         self.connect()
         self._refresh()
         self.view.refresh()
@@ -60,16 +61,16 @@ class ResultTree(GUIObject, Tree):
             node = self.get_node(path)
         except IndexError:
             return '---'
-        if self.app.display_delta_values:
+        if self.delta_values:
             return node.data_delta[column]
         else:
             return node.data[column]
     
     def sort(self, key, asc):
         if self.power_marker:
-            self.app.sort_dupes(key, asc)
+            self.app.results.sort_dupes(key, asc, self.delta_values)
         else:
-            self.app.sort_groups(key, asc)
+            self.app.results.sort_groups(key, asc)
     
     @property
     def power_marker(self):
@@ -80,6 +81,18 @@ class ResultTree(GUIObject, Tree):
         if value == self._power_marker:
             return
         self._power_marker = value
+        self._refresh()
+        self.view.refresh()
+    
+    @property
+    def delta_values(self):
+        return self._delta_values
+    
+    @delta_values.setter
+    def delta_values(self, value):
+        if value == self._delta_values:
+            return
+        self._delta_values = value
         self._refresh()
         self.view.refresh()
     

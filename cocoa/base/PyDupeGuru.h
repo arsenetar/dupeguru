@@ -56,7 +56,6 @@ http://www.hardcoded.net/licenses/hs_license
 //Scanning options
 - (void)setMinMatchPercentage:(NSNumber *)percentage;
 - (void)setMixFileKind:(NSNumber *)mix_file_kind;
-- (void)setDisplayDeltaValues:(NSNumber *)display_delta_values;
 - (void)setEscapeFilterRegexp:(NSNumber *)escape_filter_regexp;
 - (void)setRemoveEmptyFolders:(NSNumber *)remove_empty_folders;
 - (void)setSizeThreshold:(NSInteger)size_threshold;

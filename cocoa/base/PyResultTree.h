@@ -10,7 +10,10 @@ http://www.hardcoded.net/licenses/hs_license
 #import "PyOutline.h"
 
 @interface PyResultTree : PyOutline
+- (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
+- (BOOL)deltaValuesMode;
+- (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
 
 - (NSString *)valueForPath:(NSArray *)aPath column:(NSInteger)aColumn;
 - (BOOL)renameSelected:(NSString *)aNewName;

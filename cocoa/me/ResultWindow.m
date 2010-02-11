@@ -20,8 +20,9 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [super awakeFromNib];
     [[self window] setTitle:@"dupeGuru Music Edition"];
-    _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,7)] retain];
-    [_deltaColumns removeIndex:6];
+    NSMutableIndexSet *deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,7)] retain];
+    [deltaColumns removeIndex:6];
+    [outline setDeltaColumns:deltaColumns];
 }
 
 /* Actions */

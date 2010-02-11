@@ -27,10 +27,7 @@ http://www.hardcoded.net/licenses/hs_license
 	IBOutlet NSMenu *columnsMenu;
 	IBOutlet NSSearchField *filterField;
     
-    BOOL _powerMode;
-    BOOL _displayDelta;
     NSMutableArray *_resultColumns;
-    NSMutableIndexSet *_deltaColumns;
     NSWindowController *preferencesPanel;
     ResultOutline *outline;
 }

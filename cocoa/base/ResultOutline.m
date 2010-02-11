@@ -18,6 +18,12 @@ http://www.hardcoded.net/licenses/hs_license
     return self;
 }
 
+- (void)dealloc
+{
+    [_deltaColumns release];
+    [super dealloc];
+}
+
 - (PyResultTree *)py
 {
     return (PyResultTree *)py;
@@ -31,9 +37,30 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Public */
+- (BOOL)powerMarkerMode
+{
+    return [[self py] powerMarkerMode];
+}
+
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode
 {
     [[self py] setPowerMarkerMode:aPowerMarkerMode];
+}
+
+- (BOOL)deltaValuesMode
+{
+    return [[self py] deltaValuesMode];
+}
+
+- (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode
+{
+    [[self py] setDeltaValuesMode:aDeltaValuesMode];
+}
+
+- (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns
+{
+    [_deltaColumns release];
+    _deltaColumns = [aDeltaColumns retain];
 }
 
 - (IBAction)markSelected:(id)sender
@@ -96,12 +123,12 @@ http://www.hardcoded.net/licenses/hs_license
         else {
             [textCell setTextColor:[NSColor blueColor]];
         }
-        // if ((_displayDelta) && (_powerMode || ([node level] > 1))) {
-        //     NSInteger i = [[tableColumn identifier] integerValue];
-        //     if ([_deltaColumns containsIndex:i]) {
-        //         [textCell setTextColor:[NSColor orangeColor]];
-        //     }
-        // }
+        if (([self deltaValuesMode]) && ([self powerMarkerMode] || ([path length] > 1))) {
+            NSInteger i = [[tableColumn identifier] integerValue];
+            if ([_deltaColumns containsIndex:i]) {
+                [textCell setTextColor:[NSColor orangeColor]];
+            }
+        }
     }
 }
 @end

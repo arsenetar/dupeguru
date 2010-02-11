@@ -46,7 +46,6 @@ class DupeGuru(app.DupeGuru):
         appdata = op.join(appsupport, appdata_subdir)
         app.DupeGuru.__init__(self, data_module, appdata, appid)
         self.progress = cocoa.ThreadedJobPerformer()
-        self.display_delta_values = False
     
     #--- Override
     @staticmethod
@@ -155,10 +154,4 @@ class DupeGuru(app.DupeGuru):
         rows = [p[0] for p in node_paths]
         dupes = [self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))]
         self._select_dupes(dupes)
-    
-    def sort_dupes(self,key,asc):
-        self.results.sort_dupes(key,asc,self.display_delta_values)
-    
-    def sort_groups(self,key,asc):
-        self.results.sort_groups(key,asc)
     

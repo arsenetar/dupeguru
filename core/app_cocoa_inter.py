@@ -131,9 +131,6 @@ class PyDupeGuruBase(PyRegistrable):
     def setMixFileKind_(self, mix_file_kind):
         self.py.scanner.mix_file_kind = mix_file_kind
     
-    def setDisplayDeltaValues_(self, display_delta_values):
-        self.py.display_delta_values= display_delta_values
-    
     def setEscapeFilterRegexp_(self, escape_filter_regexp):
         self.py.options['escape_filter_regexp'] = escape_filter_regexp
     
@@ -175,9 +172,21 @@ class PyDirectoryOutline(PyOutline):
 class PyResultOutline(PyOutline):
     py_class = ResultTree
     
+    @signature('c@:')
+    def powerMarkerMode(self):
+        return self.py.power_marker
+    
     @signature('v@:c')
     def setPowerMarkerMode_(self, value):
         self.py.power_marker = value
+    
+    @signature('c@:')
+    def deltaValuesMode(self):
+        return self.py.delta_values
+    
+    @signature('v@:c')
+    def setDeltaValuesMode_(self, value):
+        self.py.delta_values = value
     
     @signature('@@:@i')
     def valueForPath_column_(self, path, column):

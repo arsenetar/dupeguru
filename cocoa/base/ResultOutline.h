@@ -12,10 +12,14 @@ http://www.hardcoded.net/licenses/hs_license
 
 @interface ResultOutline : HSOutline
 {
-    NSMutableIndexSet *_deltaColumns;
+    NSIndexSet *_deltaColumns;
 }
 - (PyResultTree *)py;
+- (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
+- (BOOL)deltaValuesMode;
+- (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
+- (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns;
 
 - (IBAction)markSelected:(id)sender;
 @end;
