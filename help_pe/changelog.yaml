@@ -1,3 +1,8 @@
+- date: 2010-02-11
+  version: 1.8.3
+  description: |
+    * Fixed a crash when reading certain pictures. [Mac OS X] (#94)
+    * Fixed selection glitches, especially while renaming. (#93)
 - date: 2010-02-06
   version: 1.8.2
   description: |
@@ -79,159 +84,145 @@
     * Converted the Windows GUI to Qt, thus enabling multiprocessing and making the scanning process
       faster.
 - date: 2009-03-24
-  description: "* **Improved** scanning speed, mainly on OS X where all cores of the\
-    \ CPU are now used.\r\n* **Fixed** an occasional crash caused by permission issues.\r\
-    \n* **Fixed** a bug where the \"X discarded\" notice would show a too large number\
-    \ of discarded duplicates."
   version: 1.6.0
+  description: |
+    * **Improved** scanning speed, mainly on OS X where all cores of the CPU are now used.
+    * **Fixed** an occasional crash caused by permission issues.
+    * **Fixed** a bug where the "X discarded" notice would show a too large number of discarded duplicates.
 - date: 2008-09-10
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> a notice in the status bar when\
-    \ matches were discarded during the scan.</li>\n\t\t\t\t\t\t<li><b>Improved</b>\
-    \ duplicate prioritization (smartly chooses which file you will keep).</li>\n\t\
-    \t\t\t\t\t<li><b>Improved</b> scan progress feedback.</li>\n\t\t\t\t\t\t<li><b>Improved</b>\
-    \ responsiveness of the user interface for certain actions.</li>\n\t\t       \
-    \     </ul>"
   version: 1.5.0
+  description: |
+    * **Added** a notice in the status bar when matches were discarded during the scan.
+    * **Improved** duplicate prioritization (smartly chooses which file you will keep).
+    * **Improved** scan progress feedback.
+    * **Improved** responsiveness of the user interface for certain actions.
 - date: 2008-07-28
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> iPhoto compatibility on Mac\
-    \ OS X.</li>\n\t\t\t\t\t\t<li><b>Improved</b> the speed of results loading and\
-    \ saving.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a crash sometimes occurring during\
-    \ duplicate deletion.</li>\n\t\t            </ul>"
   version: 1.4.2
+  description: |
+    * **Improved** iPhoto compatibility on Mac OS X.
+    * **Improved** the speed of results loading and saving.
+    * **Fixed** a crash sometimes occurring during duplicate deletion.
 - date: 2008-04-12
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> iPhoto Library loading feedback\
-    \ on Mac OS X.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> the directory selection dialog.\
-    \ Bundles can be selected again on Mac OS X.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ \"Clear Ignore List\" crash in Windows.</li>\n\t\t            </ul>"
   version: 1.4.1
+  description: |
+    * **Improved** iPhoto Library loading feedback on Mac OS X.
+    * **Fixed** the directory selection dialog. Bundles can be selected again on Mac OS X.
+    * **Fixed** "Clear Ignore List" crash in Windows.
 - date: 2008-02-20
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> iPhoto Library support on Mac OS\
-    \ X.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> occasional crashes when scanning corrupted\
-    \ pictures.</li>\n\t\t            </ul>"
   version: 1.4.0
-- date: 2008-02-20
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> iPhoto Library support on Mac OS\
-    \ X.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> occasional crashes when scanning corrupted\
-    \ pictures.</li>\n\t\t            </ul>"
-  version: 1.4.0
+  description: |
+    * **Added** iPhoto Library support on Mac OS X.
+    * **Fixed** occasional crashes when scanning corrupted pictures.
 - date: 2008-01-12
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> scan, delete and move speed\
-    \ in situations where there were a lot of duplicates.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ occasional crashes when moving a lot of files at once.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ an issue sometimes preventing the application from starting at all.</li>\n\t\
-    \t            </ul>"
   version: 1.3.4
+  description: |
+    * **Improved** scan, delete and move speed in situations where there were a lot of duplicates.
+    * **Fixed** occasional crashes when moving a lot of files at once.
+    * **Fixed** an issue sometimes preventing the application from starting at all.
 - date: 2007-12-03
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> the handling of low memory situations.</li>\n\
-    \t\t\t\t\t\t<li><b>Improved</b> the directory panel. The \"Remove\" button changes\
-    \ to \"Put Back\" when an excluded directory is selected.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ the directory selection dialog. iPhoto '08 library files can now be selected.</li>\n\
-    \t\t            </ul>"
   version: 1.3.3
+  description: |
+    * **Improved** the handling of low memory situations.
+    * **Improved** the directory panel. The "Remove" button changes to "Put Back" when an excluded directory is selected.
+    * **Fixed** the directory selection dialog. iPhoto '08 library files can now be selected.
 - date: 2007-11-24
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> the \"Remove empty folders\" option.</li>\n\
-    \t\t\t\t\t\t<li><b>Fixed</b> results load/save issues.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ occasional status bar inaccuracies when the results are filtered.</li>\n\t\t\
-    \            </ul>"
   version: 1.3.2
+  description: |
+    * **Added** the "Remove empty folders" option.
+    * **Fixed** results load/save issues.
+    * **Fixed** occasional status bar inaccuracies when the results are filtered.
 - date: 2007-10-21
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> results loading speed.</li>\n\
-    \t\t\t\t\t\t<li><b>Improved</b> details panel's picture loading (made it asynchronous).</li>\n\
-    \t\t\t\t\t\t<li><b>Fixed</b> a bug where the stats line at the bottom would sometimes\
-    \ go confused while having a filter active.</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ a bug under Windows where some duplicate markings would be lost.</li>\n\t\t\
-    \            </ul>"
   version: 1.3.1
+  description: |
+    * **Improved** results loading speed.
+    * **Improved** details panel's picture loading (made it asynchronous).
+    * **Fixed** a bug where the stats line at the bottom would sometimes go confused while having a filter active.
+    * **Fixed** a bug under Windows where some duplicate markings would be lost.
 - date: 2007-09-22
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> post scan filtering.</li>\n\t\t\
-    \t\t\t\t<li><b>Fixed</b> issues with the rename feature under Windows</li>\n\t\
-    \t\t\t\t\t<li><b>Fixed</b> some user interface annoyances under Windows</li>\n\
-    \t\t            </ul>"
   version: 1.3.0
+  description: |
+    * **Added** post scan filtering.
+    * **Fixed** issues with the rename feature under Windows.
+    * **Fixed** some user interface annoyances under Windows.
 - date: 2007-05-19
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> UI responsiveness (using threads)\
-    \ under Mac OS X.</li>\n\t\t\t\t\t\t<li><b>Improved</b> result load/save speed\
-    \ and memory usage.</li>\n\t\t            </ul>"
   version: 1.2.1
+  description: |
+    * **Improved** UI responsiveness (using threads) under Mac OS X.
+    * **Improved** result load/save speed and memory usage.
 - date: 2007-03-17
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Changed</b> the picture decoding libraries\
-    \ for both Mac OS X and Windows. The Mac OS X version uses the Core Graphics library\
-    \ and the Windows version uses the .NET framework imaging capabilities. This results\
-    \ in much faster scans. As a bonus, the Mac OS X version of dupeGuru PE now supports\
-    \ RAW images.</li>\n\t\t            </ul>"
   version: 1.2.0
+  description: |
+    * **Changed** the picture decoding libraries for both Mac OS X and Windows. The Mac OS X version
+      uses the Core Graphics library and the Windows version uses the .NET framework imaging
+      capabilities. This results in much faster scans. As a bonus, the Mac OS X version of dupeGuru
+      PE now supports RAW images.
 - date: 2007-02-11
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> Re-orderable columns. In fact,\
-    \ I re-added the feature which was lost in the C# conversion in 2.4.0 (Windows).</li>\n\
-    \t\t\t\t\t\t<li><b>Fixed</b> a bug with all the Delete/Move/Copy actions with\
-    \ certain kinds of files.</li>\n\t\t            </ul>"
   version: 1.1.6
+  description: |
+    * **Added** Re-orderable columns. In fact, I re-added the feature which was lost in the C#
+      conversion in 1.1.0 (Windows).
+    * **Fixed** a bug with all the Delete/Move/Copy actions with certain kinds of files.
 - date: 2007-01-11
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with the Move action.</li>\n\
-    \t\t            </ul>"
   version: 1.1.5
+  description: |
+    * **Fixed** a bug with the Move action.
 - date: 2007-01-09
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a \"ghosting\" bug. Dupes deleted\
-    \ by dupeGuru would sometimes come back in subsequent scans (Windows).</li>\n\t\
-    \t\t\t\t\t<li><b>Fixed</b> bugs sometimes making dupeGuru crash when marking a\
-    \ dupe (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> some minor visual glitches\
-    \ (Windows).</li>\n\t\t            </ul>"
   version: 1.1.4
+  description: |
+    * **Fixed** a "ghosting" bug. Dupes deleted by dupeGuru would sometimes come back in subsequent scans (Windows).
+    * **Fixed** bugs sometimes making dupeGuru crash when marking a dupe (Windows).
+    * **Fixed** some minor visual glitches (Windows).
 - date: 2006-12-23
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Improved</b> the caching system. This makes\
-    \ duplicate scans significantly faster.</li>\n\t\t\t\t\t\t<li><b>Improved</b>\
-    \ the rename file dialog to exclude the extension from the original selection\
-    \ (so when you start typing your new filename, it doesn't overwrite it) (Windows).</li>\n\
-    \t\t\t\t\t\t<li><b>Changed</b> some menu key shortcuts that created conflicts\
-    \ (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug preventing files from \"\
-    reference\" directories to be displayed in blue in the results (Windows).</li>\n\
-    \t\t\t\t\t\t<li><b>Fixed</b> a bug preventing some files to be sent to the recycle\
-    \ bin (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with the \"Remove\"\
-    \ button of the directories panel (Windows).</li>\n\t\t\t\t\t\t<li><b>Fixed</b>\
-    \ a bug in the packaging preventing certain Windows configurations to start dupeGuru\
-    \ at all.</li>\n\t\t            </ul>"
   version: 1.1.3
+  description: |
+    * **Improved** the caching system. This makes duplicate scans significantly faster.
+    * **Improved** the rename file dialog to exclude the extension from the original selection (so 
+      when you start typing your new filename, it doesn't overwrite it) (Windows).
+    * **Changed** some menu key shortcuts that created conflicts (Windows).
+    * **Fixed** a bug preventing files from "reference" directories to be displayed in blue in the results (Windows).
+    * **Fixed** a bug preventing some files to be sent to the recycle bin (Windows).
+    * **Fixed** a bug with the "Remove" button of the directories panel (Windows).
+    * **Fixed** a bug in the packaging preventing certain Windows configurations to start dupeGuru at all.
 - date: 2006-11-18
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with directory states.</li>\n\
-    \t\t            </ul>"
   version: 1.1.2
+  description: |
+    * **Fixed** a bug with directory states.
 - date: 2006-11-17
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug causing the ignore list not\
-    \ to be saved.</li>\n\t\t\t\t\t\t<li><b>Fixed</b> a bug with selection under Power\
-    \ Marker mode.</li>\n\t\t            </ul>"
   version: 1.1.1
+  description: |
+    * **Fixed** a bug causing the ignore list not to be saved.
+    * **Fixed** a bug with selection under Power Marker mode.
 - date: 2006-11-15
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Changed</b> the Windows interface. It is\
-    \ now .NET based.</li>\n\t\t\t\t\t\t<li><b>Added</b> an auto-update feature to\
-    \ the windows version.</li>\n\t\t\t\t\t\t<li><b>Changed</b> the way power marking\
-    \ works. It is now a mode instead of a separate window.</li>\n\t\t\t\t\t\t<li><b>Changed</b>\
-    \ the \"Size (MB)\" column for a \"Size (KB)\" column. The values are now \"ceiled\"\
-    \ instead of rounded. Therefore, a size \"0\" is now really 0 bytes, not just\
-    \ a value too small to be rounded up. It is also the case for delta values.</li>\n\
-    \t\t\t\t\t\t<li><b>Fixed</b> a bug sometimes making delete and move operations\
-    \ stall.</li>\n\t\t            </ul>"
   version: 1.1.0
+  description: |
+    * **Changed** the Windows interface. It is now .NET based.
+    * **Added** an auto-update feature to the windows version.
+    * **Changed** the way power marking works. It is now a mode instead of a separate window.
+    * **Changed** the "Size (MB)" column for a "Size (KB)" column. The values are now "ceiled"
+      instead of rounded. Therefore, a size "0" is now really 0 bytes, not just a value too small to
+      be rounded up. It is also the case for delta values.
+    * **Fixed** a bug sometimes making delete and move operations stall.
 - date: 2006-10-12
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> an auto-update feature in the Mac\
-    \ OS X version (with Sparkle).</li>\n\t\t            \t<li><b>Fixed</b> a bug\
-    \ sometimes causing inaccuracies of the Match %.</li>\n\t\t            </ul>"
   version: 1.0.5
+  description: |
+    * **Added** an auto-update feature in the Mac OS X version (with Sparkle).
+    * **Fixed** a bug sometimes causing inaccuracies of the Match %.
 - date: 2006-09-21
-  description: "<ul>\n\t\t            \t<li><b>Fixed</b> a bug with the cache system.</li>\n\
-    \t\t            </ul>"
   version: 1.0.4
+  description: |
+    * **Fixed** a bug with the cache system.
 - date: 2006-09-15
-  description: "<ul>\n\t\t\t\t\t\t<li><b>Added</b> the ability to search for scaled\
-    \ duplicates.</li>\n\t\t\t\t\t\t<li><b>Added</b> a cache system for faster scans.</li>\n\
-    \t\t            \t<li><b>Improved</b> speed of the scanning engine.</li>\n\t\t\
-    \            </ul>"
   version: 1.0.3
+  description: |
+    * **Added** the ability to search for scaled duplicates.
+    * **Added** a cache system for faster scans.
+    * **Improved** speed of the scanning engine.
 - date: 2006-09-11
-  description: "<ul>\n\t\t            \t<li><b>Improved</b> speed of the scanning\
-    \ engine.</li>\n\t\t\t\t\t\t<li><b>Improved</b> the display of pictures in the\
-    \ details panel (Windows).</li>\n\t\t            </ul>"
   version: 1.0.2
+  description: |
+    * **Improved** speed of the scanning engine.
+    * **Improved** the display of pictures in the details panel (Windows).
 - date: 2006-09-08
-  description: "<ul>\n\t\t            \t<li>Initial release.</li>\n\t\t          \
-    \  </ul>"
   version: 1.0.0
+  description: |
+    * Initial release.

@@ -56,7 +56,7 @@ class File(fs.File):
 class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_pe'
     NAME = 'dupeGuru Picture Edition'
-    VERSION = '1.8.2'
+    VERSION = '1.8.3'
     DELTA_COLUMNS = frozenset([2, 5, 6])
     
     def __init__(self):
