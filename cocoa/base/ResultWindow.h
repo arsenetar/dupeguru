@@ -38,7 +38,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
 - (NSDictionary *)getColumnsWidth;
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)initResultColumns;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 

@@ -109,22 +109,6 @@ http://www.hardcoded.net/licenses/hs_license
     return result;
 }
 
-- (NSArray *)getSelectedPaths:(BOOL)aDupesOnly
-{
-    if ([outline powerMarkerMode])
-        aDupesOnly = NO;
-    NSIndexSet *indexes = [matches selectedRowIndexes];
-    NSMutableArray *nodeList = [NSMutableArray array];
-    NSInteger i = [indexes firstIndex];
-    while (i != NSNotFound) {
-        NSIndexPath *path = [matches itemAtRow:i];
-        if (!aDupesOnly || ([path length] > 1))
-            [nodeList addObject:p2a(path)];
-        i = [indexes indexGreaterThanIndex:i];
-    }
-    return nodeList;
-}
-
 - (void)initResultColumns
 {
     // Virtual
@@ -220,10 +204,10 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)ignoreSelected:(id)sender
 {
-    NSArray *pathList = [self getSelectedPaths:YES];
-    if (![pathList count])
+    NSInteger selectedDupeCount = [outline selectedDupeCount];
+    if (!selectedDupeCount)
         return;
-    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",[pathList count]];
+    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py addSelectedToIgnoreList];
@@ -295,10 +279,11 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)removeSelected:(id)sender
 {
-    NSArray *pathList = [self getSelectedPaths:YES];
-    if (![pathList count])
+    NSInteger selectedDupeCount = [outline selectedDupeCount];
+    if (!selectedDupeCount)
         return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",[pathList count]]] == NSAlertSecondButtonReturn) // NO
+    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",selectedDupeCount];
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py removeSelected];
 }

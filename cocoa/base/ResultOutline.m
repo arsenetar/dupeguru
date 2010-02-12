@@ -59,6 +59,23 @@ http://www.hardcoded.net/licenses/hs_license
     _deltaColumns = [aDeltaColumns retain];
 }
 
+- (NSInteger)selectedDupeCount
+{
+    NSArray *selected = [self selectedIndexPaths];
+    if ([self powerMarkerMode]) {
+        return [selected count];
+    }
+    else {
+        NSInteger r = 0;
+        for (NSArray *path in selected) {
+            if ([path count] == 1) {
+                r++;
+            }
+        }
+        return r;
+    }
+}
+
 - (IBAction)markSelected:(id)sender
 {
     [[self py] markSelected];
