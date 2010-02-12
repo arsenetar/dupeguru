@@ -7,6 +7,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from operator import attrgetter
+
 from hsgui.tree import Tree, Node
 
 from .base import GUIObject
@@ -40,6 +42,12 @@ class ResultTree(GUIObject, Tree):
         self._refresh()
         self.view.refresh()
     
+    #--- Override
+    def _select_nodes(self, nodes):
+        Tree._select_nodes(self, nodes)
+        self.app._select_dupes(map(attrgetter('_dupe'), nodes))
+    
+    #--- Private
     def _refresh(self):
         self.clear()
         if not self.power_marker:
@@ -53,10 +61,11 @@ class ResultTree(GUIObject, Tree):
                 group = self.app.results.get_group_of_duplicate(dupe)
                 self.append(DupeNode(self.app, group, dupe))
         if self.app.selected_dupes:
-            to_find = self.app.selected_dupes[0]
-            node = self.find(lambda n: n is not self and n._dupe is to_find)
-            self.selected = node
+            to_find = set(self.app.selected_dupes)
+            nodes = list(self.findall(lambda n: n is not self and n._dupe in to_find))
+            self.selected_nodes = nodes
     
+    #--- Public
     def get_node_value(self, path, column):
         try:
             node = self.get_node(path)
@@ -76,6 +85,7 @@ class ResultTree(GUIObject, Tree):
         self._refresh()
         self.view.refresh()
     
+    #--- Properties
     @property
     def power_marker(self):
         return self._power_marker
@@ -101,14 +111,6 @@ class ResultTree(GUIObject, Tree):
         self._delta_values = value
         self._refresh()
         self.view.refresh()
-    
-    @Tree.selected.setter
-    def selected(self, node):
-        self._selected = node
-        if node is None:
-            self.app._select_dupes([])
-        else:
-            self.app._select_dupes([node._dupe])
     
     #--- Event Handlers
     def results_changed(self):
