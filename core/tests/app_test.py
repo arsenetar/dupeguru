@@ -169,6 +169,9 @@ class TCDupeGuruWithResults(TestCase):
         self.dtree = DirectoryTree(self.dtree_gui, self.app)
         self.rtree_gui = CallLogger()
         self.rtree = ResultTree(self.rtree_gui, self.app)
+        self.dpanel.connect()
+        self.dtree.connect()
+        self.rtree.connect()
         tmppath = self.tmppath()
         io.mkdir(tmppath + 'foo')
         io.mkdir(tmppath + 'bar')
@@ -443,6 +446,7 @@ class TCDupeGuru_renameSelected(TestCase):
         self.files = files
         self.rtree_gui = CallLogger()
         self.rtree = ResultTree(self.rtree_gui, self.app)
+        self.rtree.connect()
     
     def test_simple(self):
         app = self.app
