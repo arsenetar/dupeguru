@@ -13,7 +13,14 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super initWithPyClassName:@"PyDirectoryOutline" pyParent:aPyParent view:aOutlineView];
     [outlineView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+    [self connect];
     return self;
+}
+
+- (void)dealloc
+{
+    [self disconnect];
+    [super dealloc];
 }
 
 - (PyDirectoryOutline *)py

@@ -14,7 +14,14 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super initWithNibName:@"DetailsPanel" pyClassName:@"PyDetailsPanel" pyParent:aPy];
     [self window]; //So the detailsTable is initialized.
+    [self connect];
     return self;
+}
+
+- (void)dealloc
+{
+    [self disconnect];
+    [super dealloc];
 }
 
 - (PyDetailsPanel *)py

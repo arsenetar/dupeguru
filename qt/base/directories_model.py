@@ -64,6 +64,7 @@ class DirectoriesModel(TreeModel):
     def __init__(self, app):
         TreeModel.__init__(self)
         self.model = DirectoryTree(self, app)
+        self.model.connect()
     
     def _createNode(self, ref, row):
         return RefNode(self, None, ref, row)

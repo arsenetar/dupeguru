@@ -53,7 +53,9 @@ class DirectoryTree(GUIObject, Tree):
     def __init__(self, view, app):
         GUIObject.__init__(self, view, app)
         Tree.__init__(self)
-        self.connect()
+    
+    def connect(self):
+        GUIObject.connect(self)
         self._refresh()
         self.view.refresh()
     

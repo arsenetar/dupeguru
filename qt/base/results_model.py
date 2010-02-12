@@ -6,74 +6,62 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from PyQt4.QtCore import SIGNAL, Qt, QAbstractItemModel, QModelIndex, QRect
-from PyQt4.QtGui import QBrush, QStyledItemDelegate, QFont, QTreeView, QColor
+from PyQt4.QtCore import SIGNAL, Qt
+from PyQt4.QtGui import (QBrush, QStyledItemDelegate, QFont, QTreeView, QColor, QItemSelectionModel,
+    QItemSelection)
 
-from qtlib.tree_model import TreeNode, TreeModel
+from qtlib.tree_model import TreeModel, RefNode
 
-class ResultNode(TreeNode):
-    def __init__(self, model, parent, row, dupe, group):
-        TreeNode.__init__(self, model, parent, row)
-        self.dupe = dupe
-        self.group = group
-        self._normalData = None
-        self._deltaData = None
-    
-    def _createNode(self, ref, row):
-        return ResultNode(self.model, self, row, ref, self.group)
-    
-    def _getChildren(self):
-        return self.group.dupes if self.dupe is self.group.ref else []
-    
-    def invalidate(self):
-        self._normalData = None
-        self._deltaData = None
-        TreeNode.invalidate(self)
-    
-    @property
-    def normalData(self):
-        if self._normalData is None:
-            self._normalData = self.model._app._get_display_info(self.dupe, self.group, delta=False)
-        return self._normalData
-    
-    @property
-    def deltaData(self):
-        if self._deltaData is None:
-            self._deltaData = self.model._app._get_display_info(self.dupe, self.group, delta=True)
-        return self._deltaData
-    
+from core.gui.result_tree import ResultTree as ResultTreeModel
 
 class ResultsDelegate(QStyledItemDelegate):
     def initStyleOption(self, option, index):
         QStyledItemDelegate.initStyleOption(self, option, index)
         node = index.internalPointer()
-        if node.group.ref is node.dupe:
+        ref = node.ref
+        if ref._group.ref is ref._dupe:
             newfont = QFont(option.font)
             newfont.setBold(True)
             option.font = newfont
     
 
 class ResultsModel(TreeModel):
-    def __init__(self, app):
+    def __init__(self, app, view):
+        TreeModel.__init__(self)
+        self.view = view
         self._app = app
-        self._results = app.results
         self._data = app.data
         self._delta_columns = app.DELTA_COLUMNS
-        self.delta = False
-        self._power_marker = False
-        TreeModel.__init__(self)
+        self.resultsDelegate = ResultsDelegate()
+        self.model = ResultTreeModel(self, app)
+        self.view.setItemDelegate(self.resultsDelegate)
+        self.view.setModel(self)
+        self.model.connect()
+        
+        self.connect(self.view.selectionModel(), SIGNAL('selectionChanged(QItemSelection,QItemSelection)'), self.selectionChanged)
     
     def _createNode(self, ref, row):
-        if self.power_marker:
-            # ref is a dupe
-            group = self._results.get_group_of_duplicate(ref)
-            return ResultNode(self, None, row, ref, group)
-        else:
-            # ref is a group
-            return ResultNode(self, None, row, ref.ref, ref)
+        return RefNode(self, None, ref, row)
     
     def _getChildren(self):
-        return self._results.dupes if self.power_marker else self._results.groups
+        return list(self.model)
+    
+    def _updateSelection(self):
+        selectedIndexes = []
+        for path in self.model.selected_paths:
+            modelIndex = self.findIndex(path)
+            if modelIndex.isValid():
+                selectedIndexes.append(modelIndex)
+        if selectedIndexes:
+            selection = QItemSelection()
+            for modelIndex in selectedIndexes:
+                selection.select(modelIndex, modelIndex)
+            flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
+            self.view.selectionModel().select(selection, flags)
+            flags = QItemSelectionModel.Rows
+            self.view.selectionModel().setCurrentIndex(selectedIndexes[0], flags)
+        else:
+            self.view.selectionModel().clear()
     
     def columnCount(self, parent):
         return len(self._data.COLUMNS)
@@ -82,50 +70,22 @@ class ResultsModel(TreeModel):
         if not index.isValid():
             return None
         node = index.internalPointer()
+        ref = node.ref
         if role == Qt.DisplayRole:
-            data = node.deltaData if self.delta else node.normalData
+            data = ref.data_delta if self.model.delta_values else ref.data
             return data[index.column()]
         elif role == Qt.CheckStateRole:
-            if index.column() == 0 and node.dupe is not node.group.ref:
-                state = Qt.Checked if self._results.is_marked(node.dupe) else Qt.Unchecked
-                return state
+            if index.column() == 0 and ref.markable:
+                return Qt.Checked if ref.marked else Qt.Unchecked
         elif role == Qt.ForegroundRole:
-            if node.dupe is node.group.ref or node.dupe.is_ref:
+            if ref._dupe is ref._group.ref or ref._dupe.is_ref:
                 return QBrush(Qt.blue)
-            elif self.delta and index.column() in self._delta_columns:
+            elif self.model.delta_values and index.column() in self._delta_columns:
                 return QBrush(QColor(255, 142, 40)) # orange
         elif role == Qt.EditRole:
             if index.column() == 0:
-                return node.normalData[index.column()]
+                return ref.data[index.column()]
         return None
-    
-    def dupesForIndexes(self, indexes):
-        nodes = [index.internalPointer() for index in indexes]
-        return [node.dupe for node in nodes]
-    
-    def indexesForDupes(self, dupes):
-        def index(dupe):
-            try:
-                if self.power_marker:
-                    row = self._results.dupes.index(dupe)
-                    node = self.subnodes[row]
-                    assert node.dupe is dupe
-                    return self.createIndex(row, 0, node)
-                else:
-                    group = self._results.get_group_of_duplicate(dupe)
-                    row = self._results.groups.index(group)
-                    node = self.subnodes[row]
-                    if dupe is group.ref:
-                        assert node.dupe is dupe
-                        return self.createIndex(row, 0, node)
-                    subrow = group.dupes.index(dupe)
-                    subnode = node.subnodes[subrow]
-                    assert subnode.dupe is dupe
-                    return self.createIndex(subrow, 0, subnode)
-            except ValueError: # the dupe is not there anymore
-                return QModelIndex()
-        
-        return map(index, dupes)
     
     def flags(self, index):
         if not index.isValid():
@@ -144,60 +104,65 @@ class ResultsModel(TreeModel):
         if not index.isValid():
             return False
         node = index.internalPointer()
+        ref = node.ref
         if role == Qt.CheckStateRole:
             if index.column() == 0:
-                self._app.toggle_marking_for_dupes([node.dupe])
+                self._app.mark_dupe(ref._dupe, value.toBool())
                 return True
         if role == Qt.EditRole:
             if index.column() == 0:
                 value = unicode(value.toString())
-                if self._app.rename_dupe(node.dupe, value):
-                    node.invalidate()
-                    return True
+                return self.model.rename_selected(value)
         return False
     
     def sort(self, column, order):
-        if self.power_marker:
-            self._results.sort_dupes(column, order == Qt.AscendingOrder, self.delta)
-        else:
-            self._results.sort_groups(column, order == Qt.AscendingOrder)
-        self.reset()
-    
-    def toggleMarked(self, indexes):
-        assert indexes
-        dupes = self.dupesForIndexes(indexes)
-        self._app.toggle_marking_for_dupes(dupes)
+        self.model.sort(column, order == Qt.AscendingOrder)
     
     #--- Properties
     @property
     def power_marker(self):
-        return self._power_marker
+        return self.model.power_marker
     
     @power_marker.setter
     def power_marker(self, value):
-        if value == self._power_marker:
-            return
-        self._power_marker = value
+        self.model.power_marker = value
+    
+    @property
+    def delta_values(self):
+        return self.model.delta_values
+    
+    @delta_values.setter
+    def delta_values(self, value):
+        self.model.delta_values = value
+    
+    #--- Events
+    def selectionChanged(self, selected, deselected):
+        indexes = self.view.selectionModel().selectedRows()
+        nodes = [index.internalPointer() for index in indexes]
+        self.model.selected_nodes = [node.ref for node in nodes]
+    
+    #--- model --> view
+    def refresh(self):
         self.reset()
+        self._updateSelection()
+        self.view.expandAll()
+    
+    def invalidate_markings(self):
+        # redraw view
+        # HACK. this is the only way I found to update the widget without reseting everything
+        self.view.scroll(0, 1)
+        self.view.scroll(0, -1)
     
 
 class ResultsView(QTreeView):
     #--- Override
     def keyPressEvent(self, event):
         if event.text() == ' ':
-            self.model().toggleMarked(self.selectionModel().selectedRows())
+            self.emit(SIGNAL('spacePressed()'))
             return
         QTreeView.keyPressEvent(self, event)
     
     def mouseDoubleClickEvent(self, event):
         self.emit(SIGNAL('doubleClicked()'))
         # We don't call the superclass' method because the default behavior is to rename the cell.
-    
-    def setModel(self, model):
-        assert isinstance(model, ResultsModel)
-        QTreeView.setModel(self, model)
-    
-    #--- Public
-    def selectedDupes(self):
-        return self.model().dupesForIndexes(self.selectionModel().selectedRows())
     

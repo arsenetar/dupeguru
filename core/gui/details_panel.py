@@ -13,8 +13,11 @@ class DetailsPanel(GUIObject):
     def __init__(self, view, app):
         GUIObject.__init__(self, view, app)
         self._table = []
+    
+    def connect(self):
+        GUIObject.connect(self)
         self._refresh()
-        self.connect()
+        self.view.refresh()
     
     #--- Private
     def _refresh(self):

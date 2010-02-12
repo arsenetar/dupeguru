@@ -12,13 +12,12 @@ import logging
 import os
 import os.path as op
 
-from PyQt4.QtCore import Qt, QTimer, QObject, QCoreApplication, QUrl, SIGNAL
-from PyQt4.QtGui import QProgressDialog, QDesktopServices, QFileDialog, QDialog, QMessageBox
+from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL
+from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
 
 from hsutil import job
 from hsutil.reg import RegistrationRequired
 
-from core import fs
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     
 from qtlib.about_box import AboutBox
@@ -148,10 +147,6 @@ class DupeGuru(DupeGuruBase, QObject):
         if self.main_window._confirm(title, msg):
             DupeGuruBase.add_selected_to_ignore_list(self)
     
-    def apply_filter(self, filter):
-        DupeGuruBase.apply_filter(self, filter)
-        self.emit(SIGNAL('resultsChanged()'))
-    
     @demo_method
     def copy_or_move_marked(self, copy):
         opname = 'copy' if copy else 'move'
@@ -164,14 +159,6 @@ class DupeGuru(DupeGuruBase, QObject):
         DupeGuruBase.copy_or_move_marked(self, copy, destination, recreate_path)
     
     delete_marked = demo_method(DupeGuruBase.delete_marked)
-    
-    def make_selected_reference(self):
-        DupeGuruBase.make_selected_reference(self)
-        self.emit(SIGNAL('resultsChanged()'))
-    
-    def remove_duplicates(self, duplicates):
-        DupeGuruBase.remove_duplicates(self, duplicates)
-        self.emit(SIGNAL('resultsChanged()'))
     
     def remove_selected(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -186,36 +173,9 @@ class DupeGuru(DupeGuruBase, QObject):
     def askForRegCode(self):
         self.reg.ask_for_code()
     
-    def mark_all(self):
-        self.results.mark_all()
-        self.emit(SIGNAL('dupeMarkingChanged()'))
-    
-    def mark_invert(self):
-        self.results.mark_invert()
-        self.emit(SIGNAL('dupeMarkingChanged()'))
-    
-    def mark_none(self):
-        self.results.mark_none()
-        self.emit(SIGNAL('dupeMarkingChanged()'))
-    
     def openDebugLog(self):
         debugLogPath = op.join(self.appdata, 'debug.log')
         self._open_path(debugLogPath)
-    
-    def remove_marked_duplicates(self):
-        marked = [d for d in self.results.dupes if self.results.is_marked(d)]
-        self.remove_duplicates(marked)
-    
-    def rename_dupe(self, dupe, newname):
-        try:
-            dupe.rename(newname)
-            return True
-        except (IndexError, fs.FSError) as e:
-            logging.warning("dupeGuru Warning: %s" % unicode(e))
-        return False
-    
-    def select_dupes(self, dupes):
-        self._select_dupes(dupes)
     
     def show_about_box(self):
         self.about_box.show()
@@ -238,11 +198,6 @@ class DupeGuru(DupeGuruBase, QObject):
             self.prefs.save()
             self._update_options()
     
-    def toggle_marking_for_dupes(self, dupes):
-        for dupe in dupes:
-            self.results.mark_toggle(dupe)
-        self.emit(SIGNAL('dupeMarkingChanged()'))
-    
     #--- Events
     def application_will_terminate(self):
         self.save()
@@ -253,7 +208,7 @@ class DupeGuru(DupeGuruBase, QObject):
         self.reg.show_nag()
     
     def job_finished(self, jobid):
-        self.emit(SIGNAL('resultsChanged()'))
+        self._job_completed(jobid)
         if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE) and self.last_op_error_count > 0:
             msg = "{0} files could not be processed.".format(self.results.mark_count)
             QMessageBox.warning(self.main_window, 'Warning', msg)

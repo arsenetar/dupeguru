@@ -8,7 +8,7 @@
 
 from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL, QUrl
 from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
-    QMessageBox, QInputDialog, QLineEdit, QItemSelectionModel, QDesktopServices)
+    QMessageBox, QInputDialog, QLineEdit, QDesktopServices)
 
 from hsutil.misc import nonone
 
@@ -16,7 +16,8 @@ from core.app import NoScannableFileError, AllFilesAreRefError
 
 import dg_rc
 from main_window_ui import Ui_MainWindow
-from results_model import ResultsDelegate, ResultsModel
+from results_model import ResultsModel
+from stats_label import StatsLabel
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
@@ -24,23 +25,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app = app
         self._last_filter = None
         self._setupUi()
-        self.resultsDelegate = ResultsDelegate() 
-        self.resultsModel = ResultsModel(self.app) 
-        self.resultsView.setModel(self.resultsModel) 
-        self.resultsView.setItemDelegate(self.resultsDelegate) 
+        self.resultsModel = ResultsModel(self.app, self.resultsView) 
+        self.stats = StatsLabel(app, self.statusLabel)
         self._load_columns()
         self._update_column_actions_status()
-        self.resultsView.expandAll()
-        self._update_status_line()
         
-        self.connect(self.app, SIGNAL('resultsChanged()'), self.resultsChanged)
-        self.connect(self.app, SIGNAL('dupeMarkingChanged()'), self.dupeMarkingChanged)
         self.connect(self.actionQuit, SIGNAL('triggered()'), QCoreApplication.instance().quit)
-        self.connect(self.resultsView.selectionModel(), SIGNAL('selectionChanged(QItemSelection,QItemSelection)'), self.selectionChanged)
         self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
-        self.connect(self.resultsModel, SIGNAL('modelReset()'), self.resultsReset)
         self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
+        self.connect(self.resultsView, SIGNAL('spacePressed()'), self.resultsSpacePressed)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -108,11 +102,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             h.setSectionHidden(index, not visible)
         h.setResizeMode(0, QHeaderView.Stretch)
     
-    def _redraw_results(self):
-        # HACK. this is the only way I found to update the widget without reseting everything
-        self.resultsView.scroll(0, 1)
-        self.resultsView.scroll(0, -1)
-    
     def _save_columns(self):
         h = self.resultsView.header()
         widths = []
@@ -130,9 +119,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for action in self._column_actions:
             colid = action.column_index
             action.setChecked(not h.isSectionHidden(colid))
-    
-    def _update_status_line(self):
-        self.statusLabel.setText(self.app.stat_line)
     
     #--- Actions
     def aboutTriggered(self):
@@ -185,8 +171,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.app.delete_marked()
     
     def deltaTriggered(self):
-        self.resultsModel.delta = self.actionDelta.isChecked()
-        self._redraw_results()
+        self.resultsModel.delta_values = self.actionDelta.isChecked()
     
     def detailsTriggered(self):
         self.app.show_details()
@@ -217,8 +202,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.mark_none()
     
     def markSelectedTriggered(self):
-        dupes = self.resultsView.selectedDupes()
-        self.app.toggle_marking_for_dupes(dupes)
+        self.app.toggle_selected_mark_state()
     
     def moveTriggered(self):
         self.app.copy_or_move_marked(False)
@@ -245,7 +229,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         title = "Remove duplicates"
         msg = "You are about to remove {0} files from results. Continue?".format(count)
         if self._confirm(title, msg):
-            self.app.remove_marked_duplicates()
+            self.app.remove_marked()
     
     def removeSelectedTriggered(self):
         self.app.remove_selected()
@@ -292,25 +276,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def contextMenuEvent(self, event):
         self.actionActions.menu().exec_(event.globalPos())
     
-    def dupeMarkingChanged(self):
-        self._redraw_results()
-        self._update_status_line()
-    
-    def resultsChanged(self):
-        self.resultsView.model().reset()
-    
     def resultsDoubleClicked(self):
         self.app.open_selected()
     
-    def resultsReset(self):
-        self.resultsView.expandAll()
-        if self.app.selected_dupes:
-            [modelIndex] = self.resultsModel.indexesForDupes(self.app.selected_dupes[:1])
-            if modelIndex.isValid():
-                flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
-                self.resultsView.selectionModel().setCurrentIndex(modelIndex, flags)
-        self._update_status_line()
-    
-    def selectionChanged(self, selected, deselected):
-        self.app.select_dupes(self.resultsView.selectedDupes())
+    def resultsSpacePressed(self):
+        self.app.toggle_selected_mark_state()
     

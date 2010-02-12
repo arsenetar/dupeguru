@@ -23,6 +23,7 @@ class DetailsDialog(QDialog):
         self.tableModel = DetailsModel(self.model)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
+        self.model.connect()
     
     def _setupUi(self): # Virtual
         pass

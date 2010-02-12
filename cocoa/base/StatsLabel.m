@@ -14,11 +14,13 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super initWithPyClassName:@"PyStatsLabel" pyParent:aPyParent];
     labelView = [aLabelView retain];
+    [self connect];
     return self;
 }
 
 - (void)dealloc
 {
+    [self disconnect];
     [labelView release];
     [super dealloc];
 }

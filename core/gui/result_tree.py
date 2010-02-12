@@ -54,11 +54,13 @@ class ResultTree(GUIObject, Tree):
         self._power_marker = False
         self._delta_values = False
         self._sort_descriptors = (0, True)
-        self.connect()
+    
+    #--- Override
+    def connect(self):
+        GUIObject.connect(self)
         self._refresh()
         self.view.refresh()
     
-    #--- Override
     def _select_nodes(self, nodes):
         Tree._select_nodes(self, nodes)
         self.app._select_dupes(map(attrgetter('_dupe'), nodes))

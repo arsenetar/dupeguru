@@ -16,11 +16,13 @@ http://www.hardcoded.net/licenses/hs_license
 {
     self = [super initWithPyClassName:@"PyResultOutline" pyParent:aPyParent view:aOutlineView];
     _rootChildrenCounts = nil;
+    [self connect];
     return self;
 }
 
 - (void)dealloc
 {
+    [self disconnect];
     [_deltaColumns release];
     [super dealloc];
 }
