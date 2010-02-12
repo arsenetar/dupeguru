@@ -92,6 +92,12 @@ class ResultTree(GUIObject, Tree):
         else:
             return node.data[column]
     
+    def rename_selected(self, newname):
+        node = self.selected_node
+        node._data = None
+        node._data_delta = None
+        return self.app.rename_selected(newname)
+    
     def root_children_counts(self):
         # This is a speed optimization for cases where there's a lot of results so that there is
         # not thousands of children_count queries when expandAll is called.

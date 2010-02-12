@@ -173,7 +173,7 @@ class PyResultOutline(PyOutline):
     
     @signature('c@:@')
     def renameSelected_(self, newname):
-        return self.py.app.rename_selected(newname)
+        return self.py.rename_selected(newname)
     
     @signature('v@:ic')
     def sortBy_ascending_(self, key, asc):

@@ -98,6 +98,9 @@ http://www.hardcoded.net/licenses/hs_license
             if (!renamed) {
                 [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.", newName]];
             }
+            else {
+                [self refreshItemAtPath:path];
+            }
         }
     }
     else {
@@ -137,6 +140,15 @@ http://www.hardcoded.net/licenses/hs_license
             }
         }
     }
+}
+
+/* don't calls saveEdits and cancelEdits */
+- (void)outlineViewDidEndEditing:(HSOutlineView *)outlineView
+{
+}
+
+- (void)outlineViewCancelsEdition:(HSOutlineView *)outlineView
+{
 }
 
 /* Python --> Cocoa */
