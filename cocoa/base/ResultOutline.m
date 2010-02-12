@@ -67,8 +67,8 @@ http://www.hardcoded.net/licenses/hs_license
     }
     else {
         NSInteger r = 0;
-        for (NSArray *path in selected) {
-            if ([path count] == 2) {
+        for (NSIndexPath *path in selected) {
+            if ([path length] == 2) {
                 r++;
             }
         }
