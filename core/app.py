@@ -264,6 +264,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if self.selected_dupes:
             self._open_path(self.selected_dupes[0].path)
     
+    def purge_ignore_list(self):
+        self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
+    
     def remove_directory(self,index):
         try:
             del self.directories[index]
@@ -277,6 +280,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def remove_selected(self):
         self.remove_duplicates(self.selected_dupes)
+    
+    def rename_selected(self, newname):
+        try:
+            d = self.selected_dupes[0]
+            d.rename(newname)
+            return True
+        except (IndexError, fs.FSError) as e:
+            logging.warning("dupeGuru Warning: %s" % unicode(e))
+        return False
     
     def reveal_selected(self):
         if self.selected_dupes:

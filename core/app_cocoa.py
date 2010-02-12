@@ -14,7 +14,6 @@ from hsutil.cocoa import install_exception_hook
 from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace, NSWorkspaceRecycleOperation)
-from hsutil.misc import stripnone
 from hsutil.reg import RegistrationRequired
 
 from . import app, fs
@@ -77,18 +76,6 @@ class DupeGuru(app.DupeGuru):
     #---Public
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
-    
-    def PurgeIgnoreList(self):
-        self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
-    
-    def RenameSelected(self, newname):
-        try:
-            d = self.selected_dupes[0]
-            d.rename(newname)
-            return True
-        except (IndexError, fs.FSError) as e:
-            logging.warning("dupeGuru Warning: %s" % unicode(e))
-        return False
     
     def start_scanning(self):
         self._select_dupes([])
