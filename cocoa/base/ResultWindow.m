@@ -14,22 +14,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import "AppDelegate.h"
 #import "Consts.h"
 
-@implementation MatchesView
-- (void)keyDown:(NSEvent *)theEvent
-{
-    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
-    // get flags and strip the lower 16 (device dependant) bits
-    NSUInteger flags = ( [theEvent modifierFlags] & 0x00FF );
-    if (((key == NSDeleteFunctionKey) || (key == NSDeleteCharacter)) && (flags == 0))
-        [self sendAction:@selector(removeSelected:) to:[self delegate]];
-    else
-    if ((key == 0x20) && (flags == 0)) // Space
-        [self sendAction:@selector(markSelected:) to:[self delegate]];
-    else
-        [super keyDown:theEvent];
-}
-@end
-
 @implementation ResultWindowBase
 - (void)awakeFromNib
 {
@@ -155,7 +139,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)changePowerMarker:(id)sender
 {
     [outline setPowerMarkerMode:[pmSwitch selectedSegment] == 1];
-    // [self outlineView:matches didClickTableColumn:nil];
 }
 
 - (IBAction)copyMarked:(id)sender
@@ -279,13 +262,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)removeSelected:(id)sender
 {
-    NSInteger selectedDupeCount = [outline selectedDupeCount];
-    if (!selectedDupeCount)
-        return;
-    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",selectedDupeCount];
-    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
-        return;
-    [py removeSelected];
+    [outline removeSelected];
 }
 
 - (IBAction)renameSelected:(id)sender
@@ -308,6 +285,11 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)showPreferencesPanel:(id)sender
 {
     [preferencesPanel showWindow:sender];
+}
+
+- (IBAction)startDuplicateScan:(id)sender
+{
+    // Virtual
 }
 
 - (IBAction)switchSelected:(id)sender

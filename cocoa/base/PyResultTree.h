@@ -19,5 +19,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (BOOL)renameSelected:(NSString *)aNewName;
 - (void)sortBy:(NSInteger)aIdentifier ascending:(BOOL)aAscending;
 - (void)markSelected;
+- (void)removeSelected;
 - (NSArray *)rootChildrenCounts;
 @end

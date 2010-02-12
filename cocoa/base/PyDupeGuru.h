@@ -29,7 +29,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)markNone;
 
 - (void)addSelectedToIgnoreList;
-- (void)removeSelected;
 - (void)openSelected;
 - (void)revealSelected;
 - (void)makeSelectedReference;

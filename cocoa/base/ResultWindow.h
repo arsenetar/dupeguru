@@ -12,17 +12,13 @@ http://www.hardcoded.net/licenses/hs_license
 #import "ResultOutline.h"
 #import "PyDupeGuru.h"
 
-@interface MatchesView : HSOutlineView
-- (void)keyDown:(NSEvent *)theEvent;
-@end
-
 @interface ResultWindowBase : NSWindowController
 {
 @protected
     IBOutlet PyDupeGuruBase *py;
     IBOutlet id app;
     IBOutlet NSSegmentedControl *deltaSwitch;
-    IBOutlet MatchesView *matches;
+    IBOutlet HSOutlineView *matches;
 	IBOutlet NSSegmentedControl *pmSwitch;
 	IBOutlet NSTextField *stats;
 	IBOutlet NSMenu *columnsMenu;
@@ -63,6 +59,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)resetColumnsToDefault:(id)sender;
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
+- (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;
 - (IBAction)toggleDelta:(id)sender;

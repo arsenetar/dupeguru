@@ -22,6 +22,5 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
 - (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns;
 - (NSInteger)selectedDupeCount;
-
-- (IBAction)markSelected:(id)sender;
+- (void)removeSelected;
 @end;

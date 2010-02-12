@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="406"/>
+			<integer value="219"/>
 			<integer value="29"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1670,27 +1670,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">matches</string>
-						<reference key="source" ref="339936126"/>
-						<reference key="destination" ref="40047569"/>
-					</object>
-					<int key="connectionID">245</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">initialFirstResponder</string>
 						<reference key="source" ref="641929189"/>
 						<reference key="destination" ref="40047569"/>
 					</object>
 					<int key="connectionID">279</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="40047569"/>
-						<reference key="destination" ref="339936126"/>
-					</object>
-					<int key="connectionID">410</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1931,14 +1915,6 @@
 						<reference key="destination" ref="571301982"/>
 					</object>
 					<int key="connectionID">758</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">py</string>
-						<reference key="source" ref="40047569"/>
-						<reference key="destination" ref="875360857"/>
-					</object>
-					<int key="connectionID">764</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2219,6 +2195,14 @@
 						<reference key="destination" ref="91622651"/>
 					</object>
 					<int key="connectionID">1175</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">matches</string>
+						<reference key="source" ref="339936126"/>
+						<reference key="destination" ref="40047569"/>
+					</object>
+					<int key="connectionID">1176</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3399,7 +3383,7 @@
 					<string>{340, 340}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>MatchesView</string>
+					<string>HSOutlineView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3577,7 +3561,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1175</int>
+			<int key="maxID">1176</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3656,7 +3640,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">dgbase/AppDelegate.h</string>
+						<string key="minorKey">../base/AppDelegate.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3668,19 +3652,22 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">MatchesView</string>
-					<string key="superclassName">OutlineView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="417275989">
+					<string key="className">HSOutlineView</string>
+					<string key="superclassName">NSOutlineView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="384069338">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">dgbase/ResultWindow.h</string>
+						<string key="minorKey">../views/HSOutlineView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">MatchesView</string>
-					<string key="superclassName">OutlineView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBUserSource</string>
-						<string key="minorKey"/>
+					<string key="className">NSObject</string>
+					<reference key="sourceIdentifier" ref="384069338"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="653924221">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../views/NSTableViewAdditions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3692,31 +3679,15 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">OutlineView</string>
-					<string key="superclassName">NSOutlineView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">py</string>
-						<string key="NS.object.0">PyApp</string>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">cocoalib/Outline.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">OutlineView</string>
-					<string key="superclassName">NSOutlineView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBUserSource</string>
-						<string key="minorKey"/>
-					</object>
+					<string key="className">NSTableView</string>
+					<reference key="sourceIdentifier" ref="653924221"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PyApp</string>
 					<string key="superclassName">PyRegistrable</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">cocoalib/PyApp.h</string>
+						<string key="minorKey">../PyApp.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3748,7 +3719,7 @@
 					<string key="superclassName">PyApp</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">dgbase/PyDupeGuru.h</string>
+						<string key="minorKey">../base/PyDupeGuru.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3756,7 +3727,7 @@
 					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">cocoalib/PyRegistrable.h</string>
+						<string key="minorKey">../PyRegistrable.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3790,7 +3761,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">cocoalib/RecentDirectories.h</string>
+						<string key="minorKey">../RecentDirectories.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3805,121 +3776,12 @@
 					<string key="className">ResultWindow</string>
 					<string key="superclassName">ResultWindowBase</string>
 					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>clearIgnoreList:</string>
-							<string>filter:</string>
-							<string>ignoreSelected:</string>
-							<string>markAll:</string>
-							<string>markInvert:</string>
-							<string>markNone:</string>
-							<string>markSelected:</string>
-							<string>markToggle:</string>
-							<string>openSelected:</string>
-							<string>refresh:</string>
-							<string>removeMarked:</string>
-							<string>removeSelected:</string>
-							<string>renameSelected:</string>
-							<string>resetColumnsToDefault:</string>
-							<string>revealSelected:</string>
-							<string>startDuplicateScan:</string>
-							<string>toggleDelta:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">filterField</string>
-						<string key="NS.object.0">NSSearchField</string>
+						<string key="NS.key.0">removeDeadTracks:</string>
+						<string key="NS.object.0">id</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">ResultWindow.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ResultWindow</string>
-					<string key="superclassName">ResultWindowBase</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>changeDelta:</string>
-							<string>changePowerMarker:</string>
-							<string>collapseAll:</string>
-							<string>copyMarked:</string>
-							<string>deleteMarked:</string>
-							<string>expandAll:</string>
-							<string>exportToXHTML:</string>
-							<string>moveMarked:</string>
-							<string>switchSelected:</string>
-							<string>togglePowerMarker:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>actionMenuView</string>
-							<string>app</string>
-							<string>deltaSwitch</string>
-							<string>deltaSwitchView</string>
-							<string>filterFieldView</string>
-							<string>matches</string>
-							<string>pmSwitch</string>
-							<string>pmSwitchView</string>
-							<string>py</string>
-							<string>stats</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSView</string>
-							<string>id</string>
-							<string>NSSegmentedControl</string>
-							<string>NSView</string>
-							<string>NSView</string>
-							<string>MatchesView</string>
-							<string>NSSegmentedControl</string>
-							<string>NSView</string>
-							<string>PyDupeGuru</string>
-							<string>NSTextField</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBUserSource</string>
-						<string key="minorKey"/>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3931,20 +3793,48 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changeDelta:</string>
 							<string>changePowerMarker:</string>
+							<string>clearIgnoreList:</string>
 							<string>copyMarked:</string>
 							<string>deleteMarked:</string>
-							<string>expandAll:</string>
 							<string>exportToXHTML:</string>
+							<string>filter:</string>
+							<string>ignoreSelected:</string>
+							<string>markAll:</string>
+							<string>markInvert:</string>
+							<string>markNone:</string>
+							<string>markSelected:</string>
 							<string>moveMarked:</string>
+							<string>openClicked:</string>
+							<string>openSelected:</string>
+							<string>removeMarked:</string>
+							<string>removeSelected:</string>
+							<string>renameSelected:</string>
 							<string>resetColumnsToDefault:</string>
+							<string>revealSelected:</string>
 							<string>showPreferencesPanel:</string>
+							<string>startDuplicateScan:</string>
 							<string>switchSelected:</string>
 							<string>toggleColumn:</string>
+							<string>toggleDelta:</string>
 							<string>toggleDetailsPanel:</string>
 							<string>togglePowerMarker:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3967,6 +3857,7 @@
 							<string>app</string>
 							<string>columnsMenu</string>
 							<string>deltaSwitch</string>
+							<string>filterField</string>
 							<string>matches</string>
 							<string>pmSwitch</string>
 							<string>py</string>
@@ -3977,13 +3868,17 @@
 							<string>id</string>
 							<string>NSMenu</string>
 							<string>NSSegmentedControl</string>
-							<string>MatchesView</string>
+							<string>NSSearchField</string>
+							<string>HSOutlineView</string>
 							<string>NSSegmentedControl</string>
 							<string>PyDupeGuruBase</string>
 							<string>NSTextField</string>
 						</object>
 					</object>
-					<reference key="sourceIdentifier" ref="417275989"/>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../base/ResultWindow.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SUUpdater</string>
@@ -4605,7 +4500,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../dupeguru.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../me/dupeguru.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 	</data>
 </archive>

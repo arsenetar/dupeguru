@@ -68,7 +68,7 @@ http://www.hardcoded.net/licenses/hs_license
     else {
         NSInteger r = 0;
         for (NSArray *path in selected) {
-            if ([path count] == 1) {
+            if ([path count] == 2) {
                 r++;
             }
         }
@@ -76,9 +76,15 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
-- (IBAction)markSelected:(id)sender
+- (void)removeSelected
 {
-    [[self py] markSelected];
+    NSInteger selectedDupeCount = [self selectedDupeCount];
+    if (!selectedDupeCount)
+        return;
+    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",selectedDupeCount];
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
+        return;
+    [[self py] removeSelected];
 }
 
 /* Datasource */
@@ -159,6 +165,18 @@ http://www.hardcoded.net/licenses/hs_license
             }
         }
     }
+}
+
+- (BOOL)tableViewHadDeletePressed:(NSTableView *)tableView
+{
+    [self removeSelected];
+    return YES;
+}
+
+- (BOOL)tableViewHadSpacePressed:(NSTableView *)tableView
+{
+    [[self py] markSelected];
+    return YES;
 }
 
 /* don't calls saveEdits and cancelEdits */

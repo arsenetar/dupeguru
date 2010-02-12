@@ -87,9 +87,6 @@ class PyDupeGuruBase(PyRegistrable):
     def removeMarked(self):
         self.py.remove_marked()
     
-    def removeSelected(self):
-        self.py.remove_selected()
-    
     def renameSelected_(self,newname):
         return self.py.rename_selected(newname)
     
@@ -181,6 +178,9 @@ class PyResultOutline(PyOutline):
     
     def markSelected(self):
         self.py.app.toggle_selected_mark_state()
+    
+    def removeSelected(self):
+        self.py.app.remove_selected()
     
     def rootChildrenCounts(self):
         return self.py.root_children_counts()

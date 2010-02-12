@@ -275,7 +275,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             pass
     
     def remove_duplicates(self, duplicates):
-        self.results.remove_duplicates(duplicates)
+        self.results.remove_duplicates(self.without_ref(duplicates))
         self.notify('results_changed')
     
     def remove_marked(self):

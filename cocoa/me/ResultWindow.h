@@ -12,5 +12,4 @@ http://www.hardcoded.net/licenses/hs_license
 
 @interface ResultWindow : ResultWindowBase {}
 - (IBAction)removeDeadTracks:(id)sender;
-- (IBAction)startDuplicateScan:(id)sender;
 @end
