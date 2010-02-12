@@ -28,6 +28,7 @@ except ImportError:
     raise SkipTest("These tests can only be run on OS X")
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
+from ..gui.result_tree import ResultTree
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -60,12 +61,14 @@ class CallLogger(object):
 class TCDupeGuru(TestCase):
     def setUp(self):
         self.app = DupeGuru()
+        self.objects,self.matches,self.groups = GetTestGroups()
+        self.app.results.groups = self.groups
         self.dpanel_gui = CallLogger()
         self.dpanel = DetailsPanel(self.dpanel_gui, self.app)
         self.dtree_gui = CallLogger()
         self.dtree = DirectoryTree(self.dtree_gui, self.app)
-        self.objects,self.matches,self.groups = GetTestGroups()
-        self.app.results.groups = self.groups
+        self.rtree_gui = CallLogger()
+        self.rtree = ResultTree(self.rtree_gui, self.app)
         tmppath = self.tmppath()
         io.mkdir(tmppath + 'foo')
         io.mkdir(tmppath + 'bar')
@@ -110,142 +113,117 @@ class TCDupeGuru(TestCase):
                     gui.clear_calls()
     
     def test_GetObjects(self):
-        app = self.app
         objects = self.objects
         groups = self.groups
-        g,d = app.GetObjects([0])
-        self.assert_(g is groups[0])
-        self.assert_(d is None)
-        g,d = app.GetObjects([0,0])
-        self.assert_(g is groups[0])
-        self.assert_(d is objects[1])
-        g,d = app.GetObjects([1,0])
-        self.assert_(g is groups[1])
-        self.assert_(d is objects[4])
+        n = self.rtree.get_node([0])
+        assert n._group is groups[0]
+        assert n._dupe is objects[0]
+        n = self.rtree.get_node([0, 0])
+        assert n._group is groups[0]
+        assert n._dupe is objects[1]
+        n = self.rtree.get_node([1, 0])
+        assert n._group is groups[1]
+        assert n._dupe is objects[4]
     
     def test_GetObjects_after_sort(self):
-        app = self.app
         objects = self.objects
-        groups = self.groups[:] #To keep the old order in memory
-        app.sort_groups(0,False) #0 = Filename
-        #Now, the group order is supposed to be reversed
-        g,d = app.GetObjects([0,0])
-        self.assert_(g is groups[1])
-        self.assert_(d is objects[4])
-    
-    def test_GetObjects_out_of_range(self):
-        app = self.app
-        self.assertEqual((None,None),app.GetObjects([2]))
-        self.assertEqual((None,None),app.GetObjects([]))
-        self.assertEqual((None,None),app.GetObjects([1,2]))
+        groups = self.groups[:] # we need an un-sorted reference
+        self.rtree.sort(0, False) #0 = Filename
+        n = self.rtree.get_node([0, 0])
+        assert n._group is groups[1]
+        assert n._dupe is objects[4]
     
     def test_selected_result_node_paths(self):
         # app.selected_dupes is correctly converted into node paths
-        app = self.app
-        objects = self.objects
         paths = [[0, 0], [0, 1], [1]]
-        app.SelectResultNodePaths(paths)
-        eq_(app.selected_result_node_paths(), paths)
+        self.rtree.selected_paths = paths
+        eq_(self.rtree.selected_paths, paths)
     
     def test_selected_result_node_paths_after_deletion(self):
         # cases where the selected dupes aren't there are correctly handled
-        app = self.app
-        objects = self.objects
         paths = [[0, 0], [0, 1], [1]]
-        app.SelectResultNodePaths(paths)
-        app.remove_selected()
+        self.rtree.selected_paths = paths
+        self.app.remove_selected()
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
-        eq_(app.selected_result_node_paths(), [[0]]) # no exception
+        eq_(self.rtree.selected_paths, [[0]]) # no exception
     
     def test_selectResultNodePaths(self):
         app = self.app
         objects = self.objects
-        app.SelectResultNodePaths([[0,0],[0,1]])
-        self.assertEqual(2,len(app.selected_dupes))
-        self.assert_(app.selected_dupes[0] is objects[1])
-        self.assert_(app.selected_dupes[1] is objects[2])
+        self.rtree.selected_paths = [[0, 0], [0, 1]]
+        eq_(len(app.selected_dupes), 2)
+        assert app.selected_dupes[0] is objects[1]
+        assert app.selected_dupes[1] is objects[2]
     
     def test_selectResultNodePaths_with_ref(self):
         app = self.app
         objects = self.objects
-        app.SelectResultNodePaths([[0,0],[0,1],[1]])
-        self.assertEqual(3,len(app.selected_dupes))
-        self.assert_(app.selected_dupes[0] is objects[1])
-        self.assert_(app.selected_dupes[1] is objects[2])
-        self.assert_(app.selected_dupes[2] is self.groups[1].ref)
-    
-    def test_selectResultNodePaths_empty(self):
-        self.app.SelectResultNodePaths([])
-        self.assertEqual(0,len(self.app.selected_dupes))        
+        self.rtree.selected_paths = [[0, 0], [0, 1], [1]]
+        eq_(len(app.selected_dupes), 3)
+        assert app.selected_dupes[0] is objects[1]
+        assert app.selected_dupes[1] is objects[2]
+        assert app.selected_dupes[2] is self.groups[1].ref
     
     def test_selectResultNodePaths_after_sort(self):
         app = self.app
         objects = self.objects
         groups = self.groups[:] #To keep the old order in memory
-        app.sort_groups(0,False) #0 = Filename
+        self.rtree.sort(0, False) #0 = Filename
         #Now, the group order is supposed to be reversed
-        app.SelectResultNodePaths([[0,0],[1],[1,0]])
-        self.assertEqual(3,len(app.selected_dupes))
-        self.assert_(app.selected_dupes[0] is objects[4])
-        self.assert_(app.selected_dupes[1] is groups[0].ref)
-        self.assert_(app.selected_dupes[2] is objects[1])
-    
-    def test_selectResultNodePaths_out_of_range(self):
-        app = self.app
-        app.SelectResultNodePaths([[0,0],[0,1],[1],[1,1],[2]])
-        self.assertEqual(3,len(app.selected_dupes))
+        self.rtree.selected_paths = [[0, 0], [1], [1, 0]]
+        eq_(len(app.selected_dupes), 3)
+        assert app.selected_dupes[0] is objects[4]
+        assert app.selected_dupes[1] is groups[0].ref
+        assert app.selected_dupes[2] is objects[1]
     
     def test_selected_powermarker_node_paths(self):
         # app.selected_dupes is correctly converted into paths
         app = self.app
         objects = self.objects
-        paths = r2np([0, 1, 2])
-        app.SelectPowerMarkerNodePaths(paths)
-        eq_(app.selected_powermarker_node_paths(), paths)
+        self.rtree.power_marker = True
+        self.rtree.selected_paths = [[0], [1], [2]]
+        self.rtree.power_marker = False
+        eq_(self.rtree.selected_paths, [[0, 0], [0, 1], [1, 0]])
     
     def test_selected_powermarker_node_paths_after_deletion(self):
         # cases where the selected dupes aren't there are correctly handled
         app = self.app
         objects = self.objects
-        paths = r2np([0, 1, 2])
-        app.SelectPowerMarkerNodePaths(paths)
+        self.rtree.power_marker = True
+        self.rtree.selected_paths = [[0], [1], [2]]
         app.remove_selected()
-        eq_(app.selected_powermarker_node_paths(), []) # no exception
+        eq_(self.rtree.selected_paths, []) # no exception
     
     def test_selectPowerMarkerRows(self):
         app = self.app
         objects = self.objects
-        app.SelectPowerMarkerNodePaths(r2np([0,1,2]))
-        self.assertEqual(3,len(app.selected_dupes))
-        self.assert_(app.selected_dupes[0] is objects[1])
-        self.assert_(app.selected_dupes[1] is objects[2])
-        self.assert_(app.selected_dupes[2] is objects[4])
+        self.rtree.selected_paths = [[0, 0], [0, 1], [1, 0]]
+        eq_(len(app.selected_dupes), 3)
+        assert app.selected_dupes[0] is objects[1]
+        assert app.selected_dupes[1] is objects[2]
+        assert app.selected_dupes[2] is objects[4]
     
     def test_selectPowerMarkerRows_empty(self):
-        self.app.SelectPowerMarkerNodePaths([])
-        self.assertEqual(0,len(self.app.selected_dupes))
+        self.rtree.selected_paths = []
+        eq_(len(self.app.selected_dupes), 0)
     
     def test_selectPowerMarkerRows_after_sort(self):
         app = self.app
         objects = self.objects
-        app.sort_dupes(0,False) #0 = Filename
-        app.SelectPowerMarkerNodePaths(r2np([0,1,2]))
-        self.assertEqual(3,len(app.selected_dupes))
-        self.assert_(app.selected_dupes[0] is objects[4])
-        self.assert_(app.selected_dupes[1] is objects[2])
-        self.assert_(app.selected_dupes[2] is objects[1])
-    
-    def test_selectPowerMarkerRows_out_of_range(self):
-        app = self.app
-        app.SelectPowerMarkerNodePaths(r2np([0,1,2,3]))
-        self.assertEqual(3,len(app.selected_dupes))
+        self.rtree.power_marker = True
+        self.rtree.sort(0, False) #0 = Filename
+        self.rtree.selected_paths = [[0], [1], [2]]
+        eq_(len(app.selected_dupes), 3)
+        assert app.selected_dupes[0] is objects[4]
+        assert app.selected_dupes[1] is objects[2]
+        assert app.selected_dupes[2] is objects[1]
     
     def test_toggleSelectedMark(self):
         app = self.app
         objects = self.objects
         app.toggle_selected_mark_state()
         eq_(app.results.mark_count, 0)
-        app.SelectPowerMarkerNodePaths(r2np([0,2]))
+        self.rtree.selected_paths = [[0, 0], [1, 0]]
         app.toggle_selected_mark_state()
         eq_(app.results.mark_count, 2)
         assert not app.results.is_marked(objects[0])
@@ -255,10 +233,10 @@ class TCDupeGuru(TestCase):
         assert app.results.is_marked(objects[4])
     
     def test_refreshDetailsWithSelected(self):
-        self.app.SelectPowerMarkerNodePaths(r2np([0,2]))
+        self.rtree.selected_paths = [[0, 0], [1, 0]]
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
-        self.app.SelectPowerMarkerNodePaths([])
+        self.rtree.selected_paths = []
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
     
@@ -266,7 +244,7 @@ class TCDupeGuru(TestCase):
         app = self.app
         objects = self.objects
         groups = self.groups
-        app.SelectPowerMarkerNodePaths(r2np([0,2]))
+        self.rtree.selected_paths = [[0, 0], [1, 0]]
         app.make_selected_reference()
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
@@ -275,20 +253,20 @@ class TCDupeGuru(TestCase):
         app = self.app
         objects = self.objects
         groups = self.groups
-        app.SelectPowerMarkerNodePaths(r2np([0,1,2]))
-        #Only 0 and 2 must go ref, not 1 because it is a part of the same group
+        self.rtree.selected_paths = [[0, 0], [0, 1], [1, 0]]
+        #Only [0, 0] and [1, 0] must go ref, not [0, 1] because it is a part of the same group
         app.make_selected_reference()
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
     
     def test_removeSelected(self):
         app = self.app
-        app.SelectPowerMarkerNodePaths(r2np([0,2]))
+        self.rtree.selected_paths = [[0, 0], [1, 0]]
         app.remove_selected()
         eq_(len(app.results.dupes), 1)
         app.remove_selected()
         eq_(len(app.results.dupes), 1)
-        app.SelectPowerMarkerNodePaths(r2np([0,2]))
+        self.rtree.selected_path = [0, 0]
         app.remove_selected()
         eq_(len(app.results.dupes), 0)
     
@@ -309,13 +287,13 @@ class TCDupeGuru(TestCase):
     
     def test_ignore(self):
         app = self.app
-        app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
+        self.rtree.selected_path = [1, 0] #The dupe of the second, 2 sized group
         app.add_selected_to_ignore_list()
-        self.assertEqual(1,len(app.scanner.ignore_list))
-        app.SelectPowerMarkerNodePaths(r2np([0])) #first dupe of the 3 dupes group
+        eq_(len(app.scanner.ignore_list), 1)
+        self.rtree.selected_path = [0, 0] #first dupe of the 3 dupes group
         app.add_selected_to_ignore_list()
         #BOTH the ref and the other dupe should have been added
-        self.assertEqual(3,len(app.scanner.ignore_list))
+        eq_(len(app.scanner.ignore_list), 3)
     
     def test_purgeIgnoreList(self):
         app = self.app
@@ -339,7 +317,7 @@ class TCDupeGuru(TestCase):
         
         app = self.app
         app.scanner.ignore_list.Ignore = FakeIgnore
-        app.SelectPowerMarkerNodePaths(r2np([2])) #The dupe of the second, 2 sized group
+        self.rtree.selected_path = [1, 0]
         app.add_selected_to_ignore_list()
     
 
@@ -363,11 +341,13 @@ class TCDupeGuru_renameSelected(TestCase):
         self.groups = groups
         self.p = p
         self.files = files
+        self.rtree_gui = CallLogger()
+        self.rtree = ResultTree(self.rtree_gui, self.app)
     
     def test_simple(self):
         app = self.app
         g = self.groups[0]
-        app.SelectPowerMarkerNodePaths(r2np([0]))
+        self.rtree.selected_path = [0, 0]
         assert app.RenameSelected('renamed')
         names = io.listdir(self.p)
         assert 'renamed' in names
@@ -377,7 +357,7 @@ class TCDupeGuru_renameSelected(TestCase):
     def test_none_selected(self):
         app = self.app
         g = self.groups[0]
-        app.SelectPowerMarkerNodePaths([])
+        self.rtree.selected_paths = []
         self.mock(logging, 'warning', log_calls(lambda msg: None))
         assert not app.RenameSelected('renamed')
         msg = logging.warning.calls[0]['msg']
@@ -390,7 +370,7 @@ class TCDupeGuru_renameSelected(TestCase):
     def test_name_already_exists(self):
         app = self.app
         g = self.groups[0]
-        app.SelectPowerMarkerNodePaths(r2np([0]))
+        self.rtree.selected_path = [0, 0]
         self.mock(logging, 'warning', log_calls(lambda msg: None))
         assert not app.RenameSelected('foo bar 1')
         msg = logging.warning.calls[0]['msg']

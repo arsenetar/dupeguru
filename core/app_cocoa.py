@@ -74,18 +74,6 @@ class DupeGuru(app.DupeGuru):
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('JobStarted', self, ud)
     
-    #---Helpers
-    def GetObjects(self,node_path):
-        #returns a tuple g,d
-        try:
-            g = self.results.groups[node_path[0]]
-            if len(node_path) == 2:
-                return (g,self.results.groups[node_path[0]].dupes[node_path[1]])
-            else:
-                return (g,None)
-        except IndexError:
-            return (None,None)
-    
     #---Public
     copy_or_move_marked = demo_method(app.DupeGuru.copy_or_move_marked)
     delete_marked = demo_method(app.DupeGuru.delete_marked)
@@ -111,47 +99,4 @@ class DupeGuru(app.DupeGuru):
             return 3
         except app.AllFilesAreRefError:
             return 1
-    
-    def selected_result_node_paths(self):
-        def get_path(dupe):
-            try:
-                group = self.results.get_group_of_duplicate(dupe)
-                groupindex = self.results.groups.index(group)
-                if dupe is group.ref:
-                    return [groupindex]
-                dupeindex = group.dupes.index(dupe)
-                return [groupindex, dupeindex]
-            except ValueError: # dupe not in there
-                return None
-        
-        dupes = self.selected_dupes
-        return stripnone(get_path(dupe) for dupe in dupes)
-    
-    def selected_powermarker_node_paths(self):
-        def get_path(dupe):
-            try:
-                dupeindex = self.results.dupes.index(dupe)
-                return [dupeindex]
-            except ValueError: # dupe not in there
-                return None
-        
-        dupes = self.selected_dupes
-        return stripnone(get_path(dupe) for dupe in dupes)
-    
-    def SelectResultNodePaths(self,node_paths):
-        def extract_dupe(t):
-            g,d = t
-            if d is not None:
-                return d
-            else:
-                if g is not None:
-                    return g.ref
-        
-        selected = [extract_dupe(self.GetObjects(p)) for p in node_paths]
-        self._select_dupes([dupe for dupe in selected if dupe is not None])
-    
-    def SelectPowerMarkerNodePaths(self,node_paths):
-        rows = [p[0] for p in node_paths]
-        dupes = [self.results.dupes[row] for row in rows if row in xrange(len(self.results.dupes))]
-        self._select_dupes(dupes)
     

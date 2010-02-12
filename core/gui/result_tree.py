@@ -42,6 +42,10 @@ class DupeNode(Node):
     def marked(self):
         return self._app.results.is_marked(self._dupe)
     
+    @marked.setter
+    def marked(self, value):
+        self._app.mark_dupe(self._dupe, value)
+    
 
 class ResultTree(GUIObject, Tree):
     def __init__(self, view, app):

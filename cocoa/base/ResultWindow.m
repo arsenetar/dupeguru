@@ -139,7 +139,7 @@ http://www.hardcoded.net/licenses/hs_license
     }
     //Add columns and set widths
     for (NSString *colId in aColumnsOrder) {
-        if ([colId isEqual:@"mark"]) {
+        if ([colId isEqual:@"marked"]) {
             continue;
         }
         NSTableColumn *col = [_resultColumns objectAtIndex:[colId intValue]];
@@ -149,28 +149,6 @@ http://www.hardcoded.net/licenses/hs_license
             [col setWidth:[width floatValue]];
         }
         [self toggleColumn:mi];
-    }
-}
-
-// - (void)updatePySelection
-// {
-//     NSArray *selection;
-//     if (_powerMode) {
-//         selection = [py selectedPowerMarkerNodePaths];
-//     }
-//     else {
-//         selection = [py selectedResultNodePaths];
-//     }
-//     [matches selectNodePaths:selection];
-// }
-
-- (void)performPySelection:(NSArray *)aIndexPaths
-{
-    if ([outline powerMarkerMode]) {
-        [py selectPowerMarkerNodePaths:aIndexPaths];
-    }
-    else {
-        [py selectResultNodePaths:aIndexPaths];
     }
 }
 
@@ -268,14 +246,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)markSelected:(id)sender
 {
-    [self performPySelection:[self getSelectedPaths:YES]];
-    [py toggleSelectedMark];
-}
-
-- (IBAction)markToggle:(id)sender
-{
-    NSIndexPath *path = [matches itemAtRow:[matches clickedRow]];
-    [self performPySelection:[NSArray arrayWithObject:p2a(path)]];
     [py toggleSelectedMark];
 }
 
@@ -310,7 +280,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)openSelected:(id)sender
 {
-    [self performPySelection:[self getSelectedPaths:NO]];
     [py openSelected];
 }
 
@@ -331,7 +300,6 @@ http://www.hardcoded.net/licenses/hs_license
         return;
     if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",[pathList count]]] == NSAlertSecondButtonReturn) // NO
         return;
-    [self performPySelection:[self getSelectedPaths:YES]];
     [py removeSelected];
 }
 
@@ -349,7 +317,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)revealSelected:(id)sender
 {
-    [self performPySelection:[self getSelectedPaths:NO]];
     [py revealSelected];
 }
 
@@ -467,11 +434,6 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSString *msg = @"This is a demo version, which only allows you 10 delete/copy/move actions per session. You cannot continue.";
     [Dialogs showMessage:msg];
-}
-
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-    [self performPySelection:[self getSelectedPaths:NO]];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem

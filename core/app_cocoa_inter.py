@@ -65,18 +65,6 @@ class PyDupeGuruBase(PyRegistrable):
     def saveResults(self):
         self.py.save()
     
-    def selectedResultNodePaths(self):
-        return self.py.selected_result_node_paths()
-    
-    def selectResultNodePaths_(self,node_paths):
-        self.py.SelectResultNodePaths(node_paths)
-    
-    def selectedPowerMarkerNodePaths(self):
-        return self.py.selected_powermarker_node_paths()
-    
-    def selectPowerMarkerNodePaths_(self,node_paths):
-        self.py.SelectPowerMarkerNodePaths(node_paths)
-    
     #---Actions
     def addSelectedToIgnoreList(self):
         self.py.add_selected_to_ignore_list()

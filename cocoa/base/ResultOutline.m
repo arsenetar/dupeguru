@@ -80,7 +80,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSIndexPath *path = item;
     NSString *identifier = [column identifier];
-    if ([identifier isEqual:@"mark"]) {
+    if ([identifier isEqual:@"marked"]) {
         return b2n([self boolProperty:@"marked" valueAtPath:path]);
     }
     NSInteger columnId = [identifier integerValue];
@@ -89,16 +89,19 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)outlineView:(NSOutlineView *)aOutlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    if (![[tableColumn identifier] isEqual:@"0"])
-        return; //We only want to cover renames.
-    NSIndexPath *path = item;
-    NSString *oldName = [[self py] valueForPath:p2a(path) column:0];
-    NSString *newName = object;
-    if (![newName isEqual:oldName]) {
-        BOOL renamed = [[self py] renameSelected:newName];
-        if (!renamed) {
-            [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.", newName]];
+    if ([[tableColumn identifier] isEqual:@"0"]) {
+        NSIndexPath *path = item;
+        NSString *oldName = [[self py] valueForPath:p2a(path) column:0];
+        NSString *newName = object;
+        if (![newName isEqual:oldName]) {
+            BOOL renamed = [[self py] renameSelected:newName];
+            if (!renamed) {
+                [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.", newName]];
+            }
         }
+    }
+    else {
+        [super outlineView:aOutlineView setObjectValue:object forTableColumn:tableColumn byItem:item];
     }
 }
 
@@ -115,7 +118,7 @@ http://www.hardcoded.net/licenses/hs_license
 { 
     NSIndexPath *path = item;
     BOOL isMarkable = [self boolProperty:@"markable" valueAtPath:path];
-    if ([[tableColumn identifier] isEqual:@"mark"]) {
+    if ([[tableColumn identifier] isEqual:@"marked"]) {
         [cell setEnabled:isMarkable];
     }
     if ([cell isKindOfClass:[NSTextFieldCell class]]) {

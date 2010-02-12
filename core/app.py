@@ -253,6 +253,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.results.mark_invert()
         self.notify('marking_changed')
     
+    def mark_dupe(self, dupe, marked):
+        if marked:
+            self.results.mark(dupe)
+        else:
+            self.results.unmark(dupe)
+        self.notify('marking_changed')
+    
     def open_selected(self):
         if self.selected_dupes:
             self._open_path(self.selected_dupes[0].path)

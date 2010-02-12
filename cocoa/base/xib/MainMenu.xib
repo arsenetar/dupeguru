@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="406"/>
 			<integer value="29"/>
-			<integer value="21"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -710,7 +710,7 @@
 											<object class="NSMutableArray" key="NSTableColumns">
 												<bool key="EncodedWithXMLCoder">YES</bool>
 												<object class="NSTableColumn" id="430098394">
-													<string key="NSIdentifier">mark</string>
+													<string key="NSIdentifier">marked</string>
 													<double key="NSWidth">47</double>
 													<double key="NSMinWidth">16</double>
 													<double key="NSMaxWidth">1000</double>
@@ -752,6 +752,7 @@
 														<int key="NSPeriodicDelay">400</int>
 														<int key="NSPeriodicInterval">75</int>
 													</object>
+													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="40047569"/>
 												</object>
 												<object class="NSTableColumn" id="932540235">
@@ -1690,14 +1691,6 @@
 						<reference key="destination" ref="339936126"/>
 					</object>
 					<int key="connectionID">410</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">markToggle:</string>
-						<reference key="source" ref="339936126"/>
-						<reference key="destination" ref="705360835"/>
-					</object>
-					<int key="connectionID">414</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">

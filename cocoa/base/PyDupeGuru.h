@@ -23,11 +23,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (NSNumber *)doScan;
 
-- (NSArray *)selectedPowerMarkerNodePaths;
-- (void)selectPowerMarkerNodePaths:(NSArray *)aIndexPaths;
-- (NSArray *)selectedResultNodePaths;
-- (void)selectResultNodePaths:(NSArray *)aIndexPaths;
-
 - (void)toggleSelectedMark;
 - (void)markAll;
 - (void)markInvert;

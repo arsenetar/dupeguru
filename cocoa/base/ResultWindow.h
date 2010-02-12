@@ -40,7 +40,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSDictionary *)getColumnsWidth;
 - (NSArray *)getSelectedPaths:(BOOL)aDupesOnly;
 - (void)initResultColumns;
-- (void)performPySelection:(NSArray *)aIndexPaths;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 
 /* Actions */
@@ -56,7 +55,6 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)markInvert:(id)sender;
 - (IBAction)markNone:(id)sender;
 - (IBAction)markSelected:(id)sender;
-- (IBAction)markToggle:(id)sender;
 - (IBAction)moveMarked:(id)sender;
 - (IBAction)openClicked:(id)sender;
 - (IBAction)openSelected:(id)sender;
