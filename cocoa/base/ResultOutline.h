@@ -13,6 +13,7 @@ http://www.hardcoded.net/licenses/hs_license
 @interface ResultOutline : HSOutline
 {
     NSIndexSet *_deltaColumns;
+    NSArray *_rootChildrenCounts;
 }
 - (PyResultTree *)py;
 - (BOOL)powerMarkerMode;

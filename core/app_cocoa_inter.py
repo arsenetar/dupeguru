@@ -194,6 +194,9 @@ class PyResultOutline(PyOutline):
     def markSelected(self):
         self.py.app.toggle_selected_mark_state()
     
+    def rootChildrenCounts(self):
+        return self.py.root_children_counts()
+    
     # python --> cocoa
     def invalidate_markings(self):
         self.cocoa.invalidateMarkings()

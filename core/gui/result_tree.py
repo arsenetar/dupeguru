@@ -88,6 +88,11 @@ class ResultTree(GUIObject, Tree):
         else:
             return node.data[column]
     
+    def root_children_counts(self):
+        # This is a speed optimization for cases where there's a lot of results so that there is
+        # not thousands of children_count queries when expandAll is called.
+        return [len(node) for node in self]
+    
     def sort(self, key, asc):
         if self.power_marker:
             self.app.results.sort_dupes(key, asc, self.delta_values)

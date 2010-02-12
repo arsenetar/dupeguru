@@ -15,6 +15,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (id)initWithPyParent:(id)aPyParent view:(HSOutlineView *)aOutlineView
 {
     self = [super initWithPyClassName:@"PyResultOutline" pyParent:aPyParent view:aOutlineView];
+    _rootChildrenCounts = nil;
     return self;
 }
 
@@ -62,6 +63,19 @@ http://www.hardcoded.net/licenses/hs_license
 }
 
 /* Datasource */
+- (NSInteger)outlineView:(NSOutlineView *)aOutlineView numberOfChildrenOfItem:(id)item
+{
+    NSIndexPath *path = item;
+    if ((path != nil) && ([path length] == 1)) {
+        if (_rootChildrenCounts == nil) {
+            _rootChildrenCounts = [[[self py] rootChildrenCounts] retain];
+        }
+        NSInteger index = [path indexAtPosition:0];
+        return n2i([_rootChildrenCounts objectAtIndex:index]);
+    }
+    return [super outlineView:aOutlineView numberOfChildrenOfItem:item];
+}
+
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)column byItem:(id)item
 {
     NSIndexPath *path = item;
@@ -125,6 +139,8 @@ http://www.hardcoded.net/licenses/hs_license
 /* Python --> Cocoa */
 - (void)refresh /* Override */
 {
+    [_rootChildrenCounts release];
+    _rootChildrenCounts = nil;
     [super refresh];
     [outlineView expandItem:nil expandChildren:YES];
 }
