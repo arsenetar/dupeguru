@@ -21,6 +21,9 @@ class GUIObject(Listener):
     def dupes_selected(self):
         pass
     
+    def marking_changed(self):
+        pass
+    
     def results_changed(self):
         pass
     

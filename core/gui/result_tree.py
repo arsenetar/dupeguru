@@ -19,8 +19,20 @@ class DupeNode(Node):
         self._app = app
         self._group = group
         self._dupe = dupe
-        self.data = app._get_display_info(dupe, group, False)
-        self.data_delta = app._get_display_info(dupe, group, True)
+        self._data = None
+        self._data_delta = None
+    
+    @property
+    def data(self):
+        if self._data is None:
+            self._data = self._app._get_display_info(self._dupe, self._group, False)
+        return self._data
+    
+    @property
+    def data_delta(self):
+        if self._data_delta is None:
+            self._data_delta = self._app._get_display_info(self._dupe, self._group, True)
+        return self._data_delta
     
     @property
     def markable(self):
@@ -113,6 +125,9 @@ class ResultTree(GUIObject, Tree):
         self.view.refresh()
     
     #--- Event Handlers
+    def marking_changed(self):
+        self.view.invalidate_markings()
+    
     def results_changed(self):
         self._refresh()
         self.view.refresh()

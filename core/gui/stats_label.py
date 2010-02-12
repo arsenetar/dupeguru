@@ -21,4 +21,4 @@ class StatsLabel(GUIObject):
     
     def results_changed(self):
         self.view.refresh()
-    
+    marking_changed = results_changed

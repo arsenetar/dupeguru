@@ -194,6 +194,10 @@ class PyResultOutline(PyOutline):
     def markSelected(self):
         self.py.app.toggle_selected_mark_state()
     
+    # python --> cocoa
+    def invalidate_markings(self):
+        self.cocoa.invalidateMarkings()
+    
 
 class PyStatsLabel(PyGUIObject):
     py_class = StatsLabel

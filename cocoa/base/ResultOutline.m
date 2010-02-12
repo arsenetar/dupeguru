@@ -29,13 +29,6 @@ http://www.hardcoded.net/licenses/hs_license
     return (PyResultTree *)py;
 }
 
-/* Override */
-- (void)refresh
-{
-    [super refresh];
-    [outlineView expandItem:nil expandChildren:YES];
-}
-
 /* Public */
 - (BOOL)powerMarkerMode
 {
@@ -127,5 +120,20 @@ http://www.hardcoded.net/licenses/hs_license
             }
         }
     }
+}
+
+/* Python --> Cocoa */
+- (void)refresh /* Override */
+{
+    [super refresh];
+    [outlineView expandItem:nil expandChildren:YES];
+}
+
+- (void)invalidateMarkings
+{
+    for (NSMutableDictionary *props in [itemData objectEnumerator]) {
+        [props removeObjectForKey:@"marked"];
+    }
+    [outlineView setNeedsDisplay:YES];
 }
 @end

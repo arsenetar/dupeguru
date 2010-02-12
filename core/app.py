@@ -243,15 +243,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def mark_all(self):
         self.results.mark_all()
-        self.notify('results_changed')
+        self.notify('marking_changed')
     
     def mark_none(self):
         self.results.mark_none()
-        self.notify('results_changed')
+        self.notify('marking_changed')
     
     def mark_invert(self):
         self.results.mark_invert()
-        self.notify('results_changed')
+        self.notify('marking_changed')
     
     def open_selected(self):
         if self.selected_dupes:
@@ -306,7 +306,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def toggle_selected_mark_state(self):
         for dupe in self.selected_dupes:
             self.results.mark_toggle(dupe)
-        self.notify('results_changed')
+        self.notify('marking_changed')
     
     def without_ref(self, dupes):
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
