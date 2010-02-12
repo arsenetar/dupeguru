@@ -278,6 +278,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.results.remove_duplicates(duplicates)
         self.notify('results_changed')
     
+    def remove_marked(self):
+        self.results.perform_on_marked(lambda x:True, True)
+        self.notify('results_changed')
+    
     def remove_selected(self):
         self.remove_duplicates(self.selected_dupes)
     

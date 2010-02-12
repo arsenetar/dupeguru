@@ -54,7 +54,7 @@ class PyDupeGuruBase(PyRegistrable):
         self.py.mark_invert()
     
     def purgeIgnoreList(self):
-        self.py.PurgeIgnoreList()
+        self.py.purge_ignore_list()
     
     def toggleSelectedMark(self):
         self.py.toggle_selected_mark_state()
@@ -85,7 +85,7 @@ class PyDupeGuruBase(PyRegistrable):
         self.py.open_selected()
     
     def removeMarked(self):
-        self.py.results.perform_on_marked(lambda x:True, True)
+        self.py.remove_marked()
     
     def removeSelected(self):
         self.py.remove_selected()
