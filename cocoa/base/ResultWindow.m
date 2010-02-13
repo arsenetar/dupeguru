@@ -107,12 +107,13 @@ http://www.hardcoded.net/licenses/hs_license
     }
     //Add columns and set widths
     for (NSString *colId in aColumnsOrder) {
-        if ([colId isEqual:@"marked"]) {
+        NSInteger colIndex = [colId integerValue];
+        if ((colIndex == 0) && (![colId isEqual:@"0"])) {
             continue;
         }
-        NSTableColumn *col = [_resultColumns objectAtIndex:[colId intValue]];
+        NSTableColumn *col = [_resultColumns objectAtIndex:colIndex];
         NSNumber *width = [aColumnsWidth objectForKey:[col identifier]];
-        NSMenuItem *mi = [columnsMenu itemWithTag:[colId intValue]];
+        NSMenuItem *mi = [columnsMenu itemWithTag:colIndex];
         if (width) {
             [col setWidth:[width floatValue]];
         }
