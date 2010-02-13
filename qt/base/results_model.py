@@ -60,6 +60,7 @@ class ResultsModel(TreeModel):
             self.view.selectionModel().select(selection, flags)
             flags = QItemSelectionModel.Rows
             self.view.selectionModel().setCurrentIndex(selectedIndexes[0], flags)
+            self.view.scrollTo(selectedIndexes[0])
         else:
             self.view.selectionModel().clear()
     
@@ -144,8 +145,8 @@ class ResultsModel(TreeModel):
     #--- model --> view
     def refresh(self):
         self.reset()
-        self._updateSelection()
         self.view.expandAll()
+        self._updateSelection()
     
     def invalidate_markings(self):
         # redraw view
