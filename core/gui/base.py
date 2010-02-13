@@ -27,3 +27,6 @@ class GUIObject(Listener):
     def results_changed(self):
         pass
     
+    def results_switched(self):
+        pass
+    

@@ -239,7 +239,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if g not in changed_groups:
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
-        self.notify('results_changed')
+        self.notify('results_switched')
     
     def mark_all(self):
         self.results.mark_all()
