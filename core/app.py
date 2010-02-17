@@ -239,7 +239,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if g not in changed_groups:
                 self.results.make_ref(dupe)
                 changed_groups.add(g)
-        self.notify('results_switched')
+        self.notify('results_changed_but_keep_selection')
     
     def mark_all(self):
         self.results.mark_all()
@@ -276,7 +276,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def remove_duplicates(self, duplicates):
         self.results.remove_duplicates(self.without_ref(duplicates))
-        self.notify('results_changed')
+        self.notify('results_changed_but_keep_selection')
     
     def remove_marked(self):
         self.results.perform_on_marked(lambda x:True, True)

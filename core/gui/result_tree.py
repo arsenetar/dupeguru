@@ -149,7 +149,7 @@ class ResultTree(GUIObject, Tree):
         self._refresh()
         self.view.refresh()
     
-    def results_switched(self):
+    def results_changed_but_keep_selection(self):
         # What we want to to here is that instead of restoring selected *dupes* after refresh, we
         # restore selected *paths*.
         paths = self.selected_paths
