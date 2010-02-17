@@ -20,9 +20,10 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [super awakeFromNib];
     [[self window] setTitle:@"dupeGuru Picture Edition"];
-    _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,5)] retain];
-    [_deltaColumns removeIndex:3];
-    [_deltaColumns removeIndex:4];
+    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,5)];
+    [deltaColumns removeIndex:3];
+    [deltaColumns removeIndex:4];
+    [outline setDeltaColumns:deltaColumns];
 }
 
 /* Actions */
@@ -63,8 +64,6 @@ http://www.hardcoded.net/licenses/hs_license
     [_py setMixFileKind:[ud objectForKey:@"mixFileKind"]];
     [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
     int r = n2i([py doScan]);
-    [matches reloadData];
-    [self refreshStats];
     if (r != 0)
         [[ProgressController mainProgressController] hide];
     if (r == 1)

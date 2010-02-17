@@ -27,7 +27,6 @@
 		CE7AC91A1119911200D02F6C /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9171119911200D02F6C /* registration.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
-		CE80DB300FC192D60086DCA6 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB200FC192D60086DCA6 /* Outline.m */; };
 		CE80DB310FC192D60086DCA6 /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB220FC192D60086DCA6 /* ProgressController.m */; };
 		CE80DB320FC192D60086DCA6 /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB250FC192D60086DCA6 /* RecentDirectories.m */; };
 		CE80DB330FC192D60086DCA6 /* RegistrationInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB270FC192D60086DCA6 /* RegistrationInterface.m */; };
@@ -39,6 +38,8 @@
 		CE80DB8B0FC1951C0086DCA6 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */; };
 		CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB890FC1951C0086DCA6 /* ResultWindow.m */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
+		CE95865E112C516400F95FD2 /* ResultOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95865B112C516400F95FD2 /* ResultOutline.m */; };
+		CE95865F112C516400F95FD2 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95865D112C516400F95FD2 /* StatsLabel.m */; };
 		CE9EA7561122C96C008CD2BC /* HSGUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7441122C96C008CD2BC /* HSGUIController.m */; };
 		CE9EA7571122C96C008CD2BC /* HSOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7461122C96C008CD2BC /* HSOutline.m */; };
 		CE9EA7581122C96C008CD2BC /* HSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7481122C96C008CD2BC /* HSWindowController.m */; };
@@ -104,8 +105,6 @@
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSErrorReportWindow.m; path = ../../cocoalib/HSErrorReportWindow.m; sourceTree = SOURCE_ROOT; };
-		CE80DB1F0FC192D60086DCA6 /* Outline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outline.h; path = ../../cocoalib/Outline.h; sourceTree = SOURCE_ROOT; };
-		CE80DB200FC192D60086DCA6 /* Outline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Outline.m; path = ../../cocoalib/Outline.m; sourceTree = SOURCE_ROOT; };
 		CE80DB210FC192D60086DCA6 /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = ../../cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
 		CE80DB220FC192D60086DCA6 /* ProgressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController.m; path = ../../cocoalib/ProgressController.m; sourceTree = SOURCE_ROOT; };
 		CE80DB230FC192D60086DCA6 /* PyApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyApp.h; path = ../../cocoalib/PyApp.h; sourceTree = SOURCE_ROOT; };
@@ -130,6 +129,12 @@
 		CE80DB880FC1951C0086DCA6 /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultWindow.h; path = ../base/ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE80DB890FC1951C0086DCA6 /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = ../base/ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+		CE958658112C516400F95FD2 /* PyResultTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTree.h; path = ../base/PyResultTree.h; sourceTree = SOURCE_ROOT; };
+		CE958659112C516400F95FD2 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CE95865A112C516400F95FD2 /* ResultOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultOutline.h; path = ../base/ResultOutline.h; sourceTree = SOURCE_ROOT; };
+		CE95865B112C516400F95FD2 /* ResultOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultOutline.m; path = ../base/ResultOutline.m; sourceTree = SOURCE_ROOT; };
+		CE95865C112C516400F95FD2 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CE95865D112C516400F95FD2 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CE9EA7431122C96C008CD2BC /* HSGUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSGUIController.h; sourceTree = "<group>"; };
 		CE9EA7441122C96C008CD2BC /* HSGUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSGUIController.m; sourceTree = "<group>"; };
 		CE9EA7451122C96C008CD2BC /* HSOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSOutline.h; sourceTree = "<group>"; };
@@ -304,8 +309,6 @@
 				CE80DB1C0FC192D60086DCA6 /* Dialogs.m */,
 				CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */,
 				CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */,
-				CE80DB1F0FC192D60086DCA6 /* Outline.h */,
-				CE80DB200FC192D60086DCA6 /* Outline.m */,
 				CE80DB210FC192D60086DCA6 /* ProgressController.h */,
 				CE80DB220FC192D60086DCA6 /* ProgressController.m */,
 				CE80DB230FC192D60086DCA6 /* PyApp.h */,
@@ -325,7 +328,6 @@
 		CE80DB810FC194BD0086DCA6 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
-				CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */,
 				CE80DB820FC1951C0086DCA6 /* AppDelegate.h */,
 				CE80DB830FC1951C0086DCA6 /* AppDelegate.m */,
 				CE80DB840FC1951C0086DCA6 /* Consts.h */,
@@ -333,12 +335,19 @@
 				CE6044EB0FE6796200B71262 /* DetailsPanel.m */,
 				CE80DB850FC1951C0086DCA6 /* DirectoryPanel.h */,
 				CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */,
+				CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */,
 				CE9EA76F1122CA0B008CD2BC /* DirectoryOutline.h */,
 				CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */,
 				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
 				CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */,
 				CE80DB880FC1951C0086DCA6 /* ResultWindow.h */,
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
+				CE958658112C516400F95FD2 /* PyResultTree.h */,
+				CE95865A112C516400F95FD2 /* ResultOutline.h */,
+				CE95865B112C516400F95FD2 /* ResultOutline.m */,
+				CE958659112C516400F95FD2 /* PyStatsLabel.h */,
+				CE95865C112C516400F95FD2 /* StatsLabel.h */,
+				CE95865D112C516400F95FD2 /* StatsLabel.m */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -478,7 +487,6 @@
 				CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */,
 				CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */,
 				CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */,
-				CE80DB300FC192D60086DCA6 /* Outline.m in Sources */,
 				CE80DB310FC192D60086DCA6 /* ProgressController.m in Sources */,
 				CE80DB320FC192D60086DCA6 /* RecentDirectories.m in Sources */,
 				CE80DB330FC192D60086DCA6 /* RegistrationInterface.m in Sources */,
@@ -499,6 +507,8 @@
 				CE9EA75B1122C96C008CD2BC /* NSIndexPathAdditions.m in Sources */,
 				CE9EA75C1122C96C008CD2BC /* NSTableViewAdditions.m in Sources */,
 				CE9EA7721122CA0B008CD2BC /* DirectoryOutline.m in Sources */,
+				CE95865E112C516400F95FD2 /* ResultOutline.m in Sources */,
+				CE95865F112C516400F95FD2 /* StatsLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

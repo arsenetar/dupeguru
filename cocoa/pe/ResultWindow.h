@@ -7,7 +7,6 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "Outline.h"
 #import "../base/ResultWindow.h"
 
 @interface ResultWindow : ResultWindowBase {}
