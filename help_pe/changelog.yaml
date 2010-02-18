@@ -1,3 +1,7 @@
+- date: 2010-02-18
+  version: 1.8.4
+  description: |
+    * Fixed a glitch in the details panel causing it to sometimes show the wrong pictures.
 - date: 2010-02-11
   version: 1.8.3
   description: |
