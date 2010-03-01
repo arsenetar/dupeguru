@@ -10,8 +10,10 @@ from core import scanner
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
 
-# Fix py2app imports with chokes on relative imports
+# Fix py2app imports with chokes on relative imports and other stuff
 from core_se import fs, data
+from lxml import etree, _elementpath
+import gzip
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):

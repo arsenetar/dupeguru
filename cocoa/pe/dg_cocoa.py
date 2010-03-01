@@ -7,8 +7,10 @@
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_pe import app_cocoa as app_pe_cocoa
 
-# Fix py2app imports which chokes on relative imports
+# Fix py2app imports which chokes on relative imports and other stuff
 from core_pe import block, cache, matchbase, data, _block_osx
+from lxml import etree, _elementpath
+import gzip
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
