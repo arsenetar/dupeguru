@@ -18,8 +18,9 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    _deltaColumns = [[NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,4)] retain];
-    [_deltaColumns removeIndex:3];
+    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,4)];
+    [deltaColumns removeIndex:3];
+    [outline setDeltaColumns:deltaColumns];
 }
 
 /* Actions */

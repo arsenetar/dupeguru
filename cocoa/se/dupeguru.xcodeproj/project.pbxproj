@@ -27,6 +27,8 @@
 		CE76FDD4111EE3A7006618EA /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76FDD2111EE3A7006618EA /* DirectoryOutline.m */; };
 		CE76FDDF111EE42F006618EA /* HSOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76FDDE111EE42F006618EA /* HSOutline.m */; };
 		CE76FDF7111EE561006618EA /* NSEventAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76FDF6111EE561006618EA /* NSEventAdditions.m */; };
+		CE91F215113BC22D0010360B /* ResultOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F212113BC22D0010360B /* ResultOutline.m */; };
+		CE91F216113BC22D0010360B /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F214113BC22D0010360B /* StatsLabel.m */; };
 		CEAC6811109B0B7E00B43C85 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAC6810109B0B7E00B43C85 /* Preferences.xib */; };
 		CEBE4D74111F0EE1009AAC6D /* HSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */; };
 		CEDD92DA0FDD01640031C7B7 /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */; };
@@ -39,7 +41,6 @@
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
 		CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8B0FC9517500CD5728 /* Dialogs.m */; };
 		CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */; };
-		CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8F0FC9517500CD5728 /* Outline.m */; };
 		CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F910FC9517500CD5728 /* ProgressController.m */; };
 		CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F950FC9517500CD5728 /* RecentDirectories.m */; };
 		CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F970FC9517500CD5728 /* RegistrationInterface.m */; };
@@ -101,6 +102,12 @@
 		CE76FDDE111EE42F006618EA /* HSOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSOutline.m; sourceTree = "<group>"; };
 		CE76FDF5111EE561006618EA /* NSEventAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSEventAdditions.h; path = ../../cocoalib/NSEventAdditions.h; sourceTree = SOURCE_ROOT; };
 		CE76FDF6111EE561006618EA /* NSEventAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSEventAdditions.m; path = ../../cocoalib/NSEventAdditions.m; sourceTree = SOURCE_ROOT; };
+		CE91F20F113BC22D0010360B /* PyResultTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTree.h; path = ../base/PyResultTree.h; sourceTree = SOURCE_ROOT; };
+		CE91F210113BC22D0010360B /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CE91F211113BC22D0010360B /* ResultOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultOutline.h; path = ../base/ResultOutline.h; sourceTree = SOURCE_ROOT; };
+		CE91F212113BC22D0010360B /* ResultOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultOutline.m; path = ../base/ResultOutline.m; sourceTree = SOURCE_ROOT; };
+		CE91F213113BC22D0010360B /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
+		CE91F214113BC22D0010360B /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CEAC6810109B0B7E00B43C85 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Preferences.xib; path = xib/Preferences.xib; sourceTree = "<group>"; };
 		CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
 		CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
@@ -118,8 +125,6 @@
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSErrorReportWindow.m; path = ../../cocoalib/HSErrorReportWindow.m; sourceTree = SOURCE_ROOT; };
-		CEFC7F8E0FC9517500CD5728 /* Outline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outline.h; path = ../../cocoalib/Outline.h; sourceTree = SOURCE_ROOT; };
-		CEFC7F8F0FC9517500CD5728 /* Outline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Outline.m; path = ../../cocoalib/Outline.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F900FC9517500CD5728 /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = ../../cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F910FC9517500CD5728 /* ProgressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController.m; path = ../../cocoalib/ProgressController.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F920FC9517500CD5728 /* PyApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyApp.h; path = ../../cocoalib/PyApp.h; sourceTree = SOURCE_ROOT; };
@@ -326,8 +331,6 @@
 				CEFC7F8B0FC9517500CD5728 /* Dialogs.m */,
 				CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */,
 				CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */,
-				CEFC7F8E0FC9517500CD5728 /* Outline.h */,
-				CEFC7F8F0FC9517500CD5728 /* Outline.m */,
 				CEFC7F900FC9517500CD5728 /* ProgressController.h */,
 				CEFC7F910FC9517500CD5728 /* ProgressController.m */,
 				CEFC7F920FC9517500CD5728 /* PyApp.h */,
@@ -347,6 +350,12 @@
 		CEFC7FB00FC9518F00CD5728 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CE91F20F113BC22D0010360B /* PyResultTree.h */,
+				CE91F210113BC22D0010360B /* PyStatsLabel.h */,
+				CE91F211113BC22D0010360B /* ResultOutline.h */,
+				CE91F212113BC22D0010360B /* ResultOutline.m */,
+				CE91F213113BC22D0010360B /* StatsLabel.h */,
+				CE91F214113BC22D0010360B /* StatsLabel.m */,
 				CE76FDD1111EE3A7006618EA /* DirectoryOutline.h */,
 				CE76FDD2111EE3A7006618EA /* DirectoryOutline.m */,
 				CE76FDD3111EE3A7006618EA /* PyDirectoryOutline.h */,
@@ -441,7 +450,6 @@
 				CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */,
 				CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */,
 				CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */,
-				CEFC7FA00FC9517500CD5728 /* Outline.m in Sources */,
 				CEFC7FA10FC9517500CD5728 /* ProgressController.m in Sources */,
 				CEFC7FA20FC9517500CD5728 /* RecentDirectories.m in Sources */,
 				CEFC7FA30FC9517500CD5728 /* RegistrationInterface.m in Sources */,
@@ -460,6 +468,8 @@
 				CE76FDDF111EE42F006618EA /* HSOutline.m in Sources */,
 				CE76FDF7111EE561006618EA /* NSEventAdditions.m in Sources */,
 				CEBE4D74111F0EE1009AAC6D /* HSWindowController.m in Sources */,
+				CE91F215113BC22D0010360B /* ResultOutline.m in Sources */,
+				CE91F216113BC22D0010360B /* StatsLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

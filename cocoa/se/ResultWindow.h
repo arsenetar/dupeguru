@@ -7,7 +7,6 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "../../cocoalib/Outline.h"
 #import "../base/ResultWindow.h"
 #import "DirectoryPanel.h"
 
