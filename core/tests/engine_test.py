@@ -229,10 +229,9 @@ class TCbuild_word_dict(TestCase):
         self.log = []
         s = "foo bar"
         build_word_dict([NamedObject(s, True), NamedObject(s, True), NamedObject(s, True)], j)
+        # We don't have intermediate log because iter_with_progress is called with every > 1
         self.assertEqual(0,self.log[0])
-        self.assertEqual(33,self.log[1])
-        self.assertEqual(66,self.log[2])
-        self.assertEqual(100,self.log[3])
+        self.assertEqual(100,self.log[1])
     
 
 class TCmerge_similar_words(TestCase):

@@ -8,16 +8,14 @@
 
 import logging
 import re
-from xml.sax import handler, make_parser, SAXException
-from xml.sax.saxutils import XMLGenerator
-from xml.sax.xmlreader import AttributesImpl
+from lxml import etree
 
 from . import engine
 from hsutil.job import nulljob
 from hsutil.markable import Markable
-from hsutil.misc import flatten, cond, nonone
+from hsutil.misc import flatten, nonone
 from hsutil.str import format_size
-from hsutil.files import open_if_filename
+from hsutil.files import FileOrPath
 
 class Results(Markable):
     #---Override
@@ -168,42 +166,54 @@ class Results(Markable):
     is_markable = _is_markable
     
     def load_from_xml(self, infile, get_file, j=nulljob):
+        def do_match(ref_file, other_files, group):
+            if not other_files:
+                return
+            for other_file in other_files:
+                group.add_match(engine.get_match(ref_file, other_file))
+            do_match(other_files[0], other_files[1:], group)
+        
         self.apply_filter(None)
-        handler = _ResultsHandler(get_file)
         try:
-            parser = make_parser()
-        except Exception as e:
-            # This special handling is to try to figure out the cause of #47
-            # We don't silently return, because we want the user to send error report.
-            logging.exception(e)
-            try:
-                import xml.parsers.expat
-                logging.warning('importing xml.parsers.expat went ok, WTF?')
-            except Exception as e:
-                # This log should give a little more details about the cause of this all
-                logging.exception(e)
-                raise
-            raise
-        parser.setContentHandler(handler)
-        try:
-            infile, must_close = open_if_filename(infile)
-        except IOError:
+            root = etree.parse(infile).getroot()
+        except Exception:
             return
-        BUFSIZE = 1024 * 1024 # 1mb buffer
-        infile.seek(0, 2)
-        j.start_job(infile.tell() // BUFSIZE)
-        infile.seek(0, 0)
-        try:
-            while True:
-                data = infile.read(BUFSIZE)
-                if not data:
-                    break
-                parser.feed(data)
-                j.add_progress()
-        except SAXException:
-            return
-        self.groups = handler.groups
-        for dupe_file in handler.marked:
+        group_elems = list(root.iterchildren('group'))
+        groups = []
+        marked = set()
+        for group_elem in j.iter_with_progress(group_elems, every=100):
+            group = engine.Group()
+            dupes = []
+            for file_elem in group_elem.iterchildren('file'):
+                path = file_elem.get('path')
+                words = file_elem.get('words', '')
+                if not path:
+                    continue
+                file = get_file(path)
+                if file is None:
+                    continue
+                file.words = words.split(',')
+                file.is_ref = file_elem.get('is_ref') == 'y'
+                dupes.append(file)
+                if file_elem.get('marked') == 'y':
+                    marked.add(file)
+            for match_elem in group_elem.iterchildren('match'):
+                try:
+                    attrs = match_elem.attrib
+                    first_file = dupes[int(attrs['first'])]
+                    second_file = dupes[int(attrs['second'])]
+                    percentage = int(attrs['percentage'])
+                    group.add_match(engine.Match(first_file, second_file, percentage))
+                except (IndexError, KeyError, ValueError): # Covers missing attr, non-int values and indexes out of bounds
+                    pass
+            if (not group.matches) and (len(dupes) >= 2):
+                do_match(dupes[0], dupes[1:], group)
+            group.prioritize(lambda x: dupes.index(x))
+            if len(group):
+                groups.append(group)    
+            j.add_progress()
+        self.groups = groups
+        for dupe_file in marked:
             self.mark(dupe_file)
     
     def make_ref(self, dupe):
@@ -256,13 +266,10 @@ class Results(Markable):
     
     def save_to_xml(self, outfile):
         self.apply_filter(None)
-        outfile, must_close = open_if_filename(outfile, 'wb')
-        writer = XMLGenerator(outfile, 'utf-8')
-        writer.startDocument()
-        empty_attrs = AttributesImpl({})
-        writer.startElement('results', empty_attrs)
+        root = etree.Element('results')
+        # writer = XMLGenerator(outfile, 'utf-8')
         for g in self.groups:
-            writer.startElement('group', empty_attrs)
+            group_elem = etree.SubElement(root, 'group')
             dupe2index = {}
             for index, d in enumerate(g):
                 dupe2index[d] = index
@@ -270,27 +277,19 @@ class Results(Markable):
                     words = engine.unpack_fields(d.words)
                 except AttributeError:
                     words = ()
-                attrs = AttributesImpl({
-                    'path': unicode(d.path),
-                    'is_ref': cond(d.is_ref, 'y', 'n'),
-                    'words': ','.join(words),
-                    'marked': cond(self.is_marked(d), 'y', 'n')
-                })
-                writer.startElement('file', attrs)
-                writer.endElement('file')
+                file_elem = etree.SubElement(group_elem, 'file')
+                file_elem.set('path', unicode(d.path))
+                file_elem.set('is_ref', ('y' if d.is_ref else 'n'))
+                file_elem.set('words', ','.join(words))
+                file_elem.set('marked', ('y' if self.is_marked(d) else 'n'))
             for match in g.matches:
-                attrs = AttributesImpl({
-                    'first': str(dupe2index[match.first]),
-                    'second': str(dupe2index[match.second]),
-                    'percentage': str(int(match.percentage)),
-                })
-                writer.startElement('match', attrs)
-                writer.endElement('match')
-            writer.endElement('group')
-        writer.endElement('results')
-        writer.endDocument()
-        if must_close:
-            outfile.close()
+                match_elem = etree.SubElement(group_elem, 'match')
+                match_elem.set('first', unicode(dupe2index[match.first]))
+                match_elem.set('second', unicode(dupe2index[match.second]))
+                match_elem.set('percentage', unicode(int(match.percentage)))
+        tree = etree.ElementTree(root)
+        with FileOrPath(outfile, 'wb') as fp:
+            tree.write(fp, encoding='utf-8')
     
     def sort_dupes(self, key, asc=True, delta=False):
         if not self.__dupes:
@@ -310,60 +309,3 @@ class Results(Markable):
     dupes     = property(__get_dupe_list)
     groups    = property(__get_groups, __set_groups)
     stat_line = property(__get_stat_line)
-
-class _ResultsHandler(handler.ContentHandler):
-    def __init__(self, get_file):
-        self.group = None
-        self.dupes = None
-        self.marked = set()
-        self.groups = []
-        self.get_file = get_file
-    
-    def startElement(self, name, attrs):
-        if name == 'group':
-            self.group = engine.Group()
-            self.dupes = []
-            return
-        if (name == 'file') and (self.group is not None):
-            if not (('path' in attrs) and ('words' in attrs)):
-                return
-            path = attrs['path']
-            file = self.get_file(path)
-            if file is None:
-                return
-            file.words = attrs['words'].split(',')
-            file.is_ref = attrs.get('is_ref') == 'y'
-            self.dupes.append(file)
-            if attrs.get('marked') == 'y':
-                self.marked.add(file)
-        if (name == 'match') and (self.group is not None):
-            try:
-                first_file = self.dupes[int(attrs['first'])]
-                second_file = self.dupes[int(attrs['second'])]
-                percentage = int(attrs['percentage'])
-                self.group.add_match(engine.Match(first_file, second_file, percentage))
-            except (IndexError, KeyError, ValueError): # Covers missing attr, non-int values and indexes out of bounds
-                pass
-    
-    def endElement(self, name):
-        def do_match(ref_file, other_files, group):
-            if not other_files:
-                return
-            for other_file in other_files:
-                group.add_match(engine.get_match(ref_file, other_file))
-            do_match(other_files[0], other_files[1:], group)
-        
-        if name == 'group':
-            group = self.group
-            self.group = None
-            dupes = self.dupes
-            self.dupes = []
-            if group is None:
-                return
-            if len(dupes) < 2:
-                return
-            if not group.matches: # <match> elements not present, do it manually, without %
-                do_match(dupes[0], dupes[1:], group)
-            group.prioritize(lambda x: dupes.index(x))
-            self.groups.append(group)
-    

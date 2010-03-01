@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import cStringIO
-import xml.dom.minidom
+from lxml import etree
 
 from nose.tools import eq_
 
@@ -62,25 +62,24 @@ def test_save_to_xml():
     f = cStringIO.StringIO()
     il.save_to_xml(f)
     f.seek(0)
-    doc = xml.dom.minidom.parse(f)
-    root = doc.documentElement
-    eq_('ignore_list',root.nodeName)
-    children = [c for c in root.childNodes if c.localName]
-    eq_(2,len(children))
-    eq_(2,len([c for c in children if c.nodeName == 'file']))
-    f1,f2 = children
-    subchildren = [c for c in f1.childNodes if c.localName == 'file'] +\
-        [c for c in f2.childNodes if c.localName == 'file']
-    eq_(3,len(subchildren))
+    doc = etree.parse(f)
+    root = doc.getroot()
+    eq_(root.tag, 'ignore_list')
+    eq_(len(root), 2)
+    eq_(len([c for c in root if c.tag == 'file']), 2)
+    f1, f2 = root[:]
+    subchildren = [c for c in f1 if c.tag == 'file'] + [c for c in f2 if c.tag == 'file']
+    eq_(len(subchildren), 3)
 
 def test_SaveThenLoad():
     il = IgnoreList()
-    il.Ignore('foo','bar')
-    il.Ignore('foo','bleh')
-    il.Ignore('bleh','bar')
-    il.Ignore(u'\u00e9','bar')
+    il.Ignore('foo', 'bar')
+    il.Ignore('foo', 'bleh')
+    il.Ignore('bleh', 'bar')
+    il.Ignore(u'\u00e9', 'bar')
     f = cStringIO.StringIO()
     il.save_to_xml(f)
+    f.seek(0)
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)
@@ -129,9 +128,9 @@ def test_filter():
     assert not il.AreIgnored('foo','bar')
     assert il.AreIgnored('bar','baz')
 
-def test_save_with_non_ascii_non_unicode_items():
+def test_save_with_non_ascii_items():
     il = IgnoreList()
-    il.Ignore('\xac','\xbf')
+    il.Ignore(u'\xac', u'\xbf')
     f = cStringIO.StringIO()
     try:
         il.save_to_xml(f)

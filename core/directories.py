@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import xml.dom.minidom
+from lxml import etree
 
 from hsutil import io
 from hsutil.files import FileOrPath
@@ -126,38 +126,38 @@ class Directories(object):
     
     def load_from_file(self, infile):
         try:
-            doc = xml.dom.minidom.parse(infile)
+            root = etree.parse(infile).getroot()
         except:
             return
-        root_path_nodes = doc.getElementsByTagName('root_directory')
-        for rdn in root_path_nodes:
-            if not rdn.getAttributeNode('path'):
+        for rdn in root.iterchildren('root_directory'):
+            attrib = rdn.attrib
+            if 'path' not in attrib:
                 continue
-            path = rdn.getAttributeNode('path').nodeValue
+            path = attrib['path']
             try:
                 self.add_path(Path(path))
             except (AlreadyThereError, InvalidPathError):
                 pass
-        state_nodes = doc.getElementsByTagName('state')
-        for sn in state_nodes:
-            if not (sn.getAttributeNode('path') and sn.getAttributeNode('value')):
+        for sn in root.iterchildren('state'):
+            attrib = sn.attrib
+            if not ('path' in attrib and 'value' in attrib):
                 continue
-            path = sn.getAttributeNode('path').nodeValue
-            state = sn.getAttributeNode('value').nodeValue
+            path = attrib['path']
+            state = attrib['value']
             self.set_state(Path(path), int(state))
     
-    def save_to_file(self,outfile):
+    def save_to_file(self, outfile):
         with FileOrPath(outfile, 'wb') as fp:
-            doc = xml.dom.minidom.Document()
-            root = doc.appendChild(doc.createElement('directories'))
+            root = etree.Element('directories')
             for root_path in self:
-                root_path_node = root.appendChild(doc.createElement('root_directory'))
-                root_path_node.setAttribute('path', unicode(root_path).encode('utf-8'))
+                root_path_node = etree.SubElement(root, 'root_directory')
+                root_path_node.set('path', unicode(root_path))
             for path, state in self.states.iteritems():
-                state_node = root.appendChild(doc.createElement('state'))
-                state_node.setAttribute('path', unicode(path).encode('utf-8'))
-                state_node.setAttribute('value', str(state))
-            doc.writexml(fp, '\t', '\t', '\n', encoding='utf-8')
+                state_node = etree.SubElement(root, 'state')
+                state_node.set('path', unicode(path))
+                state_node.set('value', unicode(state))
+            tree = etree.ElementTree(root)
+            tree.write(fp, encoding='utf-8')
     
     def set_state(self, path, state):
         if self.get_state(path) == state:

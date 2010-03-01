@@ -7,10 +7,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import unittest
 import StringIO
-import xml.dom.minidom
 import os.path as op
+from lxml import etree
 
 from hsutil.path import Path
 from hsutil.testcase import TestCase
@@ -18,7 +17,7 @@ from hsutil.misc import first
 
 from . import engine_test, data
 from .. import engine
-from ..results import *
+from ..results import Results
 
 class NamedObject(engine_test.NamedObject):
     path = property(lambda x:Path('basepath') + x.name)
@@ -65,9 +64,9 @@ class TCResultsEmpty(TestCase):
         f = StringIO.StringIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = xml.dom.minidom.parse(f)
-        root = doc.documentElement
-        self.assertEqual('results',root.nodeName)
+        doc = etree.parse(f)
+        root = doc.getroot()
+        self.assertEqual('results', root.tag)
     
 
 class TCResultsWithSomeGroups(TestCase):
@@ -321,16 +320,16 @@ class TCResultsMarkings(TestCase):
         f = StringIO.StringIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = xml.dom.minidom.parse(f)
-        root = doc.documentElement
-        g1,g2 = root.getElementsByTagName('group')
-        d1,d2,d3 = g1.getElementsByTagName('file')
-        self.assertEqual('n',d1.getAttributeNode('marked').nodeValue)
-        self.assertEqual('n',d2.getAttributeNode('marked').nodeValue)
-        self.assertEqual('y',d3.getAttributeNode('marked').nodeValue)
-        d1,d2 = g2.getElementsByTagName('file')
-        self.assertEqual('n',d1.getAttributeNode('marked').nodeValue)
-        self.assertEqual('y',d2.getAttributeNode('marked').nodeValue)
+        doc = etree.parse(f)
+        root = doc.getroot()
+        g1, g2 = root.iterchildren('group')
+        d1, d2, d3 = g1.iterchildren('file')
+        self.assertEqual('n', d1.get('marked'))
+        self.assertEqual('n', d2.get('marked'))
+        self.assertEqual('y', d3.get('marked'))
+        d1, d2 = g2.iterchildren('file')
+        self.assertEqual('n', d1.get('marked'))
+        self.assertEqual('y', d2.get('marked'))
     
     def test_LoadXML(self):
         def get_file(path):
@@ -366,38 +365,35 @@ class TCResultsXML(TestCase):
         f = StringIO.StringIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = xml.dom.minidom.parse(f)
-        root = doc.documentElement
-        self.assertEqual('results',root.nodeName)
-        children = [c for c in root.childNodes if c.localName]
-        self.assertEqual(2,len(children))
-        self.assertEqual(2,len([c for c in children if c.nodeName == 'group']))
-        g1,g2 = children
-        children = [c for c in g1.childNodes if c.localName]
-        self.assertEqual(6,len(children))
-        self.assertEqual(3,len([c for c in children if c.nodeName == 'file']))
-        self.assertEqual(3,len([c for c in children if c.nodeName == 'match']))
-        d1,d2,d3 = [c for c in children if c.nodeName == 'file']
-        self.assertEqual(op.join('basepath','foo bar'),d1.getAttributeNode('path').nodeValue)
-        self.assertEqual(op.join('basepath','bar bleh'),d2.getAttributeNode('path').nodeValue)
-        self.assertEqual(op.join('basepath','foo bleh'),d3.getAttributeNode('path').nodeValue)
-        self.assertEqual('y',d1.getAttributeNode('is_ref').nodeValue)
-        self.assertEqual('n',d2.getAttributeNode('is_ref').nodeValue)
-        self.assertEqual('n',d3.getAttributeNode('is_ref').nodeValue)
-        self.assertEqual('foo,bar',d1.getAttributeNode('words').nodeValue)
-        self.assertEqual('bar,bleh',d2.getAttributeNode('words').nodeValue)
-        self.assertEqual('foo,bleh',d3.getAttributeNode('words').nodeValue)
-        children = [c for c in g2.childNodes if c.localName]
-        self.assertEqual(3,len(children))
-        self.assertEqual(2,len([c for c in children if c.nodeName == 'file']))
-        self.assertEqual(1,len([c for c in children if c.nodeName == 'match']))
-        d1,d2 = [c for c in children if c.nodeName == 'file']
-        self.assertEqual(op.join('basepath','ibabtu'),d1.getAttributeNode('path').nodeValue)
-        self.assertEqual(op.join('basepath','ibabtu'),d2.getAttributeNode('path').nodeValue)
-        self.assertEqual('n',d1.getAttributeNode('is_ref').nodeValue)
-        self.assertEqual('n',d2.getAttributeNode('is_ref').nodeValue)
-        self.assertEqual('ibabtu',d1.getAttributeNode('words').nodeValue)
-        self.assertEqual('ibabtu',d2.getAttributeNode('words').nodeValue)
+        doc = etree.parse(f)
+        root = doc.getroot()
+        self.assertEqual('results', root.tag)
+        self.assertEqual(2, len(root))
+        self.assertEqual(2, len([c for c in root if c.tag == 'group']))
+        g1, g2 = root
+        self.assertEqual(6,len(g1))
+        self.assertEqual(3,len([c for c in g1 if c.tag == 'file']))
+        self.assertEqual(3,len([c for c in g1 if c.tag == 'match']))
+        d1, d2, d3 = [c for c in g1 if c.tag == 'file']
+        self.assertEqual(op.join('basepath','foo bar'),d1.get('path'))
+        self.assertEqual(op.join('basepath','bar bleh'),d2.get('path'))
+        self.assertEqual(op.join('basepath','foo bleh'),d3.get('path'))
+        self.assertEqual('y',d1.get('is_ref'))
+        self.assertEqual('n',d2.get('is_ref'))
+        self.assertEqual('n',d3.get('is_ref'))
+        self.assertEqual('foo,bar',d1.get('words'))
+        self.assertEqual('bar,bleh',d2.get('words'))
+        self.assertEqual('foo,bleh',d3.get('words'))
+        self.assertEqual(3,len(g2))
+        self.assertEqual(2,len([c for c in g2 if c.tag == 'file']))
+        self.assertEqual(1,len([c for c in g2 if c.tag == 'match']))
+        d1, d2 = [c for c in g2 if c.tag == 'file']
+        self.assertEqual(op.join('basepath','ibabtu'),d1.get('path'))
+        self.assertEqual(op.join('basepath','ibabtu'),d2.get('path'))
+        self.assertEqual('n',d1.get('is_ref'))
+        self.assertEqual('n',d2.get('is_ref'))
+        self.assertEqual('ibabtu',d1.get('words'))
+        self.assertEqual('ibabtu',d2.get('words'))
     
     def test_LoadXML(self):
         def get_file(path):
@@ -460,41 +456,41 @@ class TCResultsXML(TestCase):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
         
-        doc = xml.dom.minidom.Document()
-        root = doc.appendChild(doc.createElement('foobar')) #The root element shouldn't matter, really.
-        group_node = root.appendChild(doc.createElement('group'))
-        dupe_node = group_node.appendChild(doc.createElement('file')) #Perfectly correct file
-        dupe_node.setAttribute('path',op.join('basepath','foo bar'))
-        dupe_node.setAttribute('is_ref','y')
-        dupe_node.setAttribute('words','foo,bar')
-        dupe_node = group_node.appendChild(doc.createElement('file')) #is_ref missing, default to 'n'
-        dupe_node.setAttribute('path',op.join('basepath','foo bleh'))
-        dupe_node.setAttribute('words','foo,bleh')
-        dupe_node = group_node.appendChild(doc.createElement('file')) #words are missing, invalid.
-        dupe_node.setAttribute('path',op.join('basepath','bar bleh'))
-        dupe_node = group_node.appendChild(doc.createElement('file')) #path is missing, invalid.
-        dupe_node.setAttribute('words','foo,bleh')
-        dupe_node = group_node.appendChild(doc.createElement('foobar')) #Invalid element name
-        dupe_node.setAttribute('path',op.join('basepath','bar bleh'))
-        dupe_node.setAttribute('is_ref','y')
-        dupe_node.setAttribute('words','bar,bleh')
-        match_node = group_node.appendChild(doc.createElement('match')) # match pointing to a bad index
-        match_node.setAttribute('first', '42')
-        match_node.setAttribute('second', '45')
-        match_node = group_node.appendChild(doc.createElement('match')) # match with missing attrs
-        match_node = group_node.appendChild(doc.createElement('match')) # match with non-int values
-        match_node.setAttribute('first', 'foo')
-        match_node.setAttribute('second', 'bar')
-        match_node.setAttribute('percentage', 'baz')
-        group_node = root.appendChild(doc.createElement('foobar')) #invalid group
-        group_node = root.appendChild(doc.createElement('group')) #empty group
+        root = etree.Element('foobar') #The root element shouldn't matter, really.
+        group_node = etree.SubElement(root, 'group')
+        dupe_node = etree.SubElement(group_node, 'file') #Perfectly correct file
+        dupe_node.set('path', op.join('basepath','foo bar'))
+        dupe_node.set('is_ref', 'y')
+        dupe_node.set('words', 'foo,bar')
+        dupe_node = etree.SubElement(group_node, 'file') #is_ref missing, default to 'n'
+        dupe_node.set('path',op.join('basepath','foo bleh'))
+        dupe_node.set('words','foo,bleh')
+        dupe_node = etree.SubElement(group_node, 'file') #words are missing, valid.
+        dupe_node.set('path',op.join('basepath','bar bleh'))
+        dupe_node = etree.SubElement(group_node, 'file') #path is missing, invalid.
+        dupe_node.set('words','foo,bleh')
+        dupe_node = etree.SubElement(group_node, 'foobar') #Invalid element name
+        dupe_node.set('path',op.join('basepath','bar bleh'))
+        dupe_node.set('is_ref','y')
+        dupe_node.set('words','bar,bleh')
+        match_node = etree.SubElement(group_node, 'match') # match pointing to a bad index
+        match_node.set('first', '42')
+        match_node.set('second', '45')
+        match_node = etree.SubElement(group_node, 'match') # match with missing attrs
+        match_node = etree.SubElement(group_node, 'match') # match with non-int values
+        match_node.set('first', 'foo')
+        match_node.set('second', 'bar')
+        match_node.set('percentage', 'baz')
+        group_node = etree.SubElement(root, 'foobar') #invalid group
+        group_node = etree.SubElement(root, 'group') #empty group
         f = StringIO.StringIO()
-        doc.writexml(f,'\t','\t','\n',encoding='utf-8')
+        tree = etree.ElementTree(root)
+        tree.write(f, encoding='utf-8')
         f.seek(0)
         r = Results(data)
-        r.load_from_xml(f,get_file)
+        r.load_from_xml(f, get_file)
         self.assertEqual(1,len(r.groups))
-        self.assertEqual(2,len(r.groups[0]))
+        self.assertEqual(3,len(r.groups[0]))
     
     def test_xml_non_ascii(self):
         def get_file(path):

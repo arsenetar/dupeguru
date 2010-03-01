@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.files import FileOrPath
+from lxml import etree
 
-import xml.dom.minidom
+from hsutil.files import FileOrPath
 
 class IgnoreList(object):
     """An ignore list implementation that is iterable, filterable and exportable to XML.
@@ -71,45 +71,38 @@ class IgnoreList(object):
                 self._ignored[first] = matches
         self._count += 1
     
-    def load_from_xml(self,infile):
+    def load_from_xml(self, infile):
         """Loads the ignore list from a XML created with save_to_xml.
         
         infile can be a file object or a filename.
         """
         try:
-            doc = xml.dom.minidom.parse(infile)
+            root = etree.parse(infile).getroot()
         except Exception:
             return
-        file_nodes = doc.getElementsByTagName('file')
-        for fn in file_nodes:
-            if not fn.getAttributeNode('path'):
+        for fn in root.iterchildren('file'):
+            file_path = fn.get('path')
+            if not file_path:
                 continue
-            file_path = fn.getAttributeNode('path').nodeValue
-            subfile_nodes = fn.getElementsByTagName('file')
-            for sfn in subfile_nodes:
-                if not sfn.getAttributeNode('path'):
-                    continue
-                subfile_path = sfn.getAttributeNode('path').nodeValue
-                self.Ignore(file_path,subfile_path)
+            for sfn in fn.iterchildren('file'):
+                subfile_path = sfn.get('path')
+                if subfile_path:
+                    self.Ignore(file_path, subfile_path)
     
-    def save_to_xml(self,outfile):
+    def save_to_xml(self, outfile):
         """Create a XML file that can be used by load_from_xml.
         
         outfile can be a file object or a filename.
         """
-        doc = xml.dom.minidom.Document()
-        root = doc.appendChild(doc.createElement('ignore_list'))
-        for file,subfiles in self._ignored.items():
-            file_node = root.appendChild(doc.createElement('file'))
-            if isinstance(file,unicode):
-                file = file.encode('utf-8')
-            file_node.setAttribute('path',file)
-            for subfile in subfiles:
-                subfile_node = file_node.appendChild(doc.createElement('file'))
-                if isinstance(subfile,unicode):
-                    subfile = subfile.encode('utf-8')
-                subfile_node.setAttribute('path',subfile)
+        root = etree.Element('ignore_list')
+        for filename, subfiles in self._ignored.items():
+            file_node = etree.SubElement(root, 'file')
+            file_node.set('path', filename)
+            for subfilename in subfiles:
+                subfile_node = etree.SubElement(file_node, 'file')
+                subfile_node.set('path', subfilename)
+        tree = etree.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
-            doc.writexml(fp,'\t','\t','\n',encoding='utf-8')
+            tree.write(fp, encoding='utf-8')
     
 

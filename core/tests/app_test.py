@@ -248,7 +248,7 @@ class TCDupeGuruWithResults(TestCase):
         self.rtree.selected_paths = paths
         self.app.remove_selected()
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
-        eq_(self.rtree.selected_paths, [[0]]) # no exception
+        eq_(self.rtree.selected_paths, [[0, 0]]) # no exception
     
     def test_selectResultNodePaths(self):
         app = self.app
@@ -366,10 +366,7 @@ class TCDupeGuruWithResults(TestCase):
         app = self.app
         self.rtree.selected_paths = [[0, 0], [1, 0]]
         app.remove_selected()
-        eq_(len(app.results.dupes), 1)
-        app.remove_selected()
-        eq_(len(app.results.dupes), 1)
-        self.rtree.selected_path = [0, 0]
+        eq_(len(app.results.dupes), 1) # the first path is now selected
         app.remove_selected()
         eq_(len(app.results.dupes), 0)
     
