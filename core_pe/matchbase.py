@@ -111,8 +111,13 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
             others = [pic for pic in others if not pic.is_ref]
         if others:
             cache_ids = [f.cache_id for f in others]
-            args = (ref.cache_id, cache_ids, cache_path, threshold)
-            async_results.append(pool.apply_async(async_compare, args))
+            # We limit the number of cache_ids we send for multi-processing because otherwise, we
+            # might get an error saying "String or BLOB exceeded size limit"
+            ARG_LIMIT = 1000
+            while cache_ids:
+                args = (ref.cache_id, cache_ids[:ARG_LIMIT], cache_path, threshold)
+                async_results.append(pool.apply_async(async_compare, args))
+                cache_ids = cache_ids[ARG_LIMIT:]
         if len(async_results) > RESULTS_QUEUE_LIMIT:
             result = async_results.pop(0)
             matches.extend(result.get())
