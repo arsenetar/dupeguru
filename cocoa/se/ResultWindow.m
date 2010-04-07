@@ -57,8 +57,6 @@ http://www.hardcoded.net/licenses/hs_license
     int sizeThreshold = [ud boolForKey:@"ignoreSmallFiles"] ? smallFileThreshold * 1024 : 0; // The py side wants bytes
     [_py setSizeThreshold:sizeThreshold];
     int r = n2i([py doScan]);
-    [matches reloadData];
-    [self refreshStats];
     if (r != 0)
         [[ProgressController mainProgressController] hide];
     if (r == 1)
