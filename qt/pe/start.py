@@ -11,10 +11,11 @@ from PyQt4.QtCore import QCoreApplication
 from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
 import base.dg_rc
+import base.cxfreeze_fix
 
 from app import DupeGuru
 
-# This is a workaround for a pyinstaller problem where compiled dupeguru can't read tiff files
+# This is a workaround for a cxfreeze problem where compiled dupeguru can't read tiff files
 from PIL import TiffImagePlugin, TiffTags
 
 if __name__ == "__main__":
