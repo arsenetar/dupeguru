@@ -1,0 +1,12 @@
+Source: dupeguru-se
+Section: devel
+Priority: extra
+Maintainer: Virgil Dupras <hsoft@hardcoded.net>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.1
+Homepage: http://www.hardcoded.net
+
+Package: dupeguru-se
+Architecture: any
+Depends: python (>= 2.6), python-qt4 (>= 4.6)
+Description: dupeGuru
