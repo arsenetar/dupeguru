@@ -90,8 +90,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         j = j.start_subjob([1, 9])
         self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
         files = flatten(g[:] for g in self.results.groups)
-        for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
-            file._read_all_info(attrnames=self.data.METADATA_TO_READ)
+        try:
+            for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
+                file._read_all_info(attrnames=self.data.METADATA_TO_READ)
+        except OSError:
+            # If this error is raised, it means that a file was deleted while we were reading
+            # metadata. Proper handling of this rare occurrence is complex because there's no easy
+            # way to remove an arbitrary file from the Results. Thus, we simply clear them.
+            self.results.groups = []
     
     def _get_display_info(self, dupe, group, delta=False):
         if (dupe is None) or (group is None):
