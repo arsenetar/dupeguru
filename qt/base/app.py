@@ -183,7 +183,8 @@ class DupeGuru(DupeGuruBase, QObject):
         self.directories_dialog.show()
     
     def show_help(self):
-        url = QUrl.fromLocalFile(op.abspath('help/intro.htm'))
+        base_path = platform.HELP_PATH.format(self.EDITION)
+        url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'intro.htm')))
         QDesktopServices.openUrl(url)
     
     def show_preferences(self):
