@@ -8,5 +8,5 @@ Homepage: http://www.hardcoded.net
 
 Package: dupeguru-se
 Architecture: any
-Depends: python (>= 2.6), python-qt4 (>= 4.6)
+Depends: python (>= 2.6), python-qt4 (>= 4.6), python-lxml (>= 2.1)
 Description: dupeGuru
