@@ -122,10 +122,6 @@ class DupeGuru(DupeGuruBase, QObject):
         QDesktopServices.openUrl(url)
     
     @staticmethod
-    def _recycle_dupe(dupe):
-        platform.recycle_file(dupe.path)
-    
-    @staticmethod
     def _reveal_path(path):
         DupeGuru._open_path(path[:-1])
     

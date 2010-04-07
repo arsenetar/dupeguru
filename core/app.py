@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Created By: Virgil Dupras
 # Created On: 2006/11/11
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -13,6 +12,7 @@ import os
 import os.path as op
 import logging
 
+from send2trash import send2trash
 from hsutil import io, files
 from hsutil.path import Path
 from hsutil.reg import RegistrableApplication, RegistrationRequired
@@ -75,12 +75,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _do_delete_dupe(self, dupe):
         if not io.exists(dupe.path):
             return True
-        self._recycle_dupe(dupe)
+        try:
+            send2trash(unicode(dupe.path))
+        except OSError as e:
+            msg = "Could not send {0} to trash: {1}"
+            logging.warning(msg.format(unicode(dupe.path), unicode(e)))
+            return False
         self.clean_empty_dirs(dupe.path[:-1])
-        if not io.exists(dupe.path):
-            return True
-        logging.warning("Could not send {0} to trash.".format(unicode(dupe.path)))
-        return False
+        return True
     
     def _do_load(self, j):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
@@ -111,10 +113,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     @staticmethod
     def _open_path(path):
-        raise NotImplementedError()
-    
-    @staticmethod
-    def _recycle_dupe(dupe):
         raise NotImplementedError()
     
     @staticmethod

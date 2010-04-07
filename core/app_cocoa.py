@@ -13,10 +13,10 @@ from hsutil import cocoa, job
 from hsutil.cocoa import install_exception_hook
 from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
-    NSWorkspace, NSWorkspaceRecycleOperation)
+    NSWorkspace)
 from hsutil.reg import RegistrationRequired
 
-from . import app, fs
+from . import app
 
 JOBID2TITLE = {
     app.JOB_SCAN: "Scanning for duplicates",
@@ -50,14 +50,6 @@ class DupeGuru(app.DupeGuru):
     @staticmethod
     def _open_path(path):
         NSWorkspace.sharedWorkspace().openFile_(unicode(path))
-    
-    @staticmethod
-    def _recycle_dupe(dupe):
-        # local import because first appkit import takes a lot of memory. we want to avoid it.
-        directory = unicode(dupe.path[:-1])
-        filename = dupe.name
-        result, tag = NSWorkspace.sharedWorkspace().performFileOperation_source_destination_files_tag_(
-            NSWorkspaceRecycleOperation, directory, '', [filename], None)
     
     @staticmethod
     def _reveal_path(path):

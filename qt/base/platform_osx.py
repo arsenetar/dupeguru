@@ -9,7 +9,4 @@
 
 # dummy unit to allow the app to run under OSX during development
 
-INITIAL_FOLDER_IN_DIALOGS = '/'
-
-def recycle_file(path):
-    pass
+INITIAL_FOLDER_IN_DIALOGS = u'/'
