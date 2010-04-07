@@ -55,7 +55,7 @@ def package_windows(edition):
     print_and_do("del dist\\*90.dll") # They're in vcredist, no need to include them
     print_and_do("del dist\\POWRPROF.dll") # no need of that crap
     print_and_do("del dist\\SHLWAPI.dll") # no need of that crap
-    print_and_do("xcopy /Y /S /I ..\\..\\help_me\\dupeguru_me_help dist\\help")
+    print_and_do("xcopy /Y /S /I ..\\..\\help_{0}\\dupeguru_{0}_help dist\\help".format(edition))
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change
