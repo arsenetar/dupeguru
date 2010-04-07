@@ -85,7 +85,7 @@
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>188</height>
+       <height>190</height>
       </size>
      </property>
      <property name="alternatingRowColors">
