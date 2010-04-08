@@ -15,7 +15,8 @@ import shutil
 
 import yaml
 
-from hsutil.build import build_dmg, add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog
+from hsutil.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
+    build_debian_changelog, copy_qt_plugins)
 
 def package_cocoa(edition):
     app_path = {
@@ -25,7 +26,7 @@ def package_cocoa(edition):
     }[edition]
     build_dmg(app_path, '.')
 
-def package_windows(edition, with_upx=True):
+def package_windows(edition, dev):
     # On Windows, PyInstaller is used to build an exe (py2exe creates a very bad looking icon)
     # The release version is outdated. Use at least r672 on http://svn.pyinstaller.org/trunk
     if sys.platform != "win32":
@@ -45,7 +46,13 @@ def package_windows(edition, with_upx=True):
     icon_path = '..\\..\\images\\dg{0}_logo.ico'.format(edition)
     print_and_do(cmd.format(target_name, icon_path))
     
-    if with_upx:
+    if not dev:
+        # Copy qt plugins
+        plugin_dest = op.join('dist', 'qt4_plugins')
+        plugin_names = ['accessible', 'codecs', 'iconengines', 'imageformats']
+        copy_qt_plugins(plugin_names, plugin_dest)
+        
+        # Compress with UPX 
         libs = [name for name in os.listdir('dist') if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
         for lib in libs:
             print_and_do("upx --best \"dist\\{0}\"".format(lib))
@@ -104,7 +111,7 @@ def main():
         package_cocoa(edition)
     elif ui == 'qt':
         if sys.platform == "win32":
-            package_windows(edition, with_upx=not dev)
+            package_windows(edition, dev)
         elif sys.platform == "linux2":
             package_debian(edition)
         else:
