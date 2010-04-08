@@ -63,7 +63,7 @@
     <ROW File="credits.htm" Component_="credits.htm" FileName="credits.htm" Attributes="0" SourcePath="dist\help\credits.htm" SelfReg="false" Sequence="24"/>
     <ROW File="ctypes.pyd" Component_="bz2.pyd" FileName="_ctypes.pyd" Attributes="0" SourcePath="dist\_ctypes.pyd" SelfReg="false" Sequence="16"/>
     <ROW File="directories.htm" Component_="credits.htm" FileName="direct~1.htm|directories.htm" Attributes="0" SourcePath="dist\help\directories.htm" SelfReg="false" Sequence="25"/>
-    <ROW File="dupeGuru_PE.exe" Component_="dupeGuru_PE.exe" FileName="dupeGu~2.exe|dupeGuru PE.exe" Attributes="0" SourcePath="dist\dupeGuru PE.exe" SelfReg="false" Sequence="2"/>
+    <ROW File="dupeGuru_PE.exe" Component_="dupeGuru_PE.exe" FileName="dupeGu~2.exe|dupeGuru PE.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="dist\dupeGuru PE.exe" SelfReg="false" Sequence="2"/>
     <ROW File="faq.htm" Component_="credits.htm" FileName="faq.htm" Attributes="0" SourcePath="dist\help\faq.htm" SelfReg="false" Sequence="26"/>
     <ROW File="hardcoded.css" Component_="credits.htm" FileName="hardco~1.css|hardcoded.css" Attributes="0" SourcePath="dist\help\hardcoded.css" SelfReg="false" Sequence="27"/>
     <ROW File="hashlib.pyd" Component_="bz2.pyd" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\_hashlib.pyd" SelfReg="false" Sequence="17"/>
