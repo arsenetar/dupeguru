@@ -1,4 +1,4 @@
-- date: 2010-04-07
+- date: 2010-04-08
   version: 1.8.6
   description: |
     * Fixed a crash when performing very big scans.
