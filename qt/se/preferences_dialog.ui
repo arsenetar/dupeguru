@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>294</width>
-    <height>296</height>
+    <width>449</width>
+    <height>312</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -170,110 +170,105 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>134</height>
+         <height>136</height>
         </size>
        </property>
-       <widget class="QCheckBox" name="wordWeightingBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>350</width>
-          <height>21</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string>Word weighting</string>
+        <property name="topMargin">
+         <number>0</number>
         </property>
-       </widget>
-       <widget class="QCheckBox" name="matchSimilarBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>22</y>
-          <width>350</width>
-          <height>21</height>
-         </rect>
+        <property name="bottomMargin">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string>Match similar words</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="mixFileKindBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>44</y>
-          <width>350</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Can mix file kind</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="useRegexpBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>66</y>
-          <width>350</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Use regular expressions when filtering</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="removeEmptyFoldersBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>88</y>
-          <width>350</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Remove empty folders on delete or move</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="ignoreSmallFilesBox">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>110</y>
-          <width>171</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Ignore files smaller than</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="sizeThresholdEdit">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>110</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>110</y>
-          <width>21</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>KB</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QCheckBox" name="wordWeightingBox">
+          <property name="text">
+           <string>Word weighting</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="matchSimilarBox">
+          <property name="text">
+           <string>Match similar words</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="mixFileKindBox">
+          <property name="text">
+           <string>Can mix file kind</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="useRegexpBox">
+          <property name="text">
+           <string>Use regular expressions when filtering</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="removeEmptyFoldersBox">
+          <property name="text">
+           <string>Remove empty folders on delete or move</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="ignoreSmallFilesBox">
+            <property name="text">
+             <string>Ignore files smaller than</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="sizeThresholdEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>KB</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
