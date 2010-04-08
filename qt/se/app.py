@@ -24,6 +24,7 @@ class Directories(DirectoriesBase):
             return STATE_EXCLUDED
 
 class DupeGuru(DupeGuruBase):
+    EDITION = 'se'
     LOGO_NAME = 'logo_se'
     NAME = 'dupeGuru'
     VERSION = '2.9.2'

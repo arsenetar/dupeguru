@@ -54,6 +54,7 @@ class File(fs.File):
     
 
 class DupeGuru(DupeGuruBase):
+    EDITION = 'pe'
     LOGO_NAME = 'logo_pe'
     NAME = 'dupeGuru Picture Edition'
     VERSION = '1.8.6'

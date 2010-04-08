@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import sys
+
 from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL, QUrl
 from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
     QMessageBox, QInputDialog, QLineEdit, QDesktopServices)
@@ -85,6 +87,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.statusLabel = QLabel(self)
         self.statusbar.addPermanentWidget(self.statusLabel, 1)
+        
+        # Linux setup
+        if sys.platform == 'linux2':
+            self.actionCheckForUpdate.setVisible(False) # This only works on Windows
     
     #--- Private
     def _confirm(self, title, msg, default_button=QMessageBox.Yes):

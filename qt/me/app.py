@@ -14,6 +14,7 @@ from preferences import Preferences
 from preferences_dialog import PreferencesDialog
 
 class DupeGuru(DupeGuruBase):
+    EDITION = 'me'
     LOGO_NAME = 'logo_me'
     NAME = 'dupeGuru Music Edition'
     VERSION = '5.7.2'

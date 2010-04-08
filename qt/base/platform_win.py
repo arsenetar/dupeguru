@@ -8,3 +8,4 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 INITIAL_FOLDER_IN_DIALOGS = u'C:\\'
+HELP_PATH = 'help'

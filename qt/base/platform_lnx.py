@@ -8,3 +8,4 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 INITIAL_FOLDER_IN_DIALOGS = u'/'
+HELP_PATH = '/usr/local/share/dupeguru_{0}/help'
