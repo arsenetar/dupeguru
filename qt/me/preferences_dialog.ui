@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>322</height>
+    <width>449</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -193,97 +193,86 @@
          <height>40</height>
         </size>
        </property>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string>Tags to scan:</string>
+        <property name="margin">
+         <number>0</number>
         </property>
-       </widget>
-       <widget class="QCheckBox" name="tagTrackBox">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Track</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="tagArtistBox">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>20</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Artist</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="tagAlbumBox">
-        <property name="geometry">
-         <rect>
-          <x>110</x>
-          <y>20</y>
-          <width>61</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Album</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="tagTitleBox">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>20</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Title</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="tagGenreBox">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>20</y>
-          <width>61</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Genre</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="tagYearBox">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>20</y>
-          <width>51</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Year</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Tags to scan:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>15</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagTrackBox">
+            <property name="text">
+             <string>Track</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagArtistBox">
+            <property name="text">
+             <string>Artist</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagAlbumBox">
+            <property name="text">
+             <string>Album</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagTitleBox">
+            <property name="text">
+             <string>Title</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagGenreBox">
+            <property name="text">
+             <string>Genre</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="tagYearBox">
+            <property name="text">
+             <string>Year</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
