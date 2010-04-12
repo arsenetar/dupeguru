@@ -95,6 +95,9 @@ class PyDupeGuruBase(PyRegistrable):
     def revealSelected(self):
         self.py.reveal_selected()
     
+    def invokeCommand_(self, cmd):
+        self.py.invoke_command(cmd)
+    
     #---Information
     def getIgnoreListCount(self):
         return len(self.py.scanner.ignore_list)

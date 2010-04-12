@@ -20,6 +20,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)clearIgnoreList;
 - (void)purgeIgnoreList;
 - (NSString *)exportToXHTMLwithColumns:(NSArray *)aColIds;
+- (void)invokeCommand:(NSString *)cmd;
 
 - (NSNumber *)doScan;
 

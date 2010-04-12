@@ -200,6 +200,13 @@ http://www.hardcoded.net/licenses/hs_license
     [py addSelectedToIgnoreList];
 }
 
+- (IBAction)invokeCustomCommand:(id)sender
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *cmd = [ud stringForKey:@"CustomCommand"];
+    [py invokeCommand:cmd];
+}
+
 - (IBAction)markAll:(id)sender
 {
     [py markAll];

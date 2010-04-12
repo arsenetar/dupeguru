@@ -11,6 +11,7 @@ from __future__ import unicode_literals
 import os
 import os.path as op
 import logging
+import subprocess
 
 from send2trash import send2trash
 from hsutil import io, files
@@ -217,6 +218,22 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 row.insert(0, dupe is not group.ref)
                 rows.append(row)
         return export.export_to_xhtml(colnames, rows)
+    
+    def invoke_command(self, cmd):
+        """Calls command `cmd` with %d and %r placeholders replaced.
+        
+        Using the current selection, %d is replaced with the currently selected dupe and %r is
+        replaced with that dupe's ref file. If there's no selection, the command is not invoked.
+        If the dupe is a ref, %d and %r will be the same.
+        """
+        if not self.selected_dupes:
+            return
+        dupe = self.selected_dupes[0]
+        group = self.results.get_group_of_duplicate(dupe)
+        ref = group.ref
+        cmd = cmd.replace('%d', unicode(dupe.path))
+        cmd = cmd.replace('%r', unicode(ref.path))
+        subprocess.Popen(cmd, shell=True)
     
     def load(self):
         self._start_job(JOB_LOAD, self._do_load)

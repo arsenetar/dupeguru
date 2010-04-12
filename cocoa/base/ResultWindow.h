@@ -48,6 +48,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;
+- (IBAction)invokeCustomCommand:(id)sender;
 - (IBAction)markAll:(id)sender;
 - (IBAction)markInvert:(id)sender;
 - (IBAction)markNone:(id)sender;
