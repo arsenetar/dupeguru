@@ -28,6 +28,7 @@ from . import platform
 
 from .main_window import MainWindow
 from .directories_dialog import DirectoriesDialog
+from .problem_dialog import ProblemDialog
 
 JOBID2TITLE = {
     JOB_SCAN: "Scanning for duplicates",
@@ -71,6 +72,7 @@ class DupeGuru(DupeGuruBase, QObject):
         self._progress = Progress(self.main_window)
         self.directories_dialog = DirectoriesDialog(self.main_window, self)
         self.details_dialog = self._create_details_dialog(self.main_window)
+        self.problemDialog = ProblemDialog(parent=self.main_window, app=self)
         self.preferences_dialog = self._create_preferences_dialog(self.main_window)
         self.about_box = AboutBox(self.main_window, self)
         
@@ -206,9 +208,12 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def job_finished(self, jobid):
         self._job_completed(jobid)
-        if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE) and self.last_op_error_count > 0:
-            msg = "{0} files could not be processed.".format(self.results.mark_count)
-            QMessageBox.warning(self.main_window, 'Warning', msg)
+        if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE):
+            if self.results.problems:
+                self.problemDialog.show()
+            else:
+                msg = "All files were processed successfully."
+                QMessageBox.information(self.main_window, 'Operation Complete', msg)
         elif jobid == JOB_SCAN:
             if not self.results.groups:
                 title = "Scanning complete"
