@@ -41,7 +41,7 @@ http://www.hardcoded.net/licenses/hs_license
 //Data
 - (NSNumber *)getIgnoreListCount;
 - (NSNumber *)getMarkCount;
-- (NSNumber *)getOperationalErrorCount;
+- (BOOL)scanWasProblematic;
 
 //Scanning options
 - (void)setMinMatchPercentage:(NSNumber *)percentage;

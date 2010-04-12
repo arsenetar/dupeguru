@@ -48,7 +48,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.results = results.Results(data_module)
         self.scanner = scanner.Scanner()
         self.action_count = 0
-        self.last_op_error_count = 0
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
@@ -70,19 +69,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return self._do_delete_dupe(dupe)
         
         j.start_job(self.results.mark_count)
-        self.last_op_error_count = self.results.perform_on_marked(op, True)
+        self.results.perform_on_marked(op, True)
     
     def _do_delete_dupe(self, dupe):
         if not io.exists(dupe.path):
-            return True
-        try:
-            send2trash(unicode(dupe.path))
-        except OSError as e:
-            msg = "Could not send {0} to trash: {1}"
-            logging.warning(msg.format(unicode(dupe.path), unicode(e)))
-            return False
+            return
+        send2trash(unicode(dupe.path)) # Raises OSError when there's a problem
         self.clean_empty_dirs(dupe.path[:-1])
-        return True
     
     def _do_load(self, j):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
@@ -114,8 +107,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def _job_completed(self, jobid):
         # Must be called by subclasses when they detect that an async job is completed.
-        if jobid in (JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_DELETE):
+        if jobid == JOB_SCAN:
             self.notify('results_changed')
+        elif jobid in (JOB_LOAD, JOB_MOVE, JOB_DELETE):
+            self.notify('results_changed')
+            self.notify('problems_changed')
     
     @staticmethod
     def _open_path(path):
@@ -182,28 +178,23 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             dest_path = dest_path + source_path[1:-1] #Remove drive letter and filename
         elif dest_type == 1:
             dest_path = dest_path + source_path[location_path:-1]
-        try:
-            if not io.exists(dest_path):
-                io.makedirs(dest_path)
-            if copy:
-                files.copy(source_path, dest_path)
-            else:
-                files.move(source_path, dest_path)
-                self.clean_empty_dirs(source_path[:-1])
-        except EnvironmentError as e:
-            operation = 'Copy' if copy else 'Move'
-            logging.warning('%s operation failed on %s. Error: %s' % (operation, unicode(dupe.path), unicode(e)))
-            return False
-        return True
+        if not io.exists(dest_path):
+            io.makedirs(dest_path)
+        # Raises an EnvironmentError if there's a problem
+        if copy:
+            files.copy(source_path, dest_path)
+        else:
+            files.move(source_path, dest_path)
+            self.clean_empty_dirs(source_path[:-1])
     
     def copy_or_move_marked(self, copy, destination, recreate_path):
         def do(j):
             def op(dupe):
                 j.add_progress()
-                return self.copy_or_move(dupe, copy, destination, recreate_path)
+                self.copy_or_move(dupe, copy, destination, recreate_path)
             
             j.start_job(self.results.mark_count)
-            self.last_op_error_count = self.results.perform_on_marked(op, not copy)
+            self.results.perform_on_marked(op, not copy)
         
         self._demo_check()
         jobid = JOB_COPY if copy else JOB_MOVE
@@ -283,7 +274,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('results_changed_but_keep_selection')
     
     def remove_marked(self):
-        self.results.perform_on_marked(lambda x:True, True)
+        self.results.perform_on_marked(lambda x:None, True)
         self.notify('results_changed')
     
     def remove_selected(self):

@@ -7,9 +7,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import os.path as op
-import logging
 import plistlib
-import re
 
 from lxml import etree
 from appscript import app, k, CommandError
@@ -148,7 +146,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
             except (CommandError, RuntimeError):
                 pass
         j.start_job(self.results.mark_count, "Sending dupes to the Trash")
-        self.last_op_error_count = self.results.perform_on_marked(op, True)
+        self.results.perform_on_marked(op, True)
         del self.path2iphoto
     
     def _do_delete_dupe(self, dupe):
@@ -158,14 +156,13 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                 try:
                     a = app('iPhoto')
                     a.remove(photo, timeout=0)
-                    return True
-                except (CommandError, RuntimeError):
-                    return False
+                except (CommandError, RuntimeError) as e:
+                    raise EnvironmentError(unicode(e))
             else:
-                logging.warning(u"Could not find photo %s in iPhoto Library", unicode(dupe.path))
-                return False
+                msg = u"Could not find photo %s in iPhoto Library" % unicode(dupe.path)
+                raise EnvironmentError(msg)
         else:
-            return app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
+            app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
     
     def _do_load(self, j):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))

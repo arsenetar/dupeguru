@@ -9,7 +9,9 @@
 
 import StringIO
 import os.path as op
+
 from lxml import etree
+from nose.tools import eq_
 
 from hsutil.path import Path
 from hsutil.testcase import TestCase
@@ -252,18 +254,23 @@ class TCResultsMarkings(TestCase):
     def test_perform_on_marked_with_problems(self):
         def log_object(o):
             log.append(o)
-            return o is not self.objects[1]
+            if o is self.objects[1]:
+                raise EnvironmentError('foobar')
         
         log = []
         self.results.mark_all()
-        self.assert_(self.results.is_marked(self.objects[1]))
-        self.assertEqual(1,self.results.perform_on_marked(log_object, True))
-        self.assertEqual(3,len(log))
-        self.assertEqual(1,len(self.results.groups))
-        self.assertEqual(2,len(self.results.groups[0]))
-        self.assert_(self.objects[1] in self.results.groups[0])
-        self.assert_(not self.results.is_marked(self.objects[2]))
-        self.assert_(self.results.is_marked(self.objects[1]))
+        assert self.results.is_marked(self.objects[1])
+        self.results.perform_on_marked(log_object, True)
+        eq_(len(log), 3)
+        eq_(len(self.results.groups), 1)
+        eq_(len(self.results.groups[0]), 2)
+        assert self.objects[1] in self.results.groups[0]
+        assert not self.results.is_marked(self.objects[2])
+        assert self.results.is_marked(self.objects[1])
+        eq_(len(self.results.problems), 1)
+        dupe, msg = self.results.problems[0]
+        assert dupe is self.objects[1]
+        eq_(msg, 'foobar')
     
     def test_perform_on_marked_with_ref(self):
         def log_object(o):

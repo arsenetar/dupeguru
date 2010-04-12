@@ -10,6 +10,7 @@ http://www.hardcoded.net/licenses/hs_license
 #import "HSOutlineView.h"
 #import "StatsLabel.h"
 #import "ResultOutline.h"
+#import "ProblemDialog.h"
 #import "PyDupeGuru.h"
 
 @interface ResultWindowBase : NSWindowController
@@ -28,6 +29,7 @@ http://www.hardcoded.net/licenses/hs_license
     NSWindowController *preferencesPanel;
     ResultOutline *outline;
     StatsLabel *statsLabel;
+    ProblemDialog *problemDialog;
 }
 /* Helpers */
 - (void)fillColumnsMenu;

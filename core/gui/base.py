@@ -24,6 +24,9 @@ class GUIObject(Listener):
     def marking_changed(self):
         pass
     
+    def problems_changed(self):
+        pass
+    
     def results_changed(self):
         pass
     

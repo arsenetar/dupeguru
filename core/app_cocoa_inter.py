@@ -9,10 +9,12 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-from hsutil.cocoa.inter import signature, PyOutline, PyGUIObject, PyRegistrable
+from hsutil.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyRegistrable
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
+from .gui.problem_dialog import ProblemDialog
+from .gui.problem_table import ProblemTable
 from .gui.result_tree import ResultTree
 from .gui.stats_label import StatsLabel
 
@@ -100,8 +102,9 @@ class PyDupeGuruBase(PyRegistrable):
     def getMarkCount(self):
         return self.py.results.mark_count
     
-    def getOperationalErrorCount(self):
-        return self.py.last_op_error_count
+    @signature('i@:')
+    def scanWasProblematic(self):
+        return bool(self.py.results.problems)
     
     #---Properties
     def setMixFileKind_(self, mix_file_kind):
@@ -196,3 +199,13 @@ class PyStatsLabel(PyGUIObject):
     def display(self):
         return self.py.display
     
+
+class PyProblemDialog(PyGUIObject):
+    py_class = ProblemDialog
+    
+    def revealSelected(self):
+        self.py.reveal_selected_dupe()
+    
+
+class PyProblemTable(PyTable):
+    py_class = ProblemTable

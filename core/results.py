@@ -32,6 +32,7 @@ class Results(Markable):
         self.__recalculate_stats()
         self.__marked_size = 0
         self.data = data_module
+        self.problems = [] # (dupe, error_msg)
     
     def _did_mark(self, dupe):
         self.__marked_size += dupe.size
@@ -230,17 +231,22 @@ class Results(Markable):
         self.__dupes = None
     
     def perform_on_marked(self, func, remove_from_results):
-        problems = []
-        for d in self.dupes:
-            if self.is_marked(d) and (not func(d)):
-                problems.append(d)
+        # Performs `func` on all marked dupes. If an EnvironmentError is raised during the call,
+        # the problematic dupe is added to self.problems.
+        self.problems = []
+        to_remove = []
+        marked = (dupe for dupe in self.dupes if self.is_marked(dupe))
+        for dupe in marked:
+            try:
+                func(dupe)
+                to_remove.append(dupe)
+            except EnvironmentError as e:
+                self.problems.append((dupe, unicode(e)))
         if remove_from_results:
-            to_remove = [d for d in self.dupes if self.is_marked(d) and (d not in problems)]
             self.remove_duplicates(to_remove)
             self.mark_none()
-            for d in problems:
-                self.mark(d)
-        return len(problems)
+            for dupe, _ in self.problems:
+                self.mark(dupe)
     
     def remove_duplicates(self, dupes):
         '''Remove 'dupes' from their respective group, and remove the group is it ends up empty.

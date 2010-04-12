@@ -21,6 +21,7 @@ http://www.hardcoded.net/licenses/hs_license
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     outline = [[ResultOutline alloc] initWithPyParent:py view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
+    problemDialog = [[ProblemDialog alloc] initWithPy:py];
     [self initResultColumns];
     [self fillColumnsMenu];
     [deltaSwitch setSelectedSegment:0];
@@ -38,6 +39,8 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [outline release];
     [preferencesPanel release];
+    [statsLabel release];
+    [problemDialog release];
     [super dealloc];
 }
 
@@ -349,28 +352,30 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)jobCompleted:(NSNotification *)aNotification
 {
-    NSInteger r = n2i([py getOperationalErrorCount]);
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobCopy]) {
-        if (r > 0)
-            [Dialogs showMessage:[NSString stringWithFormat:@"%d file(s) couldn't be copied.",r]];
-        else
+        if ([py scanWasProblematic]) {
+            [problemDialog showWindow:self];
+        }
+        else {
             [Dialogs showMessage:@"All marked files were copied sucessfully."];
+        }
     }
     else if ([lastAction isEqualTo:jobMove]) {
-        if (r > 0)
-            [Dialogs showMessage:[NSString stringWithFormat:@"%d file(s) couldn't be moved. They were kept in the results, and still are marked.",r]];
-        else
+        if ([py scanWasProblematic]) {
+            [problemDialog showWindow:self];
+        }
+        else {
             [Dialogs showMessage:@"All marked files were moved sucessfully."];
+        }
     }
     else if ([lastAction isEqualTo:jobDelete]) {
-        if (r > 0) {
-            NSString *msg = @"%d file(s) couldn't be sent to Trash. They were kept in the results, "\
-                "and still are marked. See the F.A.Q. section in the help file for details.";
-            [Dialogs showMessage:[NSString stringWithFormat:msg,r]];
+        if ([py scanWasProblematic]) {
+            [problemDialog showWindow:self];
         }
-        else
+        else {
             [Dialogs showMessage:@"All marked files were sucessfully sent to Trash."];
+        }
     }
     else if ([lastAction isEqualTo:jobScan]) {
         NSInteger groupCount = [outline intProperty:@"children_count" valueAtPath:nil];
