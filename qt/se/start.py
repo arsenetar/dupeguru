@@ -14,6 +14,10 @@ import base.dg_rc
 
 from app import DupeGuru
 
+if sys.platform == 'win32':
+    import base.cxfreeze_fix
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(QPixmap(":/logo_se")))

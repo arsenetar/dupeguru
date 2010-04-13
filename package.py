@@ -56,8 +56,12 @@ def package_windows(edition, dev):
         libs = [name for name in os.listdir('dist') if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
         for lib in libs:
             print_and_do("upx --best \"dist\\{0}\"".format(lib))
-
-    print_and_do("xcopy /Y /S /I ..\\..\\help_{0}\\dupeguru_{0}_help dist\\help".format(edition))
+    
+    help_basedir = '..\\..\\help_{0}'.format(edition)
+    help_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
+    help_path = op.join(help_basedir, help_dir)
+    print "Copying {0} to dist\\help".format(help_path)
+    shutil.copytree(help_path, 'dist\\help')
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change
