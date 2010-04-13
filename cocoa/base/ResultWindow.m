@@ -204,7 +204,12 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *cmd = [ud stringForKey:@"CustomCommand"];
-    [py invokeCommand:cmd];
+    if ((cmd != nil) && ([cmd length] > 0)) {
+        [py invokeCommand:cmd];
+    }
+    else {
+        [Dialogs showMessage:@"You have no custom command set up. Set it up in your preferences."];
+    }
 }
 
 - (IBAction)markAll:(id)sender
