@@ -25,3 +25,11 @@
 * **Recreate absolute path:** The source file's path will be re-created in the destination directory in it's entirety. For example, if you move "/Users/foobar/Music/Artist/Album/the_song.mp3" to the destination "/Users/foobar/MyDestination", the final destination for the file will be "/Users/foobar/MyDestination/Users/foobar/Music/Artist/Album".
 
 In all cases, dupeGuru nicely handles naming conflicts by prepending a number to the destination filename if the filename already exists in the destination.
+
+**Custom Command:** This preference determines the command that will be invoked by the "Invoke Custom Command" action. You can invoke any external application through this action. This can be useful if, for example, you have a nice diffing application installed.
+
+The format of the command is the same as what you would write in the command line, except that there are 2 placeholders: **%d** and **%r**. These placeholders will be replaced by the path of the selected dupe (%d) and the path of the selected dupe's reference file (%r).
+  
+If the path to your executable contains space characters, you should enclose it in "" quotes. You should also enclose placeholders in quotes because it's very possible that paths to dupes and refs will contain spaces. Here's an example custom command:
+  
+    "C:\Program Files\SuperDiffProg\SuperDiffProg.exe" "%d" "%r"
