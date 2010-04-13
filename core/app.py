@@ -12,6 +12,7 @@ import os
 import os.path as op
 import logging
 import subprocess
+import re
 
 from send2trash import send2trash
 from hsutil import io, files
@@ -233,7 +234,16 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         ref = group.ref
         cmd = cmd.replace('%d', unicode(dupe.path))
         cmd = cmd.replace('%r', unicode(ref.path))
-        subprocess.Popen(cmd, shell=True)
+        match = re.match(r'"([^"]+)"(.*)', cmd)
+        if match is not None:
+            # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
+            # executable paths with spaces in it, *even* when they're enclosed in "". So this is
+            # a workaround to make the damn thing work.
+            exepath, args = match.groups()
+            path, exename = op.split(exepath)
+            subprocess.Popen(exename + args, shell=True, cwd=path)
+        else:
+            subprocess.Popen(cmd, shell=True)
     
     def load(self):
         self._start_job(JOB_LOAD, self._do_load)

@@ -37,6 +37,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
         self.connect(self.resultsView, SIGNAL('spacePressed()'), self.resultsSpacePressed)
+        self.actionInvokeCustomCommand.triggered.connect(self.app.invokeCustomCommand)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -76,6 +77,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         actionMenu.addSeparator()
         actionMenu.addAction(self.actionOpenSelected)
         actionMenu.addAction(self.actionRevealSelected)
+        actionMenu.addAction(self.actionInvokeCustomCommand)
         actionMenu.addAction(self.actionRenameSelected)
         self.actionActions.setMenu(actionMenu)
         button = QToolButton(self.toolBar)
@@ -194,7 +196,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         exported_path = self.app.export_to_xhtml(column_ids)
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
-    
+      
     def makeReferenceTriggered(self):
         self.app.make_selected_reference()
     

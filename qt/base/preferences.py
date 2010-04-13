@@ -26,6 +26,7 @@ class Preferences(PreferencesBase):
         self.use_regexp = get('UseRegexp', self.use_regexp)
         self.remove_empty_folders = get('RemoveEmptyFolders', self.remove_empty_folders)
         self.destination_type = get('DestinationType', self.destination_type)
+        self.custom_command = get('CustomCommand', self.custom_command)
         widths = get('ColumnsWidth', self.columns_width)
         # only set nonzero values
         for index, width in enumerate(widths[:len(self.columns_width)]):
@@ -46,6 +47,7 @@ class Preferences(PreferencesBase):
         self.use_regexp = False
         self.remove_empty_folders = False
         self.destination_type = 1
+        self.custom_command = ''
         self.registration_code = ''
         self.registration_email = ''
         self._reset_specific()
@@ -64,6 +66,7 @@ class Preferences(PreferencesBase):
         set_('UseRegexp', self.use_regexp)
         set_('RemoveEmptyFolders', self.remove_empty_folders)
         set_('DestinationType', self.destination_type)
+        set_('CustomCommand', self.custom_command)
         set_('ColumnsWidth', self.columns_width)
         set_('ColumnsVisible', self.columns_visible)
         set_('RegistrationCode', self.registration_code)

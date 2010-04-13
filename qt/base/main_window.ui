@@ -44,6 +44,9 @@
       <attribute name="headerStretchLastSection">
        <bool>false</bool>
       </attribute>
+      <attribute name="headerStretchLastSection">
+       <bool>false</bool>
+      </attribute>
      </widget>
     </item>
    </layout>
@@ -54,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuColumns">
@@ -77,6 +80,7 @@
     <addaction name="separator"/>
     <addaction name="actionOpenSelected"/>
     <addaction name="actionRevealSelected"/>
+    <addaction name="actionInvokeCustomCommand"/>
     <addaction name="actionRenameSelected"/>
     <addaction name="separator"/>
     <addaction name="actionApplyFilter"/>
@@ -426,6 +430,14 @@
   <action name="actionOpenDebugLog">
    <property name="text">
     <string>Open Debug Log</string>
+   </property>
+  </action>
+  <action name="actionInvokeCustomCommand">
+   <property name="text">
+    <string>Invoke Custom Command</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
    </property>
   </action>
  </widget>

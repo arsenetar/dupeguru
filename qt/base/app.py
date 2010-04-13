@@ -171,6 +171,14 @@ class DupeGuru(DupeGuruBase, QObject):
     def askForRegCode(self):
         self.reg.ask_for_code()
     
+    def invokeCustomCommand(self):
+        cmd = self.prefs.custom_command
+        if cmd:
+            self.invoke_command(cmd)
+        else:
+            msg = "You have no custom command set up. Please, set it up in your preferences."
+            QMessageBox.warning(self.main_window, 'Custom Command', msg)
+    
     def openDebugLog(self):
         debugLogPath = op.join(self.appdata, 'debug.log')
         self._open_path(debugLogPath)
