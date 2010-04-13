@@ -570,6 +570,10 @@ class TCResultsXML(TestCase):
         self.results.load_from_xml(f, self.get_file)
         first(self.results.groups[0].matches).percentage
     
+    def test_apply_filter_works_on_paths(self):
+        # apply_filter() searches on the whole path, not just on the filename.
+        self.results.apply_filter(u'basepath')
+        eq_(len(self.results.groups), 2)
 
 class TCResultsFilter(TestCase):
     def setUp(self):

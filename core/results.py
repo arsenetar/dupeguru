@@ -147,7 +147,7 @@ class Results(Markable):
             self.__filters.append(filter_str)
             if self.__filtered_dupes is None:
                 self.__filtered_dupes = flatten(g[:] for g in self.groups)
-            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(dupe.name))
+            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(unicode(dupe.path)))
             filtered_groups = set()
             for dupe in self.__filtered_dupes:
                 filtered_groups.add(self.get_group_of_duplicate(dupe))
