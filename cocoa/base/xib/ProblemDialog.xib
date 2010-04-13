@@ -42,7 +42,7 @@
 				<int key="NSWindowStyleMask">11</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{477, 306}, {480, 309}}</string>
-				<int key="NSWTFlags">611844096</int>
+				<int key="NSWTFlags">1685585920</int>
 				<string key="NSWindowTitle">Problems!</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
@@ -554,7 +554,7 @@
 					<string>{{477, 306}, {480, 309}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{477, 306}, {480, 309}}</string>
-					<boolean value="YES"/>
+					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
