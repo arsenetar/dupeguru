@@ -70,4 +70,5 @@ Action Menu
 * **Add Selected to Ignore List:** This first removes all selected duplicates from results, and then add the match of that duplicate and the current reference in the ignore list. This match will not come up again in further scan. The duplicate itself might come back, but it will be matched with another reference file. You can clear the ignore list with the Clear Ignore List command.
 * **Open Selected with Default Application:** Open the file with the application associated with selected file's type.
 * **Reveal Selected in Finder:** Open the folder containing selected file.
+* **Invoke Custom Command:** Invokes the external application you've set up in your preferences using the current selection as arguments in the invocation.
 * **Rename Selected:** Prompts you for a new name, and then rename the selected file.
