@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT type="Advanced Installer" CreateVersion="4.7.2" version="7.5" modules="professional" RootPath="." Language="en">
+<DOCUMENT Type="Advanced Installer" CreateVersion="4.7.2" version="7.6" Modules="professional" RootPath="." Language="en">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_SHORTCUTSREG" Value="0|0|0|"/>
@@ -28,18 +28,13 @@
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
-    <ROW Directory="accessible_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="access~1|accessible"/>
-    <ROW Directory="codecs_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="codecs"/>
     <ROW Directory="help_DIR" Directory_Parent="APPDIR" DefaultDir="help"/>
-    <ROW Directory="iconengines_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="iconen~1|iconengines"/>
-    <ROW Directory="imageformats_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="imagef~1|imageformats"/>
     <ROW Directory="images_DIR" Directory_Parent="help_DIR" DefaultDir="images"/>
-    <ROW Directory="qt4_plugins_DIR" Directory_Parent="APPDIR" DefaultDir="qt4_pl~1|qt4_plugins"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="AIShRegAnswer" ComponentId="{7DB5C163-2978-436F-A47D-54F1C76F1D64}" Directory_="APPDIR" Attributes="4" KeyPath="AIShRegAnswer"/>
     <ROW Component="AI_ExePath" ComponentId="{AB8EF793-B4A4-4A5C-A343-8095FFE16175}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
-    <ROW Component="PyWinTypes26.dll" ComponentId="{E7DC87D7-F396-46F0-8132-D4F582709AA2}" Directory_="APPDIR" Attributes="0" KeyPath="PyWinTypes26.dll"/>
+    <ROW Component="CurrentVersion" ComponentId="{1EF88868-DCB1-4F7D-83F6-CC17C9F65740}" Directory_="APPDIR" Attributes="4" KeyPath="CurrentVersion"/>
     <ROW Component="QtCore4.dll" ComponentId="{731F12A4-0DB0-4484-8BA1-399560578D68}" Directory_="APPDIR" Attributes="0" KeyPath="QtCore4.dll"/>
     <ROW Component="QtGui4.dll" ComponentId="{3D4FDAFA-EE5E-43C5-A4F5-125F7FA6A550}" Directory_="APPDIR" Attributes="0" KeyPath="QtGui4.dll"/>
     <ROW Component="bz2.pyd_1" ComponentId="{E34B2912-4B50-4EEA-B1EF-B56FA625FCC7}" Directory_="APPDIR" Attributes="0" KeyPath="bz2.pyd" Type="0"/>
@@ -47,77 +42,47 @@
     <ROW Component="dupeGuru_ME.exe" ComponentId="{14F7B73A-FA85-4C10-AA92-10BE05FE103B}" Directory_="APPDIR" Attributes="0" KeyPath="dupeGuru_ME.exe"/>
     <ROW Component="hs_title.png" ComponentId="{A292ADA8-FEC0-49B9-81A5-6C7F837290D4}" Directory_="images_DIR" Attributes="0" KeyPath="hs_title.png" Type="0"/>
     <ROW Component="python26.dll" ComponentId="{20E0EA31-C5CF-4278-B7C6-5FCA0C691B7F}" Directory_="APPDIR" Attributes="0" KeyPath="python26.dll"/>
-    <ROW Component="pythoncom26.dll" ComponentId="{C0489561-2362-48C1-86E8-D5F1A08DE4DE}" Directory_="APPDIR" Attributes="0" KeyPath="pythoncom26.dll"/>
-    <ROW Component="qcncodecs4.dll" ComponentId="{03C97279-4453-48E0-A40D-D28E6F3E701F}" Directory_="codecs_DIR" Attributes="0" KeyPath="qcncodecs4.dll"/>
-    <ROW Component="qgif4.dll" ComponentId="{5D6E676F-18BC-49C8-BBD2-E6BA1F3CA043}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qgif4.dll"/>
-    <ROW Component="qico4.dll" ComponentId="{C23E13E3-0E14-46E8-AA73-5D592CDBB725}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qico4.dll"/>
-    <ROW Component="qjpcodecs4.dll" ComponentId="{E6649370-16BB-449A-8668-9995B5C1CEB5}" Directory_="codecs_DIR" Attributes="0" KeyPath="qjpcodecs4.dll"/>
-    <ROW Component="qjpeg4.dll" ComponentId="{1D084E38-4A03-4C3C-87F7-3C68FEB41B4C}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qjpeg4.dll"/>
-    <ROW Component="qkrcodecs4.dll" ComponentId="{18F32B38-7D3F-4F3C-AB80-3778634C8676}" Directory_="codecs_DIR" Attributes="0" KeyPath="qkrcodecs4.dll"/>
-    <ROW Component="qmng4.dll" ComponentId="{D7E0BF84-EB34-4E4B-81CD-93B47B31503C}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qmng4.dll"/>
-    <ROW Component="qsvg4.dll" ComponentId="{3920BD4C-9A56-4CE4-A321-E649652D3D8A}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qsvg4.dll"/>
-    <ROW Component="qsvgicon4.dll" ComponentId="{F5D7A7C3-6320-4274-90DF-9F42C94FCDED}" Directory_="iconengines_DIR" Attributes="0" KeyPath="qsvgicon4.dll"/>
-    <ROW Component="qtaccessiblecompatwidgets4.dll" ComponentId="{990608A3-AD85-439A-B46A-764DF560FA3A}" Directory_="accessible_DIR" Attributes="0" KeyPath="qtaccessiblecompatwidgets4.dll"/>
-    <ROW Component="qtaccessiblewidgets4.dll" ComponentId="{1F04BD2B-42BD-412D-B101-806B130CD1B8}" Directory_="accessible_DIR" Attributes="0" KeyPath="qtaccessiblewidgets4.dll"/>
-    <ROW Component="qtiff4.dll" ComponentId="{D5B4A7B8-7D9B-4A5C-9DD5-2048690EEE11}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qtiff4.dll"/>
-    <ROW Component="qtwcodecs4.dll" ComponentId="{E6C5E92F-D193-4A75-88E2-5058F069C224}" Directory_="codecs_DIR" Attributes="0" KeyPath="qtwcodecs4.dll"/>
     <ROW Component="updater.exe" ComponentId="{D1DDB6CB-B336-4112-BC40-1ABD36C3ABDA}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_ME.exe AIShRegAnswer bz2.pyd_1 python26.dll pythoncom26.dll PyWinTypes26.dll qtaccessiblecompatwidgets4.dll qtaccessiblewidgets4.dll qcncodecs4.dll qjpcodecs4.dll qkrcodecs4.dll qtwcodecs4.dll qsvgicon4.dll qgif4.dll qico4.dll qjpeg4.dll qmng4.dll qsvg4.dll qtiff4.dll QtCore4.dll QtGui4.dll AI_ExePath credits.htm hs_title.png"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_ME.exe AIShRegAnswer bz2.pyd_1 python26.dll QtCore4.dll QtGui4.dll AI_ExePath credits.htm hs_title.png CurrentVersion"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="PyQt4.QtCore.pyd" Component_="bz2.pyd_1" FileName="PyQt4Q~1.pyd|PyQt4.QtCore.pyd" Attributes="0" SourcePath="dist\PyQt4.QtCore.pyd" SelfReg="false" Sequence="5"/>
-    <ROW File="PyQt4.QtGui.pyd" Component_="bz2.pyd_1" FileName="PyQt4Q~2.pyd|PyQt4.QtGui.pyd" Attributes="0" SourcePath="dist\PyQt4.QtGui.pyd" SelfReg="false" Sequence="6"/>
-    <ROW File="PyWinTypes26.dll" Component_="PyWinTypes26.dll" FileName="PyWinT~1.dll|PyWinTypes26.dll" Attributes="0" SourcePath="dist\PyWinTypes26.dll" SelfReg="false" Sequence="9"/>
-    <ROW File="QtCore4.dll" Component_="QtCore4.dll" FileName="QtCore4.dll" Attributes="0" SourcePath="dist\QtCore4.dll" SelfReg="false" Sequence="23"/>
-    <ROW File="QtGui4.dll" Component_="QtGui4.dll" FileName="QtGui4.dll" Attributes="0" SourcePath="dist\QtGui4.dll" SelfReg="false" Sequence="24"/>
+    <ROW File="PyQt4.QtCore.pyd" Component_="bz2.pyd_1" FileName="PyQt4Q~1.pyd|PyQt4.QtCore.pyd" Attributes="0" SourcePath="dist\PyQt4.QtCore.pyd" SelfReg="false" Sequence="4"/>
+    <ROW File="PyQt4.QtGui.pyd" Component_="bz2.pyd_1" FileName="PyQt4Q~2.pyd|PyQt4.QtGui.pyd" Attributes="0" SourcePath="dist\PyQt4.QtGui.pyd" SelfReg="false" Sequence="5"/>
+    <ROW File="QtCore4.dll" Component_="QtCore4.dll" FileName="QtCore4.dll" Attributes="0" SourcePath="dist\QtCore4.dll" SelfReg="false" Sequence="7"/>
+    <ROW File="QtGui4.dll" Component_="QtGui4.dll" FileName="QtGui4.dll" Attributes="0" SourcePath="dist\QtGui4.dll" SelfReg="false" Sequence="8"/>
     <ROW File="bz2.pyd" Component_="bz2.pyd_1" FileName="bz2.pyd" Attributes="0" SourcePath="dist\bz2.pyd" SelfReg="false" Sequence="3"/>
-    <ROW File="credits.htm" Component_="credits.htm" FileName="credits.htm" Attributes="0" SourcePath="dist\help\credits.htm" SelfReg="false" Sequence="36"/>
-    <ROW File="directories.htm" Component_="credits.htm" FileName="direct~1.htm|directories.htm" Attributes="0" SourcePath="dist\help\directories.htm" SelfReg="false" Sequence="37"/>
-    <ROW File="dupeGuru_ME.exe" Component_="dupeGuru_ME.exe" FileName="dupeGu~1.exe|dupeGuru ME.exe" Attributes="0" SourcePath="dist\dupeGuru ME.exe" SelfReg="false" Sequence="2"/>
-    <ROW File="faq.htm" Component_="credits.htm" FileName="faq.htm" Attributes="0" SourcePath="dist\help\faq.htm" SelfReg="false" Sequence="38"/>
-    <ROW File="hardcoded.css" Component_="credits.htm" FileName="hardco~1.css|hardcoded.css" Attributes="0" SourcePath="dist\help\hardcoded.css" SelfReg="false" Sequence="39"/>
-    <ROW File="hashlib.pyd" Component_="bz2.pyd_1" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\_hashlib.pyd" SelfReg="false" Sequence="32"/>
-    <ROW File="hs_title.png" Component_="hs_title.png" FileName="hs_title.png" Attributes="0" SourcePath="dist\help\images\hs_title.png" SelfReg="false" Sequence="40"/>
-    <ROW File="intro.htm" Component_="credits.htm" FileName="intro.htm" Attributes="0" SourcePath="dist\help\intro.htm" SelfReg="false" Sequence="41"/>
-    <ROW File="power_marker.htm" Component_="credits.htm" FileName="power_~1.htm|power_marker.htm" Attributes="0" SourcePath="dist\help\power_marker.htm" SelfReg="false" Sequence="42"/>
-    <ROW File="preferences.htm" Component_="credits.htm" FileName="prefer~1.htm|preferences.htm" Attributes="0" SourcePath="dist\help\preferences.htm" SelfReg="false" Sequence="43"/>
-    <ROW File="pyexpat.pyd" Component_="bz2.pyd_1" FileName="pyexpat.pyd" Attributes="0" SourcePath="dist\pyexpat.pyd" SelfReg="false" Sequence="4"/>
-    <ROW File="python26.dll" Component_="python26.dll" FileName="python26.dll" Attributes="0" SourcePath="dist\python26.dll" SelfReg="false" Sequence="7"/>
-    <ROW File="pythoncom26.dll" Component_="pythoncom26.dll" FileName="python~1.dll|pythoncom26.dll" Attributes="0" SourcePath="dist\pythoncom26.dll" SelfReg="false" Sequence="8"/>
-    <ROW File="qcncodecs4.dll" Component_="qcncodecs4.dll" FileName="qcncod~1.dll|qcncodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qcncodecs4.dll" SelfReg="false" Sequence="12"/>
-    <ROW File="qgif4.dll" Component_="qgif4.dll" FileName="qgif4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qgif4.dll" SelfReg="false" Sequence="17"/>
-    <ROW File="qico4.dll" Component_="qico4.dll" FileName="qico4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qico4.dll" SelfReg="false" Sequence="18"/>
-    <ROW File="qjpcodecs4.dll" Component_="qjpcodecs4.dll" FileName="qjpcod~1.dll|qjpcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qjpcodecs4.dll" SelfReg="false" Sequence="13"/>
-    <ROW File="qjpeg4.dll" Component_="qjpeg4.dll" FileName="qjpeg4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qjpeg4.dll" SelfReg="false" Sequence="19"/>
-    <ROW File="qkrcodecs4.dll" Component_="qkrcodecs4.dll" FileName="qkrcod~1.dll|qkrcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qkrcodecs4.dll" SelfReg="false" Sequence="14"/>
-    <ROW File="qmng4.dll" Component_="qmng4.dll" FileName="qmng4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qmng4.dll" SelfReg="false" Sequence="20"/>
-    <ROW File="qsvg4.dll" Component_="qsvg4.dll" FileName="qsvg4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qsvg4.dll" SelfReg="false" Sequence="21"/>
-    <ROW File="qsvgicon4.dll" Component_="qsvgicon4.dll" FileName="qsvgic~1.dll|qsvgicon4.dll" Attributes="0" SourcePath="dist\qt4_plugins\iconengines\qsvgicon4.dll" SelfReg="false" Sequence="16"/>
-    <ROW File="qtaccessiblecompatwidgets4.dll" Component_="qtaccessiblecompatwidgets4.dll" FileName="qtacce~1.dll|qtaccessiblecompatwidgets4.dll" Attributes="0" SourcePath="dist\qt4_plugins\accessible\qtaccessiblecompatwidgets4.dll" SelfReg="false" Sequence="10"/>
-    <ROW File="qtaccessiblewidgets4.dll" Component_="qtaccessiblewidgets4.dll" FileName="qtacce~2.dll|qtaccessiblewidgets4.dll" Attributes="0" SourcePath="dist\qt4_plugins\accessible\qtaccessiblewidgets4.dll" SelfReg="false" Sequence="11"/>
-    <ROW File="qtiff4.dll" Component_="qtiff4.dll" FileName="qtiff4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qtiff4.dll" SelfReg="false" Sequence="22"/>
-    <ROW File="qtwcodecs4.dll" Component_="qtwcodecs4.dll" FileName="qtwcod~1.dll|qtwcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qtwcodecs4.dll" SelfReg="false" Sequence="15"/>
-    <ROW File="quick_start.htm" Component_="credits.htm" FileName="quick_~1.htm|quick_start.htm" Attributes="0" SourcePath="dist\help\quick_start.htm" SelfReg="false" Sequence="44"/>
-    <ROW File="results.htm" Component_="credits.htm" FileName="results.htm" Attributes="0" SourcePath="dist\help\results.htm" SelfReg="false" Sequence="45"/>
-    <ROW File="select.pyd" Component_="bz2.pyd_1" FileName="select.pyd" Attributes="0" SourcePath="dist\select.pyd" SelfReg="false" Sequence="25"/>
-    <ROW File="sip.pyd" Component_="bz2.pyd_1" FileName="sip.pyd" Attributes="0" SourcePath="dist\sip.pyd" SelfReg="false" Sequence="26"/>
-    <ROW File="socket.pyd" Component_="bz2.pyd_1" FileName="_socket.pyd" Attributes="0" SourcePath="dist\_socket.pyd" SelfReg="false" Sequence="33"/>
-    <ROW File="ssl.pyd" Component_="bz2.pyd_1" FileName="_ssl.pyd" Attributes="0" SourcePath="dist\_ssl.pyd" SelfReg="false" Sequence="34"/>
-    <ROW File="unicodedata.pyd" Component_="bz2.pyd_1" FileName="unicod~1.pyd|unicodedata.pyd" Attributes="0" SourcePath="dist\unicodedata.pyd" SelfReg="false" Sequence="27"/>
-    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_HOME&gt;updater.exe" SelfReg="false" Sequence="1" DigSign="true"/>
-    <ROW File="versions.htm" Component_="credits.htm" FileName="versions.htm" Attributes="0" SourcePath="dist\help\versions.htm" SelfReg="false" Sequence="46"/>
-    <ROW File="win32api.pyd" Component_="bz2.pyd_1" FileName="win32api.pyd" Attributes="0" SourcePath="dist\win32api.pyd" SelfReg="false" Sequence="28"/>
-    <ROW File="win32com.shell.shell.pyd" Component_="bz2.pyd_1" FileName="win32c~1.pyd|win32com.shell.shell.pyd" Attributes="0" SourcePath="dist\win32com.shell.shell.pyd" SelfReg="false" Sequence="29"/>
-    <ROW File="win32sysloader.pyd" Component_="bz2.pyd_1" FileName="_win32~1.pyd|_win32sysloader.pyd" Attributes="0" SourcePath="dist\_win32sysloader.pyd" SelfReg="false" Sequence="35"/>
-    <ROW File="win32trace.pyd" Component_="bz2.pyd_1" FileName="win32t~1.pyd|win32trace.pyd" Attributes="0" SourcePath="dist\win32trace.pyd" SelfReg="false" Sequence="30"/>
-    <ROW File="win32ui.pyd" Component_="bz2.pyd_1" FileName="win32ui.pyd" Attributes="0" SourcePath="dist\win32ui.pyd" SelfReg="false" Sequence="31"/>
+    <ROW File="credits.htm" Component_="credits.htm" FileName="credits.htm" Attributes="0" SourcePath="dist\help\credits.htm" SelfReg="false" Sequence="15"/>
+    <ROW File="directories.htm" Component_="credits.htm" FileName="direct~1.htm|directories.htm" Attributes="0" SourcePath="dist\help\directories.htm" SelfReg="false" Sequence="16"/>
+    <ROW File="dupeGuru_ME.exe" Component_="dupeGuru_ME.exe" FileName="dupeGu~1.exe|dupeGuru ME.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="dist\dupeGuru ME.exe" SelfReg="false" Sequence="2"/>
+    <ROW File="faq.htm" Component_="credits.htm" FileName="faq.htm" Attributes="0" SourcePath="dist\help\faq.htm" SelfReg="false" Sequence="17"/>
+    <ROW File="hardcoded.css" Component_="credits.htm" FileName="hardco~1.css|hardcoded.css" Attributes="0" SourcePath="dist\help\hardcoded.css" SelfReg="false" Sequence="18"/>
+    <ROW File="hashlib.pyd" Component_="bz2.pyd_1" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\_hashlib.pyd" SelfReg="false" Sequence="12"/>
+    <ROW File="hs_title.png" Component_="hs_title.png" FileName="hs_title.png" Attributes="0" SourcePath="dist\help\images\hs_title.png" SelfReg="false" Sequence="19"/>
+    <ROW File="intro.htm" Component_="credits.htm" FileName="intro.htm" Attributes="0" SourcePath="dist\help\intro.htm" SelfReg="false" Sequence="20"/>
+    <ROW File="lxml.etree.pyd" Component_="bz2.pyd_1" FileName="lxmlet~1.pyd|lxml.etree.pyd" Attributes="0" SourcePath="dist\lxml.etree.pyd" SelfReg="false" Sequence="26"/>
+    <ROW File="power_marker.htm" Component_="credits.htm" FileName="power_~1.htm|power_marker.htm" Attributes="0" SourcePath="dist\help\power_marker.htm" SelfReg="false" Sequence="21"/>
+    <ROW File="preferences.htm" Component_="credits.htm" FileName="prefer~1.htm|preferences.htm" Attributes="0" SourcePath="dist\help\preferences.htm" SelfReg="false" Sequence="22"/>
+    <ROW File="python26.dll" Component_="python26.dll" FileName="python26.dll" Attributes="0" SourcePath="dist\python26.dll" SelfReg="false" Sequence="6"/>
+    <ROW File="quick_start.htm" Component_="credits.htm" FileName="quick_~1.htm|quick_start.htm" Attributes="0" SourcePath="dist\help\quick_start.htm" SelfReg="false" Sequence="23"/>
+    <ROW File="results.htm" Component_="credits.htm" FileName="results.htm" Attributes="0" SourcePath="dist\help\results.htm" SelfReg="false" Sequence="24"/>
+    <ROW File="select.pyd" Component_="bz2.pyd_1" FileName="select.pyd" Attributes="0" SourcePath="dist\select.pyd" SelfReg="false" Sequence="9"/>
+    <ROW File="send2trash_win.pyd" Component_="bz2.pyd_1" FileName="_send2~1.pyd|_send2trash_win.pyd" Attributes="0" SourcePath="dist\_send2trash_win.pyd" SelfReg="false" Sequence="27"/>
+    <ROW File="sip.pyd" Component_="bz2.pyd_1" FileName="sip.pyd" Attributes="0" SourcePath="dist\sip.pyd" SelfReg="false" Sequence="10"/>
+    <ROW File="socket.pyd" Component_="bz2.pyd_1" FileName="_socket.pyd" Attributes="0" SourcePath="dist\_socket.pyd" SelfReg="false" Sequence="13"/>
+    <ROW File="ssl.pyd" Component_="bz2.pyd_1" FileName="_ssl.pyd" Attributes="0" SourcePath="dist\_ssl.pyd" SelfReg="false" Sequence="14"/>
+    <ROW File="unicodedata.pyd" Component_="bz2.pyd_1" FileName="unicod~1.pyd|unicodedata.pyd" Attributes="0" SourcePath="dist\unicodedata.pyd" SelfReg="false" Sequence="11"/>
+    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" Sequence="1" DigSign="true"/>
+    <ROW File="versions.htm" Component_="credits.htm" FileName="versions.htm" Attributes="0" SourcePath="dist\help\versions.htm" SelfReg="false" Sequence="25"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageName="install\dupeguru_me_win_[|ProductVersion]" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" CreateMd5="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\install" ExtUI="true"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="install" PackageFileName="dupeguru_me_win_[|ProductVersion]" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" CreateMd5="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\install" ExtUI="true"/>
     <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.CacheComponent">
+    <ATTRIBUTE name="Enable" value="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
@@ -239,10 +204,11 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="AIShRegAnswer" Root="-1" Key="Software\Caphyon\Advanced Installer\Installs\[ProductCode]" Name="AIShRegAnswer" Value="[AI_SHORTCUTSREG]" Component_="AIShRegAnswer"/>
     <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
+    <ROW Registry="CurrentVersion" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="CurrentVersion" Value="[ProductVersion]" Component_="CurrentVersion"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="Check_for_update" Directory_="SHORTCUTDIR" Name="Checkf~2|Check for update" Component_="updater.exe" Target="[#updater.exe]" Arguments="/checknow" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="Uninstall_dupeGuru_ME" Directory_="SHORTCUTDIR" Name="Uninst~1|Uninstall dupeGuru ME" Component_="qtwcodecs4.dll" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Hotkey="0" Icon_="SystemFolder_msiexec.exe" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="Uninstall_dupeGuru_ME" Directory_="SHORTCUTDIR" Name="Uninst~1|Uninstall dupeGuru ME" Component_="AIShRegAnswer" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Hotkey="0" Icon_="SystemFolder_msiexec.exe" IconIndex="0" ShowCmd="1"/>
     <ROW Shortcut="dupeGuru_ME" Directory_="SHORTCUTDIR" Name="dupeGu~1|dupeGuru ME" Component_="dupeGuru_ME.exe" Target="[#dupeGuru_ME.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
     <ROW Shortcut="dupeGuru_ME_1" Directory_="DesktopFolder" Name="dupeGu~1|dupeGuru ME" Component_="dupeGuru_ME.exe" Target="[#dupeGuru_ME.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
