@@ -35,6 +35,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         setchecked(self.useRegexpBox, prefs.use_regexp)
         setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
+        self.customCommandEdit.setText(prefs.custom_command)
     
     def save(self):
         prefs = self.app.prefs
@@ -45,6 +46,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
+        prefs.custom_command = unicode(self.customCommandEdit.text())
     
     def resetToDefaults(self):
         self.load(preferences.Preferences())
