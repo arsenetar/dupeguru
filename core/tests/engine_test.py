@@ -12,9 +12,10 @@ from nose.tools import eq_
 
 from hsutil import job
 from hsutil.decorators import log_calls
+from hsutil.misc import first
 from hsutil.testcase import TestCase
 
-from .. import engine, fs
+from .. import engine
 from ..engine import *
 
 class NamedObject(object):
@@ -45,6 +46,15 @@ def get_test_group():
     result.add_match(m2)
     result.add_match(m3)
     return result
+
+def assert_match(m, name1, name2):
+    # When testing matches, whether objects are in first or second position very often doesn't
+    # matter. This function makes this test more convenient.
+    if m.first.name == name1:
+        eq_(m.second.name, name2)
+    else:
+        eq_(m.first.name, name2)
+        eq_(m.second.name, name1)
 
 class TCgetwords(TestCase):
     def test_spaces(self):
@@ -351,14 +361,10 @@ class GetMatches(TestCase):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("a b c foo")]
         r = getmatches(l)
         self.assertEqual(2,len(r))
-        seek = [m for m in r if m.percentage == 50] #"foo bar" and "bar bleh"
-        m = seek[0]
-        self.assertEqual(['foo','bar'],m.first.words)
-        self.assertEqual(['bar','bleh'],m.second.words)
-        seek = [m for m in r if m.percentage == 33] #"foo bar" and "a b c foo"
-        m = seek[0]
-        self.assertEqual(['foo','bar'],m.first.words)
-        self.assertEqual(['a','b','c','foo'],m.second.words)
+        m = first(m for m in r if m.percentage == 50) #"foo bar" and "bar bleh"
+        assert_match(m, 'foo bar', 'bar bleh')
+        m = first(m for m in r if m.percentage == 33) #"foo bar" and "a b c foo"
+        assert_match(m, 'foo bar', 'a b c foo')
     
     def test_null_and_unrelated_objects(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject(""),NamedObject("unrelated object")]
