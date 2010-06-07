@@ -369,11 +369,10 @@ class GetMatches(TestCase):
     def test_null_and_unrelated_objects(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject(""),NamedObject("unrelated object")]
         r = getmatches(l)
-        self.assertEqual(1,len(r))
+        eq_(len(r), 1)
         m = r[0]
-        self.assertEqual(50,m.percentage)
-        self.assertEqual(['foo','bar'],m.first.words)
-        self.assertEqual(['bar','bleh'],m.second.words)
+        eq_(m.percentage, 50)
+        assert_match(m, 'foo bar', 'bar bleh')
     
     def test_twice_the_same_word(self):
         l = [NamedObject("foo foo bar"),NamedObject("bar bleh")]
