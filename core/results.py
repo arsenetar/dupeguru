@@ -11,8 +11,8 @@ import re
 from lxml import etree
 
 from . import engine
-from hsutil.job import nulljob
-from hsutil.markable import Markable
+from hscommon.job import nulljob
+from hscommon.markable import Markable
 from hsutil.misc import flatten, nonone
 from hsutil.str import format_size
 from hsutil.files import FileOrPath

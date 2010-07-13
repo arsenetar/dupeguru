@@ -13,7 +13,7 @@ import os.path as op
 
 import yaml
 
-from hsutil.build import add_to_pythonpath
+from hscommon.build import add_to_pythonpath
 
 def main():
     conf = yaml.load(open('conf.yaml'))

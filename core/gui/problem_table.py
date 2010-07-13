@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.notify import Listener
+from hscommon.notify import Listener
 from hsgui.table import GUITable, Row
 
 class ProblemTable(GUITable, Listener):

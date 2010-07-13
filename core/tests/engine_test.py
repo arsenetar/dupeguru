@@ -10,7 +10,7 @@ import sys
 
 from nose.tools import eq_
 
-from hsutil import job
+from hscommon import job
 from hsutil.decorators import log_calls
 from hsutil.misc import first
 from hsutil.testcase import TestCase

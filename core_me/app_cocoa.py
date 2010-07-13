@@ -10,7 +10,7 @@ import logging
 from appscript import app, k, CommandError
 import time
 
-from hsutil.cocoa import as_fetch
+from hscommon.cocoa import as_fetch
 
 from core.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
 

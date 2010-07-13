@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.notify import Broadcaster
+from hscommon.notify import Broadcaster
 
 from .base import GUIObject
 

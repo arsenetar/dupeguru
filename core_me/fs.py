@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsmedia import mpeg, wma, mp4, ogg, flac, aiff
+from hsaudiotag import mpeg, wma, mp4, ogg, flac, aiff
 from hsutil.str import get_file_ext
 from core import fs
 

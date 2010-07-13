@@ -10,7 +10,7 @@ import logging
 import multiprocessing
 from collections import defaultdict, deque
 
-from hsutil import job
+from hscommon import job
 
 from core.engine import Match
 from .block import avgdiff, DifferentBlockCountError, NoBlocksError

@@ -8,7 +8,8 @@
 
 from nose.tools import eq_
 
-from hsutil import job, io
+from hscommon import job
+from hsutil import io
 from hsutil.path import Path
 from hsutil.testcase import TestCase
 

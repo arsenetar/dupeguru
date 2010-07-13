@@ -16,7 +16,7 @@ from setuptools import setup
 import yaml
 
 from hsdocgen import generate_help, filters
-from hsutil.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
+from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
 def build_cocoa(edition, dev, help_destpath):
     if not dev:
@@ -30,10 +30,10 @@ def build_cocoa(edition, dev, help_destpath):
     if not dev:
         specific_packages = {
             'se': ['core_se'],
-            'me': ['core_me', 'hsmedia'],
+            'me': ['core_me'],
             'pe': ['core_pe'],
         }[edition]
-        copy_packages(['core', 'hsutil'] + specific_packages, 'build')
+        copy_packages(['core', 'hscommon'] + specific_packages, 'build')
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     os.chdir('build')

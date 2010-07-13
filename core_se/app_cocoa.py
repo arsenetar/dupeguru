@@ -12,7 +12,7 @@ import logging
 
 from hsutil import io
 from hsutil.path import Path
-from hsutil.cocoa.objcmin import NSWorkspace
+from hscommon.cocoa.objcmin import NSWorkspace
 
 from core import fs
 from core.app_cocoa import DupeGuru as DupeGuruBase

@@ -16,7 +16,7 @@ from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
 
 from hsutil import job
-from hsutil.reg import RegistrationRequired
+from hscommon.reg import RegistrationRequired
 
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     

@@ -16,7 +16,7 @@ from unicodedata import normalize
 
 from hsutil.misc import flatten
 from hsutil.str import multi_replace
-from hsutil import job
+from hscommon import job
 
 (WEIGHT_WORDS,
 MATCH_SIMILAR_WORDS,

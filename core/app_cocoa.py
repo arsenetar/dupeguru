@@ -9,12 +9,12 @@
 import logging
 import os.path as op
 
-from hsutil import cocoa, job
-from hsutil.cocoa import install_exception_hook
-from hsutil.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
+from hscommon import cocoa, job
+from hscommon.cocoa import install_exception_hook
+from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace)
-from hsutil.reg import RegistrationRequired
+from hscommon.reg import RegistrationRequired
 
 from . import app
 

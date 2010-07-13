@@ -15,7 +15,7 @@ import shutil
 
 import yaml
 
-from hsutil.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
+from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
     build_debian_changelog, copy_qt_plugins)
 
 def package_cocoa(edition):
@@ -84,11 +84,9 @@ def package_debian(edition):
     help_src = ed('help_{0}')
     os.makedirs(destpath)
     shutil.copytree(ed('qt/{0}'), srcpath)
-    packages = ['hsutil', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt/base']
-    if edition == 'me':
-        packages.append('hsmedia')
+    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt/base']
     copy_packages(packages, srcpath)
-    # We also have to copy the Send2Trash package
+    # We also have to copy the Send2Trash, hsutil and hsaudiotag package
     import send2trash
     pkg_path = op.dirname(send2trash.__file__)
     shutil.copytree(pkg_path, op.join(srcpath, 'send2trash'))

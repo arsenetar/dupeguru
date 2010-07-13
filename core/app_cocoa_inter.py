@@ -9,7 +9,7 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-from hsutil.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyRegistrable
+from hscommon.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyRegistrable
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree

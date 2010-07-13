@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.cocoa import signature
+from hscommon.cocoa import signature
 
 from core import scanner
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel

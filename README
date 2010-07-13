@@ -12,9 +12,8 @@ This package contains the source for dupeGuru. To learns how to build it, refer 
 There are also other sub-folder that comes from external repositories (automatically checked out
 with svn:externals):
 
-- hsutil: A collection of helpers used across HS applications.
+- hscommon: A collection of helpers used across HS applications.
 - hsdocgen: An ad-hoc document generation used across HS project (used for help files)
-- hsmedia: A library to read audio file metadata, used in dupeGuru ME.
 - cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
 - qtlib: A collection of helpers used across Qt UI codebases of HS applications.
 
@@ -28,6 +27,8 @@ General dependencies
 
 - Python 2.6 (http://www.python.org)
 - Send2Trash (http://hg.hardcoded.net/send2trash)
+- hsutil (http://hg.hardcoded.net/hsutil)
+- hsaudiotag (for ME) (http://hg.hardcoded.net/hsaudiotag)
 - lxml, to read and write XML files. (http://codespeak.net/lxml/)
 - Mako, to generate help files. (http://www.makotemplates.org/)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)

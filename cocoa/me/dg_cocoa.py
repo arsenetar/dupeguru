@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from hsutil.cocoa import signature
+from hscommon.cocoa import signature
 
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
@@ -13,7 +13,7 @@ from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS
 
 # Fix py2app imports which chokes on relative imports and other stuff
 from core_me import app_cocoa, data, fs, scanner
-from hsmedia import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
+from hsaudiotag import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
 from lxml import etree, _elementpath
 import gzip
 
