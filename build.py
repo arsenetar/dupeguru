@@ -15,7 +15,7 @@ import shutil
 from setuptools import setup
 import yaml
 
-from hsdocgen import generate_help, filters
+from hscommon import helpgen
 from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
 def build_cocoa(edition, dev, help_destpath):
@@ -85,13 +85,12 @@ def main():
     add_to_pythonpath('.')
     print "Generating Help"
     windows = sys.platform == 'win32'
-    tix = filters.tixgen("https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}")
+    profile = 'win_en' if windows else 'osx_en'
     help_dir = 'help_{0}'.format(edition)
     dest_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
     help_basepath = op.abspath(help_dir)
     help_destpath = op.abspath(op.join(help_dir, dest_dir))
-    generate_help.main(help_basepath, help_destpath, force_render=not dev, tix=tix, windows=windows)
-    
+    helpgen.gen(help_basepath, help_destpath, profile=profile)
     print "Building dupeGuru"
     if edition == 'pe':
         os.chdir('core_pe')

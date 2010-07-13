@@ -1,0 +1,45 @@
+- 
+    name: intro
+    title: Introduction to dupeGuru ME
+    menutitle: Introduction
+    menudesc: Introduction to dupeGuru
+- 
+    name: quick_start
+    title: Quick Start
+    menutitle: Quick Start
+    menudesc: Quickly get into the action
+- 
+    name: directories
+    title: Directories
+    menutitle: Directories
+    menudesc: Managing dupeGuru directories
+- 
+    name: preferences
+    title: Preferences
+    menutitle: Preferences
+    menudesc: Setting dupeGuru preferences
+- 
+    name: results
+    title: Results
+    menutitle: Results
+    menudesc: Time to delete these duplicates!
+- 
+    name: power_marker
+    title: Power Marker
+    menutitle: Power Marker
+    menudesc: Take control of your duplicates
+- 
+    name: faq
+    title: Frequently Asked Questions
+    menutitle: F.A.Q.
+    menudesc: Frequently Asked Questions
+- 
+    name: versions
+    title: Version History
+    menutitle: Version History
+    menudesc: Changes moneyGuru went through
+- 
+    name: credits
+    title: Credits
+    menutitle: Credits
+    menudesc: People who contributed to dupeGuru
