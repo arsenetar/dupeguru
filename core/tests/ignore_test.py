@@ -9,7 +9,7 @@
 import cStringIO
 from lxml import etree
 
-from nose.tools import eq_
+from hsutil.testutil import eq_
 
 from ..ignore import *
 

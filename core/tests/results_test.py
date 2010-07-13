@@ -11,9 +11,9 @@ import StringIO
 import os.path as op
 
 from lxml import etree
-from nose.tools import eq_
 
 from hsutil.path import Path
+from hsutil.testutil import eq_
 from hsutil.testcase import TestCase
 from hsutil.misc import first
 

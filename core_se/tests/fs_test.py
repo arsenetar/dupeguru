@@ -9,9 +9,8 @@
 
 import hashlib
 
-from nose.tools import eq_
-
 from hsutil.testcase import TestCase
+from hsutil.testutil import eq_
 from core.fs import File
 from core.tests.directories_test import create_fake_fs
 

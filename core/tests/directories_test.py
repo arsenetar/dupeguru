@@ -10,10 +10,9 @@ import os.path as op
 import os
 import time
 
-from nose.tools import eq_
-
 from hsutil import io
 from hsutil.path import Path
+from hsutil.testutil import eq_
 from hsutil.testcase import TestCase
 
 from ..directories import *

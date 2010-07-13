@@ -9,8 +9,7 @@
 import os
 import logging
 
-from nose.tools import eq_
-
+from hsutil.testutil import eq_
 from hsutil.testcase import TestCase
 from hsutil import io
 from hsutil.path import Path

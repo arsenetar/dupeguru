@@ -32,7 +32,7 @@ General dependencies
 - lxml, to read and write XML files. (http://codespeak.net/lxml/)
 - Mako, to generate help files. (http://www.makotemplates.org/)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
-- Nose, to run unit tests. (http://somethingaboutorange.com/mrl/projects/nose/)
+- py.test, to run unit tests. (http://codespeak.net/py/dist/test/)
 
 OS X prerequisites
 -----
