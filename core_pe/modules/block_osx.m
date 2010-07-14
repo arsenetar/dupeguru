@@ -158,6 +158,11 @@ static PyObject* block_osx_getblocks(PyObject *self, PyObject *args)
         return NULL;
     }
     
+    if (PySequence_Length(path) == 0) {
+        PyErr_SetString(PyExc_ValueError, "empty path");
+        return NULL;
+    }
+    
     image_path = pystring2cfstring(path);
     if (image_path == NULL) {
         return PyErr_NoMemory();

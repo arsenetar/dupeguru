@@ -40,7 +40,7 @@ def prepare_pictures(pictures, cache_path, j=job.nulljob):
                     blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
-            except IOError as e:
+            except (IOError, ValueError) as e:
                 logging.warning(unicode(e))
             except MemoryError:
                 logging.warning(u'Ran out of memory while reading %s of size %d' % (picture.unicode_path, picture.size))
