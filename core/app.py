@@ -88,7 +88,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         try:
             for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
                 file._read_all_info(attrnames=self.data.METADATA_TO_READ)
-        except OSError:
+        except (OSError, IOError):
             # If this error is raised, it means that a file was deleted while we were reading
             # metadata. Proper handling of this rare occurrence is complex because there's no easy
             # way to remove an arbitrary file from the Results. Thus, we simply clear them.
