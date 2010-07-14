@@ -84,12 +84,10 @@ def package_debian(edition):
     help_src = ed('help_{0}')
     os.makedirs(destpath)
     shutil.copytree(ed('qt/{0}'), srcpath)
-    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt/base']
+    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt/base', 'hsutil', 'send2trash']
+    if edition == 'me':
+        packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
-    # We also have to copy the Send2Trash, hsutil and hsaudiotag package
-    import send2trash
-    pkg_path = op.dirname(send2trash.__file__)
-    shutil.copytree(pkg_path, op.join(srcpath, 'send2trash'))
     shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
     yaml_path = op.join(help_src, 'changelog.yaml')
     changelog_dest = op.join(destpath, 'debian', 'changelog')
