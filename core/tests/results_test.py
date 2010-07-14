@@ -574,6 +574,12 @@ class TCResultsXML(TestCase):
         # apply_filter() searches on the whole path, not just on the filename.
         self.results.apply_filter(u'basepath')
         eq_(len(self.results.groups), 2)
+    
+    def test_save_xml_with_invalid_characters(self):
+        # Don't crash when saving files that have invalid xml characters in their path
+        self.objects[0].name = u'foo\x19'
+        self.results.save_to_xml(StringIO.StringIO()) # don't crash
+    
 
 class TCResultsFilter(TestCase):
     def setUp(self):

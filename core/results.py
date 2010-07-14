@@ -284,9 +284,12 @@ class Results(Markable):
                 except AttributeError:
                     words = ()
                 file_elem = etree.SubElement(group_elem, 'file')
-                file_elem.set('path', unicode(d.path))
+                try:
+                    file_elem.set('path', unicode(d.path))
+                    file_elem.set('words', ','.join(words))
+                except ValueError: # If there's an invalid character, just skip the file
+                    file_elem.set('path', '')
                 file_elem.set('is_ref', ('y' if d.is_ref else 'n'))
-                file_elem.set('words', ','.join(words))
                 file_elem.set('marked', ('y' if self.is_marked(d) else 'n'))
             for match in g.matches:
                 match_elem = etree.SubElement(group_elem, 'match')
