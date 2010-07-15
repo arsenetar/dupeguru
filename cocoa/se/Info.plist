@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>hsft</string>
 	<key>CFBundleVersion</key>
-	<string>2.10.0</string>
+	<string>2.10.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

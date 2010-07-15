@@ -1,3 +1,7 @@
+- date: 2010-07-15
+  version: 2.10.1
+  description: |
+    * Fixed a couple of crashes. (#95, #97, #100)
 - date: 2010-04-13
   version: 2.10.0
   description: |
