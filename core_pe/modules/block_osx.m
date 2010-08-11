@@ -29,8 +29,8 @@ pystring2cfstring(PyObject *pystring)
         Py_INCREF(encoded);
     }
     
-    s = (UInt8*)PyString_AS_STRING(encoded);
-    size = PyString_GET_SIZE(encoded);
+    s = (UInt8*)PyBytes_AS_STRING(encoded);
+    size = PyUnicode_GET_SIZE(encoded);
     result = CFStringCreateWithBytes(NULL, s, size, kCFStringEncodingUTF8, FALSE);
     Py_DECREF(encoded);
     return result;
@@ -43,7 +43,7 @@ static PyObject* block_osx_get_image_size(PyObject *self, PyObject *args)
     CFURLRef image_url;
     CGImageSourceRef source;
     CGImageRef image;
-    size_t width, height;
+    long width, height;
     PyObject *pwidth, *pheight;
     PyObject *result;
     
@@ -72,11 +72,11 @@ static PyObject* block_osx_get_image_size(PyObject *self, PyObject *args)
         CFRelease(source);
     }
     
-    pwidth = PyInt_FromSsize_t(width);
+    pwidth = PyLong_FromLong(width);
     if (pwidth == NULL) {
         return NULL;
     }
-    pheight = PyInt_FromSsize_t(height);
+    pheight = PyLong_FromLong(height);
     if (pheight == NULL) {
         return NULL;
     }
@@ -228,8 +228,24 @@ static PyMethodDef BlockOsxMethods[] = {
     {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC
-init_block_osx(void)
+static struct PyModuleDef BlockOsxDef = {
+    PyModuleDef_HEAD_INIT,
+    "_block_osx",
+    NULL,
+    -1,
+    BlockOsxMethods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyObject *
+PyInit__block_osx(void)
 {
-    Py_InitModule("_block_osx", BlockOsxMethods);
+    PyObject *m = PyModule_Create(&BlockOsxDef);
+    if (m == NULL) {
+        return NULL;
+    }
+    return m;
 }

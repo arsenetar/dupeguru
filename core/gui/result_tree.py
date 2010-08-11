@@ -63,7 +63,7 @@ class ResultTree(GUIObject, Tree):
     
     def _select_nodes(self, nodes):
         Tree._select_nodes(self, nodes)
-        self.app._select_dupes(map(attrgetter('_dupe'), nodes))
+        self.app._select_dupes(list(map(attrgetter('_dupe'), nodes)))
     
     #--- Private
     def _refresh(self):

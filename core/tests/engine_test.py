@@ -62,12 +62,12 @@ class TCgetwords(TestCase):
     
     def test_splitter_chars(self):
         self.assertEqual(
-            [chr(i) for i in xrange(ord('a'),ord('z')+1)],
+            [chr(i) for i in range(ord('a'),ord('z')+1)],
             getwords("a-b_c&d+e(f)g;h\\i[j]k{l}m:n.o,p<q>r/s?t~u!v@w#x$y*z")
         )
     
     def test_joiner_chars(self):
-        self.assertEqual(["aec"], getwords(u"a'e\u0301c"))
+        self.assertEqual(["aec"], getwords("a'e\u0301c"))
     
     def test_empty(self):
         self.assertEqual([], getwords(''))
@@ -76,7 +76,7 @@ class TCgetwords(TestCase):
         self.assertEqual(['foo', 'bar'], getwords('FOO BAR'))
     
     def test_decompose_unicode(self):
-        self.assertEqual(getwords(u'foo\xe9bar'), ['fooebar'])
+        self.assertEqual(getwords('foo\xe9bar'), ['fooebar'])
     
 
 class TCgetfields(TestCase):
@@ -768,7 +768,7 @@ class TCget_groups(TestCase):
         self.assert_(o3 in g)
     
     def test_four_sized_group(self):
-        l = [NamedObject("foobar") for i in xrange(4)]
+        l = [NamedObject("foobar") for i in range(4)]
         m = getmatches(l)
         r = get_groups(m)
         self.assertEqual(1,len(r))

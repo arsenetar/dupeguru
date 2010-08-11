@@ -52,9 +52,9 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         # label = 'Remove' if node.parent is None else 'Exclude'
     
     def addButtonClicked(self):
-        title = u"Select a directory to add to the scanning list"
+        title = "Select a directory to add to the scanning list"
         flags = QFileDialog.ShowDirsOnly
-        dirpath = unicode(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
+        dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
         if not dirpath:
             return
         self.lastAddedFolder = dirpath

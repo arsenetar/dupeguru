@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import StringIO
+import io
 import os.path as op
 
 from lxml import etree
@@ -25,7 +25,7 @@ class NamedObject(engine_test.NamedObject):
     path = property(lambda x:Path('basepath') + x.name)
     is_ref = False
     
-    def __nonzero__(self):
+    def __bool__(self):
         return False #Make sure that operations are made correctly when the bool value of files is false.
 
 # Returns a group set that looks like that:
@@ -63,7 +63,7 @@ class TCResultsEmpty(TestCase):
         self.assert_(self.results.get_group_of_duplicate('foo') is None)
     
     def test_save_to_xml(self):
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         doc = etree.parse(f)
@@ -324,7 +324,7 @@ class TCResultsMarkings(TestCase):
     def test_SaveXML(self):
         self.results.mark(self.objects[1])
         self.results.mark_invert()
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         doc = etree.parse(f)
@@ -345,7 +345,7 @@ class TCResultsMarkings(TestCase):
         self.objects[4].name = 'ibabtu 2' #we can't have 2 files with the same path
         self.results.mark(self.objects[1])
         self.results.mark_invert()
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         r = Results(data)
@@ -369,7 +369,7 @@ class TCResultsXML(TestCase):
     def test_save_to_xml(self):
         self.objects[0].is_ref = True
         self.objects[0].words = [['foo','bar']]
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         doc = etree.parse(f)
@@ -408,7 +408,7 @@ class TCResultsXML(TestCase):
         
         self.objects[0].is_ref = True
         self.objects[4].name = 'ibabtu 2' #we can't have 2 files with the same path
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         r = Results(data)
@@ -451,7 +451,7 @@ class TCResultsXML(TestCase):
             return [f for f in self.objects if str(f.path) == path][0]
         
         self.objects[4].name = 'ibabtu 2' #we can't have 2 files with the same path
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         r = Results(data)
@@ -490,7 +490,7 @@ class TCResultsXML(TestCase):
         match_node.set('percentage', 'baz')
         group_node = etree.SubElement(root, 'foobar') #invalid group
         group_node = etree.SubElement(root, 'group') #empty group
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         tree = etree.ElementTree(root)
         tree.write(f, encoding='utf-8')
         f.seek(0)
@@ -501,30 +501,30 @@ class TCResultsXML(TestCase):
     
     def test_xml_non_ascii(self):
         def get_file(path):
-            if path == op.join('basepath',u'\xe9foo bar'):
+            if path == op.join('basepath','\xe9foo bar'):
                 return objects[0]
-            if path == op.join('basepath',u'bar bleh'):
+            if path == op.join('basepath','bar bleh'):
                 return objects[1]
         
-        objects = [NamedObject(u"\xe9foo bar",True),NamedObject("bar bleh",True)]
+        objects = [NamedObject("\xe9foo bar",True),NamedObject("bar bleh",True)]
         matches = engine.getmatches(objects) #we should have 5 matches
         groups = engine.get_groups(matches) #We should have 2 groups
         for g in groups:
             g.prioritize(lambda x:objects.index(x)) #We want the dupes to be in the same order as the list is
         results = Results(data)
         results.groups = groups
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         results.save_to_xml(f)
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,get_file)
         g = r.groups[0]
-        self.assertEqual(u"\xe9foo bar",g[0].name)
+        self.assertEqual("\xe9foo bar",g[0].name)
         self.assertEqual(['efoo','bar'],g[0].words)
     
     def test_load_invalid_xml(self):
-        f = StringIO.StringIO()
-        f.write('<this is invalid')
+        f = io.BytesIO()
+        f.write(b'<this is invalid')
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,None)
@@ -546,7 +546,7 @@ class TCResultsXML(TestCase):
         fake_matches.add(engine.Match(d1, d3, 43))
         fake_matches.add(engine.Match(d2, d3, 46))
         group.matches = fake_matches
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         results = self.results
         results.save_to_xml(f)
         f.seek(0)
@@ -564,7 +564,7 @@ class TCResultsXML(TestCase):
     
     def test_save_and_load(self):
         # previously, when reloading matches, they wouldn't be reloaded as namedtuples
-        f = StringIO.StringIO()
+        f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
         self.results.load_from_xml(f, self.get_file)
@@ -572,13 +572,13 @@ class TCResultsXML(TestCase):
     
     def test_apply_filter_works_on_paths(self):
         # apply_filter() searches on the whole path, not just on the filename.
-        self.results.apply_filter(u'basepath')
+        self.results.apply_filter('basepath')
         eq_(len(self.results.groups), 2)
     
     def test_save_xml_with_invalid_characters(self):
         # Don't crash when saving files that have invalid xml characters in their path
-        self.objects[0].name = u'foo\x19'
-        self.results.save_to_xml(StringIO.StringIO()) # don't crash
+        self.objects[0].name = 'foo\x19'
+        self.results.save_to_xml(io.BytesIO()) # don't crash
     
 
 class TCResultsFilter(TestCase):

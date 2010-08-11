@@ -258,8 +258,8 @@ class TCavgdiff(unittest.TestCase):
     def test_return_at_least_1_at_the_slightest_difference(self):
         ref = (0,0,0)
         b1 = (1,0,0)
-        blocks1 = [ref for i in xrange(250)]
-        blocks2 = [ref for i in xrange(250)]
+        blocks1 = [ref for i in range(250)]
+        blocks2 = [ref for i in range(250)]
         blocks2[0] = b1
         self.assertEqual(1,my_avgdiff(blocks1,blocks2))
     

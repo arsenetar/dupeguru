@@ -112,7 +112,7 @@ class ResultsModel(TreeModel):
                 return True
         if role == Qt.EditRole:
             if index.column() == 0:
-                value = unicode(value.toString())
+                value = str(value.toString())
                 return self.model.rename_selected(value)
         return False
     

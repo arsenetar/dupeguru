@@ -11,7 +11,7 @@ from hsutil.str import format_time, FT_DECIMAL, format_size
 import time
 
 def format_path(p):
-    return unicode(p[:-1])
+    return str(p[:-1])
 
 def format_timestamp(t, delta):
     if delta:
@@ -38,4 +38,4 @@ def format_dupe_count(c):
     return str(c) if c else '---'
 
 def cmp_value(value):
-    return value.lower() if isinstance(value, basestring) else value
+    return value.lower() if isinstance(value, str) else value

@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import cStringIO
+import io
 from lxml import etree
 
 from hsutil.testutil import eq_
@@ -59,7 +59,7 @@ def test_save_to_xml():
     il.Ignore('foo','bar')
     il.Ignore('foo','bleh')
     il.Ignore('bleh','bar')
-    f = cStringIO.StringIO()
+    f = io.BytesIO()
     il.save_to_xml(f)
     f.seek(0)
     doc = etree.parse(f)
@@ -76,19 +76,19 @@ def test_SaveThenLoad():
     il.Ignore('foo', 'bar')
     il.Ignore('foo', 'bleh')
     il.Ignore('bleh', 'bar')
-    il.Ignore(u'\u00e9', 'bar')
-    f = cStringIO.StringIO()
+    il.Ignore('\u00e9', 'bar')
+    f = io.BytesIO()
     il.save_to_xml(f)
     f.seek(0)
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)
     eq_(4,len(il))
-    assert il.AreIgnored(u'\u00e9','bar')
+    assert il.AreIgnored('\u00e9','bar')
     
 def test_LoadXML_with_empty_file_tags():
-    f = cStringIO.StringIO()
-    f.write('<?xml version="1.0" encoding="utf-8"?><ignore_list><file><file/></file></ignore_list>')
+    f = io.BytesIO()
+    f.write(b'<?xml version="1.0" encoding="utf-8"?><ignore_list><file><file/></file></ignore_list>')
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)
@@ -130,12 +130,12 @@ def test_filter():
 
 def test_save_with_non_ascii_items():
     il = IgnoreList()
-    il.Ignore(u'\xac', u'\xbf')
-    f = cStringIO.StringIO()
+    il.Ignore('\xac', '\xbf')
+    f = io.BytesIO()
     try:
         il.save_to_xml(f)
     except Exception as e:
-        raise AssertionError(unicode(e))
+        raise AssertionError(str(e))
 
 def test_len():
     il = IgnoreList()

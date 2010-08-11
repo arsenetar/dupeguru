@@ -62,7 +62,7 @@ class DirectoryTree(GUIObject, Tree):
     def _refresh(self):
         self.clear()
         for path in self.app.directories:
-            self.append(DirectoryNode(self.app, path, unicode(path)))
+            self.append(DirectoryNode(self.app, path, str(path)))
     
     def add_directory(self, path):
         self.app.add_directory(path)

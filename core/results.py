@@ -147,7 +147,7 @@ class Results(Markable):
             self.__filters.append(filter_str)
             if self.__filtered_dupes is None:
                 self.__filtered_dupes = flatten(g[:] for g in self.groups)
-            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(unicode(dupe.path)))
+            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(str(dupe.path)))
             filtered_groups = set()
             for dupe in self.__filtered_dupes:
                 filtered_groups.add(self.get_group_of_duplicate(dupe))
@@ -241,7 +241,7 @@ class Results(Markable):
                 func(dupe)
                 to_remove.append(dupe)
             except EnvironmentError as e:
-                self.problems.append((dupe, unicode(e)))
+                self.problems.append((dupe, str(e)))
         if remove_from_results:
             self.remove_duplicates(to_remove)
             self.mark_none()
@@ -285,7 +285,7 @@ class Results(Markable):
                     words = ()
                 file_elem = etree.SubElement(group_elem, 'file')
                 try:
-                    file_elem.set('path', unicode(d.path))
+                    file_elem.set('path', str(d.path))
                     file_elem.set('words', ','.join(words))
                 except ValueError: # If there's an invalid character, just skip the file
                     file_elem.set('path', '')
@@ -293,9 +293,9 @@ class Results(Markable):
                 file_elem.set('marked', ('y' if self.is_marked(d) else 'n'))
             for match in g.matches:
                 match_elem = etree.SubElement(group_elem, 'match')
-                match_elem.set('first', unicode(dupe2index[match.first]))
-                match_elem.set('second', unicode(dupe2index[match.second]))
-                match_elem.set('percentage', unicode(int(match.percentage)))
+                match_elem.set('first', str(dupe2index[match.first]))
+                match_elem.set('second', str(dupe2index[match.second]))
+                match_elem.set('percentage', str(int(match.percentage)))
         tree = etree.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
             tree.write(fp, encoding='utf-8')

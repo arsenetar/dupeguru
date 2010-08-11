@@ -16,10 +16,10 @@ from hsutil.misc import nonone
 
 from core.app import NoScannableFileError, AllFilesAreRefError
 
-import dg_rc
-from main_window_ui import Ui_MainWindow
-from results_model import ResultsModel
-from stats_label import StatsLabel
+from . import dg_rc
+from .main_window_ui import Ui_MainWindow
+from .results_model import ResultsModel
+from .stats_label import StatsLabel
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app):
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         h = self.resultsView.header()
         h.setResizeMode(QHeaderView.Interactive)
         prefs = self.app.prefs
-        attrs = zip(prefs.columns_width, prefs.columns_visible)
+        attrs = list(zip(prefs.columns_width, prefs.columns_visible))
         for index, (width, visible) in enumerate(attrs):
             h.resizeSection(index, width)
             h.setSectionHidden(index, not visible)
@@ -145,7 +145,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         answer, ok = QInputDialog.getText(self, title, msg, QLineEdit.Normal, text)
         if not ok:
             return
-        answer = unicode(answer)
+        answer = str(answer)
         self.app.apply_filter(answer)
         self._last_filter = answer
     

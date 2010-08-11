@@ -82,8 +82,8 @@ class TCDirectories(TestCase):
     
     def test_AddPath_non_latin(self):
     	p = Path(self.tmpdir())
-    	to_add = p + u'unicode\u201a'
-    	os.mkdir(unicode(to_add))
+    	to_add = p + 'unicode\u201a'
+    	os.mkdir(str(to_add))
     	d = Directories()
     	try:
     		d.add_path(to_add)
@@ -111,7 +111,7 @@ class TCDirectories(TestCase):
         self.assertEqual(STATE_REFERENCE,d.get_state(p))
         self.assertEqual(STATE_REFERENCE,d.get_state(p + 'dir1'))
         self.assertEqual(1,len(d.states))
-        self.assertEqual(p,d.states.keys()[0])
+        self.assertEqual(p,list(d.states.keys())[0])
         self.assertEqual(STATE_REFERENCE,d.states[p])
     
     def test_get_state_with_path_not_there(self):
@@ -213,11 +213,11 @@ class TCDirectories(TestCase):
     
     def test_unicode_save(self):
         d = Directories()
-        p1 = self.tmppath() + u'hello\xe9'
+        p1 = self.tmppath() + 'hello\xe9'
         io.mkdir(p1)
-        io.mkdir(p1 + u'foo\xe9')
+        io.mkdir(p1 + 'foo\xe9')
         d.add_path(p1)
-        d.set_state(p1 + u'foo\xe9', STATE_EXCLUDED)
+        d.set_state(p1 + 'foo\xe9', STATE_EXCLUDED)
         tmpxml = op.join(self.tmpdir(), 'directories_testunit.xml')
         try:
             d.save_to_file(tmpxml)

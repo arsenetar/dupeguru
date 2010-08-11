@@ -42,12 +42,12 @@ class Mp3File(MusicFile):
     HANDLED_EXTS = set(['mp3'])
     def _read_info(self, field):
         if field == 'md5partial':
-            fileinfo = mpeg.Mpeg(unicode(self.path))
+            fileinfo = mpeg.Mpeg(str(self.path))
             self._md5partial_offset = fileinfo.audio_offset
             self._md5partial_size = fileinfo.audio_size
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            fileinfo = mpeg.Mpeg(unicode(self.path))
+            fileinfo = mpeg.Mpeg(str(self.path))
             self.audiosize = fileinfo.audio_size
             self.bitrate = fileinfo.bitrate
             self.duration = fileinfo.duration
@@ -70,12 +70,12 @@ class WmaFile(MusicFile):
     HANDLED_EXTS = set(['wma'])
     def _read_info(self, field):
         if field == 'md5partial':
-            dec = wma.WMADecoder(unicode(self.path))
+            dec = wma.WMADecoder(str(self.path))
             self._md5partial_offset = dec.audio_offset
             self._md5partial_size = dec.audio_size
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            dec = wma.WMADecoder(unicode(self.path))
+            dec = wma.WMADecoder(str(self.path))
             self.audiosize = dec.audio_size
             self.bitrate = dec.bitrate
             self.duration = dec.duration
@@ -92,13 +92,13 @@ class Mp4File(MusicFile):
     HANDLED_EXTS = set(['m4a', 'm4p'])
     def _read_info(self, field):
         if field == 'md5partial':
-            dec = mp4.File(unicode(self.path))
+            dec = mp4.File(str(self.path))
             self._md5partial_offset = dec.audio_offset
             self._md5partial_size = dec.audio_size
             dec.close()
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            dec = mp4.File(unicode(self.path))
+            dec = mp4.File(str(self.path))
             self.audiosize = dec.audio_size
             self.bitrate = dec.bitrate
             self.duration = dec.duration
@@ -116,12 +116,12 @@ class OggFile(MusicFile):
     HANDLED_EXTS = set(['ogg'])
     def _read_info(self, field):
         if field == 'md5partial':
-            dec = ogg.Vorbis(unicode(self.path))
+            dec = ogg.Vorbis(str(self.path))
             self._md5partial_offset = dec.audio_offset
             self._md5partial_size = dec.audio_size
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            dec = ogg.Vorbis(unicode(self.path))
+            dec = ogg.Vorbis(str(self.path))
             self.audiosize = dec.audio_size
             self.bitrate = dec.bitrate
             self.duration = dec.duration
@@ -138,12 +138,12 @@ class FlacFile(MusicFile):
     HANDLED_EXTS = set(['flac'])
     def _read_info(self, field):
         if field == 'md5partial':
-            dec = flac.FLAC(unicode(self.path))
+            dec = flac.FLAC(str(self.path))
             self._md5partial_offset = dec.audio_offset
             self._md5partial_size = dec.audio_size
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            dec = flac.FLAC(unicode(self.path))
+            dec = flac.FLAC(str(self.path))
             self.audiosize = dec.audio_size
             self.bitrate = dec.bitrate
             self.duration = dec.duration
@@ -160,12 +160,12 @@ class AiffFile(MusicFile):
     HANDLED_EXTS = set(['aif', 'aiff', 'aifc'])
     def _read_info(self, field):
         if field == 'md5partial':
-            dec = aiff.File(unicode(self.path))
+            dec = aiff.File(str(self.path))
             self._md5partial_offset = dec.audio_offset
             self._md5partial_size = dec.audio_size
         MusicFile._read_info(self, field)
         if field in TAG_FIELDS:
-            dec = aiff.File(unicode(self.path))
+            dec = aiff.File(str(self.path))
             self.audiosize = dec.audio_size
             self.bitrate = dec.bitrate
             self.duration = dec.duration

@@ -35,7 +35,7 @@ class Bundle(fs.File):
                 files = fs.get_all_files(self.path)
                 files.sort(key=lambda f:f.path)
                 md5s = [getattr(f, field) for f in files]
-                return ''.join(md5s)
+                return b''.join(md5s)
             
             md5 = hashlib.md5(get_dir_md5_concat())
             digest = md5.digest()

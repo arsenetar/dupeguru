@@ -32,7 +32,7 @@ class DetailsPanel(GUIObject):
         ref = group.ref if group is not None and group.ref is not dupe else None
         l2 = self.app._get_display_info(ref, group, False)
         names = [c['display'] for c in self.app.data.COLUMNS]
-        self._table = zip(names, l1, l2)
+        self._table = list(zip(names, l1, l2))
     
     #--- Public
     def row_count(self):

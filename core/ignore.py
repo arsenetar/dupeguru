@@ -22,7 +22,7 @@ class IgnoreList(object):
         self._count = 0
     
     def __iter__(self):
-        for first,seconds in self._ignored.iteritems():
+        for first,seconds in self._ignored.items():
             for second in seconds:
                 yield (first,second)
     

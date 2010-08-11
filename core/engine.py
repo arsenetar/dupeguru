@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from __future__ import division
+
 import difflib
 import itertools
 import logging
@@ -25,15 +25,15 @@ NO_FIELD_ORDER) = range(3)
 JOB_REFRESH_RATE = 100
 
 def getwords(s):
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         s = normalize('NFD', s)
     s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", ' ').lower()
     s = ''.join(c for c in s if c in string.ascii_letters + string.digits + string.whitespace)
-    return filter(None, s.split(' ')) # filter() is to remove empty elements
+    return [_f for _f in s.split(' ') if _f] # remove empty elements
 
 def getfields(s):
     fields = [getwords(field) for field in s.split(' - ')]
-    return filter(None, fields)
+    return [_f for _f in fields if _f]
 
 def unpack_fields(fields):
     result = []
@@ -118,7 +118,7 @@ def build_word_dict(objects, j=job.nulljob):
 def merge_similar_words(word_dict):
     """Take all keys in word_dict that are similar, and merge them together.
     """
-    keys = word_dict.keys()
+    keys = list(word_dict.keys())
     keys.sort(key=len)# we want the shortest word to stay
     while keys:
         key = keys.pop(0)
@@ -138,7 +138,7 @@ def reduce_common_words(word_dict, threshold):
     Because if we remove them, we will miss some duplicates!
     """
     uncommon_words = set(word for word, objects in word_dict.items() if len(objects) < threshold)
-    for word, objects in word_dict.items():
+    for word, objects in list(word_dict.items()):
         if len(objects) < threshold:
             continue
         reduced = set()

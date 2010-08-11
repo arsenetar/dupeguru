@@ -25,6 +25,9 @@ class NamedObject(object):
         self.path = Path('')
         self.words = getwords(name)
     
+    def __repr__(self):
+        return '<NamedObject %r>' % self.name
+    
 
 no = NamedObject
 
@@ -297,8 +300,8 @@ class ScannerTestFakeFiles(TestCase):
         s.scanned_tags = set(['title'])
         o1 = no('foo')
         o2 = no('bar')
-        o1.title = u'foobar\u00e9'
-        o2.title = u'foobar\u00e9'
+        o1.title = 'foobar\u00e9'
+        o2.title = 'foobar\u00e9'
         try:
             r = s.GetDupeGroups([o1, o2])
         except UnicodeEncodeError:
@@ -362,11 +365,11 @@ class ScannerTestFakeFiles(TestCase):
         f1 = no('foobar')
         f2 = no('foobar')
         f3 = no('foobar')
-        f1.path = Path(u'foo1\u00e9')
-        f2.path = Path(u'foo2\u00e9')
-        f3.path = Path(u'foo3\u00e9')
-        s.ignore_list.Ignore(unicode(f1.path),unicode(f2.path))
-        s.ignore_list.Ignore(unicode(f1.path),unicode(f3.path))
+        f1.path = Path('foo1\u00e9')
+        f2.path = Path('foo2\u00e9')
+        f3.path = Path('foo3\u00e9')
+        s.ignore_list.Ignore(str(f1.path),str(f2.path))
+        s.ignore_list.Ignore(str(f1.path),str(f3.path))
         r = s.GetDupeGroups([f1,f2,f3])
         eq_(len(r), 1)
         g = r[0]
@@ -379,7 +382,7 @@ class ScannerTestFakeFiles(TestCase):
         # A very wrong way to use any() was added at some point, causing resulting group list
         # to be empty.
         class FalseNamedObject(NamedObject):
-            def __nonzero__(self):
+            def __bool__(self):
                 return False
         
     

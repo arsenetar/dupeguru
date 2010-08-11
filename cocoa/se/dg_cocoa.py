@@ -11,8 +11,10 @@ from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
 
 # Fix py2app imports with chokes on relative imports and other stuff
-from core_se import fs, data
-from lxml import etree, _elementpath
+import hsutil.conflict
+import core.engine, core.fs, core.app
+import core_se.fs, core_se.data
+import lxml.etree, lxml._elementpath
 import gzip
 
 class PyDupeGuru(PyDupeGuruBase):

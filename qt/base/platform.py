@@ -11,10 +11,10 @@ import logging
 import sys
 
 if sys.platform == 'win32':
-    from platform_win import *
+    from .platform_win import *
 elif sys.platform == 'darwin':
-    from platform_osx import *
+    from .platform_osx import *
 elif sys.platform == 'linux2':
-    from platform_lnx import *
+    from .platform_lnx import *
 else:
     pass # unsupported platform

@@ -39,5 +39,5 @@ class ProblemRow(Row):
         Row.__init__(self, table)
         self.dupe = dupe
         self.msg = msg
-        self.path = unicode(dupe.path)
+        self.path = str(dupe.path)
     

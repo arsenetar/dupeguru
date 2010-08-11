@@ -18,7 +18,7 @@ def main(edition, ui, dev):
     if ui not in ('cocoa', 'qt'):
         ui = 'cocoa' if sys.platform == 'darwin' else 'qt'
     build_type = 'Dev' if dev else 'Release'
-    print "Configuring dupeGuru {0} for UI {1} ({2})".format(edition.upper(), ui, build_type)
+    print("Configuring dupeGuru {0} for UI {1} ({2})".format(edition.upper(), ui, build_type))
     conf = {
         'edition': edition,
         'ui': ui,

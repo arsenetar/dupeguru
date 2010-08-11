@@ -39,9 +39,9 @@ static PyObject* getblock(PyObject *image)
         pg = PySequence_ITEM(ppixel, 1);
         pb = PySequence_ITEM(ppixel, 2);
         Py_DECREF(ppixel);
-        r = PyInt_AsSsize_t(pr);
-        g = PyInt_AsSsize_t(pg);
-        b = PyInt_AsSsize_t(pb);
+        r = PyLong_AsLong(pr);
+        g = PyLong_AsLong(pg);
+        b = PyLong_AsLong(pb);
         Py_DECREF(pr);
         Py_DECREF(pg);
         Py_DECREF(pb);
@@ -67,14 +67,14 @@ static PyObject* getblock(PyObject *image)
  */
 static int diff(PyObject *first, PyObject *second)
 {
-    Py_ssize_t r1, g1, b1, r2, b2, g2;
+    int r1, g1, b1, r2, b2, g2;
     PyObject *pr, *pg, *pb;
     pr = PySequence_ITEM(first, 0);
     pg = PySequence_ITEM(first, 1);
     pb = PySequence_ITEM(first, 2);
-    r1 = PyInt_AsSsize_t(pr);
-    g1 = PyInt_AsSsize_t(pg);
-    b1 = PyInt_AsSsize_t(pb);
+    r1 = PyLong_AsLong(pr);
+    g1 = PyLong_AsLong(pg);
+    b1 = PyLong_AsLong(pb);
     Py_DECREF(pr);
     Py_DECREF(pg);
     Py_DECREF(pb);
@@ -82,9 +82,9 @@ static int diff(PyObject *first, PyObject *second)
     pr = PySequence_ITEM(second, 0);
     pg = PySequence_ITEM(second, 1);
     pb = PySequence_ITEM(second, 2);
-    r2 = PyInt_AsSsize_t(pr);
-    g2 = PyInt_AsSsize_t(pg);
-    b2 = PyInt_AsSsize_t(pb);
+    r2 = PyLong_AsLong(pr);
+    g2 = PyLong_AsLong(pg);
+    b2 = PyLong_AsLong(pb);
     Py_DECREF(pr);
     Py_DECREF(pg);
     Py_DECREF(pb);
@@ -115,8 +115,8 @@ static PyObject* block_getblocks2(PyObject *self, PyObject *args)
     pimage_size = PyObject_GetAttrString(image, "size");
     pwidth = PySequence_ITEM(pimage_size, 0);
     pheight = PySequence_ITEM(pimage_size, 1);
-    width = PyInt_AsSsize_t(pwidth);
-    height = PyInt_AsSsize_t(pheight);
+    width = PyLong_AsLong(pwidth);
+    height = PyLong_AsLong(pheight);
     Py_DECREF(pimage_size);
     Py_DECREF(pwidth);
     Py_DECREF(pheight);
@@ -147,8 +147,8 @@ static PyObject* block_getblocks2(PyObject *self, PyObject *args)
             left = min(iw*block_width, width-block_width);
             right = left + block_width;
             pbox = inttuple(4, left, top, right, bottom);
-            pmethodname = PyString_FromString("crop");
-            pcrop = PyObject_CallMethodObjArgs(image, pmethodname, pbox);
+            pmethodname = PyUnicode_FromString("crop");
+            pcrop = PyObject_CallMethodObjArgs(image, pmethodname, pbox, NULL);
             Py_DECREF(pmethodname);
             Py_DECREF(pbox);
             if (pcrop == NULL) {
@@ -207,7 +207,7 @@ static PyObject* block_avgdiff(PyObject *self, PyObject *args)
         Py_DECREF(item1);
         Py_DECREF(item2);
         if ((sum > limit*iteration_count) && (iteration_count >= min_iterations)) {
-            return PyInt_FromSsize_t(limit + 1);
+            return PyLong_FromLong(limit + 1);
         }
     }
     
@@ -215,7 +215,7 @@ static PyObject* block_avgdiff(PyObject *self, PyObject *args)
     if (!result && sum) {
         result = 1;
     }
-    return PyInt_FromSsize_t(result);
+    return PyLong_FromLong(result);
 }
 
 static PyMethodDef BlockMethods[] = {
@@ -224,16 +224,30 @@ static PyMethodDef BlockMethods[] = {
     {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC
-init_block(void)
+static struct PyModuleDef BlockDef = {
+    PyModuleDef_HEAD_INIT,
+    "_block",
+    NULL,
+    -1,
+    BlockMethods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyObject *
+PyInit__block(void)
 {
-    PyObject *m = Py_InitModule("_block", BlockMethods);
+    PyObject *m = PyModule_Create(&BlockDef);
     if (m == NULL) {
-        return;
+        return NULL;
     }
     
     NoBlocksError = PyErr_NewException("_block.NoBlocksError", NULL, NULL);
     PyModule_AddObject(m, "NoBlocksError", NoBlocksError);
     DifferentBlockCountError = PyErr_NewException("_block.DifferentBlockCountError", NULL, NULL);
     PyModule_AddObject(m, "DifferentBlockCountError", DifferentBlockCountError);
+
+    return m;
 }

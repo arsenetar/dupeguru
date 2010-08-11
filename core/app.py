@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from __future__ import unicode_literals
+
 
 import os
 import os.path as op
@@ -76,7 +76,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _do_delete_dupe(self, dupe):
         if not io.exists(dupe.path):
             return
-        send2trash(unicode(dupe.path)) # Raises OSError when there's a problem
+        send2trash(str(dupe.path)) # Raises OSError when there's a problem
         self.clean_empty_dirs(dupe.path[:-1])
     
     def _do_load(self, j):
@@ -100,7 +100,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         try:
             return self.data.GetDisplayInfo(dupe, group, delta)
         except Exception as e:
-            logging.warning("Exception on GetDisplayInfo for %s: %s", unicode(dupe.path), unicode(e))
+            logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
             return ['---'] * len(self.data.COLUMNS)
     
     def _get_file(self, str_path):
@@ -149,7 +149,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             g = self.results.get_group_of_duplicate(dupe)
             for other in g:
                 if other is not dupe:
-                    self.scanner.ignore_list.Ignore(unicode(other.path), unicode(dupe.path))
+                    self.scanner.ignore_list.Ignore(str(other.path), str(dupe.path))
         self.remove_duplicates(dupes)
     
     def apply_filter(self, filter):
@@ -208,7 +208,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def export_to_xhtml(self, column_ids):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
-        column_ids = map(int, column_ids)
+        column_ids = list(map(int, column_ids))
         column_ids.sort()
         colnames = [col['display'] for i, col in enumerate(self.data.COLUMNS) if i in column_ids]
         rows = []
@@ -232,8 +232,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         dupe = self.selected_dupes[0]
         group = self.results.get_group_of_duplicate(dupe)
         ref = group.ref
-        cmd = cmd.replace('%d', unicode(dupe.path))
-        cmd = cmd.replace('%r', unicode(ref.path))
+        cmd = cmd.replace('%d', str(dupe.path))
+        cmd = cmd.replace('%r', str(ref.path))
         match = re.match(r'"([^"]+)"(.*)', cmd)
         if match is not None:
             # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
@@ -313,7 +313,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             d.rename(newname)
             return True
         except (IndexError, fs.FSError) as e:
-            logging.warning("dupeGuru Warning: %s" % unicode(e))
+            logging.warning("dupeGuru Warning: %s" % str(e))
         return False
     
     def reveal_selected(self):

@@ -23,10 +23,10 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Information    
     def getSelectedDupePath(self):
-        return unicode(self.py.selected_dupe_path())
+        return str(self.py.selected_dupe_path())
     
     def getSelectedDupeRefPath(self):
-        return unicode(self.py.selected_dupe_ref_path())
+        return str(self.py.selected_dupe_ref_path())
     
     #---Properties
     def setMatchScaled_(self,match_scaled):

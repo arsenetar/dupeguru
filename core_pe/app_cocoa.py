@@ -37,15 +37,15 @@ class Photo(fs.File):
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field == 'dimensions':
-            self.dimensions = _block_osx.get_image_size(unicode(self.path))
+            self.dimensions = _block_osx.get_image_size(str(self.path))
     
     def get_blocks(self, block_count_per_side):
         try:
-            blocks = _block_osx.getblocks(unicode(self.path), block_count_per_side)
+            blocks = _block_osx.getblocks(str(self.path), block_count_per_side)
         except Exception as e:
-            raise IOError('The reading of "%s" failed with "%s"' % (unicode(self.path), unicode(e)))
+            raise IOError('The reading of "%s" failed with "%s"' % (str(self.path), str(e)))
         if not blocks:
-            raise IOError('The picture %s could not be read' % unicode(self.path))
+            raise IOError('The picture %s could not be read' % str(self.path))
         return blocks
     
 
@@ -140,7 +140,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                 photos = as_fetch(a.photo_library_album().photos, k.item)
                 for photo in j.iter_with_progress(photos):
                     try:
-                        self.path2iphoto[unicode(photo.image_path(timeout=0))] = photo
+                        self.path2iphoto[str(photo.image_path(timeout=0))] = photo
                     except CommandError:
                         pass
             except (CommandError, RuntimeError):
@@ -151,15 +151,15 @@ class DupeGuruPE(app_cocoa.DupeGuru):
     
     def _do_delete_dupe(self, dupe):
         if isinstance(dupe, IPhoto):
-            if unicode(dupe.path) in self.path2iphoto:
-                photo = self.path2iphoto[unicode(dupe.path)]
+            if str(dupe.path) in self.path2iphoto:
+                photo = self.path2iphoto[str(dupe.path)]
                 try:
                     a = app('iPhoto')
                     a.remove(photo, timeout=0)
                 except (CommandError, RuntimeError) as e:
-                    raise EnvironmentError(unicode(e))
+                    raise EnvironmentError(str(e))
             else:
-                msg = u"Could not find photo %s in iPhoto Library" % unicode(dupe.path)
+                msg = "Could not find photo %s in iPhoto Library" % str(dupe.path)
                 raise EnvironmentError(msg)
         else:
             app_cocoa.DupeGuru._do_delete_dupe(self, dupe)

@@ -72,8 +72,24 @@ static PyMethodDef CacheMethods[] = {
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
-PyMODINIT_FUNC
-init_cache(void)
+static struct PyModuleDef CacheDef = {
+    PyModuleDef_HEAD_INIT,
+    "_cache",
+    NULL,
+    -1,
+    CacheMethods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyObject *
+PyInit__cache(void)
 {
-    (void)Py_InitModule("_cache", CacheMethods);
+    PyObject *m = PyModule_Create(&CacheDef);
+    if (m == NULL) {
+        return NULL;
+    }
+    return m;
 }

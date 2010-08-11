@@ -41,14 +41,14 @@ class File(fs.File):
         fs.File._read_info(self, field)
         if field == 'dimensions':
             try:
-                im = PIL.Image.open(unicode(self.path))
+                im = PIL.Image.open(str(self.path))
                 self.dimensions = im.size
             except IOError:
                 self.dimensions = (0, 0)
-                logging.warning(u"Could not read image '%s'", unicode(self.path))
+                logging.warning("Could not read image '%s'", str(self.path))
     
     def get_blocks(self, block_count_per_side):
-        image = QImage(unicode(self.path))
+        image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
         return getblocks(image, block_count_per_side)
     

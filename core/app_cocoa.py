@@ -49,11 +49,11 @@ class DupeGuru(app.DupeGuru):
     #--- Override
     @staticmethod
     def _open_path(path):
-        NSWorkspace.sharedWorkspace().openFile_(unicode(path))
+        NSWorkspace.sharedWorkspace().openFile_(str(path))
     
     @staticmethod
     def _reveal_path(path):
-        NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(unicode(path), '')
+        NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(str(path), '')
     
     def _start_job(self, jobid, func):
         try:

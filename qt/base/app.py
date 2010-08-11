@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from __future__ import unicode_literals
+
 
 import logging
 import os
@@ -54,7 +54,7 @@ class DupeGuru(DupeGuruBase, QObject):
     DELTA_COLUMNS = frozenset()
     
     def __init__(self, data_module, appid):
-        appdata = unicode(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
+        appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
         if not op.exists(appdata):
             os.makedirs(appdata)
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
@@ -120,7 +120,7 @@ class DupeGuru(DupeGuruBase, QObject):
     #--- Override
     @staticmethod
     def _open_path(path):
-        url = QUrl.fromLocalFile(unicode(path))
+        url = QUrl.fromLocalFile(str(path))
         QDesktopServices.openUrl(url)
     
     @staticmethod
@@ -150,7 +150,7 @@ class DupeGuru(DupeGuruBase, QObject):
         opname = 'copy' if copy else 'move'
         title = "Select a directory to {0} marked files to".format(opname)
         flags = QFileDialog.ShowDirsOnly
-        destination = unicode(QFileDialog.getExistingDirectory(self.main_window, title, '', flags))
+        destination = str(QFileDialog.getExistingDirectory(self.main_window, title, '', flags))
         if not destination:
             return
         recreate_path = self.prefs.destination_type

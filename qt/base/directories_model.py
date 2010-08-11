@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import urllib
+import urllib.parse
 
 from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
@@ -101,9 +101,9 @@ class DirectoriesModel(TreeModel):
         if not mimeData.hasFormat('text/uri-list'):
             return False
         data = str(mimeData.data('text/uri-list'))
-        unquoted = urllib.unquote(data)
-        urls = unicode(unquoted, 'utf-8').split('\r\n')
-        paths = [unicode(QUrl(url).toLocalFile()) for url in urls if url]
+        unquoted = urllib.parse.unquote(data)
+        urls = str(unquoted, 'utf-8').split('\r\n')
+        paths = [str(QUrl(url).toLocalFile()) for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
         self.reset()

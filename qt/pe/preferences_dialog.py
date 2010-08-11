@@ -46,7 +46,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
-        prefs.custom_command = unicode(self.customCommandEdit.text())
+        prefs.custom_command = str(self.customCommandEdit.text())
     
     def resetToDefaults(self):
         self.load(preferences.Preferences())

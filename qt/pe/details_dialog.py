@@ -28,11 +28,11 @@ class DetailsDialog(DetailsDialogBase, Ui_DetailsDialog):
         group = self.app.results.get_group_of_duplicate(dupe)
         ref = group.ref
         
-        self.selectedPixmap = QPixmap(unicode(dupe.path))
+        self.selectedPixmap = QPixmap(str(dupe.path))
         if ref is dupe:
             self.referencePixmap = None
         else:
-            self.referencePixmap = QPixmap(unicode(ref.path))
+            self.referencePixmap = QPixmap(str(ref.path))
         self._updateImages()
     
     def _updateImages(self):

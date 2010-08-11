@@ -34,16 +34,16 @@ def prepare_pictures(pictures, cache_path, j=job.nulljob):
     try:
         for picture in j.iter_with_progress(pictures, 'Analyzed %d/%d pictures'):
             picture.dimensions
-            picture.unicode_path = unicode(picture.path)
+            picture.unicode_path = str(picture.path)
             try:
                 if picture.unicode_path not in cache:
                     blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
             except (IOError, ValueError) as e:
-                logging.warning(unicode(e))
+                logging.warning(str(e))
             except MemoryError:
-                logging.warning(u'Ran out of memory while reading %s of size %d' % (picture.unicode_path, picture.size))
+                logging.warning('Ran out of memory while reading %s of size %d' % (picture.unicode_path, picture.size))
                 if picture.size < 10 * 1024 * 1024: # We're really running out of memory
                     raise
     except MemoryError:

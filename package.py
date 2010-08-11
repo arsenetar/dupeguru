@@ -30,7 +30,7 @@ def package_windows(edition, dev):
     # On Windows, PyInstaller is used to build an exe (py2exe creates a very bad looking icon)
     # The release version is outdated. Use at least r672 on http://svn.pyinstaller.org/trunk
     if sys.platform != "win32":
-        print "Qt packaging only works under Windows."
+        print("Qt packaging only works under Windows.")
         return
     add_to_pythonpath('.')
     add_to_pythonpath('qt')
@@ -60,7 +60,7 @@ def package_windows(edition, dev):
     help_basedir = '..\\..\\help_{0}'.format(edition)
     help_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
     help_path = op.join(help_basedir, help_dir)
-    print "Copying {0} to dist\\help".format(help_path)
+    print("Copying {0} to dist\\help".format(help_path))
     shutil.copytree(help_path, 'dist\\help')
 
     # AdvancedInstaller.com has to be in your PATH
@@ -106,7 +106,7 @@ def main():
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
-    print "Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui)
+    print("Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if ui == 'cocoa':
         package_cocoa(edition)
     elif ui == 'qt':
@@ -115,7 +115,7 @@ def main():
         elif sys.platform == "linux2":
             package_debian(edition)
         else:
-            print "Qt packaging only works under Windows or Linux."
+            print("Qt packaging only works under Windows or Linux.")
 
 if __name__ == '__main__':
     main()

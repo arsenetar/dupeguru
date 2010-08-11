@@ -109,7 +109,7 @@ class TCDupeGuru(TestCase):
     
     def test_Scan_with_objects_evaluating_to_false(self):
         class FakeFile(fs.File):
-            def __nonzero__(self):
+            def __bool__(self):
                 return False
             
         
@@ -200,11 +200,11 @@ class TCDupeGuruWithResults(TestCase):
         if expected is not None:
             expected = set(expected)
             not_called = expected - calls
-            assert not not_called, u"These calls haven't been made: {0}".format(not_called)
+            assert not not_called, "These calls haven't been made: {0}".format(not_called)
         if not_expected is not None:
             not_expected = set(not_expected)
             called = not_expected & calls
-            assert not called, u"These calls shouldn't have been made: {0}".format(called)
+            assert not called, "These calls shouldn't have been made: {0}".format(called)
         gui.clear_calls()
     
     def clear_gui_calls(self):
@@ -409,9 +409,9 @@ class TCDupeGuruWithResults(TestCase):
     
     def test_only_unicode_is_added_to_ignore_list(self):
         def FakeIgnore(first,second):
-            if not isinstance(first,unicode):
+            if not isinstance(first,str):
                 self.fail()
-            if not isinstance(second,unicode):
+            if not isinstance(second,str):
                 self.fail()
         
         app = self.app
@@ -423,11 +423,11 @@ class TCDupeGuruWithResults(TestCase):
 class TCDupeGuru_renameSelected(TestCase):
     def setUp(self):
         p = self.tmppath()
-        fp = open(unicode(p + 'foo bar 1'),mode='w')
+        fp = open(str(p + 'foo bar 1'),mode='w')
         fp.close()
-        fp = open(unicode(p + 'foo bar 2'),mode='w')
+        fp = open(str(p + 'foo bar 2'),mode='w')
         fp.close()
-        fp = open(unicode(p + 'foo bar 3'),mode='w')
+        fp = open(str(p + 'foo bar 3'),mode='w')
         fp.close()
         files = fs.get_files(p)
         matches = engine.getmatches(files)

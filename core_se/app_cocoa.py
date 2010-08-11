@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from __future__ import unicode_literals
+
 
 import logging
 
@@ -24,17 +24,17 @@ def is_bundle(str_path):
     sw = NSWorkspace.sharedWorkspace()
     uti, error = sw.typeOfFile_error_(str_path, None)
     if error is not None:
-        logging.warning(u'There was an error trying to detect the UTI of %s', str_path)
+        logging.warning('There was an error trying to detect the UTI of %s', str_path)
     return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
 
 class Bundle(BundleBase):
     @classmethod
     def can_handle(cls, path):
-        return not io.islink(path) and io.isdir(path) and is_bundle(unicode(path))
+        return not io.islink(path) and io.isdir(path) and is_bundle(str(path))
     
 
 class Directories(DirectoriesBase):
-    ROOT_PATH_TO_EXCLUDE = map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev'])
+    ROOT_PATH_TO_EXCLUDE = list(map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev']))
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
         DirectoriesBase.__init__(self, fileclasses=[Bundle, fs.File])

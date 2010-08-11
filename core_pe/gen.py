@@ -15,11 +15,11 @@ def move(src, dst):
         return
     if op.exists(dst):
         os.remove(dst)
-    print 'Moving %s --> %s' % (src, dst)
+    print('Moving %s --> %s' % (src, dst))
     os.rename(src, dst)
 
 os.chdir('modules')
-os.system('python setup.py build_ext --inplace')
+os.system('python3 setup.py build_ext --inplace')
 os.chdir('..')
 move(op.join('modules', '_block.so'), '_block.so')
 move(op.join('modules', '_block.pyd'), '_block.pyd')

@@ -82,7 +82,7 @@ class Cache(object):
             self.con.execute(sql, [value, key])
         except sqlite.OperationalError:
             logging.warning('Picture cache could not set %r for key %r', value, key)
-        except sqlite.DatabaseError, e:
+        except sqlite.DatabaseError as e:
             logging.warning('DatabaseError while setting %r for key %r: %s', value, key, str(e))
     
     def _create_con(self, second_try=False):
@@ -97,7 +97,7 @@ class Cache(object):
             self.con.execute("select * from pictures where 1=2")
         except sqlite.OperationalError: # new db
             create_tables()
-        except sqlite.DatabaseError, e: # corrupted db
+        except sqlite.DatabaseError as e: # corrupted db
             if second_try:
                 raise # Something really strange is happening
             logging.warning('Could not create picture cache because of an error: %s', str(e))

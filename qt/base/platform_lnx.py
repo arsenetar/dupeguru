@@ -7,5 +7,5 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-INITIAL_FOLDER_IN_DIALOGS = u'/'
+INITIAL_FOLDER_IN_DIALOGS = '/'
 HELP_PATH = '/usr/local/share/dupeguru_{0}/help'

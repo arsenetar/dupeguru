@@ -41,7 +41,7 @@ class DupeGuruME(DupeGuruBase):
                 try:
                     track.delete(timeout=0)
                 except CommandError as e:
-                    logging.warning('Error while trying to remove a track from iTunes: %s' % unicode(e))
+                    logging.warning('Error while trying to remove a track from iTunes: %s' % str(e))
         
         self._start_job(JOB_REMOVE_DEAD_TRACKS, do)
     

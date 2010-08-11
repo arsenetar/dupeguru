@@ -6,10 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from StringIO import StringIO
 import os.path as op
 import os
-import threading
 
 from hsutil.testcase import TestCase
 

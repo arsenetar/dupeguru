@@ -9,5 +9,5 @@
 
 # dummy unit to allow the app to run under OSX during development
 
-INITIAL_FOLDER_IN_DIALOGS = u'/'
+INITIAL_FOLDER_IN_DIALOGS = '/'
 HELP_PATH = ''

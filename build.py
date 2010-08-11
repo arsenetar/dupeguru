@@ -20,10 +20,10 @@ from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, cop
 
 def build_cocoa(edition, dev, help_destpath):
     if not dev:
-        print "Building help index"
+        print("Building help index")
         os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
     
-    print "Building dg_cocoa.plugin"
+    print("Building dg_cocoa.plugin")
     if op.exists('build'):
         shutil.rmtree('build')
     os.mkdir('build')
@@ -54,7 +54,7 @@ def build_cocoa(edition, dev, help_destpath):
         pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
         open(pthpath, 'w').write(op.abspath('.'))
     os.chdir(cocoa_project_path)
-    print "Building the XCode project"
+    print("Building the XCode project")
     args = []
     if dev:
         args.append('-configuration dev')
@@ -68,10 +68,10 @@ def build_qt(edition, dev):
     build_all_qt_ui(op.join('qtlib', 'ui'))
     build_all_qt_ui(op.join('qt', 'base'))
     build_all_qt_ui(op.join('qt', edition))
-    print_and_do("pyrcc4 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
+    print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     if edition == 'pe':
         os.chdir(op.join('qt', edition))
-        os.system('python gen.py')
+        os.system('python3 gen.py')
         os.chdir(op.join('..', '..'))
 
 def main():
@@ -79,11 +79,11 @@ def main():
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
-    print "Building dupeGuru {0} with UI {1}".format(edition.upper(), ui)
+    print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if dev:
-        print "Building in Dev mode"
+        print("Building in Dev mode")
     add_to_pythonpath('.')
-    print "Generating Help"
+    print("Generating Help")
     windows = sys.platform == 'win32'
     profile = 'win_en' if windows else 'osx_en'
     help_dir = 'help_{0}'.format(edition)
@@ -91,10 +91,10 @@ def main():
     help_basepath = op.abspath(help_dir)
     help_destpath = op.abspath(op.join(help_dir, dest_dir))
     helpgen.gen(help_basepath, help_destpath, profile=profile)
-    print "Building dupeGuru"
+    print("Building dupeGuru")
     if edition == 'pe':
         os.chdir('core_pe')
-        os.system('python gen.py')
+        os.system('python3 gen.py')
         os.chdir('..')
     if ui == 'cocoa':
         build_cocoa(edition, dev, help_destpath)

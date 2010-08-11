@@ -12,7 +12,7 @@
 # resulting needless complexity and memory usage. It's been a while since I wanted to do that fork,
 # and I'm doing it now.
 
-from __future__ import unicode_literals
+
 
 import hashlib
 import logging
@@ -25,13 +25,13 @@ class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
     def __init__(self, fsobject, parent=None):
         message = self.cls_message
-        if isinstance(fsobject, basestring):
+        if isinstance(fsobject, str):
             name = fsobject
         elif isinstance(fsobject, File):
             name = fsobject.name
         else:
             name = ''
-        parentname = unicode(parent) if parent is not None else ''
+        parentname = str(parent) if parent is not None else ''
         Exception.__init__(self, message.format(name=name, parent=parentname))
     
 
@@ -119,7 +119,7 @@ class File(object):
         If `attrnames` is not None, caches only attrnames.
         """
         if attrnames is None:
-            attrnames = self.INITIAL_INFO.keys()
+            attrnames = list(self.INITIAL_INFO.keys())
         for attrname in attrnames:
             if attrname not in self.__dict__:
                 self._read_info(attrname)

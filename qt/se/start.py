@@ -6,6 +6,8 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import sys
+import sip
+sip.setapi('QVariant', 1)
 
 from PyQt4.QtCore import QCoreApplication
 from PyQt4.QtGui import QApplication, QIcon, QPixmap

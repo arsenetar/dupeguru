@@ -53,7 +53,7 @@ class Scanner(object):
             func = {
                 SCAN_TYPE_FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
                 SCAN_TYPE_FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
-                SCAN_TYPE_TAG: lambda f: [engine.getwords(unicode(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
+                SCAN_TYPE_TAG: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
             }[self.scan_type]
             for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
                 f.words = func(f)
@@ -67,8 +67,12 @@ class Scanner(object):
     def _tie_breaker(ref, dupe):
         refname = rem_file_ext(ref.name).lower()
         dupename = rem_file_ext(dupe.name).lower()
-        if 'copy' in refname and 'copy' not in dupename:
+        if 'copy' in dupename:
+            return False
+        if 'copy' in refname:
             return True
+        if dupename.startswith(refname) and (dupename[len(refname):].strip().isdigit()):
+            return False
         if refname.startswith(dupename) and (refname[len(dupename):].strip().isdigit()):
             return True
         return len(dupe.path) > len(ref.path)
@@ -88,7 +92,7 @@ class Scanner(object):
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, 'Processed %d/%d matches against the ignore list')
             matches = [m for m in iter_matches 
-                if not self.ignore_list.AreIgnored(unicode(m.first.path), unicode(m.second.path))]
+                if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
         matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])

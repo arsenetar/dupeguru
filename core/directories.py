@@ -151,11 +151,11 @@ class Directories(object):
             root = etree.Element('directories')
             for root_path in self:
                 root_path_node = etree.SubElement(root, 'root_directory')
-                root_path_node.set('path', unicode(root_path))
-            for path, state in self.states.iteritems():
+                root_path_node.set('path', str(root_path))
+            for path, state in self.states.items():
                 state_node = etree.SubElement(root, 'state')
-                state_node.set('path', unicode(path))
-                state_node.set('value', unicode(state))
+                state_node.set('path', str(path))
+                state_node.set('value', str(state))
             tree = etree.ElementTree(root)
             tree.write(fp, encoding='utf-8')
     

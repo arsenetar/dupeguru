@@ -20,7 +20,7 @@ def main():
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
-    print "Running dupeGuru {0} with UI {1}".format(edition.upper(), ui)
+    print("Running dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if ui == 'cocoa':
         subfolder = 'dev' if dev else 'release'
         app_path = {
@@ -32,8 +32,9 @@ def main():
     elif ui == 'qt':
         add_to_pythonpath('.')
         add_to_pythonpath('qt')
+        add_to_pythonpath(op.join('qt', 'base'))
         os.chdir(op.join('qt', edition))
-        os.system('python start.py')
+        os.system('python3 start.py')
         os.chdir('..')
 
 if __name__ == '__main__':
