@@ -82,17 +82,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _do_load(self, j):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
         self.notify('directories_changed')
-        j = j.start_subjob([1, 9])
         self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
-        files = flatten(g[:] for g in self.results.groups)
-        try:
-            for file in j.iter_with_progress(files, 'Reading metadata %d/%d'):
-                file._read_all_info(attrnames=self.data.METADATA_TO_READ)
-        except (OSError, IOError):
-            # If this error is raised, it means that a file was deleted while we were reading
-            # metadata. Proper handling of this rare occurrence is complex because there's no easy
-            # way to remove an arbitrary file from the Results. Thus, we simply clear them.
-            self.results.groups = []
     
     def _get_display_info(self, dupe, group, delta=False):
         if (dupe is None) or (group is None):
@@ -105,7 +95,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def _get_file(self, str_path):
         path = Path(str_path)
-        return fs.get_file(path, self.directories.fileclasses)    
+        f = fs.get_file(path, self.directories.fileclasses)    
+        try:
+            f._read_all_info(attrnames=self.data.METADATA_TO_READ)
+            return f
+        except EnvironmentError:
+            return None
     
     def _job_completed(self, jobid):
         # Must be called by subclasses when they detect that an async job is completed.
