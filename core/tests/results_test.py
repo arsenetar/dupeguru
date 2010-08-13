@@ -54,13 +54,13 @@ class TCResultsEmpty(TestCase):
         self.test_stat_line() # make sure that the stats line isn't saying we applied a '[' filter
     
     def test_stat_line(self):
-        self.assertEqual("0 / 0 (0.00 B / 0.00 B) duplicates marked.",self.results.stat_line)
+        eq_("0 / 0 (0.00 B / 0.00 B) duplicates marked.",self.results.stat_line)
     
     def test_groups(self):
-        self.assertEqual(0,len(self.results.groups))
+        eq_(0,len(self.results.groups))
     
     def test_get_group_of_duplicate(self):
-        self.assert_(self.results.get_group_of_duplicate('foo') is None)
+        assert self.results.get_group_of_duplicate('foo') is None
     
     def test_save_to_xml(self):
         f = io.BytesIO()
@@ -68,7 +68,7 @@ class TCResultsEmpty(TestCase):
         f.seek(0)
         doc = etree.parse(f)
         root = doc.getroot()
-        self.assertEqual('results', root.tag)
+        eq_('results', root.tag)
     
 
 class TCResultsWithSomeGroups(TestCase):
@@ -78,57 +78,57 @@ class TCResultsWithSomeGroups(TestCase):
         self.results.groups = self.groups
     
     def test_stat_line(self):
-        self.assertEqual("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
     
     def test_groups(self):
-        self.assertEqual(2,len(self.results.groups))
+        eq_(2,len(self.results.groups))
     
     def test_get_group_of_duplicate(self):
         for o in self.objects:
             g = self.results.get_group_of_duplicate(o)
-            self.assert_(isinstance(g, engine.Group))
-            self.assert_(o in g)
-        self.assert_(self.results.get_group_of_duplicate(self.groups[0]) is None)
+            assert isinstance(g, engine.Group)
+            assert o in g
+        assert self.results.get_group_of_duplicate(self.groups[0]) is None
     
     def test_remove_duplicates(self):
         g1,g2 = self.results.groups
         self.results.remove_duplicates([g1.dupes[0]])
-        self.assertEqual(2,len(g1))
-        self.assert_(g1 in self.results.groups)
+        eq_(2,len(g1))
+        assert g1 in self.results.groups
         self.results.remove_duplicates([g1.ref])
-        self.assertEqual(2,len(g1))
-        self.assert_(g1 in self.results.groups)
+        eq_(2,len(g1))
+        assert g1 in self.results.groups
         self.results.remove_duplicates([g1.dupes[0]])
-        self.assertEqual(0,len(g1))
-        self.assert_(g1 not in self.results.groups)
+        eq_(0,len(g1))
+        assert g1 not in self.results.groups
         self.results.remove_duplicates([g2.dupes[0]])
-        self.assertEqual(0,len(g2))
-        self.assert_(g2 not in self.results.groups)
-        self.assertEqual(0,len(self.results.groups))
+        eq_(0,len(g2))
+        assert g2 not in self.results.groups
+        eq_(0,len(self.results.groups))
     
     def test_remove_duplicates_with_ref_files(self):
         g1,g2 = self.results.groups
         self.objects[0].is_ref = True
         self.objects[1].is_ref = True
         self.results.remove_duplicates([self.objects[2]])
-        self.assertEqual(0,len(g1))
-        self.assert_(g1 not in self.results.groups)
+        eq_(0,len(g1))
+        assert g1 not in self.results.groups
     
     def test_make_ref(self):
         g = self.results.groups[0]
         d = g.dupes[0]
         self.results.make_ref(d)
-        self.assert_(d is g.ref)
+        assert d is g.ref
     
     def test_sort_groups(self):
         self.results.make_ref(self.objects[1]) #We want to make the 1024 sized object to go ref.
         g1,g2 = self.groups
         self.results.sort_groups(2) #2 is the key for size
-        self.assert_(self.results.groups[0] is g2)
-        self.assert_(self.results.groups[1] is g1)
+        assert self.results.groups[0] is g2
+        assert self.results.groups[1] is g1
         self.results.sort_groups(2,False)
-        self.assert_(self.results.groups[0] is g1)
-        self.assert_(self.results.groups[1] is g2)
+        assert self.results.groups[0] is g1
+        assert self.results.groups[1] is g2
     
     def test_set_groups_when_sorted(self):
         self.results.make_ref(self.objects[1]) #We want to make the 1024 sized object to go ref.
@@ -137,24 +137,24 @@ class TCResultsWithSomeGroups(TestCase):
         g1,g2 = groups
         g1.switch_ref(objects[1])
         self.results.groups = groups
-        self.assert_(self.results.groups[0] is g2)
-        self.assert_(self.results.groups[1] is g1)
+        assert self.results.groups[0] is g2
+        assert self.results.groups[1] is g1
     
     def test_get_dupe_list(self):
-        self.assertEqual([self.objects[1],self.objects[2],self.objects[4]],self.results.dupes)
+        eq_([self.objects[1],self.objects[2],self.objects[4]],self.results.dupes)
     
     def test_dupe_list_is_cached(self):
-        self.assert_(self.results.dupes is self.results.dupes)
+        assert self.results.dupes is self.results.dupes
     
     def test_dupe_list_cache_is_invalidated_when_needed(self):
         o1,o2,o3,o4,o5 = self.objects
-        self.assertEqual([o2,o3,o5],self.results.dupes)
+        eq_([o2,o3,o5],self.results.dupes)
         self.results.make_ref(o2)
-        self.assertEqual([o1,o3,o5],self.results.dupes)
+        eq_([o1,o3,o5],self.results.dupes)
         objects,matches,groups = GetTestGroups()
         o1,o2,o3,o4,o5 = objects
         self.results.groups = groups
-        self.assertEqual([o2,o3,o5],self.results.dupes)
+        eq_([o2,o3,o5],self.results.dupes)
     
     def test_dupe_list_sort(self):
         o1,o2,o3,o4,o5 = self.objects
@@ -164,9 +164,9 @@ class TCResultsWithSomeGroups(TestCase):
         o4.size = 2
         o5.size = 1
         self.results.sort_dupes(2)
-        self.assertEqual([o5,o3,o2],self.results.dupes)
+        eq_([o5,o3,o2],self.results.dupes)
         self.results.sort_dupes(2,False)
-        self.assertEqual([o2,o3,o5],self.results.dupes)
+        eq_([o2,o3,o5],self.results.dupes)
     
     def test_dupe_list_remember_sort(self):
         o1,o2,o3,o4,o5 = self.objects
@@ -177,7 +177,7 @@ class TCResultsWithSomeGroups(TestCase):
         o5.size = 1
         self.results.sort_dupes(2)
         self.results.make_ref(o2)
-        self.assertEqual([o5,o3,o1],self.results.dupes)
+        eq_([o5,o3,o1],self.results.dupes)
     
     def test_dupe_list_sort_delta_values(self):
         o1,o2,o3,o4,o5 = self.objects
@@ -187,19 +187,19 @@ class TCResultsWithSomeGroups(TestCase):
         o4.size = 20
         o5.size = 1 #-19
         self.results.sort_dupes(2,delta=True)
-        self.assertEqual([o5,o2,o3],self.results.dupes)
+        eq_([o5,o2,o3],self.results.dupes)
     
     def test_sort_empty_list(self):
         #There was an infinite loop when sorting an empty list.
         r = Results(data)
         r.sort_dupes(0)
-        self.assertEqual([],r.dupes)
+        eq_([],r.dupes)
     
     def test_dupe_list_update_on_remove_duplicates(self):
         o1,o2,o3,o4,o5 = self.objects
-        self.assertEqual(3,len(self.results.dupes))
+        eq_(3,len(self.results.dupes))
         self.results.remove_duplicates([o2])
-        self.assertEqual(2,len(self.results.dupes))
+        eq_(2,len(self.results.dupes))
     
 
 class TCResultsMarkings(TestCase):
@@ -209,27 +209,27 @@ class TCResultsMarkings(TestCase):
         self.results.groups = self.groups
     
     def test_stat_line(self):
-        self.assertEqual("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.mark(self.objects[1])
-        self.assertEqual("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.mark_invert()
-        self.assertEqual("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.mark_invert()
         self.results.unmark(self.objects[1])
         self.results.mark(self.objects[2])
         self.results.mark(self.objects[4])
-        self.assertEqual("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.mark(self.objects[0]) #this is a ref, it can't be counted
-        self.assertEqual("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("2 / 3 (2.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.groups = self.groups
-        self.assertEqual("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("0 / 3 (0.00 B / 1.01 KB) duplicates marked.",self.results.stat_line)
     
     def test_with_ref_duplicate(self):
         self.objects[1].is_ref = True
         self.results.groups = self.groups
-        self.assert_(not self.results.mark(self.objects[1]))
+        assert not self.results.mark(self.objects[1])
         self.results.mark(self.objects[2])
-        self.assertEqual("1 / 2 (1.00 B / 2.00 B) duplicates marked.",self.results.stat_line)
+        eq_("1 / 2 (1.00 B / 2.00 B) duplicates marked.",self.results.stat_line)
     
     def test_perform_on_marked(self):
         def log_object(o):
@@ -239,17 +239,17 @@ class TCResultsMarkings(TestCase):
         log = []
         self.results.mark_all()
         self.results.perform_on_marked(log_object,False)
-        self.assert_(self.objects[1] in log)
-        self.assert_(self.objects[2] in log)
-        self.assert_(self.objects[4] in log)
-        self.assertEqual(3,len(log))
+        assert self.objects[1] in log
+        assert self.objects[2] in log
+        assert self.objects[4] in log
+        eq_(3,len(log))
         log = []
         self.results.mark_none()
         self.results.mark(self.objects[4])
         self.results.perform_on_marked(log_object,True)
-        self.assertEqual(1,len(log))
-        self.assert_(self.objects[4] in log)
-        self.assertEqual(1,len(self.results.groups))
+        eq_(1,len(log))
+        assert self.objects[4] in log
+        eq_(1,len(self.results.groups))
     
     def test_perform_on_marked_with_problems(self):
         def log_object(o):
@@ -282,44 +282,44 @@ class TCResultsMarkings(TestCase):
         self.objects[1].is_ref = True
         self.results.mark_all()
         self.results.perform_on_marked(log_object,True)
-        self.assert_(self.objects[1] not in log)
-        self.assert_(self.objects[2] in log)
-        self.assert_(self.objects[4] in log)
-        self.assertEqual(2,len(log))
-        self.assertEqual(0,len(self.results.groups))
+        assert self.objects[1] not in log
+        assert self.objects[2] in log
+        assert self.objects[4] in log
+        eq_(2,len(log))
+        eq_(0,len(self.results.groups))
     
     def test_perform_on_marked_remove_objects_only_at_the_end(self):
         def check_groups(o):
-            self.assertEqual(3,len(g1))
-            self.assertEqual(2,len(g2))
+            eq_(3,len(g1))
+            eq_(2,len(g2))
             return True
         
         g1,g2 = self.results.groups
         self.results.mark_all()
         self.results.perform_on_marked(check_groups,True)
-        self.assertEqual(0,len(g1))
-        self.assertEqual(0,len(g2))
-        self.assertEqual(0,len(self.results.groups))
+        eq_(0,len(g1))
+        eq_(0,len(g2))
+        eq_(0,len(self.results.groups))
     
     def test_remove_duplicates(self):
         g1 = self.results.groups[0]
         g2 = self.results.groups[1]
         self.results.mark(g1.dupes[0])
-        self.assertEqual("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.remove_duplicates([g1.dupes[1]])
-        self.assertEqual("1 / 2 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("1 / 2 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.remove_duplicates([g1.dupes[0]])
-        self.assertEqual("0 / 1 (0.00 B / 1.00 B) duplicates marked.",self.results.stat_line)
+        eq_("0 / 1 (0.00 B / 1.00 B) duplicates marked.",self.results.stat_line)
     
     def test_make_ref(self):
         g = self.results.groups[0]
         d = g.dupes[0]
         self.results.mark(d)
-        self.assertEqual("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
+        eq_("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.make_ref(d)
-        self.assertEqual("0 / 3 (0.00 B / 3.00 B) duplicates marked.",self.results.stat_line)
+        eq_("0 / 3 (0.00 B / 3.00 B) duplicates marked.",self.results.stat_line)
         self.results.make_ref(d)
-        self.assertEqual("0 / 3 (0.00 B / 3.00 B) duplicates marked.",self.results.stat_line)
+        eq_("0 / 3 (0.00 B / 3.00 B) duplicates marked.",self.results.stat_line)
     
     def test_SaveXML(self):
         self.results.mark(self.objects[1])
@@ -331,12 +331,12 @@ class TCResultsMarkings(TestCase):
         root = doc.getroot()
         g1, g2 = root.iterchildren('group')
         d1, d2, d3 = g1.iterchildren('file')
-        self.assertEqual('n', d1.get('marked'))
-        self.assertEqual('n', d2.get('marked'))
-        self.assertEqual('y', d3.get('marked'))
+        eq_('n', d1.get('marked'))
+        eq_('n', d2.get('marked'))
+        eq_('y', d3.get('marked'))
         d1, d2 = g2.iterchildren('file')
-        self.assertEqual('n', d1.get('marked'))
-        self.assertEqual('y', d2.get('marked'))
+        eq_('n', d1.get('marked'))
+        eq_('y', d2.get('marked'))
     
     def test_LoadXML(self):
         def get_file(path):
@@ -350,11 +350,11 @@ class TCResultsMarkings(TestCase):
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,get_file)
-        self.assert_(not r.is_marked(self.objects[0]))
-        self.assert_(not r.is_marked(self.objects[1]))
-        self.assert_(r.is_marked(self.objects[2]))
-        self.assert_(not r.is_marked(self.objects[3]))
-        self.assert_(r.is_marked(self.objects[4]))
+        assert not r.is_marked(self.objects[0])
+        assert not r.is_marked(self.objects[1])
+        assert r.is_marked(self.objects[2])
+        assert not r.is_marked(self.objects[3])
+        assert r.is_marked(self.objects[4])
     
 
 class TCResultsXML(TestCase):
@@ -374,33 +374,33 @@ class TCResultsXML(TestCase):
         f.seek(0)
         doc = etree.parse(f)
         root = doc.getroot()
-        self.assertEqual('results', root.tag)
-        self.assertEqual(2, len(root))
-        self.assertEqual(2, len([c for c in root if c.tag == 'group']))
+        eq_('results', root.tag)
+        eq_(2, len(root))
+        eq_(2, len([c for c in root if c.tag == 'group']))
         g1, g2 = root
-        self.assertEqual(6,len(g1))
-        self.assertEqual(3,len([c for c in g1 if c.tag == 'file']))
-        self.assertEqual(3,len([c for c in g1 if c.tag == 'match']))
+        eq_(6,len(g1))
+        eq_(3,len([c for c in g1 if c.tag == 'file']))
+        eq_(3,len([c for c in g1 if c.tag == 'match']))
         d1, d2, d3 = [c for c in g1 if c.tag == 'file']
-        self.assertEqual(op.join('basepath','foo bar'),d1.get('path'))
-        self.assertEqual(op.join('basepath','bar bleh'),d2.get('path'))
-        self.assertEqual(op.join('basepath','foo bleh'),d3.get('path'))
-        self.assertEqual('y',d1.get('is_ref'))
-        self.assertEqual('n',d2.get('is_ref'))
-        self.assertEqual('n',d3.get('is_ref'))
-        self.assertEqual('foo,bar',d1.get('words'))
-        self.assertEqual('bar,bleh',d2.get('words'))
-        self.assertEqual('foo,bleh',d3.get('words'))
-        self.assertEqual(3,len(g2))
-        self.assertEqual(2,len([c for c in g2 if c.tag == 'file']))
-        self.assertEqual(1,len([c for c in g2 if c.tag == 'match']))
+        eq_(op.join('basepath','foo bar'),d1.get('path'))
+        eq_(op.join('basepath','bar bleh'),d2.get('path'))
+        eq_(op.join('basepath','foo bleh'),d3.get('path'))
+        eq_('y',d1.get('is_ref'))
+        eq_('n',d2.get('is_ref'))
+        eq_('n',d3.get('is_ref'))
+        eq_('foo,bar',d1.get('words'))
+        eq_('bar,bleh',d2.get('words'))
+        eq_('foo,bleh',d3.get('words'))
+        eq_(3,len(g2))
+        eq_(2,len([c for c in g2 if c.tag == 'file']))
+        eq_(1,len([c for c in g2 if c.tag == 'match']))
         d1, d2 = [c for c in g2 if c.tag == 'file']
-        self.assertEqual(op.join('basepath','ibabtu'),d1.get('path'))
-        self.assertEqual(op.join('basepath','ibabtu'),d2.get('path'))
-        self.assertEqual('n',d1.get('is_ref'))
-        self.assertEqual('n',d2.get('is_ref'))
-        self.assertEqual('ibabtu',d1.get('words'))
-        self.assertEqual('ibabtu',d2.get('words'))
+        eq_(op.join('basepath','ibabtu'),d1.get('path'))
+        eq_(op.join('basepath','ibabtu'),d2.get('path'))
+        eq_('n',d1.get('is_ref'))
+        eq_('n',d2.get('is_ref'))
+        eq_('ibabtu',d1.get('words'))
+        eq_('ibabtu',d2.get('words'))
     
     def test_LoadXML(self):
         def get_file(path):
@@ -413,25 +413,25 @@ class TCResultsXML(TestCase):
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,get_file)
-        self.assertEqual(2,len(r.groups))
+        eq_(2,len(r.groups))
         g1,g2 = r.groups
-        self.assertEqual(3,len(g1))
-        self.assert_(g1[0].is_ref)
-        self.assert_(not g1[1].is_ref)
-        self.assert_(not g1[2].is_ref)
-        self.assert_(g1[0] is self.objects[0])
-        self.assert_(g1[1] is self.objects[1])
-        self.assert_(g1[2] is self.objects[2])
-        self.assertEqual(['foo','bar'],g1[0].words)
-        self.assertEqual(['bar','bleh'],g1[1].words)
-        self.assertEqual(['foo','bleh'],g1[2].words)
-        self.assertEqual(2,len(g2))
-        self.assert_(not g2[0].is_ref)
-        self.assert_(not g2[1].is_ref)
-        self.assert_(g2[0] is self.objects[3])
-        self.assert_(g2[1] is self.objects[4])
-        self.assertEqual(['ibabtu'],g2[0].words)
-        self.assertEqual(['ibabtu'],g2[1].words)
+        eq_(3,len(g1))
+        assert g1[0].is_ref
+        assert not g1[1].is_ref
+        assert not g1[2].is_ref
+        assert g1[0] is self.objects[0]
+        assert g1[1] is self.objects[1]
+        assert g1[2] is self.objects[2]
+        eq_(['foo','bar'],g1[0].words)
+        eq_(['bar','bleh'],g1[1].words)
+        eq_(['foo','bleh'],g1[2].words)
+        eq_(2,len(g2))
+        assert not g2[0].is_ref
+        assert not g2[1].is_ref
+        assert g2[0] is self.objects[3]
+        assert g2[1] is self.objects[4]
+        eq_(['ibabtu'],g2[0].words)
+        eq_(['ibabtu'],g2[1].words)
     
     def test_LoadXML_with_filename(self):
         def get_file(path):
@@ -442,7 +442,7 @@ class TCResultsXML(TestCase):
         self.results.save_to_xml(filename)
         r = Results(data)
         r.load_from_xml(filename,get_file)
-        self.assertEqual(2,len(r.groups))
+        eq_(2,len(r.groups))
     
     def test_LoadXML_with_some_files_that_dont_exist_anymore(self):
         def get_file(path):
@@ -456,8 +456,8 @@ class TCResultsXML(TestCase):
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,get_file)
-        self.assertEqual(1,len(r.groups))
-        self.assertEqual(3,len(r.groups[0]))
+        eq_(1,len(r.groups))
+        eq_(3,len(r.groups[0]))
     
     def test_LoadXML_missing_attributes_and_bogus_elements(self):
         def get_file(path):
@@ -496,8 +496,8 @@ class TCResultsXML(TestCase):
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f, get_file)
-        self.assertEqual(1,len(r.groups))
-        self.assertEqual(3,len(r.groups[0]))
+        eq_(1,len(r.groups))
+        eq_(3,len(r.groups[0]))
     
     def test_xml_non_ascii(self):
         def get_file(path):
@@ -519,8 +519,8 @@ class TCResultsXML(TestCase):
         r = Results(data)
         r.load_from_xml(f,get_file)
         g = r.groups[0]
-        self.assertEqual("\xe9foo bar",g[0].name)
-        self.assertEqual(['efoo','bar'],g[0].words)
+        eq_("\xe9foo bar",g[0].name)
+        eq_(['efoo','bar'],g[0].words)
     
     def test_load_invalid_xml(self):
         f = io.BytesIO()
@@ -528,7 +528,7 @@ class TCResultsXML(TestCase):
         f.seek(0)
         r = Results(data)
         r.load_from_xml(f,None)
-        self.assertEqual(0,len(r.groups))
+        eq_(0,len(r.groups))
     
     def test_load_non_existant_xml(self):
         r = Results(data)
@@ -536,7 +536,7 @@ class TCResultsXML(TestCase):
             r.load_from_xml('does_not_exist.xml', None)
         except IOError:
             self.fail()
-        self.assertEqual(0,len(r.groups))
+        eq_(0,len(r.groups))
     
     def test_remember_match_percentage(self):
         group = self.groups[0]
@@ -555,12 +555,12 @@ class TCResultsXML(TestCase):
         group = results.groups[0]
         d1, d2, d3 = group
         match = group.get_match_of(d2) #d1 - d2
-        self.assertEqual(42, match[2])
+        eq_(42, match[2])
         match = group.get_match_of(d3) #d1 - d3
-        self.assertEqual(43, match[2])
+        eq_(43, match[2])
         group.switch_ref(d2)
         match = group.get_match_of(d3) #d2 - d3
-        self.assertEqual(46, match[2])
+        eq_(46, match[2])
     
     def test_save_and_load(self):
         # previously, when reloading matches, they wouldn't be reloaded as namedtuples
@@ -589,47 +589,47 @@ class TCResultsFilter(TestCase):
         self.results.apply_filter(r'foo')
     
     def test_groups(self):
-        self.assertEqual(1, len(self.results.groups))
-        self.assert_(self.results.groups[0] is self.groups[0])
+        eq_(1, len(self.results.groups))
+        assert self.results.groups[0] is self.groups[0]
     
     def test_dupes(self):
         # There are 2 objects matching. The first one is ref. Only the 3rd one is supposed to be in dupes.
-        self.assertEqual(1, len(self.results.dupes))
-        self.assert_(self.results.dupes[0] is self.objects[2])
+        eq_(1, len(self.results.dupes))
+        assert self.results.dupes[0] is self.objects[2]
     
     def test_cancel_filter(self):
         self.results.apply_filter(None)
-        self.assertEqual(3, len(self.results.dupes))
-        self.assertEqual(2, len(self.results.groups))
+        eq_(3, len(self.results.dupes))
+        eq_(2, len(self.results.groups))
     
     def test_dupes_reconstructed_filtered(self):
         # make_ref resets self.__dupes to None. When it's reconstructed, we want it filtered
         dupe = self.results.dupes[0] #3rd object
         self.results.make_ref(dupe)
-        self.assertEqual(1, len(self.results.dupes))
-        self.assert_(self.results.dupes[0] is self.objects[0])
+        eq_(1, len(self.results.dupes))
+        assert self.results.dupes[0] is self.objects[0]
     
     def test_include_ref_dupes_in_filter(self):
         # When only the ref of a group match the filter, include it in the group
         self.results.apply_filter(None)
         self.results.apply_filter(r'foo bar')
-        self.assertEqual(1, len(self.results.groups))
-        self.assertEqual(0, len(self.results.dupes))
+        eq_(1, len(self.results.groups))
+        eq_(0, len(self.results.dupes))
     
     def test_filters_build_on_one_another(self):
         self.results.apply_filter(r'bar')
-        self.assertEqual(1, len(self.results.groups))
-        self.assertEqual(0, len(self.results.dupes))
+        eq_(1, len(self.results.groups))
+        eq_(0, len(self.results.dupes))
     
     def test_stat_line(self):
         expected = '0 / 1 (0.00 B / 1.00 B) duplicates marked. filter: foo'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
         self.results.apply_filter(r'bar')
         expected = '0 / 0 (0.00 B / 0.00 B) duplicates marked. filter: foo --> bar'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
         self.results.apply_filter(None)
         expected = '0 / 3 (0.00 B / 1.01 KB) duplicates marked.'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
     
     def test_mark_count_is_filtered_as_well(self):
         self.results.apply_filter(None)
@@ -638,7 +638,7 @@ class TCResultsFilter(TestCase):
             self.results.mark(dupe)
         self.results.apply_filter(r'foo')
         expected = '1 / 1 (1.00 B / 1.00 B) duplicates marked. filter: foo'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
     
     def test_sort_groups(self):
         self.results.apply_filter(None)
@@ -646,22 +646,22 @@ class TCResultsFilter(TestCase):
         g1,g2 = self.groups
         self.results.apply_filter('a') # Matches both group
         self.results.sort_groups(2) #2 is the key for size
-        self.assert_(self.results.groups[0] is g2)
-        self.assert_(self.results.groups[1] is g1)
+        assert self.results.groups[0] is g2
+        assert self.results.groups[1] is g1
         self.results.apply_filter(None)
-        self.assert_(self.results.groups[0] is g2)
-        self.assert_(self.results.groups[1] is g1)
+        assert self.results.groups[0] is g2
+        assert self.results.groups[1] is g1
         self.results.sort_groups(2, False)
         self.results.apply_filter('a')
-        self.assert_(self.results.groups[1] is g2)
-        self.assert_(self.results.groups[0] is g1)
+        assert self.results.groups[1] is g2
+        assert self.results.groups[0] is g1
     
     def test_set_group(self):
         #We want the new group to be filtered
         self.objects, self.matches, self.groups = GetTestGroups()
         self.results.groups = self.groups
-        self.assertEqual(1, len(self.results.groups))
-        self.assert_(self.results.groups[0] is self.groups[0])
+        eq_(1, len(self.results.groups))
+        assert self.results.groups[0] is self.groups[0]
     
     def test_load_cancels_filter(self):
         def get_file(path):
@@ -673,23 +673,23 @@ class TCResultsFilter(TestCase):
         r = Results(data)
         r.apply_filter('foo')
         r.load_from_xml(filename,get_file)
-        self.assertEqual(2,len(r.groups))
+        eq_(2,len(r.groups))
     
     def test_remove_dupe(self):
         self.results.remove_duplicates([self.results.dupes[0]])
         self.results.apply_filter(None)
-        self.assertEqual(2,len(self.results.groups))
-        self.assertEqual(2,len(self.results.dupes))
+        eq_(2,len(self.results.groups))
+        eq_(2,len(self.results.dupes))
         self.results.apply_filter('ibabtu')
         self.results.remove_duplicates([self.results.dupes[0]])
         self.results.apply_filter(None)
-        self.assertEqual(1,len(self.results.groups))
-        self.assertEqual(1,len(self.results.dupes))
+        eq_(1,len(self.results.groups))
+        eq_(1,len(self.results.dupes))
     
     def test_filter_is_case_insensitive(self):
         self.results.apply_filter(None)
         self.results.apply_filter('FOO')
-        self.assertEqual(1, len(self.results.dupes))
+        eq_(1, len(self.results.dupes))
     
     def test_make_ref_on_filtered_out_doesnt_mess_stats(self):
         # When filtered, a group containing filtered out dupes will display them as being reference.
@@ -700,10 +700,10 @@ class TCResultsFilter(TestCase):
         self.results.make_ref(bar_bleh)
         # Now the stats should display *2* markable dupes (instead of 1)
         expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked. filter: foo'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
         self.results.apply_filter(None) # Now let's make sure our unfiltered results aren't fucked up
         expected = '0 / 3 (0.00 B / 3.00 B) duplicates marked.'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
     
 
 class TCResultsRefFile(TestCase):
@@ -716,15 +716,15 @@ class TCResultsRefFile(TestCase):
     
     def test_stat_line(self):
         expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked.'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
     
     def test_make_ref(self):
         d = self.results.groups[0].dupes[1] #non-ref
         r = self.results.groups[0].ref
         self.results.make_ref(d)
         expected = '0 / 1 (0.00 B / 1.00 B) duplicates marked.'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
         self.results.make_ref(r)
         expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked.'
-        self.assertEqual(expected, self.results.stat_line)
+        eq_(expected, self.results.stat_line)
     
