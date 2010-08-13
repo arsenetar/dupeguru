@@ -18,8 +18,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,4)];
-    [deltaColumns removeIndex:3];
+    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
+    [deltaColumns addIndex:4];
     [outline setDeltaColumns:deltaColumns];
 }
 
@@ -30,12 +30,12 @@ http://www.hardcoded.net/licenses/hs_license
     [columnsOrder addObject:@"0"];
     [columnsOrder addObject:@"1"];
     [columnsOrder addObject:@"2"];
-    [columnsOrder addObject:@"6"];
+    [columnsOrder addObject:@"5"];
     NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
     [columnsWidth setObject:i2n(195) forKey:@"0"];
     [columnsWidth setObject:i2n(120) forKey:@"1"];
     [columnsWidth setObject:i2n(63) forKey:@"2"];
-    [columnsWidth setObject:i2n(60) forKey:@"6"];
+    [columnsWidth setObject:i2n(60) forKey:@"5"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
 }
 
@@ -80,10 +80,9 @@ http://www.hardcoded.net/licenses/hs_license
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
     [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Creation" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Match %" width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Words Used" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Dupe Count" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Modification" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Match %" width:60 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Words Used" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
 }
 @end

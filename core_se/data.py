@@ -15,18 +15,16 @@ COLUMNS = [
     {'attr':'path','display':'Directory'},
     {'attr':'size','display':'Size (KB)'},
     {'attr':'extension','display':'Kind'},
-    {'attr':'ctime','display':'Creation'},
     {'attr':'mtime','display':'Modification'},
     {'attr':'percentage','display':'Match %'},
     {'attr':'words','display':'Words Used'},
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
-METADATA_TO_READ = ['size', 'ctime', 'mtime']
+METADATA_TO_READ = ['size', 'mtime']
 
 def GetDisplayInfo(dupe, group, delta):
     size = dupe.size
-    ctime = dupe.ctime
     mtime = dupe.mtime
     m = group.get_match_of(dupe)
     if m:
@@ -35,7 +33,6 @@ def GetDisplayInfo(dupe, group, delta):
         if delta:
             r = group.ref
             size -= r.size
-            ctime -= r.ctime
             mtime -= r.mtime
     else:
         percentage = group.percentage
@@ -45,7 +42,6 @@ def GetDisplayInfo(dupe, group, delta):
         format_path(dupe.path),
         format_size(size, 0, 1, False),
         dupe.extension,
-        format_timestamp(ctime, delta and m),
         format_timestamp(mtime, delta and m),
         format_perc(percentage),
         format_words(dupe.words) if hasattr(dupe, 'words') else '',

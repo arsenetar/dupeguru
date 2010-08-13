@@ -18,19 +18,17 @@ COLUMNS = [
     {'attr':'size','display':'Size (KB)'},
     {'attr':'extension','display':'Kind'},
     {'attr':'dimensions','display':'Dimensions'},
-    {'attr':'ctime','display':'Creation'},
     {'attr':'mtime','display':'Modification'},
     {'attr':'percentage','display':'Match %'},
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
-METADATA_TO_READ = ['size', 'ctime', 'mtime', 'dimensions']
+METADATA_TO_READ = ['size', 'mtime', 'dimensions']
 
 def GetDisplayInfo(dupe,group,delta=False):
     if (dupe is None) or (group is None):
         return ['---'] * len(COLUMNS)
     size = dupe.size
-    ctime = dupe.ctime
     mtime = dupe.mtime
     m = group.get_match_of(dupe)
     if m:
@@ -39,7 +37,6 @@ def GetDisplayInfo(dupe,group,delta=False):
         if delta:
             r = group.ref
             size -= r.size
-            ctime -= r.ctime
             mtime -= r.mtime
     else:
         percentage = group.percentage
@@ -51,7 +48,6 @@ def GetDisplayInfo(dupe,group,delta=False):
         format_size(size, 0, 1, False),
         dupe.extension,
         format_dimensions(dupe.dimensions),
-        format_timestamp(ctime, delta and m),
         format_timestamp(mtime, delta and m),
         format_perc(percentage),
         format_dupe_count(dupe_count)

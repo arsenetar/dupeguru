@@ -18,7 +18,6 @@ COLUMNS = [
     {'attr':'bitrate','display':'Bitrate'},
     {'attr':'samplerate','display':'Sample Rate'},
     {'attr':'extension','display':'Kind'},
-    {'attr':'ctime','display':'Creation'},
     {'attr':'mtime','display':'Modification'},
     {'attr':'title','display':'Title'},
     {'attr':'artist','display':'Artist'},
@@ -32,7 +31,7 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
-METADATA_TO_READ = ['size', 'ctime', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
+METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
     'album', 'genre', 'year', 'track', 'comment']
 
 def GetDisplayInfo(dupe, group, delta):
@@ -40,7 +39,6 @@ def GetDisplayInfo(dupe, group, delta):
     duration = dupe.duration
     bitrate = dupe.bitrate
     samplerate = dupe.samplerate
-    ctime = dupe.ctime
     mtime = dupe.mtime
     m = group.get_match_of(dupe)
     if m:
@@ -52,7 +50,6 @@ def GetDisplayInfo(dupe, group, delta):
             duration -= r.duration
             bitrate -= r.bitrate
             samplerate -= r.samplerate
-            ctime -= r.ctime
             mtime -= r.mtime
     else:
         percentage = group.percentage
@@ -65,7 +62,6 @@ def GetDisplayInfo(dupe, group, delta):
         str(bitrate),
         str(samplerate),
         dupe.extension,
-        format_timestamp(ctime,delta and m),
         format_timestamp(mtime,delta and m),
         dupe.title,
         dupe.artist,

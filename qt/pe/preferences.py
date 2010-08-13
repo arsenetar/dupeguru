@@ -18,7 +18,6 @@ class Preferences(PreferencesBase):
         (60, True), # size
         (40, False), # kind
         (100, True), # dimensions
-        (120, False), # creation
         (120, False), # modification
         (60, True), # match %
         (80, False), # dupe count

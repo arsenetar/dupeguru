@@ -20,12 +20,11 @@ class Bundle(fs.File):
     to see them as files.
     """
     def _read_info(self, field):
-        if field in ('size', 'ctime', 'mtime'):
+        if field in ('size', 'mtime'):
             files = fs.get_all_files(self.path)
             size = sum((file.size for file in files), 0)
             self.size = size
             stats = io.stat(self.path)
-            self.ctime = nonone(stats.st_ctime, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field in ('md5', 'md5partial'):
             # What's sensitive here is that we must make sure that subfiles'

@@ -20,7 +20,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [super awakeFromNib];
     [[self window] setTitle:@"dupeGuru Music Edition"];
-    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,7)];
+    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,6)];
     [deltaColumns removeIndex:6];
     [outline setDeltaColumns:deltaColumns];
 }
@@ -38,13 +38,13 @@ http://www.hardcoded.net/licenses/hs_license
     [columnsOrder addObject:@"2"];
     [columnsOrder addObject:@"3"];
     [columnsOrder addObject:@"4"];
-    [columnsOrder addObject:@"16"];
+    [columnsOrder addObject:@"15"];
     NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
     [columnsWidth setObject:i2n(214) forKey:@"0"];
     [columnsWidth setObject:i2n(63) forKey:@"2"];
     [columnsWidth setObject:i2n(50) forKey:@"3"];
     [columnsWidth setObject:i2n(50) forKey:@"4"];
-    [columnsWidth setObject:i2n(57) forKey:@"16"];
+    [columnsWidth setObject:i2n(57) forKey:@"15"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
 }
 
@@ -96,18 +96,17 @@ http://www.hardcoded.net/licenses/hs_license
     [_resultColumns addObject:brCol];
     [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Sample Rate" width:60 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Creation" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:9 title:@"Title" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:10 title:@"Artist" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:11 title:@"Album" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:12 title:@"Genre" width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:13 title:@"Year" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:14 title:@"Track Number" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:15 title:@"Comment" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:16 title:@"Match %" width:57 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:17 title:@"Words Used" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:18 title:@"Dupe Count" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Modification" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Title" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:9 title:@"Artist" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:10 title:@"Album" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:11 title:@"Genre" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:12 title:@"Year" width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:13 title:@"Track Number" width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:14 title:@"Comment" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:15 title:@"Match %" width:57 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:16 title:@"Words Used" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:17 title:@"Dupe Count" width:80 refCol:refCol]];
 }
 
 /* Notifications */

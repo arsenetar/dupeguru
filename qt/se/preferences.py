@@ -17,7 +17,6 @@ class Preferences(PreferencesBase):
         (180, True), # path
         (60, True), # size
         (40, False), # Kind
-        (120, False), # creation
         (120, False), # modification
         (60, True), # match %
         (120, False), # Words Used

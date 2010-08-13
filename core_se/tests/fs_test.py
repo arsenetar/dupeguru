@@ -38,9 +38,8 @@ class TCBundle(TestCase):
         eq_(b.md5, md5.digest())
     
     def test_has_file_attrs(self):
-        #a Bundle must behave like a file, so it must have ctime and mtime attributes
+        #a Bundle must behave like a file, so it must have mtime attributes
         b = fs.Bundle(self.tmppath())
         assert b.mtime > 0
-        assert b.ctime > 0
         eq_(b.extension, '')
     

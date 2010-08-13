@@ -55,7 +55,6 @@ class OperationError(FSError):
 class File(object):
     INITIAL_INFO = {
         'size': 0,
-        'ctime': 0,
         'mtime': 0,
         'md5': '',
         'md5partial': '',
@@ -82,10 +81,9 @@ class File(object):
         raise AttributeError()
     
     def _read_info(self, field):
-        if field in ('size', 'ctime', 'mtime'):
+        if field in ('size', 'mtime'):
             stats = io.stat(self.path)
             self.size = nonone(stats.st_size, 0)
-            self.ctime = nonone(stats.st_ctime, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == 'md5partial':
             try:

@@ -21,7 +21,6 @@ class Preferences(PreferencesBase):
         (50, True), # Bitrate
         (60, False), # Sample Rate
         (40, False), # Kind
-        (120, False), # creation
         (120, False), # modification
         (120, False), # Title
         (120, False), # Artist
