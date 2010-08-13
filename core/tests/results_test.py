@@ -70,6 +70,9 @@ class TCResultsEmpty(TestCase):
         root = doc.getroot()
         eq_('results', root.tag)
     
+    def test_is_modified(self):
+        assert not self.results.is_modified
+    
 
 class TCResultsWithSomeGroups(TestCase):
     def setUp(self):
@@ -200,6 +203,56 @@ class TCResultsWithSomeGroups(TestCase):
         eq_(3,len(self.results.dupes))
         self.results.remove_duplicates([o2])
         eq_(2,len(self.results.dupes))
+    
+    def test_is_modified(self):
+        # Changing the groups sets the modified flag
+        assert self.results.is_modified
+    
+    def test_is_modified_after_save_and_load(self):
+        # Saving/Loading a file sets the modified flag back to False
+        def get_file(path):
+            return [f for f in self.objects if str(f.path) == path][0]
+        
+        f = io.BytesIO()
+        self.results.save_to_xml(f)
+        assert not self.results.is_modified
+        self.results.groups = self.groups # sets the flag back
+        f.seek(0)
+        self.results.load_from_xml(f, get_file)
+        assert not self.results.is_modified
+    
+
+class ResultsWithSavedResults(TestCase):
+    def setUp(self):
+        self.results = Results(data)
+        self.objects,self.matches,self.groups = GetTestGroups()
+        self.results.groups = self.groups
+        self.f = io.BytesIO()
+        self.results.save_to_xml(self.f)
+        self.f.seek(0)
+    
+    def test_is_modified(self):
+        # Saving a file sets the modified flag back to False
+        assert not self.results.is_modified
+    
+    def test_is_modified_after_load(self):
+        # Loading a file sets the modified flag back to False
+        def get_file(path):
+            return [f for f in self.objects if str(f.path) == path][0]
+        
+        self.results.groups = self.groups # sets the flag back
+        self.results.load_from_xml(self.f, get_file)
+        assert not self.results.is_modified
+    
+    def test_is_modified_after_remove(self):
+        # Removing dupes sets the modified flag
+        self.results.remove_duplicates([self.results.groups[0].dupes[0]])
+        assert self.results.is_modified
+    
+    def test_is_modified_after_make_ref(self):
+        # Making a dupe ref sets the modified flag
+        self.results.make_ref(self.results.groups[0].dupes[0])
+        assert self.results.is_modified
     
 
 class TCResultsMarkings(TestCase):

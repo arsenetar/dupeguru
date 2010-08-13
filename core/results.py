@@ -33,6 +33,7 @@ class Results(Markable):
         self.__marked_size = 0
         self.data = data_module
         self.problems = [] # (dupe, error_msg)
+        self.is_modified = False
     
     def _did_mark(self, dupe):
         self.__marked_size += dupe.size
@@ -115,6 +116,7 @@ class Results(Markable):
                 self.__group_of_duplicate[dupe] = g
                 if not hasattr(dupe, 'is_ref'):
                     dupe.is_ref = False
+        self.is_modified = True
         old_filters = nonone(self.__filters, [])
         self.apply_filter(None)
         for filter_str in old_filters:
@@ -216,6 +218,7 @@ class Results(Markable):
         self.groups = groups
         for dupe_file in marked:
             self.mark(dupe_file)
+        self.is_modified = False
     
     def make_ref(self, dupe):
         g = self.get_group_of_duplicate(dupe)
@@ -229,6 +232,7 @@ class Results(Markable):
             self.__total_count -= 1
             self.__total_size -= dupe.size
         self.__dupes = None
+        self.is_modified = True
     
     def perform_on_marked(self, func, remove_from_results):
         # Performs `func` on all marked dupes. If an EnvironmentError is raised during the call,
@@ -269,6 +273,7 @@ class Results(Markable):
         for group in affected_groups:
             group.discard_matches()
         self.__dupes = None
+        self.is_modified = True
     
     def save_to_xml(self, outfile):
         self.apply_filter(None)
@@ -299,6 +304,7 @@ class Results(Markable):
         tree = etree.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
             tree.write(fp, encoding='utf-8')
+        self.is_modified = False
     
     def sort_dupes(self, key, asc=True, delta=False):
         if not self.__dupes:
