@@ -319,7 +319,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
-        self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
+        if self.results.is_modified:
+            self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
     
     def save_ignore_list(self):
         if not op.exists(self.appdata):
