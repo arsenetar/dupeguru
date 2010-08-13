@@ -164,10 +164,6 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         else:
             app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
     
-    def _do_load(self, j):
-        self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
-        self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
-    
     def _get_file(self, str_path):
         p = Path(str_path)
         if (self.directories.iphoto_libpath is not None) and (p in self.directories.iphoto_libpath[:-1]):

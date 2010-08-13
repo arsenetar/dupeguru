@@ -49,6 +49,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;
 - (IBAction)invokeCustomCommand:(id)sender;
+- (IBAction)loadResults:(id)sender;
 - (IBAction)markAll:(id)sender;
 - (IBAction)markInvert:(id)sender;
 - (IBAction)markNone:(id)sender;
@@ -61,6 +62,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)renameSelected:(id)sender;
 - (IBAction)resetColumnsToDefault:(id)sender;
 - (IBAction)revealSelected:(id)sender;
+- (IBAction)saveResults:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)switchSelected:(id)sender;

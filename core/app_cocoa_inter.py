@@ -46,6 +46,9 @@ class PyDupeGuruBase(PyRegistrable):
     def loadResults(self):
         self.py.load()
     
+    def loadResultsFrom_(self, filename):
+        self.py.load_from(filename)
+    
     def markAll(self):
         self.py.mark_all()
     
@@ -66,6 +69,9 @@ class PyDupeGuruBase(PyRegistrable):
     
     def saveResults(self):
         self.py.save()
+    
+    def saveResultsAs_(self, filename):
+        self.py.save_as(filename)
     
     #---Actions
     def addSelectedToIgnoreList(self):

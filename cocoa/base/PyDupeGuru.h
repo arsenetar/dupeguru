@@ -14,7 +14,9 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)removeDirectory:(NSNumber *)index;
 - (void)loadResults;
+- (void)loadResultsFrom:(NSString *)filename;
 - (void)saveResults;
+- (void)saveResultsAs:(NSString *)filename;
 - (void)loadIgnoreList;
 - (void)saveIgnoreList;
 - (void)clearIgnoreList;

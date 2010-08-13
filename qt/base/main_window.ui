@@ -126,6 +126,8 @@
     </property>
     <addaction name="actionScan"/>
     <addaction name="separator"/>
+    <addaction name="actionLoadResults"/>
+    <addaction name="actionSaveResults"/>
     <addaction name="actionExport"/>
     <addaction name="actionClearIgnoreList"/>
     <addaction name="separator"/>
@@ -183,7 +185,7 @@
     <string>Start scanning for duplicates</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionDirectories">
@@ -425,6 +427,22 @@
   <action name="actionExport">
    <property name="text">
     <string>Export To XHTML</string>
+   </property>
+  </action>
+  <action name="actionLoadResults">
+   <property name="text">
+    <string>Load Results...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionSaveResults">
+   <property name="text">
+    <string>Save Results...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionOpenDebugLog">

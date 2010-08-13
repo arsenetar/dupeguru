@@ -212,6 +212,21 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
+- (IBAction)loadResults:(id)sender
+{
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    [op setCanCreateDirectories:NO];
+    [op setAllowsMultipleSelection:NO];
+    [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
+    [op setTitle:@"Select a results file to load"];
+    if ([op runModal] == NSOKButton) {
+        NSString *filename = [[op filenames] objectAtIndex:0];
+        [py loadResultsFrom:filename];
+    }
+}
+
 - (IBAction)markAll:(id)sender
 {
     [py markAll];
@@ -301,6 +316,17 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)showPreferencesPanel:(id)sender
 {
     [preferencesPanel showWindow:sender];
+}
+
+- (IBAction)saveResults:(id)sender
+{
+    NSSavePanel *sp = [NSSavePanel savePanel];
+    [sp setCanCreateDirectories:YES];
+    [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
+    [sp setTitle:@"Select a file to save your results to"];
+    if ([sp runModal] == NSOKButton) {
+        [py saveResultsAs:[sp filename]];
+    }
 }
 
 - (IBAction)startDuplicateScan:(id)sender

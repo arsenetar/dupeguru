@@ -244,6 +244,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self._start_job(JOB_LOAD, self._do_load)
         self.load_ignore_list()
     
+    def load_from(self, filename):
+        def do(j):
+            self.results.load_from_xml(filename, self._get_file, j)
+        self._start_job(JOB_LOAD, do)
+    
     def load_ignore_list(self):
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.load_from_xml(p)
@@ -321,6 +326,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
         if self.results.is_modified:
             self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
+    
+    def save_as(self, filename):
+        self.results.save_to_xml(filename)
+        # It's not because we saved it here that we don't want to save it in appdata when we quit
+        self.results.is_modified = True
     
     def save_ignore_list(self):
         if not op.exists(self.appdata):

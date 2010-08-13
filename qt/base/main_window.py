@@ -10,7 +10,7 @@ import sys
 
 from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL, QUrl
 from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
-    QMessageBox, QInputDialog, QLineEdit, QDesktopServices)
+    QMessageBox, QInputDialog, QLineEdit, QDesktopServices, QFileDialog)
 
 from hsutil.misc import nonone
 
@@ -37,7 +37,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
         self.connect(self.resultsView, SIGNAL('spacePressed()'), self.resultsSpacePressed)
+        
+        # Actions (the vast majority of them are connected in the UI file, but I'm trying to
+        # phase away from those, and these connections are harder to maintain than through simple
+        # code
         self.actionInvokeCustomCommand.triggered.connect(self.app.invokeCustomCommand)
+        self.actionLoadResults.triggered.connect(self.loadResultsTriggered)
+        self.actionSaveResults.triggered.connect(self.saveResultsTriggered)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -196,7 +202,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         exported_path = self.app.export_to_xhtml(column_ids)
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
-      
+    
+    def loadResultsTriggered(self):
+        title = "Select a results file to load"
+        files = "dupeGuru Results (*.dupeguru)"
+        destination = QFileDialog.getOpenFileName(self, title, '', files)
+        if destination:
+            self.app.load_from(destination)
+    
     def makeReferenceTriggered(self):
         self.app.make_selected_reference()
     
@@ -247,6 +260,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def revealTriggered(self):
         self.app.reveal_selected()
+    
+    def saveResultsTriggered(self):
+        title = "Select a file to save your results to"
+        files = "dupeGuru Results (*.dupeguru)"
+        destination = QFileDialog.getSaveFileName(self, title, '', files)
+        if destination:
+            self.app.save_as(destination)
     
     def scanTriggered(self):
         title = "Start a new scan"
