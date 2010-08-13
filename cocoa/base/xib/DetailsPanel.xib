@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.InterfaceBuilderVersion">788</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">740</string>
+			<string key="NS.object.0">788</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -41,7 +41,7 @@
 			<object class="NSWindowTemplate" id="476890502">
 				<int key="NSWindowStyleMask">155</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{33, 261}, {451, 161}}</string>
+				<string key="NSWindowRect">{{33, 261}, {451, 146}}</string>
 				<int key="NSWTFlags">-260571136</int>
 				<string key="NSWindowTitle">Details of Selected File</string>
 				<object class="NSMutableString" key="NSWindowClass">
@@ -51,7 +51,7 @@
 					<characters key="NS.bytes">View</characters>
 				</object>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
-				<string key="NSWindowContentMinSize">{451, 161}</string>
+				<string key="NSWindowContentMinSize">{451, 146}</string>
 				<object class="NSView" key="NSWindowView" id="1027711962">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -70,7 +70,7 @@
 										<object class="NSTableView" id="251969872">
 											<reference key="NSNextResponder" ref="488480549"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{449, 143}</string>
+											<string key="NSFrameSize">{449, 128}</string>
 											<reference key="NSSuperview" ref="488480549"/>
 											<int key="NSTag">2</int>
 											<bool key="NSEnabled">YES</bool>
@@ -224,7 +224,7 @@
 											<int key="NSTableViewDraggingDestinationStyle">0</int>
 										</object>
 									</object>
-									<string key="NSFrame">{{1, 17}, {449, 143}}</string>
+									<string key="NSFrame">{{1, 17}, {449, 128}}</string>
 									<reference key="NSSuperview" ref="362108788"/>
 									<reference key="NSNextKeyView" ref="251969872"/>
 									<reference key="NSDocView" ref="251969872"/>
@@ -266,7 +266,7 @@
 								</object>
 								<reference ref="717380566"/>
 							</object>
-							<string key="NSFrameSize">{451, 161}</string>
+							<string key="NSFrameSize">{451, 146}</string>
 							<reference key="NSSuperview" ref="1027711962"/>
 							<reference key="NSNextKeyView" ref="488480549"/>
 							<int key="NSsFlags">530</int>
@@ -278,11 +278,11 @@
 							<bytes key="NSScrollAmts">QSAAAEEgAABBgAAAQYAAAA</bytes>
 						</object>
 					</object>
-					<string key="NSFrameSize">{451, 161}</string>
+					<string key="NSFrameSize">{451, 146}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1024, 746}}</string>
-				<string key="NSMinSize">{451, 177}</string>
+				<string key="NSMinSize">{451, 162}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
 		</object>
@@ -497,12 +497,12 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{109, 656}, {451, 161}}</string>
+					<string>{{109, 671}, {451, 146}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{109, 656}, {451, 161}}</string>
+					<string>{{109, 671}, {451, 146}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
-					<string>{451, 161}</string>
+					<string>{451, 146}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -536,10 +536,17 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">DetailsPanel</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">HSWindowController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailsTable</string>
 						<string key="NS.object.0">NSTableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">detailsTable</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">detailsTable</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -548,7 +555,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">DetailsPanel</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">HSWindowController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
@@ -561,6 +568,32 @@
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
 					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HSWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../controllers/HSWindowController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../views/HSOutlineView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="111130406">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../views/NSTableViewAdditions.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSTableView</string>
+					<reference key="sourceIdentifier" ref="111130406"/>
 				</object>
 			</object>
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
@@ -1029,6 +1062,13 @@
 						<string key="NS.key.0">showWindow:</string>
 						<string key="NS.object.0">id</string>
 					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">showWindow:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">showWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSWindowController.h</string>
@@ -1037,6 +1077,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>
