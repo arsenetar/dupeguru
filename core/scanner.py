@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import logging
-
+import re
 
 from hscommon import job
 from hsutil import io
@@ -26,6 +26,15 @@ SCAN_TYPE_CONTENT,
 SCAN_TYPE_CONTENT_AUDIO) = range(7)
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
+
+RE_DIGIT_ENDING = re.compile(r'\d+|\(\d+\)|\[\d+\]|{\d+}')
+
+def is_same_with_digit(name, refname):
+    # Returns True if name is the same as refname, but with digits (with brackets or not) at the end
+    if not name.startswith(refname):
+        return False
+    end = name[len(refname):].strip()
+    return RE_DIGIT_ENDING.match(end) is not None
 
 class Scanner(object):
     def __init__(self):
@@ -71,9 +80,9 @@ class Scanner(object):
             return False
         if 'copy' in refname:
             return True
-        if dupename.startswith(refname) and (dupename[len(refname):].strip().isdigit()):
+        if is_same_with_digit(dupename, refname):
             return False
-        if refname.startswith(dupename) and (refname[len(dupename):].strip().isdigit()):
+        if is_same_with_digit(refname, dupename):
             return True
         return len(dupe.path) > len(ref.path)
     

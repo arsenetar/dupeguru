@@ -429,11 +429,20 @@ class ScannerTestFakeFiles(TestCase):
         # if ref has the same words as dupe, but has some just one extra word which is a digit, it
         # becomes a dupe
         s = Scanner()
-        o1, o2 = no('foo bar 42'), no('foo bar')
+        o1 = no('foo bar 42')
+        o2 = no('foo bar [42]')
+        o3 = no('foo bar (42)')
+        o4 = no('foo bar {42}')
+        o5 = no('foo bar')
+        # all numbered names have deeper paths, so they'll end up ref if the digits aren't correctly
+        # used as tie breakers
         o1.path = Path('deeper/path')
-        o2.path = Path('foo')
-        [group] = s.GetDupeGroups([o1, o2])
-        assert group.ref is o2
+        o2.path = Path('deeper/path')
+        o3.path = Path('deeper/path')
+        o4.path = Path('deeper/path')
+        o5.path = Path('foo')
+        [group] = s.GetDupeGroups([o1, o2, o3, o4, o5])
+        assert group.ref is o5
     
     def test_partial_group_match(self):
         # Count the number od discarded matches (when a file doesn't match all other dupes of the 
