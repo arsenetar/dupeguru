@@ -6,8 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
-    SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
+from core.scanner import ScanType
 
 from base.preferences import Preferences as PreferencesBase
 
@@ -47,7 +46,7 @@ class Preferences(PreferencesBase):
     
     def _reset_specific(self):
         self.filter_hardness = 80
-        self.scan_type = SCAN_TYPE_TAG
+        self.scan_type = ScanType.Tag
         self.word_weighting = True
         self.match_similar = False
         self.scan_tag_track = False

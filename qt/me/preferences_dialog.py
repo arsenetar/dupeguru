@@ -9,19 +9,18 @@
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QDialog, QDialogButtonBox
 
-from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
-    SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
+from core.scanner import ScanType
 
 from preferences_dialog_ui import Ui_PreferencesDialog
 import preferences
 
 SCAN_TYPE_ORDER = [
-    SCAN_TYPE_FILENAME,
-    SCAN_TYPE_FIELDS,
-    SCAN_TYPE_FIELDS_NO_ORDER,
-    SCAN_TYPE_TAG,
-    SCAN_TYPE_CONTENT,
-    SCAN_TYPE_CONTENT_AUDIO,
+    ScanType.Filename,
+    ScanType.Fields,
+    ScanType.FieldsNoOrder,
+    ScanType.Tag,
+    ScanType.Contents,
+    ScanType.ContentsAudio,
 ]
 
 class PreferencesDialog(QDialog, Ui_PreferencesDialog):
@@ -89,9 +88,9 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
     
     def scanTypeChanged(self, index):
         scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
-        word_based = scan_type in [SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
-            SCAN_TYPE_TAG]
-        tag_based = scan_type == SCAN_TYPE_TAG
+        word_based = scan_type in (ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder,
+            ScanType.Tag)
+        tag_based = scan_type == ScanType.Tag
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)

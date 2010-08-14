@@ -46,7 +46,7 @@ class ScannerTestFakeFiles(TestCase):
     def test_default_settings(self):
         s = Scanner()
         eq_(s.min_match_percentage, 80)
-        eq_(s.scan_type, SCAN_TYPE_FILENAME)
+        eq_(s.scan_type, ScanType.Filename)
         eq_(s.mix_file_kind, True)
         eq_(s.word_weighting, False)
         eq_(s.match_similar_words, False)
@@ -98,7 +98,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_content_scan(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT
+        s.scan_type = ScanType.Contents
         f = [no('foo'), no('bar'), no('bleh')]
         f[0].md5 = f[0].md5partial = 'foobar'
         f[1].md5 = f[1].md5partial = 'foobar'
@@ -115,13 +115,13 @@ class ScannerTestFakeFiles(TestCase):
                 raise AssertionError()
     
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT
+        s.scan_type = ScanType.Contents
         f = [MyFile('foo', 1), MyFile('bar', 2)]
         eq_(len(s.GetDupeGroups(f)), 0)
     
     def test_min_match_perc_doesnt_matter_for_content_scan(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT
+        s.scan_type = ScanType.Contents
         f = [no('foo'), no('bar'), no('bleh')]
         f[0].md5 = f[0].md5partial = 'foobar'
         f[1].md5 = f[1].md5partial = 'foobar'
@@ -137,7 +137,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_content_scan_doesnt_put_md5_in_words_at_the_end(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT
+        s.scan_type = ScanType.Contents
         f = [no('foo'),no('bar')]
         f[0].md5 = f[0].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
         f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
@@ -191,21 +191,21 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_fields(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_FIELDS
+        s.scan_type = ScanType.Fields
         f = [no('The White Stripes - Little Ghost'), no('The White Stripes - Little Acorn')]
         r = s.GetDupeGroups(f)
         eq_(len(r), 0)
     
     def test_fields_no_order(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_FIELDS_NO_ORDER
+        s.scan_type = ScanType.FieldsNoOrder
         f = [no('The White Stripes - Little Ghost'), no('Little Ghost - The White Stripes')]
         r = s.GetDupeGroups(f)
         eq_(len(r), 1)
     
     def test_tag_scan(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         o1 = no('foo')
         o2 = no('bar')
         o1.artist = 'The White Stripes'
@@ -217,7 +217,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_tag_with_album_scan(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['artist', 'album', 'title'])
         o1 = no('foo')
         o2 = no('bar')
@@ -236,7 +236,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_that_dash_in_tags_dont_create_new_fields(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['artist', 'album', 'title'])
         s.min_match_percentage = 50
         o1 = no('foo')
@@ -252,7 +252,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_tag_scan_with_different_scanned(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['track', 'year'])
         o1 = no('foo')
         o2 = no('bar')
@@ -269,7 +269,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_tag_scan_only_scans_existing_tags(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['artist', 'foo'])
         o1 = no('foo')
         o2 = no('bar')
@@ -282,7 +282,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_tag_scan_converts_to_str(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['track'])
         o1 = no('foo')
         o2 = no('bar')
@@ -296,7 +296,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_tag_scan_non_ascii(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_TAG
+        s.scan_type = ScanType.Tag
         s.scanned_tags = set(['title'])
         o1 = no('foo')
         o2 = no('bar')
@@ -310,7 +310,7 @@ class ScannerTestFakeFiles(TestCase):
     
     def test_audio_content_scan(self):
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT_AUDIO
+        s.scan_type = ScanType.ContentsAudio
         f = [no('foo'), no('bar'), no('bleh')]
         f[0].md5 = 'foo'
         f[1].md5 = 'bar'
@@ -332,7 +332,7 @@ class ScannerTestFakeFiles(TestCase):
                 raise AssertionError()
     
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT_AUDIO
+        s.scan_type = ScanType.ContentsAudio
         f = [MyFile('foo'), MyFile('bar')]
         f[0].audiosize = 1
         f[1].audiosize = 2
@@ -465,7 +465,7 @@ class ScannerTest(TestCase):
         # In this test, we have to delete one of the files between the get_matches() part and the
         # get_groups() part.
         s = Scanner()
-        s.scan_type = SCAN_TYPE_CONTENT
+        s.scan_type = ScanType.Contents
         p = self.tmppath()
         io.open(p + 'file1', 'w').write('foo')
         io.open(p + 'file2', 'w').write('foo')

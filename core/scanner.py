@@ -17,13 +17,14 @@ from hsutil.str import get_file_ext, rem_file_ext
 from . import engine
 from .ignore import IgnoreList
 
-(SCAN_TYPE_FILENAME,
-SCAN_TYPE_FIELDS,
-SCAN_TYPE_FIELDS_NO_ORDER,
-SCAN_TYPE_TAG,
-UNUSED, # Must not be removed. Constants here are what scan_type in the prefs are.
-SCAN_TYPE_CONTENT,
-SCAN_TYPE_CONTENT_AUDIO) = range(7)
+class ScanType:
+    Filename = 0
+    Fields = 1
+    FieldsNoOrder = 2
+    Tag = 3
+    # number 4 is obsolete
+    Contents = 5
+    ContentsAudio = 6
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 
@@ -47,22 +48,22 @@ class Scanner(object):
             for f in j.iter_with_progress(files, 'Read size of %d/%d files'):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
             files = [f for f in files if f.size >= self.size_threshold]
-        if self.scan_type in (SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO):
-            sizeattr = 'size' if self.scan_type == SCAN_TYPE_CONTENT else 'audiosize'
-            return engine.getmatches_by_contents(files, sizeattr, partial=self.scan_type==SCAN_TYPE_CONTENT_AUDIO, j=j)
+        if self.scan_type in (ScanType.Contents, ScanType.ContentsAudio):
+            sizeattr = 'size' if self.scan_type == ScanType.Contents else 'audiosize'
+            return engine.getmatches_by_contents(files, sizeattr, partial=self.scan_type==ScanType.ContentsAudio, j=j)
         else:
             j = j.start_subjob([2, 8])
             kw = {}
             kw['match_similar_words'] = self.match_similar_words
             kw['weight_words'] = self.word_weighting
             kw['min_match_percentage'] = self.min_match_percentage
-            if self.scan_type == SCAN_TYPE_FIELDS_NO_ORDER:
-                self.scan_type = SCAN_TYPE_FIELDS
+            if self.scan_type == ScanType.FieldsNoOrder:
+                self.scan_type = ScanType.Fields
                 kw['no_field_order'] = True
             func = {
-                SCAN_TYPE_FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
-                SCAN_TYPE_FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
-                SCAN_TYPE_TAG: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
+                ScanType.Filename: lambda f: engine.getwords(rem_file_ext(f.name)),
+                ScanType.Fields: lambda f: engine.getfields(rem_file_ext(f.name)),
+                ScanType.Tag: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
             }[self.scan_type]
             for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
                 f.words = func(f)
@@ -116,7 +117,7 @@ class Scanner(object):
     match_similar_words  = False
     min_match_percentage = 80
     mix_file_kind        = True
-    scan_type            = SCAN_TYPE_FILENAME
+    scan_type            = ScanType.Filename
     scanned_tags         = set(['artist', 'title'])
     size_threshold       = 0
     word_weighting       = False

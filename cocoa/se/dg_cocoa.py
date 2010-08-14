@@ -6,7 +6,7 @@
 
 from hscommon.cocoa import signature
 
-from core import scanner
+from core.scanner import ScanType
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
 
@@ -30,8 +30,8 @@ class PyDupeGuru(PyDupeGuruBase):
     def setScanType_(self,scan_type):
         try:
             self.py.scanner.scan_type = [
-                scanner.SCAN_TYPE_FILENAME,
-                scanner.SCAN_TYPE_CONTENT
+                ScanType.Filename,
+                ScanType.Contents,
             ][scan_type]
         except IndexError:
             pass

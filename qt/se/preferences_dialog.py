@@ -11,14 +11,14 @@ from PyQt4.QtGui import QDialog, QDialogButtonBox
 
 from hsutil.misc import tryint
 
-from core.scanner import SCAN_TYPE_FILENAME, SCAN_TYPE_CONTENT
+from core.scanner import ScanType
 
 from preferences_dialog_ui import Ui_PreferencesDialog
 import preferences
 
 SCAN_TYPE_ORDER = [
-    SCAN_TYPE_FILENAME,
-    SCAN_TYPE_CONTENT,
+    ScanType.Filename,
+    ScanType.Contents,
 ]
 
 class PreferencesDialog(QDialog, Ui_PreferencesDialog):
@@ -78,7 +78,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
     
     def scanTypeChanged(self, index):
         scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
-        word_based = scan_type == SCAN_TYPE_FILENAME
+        word_based = scan_type == ScanType.Filename
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)

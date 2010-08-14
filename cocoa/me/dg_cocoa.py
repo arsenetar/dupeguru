@@ -8,8 +8,7 @@ from hscommon.cocoa import signature
 
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
-from core.scanner import (SCAN_TYPE_FILENAME, SCAN_TYPE_FIELDS, SCAN_TYPE_FIELDS_NO_ORDER,
-    SCAN_TYPE_TAG, SCAN_TYPE_CONTENT, SCAN_TYPE_CONTENT_AUDIO)
+from core.scanner import ScanType
 
 # Fix py2app imports which chokes on relative imports and other stuff
 from core_me import app_cocoa, data, fs, scanner
@@ -41,12 +40,12 @@ class PyDupeGuru(PyDupeGuruBase):
     def setScanType_(self, scan_type):
         try:
             self.py.scanner.scan_type = [
-                SCAN_TYPE_FILENAME,
-                SCAN_TYPE_FIELDS,
-                SCAN_TYPE_FIELDS_NO_ORDER,
-                SCAN_TYPE_TAG,
-                SCAN_TYPE_CONTENT,
-                SCAN_TYPE_CONTENT_AUDIO
+                ScanType.Filename,
+                ScanType.Fields,
+                ScanType.FieldsNoOrder,
+                ScanType.Tag,
+                ScanType.Contents,
+                ScanType.ContentsAudio,
             ][scan_type]
         except IndexError:
             pass
