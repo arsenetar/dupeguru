@@ -25,12 +25,12 @@ Before being able to build dupeGuru, a few dependencies have to be installed:
 General dependencies
 -----
 
-- Python 2.6 (http://www.python.org)
-- Send2Trash (http://hg.hardcoded.net/send2trash)
-- hsutil (http://hg.hardcoded.net/hsutil)
-- hsaudiotag (for ME) (http://hg.hardcoded.net/hsaudiotag)
+- Python 3.1 (http://www.python.org)
+- Send2Trash3k (http://hg.hardcoded.net/send2trash3k)
+- hsutil3k (http://hg.hardcoded.net/hsutil3k)
+- hsaudiotag3k (for ME) (http://hg.hardcoded.net/hsaudiotag3k)
 - lxml, to read and write XML files. (http://codespeak.net/lxml/)
-- Mako, to generate help files. (http://www.makotemplates.org/)
+- Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
 - py.test, to run unit tests. (http://codespeak.net/py/dist/test/)
 
@@ -39,14 +39,14 @@ OS X prerequisites
 
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
-- PyObjC 2.2. (http://pyobjc.sourceforge.net/)
-- py2app (http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html)
+- PyObjC 2.3. (http://pyobjc.sourceforge.net/)
+- py2app 0.5.4 (http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html)
 
 Windows prerequisites
 ---
 
 - Visual Studio 2008 (Express is enough) is needed to build C extensions. (http://www.microsoft.com/Express/)
-- PyQt 4.6 (http://www.riverbankcomputing.co.uk/news)
+- PyQt 4.7 (http://www.riverbankcomputing.co.uk/news)
 - Python Imaging Library for dupeGuru PE. (http://www.pythonware.com/products/pil/)
 - cx_Freeze, if you want to build a exe. You don't need it if you just want to run dupeGuru. (http://cx-freeze.sourceforge.net/)
 - Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)
