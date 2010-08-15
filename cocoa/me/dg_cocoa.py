@@ -13,7 +13,7 @@ from core.scanner import ScanType
 # Fix py2app imports which chokes on relative imports and other stuff
 from core_me import app_cocoa, data, fs, scanner
 from hsaudiotag import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
-from lxml import etree, _elementpath
+import xml.etree.ElementPath
 import gzip
 
 class PyDupeGuru(PyDupeGuruBase):

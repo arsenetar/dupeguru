@@ -8,12 +8,13 @@
 
 import os.path as op
 import plistlib
+import logging
+import re
 
-from lxml import etree
 from appscript import app, k, CommandError
 
 from hsutil import io
-from hsutil.str import get_file_ext
+from hsutil.str import get_file_ext, remove_invalid_xml
 from hsutil.path import Path
 from hscommon.cocoa import as_fetch
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
@@ -67,11 +68,16 @@ def get_iphoto_database_path():
 def get_iphoto_pictures(plistpath):
     if not io.exists(plistpath):
         return []
-    # We make the xml go through lxml so that it can fix broken xml which iPhoto sometimes produces.
-    parser = etree.XMLParser(recover=True)
-    root = etree.parse(io.open(plistpath), parser=parser).getroot()
-    s = etree.tostring(root)
-    plist = plistlib.readPlistFromString(s)
+    s = io.open(plistpath, 'rt', encoding='utf-8').read()
+    # There was a case where a guy had 0x10 chars in his plist, causing expat errors on loading
+    s = remove_invalid_xml(s, replace_with='')
+    # It seems that iPhoto sometimes doesn't properly escape & chars. The regexp below is to find
+    # any & char that is not a &-based entity (&amp;, &quot;, etc.). based on TextMate's XML
+    # bundle's regexp
+    s, count = re.subn(r'&(?![a-zA-Z0-9_-]+|#[0-9]+|#x[0-9a-fA-F]+;)', '', s)
+    if count:
+        logging.warning("%d invalid XML entities replacement made", count)
+    plist = plistlib.readPlistFromBytes(s.encode('utf-8'))
     result = []
     for photo_data in plist['Master Image List'].values():
         if photo_data['MediaType'] != 'Image':

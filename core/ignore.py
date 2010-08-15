@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from lxml import etree
+from xml.etree import ElementTree as ET
 
 from hsutil.files import FileOrPath
 
@@ -77,14 +77,16 @@ class IgnoreList(object):
         infile can be a file object or a filename.
         """
         try:
-            root = etree.parse(infile).getroot()
+            root = ET.parse(infile).getroot()
         except Exception:
             return
-        for fn in root.iterchildren('file'):
+        file_elems = (e for e in root if e.tag == 'file')
+        for fn in file_elems:
             file_path = fn.get('path')
             if not file_path:
                 continue
-            for sfn in fn.iterchildren('file'):
+            subfile_elems = (e for e in fn if e.tag == 'file')
+            for sfn in subfile_elems:
                 subfile_path = sfn.get('path')
                 if subfile_path:
                     self.Ignore(file_path, subfile_path)
@@ -94,14 +96,14 @@ class IgnoreList(object):
         
         outfile can be a file object or a filename.
         """
-        root = etree.Element('ignore_list')
+        root = ET.Element('ignore_list')
         for filename, subfiles in self._ignored.items():
-            file_node = etree.SubElement(root, 'file')
+            file_node = ET.SubElement(root, 'file')
             file_node.set('path', filename)
             for subfilename in subfiles:
-                subfile_node = etree.SubElement(file_node, 'file')
+                subfile_node = ET.SubElement(file_node, 'file')
                 subfile_node.set('path', subfilename)
-        tree = etree.ElementTree(root)
+        tree = ET.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
             tree.write(fp, encoding='utf-8')
     

@@ -29,7 +29,6 @@ General dependencies
 - Send2Trash3k (http://hg.hardcoded.net/send2trash3k)
 - hsutil3k (http://hg.hardcoded.net/hsutil3k)
 - hsaudiotag3k (for ME) (http://hg.hardcoded.net/hsaudiotag3k)
-- lxml, to read and write XML files. (http://codespeak.net/lxml/)
 - Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
 - py.test, to run unit tests. (http://codespeak.net/py/dist/test/)

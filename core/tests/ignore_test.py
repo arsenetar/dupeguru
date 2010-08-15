@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import io
-from lxml import etree
+from xml.etree import ElementTree as ET
 
 from hsutil.testutil import eq_
 
@@ -62,7 +62,7 @@ def test_save_to_xml():
     f = io.BytesIO()
     il.save_to_xml(f)
     f.seek(0)
-    doc = etree.parse(f)
+    doc = ET.parse(f)
     root = doc.getroot()
     eq_(root.tag, 'ignore_list')
     eq_(len(root), 2)
@@ -79,7 +79,6 @@ def test_SaveThenLoad():
     il.Ignore('\u00e9', 'bar')
     f = io.BytesIO()
     il.save_to_xml(f)
-    f.seek(0)
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)

@@ -8,7 +8,7 @@
 
 import logging
 import re
-from lxml import etree
+from xml.etree import ElementTree as ET
 
 from . import engine
 from hscommon.job import nulljob
@@ -178,16 +178,16 @@ class Results(Markable):
         
         self.apply_filter(None)
         try:
-            root = etree.parse(infile).getroot()
+            root = ET.parse(infile).getroot()
         except Exception:
             return
-        group_elems = list(root.iterchildren('group'))
+        group_elems = list(root.getiterator('group'))
         groups = []
         marked = set()
         for group_elem in j.iter_with_progress(group_elems, every=100):
             group = engine.Group()
             dupes = []
-            for file_elem in group_elem.iterchildren('file'):
+            for file_elem in group_elem.getiterator('file'):
                 path = file_elem.get('path')
                 words = file_elem.get('words', '')
                 if not path:
@@ -200,7 +200,7 @@ class Results(Markable):
                 dupes.append(file)
                 if file_elem.get('marked') == 'y':
                     marked.add(file)
-            for match_elem in group_elem.iterchildren('match'):
+            for match_elem in group_elem.getiterator('match'):
                 try:
                     attrs = match_elem.attrib
                     first_file = dupes[int(attrs['first'])]
@@ -277,10 +277,10 @@ class Results(Markable):
     
     def save_to_xml(self, outfile):
         self.apply_filter(None)
-        root = etree.Element('results')
+        root = ET.Element('results')
         # writer = XMLGenerator(outfile, 'utf-8')
         for g in self.groups:
-            group_elem = etree.SubElement(root, 'group')
+            group_elem = ET.SubElement(root, 'group')
             dupe2index = {}
             for index, d in enumerate(g):
                 dupe2index[d] = index
@@ -288,7 +288,7 @@ class Results(Markable):
                     words = engine.unpack_fields(d.words)
                 except AttributeError:
                     words = ()
-                file_elem = etree.SubElement(group_elem, 'file')
+                file_elem = ET.SubElement(group_elem, 'file')
                 try:
                     file_elem.set('path', str(d.path))
                     file_elem.set('words', ','.join(words))
@@ -297,11 +297,11 @@ class Results(Markable):
                 file_elem.set('is_ref', ('y' if d.is_ref else 'n'))
                 file_elem.set('marked', ('y' if self.is_marked(d) else 'n'))
             for match in g.matches:
-                match_elem = etree.SubElement(group_elem, 'match')
+                match_elem = ET.SubElement(group_elem, 'match')
                 match_elem.set('first', str(dupe2index[match.first]))
                 match_elem.set('second', str(dupe2index[match.second]))
                 match_elem.set('percentage', str(int(match.percentage)))
-        tree = etree.ElementTree(root)
+        tree = ET.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
             tree.write(fp, encoding='utf-8')
         self.is_modified = False

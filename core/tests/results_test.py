@@ -10,7 +10,7 @@
 import io
 import os.path as op
 
-from lxml import etree
+from xml.etree import ElementTree as ET
 
 from hsutil.path import Path
 from hsutil.testutil import eq_
@@ -66,7 +66,7 @@ class TCResultsEmpty(TestCase):
         f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = etree.parse(f)
+        doc = ET.parse(f)
         root = doc.getroot()
         eq_('results', root.tag)
     
@@ -380,14 +380,14 @@ class TCResultsMarkings(TestCase):
         f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = etree.parse(f)
+        doc = ET.parse(f)
         root = doc.getroot()
-        g1, g2 = root.iterchildren('group')
-        d1, d2, d3 = g1.iterchildren('file')
+        g1, g2 = root.getiterator('group')
+        d1, d2, d3 = g1.getiterator('file')
         eq_('n', d1.get('marked'))
         eq_('n', d2.get('marked'))
         eq_('y', d3.get('marked'))
-        d1, d2 = g2.iterchildren('file')
+        d1, d2 = g2.getiterator('file')
         eq_('n', d1.get('marked'))
         eq_('y', d2.get('marked'))
     
@@ -425,7 +425,7 @@ class TCResultsXML(TestCase):
         f = io.BytesIO()
         self.results.save_to_xml(f)
         f.seek(0)
-        doc = etree.parse(f)
+        doc = ET.parse(f)
         root = doc.getroot()
         eq_('results', root.tag)
         eq_(2, len(root))
@@ -516,35 +516,35 @@ class TCResultsXML(TestCase):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
         
-        root = etree.Element('foobar') #The root element shouldn't matter, really.
-        group_node = etree.SubElement(root, 'group')
-        dupe_node = etree.SubElement(group_node, 'file') #Perfectly correct file
+        root = ET.Element('foobar') #The root element shouldn't matter, really.
+        group_node = ET.SubElement(root, 'group')
+        dupe_node = ET.SubElement(group_node, 'file') #Perfectly correct file
         dupe_node.set('path', op.join('basepath','foo bar'))
         dupe_node.set('is_ref', 'y')
         dupe_node.set('words', 'foo,bar')
-        dupe_node = etree.SubElement(group_node, 'file') #is_ref missing, default to 'n'
+        dupe_node = ET.SubElement(group_node, 'file') #is_ref missing, default to 'n'
         dupe_node.set('path',op.join('basepath','foo bleh'))
         dupe_node.set('words','foo,bleh')
-        dupe_node = etree.SubElement(group_node, 'file') #words are missing, valid.
+        dupe_node = ET.SubElement(group_node, 'file') #words are missing, valid.
         dupe_node.set('path',op.join('basepath','bar bleh'))
-        dupe_node = etree.SubElement(group_node, 'file') #path is missing, invalid.
+        dupe_node = ET.SubElement(group_node, 'file') #path is missing, invalid.
         dupe_node.set('words','foo,bleh')
-        dupe_node = etree.SubElement(group_node, 'foobar') #Invalid element name
+        dupe_node = ET.SubElement(group_node, 'foobar') #Invalid element name
         dupe_node.set('path',op.join('basepath','bar bleh'))
         dupe_node.set('is_ref','y')
         dupe_node.set('words','bar,bleh')
-        match_node = etree.SubElement(group_node, 'match') # match pointing to a bad index
+        match_node = ET.SubElement(group_node, 'match') # match pointing to a bad index
         match_node.set('first', '42')
         match_node.set('second', '45')
-        match_node = etree.SubElement(group_node, 'match') # match with missing attrs
-        match_node = etree.SubElement(group_node, 'match') # match with non-int values
+        match_node = ET.SubElement(group_node, 'match') # match with missing attrs
+        match_node = ET.SubElement(group_node, 'match') # match with non-int values
         match_node.set('first', 'foo')
         match_node.set('second', 'bar')
         match_node.set('percentage', 'baz')
-        group_node = etree.SubElement(root, 'foobar') #invalid group
-        group_node = etree.SubElement(root, 'group') #empty group
+        group_node = ET.SubElement(root, 'foobar') #invalid group
+        group_node = ET.SubElement(root, 'group') #empty group
         f = io.BytesIO()
-        tree = etree.ElementTree(root)
+        tree = ET.ElementTree(root)
         tree.write(f, encoding='utf-8')
         f.seek(0)
         r = Results(data)

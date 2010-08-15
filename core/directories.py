@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from lxml import etree
+from xml.etree import ElementTree as ET
 
 from hsutil import io
 from hsutil.files import FileOrPath
@@ -126,10 +126,10 @@ class Directories(object):
     
     def load_from_file(self, infile):
         try:
-            root = etree.parse(infile).getroot()
-        except:
+            root = ET.parse(infile).getroot()
+        except Exception:
             return
-        for rdn in root.iterchildren('root_directory'):
+        for rdn in root.getiterator('root_directory'):
             attrib = rdn.attrib
             if 'path' not in attrib:
                 continue
@@ -138,7 +138,7 @@ class Directories(object):
                 self.add_path(Path(path))
             except (AlreadyThereError, InvalidPathError):
                 pass
-        for sn in root.iterchildren('state'):
+        for sn in root.getiterator('state'):
             attrib = sn.attrib
             if not ('path' in attrib and 'value' in attrib):
                 continue
@@ -148,15 +148,15 @@ class Directories(object):
     
     def save_to_file(self, outfile):
         with FileOrPath(outfile, 'wb') as fp:
-            root = etree.Element('directories')
+            root = ET.Element('directories')
             for root_path in self:
-                root_path_node = etree.SubElement(root, 'root_directory')
+                root_path_node = ET.SubElement(root, 'root_directory')
                 root_path_node.set('path', str(root_path))
             for path, state in self.states.items():
-                state_node = etree.SubElement(root, 'state')
+                state_node = ET.SubElement(root, 'state')
                 state_node.set('path', str(path))
                 state_node.set('value', str(state))
-            tree = etree.ElementTree(root)
+            tree = ET.ElementTree(root)
             tree.write(fp, encoding='utf-8')
     
     def set_state(self, path, state):

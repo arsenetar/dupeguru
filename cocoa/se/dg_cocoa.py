@@ -14,7 +14,7 @@ from core_se.app_cocoa import DupeGuru
 import hsutil.conflict
 import core.engine, core.fs, core.app
 import core_se.fs, core_se.data
-import lxml.etree, lxml._elementpath
+import xml.etree.ElementPath
 import gzip
 
 class PyDupeGuru(PyDupeGuruBase):

@@ -11,7 +11,7 @@ from core_pe import app_cocoa as app_pe_cocoa
 import hsutil.conflict
 import core.engine, core.fs, core.app
 import core_pe.block, core_pe.cache, core_pe.matchbase, core_pe.data, core_pe._block_osx
-import lxml.etree, lxml._elementpath
+import xml.etree.ElementPath
 import gzip
 import aem.kae
 import appscript.defaultterminology
