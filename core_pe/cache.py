@@ -10,7 +10,7 @@ import os
 import logging
 import sqlite3 as sqlite
 
-from _cache import string_to_colors
+from ._cache import string_to_colors
 
 def colors_to_string(colors):
     """Transform the 3 sized tuples 'colors' into a hex string.

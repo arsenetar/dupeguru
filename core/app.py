@@ -96,6 +96,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _get_file(self, str_path):
         path = Path(str_path)
         f = fs.get_file(path, self.directories.fileclasses)    
+        if f is None:
+            return None
         try:
             f._read_all_info(attrnames=self.data.METADATA_TO_READ)
             return f
