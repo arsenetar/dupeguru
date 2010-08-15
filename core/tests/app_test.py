@@ -118,7 +118,7 @@ class TCDupeGuru(TestCase):
         f1, f2 = [FakeFile('foo') for i in range(2)]
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
-        app.directories.get_files = lambda: [f1, f2]
+        app.directories.get_files = lambda: iter([f1, f2])
         app.directories._dirs.append('this is just so Scan() doesnt return 3')
         app.start_scanning() # no exception
     
