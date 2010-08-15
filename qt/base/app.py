@@ -12,7 +12,7 @@ import logging
 import os
 import os.path as op
 
-from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL
+from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL, pyqtSignal
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
 
 from hscommon import job
@@ -86,7 +86,10 @@ class DupeGuru(DupeGuruBase, QObject):
             self._nagTimer = QTimer()
             self.connect(self._nagTimer, SIGNAL('timeout()'), self.mustShowNag)
             self._nagTimer.start(0)
-        self.main_window.show()
+        if self.prefs.mainWindowIsMaximized:
+            self.main_window.showMaximized()
+        else:
+            self.main_window.show()
         self.load()
         
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
@@ -205,8 +208,13 @@ class DupeGuru(DupeGuruBase, QObject):
             self.prefs.save()
             self._update_options()
     
+    #--- Signals
+    willSavePrefs = pyqtSignal()
+    
     #--- Events
     def application_will_terminate(self):
+        self.willSavePrefs.emit()
+        self.prefs.save()
         self.save()
         self.save_ignore_list()
     

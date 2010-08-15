@@ -20,15 +20,23 @@ class DetailsDialog(QDialog):
         self.app = app
         self.model = DetailsPanel(self, app)
         self._setupUi()
+        if self.app.prefs.detailsWindowRect is not None:
+            self.setGeometry(self.app.prefs.detailsWindowRect)
         self.tableModel = DetailsModel(self.model)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
         self.model.connect()
+        
+        self.app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _setupUi(self): # Virtual
         pass
     
-    # model --> view
+    #--- Events
+    def appWillSavePrefs(self):
+        self.app.prefs.detailsWindowRect = self.geometry()
+    
+    #--- model --> view
     def refresh(self):
         self.tableModel.reset()
     

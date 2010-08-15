@@ -16,11 +16,12 @@ class Preferences(PreferencesBase):
         PreferencesBase.__init__(self)
         self.reset_columns()
     
-    def _load_specific(self, settings, get):
+    def _load_specific(self, settings):
         # load prefs specific to the dg edition
         pass
     
-    def _load_values(self, settings, get):
+    def _load_values(self, settings):
+        get = self.get_value
         self.filter_hardness = get('FilterHardness', self.filter_hardness)
         self.mix_file_kind = get('MixFileKind', self.mix_file_kind)
         self.use_regexp = get('UseRegexp', self.use_regexp)
@@ -33,9 +34,15 @@ class Preferences(PreferencesBase):
             if width > 0:
                 self.columns_width[index] = width
         self.columns_visible = get('ColumnsVisible', self.columns_visible)
+        
+        self.mainWindowIsMaximized = get('MainWindowIsMaximized', self.mainWindowIsMaximized)
+        self.mainWindowRect = self.get_rect('MainWindowRect', self.mainWindowRect)
+        self.detailsWindowRect = self.get_rect('DetailsWindowRect', self.detailsWindowRect)
+        self.directoriesWindowRect = self.get_rect('DirectoriesWindowRect', self.directoriesWindowRect)
+        
         self.registration_code = get('RegistrationCode', self.registration_code)
         self.registration_email = get('RegistrationEmail', self.registration_email)
-        self._load_specific(settings, get)
+        self._load_specific(settings)
     
     def _reset_specific(self):
         # reset prefs specific to the dg edition
@@ -48,6 +55,12 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = False
         self.destination_type = 1
         self.custom_command = ''
+        
+        self.mainWindowIsMaximized = False
+        self.mainWindowRect = None
+        self.detailsWindowRect = None
+        self.directoriesWindowRect = None
+        
         self.registration_code = ''
         self.registration_email = ''
         self._reset_specific()
@@ -56,11 +69,12 @@ class Preferences(PreferencesBase):
         self.columns_width = [width for width, _ in self.COLUMNS_DEFAULT_ATTRS]
         self.columns_visible = [visible for _, visible in self.COLUMNS_DEFAULT_ATTRS]
     
-    def _save_specific(self, settings, set_):
+    def _save_specific(self, settings):
         # save prefs specific to the dg edition
         pass
     
-    def _save_values(self, settings, set_):
+    def _save_values(self, settings):
+        set_ = self.set_value
         set_('FilterHardness', self.filter_hardness)
         set_('MixFileKind', self.mix_file_kind)
         set_('UseRegexp', self.use_regexp)
@@ -69,7 +83,13 @@ class Preferences(PreferencesBase):
         set_('CustomCommand', self.custom_command)
         set_('ColumnsWidth', self.columns_width)
         set_('ColumnsVisible', self.columns_visible)
+        
+        set_('MainWindowIsMaximized', self.mainWindowIsMaximized)
+        self.set_rect('MainWindowRect', self.mainWindowRect)
+        self.set_rect('DetailsWindowRect', self.detailsWindowRect)
+        self.set_rect('DirectoriesWindowRect', self.directoriesWindowRect)
+        
         set_('RegistrationCode', self.registration_code)
         set_('RegistrationEmail', self.registration_email)
-        self._save_specific(settings, set_)
+        self._save_specific(settings)
     

@@ -23,13 +23,13 @@ class Preferences(PreferencesBase):
         (80, False), # dupe count
     ]
     
-    def _load_specific(self, settings, get):
-        self.match_scaled = get('MatchScaled', self.match_scaled)
+    def _load_specific(self, settings):
+        self.match_scaled = self.get_value('MatchScaled', self.match_scaled)
     
     def _reset_specific(self):
         self.filter_hardness = 95
         self.match_scaled = False
     
-    def _save_specific(self, settings, set_):
-        set_('MatchScaled', self.match_scaled)
+    def _save_specific(self, settings):
+        self.set_value('MatchScaled', self.match_scaled)
     

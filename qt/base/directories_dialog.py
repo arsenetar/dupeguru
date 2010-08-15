@@ -26,6 +26,7 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         self.connect(self.addButton, SIGNAL('clicked()'), self.addButtonClicked)
         self.connect(self.removeButton, SIGNAL('clicked()'), self.removeButtonClicked)
         self.connect(self.treeView.selectionModel(), SIGNAL('selectionChanged(QItemSelection,QItemSelection)'), self.selectionChanged)
+        self.app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -40,6 +41,9 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         header.setResizeMode(0, QHeaderView.Stretch)
         header.setResizeMode(1, QHeaderView.Fixed)
         header.resizeSection(1, 100)
+        
+        if self.app.prefs.directoriesWindowRect is not None:
+            self.setGeometry(self.app.prefs.directoriesWindowRect)
     
     def _updateRemoveButton(self):
         indexes = self.treeView.selectedIndexes()
@@ -51,6 +55,7 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         node = index.internalPointer()
         # label = 'Remove' if node.parent is None else 'Exclude'
     
+    #--- Events
     def addButtonClicked(self):
         title = "Select a directory to add to the scanning list"
         flags = QFileDialog.ShowDirsOnly
@@ -59,6 +64,9 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
             return
         self.lastAddedFolder = dirpath
         self.app.add_directory(dirpath)
+    
+    def appWillSavePrefs(self):
+        self.app.prefs.directoriesWindowRect = self.geometry()
     
     def doneButtonClicked(self):
         self.hide()

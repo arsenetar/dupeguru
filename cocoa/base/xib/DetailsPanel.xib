@@ -284,6 +284,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1024, 746}}</string>
 				<string key="NSMinSize">{451, 162}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSFrameAutosaveName">DetailsPanel</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">

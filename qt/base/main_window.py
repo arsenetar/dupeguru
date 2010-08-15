@@ -34,9 +34,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.connect(self.actionQuit, SIGNAL('triggered()'), QCoreApplication.instance().quit)
         self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
-        self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
         self.connect(self.resultsView, SIGNAL('spacePressed()'), self.resultsSpacePressed)
+        self.app.willSavePrefs.connect(self.appWillSavePrefs)
         
         # Actions (the vast majority of them are connected in the UI file, but I'm trying to
         # phase away from those, and these connections are harder to maintain than through simple
@@ -96,6 +96,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusLabel = QLabel(self)
         self.statusbar.addPermanentWidget(self.statusLabel, 1)
         
+        if self.app.prefs.mainWindowRect is not None and not self.app.prefs.mainWindowIsMaximized:
+            self.setGeometry(self.app.prefs.mainWindowRect)
+        
         # Linux setup
         if sys.platform == 'linux2':
             self.actionCheckForUpdate.setVisible(False) # This only works on Windows
@@ -115,18 +118,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             h.resizeSection(index, width)
             h.setSectionHidden(index, not visible)
         h.setResizeMode(0, QHeaderView.Stretch)
-    
-    def _save_columns(self):
-        h = self.resultsView.header()
-        widths = []
-        visible = []
-        for i in range(len(self.app.data.COLUMNS)):
-            widths.append(h.sectionSize(i))
-            visible.append(not h.isSectionHidden(i))
-        prefs = self.app.prefs
-        prefs.columns_width = widths
-        prefs.columns_visible = visible
-        prefs.save()
     
     def _update_column_actions_status(self):
         h = self.resultsView.header()
@@ -288,8 +279,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.show_help()
     
     #--- Events
-    def application_will_terminate(self):
-        self._save_columns()
+    def appWillSavePrefs(self):
+        prefs = self.app.prefs
+        h = self.resultsView.header()
+        widths = []
+        visible = []
+        for i in range(len(self.app.data.COLUMNS)):
+            widths.append(h.sectionSize(i))
+            visible.append(not h.isSectionHidden(i))
+        prefs.columns_width = widths
+        prefs.columns_visible = visible
+        prefs.mainWindowIsMaximized = self.isMaximized()
+        prefs.mainWindowRect = self.geometry()
     
     def columnToggled(self, action):
         colid = action.column_index

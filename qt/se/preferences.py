@@ -23,7 +23,8 @@ class Preferences(PreferencesBase):
         (80, False), # dupe count
     ]
     
-    def _load_specific(self, settings, get):
+    def _load_specific(self, settings):
+        get = self.get_value
         self.scan_type = get('ScanType', self.scan_type)
         self.word_weighting = get('WordWeighting', self.word_weighting)
         self.match_similar = get('MatchSimilar', self.match_similar)
@@ -38,7 +39,8 @@ class Preferences(PreferencesBase):
         self.ignore_small_files = True
         self.small_file_threshold = 10 # KB
     
-    def _save_specific(self, settings, set_):
+    def _save_specific(self, settings):
+        set_ = self.set_value
         set_('ScanType', self.scan_type)
         set_('WordWeighting', self.word_weighting)
         set_('MatchSimilar', self.match_similar)
