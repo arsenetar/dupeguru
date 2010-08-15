@@ -69,8 +69,6 @@ http://www.hardcoded.net/licenses/hs_license
     [_py setMixFileKind:[ud objectForKey:@"mixFileKind"]];
     [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
     NSInteger r = n2i([py doScan]);
-    if (r == 1)
-        [Dialogs showMessage:@"You cannot make a duplicate scan with only reference directories."];
     if (r == 3)
     {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];

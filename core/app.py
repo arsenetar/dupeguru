@@ -33,9 +33,6 @@ JOB_DELETE = 'job_delete'
 class NoScannableFileError(Exception):
     pass
 
-class AllFilesAreRefError(Exception):
-    pass
-
 class DupeGuru(RegistrableApplication, Broadcaster):
     DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
     
@@ -347,12 +344,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.info('Scanning %d files' % len(files))
             self.results.groups = self.scanner.GetDupeGroups(files, j)
         
-        files = self.directories.get_files()
-        first_file = first(files)
-        if first_file is None:
+        if not self.directories.has_any_file():
             raise NoScannableFileError()
-        if first_file.is_ref and all(f.is_ref for f in files):
-            raise AllFilesAreRefError()
         self.results.groups = []
         self._start_job(JOB_SCAN, do)
     

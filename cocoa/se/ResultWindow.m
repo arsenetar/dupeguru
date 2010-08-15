@@ -59,8 +59,6 @@ http://www.hardcoded.net/licenses/hs_license
     int r = n2i([py doScan]);
     if (r != 0)
         [[ProgressController mainProgressController] hide];
-    if (r == 1)
-        [Dialogs showMessage:@"You cannot make a duplicate scan with only reference directories."];
     if (r == 3)
     {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];

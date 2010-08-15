@@ -76,6 +76,4 @@ class DupeGuru(app.DupeGuru):
             return 0
         except app.NoScannableFileError:
             return 3
-        except app.AllFilesAreRefError:
-            return 1
     

@@ -124,6 +124,13 @@ class Directories(object):
         else:
             return STATE_NORMAL
     
+    def has_any_file(self):
+        try:
+            next(self.get_files())
+            return True
+        except StopIteration:
+            return False
+    
     def load_from_file(self, infile):
         try:
             root = ET.parse(infile).getroot()

@@ -122,6 +122,15 @@ class Directories(directories.Directories):
         else:
             directories.Directories.add_path(self, path)
     
+    def has_any_file(self):
+        # If we don't do that, it causes a hangup in the GUI when we click Start Scanning because
+        # checking if there's any file to scan involves reading the whole library. If we have the
+        # iPhoto library, we assume we have at least one file.
+        if any(path == Path('iPhoto Library') for path in self._dirs):
+            return True
+        else:
+            return directories.Directories.has_any_file(self)
+    
 
 class DupeGuruPE(app_cocoa.DupeGuru):
     def __init__(self):

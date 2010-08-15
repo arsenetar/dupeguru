@@ -14,7 +14,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel
 
 from hsutil.misc import nonone
 
-from core.app import NoScannableFileError, AllFilesAreRefError
+from core.app import NoScannableFileError
 
 from . import dg_rc
 from .main_window_ui import Ui_MainWindow
@@ -271,9 +271,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             msg = "The selected directories contain no scannable file."
             QMessageBox.warning(self, title, msg)
             self.app.show_directories()
-        except AllFilesAreRefError:
-            msg = "You cannot make a duplicate scan with only reference directories."
-            QMessageBox.warning(self, title, msg)
     
     def showHelpTriggered(self):
         self.app.show_help()
