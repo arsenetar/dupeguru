@@ -27,7 +27,7 @@ class DupeGuru(DupeGuruBase):
     EDITION = 'se'
     LOGO_NAME = 'logo_se'
     NAME = 'dupeGuru'
-    VERSION = '2.10.1'
+    VERSION = '2.11.0'
     DELTA_COLUMNS = frozenset([2, 4])
     
     def __init__(self):
