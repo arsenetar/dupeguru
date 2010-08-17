@@ -9,8 +9,7 @@
 import os.path as op
 import logging
 
-from PyQt4.QtGui import QImage
-import PIL.Image
+from PyQt4.QtGui import QImage, QImageReader
 
 from hsutil.str import get_file_ext
 
@@ -41,9 +40,13 @@ class File(fs.File):
         fs.File._read_info(self, field)
         if field == 'dimensions':
             try:
-                im = PIL.Image.open(str(self.path))
-                self.dimensions = im.size
-            except IOError:
+                ir = QImageReader(str(self.path))
+                size = ir.size()
+                if size.isValid():
+                    self.dimensions = (size.width(), size.height())
+                else:
+                    self.dimensions = (0, 0)
+            except EnvironmentError:
                 self.dimensions = (0, 0)
                 logging.warning("Could not read image '%s'", str(self.path))
     
