@@ -40,14 +40,14 @@ getblock(PyObject *image, int width, int height)
         int i;
         
         pi = PyObject_CallMethod(image, "bytesPerLine", NULL);
-        bytes_per_line = PyInt_AsSsize_t(pi);
+        bytes_per_line = PyLong_AsLong(pi);
         Py_DECREF(pi);
         
         sipptr = PyObject_CallMethod(image, "bits", NULL);
         /* int(sipptr) returns the address of the pointer */
         pi = PyObject_CallMethod(sipptr, "__int__", NULL);
         Py_DECREF(sipptr);
-        s = (char *)PyInt_AsSsize_t(pi);
+        s = (char *)PyLong_AsLong(pi);
         Py_DECREF(pi);
         /* Qt aligns all its lines on 32bit, which means that if the number of bytes per
          * line for image is not divisible by 4, there's going to be crap inserted in "s"
@@ -74,9 +74,9 @@ getblock(PyObject *image, int width, int height)
         blue /= pixel_count;
     }
     
-    pred = PyInt_FromSsize_t(red);
-    pgreen = PyInt_FromSsize_t(green);
-    pblue = PyInt_FromSsize_t(blue);
+    pred = PyLong_FromLong(red);
+    pgreen = PyLong_FromLong(green);
+    pblue = PyLong_FromLong(blue);
     result = PyTuple_Pack(3, pred, pgreen, pblue);
     Py_DECREF(pred);
     Py_DECREF(pgreen);
@@ -107,10 +107,10 @@ block_getblocks(PyObject *self, PyObject *args)
     }
     
     pi = PyObject_CallMethod(image, "width", NULL);
-    width = PyInt_AsSsize_t(pi);
+    width = PyLong_AsLong(pi);
     Py_DECREF(pi);
     pi = PyObject_CallMethod(image, "height", NULL);
-    height = PyInt_AsSsize_t(pi);
+    height = PyLong_AsLong(pi);
     Py_DECREF(pi);
     
     if (!(width && height)) {
@@ -157,11 +157,24 @@ static PyMethodDef BlockMethods[] = {
     {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC
-init_block(void)
+static struct PyModuleDef BlockDef = {
+    PyModuleDef_HEAD_INIT,
+    "_block",
+    NULL,
+    -1,
+    BlockMethods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyObject *
+PyInit__block(void)
 {
-    PyObject *m = Py_InitModule("_block", BlockMethods);
+    PyObject *m = PyModule_Create(&BlockDef);
     if (m == NULL) {
-        return;
+        return NULL;
     }
+    return m;
 }

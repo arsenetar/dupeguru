@@ -13,6 +13,7 @@ import os.path as op
 import shutil
 
 from setuptools import setup
+from distutils.extension import Extension
 import yaml
 
 from hscommon import helpgen
@@ -65,14 +66,47 @@ def build_cocoa(edition, dev, help_destpath):
     os.chdir('..')
 
 def build_qt(edition, dev):
+    print("Building Qt stuff")
     build_all_qt_ui(op.join('qtlib', 'ui'))
     build_all_qt_ui(op.join('qt', 'base'))
     build_all_qt_ui(op.join('qt', edition))
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
-    if edition == 'pe':
-        os.chdir(op.join('qt', edition))
-        os.system('python3 gen.py')
-        os.chdir(op.join('..', '..'))
+
+def build_pe_modules(ui):
+    def move(src, dst):
+        if not op.exists(src):
+            return
+        if op.exists(dst):
+            os.remove(dst)
+        print('Moving %s --> %s' % (src, dst))
+        os.rename(src, dst)
+    
+    print("Building PE Modules")
+    exts = [
+        Extension("_block", [op.join('core_pe', 'modules', 'block.c'), op.join('core_pe', 'modules', 'common.c')]),
+        Extension("_cache", [op.join('core_pe', 'modules', 'cache.c'), op.join('core_pe', 'modules', 'common.c')]),
+    ]
+    if ui == 'qt':
+        exts.append(Extension("_block_qt", [op.join('qt', 'pe', 'modules', 'block.c')]))
+    elif ui == 'cocoa':
+        exts.append(Extension(
+            "_block_osx", [op.join('core_pe', 'modules', 'block_osx.m'), op.join('core_pe', 'modules', 'common.c')],
+            extra_link_args=[
+                "-framework", "CoreFoundation",
+                "-framework", "Foundation",
+                "-framework", "ApplicationServices",]
+        ))
+    setup(
+        script_args = ['build_ext', '--inplace'],
+        ext_modules = exts,
+    )
+    move('_block.so', op.join('core_pe', '_block.so'))
+    move('_block.pyd', op.join('core_pe', '_block.pyd'))
+    move('_block_osx.so', op.join('core_pe', '_block_osx.so'))
+    move('_cache.so', op.join('core_pe', '_cache.so'))
+    move('_cache.pyd', op.join('core_pe', '_cache.pyd'))
+    move('_block_qt.so', op.join('qt', 'pe', '_block.so'))
+    move('_block_qt.pyd', op.join('qt', 'pe', '_block.pyd'))
 
 def main():
     conf = yaml.load(open('conf.yaml'))
@@ -93,9 +127,7 @@ def main():
     helpgen.gen(help_basepath, help_destpath, profile=profile)
     print("Building dupeGuru")
     if edition == 'pe':
-        os.chdir('core_pe')
-        os.system('python3 gen.py')
-        os.chdir('..')
+        build_pe_modules(ui)
     if ui == 'cocoa':
         build_cocoa(edition, dev, help_destpath)
     elif ui == 'qt':
