@@ -74,6 +74,7 @@ def package_windows(edition, dev):
 
 def package_debian(edition):
     add_to_pythonpath('qt')
+    add_to_pythonpath(op.join('qt', 'base'))
     add_to_pythonpath(op.join('qt', edition))
     from app import DupeGuru
     
@@ -89,6 +90,14 @@ def package_debian(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
+    import PyQt4
+    qtsrcpath = op.dirname(PyQt4.__file__)
+    qtdestpath = op.join(srcpath, 'PyQt4')
+    os.makedirs(qtdestpath)
+    shutil.copy(op.join(qtsrcpath, '__init__.py'), qtdestpath)
+    shutil.copy(op.join(qtsrcpath, 'Qt.so'), qtdestpath)
+    shutil.copy(op.join(qtsrcpath, 'QtCore.so'), qtdestpath)
+    shutil.copy(op.join(qtsrcpath, 'QtGui.so'), qtdestpath)
     shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
     yaml_path = op.join(help_src, 'changelog.yaml')
     changelog_dest = op.join(destpath, 'debian', 'changelog')

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
 # 
 # This software is licensed under the "HS" License as described in the "LICENSE" file, 
@@ -6,6 +6,7 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 import sys
+import os.path
 import sip
 sip.setapi('QVariant', 1)
 
@@ -14,11 +15,15 @@ from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
 import base.dg_rc
 
+if sys.platform == 'linux2':
+    # Under Python3, we have to add 'base' to pythonpath because UI files don't use
+    # relative imports.
+    sys.path.append(os.path.dirname(base.dg_rc.__file__))
+
 from app import DupeGuru
 
 if sys.platform == 'win32':
     import base.cxfreeze_fix
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
