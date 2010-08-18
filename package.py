@@ -90,7 +90,8 @@ def package_debian(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
-    import PyQt4
+    import sip, PyQt4
+    shutil.copy(sip.__file__, srcpath)
     qtsrcpath = op.dirname(PyQt4.__file__)
     qtdestpath = op.join(srcpath, 'PyQt4')
     os.makedirs(qtdestpath)
