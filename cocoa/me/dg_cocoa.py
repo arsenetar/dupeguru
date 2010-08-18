@@ -17,7 +17,6 @@ import hsaudiotag.aiff, hsaudiotag.flac, hsaudiotag.genres, hsaudiotag.id3v1,\
 from hsaudiotag import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
 import hsutil.conflict
 import core.engine, core.fs, core.app
-import core_se.fs, core_se.data
 import xml.etree.ElementPath
 import gzip
 import aem.kae
