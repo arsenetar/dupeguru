@@ -1,7 +1,7 @@
 - date: 2010-08-18
   version: 2.11.0
   description: |
-    * Added the ability to save (and reload them) at arbitrary locations.
+    * Added the ability to save results (and reload them) at arbitrary locations.
     * Improved the way reference files in dupe groups are chosen. (#15)
     * Remember size/position of all windows between launches. (#102)
     * Fixed a bug sometimes preventing dupeGuru from reloading previous results.
