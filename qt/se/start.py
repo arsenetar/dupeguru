@@ -15,11 +15,6 @@ from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
 import base.dg_rc
 
-if sys.platform == 'linux2':
-    # Under Python3, we have to add 'base' to pythonpath because UI files don't use
-    # relative imports.
-    sys.path.append(os.path.dirname(base.dg_rc.__file__))
-
 from app import DupeGuru
 
 if sys.platform == 'win32':

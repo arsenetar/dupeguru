@@ -34,7 +34,6 @@ def package_windows(edition, dev):
         return
     add_to_pythonpath('.')
     add_to_pythonpath('qt')
-    add_to_pythonpath(op.join('qt', 'base'))
     add_to_pythonpath(op.join('qt', edition))
     os.chdir(op.join('qt', edition))
     from app import DupeGuru
@@ -74,7 +73,6 @@ def package_windows(edition, dev):
 
 def package_debian(edition):
     add_to_pythonpath('qt')
-    add_to_pythonpath(op.join('qt', 'base'))
     add_to_pythonpath(op.join('qt', edition))
     from app import DupeGuru
     

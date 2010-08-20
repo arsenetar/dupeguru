@@ -463,7 +463,7 @@
   <customwidget>
    <class>ResultsView</class>
    <extends>QTreeView</extends>
-   <header>results_model</header>
+   <header>.results_model</header>
   </customwidget>
  </customwidgets>
  <resources>

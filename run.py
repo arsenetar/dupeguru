@@ -32,7 +32,6 @@ def main():
     elif ui == 'qt':
         add_to_pythonpath('.')
         add_to_pythonpath('qt')
-        add_to_pythonpath(op.join('qt', 'base'))
         os.chdir(op.join('qt', edition))
         os.system('{0} start.py'.format(sys.executable))
         os.chdir('..')
