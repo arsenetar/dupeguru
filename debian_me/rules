@@ -42,9 +42,9 @@ install: build
 	dh_installdirs
 
 	chmod +x src/start.py
-	cp -R src/ $(CURDIR)/debian/tmp/usr/local/share/dupeguru_me
-	cp $(CURDIR)/debian/dupeguru_me.desktop $(CURDIR)/debian/tmp/usr/share/applications
-	ln -s /usr/local/share/dupeguru_me/start.py $(CURDIR)/debian/tmp/usr/local/bin/dupeguru_me
+	cp -R src/ $(CURDIR)/debian/dupeguru-me/usr/local/share/dupeguru_me
+	cp $(CURDIR)/debian/dupeguru_me.desktop $(CURDIR)/debian/dupeguru-me/usr/share/applications
+	ln -s /usr/local/share/dupeguru_me/start.py $(CURDIR)/debian/dupeguru-me/usr/local/bin/dupeguru_me
 
 
 # Build architecture-independent files here.
