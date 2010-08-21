@@ -6,7 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import tempfile
 import os.path as op
 from tempfile import mkdtemp
 
@@ -131,7 +130,7 @@ def export_to_xhtml(colnames, rows):
     content = MAIN_TEMPLATE.replace('$colheaders', colheaders).replace('$rows', rendered_rows)
     folder = mkdtemp()
     destpath = op.join(folder, 'export.htm')
-    fp = open(destpath, 'w')
-    fp.write(content.encode('utf-8'))
+    fp = open(destpath, 'wt', encoding='utf-8')
+    fp.write(content)
     fp.close()
     return destpath
