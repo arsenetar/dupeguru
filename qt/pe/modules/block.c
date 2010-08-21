@@ -159,7 +159,7 @@ static PyMethodDef BlockMethods[] = {
 
 static struct PyModuleDef BlockDef = {
     PyModuleDef_HEAD_INIT,
-    "_block",
+    "_block_qt",
     NULL,
     -1,
     BlockMethods,
@@ -170,7 +170,7 @@ static struct PyModuleDef BlockDef = {
 };
 
 PyObject *
-PyInit__block(void)
+PyInit__block_qt(void)
 {
     PyObject *m = PyModule_Create(&BlockDef);
     if (m == NULL) {

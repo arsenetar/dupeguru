@@ -105,8 +105,8 @@ def build_pe_modules(ui):
     move('_block_osx.so', op.join('core_pe', '_block_osx.so'))
     move('_cache.so', op.join('core_pe', '_cache.so'))
     move('_cache.pyd', op.join('core_pe', '_cache.pyd'))
-    move('_block_qt.so', op.join('qt', 'pe', '_block.so'))
-    move('_block_qt.pyd', op.join('qt', 'pe', '_block.pyd'))
+    move('_block_qt.so', op.join('qt', 'pe', '_block_qt.so'))
+    move('_block_qt.pyd', op.join('qt', 'pe', '_block_qt.pyd'))
 
 def main():
     conf = yaml.load(open('conf.yaml'))

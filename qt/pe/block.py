@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-from _block import getblocks
+from _block_qt import getblocks
 
 # Converted to C
 # def getblock(image):
