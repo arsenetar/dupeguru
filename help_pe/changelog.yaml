@@ -1,3 +1,12 @@
+- date: 2010-08-21
+  version: 1.10.0
+  description: |
+    * Added the ability to save results (and reload them) at arbitrary locations.
+    * Improved the way reference files in dupe groups are chosen. (#15)
+    * Remember size/position of all windows between launches. (#102)
+    * Fixed a bug sometimes preventing dupeGuru from reloading previous results.
+    * Fixed a bug sometimes causing the progress dialog to be stuck there. [Mac OS X] (#103)
+    * Removed the Creation Date column, which wasn't displaying the correct value anyway. (#101)
 - date: 2010-07-17
   version: 1.9.1
   description: |
