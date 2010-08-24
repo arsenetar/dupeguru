@@ -3,4 +3,4 @@ base:
     skeleton: skeleton
     changelog: changelog.yaml
     tixurl: "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
-    firstpage_meta: "<meta name=\"AppleTitle\" content=\"dupeGuru Help\"></meta>"
+    firstpage_meta: "<meta name=\"AppleTitle\" content=\"dupeGuru ME Help\"></meta>"
