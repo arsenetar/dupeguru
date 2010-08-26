@@ -1,3 +1,7 @@
+- date: 2010-08-26
+  version: 2.11.1
+  description: |
+    * Fixed HTML exporting which was broken in 2.11.0.
 - date: 2010-08-18
   version: 2.11.0
   description: |
