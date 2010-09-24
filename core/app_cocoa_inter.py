@@ -127,7 +127,13 @@ class PyDupeGuruBase(PyRegistrable):
     
     #---Worker
     def getJobProgress(self):
-        return self.py.progress.last_progress
+        try:
+            return self.py.progress.last_progress
+        except AttributeError:
+            # I have *no idea* why this can possible happen (last_progress is always set by
+            # create_job() *before* any threaded job notification, which shows the progress panel,
+            # is sent), but it happens anyway, so there we go.
+            return -1
     
     def getJobDesc(self):
         return self.py.progress.last_desc
