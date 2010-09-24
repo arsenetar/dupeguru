@@ -7,18 +7,19 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "PyOutline.h"
+#import "HSTable.h"
+#import "PyResultTable.h"
 
-@interface PyResultTree : PyOutline
+@interface ResultTable : HSTable
+{
+    NSIndexSet *_deltaColumns;
+}
+- (PyResultTable *)py;
 - (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
 - (BOOL)deltaValuesMode;
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
-
-- (NSString *)valueForPath:(NSArray *)aPath column:(NSInteger)aColumn;
-- (BOOL)renameSelected:(NSString *)aNewName;
-- (void)sortBy:(NSInteger)aIdentifier ascending:(BOOL)aAscending;
-- (void)markSelected;
+- (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns;
+- (NSInteger)selectedDupeCount;
 - (void)removeSelected;
-- (NSArray *)rootChildrenCounts;
-@end
+@end;

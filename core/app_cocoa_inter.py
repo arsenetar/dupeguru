@@ -15,7 +15,7 @@ from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.problem_dialog import ProblemDialog
 from .gui.problem_table import ProblemTable
-from .gui.result_tree import ResultTree
+from .gui.result_table import ResultTable
 from .gui.stats_label import StatsLabel
 
 # Fix py2app's problems on relative imports
@@ -163,8 +163,8 @@ class PyDirectoryOutline(PyOutline):
         self.py.add_directory(path)
     
 
-class PyResultOutline(PyOutline):
-    py_class = ResultTree
+class PyResultTable(PyTable):
+    py_class = ResultTable
     
     @signature('c@:')
     def powerMarkerMode(self):
@@ -182,9 +182,9 @@ class PyResultOutline(PyOutline):
     def setDeltaValuesMode_(self, value):
         self.py.delta_values = value
     
-    @signature('@@:@i')
-    def valueForPath_column_(self, path, column):
-        return self.py.get_node_value(path, column)
+    @signature('@@:ii')
+    def valueForRow_column_(self, row_index, column):
+        return self.py.get_row_value(row_index, column)
     
     @signature('c@:@')
     def renameSelected_(self, newname):
@@ -200,8 +200,9 @@ class PyResultOutline(PyOutline):
     def removeSelected(self):
         self.py.app.remove_selected()
     
-    def rootChildrenCounts(self):
-        return self.py.root_children_counts()
+    @signature('i@:')
+    def selectedDupeCount(self):
+        return self.py.selected_dupe_count
     
     # python --> cocoa
     def invalidate_markings(self):

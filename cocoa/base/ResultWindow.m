@@ -19,7 +19,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     [self window];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
-    outline = [[ResultOutline alloc] initWithPyParent:py view:matches];
+    table = [[ResultTable alloc] initWithPyParent:py view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
     problemDialog = [[ProblemDialog alloc] initWithPy:py];
     [self initResultColumns];
@@ -37,7 +37,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)dealloc
 {
-    [outline release];
+    [table release];
     [preferencesPanel release];
     [statsLabel release];
     [problemDialog release];
@@ -137,12 +137,12 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)changeDelta:(id)sender
 {
-    [outline setDeltaValuesMode:[deltaSwitch selectedSegment] == 1];
+    [table setDeltaValuesMode:[deltaSwitch selectedSegment] == 1];
 }
 
 - (IBAction)changePowerMarker:(id)sender
 {
-    [outline setPowerMarkerMode:[pmSwitch selectedSegment] == 1];
+    [table setPowerMarkerMode:[pmSwitch selectedSegment] == 1];
 }
 
 - (IBAction)copyMarked:(id)sender
@@ -191,7 +191,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)ignoreSelected:(id)sender
 {
-    NSInteger selectedDupeCount = [outline selectedDupeCount];
+    NSInteger selectedDupeCount = [table selectedDupeCount];
     if (!selectedDupeCount)
         return;
     NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",selectedDupeCount];
@@ -293,7 +293,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)removeSelected:(id)sender
 {
-    [outline removeSelected];
+    [table removeSelected];
 }
 
 - (IBAction)renameSelected:(id)sender
@@ -416,8 +416,8 @@ http://www.hardcoded.net/licenses/hs_license
         }
     }
     else if ([lastAction isEqualTo:jobScan]) {
-        NSInteger groupCount = [outline intProperty:@"children_count" valueAtPath:nil];
-        if (groupCount == 0)
+        NSInteger rowCount = [[table py] numberOfRows];
+        if (rowCount == 0)
             [Dialogs showMessage:@"No duplicates found."];
     }
     

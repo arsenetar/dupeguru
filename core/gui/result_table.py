@@ -9,14 +9,14 @@
 
 from operator import attrgetter
 
-from hsgui.tree import Tree, Node
+from hsgui.table import GUITable, Row
 
 from .base import GUIObject
 
-class DupeNode(Node):
-    def __init__(self, app, group, dupe):
-        Node.__init__(self, '')
-        self._app = app
+class DupeRow(Row):
+    def __init__(self, table, group, dupe):
+        Row.__init__(self, table)
+        self._app = table.app
         self._group = group
         self._dupe = dupe
         self._data = None
@@ -35,6 +35,10 @@ class DupeNode(Node):
         return self._data_delta
     
     @property
+    def isref(self):
+        return self._dupe is self._group.ref
+    
+    @property
     def markable(self):
         return self._app.results.is_markable(self._dupe)
     
@@ -47,10 +51,10 @@ class DupeNode(Node):
         self._app.mark_dupe(self._dupe, value)
     
 
-class ResultTree(GUIObject, Tree):
+class ResultTable(GUIObject, GUITable):
     def __init__(self, view, app):
         GUIObject.__init__(self, view, app)
-        Tree.__init__(self)
+        GUITable.__init__(self)
         self._power_marker = False
         self._delta_values = False
         self._sort_descriptors = (0, True)
@@ -58,52 +62,46 @@ class ResultTree(GUIObject, Tree):
     #--- Override
     def connect(self):
         GUIObject.connect(self)
-        self._refresh()
+        self.refresh()
         self.view.refresh()
     
-    def _select_nodes(self, nodes):
-        Tree._select_nodes(self, nodes)
-        self.app._select_dupes(list(map(attrgetter('_dupe'), nodes)))
+    def _restore_selection(self, previous_selection):
+        if self.app.selected_dupes:
+            to_find = set(self.app.selected_dupes)
+            indexes = [i for i, r in enumerate(self) if r._dupe in to_find]
+            self.selected_indexes = indexes
     
-    #--- Private
-    def _refresh(self):
-        self.clear()
+    def _update_selection(self):
+        rows = self.selected_rows
+        self.app._select_dupes(list(map(attrgetter('_dupe'), rows)))
+    
+    def _fill(self):
         if not self.power_marker:
             for group in self.app.results.groups:
-                group_node = DupeNode(self.app, group, group.ref)
-                self.append(group_node)
+                self.append(DupeRow(self, group, group.ref))
                 for dupe in group.dupes:
-                    group_node.append(DupeNode(self.app, group, dupe))
+                    self.append(DupeRow(self, group, dupe))
         else:
             for dupe in self.app.results.dupes:
                 group = self.app.results.get_group_of_duplicate(dupe)
-                self.append(DupeNode(self.app, group, dupe))
-        if self.app.selected_dupes:
-            to_find = set(self.app.selected_dupes)
-            nodes = list(self.findall(lambda n: n is not self and n._dupe in to_find))
-            self.selected_nodes = nodes
+                self.append(DupeRow(self, group, dupe))
     
     #--- Public
-    def get_node_value(self, path, column):
+    def get_row_value(self, index, column):
         try:
-            node = self.get_node(path)
+            row = self[index]
         except IndexError:
             return '---'
         if self.delta_values:
-            return node.data_delta[column]
+            return row.data_delta[column]
         else:
-            return node.data[column]
+            return row.data[column]
     
     def rename_selected(self, newname):
-        node = self.selected_node
-        node._data = None
-        node._data_delta = None
+        row = self.selected_row
+        row._data = None
+        row._data_delta = None
         return self.app.rename_selected(newname)
-    
-    def root_children_counts(self):
-        # This is a speed optimization for cases where there's a lot of results so that there is
-        # not thousands of children_count queries when expandAll is called.
-        return [len(node) for node in self]
     
     def sort(self, key, asc):
         if self.power_marker:
@@ -111,7 +109,7 @@ class ResultTree(GUIObject, Tree):
         else:
             self.app.results.sort_groups(key, asc)
         self._sort_descriptors = (key, asc)
-        self._refresh()
+        self.refresh()
         self.view.refresh()
     
     #--- Properties
@@ -126,7 +124,7 @@ class ResultTree(GUIObject, Tree):
         self._power_marker = value
         key, asc = self._sort_descriptors
         self.sort(key, asc)
-        self._refresh()
+        self.refresh()
         self.view.refresh()
     
     @property
@@ -138,22 +136,26 @@ class ResultTree(GUIObject, Tree):
         if value == self._delta_values:
             return
         self._delta_values = value
-        self._refresh()
+        self.refresh()
         self.view.refresh()
+    
+    @property
+    def selected_dupe_count(self):
+        return sum(1 for row in self.selected_rows if not row.isref)
     
     #--- Event Handlers
     def marking_changed(self):
         self.view.invalidate_markings()
     
     def results_changed(self):
-        self._refresh()
+        self.refresh()
         self.view.refresh()
     
     def results_changed_but_keep_selection(self):
         # What we want to to here is that instead of restoring selected *dupes* after refresh, we
         # restore selected *paths*.
-        paths = self.selected_paths
-        self._refresh()
-        self.selected_paths = paths
+        indexes = self.selected_indexes
+        self.refresh()
+        self.select(indexes)
         self.view.refresh()
     

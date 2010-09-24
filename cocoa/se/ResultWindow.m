@@ -20,7 +20,7 @@ http://www.hardcoded.net/licenses/hs_license
     [super awakeFromNib];
     NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
     [deltaColumns addIndex:4];
-    [outline setDeltaColumns:deltaColumns];
+    [table setDeltaColumns:deltaColumns];
 }
 
 /* Actions */

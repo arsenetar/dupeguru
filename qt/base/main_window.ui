@@ -26,26 +26,20 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
-      <property name="rootIsDecorated">
-       <bool>false</bool>
-      </property>
-      <property name="uniformRowHeights">
-       <bool>true</bool>
-      </property>
-      <property name="itemsExpandable">
-       <bool>false</bool>
-      </property>
       <property name="sortingEnabled">
        <bool>true</bool>
       </property>
-      <property name="expandsOnDoubleClick">
-       <bool>false</bool>
-      </property>
-      <attribute name="headerStretchLastSection">
+      <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
-      <attribute name="headerStretchLastSection">
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>18</number>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
        <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>18</number>
       </attribute>
      </widget>
     </item>
@@ -57,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>630</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuColumns">
@@ -462,7 +456,7 @@
  <customwidgets>
   <customwidget>
    <class>ResultsView</class>
-   <extends>QTreeView</extends>
+   <extends>QTableView</extends>
    <header>.results_model</header>
   </customwidget>
  </customwidgets>

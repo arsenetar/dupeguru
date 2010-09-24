@@ -7,62 +7,20 @@
 # http://www.hardcoded.net/licenses/hs_license
 
 from PyQt4.QtCore import SIGNAL, Qt
-from PyQt4.QtGui import (QBrush, QStyledItemDelegate, QFont, QTreeView, QColor, QItemSelectionModel,
-    QItemSelection)
+from PyQt4.QtGui import QBrush, QFont, QTableView, QColor, QItemSelectionModel, QItemSelection
 
-from qtlib.tree_model import TreeModel, RefNode
+from qtlib.table import Table
 
-from core.gui.result_tree import ResultTree as ResultTreeModel
+from core.gui.result_table import ResultTable as ResultTableModel
 
-class ResultsDelegate(QStyledItemDelegate):
-    def initStyleOption(self, option, index):
-        QStyledItemDelegate.initStyleOption(self, option, index)
-        node = index.internalPointer()
-        ref = node.ref
-        if ref._group.ref is ref._dupe:
-            newfont = QFont(option.font)
-            newfont.setBold(True)
-            option.font = newfont
-    
-
-class ResultsModel(TreeModel):
+class ResultsModel(Table):
     def __init__(self, app, view):
-        TreeModel.__init__(self)
-        self.view = view
+        model = ResultTableModel(self, app)
         self._app = app
         self._data = app.data
         self._delta_columns = app.DELTA_COLUMNS
-        self.resultsDelegate = ResultsDelegate()
-        self.model = ResultTreeModel(self, app)
-        self.view.setItemDelegate(self.resultsDelegate)
-        self.view.setModel(self)
+        Table.__init__(self, model, view)
         self.model.connect()
-        
-        self.connect(self.view.selectionModel(), SIGNAL('selectionChanged(QItemSelection,QItemSelection)'), self.selectionChanged)
-    
-    def _createNode(self, ref, row):
-        return RefNode(self, None, ref, row)
-    
-    def _getChildren(self):
-        return list(self.model)
-    
-    def _updateSelection(self):
-        selectedIndexes = []
-        for path in self.model.selected_paths:
-            modelIndex = self.findIndex(path)
-            if modelIndex.isValid():
-                selectedIndexes.append(modelIndex)
-        if selectedIndexes:
-            selection = QItemSelection()
-            for modelIndex in selectedIndexes:
-                selection.select(modelIndex, modelIndex)
-            flags = QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows
-            self.view.selectionModel().select(selection, flags)
-            flags = QItemSelectionModel.Rows
-            self.view.selectionModel().setCurrentIndex(selectedIndexes[0], flags)
-            self.view.scrollTo(selectedIndexes[0])
-        else:
-            self.view.selectionModel().clear()
     
     def columnCount(self, parent):
         return len(self._data.COLUMNS)
@@ -70,22 +28,26 @@ class ResultsModel(TreeModel):
     def data(self, index, role):
         if not index.isValid():
             return None
-        node = index.internalPointer()
-        ref = node.ref
+        row = self.model[index.row()]
         if role == Qt.DisplayRole:
-            data = ref.data_delta if self.model.delta_values else ref.data
+            data = row.data_delta if self.model.delta_values else row.data
             return data[index.column()]
         elif role == Qt.CheckStateRole:
-            if index.column() == 0 and ref.markable:
-                return Qt.Checked if ref.marked else Qt.Unchecked
+            if index.column() == 0 and row.markable:
+                return Qt.Checked if row.marked else Qt.Unchecked
         elif role == Qt.ForegroundRole:
-            if ref._dupe is ref._group.ref or ref._dupe.is_ref:
+            if row.isref:
                 return QBrush(Qt.blue)
             elif self.model.delta_values and index.column() in self._delta_columns:
                 return QBrush(QColor(255, 142, 40)) # orange
+        elif role == Qt.FontRole:
+            isBold = row.isref
+            font = QFont(self.view.font())
+            font.setBold(isBold)
+            return font
         elif role == Qt.EditRole:
             if index.column() == 0:
-                return ref.data[index.column()]
+                return row.data[index.column()]
         return None
     
     def flags(self, index):
@@ -93,7 +55,10 @@ class ResultsModel(TreeModel):
             return Qt.ItemIsEnabled
         flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
         if index.column() == 0:
-            flags |= Qt.ItemIsUserCheckable | Qt.ItemIsEditable
+            flags |= Qt.ItemIsEditable
+            row = self.model[index.row()]
+            if row.markable:
+                flags |= Qt.ItemIsUserCheckable
         return flags
     
     def headerData(self, section, orientation, role):
@@ -104,13 +69,12 @@ class ResultsModel(TreeModel):
     def setData(self, index, value, role):
         if not index.isValid():
             return False
-        node = index.internalPointer()
-        ref = node.ref
+        row = self.model[index.row()]
         if role == Qt.CheckStateRole:
             if index.column() == 0:
-                self._app.mark_dupe(ref._dupe, value.toBool())
+                self._app.mark_dupe(row._dupe, value.toBool())
                 return True
-        if role == Qt.EditRole:
+        elif role == Qt.EditRole:
             if index.column() == 0:
                 value = str(value.toString())
                 return self.model.rename_selected(value)
@@ -136,18 +100,7 @@ class ResultsModel(TreeModel):
     def delta_values(self, value):
         self.model.delta_values = value
     
-    #--- Events
-    def selectionChanged(self, selected, deselected):
-        indexes = self.view.selectionModel().selectedRows()
-        nodes = [index.internalPointer() for index in indexes]
-        self.model.selected_nodes = [node.ref for node in nodes]
-    
     #--- model --> view
-    def refresh(self):
-        self.reset()
-        self.view.expandAll()
-        self._updateSelection()
-    
     def invalidate_markings(self):
         # redraw view
         # HACK. this is the only way I found to update the widget without reseting everything
@@ -155,13 +108,13 @@ class ResultsModel(TreeModel):
         self.view.scroll(0, -1)
     
 
-class ResultsView(QTreeView):
+class ResultsView(QTableView):
     #--- Override
     def keyPressEvent(self, event):
         if event.text() == ' ':
             self.emit(SIGNAL('spacePressed()'))
             return
-        QTreeView.keyPressEvent(self, event)
+        QTableView.keyPressEvent(self, event)
     
     def mouseDoubleClickEvent(self, event):
         self.emit(SIGNAL('doubleClicked()'))

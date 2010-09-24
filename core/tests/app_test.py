@@ -23,7 +23,7 @@ from .. import app, fs, engine
 from ..app import DupeGuru as DupeGuruBase
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
-from ..gui.result_tree import ResultTree
+from ..gui.result_table import ResultTable
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -166,11 +166,11 @@ class TCDupeGuruWithResults(TestCase):
         self.dpanel = DetailsPanel(self.dpanel_gui, self.app)
         self.dtree_gui = CallLogger()
         self.dtree = DirectoryTree(self.dtree_gui, self.app)
-        self.rtree_gui = CallLogger()
-        self.rtree = ResultTree(self.rtree_gui, self.app)
+        self.rtable_gui = CallLogger()
+        self.rtable = ResultTable(self.rtable_gui, self.app)
         self.dpanel.connect()
         self.dtree.connect()
-        self.rtree.connect()
+        self.rtable.connect()
         tmppath = self.tmppath()
         io.mkdir(tmppath + 'foo')
         io.mkdir(tmppath + 'bar')
@@ -217,42 +217,35 @@ class TCDupeGuruWithResults(TestCase):
     def test_GetObjects(self):
         objects = self.objects
         groups = self.groups
-        n = self.rtree.get_node([0])
-        assert n._group is groups[0]
-        assert n._dupe is objects[0]
-        n = self.rtree.get_node([0, 0])
-        assert n._group is groups[0]
-        assert n._dupe is objects[1]
-        n = self.rtree.get_node([1, 0])
-        assert n._group is groups[1]
-        assert n._dupe is objects[4]
+        r = self.rtable[0]
+        assert r._group is groups[0]
+        assert r._dupe is objects[0]
+        r = self.rtable[1]
+        assert r._group is groups[0]
+        assert r._dupe is objects[1]
+        r = self.rtable[4]
+        assert r._group is groups[1]
+        assert r._dupe is objects[4]
     
     def test_GetObjects_after_sort(self):
         objects = self.objects
         groups = self.groups[:] # we need an un-sorted reference
-        self.rtree.sort(0, False) #0 = Filename
-        n = self.rtree.get_node([0, 0])
-        assert n._group is groups[1]
-        assert n._dupe is objects[4]
-    
-    def test_selected_result_node_paths(self):
-        # app.selected_dupes is correctly converted into node paths
-        paths = [[0, 0], [0, 1], [1]]
-        self.rtree.selected_paths = paths
-        eq_(self.rtree.selected_paths, paths)
+        self.rtable.sort(0, False) #0 = Filename
+        r = self.rtable[1]
+        assert r._group is groups[1]
+        assert r._dupe is objects[4]
     
     def test_selected_result_node_paths_after_deletion(self):
         # cases where the selected dupes aren't there are correctly handled
-        paths = [[0, 0], [0, 1], [1]]
-        self.rtree.selected_paths = paths
+        self.rtable.select([1, 2, 3])
         self.app.remove_selected()
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
-        eq_(self.rtree.selected_paths, [[0, 0]]) # no exception
+        eq_(self.rtable.selected_indexes, [1]) # no exception
     
     def test_selectResultNodePaths(self):
         app = self.app
         objects = self.objects
-        self.rtree.selected_paths = [[0, 0], [0, 1]]
+        self.rtable.select([1, 2])
         eq_(len(app.selected_dupes), 2)
         assert app.selected_dupes[0] is objects[1]
         assert app.selected_dupes[1] is objects[2]
@@ -260,7 +253,7 @@ class TCDupeGuruWithResults(TestCase):
     def test_selectResultNodePaths_with_ref(self):
         app = self.app
         objects = self.objects
-        self.rtree.selected_paths = [[0, 0], [0, 1], [1]]
+        self.rtable.select([1, 2, 3])
         eq_(len(app.selected_dupes), 3)
         assert app.selected_dupes[0] is objects[1]
         assert app.selected_dupes[1] is objects[2]
@@ -270,9 +263,9 @@ class TCDupeGuruWithResults(TestCase):
         app = self.app
         objects = self.objects
         groups = self.groups[:] #To keep the old order in memory
-        self.rtree.sort(0, False) #0 = Filename
+        self.rtable.sort(0, False) #0 = Filename
         #Now, the group order is supposed to be reversed
-        self.rtree.selected_paths = [[0, 0], [1], [1, 0]]
+        self.rtable.select([1, 2, 3])
         eq_(len(app.selected_dupes), 3)
         assert app.selected_dupes[0] is objects[4]
         assert app.selected_dupes[1] is groups[0].ref
@@ -282,39 +275,26 @@ class TCDupeGuruWithResults(TestCase):
         # app.selected_dupes is correctly converted into paths
         app = self.app
         objects = self.objects
-        self.rtree.power_marker = True
-        self.rtree.selected_paths = [[0], [1], [2]]
-        self.rtree.power_marker = False
-        eq_(self.rtree.selected_paths, [[0, 0], [0, 1], [1, 0]])
+        self.rtable.power_marker = True
+        self.rtable.select([0, 1, 2])
+        self.rtable.power_marker = False
+        eq_(self.rtable.selected_indexes, [1, 2, 4])
     
     def test_selected_powermarker_node_paths_after_deletion(self):
         # cases where the selected dupes aren't there are correctly handled
         app = self.app
         objects = self.objects
-        self.rtree.power_marker = True
-        self.rtree.selected_paths = [[0], [1], [2]]
+        self.rtable.power_marker = True
+        self.rtable.select([0, 1, 2])
         app.remove_selected()
-        eq_(self.rtree.selected_paths, []) # no exception
-    
-    def test_selectPowerMarkerRows(self):
-        app = self.app
-        objects = self.objects
-        self.rtree.selected_paths = [[0, 0], [0, 1], [1, 0]]
-        eq_(len(app.selected_dupes), 3)
-        assert app.selected_dupes[0] is objects[1]
-        assert app.selected_dupes[1] is objects[2]
-        assert app.selected_dupes[2] is objects[4]
-    
-    def test_selectPowerMarkerRows_empty(self):
-        self.rtree.selected_paths = []
-        eq_(len(self.app.selected_dupes), 0)
+        eq_(self.rtable.selected_indexes, []) # no exception
     
     def test_selectPowerMarkerRows_after_sort(self):
         app = self.app
         objects = self.objects
-        self.rtree.power_marker = True
-        self.rtree.sort(0, False) #0 = Filename
-        self.rtree.selected_paths = [[0], [1], [2]]
+        self.rtable.power_marker = True
+        self.rtable.sort(0, False) #0 = Filename
+        self.rtable.select([0, 1, 2])
         eq_(len(app.selected_dupes), 3)
         assert app.selected_dupes[0] is objects[4]
         assert app.selected_dupes[1] is objects[2]
@@ -325,7 +305,7 @@ class TCDupeGuruWithResults(TestCase):
         objects = self.objects
         app.toggle_selected_mark_state()
         eq_(app.results.mark_count, 0)
-        self.rtree.selected_paths = [[0, 0], [1, 0]]
+        self.rtable.select([1, 4])
         app.toggle_selected_mark_state()
         eq_(app.results.mark_count, 2)
         assert not app.results.is_marked(objects[0])
@@ -335,10 +315,10 @@ class TCDupeGuruWithResults(TestCase):
         assert app.results.is_marked(objects[4])
     
     def test_refreshDetailsWithSelected(self):
-        self.rtree.selected_paths = [[0, 0], [1, 0]]
+        self.rtable.select([1, 4])
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
-        self.rtree.selected_paths = []
+        self.rtable.select([])
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
         self.check_gui_calls(self.dpanel_gui, ['refresh'])
     
@@ -346,7 +326,7 @@ class TCDupeGuruWithResults(TestCase):
         app = self.app
         objects = self.objects
         groups = self.groups
-        self.rtree.selected_paths = [[0, 0], [1, 0]]
+        self.rtable.select([1, 4])
         app.make_selected_reference()
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
@@ -355,7 +335,7 @@ class TCDupeGuruWithResults(TestCase):
         app = self.app
         objects = self.objects
         groups = self.groups
-        self.rtree.selected_paths = [[0, 0], [0, 1], [1, 0]]
+        self.rtable.select([1, 2, 4])
         #Only [0, 0] and [1, 0] must go ref, not [0, 1] because it is a part of the same group
         app.make_selected_reference()
         assert groups[0].ref is objects[1]
@@ -363,7 +343,7 @@ class TCDupeGuruWithResults(TestCase):
     
     def test_removeSelected(self):
         app = self.app
-        self.rtree.selected_paths = [[0, 0], [1, 0]]
+        self.rtable.select([1, 4])
         app.remove_selected()
         eq_(len(app.results.dupes), 1) # the first path is now selected
         app.remove_selected()
@@ -386,10 +366,10 @@ class TCDupeGuruWithResults(TestCase):
     
     def test_ignore(self):
         app = self.app
-        self.rtree.selected_path = [1, 0] #The dupe of the second, 2 sized group
+        self.rtable.select([4]) #The dupe of the second, 2 sized group
         app.add_selected_to_ignore_list()
         eq_(len(app.scanner.ignore_list), 1)
-        self.rtree.selected_path = [0, 0] #first dupe of the 3 dupes group
+        self.rtable.select([1]) #first dupe of the 3 dupes group
         app.add_selected_to_ignore_list()
         #BOTH the ref and the other dupe should have been added
         eq_(len(app.scanner.ignore_list), 3)
@@ -416,7 +396,7 @@ class TCDupeGuruWithResults(TestCase):
         
         app = self.app
         app.scanner.ignore_list.Ignore = FakeIgnore
-        self.rtree.selected_path = [1, 0]
+        self.rtable.select([4])
         app.add_selected_to_ignore_list()
     
 
@@ -440,14 +420,14 @@ class TCDupeGuru_renameSelected(TestCase):
         self.groups = groups
         self.p = p
         self.files = files
-        self.rtree_gui = CallLogger()
-        self.rtree = ResultTree(self.rtree_gui, self.app)
-        self.rtree.connect()
+        self.rtable_gui = CallLogger()
+        self.rtable = ResultTable(self.rtable_gui, self.app)
+        self.rtable.connect()
     
     def test_simple(self):
         app = self.app
         g = self.groups[0]
-        self.rtree.selected_path = [0, 0]
+        self.rtable.select([1])
         assert app.rename_selected('renamed')
         names = io.listdir(self.p)
         assert 'renamed' in names
@@ -457,7 +437,7 @@ class TCDupeGuru_renameSelected(TestCase):
     def test_none_selected(self):
         app = self.app
         g = self.groups[0]
-        self.rtree.selected_paths = []
+        self.rtable.select([])
         self.mock(logging, 'warning', log_calls(lambda msg: None))
         assert not app.rename_selected('renamed')
         msg = logging.warning.calls[0]['msg']
@@ -470,7 +450,7 @@ class TCDupeGuru_renameSelected(TestCase):
     def test_name_already_exists(self):
         app = self.app
         g = self.groups[0]
-        self.rtree.selected_path = [0, 0]
+        self.rtable.select([1])
         self.mock(logging, 'warning', log_calls(lambda msg: None))
         assert not app.rename_selected('foo bar 1')
         msg = logging.warning.calls[0]['msg']

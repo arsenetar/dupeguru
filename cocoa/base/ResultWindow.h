@@ -7,10 +7,10 @@ http://www.hardcoded.net/licenses/hs_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSOutlineView.h"
 #import "StatsLabel.h"
-#import "ResultOutline.h"
+#import "ResultTable.h"
 #import "ProblemDialog.h"
+#import "HSTableView.h"
 #import "PyDupeGuru.h"
 
 @interface ResultWindowBase : NSWindowController
@@ -19,7 +19,7 @@ http://www.hardcoded.net/licenses/hs_license
     IBOutlet PyDupeGuruBase *py;
     IBOutlet id app;
     IBOutlet NSSegmentedControl *deltaSwitch;
-    IBOutlet HSOutlineView *matches;
+    IBOutlet HSTableView *matches;
 	IBOutlet NSSegmentedControl *pmSwitch;
 	IBOutlet NSTextField *stats;
 	IBOutlet NSMenu *columnsMenu;
@@ -27,7 +27,7 @@ http://www.hardcoded.net/licenses/hs_license
     
     NSMutableArray *_resultColumns;
     NSWindowController *preferencesPanel;
-    ResultOutline *outline;
+    ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
 }

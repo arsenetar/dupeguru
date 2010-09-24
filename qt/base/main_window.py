@@ -48,7 +48,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def _setupUi(self):
         self.setupUi(self)
         # Stuff that can't be setup in the Designer
-        h = self.resultsView.header()
+        h = self.resultsView.horizontalHeader()
         h.setHighlightSections(False)
         h.setMovable(True)
         h.setStretchLastSection(False)
@@ -110,7 +110,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return answer == QMessageBox.Yes
     
     def _load_columns(self):
-        h = self.resultsView.header()
+        h = self.resultsView.horizontalHeader()
         h.setResizeMode(QHeaderView.Interactive)
         prefs = self.app.prefs
         attrs = list(zip(prefs.columns_width, prefs.columns_visible))
@@ -120,7 +120,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         h.setResizeMode(0, QHeaderView.Stretch)
     
     def _update_column_actions_status(self):
-        h = self.resultsView.header()
+        h = self.resultsView.horizontalHeader()
         for action in self._column_actions:
             colid = action.column_index
             action.setChecked(not h.isSectionHidden(colid))
@@ -185,7 +185,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.app.show_directories()
     
     def exportTriggered(self):
-        h = self.resultsView.header()
+        h = self.resultsView.horizontalHeader()
         column_ids = []
         for i in range(len(self.app.data.COLUMNS)):
             if not h.isSectionHidden(i):
@@ -278,7 +278,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #--- Events
     def appWillSavePrefs(self):
         prefs = self.app.prefs
-        h = self.resultsView.header()
+        h = self.resultsView.horizontalHeader()
         widths = []
         visible = []
         for i in range(len(self.app.data.COLUMNS)):
@@ -295,7 +295,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.app.prefs.reset_columns()
             self._load_columns()
         else:
-            h = self.resultsView.header()
+            h = self.resultsView.horizontalHeader()
             h.setSectionHidden(colid, not h.isSectionHidden(colid))
         self._update_column_actions_status()
     
