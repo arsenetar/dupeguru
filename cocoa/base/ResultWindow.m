@@ -18,6 +18,8 @@ http://www.hardcoded.net/licenses/hs_license
 - (void)awakeFromNib
 {
     [self window];
+    /* Put a cute iTunes-like bottom bar */
+    [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     table = [[ResultTable alloc] initWithPyParent:py view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
