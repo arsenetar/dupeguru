@@ -14,6 +14,7 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSIndexSet *_deltaColumns;
 }
+- (id)initWithPyParent:(id)aPyParent view:(NSTableView *)aTableView;
 - (PyResultTable *)py;
 - (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
