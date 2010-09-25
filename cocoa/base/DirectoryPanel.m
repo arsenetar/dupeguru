@@ -39,13 +39,13 @@ http://www.hardcoded.net/licenses/hs_license
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:YES];
-    [op setAllowsMultipleSelection:NO];
+    [op setAllowsMultipleSelection:YES];
     [op setTitle:@"Select a directory to add to the scanning list"];
     [op setDelegate:self];
-    if ([op runModalForTypes:nil] == NSOKButton)
-    {
-        NSString *directory = [[op filenames] objectAtIndex:0];
-        [self addDirectory:directory];
+    if ([op runModal] == NSOKButton) {
+        for (NSString *directory in [op filenames]) {
+            [self addDirectory:directory];
+        }
     }
 }
 
@@ -95,18 +95,14 @@ http://www.hardcoded.net/licenses/hs_license
 {
     NSInteger r = [[_py addDirectory:directory] intValue];
     if (r) {
-        NSString *m;
-        switch (r) {
-            case 1: {
-                m = @"This directory already is in the list.";
-                break;
-            }
-            case 2: {
-                m = @"This directory does not exist.";
-                break;
-            }
+        NSString *m = @"";
+        if (r == 1) {
+            m = @"'%@' already is in the list.";
         }
-        [Dialogs showMessage:m];
+        else if (r == 2) {
+            m = @"'%@' does not exist.";
+        }
+        [Dialogs showMessage:[NSString stringWithFormat:m,directory]];
     }
     [_recentDirectories addDirectory:directory];
     [[self window] makeKeyAndOrderFront:nil];
