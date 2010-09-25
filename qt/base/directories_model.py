@@ -96,13 +96,13 @@ class DirectoriesModel(TreeModel):
         return None
     
     def dropMimeData(self, mimeData, action, row, column, parentIndex):
-        # the data in mimeData is urlencoded **in utf-8**!!! which means that urllib.unquote has
-        # to be called on the utf-8 encoded string, and *only then*, decoded to unicode.
+        # the data in mimeData is urlencoded **in utf-8**!!! What we do is to decode, the mime data
+        # with 'ascii', which works since it's urlencoded. Then, we pass that to urllib.
         if not mimeData.hasFormat('text/uri-list'):
             return False
-        data = str(mimeData.data('text/uri-list'))
+        data = bytes(mimeData.data('text/uri-list')).decode('ascii')
         unquoted = urllib.parse.unquote(data)
-        urls = str(unquoted, 'utf-8').split('\r\n')
+        urls = unquoted.split('\r\n')
         paths = [str(QUrl(url).toLocalFile()) for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
