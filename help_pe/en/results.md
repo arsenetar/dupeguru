@@ -56,6 +56,7 @@ Action Menu
 * **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the newly cleared ignore list to be effective.
 * **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The columns that are visible when you click on this button will be the columns present in the XHTML file. The file will automatically be opened in your default browser.
 * **Send Marked to Trash:** Send all marked duplicates to trash, obviously.
+* **Delete Marked and Replace with Hardlinks:** Sends all marked duplicates to trash, but after having done that, the deleted files are replaced by a [hard link](http://en.wikipedia.org/wiki/Hard_link) to the reference file. (Only for OS X and Linux)
 * **Move Marked to...:** Prompt you for a destination, and then move all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
 * **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
 * **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will not be touched and will stay where they are.

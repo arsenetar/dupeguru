@@ -17,6 +17,8 @@
 
 **Can mix file kind:** If you check this box, duplicate groups are allowed to have files with different extensions. If you don't check it, well, they aren't!
 
+**Ignore duplicates hardlinking to the same file:** If this option is enabled, dupeGuru will verify duplicates to see if they refer to the same [inode](http://en.wikipedia.org/wiki/Inode). If they do, they will not be considered duplicates. (Only for OS X and Linux)
+
 **Use regular expressions when filtering:** If you check this box, the filtering feature will treat your filter query as a **regular expression**. Explaining them is beyond the scope of this document. A good place to start learning it is <http://www.regular-expressions.info>.
 
 **Remove empty folders after delete or move:** When this option is enabled, folders are deleted after a file is deleted or moved and the folder is empty.
