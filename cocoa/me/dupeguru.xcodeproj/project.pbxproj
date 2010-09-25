@@ -33,7 +33,6 @@
 		CE0A0C001175A1C000DCA3C6 /* HSTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A0BFF1175A1C000DCA3C6 /* HSTable.m */; };
 		CE0A0C041175A1DE00DCA3C6 /* ProblemDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A0C021175A1DE00DCA3C6 /* ProblemDialog.m */; };
 		CE0A0C061175A24800DCA3C6 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A0C051175A24800DCA3C6 /* ProblemDialog.xib */; };
-		CE0B3D6711243F83009A7A30 /* ResultOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B3D6611243F83009A7A30 /* ResultOutline.m */; };
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -54,12 +53,14 @@
 		CE515E1D0FC6C19300EC695D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E160FC6C19300EC695D /* AppDelegate.m */; };
 		CE515E1E0FC6C19300EC695D /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E190FC6C19300EC695D /* DirectoryPanel.m */; };
 		CE515E1F0FC6C19300EC695D /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E1C0FC6C19300EC695D /* ResultWindow.m */; };
+		CE578303124DFC660004769C /* HSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE578302124DFC660004769C /* HSTableView.m */; };
 		CE6032C00FE6784C007E33FF /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6032BF0FE6784C007E33FF /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0E9F1054EB97008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CE900AD2109B238600754048 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD1109B238600754048 /* Preferences.xib */; };
 		CE900AD7109B2A9B00754048 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD6109B2A9B00754048 /* MainMenu.xib */; };
+		CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB14D28124DFC2800FA7481 /* ResultTable.m */; };
 		CECC563B12144A9000ABF262 /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECC563912144A9000ABF262 /* registration.xib */; };
 		CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF07A2112493B200EE5BC0 /* StatsLabel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -118,9 +119,6 @@
 		CE0A0C031175A1DE00DCA3C6 /* PyProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyProblemDialog.h; path = ../base/PyProblemDialog.h; sourceTree = SOURCE_ROOT; };
 		CE0A0C051175A24800DCA3C6 /* ProblemDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProblemDialog.xib; path = ../base/xib/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CE0A0C131175A28100DCA3C6 /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
-		CE0B3D6411243F83009A7A30 /* PyResultTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTree.h; path = ../base/PyResultTree.h; sourceTree = SOURCE_ROOT; };
-		CE0B3D6511243F83009A7A30 /* ResultOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultOutline.h; path = ../base/ResultOutline.h; sourceTree = SOURCE_ROOT; };
-		CE0B3D6611243F83009A7A30 /* ResultOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultOutline.m; path = ../base/ResultOutline.m; sourceTree = SOURCE_ROOT; };
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -156,6 +154,8 @@
 		CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDupeGuru.h; path = ../base/PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
 		CE515E1B0FC6C19300EC695D /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultWindow.h; path = ../base/ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE515E1C0FC6C19300EC695D /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = ../base/ResultWindow.m; sourceTree = SOURCE_ROOT; };
+		CE578301124DFC660004769C /* HSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSTableView.h; path = ../../cocoalib/views/HSTableView.h; sourceTree = SOURCE_ROOT; };
+		CE578302124DFC660004769C /* HSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSTableView.m; path = ../../cocoalib/views/HSTableView.m; sourceTree = SOURCE_ROOT; };
 		CE6032BE0FE6784C007E33FF /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE6032BF0FE6784C007E33FF /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = ../base/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
@@ -164,6 +164,9 @@
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		CE900AD1109B238600754048 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		CE900AD6109B2A9B00754048 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
+		CEB14D26124DFC2800FA7481 /* PyResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTable.h; path = ../base/PyResultTable.h; sourceTree = SOURCE_ROOT; };
+		CEB14D27124DFC2800FA7481 /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
+		CEB14D28124DFC2800FA7481 /* ResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultTable.m; path = ../base/ResultTable.m; sourceTree = SOURCE_ROOT; };
 		CECC563A12144A9000ABF262 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../cocoalib/en.lproj/registration.xib; sourceTree = SOURCE_ROOT; };
 		CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CEDF07A0112493B200EE5BC0 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
@@ -306,6 +309,8 @@
 		CE003CBF11242D00004B0AA7 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				CE578301124DFC660004769C /* HSTableView.h */,
+				CE578302124DFC660004769C /* HSTableView.m */,
 				CE003CC011242D00004B0AA7 /* HSOutlineView.h */,
 				CE003CC111242D00004B0AA7 /* HSOutlineView.m */,
 				CE003CC211242D00004B0AA7 /* NSIndexPathAdditions.h */,
@@ -383,6 +388,9 @@
 		CE515E140FC6C17900EC695D /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CEB14D26124DFC2800FA7481 /* PyResultTable.h */,
+				CEB14D27124DFC2800FA7481 /* ResultTable.h */,
+				CEB14D28124DFC2800FA7481 /* ResultTable.m */,
 				CE003CCD11242D2C004B0AA7 /* DirectoryOutline.h */,
 				CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */,
 				CE003CCF11242D2C004B0AA7 /* PyDirectoryOutline.h */,
@@ -397,14 +405,11 @@
 				CE0A0C021175A1DE00DCA3C6 /* ProblemDialog.m */,
 				CE515E1B0FC6C19300EC695D /* ResultWindow.h */,
 				CE515E1C0FC6C19300EC695D /* ResultWindow.m */,
-				CE0B3D6511243F83009A7A30 /* ResultOutline.h */,
-				CE0B3D6611243F83009A7A30 /* ResultOutline.m */,
 				CEDF07A1112493B200EE5BC0 /* StatsLabel.h */,
 				CEDF07A2112493B200EE5BC0 /* StatsLabel.m */,
 				CE515E1A0FC6C19300EC695D /* PyDupeGuru.h */,
 				CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */,
 				CE0A0C031175A1DE00DCA3C6 /* PyProblemDialog.h */,
-				CE0B3D6411243F83009A7A30 /* PyResultTree.h */,
 				CEDF07A0112493B200EE5BC0 /* PyStatsLabel.h */,
 			);
 			name = dgbase;
@@ -521,10 +526,11 @@
 				CE003CCB11242D00004B0AA7 /* NSIndexPathAdditions.m in Sources */,
 				CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */,
 				CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */,
-				CE0B3D6711243F83009A7A30 /* ResultOutline.m in Sources */,
 				CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */,
 				CE0A0C001175A1C000DCA3C6 /* HSTable.m in Sources */,
 				CE0A0C041175A1DE00DCA3C6 /* ProblemDialog.m in Sources */,
+				CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */,
+				CE578303124DFC660004769C /* HSTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

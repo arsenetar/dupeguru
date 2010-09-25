@@ -151,6 +151,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QCheckBox" name="ignoreHardlinkMatches">
+       <property name="text">
+        <string>Ignore duplicates hardlinking to the same file</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="label_5">

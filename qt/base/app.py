@@ -106,6 +106,7 @@ class DupeGuru(DupeGuruBase, QObject):
         self.scanner.mix_file_kind = self.prefs.mix_file_kind
         self.options['escape_filter_regexp'] = self.prefs.use_regexp
         self.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
+        self.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
     
     #--- Virtual
     def _create_details_dialog(self, parent):

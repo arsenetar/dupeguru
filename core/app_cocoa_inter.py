@@ -116,14 +116,21 @@ class PyDupeGuruBase(PyRegistrable):
         return bool(self.py.results.problems)
     
     #---Properties
+    @signature('v@:c')
     def setMixFileKind_(self, mix_file_kind):
         self.py.scanner.mix_file_kind = mix_file_kind
     
+    @signature('v@:c')
     def setEscapeFilterRegexp_(self, escape_filter_regexp):
         self.py.options['escape_filter_regexp'] = escape_filter_regexp
     
+    @signature('v@:c')
     def setRemoveEmptyFolders_(self, remove_empty_folders):
         self.py.options['clean_empty_dirs'] = remove_empty_folders
+    
+    @signature('v@:c')
+    def setIgnoreHardlinkMatches_(self, ignore_hardlink_matches):
+        self.py.options['ignore_hardlink_matches'] = ignore_hardlink_matches
     
     #---Worker
     def getJobProgress(self):

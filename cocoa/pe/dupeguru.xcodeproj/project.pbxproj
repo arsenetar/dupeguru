@@ -41,7 +41,6 @@
 		CE80DB8C0FC1951C0086DCA6 /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB890FC1951C0086DCA6 /* ResultWindow.m */; };
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CE895D7B12144A7800E74705 /* registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE895D7912144A7800E74705 /* registration.xib */; };
-		CE95865E112C516400F95FD2 /* ResultOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95865B112C516400F95FD2 /* ResultOutline.m */; };
 		CE95865F112C516400F95FD2 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95865D112C516400F95FD2 /* StatsLabel.m */; };
 		CE9EA7561122C96C008CD2BC /* HSGUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7441122C96C008CD2BC /* HSGUIController.m */; };
 		CE9EA7571122C96C008CD2BC /* HSOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7461122C96C008CD2BC /* HSOutline.m */; };
@@ -55,6 +54,8 @@
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
+		CEF12A7E124DFD400087B51D /* HSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A7D124DFD400087B51D /* HSTableView.m */; };
+		CEF12A84124DFD620087B51D /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A83124DFD620087B51D /* ResultTable.m */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
@@ -139,10 +140,7 @@
 		CE80DB890FC1951C0086DCA6 /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = ../base/ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		CE895D7A12144A7800E74705 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../cocoalib/en.lproj/registration.xib; sourceTree = SOURCE_ROOT; };
-		CE958658112C516400F95FD2 /* PyResultTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTree.h; path = ../base/PyResultTree.h; sourceTree = SOURCE_ROOT; };
 		CE958659112C516400F95FD2 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
-		CE95865A112C516400F95FD2 /* ResultOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultOutline.h; path = ../base/ResultOutline.h; sourceTree = SOURCE_ROOT; };
-		CE95865B112C516400F95FD2 /* ResultOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultOutline.m; path = ../base/ResultOutline.m; sourceTree = SOURCE_ROOT; };
 		CE95865C112C516400F95FD2 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE95865D112C516400F95FD2 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CE9EA7431122C96C008CD2BC /* HSGUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSGUIController.h; sourceTree = "<group>"; };
@@ -170,6 +168,11 @@
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
+		CEF12A7C124DFD400087B51D /* HSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSTableView.h; path = ../../cocoalib/views/HSTableView.h; sourceTree = SOURCE_ROOT; };
+		CEF12A7D124DFD400087B51D /* HSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSTableView.m; path = ../../cocoalib/views/HSTableView.m; sourceTree = SOURCE_ROOT; };
+		CEF12A81124DFD620087B51D /* PyResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTable.h; path = ../base/PyResultTable.h; sourceTree = SOURCE_ROOT; };
+		CEF12A82124DFD620087B51D /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
+		CEF12A83124DFD620087B51D /* ResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultTable.m; path = ../base/ResultTable.m; sourceTree = SOURCE_ROOT; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = ../../images/details32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = ../../images/preferences32.png; sourceTree = SOURCE_ROOT; };
@@ -339,6 +342,9 @@
 		CE80DB810FC194BD0086DCA6 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CEF12A81124DFD620087B51D /* PyResultTable.h */,
+				CEF12A82124DFD620087B51D /* ResultTable.h */,
+				CEF12A83124DFD620087B51D /* ResultTable.m */,
 				CE80DB820FC1951C0086DCA6 /* AppDelegate.h */,
 				CE80DB830FC1951C0086DCA6 /* AppDelegate.m */,
 				CE80DB840FC1951C0086DCA6 /* Consts.h */,
@@ -352,9 +358,6 @@
 				CE0C2ABB1177014200BC749F /* ProblemDialog.m */,
 				CE80DB880FC1951C0086DCA6 /* ResultWindow.h */,
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
-				CE958658112C516400F95FD2 /* PyResultTree.h */,
-				CE95865A112C516400F95FD2 /* ResultOutline.h */,
-				CE95865B112C516400F95FD2 /* ResultOutline.m */,
 				CE95865C112C516400F95FD2 /* StatsLabel.h */,
 				CE95865D112C516400F95FD2 /* StatsLabel.m */,
 				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
@@ -396,6 +399,8 @@
 		CE9EA74F1122C96C008CD2BC /* views */ = {
 			isa = PBXGroup;
 			children = (
+				CEF12A7C124DFD400087B51D /* HSTableView.h */,
+				CEF12A7D124DFD400087B51D /* HSTableView.m */,
 				CE9EA7501122C96C008CD2BC /* HSOutlineView.h */,
 				CE9EA7511122C96C008CD2BC /* HSOutlineView.m */,
 				CE9EA7521122C96C008CD2BC /* NSIndexPathAdditions.h */,
@@ -532,10 +537,11 @@
 				CE9EA75B1122C96C008CD2BC /* NSIndexPathAdditions.m in Sources */,
 				CE9EA75C1122C96C008CD2BC /* NSTableViewAdditions.m in Sources */,
 				CE9EA7721122CA0B008CD2BC /* DirectoryOutline.m in Sources */,
-				CE95865E112C516400F95FD2 /* ResultOutline.m in Sources */,
 				CE95865F112C516400F95FD2 /* StatsLabel.m in Sources */,
 				CE0C2AB61177011000BC749F /* HSTable.m in Sources */,
 				CE0C2ABD1177014200BC749F /* ProblemDialog.m in Sources */,
+				CEF12A7E124DFD400087B51D /* HSTableView.m in Sources */,
+				CEF12A84124DFD620087B51D /* ResultTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

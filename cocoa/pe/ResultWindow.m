@@ -22,7 +22,7 @@ http://www.hardcoded.net/licenses/hs_license
     [[self window] setTitle:@"dupeGuru Picture Edition"];
     NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
     [deltaColumns addIndex:5];
-    [outline setDeltaColumns:deltaColumns];
+    [table setDeltaColumns:deltaColumns];
 }
 
 /* Actions */
@@ -60,7 +60,8 @@ http://www.hardcoded.net/licenses/hs_license
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     PyDupeGuru *_py = (PyDupeGuru *)py;
     [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setMixFileKind:[ud objectForKey:@"mixFileKind"]];
+    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
     [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
     int r = n2i([py doScan]);
     if (r != 0)

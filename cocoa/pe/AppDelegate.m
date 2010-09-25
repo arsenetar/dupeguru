@@ -25,6 +25,7 @@ http://www.hardcoded.net/licenses/hs_license
     [d setObject:[NSNumber numberWithBool:NO] forKey:@"matchScaled"];
     [d setObject:[NSNumber numberWithBool:YES] forKey:@"mixFileKind"];
     [d setObject:[NSNumber numberWithBool:NO] forKey:@"useRegexpFilter"];
+    [d setObject:[NSNumber numberWithBool:NO] forKey:@"ignoreHardlinkMatches"];
     [d setObject:[NSNumber numberWithBool:NO] forKey:@"removeEmptyFolders"];
     [d setObject:[NSNumber numberWithBool:NO] forKey:@"debug"];
     [d setObject:[NSArray array] forKey:@"recentDirectories"];

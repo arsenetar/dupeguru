@@ -174,7 +174,7 @@ http://www.hardcoded.net/licenses/hs_license
     if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to send %d files to Trash. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
         return;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setRemoveEmptyFolders:[ud objectForKey:@"removeEmptyFolders"]];
+    [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
     [py deleteMarked];
 }
 
@@ -187,7 +187,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)filter:(id)sender
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setEscapeFilterRegexp:b2n(!n2b([ud objectForKey:@"useRegexpFilter"]))];
+    [py setEscapeFilterRegexp:!n2b([ud objectForKey:@"useRegexpFilter"])];
     [py applyFilter:[filterField stringValue]];
 }
 
@@ -264,7 +264,7 @@ http://www.hardcoded.net/licenses/hs_license
     {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [py setRemoveEmptyFolders:[ud objectForKey:@"removeEmptyFolders"]];
+        [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
         [py copyOrMove:b2n(NO) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
     }
 }

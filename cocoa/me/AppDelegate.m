@@ -28,6 +28,7 @@ http://www.hardcoded.net/licenses/hs_license
     [d setObject:b2n(NO) forKey:@"matchSimilarWords"];
     [d setObject:b2n(YES) forKey:@"mixFileKind"];
     [d setObject:b2n(NO) forKey:@"useRegexpFilter"];
+    [d setObject:b2n(NO) forKey:@"ignoreHardlinkMatches"];
     [d setObject:b2n(NO) forKey:@"removeEmptyFolders"];
     [d setObject:b2n(NO) forKey:@"debug"];
     [d setObject:b2n(NO) forKey:@"scanTagTrack"];

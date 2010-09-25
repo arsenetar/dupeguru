@@ -48,8 +48,9 @@ http://www.hardcoded.net/licenses/hs_license
 
 //Scanning options
 - (void)setMinMatchPercentage:(NSNumber *)percentage;
-- (void)setMixFileKind:(NSNumber *)mix_file_kind;
-- (void)setEscapeFilterRegexp:(NSNumber *)escape_filter_regexp;
-- (void)setRemoveEmptyFolders:(NSNumber *)remove_empty_folders;
+- (void)setMixFileKind:(BOOL)mix_file_kind;
+- (void)setEscapeFilterRegexp:(BOOL)escape_filter_regexp;
+- (void)setRemoveEmptyFolders:(BOOL)remove_empty_folders;
+- (void)setIgnoreHardlinkMatches:(BOOL)ignore_hardlink_matches;
 - (void)setSizeThreshold:(NSInteger)size_threshold;
 @end

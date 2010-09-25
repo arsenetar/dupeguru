@@ -22,7 +22,7 @@ http://www.hardcoded.net/licenses/hs_license
     [[self window] setTitle:@"dupeGuru Music Edition"];
     NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,6)];
     [deltaColumns removeIndex:6];
-    [outline setDeltaColumns:deltaColumns];
+    [table setDeltaColumns:deltaColumns];
 }
 
 /* Actions */
@@ -66,7 +66,8 @@ http://www.hardcoded.net/licenses/hs_license
     [_py enable:[ud objectForKey:@"scanTagYear"] scanForTag:@"year"];
     [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
     [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
-    [_py setMixFileKind:[ud objectForKey:@"mixFileKind"]];
+    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
     [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
     NSInteger r = n2i([py doScan]);
     if (r == 3)

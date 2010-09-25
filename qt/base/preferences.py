@@ -24,6 +24,7 @@ class Preferences(PreferencesBase):
         get = self.get_value
         self.filter_hardness = get('FilterHardness', self.filter_hardness)
         self.mix_file_kind = get('MixFileKind', self.mix_file_kind)
+        self.ignore_hardlink_matches = get('IgnoreHardlinkMatches', self.ignore_hardlink_matches)
         self.use_regexp = get('UseRegexp', self.use_regexp)
         self.remove_empty_folders = get('RemoveEmptyFolders', self.remove_empty_folders)
         self.destination_type = get('DestinationType', self.destination_type)
@@ -52,6 +53,7 @@ class Preferences(PreferencesBase):
         self.filter_hardness = 95
         self.mix_file_kind = True
         self.use_regexp = False
+        self.ignore_hardlink_matches = False
         self.remove_empty_folders = False
         self.destination_type = 1
         self.custom_command = ''
@@ -77,6 +79,7 @@ class Preferences(PreferencesBase):
         set_ = self.set_value
         set_('FilterHardness', self.filter_hardness)
         set_('MixFileKind', self.mix_file_kind)
+        set_('IgnoreHardlinkMatches', self.ignore_hardlink_matches)
         set_('UseRegexp', self.use_regexp)
         set_('RemoveEmptyFolders', self.remove_empty_folders)
         set_('DestinationType', self.destination_type)

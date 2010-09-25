@@ -50,6 +50,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
+            'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
     
@@ -116,6 +117,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     @staticmethod
     def _reveal_path(path):
         raise NotImplementedError()
+    
+    @staticmethod
+    def _remove_hardlink_dupes(files):
+        seen_inodes = set()
+        result = []
+        for file in files:
+            inode = io.stat(file.path).st_ino
+            if inode not in seen_inodes:
+                seen_inodes.add(inode)
+                result.append(file)
+        return result
     
     def _select_dupes(self, dupes):
         if dupes == self.selected_dupes:
@@ -341,6 +353,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         def do(j):
             j.set_progress(0, 'Collecting files to scan')
             files = list(self.directories.get_files())
+            if self.options['ignore_hardlink_matches']:
+                files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))
             self.results.groups = self.scanner.GetDupeGroups(files, j)
         

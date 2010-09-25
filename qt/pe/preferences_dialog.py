@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import sys
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QDialog, QDialogButtonBox
 
@@ -23,6 +24,9 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
     
     def _setupUi(self):
         self.setupUi(self)
+        if sys.platform not in {'darwin', 'linux2'}:
+            self.verticalLayout.removeWidget(self.ignoreHardlinkMatches)
+            self.ignoreHardlinkMatches.setHidden(True)
     
     def load(self, prefs=None):
         if prefs is None:

@@ -253,8 +253,15 @@
              </size>
             </property>
            </spacer>
-          </item>
+          </item>          
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ignoreHardlinkMatches">
+          <property name="text">
+           <string>Ignore duplicates hardlinking to the same file</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

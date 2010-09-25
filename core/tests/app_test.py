@@ -24,6 +24,7 @@ from ..app import DupeGuru as DupeGuruBase
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
 from ..gui.result_table import ResultTable
+from ..scanner import ScanType
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
@@ -121,6 +122,19 @@ class TCDupeGuru(TestCase):
         app.directories.get_files = lambda: iter([f1, f2])
         app.directories._dirs.append('this is just so Scan() doesnt return 3')
         app.start_scanning() # no exception
+    
+    def test_ignore_hardlink_matches(self):
+        # If the ignore_hardlink_matches option is set, don't match files hardlinking to the same
+        # inode.
+        tmppath = Path(self.tmpdir())
+        io.open(tmppath + 'myfile', 'w').write('foo')
+        os.link(str(tmppath + 'myfile'), str(tmppath + 'hardlink'))
+        app = DupeGuru()
+        app.directories.add_path(tmppath)
+        app.scanner.scan_type = ScanType.Contents
+        app.options['ignore_hardlink_matches'] = True
+        app.start_scanning()
+        eq_(len(app.results.groups), 0)
     
 
 class TCDupeGuru_clean_empty_dirs(TestCase):

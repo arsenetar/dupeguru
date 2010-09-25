@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+import sys
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QDialog, QDialogButtonBox
 
@@ -33,6 +34,9 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
     
     def _setupUi(self):
         self.setupUi(self)
+        if sys.platform not in {'darwin', 'linux2'}:
+            self.verticalLayout_4.removeWidget(self.ignoreHardlinkMatches)
+            self.ignoreHardlinkMatches.setHidden(True)
     
     def load(self, prefs=None):
         if prefs is None:
@@ -45,6 +49,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.mixFileKindBox, prefs.mix_file_kind)
+        setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
         setchecked(self.useRegexpBox, prefs.use_regexp)
         setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
@@ -60,6 +65,7 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.mix_file_kind = ischecked(self.mixFileKindBox)
+        prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
