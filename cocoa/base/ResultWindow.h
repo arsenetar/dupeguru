@@ -38,6 +38,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (NSDictionary *)getColumnsWidth;
 - (void)initResultColumns;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
+- (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender;
@@ -45,6 +46,7 @@ http://www.hardcoded.net/licenses/hs_license
 - (IBAction)changePowerMarker:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
+- (IBAction)hardlinkMarked:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;

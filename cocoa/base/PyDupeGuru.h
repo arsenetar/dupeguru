@@ -39,6 +39,7 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (void)copyOrMove:(NSNumber *)aCopy markedTo:(NSString *)destination recreatePath:(NSNumber *)aRecreateType;
 - (void)deleteMarked;
+- (void)hardlinkMarked;
 - (void)removeMarked;
 
 //Data

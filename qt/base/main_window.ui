@@ -64,6 +64,7 @@
      <string>Actions</string>
     </property>
     <addaction name="actionDeleteMarked"/>
+    <addaction name="actionHardlinkMarked"/>
     <addaction name="actionMoveMarked"/>
     <addaction name="actionCopyMarked"/>
     <addaction name="actionRemoveMarked"/>
@@ -263,6 +264,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionHardlinkMarked">
+   <property name="text">
+    <string>Delete Marked and Replace with Hardlinks</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
    </property>
   </action>
   <action name="actionMoveMarked">

@@ -80,6 +80,9 @@ class PyDupeGuruBase(PyRegistrable):
     def deleteMarked(self):
         self.py.delete_marked()
     
+    def hardlinkMarked(self):
+        self.py.delete_marked(replace_with_hardlinks=True)
+    
     def applyFilter_(self, filter):
         self.py.apply_filter(filter)
     

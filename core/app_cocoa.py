@@ -55,10 +55,11 @@ class DupeGuru(app.DupeGuru):
     def _reveal_path(path):
         NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(str(path), '')
     
-    def _start_job(self, jobid, func):
+    def _start_job(self, jobid, func, *args):
         try:
             j = self.progress.create_job()
-            self.progress.run_threaded(func, args=(j, ))
+            args = tuple([j] + list(args))
+            self.progress.run_threaded(func, args=args)
         except job.JobInProgressError:
             NSNotificationCenter.defaultCenter().postNotificationName_object_('JobInProgress', self)
         else:

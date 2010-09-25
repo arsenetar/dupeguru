@@ -131,11 +131,12 @@ class DupeGuru(DupeGuruBase, QObject):
     def _reveal_path(path):
         DupeGuru._open_path(path[:-1])
     
-    def _start_job(self, jobid, func):
+    def _start_job(self, jobid, func, *args):
         title = JOBID2TITLE[jobid]
         try:
             j = self._progress.create_job()
-            self._progress.run(jobid, title, func, args=(j, ))
+            args = tuple([j] + list(args))
+            self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
             msg = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
             QMessageBox.information(self.main_window, 'Action in progress', msg)

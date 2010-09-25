@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
-			<integer value="29"/>
+			<integer value="1147"/>
+			<integer value="598"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -87,7 +87,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{7, 14}, {67, 25}}</string>
 									<reference key="NSSuperview"/>
-									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="431579725">
 										<int key="NSCellFlags">67239424</int>
@@ -183,7 +182,6 @@
 									<int key="NSvFlags">258</int>
 									<string key="NSFrame">{{0, 14}, {81, 22}}</string>
 									<reference key="NSSuperview"/>
-									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="484816507">
 										<int key="NSCellFlags">343014976</int>
@@ -329,7 +327,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{1, 14}, {40, 25}}</string>
 									<reference key="NSSuperview"/>
-									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSPopUpButtonCell" key="NSCell" id="436420677">
 										<int key="NSCellFlags">-2076049856</int>
@@ -378,6 +375,16 @@
 												<object class="NSMenuItem" id="13829058">
 													<reference key="NSMenu" ref="106411576"/>
 													<string key="NSTitle">Send Marked to Trash</string>
+													<string key="NSKeyEquiv"/>
+													<int key="NSMnemonicLoc">2147483647</int>
+													<reference key="NSOnImage" ref="852972005"/>
+													<reference key="NSMixedImage" ref="218295580"/>
+													<string key="NSAction">_popUpItemAction:</string>
+													<reference key="NSTarget" ref="436420677"/>
+												</object>
+												<object class="NSMenuItem" id="103810273">
+													<reference key="NSMenu" ref="106411576"/>
+													<string key="NSTitle">Delete Marked and Replace with Hardlinks</string>
 													<string key="NSKeyEquiv"/>
 													<int key="NSMnemonicLoc">2147483647</int>
 													<reference key="NSOnImage" ref="852972005"/>
@@ -505,6 +512,7 @@
 												</object>
 											</object>
 										</object>
+										<int key="NSSelectedIndex">2</int>
 										<bool key="NSPullDown">YES</bool>
 										<int key="NSPreferredEdge">3</int>
 										<bool key="NSUsesItemFromMenu">YES</bool>
@@ -535,7 +543,6 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{4, 14}, {67, 25}}</string>
 									<reference key="NSSuperview"/>
-									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="211272396">
 										<int key="NSCellFlags">67239424</int>
@@ -1221,6 +1228,15 @@
 									<reference key="NSMenu" ref="600111647"/>
 									<string key="NSTitle">Send Marked to Trash</string>
 									<string key="NSKeyEquiv">t</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="852972005"/>
+									<reference key="NSMixedImage" ref="218295580"/>
+								</object>
+								<object class="NSMenuItem" id="514384201">
+									<reference key="NSMenu" ref="600111647"/>
+									<string key="NSTitle">Delete Marked and Replace with Hardlinks</string>
+									<string key="NSKeyEquiv">T</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="852972005"/>
@@ -2274,6 +2290,22 @@
 					</object>
 					<int key="connectionID">1226</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">hardlinkMarked:</string>
+						<reference key="source" ref="339936126"/>
+						<reference key="destination" ref="514384201"/>
+					</object>
+					<int key="connectionID">1229</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">hardlinkMarked:</string>
+						<reference key="source" ref="339936126"/>
+						<reference key="destination" ref="103810273"/>
+					</object>
+					<int key="connectionID">1231</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2556,6 +2588,7 @@
 							<reference ref="564101661"/>
 							<reference ref="747820446"/>
 							<reference ref="517397504"/>
+							<reference ref="514384201"/>
 						</object>
 						<reference key="parent" ref="528113253"/>
 					</object>
@@ -2925,6 +2958,7 @@
 							<reference ref="707934795"/>
 							<reference ref="13829058"/>
 							<reference ref="698110866"/>
+							<reference ref="103810273"/>
 						</object>
 						<reference key="parent" ref="436420677"/>
 					</object>
@@ -3172,6 +3206,16 @@
 						<reference key="object" ref="267036250"/>
 						<reference key="parent" ref="201009225"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1227</int>
+						<reference key="object" ref="514384201"/>
+						<reference key="parent" ref="600111647"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1230</int>
+						<reference key="object" ref="103810273"/>
+						<reference key="parent" ref="106411576"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -3232,6 +3276,10 @@
 					<string>1222.IBPluginDependency</string>
 					<string>1223.IBPluginDependency</string>
 					<string>1224.IBPluginDependency</string>
+					<string>1227.IBPluginDependency</string>
+					<string>1227.ImportedFromIB2</string>
+					<string>1230.IBPluginDependency</string>
+					<string>1230.ImportedFromIB2</string>
 					<string>134.IBPluginDependency</string>
 					<string>134.ImportedFromIB2</string>
 					<string>136.IBPluginDependency</string>
@@ -3444,7 +3492,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{294, 689}, {617, 0}}</string>
+					<string>{{294, 462}, {617, 227}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3470,6 +3518,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<boolean value="YES"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3529,7 +3581,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{328, 475}, {361, 293}}</string>
+					<string>{{328, 455}, {383, 313}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3569,7 +3621,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{94, 408}, {331, 243}}</string>
+					<string>{{310, 310}, {353, 263}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3669,7 +3721,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1226</int>
+			<int key="maxID">1231</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4065,6 +4117,7 @@
 							<string>deleteMarked:</string>
 							<string>exportToXHTML:</string>
 							<string>filter:</string>
+							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
 							<string>loadResults:</string>
@@ -4121,6 +4174,7 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -4134,6 +4188,7 @@
 							<string>deleteMarked:</string>
 							<string>exportToXHTML:</string>
 							<string>filter:</string>
+							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
 							<string>loadResults:</string>
@@ -4186,6 +4241,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">filter:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">hardlinkMarked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

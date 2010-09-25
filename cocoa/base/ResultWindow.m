@@ -126,6 +126,29 @@ http://www.hardcoded.net/licenses/hs_license
     }
 }
 
+- (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
+{
+    NSInteger mark_count = [[py getMarkCount] intValue];
+    if (!mark_count) {
+        return;
+    }
+    NSString *msg = @"You are about to send %d files to Trash. Continue?";
+    if (hardlinkDeleted) {
+        msg = @"You are about to send %d files to Trash (and hardlink them afterwards). Continue?";
+    }
+    if ([Dialogs askYesNo:[NSString stringWithFormat:msg,mark_count]] == NSAlertSecondButtonReturn) { // NO
+        return;
+    }
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+    if (hardlinkDeleted) {
+        [py hardlinkMarked];
+    }
+    else {
+        [py deleteMarked];
+    }
+}
+
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
@@ -168,14 +191,12 @@ http://www.hardcoded.net/licenses/hs_license
 
 - (IBAction)deleteMarked:(id)sender
 {
-    NSInteger mark_count = [[py getMarkCount] intValue];
-    if (!mark_count)
-        return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to send %d files to Trash. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
-        return;
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
-    [py deleteMarked];
+    [self sendMarkedToTrash:NO];
+}
+
+- (IBAction)hardlinkMarked:(id)sender
+{
+    [self sendMarkedToTrash:YES];
 }
 
 - (IBAction)exportToXHTML:(id)sender

@@ -6,8 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-
-
 import os
 import os.path as op
 import logging
@@ -63,18 +61,22 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         else:
             self.action_count += count
     
-    def _do_delete(self, j):
+    def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe)
+            return self._do_delete_dupe(dupe, replace_with_hardlinks)
         
         j.start_job(self.results.mark_count)
         self.results.perform_on_marked(op, True)
     
-    def _do_delete_dupe(self, dupe):
+    def _do_delete_dupe(self, dupe, replace_with_hardlinks):
         if not io.exists(dupe.path):
             return
         send2trash(str(dupe.path)) # Raises OSError when there's a problem
+        if replace_with_hardlinks:
+            group = self.results.get_group_of_duplicate(dupe)
+            ref = group.ref
+            os.link(str(ref.path), str(dupe.path))
         self.clean_empty_dirs(dupe.path[:-1])
     
     def _do_load(self, j):
@@ -135,8 +137,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.selected_dupes = dupes
         self.notify('dupes_selected')
     
-    def _start_job(self, jobid, func):
-        # func(j)
+    def _start_job(self, jobid, func, *args):
+        # func(j, *args)
         raise NotImplementedError()
     
     def add_directory(self, d):
@@ -208,9 +210,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         jobid = JOB_COPY if copy else JOB_MOVE
         self._start_job(jobid, do)
     
-    def delete_marked(self):
+    def delete_marked(self, replace_with_hardlinks=False):
         self._demo_check()
-        self._start_job(JOB_DELETE, self._do_delete)
+        self._start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
     
     def export_to_xhtml(self, column_ids):
         column_ids = [colid for colid in column_ids if colid.isdigit()]

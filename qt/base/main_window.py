@@ -44,6 +44,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionInvokeCustomCommand.triggered.connect(self.app.invokeCustomCommand)
         self.actionLoadResults.triggered.connect(self.loadResultsTriggered)
         self.actionSaveResults.triggered.connect(self.saveResultsTriggered)
+        self.actionHardlinkMarked.triggered.connect(self.hardlinkTriggered)
     
     def _setupUi(self):
         self.setupUi(self)
@@ -73,6 +74,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         actionMenu = QMenu('Actions', self.toolBar)
         actionMenu.setIcon(QIcon(QPixmap(":/actions")))
         actionMenu.addAction(self.actionDeleteMarked)
+        actionMenu.addAction(self.actionHardlinkMarked)
         actionMenu.addAction(self.actionMoveMarked)
         actionMenu.addAction(self.actionCopyMarked)
         actionMenu.addAction(self.actionRemoveMarked)
@@ -99,9 +101,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.app.prefs.mainWindowRect is not None and not self.app.prefs.mainWindowIsMaximized:
             self.setGeometry(self.app.prefs.mainWindowRect)
         
-        # Linux setup
+        # Platform-specific setup
         if sys.platform == 'linux2':
             self.actionCheckForUpdate.setVisible(False) # This only works on Windows
+        if sys.platform not in {'darwin', 'linux2'}:
+            self.actionHardlinkMarked.setVisible(False)
     
     #--- Private
     def _confirm(self, title, msg, default_button=QMessageBox.Yes):
@@ -193,6 +197,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         exported_path = self.app.export_to_xhtml(column_ids)
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
+    
+    def hardlinkTriggered(self):
+        count = self.app.results.mark_count
+        if not count:
+            return
+        title = "Delete and hardlink duplicates"
+        msg = "You are about to send {0} files to the trash and hardlink them afterwards. Continue?".format(count)
+        if self._confirm(title, msg):
+            self.app.delete_marked(replace_with_hardlinks=True)
     
     def loadResultsTriggered(self):
         title = "Select a results file to load"

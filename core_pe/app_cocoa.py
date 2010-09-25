@@ -139,10 +139,10 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         self.directories = Directories()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     
-    def _do_delete(self, j):
+    def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe)
+            return self._do_delete_dupe(dupe, replace_with_hardlinks)
         
         marked = [dupe for dupe in self.results.dupes if self.results.is_marked(dupe)]
         self.path2iphoto = {}
@@ -164,7 +164,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         self.results.perform_on_marked(op, True)
         del self.path2iphoto
     
-    def _do_delete_dupe(self, dupe):
+    def _do_delete_dupe(self, dupe, replace_with_hardlinks):
         if isinstance(dupe, IPhoto):
             if str(dupe.path) in self.path2iphoto:
                 photo = self.path2iphoto[str(dupe.path)]
@@ -177,7 +177,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                 msg = "Could not find photo %s in iPhoto Library" % str(dupe.path)
                 raise EnvironmentError(msg)
         else:
-            app_cocoa.DupeGuru._do_delete_dupe(self, dupe)
+            app_cocoa.DupeGuru._do_delete_dupe(self, dupe, replace_with_hardlinks)
     
     def _get_file(self, str_path):
         p = Path(str_path)
