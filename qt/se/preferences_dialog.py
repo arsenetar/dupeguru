@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
-import sys
+import platform
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QDialog, QDialogButtonBox
 
@@ -34,9 +34,13 @@ class PreferencesDialog(QDialog, Ui_PreferencesDialog):
     
     def _setupUi(self):
         self.setupUi(self)
-        if sys.platform not in {'darwin', 'linux2'}:
+        if platform.system() not in {'Darwin', 'Linux'}:
             self.verticalLayout_4.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
+        if platform.system() == 'Linux':
+            # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
+            # doesn't have enough space, so we make the pref pane higher to compensate.
+            self.resize(self.width(), 400)
     
     def load(self, prefs=None):
         if prefs is None:
