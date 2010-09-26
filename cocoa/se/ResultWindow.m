@@ -33,7 +33,7 @@ http://www.hardcoded.net/licenses/hs_license
     [columnsOrder addObject:@"5"];
     NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
     [columnsWidth setObject:i2n(195) forKey:@"0"];
-    [columnsWidth setObject:i2n(120) forKey:@"1"];
+    [columnsWidth setObject:i2n(183) forKey:@"1"];
     [columnsWidth setObject:i2n(63) forKey:@"2"];
     [columnsWidth setObject:i2n(60) forKey:@"5"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
