@@ -62,8 +62,7 @@ class ResultTable(GUIObject, GUITable):
     #--- Override
     def connect(self):
         GUIObject.connect(self)
-        self.refresh()
-        self.view.refresh()
+        self._refresh_with_view()
     
     def _restore_selection(self, previous_selection):
         if self.app.selected_dupes:
@@ -85,6 +84,11 @@ class ResultTable(GUIObject, GUITable):
             for dupe in self.app.results.dupes:
                 group = self.app.results.get_group_of_duplicate(dupe)
                 self.append(DupeRow(self, group, dupe))
+    
+    def _refresh_with_view(self):
+        self.refresh()
+        self.view.refresh()
+        self.view.show_selected_row()
     
     #--- Public
     def get_row_value(self, index, column):
@@ -109,8 +113,7 @@ class ResultTable(GUIObject, GUITable):
         else:
             self.app.results.sort_groups(key, asc)
         self._sort_descriptors = (key, asc)
-        self.refresh()
-        self.view.refresh()
+        self._refresh_with_view()
     
     #--- Properties
     @property
@@ -124,8 +127,7 @@ class ResultTable(GUIObject, GUITable):
         self._power_marker = value
         key, asc = self._sort_descriptors
         self.sort(key, asc)
-        self.refresh()
-        self.view.refresh()
+        # no need to refresh, it has happened in sort()
     
     @property
     def delta_values(self):
@@ -148,8 +150,7 @@ class ResultTable(GUIObject, GUITable):
         self.view.invalidate_markings()
     
     def results_changed(self):
-        self.refresh()
-        self.view.refresh()
+        self._refresh_with_view()
     
     def results_changed_but_keep_selection(self):
         # What we want to to here is that instead of restoring selected *dupes* after refresh, we
