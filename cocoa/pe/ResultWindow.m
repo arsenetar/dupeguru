@@ -42,8 +42,8 @@ http://www.hardcoded.net/licenses/hs_license
     [columnsOrder addObject:@"4"];
     [columnsOrder addObject:@"6"];
     NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
-    [columnsWidth setObject:i2n(121) forKey:@"0"];
-    [columnsWidth setObject:i2n(120) forKey:@"1"];
+    [columnsWidth setObject:i2n(162) forKey:@"0"];
+    [columnsWidth setObject:i2n(142) forKey:@"1"];
     [columnsWidth setObject:i2n(63) forKey:@"2"];
     [columnsWidth setObject:i2n(73) forKey:@"4"];
     [columnsWidth setObject:i2n(58) forKey:@"6"];
