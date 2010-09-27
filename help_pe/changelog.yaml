@@ -1,3 +1,11 @@
+- date: 2010-09-27
+  version: 1.11.0
+  description: |
+    * Improved UI with a little revamp.
+    * Added the possibility to place hardlinks to references after having deleted duplicates. [Mac OS X, Linux] (#91)
+    * Added an option to ignore duplicates hardlinking to the same file. [Mac OS X, Linux] (#92)
+    * Added multiple selection in the "Add Directory" dialog. [Mac OS X] (#105)
+    * Fixed a bug preventing drag & drop from working in the Directories panel. [Windows, Linux]
 - date: 2010-08-21
   version: 1.10.0
   description: |
