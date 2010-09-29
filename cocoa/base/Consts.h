@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import <Cocoa/Cocoa.h>
 
-#define RegistrationRequired @"RegistrationRequired"
 #define JobStarted @"JobStarted"
 #define JobInProgress @"JobInProgress"
 

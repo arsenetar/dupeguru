@@ -31,7 +31,7 @@ class DupeGuru(DupeGuruBase):
     DELTA_COLUMNS = frozenset([2, 4])
     
     def __init__(self):
-        DupeGuruBase.__init__(self, data, appid=4)
+        DupeGuruBase.__init__(self, data)
     
     def _setup(self):
         self.directories = Directories()

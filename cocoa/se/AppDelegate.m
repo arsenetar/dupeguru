@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import "AppDelegate.h"
 #import "../../cocoalib/ProgressController.h"
-#import "../../cocoalib/RegistrationInterface.h"
 #import "../../cocoalib/Utils.h"
 #import "../../cocoalib/ValueTransformers.h"
 #import "DetailsPanel.h"

@@ -9,7 +9,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import "ResultWindow.h"
 #import "../../cocoalib/Dialogs.h"
 #import "../../cocoalib/ProgressController.h"
-#import "../../cocoalib/RegistrationInterface.h"
 #import "../../cocoalib/Utils.h"
 #import "AppDelegate.h"
 #import "Consts.h"

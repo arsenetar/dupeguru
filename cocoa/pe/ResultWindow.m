@@ -9,7 +9,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import "ResultWindow.h"
 #import "Dialogs.h"
 #import "ProgressController.h"
-#import "RegistrationInterface.h"
 #import "Utils.h"
 #import "AppDelegate.h"
 #import "Consts.h"

@@ -16,7 +16,6 @@ from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL, pyqtSi
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
 
 from hscommon import job
-from hscommon.reg import RegistrationRequired
 
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     
@@ -38,28 +37,18 @@ JOBID2TITLE = {
     JOB_DELETE: "Sending files to the recycle bin",
 }
 
-def demo_method(method):
-    def wrapper(self, *args, **kwargs):
-        try:
-            return method(self, *args, **kwargs)
-        except RegistrationRequired:
-            msg = "The demo version of dupeGuru only allows 10 actions (delete/move/copy) per session."
-            QMessageBox.information(self.main_window, 'Demo', msg)
-    
-    return wrapper
-
 class DupeGuru(DupeGuruBase, QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
     DELTA_COLUMNS = frozenset()
     
-    def __init__(self, data_module, appid):
+    def __init__(self, data_module):
         appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
         if not op.exists(appdata):
             os.makedirs(appdata)
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
         logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING)
-        DupeGuruBase.__init__(self, data_module, appdata, appid)
+        DupeGuruBase.__init__(self, data_module, appdata)
         QObject.__init__(self)
         self._setup()
     
@@ -78,7 +67,7 @@ class DupeGuru(DupeGuruBase, QObject):
         
         self.reg = Registration(self)
         self.set_registration(self.prefs.registration_code, self.prefs.registration_email)
-        if not self.registered:
+        if not self.registered and self.unpaid_hours >= 1:
             # The timer scheme is because if the nag is not shown before the application is 
             # completely initialized, the nag will be shown before the app shows up in the task bar
             # In some circumstances, the nag is hidden by other window, which may make the user think
@@ -150,7 +139,6 @@ class DupeGuru(DupeGuruBase, QObject):
         if self.main_window._confirm(title, msg):
             DupeGuruBase.add_selected_to_ignore_list(self)
     
-    @demo_method
     def copy_or_move_marked(self, copy):
         opname = 'copy' if copy else 'move'
         title = "Select a directory to {0} marked files to".format(opname)
@@ -160,8 +148,6 @@ class DupeGuru(DupeGuruBase, QObject):
             return
         recreate_path = self.prefs.destination_type
         DupeGuruBase.copy_or_move_marked(self, copy, destination, recreate_path)
-    
-    delete_marked = demo_method(DupeGuruBase.delete_marked)
     
     def remove_selected(self):
         dupes = self.without_ref(self.selected_dupes)

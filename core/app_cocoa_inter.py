@@ -9,7 +9,7 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-from hscommon.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyRegistrable
+from hscommon.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyFairware
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -22,7 +22,7 @@ from .gui.stats_label import StatsLabel
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
 from hsutil import conflict
 
-class PyDupeGuruBase(PyRegistrable):
+class PyDupeGuruBase(PyFairware):
     #---Directories
     def addDirectory_(self, directory):
         return self.py.add_directory(directory)

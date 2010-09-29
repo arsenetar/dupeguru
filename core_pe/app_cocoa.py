@@ -134,7 +134,7 @@ class Directories(directories.Directories):
 
 class DupeGuruPE(app_cocoa.DupeGuru):
     def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru Picture Edition', appid=5)
+        app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru Picture Edition')
         self.scanner = ScannerPE()
         self.directories = Directories()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')

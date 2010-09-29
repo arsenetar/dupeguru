@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1147"/>
-			<integer value="598"/>
+			<integer value="21"/>
+			<integer value="57"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -87,6 +87,7 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{7, 14}, {67, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="431579725">
 										<int key="NSCellFlags">67239424</int>
@@ -182,6 +183,7 @@
 									<int key="NSvFlags">258</int>
 									<string key="NSFrame">{{0, 14}, {81, 22}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="484816507">
 										<int key="NSCellFlags">343014976</int>
@@ -327,6 +329,7 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{1, 14}, {40, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSPopUpButtonCell" key="NSCell" id="436420677">
 										<int key="NSCellFlags">-2076049856</int>
@@ -512,7 +515,6 @@
 												</object>
 											</object>
 										</object>
-										<int key="NSSelectedIndex">2</int>
 										<bool key="NSPullDown">YES</bool>
 										<int key="NSPreferredEdge">3</int>
 										<bool key="NSUsesItemFromMenu">YES</bool>
@@ -543,6 +545,7 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{4, 14}, {67, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="211272396">
 										<int key="NSCellFlags">67239424</int>
@@ -944,15 +947,6 @@
 									<reference key="NSMenu" ref="7402560"/>
 									<string key="NSTitle">About dupeGuru</string>
 									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="852972005"/>
-									<reference key="NSMixedImage" ref="218295580"/>
-								</object>
-								<object class="NSMenuItem" id="29406775">
-									<reference key="NSMenu" ref="7402560"/>
-									<string key="NSTitle">Unlock dupeGuru</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="852972005"/>
 									<reference key="NSMixedImage" ref="218295580"/>
@@ -1939,22 +1933,6 @@
 					<int key="connectionID">748</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">unlockApp:</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="29406775"/>
-					</object>
-					<int key="connectionID">755</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">unlockMenuItem</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="29406775"/>
-					</object>
-					<int key="connectionID">756</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">app</string>
 						<reference key="source" ref="339936126"/>
@@ -2469,7 +2447,6 @@
 							<reference ref="873971427"/>
 							<reference ref="941940359"/>
 							<reference ref="234345427"/>
-							<reference ref="29406775"/>
 							<reference ref="688262014"/>
 						</object>
 						<reference key="parent" ref="162097048"/>
@@ -2517,11 +2494,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">542</int>
 						<reference key="object" ref="234345427"/>
-						<reference key="parent" ref="7402560"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">754</int>
-						<reference key="object" ref="29406775"/>
 						<reference key="parent" ref="7402560"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3404,8 +3376,6 @@
 					<string>739.ImportedFromIB2</string>
 					<string>740.IBPluginDependency</string>
 					<string>740.ImportedFromIB2</string>
-					<string>754.IBPluginDependency</string>
-					<string>754.ImportedFromIB2</string>
 					<string>872.IBPluginDependency</string>
 					<string>872.ImportedFromIB2</string>
 					<string>880.IBPluginDependency</string>
@@ -3492,7 +3462,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{294, 462}, {617, 227}}</string>
+					<string>{{294, 689}, {617, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3572,7 +3542,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{152, 575}, {221, 193}}</string>
+					<string>{{152, 595}, {221, 173}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3622,8 +3592,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>{{310, 310}, {353, 263}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3827,17 +3795,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">AppDelegateBase</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">unlockApp:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">unlockApp:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">unlockApp:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -3845,14 +3802,12 @@
 							<string>py</string>
 							<string>recentDirectories</string>
 							<string>result</string>
-							<string>unlockMenuItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>PyDupeGuruBase</string>
 							<string>RecentDirectories</string>
 							<string>ResultWindowBase</string>
-							<string>NSMenuItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3862,7 +3817,6 @@
 							<string>py</string>
 							<string>recentDirectories</string>
 							<string>result</string>
-							<string>unlockMenuItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3877,10 +3831,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">result</string>
 								<string key="candidateClassName">ResultWindowBase</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">unlockMenuItem</string>
-								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 						</object>
 					</object>
@@ -3973,14 +3923,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">../base/PyDupeGuru.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyRegistrable</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../PyRegistrable.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

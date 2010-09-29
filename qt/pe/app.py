@@ -64,7 +64,7 @@ class DupeGuru(DupeGuruBase):
     DELTA_COLUMNS = frozenset([2, 5])
     
     def __init__(self):
-        DupeGuruBase.__init__(self, data_pe, appid=5)
+        DupeGuruBase.__init__(self, data_pe)
     
     def _setup(self):
         self.scanner = ScannerPE()

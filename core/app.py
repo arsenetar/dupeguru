@@ -13,7 +13,7 @@ import subprocess
 import re
 
 from send2trash import send2trash
-from hscommon.reg import RegistrableApplication, RegistrationRequired
+from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hsutil import io, files
 from hsutil.path import Path
@@ -32,10 +32,8 @@ class NoScannableFileError(Exception):
     pass
 
 class DupeGuru(RegistrableApplication, Broadcaster):
-    DEMO_LIMIT_DESC = "In the demo version, only 10 duplicates per session can be sent to the recycle bin, moved or copied."
-    
-    def __init__(self, data_module, appdata, appid):
-        RegistrableApplication.__init__(self, appid)
+    def __init__(self, data_module, appdata):
+        RegistrableApplication.__init__(self, appid=1)
         Broadcaster.__init__(self)
         self.appdata = appdata
         if not op.exists(self.appdata):
@@ -44,22 +42,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.directories = directories.Directories()
         self.results = results.Results(data_module)
         self.scanner = scanner.Scanner()
-        self.action_count = 0
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
-    
-    def _demo_check(self):
-        if self.registered:
-            return
-        count = self.results.mark_count
-        if count + self.action_count > 10:
-            raise RegistrationRequired()
-        else:
-            self.action_count += count
     
     def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):
@@ -206,12 +194,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
-        self._demo_check()
         jobid = JOB_COPY if copy else JOB_MOVE
         self._start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
-        self._demo_check()
         self._start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
     
     def export_to_xhtml(self, column_ids):

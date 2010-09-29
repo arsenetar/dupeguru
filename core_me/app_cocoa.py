@@ -26,7 +26,7 @@ JOBID2TITLE.update({
 
 class DupeGuruME(DupeGuruBase):
     def __init__(self):
-        DupeGuruBase.__init__(self, data, 'dupeGuru Music Edition', appid=1)
+        DupeGuruBase.__init__(self, data, 'dupeGuru Music Edition')
         self.scanner = scanner.ScannerME()
         self.directories.fileclasses = [fs.Mp3File, fs.Mp4File, fs.WmaFile, fs.OggFile, fs.FlacFile, fs.AiffFile]
         self.dead_tracks = []

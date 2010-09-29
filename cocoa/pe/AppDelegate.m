@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import "AppDelegate.h"
 #import "ProgressController.h"
-#import "RegistrationInterface.h"
 #import "Utils.h"
 #import "ValueTransformers.h"
 #import "Consts.h"

@@ -17,15 +17,12 @@ http://www.hardcoded.net/licenses/hs_license
 {
     IBOutlet PyDupeGuruBase *py;
     IBOutlet RecentDirectories *recentDirectories;
-    IBOutlet NSMenuItem *unlockMenuItem;
     IBOutlet ResultWindowBase *result;
     
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
     BOOL _savedResults;
 }
-- (IBAction)unlockApp:(id)sender;
-
 - (PyDupeGuruBase *)py;
 - (RecentDirectories *)recentDirectories;
 - (DirectoryPanel *)directoryPanel;

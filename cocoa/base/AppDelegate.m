@@ -8,25 +8,12 @@ http://www.hardcoded.net/licenses/hs_license
 
 #import "AppDelegate.h"
 #import "ProgressController.h"
-#import "RegistrationInterface.h"
+#import "HSFairwareReminder.h"
 #import "Utils.h"
 #import "Consts.h"
 #import <Sparkle/SUUpdater.h>
 
 @implementation AppDelegateBase
-- (IBAction)unlockApp:(id)sender
-{
-    if ([[self py] isRegistered])
-        return;
-    RegistrationInterface *ri = [[RegistrationInterface alloc] initWithApp:[self py]];
-    if ([ri enterCode] == NSOKButton)
-    {
-        NSString *menuTitle = [NSString stringWithFormat:@"Thanks for buying %@!",[py appName]];
-        [unlockMenuItem setTitle:menuTitle];
-    }
-    [ri release];
-}
-
 - (PyDupeGuruBase *)py { return py; }
 - (RecentDirectories *)recentDirectories { return recentDirectories; }
 - (DirectoryPanel *)directoryPanel
@@ -65,9 +52,7 @@ http://www.hardcoded.net/licenses/hs_license
         [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
     else
         [result resetColumnsToDefault:nil];
-    //Reg stuff
-    if ([RegistrationInterface showNagWithApp:[self py]])
-        [unlockMenuItem setTitle:[NSString stringWithFormat:@"Thanks for buying %@!",[py appName]]];
+    [HSFairwareReminder showNagWithApp:[self py]];
     //Restore results
     [py loadIgnoreList];
     [py loadResults];

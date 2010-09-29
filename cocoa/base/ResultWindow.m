@@ -10,7 +10,6 @@ http://www.hardcoded.net/licenses/hs_license
 #import "Dialogs.h"
 #import "ProgressController.h"
 #import "Utils.h"
-#import "RegistrationInterface.h"
 #import "AppDelegate.h"
 #import "Consts.h"
 
@@ -31,7 +30,6 @@ http://www.hardcoded.net/licenses/hs_license
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registrationRequired:) name:RegistrationRequired object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
@@ -462,12 +460,6 @@ http://www.hardcoded.net/licenses/hs_license
     NSString *jobid = [ui valueForKey:@"jobid"];
     [[ProgressController mainProgressController] setJobId:jobid];
     [[ProgressController mainProgressController] showSheetForParent:[self window]];
-}
-
-- (void)registrationRequired:(NSNotification *)aNotification
-{
-    NSString *msg = @"This is a demo version, which only allows you 10 delete/copy/move actions per session. You cannot continue.";
-    [Dialogs showMessage:msg];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
