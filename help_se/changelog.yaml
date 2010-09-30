@@ -1,3 +1,7 @@
+- date: 2010-09-30
+  version: 2.12.1
+  description: |
+    * Re-licensed dupeGuru to BSD and made it [Fairware](http://open.hardcoded.net/about/)
 - date: 2010-09-26
   version: 2.12.0
   description: |
