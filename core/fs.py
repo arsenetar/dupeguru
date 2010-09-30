@@ -3,9 +3,9 @@
 # Created On: 2009-10-22
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
 # 
-# This software is licensed under the "HS" License as described in the "LICENSE" file, 
+# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
 # which should be included with this package. The terms are also available at 
-# http://www.hardcoded.net/licenses/hs_license
+# http://www.hardcoded.net/licenses/bsd_license
 
 # This is a fork from hsfs. The reason for this fork is that hsfs has been designed for musicGuru
 # and was re-used for dupeGuru. The problem is that hsfs is way over-engineered for dupeGuru,
