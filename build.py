@@ -63,11 +63,25 @@ def build_cocoa(edition, dev, help_destpath):
         args.append('-configuration release')
     args = ' '.join(args)
     os.system('xcodebuild {0}'.format(args))
-    os.chdir('..')
+    os.chdir('../..')
+    print("Creating the run.py file")
+    subfolder = 'dev' if dev else 'release'
+    app_path = {
+        'se': 'cocoa/se/build/{0}/dupeGuru.app',
+        'me': 'cocoa/me/build/{0}/dupeGuru\\ ME.app',
+        'pe': 'cocoa/pe/build/{0}/dupeGuru\\ PE.app',
+    }[edition].format(subfolder)
+    tmpl = open('run_template_cocoa.py', 'rt').read()
+    run_contents = tmpl.format(app_path=app_path)
+    open('run.py', 'wt').write(run_contents)
 
 def build_qt(edition, dev):
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
+    print("Creating the run.py file")
+    tmpl = open('run_template_qt.py', 'rt').read()
+    run_contents = tmpl.format(edition=edition)
+    open('run.py', 'wt').write(run_contents)
 
 def build_pe_modules(ui):
     def move(src, dst):

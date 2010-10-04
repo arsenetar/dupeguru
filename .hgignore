@@ -1,6 +1,7 @@
 syntax: glob
 
 .DS_Store
+run.py
 *.pyc
 *.so
 *.mode1v3
