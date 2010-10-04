@@ -142,11 +142,15 @@ class PyDupeGuruBase(PyFairware):
         except AttributeError:
             # I have *no idea* why this can possible happen (last_progress is always set by
             # create_job() *before* any threaded job notification, which shows the progress panel,
-            # is sent), but it happens anyway, so there we go.
+            # is sent), but it happens anyway, so there we go. ref: #106
             return -1
     
     def getJobDesc(self):
-        return self.py.progress.last_desc
+        try:
+            return self.py.progress.last_desc
+        except AttributeError:
+            # see getJobProgress
+            return ''
     
     def cancelJob(self):
         self.py.progress.job_cancelled = True
