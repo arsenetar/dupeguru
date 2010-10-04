@@ -31,6 +31,9 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
+MATCHPERC_COL = 15
+DUPECOUNT_COL = 17
+
 METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
     'album', 'genre', 'year', 'track', 'comment']
 
@@ -76,19 +79,19 @@ def GetDisplayInfo(dupe, group, delta):
     ]
 
 def GetDupeSortKey(dupe, get_group, key, delta):
-    if key == 16:
+    if key == MATCHPERC_COL:
         m = get_group().get_match_of(dupe)
         return m.percentage
-    if key == 18:
+    if key == DUPECOUNT_COL:
         return 0
     r = cmp_value(getattr(dupe, COLUMNS[key]['attr'], ''))
-    if delta and (key in (2, 3, 4, 7, 8)):
+    if delta and (key in {2, 3, 4, 7}):
         r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr'], ''))
     return r
 
 def GetGroupSortKey(group, key):
-    if key == 16:
+    if key == MATCHPERC_COL:
         return group.percentage
-    if key == 18:
+    if key == DUPECOUNT_COL:
         return len(group)
     return cmp_value(getattr(group.ref, COLUMNS[key]['attr'], ''))

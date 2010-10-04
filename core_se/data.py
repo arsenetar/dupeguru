@@ -21,6 +21,9 @@ COLUMNS = [
     {'attr':'dupe_count','display':'Dupe Count'},
 ]
 
+MATCHPERC_COL = 5
+DUPECOUNT_COL = 7
+
 METADATA_TO_READ = ['size', 'mtime']
 
 def GetDisplayInfo(dupe, group, delta):
@@ -49,19 +52,19 @@ def GetDisplayInfo(dupe, group, delta):
     ]
 
 def GetDupeSortKey(dupe, get_group, key, delta):
-    if key == 6:
+    if key == MATCHPERC_COL:
         m = get_group().get_match_of(dupe)
         return m.percentage
-    if key == 8:
+    if key == DUPECOUNT_COL:
         return 0
     r = cmp_value(getattr(dupe, COLUMNS[key]['attr'], ''))
-    if delta and (key in (2, 4, 5)):
+    if delta and (key in {2, 4}):
         r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr'], ''))
     return r
 
 def GetGroupSortKey(group, key):
-    if key == 6:
+    if key == MATCHPERC_COL:
         return group.percentage
-    if key == 8:
+    if key == DUPECOUNT_COL:
         return len(group)
     return cmp_value(getattr(group.ref, COLUMNS[key]['attr'], ''))
