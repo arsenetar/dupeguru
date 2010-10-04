@@ -6,10 +6,23 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from base.details_dialog import DetailsDialog as DetailsDialogBase
-from details_dialog_ui import Ui_DetailsDialog
+from PyQt4.QtCore import QSize
+from PyQt4.QtGui import QVBoxLayout, QAbstractItemView
 
-class DetailsDialog(DetailsDialogBase, Ui_DetailsDialog):
+from ..base.details_dialog import DetailsDialog as DetailsDialogBase
+from ..base.details_table import DetailsTable
+
+class DetailsDialog(DetailsDialogBase):
     def _setupUi(self):
-        self.setupUi(self)
+        self.setWindowTitle("Details")
+        self.resize(502, 295)
+        self.setMinimumSize(QSize(250, 250))
+        self.verticalLayout = QVBoxLayout(self)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setMargin(0)
+        self.tableView = DetailsTable(self)
+        self.tableView.setAlternatingRowColors(True)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView.setShowGrid(False)
+        self.verticalLayout.addWidget(self.tableView)
     

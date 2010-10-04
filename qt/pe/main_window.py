@@ -9,7 +9,7 @@
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QMessageBox, QAction
 
-from base.main_window import MainWindow as MainWindowBase
+from ..base.main_window import MainWindow as MainWindowBase
 
 class MainWindow(MainWindowBase):
     def _setupUi(self):

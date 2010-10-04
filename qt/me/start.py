@@ -12,9 +12,8 @@ sip.setapi('QVariant', 1)
 from PyQt4.QtCore import QCoreApplication
 from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
-import base.dg_rc
-
-from app import DupeGuru
+from ..base import dg_rc
+from .app import DupeGuru
 
 if sys.platform == 'win32':
     import base.cxfreeze_fix

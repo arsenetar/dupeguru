@@ -8,7 +8,7 @@
 
 from PyQt4.QtCore import QSettings, QVariant
 
-from base.preferences import Preferences as PreferencesBase
+from ..base.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
     # (width, is_visible)

@@ -67,9 +67,6 @@ def build_cocoa(edition, dev, help_destpath):
 
 def build_qt(edition, dev):
     print("Building Qt stuff")
-    build_all_qt_ui(op.join('qtlib', 'ui'))
-    build_all_qt_ui(op.join('qt', 'base'))
-    build_all_qt_ui(op.join('qt', edition))
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
 
 def build_pe_modules(ui):

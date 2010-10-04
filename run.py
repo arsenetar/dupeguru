@@ -10,6 +10,7 @@
 import sys
 import os
 import os.path as op
+import runpy
 
 import yaml
 
@@ -31,10 +32,7 @@ def main():
         os.system('open {0}'.format(app_path))
     elif ui == 'qt':
         add_to_pythonpath('.')
-        add_to_pythonpath('qt')
-        os.chdir(op.join('qt', edition))
-        os.system('{0} start.py'.format(sys.executable))
-        os.chdir('..')
+        runpy.run_module('qt.{0}.start'.format(edition), run_name='__main__')
 
 if __name__ == '__main__':
     main()

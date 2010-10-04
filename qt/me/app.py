@@ -8,10 +8,10 @@
 
 from core_me import data, scanner, fs
 
-from base.app import DupeGuru as DupeGuruBase
-from details_dialog import DetailsDialog
-from preferences import Preferences
-from preferences_dialog import PreferencesDialog
+from ..base.app import DupeGuru as DupeGuruBase
+from .details_dialog import DetailsDialog
+from .preferences import Preferences
+from .preferences_dialog import PreferencesDialog
 
 class DupeGuru(DupeGuruBase):
     EDITION = 'me'

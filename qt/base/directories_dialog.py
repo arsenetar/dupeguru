@@ -6,19 +6,21 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL, Qt
-from PyQt4.QtGui import QDialog, QFileDialog, QHeaderView
+from PyQt4.QtCore import SIGNAL, Qt, QSize
+from PyQt4.QtGui import (QDialog, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
+    QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication)
 
 from . import platform
-from .directories_dialog_ui import Ui_DirectoriesDialog
 from .directories_model import DirectoriesModel, DirectoriesDelegate
 
-class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
+class DirectoriesDialog(QDialog):
     def __init__(self, parent, app):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         QDialog.__init__(self, parent, flags)
         self.app = app
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
+        self.directoriesModel = DirectoriesModel(self.app)
+        self.directoriesDelegate = DirectoriesDelegate()
         self._setupUi()
         self._updateRemoveButton()
         
@@ -29,19 +31,52 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _setupUi(self):
-        self.setupUi(self)
-        # Stuff that can't be done in the Designer
-        self.directoriesModel = DirectoriesModel(self.app)
-        self.directoriesDelegate = DirectoriesDelegate()
+        self.setWindowTitle("Directories")
+        self.resize(420, 338)
+        self.verticalLayout = QVBoxLayout(self)
+        self.treeView = QTreeView(self)
         self.treeView.setItemDelegate(self.directoriesDelegate)
         self.treeView.setModel(self.directoriesModel)
-        
+        self.treeView.setAcceptDrops(True)
+        self.treeView.setEditTriggers(QAbstractItemView.DoubleClicked|QAbstractItemView.EditKeyPressed|QAbstractItemView.SelectedClicked)
+        self.treeView.setDragDropOverwriteMode(True)
+        self.treeView.setDragDropMode(QAbstractItemView.DropOnly)
+        self.treeView.setUniformRowHeights(True)
         header = self.treeView.header()
         header.setStretchLastSection(False)
         header.setResizeMode(0, QHeaderView.Stretch)
         header.setResizeMode(1, QHeaderView.Fixed)
         header.resizeSection(1, 100)
-        
+        self.verticalLayout.addWidget(self.treeView)
+        self.horizontalLayout = QHBoxLayout()
+        spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.removeButton = QPushButton(self)
+        self.removeButton.setText("Remove")
+        self.removeButton.setShortcut("Del")
+        self.removeButton.setMinimumSize(QSize(91, 0))
+        self.removeButton.setMaximumSize(QSize(16777215, 32))
+        self.horizontalLayout.addWidget(self.removeButton)
+        self.addButton = QPushButton(self)
+        self.addButton.setText("Add")
+        self.addButton.setMinimumSize(QSize(91, 0))
+        self.addButton.setMaximumSize(QSize(16777215, 32))
+        self.horizontalLayout.addWidget(self.addButton)
+        spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
+        self.doneButton = QPushButton(self)
+        self.doneButton.setText("Done")
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.doneButton.sizePolicy().hasHeightForWidth())
+        self.doneButton.setSizePolicy(sizePolicy)
+        self.doneButton.setMinimumSize(QSize(91, 0))
+        self.doneButton.setMaximumSize(QSize(16777215, 32))
+        self.doneButton.setDefault(True)
+        self.horizontalLayout.addWidget(self.doneButton)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+                
         if self.app.prefs.directoriesWindowRect is not None:
             self.setGeometry(self.app.prefs.directoriesWindowRect)
     
@@ -84,3 +119,12 @@ class DirectoriesDialog(QDialog, Ui_DirectoriesDialog):
     def selectionChanged(self, selected, deselected):
         self._updateRemoveButton()
     
+
+if __name__ == '__main__':
+    import sys
+    from ..testapp import TestApp
+    app = QApplication([])
+    dgapp = TestApp()
+    dialog = DirectoriesDialog(None, dgapp)
+    dialog.show()
+    sys.exit(app.exec_())

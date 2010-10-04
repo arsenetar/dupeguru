@@ -13,8 +13,6 @@ cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/dg_cocoa.plugin
 qt/base/*_rc.py
-qt/base/*_ui.py
-qt/*/*_ui.py
 qt/*/build
 qt/*/dist
 qt/*/install

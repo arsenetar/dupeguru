@@ -9,10 +9,10 @@
 from core_se import data
 from core.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
-from base.app import DupeGuru as DupeGuruBase
-from details_dialog import DetailsDialog
-from preferences import Preferences
-from preferences_dialog import PreferencesDialog
+from ..base.app import DupeGuru as DupeGuruBase
+from .details_dialog import DetailsDialog
+from .preferences import Preferences
+from .preferences_dialog import PreferencesDialog
 
 class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = frozenset(['windows', 'program files'])

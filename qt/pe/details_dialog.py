@@ -6,20 +6,57 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QPixmap
+from PyQt4.QtCore import Qt, QSize
+from PyQt4.QtGui import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy, QPixmap
 
-from base.details_dialog import DetailsDialog as DetailsDialogBase
-from details_dialog_ui import Ui_DetailsDialog
+from ..base.details_dialog import DetailsDialog as DetailsDialogBase
+from ..base.details_table import DetailsTable
 
-class DetailsDialog(DetailsDialogBase, Ui_DetailsDialog):
+class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
         DetailsDialogBase.__init__(self, parent, app)
         self.selectedPixmap = None
         self.referencePixmap = None
     
     def _setupUi(self):
-        self.setupUi(self)
+        self.setWindowTitle("Details")
+        self.resize(502, 295)
+        self.setMinimumSize(QSize(250, 250))
+        self.verticalLayout = QVBoxLayout(self)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setMargin(0)
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSpacing(4)
+        self.selectedImage = QLabel(self)
+        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.selectedImage.sizePolicy().hasHeightForWidth())
+        self.selectedImage.setSizePolicy(sizePolicy)
+        self.selectedImage.setScaledContents(False)
+        self.selectedImage.setAlignment(Qt.AlignCenter)
+        self.horizontalLayout.addWidget(self.selectedImage)
+        self.referenceImage = QLabel(self)
+        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.referenceImage.sizePolicy().hasHeightForWidth())
+        self.referenceImage.setSizePolicy(sizePolicy)
+        self.referenceImage.setAlignment(Qt.AlignCenter)
+        self.horizontalLayout.addWidget(self.referenceImage)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.tableView = DetailsTable(self)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
+        self.tableView.setSizePolicy(sizePolicy)
+        self.tableView.setMinimumSize(QSize(0, 188))
+        self.tableView.setMaximumSize(QSize(16777215, 190))
+        self.tableView.setAlternatingRowColors(True)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView.setShowGrid(False)
+        self.verticalLayout.addWidget(self.tableView)
     
     def _update(self):
         if not self.app.selected_dupes:

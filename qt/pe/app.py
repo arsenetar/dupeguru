@@ -18,12 +18,12 @@ from core_pe import data as data_pe
 from core_pe.cache import Cache
 from core_pe.scanner import ScannerPE
 
-from block import getblocks
-from base.app import DupeGuru as DupeGuruBase
-from details_dialog import DetailsDialog
-from main_window import MainWindow
-from preferences import Preferences
-from preferences_dialog import PreferencesDialog
+from ..base.app import DupeGuru as DupeGuruBase
+from .block import getblocks
+from .details_dialog import DetailsDialog
+from .main_window import MainWindow
+from .preferences import Preferences
+from .preferences_dialog import PreferencesDialog
 
 class File(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
