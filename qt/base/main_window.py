@@ -380,7 +380,7 @@ class MainWindow(QMainWindow):
         self.app.show_preferences()
     
     def registerTrigerred(self):
-        self.app.ask_for_reg_code()
+        self.app.reg.ask_for_code()
     
     def removeMarkedTriggered(self):
         count = self.app.results.mark_count
