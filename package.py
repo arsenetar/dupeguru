@@ -12,6 +12,7 @@ import os
 import os.path as op
 import compileall
 import shutil
+import importlib
 
 import yaml
 
@@ -33,43 +34,46 @@ def package_windows(edition, dev):
         print("Qt packaging only works under Windows.")
         return
     add_to_pythonpath('.')
-    add_to_pythonpath('qt')
-    add_to_pythonpath(op.join('qt', edition))
-    os.chdir(op.join('qt', edition))
-    from app import DupeGuru
+    modname = 'qt.{0}.app'.format(edition)
+    appmod = importlib.import_module(modname)
+    DupeGuru = appmod.DupeGuru
+    #distdir = op.join('qt', edition, 'dist')
+    distdir = 'dist'
     
-    if op.exists('dist'):
-        shutil.rmtree('dist')
+    if op.exists(distdir):
+        shutil.rmtree(distdir)
     
-    cmd = 'cxfreeze --base-name Win32GUI --target-name "{0}.exe" --icon {1} start.py'
+    cmd = 'cxfreeze --base-name Win32GUI --target-dir "{0}" --target-name "{1}.exe" --icon {2} run.py'
     target_name = {'se': 'dupeGuru', 'me': 'dupeGuru ME', 'pe': 'dupeGuru PE'}[edition]
-    icon_path = '..\\..\\images\\dg{0}_logo.ico'.format(edition)
-    print_and_do(cmd.format(target_name, icon_path))
+    icon_path = 'images\\dg{0}_logo.ico'.format(edition)
+    print_and_do(cmd.format(distdir, target_name, icon_path))
     
     if not dev:
         # Copy qt plugins
-        plugin_dest = op.join('dist', 'qt4_plugins')
+        plugin_dest = op.join(distdir, 'qt4_plugins')
         plugin_names = ['accessible', 'codecs', 'iconengines', 'imageformats']
         copy_qt_plugins(plugin_names, plugin_dest)
         
         # Compress with UPX 
-        libs = [name for name in os.listdir('dist') if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
+        libs = [name for name in os.listdir(distdir) if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
         for lib in libs:
-            print_and_do("upx --best \"dist\\{0}\"".format(lib))
+            print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
     
-    help_basedir = '..\\..\\help_{0}'.format(edition)
+    help_basedir = 'help_{0}'.format(edition)
     help_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
     help_path = op.join(help_basedir, help_dir)
     print("Copying {0} to dist\\help".format(help_path))
-    shutil.copytree(help_path, 'dist\\help')
+    shutil.copytree(help_path, op.join(distdir, 'help'))
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change
-    shutil.copy('installer.aip', 'installer_tmp.aip')
+    installer_path = op.join('qt', edition, 'installer.aip')
+    shutil.copy(installer_path, 'installer_tmp.aip')
     print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % DupeGuru.VERSION)
     print_and_do('AdvancedInstaller.com /build installer_tmp.aip -force')
     os.remove('installer_tmp.aip')
-    os.chdir(op.join('..', '..'))
+    if op.exists('installer_tmp.back.aip'):
+        os.remove('installer_tmp.back.aip')
 
 def package_debian(edition):
     add_to_pythonpath('qt')

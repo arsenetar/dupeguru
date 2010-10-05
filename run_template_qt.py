@@ -16,7 +16,7 @@ from qt.base import dg_rc
 from qt.{{edition}}.app import DupeGuru
 
 if sys.platform == 'win32':
-    import base.cxfreeze_fix
+    import qt.base.cxfreeze_fix
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
