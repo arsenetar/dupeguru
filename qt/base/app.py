@@ -72,9 +72,7 @@ class DupeGuru(DupeGuruBase, QObject):
             # completely initialized, the nag will be shown before the app shows up in the task bar
             # In some circumstances, the nag is hidden by other window, which may make the user think
             # that the application haven't launched.
-            self._nagTimer = QTimer()
-            self.connect(self._nagTimer, SIGNAL('timeout()'), self.mustShowNag)
-            self._nagTimer.start(0)
+            QTimer.singleShot(0, self.reg.show_nag)
         if self.prefs.mainWindowIsMaximized:
             self.main_window.showMaximized()
         else:
@@ -205,10 +203,6 @@ class DupeGuru(DupeGuruBase, QObject):
         self.prefs.save()
         self.save()
         self.save_ignore_list()
-    
-    def mustShowNag(self):
-        self._nagTimer.stop() # must be shown only once
-        self.reg.show_nag()
     
     def job_finished(self, jobid):
         self._job_completed(jobid)
