@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import platform
+import sys
 from PyQt4.QtCore import SIGNAL, Qt, QSize
 from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QSlider, QSizePolicy, QSpacerItem, QWidget, QCheckBox, QLineEdit, QDialogButtonBox, QApplication)
@@ -159,10 +159,10 @@ class PreferencesDialog(QDialog):
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
         self.verticalLayout_2.addWidget(self.buttonBox)
         
-        if platform.system() not in {'Darwin', 'Linux'}:
+        if sys.platform not in {'darwin', 'linux2'}:
             self.verticalLayout_4.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
-        if platform.system() == 'Linux':
+        if sys.platform == 'linux2':
             # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
             # doesn't have enough space, so we make the pref pane higher to compensate.
             self.resize(self.width(), 400)
@@ -220,7 +220,6 @@ class PreferencesDialog(QDialog):
     
 
 if __name__ == '__main__':
-    import sys
     from ..testapp import TestApp
     app = QApplication([])
     dgapp = TestApp()
