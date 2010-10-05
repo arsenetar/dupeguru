@@ -129,15 +129,15 @@ http://www.hardcoded.net/licenses/bsd_license
         NSTextFieldCell *textCell = cell;
         if (isMarkable) {
             [textCell setTextColor:[NSColor blackColor]];
-        }
-        else {
-            [textCell setTextColor:[NSColor blueColor]];
             if ([self deltaValuesMode]) {
                 NSInteger i = [[column identifier] integerValue];
                 if ([_deltaColumns containsIndex:i]) {
                     [textCell setTextColor:[NSColor orangeColor]];
                 }
             }
+        }
+        else {
+            [textCell setTextColor:[NSColor blueColor]];
         }
     }
 }
