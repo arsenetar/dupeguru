@@ -3,14 +3,13 @@
 import sys
 import os
 import os.path as op
-import runpy
+import subprocess
 
 def main():
     scriptpath = op.abspath(__file__)
     scriptfolder = op.dirname(scriptpath)
-    sys.path.insert(0, scriptfolder)
-    del sys.argv[0]
-    runpy.run_module('qt.{edition}.start', run_name="__main__")
+    newenv = {'PYTHONPATH': scriptfolder}
+    subprocess.Popen([sys.executable, '-m', 'qt.{{edition}}.start'], env=newenv)
 
 if __name__ == '__main__':
     sys.exit(main())
