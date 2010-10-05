@@ -28,8 +28,6 @@ def package_cocoa(edition):
     build_dmg(app_path, '.')
 
 def package_windows(edition, dev):
-    # On Windows, PyInstaller is used to build an exe (py2exe creates a very bad looking icon)
-    # The release version is outdated. Use at least r672 on http://svn.pyinstaller.org/trunk
     if sys.platform != "win32":
         print("Qt packaging only works under Windows.")
         return
@@ -37,7 +35,6 @@ def package_windows(edition, dev):
     modname = 'qt.{0}.app'.format(edition)
     appmod = importlib.import_module(modname)
     DupeGuru = appmod.DupeGuru
-    #distdir = op.join('qt', edition, 'dist')
     distdir = 'dist'
     
     if op.exists(distdir):
@@ -76,9 +73,9 @@ def package_windows(edition, dev):
         os.remove('installer_tmp.back.aip')
 
 def package_debian(edition):
-    add_to_pythonpath('qt')
-    add_to_pythonpath(op.join('qt', edition))
-    from app import DupeGuru
+    modname = 'qt.{0}.app'.format(edition)
+    appmod = importlib.import_module(modname)
+    DupeGuru = appmod.DupeGuru
     
     if op.exists('build'):
         shutil.rmtree('build')
@@ -87,8 +84,9 @@ def package_debian(edition):
     srcpath = op.join(destpath, 'src')
     help_src = ed('help_{0}')
     os.makedirs(destpath)
-    shutil.copytree(ed('qt/{0}'), srcpath)
-    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt/base', 'hsutil', 'send2trash']
+    os.makedirs(srcpath)
+    shutil.copy('run.py', op.join(srcpath, 'run.py'))
+    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt', 'hsutil', 'send2trash']
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
