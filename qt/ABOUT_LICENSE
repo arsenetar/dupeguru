@@ -1,0 +1,9 @@
+PyQt is used in this UI package, and PyQt is GPL software. I used PyQt before going releasing my
+source as BSD, so I have commercial license. When I released this software as BSD, I assumed that,
+BSD being incompatible with GPL, anyone wanting to redistribute this code would need a commercial
+license from PyQt. Therefore, I had a warning here telling people they needed a commercial license
+to modify and redistribute the qt code.
+
+But no! There are good news. I saw that PyQt has special permissions in its "GPL_EXCEPTION.TXT"
+file, thus making everything nice and shiny. The license of this software package is compatible with
+PyQt's GPL license. No problem here.
