@@ -12,6 +12,7 @@ sip.setapi('QVariant', 1)
 from PyQt4.QtCore import QCoreApplication
 from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
+from qtlib.error_report_dialog import install_excepthook
 from qt.base import dg_rc
 from qt.{{edition}}.app import DupeGuru
 
@@ -25,4 +26,5 @@ if __name__ == "__main__":
     QCoreApplication.setApplicationName(DupeGuru.NAME)
     QCoreApplication.setApplicationVersion(DupeGuru.VERSION)
     dgapp = DupeGuru()
+    install_excepthook()
     sys.exit(app.exec_())

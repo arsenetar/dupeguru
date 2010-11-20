@@ -6,8 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-
-from hscommon import job
+from jobprogress import job
 from hsutil import io
 from hsutil.path import Path
 from hsutil.testutil import eq_

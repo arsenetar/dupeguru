@@ -13,6 +13,7 @@ There are also other sub-folder that comes from external repositories (automatic
 with svn:externals):
 
 - hscommon: A collection of helpers used across HS applications.
+- hsgui: Cross-toolkit GUI-related helper classes.
 - cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
 - qtlib: A collection of helpers used across Qt UI codebases of HS applications.
 
@@ -25,9 +26,10 @@ General dependencies
 -----
 
 - Python 3.1 (http://www.python.org)
-- Send2Trash3k (http://hg.hardcoded.net/send2trash3k)
-- hsutil3k (http://hg.hardcoded.net/hsutil3k)
-- hsaudiotag3k (for ME) (http://hg.hardcoded.net/hsaudiotag3k)
+- Send2Trash3k (http://hg.hardcoded.net/send2trash)
+- hsutil3k (http://hg.hardcoded.net/hsutil)
+- hsaudiotag3k (for ME) (http://hg.hardcoded.net/hsaudiotag)
+- jobprogress (http://hg.hardcoded.net/jobprogress)
 - Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
 - py.test, to run unit tests. (http://codespeak.net/py/dist/test/)
@@ -38,7 +40,7 @@ OS X prerequisites
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
 - PyObjC 2.3. (http://pyobjc.sourceforge.net/)
-- py2app 0.5.4 (http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html)
+- py2app 0.5.4 (http://bitbucket.org/ronaldoussoren/py2app)
 
 Windows prerequisites
 ---

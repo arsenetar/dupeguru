@@ -11,7 +11,7 @@ import re
 from xml.etree import ElementTree as ET
 
 from . import engine
-from hscommon.job import nulljob
+from jobprogress.job import nulljob
 from hscommon.markable import Markable
 from hsutil.misc import flatten, nonone
 from hsutil.str import format_size

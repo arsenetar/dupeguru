@@ -15,12 +15,12 @@ import os.path as op
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL, pyqtSignal
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
 
-from hscommon import job
+from jobprogress import job
+from jobprogress.qt import Progress
 
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     
 from qtlib.about_box import AboutBox
-from qtlib.progress import Progress
 from qtlib.reg import Registration
 
 from . import platform

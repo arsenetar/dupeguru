@@ -9,7 +9,8 @@
 import logging
 import os.path as op
 
-from hscommon import cocoa, job
+from jobprogress import job
+from hscommon import cocoa
 from hscommon.cocoa import install_exception_hook
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,

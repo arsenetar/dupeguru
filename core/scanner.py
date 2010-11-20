@@ -9,7 +9,7 @@
 import logging
 import re
 
-from hscommon import job
+from jobprogress import job
 from hsutil import io
 from hsutil.misc import dedupe
 from hsutil.str import get_file_ext, rem_file_ext

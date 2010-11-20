@@ -8,7 +8,7 @@
 
 import sys
 
-from hscommon import job
+from jobprogress import job
 from hsutil.decorators import log_calls
 from hsutil.misc import first
 from hsutil.testutil import eq_

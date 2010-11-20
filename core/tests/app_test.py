@@ -15,7 +15,7 @@ from hsutil import io
 from hsutil.path import Path
 from hsutil.decorators import log_calls
 import hsutil.files
-from hscommon.job import nulljob
+from jobprogress.job import nulljob
 
 from . import data
 from .results_test import GetTestGroups
