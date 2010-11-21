@@ -1,3 +1,7 @@
+- date: 2010-11-21
+  version: 5.10.3
+  description: |
+    * Fixed crash when reading malformed mp4 files. (#117 #118)
 - date: 2010-10-06
   version: 5.10.2
   description: |
