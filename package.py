@@ -86,7 +86,7 @@ def package_debian(edition):
     os.makedirs(destpath)
     os.makedirs(srcpath)
     shutil.copy('run.py', op.join(srcpath, 'run.py'))
-    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt', 'hsutil', 'send2trash']
+    packages = ['hscommon', 'hsgui', 'core', ed('core_{0}'), 'qtlib', 'qt', 'hsutil', 'send2trash', 'jobprogress']
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
