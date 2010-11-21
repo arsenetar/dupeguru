@@ -28,7 +28,7 @@ from ..scanner import ScanType
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
-        DupeGuruBase.__init__(self, data, '/tmp', appid=4)
+        DupeGuruBase.__init__(self, data, '/tmp')
     
     def _start_job(self, jobid, func, *args):
         func(nulljob, *args)
