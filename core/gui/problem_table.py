@@ -8,7 +8,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.notify import Listener
-from hsgui.table import GUITable, Row
+from hscommon.gui.table import GUITable, Row
 
 class ProblemTable(GUITable, Listener):
     def __init__(self, view, problem_dialog):
@@ -31,7 +31,6 @@ class ProblemTable(GUITable, Listener):
     #--- Event handlers
     def problems_changed(self):
         self.refresh()
-        self.view.refresh()
     
 
 class ProblemRow(Row):

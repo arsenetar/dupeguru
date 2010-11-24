@@ -9,7 +9,7 @@
 
 from operator import attrgetter
 
-from hsgui.table import GUITable, Row
+from hscommon.gui.table import GUITable, Row
 
 from .base import GUIObject
 
@@ -87,7 +87,6 @@ class ResultTable(GUIObject, GUITable):
     
     def _refresh_with_view(self):
         self.refresh()
-        self.view.refresh()
         self.view.show_selected_row()
     
     #--- Public
@@ -139,7 +138,6 @@ class ResultTable(GUIObject, GUITable):
             return
         self._delta_values = value
         self.refresh()
-        self.view.refresh()
     
     @property
     def selected_dupe_count(self):
@@ -156,7 +154,7 @@ class ResultTable(GUIObject, GUITable):
         # What we want to to here is that instead of restoring selected *dupes* after refresh, we
         # restore selected *paths*.
         indexes = self.selected_indexes
-        self.refresh()
+        self.refresh(refresh_view=False)
         self.select(indexes)
         self.view.refresh()
     

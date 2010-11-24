@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hsgui.tree import Tree, Node
+from hscommon.gui.tree import Tree, Node
 
 from ..directories import STATE_NORMAL, STATE_REFERENCE, STATE_EXCLUDED
 from .base import GUIObject
