@@ -113,7 +113,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         seen_inodes = set()
         result = []
         for file in files:
-            inode = io.stat(file.path).st_ino
+            try:
+                inode = io.stat(file.path).st_ino
+            except OSError:
+                # The file was probably deleted or something
+                continue
             if inode not in seen_inodes:
                 seen_inodes.add(inode)
                 result.append(file)
