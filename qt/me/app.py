@@ -25,7 +25,7 @@ class DupeGuru(DupeGuruBase):
     
     def _setup(self):
         self.scanner = scanner.ScannerME()
-        self.directories.fileclasses = [fs.Mp3File, fs.Mp4File, fs.WmaFile, fs.OggFile, fs.FlacFile, fs.AiffFile]
+        self.directories.fileclasses = [fs.MusicFile]
         DupeGuruBase._setup(self)
     
     def _update_options(self):

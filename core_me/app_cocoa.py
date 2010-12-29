@@ -28,7 +28,7 @@ class DupeGuruME(DupeGuruBase):
     def __init__(self):
         DupeGuruBase.__init__(self, data, 'dupeGuru Music Edition')
         self.scanner = scanner.ScannerME()
-        self.directories.fileclasses = [fs.Mp3File, fs.Mp4File, fs.WmaFile, fs.OggFile, fs.FlacFile, fs.AiffFile]
+        self.directories.fileclasses = [fs.MusicFile]
         self.dead_tracks = []
     
     def remove_dead_tracks(self):
