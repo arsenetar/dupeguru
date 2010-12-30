@@ -31,7 +31,7 @@ General dependencies
 - jobprogress (http://hg.hardcoded.net/jobprogress)
 - Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)
 - PyYaml, for help files and the build system. (http://pyyaml.org/)
-- py.test, to run unit tests. (http://codespeak.net/py/dist/test/)
+- pytest 2.0.0, to run unit tests. (http://pytest.org/)
 
 OS X prerequisites
 -----
