@@ -1,3 +1,10 @@
+- date: 2010-12-30
+  version: 5.10.4
+  description: |
+    * Fixed bug causing results to be corrupted after a scan cancellation. (#120)
+    * Fixed crash when fetching Fairware unpaid hours. (#121)
+    * Fixed crash when replacing files with hardlinks. (#122)
+    * Fixed crash when reading malformed aiff files. (#123)
 - date: 2010-11-21
   version: 5.10.3
   description: |
