@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "ResultWindow.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
+#import "HSAboutBox.h"
 
 @interface AppDelegateBase : NSObject
 {
@@ -21,6 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
     
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
+    HSAboutBox *_aboutBox;
     BOOL _savedResults;
 }
 - (PyDupeGuruBase *)py;
@@ -28,4 +30,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (DirectoryPanel *)directoryPanel;
 - (DetailsPanel *)detailsPanel;
 - (void)saveResults;
+
+- (IBAction)showAboutBox:(id)sender;
 @end

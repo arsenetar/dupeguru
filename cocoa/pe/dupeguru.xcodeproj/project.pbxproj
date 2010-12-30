@@ -51,6 +51,8 @@
 		CE9EA75C1122C96C008CD2BC /* NSTableViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7551122C96C008CD2BC /* NSTableViewAdditions.m */; };
 		CE9EA7721122CA0B008CD2BC /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */; };
 		CEBAE4270FDA97E000B7887D /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */; };
+		CEC9DB4712CCAA6B003102F0 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC9DB4612CCAA6B003102F0 /* about.xib */; };
+		CEC9DB4C12CCAA7D003102F0 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -165,6 +167,9 @@
 		CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDirectoryOutline.h; path = ../base/PyDirectoryOutline.h; sourceTree = SOURCE_ROOT; };
 		CEBAE4230FDA97E000B7887D /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CEBAE4240FDA97E000B7887D /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
+		CEC9DB4612CCAA6B003102F0 /* about.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = about.xib; path = ../../cocoalib/xib/about.xib; sourceTree = SOURCE_ROOT; };
+		CEC9DB4A12CCAA7D003102F0 /* HSAboutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox.h; path = ../../cocoalib/HSAboutBox.h; sourceTree = SOURCE_ROOT; };
+		CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
@@ -297,6 +302,7 @@
 		CE7AC9141119911200D02F6C /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				CEC9DB4612CCAA6B003102F0 /* about.xib */,
 				CE1EB5FF12537FB90034AABB /* FairwareReminder.xib */,
 				CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */,
 				CE7AC9161119911200D02F6C /* progress.xib */,
@@ -326,6 +332,8 @@
 				CE1EB5FB12537F9D0034AABB /* HSFairwareReminder.h */,
 				CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */,
 				CE1EB5FD12537F9D0034AABB /* PyFairware.h */,
+				CEC9DB4A12CCAA7D003102F0 /* HSAboutBox.h */,
+				CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */,
 				CE80DB210FC192D60086DCA6 /* ProgressController.h */,
 				CE80DB220FC192D60086DCA6 /* ProgressController.m */,
 				CE80DB230FC192D60086DCA6 /* PyApp.h */,
@@ -462,6 +470,7 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -500,6 +509,7 @@
 				CE7AC9191119911200D02F6C /* progress.xib in Resources */,
 				CE0C2AC81177021600BC749F /* ProblemDialog.xib in Resources */,
 				CE1EB60112537FB90034AABB /* FairwareReminder.xib in Resources */,
+				CEC9DB4712CCAA6B003102F0 /* about.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +552,7 @@
 				CEF12A7E124DFD400087B51D /* HSTableView.m in Sources */,
 				CEF12A84124DFD620087B51D /* ResultTable.m in Sources */,
 				CE1EB5FE12537F9D0034AABB /* HSFairwareReminder.m in Sources */,
+				CEC9DB4C12CCAA7D003102F0 /* HSAboutBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

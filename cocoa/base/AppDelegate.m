@@ -40,6 +40,14 @@ http://www.hardcoded.net/licenses/bsd_license
     _savedResults = YES;
 }
 
+- (IBAction)showAboutBox:(id)sender
+{
+    if (_aboutBox == nil) {
+        _aboutBox = [[HSAboutBox alloc] initWithApp:py];
+    }
+    [[_aboutBox window] makeKeyAndOrderFront:sender];
+}
+
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

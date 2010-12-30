@@ -43,6 +43,8 @@
 		CE49DEF60FDFEB810098617B /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */; };
 		CE4B59C81119919700C06C9E /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */; };
 		CE4B59C91119919700C06C9E /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C61119919700C06C9E /* progress.xib */; };
+		CE4F934612CCA9470067A3AE /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4F934512CCA9470067A3AE /* about.xib */; };
+		CE4F934912CCA96C0067A3AE /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F934812CCA96C0067A3AE /* HSAboutBox.m */; };
 		CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE10FC6C12E00EC695D /* Dialogs.m */; };
 		CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */; };
 		CE515DF60FC6C12E00EC695D /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE70FC6C12E00EC695D /* ProgressController.m */; };
@@ -130,6 +132,9 @@
 		CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
 		CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CE4B59C61119919700C06C9E /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
+		CE4F934512CCA9470067A3AE /* about.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = about.xib; path = ../../cocoalib/xib/about.xib; sourceTree = SOURCE_ROOT; };
+		CE4F934712CCA96C0067A3AE /* HSAboutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox.h; path = ../../cocoalib/HSAboutBox.h; sourceTree = SOURCE_ROOT; };
+		CE4F934812CCA96C0067A3AE /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CE515DE00FC6C12E00EC695D /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE515DE10FC6C12E00EC695D /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE515DE20FC6C12E00EC695D /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -347,6 +352,7 @@
 		CE4B59C41119919700C06C9E /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F934512CCA9470067A3AE /* about.xib */,
 				CE74A12512537F2E008A8DF0 /* FairwareReminder.xib */,
 				CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */,
 				CE4B59C61119919700C06C9E /* progress.xib */,
@@ -370,6 +376,8 @@
 				CE74A12112537F06008A8DF0 /* HSFairwareReminder.h */,
 				CE74A12212537F06008A8DF0 /* HSFairwareReminder.m */,
 				CE74A12312537F06008A8DF0 /* PyFairware.h */,
+				CE4F934712CCA96C0067A3AE /* HSAboutBox.h */,
+				CE4F934812CCA96C0067A3AE /* HSAboutBox.m */,
 				CE003CB911242D00004B0AA7 /* NSEventAdditions.h */,
 				CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */,
 				CE515DE60FC6C12E00EC695D /* ProgressController.h */,
@@ -455,6 +463,7 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -492,6 +501,7 @@
 				CE4B59C91119919700C06C9E /* progress.xib in Resources */,
 				CE0A0C061175A24800DCA3C6 /* ProblemDialog.xib in Resources */,
 				CE74A12712537F2E008A8DF0 /* FairwareReminder.xib in Resources */,
+				CE4F934612CCA9470067A3AE /* about.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +541,7 @@
 				CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */,
 				CE578303124DFC660004769C /* HSTableView.m in Sources */,
 				CE74A12412537F06008A8DF0 /* HSFairwareReminder.m in Sources */,
+				CE4F934912CCA96C0067A3AE /* HSAboutBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
