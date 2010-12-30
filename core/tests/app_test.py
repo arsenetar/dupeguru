@@ -16,7 +16,7 @@ from hsutil.path import Path
 from hsutil.decorators import log_calls
 import hsutil.files
 from hscommon.testutil import CallLogger
-from jobprogress.job import nulljob
+from jobprogress.job import nulljob, Job, JobCancelled
 
 from . import data
 from .results_test import GetTestGroups
@@ -28,12 +28,21 @@ from ..gui.result_table import ResultTable
 from ..scanner import ScanType
 
 class DupeGuru(DupeGuruBase):
+    JOB = nulljob
+    
     def __init__(self):
         DupeGuruBase.__init__(self, data, '/tmp')
     
     def _start_job(self, jobid, func, *args):
-        func(nulljob, *args)
+        try:
+            func(self.JOB, *args)
+        except JobCancelled:
+            return
     
+
+def add_fake_files_to_directories(directories, files):
+    directories.get_files = lambda: iter(files)
+    directories._dirs.append('this is just so Scan() doesnt return 3')
 
 class TCDupeGuru(TestCase):
     cls_tested_module = app
@@ -103,8 +112,7 @@ class TCDupeGuru(TestCase):
         f1, f2 = [FakeFile('foo') for i in range(2)]
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
-        app.directories.get_files = lambda: iter([f1, f2])
-        app.directories._dirs.append('this is just so Scan() doesnt return 3')
+        add_fake_files_to_directories(app.directories, [f1, f2])
         app.start_scanning() # no exception
     
     def test_ignore_hardlink_matches(self):
@@ -356,6 +364,14 @@ class TCDupeGuruWithResults(TestCase):
         self.rtable.select([4])
         app.add_selected_to_ignore_list()
     
+    def test_cancel_scan_with_previous_results(self):
+        # When doing a scan with results being present prior to the scan, correctly invalidate the
+        # results table.
+        app = self.app
+        app.JOB = Job(1, lambda *args, **kw: False) # Cancels the task
+        add_fake_files_to_directories(app.directories, self.objects) # We want the scan to at least start
+        app.start_scanning() # will be cancelled immediately
+        eq_(len(self.rtable), 0)
 
 class TCDupeGuru_renameSelected(TestCase):
     def setUp(self):

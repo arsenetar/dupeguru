@@ -353,6 +353,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if not self.directories.has_any_file():
             raise NoScannableFileError()
         self.results.groups = []
+        self.notify('results_changed')
         self._start_job(JOB_SCAN, do)
     
     def toggle_selected_mark_state(self):
