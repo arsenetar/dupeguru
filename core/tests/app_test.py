@@ -15,6 +15,7 @@ from hsutil import io
 from hsutil.path import Path
 from hsutil.decorators import log_calls
 import hsutil.files
+from hscommon.testutil import CallLogger
 from jobprogress.job import nulljob
 
 from . import data
@@ -32,23 +33,6 @@ class DupeGuru(DupeGuruBase):
     
     def _start_job(self, jobid, func, *args):
         func(nulljob, *args)
-    
-
-class CallLogger(object):
-    """This is a dummy object that logs all calls made to it.
-    
-    It is used to simulate the GUI layer.
-    """
-    def __init__(self):
-        self.calls = []
-    
-    def __getattr__(self, func_name):
-        def func(*args, **kw):
-            self.calls.append(func_name)
-        return func
-    
-    def clear_calls(self):
-        del self.calls[:]
     
 
 class TCDupeGuru(TestCase):
@@ -190,44 +174,6 @@ class TCDupeGuruWithResults(TestCase):
         io.mkdir(tmppath + 'bar')
         self.app.directories.add_path(tmppath)
     
-    def check_gui_calls(self, gui, expected, verify_order=False):
-        """Checks that the expected calls have been made to 'gui', then clears the log.
-        
-        `expected` is an iterable of strings representing method names.
-        If `verify_order` is True, the order of the calls matters.
-        """
-        if verify_order:
-            eq_(gui.calls, expected)
-        else:
-            eq_(set(gui.calls), set(expected))
-        gui.clear_calls()
-    
-    def check_gui_calls_partial(self, gui, expected=None, not_expected=None):
-        """Checks that the expected calls have been made to 'gui', then clears the log.
-        
-        `expected` is an iterable of strings representing method names. Order doesn't matter.
-        Moreover, if calls have been made that are not in expected, no failure occur.
-        `not_expected` can be used for a more explicit check (rather than calling `check_gui_calls`
-        with an empty `expected`) to assert that calls have *not* been made.
-        """
-        calls = set(gui.calls)
-        if expected is not None:
-            expected = set(expected)
-            not_called = expected - calls
-            assert not not_called, "These calls haven't been made: {0}".format(not_called)
-        if not_expected is not None:
-            not_expected = set(not_expected)
-            called = not_expected & calls
-            assert not called, "These calls shouldn't have been made: {0}".format(called)
-        gui.clear_calls()
-    
-    def clear_gui_calls(self):
-        for attr in dir(self):
-            if attr.endswith('_gui'):
-                gui = getattr(self, attr)
-                if hasattr(gui, 'calls'): # We might have test methods ending with '_gui'
-                    gui.clear_calls()
-    
     def test_GetObjects(self):
         objects = self.objects
         groups = self.groups
@@ -287,8 +233,6 @@ class TCDupeGuruWithResults(TestCase):
     
     def test_selected_powermarker_node_paths(self):
         # app.selected_dupes is correctly converted into paths
-        app = self.app
-        objects = self.objects
         self.rtable.power_marker = True
         self.rtable.select([0, 1, 2])
         self.rtable.power_marker = False
@@ -297,7 +241,6 @@ class TCDupeGuruWithResults(TestCase):
     def test_selected_powermarker_node_paths_after_deletion(self):
         # cases where the selected dupes aren't there are correctly handled
         app = self.app
-        objects = self.objects
         self.rtable.power_marker = True
         self.rtable.select([0, 1, 2])
         app.remove_selected()
@@ -331,10 +274,10 @@ class TCDupeGuruWithResults(TestCase):
     def test_refreshDetailsWithSelected(self):
         self.rtable.select([1, 4])
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
-        self.check_gui_calls(self.dpanel_gui, ['refresh'])
+        self.dpanel_gui.check_gui_calls(['refresh'])
         self.rtable.select([])
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
-        self.check_gui_calls(self.dpanel_gui, ['refresh'])
+        self.dpanel_gui.check_gui_calls(['refresh'])
     
     def test_makeSelectedReference(self):
         app = self.app
