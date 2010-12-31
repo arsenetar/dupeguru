@@ -1,3 +1,10 @@
+- date: 2010-12-31
+  version: 1.11.3
+  description: |
+    * Fixed bug causing results to be corrupted after a scan cancellation. (#120)
+    * Fixed crash when fetching Fairware unpaid hours. (#121)
+    * Fixed crash when replacing files with hardlinks. (#122)
+    * Fixed crash when iPhoto can't be found. (#125)
 - date: 2010-10-07
   version: 1.11.2
   description: |
