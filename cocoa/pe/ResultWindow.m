@@ -63,12 +63,15 @@ http://www.hardcoded.net/licenses/bsd_license
     [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
     [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
     int r = n2i([py doScan]);
-    if (r != 0)
+    if (r != 0) {
         [[ProgressController mainProgressController] hide];
-    if (r == 3)
-    {
+    }
+    if (r == 3) {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];
         [app toggleDirectories:nil];
+    }
+    if (r == 4) {
+        [Dialogs showMessage:@"The iPhoto application couldn't be found."];
     }
 }
 

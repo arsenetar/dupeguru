@@ -11,7 +11,7 @@ import plistlib
 import logging
 import re
 
-from appscript import app, k, CommandError
+from appscript import app, k, CommandError, ApplicationNotFoundError
 
 from hsutil import io
 from hsutil.str import get_file_ext, remove_invalid_xml
@@ -24,12 +24,14 @@ from core import app_cocoa, directories
 from . import data, _block_osx
 from .scanner import ScannerPE
 
+IPHOTO_PATH = Path('iPhoto Library')
+
 class Photo(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
     INITIAL_INFO.update({
         'dimensions': (0,0),
     })
-    HANDLED_EXTS = set(['png', 'jpg', 'jpeg', 'gif', 'psd', 'bmp', 'tiff', 'tif', 'nef', 'cr2'])
+    HANDLED_EXTS = {'png', 'jpg', 'jpeg', 'gif', 'psd', 'bmp', 'tiff', 'tif', 'nef', 'cr2'}
     
     @classmethod
     def can_handle(cls, path):
@@ -97,7 +99,7 @@ class Directories(directories.Directories):
             self.iphoto_libpath = None
     
     def _get_files(self, from_path):
-        if from_path == Path('iPhoto Library'):
+        if from_path == IPHOTO_PATH:
             if self.iphoto_libpath is None:
                 return []
             is_ref = self.get_state(from_path) == directories.STATE_REFERENCE
@@ -110,23 +112,26 @@ class Directories(directories.Directories):
     
     @staticmethod
     def get_subfolders(path):
-        if path == Path('iPhoto Library'):
+        if path == IPHOTO_PATH:
             return []
         else:
             return directories.Directories.get_subfolders(path)
     
     def add_path(self, path):
-        if path == Path('iPhoto Library'):
+        if path == IPHOTO_PATH:
             if path not in self:
                 self._dirs.append(path)
         else:
             directories.Directories.add_path(self, path)
     
+    def has_iphoto_path(self):
+        return any(path == IPHOTO_PATH for path in self._dirs)
+    
     def has_any_file(self):
         # If we don't do that, it causes a hangup in the GUI when we click Start Scanning because
         # checking if there's any file to scan involves reading the whole library. If we have the
         # iPhoto library, we assume we have at least one file.
-        if any(path == Path('iPhoto Library') for path in self._dirs):
+        if self.has_iphoto_path():
             return True
         else:
             return directories.Directories.has_any_file(self)
@@ -158,7 +163,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                         self.path2iphoto[str(photo.image_path(timeout=0))] = photo
                     except CommandError:
                         pass
-            except (CommandError, RuntimeError):
+            except (CommandError, RuntimeError, ApplicationNotFoundError):
                 pass
         j.start_job(self.results.mark_count, "Sending dupes to the Trash")
         self.results.perform_on_marked(op, True)
@@ -202,4 +207,13 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         if ref is self.selected_dupes[0]: # we don't want the same pic to be displayed on both sides
             return None
         return ref.path
+    
+    def start_scanning(self):
+        result = app_cocoa.DupeGuru.start_scanning(self)
+        if self.directories.has_iphoto_path():
+            try:
+                app('iPhoto')
+            except ApplicationNotFoundError:
+                return 4
+        return result
     
