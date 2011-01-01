@@ -9,6 +9,7 @@
 import os
 import logging
 
+from pytest import mark
 from hsutil.testutil import eq_
 from hsutil.testcase import TestCase
 from hsutil import io
@@ -115,6 +116,7 @@ class TCDupeGuru(TestCase):
         add_fake_files_to_directories(app.directories, [f1, f2])
         app.start_scanning() # no exception
     
+    @mark.skipif("not hasattr(os, 'link')")
     def test_ignore_hardlink_matches(self):
         # If the ignore_hardlink_matches option is set, don't match files hardlinking to the same
         # inode.
