@@ -7,16 +7,15 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os
+import os.path as op
 import logging
 
 from pytest import mark
-from hsutil.testutil import eq_
-from hsutil.testcase import TestCase
 from hsutil import io
 from hsutil.path import Path
 from hsutil.decorators import log_calls
 import hsutil.files
-from hscommon.testutil import CallLogger
+from hscommon.testutil import CallLogger, eq_
 from jobprogress.job import nulljob, Job, JobCancelled
 
 from . import data
@@ -45,62 +44,61 @@ def add_fake_files_to_directories(directories, files):
     directories.get_files = lambda: iter(files)
     directories._dirs.append('this is just so Scan() doesnt return 3')
 
-class TCDupeGuru(TestCase):
-    cls_tested_module = app
-    def test_apply_filter_calls_results_apply_filter(self):
+class TestCaseDupeGuru:
+    def test_apply_filter_calls_results_apply_filter(self, monkeypatch):
         app = DupeGuru()
-        self.mock(app.results, 'apply_filter', log_calls(app.results.apply_filter))
+        monkeypatch.setattr(app.results, 'apply_filter', log_calls(app.results.apply_filter))
         app.apply_filter('foo')
-        self.assertEqual(2, len(app.results.apply_filter.calls))
+        eq_(2, len(app.results.apply_filter.calls))
         call = app.results.apply_filter.calls[0]
-        self.assert_(call['filter_str'] is None)
+        assert call['filter_str'] is None
         call = app.results.apply_filter.calls[1]
-        self.assertEqual('foo', call['filter_str'])
+        eq_('foo', call['filter_str'])
     
-    def test_apply_filter_escapes_regexp(self):
+    def test_apply_filter_escapes_regexp(self, monkeypatch):
         app = DupeGuru()
-        self.mock(app.results, 'apply_filter', log_calls(app.results.apply_filter))
+        monkeypatch.setattr(app.results, 'apply_filter', log_calls(app.results.apply_filter))
         app.apply_filter('()[]\\.|+?^abc')
         call = app.results.apply_filter.calls[1]
-        self.assertEqual('\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc', call['filter_str'])
+        eq_('\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc', call['filter_str'])
         app.apply_filter('(*)') # In "simple mode", we want the * to behave as a wilcard
         call = app.results.apply_filter.calls[3]
-        self.assertEqual('\(.*\)', call['filter_str'])
+        eq_('\(.*\)', call['filter_str'])
         app.options['escape_filter_regexp'] = False
         app.apply_filter('(abc)')
         call = app.results.apply_filter.calls[5]
-        self.assertEqual('(abc)', call['filter_str'])
+        eq_('(abc)', call['filter_str'])
     
-    def test_copy_or_move(self):
+    def test_copy_or_move(self, tmpdir, monkeypatch):
         # The goal here is just to have a test for a previous blowup I had. I know my test coverage
         # for this unit is pathetic. What's done is done. My approach now is to add tests for
         # every change I want to make. The blowup was caused by a missing import.
-        p = self.tmppath()
+        p = Path(str(tmpdir))
         io.open(p + 'foo', 'w').close()
-        self.mock(hsutil.files, 'copy', log_calls(lambda source_path, dest_path: None))
-        self.mock(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
+        monkeypatch.setattr(hsutil.files, 'copy', log_calls(lambda source_path, dest_path: None))
+        monkeypatch.setattr(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
         app = DupeGuru()
         app.directories.add_path(p)
         [f] = app.directories.get_files()
         app.copy_or_move(f, True, 'some_destination', 0)
-        self.assertEqual(1, len(hsutil.files.copy.calls))
+        eq_(1, len(hsutil.files.copy.calls))
         call = hsutil.files.copy.calls[0]
-        self.assertEqual('some_destination', call['dest_path'])
-        self.assertEqual(f.path, call['source_path'])
+        eq_('some_destination', call['dest_path'])
+        eq_(f.path, call['source_path'])
     
-    def test_copy_or_move_clean_empty_dirs(self):
-        tmppath = Path(self.tmpdir())
+    def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
+        tmppath = Path(str(tmpdir))
         sourcepath = tmppath + 'source'
         io.mkdir(sourcepath)
         io.open(sourcepath + 'myfile', 'w')
         app = DupeGuru()
         app.directories.add_path(tmppath)
         [myfile] = app.directories.get_files()
-        self.mock(app, 'clean_empty_dirs', log_calls(lambda path: None))
+        monkeypatch.setattr(app, 'clean_empty_dirs', log_calls(lambda path: None))
         app.copy_or_move(myfile, False, tmppath + 'dest', 0)
         calls = app.clean_empty_dirs.calls
-        self.assertEqual(1, len(calls))
-        self.assertEqual(sourcepath, calls[0]['path'])
+        eq_(1, len(calls))
+        eq_(sourcepath, calls[0]['path'])
     
     def test_Scan_with_objects_evaluating_to_false(self):
         class FakeFile(fs.File):
@@ -117,10 +115,10 @@ class TCDupeGuru(TestCase):
         app.start_scanning() # no exception
     
     @mark.skipif("not hasattr(os, 'link')")
-    def test_ignore_hardlink_matches(self):
+    def test_ignore_hardlink_matches(self, tmpdir):
         # If the ignore_hardlink_matches option is set, don't match files hardlinking to the same
         # inode.
-        tmppath = Path(self.tmpdir())
+        tmppath = Path(str(tmpdir))
         io.open(tmppath + 'myfile', 'w').write('foo')
         os.link(str(tmppath + 'myfile'), str(tmppath + 'hardlink'))
         app = DupeGuru()
@@ -131,42 +129,42 @@ class TCDupeGuru(TestCase):
         eq_(len(app.results.groups), 0)
     
 
-class TCDupeGuru_clean_empty_dirs(TestCase):
-    cls_tested_module = app
-    def setUp(self):
-        self.mock(hsutil.files, 'delete_if_empty', log_calls(lambda path, files_to_delete=[]: None))
+class TestCaseDupeGuru_clean_empty_dirs:
+    def pytest_funcarg__do_setup(self, request):
+        monkeypatch = request.getfuncargvalue('monkeypatch')
+        monkeypatch.setattr(hsutil.files, 'delete_if_empty', log_calls(lambda path, files_to_delete=[]: None))
         self.app = DupeGuru()
     
-    def test_option_off(self):
+    def test_option_off(self, do_setup):
         self.app.clean_empty_dirs(Path('/foo/bar'))
-        self.assertEqual(0, len(hsutil.files.delete_if_empty.calls))
+        eq_(0, len(hsutil.files.delete_if_empty.calls))
     
-    def test_option_on(self):
+    def test_option_on(self, do_setup):
         self.app.options['clean_empty_dirs'] = True
         self.app.clean_empty_dirs(Path('/foo/bar'))
         calls = hsutil.files.delete_if_empty.calls
-        self.assertEqual(1, len(calls))
-        self.assertEqual(Path('/foo/bar'), calls[0]['path'])
-        self.assertEqual(['.DS_Store'], calls[0]['files_to_delete'])
+        eq_(1, len(calls))
+        eq_(Path('/foo/bar'), calls[0]['path'])
+        eq_(['.DS_Store'], calls[0]['files_to_delete'])
     
-    def test_recurse_up(self):
+    def test_recurse_up(self, do_setup, monkeypatch):
         # delete_if_empty must be recursively called up in the path until it returns False
         @log_calls
         def mock_delete_if_empty(path, files_to_delete=[]):
             return len(path) > 1
         
-        self.mock(hsutil.files, 'delete_if_empty', mock_delete_if_empty)
+        monkeypatch.setattr(hsutil.files, 'delete_if_empty', mock_delete_if_empty)
         self.app.options['clean_empty_dirs'] = True
         self.app.clean_empty_dirs(Path('not-empty/empty/empty'))
         calls = hsutil.files.delete_if_empty.calls
-        self.assertEqual(3, len(calls))
-        self.assertEqual(Path('not-empty/empty/empty'), calls[0]['path'])
-        self.assertEqual(Path('not-empty/empty'), calls[1]['path'])
-        self.assertEqual(Path('not-empty'), calls[2]['path'])
+        eq_(3, len(calls))
+        eq_(Path('not-empty/empty/empty'), calls[0]['path'])
+        eq_(Path('not-empty/empty'), calls[1]['path'])
+        eq_(Path('not-empty'), calls[2]['path'])
     
 
-class TCDupeGuruWithResults(TestCase):
-    def setUp(self):
+class TestCaseDupeGuruWithResults:
+    def pytest_funcarg__do_setup(self, request):
         self.app = DupeGuru()
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
@@ -179,12 +177,13 @@ class TCDupeGuruWithResults(TestCase):
         self.dpanel.connect()
         self.dtree.connect()
         self.rtable.connect()
-        tmppath = self.tmppath()
+        tmpdir = request.getfuncargvalue('tmpdir')
+        tmppath = Path(str(tmpdir))
         io.mkdir(tmppath + 'foo')
         io.mkdir(tmppath + 'bar')
         self.app.directories.add_path(tmppath)
     
-    def test_GetObjects(self):
+    def test_GetObjects(self, do_setup):
         objects = self.objects
         groups = self.groups
         r = self.rtable[0]
@@ -197,7 +196,7 @@ class TCDupeGuruWithResults(TestCase):
         assert r._group is groups[1]
         assert r._dupe is objects[4]
     
-    def test_GetObjects_after_sort(self):
+    def test_GetObjects_after_sort(self, do_setup):
         objects = self.objects
         groups = self.groups[:] # we need an un-sorted reference
         self.rtable.sort(0, False) #0 = Filename
@@ -205,14 +204,14 @@ class TCDupeGuruWithResults(TestCase):
         assert r._group is groups[1]
         assert r._dupe is objects[4]
     
-    def test_selected_result_node_paths_after_deletion(self):
+    def test_selected_result_node_paths_after_deletion(self, do_setup):
         # cases where the selected dupes aren't there are correctly handled
         self.rtable.select([1, 2, 3])
         self.app.remove_selected()
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
         eq_(self.rtable.selected_indexes, [1]) # no exception
     
-    def test_selectResultNodePaths(self):
+    def test_selectResultNodePaths(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.select([1, 2])
@@ -220,7 +219,7 @@ class TCDupeGuruWithResults(TestCase):
         assert app.selected_dupes[0] is objects[1]
         assert app.selected_dupes[1] is objects[2]
     
-    def test_selectResultNodePaths_with_ref(self):
+    def test_selectResultNodePaths_with_ref(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.select([1, 2, 3])
@@ -229,7 +228,7 @@ class TCDupeGuruWithResults(TestCase):
         assert app.selected_dupes[1] is objects[2]
         assert app.selected_dupes[2] is self.groups[1].ref
     
-    def test_selectResultNodePaths_after_sort(self):
+    def test_selectResultNodePaths_after_sort(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups[:] #To keep the old order in memory
@@ -241,14 +240,14 @@ class TCDupeGuruWithResults(TestCase):
         assert app.selected_dupes[1] is groups[0].ref
         assert app.selected_dupes[2] is objects[1]
     
-    def test_selected_powermarker_node_paths(self):
+    def test_selected_powermarker_node_paths(self, do_setup):
         # app.selected_dupes is correctly converted into paths
         self.rtable.power_marker = True
         self.rtable.select([0, 1, 2])
         self.rtable.power_marker = False
         eq_(self.rtable.selected_indexes, [1, 2, 4])
     
-    def test_selected_powermarker_node_paths_after_deletion(self):
+    def test_selected_powermarker_node_paths_after_deletion(self, do_setup):
         # cases where the selected dupes aren't there are correctly handled
         app = self.app
         self.rtable.power_marker = True
@@ -256,7 +255,7 @@ class TCDupeGuruWithResults(TestCase):
         app.remove_selected()
         eq_(self.rtable.selected_indexes, []) # no exception
     
-    def test_selectPowerMarkerRows_after_sort(self):
+    def test_selectPowerMarkerRows_after_sort(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.power_marker = True
@@ -267,7 +266,7 @@ class TCDupeGuruWithResults(TestCase):
         assert app.selected_dupes[1] is objects[2]
         assert app.selected_dupes[2] is objects[1]
     
-    def test_toggleSelectedMark(self):
+    def test_toggleSelectedMark(self, do_setup):
         app = self.app
         objects = self.objects
         app.toggle_selected_mark_state()
@@ -281,7 +280,7 @@ class TCDupeGuruWithResults(TestCase):
         assert not app.results.is_marked(objects[3])
         assert app.results.is_marked(objects[4])
     
-    def test_refreshDetailsWithSelected(self):
+    def test_refreshDetailsWithSelected(self, do_setup):
         self.rtable.select([1, 4])
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
         self.dpanel_gui.check_gui_calls(['refresh'])
@@ -289,7 +288,7 @@ class TCDupeGuruWithResults(TestCase):
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
         self.dpanel_gui.check_gui_calls(['refresh'])
     
-    def test_makeSelectedReference(self):
+    def test_makeSelectedReference(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups
@@ -298,7 +297,7 @@ class TCDupeGuruWithResults(TestCase):
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
     
-    def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(self):
+    def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups
@@ -308,7 +307,7 @@ class TCDupeGuruWithResults(TestCase):
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
     
-    def test_removeSelected(self):
+    def test_removeSelected(self, do_setup):
         app = self.app
         self.rtable.select([1, 4])
         app.remove_selected()
@@ -316,22 +315,25 @@ class TCDupeGuruWithResults(TestCase):
         app.remove_selected()
         eq_(len(app.results.dupes), 0)
     
-    def test_addDirectory_simple(self):
+    def test_addDirectory_simple(self, do_setup):
         # There's already a directory in self.app, so adding another once makes 2 of em
         app = self.app
-        eq_(app.add_directory(self.datadirpath()), 0)
+        # any other path that isn't a parent or child of the already added path
+        otherpath = Path(op.dirname(__file__))
+        eq_(app.add_directory(otherpath), 0)
         eq_(len(app.directories), 2)
     
-    def test_addDirectory_already_there(self):
+    def test_addDirectory_already_there(self, do_setup):
         app = self.app
-        self.assertEqual(0,app.add_directory(self.datadirpath()))
-        self.assertEqual(1,app.add_directory(self.datadirpath()))
+        otherpath = Path(op.dirname(__file__))
+        eq_(app.add_directory(otherpath), 0)
+        eq_(app.add_directory(otherpath), 1)
     
-    def test_addDirectory_does_not_exist(self):
+    def test_addDirectory_does_not_exist(self, do_setup):
         app = self.app
-        self.assertEqual(2,app.add_directory('/does_not_exist'))
+        eq_(2,app.add_directory('/does_not_exist'))
     
-    def test_ignore(self):
+    def test_ignore(self, do_setup):
         app = self.app
         self.rtable.select([4]) #The dupe of the second, 2 sized group
         app.add_selected_to_ignore_list()
@@ -341,20 +343,22 @@ class TCDupeGuruWithResults(TestCase):
         #BOTH the ref and the other dupe should have been added
         eq_(len(app.scanner.ignore_list), 3)
     
-    def test_purgeIgnoreList(self):
+    def test_purgeIgnoreList(self, do_setup, tmpdir):
         app = self.app
-        p1 = self.filepath('zerofile')
-        p2 = self.filepath('zerofill')
+        p1 = str(tmpdir.join('file1'))
+        p2 = str(tmpdir.join('file2'))
+        open(p1, 'w').close()
+        open(p2, 'w').close()
         dne = '/does_not_exist'
         app.scanner.ignore_list.Ignore(dne,p1)
         app.scanner.ignore_list.Ignore(p2,dne)
         app.scanner.ignore_list.Ignore(p1,p2)
         app.purge_ignore_list()
-        self.assertEqual(1,len(app.scanner.ignore_list))
-        self.assert_(app.scanner.ignore_list.AreIgnored(p1,p2))
-        self.assert_(not app.scanner.ignore_list.AreIgnored(dne,p1))
+        eq_(1,len(app.scanner.ignore_list))
+        assert app.scanner.ignore_list.AreIgnored(p1,p2)
+        assert not app.scanner.ignore_list.AreIgnored(dne,p1)
     
-    def test_only_unicode_is_added_to_ignore_list(self):
+    def test_only_unicode_is_added_to_ignore_list(self, do_setup):
         def FakeIgnore(first,second):
             if not isinstance(first,str):
                 self.fail()
@@ -366,7 +370,7 @@ class TCDupeGuruWithResults(TestCase):
         self.rtable.select([4])
         app.add_selected_to_ignore_list()
     
-    def test_cancel_scan_with_previous_results(self):
+    def test_cancel_scan_with_previous_results(self, do_setup):
         # When doing a scan with results being present prior to the scan, correctly invalidate the
         # results table.
         app = self.app
@@ -375,9 +379,10 @@ class TCDupeGuruWithResults(TestCase):
         app.start_scanning() # will be cancelled immediately
         eq_(len(self.rtable), 0)
 
-class TCDupeGuru_renameSelected(TestCase):
-    def setUp(self):
-        p = self.tmppath()
+class TestCaseDupeGuru_renameSelected:
+    def pytest_funcarg__do_setup(self, request):
+        tmpdir = request.getfuncargvalue('tmpdir')
+        p = Path(str(tmpdir))
         fp = open(str(p + 'foo bar 1'),mode='w')
         fp.close()
         fp = open(str(p + 'foo bar 2'),mode='w')
@@ -399,7 +404,7 @@ class TCDupeGuru_renameSelected(TestCase):
         self.rtable = ResultTable(self.rtable_gui, self.app)
         self.rtable.connect()
     
-    def test_simple(self):
+    def test_simple(self, do_setup):
         app = self.app
         g = self.groups[0]
         self.rtable.select([1])
@@ -409,11 +414,11 @@ class TCDupeGuru_renameSelected(TestCase):
         assert 'foo bar 2' not in names
         eq_(g.dupes[0].name, 'renamed')
     
-    def test_none_selected(self):
+    def test_none_selected(self, do_setup, monkeypatch):
         app = self.app
         g = self.groups[0]
         self.rtable.select([])
-        self.mock(logging, 'warning', log_calls(lambda msg: None))
+        monkeypatch.setattr(logging, 'warning', log_calls(lambda msg: None))
         assert not app.rename_selected('renamed')
         msg = logging.warning.calls[0]['msg']
         eq_('dupeGuru Warning: list index out of range', msg)
@@ -422,11 +427,11 @@ class TCDupeGuru_renameSelected(TestCase):
         assert 'foo bar 2' in names
         eq_(g.dupes[0].name, 'foo bar 2')
     
-    def test_name_already_exists(self):
+    def test_name_already_exists(self, do_setup, monkeypatch):
         app = self.app
         g = self.groups[0]
         self.rtable.select([1])
-        self.mock(logging, 'warning', log_calls(lambda msg: None))
+        monkeypatch.setattr(logging, 'warning', log_calls(lambda msg: None))
         assert not app.rename_selected('foo bar 1')
         msg = logging.warning.calls[0]['msg']
         assert msg.startswith('dupeGuru Warning: \'foo bar 1\' already exists in')

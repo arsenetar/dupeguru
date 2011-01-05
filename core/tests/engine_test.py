@@ -12,12 +12,11 @@ from jobprogress import job
 from hsutil.decorators import log_calls
 from hsutil.misc import first
 from hsutil.testutil import eq_
-from hsutil.testcase import TestCase
 
 from .. import engine
 from ..engine import *
 
-class NamedObject(object):
+class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1):
         self.name = name
         self.size = size
@@ -55,179 +54,179 @@ def assert_match(m, name1, name2):
         eq_(m.first.name, name2)
         eq_(m.second.name, name1)
 
-class TCgetwords(TestCase):
+class TestCasegetwords:
     def test_spaces(self):
-        self.assertEqual(['a', 'b', 'c', 'd'], getwords("a b c d"))
-        self.assertEqual(['a', 'b', 'c', 'd'], getwords(" a  b  c d "))
+        eq_(['a', 'b', 'c', 'd'], getwords("a b c d"))
+        eq_(['a', 'b', 'c', 'd'], getwords(" a  b  c d "))
     
     def test_splitter_chars(self):
-        self.assertEqual(
+        eq_(
             [chr(i) for i in range(ord('a'),ord('z')+1)],
             getwords("a-b_c&d+e(f)g;h\\i[j]k{l}m:n.o,p<q>r/s?t~u!v@w#x$y*z")
         )
     
     def test_joiner_chars(self):
-        self.assertEqual(["aec"], getwords("a'e\u0301c"))
+        eq_(["aec"], getwords("a'e\u0301c"))
     
     def test_empty(self):
-        self.assertEqual([], getwords(''))
+        eq_([], getwords(''))
         
     def test_returns_lowercase(self):
-        self.assertEqual(['foo', 'bar'], getwords('FOO BAR'))
+        eq_(['foo', 'bar'], getwords('FOO BAR'))
     
     def test_decompose_unicode(self):
-        self.assertEqual(getwords('foo\xe9bar'), ['fooebar'])
+        eq_(getwords('foo\xe9bar'), ['fooebar'])
     
 
-class TCgetfields(TestCase):
+class TestCasegetfields:
     def test_simple(self):
-        self.assertEqual([['a', 'b'], ['c', 'd', 'e']], getfields('a b - c d e'))
+        eq_([['a', 'b'], ['c', 'd', 'e']], getfields('a b - c d e'))
     
     def test_empty(self):
-        self.assertEqual([], getfields(''))
-        
+        eq_([], getfields(''))
+    
     def test_cleans_empty_fields(self):
         expected = [['a', 'bc', 'def']]
         actual = getfields(' - a bc def')
-        self.assertEqual(expected, actual)
+        eq_(expected, actual)
         expected = [['bc', 'def']]
     
 
-class TCunpack_fields(TestCase):
+class TestCaseunpack_fields:
     def test_with_fields(self):
         expected = ['a', 'b', 'c', 'd', 'e', 'f']
         actual = unpack_fields([['a'], ['b', 'c'], ['d', 'e', 'f']])
-        self.assertEqual(expected, actual)
+        eq_(expected, actual)
     
     def test_without_fields(self):
         expected = ['a', 'b', 'c', 'd', 'e', 'f']
         actual = unpack_fields(['a', 'b', 'c', 'd', 'e', 'f'])
-        self.assertEqual(expected, actual)
+        eq_(expected, actual)
     
     def test_empty(self):
-        self.assertEqual([], unpack_fields([]))
+        eq_([], unpack_fields([]))
     
 
-class TCWordCompare(TestCase):
+class TestCaseWordCompare:
     def test_list(self):
-        self.assertEqual(100, compare(['a', 'b', 'c', 'd'],['a', 'b', 'c', 'd']))
-        self.assertEqual(86, compare(['a', 'b', 'c', 'd'],['a', 'b', 'c']))
+        eq_(100, compare(['a', 'b', 'c', 'd'],['a', 'b', 'c', 'd']))
+        eq_(86, compare(['a', 'b', 'c', 'd'],['a', 'b', 'c']))
     
     def test_unordered(self):
         #Sometimes, users don't want fuzzy matching too much When they set the slider
         #to 100, they don't expect a filename with the same words, but not the same order, to match.
         #Thus, we want to return 99 in that case.
-        self.assertEqual(99, compare(['a', 'b', 'c', 'd'], ['d', 'b', 'c', 'a']))
+        eq_(99, compare(['a', 'b', 'c', 'd'], ['d', 'b', 'c', 'a']))
     
     def test_word_occurs_twice(self):
         #if a word occurs twice in first, but once in second, we want the word to be only counted once
-        self.assertEqual(89, compare(['a', 'b', 'c', 'd', 'a'], ['d', 'b', 'c', 'a']))
+        eq_(89, compare(['a', 'b', 'c', 'd', 'a'], ['d', 'b', 'c', 'a']))
     
     def test_uses_copy_of_lists(self):
         first = ['foo', 'bar']
         second = ['bar', 'bleh']
         compare(first, second)
-        self.assertEqual(['foo', 'bar'], first)
-        self.assertEqual(['bar', 'bleh'], second)
+        eq_(['foo', 'bar'], first)
+        eq_(['bar', 'bleh'], second)
     
     def test_word_weight(self):
-        self.assertEqual(int((6.0 / 13.0) * 100), compare(['foo', 'bar'], ['bar', 'bleh'], (WEIGHT_WORDS, )))
+        eq_(int((6.0 / 13.0) * 100), compare(['foo', 'bar'], ['bar', 'bleh'], (WEIGHT_WORDS, )))
     
     def test_similar_words(self):
-        self.assertEqual(100, compare(['the', 'white', 'stripes'],['the', 'whites', 'stripe'], (MATCH_SIMILAR_WORDS, )))
+        eq_(100, compare(['the', 'white', 'stripes'],['the', 'whites', 'stripe'], (MATCH_SIMILAR_WORDS, )))
     
     def test_empty(self):
-        self.assertEqual(0, compare([], []))
+        eq_(0, compare([], []))
     
     def test_with_fields(self):
-        self.assertEqual(67, compare([['a', 'b'], ['c', 'd', 'e']], [['a', 'b'], ['c', 'd', 'f']]))
+        eq_(67, compare([['a', 'b'], ['c', 'd', 'e']], [['a', 'b'], ['c', 'd', 'f']]))
     
-    def test_propagate_flags_with_fields(self):
+    def test_propagate_flags_with_fields(self, monkeypatch):
         def mock_compare(first, second, flags):
-            self.assertEqual((0, 1, 2, 3, 5), flags)
+            eq_((0, 1, 2, 3, 5), flags)
         
-        self.mock(engine, 'compare_fields', mock_compare)
+        monkeypatch.setattr(engine, 'compare_fields', mock_compare)
         compare([['a']], [['a']], (0, 1, 2, 3, 5))
     
 
-class TCWordCompareWithFields(TestCase):
+class TestCaseWordCompareWithFields:
     def test_simple(self):
-        self.assertEqual(67, compare_fields([['a', 'b'], ['c', 'd', 'e']], [['a', 'b'], ['c', 'd', 'f']]))
+        eq_(67, compare_fields([['a', 'b'], ['c', 'd', 'e']], [['a', 'b'], ['c', 'd', 'f']]))
     
     def test_empty(self):
-        self.assertEqual(0, compare_fields([], []))
+        eq_(0, compare_fields([], []))
     
     def test_different_length(self):
-        self.assertEqual(0, compare_fields([['a'], ['b']], [['a'], ['b'], ['c']]))
+        eq_(0, compare_fields([['a'], ['b']], [['a'], ['b'], ['c']]))
     
-    def test_propagates_flags(self):
+    def test_propagates_flags(self, monkeypatch):
         def mock_compare(first, second, flags):
-            self.assertEqual((0, 1, 2, 3, 5), flags)
+            eq_((0, 1, 2, 3, 5), flags)
         
-        self.mock(engine, 'compare_fields', mock_compare)
+        monkeypatch.setattr(engine, 'compare_fields', mock_compare)
         compare_fields([['a']], [['a']],(0, 1, 2, 3, 5))
     
     def test_order(self):
         first = [['a', 'b'], ['c', 'd', 'e']]
         second = [['c', 'd', 'f'], ['a', 'b']]
-        self.assertEqual(0, compare_fields(first, second))
+        eq_(0, compare_fields(first, second))
     
     def test_no_order(self):
         first = [['a','b'],['c','d','e']]
         second = [['c','d','f'],['a','b']]
-        self.assertEqual(67, compare_fields(first, second, (NO_FIELD_ORDER, )))
+        eq_(67, compare_fields(first, second, (NO_FIELD_ORDER, )))
         first = [['a','b'],['a','b']] #a field can only be matched once.
         second = [['c','d','f'],['a','b']]
-        self.assertEqual(0, compare_fields(first, second, (NO_FIELD_ORDER, )))
+        eq_(0, compare_fields(first, second, (NO_FIELD_ORDER, )))
         first = [['a','b'],['a','b','c']] 
         second = [['c','d','f'],['a','b']]
-        self.assertEqual(33, compare_fields(first, second, (NO_FIELD_ORDER, )))
+        eq_(33, compare_fields(first, second, (NO_FIELD_ORDER, )))
     
     def test_compare_fields_without_order_doesnt_alter_fields(self):
         #The NO_ORDER comp type altered the fields!
         first = [['a','b'],['c','d','e']]
         second = [['c','d','f'],['a','b']]
-        self.assertEqual(67, compare_fields(first, second, (NO_FIELD_ORDER, )))
-        self.assertEqual([['a','b'],['c','d','e']],first)
-        self.assertEqual([['c','d','f'],['a','b']],second)
+        eq_(67, compare_fields(first, second, (NO_FIELD_ORDER, )))
+        eq_([['a','b'],['c','d','e']],first)
+        eq_([['c','d','f'],['a','b']],second)
     
 
-class TCbuild_word_dict(TestCase):
+class TestCasebuild_word_dict:
     def test_with_standard_words(self):
         l = [NamedObject('foo bar',True)]
         l.append(NamedObject('bar baz',True))
         l.append(NamedObject('baz bleh foo',True))
         d = build_word_dict(l)
-        self.assertEqual(4,len(d))
-        self.assertEqual(2,len(d['foo']))
-        self.assert_(l[0] in d['foo'])
-        self.assert_(l[2] in d['foo'])
-        self.assertEqual(2,len(d['bar']))
-        self.assert_(l[0] in d['bar'])
-        self.assert_(l[1] in d['bar'])
-        self.assertEqual(2,len(d['baz']))
-        self.assert_(l[1] in d['baz'])
-        self.assert_(l[2] in d['baz'])
-        self.assertEqual(1,len(d['bleh']))
-        self.assert_(l[2] in d['bleh'])
+        eq_(4,len(d))
+        eq_(2,len(d['foo']))
+        assert l[0] in d['foo']
+        assert l[2] in d['foo']
+        eq_(2,len(d['bar']))
+        assert l[0] in d['bar']
+        assert l[1] in d['bar']
+        eq_(2,len(d['baz']))
+        assert l[1] in d['baz']
+        assert l[2] in d['baz']
+        eq_(1,len(d['bleh']))
+        assert l[2] in d['bleh']
     
     def test_unpack_fields(self):
         o = NamedObject('')
         o.words = [['foo','bar'],['baz']]
         d = build_word_dict([o])
-        self.assertEqual(3,len(d))
-        self.assertEqual(1,len(d['foo']))
+        eq_(3,len(d))
+        eq_(1,len(d['foo']))
     
     def test_words_are_unaltered(self):
         o = NamedObject('')
         o.words = [['foo','bar'],['baz']]
-        d = build_word_dict([o])
-        self.assertEqual([['foo','bar'],['baz']],o.words)
+        build_word_dict([o])
+        eq_([['foo','bar'],['baz']],o.words)
     
     def test_object_instances_can_only_be_once_in_words_object_list(self):
         o = NamedObject('foo foo',True)
         d = build_word_dict([o])
-        self.assertEqual(1,len(d['foo']))
+        eq_(1,len(d['foo']))
     
     def test_job(self):
         def do_progress(p,d=''):
@@ -239,11 +238,11 @@ class TCbuild_word_dict(TestCase):
         s = "foo bar"
         build_word_dict([NamedObject(s, True), NamedObject(s, True), NamedObject(s, True)], j)
         # We don't have intermediate log because iter_with_progress is called with every > 1
-        self.assertEqual(0,self.log[0])
-        self.assertEqual(100,self.log[1])
+        eq_(0,self.log[0])
+        eq_(100,self.log[1])
     
 
-class TCmerge_similar_words(TestCase):
+class TestCasemerge_similar_words:
     def test_some_similar_words(self):
         d = {
             'foobar':set([1]),
@@ -251,20 +250,20 @@ class TCmerge_similar_words(TestCase):
             'foobar2':set([3]),
         }
         merge_similar_words(d)
-        self.assertEqual(1,len(d))
-        self.assertEqual(3,len(d['foobar']))
+        eq_(1,len(d))
+        eq_(3,len(d['foobar']))
     
     
 
-class TCreduce_common_words(TestCase):
+class TestCasereduce_common_words:
     def test_typical(self):
         d = {
             'foo': set([NamedObject('foo bar',True) for i in range(50)]),
             'bar': set([NamedObject('foo bar',True) for i in range(49)])
         }
         reduce_common_words(d, 50)
-        self.assert_('foo' not in d)
-        self.assertEqual(49,len(d['bar']))
+        assert 'foo' not in d
+        eq_(49,len(d['bar']))
     
     def test_dont_remove_objects_with_only_common_words(self):
         d = {
@@ -272,8 +271,8 @@ class TCreduce_common_words(TestCase):
             'uncommon': set([NamedObject("common uncommon",True)])
         }
         reduce_common_words(d, 50)
-        self.assertEqual(1,len(d['common']))
-        self.assertEqual(1,len(d['uncommon']))
+        eq_(1,len(d['common']))
+        eq_(1,len(d['uncommon']))
     
     def test_values_still_are_set_instances(self):
         d = {
@@ -281,8 +280,8 @@ class TCreduce_common_words(TestCase):
             'uncommon': set([NamedObject("common uncommon",True)])
         }
         reduce_common_words(d, 50)
-        self.assert_(isinstance(d['common'],set))
-        self.assert_(isinstance(d['uncommon'],set))
+        assert isinstance(d['common'],set)
+        assert isinstance(d['uncommon'],set)
     
     def test_dont_raise_KeyError_when_a_word_has_been_removed(self):
         #If a word has been removed by the reduce, an object in a subsequent common word that
@@ -324,42 +323,42 @@ class TCreduce_common_words(TestCase):
             'baz': set([NamedObject('foo bar baz',True) for i in range(49)])
         }
         reduce_common_words(d, 50)
-        self.assertEqual(1,len(d['foo']))
-        self.assertEqual(1,len(d['bar']))
-        self.assertEqual(49,len(d['baz']))
+        eq_(1,len(d['foo']))
+        eq_(1,len(d['bar']))
+        eq_(49,len(d['baz']))
     
 
-class TCget_match(TestCase):
+class TestCaseget_match:
     def test_simple(self):
         o1 = NamedObject("foo bar",True)
         o2 = NamedObject("bar bleh",True)
         m = get_match(o1,o2)
-        self.assertEqual(50,m.percentage)
-        self.assertEqual(['foo','bar'],m.first.words)
-        self.assertEqual(['bar','bleh'],m.second.words)
-        self.assert_(m.first is o1)
-        self.assert_(m.second is o2)
+        eq_(50,m.percentage)
+        eq_(['foo','bar'],m.first.words)
+        eq_(['bar','bleh'],m.second.words)
+        assert m.first is o1
+        assert m.second is o2
     
     def test_in(self):
         o1 = NamedObject("foo",True)
         o2 = NamedObject("bar",True)
         m = get_match(o1,o2)
-        self.assert_(o1 in m)
-        self.assert_(o2 in m)
-        self.assert_(object() not in m)
+        assert o1 in m
+        assert o2 in m
+        assert object() not in m
     
     def test_word_weight(self):
-        self.assertEqual(int((6.0 / 13.0) * 100),get_match(NamedObject("foo bar",True),NamedObject("bar bleh",True),(WEIGHT_WORDS,)).percentage)
+        eq_(int((6.0 / 13.0) * 100),get_match(NamedObject("foo bar",True),NamedObject("bar bleh",True),(WEIGHT_WORDS,)).percentage)
     
 
-class GetMatches(TestCase):
+class TestCaseGetMatches:
     def test_empty(self):
         eq_(getmatches([]), [])
     
     def test_simple(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("a b c foo")]
         r = getmatches(l)
-        self.assertEqual(2,len(r))
+        eq_(2,len(r))
         m = first(m for m in r if m.percentage == 50) #"foo bar" and "bar bleh"
         assert_match(m, 'foo bar', 'bar bleh')
         m = first(m for m in r if m.percentage == 33) #"foo bar" and "a b c foo"
@@ -376,17 +375,17 @@ class GetMatches(TestCase):
     def test_twice_the_same_word(self):
         l = [NamedObject("foo foo bar"),NamedObject("bar bleh")]
         r = getmatches(l)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
     
     def test_twice_the_same_word_when_preworded(self):
         l = [NamedObject("foo foo bar",True),NamedObject("bar bleh",True)]
         r = getmatches(l)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
     
     def test_two_words_match(self):
         l = [NamedObject("foo bar"),NamedObject("foo bar bleh")]
         r = getmatches(l)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
     
     def test_match_files_with_only_common_words(self):
         #If a word occurs more than 50 times, it is excluded from the matching process
@@ -395,7 +394,7 @@ class GetMatches(TestCase):
         # This test assumes that the common word threashold const is 50
         l = [NamedObject("foo") for i in range(50)]
         r = getmatches(l)
-        self.assertEqual(1225,len(r))
+        eq_(1225,len(r))
     
     def test_use_words_already_there_if_there(self):
         o1 = NamedObject('foo')
@@ -412,14 +411,14 @@ class GetMatches(TestCase):
         self.log = []
         s = "foo bar"
         getmatches([NamedObject(s), NamedObject(s), NamedObject(s)], j=j)
-        self.assert_(len(self.log) > 2)
-        self.assertEqual(0,self.log[0])
-        self.assertEqual(100,self.log[-1])
+        assert len(self.log) > 2
+        eq_(0,self.log[0])
+        eq_(100,self.log[-1])
     
     def test_weight_words(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh")]
         m = getmatches(l, weight_words=True)[0]
-        self.assertEqual(int((6.0 / 13.0) * 100),m.percentage)
+        eq_(int((6.0 / 13.0) * 100),m.percentage)
     
     def test_similar_word(self):
         l = [NamedObject("foobar"),NamedObject("foobars")]
@@ -439,7 +438,7 @@ class GetMatches(TestCase):
     def test_double_words_get_counted_only_once(self):
         l = [NamedObject("foo bar foo bleh"),NamedObject("foo bar bleh bar")]
         m = getmatches(l)[0]
-        self.assertEqual(75,m.percentage)
+        eq_(75,m.percentage)
     
     def test_with_fields(self):
         o1 = NamedObject("foo bar - foo bleh")
@@ -447,7 +446,7 @@ class GetMatches(TestCase):
         o1.words = getfields(o1.name)
         o2.words = getfields(o2.name)
         m = getmatches([o1, o2])[0]
-        self.assertEqual(50, m.percentage)
+        eq_(50, m.percentage)
     
     def test_with_fields_no_order(self):
         o1 = NamedObject("foo bar - foo bleh")
@@ -475,9 +474,9 @@ class GetMatches(TestCase):
     def test_min_match_percentage(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("a b c foo")]
         r = getmatches(l, min_match_percentage=50)
-        self.assertEqual(1,len(r)) #Only "foo bar" / "bar bleh" should match
+        eq_(1,len(r)) #Only "foo bar" / "bar bleh" should match
     
-    def test_MemoryError(self):
+    def test_MemoryError(self, monkeypatch):
         @log_calls
         def mocked_match(first, second, flags):
             if len(mocked_match.calls) > 42:
@@ -485,35 +484,35 @@ class GetMatches(TestCase):
             return Match(first, second, 0)
         
         objects = [NamedObject() for i in range(10)] # results in 45 matches
-        self.mock(engine, 'get_match', mocked_match)
+        monkeypatch.setattr(engine, 'get_match', mocked_match)
         try:
             r = getmatches(objects)
         except MemoryError:
             self.fail('MemorryError must be handled')
-        self.assertEqual(42, len(r))
+        eq_(42, len(r))
     
 
-class GetMatchesByContents(TestCase):
+class TestCaseGetMatchesByContents:
     def test_dont_compare_empty_files(self):
         o1, o2 = no(size=0), no(size=0)
         assert not getmatches_by_contents([o1, o2])
     
 
-class TCGroup(TestCase):
+class TestCaseGroup:
     def test_empy(self):
         g = Group()
-        self.assertEqual(None,g.ref)
-        self.assertEqual([],g.dupes)
-        self.assertEqual(0,len(g.matches))
+        eq_(None,g.ref)
+        eq_([],g.dupes)
+        eq_(0,len(g.matches))
     
     def test_add_match(self):
         g = Group()
         m = get_match(NamedObject("foo",True),NamedObject("bar",True))
         g.add_match(m)
-        self.assert_(g.ref is m.first)
-        self.assertEqual([m.second],g.dupes)
-        self.assertEqual(1,len(g.matches))
-        self.assert_(m in g.matches)
+        assert g.ref is m.first
+        eq_([m.second],g.dupes)
+        eq_(1,len(g.matches))
+        assert m in g.matches
     
     def test_multiple_add_match(self):
         g = Group()
@@ -522,49 +521,49 @@ class TCGroup(TestCase):
         o3 = NamedObject("c",True)
         o4 = NamedObject("d",True)
         g.add_match(get_match(o1,o2))
-        self.assert_(g.ref is o1)
-        self.assertEqual([o2],g.dupes)
-        self.assertEqual(1,len(g.matches))
+        assert g.ref is o1
+        eq_([o2],g.dupes)
+        eq_(1,len(g.matches))
         g.add_match(get_match(o1,o3))
-        self.assertEqual([o2],g.dupes)
-        self.assertEqual(2,len(g.matches))
+        eq_([o2],g.dupes)
+        eq_(2,len(g.matches))
         g.add_match(get_match(o2,o3))
-        self.assertEqual([o2,o3],g.dupes)
-        self.assertEqual(3,len(g.matches))
+        eq_([o2,o3],g.dupes)
+        eq_(3,len(g.matches))
         g.add_match(get_match(o1,o4))
-        self.assertEqual([o2,o3],g.dupes)
-        self.assertEqual(4,len(g.matches))
+        eq_([o2,o3],g.dupes)
+        eq_(4,len(g.matches))
         g.add_match(get_match(o2,o4))
-        self.assertEqual([o2,o3],g.dupes)
-        self.assertEqual(5,len(g.matches))
+        eq_([o2,o3],g.dupes)
+        eq_(5,len(g.matches))
         g.add_match(get_match(o3,o4))
-        self.assertEqual([o2,o3,o4],g.dupes)
-        self.assertEqual(6,len(g.matches))
+        eq_([o2,o3,o4],g.dupes)
+        eq_(6,len(g.matches))
     
     def test_len(self):
         g = Group()
-        self.assertEqual(0,len(g))
+        eq_(0,len(g))
         g.add_match(get_match(NamedObject("foo",True),NamedObject("bar",True)))
-        self.assertEqual(2,len(g))
+        eq_(2,len(g))
     
     def test_add_same_match_twice(self):
         g = Group()
         m = get_match(NamedObject("foo",True),NamedObject("foo",True))
         g.add_match(m)
-        self.assertEqual(2,len(g))
-        self.assertEqual(1,len(g.matches))
+        eq_(2,len(g))
+        eq_(1,len(g.matches))
         g.add_match(m)
-        self.assertEqual(2,len(g))
-        self.assertEqual(1,len(g.matches))
+        eq_(2,len(g))
+        eq_(1,len(g.matches))
     
     def test_in(self):
         g = Group()
         o1 = NamedObject("foo",True)
         o2 = NamedObject("bar",True)
-        self.assert_(o1 not in g)
+        assert o1 not in g
         g.add_match(get_match(o1,o2))
-        self.assert_(o1 in g)
-        self.assert_(o2 in g)
+        assert o1 in g
+        assert o2 in g
     
     def test_remove(self):
         g = Group()
@@ -574,14 +573,14 @@ class TCGroup(TestCase):
         g.add_match(get_match(o1,o2))
         g.add_match(get_match(o1,o3))
         g.add_match(get_match(o2,o3))
-        self.assertEqual(3,len(g.matches))
-        self.assertEqual(3,len(g))
+        eq_(3,len(g.matches))
+        eq_(3,len(g))
         g.remove_dupe(o3)
-        self.assertEqual(1,len(g.matches))
-        self.assertEqual(2,len(g))
+        eq_(1,len(g.matches))
+        eq_(2,len(g))
         g.remove_dupe(o1)
-        self.assertEqual(0,len(g.matches))
-        self.assertEqual(0,len(g))
+        eq_(0,len(g.matches))
+        eq_(0,len(g))
     
     def test_remove_with_ref_dupes(self):
         g = Group()
@@ -594,21 +593,21 @@ class TCGroup(TestCase):
         o1.is_ref = True
         o2.is_ref = True
         g.remove_dupe(o3)
-        self.assertEqual(0,len(g))
+        eq_(0,len(g))
     
     def test_switch_ref(self):
         o1 = NamedObject(with_words=True)
         o2 = NamedObject(with_words=True)
         g = Group()
         g.add_match(get_match(o1,o2))
-        self.assert_(o1 is g.ref)
+        assert o1 is g.ref
         g.switch_ref(o2)
-        self.assert_(o2 is g.ref)
-        self.assertEqual([o1],g.dupes)
+        assert o2 is g.ref
+        eq_([o1],g.dupes)
         g.switch_ref(o2)
-        self.assert_(o2 is g.ref)
+        assert o2 is g.ref
         g.switch_ref(NamedObject('',True))
-        self.assert_(o2 is g.ref)
+        assert o2 is g.ref
     
     def test_get_match_of(self):
         g = Group()
@@ -616,10 +615,10 @@ class TCGroup(TestCase):
             g.add_match(m)
         o = g.dupes[0]
         m = g.get_match_of(o)
-        self.assert_(g.ref in m)
-        self.assert_(o in m)
-        self.assert_(g.get_match_of(NamedObject('',True)) is None)
-        self.assert_(g.get_match_of(g.ref) is None)
+        assert g.ref in m
+        assert o in m
+        assert g.get_match_of(NamedObject('',True)) is None
+        assert g.get_match_of(g.ref) is None
     
     def test_percentage(self):
         #percentage should return the avg percentage in relation to the ref
@@ -631,18 +630,18 @@ class TCGroup(TestCase):
         g.add_match(m1)
         g.add_match(m2)
         g.add_match(m3)
-        self.assertEqual(75,g.percentage)
+        eq_(75,g.percentage)
         g.switch_ref(g.dupes[0])
-        self.assertEqual(66,g.percentage)
+        eq_(66,g.percentage)
         g.remove_dupe(g.dupes[0])
-        self.assertEqual(33,g.percentage)
+        eq_(33,g.percentage)
         g.add_match(m1)
         g.add_match(m2)
-        self.assertEqual(66,g.percentage)
+        eq_(66,g.percentage)
     
     def test_percentage_on_empty_group(self):
         g = Group()
-        self.assertEqual(0,g.percentage)
+        eq_(0,g.percentage)
     
     def test_prioritize(self):
         m1,m2,m3 = get_match_triangle()
@@ -656,9 +655,9 @@ class TCGroup(TestCase):
         g.add_match(m1)
         g.add_match(m2)
         g.add_match(m3)
-        self.assert_(o1 is g.ref)
+        assert o1 is g.ref
         g.prioritize(lambda x:x.name)
-        self.assert_(o3 is g.ref)
+        assert o3 is g.ref
     
     def test_prioritize_with_tie_breaker(self):
         # if the ref has the same key as one or more of the dupe, run the tie_breaker func among them
@@ -666,7 +665,7 @@ class TCGroup(TestCase):
         o1, o2, o3 = g.ordered
         tie_breaker = lambda ref, dupe: dupe is o3
         g.prioritize(lambda x:0, tie_breaker)
-        self.assertTrue(g.ref is o3)
+        assert g.ref is o3
     
     def test_prioritize_with_tie_breaker_runs_on_all_dupes(self):
         # Even if a dupe is chosen to switch with ref with a tie breaker, we still run the tie breaker 
@@ -678,7 +677,7 @@ class TCGroup(TestCase):
         o3.foo = 3
         tie_breaker = lambda ref, dupe: dupe.foo > ref.foo
         g.prioritize(lambda x:0, tie_breaker)
-        self.assertTrue(g.ref is o3)
+        assert g.ref is o3
     
     def test_prioritize_with_tie_breaker_runs_only_on_tie_dupes(self):
         # The tie breaker only runs on dupes that had the same value for the key_func
@@ -693,14 +692,14 @@ class TCGroup(TestCase):
         key_func = lambda x: -x.foo
         tie_breaker = lambda ref, dupe: dupe.bar > ref.bar
         g.prioritize(key_func, tie_breaker)
-        self.assertTrue(g.ref is o2)
+        assert g.ref is o2
     
     def test_list_like(self):
         g = Group()
         o1,o2 = (NamedObject("foo",True),NamedObject("bar",True))
         g.add_match(get_match(o1,o2))
-        self.assert_(g[0] is o1)
-        self.assert_(g[1] is o2)
+        assert g[0] is o1
+        assert g[1] is o2
     
     def test_discard_matches(self):
         g = Group()
@@ -708,33 +707,33 @@ class TCGroup(TestCase):
         g.add_match(get_match(o1,o2))
         g.add_match(get_match(o1,o3))
         g.discard_matches()
-        self.assertEqual(1,len(g.matches))
-        self.assertEqual(0,len(g.candidates))
+        eq_(1,len(g.matches))
+        eq_(0,len(g.candidates))
     
 
-class TCget_groups(TestCase):
+class TestCaseget_groups:
     def test_empty(self):
         r = get_groups([])
-        self.assertEqual([],r)
+        eq_([],r)
     
     def test_simple(self):
         l = [NamedObject("foo bar"),NamedObject("bar bleh")]
         matches = getmatches(l)
         m = matches[0]
         r = get_groups(matches)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
         g = r[0]
-        self.assert_(g.ref is m.first)
-        self.assertEqual([m.second],g.dupes)
+        assert g.ref is m.first
+        eq_([m.second],g.dupes)
     
     def test_group_with_multiple_matches(self):
         #This results in 3 matches
         l = [NamedObject("foo"),NamedObject("foo"),NamedObject("foo")]
         matches = getmatches(l)
         r = get_groups(matches)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
         g = r[0]
-        self.assertEqual(3,len(g))
+        eq_(3,len(g))
     
     def test_must_choose_a_group(self):
         l = [NamedObject("a b"),NamedObject("a b"),NamedObject("b c"),NamedObject("c d"),NamedObject("c d")]
@@ -742,8 +741,8 @@ class TCget_groups(TestCase):
         #"b c" can go either of them, but not both.
         matches = getmatches(l)
         r = get_groups(matches)
-        self.assertEqual(2,len(r))
-        self.assertEqual(5,len(r[0])+len(r[1]))
+        eq_(2,len(r))
+        eq_(5,len(r[0])+len(r[1]))
     
     def test_should_all_go_in_the_same_group(self):
         l = [NamedObject("a b"),NamedObject("a b"),NamedObject("a b"),NamedObject("a b")]
@@ -751,7 +750,7 @@ class TCget_groups(TestCase):
         #"b c" can fit in both, but it must be in only one of them
         matches = getmatches(l)
         r = get_groups(matches)
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
     
     def test_give_priority_to_matches_with_higher_percentage(self):
         o1 = NamedObject(with_words=True)
@@ -760,19 +759,19 @@ class TCget_groups(TestCase):
         m1 = Match(o1, o2, 1)
         m2 = Match(o2, o3, 2)
         r = get_groups([m1,m2])
-        self.assertEqual(1,len(r))
+        eq_(1,len(r))
         g = r[0]
-        self.assertEqual(2,len(g))
-        self.assert_(o1 not in g)
-        self.assert_(o2 in g)
-        self.assert_(o3 in g)
+        eq_(2,len(g))
+        assert o1 not in g
+        assert o2 in g
+        assert o3 in g
     
     def test_four_sized_group(self):
         l = [NamedObject("foobar") for i in range(4)]
         m = getmatches(l)
         r = get_groups(m)
-        self.assertEqual(1,len(r))
-        self.assertEqual(4,len(r[0]))
+        eq_(1,len(r))
+        eq_(4,len(r[0]))
     
     def test_referenced_by_ref2(self):
         o1 = NamedObject(with_words=True)
@@ -782,7 +781,7 @@ class TCget_groups(TestCase):
         m2 = get_match(o3,o1)
         m3 = get_match(o3,o2)
         r = get_groups([m1,m2,m3])
-        self.assertEqual(3,len(r[0]))
+        eq_(3,len(r[0]))
     
     def test_job(self):
         def do_progress(p,d=''):
@@ -795,8 +794,8 @@ class TCget_groups(TestCase):
         #101%: To make sure it is processed first so the job test works correctly
         m4 = Match(NamedObject('a',True), NamedObject('a',True), 101)
         get_groups([m1,m2,m3,m4],j)
-        self.assertEqual(0,self.log[0])
-        self.assertEqual(100,self.log[-1])
+        eq_(0,self.log[0])
+        eq_(100,self.log[-1])
     
     def test_group_admissible_discarded_dupes(self):
         # If, with a (A, B, C, D) set, all match with A, but C and D don't match with B and that the

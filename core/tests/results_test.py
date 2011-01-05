@@ -13,8 +13,7 @@ import os.path as op
 from xml.etree import ElementTree as ET
 
 from hsutil.path import Path
-from hsutil.testutil import eq_
-from hsutil.testcase import TestCase
+from hscommon.testutil import eq_
 from hsutil.misc import first
 
 from . import engine_test, data
@@ -44,8 +43,8 @@ def GetTestGroups():
     groups.sort(key=len, reverse=True) # We want the group with 3 members to be first.
     return (objects,matches,groups)
 
-class TCResultsEmpty(TestCase):
-    def setUp(self):
+class TestCaseResultsEmpty:
+    def setup_method(self, method):
         self.results = Results(data)
     
     def test_apply_invalid_filter(self):
@@ -74,8 +73,8 @@ class TCResultsEmpty(TestCase):
         assert not self.results.is_modified
     
 
-class TCResultsWithSomeGroups(TestCase):
-    def setUp(self):
+class TestCaseResultsWithSomeGroups:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects,self.matches,self.groups = GetTestGroups()
         self.results.groups = self.groups
@@ -222,8 +221,8 @@ class TCResultsWithSomeGroups(TestCase):
         assert not self.results.is_modified
     
 
-class ResultsWithSavedResults(TestCase):
-    def setUp(self):
+class TestCaseResultsWithSavedResults:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects,self.matches,self.groups = GetTestGroups()
         self.results.groups = self.groups
@@ -255,8 +254,8 @@ class ResultsWithSavedResults(TestCase):
         assert self.results.is_modified
     
 
-class TCResultsMarkings(TestCase):
-    def setUp(self):
+class TestCaseResultsMarkings:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects,self.matches,self.groups = GetTestGroups()
         self.results.groups = self.groups
@@ -356,7 +355,6 @@ class TCResultsMarkings(TestCase):
     
     def test_remove_duplicates(self):
         g1 = self.results.groups[0]
-        g2 = self.results.groups[1]
         self.results.mark(g1.dupes[0])
         eq_("1 / 3 (1.00 KB / 1.01 KB) duplicates marked.",self.results.stat_line)
         self.results.remove_duplicates([g1.dupes[1]])
@@ -410,8 +408,8 @@ class TCResultsMarkings(TestCase):
         assert r.is_marked(self.objects[4])
     
 
-class TCResultsXML(TestCase):
-    def setUp(self):
+class TestCaseResultsXML:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects, self.matches, self.groups = GetTestGroups()
         self.results.groups = self.groups
@@ -486,11 +484,11 @@ class TCResultsXML(TestCase):
         eq_(['ibabtu'],g2[0].words)
         eq_(['ibabtu'],g2[1].words)
     
-    def test_LoadXML_with_filename(self):
+    def test_LoadXML_with_filename(self, tmpdir):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
         
-        filename = op.join(self.tmpdir(), 'dupeguru_results.xml')
+        filename = str(tmpdir.join('dupeguru_results.xml'))
         self.objects[4].name = 'ibabtu 2' #we can't have 2 files with the same path
         self.results.save_to_xml(filename)
         r = Results(data)
@@ -634,8 +632,8 @@ class TCResultsXML(TestCase):
         self.results.save_to_xml(io.BytesIO()) # don't crash
     
 
-class TCResultsFilter(TestCase):
-    def setUp(self):
+class TestCaseResultsFilter:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects, self.matches, self.groups = GetTestGroups()
         self.results.groups = self.groups
@@ -716,11 +714,11 @@ class TCResultsFilter(TestCase):
         eq_(1, len(self.results.groups))
         assert self.results.groups[0] is self.groups[0]
     
-    def test_load_cancels_filter(self):
+    def test_load_cancels_filter(self, tmpdir):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
         
-        filename = op.join(self.tmpdir(), 'dupeguru_results.xml')
+        filename = str(tmpdir.join('dupeguru_results.xml'))
         self.objects[4].name = 'ibabtu 2' #we can't have 2 files with the same path
         self.results.save_to_xml(filename)
         r = Results(data)
@@ -759,8 +757,8 @@ class TCResultsFilter(TestCase):
         eq_(expected, self.results.stat_line)
     
 
-class TCResultsRefFile(TestCase):
-    def setUp(self):
+class TestCaseResultsRefFile:
+    def setup_method(self, method):
         self.results = Results(data)
         self.objects, self.matches, self.groups = GetTestGroups()
         self.objects[0].is_ref = True
