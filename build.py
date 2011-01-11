@@ -11,10 +11,10 @@ import sys
 import os
 import os.path as op
 import shutil
+import json
 
 from setuptools import setup
 from distutils.extension import Extension
-import yaml
 
 from hscommon import helpgen
 from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
@@ -120,7 +120,7 @@ def build_pe_modules(ui):
     move('_block_qt.pyd', op.join('qt', 'pe', '_block_qt.pyd'))
 
 def main():
-    conf = yaml.load(open('conf.yaml'))
+    conf = json.load(open('conf.json'))
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']

@@ -1,6 +1,6 @@
 base:
     pages: en/pages.yaml
     skeleton: skeleton
-    changelog: changelog.yaml
+    changelog: CHANGELOG
     tixurl: "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
     firstpage_meta: "<meta name=\"AppleTitle\" content=\"dupeGuru ME Help\"></meta>"

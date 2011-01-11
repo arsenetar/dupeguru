@@ -8,7 +8,7 @@ run.py
 *.pbxuser
 *.tm_build_errors
 *.pyd
-conf.yaml
+conf.json
 build
 dist
 install

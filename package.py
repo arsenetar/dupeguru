@@ -13,8 +13,7 @@ import os.path as op
 import compileall
 import shutil
 import importlib
-
-import yaml
+import json
 
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
     build_debian_changelog, copy_qt_plugins)
@@ -100,11 +99,11 @@ def package_debian(edition):
     shutil.copy(op.join(qtsrcpath, 'QtCore.so'), qtdestpath)
     shutil.copy(op.join(qtsrcpath, 'QtGui.so'), qtdestpath)
     shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
-    yaml_path = op.join(help_src, 'changelog.yaml')
+    changelogpath = op.join(help_src, 'CHANGELOG')
     changelog_dest = op.join(destpath, 'debian', 'changelog')
     project_name = ed('dupeguru-{0}')
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
-    build_debian_changelog(yaml_path, changelog_dest, project_name, from_version=from_version)
+    build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version)
     help_name = {'se': 'dupeguru_help', 'me': 'dupeguru_me_help', 'pe': 'dupeguru_pe_help'}[edition]
     shutil.copytree(op.join(help_src, help_name), op.join(srcpath, 'help'))
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
@@ -113,7 +112,7 @@ def package_debian(edition):
     os.system("dpkg-buildpackage")
 
 def main():
-    conf = yaml.load(open('conf.yaml'))
+    conf = json.load(open('conf.json'))
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']

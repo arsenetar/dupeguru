@@ -9,8 +9,7 @@
 
 import sys
 from optparse import OptionParser
-
-import yaml
+import json
 
 def main(edition, ui, dev):
     if edition not in ('se', 'me', 'pe'):
@@ -24,7 +23,7 @@ def main(edition, ui, dev):
         'ui': ui,
         'dev': dev,
     }
-    yaml.dump(conf, open('conf.yaml', 'w'))
+    json.dump(conf, open('conf.json', 'w'))
 
 if __name__ == '__main__':
     usage = "usage: %prog [options]"
