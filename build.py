@@ -19,11 +19,7 @@ from distutils.extension import Extension
 from hscommon import helpgen
 from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
 
-def build_cocoa(edition, dev, help_destpath):
-    if not dev:
-        print("Building help index")
-        os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
-    
+def build_cocoa(edition, dev):
     print("Building dg_cocoa.plugin")
     if op.exists('build'):
         shutil.rmtree('build')
@@ -83,6 +79,20 @@ def build_qt(edition, dev):
     run_contents = tmpl.replace('{{edition}}', edition)
     open('run.py', 'wt').write(run_contents)
 
+def build_help(edition, ui, dev):
+    print("Generating Help")
+    windows = sys.platform == 'win32'
+    profile = 'win_en' if windows else 'osx_en'
+    help_dir = 'help_{0}'.format(edition)
+    dest_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
+    help_basepath = op.abspath(help_dir)
+    help_destpath = op.abspath(op.join(help_dir, dest_dir))
+    helpgen.gen(help_basepath, help_destpath, profile=profile)
+    
+    if (ui == 'cocoa') and (not dev):
+        print("Building help index")
+        os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
+
 def build_pe_modules(ui):
     def move(src, dst):
         if not op.exists(src):
@@ -128,19 +138,12 @@ def main():
     if dev:
         print("Building in Dev mode")
     add_to_pythonpath('.')
-    print("Generating Help")
-    windows = sys.platform == 'win32'
-    profile = 'win_en' if windows else 'osx_en'
-    help_dir = 'help_{0}'.format(edition)
-    dest_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
-    help_basepath = op.abspath(help_dir)
-    help_destpath = op.abspath(op.join(help_dir, dest_dir))
-    helpgen.gen(help_basepath, help_destpath, profile=profile)
+    build_help(edition, ui, dev)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
     if ui == 'cocoa':
-        build_cocoa(edition, dev, help_destpath)
+        build_cocoa(edition, dev)
     elif ui == 'qt':
         build_qt(edition, dev)
 
