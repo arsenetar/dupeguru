@@ -10,7 +10,7 @@ import logging
 import re
 
 from jobprogress import job
-from hsutil import io
+from hscommon import io
 from hsutil.misc import dedupe
 from hsutil.str import get_file_ext, rem_file_ext
 
@@ -37,7 +37,7 @@ def is_same_with_digit(name, refname):
     end = name[len(refname):].strip()
     return RE_DIGIT_ENDING.match(end) is not None
 
-class Scanner(object):
+class Scanner:
     def __init__(self):
         self.ignore_list = IgnoreList()
         self.discarded_file_count = 0

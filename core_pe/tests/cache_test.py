@@ -9,7 +9,7 @@
 import logging
 
 from pytest import raises, skip
-from hsutil.testutil import eq_
+from hscommon.testutil import eq_
 
 try:
     from ..cache import Cache, colors_to_string, string_to_colors

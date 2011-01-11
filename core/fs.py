@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-10-22
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -12,12 +11,10 @@
 # resulting needless complexity and memory usage. It's been a while since I wanted to do that fork,
 # and I'm doing it now.
 
-
-
 import hashlib
 import logging
 
-from hsutil import io
+from hscommon import io
 from hsutil.misc import nonone, flatten
 from hsutil.str import get_file_ext
 
@@ -52,7 +49,7 @@ class OperationError(FSError):
     operation shows that it didn't work."""
     cls_message = "Operation on '{name}' failed."
 
-class File(object):
+class File:
     INITIAL_INFO = {
         'size': 0,
         'mtime': 0,

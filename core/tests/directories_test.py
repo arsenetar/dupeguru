@@ -12,8 +12,8 @@ import tempfile
 import shutil
 
 from pytest import raises
-from hsutil import io
-from hsutil.path import Path
+from hscommon import io
+from hscommon.path import Path
 from hscommon.testutil import eq_
 
 from ..directories import *

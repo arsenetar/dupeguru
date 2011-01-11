@@ -6,12 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-
-
 import logging
 
-from hsutil import io
-from hsutil.path import Path
+from hscommon import io
+from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSWorkspace
 
 from core import fs

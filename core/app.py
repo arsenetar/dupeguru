@@ -13,10 +13,11 @@ import subprocess
 import re
 
 from send2trash import send2trash
+from hscommon import io
 from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
-from hsutil import io, files
-from hsutil.path import Path
+from hscommon.path import Path
+from hsutil import files
 from hsutil.misc import flatten, first
 from hsutil.str import escape
 

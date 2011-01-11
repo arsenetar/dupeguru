@@ -9,7 +9,7 @@
 
 import hashlib
 
-from hsutil import io
+from hscommon import io
 from hsutil.misc import nonone
 
 from core import fs

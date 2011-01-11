@@ -11,7 +11,7 @@ import sys
 from jobprogress import job
 from hsutil.decorators import log_calls
 from hsutil.misc import first
-from hsutil.testutil import eq_
+from hscommon.testutil import eq_
 
 from .. import engine
 from ..engine import *

@@ -8,9 +8,9 @@
 
 from xml.etree import ElementTree as ET
 
-from hsutil import io
+from hscommon import io
+from hscommon.path import Path
 from hsutil.files import FileOrPath
-from hsutil.path import Path
 
 from . import fs
 

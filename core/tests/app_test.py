@@ -11,8 +11,8 @@ import os.path as op
 import logging
 
 from pytest import mark
-from hsutil import io
-from hsutil.path import Path
+from hscommon import io
+from hscommon.path import Path
 from hsutil.decorators import log_calls
 import hsutil.files
 from hscommon.testutil import CallLogger, eq_

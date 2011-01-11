@@ -9,7 +9,7 @@
 import io
 from xml.etree import ElementTree as ET
 
-from hsutil.testutil import eq_
+from hscommon.testutil import eq_
 
 from ..ignore import *
 

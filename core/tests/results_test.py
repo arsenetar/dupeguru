@@ -12,7 +12,7 @@ import os.path as op
 
 from xml.etree import ElementTree as ET
 
-from hsutil.path import Path
+from hscommon.path import Path
 from hscommon.testutil import eq_
 from hsutil.misc import first
 

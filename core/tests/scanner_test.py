@@ -7,8 +7,8 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from jobprogress import job
-from hsutil import io
-from hsutil.path import Path
+from hscommon import io
+from hscommon.path import Path
 from hscommon.testutil import eq_
 
 from .. import fs

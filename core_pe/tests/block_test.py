@@ -8,7 +8,7 @@
 # The commented out tests are tests for function that have been converted to pure C for speed
 
 from pytest import raises, skip
-from hsutil.testutil import eq_
+from hscommon.testutil import eq_
 
 try:
     from ..block import *
