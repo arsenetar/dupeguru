@@ -9,9 +9,8 @@
 import sys
 
 from jobprogress import job
-from hsutil.decorators import log_calls
-from hsutil.misc import first
-from hscommon.testutil import eq_
+from hscommon.util import first
+from hscommon.testutil import eq_, log_calls
 
 from .. import engine
 from ..engine import *

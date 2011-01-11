@@ -26,7 +26,6 @@ General dependencies
 
 - Python 3.1 (http://www.python.org)
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
-- hsutil3k (http://hg.hardcoded.net/hsutil)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
 - jobprogress (http://hg.hardcoded.net/jobprogress)
 - Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)

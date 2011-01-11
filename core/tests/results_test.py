@@ -14,7 +14,7 @@ from xml.etree import ElementTree as ET
 
 from hscommon.path import Path
 from hscommon.testutil import eq_
-from hsutil.misc import first
+from hscommon.util import first
 
 from . import engine_test, data
 from .. import engine

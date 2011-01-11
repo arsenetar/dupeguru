@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hsaudiotag import auto
-from hsutil.str import get_file_ext
+from hscommon.util import get_file_ext
 from core import fs
 
 TAG_FIELDS = {'audiosize', 'duration', 'bitrate', 'samplerate', 'title', 'artist',

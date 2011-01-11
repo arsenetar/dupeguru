@@ -13,9 +13,7 @@ from xml.etree import ElementTree as ET
 from . import engine
 from jobprogress.job import nulljob
 from hscommon.markable import Markable
-from hsutil.misc import flatten, nonone
-from hsutil.str import format_size
-from hsutil.files import FileOrPath
+from hscommon.util import flatten, nonone, FileOrPath, format_size
 
 class Results(Markable):
     #---Override

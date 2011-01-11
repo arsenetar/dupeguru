@@ -9,7 +9,7 @@
 
 import hashlib
 
-from hsutil.path import Path
+from hscommon.path import Path
 from hscommon.testutil import eq_
 from core.fs import File
 from core.tests.directories_test import create_fake_fs

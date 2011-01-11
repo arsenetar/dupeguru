@@ -14,7 +14,7 @@ import re
 from appscript import app, k, CommandError, ApplicationNotFoundError
 
 from hscommon import io
-from hsutil.str import get_file_ext, remove_invalid_xml
+from hscommon.util import get_file_ext, remove_invalid_xml
 from hscommon.path import Path
 from hscommon.cocoa import as_fetch
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL

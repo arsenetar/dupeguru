@@ -11,8 +11,7 @@ import re
 
 from jobprogress import job
 from hscommon import io
-from hsutil.misc import dedupe
-from hsutil.str import get_file_ext, rem_file_ext
+from hscommon.util import dedupe, rem_file_ext, get_file_ext
 
 from . import engine
 from .ignore import IgnoreList

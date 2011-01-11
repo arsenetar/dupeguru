@@ -14,8 +14,7 @@ import string
 from collections import defaultdict, namedtuple
 from unicodedata import normalize
 
-from hsutil.misc import flatten
-from hsutil.str import multi_replace
+from hscommon.util import flatten, multi_replace
 from jobprogress import job
 
 (WEIGHT_WORDS,

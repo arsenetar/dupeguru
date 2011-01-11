@@ -15,8 +15,7 @@ import hashlib
 import logging
 
 from hscommon import io
-from hsutil.misc import nonone, flatten
-from hsutil.str import get_file_ext
+from hscommon.util import nonone, flatten, get_file_ext
 
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"

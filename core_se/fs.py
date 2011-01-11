@@ -10,7 +10,7 @@
 import hashlib
 
 from hscommon import io
-from hsutil.misc import nonone
+from hscommon.util import nonone
 
 from core import fs
 

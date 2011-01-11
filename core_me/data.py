@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hsutil.str import format_time, FT_MINUTES, format_size
+from hscommon.util import format_time, format_size
 from core.data import (format_path, format_timestamp, format_words, format_perc, 
     format_dupe_count, cmp_value)
 
@@ -61,7 +61,7 @@ def GetDisplayInfo(dupe, group, delta):
         dupe.name,
         format_path(dupe.path),
         format_size(size, 2, 2, False),
-        format_time(duration, FT_MINUTES),
+        format_time(duration, with_hours=False),
         str(bitrate),
         str(samplerate),
         dupe.extension,

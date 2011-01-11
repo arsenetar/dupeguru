@@ -11,7 +11,7 @@ from PyQt4.QtCore import SIGNAL, Qt, QSize
 from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QSlider, QSizePolicy, QSpacerItem, QWidget, QCheckBox, QLineEdit, QDialogButtonBox, QApplication)
 
-from hsutil.misc import tryint
+from hscommon.util import tryint
 
 from core.scanner import ScanType
 

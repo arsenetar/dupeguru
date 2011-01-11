@@ -15,7 +15,7 @@ import core_me.app_cocoa, core_me.data, core_me.fs, core_me.scanner
 import hsaudiotag.aiff, hsaudiotag.flac, hsaudiotag.genres, hsaudiotag.id3v1,\
     hsaudiotag.id3v2, hsaudiotag.mp4, hsaudiotag.mpeg, hsaudiotag.ogg, hsaudiotag.wma
 from hsaudiotag import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
-import hsutil.conflict
+import hscommon.conflict
 import core.engine, core.fs, core.app
 import xml.etree.ElementPath
 import gzip

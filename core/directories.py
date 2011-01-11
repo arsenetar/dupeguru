@@ -10,7 +10,7 @@ from xml.etree import ElementTree as ET
 
 from hscommon import io
 from hscommon.path import Path
-from hsutil.files import FileOrPath
+from hscommon.util import FileOrPath
 
 from . import fs
 

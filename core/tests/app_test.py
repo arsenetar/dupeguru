@@ -13,9 +13,9 @@ import logging
 from pytest import mark
 from hscommon import io
 from hscommon.path import Path
-from hsutil.decorators import log_calls
-import hsutil.files
-from hscommon.testutil import CallLogger, eq_
+import hscommon.conflict
+import hscommon.util
+from hscommon.testutil import CallLogger, eq_, log_calls
 from jobprogress.job import nulljob, Job, JobCancelled
 
 from . import data
@@ -46,27 +46,27 @@ def add_fake_files_to_directories(directories, files):
 
 class TestCaseDupeGuru:
     def test_apply_filter_calls_results_apply_filter(self, monkeypatch):
-        app = DupeGuru()
-        monkeypatch.setattr(app.results, 'apply_filter', log_calls(app.results.apply_filter))
-        app.apply_filter('foo')
-        eq_(2, len(app.results.apply_filter.calls))
-        call = app.results.apply_filter.calls[0]
+        dgapp = DupeGuru()
+        monkeypatch.setattr(dgapp.results, 'apply_filter', log_calls(dgapp.results.apply_filter))
+        dgapp.apply_filter('foo')
+        eq_(2, len(dgapp.results.apply_filter.calls))
+        call = dgapp.results.apply_filter.calls[0]
         assert call['filter_str'] is None
-        call = app.results.apply_filter.calls[1]
+        call = dgapp.results.apply_filter.calls[1]
         eq_('foo', call['filter_str'])
     
     def test_apply_filter_escapes_regexp(self, monkeypatch):
-        app = DupeGuru()
-        monkeypatch.setattr(app.results, 'apply_filter', log_calls(app.results.apply_filter))
-        app.apply_filter('()[]\\.|+?^abc')
-        call = app.results.apply_filter.calls[1]
+        dgapp = DupeGuru()
+        monkeypatch.setattr(dgapp.results, 'apply_filter', log_calls(dgapp.results.apply_filter))
+        dgapp.apply_filter('()[]\\.|+?^abc')
+        call = dgapp.results.apply_filter.calls[1]
         eq_('\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc', call['filter_str'])
-        app.apply_filter('(*)') # In "simple mode", we want the * to behave as a wilcard
-        call = app.results.apply_filter.calls[3]
+        dgapp.apply_filter('(*)') # In "simple mode", we want the * to behave as a wilcard
+        call = dgapp.results.apply_filter.calls[3]
         eq_('\(.*\)', call['filter_str'])
-        app.options['escape_filter_regexp'] = False
-        app.apply_filter('(abc)')
-        call = app.results.apply_filter.calls[5]
+        dgapp.options['escape_filter_regexp'] = False
+        dgapp.apply_filter('(abc)')
+        call = dgapp.results.apply_filter.calls[5]
         eq_('(abc)', call['filter_str'])
     
     def test_copy_or_move(self, tmpdir, monkeypatch):
@@ -75,14 +75,16 @@ class TestCaseDupeGuru:
         # every change I want to make. The blowup was caused by a missing import.
         p = Path(str(tmpdir))
         io.open(p + 'foo', 'w').close()
-        monkeypatch.setattr(hsutil.files, 'copy', log_calls(lambda source_path, dest_path: None))
+        monkeypatch.setattr(hscommon.conflict, 'smart_copy', log_calls(lambda source_path, dest_path: None))
+        # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
+        monkeypatch.setattr(app, 'smart_copy', hscommon.conflict.smart_copy)
         monkeypatch.setattr(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
-        app = DupeGuru()
-        app.directories.add_path(p)
-        [f] = app.directories.get_files()
-        app.copy_or_move(f, True, 'some_destination', 0)
-        eq_(1, len(hsutil.files.copy.calls))
-        call = hsutil.files.copy.calls[0]
+        dgapp = DupeGuru()
+        dgapp.directories.add_path(p)
+        [f] = dgapp.directories.get_files()
+        dgapp.copy_or_move(f, True, 'some_destination', 0)
+        eq_(1, len(hscommon.conflict.smart_copy.calls))
+        call = hscommon.conflict.smart_copy.calls[0]
         eq_('some_destination', call['dest_path'])
         eq_(f.path, call['source_path'])
     
@@ -132,17 +134,19 @@ class TestCaseDupeGuru:
 class TestCaseDupeGuru_clean_empty_dirs:
     def pytest_funcarg__do_setup(self, request):
         monkeypatch = request.getfuncargvalue('monkeypatch')
-        monkeypatch.setattr(hsutil.files, 'delete_if_empty', log_calls(lambda path, files_to_delete=[]: None))
+        monkeypatch.setattr(hscommon.util, 'delete_if_empty', log_calls(lambda path, files_to_delete=[]: None))
+        # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
+        monkeypatch.setattr(app, 'delete_if_empty', hscommon.util.delete_if_empty)
         self.app = DupeGuru()
     
     def test_option_off(self, do_setup):
         self.app.clean_empty_dirs(Path('/foo/bar'))
-        eq_(0, len(hsutil.files.delete_if_empty.calls))
+        eq_(0, len(hscommon.util.delete_if_empty.calls))
     
     def test_option_on(self, do_setup):
         self.app.options['clean_empty_dirs'] = True
         self.app.clean_empty_dirs(Path('/foo/bar'))
-        calls = hsutil.files.delete_if_empty.calls
+        calls = hscommon.util.delete_if_empty.calls
         eq_(1, len(calls))
         eq_(Path('/foo/bar'), calls[0]['path'])
         eq_(['.DS_Store'], calls[0]['files_to_delete'])
@@ -153,10 +157,12 @@ class TestCaseDupeGuru_clean_empty_dirs:
         def mock_delete_if_empty(path, files_to_delete=[]):
             return len(path) > 1
         
-        monkeypatch.setattr(hsutil.files, 'delete_if_empty', mock_delete_if_empty)
+        monkeypatch.setattr(hscommon.util, 'delete_if_empty', mock_delete_if_empty)
+        # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
+        monkeypatch.setattr(app, 'delete_if_empty', mock_delete_if_empty)
         self.app.options['clean_empty_dirs'] = True
         self.app.clean_empty_dirs(Path('not-empty/empty/empty'))
-        calls = hsutil.files.delete_if_empty.calls
+        calls = hscommon.util.delete_if_empty.calls
         eq_(3, len(calls))
         eq_(Path('not-empty/empty/empty'), calls[0]['path'])
         eq_(Path('not-empty/empty'), calls[1]['path'])

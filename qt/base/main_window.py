@@ -13,7 +13,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel
     QMessageBox, QInputDialog, QLineEdit, QDesktopServices, QFileDialog, QAction, QMenuBar,
     QToolBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar)
 
-from hsutil.misc import nonone
+from hscommon.util import nonone
 
 from core.app import NoScannableFileError
 

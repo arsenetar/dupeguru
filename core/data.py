@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hsutil.str import format_time, FT_DECIMAL, format_size
+from hscommon.util import format_time_decimal, format_size
 
 import time
 
@@ -15,7 +15,7 @@ def format_path(p):
 
 def format_timestamp(t, delta):
     if delta:
-        return format_time(t, FT_DECIMAL)
+        return format_time_decimal(t)
     else:
         if t > 0:
             return time.strftime('%Y/%m/%d %H:%M:%S', time.localtime(t))

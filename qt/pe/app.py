@@ -11,7 +11,7 @@ import logging
 
 from PyQt4.QtGui import QImage, QImageReader
 
-from hsutil.str import get_file_ext
+from hscommon.util import get_file_ext
 
 from core import fs
 from core_pe import data as data_pe

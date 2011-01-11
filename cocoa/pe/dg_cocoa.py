@@ -8,7 +8,7 @@ from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_pe import app_cocoa as app_pe_cocoa
 
 # Fix py2app imports which chokes on relative imports and other stuff
-import hsutil.conflict
+import hscommon.conflict
 import core.engine, core.fs, core.app
 import core_pe.block, core_pe.cache, core_pe.matchbase, core_pe.data, core_pe._block_osx
 import xml.etree.ElementPath

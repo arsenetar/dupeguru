@@ -8,9 +8,9 @@
 
 from xml.etree import ElementTree as ET
 
-from hsutil.files import FileOrPath
+from hscommon.util import FileOrPath
 
-class IgnoreList(object):
+class IgnoreList:
     """An ignore list implementation that is iterable, filterable and exportable to XML.
     
     Call Ignore to add an ignore list entry, and AreIgnore to check if 2 items are in the list.

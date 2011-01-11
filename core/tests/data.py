@@ -9,7 +9,7 @@
 
 # data module for tests
 
-from hsutil.str import format_size
+from hscommon.util import format_size
 from ..data import format_path, cmp_value
 
 COLUMNS = [

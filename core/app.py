@@ -17,9 +17,8 @@ from hscommon import io
 from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
-from hsutil import files
-from hsutil.misc import flatten, first
-from hsutil.str import escape
+from hscommon.conflict import smart_move, smart_copy
+from hscommon.util import delete_if_empty, first, escape
 
 from . import directories, results, scanner, export, fs
 
@@ -156,14 +155,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def apply_filter(self, filter):
         self.results.apply_filter(None)
         if self.options['escape_filter_regexp']:
-            filter = escape(filter, '()[]\\.|+?^')
+            filter = escape(filter, set('()[]\\.|+?^'))
             filter = escape(filter, '*', '.')
         self.results.apply_filter(filter)
         self.notify('results_changed')
     
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
-            while files.delete_if_empty(path, ['.DS_Store']):
+            while delete_if_empty(path, ['.DS_Store']):
                 path = path[:-1]
     
     def copy_or_move(self, dupe, copy, destination, dest_type):
@@ -185,9 +184,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             io.makedirs(dest_path)
         # Raises an EnvironmentError if there's a problem
         if copy:
-            files.copy(source_path, dest_path)
+            smart_copy(source_path, dest_path)
         else:
-            files.move(source_path, dest_path)
+            smart_move(source_path, dest_path)
             self.clean_empty_dirs(source_path[:-1])
     
     def copy_or_move_marked(self, copy, destination, recreate_path):

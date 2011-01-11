@@ -20,7 +20,7 @@ from .gui.stats_label import StatsLabel
 
 # Fix py2app's problems on relative imports
 from core import app, app_cocoa, data, directories, engine, export, ignore, results, fs, scanner
-from hsutil import conflict
+from hscommon import conflict
 
 class PyDupeGuruBase(PyFairware):
     #---Directories
