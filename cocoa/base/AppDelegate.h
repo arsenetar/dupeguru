@@ -32,4 +32,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)saveResults;
 
 - (IBAction)showAboutBox:(id)sender;
+- (IBAction)openWebsite:(id)sender;
+- (IBAction)openHelp:(id)sender;
 @end

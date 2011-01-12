@@ -1,3 +1,6 @@
+Quick Start
+===========
+
 To get you quickly started with dupeGuru, let's just make a standard scan using default preferences.
 
 * Click on **Directories**.

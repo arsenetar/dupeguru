@@ -1,7 +1,10 @@
+Results
+=======
+
 When dupeGuru is finished scanning for duplicates, it will show its results in the form of duplicate group list.
 
 About duplicate groups
------
+----------------------
 
 A duplicate group is a group of files that all match together. Every group has a **reference file** and one or more **duplicate files**. The reference file is the first file of the group. Its mark box is disabled. Below it, and indented, are the duplicate files.
 
@@ -12,7 +15,7 @@ What determines which files are reference and which files are duplicates is firs
 You can change the reference file of a group manually. To do so, select the duplicate file you want to promote to reference, and click on **Actions-->Make Selected Reference**.
 
 Reviewing results
------
+-----------------
 
 Although you can just click on **Edit-->Mark All** and then **Actions-->Send Marked to Recycle bin** to quickly delete all duplicate files in your results, it is always recommended to review all duplicates before deleting them.
 
@@ -21,17 +24,17 @@ To help you reviewing the results, you can bring up the **Details panel**. This 
 If you have more false duplicates than true duplicates (If your filter hardness is very low), the best way to proceed would be to review duplicates, mark true duplicates and then click on **Actions-->Send Marked to Recycle bin**. If you have more true duplicates than false duplicates, you can instead mark all files that are false duplicates, and use **Actions-->Remove Marked from Results**.
 
 Marking and Selecting
------
+---------------------
 
 A **marked** duplicate is a duplicate with the little box next to it having a check-mark. A **selected** duplicate is a duplicate being highlighted. The multiple selection actions can be performed in dupeGuru in the standard way (Shift/Command/Control click). You can toggle all selected duplicates' mark state by pressing **space**.
 
 Delta Values
------
+------------
 
-If you turn this switch on, some columns will display the value relative to the duplicate's reference instead of the absolute values. These delta values will also be displayed in a different color so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference is 1.4 MB, the Size column will display -0.2 MB. This option is a killer feature when combined with the [Power Marker](power_marker.htm).
+If you turn this switch on, some columns will display the value relative to the duplicate's reference instead of the absolute values. These delta values will also be displayed in a different color so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference is 1.4 MB, the Size column will display -0.2 MB. This option is a killer feature when combined with the :doc:`Power Marker <power_marker>`.
 
 Filtering
------
+---------
 
 dupeGuru supports post-scan filtering. With it, you can narrow down your results so you can perform actions on a subset of it. For example, you could easily mark all duplicates with their filename containing "copy" from your results using the filter.
 
@@ -41,7 +44,7 @@ dupeGuru supports post-scan filtering. With it, you can narrow down your results
 
 In simple mode (the default mode), whatever you type as the filter is the string used to perform the actual filtering, with the exception of one wildcard: **\***. Thus, if you type "[*]" as your filter, it will match anything with [] brackets in it, whatever is in between those brackets.
 
-For more advanced filtering, you can turn "Use regular expressions when filtering" on. The filtering feature will then use **regular expressions**. A regular expression is a language for matching text. Explaining them is beyond the scope of this document. A good place to start learning it is <http://www.regular-expressions.info>.
+For more advanced filtering, you can turn "Use regular expressions when filtering" on. The filtering feature will then use **regular expressions**. A regular expression is a language for matching text. Explaining them is beyond the scope of this document. A good place to start learning it is `regular-expressions.info <http://www.regular-expressions.info>`_.
 
 Matches are case insensitive in both simple and regexp mode.
 
@@ -50,13 +53,13 @@ For the filter to match, your regular expression don't have to match the whole f
 You might notice that not all duplicates in the filtered results will match your filter. That is because as soon as one single duplicate in a group matches the filter, the whole group stays in the results so you can have a better view of the duplicate's context. However, non-matching duplicates are in "reference mode". Therefore, you can perform actions like Mark All and be sure to only mark filtered duplicates.
 
 Action Menu
------
+-----------
 
 * **Start Duplicate Scan:** Starts a new duplicate scan.
 * **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the newly cleared ignore list to be effective.
 * **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The columns that are visible when you click on this button will be the columns present in the XHTML file. The file will automatically be opened in your default browser.
 * **Send Marked to Trash:** Send all marked duplicates to trash, obviously.
-* **Delete Marked and Replace with Hardlinks:** Sends all marked duplicates to trash, but after having done that, the deleted files are replaced by a [hard link](http://en.wikipedia.org/wiki/Hard_link) to the reference file. (Only for OS X and Linux)
+* **Delete Marked and Replace with Hardlinks:** Sends all marked duplicates to trash, but after having done that, the deleted files are replaced by a `hard link <http://en.wikipedia.org/wiki/Hard_link>`_ to the reference file. (Only for OS X and Linux)
 * **Move Marked to...:** Prompt you for a destination, and then move all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
 * **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
 * **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will not be touched and will stay where they are.

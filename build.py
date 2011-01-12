@@ -7,7 +7,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import sys
 import os
 import os.path as op
 import shutil
@@ -16,14 +15,11 @@ import json
 from setuptools import setup
 from distutils.extension import Extension
 
-from hscommon import helpgen
-from hscommon.build import add_to_pythonpath, print_and_do, build_all_qt_ui, copy_packages
+from hscommon import sphinxgen
+from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder)
 
 def build_cocoa(edition, dev):
     print("Building dg_cocoa.plugin")
-    if op.exists('build'):
-        shutil.rmtree('build')
-    os.mkdir('build')
     if not dev:
         specific_packages = {
             'se': ['core_se'],
@@ -81,17 +77,16 @@ def build_qt(edition, dev):
 
 def build_help(edition, ui, dev):
     print("Generating Help")
-    windows = sys.platform == 'win32'
-    profile = 'win_en' if windows else 'osx_en'
-    help_dir = 'help_{0}'.format(edition)
-    dest_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
-    help_basepath = op.abspath(help_dir)
-    help_destpath = op.abspath(op.join(help_dir, dest_dir))
-    helpgen.gen(help_basepath, help_destpath, profile=profile)
-    
-    if (ui == 'cocoa') and (not dev):
-        print("Building help index")
-        os.system('open -a /Developer/Applications/Utilities/Help\\ Indexer.app {0}'.format(help_destpath))
+    current_path = op.abspath('.')
+    help_basepath = op.join(current_path, 'help', 'en')
+    help_buildpath = op.join(current_path, 'build', 'sphinx_src'.format(edition))
+    help_destpath = op.join(current_path, 'build', 'help'.format(edition))
+    changelog_path = op.join(current_path, 'help', 'changelog_{}'.format(edition))
+    tixurl = "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
+    appname = {'se': 'dupeGuru', 'me': 'dupeGuru Music Edition', 'pe': 'dupeGuru Picture Edition'}[edition]
+    homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
+    confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage}
+    sphinxgen.gen(help_basepath, help_buildpath, help_destpath, changelog_path, tixurl, confrepl)
 
 def build_pe_modules(ui):
     def move(src, dst):
@@ -135,6 +130,7 @@ def main():
     ui = conf['ui']
     dev = conf['dev']
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
+    ensure_empty_folder('build')
     if dev:
         print("Building in Dev mode")
     add_to_pythonpath('.')

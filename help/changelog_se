@@ -11,7 +11,7 @@
 * Fixed occasional crash during scan. (#106)
 
 === 2.12.1 (2010-09-30)
-*  Re-licensed dupeGuru to BSD and made it [Fairware](http://open.hardcoded.net/about/)
+*  Re-licensed dupeGuru to BSD and made it `Fairware <http://open.hardcoded.net/about/>`__.
 
 === 2.12.0 (2010-09-26)
 *  Improved UI with a little revamp.

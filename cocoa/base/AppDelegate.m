@@ -48,6 +48,18 @@ http://www.hardcoded.net/licenses/bsd_license
     [[_aboutBox window] makeKeyAndOrderFront:sender];
 }
 
+- (IBAction)openWebsite:(id)sender
+{
+}
+
+- (IBAction)openHelp:(id)sender
+{
+    NSBundle *b = [NSBundle mainBundle];
+    NSString *p = [b pathForResource:@"index" ofType:@"html" inDirectory:@"help"];
+    NSURL *u = [NSURL fileURLWithPath:p];
+    [[NSWorkspace sharedWorkspace] openURL:u];
+}
+
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

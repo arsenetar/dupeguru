@@ -89,7 +89,7 @@
 		8D1107320486CEB800E47090 /* dupeGuru PE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dupeGuru PE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE031750109B340A00517EE6 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		CE031753109B345200517EE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
-		CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_pe_help; path = ../../help_pe/dupeguru_pe_help; sourceTree = SOURCE_ROOT; };
+		CE073F5409CAE1A3005C1D2F /* dupeguru_pe_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = SOURCE_ROOT; };
 		CE0C2AAA117700E700BC749F /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE0C2AB41177011000BC749F /* HSTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTable.h; sourceTree = "<group>"; };
 		CE0C2AB51177011000BC749F /* HSTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTable.m; sourceTree = "<group>"; };

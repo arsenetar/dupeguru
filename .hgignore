@@ -17,6 +17,3 @@ cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/dg_cocoa.plugin
 qt/base/*_rc.py
-help_se/dupeguru_help
-help_me/dupeguru_me_help
-help_pe/dupeguru_pe_help

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CE073F6309CAE1A3005C1D2F /* dupeguru_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_help */; };
+		CE073F6309CAE1A3005C1D2F /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
 		CE19BC6311199231007CCEB0 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BC6011199231007CCEB0 /* ErrorReportWindow.xib */; };
 		CE19BC6411199231007CCEB0 /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BC6111199231007CCEB0 /* progress.xib */; };
 		CE27D3C112CCA42500859E67 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE27D3C012CCA42500859E67 /* about.xib */; };
@@ -78,7 +78,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dupeGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE073F5409CAE1A3005C1D2F /* dupeguru_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dupeguru_help; path = ../../help_se/dupeguru_help; sourceTree = "<group>"; };
+		CE073F5409CAE1A3005C1D2F /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = "<group>"; };
 		CE19BC6011199231007CCEB0 /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CE19BC6111199231007CCEB0 /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
 		CE27D3C012CCA42500859E67 /* about.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = about.xib; path = ../../cocoalib/xib/about.xib; sourceTree = SOURCE_ROOT; };
@@ -234,7 +234,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE073F5409CAE1A3005C1D2F /* dupeguru_help */,
+				CE073F5409CAE1A3005C1D2F /* help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
 				CEEFC0CA10943849001F3A39 /* xib */,
@@ -458,7 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */,
-				CE073F6309CAE1A3005C1D2F /* dupeguru_help in Resources */,
+				CE073F6309CAE1A3005C1D2F /* help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,

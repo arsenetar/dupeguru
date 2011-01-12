@@ -1,16 +1,18 @@
 Contents
 =====
 
-This package contains the source for dupeGuru. To learns how to build it, refer to the "Build dupeGuru" section. Below is the description of the various subfolders:
+This package contains the source for dupeGuru. To learn how to build it, refer to the "Build dupeGuru" section. Below is the description of the various subfolders:
 
 - core: Contains the core logic code for dupeGuru. It's Python code written in TDD style.
 - core_*: Edition-specific-cross-toolkit code written in Python.
 - cocoa: UI code for the Cocoa toolkit. It's Objective-C code.
-- qt: UI code for the Qt toolkit. It's written in Python and uses PyQt. Before redistributing changes in this part of the code, read the "qt/WARNING" file.
+- qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
 - images: Images used by the different UI codebases.
+- debian_*: Skeleton files required to create a .deb package
+- help: Help document, written for Sphinx.
 
 There are also other sub-folder that comes from external repositories (automatically checked out
-with svn:externals):
+with as mercurial subrepos):
 
 - hscommon: A collection of helpers used across HS applications.
 - cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
@@ -28,16 +30,19 @@ General dependencies
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
 - jobprogress (http://hg.hardcoded.net/jobprogress)
-- Markdown, to generate help files. (http://pypi.python.org/pypi/Markdown)
-- PyYaml, for help files and the build system. (http://pyyaml.org/)
+- Sphinx 1.0.6 (http://sphinx.pocoo.org/)
 - pytest 2.0.0, to run unit tests. (http://pytest.org/)
+
+Note: Sphinx doesn't officially support Python 3.x yet, but it doesn't matter because it is invoked
+by the build system through command line, so you can build dupeGuru even if Sphinx is installed in
+your Python 2.x install.
 
 OS X prerequisites
 -----
 
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
-- PyObjC 2.3. (http://pyobjc.sourceforge.net/)
+- PyObjC 2.3 (http://pyobjc.sourceforge.net/)
 - py2app 0.5.4 (http://bitbucket.org/ronaldoussoren/py2app)
 
 Windows prerequisites
