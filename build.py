@@ -16,7 +16,8 @@ from setuptools import setup
 from distutils.extension import Extension
 
 from hscommon import sphinxgen
-from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder)
+from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder,
+    filereplace, get_module_version)
 
 def build_cocoa(edition, dev):
     print("Building dg_cocoa.plugin")
@@ -47,6 +48,9 @@ def build_cocoa(edition, dev):
         pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
         open(pthpath, 'w').write(op.abspath('.'))
     os.chdir(cocoa_project_path)
+    print('Generating Info.plist')
+    app_version = get_module_version('core_{}'.format(edition))
+    filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
     print("Building the XCode project")
     args = []
     if dev:

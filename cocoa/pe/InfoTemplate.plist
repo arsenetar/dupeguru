@@ -7,13 +7,13 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>dupeguru_me_help</string>
+	<string>dupeguru_pe_help</string>
 	<key>CFBundleHelpBookName</key>
-	<string>dupeGuru ME Help</string>
+	<string>dupeGuru PE Help</string>
 	<key>CFBundleIconFile</key>
 	<string>dupeguru</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.hardcoded_software.dupeguru_me</string>
+	<string>com.hardcoded_software.dupeguru_pe</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>hsft</string>
 	<key>CFBundleVersion</key>
-	<string>5.10.4</string>
+	<string>{version}</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -31,7 +31,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>© Hardcoded Software, 2010</string>
 	<key>SUFeedURL</key>
-	<string>http://www.hardcoded.net/updates/dupeguru_me.appcast</string>
+	<string>http://www.hardcoded.net/updates/dupeguru_pe.appcast</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>

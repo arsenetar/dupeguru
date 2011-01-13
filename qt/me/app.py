@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core_me import data, scanner, fs
+from core_me import data, scanner, fs, __version__
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog
@@ -17,7 +17,7 @@ class DupeGuru(DupeGuruBase):
     EDITION = 'me'
     LOGO_NAME = 'logo_me'
     NAME = 'dupeGuru Music Edition'
-    VERSION = '5.10.4'
+    VERSION = __version__
     DELTA_COLUMNS = frozenset([2, 3, 4, 5, 7])
     
     def __init__(self):
