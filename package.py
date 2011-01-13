@@ -12,11 +12,10 @@ import os
 import os.path as op
 import compileall
 import shutil
-import importlib
 import json
 
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
-    build_debian_changelog, copy_qt_plugins)
+    build_debian_changelog, copy_qt_plugins, get_module_version)
 
 def package_cocoa(edition):
     app_path = {
@@ -31,9 +30,7 @@ def package_windows(edition, dev):
         print("Qt packaging only works under Windows.")
         return
     add_to_pythonpath('.')
-    modname = 'qt.{0}.app'.format(edition)
-    appmod = importlib.import_module(modname)
-    DupeGuru = appmod.DupeGuru
+    app_version = get_module_version('core_{}'.format(edition))
     distdir = 'dist'
     
     if op.exists(distdir):
@@ -55,9 +52,7 @@ def package_windows(edition, dev):
         for lib in libs:
             print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
     
-    help_basedir = 'help_{0}'.format(edition)
-    help_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
-    help_path = op.join(help_basedir, help_dir)
+    help_path = op.join('build', 'help')
     print("Copying {0} to dist\\help".format(help_path))
     shutil.copytree(help_path, op.join(distdir, 'help'))
 
@@ -65,21 +60,19 @@ def package_windows(edition, dev):
     # this is so we don'a have to re-commit installer.aip at every version change
     installer_path = op.join('qt', edition, 'installer.aip')
     shutil.copy(installer_path, 'installer_tmp.aip')
-    print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % DupeGuru.VERSION)
+    print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % app_version)
     print_and_do('AdvancedInstaller.com /build installer_tmp.aip -force')
     os.remove('installer_tmp.aip')
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
 def package_debian(edition):
-    modname = 'qt.{0}.app'.format(edition)
-    appmod = importlib.import_module(modname)
-    DupeGuru = appmod.DupeGuru
+    app_version = get_module_version('core_{}'.format(edition))
     
     if op.exists('build'):
         shutil.rmtree('build')
     ed = lambda s: s.format(edition)
-    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, DupeGuru.VERSION))
+    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, app_version))
     srcpath = op.join(destpath, 'src')
     help_src = ed('help_{0}')
     os.makedirs(destpath)
