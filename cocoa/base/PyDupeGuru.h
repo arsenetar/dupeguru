@@ -13,12 +13,10 @@ http://www.hardcoded.net/licenses/bsd_license
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)removeDirectory:(NSNumber *)index;
-- (void)loadResults;
 - (void)loadResultsFrom:(NSString *)filename;
-- (void)saveResults;
 - (void)saveResultsAs:(NSString *)filename;
-- (void)loadIgnoreList;
-- (void)saveIgnoreList;
+- (void)loadSession;
+- (void)saveSession;
 - (void)clearIgnoreList;
 - (void)purgeIgnoreList;
 - (NSString *)exportToXHTMLwithColumns:(NSArray *)aColIds;
@@ -46,6 +44,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSNumber *)getIgnoreListCount;
 - (NSNumber *)getMarkCount;
 - (BOOL)scanWasProblematic;
+- (BOOL)resultsAreModified;
 
 //Scanning options
 - (void)setMinMatchPercentage:(NSNumber *)percentage;

@@ -7,8 +7,8 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "RecentDirectories.h"
 #import "HSOutlineView.h"
+#import "HSRecentFiles.h"
 #import "DirectoryOutline.h"
 #import "PyDupeGuru.h"
 
@@ -19,7 +19,7 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSButton *removeButton;
     
     PyDupeGuruBase *_py;
-    RecentDirectories *_recentDirectories;
+    HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
 }
 - (id)initWithParentApp:(id)aParentApp;

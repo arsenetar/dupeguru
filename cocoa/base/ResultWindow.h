@@ -38,6 +38,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)initResultColumns;
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
+- (void)updateOptionSegments;
 
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender;

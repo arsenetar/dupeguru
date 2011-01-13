@@ -67,11 +67,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             os.link(str(ref.path), str(dupe.path))
         self.clean_empty_dirs(dupe.path[:-1])
     
-    def _do_load(self, j):
-        self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
-        self.notify('directories_changed')
-        self.results.load_from_xml(op.join(self.appdata, 'last_results.xml'), self._get_file, j)
-    
     def _get_display_info(self, dupe, group, delta=False):
         if (dupe is None) or (group is None):
             return ['---'] * len(self.data.COLUMNS)
@@ -244,17 +239,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             subprocess.Popen(cmd, shell=True)
     
     def load(self):
-        self._start_job(JOB_LOAD, self._do_load)
-        self.load_ignore_list()
+        self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
+        self.notify('directories_changed')
+        p = op.join(self.appdata, 'ignore_list.xml')
+        self.scanner.ignore_list.load_from_xml(p)
     
     def load_from(self, filename):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
         self._start_job(JOB_LOAD, do)
-    
-    def load_ignore_list(self):
-        p = op.join(self.appdata, 'ignore_list.xml')
-        self.scanner.ignore_list.load_from_xml(p)
     
     def make_selected_reference(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -327,19 +320,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
-        if self.results.is_modified:
-            self.results.save_to_xml(op.join(self.appdata, 'last_results.xml'))
+        p = op.join(self.appdata, 'ignore_list.xml')
+        self.scanner.ignore_list.save_to_xml(p)
     
     def save_as(self, filename):
         self.results.save_to_xml(filename)
-        # It's not because we saved it here that we don't want to save it in appdata when we quit
-        self.results.is_modified = True
-    
-    def save_ignore_list(self):
-        if not op.exists(self.appdata):
-            os.makedirs(self.appdata)
-        p = op.join(self.appdata, 'ignore_list.xml')
-        self.scanner.ignore_list.save_to_xml(p)
     
     def start_scanning(self):
         def do(j):

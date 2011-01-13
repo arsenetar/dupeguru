@@ -7,31 +7,32 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "RecentDirectories.h"
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 #import "HSAboutBox.h"
+#import "HSRecentFiles.h"
 
 @interface AppDelegateBase : NSObject
 {
     IBOutlet PyDupeGuruBase *py;
-    IBOutlet RecentDirectories *recentDirectories;
     IBOutlet ResultWindowBase *result;
+    IBOutlet NSMenu *recentResultsMenu;
     
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
     HSAboutBox *_aboutBox;
-    BOOL _savedResults;
+    HSRecentFiles *_recentResults;
 }
 - (PyDupeGuruBase *)py;
-- (RecentDirectories *)recentDirectories;
 - (DirectoryPanel *)directoryPanel;
 - (DetailsPanel *)detailsPanel;
-- (void)saveResults;
+- (HSRecentFiles *)recentResults;
+- (NSString *)homepageURL;
 
 - (IBAction)showAboutBox:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openHelp:(id)sender;
+- (IBAction)toggleDirectories:(id)sender;
 @end

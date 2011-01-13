@@ -51,9 +51,8 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)startDuplicateScan:(id)sender
 {
-    if ([matches numberOfRows] > 0)
-    {
-        if ([Dialogs askYesNo:@"Are you sure you want to start a new duplicate scan?"] == NSAlertSecondButtonReturn) // NO
+    if ([py resultsAreModified]) {
+        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
             return;
     }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];

@@ -12,7 +12,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface AppDelegate : AppDelegateBase {}
 - (IBAction)openWebsite:(id)sender;
-- (IBAction)toggleDirectories:(id)sender;
 
 - (PyDupeGuru *)py;
 @end

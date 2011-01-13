@@ -18,7 +18,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window];
     AppDelegateBase *app = aParentApp;
     _py = [app py];
-    _recentDirectories = [app recentDirectories];
+    _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
+    [_recentDirectories setDelegate:self];
     outline = [[DirectoryOutline alloc] initWithPyParent:_py view:outlineView];
     [self refreshRemoveButtonText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directorySelectionChanged:)
@@ -29,6 +30,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [outline release];
+    [_recentDirectories release];
     [super dealloc];
 }
 
@@ -51,20 +53,13 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)popupAddDirectoryMenu:(id)sender
 {
-    if ([[_recentDirectories directories] count] == 0)
-    {
+    if ([[_recentDirectories filepaths] count] == 0) {
         [self askForDirectory:sender];
-        return;
     }
-    NSMenu *m = [addButtonPopUp menu];
-    while ([m numberOfItems] > 0)
-        [m removeItemAtIndex:0];
-    NSMenuItem *mi = [m addItemWithTitle:@"Add New Directory..." action:@selector(askForDirectory:) keyEquivalent:@""];
-    [mi setTarget:self];
-    [m addItem:[NSMenuItem separatorItem]];
-    [_recentDirectories fillMenu:m];
-    [addButtonPopUp selectItem:nil];
-    [[addButtonPopUp cell] performClickWithFrame:[sender frame] inView:[sender superview]];
+    else {
+        [addButtonPopUp selectItem:nil];
+        [[addButtonPopUp cell] performClickWithFrame:[sender frame] inView:[sender superview]];
+    }
 }
 
 - (IBAction)removeSelectedDirectory:(id)sender
@@ -104,7 +99,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
         [Dialogs showMessage:[NSString stringWithFormat:m,directory]];
     }
-    [_recentDirectories addDirectory:directory];
+    [_recentDirectories addFile:directory];
     [[self window] makeKeyAndOrderFront:nil];
 }
 
@@ -126,6 +121,11 @@ http://www.hardcoded.net/licenses/bsd_license
     BOOL isdir;
     [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isdir];
     return isdir;
+}
+
+- (void)recentFileClicked:(NSString *)path
+{
+    [self addDirectory:path];
 }
 
 /* Notifications */

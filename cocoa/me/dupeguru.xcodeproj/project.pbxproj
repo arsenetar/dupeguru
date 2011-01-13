@@ -29,12 +29,13 @@
 		CE003CCB11242D00004B0AA7 /* NSIndexPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC311242D00004B0AA7 /* NSIndexPathAdditions.m */; };
 		CE003CCC11242D00004B0AA7 /* NSTableViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CC511242D00004B0AA7 /* NSTableViewAdditions.m */; };
 		CE003CD011242D2C004B0AA7 /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */; };
-		CE073F6309CAE1A3005C1D2F /* dupeguru_me_help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */; };
+		CE073F6309CAE1A3005C1D2F /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
 		CE0A0C001175A1C000DCA3C6 /* HSTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A0BFF1175A1C000DCA3C6 /* HSTable.m */; };
 		CE0A0C041175A1DE00DCA3C6 /* ProblemDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A0C021175A1DE00DCA3C6 /* ProblemDialog.m */; };
 		CE0A0C061175A24800DCA3C6 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A0C051175A24800DCA3C6 /* ProblemDialog.xib */; };
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
+		CE1EAA0A12DF3E81009BA949 /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
@@ -48,7 +49,6 @@
 		CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE10FC6C12E00EC695D /* Dialogs.m */; };
 		CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE30FC6C12E00EC695D /* HSErrorReportWindow.m */; };
 		CE515DF60FC6C12E00EC695D /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DE70FC6C12E00EC695D /* ProgressController.m */; };
-		CE515DF70FC6C12E00EC695D /* RecentDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DEA0FC6C12E00EC695D /* RecentDirectories.m */; };
 		CE515DFA0FC6C12E00EC695D /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DF00FC6C12E00EC695D /* Utils.m */; };
 		CE515DFB0FC6C12E00EC695D /* ValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515DF20FC6C12E00EC695D /* ValueTransformers.m */; };
 		CE515E1D0FC6C19300EC695D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE515E160FC6C19300EC695D /* AppDelegate.m */; };
@@ -112,7 +112,7 @@
 		CE003CCD11242D2C004B0AA7 /* DirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectoryOutline.h; path = ../base/DirectoryOutline.h; sourceTree = SOURCE_ROOT; };
 		CE003CCE11242D2C004B0AA7 /* DirectoryOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectoryOutline.m; path = ../base/DirectoryOutline.m; sourceTree = SOURCE_ROOT; };
 		CE003CCF11242D2C004B0AA7 /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDirectoryOutline.h; path = ../base/PyDirectoryOutline.h; sourceTree = SOURCE_ROOT; };
-		CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = "<group>"; };
+		CE073F5409CAE1A3005C1D2F /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = "<group>"; };
 		CE0A0BFE1175A1C000DCA3C6 /* HSTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTable.h; sourceTree = "<group>"; };
 		CE0A0BFF1175A1C000DCA3C6 /* HSTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTable.m; sourceTree = "<group>"; };
 		CE0A0C011175A1DE00DCA3C6 /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
@@ -121,6 +121,8 @@
 		CE0A0C051175A24800DCA3C6 /* ProblemDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProblemDialog.xib; path = ../base/xib/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CE0A0C131175A28100DCA3C6 /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
+		CE1EAA0812DF3E81009BA949 /* HSRecentFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSRecentFiles.h; path = ../../cocoalib/HSRecentFiles.h; sourceTree = SOURCE_ROOT; };
+		CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -142,8 +144,6 @@
 		CE515DE60FC6C12E00EC695D /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = ../../cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
 		CE515DE70FC6C12E00EC695D /* ProgressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController.m; path = ../../cocoalib/ProgressController.m; sourceTree = SOURCE_ROOT; };
 		CE515DE80FC6C12E00EC695D /* PyApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyApp.h; path = ../../cocoalib/PyApp.h; sourceTree = SOURCE_ROOT; };
-		CE515DE90FC6C12E00EC695D /* RecentDirectories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecentDirectories.h; path = ../../cocoalib/RecentDirectories.h; sourceTree = SOURCE_ROOT; };
-		CE515DEA0FC6C12E00EC695D /* RecentDirectories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecentDirectories.m; path = ../../cocoalib/RecentDirectories.m; sourceTree = SOURCE_ROOT; };
 		CE515DEF0FC6C12E00EC695D /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../../cocoalib/Utils.h; sourceTree = SOURCE_ROOT; };
 		CE515DF00FC6C12E00EC695D /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = ../../cocoalib/Utils.m; sourceTree = SOURCE_ROOT; };
 		CE515DF10FC6C12E00EC695D /* ValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueTransformers.h; path = ../../cocoalib/ValueTransformers.h; sourceTree = SOURCE_ROOT; };
@@ -265,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3FBDD01094637800B72D77 /* xib */,
-				CE073F5409CAE1A3005C1D2F /* dupeguru_me_help */,
+				CE073F5409CAE1A3005C1D2F /* help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
@@ -378,13 +378,13 @@
 				CE74A12312537F06008A8DF0 /* PyFairware.h */,
 				CE4F934712CCA96C0067A3AE /* HSAboutBox.h */,
 				CE4F934812CCA96C0067A3AE /* HSAboutBox.m */,
+				CE1EAA0812DF3E81009BA949 /* HSRecentFiles.h */,
+				CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */,
 				CE003CB911242D00004B0AA7 /* NSEventAdditions.h */,
 				CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */,
 				CE515DE60FC6C12E00EC695D /* ProgressController.h */,
 				CE515DE70FC6C12E00EC695D /* ProgressController.m */,
 				CE515DE80FC6C12E00EC695D /* PyApp.h */,
-				CE515DE90FC6C12E00EC695D /* RecentDirectories.h */,
-				CE515DEA0FC6C12E00EC695D /* RecentDirectories.m */,
 				CE515DEF0FC6C12E00EC695D /* Utils.h */,
 				CE515DF00FC6C12E00EC695D /* Utils.m */,
 				CE515DF10FC6C12E00EC695D /* ValueTransformers.h */,
@@ -487,7 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */,
-				CE073F6309CAE1A3005C1D2F /* dupeguru_me_help in Resources */,
+				CE073F6309CAE1A3005C1D2F /* help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
@@ -519,7 +519,6 @@
 				CE515DF30FC6C12E00EC695D /* Dialogs.m in Sources */,
 				CE515DF40FC6C12E00EC695D /* HSErrorReportWindow.m in Sources */,
 				CE515DF60FC6C12E00EC695D /* ProgressController.m in Sources */,
-				CE515DF70FC6C12E00EC695D /* RecentDirectories.m in Sources */,
 				CE515DFA0FC6C12E00EC695D /* Utils.m in Sources */,
 				CE515DFB0FC6C12E00EC695D /* ValueTransformers.m in Sources */,
 				CE515E1D0FC6C19300EC695D /* AppDelegate.m in Sources */,
@@ -542,6 +541,7 @@
 				CE578303124DFC660004769C /* HSTableView.m in Sources */,
 				CE74A12412537F06008A8DF0 /* HSFairwareReminder.m in Sources */,
 				CE4F934912CCA96C0067A3AE /* HSAboutBox.m in Sources */,
+				CE1EAA0A12DF3E81009BA949 /* HSRecentFiles.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

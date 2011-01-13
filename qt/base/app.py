@@ -202,7 +202,6 @@ class DupeGuru(DupeGuruBase, QObject):
         self.willSavePrefs.emit()
         self.prefs.save()
         self.save()
-        self.save_ignore_list()
     
     def job_finished(self, jobid):
         self._job_completed(jobid)

@@ -56,14 +56,9 @@ http://www.hardcoded.net/licenses/bsd_license
     return self;
 }
 
-- (IBAction)openWebsite:(id)sender
+- (NSString *)homepageURL
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.hardcoded.net/dupeguru_me"]];
-}
-
-- (IBAction)toggleDirectories:(id)sender
-{
-    [[self directoryPanel] toggleVisible:sender];
+    return @"http://www.hardcoded.net/dupeguru_me/"
 }
 
 - (DirectoryPanel *)directoryPanel

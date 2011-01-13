@@ -40,10 +40,7 @@ class PyDupeGuruBase(PyFairware):
     def exportToXHTMLwithColumns_(self, column_ids):
         return self.py.export_to_xhtml(column_ids)
     
-    def loadIgnoreList(self):
-        self.py.load_ignore_list()
-    
-    def loadResults(self):
+    def loadSession(self):
         self.py.load()
     
     def loadResultsFrom_(self, filename):
@@ -64,10 +61,7 @@ class PyDupeGuruBase(PyFairware):
     def toggleSelectedMark(self):
         self.py.toggle_selected_mark_state()
     
-    def saveIgnoreList(self):
-        self.py.save_ignore_list()
-    
-    def saveResults(self):
+    def saveSession(self):
         self.py.save()
     
     def saveResultsAs_(self, filename):
@@ -117,6 +111,10 @@ class PyDupeGuruBase(PyFairware):
     @signature('i@:')
     def scanWasProblematic(self):
         return bool(self.py.results.problems)
+    
+    @signature('i@:')
+    def resultsAreModified(self):
+        return self.py.results.is_modified
     
     #---Properties
     @signature('v@:c')

@@ -11,11 +11,17 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSFairwareReminder.h"
 #import "Utils.h"
 #import "Consts.h"
+#import "Dialogs.h"
 #import <Sparkle/SUUpdater.h>
 
 @implementation AppDelegateBase
+- (void)awakeFromNib
+{
+    _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
+    [_recentResults setDelegate:self];
+}
+
 - (PyDupeGuruBase *)py { return py; }
-- (RecentDirectories *)recentDirectories { return recentDirectories; }
 - (DirectoryPanel *)directoryPanel
 {
     if (!_directoryPanel)
@@ -30,14 +36,14 @@ http://www.hardcoded.net/licenses/bsd_license
     return _detailsPanel;
 }
 
-- (void)saveResults
+- (HSRecentFiles *)recentResults
 {
-    if (_savedResults) {
-        return;
-    }
-    [py saveIgnoreList];
-    [py saveResults];
-    _savedResults = YES;
+    return _recentResults;
+}
+
+- (NSString *)homepageURL
+{
+    return @""; // Virtual
 }
 
 - (IBAction)showAboutBox:(id)sender
@@ -50,6 +56,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)openWebsite:(id)sender
 {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[self homepageURL]]];
 }
 
 - (IBAction)openHelp:(id)sender
@@ -58,6 +65,11 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *p = [b pathForResource:@"index" ofType:@"html" inDirectory:@"help"];
     NSURL *u = [NSURL fileURLWithPath:p];
     [[NSWorkspace sharedWorkspace] openURL:u];
+}
+
+- (IBAction)toggleDirectories:(id)sender
+{
+    [[self directoryPanel] toggleVisible:sender];
 }
 
 /* Delegate */
@@ -73,10 +85,7 @@ http://www.hardcoded.net/licenses/bsd_license
     else
         [result resetColumnsToDefault:nil];
     [HSFairwareReminder showNagWithApp:[self py]];
-    //Restore results
-    [py loadIgnoreList];
-    [py loadResults];
-    _savedResults = NO;
+    [py loadSession];
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
@@ -85,38 +94,39 @@ http://www.hardcoded.net/licenses/bsd_license
         [result showWindow:NSApp];
 }
 
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    if ([py resultsAreModified]) {
+        NSString *msg = @"You have unsaved results, do you really want to quit?";
+        if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) { // NO
+            return NSTerminateCancel;
+        }
+    }
+    return NSTerminateNow;
+}
+
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject: [result getColumnsOrder] forKey:@"columnsOrder"];
     [ud setObject: [result getColumnsWidth] forKey:@"columnsWidth"];
-    [self saveResults];
     NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
-    if (sc >= 10)
-    {
+    if (sc >= 10) {
         sc = -1;
         [py purgeIgnoreList];
     }
     sc++;
+    [py saveSession];
     [ud setInteger:sc forKey:@"sessionCountSinceLastIgnorePurge"];
     // NSApplication does not release nib instances objects, we must do it manually
     // Well, it isn't needed because the memory is freed anyway (we are quitting the application
-    // But I need to release RecentDirectories so it saves the user defaults
-    [recentDirectories release];
+    // But I need to release HSRecentFiles so it saves the user defaults
+    [_directoryPanel release];
+    [_recentResults release];
 }
 
-- (void)recentDirecoryClicked:(NSString *)directory
+- (void)recentFileClicked:(NSString *)path
 {
-    [[self directoryPanel] addDirectory:directory];
-}
-
-/* SUUpdater delegate */
-
-- (BOOL)updater:(SUUpdater *)updater shouldPostponeRelaunchForUpdate:(SUAppcastItem *)update untilInvoking:(NSInvocation *)invocation;
-{
-    /* If results aren't saved now, we might get a weird utf-8 lookup error when saving later.
-    **/
-    [self saveResults];
-    return NO;
+    [py loadResultsFrom:path];
 }
 @end

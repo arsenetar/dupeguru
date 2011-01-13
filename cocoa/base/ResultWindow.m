@@ -254,6 +254,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([op runModal] == NSOKButton) {
         NSString *filename = [[op filenames] objectAtIndex:0];
         [py loadResultsFrom:filename];
+        [[(AppDelegateBase *)app recentResults] addFile:filename];
     }
 }
 
@@ -356,6 +357,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [sp setTitle:@"Select a file to save your results to"];
     if ([sp runModal] == NSOKButton) {
         [py saveResultsAs:[sp filename]];
+        [[(AppDelegateBase *)app recentResults] addFile:[sp filename]];
     }
 }
 

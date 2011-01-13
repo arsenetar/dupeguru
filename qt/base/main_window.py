@@ -14,6 +14,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel
     QToolBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar)
 
 from hscommon.util import nonone
+from qtlib.recent import Recent
 
 from core.app import NoScannableFileError
 
@@ -63,7 +64,7 @@ class MainWindow(QMainWindow):
             ('actionInvertMarking', 'Ctrl+Alt+A', '', "Invert Marking", self.markInvertTriggered),
             ('actionMarkSelected', '', '', "Mark Selected", self.markSelectedTriggered),
             ('actionClearIgnoreList', '', '', "Clear Ignore List", self.clearIgnoreListTriggered),
-            ('actionQuit', 'Ctrl+Q', '', "Quit", QCoreApplication.instance().quit),
+            ('actionQuit', 'Ctrl+Q', '', "Quit", self.close),
             ('actionApplyFilter', 'Ctrl+F', '', "Apply Filter", self.applyFilterTriggered),
             ('actionCancelFilter', 'Ctrl+Shift+F', '', "Cancel Filter", self.cancelFilterTriggered),
             ('actionShowHelp', 'F1', '', "dupeGuru Help", self.showHelpTriggered),
@@ -105,6 +106,8 @@ class MainWindow(QMainWindow):
         self.menuWindow.setTitle("Windows")
         self.menuHelp = QMenu(self.menubar)
         self.menuHelp.setTitle("Help")
+        self.menuLoadRecent = QMenu(self.menuFile)
+        self.menuLoadRecent.setTitle("Load Recent Results")
         self.setMenuBar(self.menubar)
         
         self.menuActions.addAction(self.actionDeleteMarked)
@@ -141,6 +144,7 @@ class MainWindow(QMainWindow):
         self.menuFile.addAction(self.actionScan)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionLoadResults)
+        self.menuFile.addAction(self.menuLoadRecent.menuAction())
         self.menuFile.addAction(self.actionSaveResults)
         self.menuFile.addAction(self.actionExport)
         self.menuFile.addAction(self.actionClearIgnoreList)
@@ -227,6 +231,8 @@ class MainWindow(QMainWindow):
         self._setupActions()
         self._setupMenu()
         self._setupToolbar()
+        self.recentResults = Recent(self.app, self.menuLoadRecent, 'recentResults')
+        self.recentResults.mustOpenItem.connect(self.app.load_from)
         self.statusbar = QStatusBar(self)
         self.statusbar.setSizeGripEnabled(True)
         self.setStatusBar(self.statusbar)
@@ -263,6 +269,15 @@ class MainWindow(QMainWindow):
         for action in self._column_actions:
             colid = action.column_index
             action.setChecked(not h.isSectionHidden(colid))
+    
+    #--- QWidget overrides
+    def closeEvent(self, event):
+        event.accept()
+        if self.app.results.is_modified:
+            title = "Unsaved results"
+            msg = "You have unsaved results, do you really want to quit?"
+            if not self._confirm(title, msg):
+                event.ignore()
     
     #--- Actions
     def aboutTriggered(self):
@@ -348,6 +363,7 @@ class MainWindow(QMainWindow):
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
             self.app.load_from(destination)
+            self.recentResults.insertItem(destination)
     
     def makeReferenceTriggered(self):
         self.app.make_selected_reference()
@@ -406,6 +422,7 @@ class MainWindow(QMainWindow):
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:
             self.app.save_as(destination)
+            self.recentResults.insertItem(destination)
     
     def scanTriggered(self):
         title = "Start a new scan"
