@@ -18,6 +18,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPy:(PyApp *)aPy;
 - (PyDetailsPanel *)py;
 
+- (BOOL)isVisible;
 - (void)toggleVisibility;
 
 /* Python --> Cocoa */

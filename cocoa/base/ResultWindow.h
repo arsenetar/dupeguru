@@ -18,9 +18,8 @@ http://www.hardcoded.net/licenses/bsd_license
 @protected
     IBOutlet PyDupeGuruBase *py;
     IBOutlet id app;
-    IBOutlet NSSegmentedControl *deltaSwitch;
+    IBOutlet NSSegmentedControl *optionsSwitch;
     IBOutlet HSTableView *matches;
-	IBOutlet NSSegmentedControl *pmSwitch;
 	IBOutlet NSTextField *stats;
 	IBOutlet NSMenu *columnsMenu;
 	IBOutlet NSSearchField *filterField;
@@ -42,8 +41,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender;
-- (IBAction)changeDelta:(id)sender;
-- (IBAction)changePowerMarker:(id)sender;
+- (IBAction)changeOptions:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;
 - (IBAction)hardlinkMarked:(id)sender;

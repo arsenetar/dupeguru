@@ -25,8 +25,6 @@ http://www.hardcoded.net/licenses/bsd_license
     problemDialog = [[ProblemDialog alloc] initWithPy:py];
     [self initResultColumns];
     [self fillColumnsMenu];
-    [deltaSwitch setSelectedSegment:0];
-    [pmSwitch setSelectedSegment:0];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
     
@@ -147,6 +145,13 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
+- (void)updateOptionSegments
+{
+    [optionsSwitch setSelected:[[(AppDelegateBase *)app detailsPanel] isVisible] forSegment:0];
+    [optionsSwitch setSelected:[table powerMarkerMode] forSegment:1];
+    [optionsSwitch setSelected:[table deltaValuesMode] forSegment:2];
+}
+
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
@@ -158,14 +163,18 @@ http://www.hardcoded.net/licenses/bsd_license
     [py clearIgnoreList];
 }
 
-- (IBAction)changeDelta:(id)sender
+- (IBAction)changeOptions:(id)sender
 {
-    [table setDeltaValuesMode:[deltaSwitch selectedSegment] == 1];
-}
-
-- (IBAction)changePowerMarker:(id)sender
-{
-    [table setPowerMarkerMode:[pmSwitch selectedSegment] == 1];
+    NSInteger seg = [optionsSwitch selectedSegment];
+    if (seg == 0) {
+        [self toggleDetailsPanel:sender];
+    }
+    else if (seg == 1) {
+        [self togglePowerMarker:sender];
+    }
+    else if (seg == 2) {
+        [self toggleDelta:sender];
+    }
 }
 
 - (IBAction)copyMarked:(id)sender
@@ -380,27 +389,22 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)toggleDelta:(id)sender
-{
-    if ([deltaSwitch selectedSegment] == 1)
-        [deltaSwitch setSelectedSegment:0];
-    else
-        [deltaSwitch setSelectedSegment:1];
-    [self changeDelta:sender];
-}
-
 - (IBAction)toggleDetailsPanel:(id)sender
 {
     [[(AppDelegateBase *)app detailsPanel] toggleVisibility];
+    [self updateOptionSegments];
+}
+
+- (IBAction)toggleDelta:(id)sender
+{
+    [table setDeltaValuesMode:![table deltaValuesMode]];
+    [self updateOptionSegments];
 }
 
 - (IBAction)togglePowerMarker:(id)sender
 {
-    if ([pmSwitch selectedSegment] == 1)
-        [pmSwitch setSelectedSegment:0];
-    else
-        [pmSwitch setSelectedSegment:1];
-    [self changePowerMarker:sender];
+    [table setPowerMarkerMode:![table powerMarkerMode]];
+    [self updateOptionSegments];
 }
 
 /* Notifications */

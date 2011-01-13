@@ -44,7 +44,6 @@
 		CEEFC0F810945D9F001F3A39 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */; };
 		CEEFC0FB10945E37001F3A39 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
-		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
 		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
 		CEFC7F9E0FC9517500CD5728 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8B0FC9517500CD5728 /* Dialogs.m */; };
 		CEFC7F9F0FC9517500CD5728 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7F8D0FC9517500CD5728 /* HSErrorReportWindow.m */; };
@@ -139,7 +138,6 @@
 		CEEFC0F710945D9F001F3A39 /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = ../base/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CEEFC0FA10945E37001F3A39 /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsPanel.xib; path = ../base/xib/DetailsPanel.xib; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = ../../images/details32.png; sourceTree = SOURCE_ROOT; };
 		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = ../../images/preferences32.png; sourceTree = SOURCE_ROOT; };
 		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
@@ -333,7 +331,6 @@
 		CEFC294309C89E0000D9F998 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CEFC295309C89FF200D9F998 /* details32.png */,
 				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
 			);
@@ -461,7 +458,6 @@
 				CE073F6309CAE1A3005C1D2F /* help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
-				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
 				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
 				CE6E0DFE1054E9EF008D9390 /* dsa_pub.pem in Resources */,
 				CEEFC0F810945D9F001F3A39 /* DirectoryPanel.xib in Resources */,

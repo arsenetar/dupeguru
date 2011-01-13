@@ -34,9 +34,14 @@ http://www.hardcoded.net/licenses/bsd_license
     [detailsTable reloadData];
 }
 
+- (BOOL)isVisible
+{
+    return [[self window] isVisible];
+}
+
 - (void)toggleVisibility
 {
-    if ([[self window] isVisible]) {
+    if ([self isVisible]) {
         [[self window] close];
     }
     else {
