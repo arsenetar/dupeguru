@@ -12,11 +12,10 @@ import os
 import os.path as op
 import compileall
 import shutil
-import importlib
 import json
 
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
-    build_debian_changelog, copy_qt_plugins)
+    build_debian_changelog, copy_qt_plugins, get_module_version)
 
 def package_cocoa(edition):
     app_path = {
@@ -31,9 +30,7 @@ def package_windows(edition, dev):
         print("Qt packaging only works under Windows.")
         return
     add_to_pythonpath('.')
-    modname = 'qt.{0}.app'.format(edition)
-    appmod = importlib.import_module(modname)
-    DupeGuru = appmod.DupeGuru
+    app_version = get_module_version('core_{}'.format(edition))
     distdir = 'dist'
     
     if op.exists(distdir):
@@ -55,9 +52,7 @@ def package_windows(edition, dev):
         for lib in libs:
             print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
     
-    help_basedir = 'help_{0}'.format(edition)
-    help_dir = 'dupeguru_{0}_help'.format(edition) if edition != 'se' else 'dupeguru_help'
-    help_path = op.join(help_basedir, help_dir)
+    help_path = op.join('build', 'help')
     print("Copying {0} to dist\\help".format(help_path))
     shutil.copytree(help_path, op.join(distdir, 'help'))
 
@@ -65,23 +60,19 @@ def package_windows(edition, dev):
     # this is so we don'a have to re-commit installer.aip at every version change
     installer_path = op.join('qt', edition, 'installer.aip')
     shutil.copy(installer_path, 'installer_tmp.aip')
-    print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % DupeGuru.VERSION)
+    print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % app_version)
     print_and_do('AdvancedInstaller.com /build installer_tmp.aip -force')
     os.remove('installer_tmp.aip')
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
 def package_debian(edition):
-    modname = 'qt.{0}.app'.format(edition)
-    appmod = importlib.import_module(modname)
-    DupeGuru = appmod.DupeGuru
-    
-    if op.exists('build'):
-        shutil.rmtree('build')
+    app_version = get_module_version('core_{}'.format(edition))
     ed = lambda s: s.format(edition)
-    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, DupeGuru.VERSION))
+    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, app_version))
+    if op.exists(destpath):
+        shutil.rmtree(destpath)
     srcpath = op.join(destpath, 'src')
-    help_src = ed('help_{0}')
     os.makedirs(destpath)
     os.makedirs(srcpath)
     shutil.copy('run.py', op.join(srcpath, 'run.py'))
@@ -99,13 +90,12 @@ def package_debian(edition):
     shutil.copy(op.join(qtsrcpath, 'QtCore.so'), qtdestpath)
     shutil.copy(op.join(qtsrcpath, 'QtGui.so'), qtdestpath)
     shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
-    changelogpath = op.join(help_src, 'CHANGELOG')
+    changelogpath = op.join('help', ed('changelog_{}'))
     changelog_dest = op.join(destpath, 'debian', 'changelog')
     project_name = ed('dupeguru-{0}')
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
     build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version)
-    help_name = {'se': 'dupeguru_help', 'me': 'dupeguru_me_help', 'pe': 'dupeguru_pe_help'}[edition]
-    shutil.copytree(op.join(help_src, help_name), op.join(srcpath, 'help'))
+    shutil.copytree(op.join('build', 'help'), op.join(srcpath, 'help'))
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
     compileall.compile_dir(srcpath)
     os.chdir(destpath)
