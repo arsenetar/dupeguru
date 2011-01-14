@@ -118,8 +118,8 @@ http://www.hardcoded.net/licenses/bsd_license
     }
     [removeButton setEnabled:YES];
     NSInteger state = [outline intProperty:@"state" valueAtPath:[outline selectedIndexPath]];
-    NSString *buttonText = state == 2 ? @"Put Back" : @"Remove";
-    [removeButton setTitle:buttonText];
+    NSString *imgName = state == 2 ? @"NSGoLeftTemplate" : @"NSRemoveTemplate";
+    [removeButton setImage:[NSImage imageNamed:imgName]];
 }
 
 /* Delegate */
