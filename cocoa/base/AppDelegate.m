@@ -17,22 +17,57 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegateBase
 - (void)awakeFromNib
 {
+    _resultWindow = nil;
+    _directoryPanel = nil;
+    _detailsPanel = nil;
+    _aboutBox = nil;
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
 }
 
+/* Virtual */
+
 - (PyDupeGuruBase *)py { return py; }
+
+- (ResultWindowBase *)createResultWindow
+{
+    return nil; // must be overriden by all editions
+}
+
+- (DirectoryPanel *)createDirectoryPanel
+{
+    return [[DirectoryPanel alloc] initWithParentApp:self];
+}
+
+- (DetailsPanel *)createDetailsPanel
+{
+    return [[DetailsPanel alloc] initWithPy:py];
+}
+
+- (NSString *)homepageURL
+{
+    return @""; // must be overriden by all editions
+}
+
+/* Public */
+- (ResultWindowBase *)resultWindow
+{
+    if (!_resultWindow)
+        _resultWindow = [self createResultWindow];
+    return _resultWindow;
+}
+
 - (DirectoryPanel *)directoryPanel
 {
     if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
+        _directoryPanel = [self createDirectoryPanel];
     return _directoryPanel;
 }
 
 - (DetailsPanel *)detailsPanel
 {
     if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanel alloc] initWithPy:py];
+        _detailsPanel = [self createDetailsPanel];
     return _detailsPanel;
 }
 
@@ -41,11 +76,9 @@ http://www.hardcoded.net/licenses/bsd_license
     return _recentResults;
 }
 
-- (NSString *)homepageURL
-{
-    return @""; // Virtual
-}
+- (NSMenu *)columnsMenu { return columnsMenu; }
 
+/* Actions */
 - (IBAction)showAboutBox:(id)sender
 {
     if (_aboutBox == nil) {
@@ -81,17 +114,17 @@ http://www.hardcoded.net/licenses/bsd_license
     NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
     NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
     if ([columnsOrder count])
-        [result restoreColumnsPosition:columnsOrder widths:columnsWidth];
+        [[self resultWindow] restoreColumnsPosition:columnsOrder widths:columnsWidth];
     else
-        [result resetColumnsToDefault:nil];
+        [[self resultWindow] resetColumnsToDefault:nil];
     [HSFairwareReminder showNagWithApp:[self py]];
     [py loadSession];
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
-    if (![[result window] isVisible])
-        [result showWindow:NSApp];
+    if (![[[self resultWindow] window] isVisible])
+        [[self resultWindow] showWindow:NSApp];
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -108,8 +141,8 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject: [result getColumnsOrder] forKey:@"columnsOrder"];
-    [ud setObject: [result getColumnsWidth] forKey:@"columnsWidth"];
+    [ud setObject: [[self resultWindow] getColumnsOrder] forKey:@"columnsOrder"];
+    [ud setObject: [[self resultWindow] getColumnsWidth] forKey:@"columnsWidth"];
     NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
     if (sc >= 10) {
         sc = -1;

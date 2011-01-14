@@ -63,6 +63,7 @@
 		CE848A1909DD85810004CB44 /* Consts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE848A1809DD85810004CB44 /* Consts.h */; };
 		CE900AD2109B238600754048 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD1109B238600754048 /* Preferences.xib */; };
 		CE900AD7109B2A9B00754048 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE900AD6109B2A9B00754048 /* MainMenu.xib */; };
+		CEAF803712E07DF000A988DF /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAF803612E07DF000A988DF /* ResultWindow.xib */; };
 		CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB14D28124DFC2800FA7481 /* ResultTable.m */; };
 		CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF07A2112493B200EE5BC0 /* StatsLabel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -170,6 +171,7 @@
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		CE900AD1109B238600754048 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		CE900AD6109B2A9B00754048 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
+		CEAF803612E07DF000A988DF /* ResultWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ResultWindow.xib; path = ../base/xib/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CEB14D26124DFC2800FA7481 /* PyResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTable.h; path = ../base/PyResultTable.h; sourceTree = SOURCE_ROOT; };
 		CEB14D27124DFC2800FA7481 /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
 		CEB14D28124DFC2800FA7481 /* ResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultTable.m; path = ../base/ResultTable.m; sourceTree = SOURCE_ROOT; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				CE900AD6109B2A9B00754048 /* MainMenu.xib */,
+				CEAF803612E07DF000A988DF /* ResultWindow.xib */,
 				CE3FBDD11094637800B72D77 /* DetailsPanel.xib */,
 				CE3FBDD21094637800B72D77 /* DirectoryPanel.xib */,
 				CE900AD1109B238600754048 /* Preferences.xib */,
@@ -502,6 +505,7 @@
 				CE0A0C061175A24800DCA3C6 /* ProblemDialog.xib in Resources */,
 				CE74A12712537F2E008A8DF0 /* FairwareReminder.xib in Resources */,
 				CE4F934612CCA9470067A3AE /* about.xib in Resources */,
+				CEAF803712E07DF000A988DF /* ResultWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

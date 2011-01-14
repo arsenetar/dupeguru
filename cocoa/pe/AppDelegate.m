@@ -13,6 +13,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
+#import "ResultWindow.h"
 
 @implementation AppDelegate
 + (void)initialize
@@ -34,31 +35,26 @@ http://www.hardcoded.net/licenses/bsd_license
     [ud registerDefaults:d];
 }
 
-- (id)init
-{
-    self = [super init];
-    _directoryPanel = nil;
-    return self;
-}
-
-- (DetailsPanel *)detailsPanel
-{
-    if (!_detailsPanel)
-        _detailsPanel = [[DetailsPanelPE alloc] initWithPy:py];
-    return _detailsPanel;
-}
-
 - (NSString *)homepageURL
 {
-    return @"http://www.hardcoded.net/dupeguru_pe/"
+    return @"http://www.hardcoded.net/dupeguru_pe/";
 }
 
-- (DirectoryPanel *)directoryPanel
+- (ResultWindowBase *)createResultWindow
 {
-    if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanelPE alloc] initWithParentApp:self];
-    return _directoryPanel;
+    return [[ResultWindow alloc] initWithParentApp:self];
 }
+
+- (DirectoryPanel *)createDirectoryPanel
+{
+    return [[DirectoryPanelPE alloc] initWithParentApp:self];
+}
+
+- (DetailsPanel *)createDetailsPanel
+{
+    return [[DetailsPanelPE alloc] initWithPy:py];
+}
+
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
@@ -67,7 +63,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
     // index 2 is just after "Clear Ingore List"
     NSMenuItem *mi = [actionsMenu insertItemWithTitle:@"Clear Picture Cache" action:@selector(clearPictureCache:) keyEquivalent:@"P" atIndex:2];
-    [mi setTarget:result];
+    [mi setTarget:[self resultWindow]];
     [mi setKeyEquivalentModifierMask:NSCommandKeyMask|NSShiftKeyMask];
     [super applicationDidFinishLaunching:aNotification];
 }

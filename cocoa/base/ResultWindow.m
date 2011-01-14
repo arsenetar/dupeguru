@@ -14,9 +14,12 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 
 @implementation ResultWindowBase
-- (void)awakeFromNib
+- (id)initWithParentApp:(AppDelegateBase *)aApp;
 {
-    [self window];
+    self = [super initWithWindowNibName:@"ResultWindow"];
+    app = aApp;
+    py = [app py];
+    columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
@@ -31,6 +34,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
+    return self;
 }
 
 - (void)dealloc
@@ -147,7 +151,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)updateOptionSegments
 {
-    [optionsSwitch setSelected:[[(AppDelegateBase *)app detailsPanel] isVisible] forSegment:0];
+    [optionsSwitch setSelected:[[app detailsPanel] isVisible] forSegment:0];
     [optionsSwitch setSelected:[table powerMarkerMode] forSegment:1];
     [optionsSwitch setSelected:[table deltaValuesMode] forSegment:2];
 }
@@ -254,7 +258,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([op runModal] == NSOKButton) {
         NSString *filename = [[op filenames] objectAtIndex:0];
         [py loadResultsFrom:filename];
-        [[(AppDelegateBase *)app recentResults] addFile:filename];
+        [[app recentResults] addFile:filename];
     }
 }
 
@@ -357,7 +361,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [sp setTitle:@"Select a file to save your results to"];
     if ([sp runModal] == NSOKButton) {
         [py saveResultsAs:[sp filename]];
-        [[(AppDelegateBase *)app recentResults] addFile:[sp filename]];
+        [[app recentResults] addFile:[sp filename]];
     }
 }
 
@@ -393,7 +397,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)toggleDetailsPanel:(id)sender
 {
-    [[(AppDelegateBase *)app detailsPanel] toggleVisibility];
+    [[app detailsPanel] toggleVisibility];
     [self updateOptionSegments];
 }
 

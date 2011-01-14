@@ -13,6 +13,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "../../cocoalib/Dialogs.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
+#import "ResultWindow.h"
 #import "Consts.h"
 
 @implementation AppDelegate
@@ -58,15 +59,19 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (NSString *)homepageURL
 {
-    return @"http://www.hardcoded.net/dupeguru_me/"
+    return @"http://www.hardcoded.net/dupeguru_me/";
 }
 
-- (DirectoryPanel *)directoryPanel
+- (ResultWindowBase *)createResultWindow
 {
-    if (!_directoryPanel)
-        _directoryPanel = [[DirectoryPanelME alloc] initWithParentApp:self];
-    return _directoryPanel;
+    return [[ResultWindow alloc] initWithParentApp:self];
 }
+
+- (DirectoryPanel *)createDirectoryPanel
+{
+    return [[DirectoryPanelME alloc] initWithParentApp:self];
+}
+
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
@@ -76,7 +81,7 @@ http://www.hardcoded.net/licenses/bsd_license
     // index 3 is just after "Export Results to XHTML"
     NSMenuItem *mi = [actionsMenu insertItemWithTitle:@"Remove Dead Tracks in iTunes" 
         action:@selector(removeDeadTracks:) keyEquivalent:@"" atIndex:3];
-    [mi setTarget:result];
+    [mi setTarget:[self resultWindow]];
     [super applicationDidFinishLaunching:aNotification];
 }
 @end

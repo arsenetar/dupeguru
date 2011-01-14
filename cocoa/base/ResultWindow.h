@@ -13,23 +13,26 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSTableView.h"
 #import "PyDupeGuru.h"
 
+@class AppDelegateBase;
+
 @interface ResultWindowBase : NSWindowController
 {
 @protected
-    IBOutlet PyDupeGuruBase *py;
-    IBOutlet id app;
     IBOutlet NSSegmentedControl *optionsSwitch;
     IBOutlet HSTableView *matches;
-	IBOutlet NSTextField *stats;
-	IBOutlet NSMenu *columnsMenu;
-	IBOutlet NSSearchField *filterField;
+    IBOutlet NSTextField *stats;
+    IBOutlet NSSearchField *filterField;
     
+    AppDelegateBase *app;
+    PyDupeGuruBase *py;
+    NSMenu *columnsMenu;
     NSMutableArray *_resultColumns;
     NSWindowController *preferencesPanel;
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
 }
+- (id)initWithParentApp:(AppDelegateBase *)app;
 /* Helpers */
 - (void)fillColumnsMenu;
 - (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn;

@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "../../cocoalib/ValueTransformers.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
+#import "ResultWindow.h"
 #import "Consts.h"
 
 @implementation AppDelegate
@@ -50,6 +51,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSString *)homepageURL
 {
     return @"http://www.hardcoded.net/dupeguru/";
+}
+
+- (ResultWindowBase *)createResultWindow
+{
+    return [[ResultWindow alloc] initWithParentApp:self];
 }
 
 - (PyDupeGuru *)py { return (PyDupeGuru *)py; }

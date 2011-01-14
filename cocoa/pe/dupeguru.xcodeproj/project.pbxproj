@@ -26,6 +26,7 @@
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
+		CE7360AC12E07DD000A0888D /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7360AB12E07DD000A0888D /* ResultWindow.xib */; };
 		CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */; };
 		CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A710946CE20078B0DB /* DetailsPanel.xib */; };
 		CE7AC9181119911200D02F6C /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */; };
@@ -115,6 +116,7 @@
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
+		CE7360AB12E07DD000A0888D /* ResultWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ResultWindow.xib; path = ../base/xib/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = ../../base/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE77C8A710946CE20078B0DB /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPanel.xib; sourceTree = "<group>"; };
 		CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				CE031753109B345200517EE6 /* MainMenu.xib */,
+				CE7360AB12E07DD000A0888D /* ResultWindow.xib */,
 				CE77C8A710946CE20078B0DB /* DetailsPanel.xib */,
 				CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */,
 				CE031750109B340A00517EE6 /* Preferences.xib */,
@@ -510,6 +513,7 @@
 				CE0C2AC81177021600BC749F /* ProblemDialog.xib in Resources */,
 				CE1EB60112537FB90034AABB /* FairwareReminder.xib in Resources */,
 				CEC9DB4712CCAA6B003102F0 /* about.xib in Resources */,
+				CE7360AC12E07DD000A0888D /* ResultWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
