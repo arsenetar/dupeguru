@@ -24,6 +24,7 @@ http://www.hardcoded.net/licenses/bsd_license
     _preferencesPanel = nil;
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
+    [[[self directoryPanel] window] makeKeyAndOrderFront:self];
 }
 
 /* Virtual */
@@ -109,6 +110,12 @@ http://www.hardcoded.net/licenses/bsd_license
     [_preferencesPanel showWindow:sender];
 }
 
+- (IBAction)startScanning:(id)sender
+{
+    [[[self resultWindow] window] makeKeyAndOrderFront:sender];
+    [[self resultWindow] startDuplicateScan:sender];
+}
+
 - (IBAction)toggleDirectories:(id)sender
 {
     [[self directoryPanel] toggleVisible:sender];
@@ -132,8 +139,9 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
 {
-    if (![[[self resultWindow] window] isVisible])
-        [[self resultWindow] showWindow:NSApp];
+    if (![[[self directoryPanel] window] isVisible]) {
+        [[self directoryPanel] showWindow:NSApp];
+    }
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender

@@ -11,6 +11,5 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface ResultWindow : ResultWindowBase {}
 - (IBAction)clearPictureCache:(id)sender;
-- (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
 @end

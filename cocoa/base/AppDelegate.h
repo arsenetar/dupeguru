@@ -47,5 +47,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openHelp:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
+- (IBAction)startScanning:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
 @end

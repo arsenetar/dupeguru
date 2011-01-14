@@ -407,11 +407,6 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Notifications */
-- (void)windowWillClose:(NSNotification *)aNotification
-{
-    [NSApp hide:NSApp];
-}
-
 - (void)jobCompleted:(NSNotification *)aNotification
 {
     id lastAction = [[ProgressController mainProgressController] jobId];
@@ -444,10 +439,6 @@ http://www.hardcoded.net/licenses/bsd_license
         if (rowCount == 0)
             [Dialogs showMessage:@"No duplicates found."];
     }
-    
-    // Re-activate toolbar items right after the progress bar stops showing instead of waiting until
-    // a mouse-over is performed
-    [[[self window] toolbar] validateVisibleItems];
 }
 
 - (void)jobInProgress:(NSNotification *)aNotification

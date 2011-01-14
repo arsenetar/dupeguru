@@ -15,5 +15,4 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *_lastAction;
 }
 - (IBAction)resetColumnsToDefault:(id)sender;
-- (IBAction)startDuplicateScan:(id)sender;
 @end
