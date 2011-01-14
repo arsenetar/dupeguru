@@ -27,7 +27,6 @@ http://www.hardcoded.net/licenses/bsd_license
     PyDupeGuruBase *py;
     NSMenu *columnsMenu;
     NSMutableArray *_resultColumns;
-    NSWindowController *preferencesPanel;
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
@@ -67,7 +66,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)resetColumnsToDefault:(id)sender;
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)saveResults:(id)sender;
-- (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)startDuplicateScan:(id)sender;
 - (IBAction)switchSelected:(id)sender;
 - (IBAction)toggleColumn:(id)sender;

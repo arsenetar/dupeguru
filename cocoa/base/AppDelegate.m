@@ -21,6 +21,7 @@ http://www.hardcoded.net/licenses/bsd_license
     _directoryPanel = nil;
     _detailsPanel = nil;
     _aboutBox = nil;
+    _preferencesPanel = nil;
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
 }
@@ -98,6 +99,14 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *p = [b pathForResource:@"index" ofType:@"html" inDirectory:@"help"];
     NSURL *u = [NSURL fileURLWithPath:p];
     [[NSWorkspace sharedWorkspace] openURL:u];
+}
+
+- (IBAction)showPreferencesPanel:(id)sender
+{
+    if (_preferencesPanel == nil) {
+        _preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
+    }
+    [_preferencesPanel showWindow:sender];
 }
 
 - (IBAction)toggleDirectories:(id)sender

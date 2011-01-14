@@ -19,13 +19,8 @@
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -140,7 +135,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>3E17CA47-6688-44FC-963C-CF22D780305F</string>
 							<string>4BD1D94E-8A70-48E1-AF8A-CEDC80CD0A5E</string>
-							<string>8021CD05-A38E-4F80-99DD-7771914CEE06</string>
 							<string>8E5ADD0F-24AD-452A-BE68-464FE9E5E240</string>
 							<string>BA65FFF2-9E56-4E88-AB2E-8FBE2B3D030F</string>
 							<string>F37510C7-955F-4141-9D09-AC2881ADCCFA</string>
@@ -180,9 +174,11 @@
 								<string key="NSToolbarItemPaletteLabel">Options</string>
 								<nil key="NSToolbarItemToolTip"/>
 								<object class="NSSegmentedControl" key="NSToolbarItemView" id="452019408">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {195, 23}}</string>
+									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="993391476">
 										<int key="NSCellFlags">67239424</int>
@@ -228,28 +224,6 @@
 								<bool key="NSToolbarIsUserRemovable">YES</bool>
 								<int key="NSToolbarItemVisibilityPriority">0</int>
 							</object>
-							<object class="NSToolbarItem" id="733675821">
-								<object class="NSMutableString" key="NSToolbarItemIdentifier">
-									<characters key="NS.bytes">8021CD05-A38E-4F80-99DD-7771914CEE06</characters>
-								</object>
-								<string key="NSToolbarItemLabel">Preferences</string>
-								<string key="NSToolbarItemPaletteLabel">Preferences</string>
-								<string key="NSToolbarItemToolTip"/>
-								<nil key="NSToolbarItemView"/>
-								<object class="NSCustomResource" key="NSToolbarItemImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">preferences32</string>
-								</object>
-								<nil key="NSToolbarItemTarget"/>
-								<nil key="NSToolbarItemAction"/>
-								<string key="NSToolbarItemMinSize">{0, 0}</string>
-								<string key="NSToolbarItemMaxSize">{0, 0}</string>
-								<bool key="NSToolbarItemEnabled">YES</bool>
-								<bool key="NSToolbarItemAutovalidates">YES</bool>
-								<int key="NSToolbarItemTag">-1</int>
-								<bool key="NSToolbarIsUserRemovable">YES</bool>
-								<int key="NSToolbarItemVisibilityPriority">0</int>
-							</object>
 							<object class="NSToolbarItem" id="695856706">
 								<object class="NSMutableString" key="NSToolbarItemIdentifier">
 									<characters key="NS.bytes">8E5ADD0F-24AD-452A-BE68-464FE9E5E240</characters>
@@ -258,9 +232,11 @@
 								<string key="NSToolbarItemPaletteLabel">Filter</string>
 								<nil key="NSToolbarItemToolTip"/>
 								<object class="NSSearchField" key="NSToolbarItemView" id="363479146">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">258</int>
 									<string key="NSFrame">{{0, 14}, {81, 22}}</string>
+									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="830851754">
 										<int key="NSCellFlags">343014976</int>
@@ -380,9 +356,11 @@
 								<string key="NSToolbarItemPaletteLabel">Action</string>
 								<nil key="NSToolbarItemToolTip"/>
 								<object class="NSPopUpButton" key="NSToolbarItemView" id="1050768959">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{1, 14}, {40, 25}}</string>
+									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSPopUpButtonCell" key="NSCell" id="302095930">
 										<int key="NSCellFlags">-2076049856</int>
@@ -670,7 +648,6 @@
 						<reference ref="501140424"/>
 						<reference ref="481733947"/>
 						<reference ref="272445295"/>
-						<reference ref="733675821"/>
 						<reference ref="77112286"/>
 						<reference ref="695856706"/>
 						<reference ref="234109357"/>
@@ -684,7 +661,9 @@
 						<reference ref="501140424"/>
 						<reference ref="695856706"/>
 					</object>
-					<reference key="NSToolbarIBSelectableItems" ref="0"/>
+					<object class="NSArray" key="NSToolbarIBSelectableItems" id="0">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+					</object>
 				</object>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<string key="NSWindowContentMinSize">{340, 340}</string>
@@ -960,14 +939,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showPreferencesPanel:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="733675821"/>
-					</object>
-					<int key="connectionID">49</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">deleteMarked:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="799999563"/>
@@ -1205,7 +1176,6 @@
 							<reference ref="234109357"/>
 							<reference ref="695856706"/>
 							<reference ref="77112286"/>
-							<reference ref="733675821"/>
 							<reference ref="272445295"/>
 							<reference ref="481733947"/>
 							<reference ref="501140424"/>
@@ -1328,11 +1298,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1050768959"/>
 						</object>
-						<reference key="parent" ref="983262794"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="733675821"/>
 						<reference key="parent" ref="983262794"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1555,8 +1520,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>-1.IBPluginDependency</string>
-					<string>-2.IBPluginDependency</string>
 					<string>-3.IBPluginDependency</string>
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
@@ -1570,9 +1533,9 @@
 					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
+					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
-					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
@@ -1647,8 +1610,6 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{324, 305}, {557, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1769,10 +1730,12 @@
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showPreferencesPanel:</string>
 							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1786,6 +1749,7 @@
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showPreferencesPanel:</string>
 							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1803,6 +1767,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showPreferencesPanel:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">toggleDirectories:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -1812,27 +1780,31 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>columnsMenu</string>
 							<string>py</string>
 							<string>recentResultsMenu</string>
-							<string>result</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSMenu</string>
 							<string>PyDupeGuruBase</string>
 							<string>NSMenu</string>
-							<string>ResultWindowBase</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>columnsMenu</string>
 							<string>py</string>
 							<string>recentResultsMenu</string>
-							<string>result</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">columnsMenu</string>
+								<string key="candidateClassName">NSMenu</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">py</string>
 								<string key="candidateClassName">PyDupeGuruBase</string>
@@ -1840,10 +1812,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">recentResultsMenu</string>
 								<string key="candidateClassName">NSMenu</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">result</string>
-								<string key="candidateClassName">ResultWindowBase</string>
 							</object>
 						</object>
 					</object>
@@ -1976,7 +1944,6 @@
 							<string>resetColumnsToDefault:</string>
 							<string>revealSelected:</string>
 							<string>saveResults:</string>
-							<string>showPreferencesPanel:</string>
 							<string>startDuplicateScan:</string>
 							<string>switchSelected:</string>
 							<string>toggleColumn:</string>
@@ -1986,7 +1953,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2045,7 +2011,6 @@
 							<string>resetColumnsToDefault:</string>
 							<string>revealSelected:</string>
 							<string>saveResults:</string>
-							<string>showPreferencesPanel:</string>
 							<string>startDuplicateScan:</string>
 							<string>switchSelected:</string>
 							<string>toggleColumn:</string>
@@ -2148,10 +2113,6 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">showPreferencesPanel:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">startDuplicateScan:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -2181,22 +2142,16 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>app</string>
-							<string>columnsMenu</string>
 							<string>filterField</string>
 							<string>matches</string>
 							<string>optionsSwitch</string>
-							<string>py</string>
 							<string>stats</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>NSMenu</string>
 							<string>NSSearchField</string>
 							<string>HSTableView</string>
 							<string>NSSegmentedControl</string>
-							<string>PyDupeGuruBase</string>
 							<string>NSTextField</string>
 						</object>
 					</object>
@@ -2204,24 +2159,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>app</string>
-							<string>columnsMenu</string>
 							<string>filterField</string>
 							<string>matches</string>
 							<string>optionsSwitch</string>
-							<string>py</string>
 							<string>stats</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">app</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">columnsMenu</string>
-								<string key="candidateClassName">NSMenu</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">filterField</string>
 								<string key="candidateClassName">NSSearchField</string>
@@ -2233,10 +2177,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">optionsSwitch</string>
 								<string key="candidateClassName">NSSegmentedControl</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">py</string>
-								<string key="candidateClassName">PyDupeGuruBase</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">stats</string>
@@ -2847,7 +2787,6 @@
 				<string>NSMenuMixedState</string>
 				<string>NSSwitch</string>
 				<string>folder32</string>
-				<string>preferences32</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2856,7 +2795,6 @@
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
 				<string>{15, 15}</string>
-				<string>{32, 32}</string>
 				<string>{32, 32}</string>
 			</object>
 		</object>

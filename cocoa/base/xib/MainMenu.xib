@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="619"/>
+			<integer value="57"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1031,20 +1031,20 @@
 					<int key="connectionID">1266</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showPreferencesPanel:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="941940359"/>
-					</object>
-					<int key="connectionID">1267</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">columnsMenu</string>
 						<reference key="source" ref="91622651"/>
 						<reference key="destination" ref="696587160"/>
 					</object>
 					<int key="connectionID">1269</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPreferencesPanel:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="941940359"/>
+					</object>
+					<int key="connectionID">1270</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1884,7 +1884,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1269</int>
+			<int key="maxID">1270</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1907,10 +1907,12 @@
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showPreferencesPanel:</string>
 							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1924,6 +1926,7 @@
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showPreferencesPanel:</string>
 							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1938,6 +1941,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showAboutBox:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showPreferencesPanel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -2192,7 +2199,6 @@
 							<string>resetColumnsToDefault:</string>
 							<string>revealSelected:</string>
 							<string>saveResults:</string>
-							<string>showPreferencesPanel:</string>
 							<string>startDuplicateScan:</string>
 							<string>switchSelected:</string>
 							<string>toggleColumn:</string>
@@ -2202,7 +2208,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2261,7 +2266,6 @@
 							<string>resetColumnsToDefault:</string>
 							<string>revealSelected:</string>
 							<string>saveResults:</string>
-							<string>showPreferencesPanel:</string>
 							<string>startDuplicateScan:</string>
 							<string>switchSelected:</string>
 							<string>toggleColumn:</string>
@@ -2361,10 +2365,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">saveResults:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showPreferencesPanel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

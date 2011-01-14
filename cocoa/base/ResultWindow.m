@@ -22,7 +22,6 @@ http://www.hardcoded.net/licenses/bsd_license
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
-    preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
     table = [[ResultTable alloc] initWithPyParent:py view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
     problemDialog = [[ProblemDialog alloc] initWithPy:py];
@@ -40,7 +39,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [table release];
-    [preferencesPanel release];
     [statsLabel release];
     [problemDialog release];
     [super dealloc];
@@ -346,11 +344,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)revealSelected:(id)sender
 {
     [py revealSelected];
-}
-
-- (IBAction)showPreferencesPanel:(id)sender
-{
-    [preferencesPanel showWindow:sender];
 }
 
 - (IBAction)saveResults:(id)sender

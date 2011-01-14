@@ -60,9 +60,6 @@
 		CEF12A7E124DFD400087B51D /* HSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A7D124DFD400087B51D /* HSTableView.m */; };
 		CEF12A84124DFD620087B51D /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A83124DFD620087B51D /* ResultTable.m */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
-		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
-		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
-		CEFCDE2D0AB0418600C33A93 /* dgpe_logo_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFCDE2C0AB0418600C33A93 /* dgpe_logo_32.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,9 +178,6 @@
 		CEF12A82124DFD620087B51D /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
 		CEF12A83124DFD620087B51D /* ResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultTable.m; path = ../base/ResultTable.m; sourceTree = SOURCE_ROOT; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = ../../images/details32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = ../../images/preferences32.png; sourceTree = SOURCE_ROOT; };
-		CEFCDE2C0AB0418600C33A93 /* dgpe_logo_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dgpe_logo_32.png; path = ../../images/dgpe_logo_32.png; sourceTree = SOURCE_ROOT; };
 		CEFF18A009A4D387005E6321 /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -436,9 +430,6 @@
 		CEFC294309C89E0000D9F998 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CEFCDE2C0AB0418600C33A93 /* dgpe_logo_32.png */,
-				CEFC295309C89FF200D9F998 /* details32.png */,
-				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
 			);
 			name = images;
@@ -500,9 +491,6 @@
 				CE073F6309CAE1A3005C1D2F /* help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
-				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
-				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
-				CEFCDE2D0AB0418600C33A93 /* dgpe_logo_32.png in Resources */,
 				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
 				CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */,
 				CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */,

@@ -23,6 +23,7 @@ http://www.hardcoded.net/licenses/bsd_license
     ResultWindowBase *_resultWindow;
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
+    NSWindowController *_preferencesPanel;
     HSAboutBox *_aboutBox;
     HSRecentFiles *_recentResults;
 }
@@ -45,5 +46,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showAboutBox:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openHelp:(id)sender;
+- (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)toggleDirectories:(id)sender;
 @end

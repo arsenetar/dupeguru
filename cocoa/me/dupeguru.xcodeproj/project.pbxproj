@@ -68,8 +68,6 @@
 		CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF07A2112493B200EE5BC0 /* StatsLabel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEFC294609C89E3D00D9F998 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
-		CEFC295509C89FF200D9F998 /* details32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295309C89FF200D9F998 /* details32.png */; };
-		CEFC295609C89FF200D9F998 /* preferences32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC295409C89FF200D9F998 /* preferences32.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,8 +179,6 @@
 		CEDF07A2112493B200EE5BC0 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295309C89FF200D9F998 /* details32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details32.png; path = ../../images/details32.png; sourceTree = SOURCE_ROOT; };
-		CEFC295409C89FF200D9F998 /* preferences32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = preferences32.png; path = ../../images/preferences32.png; sourceTree = SOURCE_ROOT; };
 		CEFF18A009A4D387005E6321 /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -429,8 +425,6 @@
 		CEFC294309C89E0000D9F998 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CEFC295309C89FF200D9F998 /* details32.png */,
-				CEFC295409C89FF200D9F998 /* preferences32.png */,
 				CEFC294509C89E3D00D9F998 /* folder32.png */,
 			);
 			name = images;
@@ -493,8 +487,6 @@
 				CE073F6309CAE1A3005C1D2F /* help in Resources */,
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
-				CEFC295509C89FF200D9F998 /* details32.png in Resources */,
-				CEFC295609C89FF200D9F998 /* preferences32.png in Resources */,
 				CE6E0E9F1054EB97008D9390 /* dsa_pub.pem in Resources */,
 				CE3FBDD31094637800B72D77 /* DetailsPanel.xib in Resources */,
 				CE3FBDD41094637800B72D77 /* DirectoryPanel.xib in Resources */,
