@@ -15,13 +15,13 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @implementation ResultWindow
 /* Override */
-- (void)awakeFromNib
+- (id)initWithParentApp:(AppDelegateBase *)aApp;
 {
-    [super awakeFromNib];
-    [[self window] setTitle:@"dupeGuru Picture Edition"];
+    self = [super initWithParentApp:aApp];
     NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
     [deltaColumns addIndex:5];
     [table setDeltaColumns:deltaColumns];
+    return self;
 }
 
 /* Actions */

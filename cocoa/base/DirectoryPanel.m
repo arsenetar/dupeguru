@@ -18,6 +18,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window];
     AppDelegateBase *app = aParentApp;
     _py = [app py];
+    _alwaysShowPopUp = NO;
+    [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
     [_recentDirectories setDelegate:self];
     outline = [[DirectoryOutline alloc] initWithPyParent:_py view:outlineView];
@@ -32,6 +34,16 @@ http://www.hardcoded.net/licenses/bsd_license
     [outline release];
     [_recentDirectories release];
     [super dealloc];
+}
+
+/* Virtual */
+
+- (void)fillPopUpMenu
+{
+    NSMenu *m = [addButtonPopUp menu];
+    NSMenuItem *mi = [m addItemWithTitle:@"Add New Directory..." action:@selector(askForDirectory:) keyEquivalent:@""];
+    [mi setTarget:self];
+    [m addItem:[NSMenuItem separatorItem]];
 }
 
 /* Actions */
@@ -53,7 +65,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)popupAddDirectoryMenu:(id)sender
 {
-    if ([[_recentDirectories filepaths] count] == 0) {
+    if ((!_alwaysShowPopUp) && ([[_recentDirectories filepaths] count] == 0)) {
         [self askForDirectory:sender];
     }
     else {

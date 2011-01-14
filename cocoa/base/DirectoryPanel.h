@@ -21,8 +21,11 @@ http://www.hardcoded.net/licenses/bsd_license
     PyDupeGuruBase *_py;
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
+    BOOL _alwaysShowPopUp;
 }
 - (id)initWithParentApp:(id)aParentApp;
+
+- (void)fillPopUpMenu; // Virtual
 
 - (IBAction)askForDirectory:(id)sender;
 - (IBAction)popupAddDirectoryMenu:(id)sender;

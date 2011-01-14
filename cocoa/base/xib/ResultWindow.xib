@@ -116,7 +116,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{47, 310}, {557, 400}}</string>
 				<int key="NSWTFlags">1618477056</int>
-				<string key="NSWindowTitle">dupeGuru</string>
+				<string key="NSWindowTitle">dupeGuru Results</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSToolbar" key="NSViewClass" id="983262794">
 					<object class="NSMutableString" key="NSToolbarIdentifier">
