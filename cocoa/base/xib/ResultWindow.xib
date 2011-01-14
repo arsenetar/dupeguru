@@ -892,14 +892,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleDirectories:</string>
-						<reference key="source" ref="1003"/>
-						<reference key="destination" ref="272445295"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">deleteMarked:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="799999563"/>
@@ -1089,6 +1081,14 @@
 						<reference key="destination" ref="511116146"/>
 					</object>
 					<int key="connectionID">81</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showDirectoryWindow:</string>
+						<reference key="source" ref="1003"/>
+						<reference key="destination" ref="272445295"/>
+					</object>
+					<int key="connectionID">82</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1668,7 +1668,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">81</int>
+			<int key="maxID">82</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1680,15 +1680,19 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadResults:</string>
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showDirectoryWindow:</string>
 							<string>showPreferencesPanel:</string>
+							<string>showResultWindow:</string>
 							<string>startScanning:</string>
-							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1701,15 +1705,21 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadResults:</string>
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showDirectoryWindow:</string>
 							<string>showPreferencesPanel:</string>
+							<string>showResultWindow:</string>
 							<string>startScanning:</string>
-							<string>toggleDirectories:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">loadResults:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">openHelp:</string>
 								<string key="candidateClassName">id</string>
@@ -1723,15 +1733,19 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showDirectoryWindow:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showPreferencesPanel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">startScanning:</string>
+								<string key="name">showResultWindow:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">toggleDirectories:</string>
+								<string key="name">startScanning:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -1869,7 +1883,6 @@
 							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
-							<string>loadResults:</string>
 							<string>markAll:</string>
 							<string>markInvert:</string>
 							<string>markNone:</string>
@@ -1920,7 +1933,6 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
-							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -1936,7 +1948,6 @@
 							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
-							<string>loadResults:</string>
 							<string>markAll:</string>
 							<string>markInvert:</string>
 							<string>markNone:</string>
@@ -1993,10 +2004,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">invokeCustomCommand:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">loadResults:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

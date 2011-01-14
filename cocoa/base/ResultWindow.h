@@ -52,7 +52,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;
 - (IBAction)invokeCustomCommand:(id)sender;
-- (IBAction)loadResults:(id)sender;
 - (IBAction)markAll:(id)sender;
 - (IBAction)markInvert:(id)sender;
 - (IBAction)markNone:(id)sender;

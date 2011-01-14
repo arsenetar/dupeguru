@@ -30,7 +30,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)askForDirectory:(id)sender;
 - (IBAction)popupAddDirectoryMenu:(id)sender;
 - (IBAction)removeSelectedDirectory:(id)sender;
-- (IBAction)toggleVisible:(id)sender;
 
 - (void)addDirectory:(NSString *)directory;
 - (void)refreshRemoveButtonText;

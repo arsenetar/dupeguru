@@ -81,12 +81,20 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSMenu *)columnsMenu { return columnsMenu; }
 
 /* Actions */
-- (IBAction)showAboutBox:(id)sender
+- (IBAction)loadResults:(id)sender
 {
-    if (_aboutBox == nil) {
-        _aboutBox = [[HSAboutBox alloc] initWithApp:py];
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setCanChooseFiles:YES];
+    [op setCanChooseDirectories:NO];
+    [op setCanCreateDirectories:NO];
+    [op setAllowsMultipleSelection:NO];
+    [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
+    [op setTitle:@"Select a results file to load"];
+    if ([op runModal] == NSOKButton) {
+        NSString *filename = [[op filenames] objectAtIndex:0];
+        [py loadResultsFrom:filename];
+        [[self recentResults] addFile:filename];
     }
-    [[_aboutBox window] makeKeyAndOrderFront:sender];
 }
 
 - (IBAction)openWebsite:(id)sender
@@ -102,6 +110,19 @@ http://www.hardcoded.net/licenses/bsd_license
     [[NSWorkspace sharedWorkspace] openURL:u];
 }
 
+- (IBAction)showAboutBox:(id)sender
+{
+    if (_aboutBox == nil) {
+        _aboutBox = [[HSAboutBox alloc] initWithApp:py];
+    }
+    [[_aboutBox window] makeKeyAndOrderFront:sender];
+}
+
+- (IBAction)showDirectoryWindow:(id)sender
+{
+    [[[self directoryPanel] window] makeKeyAndOrderFront:nil];
+}
+
 - (IBAction)showPreferencesPanel:(id)sender
 {
     if (_preferencesPanel == nil) {
@@ -110,16 +131,16 @@ http://www.hardcoded.net/licenses/bsd_license
     [_preferencesPanel showWindow:sender];
 }
 
+- (IBAction)showResultWindow:(id)sender
+{
+    [[[self resultWindow] window] makeKeyAndOrderFront:nil];
+}
+
 - (IBAction)startScanning:(id)sender
 {
-    [[[self resultWindow] window] makeKeyAndOrderFront:sender];
     [[self resultWindow] startDuplicateScan:sender];
 }
 
-- (IBAction)toggleDirectories:(id)sender
-{
-    [[self directoryPanel] toggleVisible:sender];
-}
 
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

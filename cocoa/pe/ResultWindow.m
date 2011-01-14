@@ -67,16 +67,10 @@ http://www.hardcoded.net/licenses/bsd_license
     }
     if (r == 3) {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];
-        [app toggleDirectories:nil];
     }
     if (r == 4) {
         [Dialogs showMessage:@"The iPhoto application couldn't be found."];
     }
-}
-
-- (IBAction)toggleDirectories:(id)sender
-{
-    [(AppDelegate *)app toggleDirectories:sender];
 }
 
 /* Public */

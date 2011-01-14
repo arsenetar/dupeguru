@@ -59,10 +59,8 @@ http://www.hardcoded.net/licenses/bsd_license
     int r = n2i([py doScan]);
     if (r != 0)
         [[ProgressController mainProgressController] hide];
-    if (r == 3)
-    {
+    if (r == 3) {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];
-        [app toggleDirectories:nil];
     }
 
 }

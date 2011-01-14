@@ -70,10 +70,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
     [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
     NSInteger r = n2i([py doScan]);
-    if (r == 3)
-    {
+    if (r == 3) {
         [Dialogs showMessage:@"The selected directories contain no scannable file."];
-        [app toggleDirectories:nil];
     }
 }
 

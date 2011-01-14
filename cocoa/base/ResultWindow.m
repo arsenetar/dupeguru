@@ -244,22 +244,6 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)loadResults:(id)sender
-{
-    NSOpenPanel *op = [NSOpenPanel openPanel];
-    [op setCanChooseFiles:YES];
-    [op setCanChooseDirectories:NO];
-    [op setCanCreateDirectories:NO];
-    [op setAllowsMultipleSelection:NO];
-    [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [op setTitle:@"Select a results file to load"];
-    if ([op runModal] == NSOKButton) {
-        NSString *filename = [[op filenames] objectAtIndex:0];
-        [py loadResultsFrom:filename];
-        [[app recentResults] addFile:filename];
-    }
-}
-
 - (IBAction)markAll:(id)sender
 {
     [py markAll];
@@ -448,6 +432,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)jobStarted:(NSNotification *)aNotification
 {
+    [[self window] makeKeyAndOrderFront:nil];
     NSDictionary *ui = [aNotification userInfo];
     NSString *desc = [ui valueForKey:@"desc"];
     [[ProgressController mainProgressController] setJobDesc:desc];

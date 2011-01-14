@@ -92,11 +92,6 @@ http://www.hardcoded.net/licenses/bsd_license
     [self refreshRemoveButtonText];
 }
 
-- (IBAction)toggleVisible:(id)sender
-{
-    [[self window] makeKeyAndOrderFront:nil];
-}
-
 /* Public */
 - (void)addDirectory:(NSString *)directory
 {

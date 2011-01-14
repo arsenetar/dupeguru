@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="57"/>
+			<integer value="24"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -461,8 +461,8 @@
 								<object class="NSMenuItem" id="517397504">
 									<reference key="NSMenu" ref="600111647"/>
 									<string key="NSTitle">Invoke Custom Command</string>
-									<string key="NSKeyEquiv">i</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string key="NSKeyEquiv">C</string>
+									<int key="NSKeyEquivModMask">262144</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="34697260"/>
 									<reference key="NSMixedImage" ref="201180191"/>
@@ -541,11 +541,18 @@
 							<string key="NSTitle">Window</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSMenuItem" id="937862901">
+									<reference key="NSMenu" ref="472719764"/>
+									<string key="NSTitle">Results Window</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="34697260"/>
+									<reference key="NSMixedImage" ref="201180191"/>
+								</object>
 								<object class="NSMenuItem" id="571301982">
 									<reference key="NSMenu" ref="472719764"/>
-									<string key="NSTitle">Directory Panel</string>
-									<string key="NSKeyEquiv">3</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string key="NSTitle">Directories Window</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="34697260"/>
 									<reference key="NSMixedImage" ref="201180191"/>
@@ -553,7 +560,7 @@
 								<object class="NSMenuItem" id="961037837">
 									<reference key="NSMenu" ref="472719764"/>
 									<string key="NSTitle">Details Panel</string>
-									<string key="NSKeyEquiv">4</string>
+									<string key="NSKeyEquiv">i</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="34697260"/>
@@ -749,14 +756,6 @@
 						<reference key="destination" ref="875360857"/>
 					</object>
 					<int key="connectionID">614</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleDirectories:</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="571301982"/>
-					</object>
-					<int key="connectionID">758</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -968,14 +967,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">startDuplicateScan:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="1035429435"/>
-					</object>
-					<int key="connectionID">1259</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">switchSelected:</string>
 						<reference key="source" ref="83466988"/>
 						<reference key="destination" ref="798897608"/>
@@ -1046,6 +1037,30 @@
 					</object>
 					<int key="connectionID">1270</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">startScanning:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="1035429435"/>
+					</object>
+					<int key="connectionID">1271</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showDirectoryWindow:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="571301982"/>
+					</object>
+					<int key="connectionID">1273</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showResultWindow:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="937862901"/>
+					</object>
+					<int key="connectionID">1274</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1115,6 +1130,7 @@
 							<reference ref="424012835"/>
 							<reference ref="571301982"/>
 							<reference ref="762484626"/>
+							<reference ref="937862901"/>
 						</object>
 						<reference key="parent" ref="751320875"/>
 					</object>
@@ -1565,6 +1581,11 @@
 						</object>
 						<reference key="parent" ref="356425059"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1272</int>
+						<reference key="object" ref="937862901"/>
+						<reference key="parent" ref="472719764"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1603,6 +1624,7 @@
 					<string>1239.IBPluginDependency</string>
 					<string>1240.IBEditorWindowLastContentRect</string>
 					<string>1240.IBPluginDependency</string>
+					<string>1272.IBPluginDependency</string>
 					<string>134.IBPluginDependency</string>
 					<string>134.ImportedFromIB2</string>
 					<string>136.IBPluginDependency</string>
@@ -1743,7 +1765,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{242, 685}, {258, 83}}</string>
+					<string>{{538, 738}, {258, 83}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1753,7 +1775,6 @@
 					<string>{{500, 742}, {64, 6}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1768,13 +1789,15 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{531, 625}, {193, 143}}</string>
+					<string>{{827, 658}, {208, 163}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{140, 768}, {523, 20}}</string>
+					<string>{{436, 821}, {523, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1798,7 +1821,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{328, 455}, {383, 313}}</string>
+					<string>{{624, 508}, {383, 313}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1818,7 +1841,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{397, 762}, {64, 6}}</string>
+					<string>{{693, 815}, {64, 6}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1848,7 +1871,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{475, 725}, {167, 43}}</string>
+					<string>{{771, 778}, {167, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1857,7 +1880,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{284, 615}, {188, 153}}</string>
+					<string>{{580, 668}, {188, 153}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1884,7 +1907,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1270</int>
+			<int key="maxID">1274</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1904,14 +1927,20 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadResults:</string>
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showDirectoryWindow:</string>
 							<string>showPreferencesPanel:</string>
-							<string>toggleDirectories:</string>
+							<string>showResultWindow:</string>
+							<string>startScanning:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1923,14 +1952,21 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadResults:</string>
 							<string>openHelp:</string>
 							<string>openWebsite:</string>
 							<string>showAboutBox:</string>
+							<string>showDirectoryWindow:</string>
 							<string>showPreferencesPanel:</string>
-							<string>toggleDirectories:</string>
+							<string>showResultWindow:</string>
+							<string>startScanning:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">loadResults:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">openHelp:</string>
 								<string key="candidateClassName">id</string>
@@ -1944,11 +1980,19 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showDirectoryWindow:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showPreferencesPanel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">toggleDirectories:</string>
+								<string key="name">showResultWindow:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">startScanning:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -2130,46 +2174,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ResultWindow</string>
-					<string key="superclassName">ResultWindowBase</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>resetColumnsToDefault:</string>
-							<string>startDuplicateScan:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>resetColumnsToDefault:</string>
-							<string>startDuplicateScan:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">resetColumnsToDefault:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">startDuplicateScan:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">ResultWindow.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">ResultWindowBase</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -2185,7 +2189,6 @@
 							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
-							<string>loadResults:</string>
 							<string>markAll:</string>
 							<string>markInvert:</string>
 							<string>markNone:</string>
@@ -2236,7 +2239,6 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
-							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -2252,7 +2254,6 @@
 							<string>hardlinkMarked:</string>
 							<string>ignoreSelected:</string>
 							<string>invokeCustomCommand:</string>
-							<string>loadResults:</string>
 							<string>markAll:</string>
 							<string>markInvert:</string>
 							<string>markNone:</string>
@@ -2309,10 +2310,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">invokeCustomCommand:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">loadResults:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -2956,7 +2953,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../se/dupeguru.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../me/dupeguru.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>

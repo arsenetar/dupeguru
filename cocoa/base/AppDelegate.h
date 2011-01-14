@@ -43,10 +43,12 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSMenu *)columnsMenu;
 
 /* Actions */
-- (IBAction)showAboutBox:(id)sender;
+- (IBAction)loadResults:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openHelp:(id)sender;
+- (IBAction)showAboutBox:(id)sender;
+- (IBAction)showDirectoryWindow:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
+- (IBAction)showResultWindow:(id)sender;
 - (IBAction)startScanning:(id)sender;
-- (IBAction)toggleDirectories:(id)sender;
 @end
