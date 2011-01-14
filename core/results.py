@@ -114,7 +114,7 @@ class Results(Markable):
                 self.__group_of_duplicate[dupe] = g
                 if not hasattr(dupe, 'is_ref'):
                     dupe.is_ref = False
-        self.is_modified = True
+        self.is_modified = bool(self.__groups)
         old_filters = nonone(self.__filters, [])
         self.apply_filter(None)
         for filter_str in old_filters:

@@ -72,6 +72,11 @@ class TestCaseResultsEmpty:
     def test_is_modified(self):
         assert not self.results.is_modified
     
+    def test_is_modified_after_setting_empty_group(self):
+        # Don't consider results as modified if they're empty
+        self.results.groups = []
+        assert not self.results.is_modified
+    
 
 class TestCaseResultsWithSomeGroups:
     def setup_method(self, method):
