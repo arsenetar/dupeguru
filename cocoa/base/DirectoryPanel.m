@@ -12,12 +12,12 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "AppDelegate.h"
 
 @implementation DirectoryPanel
-- (id)initWithParentApp:(id)aParentApp
+- (id)initWithParentApp:(AppDelegateBase *)aParentApp
 {
     self = [super initWithWindowNibName:@"DirectoryPanel"];
     [self window];
-    AppDelegateBase *app = aParentApp;
-    _py = [app py];
+    _app = aParentApp;
+    _py = [_app py];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
@@ -71,6 +71,25 @@ http://www.hardcoded.net/licenses/bsd_license
     else {
         [addButtonPopUp selectItem:nil];
         [[addButtonPopUp cell] performClickWithFrame:[sender frame] inView:[sender superview]];
+    }
+}
+
+- (IBAction)popupLoadRecentMenu:(id)sender
+{
+    if ([[[_app recentResults] filepaths] count] > 0) {
+        NSMenu *m = [loadRecentButtonPopUp menu];
+        while ([m numberOfItems] > 0) {
+            [m removeItemAtIndex:0];
+        }
+        NSMenuItem *mi = [m addItemWithTitle:@"Load from file..." action:@selector(loadResults:) keyEquivalent:@""];
+        [mi setTarget:_app];
+        [m addItem:[NSMenuItem separatorItem]];
+        [[_app recentResults] fillMenu:m];
+        [loadRecentButtonPopUp selectItem:nil];
+        [[loadRecentButtonPopUp cell] performClickWithFrame:[sender frame] inView:[sender superview]];
+    }
+    else {
+        [_app loadResults:nil];
     }
 }
 

@@ -17,13 +17,13 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegateBase
 - (void)awakeFromNib
 {
-    _resultWindow = nil;
-    _directoryPanel = nil;
-    _detailsPanel = nil;
-    _aboutBox = nil;
-    _preferencesPanel = nil;
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
+    _resultWindow = [self createResultWindow];
+    _directoryPanel = [self createDirectoryPanel];
+    _detailsPanel = nil; // Lazily loaded
+    _aboutBox = nil; // Lazily loaded
+    _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
 }
 
@@ -54,15 +54,11 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Public */
 - (ResultWindowBase *)resultWindow
 {
-    if (!_resultWindow)
-        _resultWindow = [self createResultWindow];
     return _resultWindow;
 }
 
 - (DirectoryPanel *)directoryPanel
 {
-    if (!_directoryPanel)
-        _directoryPanel = [self createDirectoryPanel];
     return _directoryPanel;
 }
 

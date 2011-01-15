@@ -12,23 +12,28 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "DirectoryOutline.h"
 #import "PyDupeGuru.h"
 
+@class AppDelegateBase;
+
 @interface DirectoryPanel : NSWindowController
 {
     IBOutlet NSPopUpButton *addButtonPopUp;
+    IBOutlet NSPopUpButton *loadRecentButtonPopUp;
     IBOutlet HSOutlineView *outlineView;
     IBOutlet NSButton *removeButton;
     
+    AppDelegateBase *_app;
     PyDupeGuruBase *_py;
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
     BOOL _alwaysShowPopUp;
 }
-- (id)initWithParentApp:(id)aParentApp;
+- (id)initWithParentApp:(AppDelegateBase *)aParentApp;
 
 - (void)fillPopUpMenu; // Virtual
 
 - (IBAction)askForDirectory:(id)sender;
 - (IBAction)popupAddDirectoryMenu:(id)sender;
+- (IBAction)popupLoadRecentMenu:(id)sender;
 - (IBAction)removeSelectedDirectory:(id)sender;
 
 - (void)addDirectory:(NSString *)directory;
