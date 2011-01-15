@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "../base/ResultWindow.h"
-#import "DirectoryPanel.h"
 
 @interface ResultWindow : ResultWindowBase {}
 - (IBAction)removeDeadTracks:(id)sender;

@@ -44,6 +44,26 @@ http://www.hardcoded.net/licenses/bsd_license
     [super dealloc];
 }
 
+/* Virtual */
+- (void)initResultColumns
+{
+}
+
+- (void)setScanOptions
+{
+}
+
+- (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode
+{
+    if (errorCode == 0) {
+        return nil;
+    }
+    if (errorCode == 3) {
+        return @"The selected directories contain no scannable file.";
+    }
+    return @"Unknown Error.";
+}
+
 /* Helpers */
 - (void)fillColumnsMenu
 {
@@ -94,11 +114,6 @@ http://www.hardcoded.net/licenses/bsd_license
         [result setObject:width forKey:colId];
     }
     return result;
-}
-
-- (void)initResultColumns
-{
-    // Virtual
 }
 
 - (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
@@ -344,7 +359,17 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)startDuplicateScan:(id)sender
 {
-    // Virtual
+    if ([py resultsAreModified]) {
+        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
+            return;
+    }
+    [self setScanOptions];
+    NSInteger r = n2i([py doScan]);
+    NSString *errorMsg = [self getScanErrorMessageForCode:r];
+    if (errorMsg != nil) {
+        [[ProgressController mainProgressController] hide];
+        [Dialogs showMessage:errorMsg];
+    }
 }
 
 - (IBAction)switchSelected:(id)sender

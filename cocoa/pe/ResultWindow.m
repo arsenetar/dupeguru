@@ -8,10 +8,8 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import "ResultWindow.h"
 #import "Dialogs.h"
-#import "ProgressController.h"
 #import "Utils.h"
-#import "AppDelegate.h"
-#import "Consts.h"
+#import "PyDupeGuru.h"
 
 @implementation ResultWindow
 /* Override */
@@ -22,6 +20,40 @@ http://www.hardcoded.net/licenses/bsd_license
     [deltaColumns addIndex:5];
     [table setDeltaColumns:deltaColumns];
     return self;
+}
+
+- (void)initResultColumns
+{
+    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
+    _resultColumns = [[NSMutableArray alloc] init];
+    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
+    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:sizeCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Dimensions" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Modification" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Match %" width:58 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
+}
+
+- (void)setScanOptions
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    PyDupeGuru *_py = (PyDupeGuru *)py;
+    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
+    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
+}
+
+- (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode
+{
+    if (errorCode == 4) {
+        return @"The iPhoto application couldn't be found.";
+    }
+    return [super getScanErrorMessageForCode:errorCode];
 }
 
 /* Actions */
@@ -47,46 +79,5 @@ http://www.hardcoded.net/licenses/bsd_license
     [columnsWidth setObject:i2n(73) forKey:@"4"];
     [columnsWidth setObject:i2n(58) forKey:@"6"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
-}
-
-- (IBAction)startDuplicateScan:(id)sender
-{
-    if ([py resultsAreModified]) {
-        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
-            return;
-    }
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    PyDupeGuru *_py = (PyDupeGuru *)py;
-    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
-    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
-    [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
-    int r = n2i([py doScan]);
-    if (r != 0) {
-        [[ProgressController mainProgressController] hide];
-    }
-    if (r == 3) {
-        [Dialogs showMessage:@"The selected directories contain no scannable file."];
-    }
-    if (r == 4) {
-        [Dialogs showMessage:@"The iPhoto application couldn't be found."];
-    }
-}
-
-/* Public */
-- (void)initResultColumns
-{
-    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
-    _resultColumns = [[NSMutableArray alloc] init];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
-    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Dimensions" width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Match %" width:58 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
 }
 @end

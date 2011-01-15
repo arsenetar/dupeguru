@@ -7,20 +7,49 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "ResultWindow.h"
-#import "../../cocoalib/Dialogs.h"
-#import "../../cocoalib/ProgressController.h"
-#import "../../cocoalib/Utils.h"
-#import "AppDelegate.h"
-#import "Consts.h"
+#import "Utils.h"
+#import "PyDupeGuru.h"
 
 @implementation ResultWindow
 /* Override */
-- (void)awakeFromNib
+- (id)initWithParentApp:(AppDelegateBase *)aApp;
 {
-    [super awakeFromNib];
+    self = [super initWithParentApp:aApp];
     NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
     [deltaColumns addIndex:4];
     [table setDeltaColumns:deltaColumns];
+    return self;
+}
+
+- (void)initResultColumns
+{
+    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
+    _resultColumns = [[NSMutableArray alloc] init];
+    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
+    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
+    [_resultColumns addObject:sizeCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Modification" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Match %" width:60 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Words Used" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
+}
+
+- (void)setScanOptions
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    PyDupeGuru *_py = (PyDupeGuru *)py;
+    [_py setScanType:[ud objectForKey:@"scanType"]];
+    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
+    [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
+    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
+    int smallFileThreshold = [ud integerForKey:@"smallFileThreshold"]; // In KB
+    int sizeThreshold = [ud boolForKey:@"ignoreSmallFiles"] ? smallFileThreshold * 1024 : 0; // The py side wants bytes
+    [_py setSizeThreshold:sizeThreshold];
 }
 
 /* Actions */
@@ -37,48 +66,5 @@ http://www.hardcoded.net/licenses/bsd_license
     [columnsWidth setObject:i2n(63) forKey:@"2"];
     [columnsWidth setObject:i2n(60) forKey:@"5"];
     [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
-}
-
-- (IBAction)startDuplicateScan:(id)sender
-{
-    if ([py resultsAreModified]) {
-        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
-            return;
-    }
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    PyDupeGuru *_py = (PyDupeGuru *)py;
-    [_py setScanType:[ud objectForKey:@"scanType"]];
-    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
-    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
-    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
-    [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
-    int smallFileThreshold = [ud integerForKey:@"smallFileThreshold"]; // In KB
-    int sizeThreshold = [ud boolForKey:@"ignoreSmallFiles"] ? smallFileThreshold * 1024 : 0; // The py side wants bytes
-    [_py setSizeThreshold:sizeThreshold];
-    int r = n2i([py doScan]);
-    if (r != 0)
-        [[ProgressController mainProgressController] hide];
-    if (r == 3) {
-        [Dialogs showMessage:@"The selected directories contain no scannable file."];
-    }
-
-}
-
-/* Public */
-- (void)initResultColumns
-{
-    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
-    _resultColumns = [[NSMutableArray alloc] init];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
-    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Match %" width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Words Used" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
 }
 @end

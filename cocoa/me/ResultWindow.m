@@ -7,10 +7,9 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "ResultWindow.h"
-#import "../../cocoalib/Dialogs.h"
-#import "../../cocoalib/ProgressController.h"
-#import "../../cocoalib/Utils.h"
-#import "AppDelegate.h"
+#import "Dialogs.h"
+#import "Utils.h"
+#import "PyDupeGuru.h"
 #import "Consts.h"
 
 @implementation ResultWindow
@@ -24,37 +23,8 @@ http://www.hardcoded.net/licenses/bsd_license
     return self;
 }
 
-/* Actions */
-- (IBAction)removeDeadTracks:(id)sender
+- (void)setScanOptions
 {
-    [(PyDupeGuru *)py scanDeadTracks];
-}
-
-- (IBAction)resetColumnsToDefault:(id)sender
-{
-    NSMutableArray *columnsOrder = [NSMutableArray array];
-    [columnsOrder addObject:@"0"];
-    [columnsOrder addObject:@"2"];
-    [columnsOrder addObject:@"3"];
-    [columnsOrder addObject:@"4"];
-    [columnsOrder addObject:@"6"];
-    [columnsOrder addObject:@"15"];
-    NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
-    [columnsWidth setObject:i2n(235) forKey:@"0"];
-    [columnsWidth setObject:i2n(63) forKey:@"2"];
-    [columnsWidth setObject:i2n(50) forKey:@"3"];
-    [columnsWidth setObject:i2n(50) forKey:@"4"];
-    [columnsWidth setObject:i2n(40) forKey:@"6"];
-    [columnsWidth setObject:i2n(57) forKey:@"15"];
-    [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
-}
-
-- (IBAction)startDuplicateScan:(id)sender
-{
-    if ([py resultsAreModified]) {
-        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
-            return;
-    }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     PyDupeGuru *_py = (PyDupeGuru *)py;
     [_py setScanType:[ud objectForKey:@"scanType"]];
@@ -69,13 +39,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
     [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
     [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
-    NSInteger r = n2i([py doScan]);
-    if (r == 3) {
-        [Dialogs showMessage:@"The selected directories contain no scannable file."];
-    }
 }
 
-/* Public */
 - (void)initResultColumns
 {
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
@@ -104,6 +69,31 @@ http://www.hardcoded.net/licenses/bsd_license
     [_resultColumns addObject:[self getColumnForIdentifier:15 title:@"Match %" width:57 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:16 title:@"Words Used" width:120 refCol:refCol]];
     [_resultColumns addObject:[self getColumnForIdentifier:17 title:@"Dupe Count" width:80 refCol:refCol]];
+}
+
+/* Actions */
+- (IBAction)removeDeadTracks:(id)sender
+{
+    [(PyDupeGuru *)py scanDeadTracks];
+}
+
+- (IBAction)resetColumnsToDefault:(id)sender
+{
+    NSMutableArray *columnsOrder = [NSMutableArray array];
+    [columnsOrder addObject:@"0"];
+    [columnsOrder addObject:@"2"];
+    [columnsOrder addObject:@"3"];
+    [columnsOrder addObject:@"4"];
+    [columnsOrder addObject:@"6"];
+    [columnsOrder addObject:@"15"];
+    NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
+    [columnsWidth setObject:i2n(235) forKey:@"0"];
+    [columnsWidth setObject:i2n(63) forKey:@"2"];
+    [columnsWidth setObject:i2n(50) forKey:@"3"];
+    [columnsWidth setObject:i2n(50) forKey:@"4"];
+    [columnsWidth setObject:i2n(40) forKey:@"6"];
+    [columnsWidth setObject:i2n(57) forKey:@"15"];
+    [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
 }
 
 /* Notifications */
