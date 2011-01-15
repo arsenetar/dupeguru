@@ -9,11 +9,11 @@
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QMessageBox, QAction
 
-from ..base.main_window import MainWindow as MainWindowBase
+from ..base.result_window import ResultWindow as ResultWindowBase
 
-class MainWindow(MainWindowBase):
+class ResultWindow(ResultWindowBase):
     def _setupUi(self):
-        MainWindowBase._setupUi(self)
+        ResultWindowBase._setupUi(self)
         self.actionClearPictureCache = QAction("Clear Picture Cache", self)
         self.menuFile.insertAction(self.actionClearIgnoreList, self.actionClearPictureCache)
         self.connect(self.actionClearPictureCache, SIGNAL("triggered()"), self.clearPictureCacheTriggered)
@@ -21,7 +21,7 @@ class MainWindow(MainWindowBase):
     def clearPictureCacheTriggered(self):
         title = "Clear Picture Cache"
         msg = "Do you really want to remove all your cached picture analysis?"
-        if self._confirm(title, msg, QMessageBox.No):
+        if self.app.confirm(title, msg, QMessageBox.No):
             self.app.scanner.clear_picture_cache()
             QMessageBox.information(self, title, "Picture cache cleared.")
     

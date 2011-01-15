@@ -36,8 +36,8 @@ class Preferences(PreferencesBase):
                 self.columns_width[index] = width
         self.columns_visible = get('ColumnsVisible', self.columns_visible)
         
-        self.mainWindowIsMaximized = get('MainWindowIsMaximized', self.mainWindowIsMaximized)
-        self.mainWindowRect = self.get_rect('MainWindowRect', self.mainWindowRect)
+        self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
+        self.resultWindowRect = self.get_rect('ResultWindowRect', self.resultWindowRect)
         self.detailsWindowRect = self.get_rect('DetailsWindowRect', self.detailsWindowRect)
         self.directoriesWindowRect = self.get_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         self.recentResults = get('RecentResults', self.recentResults)
@@ -59,8 +59,8 @@ class Preferences(PreferencesBase):
         self.destination_type = 1
         self.custom_command = ''
         
-        self.mainWindowIsMaximized = False
-        self.mainWindowRect = None
+        self.resultWindowIsMaximized = False
+        self.resultWindowRect = None
         self.detailsWindowRect = None
         self.directoriesWindowRect = None
         self.recentResults = []
@@ -89,8 +89,8 @@ class Preferences(PreferencesBase):
         set_('ColumnsWidth', self.columns_width)
         set_('ColumnsVisible', self.columns_visible)
         
-        set_('MainWindowIsMaximized', self.mainWindowIsMaximized)
-        self.set_rect('MainWindowRect', self.mainWindowRect)
+        set_('ResultWindowIsMaximized', self.resultWindowIsMaximized)
+        self.set_rect('ResultWindowRect', self.resultWindowRect)
         self.set_rect('DetailsWindowRect', self.detailsWindowRect)
         self.set_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         set_('RecentResults', self.recentResults)

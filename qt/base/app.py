@@ -6,14 +6,12 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-
-
 import logging
 import os
 import os.path as op
 
-from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, SIGNAL, pyqtSignal
-from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox
+from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
+from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QApplication
 
 from jobprogress import job
 from jobprogress.qt import Progress
@@ -21,13 +19,14 @@ from jobprogress.qt import Progress
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
     
 from qtlib.about_box import AboutBox
+from qtlib.recent import Recent
 from qtlib.reg import Registration
 
 from . import platform
-
-from .main_window import MainWindow
+from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
+from .util import createActions
 
 JOBID2TITLE = {
     JOB_SCAN: "Scanning for duplicates",
@@ -54,16 +53,20 @@ class DupeGuru(DupeGuruBase, QObject):
     
     #--- Private
     def _setup(self):
+        self._setupActions()
         self.prefs = self._create_preferences()
         self.prefs.load()
         self._update_options()
-        self.main_window = self._create_main_window()
-        self._progress = Progress(self.main_window)
-        self.directories_dialog = DirectoriesDialog(self.main_window, self)
-        self.details_dialog = self._create_details_dialog(self.main_window)
-        self.problemDialog = ProblemDialog(parent=self.main_window, app=self)
-        self.preferences_dialog = self._create_preferences_dialog(self.main_window)
-        self.about_box = AboutBox(self.main_window, self)
+        self.resultWindow = self._create_result_window()
+        self._progress = Progress(self.resultWindow)
+        self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
+        self.details_dialog = self._create_details_dialog(self.resultWindow)
+        self.problemDialog = ProblemDialog(parent=self.resultWindow, app=self)
+        self.preferences_dialog = self._create_preferences_dialog(self.resultWindow)
+        self.about_box = AboutBox(self.resultWindow, self)
+        
+        self.recentResults = Recent(self, self.directories_dialog.menuLoadRecent, 'recentResults')
+        self.recentResults.mustOpenItem.connect(self.load_from)
         
         self.reg = Registration(self)
         self.set_registration(self.prefs.registration_code, self.prefs.registration_email)
@@ -73,19 +76,30 @@ class DupeGuru(DupeGuruBase, QObject):
             # In some circumstances, the nag is hidden by other window, which may make the user think
             # that the application haven't launched.
             QTimer.singleShot(0, self.reg.show_nag)
-        if self.prefs.mainWindowIsMaximized:
-            self.main_window.showMaximized()
-        else:
-            self.main_window.show()
+        self.directories_dialog.show()
         self.load()
         
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self._progress, SIGNAL('finished(QString)'), self.job_finished)
     
+    def _setupActions(self):
+        # Setup actions that are common to both the directory dialog and the results window.
+        # (name, shortcut, icon, desc, func)
+        ACTIONS = [
+            ('actionQuit', 'Ctrl+Q', '', "Quit", self.quitTriggered),
+            ('actionPreferences', 'Ctrl+5', 'preferences', "Preferences", self.preferencesTriggered),
+            ('actionShowHelp', 'F1', '', "dupeGuru Help", self.showHelpTriggered),
+            ('actionAbout', '', '', "About dupeGuru", self.showAboutBoxTriggered),
+            ('actionRegister', '', '', "Register dupeGuru", self.registerTriggered),
+            ('actionCheckForUpdate', '', '', "Check for Update", self.checkForUpdateTriggered),
+            ('actionOpenDebugLog', '', '', "Open Debug Log", self.openDebugLogTriggered),
+        ]
+        createActions(ACTIONS, self)
+    
     def _setup_as_registered(self):
         self.prefs.registration_code = self.registration_code
         self.prefs.registration_email = self.registration_email
-        self.main_window.actionRegister.setVisible(False)
+        self.actionRegister.setVisible(False)
         self.about_box.registerButton.hide()
         self.about_box.registeredEmailLabel.setText(self.prefs.registration_email)
     
@@ -99,8 +113,8 @@ class DupeGuru(DupeGuruBase, QObject):
     def _create_details_dialog(self, parent):
         raise NotImplementedError()
     
-    def _create_main_window(self):
-        return MainWindow(app=self)
+    def _create_result_window(self):
+        return ResultWindow(app=self)
     
     def _create_preferences(self):
         raise NotImplementedError()
@@ -126,7 +140,7 @@ class DupeGuru(DupeGuruBase, QObject):
             self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
             msg = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
-            QMessageBox.information(self.main_window, 'Action in progress', msg)
+            QMessageBox.information(self.resultWindow, 'Action in progress', msg)
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -134,14 +148,14 @@ class DupeGuru(DupeGuruBase, QObject):
             return
         title = "Add to Ignore List"
         msg = "All selected {0} matches are going to be ignored in all subsequent scans. Continue?".format(len(dupes))
-        if self.main_window._confirm(title, msg):
+        if self.confirm(title, msg):
             DupeGuruBase.add_selected_to_ignore_list(self)
     
     def copy_or_move_marked(self, copy):
         opname = 'copy' if copy else 'move'
         title = "Select a directory to {0} marked files to".format(opname)
         flags = QFileDialog.ShowDirsOnly
-        destination = str(QFileDialog.getExistingDirectory(self.main_window, title, '', flags))
+        destination = str(QFileDialog.getExistingDirectory(self.resultWindow, title, '', flags))
         if not destination:
             return
         recreate_path = self.prefs.destination_type
@@ -153,12 +167,18 @@ class DupeGuru(DupeGuruBase, QObject):
             return
         title = "Remove duplicates"
         msg = "You are about to remove {0} files from results. Continue?".format(len(dupes))
-        if self.main_window._confirm(title, msg):
+        if self.confirm(title, msg):
             DupeGuruBase.remove_selected(self)
     
     #--- Public
     def askForRegCode(self):
         self.reg.ask_for_code()
+    
+    def confirm(self, title, msg, default_button=QMessageBox.Yes):
+        active = QApplication.activeWindow()
+        buttons = QMessageBox.Yes | QMessageBox.No
+        answer = QMessageBox.question(active, title, msg, buttons, default_button)
+        return answer == QMessageBox.Yes
     
     def invokeCustomCommand(self):
         cmd = self.prefs.custom_command
@@ -166,33 +186,13 @@ class DupeGuru(DupeGuruBase, QObject):
             self.invoke_command(cmd)
         else:
             msg = "You have no custom command set up. Please, set it up in your preferences."
-            QMessageBox.warning(self.main_window, 'Custom Command', msg)
-    
-    def openDebugLog(self):
-        debugLogPath = op.join(self.appdata, 'debug.log')
-        self._open_path(debugLogPath)
-    
-    def show_about_box(self):
-        self.about_box.show()
+            QMessageBox.warning(self.resultWindow, 'Custom Command', msg)
     
     def show_details(self):
         self.details_dialog.show()
     
-    def show_directories(self):
-        self.directories_dialog.show()
-    
-    def show_help(self):
-        base_path = platform.HELP_PATH.format(self.EDITION)
-        url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'index.html')))
-        QDesktopServices.openUrl(url)
-    
-    def show_preferences(self):
-        self.preferences_dialog.load()
-        result = self.preferences_dialog.exec_()
-        if result == QDialog.Accepted:
-            self.preferences_dialog.save()
-            self.prefs.save()
-            self._update_options()
+    def showResultsWindow(self):
+        self.resultWindow.show()
     
     #--- Signals
     willSavePrefs = pyqtSignal()
@@ -203,6 +203,9 @@ class DupeGuru(DupeGuruBase, QObject):
         self.prefs.save()
         self.save()
     
+    def checkForUpdateTriggered(self):
+        QProcess.execute('updater.exe', ['/checknow'])
+    
     def job_finished(self, jobid):
         self._job_completed(jobid)
         if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE):
@@ -210,10 +213,40 @@ class DupeGuru(DupeGuruBase, QObject):
                 self.problemDialog.show()
             else:
                 msg = "All files were processed successfully."
-                QMessageBox.information(self.main_window, 'Operation Complete', msg)
+                QMessageBox.information(self.resultWindow, 'Operation Complete', msg)
         elif jobid == JOB_SCAN:
             if not self.results.groups:
-                title = "Scanning complete"
+                title = "Scan complete"
                 msg = "No duplicates found."
-                QMessageBox.information(self.main_window, title, msg)
+                QMessageBox.information(self.resultWindow, title, msg)
+            else:
+                self.showResultsWindow()
+        elif jobid == JOB_LOAD:
+            self.showResultsWindow()
+    
+    def openDebugLogTriggered(self):
+        debugLogPath = op.join(self.appdata, 'debug.log')
+        self._open_path(debugLogPath)
+    
+    def preferencesTriggered(self):
+        self.preferences_dialog.load()
+        result = self.preferences_dialog.exec_()
+        if result == QDialog.Accepted:
+            self.preferences_dialog.save()
+            self.prefs.save()
+            self._update_options()
+    
+    def quitTriggered(self):
+        self.directories_dialog.close()
+    
+    def registerTriggered(self):
+        self.reg.ask_for_code()
+    
+    def showAboutBoxTriggered(self):
+        self.about_box.show()
+    
+    def showHelpTriggered(self):
+        base_path = platform.HELP_PATH.format(self.EDITION)
+        url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'index.html')))
+        QDesktopServices.openUrl(url)
     

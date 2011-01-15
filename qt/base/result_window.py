@@ -8,21 +8,18 @@
 
 import sys
 
-from PyQt4.QtCore import Qt, QCoreApplication, QProcess, SIGNAL, QUrl, QRect
-from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QToolButton, QLabel, QHeaderView,
-    QMessageBox, QInputDialog, QLineEdit, QDesktopServices, QFileDialog, QAction, QMenuBar,
-    QToolBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar)
+from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
+from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QLabel, QHeaderView, QMessageBox,
+    QInputDialog, QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout,
+    QAbstractItemView, QStatusBar)
 
 from hscommon.util import nonone
-from qtlib.recent import Recent
 
-from core.app import NoScannableFileError
-
-from . import dg_rc
 from .results_model import ResultsModel, ResultsView
 from .stats_label import StatsLabel
+from .util import createActions
 
-class MainWindow(QMainWindow):
+class ResultWindow(QMainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self, None)
         self.app = app
@@ -41,11 +38,8 @@ class MainWindow(QMainWindow):
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionScan', 'Ctrl+T', self.app.LOGO_NAME, "Start Scan", self.scanTriggered),
-            ('actionDirectories', 'Ctrl+4', 'folder', "Directories", self.directoriesTriggered),
             ('actionDetails', 'Ctrl+3', 'details', "Details", self.detailsTriggered),
             ('actionActions', '', 'actions', "Actions", self.actionsTriggered),
-            ('actionPreferences', 'Ctrl+5', 'preferences', "Preferences", self.preferencesTriggered),
             ('actionDelta', 'Ctrl+2', 'delta', "Delta Values", self.deltaTriggered),
             ('actionPowerMarker', 'Ctrl+1', 'power_marker', "Power Marker", self.powerMarkerTriggered),
             ('actionDeleteMarked', 'Ctrl+D', '', "Send Marked to Recycle Bin", self.deleteTriggered),
@@ -64,28 +58,13 @@ class MainWindow(QMainWindow):
             ('actionInvertMarking', 'Ctrl+Alt+A', '', "Invert Marking", self.markInvertTriggered),
             ('actionMarkSelected', '', '', "Mark Selected", self.markSelectedTriggered),
             ('actionClearIgnoreList', '', '', "Clear Ignore List", self.clearIgnoreListTriggered),
-            ('actionQuit', 'Ctrl+Q', '', "Quit", self.close),
             ('actionApplyFilter', 'Ctrl+F', '', "Apply Filter", self.applyFilterTriggered),
             ('actionCancelFilter', 'Ctrl+Shift+F', '', "Cancel Filter", self.cancelFilterTriggered),
-            ('actionShowHelp', 'F1', '', "dupeGuru Help", self.showHelpTriggered),
-            ('actionAbout', '', '', "About dupeGuru", self.aboutTriggered),
-            ('actionRegister', '', '', "Register dupeGuru", self.registerTrigerred),
-            ('actionCheckForUpdate', '', '', "Check for Update", self.checkForUpdateTriggered),
             ('actionExport', '', '', "Export To HTML", self.exportTriggered),
-            ('actionLoadResults', 'Ctrl+L', '', "Load Results...", self.loadResultsTriggered),
             ('actionSaveResults', 'Ctrl+S', '', "Save Results...", self.saveResultsTriggered),
-            ('actionOpenDebugLog', '', '', "Open Debug Log", self.openDebugLogTriggered),
             ('actionInvokeCustomCommand', 'Ctrl+I', '', "Invoke Custom Command", self.app.invokeCustomCommand),
         ]
-        for name, shortcut, icon, desc, func in ACTIONS:
-            action = QAction(self)
-            if icon:
-                action.setIcon(QIcon(QPixmap(':/' + icon)))
-            if shortcut:
-                action.setShortcut(shortcut)
-            action.setText(desc)
-            action.triggered.connect(func)
-            setattr(self, name, action)
+        createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
     
@@ -100,14 +79,10 @@ class MainWindow(QMainWindow):
         self.menuActions.setTitle("Actions")
         self.menuColumns = QMenu(self.menubar)
         self.menuColumns.setTitle("Columns")
-        self.menuModes = QMenu(self.menubar)
-        self.menuModes.setTitle("Modes")
-        self.menuWindow = QMenu(self.menubar)
-        self.menuWindow.setTitle("Windows")
+        self.menuView = QMenu(self.menubar)
+        self.menuView.setTitle("View")
         self.menuHelp = QMenu(self.menubar)
         self.menuHelp.setTitle("Help")
-        self.menuLoadRecent = QMenu(self.menuFile)
-        self.menuLoadRecent.setTitle("Load Recent Results")
         self.setMenuBar(self.menubar)
         
         self.menuActions.addAction(self.actionDeleteMarked)
@@ -131,32 +106,27 @@ class MainWindow(QMainWindow):
         self.menuMark.addAction(self.actionMarkNone)
         self.menuMark.addAction(self.actionInvertMarking)
         self.menuMark.addAction(self.actionMarkSelected)
-        self.menuModes.addAction(self.actionPowerMarker)
-        self.menuModes.addAction(self.actionDelta)
-        self.menuWindow.addAction(self.actionDetails)
-        self.menuWindow.addAction(self.actionDirectories)
-        self.menuWindow.addAction(self.actionPreferences)
-        self.menuHelp.addAction(self.actionShowHelp)
-        self.menuHelp.addAction(self.actionRegister)
-        self.menuHelp.addAction(self.actionCheckForUpdate)
-        self.menuHelp.addAction(self.actionOpenDebugLog)
-        self.menuHelp.addAction(self.actionAbout)
-        self.menuFile.addAction(self.actionScan)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionLoadResults)
-        self.menuFile.addAction(self.menuLoadRecent.menuAction())
+        self.menuView.addAction(self.actionPowerMarker)
+        self.menuView.addAction(self.actionDelta)
+        self.menuView.addSeparator()
+        self.menuView.addAction(self.actionDetails)
+        self.menuView.addAction(self.app.actionPreferences)
+        self.menuHelp.addAction(self.app.actionShowHelp)
+        self.menuHelp.addAction(self.app.actionRegister)
+        self.menuHelp.addAction(self.app.actionCheckForUpdate)
+        self.menuHelp.addAction(self.app.actionOpenDebugLog)
+        self.menuHelp.addAction(self.app.actionAbout)
         self.menuFile.addAction(self.actionSaveResults)
         self.menuFile.addAction(self.actionExport)
         self.menuFile.addAction(self.actionClearIgnoreList)
         self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionQuit)
+        self.menuFile.addAction(self.app.actionQuit)
         
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuMark.menuAction())
         self.menubar.addAction(self.menuActions.menuAction())
         self.menubar.addAction(self.menuColumns.menuAction())
-        self.menubar.addAction(self.menuModes.menuAction())
-        self.menubar.addAction(self.menuWindow.menuAction())
+        self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
         
         # Columns menu
@@ -190,27 +160,8 @@ class MainWindow(QMainWindow):
         actionMenu.addAction(self.actionRenameSelected)
         self.actionActions.setMenu(actionMenu)
     
-    def _setupToolbar(self):
-        self.toolBar = QToolBar(self)
-        self.toolBar.setMovable(False)
-        self.toolBar.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
-        self.toolBar.setFloatable(False)
-        self.addToolBar(Qt.ToolBarArea(Qt.TopToolBarArea), self.toolBar)
-        
-        self.toolBar.addAction(self.actionScan)
-        button = QToolButton(self.toolBar)
-        button.setDefaultAction(self.actionActions.menu().menuAction())
-        button.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
-        self.actionsButton = button
-        self.toolBar.addWidget(button)
-        self.toolBar.addAction(self.actionDirectories)
-        self.toolBar.addAction(self.actionDetails)
-        self.toolBar.addAction(self.actionPreferences)
-        self.toolBar.addAction(self.actionDelta)
-        self.toolBar.addAction(self.actionPowerMarker)
-    
     def _setupUi(self):
-        self.setWindowTitle(QCoreApplication.instance().applicationName())
+        self.setWindowTitle("dupeGuru Results")
         self.resize(630, 514)
         self.centralwidget = QWidget(self)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -230,17 +181,16 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.centralwidget)
         self._setupActions()
         self._setupMenu()
-        self._setupToolbar()
-        self.recentResults = Recent(self.app, self.menuLoadRecent, 'recentResults')
-        self.recentResults.mustOpenItem.connect(self.app.load_from)
         self.statusbar = QStatusBar(self)
         self.statusbar.setSizeGripEnabled(True)
         self.setStatusBar(self.statusbar)
         self.statusLabel = QLabel(self)
         self.statusbar.addPermanentWidget(self.statusLabel, 1)
         
-        if self.app.prefs.mainWindowRect is not None and not self.app.prefs.mainWindowIsMaximized:
-            self.setGeometry(self.app.prefs.mainWindowRect)
+        if self.app.prefs.resultWindowIsMaximized:
+            self.setWindowState(self.windowState() | Qt.WindowMaximized)
+        if self.app.prefs.resultWindowRect is not None and not self.app.prefs.resultWindowIsMaximized:
+            self.setGeometry(self.app.prefs.resultWindowRect)
         
         # Platform-specific setup
         if sys.platform == 'linux2':
@@ -249,11 +199,6 @@ class MainWindow(QMainWindow):
             self.actionHardlinkMarked.setVisible(False)
     
     #--- Private
-    def _confirm(self, title, msg, default_button=QMessageBox.Yes):
-        buttons = QMessageBox.Yes | QMessageBox.No
-        answer = QMessageBox.question(self, title, msg, buttons, default_button)
-        return answer == QMessageBox.Yes
-    
     def _load_columns(self):
         h = self.resultsView.horizontalHeader()
         h.setResizeMode(QHeaderView.Interactive)
@@ -270,19 +215,7 @@ class MainWindow(QMainWindow):
             colid = action.column_index
             action.setChecked(not h.isSectionHidden(colid))
     
-    #--- QWidget overrides
-    def closeEvent(self, event):
-        event.accept()
-        if self.app.results.is_modified:
-            title = "Unsaved results"
-            msg = "You have unsaved results, do you really want to quit?"
-            if not self._confirm(title, msg):
-                event.ignore()
-    
     #--- Actions
-    def aboutTriggered(self):
-        self.app.show_about_box()
-    
     def actionsTriggered(self):
         self.actionsButton.showMenu()
     
@@ -303,9 +236,6 @@ class MainWindow(QMainWindow):
     def cancelFilterTriggered(self):
         self.app.apply_filter('')
     
-    def checkForUpdateTriggered(self):
-        QProcess.execute('updater.exe', ['/checknow'])
-    
     def clearIgnoreListTriggered(self):
         title = "Clear Ignore List"
         count = len(self.app.scanner.ignore_list)
@@ -313,7 +243,7 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, title, "Nothing to clear.")
             return
         msg = "Do you really want to remove all {0} items from the ignore list?".format(count)
-        if self._confirm(title, msg, QMessageBox.No):
+        if self.app.confirm(title, msg, QMessageBox.No):
             self.app.scanner.ignore_list.Clear()
             QMessageBox.information(self, title, "Ignore list cleared.")
     
@@ -326,7 +256,7 @@ class MainWindow(QMainWindow):
             return
         title = "Delete duplicates"
         msg = "You are about to send {0} files to the recycle bin. Continue?".format(count)
-        if self._confirm(title, msg):
+        if self.app.confirm(title, msg):
             self.app.delete_marked()
     
     def deltaTriggered(self):
@@ -334,9 +264,6 @@ class MainWindow(QMainWindow):
     
     def detailsTriggered(self):
         self.app.show_details()
-    
-    def directoriesTriggered(self):
-        self.app.show_directories()
     
     def exportTriggered(self):
         h = self.resultsView.horizontalHeader()
@@ -354,16 +281,8 @@ class MainWindow(QMainWindow):
             return
         title = "Delete and hardlink duplicates"
         msg = "You are about to send {0} files to the trash and hardlink them afterwards. Continue?".format(count)
-        if self._confirm(title, msg):
+        if self.app.confirm(title, msg):
             self.app.delete_marked(replace_with_hardlinks=True)
-    
-    def loadResultsTriggered(self):
-        title = "Select a results file to load"
-        files = "dupeGuru Results (*.dupeguru)"
-        destination = QFileDialog.getOpenFileName(self, title, '', files)
-        if destination:
-            self.app.load_from(destination)
-            self.recentResults.insertItem(destination)
     
     def makeReferenceTriggered(self):
         self.app.make_selected_reference()
@@ -383,9 +302,6 @@ class MainWindow(QMainWindow):
     def moveTriggered(self):
         self.app.copy_or_move_marked(False)
     
-    def openDebugLogTriggered(self):
-        self.app.openDebugLog()
-    
     def openTriggered(self):
         self.app.open_selected()
     
@@ -395,16 +311,13 @@ class MainWindow(QMainWindow):
     def preferencesTriggered(self):
         self.app.show_preferences()
     
-    def registerTrigerred(self):
-        self.app.reg.ask_for_code()
-    
     def removeMarkedTriggered(self):
         count = self.app.results.mark_count
         if not count:
             return
         title = "Remove duplicates"
         msg = "You are about to remove {0} files from results. Continue?".format(count)
-        if self._confirm(title, msg):
+        if self.app.confirm(title, msg):
             self.app.remove_marked()
     
     def removeSelectedTriggered(self):
@@ -422,23 +335,7 @@ class MainWindow(QMainWindow):
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:
             self.app.save_as(destination)
-            self.recentResults.insertItem(destination)
-    
-    def scanTriggered(self):
-        title = "Start a new scan"
-        if len(self.app.results.groups) > 0:
-            msg = "Are you sure you want to start a new duplicate scan?"
-            if not self._confirm(title, msg):
-                return
-        try:
-            self.app.start_scanning()
-        except NoScannableFileError:
-            msg = "The selected directories contain no scannable file."
-            QMessageBox.warning(self, title, msg)
-            self.app.show_directories()
-    
-    def showHelpTriggered(self):
-        self.app.show_help()
+            self.app.recentResults.insertItem(destination)
     
     #--- Events
     def appWillSavePrefs(self):
@@ -451,8 +348,8 @@ class MainWindow(QMainWindow):
             visible.append(not h.isSectionHidden(i))
         prefs.columns_width = widths
         prefs.columns_visible = visible
-        prefs.mainWindowIsMaximized = self.isMaximized()
-        prefs.mainWindowRect = self.geometry()
+        prefs.resultWindowIsMaximized = self.isMaximized()
+        prefs.resultWindowRect = self.geometry()
     
     def columnToggled(self, action):
         colid = action.column_index

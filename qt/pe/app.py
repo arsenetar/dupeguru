@@ -20,7 +20,7 @@ from core_pe.scanner import ScannerPE
 from ..base.app import DupeGuru as DupeGuruBase
 from .block import getblocks
 from .details_dialog import DetailsDialog
-from .main_window import MainWindow
+from .result_window import ResultWindow
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
@@ -79,8 +79,8 @@ class DupeGuru(DupeGuruBase):
     def _create_details_dialog(self, parent):
         return DetailsDialog(parent, self)
     
-    def _create_main_window(self):
-        return MainWindow(app=self)
+    def _create_result_window(self):
+        return ResultWindow(app=self)
     
     def _create_preferences(self):
         return Preferences()
