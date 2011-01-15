@@ -26,7 +26,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Directory" width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Folder" width:120 refCol:refCol]];
     NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];

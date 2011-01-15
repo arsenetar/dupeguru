@@ -41,7 +41,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)fillPopUpMenu
 {
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m addItemWithTitle:@"Add New Directory..." action:@selector(askForDirectory:) keyEquivalent:@""];
+    NSMenuItem *mi = [m addItemWithTitle:@"Add New Folder..." action:@selector(askForDirectory:) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
 }
@@ -54,7 +54,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:YES];
     [op setAllowsMultipleSelection:YES];
-    [op setTitle:@"Select a directory to add to the scanning list"];
+    [op setTitle:@"Select a folder to add to the scanning list"];
     [op setDelegate:self];
     if ([op runModal] == NSOKButton) {
         for (NSString *directory in [op filenames]) {
