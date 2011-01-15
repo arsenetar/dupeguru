@@ -19,10 +19,9 @@ Contents:
    :maxdepth: 2
    
    quick_start
-   directories
+   folders
    preferences
    results
-   power_marker
    faq
    changelog
    credits

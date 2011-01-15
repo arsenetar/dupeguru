@@ -3,10 +3,9 @@ Quick Start
 
 To get you quickly started with dupeGuru, let's just make a standard scan using default preferences.
 
-* Click on **Directories**.
-* Click on **Add**.
-* Choose a directory you want to scan for duplicates.
-* Click on **Start Scanning**.
+* Launch dupeGuru.
+* Add folders to scan with either drag & drop or the "+" button.
+* Click on **Scan**.
 * Wait until the scan process is over.
 * Look at every duplicate (The files that are indented) and verify that it is indeed a duplicate to the group's reference (The file above the duplicate that is not indented and have a disabled mark box).
 * If a file is a false duplicate, select it and click on **Actions-->Remove Selected from Results**.

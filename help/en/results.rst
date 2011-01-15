@@ -10,7 +10,7 @@ A duplicate group is a group of files that all match together. Every group has a
 
 You can mark duplicate files, but you can never mark the reference file of a group. This is a security measure to prevent dupeGuru from deleting not only duplicate files, but their reference. You sure don't want that, do you?
 
-What determines which files are reference and which files are duplicates is first their directory state. A files from a reference directory will always be reference in a duplicate group. If all files are from a normal directory, the size determine which file will be the reference of a duplicate group. dupeGuru assumes that you always want to keep the biggest file, so the biggest files will take the reference position.
+What determines which files are reference and which files are duplicates is first their folder state. A file from a reference folder will always be reference in a duplicate group. If all files are from a normal folder, the size determine which file will be the reference of a duplicate group. dupeGuru assumes that you always want to keep the biggest file, so the biggest files will take the reference position.
 
 You can change the reference file of a group manually. To do so, select the duplicate file you want to promote to reference, and click on **Actions-->Make Selected Reference**.
 
@@ -28,10 +28,33 @@ Marking and Selecting
 
 A **marked** duplicate is a duplicate with the little box next to it having a check-mark. A **selected** duplicate is a duplicate being highlighted. The multiple selection actions can be performed in dupeGuru in the standard way (Shift/Command/Control click). You can toggle all selected duplicates' mark state by pressing **space**.
 
+Show Dupes Only
+---------------
+
+When this mode is enabled, the duplicates are shown without their respective reference file. You can select, mark and sort this list, just like in normal mode.
+
+The dupeGuru results, when in normal mode, are sorted according to duplicate groups' **reference file**. This means that if you want, for example, to mark all duplicates with the "exe" extension, you cannot just sort the results by "Kind" to have all exe duplicates together because a group can be composed of more than one kind of files. That is where Dupes Only mode comes into play. To mark all your "exe" duplicates, you just have to:
+
+* Enable the Dupes Only mode.
+* Add the "Kind" column with the "Columns" menu.
+* Click on that "Kind" column to sort the list by kind.
+* Locate the first duplicate with a "exe" kind.
+* Select it.
+* Scroll down the list to locate the last duplicate with a "exe" kind.
+* Hold Shift and click on it.
+* Press Space to mark all selected duplicates.
+
 Delta Values
 ------------
 
-If you turn this switch on, some columns will display the value relative to the duplicate's reference instead of the absolute values. These delta values will also be displayed in a different color so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference is 1.4 MB, the Size column will display -0.2 MB. This option is a killer feature when combined with the :doc:`Power Marker <power_marker>`.
+If you turn this switch on, some columns will display the value relative to the duplicate's reference instead of the absolute values. These delta values will also be displayed in a different color so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference is 1.4 MB, the Size column will display -0.2 MB.
+
+Dupes Only and Delta Values
+---------------------------
+
+The Dupes Only mode unveil its true power when you use it with the Delta Values switch turned on. When you turn it on, relative values will be displayed instead of absolute ones. So if, for example, you want to remove from your results all duplicates that are more than 300 KB away from their reference, you could sort the dupes only results by Size, select all duplicates under -300 in the Size column, delete them, and then do the same for duplicates over 300 at the bottom of the list.
+
+You could also use it to change the reference priority of your duplicate list. When you make a fresh scan, if there are no reference directories, the reference file of every group is the biggest file. If you want to change that, for example, to the latest modification time, you can sort the dupes only results by modification time in **descending** order, select all duplicates with a modification time delta value higher than 0 and click on **Make Selected Reference**. The reason why you must make the sort order descending is because if 2 files among the same duplicate group are selected when you click on **Make Selected Reference**, only the first of the list will be made reference, the other will be ignored. And since you want the last modified file to be reference, having the sort order descending assures you that the first item of the list will be the last modified.
 
 Filtering
 ---------
@@ -55,7 +78,6 @@ You might notice that not all duplicates in the filtered results will match your
 Action Menu
 -----------
 
-* **Start Duplicate Scan:** Starts a new duplicate scan.
 * **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the newly cleared ignore list to be effective.
 * **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The columns that are visible when you click on this button will be the columns present in the XHTML file. The file will automatically be opened in your default browser.
 * **Send Marked to Trash:** Send all marked duplicates to trash, obviously.
@@ -64,7 +86,7 @@ Action Menu
 * **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
 * **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will not be touched and will stay where they are.
 * **Remove Selected from Results:** Remove all selected duplicates from results. Note that all selected reference files will be ignored, only duplicates can be removed with this action.
-* **Make Selected Reference:** Promote all selected duplicates to reference. If a duplicate is a part of a group having a reference file coming from a reference directory (in blue color), no action will be taken for this duplicate. If more than one duplicate among the same group are selected, only the first of each group will be promoted.
+* **Make Selected Reference:** Promote all selected duplicates to reference. If a duplicate is a part of a group having a reference file coming from a reference folder (in blue color), no action will be taken for this duplicate. If more than one duplicate among the same group are selected, only the first of each group will be promoted.
 * **Add Selected to Ignore List:** This first removes all selected duplicates from results, and then add the match of that duplicate and the current reference in the ignore list. This match will not come up again in further scan. The duplicate itself might come back, but it will be matched with another reference file. You can clear the ignore list with the Clear Ignore List command.
 * **Open Selected with Default Application:** Open the file with the application associated with selected file's type.
 * **Reveal Selected in Finder:** Open the folder containing selected file.

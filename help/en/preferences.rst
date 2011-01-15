@@ -45,8 +45,8 @@ Preferences
 **Copy and Move:** Determines how the Copy and Move operations (in the Action menu) will behave.
 
 * **Right in destination:** All files will be sent directly in the selected destination, without trying to recreate the source path at all.
-* **Recreate relative path:** The source file's path will be re-created in the destination directory up to the root selection in the Directories panel. For example, if you added ``/Users/foobar/SomeFolder`` to your Directories panel and you move ``/Users/foobar/SomeFolder/SubFolder/SomeFile.ext`` to the destination ``/Users/foobar/MyDestination``, the final destination for the file will be ``/Users/foobar/MyDestination/SubFolder`` (``SomeFolder`` has been trimmed from source's path in the final destination.).
-* **Recreate absolute path:** The source file's path will be re-created in the destination directory in it's entirety. For example, if you move ``/Users/foobar/SomeFolder/SubFolder/SomeFile.ext`` to the destination ``/Users/foobar/MyDestination``, the final destination for the file will be ``/Users/foobar/MyDestination/Users/foobar/SomeFolder/SubFolder``.
+* **Recreate relative path:** The source file's path will be re-created in the destination folder up to the root selection in the Directories panel. For example, if you added ``/Users/foobar/SomeFolder`` to your Directories panel and you move ``/Users/foobar/SomeFolder/SubFolder/SomeFile.ext`` to the destination ``/Users/foobar/MyDestination``, the final destination for the file will be ``/Users/foobar/MyDestination/SubFolder`` (``SomeFolder`` has been trimmed from source's path in the final destination.).
+* **Recreate absolute path:** The source file's path will be re-created in the destination folder in it's entirety. For example, if you move ``/Users/foobar/SomeFolder/SubFolder/SomeFile.ext`` to the destination ``/Users/foobar/MyDestination``, the final destination for the file will be ``/Users/foobar/MyDestination/Users/foobar/SomeFolder/SubFolder``.
 
 In all cases, dupeGuru nicely handles naming conflicts by prepending a number to the destination filename if the filename already exists in the destination.
 
