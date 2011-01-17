@@ -11,6 +11,7 @@ from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLa
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMessageBox, QMainWindow,
     QMenuBar, QMenu)
 
+from qtlib.recent import Recent
 from core.app import NoScannableFileError
 
 from . import platform
@@ -22,22 +23,35 @@ class DirectoriesDialog(QMainWindow):
         QMainWindow.__init__(self, None)
         self.app = app
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
+        self.recentFolders = Recent(self.app, 'recentFolders')
         self.directoriesModel = DirectoriesModel(self.app)
         self.directoriesDelegate = DirectoriesDelegate()
         self._setupUi()
+        self.app.recentResults.addMenu(self.menuLoadRecent)
+        self.app.recentResults.addMenu(self.menuRecentResults)
+        self.recentFolders.addMenu(self.menuRecentFolders)
+        self._updateAddButton()
         self._updateRemoveButton()
-        
-        self.scanButton.clicked.connect(self.scanButtonClicked)
-        self.addButton.clicked.connect(self.addButtonClicked)
-        self.removeButton.clicked.connect(self.removeButtonClicked)
-        self.treeView.selectionModel().selectionChanged.connect(self.selectionChanged)
-        self.app.willSavePrefs.connect(self.appWillSavePrefs)
+        self._updateLoadResultsButton()
+        self._setupBindings()
     
+    def _setupBindings(self):
+        self.scanButton.clicked.connect(self.scanButtonClicked)
+        self.loadResultsButton.clicked.connect(self.actionLoadResults.trigger)
+        self.addFolderButton.clicked.connect(self.actionAddFolder.trigger)
+        self.removeFolderButton.clicked.connect(self.removeFolderButtonClicked)
+        self.treeView.selectionModel().selectionChanged.connect(self.selectionChanged)
+        self.app.recentResults.itemsChanged.connect(self._updateLoadResultsButton)
+        self.recentFolders.itemsChanged.connect(self._updateAddButton)
+        self.recentFolders.mustOpenItem.connect(self.app.add_directory)
+        self.app.willSavePrefs.connect(self.appWillSavePrefs)
+        
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
             ('actionLoadResults', 'Ctrl+L', '', "Load Results...", self.loadResultsTriggered),
             ('actionShowResultsWindow', '', '', "Results Window", self.app.showResultsWindow),
+            ('actionAddFolder', '', '', "Add Folder...", self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
     
@@ -69,6 +83,16 @@ class DirectoriesDialog(QMainWindow):
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+        
+        # Recent folders menu
+        self.menuRecentFolders = QMenu()
+        self.menuRecentFolders.addAction(self.actionAddFolder)
+        self.menuRecentFolders.addSeparator()
+        
+        # Recent results menu
+        self.menuRecentResults = QMenu()
+        self.menuRecentResults.addAction(self.actionLoadResults)
+        self.menuRecentResults.addSeparator()
     
     def _setupUi(self):
         self.setWindowTitle(self.app.NAME)
@@ -92,30 +116,18 @@ class DirectoriesDialog(QMainWindow):
         header.resizeSection(1, 100)
         self.verticalLayout.addWidget(self.treeView)
         self.horizontalLayout = QHBoxLayout()
-        spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.removeButton = QPushButton(self.centralwidget)
-        self.removeButton.setText("Remove")
-        self.removeButton.setShortcut("Del")
-        self.removeButton.setMinimumSize(QSize(91, 0))
-        self.removeButton.setMaximumSize(QSize(16777215, 32))
-        self.horizontalLayout.addWidget(self.removeButton)
-        self.addButton = QPushButton(self.centralwidget)
-        self.addButton.setText("Add")
-        self.addButton.setMinimumSize(QSize(91, 0))
-        self.addButton.setMaximumSize(QSize(16777215, 32))
-        self.horizontalLayout.addWidget(self.addButton)
-        spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.removeFolderButton = QPushButton("Remove", self.centralwidget)
+        self.removeFolderButton.setShortcut("Del")
+        self.horizontalLayout.addWidget(self.removeFolderButton)
+        self.addFolderButton = QPushButton("Add", self.centralwidget)
+        self.horizontalLayout.addWidget(self.addFolderButton)
+        spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
+        self.loadResultsButton = QPushButton(self.centralwidget)
+        self.loadResultsButton.setText("Load Results")
+        self.horizontalLayout.addWidget(self.loadResultsButton)
         self.scanButton = QPushButton(self.centralwidget)
         self.scanButton.setText("Scan")
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.scanButton.sizePolicy().hasHeightForWidth())
-        self.scanButton.setSizePolicy(sizePolicy)
-        self.scanButton.setMinimumSize(QSize(91, 0))
-        self.scanButton.setMaximumSize(QSize(16777215, 32))
         self.scanButton.setDefault(True)
         self.horizontalLayout.addWidget(self.scanButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -123,19 +135,31 @@ class DirectoriesDialog(QMainWindow):
         
         self._setupActions()
         self._setupMenu()
-                
+        
         if self.app.prefs.directoriesWindowRect is not None:
             self.setGeometry(self.app.prefs.directoriesWindowRect)
+    
+    def _updateAddButton(self):
+        if self.recentFolders.isEmpty():
+            self.addFolderButton.setMenu(None)
+        else:
+            self.addFolderButton.setMenu(self.menuRecentFolders)
     
     def _updateRemoveButton(self):
         indexes = self.treeView.selectedIndexes()
         if not indexes:
-            self.removeButton.setEnabled(False)
+            self.removeFolderButton.setEnabled(False)
             return
-        self.removeButton.setEnabled(True)
+        self.removeFolderButton.setEnabled(True)
         index = indexes[0]
         node = index.internalPointer()
         # label = 'Remove' if node.parent is None else 'Exclude'
+    
+    def _updateLoadResultsButton(self):
+        if self.app.recentResults.isEmpty():
+            self.loadResultsButton.setMenu(None)
+        else:
+            self.loadResultsButton.setMenu(self.menuRecentResults)
     
     #--- QWidget overrides
     def closeEvent(self, event):
@@ -149,7 +173,7 @@ class DirectoriesDialog(QMainWindow):
             QApplication.quit()
     
     #--- Events
-    def addButtonClicked(self):
+    def addFolderTriggered(self):
         title = "Select a directory to add to the scanning list"
         flags = QFileDialog.ShowDirsOnly
         dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
@@ -157,6 +181,7 @@ class DirectoriesDialog(QMainWindow):
             return
         self.lastAddedFolder = dirpath
         self.app.add_directory(dirpath)
+        self.recentFolders.insertItem(dirpath)
     
     def appWillSavePrefs(self):
         self.app.prefs.directoriesWindowRect = self.geometry()
@@ -169,7 +194,7 @@ class DirectoriesDialog(QMainWindow):
             self.app.load_from(destination)
             self.app.recentResults.insertItem(destination)
     
-    def removeButtonClicked(self):
+    def removeFolderButtonClicked(self):
         indexes = self.treeView.selectedIndexes()
         if not indexes:
             return

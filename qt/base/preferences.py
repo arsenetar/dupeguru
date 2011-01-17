@@ -41,6 +41,7 @@ class Preferences(PreferencesBase):
         self.detailsWindowRect = self.get_rect('DetailsWindowRect', self.detailsWindowRect)
         self.directoriesWindowRect = self.get_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         self.recentResults = get('RecentResults', self.recentResults)
+        self.recentFolders = get('RecentFolders', self.recentFolders)
         
         self.registration_code = get('RegistrationCode', self.registration_code)
         self.registration_email = get('RegistrationEmail', self.registration_email)
@@ -64,6 +65,7 @@ class Preferences(PreferencesBase):
         self.detailsWindowRect = None
         self.directoriesWindowRect = None
         self.recentResults = []
+        self.recentFolders = []
         
         self.registration_code = ''
         self.registration_email = ''
@@ -94,6 +96,7 @@ class Preferences(PreferencesBase):
         self.set_rect('DetailsWindowRect', self.detailsWindowRect)
         self.set_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         set_('RecentResults', self.recentResults)
+        set_('RecentFolders', self.recentFolders)
         
         set_('RegistrationCode', self.registration_code)
         set_('RegistrationEmail', self.registration_email)

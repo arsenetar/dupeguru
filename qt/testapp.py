@@ -7,6 +7,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/hs_license
 
+from qtlib.recent import Recent
+
 from .se.app import DupeGuru
 
 class TestApp(DupeGuru):
@@ -17,4 +19,6 @@ class TestApp(DupeGuru):
     def _setup(self):
         self.prefs = self._create_preferences()
         self.prefs.load()
+        self.recentResults = Recent(self, 'recentResults')
+        self._setupActions()
     

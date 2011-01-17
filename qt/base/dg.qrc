@@ -1,16 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file alias="details">../../images/details32.png</file>
     <file alias="logo_pe">../../images/dgpe_logo_32.png</file>
     <file alias="logo_pe_big">../../images/dgpe_logo_128.png</file>
     <file alias="logo_me">../../images/dgme_logo_32.png</file>
     <file alias="logo_me_big">../../images/dgme_logo_128.png</file>
     <file alias="logo_se">../../images/dgse_logo_32.png</file>
     <file alias="logo_se_big">../../images/dgse_logo_128.png</file>
-    <file alias="folder">../../images/folderwin32.png</file>
-    <file alias="preferences">../../images/preferences32.png</file>
-    <file alias="actions">../../images/actions32.png</file>
-    <file alias="delta">../../images/delta32.png</file>
-    <file alias="power_marker">../../images/power_marker32.png</file>
 </qresource>
 </RCC>

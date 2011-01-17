@@ -38,10 +38,10 @@ class ResultWindow(QMainWindow):
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionDetails', 'Ctrl+3', 'details', "Details", self.detailsTriggered),
-            ('actionActions', '', 'actions', "Actions", self.actionsTriggered),
-            ('actionDelta', 'Ctrl+2', 'delta', "Delta Values", self.deltaTriggered),
-            ('actionPowerMarker', 'Ctrl+1', 'power_marker', "Power Marker", self.powerMarkerTriggered),
+            ('actionDetails', 'Ctrl+I', '', "Details", self.detailsTriggered),
+            ('actionActions', '', '', "Actions", self.actionsTriggered),
+            ('actionDelta', 'Ctrl+2', '', "Delta Values", self.deltaTriggered),
+            ('actionPowerMarker', 'Ctrl+1', '', "Power Marker", self.powerMarkerTriggered),
             ('actionDeleteMarked', 'Ctrl+D', '', "Send Marked to Recycle Bin", self.deleteTriggered),
             ('actionHardlinkMarked', 'Ctrl+Shift+D', '', "Delete Marked and Replace with Hardlinks", self.hardlinkTriggered),
             ('actionMoveMarked', 'Ctrl+M', '', "Move Marked to...", self.moveTriggered),
@@ -62,7 +62,7 @@ class ResultWindow(QMainWindow):
             ('actionCancelFilter', 'Ctrl+Shift+F', '', "Cancel Filter", self.cancelFilterTriggered),
             ('actionExport', '', '', "Export To HTML", self.exportTriggered),
             ('actionSaveResults', 'Ctrl+S', '', "Save Results...", self.saveResultsTriggered),
-            ('actionInvokeCustomCommand', 'Ctrl+I', '', "Invoke Custom Command", self.app.invokeCustomCommand),
+            ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', "Invoke Custom Command", self.app.invokeCustomCommand),
         ]
         createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)

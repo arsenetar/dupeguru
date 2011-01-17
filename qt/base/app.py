@@ -57,6 +57,8 @@ class DupeGuru(DupeGuruBase, QObject):
         self.prefs = self._create_preferences()
         self.prefs.load()
         self._update_options()
+        self.recentResults = Recent(self, 'recentResults')
+        self.recentResults.mustOpenItem.connect(self.load_from)
         self.resultWindow = self._create_result_window()
         self._progress = Progress(self.resultWindow)
         self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
@@ -65,8 +67,6 @@ class DupeGuru(DupeGuruBase, QObject):
         self.preferences_dialog = self._create_preferences_dialog(self.resultWindow)
         self.about_box = AboutBox(self.resultWindow, self)
         
-        self.recentResults = Recent(self, self.directories_dialog.menuLoadRecent, 'recentResults')
-        self.recentResults.mustOpenItem.connect(self.load_from)
         
         self.reg = Registration(self)
         self.set_registration(self.prefs.registration_code, self.prefs.registration_email)
@@ -87,7 +87,7 @@ class DupeGuru(DupeGuruBase, QObject):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
             ('actionQuit', 'Ctrl+Q', '', "Quit", self.quitTriggered),
-            ('actionPreferences', 'Ctrl+5', 'preferences', "Preferences", self.preferencesTriggered),
+            ('actionPreferences', 'Ctrl+P', '', "Preferences", self.preferencesTriggered),
             ('actionShowHelp', 'F1', '', "dupeGuru Help", self.showHelpTriggered),
             ('actionAbout', '', '', "About dupeGuru", self.showAboutBoxTriggered),
             ('actionRegister', '', '', "Register dupeGuru", self.registerTriggered),
