@@ -19,6 +19,7 @@ from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.util import delete_if_empty, first, escape
+from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
 
@@ -328,7 +329,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def start_scanning(self):
         def do(j):
-            j.set_progress(0, 'Collecting files to scan')
+            j.set_progress(0, tr("Collecting files to scan"))
             files = list(self.directories.get_files())
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
@@ -354,6 +355,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def stat_line(self):
         result = self.results.stat_line
         if self.scanner.discarded_file_count:
-            result = '%s (%d discarded)' % (result, self.scanner.discarded_file_count)
+            result = tr("%s (%d discarded)") % (result, self.scanner.discarded_file_count)
         return result
     

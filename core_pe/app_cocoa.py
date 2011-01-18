@@ -18,6 +18,7 @@ from hscommon.util import get_file_ext, remove_invalid_xml
 from hscommon.path import Path
 from hscommon.cocoa import as_fetch
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
+from hscommon.trans import tr
 
 from core import fs
 from core import app_cocoa, directories
@@ -152,7 +153,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         marked = [dupe for dupe in self.results.dupes if self.results.is_marked(dupe)]
         self.path2iphoto = {}
         if any(isinstance(dupe, IPhoto) for dupe in marked):
-            j = j.start_subjob([6, 4], "Probing iPhoto. Don\'t touch it during the operation!")
+            j = j.start_subjob([6, 4], tr("Probing iPhoto. Don't touch it during the operation!"))
             try:
                 a = app('iPhoto')
                 a.activate(timeout=0)
@@ -165,7 +166,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
                         pass
             except (CommandError, RuntimeError, ApplicationNotFoundError):
                 pass
-        j.start_job(self.results.mark_count, "Sending dupes to the Trash")
+        j.start_job(self.results.mark_count, tr("Sending dupes to the Trash"))
         self.results.perform_on_marked(op, True)
         del self.path2iphoto
     

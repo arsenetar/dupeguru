@@ -14,6 +14,7 @@ from . import engine
 from jobprogress.job import nulljob
 from hscommon.markable import Markable
 from hscommon.util import flatten, nonone, FileOrPath, format_size
+from hscommon.trans import tr
 
 class Results(Markable):
     #---Override
@@ -87,14 +88,14 @@ class Results(Markable):
             total_size = sum(dupe.size for dupe in self.__filtered_dupes if self.is_markable(dupe))
         if self.mark_inverted:
             marked_size = self.__total_size - marked_size
-        result = '%d / %d (%s / %s) duplicates marked.' % (
+        result = tr("%d / %d (%s / %s) duplicates marked.") % (
             mark_count,
             total_count,
             format_size(marked_size, 2),
             format_size(total_size, 2),
         )
         if self.__filters:
-            result += ' filter: %s' % ' --> '.join(self.__filters)
+            result += tr(" filter: %s") % ' --> '.join(self.__filters)
         return result
     
     def __recalculate_stats(self):

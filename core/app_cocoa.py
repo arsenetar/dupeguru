@@ -15,15 +15,16 @@ from hscommon.cocoa import install_exception_hook
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace)
+from hscommon.trans import tr
 
 from . import app
 
 JOBID2TITLE = {
-    app.JOB_SCAN: "Scanning for duplicates",
-    app.JOB_LOAD: "Loading",
-    app.JOB_MOVE: "Moving",
-    app.JOB_COPY: "Copying",
-    app.JOB_DELETE: "Sending to Trash",
+    app.JOB_SCAN: tr("Scanning for duplicates"),
+    app.JOB_LOAD: tr("Loading"),
+    app.JOB_MOVE: tr("Moving"),
+    app.JOB_COPY: tr("Copying"),
+    app.JOB_DELETE: tr("Sending to Trash"),
 }
 
 class DupeGuru(app.DupeGuru):

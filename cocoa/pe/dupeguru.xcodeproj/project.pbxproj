@@ -26,6 +26,7 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE4527AC12E5F6E700005A15 /* core.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4527AA12E5F6E700005A15 /* core.strings */; };
 		CE60180812DF3EA900236FDC /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60180712DF3EA900236FDC /* HSRecentFiles.m */; };
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
@@ -119,6 +120,8 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE4527AB12E5F6E700005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
+		CE4527B012E5F72600005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE60180612DF3EA900236FDC /* HSRecentFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSRecentFiles.h; path = ../../cocoalib/HSRecentFiles.h; sourceTree = SOURCE_ROOT; };
 		CE60180712DF3EA900236FDC /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
 		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
@@ -272,6 +275,7 @@
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				CE0533A912E5DA6A0029EF25 /* Localizable.strings */,
+				CE4527AA12E5F6E700005A15 /* core.strings */,
 				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
 			);
 			name = Resources;
@@ -507,6 +511,7 @@
 				CE0533A712E5DA4D0029EF25 /* DetailsPanel.xib in Resources */,
 				CE0533A812E5DA4D0029EF25 /* Preferences.xib in Resources */,
 				CE0533AB12E5DA6A0029EF25 /* Localizable.strings in Resources */,
+				CE4527AC12E5F6E700005A15 /* core.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +632,15 @@
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE4527AA12E5F6E700005A15 /* core.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE4527AB12E5F6E700005A15 /* en */,
+				CE4527B012E5F72600005A15 /* fr */,
+			);
+			name = core.strings;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */

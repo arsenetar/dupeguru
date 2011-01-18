@@ -12,6 +12,7 @@ import re
 from jobprogress import job
 from hscommon import io
 from hscommon.util import dedupe, rem_file_ext, get_file_ext
+from hscommon.trans import tr
 
 from . import engine
 from .ignore import IgnoreList
@@ -44,7 +45,7 @@ class Scanner:
     def _getmatches(self, files, j):
         if self.size_threshold:
             j = j.start_subjob([2, 8])
-            for f in j.iter_with_progress(files, 'Read size of %d/%d files'):
+            for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
             files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in (ScanType.Contents, ScanType.ContentsAudio):
@@ -64,7 +65,7 @@ class Scanner:
                 ScanType.Fields: lambda f: engine.getfields(rem_file_ext(f.name)),
                 ScanType.Tag: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
             }[self.scan_type]
-            for f in j.iter_with_progress(files, 'Read metadata of %d/%d files'):
+            for f in j.iter_with_progress(files, tr("Read metadata of %d/%d files")):
                 f.words = func(f)
             return engine.getmatches(files, j=j, **kw)
     
@@ -93,13 +94,13 @@ class Scanner:
         logging.info('Getting matches')
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
-        j.set_progress(100, 'Removing false matches')
+        j.set_progress(100, tr("Removing false matches"))
         if not self.mix_file_kind:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
         matches = [m for m in matches if io.exists(m.first.path) and io.exists(m.second.path)]
         if self.ignore_list:
             j = j.start_subjob(2)
-            iter_matches = j.iter_with_progress(matches, 'Processed %d/%d matches against the ignore list')
+            iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
             matches = [m for m in iter_matches 
                 if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
         logging.info('Grouping matches')
@@ -108,7 +109,7 @@ class Scanner:
         self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         groups = [g for g in groups if any(not f.is_ref for f in g)]
         logging.info('Created %d groups' % len(groups))
-        j.set_progress(100, 'Doing group prioritization')
+        j.set_progress(100, tr("Doing group prioritization"))
         for g in groups:
             g.prioritize(self._key_func, self._tie_breaker)
         return groups

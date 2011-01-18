@@ -290,7 +290,7 @@
 													<reference key="NSControlView" ref="637819333"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<object class="NSCustomResource" key="NSNormalImage" id="466498619">
+													<object class="NSCustomResource" key="NSNormalImage" id="751058253">
 														<string key="NSClassName">NSImage</string>
 														<string key="NSResourceName">NSSwitch</string>
 													</object>
@@ -317,7 +317,7 @@
 													<reference key="NSControlView" ref="1067721243"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -339,7 +339,7 @@
 													<reference key="NSControlView" ref="290008886"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -361,7 +361,7 @@
 													<reference key="NSControlView" ref="551239185"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -383,7 +383,7 @@
 													<reference key="NSControlView" ref="208488736"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -405,7 +405,7 @@
 													<reference key="NSControlView" ref="427690895"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -621,7 +621,7 @@
 													<reference key="NSControlView" ref="724127338"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -643,7 +643,7 @@
 													<reference key="NSControlView" ref="647216699"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="466498619"/>
+													<reference key="NSNormalImage" ref="751058253"/>
 													<reference key="NSAlternateImage" ref="589920880"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>

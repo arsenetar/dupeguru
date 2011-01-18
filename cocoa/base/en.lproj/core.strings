@@ -1,0 +1,29 @@
+"Collecting files to scan" = "Collecting files to scan";
+"%s (%d discarded)" = "%s (%d discarded)";
+"Scanning for duplicates" = "Scanning for duplicates";
+"Loading" = "Loading";
+"Moving" = "Moving";
+"Copying" = "Copying";
+"Sending to Trash" = "Sending to Trash";
+"0 matches found" = "0 matches found";
+"%d matches found" = "%d matches found";
+"Read size of %d/%d files" = "Read size of %d/%d files";
+"Grouped %d/%d matches" = "Grouped %d/%d matches";
+"%d / %d (%s / %s) duplicates marked." = "%d / %d (%s / %s) duplicates marked.";
+" filter: %s" = " filter: %s";
+"Read size of %d/%d files" = "Read size of %d/%d files";
+"Read metadata of %d/%d files" = "Read metadata of %d/%d files";
+"Removing false matches" = "Removing false matches";
+"Processed %d/%d matches against the ignore list" = "Processed %d/%d matches against the ignore list";
+"Doing group prioritization" = "Doing group prioritization";
+
+"Analyzed %d/%d pictures" = "Analyzed %d/%d pictures";
+"Preparing for matching" = "Preparing for matching";
+"Matched %d/%d pictures" = "Matched %d/%d pictures";
+"Verified %d/%d matches" = "Verified %d/%d matches";
+
+"Removing dead tracks from your iTunes Library" = "Removing dead tracks from your iTunes Library";
+"Scanning the iTunes Library" = "Scanning the iTunes Library";
+
+"Probing iPhoto. Don't touch it during the operation!" = "Probing iPhoto. Don't touch it during the operation!";
+"Sending dupes to the Trash" = "Sending dupes to the Trash";

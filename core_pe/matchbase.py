@@ -10,6 +10,7 @@ import logging
 import multiprocessing
 from collections import defaultdict, deque
 
+from hscommon.trans import tr
 from jobprogress import job
 
 from core.engine import Match
@@ -32,7 +33,7 @@ def prepare_pictures(pictures, cache_path, j=job.nulljob):
     cache = Cache(cache_path)
     prepared = [] # only pictures for which there was no error getting blocks
     try:
-        for picture in j.iter_with_progress(pictures, 'Analyzed %d/%d pictures'):
+        for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):
             picture.dimensions
             picture.unicode_path = str(picture.path)
             try:
@@ -76,7 +77,7 @@ def async_compare(ref_id, other_ids, dbname, threshold):
 def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nulljob):
     j = j.start_subjob([3, 7])
     pictures = prepare_pictures(pictures, cache_path, j)
-    j = j.start_subjob([9, 1], 'Preparing for matching')
+    j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = Cache(cache_path)
     id2picture = {}
     dimensions2pictures = defaultdict(set)
@@ -94,7 +95,7 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
     async_results = deque()
     matches = []
     pictures_copy = set(pictures)
-    for ref in j.iter_with_progress(pictures, 'Matched %d/%d pictures'):
+    for ref in j.iter_with_progress(pictures, tr("Matched %d/%d pictures")):
         others = pictures_copy if match_scaled else dimensions2pictures[ref.dimensions]
         others.remove(ref)
         if ref.is_ref:
@@ -118,7 +119,7 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
         matches.extend(result.get())
     
     result = []
-    for ref_id, other_id, percentage in j.iter_with_progress(matches, 'Verified %d/%d matches', every=10):
+    for ref_id, other_id, percentage in j.iter_with_progress(matches, tr("Verified %d/%d matches"), every=10):
         ref = id2picture[ref_id]
         other = id2picture[other_id]
         if percentage == 100 and ref.md5 != other.md5:

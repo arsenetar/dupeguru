@@ -6,7 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-
 import difflib
 import itertools
 import logging
@@ -15,6 +14,7 @@ from collections import defaultdict, namedtuple
 from unicodedata import normalize
 
 from hscommon.util import flatten, multi_replace
+from hscommon.trans import tr
 from jobprogress import job
 
 (WEIGHT_WORDS,
@@ -25,6 +25,7 @@ JOB_REFRESH_RATE = 100
 
 def getwords(s):
     if isinstance(s, str):
+        # XXX is this really needed?
         s = normalize('NFD', s)
     s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", ' ').lower()
     s = ''.join(c for c in s if c in string.ascii_letters + string.digits + string.whitespace)
@@ -175,7 +176,7 @@ def getmatches(objects, min_match_percentage=0, match_similar_words=False, weigh
         match_flags.append(MATCH_SIMILAR_WORDS)
     if no_field_order:
         match_flags.append(NO_FIELD_ORDER)
-    j.start_job(len(word_dict), '0 matches found')
+    j.start_job(len(word_dict), tr("0 matches found"))
     compared = defaultdict(set)
     result = []
     try:
@@ -193,7 +194,7 @@ def getmatches(objects, min_match_percentage=0, match_similar_words=False, weigh
                         result.append(m)
                         if len(result) >= LIMIT:
                             return result
-            j.add_progress(desc='%d matches found' % len(result))
+            j.add_progress(desc=tr("%d matches found") % len(result))
     except MemoryError:
         # This is the place where the memory usage is at its peak during the scan.
         # Just continue the process with an incomplete list of matches.
@@ -205,14 +206,14 @@ def getmatches(objects, min_match_percentage=0, match_similar_words=False, weigh
 def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob):
     j = j.start_subjob([2, 8])
     size2files = defaultdict(set)
-    for file in j.iter_with_progress(files, 'Read size of %d/%d files'):
+    for file in j.iter_with_progress(files, tr("Read size of %d/%d files")):
         filesize = getattr(file, sizeattr)
         if filesize:
             size2files[filesize].add(file)
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
     result = []
-    j.start_job(len(possible_matches), '0 matches found')
+    j.start_job(len(possible_matches), tr("0 matches found"))
     for group in possible_matches:
         for first, second in itertools.combinations(group, 2):
             if first.is_ref and second.is_ref:
@@ -220,7 +221,7 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
             if first.md5partial == second.md5partial:
                 if partial or first.md5 == second.md5:
                     result.append(Match(first, second, 100))
-        j.add_progress(desc='%d matches found' % len(result))
+        j.add_progress(desc=tr("%d matches found") % len(result))
     return result
 
 class Group(object):
@@ -349,7 +350,7 @@ def get_groups(matches, j=job.nulljob):
     dupe2group = {}
     groups = []
     try:
-        for match in j.iter_with_progress(matches, 'Grouped %d/%d matches', JOB_REFRESH_RATE):
+        for match in j.iter_with_progress(matches, tr("Grouped %d/%d matches"), JOB_REFRESH_RATE):
             first, second, _ = match
             first_group = dupe2group.get(first)
             second_group = dupe2group.get(second)

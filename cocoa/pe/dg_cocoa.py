@@ -4,6 +4,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from hscommon.trans import install_cocoa_trans
+install_cocoa_trans()
+
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_pe import app_cocoa as app_pe_cocoa
 

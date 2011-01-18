@@ -11,6 +11,7 @@ from appscript import app, k, CommandError
 import time
 
 from hscommon.cocoa import as_fetch
+from hscommon.trans import tr
 
 from core.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
 
@@ -20,8 +21,8 @@ JOB_REMOVE_DEAD_TRACKS = 'jobRemoveDeadTracks'
 JOB_SCAN_DEAD_TRACKS = 'jobScanDeadTracks'
 
 JOBID2TITLE.update({
-    JOB_REMOVE_DEAD_TRACKS: "Removing dead tracks from your iTunes Library",
-    JOB_SCAN_DEAD_TRACKS: "Scanning the iTunes Library",
+    JOB_REMOVE_DEAD_TRACKS: tr("Removing dead tracks from your iTunes Library"),
+    JOB_SCAN_DEAD_TRACKS: tr("Scanning the iTunes Library"),
 })
 
 class DupeGuruME(DupeGuruBase):

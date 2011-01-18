@@ -45,6 +45,7 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE45274F12E5F62D00005A15 /* core.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE45274D12E5F62D00005A15 /* core.strings */; };
 		CE49DEF60FDFEB810098617B /* BRSingleLineFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */; };
 		CE4B59C81119919700C06C9E /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */; };
 		CE4B59C91119919700C06C9E /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B59C61119919700C06C9E /* progress.xib */; };
@@ -142,6 +143,8 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE45274E12E5F62D00005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
+		CE45275012E5F63900005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE49DEF20FDFEB810098617B /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CE49DEF30FDFEB810098617B /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
 		CE4B59C51119919700C06C9E /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 				CE05330C12E5D3D70029EF25 /* xib */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				CE05332D12E5D6100029EF25 /* Localizable.strings */,
+				CE45274D12E5F62D00005A15 /* core.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */,
 			);
@@ -503,6 +507,7 @@
 				CE05331B12E5D3ED0029EF25 /* ResultWindow.xib in Resources */,
 				CE05332312E5D4100029EF25 /* Preferences.xib in Resources */,
 				CE05332F12E5D6100029EF25 /* Localizable.strings in Resources */,
+				CE45274F12E5F62D00005A15 /* core.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +616,15 @@
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
+		};
+		CE45274D12E5F62D00005A15 /* core.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE45274E12E5F62D00005A15 /* en */,
+				CE45275012E5F63900005A15 /* fr */,
+			);
+			name = core.strings;
+			sourceTree = SOURCE_ROOT;
 		};
 		CE74A12512537F2E008A8DF0 /* FairwareReminder.xib */ = {
 			isa = PBXVariantGroup;
