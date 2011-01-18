@@ -17,9 +17,13 @@ from distutils.extension import Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder,
-    filereplace, get_module_version)
+    filereplace, get_module_version, build_all_cocoa_locs)
 
 def build_cocoa(edition, dev):
+    build_all_cocoa_locs('cocoalib')
+    build_all_cocoa_locs(op.join('cocoa', 'base'))
+    build_all_cocoa_locs(op.join('cocoa', edition))
+    
     print("Building dg_cocoa.plugin")
     if not dev:
         specific_packages = {

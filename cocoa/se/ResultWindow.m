@@ -8,6 +8,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import "ResultWindow.h"
 #import "Utils.h"
+#import "Consts.h"
 #import "PyDupeGuru.h"
 
 @implementation ResultWindow
@@ -26,15 +27,15 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Folder" width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TR(@"Folder") width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TR(@"Size (KB)") width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Match %" width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Words Used" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:3 title:TR(@"Kind") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:TR(@"Modification") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TR(@"Match %") width:60 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TR(@"Words Used") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TR(@"Dupe Count") width:80 refCol:refCol]];
 }
 
 - (void)setScanOptions

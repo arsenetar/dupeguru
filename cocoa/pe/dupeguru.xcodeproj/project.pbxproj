@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CE031751109B340A00517EE6 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031750109B340A00517EE6 /* Preferences.xib */; };
-		CE031754109B345200517EE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE031753109B345200517EE6 /* MainMenu.xib */; };
+		CE05339B12E5DA350029EF25 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339312E5DA350029EF25 /* DirectoryPanel.xib */; };
+		CE05339C12E5DA350029EF25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339512E5DA350029EF25 /* MainMenu.xib */; };
+		CE05339D12E5DA350029EF25 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339712E5DA350029EF25 /* ProblemDialog.xib */; };
+		CE05339E12E5DA350029EF25 /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339912E5DA350029EF25 /* ResultWindow.xib */; };
+		CE0533A712E5DA4D0029EF25 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */; };
+		CE0533A812E5DA4D0029EF25 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A512E5DA4D0029EF25 /* Preferences.xib */; };
+		CE0533AB12E5DA6A0029EF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A912E5DA6A0029EF25 /* Localizable.strings */; };
 		CE073F6309CAE1A3005C1D2F /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
 		CE0C2AB61177011000BC749F /* HSTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C2AB51177011000BC749F /* HSTable.m */; };
 		CE0C2ABD1177014200BC749F /* ProblemDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C2ABB1177014200BC749F /* ProblemDialog.m */; };
-		CE0C2AC81177021600BC749F /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0C2AC71177021600BC749F /* ProblemDialog.xib */; };
 		CE15C8A80ADEB8B50061D4A5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE15C8C00ADEB8D40061D4A5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE1EB5FE12537F9D0034AABB /* HSFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */; };
@@ -26,9 +30,6 @@
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
-		CE7360AC12E07DD000A0888D /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7360AB12E07DD000A0888D /* ResultWindow.xib */; };
-		CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */; };
-		CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE77C8A710946CE20078B0DB /* DetailsPanel.xib */; };
 		CE7AC9181119911200D02F6C /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */; };
 		CE7AC9191119911200D02F6C /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9161119911200D02F6C /* progress.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
@@ -80,13 +81,26 @@
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru PE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dupeGuru PE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE031750109B340A00517EE6 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
-		CE031753109B345200517EE6 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../base/xib/MainMenu.xib; sourceTree = "<group>"; };
+		CE05339412E5DA350029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
+		CE05339612E5DA350029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		CE05339812E5DA350029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
+		CE05339A12E5DA350029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
+		CE05339F12E5DA420029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
+		CE0533A012E5DA420029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		CE0533A112E5DA420029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
+		CE0533A212E5DA420029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
+		CE0533A412E5DA4D0029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
+		CE0533A612E5DA4D0029EF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CE0533AA12E5DA6A0029EF25 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		CE0533AC12E5DA790029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		CE0533AD12E5DAAD0029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
+		CE0533AE12E5DAAD0029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CE0533B712E5DC040029EF25 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../../cocoalib/fr.lproj/FairwareReminder.xib; sourceTree = SOURCE_ROOT; };
 		CE073F5409CAE1A3005C1D2F /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = SOURCE_ROOT; };
 		CE0C2AAA117700E700BC749F /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE0C2AB41177011000BC749F /* HSTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTable.h; sourceTree = "<group>"; };
@@ -94,7 +108,6 @@
 		CE0C2ABA1177014200BC749F /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
 		CE0C2ABB1177014200BC749F /* ProblemDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProblemDialog.m; path = ../base/ProblemDialog.m; sourceTree = SOURCE_ROOT; };
 		CE0C2ABC1177014200BC749F /* PyProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyProblemDialog.h; path = ../base/PyProblemDialog.h; sourceTree = SOURCE_ROOT; };
-		CE0C2AC71177021600BC749F /* ProblemDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProblemDialog.xib; path = ../base/xib/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE1EB5FB12537F9D0034AABB /* HSFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSFairwareReminder.h; path = ../../cocoalib/HSFairwareReminder.h; sourceTree = SOURCE_ROOT; };
@@ -113,9 +126,6 @@
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
-		CE7360AB12E07DD000A0888D /* ResultWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ResultWindow.xib; path = ../base/xib/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
-		CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DirectoryPanel.xib; path = ../../base/xib/DirectoryPanel.xib; sourceTree = "<group>"; };
-		CE77C8A710946CE20078B0DB /* DetailsPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPanel.xib; sourceTree = "<group>"; };
 		CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CE7AC9161119911200D02F6C /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
@@ -197,6 +207,7 @@
 		080E96DDFE201D6D7F000001 /* DGPE */ = {
 			isa = PBXGroup;
 			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				CE381C9509914ACE003581CE /* AppDelegate.h */,
 				CE381C9409914ACE003581CE /* AppDelegate.m */,
 				CE848A1809DD85810004CB44 /* Consts.h */,
@@ -244,7 +255,6 @@
 				080E96DDFE201D6D7F000001 /* DGPE */,
 				CE80DB1A0FC192AB0086DCA6 /* cocoalib */,
 				CE80DB810FC194BD0086DCA6 /* dgbase */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -252,23 +262,16 @@
 			name = dupeguru;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-				29B97316FDCFA39411CA2CEA /* main.m */,
-			);
-			name = "Other Sources";
-			sourceTree = "<group>";
-		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE77C89A10946C6D0078B0DB /* xib */,
 				CE073F5409CAE1A3005C1D2F /* help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
+				CE05339212E5DA1D0029EF25 /* xib */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				CE0533A912E5DA6A0029EF25 /* Localizable.strings */,
 				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
 			);
 			name = Resources;
@@ -283,17 +286,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CE77C89A10946C6D0078B0DB /* xib */ = {
+		CE05339212E5DA1D0029EF25 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				CE031753109B345200517EE6 /* MainMenu.xib */,
-				CE7360AB12E07DD000A0888D /* ResultWindow.xib */,
-				CE77C8A710946CE20078B0DB /* DetailsPanel.xib */,
-				CE77C89C10946C6D0078B0DB /* DirectoryPanel.xib */,
-				CE031750109B340A00517EE6 /* Preferences.xib */,
-				CE0C2AC71177021600BC749F /* ProblemDialog.xib */,
+				CE05339312E5DA350029EF25 /* DirectoryPanel.xib */,
+				CE05339512E5DA350029EF25 /* MainMenu.xib */,
+				CE05339712E5DA350029EF25 /* ProblemDialog.xib */,
+				CE05339912E5DA350029EF25 /* ResultWindow.xib */,
+				CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */,
+				CE0533A512E5DA4D0029EF25 /* Preferences.xib */,
 			);
-			path = xib;
+			name = xib;
 			sourceTree = "<group>";
 		};
 		CE7AC9141119911200D02F6C /* xib */ = {
@@ -472,6 +475,7 @@
 				French,
 				German,
 				en,
+				fr,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -492,16 +496,17 @@
 				CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */,
 				CEFC294609C89E3D00D9F998 /* folder32.png in Resources */,
 				CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */,
-				CE77C89E10946C6D0078B0DB /* DirectoryPanel.xib in Resources */,
-				CE77C8A810946CE20078B0DB /* DetailsPanel.xib in Resources */,
-				CE031751109B340A00517EE6 /* Preferences.xib in Resources */,
-				CE031754109B345200517EE6 /* MainMenu.xib in Resources */,
 				CE7AC9181119911200D02F6C /* ErrorReportWindow.xib in Resources */,
 				CE7AC9191119911200D02F6C /* progress.xib in Resources */,
-				CE0C2AC81177021600BC749F /* ProblemDialog.xib in Resources */,
 				CE1EB60112537FB90034AABB /* FairwareReminder.xib in Resources */,
 				CEC9DB4712CCAA6B003102F0 /* about.xib in Resources */,
-				CE7360AC12E07DD000A0888D /* ResultWindow.xib in Resources */,
+				CE05339B12E5DA350029EF25 /* DirectoryPanel.xib in Resources */,
+				CE05339C12E5DA350029EF25 /* MainMenu.xib in Resources */,
+				CE05339D12E5DA350029EF25 /* ProblemDialog.xib in Resources */,
+				CE05339E12E5DA350029EF25 /* ResultWindow.xib in Resources */,
+				CE0533A712E5DA4D0029EF25 /* DetailsPanel.xib in Resources */,
+				CE0533A812E5DA4D0029EF25 /* Preferences.xib in Resources */,
+				CE0533AB12E5DA6A0029EF25 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,10 +556,74 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CE05339312E5DA350029EF25 /* DirectoryPanel.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE05339412E5DA350029EF25 /* en */,
+				CE05339F12E5DA420029EF25 /* fr */,
+			);
+			name = DirectoryPanel.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE05339512E5DA350029EF25 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE05339612E5DA350029EF25 /* en */,
+				CE0533A012E5DA420029EF25 /* fr */,
+			);
+			name = MainMenu.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE05339712E5DA350029EF25 /* ProblemDialog.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE05339812E5DA350029EF25 /* en */,
+				CE0533A112E5DA420029EF25 /* fr */,
+			);
+			name = ProblemDialog.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE05339912E5DA350029EF25 /* ResultWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE05339A12E5DA350029EF25 /* en */,
+				CE0533A212E5DA420029EF25 /* fr */,
+			);
+			name = ResultWindow.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE0533A412E5DA4D0029EF25 /* en */,
+				CE0533AD12E5DAAD0029EF25 /* fr */,
+			);
+			name = DetailsPanel.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE0533A512E5DA4D0029EF25 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE0533A612E5DA4D0029EF25 /* en */,
+				CE0533AE12E5DAAD0029EF25 /* fr */,
+			);
+			name = Preferences.xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE0533A912E5DA6A0029EF25 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE0533AA12E5DA6A0029EF25 /* en */,
+				CE0533AC12E5DA790029EF25 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = SOURCE_ROOT;
+		};
 		CE1EB5FF12537FB90034AABB /* FairwareReminder.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CE1EB60012537FB90034AABB /* en */,
+				CE0533B712E5DC040029EF25 /* fr */,
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;

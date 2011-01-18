@@ -7,10 +7,10 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "AppDelegate.h"
-#import "../../cocoalib/ProgressController.h"
-#import "../../cocoalib/Utils.h"
-#import "../../cocoalib/ValueTransformers.h"
-#import "../../cocoalib/Dialogs.h"
+#import "ProgressController.h"
+#import "Utils.h"
+#import "ValueTransformers.h"
+#import "Dialogs.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 #import "ResultWindow.h"
@@ -79,7 +79,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
     // index 3 is just after "Export Results to XHTML"
-    NSMenuItem *mi = [actionsMenu insertItemWithTitle:@"Remove Dead Tracks in iTunes" 
+    NSMenuItem *mi = [actionsMenu insertItemWithTitle:TR(@"Remove Dead Tracks in iTunes")
         action:@selector(removeDeadTracks:) keyEquivalent:@"" atIndex:3];
     [mi setTarget:[self resultWindow]];
     [super applicationDidFinishLaunching:aNotification];

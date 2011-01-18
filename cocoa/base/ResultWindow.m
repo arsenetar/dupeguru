@@ -59,9 +59,9 @@ http://www.hardcoded.net/licenses/bsd_license
         return nil;
     }
     if (errorCode == 3) {
-        return @"The selected directories contain no scannable file.";
+        return TR(@"NoScannableFileMsg");
     }
-    return @"Unknown Error.";
+    return TR(@"UnknownErrorMsg");
 }
 
 /* Helpers */
@@ -77,7 +77,8 @@ http://www.hardcoded.net/licenses/bsd_license
             [mi setState:NSOnState];
     }
     [columnsMenu addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *mi = [columnsMenu addItemWithTitle:@"Reset to Default" action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
+    NSMenuItem *mi = [columnsMenu addItemWithTitle:TR(@"Reset to Default")
+        action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
     [mi setTarget:self];
 }
 
@@ -145,9 +146,9 @@ http://www.hardcoded.net/licenses/bsd_license
     if (!mark_count) {
         return;
     }
-    NSString *msg = @"You are about to send %d files to Trash. Continue?";
+    NSString *msg = TR(@"SendToTrashConfirmMsg");
     if (hardlinkDeleted) {
-        msg = @"You are about to send %d files to Trash (and hardlink them afterwards). Continue?";
+        msg = TR(@"HardlinkConfirmMsg");
     }
     if ([Dialogs askYesNo:[NSString stringWithFormat:msg,mark_count]] == NSAlertSecondButtonReturn) { // NO
         return;
@@ -175,7 +176,8 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger i = n2i([py getIgnoreListCount]);
     if (!i)
         return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"Do you really want to remove all %d items from the ignore list?",i]] == NSAlertSecondButtonReturn) // NO
+    NSString *msg = [NSString stringWithFormat:TR(@"ClearIgnoreListConfirmMsg"),i];
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py clearIgnoreList];
 }
@@ -204,9 +206,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseDirectories:YES];
     [op setCanCreateDirectories:YES];
     [op setAllowsMultipleSelection:NO];
-    [op setTitle:@"Select a directory to copy marked files to"];
-    if ([op runModalForTypes:nil] == NSOKButton)
-    {
+    [op setTitle:TR(@"SelectCopyDestinationMsg")];
+    if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         [py copyOrMove:b2n(YES) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
@@ -241,7 +242,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger selectedDupeCount = [table selectedDupeCount];
     if (!selectedDupeCount)
         return;
-    NSString *msg = [NSString stringWithFormat:@"All selected %d matches are going to be ignored in all subsequent scans. Continue?",selectedDupeCount];
+    NSString *msg = [NSString stringWithFormat:TR(@"IgnoreConfirmMsg"),selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py addSelectedToIgnoreList];
@@ -255,7 +256,7 @@ http://www.hardcoded.net/licenses/bsd_license
         [py invokeCommand:cmd];
     }
     else {
-        [Dialogs showMessage:@"You have no custom command set up. Set it up in your preferences."];
+        [Dialogs showMessage:TR(@"NoCustomCommandMsg")];
     }
 }
 
@@ -289,9 +290,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseDirectories:YES];
     [op setCanCreateDirectories:YES];
     [op setAllowsMultipleSelection:NO];
-    [op setTitle:@"Select a directory to move marked files to"];
-    if ([op runModalForTypes:nil] == NSOKButton)
-    {
+    [op setTitle:TR(@"SelectMoveDestinationMsg")];
+    if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
@@ -318,7 +318,8 @@ http://www.hardcoded.net/licenses/bsd_license
     int mark_count = [[py getMarkCount] intValue];
     if (!mark_count)
         return;
-    if ([Dialogs askYesNo:[NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count]] == NSAlertSecondButtonReturn) // NO
+    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count];
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py removeMarked];
 }
@@ -350,7 +351,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSSavePanel *sp = [NSSavePanel savePanel];
     [sp setCanCreateDirectories:YES];
     [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [sp setTitle:@"Select a file to save your results to"];
+    [sp setTitle:TR(@"SelectResultToSaveMsg")];
     if ([sp runModal] == NSOKButton) {
         [py saveResultsAs:[sp filename]];
         [[app recentResults] addFile:[sp filename]];
@@ -360,7 +361,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)startDuplicateScan:(id)sender
 {
     if ([py resultsAreModified]) {
-        if ([Dialogs askYesNo:@"You have unsaved results, do you really want to continue?"] == NSAlertSecondButtonReturn) // NO
+        if ([Dialogs askYesNo:TR(@"ReallyWantToContinueMsg")] == NSAlertSecondButtonReturn) // NO
             return;
     }
     [self setScanOptions];
@@ -382,15 +383,13 @@ http://www.hardcoded.net/licenses/bsd_license
     NSMenuItem *mi = sender;
     NSString *colId = [NSString stringWithFormat:@"%d",[mi tag]];
     NSTableColumn *col = [matches tableColumnWithIdentifier:colId];
-    if (col == nil)
-    {
+    if (col == nil) {
         //Add Column
         col = [_resultColumns objectAtIndex:[mi tag]];
         [matches addTableColumn:col];
         [mi setState:NSOnState];
     }
-    else
-    {
+    else {
         //Remove column
         [matches removeTableColumn:col];
         [mi setState:NSOffState];
@@ -424,7 +423,7 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:@"All marked files were copied sucessfully."];
+            [Dialogs showMessage:TR(@"CopySuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobMove]) {
@@ -432,7 +431,7 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:@"All marked files were moved sucessfully."];
+            [Dialogs showMessage:TR(@"MoveSuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobDelete]) {
@@ -440,19 +439,20 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:@"All marked files were sucessfully sent to Trash."];
+            [Dialogs showMessage:TR(@"SendToTrashSuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobScan]) {
         NSInteger rowCount = [[table py] numberOfRows];
-        if (rowCount == 0)
-            [Dialogs showMessage:@"No duplicates found."];
+        if (rowCount == 0) {
+            [Dialogs showMessage:TR(@"NoDuplicateFoundMsg")];
+        }
     }
 }
 
 - (void)jobInProgress:(NSNotification *)aNotification
 {
-    [Dialogs showMessage:@"A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."];
+    [Dialogs showMessage:TR(@"TaskHangingMsg")];
 }
 
 - (void)jobStarted:(NSNotification *)aNotification

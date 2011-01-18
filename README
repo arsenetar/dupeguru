@@ -44,6 +44,7 @@ OS X prerequisites
 - Sparkle (http://sparkle.andymatuschak.org/)
 - PyObjC 2.3 (http://pyobjc.sourceforge.net/)
 - py2app 0.5.4 (http://bitbucket.org/ronaldoussoren/py2app)
+- appscript 0.22.0 for ME and PE (http://appscript.sourceforge.net/)
 
 Windows prerequisites
 ---

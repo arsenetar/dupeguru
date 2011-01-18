@@ -68,7 +68,8 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger selectedDupeCount = [self selectedDupeCount];
     if (!selectedDupeCount)
         return;
-    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",selectedDupeCount];
+    NSString *msgFmt = TR(@"FileRemovalConfirmMsg");
+    NSString *msg = [NSString stringWithFormat:msgFmt,selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [[self py] removeSelected];
@@ -97,7 +98,7 @@ http://www.hardcoded.net/licenses/bsd_license
         if (![newName isEqual:oldName]) {
             BOOL renamed = [[self py] renameSelected:newName];
             if (!renamed) {
-                [Dialogs showMessage:[NSString stringWithFormat:@"The name '%@' already exists.", newName]];
+                [Dialogs showMessage:[NSString stringWithFormat:TR(@"FilenameAlreadyExistsMsg"), newName]];
             }
             else {
                 [tableView setNeedsDisplay:YES];

@@ -10,6 +10,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Dialogs.h"
 #import "Utils.h"
 #import "AppDelegate.h"
+#import "Consts.h"
 
 @implementation DirectoryPanel
 - (id)initWithParentApp:(AppDelegateBase *)aParentApp
@@ -41,7 +42,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)fillPopUpMenu
 {
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m addItemWithTitle:@"Add New Folder..." action:@selector(askForDirectory:) keyEquivalent:@""];
+    NSMenuItem *mi = [m addItemWithTitle:TR(@"Add New Folder...") action:@selector(askForDirectory:) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
 }
@@ -54,7 +55,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:YES];
     [op setAllowsMultipleSelection:YES];
-    [op setTitle:@"Select a folder to add to the scanning list"];
+    [op setTitle:TR(@"SelectFolderToAddMsg")];
     [op setDelegate:self];
     if ([op runModal] == NSOKButton) {
         for (NSString *directory in [op filenames]) {
@@ -81,7 +82,7 @@ http://www.hardcoded.net/licenses/bsd_license
         while ([m numberOfItems] > 0) {
             [m removeItemAtIndex:0];
         }
-        NSMenuItem *mi = [m addItemWithTitle:@"Load from file..." action:@selector(loadResults:) keyEquivalent:@""];
+        NSMenuItem *mi = [m addItemWithTitle:TR(@"Load from file...") action:@selector(loadResults:) keyEquivalent:@""];
         [mi setTarget:_app];
         [m addItem:[NSMenuItem separatorItem]];
         [[_app recentResults] fillMenu:m];
@@ -118,10 +119,10 @@ http://www.hardcoded.net/licenses/bsd_license
     if (r) {
         NSString *m = @"";
         if (r == 1) {
-            m = @"'%@' already is in the list.";
+            m = TR(@"FolderAlreadyInListMsg");
         }
         else if (r == 2) {
-            m = @"'%@' does not exist.";
+            m = TR(@"FolderDoesNotExistMsg");
         }
         [Dialogs showMessage:[NSString stringWithFormat:m,directory]];
     }

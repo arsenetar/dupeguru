@@ -16,3 +16,5 @@ http://www.hardcoded.net/licenses/bsd_license
 #define jobCopy @"job_copy"
 #define jobMove @"job_move"
 #define jobDelete @"job_delete"
+
+#define TR(s) NSLocalizedString(s, @"")

@@ -46,29 +46,29 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Folder" width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (MB)" width:63 refCol:refCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TR(@"Folder") width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TR(@"Size (MB)") width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
-    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:@"Time" width:50 refCol:refCol];
+    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:TR(@"Time") width:50 refCol:refCol];
     [[timeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:timeCol];
-    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:@"Bitrate" width:50 refCol:refCol];
+    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:TR(@"Bitrate") width:50 refCol:refCol];
     [[brCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:brCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Sample Rate" width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:8 title:@"Title" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:9 title:@"Artist" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:10 title:@"Album" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:11 title:@"Genre" width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:12 title:@"Year" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:13 title:@"Track Number" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:14 title:@"Comment" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:15 title:@"Match %" width:57 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:16 title:@"Words Used" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:17 title:@"Dupe Count" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TR(@"Sample Rate") width:60 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TR(@"Kind") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TR(@"Modification") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:8 title:TR(@"Title") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:9 title:TR(@"Artist") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:10 title:TR(@"Album") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:11 title:TR(@"Genre") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:12 title:TR(@"Year") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:13 title:TR(@"Track Number") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:14 title:TR(@"Comment") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:15 title:TR(@"Match %") width:57 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:16 title:TR(@"Words Used") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:17 title:TR(@"Dupe Count") width:80 refCol:refCol]];
 }
 
 /* Actions */
@@ -101,18 +101,15 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [super jobCompleted:aNotification];
     id lastAction = [[ProgressController mainProgressController] jobId];
-    if ([lastAction isEqualTo:jobScanDeadTracks])
-    {
+    if ([lastAction isEqualTo:jobScanDeadTracks]) {
         NSInteger deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
-        if (deadTrackCount > 0)
-        {
-            NSString *msg = @"Your iTunes Library contains %d dead tracks ready to be removed. Continue?";
+        if (deadTrackCount > 0) {
+            NSString *msg = TR(@"RemoveDeadTracksConfirmMsg");
             if ([Dialogs askYesNo:[NSString stringWithFormat:msg,deadTrackCount]] == NSAlertFirstButtonReturn)
                 [(PyDupeGuru *)py removeDeadTracks];
         }
-        else
-        {
-            [Dialogs showMessage:@"You have no dead tracks in your iTunes Library"];
+        else {
+            [Dialogs showMessage:TR(@"NoDeadTrackMsg")];
         }
     }
 }

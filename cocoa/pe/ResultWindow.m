@@ -9,6 +9,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "ResultWindow.h"
 #import "Dialogs.h"
 #import "Utils.h"
+#import "Consts.h"
 #import "PyDupeGuru.h"
 
 @implementation ResultWindow
@@ -27,15 +28,15 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:@"Folder" width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:@"Size (KB)" width:63 refCol:refCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TR(@"Folder") width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TR(@"Size (KB)") width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:@"Kind" width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:@"Dimensions" width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:@"Modification" width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:@"Match %" width:58 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:@"Dupe Count" width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:3 title:TR(@"Kind") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:TR(@"Dimensions") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TR(@"Modification") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TR(@"Match %") width:58 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TR(@"Dupe Count") width:80 refCol:refCol]];
 }
 
 - (void)setScanOptions
@@ -51,7 +52,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode
 {
     if (errorCode == 4) {
-        return @"The iPhoto application couldn't be found.";
+        return TR(@"IPhotoAppNotFoundMsg");
     }
     return [super getScanErrorMessageForCode:errorCode];
 }
@@ -59,7 +60,8 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Actions */
 - (IBAction)clearPictureCache:(id)sender
 {
-    if ([Dialogs askYesNo:@"Do you really want to remove all your cached picture analysis?"] == NSAlertSecondButtonReturn) // NO
+    NSString *msg = TR(@"ClearPictureCacheConfirmMsg");
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [(PyDupeGuru *)py clearPictureCache];
 }
