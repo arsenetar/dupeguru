@@ -6,10 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import QSize, QRect
+from PyQt4.QtCore import QRect
 from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMessageBox, QMainWindow,
-    QMenuBar, QMenu)
+    QMenuBar, QMenu, QIcon, QPixmap)
 
 from qtlib.recent import Recent
 from core.app import NoScannableFileError
@@ -116,10 +116,12 @@ class DirectoriesDialog(QMainWindow):
         header.resizeSection(1, 100)
         self.verticalLayout.addWidget(self.treeView)
         self.horizontalLayout = QHBoxLayout()
-        self.removeFolderButton = QPushButton("Remove", self.centralwidget)
+        self.removeFolderButton = QPushButton(self.centralwidget)
+        self.removeFolderButton.setIcon(QIcon(QPixmap(":/minus")))
         self.removeFolderButton.setShortcut("Del")
         self.horizontalLayout.addWidget(self.removeFolderButton)
-        self.addFolderButton = QPushButton("Add", self.centralwidget)
+        self.addFolderButton = QPushButton(self.centralwidget)
+        self.addFolderButton.setIcon(QIcon(QPixmap(":/plus")))
         self.horizontalLayout.addWidget(self.addFolderButton)
         spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)

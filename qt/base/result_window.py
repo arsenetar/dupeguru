@@ -143,7 +143,6 @@ class ResultWindow(QMainWindow):
         
         # Action menu
         actionMenu = QMenu('Actions', self.menubar)
-        actionMenu.setIcon(QIcon(QPixmap(":/actions")))
         actionMenu.addAction(self.actionDeleteMarked)
         actionMenu.addAction(self.actionHardlinkMarked)
         actionMenu.addAction(self.actionMoveMarked)
