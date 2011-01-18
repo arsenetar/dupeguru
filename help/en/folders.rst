@@ -1,7 +1,7 @@
 Folder Selection
 ================
 
-The first window you see when you launch dupeGuru is the folder selection window. This windows contains the list of the directories that will be scanned when you click on **Scan**.
+The first window you see when you launch dupeGuru is the folder selection window. This windows contains the list of the folders that will be scanned when you click on **Scan**.
 
 This window is quite straightforward to use. If you want to add a folder, click on the **+** button. If you added folder before, a popup menu with a list of recent folders you added will pop. You can click on one of them to add it directly to your list. If you click on the first item of the popup menu, **Add New Folder...**, you will be prompted for a folder to add. If you never added a folder, no menu will pop and you will directly be prompted for a new folder to add.
 

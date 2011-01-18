@@ -39,7 +39,7 @@ You cannot mark the reference (The first file) of a duplicate group. However, wh
 I have a folder from which I really don't want to delete files.
 ------------------------------------------------------------------
 
-If you want to be sure that dupeGuru will never delete file from a particular folder, make sure to set its state to **Reference** at :doc:`directories`.
+If you want to be sure that dupeGuru will never delete file from a particular folder, make sure to set its state to **Reference** at :doc:`folders`.
 
 What is this '(X discarded)' notice in the status bar?
 ------------------------------------------------------

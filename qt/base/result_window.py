@@ -40,8 +40,8 @@ class ResultWindow(QMainWindow):
         ACTIONS = [
             ('actionDetails', 'Ctrl+I', '', "Details", self.detailsTriggered),
             ('actionActions', '', '', "Actions", self.actionsTriggered),
-            ('actionDelta', 'Ctrl+2', '', "Delta Values", self.deltaTriggered),
-            ('actionPowerMarker', 'Ctrl+1', '', "Power Marker", self.powerMarkerTriggered),
+            ('actionPowerMarker', 'Ctrl+1', '', "Show Dupes Only", self.powerMarkerTriggered),
+            ('actionDelta', 'Ctrl+2', '', "Show Delta Values", self.deltaTriggered),
             ('actionDeleteMarked', 'Ctrl+D', '', "Send Marked to Recycle Bin", self.deleteTriggered),
             ('actionHardlinkMarked', 'Ctrl+Shift+D', '', "Delete Marked and Replace with Hardlinks", self.hardlinkTriggered),
             ('actionMoveMarked', 'Ctrl+M', '', "Move Marked to...", self.moveTriggered),
