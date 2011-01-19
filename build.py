@@ -17,7 +17,7 @@ from distutils.extension import Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder,
-    filereplace, get_module_version, build_all_cocoa_locs)
+    filereplace, get_module_version, build_all_cocoa_locs, build_all_qt_locs)
 
 def build_cocoa(edition, dev):
     build_all_cocoa_locs('cocoalib')
@@ -76,6 +76,8 @@ def build_cocoa(edition, dev):
     open('run.py', 'wt').write(run_contents)
 
 def build_qt(edition, dev):
+    print("Building .ts files")
+    build_all_qt_locs(op.join('qt', 'lang'))
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     print("Creating the run.py file")

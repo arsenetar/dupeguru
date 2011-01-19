@@ -9,18 +9,24 @@ import sys
 import sip
 sip.setapi('QVariant', 1)
 
-from PyQt4.QtCore import QCoreApplication
+from PyQt4.QtCore import QCoreApplication, QSettings
 from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
+from hscommon.trans import install_qt_trans
 from qtlib.error_report_dialog import install_excepthook
 from qt.base import dg_rc
-from qt.{{edition}}.app import DupeGuru
 
 if sys.platform == 'win32':
     import qt.base.cxfreeze_fix
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    settings = QSettings()
+    lang = settings.value('Language').toString()
+    install_qt_trans(lang)
+    # Many strings are translated at import time, so this is why we only import after the translator
+    # has been installed
+    from qt.{{edition}}.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     QCoreApplication.setOrganizationName('Hardcoded Software')
     QCoreApplication.setApplicationName(DupeGuru.NAME)
