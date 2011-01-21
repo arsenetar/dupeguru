@@ -9,6 +9,7 @@
 
 import os
 import os.path as op
+from optparse import OptionParser
 import shutil
 import json
 
@@ -18,6 +19,14 @@ from distutils.extension import Extension
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder,
     filereplace, get_module_version, build_all_cocoa_locs, build_all_qt_locs)
+
+def parse_args():
+    usage = "usage: %prog [options]"
+    parser = OptionParser(usage=usage)
+    parser.add_option('--only-help', action='store_true', dest='only_help',
+        help="Build only help file")
+    (options, args) = parser.parse_args()
+    return options
 
 def build_cocoa(edition, dev):
     build_all_cocoa_locs('cocoalib')
@@ -85,7 +94,7 @@ def build_qt(edition, dev):
     run_contents = tmpl.replace('{{edition}}', edition)
     open('run.py', 'wt').write(run_contents)
 
-def build_help(edition, ui, dev):
+def build_help(edition):
     print("Generating Help")
     current_path = op.abspath('.')
     help_basepath = op.join(current_path, 'help', 'en')
@@ -134,15 +143,8 @@ def build_pe_modules(ui):
     move('_block_qt.so', op.join('qt', 'pe', '_block_qt.so'))
     move('_block_qt.pyd', op.join('qt', 'pe', '_block_qt.pyd'))
 
-def main():
-    conf = json.load(open('conf.json'))
-    edition = conf['edition']
-    ui = conf['ui']
-    dev = conf['dev']
+def build_normal(edition, ui, dev):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
-    ensure_empty_folder('build')
-    if dev:
-        print("Building in Dev mode")
     add_to_pythonpath('.')
     build_help(edition, ui, dev)
     print("Building dupeGuru")
@@ -152,6 +154,20 @@ def main():
         build_cocoa(edition, dev)
     elif ui == 'qt':
         build_qt(edition, dev)
+
+def main():
+    options = parse_args()
+    conf = json.load(open('conf.json'))
+    edition = conf['edition']
+    ui = conf['ui']
+    dev = conf['dev']
+    if dev:
+        print("Building in Dev mode")
+    ensure_empty_folder('build')
+    if options.only_help:
+        build_help(edition)
+    else:
+        build_normal(edition, ui, dev)
 
 if __name__ == '__main__':
     main()
