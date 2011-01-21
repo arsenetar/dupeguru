@@ -15,12 +15,16 @@ from PyQt4.QtGui import QApplication, QIcon, QPixmap
 from hscommon.trans import install_qt_trans
 from qtlib.error_report_dialog import install_excepthook
 from qt.base import dg_rc
+from core_{{edition}} import __version__, __appname__
 
 if sys.platform == 'win32':
     import qt.base.cxfreeze_fix
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    QCoreApplication.setOrganizationName('Hardcoded Software')
+    QCoreApplication.setApplicationName(__appname__)
+    QCoreApplication.setApplicationVersion(__version__)
     settings = QSettings()
     lang = settings.value('Language').toString()
     install_qt_trans(lang)
@@ -28,9 +32,6 @@ if __name__ == "__main__":
     # has been installed
     from qt.{{edition}}.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
-    QCoreApplication.setOrganizationName('Hardcoded Software')
-    QCoreApplication.setApplicationName(DupeGuru.NAME)
-    QCoreApplication.setApplicationVersion(DupeGuru.VERSION)
     dgapp = DupeGuru()
     install_excepthook()
     sys.exit(app.exec_())

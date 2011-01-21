@@ -9,10 +9,11 @@
 import sys
 
 from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
-from PyQt4.QtGui import (QMainWindow, QMenu, QPixmap, QIcon, QLabel, QHeaderView, QMessageBox,
-    QInputDialog, QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout,
-    QAbstractItemView, QStatusBar)
+from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, QInputDialog,
+    QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView,
+    QStatusBar)
 
+from hscommon.trans import tr, trmsg
 from hscommon.util import nonone
 
 from .results_model import ResultsModel, ResultsView
@@ -38,31 +39,31 @@ class ResultWindow(QMainWindow):
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionDetails', 'Ctrl+I', '', "Details", self.detailsTriggered),
-            ('actionActions', '', '', "Actions", self.actionsTriggered),
-            ('actionPowerMarker', 'Ctrl+1', '', "Show Dupes Only", self.powerMarkerTriggered),
-            ('actionDelta', 'Ctrl+2', '', "Show Delta Values", self.deltaTriggered),
-            ('actionDeleteMarked', 'Ctrl+D', '', "Send Marked to Recycle Bin", self.deleteTriggered),
-            ('actionHardlinkMarked', 'Ctrl+Shift+D', '', "Delete Marked and Replace with Hardlinks", self.hardlinkTriggered),
-            ('actionMoveMarked', 'Ctrl+M', '', "Move Marked to...", self.moveTriggered),
-            ('actionCopyMarked', 'Ctrl+Shift+M', '', "Copy Marked to...", self.copyTriggered),
-            ('actionRemoveMarked', 'Ctrl+R', '', "Remove Marked from Results", self.removeMarkedTriggered),
-            ('actionRemoveSelected', 'Ctrl+Del', '', "Remove Selected from Results", self.removeSelectedTriggered),
-            ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', "Add Selected to Ignore List", self.addToIgnoreListTriggered),
-            ('actionMakeSelectedReference', 'Ctrl+Space', '', "Make Selected Reference", self.makeReferenceTriggered),
-            ('actionOpenSelected', 'Ctrl+O', '', "Open Selected with Default Application", self.openTriggered),
-            ('actionRevealSelected', 'Ctrl+Shift+O', '', "Open Containing Folder of Selected", self.revealTriggered),
-            ('actionRenameSelected', 'F2', '', "Rename Selected", self.renameTriggered),
-            ('actionMarkAll', 'Ctrl+A', '', "Mark All", self.markAllTriggered),
-            ('actionMarkNone', 'Ctrl+Shift+A', '', "Mark None", self.markNoneTriggered),
-            ('actionInvertMarking', 'Ctrl+Alt+A', '', "Invert Marking", self.markInvertTriggered),
-            ('actionMarkSelected', '', '', "Mark Selected", self.markSelectedTriggered),
-            ('actionClearIgnoreList', '', '', "Clear Ignore List", self.clearIgnoreListTriggered),
-            ('actionApplyFilter', 'Ctrl+F', '', "Apply Filter", self.applyFilterTriggered),
-            ('actionCancelFilter', 'Ctrl+Shift+F', '', "Cancel Filter", self.cancelFilterTriggered),
-            ('actionExport', '', '', "Export To HTML", self.exportTriggered),
-            ('actionSaveResults', 'Ctrl+S', '', "Save Results...", self.saveResultsTriggered),
-            ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', "Invoke Custom Command", self.app.invokeCustomCommand),
+            ('actionDetails', 'Ctrl+I', '', tr("Details"), self.detailsTriggered),
+            ('actionActions', '', '', tr("Actions"), self.actionsTriggered),
+            ('actionPowerMarker', 'Ctrl+1', '', tr("Show Dupes Only"), self.powerMarkerTriggered),
+            ('actionDelta', 'Ctrl+2', '', tr("Show Delta Values"), self.deltaTriggered),
+            ('actionDeleteMarked', 'Ctrl+D', '', tr("Send Marked to Recycle Bin"), self.deleteTriggered),
+            ('actionHardlinkMarked', 'Ctrl+Shift+D', '', tr("Delete Marked and Replace with Hardlinks"), self.hardlinkTriggered),
+            ('actionMoveMarked', 'Ctrl+M', '', tr("Move Marked to..."), self.moveTriggered),
+            ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
+            ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
+            ('actionRemoveSelected', 'Ctrl+Del', '', tr("Remove Selected from Results"), self.removeSelectedTriggered),
+            ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered),
+            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected Reference"), self.makeReferenceTriggered),
+            ('actionOpenSelected', 'Ctrl+O', '', tr("Open Selected with Default Application"), self.openTriggered),
+            ('actionRevealSelected', 'Ctrl+Shift+O', '', tr("Open Containing Folder of Selected"), self.revealTriggered),
+            ('actionRenameSelected', 'F2', '', tr("Rename Selected"), self.renameTriggered),
+            ('actionMarkAll', 'Ctrl+A', '', tr("Mark All"), self.markAllTriggered),
+            ('actionMarkNone', 'Ctrl+Shift+A', '', tr("Mark None"), self.markNoneTriggered),
+            ('actionInvertMarking', 'Ctrl+Alt+A', '', tr("Invert Marking"), self.markInvertTriggered),
+            ('actionMarkSelected', '', '', tr("Mark Selected"), self.markSelectedTriggered),
+            ('actionClearIgnoreList', '', '', tr("Clear Ignore List"), self.clearIgnoreListTriggered),
+            ('actionApplyFilter', 'Ctrl+F', '', tr("Apply Filter"), self.applyFilterTriggered),
+            ('actionCancelFilter', 'Ctrl+Shift+F', '', tr("Cancel Filter"), self.cancelFilterTriggered),
+            ('actionExport', '', '', tr("Export To HTML"), self.exportTriggered),
+            ('actionSaveResults', 'Ctrl+S', '', tr("Save Results..."), self.saveResultsTriggered),
+            ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', tr("Invoke Custom Command"), self.app.invokeCustomCommand),
         ]
         createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)
@@ -72,17 +73,17 @@ class ResultWindow(QMainWindow):
         self.menubar = QMenuBar(self)
         self.menubar.setGeometry(QRect(0, 0, 630, 22))
         self.menuFile = QMenu(self.menubar)
-        self.menuFile.setTitle("File")
+        self.menuFile.setTitle(tr("File"))
         self.menuMark = QMenu(self.menubar)
-        self.menuMark.setTitle("Mark")
+        self.menuMark.setTitle(tr("Mark"))
         self.menuActions = QMenu(self.menubar)
-        self.menuActions.setTitle("Actions")
+        self.menuActions.setTitle(tr("Actions"))
         self.menuColumns = QMenu(self.menubar)
-        self.menuColumns.setTitle("Columns")
+        self.menuColumns.setTitle(tr("Columns"))
         self.menuView = QMenu(self.menubar)
-        self.menuView.setTitle("View")
+        self.menuView.setTitle(tr("View"))
         self.menuHelp = QMenu(self.menubar)
-        self.menuHelp.setTitle("Help")
+        self.menuHelp.setTitle(tr("Help"))
         self.setMenuBar(self.menubar)
         
         self.menuActions.addAction(self.actionDeleteMarked)
@@ -138,11 +139,11 @@ class ResultWindow(QMainWindow):
             action.column_index = index
             self._column_actions.append(action)
         menu.addSeparator()
-        action = menu.addAction("Reset to Defaults")
+        action = menu.addAction(tr("Reset to Defaults"))
         action.column_index = -1
         
         # Action menu
-        actionMenu = QMenu('Actions', self.menubar)
+        actionMenu = QMenu(tr("Actions"), self.menubar)
         actionMenu.addAction(self.actionDeleteMarked)
         actionMenu.addAction(self.actionHardlinkMarked)
         actionMenu.addAction(self.actionMoveMarked)
@@ -160,7 +161,7 @@ class ResultWindow(QMainWindow):
         self.actionActions.setMenu(actionMenu)
     
     def _setupUi(self):
-        self.setWindowTitle("dupeGuru Results")
+        self.setWindowTitle(tr("dupeGuru Results"))
         self.resize(630, 514)
         self.centralwidget = QWidget(self)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -222,8 +223,8 @@ class ResultWindow(QMainWindow):
         self.app.add_selected_to_ignore_list()
     
     def applyFilterTriggered(self):
-        title = "Apply Filter"
-        msg = "Type the filter you want to apply on your results. See help for details."
+        title = tr("Apply Filter")
+        msg = trmsg("TypeFilterMsg")
         text = nonone(self._last_filter, '[*]')
         answer, ok = QInputDialog.getText(self, title, msg, QLineEdit.Normal, text)
         if not ok:
@@ -236,15 +237,15 @@ class ResultWindow(QMainWindow):
         self.app.apply_filter('')
     
     def clearIgnoreListTriggered(self):
-        title = "Clear Ignore List"
+        title = tr("Clear Ignore List")
         count = len(self.app.scanner.ignore_list)
         if not count:
-            QMessageBox.information(self, title, "Nothing to clear.")
+            QMessageBox.information(self, title, trmsg("NothingToClearMsg"))
             return
-        msg = "Do you really want to remove all {0} items from the ignore list?".format(count)
+        msg = trmsg("ClearIgnoreListConfirmMsg").format(count)
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.scanner.ignore_list.Clear()
-            QMessageBox.information(self, title, "Ignore list cleared.")
+            QMessageBox.information(self, title, trmsg("IgnoreListClearedMsg"))
     
     def copyTriggered(self):
         self.app.copy_or_move_marked(True)
@@ -253,8 +254,8 @@ class ResultWindow(QMainWindow):
         count = self.app.results.mark_count
         if not count:
             return
-        title = "Delete duplicates"
-        msg = "You are about to send {0} files to the recycle bin. Continue?".format(count)
+        title = tr("Delete duplicates")
+        msg = trmsg("SendToTrashConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.delete_marked()
     
@@ -278,8 +279,8 @@ class ResultWindow(QMainWindow):
         count = self.app.results.mark_count
         if not count:
             return
-        title = "Delete and hardlink duplicates"
-        msg = "You are about to send {0} files to the trash and hardlink them afterwards. Continue?".format(count)
+        title = tr("Delete and hardlink duplicates")
+        msg = trmsg("HardlinkConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.delete_marked(replace_with_hardlinks=True)
     
@@ -314,8 +315,8 @@ class ResultWindow(QMainWindow):
         count = self.app.results.mark_count
         if not count:
             return
-        title = "Remove duplicates"
-        msg = "You are about to remove {0} files from results. Continue?".format(count)
+        title = tr("Remove duplicates")
+        msg = trmsg("FileRemovalConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.remove_marked()
     
@@ -329,8 +330,8 @@ class ResultWindow(QMainWindow):
         self.app.reveal_selected()
     
     def saveResultsTriggered(self):
-        title = "Select a file to save your results to"
-        files = "dupeGuru Results (*.dupeguru)"
+        title = trmsg("SelectResultToSaveMsg")
+        files = tr("dupeGuru Results (*.dupeguru)")
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:
             self.app.save_as(destination)

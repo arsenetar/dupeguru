@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core_se import data, __version__
+from core_se import data, __appname__
 from core.directories import Directories as DirectoriesBase, STATE_EXCLUDED
 
 from ..base.app import DupeGuru as DupeGuruBase
@@ -26,8 +26,7 @@ class Directories(DirectoriesBase):
 class DupeGuru(DupeGuruBase):
     EDITION = 'se'
     LOGO_NAME = 'logo_se'
-    NAME = 'dupeGuru'
-    VERSION = __version__
+    NAME = __appname__
     DELTA_COLUMNS = frozenset([2, 4])
     
     def __init__(self):

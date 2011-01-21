@@ -9,6 +9,7 @@
 from PyQt4.QtCore import Qt, QSize
 from PyQt4.QtGui import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy, QPixmap
 
+from hscommon.trans import tr
 from ..base.details_dialog import DetailsDialog as DetailsDialogBase
 from ..base.details_table import DetailsTable
 
@@ -19,7 +20,7 @@ class DetailsDialog(DetailsDialogBase):
         self.referencePixmap = None
     
     def _setupUi(self):
-        self.setWindowTitle("Details")
+        self.setWindowTitle(tr("Details"))
         self.resize(502, 295)
         self.setMinimumSize(QSize(250, 250))
         self.verticalLayout = QVBoxLayout(self)

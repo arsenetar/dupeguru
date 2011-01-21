@@ -17,3 +17,5 @@ cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/dg_cocoa.plugin
 qt/base/*_rc.py
+qt/lang/fr.qm
+qt/lang/en.qm

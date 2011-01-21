@@ -15,9 +15,10 @@ from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QAp
 
 from jobprogress import job
 from jobprogress.qt import Progress
+from hscommon.trans import tr, trmsg
 
 from core.app import DupeGuru as DupeGuruBase, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
-    
+
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
 from qtlib.reg import Registration
@@ -29,11 +30,11 @@ from .problem_dialog import ProblemDialog
 from .util import createActions
 
 JOBID2TITLE = {
-    JOB_SCAN: "Scanning for duplicates",
-    JOB_LOAD: "Loading",
-    JOB_MOVE: "Moving",
-    JOB_COPY: "Copying",
-    JOB_DELETE: "Sending files to the recycle bin",
+    JOB_SCAN: tr("Scanning for duplicates"),
+    JOB_LOAD: tr("Loading"),
+    JOB_MOVE: tr("Moving"),
+    JOB_COPY: tr("Copying"),
+    JOB_DELETE: tr("Sending files to the recycle bin"),
 }
 
 class DupeGuru(DupeGuruBase, QObject):
@@ -86,13 +87,13 @@ class DupeGuru(DupeGuruBase, QObject):
         # Setup actions that are common to both the directory dialog and the results window.
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionQuit', 'Ctrl+Q', '', "Quit", self.quitTriggered),
-            ('actionPreferences', 'Ctrl+P', '', "Preferences", self.preferencesTriggered),
-            ('actionShowHelp', 'F1', '', "dupeGuru Help", self.showHelpTriggered),
-            ('actionAbout', '', '', "About dupeGuru", self.showAboutBoxTriggered),
-            ('actionRegister', '', '', "Register dupeGuru", self.registerTriggered),
-            ('actionCheckForUpdate', '', '', "Check for Update", self.checkForUpdateTriggered),
-            ('actionOpenDebugLog', '', '', "Open Debug Log", self.openDebugLogTriggered),
+            ('actionQuit', 'Ctrl+Q', '', tr("Quit"), self.quitTriggered),
+            ('actionPreferences', 'Ctrl+P', '', tr("Preferences"), self.preferencesTriggered),
+            ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
+            ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
+            ('actionRegister', '', '', tr("Register dupeGuru"), self.registerTriggered),
+            ('actionCheckForUpdate', '', '', tr("Check for Update"), self.checkForUpdateTriggered),
+            ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
         ]
         createActions(ACTIONS, self)
     
@@ -139,21 +140,21 @@ class DupeGuru(DupeGuruBase, QObject):
             args = tuple([j] + list(args))
             self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
-            msg = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
+            msg = trmsg("TaskHangingMsg")
             QMessageBox.information(self.resultWindow, 'Action in progress', msg)
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             return
-        title = "Add to Ignore List"
-        msg = "All selected {0} matches are going to be ignored in all subsequent scans. Continue?".format(len(dupes))
+        title = tr("Add to Ignore List")
+        msg = trmsg("IgnoreConfirmMsg").format(len(dupes))
         if self.confirm(title, msg):
             DupeGuruBase.add_selected_to_ignore_list(self)
     
     def copy_or_move_marked(self, copy):
-        opname = 'copy' if copy else 'move'
-        title = "Select a directory to {0} marked files to".format(opname)
+        opname = tr("copy") if copy else tr("move")
+        title = trmsg("SelectCopyOrMoveDestinationMsg").format(opname)
         flags = QFileDialog.ShowDirsOnly
         destination = str(QFileDialog.getExistingDirectory(self.resultWindow, title, '', flags))
         if not destination:
@@ -165,8 +166,8 @@ class DupeGuru(DupeGuruBase, QObject):
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             return
-        title = "Remove duplicates"
-        msg = "You are about to remove {0} files from results. Continue?".format(len(dupes))
+        title = tr("Remove duplicates")
+        msg = trmsg("FileRemovalConfirmMsg").format(len(dupes))
         if self.confirm(title, msg):
             DupeGuruBase.remove_selected(self)
     
@@ -185,8 +186,8 @@ class DupeGuru(DupeGuruBase, QObject):
         if cmd:
             self.invoke_command(cmd)
         else:
-            msg = "You have no custom command set up. Please, set it up in your preferences."
-            QMessageBox.warning(self.resultWindow, 'Custom Command', msg)
+            msg = trmsg("NoCustomCommandMsg")
+            QMessageBox.warning(self.resultWindow, tr("Custom Command"), msg)
     
     def show_details(self):
         self.details_dialog.show()
@@ -212,12 +213,12 @@ class DupeGuru(DupeGuruBase, QObject):
             if self.results.problems:
                 self.problemDialog.show()
             else:
-                msg = "All files were processed successfully."
-                QMessageBox.information(self.resultWindow, 'Operation Complete', msg)
+                msg = trmsg("OperationSuccessMsg")
+                QMessageBox.information(self.resultWindow, tr("Operation Complete"), msg)
         elif jobid == JOB_SCAN:
             if not self.results.groups:
-                title = "Scan complete"
-                msg = "No duplicates found."
+                title = tr("Scan complete")
+                msg = trmsg("NoDuplicateFoundMsg")
                 QMessageBox.information(self.resultWindow, title, msg)
             else:
                 self.showResultsWindow()

@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file alias="en.qm">../lang/en.qm</file>
     <file alias="fr.qm">../lang/fr.qm</file>
     <file alias="qt_fr.qm">../lang/qt_fr.qm</file>
     <file alias="logo_pe">../../images/dgpe_logo_32.png</file>

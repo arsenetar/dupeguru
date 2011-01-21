@@ -11,6 +11,7 @@ from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLa
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMessageBox, QMainWindow,
     QMenuBar, QMenu, QIcon, QPixmap)
 
+from hscommon.trans import tr, trmsg
 from qtlib.recent import Recent
 from core.app import NoScannableFileError
 
@@ -49,9 +50,9 @@ class DirectoriesDialog(QMainWindow):
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionLoadResults', 'Ctrl+L', '', "Load Results...", self.loadResultsTriggered),
-            ('actionShowResultsWindow', '', '', "Results Window", self.app.showResultsWindow),
-            ('actionAddFolder', '', '', "Add Folder...", self.addFolderTriggered),
+            ('actionLoadResults', 'Ctrl+L', '', tr("Load Results..."), self.loadResultsTriggered),
+            ('actionShowResultsWindow', '', '', tr("Results Window"), self.app.showResultsWindow),
+            ('actionAddFolder', '', '', tr("Add Folder..."), self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
     
@@ -59,13 +60,13 @@ class DirectoriesDialog(QMainWindow):
         self.menubar = QMenuBar(self)
         self.menubar.setGeometry(QRect(0, 0, 42, 22))
         self.menuFile = QMenu(self.menubar)
-        self.menuFile.setTitle("File")
+        self.menuFile.setTitle(tr("File"))
         self.menuView = QMenu(self.menubar)
-        self.menuView.setTitle("View")
+        self.menuView.setTitle(tr("View"))
         self.menuHelp = QMenu(self.menubar)
-        self.menuHelp.setTitle("Help")
+        self.menuHelp.setTitle(tr("Help"))
         self.menuLoadRecent = QMenu(self.menuFile)
-        self.menuLoadRecent.setTitle("Load Recent Results")
+        self.menuLoadRecent.setTitle(tr("Load Recent Results"))
         self.setMenuBar(self.menubar)
         
         self.menuFile.addAction(self.actionLoadResults)
@@ -126,10 +127,10 @@ class DirectoriesDialog(QMainWindow):
         spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.loadResultsButton = QPushButton(self.centralwidget)
-        self.loadResultsButton.setText("Load Results")
+        self.loadResultsButton.setText(tr("Load Results"))
         self.horizontalLayout.addWidget(self.loadResultsButton)
         self.scanButton = QPushButton(self.centralwidget)
-        self.scanButton.setText("Scan")
+        self.scanButton.setText(tr("Scan"))
         self.scanButton.setDefault(True)
         self.horizontalLayout.addWidget(self.scanButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -167,8 +168,8 @@ class DirectoriesDialog(QMainWindow):
     def closeEvent(self, event):
         event.accept()
         if self.app.results.is_modified:
-            title = "Unsaved results"
-            msg = "You have unsaved results, do you really want to quit?"
+            title = tr("Unsaved results")
+            msg = trmsg("ReallyWantToQuitMsg")
             if not self.app.confirm(title, msg):
                 event.ignore()
         if event.isAccepted():
@@ -176,7 +177,7 @@ class DirectoriesDialog(QMainWindow):
     
     #--- Events
     def addFolderTriggered(self):
-        title = "Select a directory to add to the scanning list"
+        title = trmsg("SelectFolderToAddMsg")
         flags = QFileDialog.ShowDirsOnly
         dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
         if not dirpath:
@@ -189,8 +190,8 @@ class DirectoriesDialog(QMainWindow):
         self.app.prefs.directoriesWindowRect = self.geometry()
     
     def loadResultsTriggered(self):
-        title = "Select a results file to load"
-        files = "dupeGuru Results (*.dupeguru)"
+        title = trmsg("SelectResultToLoadMsg")
+        files = tr("dupeGuru Results (*.dupeguru)")
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
             self.app.load_from(destination)
@@ -207,15 +208,16 @@ class DirectoriesDialog(QMainWindow):
             self.app.remove_directory(row)
     
     def scanButtonClicked(self):
-        title = "Start a new scan"
+        title = tr("Start a new scan")
+        # XXX must be triggered on unsaved results
         if len(self.app.results.groups) > 0:
-            msg = "Are you sure you want to start a new duplicate scan?"
+            msg = trmsg("ReallyWantToContinueMsg")
             if not self.app.confirm(title, msg):
                 return
         try:
             self.app.start_scanning()
         except NoScannableFileError:
-            msg = "The selected directories contain no scannable file."
+            msg = trmsg("NoScannableFileMsg")
             QMessageBox.warning(self, title, msg)
     
     def selectionChanged(self, selected, deselected):

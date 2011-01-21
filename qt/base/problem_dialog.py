@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-04-12
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -11,6 +10,7 @@ from PyQt4.QtCore import Qt
 from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
     QLabel, QTableView, QAbstractItemView, QApplication)
 
+from hscommon.trans import tr, trmsg
 from core.gui.problem_dialog import ProblemDialog as ProblemDialogModel
 from .problem_table import ProblemTable
 
@@ -29,11 +29,11 @@ class ProblemDialog(QDialog):
         self.closeButton.clicked.connect(self.accept)
     
     def _setupUi(self):
-        self.setWindowTitle("Problems!")
+        self.setWindowTitle(tr("Problems!"))
         self.resize(413, 323)
         self.verticalLayout = QVBoxLayout(self)
         self.label = QLabel(self)
-        self.label.setText("There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results.")
+        self.label.setText(trmsg("ProblemsDuringProcessingMsg"))
         self.label.setWordWrap(True)
         self.verticalLayout.addWidget(self.label)
         self.tableView = QTableView(self)
@@ -47,12 +47,12 @@ class ProblemDialog(QDialog):
         self.verticalLayout.addWidget(self.tableView)
         self.horizontalLayout = QHBoxLayout()
         self.revealButton = QPushButton(self)
-        self.revealButton.setText("Reveal Selected")
+        self.revealButton.setText(tr("Reveal Selected"))
         self.horizontalLayout.addWidget(self.revealButton)
         spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.closeButton = QPushButton(self)
-        self.closeButton.setText("Close")
+        self.closeButton.setText(tr("Close"))
         self.closeButton.setDefault(True)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)

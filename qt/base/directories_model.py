@@ -12,12 +12,13 @@ from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
+from hscommon.trans import tr
 from qtlib.tree_model import RefNode, TreeModel
 
 from core.gui.directory_tree import DirectoryTree
 
-HEADERS = ['Name', 'State']
-STATES = ['Normal', 'Reference', 'Excluded']
+HEADERS = [tr("Name"), tr("State")]
+STATES = [tr("Normal"), tr("Reference"), tr("Excluded")]
 
 class DirectoriesDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):

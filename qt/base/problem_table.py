@@ -7,14 +7,15 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from hscommon.trans import tr
 from qtlib.column import Column
 from qtlib.table import Table
 from core.gui.problem_table import ProblemTable as ProblemTableModel
 
 class ProblemTable(Table):
     COLUMNS = [
-        Column('path', 'File Path', 150),
-        Column('msg', 'Error Message', 150),
+        Column('path', tr("File Path"), 150),
+        Column('msg', tr("Error Message"), 150),
     ]
     
     def __init__(self, problem_dialog, view):

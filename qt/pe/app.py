@@ -14,7 +14,7 @@ from PyQt4.QtGui import QImage, QImageReader
 from hscommon.util import get_file_ext
 
 from core import fs
-from core_pe import data as data_pe, __version__
+from core_pe import data as data_pe, __appname__
 from core_pe.scanner import ScannerPE
 
 from ..base.app import DupeGuru as DupeGuruBase
@@ -58,8 +58,7 @@ class File(fs.File):
 class DupeGuru(DupeGuruBase):
     EDITION = 'pe'
     LOGO_NAME = 'logo_pe'
-    NAME = 'dupeGuru Picture Edition'
-    VERSION = __version__
+    NAME = __appname__
     DELTA_COLUMNS = frozenset([2, 5])
     
     def __init__(self):

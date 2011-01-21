@@ -29,6 +29,8 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = get('RemoveEmptyFolders', self.remove_empty_folders)
         self.destination_type = get('DestinationType', self.destination_type)
         self.custom_command = get('CustomCommand', self.custom_command)
+        self.language = get('Language', self.language)
+        
         widths = get('ColumnsWidth', self.columns_width)
         # only set nonzero values
         for index, width in enumerate(widths[:len(self.columns_width)]):
@@ -59,6 +61,7 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = False
         self.destination_type = 1
         self.custom_command = ''
+        self.language = ''
         
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
@@ -90,6 +93,7 @@ class Preferences(PreferencesBase):
         set_('CustomCommand', self.custom_command)
         set_('ColumnsWidth', self.columns_width)
         set_('ColumnsVisible', self.columns_visible)
+        set_('Language', self.language)
         
         set_('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.set_rect('ResultWindowRect', self.resultWindowRect)

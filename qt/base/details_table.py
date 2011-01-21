@@ -9,7 +9,9 @@
 from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel
 from PyQt4.QtGui import QHeaderView, QTableView
 
-HEADER = ['Attribute', 'Selected', 'Reference']
+from hscommon.trans import tr
+
+HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
 
 class DetailsModel(QAbstractTableModel):
     def __init__(self, model):
