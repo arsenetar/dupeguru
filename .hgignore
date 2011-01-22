@@ -19,3 +19,5 @@ cocoa/*/dg_cocoa.plugin
 qt/base/*_rc.py
 qt/lang/fr.qm
 qt/lang/en.qm
+help/*/conf.py
+help/*/changelog.rst

@@ -17,12 +17,14 @@ from setuptools import setup
 from distutils.extension import Extension
 
 from hscommon import sphinxgen
-from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, ensure_empty_folder,
+from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages,
     filereplace, get_module_version, build_all_cocoa_locs, build_all_qt_locs)
 
 def parse_args():
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
+    parser.add_option('--clean', action='store_true', dest='clean',
+        help="Clean build folder before building")
     parser.add_option('--only-help', action='store_true', dest='only_help',
         help="Build only help file")
     (options, args) = parser.parse_args()
@@ -98,14 +100,13 @@ def build_help(edition):
     print("Generating Help")
     current_path = op.abspath('.')
     help_basepath = op.join(current_path, 'help', 'en')
-    help_buildpath = op.join(current_path, 'build', 'sphinx_src'.format(edition))
     help_destpath = op.join(current_path, 'build', 'help'.format(edition))
     changelog_path = op.join(current_path, 'help', 'changelog_{}'.format(edition))
     tixurl = "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
     appname = {'se': 'dupeGuru', 'me': 'dupeGuru Music Edition', 'pe': 'dupeGuru Picture Edition'}[edition]
     homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
     confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage}
-    sphinxgen.gen(help_basepath, help_buildpath, help_destpath, changelog_path, tixurl, confrepl)
+    sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl)
 
 def build_pe_modules(ui):
     def move(src, dst):
@@ -163,7 +164,11 @@ def main():
     dev = conf['dev']
     if dev:
         print("Building in Dev mode")
-    ensure_empty_folder('build')
+    if options.clean:
+        if op.exists('build'):
+            shutil.rmtree('build')
+    if not op.exists('build'):
+        os.mkdir('build')
     if options.only_help:
         build_help(edition)
     else:
