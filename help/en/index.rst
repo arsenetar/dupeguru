@@ -1,6 +1,18 @@
 |appname| help
 ===============
 
+.. only:: edition_se
+
+    This document is also available in `french <http://www.hardcoded.net/dupeguru/help/fr/>`__.
+
+.. only:: edition_me
+
+    This document is also available in `french <http://www.hardcoded.net/dupeguru_me/help/fr/>`__.
+
+.. only:: edition_pe
+
+    This document is also available in `french <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__.
+
 .. only:: edition_se or edition_me
 
     |appname| is a tool to find duplicate files on your computer. It can scan either filenames or contents. The filename scan features a fuzzy matching algorithm that can find duplicate filenames even when they are not exactly the same.
