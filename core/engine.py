@@ -24,9 +24,8 @@ NO_FIELD_ORDER) = range(3)
 JOB_REFRESH_RATE = 100
 
 def getwords(s):
-    if isinstance(s, str):
-        # XXX is this really needed?
-        s = normalize('NFD', s)
+    # We decompose the string so that ascii letters with accents can be part of the word.
+    s = normalize('NFD', s)
     s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", ' ').lower()
     s = ''.join(c for c in s if c in string.ascii_letters + string.digits + string.whitespace)
     return [_f for _f in s.split(' ') if _f] # remove empty elements

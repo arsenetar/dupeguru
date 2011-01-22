@@ -146,7 +146,7 @@ def build_pe_modules(ui):
 def build_normal(edition, ui, dev):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
-    build_help(edition, ui, dev)
+    build_help(edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)

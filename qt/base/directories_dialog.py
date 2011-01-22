@@ -154,9 +154,6 @@ class DirectoriesDialog(QMainWindow):
             self.removeFolderButton.setEnabled(False)
             return
         self.removeFolderButton.setEnabled(True)
-        index = indexes[0]
-        node = index.internalPointer()
-        # label = 'Remove' if node.parent is None else 'Exclude'
     
     def _updateLoadResultsButton(self):
         if self.app.recentResults.isEmpty():
@@ -209,8 +206,7 @@ class DirectoriesDialog(QMainWindow):
     
     def scanButtonClicked(self):
         title = tr("Start a new scan")
-        # XXX must be triggered on unsaved results
-        if len(self.app.results.groups) > 0:
+        if self.app.results.is_modified:
             msg = trmsg("ReallyWantToContinueMsg")
             if not self.app.confirm(title, msg):
                 return

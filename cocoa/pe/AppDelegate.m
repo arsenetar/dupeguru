@@ -60,8 +60,6 @@ http://www.hardcoded.net/licenses/bsd_license
 //Delegate
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // XXX The line below could be broken by a localization...
-    NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
     // index 2 is just after "Clear Ingore List"
     NSMenuItem *mi = [actionsMenu insertItemWithTitle:TR(@"Clear Picture Cache")
         action:@selector(clearPictureCache:) keyEquivalent:@"P" atIndex:2];

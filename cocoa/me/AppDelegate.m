@@ -77,7 +77,6 @@ http://www.hardcoded.net/licenses/bsd_license
 //Delegate
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSMenu *actionsMenu = [[[NSApp mainMenu] itemWithTitle:@"Actions"] submenu];
     // index 3 is just after "Export Results to XHTML"
     NSMenuItem *mi = [actionsMenu insertItemWithTitle:TR(@"Remove Dead Tracks in iTunes")
         action:@selector(removeDeadTracks:) keyEquivalent:@"" atIndex:3];

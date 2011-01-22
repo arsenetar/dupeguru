@@ -18,6 +18,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     IBOutlet PyDupeGuruBase *py;
     IBOutlet NSMenu *recentResultsMenu;
+    IBOutlet NSMenu *actionsMenu;
     IBOutlet NSMenu *columnsMenu;
     
     ResultWindowBase *_resultWindow;
