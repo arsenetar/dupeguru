@@ -13,18 +13,6 @@ from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
 from core.scanner import ScanType
 
-# Fix py2app imports which chokes on relative imports and other stuff
-import core_me.app_cocoa, core_me.data, core_me.fs, core_me.scanner
-import hsaudiotag.aiff, hsaudiotag.flac, hsaudiotag.genres, hsaudiotag.id3v1,\
-    hsaudiotag.id3v2, hsaudiotag.mp4, hsaudiotag.mpeg, hsaudiotag.ogg, hsaudiotag.wma
-from hsaudiotag import aiff, flac, genres, id3v1, id3v2, mp4, mpeg, ogg, wma
-import hscommon.conflict
-import core.engine, core.fs, core.app
-import xml.etree.ElementPath
-import gzip
-import aem.kae
-import appscript.defaultterminology
-
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
