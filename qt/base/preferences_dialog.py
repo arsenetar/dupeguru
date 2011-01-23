@@ -110,7 +110,7 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
         self.mainVLayout.addWidget(self.buttonBox)
         if sys.platform not in {'darwin', 'linux2'}:
-            self.verticalLayout.removeWidget(self.ignoreHardlinkMatches)
+            self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
     
     def _load(self, prefs, setchecked):
