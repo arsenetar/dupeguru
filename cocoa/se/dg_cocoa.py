@@ -12,6 +12,7 @@ from hscommon.cocoa import signature
 from core.scanner import ScanType
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
+from core_se import __appname__
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
@@ -44,5 +45,5 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Registration
     def appName(self):
-        return "dupeGuru"
+        return __appname__
     

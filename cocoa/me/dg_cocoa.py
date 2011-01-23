@@ -11,6 +11,7 @@ from hscommon.cocoa import signature
 
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
+from core_me import __appname__
 from core.scanner import ScanType
 
 class PyDupeGuru(PyDupeGuruBase):
@@ -61,5 +62,5 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Registration
     def appName(self):
-        return "dupeGuru Music Edition"
+        return __appname__
     

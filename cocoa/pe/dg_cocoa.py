@@ -8,7 +8,7 @@ from hscommon.trans import install_cocoa_trans
 install_cocoa_trans()
 
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
-from core_pe import app_cocoa as app_pe_cocoa
+from core_pe import app_cocoa as app_pe_cocoa, __appname__
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
@@ -35,5 +35,5 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Registration
     def appName(self):
-        return "dupeGuru Picture Edition"
+        return __appname__
     
