@@ -4,6 +4,10 @@
 <context>
 <name>message</name>
 <message>
+    <source>SelectFolderToScanMsg</source>
+    <translation>Select folders to scan and press &quot;Scan&quot;.</translation>
+</message>
+<message>
     <source>TaskHangingMsg</source>
     <translation>A previous action is still hanging in there. You can&apos;t start a new one yet. Wait a few seconds, then try again.</translation>
 </message>

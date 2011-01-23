@@ -540,6 +540,10 @@
 <context>
 <name>message</name>
 <message>
+    <source>SelectFolderToScanMsg</source>
+    <translation>Sélectionnez les dossiers à scanner puis faites &quot;Scan&quot;.</translation>
+</message>
+<message>
     <source>TaskHangingMsg</source>
     <translation>Une action précédente est encore en cours. Attendez quelques secondes avant d'en repartir une nouvelle.</translation>
 </message>

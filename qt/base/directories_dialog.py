@@ -9,7 +9,7 @@
 from PyQt4.QtCore import QRect
 from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMessageBox, QMainWindow,
-    QMenuBar, QMenu, QIcon, QPixmap)
+    QMenuBar, QMenu, QIcon, QPixmap, QLabel)
 
 from hscommon.trans import tr, trmsg
 from qtlib.recent import Recent
@@ -100,6 +100,8 @@ class DirectoriesDialog(QMainWindow):
         self.resize(420, 338)
         self.centralwidget = QWidget(self)
         self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.promptLabel = QLabel(trmsg("SelectFolderToScanMsg"), self.centralwidget)
+        self.verticalLayout.addWidget(self.promptLabel)
         self.treeView = QTreeView(self.centralwidget)
         self.treeView.setItemDelegate(self.directoriesDelegate)
         self.treeView.setModel(self.directoriesModel)
@@ -222,6 +224,7 @@ class DirectoriesDialog(QMainWindow):
 
 if __name__ == '__main__':
     import sys
+    from . import dg_rc
     from ..testapp import TestApp
     app = QApplication([])
     dgapp = TestApp()
