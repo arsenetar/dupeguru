@@ -68,6 +68,9 @@ class ResultWindow(QMainWindow):
         createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
+        
+        if sys.platform not in {'darwin', 'linux2'}:
+            self.actionHardlinkMarked.setVisible(False)
     
     def _setupMenu(self):
         self.menubar = QMenuBar(self)
@@ -191,12 +194,6 @@ class ResultWindow(QMainWindow):
             self.setWindowState(self.windowState() | Qt.WindowMaximized)
         if self.app.prefs.resultWindowRect is not None and not self.app.prefs.resultWindowIsMaximized:
             self.setGeometry(self.app.prefs.resultWindowRect)
-        
-        # Platform-specific setup
-        if sys.platform == 'linux2':
-            self.actionCheckForUpdate.setVisible(False) # This only works on Windows
-        if sys.platform not in {'darwin', 'linux2'}:
-            self.actionHardlinkMarked.setVisible(False)
     
     #--- Private
     def _load_columns(self):

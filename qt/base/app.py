@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import sys
 import logging
 import os
 import os.path as op
@@ -96,6 +97,9 @@ class DupeGuru(DupeGuruBase, QObject):
             ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
         ]
         createActions(ACTIONS, self)
+        
+        if sys.platform == 'linux2':
+            self.actionCheckForUpdate.setVisible(False) # This only works on Windows
     
     def _setup_as_registered(self):
         self.prefs.registration_code = self.registration_code
