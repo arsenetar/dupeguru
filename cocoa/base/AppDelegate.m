@@ -17,6 +17,13 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegateBase
 - (void)awakeFromNib
 {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    /* Because the pref pane is lazily loaded, we have to manually do the update check if the
+       preference is set.
+    */
+    if ([ud boolForKey:@"SUEnableAutomaticChecks"]) {
+        [[SUUpdater sharedUpdater] checkForUpdatesInBackground];
+    }
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
     _resultWindow = [self createResultWindow];
