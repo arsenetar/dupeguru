@@ -105,7 +105,8 @@
 
 === 2.6.0 (2008-09-10)
 
-* **Added** a small file threshold preference.* **Added** a notice in the status bar when matches were discarded during the scan.
+* **Added** a small file threshold preference.
+* **Added** a notice in the status bar when matches were discarded during the scan.
 * **Improved** duplicate prioritization (smartly chooses which file you will keep).
 * **Improved** scan progress feedback.
 * **Improved** responsiveness of the user interface for certain actions.
@@ -149,7 +150,8 @@
 
 === 2.4.7 (2007-03-10)
 
-* **Fixed** a "bad file descriptor" error occasionally popping up.* **Fixed** a bug with non-latin directory names.
+* **Fixed** a "bad file descriptor" error occasionally popping up.
+* **Fixed** a bug with non-latin directory names.
 
 === 2.4.6 (2007-02-10)
 
@@ -202,7 +204,8 @@
 
 === 2.3.2 (2006-10-16)
 
-* **Added** an auto-update feature in the Mac OS X version (with Sparkle).* **Fixed** a bug preventing some duplicate reports to be created correctly under Windows.
+* **Added** an auto-update feature in the Mac OS X version (with Sparkle).
+* **Fixed** a bug preventing some duplicate reports to be created correctly under Windows.
 
 === 2.3.1 (2006-10-02)
 
@@ -221,7 +224,8 @@
 === 2.2.9 (2006-08-27)
 
 * **Fixed** an issue with ignore list and unicode.
-* **Fixed** an issue with file attribute fetching sometimes causing dupeGuru to crash.* **Fixed** an issue in the directories panel under Windows.
+* **Fixed** an issue with file attribute fetching sometimes causing dupeGuru to crash.
+* **Fixed** an issue in the directories panel under Windows.
 
 === 2.2.8 (2006-08-17)
 
@@ -260,7 +264,8 @@
 === 2.2.1 (2006-05-22)
 
 * **Fixed** occasional progress bar woes under Windows.
-* **Fixed** a bug in the registration system under Windows.* Nothing has been changed in the Mac OS X version, but I want to keep version in sync.
+* **Fixed** a bug in the registration system under Windows.
+* Nothing has been changed in the Mac OS X version, but I want to keep version in sync.
 
 === 2.2.0 (2006-05-10)
 
