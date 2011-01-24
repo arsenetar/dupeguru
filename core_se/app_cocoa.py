@@ -46,6 +46,11 @@ class Directories(DirectoriesBase):
         if path[:2] == Path('/Users') and path[3:] in self.HOME_PATH_TO_EXCLUDE:
             return STATE_EXCLUDED
     
+    @staticmethod
+    def get_subfolders(path):
+        result = DirectoriesBase.get_subfolders(path)
+        return [p for p in result if not is_bundle(str(p))]
+    
 
 class DupeGuru(DupeGuruBase):
     def __init__(self):
