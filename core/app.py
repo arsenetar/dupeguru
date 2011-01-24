@@ -18,7 +18,7 @@ from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
-from hscommon.util import delete_if_empty, first, escape
+from hscommon.util import delete_if_empty, first, escape, nonone
 from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
@@ -29,6 +29,8 @@ JOB_MOVE = 'job_move'
 JOB_COPY = 'job_copy'
 JOB_DELETE = 'job_delete'
 
+HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
+
 class NoScannableFileError(Exception):
     pass
 
@@ -36,6 +38,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def __init__(self, data_module, appdata):
         RegistrableApplication.__init__(self, appid=1)
         Broadcaster.__init__(self)
+        self.is_first_run = not self.get_default(HAD_FIRST_LAUNCH_PREFERENCE, False)
+        if self.is_first_run:
+            self.set_default(HAD_FIRST_LAUNCH_PREFERENCE, True)
         self.appdata = appdata
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
@@ -50,6 +55,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         }
         self.selected_dupes = []
     
+    #--- Private
     def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):
             j.add_progress()
@@ -129,6 +135,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         # func(j, *args)
         raise NotImplementedError()
     
+    def _get_default(self, key_name, fallback_value=None):
+        raise NotImplementedError()
+    
+    def _set_default(self, key_name, value):
+        raise NotImplementedError()
+    
+    #--- Public
     def add_directory(self, d):
         try:
             self.directories.add_path(Path(d))
@@ -349,6 +362,19 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def without_ref(self, dupes):
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
+    
+    def get_default(self, key, fallback_value=None):
+        result = nonone(self._get_default(key), fallback_value)
+        if fallback_value is not None and not isinstance(result, type(fallback_value)):
+            # we don't want to end up with garbage values from the prefs
+            try:
+                result = type(fallback_value)(result)
+            except Exception:
+                result = fallback_value
+        return result
+    
+    def set_default(self, key, value):
+        self._set_default(key, value)
     
     #--- Properties
     @property

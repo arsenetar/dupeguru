@@ -49,6 +49,8 @@ class DupeGuru(DupeGuruBase, QObject):
             os.makedirs(appdata)
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
         logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING)
+        self.prefs = self._create_preferences()
+        self.prefs.load()
         DupeGuruBase.__init__(self, data_module, appdata)
         QObject.__init__(self)
         self._setup()
@@ -56,8 +58,6 @@ class DupeGuru(DupeGuruBase, QObject):
     #--- Private
     def _setup(self):
         self._setupActions()
-        self.prefs = self._create_preferences()
-        self.prefs.load()
         self._update_options()
         self.recentResults = Recent(self, 'recentResults')
         self.recentResults.mustOpenItem.connect(self.load_from)
@@ -146,6 +146,12 @@ class DupeGuru(DupeGuruBase, QObject):
         except job.JobInProgressError:
             msg = trmsg("TaskHangingMsg")
             QMessageBox.information(self.resultWindow, 'Action in progress', msg)
+    
+    def _get_default(self, key):
+        return self.prefs.get_value(key)
+    
+    def _set_default(self, key, value):
+        self.prefs.set_value(key, value)
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)

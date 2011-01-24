@@ -30,7 +30,7 @@
 "30.title" = "Directement à la destination";
 
 /* Class = "NSButtonCell"; title = "Match scaled pictures together"; ObjectID = "31"; */
-"31.title" = "Comparer les images de taille différente";
+"31.title" = "Comparer les images de tailles différentes";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "32"; */
 "32.title" = "Vérifier automatiquement les mises à jour";

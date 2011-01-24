@@ -512,7 +512,7 @@
 </message>
 <message>
     <source>Match scaled pictures together</source>
-    <translation>Comparer les images de taille différente</translation>
+    <translation>Comparer les images de tailles différentes</translation>
 </message>
 <message>
     <source>Clear Picture Cache</source>

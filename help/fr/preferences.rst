@@ -32,7 +32,7 @@ Préférences
 
     **Seuil du filtre:** Plus il est élevé, plus les images doivent être similaires pour être considérées comme des doublons. Le défaut de 95% permet quelques petites différence, comme par exemple une différence de qualité ou bien une légère modification des couleurs.
 
-    **Comparer les images de taille différente:** Le nom dit tout. Sans cette option, les images de taille différentes ne sont pas comparées.
+    **Comparer les images de tailles différentes:** Le nom dit tout. Sans cette option, les images de tailles différentes ne sont pas comparées.
 
 **Comparer les fichiers de différents types:** Sans cette option, seulement les fichiers du même type seront comparés.
 

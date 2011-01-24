@@ -88,7 +88,7 @@ def build_cocoa(edition, dev):
 
 def build_qt(edition, dev):
     print("Building .ts files")
-    build_all_qt_locs(op.join('qt', 'lang'))
+    build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     print("Creating the run.py file")

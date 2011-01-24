@@ -11,7 +11,7 @@ import os.path as op
 
 from jobprogress import job
 from hscommon import cocoa
-from hscommon.cocoa import install_exception_hook
+from hscommon.cocoa import install_exception_hook, pythonify
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace)
@@ -29,7 +29,7 @@ JOBID2TITLE = {
 
 class DupeGuru(app.DupeGuru):
     def __init__(self, data_module, appdata_subdir):
-        LOGGING_LEVEL = logging.DEBUG if NSUserDefaults.standardUserDefaults().boolForKey_('debug') else logging.WARNING
+        LOGGING_LEVEL = logging.DEBUG if self.get_default('debug') else logging.WARNING
         logging.basicConfig(level=LOGGING_LEVEL, format='%(levelname)s %(message)s')
         logging.debug('started in debug mode')
         install_exception_hook()
@@ -58,7 +58,15 @@ class DupeGuru(app.DupeGuru):
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('JobStarted', self, ud)
     
-    #---Public
+    def _get_default(self, key_name):
+        raw = NSUserDefaults.standardUserDefaults().objectForKey_(key_name)
+        result = pythonify(raw)
+        return result
+    
+    def _set_default(self, key_name, value):
+        NSUserDefaults.standardUserDefaults().setObject_forKey_(value, key_name)
+    
+    #--- Public
     def start_scanning(self):
         self._select_dupes([])
         try:
