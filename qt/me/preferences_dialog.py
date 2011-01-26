@@ -88,6 +88,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.removeEmptyFoldersBox)
         self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"))
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
+        self._setupAddCheckbox('debugModeBox', tr(tr("Debug mode (restart required)")))
+        self.widgetsVLayout.addWidget(self.debugModeBox)
         self._setupBottomPart()
     
     def _load(self, prefs, setchecked):

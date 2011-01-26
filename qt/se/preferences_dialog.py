@@ -76,6 +76,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"), self.widget)
         self.verticalLayout_4.addWidget(self.ignoreHardlinkMatches)
+        self._setupAddCheckbox('debugModeBox', tr(tr("Debug mode (restart required)")), self.widget)
+        self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
     

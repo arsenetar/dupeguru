@@ -30,12 +30,16 @@ JOB_COPY = 'job_copy'
 JOB_DELETE = 'job_delete'
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
+DEBUG_MODE_PREFERENCE = 'DebugMode'
 
 class NoScannableFileError(Exception):
     pass
 
 class DupeGuru(RegistrableApplication, Broadcaster):
     def __init__(self, data_module, appdata):
+        if self.get_default(DEBUG_MODE_PREFERENCE, False):
+            logging.getLogger().setLevel(logging.DEBUG)
+            logging.debug("Debug mode enabled")
         RegistrableApplication.__init__(self, appid=1)
         Broadcaster.__init__(self)
         self.is_first_run = not self.get_default(HAD_FIRST_LAUNCH_PREFERENCE, False)

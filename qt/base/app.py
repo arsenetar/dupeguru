@@ -48,7 +48,8 @@ class DupeGuru(DupeGuruBase, QObject):
         if not op.exists(appdata):
             os.makedirs(appdata)
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
-        logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING)
+        logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING,
+            format='%(asctime)s - %(levelname)s - %(message)s')
         self.prefs = self._create_preferences()
         self.prefs.load()
         DupeGuruBase.__init__(self, data_module, appdata)

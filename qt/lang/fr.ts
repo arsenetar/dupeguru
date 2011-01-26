@@ -390,6 +390,8 @@
     <source>Delete and hardlink duplicates</source>
     <translation>Hardlinking de doublons</translation>
 </message>
+
+<!--- Preferences dialog -->
 <message>
     <source>Scan Type:</source>
     <translation>Type de scan:</translation>
@@ -533,6 +535,10 @@
 <message>
     <source>French</source>
     <translation>Français</translation>
+</message>
+<message>
+    <source>Debug mode (restart required)</source>
+    <translation>Mode de déboguage (redémarrage requis)</translation>
 </message>
 </context>
 

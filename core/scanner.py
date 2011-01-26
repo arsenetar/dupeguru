@@ -66,6 +66,7 @@ class Scanner:
                 ScanType.Tag: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
             }[self.scan_type]
             for f in j.iter_with_progress(files, tr("Read metadata of %d/%d files")):
+                logging.debug("Reading metadata of {}".format(str(f.path)))
                 f.words = func(f)
             return engine.getmatches(files, j=j, **kw)
     

@@ -27,6 +27,7 @@ class Preferences(PreferencesBase):
         self.ignore_hardlink_matches = get('IgnoreHardlinkMatches', self.ignore_hardlink_matches)
         self.use_regexp = get('UseRegexp', self.use_regexp)
         self.remove_empty_folders = get('RemoveEmptyFolders', self.remove_empty_folders)
+        self.debug_mode = get('DebugMode', self.debug_mode)
         self.destination_type = get('DestinationType', self.destination_type)
         self.custom_command = get('CustomCommand', self.custom_command)
         self.language = get('Language', self.language)
@@ -59,6 +60,7 @@ class Preferences(PreferencesBase):
         self.use_regexp = False
         self.ignore_hardlink_matches = False
         self.remove_empty_folders = False
+        self.debug_mode = False
         self.destination_type = 1
         self.custom_command = ''
         self.language = ''
@@ -89,6 +91,7 @@ class Preferences(PreferencesBase):
         set_('IgnoreHardlinkMatches', self.ignore_hardlink_matches)
         set_('UseRegexp', self.use_regexp)
         set_('RemoveEmptyFolders', self.remove_empty_folders)
+        set_('DebugMode', self.debug_mode)
         set_('DestinationType', self.destination_type)
         set_('CustomCommand', self.custom_command)
         set_('ColumnsWidth', self.columns_width)

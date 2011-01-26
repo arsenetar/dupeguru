@@ -52,3 +52,6 @@
 
 /* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "70"; */
 "70.title" = "Ignorer doublons avec hardlink vers le même fichier";
+
+/* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "75"; */
+"75.title" = "Mode de déboguage (redémarrage requis)";

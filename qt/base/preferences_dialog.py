@@ -131,6 +131,7 @@ class PreferencesDialogBase(QDialog):
         setchecked(self.useRegexpBox, prefs.use_regexp)
         setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
         setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
+        setchecked(self.debugModeBox, prefs.debug_mode)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
         langindex = {'fr': 1}.get(self.app.prefs.language, 0)
@@ -145,6 +146,7 @@ class PreferencesDialogBase(QDialog):
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
+        prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         langs = ['en', 'fr']

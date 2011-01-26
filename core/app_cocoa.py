@@ -29,9 +29,7 @@ JOBID2TITLE = {
 
 class DupeGuru(app.DupeGuru):
     def __init__(self, data_module, appdata_subdir):
-        LOGGING_LEVEL = logging.DEBUG if self.get_default('debug') else logging.WARNING
-        logging.basicConfig(level=LOGGING_LEVEL, format='%(levelname)s %(message)s')
-        logging.debug('started in debug mode')
+        logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook()
         appsupport = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
         appdata = op.join(appsupport, appdata_subdir)

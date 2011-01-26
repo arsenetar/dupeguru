@@ -7,6 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from xml.etree import ElementTree as ET
+import logging
 
 from hscommon import io
 from hscommon.path import Path
@@ -24,7 +25,7 @@ class AlreadyThereError(Exception):
 class InvalidPathError(Exception):
     """The path being added is invalid"""
 
-class Directories(object):
+class Directories:
     #---Override
     def __init__(self, fileclasses=[fs.File]):
         self._dirs = []
@@ -63,7 +64,9 @@ class Directories(object):
         try:
             filepaths = set()
             if state != STATE_EXCLUDED:
-                for file in fs.get_files(from_path, fileclasses=self.fileclasses):
+                found_files = fs.get_files(from_path, fileclasses=self.fileclasses)
+                logging.debug("Collected {} files in folder {}".format(len(found_files), str(from_path)))
+                for file in found_files:
                     file.is_ref = state == STATE_REFERENCE
                     filepaths.add(file.path)
                     yield file
