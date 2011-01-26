@@ -39,6 +39,12 @@ class DupeGuru(DupeGuruBase):
         except JobCancelled:
             return
     
+    def _get_default(self, key_name):
+        return None
+    
+    def _set_default(self, key_name, value):
+        pass
+    
 
 def add_fake_files_to_directories(directories, files):
     directories.get_files = lambda: iter(files)
