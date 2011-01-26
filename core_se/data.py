@@ -7,18 +7,21 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.util import format_size
+from hscommon.trans import tr as trbase
 from core.data import (format_path, format_timestamp, format_words, format_perc, 
     format_dupe_count, cmp_value)
 
+tr = lambda s: trbase(s, 'columns')
+
 COLUMNS = [
-    {'attr':'name','display':'Filename'},
-    {'attr':'path','display':'Directory'},
-    {'attr':'size','display':'Size (KB)'},
-    {'attr':'extension','display':'Kind'},
-    {'attr':'mtime','display':'Modification'},
-    {'attr':'percentage','display':'Match %'},
-    {'attr':'words','display':'Words Used'},
-    {'attr':'dupe_count','display':'Dupe Count'},
+    {'attr':'name', 'display': tr("Filename")},
+    {'attr':'path', 'display': tr("Folder")},
+    {'attr':'size', 'display': tr("Size (KB)")},
+    {'attr':'extension', 'display': tr("Kind")},
+    {'attr':'mtime', 'display': tr("Modification")},
+    {'attr':'percentage', 'display': tr("Match %")},
+    {'attr':'words', 'display': tr("Words Used")},
+    {'attr':'dupe_count', 'display': tr("Dupe Count")},
 ]
 
 MATCHPERC_COL = 5

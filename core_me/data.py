@@ -7,28 +7,31 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.util import format_time, format_size
+from hscommon.trans import tr as trbase
 from core.data import (format_path, format_timestamp, format_words, format_perc, 
     format_dupe_count, cmp_value)
 
+tr = lambda s: trbase(s, 'columns')
+
 COLUMNS = [
-    {'attr':'name','display':'Filename'},
-    {'attr':'path','display':'Directory'},
-    {'attr':'size','display':'Size (MB)'},
-    {'attr':'duration','display':'Time'},
-    {'attr':'bitrate','display':'Bitrate'},
-    {'attr':'samplerate','display':'Sample Rate'},
-    {'attr':'extension','display':'Kind'},
-    {'attr':'mtime','display':'Modification'},
-    {'attr':'title','display':'Title'},
-    {'attr':'artist','display':'Artist'},
-    {'attr':'album','display':'Album'},
-    {'attr':'genre','display':'Genre'},
-    {'attr':'year','display':'Year'},
-    {'attr':'track','display':'Track Number'},
-    {'attr':'comment','display':'Comment'},
-    {'attr':'percentage','display':'Match %'},
-    {'attr':'words','display':'Words Used'},
-    {'attr':'dupe_count','display':'Dupe Count'},
+    {'attr': 'name', 'display': tr("Filename")},
+    {'attr': 'path', 'display': tr("Folder")},
+    {'attr': 'size', 'display': tr("Size (MB)")},
+    {'attr': 'duration', 'display': tr("Time")},
+    {'attr': 'bitrate', 'display': tr("Bitrate")},
+    {'attr': 'samplerate', 'display': tr("Sample Rate")},
+    {'attr': 'extension', 'display': tr("Kind")},
+    {'attr': 'mtime', 'display': tr("Modification")},
+    {'attr': 'title', 'display': tr("Title")},
+    {'attr': 'artist', 'display': tr("Artist")},
+    {'attr': 'album', 'display': tr("Album")},
+    {'attr': 'genre', 'display': tr("Genre")},
+    {'attr': 'year', 'display': tr("Year")},
+    {'attr': 'track', 'display': tr("Track Number")},
+    {'attr': 'comment', 'display': tr("Comment")},
+    {'attr': 'percentage', 'display': tr("Match %")},
+    {'attr': 'words', 'display': tr("Words Used")},
+    {'attr': 'dupe_count', 'display': tr("Dupe Count")},
 ]
 
 MATCHPERC_COL = 15

@@ -7,20 +7,23 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.util import format_size
+from hscommon.trans import tr as trbase
 from core.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value
+
+tr = lambda s: trbase(s, 'columns')
 
 def format_dimensions(dimensions):
     return '%d x %d' % (dimensions[0], dimensions[1])
 
 COLUMNS = [
-    {'attr':'name','display':'Filename'},
-    {'attr':'path','display':'Directory'},
-    {'attr':'size','display':'Size (KB)'},
-    {'attr':'extension','display':'Kind'},
-    {'attr':'dimensions','display':'Dimensions'},
-    {'attr':'mtime','display':'Modification'},
-    {'attr':'percentage','display':'Match %'},
-    {'attr':'dupe_count','display':'Dupe Count'},
+    {'attr':'name', 'display': tr("Filename")},
+    {'attr':'path', 'display': tr("Folder")},
+    {'attr':'size', 'display': tr("Size (KB)")},
+    {'attr':'extension', 'display': tr("Kind")},
+    {'attr':'dimensions', 'display': tr("Dimensions")},
+    {'attr':'mtime', 'display': tr("Modification")},
+    {'attr':'percentage', 'display': tr("Match %")},
+    {'attr':'dupe_count', 'display': tr("Dupe Count")},
 ]
 
 MATCHPERC_COL = 6

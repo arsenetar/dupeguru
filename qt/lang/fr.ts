@@ -542,6 +542,93 @@
 </message>
 </context>
 
+<!-- ******** Columns ******** -->
+<context>
+<name>columns</name>
+<message>
+    <source>Filename</source>
+    <translation>Nom de fichier</translation>
+</message>
+<message>
+    <source>Folder</source>
+    <translation>Dossier</translation>
+</message>
+<message>
+    <source>Size (KB)</source>
+    <translation>Taille (KB)</translation>
+</message>
+<message>
+    <source>Size (MB)</source>
+    <translation>Taille (MB)</translation>
+</message>
+<message>
+    <source>Kind</source>
+    <translation>Type</translation>
+</message>
+<message>
+    <source>Modification</source>
+    <translation>Modification</translation>
+</message>
+<message>
+    <source>Match %</source>
+    <translation>Match %</translation>
+</message>
+<message>
+    <source>Words Used</source>
+    <translation>Mots</translation>
+</message>
+<message>
+    <source>Dupe Count</source>
+    <translation># Doublons</translation>
+</message>
+
+<message>
+    <source>Time</source>
+    <translation>Temps</translation>
+</message>
+<message>
+    <source>Bitrate</source>
+    <translation>Bitrate</translation>
+</message>
+<message>
+    <source>Sample Rate</source>
+    <translation>Sample Rate</translation>
+</message>
+<message>
+    <source>Title</source>
+    <translation>Titre</translation>
+</message>
+<message>
+    <source>Artist</source>
+    <translation>Artiste</translation>
+</message>
+<message>
+    <source>Album</source>
+    <translation>Album</translation>
+</message>
+<message>
+    <source>Genre</source>
+    <translation>Genre</translation>
+</message>
+<message>
+    <source>Year</source>
+    <translation>Année</translation>
+</message>
+<message>
+    <source>Track Number</source>
+    <translation>Track</translation>
+</message>
+<message>
+    <source>Comment</source>
+    <translation>Commentaire</translation>
+</message>
+
+<message>
+    <source>Dimensions</source>
+    <translation>Dimensions</translation>
+</message>
+</context>
+
 <!-- ******** Message ******** -->
 <context>
 <name>message</name>
