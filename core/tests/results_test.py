@@ -225,6 +225,12 @@ class TestCaseResultsWithSomeGroups:
         self.results.load_from_xml(f, get_file)
         assert not self.results.is_modified
     
+    def test_is_modified_after_removing_all_results(self):
+        # Removing all results sets the is_modified flag to false.
+        self.results.mark_all()
+        self.results.perform_on_marked(lambda x:None, True)
+        assert not self.results.is_modified
+    
 
 class TestCaseResultsWithSavedResults:
     def setup_method(self, method):
