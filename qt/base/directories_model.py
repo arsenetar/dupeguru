@@ -8,7 +8,7 @@
 
 import urllib.parse
 
-from PyQt4.QtCore import QModelIndex, Qt, QRect, QEvent, QPoint, QUrl
+from PyQt4.QtCore import pyqtSignal, Qt, QRect, QEvent, QPoint, QUrl
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
@@ -107,6 +107,7 @@ class DirectoriesModel(TreeModel):
         paths = [str(QUrl(url).toLocalFile()) for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
+        self.foldersAdded.emit(paths)
         self.reset()
         return True
     
@@ -140,6 +141,8 @@ class DirectoriesModel(TreeModel):
         # work with ActionMove either. So screw that, and accept anything.
         return Qt.ActionMask
     
+    #--- Signals
+    foldersAdded = pyqtSignal(list)
     #--- model --> view
     def refresh(self):
         self.reset()

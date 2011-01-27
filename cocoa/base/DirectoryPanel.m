@@ -27,6 +27,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [self refreshRemoveButtonText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directorySelectionChanged:)
         name:NSOutlineViewSelectionDidChangeNotification object:outlineView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outlineAddedFolders:)
+        name:DGAddedFoldersNotification object:outline];
     return self;
 }
 
@@ -160,6 +162,14 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)directorySelectionChanged:(NSNotification *)aNotification
 {
     [self refreshRemoveButtonText];
+}
+
+- (void)outlineAddedFolders:(NSNotification *)aNotification
+{
+    NSArray *foldernames = [[aNotification userInfo] objectForKey:@"foldernames"];
+    for (NSString *foldername in foldernames) {
+        [_recentDirectories addFile:foldername];
+    }
 }
 
 @end

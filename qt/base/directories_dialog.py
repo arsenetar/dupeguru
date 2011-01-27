@@ -45,6 +45,7 @@ class DirectoriesDialog(QMainWindow):
         self.app.recentResults.itemsChanged.connect(self._updateLoadResultsButton)
         self.recentFolders.itemsChanged.connect(self._updateAddButton)
         self.recentFolders.mustOpenItem.connect(self.app.add_directory)
+        self.directoriesModel.foldersAdded.connect(self.directoriesModelAddedFolders)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
         
     def _setupActions(self):
@@ -187,6 +188,10 @@ class DirectoriesDialog(QMainWindow):
     
     def appWillSavePrefs(self):
         self.app.prefs.directoriesWindowRect = self.geometry()
+    
+    def directoriesModelAddedFolders(self, folders):
+        for folder in folders:
+            self.recentFolders.insertItem(folder)
     
     def loadResultsTriggered(self):
         title = trmsg("SelectResultToLoadMsg")

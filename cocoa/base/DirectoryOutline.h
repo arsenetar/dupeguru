@@ -10,6 +10,8 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSOutline.h"
 #import "PyDirectoryOutline.h"
 
+#define DGAddedFoldersNotification @"DGAddedFoldersNotification"
+
 @interface DirectoryOutline : HSOutline {}
 - (id)initWithPyParent:(id)aPyParent view:(HSOutlineView *)aOutlineView;
 - (PyDirectoryOutline *)py;

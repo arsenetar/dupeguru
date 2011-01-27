@@ -49,12 +49,15 @@ http://www.hardcoded.net/licenses/bsd_license
     sourceDragMask = [info draggingSourceOperationMask];
     pboard = [info draggingPasteboard];
     if ([[pboard types] containsObject:NSFilenamesPboardType]) {
-        NSArray *filenames = [pboard propertyListForType:NSFilenamesPboardType];
+        NSArray *foldernames = [pboard propertyListForType:NSFilenamesPboardType];
         if (!(sourceDragMask & NSDragOperationLink))
             return NO;
-        for (NSString *filename in filenames) {
-            [[self py] addDirectory:filename];
+        for (NSString *foldername in foldernames) {
+            [[self py] addDirectory:foldername];
         }
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:foldernames forKey:@"foldernames"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DGAddedFoldersNotification
+            object:self userInfo:userInfo];
     }
     return YES;
 }
