@@ -1,3 +1,12 @@
+=== 3.0.1 (2011-01-27)
+
+* Restored the context menu which had been broken in 3.0.0. [Mac OS X] (#133)
+* Fixed a bug where an "unsaved results" warning would be issued on quit even with empty results. (#134)
+* Removed focus from the cancel button in the progress dialog to avoid accidental cancellations. [Mac OS X] (#135)
+* Folders added through drag and drop are added to the recent folders list. (#136)
+* Added a debugging mode. (#132)
+* Fixed french localization glitches.
+
 === 3.0.0 (2011-01-24)
 
 * Re-designed the UI. (#129)
