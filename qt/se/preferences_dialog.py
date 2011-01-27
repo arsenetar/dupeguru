@@ -87,7 +87,7 @@ class PreferencesDialog(PreferencesDialogBase):
         if sys.platform == 'linux2':
             # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
             # doesn't have enough space, so we make the pref pane higher to compensate.
-            self.resize(self.width(), 480)
+            self.resize(self.width(), 490)
         elif sys.platform == 'win32':
             self.resize(self.width(), 420)
     
