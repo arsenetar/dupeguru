@@ -34,8 +34,9 @@ def prepare_pictures(pictures, cache_path, j=job.nulljob):
     prepared = [] # only pictures for which there was no error getting blocks
     try:
         for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):
-            picture.dimensions
             picture.unicode_path = str(picture.path)
+            logging.debug("Analyzing picture at {}".format(picture.unicode_path))
+            picture.dimensions # pre-read dimensions
             try:
                 if picture.unicode_path not in cache:
                     blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)

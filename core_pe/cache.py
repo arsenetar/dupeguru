@@ -81,9 +81,9 @@ class Cache(object):
         try:
             self.con.execute(sql, [value, key])
         except sqlite.OperationalError:
-            logging.warning('Picture cache could not set %r for key %r', value, key)
+            logging.warning('Picture cache could not set value for key %r', key)
         except sqlite.DatabaseError as e:
-            logging.warning('DatabaseError while setting %r for key %r: %s', value, key, str(e))
+            logging.warning('DatabaseError while setting value for key %r: %s', key, str(e))
     
     def _create_con(self, second_try=False):
         def create_tables():
