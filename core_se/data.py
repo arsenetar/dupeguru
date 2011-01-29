@@ -62,7 +62,7 @@ def GetDupeSortKey(dupe, get_group, key, delta):
     if key == DUPECOUNT_COL:
         return 0
     r = cmp_value(getattr(dupe, COLUMNS[key].attr, ''))
-    if delta and (key in {2, 4}):
+    if delta and (key in DELTA_COLUMNS):
         r -= cmp_value(getattr(get_group().ref, COLUMNS[key].attr, ''))
     return r
 
