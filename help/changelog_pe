@@ -1,3 +1,13 @@
+=== 2.0.0 (2011-01-29)
+
+* Re-designed the UI. (#129)
+* Internationalized dupeGuru and localized it to french. (#32)
+* Changed the format of the help file. (#130)
+* The "Dimensions" column is now affected by the delta mode. (#115)
+* Removed focus from the cancel button in the progress dialog to avoid accidental cancellations. [Mac OS X] (#135)
+* Folders added through drag and drop are added to the recent folders list. (#136)
+* Added a debugging mode. (#132)
+
 === 1.11.3 (2010-12-31)
 
 * Fixed bug causing results to be corrupted after a scan cancellation. (#120)

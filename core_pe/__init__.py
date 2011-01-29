@@ -1,2 +1,2 @@
-__version__ = '1.11.3'
+__version__ = '2.0.0'
 __appname__ = 'dupeGuru Picture Edition'
