@@ -18,7 +18,7 @@ class ResultsModel(Table):
         model = ResultTableModel(self, app)
         self._app = app
         self._data = app.data
-        self._delta_columns = app.DELTA_COLUMNS
+        self._delta_columns = app.data.DELTA_COLUMNS
         Table.__init__(self, model, view)
         self.model.connect()
     
@@ -63,7 +63,7 @@ class ResultsModel(Table):
     
     def headerData(self, section, orientation, role):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(self._data.COLUMNS):
-            return self._data.COLUMNS[section]['display']
+            return self._data.COLUMNS[section].display
         return None
     
     def setData(self, index, value, role):

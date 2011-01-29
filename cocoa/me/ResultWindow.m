@@ -14,15 +14,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @implementation ResultWindow
 /* Override */
-- (id)initWithParentApp:(AppDelegateBase *)aApp;
-{
-    self = [super initWithParentApp:aApp];
-    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(2,6)];
-    [deltaColumns removeIndex:6];
-    [table setDeltaColumns:deltaColumns];
-    return self;
-}
-
 - (void)setScanOptions
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];

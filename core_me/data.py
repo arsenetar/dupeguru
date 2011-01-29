@@ -9,33 +9,34 @@
 from hscommon.util import format_time, format_size
 from hscommon.trans import tr as trbase
 from core.data import (format_path, format_timestamp, format_words, format_perc, 
-    format_dupe_count, cmp_value)
+    format_dupe_count, cmp_value, Column)
 
 tr = lambda s: trbase(s, 'columns')
 
 COLUMNS = [
-    {'attr': 'name', 'display': tr("Filename")},
-    {'attr': 'path', 'display': tr("Folder")},
-    {'attr': 'size', 'display': tr("Size (MB)")},
-    {'attr': 'duration', 'display': tr("Time")},
-    {'attr': 'bitrate', 'display': tr("Bitrate")},
-    {'attr': 'samplerate', 'display': tr("Sample Rate")},
-    {'attr': 'extension', 'display': tr("Kind")},
-    {'attr': 'mtime', 'display': tr("Modification")},
-    {'attr': 'title', 'display': tr("Title")},
-    {'attr': 'artist', 'display': tr("Artist")},
-    {'attr': 'album', 'display': tr("Album")},
-    {'attr': 'genre', 'display': tr("Genre")},
-    {'attr': 'year', 'display': tr("Year")},
-    {'attr': 'track', 'display': tr("Track Number")},
-    {'attr': 'comment', 'display': tr("Comment")},
-    {'attr': 'percentage', 'display': tr("Match %")},
-    {'attr': 'words', 'display': tr("Words Used")},
-    {'attr': 'dupe_count', 'display': tr("Dupe Count")},
+    Column('name', tr("Filename")),
+    Column('path', tr("Folder")),
+    Column('size', tr("Size (MB)")),
+    Column('duration', tr("Time")),
+    Column('bitrate', tr("Bitrate")),
+    Column('samplerate', tr("Sample Rate")),
+    Column('extension', tr("Kind")),
+    Column('mtime', tr("Modification")),
+    Column('title', tr("Title")),
+    Column('artist', tr("Artist")),
+    Column('album', tr("Album")),
+    Column('genre', tr("Genre")),
+    Column('year', tr("Year")),
+    Column('track', tr("Track Number")),
+    Column('comment', tr("Comment")),
+    Column('percentage', tr("Match %")),
+    Column('words', tr("Words Used")),
+    Column('dupe_count', tr("Dupe Count")),
 ]
 
 MATCHPERC_COL = 15
 DUPECOUNT_COL = 17
+DELTA_COLUMNS = {2, 3, 4, 5, 7}
 
 METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
     'album', 'genre', 'year', 'track', 'comment']
@@ -87,9 +88,9 @@ def GetDupeSortKey(dupe, get_group, key, delta):
         return m.percentage
     if key == DUPECOUNT_COL:
         return 0
-    r = cmp_value(getattr(dupe, COLUMNS[key]['attr'], ''))
-    if delta and (key in {2, 3, 4, 7}):
-        r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr'], ''))
+    r = cmp_value(getattr(dupe, COLUMNS[key].attr, ''))
+    if delta and (key in DELTA_COLUMNS):
+        r -= cmp_value(getattr(get_group().ref, COLUMNS[key].attr, ''))
     return r
 
 def GetGroupSortKey(group, key):
@@ -97,4 +98,4 @@ def GetGroupSortKey(group, key):
         return group.percentage
     if key == DUPECOUNT_COL:
         return len(group)
-    return cmp_value(getattr(group.ref, COLUMNS[key]['attr'], ''))
+    return cmp_value(getattr(group.ref, COLUMNS[key].attr, ''))

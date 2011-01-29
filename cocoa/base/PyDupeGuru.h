@@ -45,6 +45,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSNumber *)getMarkCount;
 - (BOOL)scanWasProblematic;
 - (BOOL)resultsAreModified;
+- (NSArray *)deltaColumns;
 
 //Scanning options
 - (void)setMinMatchPercentage:(NSNumber *)percentage;

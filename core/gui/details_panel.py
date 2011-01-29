@@ -31,7 +31,7 @@ class DetailsPanel(GUIObject):
         # we don't want the two sides of the table to display the stats for the same file
         ref = group.ref if group is not None and group.ref is not dupe else None
         l2 = self.app._get_display_info(ref, group, False)
-        names = [c['display'] for c in self.app.data.COLUMNS]
+        names = [c.display for c in self.app.data.COLUMNS]
         self._table = list(zip(names, l1, l2))
     
     #--- Public

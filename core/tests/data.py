@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-10-23
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -10,16 +9,17 @@
 # data module for tests
 
 from hscommon.util import format_size
-from ..data import format_path, cmp_value
+from ..data import format_path, cmp_value, Column
 
 COLUMNS = [
-    {'attr':'name','display':'Filename'},
-    {'attr':'path','display':'Directory'},
-    {'attr':'size','display':'Size (KB)'},
-    {'attr':'extension','display':'Kind'},
+    Column('name', 'Filename'),
+    Column('path', 'Directory'),
+    Column('size', 'Size (KB)'),
+    Column('extension', 'Kind'),
 ]
 
 METADATA_TO_READ = ['size']
+DELTA_COLUMNS = {2,}
 
 def GetDisplayInfo(dupe, group, delta):
     size = dupe.size
@@ -35,10 +35,10 @@ def GetDisplayInfo(dupe, group, delta):
     ]
 
 def GetDupeSortKey(dupe, get_group, key, delta):
-    r = cmp_value(getattr(dupe, COLUMNS[key]['attr']))
-    if delta and (key == 2):
-        r -= cmp_value(getattr(get_group().ref, COLUMNS[key]['attr']))
+    r = cmp_value(getattr(dupe, COLUMNS[key].attr))
+    if delta and (key in DELTA_COLUMNS):
+        r -= cmp_value(getattr(get_group().ref, COLUMNS[key].attr))
     return r
 
 def GetGroupSortKey(group, key):
-    return cmp_value(getattr(group.ref, COLUMNS[key]['attr']))
+    return cmp_value(getattr(group.ref, COLUMNS[key].attr))

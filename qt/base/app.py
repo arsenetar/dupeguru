@@ -41,7 +41,6 @@ JOBID2TITLE = {
 class DupeGuru(DupeGuruBase, QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
-    DELTA_COLUMNS = frozenset()
     
     def __init__(self, data_module):
         appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))

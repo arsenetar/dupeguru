@@ -137,7 +137,7 @@ class ResultWindow(QMainWindow):
         menu = self.menuColumns
         self._column_actions = []
         for index, column in enumerate(self.app.data.COLUMNS):
-            action = menu.addAction(column['display'])
+            action = menu.addAction(column.display)
             action.setCheckable(True)
             action.column_index = index
             self._column_actions.append(action)

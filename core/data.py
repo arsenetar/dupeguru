@@ -6,9 +6,13 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from collections import namedtuple
+
 from hscommon.util import format_time_decimal, format_size
 
 import time
+
+Column = namedtuple('Column', 'attr display')
 
 def format_path(p):
     return str(p[:-1])

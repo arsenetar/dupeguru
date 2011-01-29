@@ -13,15 +13,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @implementation ResultWindow
 /* Override */
-- (id)initWithParentApp:(AppDelegateBase *)aApp;
-{
-    self = [super initWithParentApp:aApp];
-    NSMutableIndexSet *deltaColumns = [NSMutableIndexSet indexSetWithIndex:2];
-    [deltaColumns addIndex:4];
-    [table setDeltaColumns:deltaColumns];
-    return self;
-}
-
 - (void)initResultColumns
 {
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];

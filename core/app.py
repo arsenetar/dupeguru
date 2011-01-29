@@ -221,7 +221,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
         column_ids = list(map(int, column_ids))
         column_ids.sort()
-        colnames = [col['display'] for i, col in enumerate(self.data.COLUMNS) if i in column_ids]
+        colnames = [col.display for i, col in enumerate(self.data.COLUMNS) if i in column_ids]
         rows = []
         for group in self.results.groups:
             for dupe in group:
