@@ -191,7 +191,7 @@
 																</object>
 																<object class="NSMenuItem" id="142495353">
 																	<reference key="NSMenu" ref="104112446"/>
-																	<string key="NSTitle">Exclus</string>
+																	<string key="NSTitle">Exclu</string>
 																	<string key="NSKeyEquiv"/>
 																	<int key="NSMnemonicLoc">2147483647</int>
 																	<string key="NSAction">_popUpItemAction:</string>

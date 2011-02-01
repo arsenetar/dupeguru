@@ -244,7 +244,7 @@
 </message>
 <message>
     <source>Excluded</source>
-    <translation>Exclus</translation>
+    <translation>Exclu</translation>
 </message>
 <message>
     <source>Problems!</source>
