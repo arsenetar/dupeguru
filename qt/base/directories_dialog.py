@@ -13,6 +13,7 @@ from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLa
 
 from hscommon.trans import tr, trmsg
 from qtlib.recent import Recent
+from qtlib.util import moveToScreenCenter
 from core.app import NoScannableFileError
 
 from . import platform
@@ -144,6 +145,8 @@ class DirectoriesDialog(QMainWindow):
         
         if self.app.prefs.directoriesWindowRect is not None:
             self.setGeometry(self.app.prefs.directoriesWindowRect)
+        else:
+            moveToScreenCenter(self)
     
     def _updateAddButton(self):
         if self.recentFolders.isEmpty():

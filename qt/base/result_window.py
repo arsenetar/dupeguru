@@ -15,6 +15,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, Q
 
 from hscommon.trans import tr, trmsg
 from hscommon.util import nonone
+from qtlib.util import moveToScreenCenter
 
 from .results_model import ResultsModel, ResultsView
 from .stats_label import StatsLabel
@@ -192,8 +193,11 @@ class ResultWindow(QMainWindow):
         
         if self.app.prefs.resultWindowIsMaximized:
             self.setWindowState(self.windowState() | Qt.WindowMaximized)
-        if self.app.prefs.resultWindowRect is not None and not self.app.prefs.resultWindowIsMaximized:
-            self.setGeometry(self.app.prefs.resultWindowRect)
+        else:
+            if self.app.prefs.resultWindowRect is not None:
+                self.setGeometry(self.app.prefs.resultWindowRect)
+            else:
+                moveToScreenCenter(self)
     
     #--- Private
     def _load_columns(self):
