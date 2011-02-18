@@ -98,12 +98,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         except EnvironmentError:
             return None
     
+    def _results_changed(self):
+        self.selected_dupes = [d for d in self.selected_dupes
+            if self.results.get_group_of_duplicate(d) is not None]
+        self.notify('results_changed')
+    
     def _job_completed(self, jobid):
         # Must be called by subclasses when they detect that an async job is completed.
         if jobid == JOB_SCAN:
-            self.notify('results_changed')
+            self._results_changed()
         elif jobid in (JOB_LOAD, JOB_MOVE, JOB_DELETE):
-            self.notify('results_changed')
+            self._results_changed()
             self.notify('problems_changed')
     
     @staticmethod
@@ -171,7 +176,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             filter = escape(filter, set('()[]\\.|+?^'))
             filter = escape(filter, '*', '.')
         self.results.apply_filter(filter)
-        self.notify('results_changed')
+        self._results_changed()
     
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
@@ -316,7 +321,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def remove_marked(self):
         self.results.perform_on_marked(lambda x:None, True)
-        self.notify('results_changed')
+        self._results_changed()
     
     def remove_selected(self):
         self.remove_duplicates(self.selected_dupes)
@@ -356,7 +361,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if not self.directories.has_any_file():
             raise NoScannableFileError()
         self.results.groups = []
-        self.notify('results_changed')
+        self._results_changed()
         self._start_job(JOB_SCAN, do)
     
     def toggle_selected_mark_state(self):

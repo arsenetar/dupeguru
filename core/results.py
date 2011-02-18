@@ -259,11 +259,14 @@ class Results(Markable):
             group = self.get_group_of_duplicate(dupe)
             if dupe not in group.dupes:
                 return
+            ref = group.ref
             group.remove_dupe(dupe, False)
+            del self.__group_of_duplicate[dupe]
             self._remove_mark_flag(dupe)
             self.__total_count -= 1
             self.__total_size -= dupe.size
             if not group:
+                del self.__group_of_duplicate[ref]
                 self.__groups.remove(group)
                 if self.__filtered_groups:
                     self.__filtered_groups.remove(group)

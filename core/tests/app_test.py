@@ -390,6 +390,16 @@ class TestCaseDupeGuruWithResults:
         add_fake_files_to_directories(app.directories, self.objects) # We want the scan to at least start
         app.start_scanning() # will be cancelled immediately
         eq_(len(self.rtable), 0)
+    
+    def test_selected_dupes_after_removal(self, do_setup):
+        # Purge the app's `selected_dupes` attribute when removing dupes, or else it might cause a
+        # crash later with None refs.
+        app = self.app
+        app.results.mark_all()
+        self.rtable.select([0, 1, 2, 3, 4])
+        app.remove_marked()
+        eq_(len(self.rtable), 0)
+        eq_(app.selected_dupes, [])
 
 class TestCaseDupeGuru_renameSelected:
     def pytest_funcarg__do_setup(self, request):

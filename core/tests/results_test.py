@@ -231,6 +231,15 @@ class TestCaseResultsWithSomeGroups:
         self.results.perform_on_marked(lambda x:None, True)
         assert not self.results.is_modified
     
+    def test_group_of_duplicate_after_removal(self):
+        # removing a duplicate also removes it from the dupe:group map.
+        dupe = self.results.groups[1].dupes[0]
+        ref = self.results.groups[1].ref
+        self.results.remove_duplicates([dupe])
+        assert self.results.get_group_of_duplicate(dupe) is None
+        # also remove group ref
+        assert self.results.get_group_of_duplicate(ref) is None
+    
 
 class TestCaseResultsWithSavedResults:
     def setup_method(self, method):
