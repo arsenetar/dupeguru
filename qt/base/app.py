@@ -10,6 +10,7 @@ import sys
 import logging
 import os
 import os.path as op
+import io
 
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QApplication
@@ -38,6 +39,11 @@ JOBID2TITLE = {
     JOB_DELETE: tr("Sending files to the recycle bin"),
 }
 
+class SysWrapper(io.IOBase):
+    def write(self, s):
+        if s.strip(): # don't log empty stuff
+            logging.warning(s)
+
 class DupeGuru(DupeGuruBase, QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
@@ -49,6 +55,10 @@ class DupeGuru(DupeGuruBase, QObject):
         # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
         logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING,
             format='%(asctime)s - %(levelname)s - %(message)s')
+        if sys.stderr is None: # happens under a cx_freeze environment
+            sys.stderr = SysWrapper()
+        if sys.stdout is None:
+            sys.stdout = SysWrapper()
         self.prefs = self._create_preferences()
         self.prefs.load()
         DupeGuruBase.__init__(self, data_module, appdata)
