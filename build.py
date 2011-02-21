@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-12-30
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -15,6 +14,7 @@ import json
 
 from setuptools import setup
 from distutils.extension import Extension
+from pluginbuilder import build_plugin
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages,
@@ -46,12 +46,8 @@ def build_cocoa(edition, dev):
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     os.chdir('build')
-    script_args = ['py2app', '-A'] if dev else ['py2app']
-    setup(
-        script_args = script_args,
-        plugin = ['dg_cocoa.py'],
-        setup_requires = ['py2app'],
-    )
+    # We have to exclude PyQt4 specifically because it's conditionally imported in hscommon.trans
+    build_plugin('dg_cocoa.py', excludes=['PyQt4'], alias=dev)
     os.chdir('..')
     pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
     if op.exists(pluginpath):

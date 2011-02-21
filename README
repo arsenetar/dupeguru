@@ -1,5 +1,5 @@
 Contents
-=====
+========
 
 This package contains the source for dupeGuru. To learn how to build it, refer to the "Build dupeGuru" section. Below is the description of the various subfolders:
 
@@ -19,14 +19,14 @@ with as mercurial subrepos):
 - qtlib: A collection of helpers used across Qt UI codebases of HS applications.
 
 dupeGuru Dependencies
-=====
+=====================
 
 Before being able to build dupeGuru, a few dependencies have to be installed:
 
 General dependencies
------
+--------------------
 
-- Python 3.1 (http://www.python.org)
+- Python 3.1 (3.2 on Mac OS X) (http://www.python.org)
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
 - jobprogress (http://hg.hardcoded.net/jobprogress)
@@ -38,16 +38,16 @@ by the build system through command line, so you can build dupeGuru even if Sphi
 your Python 2.x install.
 
 OS X prerequisites
------
+------------------
 
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
 - PyObjC 2.3 (http://pyobjc.sourceforge.net/)
-- py2app 0.5.4 (http://bitbucket.org/ronaldoussoren/py2app)
+- pluginbuilder 1.0.0 (http://bitbucket.org/hsoft/pluginbuilder)
 - appscript 0.22.0 for ME and PE (http://appscript.sourceforge.net/)
 
 Windows prerequisites
----
+---------------------
 
 - Visual Studio 2008 (Express is enough) is needed to build C extensions. (http://www.microsoft.com/Express/)
 - PyQt 4.7.5 (http://www.riverbankcomputing.co.uk/news)
@@ -55,7 +55,7 @@ Windows prerequisites
 - Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)
 
 Building dupeGuru
-=====
+=================
 
 First, make sure you meet the dependencies listed in the section above. Then you need to configure your build with:
 
