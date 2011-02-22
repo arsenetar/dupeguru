@@ -14,7 +14,6 @@ import json
 
 from setuptools import setup
 from distutils.extension import Extension
-from pluginbuilder import build_plugin
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages,
@@ -31,6 +30,7 @@ def parse_args():
     return options
 
 def build_cocoa(edition, dev):
+    from pluginbuilder import build_plugin
     build_all_cocoa_locs('cocoalib')
     build_all_cocoa_locs(op.join('cocoa', 'base'))
     build_all_cocoa_locs(op.join('cocoa', edition))
