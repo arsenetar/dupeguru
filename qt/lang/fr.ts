@@ -84,7 +84,7 @@
 </message>
 <message>
     <source>Matched %d/%d pictures</source>
-    <translation>Comparé %d/%d images</translation>
+    <translation>%d/%d blocs d'images comparés</translation>
 </message>
 <message>
     <source>Verified %d/%d matches</source>

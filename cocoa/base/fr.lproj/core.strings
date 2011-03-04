@@ -18,7 +18,7 @@
 
 "Analyzed %d/%d pictures" = "Analyzé %d/%d images";
 "Preparing for matching" = "Préparation pour la comparaison";
-"Matched %d/%d pictures" = "Comparé %d/%d images";
+"Performed %d/%d chunk matches" = "%d/%d blocs d'images comparés";
 "Verified %d/%d matches" = "Vérifié %d/%d paires";
 
 "Removing dead tracks from your iTunes Library" = "Retrait des tracks mortes de votre librairie iTunes";

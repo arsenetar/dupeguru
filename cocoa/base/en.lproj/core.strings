@@ -19,7 +19,7 @@
 
 "Analyzed %d/%d pictures" = "Analyzed %d/%d pictures";
 "Preparing for matching" = "Preparing for matching";
-"Matched %d/%d pictures" = "Matched %d/%d pictures";
+"Performed %d/%d chunk matches" = "Performed %d/%d chunk matches";
 "Verified %d/%d matches" = "Verified %d/%d matches";
 
 "Removing dead tracks from your iTunes Library" = "Removing dead tracks from your iTunes Library";
