@@ -41,7 +41,13 @@ MIN_CHUNK_SIZE = 100
 # Enough so that we're sure that the main thread will not wait after a result.get() call
 # cpucount+1 should be enough to be sure that the spawned process will not wait after the results
 # collection made by the main process.
-RESULTS_QUEUE_LIMIT = multiprocessing.cpu_count() + 1
+try:
+    RESULTS_QUEUE_LIMIT = multiprocessing.cpu_count() + 1
+except Exception:
+    # I had an IOError on app launch once. It seems to be a freak occurrence. In any case, we want
+    # the app to launch, so let's just put an arbitrary value.
+    logging.warning("Had problems to determine cpu count on launch.")
+    RESULTS_QUEUE_LIMIT = 8
 
 def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
