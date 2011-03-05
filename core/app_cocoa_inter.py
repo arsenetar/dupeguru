@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-02
 # Copyright 2010 Hardcoded Software (http://www.hardcoded.net)
@@ -17,6 +16,7 @@ from .gui.problem_dialog import ProblemDialog
 from .gui.problem_table import ProblemTable
 from .gui.result_table import ResultTable
 from .gui.stats_label import StatsLabel
+from .gui.extra_fairware_reminder import ExtraFairwareReminder
 
 class PyDupeGuruBase(PyFairware):
     #---Directories
@@ -236,3 +236,26 @@ class PyProblemDialog(PyGUIObject):
 
 class PyProblemTable(PyTable):
     py_class = ProblemTable
+
+class PyExtraFairwareReminder(PyGUIObject):
+    py_class = ExtraFairwareReminder
+    
+    def start(self):
+        self.py.start()
+    
+    def updateButton(self):
+        self.py.update_button()
+    
+    # model --> view
+    def start_timer(self):
+        self.cocoa.startTimer()
+    
+    def stop_timer(self):
+        self.cocoa.stopTimer()
+    
+    def enable_button(self):
+        self.cocoa.enableButton()
+    
+    def set_button_text(self, text):
+        self.cocoa.setButtonText_(text)
+    

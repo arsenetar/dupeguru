@@ -100,4 +100,24 @@
     <translation>Picture cache cleared.</translation>
 </message>
 </context>
+
+<context>
+<name>ExtraFairwareReminder</name>
+<message>
+    <source>ExtraFairwarePromptMsg</source>
+    <translation>It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.
+    
+You might think &quot;but I'm only going to use this once, I don't have to contribute&quot;. The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.
+
+If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder.</translation>
+</message>
+<message>
+    <source>ExtraFairwareReasonMsg</source>
+    <translation>This reminder showed up because:
+
+1. You are processing more than 100 duplicates
+2. You have not yet contributed to dupeGuru
+3. There are unpaid hours in the project</translation>
+</message>
+</context>
 </TS>

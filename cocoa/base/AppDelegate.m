@@ -9,6 +9,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "AppDelegate.h"
 #import "ProgressController.h"
 #import "HSFairwareReminder.h"
+#import "ExtraFairwareReminder.h"
 #import "Utils.h"
 #import "Consts.h"
 #import "Dialogs.h"
@@ -32,6 +33,8 @@ http://www.hardcoded.net/licenses/bsd_license
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(showExtraFairwareReminder:) name:ShowExtraFairwareReminder object:nil];
 }
 
 /* Virtual */
@@ -202,5 +205,13 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)recentFileClicked:(NSString *)path
 {
     [py loadResultsFrom:path];
+}
+
+- (void)showExtraFairwareReminder:(NSNotification *)aNotification
+{
+    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithPy:py];
+    [dialog start];
+    [NSApp runModalForWindow:[dialog window]];
+    [dialog release];
 }
 @end

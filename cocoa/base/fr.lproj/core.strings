@@ -16,6 +16,9 @@
 "Processed %d/%d matches against the ignore list" = "Vérification de %d/%d paires dans la ignore list";
 "Doing group prioritization" = "Prioritization des groupes";
 
+"Continue" = "Continuer";
+"Continue ({})" = "Continuer ({})";
+
 "Analyzed %d/%d pictures" = "Analyzé %d/%d images";
 "Preparing for matching" = "Préparation pour la comparaison";
 "Performed %d/%d chunk matches" = "%d/%d blocs d'images comparés";

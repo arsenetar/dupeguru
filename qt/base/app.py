@@ -26,6 +26,7 @@ from qtlib.recent import Recent
 from qtlib.reg import Registration
 
 from . import platform
+from .extra_fairware_reminder import ExtraFairwareReminder
 from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
@@ -162,6 +163,10 @@ class DupeGuru(DupeGuruBase, QObject):
     
     def _set_default(self, key, value):
         self.prefs.set_value(key, value)
+    
+    def _show_extra_fairware_reminder(self):
+        dialog = ExtraFairwareReminder(self.directories_dialog, self)
+        dialog.exec_()
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)

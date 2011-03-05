@@ -150,6 +150,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _set_default(self, key_name, value):
         raise NotImplementedError()
     
+    def _show_extra_fairware_reminder(self):
+        raise NotImplementedError()
+    
     #--- Public
     def add_directory(self, d):
         try:
@@ -177,6 +180,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             filter = escape(filter, '*', '.')
         self.results.apply_filter(filter)
         self._results_changed()
+    
+    def show_extra_fairware_reminder_if_needed(self):
+        if self.results.mark_count > 100 and self.should_show_fairware_reminder:
+            self._show_extra_fairware_reminder()
     
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
@@ -216,10 +223,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
+        self.show_extra_fairware_reminder_if_needed()
         jobid = JOB_COPY if copy else JOB_MOVE
         self._start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
+        self.show_extra_fairware_reminder_if_needed()
         self._start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
     
     def export_to_xhtml(self, column_ids):

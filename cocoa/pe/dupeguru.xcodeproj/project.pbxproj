@@ -23,6 +23,8 @@
 		CE15C8C00ADEB8D40061D4A5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE1EB5FE12537F9D0034AABB /* HSFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */; };
 		CE1EB60112537FB90034AABB /* FairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1EB5FF12537FB90034AABB /* FairwareReminder.xib */; };
+		CE2A29F413213BE3005899AC /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */; };
+		CE2A29F713213BFB005899AC /* ExtraFairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2A29F513213BFB005899AC /* ExtraFairwareReminder.xib */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
@@ -115,6 +117,10 @@
 		CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSFairwareReminder.m; path = ../../cocoalib/HSFairwareReminder.m; sourceTree = SOURCE_ROOT; };
 		CE1EB5FD12537F9D0034AABB /* PyFairware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyFairware.h; path = ../../cocoalib/PyFairware.h; sourceTree = SOURCE_ROOT; };
 		CE1EB60012537FB90034AABB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../cocoalib/en.lproj/FairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CE2A29F213213BE3005899AC /* ExtraFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtraFairwareReminder.h; path = ../base/ExtraFairwareReminder.h; sourceTree = SOURCE_ROOT; };
+		CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtraFairwareReminder.m; path = ../base/ExtraFairwareReminder.m; sourceTree = SOURCE_ROOT; };
+		CE2A29F613213BFB005899AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CE2A29FF13213C31005899AC /* PyExtraFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyExtraFairwareReminder.h; path = ../base/PyExtraFairwareReminder.h; sourceTree = SOURCE_ROOT; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -184,6 +190,7 @@
 		CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
 		CECA899B09DB132E00A3D774 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DetailsPanel.m; sourceTree = "<group>"; };
+		CEE660B7132253910036DB04 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEF12A7C124DFD400087B51D /* HSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSTableView.h; path = ../../cocoalib/views/HSTableView.h; sourceTree = SOURCE_ROOT; };
 		CEF12A7D124DFD400087B51D /* HSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSTableView.m; path = ../../cocoalib/views/HSTableView.m; sourceTree = SOURCE_ROOT; };
@@ -299,6 +306,7 @@
 				CE05339912E5DA350029EF25 /* ResultWindow.xib */,
 				CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */,
 				CE0533A512E5DA4D0029EF25 /* Preferences.xib */,
+				CE2A29F513213BFB005899AC /* ExtraFairwareReminder.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -354,6 +362,7 @@
 		CE80DB810FC194BD0086DCA6 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CE2A29FF13213C31005899AC /* PyExtraFairwareReminder.h */,
 				CEF12A81124DFD620087B51D /* PyResultTable.h */,
 				CEF12A82124DFD620087B51D /* ResultTable.h */,
 				CEF12A83124DFD620087B51D /* ResultTable.m */,
@@ -372,6 +381,8 @@
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
 				CE95865C112C516400F95FD2 /* StatsLabel.h */,
 				CE95865D112C516400F95FD2 /* StatsLabel.m */,
+				CE2A29F213213BE3005899AC /* ExtraFairwareReminder.h */,
+				CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */,
 				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
 				CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */,
 				CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */,
@@ -512,6 +523,7 @@
 				CE0533A812E5DA4D0029EF25 /* Preferences.xib in Resources */,
 				CE0533AB12E5DA6A0029EF25 /* Localizable.strings in Resources */,
 				CE4527AC12E5F6E700005A15 /* core.strings in Resources */,
+				CE2A29F713213BFB005899AC /* ExtraFairwareReminder.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +567,7 @@
 				CE1EB5FE12537F9D0034AABB /* HSFairwareReminder.m in Sources */,
 				CEC9DB4C12CCAA7D003102F0 /* HSAboutBox.m in Sources */,
 				CE60180812DF3EA900236FDC /* HSRecentFiles.m in Sources */,
+				CE2A29F413213BE3005899AC /* ExtraFairwareReminder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +645,15 @@
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
+			sourceTree = SOURCE_ROOT;
+		};
+		CE2A29F513213BFB005899AC /* ExtraFairwareReminder.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE2A29F613213BFB005899AC /* en */,
+				CEE660B7132253910036DB04 /* fr */,
+			);
+			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;
 		};
 		CE4527AA12E5F6E700005A15 /* core.strings */ = {

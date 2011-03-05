@@ -11,11 +11,13 @@
 "Grouped %d/%d matches" = "Grouped %d/%d matches";
 "%d / %d (%s / %s) duplicates marked." = "%d / %d (%s / %s) duplicates marked.";
 " filter: %s" = " filter: %s";
-"Read size of %d/%d files" = "Read size of %d/%d files";
 "Read metadata of %d/%d files" = "Read metadata of %d/%d files";
 "Removing false matches" = "Removing false matches";
 "Processed %d/%d matches against the ignore list" = "Processed %d/%d matches against the ignore list";
 "Doing group prioritization" = "Doing group prioritization";
+
+"Continue" = "Continue";
+"Continue ({})" = "Continue ({})";
 
 "Analyzed %d/%d pictures" = "Analyzed %d/%d pictures";
 "Preparing for matching" = "Preparing for matching";

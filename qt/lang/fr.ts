@@ -75,6 +75,15 @@
 </message>
 
 <message>
+    <source>Continue</source>
+    <translation>Continuer</translation>
+</message>
+<message>
+    <source>Continue ({})</source>
+    <translation>Continuer ({})</translation>
+</message>
+
+<message>
     <source>Analyzed %d/%d pictures</source>
     <translation>Analyzé %d/%d images</translation>
 </message>
@@ -629,6 +638,34 @@
 </message>
 </context>
 
+<!-- ******** ExtraFairwareReminder ******** -->
+<context>
+<name>ExtraFairwareReminder</name>
+<message>
+    <source>Sorry, I must insist</source>
+    <translation>Désolé, je dois insister</translation>
+</message>
+<message>
+    <source>Contribute</source>
+    <translation>Contribuer</translation>
+</message>
+<message>
+    <source>ExtraFairwarePromptMsg</source>
+    <translation>Il semble que vous ayez trouvé beaucoup de doublons. Super! Je dois par contre insister que des contributions sont attendues lorsqu'il y'a des heures non-payées au projet.
+
+Vous pensez peut-être &quot;je n'utiliserai ce programme qu'une fois, pas besoin de contribuer&quot;. Le problème c'est que la plupart des utilisateurs de dupeGuru ne l'utilisent qu'une fois. Si tous suivent ce raisonnement, le développement de dupeGuru ne peut pas continuer. C'est à cause de cette tendance inhérente à la nature de dupeGuru que je me vois contraint d'insister ici.
+
+Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi un message à hsoft@hardcoded.net pour que je vous envoie une clé d'enregistrement.</translation>
+</message>
+<message>
+    <source>ExtraFairwareReasonMsg</source>
+    <translation>Ce rappel apparaît parce que:
+    
+1. Plus de 100 doublons sont traités
+2. Vous n'avez pas encore contribué à dupeGuru
+3. Il y a des heures non-payées au projet</translation>
+</message>
+</context>
 <!-- ******** Message ******** -->
 <context>
 <name>message</name>

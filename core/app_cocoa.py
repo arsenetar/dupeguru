@@ -64,6 +64,9 @@ class DupeGuru(app.DupeGuru):
     def _set_default(self, key_name, value):
         NSUserDefaults.standardUserDefaults().setObject_forKey_(value, key_name)
     
+    def _show_extra_fairware_reminder(self):
+        NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('ShowExtraFairwareReminder', self, None)
+    
     #--- Public
     def start_scanning(self):
         self._select_dupes([])
