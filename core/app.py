@@ -35,6 +35,11 @@ DEBUG_MODE_PREFERENCE = 'DebugMode'
 class NoScannableFileError(Exception):
     pass
 
+class DestType:
+    Direct = 0
+    Relative = 1
+    Absolute = 2
+
 class DupeGuru(RegistrableApplication, Broadcaster):
     def __init__(self, data_module, appdata):
         if self.get_default(DEBUG_MODE_PREFERENCE, False):
@@ -107,8 +112,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         # Must be called by subclasses when they detect that an async job is completed.
         if jobid == JOB_SCAN:
             self._results_changed()
-        elif jobid in (JOB_LOAD, JOB_MOVE, JOB_DELETE):
+        elif jobid in {JOB_LOAD, JOB_MOVE, JOB_DELETE}:
             self._results_changed()
+        
+        if jobid in {JOB_COPY, JOB_MOVE, JOB_DELETE}:
             self.notify('problems_changed')
     
     @staticmethod
@@ -194,17 +201,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         """
             copy: True = Copy False = Move
             destination: string.
-            dest_type: 0 = right in destination.
-                       1 = relative re-creation.
-                       2 = absolute re-creation.
+            dest_type: DestType constants
         """
         source_path = dupe.path
         location_path = first(p for p in self.directories if dupe.path in p)
         dest_path = Path(destination)
-        if dest_type == 2:
-            dest_path = dest_path + source_path[1:-1] #Remove drive letter and filename
-        elif dest_type == 1:
-            dest_path = dest_path + source_path[location_path:-1]
+        if dest_type in {DestType.Relative, DestType.Absolute}:
+            # no filename, no windows drive letter
+            source_base = source_path.remove_drive_letter()[:-1]
+            if dest_type == DestType.Relative:
+                source_base = source_base[location_path:]
+            dest_path = dest_path + source_base
         if not io.exists(dest_path):
             io.makedirs(dest_path)
         # Raises an EnvironmentError if there's a problem
