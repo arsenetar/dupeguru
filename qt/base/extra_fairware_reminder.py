@@ -33,7 +33,8 @@ class ExtraFairwareReminder(QDialog):
     
     def _setupUi(self):
         self.setWindowTitle(tr("Sorry, I must insist"))
-        self.resize(380, 350)
+        dlg_height = 410 if sys.platform == 'linux2' else 330
+        self.resize(380, dlg_height)
         self.verticalLayout = QVBoxLayout(self)
         self.descLabel = QLabel(self)        
         self.descLabel.setText(trmsg("ExtraFairwarePromptMsg"))
