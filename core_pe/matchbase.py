@@ -140,7 +140,7 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
             for result in ready:
                 matches += result.get()
                 async_results.remove(result)
-            comparison_count += 1
+                comparison_count += 1
         progress_msg = tr("Performed %d/%d chunk matches") % (comparison_count, len(comparisons_to_do))
         j.set_progress(comparison_count, progress_msg)
     
