@@ -43,8 +43,8 @@ OS X prerequisites
 - XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
 - Sparkle (http://sparkle.andymatuschak.org/)
 - PyObjC 2.3 (http://pyobjc.sourceforge.net/)
-- pluginbuilder 1.0.0 (http://bitbucket.org/hsoft/pluginbuilder)
-- appscript 0.22.0 for ME and PE (http://appscript.sourceforge.net/)
+- pluginbuilder 1.0.1 (http://bitbucket.org/hsoft/pluginbuilder)
+- appscript 1.0.0 for ME and PE (http://appscript.sourceforge.net/)
 
 Windows prerequisites
 ---------------------

@@ -1,3 +1,13 @@
+=== 2.1.0 (2011-03-07)
+
+* Improved scanning speed, especially for big scans with a lot of CPU cores.
+* Improved iPhoto integration. [Mac OS X]
+* Fixed crash after removing marked dupes. (#140)
+* Fixed crash on error handling. [Windows] (#144)
+* Fixed crash on copy/move. [Windows] (#148)
+* Fixed crash when launching dupeGuru from a very long folder name. [Mac OS X] (#119)
+* Tweaked Fairware reminders.
+
 === 2.0.0 (2011-01-29)
 
 * Re-designed the UI. (#129)
