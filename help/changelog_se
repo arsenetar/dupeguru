@@ -5,6 +5,7 @@
 * Fixed crash on copy/move. [Windows] (#148)
 * Fixed crash when launching dupeGuru from a very long folder name. [Mac OS X] (#119)
 * Fixed a refresh bug in directory panel. (#153)
+* Improved reliability of the "Send to Trash" operation. [Linux]
 * Tweaked Fairware reminders.
 
 === 3.0.1 (2011-01-27)
