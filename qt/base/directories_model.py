@@ -8,8 +8,8 @@
 
 import urllib.parse
 
-from PyQt4.QtCore import pyqtSignal, Qt, QRect, QEvent, QPoint, QUrl
-from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QMouseEvent, QApplication, QBrush, QStyle,
+from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl
+from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
 from hscommon.trans import tr
@@ -47,11 +47,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
         editor.setCurrentIndex(value);
-        press = QMouseEvent(QEvent.MouseButtonPress, QPoint(0, 0), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
-        release = QMouseEvent(QEvent.MouseButtonRelease, QPoint(0, 0), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
-        QApplication.sendEvent(editor, press)
-        QApplication.sendEvent(editor, release)
-        # editor.showPopup() # this causes a weird glitch. the ugly workaround is above.
+        editor.showPopup()
     
     def setModelData(self, editor, model, index):
         value = editor.currentIndex()
