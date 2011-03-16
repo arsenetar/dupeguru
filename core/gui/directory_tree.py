@@ -16,12 +16,12 @@ STATE_ORDER = [STATE_NORMAL, STATE_REFERENCE, STATE_EXCLUDED]
 
 # Lazily loads children
 class DirectoryNode(Node):
-    def __init__(self, app, path, name):
+    def __init__(self, tree, path, name):
         Node.__init__(self, name)
-        self._app = app
+        self._tree = tree
         self._directory_path = path
         self._loaded = False
-        self._state = STATE_ORDER.index(self._app.directories.get_state(path))
+        self._state = STATE_ORDER.index(self._tree.app.directories.get_state(path))
     
     def __len__(self):
         if not self._loaded:
@@ -30,9 +30,9 @@ class DirectoryNode(Node):
     
     def _load(self):
         self.clear()
-        subpaths = self._app.directories.get_subfolders(self._directory_path)
+        subpaths = self._tree.app.directories.get_subfolders(self._directory_path)
         for path in subpaths:
-            self.append(DirectoryNode(self._app, path, path[-1]))
+            self.append(DirectoryNode(self._tree, path, path[-1]))
         self._loaded = True
     
     # The state propery is an index to the combobox
@@ -46,7 +46,9 @@ class DirectoryNode(Node):
             return
         self._state = value
         state = STATE_ORDER[value]
-        self._app.directories.set_state(self._directory_path, state)
+        self._tree.app.directories.set_state(self._directory_path, state)
+        self._tree._refresh()
+        self._tree.view.refresh()
     
 
 class DirectoryTree(GUIObject, Tree):
@@ -62,7 +64,7 @@ class DirectoryTree(GUIObject, Tree):
     def _refresh(self):
         self.clear()
         for path in self.app.directories:
-            self.append(DirectoryNode(self.app, path, str(path)))
+            self.append(DirectoryNode(self, path, str(path)))
     
     def add_directory(self, path):
         self.app.add_directory(path)

@@ -462,3 +462,31 @@ class TestCaseDupeGuru_renameSelected:
         assert 'foo bar 2' in names
         eq_(g.dupes[0].name, 'foo bar 2')
     
+
+class TestAppWithDirectoriesInTree:
+    def pytest_funcarg__do_setup(self, request):
+        tmpdir = request.getfuncargvalue('tmpdir')
+        p = Path(str(tmpdir))
+        io.mkdir(p + 'sub1')
+        io.mkdir(p + 'sub2')
+        io.mkdir(p + 'sub3')
+        self.app = DupeGuru()
+        self.dtree_gui = CallLogger()
+        self.dtree = DirectoryTree(self.dtree_gui, self.app)
+        self.dtree.connect()
+        self.dtree.add_directory(p)
+        self.dtree_gui.clear_calls()
+    
+    def test_set_root_as_ref_makes_subfolders_ref_as_well(self, do_setup):
+        # Setting a node state to something also affect subnodes. These subnodes must be correctly
+        # refreshed.
+        node = self.dtree[0]
+        eq_(len(node), 3) # a len() call is required for subnodes to be loaded
+        subnode = node[0]
+        node.state = 1 # the state property is a state index
+        node = self.dtree[0]
+        eq_(len(node), 3)
+        subnode = node[0]
+        eq_(subnode.state, 1)
+        self.dtree_gui.check_gui_calls(['refresh'])
+    
