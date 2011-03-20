@@ -36,7 +36,8 @@ def package_windows(edition, dev):
     if op.exists(distdir):
         shutil.rmtree(distdir)
     
-    cmd = 'cxfreeze --base-name Win32GUI --target-dir "{0}" --target-name "{1}.exe" --icon {2} run.py'
+    # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it explicitly because of that.
+    cmd = 'cxfreeze --base-name Win32GUI --target-dir "{0}" --target-name "{1}.exe" --icon {2} --exclude-modules tkinter run.py'
     target_name = {'se': 'dupeGuru', 'me': 'dupeGuru ME', 'pe': 'dupeGuru PE'}[edition]
     icon_path = 'images\\dg{0}_logo.ico'.format(edition)
     print_and_do(cmd.format(distdir, target_name, icon_path))
