@@ -63,6 +63,9 @@ class File:
         self._md5partial_offset = 0x4000 #16Kb
         self._md5partial_size   = 0x4000 #16Kb
     
+    def __repr__(self):
+        return "<{} {}>".format(self.__class__.__name__, str(self.path))
+    
     def __getattr__(self, attrname):
         # Only called when attr is not there
         if attrname in self.INITIAL_INFO:
@@ -147,6 +150,49 @@ class File:
         return self.path[-1]
     
 
+class Folder(File):
+    """A wrapper around a folder path.
+    
+    It has the size/md5 info of a File, but it's value are the sum of its subitems.
+    """
+    def __init__(self, path):
+        File.__init__(self, path)
+        self._subfolders = None
+    
+    def _all_items(self):
+        folders = self.subfolders
+        files = get_files(self.path)
+        return folders + files
+    
+    def _read_info(self, field):
+        if field in {'size', 'mtime'}:
+            size = sum((f.size for f in self._all_items()), 0)
+            self.size = size
+            stats = io.stat(self.path)
+            self.mtime = nonone(stats.st_mtime, 0)
+        elif field in {'md5', 'md5partial'}:
+            # What's sensitive here is that we must make sure that subfiles'
+            # md5 are always added up in the same order, but we also want a
+            # different md5 if a file gets moved in a different subdirectory.
+            def get_dir_md5_concat():
+                items = self._all_items()
+                items.sort(key=lambda f:f.path)
+                md5s = [getattr(f, field) for f in items]
+                return b''.join(md5s)
+            
+            md5 = hashlib.md5(get_dir_md5_concat())
+            digest = md5.digest()
+            setattr(self, field, digest)
+    
+    @property
+    def subfolders(self):
+        if self._subfolders is None:
+            subpaths = [self.path + name for name in io.listdir(self.path)]
+            subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p)]
+            self._subfolders = [Folder(p) for p in subfolders]
+        return self._subfolders
+    
+
 def get_file(path, fileclasses=[File]):
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
@@ -172,12 +218,3 @@ def get_files(path, fileclasses=[File]):
         return result
     except EnvironmentError:
         raise InvalidPath(path)
-
-def get_all_files(path, fileclasses=[File]):
-    files = get_files(path, fileclasses=fileclasses)
-    filepaths = set(f.path for f in files)
-    subpaths = [path + name for name in io.listdir(path)]
-    # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
-    subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p) and p not in filepaths]
-    subfiles = flatten(get_all_files(subpath, fileclasses=fileclasses) for subpath in subfolders)
-    return subfiles + files

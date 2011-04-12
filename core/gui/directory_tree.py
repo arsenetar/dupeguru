@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-06
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -9,10 +8,10 @@
 
 from hscommon.gui.tree import Tree, Node
 
-from ..directories import STATE_NORMAL, STATE_REFERENCE, STATE_EXCLUDED
+from ..directories import DirectoryState
 from .base import GUIObject
 
-STATE_ORDER = [STATE_NORMAL, STATE_REFERENCE, STATE_EXCLUDED]
+STATE_ORDER = [DirectoryState.Normal, DirectoryState.Reference, DirectoryState.Excluded]
 
 # Lazily loads children
 class DirectoryNode(Node):

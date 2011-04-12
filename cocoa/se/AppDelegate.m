@@ -42,7 +42,10 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)init
 {
     self = [super init];
-    VTIsIntIn *vt = [[[VTIsIntIn alloc] initWithValues:[NSIndexSet indexSetWithIndex:1] reverse:YES] autorelease];
+    NSMutableIndexSet *contentsIndexes = [NSMutableIndexSet indexSet];
+    [contentsIndexes addIndex:1];
+    [contentsIndexes addIndex:2];
+    VTIsIntIn *vt = [[[VTIsIntIn alloc] initWithValues:contentsIndexes reverse:YES] autorelease];
     [NSValueTransformer setValueTransformer:vt forName:@"vtScanTypeIsNotContent"];
     _directoryPanel = nil;
     return self;

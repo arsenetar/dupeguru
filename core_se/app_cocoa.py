@@ -14,9 +14,8 @@ from hscommon.cocoa.objcmin import NSWorkspace
 
 from core import fs
 from core.app_cocoa import DupeGuru as DupeGuruBase
-from core.directories import Directories as DirectoriesBase, STATE_EXCLUDED
+from core.directories import Directories as DirectoriesBase, DirectoryState
 from . import data
-from .fs import Bundle as BundleBase
 
 def is_bundle(str_path):
     sw = NSWorkspace.sharedWorkspace()
@@ -25,7 +24,7 @@ def is_bundle(str_path):
         logging.warning('There was an error trying to detect the UTI of %s', str_path)
     return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
 
-class Bundle(BundleBase):
+class Bundle(fs.Folder):
     @classmethod
     def can_handle(cls, path):
         return not io.islink(path) and io.isdir(path) and is_bundle(str(path))
@@ -42,9 +41,22 @@ class Directories(DirectoriesBase):
         if result is not None:
             return result
         if path in self.ROOT_PATH_TO_EXCLUDE:
-            return STATE_EXCLUDED
+            return DirectoryState.Excluded
         if path[:2] == Path('/Users') and path[3:] in self.HOME_PATH_TO_EXCLUDE:
-            return STATE_EXCLUDED
+            return DirectoryState.Excluded
+    
+    def _get_folders(self, from_folder):
+        # We don't want to scan bundle's subfolder even in Folders mode. Bundle's integrity has to
+        # stay intact.
+        if is_bundle(str(from_folder.path)):
+            # just yield the current folder and bail
+            state = self.get_state(from_folder.path)
+            from_folder.is_ref = state == DirectoryState.Reference
+            yield from_folder
+            return
+        else:
+            for folder in DirectoriesBase._get_folders(self, from_folder):
+                yield folder
     
     @staticmethod
     def get_subfolders(path):

@@ -15,9 +15,10 @@ from hscommon.util import FileOrPath
 
 from . import fs
 
-(STATE_NORMAL,
-STATE_REFERENCE,
-STATE_EXCLUDED) = range(3)
+class DirectoryState:
+    Normal = 0
+    Reference = 1
+    Excluded = 2
 
 class AlreadyThereError(Exception):
     """The path being added is already in the directory list"""
@@ -51,11 +52,11 @@ class Directories:
     def _default_state_for_path(self, path):
         # Override this in subclasses to specify the state of some special folders.
         if path[-1].startswith('.'): # hidden
-            return STATE_EXCLUDED
+            return DirectoryState.Excluded
     
     def _get_files(self, from_path):
         state = self.get_state(from_path)
-        if state == STATE_EXCLUDED:
+        if state == DirectoryState.Excluded:
             # Recursively get files from folders with lots of subfolder is expensive. However, there
             # might be a subfolder in this path that is not excluded. What we want to do is to skim
             # through self.states and see if we must continue, or we can stop right here to save time
@@ -63,11 +64,11 @@ class Directories:
                 return
         try:
             filepaths = set()
-            if state != STATE_EXCLUDED:
+            if state != DirectoryState.Excluded:
                 found_files = fs.get_files(from_path, fileclasses=self.fileclasses)
-                logging.debug("Collected {} files in folder {}".format(len(found_files), str(from_path)))
+                logging.debug("Collected %d files in folder %s", len(found_files), str(from_path))
                 for file in found_files:
-                    file.is_ref = state == STATE_REFERENCE
+                    file.is_ref = state == DirectoryState.Reference
                     filepaths.add(file.path)
                     yield file
             subpaths = [from_path + name for name in io.listdir(from_path)]
@@ -76,6 +77,18 @@ class Directories:
             for subfolder in subfolders:
                 for file in self._get_files(subfolder):
                     yield file
+        except (EnvironmentError, fs.InvalidPath):
+            pass
+    
+    def _get_folders(self, from_folder):
+        state = self.get_state(from_folder.path)
+        try:
+            for subfolder in from_folder.subfolders:
+                for folder in self._get_folders(subfolder):
+                    yield folder
+            if state != DirectoryState.Excluded:
+                from_folder.is_ref = state == DirectoryState.Reference
+                yield from_folder
         except (EnvironmentError, fs.InvalidPath):
             pass
     
@@ -113,6 +126,16 @@ class Directories:
             for file in self._get_files(path):
                 yield file
     
+    def get_folders(self):
+        """Returns a list of all folders that are not excluded.
+        
+        Returned folders also have their 'is_ref' attr set.
+        """
+        for path in self._dirs:
+            from_folder = fs.Folder(path)
+            for folder in self._get_folders(from_folder):
+                yield folder
+    
     def get_state(self, path):
         """Returns the state of 'path' (One of the STATE_* const.)
         """
@@ -125,7 +148,7 @@ class Directories:
         if parent in self:
             return self.get_state(parent)
         else:
-            return STATE_NORMAL
+            return DirectoryState.Normal
     
     def has_any_file(self):
         try:

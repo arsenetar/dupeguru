@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-from PyQt4.QtCore import SIGNAL, QSize
+from PyQt4.QtCore import QSize
 from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QSizePolicy, QSpacerItem,
     QWidget, QLineEdit, QApplication)
 
@@ -22,13 +22,14 @@ from . import preferences
 SCAN_TYPE_ORDER = [
     ScanType.Filename,
     ScanType.Contents,
+    ScanType.Folders,
 ]
 
 class PreferencesDialog(PreferencesDialogBase):
     def __init__(self, parent, app):
         PreferencesDialogBase.__init__(self, parent, app)
         
-        self.connect(self.scanTypeComboBox, SIGNAL('currentIndexChanged(int)'), self.scanTypeChanged)
+        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     
     def _setupPreferenceWidgets(self):
         self.horizontalLayout = QHBoxLayout()
@@ -38,8 +39,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.label_2.setMaximumSize(QSize(100, 16777215))
         self.horizontalLayout.addWidget(self.label_2)
         self.scanTypeComboBox = QComboBox(self)
-        self.scanTypeComboBox.addItem(tr("Filename"))
-        self.scanTypeComboBox.addItem(tr("Contents"))
+        for label in [tr("Filename"), tr("Contents"), tr("Folders")]:
+            self.scanTypeComboBox.addItem(label)
         self.horizontalLayout.addWidget(self.scanTypeComboBox)
         self.widgetsVLayout.addLayout(self.horizontalLayout)
         self._setupFilterHardnessBox()

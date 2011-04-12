@@ -5,6 +5,8 @@ Préférences
 
     **Type de scan:** Cette option détermine quels aspects du fichier doit être comparé. Un scan par **Nom de fichier** compare les noms de fichiers mot-à-mot et, dépendant des autres préférences ci-dessous, déterminera si les noms se ressemblent assez pour être considérés comme doublons. Un scan par **Contenu** trouvera les doublons qui ont exactement le même contenu.
     
+    Le scan **Dossiers** est spécial. Si vous le sélectionnez, dupeGuru cherchera des doublons de *dossiers* plutôt que des doublons de fichiers. Pour déterminer si deux dossiers sont des doublons, dupeGuru regarde le contenu de tous les fichiers dans les dossiers, et si **tous** sont les mêmes, les dossiers sont considérés comme des doublons.
+    
     **Seuil du filtre:** Pour les scan de type **Nom de fichier**, cette option détermine le degré de similtude nécessaire afin de considérer deux noms comme doublons. Avec un seuil de 80, 80% des mots doivent être égaux. Pour déterminer ce pourcentage, dupeGuru compte le nombre de mots total des deux noms, puis compte le nombre de mots égaux, puis fait la division des deux. Un résultat égalisant ou dépassant le seuil sera considéré comme un doublon. Exemple: "a b c d" et "c d e" ont un pourcentage de 57 (4 mots égaux, 7 au total).
 
 .. only:: edition_me

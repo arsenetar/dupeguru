@@ -94,7 +94,7 @@ class Directories(directories.Directories):
         directories.Directories.__init__(self, fileclasses=[Photo])
         try:
             self.iphoto_libpath = get_iphoto_database_path()
-            self.set_state(self.iphoto_libpath[:-1], directories.STATE_EXCLUDED)
+            self.set_state(self.iphoto_libpath[:-1], directories.DirectoryState.Excluded)
         except directories.InvalidPathError:
             self.iphoto_libpath = None
     
@@ -102,7 +102,7 @@ class Directories(directories.Directories):
         if from_path == IPHOTO_PATH:
             if self.iphoto_libpath is None:
                 return []
-            is_ref = self.get_state(from_path) == directories.STATE_REFERENCE
+            is_ref = self.get_state(from_path) == directories.DirectoryState.Reference
             photos = get_iphoto_pictures(self.iphoto_libpath)
             for photo in photos:
                 photo.is_ref = is_ref

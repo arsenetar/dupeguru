@@ -122,52 +122,52 @@ def test_states():
     d = Directories()
     p = testpath + 'onefile'
     d.add_path(p)
-    eq_(STATE_NORMAL,d.get_state(p))
-    d.set_state(p,STATE_REFERENCE)
-    eq_(STATE_REFERENCE,d.get_state(p))
-    eq_(STATE_REFERENCE,d.get_state(p + 'dir1'))
+    eq_(DirectoryState.Normal ,d.get_state(p))
+    d.set_state(p, DirectoryState.Reference)
+    eq_(DirectoryState.Reference ,d.get_state(p))
+    eq_(DirectoryState.Reference ,d.get_state(p + 'dir1'))
     eq_(1,len(d.states))
     eq_(p,list(d.states.keys())[0])
-    eq_(STATE_REFERENCE,d.states[p])
+    eq_(DirectoryState.Reference ,d.states[p])
 
 def test_get_state_with_path_not_there():
-    # When the path's not there, just return STATE_NORMAL
+    # When the path's not there, just return DirectoryState.Normal
     d = Directories()
     d.add_path(testpath + 'onefile')
-    eq_(d.get_state(testpath), STATE_NORMAL)
+    eq_(d.get_state(testpath), DirectoryState.Normal)
 
 def test_states_remain_when_larger_directory_eat_smaller_ones():
     d = Directories()
     p = testpath + 'onefile'
     d.add_path(p)
-    d.set_state(p,STATE_EXCLUDED)
+    d.set_state(p, DirectoryState.Excluded)
     d.add_path(testpath)
-    d.set_state(testpath,STATE_REFERENCE)
-    eq_(STATE_EXCLUDED,d.get_state(p))
-    eq_(STATE_EXCLUDED,d.get_state(p + 'dir1'))
-    eq_(STATE_REFERENCE,d.get_state(testpath))
+    d.set_state(testpath, DirectoryState.Reference)
+    eq_(DirectoryState.Excluded ,d.get_state(p))
+    eq_(DirectoryState.Excluded ,d.get_state(p + 'dir1'))
+    eq_(DirectoryState.Reference ,d.get_state(testpath))
 
 def test_set_state_keep_state_dict_size_to_minimum():
     d = Directories()
     p = testpath + 'fs'
     d.add_path(p)
-    d.set_state(p,STATE_REFERENCE)
-    d.set_state(p + 'dir1',STATE_REFERENCE)
+    d.set_state(p, DirectoryState.Reference)
+    d.set_state(p + 'dir1', DirectoryState.Reference)
     eq_(1,len(d.states))
-    eq_(STATE_REFERENCE,d.get_state(p + 'dir1'))
-    d.set_state(p + 'dir1',STATE_NORMAL)
+    eq_(DirectoryState.Reference ,d.get_state(p + 'dir1'))
+    d.set_state(p + 'dir1', DirectoryState.Normal)
     eq_(2,len(d.states))
-    eq_(STATE_NORMAL,d.get_state(p + 'dir1'))
-    d.set_state(p + 'dir1',STATE_REFERENCE)
+    eq_(DirectoryState.Normal ,d.get_state(p + 'dir1'))
+    d.set_state(p + 'dir1', DirectoryState.Reference)
     eq_(1,len(d.states))
-    eq_(STATE_REFERENCE,d.get_state(p + 'dir1'))
+    eq_(DirectoryState.Reference ,d.get_state(p + 'dir1'))
 
 def test_get_files():
     d = Directories()
     p = testpath + 'fs'
     d.add_path(p)
-    d.set_state(p + 'dir1',STATE_REFERENCE)
-    d.set_state(p + 'dir2',STATE_EXCLUDED)
+    d.set_state(p + 'dir1', DirectoryState.Reference)
+    d.set_state(p + 'dir2', DirectoryState.Excluded)
     files = list(d.get_files())
     eq_(5, len(files))
     for f in files:
@@ -176,11 +176,26 @@ def test_get_files():
         else:
             assert not f.is_ref
 
+def test_get_folders():
+    d = Directories()
+    p = testpath + 'fs'
+    d.add_path(p)
+    d.set_state(p + 'dir1', DirectoryState.Reference)
+    d.set_state(p + 'dir2', DirectoryState.Excluded)
+    folders = list(d.get_folders())
+    eq_(len(folders), 3)
+    ref = [f for f in folders if f.is_ref]
+    not_ref = [f for f in folders if not f.is_ref]
+    eq_(len(ref), 1)
+    eq_(ref[0].path, p + 'dir1')
+    eq_(len(not_ref), 2)
+    eq_(ref[0].size, 1)
+
 def test_get_files_with_inherited_exclusion():
     d = Directories()
     p = testpath + 'onefile'
     d.add_path(p)
-    d.set_state(p,STATE_EXCLUDED)
+    d.set_state(p, DirectoryState.Excluded)
     eq_([], list(d.get_files()))
 
 def test_save_and_load(tmpdir):
@@ -192,14 +207,14 @@ def test_save_and_load(tmpdir):
     io.mkdir(p2)
     d1.add_path(p1)
     d1.add_path(p2)
-    d1.set_state(p1, STATE_REFERENCE)
-    d1.set_state(p1 + 'dir1',STATE_EXCLUDED)
+    d1.set_state(p1, DirectoryState.Reference)
+    d1.set_state(p1 + 'dir1', DirectoryState.Excluded)
     tmpxml = str(tmpdir.join('directories_testunit.xml'))
     d1.save_to_file(tmpxml)
     d2.load_from_file(tmpxml)
     eq_(2, len(d2))
-    eq_(STATE_REFERENCE,d2.get_state(p1))
-    eq_(STATE_EXCLUDED,d2.get_state(p1 + 'dir1'))
+    eq_(DirectoryState.Reference ,d2.get_state(p1))
+    eq_(DirectoryState.Excluded ,d2.get_state(p1 + 'dir1'))
 
 def test_invalid_path():
     d = Directories()
@@ -211,7 +226,7 @@ def test_invalid_path():
 def test_set_state_on_invalid_path():
     d = Directories()
     try:
-        d.set_state(Path('foobar',),STATE_NORMAL)
+        d.set_state(Path('foobar',), DirectoryState.Normal)
     except LookupError:
         assert False
 
@@ -237,7 +252,7 @@ def test_unicode_save(tmpdir):
     io.mkdir(p1)
     io.mkdir(p1 + 'foo\xe9')
     d.add_path(p1)
-    d.set_state(p1 + 'foo\xe9', STATE_EXCLUDED)
+    d.set_state(p1 + 'foo\xe9', DirectoryState.Excluded)
     tmpxml = str(tmpdir.join('directories_testunit.xml'))
     try:
         d.save_to_file(tmpxml)
@@ -268,17 +283,17 @@ def test_get_state_returns_excluded_by_default_for_hidden_directories(tmpdir):
     hidden_dir_path = p + '.foo'
     io.mkdir(p + '.foo')
     d.add_path(p)
-    eq_(d.get_state(hidden_dir_path), STATE_EXCLUDED)
+    eq_(d.get_state(hidden_dir_path), DirectoryState.Excluded)
     # But it can be overriden
-    d.set_state(hidden_dir_path, STATE_NORMAL)
-    eq_(d.get_state(hidden_dir_path), STATE_NORMAL)
+    d.set_state(hidden_dir_path, DirectoryState.Normal)
+    eq_(d.get_state(hidden_dir_path), DirectoryState.Normal)
 
 def test_default_path_state_override(tmpdir):
     # It's possible for a subclass to override the default state of a path
     class MyDirectories(Directories):
         def _default_state_for_path(self, path):
             if 'foobar' in path:
-                return STATE_EXCLUDED
+                return DirectoryState.Excluded
     
     d = MyDirectories()
     p1 = Path(str(tmpdir))
@@ -287,11 +302,11 @@ def test_default_path_state_override(tmpdir):
     io.mkdir(p1 + 'foobaz')
     io.open(p1 + 'foobaz/somefile', 'w').close()
     d.add_path(p1)
-    eq_(d.get_state(p1 + 'foobaz'), STATE_NORMAL)
-    eq_(d.get_state(p1 + 'foobar'), STATE_EXCLUDED)
+    eq_(d.get_state(p1 + 'foobaz'), DirectoryState.Normal)
+    eq_(d.get_state(p1 + 'foobar'), DirectoryState.Excluded)
     eq_(len(list(d.get_files())), 1) # only the 'foobaz' file is there
     # However, the default state can be changed
-    d.set_state(p1 + 'foobar', STATE_NORMAL)
-    eq_(d.get_state(p1 + 'foobar'), STATE_NORMAL)
+    d.set_state(p1 + 'foobar', DirectoryState.Normal)
+    eq_(d.get_state(p1 + 'foobar'), DirectoryState.Normal)
     eq_(len(list(d.get_files())), 2)
 

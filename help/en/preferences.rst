@@ -5,6 +5,8 @@ Preferences
 
     **Scan Type:** This option determines what aspect of the files will be compared in the duplicate scan. If you select **Filename**, dupeGuru will compare every filenames word-by-word and, depending on the other settings below, it will determine if enough words are matching to consider 2 files duplicates. If you select **Content**, only files with the exact same content will match.
     
+    The **Folders** scan type is a bit special. When you choose it, dupeGuru will scan for duplicate *folders* instead of duplicate files. To determine whether two folders are duplicates, all files contained in the folders will be scanned, and if the contents of **all** files in the folders match, the folders will be considered duplicates.
+    
     **Filter Hardness:** If you chose the **Filename** scan type, this option determines how similar two filenames must be for dupeGuru to consider them duplicates. If the filter hardness is, for example 80, it means that 80% of the words of two filenames must match. To determine the matching percentage, dupeGuru first counts the total number of words in **both** filenames, then count the number of words matching (every word matching count as 2), and then divide the number of words matching by the total number of words. If the result is higher or equal to the filter hardness, we have a duplicate match. For example, "a b c d" and "c d e" have a matching percentage of 57 (4 words matching, 7 total words).
 
 .. only:: edition_me

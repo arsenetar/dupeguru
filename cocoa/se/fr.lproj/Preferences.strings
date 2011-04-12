@@ -73,3 +73,6 @@
 
 /* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "146"; */
 "146.title" = "Mode de déboguage (redémarrage requis)";
+
+/* Class = "NSMenuItem"; title = "Folders"; ObjectID = "149"; */
+"149.title" = "Dossiers";

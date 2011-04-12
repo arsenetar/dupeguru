@@ -471,3 +471,27 @@ def test_dont_group_files_that_dont_exist(tmpdir):
     s._getmatches = getmatches
     
     assert not s.GetDupeGroups([file1, file2])
+
+def test_folder_scan_exclude_subfolder_matches(fake_fileexists):
+    # when doing a Folders scan type, don't include matches for folders whose parent folder already
+    # match.
+    s = Scanner()
+    s.scan_type = ScanType.Folders
+    topf1 = no("top folder 1", size=42)
+    topf1.md5 = topf1.md5partial = b"some_md5_1"
+    topf1.path = Path('/topf1')
+    topf2 = no("top folder 2", size=42)
+    topf2.md5 = topf2.md5partial = b"some_md5_1"
+    topf2.path = Path('/topf2')
+    subf1 = no("sub folder 1", size=41)
+    subf1.md5 = subf1.md5partial = b"some_md5_2"
+    subf1.path = Path('/topf1/sub')
+    subf2 = no("sub folder 2", size=41)
+    subf2.md5 = subf2.md5partial = b"some_md5_2"
+    subf2.path = Path('/topf2/sub')
+    eq_(len(s.GetDupeGroups([topf1, topf2, subf1, subf2])), 1) # only top folders
+    # however, if another folder matches a subfolder, keep in in the matches
+    otherf = no("other folder", size=41)
+    otherf.md5 = otherf.md5partial = b"some_md5_2"
+    otherf.path = Path('/otherfolder')
+    eq_(len(s.GetDupeGroups([topf1, topf2, subf1, subf2, otherf])), 2)

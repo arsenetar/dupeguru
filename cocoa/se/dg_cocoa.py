@@ -29,6 +29,7 @@ class PyDupeGuru(PyDupeGuruBase):
             self.py.scanner.scan_type = [
                 ScanType.Filename,
                 ScanType.Contents,
+                ScanType.Folders,
             ][scan_type]
         except IndexError:
             pass

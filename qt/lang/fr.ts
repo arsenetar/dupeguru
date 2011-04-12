@@ -414,6 +414,10 @@
     <translation>Contenu</translation>
 </message>
 <message>
+    <source>Folders</source>
+    <translation>Dossiers</translation>
+</message>
+<message>
     <source>Filter Hardness:</source>
     <translation>Seuil du filtre:</translation>
 </message>

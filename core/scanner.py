@@ -22,7 +22,7 @@ class ScanType:
     Fields = 1
     FieldsNoOrder = 2
     Tag = 3
-    # number 4 is obsolete
+    Folders = 4
     Contents = 5
     ContentsAudio = 6
 
@@ -48,8 +48,8 @@ class Scanner:
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
             files = [f for f in files if f.size >= self.size_threshold]
-        if self.scan_type in (ScanType.Contents, ScanType.ContentsAudio):
-            sizeattr = 'size' if self.scan_type == ScanType.Contents else 'audiosize'
+        if self.scan_type in {ScanType.Contents, ScanType.ContentsAudio, ScanType.Folders}:
+            sizeattr = 'audiosize' if self.scan_type == ScanType.ContentsAudio else 'size'
             return engine.getmatches_by_contents(files, sizeattr, partial=self.scan_type==ScanType.ContentsAudio, j=j)
         else:
             j = j.start_subjob([2, 8])
@@ -92,10 +92,22 @@ class Scanner:
         j = j.start_subjob([8, 2])
         for f in [f for f in files if not hasattr(f, 'is_ref')]:
             f.is_ref = False
-        logging.info('Getting matches')
+        logging.info("Getting matches. Scan type: %d", self.scan_type)
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
         j.set_progress(100, tr("Removing false matches"))
+        if self.scan_type == ScanType.Folders and matches:
+            allpath = {m.first.path for m in matches}
+            allpath |= {m.second.path for m in matches}
+            sortedpaths = sorted(allpath)
+            toremove = set()
+            last_parent_path = sortedpaths[0]
+            for p in sortedpaths[1:]:
+                if p in last_parent_path:
+                    toremove.add(p)
+                else:
+                    last_parent_path = p
+            matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
         if not self.mix_file_kind:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
         matches = [m for m in matches if io.exists(m.first.path) and io.exists(m.second.path)]

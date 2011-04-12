@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from core_se import data, __appname__
-from core.directories import Directories as DirectoriesBase, STATE_EXCLUDED
+from core.directories import Directories as DirectoriesBase, DirectoryState
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog
@@ -21,7 +21,7 @@ class Directories(DirectoriesBase):
         if result is not None:
             return result
         if len(path) == 2 and path[1].lower() in self.ROOT_PATH_TO_EXCLUDE:
-            return STATE_EXCLUDED
+            return DirectoryState.Excluded
 
 class DupeGuru(DupeGuruBase):
     EDITION = 'se'
