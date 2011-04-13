@@ -102,6 +102,10 @@ class ResultTable(GUIObject, GUITable):
     
     def rename_selected(self, newname):
         row = self.selected_row
+        if row is None:
+            # There's all kinds of way the current row can be swept off during rename. When it
+            # happens, selected_row will be None.
+            return False
         row._data = None
         row._data_delta = None
         return self.app.rename_selected(newname)

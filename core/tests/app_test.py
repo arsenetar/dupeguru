@@ -136,6 +136,13 @@ class TestCaseDupeGuru:
         app.start_scanning()
         eq_(len(app.results.groups), 0)
     
+    def test_rename_when_nothing_is_selected(self):
+        # It's possible that rename operation has its selected row swept off from under it, thus
+        # making the selected row None. Don't crash when it happens.
+        dgapp = DupeGuru()
+        rtable = ResultTable(CallLogger(), dgapp)
+        # selected_row is None because there's no result.
+        assert not rtable.rename_selected('foo') # no crash
 
 class TestCaseDupeGuru_clean_empty_dirs:
     def pytest_funcarg__do_setup(self, request):
