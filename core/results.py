@@ -8,10 +8,13 @@
 
 import logging
 import re
+import os
+import os.path as op
 from xml.etree import ElementTree as ET
 
 from . import engine
 from jobprogress.job import nulljob
+from hscommon.conflict import get_conflicted_name
 from hscommon.markable import Markable
 from hscommon.util import flatten, nonone, FileOrPath, format_size
 from hscommon.trans import tr
@@ -304,8 +307,22 @@ class Results(Markable):
                 match_elem.set('second', str(dupe2index[match.second]))
                 match_elem.set('percentage', str(int(match.percentage)))
         tree = ET.ElementTree(root)
-        with FileOrPath(outfile, 'wb') as fp:
-            tree.write(fp, encoding='utf-8')
+        
+        def do_write(outfile):
+            with FileOrPath(outfile, 'wb') as fp:
+                tree.write(fp, encoding='utf-8')
+        
+        try:
+            do_write(outfile)
+        except IOError as e:
+            if e.errno == 21: # outfile is a directory
+                p = str(outfile)
+                dirname, basename = op.split(p)
+                otherfiles = os.listdir(dirname)
+                newname = get_conflicted_name(otherfiles, basename)
+                do_write(op.join(dirname, newname))
+            else:
+                raise
         self.is_modified = False
     
     def sort_dupes(self, key, asc=True, delta=False):

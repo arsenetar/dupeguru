@@ -77,6 +77,18 @@ class TestCaseResultsEmpty:
         self.results.groups = []
         assert not self.results.is_modified
     
+    def test_save_to_same_name_as_folder(self, tmpdir):
+        # Issue #149
+        # When saving to a filename that already exists, the file is overwritten. However, when
+        # the name exists but that it's a folder, then there used to be a crash. The proper fix
+        # would have been some kind of feedback to the user, but the work involved for something
+        # that simply never happens (I never received a report of this crash, I experienced it
+        # while fooling around) is too much. Instead, use standard name conflict resolution.
+        folderpath = tmpdir.join('foo')
+        folderpath.mkdir()
+        self.results.save_to_xml(str(folderpath)) # no crash
+        assert tmpdir.join('[000] foo').check()
+    
 
 class TestCaseResultsWithSomeGroups:
     def setup_method(self, method):

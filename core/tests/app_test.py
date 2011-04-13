@@ -137,6 +137,7 @@ class TestCaseDupeGuru:
         eq_(len(app.results.groups), 0)
     
     def test_rename_when_nothing_is_selected(self):
+        # Issue #140
         # It's possible that rename operation has its selected row swept off from under it, thus
         # making the selected row None. Don't crash when it happens.
         dgapp = DupeGuru()
