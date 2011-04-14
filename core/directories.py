@@ -81,13 +81,14 @@ class Directories:
             pass
     
     def _get_folders(self, from_folder):
-        state = self.get_state(from_folder.path)
         try:
             for subfolder in from_folder.subfolders:
                 for folder in self._get_folders(subfolder):
                     yield folder
+            state = self.get_state(from_folder.path)
             if state != DirectoryState.Excluded:
                 from_folder.is_ref = state == DirectoryState.Reference
+                logging.debug("Yielding Folder %r state: %d", from_folder, state)
                 yield from_folder
         except (EnvironmentError, fs.InvalidPath):
             pass

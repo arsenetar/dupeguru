@@ -51,8 +51,9 @@ class Directories(DirectoriesBase):
         if is_bundle(str(from_folder.path)):
             # just yield the current folder and bail
             state = self.get_state(from_folder.path)
-            from_folder.is_ref = state == DirectoryState.Reference
-            yield from_folder
+            if state != DirectoryState.Excluded:
+                from_folder.is_ref = state == DirectoryState.Reference
+                yield from_folder
             return
         else:
             for folder in DirectoriesBase._get_folders(self, from_folder):
