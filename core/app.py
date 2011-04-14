@@ -94,7 +94,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def _get_file(self, str_path):
         path = Path(str_path)
-        f = fs.get_file(path, self.directories.fileclasses)    
+        # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
+        f = fs.get_file(path, self.directories.fileclasses + [fs.Folder])    
         if f is None:
             return None
         try:
@@ -197,12 +198,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             while delete_if_empty(path, ['.DS_Store']):
                 path = path[:-1]
     
-    def copy_or_move(self, dupe, copy, destination, dest_type):
-        """
-            copy: True = Copy False = Move
-            destination: string.
-            dest_type: DestType constants
-        """
+    def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
         location_path = first(p for p in self.directories if dupe.path in p)
         dest_path = Path(destination)
@@ -214,6 +210,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             dest_path = dest_path + source_base
         if not io.exists(dest_path):
             io.makedirs(dest_path)
+        # Add filename to dest_path. For file move/copy, it's not required, but for folders, yes.
+        dest_path = dest_path + source_path[-1]
+        logging.debug("Copy/Move operation from '%s' to '%s'", source_path, dest_path)
         # Raises an EnvironmentError if there's a problem
         if copy:
             smart_copy(source_path, dest_path)

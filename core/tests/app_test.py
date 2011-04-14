@@ -91,8 +91,8 @@ class TestCaseDupeGuru:
         dgapp.copy_or_move(f, True, 'some_destination', 0)
         eq_(1, len(hscommon.conflict.smart_copy.calls))
         call = hscommon.conflict.smart_copy.calls[0]
-        eq_('some_destination', call['dest_path'])
-        eq_(f.path, call['source_path'])
+        eq_(call['dest_path'], op.join('some_destination', 'foo'))
+        eq_(call['source_path'], f.path)
     
     def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
         tmppath = Path(str(tmpdir))

@@ -192,6 +192,10 @@ class Folder(File):
             self._subfolders = [Folder(p) for p in subfolders]
         return self._subfolders
     
+    @classmethod
+    def can_handle(cls, path):
+        return not io.islink(path) and io.isdir(path)
+    
 
 def get_file(path, fileclasses=[File]):
     for fileclass in fileclasses:
