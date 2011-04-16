@@ -1,3 +1,8 @@
+=== 3.1.0 (2011-04-16)
+
+* Added the "Folders" scan type. (#89)
+* Fixed a couple of crashes. (#140 #149)
+
 === 3.0.2 (2011-03-16)
 
 * Fixed crash after removing marked dupes. (#140)
