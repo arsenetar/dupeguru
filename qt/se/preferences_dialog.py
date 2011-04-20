@@ -8,8 +8,8 @@
 
 import sys
 from PyQt4.QtCore import QSize
-from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QSizePolicy, QSpacerItem,
-    QWidget, QLineEdit, QApplication)
+from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
+    QLineEdit, QApplication)
 
 from hscommon.trans import tr
 from hscommon.util import tryint
@@ -32,17 +32,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     
     def _setupPreferenceWidgets(self):
-        self.horizontalLayout = QHBoxLayout()
-        self.label_2 = QLabel(self)
-        self.label_2.setText(tr("Scan Type:"))
-        self.label_2.setMinimumSize(QSize(100, 0))
-        self.label_2.setMaximumSize(QSize(100, 16777215))
-        self.horizontalLayout.addWidget(self.label_2)
-        self.scanTypeComboBox = QComboBox(self)
-        for label in [tr("Filename"), tr("Contents"), tr("Folders")]:
-            self.scanTypeComboBox.addItem(label)
-        self.horizontalLayout.addWidget(self.scanTypeComboBox)
-        self.widgetsVLayout.addLayout(self.horizontalLayout)
+        scanTypeLabels = [tr(s) for s in ["Filename", "Contents", "Folders"]]
+        self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)

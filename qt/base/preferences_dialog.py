@@ -25,6 +25,19 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
     
+    def _setupScanTypeBox(self, labels):
+        self.scanTypeHLayout = QHBoxLayout()
+        self.scanTypeLabel = QLabel(self)
+        self.scanTypeLabel.setText(tr("Scan Type:"))
+        self.scanTypeLabel.setMinimumSize(QSize(100, 0))
+        self.scanTypeLabel.setMaximumSize(QSize(100, 16777215))
+        self.scanTypeHLayout.addWidget(self.scanTypeLabel)
+        self.scanTypeComboBox = QComboBox(self)
+        for label in labels:
+            self.scanTypeComboBox.addItem(label)
+        self.scanTypeHLayout.addWidget(self.scanTypeComboBox)
+        self.widgetsVLayout.addLayout(self.scanTypeHLayout)
+    
     def _setupFilterHardnessBox(self):
         self.filterHardnessHLayout = QHBoxLayout()
         self.filterHardnessLabel = QLabel(self)
