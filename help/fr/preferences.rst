@@ -32,9 +32,11 @@ Préférences
 
 .. only:: edition_pe
 
-    **Seuil du filtre:** Plus il est élevé, plus les images doivent être similaires pour être considérées comme des doublons. Le défaut de 95% permet quelques petites différence, comme par exemple une différence de qualité ou bien une légère modification des couleurs.
+    **Type de scan:** Détermine le type de scan qui sera fait sur vos images. Le type **Contenu** compare le contenu des images de façon "fuzzy", rendant possible de trouver non seulement les doublons exactes, mais aussi les similaires. Le type **EXIF Timestamp** compare les métadonnées EXIF des images (si existantes) et détermine si le "timestamp" (moment de prise de la photo) est pareille. C'est beaucoup plus rapide que le scan par Contenu.
+    
+    **Seuil du filtre:** *Scan par Contenu seulement.* Plus il est élevé, plus les images doivent être similaires pour être considérées comme des doublons. Le défaut de 95% permet quelques petites différence, comme par exemple une différence de qualité ou bien une légère modification des couleurs.
 
-    **Comparer les images de tailles différentes:** Le nom dit tout. Sans cette option, les images de tailles différentes ne sont pas comparées.
+    **Comparer les images de tailles différentes:** *Scan par Contenu seulement.* Le nom dit tout. Sans cette option, les images de tailles différentes ne sont pas comparées.
 
 **Comparer les fichiers de différents types:** Sans cette option, seulement les fichiers du même type seront comparés.
 

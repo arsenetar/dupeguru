@@ -8,8 +8,6 @@
 
 # Heavily based on http://topo.math.u-psud.fr/~bousch/exifdump.py by Thierry Bousch (Public Domain)
 
-import os
-import sys
 import logging
 
 EXIF_TAGS = {
@@ -260,7 +258,6 @@ def read_exif_header(fp):
     try:
         index = large_data.index(b'Exif')
         data = large_data[index-6:index+6]
-        print('hello!', data)
         # large_data omits the first 12 bytes, and the index is at the middle of the header, so we
         # must seek index + 18
         fp.seek(index+18)
@@ -324,25 +321,3 @@ def get_fields(fp):
         for tag, type, values in IFD:
             add_tag_to_result(tag, values)
     return result
-
-def main():
-    # logging.getLogger().setLevel(logging.DEBUG)
-    if len(sys.argv) < 2:
-        filenames = os.listdir('.')
-    else:
-        filenames = sys.argv[1:]
-    for filename in filenames:
-        print(filename+':')
-        try:
-            file = open(filename, 'rb')
-            fields = get_fields(file)
-            if 'DateTime' in fields:
-                print(fields['DateTime'])
-            else:
-                print(repr(fields))
-        except (IOError, ValueError):
-            print(' Cannot open file')
-    sys.exit(0)
-
-if __name__ == '__main__':
-    main()

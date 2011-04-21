@@ -20,19 +20,29 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:10];
-    [d setObject:[NSNumber numberWithInt:95] forKey:@"minMatchPercentage"];
-    [d setObject:[NSNumber numberWithInt:1] forKey:@"recreatePathType"];
-    [d setObject:[NSNumber numberWithBool:NO] forKey:@"matchScaled"];
-    [d setObject:[NSNumber numberWithBool:YES] forKey:@"mixFileKind"];
-    [d setObject:[NSNumber numberWithBool:NO] forKey:@"useRegexpFilter"];
-    [d setObject:[NSNumber numberWithBool:NO] forKey:@"ignoreHardlinkMatches"];
-    [d setObject:[NSNumber numberWithBool:NO] forKey:@"removeEmptyFolders"];
-    [d setObject:[NSNumber numberWithBool:NO] forKey:@"debug"];
+    [d setObject:i2n(0) forKey:@"scanType"];
+    [d setObject:i2n(95) forKey:@"minMatchPercentage"];
+    [d setObject:i2n(1) forKey:@"recreatePathType"];
+    [d setObject:b2n(NO) forKey:@"matchScaled"];
+    [d setObject:b2n(YES) forKey:@"mixFileKind"];
+    [d setObject:b2n(NO) forKey:@"useRegexpFilter"];
+    [d setObject:b2n(NO) forKey:@"ignoreHardlinkMatches"];
+    [d setObject:b2n(NO) forKey:@"removeEmptyFolders"];
+    [d setObject:b2n(NO) forKey:@"debug"];
     [d setObject:[NSArray array] forKey:@"recentDirectories"];
     [d setObject:[NSArray array] forKey:@"columnsOrder"];
     [d setObject:[NSDictionary dictionary] forKey:@"columnsWidth"];
     [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:d];
     [ud registerDefaults:d];
+}
+
+- (id)init
+{
+    self = [super init];
+    NSMutableIndexSet *i = [NSMutableIndexSet indexSetWithIndex:0];
+    VTIsIntIn *vtScanTypeIsFuzzy = [[[VTIsIntIn alloc] initWithValues:i reverse:NO] autorelease];
+    [NSValueTransformer setValueTransformer:vtScanTypeIsFuzzy forName:@"vtScanTypeIsFuzzy"];
+    return self;
 }
 
 - (NSString *)homepageURL

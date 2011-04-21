@@ -71,6 +71,7 @@ class DupeGuru(DupeGuruBase):
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
+        self.scanner.scan_type = self.prefs.scan_type
         self.scanner.match_scaled = self.prefs.match_scaled
         self.scanner.threshold = self.prefs.filter_hardness
     

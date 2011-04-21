@@ -34,6 +34,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     PyDupeGuru *_py = (PyDupeGuru *)py;
+    [_py setScanType:[ud objectForKey:@"scanType"]];
     [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
     [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
     [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];

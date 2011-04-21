@@ -17,6 +17,10 @@ from hscommon.trans import tr
 from . import engine
 from .ignore import IgnoreList
 
+# It's quite ugly to have scan types from all editions all put in the same class, but because there's
+# there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be
+# used in core_*). One day I'll clean this up.
+
 class ScanType:
     Filename = 0
     Fields = 1
@@ -25,6 +29,10 @@ class ScanType:
     Folders = 4
     Contents = 5
     ContentsAudio = 6
+    
+    #PE
+    FuzzyBlock = 10
+    ExifTimestamp = 11
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 

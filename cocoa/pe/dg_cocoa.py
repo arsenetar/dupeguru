@@ -9,6 +9,7 @@ install_cocoa_trans()
 
 from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
 from core_pe import app_cocoa as app_pe_cocoa, __appname__
+from core.scanner import ScanType
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
@@ -27,6 +28,15 @@ class PyDupeGuru(PyDupeGuruBase):
         return str(self.py.selected_dupe_ref_path())
     
     #---Properties
+    def setScanType_(self, scan_type):
+        try:
+            self.py.scanner.scan_type = [
+                ScanType.FuzzyBlock,
+                ScanType.ExifTimestamp,
+            ][scan_type]
+        except IndexError:
+            pass
+    
     def setMatchScaled_(self,match_scaled):
         self.py.scanner.match_scaled = match_scaled
     

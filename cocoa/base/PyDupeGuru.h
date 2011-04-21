@@ -48,6 +48,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSArray *)deltaColumns;
 
 //Scanning options
+- (void)setScanType:(NSNumber *)scan_type;
 - (void)setMinMatchPercentage:(NSNumber *)percentage;
 - (void)setMixFileKind:(BOOL)mix_file_kind;
 - (void)setEscapeFilterRegexp:(BOOL)escape_filter_regexp;

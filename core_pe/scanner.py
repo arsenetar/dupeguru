@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-10-18
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -7,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core.scanner import Scanner
+from core.scanner import Scanner, ScanType
 
-from . import matchbase
+from . import matchblock, matchexif
 from .cache import Cache
 
 class ScannerPE(Scanner):
@@ -18,7 +17,12 @@ class ScannerPE(Scanner):
     threshold = 75
     
     def _getmatches(self, files, j):
-        return matchbase.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
+        if self.scan_type == ScanType.FuzzyBlock:
+            return matchblock.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
+        elif self.scan_type == ScanType.ExifTimestamp:
+            return matchexif.getmatches(files, j)
+        else:
+            raise Exception("Invalid scan type")
     
     def clear_picture_cache(self):
         cache = Cache(self.cache_path)

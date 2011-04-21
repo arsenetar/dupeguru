@@ -10,12 +10,26 @@ import sys
 from PyQt4.QtGui import QLabel, QApplication
 
 from hscommon.trans import tr
+from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
 from . import preferences
 
+
+SCAN_TYPE_ORDER = [
+    ScanType.FuzzyBlock,
+    ScanType.ExifTimestamp,
+]
+
 class PreferencesDialog(PreferencesDialogBase):
+    def __init__(self, parent, app):
+        PreferencesDialogBase.__init__(self, parent, app)
+        
+        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
+    
     def _setupPreferenceWidgets(self):
+        scanTypeLabels = [tr(s) for s in ["Contents", "EXIF Timestamp"]]
+        self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self._setupAddCheckbox('matchScaledBox', tr("Match scaled pictures together"))
@@ -33,13 +47,23 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupBottomPart()
     
     def _load(self, prefs, setchecked):
+        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
+        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
         setchecked(self.matchScaledBox, prefs.match_scaled)
     
     def _save(self, prefs, ischecked):
+        prefs.scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
         prefs.match_scaled = ischecked(self.matchScaledBox)
     
     def resetToDefaults(self):
         self.load(preferences.Preferences())
+    
+    #--- Events
+    def scanTypeChanged(self, index):
+        scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        fuzzy_scan = scan_type == ScanType.FuzzyBlock
+        self.filterHardnessSlider.setEnabled(fuzzy_scan)
+        self.matchScaledBox.setEnabled(fuzzy_scan)
     
 
 if __name__ == '__main__':
