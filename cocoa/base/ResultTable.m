@@ -117,7 +117,8 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 - (void)tableView:(NSTableView *)aTableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)column row:(NSInteger)row
-{ 
+{
+    BOOL isSelected = [tableView isRowSelected:row];
     BOOL isMarkable = n2b([[self py] valueForColumn:@"markable" row:row]);
     if ([[column identifier] isEqual:@"marked"]) {
         [cell setEnabled:isMarkable];
@@ -126,20 +127,22 @@ http://www.hardcoded.net/licenses/bsd_license
         [cell setImagePosition:pos];
     }
     if ([cell isKindOfClass:[NSTextFieldCell class]]) {
-        // Determine if the text color will be blue due to directory being reference.
-        NSTextFieldCell *textCell = cell;
-        if (isMarkable) {
-            [textCell setTextColor:[NSColor blackColor]];
+        NSColor *color = [NSColor textColor];
+        if (isSelected) {
+            color = [NSColor selectedTextColor];
+        }
+        else if (isMarkable) {
             if ([self deltaValuesMode]) {
                 NSInteger i = [[column identifier] integerValue];
                 if ([_deltaColumns containsIndex:i]) {
-                    [textCell setTextColor:[NSColor orangeColor]];
+                    color = [NSColor orangeColor];
                 }
             }
         }
         else {
-            [textCell setTextColor:[NSColor blueColor]];
+            color = [NSColor blueColor];
         }
+        [(NSTextFieldCell *)cell setTextColor:color];
     }
 }
 
