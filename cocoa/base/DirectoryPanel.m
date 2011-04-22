@@ -19,6 +19,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window];
     _app = aParentApp;
     _py = [_app py];
+    [[self window] setTitle:[_py appName]];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];

@@ -13,7 +13,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithParentApp:(id)aParentApp
 {
     self = [super initWithParentApp:aParentApp];
-    [[self window] setTitle:@"dupeGuru Music Edition"];
     _alwaysShowPopUp = YES;
     return self;
 }

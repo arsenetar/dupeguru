@@ -165,7 +165,7 @@ class ResultWindow(QMainWindow):
         self.actionActions.setMenu(actionMenu)
     
     def _setupUi(self):
-        self.setWindowTitle(tr("dupeGuru Results"))
+        self.setWindowTitle(tr("{} Results").format(self.app.NAME))
         self.resize(630, 514)
         self.centralwidget = QWidget(self)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)

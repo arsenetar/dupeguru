@@ -388,8 +388,8 @@
     <translation>Réinitialiser</translation>
 </message>
 <message>
-    <source>dupeGuru Results</source>
-    <translation>dupeGuru (Résultats)</translation>
+    <source>{} Results</source>
+    <translation>{} (Résultats)</translation>
 </message>
 <message>
     <source>Delete duplicates</source>

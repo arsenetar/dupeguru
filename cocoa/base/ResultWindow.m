@@ -19,6 +19,7 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithWindowNibName:@"ResultWindow"];
     app = aApp;
     py = [app py];
+    [[self window] setTitle:fmt(@"%@ Results", [py appName])];
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
