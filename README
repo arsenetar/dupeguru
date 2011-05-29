@@ -29,7 +29,7 @@ General dependencies
 - Python 3.1 (3.2 on Mac OS X) (http://www.python.org)
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
-- jobprogress (http://hg.hardcoded.net/jobprogress)
+- jobprogress 1.0.1 (http://hg.hardcoded.net/jobprogress)
 - Sphinx 1.0.6 (http://sphinx.pocoo.org/)
 - pytest 2.0.0, to run unit tests. (http://pytest.org/)
 
