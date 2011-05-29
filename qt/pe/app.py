@@ -11,10 +11,8 @@ import logging
 
 from PyQt4.QtGui import QImage, QImageReader
 
-from hscommon.util import get_file_ext
-
-from core import fs
 from core_pe import data as data_pe, __appname__
+from core_pe.photo import Photo as PhotoBase
 from core_pe.scanner import ScannerPE
 
 from ..base.app import DupeGuru as DupeGuruBase
@@ -24,19 +22,9 @@ from .result_window import ResultWindow
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
-class File(fs.File):
-    INITIAL_INFO = fs.File.INITIAL_INFO.copy()
-    INITIAL_INFO.update({
-        'dimensions': (0,0),
-    })
-    HANDLED_EXTS = set(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'])
-    
-    @classmethod
-    def can_handle(cls, path):
-        return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
-    
+class File(PhotoBase):
     def _read_info(self, field):
-        fs.File._read_info(self, field)
+        PhotoBase._read_info(self, field)
         if field == 'dimensions':
             try:
                 ir = QImageReader(str(self.path))

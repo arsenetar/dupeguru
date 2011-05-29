@@ -14,31 +14,24 @@ import re
 from appscript import app, its, CommandError, ApplicationNotFoundError
 
 from hscommon import io
-from hscommon.util import get_file_ext, remove_invalid_xml
+from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
 from hscommon.trans import tr
 
-from core import fs
 from core import app_cocoa, directories
 from . import data, _block_osx
+from .photo import Photo as PhotoBase
 from .scanner import ScannerPE
 
 IPHOTO_PATH = Path('iPhoto Library')
 
-class Photo(fs.File):
-    INITIAL_INFO = fs.File.INITIAL_INFO.copy()
-    INITIAL_INFO.update({
-        'dimensions': (0,0),
-    })
-    HANDLED_EXTS = {'png', 'jpg', 'jpeg', 'gif', 'psd', 'bmp', 'tiff', 'tif', 'nef', 'cr2'}
-    
-    @classmethod
-    def can_handle(cls, path):
-        return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
+class Photo(PhotoBase):
+    HANDLED_EXTS = PhotoBase.HANDLED_EXTS.copy()
+    HANDLED_EXTS.update({'psd', 'nef', 'cr2'})
     
     def _read_info(self, field):
-        fs.File._read_info(self, field)
+        PhotoBase._read_info(self, field)
         if field == 'dimensions':
             self.dimensions = _block_osx.get_image_size(str(self.path))
     
