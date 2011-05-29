@@ -335,6 +335,8 @@ class ResultWindow(QMainWindow):
         files = tr("dupeGuru Results (*.dupeguru)")
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:
+            if not destination.endswith('.dupeguru'):
+                destination = '{}.dupeguru'.format(destination)
             self.app.save_as(destination)
             self.app.recentResults.insertItem(destination)
     

@@ -198,7 +198,7 @@ class DirectoriesDialog(QMainWindow):
     
     def loadResultsTriggered(self):
         title = trmsg("SelectResultToLoadMsg")
-        files = tr("dupeGuru Results (*.dupeguru)")
+        files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
             self.app.load_from(destination)

@@ -236,6 +236,10 @@
     <translation>Résultats dupeGuru (*.dupeguru)</translation>
 </message>
 <message>
+    <source>All Files (*.*)</source>
+    <translation>Tout les fichiers (*.*)</translation>
+</message>
+<message>
     <source>Start a new scan</source>
     <translation>Commencer un nouveau scan</translation>
 </message>
