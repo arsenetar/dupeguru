@@ -9,7 +9,7 @@
 import os.path as op
 import logging
 
-from PyQt4.QtGui import QImage, QImageReader
+from PyQt4.QtGui import QImage, QImageReader, QTransform
 
 from core_pe import data as data_pe, __appname__
 from core_pe.photo import Photo as PhotoBase
@@ -23,23 +23,45 @@ from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
 class File(PhotoBase):
-    def _read_info(self, field):
-        PhotoBase._read_info(self, field)
-        if field == 'dimensions':
-            try:
-                ir = QImageReader(str(self.path))
-                size = ir.size()
-                if size.isValid():
-                    self.dimensions = (size.width(), size.height())
-                else:
-                    self.dimensions = (0, 0)
-            except EnvironmentError:
-                self.dimensions = (0, 0)
-                logging.warning("Could not read image '%s'", str(self.path))
+    def _plat_get_dimensions(self):
+        try:
+            ir = QImageReader(str(self.path))
+            size = ir.size()
+            if size.isValid():
+                return (size.width(), size.height())
+            else:
+                return (0, 0)
+        except EnvironmentError:
+            logging.warning("Could not read image '%s'", str(self.path))
+            return (0, 0)
     
-    def get_blocks(self, block_count_per_side):
+    def _plat_get_blocks(self, block_count_per_side, orientation):
         image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
+        # MYSTERY TO SOLVE: For reasons I cannot explain, orientations 5 and 7 don't work for
+        # duplicate scanning. The transforms seems to work fine (if I try to save the image after
+        # the transform, we see that the image has been correctly flipped and rotated), but the
+        # analysis part yields wrong blocks. I spent enought time with this feature, so I'll leave
+        # like that for now. (by the way, orientations 5 and 7 work fine under Cocoa)
+        if 2 <= orientation <= 8:
+            t = QTransform()
+            if orientation == 2:
+                t.scale(-1, 1)
+            elif orientation == 3:
+                t.rotate(180)
+            elif orientation == 4:
+                t.scale(1, -1)
+            elif orientation == 5:
+                t.scale(-1, 1)
+                t.rotate(90)
+            elif orientation == 6:
+                t.rotate(90)
+            elif orientation == 7:
+                t.scale(-1, 1)
+                t.rotate(270)
+            elif orientation == 8:
+                t.rotate(270)
+            image = image.transformed(t)
         return getblocks(image, block_count_per_side)
     
 

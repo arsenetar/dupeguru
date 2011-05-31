@@ -30,14 +30,12 @@ class Photo(PhotoBase):
     HANDLED_EXTS = PhotoBase.HANDLED_EXTS.copy()
     HANDLED_EXTS.update({'psd', 'nef', 'cr2'})
     
-    def _read_info(self, field):
-        PhotoBase._read_info(self, field)
-        if field == 'dimensions':
-            self.dimensions = _block_osx.get_image_size(str(self.path))
+    def _plat_get_dimensions(self):
+        return _block_osx.get_image_size(str(self.path))
     
-    def get_blocks(self, block_count_per_side):
+    def _plat_get_blocks(self, block_count_per_side, orientation):
         try:
-            blocks = _block_osx.getblocks(str(self.path), block_count_per_side)
+            blocks = _block_osx.getblocks(str(self.path), block_count_per_side, orientation)
         except Exception as e:
             raise IOError('The reading of "%s" failed with "%s"' % (str(self.path), str(e)))
         if not blocks:

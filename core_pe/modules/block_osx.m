@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define RADIANS( degrees ) ( degrees * M_PI / 180 )
+
 static CFStringRef
 pystring2cfstring(PyObject *pystring)
 {
@@ -149,18 +151,20 @@ static PyObject* block_osx_getblocks(PyObject *self, PyObject *args)
     CFURLRef image_url;
     CGImageSourceRef source;
     CGImageRef image;
-    size_t width, height;
-    int block_count, block_width, block_height, i;
+    size_t width, height, image_width, image_height;
+    int block_count, block_width, block_height, orientation, i;
     
-    width = 0;
-    height = 0;
-    if (!PyArg_ParseTuple(args, "Oi", &path, &block_count)) {
+    if (!PyArg_ParseTuple(args, "Oii", &path, &block_count, &orientation)) {
         return NULL;
     }
     
     if (PySequence_Length(path) == 0) {
         PyErr_SetString(PyExc_ValueError, "empty path");
         return NULL;
+    }
+    
+    if ((orientation > 8) || (orientation < 0)) {
+        orientation = 0; // simplifies checks later since we can only have values in 0-8
     }
     
     image_path = pystring2cfstring(path);
@@ -182,13 +186,61 @@ static PyObject* block_osx_getblocks(PyObject *self, PyObject *args)
         return PyErr_NoMemory();
     }
     
-    width = CGImageGetWidth(image);
-    height = CGImageGetHeight(image);
-    CGContextRef myContext = MyCreateBitmapContext(width, height);
-    CGRect myBoundingBox = CGRectMake(0, 0, width, height);
-    CGContextDrawImage(myContext, myBoundingBox, image);
-    unsigned char *bitmapData = CGBitmapContextGetData(myContext);
-    CGContextRelease(myContext);
+    
+    width = image_width = CGImageGetWidth(image);
+    height = image_height = CGImageGetHeight(image);
+    if (orientation >= 5) {
+        // orientations 5-8 rotate the photo sideways, so we have to swap width and height
+        width = image_height;
+        height = image_width;
+    }
+    
+    CGContextRef context = MyCreateBitmapContext(width, height);
+    
+    if (orientation == 2) {
+        // Flip X
+        CGContextTranslateCTM(context, width, 0);
+        CGContextScaleCTM(context, -1, 1);
+    }
+    else if (orientation == 3) {
+        // Rot 180
+        CGContextTranslateCTM(context, width, height);
+        CGContextRotateCTM(context, RADIANS(180)); 
+    }
+    else if (orientation == 4) {
+        // Flip Y
+        CGContextTranslateCTM(context, 0, height);
+        CGContextScaleCTM(context, 1, -1);
+    }
+    else if (orientation == 5) {
+        // Flip X + Rot CW 90
+        CGContextTranslateCTM(context, width, 0);
+        CGContextScaleCTM(context, -1, 1);
+        CGContextTranslateCTM(context, 0, height);
+        CGContextRotateCTM(context, RADIANS(-90));
+    }
+    else if (orientation == 6) {
+        // Rot CW 90
+        CGContextTranslateCTM(context, 0, height);
+        CGContextRotateCTM(context, RADIANS(-90));
+    }
+    else if (orientation == 7) {
+        // Rot CCW 90 + Flip X
+        CGContextTranslateCTM(context, width, 0);
+        CGContextScaleCTM(context, -1, 1);
+        CGContextTranslateCTM(context, width, 0);
+        CGContextRotateCTM(context, RADIANS(90));
+    }
+    else if (orientation == 8) {
+        // Rot CCW 90
+        CGContextTranslateCTM(context, width, 0);
+        CGContextRotateCTM(context, RADIANS(90));
+    }
+    CGRect myBoundingBox = CGRectMake(0, 0, image_width, image_height);
+    CGContextDrawImage(context, myBoundingBox, image);
+    unsigned char *bitmapData = CGBitmapContextGetData(context);
+    CGContextRelease(context);
+    
     CGImageRelease(image);
     CFRelease(source);
     if (bitmapData == NULL) {
