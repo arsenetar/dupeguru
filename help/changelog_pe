@@ -1,4 +1,4 @@
-=== 2.2.0 (2011-03-07)
+=== 2.2.0 (2011-06-02)
 
 * Added the EXIF Timestamp scan type.
 * Correctly rotate pictures before analysis when EXIF orientation indicates it. (#154)
