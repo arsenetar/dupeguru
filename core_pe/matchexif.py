@@ -25,7 +25,7 @@ def getmatches(files, j):
                 timestamp = exifdata['DateTimeOriginal']
                 timestamp2pic[timestamp].add(picture)
         except Exception:
-            logging.warning("Couldn't read EXIF of picture: %s", picture.path)
+            logging.info("Couldn't read EXIF of picture: %s", picture.path)
     if '0000:00:00 00:00:00' in timestamp2pic: # very likely false matches
         del timestamp2pic['0000:00:00 00:00:00']
     matches = []
