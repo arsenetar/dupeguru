@@ -1,3 +1,13 @@
+=== 2.2.0 (2011-03-07)
+
+* Added the EXIF Timestamp scan type.
+* Correctly rotate pictures before analysis when EXIF orientation indicates it. (#154)
+* Make sure that saved results have the ".dupeguru" extension. [Linux] (#157)
+* Fixed a text coloring glitch in the results. (#156)
+* Fixed a refresh bug in directory panel. (#153)
+* Fixed a crash on saving results. (#149)
+* Improved reliability of the "Send to Trash" operation. [Linux]
+
 === 2.1.0 (2011-03-07)
 
 * Improved scanning speed, especially for big scans with a lot of CPU cores.
