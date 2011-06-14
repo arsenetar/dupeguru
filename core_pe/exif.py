@@ -154,6 +154,12 @@ GPS_TA0GS = {
 INTEL_ENDIAN = ord('I')
 MOTOROLA_ENDIAN = ord('M')
 
+# About MAX_COUNT: It's possible to have corrupted exif tags where the entry count is way too high
+# and thus makes us loop, not endlessly, but for heck of a long time for nothing. Therefore, we put
+# an arbitrary limit on the entry count we'll allow ourselves to read and any IFD reporting more
+# entries than that will be considered corrupt.
+MAX_COUNT = 0xffff
+
 def s2n_motorola(bytes):
     x = 0
     for c in bytes:
@@ -214,6 +220,9 @@ class TIFF_file:
     def dump_IFD(self, ifd):
         entries = self.s2n(ifd, 2)
         logging.debug("Entries for IFD %d: %d", ifd, entries)
+        if entries > MAX_COUNT:
+            logging.debug("Probably corrupt. Aborting.")
+            return []
         a = []
         for i in range(entries):
             entry = ifd + 2 + 12*i
@@ -223,6 +232,9 @@ class TIFF_file:
                 continue # not handled
             typelen = [ 1, 1, 2, 4, 8, 1, 1, 2, 4, 8 ] [type-1]
             count = self.s2n(entry+4, 4)
+            if count > MAX_COUNT:
+                logging.debug("Probably corrupt. Aborting.")
+                return []
             offset = entry+8
             if count*typelen > 4:
                 offset = self.s2n(offset, 4)
