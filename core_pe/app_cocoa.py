@@ -28,7 +28,7 @@ IPHOTO_PATH = Path('iPhoto Library')
 
 class Photo(PhotoBase):
     HANDLED_EXTS = PhotoBase.HANDLED_EXTS.copy()
-    HANDLED_EXTS.update({'psd', 'nef', 'cr2'})
+    HANDLED_EXTS.update({'psd', 'nef', 'cr2', 'orf'})
     
     def _plat_get_dimensions(self):
         return _block_osx.get_image_size(str(self.path))
