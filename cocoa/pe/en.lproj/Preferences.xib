@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">10J4138</string>
 		<string key="IBDocument.InterfaceBuilderVersion">851</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
@@ -34,10 +34,6 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSUserDefaultsController" id="455472712">
-				<object class="NSMutableArray" key="NSDeclaredKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>scanType</string>
-				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSWindowTemplate" id="809668081">
@@ -289,7 +285,7 @@
 											<object class="NSTextField" id="403531548">
 												<reference key="NSNextResponder" ref="1073354031"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrame">{{301, 145}, {31, 14}}</string>
+												<string key="NSFrame">{{301, 112}, {31, 14}}</string>
 												<reference key="NSSuperview" ref="1073354031"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="983190380">
@@ -386,7 +382,7 @@
 											<object class="NSPopUpButton" id="337614813">
 												<reference key="NSNextResponder" ref="1073354031"/>
 												<int key="NSvFlags">292</int>
-												<string key="NSFrame">{{113, 135}, {216, 26}}</string>
+												<string key="NSFrame">{{113, 135}, {219, 26}}</string>
 												<reference key="NSSuperview" ref="1073354031"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSPopUpButtonCell" key="NSCell" id="697629846">
@@ -1124,7 +1120,6 @@
 						<reference key="object" ref="1073354031"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="403531548"/>
 							<reference ref="266372855"/>
 							<reference ref="869007847"/>
 							<reference ref="171701149"/>
@@ -1135,6 +1130,7 @@
 							<reference ref="472028782"/>
 							<reference ref="337614813"/>
 							<reference ref="536472926"/>
+							<reference ref="403531548"/>
 						</object>
 						<reference key="parent" ref="700068878"/>
 					</object>
@@ -1466,6 +1462,7 @@
 					<string>10.IBViewBoundsToFrameTransform</string>
 					<string>10.ImportedFromIB2</string>
 					<string>11.IBPluginDependency</string>
+					<string>11.IBViewBoundsToFrameTransform</string>
 					<string>11.ImportedFromIB2</string>
 					<string>12.IBPluginDependency</string>
 					<string>12.IBViewBoundsToFrameTransform</string>
@@ -1577,6 +1574,9 @@
 					</object>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABDloAAwxAAAA</bytes>
+					</object>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
@@ -1606,9 +1606,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{88, 591}, {392, 254}}</string>
+					<string>{{413, 591}, {392, 254}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{88, 591}, {392, 254}}</string>
+					<string>{{413, 591}, {392, 254}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{213, 107}</string>
