@@ -24,17 +24,15 @@ def parse_args():
     parser = OptionParser(usage=usage)
     parser.add_option('--clean', action='store_true', dest='clean',
         help="Clean build folder before building")
-    parser.add_option('--only-help', action='store_true', dest='only_help',
-        help="Build only help file")
+    parser.add_option('--doc', action='store_true', dest='doc',
+        help="Build only the help file")
+    parser.add_option('--loc', action='store_true', dest='loc',
+        help="Build only localization")
     (options, args) = parser.parse_args()
     return options
 
 def build_cocoa(edition, dev):
     from pluginbuilder import build_plugin
-    build_all_cocoa_locs('cocoalib')
-    build_all_cocoa_locs(op.join('cocoa', 'base'))
-    build_all_cocoa_locs(op.join('cocoa', edition))
-    
     print("Building dg_cocoa.plugin")
     if not dev:
         specific_packages = {
@@ -83,8 +81,6 @@ def build_cocoa(edition, dev):
     open('run.py', 'wt').write(run_contents)
 
 def build_qt(edition, dev):
-    print("Building .ts files")
-    build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     print("Creating the run.py file")
@@ -103,6 +99,16 @@ def build_help(edition):
     homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
     confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage}
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl)
+
+def build_localizations(ui, edition):
+    print("Building localizations")
+    if ui == 'cocoa':
+        build_all_cocoa_locs('cocoalib')
+        build_all_cocoa_locs(op.join('cocoa', 'base'))
+        build_all_cocoa_locs(op.join('cocoa', edition))
+    elif ui == 'qt':
+        print("Building .ts files")
+        build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
 
 def build_pe_modules(ui):
     def move(src, dst):
@@ -144,6 +150,7 @@ def build_normal(edition, ui, dev):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
     build_help(edition)
+    build_localizations(ui, edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
@@ -165,8 +172,10 @@ def main():
             shutil.rmtree('build')
     if not op.exists('build'):
         os.mkdir('build')
-    if options.only_help:
+    if options.doc:
         build_help(edition)
+    elif options.loc:
+        build_localizations(ui, edition)
     else:
         build_normal(edition, ui, dev)
 
