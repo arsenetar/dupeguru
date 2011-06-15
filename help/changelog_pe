@@ -1,3 +1,11 @@
+=== 2.2.1 (2011-06-15)
+
+* Brought back the filter hardness label which disappeared in 2.2.0. [Mac OS X] (#164)
+* Added support for Olympus RAW files (.orf). [Mac OS X] (#159)
+* Fixed a bug causing the picture analysis to stall on some corrupt EXIF data.
+* Make the "Match scaled pictures" option apply to the new EXIF timestamp scan. (#162)
+* Fixed glitch in the sorting feature of the Folder column. (#161)
+
 === 2.2.0 (2011-06-02)
 
 * Added the EXIF Timestamp scan type.
