@@ -45,8 +45,8 @@ class Photo(PhotoBase):
 
 class IPhoto(Photo):
     @property
-    def display_path(self):
-        return Path(('iPhoto Library', self.name))
+    def display_folder_path(self):
+        return IPHOTO_PATH
     
 def get_iphoto_database_path():
     ud = NSUserDefaults.standardUserDefaults()
@@ -166,11 +166,10 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         else:
             app_cocoa.DupeGuru._do_delete_dupe(self, dupe, replace_with_hardlinks)
     
-    def _get_file(self, str_path):
-        p = Path(str_path)
-        if (self.directories.iphoto_libpath is not None) and (p in self.directories.iphoto_libpath[:-1]):
-            return IPhoto(p)
-        return app_cocoa.DupeGuru._get_file(self, str_path)
+    def _create_file(self, path):
+        if (self.directories.iphoto_libpath is not None) and (path in self.directories.iphoto_libpath[:-1]):
+            return IPhoto(path)
+        return app_cocoa.DupeGuru._create_file(self, path)
     
     def copy_or_move(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, IPhoto):

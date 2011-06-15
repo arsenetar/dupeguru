@@ -14,9 +14,6 @@ import time
 
 Column = namedtuple('Column', 'attr display')
 
-def format_path(p):
-    return str(p[:-1])
-
 def format_timestamp(t, delta):
     if delta:
         return format_time_decimal(t)

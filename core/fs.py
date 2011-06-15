@@ -149,6 +149,10 @@ class File:
     def name(self):
         return self.path[-1]
     
+    @property
+    def folder_path(self):
+        return self.path[:-1]
+    
 
 class Folder(File):
     """A wrapper around a folder path.

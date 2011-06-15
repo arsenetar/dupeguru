@@ -8,7 +8,7 @@
 
 from hscommon.util import format_size
 from hscommon.trans import tr as trbase
-from core.data import format_path, format_timestamp, format_perc, format_dupe_count, cmp_value, Column
+from core.data import format_timestamp, format_perc, format_dupe_count, cmp_value, Column
 
 tr = lambda s: trbase(s, 'columns')
 
@@ -17,7 +17,7 @@ def format_dimensions(dimensions):
 
 COLUMNS = [
     Column('name', tr("Filename")),
-    Column('path', tr("Folder")),
+    Column('folder_path', tr("Folder")),
     Column('size', tr("Size (KB)")),
     Column('extension', tr("Kind")),
     Column('dimensions', tr("Dimensions")),
@@ -26,6 +26,7 @@ COLUMNS = [
     Column('dupe_count', tr("Dupe Count")),
 ]
 
+FOLDER_COL = 1
 MATCHPERC_COL = 6
 DUPECOUNT_COL = 7
 DELTA_COLUMNS = {2, 4, 5}
@@ -53,10 +54,10 @@ def GetDisplayInfo(dupe,group,delta=False):
     else:
         percentage = group.percentage
         dupe_count = len(group.dupes)
-    dupe_path = getattr(dupe, 'display_path', dupe.path)
+    dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
     return [
         dupe.name,
-        format_path(dupe_path),
+        str(dupe_folder_path),
         format_size(size, 0, 1, False),
         dupe.extension,
         format_dimensions(dimensions),
@@ -71,6 +72,9 @@ def GetDupeSortKey(dupe, get_group, key, delta):
         return m.percentage
     if key == DUPECOUNT_COL:
         return 0
+    if key == FOLDER_COL:
+        dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
+        return cmp_value(str(dupe_folder_path))
     r = cmp_value(getattr(dupe, COLUMNS[key].attr, ''))
     if delta and (key in DELTA_COLUMNS):
         ref_value = cmp_value(getattr(get_group().ref, COLUMNS[key].attr, ''))
@@ -85,5 +89,8 @@ def GetGroupSortKey(group, key):
         return group.percentage
     if key == DUPECOUNT_COL:
         return len(group)
+    if key == FOLDER_COL:
+        dupe_folder_path = getattr(group.ref, 'display_folder_path', group.ref.folder_path)
+        return cmp_value(str(dupe_folder_path))
     return cmp_value(getattr(group.ref, COLUMNS[key].attr, ''))
 

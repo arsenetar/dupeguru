@@ -8,14 +8,14 @@
 
 from hscommon.util import format_time, format_size
 from hscommon.trans import tr as trbase
-from core.data import (format_path, format_timestamp, format_words, format_perc, 
-    format_dupe_count, cmp_value, Column)
+from core.data import (format_timestamp, format_words, format_perc, format_dupe_count, cmp_value,
+    Column)
 
 tr = lambda s: trbase(s, 'columns')
 
 COLUMNS = [
     Column('name', tr("Filename")),
-    Column('path', tr("Folder")),
+    Column('folder_path', tr("Folder")),
     Column('size', tr("Size (MB)")),
     Column('duration', tr("Time")),
     Column('bitrate', tr("Bitrate")),
@@ -63,7 +63,7 @@ def GetDisplayInfo(dupe, group, delta):
         dupe_count = len(group.dupes)
     return [
         dupe.name,
-        format_path(dupe.path),
+        str(dupe.folder_path),
         format_size(size, 2, 2, False),
         format_time(duration, with_hours=False),
         str(bitrate),

@@ -328,15 +328,13 @@ class Results(Markable):
     def sort_dupes(self, key, asc=True, delta=False):
         if not self.__dupes:
             self.__get_dupe_list()
-        self.__dupes.sort(key=lambda d: self.data.GetDupeSortKey(d, lambda: self.get_group_of_duplicate(d), key, delta))
-        if not asc:
-            self.__dupes.reverse()
+        keyfunc = lambda d: self.data.GetDupeSortKey(d, lambda: self.get_group_of_duplicate(d), key, delta)
+        self.__dupes.sort(key=keyfunc, reverse=not asc)
         self.__dupes_sort_descriptor = (key,asc,delta)
     
     def sort_groups(self,key,asc=True):
-        self.groups.sort(key=lambda g: self.data.GetGroupSortKey(g, key))
-        if not asc:
-            self.groups.reverse()
+        keyfunc = lambda g: self.data.GetGroupSortKey(g, key)
+        self.groups.sort(key=keyfunc, reverse=not asc)
         self.__groups_sort_descriptor = (key,asc)
     
     #---Properties

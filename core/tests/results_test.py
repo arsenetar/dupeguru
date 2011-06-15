@@ -26,6 +26,11 @@ class NamedObject(engine_test.NamedObject):
     
     def __bool__(self):
         return False #Make sure that operations are made correctly when the bool value of files is false.
+    
+    @property
+    def folder_path(self):
+        return self.path[:-1]
+    
 
 # Returns a group set that looks like that:
 # "foo bar" (1)

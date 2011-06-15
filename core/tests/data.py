@@ -9,11 +9,11 @@
 # data module for tests
 
 from hscommon.util import format_size
-from ..data import format_path, cmp_value, Column
+from ..data import cmp_value, Column
 
 COLUMNS = [
     Column('name', 'Filename'),
-    Column('path', 'Directory'),
+    Column('folder_path', 'Directory'),
     Column('size', 'Size (KB)'),
     Column('extension', 'Kind'),
 ]
@@ -29,7 +29,7 @@ def GetDisplayInfo(dupe, group, delta):
         size -= r.size
     return [
         dupe.name,
-        format_path(dupe.path),
+        str(dupe.folder_path),
         format_size(size, 0, 1, False),
         dupe.extension if hasattr(dupe, 'extension') else '---',
     ]

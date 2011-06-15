@@ -92,10 +92,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
             return ['---'] * len(self.data.COLUMNS)
     
+    def _create_file(self, path):
+        # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
+        return fs.get_file(path, self.directories.fileclasses + [fs.Folder])
+    
     def _get_file(self, str_path):
         path = Path(str_path)
-        # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
-        f = fs.get_file(path, self.directories.fileclasses + [fs.Folder])    
+        f = self._create_file(path)
         if f is None:
             return None
         try:
