@@ -209,7 +209,7 @@
 													<reference key="NSControlView" ref="488256664"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<object class="NSCustomResource" key="NSNormalImage" id="745366445">
+													<object class="NSCustomResource" key="NSNormalImage" id="949163782">
 														<string key="NSClassName">NSImage</string>
 														<string key="NSResourceName">NSSwitch</string>
 													</object>
@@ -236,7 +236,7 @@
 													<reference key="NSControlView" ref="722670516"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -258,7 +258,7 @@
 													<reference key="NSControlView" ref="472028782"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -280,7 +280,7 @@
 													<reference key="NSControlView" ref="279087998"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -479,7 +479,7 @@
 													<reference key="NSControlView" ref="1018598123"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -501,7 +501,7 @@
 													<reference key="NSControlView" ref="519470955"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -523,7 +523,7 @@
 													<reference key="NSControlView" ref="606836304"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
-													<reference key="NSNormalImage" ref="745366445"/>
+													<reference key="NSNormalImage" ref="949163782"/>
 													<reference key="NSAlternateImage" ref="990345653"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -991,26 +991,6 @@
 						</object>
 					</object>
 					<int key="connectionID">98</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: values.scanType</string>
-						<reference key="source" ref="722670516"/>
-						<reference key="destination" ref="455472712"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="722670516"/>
-							<reference key="NSDestination" ref="455472712"/>
-							<string key="NSLabel">enabled: values.scanType</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">values.scanType</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">vtScanTypeIsFuzzy</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">

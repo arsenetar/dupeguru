@@ -16,7 +16,7 @@ from hscommon.trans import tr
 from core.engine import Match
 from . import exif
 
-def getmatches(files, j):
+def getmatches(files, match_scaled, j):
     timestamp2pic = defaultdict(set)
     for picture in j.iter_with_progress(files, tr("Read EXIF of %d/%d pictures")):
         try:
@@ -30,5 +30,8 @@ def getmatches(files, j):
         del timestamp2pic['0000:00:00 00:00:00']
     matches = []
     for pictures in timestamp2pic.values():
-        matches += [Match(p1, p2, 100) for p1, p2 in combinations(pictures, 2)]
+        for p1, p2 in combinations(pictures, 2):
+            if (not match_scaled) and (p1.dimensions != p2.dimensions):
+                continue
+            matches.append(Match(p1, p2, 100))
     return matches

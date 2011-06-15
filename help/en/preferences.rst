@@ -32,11 +32,11 @@ Preferences
 
 .. only:: edition_pe
 
-    **Scan Type:** This option determines the type of scan that will be made on your pictures. The **Contents** scan type compares the actual contents of the pictures in a fuzzy way (making it possible to find not only exact duplicates, but also similar ones). The **EXIF Timestamp** scan type looks at the EXIF metadata of the picture (if it exists) and matches pictures that have the same one. It's much faster than the Contents scan.
+    **Scan Type:** This option determines the type of scan that will be made on your pictures. The **Contents** scan type compares the actual contents of the pictures in a fuzzy way (making it possible to find not only exact duplicates, but also similar ones). The **EXIF Timestamp** scan type looks at the EXIF metadata of the picture (if it exists) and matches pictures that have the same one. It's much faster than the Contents scan. **Warning:** Modified pictures often keep the same EXIF timestamp, so watch out for false positives when you use that scan type.
     
     **Filter Hardness:** *Contents scan type only.* The higher is this setting, the "harder" is the filter (In other words, the less results you get). Most pictures of the same quality match at 100% even if the format is different (PNG and JPG for example.). However, if you want to make a PNG match with a lower quality JPG, you will have to set the filer hardness to lower than 100. The default, 95, is a sweet spot.
 
-    **Match scaled pictures together:** *Contents scan type only.* If you check this box, pictures of different dimensions will be allowed in the same duplicate group.
+    **Match pictures of different dimensions:** If you check this box, pictures of different dimensions will be allowed in the same duplicate group.
 
 **Can mix file kind:** If you check this box, duplicate groups are allowed to have files with different extensions. If you don't check it, well, they aren't!
 

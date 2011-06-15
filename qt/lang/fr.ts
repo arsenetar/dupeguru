@@ -530,7 +530,7 @@
     <translation>Année</translation>
 </message>
 <message>
-    <source>Match scaled pictures together</source>
+    <source>Match pictures of different dimensions</source>
     <translation>Comparer les images de tailles différentes</translation>
 </message>
 <message>

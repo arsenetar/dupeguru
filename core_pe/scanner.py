@@ -20,7 +20,7 @@ class ScannerPE(Scanner):
         if self.scan_type == ScanType.FuzzyBlock:
             return matchblock.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
         elif self.scan_type == ScanType.ExifTimestamp:
-            return matchexif.getmatches(files, j)
+            return matchexif.getmatches(files, self.match_scaled, j)
         else:
             raise Exception("Invalid scan type")
     

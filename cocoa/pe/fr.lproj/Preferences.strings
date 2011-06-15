@@ -29,7 +29,7 @@
 /* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "30"; */
 "30.title" = "Directement à la destination";
 
-/* Class = "NSButtonCell"; title = "Match scaled pictures together"; ObjectID = "31"; */
+/* Class = "NSButtonCell"; title = "Match pictures of different dimensions"; ObjectID = "31"; */
 "31.title" = "Comparer les images de tailles différentes";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "32"; */

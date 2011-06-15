@@ -32,7 +32,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
-        self._setupAddCheckbox('matchScaledBox', tr("Match scaled pictures together"))
+        self._setupAddCheckbox('matchScaledBox', tr("Match pictures of different dimensions"))
         self.widgetsVLayout.addWidget(self.matchScaledBox)
         self._setupAddCheckbox('mixFileKindBox', tr("Can mix file kind"))
         self.widgetsVLayout.addWidget(self.mixFileKindBox)
@@ -63,7 +63,6 @@ class PreferencesDialog(PreferencesDialogBase):
         scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
         fuzzy_scan = scan_type == ScanType.FuzzyBlock
         self.filterHardnessSlider.setEnabled(fuzzy_scan)
-        self.matchScaledBox.setEnabled(fuzzy_scan)
     
 
 if __name__ == '__main__':
