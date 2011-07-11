@@ -371,9 +371,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if self.scanner.scan_type == scanner.ScanType.Folders:
-                files = list(self.directories.get_folders())
+                files = list(self.directories.get_folders(j))
             else:
-                files = list(self.directories.get_files())
+                files = list(self.directories.get_files(j))
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))

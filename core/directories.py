@@ -9,6 +9,7 @@
 from xml.etree import ElementTree as ET
 import logging
 
+from jobprogress import job
 from hscommon import io
 from hscommon.path import Path
 from hscommon.util import FileOrPath
@@ -54,7 +55,8 @@ class Directories:
         if path[-1].startswith('.'): # hidden
             return DirectoryState.Excluded
     
-    def _get_files(self, from_path):
+    def _get_files(self, from_path, j):
+        j.check_if_cancelled()
         state = self.get_state(from_path)
         if state == DirectoryState.Excluded:
             # Recursively get files from folders with lots of subfolder is expensive. However, there
@@ -75,15 +77,16 @@ class Directories:
             # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
             subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p) and p not in filepaths]
             for subfolder in subfolders:
-                for file in self._get_files(subfolder):
+                for file in self._get_files(subfolder, j):
                     yield file
         except (EnvironmentError, fs.InvalidPath):
             pass
     
-    def _get_folders(self, from_folder):
+    def _get_folders(self, from_folder, j):
+        j.check_if_cancelled()
         try:
             for subfolder in from_folder.subfolders:
-                for folder in self._get_folders(subfolder):
+                for folder in self._get_folders(subfolder, j):
                     yield folder
             state = self.get_state(from_folder.path)
             if state != DirectoryState.Excluded:
@@ -118,23 +121,23 @@ class Directories:
         except EnvironmentError:
             return []
     
-    def get_files(self):
+    def get_files(self, j=job.nulljob):
         """Returns a list of all files that are not excluded.
         
         Returned files also have their 'is_ref' attr set.
         """
         for path in self._dirs:
-            for file in self._get_files(path):
+            for file in self._get_files(path, j):
                 yield file
     
-    def get_folders(self):
+    def get_folders(self, j=job.nulljob):
         """Returns a list of all folders that are not excluded.
         
         Returned folders also have their 'is_ref' attr set.
         """
         for path in self._dirs:
             from_folder = fs.Folder(path)
-            for folder in self._get_folders(from_folder):
+            for folder in self._get_folders(from_folder, j):
                 yield folder
     
     def get_state(self, path):
