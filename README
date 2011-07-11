@@ -59,6 +59,21 @@ Linux prerequisites
 
 - PyQt 4.7.5 (http://www.riverbankcomputing.co.uk/news)
 
+The easy way!
+-------------
+
+There's an easy way to install the majority of the prerequisites above, and it's `pip <http://www.pip-installer.org/>`_ which has recently started to support Python 3. So install it and then run::
+
+    pip install -r requirements-[osx|win].txt
+
+([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt). 
+Because Sphinx doesn't support Python 3 yet, it's not in the requirements file and you'll have to 
+install it manually. You might have to compile PyObjC manually too (see gotchas below). Sparkle and 
+Advanced Installer, having nothing to do with Python, are also manual installs.
+
+PyQt isn't in the requirements file either (there's no package uploaded on PyPI) and you also have
+to install it manually.
+
 Prerequisite gotchas
 --------------------
 

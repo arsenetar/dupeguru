@@ -1,0 +1,2 @@
+-r requirements.txt
+cx_freeze>=4.2.3
