@@ -173,6 +173,11 @@ class PyDirectoryOutline(PyOutline):
     def addDirectory_(self, path):
         self.py.add_directory(path)
     
+    # python --> cocoa
+    def refresh_states(self):
+        # Under cocoa, both refresh() and refresh_states() do the same thing.
+        self.cocoa.refresh()
+    
 
 class PyResultTable(PyTable):
     py_class = ResultTable

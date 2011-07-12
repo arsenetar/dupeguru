@@ -34,6 +34,11 @@ class DirectoryNode(Node):
             self.append(DirectoryNode(self._tree, path, path[-1]))
         self._loaded = True
     
+    def update_all_states(self):
+        self._state = STATE_ORDER.index(self._tree.app.directories.get_state(self._directory_path))
+        for node in self:
+            node.update_all_states()
+    
     # The state propery is an index to the combobox
     @property
     def state(self):
@@ -46,11 +51,14 @@ class DirectoryNode(Node):
         self._state = value
         state = STATE_ORDER[value]
         self._tree.app.directories.set_state(self._directory_path, state)
-        self._tree._refresh()
-        self._tree.view.refresh()
+        self._tree.update_all_states()
     
 
 class DirectoryTree(GUIObject, Tree):
+    #--- model -> view calls:
+    # refresh()
+    # refresh_states() # when only states label need to be refreshed
+    #
     def __init__(self, view, app):
         GUIObject.__init__(self, view, app)
         Tree.__init__(self)
@@ -67,6 +75,11 @@ class DirectoryTree(GUIObject, Tree):
     
     def add_directory(self, path):
         self.app.add_directory(path)
+    
+    def update_all_states(self):
+        for node in self:
+            node.update_all_states()
+        self.view.refresh_states()
     
     #--- Event Handlers
     def directories_changed(self):

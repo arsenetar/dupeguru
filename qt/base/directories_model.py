@@ -8,7 +8,7 @@
 
 import urllib.parse
 
-from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl
+from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
@@ -69,7 +69,7 @@ class DirectoriesModel(TreeModel):
     def _getChildren(self):
         return list(self.model)
     
-    def columnCount(self, parent):
+    def columnCount(self, parent=QModelIndex()):
         return 2
     
     def data(self, index, role):
@@ -100,7 +100,7 @@ class DirectoriesModel(TreeModel):
         data = bytes(mimeData.data('text/uri-list')).decode('ascii')
         unquoted = urllib.parse.unquote(data)
         urls = unquoted.split('\r\n')
-        paths = [str(QUrl(url).toLocalFile()) for url in urls if url]
+        paths = [QUrl(url).toLocalFile() for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
         self.foldersAdded.emit(paths)
@@ -142,4 +142,7 @@ class DirectoriesModel(TreeModel):
     #--- model --> view
     def refresh(self):
         self.reset()
+    
+    def refresh_states(self):
+        self.refreshData()
     
