@@ -1,0 +1,18 @@
+
+/* Class = "NSWindow"; title = "Problems!"; ObjectID = "1"; */
+"1.title" = "Probleme!";
+
+/* Class = "NSTextFieldCell"; title = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results."; ObjectID = "4"; */
+"4.title" = "Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Grund der Probleme ist unten in der Tabelle beschrieben.";
+
+/* Class = "NSTableColumn"; headerCell.title = "File Path"; ObjectID = "10"; */
+"10.headerCell.title" = "Dateipfad";
+
+/* Class = "NSTableColumn"; headerCell.title = "Error Message"; ObjectID = "11"; */
+"11.headerCell.title" = "Fehlermeldung";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "19"; */
+"19.title" = "Schließen";
+
+/* Class = "NSButtonCell"; title = "Reveal Selected"; ObjectID = "21"; */
+"21.title" = "Zeige Markierte";

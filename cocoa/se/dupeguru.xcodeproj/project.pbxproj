@@ -153,6 +153,13 @@
 		CE91F214113BC22D0010360B /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
 		CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
+		CECFFF1C13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF1D13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF1E13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF1F13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF2013CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF2113CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
+		CECFFF2413CDF8E5003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CEDD92D60FDD01640031C7B7 /* BRSingleLineFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRSingleLineFormatter.h; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.h; sourceTree = SOURCE_ROOT; };
 		CEDD92D70FDD01640031C7B7 /* BRSingleLineFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRSingleLineFormatter.m; path = ../../cocoalib/brsinglelineformatter/BRSingleLineFormatter.m; sourceTree = SOURCE_ROOT; };
 		CEE7EA110FE675C80004E467 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
@@ -457,6 +464,7 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -465,6 +473,7 @@
 				German,
 				en,
 				fr,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -558,6 +567,7 @@
 			children = (
 				CE665B3213225AF8003F5CFB /* en */,
 				CE665B3413225B07003F5CFB /* fr */,
+				CECFFF1E13CDF8D0003A4518 /* de */,
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;
@@ -577,6 +587,7 @@
 			children = (
 				CE81134312E5CE4D00A36C80 /* en */,
 				CE81135112E5CE6100A36C80 /* fr */,
+				CECFFF1C13CDF8D0003A4518 /* de */,
 			);
 			name = DetailsPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -586,6 +597,7 @@
 			children = (
 				CE81134512E5CE4D00A36C80 /* en */,
 				CE81135212E5CE6100A36C80 /* fr */,
+				CECFFF1D13CDF8D0003A4518 /* de */,
 			);
 			name = DirectoryPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -595,6 +607,7 @@
 			children = (
 				CE81134712E5CE4D00A36C80 /* en */,
 				CE81135312E5CE6100A36C80 /* fr */,
+				CECFFF1F13CDF8D0003A4518 /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = SOURCE_ROOT;
@@ -604,6 +617,7 @@
 			children = (
 				CE81134912E5CE4D00A36C80 /* en */,
 				CE81135412E5CE6100A36C80 /* fr */,
+				CECFFF2013CDF8D0003A4518 /* de */,
 			);
 			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
@@ -613,6 +627,7 @@
 			children = (
 				CE81134B12E5CE4D00A36C80 /* en */,
 				CE81135512E5CE6100A36C80 /* fr */,
+				CECFFF2113CDF8D0003A4518 /* de */,
 			);
 			name = ResultWindow.xib;
 			sourceTree = SOURCE_ROOT;
@@ -622,6 +637,7 @@
 			children = (
 				CE81135712E5CE6D00A36C80 /* en */,
 				CE81135912E5CE7B00A36C80 /* fr */,
+				CECFFF2413CDF8E5003A4518 /* de */,
 			);
 			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;

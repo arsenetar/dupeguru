@@ -1,0 +1,23 @@
+/* Class = "NSTableColumn"; headerCell.title = "State"; ObjectID = "13"; */
+"13.headerCell.title" = "Zustand";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "15"; */
+"15.headerCell.title" = "Name";
+
+/* Class = "NSButtonCell"; title = "Scan"; ObjectID = "48"; */
+"48.title" = "Scan";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "55"; */
+"55.title" = "Normal";
+
+/* Class = "NSMenuItem"; title = "Reference"; ObjectID = "56"; */
+"56.title" = "Referenz";
+
+/* Class = "NSMenuItem"; title = "Excluded"; ObjectID = "57"; */
+"57.title" = "Ausgeschlossen";
+
+/* Class = "NSTextFieldCell"; title = "Select folders to scan and press \"Scan\"."; ObjectID = "71"; */
+"71.title" = "Wähle Ordner zum Durchsuchen und drücke \"Scan\".";
+
+/* Class = "NSButtonCell"; title = "Load Results"; ObjectID = "73"; */
+"73.title" = "Lade Ergebnisse";

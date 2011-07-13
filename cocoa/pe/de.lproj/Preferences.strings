@@ -12,34 +12,34 @@
 "20.title" = "Filter hardness:";
 
 /* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "21"; */
-"21.title" = "Can mix file kind";
+"21.title" = "Vergleiche mit unterschiedlichen Dateitypen";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "24"; */
-"24.title" = "Reset to Defaults";
+"24.title" = "Voreinstellungen";
 
 /* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "25"; */
-"25.title" = "Copy and Move:";
+"25.title" = "Kopieren und Verschieben:";
 
 /* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "28"; */
-"28.title" = "Recreate relative path";
+"28.title" = "Relativen Pfad neu erstellen";
 
 /* Class = "NSMenuItem"; title = "Recreate absolute path"; ObjectID = "29"; */
-"29.title" = "Recreate absolute path";
+"29.title" = "Absoluten Pfad neu erstellen";
 
 /* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "30"; */
-"30.title" = "Right in destination";
+"30.title" = "Direkt im Ziel";
 
 /* Class = "NSButtonCell"; title = "Match pictures of different dimensions"; ObjectID = "31"; */
-"31.title" = "Match pictures of different dimensions";
+"31.title" = "Vergleiche Bilder mit unterschiedlicher Auflösung";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "32"; */
-"32.title" = "Automatically check for updates";
+"32.title" = "Automatisch nach Updates suchen";
 
 /* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "33"; */
-"33.title" = "Remove empty folders on delete or move";
+"33.title" = "Entferne leere Ordner beim Löschen oder Verschieben";
 
 /* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "34"; */
-"34.title" = "Use regular expressions when filtering";
+"34.title" = "Nutze reguläre Ausdrücke beim Filtern";
 
 /* Class = "NSTabViewItem"; label = "Basic"; ObjectID = "60"; */
 "60.label" = "Basic";
@@ -48,10 +48,10 @@
 "61.label" = "Advanced";
 
 /* Class = "NSTextFieldCell"; title = "Custom Command (arguments: %d for dupe, %r for ref):"; ObjectID = "65"; */
-"65.title" = "Custom Command (arguments: %d for dupe, %r for ref):";
+"65.title" = "Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):";
 
 /* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "70"; */
-"70.title" = "Ignore duplicates hardlinking to the same file";
+"70.title" = "Ignoriere Duplikate die mit derselben Datei verknüpft sind";
 
 /* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "75"; */
-"75.title" = "Debug mode (restart required)";
+"75.title" = "Debug Modus (Neustart nötig)";

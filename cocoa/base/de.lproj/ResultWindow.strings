@@ -1,0 +1,99 @@
+
+/* Class = "NSWindow"; title = "dupeGuru Results"; ObjectID = "1"; */
+"1.title" = "dupeGuru Results";
+
+/* Class = "NSTextFieldCell"; title = "Marked: 0 files, 0 B. Total: 0 files, 0 B."; ObjectID = "6"; */
+"6.title" = "Marked: 0 files, 0 B. Total: 0 files, 0 B.";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "11"; */
+"11.headerCell.title" = "Name";
+
+/* Class = "NSToolbarItem"; label = "Options"; ObjectID = "15"; */
+"15.label" = "Options";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Options"; ObjectID = "15"; */
+"15.paletteLabel" = "Options";
+
+/* Class = "NSToolbarItem"; label = "Filter"; ObjectID = "16"; */
+"16.label" = "Filter";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Filter"; ObjectID = "16"; */
+"16.paletteLabel" = "Filter";
+
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "17"; */
+"17.label" = "Action";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "17"; */
+"17.paletteLabel" = "Action";
+
+/* Class = "NSToolbarItem"; label = "Directories"; ObjectID = "19"; */
+"19.label" = "Directories";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Directories"; ObjectID = "19"; */
+"19.paletteLabel" = "Directories";
+
+/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "27"; */
+"27.title" = "Lösche Markierte und ersetze mit Hardlinks";
+
+/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "29"; */
+"29.title" = "Send Marked to Trash";
+
+/* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "30"; */
+"30.title" = "Verschiebe Markierte nach...";
+
+/* Class = "NSMenuItem"; title = "Copy Marked to..."; ObjectID = "31"; */
+"31.title" = "Kopiere Markierte nach...";
+
+/* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "32"; */
+"32.title" = "Entferne Markierte aus den Ergebnissen";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "34"; */
+"34.title" = "Entferne Ausgewählte aus den Ergebnissen";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "35"; */
+"35.title" = "Füge Ausgewählte der Ignorier-Liste hinzu";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "36"; */
+"36.title" = "Mache Ausgewählte zur Referenz";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "38"; */
+"38.title" = "Öffne Ausgewählte mit Standardanwendung";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "39"; */
+"39.title" = "Reveal Selected in Finder";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "40"; */
+"40.title" = "Ausgewählte umbenennen";
+
+/* Class = "NSSearchFieldCell"; placeholderString = "Filter"; ObjectID = "42"; */
+"42.placeholderString" = "Filter";
+
+/* Class = "NSSegmentedCell"; 44.labels[0] = "Details"; ObjectID = "44"; */
+"44.labels[0]" = "Details";
+
+/* Class = "NSSegmentedCell"; 44.labels[1] = "Dupes Only"; ObjectID = "44"; */
+"44.labels[1]" = "Dupes Only";
+
+/* Class = "NSSegmentedCell"; 44.labels[2] = "Delta"; ObjectID = "44"; */
+"44.labels[2]" = "Delta";
+
+/* Class = "NSMenu"; title = "Menu"; ObjectID = "67"; */
+"67.title" = "Menu";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "68"; */
+"68.title" = "Füge Ausgewählte der Ignorier-Liste hinzu";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "70"; */
+"70.title" = "Ausgewählte umbenennen";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "71"; */
+"71.title" = "Entferne Ausgewählte aus den Ergebnissen";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "72"; */
+"72.title" = "Mache Ausgewählte zur Referenz";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "73"; */
+"73.title" = "Reveal Selected in Finder";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "74"; */
+"74.title" = "Öffne Ausgewählte mit Standardanwendung";

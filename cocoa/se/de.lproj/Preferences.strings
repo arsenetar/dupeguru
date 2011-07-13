@@ -18,40 +18,40 @@
 "80.title" = "Content";
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "81"; */
-"81.title" = "Filename";
+"81.title" = "Dateiname";
 
 /* Class = "NSButtonCell"; title = "Word weighting"; ObjectID = "82"; */
-"82.title" = "Word weighting";
+"82.title" = "Wortgewichtung";
 
 /* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "83"; */
-"83.title" = "Can mix file kind";
+"83.title" = "Vergleiche mit unterschiedlichen Dateitypen";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "86"; */
-"86.title" = "Reset to Defaults";
+"86.title" = "Voreinstellungen";
 
 /* Class = "NSButtonCell"; title = "Match similar words"; ObjectID = "87"; */
-"87.title" = "Match similar words";
+"87.title" = "Vergleiche ähnliche Wörter";
 
 /* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "88"; */
-"88.title" = "Copy and Move:";
+"88.title" = "Kopieren und Verschieben:";
 
 /* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "91"; */
-"91.title" = "Recreate relative path";
+"91.title" = "Relativen Pfad neu erstellen";
 
 /* Class = "NSMenuItem"; title = "Recreate absolute path"; ObjectID = "92"; */
-"92.title" = "Recreate absolute path";
+"92.title" = "Absoluten Pfad neu erstellen";
 
 /* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "93"; */
-"93.title" = "Right in destination";
+"93.title" = "Direkt im Ziel";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "94"; */
-"94.title" = "Automatically check for updates";
+"94.title" = "Automatisch nach Updates suchen";
 
 /* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "96"; */
-"96.title" = "Remove empty folders on delete or move";
+"96.title" = "Entferne leere Ordner beim Löschen oder Verschieben";
 
 /* Class = "NSButtonCell"; title = "Ignore files smaller than:"; ObjectID = "97"; */
-"97.title" = "Ignore files smaller than:";
+"97.title" = "Ignoriere Dateien kleiner als:";
 
 /* Class = "NSTextFieldCell"; title = "KB"; ObjectID = "100"; */
 "100.title" = "KB";
@@ -63,16 +63,16 @@
 "125.label" = "Advanced";
 
 /* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "129"; */
-"129.title" = "Use regular expressions when filtering";
+"129.title" = "Nutze reguläre Ausdrücke beim Filtern";
 
 /* Class = "NSTextFieldCell"; title = "Custom command (arguments: %d for dupe, %r for ref):"; ObjectID = "134"; */
 "134.title" = "Custom command (arguments: %d for dupe, %r for ref):";
 
 /* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "142"; */
-"142.title" = "Ignore duplicates hardlinking to the same file";
+"142.title" = "Ignoriere Duplikate die mit derselben Datei verknüpft sind";
 
 /* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "146"; */
-"146.title" = "Debug mode (restart required)";
+"146.title" = "Debug Modus (Neustart nötig)";
 
 /* Class = "NSMenuItem"; title = "Folders"; ObjectID = "149"; */
-"149.title" = "Folders";
+"149.title" = "Ordner";

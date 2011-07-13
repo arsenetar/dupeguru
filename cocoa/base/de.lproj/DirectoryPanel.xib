@@ -88,7 +88,7 @@
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
 														<int key="NSCellFlags">75628096</int>
 														<int key="NSCellFlags2">2048</int>
-														<string key="NSContents">Nom</string>
+														<string key="NSContents">Name</string>
 														<object class="NSFont" key="NSSupport" id="26">
 															<string key="NSName">LucidaGrande</string>
 															<double key="NSSize">11</double>
@@ -142,7 +142,7 @@
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
 														<int key="NSCellFlags">75628096</int>
 														<int key="NSCellFlags2">2048</int>
-														<string key="NSContents">Type</string>
+														<string key="NSContents">Zustand</string>
 														<reference key="NSSupport" ref="26"/>
 														<object class="NSColor" key="NSBackgroundColor">
 															<int key="NSColorSpace">6</int>
@@ -183,7 +183,7 @@
 																<reference ref="71151438"/>
 																<object class="NSMenuItem" id="828402206">
 																	<reference key="NSMenu" ref="104112446"/>
-																	<string key="NSTitle">Référence</string>
+																	<string key="NSTitle">Referenz</string>
 																	<string key="NSKeyEquiv"/>
 																	<int key="NSMnemonicLoc">2147483647</int>
 																	<string key="NSAction">_popUpItemAction:</string>
@@ -191,7 +191,7 @@
 																</object>
 																<object class="NSMenuItem" id="142495353">
 																	<reference key="NSMenu" ref="104112446"/>
-																	<string key="NSTitle">Exclu</string>
+																	<string key="NSTitle">Ausgeschlossen</string>
 																	<string key="NSKeyEquiv"/>
 																	<int key="NSMnemonicLoc">2147483647</int>
 																	<string key="NSAction">_popUpItemAction:</string>
@@ -448,7 +448,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="293396843">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">Sélectionnez les dossiers à scanner et cliquez sur Scan.</string>
+								<string key="NSContents">Wähle Ordner zum Durchsuchen und drücke "Scan".</string>
 								<reference key="NSSupport" ref="156117695"/>
 								<reference key="NSControlView" ref="186572573"/>
 								<object class="NSColor" key="NSBackgroundColor">
@@ -469,7 +469,7 @@
 							<object class="NSButtonCell" key="NSCell" id="1017656049">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Charger</string>
+								<string key="NSContents">Lade Ergebnisse</string>
 								<reference key="NSSupport" ref="156117695"/>
 								<reference key="NSControlView" ref="84918337"/>
 								<int key="NSButtonFlags">-2038284033</int>

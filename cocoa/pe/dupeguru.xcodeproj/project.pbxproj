@@ -135,6 +135,13 @@
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
+		CE78759D13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
+		CE78759E13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CE78759F13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		CE7875A013CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
+		CE7875A113CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
+		CE7875A513CDFAB900F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
+		CE7875A613CDFAB900F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE7AC9151119911200D02F6C /* ErrorReportWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CE7AC9161119911200D02F6C /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
@@ -491,6 +498,7 @@
 				German,
 				en,
 				fr,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -579,6 +587,7 @@
 			children = (
 				CE05339412E5DA350029EF25 /* en */,
 				CE05339F12E5DA420029EF25 /* fr */,
+				CE78759D13CDFA7100F23771 /* de */,
 			);
 			name = DirectoryPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -588,6 +597,7 @@
 			children = (
 				CE05339612E5DA350029EF25 /* en */,
 				CE0533A012E5DA420029EF25 /* fr */,
+				CE78759F13CDFA7100F23771 /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = SOURCE_ROOT;
@@ -597,6 +607,7 @@
 			children = (
 				CE05339812E5DA350029EF25 /* en */,
 				CE0533A112E5DA420029EF25 /* fr */,
+				CE7875A013CDFA7100F23771 /* de */,
 			);
 			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
@@ -606,6 +617,7 @@
 			children = (
 				CE05339A12E5DA350029EF25 /* en */,
 				CE0533A212E5DA420029EF25 /* fr */,
+				CE7875A113CDFA7100F23771 /* de */,
 			);
 			name = ResultWindow.xib;
 			sourceTree = SOURCE_ROOT;
@@ -615,6 +627,7 @@
 			children = (
 				CE0533A412E5DA4D0029EF25 /* en */,
 				CE0533AD12E5DAAD0029EF25 /* fr */,
+				CE7875A513CDFAB900F23771 /* de */,
 			);
 			name = DetailsPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -624,6 +637,7 @@
 			children = (
 				CE0533A612E5DA4D0029EF25 /* en */,
 				CE0533AE12E5DAAD0029EF25 /* fr */,
+				CE7875A613CDFAB900F23771 /* de */,
 			);
 			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;
@@ -652,6 +666,7 @@
 			children = (
 				CE2A29F613213BFB005899AC /* en */,
 				CEE660B7132253910036DB04 /* fr */,
+				CE78759E13CDFA7100F23771 /* de */,
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;

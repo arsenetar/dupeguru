@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">823</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
+		<string key="IBDocument.InterfaceBuilderVersion">851</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">823</string>
+			<string key="NS.object.0">851</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -374,7 +374,7 @@
 						<object class="NSButton" id="580397230">
 							<reference key="NSNextResponder" ref="53314480"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{261, 12}, {120, 32}}</string>
+							<string key="NSFrame">{{251, 12}, {130, 32}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="799888482">
@@ -464,7 +464,7 @@
 						<object class="NSButton" id="84918337">
 							<reference key="NSNextResponder" ref="53314480"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{141, 12}, {120, 32}}</string>
+							<string key="NSFrame">{{121, 12}, {130, 32}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="1017656049">
@@ -935,16 +935,16 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDhgAAwigAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDewAAwiQAAA</bytes>
 					</object>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{163, 484}, {395, 294}}</string>
+					<string>{{413, 484}, {395, 294}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{163, 484}, {395, 294}}</string>
+					<string>{{413, 484}, {395, 294}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{369, 269}</string>
@@ -980,7 +980,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDFAAAwigAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCeAAAwigAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1099,12 +1099,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsMenu</string>
 							<string>columnsMenu</string>
 							<string>py</string>
 							<string>recentResultsMenu</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSMenu</string>
 							<string>NSMenu</string>
 							<string>PyDupeGuruBase</string>
 							<string>NSMenu</string>
@@ -1114,12 +1116,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionsMenu</string>
 							<string>columnsMenu</string>
 							<string>py</string>
 							<string>recentResultsMenu</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">actionsMenu</string>
+								<string key="candidateClassName">NSMenu</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">columnsMenu</string>
 								<string key="candidateClassName">NSMenu</string>

@@ -198,6 +198,13 @@
 		CEDF07A1112493B200EE5BC0 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CEDF07A2112493B200EE5BC0 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
+		CEF5770713CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770813CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770913CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770A13CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770B13CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770C13CDFB250083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
+		CEF5770D13CDFB310083CB30 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFF18A009A4D387005E6321 /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -487,6 +494,7 @@
 				German,
 				en,
 				fr,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -572,6 +580,7 @@
 			children = (
 				CE05330E12E5D3ED0029EF25 /* en */,
 				CE05331C12E5D4010029EF25 /* fr */,
+				CEF5770713CDFB250083CB30 /* de */,
 			);
 			name = DetailsPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -581,6 +590,7 @@
 			children = (
 				CE05331012E5D3ED0029EF25 /* en */,
 				CE05331D12E5D4010029EF25 /* fr */,
+				CEF5770813CDFB250083CB30 /* de */,
 			);
 			name = DirectoryPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -590,6 +600,7 @@
 			children = (
 				CE05331212E5D3ED0029EF25 /* en */,
 				CE05331E12E5D4010029EF25 /* fr */,
+				CEF5770A13CDFB250083CB30 /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = SOURCE_ROOT;
@@ -599,6 +610,7 @@
 			children = (
 				CE05331412E5D3ED0029EF25 /* en */,
 				CE05331F12E5D4010029EF25 /* fr */,
+				CEF5770B13CDFB250083CB30 /* de */,
 			);
 			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
@@ -608,6 +620,7 @@
 			children = (
 				CE05331612E5D3ED0029EF25 /* en */,
 				CE05332012E5D4010029EF25 /* fr */,
+				CEF5770C13CDFB250083CB30 /* de */,
 			);
 			name = ResultWindow.xib;
 			sourceTree = SOURCE_ROOT;
@@ -617,6 +630,7 @@
 			children = (
 				CE05332212E5D4100029EF25 /* en */,
 				CE05332912E5D4460029EF25 /* fr */,
+				CEF5770D13CDFB310083CB30 /* de */,
 			);
 			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;
@@ -654,6 +668,7 @@
 			children = (
 				CEB5E07C13225CA2009F521D /* en */,
 				CEB5E07E13225CB8009F521D /* fr */,
+				CEF5770913CDFB250083CB30 /* de */,
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;

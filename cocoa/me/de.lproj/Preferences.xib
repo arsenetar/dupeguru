@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -51,7 +50,7 @@
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="986069316">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -64,7 +63,7 @@
 							<object class="NSButtonCell" key="NSCell" id="1054849719">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Reset to Defaults</string>
+								<string key="NSContents">Voreinstellungen</string>
 								<object class="NSFont" key="NSSupport" id="398730609">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
@@ -259,7 +258,7 @@
 															<bool key="EncodedWithXMLCoder">YES</bool>
 															<object class="NSMenuItem" id="298434310">
 																<reference key="NSMenu" ref="370998392"/>
-																<string key="NSTitle">Filename</string>
+																<string key="NSTitle">Dateiname</string>
 																<string key="NSKeyEquiv"/>
 																<int key="NSKeyEquivModMask">1048576</int>
 																<int key="NSMnemonicLoc">2147483647</int>
@@ -270,7 +269,7 @@
 															</object>
 															<object class="NSMenuItem" id="764364324">
 																<reference key="NSMenu" ref="370998392"/>
-																<string key="NSTitle">Filename - Fields</string>
+																<string key="NSTitle">Dateiname - Felder</string>
 																<string key="NSKeyEquiv"/>
 																<int key="NSKeyEquivModMask">1048576</int>
 																<int key="NSMnemonicLoc">2147483647</int>
@@ -281,7 +280,7 @@
 															</object>
 															<object class="NSMenuItem" id="442999824">
 																<reference key="NSMenu" ref="370998392"/>
-																<string key="NSTitle">Filename - Fields (No Order)</string>
+																<string key="NSTitle">Dateiname - Felder (ohne Reihenfolge)</string>
 																<string key="NSKeyEquiv"/>
 																<int key="NSKeyEquivModMask">1048576</int>
 																<int key="NSMnemonicLoc">2147483647</int>
@@ -331,11 +330,15 @@
 												<object class="NSButtonCell" key="NSCell" id="455609515">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Word weighting</string>
+													<string key="NSContents">Wortgewichtung</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="102571342"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<object class="NSCustomResource" key="NSNormalImage" id="463290817">
+														<string key="NSClassName">NSImage</string>
+														<string key="NSResourceName">NSSwitch</string>
+													</object>
 													<object class="NSButtonImageSource" key="NSAlternateImage" id="150447483">
 														<string key="NSImageName">NSSwitch</string>
 													</object>
@@ -354,11 +357,12 @@
 												<object class="NSButtonCell" key="NSCell" id="812282968">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Can mix file kind</string>
+													<string key="NSContents">Vergleiche mit unterschiedlichen Dateitypen</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="527948380"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -456,11 +460,12 @@
 												<object class="NSButtonCell" key="NSCell" id="839484037">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Match similar words</string>
+													<string key="NSContents">Vergleiche ähnliche Wörter</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="996173927"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -477,11 +482,12 @@
 												<object class="NSButtonCell" key="NSCell" id="58676792">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Automatically check for updates</string>
+													<string key="NSContents">Automatisch nach Updates suchen</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="147113892"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -503,6 +509,7 @@
 													<reference key="NSControlView" ref="367077416"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -519,7 +526,7 @@
 												<object class="NSTextFieldCell" key="NSCell" id="714876031">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">272629760</int>
-													<string key="NSContents">Tags to scan:</string>
+													<string key="NSContents">folgende Tags scannen:</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="742879627"/>
 													<reference key="NSBackgroundColor" ref="221998487"/>
@@ -535,11 +542,12 @@
 												<object class="NSButtonCell" key="NSCell" id="771292699">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Track</string>
+													<string key="NSContents">Stück</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="24386232"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -556,11 +564,12 @@
 												<object class="NSButtonCell" key="NSCell" id="324625140">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Artist</string>
+													<string key="NSContents">Künstler</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="28878355"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -582,6 +591,7 @@
 													<reference key="NSControlView" ref="964877114"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -598,11 +608,12 @@
 												<object class="NSButtonCell" key="NSCell" id="243345318">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Title</string>
+													<string key="NSContents">Titel</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="144566514"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -624,6 +635,7 @@
 													<reference key="NSControlView" ref="180911463"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -640,11 +652,12 @@
 												<object class="NSButtonCell" key="NSCell" id="464356494">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Year</string>
+													<string key="NSContents">Jahr</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="422320464"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -676,11 +689,12 @@
 												<object class="NSButtonCell" key="NSCell" id="287230715">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Use regular expressions when filtering</string>
+													<string key="NSContents">Nutze reguläre Ausdrücke beim Filtern</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="836095588"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -697,7 +711,7 @@
 												<object class="NSTextFieldCell" key="NSCell" id="142188233">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">272629760</int>
-													<string key="NSContents">Copy and Move:</string>
+													<string key="NSContents">Kopieren und Verschieben:</string>
 													<reference key="NSSupport" ref="262032469"/>
 													<reference key="NSControlView" ref="519483808"/>
 													<reference key="NSBackgroundColor" ref="221998487"/>
@@ -713,7 +727,7 @@
 												<object class="NSTextFieldCell" key="NSCell" id="380716547">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">272629760</int>
-													<string key="NSContents">Custom Command (arguments: %d for dupe, %r for ref):</string>
+													<string key="NSContents">Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):</string>
 													<reference key="NSSupport" ref="262032469"/>
 													<reference key="NSControlView" ref="839713145"/>
 													<reference key="NSBackgroundColor" ref="221998487"/>
@@ -742,7 +756,7 @@
 													<int key="NSPeriodicInterval">75</int>
 													<object class="NSMenuItem" key="NSMenuItem" id="629871408">
 														<reference key="NSMenu" ref="474503619"/>
-														<string key="NSTitle">Right in destination</string>
+														<string key="NSTitle">Direkt im Ziel</string>
 														<string key="NSKeyEquiv"/>
 														<int key="NSKeyEquivModMask">1048576</int>
 														<int key="NSMnemonicLoc">2147483647</int>
@@ -762,7 +776,7 @@
 															<reference ref="629871408"/>
 															<object class="NSMenuItem" id="585310967">
 																<reference key="NSMenu" ref="474503619"/>
-																<string key="NSTitle">Recreate relative path</string>
+																<string key="NSTitle">Relativen Pfad neu erstellen</string>
 																<string key="NSKeyEquiv"/>
 																<int key="NSKeyEquivModMask">1048576</int>
 																<int key="NSMnemonicLoc">2147483647</int>
@@ -773,7 +787,7 @@
 															</object>
 															<object class="NSMenuItem" id="941356101">
 																<reference key="NSMenu" ref="474503619"/>
-																<string key="NSTitle">Recreate absolute path</string>
+																<string key="NSTitle">Absoluten Pfad neu erstellen</string>
 																<string key="NSKeyEquiv"/>
 																<int key="NSKeyEquivModMask">1048576</int>
 																<int key="NSMnemonicLoc">2147483647</int>
@@ -829,11 +843,12 @@
 												<object class="NSButtonCell" key="NSCell" id="621426332">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Ignore duplicates hardlinking to the same file</string>
+													<string key="NSContents">Ignoriere Duplikate die mit derselben Datei verknüpft sind</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="1065764374"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -850,11 +865,12 @@
 												<object class="NSButtonCell" key="NSCell" id="29064087">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Debug mode (restart required)</string>
+													<string key="NSContents">Debug Modus (Neustart nötig)</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSControlView" ref="476462426"/>
 													<int key="NSButtonFlags">1211912703</int>
 													<int key="NSButtonFlags2">2</int>
+													<reference key="NSNormalImage" ref="463290817"/>
 													<reference key="NSAlternateImage" ref="150447483"/>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
@@ -882,7 +898,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{406, 343}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
@@ -2176,6 +2191,7 @@
 					<string>2.IBWindowTemplateEditedContentRect</string>
 					<string>2.ImportedFromIB2</string>
 					<string>2.windowTemplate.hasMinSize</string>
+					<string>2.windowTemplate.maxSize</string>
 					<string>2.windowTemplate.minSize</string>
 					<string>20.IBPluginDependency</string>
 					<string>20.IBViewBoundsToFrameTransform</string>
@@ -2339,6 +2355,7 @@
 					<string>{{555, 254}, {406, 343}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
+					<string>{1.79769e+308, 1.79769e+308}</string>
 					<string>{213, 107}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
@@ -3046,11 +3063,13 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
+				<string>NSSwitch</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
+				<string>{15, 15}</string>
 			</object>
 		</object>
 	</data>
