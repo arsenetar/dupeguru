@@ -1,183 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.0" language="de_DE">
 <!-- ******** Core ******** -->
 <context>
 <name>core</name>
 <!-- core.* -->
 <message>
     <source>Collecting files to scan</source>
-    <translation>Collecte des fichiers à scanner</translation>
+    <translation>Sammle Dateien zum Scannen</translation>
 </message>
 <message>
     <source>%s (%d discarded)</source>
-    <translation>%s (%d hors-groupe)</translation>
+    <translation>%s (%d verworfen)</translation>
 </message>
 <message>
     <source>Scanning for duplicates</source>
-    <translation>Scan de doublons en cours</translation>
+    <translation>Suche nach Duplikaten</translation>
 </message>
 <message>
     <source>Loading</source>
-    <translation>Chargement en cours</translation>
+    <translation>Laden</translation>
 </message>
 <message>
     <source>Moving</source>
-    <translation>Déplacement en cours</translation>
+    <translation>Verschieben</translation>
 </message>
 <message>
     <source>Copying</source>
-    <translation>Copie en cours</translation>
+    <translation>Kopieren</translation>
 </message>
 <message>
     <source>Sending to Trash</source>
-    <translation>Envoi vers corbeille</translation>
+    <translation>Verschiebe in den Mülleimer</translation>
 </message>
 <message>
     <source>0 matches found</source>
-    <translation>0 paires trouvées</translation>
+    <translation>0 Paare gefunden</translation>
 </message>
 <message>
     <source>%d matches found</source>
-    <translation>%d paires trouvées</translation>
+    <translation>%d Paare gefunden</translation>
 </message>
 <message>
     <source>Read size of %d/%d files</source>
-    <translation>Lu la taille de %d/%d fichiers</translation>
+    <translation>Lese Größe von %d/%d Dateien</translation>
 </message>
 <message>
     <source>Grouped %d/%d matches</source>
-    <translation>%d/%d paires groupées</translation>
+    <translation>%d/%d Paare gruppiert</translation>
 </message>
 <message>
     <source>%d / %d (%s / %s) duplicates marked.</source>
-    <translation>%d / %d (%s / %s) doublons marqués.</translation>
+    <translation>%d / %d (%s / %s) Duplikate markiert.</translation>
 </message>
 <message>
     <source> filter: %s</source>
-    <translation> filtre: %s</translation>
+    <translation> Filter: %s</translation>
 </message>
 <message>
     <source>Read metadata of %d/%d files</source>
-    <translation>Lu les métadonnées de %d/%d fichiers</translation>
+    <translation>Lese Metadaten von %d/%d Dateien</translation>
 </message>
 <message>
     <source>Removing false matches</source>
-    <translation>Retrait des paires invalides</translation>
+    <translation>Entferne Falschpositive.</translation>
 </message>
 <message>
     <source>Processed %d/%d matches against the ignore list</source>
-    <translation>Vérification de %d/%d paires dans la ignore list</translation>
+    <translation>Verarbeitung von %d/%d Paaren gegen die Ignorier-Liste</translation>
 </message>
 <message>
     <source>Doing group prioritization</source>
-    <translation>Prioritization des groupes</translation>
+    <translation>Gruppenpriorisierung</translation>
 </message>
 
 <message>
     <source>Continue</source>
-    <translation>Continuer</translation>
+    <translation>Fortfahren</translation>
 </message>
 <message>
     <source>Continue ({})</source>
-    <translation>Continuer ({})</translation>
+    <translation>Fortfahren ({})</translation>
 </message>
 
 <message>
     <source>Analyzed %d/%d pictures</source>
-    <translation>Analyzé %d/%d images</translation>
+    <translation>Analysiere %d/%d Bilder</translation>
 </message>
 <message>
     <source>Preparing for matching</source>
-    <translation>Préparation pour la comparaison</translation>
+    <translation>Vorbereitung auf den Vergleich</translation>
 </message>
 <message>
     <source>Matched %d/%d pictures</source>
-    <translation>%d/%d blocs d'images comparés</translation>
+    <translation>%d/%d gleiche Bilder</translation>
 </message>
 <message>
     <source>Verified %d/%d matches</source>
-    <translation>Vérifié %d/%d paires</translation>
+    <translation>%d/%d verifizierte Paare</translation>
 </message>
 
 <message>
     <source>Removing dead tracks from your iTunes Library</source>
-    <translation>Retrait des tracks mortes de votre librairie iTunes</translation>
+    <translation>Entfernung toter Stücke aus der iTunes Bibliothek.</translation>
 </message>
 <message>
     <source>Scanning the iTunes Library</source>
-    <translation>Scan de la librairie iTunes en cours</translation>
+    <translation>Scanne die iTunes Bibiliothek</translation>
 </message>
 
 <message>
     <source>Probing iPhoto. Don't touch it during the operation!</source>
-    <translation>Communication avec iPhoto en cours. N'y touchez pas!</translation>
+    <translation>Untersuche iPhoto. Während der Operation nicht anfassen!</translation>
 </message>
 <message>
     <source>Sending dupes to the Trash</source>
-    <translation>Envoi de doublons à la corbeille en cours</translation>
+    <translation>Verschiebe Duplikate in den Mülleimer</translation>
 </message>
 
 <!-- qt.* -->
 <message>
     <source>Sending files to the recycle bin</source>
-    <translation>Envoi de fichiers à la corbeille</translation>
+    <translation>Sende Dateien in den Mülleimer</translation>
 </message>
 <message>
     <source>Quit</source>
-    <translation>Quitter</translation>
+    <translation>Beenden</translation>
 </message>
 <message>
     <source>Preferences</source>
-    <translation>Préférences</translation>
+    <translation>Einstellungen</translation>
 </message>
 <message>
     <source>dupeGuru Help</source>
-    <translation>Aide dupeGuru</translation>
+    <translation>dupeGuru Hilfe</translation>
 </message>
 <message>
     <source>About dupeGuru</source>
-    <translation>À propos de dupeGuru</translation>
+    <translation>Über dupeGuru</translation>
 </message>
 <message>
     <source>Register dupeGuru</source>
-    <translation>Enregistrer dupeGuru</translation>
+    <translation>Registriere dupeGuru</translation>
 </message>
 <message>
     <source>Check for Update</source>
-    <translation>Vérifier les mises à jour</translation>
+    <translation>Auf Updates überprüfen</translation>
 </message>
 <message>
     <source>Open Debug Log</source>
-    <translation>Ouvrir logs de déboguage</translation>
+    <translation>Debug Log öffnen</translation>
 </message>
 <message>
     <source>Add to Ignore List</source>
-    <translation>Ignorer ces doublons à l'avenir</translation>
+    <translation>Zur Ignorier-Liste hinzufügen</translation>
 </message>
 <message>
     <source>copy</source>
-    <translation>copier</translation>
+    <translation>kopieren</translation>
 </message>
 <message>
     <source>move</source>
-    <translation>déplacer</translation>
+    <translation>verschieben</translation>
 </message>
 <message>
     <source>Remove duplicates</source>
-    <translation>Retirer des doublons</translation>
+    <translation>Duplikate entfernen</translation>
 </message>
 <message>
     <source>Custom Command</source>
-    <translation>Commande personnalisée</translation>
+    <translation>Persönlicher Befehl</translation>
 </message>
 <message>
     <source>Operation Complete</source>
-    <translation>Opération complétée</translation>
+    <translation>Operation komplett</translation>
 </message>
 <message>
     <source>Scan complete</source>
-    <translation>Scan complété</translation>
+    <translation>Scan komplett</translation>
 </message>
 <message>
     <source>Attribute</source>
@@ -185,43 +185,43 @@
 </message>
 <message>
     <source>Selected</source>
-    <translation>Sélectionné</translation>
+    <translation>Ausgewählt</translation>
 </message>
 <message>
     <source>Reference</source>
-    <translation>Référence</translation>
+    <translation>Referenz</translation>
 </message>
 <message>
     <source>Load Results...</source>
-    <translation>Charger résultats...</translation>
+    <translation>Lade Ergebnisse...</translation>
 </message>
 <message>
     <source>Results Window</source>
-    <translation>Fenêtre de résultats</translation>
+    <translation>Ergebnisfenster</translation>
 </message>
 <message>
     <source>Add Folder...</source>
-    <translation>Ajouter dossier...</translation>
+    <translation>Ordner hinzufügen...</translation>
 </message>
 <message>
     <source>File</source>
-    <translation>Fichier</translation>
+    <translation>Datei</translation>
 </message>
 <message>
     <source>View</source>
-    <translation>Voir</translation>
+    <translation>Ansicht</translation>
 </message>
 <message>
     <source>Help</source>
-    <translation>Aide</translation>
+    <translation>Hilfe</translation>
 </message>
 <message>
     <source>Load Recent Results</source>
-    <translation>Charger résultats récents</translation>
+    <translation>Lade letzte Ergebnisse</translation>
 </message>
 <message>
     <source>Load Results</source>
-    <translation>Charger</translation>
+    <translation>Lade Ergebnisse</translation>
 </message>
 <message>
     <source>Scan</source>
@@ -229,27 +229,27 @@
 </message>
 <message>
     <source>Unsaved results</source>
-    <translation>Résultats non sauvegardés</translation>
+    <translation>Ungespeicherte Ergebnisse</translation>
 </message>
 <message>
     <source>dupeGuru Results (*.dupeguru)</source>
-    <translation>Résultats dupeGuru (*.dupeguru)</translation>
+    <translation>dupeGuru Ergebnisse (*.dupeguru)</translation>
 </message>
 <message>
     <source>All Files (*.*)</source>
-    <translation>Tout les fichiers (*.*)</translation>
+    <translation>Alle Dateien (*.*)</translation>
 </message>
 <message>
     <source>Start a new scan</source>
-    <translation>Commencer un nouveau scan</translation>
+    <translation>Starte einen neuen Scan</translation>
 </message>
 <message>
     <source>Name</source>
-    <translation>Nom</translation>
+    <translation>Name</translation>
 </message>
 <message>
     <source>State</source>
-    <translation>Type</translation>
+    <translation>Zustand</translation>
 </message>
 <message>
     <source>Normal</source>
@@ -257,205 +257,205 @@
 </message>
 <message>
     <source>Excluded</source>
-    <translation>Exclu</translation>
+    <translation>Ausgeschlossen</translation>
 </message>
 <message>
     <source>Problems!</source>
-    <translation>Problèmes!</translation>
+    <translation>Probleme!</translation>
 </message>
 <message>
     <source>Reveal Selected</source>
-    <translation>Révéler Fichier</translation>
+    <translation>Zeige Markierte</translation>
 </message>
 <message>
     <source>Close</source>
-    <translation>Fermer</translation>
+    <translation>Schließen</translation>
 </message>
 <message>
     <source>File Path</source>
-    <translation>Chemin du fichier</translation>
+    <translation>Dateipfad</translation>
 </message>
 <message>
     <source>Error Message</source>
-    <translation>Message d'erreur</translation>
+    <translation>Fehlermeldung</translation>
 </message>
 <message>
     <source>Details</source>
-    <translation>Détails</translation>
+    <translation>Details</translation>
 </message>
 <message>
     <source>Actions</source>
-    <translation>Actions</translation>
+    <translation>Aktionen</translation>
 </message>
 <message>
     <source>Show Dupes Only</source>
-    <translation>Ne pas montrer les références</translation>
+    <translation>Nur Duplikate anzeigen</translation>
 </message>
 <message>
     <source>Show Delta Values</source>
-    <translation>Montrer les valeurs en tant que delta</translation>
+    <translation>Zeige Deltawerte</translation>
 </message>
 <message>
     <source>Send Marked to Recycle Bin</source>
-    <translation>Envoyer marqués à la corbeille</translation>
+    <translation>Verschiebe Markierte in den Mülleimer</translation>
 </message>
 <message>
     <source>Delete Marked and Replace with Hardlinks</source>
-    <translation>Remplacer marqués par des hardlinks</translation>
+    <translation>Lösche Markierte und ersetze mit Hardlinks</translation>
 </message>
 <message>
     <source>Move Marked to...</source>
-    <translation>Déplacer marqués vers...</translation>
+    <translation>Verschiebe Markierte nach...</translation>
 </message>
 <message>
     <source>Copy Marked to...</source>
-    <translation>Copier marqués vers...</translation>
+    <translation>Kopiere Markierte nach...</translation>
 </message>
 <message>
     <source>Remove Marked from Results</source>
-    <translation>Retirer marqués des résultats</translation>
+    <translation>Entferne Markierte aus den Ergebnissen</translation>
 </message>
 <message>
     <source>Remove Selected from Results</source>
-    <translation>Retirer sélectionnés des résultats</translation>
+    <translation>Entferne Ausgewählte aus den Ergebnissen</translation>
 </message>
 <message>
     <source>Add Selected to Ignore List</source>
-    <translation>Ajouter sélectionnés à la liste de fichiers ignorés</translation>
+    <translation>Füge Ausgewählte der Ignorier-Liste hinzu</translation>
 </message>
 <message>
     <source>Make Selected Reference</source>
-    <translation>Transformer sélectionnés en références</translation>
+    <translation>Mache Ausgewählte zur Referenz</translation>
 </message>
 <message>
     <source>Open Selected with Default Application</source>
-    <translation>Ouvrir sélectionné avec l'application par défaut</translation>
+    <translation>Öffne Ausgewählte mit Standardanwendung</translation>
 </message>
 <message>
     <source>Open Containing Folder of Selected</source>
-    <translation>Ouvrir le dossier contenant le fichier sélectionné</translation>
+    <translation>Öffne beeinhaltenden Ordner der Ausgewählten</translation>
 </message>
 <message>
     <source>Rename Selected</source>
-    <translation>Renommer sélectionné</translation>
+    <translation>Ausgewählte umbenennen</translation>
 </message>
 <message>
     <source>Mark All</source>
-    <translation>Tout marquer</translation>
+    <translation>Alles markieren</translation>
 </message>
 <message>
     <source>Mark None</source>
-    <translation>Tout démarquer</translation>
+    <translation>Nichts markieren</translation>
 </message>
 <message>
     <source>Invert Marking</source>
-    <translation>Inverser le marquage</translation>
+    <translation>Markierung invertieren</translation>
 </message>
 <message>
     <source>Mark Selected</source>
-    <translation>Marquer sélectionnés</translation>
+    <translation>Ausgewählte markieren</translation>
 </message>
 <message>
     <source>Clear Ignore List</source>
-    <translation>Vider la liste de fichiers ignorés</translation>
+    <translation>Ignorier-Liste leeren</translation>
 </message>
 <message>
     <source>Apply Filter</source>
-    <translation>Appliquer filtre</translation>
+    <translation>Filter anwenden</translation>
 </message>
 <message>
     <source>Cancel Filter</source>
-    <translation>Annuler filtre</translation>
+    <translation>Filter entfernen</translation>
 </message>
 <message>
     <source>Export To HTML</source>
-    <translation>Exporter vers HTML</translation>
+    <translation>Exportiere als HTML</translation>
 </message>
 <message>
     <source>Save Results...</source>
-    <translation>Sauvegarder résultats...</translation>
+    <translation>Speichere Ergebnisse...</translation>
 </message>
 <message>
     <source>Invoke Custom Command</source>
-    <translation>Invoquer commande personnalisée</translation>
+    <translation>Eigenen Befehl ausführen</translation>
 </message>
 <message>
     <source>Mark</source>
-    <translation>Marquer</translation>
+    <translation>Auswählen</translation>
 </message>
 <message>
     <source>Columns</source>
-    <translation>Colonnes</translation>
+    <translation>Spalten</translation>
 </message>
 <message>
     <source>Reset to Defaults</source>
-    <translation>Réinitialiser</translation>
+    <translation>Voreinstellungen</translation>
 </message>
 <message>
     <source>{} Results</source>
-    <translation>{} (Résultats)</translation>
+    <translation>{} (Ergebnisse)</translation>
 </message>
 <message>
     <source>Delete duplicates</source>
-    <translation>Effacement de doublons</translation>
+    <translation>Lösche Duplikate</translation>
 </message>
 <message>
     <source>Delete and hardlink duplicates</source>
-    <translation>Hardlinking de doublons</translation>
+    <translation>Ersetze Duplikate mit physikalischer Verknüpfung</translation>
 </message>
 
 <!--- Preferences dialog -->
 <message>
     <source>Scan Type:</source>
-    <translation>Type de scan:</translation>
+    <translation>Scantyp:</translation>
 </message>
 <message>
     <source>Filename</source>
-    <translation>Nom de fichier</translation>
+    <translation>Dateiname</translation>
 </message>
 <message>
     <source>Contents</source>
-    <translation>Contenu</translation>
+    <translation>Inhalt</translation>
 </message>
 <message>
     <source>Folders</source>
-    <translation>Dossiers</translation>
+    <translation>Ordner</translation>
 </message>
 <message>
     <source>Filter Hardness:</source>
-    <translation>Seuil du filtre:</translation>
+    <translation>Filter Empfindlichkeit:</translation>
 </message>
 <message>
     <source>More Results</source>
-    <translation>+ de doublons</translation>
+    <translation>mehr Ergebnisse</translation>
 </message>
 <message>
     <source>Fewer Results</source>
-    <translation>- de doublons</translation>
+    <translation>weniger Ergebnisse</translation>
 </message>
 <message>
     <source>Word weighting</source>
-    <translation>Proportionalité des mots</translation>
+    <translation>Wortgewichtung</translation>
 </message>
 <message>
     <source>Match similar words</source>
-    <translation>Comparer les mots similaires</translation>
+    <translation>Vergleiche ähnliche Wörter</translation>
 </message>
 <message>
     <source>Can mix file kind</source>
-    <translation>Comparer les fichiers de différents types</translation>
+    <translation>Vergleiche mit unterschiedlichen Dateitypen</translation>
 </message>
 <message>
     <source>Use regular expressions when filtering</source>
-    <translation>Utiliser les expressions régulières pour les filtres</translation>
+    <translation>Nutze reguläre Ausdrücke beim Filtern</translation>
 </message>
 <message>
     <source>Remove empty folders on delete or move</source>
-    <translation>Effacer les dossiers vides après un déplacement</translation>
+    <translation>Entferne leere Ordner beim Löschen oder Verschieben</translation>
 </message>
 <message>
     <source>Ignore files smaller than</source>
-    <translation>Ignorer les fichiers plus petits que:</translation>
+    <translation>Ignoriere Dateien kleiner als</translation>
 </message>
 <message>
     <source>KB</source>
@@ -463,35 +463,35 @@
 </message>
 <message>
     <source>Ignore duplicates hardlinking to the same file</source>
-    <translation>Ignorer doublons avec hardlink vers le même fichier</translation>
+    <translation>Ignoriere Duplikate die mit derselben Datei verknüpft sind</translation>
 </message>
 <message>
     <source>Copy and Move:</source>
-    <translation>Déplacements de fichiers:</translation>
+    <translation>Kopieren und Verschieben:</translation>
 </message>
 <message>
     <source>Right in destination</source>
-    <translation>Directement à la destination</translation>
+    <translation>Direkt im Ziel</translation>
 </message>
 <message>
     <source>Recreate relative path</source>
-    <translation>Re-créer chemins relatifs</translation>
+    <translation>Relativen Pfad neu erstellen</translation>
 </message>
 <message>
     <source>Recreate absolute path</source>
-    <translation>Re-créer chemins absolus</translation>
+    <translation>Absoluten Pfad neu erstellen</translation>
 </message>
 <message>
     <source>Custom Command (arguments: %d for dupe, %r for ref):</source>
-    <translation>Commande perso. (arguments: %d pour doublon, %r pour réf):</translation>
+    <translation>Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):</translation>
 </message>
 <message>
     <source>Filename - Fields</source>
-    <translation>Nom de fichier (Champs)</translation>
+    <translation>Dateiname - Felder</translation>
 </message>
 <message>
     <source>Filename - Fields (No Order)</source>
-    <translation>Nom de fichier (Champs sans ordre)</translation>
+    <translation>Dateiname - Felder (ohne Reihenfolge)</translation>
 </message>
 <message>
     <source>Tags</source>
@@ -499,19 +499,19 @@
 </message>
 <message>
     <source>Audio Contents</source>
-    <translation>Contenu Audio</translation>
+    <translation>Audio Inhalte</translation>
 </message>
 <message>
     <source>Tags to scan:</source>
-    <translation>Tags à scanner:</translation>
+    <translation>folgende Tags scannen:</translation>
 </message>
 <message>
     <source>Track</source>
-    <translation>Track</translation>
+    <translation>Stück</translation>
 </message>
 <message>
     <source>Artist</source>
-    <translation>Artiste</translation>
+    <translation>Künstler</translation>
 </message>
 <message>
     <source>Album</source>
@@ -519,7 +519,7 @@
 </message>
 <message>
     <source>Title</source>
-    <translation>Titre</translation>
+    <translation>Titel</translation>
 </message>
 <message>
     <source>Genre</source>
@@ -527,39 +527,39 @@
 </message>
 <message>
     <source>Year</source>
-    <translation>Année</translation>
+    <translation>Jahr</translation>
 </message>
 <message>
     <source>Match pictures of different dimensions</source>
-    <translation>Comparer les images de tailles différentes</translation>
+    <translation>Vergleiche Bilder mit unterschiedlicher Auflösung</translation>
 </message>
 <message>
     <source>Clear Picture Cache</source>
-    <translation>Vider la cache d'images</translation>
+    <translation>Bildzwischenspeicher leeren</translation>
 </message>
 <message>
     <source>Clear List</source>
-    <translation>Vider la liste</translation>
+    <translation>Liste leeren</translation>
 </message>
 <message>
     <source>Language:</source>
-    <translation>Langue:</translation>
+    <translation>Sprache:</translation>
 </message>
 <message>
     <source>English</source>
-    <translation>Anglais</translation>
+    <translation>Englisch</translation>
 </message>
 <message>
     <source>French</source>
-    <translation>Français</translation>
+    <translation>Französisch</translation>
 </message>
 <message>
     <source>German</source>
-    <translation>Allemand</translation>
+    <translation>Deutsch</translation>
 </message>
 <message>
     <source>Debug mode (restart required)</source>
-    <translation>Mode de déboguage (redémarrage requis)</translation>
+    <translation>Debug Modus (Neustart nötig)</translation>
 </message>
 </context>
 
@@ -568,44 +568,44 @@
 <name>columns</name>
 <message>
     <source>Filename</source>
-    <translation>Nom de fichier</translation>
+    <translation>Dateiname</translation>
 </message>
 <message>
     <source>Folder</source>
-    <translation>Dossier</translation>
+    <translation>Ordner</translation>
 </message>
 <message>
     <source>Size (KB)</source>
-    <translation>Taille (KB)</translation>
+    <translation>Größe (KB)</translation>
 </message>
 <message>
     <source>Size (MB)</source>
-    <translation>Taille (MB)</translation>
+    <translation>Größe (MB)</translation>
 </message>
 <message>
     <source>Kind</source>
-    <translation>Type</translation>
+    <translation>Typ</translation>
 </message>
 <message>
     <source>Modification</source>
-    <translation>Modification</translation>
+    <translation>Modifikation</translation>
 </message>
 <message>
     <source>Match %</source>
-    <translation>Match %</translation>
+    <translation>Übereinstimmung %</translation>
 </message>
 <message>
     <source>Words Used</source>
-    <translation>Mots</translation>
+    <translation>Wörter genutzt</translation>
 </message>
 <message>
     <source>Dupe Count</source>
-    <translation># Doublons</translation>
+    <translation>Anzahl Duplikate</translation>
 </message>
 
 <message>
     <source>Time</source>
-    <translation>Temps</translation>
+    <translation>Zeit</translation>
 </message>
 <message>
     <source>Bitrate</source>
@@ -613,15 +613,15 @@
 </message>
 <message>
     <source>Sample Rate</source>
-    <translation>Sample Rate</translation>
+    <translation>Abtastrate</translation>
 </message>
 <message>
     <source>Title</source>
-    <translation>Titre</translation>
+    <translation>Titel</translation>
 </message>
 <message>
     <source>Artist</source>
-    <translation>Artiste</translation>
+    <translation>Künstler</translation>
 </message>
 <message>
     <source>Album</source>
@@ -633,20 +633,20 @@
 </message>
 <message>
     <source>Year</source>
-    <translation>Année</translation>
+    <translation>Jahr</translation>
 </message>
 <message>
     <source>Track Number</source>
-    <translation>Track</translation>
+    <translation>Stück Nummer</translation>
 </message>
 <message>
     <source>Comment</source>
-    <translation>Commentaire</translation>
+    <translation>Kommentar</translation>
 </message>
 
 <message>
     <source>Dimensions</source>
-    <translation>Dimensions</translation>
+    <translation>Dimensionen</translation>
 </message>
 </context>
 
@@ -655,27 +655,27 @@
 <name>ExtraFairwareReminder</name>
 <message>
     <source>Sorry, I must insist</source>
-    <translation>Désolé, je dois insister</translation>
+    <translation>Entschuldigung, ich muss darauf beharren</translation>
 </message>
 <message>
     <source>Contribute</source>
-    <translation>Contribuer</translation>
+    <translation>Spenden</translation>
 </message>
 <message>
     <source>ExtraFairwarePromptMsg</source>
-    <translation>Il semble que vous ayez trouvé beaucoup de doublons. Super! Je dois par contre insister que des contributions sont attendues lorsqu'il y'a des heures non-payées au projet.
+    <translation>Scheinbar haben Sie eine Menge Duplikate gefunden. Schön! Ich muss Sie jedoch daran erinnern das Spenden gewünscht werden, wenn noch nicht alle Arbeitsstunden bezahlt wurden.
 
-Vous pensez peut-être &quot;je n'utiliserai ce programme qu'une fois, pas besoin de contribuer&quot;. Le problème c'est que la plupart des utilisateurs de dupeGuru ne l'utilisent qu'une fois. Si tous suivent ce raisonnement, le développement de dupeGuru ne peut pas continuer. C'est à cause de cette tendance inhérente à la nature de dupeGuru que je me vois contraint d'insister ici.
+Sie denken vielleicht &quot;aber ich nutze dieses Programm doch nur einmal, da brauche ich nicht zu spenden&quot;. Das Problem ist, das die meisten Menschen dupeGuru nur sehr selten nutzen. Wenn jeder so denkt kann die Entwicklung von dupeGuru nicht finanziert werden. Aufgrund dieser, dem Wesen von dupeGuru innenliegenden, Tendenz muss ich hier auf Unterstützung bestehen.  
 
-Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi un message à hsoft@hardcoded.net pour que je vous envoie une clé d'enregistrement.</translation>
+Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung entweder ignorieren oder mir eine Nachricht an hsoft@hardcoded.net schicken, damit ich ihnen einen Schlüssel gebe um diesen Hinweis zu entfernen.</translation>
 </message>
 <message>
     <source>ExtraFairwareReasonMsg</source>
-    <translation>Ce rappel apparaît parce que:
+    <translation>Diese Erinnerung erschien, weil:
     
-1. Plus de 100 doublons sont traités
-2. Vous n'avez pas encore contribué à dupeGuru
-3. Il y a des heures non-payées au projet</translation>
+1. Mehr als 100 Duplikate verarbeitet wurden
+2. Sie noch nicht an dupeGuru gespendet haben
+3. Es unbezahlte Arbeitstunden im Projekt gibt</translation>
 </message>
 </context>
 <!-- ******** Message ******** -->
@@ -683,99 +683,99 @@ Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi u
 <name>message</name>
 <message>
     <source>SelectFolderToScanMsg</source>
-    <translation>Sélectionnez les dossiers à scanner puis faites &quot;Scan&quot;.</translation>
+    <translation>Wähle Ordner zum Durchsuchen und drücke &quot;Scan&quot;.</translation>
 </message>
 <message>
     <source>TaskHangingMsg</source>
-    <translation>Une action précédente est encore en cours. Attendez quelques secondes avant d'en repartir une nouvelle.</translation>
+    <translation>Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine Neue starten. Warten Sie einige Sekunden und versuchen es erneut.</translation>
 </message>
 <message>
     <source>IgnoreConfirmMsg</source>
-    <translation>%d fichiers seront ignorés des prochains scans. Continuer?</translation>
+    <translation>%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?</translation>
 </message>
 <message>
     <source>SelectCopyOrMoveDestinationMsg</source>
-    <translation>Sélectionnez un dossier vers lequel {} les fichiers marqués.</translation>
+    <translation>Wählen sie einen Ordner zum {} der ausgewählten Dateien</translation>
 </message>
 <message>
     <source>FileRemovalConfirmMsg</source>
-    <translation>{} fichiers seront retirés des résultats. Continuer?</translation>
+    <translation>{} Dateien werden aus der Ergebnisliste entfernt. Fortfahren?</translation>
 </message>
 <message>
     <source>NoCustomCommandMsg</source>
-    <translation>Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences.</translation>
+    <translation>Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen konfigurieren.</translation>
 </message>
 <message>
     <source>OperationSuccessMsg</source>
-    <translation>Tous les fichiers ont été traités avec succès.</translation>
+    <translation>Alle Dateien wurden erfolgreich verarbeitet.</translation>
 </message>
 <message>
     <source>NoDuplicateFoundMsg</source>
-    <translation>Aucun doublon trouvé.</translation>
+    <translation>Keine Duplikate gefunden.</translation>
 </message>
 <message>
     <source>ReallyWantToQuitMsg</source>
-    <translation>Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment quitter?</translation>
+    <translation>Sie haben ungespeicherte Ergebnisse. Wollen Sie wirklich beenden?</translation>
 </message>
 <message>
     <source>SelectFolderToAddMsg</source>
-    <translation>Sélectionnez un dossier à ajouter à la liste</translation>
+    <translation>Wählen Sie einen Ordner aus, um ihn der Scanliste hinzuzufügen.</translation>
 </message>
 <message>
     <source>SelectResultToLoadMsg</source>
-    <translation>Sélectionnez un fichier résultats à charger</translation>
+    <translation>Wählen Sie eine Ergebnisliste zum Laden aus.</translation>
 </message>
 <message>
     <source>ReallyWantToContinueMsg</source>
-    <translation>Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?</translation>
+    <translation>Sie haben ungespeicherte Ergebnisse. Möchten Sie wirklich fortfahren?</translation>
 </message>
 <message>
     <source>NoScannableFileMsg</source>
-    <translation>Les dossiers sélectionnés ne continnent pas de fichiers valides.</translation>
+    <translation>Der ausgewählte Ordner enthält keine scannbare Dateien.</translation>
 </message>
 <message>
     <source>ProblemsDuringProcessingMsg</source>
-    <translation>Des problèmes ont été rencontrés lors du traitement de certains fichiers. La nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers n'ont pas été retirés des résultats.</translation>
+    <translation>Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Grund der Probleme ist unten in der Tabelle beschrieben.</translation>
 </message>
 <message>
     <source>TypeFilterMsg</source>
-    <translation>Entrer le filtre que vous voulez appliquer sur vos résultats.</translation>
+    <translation>Geben Sie den Filter ein, den Sie anwenden möchten. Siehe Hilfe für Details.</translation>
 </message>
 <message>
     <source>NothingToClearMsg</source>
-    <translation>Il n'y a rien à vider.</translation>
+    <translation>Nichts zu löschen.</translation>
 </message>
 <message>
     <source>ClearIgnoreListConfirmMsg</source>
-    <translation>Voulez-vous vider la liste de fichiers ignorés des {} items qu'elle contient?</translation>
+    <translation>Möchten Sie wirklich alle {} Einträge aus der Ignorier-Liste löschen?</translation>
 </message>
 <message>
     <source>IgnoreListClearedMsg</source>
-    <translation>La liste de doublons ignorés a été vidée.</translation>
+    <translation>Ignorier-Liste geleert.</translation>
 </message>
 <message>
     <source>SendToTrashConfirmMsg</source>
-    <translation>{} fichiers seront envoyés à la corbeille. Continuer?</translation>
+    <translation>{} Dateien werden in den Mülleimer zu verschoben. Fortfahren?</translation>
 </message>
 <message>
     <source>HardlinkConfirmMsg</source>
-    <translation>{} fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?</translation>
+    <translation>{} Dateien werden gelöscht und mit physikalischen Verknüpfungen ersetzt. Fortfahren?</translation>
 </message>
 <message>
     <source>SelectResultToSaveMsg</source>
-    <translation>Sélectionnez un fichier résultats dans lequel sauvegarder</translation>
+    <translation>Datei zum Speichern der Ergebnisliste auswählen.</translation>
 </message>
 <message>
     <source>NeedsToRestartToApplyLangMsg</source>
-    <translation>dupeGuru doit redémarrer pour appliquer le changement de langue.</translation>
+    <translation>dupeGuru muss neustarten, um die Sprachänderung durchzuführen.</translation>
 </message>
 <message>
     <source>ClearPictureCacheConfirmMsg</source>
-    <translation>Voulez-vous vraiment vider la cache de vos analyses précédentes?</translation>
+    <translation>Möchten Sie wirklich alle zwischengespeicherten Bildanalysen entfernen?</translation>
 </message>
 <message>
     <source>PictureCacheClearedMsg</source>
-    <translation>La cache des analyses précédentes a été vidée.</translation>
+    <translation>Bildzwischenspeicher geleert.</translation>
 </message>
 </context>
 </TS>

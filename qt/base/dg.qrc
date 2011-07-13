@@ -3,6 +3,8 @@
     <file alias="en.qm">../lang/en.qm</file>
     <file alias="fr.qm">../lang/fr.qm</file>
     <file alias="qt_fr.qm">../lang/qt_fr.qm</file>
+    <file alias="de.qm">../lang/de.qm</file>
+    <file alias="qt_de.qm">../lang/qt_de.qm</file>
     <file alias="logo_pe">../../images/dgpe_logo_32.png</file>
     <file alias="logo_pe_big">../../images/dgpe_logo_128.png</file>
     <file alias="logo_me">../../images/dgme_logo_32.png</file>
