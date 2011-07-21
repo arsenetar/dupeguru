@@ -46,6 +46,8 @@ OS X prerequisites
 - pluginbuilder 1.0.1 (http://bitbucket.org/hsoft/pluginbuilder)
 - appscript 1.0.0 for ME and PE (http://appscript.sourceforge.net/)
 
+dupeGuru can be built with XCode 4, but there's gotchas, see below.
+
 Windows prerequisites
 ---------------------
 
@@ -102,8 +104,12 @@ same Python version you build dupeGuru with.
 Another one on OS X: I wouldn't use macports/fink/whatever. Whenever I tried using those, I always 
 ended up with problems.
 
-Also, I don't know yet if it's possible to compile dupeGuru with XCode 4, I haven't tried it yet.
-It's safer to use XCode 3.x. However, I don't see why it wouldn't work, so it very well might work.
+dupeGuru can be built with XCode 4 (until support for 10.5 is dropped, xcode 3 and xcode 4 projects
+have to be maintained in parallel though). You build it through `build.py`, like you'd normally do
+but for dupeGuru PE, make sure that you installed the latest version of macholib because there was a
+10.7 related bug that was fixed recently. Right now, the fix hasn't even been released yet so you 
+have to install directly from the repo ( http://bitbucket.org/ronaldoussoren/macholib ). The fix
+in question is at http://bitbucket.org/ronaldoussoren/macholib/changeset/4ab0de0f5b60
 
 Whenever you have a problem, always double-check that you're running the correct python version. 
 You'll probably have to tweak your $PATH.

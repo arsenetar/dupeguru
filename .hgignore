@@ -8,6 +8,8 @@ run.py
 *.pbxuser
 *.tm_build_errors
 *.pyd
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcuserdata
 conf.json
 build
 dist
