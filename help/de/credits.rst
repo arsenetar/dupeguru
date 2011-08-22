@@ -8,6 +8,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 | **Jérôme Cantin, Icon designer**
 | Icons in dupeGuru are from him
 
+| **Gregor Tätzner, deutsche Übersetzung**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 

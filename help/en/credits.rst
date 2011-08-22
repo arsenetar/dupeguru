@@ -8,6 +8,8 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 | **Jérôme Cantin, Icon designer**
 | Icons in dupeGuru are from him
 
+| **Gregor Tätzner, German localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 
