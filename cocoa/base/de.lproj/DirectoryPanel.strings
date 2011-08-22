@@ -17,7 +17,7 @@
 "57.title" = "Ausgeschlossen";
 
 /* Class = "NSTextFieldCell"; title = "Select folders to scan and press \"Scan\"."; ObjectID = "71"; */
-"71.title" = "Wähle Ordner zum Durchsuchen und drücke \"Scan\".";
+"71.title" = "Zu scannende Ordner auswählen und \"Scan\" drücken.";
 
 /* Class = "NSButtonCell"; title = "Load Results"; ObjectID = "73"; */
 "73.title" = "Lade Ergebnisse";

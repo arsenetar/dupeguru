@@ -102,7 +102,7 @@
 
 <message>
     <source>Removing dead tracks from your iTunes Library</source>
-    <translation>Entfernung toter Stücke aus der iTunes Bibliothek.</translation>
+    <translation>Entferne tote Stücke aus Ihrer iTunes Bibliothek.</translation>
 </message>
 <message>
     <source>Scanning the iTunes Library</source>
@@ -169,7 +169,7 @@
 </message>
 <message>
     <source>Custom Command</source>
-    <translation>Persönlicher Befehl</translation>
+    <translation>Eigener Befehl</translation>
 </message>
 <message>
     <source>Operation Complete</source>
@@ -443,7 +443,7 @@
 </message>
 <message>
     <source>Can mix file kind</source>
-    <translation>Vergleiche mit unterschiedlichen Dateitypen</translation>
+    <translation>Dateitypen dürfen gemischt werden</translation>
 </message>
 <message>
     <source>Use regular expressions when filtering</source>
@@ -665,7 +665,7 @@
     <source>ExtraFairwarePromptMsg</source>
     <translation>Scheinbar haben Sie eine Menge Duplikate gefunden. Schön! Ich muss Sie jedoch daran erinnern das Spenden gewünscht werden, wenn noch nicht alle Arbeitsstunden bezahlt wurden.
 
-Sie denken vielleicht &quot;aber ich nutze dieses Programm doch nur einmal, da brauche ich nicht zu spenden&quot;. Das Problem ist, das die meisten Menschen dupeGuru nur sehr selten nutzen. Wenn jeder so denkt kann die Entwicklung von dupeGuru nicht finanziert werden. Aufgrund dieser, dem Wesen von dupeGuru innenliegenden, Tendenz muss ich hier auf Unterstützung bestehen.  
+Sie denken vielleicht &quot;aber ich nutze dieses Programm doch nur einmal, da brauche ich nicht zu spenden&quot;. Das Problem ist, das die meisten Menschen dupeGuru nur sehr selten nutzen. Wenn jeder so denkt kann die Entwicklung von dupeGuru nicht finanziert werden. Aufgrund dieser, dem Wesen von dupeGuru innenliegenden Eigenschaft, muss ich hier auf Ihre Unterstützung bestehen.  
 
 Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung entweder ignorieren oder mir eine Nachricht an hsoft@hardcoded.net schicken, damit ich ihnen einen Schlüssel gebe um diesen Hinweis zu entfernen.</translation>
 </message>
@@ -683,7 +683,7 @@ Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung 
 <name>message</name>
 <message>
     <source>SelectFolderToScanMsg</source>
-    <translation>Wähle Ordner zum Durchsuchen und drücke &quot;Scan&quot;.</translation>
+    <translation>Zu scannende Ordner auswählen und &quot;Scan&quot; drücken.</translation>
 </message>
 <message>
     <source>TaskHangingMsg</source>

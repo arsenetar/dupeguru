@@ -36,7 +36,7 @@
 "41.title" = "Wortgewichtung";
 
 /* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "42"; */
-"42.title" = "Vergleiche mit unterschiedlichen Dateitypen";
+"42.title" = "Dateitypen dürfen gemischt werden";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "45"; */
 "45.title" = "Voreinstellungen";

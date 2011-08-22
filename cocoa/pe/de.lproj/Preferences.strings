@@ -12,7 +12,7 @@
 "20.title" = "Filter hardness:";
 
 /* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "21"; */
-"21.title" = "Vergleiche mit unterschiedlichen Dateitypen";
+"21.title" = "Dateitypen dürfen gemischt werden";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "24"; */
 "24.title" = "Voreinstellungen";
