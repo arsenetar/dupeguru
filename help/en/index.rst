@@ -3,15 +3,15 @@
 
 .. only:: edition_se
 
-    This document is also available in `french <http://www.hardcoded.net/dupeguru/help/fr/>`__.
+    This document is also available in `french <http://www.hardcoded.net/dupeguru/help/fr/>`__ and `german <http://www.hardcoded.net/dupeguru/help/de/>`__.
 
 .. only:: edition_me
 
-    This document is also available in `french <http://www.hardcoded.net/dupeguru_me/help/fr/>`__.
+    This document is also available in `french <http://www.hardcoded.net/dupeguru_me/help/fr/>`__ and `german <http://www.hardcoded.net/dupeguru_me/help/de/>`__.
 
 .. only:: edition_pe
 
-    This document is also available in `french <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__.
+    This document is also available in `french <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__ and `german <http://www.hardcoded.net/dupeguru_pe/help/de/>`__.
 
 .. only:: edition_se or edition_me
 
