@@ -8,5 +8,5 @@ Homepage: http://www.hardcoded.net
 
 Package: dupeguru-me
 Architecture: any
-Depends: python3.1
+Depends: python3.1, libqtgui4
 Description: dupeGuru Music Edition
