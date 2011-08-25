@@ -168,6 +168,8 @@
 		CE80DB880FC1951C0086DCA6 /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultWindow.h; path = ../base/ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE80DB890FC1951C0086DCA6 /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultWindow.m; path = ../base/ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE848A1809DD85810004CB44 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+		CE8D43CB1406ADBA00AAF8CF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/core.strings; sourceTree = SOURCE_ROOT; };
+		CE8D43CC1406ADBA00AAF8CF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE958659112C516400F95FD2 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE95865C112C516400F95FD2 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE95865D112C516400F95FD2 /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
@@ -647,6 +649,7 @@
 			children = (
 				CE0533AA12E5DA6A0029EF25 /* en */,
 				CE0533AC12E5DA790029EF25 /* fr */,
+				CE8D43CC1406ADBA00AAF8CF /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
@@ -676,6 +679,7 @@
 			children = (
 				CE4527AB12E5F6E700005A15 /* en */,
 				CE4527B012E5F72600005A15 /* fr */,
+				CE8D43CB1406ADBA00AAF8CF /* de */,
 			);
 			name = core.strings;
 			sourceTree = SOURCE_ROOT;
