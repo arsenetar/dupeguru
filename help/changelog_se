@@ -1,3 +1,7 @@
+=== 3.1.2 (2011-08-25)
+
+* Fixed a bug preventing the Folders scan from working. (#172)
+
 === 3.1.1 (2011-08-24)
 
 * Added German localization by Gregor Tätzner.
