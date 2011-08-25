@@ -45,7 +45,7 @@ class Directories(DirectoriesBase):
         if path[:2] == Path('/Users') and path[3:] in self.HOME_PATH_TO_EXCLUDE:
             return DirectoryState.Excluded
     
-    def _get_folders(self, from_folder):
+    def _get_folders(self, from_folder, j):
         # We don't want to scan bundle's subfolder even in Folders mode. Bundle's integrity has to
         # stay intact.
         if is_bundle(str(from_folder.path)):
@@ -56,7 +56,7 @@ class Directories(DirectoriesBase):
                 yield from_folder
             return
         else:
-            for folder in DirectoriesBase._get_folders(self, from_folder):
+            for folder in DirectoriesBase._get_folders(self, from_folder, j):
                 yield folder
     
     @staticmethod
