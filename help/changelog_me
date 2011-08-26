@@ -1,3 +1,13 @@
+=== 6.0.2 (2011-08-26)
+
+* Added German localization by Gregor Tätzner.
+* Improved OS X Lion compatibility. [Mac OS X]
+* Made the file collection phase cancellable. (#168)
+* Fixed glitch in folder window upon selecting a folder state. [Windows, Linux] (#165)
+* Fixed a text coloring glitch in the results. (#156)
+* Fixed glitch in the sorting feature of the Folder column. (#161)
+* Make sure that saved results have the ".dupeguru" extension. [Linux] (#157)
+
 === 6.0.1 (2011-03-18)
 
 * Fixed crash after removing marked dupes. (#140)
