@@ -89,7 +89,7 @@ class Directories(directories.Directories):
         except directories.InvalidPathError:
             self.iphoto_libpath = None
     
-    def _get_files(self, from_path):
+    def _get_files(self, from_path, j):
         if from_path == IPHOTO_PATH:
             if self.iphoto_libpath is None:
                 return []
