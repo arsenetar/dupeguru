@@ -100,6 +100,7 @@
 		CE4526F112E5F55F00005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE4526F312E5F57000005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
+		CE50A2CB1409769700AD9080 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../../cocoalib/de.lproj/FairwareReminder.xib; sourceTree = SOURCE_ROOT; };
 		CE647E541173024A006D28BA /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
 		CE647E551173024A006D28BA /* ProblemDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProblemDialog.m; path = ../base/ProblemDialog.m; sourceTree = SOURCE_ROOT; };
 		CE647E561173024A006D28BA /* PyProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyProblemDialog.h; path = ../base/PyProblemDialog.h; sourceTree = SOURCE_ROOT; };
@@ -605,6 +606,7 @@
 			children = (
 				CE79638512536C94008D405B /* en */,
 				CE05341312E5DC260029EF25 /* fr */,
+				CE50A2CB1409769700AD9080 /* de */,
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
