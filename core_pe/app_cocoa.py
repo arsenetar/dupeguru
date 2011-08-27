@@ -99,7 +99,7 @@ class Directories(directories.Directories):
                 photo.is_ref = is_ref
             return photos
         else:
-            return directories.Directories._get_files(self, from_path)
+            return directories.Directories._get_files(self, from_path, j)
     
     @staticmethod
     def get_subfolders(path):
