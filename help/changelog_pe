@@ -1,3 +1,10 @@
+=== 2.2.2 (2011-08-27)
+
+* Added German localization by Gregor Tätzner.
+* Improved OS X Lion compatibility. [Mac OS X]
+* Made the file collection phase cancellable. (#168)
+* Fixed glitch in folder window upon selecting a folder state. [Windows, Linux] (#165)
+
 === 2.2.1 (2011-06-15)
 
 * Brought back the filter hardness label which disappeared in 2.2.0. [Mac OS X] (#164)
