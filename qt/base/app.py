@@ -83,7 +83,7 @@ class DupeGuru(DupeGuruBase, QObject):
         
         self.reg = Registration(self)
         self.set_registration(self.prefs.registration_code, self.prefs.registration_email)
-        if not self.registered and self.unpaid_hours >= 1:
+        if self.should_show_fairware_reminder:
             # The timer scheme is because if the nag is not shown before the application is 
             # completely initialized, the nag will be shown before the app shows up in the task bar
             # In some circumstances, the nag is hidden by other window, which may make the user think
