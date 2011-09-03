@@ -85,6 +85,7 @@ class PreferencesDialogBase(QDialog):
         self.languageComboBox.addItem(tr("English"))
         self.languageComboBox.addItem(tr("French"))
         self.languageComboBox.addItem(tr("German"))
+        self.languageComboBox.addItem(tr("Chinese (Simplified)"))
         self.widgetsVLayout.addWidget(self.languageComboBox)
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
@@ -151,6 +152,7 @@ class PreferencesDialogBase(QDialog):
         langindex = {
             'fr': 1,
             'de': 2,
+            'zh': 3
         }.get(self.app.prefs.language, 0)
         self.languageComboBox.setCurrentIndex(langindex)
         self._load(prefs, setchecked)
@@ -166,7 +168,7 @@ class PreferencesDialogBase(QDialog):
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
-        langs = ['en', 'fr', 'de']
+        langs = ['en', 'fr', 'de', 'zh']
         lang = langs[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in langs:

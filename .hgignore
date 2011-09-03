@@ -23,5 +23,7 @@ cocoa/*/de.lproj/*.xib
 qt/base/*_rc.py
 qt/lang/fr.qm
 qt/lang/en.qm
+qt/lang/de.qm
+qt/lang/zh.qm
 help/*/conf.py
 help/*/changelog.rst
