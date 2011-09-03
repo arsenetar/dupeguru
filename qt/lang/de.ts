@@ -558,6 +558,10 @@
     <translation>Deutsch</translation>
 </message>
 <message>
+    <source>Chinese (Simplified)</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Debug mode (restart required)</source>
     <translation>Debug Modus (Neustart nötig)</translation>
 </message>

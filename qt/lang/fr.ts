@@ -558,6 +558,10 @@
     <translation>Allemand</translation>
 </message>
 <message>
+    <source>Chinese (Simplified)</source>
+    <translation>Chinois (Simplifié)</translation>
+</message>
+<message>
     <source>Debug mode (restart required)</source>
     <translation>Mode de déboguage (redémarrage requis)</translation>
 </message>

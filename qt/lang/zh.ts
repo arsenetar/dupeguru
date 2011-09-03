@@ -558,6 +558,10 @@
     <translation>德语</translation>
 </message>
 <message>
+    <source>Chinese (Simplified)</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Debug mode (restart required)</source>
     <translation>调试模式 (需要重新启动)</translation>
 </message>
