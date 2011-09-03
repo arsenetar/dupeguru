@@ -10,6 +10,8 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Gregor Tätzner, German localization**
 
+| **Eric Dee, Chinese localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 

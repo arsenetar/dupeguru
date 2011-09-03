@@ -10,6 +10,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Gregor Tätzner, deutsche Übersetzung**
 
+| **Eric Dee, chinesische Übersetzung**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 
