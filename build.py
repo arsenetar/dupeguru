@@ -17,7 +17,7 @@ from distutils.extension import Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, build_all_qt_locs, get_xcode_version)
+    get_module_version, build_all_cocoa_locs, build_all_qt_locs)
 
 def parse_args():
     usage = "usage: %prog [options]"
@@ -61,11 +61,7 @@ def build_cocoa(edition, dev):
     app_version = get_module_version('core_{}'.format(edition))
     filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
     print("Building the XCode project")
-    args = []
-    if get_xcode_version().startswith('4'):
-        args.append('-project dupeguru_xcode4.xcodeproj')
-    else:
-        args.append('-project dupeguru.xcodeproj')
+    args = ['-project dupeguru.xcodeproj']
     if dev:
         args.append('-configuration dev')
     else:

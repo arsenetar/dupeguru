@@ -4,9 +4,6 @@ syntax: glob
 run.py
 *.pyc
 *.so
-*.mode1v3
-*.pbxuser
-*.tm_build_errors
 *.pyd
 *.xcodeproj/xcuserdata
 *.xcodeproj/project.xcworkspace/xcuserdata
