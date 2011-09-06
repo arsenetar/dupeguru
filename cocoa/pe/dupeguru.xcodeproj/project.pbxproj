@@ -131,6 +131,18 @@
 		CE60180712DF3EA900236FDC /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
 		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CE6044EB0FE6796200B71262 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = ../base/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
+		CE653CEB14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/about.xib; sourceTree = "<group>"; };
+		CE653CEC14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
+		CE653CED14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
+		CE653CF214169F2C0058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/core.strings; sourceTree = "<group>"; };
+		CE653CF314169F2C0058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE653CF61416A0140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
+		CE653CF71416A0140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CE653CFA1416A0260058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
+		CE653CFB1416A0260058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ExtraFairwareReminder.xib; sourceTree = "<group>"; };
+		CE653CFC1416A0260058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CE653CFD1416A0260058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
+		CE653CFE1416A0260058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
@@ -495,6 +507,7 @@
 				en,
 				fr,
 				de,
+				zh_CN,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -583,6 +596,7 @@
 				CE05339412E5DA350029EF25 /* en */,
 				CE05339F12E5DA420029EF25 /* fr */,
 				CE78759D13CDFA7100F23771 /* de */,
+				CE653CFA1416A0260058A022 /* zh_CN */,
 			);
 			name = DirectoryPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -593,6 +607,7 @@
 				CE05339612E5DA350029EF25 /* en */,
 				CE0533A012E5DA420029EF25 /* fr */,
 				CE78759F13CDFA7100F23771 /* de */,
+				CE653CFC1416A0260058A022 /* zh_CN */,
 			);
 			name = MainMenu.xib;
 			sourceTree = SOURCE_ROOT;
@@ -603,6 +618,7 @@
 				CE05339812E5DA350029EF25 /* en */,
 				CE0533A112E5DA420029EF25 /* fr */,
 				CE7875A013CDFA7100F23771 /* de */,
+				CE653CFD1416A0260058A022 /* zh_CN */,
 			);
 			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
@@ -613,6 +629,7 @@
 				CE05339A12E5DA350029EF25 /* en */,
 				CE0533A212E5DA420029EF25 /* fr */,
 				CE7875A113CDFA7100F23771 /* de */,
+				CE653CFE1416A0260058A022 /* zh_CN */,
 			);
 			name = ResultWindow.xib;
 			sourceTree = SOURCE_ROOT;
@@ -623,6 +640,7 @@
 				CE0533A412E5DA4D0029EF25 /* en */,
 				CE0533AD12E5DAAD0029EF25 /* fr */,
 				CE7875A513CDFAB900F23771 /* de */,
+				CE653CF61416A0140058A022 /* zh_CN */,
 			);
 			name = DetailsPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -633,6 +651,7 @@
 				CE0533A612E5DA4D0029EF25 /* en */,
 				CE0533AE12E5DAAD0029EF25 /* fr */,
 				CE7875A613CDFAB900F23771 /* de */,
+				CE653CF71416A0140058A022 /* zh_CN */,
 			);
 			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;
@@ -643,6 +662,7 @@
 				CE0533AA12E5DA6A0029EF25 /* en */,
 				CE0533AC12E5DA790029EF25 /* fr */,
 				CE7358071406ABF700F3F6DA /* de */,
+				CE653CF314169F2C0058A022 /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
@@ -653,6 +673,7 @@
 				CE1EB60012537FB90034AABB /* en */,
 				CE0533B712E5DC040029EF25 /* fr */,
 				CECB2ACD13D867C00081E295 /* de */,
+				CE653CED14169F140058A022 /* zh_CN */,
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
@@ -664,6 +685,7 @@
 				CE2A29F613213BFB005899AC /* en */,
 				CEE660B7132253910036DB04 /* fr */,
 				CE78759E13CDFA7100F23771 /* de */,
+				CE653CFB1416A0260058A022 /* zh_CN */,
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;
@@ -674,6 +696,7 @@
 				CE4527AB12E5F6E700005A15 /* en */,
 				CE4527B012E5F72600005A15 /* fr */,
 				CE7358061406ABF700F3F6DA /* de */,
+				CE653CF214169F2C0058A022 /* zh_CN */,
 			);
 			name = core.strings;
 			sourceTree = SOURCE_ROOT;
@@ -684,6 +707,7 @@
 				CECB2AC213D867AD0081E295 /* en */,
 				CECB2AC713D867B70081E295 /* fr */,
 				CECB2ACB13D867C00081E295 /* de */,
+				CE653CEB14169F140058A022 /* zh_CN */,
 			);
 			name = about.xib;
 			sourceTree = "<group>";
@@ -694,6 +718,7 @@
 				CECB2AC413D867AD0081E295 /* en */,
 				CECB2AC813D867B70081E295 /* fr */,
 				CECB2ACC13D867C00081E295 /* de */,
+				CE653CEC14169F140058A022 /* zh_CN */,
 			);
 			name = ErrorReportWindow.xib;
 			sourceTree = "<group>";

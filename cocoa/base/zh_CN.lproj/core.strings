@@ -1,0 +1,31 @@
+"Collecting files to scan" = "收集文件以备扫描";
+"%s (%d discarded)" = "%s (%d 无效)";
+"Scanning for duplicates" = "重复文件扫描中";
+"Loading" = "载入中";
+"Moving" = "移动中";
+"Copying" = "复制中";
+"Sending to Trash" = "移到垃圾桶";
+"0 matches found" = "未找到匹配项";
+"%d matches found" = "找到 %d 个匹配项";
+"Read size of %d/%d files" = "读取 %d/%d 文件大小";
+"Grouped %d/%d matches" = "%d/%d 匹配项组合在一起";
+"%d / %d (%s / %s) duplicates marked." = "已标记 %d / %d (%s / %s) 个重复项。";
+" filter: %s" = " 筛选: %s";
+"Read metadata of %d/%d files" = "读取 %d/%d 文件元数据";
+"Removing false matches" = "移除错误匹配项";
+"Processed %d/%d matches against the ignore list" = "在忽略列表之外已处理 %d/%d 匹配项";
+"Doing group prioritization" = "优化分组";
+
+"Continue" = "继续";
+"Continue ({})" = "继续 ({})";
+
+"Analyzed %d/%d pictures" = "分析 %d/%d 图像";
+"Preparing for matching" = "准备进行匹配";
+"Performed %d/%d chunk matches" = "Performed %d/%d chunk matches";
+"Verified %d/%d matches" = "验证 %d/%d 匹配项";
+
+"Removing dead tracks from your iTunes Library" = "从你的iTunes库中移除无效的音轨";
+"Scanning the iTunes Library" = "正在扫描iTunes库";
+
+"Probing iPhoto. Don't touch it during the operation!" = "正在对iPhoto进行搜索.请在此过程中不要触碰任何按键!";
+"Sending dupes to the Trash" = "将重复文件移到垃圾桶";

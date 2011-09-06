@@ -1,0 +1,78 @@
+
+/* Class = "NSWindow"; title = "dupeGuru Preferences"; ObjectID = "52"; */
+"52.title" = "dupeGuru Preferences";
+
+/* Class = "NSTextFieldCell"; title = "More results"; ObjectID = "74"; */
+"74.title" = "More results";
+
+/* Class = "NSTextFieldCell"; title = "Fewer results"; ObjectID = "75"; */
+"75.title" = "Fewer results";
+
+/* Class = "NSTextFieldCell"; title = "Filter hardness:"; ObjectID = "76"; */
+"76.title" = "Filter hardness:";
+
+/* Class = "NSTextFieldCell"; title = "Scan type:"; ObjectID = "77"; */
+"77.title" = "Scan type:";
+
+/* Class = "NSMenuItem"; title = "Content"; ObjectID = "80"; */
+"80.title" = "Content";
+
+/* Class = "NSMenuItem"; title = "Filename"; ObjectID = "81"; */
+"81.title" = "文件名称";
+
+/* Class = "NSButtonCell"; title = "Word weighting"; ObjectID = "82"; */
+"82.title" = "词语匹配度 (Word weighting)";
+
+/* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "83"; */
+"83.title" = "混合文件类型";
+
+/* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "86"; */
+"86.title" = "重置为默认值";
+
+/* Class = "NSButtonCell"; title = "Match similar words"; ObjectID = "87"; */
+"87.title" = "匹配近似词语";
+
+/* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "88"; */
+"88.title" = "复制和移动:";
+
+/* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "91"; */
+"91.title" = "重建相对路径";
+
+/* Class = "NSMenuItem"; title = "Recreate absolute path"; ObjectID = "92"; */
+"92.title" = "重建绝对路径";
+
+/* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "93"; */
+"93.title" = "目标位置";
+
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "94"; */
+"94.title" = "Automatically check for updates";
+
+/* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "96"; */
+"96.title" = "删除或移动时一并移除空文件夹";
+
+/* Class = "NSButtonCell"; title = "Ignore files smaller than:"; ObjectID = "97"; */
+"97.title" = "忽略文件当其小于:";
+
+/* Class = "NSTextFieldCell"; title = "KB"; ObjectID = "100"; */
+"100.title" = "KB";
+
+/* Class = "NSTabViewItem"; label = "Basic"; ObjectID = "124"; */
+"124.label" = "Basic";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "125"; */
+"125.label" = "Advanced";
+
+/* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "129"; */
+"129.title" = "筛选时使用常规表达式";
+
+/* Class = "NSTextFieldCell"; title = "Custom command (arguments: %d for dupe, %r for ref):"; ObjectID = "134"; */
+"134.title" = "Custom command (arguments: %d for dupe, %r for ref):";
+
+/* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "142"; */
+"142.title" = "忽略重复文件当其硬连接到相同文件时";
+
+/* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "146"; */
+"146.title" = "调试模式 (需要重新启动)";
+
+/* Class = "NSMenuItem"; title = "Folders"; ObjectID = "149"; */
+"149.title" = "文件夹";

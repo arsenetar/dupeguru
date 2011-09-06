@@ -1,0 +1,23 @@
+/* Class = "NSTableColumn"; headerCell.title = "State"; ObjectID = "13"; */
+"13.headerCell.title" = "说明";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "15"; */
+"15.headerCell.title" = "名称";
+
+/* Class = "NSButtonCell"; title = "Scan"; ObjectID = "48"; */
+"48.title" = "扫描";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "55"; */
+"55.title" = "正常";
+
+/* Class = "NSMenuItem"; title = "Reference"; ObjectID = "56"; */
+"56.title" = "参照文件";
+
+/* Class = "NSMenuItem"; title = "Excluded"; ObjectID = "57"; */
+"57.title" = "不包含";
+
+/* Class = "NSTextFieldCell"; title = "Select folders to scan and press \"Scan\"."; ObjectID = "71"; */
+"71.title" = "Select folders to scan and press \"Scan\".";
+
+/* Class = "NSButtonCell"; title = "Load Results"; ObjectID = "73"; */
+"73.title" = "载入结果";
