@@ -68,14 +68,14 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Filter"; ObjectID = "42"; */
 "42.placeholderString" = "Filtre";
 
-/* Class = "NSSegmentedCell"; 44.labels[0] = "Details"; ObjectID = "44"; */
-"44.labels[0]" = "Détails";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[0] = "Details"; ObjectID = "44"; */
+"44.ibShadowedLabels[0]" = "Détails";
 
-/* Class = "NSSegmentedCell"; 44.labels[1] = "Dupes Only"; ObjectID = "44"; */
-"44.labels[1]" = "Sans réf.";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[1] = "Dupes Only"; ObjectID = "44"; */
+"44.ibShadowedLabels[1]" = "Sans réf.";
 
-/* Class = "NSSegmentedCell"; 44.labels[2] = "Delta"; ObjectID = "44"; */
-"44.labels[2]" = "Delta";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[2] = "Delta"; ObjectID = "44"; */
+"44.ibShadowedLabels[2]" = "Delta";
 
 /* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "68"; */
 "68.title" = "Ajouter sélectionnés à la liste de fichiers ignorés";

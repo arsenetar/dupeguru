@@ -68,14 +68,14 @@
 /* Class = "NSSearchFieldCell"; placeholderString = "Filter"; ObjectID = "42"; */
 "42.placeholderString" = "Filter";
 
-/* Class = "NSSegmentedCell"; 44.labels[0] = "Details"; ObjectID = "44"; */
-"44.labels[0]" = "Details";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[0] = "Details"; ObjectID = "44"; */
+"44.ibShadowedLabels[0]" = "Details";
 
-/* Class = "NSSegmentedCell"; 44.labels[1] = "Dupes Only"; ObjectID = "44"; */
-"44.labels[1]" = "Dupes Only";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[1] = "Dupes Only"; ObjectID = "44"; */
+"44.ibShadowedLabels[1]" = "Dupes Only";
 
-/* Class = "NSSegmentedCell"; 44.labels[2] = "Delta"; ObjectID = "44"; */
-"44.labels[2]" = "Delta";
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[2] = "Delta"; ObjectID = "44"; */
+"44.ibShadowedLabels[2]" = "Delta";
 
 /* Class = "NSMenu"; title = "Menu"; ObjectID = "67"; */
 "67.title" = "Menu";
