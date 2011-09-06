@@ -43,6 +43,14 @@ http://www.hardcoded.net/licenses/bsd_license
 - (HSRecentFiles *)recentResults;
 - (NSMenu *)columnsMenu;
 
+/* Delegate */
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
+- (void)applicationWillBecomeActive:(NSNotification *)aNotification;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+- (void)applicationWillTerminate:(NSNotification *)aNotification;
+- (void)recentFileClicked:(NSString *)path;
+- (void)showExtraFairwareReminder:(NSNotification *)aNotification;
+
 /* Actions */
 - (IBAction)loadResults:(id)sender;
 - (IBAction)openWebsite:(id)sender;

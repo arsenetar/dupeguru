@@ -14,7 +14,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @class AppDelegateBase;
 
-@interface DirectoryPanel : NSWindowController
+@interface DirectoryPanel : NSWindowController <NSOpenSavePanelDelegate>
 {
     IBOutlet NSPopUpButton *addButtonPopUp;
     IBOutlet NSPopUpButton *loadRecentButtonPopUp;

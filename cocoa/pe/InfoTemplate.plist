@@ -13,7 +13,7 @@
 	<key>CFBundleIconFile</key>
 	<string>dupeguru</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.hardcoded_software.dupeguru_pe</string>
+	<string>com.hardcoded-software.dupeguru-pe</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
