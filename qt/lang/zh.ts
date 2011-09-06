@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="zh_CN">
 <!-- ******** Core ******** -->
@@ -39,7 +39,7 @@
 </message>
 <message>
     <source>%d matches found</source>
-    <translation>找到 %d 匹配项</translation>
+    <translation>找到 %d 个匹配项</translation>
 </message>
 <message>
     <source>Read size of %d/%d files</source>
@@ -51,7 +51,7 @@
 </message>
 <message>
     <source>%d / %d (%s / %s) duplicates marked.</source>
-    <translation>已标记 %d / %d (%s / %s) 重复项.</translation>
+    <translation>已标记 %d / %d (%s / %s) 个重复项。</translation>
 </message>
 <message>
     <source> filter: %s</source>
@@ -189,7 +189,7 @@
 </message>
 <message>
     <source>Reference</source>
-    <translation>引用</translation>
+    <translation>参照文件</translation>
 </message>
 <message>
     <source>Load Results...</source>
@@ -201,7 +201,7 @@
 </message>
 <message>
     <source>Add Folder...</source>
-    <translation>添加文件夹...</translation>
+    <translation>增加文件夹...</translation>
 </message>
 <message>
     <source>File</source>
@@ -313,7 +313,7 @@
 </message>
 <message>
     <source>Remove Marked from Results</source>
-    <translation>从结果中移除标记的文件</translation>
+    <translation>从结果中移除所标记的文件</translation>
 </message>
 <message>
     <source>Remove Selected from Results</source>
@@ -333,7 +333,7 @@
 </message>
 <message>
     <source>Open Containing Folder of Selected</source>
-    <translation>打开已选文件所在的文件夹</translation>
+    <translation>打开所选文件所在的文件夹</translation>
 </message>
 <message>
     <source>Rename Selected</source>
@@ -385,7 +385,7 @@
 </message>
 <message>
     <source>Columns</source>
-    <translation>列</translation>
+    <translation>显示列</translation>
 </message>
 <message>
     <source>Reset to Defaults</source>
@@ -435,11 +435,11 @@
 </message>
 <message>
     <source>Word weighting</source>
-    <translation>词语匹配权重</translation>
+    <translation>词语匹配度 (Word weighting)</translation>
 </message>
 <message>
     <source>Match similar words</source>
-    <translation>匹配相近词语</translation>
+    <translation>匹配近似词语</translation>
 </message>
 <message>
     <source>Can mix file kind</source>
@@ -451,7 +451,7 @@
 </message>
 <message>
     <source>Remove empty folders on delete or move</source>
-    <translation>删除或移动时同时移除空文件夹</translation>
+    <translation>删除或移动时一并移除空文件夹</translation>
 </message>
 <message>
     <source>Ignore files smaller than</source>
@@ -483,7 +483,7 @@
 </message>
 <message>
     <source>Custom Command (arguments: %d for dupe, %r for ref):</source>
-    <translation>自定义命令 (参数: %d 指重复文件, %r 指引用):</translation>
+    <translation type="unfinished"></translation>
 </message>
 <message>
     <source>Filename - Fields</source>
@@ -559,7 +559,11 @@
 </message>
 <message>
     <source>Chinese (Simplified)</source>
-    <translation type="unfinished"></translation>
+    <translation>简体中文</translation>
+</message>
+<message>
+    <source>Chinese (Traditional)</source>
+    <translation>繁体中文</translation>
 </message>
 <message>
     <source>Debug mode (restart required)</source>
@@ -592,11 +596,11 @@
 </message>
 <message>
     <source>Modification</source>
-    <translation>编辑</translation>
+    <translation>编辑日期</translation>
 </message>
 <message>
     <source>Match %</source>
-    <translation>匹配 %</translation>
+    <translation>匹配度 %</translation>
 </message>
 <message>
     <source>Words Used</source>
@@ -687,7 +691,7 @@
 <name>message</name>
 <message>
     <source>SelectFolderToScanMsg</source>
-    <translation>选择要扫描的文件夹，然后点击 &quot;扫描&quot;.</translation>
+    <translation>请选择要扫描的文件夹，然后点击 &quot;扫描&quot;。</translation>
 </message>
 <message>
     <source>TaskHangingMsg</source>
@@ -695,7 +699,7 @@
 </message>
 <message>
     <source>IgnoreConfirmMsg</source>
-    <translation>目前已选的 {} 匹配项将在后续的扫描中被忽略。继续吗?</translation>
+    <translation>目前已选的 {} 个匹配项将在后续的扫描中被忽略。继续吗?</translation>
 </message>
 <message>
     <source>SelectCopyOrMoveDestinationMsg</source>
@@ -719,11 +723,11 @@
 </message>
 <message>
     <source>ReallyWantToQuitMsg</source>
-    <translation>目前还有结果尚未保存，确定要退出吗?</translation>
+    <translation>您还没有保存扫描结果，确定要退出吗?</translation>
 </message>
 <message>
     <source>SelectFolderToAddMsg</source>
-    <translation>选择一个文件夹以加入到扫描列表中</translation>
+    <translation>请选择一个文件夹并加入到扫描列表中</translation>
 </message>
 <message>
     <source>SelectResultToLoadMsg</source>
@@ -767,7 +771,7 @@
 </message>
 <message>
     <source>SelectResultToSaveMsg</source>
-    <translation>选择一个文件将结果保存到</translation>
+    <translation>将结果保存为...</translation>
 </message>
 <message>
     <source>NeedsToRestartToApplyLangMsg</source>
