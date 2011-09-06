@@ -152,7 +152,7 @@ class PreferencesDialogBase(QDialog):
         langindex = {
             'fr': 1,
             'de': 2,
-            'zh': 3
+            'zh_CN': 3
         }.get(self.app.prefs.language, 0)
         self.languageComboBox.setCurrentIndex(langindex)
         self._load(prefs, setchecked)
@@ -168,7 +168,7 @@ class PreferencesDialogBase(QDialog):
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
-        langs = ['en', 'fr', 'de', 'zh']
+        langs = ['en', 'fr', 'de', 'zh_CN']
         lang = langs[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in langs:
