@@ -47,7 +47,7 @@ class DupeGuru(DupeGuruBase):
     
 
 def add_fake_files_to_directories(directories, files):
-    directories.get_files = lambda: iter(files)
+    directories.get_files = lambda j=None: iter(files)
     directories._dirs.append('this is just so Scan() doesnt return 3')
 
 class TestCaseDupeGuru:
@@ -496,5 +496,5 @@ class TestAppWithDirectoriesInTree:
         eq_(len(node), 3)
         subnode = node[0]
         eq_(subnode.state, 1)
-        self.dtree_gui.check_gui_calls(['refresh'])
+        self.dtree_gui.check_gui_calls(['refresh_states'])
     
