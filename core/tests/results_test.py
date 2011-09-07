@@ -1,6 +1,5 @@
 # Created By: Virgil Dupras
 # Created On: 2006/02/23
-# $Id$                                  
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
 # 
 # This software is licensed under the "BSD" License as described in the "LICENSE" file, 
@@ -12,41 +11,13 @@ import os.path as op
 
 from xml.etree import ElementTree as ET
 
-from hscommon.path import Path
 from hscommon.testutil import eq_
 from hscommon.util import first
 
-from . import engine_test, data
+from . import data
 from .. import engine
+from .base import NamedObject, GetTestGroups
 from ..results import Results
-
-class NamedObject(engine_test.NamedObject):
-    path = property(lambda x:Path('basepath') + x.name)
-    is_ref = False
-    
-    def __bool__(self):
-        return False #Make sure that operations are made correctly when the bool value of files is false.
-    
-    @property
-    def folder_path(self):
-        return self.path[:-1]
-    
-
-# Returns a group set that looks like that:
-# "foo bar" (1)
-#   "bar bleh" (1024)
-#   "foo bleh" (1)
-# "ibabtu" (1)
-#   "ibabtu" (1)
-def GetTestGroups():
-    objects = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("foo bleh"),NamedObject("ibabtu"),NamedObject("ibabtu")]
-    objects[1].size = 1024
-    matches = engine.getmatches(objects) #we should have 5 matches
-    groups = engine.get_groups(matches) #We should have 2 groups
-    for g in groups:
-        g.prioritize(lambda x:objects.index(x)) #We want the dupes to be in the same order as the list is
-    groups.sort(key=len, reverse=True) # We want the group with 3 members to be first.
-    return (objects,matches,groups)
 
 class TestCaseResultsEmpty:
     def setup_method(self, method):

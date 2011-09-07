@@ -16,35 +16,15 @@ from hscommon.path import Path
 import hscommon.conflict
 import hscommon.util
 from hscommon.testutil import CallLogger, eq_, log_calls
-from jobprogress.job import nulljob, Job, JobCancelled
+from jobprogress.job import Job
 
-from . import data
+from .base import DupeGuru
 from .results_test import GetTestGroups
 from .. import app, fs, engine
-from ..app import DupeGuru as DupeGuruBase
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
 from ..gui.result_table import ResultTable
 from ..scanner import ScanType
-
-class DupeGuru(DupeGuruBase):
-    JOB = nulljob
-    
-    def __init__(self):
-        DupeGuruBase.__init__(self, data, '/tmp')
-    
-    def _start_job(self, jobid, func, *args):
-        try:
-            func(self.JOB, *args)
-        except JobCancelled:
-            return
-    
-    def _get_default(self, key_name):
-        return None
-    
-    def _set_default(self, key_name, value):
-        pass
-    
 
 def add_fake_files_to_directories(directories, files):
     directories.get_files = lambda j=None: iter(files)
@@ -185,6 +165,7 @@ class TestCaseDupeGuru_clean_empty_dirs:
 
 class TestCaseDupeGuruWithResults:
     def pytest_funcarg__do_setup(self, request):
+        # XXX eventually, convert this to TestApp-based tests
         self.app = DupeGuru()
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups

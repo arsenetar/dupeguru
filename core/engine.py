@@ -223,7 +223,7 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
         j.add_progress(desc=tr("%d matches found") % len(result))
     return result
 
-class Group(object):
+class Group:
     #---Override
     def __init__(self):
         self._clear()

@@ -12,18 +12,9 @@ from jobprogress import job
 from hscommon.util import first
 from hscommon.testutil import eq_, log_calls
 
+from .base import NamedObject
 from .. import engine
 from ..engine import *
-
-class NamedObject:
-    def __init__(self, name="foobar", with_words=False, size=1):
-        self.name = name
-        self.size = size
-        self.md5partial = name
-        self.md5 = name
-        if with_words:
-            self.words = getwords(name)
-    
 
 no = NamedObject
 
