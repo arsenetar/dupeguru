@@ -42,8 +42,8 @@ class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
         self.name = name
         if folder is None:
-            folder = Path('basepath')
-        self._folder = folder
+            folder = 'basepath'
+        self._folder = Path(folder)
         self.size = size
         self.md5partial = name
         self.md5 = name

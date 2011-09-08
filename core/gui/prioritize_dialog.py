@@ -8,7 +8,7 @@
 
 from hscommon.gui.selectable_list import SelectableList
 
-from ..prioritize import KindCategory
+from ..prioritize import all_categories
 
 class CriterionCategoryList(SelectableList):
     def __init__(self, dialog):
@@ -22,29 +22,27 @@ class CriterionCategoryList(SelectableList):
 class PrioritizeDialog:
     def __init__(self, view, app):
         self.app = app
-        self.categories = [KindCategory(app.results)]
+        self.categories = [cat(app.results) for cat in all_categories()]
         self.category_list = CriterionCategoryList(self)
         self.criteria = []
         self.criteria_list = SelectableList()
         self.prioritizations = []
+        self.prioritization_list = SelectableList()
     
     #--- Private
     def _sort_key(self, dupe):
-        # Our sort key consists of a tuple of inverted bool values represented as ints. When a dupe
-        # fits a criteria, we want it at the top of the listm and thus we'll give it the value 0.
-        # When the dupe doesn't fit a criteria, we ant it at the bottom, and we give the value 1.
-        result = (crit.test_dupe(dupe) for crit in self.prioritizations)
-        return tuple((0 if value else 1) for value in result)
+        return tuple(crit.sort_key(dupe) for crit in self.prioritizations)
     
     #--- Public
     def select_category(self, category):
         self.criteria = category.criteria_list()
-        self.criteria_list[:] = [c.value for c in self.criteria]
+        self.criteria_list[:] = [c.display_value for c in self.criteria]
 
     def add_selected(self):
         # Add selected criteria in criteria_list to prioritization_list.
         crit = self.criteria[self.criteria_list.selected_index]
         self.prioritizations.append(crit)
+        self.prioritization_list[:] = [crit.display for crit in self.prioritizations]
     
     def perform_reprioritization(self):
         self.app.reprioritize_groups(self._sort_key)
