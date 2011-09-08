@@ -21,10 +21,30 @@ class CriterionCategoryList(SelectableList):
 
 class PrioritizeDialog:
     def __init__(self, view, app):
+        self.app = app
         self.categories = [KindCategory(app.results)]
         self.category_list = CriterionCategoryList(self)
-        self.criteria_list = []
+        self.criteria = []
+        self.criteria_list = SelectableList()
+        self.prioritizations = []
     
+    #--- Private
+    def _sort_key(self, dupe):
+        # Our sort key consists of a tuple of inverted bool values represented as ints. When a dupe
+        # fits a criteria, we want it at the top of the listm and thus we'll give it the value 0.
+        # When the dupe doesn't fit a criteria, we ant it at the bottom, and we give the value 1.
+        result = (crit.test_dupe(dupe) for crit in self.prioritizations)
+        return tuple((0 if value else 1) for value in result)
+    
+    #--- Public
     def select_category(self, category):
-        criteria = category.criteria_list()
-        self.criteria_list = [c.value for c in criteria]
+        self.criteria = category.criteria_list()
+        self.criteria_list[:] = [c.value for c in self.criteria]
+
+    def add_selected(self):
+        # Add selected criteria in criteria_list to prioritization_list.
+        crit = self.criteria[self.criteria_list.selected_index]
+        self.prioritizations.append(crit)
+    
+    def perform_reprioritization(self):
+        self.app.reprioritize_groups(self._sort_key)

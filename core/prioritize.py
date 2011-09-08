@@ -29,6 +29,9 @@ class Criterion:
         self.category = category
         self.value = value
     
+    def test_dupe(self, dupe):
+        return self.category._extract_value(dupe) == self.value
+    
     @property
     def display(self):
         return "{} ({})".format(self.category, self.value)

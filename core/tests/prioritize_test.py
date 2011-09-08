@@ -40,4 +40,14 @@ def app_normal_results():
 def test_kind_subcrit(app):
     # The subcriteria of the "Kind" criteria is a list of extensions contained in the dupes.
     app.select_pri_criterion("Kind")
-    eq_(app.pdialog.criteria_list, ['ext1', 'ext2'])
+    eq_(app.pdialog.criteria_list[:], ['ext1', 'ext2'])
+
+@with_app(app_normal_results)
+def test_perform_reprioritization(app):
+    # Just a simple test of the system as a whole.
+    # select a criterion, and perform re-prioritization and see if it worked.
+    app.select_pri_criterion("Kind")
+    app.pdialog.criteria_list.select([1]) # ext2
+    app.pdialog.add_selected()
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data[0], 'foo2.ext2')

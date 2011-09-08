@@ -353,6 +353,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.warning("dupeGuru Warning: %s" % str(e))
         return False
     
+    def reprioritize_groups(self, sort_key):
+        for group in self.results.groups:
+            group.prioritize(key_func=sort_key)
+        self._results_changed()
+    
     def reveal_selected(self):
         if self.selected_dupes:
             self._reveal_path(self.selected_dupes[0].path)
