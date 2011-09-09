@@ -76,9 +76,13 @@ def test_prilist_display(app):
     app.select_pri_criterion("Folder")
     app.pdialog.criteria_list.select([1]) # folder2
     app.pdialog.add_selected()
+    app.select_pri_criterion("Size")
+    app.pdialog.criteria_list.select([1]) # Lowest
+    app.pdialog.add_selected()
     expected = [
         "Kind (ext2)",
         "Folder (folder2)",
+        "Size (Lowest)",
     ]
     eq_(app.pdialog.prioritization_list[:], expected)
 

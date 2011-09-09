@@ -11,7 +11,7 @@ import sys
 from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
 from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, QInputDialog,
     QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView,
-    QStatusBar)
+    QStatusBar, QDialog)
 
 from hscommon.trans import tr, trmsg
 from hscommon.util import nonone
@@ -20,6 +20,7 @@ from qtlib.util import moveToScreenCenter
 from .results_model import ResultsModel, ResultsView
 from .stats_label import StatsLabel
 from .util import createActions
+from .prioritize_dialog import PrioritizeDialog
 
 class ResultWindow(QMainWindow):
     def __init__(self, app):
@@ -49,6 +50,7 @@ class ResultWindow(QMainWindow):
             ('actionMoveMarked', 'Ctrl+M', '', tr("Move Marked to..."), self.moveTriggered),
             ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
             ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
+            ('actionReprioritize', '', '', tr("Re-Prioritize..."), self.reprioritizeTriggered),
             ('actionRemoveSelected', 'Ctrl+Del', '', tr("Remove Selected from Results"), self.removeSelectedTriggered),
             ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered),
             ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected Reference"), self.makeReferenceTriggered),
@@ -95,6 +97,7 @@ class ResultWindow(QMainWindow):
         self.menuActions.addAction(self.actionMoveMarked)
         self.menuActions.addAction(self.actionCopyMarked)
         self.menuActions.addAction(self.actionRemoveMarked)
+        self.menuActions.addAction(self.actionReprioritize)
         self.menuActions.addSeparator()
         self.menuActions.addAction(self.actionRemoveSelected)
         self.menuActions.addAction(self.actionIgnoreSelected)
@@ -326,6 +329,12 @@ class ResultWindow(QMainWindow):
     
     def renameTriggered(self):
         self.resultsView.edit(self.resultsView.selectionModel().currentIndex())
+    
+    def reprioritizeTriggered(self):
+        dlg = PrioritizeDialog(self, self.app)
+        result = dlg.exec()
+        if result == QDialog.Accepted:
+            dlg.model.perform_reprioritization()
     
     def revealTriggered(self):
         self.app.reveal_selected()

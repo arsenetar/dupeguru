@@ -46,7 +46,7 @@ class Criterion:
     
     @property
     def display(self):
-        return "{} ({})".format(self.category.NAME, self.value)
+        return "{} ({})".format(self.category.NAME, self.display_value)
     
 
 class KindCategory(CriterionCategory):

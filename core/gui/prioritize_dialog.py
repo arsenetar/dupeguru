@@ -6,14 +6,14 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.gui.selectable_list import SelectableList
+from hscommon.gui.selectable_list import GUISelectableList
 
 from ..prioritize import all_categories
 
-class CriterionCategoryList(SelectableList):
+class CriterionCategoryList(GUISelectableList):
     def __init__(self, dialog):
         self.dialog = dialog
-        SelectableList.__init__(self, [c.NAME for c in dialog.categories])
+        GUISelectableList.__init__(self, [c.NAME for c in dialog.categories])
     
     def _update_selection(self):
         self.dialog.select_category(self.dialog.categories[self.selected_index])
@@ -25,9 +25,9 @@ class PrioritizeDialog:
         self.categories = [cat(app.results) for cat in all_categories()]
         self.category_list = CriterionCategoryList(self)
         self.criteria = []
-        self.criteria_list = SelectableList()
+        self.criteria_list = GUISelectableList()
         self.prioritizations = []
-        self.prioritization_list = SelectableList()
+        self.prioritization_list = GUISelectableList()
     
     #--- Private
     def _sort_key(self, dupe):
