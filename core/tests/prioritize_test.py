@@ -98,3 +98,14 @@ def test_size_reprioritization(app):
     app.pdialog.add_selected()
     app.pdialog.perform_reprioritization()
     eq_(app.rtable[0].data[0], 'foo2.ext2')
+
+@with_app(app_normal_results)
+def test_reorder_prioritizations(app):
+    app.add_pri_criterion("Kind", 0) # ext1
+    app.add_pri_criterion("Kind", 1) # ext2
+    app.pdialog.prioritization_list.move_indexes([1], 0)
+    expected = [
+        "Kind (ext2)",
+        "Kind (ext1)",
+    ]
+    eq_(app.pdialog.prioritization_list[:], expected)

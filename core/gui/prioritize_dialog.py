@@ -18,6 +18,19 @@ class CriterionCategoryList(GUISelectableList):
     def _update_selection(self):
         self.dialog.select_category(self.dialog.categories[self.selected_index])
 
+class PrioritizationList(GUISelectableList):
+    def __init__(self, dialog):
+        self.dialog = dialog
+        GUISelectableList.__init__(self)
+    
+    def move_indexes(self, indexes, dest_index):
+        indexes.sort()
+        prilist = self.dialog.prioritizations
+        selected = [prilist[i] for i in indexes]
+        for i in reversed(indexes):
+            del prilist[i]
+        prilist[dest_index:dest_index] = selected
+        self[:] = [crit.display for crit in prilist]
 
 class PrioritizeDialog:
     def __init__(self, view, app):
@@ -27,7 +40,7 @@ class PrioritizeDialog:
         self.criteria = []
         self.criteria_list = GUISelectableList()
         self.prioritizations = []
-        self.prioritization_list = GUISelectableList()
+        self.prioritization_list = PrioritizationList(self)
     
     #--- Private
     def _sort_key(self, dupe):

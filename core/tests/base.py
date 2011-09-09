@@ -101,3 +101,8 @@ class TestApp(TestAppBase):
         # maintainable.
         index = self.pdialog.category_list.index(name)
         self.pdialog.category_list.select(index)
+    
+    def add_pri_criterion(self, name, index):
+        self.select_pri_criterion("Kind")
+        self.pdialog.criteria_list.select([index])
+        self.pdialog.add_selected()
