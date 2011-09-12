@@ -23,6 +23,9 @@ class PrioritizationList(GUISelectableList):
         self.dialog = dialog
         GUISelectableList.__init__(self)
     
+    def _refresh_contents(self):
+        self[:] = [crit.display for crit in self.dialog.prioritizations]
+    
     def move_indexes(self, indexes, dest_index):
         indexes.sort()
         prilist = self.dialog.prioritizations
@@ -30,7 +33,13 @@ class PrioritizationList(GUISelectableList):
         for i in reversed(indexes):
             del prilist[i]
         prilist[dest_index:dest_index] = selected
-        self[:] = [crit.display for crit in prilist]
+        self._refresh_contents()
+    
+    def remove_selected(self):
+        prilist = self.dialog.prioritizations
+        for i in sorted(self.selected_indexes, reverse=True):
+            del prilist[i]
+        self._refresh_contents()
 
 class PrioritizeDialog:
     def __init__(self, view, app):
@@ -56,6 +65,9 @@ class PrioritizeDialog:
         crit = self.criteria[self.criteria_list.selected_index]
         self.prioritizations.append(crit)
         self.prioritization_list[:] = [crit.display for crit in self.prioritizations]
+    
+    def remove_selected(self):
+        self.prioritization_list.remove_selected()
     
     def perform_reprioritization(self):
         self.app.reprioritize_groups(self._sort_key)

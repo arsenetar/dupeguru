@@ -8,10 +8,11 @@
 
 from PyQt4.QtCore import Qt, QMimeData, QByteArray
 from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
-    QDialogButtonBox, QAbstractItemView)
+    QDialogButtonBox, QAbstractItemView, QLabel)
 
 from hscommon.trans import tr
 from qtlib.selectable_list import ComboboxModel, ListviewModel
+from qtlib.util import verticalSpacer
 from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 
 MIME_INDEXES = 'application/dupeguru.rowindexes'
@@ -60,16 +61,23 @@ class PrioritizeDialog(QDialog):
         self.prioritizationList = PrioritizationList(model=self.model.prioritization_list, view=self.prioritizationListView)
         
         self.addCriteriaButton.clicked.connect(self.model.add_selected)
+        self.removeCriteriaButton.clicked.connect(self.model.remove_selected)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
     def _setupUi(self):
         self.setWindowTitle(tr("Re-prioritize duplicates"))
-        self.resize(413, 323)
+        self.resize(700, 400)
         
         #widgets
+        msg = tr("Add criteria to the right box and click OK to send the dupes that correspond the "
+            "best to these criteria to their respective group's "
+            "reference position. Read the help file for more information.")
+        self.promptLabel = QLabel(msg)
+        self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
+        self.removeCriteriaButton = QPushButton("<--")
         self.addCriteriaButton = QPushButton("-->")
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
@@ -81,12 +89,18 @@ class PrioritizeDialog(QDialog):
         
         # layout
         self.mainLayout = QVBoxLayout(self)
+        self.mainLayout.addWidget(self.promptLabel)
         self.widgetsLayout = QHBoxLayout()
         self.leftWidgetsLayout = QVBoxLayout()
         self.leftWidgetsLayout.addWidget(self.categoryCombobox)
         self.leftWidgetsLayout.addWidget(self.criteriaListView)
         self.widgetsLayout.addLayout(self.leftWidgetsLayout)
-        self.widgetsLayout.addWidget(self.addCriteriaButton)
+        self.addRemoveButtonsLayout = QVBoxLayout()
+        self.addRemoveButtonsLayout.addItem(verticalSpacer())
+        self.addRemoveButtonsLayout.addWidget(self.removeCriteriaButton)
+        self.addRemoveButtonsLayout.addWidget(self.addCriteriaButton)
+        self.addRemoveButtonsLayout.addItem(verticalSpacer())
+        self.widgetsLayout.addLayout(self.addRemoveButtonsLayout)
         self.widgetsLayout.addWidget(self.prioritizationListView)
         self.mainLayout.addLayout(self.widgetsLayout)
         self.mainLayout.addWidget(self.buttonBox)

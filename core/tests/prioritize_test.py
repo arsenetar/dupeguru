@@ -111,6 +111,17 @@ def test_reorder_prioritizations(app):
     ]
     eq_(app.pdialog.prioritization_list[:], expected)
 
+@with_app(app_normal_results)
+def test_remove_crit_from_list(app):
+    app.add_pri_criterion("Kind", 0)
+    app.add_pri_criterion("Kind", 1)
+    app.pdialog.prioritization_list.select(0)
+    app.pdialog.remove_selected()
+    expected = [
+        "Kind (ext2)",
+    ]
+    eq_(app.pdialog.prioritization_list[:], expected)
+
 #---
 def app_one_name_ends_with_number():
     dupes = [
