@@ -103,6 +103,6 @@ class TestApp(TestAppBase):
         self.pdialog.category_list.select(index)
     
     def add_pri_criterion(self, name, index):
-        self.select_pri_criterion("Kind")
+        self.select_pri_criterion(name)
         self.pdialog.criteria_list.select([index])
         self.pdialog.add_selected()

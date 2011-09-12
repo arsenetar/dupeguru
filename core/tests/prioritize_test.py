@@ -34,7 +34,8 @@ def app_normal_results():
     dupes = [
         [
             no('foo1.ext1', size=1, folder='folder1'),
-            no('foo2.ext2', size=2, folder='folder2')],
+            no('foo2.ext2', size=2, folder='folder2')
+        ],
     ]
     return app_with_dupes(dupes)
 
@@ -109,3 +110,19 @@ def test_reorder_prioritizations(app):
         "Kind (ext1)",
     ]
     eq_(app.pdialog.prioritization_list[:], expected)
+
+#---
+def app_one_name_ends_with_number():
+    dupes = [
+        [
+            no('foo.ext'),
+            no('foo1.ext'),
+        ],
+    ]
+    return app_with_dupes(dupes)
+
+@with_app(app_one_name_ends_with_number)
+def test_filename_reprioritization(app):
+    app.add_pri_criterion("Filename", 0) # Ends with a number
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data[0], 'foo1.ext')

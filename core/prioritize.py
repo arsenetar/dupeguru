@@ -6,7 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.util import dedupe, flatten
+from hscommon.util import dedupe, flatten,  rem_file_ext
+from hscommon.trans import tr
 
 class CriterionCategory:
     NAME = "Undefined"
@@ -18,7 +19,7 @@ class CriterionCategory:
     def extract_value(self, dupe):
         raise NotImplementedError()
     
-    def format_value(self, value):
+    def format_criterion_value(self, value):
         return value
     
     #--- Public
@@ -39,7 +40,7 @@ class Criterion:
     def __init__(self, category, value):
         self.category = category
         self.value = value
-        self.display_value = category.format_value(value)
+        self.display_value = category.format_criterion_value(value)
     
     def sort_key(self, dupe):
         return self.category.sort_key(dupe, self.value)
@@ -50,26 +51,51 @@ class Criterion:
     
 
 class KindCategory(CriterionCategory):
-    NAME = "Kind"
+    NAME = tr("Kind")
     
     def extract_value(self, dupe):
         return dupe.extension
 
 class FolderCategory(CriterionCategory):
-    NAME = "Folder"
+    NAME = tr("Folder")
     
     def extract_value(self, dupe):
         return dupe.folder_path
     
-    def format_value(self, value):
+    def format_criterion_value(self, value):
         return str(value)
+
+class FilenameCategory(CriterionCategory):
+    NAME = tr("Filename")
+    ENDS_WITH_NUMBER = 0
+    DOESNT_END_WITH_NUMBER = 1
+    
+    def format_criterion_value(self, value):
+        if value == self.ENDS_WITH_NUMBER:
+            return tr("Ends with number")
+        else:
+            return tr("Doesn't end with number")
+    
+    def extract_value(self, dupe):
+        return rem_file_ext(dupe.name)
+    
+    def sort_key(self, dupe, crit_value):
+        value = self.extract_value(dupe)
+        ends_with_digit = value.strip()[-1:].isdigit()
+        if crit_value == self.ENDS_WITH_NUMBER:
+            return 0 if ends_with_digit else 1
+        else:
+            return 1 if ends_with_digit else 0
+    
+    def criteria_list(self):
+        return [Criterion(self, self.ENDS_WITH_NUMBER), Criterion(self, self.DOESNT_END_WITH_NUMBER)]
 
 class NumericalCategory(CriterionCategory):
     HIGHEST = 0
     LOWEST = 1
     
-    def format_value(self, value):
-        return "Highest" if value == self.HIGHEST else "Lowest"
+    def format_criterion_value(self, value):
+        return tr("Highest") if value == self.HIGHEST else tr("Lowest")
     
     def sort_key(self, dupe, crit_value):
         value = self.extract_value(dupe)
@@ -81,10 +107,19 @@ class NumericalCategory(CriterionCategory):
         return [Criterion(self, self.HIGHEST), Criterion(self, self.LOWEST)]
     
 class SizeCategory(NumericalCategory):
-    NAME = "Size"
+    NAME = tr("Size")
     
     def extract_value(self, dupe):
         return dupe.size
 
+class MtimeCategory(NumericalCategory):
+    NAME = tr("Modification Date")
+    
+    def extract_value(self, dupe):
+        return dupe.mtime
+    
+    def format_criterion_value(self, value):
+        return tr("Newest") if value == self.HIGHEST else tr("Oldest")
+
 def all_categories():
-    return [KindCategory, FolderCategory, SizeCategory]
+    return [KindCategory, FolderCategory, FilenameCategory, SizeCategory, MtimeCategory]
