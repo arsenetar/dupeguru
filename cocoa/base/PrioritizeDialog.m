@@ -42,4 +42,14 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [[self py] removeSelected];
 }
+
+- (IBAction)ok:(id)sender
+{
+    [NSApp stopModal];
+}
+
+- (IBAction)cancel:(id)sender
+{
+    [NSApp abortModal];
+}
 @end

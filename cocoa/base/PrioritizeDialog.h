@@ -28,4 +28,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)addSelected:(id)sender;
 - (IBAction)removeSelected:(id)sender;
+- (IBAction)ok:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end;

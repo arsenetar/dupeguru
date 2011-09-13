@@ -290,3 +290,6 @@ class PyPrioritizeDialog(PyGUIObject):
     
     def removeSelected(self):
         self.py.remove_selected()
+    
+    def performReprioritization(self):
+        self.py.perform_reprioritization()

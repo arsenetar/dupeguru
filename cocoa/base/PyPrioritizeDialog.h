@@ -16,4 +16,5 @@ http://www.hardcoded.net/licenses/bsd_license
 - (PySelectableList *)prioritizationList;
 - (void)addSelected;
 - (void)removeSelected;
+- (void)performReprioritization;
 @end

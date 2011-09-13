@@ -342,7 +342,12 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)reprioritizeResults:(id)sender
 {
     PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithPy:py];
-    [dlg showWindow:nil];
+    NSInteger result = [NSApp runModalForWindow:[dlg window]];
+    if (result == NSRunStoppedResponse) {
+        [[dlg py] performReprioritization];
+    }
+    [dlg release];
+    [[self window] makeKeyAndOrderFront:nil];
 }
 
 - (IBAction)resetColumnsToDefault:(id)sender
