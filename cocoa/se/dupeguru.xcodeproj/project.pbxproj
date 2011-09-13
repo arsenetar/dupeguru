@@ -17,6 +17,7 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41672B141FE1E5004F3F0B /* HSSelectableList.m */; };
 		CE4526F212E5F55F00005A15 /* core.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4526F012E5F55F00005A15 /* core.strings */; };
 		CE45579B0AE3BC2B005A9546 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
@@ -44,6 +45,9 @@
 		CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8113E912E5CE9A00A36C80 /* Localizable.strings */; };
 		CE8C53BC117324CE0011B41F /* HSTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8C53BB117324CE0011B41F /* HSTable.m */; };
 		CE91F216113BC22D0010360B /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F214113BC22D0010360B /* StatsLabel.m */; };
+		CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */; };
+		CE9777D1141F8CB400C13FB5 /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */; };
+		CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */; };
 		CEBE4D74111F0EE1009AAC6D /* HSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */; };
 		CEE7EA130FE675C80004E467 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7EA120FE675C80004E467 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -109,6 +113,9 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
+		CE41672A141FE1E5004F3F0B /* HSSelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSelectableList.h; sourceTree = "<group>"; };
+		CE41672B141FE1E5004F3F0B /* HSSelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSelectableList.m; sourceTree = "<group>"; };
+		CE41672C141FE1E5004F3F0B /* HSTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTable.h; sourceTree = "<group>"; };
 		CE4526F112E5F55F00005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE4526F312E5F57000005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
@@ -167,6 +174,12 @@
 		CE91F210113BC22D0010360B /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE91F213113BC22D0010360B /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE91F214113BC22D0010360B /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
+		CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeDialog.h; path = ../base/PrioritizeDialog.h; sourceTree = "<group>"; };
+		CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeDialog.m; path = ../base/PrioritizeDialog.m; sourceTree = "<group>"; };
+		CE9777D0141F8CB400C13FB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CE9777D2141F9D6500C13FB5 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
+		CE9777D3141F9D7600C13FB5 /* HSPopUpList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopUpList.h; sourceTree = "<group>"; };
+		CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPopUpList.m; sourceTree = "<group>"; };
 		CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
 		CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
 		CECFFF1C13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
@@ -334,7 +347,12 @@
 				CE76FDDE111EE42F006618EA /* HSOutline.m */,
 				CE76FDC8111EE38E006618EA /* HSGUIController.h */,
 				CE76FDC9111EE38E006618EA /* HSGUIController.m */,
+				CE41672C141FE1E5004F3F0B /* HSTable.h */,
 				CE8C53BB117324CE0011B41F /* HSTable.m */,
+				CE9777D3141F9D7600C13FB5 /* HSPopUpList.h */,
+				CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */,
+				CE41672A141FE1E5004F3F0B /* HSSelectableList.h */,
+				CE41672B141FE1E5004F3F0B /* HSSelectableList.m */,
 			);
 			name = controllers;
 			path = ../../cocoalib/controllers;
@@ -346,6 +364,7 @@
 				CE76FDCD111EE38E006618EA /* PyGUI.h */,
 				CE76FDCE111EE38E006618EA /* PyOutline.h */,
 				CE8C53B61173248F0011B41F /* PyTable.h */,
+				CE9777D2141F9D6500C13FB5 /* PySelectableList.h */,
 			);
 			name = proxies;
 			path = ../../cocoalib/proxies;
@@ -361,6 +380,7 @@
 				CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */,
 				CE81135612E5CE6D00A36C80 /* Preferences.xib */,
 				CE665B3113225AF8003F5CFB /* ExtraFairwareReminder.xib */,
+				CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -433,6 +453,8 @@
 				CE647E551173024A006D28BA /* ProblemDialog.m */,
 				CE647E561173024A006D28BA /* PyProblemDialog.h */,
 				CE665B2F13225ADD003F5CFB /* PyExtraFairwareReminder.h */,
+				CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */,
+				CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -514,6 +536,7 @@
 				CE665B3313225AF8003F5CFB /* ExtraFairwareReminder.xib in Resources */,
 				CE31819D13D85D9B00B6D649 /* about.xib in Resources */,
 				CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */,
+				CE9777D1141F8CB400C13FB5 /* PrioritizeDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +576,9 @@
 				CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */,
 				CEF0ACCE12DF3C2000B32F7E /* HSRecentFiles.m in Sources */,
 				CE665B3013225ADD003F5CFB /* ExtraFairwareReminder.m in Sources */,
+				CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */,
+				CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */,
+				CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +717,14 @@
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
+		};
+		CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE9777D0141F8CB400C13FB5 /* en */,
+			);
+			name = PrioritizeDialog.xib;
+			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 

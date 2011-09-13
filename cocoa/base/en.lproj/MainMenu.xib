@@ -380,6 +380,14 @@
 									<reference key="NSOnImage" ref="34697260"/>
 									<reference key="NSMixedImage" ref="201180191"/>
 								</object>
+								<object class="NSMenuItem" id="200019883">
+									<reference key="NSMenu" ref="600111647"/>
+									<string key="NSTitle">Re-Prioritize Results</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="34697260"/>
+									<reference key="NSMixedImage" ref="201180191"/>
+								</object>
 								<object class="NSMenuItem" id="477370537">
 									<reference key="NSMenu" ref="600111647"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -934,14 +942,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">removeMarked:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="733607971"/>
-					</object>
-					<int key="connectionID">1257</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">removeSelected:</string>
 						<reference key="source" ref="83466988"/>
 						<reference key="destination" ref="747820446"/>
@@ -1051,6 +1051,22 @@
 						<reference key="destination" ref="600111647"/>
 					</object>
 					<int key="connectionID">1275</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">reprioritizeResults:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="200019883"/>
+					</object>
+					<int key="connectionID">1278</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeMarked:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="733607971"/>
+					</object>
+					<int key="connectionID">1279</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1290,6 +1306,7 @@
 							<reference ref="747820446"/>
 							<reference ref="517397504"/>
 							<reference ref="514384201"/>
+							<reference ref="200019883"/>
 						</array>
 						<reference key="parent" ref="528113253"/>
 					</object>
@@ -1553,6 +1570,11 @@
 						<reference key="object" ref="937862901"/>
 						<reference key="parent" ref="472719764"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1276</int>
+						<reference key="object" ref="200019883"/>
+						<reference key="parent" ref="600111647"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1577,6 +1599,7 @@
 				<string key="1239.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1240.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1272.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1276.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1637,7 +1660,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1275</int>
+			<int key="maxID">1279</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1826,6 +1849,7 @@
 						<string key="removeMarked:">id</string>
 						<string key="removeSelected:">id</string>
 						<string key="renameSelected:">id</string>
+						<string key="reprioritizeResults:">id</string>
 						<string key="resetColumnsToDefault:">id</string>
 						<string key="revealSelected:">id</string>
 						<string key="saveResults:">id</string>
@@ -1911,6 +1935,10 @@
 						</object>
 						<object class="IBActionInfo" key="renameSelected:">
 							<string key="name">renameSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="reprioritizeResults:">
+							<string key="name">reprioritizeResults:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="resetColumnsToDefault:">

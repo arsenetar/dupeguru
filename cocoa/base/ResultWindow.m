@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 #import "AppDelegate.h"
 #import "Consts.h"
+#import "PrioritizeDialog.h"
 
 @implementation ResultWindowBase
 - (id)initWithParentApp:(AppDelegateBase *)aApp;
@@ -336,6 +337,12 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger col = [matches columnWithIdentifier:@"0"];
     NSInteger row = [matches selectedRow];
     [matches editColumn:col row:row withEvent:[NSApp currentEvent] select:YES];
+}
+
+- (IBAction)reprioritizeResults:(id)sender
+{
+    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithPy:py];
+    [dlg showWindow:nil];
 }
 
 - (IBAction)resetColumnsToDefault:(id)sender

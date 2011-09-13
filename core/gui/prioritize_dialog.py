@@ -50,6 +50,7 @@ class PrioritizeDialog:
         self.criteria_list = GUISelectableList()
         self.prioritizations = []
         self.prioritization_list = PrioritizationList(self)
+        self.category_list.select(0)
     
     #--- Private
     def _sort_key(self, dupe):

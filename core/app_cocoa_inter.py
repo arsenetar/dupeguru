@@ -8,7 +8,8 @@
 
 # Common interface for all editions' dg_cocoa unit.
 
-from hscommon.cocoa.inter import signature, PyTable, PyOutline, PyGUIObject, PyFairware
+from hscommon.cocoa.inter import (signature, PyTable, PyOutline, PyGUIObject, PyFairware,
+    PySelectableList)
 
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -17,6 +18,7 @@ from .gui.problem_table import ProblemTable
 from .gui.result_table import ResultTable
 from .gui.stats_label import StatsLabel
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
+from .gui.prioritize_dialog import PrioritizeDialog
 
 class PyDupeGuruBase(PyFairware):
     #---Directories
@@ -264,3 +266,27 @@ class PyExtraFairwareReminder(PyGUIObject):
     def set_button_text(self, text):
         self.cocoa.setButtonText_(text)
     
+
+class PyPrioritizeDialog(PyGUIObject):
+    py_class = PrioritizeDialog
+    
+    def categoryList(self):
+        if not hasattr(self, '_categoryList'):
+            self._categoryList = PySelectableList.alloc().initWithPy_(self.py.category_list)
+        return self._categoryList
+    
+    def criteriaList(self):
+        if not hasattr(self, '_criteriaList'):
+            self._criteriaList = PySelectableList.alloc().initWithPy_(self.py.criteria_list)
+        return self._criteriaList
+    
+    def prioritizationList(self):
+        if not hasattr(self, '_prioritizationList'):
+            self._prioritizationList = PySelectableList.alloc().initWithPy_(self.py.prioritization_list)
+        return self._prioritizationList
+    
+    def addSelected(self):
+        self.py.add_selected()
+    
+    def removeSelected(self):
+        self.py.remove_selected()

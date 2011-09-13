@@ -67,6 +67,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)removeMarked:(id)sender;
 - (IBAction)removeSelected:(id)sender;
 - (IBAction)renameSelected:(id)sender;
+- (IBAction)reprioritizeResults:(id)sender;
 - (IBAction)resetColumnsToDefault:(id)sender;
 - (IBAction)revealSelected:(id)sender;
 - (IBAction)saveResults:(id)sender;
