@@ -7,10 +7,10 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from collections import namedtuple
+import time
 
 from hscommon.util import format_time_decimal, format_size
-
-import time
+from . import prioritize
 
 Column = namedtuple('Column', 'attr display')
 
@@ -40,3 +40,6 @@ def format_dupe_count(c):
 
 def cmp_value(value):
     return value.lower() if isinstance(value, str) else value
+
+def prioritization_categories():
+    return prioritize.all_categories()

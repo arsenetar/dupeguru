@@ -10,6 +10,7 @@
 
 from hscommon.util import format_size
 from ..data import cmp_value, Column
+from .. import prioritize
 
 COLUMNS = [
     Column('name', 'Filename'),
@@ -42,3 +43,6 @@ def GetDupeSortKey(dupe, get_group, key, delta):
 
 def GetGroupSortKey(group, key):
     return cmp_value(getattr(group.ref, COLUMNS[key].attr))
+
+def prioritization_categories():
+    return prioritize.all_categories()

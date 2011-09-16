@@ -8,8 +8,6 @@
 
 from hscommon.gui.selectable_list import GUISelectableList
 
-from ..prioritize import all_categories
-
 class CriterionCategoryList(GUISelectableList):
     def __init__(self, dialog):
         self.dialog = dialog
@@ -44,7 +42,7 @@ class PrioritizationList(GUISelectableList):
 class PrioritizeDialog:
     def __init__(self, view, app):
         self.app = app
-        self.categories = [cat(app.results) for cat in all_categories()]
+        self.categories = [cat(app.results) for cat in app.data.prioritization_categories()]
         self.category_list = CriterionCategoryList(self)
         self.criteria = []
         self.criteria_list = GUISelectableList()
