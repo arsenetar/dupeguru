@@ -18,4 +18,6 @@ http://www.hardcoded.net/licenses/bsd_license
 #define jobMove @"job_move"
 #define jobDelete @"job_delete"
 
+#define DGPrioritizeIndexPasteboardType @"DGPrioritizeIndexPasteboardType"
+
 #define TR(s) NSLocalizedString(s, @"")

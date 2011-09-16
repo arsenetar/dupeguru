@@ -43,6 +43,7 @@
 		CE81135012E5CE4D00A36C80 /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
 		CE81135812E5CE6D00A36C80 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81135612E5CE6D00A36C80 /* Preferences.xib */; };
 		CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8113E912E5CE9A00A36C80 /* Localizable.strings */; };
+		CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE89240714239CC30024CE4E /* PrioritizeList.m */; };
 		CE8C53BC117324CE0011B41F /* HSTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8C53BB117324CE0011B41F /* HSTable.m */; };
 		CE91F216113BC22D0010360B /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F214113BC22D0010360B /* StatsLabel.m */; };
 		CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */; };
@@ -169,6 +170,10 @@
 		CE81135912E5CE7B00A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE8113EA12E5CE9A00A36C80 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE8113EC12E5CEA800A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		CE89240614239CC30024CE4E /* PrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeList.h; path = ../base/PrioritizeList.h; sourceTree = "<group>"; };
+		CE89240714239CC30024CE4E /* PrioritizeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeList.m; path = ../base/PrioritizeList.m; sourceTree = "<group>"; };
+		CE89240814239CC30024CE4E /* PyPrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeDialog.h; path = ../base/PyPrioritizeDialog.h; sourceTree = "<group>"; };
+		CE89240914239CC30024CE4E /* PyPrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeList.h; path = ../base/PyPrioritizeList.h; sourceTree = "<group>"; };
 		CE8C53B61173248F0011B41F /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE8C53BB117324CE0011B41F /* HSTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTable.m; sourceTree = "<group>"; };
 		CE91F210113BC22D0010360B /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
@@ -455,6 +460,10 @@
 				CE665B2F13225ADD003F5CFB /* PyExtraFairwareReminder.h */,
 				CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */,
 				CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */,
+				CE89240814239CC30024CE4E /* PyPrioritizeDialog.h */,
+				CE89240614239CC30024CE4E /* PrioritizeList.h */,
+				CE89240714239CC30024CE4E /* PrioritizeList.m */,
+				CE89240914239CC30024CE4E /* PyPrioritizeList.h */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -579,6 +588,7 @@
 				CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */,
 				CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */,
 				CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */,
+				CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

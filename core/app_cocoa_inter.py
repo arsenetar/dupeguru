@@ -282,7 +282,7 @@ class PyPrioritizeDialog(PyGUIObject):
     
     def prioritizationList(self):
         if not hasattr(self, '_prioritizationList'):
-            self._prioritizationList = PySelectableList.alloc().initWithPy_(self.py.prioritization_list)
+            self._prioritizationList = PyPrioritizeList.alloc().initWithPy_(self.py.prioritization_list)
         return self._prioritizationList
     
     def addSelected(self):
@@ -293,3 +293,9 @@ class PyPrioritizeDialog(PyGUIObject):
     
     def performReprioritization(self):
         self.py.perform_reprioritization()
+
+class PyPrioritizeList(PySelectableList):
+    @signature('v@:@i')
+    def moveIndexes_toIndex_(self, indexes, dest_index):
+        self.py.move_indexes(indexes, dest_index)
+    

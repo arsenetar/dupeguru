@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyPrioritizeDialog.h"
 #import "HSPopUpList.h"
 #import "HSSelectableList.h"
+#import "PrioritizeList.h"
 
 @interface PrioritizeDialog : HSWindowController
 {
@@ -21,7 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
     
     HSPopUpList *categoryPopUp;
     HSSelectableList *criteriaList;
-    HSSelectableList *prioritizationList;
+    PrioritizeList *prioritizationList;
 }
 - (id)initWithPy:(PyApp *)aPy;
 - (PyPrioritizeDialog *)py;

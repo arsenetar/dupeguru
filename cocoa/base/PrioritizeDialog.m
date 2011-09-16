@@ -15,7 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window];
     categoryPopUp = [[HSPopUpList alloc] initWithPy:[[self py] categoryList] view:categoryPopUpView];
     criteriaList = [[HSSelectableList alloc] initWithPy:[[self py] criteriaList] view:criteriaTableView];
-    prioritizationList = [[HSSelectableList alloc] initWithPy:[[self py] prioritizationList] view:prioritizationTableView];
+    prioritizationList = [[PrioritizeList alloc] initWithPy:[[self py] prioritizationList] view:prioritizationTableView];
     [self connect];
     return self;
 }
@@ -25,6 +25,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self disconnect];
     [categoryPopUp release];
     [criteriaList release];
+    [prioritizationList release];
     [super dealloc];
 }
 
