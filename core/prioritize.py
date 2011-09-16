@@ -97,10 +97,13 @@ class NumericalCategory(CriterionCategory):
     def format_criterion_value(self, value):
         return tr("Highest") if value == self.HIGHEST else tr("Lowest")
     
+    def invert_numerical_value(self, value): # Virtual
+        return value * -1
+    
     def sort_key(self, dupe, crit_value):
         value = self.extract_value(dupe)
         if crit_value == self.HIGHEST: # we want highest values on top
-            value *= -1
+            value = self.invert_numerical_value(value)
         return value
     
     def criteria_list(self):

@@ -10,6 +10,8 @@ from hscommon.util import format_size
 from hscommon.trans import tr as trbase
 from core.data import format_timestamp, format_perc, format_dupe_count, cmp_value, Column
 
+from . import prioritize
+
 tr = lambda s: trbase(s, 'columns')
 
 def format_dimensions(dimensions):
@@ -94,3 +96,5 @@ def GetGroupSortKey(group, key):
         return cmp_value(str(dupe_folder_path))
     return cmp_value(getattr(group.ref, COLUMNS[key].attr, ''))
 
+def prioritization_categories():
+    return prioritize.all_categories()

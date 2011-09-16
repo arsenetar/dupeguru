@@ -34,6 +34,11 @@
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
 		CE6E0F3D1054EC62008D9390 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
 		CE7AC9191119911200D02F6C /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9161119911200D02F6C /* progress.xib */; };
+		CE7D249D1423B0BD002E2297 /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D249A1423B0BD002E2297 /* HSPopUpList.m */; };
+		CE7D249E1423B0BD002E2297 /* HSSelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D249C1423B0BD002E2297 /* HSSelectableList.m */; };
+		CE7D24A51423B106002E2297 /* PrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D24A01423B106002E2297 /* PrioritizeDialog.m */; };
+		CE7D24A61423B106002E2297 /* PrioritizeList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D24A21423B106002E2297 /* PrioritizeList.m */; };
+		CE7D24A91423B123002E2297 /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */; };
 		CE80DB2E0FC192D60086DCA6 /* Dialogs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1C0FC192D60086DCA6 /* Dialogs.m */; };
 		CE80DB2F0FC192D60086DCA6 /* HSErrorReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB1E0FC192D60086DCA6 /* HSErrorReportWindow.m */; };
 		CE80DB310FC192D60086DCA6 /* ProgressController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80DB220FC192D60086DCA6 /* ProgressController.m */; };
@@ -156,6 +161,18 @@
 		CE7875A513CDFAB900F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
 		CE7875A613CDFAB900F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE7AC9161119911200D02F6C /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
+		CE7D24971423B0A7002E2297 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
+		CE7D24991423B0BD002E2297 /* HSPopUpList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopUpList.h; sourceTree = "<group>"; };
+		CE7D249A1423B0BD002E2297 /* HSPopUpList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPopUpList.m; sourceTree = "<group>"; };
+		CE7D249B1423B0BD002E2297 /* HSSelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSelectableList.h; sourceTree = "<group>"; };
+		CE7D249C1423B0BD002E2297 /* HSSelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSelectableList.m; sourceTree = "<group>"; };
+		CE7D249F1423B106002E2297 /* PrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeDialog.h; path = ../base/PrioritizeDialog.h; sourceTree = "<group>"; };
+		CE7D24A01423B106002E2297 /* PrioritizeDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeDialog.m; path = ../base/PrioritizeDialog.m; sourceTree = "<group>"; };
+		CE7D24A11423B106002E2297 /* PrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeList.h; path = ../base/PrioritizeList.h; sourceTree = "<group>"; };
+		CE7D24A21423B106002E2297 /* PrioritizeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeList.m; path = ../base/PrioritizeList.m; sourceTree = "<group>"; };
+		CE7D24A31423B106002E2297 /* PyPrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeDialog.h; path = ../base/PyPrioritizeDialog.h; sourceTree = "<group>"; };
+		CE7D24A41423B106002E2297 /* PyPrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeList.h; path = ../base/PyPrioritizeList.h; sourceTree = "<group>"; };
+		CE7D24A81423B123002E2297 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CE80DB1B0FC192D60086DCA6 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CE80DB1C0FC192D60086DCA6 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CE80DB1D0FC192D60086DCA6 /* HSErrorReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSErrorReportWindow.h; path = ../../cocoalib/HSErrorReportWindow.h; sourceTree = SOURCE_ROOT; };
@@ -330,6 +347,7 @@
 				CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */,
 				CE0533A512E5DA4D0029EF25 /* Preferences.xib */,
 				CE2A29F513213BFB005899AC /* ExtraFairwareReminder.xib */,
+				CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -384,32 +402,38 @@
 		CE80DB810FC194BD0086DCA6 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
-				CE2A29FF13213C31005899AC /* PyExtraFairwareReminder.h */,
-				CEF12A81124DFD620087B51D /* PyResultTable.h */,
 				CEF12A82124DFD620087B51D /* ResultTable.h */,
 				CEF12A83124DFD620087B51D /* ResultTable.m */,
+				CEF12A81124DFD620087B51D /* PyResultTable.h */,
 				CE80DB820FC1951C0086DCA6 /* AppDelegate.h */,
 				CE80DB830FC1951C0086DCA6 /* AppDelegate.m */,
+				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
 				CE80DB840FC1951C0086DCA6 /* Consts.h */,
 				CE6044EA0FE6796200B71262 /* DetailsPanel.h */,
 				CE6044EB0FE6796200B71262 /* DetailsPanel.m */,
+				CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */,
 				CE80DB850FC1951C0086DCA6 /* DirectoryPanel.h */,
 				CE80DB860FC1951C0086DCA6 /* DirectoryPanel.m */,
 				CE9EA76F1122CA0B008CD2BC /* DirectoryOutline.h */,
 				CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */,
+				CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */,
 				CE0C2ABA1177014200BC749F /* ProblemDialog.h */,
 				CE0C2ABB1177014200BC749F /* ProblemDialog.m */,
+				CE0C2ABC1177014200BC749F /* PyProblemDialog.h */,
 				CE80DB880FC1951C0086DCA6 /* ResultWindow.h */,
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
 				CE95865C112C516400F95FD2 /* StatsLabel.h */,
 				CE95865D112C516400F95FD2 /* StatsLabel.m */,
+				CE958659112C516400F95FD2 /* PyStatsLabel.h */,
 				CE2A29F213213BE3005899AC /* ExtraFairwareReminder.h */,
 				CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */,
-				CE80DB870FC1951C0086DCA6 /* PyDupeGuru.h */,
-				CE18126F111C9D5100E49FCE /* PyDetailsPanel.h */,
-				CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */,
-				CE0C2ABC1177014200BC749F /* PyProblemDialog.h */,
-				CE958659112C516400F95FD2 /* PyStatsLabel.h */,
+				CE2A29FF13213C31005899AC /* PyExtraFairwareReminder.h */,
+				CE7D249F1423B106002E2297 /* PrioritizeDialog.h */,
+				CE7D24A01423B106002E2297 /* PrioritizeDialog.m */,
+				CE7D24A31423B106002E2297 /* PyPrioritizeDialog.h */,
+				CE7D24A11423B106002E2297 /* PrioritizeList.h */,
+				CE7D24A21423B106002E2297 /* PrioritizeList.m */,
+				CE7D24A41423B106002E2297 /* PyPrioritizeList.h */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -425,6 +449,10 @@
 				CE0C2AB51177011000BC749F /* HSTable.m */,
 				CE9EA7471122C96C008CD2BC /* HSWindowController.h */,
 				CE9EA7481122C96C008CD2BC /* HSWindowController.m */,
+				CE7D24991423B0BD002E2297 /* HSPopUpList.h */,
+				CE7D249A1423B0BD002E2297 /* HSPopUpList.m */,
+				CE7D249B1423B0BD002E2297 /* HSSelectableList.h */,
+				CE7D249C1423B0BD002E2297 /* HSSelectableList.m */,
 			);
 			name = controllers;
 			path = ../../cocoalib/controllers;
@@ -436,6 +464,7 @@
 				CE9EA74C1122C96C008CD2BC /* PyGUI.h */,
 				CE9EA74D1122C96C008CD2BC /* PyOutline.h */,
 				CE0C2AAA117700E700BC749F /* PyTable.h */,
+				CE7D24971423B0A7002E2297 /* PySelectableList.h */,
 			);
 			name = proxies;
 			path = ../../cocoalib/proxies;
@@ -541,6 +570,7 @@
 				CE2A29F713213BFB005899AC /* ExtraFairwareReminder.xib in Resources */,
 				CECB2AC513D867AD0081E295 /* about.xib in Resources */,
 				CECB2AC613D867AD0081E295 /* ErrorReportWindow.xib in Resources */,
+				CE7D24A91423B123002E2297 /* PrioritizeDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +614,10 @@
 				CEC9DB4C12CCAA7D003102F0 /* HSAboutBox.m in Sources */,
 				CE60180812DF3EA900236FDC /* HSRecentFiles.m in Sources */,
 				CE2A29F413213BE3005899AC /* ExtraFairwareReminder.m in Sources */,
+				CE7D249D1423B0BD002E2297 /* HSPopUpList.m in Sources */,
+				CE7D249E1423B0BD002E2297 /* HSSelectableList.m in Sources */,
+				CE7D24A51423B106002E2297 /* PrioritizeDialog.m in Sources */,
+				CE7D24A61423B106002E2297 /* PrioritizeList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +734,14 @@
 			);
 			name = core.strings;
 			sourceTree = SOURCE_ROOT;
+		};
+		CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE7D24A81423B123002E2297 /* en */,
+			);
+			name = PrioritizeDialog.xib;
+			sourceTree = "<group>";
 		};
 		CECB2AC113D867AD0081E295 /* about.xib */ = {
 			isa = PBXVariantGroup;
