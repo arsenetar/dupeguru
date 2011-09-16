@@ -9,6 +9,8 @@
 from hscommon.util import dedupe, flatten,  rem_file_ext
 from hscommon.trans import tr
 
+coltr = lambda s: tr(s, 'columns')
+
 class CriterionCategory:
     NAME = "Undefined"
     
@@ -51,13 +53,13 @@ class Criterion:
     
 
 class KindCategory(CriterionCategory):
-    NAME = tr("Kind")
+    NAME = coltr("Kind")
     
     def extract_value(self, dupe):
         return dupe.extension
 
 class FolderCategory(CriterionCategory):
-    NAME = tr("Folder")
+    NAME = coltr("Folder")
     
     def extract_value(self, dupe):
         return dupe.folder_path
@@ -66,7 +68,7 @@ class FolderCategory(CriterionCategory):
         return str(value)
 
 class FilenameCategory(CriterionCategory):
-    NAME = tr("Filename")
+    NAME = coltr("Filename")
     ENDS_WITH_NUMBER = 0
     DOESNT_END_WITH_NUMBER = 1
     
@@ -110,13 +112,13 @@ class NumericalCategory(CriterionCategory):
         return [Criterion(self, self.HIGHEST), Criterion(self, self.LOWEST)]
     
 class SizeCategory(NumericalCategory):
-    NAME = tr("Size")
+    NAME = coltr("Size")
     
     def extract_value(self, dupe):
         return dupe.size
 
 class MtimeCategory(NumericalCategory):
-    NAME = tr("Modification Date")
+    NAME = coltr("Modification")
     
     def extract_value(self, dupe):
         return dupe.mtime

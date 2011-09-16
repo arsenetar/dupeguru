@@ -10,8 +10,10 @@ from hscommon.trans import tr
 from core.prioritize import (KindCategory, FolderCategory, FilenameCategory, NumericalCategory,
     SizeCategory, MtimeCategory)
 
+coltr = lambda s: tr(s, 'columns')
+
 class DimensionsCategory(NumericalCategory):
-    NAME = tr("Dimensions")
+    NAME = coltr("Dimensions")
     
     def extract_value(self, dupe):
         return dupe.dimensions

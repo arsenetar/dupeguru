@@ -66,7 +66,7 @@ class PrioritizeDialog(QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
     def _setupUi(self):
-        self.setWindowTitle(tr("Re-prioritize duplicates"))
+        self.setWindowTitle(tr("Re-Prioritize duplicates"))
         self.resize(700, 400)
         
         #widgets
@@ -77,8 +77,8 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
-        self.removeCriteriaButton = QPushButton("<--")
         self.addCriteriaButton = QPushButton("-->")
+        self.removeCriteriaButton = QPushButton("<--")
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
         self.prioritizationListView.setDragEnabled(True)
@@ -97,8 +97,8 @@ class PrioritizeDialog(QDialog):
         self.widgetsLayout.addLayout(self.leftWidgetsLayout)
         self.addRemoveButtonsLayout = QVBoxLayout()
         self.addRemoveButtonsLayout.addItem(verticalSpacer())
-        self.addRemoveButtonsLayout.addWidget(self.removeCriteriaButton)
         self.addRemoveButtonsLayout.addWidget(self.addCriteriaButton)
+        self.addRemoveButtonsLayout.addWidget(self.removeCriteriaButton)
         self.addRemoveButtonsLayout.addItem(verticalSpacer())
         self.widgetsLayout.addLayout(self.addRemoveButtonsLayout)
         self.widgetsLayout.addWidget(self.prioritizationListView)

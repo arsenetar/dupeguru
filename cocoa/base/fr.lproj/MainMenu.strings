@@ -172,3 +172,6 @@
 
 /* Class = "NSMenuItem"; title = "Results Window"; ObjectID = "1272"; */
 "1272.title" = "Fenêtre de résultats";
+
+/* Class = "NSMenuItem"; title = "Re-Prioritize Results"; ObjectID = "1276"; */
+"1276.title" = "Re-prioriser les résultats";

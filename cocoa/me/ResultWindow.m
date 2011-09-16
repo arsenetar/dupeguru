@@ -37,29 +37,29 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TR(@"Folder") width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TR(@"Size (MB)") width:63 refCol:refCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TRCOL(@"Folder") width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TRCOL(@"Size (MB)") width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
-    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:TR(@"Time") width:50 refCol:refCol];
+    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:TRCOL(@"Time") width:50 refCol:refCol];
     [[timeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:timeCol];
-    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:TR(@"Bitrate") width:50 refCol:refCol];
+    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:TRCOL(@"Bitrate") width:50 refCol:refCol];
     [[brCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:brCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TR(@"Sample Rate") width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TR(@"Kind") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TR(@"Modification") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:8 title:TR(@"Title") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:9 title:TR(@"Artist") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:10 title:TR(@"Album") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:11 title:TR(@"Genre") width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:12 title:TR(@"Year") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:13 title:TR(@"Track Number") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:14 title:TR(@"Comment") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:15 title:TR(@"Match %") width:57 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:16 title:TR(@"Words Used") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:17 title:TR(@"Dupe Count") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TRCOL(@"Sample Rate") width:60 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TRCOL(@"Kind") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TRCOL(@"Modification") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:8 title:TRCOL(@"Title") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:9 title:TRCOL(@"Artist") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:10 title:TRCOL(@"Album") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:11 title:TRCOL(@"Genre") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:12 title:TRCOL(@"Year") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:13 title:TRCOL(@"Track Number") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:14 title:TRCOL(@"Comment") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:15 title:TRCOL(@"Match %") width:57 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:16 title:TRCOL(@"Words Used") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:17 title:TRCOL(@"Dupe Count") width:80 refCol:refCol]];
 }
 
 /* Actions */

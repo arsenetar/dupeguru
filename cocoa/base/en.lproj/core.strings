@@ -29,3 +29,11 @@
 
 "Probing iPhoto. Don't touch it during the operation!" = "Probing iPhoto. Don't touch it during the operation!";
 "Sending dupes to the Trash" = "Sending dupes to the Trash";
+
+/* Prioritization */
+"Ends with number" = "Ends with number";
+"Doesn't end with number" = "Doesn't end with number";
+"Highest" = "Highest";
+"Lowest" = "Lowest";
+"Newest" = "Newest";
+"Oldest" = "Oldest";

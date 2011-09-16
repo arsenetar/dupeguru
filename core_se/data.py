@@ -10,6 +10,7 @@ from hscommon.util import format_size
 from hscommon.trans import tr as trbase
 from core.data import (format_timestamp, format_words, format_perc, format_dupe_count, cmp_value,
     Column)
+from core import prioritize
 
 tr = lambda s: trbase(s, 'columns')
 
@@ -72,3 +73,6 @@ def GetGroupSortKey(group, key):
     if key == DUPECOUNT_COL:
         return len(group)
     return cmp_value(getattr(group.ref, COLUMNS[key].attr, ''))
+
+def prioritization_categories():
+    return prioritize.all_categories()

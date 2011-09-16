@@ -8,29 +8,6 @@
 "Add iPhoto Library" = "Ajouter librairie iPhoto";
 "Clear Picture Cache" = "Vider la cache d'images";
 
-/* Columns */
-"Folder" = "Dossier";
-"Size (KB)" = "Taille (KB)";
-"Size (MB)" = "Taille (MB)";
-"Kind" = "Type";
-"Modification" = "Modification";
-"Match %" = "Match %";
-"Words Used" = "Mots";
-"Dupe Count" = "# Doublons";
-
-"Time" = "Temps";
-"Bitrate" = "Bitrate";
-"Sample Rate" = "Sample Rate";
-"Title" = "Titre";
-"Artist" = "Artiste";
-"Album" = "Album";
-"Genre" = "Genre";
-"Year" = "Année";
-"Track Number" = "Track";
-"Comment" = "Commentaire";
-
-"Dimensions" = "Dimensions";
-
 /* Messages */
 "SelectResultToLoadMsg" = "Sélectionnez un fichier résultats à charger";
 "SelectCopyDestinationMsg" = "Sélectionnez un dossier vers lequel copier les fichiers";

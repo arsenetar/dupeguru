@@ -316,6 +316,10 @@
     <translation>Entferne Markierte aus den Ergebnissen</translation>
 </message>
 <message>
+    <source>Re-Prioritize Results...</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Remove Selected from Results</source>
     <translation>Entferne Ausgewählte aus den Ergebnissen</translation>
 </message>
@@ -565,6 +569,40 @@
     <source>Debug mode (restart required)</source>
     <translation>Debug Modus (Neustart nötig)</translation>
 </message>
+
+<!--- Prioritization -->
+<message>
+    <source>Ends with number</source>
+    <translation type="unfinished></translation>
+</message>
+<message>
+    <source>Doesn't end with number</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Highest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Lowest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Newest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Oldest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Re-Prioritize duplicates</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.</source>
+    <translation type="unfinished"></translation>
+</message>
 </context>
 
 <!-- ******** Columns ******** -->
@@ -577,6 +615,10 @@
 <message>
     <source>Folder</source>
     <translation>Ordner</translation>
+</message>
+<message>
+    <source>Size</source>
+    <translation>Größe</translation>
 </message>
 <message>
     <source>Size (KB)</source>

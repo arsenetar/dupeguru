@@ -10,20 +10,22 @@ from hscommon.trans import tr
 from core.prioritize import (KindCategory, FolderCategory, FilenameCategory, NumericalCategory,
     SizeCategory, MtimeCategory)
 
+coltr = lambda s: tr(s, 'columns')
+
 class DurationCategory(NumericalCategory):
-    NAME = tr("Duration")
+    NAME = coltr("Duration")
     
     def extract_value(self, dupe):
         return dupe.duration
 
 class BitrateCategory(NumericalCategory):
-    NAME = tr("Bitrate")
+    NAME = coltr("Bitrate")
     
     def extract_value(self, dupe):
         return dupe.bitrate
 
 class SamplerateCategory(NumericalCategory):
-    NAME = tr("Samplerate")
+    NAME = coltr("Samplerate")
     
     def extract_value(self, dupe):
         return dupe.samplerate

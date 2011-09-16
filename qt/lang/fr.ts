@@ -316,6 +316,10 @@
     <translation>Retirer marqués des résultats</translation>
 </message>
 <message>
+    <source>Re-Prioritize Results...</source>
+    <translation>Re-prioriser les résultats</translation>
+</message>
+<message>
     <source>Remove Selected from Results</source>
     <translation>Retirer sélectionnés des résultats</translation>
 </message>
@@ -565,6 +569,40 @@
     <source>Debug mode (restart required)</source>
     <translation>Mode de déboguage (redémarrage requis)</translation>
 </message>
+
+<!--- Prioritization -->
+<message>
+    <source>Ends with number</source>
+    <translation>Chiffres à la fin</translation>
+</message>
+<message>
+    <source>Doesn't end with number</source>
+    <translation>Pas de chiffres à la fin</translation>
+</message>
+<message>
+    <source>Highest</source>
+    <translation>Plus grand</translation>
+</message>
+<message>
+    <source>Lowest</source>
+    <translation>Moins grand</translation>
+</message>
+<message>
+    <source>Newest</source>
+    <translation>Plus récent</translation>
+</message>
+<message>
+    <source>Oldest</source>
+    <translation>Moins récent</translation>
+</message>
+<message>
+    <source>Re-Prioritize duplicates</source>
+    <translation>Re-prioriser les doublons</translation>
+</message>
+<message>
+    <source>Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.</source>
+    <translation>Ajoutez des critères dans la liste de droite pour envoyer les doublons qui correspondent le plus à ces critère à la position de référence. Une lecture préalable du fichier d'aide est conseillée.</translation>
+</message>
 </context>
 
 <!-- ******** Columns ******** -->
@@ -577,6 +615,10 @@
 <message>
     <source>Folder</source>
     <translation>Dossier</translation>
+</message>
+<message>
+    <source>Size</source>
+    <translation>Taille</translation>
 </message>
 <message>
     <source>Size (KB)</source>

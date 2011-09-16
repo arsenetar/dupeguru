@@ -8,29 +8,6 @@
 "Add iPhoto Library" = "Add iPhoto Library";
 "Clear Picture Cache" = "清空图片缓存";
 
-/* Columns */
-"Folder" = "文件夹";
-"Size (KB)" = "大小 (KB)";
-"Size (MB)" = "大小 (MB)";
-"Kind" = "类型";
-"Modification" = "编辑日期";
-"Match %" = "匹配度 %";
-"Words Used" = "使用过的词语";
-"Dupe Count" = "重复文件数";
-
-"Time" = "时间";
-"Bitrate" = "比特";
-"Sample Rate" = "采样率";
-"Title" = "歌曲名";
-"Artist" = "演唱者";
-"Album" = "专辑";
-"Genre" = "音乐类型";
-"Year" = "年";
-"Track Number" = "音轨号";
-"Comment" = "注释";
-
-"Dimensions" = "规格";
-
 /* Messages */
 "SelectResultToLoadMsg" = "选择一个结果文件并载入";
 "SelectCopyDestinationMsg" = "Select a directory to copy marked files to";

@@ -23,12 +23,19 @@
 		CE15C8C00ADEB8D40061D4A5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */; };
 		CE1EB5FE12537F9D0034AABB /* HSFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */; };
 		CE1EB60112537FB90034AABB /* FairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1EB5FF12537FB90034AABB /* FairwareReminder.xib */; };
+		CE21AFB91423EA6E00DE35BF /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339312E5DA350029EF25 /* DirectoryPanel.xib */; };
+		CE21AFBA1423EA6E00DE35BF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339512E5DA350029EF25 /* MainMenu.xib */; };
+		CE21AFBB1423EA6E00DE35BF /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339712E5DA350029EF25 /* ProblemDialog.xib */; };
 		CE2A29F413213BE3005899AC /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */; };
 		CE2A29F713213BFB005899AC /* ExtraFairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2A29F513213BFB005899AC /* ExtraFairwareReminder.xib */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
 		CE4527AC12E5F6E700005A15 /* core.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4527AA12E5F6E700005A15 /* core.strings */; };
+		CE54EB8D1423FBA200E3383A /* columns.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE54EB881423FBA200E3383A /* columns.strings */; };
+		CE54EB8E1423FBA200E3383A /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
+		CE54EB8F1423FBA200E3383A /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CE54EB901423FBA200E3383A /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
 		CE60180812DF3EA900236FDC /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60180712DF3EA900236FDC /* HSRecentFiles.m */; };
 		CE6044EC0FE6796200B71262 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6044EB0FE6796200B71262 /* DetailsPanel.m */; };
 		CE68EE6809ABC48000971085 /* DirectoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68EE6609ABC48000971085 /* DirectoryPanel.m */; };
@@ -121,6 +128,9 @@
 		CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSFairwareReminder.m; path = ../../cocoalib/HSFairwareReminder.m; sourceTree = SOURCE_ROOT; };
 		CE1EB5FD12537F9D0034AABB /* PyFairware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyFairware.h; path = ../../cocoalib/PyFairware.h; sourceTree = SOURCE_ROOT; };
 		CE1EB60012537FB90034AABB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../../cocoalib/en.lproj/FairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CE21AFB61423EA6E00DE35BF /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CE21AFB71423EA6E00DE35BF /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CE21AFB81423EA6E00DE35BF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CE2A29F213213BE3005899AC /* ExtraFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtraFairwareReminder.h; path = ../base/ExtraFairwareReminder.h; sourceTree = SOURCE_ROOT; };
 		CE2A29F313213BE3005899AC /* ExtraFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtraFairwareReminder.m; path = ../base/ExtraFairwareReminder.m; sourceTree = SOURCE_ROOT; };
 		CE2A29F613213BFB005899AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
@@ -132,6 +142,10 @@
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
 		CE4527AB12E5F6E700005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE4527B012E5F72600005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
+		CE54EB891423FBA200E3383A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/columns.strings; sourceTree = "<group>"; };
+		CE54EB8A1423FBA200E3383A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/columns.strings; sourceTree = "<group>"; };
+		CE54EB8B1423FBA200E3383A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/columns.strings; sourceTree = "<group>"; };
+		CE54EB8C1423FBA200E3383A /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/columns.strings; sourceTree = "<group>"; };
 		CE60180612DF3EA900236FDC /* HSRecentFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSRecentFiles.h; path = ../../cocoalib/HSRecentFiles.h; sourceTree = SOURCE_ROOT; };
 		CE60180712DF3EA900236FDC /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
 		CE6044EA0FE6796200B71262 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
@@ -322,6 +336,7 @@
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				CE0533A912E5DA6A0029EF25 /* Localizable.strings */,
+				CE54EB881423FBA200E3383A /* columns.strings */,
 				CE4527AA12E5F6E700005A15 /* core.strings */,
 				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
 			);
@@ -571,6 +586,13 @@
 				CECB2AC513D867AD0081E295 /* about.xib in Resources */,
 				CECB2AC613D867AD0081E295 /* ErrorReportWindow.xib in Resources */,
 				CE7D24A91423B123002E2297 /* PrioritizeDialog.xib in Resources */,
+				CE21AFB91423EA6E00DE35BF /* DirectoryPanel.xib in Resources */,
+				CE21AFBA1423EA6E00DE35BF /* MainMenu.xib in Resources */,
+				CE21AFBB1423EA6E00DE35BF /* ProblemDialog.xib in Resources */,
+				CE54EB8D1423FBA200E3383A /* columns.strings in Resources */,
+				CE54EB8E1423FBA200E3383A /* help in Resources */,
+				CE54EB8F1423FBA200E3383A /* dg_cocoa.plugin in Resources */,
+				CE54EB901423FBA200E3383A /* folder32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,10 +757,24 @@
 			name = core.strings;
 			sourceTree = SOURCE_ROOT;
 		};
+		CE54EB881423FBA200E3383A /* columns.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE54EB891423FBA200E3383A /* de */,
+				CE54EB8A1423FBA200E3383A /* en */,
+				CE54EB8B1423FBA200E3383A /* fr */,
+				CE54EB8C1423FBA200E3383A /* zh_CN */,
+			);
+			name = columns.strings;
+			sourceTree = "<group>";
+		};
 		CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CE7D24A81423B123002E2297 /* en */,
+				CE21AFB61423EA6E00DE35BF /* de */,
+				CE21AFB71423EA6E00DE35BF /* fr */,
+				CE21AFB81423EA6E00DE35BF /* zh_CN */,
 			);
 			name = PrioritizeDialog.xib;
 			sourceTree = "<group>";

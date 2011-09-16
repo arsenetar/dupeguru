@@ -19,15 +19,15 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TR(@"Folder") width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TR(@"Size (KB)") width:63 refCol:refCol];
+    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TRCOL(@"Folder") width:120 refCol:refCol]];
+    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TRCOL(@"Size (KB)") width:63 refCol:refCol];
     [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
     [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:TR(@"Kind") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:TR(@"Dimensions") width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TR(@"Modification") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TR(@"Match %") width:58 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TR(@"Dupe Count") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:3 title:TRCOL(@"Kind") width:40 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:4 title:TRCOL(@"Dimensions") width:80 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TRCOL(@"Modification") width:120 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TRCOL(@"Match %") width:58 refCol:refCol]];
+    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TRCOL(@"Dupe Count") width:80 refCol:refCol]];
 }
 
 - (void)setScanOptions

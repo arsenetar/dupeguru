@@ -316,6 +316,10 @@
     <translation>从结果中移除所标记的文件</translation>
 </message>
 <message>
+    <source>Re-Prioritize Results...</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Remove Selected from Results</source>
     <translation>从结果中移除所选的文件</translation>
 </message>
@@ -569,6 +573,40 @@
     <source>Debug mode (restart required)</source>
     <translation>调试模式 (需要重新启动)</translation>
 </message>
+
+<!--- Prioritization -->
+<message>
+    <source>Ends with number</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Doesn't end with number</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Highest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Lowest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Newest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Oldest</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Re-Prioritize duplicates</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
+    <source>Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.</source>
+    <translation type="unfinished"></translation>
+</message>
 </context>
 
 <!-- ******** Columns ******** -->
@@ -581,6 +619,10 @@
 <message>
     <source>Folder</source>
     <translation>文件夹</translation>
+</message>
+<message>
+    <source>Size</source>
+    <translation>大小</translation>
 </message>
 <message>
     <source>Size (KB)</source>

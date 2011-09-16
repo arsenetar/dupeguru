@@ -49,6 +49,7 @@
 		CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */; };
 		CE9777D1141F8CB400C13FB5 /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */; };
 		CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */; };
+		CE9A2C011423F9FF003CA2EF /* columns.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9A2BFC1423F9FF003CA2EF /* columns.strings */; };
 		CEBE4D74111F0EE1009AAC6D /* HSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */; };
 		CEE7EA130FE675C80004E467 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7EA120FE675C80004E467 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -185,6 +186,10 @@
 		CE9777D2141F9D6500C13FB5 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
 		CE9777D3141F9D7600C13FB5 /* HSPopUpList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopUpList.h; sourceTree = "<group>"; };
 		CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPopUpList.m; sourceTree = "<group>"; };
+		CE9A2BFD1423F9FF003CA2EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/columns.strings; sourceTree = "<group>"; };
+		CE9A2BFE1423F9FF003CA2EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/columns.strings; sourceTree = "<group>"; };
+		CE9A2BFF1423F9FF003CA2EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/columns.strings; sourceTree = "<group>"; };
+		CE9A2C001423F9FF003CA2EF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/columns.strings; sourceTree = "<group>"; };
 		CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
 		CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
 		CECFFF1C13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
@@ -201,6 +206,9 @@
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEF0ACCC12DF3C2000B32F7E /* HSRecentFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSRecentFiles.h; path = ../../cocoalib/HSRecentFiles.h; sourceTree = SOURCE_ROOT; };
 		CEF0ACCD12DF3C2000B32F7E /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
+		CEF27A9C1423EAD90048ADFA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CEF27A9D1423EAD90048ADFA /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CEF27A9E1423EAD90048ADFA /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
 		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
@@ -300,6 +308,7 @@
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				CE8113E912E5CE9A00A36C80 /* Localizable.strings */,
+				CE9A2BFC1423F9FF003CA2EF /* columns.strings */,
 				CE4526F012E5F55F00005A15 /* core.strings */,
 				CE6E0DFD1054E9EF008D9390 /* dsa_pub.pem */,
 			);
@@ -546,6 +555,7 @@
 				CE31819D13D85D9B00B6D649 /* about.xib in Resources */,
 				CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */,
 				CE9777D1141F8CB400C13FB5 /* PrioritizeDialog.xib in Resources */,
+				CE9A2C011423F9FF003CA2EF /* columns.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,8 +742,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE9777D0141F8CB400C13FB5 /* en */,
+				CEF27A9C1423EAD90048ADFA /* de */,
+				CEF27A9D1423EAD90048ADFA /* fr */,
+				CEF27A9E1423EAD90048ADFA /* zh_CN */,
 			);
 			name = PrioritizeDialog.xib;
+			sourceTree = "<group>";
+		};
+		CE9A2BFC1423F9FF003CA2EF /* columns.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE9A2BFD1423F9FF003CA2EF /* de */,
+				CE9A2BFE1423F9FF003CA2EF /* en */,
+				CE9A2BFF1423F9FF003CA2EF /* fr */,
+				CE9A2C001423F9FF003CA2EF /* zh_CN */,
+			);
+			name = columns.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

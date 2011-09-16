@@ -71,6 +71,13 @@
 		CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB14D28124DFC2800FA7481 /* ResultTable.m */; };
 		CEB5E07813225C89009F521D /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB5E07613225C89009F521D /* ExtraFairwareReminder.m */; };
 		CEB5E07D13225CA2009F521D /* ExtraFairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB5E07B13225CA2009F521D /* ExtraFairwareReminder.xib */; };
+		CEC481F21423FBC600034F91 /* columns.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEC481ED1423FBC600034F91 /* columns.strings */; };
+		CEC481F31423FBC600034F91 /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
+		CEC481F41423FBC600034F91 /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
+		CEC481F51423FBC600034F91 /* folder32.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFC294509C89E3D00D9F998 /* folder32.png */; };
+		CECE37A61423EA980005187F /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05330D12E5D3ED0029EF25 /* DetailsPanel.xib */; };
+		CECE37A71423EA980005187F /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05330F12E5D3ED0029EF25 /* DirectoryPanel.xib */; };
+		CECE37A81423EA980005187F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05331112E5D3ED0029EF25 /* MainMenu.xib */; };
 		CEDF07A3112493B200EE5BC0 /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF07A2112493B200EE5BC0 /* StatsLabel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEF3185913D8660000B8CDCA /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF3185513D8660000B8CDCA /* about.xib */; };
@@ -207,6 +214,10 @@
 		CEB5E07713225C89009F521D /* PyExtraFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyExtraFairwareReminder.h; path = ../base/PyExtraFairwareReminder.h; sourceTree = SOURCE_ROOT; };
 		CEB5E07C13225CA2009F521D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
 		CEB5E07E13225CB8009F521D /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
+		CEC481EE1423FBC600034F91 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/columns.strings; sourceTree = "<group>"; };
+		CEC481EF1423FBC600034F91 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/columns.strings; sourceTree = "<group>"; };
+		CEC481F01423FBC600034F91 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/columns.strings; sourceTree = "<group>"; };
+		CEC481F11423FBC600034F91 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/columns.strings; sourceTree = "<group>"; };
 		CEC8F3091416A0D2004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/about.xib; sourceTree = "<group>"; };
 		CEC8F30A1416A0D2004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CEC8F30B1416A0D2004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
@@ -219,6 +230,9 @@
 		CEC8F3181416A0FC004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CEC8F3191416A0FC004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CEC8F3201416A109004D28F3 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CECE37A31423EA980005187F /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CECE37A41423EA980005187F /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CECE37A51423EA980005187F /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CED0A591111C9FD10020AD7D /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDetailsPanel.h; path = ../base/PyDetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CEDF07A0112493B200EE5BC0 /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CEDF07A1112493B200EE5BC0 /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
@@ -320,6 +334,7 @@
 				CE05330C12E5D3D70029EF25 /* xib */,
 				CEEB135109C837A2004D2330 /* dupeguru.icns */,
 				CE05332D12E5D6100029EF25 /* Localizable.strings */,
+				CEC481ED1423FBC600034F91 /* columns.strings */,
 				CE45274D12E5F62D00005A15 /* core.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				CE6E0E9E1054EB97008D9390 /* dsa_pub.pem */,
@@ -567,6 +582,13 @@
 				CEF3185913D8660000B8CDCA /* about.xib in Resources */,
 				CEF3185A13D8660000B8CDCA /* ErrorReportWindow.xib in Resources */,
 				CE84C9BD1423AF200050A6AD /* PrioritizeDialog.xib in Resources */,
+				CECE37A61423EA980005187F /* DetailsPanel.xib in Resources */,
+				CECE37A71423EA980005187F /* DirectoryPanel.xib in Resources */,
+				CECE37A81423EA980005187F /* MainMenu.xib in Resources */,
+				CEC481F21423FBC600034F91 /* columns.strings in Resources */,
+				CEC481F31423FBC600034F91 /* help in Resources */,
+				CEC481F41423FBC600034F91 /* dg_cocoa.plugin in Resources */,
+				CEC481F51423FBC600034F91 /* folder32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +743,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE84C9BC1423AF200050A6AD /* en */,
+				CECE37A31423EA980005187F /* de */,
+				CECE37A41423EA980005187F /* fr */,
+				CECE37A51423EA980005187F /* zh_CN */,
 			);
 			name = PrioritizeDialog.xib;
 			sourceTree = "<group>";
@@ -735,6 +760,17 @@
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;
+		};
+		CEC481ED1423FBC600034F91 /* columns.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC481EE1423FBC600034F91 /* de */,
+				CEC481EF1423FBC600034F91 /* en */,
+				CEC481F01423FBC600034F91 /* fr */,
+				CEC481F11423FBC600034F91 /* zh_CN */,
+			);
+			name = columns.strings;
+			sourceTree = "<group>";
 		};
 		CEF3185513D8660000B8CDCA /* about.xib */ = {
 			isa = PBXVariantGroup;
