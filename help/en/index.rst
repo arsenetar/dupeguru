@@ -28,12 +28,13 @@ It is a good idea to keep |appname| updated. You can download the latest version
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-   
-   quick_start
-   folders
-   preferences
-   results
-   faq
-   changelog
-   credits
+    :maxdepth: 2
+    
+    quick_start
+    folders
+    preferences
+    results
+    reprioritize
+    faq
+    changelog
+    credits

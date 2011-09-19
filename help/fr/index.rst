@@ -28,12 +28,13 @@ C'est toujours une bonne idée de garder |appname| à jour. Vous pouvez téléch
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-   
-   quick_start
-   folders
-   preferences
-   results
-   faq
-   changelog
-   credits
+    :maxdepth: 2
+    
+    quick_start
+    folders
+    preferences
+    results
+    reprioritize
+    faq
+    changelog
+    credits
