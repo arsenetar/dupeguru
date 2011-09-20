@@ -487,7 +487,7 @@
 </message>
 <message>
     <source>Custom Command (arguments: %d for dupe, %r for ref):</source>
-    <translation type="unfinished"></translation>
+    <translation>自定义命令 (参数: %d 指重复文件, %r 指参照文件):</translation>
 </message>
 <message>
     <source>Filename - Fields</source>
