@@ -37,12 +37,12 @@ class DupeGuru(DupeGuruBase):
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.scanner.min_match_percentage = self.prefs.filter_hardness
-        self.scanner.scan_type = self.prefs.scan_type
-        self.scanner.word_weighting = self.prefs.word_weighting
-        self.scanner.match_similar_words = self.prefs.match_similar
+        self.model.scanner.min_match_percentage = self.prefs.filter_hardness
+        self.model.scanner.scan_type = self.prefs.scan_type
+        self.model.scanner.word_weighting = self.prefs.word_weighting
+        self.model.scanner.match_similar_words = self.prefs.match_similar
         threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
-        self.scanner.size_threshold = threshold * 1024 # threshold is in KB. the scanner wants bytes
+        self.model.scanner.size_threshold = threshold * 1024 # threshold is in KB. the scanner wants bytes
     
     def _create_details_dialog(self, parent):
         return DetailsDialog(parent, self)

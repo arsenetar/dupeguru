@@ -22,16 +22,16 @@ class DupeGuru(DupeGuruBase):
         DupeGuruBase.__init__(self, data)
     
     def _setup(self):
-        self.scanner = scanner.ScannerME()
-        self.directories.fileclasses = [fs.MusicFile]
+        self.model.scanner = scanner.ScannerME()
+        self.model.directories.fileclasses = [fs.MusicFile]
         DupeGuruBase._setup(self)
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.scanner.min_match_percentage = self.prefs.filter_hardness
-        self.scanner.scan_type = self.prefs.scan_type
-        self.scanner.word_weighting = self.prefs.word_weighting
-        self.scanner.match_similar_words = self.prefs.match_similar
+        self.model.scanner.min_match_percentage = self.prefs.filter_hardness
+        self.model.scanner.scan_type = self.prefs.scan_type
+        self.model.scanner.word_weighting = self.prefs.word_weighting
+        self.model.scanner.match_similar_words = self.prefs.match_similar
         scanned_tags = set()
         if self.prefs.scan_tag_track:
             scanned_tags.add('track')
@@ -45,7 +45,7 @@ class DupeGuru(DupeGuruBase):
             scanned_tags.add('genre')
         if self.prefs.scan_tag_year:
             scanned_tags.add('year')
-        self.scanner.scanned_tags = scanned_tags
+        self.model.scanner.scanned_tags = scanned_tags
     
     def _create_details_dialog(self, parent):
         return DetailsDialog(parent, self)

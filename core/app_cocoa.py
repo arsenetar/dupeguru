@@ -27,45 +27,50 @@ JOBID2TITLE = {
     app.JOB_DELETE: tr("Sending to Trash"),
 }
 
-class DupeGuru(app.DupeGuru):
-    def __init__(self, data_module, appdata_subdir):
-        logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
-        install_exception_hook()
-        appsupport = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
-        appdata = op.join(appsupport, appdata_subdir)
-        app.DupeGuru.__init__(self, data_module, appdata)
-        self.progress = cocoa.ThreadedJobPerformer()
+class DupeGuruView:
+    def __init__(self, app):
+        self.app = app
     
-    #--- Override
     @staticmethod
-    def _open_path(path):
+    def open_path(path):
         NSWorkspace.sharedWorkspace().openFile_(str(path))
     
     @staticmethod
-    def _reveal_path(path):
+    def reveal_path(path):
         NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(str(path), '')
     
-    def _start_job(self, jobid, func, *args):
+    def start_job(self, jobid, func, *args):
         try:
-            j = self.progress.create_job()
+            j = self.app.progress.create_job()
             args = tuple([j] + list(args))
-            self.progress.run_threaded(func, args=args)
+            self.app.progress.run_threaded(func, args=args)
         except job.JobInProgressError:
             NSNotificationCenter.defaultCenter().postNotificationName_object_('JobInProgress', self)
         else:
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('JobStarted', self, ud)
     
-    def _get_default(self, key_name):
+    def get_default(self, key_name):
         raw = NSUserDefaults.standardUserDefaults().objectForKey_(key_name)
         result = pythonify(raw)
         return result
     
-    def _set_default(self, key_name, value):
+    def set_default(self, key_name, value):
         NSUserDefaults.standardUserDefaults().setObject_forKey_(value, key_name)
     
-    def _show_extra_fairware_reminder(self):
+    def show_extra_fairware_reminder(self):
         NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('ShowExtraFairwareReminder', self, None)
+    
+
+class DupeGuru(app.DupeGuru):
+    def __init__(self, data_module, appdata_subdir):
+        logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
+        install_exception_hook()
+        view = DupeGuruView(self)
+        appsupport = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
+        appdata = op.join(appsupport, appdata_subdir)
+        app.DupeGuru.__init__(self, view, data_module, appdata)
+        self.progress = cocoa.ThreadedJobPerformer()
     
     #--- Public
     def start_scanning(self):

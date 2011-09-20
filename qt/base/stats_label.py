@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-12
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -12,7 +11,7 @@ from core.gui.stats_label import StatsLabel as StatsLabelModel
 class StatsLabel(object):
     def __init__(self, app, view):
         self.view = view
-        self.model = StatsLabelModel(self, app)
+        self.model = StatsLabelModel(self, app.model)
         self.model.connect()
     
     def refresh(self):

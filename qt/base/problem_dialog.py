@@ -20,7 +20,7 @@ class ProblemDialog(QDialog):
         QDialog.__init__(self, parent, flags)
         self.app = app
         self._setupUi()
-        self.model = ProblemDialogModel(view=self, app=app)
+        self.model = ProblemDialogModel(view=self, app=app.model)
         self.table = ProblemTable(problem_dialog=self, view=self.tableView)
         self.model.connect()
         self.table.model.connect()

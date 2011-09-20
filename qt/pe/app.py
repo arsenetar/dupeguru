@@ -74,16 +74,16 @@ class DupeGuru(DupeGuruBase):
         DupeGuruBase.__init__(self, data_pe)
     
     def _setup(self):
-        self.scanner = ScannerPE()
-        self.directories.fileclasses = [File]
-        self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
+        self.model.scanner = ScannerPE()
+        self.model.directories.fileclasses = [File]
+        self.model.scanner.cache_path = op.join(self.model.appdata, 'cached_pictures.db')
         DupeGuruBase._setup(self)
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.scanner.scan_type = self.prefs.scan_type
-        self.scanner.match_scaled = self.prefs.match_scaled
-        self.scanner.threshold = self.prefs.filter_hardness
+        self.model.scanner.scan_type = self.prefs.scan_type
+        self.model.scanner.match_scaled = self.prefs.match_scaled
+        self.model.scanner.threshold = self.prefs.filter_hardness
     
     def _create_details_dialog(self, parent):
         return DetailsDialog(parent, self)

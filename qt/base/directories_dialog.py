@@ -45,7 +45,7 @@ class DirectoriesDialog(QMainWindow):
         self.treeView.selectionModel().selectionChanged.connect(self.selectionChanged)
         self.app.recentResults.itemsChanged.connect(self._updateLoadResultsButton)
         self.recentFolders.itemsChanged.connect(self._updateAddButton)
-        self.recentFolders.mustOpenItem.connect(self.app.add_directory)
+        self.recentFolders.mustOpenItem.connect(self.app.model.add_directory)
         self.directoriesModel.foldersAdded.connect(self.directoriesModelAddedFolders)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
         
@@ -170,7 +170,7 @@ class DirectoriesDialog(QMainWindow):
     #--- QWidget overrides
     def closeEvent(self, event):
         event.accept()
-        if self.app.results.is_modified:
+        if self.app.model.results.is_modified:
             title = tr("Unsaved results")
             msg = trmsg("ReallyWantToQuitMsg")
             if not self.app.confirm(title, msg):
@@ -186,7 +186,7 @@ class DirectoriesDialog(QMainWindow):
         if not dirpath:
             return
         self.lastAddedFolder = dirpath
-        self.app.add_directory(dirpath)
+        self.app.model.add_directory(dirpath)
         self.recentFolders.insertItem(dirpath)
     
     def appWillSavePrefs(self):
@@ -201,7 +201,7 @@ class DirectoriesDialog(QMainWindow):
         files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
-            self.app.load_from(destination)
+            self.app.model.load_from(destination)
             self.app.recentResults.insertItem(destination)
     
     def removeFolderButtonClicked(self):
@@ -212,16 +212,16 @@ class DirectoriesDialog(QMainWindow):
         node = index.internalPointer()
         if node.parent is None:
             row = index.row()
-            self.app.remove_directory(row)
+            self.app.model.remove_directory(row)
     
     def scanButtonClicked(self):
         title = tr("Start a new scan")
-        if self.app.results.is_modified:
+        if self.app.model.results.is_modified:
             msg = trmsg("ReallyWantToContinueMsg")
             if not self.app.confirm(title, msg):
                 return
         try:
-            self.app.start_scanning()
+            self.app.model.start_scanning()
         except NoScannableFileError:
             msg = trmsg("NoScannableFileMsg")
             QMessageBox.warning(self, title, msg)

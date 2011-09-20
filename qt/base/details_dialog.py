@@ -18,7 +18,7 @@ class DetailsDialog(QDialog):
     def __init__(self, parent, app):
         QDialog.__init__(self, parent, Qt.Tool)
         self.app = app
-        self.model = DetailsPanel(self, app)
+        self.model = DetailsPanel(self, app.model)
         self._setupUi()
         if self.app.prefs.detailsWindowRect is not None:
             self.setGeometry(self.app.prefs.detailsWindowRect)

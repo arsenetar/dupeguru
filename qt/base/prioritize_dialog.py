@@ -55,7 +55,7 @@ class PrioritizeDialog(QDialog):
         QDialog.__init__(self, parent, flags)
         self.app = app
         self._setupUi()
-        self.model = PrioritizeDialogModel(view=self, app=app)
+        self.model = PrioritizeDialogModel(view=self, app=app.model)
         self.categoryList = ComboboxModel(model=self.model.category_list, view=self.categoryCombobox)
         self.criteriaList = ListviewModel(model=self.model.criteria_list, view=self.criteriaListView)
         self.prioritizationList = PrioritizationList(model=self.model.prioritization_list, view=self.prioritizationListView)

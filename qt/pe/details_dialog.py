@@ -60,10 +60,10 @@ class DetailsDialog(DetailsDialogBase):
         self.verticalLayout.addWidget(self.tableView)
     
     def _update(self):
-        if not self.app.selected_dupes:
+        if not self.app.model.selected_dupes:
             return
-        dupe = self.app.selected_dupes[0]
-        group = self.app.results.get_group_of_duplicate(dupe)
+        dupe = self.app.model.selected_dupes[0]
+        group = self.app.model.results.get_group_of_duplicate(dupe)
         ref = group.ref
         
         self.selectedPixmap = QPixmap(str(dupe.path))

@@ -15,10 +15,10 @@ from core.gui.result_table import ResultTable as ResultTableModel
 
 class ResultsModel(Table):
     def __init__(self, app, view):
-        model = ResultTableModel(self, app)
+        model = ResultTableModel(self, app.model)
         self._app = app
-        self._data = app.data
-        self._delta_columns = app.data.DELTA_COLUMNS
+        self._data = app.model.data
+        self._delta_columns = app.model.data.DELTA_COLUMNS
         Table.__init__(self, model, view)
         self.model.connect()
     

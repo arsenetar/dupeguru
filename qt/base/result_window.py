@@ -140,7 +140,7 @@ class ResultWindow(QMainWindow):
         # Columns menu
         menu = self.menuColumns
         self._column_actions = []
-        for index, column in enumerate(self.app.data.COLUMNS):
+        for index, column in enumerate(self.app.model.data.COLUMNS):
             action = menu.addAction(column.display)
             action.setCheckable(True)
             action.column_index = index
@@ -224,7 +224,7 @@ class ResultWindow(QMainWindow):
         self.actionsButton.showMenu()
     
     def addToIgnoreListTriggered(self):
-        self.app.add_selected_to_ignore_list()
+        self.app.model.add_selected_to_ignore_list()
     
     def applyFilterTriggered(self):
         title = tr("Apply Filter")
@@ -234,34 +234,34 @@ class ResultWindow(QMainWindow):
         if not ok:
             return
         answer = str(answer)
-        self.app.apply_filter(answer)
+        self.app.model.apply_filter(answer)
         self._last_filter = answer
     
     def cancelFilterTriggered(self):
-        self.app.apply_filter('')
+        self.app.model.apply_filter('')
     
     def clearIgnoreListTriggered(self):
         title = tr("Clear Ignore List")
-        count = len(self.app.scanner.ignore_list)
+        count = len(self.app.model.scanner.ignore_list)
         if not count:
             QMessageBox.information(self, title, trmsg("NothingToClearMsg"))
             return
         msg = trmsg("ClearIgnoreListConfirmMsg").format(count)
         if self.app.confirm(title, msg, QMessageBox.No):
-            self.app.scanner.ignore_list.Clear()
+            self.app.model.scanner.ignore_list.Clear()
             QMessageBox.information(self, title, trmsg("IgnoreListClearedMsg"))
     
     def copyTriggered(self):
-        self.app.copy_or_move_marked(True)
+        self.app.model.copy_or_move_marked(True)
     
     def deleteTriggered(self):
-        count = self.app.results.mark_count
+        count = self.app.model.results.mark_count
         if not count:
             return
         title = tr("Delete duplicates")
         msg = trmsg("SendToTrashConfirmMsg").format(count)
         if self.app.confirm(title, msg):
-            self.app.delete_marked()
+            self.app.model.delete_marked()
     
     def deltaTriggered(self):
         self.resultsModel.delta_values = self.actionDelta.isChecked()
@@ -272,42 +272,42 @@ class ResultWindow(QMainWindow):
     def exportTriggered(self):
         h = self.resultsView.horizontalHeader()
         column_ids = []
-        for i in range(len(self.app.data.COLUMNS)):
+        for i in range(len(self.app.model.data.COLUMNS)):
             if not h.isSectionHidden(i):
                 column_ids.append(str(i))
-        exported_path = self.app.export_to_xhtml(column_ids)
+        exported_path = self.app.model.export_to_xhtml(column_ids)
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
     
     def hardlinkTriggered(self):
-        count = self.app.results.mark_count
+        count = self.app.model.results.mark_count
         if not count:
             return
         title = tr("Delete and hardlink duplicates")
         msg = trmsg("HardlinkConfirmMsg").format(count)
         if self.app.confirm(title, msg):
-            self.app.delete_marked(replace_with_hardlinks=True)
+            self.app.model.delete_marked(replace_with_hardlinks=True)
     
     def makeReferenceTriggered(self):
-        self.app.make_selected_reference()
+        self.app.model.make_selected_reference()
     
     def markAllTriggered(self):
-        self.app.mark_all()
+        self.app.model.mark_all()
     
     def markInvertTriggered(self):
-        self.app.mark_invert()
+        self.app.model.mark_invert()
     
     def markNoneTriggered(self):
-        self.app.mark_none()
+        self.app.model.mark_none()
     
     def markSelectedTriggered(self):
-        self.app.toggle_selected_mark_state()
+        self.app.model.toggle_selected_mark_state()
     
     def moveTriggered(self):
-        self.app.copy_or_move_marked(False)
+        self.app.model.copy_or_move_marked(False)
     
     def openTriggered(self):
-        self.app.open_selected()
+        self.app.model.open_selected()
     
     def powerMarkerTriggered(self):
         self.resultsModel.power_marker = self.actionPowerMarker.isChecked()
@@ -316,16 +316,16 @@ class ResultWindow(QMainWindow):
         self.app.show_preferences()
     
     def removeMarkedTriggered(self):
-        count = self.app.results.mark_count
+        count = self.app.model.results.mark_count
         if not count:
             return
         title = tr("Remove duplicates")
         msg = trmsg("FileRemovalConfirmMsg").format(count)
         if self.app.confirm(title, msg):
-            self.app.remove_marked()
+            self.app.model.remove_marked()
     
     def removeSelectedTriggered(self):
-        self.app.remove_selected()
+        self.app.model.remove_selected()
     
     def renameTriggered(self):
         self.resultsView.edit(self.resultsView.selectionModel().currentIndex())
@@ -337,7 +337,7 @@ class ResultWindow(QMainWindow):
             dlg.model.perform_reprioritization()
     
     def revealTriggered(self):
-        self.app.reveal_selected()
+        self.app.model.reveal_selected()
     
     def saveResultsTriggered(self):
         title = trmsg("SelectResultToSaveMsg")
@@ -346,7 +346,7 @@ class ResultWindow(QMainWindow):
         if destination:
             if not destination.endswith('.dupeguru'):
                 destination = '{}.dupeguru'.format(destination)
-            self.app.save_as(destination)
+            self.app.model.save_as(destination)
             self.app.recentResults.insertItem(destination)
     
     #--- Events
@@ -355,7 +355,7 @@ class ResultWindow(QMainWindow):
         h = self.resultsView.horizontalHeader()
         widths = []
         visible = []
-        for i in range(len(self.app.data.COLUMNS)):
+        for i in range(len(self.app.model.data.COLUMNS)):
             widths.append(h.sectionSize(i))
             visible.append(not h.isSectionHidden(i))
         prefs.columns_width = widths
@@ -377,8 +377,8 @@ class ResultWindow(QMainWindow):
         self.actionActions.menu().exec_(event.globalPos())
     
     def resultsDoubleClicked(self):
-        self.app.open_selected()
+        self.app.model.open_selected()
     
     def resultsSpacePressed(self):
-        self.app.toggle_selected_mark_state()
+        self.app.model.toggle_selected_mark_state()
     

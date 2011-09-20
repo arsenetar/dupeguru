@@ -41,7 +41,16 @@ class DestType:
     Absolute = 2
 
 class DupeGuru(RegistrableApplication, Broadcaster):
-    def __init__(self, data_module, appdata):
+    #--- View interface
+    # open_path(path)
+    # reveal_path(path)
+    # start_job(jobid, func, *args) ( func(j, *args) )
+    # get_default(key_name, fallback_value=None)
+    # set_default(key_name, value)
+    # show_extra_fairware_reminder()
+    
+    def __init__(self, view, data_module, appdata):
+        self.view = view
         if self.get_default(DEBUG_MODE_PREFERENCE, False):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
@@ -123,14 +132,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.notify('problems_changed')
     
     @staticmethod
-    def _open_path(path):
-        raise NotImplementedError()
-    
-    @staticmethod
-    def _reveal_path(path):
-        raise NotImplementedError()
-    
-    @staticmethod
     def _remove_hardlink_dupes(files):
         seen_inodes = set()
         result = []
@@ -150,19 +151,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return
         self.selected_dupes = dupes
         self.notify('dupes_selected')
-    
-    def _start_job(self, jobid, func, *args):
-        # func(j, *args)
-        raise NotImplementedError()
-    
-    def _get_default(self, key_name, fallback_value=None):
-        raise NotImplementedError()
-    
-    def _set_default(self, key_name, value):
-        raise NotImplementedError()
-    
-    def _show_extra_fairware_reminder(self):
-        raise NotImplementedError()
     
     #--- Public
     def add_directory(self, d):
@@ -194,7 +182,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def show_extra_fairware_reminder_if_needed(self):
         if self.results.mark_count > 100 and self.should_show_fairware_reminder:
-            self._show_extra_fairware_reminder()
+            self.view.show_extra_fairware_reminder()
     
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
@@ -234,11 +222,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         
         self.show_extra_fairware_reminder_if_needed()
         jobid = JOB_COPY if copy else JOB_MOVE
-        self._start_job(jobid, do)
+        self.view.start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
         self.show_extra_fairware_reminder_if_needed()
-        self._start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
+        self.view.start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
     
     def export_to_xhtml(self, column_ids):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
@@ -288,7 +276,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def load_from(self, filename):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
-        self._start_job(JOB_LOAD, do)
+        self.view.start_job(JOB_LOAD, do)
     
     def make_selected_reference(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -321,7 +309,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def open_selected(self):
         if self.selected_dupes:
-            self._open_path(self.selected_dupes[0].path)
+            self.view.open_path(self.selected_dupes[0].path)
     
     def purge_ignore_list(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
@@ -360,7 +348,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def reveal_selected(self):
         if self.selected_dupes:
-            self._reveal_path(self.selected_dupes[0].path)
+            self.view.reveal_path(self.selected_dupes[0].path)
     
     def save(self):
         if not op.exists(self.appdata):
@@ -388,7 +376,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             raise NoScannableFileError()
         self.results.groups = []
         self._results_changed()
-        self._start_job(JOB_SCAN, do)
+        self.view.start_job(JOB_SCAN, do)
     
     def toggle_selected_mark_state(self):
         for dupe in self.selected_dupes:
@@ -399,7 +387,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
     
     def get_default(self, key, fallback_value=None):
-        result = nonone(self._get_default(key), fallback_value)
+        result = nonone(self.view.get_default(key), fallback_value)
         if fallback_value is not None and not isinstance(result, type(fallback_value)):
             # we don't want to end up with garbage values from the prefs
             try:
@@ -409,7 +397,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return result
     
     def set_default(self, key, value):
-        self._set_default(key, value)
+        self.view.set_default(key, value)
     
     #--- Properties
     @property
