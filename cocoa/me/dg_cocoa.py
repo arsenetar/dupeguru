@@ -9,7 +9,7 @@ install_cocoa_trans()
 
 from hscommon.cocoa import signature
 
-from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
+from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
 from core_me import __appname__
 from core.scanner import ScanType
@@ -17,7 +17,7 @@ from core.scanner import ScanType
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.py = DupeGuruME()
+        self._init(DupeGuruME)
         return self
     
     def removeDeadTracks(self):

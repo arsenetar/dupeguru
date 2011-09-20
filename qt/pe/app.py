@@ -11,9 +11,10 @@ import logging
 
 from PyQt4.QtGui import QImage, QImageReader, QTransform
 
-from core_pe import data as data_pe, __appname__
+from core_pe import __appname__
 from core_pe.photo import Photo as PhotoBase
 from core_pe.scanner import ScannerPE
+from core_pe.app import DupeGuru as DupeGuruModel
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .block import getblocks
@@ -66,12 +67,10 @@ class File(PhotoBase):
     
 
 class DupeGuru(DupeGuruBase):
+    MODELCLASS = DupeGuruModel
     EDITION = 'pe'
     LOGO_NAME = 'logo_pe'
     NAME = __appname__
-    
-    def __init__(self):
-        DupeGuruBase.__init__(self, data_pe)
     
     def _setup(self):
         self.model.scanner = ScannerPE()

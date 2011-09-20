@@ -19,10 +19,11 @@ from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
 from hscommon.trans import tr
 
-from core import app_cocoa, directories
-from . import data, _block_osx
+from core import directories
+from . import _block_osx
 from .photo import Photo as PhotoBase
 from .scanner import ScannerPE
+from .app import DupeGuru as DupeGuruBase
 
 IPHOTO_PATH = Path('iPhoto Library')
 
@@ -128,9 +129,10 @@ class Directories(directories.Directories):
             return directories.Directories.has_any_file(self)
     
 
-class DupeGuruPE(app_cocoa.DupeGuru):
-    def __init__(self):
-        app_cocoa.DupeGuru.__init__(self, data, 'dupeGuru Picture Edition')
+class DupeGuruPE(DupeGuruBase):
+    def __init__(self, view, appdata):
+        appdata = op.join(appdata, 'dupeGuru Picture Edition')
+        DupeGuruBase.__init__(self, view, appdata)
         self.scanner = ScannerPE()
         self.directories = Directories()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
@@ -164,17 +166,17 @@ class DupeGuruPE(app_cocoa.DupeGuru):
             except (CommandError, RuntimeError) as e:
                 raise EnvironmentError(str(e))
         else:
-            app_cocoa.DupeGuru._do_delete_dupe(self, dupe, replace_with_hardlinks)
+            DupeGuruBase._do_delete_dupe(self, dupe, replace_with_hardlinks)
     
     def _create_file(self, path):
         if (self.directories.iphoto_libpath is not None) and (path in self.directories.iphoto_libpath[:-1]):
             return IPhoto(path)
-        return app_cocoa.DupeGuru._create_file(self, path)
+        return DupeGuruBase._create_file(self, path)
     
     def copy_or_move(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, IPhoto):
             copy = True
-        return app_cocoa.DupeGuru.copy_or_move(self, dupe, copy, destination, dest_type)
+        return DupeGuruBase.copy_or_move(self, dupe, copy, destination, dest_type)
     
     def selected_dupe_path(self):
         if not self.selected_dupes:
@@ -190,7 +192,7 @@ class DupeGuruPE(app_cocoa.DupeGuru):
         return ref.path
     
     def start_scanning(self):
-        result = app_cocoa.DupeGuru.start_scanning(self)
+        result = DupeGuruBase.start_scanning(self)
         if self.directories.has_iphoto_path():
             try:
                 app('iPhoto')

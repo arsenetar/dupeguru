@@ -10,14 +10,14 @@ install_cocoa_trans()
 from hscommon.cocoa import signature
 
 from core.scanner import ScanType
-from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
+from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
 from core_se import __appname__
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
-        self.py = DupeGuru()
+        self._init(DupeGuru)
         return self
     
     #---Properties

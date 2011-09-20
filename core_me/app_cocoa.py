@@ -9,13 +9,15 @@
 import logging
 from appscript import app, k, CommandError
 import time
+import os.path as op
 
 from hscommon.cocoa import as_fetch
 from hscommon.trans import tr
 
-from core.app_cocoa import JOBID2TITLE, DupeGuru as DupeGuruBase
+from core.app_cocoa import JOBID2TITLE
 
-from . import data, scanner, fs
+from . import scanner, fs
+from .app import DupeGuru as DupeGuruBase
 
 JOB_REMOVE_DEAD_TRACKS = 'jobRemoveDeadTracks'
 JOB_SCAN_DEAD_TRACKS = 'jobScanDeadTracks'
@@ -26,8 +28,9 @@ JOBID2TITLE.update({
 })
 
 class DupeGuruME(DupeGuruBase):
-    def __init__(self):
-        DupeGuruBase.__init__(self, data, 'dupeGuru Music Edition')
+    def __init__(self, view, appdata):
+        appdata = op.join(appdata, 'dupeGuru Music Edition')
+        DupeGuruBase.__init__(self, view, appdata)
         self.scanner = scanner.ScannerME()
         self.directories.fileclasses = [fs.MusicFile]
         self.dead_tracks = []

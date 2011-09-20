@@ -7,14 +7,14 @@
 from hscommon.trans import install_cocoa_trans
 install_cocoa_trans()
 
-from core.app_cocoa_inter import PyDupeGuruBase, PyDetailsPanel
+from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
 from core_pe import app_cocoa as app_pe_cocoa, __appname__
 from core.scanner import ScanType
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru, self).init()
-        self.py = app_pe_cocoa.DupeGuruPE()
+        self._init(app_pe_cocoa.DupeGuruPE)
         return self
     
     def clearPictureCache(self):

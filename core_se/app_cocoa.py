@@ -7,15 +7,15 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
+import os.path as op
 
 from hscommon import io
 from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSWorkspace
 
 from core import fs
-from core.app_cocoa import DupeGuru as DupeGuruBase
 from core.directories import Directories as DirectoriesBase, DirectoryState
-from . import data
+from .app import DupeGuru as DupeGuruBase
 
 def is_bundle(str_path):
     sw = NSWorkspace.sharedWorkspace()
@@ -66,7 +66,8 @@ class Directories(DirectoriesBase):
     
 
 class DupeGuru(DupeGuruBase):
-    def __init__(self):
-        DupeGuruBase.__init__(self, data, 'dupeGuru')
+    def __init__(self, view, appdata):
+        appdata = op.join(appdata, 'dupeGuru')
+        DupeGuruBase.__init__(self, view, appdata)
         self.directories = Directories()
     

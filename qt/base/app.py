@@ -46,10 +46,11 @@ class SysWrapper(io.IOBase):
             logging.warning(s)
 
 class DupeGuru(QObject):
+    MODELCLASS = None
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
     
-    def __init__(self, data_module):
+    def __init__(self):
         QObject.__init__(self)
         appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
         if not op.exists(appdata):
@@ -63,7 +64,7 @@ class DupeGuru(QObject):
             sys.stdout = SysWrapper()
         self.prefs = self._create_preferences()
         self.prefs.load()
-        self.model = DupeGuruModel(view=self, data_module=data_module, appdata=appdata)
+        self.model = self.MODELCLASS(view=self, appdata=appdata)
         self._setup()
     
     #--- Private
@@ -256,11 +257,11 @@ class DupeGuru(QObject):
     def reveal_path(path):
         DupeGuru.open_path(path[:-1])
     
-    def start_job(self, jobid, func, *args):
+    def start_job(self, jobid, func, args=()):
         title = JOBID2TITLE[jobid]
         try:
             j = self._progress.create_job()
-            args = tuple([j] + list(args))
+            args = (j, ) + tuple(args)
             self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
             msg = trmsg("TaskHangingMsg")

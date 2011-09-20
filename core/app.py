@@ -44,7 +44,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     #--- View interface
     # open_path(path)
     # reveal_path(path)
-    # start_job(jobid, func, *args) ( func(j, *args) )
+    # start_job(jobid, func, args=()) ( func(j, *args) )
     # get_default(key_name, fallback_value=None)
     # set_default(key_name, value)
     # show_extra_fairware_reminder()
@@ -226,7 +226,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def delete_marked(self, replace_with_hardlinks=False):
         self.show_extra_fairware_reminder_if_needed()
-        self.view.start_job(JOB_DELETE, self._do_delete, replace_with_hardlinks)
+        self.view.start_job(JOB_DELETE, self._do_delete, args=[replace_with_hardlinks])
     
     def export_to_xhtml(self, column_ids):
         column_ids = [colid for colid in column_ids if colid.isdigit()]

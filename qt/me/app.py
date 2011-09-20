@@ -6,7 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core_me import data, scanner, fs, __appname__
+from core_me import scanner, fs, __appname__
+from core_me.app import DupeGuru as DupeGuruModel
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog
@@ -14,12 +15,10 @@ from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
 class DupeGuru(DupeGuruBase):
+    MODELCLASS = DupeGuruModel
     EDITION = 'me'
     LOGO_NAME = 'logo_me'
     NAME = __appname__
-    
-    def __init__(self):
-        DupeGuruBase.__init__(self, data)
     
     def _setup(self):
         self.model.scanner = scanner.ScannerME()
