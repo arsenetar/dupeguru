@@ -137,3 +137,39 @@ def test_filename_reprioritization(app):
     app.add_pri_criterion("Filename", 0) # Ends with a number
     app.pdialog.perform_reprioritization()
     eq_(app.rtable[0].data[0], 'foo1.ext')
+
+#---
+def app_with_subfolders():
+    dupes = [
+        [
+            no('foo1', folder='baz'),
+            no('foo2', folder='foo/bar'),
+        ],
+        [
+            no('foo3', folder='baz'),
+            no('foo4', folder='foo'),
+        ],
+    ]
+    return app_with_dupes(dupes)
+
+@with_app(app_with_subfolders)
+def test_folder_crit_is_sorted(app):
+    # Folder subcriteria are sorted.
+    app.select_pri_criterion("Folder")
+    eq_(app.pdialog.criteria_list[:], ['baz', 'foo', 'foo/bar'])
+
+@with_app(app_with_subfolders)
+def test_folder_crit_includes_subfolders(app):
+    # When selecting a folder crit, dupes in a subfolder are also considered as affected by that
+    # crit.
+    app.add_pri_criterion("Folder", 1) # foo
+    app.pdialog.perform_reprioritization()
+    # Both foo and foo/bar dupes will be prioritized
+    eq_(app.rtable[0].data[0], 'foo2')
+    eq_(app.rtable[2].data[0], 'foo4')
+
+@with_app(app_with_subfolders)
+def test_display_something_on_empty_extensions(app):
+    # When there's no extension, display "None" instead of nothing at all.
+    app.select_pri_criterion("Kind")
+    eq_(app.pdialog.criteria_list[:], ['None'])
