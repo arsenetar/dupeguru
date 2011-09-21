@@ -138,7 +138,7 @@ class PyDupeGuruBase(PyFairware):
         return self.py.results.is_modified
     
     def deltaColumns(self):
-        return list(self.py.data.DELTA_COLUMNS)
+        return list(self.py.DELTA_COLUMNS)
     
     #---Properties
     @signature('v@:c')

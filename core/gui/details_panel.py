@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-05
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -27,11 +26,11 @@ class DetailsPanel(GUIObject):
         else:
             dupe = None
             group = None
-        l1 = self.app._get_display_info(dupe, group, False)
+        l1 = self.app.get_display_info(dupe, group, False)
         # we don't want the two sides of the table to display the stats for the same file
         ref = group.ref if group is not None and group.ref is not dupe else None
-        l2 = self.app._get_display_info(ref, group, False)
-        names = [c.display for c in self.app.data.COLUMNS]
+        l2 = self.app.get_display_info(ref, group, False)
+        names = [c.display for c in self.app.COLUMNS]
         self._table = list(zip(names, l1, l2))
     
     #--- Public

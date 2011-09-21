@@ -21,7 +21,7 @@ from hscommon.trans import tr
 
 class Results(Markable):
     #---Override
-    def __init__(self, data_module):
+    def __init__(self, app):
         super(Results, self).__init__()
         self.__groups = []
         self.__group_of_duplicate = {}
@@ -33,7 +33,7 @@ class Results(Markable):
         self.__filtered_groups = None
         self.__recalculate_stats()
         self.__marked_size = 0
-        self.data = data_module
+        self.app = app
         self.problems = [] # (dupe, error_msg)
         self.is_modified = False
     
@@ -328,12 +328,12 @@ class Results(Markable):
     def sort_dupes(self, key, asc=True, delta=False):
         if not self.__dupes:
             self.__get_dupe_list()
-        keyfunc = lambda d: self.data.GetDupeSortKey(d, lambda: self.get_group_of_duplicate(d), key, delta)
+        keyfunc = lambda d: self.app._get_dupe_sort_key(d, lambda: self.get_group_of_duplicate(d), key, delta)
         self.__dupes.sort(key=keyfunc, reverse=not asc)
         self.__dupes_sort_descriptor = (key,asc,delta)
     
     def sort_groups(self,key,asc=True):
-        keyfunc = lambda g: self.data.GetGroupSortKey(g, key)
+        keyfunc = lambda g: self.app._get_group_sort_key(g, key)
         self.groups.sort(key=keyfunc, reverse=not asc)
         self.__groups_sort_descriptor = (key,asc)
     

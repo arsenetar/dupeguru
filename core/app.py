@@ -11,6 +11,8 @@ import os.path as op
 import logging
 import subprocess
 import re
+import time
+from collections import namedtuple
 
 from send2trash import send2trash
 from hscommon import io
@@ -18,7 +20,7 @@ from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
-from hscommon.util import delete_if_empty, first, escape, nonone
+from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal
 from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
@@ -40,6 +42,36 @@ class DestType:
     Relative = 1
     Absolute = 2
 
+
+Column = namedtuple('Column', 'attr display')
+
+def format_timestamp(t, delta):
+    if delta:
+        return format_time_decimal(t)
+    else:
+        if t > 0:
+            return time.strftime('%Y/%m/%d %H:%M:%S', time.localtime(t))
+        else:
+            return '---'
+
+def format_words(w):
+    def do_format(w):
+        if isinstance(w, list):
+            return '(%s)' % ', '.join(do_format(item) for item in w)
+        else:
+            return w.replace('\n', ' ')
+    
+    return ', '.join(do_format(item) for item in w)
+
+def format_perc(p):
+    return "%0.0f" % p
+
+def format_dupe_count(c):
+    return str(c) if c else '---'
+
+def cmp_value(value):
+    return value.lower() if isinstance(value, str) else value
+
 class DupeGuru(RegistrableApplication, Broadcaster):
     #--- View interface
     # open_path(path)
@@ -49,7 +81,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # set_default(key_name, value)
     # show_extra_fairware_reminder()
     
-    def __init__(self, view, data_module, appdata):
+    def __init__(self, view, appdata):
         self.view = view
         if self.get_default(DEBUG_MODE_PREFERENCE, False):
             logging.getLogger().setLevel(logging.DEBUG)
@@ -62,9 +94,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.appdata = appdata
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
-        self.data = data_module
         self.directories = directories.Directories()
-        self.results = results.Results(data_module)
+        self.results = results.Results(self)
         self.scanner = scanner.Scanner()
         self.options = {
             'escape_filter_regexp': True,
@@ -72,6 +103,19 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
+    
+    #--- Virtual
+    def _get_display_info(self, dupe, group, delta):
+        raise NotImplementedError()
+    
+    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
+        raise NotImplementedError()
+    
+    def _get_group_sort_key(self, group, key):
+        raise NotImplementedError()
+    
+    def _prioritization_categories(self):
+        raise NotImplementedError()
     
     #--- Private
     def _do_delete(self, j, replace_with_hardlinks):
@@ -92,15 +136,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             os.link(str(ref.path), str(dupe.path))
         self.clean_empty_dirs(dupe.path[:-1])
     
-    def _get_display_info(self, dupe, group, delta=False):
-        if (dupe is None) or (group is None):
-            return ['---'] * len(self.data.COLUMNS)
-        try:
-            return self.data.GetDisplayInfo(dupe, group, delta)
-        except Exception as e:
-            logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
-            return ['---'] * len(self.data.COLUMNS)
-    
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
         return fs.get_file(path, self.directories.fileclasses + [fs.Folder])
@@ -111,7 +146,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if f is None:
             return None
         try:
-            f._read_all_info(attrnames=self.data.METADATA_TO_READ)
+            f._read_all_info(attrnames=self.METADATA_TO_READ)
             return f
         except EnvironmentError:
             return None
@@ -232,15 +267,24 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
         column_ids = list(map(int, column_ids))
         column_ids.sort()
-        colnames = [col.display for i, col in enumerate(self.data.COLUMNS) if i in column_ids]
+        colnames = [col.display for i, col in enumerate(self.COLUMNS) if i in column_ids]
         rows = []
         for group in self.results.groups:
             for dupe in group:
-                data = self._get_display_info(dupe, group)
+                data = self.get_display_info(dupe, group)
                 row = [data[colid] for colid in column_ids]
                 row.insert(0, dupe is not group.ref)
                 rows.append(row)
         return export.export_to_xhtml(colnames, rows)
+    
+    def get_display_info(self, dupe, group, delta=False):
+        if (dupe is None) or (group is None):
+            return ['---'] * len(self.COLUMNS)
+        try:
+            return self._get_display_info(dupe, group, delta)
+        except Exception as e:
+            logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
+            return ['---'] * len(self.COLUMNS)
     
     def invoke_command(self, cmd):
         """Calls command `cmd` with %d and %r placeholders replaced.

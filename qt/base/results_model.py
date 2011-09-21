@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt4.QtCore import SIGNAL, Qt
-from PyQt4.QtGui import QBrush, QFont, QTableView, QColor, QItemSelectionModel, QItemSelection
+from PyQt4.QtGui import QBrush, QFont, QTableView, QColor
 
 from qtlib.table import Table
 
@@ -16,14 +16,13 @@ from core.gui.result_table import ResultTable as ResultTableModel
 class ResultsModel(Table):
     def __init__(self, app, view):
         model = ResultTableModel(self, app.model)
-        self._app = app
-        self._data = app.model.data
-        self._delta_columns = app.model.data.DELTA_COLUMNS
+        self._app = app.model
+        self._delta_columns = app.model.DELTA_COLUMNS
         Table.__init__(self, model, view)
         self.model.connect()
     
     def columnCount(self, parent):
-        return len(self._data.COLUMNS)
+        return len(self._app.COLUMNS)
     
     def data(self, index, role):
         if not index.isValid():
@@ -62,8 +61,8 @@ class ResultsModel(Table):
         return flags
     
     def headerData(self, section, orientation, role):
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(self._data.COLUMNS):
-            return self._data.COLUMNS[section].display
+        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(self._app.COLUMNS):
+            return self._app.COLUMNS[section].display
         return None
     
     def setData(self, index, value, role):

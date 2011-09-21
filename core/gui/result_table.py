@@ -25,13 +25,13 @@ class DupeRow(Row):
     @property
     def data(self):
         if self._data is None:
-            self._data = self._app._get_display_info(self._dupe, self._group, False)
+            self._data = self._app.get_display_info(self._dupe, self._group, False)
         return self._data
     
     @property
     def data_delta(self):
         if self._data_delta is None:
-            self._data_delta = self._app._get_display_info(self._dupe, self._group, True)
+            self._data_delta = self._app.get_display_info(self._dupe, self._group, True)
         return self._data_delta
     
     @property

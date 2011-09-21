@@ -140,7 +140,7 @@ class ResultWindow(QMainWindow):
         # Columns menu
         menu = self.menuColumns
         self._column_actions = []
-        for index, column in enumerate(self.app.model.data.COLUMNS):
+        for index, column in enumerate(self.app.model.COLUMNS):
             action = menu.addAction(column.display)
             action.setCheckable(True)
             action.column_index = index
@@ -272,7 +272,7 @@ class ResultWindow(QMainWindow):
     def exportTriggered(self):
         h = self.resultsView.horizontalHeader()
         column_ids = []
-        for i in range(len(self.app.model.data.COLUMNS)):
+        for i in range(len(self.app.model.COLUMNS)):
             if not h.isSectionHidden(i):
                 column_ids.append(str(i))
         exported_path = self.app.model.export_to_xhtml(column_ids)
@@ -355,7 +355,7 @@ class ResultWindow(QMainWindow):
         h = self.resultsView.horizontalHeader()
         widths = []
         visible = []
-        for i in range(len(self.app.model.data.COLUMNS)):
+        for i in range(len(self.app.model.COLUMNS)):
             widths.append(h.sectionSize(i))
             visible.append(not h.isSectionHidden(i))
         prefs.columns_width = widths

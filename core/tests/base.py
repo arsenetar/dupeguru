@@ -8,17 +8,17 @@
 
 from hscommon.testutil import TestApp as TestAppBase, eq_, with_app
 from hscommon.path import Path
-from hscommon.util import get_file_ext
+from hscommon.util import get_file_ext, format_size
 from jobprogress.job import nulljob, JobCancelled
 
 from .. import engine
+from .. import prioritize
 from ..engine import getwords
-from ..app import DupeGuru as DupeGuruBase
+from ..app import DupeGuru as DupeGuruBase, Column, cmp_value
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
 from ..gui.result_table import ResultTable
 from ..gui.prioritize_dialog import PrioritizeDialog
-from . import data
 
 class DupeGuruView:
     JOB = nulljob
@@ -37,8 +37,42 @@ class DupeGuruView:
     
 
 class DupeGuru(DupeGuruBase):
+    COLUMNS = [
+        Column('name', 'Filename'),
+        Column('folder_path', 'Directory'),
+        Column('size', 'Size (KB)'),
+        Column('extension', 'Kind'),
+    ]
+    DELTA_COLUMNS = {2,}
+    METADATA_TO_READ = ['size']
+    
     def __init__(self):
-        DupeGuruBase.__init__(self, DupeGuruView(), data, '/tmp')
+        DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
+    
+    def _get_display_info(self, dupe, group, delta):
+        size = dupe.size
+        m = group.get_match_of(dupe)
+        if m and delta:
+            r = group.ref
+            size -= r.size
+        return [
+            dupe.name,
+            str(dupe.folder_path),
+            format_size(size, 0, 1, False),
+            dupe.extension if hasattr(dupe, 'extension') else '---',
+        ]
+    
+    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
+        r = cmp_value(getattr(dupe, self.COLUMNS[key].attr))
+        if delta and (key in self.DELTA_COLUMNS):
+            r -= cmp_value(getattr(get_group().ref, self.COLUMNS[key].attr))
+        return r
+    
+    def _get_group_sort_key(self, group, key):
+        return cmp_value(getattr(group.ref, self.COLUMNS[key].attr))
+    
+    def _prioritization_categories(self):
+        return prioritize.all_categories()
 
 class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
