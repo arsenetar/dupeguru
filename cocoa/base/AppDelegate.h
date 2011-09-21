@@ -49,7 +49,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (void)applicationWillTerminate:(NSNotification *)aNotification;
 - (void)recentFileClicked:(NSString *)path;
-- (void)showExtraFairwareReminder:(NSNotification *)aNotification;
 
 /* Actions */
 - (IBAction)loadResults:(id)sender;
@@ -60,4 +59,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)showResultWindow:(id)sender;
 - (IBAction)startScanning:(id)sender;
+
+/* model --> view */
+- (void)showExtraFairwareReminder;
 @end

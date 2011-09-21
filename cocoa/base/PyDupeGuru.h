@@ -10,6 +10,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyApp.h"
 
 @interface PyDupeGuruBase : PyApp
+- (void)bindCocoa:(id)cocoa;
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)removeDirectory:(NSNumber *)index;

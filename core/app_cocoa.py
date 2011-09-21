@@ -44,6 +44,9 @@ class PyDupeGuruBase(PyFairware):
         self.py = modelclass(self, appdata)
         self.progress = cocoa.ThreadedJobPerformer()
     
+    def bindCocoa_(self, cocoa):
+        self.cocoa = cocoa
+    
     #---Directories
     def addDirectory_(self, directory):
         return self.py.add_directory(directory)
@@ -211,7 +214,7 @@ class PyDupeGuruBase(PyFairware):
         NSUserDefaults.standardUserDefaults().setObject_forKey_(value, key_name)
     
     def show_extra_fairware_reminder(self):
-        NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('ShowExtraFairwareReminder', self, None)
+        self.cocoa.showExtraFairwareReminder()
 
 class PyDetailsPanel(PyGUIObject):
     py_class = DetailsPanel

@@ -18,6 +18,7 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegateBase
 - (void)awakeFromNib
 {
+    [py bindCocoa:self];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     /* Because the pref pane is lazily loaded, we have to manually do the update check if the
        preference is set.
@@ -33,8 +34,6 @@ http://www.hardcoded.net/licenses/bsd_license
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(showExtraFairwareReminder:) name:ShowExtraFairwareReminder object:nil];
 }
 
 /* Virtual */
@@ -207,7 +206,9 @@ http://www.hardcoded.net/licenses/bsd_license
     [py loadResultsFrom:path];
 }
 
-- (void)showExtraFairwareReminder:(NSNotification *)aNotification
+
+/* model --> view */
+- (void)showExtraFairwareReminder
 {
     ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithPy:py];
     [dialog start];
