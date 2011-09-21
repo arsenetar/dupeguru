@@ -20,23 +20,25 @@ from ..gui.result_table import ResultTable
 from ..gui.prioritize_dialog import PrioritizeDialog
 from . import data
 
-class DupeGuru(DupeGuruBase):
+class DupeGuruView:
     JOB = nulljob
     
-    def __init__(self):
-        DupeGuruBase.__init__(self, data, '/tmp')
-    
-    def _start_job(self, jobid, func, *args):
+    def start_job(self, jobid, func, args=()):
         try:
             func(self.JOB, *args)
         except JobCancelled:
             return
     
-    def _get_default(self, key_name):
+    def get_default(self, key_name):
         return None
     
-    def _set_default(self, key_name, value):
+    def set_default(self, key_name, value):
         pass
+    
+
+class DupeGuru(DupeGuruBase):
+    def __init__(self):
+        DupeGuruBase.__init__(self, DupeGuruView(), data, '/tmp')
 
 class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
