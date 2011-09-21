@@ -22,7 +22,6 @@ from hscommon.trans import tr
 from core import directories
 from . import _block_osx
 from .photo import Photo as PhotoBase
-from .scanner import ScannerPE
 from .app import DupeGuru as DupeGuruBase
 
 IPHOTO_PATH = Path('iPhoto Library')
@@ -133,9 +132,7 @@ class DupeGuruPE(DupeGuruBase):
     def __init__(self, view, appdata):
         appdata = op.join(appdata, 'dupeGuru Picture Edition')
         DupeGuruBase.__init__(self, view, appdata)
-        self.scanner = ScannerPE()
         self.directories = Directories()
-        self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     
     def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):

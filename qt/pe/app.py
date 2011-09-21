@@ -6,14 +6,12 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import os.path as op
 import logging
 
 from PyQt4.QtGui import QImage, QImageReader, QTransform
 
 from core_pe import __appname__
 from core_pe.photo import Photo as PhotoBase
-from core_pe.scanner import ScannerPE
 from core_pe.app import DupeGuru as DupeGuruModel
 
 from ..base.app import DupeGuru as DupeGuruBase
@@ -73,9 +71,7 @@ class DupeGuru(DupeGuruBase):
     NAME = __appname__
     
     def _setup(self):
-        self.model.scanner = ScannerPE()
         self.model.directories.fileclasses = [File]
-        self.model.scanner.cache_path = op.join(self.model.appdata, 'cached_pictures.db')
         DupeGuruBase._setup(self)
     
     def _update_options(self):

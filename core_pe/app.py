@@ -5,11 +5,14 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import os.path as op
+
 from hscommon.trans import tr as trbase
 from hscommon.util import format_size
 
 from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format_perc,
     format_dupe_count, cmp_value)
+from .scanner import ScannerPE
 from . import prioritize
 from . import __appname__
 
@@ -41,6 +44,8 @@ class DupeGuru(DupeGuruBase):
     
     def __init__(self, view, appdata):
         DupeGuruBase.__init__(self, view, appdata)
+        self.scanner = ScannerPE()
+        self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size

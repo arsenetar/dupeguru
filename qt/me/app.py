@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core_me import scanner, fs, __appname__
+from core_me import __appname__
 from core_me.app import DupeGuru as DupeGuruModel
 
 from ..base.app import DupeGuru as DupeGuruBase
@@ -19,11 +19,6 @@ class DupeGuru(DupeGuruBase):
     EDITION = 'me'
     LOGO_NAME = 'logo_me'
     NAME = __appname__
-    
-    def _setup(self):
-        self.model.scanner = scanner.ScannerME()
-        self.model.directories.fileclasses = [fs.MusicFile]
-        DupeGuruBase._setup(self)
     
     def _update_options(self):
         DupeGuruBase._update_options(self)

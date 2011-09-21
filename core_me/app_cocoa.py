@@ -17,7 +17,6 @@ from hscommon.trans import tr
 from core.app import JobType
 from core.app_cocoa import JOBID2TITLE
 
-from . import scanner, fs
 from .app import DupeGuru as DupeGuruBase
 
 JobType.RemoveDeadTracks = 'jobRemoveDeadTracks'
@@ -32,8 +31,6 @@ class DupeGuruME(DupeGuruBase):
     def __init__(self, view, appdata):
         appdata = op.join(appdata, 'dupeGuru Music Edition')
         DupeGuruBase.__init__(self, view, appdata)
-        self.scanner = scanner.ScannerME()
-        self.directories.fileclasses = [fs.MusicFile]
         self.dead_tracks = []
     
     def remove_dead_tracks(self):

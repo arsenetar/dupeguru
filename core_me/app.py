@@ -12,6 +12,7 @@ from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp,
     format_perc, format_words, format_dupe_count, cmp_value)
 from . import prioritize
 from . import __appname__
+from . import scanner, fs
 
 tr = lambda s: trbase(s, 'columns')
 
@@ -45,6 +46,8 @@ class DupeGuru(DupeGuruBase):
     
     def __init__(self, view, appdata):
         DupeGuruBase.__init__(self, view, appdata)
+        self.scanner = scanner.ScannerME()
+        self.directories.fileclasses = [fs.MusicFile]
     
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size
