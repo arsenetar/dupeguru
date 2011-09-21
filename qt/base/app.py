@@ -19,7 +19,7 @@ from jobprogress import job
 from jobprogress.qt import Progress
 from hscommon.trans import tr, trmsg
 
-from core.app import DupeGuru as DupeGuruModel, JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
+from core.app import JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
@@ -82,17 +82,15 @@ class DupeGuru(QObject):
         self.about_box = AboutBox(self.resultWindow, self)
         
         
-        self.reg = Registration(self.model)
         self.model.set_registration(self.prefs.registration_code, self.prefs.registration_email)
-        if self.model.should_show_fairware_reminder:
-            # The timer scheme is because if the nag is not shown before the application is 
-            # completely initialized, the nag will be shown before the app shows up in the task bar
-            # In some circumstances, the nag is hidden by other window, which may make the user think
-            # that the application haven't launched.
-            QTimer.singleShot(0, self.reg.show_nag)
         self.directories_dialog.show()
         self.model.load()
         
+        # The timer scheme is because if the nag is not shown before the application is 
+        # completely initialized, the nag will be shown before the app shows up in the task bar
+        # In some circumstances, the nag is hidden by other window, which may make the user think
+        # that the application haven't launched.
+        QTimer.singleShot(0, self.finishedLaunching)
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
         self.connect(self._progress, SIGNAL('finished(QString)'), self.job_finished)
     
@@ -169,7 +167,8 @@ class DupeGuru(QObject):
             self.model.remove_selected(self)
     
     def askForRegCode(self):
-        self.reg.ask_for_code()
+        reg = Registration(self.model)
+        reg.ask_for_code()
     
     def confirm(self, title, msg, default_button=QMessageBox.Yes):
         active = QApplication.activeWindow()
@@ -195,6 +194,11 @@ class DupeGuru(QObject):
     willSavePrefs = pyqtSignal()
     
     #--- Events
+    def finishedLaunching(self):
+        if self.model.should_show_fairware_reminder:
+            reg = Registration(self.model)
+            reg.show_nag()
+    
     def application_will_terminate(self):
         self.willSavePrefs.emit()
         self.prefs.save()
@@ -237,7 +241,8 @@ class DupeGuru(QObject):
         self.directories_dialog.close()
     
     def registerTriggered(self):
-        self.reg.ask_for_code()
+        reg = Registration(self.model)
+        reg.ask_for_code()
     
     def showAboutBoxTriggered(self):
         self.about_box.show()
