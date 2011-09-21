@@ -1,32 +1,15 @@
-# Created By: Virgil Dupras
-# Created On: 2006/11/11
-# Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
-# http://www.hardcoded.net/licenses/bsd_license
-
 import logging
 
 from jobprogress import job
 from hscommon import cocoa
 from hscommon.cocoa import install_exception_hook, pythonify
-from hscommon.cocoa.inter import (signature, PyTable, PyOutline, PyGUIObject, PyFairware,
-    PySelectableList)
+from hscommon.cocoa.inter import signature, PyFairware
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
     NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
     NSWorkspace)
 from hscommon.trans import tr
 
-from .gui.details_panel import DetailsPanel
-from .gui.directory_tree import DirectoryTree
-from .gui.problem_dialog import ProblemDialog
-from .gui.problem_table import ProblemTable
-from .gui.result_table import ResultTable
-from .gui.stats_label import StatsLabel
-from .gui.extra_fairware_reminder import ExtraFairwareReminder
-from .gui.prioritize_dialog import PrioritizeDialog
-from .app import JobType
+from core.app import JobType
 
 JOBID2TITLE = {
     JobType.Scan: tr("Scanning for duplicates"),
@@ -215,145 +198,3 @@ class PyDupeGuruBase(PyFairware):
     
     def show_extra_fairware_reminder(self):
         self.cocoa.showExtraFairwareReminder()
-
-class PyDetailsPanel(PyGUIObject):
-    py_class = DetailsPanel
-    @signature('i@:')
-    def numberOfRows(self):
-        return self.py.row_count()
-    
-    @signature('@@:@i')
-    def valueForColumn_row_(self, column, row):
-        return self.py.row(row)[int(column)]
-    
-
-class PyDirectoryOutline(PyOutline):
-    py_class = DirectoryTree
-    
-    def addDirectory_(self, path):
-        self.py.add_directory(path)
-    
-    # python --> cocoa
-    def refresh_states(self):
-        # Under cocoa, both refresh() and refresh_states() do the same thing.
-        self.cocoa.refresh()
-    
-
-class PyResultTable(PyTable):
-    py_class = ResultTable
-    
-    @signature('c@:')
-    def powerMarkerMode(self):
-        return self.py.power_marker
-    
-    @signature('v@:c')
-    def setPowerMarkerMode_(self, value):
-        self.py.power_marker = value
-    
-    @signature('c@:')
-    def deltaValuesMode(self):
-        return self.py.delta_values
-    
-    @signature('v@:c')
-    def setDeltaValuesMode_(self, value):
-        self.py.delta_values = value
-    
-    @signature('@@:ii')
-    def valueForRow_column_(self, row_index, column):
-        return self.py.get_row_value(row_index, column)
-    
-    @signature('c@:@')
-    def renameSelected_(self, newname):
-        return self.py.rename_selected(newname)
-    
-    @signature('v@:ic')
-    def sortBy_ascending_(self, key, asc):
-        self.py.sort(key, asc)
-    
-    def markSelected(self):
-        self.py.app.toggle_selected_mark_state()
-    
-    def removeSelected(self):
-        self.py.app.remove_selected()
-    
-    @signature('i@:')
-    def selectedDupeCount(self):
-        return self.py.selected_dupe_count
-    
-    # python --> cocoa
-    def invalidate_markings(self):
-        self.cocoa.invalidateMarkings()
-    
-
-class PyStatsLabel(PyGUIObject):
-    py_class = StatsLabel
-    
-    def display(self):
-        return self.py.display
-    
-
-class PyProblemDialog(PyGUIObject):
-    py_class = ProblemDialog
-    
-    def revealSelected(self):
-        self.py.reveal_selected_dupe()
-    
-
-class PyProblemTable(PyTable):
-    py_class = ProblemTable
-
-class PyExtraFairwareReminder(PyGUIObject):
-    py_class = ExtraFairwareReminder
-    
-    def start(self):
-        self.py.start()
-    
-    def updateButton(self):
-        self.py.update_button()
-    
-    # model --> view
-    def start_timer(self):
-        self.cocoa.startTimer()
-    
-    def stop_timer(self):
-        self.cocoa.stopTimer()
-    
-    def enable_button(self):
-        self.cocoa.enableButton()
-    
-    def set_button_text(self, text):
-        self.cocoa.setButtonText_(text)
-    
-
-class PyPrioritizeDialog(PyGUIObject):
-    py_class = PrioritizeDialog
-    
-    def categoryList(self):
-        if not hasattr(self, '_categoryList'):
-            self._categoryList = PySelectableList.alloc().initWithPy_(self.py.category_list)
-        return self._categoryList
-    
-    def criteriaList(self):
-        if not hasattr(self, '_criteriaList'):
-            self._criteriaList = PySelectableList.alloc().initWithPy_(self.py.criteria_list)
-        return self._criteriaList
-    
-    def prioritizationList(self):
-        if not hasattr(self, '_prioritizationList'):
-            self._prioritizationList = PyPrioritizeList.alloc().initWithPy_(self.py.prioritization_list)
-        return self._prioritizationList
-    
-    def addSelected(self):
-        self.py.add_selected()
-    
-    def removeSelected(self):
-        self.py.remove_selected()
-    
-    def performReprioritization(self):
-        self.py.perform_reprioritization()
-
-class PyPrioritizeList(PySelectableList):
-    @signature('v@:@i')
-    def moveIndexes_toIndex_(self, indexes, dest_index):
-        self.py.move_indexes(indexes, dest_index)
-    

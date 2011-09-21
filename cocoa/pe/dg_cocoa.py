@@ -7,14 +7,23 @@
 from hscommon.trans import install_cocoa_trans
 install_cocoa_trans()
 
-from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
-from core_pe import app_cocoa as app_pe_cocoa
 from core.scanner import ScanType
+
+from inter.app import PyDupeGuruBase
+from inter.details_panel import PyDetailsPanel
+from inter.directory_outline import PyDirectoryOutline
+from inter.extra_fairware_reminder import PyExtraFairwareReminder
+from inter.prioritize_dialog import PyPrioritizeDialog
+from inter.problem_dialog import PyProblemDialog
+from inter.problem_table import PyProblemTable
+from inter.result_table import PyResultTable
+from inter.stats_label import PyStatsLabel
+from inter.app_pe import DupeGuruPE
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru, self).init()
-        self._init(app_pe_cocoa.DupeGuruPE)
+        self._init(DupeGuruPE)
         return self
     
     def clearPictureCache(self):

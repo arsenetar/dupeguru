@@ -34,13 +34,16 @@ def parse_args():
 def build_cocoa(edition, dev):
     from pluginbuilder import build_plugin
     print("Building dg_cocoa.plugin")
-    if not dev:
+    if dev:
+        tocopy = ['cocoa/inter']
+    else:
         specific_packages = {
             'se': ['core_se'],
             'me': ['core_me'],
             'pe': ['core_pe'],
         }[edition]
-        copy_packages(['core', 'hscommon'] + specific_packages, 'build')
+        tocopy = ['core', 'hscommon', 'cocoa/inter'] + specific_packages
+    copy_packages(tocopy, 'build')
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     os.chdir('build')

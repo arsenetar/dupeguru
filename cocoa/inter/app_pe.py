@@ -20,9 +20,9 @@ from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
 from hscommon.trans import tr
 
 from core import directories
-from . import _block_osx
-from .photo import Photo as PhotoBase
-from .app import DupeGuru as DupeGuruBase
+from core_pe import _block_osx
+from core_pe.photo import Photo as PhotoBase
+from core_pe.app import DupeGuru as DupeGuruBase
 
 IPHOTO_PATH = Path('iPhoto Library')
 

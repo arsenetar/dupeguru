@@ -15,9 +15,8 @@ from hscommon.cocoa import as_fetch
 from hscommon.trans import tr
 
 from core.app import JobType
-from core.app_cocoa import JOBID2TITLE
-
-from .app import DupeGuru as DupeGuruBase
+from core_me.app import DupeGuru as DupeGuruBase
+from .app import JOBID2TITLE
 
 JobType.RemoveDeadTracks = 'jobRemoveDeadTracks'
 JobType.ScanDeadTracks = 'jobScanDeadTracks'

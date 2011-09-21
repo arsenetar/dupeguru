@@ -15,7 +15,7 @@ from hscommon.cocoa.objcmin import NSWorkspace
 
 from core import fs
 from core.directories import Directories as DirectoriesBase, DirectoryState
-from .app import DupeGuru as DupeGuruBase
+from core_se.app import DupeGuru as DupeGuruBase
 
 def is_bundle(str_path):
     sw = NSWorkspace.sharedWorkspace()

@@ -10,8 +10,17 @@ install_cocoa_trans()
 from hscommon.cocoa import signature
 
 from core.scanner import ScanType
-from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
-from core_se.app_cocoa import DupeGuru
+
+from inter.app import PyDupeGuruBase
+from inter.details_panel import PyDetailsPanel
+from inter.directory_outline import PyDirectoryOutline
+from inter.extra_fairware_reminder import PyExtraFairwareReminder
+from inter.prioritize_dialog import PyPrioritizeDialog
+from inter.problem_dialog import PyProblemDialog
+from inter.problem_table import PyProblemTable
+from inter.result_table import PyResultTable
+from inter.stats_label import PyStatsLabel
+from inter.app_se import DupeGuru
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
