@@ -19,7 +19,7 @@ from jobprogress import job
 from jobprogress.qt import Progress
 from hscommon.trans import tr, trmsg
 
-from core.app import JOB_SCAN, JOB_LOAD, JOB_MOVE, JOB_COPY, JOB_DELETE
+from core.app import JobType
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
@@ -33,11 +33,11 @@ from .problem_dialog import ProblemDialog
 from .util import createActions
 
 JOBID2TITLE = {
-    JOB_SCAN: tr("Scanning for duplicates"),
-    JOB_LOAD: tr("Loading"),
-    JOB_MOVE: tr("Moving"),
-    JOB_COPY: tr("Copying"),
-    JOB_DELETE: tr("Sending files to the recycle bin"),
+    JobType.Scan: tr("Scanning for duplicates"),
+    JobType.Load: tr("Loading"),
+    JobType.Move: tr("Moving"),
+    JobType.Copy: tr("Copying"),
+    JobType.Delete: tr("Sending files to the recycle bin"),
 }
 
 class SysWrapper(io.IOBase):
@@ -209,20 +209,20 @@ class DupeGuru(QObject):
     
     def job_finished(self, jobid):
         self.model._job_completed(jobid)
-        if jobid in (JOB_MOVE, JOB_COPY, JOB_DELETE):
+        if jobid in {JobType.Move, JobType.Copy, JobType.Delete}:
             if self.model.results.problems:
                 self.problemDialog.show()
             else:
                 msg = trmsg("OperationSuccessMsg")
                 QMessageBox.information(self.resultWindow, tr("Operation Complete"), msg)
-        elif jobid == JOB_SCAN:
+        elif jobid == JobType.Scan:
             if not self.model.results.groups:
                 title = tr("Scan complete")
                 msg = trmsg("NoDuplicateFoundMsg")
                 QMessageBox.information(self.resultWindow, title, msg)
             else:
                 self.showResultsWindow()
-        elif jobid == JOB_LOAD:
+        elif jobid == JobType.Load:
             self.showResultsWindow()
     
     def openDebugLogTriggered(self):

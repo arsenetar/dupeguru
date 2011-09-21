@@ -26,14 +26,14 @@ from .gui.result_table import ResultTable
 from .gui.stats_label import StatsLabel
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
 from .gui.prioritize_dialog import PrioritizeDialog
-from . import app
+from .app import JobType
 
 JOBID2TITLE = {
-    app.JOB_SCAN: tr("Scanning for duplicates"),
-    app.JOB_LOAD: tr("Loading"),
-    app.JOB_MOVE: tr("Moving"),
-    app.JOB_COPY: tr("Copying"),
-    app.JOB_DELETE: tr("Sending to Trash"),
+    JobType.Scan: tr("Scanning for duplicates"),
+    JobType.Load: tr("Loading"),
+    JobType.Move: tr("Moving"),
+    JobType.Copy: tr("Copying"),
+    JobType.Delete: tr("Sending to Trash"),
 }
 
 class PyDupeGuruBase(PyFairware):

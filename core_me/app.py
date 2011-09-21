@@ -6,9 +6,9 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.trans import tr as trbase
-from hscommon.util import format_size
+from hscommon.util import format_size, format_time
 
-from core.app import (DupeGuru as DupeGuruBase, Column, format_time, format_timestamp,
+from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp,
     format_perc, format_words, format_dupe_count, cmp_value)
 from . import prioritize
 from . import __appname__

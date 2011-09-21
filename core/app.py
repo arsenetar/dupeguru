@@ -25,12 +25,6 @@ from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
 
-JOB_SCAN = 'job_scan'
-JOB_LOAD = 'job_load'
-JOB_MOVE = 'job_move'
-JOB_COPY = 'job_copy'
-JOB_DELETE = 'job_delete'
-
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
 
@@ -42,6 +36,12 @@ class DestType:
     Relative = 1
     Absolute = 2
 
+class JobType:
+    Scan = 'job_scan'
+    Load = 'job_load'
+    Move = 'job_move'
+    Copy = 'job_copy'
+    Delete = 'job_delete'
 
 Column = namedtuple('Column', 'attr display')
 
@@ -158,12 +158,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def _job_completed(self, jobid):
         # Must be called by subclasses when they detect that an async job is completed.
-        if jobid == JOB_SCAN:
+        if jobid == JobType.Scan:
             self._results_changed()
-        elif jobid in {JOB_LOAD, JOB_MOVE, JOB_DELETE}:
+        elif jobid in {JobType.Load, JobType.Move, JobType.Delete}:
             self._results_changed()
         
-        if jobid in {JOB_COPY, JOB_MOVE, JOB_DELETE}:
+        if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
             self.notify('problems_changed')
     
     @staticmethod
@@ -256,12 +256,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.results.perform_on_marked(op, not copy)
         
         self.show_extra_fairware_reminder_if_needed()
-        jobid = JOB_COPY if copy else JOB_MOVE
+        jobid = JobType.Copy if copy else JobType.Move
         self.view.start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
         self.show_extra_fairware_reminder_if_needed()
-        self.view.start_job(JOB_DELETE, self._do_delete, args=[replace_with_hardlinks])
+        self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
     
     def export_to_xhtml(self, column_ids):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
@@ -320,7 +320,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def load_from(self, filename):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
-        self.view.start_job(JOB_LOAD, do)
+        self.view.start_job(JobType.Load, do)
     
     def make_selected_reference(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -420,7 +420,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             raise NoScannableFileError()
         self.results.groups = []
         self._results_changed()
-        self.view.start_job(JOB_SCAN, do)
+        self.view.start_job(JobType.Scan, do)
     
     def toggle_selected_mark_state(self):
         for dupe in self.selected_dupes:

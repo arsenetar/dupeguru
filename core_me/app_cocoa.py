@@ -14,17 +14,18 @@ import os.path as op
 from hscommon.cocoa import as_fetch
 from hscommon.trans import tr
 
+from core.app import JobType
 from core.app_cocoa import JOBID2TITLE
 
 from . import scanner, fs
 from .app import DupeGuru as DupeGuruBase
 
-JOB_REMOVE_DEAD_TRACKS = 'jobRemoveDeadTracks'
-JOB_SCAN_DEAD_TRACKS = 'jobScanDeadTracks'
+JobType.RemoveDeadTracks = 'jobRemoveDeadTracks'
+JobType.ScanDeadTracks = 'jobScanDeadTracks'
 
 JOBID2TITLE.update({
-    JOB_REMOVE_DEAD_TRACKS: tr("Removing dead tracks from your iTunes Library"),
-    JOB_SCAN_DEAD_TRACKS: tr("Scanning the iTunes Library"),
+    JobType.RemoveDeadTracks: tr("Removing dead tracks from your iTunes Library"),
+    JobType.ScanDeadTracks: tr("Scanning the iTunes Library"),
 })
 
 class DupeGuruME(DupeGuruBase):
@@ -47,7 +48,7 @@ class DupeGuruME(DupeGuruBase):
                 except CommandError as e:
                     logging.warning('Error while trying to remove a track from iTunes: %s' % str(e))
         
-        self._start_job(JOB_REMOVE_DEAD_TRACKS, do)
+        self.view.start_job(JobType.RemoveDeadTracks, do)
     
     def scan_dead_tracks(self):
         def do(j):
@@ -68,5 +69,5 @@ class DupeGuruME(DupeGuruBase):
                     self.dead_tracks.append(track)
             logging.info('Found %d dead tracks' % len(self.dead_tracks))
         
-        self._start_job(JOB_SCAN_DEAD_TRACKS, do)
+        self.view.start_job(JobType.ScanDeadTracks, do)
     
