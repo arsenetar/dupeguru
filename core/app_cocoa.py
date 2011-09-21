@@ -180,6 +180,10 @@ class PyDupeGuruBase(PyFairware):
     def jobCompleted_(self, jobid):
         self.py._job_completed(jobid)
     
+    #---Registration
+    def appName(self):
+        return self.py.NAME
+    
     #--- model --> view
     def open_path(self, path):
         NSWorkspace.sharedWorkspace().openFile_(str(path))

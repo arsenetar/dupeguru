@@ -11,6 +11,7 @@ from hscommon.util import format_size
 from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format_perc,
     format_dupe_count, cmp_value)
 from . import prioritize
+from . import __appname__
 
 tr = lambda s: trbase(s, 'columns')
 
@@ -21,6 +22,7 @@ def get_delta_dimensions(value, ref_value):
     return (value[0]-ref_value[0], value[1]-ref_value[1])
 
 class DupeGuru(DupeGuruBase):
+    NAME = __appname__
     COLUMNS = [
         Column('name', tr("Filename")),
         Column('folder_path', tr("Folder")),

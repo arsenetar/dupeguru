@@ -11,10 +11,12 @@ from hscommon.util import format_size
 from core.app import (DupeGuru as DupeGuruBase, Column, format_time, format_timestamp,
     format_perc, format_words, format_dupe_count, cmp_value)
 from . import prioritize
+from . import __appname__
 
 tr = lambda s: trbase(s, 'columns')
 
 class DupeGuru(DupeGuruBase):
+    NAME = __appname__
     COLUMNS = [
         Column('name', tr("Filename")),
         Column('folder_path', tr("Folder")),

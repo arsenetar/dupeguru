@@ -11,7 +11,6 @@ from hscommon.cocoa import signature
 
 from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
 from core_me.app_cocoa import DupeGuruME
-from core_me import __appname__
 from core.scanner import ScanType
 
 class PyDupeGuru(PyDupeGuruBase):
@@ -59,8 +58,4 @@ class PyDupeGuru(PyDupeGuruBase):
             self.py.scanner.scanned_tags.add(scan_tag)
         else:
             self.py.scanner.scanned_tags.discard(scan_tag)
-    
-    #---Registration
-    def appName(self):
-        return __appname__
     

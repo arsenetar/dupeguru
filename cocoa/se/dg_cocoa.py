@@ -12,7 +12,6 @@ from hscommon.cocoa import signature
 from core.scanner import ScanType
 from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
 from core_se.app_cocoa import DupeGuru
-from core_se import __appname__
 
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
@@ -43,8 +42,4 @@ class PyDupeGuru(PyDupeGuruBase):
     @signature('v@:i')
     def setSizeThreshold_(self, size_threshold):
         self.py.scanner.size_threshold = size_threshold
-    
-    #---Registration
-    def appName(self):
-        return __appname__
     

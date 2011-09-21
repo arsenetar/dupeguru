@@ -8,7 +8,7 @@ from hscommon.trans import install_cocoa_trans
 install_cocoa_trans()
 
 from core.app_cocoa import PyDupeGuruBase, PyDetailsPanel
-from core_pe import app_cocoa as app_pe_cocoa, __appname__
+from core_pe import app_cocoa as app_pe_cocoa
 from core.scanner import ScanType
 
 class PyDupeGuru(PyDupeGuruBase):
@@ -42,8 +42,4 @@ class PyDupeGuru(PyDupeGuruBase):
     
     def setMinMatchPercentage_(self,percentage):
         self.py.scanner.threshold = int(percentage)
-    
-    #---Registration
-    def appName(self):
-        return __appname__
     
