@@ -61,6 +61,8 @@
 		CE9EA75B1122C96C008CD2BC /* NSIndexPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7531122C96C008CD2BC /* NSIndexPathAdditions.m */; };
 		CE9EA75C1122C96C008CD2BC /* NSTableViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7551122C96C008CD2BC /* NSTableViewAdditions.m */; };
 		CE9EA7721122CA0B008CD2BC /* DirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */; };
+		CEA8F336142BC9AB00A6DFAC /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA8F335142BC9AB00A6DFAC /* Quartz.framework */; };
+		CEA8F33A142BC9D400A6DFAC /* HSQuicklook.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA8F339142BC9D400A6DFAC /* HSQuicklook.m */; };
 		CEC9DB4C12CCAA7D003102F0 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */; };
 		CECA899C09DB132E00A3D774 /* DetailsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CECA899A09DB132E00A3D774 /* DetailsPanel.h */; };
 		CECA899D09DB132E00A3D774 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA899B09DB132E00A3D774 /* DetailsPanel.m */; };
@@ -232,6 +234,9 @@
 		CE9EA76F1122CA0B008CD2BC /* DirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectoryOutline.h; path = ../base/DirectoryOutline.h; sourceTree = SOURCE_ROOT; };
 		CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectoryOutline.m; path = ../base/DirectoryOutline.m; sourceTree = SOURCE_ROOT; };
 		CE9EA7711122CA0B008CD2BC /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyDirectoryOutline.h; path = ../base/PyDirectoryOutline.h; sourceTree = SOURCE_ROOT; };
+		CEA8F335142BC9AB00A6DFAC /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		CEA8F338142BC9D400A6DFAC /* HSQuicklook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSQuicklook.h; path = ../../cocoalib/HSQuicklook.h; sourceTree = "<group>"; };
+		CEA8F339142BC9D400A6DFAC /* HSQuicklook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQuicklook.m; path = ../../cocoalib/HSQuicklook.m; sourceTree = "<group>"; };
 		CEC9DB4A12CCAA7D003102F0 /* HSAboutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox.h; path = ../../cocoalib/HSAboutBox.h; sourceTree = SOURCE_ROOT; };
 		CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CECA899A09DB132E00A3D774 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DetailsPanel.h; sourceTree = "<group>"; };
@@ -259,6 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA8F336142BC9AB00A6DFAC /* Quartz.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				CE15C8A80ADEB8B50061D4A5 /* Sparkle.framework in Frameworks */,
 			);
@@ -288,6 +294,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEA8F335142BC9AB00A6DFAC /* Quartz.framework */,
 				CE15C8A70ADEB8B50061D4A5 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
@@ -403,6 +410,8 @@
 				CEC9DB4B12CCAA7D003102F0 /* HSAboutBox.m */,
 				CE60180612DF3EA900236FDC /* HSRecentFiles.h */,
 				CE60180712DF3EA900236FDC /* HSRecentFiles.m */,
+				CEA8F338142BC9D400A6DFAC /* HSQuicklook.h */,
+				CEA8F339142BC9D400A6DFAC /* HSQuicklook.m */,
 				CE80DB210FC192D60086DCA6 /* ProgressController.h */,
 				CE80DB220FC192D60086DCA6 /* ProgressController.m */,
 				CE80DB230FC192D60086DCA6 /* PyApp.h */,
@@ -635,6 +644,7 @@
 				CE7D249E1423B0BD002E2297 /* HSSelectableList.m in Sources */,
 				CE7D24A51423B106002E2297 /* PrioritizeDialog.m in Sources */,
 				CE7D24A61423B106002E2297 /* PrioritizeList.m in Sources */,
+				CEA8F33A142BC9D400A6DFAC /* HSQuicklook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

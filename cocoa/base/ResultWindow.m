@@ -412,6 +412,40 @@ http://www.hardcoded.net/licenses/bsd_license
     [self updateOptionSegments];
 }
 
+- (IBAction)toggleQuicklookPanel:(id)sender
+{
+    if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
+        [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+    } 
+    else {
+        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+    }
+}
+
+/* Quicklook */
+- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel;
+{
+    return YES;
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    // This document is now responsible of the preview panel
+    // It is allowed to set the delegate, data source and refresh panel.
+    previewPanel = [panel retain];
+    panel.delegate = table;
+    panel.dataSource = table;
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    // This document loses its responsisibility on the preview panel
+    // Until the next call to -beginPreviewPanelControl: it must not
+    // change the panel's delegate, data source or refresh it.
+    [previewPanel release];
+    previewPanel = nil;
+}
+
 /* Notifications */
 - (void)jobCompleted:(NSNotification *)aNotification
 {

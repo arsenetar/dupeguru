@@ -14,6 +14,7 @@
 			<string>NSPopUpButton</string>
 			<string>NSMenu</string>
 			<string>NSToolbarItem</string>
+			<string>NSButton</string>
 			<string>NSToolbarFlexibleSpaceItem</string>
 			<string>NSCustomObject</string>
 			<string>NSTableView</string>
@@ -153,9 +154,11 @@
 							<string key="NSToolbarItemPaletteLabel">Options</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSegmentedControl" key="NSToolbarItemView" id="452019408">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{-11, 14}, {195, 23}}</string>
+								<string key="NSFrame">{{0, 14}, {195, 23}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSegmentedCell" key="NSCell" id="993391476">
 									<int key="NSCellFlags">67239424</int>
@@ -208,9 +211,11 @@
 							<string key="NSToolbarItemPaletteLabel">Filter</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSSearchField" key="NSToolbarItemView" id="363479146">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">258</int>
 								<string key="NSFrame">{{0, 14}, {81, 22}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSearchFieldCell" key="NSCell" id="830851754">
 									<int key="NSCellFlags">343014976</int>
@@ -290,6 +295,51 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
+						<object class="NSToolbarItem" key="A85CDEA8-333B-47CF-960E-DDC65B0C56BC" id="831294603">
+							<object class="NSMutableString" key="NSToolbarItemIdentifier">
+								<characters key="NS.bytes">A85CDEA8-333B-47CF-960E-DDC65B0C56BC</characters>
+							</object>
+							<string key="NSToolbarItemLabel">Quick Look</string>
+							<string key="NSToolbarItemPaletteLabel">Quick Look</string>
+							<nil key="NSToolbarItemToolTip"/>
+							<object class="NSButton" key="NSToolbarItemView" id="796071131">
+								<reference key="NSNextResponder"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{12, 14}, {44, 25}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:161</string>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSButtonCell" key="NSCell" id="560045192">
+									<int key="NSCellFlags">67239424</int>
+									<int key="NSCellFlags2">134217728</int>
+									<string key="NSContents"/>
+									<reference key="NSSupport" ref="930425043"/>
+									<string key="NSCellIdentifier">_NS:161</string>
+									<reference key="NSControlView" ref="796071131"/>
+									<int key="NSButtonFlags">-2033958657</int>
+									<int key="NSButtonFlags2">163</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="771141707">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">NSQuickLookTemplate</string>
+									</object>
+									<string key="NSAlternateContents"/>
+									<string key="NSKeyEquivalent"/>
+									<int key="NSPeriodicDelay">200</int>
+									<int key="NSPeriodicInterval">25</int>
+								</object>
+							</object>
+							<reference key="NSToolbarItemImage" ref="771141707"/>
+							<nil key="NSToolbarItemTarget"/>
+							<nil key="NSToolbarItemAction"/>
+							<string key="NSToolbarItemMinSize">{30, 25}</string>
+							<string key="NSToolbarItemMaxSize">{44, 32}</string>
+							<bool key="NSToolbarItemEnabled">YES</bool>
+							<bool key="NSToolbarItemAutovalidates">YES</bool>
+							<int key="NSToolbarItemTag">0</int>
+							<bool key="NSToolbarIsUserRemovable">YES</bool>
+							<int key="NSToolbarItemVisibilityPriority">0</int>
+						</object>
 						<object class="NSToolbarItem" key="BA65FFF2-9E56-4E88-AB2E-8FBE2B3D030F" id="272445295">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">BA65FFF2-9E56-4E88-AB2E-8FBE2B3D030F</characters>
@@ -320,9 +370,11 @@
 							<string key="NSToolbarItemPaletteLabel">Action</string>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSPopUpButton" key="NSToolbarItemView" id="1050768959">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{1, 14}, {40, 25}}</string>
+								<reference key="NSSuperview"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="302095930">
 									<int key="NSCellFlags">-2076049856</int>
@@ -501,6 +553,7 @@
 											</object>
 										</array>
 									</object>
+									<int key="NSSelectedIndex">-1</int>
 									<bool key="NSPullDown">YES</bool>
 									<int key="NSPreferredEdge">3</int>
 									<bool key="NSUsesItemFromMenu">YES</bool>
@@ -574,17 +627,19 @@
 							</object>
 						</object>
 					</dictionary>
-					<array key="NSToolbarIBAllowedItems">
+					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
 						<reference ref="613476052"/>
 						<reference ref="501140424"/>
 						<reference ref="272445295"/>
 						<reference ref="77112286"/>
 						<reference ref="695856706"/>
 						<reference ref="234109357"/>
+						<reference ref="831294603"/>
 					</array>
 					<array key="NSToolbarIBDefaultItems">
 						<reference ref="77112286"/>
 						<reference ref="234109357"/>
+						<reference ref="831294603"/>
 						<reference ref="272445295"/>
 						<reference ref="501140424"/>
 						<reference ref="695856706"/>
@@ -1060,6 +1115,14 @@
 					</object>
 					<int key="connectionID">83</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleQuicklookPanel:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="831294603"/>
+					</object>
+					<int key="connectionID">87</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1240,6 +1303,7 @@
 							<reference ref="272445295"/>
 							<reference ref="501140424"/>
 							<reference ref="613476052"/>
+							<reference ref="831294603"/>
 						</array>
 						<reference key="parent" ref="866620243"/>
 					</object>
@@ -1415,6 +1479,27 @@
 						<reference key="object" ref="993391476"/>
 						<reference key="parent" ref="452019408"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">86</int>
+						<reference key="object" ref="831294603"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="796071131"/>
+						</array>
+						<reference key="parent" ref="983262794"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">84</int>
+						<reference key="object" ref="796071131"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="560045192"/>
+						</array>
+						<reference key="parent" ref="831294603"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="560045192"/>
+						<reference key="parent" ref="796071131"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1474,13 +1559,16 @@
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.CustomClassName">HSTableView</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="84.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="86.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">83</int>
+			<int key="maxID">87</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1623,6 +1711,7 @@
 						<string key="removeMarked:">id</string>
 						<string key="removeSelected:">id</string>
 						<string key="renameSelected:">id</string>
+						<string key="reprioritizeResults:">id</string>
 						<string key="resetColumnsToDefault:">id</string>
 						<string key="revealSelected:">id</string>
 						<string key="saveResults:">id</string>
@@ -1632,6 +1721,7 @@
 						<string key="toggleDelta:">id</string>
 						<string key="toggleDetailsPanel:">id</string>
 						<string key="togglePowerMarker:">id</string>
+						<string key="toggleQuicklookPanel:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="changeOptions:">
@@ -1710,6 +1800,10 @@
 							<string key="name">renameSelected:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="reprioritizeResults:">
+							<string key="name">reprioritizeResults:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="resetColumnsToDefault:">
 							<string key="name">resetColumnsToDefault:</string>
 							<string key="candidateClassName">id</string>
@@ -1744,6 +1838,10 @@
 						</object>
 						<object class="IBActionInfo" key="togglePowerMarker:">
 							<string key="name">togglePowerMarker:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleQuicklookPanel:">
+							<string key="name">toggleQuicklookPanel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1798,6 +1896,7 @@
 			<string key="NSActionTemplate">{15, 15}</string>
 			<string key="NSMenuCheckmark">{9, 8}</string>
 			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="NSQuickLookTemplate">{21, 16}</string>
 			<string key="NSSwitch">{15, 15}</string>
 			<string key="folder32">{32, 32}</string>
 		</dictionary>

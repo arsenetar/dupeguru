@@ -21,4 +21,5 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)markSelected;
 - (void)removeSelected;
 - (NSInteger)selectedDupeCount;
+- (NSString *)pathAtIndex:(NSInteger)index;
 @end

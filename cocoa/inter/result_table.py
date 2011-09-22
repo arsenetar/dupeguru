@@ -43,6 +43,11 @@ class PyResultTable(PyTable):
     def selectedDupeCount(self):
         return self.py.selected_dupe_count
     
+    @signature('@@:i')
+    def pathAtIndex_(self, index):
+        row = self.py[index]
+        return str(row._dupe.path)
+    
     # python --> cocoa
     def invalidate_markings(self):
         self.cocoa.invalidateMarkings()

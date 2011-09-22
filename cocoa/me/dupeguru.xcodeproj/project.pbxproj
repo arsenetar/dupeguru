@@ -42,6 +42,8 @@
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE1EAA0A12DF3E81009BA949 /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */; };
+		CE2E87F9142BC90A00519A68 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2E87F8142BC90A00519A68 /* Quartz.framework */; };
+		CE2E87FD142BC92C00519A68 /* HSQuicklook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E87FC142BC92C00519A68 /* HSQuicklook.m */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
@@ -148,6 +150,9 @@
 		CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
 		CE2B2B591406ABDA0038D15A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/core.strings; sourceTree = "<group>"; };
 		CE2B2B5A1406ABDA0038D15A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE2E87F8142BC90A00519A68 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		CE2E87FB142BC92C00519A68 /* HSQuicklook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSQuicklook.h; path = ../../cocoalib/HSQuicklook.h; sourceTree = "<group>"; };
+		CE2E87FC142BC92C00519A68 /* HSQuicklook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQuicklook.m; path = ../../cocoalib/HSQuicklook.m; sourceTree = "<group>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -260,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2E87F9142BC90A00519A68 /* Quartz.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */,
 			);
@@ -289,6 +295,7 @@
 			children = (
 				CE1425880AFB718500BD5167 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				CE2E87F8142BC90A00519A68 /* Quartz.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -444,6 +451,8 @@
 				CE4F934812CCA96C0067A3AE /* HSAboutBox.m */,
 				CE1EAA0812DF3E81009BA949 /* HSRecentFiles.h */,
 				CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */,
+				CE2E87FB142BC92C00519A68 /* HSQuicklook.h */,
+				CE2E87FC142BC92C00519A68 /* HSQuicklook.m */,
 				CE003CB911242D00004B0AA7 /* NSEventAdditions.h */,
 				CE003CBA11242D00004B0AA7 /* NSEventAdditions.m */,
 				CE515DE60FC6C12E00EC695D /* ProgressController.h */,
@@ -628,6 +637,7 @@
 				CE84C9B31423ADFB0050A6AD /* PrioritizeList.m in Sources */,
 				CE84C9B91423AE410050A6AD /* HSPopUpList.m in Sources */,
 				CE84C9BA1423AE410050A6AD /* HSSelectableList.m in Sources */,
+				CE2E87FD142BC92C00519A68 /* HSQuicklook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

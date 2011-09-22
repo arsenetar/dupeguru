@@ -7,6 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 #import "StatsLabel.h"
 #import "ResultTable.h"
 #import "ProblemDialog.h"
@@ -30,6 +31,7 @@ http://www.hardcoded.net/licenses/bsd_license
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
+    QLPreviewPanel* previewPanel;
 }
 - (id)initWithParentApp:(AppDelegateBase *)app;
 
@@ -76,6 +78,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)toggleDelta:(id)sender;
 - (IBAction)toggleDetailsPanel:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;
+- (IBAction)toggleQuicklookPanel:(id)sender;
 
 /* Notifications */
 - (void)jobCompleted:(NSNotification *)aNotification;

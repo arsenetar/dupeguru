@@ -10,6 +10,12 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Dialogs.h"
 #import "Utils.h"
 #import "Consts.h"
+#import "HSQuicklook.h"
+
+@interface HSTable (private)
+- (void)setPySelection;
+- (void)setViewSelection;
+@end
 
 @implementation ResultTable
 - (id)initWithPyParent:(id)aPyParent view:(NSTableView *)aTableView
@@ -29,6 +35,26 @@ http://www.hardcoded.net/licenses/bsd_license
 - (PyResultTable *)py
 {
     return (PyResultTable *)py;
+}
+
+/* Private */
+- (void)updateQuicklookIfNeeded
+{
+    if ([[QLPreviewPanel sharedPreviewPanel] dataSource] == self) { 
+        [[QLPreviewPanel sharedPreviewPanel] reloadData];
+    }
+}
+
+- (void)setPySelection
+{
+    [super setPySelection];
+    [self updateQuicklookIfNeeded];
+}
+
+- (void)setViewSelection
+{
+    [super setViewSelection];
+    [self updateQuicklookIfNeeded];
 }
 
 /* Public */
@@ -156,6 +182,30 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [[self py] markSelected];
     return YES;
+}
+
+/* Quicklook */
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
+{
+    return [[[self py] selectedRows] count];
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index
+{
+    NSArray *selectedRows = [[self py] selectedRows];
+    NSInteger absIndex = n2i([selectedRows objectAtIndex:index]);
+    NSString *path = [[self py] pathAtIndex:absIndex];
+    return [[HSQLPreviewItem alloc] initWithUrl:[NSURL fileURLWithPath:path] title:path];
+}
+
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
+{
+    // redirect all key down events to the table view
+    if ([event type] == NSKeyDown) {
+        [[self view] keyDown:event];
+        return YES;
+    }
+    return NO;
 }
 
 /* Python --> Cocoa */
