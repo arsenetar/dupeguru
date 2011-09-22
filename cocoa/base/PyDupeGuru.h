@@ -23,7 +23,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSString *)exportToXHTMLwithColumns:(NSArray *)aColIds;
 - (void)invokeCommand:(NSString *)cmd;
 
-- (NSNumber *)doScan;
+- (void)doScan;
 
 - (void)toggleSelectedMark;
 - (void)markAll;

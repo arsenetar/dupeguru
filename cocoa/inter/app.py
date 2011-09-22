@@ -42,7 +42,7 @@ class PyDupeGuruBase(PyFairware):
         self.py.scanner.ignore_list.Clear()
     
     def doScan(self):
-        return self.py.start_scanning()
+        self.py.start_scanning()
     
     def exportToXHTMLwithColumns_(self, column_ids):
         return self.py.export_to_xhtml(column_ids)
@@ -198,3 +198,7 @@ class PyDupeGuruBase(PyFairware):
     
     def show_extra_fairware_reminder(self):
         self.cocoa.showExtraFairwareReminder()
+    
+    def show_message(self, msg):
+        self.cocoa.showMessage_(msg)
+    

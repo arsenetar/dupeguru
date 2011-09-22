@@ -283,3 +283,7 @@ class DupeGuru(QObject):
         dialog = ExtraFairwareReminder(self.directories_dialog, self)
         dialog.exec()
     
+    def show_message(self, msg):
+        window = QApplication.activeWindow()
+        QMessageBox.information(window, '', msg)
+    

@@ -41,18 +41,10 @@ http://www.hardcoded.net/licenses/bsd_license
     [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
 }
 
-- (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode
-{
-    if (errorCode == 4) {
-        return TR(@"IPhotoAppNotFoundMsg");
-    }
-    return [super getScanErrorMessageForCode:errorCode];
-}
-
 /* Actions */
 - (IBAction)clearPictureCache:(id)sender
 {
-    NSString *msg = TR(@"ClearPictureCacheConfirmMsg");
+    NSString *msg = TRMSG(@"ClearPictureCacheConfirmMsg");
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [(PyDupeGuru *)py clearPictureCache];

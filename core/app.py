@@ -21,15 +21,12 @@ from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal
-from hscommon.trans import tr
+from hscommon.trans import tr, trmsg
 
 from . import directories, results, scanner, export, fs
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
-
-class NoScannableFileError(Exception):
-    pass
 
 class DestType:
     Direct = 0
@@ -80,6 +77,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # get_default(key_name, fallback_value=None)
     # set_default(key_name, value)
     # show_extra_fairware_reminder()
+    # show_message(msg)
     
     def __init__(self, view, appdata):
         self.view = view
@@ -417,7 +415,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.results.groups = self.scanner.GetDupeGroups(files, j)
         
         if not self.directories.has_any_file():
-            raise NoScannableFileError()
+            self.view.show_message(trmsg("NoScannableFileMsg"))
+            return
         self.results.groups = []
         self._results_changed()
         self.view.start_job(JobType.Scan, do)

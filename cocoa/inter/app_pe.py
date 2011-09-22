@@ -17,7 +17,7 @@ from hscommon import io
 from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
-from hscommon.trans import tr
+from hscommon.trans import tr, trmsg
 
 from core import directories
 from core_pe import _block_osx
@@ -189,11 +189,11 @@ class DupeGuruPE(DupeGuruBase):
         return ref.path
     
     def start_scanning(self):
-        result = DupeGuruBase.start_scanning(self)
         if self.directories.has_iphoto_path():
             try:
                 app('iPhoto')
             except ApplicationNotFoundError:
-                return 4
-        return result
+                self.view.show_message(trmsg("IPhotoAppNotFoundMsg"))
+                return
+        DupeGuruBase.start_scanning(self)
     

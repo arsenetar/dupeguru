@@ -56,17 +56,6 @@ http://www.hardcoded.net/licenses/bsd_license
 {
 }
 
-- (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode
-{
-    if (errorCode == 0) {
-        return nil;
-    }
-    if (errorCode == 3) {
-        return TR(@"NoScannableFileMsg");
-    }
-    return TR(@"UnknownErrorMsg");
-}
-
 /* Helpers */
 - (void)fillColumnsMenu
 {
@@ -149,9 +138,9 @@ http://www.hardcoded.net/licenses/bsd_license
     if (!mark_count) {
         return;
     }
-    NSString *msg = TR(@"SendToTrashConfirmMsg");
+    NSString *msg = TRMSG(@"SendToTrashConfirmMsg");
     if (hardlinkDeleted) {
-        msg = TR(@"HardlinkConfirmMsg");
+        msg = TRMSG(@"HardlinkConfirmMsg");
     }
     if ([Dialogs askYesNo:[NSString stringWithFormat:msg,mark_count]] == NSAlertSecondButtonReturn) { // NO
         return;
@@ -179,7 +168,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger i = n2i([py getIgnoreListCount]);
     if (!i)
         return;
-    NSString *msg = [NSString stringWithFormat:TR(@"ClearIgnoreListConfirmMsg"),i];
+    NSString *msg = [NSString stringWithFormat:TRMSG(@"ClearIgnoreListConfirmMsg"),i];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py clearIgnoreList];
@@ -209,7 +198,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseDirectories:YES];
     [op setCanCreateDirectories:YES];
     [op setAllowsMultipleSelection:NO];
-    [op setTitle:TR(@"SelectCopyDestinationMsg")];
+    [op setTitle:TRMSG(@"SelectCopyDestinationMsg")];
     if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -245,7 +234,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger selectedDupeCount = [table selectedDupeCount];
     if (!selectedDupeCount)
         return;
-    NSString *msg = [NSString stringWithFormat:TR(@"IgnoreConfirmMsg"),selectedDupeCount];
+    NSString *msg = [NSString stringWithFormat:TRMSG(@"IgnoreConfirmMsg"),selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [py addSelectedToIgnoreList];
@@ -259,7 +248,7 @@ http://www.hardcoded.net/licenses/bsd_license
         [py invokeCommand:cmd];
     }
     else {
-        [Dialogs showMessage:TR(@"NoCustomCommandMsg")];
+        [Dialogs showMessage:TRMSG(@"NoCustomCommandMsg")];
     }
 }
 
@@ -293,7 +282,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseDirectories:YES];
     [op setCanCreateDirectories:YES];
     [op setAllowsMultipleSelection:NO];
-    [op setTitle:TR(@"SelectMoveDestinationMsg")];
+    [op setTitle:TRMSG(@"SelectMoveDestinationMsg")];
     if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -365,7 +354,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSSavePanel *sp = [NSSavePanel savePanel];
     [sp setCanCreateDirectories:YES];
     [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [sp setTitle:TR(@"SelectResultToSaveMsg")];
+    [sp setTitle:TRMSG(@"SelectResultToSaveMsg")];
     if ([sp runModal] == NSOKButton) {
         [py saveResultsAs:[sp filename]];
         [[app recentResults] addFile:[sp filename]];
@@ -375,16 +364,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)startDuplicateScan:(id)sender
 {
     if ([py resultsAreModified]) {
-        if ([Dialogs askYesNo:TR(@"ReallyWantToContinueMsg")] == NSAlertSecondButtonReturn) // NO
+        if ([Dialogs askYesNo:TRMSG(@"ReallyWantToContinueMsg")] == NSAlertSecondButtonReturn) // NO
             return;
     }
     [self setScanOptions];
-    NSInteger r = n2i([py doScan]);
-    NSString *errorMsg = [self getScanErrorMessageForCode:r];
-    if (errorMsg != nil) {
-        [[ProgressController mainProgressController] hide];
-        [Dialogs showMessage:errorMsg];
-    }
+    [py doScan];
 }
 
 - (IBAction)switchSelected:(id)sender
@@ -437,7 +421,7 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:TR(@"CopySuccessMsg")];
+            [Dialogs showMessage:TRMSG(@"CopySuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobMove]) {
@@ -445,7 +429,7 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:TR(@"MoveSuccessMsg")];
+            [Dialogs showMessage:TRMSG(@"MoveSuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobDelete]) {
@@ -453,20 +437,20 @@ http://www.hardcoded.net/licenses/bsd_license
             [problemDialog showWindow:self];
         }
         else {
-            [Dialogs showMessage:TR(@"SendToTrashSuccessMsg")];
+            [Dialogs showMessage:TRMSG(@"SendToTrashSuccessMsg")];
         }
     }
     else if ([lastAction isEqualTo:jobScan]) {
         NSInteger rowCount = [[table py] numberOfRows];
         if (rowCount == 0) {
-            [Dialogs showMessage:TR(@"NoDuplicateFoundMsg")];
+            [Dialogs showMessage:TRMSG(@"NoDuplicateFoundMsg")];
         }
     }
 }
 
 - (void)jobInProgress:(NSNotification *)aNotification
 {
-    [Dialogs showMessage:TR(@"TaskHangingMsg")];
+    [Dialogs showMessage:TRMSG(@"TaskHangingMsg")];
 }
 
 - (void)jobStarted:(NSNotification *)aNotification

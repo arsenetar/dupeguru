@@ -36,7 +36,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Virtual */
 - (void)initResultColumns;
 - (void)setScanOptions;
-- (NSString *)getScanErrorMessageForCode:(NSInteger)errorCode;
 
 /* Helpers */
 - (void)fillColumnsMenu;

@@ -777,7 +777,7 @@ Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi u
 </message>
 <message>
     <source>NoScannableFileMsg</source>
-    <translation>Les dossiers sélectionnés ne continnent pas de fichiers valides.</translation>
+    <translation>Les dossiers sélectionnés ne contiennent pas de fichiers valides.</translation>
 </message>
 <message>
     <source>ProblemsDuringProcessingMsg</source>

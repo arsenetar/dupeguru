@@ -95,12 +95,12 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([lastAction isEqualTo:jobScanDeadTracks]) {
         NSInteger deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
         if (deadTrackCount > 0) {
-            NSString *msg = TR(@"RemoveDeadTracksConfirmMsg");
+            NSString *msg = TRMSG(@"RemoveDeadTracksConfirmMsg");
             if ([Dialogs askYesNo:[NSString stringWithFormat:msg,deadTrackCount]] == NSAlertFirstButtonReturn)
                 [(PyDupeGuru *)py removeDeadTracks];
         }
         else {
-            [Dialogs showMessage:TR(@"NoDeadTrackMsg")];
+            [Dialogs showMessage:TRMSG(@"NoDeadTrackMsg")];
         }
     }
 }

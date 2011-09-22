@@ -94,7 +94,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanCreateDirectories:NO];
     [op setAllowsMultipleSelection:NO];
     [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [op setTitle:TR(@"SelectResultToLoadMsg")];
+    [op setTitle:TRMSG(@"SelectResultToLoadMsg")];
     if ([op runModal] == NSOKButton) {
         NSString *filename = [[op filenames] objectAtIndex:0];
         [py loadResultsFrom:filename];
@@ -173,7 +173,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     if ([py resultsAreModified]) {
-        NSString *msg = TR(@"ReallyWantToQuitMsg");
+        NSString *msg = TRMSG(@"ReallyWantToQuitMsg");
         if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) { // NO
             return NSTerminateCancel;
         }
@@ -214,5 +214,10 @@ http://www.hardcoded.net/licenses/bsd_license
     [dialog start];
     [NSApp runModalForWindow:[dialog window]];
     [dialog release];
+}
+
+- (void)showMessage:(NSString *)msg
+{
+    [Dialogs showMessage:msg];
 }
 @end

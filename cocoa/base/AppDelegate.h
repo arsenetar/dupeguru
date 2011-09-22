@@ -62,4 +62,5 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* model --> view */
 - (void)showExtraFairwareReminder;
+- (void)showMessage:(NSString *)msg;
 @end

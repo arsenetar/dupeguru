@@ -21,3 +21,4 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #define TR(s) NSLocalizedString(s, @"")
 #define TRCOL(s) NSLocalizedStringFromTable(s, @"columns", @"")
+#define TRMSG(s) NSLocalizedStringFromTable(s, @"message", @"")

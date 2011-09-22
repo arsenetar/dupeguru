@@ -8,13 +8,12 @@
 
 from PyQt4.QtCore import QRect
 from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
-    QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMessageBox, QMainWindow,
-    QMenuBar, QMenu, QIcon, QPixmap, QLabel)
+    QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMainWindow, QMenuBar,
+    QMenu, QIcon, QPixmap, QLabel)
 
 from hscommon.trans import tr, trmsg
 from qtlib.recent import Recent
 from qtlib.util import moveToScreenCenter
-from core.app import NoScannableFileError
 
 from . import platform
 from .directories_model import DirectoriesModel, DirectoriesDelegate
@@ -215,16 +214,12 @@ class DirectoriesDialog(QMainWindow):
             self.app.model.remove_directory(row)
     
     def scanButtonClicked(self):
-        title = tr("Start a new scan")
         if self.app.model.results.is_modified:
+            title = tr("Start a new scan")
             msg = trmsg("ReallyWantToContinueMsg")
             if not self.app.confirm(title, msg):
                 return
-        try:
-            self.app.model.start_scanning()
-        except NoScannableFileError:
-            msg = trmsg("NoScannableFileMsg")
-            QMessageBox.warning(self, title, msg)
+        self.app.model.start_scanning()
     
     def selectionChanged(self, selected, deselected):
         self._updateRemoveButton()

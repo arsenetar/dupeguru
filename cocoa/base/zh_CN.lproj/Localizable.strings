@@ -7,34 +7,3 @@
 
 "Add iPhoto Library" = "Add iPhoto Library";
 "Clear Picture Cache" = "清空图片缓存";
-
-/* Messages */
-"SelectResultToLoadMsg" = "选择一个结果文件并载入";
-"SelectCopyDestinationMsg" = "Select a directory to copy marked files to";
-"SelectMoveDestinationMsg" = "Select a directory to move marked files to";
-"SelectResultToSaveMsg" = "将结果保存为...";
-"SelectFolderToAddMsg" = "请选择一个文件夹并加入到扫描列表中";
-"ReallyWantToQuitMsg" = "您还没有保存扫描结果，确定要退出吗?";
-"ReallyWantToContinueMsg" = "目前还有结果尚未保存，确定要继续吗?";
-"FolderAlreadyInListMsg" = "'%@' already is in the list.";
-"FolderDoesNotExistMsg" = "'%@' does not exist.";
-"FileRemovalConfirmMsg" = "你将从结果中移除 {} 个文件。继续吗?";
-"FilenameAlreadyExistsMsg" = "The name '%@' already exists.";
-"NoScannableFileMsg" = "所选文件夹中不包含可供扫描的文件。";
-"UnknownErrorMsg" = "Unknown Error.";
-"SendToTrashConfirmMsg" = "即将有 {} 个文件被移到回收站。继续吗?";
-"HardlinkConfirmMsg" = "即将有 {} 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?";
-"ClearIgnoreListConfirmMsg" = "确定要从忽略列表中移除 {} 项吗?";
-"IgnoreConfirmMsg" = "目前已选的 {} 个匹配项将在后续的扫描中被忽略。继续吗?";
-"NoCustomCommandMsg" = "你没有设定自定义命令。请在首选项中进行设定。";
-"CopySuccessMsg" = "All marked files were copied sucessfully.";
-"MoveSuccessMsg" = "All marked files were moved sucessfully.";
-"SendToTrashSuccessMsg" = "All marked files were sucessfully sent to Trash.";
-"NoDuplicateFoundMsg" = "没有找到重复文件。";
-"TaskHangingMsg" = "目前还有任务在执行，新任务无法开启。请等待几秒钟后再重新试一次。";
-
-"RemoveDeadTracksConfirmMsg" = "Your iTunes Library contains %d dead tracks ready to be removed. Continue?";
-"NoDeadTrackMsg" = "You have no dead tracks in your iTunes Library";
-
-"IPhotoAppNotFoundMsg" = "The iPhoto application couldn't be found.";
-"ClearPictureCacheConfirmMsg" = "确定要移除所有缓存图片?";
