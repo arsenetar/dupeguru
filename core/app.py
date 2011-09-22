@@ -20,7 +20,8 @@ from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
-from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal, allsame
+from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_decimal, allsame,
+    rem_file_ext)
 from hscommon.trans import tr, trmsg
 
 from . import directories, results, scanner, export, fs
@@ -66,7 +67,11 @@ def format_perc(p):
 def format_dupe_count(c):
     return str(c) if c else '---'
 
-def cmp_value(value):
+def cmp_value(dupe, column):
+    if column.attr == 'name':
+        value = rem_file_ext(dupe.name)
+    else:
+        value = getattr(dupe, column.attr, '')
     return value.lower() if isinstance(value, str) else value
 
 class DupeGuru(RegistrableApplication, Broadcaster):

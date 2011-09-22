@@ -63,13 +63,13 @@ class DupeGuru(DupeGuruBase):
         ]
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        r = cmp_value(getattr(dupe, self.COLUMNS[key].attr))
+        r = cmp_value(dupe, self.COLUMNS[key])
         if delta and (key in self.DELTA_COLUMNS):
-            r -= cmp_value(getattr(get_group().ref, self.COLUMNS[key].attr))
+            r -= cmp_value(get_group().ref, self.COLUMNS[key])
         return r
     
     def _get_group_sort_key(self, group, key):
-        return cmp_value(getattr(group.ref, self.COLUMNS[key].attr))
+        return cmp_value(group.ref, self.COLUMNS[key])
     
     def _prioritization_categories(self):
         return prioritize.all_categories()

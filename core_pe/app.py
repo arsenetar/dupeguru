@@ -83,10 +83,10 @@ class DupeGuru(DupeGuruBase):
             return 0
         if key == self.FOLDER_COL:
             dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
-            return cmp_value(str(dupe_folder_path))
-        r = cmp_value(getattr(dupe, self.COLUMNS[key].attr, ''))
+            return str(dupe_folder_path).lower()
+        r = cmp_value(dupe, self.COLUMNS[key])
         if delta and (key in self.DELTA_COLUMNS):
-            ref_value = cmp_value(getattr(get_group().ref, self.COLUMNS[key].attr, ''))
+            ref_value = cmp_value(get_group().ref, self.COLUMNS[key])
             if key == 4: # dimensions
                 r = get_delta_dimensions(r, ref_value)
             else:
@@ -100,8 +100,8 @@ class DupeGuru(DupeGuruBase):
             return len(group)
         if key == self.FOLDER_COL:
             dupe_folder_path = getattr(group.ref, 'display_folder_path', group.ref.folder_path)
-            return cmp_value(str(dupe_folder_path))
-        return cmp_value(getattr(group.ref, self.COLUMNS[key].attr, ''))
+            return str(dupe_folder_path).lower()
+        return cmp_value(group.ref, self.COLUMNS[key])
     
     def _prioritization_categories(self):
         return prioritize.all_categories()

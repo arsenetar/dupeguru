@@ -66,9 +66,9 @@ class DupeGuru(DupeGuruBase):
             return m.percentage
         if key == self.DUPECOUNT_COL:
             return 0
-        r = cmp_value(getattr(dupe, self.COLUMNS[key].attr, ''))
+        r = cmp_value(dupe, self.COLUMNS[key])
         if delta and (key in self.DELTA_COLUMNS):
-            r -= cmp_value(getattr(get_group().ref, self.COLUMNS[key].attr, ''))
+            r -= cmp_value(get_group().ref, self.COLUMNS[key])
         return r
     
     def _get_group_sort_key(self, group, key):
@@ -76,7 +76,7 @@ class DupeGuru(DupeGuruBase):
             return group.percentage
         if key == self.DUPECOUNT_COL:
             return len(group)
-        return cmp_value(getattr(group.ref, self.COLUMNS[key].attr, ''))
+        return cmp_value(group.ref, self.COLUMNS[key])
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
