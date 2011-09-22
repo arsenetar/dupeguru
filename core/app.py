@@ -20,7 +20,7 @@ from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
-from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal
+from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal, allsame
 from hscommon.trans import tr, trmsg
 
 from . import directories, results, scanner, export, fs
@@ -422,8 +422,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.view.start_job(JobType.Scan, do)
     
     def toggle_selected_mark_state(self):
-        for dupe in self.selected_dupes:
-            self.results.mark_toggle(dupe)
+        selected = self.without_ref(self.selected_dupes)
+        if not selected:
+            return
+        if allsame(self.results.is_marked(d) for d in selected):
+            markfunc = self.results.mark_toggle
+        else:
+            markfunc = self.results.mark
+        for dupe in selected:
+            markfunc(dupe)
         self.notify('marking_changed')
     
     def without_ref(self, dupes):

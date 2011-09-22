@@ -267,7 +267,7 @@ class TestCaseDupeGuruWithResults:
         assert app.selected_dupes[1] is objects[2]
         assert app.selected_dupes[2] is objects[1]
     
-    def test_toggleSelectedMark(self, do_setup):
+    def test_toggle_selected_mark_state(self, do_setup):
         app = self.app
         objects = self.objects
         app.toggle_selected_mark_state()
@@ -280,6 +280,21 @@ class TestCaseDupeGuruWithResults:
         assert not app.results.is_marked(objects[2])
         assert not app.results.is_marked(objects[3])
         assert app.results.is_marked(objects[4])
+    
+    def test_toggle_selected_mark_state_with_different_selected_state(self, do_setup):
+        # When marking selected dupes with a heterogenous selection, mark all selected dupes. When
+        # it's homogenous, simply toggle.
+        app = self.app
+        objects = self.objects
+        self.rtable.select([1])
+        app.toggle_selected_mark_state()
+        # index 0 is unmarkable, but we throw it in the bunch to be sure that it doesn't make the
+        # selection heterogenoug when it shouldn't.
+        self.rtable.select([0, 1, 4])
+        app.toggle_selected_mark_state()
+        eq_(app.results.mark_count, 2)
+        app.toggle_selected_mark_state()
+        eq_(app.results.mark_count, 0)
     
     def test_refreshDetailsWithSelected(self, do_setup):
         self.rtable.select([1, 4])

@@ -11,13 +11,6 @@ class Markable:
         self.__marked = set()
         self.__inverted = False
     
-    #---Private
-    def __get_mark_count(self):
-        if self.__inverted:
-            return self._get_markable_count() - len(self.__marked)
-        else:
-            return len(self.__marked)
-    
     #---Virtual
     #About did_mark and did_unmark: They only happen what an object is actually added/removed
     # in self.__marked, and is not affected by __inverted. Thus, self.mark while __inverted
@@ -87,8 +80,17 @@ class Markable:
             return False
         return self.mark_toggle(o)
     
-    mark_count    = property(__get_mark_count)
-    mark_inverted = property(lambda self :self.__inverted)
+    #--- Properties
+    @property
+    def mark_count(self):
+        if self.__inverted:
+            return self._get_markable_count() - len(self.__marked)
+        else:
+            return len(self.__marked)
+    
+    @property
+    def mark_inverted(self):
+        return self.__inverted
 
 class MarkableList(list, Markable):
     def __init__(self):
