@@ -6,13 +6,12 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import sys
-
 from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
 from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, QInputDialog,
     QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView,
     QStatusBar, QDialog)
 
+from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import tr, trmsg
 from hscommon.util import nonone
 from qtlib.util import moveToScreenCenter
@@ -72,7 +71,7 @@ class ResultWindow(QMainWindow):
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
         
-        if sys.platform not in {'darwin', 'linux2'}:
+        if (not ISOSX) and (not ISLINUX):
             self.actionHardlinkMarked.setVisible(False)
     
     def _setupMenu(self):

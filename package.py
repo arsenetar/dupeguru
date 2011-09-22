@@ -14,6 +14,7 @@ import compileall
 import shutil
 import json
 
+from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
     build_debian_changelog, copy_qt_plugins, get_module_version)
 
@@ -26,7 +27,7 @@ def package_cocoa(edition):
     build_dmg(app_path, '.')
 
 def package_windows(edition, dev):
-    if sys.platform != "win32":
+    if not ISWINDOWS:
         print("Qt packaging only works under Windows.")
         return
     add_to_pythonpath('.')
@@ -111,9 +112,9 @@ def main():
     if ui == 'cocoa':
         package_cocoa(edition)
     elif ui == 'qt':
-        if sys.platform == "win32":
+        if ISWINDOWS:
             package_windows(edition, dev)
-        elif sys.platform == "linux2":
+        elif ISLINUX:
             package_debian(edition)
         else:
             print("Qt packaging only works under Windows or Linux.")

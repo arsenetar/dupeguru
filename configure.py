@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-12-30
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -11,11 +10,13 @@ import sys
 from optparse import OptionParser
 import json
 
+from hscommon.plat import ISOSX
+
 def main(edition, ui, dev):
-    if edition not in ('se', 'me', 'pe'):
+    if edition not in {'se', 'me', 'pe'}:
         edition = 'se'
-    if ui not in ('cocoa', 'qt'):
-        ui = 'cocoa' if sys.platform == 'darwin' else 'qt'
+    if ui not in {'cocoa', 'qt'}:
+        ui = 'cocoa' if ISOSX else 'qt'
     build_type = 'Dev' if dev else 'Release'
     print("Configuring dupeGuru {0} for UI {1} ({2})".format(edition.upper(), ui, build_type))
     conf = {

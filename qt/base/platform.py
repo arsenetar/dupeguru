@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-09-27
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -7,14 +6,13 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import logging
-import sys
+from hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
 
-if sys.platform == 'win32':
+if ISWINDOWS:
     from .platform_win import *
-elif sys.platform == 'darwin':
+elif ISOSX:
     from .platform_osx import *
-elif sys.platform == 'linux2':
+elif ISLINUX:
     from .platform_lnx import *
 else:
     pass # unsupported platform

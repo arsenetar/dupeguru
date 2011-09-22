@@ -11,6 +11,7 @@ from PyQt4.QtCore import QSize
 from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
     QLineEdit, QApplication)
 
+from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.trans import tr
 from hscommon.util import tryint
 
@@ -76,11 +77,11 @@ class PreferencesDialog(PreferencesDialogBase):
     def _setupUi(self):
         PreferencesDialogBase._setupUi(self)
         
-        if sys.platform == 'linux2':
+        if ISLINUX:
             # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
             # doesn't have enough space, so we make the pref pane higher to compensate.
             self.resize(self.width(), 490)
-        elif sys.platform == 'win32':
+        elif ISWINDOWS:
             self.resize(self.width(), 420)
     
     def _load(self, prefs, setchecked):

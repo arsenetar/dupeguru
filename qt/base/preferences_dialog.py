@@ -6,11 +6,11 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import sys
 from PyQt4.QtCore import SIGNAL, Qt, QSize
 from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox)
 
+from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import tr, trmsg
 
 class PreferencesDialogBase(QDialog):
@@ -124,7 +124,7 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
         self.mainVLayout.addWidget(self.buttonBox)
-        if sys.platform not in {'darwin', 'linux2'}:
+        if (not ISOSX) and (not ISLINUX):
             self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
     

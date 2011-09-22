@@ -18,6 +18,7 @@ from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QAp
 from jobprogress import job
 from jobprogress.qt import Progress
 from hscommon.trans import tr, trmsg
+from hscommon.plat import ISLINUX
 
 from core.app import JobType
 
@@ -108,7 +109,7 @@ class DupeGuru(QObject):
         ]
         createActions(ACTIONS, self)
         
-        if sys.platform == 'linux2':
+        if ISLINUX:
             self.actionCheckForUpdate.setVisible(False) # This only works on Windows
     
     def _setup_as_registered(self):

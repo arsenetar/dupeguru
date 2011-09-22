@@ -12,6 +12,7 @@ from PyQt4.QtCore import Qt, QUrl, QTimer
 from PyQt4.QtGui import (QDialog, QDesktopServices, QApplication, QVBoxLayout, QHBoxLayout, QLabel,
     QFont, QSpacerItem, QSizePolicy, QPushButton)
 
+from hscommon.plat import ISLINUX
 from hscommon.trans import tr as trbase, trmsg as trmsgbase
 tr = lambda s: trbase(s, "ExtraFairwareReminder")
 trmsg = lambda s: trmsgbase(s, "ExtraFairwareReminder")
@@ -33,7 +34,7 @@ class ExtraFairwareReminder(QDialog):
     
     def _setupUi(self):
         self.setWindowTitle(tr("Sorry, I must insist"))
-        dlg_height = 410 if sys.platform == 'linux2' else 330
+        dlg_height = 410 if ISLINUX else 330
         self.resize(380, dlg_height)
         self.verticalLayout = QVBoxLayout(self)
         self.descLabel = QLabel(self)        
