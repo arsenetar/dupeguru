@@ -12,12 +12,13 @@ import os
 import os.path as op
 from xml.etree import ElementTree as ET
 
-from . import engine
 from jobprogress.job import nulljob
 from hscommon.conflict import get_conflicted_name
-from hscommon.markable import Markable
 from hscommon.util import flatten, nonone, FileOrPath, format_size
 from hscommon.trans import tr
+
+from . import engine
+from .markable import Markable
 
 class Results(Markable):
     #---Override
