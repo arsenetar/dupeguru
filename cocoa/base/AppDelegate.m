@@ -13,9 +13,16 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 #import "Consts.h"
 #import "Dialogs.h"
+#import "ValueTransformers.h"
 #import <Sparkle/SUUpdater.h>
 
 @implementation AppDelegateBase
++ (void)initialize
+{
+    HSVTAdd *vt = [[[HSVTAdd alloc] initWithValue:4] autorelease];
+    [NSValueTransformer setValueTransformer:vt forName:@"vtRowHeightOffset"];
+}
+
 - (void)awakeFromNib
 {
     [py bindCocoa:self];

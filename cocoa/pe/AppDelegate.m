@@ -18,11 +18,13 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegate
 + (void)initialize
 {
+    [super initialize];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:10];
     [d setObject:i2n(0) forKey:@"scanType"];
     [d setObject:i2n(95) forKey:@"minMatchPercentage"];
     [d setObject:i2n(1) forKey:@"recreatePathType"];
+    [d setObject:i2n(11) forKey:TableFontSize];
     [d setObject:b2n(NO) forKey:@"matchScaled"];
     [d setObject:b2n(YES) forKey:@"mixFileKind"];
     [d setObject:b2n(NO) forKey:@"useRegexpFilter"];

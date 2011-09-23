@@ -19,11 +19,13 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegate
 + (void)initialize
 {
+    [super initialize];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:10];
     [d setObject:i2n(3) forKey:@"scanType"];
     [d setObject:i2n(80) forKey:@"minMatchPercentage"];
     [d setObject:i2n(1) forKey:@"recreatePathType"];
+    [d setObject:i2n(11) forKey:TableFontSize];
     [d setObject:b2n(NO) forKey:@"wordWeighting"];
     [d setObject:b2n(NO) forKey:@"matchSimilarWords"];
     [d setObject:b2n(YES) forKey:@"mixFileKind"];

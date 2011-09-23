@@ -15,6 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Override */
 - (void)initResultColumns
 {
+    [super initResultColumns];
     NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
     _resultColumns = [[NSMutableArray alloc] init];
     [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name

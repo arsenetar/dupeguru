@@ -10,6 +10,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #define JobStarted @"JobStarted"
 #define JobInProgress @"JobInProgress"
+#define TableFontSize @"TableFontSize"
 
 #define jobLoad @"job_load"
 #define jobScan @"job_scan"

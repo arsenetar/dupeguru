@@ -50,6 +50,9 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Virtual */
 - (void)initResultColumns
 {
+    NSUserDefaults *udc = [NSUserDefaultsController sharedUserDefaultsController];
+    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
+    [refCol bind:@"fontSize" toObject:udc withKeyPath:@"values.TableFontSize" options:nil];
 }
 
 - (void)setScanOptions
@@ -84,6 +87,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [[col headerCell] setStringValue:aTitle];
     [col setResizingMask:NSTableColumnUserResizingMask];
     [col setSortDescriptorPrototype:[[NSSortDescriptor alloc] initWithKey:[n stringValue] ascending:YES]];
+    NSUserDefaults *udc = [NSUserDefaultsController sharedUserDefaultsController];
+    [col bind:@"fontSize" toObject:udc withKeyPath:@"values.TableFontSize" options:nil];
     return col;
 }
 
