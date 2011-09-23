@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from PyQt4.QtGui import QApplication
+
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
@@ -39,6 +41,7 @@ class Preferences(PreferencesBase):
                 self.columns_width[index] = width
         self.columns_visible = get('ColumnsVisible', self.columns_visible)
         
+        self.tableFontSize = get('TableFontSize', self.tableFontSize)
         self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.resultWindowRect = self.get_rect('ResultWindowRect', self.resultWindowRect)
         self.detailsWindowRect = self.get_rect('DetailsWindowRect', self.detailsWindowRect)
@@ -65,6 +68,7 @@ class Preferences(PreferencesBase):
         self.custom_command = ''
         self.language = ''
         
+        self.tableFontSize = QApplication.font().pointSize()
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.detailsWindowRect = None
@@ -98,6 +102,7 @@ class Preferences(PreferencesBase):
         set_('ColumnsVisible', self.columns_visible)
         set_('Language', self.language)
         
+        set_('TableFontSize', self.tableFontSize)
         set_('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.set_rect('ResultWindowRect', self.resultWindowRect)
         self.set_rect('DetailsWindowRect', self.detailsWindowRect)

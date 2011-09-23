@@ -177,7 +177,6 @@ class ResultWindow(QMainWindow):
         self.resultsView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.resultsView.setSortingEnabled(True)
         self.resultsView.verticalHeader().setVisible(False)
-        self.resultsView.verticalHeader().setDefaultSectionSize(18)
         h = self.resultsView.horizontalHeader()
         h.setHighlightSections(False)
         h.setMovable(True)

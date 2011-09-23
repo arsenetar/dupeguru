@@ -67,6 +67,7 @@ class DupeGuru(QObject):
         self.prefs.load()
         self.model = self.MODELCLASS(view=self, appdata=appdata)
         self._setup()
+        self.prefsChanged.emit(self.prefs)
     
     #--- Private
     def _setup(self):
@@ -193,6 +194,7 @@ class DupeGuru(QObject):
     
     #--- Signals
     willSavePrefs = pyqtSignal()
+    prefsChanged = pyqtSignal(object)
     
     #--- Events
     def finishedLaunching(self):
@@ -237,6 +239,7 @@ class DupeGuru(QObject):
             self.preferences_dialog.save()
             self.prefs.save()
             self._update_options()
+            self.prefsChanged.emit(self.prefs)
     
     def quitTriggered(self):
         self.directories_dialog.close()

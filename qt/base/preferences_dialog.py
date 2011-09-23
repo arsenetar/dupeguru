@@ -8,10 +8,11 @@
 
 from PyQt4.QtCore import SIGNAL, Qt, QSize
 from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
-    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox)
+    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox)
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import tr, trmsg
+from qtlib.util import horizontalWrap
 
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app):
@@ -79,14 +80,17 @@ class PreferencesDialogBase(QDialog):
     
     def _setupBottomPart(self):
         # The bottom part of the pref panel is always the same in all editions.
+        self.fontSizeLabel = QLabel(tr("Font size:"))
+        self.fontSizeSpinBox = QSpinBox()
+        self.fontSizeSpinBox.setMinimum(5)
+        self.widgetsVLayout.addLayout(horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None]))
         self.languageLabel = QLabel(tr("Language:"), self)
-        self.widgetsVLayout.addWidget(self.languageLabel)
         self.languageComboBox = QComboBox(self)
         self.languageComboBox.addItem(tr("English"))
         self.languageComboBox.addItem(tr("French"))
         self.languageComboBox.addItem(tr("German"))
         self.languageComboBox.addItem(tr("Chinese (Simplified)"))
-        self.widgetsVLayout.addWidget(self.languageComboBox)
+        self.widgetsVLayout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
         self.widgetsVLayout.addWidget(self.copyMoveLabel)
@@ -149,6 +153,7 @@ class PreferencesDialogBase(QDialog):
         setchecked(self.debugModeBox, prefs.debug_mode)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
+        self.fontSizeSpinBox.setValue(prefs.tableFontSize)
         langindex = {
             'fr': 1,
             'de': 2,
@@ -168,6 +173,7 @@ class PreferencesDialogBase(QDialog):
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
+        prefs.tableFontSize = self.fontSizeSpinBox.value()
         langs = ['en', 'fr', 'de', 'zh_CN']
         lang = langs[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language

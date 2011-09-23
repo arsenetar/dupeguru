@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL, Qt
-from PyQt4.QtGui import QBrush, QFont, QTableView, QColor
+from PyQt4.QtCore import SIGNAL, Qt, QSize
+from PyQt4.QtGui import QBrush, QFont, QFontMetrics, QTableView, QColor
 
 from qtlib.table import Table
 
@@ -20,6 +20,8 @@ class ResultsModel(Table):
         self._delta_columns = app.model.DELTA_COLUMNS
         Table.__init__(self, model, view)
         self.model.connect()
+        
+        app.prefsChanged.connect(self.appPrefsChanged)
     
     def columnCount(self, parent):
         return len(self._app.COLUMNS)
@@ -61,8 +63,9 @@ class ResultsModel(Table):
         return flags
     
     def headerData(self, section, orientation, role):
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(self._app.COLUMNS):
-            return self._app.COLUMNS[section].display
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal and section < len(self._app.COLUMNS):
+                return self._app.COLUMNS[section].display
         return None
     
     def setData(self, index, value, role):
@@ -98,6 +101,14 @@ class ResultsModel(Table):
     @delta_values.setter
     def delta_values(self, value):
         self.model.delta_values = value
+    
+    #--- Events
+    def appPrefsChanged(self, prefs):
+        font = self.view.font()
+        font.setPointSize(prefs.tableFontSize)
+        self.view.setFont(font)
+        fm = QFontMetrics(font)
+        self.view.verticalHeader().setDefaultSectionSize(fm.height()+2)
     
     #--- model --> view
     def invalidate_markings(self):
