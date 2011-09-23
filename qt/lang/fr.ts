@@ -470,6 +470,10 @@
     <translation>Ignorer doublons avec hardlink vers le même fichier</translation>
 </message>
 <message>
+    <source>Font size:</source>
+    <translation>Taille de police:</translation>
+</message>
+<message>
     <source>Copy and Move:</source>
     <translation>Déplacements de fichiers:</translation>
 </message>

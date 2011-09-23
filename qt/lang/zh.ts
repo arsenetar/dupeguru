@@ -470,6 +470,10 @@
     <translation>忽略重复文件当其硬连接到相同文件时</translation>
 </message>
 <message>
+    <source>Font size:</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Copy and Move:</source>
     <translation>复制和移动:</translation>
 </message>

@@ -55,3 +55,15 @@
 
 /* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "75"; */
 "75.title" = "Debug mode (restart required)";
+
+/* Class = "NSMenuItem"; title = "EXIF Timestamp"; ObjectID = "92"; */
+"92.title" = "EXIF Timestamp";
+
+/* Class = "NSMenuItem"; title = "Contents"; ObjectID = "93"; */
+"93.title" = "Contents";
+
+/* Class = "NSTextFieldCell"; title = "Scan type:"; ObjectID = "94"; */
+"94.title" = "Scan type:";
+
+/* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "104"; */
+"104.title" = "Font size:";

@@ -470,6 +470,10 @@
     <translation>Ignoriere Duplikate die mit derselben Datei verknüpft sind</translation>
 </message>
 <message>
+    <source>Font size:</source>
+    <translation type="unfinished"></translation>
+</message>
+<message>
     <source>Copy and Move:</source>
     <translation>Kopieren und Verschieben:</translation>
 </message>

@@ -76,3 +76,6 @@
 
 /* Class = "NSMenuItem"; title = "Folders"; ObjectID = "149"; */
 "149.title" = "Ordner";
+
+/* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "155"; */
+"155.title" = "Font size:";

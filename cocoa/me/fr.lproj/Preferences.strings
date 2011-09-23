@@ -100,3 +100,6 @@
 
 /* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "130"; */
 "130.title" = "Mode de déboguage (redémarrage requis)";
+
+/* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "136"; */
+"136.title" = "Taille de police:";
