@@ -290,7 +290,8 @@ class Group:
     
     def prioritize(self, key_func, tie_breaker=None):
         # tie_breaker(ref, dupe) --> True if dupe should be ref
-        self.ordered.sort(key=key_func)
+        master_key_func = lambda x: (-x.is_ref, key_func(x))
+        self.ordered.sort(key=master_key_func)
         if tie_breaker is None:
             return
         ref = self.ref
@@ -318,6 +319,8 @@ class Group:
             pass
     
     def switch_ref(self, with_dupe):
+        if self.ref.is_ref:
+            return
         try:
             self.ordered.remove(with_dupe)
             self.ordered.insert(0, with_dupe)

@@ -416,6 +416,8 @@ class TestCaseDupeGuru_renameSelected:
         fp = open(str(p + 'foo bar 3'),mode='w')
         fp.close()
         files = fs.get_files(p)
+        for f in files:
+            f.is_ref = False
         matches = engine.getmatches(files)
         groups = engine.get_groups(matches)
         g = groups[0]

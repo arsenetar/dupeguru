@@ -795,13 +795,3 @@ class TestCaseResultsRefFile:
         expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked.'
         eq_(expected, self.results.stat_line)
     
-    def test_make_ref(self):
-        d = self.results.groups[0].dupes[1] #non-ref
-        r = self.results.groups[0].ref
-        self.results.make_ref(d)
-        expected = '0 / 1 (0.00 B / 1.00 B) duplicates marked.'
-        eq_(expected, self.results.stat_line)
-        self.results.make_ref(r)
-        expected = '0 / 2 (0.00 B / 2.00 B) duplicates marked.'
-        eq_(expected, self.results.stat_line)
-    

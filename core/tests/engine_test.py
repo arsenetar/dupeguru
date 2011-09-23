@@ -599,6 +599,16 @@ class TestCaseGroup:
         g.switch_ref(NamedObject('',True))
         assert o2 is g.ref
     
+    def test_switch_ref_from_ref_dir(self):
+        # When the ref dupe is from a ref dir, switch_ref() does nothing
+        o1 = no(with_words=True)
+        o2 = no(with_words=True)
+        o1.is_ref = True
+        g = Group()
+        g.add_match(get_match(o1, o2))
+        g.switch_ref(o2)
+        assert o1 is g.ref
+    
     def test_get_match_of(self):
         g = Group()
         for m in get_match_triangle():
@@ -683,6 +693,15 @@ class TestCaseGroup:
         tie_breaker = lambda ref, dupe: dupe.bar > ref.bar
         g.prioritize(key_func, tie_breaker)
         assert g.ref is o2
+    
+    def test_prioritize_with_ref_dupe(self):
+        # when the ref dupe of a group is from a ref dir, make it stay on top.
+        g = get_test_group()
+        o1, o2, o3 = g
+        o1.is_ref = True
+        o2.size = 2
+        g.prioritize(lambda x: -x.size)
+        assert g.ref is o1
     
     def test_list_like(self):
         g = Group()

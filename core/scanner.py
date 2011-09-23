@@ -80,7 +80,7 @@ class Scanner:
     
     @staticmethod
     def _key_func(dupe):
-        return (not dupe.is_ref, -dupe.size)
+        return -dupe.size
     
     @staticmethod
     def _tie_breaker(ref, dupe):
