@@ -49,8 +49,6 @@ class Preferences(PreferencesBase):
         self.recentResults = get('RecentResults', self.recentResults)
         self.recentFolders = get('RecentFolders', self.recentFolders)
         
-        self.registration_code = get('RegistrationCode', self.registration_code)
-        self.registration_email = get('RegistrationEmail', self.registration_email)
         self._load_specific(settings)
     
     def _reset_specific(self):
@@ -76,8 +74,6 @@ class Preferences(PreferencesBase):
         self.recentResults = []
         self.recentFolders = []
         
-        self.registration_code = ''
-        self.registration_email = ''
         self._reset_specific()
     
     def reset_columns(self):
@@ -110,7 +106,5 @@ class Preferences(PreferencesBase):
         set_('RecentResults', self.recentResults)
         set_('RecentFolders', self.recentFolders)
         
-        set_('RegistrationCode', self.registration_code)
-        set_('RegistrationEmail', self.registration_email)
         self._save_specific(settings)
     

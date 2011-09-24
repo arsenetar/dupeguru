@@ -2,11 +2,10 @@ import logging
 
 from jobprogress import job
 from hscommon import cocoa
-from hscommon.cocoa import install_exception_hook, pythonify
+from hscommon.cocoa import install_exception_hook
 from hscommon.cocoa.inter import signature, PyFairware
-from hscommon.cocoa.objcmin import (NSNotificationCenter, NSUserDefaults,
-    NSSearchPathForDirectoriesInDomains, NSApplicationSupportDirectory, NSUserDomainMask,
-    NSWorkspace)
+from hscommon.cocoa.objcmin import (NSNotificationCenter, NSSearchPathForDirectoriesInDomains,
+    NSApplicationSupportDirectory, NSUserDomainMask, NSWorkspace)
 from hscommon.trans import tr
 
 from core.app import JobType
@@ -187,14 +186,6 @@ class PyDupeGuruBase(PyFairware):
         else:
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('JobStarted', self, ud)
-    
-    def get_default(self, key_name):
-        raw = NSUserDefaults.standardUserDefaults().objectForKey_(key_name)
-        result = pythonify(raw)
-        return result
-    
-    def set_default(self, key_name, value):
-        NSUserDefaults.standardUserDefaults().setObject_forKey_(value, key_name)
     
     def show_extra_fairware_reminder(self):
         self.cocoa.showExtraFairwareReminder()

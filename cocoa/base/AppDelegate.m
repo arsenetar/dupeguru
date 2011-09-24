@@ -166,7 +166,7 @@ http://www.hardcoded.net/licenses/bsd_license
         [[self resultWindow] restoreColumnsPosition:columnsOrder widths:columnsWidth];
     else
         [[self resultWindow] resetColumnsToDefault:nil];
-    [HSFairwareReminder showNagWithApp:[self py]];
+    [py initialRegistrationSetup];
     [py loadSession];
 }
 
@@ -226,5 +226,15 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showMessage:(NSString *)msg
 {
     [Dialogs showMessage:msg];
+}
+
+- (void)setupAsRegistered
+{
+    // Nothing to do.
+}
+
+- (void)showFairwareNag
+{
+    [HSFairwareReminder showNagWithApp:[self py]];
 }
 @end

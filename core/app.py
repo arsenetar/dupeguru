@@ -79,17 +79,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # start_job(jobid, func, args=()) ( func(j, *args) )
-    # get_default(key_name, fallback_value=None)
-    # set_default(key_name, value)
     # show_extra_fairware_reminder()
     # show_message(msg)
     
     def __init__(self, view, appdata):
-        self.view = view
-        if self.get_default(DEBUG_MODE_PREFERENCE, False):
+        if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
-        RegistrableApplication.__init__(self, appid=1)
+        RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
         self.is_first_run = not self.get_default(HAD_FIRST_LAUNCH_PREFERENCE, False)
         if self.is_first_run:

@@ -82,9 +82,7 @@ class DupeGuru(QObject):
         self.problemDialog = ProblemDialog(parent=self.resultWindow, app=self)
         self.preferences_dialog = self._create_preferences_dialog(self.resultWindow)
         self.about_box = AboutBox(self.resultWindow, self)
-        
-        
-        self.model.set_registration(self.prefs.registration_code, self.prefs.registration_email)
+                
         self.directories_dialog.show()
         self.model.load()
         
@@ -112,13 +110,6 @@ class DupeGuru(QObject):
         
         if ISLINUX:
             self.actionCheckForUpdate.setVisible(False) # This only works on Windows
-    
-    def _setup_as_registered(self):
-        self.prefs.registration_code = self.registration_code
-        self.prefs.registration_email = self.registration_email
-        self.actionRegister.setVisible(False)
-        self.about_box.registerButton.hide()
-        self.about_box.registeredEmailLabel.setText(self.prefs.registration_email)
     
     def _update_options(self):
         self.model.scanner.mix_file_kind = self.prefs.mix_file_kind
@@ -198,9 +189,7 @@ class DupeGuru(QObject):
     
     #--- Events
     def finishedLaunching(self):
-        if self.model.should_show_fairware_reminder:
-            reg = Registration(self.model)
-            reg.show_nag()
+        self.model.initial_registration_setup()
     
     def application_will_terminate(self):
         self.willSavePrefs.emit()
@@ -281,6 +270,15 @@ class DupeGuru(QObject):
     
     def set_default(self, key, value):
         self.prefs.set_value(key, value)
+    
+    def setup_as_registered(self):
+        self.actionRegister.setVisible(False)
+        self.about_box.registerButton.hide()
+        self.about_box.registeredEmailLabel.setText(self.model.registration_email)
+    
+    def show_fairware_nag(self):
+        reg = Registration(self.model)
+        reg.show_nag()
     
     def show_extra_fairware_reminder(self):
         dialog = ExtraFairwareReminder(self.directories_dialog, self)
