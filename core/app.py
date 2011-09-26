@@ -80,7 +80,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # reveal_path(path)
     # start_job(jobid, func, args=()) ( func(j, *args) )
     # show_extra_fairware_reminder()
-    # show_message(msg)
+    
+    # in fairware prompts, we don't mention the edition, it's too long.
+    PROMPT_NAME = "dupeGuru"
+    DEMO_LIMITATION = tr("will only be able to delete, move or copy 10 duplicates at once")
     
     def __init__(self, view, appdata):
         if view.get_default(DEBUG_MODE_PREFERENCE):
@@ -88,9 +91,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.debug("Debug mode enabled")
         RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
-        self.is_first_run = not self.get_default(HAD_FIRST_LAUNCH_PREFERENCE, False)
-        if self.is_first_run:
-            self.set_default(HAD_FIRST_LAUNCH_PREFERENCE, True)
         self.appdata = appdata
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)

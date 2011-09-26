@@ -233,8 +233,13 @@ http://www.hardcoded.net/licenses/bsd_license
     // Nothing to do.
 }
 
-- (void)showFairwareNag
+- (void)showFairwareNagWithPrompt:(NSString *)prompt
 {
-    [HSFairwareReminder showNagWithApp:[self py]];
+    [HSFairwareReminder showFairwareNagWithApp:[self py] prompt:prompt];
+}
+
+- (void)showDemoNagWithPrompt:(NSString *)prompt
+{
+    [HSFairwareReminder showDemoNagWithApp:[self py] prompt:prompt];
 }
 @end

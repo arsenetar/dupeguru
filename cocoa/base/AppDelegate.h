@@ -63,4 +63,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* model --> view */
 - (void)showExtraFairwareReminder;
 - (void)showMessage:(NSString *)msg;
+- (void)setupAsRegistered;
+- (void)showFairwareNagWithPrompt:(NSString *)prompt;
+- (void)showDemoNagWithPrompt:(NSString *)prompt;
 @end

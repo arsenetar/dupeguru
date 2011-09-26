@@ -276,9 +276,13 @@ class DupeGuru(QObject):
         self.about_box.registerButton.hide()
         self.about_box.registeredEmailLabel.setText(self.model.registration_email)
     
-    def show_fairware_nag(self):
+    def show_fairware_nag(self, prompt):
         reg = Registration(self.model)
-        reg.show_nag()
+        reg.show_fairware_nag(prompt)
+    
+    def show_demo_nag(self, prompt):
+        reg = Registration(self.model)
+        reg.show_demo_nag(prompt)
     
     def show_extra_fairware_reminder(self):
         dialog = ExtraFairwareReminder(self.directories_dialog, self)
@@ -287,4 +291,7 @@ class DupeGuru(QObject):
     def show_message(self, msg):
         window = QApplication.activeWindow()
         QMessageBox.information(window, '', msg)
+    
+    def open_url(self, url):
+        self.open_path(url)
     
