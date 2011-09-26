@@ -187,6 +187,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.selected_dupes = dupes
         self.notify('dupes_selected')
     
+    def _check_demo(self):
+        if self.should_apply_demo_limitation and self.results.mark_count > 10:
+            msg = tr("You cannot delete, move or copy more than 10 duplicates at once in demo mode.")
+            self.view.show_message(msg)
+            return False
+        return True
+            
     #--- Public
     def add_directory(self, d):
         try:
@@ -255,11 +262,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
+        if not self._check_demo():
+            return
         self.show_extra_fairware_reminder_if_needed()
         jobid = JobType.Copy if copy else JobType.Move
         self.view.start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
+        if not self._check_demo():
+            return
         self.show_extra_fairware_reminder_if_needed()
         self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
     
