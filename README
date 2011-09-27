@@ -26,11 +26,11 @@ Before being able to build dupeGuru, a few dependencies have to be installed:
 General dependencies
 --------------------
 
-- Python 3.1 (3.2 on Mac OS X) (http://www.python.org)
+- Python 3.2 (http://www.python.org)
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
-- jobprogress 1.0.1 (http://hg.hardcoded.net/jobprogress)
-- Sphinx 1.0.6 (http://sphinx.pocoo.org/)
+- jobprogress 1.0.2 (http://hg.hardcoded.net/jobprogress)
+- Sphinx 1.0.7 (http://sphinx.pocoo.org/)
 - pytest 2.0.0, to run unit tests. (http://pytest.org/)
 
 Note: Sphinx doesn't officially support Python 3.x yet, but it doesn't matter because it is invoked
@@ -40,13 +40,11 @@ your Python 2.x install.
 OS X prerequisites
 ------------------
 
-- XCode 3.1 (http://developer.apple.com/TOOLS/xcode/)
+- XCode 4.1
 - Sparkle (http://sparkle.andymatuschak.org/)
 - PyObjC 2.3 (http://pyobjc.sourceforge.net/)
 - pluginbuilder 1.0.1 (http://bitbucket.org/hsoft/pluginbuilder)
 - appscript 1.0.0 for ME and PE (http://appscript.sourceforge.net/)
-
-dupeGuru can be built with XCode 4, but there's gotchas, see below.
 
 Windows prerequisites
 ---------------------
@@ -104,9 +102,7 @@ same Python version you build dupeGuru with.
 Another one on OS X: I wouldn't use macports/fink/whatever. Whenever I tried using those, I always 
 ended up with problems.
 
-dupeGuru can be built with XCode 4 (until support for 10.5 is dropped, xcode 3 and xcode 4 projects
-have to be maintained in parallel though). You build it through `build.py`, like you'd normally do
-but for dupeGuru PE, make sure that you installed the latest version of macholib because there was a
+On OSX Lion, for dupeGuru PE, make sure that you installed the latest version of macholib because there was a
 10.7 related bug that was fixed recently. Right now, the fix hasn't even been released yet so you 
 have to install directly from the repo ( http://bitbucket.org/ronaldoussoren/macholib ). The fix
 in question is at http://bitbucket.org/ronaldoussoren/macholib/changeset/4ab0de0f5b60
