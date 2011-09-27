@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.1
+#!/usr/bin/env python3
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
 # 
 # This software is licensed under the "BSD" License as described in the "LICENSE" file, 
