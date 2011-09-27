@@ -577,7 +577,7 @@
 <!--- Prioritization -->
 <message>
     <source>Ends with number</source>
-    <translation type="unfinished></translation>
+    <translation type="unfinished"></translation>
 </message>
 <message>
     <source>Doesn't end with number</source>
