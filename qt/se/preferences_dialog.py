@@ -80,9 +80,9 @@ class PreferencesDialog(PreferencesDialogBase):
         if ISLINUX:
             # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
             # doesn't have enough space, so we make the pref pane higher to compensate.
-            self.resize(self.width(), 490)
+            self.resize(self.width(), 530)
         elif ISWINDOWS:
-            self.resize(self.width(), 420)
+            self.resize(self.width(), 440)
     
     def _load(self, prefs, setchecked):
         scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
