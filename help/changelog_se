@@ -1,3 +1,14 @@
+=== 3.2.0 (2011-09-27)
+
+* Added duplicate re-prioritization dialog. (#138)
+* Added font size preference for duplicate table. (#82)
+* Added Quicklook support. [Mac OS X] (#21)
+* Improved behavior of Mark Selected. (#139)
+* Improved filename sorting. (#169)
+* Added Chinese (Simplified) localization by Eric Dee.
+* Tweaked the fairware system.
+* Upgraded minimum requirements to OS X 10.6 and Ubuntu 11.04.
+
 === 3.1.2 (2011-08-25)
 
 * Fixed a bug preventing the Folders scan from working. (#172)
