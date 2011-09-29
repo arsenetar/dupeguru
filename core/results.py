@@ -316,7 +316,9 @@ class Results(Markable):
         try:
             do_write(outfile)
         except IOError as e:
-            if e.errno == 21: # outfile is a directory
+            # If our IOError is because dest is already a directory, we want to handle that. 21 is
+            # the code we get on OS X and Linux, 13 is what we get on Windows.
+            if e.errno in {21, 13}:
                 p = str(outfile)
                 dirname, basename = op.split(p)
                 otherfiles = os.listdir(dirname)

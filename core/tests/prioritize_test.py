@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import os.path as op
 from itertools import combinations
 
 from .base import TestApp, NamedObject, with_app, eq_
@@ -156,7 +157,7 @@ def app_with_subfolders():
 def test_folder_crit_is_sorted(app):
     # Folder subcriteria are sorted.
     app.select_pri_criterion("Folder")
-    eq_(app.pdialog.criteria_list[:], ['baz', 'foo', 'foo/bar'])
+    eq_(app.pdialog.criteria_list[:], ['baz', 'foo', op.join('foo', 'bar')])
 
 @with_app(app_with_subfolders)
 def test_folder_crit_includes_subfolders(app):
