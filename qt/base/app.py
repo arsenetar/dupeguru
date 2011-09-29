@@ -293,5 +293,6 @@ class DupeGuru(QObject):
         QMessageBox.information(window, '', msg)
     
     def open_url(self, url):
-        self.open_path(url)
+        url = QUrl(url)
+        QDesktopServices.openUrl(url)
     
