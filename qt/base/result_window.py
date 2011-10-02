@@ -250,7 +250,7 @@ class ResultWindow(QMainWindow):
             QMessageBox.information(self, title, trmsg("IgnoreListClearedMsg"))
     
     def copyTriggered(self):
-        self.app.model.copy_or_move_marked(True)
+        self.app.copy_or_move_marked(True)
     
     def deleteTriggered(self):
         count = self.app.model.results.mark_count
@@ -302,7 +302,7 @@ class ResultWindow(QMainWindow):
         self.app.model.toggle_selected_mark_state()
     
     def moveTriggered(self):
-        self.app.model.copy_or_move_marked(False)
+        self.app.copy_or_move_marked(False)
     
     def openTriggered(self):
         self.app.model.open_selected()

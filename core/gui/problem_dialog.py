@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-04-12
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -19,7 +18,7 @@ class ProblemDialog(GUIObject, Broadcaster):
     
     def reveal_selected_dupe(self):
         if self._selected_dupe is not None:
-            self.app._reveal_path(self._selected_dupe.path)
+            self.app.view.reveal_path(self._selected_dupe.path)
     
     def select_dupe(self, dupe):
         self._selected_dupe = dupe

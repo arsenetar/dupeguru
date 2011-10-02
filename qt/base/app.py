@@ -148,7 +148,7 @@ class DupeGuru(QObject):
         if not destination:
             return
         recreate_path = self.prefs.destination_type
-        self.model.copy_or_move_marked(self, copy, destination, recreate_path)
+        self.model.copy_or_move_marked(copy, destination, recreate_path)
     
     def remove_selected(self):
         dupes = self.model.without_ref(self.model.selected_dupes)
