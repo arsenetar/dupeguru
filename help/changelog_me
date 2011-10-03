@@ -1,3 +1,7 @@
+=== 6.1.1 (2011-10-03)
+
+* Fixed a couple of broken action bindings from v6.1.0.
+
 === 6.1.0 (2011-09-29)
 
 * Added duplicate re-prioritization dialog. (#138)
