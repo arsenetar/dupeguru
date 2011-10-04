@@ -17,7 +17,7 @@ from distutils.extension import Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, build_all_qt_locs)
+    get_module_version, build_all_cocoa_locs, build_all_qt_locs, move_all)
 
 def parse_args():
     usage = "usage: %prog [options]"
@@ -114,14 +114,6 @@ def build_localizations(ui, edition):
         build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
 
 def build_pe_modules(ui):
-    def move(src, dst):
-        if not op.exists(src):
-            return
-        if op.exists(dst):
-            os.remove(dst)
-        print('Moving %s --> %s' % (src, dst))
-        os.rename(src, dst)
-    
     print("Building PE Modules")
     exts = [
         Extension("_block", [op.join('core_pe', 'modules', 'block.c'), op.join('core_pe', 'modules', 'common.c')]),
@@ -141,13 +133,9 @@ def build_pe_modules(ui):
         script_args = ['build_ext', '--inplace'],
         ext_modules = exts,
     )
-    move('_block.so', op.join('core_pe', '_block.so'))
-    move('_block.pyd', op.join('core_pe', '_block.pyd'))
-    move('_block_osx.so', op.join('core_pe', '_block_osx.so'))
-    move('_cache.so', op.join('core_pe', '_cache.so'))
-    move('_cache.pyd', op.join('core_pe', '_cache.pyd'))
-    move('_block_qt.so', op.join('qt', 'pe', '_block_qt.so'))
-    move('_block_qt.pyd', op.join('qt', 'pe', '_block_qt.pyd'))
+    move_all('_block_qt*', op.join('qt', 'pe'))
+    move_all('_block*', 'core_pe')
+    move_all('_cache*', 'core_pe')
 
 def build_normal(edition, ui, dev):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
