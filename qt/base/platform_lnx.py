@@ -8,4 +8,4 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 INITIAL_FOLDER_IN_DIALOGS = '/'
-HELP_PATH = '/usr/local/share/dupeguru_{0}/help'
+HELP_PATH = '/usr/share/dupeguru_{0}/help'
