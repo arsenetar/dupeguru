@@ -18,6 +18,7 @@ cocoa/*/dg_cocoa.plugin
 cocoa/*/fr.lproj/*.xib
 cocoa/*/de.lproj/*.xib
 cocoa/*/zh_CN.lproj/*.xib
+cocoa/*/cs.lproj/*.xib
 qt/base/*_rc.py
 qt/lang/fr.qm
 qt/lang/en.qm

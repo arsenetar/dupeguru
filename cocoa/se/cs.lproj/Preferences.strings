@@ -1,0 +1,81 @@
+
+/* Class = "NSWindow"; title = "dupeGuru Preferences"; ObjectID = "52"; */
+"52.title" = "Předvolby dupeGuru";
+
+/* Class = "NSTextFieldCell"; title = "More results"; ObjectID = "74"; */
+"74.title" = "Více výsledků";
+
+/* Class = "NSTextFieldCell"; title = "Fewer results"; ObjectID = "75"; */
+"75.title" = "Méně výsledků";
+
+/* Class = "NSTextFieldCell"; title = "Filter hardness:"; ObjectID = "76"; */
+"76.title" = "Tvrdost filtru:";
+
+/* Class = "NSTextFieldCell"; title = "Scan type:"; ObjectID = "77"; */
+"77.title" = "Typ prohledávání:";
+
+/* Class = "NSMenuItem"; title = "Content"; ObjectID = "80"; */
+"80.title" = "Obsah";
+
+/* Class = "NSMenuItem"; title = "Filename"; ObjectID = "81"; */
+"81.title" = "Název souboru";
+
+/* Class = "NSButtonCell"; title = "Word weighting"; ObjectID = "82"; */
+"82.title" = "Váha slov";
+
+/* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "83"; */
+"83.title" = "Různé druhy souborů";
+
+/* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "86"; */
+"86.title" = "Výchozí nastavení";
+
+/* Class = "NSButtonCell"; title = "Match similar words"; ObjectID = "87"; */
+"87.title" = "Shoda podobných slov";
+
+/* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "88"; */
+"88.title" = "Kopírovat a přesunout:";
+
+/* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "91"; */
+"91.title" = "Vytvořit s relativní cestou";
+
+/* Class = "NSMenuItem"; title = "Recreate absolute path"; ObjectID = "92"; */
+"92.title" = "Vytvořit s absolutní cestou";
+
+/* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "93"; */
+"93.title" = "Přímo v cílovém umístění";
+
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "94"; */
+"94.title" = "Automaticky kontrolovat aktualizace";
+
+/* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "96"; */
+"96.title" = "Po smazání a přesunu odstranit prázdné složky";
+
+/* Class = "NSButtonCell"; title = "Ignore files smaller than:"; ObjectID = "97"; */
+"97.title" = "Ignorovat soubory menší než:";
+
+/* Class = "NSTextFieldCell"; title = "KB"; ObjectID = "100"; */
+"100.title" = "KB";
+
+/* Class = "NSTabViewItem"; label = "Basic"; ObjectID = "124"; */
+"124.label" = "Základní";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "125"; */
+"125.label" = "Pokročilé";
+
+/* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "129"; */
+"129.title" = "Při filtrování používat regulární výrazy";
+
+/* Class = "NSTextFieldCell"; title = "Custom command (arguments: %d for dupe, %r for ref):"; ObjectID = "134"; */
+"134.title" = "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):";
+
+/* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "142"; */
+"142.title" = "Ignorovat duplicity ve formě hardlinků na stejný soubor";
+
+/* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "146"; */
+"146.title" = "Ladící režim (vyžaduje restart)";
+
+/* Class = "NSMenuItem"; title = "Folders"; ObjectID = "149"; */
+"149.title" = "Složky";
+
+/* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "155"; */
+"155.title" = "Velikost písma:";

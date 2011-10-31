@@ -1,0 +1,99 @@
+
+/* Class = "NSWindow"; title = "dupeGuru Results"; ObjectID = "1"; */
+"1.title" = "Výsledky dupeGuru";
+
+/* Class = "NSTextFieldCell"; title = "Marked: 0 files, 0 B. Total: 0 files, 0 B."; ObjectID = "6"; */
+"6.title" = "Označeno: 0 souborů, 0 B. Celkem: 0 souborů, 0 B.";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "11"; */
+"11.headerCell.title" = "Název";
+
+/* Class = "NSToolbarItem"; label = "Options"; ObjectID = "15"; */
+"15.label" = "Možnosti";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Options"; ObjectID = "15"; */
+"15.paletteLabel" = "Možnosti";
+
+/* Class = "NSToolbarItem"; label = "Filter"; ObjectID = "16"; */
+"16.label" = "Filtr";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Filter"; ObjectID = "16"; */
+"16.paletteLabel" = "Filtr";
+
+/* Class = "NSToolbarItem"; label = "Action"; ObjectID = "17"; */
+"17.label" = "Akce";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Action"; ObjectID = "17"; */
+"17.paletteLabel" = "Akce";
+
+/* Class = "NSToolbarItem"; label = "Directories"; ObjectID = "19"; */
+"19.label" = "Adresáře";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Directories"; ObjectID = "19"; */
+"19.paletteLabel" = "Adresáře";
+
+/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "27"; */
+"27.title" = "Označené nahradit pevnými odkazy";
+
+/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "29"; */
+"29.title" = "Vyhodit označené do koše";
+
+/* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "30"; */
+"30.title" = "Označené přesunout...";
+
+/* Class = "NSMenuItem"; title = "Copy Marked to..."; ObjectID = "31"; */
+"31.title" = "Označené kopírovat...";
+
+/* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "32"; */
+"32.title" = "Odstranit označené z výsledků";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "34"; */
+"34.title" = "Odstranit výběr z výsledků";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "35"; */
+"35.title" = "Přidat výběr na seznam výjimek";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "36"; */
+"36.title" = "Výběr jako reference";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "38"; */
+"38.title" = "Vybrané otevřít výchozí aplikací";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "39"; */
+"39.title" = "Vybrané otevřít ve Finderu";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "40"; */
+"40.title" = "Vybrané přejmenovat";
+
+/* Class = "NSSearchFieldCell"; placeholderString = "Filter"; ObjectID = "42"; */
+"42.placeholderString" = "Filtr";
+
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[0] = "Details"; ObjectID = "44"; */
+"44.ibShadowedLabels[0]" = "Detaily";
+
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[1] = "Dupes Only"; ObjectID = "44"; */
+"44.ibShadowedLabels[1]" = "Zobrazit pouze duplicity";
+
+/* Class = "NSSegmentedCell"; 44.ibShadowedLabels[2] = "Delta"; ObjectID = "44"; */
+"44.ibShadowedLabels[2]" = "Delta";
+
+/* Class = "NSMenu"; title = "Menu"; ObjectID = "67"; */
+"67.title" = "Menu";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "68"; */
+"68.title" = "Přidat výběr na seznam výjimek";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "70"; */
+"70.title" = "Vybrané přejmenovat";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "71"; */
+"71.title" = "Odstranit výběr z výsledků";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "72"; */
+"72.title" = "Výběr jako reference";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "73"; */
+"73.title" = "Vybrané otevřít ve Finderu";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "74"; */
+"74.title" = "Vybrané otevřít výchozí aplikací";

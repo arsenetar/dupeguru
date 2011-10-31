@@ -1,0 +1,69 @@
+
+/* Class = "NSWindow"; title = "dupeGuru PE Preferences"; ObjectID = "2"; */
+"2.title" = "Předvolby dupeGuru PE";
+
+/* Class = "NSTextFieldCell"; title = "More results"; ObjectID = "18"; */
+"18.title" = "Více výsledků";
+
+/* Class = "NSTextFieldCell"; title = "Fewer results"; ObjectID = "19"; */
+"19.title" = "Méně výsledků";
+
+/* Class = "NSTextFieldCell"; title = "Filter hardness:"; ObjectID = "20"; */
+"20.title" = "Tvrdost filtru:";
+
+/* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "21"; */
+"21.title" = "Různé druhy souborů";
+
+/* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "24"; */
+"24.title" = "Výchozí nastavení";
+
+/* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "25"; */
+"25.title" = "Kopírovat a přesunout:";
+
+/* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "28"; */
+"28.title" = "Vytvořit s relativní cestou";
+
+/* Class = "NSMenuItem"; title = "Recreate absolute path"; ObjectID = "29"; */
+"29.title" = "Vytvořit s absolutní cestou";
+
+/* Class = "NSMenuItem"; title = "Right in destination"; ObjectID = "30"; */
+"30.title" = "Přímo v cílovém umístění";
+
+/* Class = "NSButtonCell"; title = "Match pictures of different dimensions"; ObjectID = "31"; */
+"31.title" = "Porovnávat snímky s různými rozměry";
+
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "32"; */
+"32.title" = "Automaticky kontrolovat aktualizace";
+
+/* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "33"; */
+"33.title" = "Po smazání a přesunu odstranit prázdné složky";
+
+/* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "34"; */
+"34.title" = "Při filtrování používat regulární výrazy";
+
+/* Class = "NSTabViewItem"; label = "Basic"; ObjectID = "60"; */
+"60.label" = "Základní";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "61"; */
+"61.label" = "Pokročilé";
+
+/* Class = "NSTextFieldCell"; title = "Custom Command (arguments: %d for dupe, %r for ref):"; ObjectID = "65"; */
+"65.title" = "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):";
+
+/* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "70"; */
+"70.title" = "Ignorovat duplicity ve formě hardlinků na stejný soubor";
+
+/* Class = "NSButtonCell"; title = "Debug mode (restart required)"; ObjectID = "75"; */
+"75.title" = "Ladící režim (vyžaduje restart)";
+
+/* Class = "NSMenuItem"; title = "EXIF Timestamp"; ObjectID = "92"; */
+"92.title" = "EXIF razítko";
+
+/* Class = "NSMenuItem"; title = "Contents"; ObjectID = "93"; */
+"93.title" = "Obsahuje";
+
+/* Class = "NSTextFieldCell"; title = "Scan type:"; ObjectID = "94"; */
+"94.title" = "Typ prohledávání:";
+
+/* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "104"; */
+"104.title" = "Velikost písma:";

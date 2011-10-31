@@ -1,0 +1,177 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Vše do popředí";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Okno";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimalizovat";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Okno";
+
+/* Class = "NSMenuItem"; title = "About dupeGuru"; ObjectID = "58"; */
+"58.title" = "O aplikaci";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Nápověda";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Nápověda";
+
+/* Class = "NSMenuItem"; title = "dupeGuru Help"; ObjectID = "111"; */
+"111.title" = "Nápověda dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Hide dupeGuru"; ObjectID = "134"; */
+"134.title" = "Skrýt dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Quit dupeGuru"; ObjectID = "136"; */
+"136.title" = "Ukončit dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Skrýt ostatní";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Zobrazit vše";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "Details Panel"; ObjectID = "398"; */
+"398.title" = "Detaily";
+
+/* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "541"; */
+"541.title" = "Předvolby...";
+
+/* Class = "NSMenuItem"; title = "Folder Selection Window"; ObjectID = "579"; */
+"579.title" = "Výběr složky";
+
+/* Class = "NSMenuItem"; title = "Actions"; ObjectID = "597"; */
+"597.title" = "Akce";
+
+/* Class = "NSMenu"; title = "Actions"; ObjectID = "598"; */
+"598.title" = "Akce";
+
+/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "599"; */
+"599.title" = "Vyhodit označené do koše";
+
+/* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "600"; */
+"600.title" = "Označené přesunout...";
+
+/* Class = "NSMenuItem"; title = "Copy Marked to..."; ObjectID = "601"; */
+"601.title" = "Označené kopírovat...";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "602"; */
+"602.title" = "Výběr jako reference";
+
+/* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "603"; */
+"603.title" = "Odstranit označené z výsledků";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "605"; */
+"605.title" = "Odstranit výběr z výsledků";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "618"; */
+"618.title" = "Sloupce";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "619"; */
+"619.title" = "Sloupce";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "708"; */
+"708.title" = "Vybrané otevřít výchozí aplikací";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "710"; */
+"710.title" = "Vybrané otevřít ve Finderu";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "922"; */
+"922.title" = "Přidat výběr na seznam výjimek";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "924"; */
+"924.title" = "Zavřít okno";
+
+/* Class = "NSMenuItem"; title = "Start Duplicate Scan"; ObjectID = "926"; */
+"926.title" = "Spustit hledání duplicit";
+
+/* Class = "NSMenuItem"; title = "Clear Ignore List"; ObjectID = "927"; */
+"927.title" = "Vyčistit seznam výjimek";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "933"; */
+"933.title" = "Vybrané přejmenovat";
+
+/* Class = "NSMenuItem"; title = "Export Results to XHTML"; ObjectID = "947"; */
+"947.title" = "Exportovat výsledky do XHTML";
+
+/* Class = "NSMenuItem"; title = "Check for update..."; ObjectID = "950"; */
+"950.title" = "Zkontrolovat aktualizace...";
+
+/* Class = "NSMenuItem"; title = "Mode"; ObjectID = "959"; */
+"959.title" = "Režim";
+
+/* Class = "NSMenu"; title = "Mode"; ObjectID = "960"; */
+"960.title" = "Režim";
+
+/* Class = "NSMenuItem"; title = "Show Dupes Only"; ObjectID = "961"; */
+"961.title" = "Zobrazit pouze duplicity";
+
+/* Class = "NSMenuItem"; title = "Show Delta Values"; ObjectID = "962"; */
+"962.title" = "Zobrazit rozdíly";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "965"; */
+"965.title" = "Upravit";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "966"; */
+"966.title" = "Upravit";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "985"; */
+"985.title" = "Vyjmout";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "986"; */
+"986.title" = "Kopírovat";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "991"; */
+"991.title" = "Vložit";
+
+/* Class = "NSMenuItem"; title = "Mark All"; ObjectID = "1011"; */
+"1011.title" = "Označit vše";
+
+/* Class = "NSMenuItem"; title = "Mark None"; ObjectID = "1012"; */
+"1012.title" = "Zrušit označení";
+
+/* Class = "NSMenuItem"; title = "Invert Marking"; ObjectID = "1013"; */
+"1013.title" = "Invertovat označení";
+
+/* Class = "NSMenuItem"; title = "Mark Selected"; ObjectID = "1014"; */
+"1014.title" = "Označit vybrané";
+
+/* Class = "NSMenuItem"; title = "dupeGuru Website"; ObjectID = "1023"; */
+"1023.title" = "dupeGuru Website";
+
+/* Class = "NSMenuItem"; title = "Invoke Custom Command"; ObjectID = "1177"; */
+"1177.title" = "Spustit vlastní příkaz";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "1203"; */
+"1203.title" = "Soubor";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "1204"; */
+"1204.title" = "Soubor";
+
+/* Class = "NSMenuItem"; title = "Load Results..."; ObjectID = "1205"; */
+"1205.title" = "Nahrát výsledky...";
+
+/* Class = "NSMenuItem"; title = "Save Results..."; ObjectID = "1206"; */
+"1206.title" = "Uložit výsledky...";
+
+/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "1227"; */
+"1227.title" = "Označené nahradit pevnými odkazy";
+
+/* Class = "NSMenuItem"; title = "Load Recent Results"; ObjectID = "1239"; */
+"1239.title" = "Nahrát nedávné výsledky";
+
+/* Class = "NSMenu"; title = "Load Recent Results"; ObjectID = "1240"; */
+"1240.title" = "Nahrát nedávné výsledky";
+
+/* Class = "NSMenuItem"; title = "Results Window"; ObjectID = "1272"; */
+"1272.title" = "Okno s výsledky";
+
+/* Class = "NSMenuItem"; title = "Re-Prioritize Results"; ObjectID = "1276"; */
+"1276.title" = "Změnit prioritu výsledků";

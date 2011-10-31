@@ -1,0 +1,39 @@
+"Collecting files to scan" = "Shromažďuji prohlížené soubory";
+"%s (%d discarded)" = "%s (%d vyřazeno)";
+"Scanning for duplicates" = "Vyhledávám duplicity";
+"Loading" = "Nahrávám";
+"Moving" = "Přesouvám";
+"Copying" = "Kopíruji";
+"Sending to Trash" = "Vyhazuji do koše";
+"0 matches found" = "Nalezeno 0 shod";
+"%d matches found" = "Nalezeno %d shod";
+"Read size of %d/%d files" = "Read size of %d/%d files";
+"Grouped %d/%d matches" = "Grouped %d/%d matches";
+"%d / %d (%s / %s) duplicates marked." = "%d / %d (%s / %s) duplicit označeno.";
+" filter: %s" = " filtr: %s";
+"Read metadata of %d/%d files" = "Načtena metadata %d/%d souborů";
+"Removing false matches" = "Odstraňuji falešné shody";
+"Processed %d/%d matches against the ignore list" = "Zpracováno %d/%d shod se seznamem výjimek";
+"Doing group prioritization" = "Přiřazuji prioritu skupině";
+
+"Continue" = "Pokračovat";
+"Continue ({})" = "Pokračovat ({})";
+
+"Analyzed %d/%d pictures" = "Analyzováno %d/%d snímků";
+"Preparing for matching" = "Připravuji porovnávání";
+"Performed %d/%d chunk matches" = "Provedeno %d/%d porovnání bloků";
+"Verified %d/%d matches" = "Ověřeno %d/%d shod";
+
+"Removing dead tracks from your iTunes Library" = "Odstraňuji mrtvé stopy z Vaší knihovny iTunes";
+"Scanning the iTunes Library" = "Procházím knihovnu iTunes";
+
+"Probing iPhoto. Don't touch it during the operation!" = "Zkouším iPhoto. Nepracujte s ním během této operace!";
+"Sending dupes to the Trash" = "Vyhazuji kopie do koše";
+
+/* Prioritization */
+"Ends with number" = "Končí číslem";
+"Doesn't end with number" = "Nekončí číslem";
+"Highest" = "Nejvyšší";
+"Lowest" = "Nejnižší";
+"Newest" = "Nejnovější";
+"Oldest" = "Nejstarší";

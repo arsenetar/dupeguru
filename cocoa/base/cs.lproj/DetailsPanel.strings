@@ -1,0 +1,12 @@
+
+/* Class = "NSPanel"; title = "Details of Selected File"; ObjectID = "5"; */
+"5.title" = "Detaily vybraného souboru";
+
+/* Class = "NSTableColumn"; headerCell.title = "Selected"; ObjectID = "9"; */
+"9.headerCell.title" = "Vybráno";
+
+/* Class = "NSTableColumn"; headerCell.title = "Reference"; ObjectID = "10"; */
+"10.headerCell.title" = "Odkaz";
+
+/* Class = "NSTableColumn"; headerCell.title = "Attribute"; ObjectID = "11"; */
+"11.headerCell.title" = "Atribut";
