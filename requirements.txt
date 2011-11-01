@@ -1,5 +1,6 @@
 jobprogress>=1.0.2
 Send2Trash3k>=1.2.0
+sphinx>=1.1.0
 hsaudiotag3k>=1.1.2
 pytest>=2.0.0
 pytest-monkeyplus>=1.0.0

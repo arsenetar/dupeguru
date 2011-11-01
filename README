@@ -30,12 +30,8 @@ General dependencies
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
 - jobprogress 1.0.2 (http://hg.hardcoded.net/jobprogress)
-- Sphinx 1.0.7 (http://sphinx.pocoo.org/)
+- Sphinx 1.1 (http://sphinx.pocoo.org/)
 - pytest 2.0.0, to run unit tests. (http://pytest.org/)
-
-Note: Sphinx doesn't officially support Python 3.x yet, but it doesn't matter because it is invoked
-by the build system through command line, so you can build dupeGuru even if Sphinx is installed in
-your Python 2.x install.
 
 OS X prerequisites
 ------------------
@@ -67,8 +63,7 @@ There's an easy way to install the majority of the prerequisites above, and it's
     pip install -r requirements-[osx|win].txt
 
 ([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt). 
-Because Sphinx doesn't support Python 3 yet, it's not in the requirements file and you'll have to 
-install it manually. You might have to compile PyObjC manually too (see gotchas below). Sparkle and 
+You might have to compile PyObjC manually (see gotchas below). Sparkle and 
 Advanced Installer, having nothing to do with Python, are also manual installs.
 
 PyQt isn't in the requirements file either (there's no package uploaded on PyPI) and you also have
@@ -92,12 +87,6 @@ somewhere, you might want to try the manual way.
 PyObjC's website is badly outdated. Also, as far as I can tell, the package installable with
 `easy_install` has good chances of not working. Your best bet is to download the latest tagged
 version from the repository and compile it from source.
-
-Also, on OS X, don't try to use the built-in python 2.x to install Sphinx on (the only pre-requisite
-that doesn't run on python 3 yet). There's some weird error popping up when dupeGuru tries to build 
-its help file. Install your own framework version of python 2.7, and then install Sphinx on that. 
-When Sphinx supports Python 3, things will be easier because you'll be able to install sphinx on the 
-same Python version you build dupeGuru with.
 
 Another one on OS X: I wouldn't use macports/fink/whatever. Whenever I tried using those, I always 
 ended up with problems.
