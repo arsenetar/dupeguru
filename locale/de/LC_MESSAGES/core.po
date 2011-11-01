@@ -1,0 +1,121 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#: core/app.py:86
+msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr ""
+
+#: core/app.py:192
+msgid ""
+"You cannot delete, move or copy more than 10 duplicates at once in demo "
+"mode."
+msgstr ""
+
+#: core/app.py:420
+msgid "Collecting files to scan"
+msgstr "Sammle Dateien zum Scannen"
+
+#: core/app.py:431
+msgid "NoScannableFileMsg"
+msgstr "Der ausgewählte Ordner enthält keine scannbare Dateien."
+
+#: core/app.py:470
+msgid "%s (%d discarded)"
+msgstr "%s (%d verworfen)"
+
+#: core/engine.py:178 core/engine.py:215
+msgid "0 matches found"
+msgstr "0 Paare gefunden"
+
+#: core/engine.py:196 core/engine.py:223
+msgid "%d matches found"
+msgstr "%d Paare gefunden"
+
+#: core/engine.py:208 core/scanner.py:56
+msgid "Read size of %d/%d files"
+msgstr "Lese Größe von %d/%d Dateien"
+
+#: core/engine.py:355
+msgid "Grouped %d/%d matches"
+msgstr "%d/%d Paare gruppiert"
+
+#: core/gui/extra_fairware_reminder.py:23
+msgid "Continue ({})"
+msgstr "Fortfahren ({})"
+
+#: core/gui/extra_fairware_reminder.py:25
+msgid "Continue"
+msgstr "Fortfahren"
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr ""
+
+#: core/prioritize.py:94
+msgid "Ends with number"
+msgstr "Ends with number"
+
+#: core/prioritize.py:96
+msgid "Doesn't end with number"
+msgstr "Doesn't end with number"
+
+#: core/prioritize.py:117
+msgid "Highest"
+msgstr "Highest"
+
+#: core/prioritize.py:117
+msgid "Lowest"
+msgstr "Lowest"
+
+#: core/prioritize.py:144
+msgid "Newest"
+msgstr "Newest"
+
+#: core/prioritize.py:144
+msgid "Oldest"
+msgstr "Oldest"
+
+#: core/results.py:95
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s / %s) Duplikate markiert."
+
+#: core/results.py:102
+msgid " filter: %s"
+msgstr " Filter: %s"
+
+#: core/scanner.py:76
+msgid "Read metadata of %d/%d files"
+msgstr "Lese Metadaten von %d/%d Dateien"
+
+#: core/scanner.py:106
+msgid "Removing false matches"
+msgstr "Entferne Falschpositive."
+
+#: core/scanner.py:124
+msgid "Processed %d/%d matches against the ignore list"
+msgstr "Verarbeitung von %d/%d Paaren gegen die Ignorier-Liste"
+
+#: core/scanner.py:133
+msgid "Doing group prioritization"
+msgstr "Gruppenpriorisierung"
+
+#: core_pe/matchblock.py:60
+msgid "Analyzed %d/%d pictures"
+msgstr "Analysiere %d/%d Bilder"
+
+#: core_pe/matchblock.py:144
+msgid "Performed %d/%d chunk matches"
+msgstr "Performed %d/%d chunk matches"
+
+#: core_pe/matchblock.py:149
+msgid "Preparing for matching"
+msgstr "Vorbereitung auf den Vergleich"
+
+#: core_pe/matchblock.py:184
+msgid "Verified %d/%d matches"
+msgstr "%d/%d verifizierte Paare"
+
+#: core_pe/matchexif.py:21
+msgid "Read EXIF of %d/%d pictures"
+msgstr ""
