@@ -1,0 +1,612 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#: qt/base/app.py:39
+msgid "Scanning for duplicates"
+msgstr "Vyhledávám duplicity"
+
+#: qt/base/app.py:40
+msgid "Loading"
+msgstr "Nahrávám"
+
+#: qt/base/app.py:41
+msgid "Moving"
+msgstr "Přesouvám"
+
+#: qt/base/app.py:42
+msgid "Copying"
+msgstr "Kopíruji"
+
+#: qt/base/app.py:43
+msgid "Sending files to the recycle bin"
+msgstr ""
+
+#: qt/base/app.py:103
+msgid "Quit"
+msgstr ""
+
+#: qt/base/app.py:104 qt/base/preferences_dialog.py:122
+msgid "Preferences"
+msgstr ""
+
+#: qt/base/app.py:105
+msgid "dupeGuru Help"
+msgstr "Nápověda dupeGuru"
+
+#: qt/base/app.py:106
+msgid "About dupeGuru"
+msgstr "O aplikaci"
+
+#: qt/base/app.py:107
+msgid "Register dupeGuru"
+msgstr ""
+
+#: qt/base/app.py:108
+msgid "Check for Update"
+msgstr ""
+
+#: qt/base/app.py:109
+msgid "Open Debug Log"
+msgstr ""
+
+#: qt/base/app.py:140
+msgid "Add to Ignore List"
+msgstr ""
+
+#: qt/base/app.py:141
+msgid "IgnoreConfirmMsg"
+msgstr ""
+"Všech %d vybraných shod bude v následujících hledáních ignorováno. "
+"Pokračovat?"
+
+#: qt/base/app.py:146
+msgid "copy"
+msgstr ""
+
+#: qt/base/app.py:146
+msgid "move"
+msgstr ""
+
+#: qt/base/app.py:147
+msgid "SelectCopyOrMoveDestinationMsg"
+msgstr ""
+
+#: qt/base/app.py:159 qt/base/result_window.py:322
+msgid "Remove duplicates"
+msgstr ""
+
+#: qt/base/app.py:160 qt/base/result_window.py:323
+msgid "FileRemovalConfirmMsg"
+msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
+
+#: qt/base/app.py:179
+msgid "NoCustomCommandMsg"
+msgstr ""
+"Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
+
+#: qt/base/app.py:180
+msgid "Custom Command"
+msgstr ""
+
+#: qt/base/app.py:210
+msgid "OperationSuccessMsg"
+msgstr ""
+
+#: qt/base/app.py:211
+msgid "Operation Complete"
+msgstr ""
+
+#: qt/base/app.py:214
+msgid "Scan complete"
+msgstr ""
+
+#: qt/base/app.py:215
+msgid "NoDuplicateFoundMsg"
+msgstr "Nebyli nalezeny žádné duplicity."
+
+#: qt/base/app.py:267
+msgid "TaskHangingMsg"
+msgstr ""
+"Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte"
+" pár sekund a zkuste to znovu."
+
+#: qt/base/details_table.py:16
+msgid "Attribute"
+msgstr "Atribut"
+
+#: qt/base/details_table.py:16
+msgid "Selected"
+msgstr "Vybráno"
+
+#: qt/base/details_table.py:16 qt/base/directories_model.py:23
+msgid "Reference"
+msgstr "Referenční"
+
+#: qt/base/directories_dialog.py:56
+msgid "Load Results..."
+msgstr "Nahrát výsledky..."
+
+#: qt/base/directories_dialog.py:57
+msgid "Results Window"
+msgstr "Okno s výsledky"
+
+#: qt/base/directories_dialog.py:58
+msgid "Add Folder..."
+msgstr ""
+
+#: qt/base/directories_dialog.py:66 qt/base/result_window.py:83
+msgid "File"
+msgstr "Soubor"
+
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:91
+msgid "View"
+msgstr ""
+
+#: qt/base/directories_dialog.py:70 qt/base/result_window.py:93
+msgid "Help"
+msgstr "Nápověda"
+
+#: qt/base/directories_dialog.py:72
+msgid "Load Recent Results"
+msgstr "Nahrát nedávné výsledky"
+
+#: qt/base/directories_dialog.py:106
+msgid "SelectFolderToScanMsg"
+msgstr ""
+
+#: qt/base/directories_dialog.py:135
+msgid "Load Results"
+msgstr "Nahrát výsledky"
+
+#: qt/base/directories_dialog.py:138
+msgid "Scan"
+msgstr "Prohledat"
+
+#: qt/base/directories_dialog.py:175
+msgid "Unsaved results"
+msgstr ""
+
+#: qt/base/directories_dialog.py:176
+msgid "ReallyWantToQuitMsg"
+msgstr "Máte neuložené výsledky, opravdu si přejete skončit?"
+
+#: qt/base/directories_dialog.py:184
+msgid "SelectFolderToAddMsg"
+msgstr "Vyberte složku, kterou chcete přidat do prohledávacího seznamu"
+
+#: qt/base/directories_dialog.py:201
+msgid "SelectResultToLoadMsg"
+msgstr "Vyberte soubor s výsledky, který chcete nahrát"
+
+#: qt/base/directories_dialog.py:202
+msgid "All Files (*.*)"
+msgstr ""
+
+#: qt/base/directories_dialog.py:202 qt/base/result_window.py:344
+msgid "dupeGuru Results (*.dupeguru)"
+msgstr ""
+
+#: qt/base/directories_dialog.py:220
+msgid "Start a new scan"
+msgstr ""
+
+#: qt/base/directories_dialog.py:221
+msgid "ReallyWantToContinueMsg"
+msgstr "Máte neuložené výsledky, opravdu si přejete pokračovat?"
+
+#: qt/base/directories_model.py:22
+msgid "Name"
+msgstr "Název"
+
+#: qt/base/directories_model.py:22
+msgid "State"
+msgstr "Stav"
+
+#: qt/base/directories_model.py:23
+msgid "Excluded"
+msgstr "Vyjmuto"
+
+#: qt/base/directories_model.py:23
+msgid "Normal"
+msgstr "Normální"
+
+#: qt/base/extra_fairware_reminder.py:36
+msgid "Sorry, I must insist"
+msgstr "Je mi líto, musím na tom trvat"
+
+#: qt/base/extra_fairware_reminder.py:41
+msgid "ExtraFairwarePromptMsg"
+msgstr ""
+
+#: qt/base/extra_fairware_reminder.py:45
+msgid "ExtraFairwareReasonMsg"
+msgstr ""
+
+#: qt/base/extra_fairware_reminder.py:56
+msgid "Contribute"
+msgstr "Přispět"
+
+#: qt/base/extra_fairware_reminder.py:59
+msgid "Continue"
+msgstr "Pokračovat"
+
+#: qt/base/preferences_dialog.py:34
+msgid "Scan Type:"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:47
+msgid "Filter Hardness:"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:73
+msgid "More Results"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:78
+msgid "Fewer Results"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:85
+msgid "Font size:"
+msgstr "Velikost písma:"
+
+#: qt/base/preferences_dialog.py:89
+msgid "Language:"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:91
+msgid "English"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:92
+msgid "French"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:93
+msgid "German"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:94
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:97
+msgid "Copy and Move:"
+msgstr "Kopírovat a přesunout:"
+
+#: qt/base/preferences_dialog.py:100
+msgid "Right in destination"
+msgstr "Přímo v cílovém umístění"
+
+#: qt/base/preferences_dialog.py:101
+msgid "Recreate relative path"
+msgstr "Vytvořit s relativní cestou"
+
+#: qt/base/preferences_dialog.py:102
+msgid "Recreate absolute path"
+msgstr "Vytvořit s absolutní cestou"
+
+#: qt/base/preferences_dialog.py:105
+msgid "Custom Command (arguments: %d for dupe, %r for ref):"
+msgstr "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):"
+
+#: qt/base/preferences_dialog.py:185
+msgid "NeedsToRestartToApplyLangMsg"
+msgstr ""
+
+#: qt/base/prioritize_dialog.py:71
+msgid "Re-Prioritize duplicates"
+msgstr "Změnit prioritu duplicit"
+
+#: qt/base/prioritize_dialog.py:75
+msgid ""
+"Add criteria to the right box and click OK to send the dupes that correspond"
+" the best to these criteria to their respective group's reference position. "
+"Read the help file for more information."
+msgstr ""
+"Do pole vpravo přidejte kritéria a klepnutím na tlačítko OK odešlete "
+"duplicity, které těmto kritériím vyhovují do referenčního umístění příslušné"
+" skupiny. Více informací naleznete v nápovědě."
+
+#: qt/base/problem_dialog.py:34
+msgid "Problems!"
+msgstr "Problémy!"
+
+#: qt/base/problem_dialog.py:38
+msgid "ProblemsDuringProcessingMsg"
+msgstr ""
+
+#: qt/base/problem_dialog.py:52
+msgid "Reveal Selected"
+msgstr "Ukázat vybrané ve správci souborů"
+
+#: qt/base/problem_dialog.py:57
+msgid "Close"
+msgstr "Zavřít"
+
+#: qt/base/problem_table.py:18
+msgid "File Path"
+msgstr "Cesta k souboru"
+
+#: qt/base/problem_table.py:19
+msgid "Error Message"
+msgstr "Chybové hlášení"
+
+#: qt/base/result_window.py:45 qt/me/details_dialog.py:20
+#: qt/pe/details_dialog.py:25 qt/se/details_dialog.py:20
+msgid "Details"
+msgstr "Detaily"
+
+#: qt/base/result_window.py:46 qt/base/result_window.py:87
+#: qt/base/result_window.py:154
+msgid "Actions"
+msgstr "Akce"
+
+#: qt/base/result_window.py:47
+msgid "Show Dupes Only"
+msgstr "Zobrazit pouze duplicity"
+
+#: qt/base/result_window.py:48
+msgid "Show Delta Values"
+msgstr "Zobrazit rozdíly"
+
+#: qt/base/result_window.py:49
+msgid "Send Marked to Recycle Bin"
+msgstr ""
+
+#: qt/base/result_window.py:50
+msgid "Delete Marked and Replace with Hardlinks"
+msgstr "Označené nahradit pevnými odkazy"
+
+#: qt/base/result_window.py:51
+msgid "Move Marked to..."
+msgstr "Označené přesunout..."
+
+#: qt/base/result_window.py:52
+msgid "Copy Marked to..."
+msgstr "Označené kopírovat..."
+
+#: qt/base/result_window.py:53
+msgid "Remove Marked from Results"
+msgstr "Odstranit označené z výsledků"
+
+#: qt/base/result_window.py:54
+msgid "Re-Prioritize Results..."
+msgstr ""
+
+#: qt/base/result_window.py:55
+msgid "Remove Selected from Results"
+msgstr "Odstranit výběr z výsledků"
+
+#: qt/base/result_window.py:56
+msgid "Add Selected to Ignore List"
+msgstr "Přidat výběr na seznam výjimek"
+
+#: qt/base/result_window.py:57
+msgid "Make Selected Reference"
+msgstr "Výběr jako reference"
+
+#: qt/base/result_window.py:58
+msgid "Open Selected with Default Application"
+msgstr "Vybrané otevřít výchozí aplikací"
+
+#: qt/base/result_window.py:59
+msgid "Open Containing Folder of Selected"
+msgstr ""
+
+#: qt/base/result_window.py:60
+msgid "Rename Selected"
+msgstr "Vybrané přejmenovat"
+
+#: qt/base/result_window.py:61
+msgid "Mark All"
+msgstr "Označit vše"
+
+#: qt/base/result_window.py:62
+msgid "Mark None"
+msgstr "Zrušit označení"
+
+#: qt/base/result_window.py:63
+msgid "Invert Marking"
+msgstr "Invertovat označení"
+
+#: qt/base/result_window.py:64
+msgid "Mark Selected"
+msgstr "Označit vybrané"
+
+#: qt/base/result_window.py:65 qt/base/result_window.py:244
+msgid "Clear Ignore List"
+msgstr "Vyčistit seznam výjimek"
+
+#: qt/base/result_window.py:66 qt/base/result_window.py:230
+msgid "Apply Filter"
+msgstr ""
+
+#: qt/base/result_window.py:67
+msgid "Cancel Filter"
+msgstr ""
+
+#: qt/base/result_window.py:68
+msgid "Export To HTML"
+msgstr ""
+
+#: qt/base/result_window.py:69
+msgid "Save Results..."
+msgstr "Uložit výsledky..."
+
+#: qt/base/result_window.py:70
+msgid "Invoke Custom Command"
+msgstr "Spustit vlastní příkaz"
+
+#: qt/base/result_window.py:85
+msgid "Mark"
+msgstr ""
+
+#: qt/base/result_window.py:89
+msgid "Columns"
+msgstr "Sloupce"
+
+#: qt/base/result_window.py:150
+msgid "Reset to Defaults"
+msgstr "Výchozí nastavení"
+
+#: qt/base/result_window.py:172
+msgid "{} Results"
+msgstr ""
+
+#: qt/base/result_window.py:231
+msgid "TypeFilterMsg"
+msgstr ""
+
+#: qt/base/result_window.py:247
+msgid "NothingToClearMsg"
+msgstr ""
+
+#: qt/base/result_window.py:249
+msgid "ClearIgnoreListConfirmMsg"
+msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
+
+#: qt/base/result_window.py:252
+msgid "IgnoreListClearedMsg"
+msgstr ""
+
+#: qt/base/result_window.py:261
+msgid "Delete duplicates"
+msgstr ""
+
+#: qt/base/result_window.py:262
+msgid "SendToTrashConfirmMsg"
+msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"
+
+#: qt/base/result_window.py:286
+msgid "Delete and hardlink duplicates"
+msgstr ""
+
+#: qt/base/result_window.py:287
+msgid "HardlinkConfirmMsg"
+msgstr ""
+"Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit "
+"hardlinky). Pokračovat?"
+
+#: qt/base/result_window.py:343
+msgid "SelectResultToSaveMsg"
+msgstr "Vyberte soubor pro uložení výsledků"
+
+#: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
+msgid "Filename"
+msgstr "Název souboru"
+
+#: qt/me/preferences_dialog.py:40
+msgid "Filename - Fields"
+msgstr "Název - pole"
+
+#: qt/me/preferences_dialog.py:41
+msgid "Filename - Fields (No Order)"
+msgstr "Název - pole (bez pořadí)"
+
+#: qt/me/preferences_dialog.py:42
+msgid "Tags"
+msgstr "Tagy"
+
+#: qt/me/preferences_dialog.py:43 qt/pe/preferences_dialog.py:33
+#: qt/se/preferences_dialog.py:40
+msgid "Contents"
+msgstr "Obsahuje"
+
+#: qt/me/preferences_dialog.py:44
+msgid "Audio Contents"
+msgstr ""
+
+#: qt/me/preferences_dialog.py:55
+msgid "Tags to scan:"
+msgstr "Prohledávané tagy:"
+
+#: qt/me/preferences_dialog.py:61
+msgid "Track"
+msgstr "Stopa"
+
+#: qt/me/preferences_dialog.py:63
+msgid "Artist"
+msgstr "Umělec"
+
+#: qt/me/preferences_dialog.py:65
+msgid "Album"
+msgstr "Album"
+
+#: qt/me/preferences_dialog.py:67
+msgid "Title"
+msgstr "Titul"
+
+#: qt/me/preferences_dialog.py:69
+msgid "Genre"
+msgstr "Žánr"
+
+#: qt/me/preferences_dialog.py:71
+msgid "Year"
+msgstr "Rok"
+
+#: qt/me/preferences_dialog.py:75 qt/se/preferences_dialog.py:49
+msgid "Word weighting"
+msgstr "Váha slov"
+
+#: qt/me/preferences_dialog.py:77 qt/se/preferences_dialog.py:51
+msgid "Match similar words"
+msgstr "Shoda podobných slov"
+
+#: qt/me/preferences_dialog.py:79 qt/pe/preferences_dialog.py:41
+#: qt/se/preferences_dialog.py:53
+msgid "Can mix file kind"
+msgstr "Různé druhy souborů"
+
+#: qt/me/preferences_dialog.py:81 qt/pe/preferences_dialog.py:43
+#: qt/se/preferences_dialog.py:55
+msgid "Use regular expressions when filtering"
+msgstr "Při filtrování používat regulární výrazy"
+
+#: qt/me/preferences_dialog.py:83 qt/pe/preferences_dialog.py:45
+#: qt/se/preferences_dialog.py:57
+msgid "Remove empty folders on delete or move"
+msgstr "Po smazání a přesunu odstranit prázdné složky"
+
+#: qt/me/preferences_dialog.py:85 qt/pe/preferences_dialog.py:47
+#: qt/se/preferences_dialog.py:76
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "Ignorovat duplicity ve formě hardlinků na stejný soubor"
+
+#: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
+#: qt/se/preferences_dialog.py:78
+msgid "Debug mode (restart required)"
+msgstr "Ladící režim (vyžaduje restart)"
+
+#: qt/pe/preferences_dialog.py:34
+msgid "EXIF Timestamp"
+msgstr "EXIF razítko"
+
+#: qt/pe/preferences_dialog.py:39
+msgid "Match pictures of different dimensions"
+msgstr "Porovnávat snímky s různými rozměry"
+
+#: qt/pe/result_window.py:20 qt/pe/result_window.py:25
+msgid "Clear Picture Cache"
+msgstr "Vyčistit cache snímků"
+
+#: qt/pe/result_window.py:26
+msgid "ClearPictureCacheConfirmMsg"
+msgstr "Opravdu chcete odstranit veškeré uložené analýzy snímků?"
+
+#: qt/pe/result_window.py:29
+msgid "PictureCacheClearedMsg"
+msgstr ""
+
+#: qt/se/preferences_dialog.py:41
+msgid "Folders"
+msgstr "Složky"
+
+#: qt/se/preferences_dialog.py:60
+msgid "Ignore files smaller than"
+msgstr "Ignorovat soubory menší než"
+
+#: qt/se/preferences_dialog.py:71
+msgid "KB"
+msgstr "KB"
