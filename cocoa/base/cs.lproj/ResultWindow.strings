@@ -72,7 +72,7 @@
 "44.ibShadowedLabels[0]" = "Detaily";
 
 /* Class = "NSSegmentedCell"; 44.ibShadowedLabels[1] = "Dupes Only"; ObjectID = "44"; */
-"44.ibShadowedLabels[1]" = "Zobrazit pouze duplicity";
+"44.ibShadowedLabels[1]" = "Jen duplicity";
 
 /* Class = "NSSegmentedCell"; 44.ibShadowedLabels[2] = "Delta"; ObjectID = "44"; */
 "44.ibShadowedLabels[2]" = "Delta";
