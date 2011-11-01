@@ -10,10 +10,12 @@ from PyQt4.QtCore import Qt, QMimeData, QByteArray
 from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
     QDialogButtonBox, QAbstractItemView, QLabel)
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 from qtlib.selectable_list import ComboboxModel, ListviewModel
 from qtlib.util import verticalSpacer
 from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
+
+tr = trget('ui')
 
 MIME_INDEXES = 'application/dupeguru.rowindexes'
 

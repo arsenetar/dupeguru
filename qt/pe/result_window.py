@@ -9,8 +9,10 @@
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QMessageBox, QAction
 
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from ..base.result_window import ResultWindow as ResultWindowBase
+
+tr = trget('ui')
 
 class ResultWindow(ResultWindowBase):
     def _setupUi(self):
@@ -21,8 +23,8 @@ class ResultWindow(ResultWindowBase):
     
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")
-        msg = trmsg("ClearPictureCacheConfirmMsg")
+        msg = tr("ClearPictureCacheConfirmMsg")
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.scanner.clear_picture_cache()
-            QMessageBox.information(self, title, trmsg("PictureCacheClearedMsg"))
+            QMessageBox.information(self, title, tr("PictureCacheClearedMsg"))
     

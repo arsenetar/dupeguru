@@ -10,9 +10,11 @@ from PyQt4.QtCore import Qt
 from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
     QLabel, QTableView, QAbstractItemView, QApplication)
 
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from core.gui.problem_dialog import ProblemDialog as ProblemDialogModel
 from .problem_table import ProblemTable
+
+tr = trget('ui')
 
 class ProblemDialog(QDialog):
     def __init__(self, parent, app):
@@ -33,7 +35,7 @@ class ProblemDialog(QDialog):
         self.resize(413, 323)
         self.verticalLayout = QVBoxLayout(self)
         self.label = QLabel(self)
-        self.label.setText(trmsg("ProblemsDuringProcessingMsg"))
+        self.label.setText(tr("ProblemsDuringProcessingMsg"))
         self.label.setWordWrap(True)
         self.verticalLayout.addWidget(self.label)
         self.tableView = QTableView(self)

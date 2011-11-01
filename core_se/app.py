@@ -5,7 +5,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.trans import tr as trbase
+from hscommon.trans import trget
 from hscommon.util import format_size
 
 from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format_perc,
@@ -13,19 +13,19 @@ from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format
 from core import prioritize
 from . import __appname__
 
-tr = lambda s: trbase(s, 'columns')
+coltr = trget('columns')
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     COLUMNS = [
-        Column('name', tr("Filename")),
-        Column('folder_path', tr("Folder")),
-        Column('size', tr("Size (KB)")),
-        Column('extension', tr("Kind")),
-        Column('mtime', tr("Modification")),
-        Column('percentage', tr("Match %")),
-        Column('words', tr("Words Used")),
-        Column('dupe_count', tr("Dupe Count")),
+        Column('name', coltr("Filename")),
+        Column('folder_path', coltr("Folder")),
+        Column('size', coltr("Size (KB)")),
+        Column('extension', coltr("Kind")),
+        Column('mtime', coltr("Modification")),
+        Column('percentage', coltr("Match %")),
+        Column('words', coltr("Words Used")),
+        Column('dupe_count', coltr("Dupe Count")),
     ]
     DELTA_COLUMNS = {2, 4}
     METADATA_TO_READ = ['size', 'mtime']

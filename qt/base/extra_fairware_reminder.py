@@ -13,10 +13,10 @@ from PyQt4.QtGui import (QDialog, QDesktopServices, QApplication, QVBoxLayout, Q
     QFont, QSpacerItem, QSizePolicy, QPushButton)
 
 from hscommon.plat import ISLINUX
-from hscommon.trans import tr as trbase, trmsg as trmsgbase
-tr = lambda s: trbase(s, "ExtraFairwareReminder")
-trmsg = lambda s: trmsgbase(s, "ExtraFairwareReminder")
+from hscommon.trans import trget
 from core.gui.extra_fairware_reminder import ExtraFairwareReminder as ExtraFairwareReminderModel
+
+tr = trget('ui')
 
 class ExtraFairwareReminder(QDialog):
     def __init__(self, parent, app):
@@ -38,11 +38,11 @@ class ExtraFairwareReminder(QDialog):
         self.resize(380, dlg_height)
         self.verticalLayout = QVBoxLayout(self)
         self.descLabel = QLabel(self)        
-        self.descLabel.setText(trmsg("ExtraFairwarePromptMsg"))
+        self.descLabel.setText(tr("ExtraFairwarePromptMsg"))
         self.descLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.descLabel)
         self.reasonLabel = QLabel(self)        
-        self.reasonLabel.setText(trmsg("ExtraFairwareReasonMsg"))
+        self.reasonLabel.setText(tr("ExtraFairwareReasonMsg"))
         self.reasonLabel.setWordWrap(True)
         font = QFont()
         font.setWeight(75)

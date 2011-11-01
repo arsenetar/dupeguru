@@ -22,7 +22,7 @@ from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_decimal, allsame,
     rem_file_ext)
-from hscommon.trans import tr, trmsg
+from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
 
@@ -428,7 +428,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.results.groups = self.scanner.GetDupeGroups(files, j)
         
         if not self.directories.has_any_file():
-            self.view.show_message(trmsg("NoScannableFileMsg"))
+            self.view.show_message(tr("NoScannableFileMsg"))
             return
         self.results.groups = []
         self._results_changed()

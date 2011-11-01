@@ -11,13 +11,15 @@ from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLa
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMainWindow, QMenuBar,
     QMenu, QIcon, QPixmap, QLabel)
 
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from qtlib.recent import Recent
 from qtlib.util import moveToScreenCenter
 
 from . import platform
 from .directories_model import DirectoriesModel, DirectoriesDelegate
 from .util import createActions
+
+tr = trget('ui')
 
 class DirectoriesDialog(QMainWindow):
     def __init__(self, parent, app):
@@ -101,7 +103,7 @@ class DirectoriesDialog(QMainWindow):
         self.resize(420, 338)
         self.centralwidget = QWidget(self)
         self.verticalLayout = QVBoxLayout(self.centralwidget)
-        self.promptLabel = QLabel(trmsg("SelectFolderToScanMsg"), self.centralwidget)
+        self.promptLabel = QLabel(tr("SelectFolderToScanMsg"), self.centralwidget)
         self.verticalLayout.addWidget(self.promptLabel)
         self.treeView = QTreeView(self.centralwidget)
         self.treeView.setItemDelegate(self.directoriesDelegate)
@@ -171,7 +173,7 @@ class DirectoriesDialog(QMainWindow):
         event.accept()
         if self.app.model.results.is_modified:
             title = tr("Unsaved results")
-            msg = trmsg("ReallyWantToQuitMsg")
+            msg = tr("ReallyWantToQuitMsg")
             if not self.app.confirm(title, msg):
                 event.ignore()
         if event.isAccepted():
@@ -179,7 +181,7 @@ class DirectoriesDialog(QMainWindow):
     
     #--- Events
     def addFolderTriggered(self):
-        title = trmsg("SelectFolderToAddMsg")
+        title = tr("SelectFolderToAddMsg")
         flags = QFileDialog.ShowDirsOnly
         dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
         if not dirpath:
@@ -196,7 +198,7 @@ class DirectoriesDialog(QMainWindow):
             self.recentFolders.insertItem(folder)
     
     def loadResultsTriggered(self):
-        title = trmsg("SelectResultToLoadMsg")
+        title = tr("SelectResultToLoadMsg")
         files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
@@ -216,7 +218,7 @@ class DirectoriesDialog(QMainWindow):
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:
             title = tr("Start a new scan")
-            msg = trmsg("ReallyWantToContinueMsg")
+            msg = tr("ReallyWantToContinueMsg")
             if not self.app.confirm(title, msg):
                 return
         self.app.model.start_scanning()

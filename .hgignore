@@ -4,6 +4,7 @@ syntax: glob
 run.py
 *.pyc
 *.so
+*.mo
 *.pyd
 *.xcodeproj/xcuserdata
 *.xcodeproj/project.xcworkspace/xcuserdata

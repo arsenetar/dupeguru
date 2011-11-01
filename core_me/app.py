@@ -5,7 +5,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.trans import tr as trbase
+from hscommon.trans import trget
 from hscommon.util import format_size, format_time
 
 from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp,
@@ -14,29 +14,29 @@ from . import prioritize
 from . import __appname__
 from . import scanner, fs
 
-tr = lambda s: trbase(s, 'columns')
+coltr = trget('columns')
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     COLUMNS = [
-        Column('name', tr("Filename")),
-        Column('folder_path', tr("Folder")),
-        Column('size', tr("Size (MB)")),
-        Column('duration', tr("Time")),
-        Column('bitrate', tr("Bitrate")),
-        Column('samplerate', tr("Sample Rate")),
-        Column('extension', tr("Kind")),
-        Column('mtime', tr("Modification")),
-        Column('title', tr("Title")),
-        Column('artist', tr("Artist")),
-        Column('album', tr("Album")),
-        Column('genre', tr("Genre")),
-        Column('year', tr("Year")),
-        Column('track', tr("Track Number")),
-        Column('comment', tr("Comment")),
-        Column('percentage', tr("Match %")),
-        Column('words', tr("Words Used")),
-        Column('dupe_count', tr("Dupe Count")),
+        Column('name', coltr("Filename")),
+        Column('folder_path', coltr("Folder")),
+        Column('size', coltr("Size (MB)")),
+        Column('duration', coltr("Time")),
+        Column('bitrate', coltr("Bitrate")),
+        Column('samplerate', coltr("Sample Rate")),
+        Column('extension', coltr("Kind")),
+        Column('mtime', coltr("Modification")),
+        Column('title', coltr("Title")),
+        Column('artist', coltr("Artist")),
+        Column('album', coltr("Album")),
+        Column('genre', coltr("Genre")),
+        Column('year', coltr("Year")),
+        Column('track', coltr("Track Number")),
+        Column('comment', coltr("Comment")),
+        Column('percentage', coltr("Match %")),
+        Column('words', coltr("Words Used")),
+        Column('dupe_count', coltr("Dupe Count")),
     ]
     DELTA_COLUMNS = {2, 3, 4, 5, 7}
     METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',

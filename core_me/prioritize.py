@@ -5,12 +5,12 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 
 from core.prioritize import (KindCategory, FolderCategory, FilenameCategory, NumericalCategory,
     SizeCategory, MtimeCategory)
 
-coltr = lambda s: tr(s, 'columns')
+coltr = trget('columns')
 
 class DurationCategory(NumericalCategory):
     NAME = coltr("Duration")

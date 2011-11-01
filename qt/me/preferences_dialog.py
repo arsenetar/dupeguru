@@ -11,11 +11,13 @@ from PyQt4.QtCore import QSize
 from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
     QApplication)
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
 from . import preferences
+
+tr = trget('ui')
 
 SCAN_TYPE_ORDER = [
     ScanType.Filename,
@@ -33,8 +35,14 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [tr(s) for s in ["Filename", "Filename - Fields",
-            "Filename - Fields (No Order)", "Tags", "Contents", "Audio Contents"]]
+        scanTypeLabels = [
+            tr("Filename"),
+            tr("Filename - Fields"),
+            tr("Filename - Fields (No Order)"),
+            tr("Tags"),
+            tr("Contents"),
+            tr("Audio Contents"),
+        ]
         self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
@@ -76,7 +84,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.removeEmptyFoldersBox)
         self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"))
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox('debugModeBox', tr(tr("Debug mode (restart required)")))
+        self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"))
         self.widgetsVLayout.addWidget(self.debugModeBox)
         self._setupBottomPart()
     

@@ -7,9 +7,9 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.util import dedupe, flatten,  rem_file_ext
-from hscommon.trans import tr
+from hscommon.trans import trget, tr
 
-coltr = lambda s: tr(s, 'columns')
+coltr = trget('columns')
 
 class CriterionCategory:
     NAME = "Undefined"

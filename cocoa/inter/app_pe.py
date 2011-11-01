@@ -17,7 +17,7 @@ from hscommon import io
 from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
 from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
-from hscommon.trans import tr, trmsg
+from hscommon.trans import tr
 
 from core import directories
 from core_pe import _block_osx
@@ -193,7 +193,7 @@ class DupeGuruPE(DupeGuruBase):
             try:
                 app('iPhoto')
             except ApplicationNotFoundError:
-                self.view.show_message(trmsg("IPhotoAppNotFoundMsg"))
+                self.view.show_message(tr("IPhotoAppNotFoundMsg"))
                 return
         DupeGuruBase.start_scanning(self)
     

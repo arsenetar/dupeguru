@@ -18,6 +18,7 @@ from distutils.extension import Extension
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
     get_module_version, build_all_cocoa_locs, build_all_qt_locs, move_all)
+from hscommon import loc
 
 def parse_args():
     usage = "usage: %prog [options]"
@@ -28,6 +29,8 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
+    parser.add_option('--locpot', action='store_true', dest='locpot',
+        help="Generate .pot files from source code.")
     (options, args) = parser.parse_args()
     return options
 
@@ -112,6 +115,26 @@ def build_localizations(ui, edition):
     elif ui == 'qt':
         print("Building .ts files")
         build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
+    print("Compiling .po files")
+    loc.compile_all_po('locale')
+    loc.compile_all_po(op.join('hscommon', 'locale'))
+    loc.compile_all_po(op.join('qtlib', 'locale'))
+    loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
+    loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
+
+def build_locpot():
+    print("Building .pot files from source files")
+    print("Building core.pot")
+    all_cores = ['core', 'core_se', 'core_me', 'core_pe']
+    loc.generate_pot(all_cores, op.join('locale', 'core.pot'), ['tr'])
+    print("Building columns.pot")
+    loc.generate_pot(all_cores, op.join('locale', 'columns.pot'), ['coltr'])
+    print("Building ui.pot")
+    loc.generate_pot(['qt'], op.join('locale', 'ui.pot'), ['tr'])
+    print("Building hscommon.pot")
+    loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
+    print("Building qtlib.pot")
+    loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
 
 def build_pe_modules(ui):
     print("Building PE Modules")
@@ -167,6 +190,8 @@ def main():
         build_help(edition)
     elif options.loc:
         build_localizations(ui, edition)
+    elif options.locpot:
+        build_locpot()
     else:
         build_normal(edition, ui, dev)
 

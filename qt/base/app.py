@@ -17,7 +17,7 @@ from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QAp
 
 from jobprogress import job
 from jobprogress.qt import Progress
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 
 from core.app import JobType
@@ -32,6 +32,8 @@ from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .util import createActions
+
+tr = trget('ui')
 
 JOBID2TITLE = {
     JobType.Scan: tr("Scanning for duplicates"),
@@ -136,13 +138,13 @@ class DupeGuru(QObject):
         if not dupes:
             return
         title = tr("Add to Ignore List")
-        msg = trmsg("IgnoreConfirmMsg").format(len(dupes))
+        msg = tr("IgnoreConfirmMsg").format(len(dupes))
         if self.confirm(title, msg):
             self.model.add_selected_to_ignore_list(self)
     
     def copy_or_move_marked(self, copy):
         opname = tr("copy") if copy else tr("move")
-        title = trmsg("SelectCopyOrMoveDestinationMsg").format(opname)
+        title = tr("SelectCopyOrMoveDestinationMsg").format(opname)
         flags = QFileDialog.ShowDirsOnly
         destination = str(QFileDialog.getExistingDirectory(self.resultWindow, title, '', flags))
         if not destination:
@@ -155,7 +157,7 @@ class DupeGuru(QObject):
         if not dupes:
             return
         title = tr("Remove duplicates")
-        msg = trmsg("FileRemovalConfirmMsg").format(len(dupes))
+        msg = tr("FileRemovalConfirmMsg").format(len(dupes))
         if self.confirm(title, msg):
             self.model.remove_selected(self)
     
@@ -174,7 +176,7 @@ class DupeGuru(QObject):
         if cmd:
             self.model.invoke_command(cmd)
         else:
-            msg = trmsg("NoCustomCommandMsg")
+            msg = tr("NoCustomCommandMsg")
             QMessageBox.warning(self.resultWindow, tr("Custom Command"), msg)
     
     def show_details(self):
@@ -205,12 +207,12 @@ class DupeGuru(QObject):
             if self.model.results.problems:
                 self.problemDialog.show()
             else:
-                msg = trmsg("OperationSuccessMsg")
+                msg = tr("OperationSuccessMsg")
                 QMessageBox.information(self.resultWindow, tr("Operation Complete"), msg)
         elif jobid == JobType.Scan:
             if not self.model.results.groups:
                 title = tr("Scan complete")
-                msg = trmsg("NoDuplicateFoundMsg")
+                msg = tr("NoDuplicateFoundMsg")
                 QMessageBox.information(self.resultWindow, title, msg)
             else:
                 self.showResultsWindow()
@@ -262,7 +264,7 @@ class DupeGuru(QObject):
             args = (j, ) + tuple(args)
             self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
-            msg = trmsg("TaskHangingMsg")
+            msg = tr("TaskHangingMsg")
             QMessageBox.information(self.resultWindow, 'Action in progress', msg)
     
     def get_default(self, key):

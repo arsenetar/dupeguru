@@ -9,7 +9,9 @@
 from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel
 from PyQt4.QtGui import QHeaderView, QTableView
 
-from hscommon.trans import tr
+from hscommon.trans import trget
+
+tr = trget('ui')
 
 HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
 

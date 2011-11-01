@@ -13,7 +13,7 @@ from PyQt4.QtCore import QCoreApplication, QSettings
 from PyQt4.QtGui import QApplication, QIcon, QPixmap
 
 from hscommon.plat import ISWINDOWS
-from hscommon.trans import install_qt_trans
+from hscommon.trans import install_gettext_trans
 from qtlib.error_report_dialog import install_excepthook
 from qt.base import dg_rc
 from core_{{edition}} import __version__, __appname__
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     QCoreApplication.setApplicationVersion(__version__)
     settings = QSettings()
     lang = settings.value('Language').toString()
-    install_qt_trans(lang)
+    install_gettext_trans('locale', lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
     from qt.{{edition}}.app import DupeGuru

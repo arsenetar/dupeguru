@@ -12,7 +12,7 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, Q
     QStatusBar, QDialog)
 
 from hscommon.plat import ISOSX, ISLINUX
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from hscommon.util import nonone
 from qtlib.util import moveToScreenCenter
 
@@ -20,6 +20,8 @@ from .results_model import ResultsModel, ResultsView
 from .stats_label import StatsLabel
 from .util import createActions
 from .prioritize_dialog import PrioritizeDialog
+
+tr = trget('ui')
 
 class ResultWindow(QMainWindow):
     def __init__(self, app):
@@ -226,7 +228,7 @@ class ResultWindow(QMainWindow):
     
     def applyFilterTriggered(self):
         title = tr("Apply Filter")
-        msg = trmsg("TypeFilterMsg")
+        msg = tr("TypeFilterMsg")
         text = nonone(self._last_filter, '[*]')
         answer, ok = QInputDialog.getText(self, title, msg, QLineEdit.Normal, text)
         if not ok:
@@ -242,12 +244,12 @@ class ResultWindow(QMainWindow):
         title = tr("Clear Ignore List")
         count = len(self.app.model.scanner.ignore_list)
         if not count:
-            QMessageBox.information(self, title, trmsg("NothingToClearMsg"))
+            QMessageBox.information(self, title, tr("NothingToClearMsg"))
             return
-        msg = trmsg("ClearIgnoreListConfirmMsg").format(count)
+        msg = tr("ClearIgnoreListConfirmMsg").format(count)
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.model.scanner.ignore_list.Clear()
-            QMessageBox.information(self, title, trmsg("IgnoreListClearedMsg"))
+            QMessageBox.information(self, title, tr("IgnoreListClearedMsg"))
     
     def copyTriggered(self):
         self.app.copy_or_move_marked(True)
@@ -257,7 +259,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Delete duplicates")
-        msg = trmsg("SendToTrashConfirmMsg").format(count)
+        msg = tr("SendToTrashConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.model.delete_marked()
     
@@ -282,7 +284,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Delete and hardlink duplicates")
-        msg = trmsg("HardlinkConfirmMsg").format(count)
+        msg = tr("HardlinkConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.model.delete_marked(replace_with_hardlinks=True)
     
@@ -318,7 +320,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Remove duplicates")
-        msg = trmsg("FileRemovalConfirmMsg").format(count)
+        msg = tr("FileRemovalConfirmMsg").format(count)
         if self.app.confirm(title, msg):
             self.app.model.remove_marked()
     
@@ -338,7 +340,7 @@ class ResultWindow(QMainWindow):
         self.app.model.reveal_selected()
     
     def saveResultsTriggered(self):
-        title = trmsg("SelectResultToSaveMsg")
+        title = tr("SelectResultToSaveMsg")
         files = tr("dupeGuru Results (*.dupeguru)")
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:

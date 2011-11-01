@@ -7,7 +7,7 @@
 
 import os.path as op
 
-from hscommon.trans import tr as trbase
+from hscommon.trans import trget
 from hscommon.util import format_size
 
 from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format_perc,
@@ -16,7 +16,7 @@ from .scanner import ScannerPE
 from . import prioritize
 from . import __appname__
 
-tr = lambda s: trbase(s, 'columns')
+coltr = trget('columns')
 
 def format_dimensions(dimensions):
     return '%d x %d' % (dimensions[0], dimensions[1])
@@ -27,14 +27,14 @@ def get_delta_dimensions(value, ref_value):
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     COLUMNS = [
-        Column('name', tr("Filename")),
-        Column('folder_path', tr("Folder")),
-        Column('size', tr("Size (KB)")),
-        Column('extension', tr("Kind")),
-        Column('dimensions', tr("Dimensions")),
-        Column('mtime', tr("Modification")),
-        Column('percentage', tr("Match %")),
-        Column('dupe_count', tr("Dupe Count")),
+        Column('name', coltr("Filename")),
+        Column('folder_path', coltr("Folder")),
+        Column('size', coltr("Size (KB)")),
+        Column('extension', coltr("Kind")),
+        Column('dimensions', coltr("Dimensions")),
+        Column('mtime', coltr("Modification")),
+        Column('percentage', coltr("Match %")),
+        Column('dupe_count', coltr("Dupe Count")),
     ]
     DELTA_COLUMNS = {2, 4, 5}
     METADATA_TO_READ = ['size', 'mtime', 'dimensions']

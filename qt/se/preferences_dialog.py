@@ -12,13 +12,15 @@ from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerI
     QLineEdit, QApplication)
 
 from hscommon.plat import ISWINDOWS, ISLINUX
-from hscommon.trans import tr
+from hscommon.trans import trget
 from hscommon.util import tryint
 
 from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
 from . import preferences
+
+tr = trget('ui')
 
 SCAN_TYPE_ORDER = [
     ScanType.Filename,
@@ -33,7 +35,11 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [tr(s) for s in ["Filename", "Contents", "Folders"]]
+        scanTypeLabels = [
+            tr("Filename"),
+            tr("Contents"),
+            tr("Folders"),
+        ]
         self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)

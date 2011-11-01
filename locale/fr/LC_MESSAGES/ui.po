@@ -1,0 +1,608 @@
+
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+
+#: qt/base/app.py:39
+msgid "Scanning for duplicates"
+msgstr "Scan de doublons en cours"
+
+#: qt/base/app.py:40
+msgid "Loading"
+msgstr "Chargement en cours"
+
+#: qt/base/app.py:41
+msgid "Moving"
+msgstr "Déplacement en cours"
+
+#: qt/base/app.py:42
+msgid "Copying"
+msgstr "Copie en cours"
+
+#: qt/base/app.py:43
+msgid "Sending files to the recycle bin"
+msgstr "Envoi de fichiers à la corbeille"
+
+#: qt/base/app.py:103
+msgid "Quit"
+msgstr "Quitter"
+
+#: qt/base/app.py:104 qt/base/preferences_dialog.py:120
+msgid "Preferences"
+msgstr "Préférences"
+
+#: qt/base/app.py:105
+msgid "dupeGuru Help"
+msgstr "Aide dupeGuru"
+
+#: qt/base/app.py:106
+msgid "About dupeGuru"
+msgstr "À propos de dupeGuru"
+
+#: qt/base/app.py:107
+msgid "Register dupeGuru"
+msgstr "Enregistrer dupeGuru"
+
+#: qt/base/app.py:108
+msgid "Check for Update"
+msgstr "Vérifier les mises à jour"
+
+#: qt/base/app.py:109
+msgid "Open Debug Log"
+msgstr "Ouvrir logs de déboguage"
+
+#: qt/base/app.py:140
+msgid "Add to Ignore List"
+msgstr "Ignorer ces doublons à l'avenir"
+
+#: qt/base/app.py:141
+msgid "IgnoreConfirmMsg"
+msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
+
+#: qt/base/app.py:146
+msgid "copy"
+msgstr "copier"
+
+#: qt/base/app.py:146
+msgid "move"
+msgstr "déplacer"
+
+#: qt/base/app.py:147
+msgid "SelectCopyOrMoveDestinationMsg"
+msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
+
+#: qt/base/app.py:159 qt/base/result_window.py:320
+msgid "Remove duplicates"
+msgstr "Retirer des doublons"
+
+#: qt/base/app.py:160 qt/base/result_window.py:321
+msgid "FileRemovalConfirmMsg"
+msgstr "{} fichiers seront retirés des résultats. Continuer?"
+
+#: qt/base/app.py:179
+msgid "NoCustomCommandMsg"
+msgstr "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
+
+#: qt/base/app.py:180
+msgid "Custom Command"
+msgstr "Commande personnalisée"
+
+#: qt/base/app.py:210
+msgid "OperationSuccessMsg"
+msgstr "Tous les fichiers ont été traités avec succès."
+
+#: qt/base/app.py:211
+msgid "Operation Complete"
+msgstr "Opération complétée"
+
+#: qt/base/app.py:214
+msgid "Scan complete"
+msgstr "Scan complété"
+
+#: qt/base/app.py:215
+msgid "NoDuplicateFoundMsg"
+msgstr "Aucun doublon trouvé."
+
+#: qt/base/app.py:267
+msgid "TaskHangingMsg"
+msgstr "Une action précédente est encore en cours. Attendez quelques secondes avant d'en repartir une nouvelle."
+
+#: qt/base/details_table.py:14
+msgid "Attribute"
+msgstr "Attribut"
+
+#: qt/base/details_table.py:14
+msgid "Selected"
+msgstr "Sélectionné"
+
+#: qt/base/details_table.py:14 qt/base/directories_model.py:21
+msgid "Reference"
+msgstr "Référence"
+
+#: qt/base/directories_dialog.py:54
+msgid "Load Results..."
+msgstr "Charger résultats..."
+
+#: qt/base/directories_dialog.py:55
+msgid "Results Window"
+msgstr "Fenêtre de résultats"
+
+#: qt/base/directories_dialog.py:56
+msgid "Add Folder..."
+msgstr "Ajouter dossier..."
+
+#: qt/base/directories_dialog.py:64 qt/base/result_window.py:81
+msgid "File"
+msgstr "Fichier"
+
+#: qt/base/directories_dialog.py:66 qt/base/result_window.py:89
+msgid "View"
+msgstr "Voir"
+
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:91
+msgid "Help"
+msgstr "Aide"
+
+#: qt/base/directories_dialog.py:70
+msgid "Load Recent Results"
+msgstr "Charger résultats récents"
+
+#: qt/base/directories_dialog.py:104
+msgid "SelectFolderToScanMsg"
+msgstr "Sélectionnez les dossiers à scanner puis faites &quot;Scan&quot;."
+
+#: qt/base/directories_dialog.py:133
+msgid "Load Results"
+msgstr "Charger"
+
+#: qt/base/directories_dialog.py:136
+msgid "Scan"
+msgstr "Scan"
+
+#: qt/base/directories_dialog.py:173
+msgid "Unsaved results"
+msgstr "Résultats non sauvegardés"
+
+#: qt/base/directories_dialog.py:174
+msgid "ReallyWantToQuitMsg"
+msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment quitter?"
+
+#: qt/base/directories_dialog.py:182
+msgid "SelectFolderToAddMsg"
+msgstr "Sélectionnez un dossier à ajouter à la liste"
+
+#: qt/base/directories_dialog.py:199
+msgid "SelectResultToLoadMsg"
+msgstr "Sélectionnez un fichier résultats à charger"
+
+#: qt/base/directories_dialog.py:200
+msgid "All Files (*.*)"
+msgstr "Tout les fichiers (*.*)"
+
+#: qt/base/directories_dialog.py:200 qt/base/result_window.py:342
+msgid "dupeGuru Results (*.dupeguru)"
+msgstr "Résultats dupeGuru (*.dupeguru)"
+
+#: qt/base/directories_dialog.py:218
+msgid "Start a new scan"
+msgstr "Commencer un nouveau scan"
+
+#: qt/base/directories_dialog.py:219
+msgid "ReallyWantToContinueMsg"
+msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
+
+#: qt/base/directories_model.py:20
+msgid "Name"
+msgstr "Nom"
+
+#: qt/base/directories_model.py:20
+msgid "State"
+msgstr "Type"
+
+#: qt/base/directories_model.py:21
+msgid "Excluded"
+msgstr "Exclu"
+
+#: qt/base/directories_model.py:21
+msgid "Normal"
+msgstr "Normal"
+
+#: qt/base/extra_fairware_reminder.py:35
+msgid "Sorry, I must insist"
+msgstr "Désolé, je dois insister"
+
+#: qt/base/extra_fairware_reminder.py:40
+msgid "ExtraFairwarePromptMsg"
+msgstr ""
+"Il semble que vous ayez trouvé beaucoup de doublons. Super! Je dois par contre insister que des contributions sont attendues lorsqu'il y'a des heures non-payées au projet.\n\n"
+"Vous pensez peut-être \"je n'utiliserai ce programme qu'une fois, pas besoin de contribuer\". Le problème c'est que la plupart des utilisateurs de dupeGuru ne l'utilisent qu'une fois. Si tous suivent ce raisonnement, le développement de dupeGuru ne peut pas continuer. C'est à cause de cette tendance inhérente à la nature de dupeGuru que je me vois contraint d'insister ici.\n\n"
+"Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi un message à hsoft@hardcoded.net pour que je vous envoie une clé d'enregistrement."
+
+#: qt/base/extra_fairware_reminder.py:44
+msgid "ExtraFairwareReasonMsg"
+msgstr ""
+"Ce rappel apparaît parce que:\n\n"
+"1. Plus de 100 doublons sont traités\n"
+"2. Vous n'avez pas encore contribué à dupeGuru\n"
+"3. Il y a des heures non-payées au projet"
+
+#: qt/base/extra_fairware_reminder.py:55
+msgid "Contribute"
+msgstr "Contribuer"
+
+#: qt/base/extra_fairware_reminder.py:58
+msgid "Continue"
+msgstr "Continuer"
+
+#: qt/base/preferences_dialog.py:32
+msgid "Scan Type:"
+msgstr "Type de scan:"
+
+#: qt/base/preferences_dialog.py:45
+msgid "Filter Hardness:"
+msgstr "Seuil du filtre:"
+
+#: qt/base/preferences_dialog.py:71
+msgid "More Results"
+msgstr "+ de doublons"
+
+#: qt/base/preferences_dialog.py:76
+msgid "Fewer Results"
+msgstr "- de doublons"
+
+#: qt/base/preferences_dialog.py:83
+msgid "Font size:"
+msgstr "Taille de police:"
+
+#: qt/base/preferences_dialog.py:87
+msgid "Language:"
+msgstr "Langue:"
+
+#: qt/base/preferences_dialog.py:89
+msgid "English"
+msgstr "Anglais"
+
+#: qt/base/preferences_dialog.py:90
+msgid "French"
+msgstr "Français"
+
+#: qt/base/preferences_dialog.py:91
+msgid "German"
+msgstr "Allemand"
+
+#: qt/base/preferences_dialog.py:92
+msgid "Chinese (Simplified)"
+msgstr "Chinois (Simplifié)"
+
+#: qt/base/preferences_dialog.py:95
+msgid "Copy and Move:"
+msgstr "Déplacements de fichiers:"
+
+#: qt/base/preferences_dialog.py:98
+msgid "Right in destination"
+msgstr "Directement à la destination"
+
+#: qt/base/preferences_dialog.py:99
+msgid "Recreate relative path"
+msgstr "Re-créer chemins relatifs"
+
+#: qt/base/preferences_dialog.py:100
+msgid "Recreate absolute path"
+msgstr "Re-créer chemins absolus"
+
+#: qt/base/preferences_dialog.py:103
+msgid "Custom Command (arguments: %d for dupe, %r for ref):"
+msgstr "Commande perso. (arguments: %d pour doublon, %r pour réf):"
+
+#: qt/base/preferences_dialog.py:183
+msgid "NeedsToRestartToApplyLangMsg"
+msgstr "dupeGuru doit redémarrer pour appliquer le changement de langue."
+
+#: qt/base/prioritize_dialog.py:69
+msgid "Re-Prioritize duplicates"
+msgstr "Re-prioriser les doublons"
+
+#: qt/base/prioritize_dialog.py:73
+msgid "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information."
+msgstr "Ajoutez des critères dans la liste de droite pour envoyer les doublons qui correspondent le plus à ces critère à la position de référence. Une lecture préalable du fichier d'aide est conseillée."
+
+#: qt/base/problem_dialog.py:32
+msgid "Problems!"
+msgstr "Problèmes!"
+
+#: qt/base/problem_dialog.py:36
+msgid "ProblemsDuringProcessingMsg"
+msgstr "Des problèmes ont été rencontrés lors du traitement de certains fichiers. La nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers n'ont pas été retirés des résultats."
+
+#: qt/base/problem_dialog.py:50
+msgid "Reveal Selected"
+msgstr "Révéler Fichier"
+
+#: qt/base/problem_dialog.py:55
+msgid "Close"
+msgstr "Fermer"
+
+#: qt/base/problem_table.py:17
+msgid "File Path"
+msgstr "Chemin du fichier"
+
+#: qt/base/problem_table.py:18
+msgid "Error Message"
+msgstr "Message d'erreur"
+
+#: qt/base/result_window.py:43 qt/me/details_dialog.py:18
+#: qt/pe/details_dialog.py:23 qt/se/details_dialog.py:18
+msgid "Details"
+msgstr "Détails"
+
+#: qt/base/result_window.py:44 qt/base/result_window.py:85
+#: qt/base/result_window.py:152
+msgid "Actions"
+msgstr "Actions"
+
+#: qt/base/result_window.py:45
+msgid "Show Dupes Only"
+msgstr "Ne pas montrer les références"
+
+#: qt/base/result_window.py:46
+msgid "Show Delta Values"
+msgstr "Montrer les valeurs en tant que delta"
+
+#: qt/base/result_window.py:47
+msgid "Send Marked to Recycle Bin"
+msgstr "Envoyer marqués à la corbeille"
+
+#: qt/base/result_window.py:48
+msgid "Delete Marked and Replace with Hardlinks"
+msgstr "Remplacer marqués par des hardlinks"
+
+#: qt/base/result_window.py:49
+msgid "Move Marked to..."
+msgstr "Déplacer marqués vers..."
+
+#: qt/base/result_window.py:50
+msgid "Copy Marked to..."
+msgstr "Copier marqués vers..."
+
+#: qt/base/result_window.py:51
+msgid "Remove Marked from Results"
+msgstr "Retirer marqués des résultats"
+
+#: qt/base/result_window.py:52
+msgid "Re-Prioritize Results..."
+msgstr "Re-prioriser les résultats"
+
+#: qt/base/result_window.py:53
+msgid "Remove Selected from Results"
+msgstr "Retirer sélectionnés des résultats"
+
+#: qt/base/result_window.py:54
+msgid "Add Selected to Ignore List"
+msgstr "Ajouter sélectionnés à la liste de fichiers ignorés"
+
+#: qt/base/result_window.py:55
+msgid "Make Selected Reference"
+msgstr "Transformer sélectionnés en références"
+
+#: qt/base/result_window.py:56
+msgid "Open Selected with Default Application"
+msgstr "Ouvrir sélectionné avec l'application par défaut"
+
+#: qt/base/result_window.py:57
+msgid "Open Containing Folder of Selected"
+msgstr "Ouvrir le dossier contenant le fichier sélectionné"
+
+#: qt/base/result_window.py:58
+msgid "Rename Selected"
+msgstr "Renommer sélectionné"
+
+#: qt/base/result_window.py:59
+msgid "Mark All"
+msgstr "Tout marquer"
+
+#: qt/base/result_window.py:60
+msgid "Mark None"
+msgstr "Tout démarquer"
+
+#: qt/base/result_window.py:61
+msgid "Invert Marking"
+msgstr "Inverser le marquage"
+
+#: qt/base/result_window.py:62
+msgid "Mark Selected"
+msgstr "Marquer sélectionnés"
+
+#: qt/base/result_window.py:63 qt/base/result_window.py:242
+msgid "Clear Ignore List"
+msgstr "Vider la liste de fichiers ignorés"
+
+#: qt/base/result_window.py:64 qt/base/result_window.py:228
+msgid "Apply Filter"
+msgstr "Appliquer filtre"
+
+#: qt/base/result_window.py:65
+msgid "Cancel Filter"
+msgstr "Annuler filtre"
+
+#: qt/base/result_window.py:66
+msgid "Export To HTML"
+msgstr "Exporter vers HTML"
+
+#: qt/base/result_window.py:67
+msgid "Save Results..."
+msgstr "Sauvegarder résultats..."
+
+#: qt/base/result_window.py:68
+msgid "Invoke Custom Command"
+msgstr "Invoquer commande personnalisée"
+
+#: qt/base/result_window.py:83
+msgid "Mark"
+msgstr "Marquer"
+
+#: qt/base/result_window.py:87
+msgid "Columns"
+msgstr "Colonnes"
+
+#: qt/base/result_window.py:148
+msgid "Reset to Defaults"
+msgstr "Réinitialiser"
+
+#: qt/base/result_window.py:170
+msgid "{} Results"
+msgstr "{} (Résultats)"
+
+#: qt/base/result_window.py:229
+msgid "TypeFilterMsg"
+msgstr "Entrer le filtre que vous voulez appliquer sur vos résultats."
+
+#: qt/base/result_window.py:245
+msgid "NothingToClearMsg"
+msgstr "Il n'y a rien à vider."
+
+#: qt/base/result_window.py:247
+msgid "ClearIgnoreListConfirmMsg"
+msgstr "Voulez-vous vider la liste de fichiers ignorés des {} items qu'elle contient?"
+
+#: qt/base/result_window.py:250
+msgid "IgnoreListClearedMsg"
+msgstr "La liste de doublons ignorés a été vidée."
+
+#: qt/base/result_window.py:259
+msgid "Delete duplicates"
+msgstr "Effacement de doublons"
+
+#: qt/base/result_window.py:260
+msgid "SendToTrashConfirmMsg"
+msgstr "{} fichiers seront envoyés à la corbeille. Continuer?"
+
+#: qt/base/result_window.py:284
+msgid "Delete and hardlink duplicates"
+msgstr "Hardlinking de doublons"
+
+#: qt/base/result_window.py:285
+msgid "HardlinkConfirmMsg"
+msgstr "{} fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
+
+#: qt/base/result_window.py:341
+msgid "SelectResultToSaveMsg"
+msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
+
+#: qt/me/preferences_dialog.py:37 qt/se/preferences_dialog.py:37
+msgid "Filename"
+msgstr "Nom de fichier"
+
+#: qt/me/preferences_dialog.py:38
+msgid "Filename - Fields"
+msgstr "Nom de fichier (Champs)"
+
+#: qt/me/preferences_dialog.py:39
+msgid "Filename - Fields (No Order)"
+msgstr "Nom de fichier (Champs sans ordre)"
+
+#: qt/me/preferences_dialog.py:40
+msgid "Tags"
+msgstr "Tags"
+
+#: qt/me/preferences_dialog.py:41 qt/pe/preferences_dialog.py:32
+#: qt/se/preferences_dialog.py:38
+msgid "Contents"
+msgstr "Contenu"
+
+#: qt/me/preferences_dialog.py:42
+msgid "Audio Contents"
+msgstr "Contenu Audio"
+
+#: qt/me/preferences_dialog.py:53
+msgid "Tags to scan:"
+msgstr "Tags à scanner:"
+
+#: qt/me/preferences_dialog.py:59
+msgid "Track"
+msgstr "Track"
+
+#: qt/me/preferences_dialog.py:61
+msgid "Artist"
+msgstr "Artiste"
+
+#: qt/me/preferences_dialog.py:63
+msgid "Album"
+msgstr "Album"
+
+#: qt/me/preferences_dialog.py:65
+msgid "Title"
+msgstr "Titre"
+
+#: qt/me/preferences_dialog.py:67
+msgid "Genre"
+msgstr "Genre"
+
+#: qt/me/preferences_dialog.py:69
+msgid "Year"
+msgstr "Année"
+
+#: qt/me/preferences_dialog.py:73 qt/se/preferences_dialog.py:47
+msgid "Word weighting"
+msgstr "Proportionalité des mots"
+
+#: qt/me/preferences_dialog.py:75 qt/se/preferences_dialog.py:49
+msgid "Match similar words"
+msgstr "Comparer les mots similaires"
+
+#: qt/me/preferences_dialog.py:77 qt/pe/preferences_dialog.py:40
+#: qt/se/preferences_dialog.py:51
+msgid "Can mix file kind"
+msgstr "Comparer les fichiers de différents types"
+
+#: qt/me/preferences_dialog.py:79 qt/pe/preferences_dialog.py:42
+#: qt/se/preferences_dialog.py:53
+msgid "Use regular expressions when filtering"
+msgstr "Utiliser les expressions régulières pour les filtres"
+
+#: qt/me/preferences_dialog.py:81 qt/pe/preferences_dialog.py:44
+#: qt/se/preferences_dialog.py:55
+msgid "Remove empty folders on delete or move"
+msgstr "Effacer les dossiers vides après un déplacement"
+
+#: qt/me/preferences_dialog.py:83 qt/pe/preferences_dialog.py:46
+#: qt/se/preferences_dialog.py:74
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "Ignorer doublons avec hardlink vers le même fichier"
+
+#: qt/me/preferences_dialog.py:85 qt/pe/preferences_dialog.py:48
+#: qt/se/preferences_dialog.py:76
+msgid "Debug mode (restart required)"
+msgstr "Mode de déboguage (redémarrage requis)"
+
+#: qt/pe/preferences_dialog.py:33
+msgid "EXIF Timestamp"
+msgstr ""
+
+#: qt/pe/preferences_dialog.py:38
+msgid "Match pictures of different dimensions"
+msgstr "Comparer les images de tailles différentes"
+
+#: qt/pe/result_window.py:18 qt/pe/result_window.py:23
+msgid "Clear Picture Cache"
+msgstr "Vider la cache d'images"
+
+#: qt/pe/result_window.py:24
+msgid "ClearPictureCacheConfirmMsg"
+msgstr "Voulez-vous vraiment vider la cache de vos analyses précédentes?"
+
+#: qt/pe/result_window.py:27
+msgid "PictureCacheClearedMsg"
+msgstr "La cache des analyses précédentes a été vidée."
+
+#: qt/se/preferences_dialog.py:39
+msgid "Folders"
+msgstr "Dossiers"
+
+#: qt/se/preferences_dialog.py:58
+msgid "Ignore files smaller than"
+msgstr "Ignorer les fichiers plus petits que"
+
+#: qt/se/preferences_dialog.py:69
+msgid "KB"
+msgstr "KB"
+

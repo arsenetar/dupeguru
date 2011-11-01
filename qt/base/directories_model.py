@@ -12,10 +12,12 @@ from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, QStyle,
     QStyleOptionComboBox, QStyleOptionViewItemV4)
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 from qtlib.tree_model import RefNode, TreeModel
 
 from core.gui.directory_tree import DirectoryTree
+
+tr = trget('ui')
 
 HEADERS = [tr("Name"), tr("State")]
 STATES = [tr("Normal"), tr("Reference"), tr("Excluded")]

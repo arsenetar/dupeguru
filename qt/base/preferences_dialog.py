@@ -11,8 +11,10 @@ from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QL
     QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox)
 
 from hscommon.plat import ISOSX, ISLINUX
-from hscommon.trans import tr, trmsg
+from hscommon.trans import trget
 from qtlib.util import horizontalWrap
+
+tr = trget('ui')
 
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app):
@@ -180,7 +182,7 @@ class PreferencesDialogBase(QDialog):
         if oldlang not in langs:
             oldlang = 'en'
         if lang != oldlang:
-            QMessageBox.information(self, "", trmsg("NeedsToRestartToApplyLangMsg"))
+            QMessageBox.information(self, "", tr("NeedsToRestartToApplyLangMsg"))
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
     

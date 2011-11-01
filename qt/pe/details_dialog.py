@@ -9,9 +9,11 @@
 from PyQt4.QtCore import Qt, QSize
 from PyQt4.QtGui import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy, QPixmap
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 from ..base.details_dialog import DetailsDialog as DetailsDialogBase
 from ..base.details_table import DetailsTable
+
+tr = trget('ui')
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):

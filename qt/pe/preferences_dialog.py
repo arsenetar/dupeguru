@@ -7,14 +7,15 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-from PyQt4.QtGui import QLabel, QApplication
+from PyQt4.QtGui import QApplication
 
-from hscommon.trans import tr
+from hscommon.trans import trget
 from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
 from . import preferences
 
+tr = trget('ui')
 
 SCAN_TYPE_ORDER = [
     ScanType.FuzzyBlock,
@@ -28,7 +29,10 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [tr(s) for s in ["Contents", "EXIF Timestamp"]]
+        scanTypeLabels = [
+            tr("Contents"),
+            tr("EXIF Timestamp"),
+        ]
         self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
@@ -42,7 +46,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.removeEmptyFoldersBox)
         self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"))
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox('debugModeBox', tr(tr("Debug mode (restart required)")))
+        self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"))
         self.widgetsVLayout.addWidget(self.debugModeBox)
         self._setupBottomPart()
     
