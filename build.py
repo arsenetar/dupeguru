@@ -17,7 +17,7 @@ from distutils.extension import Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, build_all_qt_locs, move_all)
+    get_module_version, build_all_cocoa_locs, move_all)
 from hscommon import loc
 
 def parse_args():
@@ -108,19 +108,16 @@ def build_help(edition):
 
 def build_localizations(ui, edition):
     print("Building localizations")
+    loc.compile_all_po('locale')
+    loc.compile_all_po(op.join('hscommon', 'locale'))
+    loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
     if ui == 'cocoa':
         build_all_cocoa_locs('cocoalib')
         build_all_cocoa_locs(op.join('cocoa', 'base'))
         build_all_cocoa_locs(op.join('cocoa', edition))
     elif ui == 'qt':
-        print("Building .ts files")
-        build_all_qt_locs(op.join('qt', 'lang'), extradirs=[op.join('qtlib', 'lang')])
-    print("Compiling .po files")
-    loc.compile_all_po('locale')
-    loc.compile_all_po(op.join('hscommon', 'locale'))
-    loc.compile_all_po(op.join('qtlib', 'locale'))
-    loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
-    loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
+        loc.compile_all_po(op.join('qtlib', 'locale'))
+        loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
 
 def build_locpot():
     print("Building .pot files from source files")
