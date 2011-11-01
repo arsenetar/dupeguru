@@ -1,0 +1,96 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#: core/prioritize.py:63 core_me/app.py:28 core_pe/app.py:33 core_se/app.py:24
+msgid "Kind"
+msgstr "类型"
+
+#: core/prioritize.py:72 core_me/app.py:23 core_pe/app.py:31 core_se/app.py:22
+msgid "Folder"
+msgstr "文件夹"
+
+#: core/prioritize.py:88 core_me/app.py:22 core_pe/app.py:30 core_se/app.py:21
+msgid "Filename"
+msgstr "文件名称"
+
+#: core/prioritize.py:132
+msgid "Size"
+msgstr "大小"
+
+#: core/prioritize.py:138 core_me/app.py:29 core_pe/app.py:35
+#: core_se/app.py:25
+msgid "Modification"
+msgstr "编辑日期"
+
+#: core_me/app.py:24
+msgid "Size (MB)"
+msgstr "大小 (MB)"
+
+#: core_me/app.py:25
+msgid "Time"
+msgstr "时间"
+
+#: core_me/app.py:26 core_me/prioritize.py:22
+msgid "Bitrate"
+msgstr "比特"
+
+#: core_me/app.py:27
+msgid "Sample Rate"
+msgstr "采样率"
+
+#: core_me/app.py:30
+msgid "Title"
+msgstr "歌曲名"
+
+#: core_me/app.py:31
+msgid "Artist"
+msgstr "演唱者"
+
+#: core_me/app.py:32
+msgid "Album"
+msgstr "专辑"
+
+#: core_me/app.py:33
+msgid "Genre"
+msgstr "音乐类型"
+
+#: core_me/app.py:34
+msgid "Year"
+msgstr "年"
+
+#: core_me/app.py:35
+msgid "Track Number"
+msgstr "音轨号"
+
+#: core_me/app.py:36
+msgid "Comment"
+msgstr "注释"
+
+#: core_me/app.py:37 core_pe/app.py:36 core_se/app.py:26
+msgid "Match %"
+msgstr "匹配度 %"
+
+#: core_me/app.py:38 core_se/app.py:27
+msgid "Words Used"
+msgstr "使用过的词语"
+
+#: core_me/app.py:39 core_pe/app.py:37 core_se/app.py:28
+msgid "Dupe Count"
+msgstr "重复文件数"
+
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr ""
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr ""
+
+#: core_pe/app.py:32 core_se/app.py:23
+msgid "Size (KB)"
+msgstr "大小 (KB)"
+
+#: core_pe/app.py:34 core_pe/prioritize.py:16
+msgid "Dimensions"
+msgstr "规格"

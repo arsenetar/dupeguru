@@ -4,281 +4,277 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: qt/base/app.py:39
 msgid "Scanning for duplicates"
-msgstr "Suche nach Duplikaten"
+msgstr "重复文件扫描中"
 
 #: qt/base/app.py:40
 msgid "Loading"
-msgstr "Laden"
+msgstr "载入中"
 
 #: qt/base/app.py:41
 msgid "Moving"
-msgstr "Verschieben"
+msgstr "移动中"
 
 #: qt/base/app.py:42
 msgid "Copying"
-msgstr "Kopieren"
+msgstr "复制中"
 
 #: qt/base/app.py:43
 msgid "Sending files to the recycle bin"
-msgstr "Sende Dateien in den Mülleimer"
+msgstr "将文件移到回收站"
 
 #: qt/base/app.py:103
 msgid "Quit"
-msgstr "Beenden"
+msgstr "退出"
 
 #: qt/base/app.py:104 qt/base/preferences_dialog.py:122
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "首选项"
 
 #: qt/base/app.py:105
 msgid "dupeGuru Help"
-msgstr "dupeGuru Hilfe"
+msgstr "dupeGuru帮助"
 
 #: qt/base/app.py:106
 msgid "About dupeGuru"
-msgstr "Über dupeGuru"
+msgstr "关于dupeGuru"
 
 #: qt/base/app.py:107
 msgid "Register dupeGuru"
-msgstr "Registriere dupeGuru"
+msgstr "注册dupeGuru"
 
 #: qt/base/app.py:108
 msgid "Check for Update"
-msgstr "Auf Updates überprüfen"
+msgstr "检查更新"
 
 #: qt/base/app.py:109
 msgid "Open Debug Log"
-msgstr "Debug Log öffnen"
+msgstr "打开调试记录"
 
 #: qt/base/app.py:140
 msgid "Add to Ignore List"
-msgstr "Zur Ignorier-Liste hinzufügen"
+msgstr "添加到忽略列表中"
 
 #: qt/base/app.py:141
 msgid "IgnoreConfirmMsg"
-msgstr "%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?"
+msgstr "目前已选的 {} 个匹配项将在后续的扫描中被忽略。继续吗?"
 
 #: qt/base/app.py:146
 msgid "copy"
-msgstr "kopieren"
+msgstr "复制"
 
 #: qt/base/app.py:146
 msgid "move"
-msgstr "verschieben"
+msgstr "移动"
 
 #: qt/base/app.py:147
 msgid "SelectCopyOrMoveDestinationMsg"
-msgstr "Wählen sie einen Ordner zum {} der ausgewählten Dateien"
+msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
 #: qt/base/app.py:159 qt/base/result_window.py:322
 msgid "Remove duplicates"
-msgstr "Duplikate entfernen"
+msgstr "移除重复文件"
 
 #: qt/base/app.py:160 qt/base/result_window.py:323
 msgid "FileRemovalConfirmMsg"
-msgstr "{} Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
+msgstr "你将从结果中移除 {} 个文件。继续吗?"
 
 #: qt/base/app.py:179
 msgid "NoCustomCommandMsg"
-msgstr ""
-"Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen "
-"konfigurieren."
+msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
 #: qt/base/app.py:180
 msgid "Custom Command"
-msgstr "Eigener Befehl"
+msgstr "自定义命令"
 
 #: qt/base/app.py:210
 msgid "OperationSuccessMsg"
-msgstr "Alle Dateien wurden erfolgreich verarbeitet."
+msgstr "所有文件已成功处理。"
 
 #: qt/base/app.py:211
 msgid "Operation Complete"
-msgstr "Operation komplett"
+msgstr "执行完成"
 
 #: qt/base/app.py:214
 msgid "Scan complete"
-msgstr "Scan komplett"
+msgstr "扫描完成"
 
 #: qt/base/app.py:215
 msgid "NoDuplicateFoundMsg"
-msgstr "Keine Duplikate gefunden."
+msgstr "没有找到重复文件。"
 
 #: qt/base/app.py:267
 msgid "TaskHangingMsg"
-msgstr ""
-"Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine "
-"Neue starten. Warten Sie einige Sekunden und versuchen es erneut."
+msgstr "目前还有任务在执行，新任务无法开启。请等待几秒钟后再重新试一次。"
 
 #: qt/base/details_table.py:16
 msgid "Attribute"
-msgstr "Attribut"
+msgstr "属性"
 
 #: qt/base/details_table.py:16
 msgid "Selected"
-msgstr "Ausgewählt"
+msgstr "已选择"
 
 #: qt/base/details_table.py:16 qt/base/directories_model.py:23
 msgid "Reference"
-msgstr "Referenz"
+msgstr "参照文件"
 
 #: qt/base/directories_dialog.py:56
 msgid "Load Results..."
-msgstr "Lade Ergebnisse..."
+msgstr "载入结果..."
 
 #: qt/base/directories_dialog.py:57
 msgid "Results Window"
-msgstr "Ergebnisfenster"
+msgstr "结果窗口"
 
 #: qt/base/directories_dialog.py:58
 msgid "Add Folder..."
-msgstr "Ordner hinzufügen..."
+msgstr "增加文件夹..."
 
 #: qt/base/directories_dialog.py:66 qt/base/result_window.py:83
 msgid "File"
-msgstr "Datei"
+msgstr "文件"
 
 #: qt/base/directories_dialog.py:68 qt/base/result_window.py:91
 msgid "View"
-msgstr "Ansicht"
+msgstr "视图"
 
 #: qt/base/directories_dialog.py:70 qt/base/result_window.py:93
 msgid "Help"
-msgstr "Hilfe"
+msgstr "帮助"
 
 #: qt/base/directories_dialog.py:72
 msgid "Load Recent Results"
-msgstr "Lade letzte Ergebnisse"
+msgstr "载入最近的结果"
 
 #: qt/base/directories_dialog.py:106
 msgid "SelectFolderToScanMsg"
-msgstr "Zu scannende Ordner auswählen und \"Scan\" drücken."
+msgstr "请选择要扫描的文件夹，然后点击 \"扫描\"。"
 
 #: qt/base/directories_dialog.py:135
 msgid "Load Results"
-msgstr "Lade Ergebnisse"
+msgstr "载入结果"
 
 #: qt/base/directories_dialog.py:138
 msgid "Scan"
-msgstr "Scan"
+msgstr "扫描"
 
 #: qt/base/directories_dialog.py:175
 msgid "Unsaved results"
-msgstr "Ungespeicherte Ergebnisse"
+msgstr "未保存的结果"
 
 #: qt/base/directories_dialog.py:176
 msgid "ReallyWantToQuitMsg"
-msgstr "Sie haben ungespeicherte Ergebnisse. Wollen Sie wirklich beenden?"
+msgstr "您还没有保存扫描结果，确定要退出吗?"
 
 #: qt/base/directories_dialog.py:184
 msgid "SelectFolderToAddMsg"
-msgstr "Wählen Sie einen Ordner aus, um ihn der Scanliste hinzuzufügen."
+msgstr "请选择一个文件夹并加入到扫描列表中"
 
 #: qt/base/directories_dialog.py:201
 msgid "SelectResultToLoadMsg"
-msgstr "Wählen Sie eine Ergebnisliste zum Laden aus."
+msgstr "选择一个结果文件并载入"
 
 #: qt/base/directories_dialog.py:202
 msgid "All Files (*.*)"
-msgstr "Alle Dateien (*.*)"
+msgstr "所有文件 (*.*)"
 
 #: qt/base/directories_dialog.py:202 qt/base/result_window.py:344
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr "dupeGuru Ergebnisse (*.dupeguru)"
+msgstr "dupeGuru结果 (*.dupeguru)"
 
 #: qt/base/directories_dialog.py:220
 msgid "Start a new scan"
-msgstr "Starte einen neuen Scan"
+msgstr "开始新的扫描"
 
 #: qt/base/directories_dialog.py:221
 msgid "ReallyWantToContinueMsg"
-msgstr "Sie haben ungespeicherte Ergebnisse. Möchten Sie wirklich fortfahren?"
+msgstr "目前还有结果尚未保存，确定要继续吗?"
 
 #: qt/base/directories_model.py:22
 msgid "Name"
-msgstr "Name"
+msgstr "名称"
 
 #: qt/base/directories_model.py:22
 msgid "State"
-msgstr "Zustand"
+msgstr "说明"
 
 #: qt/base/directories_model.py:23
 msgid "Excluded"
-msgstr "Ausgeschlossen"
+msgstr "不包含"
 
 #: qt/base/directories_model.py:23
 msgid "Normal"
-msgstr "Normal"
+msgstr "正常"
 
 #: qt/base/extra_fairware_reminder.py:36
 msgid "Sorry, I must insist"
-msgstr "Entschuldigung, ich muss darauf beharren"
+msgstr "抱歉,现在仍要继续"
 
 #: qt/base/extra_fairware_reminder.py:41
 msgid "ExtraFairwarePromptMsg"
 msgstr ""
-"Scheinbar haben Sie eine Menge Duplikate gefunden. Schön! Ich muss Sie jedoch daran erinnern das Spenden gewünscht werden, wenn noch nicht alle Arbeitsstunden bezahlt wurden.\n"
+"看起来似乎您找到了很多重复文件。这也是我继续精进这个软件的动力之一。然而，我衷心的希望能够得到您的捐助，因为我会日夜奋战于这个软件并且没有任何报酬。\n"
+"    \n"
+"您可能会觉得 \"反正这个软件我只用一次，我不需要给开发者任何捐助\". 问题是大多数人都只用一次dupeGuru。如果每一位都这样想，dupeGuru的开发也就没有资金支持了。也正是因为dupeGuru自身的性质决定了它有着仅用一次的内在倾向，所以我还必须坚持致力于这个软件的开发与精进。\n"
 "\n"
-"Sie denken vielleicht \"aber ich nutze dieses Programm doch nur einmal, da brauche ich nicht zu spenden\". Das Problem ist, das die meisten Menschen dupeGuru nur sehr selten nutzen. Wenn jeder so denkt kann die Entwicklung von dupeGuru nicht finanziert werden. Aufgrund dieser, dem Wesen von dupeGuru innenliegenden Eigenschaft, muss ich hier auf Ihre Unterstützung bestehen.  \n"
-"\n"
-"Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung entweder ignorieren oder mir eine Nachricht an hsoft@hardcoded.net schicken, damit ich ihnen einen Schlüssel gebe um diesen Hinweis zu entfernen."
+"如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。"
 
 #: qt/base/extra_fairware_reminder.py:45
 msgid "ExtraFairwareReasonMsg"
 msgstr ""
-"Diese Erinnerung erschien, weil:\n"
-"    \n"
-"1. Mehr als 100 Duplikate verarbeitet wurden\n"
-"2. Sie noch nicht an dupeGuru gespendet haben\n"
-"3. Es unbezahlte Arbeitstunden im Projekt gibt"
+"此提醒框弹出的原因如下:\n"
+"\n"
+"1. 您正在处理超过100个重复文件\n"
+"2. 您没有捐助过dupeGuru\n"
+"3. 此软件中还有未支付时间"
 
 #: qt/base/extra_fairware_reminder.py:56
 msgid "Contribute"
-msgstr "Spenden"
+msgstr "捐助"
 
 #: qt/base/extra_fairware_reminder.py:59
 msgid "Continue"
-msgstr "Fortfahren"
+msgstr "继续"
 
 #: qt/base/preferences_dialog.py:34
 msgid "Scan Type:"
-msgstr "Scantyp:"
+msgstr "扫描类型:"
 
 #: qt/base/preferences_dialog.py:47
 msgid "Filter Hardness:"
-msgstr "Filter Empfindlichkeit:"
+msgstr "筛选强度:"
 
 #: qt/base/preferences_dialog.py:73
 msgid "More Results"
-msgstr "mehr Ergebnisse"
+msgstr "较多结果"
 
 #: qt/base/preferences_dialog.py:78
 msgid "Fewer Results"
-msgstr "weniger Ergebnisse"
+msgstr "较少结果"
 
 #: qt/base/preferences_dialog.py:85
 msgid "Font size:"
-msgstr "Kopieren und Verschieben:"
+msgstr "复制和移动:"
 
 #: qt/base/preferences_dialog.py:89
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "语言:"
 
 #: qt/base/preferences_dialog.py:91
 msgid "English"
-msgstr "Englisch"
+msgstr "英语"
 
 #: qt/base/preferences_dialog.py:92
 msgid "French"
-msgstr "Französisch"
+msgstr "法语"
 
 #: qt/base/preferences_dialog.py:93
 msgid "German"
-msgstr "Deutsch"
+msgstr "德语"
 
 #: qt/base/preferences_dialog.py:94
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "简体中文"
 
 #: qt/base/preferences_dialog.py:97
 msgid "Copy and Move:"
@@ -286,23 +282,23 @@ msgstr ""
 
 #: qt/base/preferences_dialog.py:100
 msgid "Right in destination"
-msgstr "Direkt im Ziel"
+msgstr "目标位置"
 
 #: qt/base/preferences_dialog.py:101
 msgid "Recreate relative path"
-msgstr "Relativen Pfad neu erstellen"
+msgstr "重建相对路径"
 
 #: qt/base/preferences_dialog.py:102
 msgid "Recreate absolute path"
-msgstr "Absoluten Pfad neu erstellen"
+msgstr "重建绝对路径"
 
 #: qt/base/preferences_dialog.py:105
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):"
+msgstr "自定义命令 (参数: %d 指重复文件, %r 指参照文件):"
 
 #: qt/base/preferences_dialog.py:185
 msgid "NeedsToRestartToApplyLangMsg"
-msgstr "dupeGuru muss neustarten, um die Sprachänderung durchzuführen."
+msgstr "dupeGuru将重新启动以使语言修改生效。"
 
 #: qt/base/prioritize_dialog.py:71
 msgid "Re-Prioritize duplicates"
@@ -317,71 +313,69 @@ msgstr ""
 
 #: qt/base/problem_dialog.py:34
 msgid "Problems!"
-msgstr "Probleme!"
+msgstr "有问题!"
 
 #: qt/base/problem_dialog.py:38
 msgid "ProblemsDuringProcessingMsg"
-msgstr ""
-"Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Grund der "
-"Probleme ist unten in der Tabelle beschrieben."
+msgstr "在处理部分或全部文件时发现问题。产生问题的原因在下表中进行描述。这些文件将不会从结果中移除。"
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
-msgstr "Zeige Markierte"
+msgstr "显示选择"
 
 #: qt/base/problem_dialog.py:57
 msgid "Close"
-msgstr "Schließen"
+msgstr "关闭"
 
 #: qt/base/problem_table.py:18
 msgid "File Path"
-msgstr "Dateipfad"
+msgstr "文件路径"
 
 #: qt/base/problem_table.py:19
 msgid "Error Message"
-msgstr "Fehlermeldung"
+msgstr "错误信息"
 
 #: qt/base/result_window.py:45 qt/me/details_dialog.py:20
 #: qt/pe/details_dialog.py:25 qt/se/details_dialog.py:20
 msgid "Details"
-msgstr "Details"
+msgstr "详细说明"
 
 #: qt/base/result_window.py:46 qt/base/result_window.py:87
 #: qt/base/result_window.py:154
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "行为"
 
 #: qt/base/result_window.py:47
 msgid "Show Dupes Only"
-msgstr "Nur Duplikate anzeigen"
+msgstr "仅显示重复文件"
 
 #: qt/base/result_window.py:48
 msgid "Show Delta Values"
-msgstr "Zeige Deltawerte"
+msgstr "显示Delta值"
 
 #: qt/base/result_window.py:49
 msgid "Send Marked to Recycle Bin"
-msgstr "Verschiebe Markierte in den Mülleimer"
+msgstr "将标记的文件移到回收站"
 
 #: qt/base/result_window.py:50
 msgid "Delete Marked and Replace with Hardlinks"
-msgstr "Lösche Markierte und ersetze mit Hardlinks"
+msgstr "删除标记文件并用硬连接进行替换"
 
 #: qt/base/result_window.py:51
 msgid "Move Marked to..."
-msgstr "Verschiebe Markierte nach..."
+msgstr "将标记的文件移动到..."
 
 #: qt/base/result_window.py:52
 msgid "Copy Marked to..."
-msgstr "Kopiere Markierte nach..."
+msgstr "将标记的文件复制到..."
 
 #: qt/base/result_window.py:53
 msgid "Remove Marked from Results"
-msgstr "Entferne Markierte aus den Ergebnissen"
+msgstr "从结果中移除所标记的文件"
 
 #: qt/base/result_window.py:54
 msgid "Re-Prioritize Results..."
-msgstr "Entferne Ausgewählte aus den Ergebnissen"
+msgstr "从结果中移除所选的文件"
 
 #: qt/base/result_window.py:55
 msgid "Remove Selected from Results"
@@ -389,204 +383,201 @@ msgstr ""
 
 #: qt/base/result_window.py:56
 msgid "Add Selected to Ignore List"
-msgstr "Füge Ausgewählte der Ignorier-Liste hinzu"
+msgstr "将所选文件添加到忽略列表中"
 
 #: qt/base/result_window.py:57
 msgid "Make Selected Reference"
-msgstr "Mache Ausgewählte zur Referenz"
+msgstr "将所选文件设定为参照文件"
 
 #: qt/base/result_window.py:58
 msgid "Open Selected with Default Application"
-msgstr "Öffne Ausgewählte mit Standardanwendung"
+msgstr "使用默认程序打开所选文件"
 
 #: qt/base/result_window.py:59
 msgid "Open Containing Folder of Selected"
-msgstr "Öffne beeinhaltenden Ordner der Ausgewählten"
+msgstr "打开所选文件所在的文件夹"
 
 #: qt/base/result_window.py:60
 msgid "Rename Selected"
-msgstr "Ausgewählte umbenennen"
+msgstr "重命名所选文件"
 
 #: qt/base/result_window.py:61
 msgid "Mark All"
-msgstr "Alles markieren"
+msgstr "标记全部"
 
 #: qt/base/result_window.py:62
 msgid "Mark None"
-msgstr "Nichts markieren"
+msgstr "全部取消标记"
 
 #: qt/base/result_window.py:63
 msgid "Invert Marking"
-msgstr "Markierung invertieren"
+msgstr "反选标记文件"
 
 #: qt/base/result_window.py:64
 msgid "Mark Selected"
-msgstr "Ausgewählte markieren"
+msgstr "标记所选文件"
 
 #: qt/base/result_window.py:65 qt/base/result_window.py:244
 msgid "Clear Ignore List"
-msgstr "Ignorier-Liste leeren"
+msgstr "清空忽略列表"
 
 #: qt/base/result_window.py:66 qt/base/result_window.py:230
 msgid "Apply Filter"
-msgstr "Filter anwenden"
+msgstr "应用筛选"
 
 #: qt/base/result_window.py:67
 msgid "Cancel Filter"
-msgstr "Filter entfernen"
+msgstr "取消筛选"
 
 #: qt/base/result_window.py:68
 msgid "Export To HTML"
-msgstr "Exportiere als HTML"
+msgstr "导出为 HTML"
 
 #: qt/base/result_window.py:69
 msgid "Save Results..."
-msgstr "Speichere Ergebnisse..."
+msgstr "保存结果..."
 
 #: qt/base/result_window.py:70
 msgid "Invoke Custom Command"
-msgstr "Eigenen Befehl ausführen"
+msgstr "调用自定义命令"
 
 #: qt/base/result_window.py:85
 msgid "Mark"
-msgstr "Auswählen"
+msgstr "标记"
 
 #: qt/base/result_window.py:89
 msgid "Columns"
-msgstr "Spalten"
+msgstr "显示列"
 
 #: qt/base/result_window.py:150
 msgid "Reset to Defaults"
-msgstr "Voreinstellungen"
+msgstr "重置为默认值"
 
 #: qt/base/result_window.py:172
 msgid "{} Results"
-msgstr "{} (Ergebnisse)"
+msgstr "{} (结果)"
 
 #: qt/base/result_window.py:231
 msgid "TypeFilterMsg"
-msgstr ""
-"Geben Sie den Filter ein, den Sie anwenden möchten. Siehe Hilfe für Details."
+msgstr "请输入筛选条件以应用到结果。详见帮助文档。"
 
 #: qt/base/result_window.py:247
 msgid "NothingToClearMsg"
-msgstr "Nichts zu löschen."
+msgstr "无需清空。"
 
 #: qt/base/result_window.py:249
 msgid "ClearIgnoreListConfirmMsg"
-msgstr "Möchten Sie wirklich alle {} Einträge aus der Ignorier-Liste löschen?"
+msgstr "确定要从忽略列表中移除 {} 项吗?"
 
 #: qt/base/result_window.py:252
 msgid "IgnoreListClearedMsg"
-msgstr "Ignorier-Liste geleert."
+msgstr "忽略列表已清空。"
 
 #: qt/base/result_window.py:261
 msgid "Delete duplicates"
-msgstr "Lösche Duplikate"
+msgstr "删除重复文件"
 
 #: qt/base/result_window.py:262
 msgid "SendToTrashConfirmMsg"
-msgstr "{} Dateien werden in den Mülleimer zu verschoben. Fortfahren?"
+msgstr "即将有 {} 个文件被移到回收站。继续吗?"
 
 #: qt/base/result_window.py:286
 msgid "Delete and hardlink duplicates"
-msgstr "Ersetze Duplikate mit physikalischer Verknüpfung"
+msgstr "删除及硬连接重复文件"
 
 #: qt/base/result_window.py:287
 msgid "HardlinkConfirmMsg"
-msgstr ""
-"{} Dateien werden gelöscht und mit physikalischen Verknüpfungen ersetzt. "
-"Fortfahren?"
+msgstr "即将有 {} 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?"
 
 #: qt/base/result_window.py:343
 msgid "SelectResultToSaveMsg"
-msgstr "Datei zum Speichern der Ergebnisliste auswählen."
+msgstr "将结果保存为..."
 
 #: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
 msgid "Filename"
-msgstr "Dateiname"
+msgstr "文件名称"
 
 #: qt/me/preferences_dialog.py:40
 msgid "Filename - Fields"
-msgstr "Dateiname - Felder"
+msgstr "文件名称 - 字段名"
 
 #: qt/me/preferences_dialog.py:41
 msgid "Filename - Fields (No Order)"
-msgstr "Dateiname - Felder (ohne Reihenfolge)"
+msgstr "文件名称 - 字段名 (无序)"
 
 #: qt/me/preferences_dialog.py:42
 msgid "Tags"
-msgstr "Tags"
+msgstr "标签"
 
 #: qt/me/preferences_dialog.py:43 qt/pe/preferences_dialog.py:33
 #: qt/se/preferences_dialog.py:40
 msgid "Contents"
-msgstr "Inhalt"
+msgstr "内容"
 
 #: qt/me/preferences_dialog.py:44
 msgid "Audio Contents"
-msgstr "Audio Inhalte"
+msgstr "音频内容"
 
 #: qt/me/preferences_dialog.py:55
 msgid "Tags to scan:"
-msgstr "folgende Tags scannen:"
+msgstr "标签扫描:"
 
 #: qt/me/preferences_dialog.py:61
 msgid "Track"
-msgstr "Stück"
+msgstr "音轨"
 
 #: qt/me/preferences_dialog.py:63
 msgid "Artist"
-msgstr "Künstler"
+msgstr "演唱者"
 
 #: qt/me/preferences_dialog.py:65
 msgid "Album"
-msgstr "Album"
+msgstr "专辑"
 
 #: qt/me/preferences_dialog.py:67
 msgid "Title"
-msgstr "Titel"
+msgstr "歌曲名"
 
 #: qt/me/preferences_dialog.py:69
 msgid "Genre"
-msgstr "Genre"
+msgstr "音乐类型"
 
 #: qt/me/preferences_dialog.py:71
 msgid "Year"
-msgstr "Jahr"
+msgstr "年"
 
 #: qt/me/preferences_dialog.py:75 qt/se/preferences_dialog.py:49
 msgid "Word weighting"
-msgstr "Wortgewichtung"
+msgstr "词语匹配度 (Word weighting)"
 
 #: qt/me/preferences_dialog.py:77 qt/se/preferences_dialog.py:51
 msgid "Match similar words"
-msgstr "Vergleiche ähnliche Wörter"
+msgstr "匹配近似词语"
 
 #: qt/me/preferences_dialog.py:79 qt/pe/preferences_dialog.py:41
 #: qt/se/preferences_dialog.py:53
 msgid "Can mix file kind"
-msgstr "Dateitypen dürfen gemischt werden"
+msgstr "混合文件类型"
 
 #: qt/me/preferences_dialog.py:81 qt/pe/preferences_dialog.py:43
 #: qt/se/preferences_dialog.py:55
 msgid "Use regular expressions when filtering"
-msgstr "Nutze reguläre Ausdrücke beim Filtern"
+msgstr "筛选时使用常规表达式"
 
 #: qt/me/preferences_dialog.py:83 qt/pe/preferences_dialog.py:45
 #: qt/se/preferences_dialog.py:57
 msgid "Remove empty folders on delete or move"
-msgstr "Entferne leere Ordner beim Löschen oder Verschieben"
+msgstr "删除或移动时一并移除空文件夹"
 
 #: qt/me/preferences_dialog.py:85 qt/pe/preferences_dialog.py:47
 #: qt/se/preferences_dialog.py:76
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Ignoriere Duplikate die mit derselben Datei verknüpft sind"
+msgstr "忽略重复文件当其硬连接到相同文件时"
 
 #: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
 #: qt/se/preferences_dialog.py:78
 msgid "Debug mode (restart required)"
-msgstr ""
+msgstr "调试模式 (需要重新启动)"
 
 #: qt/pe/preferences_dialog.py:34
 msgid "EXIF Timestamp"
@@ -594,28 +585,27 @@ msgstr ""
 
 #: qt/pe/preferences_dialog.py:39
 msgid "Match pictures of different dimensions"
-msgstr "Vergleiche Bilder mit unterschiedlicher Auflösung"
+msgstr "匹配不同规格的图像"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 msgid "Clear Picture Cache"
-msgstr "Bildzwischenspeicher leeren"
+msgstr "清空图片缓存"
 
 #: qt/pe/result_window.py:26
 msgid "ClearPictureCacheConfirmMsg"
-msgstr ""
-"Möchten Sie wirklich alle zwischengespeicherten Bildanalysen entfernen?"
+msgstr "确定要移除所有缓存图片?"
 
 #: qt/pe/result_window.py:29
 msgid "PictureCacheClearedMsg"
-msgstr "Bildzwischenspeicher geleert."
+msgstr "图片缓存已清空。"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Folders"
-msgstr "Ordner"
+msgstr "文件夹"
 
 #: qt/se/preferences_dialog.py:60
 msgid "Ignore files smaller than"
-msgstr "Ignoriere Dateien kleiner als"
+msgstr "忽略文件当其小于"
 
 #: qt/se/preferences_dialog.py:71
 msgid "KB"

@@ -1,0 +1,121 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#: core/app.py:86
+msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr ""
+
+#: core/app.py:192
+msgid ""
+"You cannot delete, move or copy more than 10 duplicates at once in demo "
+"mode."
+msgstr ""
+
+#: core/app.py:420
+msgid "Collecting files to scan"
+msgstr "收集文件以备扫描"
+
+#: core/app.py:431
+msgid "NoScannableFileMsg"
+msgstr "所选文件夹中不包含可供扫描的文件。"
+
+#: core/app.py:470
+msgid "%s (%d discarded)"
+msgstr "%s (%d 无效)"
+
+#: core/engine.py:178 core/engine.py:215
+msgid "0 matches found"
+msgstr "未找到匹配项"
+
+#: core/engine.py:196 core/engine.py:223
+msgid "%d matches found"
+msgstr "找到 %d 个匹配项"
+
+#: core/engine.py:208 core/scanner.py:56
+msgid "Read size of %d/%d files"
+msgstr "读取 %d/%d 文件大小"
+
+#: core/engine.py:355
+msgid "Grouped %d/%d matches"
+msgstr "%d/%d 匹配项组合在一起"
+
+#: core/gui/extra_fairware_reminder.py:23
+msgid "Continue ({})"
+msgstr "继续 ({})"
+
+#: core/gui/extra_fairware_reminder.py:25
+msgid "Continue"
+msgstr "继续"
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr ""
+
+#: core/prioritize.py:94
+msgid "Ends with number"
+msgstr "文件名称"
+
+#: core/prioritize.py:96
+msgid "Doesn't end with number"
+msgstr ""
+
+#: core/prioritize.py:117
+msgid "Highest"
+msgstr ""
+
+#: core/prioritize.py:117
+msgid "Lowest"
+msgstr ""
+
+#: core/prioritize.py:144
+msgid "Newest"
+msgstr ""
+
+#: core/prioritize.py:144
+msgid "Oldest"
+msgstr ""
+
+#: core/results.py:95
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "已标记 %d / %d (%s / %s) 个重复项。"
+
+#: core/results.py:102
+msgid " filter: %s"
+msgstr " 筛选: %s"
+
+#: core/scanner.py:76
+msgid "Read metadata of %d/%d files"
+msgstr "读取 %d/%d 文件元数据"
+
+#: core/scanner.py:106
+msgid "Removing false matches"
+msgstr "移除错误匹配项"
+
+#: core/scanner.py:124
+msgid "Processed %d/%d matches against the ignore list"
+msgstr "在忽略列表之外已处理 %d/%d 匹配项"
+
+#: core/scanner.py:133
+msgid "Doing group prioritization"
+msgstr "优化分组"
+
+#: core_pe/matchblock.py:60
+msgid "Analyzed %d/%d pictures"
+msgstr "分析 %d/%d 图像"
+
+#: core_pe/matchblock.py:144
+msgid "Performed %d/%d chunk matches"
+msgstr ""
+
+#: core_pe/matchblock.py:149
+msgid "Preparing for matching"
+msgstr "准备进行匹配"
+
+#: core_pe/matchblock.py:184
+msgid "Verified %d/%d matches"
+msgstr "验证 %d/%d 匹配项"
+
+#: core_pe/matchexif.py:21
+msgid "Read EXIF of %d/%d pictures"
+msgstr ""
