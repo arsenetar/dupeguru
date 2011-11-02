@@ -30,11 +30,11 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: qt/base/app.py:105
+#: qt/base/app.py:105 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "Nápověda dupeGuru"
 
-#: qt/base/app.py:106
+#: qt/base/app.py:106 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "O aplikaci"
 
@@ -111,23 +111,30 @@ msgstr ""
 "Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte"
 " pár sekund a zkuste to znovu."
 
-#: qt/base/details_table.py:16
+#: qt/base/details_table.py:16 cocoa/base/en.lproj/DetailsPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
 msgid "Attribute"
 msgstr "Atribut"
 
-#: qt/base/details_table.py:16
+#: qt/base/details_table.py:16 cocoa/base/en.lproj/DetailsPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
 msgid "Selected"
 msgstr "Vybráno"
 
 #: qt/base/details_table.py:16 qt/base/directories_model.py:23
+#: cocoa/base/en.lproj/DetailsPanel.strings:0
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
 msgid "Reference"
 msgstr "Referenční"
 
-#: qt/base/directories_dialog.py:56
+#: qt/base/directories_dialog.py:56 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Results..."
 msgstr "Nahrát výsledky..."
 
-#: qt/base/directories_dialog.py:57
+#: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Results Window"
 msgstr "Okno s výsledky"
 
@@ -136,6 +143,8 @@ msgid "Add Folder..."
 msgstr ""
 
 #: qt/base/directories_dialog.py:66 qt/base/result_window.py:83
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "Soubor"
 
@@ -144,10 +153,13 @@ msgid "View"
 msgstr ""
 
 #: qt/base/directories_dialog.py:70 qt/base/result_window.py:93
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Nápověda"
 
-#: qt/base/directories_dialog.py:72
+#: qt/base/directories_dialog.py:72 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Recent Results"
 msgstr "Nahrát nedávné výsledky"
 
@@ -156,10 +168,12 @@ msgid "SelectFolderToScanMsg"
 msgstr ""
 
 #: qt/base/directories_dialog.py:135
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Load Results"
 msgstr "Nahrát výsledky"
 
 #: qt/base/directories_dialog.py:138
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Scan"
 msgstr "Prohledat"
 
@@ -196,22 +210,28 @@ msgid "ReallyWantToContinueMsg"
 msgstr "Máte neuložené výsledky, opravdu si přejete pokračovat?"
 
 #: qt/base/directories_model.py:22
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Name"
 msgstr "Název"
 
 #: qt/base/directories_model.py:22
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "State"
 msgstr "Stav"
 
 #: qt/base/directories_model.py:23
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Excluded"
 msgstr "Vyjmuto"
 
 #: qt/base/directories_model.py:23
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Normal"
 msgstr "Normální"
 
 #: qt/base/extra_fairware_reminder.py:36
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Sorry, I must insist"
 msgstr "Je mi líto, musím na tom trvat"
 
@@ -224,6 +244,7 @@ msgid "ExtraFairwareReasonMsg"
 msgstr ""
 
 #: qt/base/extra_fairware_reminder.py:56
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Contribute"
 msgstr "Přispět"
 
@@ -247,7 +268,9 @@ msgstr ""
 msgid "Fewer Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:85
+#: qt/base/preferences_dialog.py:85 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Velikost písma:"
 
@@ -271,23 +294,32 @@ msgstr ""
 msgid "Chinese (Simplified)"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:97
+#: qt/base/preferences_dialog.py:97 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Kopírovat a přesunout:"
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:100 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Přímo v cílovém umístění"
 
-#: qt/base/preferences_dialog.py:101
+#: qt/base/preferences_dialog.py:101 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Vytvořit s relativní cestou"
 
-#: qt/base/preferences_dialog.py:102
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Vytvořit s absolutní cestou"
 
-#: qt/base/preferences_dialog.py:105
+#: qt/base/preferences_dialog.py:105 cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):"
 
@@ -296,10 +328,12 @@ msgid "NeedsToRestartToApplyLangMsg"
 msgstr ""
 
 #: qt/base/prioritize_dialog.py:71
+#: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Re-Prioritize duplicates"
 msgstr "Změnit prioritu duplicit"
 
 #: qt/base/prioritize_dialog.py:75
+#: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
@@ -309,7 +343,7 @@ msgstr ""
 "duplicity, které těmto kritériím vyhovují do referenčního umístění příslušné"
 " skupiny. Více informací naleznete v nápovědě."
 
-#: qt/base/problem_dialog.py:34
+#: qt/base/problem_dialog.py:34 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Problems!"
 msgstr "Problémy!"
 
@@ -317,37 +351,39 @@ msgstr "Problémy!"
 msgid "ProblemsDuringProcessingMsg"
 msgstr ""
 
-#: qt/base/problem_dialog.py:52
+#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Ukázat vybrané ve správci souborů"
 
-#: qt/base/problem_dialog.py:57
+#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Zavřít"
 
-#: qt/base/problem_table.py:18
+#: qt/base/problem_table.py:18 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "File Path"
 msgstr "Cesta k souboru"
 
-#: qt/base/problem_table.py:19
+#: qt/base/problem_table.py:19 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Error Message"
 msgstr "Chybové hlášení"
 
 #: qt/base/result_window.py:45 qt/me/details_dialog.py:20
 #: qt/pe/details_dialog.py:25 qt/se/details_dialog.py:20
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Detaily"
 
 #: qt/base/result_window.py:46 qt/base/result_window.py:87
-#: qt/base/result_window.py:154
+#: qt/base/result_window.py:154 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Akce"
 
-#: qt/base/result_window.py:47
+#: qt/base/result_window.py:47 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Dupes Only"
 msgstr "Zobrazit pouze duplicity"
 
-#: qt/base/result_window.py:48
+#: qt/base/result_window.py:48 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Delta Values"
 msgstr "Zobrazit rozdíly"
 
@@ -355,19 +391,23 @@ msgstr "Zobrazit rozdíly"
 msgid "Send Marked to Recycle Bin"
 msgstr ""
 
-#: qt/base/result_window.py:50
+#: qt/base/result_window.py:50 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Delete Marked and Replace with Hardlinks"
 msgstr "Označené nahradit pevnými odkazy"
 
-#: qt/base/result_window.py:51
+#: qt/base/result_window.py:51 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Move Marked to..."
 msgstr "Označené přesunout..."
 
-#: qt/base/result_window.py:52
+#: qt/base/result_window.py:52 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Copy Marked to..."
 msgstr "Označené kopírovat..."
 
-#: qt/base/result_window.py:53
+#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Marked from Results"
 msgstr "Odstranit označené z výsledků"
 
@@ -375,19 +415,27 @@ msgstr "Odstranit označené z výsledků"
 msgid "Re-Prioritize Results..."
 msgstr ""
 
-#: qt/base/result_window.py:55
+#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Selected from Results"
 msgstr "Odstranit výběr z výsledků"
 
-#: qt/base/result_window.py:56
+#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Přidat výběr na seznam výjimek"
 
-#: qt/base/result_window.py:57
+#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
 msgstr "Výběr jako reference"
 
-#: qt/base/result_window.py:58
+#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Vybrané otevřít výchozí aplikací"
 
@@ -395,27 +443,30 @@ msgstr "Vybrané otevřít výchozí aplikací"
 msgid "Open Containing Folder of Selected"
 msgstr ""
 
-#: qt/base/result_window.py:60
+#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Rename Selected"
 msgstr "Vybrané přejmenovat"
 
-#: qt/base/result_window.py:61
+#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark All"
 msgstr "Označit vše"
 
-#: qt/base/result_window.py:62
+#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark None"
 msgstr "Zrušit označení"
 
-#: qt/base/result_window.py:63
+#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invert Marking"
 msgstr "Invertovat označení"
 
-#: qt/base/result_window.py:64
+#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark Selected"
 msgstr "Označit vybrané"
 
 #: qt/base/result_window.py:65 qt/base/result_window.py:244
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Clear Ignore List"
 msgstr "Vyčistit seznam výjimek"
 
@@ -431,11 +482,11 @@ msgstr ""
 msgid "Export To HTML"
 msgstr ""
 
-#: qt/base/result_window.py:69
+#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Uložit výsledky..."
 
-#: qt/base/result_window.py:70
+#: qt/base/result_window.py:70 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Spustit vlastní příkaz"
 
@@ -443,11 +494,14 @@ msgstr "Spustit vlastní příkaz"
 msgid "Mark"
 msgstr ""
 
-#: qt/base/result_window.py:89
+#: qt/base/result_window.py:89 cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Sloupce"
 
-#: qt/base/result_window.py:150
+#: qt/base/result_window.py:150 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
 msgstr "Výchozí nastavení"
 
@@ -494,23 +548,25 @@ msgid "SelectResultToSaveMsg"
 msgstr "Vyberte soubor pro uložení výsledků"
 
 #: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
 msgid "Filename"
 msgstr "Název souboru"
 
-#: qt/me/preferences_dialog.py:40
+#: qt/me/preferences_dialog.py:40 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Filename - Fields"
 msgstr "Název - pole"
 
-#: qt/me/preferences_dialog.py:41
+#: qt/me/preferences_dialog.py:41 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Filename - Fields (No Order)"
 msgstr "Název - pole (bez pořadí)"
 
-#: qt/me/preferences_dialog.py:42
+#: qt/me/preferences_dialog.py:42 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Tags"
 msgstr "Tagy"
 
 #: qt/me/preferences_dialog.py:43 qt/pe/preferences_dialog.py:33
-#: qt/se/preferences_dialog.py:40
+#: qt/se/preferences_dialog.py:40 cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Contents"
 msgstr "Obsahuje"
 
@@ -518,76 +574,90 @@ msgstr "Obsahuje"
 msgid "Audio Contents"
 msgstr ""
 
-#: qt/me/preferences_dialog.py:55
+#: qt/me/preferences_dialog.py:55 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Tags to scan:"
 msgstr "Prohledávané tagy:"
 
-#: qt/me/preferences_dialog.py:61
+#: qt/me/preferences_dialog.py:61 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Track"
 msgstr "Stopa"
 
-#: qt/me/preferences_dialog.py:63
+#: qt/me/preferences_dialog.py:63 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Artist"
 msgstr "Umělec"
 
-#: qt/me/preferences_dialog.py:65
+#: qt/me/preferences_dialog.py:65 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Album"
 msgstr "Album"
 
-#: qt/me/preferences_dialog.py:67
+#: qt/me/preferences_dialog.py:67 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Title"
 msgstr "Titul"
 
-#: qt/me/preferences_dialog.py:69
+#: qt/me/preferences_dialog.py:69 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Genre"
 msgstr "Žánr"
 
-#: qt/me/preferences_dialog.py:71
+#: qt/me/preferences_dialog.py:71 cocoa/me/en.lproj/Preferences.strings:0
 msgid "Year"
 msgstr "Rok"
 
 #: qt/me/preferences_dialog.py:75 qt/se/preferences_dialog.py:49
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
 msgid "Word weighting"
 msgstr "Váha slov"
 
 #: qt/me/preferences_dialog.py:77 qt/se/preferences_dialog.py:51
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
 msgid "Match similar words"
 msgstr "Shoda podobných slov"
 
 #: qt/me/preferences_dialog.py:79 qt/pe/preferences_dialog.py:41
-#: qt/se/preferences_dialog.py:53
+#: qt/se/preferences_dialog.py:53 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Can mix file kind"
 msgstr "Různé druhy souborů"
 
 #: qt/me/preferences_dialog.py:81 qt/pe/preferences_dialog.py:43
-#: qt/se/preferences_dialog.py:55
+#: qt/se/preferences_dialog.py:55 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Use regular expressions when filtering"
 msgstr "Při filtrování používat regulární výrazy"
 
 #: qt/me/preferences_dialog.py:83 qt/pe/preferences_dialog.py:45
-#: qt/se/preferences_dialog.py:57
+#: qt/se/preferences_dialog.py:57 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Remove empty folders on delete or move"
 msgstr "Po smazání a přesunu odstranit prázdné složky"
 
 #: qt/me/preferences_dialog.py:85 qt/pe/preferences_dialog.py:47
-#: qt/se/preferences_dialog.py:76
+#: qt/se/preferences_dialog.py:76 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
 msgstr "Ignorovat duplicity ve formě hardlinků na stejný soubor"
 
 #: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
-#: qt/se/preferences_dialog.py:78
+#: qt/se/preferences_dialog.py:78 cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Debug mode (restart required)"
 msgstr "Ladící režim (vyžaduje restart)"
 
-#: qt/pe/preferences_dialog.py:34
+#: qt/pe/preferences_dialog.py:34 cocoa/pe/en.lproj/Preferences.strings:0
 msgid "EXIF Timestamp"
 msgstr "EXIF razítko"
 
-#: qt/pe/preferences_dialog.py:39
+#: qt/pe/preferences_dialog.py:39 cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Match pictures of different dimensions"
 msgstr "Porovnávat snímky s různými rozměry"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Vyčistit cache snímků"
 
@@ -599,7 +669,7 @@ msgstr "Opravdu chcete odstranit veškeré uložené analýzy snímků?"
 msgid "PictureCacheClearedMsg"
 msgstr ""
 
-#: qt/se/preferences_dialog.py:41
+#: qt/se/preferences_dialog.py:41 cocoa/se/en.lproj/Preferences.strings:0
 msgid "Folders"
 msgstr "Složky"
 
@@ -607,6 +677,303 @@ msgstr "Složky"
 msgid "Ignore files smaller than"
 msgstr "Ignorovat soubory menší než"
 
-#: qt/se/preferences_dialog.py:71
+#: qt/se/preferences_dialog.py:71 cocoa/se/en.lproj/Preferences.strings:0
 msgid "KB"
 msgstr "KB"
+
+#: cocoa/base/en.lproj/DetailsPanel.strings:0
+#: cocoa/pe/en.lproj/DetailsPanel.strings:0
+msgid "Details of Selected File"
+msgstr "Detaily vybraného souboru"
+
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
+msgid "Select folders to scan and press \"Scan\"."
+msgstr "Vyberte složky, které chcete prohledat a stiskněte \"Prohledat\"."
+
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
+msgid ""
+"This reminder showed up because:\n"
+"\n"
+"1. You are processing more than 100 duplicates\n"
+"2. You have not yet contributed to dupeGuru\n"
+"3. There are unpaid hours in the project"
+msgstr ""
+"Tato připomínka se zobrazila, protože:\n"
+"\n"
+"1. Zpracováváte více než 100 duplicit\n"
+"2. Zatím jste nepřispěli na vývoj dupeGuru\n"
+"3. V projektu jsou nezaplacené hodiny"
+
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
+msgid ""
+"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
+"\n"
+"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
+"\n"
+"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."
+msgstr ""
+"Vypadá to, že jste našli spoustu duplicit. Paráda! Musím ale trvat na tom, že v případě nezaplacených hodin vývoje projektu, očekávám příspěvky.\n"
+"\n"
+"Můžete si říct \"ale já chci program použít jen jednou, proč bych měl platit\". Problém je, že většina lidí používá dupeGuru jen občas. Kdyby si totéž řekl každý, nemohl by se vývoj dupeGuru zaplatit. Kvůli této vlastnosti, která vychází z podstaty dupeGuru, si zde dovoluji žádat o příspěvek na vývoj.\n"
+"\n"
+"Pokud si nemůžete příspěvek dovolit, můžete tuto připomínku ignorovat nebo mi poslat e-mail na hsoft@hardcoded.net, abych vám dal klíč pro odstranění tohoto vyskakovacího okna."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Add New Folder..."
+msgstr "Přidat novou složku..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Load from file..."
+msgstr "Nahrát ze souboru..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reset to Default"
+msgstr "Výchozí nastavení"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Add iTunes Directory"
+msgstr "Přidat složku iTunes"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Dead Tracks in iTunes"
+msgstr "Odstranit z iTunes mrtvé stopy"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Add iPhoto Library"
+msgstr "Přidat knihovnu iPhoto"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Bring All to Front"
+msgstr "Vše do popředí"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Window"
+msgstr "Okno"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Minimize"
+msgstr "Minimalizovat"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Hide dupeGuru"
+msgstr "Skrýt dupeGuru"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Quit dupeGuru"
+msgstr "Ukončit dupeGuru"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Hide Others"
+msgstr "Skrýt ostatní"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Show All"
+msgstr "Zobrazit vše"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Zoom"
+msgstr "Zoom"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Details Panel"
+msgstr "Detaily"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Preferences..."
+msgstr "Předvolby..."
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Folder Selection Window"
+msgstr "Výběr složky"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Send Marked to Trash"
+msgstr "Vyhodit označené do koše"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Reveal Selected in Finder"
+msgstr "Vybrané otevřít ve Finderu"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Close Window"
+msgstr "Zavřít okno"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Start Duplicate Scan"
+msgstr "Spustit hledání duplicit"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Export Results to XHTML"
+msgstr "Exportovat výsledky do XHTML"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Check for update..."
+msgstr "Zkontrolovat aktualizace..."
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Mode"
+msgstr "Režim"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Edit"
+msgstr "Upravit"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Paste"
+msgstr "Vložit"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "dupeGuru Website"
+msgstr "dupeGuru Website"
+
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Re-Prioritize Results"
+msgstr "Změnit prioritu výsledků"
+
+#: cocoa/base/en.lproj/PrioritizeDialog.strings:0
+msgid "Ok"
+msgstr "Ok"
+
+#: cocoa/base/en.lproj/PrioritizeDialog.strings:0
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: cocoa/base/en.lproj/ProblemDialog.strings:0
+msgid ""
+"There were problems processing some (or all) of the files. The cause of "
+"these problems are described in the table below. Those files were not "
+"removed from your results."
+msgstr ""
+"Při zpracování některých (nebo všech) souborů se vyskytly problémy. Jejich "
+"příčina je popsána v tabulce dole. Dotčené soubory nebyli odstraněny z "
+"výsledků."
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "dupeGuru Results"
+msgstr "Výsledky dupeGuru"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Marked: 0 files, 0 B. Total: 0 files, 0 B."
+msgstr "Označeno: 0 souborů, 0 B. Celkem: 0 souborů, 0 B."
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Options"
+msgstr "Možnosti"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Filter"
+msgstr "Filtr"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Action"
+msgstr "Akce"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Directories"
+msgstr "Adresáře"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Dupes Only"
+msgstr "Jen duplicity"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Delta"
+msgstr "Delta"
+
+#: cocoa/base/en.lproj/ResultWindow.strings:0
+msgid "Menu"
+msgstr "Menu"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+msgid "dupeGuru Preferences"
+msgstr "Předvolby dupeGuru"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "More results"
+msgstr "Více výsledků"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Fewer results"
+msgstr "Méně výsledků"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Filter hardness:"
+msgstr "Tvrdost filtru:"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Scan type:"
+msgstr "Typ prohledávání:"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+msgid "Content"
+msgstr "Obsah"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Automatically check for updates"
+msgstr "Automaticky kontrolovat aktualizace"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+msgid "Ignore files smaller than:"
+msgstr "Ignorovat soubory menší než:"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Basic"
+msgstr "Základní"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+#: cocoa/me/en.lproj/Preferences.strings:0
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "Advanced"
+msgstr "Pokročilé"
+
+#: cocoa/se/en.lproj/Preferences.strings:0
+msgid "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):"
+
+#: cocoa/me/en.lproj/Preferences.strings:0
+msgid "dupeGuru ME Preferences"
+msgstr "Předvolby dupeGuru ME"
+
+#: cocoa/me/en.lproj/Preferences.strings:0
+msgid "Audio Content"
+msgstr "Zvuk"
+
+#: cocoa/me/en.lproj/Preferences.strings:0
+msgid "Remove empty folders after delete and move"
+msgstr "Po smazání a přesunu odstranit prázdné složky"
+
+#: cocoa/pe/en.lproj/Preferences.strings:0
+msgid "dupeGuru PE Preferences"
+msgstr "Předvolby dupeGuru PE"

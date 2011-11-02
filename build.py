@@ -29,8 +29,10 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
-    parser.add_option('--locpot', action='store_true', dest='locpot',
+    parser.add_option('--updatepot', action='store_true', dest='updatepot',
         help="Generate .pot files from source code.")
+    parser.add_option('--mergepot', action='store_true', dest='mergepot',
+        help="Update all .po files based on .pot files.")
     (options, args) = parser.parse_args()
     return options
 
@@ -119,7 +121,7 @@ def build_localizations(ui, edition):
         loc.compile_all_po(op.join('qtlib', 'locale'))
         loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
 
-def build_locpot():
+def build_updatepot():
     print("Building .pot files from source files")
     print("Building core.pot")
     all_cores = ['core', 'core_se', 'core_me', 'core_pe']
@@ -132,6 +134,16 @@ def build_locpot():
     loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
+    print("Enhancing ui.pot with Cocoa's strings files")
+    loc.allstrings2pot(op.join('cocoa', 'base', 'en.lproj'), op.join('locale', 'ui.pot'),
+        excludes={'core', 'message', 'columns'})
+    loc.allstrings2pot(op.join('cocoa', 'se', 'en.lproj'), op.join('locale', 'ui.pot'))
+    loc.allstrings2pot(op.join('cocoa', 'me', 'en.lproj'), op.join('locale', 'ui.pot'))
+    loc.allstrings2pot(op.join('cocoa', 'pe', 'en.lproj'), op.join('locale', 'ui.pot'))
+
+def build_mergepot():
+    print("Updating .po files using .pot files")
+    loc.merge_pots_into_pos('locale')
 
 def build_pe_modules(ui):
     print("Building PE Modules")
@@ -187,8 +199,10 @@ def main():
         build_help(edition)
     elif options.loc:
         build_localizations(ui, edition)
-    elif options.locpot:
-        build_locpot()
+    elif options.updatepot:
+        build_updatepot()
+    elif options.mergepot:
+        build_mergepot()
     else:
         build_normal(edition, ui, dev)
 

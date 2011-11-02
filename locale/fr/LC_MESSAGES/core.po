@@ -1,14 +1,15 @@
-
+# 
 msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: core/app.py:86
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
 #: core/app.py:192
-msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
+msgid ""
+"You cannot delete, move or copy more than 10 duplicates at once in demo "
+"mode."
 msgstr ""
 
 #: core/app.py:420
@@ -118,4 +119,3 @@ msgstr "Vérifié %d/%d paires"
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
-

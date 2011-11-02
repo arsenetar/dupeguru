@@ -4,80 +4,80 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: core/prioritize.py:63 core_me/app.py:28 core_pe/app.py:33 core_se/app.py:24
 msgid "Kind"
-msgstr "Type"
+msgstr ""
 
 #: core/prioritize.py:72 core_me/app.py:23 core_pe/app.py:31 core_se/app.py:22
 msgid "Folder"
-msgstr "Dossier"
+msgstr ""
 
 #: core/prioritize.py:88 core_me/app.py:22 core_pe/app.py:30 core_se/app.py:21
 msgid "Filename"
-msgstr "Nom de fichier"
+msgstr ""
 
 #: core/prioritize.py:132
 msgid "Size"
-msgstr "Taille"
+msgstr ""
 
 #: core/prioritize.py:138 core_me/app.py:29 core_pe/app.py:35
 #: core_se/app.py:25
 msgid "Modification"
-msgstr "Modification"
+msgstr ""
 
 #: core_me/app.py:24
 msgid "Size (MB)"
-msgstr "Taille (MB)"
+msgstr ""
 
 #: core_me/app.py:25
 msgid "Time"
-msgstr "Temps"
+msgstr ""
 
 #: core_me/app.py:26 core_me/prioritize.py:22
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr ""
 
 #: core_me/app.py:27
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr ""
 
 #: core_me/app.py:30
 msgid "Title"
-msgstr "Titre"
+msgstr ""
 
 #: core_me/app.py:31
 msgid "Artist"
-msgstr "Artiste"
+msgstr ""
 
 #: core_me/app.py:32
 msgid "Album"
-msgstr "Album"
+msgstr ""
 
 #: core_me/app.py:33
 msgid "Genre"
-msgstr "Genre"
+msgstr ""
 
 #: core_me/app.py:34
 msgid "Year"
-msgstr "Année"
+msgstr ""
 
 #: core_me/app.py:35
 msgid "Track Number"
-msgstr "Track"
+msgstr ""
 
 #: core_me/app.py:36
 msgid "Comment"
-msgstr "Commentaire"
+msgstr ""
 
 #: core_me/app.py:37 core_pe/app.py:36 core_se/app.py:26
 msgid "Match %"
-msgstr "Match %"
+msgstr ""
 
 #: core_me/app.py:38 core_se/app.py:27
 msgid "Words Used"
-msgstr "Mots"
+msgstr ""
 
 #: core_me/app.py:39 core_pe/app.py:37 core_se/app.py:28
 msgid "Dupe Count"
-msgstr "# Doublons"
+msgstr ""
 
 #: core_me/prioritize.py:16
 msgid "Duration"
@@ -89,8 +89,8 @@ msgstr ""
 
 #: core_pe/app.py:32 core_se/app.py:23
 msgid "Size (KB)"
-msgstr "Taille (KB)"
+msgstr ""
 
 #: core_pe/app.py:34 core_pe/prioritize.py:16
 msgid "Dimensions"
-msgstr "Dimensions"
+msgstr ""
