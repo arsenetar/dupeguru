@@ -71,6 +71,7 @@
 		CE84C9B91423AE410050A6AD /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE84C9B61423AE410050A6AD /* HSPopUpList.m */; };
 		CE84C9BA1423AE410050A6AD /* HSSelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE84C9B81423AE410050A6AD /* HSSelectableList.m */; };
 		CE84C9BD1423AF200050A6AD /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE84C9BB1423AF200050A6AD /* PrioritizeDialog.xib */; };
+		CEA14F431461ED63007F01A5 /* locale in Resources */ = {isa = PBXBuildFile; fileRef = CEA14F421461ED63007F01A5 /* locale */; };
 		CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB14D28124DFC2800FA7481 /* ResultTable.m */; };
 		CEB5E07813225C89009F521D /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB5E07613225C89009F521D /* ExtraFairwareReminder.m */; };
 		CEB5E07D13225CA2009F521D /* ExtraFairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB5E07B13225CA2009F521D /* ExtraFairwareReminder.xib */; };
@@ -225,6 +226,7 @@
 		CE84C9B71423AE410050A6AD /* HSSelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSelectableList.h; sourceTree = "<group>"; };
 		CE84C9B81423AE410050A6AD /* HSSelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSelectableList.m; sourceTree = "<group>"; };
 		CE84C9BC1423AF200050A6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CEA14F421461ED63007F01A5 /* locale */ = {isa = PBXFileReference; lastKnownFileType = folder; name = locale; path = ../../build/locale; sourceTree = "<group>"; };
 		CEB14D26124DFC2800FA7481 /* PyResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyResultTable.h; path = ../base/PyResultTable.h; sourceTree = SOURCE_ROOT; };
 		CEB14D27124DFC2800FA7481 /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
 		CEB14D28124DFC2800FA7481 /* ResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultTable.m; path = ../base/ResultTable.m; sourceTree = SOURCE_ROOT; };
@@ -349,6 +351,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEA14F421461ED63007F01A5 /* locale */,
 				CE073F5409CAE1A3005C1D2F /* help */,
 				CE381CF509915304003581CE /* dg_cocoa.plugin */,
 				CEFC294309C89E0000D9F998 /* images */,
@@ -609,6 +612,7 @@
 				CE84C9BD1423AF200050A6AD /* PrioritizeDialog.xib in Resources */,
 				CEC481F21423FBC600034F91 /* columns.strings in Resources */,
 				CE57FB2C142B7E17005B5F83 /* message.strings in Resources */,
+				CEA14F431461ED63007F01A5 /* locale in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

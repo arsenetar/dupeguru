@@ -4,8 +4,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.trans import install_cocoa_trans
-install_cocoa_trans()
+from hscommon.trans import install_gettext_trans_under_cocoa
+install_gettext_trans_under_cocoa()
 
 from hscommon.cocoa import signature
 
