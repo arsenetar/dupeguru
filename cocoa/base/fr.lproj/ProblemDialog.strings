@@ -3,7 +3,6 @@
 "1.title" = "Problèmes!";
 
 /* Class = "NSTextFieldCell"; title = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results."; ObjectID = "4"; */
-"4.title" = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results.";
 "4.title" = "Il y a eu des problèmes lors du traitement de certain (ou tous) fichiers. La cause de ces problèmes est décrite ci-dessous. Ces fichiers n'ont pas été enlevés des résultats.";
 
 /* Class = "NSTableColumn"; headerCell.title = "File Path"; ObjectID = "10"; */

@@ -69,7 +69,7 @@
 "42.placeholderString" = "Filter";
 
 /* Class = "NSSegmentedCell"; 44.ibShadowedLabels[0] = "Details"; ObjectID = "44"; */
-"44.ibShadowedLabels[0]" = "Details";
+"44.ibShadowedLabels[0]" = "详细说明";
 
 /* Class = "NSSegmentedCell"; 44.ibShadowedLabels[1] = "Dupes Only"; ObjectID = "44"; */
 "44.ibShadowedLabels[1]" = "Dupes Only";

@@ -77,6 +77,9 @@
 /* Class = "NSSegmentedCell"; 44.ibShadowedLabels[2] = "Delta"; ObjectID = "44"; */
 "44.ibShadowedLabels[2]" = "Delta";
 
+/* Class = "NSMenu"; title = "Menu"; ObjectID = "67"; */
+"67.title" = "Menu";
+
 /* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "68"; */
 "68.title" = "Ajouter sélectionnés à la liste de fichiers ignorés";
 

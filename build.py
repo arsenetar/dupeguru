@@ -114,6 +114,17 @@ def build_localizations(ui, edition):
     loc.compile_all_po(op.join('hscommon', 'locale'))
     loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
     if ui == 'cocoa':
+        print("Creating lproj folders based on .po files")
+        enlproj = op.join('cocoa', 'base', 'en.lproj')
+        for lang in loc.get_langs('locale'):
+            if lang == 'en':
+                continue
+            pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
+            dest_lproj = op.join('cocoa', 'base', lang + '.lproj')
+            loc.po2allxibstrings(pofile, enlproj, dest_lproj)
+            loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
+            pofile = op.join('locale', lang, 'LC_MESSAGES', 'columns.po')
+            loc.po2strings(pofile, op.join(enlproj, 'columns.strings'), op.join(dest_lproj, 'columns.strings'))
         build_all_cocoa_locs('cocoalib')
         build_all_cocoa_locs(op.join('cocoa', 'base'))
         build_all_cocoa_locs(op.join('cocoa', edition))
