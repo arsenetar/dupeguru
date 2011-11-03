@@ -27,7 +27,3 @@
 
 "IPhotoAppNotFoundMsg" = "Nelze najít aplikaci iPhoto.";
 "ClearPictureCacheConfirmMsg" = "Opravdu chcete odstranit veškeré uložené analýzy snímků?";
-
-/* hscommon */
-"FairwarePromptMsg" = "{name} is Fairware, which means \"open source software developed with expectation of fair contributions from users\". Hours have been invested in this software with the expectation that users will be fair enough to compensate them. The \"Unpaid hours\" figure you see below is the hours that have yet to be compensated for this project.\n\nIf you like this application, please make a contribution that you consider fair. Thanks!\n\nIf you cannot afford to contribute, you can either ignore this reminder or send an e-mail at support@hardcoded.net so I can send you a registration key.\n\nThis dialog doesn't show when there are no unpaid hours or when you have a valid contribution key.";
-"DemoPromptMsg" = "{name} je fairware, což znamená \"open source software vyvíjený v očekávání poctivých příspěvků od uživatelů\". Jde o velmi zajímavý nápad, a po roce se ukazuje, že většina lidí se zajímá o cenu vývoje, ale jsou jim ukradené povídačky o duševním vlastnictví.\n\nTakže vás nebudu otravovat a řeknu to bez okolků: {name} si můžete zdarma vyzkoušet, ale pokud ho chcete používat bez omezení, musíte si ho koupit. V demo režimu, {name} {limitation}.\n\nA to je celé. Pokud se o fairware chcete dozvědět více, klepněte na tlačítko \"Fairware?\".";

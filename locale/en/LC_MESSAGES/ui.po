@@ -26,7 +26,7 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: qt/base/app.py:104 qt/base/preferences_dialog.py:122
+#: qt/base/app.py:104 qt/base/preferences_dialog.py:129
 msgid "Preferences"
 msgstr ""
 
@@ -261,78 +261,78 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:34
+#: qt/base/preferences_dialog.py:43
 msgid "Scan Type:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:47
+#: qt/base/preferences_dialog.py:56
 msgid "Filter Hardness:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:73
+#: qt/base/preferences_dialog.py:82
 msgid "More Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:78
+#: qt/base/preferences_dialog.py:87
 msgid "Fewer Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:85 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:94 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:98
 msgid "Language:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:91
+#: qt/base/preferences_dialog.py:21
 msgid "English"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:92
+#: qt/base/preferences_dialog.py:22
 msgid "French"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:93
+#: qt/base/preferences_dialog.py:23
 msgid "German"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:94
+#: qt/base/preferences_dialog.py:24
 msgid "Chinese (Simplified)"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:97 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:100 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:101 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:105 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:112 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:185
+#: qt/base/preferences_dialog.py:190
 msgid "NeedsToRestartToApplyLangMsg"
 msgstr "dupeGuru has to restart for language changes to take effect."
 
@@ -973,4 +973,8 @@ msgstr ""
 
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:25
+msgid "Czech"
 msgstr ""

@@ -27,7 +27,3 @@
 
 "IPhotoAppNotFoundMsg" = "The iPhoto application couldn't be found.";
 "ClearPictureCacheConfirmMsg" = "确定要移除所有缓存图片?";
-
-/* hscommon */
-"FairwarePromptMsg" = "{name} 是一款捐助软件,也就是说 \"用户对研发开源软件所花费的时间进行符合用户意愿的捐助\"。用户可以根据研发人员花费在开发软件上的时间进行合理的补偿。用户在下面看到的 \"未支付的时间\" (Unpaid hours)表示需要对该软件进行补偿的时间。\n\n如果您喜欢这款软件，我诚挚的希望您可以进行必要的捐助。谢谢！\n\n如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。\n\n当软件没有未支付的时间或您已使用一个有效的注册密钥，此对话框将不会再显示。";
-"DemoPromptMsg" = "{name} is fairware, which means \"open source software developed with expectation of fair contributions from users\". It's a very interesting concept, but one year of fairware has shown that most people just want to know how much it costs and not be bothered with theories about intellectual property.\n\nSo I won't bother you and will be very straightforward: You can try {name} for free but you have to buy it in order to use it without limitations. In demo mode, {name} {limitation}.\n\nSo it's as simple as this. If you're curious about fairware, however, I encourage you to read more about it by clicking on the \"Fairware?\" button.";
