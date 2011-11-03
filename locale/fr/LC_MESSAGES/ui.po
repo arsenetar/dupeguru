@@ -163,7 +163,7 @@ msgstr "Charger résultats récents"
 
 #: qt/base/directories_dialog.py:106
 msgid "SelectFolderToScanMsg"
-msgstr "Sélectionnez les dossiers à scanner puis faites &quot;Scan&quot;."
+msgstr "Sélectionnez les dossiers à scanner puis faites \"Scan\"."
 
 #: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
