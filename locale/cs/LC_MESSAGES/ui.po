@@ -70,7 +70,7 @@ msgstr ""
 
 #: qt/base/app.py:147
 msgid "SelectCopyOrMoveDestinationMsg"
-msgstr ""
+msgstr "Select a directory to {} marked files to"
 
 #: qt/base/app.py:159 qt/base/result_window.py:322
 msgid "Remove duplicates"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: qt/base/app.py:210
 msgid "OperationSuccessMsg"
-msgstr ""
+msgstr "All files were processed successfully."
 
 #: qt/base/app.py:211
 msgid "Operation Complete"
@@ -165,7 +165,7 @@ msgstr "Nahrát nedávné výsledky"
 
 #: qt/base/directories_dialog.py:106
 msgid "SelectFolderToScanMsg"
-msgstr ""
+msgstr "Select folders to scan and press \"Scan\"."
 
 #: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
@@ -238,10 +238,20 @@ msgstr "Je mi líto, musím na tom trvat"
 #: qt/base/extra_fairware_reminder.py:41
 msgid "ExtraFairwarePromptMsg"
 msgstr ""
+"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
+"\n"
+"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
+"\n"
+"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 
 #: qt/base/extra_fairware_reminder.py:45
 msgid "ExtraFairwareReasonMsg"
 msgstr ""
+"This reminder showed up because:\n"
+"\n"
+"1. You are processing more than 100 duplicates\n"
+"2. You have not yet contributed to dupeGuru\n"
+"3. There are unpaid hours in the project"
 
 #: qt/base/extra_fairware_reminder.py:56
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
@@ -325,7 +335,7 @@ msgstr "Uživatelský příkaz (argumenty: %d pro duplicity, %r pro odkazy):"
 
 #: qt/base/preferences_dialog.py:185
 msgid "NeedsToRestartToApplyLangMsg"
-msgstr ""
+msgstr "dupeGuru has to restart for language changes to take effect."
 
 #: qt/base/prioritize_dialog.py:71
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
@@ -350,6 +360,9 @@ msgstr "Problémy!"
 #: qt/base/problem_dialog.py:38
 msgid "ProblemsDuringProcessingMsg"
 msgstr ""
+"There were problems processing some (or all) of the files. The cause of "
+"these problems are described in the table below. Those files were not "
+"removed from your results."
 
 #: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
@@ -512,10 +525,11 @@ msgstr ""
 #: qt/base/result_window.py:231
 msgid "TypeFilterMsg"
 msgstr ""
+"Type the filter you want to apply on your results. See help for details."
 
 #: qt/base/result_window.py:247
 msgid "NothingToClearMsg"
-msgstr ""
+msgstr "Nothing to clear."
 
 #: qt/base/result_window.py:249
 msgid "ClearIgnoreListConfirmMsg"
@@ -523,7 +537,7 @@ msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
 
 #: qt/base/result_window.py:252
 msgid "IgnoreListClearedMsg"
-msgstr ""
+msgstr "Ignore list cleared."
 
 #: qt/base/result_window.py:261
 msgid "Delete duplicates"
@@ -667,7 +681,7 @@ msgstr "Opravdu chcete odstranit veškeré uložené analýzy snímků?"
 
 #: qt/pe/result_window.py:29
 msgid "PictureCacheClearedMsg"
-msgstr ""
+msgstr "Picture cache cleared."
 
 #: qt/se/preferences_dialog.py:41 cocoa/se/en.lproj/Preferences.strings:0
 msgid "Folders"

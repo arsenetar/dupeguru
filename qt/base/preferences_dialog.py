@@ -16,6 +16,15 @@ from qtlib.util import horizontalWrap
 
 tr = trget('ui')
 
+SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs']
+LANGNAMES = {
+    'en': tr("English"), 
+    'fr': tr("French"), 
+    'de': tr("German"), 
+    'zh_CN': tr("Chinese (Simplified)"), 
+    'cs': tr("Czech"),
+}
+
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
@@ -88,10 +97,8 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addLayout(horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None]))
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
-        self.languageComboBox.addItem(tr("English"))
-        self.languageComboBox.addItem(tr("French"))
-        self.languageComboBox.addItem(tr("German"))
-        self.languageComboBox.addItem(tr("Chinese (Simplified)"))
+        for lang in SUPPORTED_LANGUAGES:
+            self.languageComboBox.addItem(LANGNAMES[lang])
         self.widgetsVLayout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
@@ -156,11 +163,10 @@ class PreferencesDialogBase(QDialog):
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
         self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-        langindex = {
-            'fr': 1,
-            'de': 2,
-            'zh_CN': 3
-        }.get(self.app.prefs.language, 0)
+        try:
+            langindex = SUPPORTED_LANGUAGES.index(self.app.prefs.language)
+        except ValueError:
+            langindex = 0
         self.languageComboBox.setCurrentIndex(langindex)
         self._load(prefs, setchecked)
     
@@ -176,10 +182,9 @@ class PreferencesDialogBase(QDialog):
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
-        langs = ['en', 'fr', 'de', 'zh_CN']
-        lang = langs[self.languageComboBox.currentIndex()]
+        lang = SUPPORTED_LANGUAGES[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
-        if oldlang not in langs:
+        if oldlang not in SUPPORTED_LANGUAGES:
             oldlang = 'en'
         if lang != oldlang:
             QMessageBox.information(self, "", tr("NeedsToRestartToApplyLangMsg"))
