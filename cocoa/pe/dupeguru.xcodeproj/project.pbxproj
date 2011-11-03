@@ -28,7 +28,6 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE381D0509915304003581CE /* dg_cocoa.plugin in Resources */ = {isa = PBXBuildFile; fileRef = CE381CF509915304003581CE /* dg_cocoa.plugin */; };
-		CE4527AC12E5F6E700005A15 /* core.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4527AA12E5F6E700005A15 /* core.strings */; };
 		CE4C3D1A142B7CC000DD438A /* message.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4C3D15142B7CC000DD438A /* message.strings */; };
 		CE54EB8D1423FBA200E3383A /* columns.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE54EB881423FBA200E3383A /* columns.strings */; };
 		CE60180812DF3EA900236FDC /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60180712DF3EA900236FDC /* HSRecentFiles.m */; };
@@ -138,8 +137,6 @@
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE381CF509915304003581CE /* dg_cocoa.plugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dg_cocoa.plugin; sourceTree = SOURCE_ROOT; };
-		CE4527AB12E5F6E700005A15 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/core.strings; sourceTree = SOURCE_ROOT; };
-		CE4527B012E5F72600005A15 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/core.strings; sourceTree = SOURCE_ROOT; };
 		CE4C3D16142B7CC000DD438A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/message.strings; sourceTree = "<group>"; };
 		CE4C3D17142B7CC000DD438A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/message.strings; sourceTree = "<group>"; };
 		CE4C3D18142B7CC000DD438A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/message.strings; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 		CE653CEB14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/about.xib; sourceTree = "<group>"; };
 		CE653CEC14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CE653CED14169F140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../zh_CN.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
-		CE653CF214169F2C0058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/core.strings; sourceTree = "<group>"; };
 		CE653CF314169F2C0058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE653CF61416A0140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
 		CE653CF71416A0140058A022 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
@@ -168,7 +164,6 @@
 		CE68EE6509ABC48000971085 /* DirectoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = DirectoryPanel.h; sourceTree = SOURCE_ROOT; };
 		CE68EE6609ABC48000971085 /* DirectoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = DirectoryPanel.m; sourceTree = SOURCE_ROOT; };
 		CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../base/dsa_pub.pem; sourceTree = "<group>"; };
-		CE7358061406ABF700F3F6DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/core.strings; sourceTree = "<group>"; };
 		CE7358071406ABF700F3F6DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE78759D13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CE78759E13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ExtraFairwareReminder.xib; sourceTree = SOURCE_ROOT; };
@@ -256,7 +251,6 @@
 		CEEE156F1460325B00783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
 		CEEE15701460325B00783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
 		CEEE15751460327300783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/columns.strings; sourceTree = "<group>"; };
-		CEEE15761460327300783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/core.strings; sourceTree = "<group>"; };
 		CEEE15771460327300783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEEE15781460327300783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/message.strings; sourceTree = "<group>"; };
 		CEEE15841460328400783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
@@ -362,7 +356,6 @@
 				CE0533A912E5DA6A0029EF25 /* Localizable.strings */,
 				CE54EB881423FBA200E3383A /* columns.strings */,
 				CE4C3D15142B7CC000DD438A /* message.strings */,
-				CE4527AA12E5F6E700005A15 /* core.strings */,
 				CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */,
 			);
 			name = Resources;
@@ -609,7 +602,6 @@
 				CE0533A712E5DA4D0029EF25 /* DetailsPanel.xib in Resources */,
 				CE0533A812E5DA4D0029EF25 /* Preferences.xib in Resources */,
 				CE0533AB12E5DA6A0029EF25 /* Localizable.strings in Resources */,
-				CE4527AC12E5F6E700005A15 /* core.strings in Resources */,
 				CE2A29F713213BFB005899AC /* ExtraFairwareReminder.xib in Resources */,
 				CECB2AC513D867AD0081E295 /* about.xib in Resources */,
 				CECB2AC613D867AD0081E295 /* ErrorReportWindow.xib in Resources */,
@@ -778,18 +770,6 @@
 				CEEE15851460328400783E91 /* cs */,
 			);
 			name = ExtraFairwareReminder.xib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE4527AA12E5F6E700005A15 /* core.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE4527AB12E5F6E700005A15 /* en */,
-				CE4527B012E5F72600005A15 /* fr */,
-				CE7358061406ABF700F3F6DA /* de */,
-				CE653CF214169F2C0058A022 /* zh_CN */,
-				CEEE15761460327300783E91 /* cs */,
-			);
-			name = core.strings;
 			sourceTree = SOURCE_ROOT;
 		};
 		CE4C3D15142B7CC000DD438A /* message.strings */ = {
