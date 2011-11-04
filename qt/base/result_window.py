@@ -228,7 +228,7 @@ class ResultWindow(QMainWindow):
     
     def applyFilterTriggered(self):
         title = tr("Apply Filter")
-        msg = tr("TypeFilterMsg")
+        msg = tr("Type the filter you want to apply on your results. See help for details.")
         text = nonone(self._last_filter, '[*]')
         answer, ok = QInputDialog.getText(self, title, msg, QLineEdit.Normal, text)
         if not ok:
@@ -244,12 +244,12 @@ class ResultWindow(QMainWindow):
         title = tr("Clear Ignore List")
         count = len(self.app.model.scanner.ignore_list)
         if not count:
-            QMessageBox.information(self, title, tr("NothingToClearMsg"))
+            QMessageBox.information(self, title, tr("Nothing to clear."))
             return
         msg = tr("Do you really want to remove all %d items from the ignore list?") % count
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.model.scanner.ignore_list.Clear()
-            QMessageBox.information(self, title, tr("IgnoreListClearedMsg"))
+            QMessageBox.information(self, title, tr("Ignore list cleared."))
     
     def copyTriggered(self):
         self.app.copy_or_move_marked(True)

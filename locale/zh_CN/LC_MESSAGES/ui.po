@@ -67,7 +67,7 @@ msgid "move"
 msgstr "移动"
 
 #: qt/base/app.py:147
-msgid "SelectCopyOrMoveDestinationMsg"
+msgid "Select a directory to {} marked files to"
 msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
 #: qt/base/app.py:159 qt/base/result_window.py:322
@@ -87,7 +87,7 @@ msgid "Custom Command"
 msgstr "自定义命令"
 
 #: qt/base/app.py:210
-msgid "OperationSuccessMsg"
+msgid "All files were processed successfully."
 msgstr "所有文件已成功处理。"
 
 #: qt/base/app.py:211
@@ -159,7 +159,7 @@ msgid "Load Recent Results"
 msgstr "载入最近的结果"
 
 #: qt/base/directories_dialog.py:106
-msgid "SelectFolderToScanMsg"
+msgid "Select folders to scan and press \"Scan\"."
 msgstr "请选择要扫描的文件夹，然后点击 \"扫描\"。"
 
 #: qt/base/directories_dialog.py:135
@@ -231,7 +231,12 @@ msgid "Sorry, I must insist"
 msgstr "抱歉,现在仍要继续"
 
 #: qt/base/extra_fairware_reminder.py:41
-msgid "ExtraFairwarePromptMsg"
+msgid ""
+"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
+"\n"
+"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
+"\n"
+"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 msgstr ""
 "看起来似乎您找到了很多重复文件。这也是我继续精进这个软件的动力之一。然而，我衷心的希望能够得到您的捐助，因为我会日夜奋战于这个软件并且没有任何报酬。\n"
 "    \n"
@@ -240,7 +245,12 @@ msgstr ""
 "如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。"
 
 #: qt/base/extra_fairware_reminder.py:45
-msgid "ExtraFairwareReasonMsg"
+msgid ""
+"This reminder showed up because:\n"
+"\n"
+"1. You are processing more than 100 duplicates\n"
+"2. You have not yet contributed to dupeGuru\n"
+"3. There are unpaid hours in the project"
 msgstr ""
 "此提醒框弹出的原因如下:\n"
 "\n"
@@ -329,7 +339,7 @@ msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "自定义命令 (参数: %d 指重复文件, %r 指参照文件):"
 
 #: qt/base/preferences_dialog.py:191
-msgid "NeedsToRestartToApplyLangMsg"
+msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru将重新启动以使语言修改生效。"
 
 #: qt/base/prioritize_dialog.py:71
@@ -353,7 +363,10 @@ msgid "Problems!"
 msgstr "有问题!"
 
 #: qt/base/problem_dialog.py:38
-msgid "ProblemsDuringProcessingMsg"
+msgid ""
+"There were problems processing some (or all) of the files. The cause of "
+"these problems are described in the table below. Those files were not "
+"removed from your results."
 msgstr "在处理部分或全部文件时发现问题。产生问题的原因在下表中进行描述。这些文件将不会从结果中移除。"
 
 #: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
@@ -515,11 +528,11 @@ msgid "{} Results"
 msgstr "{} (结果)"
 
 #: qt/base/result_window.py:231
-msgid "TypeFilterMsg"
+msgid "Type the filter you want to apply on your results. See help for details."
 msgstr "请输入筛选条件以应用到结果。详见帮助文档。"
 
 #: qt/base/result_window.py:247
-msgid "NothingToClearMsg"
+msgid "Nothing to clear."
 msgstr "无需清空。"
 
 #: qt/base/result_window.py:249
@@ -527,7 +540,7 @@ msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "确定要从忽略列表中移除 %d 项吗?"
 
 #: qt/base/result_window.py:252
-msgid "IgnoreListClearedMsg"
+msgid "Ignore list cleared."
 msgstr "忽略列表已清空。"
 
 #: qt/base/result_window.py:261
@@ -669,7 +682,7 @@ msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "确定要移除所有缓存图片?"
 
 #: qt/pe/result_window.py:29
-msgid "PictureCacheClearedMsg"
+msgid "Picture cache cleared."
 msgstr "图片缓存已清空。"
 
 #: qt/se/preferences_dialog.py:41 cocoa/se/en.lproj/Preferences.strings:0
@@ -1006,7 +1019,7 @@ msgid "Talking to iPhoto. Don't touch it!"
 msgstr ""
 
 #: cocoa/inter/app_pe.py:196
-msgid "IPhotoAppNotFoundMsg"
+msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
 
 #: qt/base/preferences_dialog.py:26

@@ -428,7 +428,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.results.groups = self.scanner.GetDupeGroups(files, j)
         
         if not self.directories.has_any_file():
-            self.view.show_message(tr("NoScannableFileMsg"))
+            self.view.show_message(tr("The selected directories contain no scannable file."))
             return
         self.results.groups = []
         self._results_changed()

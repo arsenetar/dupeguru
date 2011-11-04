@@ -69,7 +69,7 @@ msgid "move"
 msgstr ""
 
 #: qt/base/app.py:147
-msgid "SelectCopyOrMoveDestinationMsg"
+msgid "Select a directory to {} marked files to"
 msgstr "Select a directory to {} marked files to"
 
 #: qt/base/app.py:159 qt/base/result_window.py:322
@@ -89,7 +89,7 @@ msgid "Custom Command"
 msgstr ""
 
 #: qt/base/app.py:210
-msgid "OperationSuccessMsg"
+msgid "All files were processed successfully."
 msgstr "All files were processed successfully."
 
 #: qt/base/app.py:211
@@ -163,7 +163,7 @@ msgid "Load Recent Results"
 msgstr ""
 
 #: qt/base/directories_dialog.py:106
-msgid "SelectFolderToScanMsg"
+msgid "Select folders to scan and press \"Scan\"."
 msgstr "Select folders to scan and press \"Scan\"."
 
 #: qt/base/directories_dialog.py:135
@@ -235,7 +235,12 @@ msgid "Sorry, I must insist"
 msgstr ""
 
 #: qt/base/extra_fairware_reminder.py:41
-msgid "ExtraFairwarePromptMsg"
+msgid ""
+"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
+"\n"
+"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
+"\n"
+"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 msgstr ""
 "It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
 "\n"
@@ -244,7 +249,12 @@ msgstr ""
 "If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 
 #: qt/base/extra_fairware_reminder.py:45
-msgid "ExtraFairwareReasonMsg"
+msgid ""
+"This reminder showed up because:\n"
+"\n"
+"1. You are processing more than 100 duplicates\n"
+"2. You have not yet contributed to dupeGuru\n"
+"3. There are unpaid hours in the project"
 msgstr ""
 "This reminder showed up because:\n"
 "\n"
@@ -333,7 +343,7 @@ msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 
 #: qt/base/preferences_dialog.py:191
-msgid "NeedsToRestartToApplyLangMsg"
+msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru has to restart for language changes to take effect."
 
 #: qt/base/prioritize_dialog.py:71
@@ -354,7 +364,10 @@ msgid "Problems!"
 msgstr ""
 
 #: qt/base/problem_dialog.py:38
-msgid "ProblemsDuringProcessingMsg"
+msgid ""
+"There were problems processing some (or all) of the files. The cause of "
+"these problems are described in the table below. Those files were not "
+"removed from your results."
 msgstr ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
@@ -519,12 +532,12 @@ msgid "{} Results"
 msgstr ""
 
 #: qt/base/result_window.py:231
-msgid "TypeFilterMsg"
+msgid "Type the filter you want to apply on your results. See help for details."
 msgstr ""
 "Type the filter you want to apply on your results. See help for details."
 
 #: qt/base/result_window.py:247
-msgid "NothingToClearMsg"
+msgid "Nothing to clear."
 msgstr "Nothing to clear."
 
 #: qt/base/result_window.py:249
@@ -532,7 +545,7 @@ msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Do you really want to remove all %d items from the ignore list?"
 
 #: qt/base/result_window.py:252
-msgid "IgnoreListClearedMsg"
+msgid "Ignore list cleared."
 msgstr "Ignore list cleared."
 
 #: qt/base/result_window.py:261
@@ -676,7 +689,7 @@ msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Do you really want to remove all your cached picture analysis?"
 
 #: qt/pe/result_window.py:29
-msgid "PictureCacheClearedMsg"
+msgid "Picture cache cleared."
 msgstr "Picture cache cleared."
 
 #: qt/se/preferences_dialog.py:41 cocoa/se/en.lproj/Preferences.strings:0
@@ -1000,7 +1013,7 @@ msgid "Talking to iPhoto. Don't touch it!"
 msgstr ""
 
 #: cocoa/inter/app_pe.py:196
-msgid "IPhotoAppNotFoundMsg"
+msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
 
 #: qt/base/preferences_dialog.py:26

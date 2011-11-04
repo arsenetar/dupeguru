@@ -17,7 +17,7 @@ msgid "Collecting files to scan"
 msgstr "Raccolta file da scansionare"
 
 #: core/app.py:431
-msgid "NoScannableFileMsg"
+msgid "The selected directories contain no scannable file."
 msgstr "Le cartelle selezionate non contengono file da scansionare."
 
 #: core/app.py:470

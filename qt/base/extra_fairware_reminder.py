@@ -38,11 +38,26 @@ class ExtraFairwareReminder(QDialog):
         self.resize(380, dlg_height)
         self.verticalLayout = QVBoxLayout(self)
         self.descLabel = QLabel(self)        
-        self.descLabel.setText(tr("ExtraFairwarePromptMsg"))
+        msg = tr("It seems that you found a lot of duplicates. Nice! I must insist, however, that "
+            "contributions are expected when there are unpaid hours on the project.\n"
+            "\n"
+            "You might think \"but I'm only going to use this once, I don't have to contribute\". "
+            "The problem is that most people use dupeGuru only once in a while. If everyone thinks "
+            "like that, dupeGuru development cannot be funded. It's because of this tendency "
+            "inherent to dupeGuru's nature that I have to insist here.\n"
+            "\n"
+            "If you can't afford to contribute, you can ignore this reminder or send me an e-mail "
+            "at hsoft@hardcoded.net so I can give you a key to remove this reminder.")
+        self.descLabel.setText(msg)
         self.descLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.descLabel)
         self.reasonLabel = QLabel(self)        
-        self.reasonLabel.setText(tr("ExtraFairwareReasonMsg"))
+        msg = tr("This reminder showed up because:\n"
+            "\n"
+            "1. You are processing more than 100 duplicates\n"
+            "2. You have not yet contributed to dupeGuru\n"
+            "3. There are unpaid hours in the project")
+        self.reasonLabel.setText(msg)
         self.reasonLabel.setWordWrap(True)
         font = QFont()
         font.setWeight(75)

@@ -35,7 +35,10 @@ class ProblemDialog(QDialog):
         self.resize(413, 323)
         self.verticalLayout = QVBoxLayout(self)
         self.label = QLabel(self)
-        self.label.setText(tr("ProblemsDuringProcessingMsg"))
+        msg = tr("There were problems processing some (or all) of the files. The cause of "
+            "these problems are described in the table below. Those files were not "
+            "removed from your results.")
+        self.label.setText(msg)
         self.label.setWordWrap(True)
         self.verticalLayout.addWidget(self.label)
         self.tableView = QTableView(self)

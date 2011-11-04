@@ -193,7 +193,7 @@ class DupeGuruPE(DupeGuruBase):
             try:
                 app('iPhoto')
             except ApplicationNotFoundError:
-                self.view.show_message(tr("IPhotoAppNotFoundMsg"))
+                self.view.show_message(tr("The iPhoto application couldn't be found."))
                 return
         DupeGuruBase.start_scanning(self)
     

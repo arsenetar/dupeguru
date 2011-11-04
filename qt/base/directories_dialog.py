@@ -103,7 +103,7 @@ class DirectoriesDialog(QMainWindow):
         self.resize(420, 338)
         self.centralwidget = QWidget(self)
         self.verticalLayout = QVBoxLayout(self.centralwidget)
-        self.promptLabel = QLabel(tr("SelectFolderToScanMsg"), self.centralwidget)
+        self.promptLabel = QLabel(tr("Select folders to scan and press \"Scan\"."), self.centralwidget)
         self.verticalLayout.addWidget(self.promptLabel)
         self.treeView = QTreeView(self.centralwidget)
         self.treeView.setItemDelegate(self.directoriesDelegate)

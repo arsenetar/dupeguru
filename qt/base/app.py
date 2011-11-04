@@ -144,7 +144,7 @@ class DupeGuru(QObject):
     
     def copy_or_move_marked(self, copy):
         opname = tr("copy") if copy else tr("move")
-        title = tr("SelectCopyOrMoveDestinationMsg").format(opname)
+        title = tr("Select a directory to {} marked files to").format(opname)
         flags = QFileDialog.ShowDirsOnly
         destination = str(QFileDialog.getExistingDirectory(self.resultWindow, title, '', flags))
         if not destination:
@@ -207,7 +207,7 @@ class DupeGuru(QObject):
             if self.model.results.problems:
                 self.problemDialog.show()
             else:
-                msg = tr("OperationSuccessMsg")
+                msg = tr("All files were processed successfully.")
                 QMessageBox.information(self.resultWindow, tr("Operation Complete"), msg)
         elif jobid == JobType.Scan:
             if not self.model.results.groups:

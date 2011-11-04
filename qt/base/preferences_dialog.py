@@ -188,7 +188,7 @@ class PreferencesDialogBase(QDialog):
         if oldlang not in SUPPORTED_LANGUAGES:
             oldlang = 'en'
         if lang != oldlang:
-            QMessageBox.information(self, "", tr("NeedsToRestartToApplyLangMsg"))
+            QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
     
