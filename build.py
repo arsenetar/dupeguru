@@ -143,7 +143,8 @@ def build_updatepot():
     print("Building columns.pot")
     loc.generate_pot(all_cores, op.join('locale', 'columns.pot'), ['coltr'])
     print("Building ui.pot")
-    loc.generate_pot(['qt'], op.join('locale', 'ui.pot'), ['tr'])
+    ui_packages = ['qt', op.join('cocoa', 'inter')]
+    loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'])
     print("Building hscommon.pot")
     loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")

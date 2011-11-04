@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: qt/base/app.py:39
+#: cocoa/inter/app.py:14 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Vyhledávám duplicity"
 
-#: qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:40
 msgid "Loading"
 msgstr "Nahrávám"
 
-#: qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:41
 msgid "Moving"
 msgstr "Přesouvám"
 
-#: qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:42
 msgid "Copying"
 msgstr "Kopíruji"
 
@@ -995,3 +995,27 @@ msgstr "Předvolby dupeGuru PE"
 #: qt/base/preferences_dialog.py:25
 msgid "Czech"
 msgstr ""
+
+#: cocoa/inter/app.py:18
+msgid "Sending to Trash"
+msgstr "Vyhazuji do koše"
+
+#: cocoa/inter/app_me.py:25
+msgid "Removing dead tracks from your iTunes Library"
+msgstr "Odstraňuji mrtvé stopy z Vaší knihovny iTunes"
+
+#: cocoa/inter/app_me.py:26
+msgid "Scanning the iTunes Library"
+msgstr "Procházím knihovnu iTunes"
+
+#: cocoa/inter/app_pe.py:143
+msgid "Sending dupes to the Trash"
+msgstr "Vyhazuji kopie do koše"
+
+#: cocoa/inter/app_pe.py:145
+msgid "Talking to iPhoto. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:196
+msgid "IPhotoAppNotFoundMsg"
+msgstr "Nelze najít aplikaci iPhoto."

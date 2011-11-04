@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: qt/base/app.py:39
+#: cocoa/inter/app.py:14 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr ""
 
-#: qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:40
 msgid "Loading"
 msgstr ""
 
-#: qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:41
 msgid "Moving"
 msgstr ""
 
-#: qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:42
 msgid "Copying"
 msgstr ""
 
@@ -978,3 +978,27 @@ msgstr ""
 #: qt/base/preferences_dialog.py:25
 msgid "Czech"
 msgstr ""
+
+#: cocoa/inter/app.py:18
+msgid "Sending to Trash"
+msgstr ""
+
+#: cocoa/inter/app_me.py:25
+msgid "Removing dead tracks from your iTunes Library"
+msgstr ""
+
+#: cocoa/inter/app_me.py:26
+msgid "Scanning the iTunes Library"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:143
+msgid "Sending dupes to the Trash"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:145
+msgid "Talking to iPhoto. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:196
+msgid "IPhotoAppNotFoundMsg"
+msgstr "The iPhoto application couldn't be found."

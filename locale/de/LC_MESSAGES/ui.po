@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: qt/base/app.py:39
+#: cocoa/inter/app.py:14 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Suche nach Duplikaten"
 
-#: qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:40
 msgid "Loading"
 msgstr "Laden"
 
-#: qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:41
 msgid "Moving"
 msgstr "Verschieben"
 
-#: qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:42
 msgid "Copying"
 msgstr "Kopieren"
 
@@ -993,3 +993,27 @@ msgstr "dupeGuru PE Preferences"
 #: qt/base/preferences_dialog.py:25
 msgid "Czech"
 msgstr ""
+
+#: cocoa/inter/app.py:18
+msgid "Sending to Trash"
+msgstr "Verschiebe in den Mülleimer"
+
+#: cocoa/inter/app_me.py:25
+msgid "Removing dead tracks from your iTunes Library"
+msgstr "Entferne tote Stücke aus Ihrer iTunes Bibliothek."
+
+#: cocoa/inter/app_me.py:26
+msgid "Scanning the iTunes Library"
+msgstr "Scanne die iTunes Bibiliothek"
+
+#: cocoa/inter/app_pe.py:143
+msgid "Sending dupes to the Trash"
+msgstr "Verschiebe Duplikate in den Mülleimer"
+
+#: cocoa/inter/app_pe.py:145
+msgid "Talking to iPhoto. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:196
+msgid "IPhotoAppNotFoundMsg"
+msgstr "The iPhoto application couldn't be found."
