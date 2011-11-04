@@ -1,0 +1,177 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Porta tutto in primo piano";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Finestra";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimizza";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Finestra";
+
+/* Class = "NSMenuItem"; title = "About dupeGuru"; ObjectID = "58"; */
+"58.title" = "Informazioni su dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Aiuto";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Aiuto";
+
+/* Class = "NSMenuItem"; title = "dupeGuru Help"; ObjectID = "111"; */
+"111.title" = "Aiuto di dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Hide dupeGuru"; ObjectID = "134"; */
+"134.title" = "Nascondi dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Quit dupeGuru"; ObjectID = "136"; */
+"136.title" = "Chiudi dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Nascondi gli altri";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Mostra tutto";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "197"; */
+"197.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "Details Panel"; ObjectID = "398"; */
+"398.title" = "Scheda dettagliata";
+
+/* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "541"; */
+"541.title" = "Preferenze...";
+
+/* Class = "NSMenuItem"; title = "Folder Selection Window"; ObjectID = "579"; */
+"579.title" = "Finestra di selezione della cartella";
+
+/* Class = "NSMenuItem"; title = "Actions"; ObjectID = "597"; */
+"597.title" = "Azioni";
+
+/* Class = "NSMenu"; title = "Actions"; ObjectID = "598"; */
+"598.title" = "Azioni";
+
+/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "599"; */
+"599.title" = "Sposta gli elementi marcati nel cestino";
+
+/* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "600"; */
+"600.title" = "Sposta gli elementi marcati nel...";
+
+/* Class = "NSMenuItem"; title = "Copy Marked to..."; ObjectID = "601"; */
+"601.title" = "Copia gli elementi evidenziati nel...";
+
+/* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "602"; */
+"602.title" = "Make Selected Reference";
+
+/* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "603"; */
+"603.title" = "Rimuovi gli elementi marcati dai risultati";
+
+/* Class = "NSMenuItem"; title = "Remove Selected from Results"; ObjectID = "605"; */
+"605.title" = "Rimuovi gli elementi selezionati dai risultati";
+
+/* Class = "NSMenuItem"; title = "Columns"; ObjectID = "618"; */
+"618.title" = "Colonne";
+
+/* Class = "NSMenu"; title = "Columns"; ObjectID = "619"; */
+"619.title" = "Colonne";
+
+/* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "708"; */
+"708.title" = "Apri gli elementi selezionati con l'applicazione predefinita";
+
+/* Class = "NSMenuItem"; title = "Reveal Selected in Finder"; ObjectID = "710"; */
+"710.title" = "Mostra gli elementi selezionati nel Finder";
+
+/* Class = "NSMenuItem"; title = "Add Selected to Ignore List"; ObjectID = "922"; */
+"922.title" = "Aggiungi gli elementi selezionati alla lista da ignorare";
+
+/* Class = "NSMenuItem"; title = "Close Window"; ObjectID = "924"; */
+"924.title" = "Chiudi la finestra";
+
+/* Class = "NSMenuItem"; title = "Start Duplicate Scan"; ObjectID = "926"; */
+"926.title" = "Inizia la scansione dei duplicati";
+
+/* Class = "NSMenuItem"; title = "Clear Ignore List"; ObjectID = "927"; */
+"927.title" = "Cancella la lista degli elementi da ignorare";
+
+/* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "933"; */
+"933.title" = "Rinomina gli elementi selezionati";
+
+/* Class = "NSMenuItem"; title = "Export Results to XHTML"; ObjectID = "947"; */
+"947.title" = "Esporta i risultati in formato XHTML";
+
+/* Class = "NSMenuItem"; title = "Check for update..."; ObjectID = "950"; */
+"950.title" = "Controlla gli aggiornamenti...";
+
+/* Class = "NSMenuItem"; title = "Mode"; ObjectID = "959"; */
+"959.title" = "Modo";
+
+/* Class = "NSMenu"; title = "Mode"; ObjectID = "960"; */
+"960.title" = "Modo";
+
+/* Class = "NSMenuItem"; title = "Show Dupes Only"; ObjectID = "961"; */
+"961.title" = "Visualizza solo i duplicati";
+
+/* Class = "NSMenuItem"; title = "Show Delta Values"; ObjectID = "962"; */
+"962.title" = "Visualizza le differenze";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "965"; */
+"965.title" = "Edita";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "966"; */
+"966.title" = "Edita";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "985"; */
+"985.title" = "Taglia";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "986"; */
+"986.title" = "Copia";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "991"; */
+"991.title" = "Incolla";
+
+/* Class = "NSMenuItem"; title = "Mark All"; ObjectID = "1011"; */
+"1011.title" = "Marca tutti";
+
+/* Class = "NSMenuItem"; title = "Mark None"; ObjectID = "1012"; */
+"1012.title" = "Deseleziona tutti";
+
+/* Class = "NSMenuItem"; title = "Invert Marking"; ObjectID = "1013"; */
+"1013.title" = "Inverti la selezione";
+
+/* Class = "NSMenuItem"; title = "Mark Selected"; ObjectID = "1014"; */
+"1014.title" = "Marca i selezionati";
+
+/* Class = "NSMenuItem"; title = "dupeGuru Website"; ObjectID = "1023"; */
+"1023.title" = "Sito Web di dupeGuru";
+
+/* Class = "NSMenuItem"; title = "Invoke Custom Command"; ObjectID = "1177"; */
+"1177.title" = "Invoca comando personalizzato";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "1203"; */
+"1203.title" = "File";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "1204"; */
+"1204.title" = "File";
+
+/* Class = "NSMenuItem"; title = "Load Results..."; ObjectID = "1205"; */
+"1205.title" = "Carica i risultati...";
+
+/* Class = "NSMenuItem"; title = "Save Results..."; ObjectID = "1206"; */
+"1206.title" = "Salva i risultati...";
+
+/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "1227"; */
+"1227.title" = "Cancella gli elementi marcati e sostituiscili con degli Hardlinks";
+
+/* Class = "NSMenuItem"; title = "Load Recent Results"; ObjectID = "1239"; */
+"1239.title" = "Carica i risultati recenti";
+
+/* Class = "NSMenu"; title = "Load Recent Results"; ObjectID = "1240"; */
+"1240.title" = "Carica i risultati recenti";
+
+/* Class = "NSMenuItem"; title = "Results Window"; ObjectID = "1272"; */
+"1272.title" = "Finestra dei risultati";
+
+/* Class = "NSMenuItem"; title = "Re-Prioritize Results"; ObjectID = "1276"; */
+"1276.title" = "Cambia la priorità dei risultati";

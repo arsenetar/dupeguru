@@ -1,0 +1,12 @@
+
+/* Class = "NSWindow"; title = "Re-Prioritize duplicates"; ObjectID = "1"; */
+"1.title" = "Cambia la priorità dei duplicati";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "37"; */
+"37.title" = "Ok";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "39"; */
+"39.title" = "Cancella";
+
+/* Class = "NSTextFieldCell"; title = "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information."; ObjectID = "41"; */
+"41.title" = "Aggiungi dei criteri di selezione nel riquadro a destra e clicca su 'OK' per inviare i duplicati che meglio corrispondono a questi criteri al loro gruppo di appartenenza. Per maggiori informazioni leggere il file di 'help'.";

@@ -1,0 +1,11 @@
+/* Class = "NSWindow"; title = "Sorry, I must insist"; ObjectID = "1"; */
+"1.title" = "Chiedo scusa, devo insistere";
+
+/* Class = "NSTextFieldCell"; title = "This reminder showed up because:  1. You are processing more than 100 duplicates 2. You have not yet contributed to dupeGuru 3. There are unpaid hours in the project"; ObjectID = "4"; */
+"4.title" = "Questo promemoria viene visualizzato perché:\n\n1. Avete trovato più di 100 duplicati\n2. Non avete ancora contribuito per dupeGuru\n3. Ci sono ore non pagate nel progetto";
+
+/* Class = "NSTextFieldCell"; title = "It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.  You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded.  If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."; ObjectID = "6"; */
+"6.title" = "Sembra che abbiate trovato molti duplicati. Ottimo! Devo insistere, però, affinché contribuiate per tutte le ore non pagate che rimangono nel progetto.\n\nVoi penserete: \"ma io l'userò solo una volta, non devo contribuire\". Il problema è che la maggior parte delle persone userà dupeGuru solo una volta. Se tutti la pensassero così lo sviluppo di dupeGuru non potrebbe proseguire. E' proprio per la natura dei programmi come dupeGuru che devo insistere su questo punto.\n\nSe non siete in grado di offrire questo contributo potete ignorare questo avviso o spedirmi una e-mail a hsoft@hardcoded.net, così che possa darvi un codice per rimuovere questo avviso.";
+
+/* Class = "NSButtonCell"; title = "Contribute"; ObjectID = "10"; */
+"10.title" = "Contribuisci";
