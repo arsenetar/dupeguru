@@ -128,6 +128,8 @@ def build_localizations(ui, edition):
             loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('locale', lang, 'LC_MESSAGES', 'columns.po')
             loc.po2strings(pofile, op.join(enlproj, 'columns.strings'), op.join(dest_lproj, 'columns.strings'))
+            pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
+            loc.po2allxibstrings(pofile, op.join('cocoalib', 'en.lproj'), op.join('cocoalib', lang + '.lproj'))
         build_all_cocoa_locs('cocoalib')
         build_all_cocoa_locs(op.join('cocoa', 'base'))
         build_all_cocoa_locs(op.join('cocoa', edition))
