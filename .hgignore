@@ -20,6 +20,7 @@ cocoa/*/fr.lproj/*.xib
 cocoa/*/de.lproj/*.xib
 cocoa/*/zh_CN.lproj/*.xib
 cocoa/*/cs.lproj/*.xib
+cocoa/*/it.lproj/*.xib
 qt/base/*_rc.py
 qt/lang/fr.qm
 qt/lang/en.qm

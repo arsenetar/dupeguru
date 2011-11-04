@@ -50,7 +50,7 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: qt/base/app.py:104 qt/base/preferences_dialog.py:129
+#: qt/base/app.py:104 qt/base/preferences_dialog.py:130
 msgid "Preferences"
 msgstr ""
 
@@ -299,63 +299,63 @@ msgstr ""
 msgid "Czech"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:43
+#: qt/base/preferences_dialog.py:44
 msgid "Scan Type:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:56
+#: qt/base/preferences_dialog.py:57
 msgid "Filter Hardness:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:82
+#: qt/base/preferences_dialog.py:83
 msgid "More Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:87
+#: qt/base/preferences_dialog.py:88
 msgid "Fewer Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:94 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:95 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Dimensione carattere:"
 
-#: qt/base/preferences_dialog.py:98
+#: qt/base/preferences_dialog.py:99
 msgid "Language:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:105 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Copia e sposta:"
 
-#: qt/base/preferences_dialog.py:107 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Tutti gli elementi in una cartella"
 
-#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Ricrea il percorso relativo"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Ricrea il percorso assoluto"
 
-#: qt/base/preferences_dialog.py:112 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:113 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 "Comando personalizzato (argomenti: %d per duplicare, %r per riferimento):"
 
-#: qt/base/preferences_dialog.py:190
+#: qt/base/preferences_dialog.py:191
 msgid "NeedsToRestartToApplyLangMsg"
 msgstr ""
 
@@ -463,7 +463,7 @@ msgstr "Aggiungi gli elementi selezionati alla lista da ignorare"
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
-msgstr "Make Selected Reference"
+msgstr "Imposta gli elementi selezionati come riferimento"
 
 #: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
@@ -1013,3 +1013,7 @@ msgstr "Rimuovi le cartelle vuote dopo aver cancellato e spostato"
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
 msgstr "Preferenze di dupeGuru PE"
+
+#: qt/base/preferences_dialog.py:26
+msgid "Italian"
+msgstr ""

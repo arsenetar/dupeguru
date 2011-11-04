@@ -5,7 +5,7 @@
 "4.title" = "此提醒框弹出的原因如下:\n\n1. 您正在处理超过100个重复文件\n2. 您没有捐助过dupeGuru\n3. 此软件中还有未支付时间";
 
 /* Class = "NSTextFieldCell"; title = "It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.  You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded.  If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."; ObjectID = "6"; */
-"6.title" = "看起来似乎您找到了很多重复文件。这也是我继续精进这个软件的动力之一。然而，我衷心的希望能够得到您的捐助，因为我会日夜奋战于这个软件并且没有任何报酬。\n\n您可能会觉得 &quot;反正这个软件我只用一次，我不需要给开发者任何捐助&quot;. 问题是大多数人都只用一次dupeGuru。如果每一位都这样想，dupeGuru的开发也就没有资金支持了。也正是因为dupeGuru自身的性质决定了它有着仅用一次的内在倾向，所以我还必须坚持致力于这个软件的开发与精进。\n\n如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。";
+"6.title" = "看起来似乎您找到了很多重复文件。这也是我继续精进这个软件的动力之一。然而，我衷心的希望能够得到您的捐助，因为我会日夜奋战于这个软件并且没有任何报酬。\n\n您可能会觉得 \"反正这个软件我只用一次，我不需要给开发者任何捐助\". 问题是大多数人都只用一次dupeGuru。如果每一位都这样想，dupeGuru的开发也就没有资金支持了。也正是因为dupeGuru自身的性质决定了它有着仅用一次的内在倾向，所以我还必须坚持致力于这个软件的开发与精进。\n\n如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。";
 
 /* Class = "NSButtonCell"; title = "Contribute"; ObjectID = "10"; */
 "10.title" = "捐助";

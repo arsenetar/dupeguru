@@ -33,7 +33,7 @@
 "19.paletteLabel" = "Cartelle";
 
 /* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "27"; */
-"27.title" = "Cancella gli elementi marcati e sostituiscili con gli Hardlinks";
+"27.title" = "Cancella gli elementi marcati e sostituiscili con degli Hardlinks";
 
 /* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "29"; */
 "29.title" = "Sposta gli elementi marcati nel cestino";
@@ -42,7 +42,7 @@
 "30.title" = "Sposta gli elementi marcati nel...";
 
 /* Class = "NSMenuItem"; title = "Copy Marked to..."; ObjectID = "31"; */
-"31.title" = "Copia gli elementi marcati nel...";
+"31.title" = "Copia gli elementi evidenziati nel...";
 
 /* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "32"; */
 "32.title" = "Rimuovi gli elementi marcati dai risultati";

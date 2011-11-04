@@ -26,7 +26,7 @@ msgstr "Sende Dateien in den Mülleimer"
 msgid "Quit"
 msgstr "Beenden"
 
-#: qt/base/app.py:104 qt/base/preferences_dialog.py:129
+#: qt/base/app.py:104 qt/base/preferences_dialog.py:130
 msgid "Preferences"
 msgstr "Einstellungen"
 
@@ -261,29 +261,29 @@ msgstr "Spenden"
 msgid "Continue"
 msgstr "Fortfahren"
 
-#: qt/base/preferences_dialog.py:43
+#: qt/base/preferences_dialog.py:44
 msgid "Scan Type:"
 msgstr "Scantyp:"
 
-#: qt/base/preferences_dialog.py:56
+#: qt/base/preferences_dialog.py:57
 msgid "Filter Hardness:"
 msgstr "Filter Empfindlichkeit:"
 
-#: qt/base/preferences_dialog.py:82
+#: qt/base/preferences_dialog.py:83
 msgid "More Results"
 msgstr "mehr Ergebnisse"
 
-#: qt/base/preferences_dialog.py:87
+#: qt/base/preferences_dialog.py:88
 msgid "Fewer Results"
 msgstr "weniger Ergebnisse"
 
-#: qt/base/preferences_dialog.py:94 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:95 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Font size:"
 
-#: qt/base/preferences_dialog.py:98
+#: qt/base/preferences_dialog.py:99
 msgid "Language:"
 msgstr "Sprache:"
 
@@ -303,36 +303,36 @@ msgstr "Deutsch"
 msgid "Chinese (Simplified)"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:105 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Kopieren und Verschieben:"
 
-#: qt/base/preferences_dialog.py:107 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Direkt im Ziel"
 
-#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Relativen Pfad neu erstellen"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Absoluten Pfad neu erstellen"
 
-#: qt/base/preferences_dialog.py:112 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:113 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):"
 
-#: qt/base/preferences_dialog.py:190
+#: qt/base/preferences_dialog.py:191
 msgid "NeedsToRestartToApplyLangMsg"
 msgstr "dupeGuru muss neustarten, um die Sprachänderung durchzuführen."
 
@@ -1017,3 +1017,7 @@ msgstr ""
 #: cocoa/inter/app_pe.py:196
 msgid "IPhotoAppNotFoundMsg"
 msgstr "The iPhoto application couldn't be found."
+
+#: qt/base/preferences_dialog.py:26
+msgid "Italian"
+msgstr ""

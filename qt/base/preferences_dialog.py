@@ -16,13 +16,14 @@ from qtlib.util import horizontalWrap
 
 tr = trget('ui')
 
-SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs']
+SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs', 'it']
 LANGNAMES = {
     'en': tr("English"), 
     'fr': tr("French"), 
     'de': tr("German"), 
     'zh_CN': tr("Chinese (Simplified)"), 
     'cs': tr("Czech"),
+    'it': tr("Italian"),
 }
 
 class PreferencesDialogBase(QDialog):

@@ -63,7 +63,7 @@
 "601.title" = "Copia gli elementi evidenziati nel...";
 
 /* Class = "NSMenuItem"; title = "Make Selected Reference"; ObjectID = "602"; */
-"602.title" = "Make Selected Reference";
+"602.title" = "Imposta gli elementi selezionati come riferimento";
 
 /* Class = "NSMenuItem"; title = "Remove Marked from Results"; ObjectID = "603"; */
 "603.title" = "Rimuovi gli elementi marcati dai risultati";
