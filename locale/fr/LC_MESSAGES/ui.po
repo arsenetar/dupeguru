@@ -1057,7 +1057,7 @@ msgstr "Sélectionnez un dossier vers lequel copier les fichiers"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a directory to move marked files to"
-msgstr ""
+msgstr "Sélectionnez un dossier vers lequel déplacer les fichiers"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "'%@' already is in the list."

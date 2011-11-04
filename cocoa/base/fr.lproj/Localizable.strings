@@ -5,7 +5,7 @@
 "Select a results file to load" = "Sélectionnez un fichier résultats à charger";
 "You have unsaved results, do you really want to quit?" = "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment quitter?";
 "Select a directory to copy marked files to" = "Sélectionnez un dossier vers lequel copier les fichiers";
-"You have no custom command set up. Set it up in your preferences." = "Sélectionnez un dossier vers lequel déplacer les fichiers";
+"Select a directory to move marked files to" = "Sélectionnez un dossier vers lequel déplacer les fichiers";
 "Select a file to save your results to" = "Sélectionnez un fichier résultats dans lequel sauvegarder";
 "Select a folder to add to the scanning list" = "Sélectionnez un dossier à ajouter à la liste";
 "You have unsaved results, do you really want to continue?" = "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?";

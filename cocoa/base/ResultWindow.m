@@ -287,7 +287,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseDirectories:YES];
     [op setCanCreateDirectories:YES];
     [op setAllowsMultipleSelection:NO];
-    [op setTitle:TR(@"You have no custom command set up. Set it up in your preferences.")];
+    [op setTitle:TR(@"Select a directory to move marked files to")];
     if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
