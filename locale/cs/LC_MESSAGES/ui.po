@@ -54,8 +54,10 @@ msgstr ""
 msgid "Add to Ignore List"
 msgstr ""
 
-#: qt/base/app.py:141
-msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
+#: qt/base/app.py:141 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
 msgstr ""
 "Všech %d vybraných shod bude v následujících hledáních ignorováno. "
 "Pokračovat?"
@@ -77,10 +79,11 @@ msgid "Remove duplicates"
 msgstr ""
 
 #: qt/base/app.py:160 qt/base/result_window.py:323
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
-#: qt/base/app.py:179
+#: qt/base/app.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
@@ -101,12 +104,14 @@ msgstr ""
 msgid "Scan complete"
 msgstr ""
 
-#: qt/base/app.py:215
+#: qt/base/app.py:215 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr "Nebyli nalezeny žádné duplicity."
 
-#: qt/base/app.py:267
-msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
+#: qt/base/app.py:267 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
 msgstr ""
 "Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte"
 " pár sekund a zkuste to znovu."
@@ -163,7 +168,7 @@ msgstr "Nápověda"
 msgid "Load Recent Results"
 msgstr "Nahrát nedávné výsledky"
 
-#: qt/base/directories_dialog.py:106
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Select folders to scan and press \"Scan\"."
 
@@ -181,15 +186,15 @@ msgstr "Prohledat"
 msgid "Unsaved results"
 msgstr ""
 
-#: qt/base/directories_dialog.py:176
+#: qt/base/directories_dialog.py:176 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Máte neuložené výsledky, opravdu si přejete skončit?"
 
-#: qt/base/directories_dialog.py:184
+#: qt/base/directories_dialog.py:184 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Vyberte složku, kterou chcete přidat do prohledávacího seznamu"
 
-#: qt/base/directories_dialog.py:201
+#: qt/base/directories_dialog.py:201 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Vyberte soubor s výsledky, který chcete nahrát"
 
@@ -205,7 +210,7 @@ msgstr ""
 msgid "Start a new scan"
 msgstr ""
 
-#: qt/base/directories_dialog.py:221
+#: qt/base/directories_dialog.py:221 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Máte neuložené výsledky, opravdu si přejete pokračovat?"
 
@@ -249,7 +254,7 @@ msgstr ""
 "\n"
 "If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 
-#: qt/base/extra_fairware_reminder.py:45
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "This reminder showed up because:\n"
 "\n"
@@ -367,7 +372,7 @@ msgstr ""
 msgid "Problems!"
 msgstr "Problémy!"
 
-#: qt/base/problem_dialog.py:38
+#: cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
@@ -536,7 +541,8 @@ msgid "{} Results"
 msgstr ""
 
 #: qt/base/result_window.py:231
-msgid "Type the filter you want to apply on your results. See help for details."
+msgid ""
+"Type the filter you want to apply on your results. See help for details."
 msgstr ""
 "Type the filter you want to apply on your results. See help for details."
 
@@ -544,7 +550,7 @@ msgstr ""
 msgid "Nothing to clear."
 msgstr "Nothing to clear."
 
-#: qt/base/result_window.py:249
+#: qt/base/result_window.py:249 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
 
@@ -556,7 +562,7 @@ msgstr "Ignore list cleared."
 msgid "Delete duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:262
+#: qt/base/result_window.py:262 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"
 
@@ -564,13 +570,15 @@ msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"
 msgid "Delete and hardlink duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:287
-msgid "You are about to send %d files to Trash (and hardlink them afterwards). Continue?"
+#: qt/base/result_window.py:287 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"You are about to send %d files to Trash (and hardlink them afterwards). "
+"Continue?"
 msgstr ""
 "Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit "
 "hardlinky). Pokračovat?"
 
-#: qt/base/result_window.py:343
+#: qt/base/result_window.py:343 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Vyberte soubor pro uložení výsledků"
 
@@ -685,10 +693,11 @@ msgstr "Porovnávat snímky s různými rozměry"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Vyčistit cache snímků"
 
-#: qt/pe/result_window.py:26
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Opravdu chcete odstranit veškeré uložené analýzy snímků?"
 
@@ -746,25 +755,31 @@ msgstr ""
 "Pokud si nemůžete příspěvek dovolit, můžete tuto připomínku ignorovat nebo mi poslat e-mail na hsoft@hardcoded.net, abych vám dal klíč pro odstranění tohoto vyskakovacího okna."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr "Přidat novou složku..."
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr "Nahrát ze souboru..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Výchozí nastavení"
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr "Přidat složku iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr "Odstranit z iTunes mrtvé stopy"
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
 msgstr "Přidat knihovnu iPhoto"
@@ -1036,3 +1051,45 @@ msgstr "Nelze najít aplikaci iPhoto."
 #: qt/base/preferences_dialog.py:26
 msgid "Italian"
 msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to copy marked files to"
+msgstr "Select a directory to copy marked files to"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to move marked files to"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' already is in the list."
+msgstr "'%@' already is in the list."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' does not exist."
+msgstr "'%@' does not exist."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr "The name '%@' already exists."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were copied sucessfully."
+msgstr "All marked files were copied sucessfully."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were moved sucessfully."
+msgstr "All marked files were moved sucessfully."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were sucessfully sent to Trash."
+msgstr "All marked files were sucessfully sent to Trash."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "You have no dead tracks in your iTunes Library"
+msgstr "You have no dead tracks in your iTunes Library"

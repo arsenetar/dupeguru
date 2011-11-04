@@ -78,8 +78,10 @@ msgstr ""
 msgid "Add to Ignore List"
 msgstr ""
 
-#: qt/base/app.py:141
-msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
+#: qt/base/app.py:141 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
 msgstr ""
 
 #: qt/base/app.py:146
@@ -99,10 +101,11 @@ msgid "Remove duplicates"
 msgstr ""
 
 #: qt/base/app.py:160 qt/base/result_window.py:323
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: qt/base/app.py:179
+#: qt/base/app.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
@@ -122,12 +125,14 @@ msgstr ""
 msgid "Scan complete"
 msgstr ""
 
-#: qt/base/app.py:215
+#: qt/base/app.py:215 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr ""
 
-#: qt/base/app.py:267
-msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
+#: qt/base/app.py:267 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
 msgstr ""
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/DetailsPanel.strings:0
@@ -200,15 +205,15 @@ msgstr ""
 msgid "Unsaved results"
 msgstr ""
 
-#: qt/base/directories_dialog.py:176
+#: qt/base/directories_dialog.py:176 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr ""
 
-#: qt/base/directories_dialog.py:184
+#: qt/base/directories_dialog.py:184 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr ""
 
-#: qt/base/directories_dialog.py:201
+#: qt/base/directories_dialog.py:201 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr ""
 
@@ -224,7 +229,7 @@ msgstr ""
 msgid "Start a new scan"
 msgstr ""
 
-#: qt/base/directories_dialog.py:221
+#: qt/base/directories_dialog.py:221 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 
@@ -547,14 +552,15 @@ msgid "{} Results"
 msgstr ""
 
 #: qt/base/result_window.py:231
-msgid "Type the filter you want to apply on your results. See help for details."
+msgid ""
+"Type the filter you want to apply on your results. See help for details."
 msgstr ""
 
 #: qt/base/result_window.py:247
 msgid "Nothing to clear."
 msgstr ""
 
-#: qt/base/result_window.py:249
+#: qt/base/result_window.py:249 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
 
@@ -566,7 +572,7 @@ msgstr ""
 msgid "Delete duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:262
+#: qt/base/result_window.py:262 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr ""
 
@@ -574,11 +580,13 @@ msgstr ""
 msgid "Delete and hardlink duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:287
-msgid "You are about to send %d files to Trash (and hardlink them afterwards). Continue?"
+#: qt/base/result_window.py:287 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"You are about to send %d files to Trash (and hardlink them afterwards). "
+"Continue?"
 msgstr ""
 
-#: qt/base/result_window.py:343
+#: qt/base/result_window.py:343 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr ""
 
@@ -693,10 +701,11 @@ msgstr ""
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr ""
 
-#: qt/pe/result_window.py:26
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr ""
 
@@ -744,25 +753,31 @@ msgid ""
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr ""
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr ""
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr ""
 
+#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
 msgstr ""
@@ -998,4 +1013,45 @@ msgstr ""
 
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to copy marked files to"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to move marked files to"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' already is in the list."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' does not exist."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were sucessfully sent to Trash."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "You have no dead tracks in your iTunes Library"
 msgstr ""
