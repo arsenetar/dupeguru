@@ -195,7 +195,7 @@ msgstr "Carica i risultati recenti"
 
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr ""
+msgstr "Seleziona le cartelle da scansionare e premi \"Scansiona\"."
 
 #: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
@@ -284,6 +284,11 @@ msgid ""
 "2. You have not yet contributed to dupeGuru\n"
 "3. There are unpaid hours in the project"
 msgstr ""
+"Questo promemoria viene visualizzato perché:\n"
+"\n"
+"1. Avete trovato più di 100 duplicati\n"
+"2. Non avete ancora contribuito per dupeGuru\n"
+"3. Ci sono ore non pagate nel progetto"
 
 #: qt/base/extra_fairware_reminder.py:56
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
@@ -400,6 +405,9 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
+"Sono stati riscontrati dei problemi elaborando alcuni (o tutti) i file. "
+"La causa di questi problemi è descritta nella tabella sottostante. Questi "
+"file non stati rimossi dai vostri risultati."
 
 #: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"

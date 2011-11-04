@@ -17,7 +17,7 @@
 "57.title" = "Exclu";
 
 /* Class = "NSTextFieldCell"; title = "Select folders to scan and press \"Scan\"."; ObjectID = "71"; */
-"71.title" = "Sélectionnez les dossiers à scanner et cliquez sur Scan.";
+"71.title" = "Sélectionnez les dossiers à scanner puis faites \"Scan\".";
 
 /* Class = "NSButtonCell"; title = "Load Results"; ObjectID = "73"; */
 "73.title" = "Charger";
