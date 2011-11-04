@@ -101,7 +101,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanCreateDirectories:NO];
     [op setAllowsMultipleSelection:NO];
     [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [op setTitle:TRMSG(@"SelectResultToLoadMsg")];
+    [op setTitle:TR(@"Select a results file to load")];
     if ([op runModal] == NSOKButton) {
         NSString *filename = [[op filenames] objectAtIndex:0];
         [py loadResultsFrom:filename];
@@ -180,7 +180,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     if ([py resultsAreModified]) {
-        NSString *msg = TRMSG(@"ReallyWantToQuitMsg");
+        NSString *msg = TR(@"You have unsaved results, do you really want to quit?");
         if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) { // NO
             return NSTerminateCancel;
         }

@@ -138,7 +138,7 @@ class DupeGuru(QObject):
         if not dupes:
             return
         title = tr("Add to Ignore List")
-        msg = tr("IgnoreConfirmMsg").format(len(dupes))
+        msg = tr("All selected %d matches are going to be ignored in all subsequent scans. Continue?") % len(dupes)
         if self.confirm(title, msg):
             self.model.add_selected_to_ignore_list(self)
     
@@ -157,7 +157,7 @@ class DupeGuru(QObject):
         if not dupes:
             return
         title = tr("Remove duplicates")
-        msg = tr("FileRemovalConfirmMsg").format(len(dupes))
+        msg = tr("You are about to remove %d files from results. Continue?") % len(dupes)
         if self.confirm(title, msg):
             self.model.remove_selected(self)
     
@@ -176,7 +176,7 @@ class DupeGuru(QObject):
         if cmd:
             self.model.invoke_command(cmd)
         else:
-            msg = tr("NoCustomCommandMsg")
+            msg = tr("You have no custom command set up. Set it up in your preferences.")
             QMessageBox.warning(self.resultWindow, tr("Custom Command"), msg)
     
     def show_details(self):
@@ -212,7 +212,7 @@ class DupeGuru(QObject):
         elif jobid == JobType.Scan:
             if not self.model.results.groups:
                 title = tr("Scan complete")
-                msg = tr("NoDuplicateFoundMsg")
+                msg = tr("No duplicates found.")
                 QMessageBox.information(self.resultWindow, title, msg)
             else:
                 self.showResultsWindow()
@@ -264,7 +264,7 @@ class DupeGuru(QObject):
             args = (j, ) + tuple(args)
             self._progress.run(jobid, title, func, args=args)
         except job.JobInProgressError:
-            msg = tr("TaskHangingMsg")
+            msg = tr("A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")
             QMessageBox.information(self.resultWindow, 'Action in progress', msg)
     
     def get_default(self, key):

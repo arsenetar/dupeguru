@@ -2,6 +2,32 @@
 "Load from file..." = "Load from file...";
 "Reset to Default" = "Reset to Default";
 
+"Select a results file to load" = "选择一个结果文件并载入";
+"You have unsaved results, do you really want to quit?" = "您还没有保存扫描结果，确定要退出吗?";
+"Select a directory to copy marked files to" = "Select a directory to copy marked files to";
+"You have no custom command set up. Set it up in your preferences." = "Select a directory to move marked files to";
+"Select a file to save your results to" = "将结果保存为...";
+"Select a folder to add to the scanning list" = "请选择一个文件夹并加入到扫描列表中";
+"You have unsaved results, do you really want to continue?" = "目前还有结果尚未保存，确定要继续吗?";
+"'%@' already is in the list." = "'%@' already is in the list.";
+"'%@' does not exist." = "'%@' does not exist.";
+"You are about to remove %d files from results. Continue?" = "你将从结果中移除 {} 个文件。继续吗?";
+"The name '%@' already exists." = "The name '%@' already exists.";
+"You are about to send %d files to Trash. Continue?" = "即将有 %d 个文件被移到回收站。继续吗?";
+"You are about to send %d files to Trash (and hardlink them afterwards). Continue?" = "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?";
+"Do you really want to remove all %d items from the ignore list?" = "确定要从忽略列表中移除 %d 项吗?";
+"All selected %d matches are going to be ignored in all subsequent scans. Continue?" = "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?";
+"You have no custom command set up. Set it up in your preferences." = "你没有设定自定义命令。请在首选项中进行设定。";
+"All marked files were copied sucessfully." = "All marked files were copied sucessfully.";
+"All marked files were moved sucessfully." = "All marked files were moved sucessfully.";
+"All marked files were sucessfully sent to Trash." = "All marked files were sucessfully sent to Trash.";
+"No duplicates found." = "没有找到重复文件。";
+"A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again." = "目前还有任务在执行，新任务无法开启。请等待几秒钟后再重新试一次。";
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?" = "Your iTunes Library contains %d dead tracks ready to be removed. Continue?";
+"You have no dead tracks in your iTunes Library" = "You have no dead tracks in your iTunes Library";
+"Do you really want to remove all your cached picture analysis?" = "确定要移除所有缓存图片?";
+
+
 "Add iTunes Directory" = "Add iTunes Directory";
 "Remove Dead Tracks in iTunes" = "Remove Dead Tracks in iTunes";
 

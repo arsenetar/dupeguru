@@ -246,7 +246,7 @@ class ResultWindow(QMainWindow):
         if not count:
             QMessageBox.information(self, title, tr("NothingToClearMsg"))
             return
-        msg = tr("ClearIgnoreListConfirmMsg").format(count)
+        msg = tr("Do you really want to remove all %d items from the ignore list?") % count
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.model.scanner.ignore_list.Clear()
             QMessageBox.information(self, title, tr("IgnoreListClearedMsg"))
@@ -259,7 +259,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Delete duplicates")
-        msg = tr("SendToTrashConfirmMsg").format(count)
+        msg = tr("You are about to send %d files to Trash. Continue?") % count
         if self.app.confirm(title, msg):
             self.app.model.delete_marked()
     
@@ -284,7 +284,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Delete and hardlink duplicates")
-        msg = tr("HardlinkConfirmMsg").format(count)
+        msg = tr("You are about to send %d files to Trash (and hardlink them afterwards). Continue?") % count
         if self.app.confirm(title, msg):
             self.app.model.delete_marked(replace_with_hardlinks=True)
     
@@ -320,7 +320,7 @@ class ResultWindow(QMainWindow):
         if not count:
             return
         title = tr("Remove duplicates")
-        msg = tr("FileRemovalConfirmMsg").format(count)
+        msg = tr("You are about to remove %d files from results. Continue?") % count
         if self.app.confirm(title, msg):
             self.app.model.remove_marked()
     
@@ -340,7 +340,7 @@ class ResultWindow(QMainWindow):
         self.app.model.reveal_selected()
     
     def saveResultsTriggered(self):
-        title = tr("SelectResultToSaveMsg")
+        title = tr("Select a file to save your results to")
         files = tr("dupeGuru Results (*.dupeguru)")
         destination = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:

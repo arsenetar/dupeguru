@@ -173,7 +173,7 @@ class DirectoriesDialog(QMainWindow):
         event.accept()
         if self.app.model.results.is_modified:
             title = tr("Unsaved results")
-            msg = tr("ReallyWantToQuitMsg")
+            msg = tr("You have unsaved results, do you really want to quit?")
             if not self.app.confirm(title, msg):
                 event.ignore()
         if event.isAccepted():
@@ -181,7 +181,7 @@ class DirectoriesDialog(QMainWindow):
     
     #--- Events
     def addFolderTriggered(self):
-        title = tr("SelectFolderToAddMsg")
+        title = tr("Select a folder to add to the scanning list")
         flags = QFileDialog.ShowDirsOnly
         dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
         if not dirpath:
@@ -198,7 +198,7 @@ class DirectoriesDialog(QMainWindow):
             self.recentFolders.insertItem(folder)
     
     def loadResultsTriggered(self):
-        title = tr("SelectResultToLoadMsg")
+        title = tr("Select a results file to load")
         files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
         destination = QFileDialog.getOpenFileName(self, title, '', files)
         if destination:
@@ -218,7 +218,7 @@ class DirectoriesDialog(QMainWindow):
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:
             title = tr("Start a new scan")
-            msg = tr("ReallyWantToContinueMsg")
+            msg = tr("You have unsaved results, do you really want to continue?")
             if not self.app.confirm(title, msg):
                 return
         self.app.model.start_scanning()

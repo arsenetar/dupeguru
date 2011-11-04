@@ -23,7 +23,7 @@ class ResultWindow(ResultWindowBase):
     
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")
-        msg = tr("ClearPictureCacheConfirmMsg")
+        msg = tr("Do you really want to remove all your cached picture analysis?")
         if self.app.confirm(title, msg, QMessageBox.No):
             self.app.scanner.clear_picture_cache()
             QMessageBox.information(self, title, tr("PictureCacheClearedMsg"))

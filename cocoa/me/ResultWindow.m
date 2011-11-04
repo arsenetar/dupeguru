@@ -96,12 +96,12 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([lastAction isEqualTo:jobScanDeadTracks]) {
         NSInteger deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
         if (deadTrackCount > 0) {
-            NSString *msg = TRMSG(@"RemoveDeadTracksConfirmMsg");
+            NSString *msg = TR(@"Your iTunes Library contains %d dead tracks ready to be removed. Continue?");
             if ([Dialogs askYesNo:[NSString stringWithFormat:msg,deadTrackCount]] == NSAlertFirstButtonReturn)
                 [(PyDupeGuru *)py removeDeadTracks];
         }
         else {
-            [Dialogs showMessage:TRMSG(@"NoDeadTrackMsg")];
+            [Dialogs showMessage:TR(@"You have no dead tracks in your iTunes Library")];
         }
     }
 }

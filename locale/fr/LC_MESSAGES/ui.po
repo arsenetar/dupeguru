@@ -55,7 +55,7 @@ msgid "Add to Ignore List"
 msgstr "Ignorer ces doublons à l'avenir"
 
 #: qt/base/app.py:141
-msgid "IgnoreConfirmMsg"
+msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
 
 #: qt/base/app.py:146
@@ -75,11 +75,11 @@ msgid "Remove duplicates"
 msgstr "Retirer des doublons"
 
 #: qt/base/app.py:160 qt/base/result_window.py:323
-msgid "FileRemovalConfirmMsg"
-msgstr "{} fichiers seront retirés des résultats. Continuer?"
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
 #: qt/base/app.py:179
-msgid "NoCustomCommandMsg"
+msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
@@ -100,11 +100,11 @@ msgid "Scan complete"
 msgstr "Scan complété"
 
 #: qt/base/app.py:215
-msgid "NoDuplicateFoundMsg"
+msgid "No duplicates found."
 msgstr "Aucun doublon trouvé."
 
 #: qt/base/app.py:267
-msgid "TaskHangingMsg"
+msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 "Une action précédente est encore en cours. Attendez quelques secondes avant "
 "d'en repartir une nouvelle."
@@ -180,15 +180,15 @@ msgid "Unsaved results"
 msgstr "Résultats non sauvegardés"
 
 #: qt/base/directories_dialog.py:176
-msgid "ReallyWantToQuitMsg"
+msgid "You have unsaved results, do you really want to quit?"
 msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment quitter?"
 
 #: qt/base/directories_dialog.py:184
-msgid "SelectFolderToAddMsg"
+msgid "Select a folder to add to the scanning list"
 msgstr "Sélectionnez un dossier à ajouter à la liste"
 
 #: qt/base/directories_dialog.py:201
-msgid "SelectResultToLoadMsg"
+msgid "Select a results file to load"
 msgstr "Sélectionnez un fichier résultats à charger"
 
 #: qt/base/directories_dialog.py:202
@@ -204,7 +204,7 @@ msgid "Start a new scan"
 msgstr "Commencer un nouveau scan"
 
 #: qt/base/directories_dialog.py:221
-msgid "ReallyWantToContinueMsg"
+msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
 
@@ -530,9 +530,9 @@ msgid "NothingToClearMsg"
 msgstr "Il n'y a rien à vider."
 
 #: qt/base/result_window.py:249
-msgid "ClearIgnoreListConfirmMsg"
+msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
-"Voulez-vous vider la liste de fichiers ignorés des {} items qu'elle "
+"Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle "
 "contient?"
 
 #: qt/base/result_window.py:252
@@ -544,20 +544,20 @@ msgid "Delete duplicates"
 msgstr "Effacement de doublons"
 
 #: qt/base/result_window.py:262
-msgid "SendToTrashConfirmMsg"
-msgstr "{} fichiers seront envoyés à la corbeille. Continuer?"
+msgid "You are about to send %d files to Trash. Continue?"
+msgstr "%d fichiers seront envoyés à la corbeille. Continuer?"
 
 #: qt/base/result_window.py:286
 msgid "Delete and hardlink duplicates"
 msgstr "Hardlinking de doublons"
 
 #: qt/base/result_window.py:287
-msgid "HardlinkConfirmMsg"
+msgid "You are about to send %d files to Trash (and hardlink them afterwards). Continue?"
 msgstr ""
-"{} fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
+"%d fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
 
 #: qt/base/result_window.py:343
-msgid "SelectResultToSaveMsg"
+msgid "Select a file to save your results to"
 msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
 
 #: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
@@ -675,7 +675,7 @@ msgid "Clear Picture Cache"
 msgstr "Vider la cache d'images"
 
 #: qt/pe/result_window.py:26
-msgid "ClearPictureCacheConfirmMsg"
+msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Voulez-vous vraiment vider la cache de vos analyses précédentes?"
 
 #: qt/pe/result_window.py:29

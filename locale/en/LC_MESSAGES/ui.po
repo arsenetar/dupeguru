@@ -55,7 +55,7 @@ msgid "Add to Ignore List"
 msgstr ""
 
 #: qt/base/app.py:141
-msgid "IgnoreConfirmMsg"
+msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -77,11 +77,11 @@ msgid "Remove duplicates"
 msgstr ""
 
 #: qt/base/app.py:160 qt/base/result_window.py:323
-msgid "FileRemovalConfirmMsg"
+msgid "You are about to remove %d files from results. Continue?"
 msgstr "You are about to remove %d files from results. Continue?"
 
 #: qt/base/app.py:179
-msgid "NoCustomCommandMsg"
+msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "You have no custom command set up. Set it up in your preferences."
 
 #: qt/base/app.py:180
@@ -101,11 +101,11 @@ msgid "Scan complete"
 msgstr ""
 
 #: qt/base/app.py:215
-msgid "NoDuplicateFoundMsg"
+msgid "No duplicates found."
 msgstr "No duplicates found."
 
 #: qt/base/app.py:267
-msgid "TaskHangingMsg"
+msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -181,15 +181,15 @@ msgid "Unsaved results"
 msgstr ""
 
 #: qt/base/directories_dialog.py:176
-msgid "ReallyWantToQuitMsg"
+msgid "You have unsaved results, do you really want to quit?"
 msgstr "You have unsaved results, do you really want to quit?"
 
 #: qt/base/directories_dialog.py:184
-msgid "SelectFolderToAddMsg"
+msgid "Select a folder to add to the scanning list"
 msgstr "Select a folder to add to the scanning list"
 
 #: qt/base/directories_dialog.py:201
-msgid "SelectResultToLoadMsg"
+msgid "Select a results file to load"
 msgstr "Select a results file to load"
 
 #: qt/base/directories_dialog.py:202
@@ -205,7 +205,7 @@ msgid "Start a new scan"
 msgstr ""
 
 #: qt/base/directories_dialog.py:221
-msgid "ReallyWantToContinueMsg"
+msgid "You have unsaved results, do you really want to continue?"
 msgstr "You have unsaved results, do you really want to continue?"
 
 #: qt/base/directories_model.py:22
@@ -528,7 +528,7 @@ msgid "NothingToClearMsg"
 msgstr "Nothing to clear."
 
 #: qt/base/result_window.py:249
-msgid "ClearIgnoreListConfirmMsg"
+msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Do you really want to remove all %d items from the ignore list?"
 
 #: qt/base/result_window.py:252
@@ -540,7 +540,7 @@ msgid "Delete duplicates"
 msgstr ""
 
 #: qt/base/result_window.py:262
-msgid "SendToTrashConfirmMsg"
+msgid "You are about to send %d files to Trash. Continue?"
 msgstr "You are about to send %d files to Trash. Continue?"
 
 #: qt/base/result_window.py:286
@@ -548,13 +548,13 @@ msgid "Delete and hardlink duplicates"
 msgstr ""
 
 #: qt/base/result_window.py:287
-msgid "HardlinkConfirmMsg"
+msgid "You are about to send %d files to Trash (and hardlink them afterwards). Continue?"
 msgstr ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
 
 #: qt/base/result_window.py:343
-msgid "SelectResultToSaveMsg"
+msgid "Select a file to save your results to"
 msgstr "Select a file to save your results to"
 
 #: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
@@ -672,7 +672,7 @@ msgid "Clear Picture Cache"
 msgstr ""
 
 #: qt/pe/result_window.py:26
-msgid "ClearPictureCacheConfirmMsg"
+msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Do you really want to remove all your cached picture analysis?"
 
 #: qt/pe/result_window.py:29

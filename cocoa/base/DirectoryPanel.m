@@ -58,7 +58,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:YES];
     [op setAllowsMultipleSelection:YES];
-    [op setTitle:TRMSG(@"SelectFolderToAddMsg")];
+    [op setTitle:TR(@"Select a folder to add to the scanning list")];
     [op setDelegate:self];
     if ([op runModal] == NSOKButton) {
         for (NSString *directory in [op filenames]) {
@@ -122,10 +122,10 @@ http://www.hardcoded.net/licenses/bsd_license
     if (r) {
         NSString *m = @"";
         if (r == 1) {
-            m = TRMSG(@"FolderAlreadyInListMsg");
+            m = TR(@"'%@' already is in the list.");
         }
         else if (r == 2) {
-            m = TRMSG(@"FolderDoesNotExistMsg");
+            m = TR(@"'%@' does not exist.");
         }
         [Dialogs showMessage:[NSString stringWithFormat:m,directory]];
     }
