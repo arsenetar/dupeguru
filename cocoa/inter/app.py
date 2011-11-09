@@ -6,9 +6,11 @@ from hscommon.cocoa import install_exception_hook
 from hscommon.cocoa.inter import signature, PyFairware
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSSearchPathForDirectoriesInDomains,
     NSApplicationSupportDirectory, NSUserDomainMask, NSWorkspace)
-from hscommon.trans import tr
+from hscommon.trans import trget
 
 from core.app import JobType
+
+tr = trget('ui')
 
 JOBID2TITLE = {
     JobType.Scan: tr("Scanning for duplicates"),
