@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:14 qt/base/app.py:39
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Vyhledávám duplicity"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Loading"
 msgstr "Nahrávám"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Moving"
 msgstr "Přesouvám"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:19 qt/base/app.py:42
 msgid "Copying"
 msgstr "Kopíruji"
 
@@ -168,9 +168,10 @@ msgstr "Nápověda"
 msgid "Load Recent Results"
 msgstr "Nahrát nedávné výsledky"
 
+#: qt/base/directories_dialog.py:106
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "Select folders to scan and press \"Scan\"."
+msgstr "Vyberte složky, které chcete prohledat a stiskněte \"Prohledat\"."
 
 #: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
@@ -248,32 +249,18 @@ msgid ""
 "\n"
 "If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 msgstr ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
+"Vypadá to, že jste našli spoustu duplicit. Paráda! Musím ale trvat na tom, že v případě nezaplacených hodin vývoje projektu, očekávám příspěvky.\n"
 "\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
+"Můžete si říct \"ale já chci program použít jen jednou, proč bych měl platit\". Problém je, že většina lidí používá dupeGuru jen občas. Kdyby si totéž řekl každý, nemohl by se vývoj dupeGuru zaplatit. Kvůli této vlastnosti, která vychází z podstaty dupeGuru, si zde dovoluji žádat o příspěvek na vývoj.\n"
 "\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
+"Pokud si nemůžete příspěvek dovolit, můžete tuto připomínku ignorovat nebo mi poslat e-mail na hsoft@hardcoded.net, abych vám dal klíč pro odstranění tohoto vyskakovacího okna."
 
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-
-#: qt/base/extra_fairware_reminder.py:56
+#: qt/base/extra_fairware_reminder.py:71
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Contribute"
 msgstr "Přispět"
 
-#: qt/base/extra_fairware_reminder.py:59
+#: qt/base/extra_fairware_reminder.py:74
 msgid "Continue"
 msgstr "Pokračovat"
 
@@ -372,21 +359,11 @@ msgstr ""
 msgid "Problems!"
 msgstr "Problémy!"
 
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
-msgid ""
-"There were problems processing some (or all) of the files. The cause of "
-"these problems are described in the table below. Those files were not "
-"removed from your results."
-msgstr ""
-"There were problems processing some (or all) of the files. The cause of "
-"these problems are described in the table below. Those files were not "
-"removed from your results."
-
-#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Ukázat vybrané ve správci souborů"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Zavřít"
 
@@ -693,7 +670,6 @@ msgstr "Porovnávat snímky s různými rozměry"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Vyčistit cache snímků"
 
@@ -722,10 +698,7 @@ msgstr "KB"
 msgid "Details of Selected File"
 msgstr "Detaily vybraného souboru"
 
-#: cocoa/base/en.lproj/DirectoryPanel.strings:0
-msgid "Select folders to scan and press \"Scan\"."
-msgstr "Vyberte složky, které chcete prohledat a stiskněte \"Prohledat\"."
-
+#: qt/base/extra_fairware_reminder.py:55
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "This reminder showed up because:\n"
@@ -740,46 +713,26 @@ msgstr ""
 "2. Zatím jste nepřispěli na vývoj dupeGuru\n"
 "3. V projektu jsou nezaplacené hodiny"
 
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."
-msgstr ""
-"Vypadá to, že jste našli spoustu duplicit. Paráda! Musím ale trvat na tom, že v případě nezaplacených hodin vývoje projektu, očekávám příspěvky.\n"
-"\n"
-"Můžete si říct \"ale já chci program použít jen jednou, proč bych měl platit\". Problém je, že většina lidí používá dupeGuru jen občas. Kdyby si totéž řekl každý, nemohl by se vývoj dupeGuru zaplatit. Kvůli této vlastnosti, která vychází z podstaty dupeGuru, si zde dovoluji žádat o příspěvek na vývoj.\n"
-"\n"
-"Pokud si nemůžete příspěvek dovolit, můžete tuto připomínku ignorovat nebo mi poslat e-mail na hsoft@hardcoded.net, abych vám dal klíč pro odstranění tohoto vyskakovacího okna."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr "Přidat novou složku..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr "Nahrát ze souboru..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Výchozí nastavení"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr "Přidat složku iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr "Odstranit z iTunes mrtvé stopy"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
 msgstr "Přidat knihovnu iPhoto"
@@ -1024,7 +977,7 @@ msgstr "Předvolby dupeGuru PE"
 msgid "Czech"
 msgstr ""
 
-#: cocoa/inter/app.py:18
+#: cocoa/inter/app.py:20
 msgid "Sending to Trash"
 msgstr "Vyhazuji do koše"
 
@@ -1093,3 +1046,15 @@ msgstr ""
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "You have no dead tracks in your iTunes Library"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Yes"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "No"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "OK"
+msgstr ""

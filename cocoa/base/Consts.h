@@ -6,7 +6,7 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import <Cocoa/Cocoa.h>
+#import "HSConsts.h"
 
 #define JobStarted @"JobStarted"
 #define JobInProgress @"JobInProgress"
@@ -20,5 +20,4 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #define DGPrioritizeIndexPasteboardType @"DGPrioritizeIndexPasteboardType"
 
-#define TR(s) NSLocalizedString(s, @"")
 #define TRCOL(s) NSLocalizedStringFromTable(s, @"columns", @"")

@@ -2,23 +2,23 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:14 qt/base/app.py:39
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Scansione per i duplicati"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Loading"
 msgstr "Caricamento"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Moving"
 msgstr "Spostamento"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:19 qt/base/app.py:42
 msgid "Copying"
 msgstr "Copia in corso"
 
-#: cocoa/inter/app.py:18
+#: cocoa/inter/app.py:20
 msgid "Sending to Trash"
 msgstr "Spostamento nel cestino"
 
@@ -193,6 +193,7 @@ msgstr "Aiuto"
 msgid "Load Recent Results"
 msgstr "Carica i risultati recenti"
 
+#: qt/base/directories_dialog.py:106
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Seleziona le cartelle da scansionare e premi \"Scansiona\"."
@@ -275,7 +276,13 @@ msgid ""
 "\n"
 "If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 msgstr ""
+"Sembra che abbiate trovato molti duplicati. Ottimo! Devo insistere, però, affinché contribuiate per tutte le ore non pagate che rimangono nel progetto.\n"
+"\n"
+"Voi penserete: \"ma io l'userò solo una volta, non devo contribuire\". Il problema è che la maggior parte delle persone userà dupeGuru solo una volta. Se tutti la pensassero così lo sviluppo di dupeGuru non potrebbe proseguire. E' proprio per la natura dei programmi come dupeGuru che devo insistere su questo punto.\n"
+"\n"
+"Se non siete in grado di offrire questo contributo potete ignorare questo avviso o spedirmi una e-mail a hsoft@hardcoded.net, così che possa darvi un codice per rimuovere questo avviso."
 
+#: qt/base/extra_fairware_reminder.py:55
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "This reminder showed up because:\n"
@@ -290,12 +297,12 @@ msgstr ""
 "2. Non avete ancora contribuito per dupeGuru\n"
 "3. Ci sono ore non pagate nel progetto"
 
-#: qt/base/extra_fairware_reminder.py:56
+#: qt/base/extra_fairware_reminder.py:71
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Contribute"
 msgstr "Contribuisci"
 
-#: qt/base/extra_fairware_reminder.py:59
+#: qt/base/extra_fairware_reminder.py:74
 msgid "Continue"
 msgstr "Continua"
 
@@ -399,21 +406,21 @@ msgstr ""
 msgid "Problems!"
 msgstr "Problemi!"
 
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"Sono stati riscontrati dei problemi elaborando alcuni (o tutti) i file. "
-"La causa di questi problemi è descritta nella tabella sottostante. Questi "
-"file non stati rimossi dai vostri risultati."
+"Sono stati riscontrati dei problemi elaborando alcuni (o tutti) i file. La "
+"causa di questi problemi è descritta nella tabella sottostante. Questi file "
+"non stati rimossi dai vostri risultati."
 
-#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Mostra i selezionati"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Chiudi"
 
@@ -720,7 +727,6 @@ msgstr "Includi immagini di dimensione differente"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Cancella la cache delle immagini"
 
@@ -751,64 +757,26 @@ msgstr "KB"
 msgid "Details of Selected File"
 msgstr "Dettagli del file selezionato"
 
-#: cocoa/base/en.lproj/DirectoryPanel.strings:0
-msgid "Select folders to scan and press \"Scan\"."
-msgstr "Seleziona le cartelle da scansionare e premi \"Scansiona\"."
-
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"Questo promemoria viene visualizzato perché:\n"
-"\n"
-"1. Avete trovato più di 100 duplicati\n"
-"2. Non avete ancora contribuito per dupeGuru\n"
-"3. Ci sono ore non pagate nel progetto"
-
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."
-msgstr ""
-"Sembra che abbiate trovato molti duplicati. Ottimo! Devo insistere, però, affinché contribuiate per tutte le ore non pagate che rimangono nel progetto.\n"
-"\n"
-"Voi penserete: \"ma io l'userò solo una volta, non devo contribuire\". Il problema è che la maggior parte delle persone userà dupeGuru solo una volta. Se tutti la pensassero così lo sviluppo di dupeGuru non potrebbe proseguire. E' proprio per la natura dei programmi come dupeGuru che devo insistere su questo punto.\n"
-"\n"
-"Se non siete in grado di offrire questo contributo potete ignorare questo avviso o spedirmi una e-mail a hsoft@hardcoded.net, così che possa darvi un codice per rimuovere questo avviso."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr "Aggiungi una nuova cartella..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr "Carica dal file..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Ripristina le impostazioni predefinite"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr "Aggiungi alla lista di iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr "Rimuovi le tracce inesistenti da iTunes"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
 msgstr "Aggiungi alla libreria di iPhoto"
@@ -1096,3 +1064,15 @@ msgstr ""
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "La tua libreria di iTunes non contiene tracce inesistenti"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Yes"
+msgstr "Si"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "No"
+msgstr "No"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "OK"
+msgstr ""

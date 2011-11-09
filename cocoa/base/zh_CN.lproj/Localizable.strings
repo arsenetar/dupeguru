@@ -11,7 +11,7 @@
 "You have unsaved results, do you really want to continue?" = "目前还有结果尚未保存，确定要继续吗?";
 "'%@' already is in the list." = "'%@' already is in the list.";
 "'%@' does not exist." = "'%@' does not exist.";
-"You are about to remove %d files from results. Continue?" = "你将从结果中移除 {} 个文件。继续吗?";
+"You are about to remove %d files from results. Continue?" = "你将从结果中移除 %d 个文件。继续吗?";
 "The name '%@' already exists." = "The name '%@' already exists.";
 "You are about to send %d files to Trash. Continue?" = "即将有 %d 个文件被移到回收站。继续吗?";
 "You are about to send %d files to Trash (and hardlink them afterwards). Continue?" = "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?";
@@ -33,3 +33,7 @@
 
 "Add iPhoto Library" = "Add iPhoto Library";
 "Clear Picture Cache" = "清空图片缓存";
+
+"Yes" = "Yes";
+"No" = "No";
+"OK" = "OK";

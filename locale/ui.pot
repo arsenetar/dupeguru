@@ -2,23 +2,23 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:14 qt/base/app.py:39
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr ""
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Loading"
 msgstr ""
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Moving"
 msgstr ""
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:19 qt/base/app.py:42
 msgid "Copying"
 msgstr ""
 
-#: cocoa/inter/app.py:18
+#: cocoa/inter/app.py:20
 msgid "Sending to Trash"
 msgstr ""
 
@@ -188,6 +188,7 @@ msgid "Load Recent Results"
 msgstr ""
 
 #: qt/base/directories_dialog.py:106
+#: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr ""
 
@@ -268,7 +269,8 @@ msgid ""
 "If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
 msgstr ""
 
-#: qt/base/extra_fairware_reminder.py:45
+#: qt/base/extra_fairware_reminder.py:55
+#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "This reminder showed up because:\n"
 "\n"
@@ -277,12 +279,12 @@ msgid ""
 "3. There are unpaid hours in the project"
 msgstr ""
 
-#: qt/base/extra_fairware_reminder.py:56
+#: qt/base/extra_fairware_reminder.py:71
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Contribute"
 msgstr ""
 
-#: qt/base/extra_fairware_reminder.py:59
+#: qt/base/extra_fairware_reminder.py:74
 msgid "Continue"
 msgstr ""
 
@@ -386,18 +388,18 @@ msgstr ""
 msgid "Problems!"
 msgstr ""
 
-#: qt/base/problem_dialog.py:38
+#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
 
-#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr ""
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr ""
 
@@ -701,7 +703,6 @@ msgstr ""
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr ""
 
@@ -730,19 +731,6 @@ msgstr ""
 msgid "Details of Selected File"
 msgstr ""
 
-#: cocoa/base/en.lproj/DirectoryPanel.strings:0
-msgid "Select folders to scan and press \"Scan\"."
-msgstr ""
-
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
@@ -753,33 +741,80 @@ msgid ""
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr ""
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to copy marked files to"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select a directory to move marked files to"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' already is in the list."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "'%@' does not exist."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "All marked files were sucessfully sent to Trash."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "You have no dead tracks in your iTunes Library"
+msgstr ""
+
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Yes"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "No"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "OK"
 msgstr ""
 
 #: cocoa/base/en.lproj/MainMenu.strings:0
@@ -890,13 +925,6 @@ msgstr ""
 
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Cancel"
-msgstr ""
-
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
-msgid ""
-"There were problems processing some (or all) of the files. The cause of "
-"these problems are described in the table below. Those files were not "
-"removed from your results."
 msgstr ""
 
 #: cocoa/base/en.lproj/ResultWindow.strings:0
@@ -1013,45 +1041,4 @@ msgstr ""
 
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to copy marked files to"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to move marked files to"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' already is in the list."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' does not exist."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "The name '%@' already exists."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were copied sucessfully."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were moved sucessfully."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were sucessfully sent to Trash."
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "You have no dead tracks in your iTunes Library"
 msgstr ""

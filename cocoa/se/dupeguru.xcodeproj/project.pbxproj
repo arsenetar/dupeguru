@@ -209,6 +209,7 @@
 		CE9A2BFF1423F9FF003CA2EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/columns.strings; sourceTree = "<group>"; };
 		CE9A2C001423F9FF003CA2EF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/columns.strings; sourceTree = "<group>"; };
 		CEA175C91461E8E600776591 /* locale */ = {isa = PBXFileReference; lastKnownFileType = folder; name = locale; path = ../../build/locale; sourceTree = "<group>"; };
+		CEB57990146ADC5100EDF7D7 /* HSConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSConsts.h; path = ../../cocoalib/HSConsts.h; sourceTree = "<group>"; };
 		CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSWindowController.h; sourceTree = "<group>"; };
 		CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSWindowController.m; sourceTree = "<group>"; };
 		CECFFF1C13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
@@ -446,6 +447,7 @@
 				CE76FDCC111EE38E006618EA /* proxies */,
 				CE76FDBD111EE37C006618EA /* views */,
 				CE19BC5F11199231007CCEB0 /* xib */,
+				CEB57990146ADC5100EDF7D7 /* HSConsts.h */,
 				CEFC7F8A0FC9517500CD5728 /* Dialogs.h */,
 				CEFC7F8B0FC9517500CD5728 /* Dialogs.m */,
 				CEFC7F8C0FC9517500CD5728 /* HSErrorReportWindow.h */,

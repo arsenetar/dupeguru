@@ -17,7 +17,7 @@
 "57.title" = "不包含";
 
 /* Class = "NSTextFieldCell"; title = "Select folders to scan and press \"Scan\"."; ObjectID = "71"; */
-"71.title" = "Select folders to scan and press \"Scan\".";
+"71.title" = "请选择要扫描的文件夹，然后点击 \"扫描\"。";
 
 /* Class = "NSButtonCell"; title = "Load Results"; ObjectID = "73"; */
 "73.title" = "载入结果";

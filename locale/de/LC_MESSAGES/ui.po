@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:14 qt/base/app.py:39
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Suche nach Duplikaten"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Loading"
 msgstr "Laden"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Moving"
 msgstr "Verschieben"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:19 qt/base/app.py:42
 msgid "Copying"
 msgstr "Kopieren"
 
@@ -167,6 +167,7 @@ msgstr "Hilfe"
 msgid "Load Recent Results"
 msgstr "Lade letzte Ergebnisse"
 
+#: qt/base/directories_dialog.py:106
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Zu scannende Ordner auswählen und \"Scan\" drücken."
@@ -253,6 +254,7 @@ msgstr ""
 "\n"
 "Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung entweder ignorieren oder mir eine Nachricht an hsoft@hardcoded.net schicken, damit ich ihnen einen Schlüssel gebe um diesen Hinweis zu entfernen."
 
+#: qt/base/extra_fairware_reminder.py:55
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid ""
 "This reminder showed up because:\n"
@@ -267,12 +269,12 @@ msgstr ""
 "2. Sie noch nicht an dupeGuru gespendet haben\n"
 "3. Es unbezahlte Arbeitstunden im Projekt gibt"
 
-#: qt/base/extra_fairware_reminder.py:56
+#: qt/base/extra_fairware_reminder.py:71
 #: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
 msgid "Contribute"
 msgstr "Spenden"
 
-#: qt/base/extra_fairware_reminder.py:59
+#: qt/base/extra_fairware_reminder.py:74
 msgid "Continue"
 msgstr "Fortfahren"
 
@@ -371,7 +373,7 @@ msgstr ""
 msgid "Problems!"
 msgstr "Probleme!"
 
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
@@ -380,11 +382,11 @@ msgstr ""
 "Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Grund der "
 "Probleme ist unten in der Tabelle beschrieben."
 
-#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Zeige Markierte"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Schließen"
 
@@ -691,7 +693,6 @@ msgstr "Vergleiche Bilder mit unterschiedlicher Auflösung"
 
 #: qt/pe/result_window.py:20 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Bildzwischenspeicher leeren"
 
@@ -721,64 +722,26 @@ msgstr "KB"
 msgid "Details of Selected File"
 msgstr "Details of Selected File"
 
-#: cocoa/base/en.lproj/DirectoryPanel.strings:0
-msgid "Select folders to scan and press \"Scan\"."
-msgstr "Zu scannende Ordner auswählen und \"Scan\" drücken."
-
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"Diese Erinnerung erschien, weil:\n"
-"\n"
-"1. Mehr als 100 Duplikate verarbeitet wurden\n"
-"2. Sie noch nicht an dupeGuru gespendet haben\n"
-"3. Es unbezahlte Arbeitstunden im Projekt gibt"
-
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this popup."
-msgstr ""
-"Scheinbar haben Sie eine Menge Duplikate gefunden. Schön! Ich muss Sie jedoch daran erinnern das Spenden gewünscht werden, wenn noch nicht alle Arbeitsstunden bezahlt wurden.\n"
-"\n"
-"Sie denken vielleicht \"aber ich nutze dieses Programm doch nur einmal, da brauche ich nicht zu spenden\". Das Problem ist, das die meisten Menschen dupeGuru nur sehr selten nutzen. Wenn jeder so denkt kann die Entwicklung von dupeGuru nicht finanziert werden. Aufgrund dieser, dem Wesen von dupeGuru innenliegenden Eigenschaft, muss ich hier auf Ihre Unterstützung bestehen.\n"
-"\n"
-"Wenn Sie es sich nicht leisten können zu spenden, können Sie diese Erinnerung entweder ignorieren oder mir eine Nachricht an hsoft@hardcoded.net schicken, damit ich ihnen einen Schlüssel gebe um diesen Hinweis zu entfernen."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr "Add New Folder..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr "Load from file..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Reset to Default"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Directory"
 msgstr "Add iTunes Directory"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr "Remove Dead Tracks in iTunes"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
 msgstr "Add iPhoto Library"
@@ -892,15 +855,6 @@ msgstr "Ok"
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Cancel"
 msgstr "Cancel"
-
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
-msgid ""
-"There were problems processing some (or all) of the files. The cause of "
-"these problems are described in the table below. Those files were not "
-"removed from your results."
-msgstr ""
-"Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Grund der "
-"Probleme ist unten in der Tabelle beschrieben."
 
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "dupeGuru Results"
@@ -1022,7 +976,7 @@ msgstr "dupeGuru PE Preferences"
 msgid "Czech"
 msgstr ""
 
-#: cocoa/inter/app.py:18
+#: cocoa/inter/app.py:20
 msgid "Sending to Trash"
 msgstr "Verschiebe in den Mülleimer"
 
@@ -1091,3 +1045,15 @@ msgstr ""
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "You have no dead tracks in your iTunes Library"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Yes"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "No"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "OK"
+msgstr ""
