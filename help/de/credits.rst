@@ -12,6 +12,10 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Eric Dee, chinesische Übersetzung**
 
+| **Aleš Nehyba, Czech localization**
+
+| **Paolo Rossi, Italian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 
