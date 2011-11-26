@@ -41,8 +41,6 @@ class JobType:
     Copy = 'job_copy'
     Delete = 'job_delete'
 
-Column = namedtuple('Column', 'attr display')
-
 def format_timestamp(t, delta):
     if delta:
         return format_time_decimal(t)
@@ -68,10 +66,10 @@ def format_dupe_count(c):
     return str(c) if c else '---'
 
 def cmp_value(dupe, column):
-    if column.attr == 'name':
+    if column.name == 'name':
         value = rem_file_ext(dupe.name)
     else:
-        value = getattr(dupe, column.attr, '')
+        value = getattr(dupe, column.name, '')
     return value.lower() if isinstance(value, str) else value
 
 class DupeGuru(RegistrableApplication, Broadcaster):
@@ -411,6 +409,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.save_to_xml(p)
+        self.notify('save_session')
     
     def save_as(self, filename):
         self.results.save_to_xml(filename)

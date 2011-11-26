@@ -9,8 +9,9 @@ import os.path as op
 
 from hscommon.trans import trget
 from hscommon.util import format_size
+from hscommon.gui.column import Column
 
-from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp, format_perc,
+from core.app import (DupeGuru as DupeGuruBase, format_timestamp, format_perc,
     format_dupe_count, cmp_value)
 from .scanner import ScannerPE
 from . import prioritize
@@ -27,14 +28,15 @@ def get_delta_dimensions(value, ref_value):
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     COLUMNS = [
+        Column('marked', ''),
         Column('name', coltr("Filename")),
-        Column('folder_path', coltr("Folder")),
-        Column('size', coltr("Size (KB)")),
-        Column('extension', coltr("Kind")),
-        Column('dimensions', coltr("Dimensions")),
-        Column('mtime', coltr("Modification")),
-        Column('percentage', coltr("Match %")),
-        Column('dupe_count', coltr("Dupe Count")),
+        Column('folder_path', coltr("Folder"), optional=True),
+        Column('size', coltr("Size (KB)"), optional=True),
+        Column('extension', coltr("Kind"), visible=False, optional=True),
+        Column('dimensions', coltr("Dimensions"), optional=True),
+        Column('mtime', coltr("Modification"), visible=False, optional=True),
+        Column('percentage', coltr("Match %"), optional=True),
+        Column('dupe_count', coltr("Dupe Count"), visible=False, optional=True),
     ]
     DELTA_COLUMNS = {2, 4, 5}
     METADATA_TO_READ = ['size', 'mtime', 'dimensions']
@@ -64,16 +66,16 @@ class DupeGuru(DupeGuruBase):
             percentage = group.percentage
             dupe_count = len(group.dupes)
         dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
-        return [
-            dupe.name,
-            str(dupe_folder_path),
-            format_size(size, 0, 1, False),
-            dupe.extension,
-            format_dimensions(dimensions),
-            format_timestamp(mtime, delta and m),
-            format_perc(percentage),
-            format_dupe_count(dupe_count)
-        ]
+        return {
+            'name': dupe.name,
+            'folder_path': str(dupe_folder_path),
+            'size': format_size(size, 0, 1, False),
+            'extension': dupe.extension,
+            'dimensions': format_dimensions(dimensions),
+            'mtime': format_timestamp(mtime, delta and m),
+            'percentage': format_perc(percentage),
+            'dupe_count': format_dupe_count(dupe_count),
+        }
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if key == self.MATCHPERC_COL:

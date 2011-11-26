@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-11
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -10,6 +9,7 @@
 from operator import attrgetter
 
 from hscommon.gui.table import GUITable, Row
+from hscommon.gui.column import Columns
 
 from .base import GUIObject
 
@@ -55,6 +55,8 @@ class ResultTable(GUIObject, GUITable):
     def __init__(self, view, app):
         GUIObject.__init__(self, view, app)
         GUITable.__init__(self)
+        self.COLUMNS = app.COLUMNS
+        self.columns = Columns(self, prefaccess=app, savename='ResultTable')
         self._power_marker = False
         self._delta_values = False
         self._sort_descriptors = (0, True)
@@ -63,6 +65,7 @@ class ResultTable(GUIObject, GUITable):
     def connect(self):
         GUIObject.connect(self)
         self._refresh_with_view()
+        self.columns.restore_columns()
     
     def _restore_selection(self, previous_selection):
         if self.app.selected_dupes:
@@ -161,4 +164,7 @@ class ResultTable(GUIObject, GUITable):
         self.refresh(refresh_view=False)
         self.select(indexes)
         self.view.refresh()
+    
+    def save_session(self):
+        self.columns.save_columns()
     

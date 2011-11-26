@@ -21,7 +21,7 @@ class PyResultTable(PyTable):
     def setDeltaValuesMode_(self, value):
         self.py.delta_values = value
     
-    @signature('@@:ii')
+    @signature('@@:i@')
     def valueForRow_column_(self, row_index, column):
         return self.py.get_row_value(row_index, column)
     

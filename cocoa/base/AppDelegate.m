@@ -158,14 +158,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[ProgressController mainProgressController] setWorker:py];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    //Restore Columns
-    NSArray *columnsOrder = [ud arrayForKey:@"columnsOrder"];
-    NSDictionary *columnsWidth = [ud dictionaryForKey:@"columnsWidth"];
-    if ([columnsOrder count])
-        [[self resultWindow] restoreColumnsPosition:columnsOrder widths:columnsWidth];
-    else
-        [[self resultWindow] resetColumnsToDefault:nil];
     [py initialRegistrationSetup];
     [py loadSession];
 }
@@ -191,8 +183,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject: [[self resultWindow] getColumnsOrder] forKey:@"columnsOrder"];
-    [ud setObject: [[self resultWindow] getColumnsWidth] forKey:@"columnsWidth"];
     NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
     if (sc >= 10) {
         sc = -1;

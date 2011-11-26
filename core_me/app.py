@@ -7,8 +7,9 @@
 
 from hscommon.trans import trget
 from hscommon.util import format_size, format_time
+from hscommon.gui.column import Column
 
-from core.app import (DupeGuru as DupeGuruBase, Column, format_timestamp,
+from core.app import (DupeGuru as DupeGuruBase, format_timestamp,
     format_perc, format_words, format_dupe_count, cmp_value)
 from . import prioritize
 from . import __appname__
@@ -19,24 +20,25 @@ coltr = trget('columns')
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     COLUMNS = [
+        Column('marked', ''),
         Column('name', coltr("Filename")),
-        Column('folder_path', coltr("Folder")),
-        Column('size', coltr("Size (MB)")),
-        Column('duration', coltr("Time")),
-        Column('bitrate', coltr("Bitrate")),
-        Column('samplerate', coltr("Sample Rate")),
-        Column('extension', coltr("Kind")),
-        Column('mtime', coltr("Modification")),
-        Column('title', coltr("Title")),
-        Column('artist', coltr("Artist")),
-        Column('album', coltr("Album")),
-        Column('genre', coltr("Genre")),
-        Column('year', coltr("Year")),
-        Column('track', coltr("Track Number")),
-        Column('comment', coltr("Comment")),
-        Column('percentage', coltr("Match %")),
-        Column('words', coltr("Words Used")),
-        Column('dupe_count', coltr("Dupe Count")),
+        Column('folder_path', coltr("Folder"), visible=False, optional=True),
+        Column('size', coltr("Size (MB)"), optional=True),
+        Column('duration', coltr("Time"), optional=True),
+        Column('bitrate', coltr("Bitrate"), optional=True),
+        Column('samplerate', coltr("Sample Rate"), visible=False, optional=True),
+        Column('extension', coltr("Kind"), optional=True),
+        Column('mtime', coltr("Modification"), visible=False, optional=True),
+        Column('title', coltr("Title"), visible=False, optional=True),
+        Column('artist', coltr("Artist"), visible=False, optional=True),
+        Column('album', coltr("Album"), visible=False, optional=True),
+        Column('genre', coltr("Genre"), visible=False, optional=True),
+        Column('year', coltr("Year"), visible=False, optional=True),
+        Column('track', coltr("Track Number"), visible=False, optional=True),
+        Column('comment', coltr("Comment"), visible=False, optional=True),
+        Column('percentage', coltr("Match %"), optional=True),
+        Column('words', coltr("Words Used"), visible=False, optional=True),
+        Column('dupe_count', coltr("Dupe Count"), visible=False, optional=True),
     ]
     DELTA_COLUMNS = {2, 3, 4, 5, 7}
     METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
@@ -69,26 +71,26 @@ class DupeGuru(DupeGuruBase):
         else:
             percentage = group.percentage
             dupe_count = len(group.dupes)
-        return [
-            dupe.name,
-            str(dupe.folder_path),
-            format_size(size, 2, 2, False),
-            format_time(duration, with_hours=False),
-            str(bitrate),
-            str(samplerate),
-            dupe.extension,
-            format_timestamp(mtime,delta and m),
-            dupe.title,
-            dupe.artist,
-            dupe.album,
-            dupe.genre,
-            dupe.year,
-            str(dupe.track),
-            dupe.comment,
-            format_perc(percentage),
-            format_words(dupe.words) if hasattr(dupe, 'words') else '',
-            format_dupe_count(dupe_count)
-        ]
+        return {
+            'name': dupe.name,
+            'folder_path': str(dupe.folder_path),
+            'size': format_size(size, 2, 2, False),
+            'duration': format_time(duration, with_hours=False),
+            'bitrate': str(bitrate),
+            'samplerate': str(samplerate),
+            'extension': dupe.extension,
+            'mtime': format_timestamp(mtime,delta and m),
+            'title': dupe.title,
+            'artist': dupe.artist,
+            'album': dupe.album,
+            'genre': dupe.genre,
+            'year': dupe.year,
+            'track': str(dupe.track),
+            'comment': dupe.comment,
+            'percentage': format_perc(percentage),
+            'words': format_words(dupe.words) if hasattr(dupe, 'words') else '',
+            'dupe_count': format_dupe_count(dupe_count),
+        }
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if key == self.MATCHPERC_COL:

@@ -16,19 +16,25 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Override */
 - (void)initResultColumns
 {
-    [super initResultColumns];
-    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
-    _resultColumns = [[NSMutableArray alloc] init];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TRCOL(@"Folder") width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TRCOL(@"Size (KB)") width:63 refCol:refCol];
-    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:sizeCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:3 title:TRCOL(@"Kind") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:4 title:TRCOL(@"Dimensions") width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TRCOL(@"Modification") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TRCOL(@"Match %") width:58 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TRCOL(@"Dupe Count") width:80 refCol:refCol]];
+    HSColumnDef defs[] = {
+        {@"marked", 26, 26, 26, NO, [NSButtonCell class]},
+        {@"name", 162, 16, 0, YES, nil},
+        {@"folder_path", 142, 16, 0, YES, nil},
+        {@"size", 63, 16, 0, YES, nil},
+        {@"extension", 40, 16, 0, YES, nil},
+        {@"dimensions", 73, 16, 0, YES, nil},
+        {@"mtime", 120, 16, 0, YES, nil},
+        {@"percentage", 58, 16, 0, YES, nil},
+        {@"dupe_count", 80, 16, 0, YES, nil},
+        nil
+    };
+    [[self columns] initializeColumns:defs];
+    NSTableColumn *c = [matches tableColumnWithIdentifier:@"marked"];
+    [[c dataCell] setButtonType:NSSwitchButton];
+    [[c dataCell] setControlSize:NSSmallControlSize];
+    c = [[self tableView] tableColumnWithIdentifier:@"size"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    [[table columns] restoreColumns];
 }
 
 - (void)setScanOptions
@@ -49,22 +55,5 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
     [(PyDupeGuru *)py clearPictureCache];
-}
-
-- (IBAction)resetColumnsToDefault:(id)sender
-{
-    NSMutableArray *columnsOrder = [NSMutableArray array];
-    [columnsOrder addObject:@"0"];
-    [columnsOrder addObject:@"1"];
-    [columnsOrder addObject:@"2"];
-    [columnsOrder addObject:@"4"];
-    [columnsOrder addObject:@"6"];
-    NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
-    [columnsWidth setObject:i2n(162) forKey:@"0"];
-    [columnsWidth setObject:i2n(142) forKey:@"1"];
-    [columnsWidth setObject:i2n(63) forKey:@"2"];
-    [columnsWidth setObject:i2n(73) forKey:@"4"];
-    [columnsWidth setObject:i2n(58) forKey:@"6"];
-    [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
 }
 @end

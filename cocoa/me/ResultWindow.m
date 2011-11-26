@@ -34,58 +34,45 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)initResultColumns
 {
-    [super initResultColumns];
-    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
-    _resultColumns = [[NSMutableArray alloc] init];
-    [_resultColumns addObject:[matches tableColumnWithIdentifier:@"0"]]; // File Name
-    [_resultColumns addObject:[self getColumnForIdentifier:1 title:TRCOL(@"Folder") width:120 refCol:refCol]];
-    NSTableColumn *sizeCol = [self getColumnForIdentifier:2 title:TRCOL(@"Size (MB)") width:63 refCol:refCol];
-    [[sizeCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:sizeCol];
-    NSTableColumn *timeCol = [self getColumnForIdentifier:3 title:TRCOL(@"Time") width:50 refCol:refCol];
-    [[timeCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:timeCol];
-    NSTableColumn *brCol = [self getColumnForIdentifier:4 title:TRCOL(@"Bitrate") width:50 refCol:refCol];
-    [[brCol dataCell] setAlignment:NSRightTextAlignment];
-    [_resultColumns addObject:brCol];
-    [_resultColumns addObject:[self getColumnForIdentifier:5 title:TRCOL(@"Sample Rate") width:60 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:6 title:TRCOL(@"Kind") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:7 title:TRCOL(@"Modification") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:8 title:TRCOL(@"Title") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:9 title:TRCOL(@"Artist") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:10 title:TRCOL(@"Album") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:11 title:TRCOL(@"Genre") width:80 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:12 title:TRCOL(@"Year") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:13 title:TRCOL(@"Track Number") width:40 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:14 title:TRCOL(@"Comment") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:15 title:TRCOL(@"Match %") width:57 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:16 title:TRCOL(@"Words Used") width:120 refCol:refCol]];
-    [_resultColumns addObject:[self getColumnForIdentifier:17 title:TRCOL(@"Dupe Count") width:80 refCol:refCol]];
+    HSColumnDef defs[] = {
+        {@"marked", 26, 26, 26, NO, [NSButtonCell class]},
+        {@"name", 235, 16, 0, YES, nil},
+        {@"folder_path", 120, 16, 0, YES, nil},
+        {@"size", 63, 16, 0, YES, nil},
+        {@"duration", 50, 16, 0, YES, nil},
+        {@"bitrate", 50, 16, 0, YES, nil},
+        {@"samplerate", 60, 16, 0, YES, nil},
+        {@"extension", 40, 16, 0, YES, nil},
+        {@"mtime", 120, 16, 0, YES, nil},
+        {@"title", 120, 16, 0, YES, nil},
+        {@"artist", 120, 16, 0, YES, nil},
+        {@"album", 120, 16, 0, YES, nil},
+        {@"genre", 80, 16, 0, YES, nil},
+        {@"year", 40, 16, 0, YES, nil},
+        {@"track", 40, 16, 0, YES, nil},
+        {@"comment", 120, 16, 0, YES, nil},
+        {@"percentage", 57, 16, 0, YES, nil},
+        {@"words", 120, 16, 0, YES, nil},
+        {@"dupe_count", 80, 16, 0, YES, nil},
+        nil
+    };
+    [[self columns] initializeColumns:defs];
+    NSTableColumn *c = [matches tableColumnWithIdentifier:@"marked"];
+    [[c dataCell] setButtonType:NSSwitchButton];
+    [[c dataCell] setControlSize:NSSmallControlSize];
+    c = [[self tableView] tableColumnWithIdentifier:@"size"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    c = [[self tableView] tableColumnWithIdentifier:@"duration"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    c = [[self tableView] tableColumnWithIdentifier:@"bitrate"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    [[table columns] restoreColumns];
 }
 
 /* Actions */
 - (IBAction)removeDeadTracks:(id)sender
 {
     [(PyDupeGuru *)py scanDeadTracks];
-}
-
-- (IBAction)resetColumnsToDefault:(id)sender
-{
-    NSMutableArray *columnsOrder = [NSMutableArray array];
-    [columnsOrder addObject:@"0"];
-    [columnsOrder addObject:@"2"];
-    [columnsOrder addObject:@"3"];
-    [columnsOrder addObject:@"4"];
-    [columnsOrder addObject:@"6"];
-    [columnsOrder addObject:@"15"];
-    NSMutableDictionary *columnsWidth = [NSMutableDictionary dictionary];
-    [columnsWidth setObject:i2n(235) forKey:@"0"];
-    [columnsWidth setObject:i2n(63) forKey:@"2"];
-    [columnsWidth setObject:i2n(50) forKey:@"3"];
-    [columnsWidth setObject:i2n(50) forKey:@"4"];
-    [columnsWidth setObject:i2n(40) forKey:@"6"];
-    [columnsWidth setObject:i2n(57) forKey:@"15"];
-    [self restoreColumnsPosition:columnsOrder widths:columnsWidth];
 }
 
 /* Notifications */

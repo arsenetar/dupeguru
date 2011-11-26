@@ -27,7 +27,6 @@ http://www.hardcoded.net/licenses/bsd_license
     AppDelegateBase *app;
     PyDupeGuruBase *py;
     NSMenu *columnsMenu;
-    NSMutableArray *_resultColumns;
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
@@ -41,10 +40,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Helpers */
 - (void)fillColumnsMenu;
-- (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn;
 - (NSArray *)getColumnsOrder;
-- (NSDictionary *)getColumnsWidth;
-- (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth;
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 - (void)updateOptionSegments;
 

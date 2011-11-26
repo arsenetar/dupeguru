@@ -50,9 +50,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Virtual */
 - (void)initResultColumns
 {
-    NSUserDefaults *udc = [NSUserDefaultsController sharedUserDefaultsController];
-    NSTableColumn *refCol = [matches tableColumnWithIdentifier:@"0"];
-    [refCol bind:@"fontSize" toObject:udc withKeyPath:@"values.TableFontSize" options:nil];
 }
 
 - (void)setScanOptions
@@ -62,34 +59,20 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Helpers */
 - (void)fillColumnsMenu
 {
-    // The columns menu is supposed to be empty and initResultColumns must have been called
-    for (NSTableColumn *col in _resultColumns)
-    {
-        NSMenuItem *mi = [columnsMenu addItemWithTitle:[[col headerCell] stringValue] action:@selector(toggleColumn:) keyEquivalent:@""];
-        [mi setTag:[[col identifier] integerValue]];
+    NSArray *menuItems = [[[table columns] py] menuItems];
+    for (NSInteger i=0; i < [menuItems count]; i++) {
+        NSArray *pair = [menuItems objectAtIndex:i];
+        NSString *display = [pair objectAtIndex:0];
+        BOOL marked = n2b([pair objectAtIndex:1]);
+        NSMenuItem *mi = [columnsMenu addItemWithTitle:display action:@selector(toggleColumn:) keyEquivalent:@""];
         [mi setTarget:self];
-        if ([[matches tableColumns] containsObject:col])
-            [mi setState:NSOnState];
+        [mi setState:marked ? NSOnState : NSOffState];
+        [mi setTag:i];
     }
     [columnsMenu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *mi = [columnsMenu addItemWithTitle:TR(@"Reset to Default")
         action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
     [mi setTarget:self];
-}
-
-- (NSTableColumn *)getColumnForIdentifier:(NSInteger)aIdentifier title:(NSString *)aTitle width:(NSInteger)aWidth refCol:(NSTableColumn *)aColumn
-{
-    NSNumber *n = [NSNumber numberWithInteger:aIdentifier];
-    NSTableColumn *col = [[NSTableColumn alloc] initWithIdentifier:[n stringValue]];
-    [col setWidth:aWidth];
-    [col setEditable:NO];
-    [[col dataCell] setFont:[[aColumn dataCell] font]];
-    [[col headerCell] setStringValue:aTitle];
-    [col setResizingMask:NSTableColumnUserResizingMask];
-    [col setSortDescriptorPrototype:[[NSSortDescriptor alloc] initWithKey:[n stringValue] ascending:YES]];
-    NSUserDefaults *udc = [NSUserDefaultsController sharedUserDefaultsController];
-    [col bind:@"fontSize" toObject:udc withKeyPath:@"values.TableFontSize" options:nil];
-    return col;
 }
 
 //Returns an array of identifiers, in order.
@@ -101,40 +84,6 @@ http://www.hardcoded.net/licenses/bsd_license
         [result addObject:colId];
     }
     return result;
-}
-
-- (NSDictionary *)getColumnsWidth
-{
-    NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    for (NSTableColumn *col in [matches tableColumns]) {
-        NSString *colId = [col identifier];
-        NSNumber *width = [NSNumber numberWithDouble:[col width]];
-        [result setObject:width forKey:colId];
-    }
-    return result;
-}
-
-- (void)restoreColumnsPosition:(NSArray *)aColumnsOrder widths:(NSDictionary *)aColumnsWidth
-{
-    for (NSMenuItem *mi in [columnsMenu itemArray]) {
-        if ([mi state] == NSOnState) {
-            [self toggleColumn:mi];
-        }
-    }
-    //Add columns and set widths
-    for (NSString *colId in aColumnsOrder) {
-        NSInteger colIndex = [colId integerValue];
-        if ((colIndex == 0) && (![colId isEqual:@"0"])) {
-            continue;
-        }
-        NSTableColumn *col = [_resultColumns objectAtIndex:colIndex];
-        NSNumber *width = [aColumnsWidth objectForKey:[col identifier]];
-        NSMenuItem *mi = [columnsMenu itemWithTag:colIndex];
-        if (width) {
-            [col setWidth:[width floatValue]];
-        }
-        [self toggleColumn:mi];
-    }
 }
 
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
@@ -223,6 +172,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)exportToXHTML:(id)sender
 {
+    // XXX No need to get column order from GUI anymore.
     NSString *exported = [py exportToXHTMLwithColumns:[self getColumnsOrder]];
     [[NSWorkspace sharedWorkspace] openFile:exported];
 }
@@ -346,7 +296,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)resetColumnsToDefault:(id)sender
 {
-    // Virtual
+    [[[table columns] py] resetToDefaults];
 }
 
 - (IBAction)revealSelected:(id)sender
@@ -384,19 +334,8 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)toggleColumn:(id)sender
 {
     NSMenuItem *mi = sender;
-    NSString *colId = [NSString stringWithFormat:@"%d",[mi tag]];
-    NSTableColumn *col = [matches tableColumnWithIdentifier:colId];
-    if (col == nil) {
-        //Add Column
-        col = [_resultColumns objectAtIndex:[mi tag]];
-        [matches addTableColumn:col];
-        [mi setState:NSOnState];
-    }
-    else {
-        //Remove column
-        [matches removeTableColumn:col];
-        [mi setState:NSOffState];
-    }
+    BOOL checked = [[[table columns] py] toggleMenuItem:[mi tag]];
+    [mi setState:checked ? NSOnState : NSOffState];
 }
 
 - (IBAction)toggleDetailsPanel:(id)sender

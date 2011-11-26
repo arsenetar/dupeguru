@@ -15,7 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (BOOL)deltaValuesMode;
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
 
-- (NSString *)valueForRow:(NSInteger)rowIndex column:(NSInteger)aColumn;
+- (NSString *)valueForRow:(NSInteger)rowIndex column:(NSString *)aColumn;
 - (BOOL)renameSelected:(NSString *)aNewName;
 - (void)sortBy:(NSInteger)aIdentifier ascending:(BOOL)aAscending;
 - (void)markSelected;

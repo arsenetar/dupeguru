@@ -22,6 +22,7 @@
 		CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE5335FC142BBFAF008E5374 /* HSQuicklook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5335FB142BBFAF008E5374 /* HSQuicklook.m */; };
 		CE533603142BC034008E5374 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE533602142BC034008E5374 /* Quartz.framework */; };
+		CE54A87E148046F9008EEA77 /* HSColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54A87D148046F9008EEA77 /* HSColumns.m */; };
 		CE647E571173024A006D28BA /* ProblemDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE647E551173024A006D28BA /* ProblemDialog.m */; };
 		CE665B3013225ADD003F5CFB /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE665B2E13225ADD003F5CFB /* ExtraFairwareReminder.m */; };
 		CE665B3313225AF8003F5CFB /* ExtraFairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE665B3113225AF8003F5CFB /* ExtraFairwareReminder.xib */; };
@@ -126,6 +127,9 @@
 		CE5335FA142BBFAF008E5374 /* HSQuicklook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSQuicklook.h; path = ../../cocoalib/HSQuicklook.h; sourceTree = "<group>"; };
 		CE5335FB142BBFAF008E5374 /* HSQuicklook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQuicklook.m; path = ../../cocoalib/HSQuicklook.m; sourceTree = "<group>"; };
 		CE533602142BC034008E5374 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		CE54A87A14804687008EEA77 /* PyColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyColumns.h; sourceTree = "<group>"; };
+		CE54A87C148046F9008EEA77 /* HSColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSColumns.h; sourceTree = "<group>"; };
+		CE54A87D148046F9008EEA77 /* HSColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColumns.m; sourceTree = "<group>"; };
 		CE647E541173024A006D28BA /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
 		CE647E551173024A006D28BA /* ProblemDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProblemDialog.m; path = ../base/ProblemDialog.m; sourceTree = SOURCE_ROOT; };
 		CE647E561173024A006D28BA /* PyProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyProblemDialog.h; path = ../base/PyProblemDialog.h; sourceTree = SOURCE_ROOT; };
@@ -386,6 +390,8 @@
 		CE76FDC7111EE38E006618EA /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE54A87C148046F9008EEA77 /* HSColumns.h */,
+				CE54A87D148046F9008EEA77 /* HSColumns.m */,
 				CEBE4D72111F0EE1009AAC6D /* HSWindowController.h */,
 				CEBE4D73111F0EE1009AAC6D /* HSWindowController.m */,
 				CE76FDDD111EE42F006618EA /* HSOutline.h */,
@@ -406,6 +412,7 @@
 		CE76FDCC111EE38E006618EA /* proxies */ = {
 			isa = PBXGroup;
 			children = (
+				CE54A87A14804687008EEA77 /* PyColumns.h */,
 				CE76FDCD111EE38E006618EA /* PyGUI.h */,
 				CE76FDCE111EE38E006618EA /* PyOutline.h */,
 				CE8C53B61173248F0011B41F /* PyTable.h */,
@@ -636,6 +643,7 @@
 				CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */,
 				CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */,
 				CE5335FC142BBFAF008E5374 /* HSQuicklook.m in Sources */,
+				CE54A87E148046F9008EEA77 /* HSColumns.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

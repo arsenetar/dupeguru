@@ -21,6 +21,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPyParent:(id)aPyParent view:(NSTableView *)aTableView
 {
     self = [super initWithPyClassName:@"PyResultTable" pyParent:aPyParent view:aTableView];
+    columns = [[HSColumns alloc] initWithPy:[[self py] columns] tableView:aTableView];
     [self connect];
     return self;
 }
@@ -28,6 +29,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [self disconnect];
+    [columns release];
     [_deltaColumns release];
     [super dealloc];
 }
@@ -58,6 +60,11 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Public */
+- (HSColumns *)columns
+{
+    return columns;
+}
+
 - (BOOL)powerMarkerMode
 {
     return [[self py] powerMarkerMode];
@@ -108,8 +115,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([identifier isEqual:@"marked"]) {
         return [[self py] valueForColumn:@"marked" row:row];
     }
-    NSInteger columnId = [identifier integerValue];
-    return [[self py] valueForRow:row column:columnId];
+    return [[self py] valueForRow:row column:identifier];
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)column row:(NSInteger)row
@@ -118,8 +124,8 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([identifier isEqual:@"marked"]) {
         [[self py] setValue:object forColumn:identifier row:row];
     }
-    else if ([identifier isEqual:@"0"]) {
-        NSString *oldName = [[self py] valueForRow:row column:0];
+    else if ([identifier isEqual:@"name"]) {
+        NSString *oldName = [[self py] valueForRow:row column:identifier];
         NSString *newName = object;
         if (![newName isEqual:oldName]) {
             BOOL renamed = [[self py] renameSelected:newName];
