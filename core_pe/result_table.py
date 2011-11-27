@@ -24,3 +24,4 @@ class ResultTable(ResultTableBase):
         Column('percentage', coltr("Match %"), optional=True),
         Column('dupe_count', coltr("Dupe Count"), visible=False, optional=True),
     ]
+    DELTA_COLUMNS = {'size', 'dimensions', 'mtime'}

@@ -127,9 +127,6 @@ class PyDupeGuruBase(PyFairware):
     def resultsAreModified(self):
         return self.py.results.is_modified
     
-    def deltaColumns(self):
-        return list(self.py.DELTA_COLUMNS)
-    
     #---Properties
     @signature('v@:c')
     def setMixFileKind_(self, mix_file_kind):

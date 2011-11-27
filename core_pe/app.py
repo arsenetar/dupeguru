@@ -24,7 +24,6 @@ def get_delta_dimensions(value, ref_value):
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    DELTA_COLUMNS = {'size', 'dimensions', 'mtime'}
     METADATA_TO_READ = ['size', 'mtime', 'dimensions']
     
     def __init__(self, view, appdata):
@@ -71,7 +70,7 @@ class DupeGuru(DupeGuruBase):
             dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
             return str(dupe_folder_path).lower()
         r = cmp_value(dupe, key)
-        if delta and (key in self.DELTA_COLUMNS):
+        if delta and (key in self.result_table.DELTA_COLUMNS):
             ref_value = cmp_value(get_group().ref, key)
             if key == 4: # dimensions
                 r = get_delta_dimensions(r, ref_value)

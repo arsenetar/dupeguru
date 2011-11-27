@@ -34,3 +34,4 @@ class ResultTable(ResultTableBase):
         Column('words', coltr("Words Used"), visible=False, optional=True),
         Column('dupe_count', coltr("Dupe Count"), visible=False, optional=True),
     ]
+    DELTA_COLUMNS = {'size', 'duration', 'bitrate', 'samplerate', 'mtime'}

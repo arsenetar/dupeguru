@@ -14,6 +14,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
 - (BOOL)deltaValuesMode;
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
+- (NSArray *)deltaColumns;
 
 - (NSString *)valueForRow:(NSInteger)rowIndex column:(NSString *)aColumn;
 - (BOOL)renameSelected:(NSString *)aNewName;

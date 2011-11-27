@@ -24,7 +24,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
 - (BOOL)deltaValuesMode;
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
-- (void)setDeltaColumns:(NSSet *)aDeltaColumns;
 - (NSInteger)selectedDupeCount;
 - (void)removeSelected;
 @end;

@@ -22,6 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     self = [super initWithPy:aPy view:aTableView];
     columns = [[HSColumns alloc] initWithPy:[[self py] columns] tableView:aTableView];
+    _deltaColumns = [[NSSet setWithArray:[[self py] deltaColumns]] retain];
     [self connect];
     return self;
 }
@@ -83,12 +84,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode
 {
     [[self py] setDeltaValuesMode:aDeltaValuesMode];
-}
-
-- (void)setDeltaColumns:(NSSet *)aDeltaColumns
-{
-    [_deltaColumns release];
-    _deltaColumns = [aDeltaColumns retain];
 }
 
 - (NSInteger)selectedDupeCount

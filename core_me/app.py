@@ -16,7 +16,6 @@ from .result_table import ResultTable
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    DELTA_COLUMNS = {'size', 'duration', 'bitrate', 'samplerate', 'mtime'}
     METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
         'album', 'genre', 'year', 'track', 'comment']
 
@@ -74,7 +73,7 @@ class DupeGuru(DupeGuruBase):
         if key == 'dupe_count':
             return 0
         r = cmp_value(dupe, key)
-        if delta and (key in self.DELTA_COLUMNS):
+        if delta and (key in self.result_table.DELTA_COLUMNS):
             r -= cmp_value(get_group().ref, key)
         return r
     
