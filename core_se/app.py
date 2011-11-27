@@ -15,7 +15,7 @@ from .result_table import ResultTable
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    DELTA_COLUMNS = {2, 4}
+    DELTA_COLUMNS = {'size', 'mtime'}
     METADATA_TO_READ = ['size', 'mtime']
     
     def __init__(self, view, appdata):

@@ -24,7 +24,7 @@ def get_delta_dimensions(value, ref_value):
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    DELTA_COLUMNS = {2, 4, 5}
+    DELTA_COLUMNS = {'size', 'dimensions', 'mtime'}
     METADATA_TO_READ = ['size', 'mtime', 'dimensions']
     
     def __init__(self, view, appdata):

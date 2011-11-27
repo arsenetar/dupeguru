@@ -14,7 +14,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface ResultTable : HSTable <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 {
-    NSIndexSet *_deltaColumns;
+    NSSet *_deltaColumns;
     HSColumns *columns;
 }
 - (id)initWithPy:(id)aPy view:(NSTableView *)aTableView;
@@ -24,7 +24,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
 - (BOOL)deltaValuesMode;
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode;
-- (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns;
+- (void)setDeltaColumns:(NSSet *)aDeltaColumns;
 - (NSInteger)selectedDupeCount;
 - (void)removeSelected;
 @end;

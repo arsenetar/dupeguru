@@ -31,7 +31,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self fillColumnsMenu];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
-    [table setDeltaColumns:[Utils array2IndexSet:[py deltaColumns]]];
+    [table setDeltaColumns:[NSSet setWithArray:[py deltaColumns]]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];

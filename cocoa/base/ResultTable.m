@@ -85,7 +85,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self py] setDeltaValuesMode:aDeltaValuesMode];
 }
 
-- (void)setDeltaColumns:(NSIndexSet *)aDeltaColumns
+- (void)setDeltaColumns:(NSSet *)aDeltaColumns
 {
     [_deltaColumns release];
     _deltaColumns = [aDeltaColumns retain];
@@ -165,8 +165,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
         else if (isMarkable) {
             if ([self deltaValuesMode]) {
-                NSInteger i = [[column identifier] integerValue];
-                if ([_deltaColumns containsIndex:i]) {
+                if ([_deltaColumns containsObject:[column identifier]]) {
                     color = [NSColor orangeColor];
                 }
             }

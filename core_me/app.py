@@ -16,7 +16,7 @@ from .result_table import ResultTable
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    DELTA_COLUMNS = {2, 3, 4, 5, 7}
+    DELTA_COLUMNS = {'size', 'duration', 'bitrate', 'samplerate', 'mtime'}
     METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
         'album', 'genre', 'year', 'track', 'comment']
 

@@ -43,7 +43,7 @@ class DupeGuru(DupeGuruBase):
         Column('size', 'Size (KB)'),
         Column('extension', 'Kind'),
     ]
-    DELTA_COLUMNS = {2,}
+    DELTA_COLUMNS = {'size', }
     METADATA_TO_READ = ['size']
     
     def __init__(self):
