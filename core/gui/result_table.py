@@ -52,14 +52,13 @@ class DupeRow(Row):
     
 
 class ResultTable(GUIObject, GUITable):
-    def __init__(self, view, app):
-        GUIObject.__init__(self, view, app)
+    def __init__(self, app):
+        GUIObject.__init__(self, None, app)
         GUITable.__init__(self)
-        self.COLUMNS = app.COLUMNS
         self.columns = Columns(self, prefaccess=app, savename='ResultTable')
         self._power_marker = False
         self._delta_values = False
-        self._sort_descriptors = (0, True)
+        self._sort_descriptors = ('name', True)
     
     #--- Override
     def connect(self):

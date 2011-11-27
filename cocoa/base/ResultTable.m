@@ -18,9 +18,9 @@ http://www.hardcoded.net/licenses/bsd_license
 @end
 
 @implementation ResultTable
-- (id)initWithPyParent:(id)aPyParent view:(NSTableView *)aTableView
+- (id)initWithPy:(id)aPy view:(NSTableView *)aTableView
 {
-    self = [super initWithPyClassName:@"PyResultTable" pyParent:aPyParent view:aTableView];
+    self = [super initWithPy:aPy view:aTableView];
     columns = [[HSColumns alloc] initWithPy:[[self py] columns] tableView:aTableView];
     [self connect];
     return self;
@@ -145,7 +145,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([[tableView sortDescriptors] count] < 1)
         return;
     NSSortDescriptor *sd = [[tableView sortDescriptors] objectAtIndex:0];
-    [[self py] sortBy:[[sd key] integerValue] ascending:[sd ascending]];
+    [[self py] sortBy:[sd key] ascending:[sd ascending]];
 }
 
 - (void)tableView:(NSTableView *)aTableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)column row:(NSInteger)row

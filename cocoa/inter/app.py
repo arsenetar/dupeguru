@@ -3,12 +3,13 @@ import logging
 from jobprogress import job
 from hscommon import cocoa
 from hscommon.cocoa import install_exception_hook
-from hscommon.cocoa.inter import signature, PyFairware
+from hscommon.cocoa.inter import signature, subproxy, PyFairware
 from hscommon.cocoa.objcmin import (NSNotificationCenter, NSSearchPathForDirectoriesInDomains,
     NSApplicationSupportDirectory, NSUserDomainMask, NSWorkspace)
 from hscommon.trans import trget
 
 from core.app import JobType
+from .result_table import PyResultTable
 
 tr = trget('ui')
 
@@ -30,6 +31,8 @@ class PyDupeGuruBase(PyFairware):
     
     def bindCocoa_(self, cocoa):
         self.cocoa = cocoa
+    
+    resultTable = subproxy('resultTable', 'result_table', PyResultTable)
     
     #---Directories
     def addDirectory_(self, directory):

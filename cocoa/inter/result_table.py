@@ -1,10 +1,6 @@
 from hscommon.cocoa.inter import signature, PyTable
 
-from core.gui.result_table import ResultTable
-
 class PyResultTable(PyTable):
-    py_class = ResultTable
-    
     @signature('c@:')
     def powerMarkerMode(self):
         return self.py.power_marker
@@ -29,7 +25,7 @@ class PyResultTable(PyTable):
     def renameSelected_(self, newname):
         return self.py.rename_selected(newname)
     
-    @signature('v@:ic')
+    @signature('v@:@c')
     def sortBy_ascending_(self, key, asc):
         self.py.sort(key, asc)
     

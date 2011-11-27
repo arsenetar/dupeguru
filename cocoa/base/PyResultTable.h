@@ -17,7 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (NSString *)valueForRow:(NSInteger)rowIndex column:(NSString *)aColumn;
 - (BOOL)renameSelected:(NSString *)aNewName;
-- (void)sortBy:(NSInteger)aIdentifier ascending:(BOOL)aAscending;
+- (void)sortBy:(NSString *)aIdentifier ascending:(BOOL)aAscending;
 - (void)markSelected;
 - (void)removeSelected;
 - (NSInteger)selectedDupeCount;

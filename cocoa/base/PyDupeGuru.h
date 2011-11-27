@@ -7,10 +7,12 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import "PyResultTable.h"
 #import "PyApp.h"
 
 @interface PyDupeGuruBase : PyApp
 - (void)bindCocoa:(id)cocoa;
+- (PyResultTable *)resultTable;
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)removeDirectory:(NSNumber *)index;

@@ -12,7 +12,8 @@ from hscommon.notify import Listener
 class GUIObject(Listener):
     def __init__(self, view, app):
         Listener.__init__(self, app)
-        self.view = view
+        if view is not None:
+            self.view = view
         self.app = app
     
     def directories_changed(self):

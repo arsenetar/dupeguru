@@ -65,11 +65,11 @@ def format_perc(p):
 def format_dupe_count(c):
     return str(c) if c else '---'
 
-def cmp_value(dupe, column):
-    if column.name == 'name':
+def cmp_value(dupe, attrname):
+    if attrname == 'name':
         value = rem_file_ext(dupe.name)
     else:
-        value = getattr(dupe, column.name, '')
+        value = getattr(dupe, attrname, '')
     return value.lower() if isinstance(value, str) else value
 
 class DupeGuru(RegistrableApplication, Broadcaster):
@@ -101,6 +101,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
+        # subclasses must create self.result_table
     
     #--- Virtual
     def _get_display_info(self, dupe, group, delta):
@@ -276,7 +277,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         column_ids = [colid for colid in column_ids if colid.isdigit()]
         column_ids = list(map(int, column_ids))
         column_ids.sort()
-        colnames = [col.display for i, col in enumerate(self.COLUMNS) if i in column_ids]
+        colnames = [col.display for i, col in enumerate(self.result_table.COLUMNS) if i in column_ids]
         rows = []
         for group in self.results.groups:
             for dupe in group:
@@ -287,13 +288,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return export.export_to_xhtml(colnames, rows)
     
     def get_display_info(self, dupe, group, delta=False):
+        def empty_data():
+            return {c.name: '---' for c in self.result_table.COLUMNS[1:]}
         if (dupe is None) or (group is None):
-            return ['---'] * len(self.COLUMNS)
+            return empty_data()
         try:
             return self._get_display_info(dupe, group, delta)
         except Exception as e:
             logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
-            return ['---'] * len(self.COLUMNS)
+            return empty_data()
     
     def invoke_command(self, cmd):
         """Calls command `cmd` with %d and %r placeholders replaced.
