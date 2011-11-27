@@ -48,8 +48,8 @@ class PyDupeGuruBase(PyFairware):
     def doScan(self):
         self.py.start_scanning()
     
-    def exportToXHTMLwithColumns_(self, column_ids):
-        return self.py.export_to_xhtml(column_ids)
+    def exportToXHTML(self):
+        return self.py.export_to_xhtml()
     
     def loadSession(self):
         self.py.load()

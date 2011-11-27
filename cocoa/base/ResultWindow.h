@@ -40,7 +40,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Helpers */
 - (void)fillColumnsMenu;
-- (NSArray *)getColumnsOrder;
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 - (void)updateOptionSegments;
 

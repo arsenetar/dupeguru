@@ -75,17 +75,6 @@ http://www.hardcoded.net/licenses/bsd_license
     [mi setTarget:self];
 }
 
-//Returns an array of identifiers, in order.
-- (NSArray *)getColumnsOrder
-{
-    NSMutableArray *result = [NSMutableArray array];
-    for (NSTableColumn *col in [matches tableColumns]) {
-        NSString *colId = [col identifier];
-        [result addObject:colId];
-    }
-    return result;
-}
-
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
 {
     NSInteger mark_count = [[py getMarkCount] intValue];
@@ -172,8 +161,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)exportToXHTML:(id)sender
 {
-    // XXX No need to get column order from GUI anymore.
-    NSString *exported = [py exportToXHTMLwithColumns:[self getColumnsOrder]];
+    NSString *exported = [py exportToXHTML];
     [[NSWorkspace sharedWorkspace] openFile:exported];
 }
 

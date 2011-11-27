@@ -22,7 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)saveSession;
 - (void)clearIgnoreList;
 - (void)purgeIgnoreList;
-- (NSString *)exportToXHTMLwithColumns:(NSArray *)aColIds;
+- (NSString *)exportToXHTML;
 - (void)invokeCommand:(NSString *)cmd;
 
 - (void)doScan;

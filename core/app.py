@@ -12,7 +12,6 @@ import logging
 import subprocess
 import re
 import time
-from collections import namedtuple
 
 from send2trash import send2trash
 from hscommon import io
@@ -273,16 +272,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.show_extra_fairware_reminder_if_needed()
         self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
     
-    def export_to_xhtml(self, column_ids):
-        column_ids = [colid for colid in column_ids if colid.isdigit()]
-        column_ids = list(map(int, column_ids))
-        column_ids.sort()
-        colnames = [col.display for i, col in enumerate(self.result_table.COLUMNS) if i in column_ids]
+    def export_to_xhtml(self):
+        columns = [col for col in self.result_table.columns.ordered_columns
+            if col.visible and col.name != 'marked']
+        colnames = [col.display for col in columns]
         rows = []
         for group in self.results.groups:
             for dupe in group:
                 data = self.get_display_info(dupe, group)
-                row = [data[colid] for colid in column_ids]
+                row = [data[col.name] for col in columns]
                 row.insert(0, dupe is not group.ref)
                 rows.append(row)
         return export.export_to_xhtml(colnames, rows)
