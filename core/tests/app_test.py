@@ -121,9 +121,8 @@ class TestCaseDupeGuru:
         # It's possible that rename operation has its selected row swept off from under it, thus
         # making the selected row None. Don't crash when it happens.
         dgapp = DupeGuru()
-        rtable = ResultTable(CallLogger(), dgapp)
         # selected_row is None because there's no result.
-        assert not rtable.rename_selected('foo') # no crash
+        assert not dgapp.result_table.rename_selected('foo') # no crash
 
 class TestCaseDupeGuru_clean_empty_dirs:
     def pytest_funcarg__do_setup(self, request):
@@ -174,7 +173,8 @@ class TestCaseDupeGuruWithResults:
         self.dtree_gui = CallLogger()
         self.dtree = DirectoryTree(self.dtree_gui, self.app)
         self.rtable_gui = CallLogger()
-        self.rtable = ResultTable(self.rtable_gui, self.app)
+        self.rtable = self.app.result_table
+        self.rtable.view = self.rtable_gui
         self.dpanel.connect()
         self.dtree.connect()
         self.rtable.connect()
@@ -200,7 +200,7 @@ class TestCaseDupeGuruWithResults:
     def test_GetObjects_after_sort(self, do_setup):
         objects = self.objects
         groups = self.groups[:] # we need an un-sorted reference
-        self.rtable.sort(0, False) #0 = Filename
+        self.rtable.sort('name', False)
         r = self.rtable[1]
         assert r._group is groups[1]
         assert r._dupe is objects[4]
@@ -233,7 +233,7 @@ class TestCaseDupeGuruWithResults:
         app = self.app
         objects = self.objects
         groups = self.groups[:] #To keep the old order in memory
-        self.rtable.sort(0, False) #0 = Filename
+        self.rtable.sort('name', False) #0 
         #Now, the group order is supposed to be reversed
         self.rtable.select([1, 2, 3])
         eq_(len(app.selected_dupes), 3)
@@ -260,7 +260,7 @@ class TestCaseDupeGuruWithResults:
         app = self.app
         objects = self.objects
         self.rtable.power_marker = True
-        self.rtable.sort(0, False) #0 = Filename
+        self.rtable.sort('name', False)
         self.rtable.select([0, 1, 2])
         eq_(len(app.selected_dupes), 3)
         assert app.selected_dupes[0] is objects[4]
@@ -429,7 +429,8 @@ class TestCaseDupeGuru_renameSelected:
         self.p = p
         self.files = files
         self.rtable_gui = CallLogger()
-        self.rtable = ResultTable(self.rtable_gui, self.app)
+        self.rtable = self.app.result_table
+        self.rtable.view = self.rtable_gui
         self.rtable.connect()
     
     def test_simple(self, do_setup):

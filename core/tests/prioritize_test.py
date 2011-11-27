@@ -54,7 +54,7 @@ def test_kind_reprioritization(app):
     app.pdialog.criteria_list.select([1]) # ext2
     app.pdialog.add_selected()
     app.pdialog.perform_reprioritization()
-    eq_(app.rtable[0].data[0], 'foo2.ext2')
+    eq_(app.rtable[0].data['name'], 'foo2.ext2')
 
 @with_app(app_normal_results)
 def test_folder_subcrit(app):
@@ -67,7 +67,7 @@ def test_folder_reprioritization(app):
     app.pdialog.criteria_list.select([1]) # folder2
     app.pdialog.add_selected()
     app.pdialog.perform_reprioritization()
-    eq_(app.rtable[0].data[0], 'foo2.ext2')
+    eq_(app.rtable[0].data['name'], 'foo2.ext2')
 
 @with_app(app_normal_results)
 def test_prilist_display(app):
@@ -99,7 +99,7 @@ def test_size_reprioritization(app):
     app.pdialog.criteria_list.select([0]) # highest
     app.pdialog.add_selected()
     app.pdialog.perform_reprioritization()
-    eq_(app.rtable[0].data[0], 'foo2.ext2')
+    eq_(app.rtable[0].data['name'], 'foo2.ext2')
 
 @with_app(app_normal_results)
 def test_reorder_prioritizations(app):
@@ -137,7 +137,7 @@ def app_one_name_ends_with_number():
 def test_filename_reprioritization(app):
     app.add_pri_criterion("Filename", 0) # Ends with a number
     app.pdialog.perform_reprioritization()
-    eq_(app.rtable[0].data[0], 'foo1.ext')
+    eq_(app.rtable[0].data['name'], 'foo1.ext')
 
 #---
 def app_with_subfolders():
@@ -166,8 +166,8 @@ def test_folder_crit_includes_subfolders(app):
     app.add_pri_criterion("Folder", 1) # foo
     app.pdialog.perform_reprioritization()
     # Both foo and foo/bar dupes will be prioritized
-    eq_(app.rtable[0].data[0], 'foo2')
-    eq_(app.rtable[2].data[0], 'foo4')
+    eq_(app.rtable[0].data['name'], 'foo2')
+    eq_(app.rtable[2].data['name'], 'foo4')
 
 @with_app(app_with_subfolders)
 def test_display_something_on_empty_extensions(app):

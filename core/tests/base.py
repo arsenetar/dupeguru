@@ -9,15 +9,16 @@
 from hscommon.testutil import TestApp as TestAppBase, eq_, with_app
 from hscommon.path import Path
 from hscommon.util import get_file_ext, format_size
+from hscommon.gui.column import Column
 from jobprogress.job import nulljob, JobCancelled
 
 from .. import engine
 from .. import prioritize
 from ..engine import getwords
-from ..app import DupeGuru as DupeGuruBase, Column, cmp_value
+from ..app import DupeGuru as DupeGuruBase, cmp_value
 from ..gui.details_panel import DetailsPanel
 from ..gui.directory_tree import DirectoryTree
-from ..gui.result_table import ResultTable
+from ..gui.result_table import ResultTable as ResultTableBase
 from ..gui.prioritize_dialog import PrioritizeDialog
 
 class DupeGuruView:
@@ -36,18 +37,22 @@ class DupeGuruView:
         pass
     
 
-class DupeGuru(DupeGuruBase):
+class ResultTable(ResultTableBase):
     COLUMNS = [
+        Column('marked', ''),
         Column('name', 'Filename'),
         Column('folder_path', 'Directory'),
         Column('size', 'Size (KB)'),
         Column('extension', 'Kind'),
     ]
     DELTA_COLUMNS = {'size', }
+    
+class DupeGuru(DupeGuruBase):
     METADATA_TO_READ = ['size']
     
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
+        self.result_table = ResultTable(self)
     
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size
@@ -55,21 +60,21 @@ class DupeGuru(DupeGuruBase):
         if m and delta:
             r = group.ref
             size -= r.size
-        return [
-            dupe.name,
-            str(dupe.folder_path),
-            format_size(size, 0, 1, False),
-            dupe.extension if hasattr(dupe, 'extension') else '---',
-        ]
+        return {
+            'name': dupe.name,
+            'folder_path': str(dupe.folder_path),
+            'size': format_size(size, 0, 1, False),
+            'extension': dupe.extension if hasattr(dupe, 'extension') else '---',
+        }
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        r = cmp_value(dupe, self.COLUMNS[key])
-        if delta and (key in self.DELTA_COLUMNS):
-            r -= cmp_value(get_group().ref, self.COLUMNS[key])
+        r = cmp_value(dupe, key)
+        if delta and (key in self.result_table.DELTA_COLUMNS):
+            r -= cmp_value(get_group().ref, key)
         return r
     
     def _get_group_sort_key(self, group, key):
-        return cmp_value(group.ref, self.COLUMNS[key])
+        return cmp_value(group.ref, key)
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
@@ -120,14 +125,20 @@ def GetTestGroups():
 
 class TestApp(TestAppBase):
     def __init__(self):
+        def link_gui(gui):
+            gui.view = self.make_logger()
+            if hasattr(gui, 'columns'): # tables
+                gui.columns.view = self.make_logger()
+            return gui
+        
+        TestAppBase.__init__(self)
         make_gui = self.make_gui
         self.app = DupeGuru()
-        # XXX After hscommon.testutil.TestApp has had its default parent changed to seomthing
-        # customizable (with adjustments in moneyguru) we can get rid of 'parent='
-        make_gui('rtable', ResultTable, parent=self.app)
-        make_gui('dtree', DirectoryTree, parent=self.app)
-        make_gui('dpanel', DetailsPanel, parent=self.app)
-        make_gui('pdialog', PrioritizeDialog, parent=self.app)
+        self.default_parent = self.app
+        self.rtable = link_gui(self.app.result_table)
+        make_gui('dtree', DirectoryTree)
+        make_gui('dpanel', DetailsPanel)
+        make_gui('pdialog', PrioritizeDialog)
         for elem in [self.rtable, self.dtree, self.dpanel]:
             elem.connect()
     

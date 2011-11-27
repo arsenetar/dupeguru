@@ -119,16 +119,16 @@ class TestCaseResultsWithSomeGroups:
     def test_sort_groups(self):
         self.results.make_ref(self.objects[1]) #We want to make the 1024 sized object to go ref.
         g1,g2 = self.groups
-        self.results.sort_groups(2) #2 is the key for size
+        self.results.sort_groups('size')
         assert self.results.groups[0] is g2
         assert self.results.groups[1] is g1
-        self.results.sort_groups(2,False)
+        self.results.sort_groups('size', False)
         assert self.results.groups[0] is g1
         assert self.results.groups[1] is g2
     
     def test_set_groups_when_sorted(self):
         self.results.make_ref(self.objects[1]) #We want to make the 1024 sized object to go ref.
-        self.results.sort_groups(2)
+        self.results.sort_groups('size')
         objects,matches,groups = GetTestGroups()
         g1,g2 = groups
         g1.switch_ref(objects[1])
@@ -159,9 +159,9 @@ class TestCaseResultsWithSomeGroups:
         o3.size = 3
         o4.size = 2
         o5.size = 1
-        self.results.sort_dupes(2)
+        self.results.sort_dupes('size')
         eq_([o5,o3,o2],self.results.dupes)
-        self.results.sort_dupes(2,False)
+        self.results.sort_dupes('size', False)
         eq_([o2,o3,o5],self.results.dupes)
     
     def test_dupe_list_remember_sort(self):
@@ -171,7 +171,7 @@ class TestCaseResultsWithSomeGroups:
         o3.size = 3
         o4.size = 2
         o5.size = 1
-        self.results.sort_dupes(2)
+        self.results.sort_dupes('size')
         self.results.make_ref(o2)
         eq_([o5,o3,o1],self.results.dupes)
     
@@ -182,14 +182,14 @@ class TestCaseResultsWithSomeGroups:
         o3.size = 3 #-7
         o4.size = 20
         o5.size = 1 #-19
-        self.results.sort_dupes(2,delta=True)
+        self.results.sort_dupes('size', delta=True)
         eq_([o5,o2,o3],self.results.dupes)
     
     def test_sort_empty_list(self):
         #There was an infinite loop when sorting an empty list.
         app = DupeGuru()
         r = app.results
-        r.sort_dupes(0)
+        r.sort_dupes('name')
         eq_([],r.dupes)
     
     def test_dupe_list_update_on_remove_duplicates(self):
@@ -720,13 +720,13 @@ class TestCaseResultsFilter:
         self.results.make_ref(self.objects[1]) # to have the 1024 b obkect as ref
         g1,g2 = self.groups
         self.results.apply_filter('a') # Matches both group
-        self.results.sort_groups(2) #2 is the key for size
+        self.results.sort_groups('size')
         assert self.results.groups[0] is g2
         assert self.results.groups[1] is g1
         self.results.apply_filter(None)
         assert self.results.groups[0] is g2
         assert self.results.groups[1] is g1
-        self.results.sort_groups(2, False)
+        self.results.sort_groups('size', False)
         self.results.apply_filter('a')
         assert self.results.groups[1] is g2
         assert self.results.groups[0] is g1
