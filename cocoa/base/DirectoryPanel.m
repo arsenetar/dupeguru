@@ -101,7 +101,6 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [[self window] makeKeyAndOrderFront:nil];
     [[outline py] removeSelectedDirectory];
-    [outlineView setNeedsDisplay:YES];
     [self refreshRemoveButtonText];
 }
 
@@ -131,10 +130,12 @@ http://www.hardcoded.net/licenses/bsd_license
     }
     [removeButton setEnabled:YES];
     NSIndexPath *path = [outline selectedIndexPath];
-    NSInteger state = [outline intProperty:@"state" valueAtPath:path];
-    BOOL shouldDisplayArrow = ([path length] > 1) && (state == 2);
-    NSString *imgName = shouldDisplayArrow ? @"NSGoLeftTemplate" : @"NSRemoveTemplate";
-    [removeButton setImage:[NSImage imageNamed:imgName]];
+    if (path != nil) {
+        NSInteger state = [outline intProperty:@"state" valueAtPath:path];
+        BOOL shouldDisplayArrow = ([path length] > 1) && (state == 2);
+        NSString *imgName = shouldDisplayArrow ? @"NSGoLeftTemplate" : @"NSRemoveTemplate";
+        [removeButton setImage:[NSImage imageNamed:imgName]];
+    }
 }
 
 /* Delegate */
