@@ -118,14 +118,16 @@ def build_localizations(ui, edition):
     shutil.copytree('locale', op.join('build', 'locale'), ignore=shutil.ignore_patterns('*.po', '*.pot'))
     if ui == 'cocoa':
         print("Creating lproj folders based on .po files")
-        enlproj = op.join('cocoa', 'base', 'en.lproj')
         for lang in loc.get_langs('locale'):
             if lang == 'en':
                 continue
             pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-            dest_lproj = op.join('cocoa', 'base', lang + '.lproj')
-            loc.po2allxibstrings(pofile, enlproj, dest_lproj)
-            loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
+            for edition_folder in ['base', 'se', 'me', 'pe']:
+                enlproj = op.join('cocoa', edition_folder, 'en.lproj')
+                dest_lproj = op.join('cocoa', edition_folder, lang + '.lproj')
+                loc.po2allxibstrings(pofile, enlproj, dest_lproj)
+                if edition_folder == 'base':
+                    loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
             loc.po2allxibstrings(pofile, op.join('cocoalib', 'en.lproj'), op.join('cocoalib', lang + '.lproj'))
         build_all_cocoa_locs('cocoalib')
