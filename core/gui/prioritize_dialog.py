@@ -61,6 +61,8 @@ class PrioritizeDialog:
 
     def add_selected(self):
         # Add selected criteria in criteria_list to prioritization_list.
+        if self.criteria_list.selected_index is None:
+            return
         crit = self.criteria[self.criteria_list.selected_index]
         self.prioritizations.append(crit)
         self.prioritization_list[:] = [crit.display for crit in self.prioritizations]
