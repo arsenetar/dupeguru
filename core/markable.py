@@ -51,6 +51,10 @@ class Markable:
             return False
         return self.mark_toggle(o)
     
+    def mark_multiple(self, objects):
+        for o in objects:
+            self.mark(o)
+    
     def mark_all(self):
         self.mark_none()
         self.__inverted = True
@@ -75,10 +79,18 @@ class Markable:
             self._did_mark(o)
         return True
     
+    def mark_toggle_multiple(self, objects):
+        for o in objects:
+            self.mark_toggle(o)
+    
     def unmark(self, o):
         if not self.is_marked(o):
             return False
         return self.mark_toggle(o)
+    
+    def unmark_multiple(self, objects):
+        for o in objects:
+            self.unmark(o)
     
     #--- Properties
     @property

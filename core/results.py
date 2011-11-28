@@ -23,7 +23,7 @@ from .markable import Markable
 class Results(Markable):
     #---Override
     def __init__(self, app):
-        super(Results, self).__init__()
+        Markable.__init__(self)
         self.__groups = []
         self.__group_of_duplicate = {}
         self.__groups_sort_descriptor = None # This is a tuple (key, asc)
@@ -58,6 +58,24 @@ class Results(Markable):
         if self.__filtered_dupes and dupe not in self.__filtered_dupes:
             return False
         return True
+    
+    def mark_all(self):
+        if self.__filters:
+            self.mark_multiple(self.__filtered_dupes)
+        else:
+            Markable.mark_all(self)
+    
+    def mark_invert(self):
+        if self.__filters:
+            self.mark_toggle_multiple(self.__filtered_dupes)
+        else:
+            Markable.mark_invert(self)
+    
+    def mark_none(self):
+        if self.__filters:
+            self.unmark_multiple(self.__filtered_dupes)
+        else:
+            Markable.mark_none(self)
     
     #---Private
     def __get_dupe_list(self):
