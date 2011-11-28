@@ -27,7 +27,7 @@
 "83.title" = "Comparer les fichiers de différents types";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "86"; */
-"86.title" = "Options par défaut";
+"86.title" = "Réinitialiser";
 
 /* Class = "NSButtonCell"; title = "Match similar words"; ObjectID = "87"; */
 "87.title" = "Comparer les mots similaires";
@@ -50,7 +50,7 @@
 /* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "96"; */
 "96.title" = "Effacer les dossiers vides après un déplacement";
 
-/* Class = "NSButtonCell"; title = "Ignore files smaller than"; ObjectID = "97"; */
+/* Class = "NSButtonCell"; title = "Ignore files smaller than:"; ObjectID = "97"; */
 "97.title" = "Ignorer les fichiers plus petits que:";
 
 /* Class = "NSTextFieldCell"; title = "KB"; ObjectID = "100"; */

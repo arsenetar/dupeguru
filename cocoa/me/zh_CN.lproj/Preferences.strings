@@ -21,7 +21,7 @@
 "36.title" = "文件名称";
 
 /* Class = "NSMenuItem"; title = "Filename - Fields"; ObjectID = "37"; */
-"37.title" = "Filename - Fields";
+"37.title" = "文件名称 - 字段名";
 
 /* Class = "NSMenuItem"; title = "Tags"; ObjectID = "38"; */
 "38.title" = "标签";
@@ -93,7 +93,7 @@
 "117.label" = "Advanced";
 
 /* Class = "NSTextFieldCell"; title = "Custom Command (arguments: %d for dupe, %r for ref):"; ObjectID = "121"; */
-"121.title" = "文件名称 - 字段名:";
+"121.title" = "自定义命令 (参数: %d 指重复文件, %r 指参照文件):";
 
 /* Class = "NSButtonCell"; title = "Ignore duplicates hardlinking to the same file"; ObjectID = "126"; */
 "126.title" = "忽略重复文件当其硬连接到相同文件时";
@@ -102,4 +102,4 @@
 "130.title" = "调试模式 (需要重新启动)";
 
 /* Class = "NSTextFieldCell"; title = "Font size:"; ObjectID = "136"; */
-"136.title" = "Font size:";
+"136.title" = "复制和移动:";

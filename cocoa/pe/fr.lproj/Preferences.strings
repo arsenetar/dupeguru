@@ -15,7 +15,7 @@
 "21.title" = "Comparer les fichiers de différents types";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "24"; */
-"24.title" = "Options par défaut";
+"24.title" = "Réinitialiser";
 
 /* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "25"; */
 "25.title" = "Déplacements de fichiers:";

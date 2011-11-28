@@ -18,7 +18,7 @@
 "24.title" = "Ripristina impostazioni predefinite";
 
 /* Class = "NSTextFieldCell"; title = "Copy and Move:"; ObjectID = "25"; */
-"25.title" = "Copia e sposta::";
+"25.title" = "Copia e sposta:";
 
 /* Class = "NSMenuItem"; title = "Recreate relative path"; ObjectID = "28"; */
 "28.title" = "Ricrea il percorso relativo";
@@ -36,7 +36,7 @@
 "32.title" = "Controlla gli aggiornamenti automaticamente";
 
 /* Class = "NSButtonCell"; title = "Remove empty folders on delete or move"; ObjectID = "33"; */
-"33.title" = "Rimuovi le cartelle vuote dopo lo spostamento o cancellazione";
+"33.title" = "Rimuovi le cartelle vuote dopo aver cancellato o spostato";
 
 /* Class = "NSButtonCell"; title = "Use regular expressions when filtering"; ObjectID = "34"; */
 "34.title" = "Usa le espressioni regolari per filtrare";

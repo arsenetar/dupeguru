@@ -60,7 +60,7 @@
 "92.title" = "EXIF Timestamp";
 
 /* Class = "NSMenuItem"; title = "Contents"; ObjectID = "93"; */
-"93.title" = "Contents";
+"93.title" = "Inhalt";
 
 /* Class = "NSTextFieldCell"; title = "Scan type:"; ObjectID = "94"; */
 "94.title" = "Scan type:";

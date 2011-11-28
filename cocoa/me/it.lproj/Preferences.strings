@@ -33,7 +33,7 @@
 "40.title" = "Nome del file - Campi (senza ordine)";
 
 /* Class = "NSButtonCell"; title = "Word weighting"; ObjectID = "41"; */
-"41.title" = "'Peso' delle parole";
+"41.title" = "'Peso' della parola";
 
 /* Class = "NSButtonCell"; title = "Can mix file kind"; ObjectID = "42"; */
 "42.title" = "Includi tipi diversi di file";

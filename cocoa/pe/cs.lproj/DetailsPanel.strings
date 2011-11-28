@@ -6,7 +6,7 @@
 "9.headerCell.title" = "Vybráno";
 
 /* Class = "NSTableColumn"; headerCell.title = "Reference"; ObjectID = "10"; */
-"10.headerCell.title" = "Odkaz";
+"10.headerCell.title" = "Referenční";
 
 /* Class = "NSTableColumn"; headerCell.title = "Attribute"; ObjectID = "11"; */
 "11.headerCell.title" = "Atribut";
@@ -15,4 +15,4 @@
 "33.title" = "Vybráno";
 
 /* Class = "NSTextFieldCell"; title = "Reference"; ObjectID = "35"; */
-"35.title" = "Odkaz";
+"35.title" = "Referenční";

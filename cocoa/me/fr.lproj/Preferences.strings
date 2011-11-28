@@ -39,7 +39,7 @@
 "42.title" = "Comparer les fichiers de différents types";
 
 /* Class = "NSButtonCell"; title = "Reset to Defaults"; ObjectID = "45"; */
-"45.title" = "Options par défaut";
+"45.title" = "Réinitialiser";
 
 /* Class = "NSButtonCell"; title = "Match similar words"; ObjectID = "46"; */
 "46.title" = "Comparer les mots similaires";
