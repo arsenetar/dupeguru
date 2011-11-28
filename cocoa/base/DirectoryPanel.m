@@ -130,8 +130,10 @@ http://www.hardcoded.net/licenses/bsd_license
         return;
     }
     [removeButton setEnabled:YES];
-    NSInteger state = [outline intProperty:@"state" valueAtPath:[outline selectedIndexPath]];
-    NSString *imgName = state == 2 ? @"NSGoLeftTemplate" : @"NSRemoveTemplate";
+    NSIndexPath *path = [outline selectedIndexPath];
+    NSInteger state = [outline intProperty:@"state" valueAtPath:path];
+    BOOL shouldDisplayArrow = ([path length] > 1) && (state == 2);
+    NSString *imgName = shouldDisplayArrow ? @"NSGoLeftTemplate" : @"NSRemoveTemplate";
     [removeButton setImage:[NSImage imageNamed:imgName]];
 }
 

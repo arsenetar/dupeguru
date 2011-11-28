@@ -368,9 +368,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def purge_ignore_list(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
     
-    def remove_directory(self,index):
+    def remove_directories(self, indexes):
         try:
-            del self.directories[index]
+            indexes = sorted(indexes, reverse=True)
+            for index in indexes:
+                del self.directories[index]
             self.notify('directories_changed')
         except IndexError:
             pass

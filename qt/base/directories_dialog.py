@@ -108,6 +108,8 @@ class DirectoriesDialog(QMainWindow):
         self.promptLabel = QLabel(tr("Select folders to scan and press \"Scan\"."), self.centralwidget)
         self.verticalLayout.addWidget(self.promptLabel)
         self.treeView = QTreeView(self.centralwidget)
+        self.treeView.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.treeView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.treeView.setAcceptDrops(True)
         triggers = QAbstractItemView.DoubleClicked|QAbstractItemView.EditKeyPressed\
             |QAbstractItemView.SelectedClicked
