@@ -3,11 +3,11 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:86
+#: core/app.py:83
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:192
+#: core/app.py:190
 msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
 msgstr ""
 
