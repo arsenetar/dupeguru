@@ -100,18 +100,8 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)removeSelectedDirectory:(id)sender
 {
     [[self window] makeKeyAndOrderFront:nil];
-    if ([outlineView selectedRow] < 0)
-        return;
-    NSIndexPath *path = [outline selectedIndexPath];
-    NSInteger state = [outline intProperty:@"state" valueAtPath:path];
-    if (([path length] == 1) && (state != 2)) {
-        [[outline py] removeSelectedDirectory];
-    }
-    else {
-        NSInteger newState = state == 2 ? 0 : 2; // If excluded, put it back
-        [outline setIntProperty:@"state" value:newState atPath:path];
-        [outlineView display];
-    }
+    [[outline py] removeSelectedDirectory];
+    [outlineView setNeedsDisplay:YES];
     [self refreshRemoveButtonText];
 }
 

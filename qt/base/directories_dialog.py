@@ -208,13 +208,7 @@ class DirectoriesDialog(QMainWindow):
             self.app.recentResults.insertItem(destination)
     
     def removeFolderButtonClicked(self):
-        indexes = self.treeView.selectedIndexes()
-        if not indexes:
-            return
-        index = indexes[0]
-        node = index.internalPointer()
-        if node.parent is None:
-            self.directoriesModel.model.remove_selected()
+        self.directoriesModel.model.remove_selected()
     
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:
