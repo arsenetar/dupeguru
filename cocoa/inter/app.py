@@ -38,9 +38,6 @@ class PyDupeGuruBase(PyFairware):
     def addDirectory_(self, directory):
         return self.py.add_directory(directory)
     
-    def removeDirectory_(self, index):
-        self.py.remove_directory(index)
-    
     #---Results
     def clearIgnoreList(self):
         self.py.scanner.ignore_list.Clear()

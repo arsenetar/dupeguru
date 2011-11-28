@@ -8,6 +8,9 @@ class PyDirectoryOutline(PyOutline):
     def addDirectory_(self, path):
         self.py.add_directory(path)
     
+    def removeSelectedDirectory(self):
+        self.py.remove_selected()
+    
     # python --> cocoa
     def refresh_states(self):
         # Under cocoa, both refresh() and refresh_states() do the same thing.

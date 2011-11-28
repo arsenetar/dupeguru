@@ -11,4 +11,5 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface PyDirectoryOutline : PyOutline
 - (void)addDirectory:(NSString *)directoryPath;
+- (void)removeSelectedDirectory;
 @end

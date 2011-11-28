@@ -76,6 +76,11 @@ class DirectoryTree(GUIObject, Tree):
     def add_directory(self, path):
         self.app.add_directory(path)
     
+    def remove_selected(self):
+        assert len(self.selected_path) == 1
+        root_index = self.selected_path[0]
+        self.app.remove_directory(root_index)
+    
     def update_all_states(self):
         for node in self:
             node.update_all_states()

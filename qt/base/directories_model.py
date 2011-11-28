@@ -10,7 +10,7 @@ import urllib.parse
 
 from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex
 from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, QStyle,
-    QStyleOptionComboBox, QStyleOptionViewItemV4)
+    QStyleOptionComboBox, QStyleOptionViewItemV4, QItemSelection)
 
 from hscommon.trans import trget
 from qtlib.tree_model import RefNode, TreeModel
@@ -60,10 +60,14 @@ class DirectoriesDelegate(QStyledItemDelegate):
     
 
 class DirectoriesModel(TreeModel):
-    def __init__(self, app):
+    def __init__(self, app, view):
         TreeModel.__init__(self)
         self.model = DirectoryTree(self, app.model)
+        self.view = view
+        self.view.setModel(self)
         self.model.connect()
+        
+        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
     
     def _createNode(self, ref, row):
         return RefNode(self, None, ref, row)
@@ -139,8 +143,14 @@ class DirectoriesModel(TreeModel):
         # work with ActionMove either. So screw that, and accept anything.
         return Qt.ActionMask
     
+    #--- Events
+    def selectionChanged(self, selected, deselected):
+        newNodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
+        self.model.selected_nodes = newNodes
+    
     #--- Signals
     foldersAdded = pyqtSignal(list)
+    
     #--- model --> view
     def refresh(self):
         self.reset()

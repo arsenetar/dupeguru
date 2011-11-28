@@ -105,7 +105,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSIndexPath *path = [outline selectedIndexPath];
     NSInteger state = [outline intProperty:@"state" valueAtPath:path];
     if (([path length] == 1) && (state != 2)) {
-        [_py removeDirectory:i2n([path indexAtPosition:0])];
+        [[outline py] removeSelectedDirectory];
     }
     else {
         NSInteger newState = state == 2 ? 0 : 2; // If excluded, put it back

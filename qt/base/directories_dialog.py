@@ -27,9 +27,11 @@ class DirectoriesDialog(QMainWindow):
         self.app = app
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
-        self.directoriesModel = DirectoriesModel(self.app)
-        self.directoriesDelegate = DirectoriesDelegate()
         self._setupUi()
+        self.directoriesModel = DirectoriesModel(self.app, view=self.treeView)
+        self.directoriesDelegate = DirectoriesDelegate()
+        self.treeView.setItemDelegate(self.directoriesDelegate)
+        self._setupColumns()
         self.app.recentResults.addMenu(self.menuLoadRecent)
         self.app.recentResults.addMenu(self.menuRecentResults)
         self.recentFolders.addMenu(self.menuRecentFolders)
@@ -106,8 +108,6 @@ class DirectoriesDialog(QMainWindow):
         self.promptLabel = QLabel(tr("Select folders to scan and press \"Scan\"."), self.centralwidget)
         self.verticalLayout.addWidget(self.promptLabel)
         self.treeView = QTreeView(self.centralwidget)
-        self.treeView.setItemDelegate(self.directoriesDelegate)
-        self.treeView.setModel(self.directoriesModel)
         self.treeView.setAcceptDrops(True)
         triggers = QAbstractItemView.DoubleClicked|QAbstractItemView.EditKeyPressed\
             |QAbstractItemView.SelectedClicked
@@ -115,11 +115,6 @@ class DirectoriesDialog(QMainWindow):
         self.treeView.setDragDropOverwriteMode(True)
         self.treeView.setDragDropMode(QAbstractItemView.DropOnly)
         self.treeView.setUniformRowHeights(True)
-        header = self.treeView.header()
-        header.setStretchLastSection(False)
-        header.setResizeMode(0, QHeaderView.Stretch)
-        header.setResizeMode(1, QHeaderView.Fixed)
-        header.resizeSection(1, 100)
         self.verticalLayout.addWidget(self.treeView)
         self.horizontalLayout = QHBoxLayout()
         self.removeFolderButton = QPushButton(self.centralwidget)
@@ -148,6 +143,13 @@ class DirectoriesDialog(QMainWindow):
             self.setGeometry(self.app.prefs.directoriesWindowRect)
         else:
             moveToScreenCenter(self)
+    
+    def _setupColumns(self):
+        header = self.treeView.header()
+        header.setStretchLastSection(False)
+        header.setResizeMode(0, QHeaderView.Stretch)
+        header.setResizeMode(1, QHeaderView.Fixed)
+        header.resizeSection(1, 100)
     
     def _updateAddButton(self):
         if self.recentFolders.isEmpty():
@@ -212,8 +214,7 @@ class DirectoriesDialog(QMainWindow):
         index = indexes[0]
         node = index.internalPointer()
         if node.parent is None:
-            row = index.row()
-            self.app.model.remove_directory(row)
+            self.directoriesModel.model.remove_selected()
     
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:

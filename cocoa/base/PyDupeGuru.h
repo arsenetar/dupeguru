@@ -15,7 +15,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (PyResultTable *)resultTable;
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
-- (void)removeDirectory:(NSNumber *)index;
 - (void)loadResultsFrom:(NSString *)filename;
 - (void)saveResultsAs:(NSString *)filename;
 - (void)loadSession;
