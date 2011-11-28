@@ -123,6 +123,11 @@ def test_remove_crit_from_list(app):
     ]
     eq_(app.pdialog.prioritization_list[:], expected)
 
+@with_app(app_normal_results)
+def test_add_crit_without_selection(app):
+    # Adding a criterion without having made a selection doesn't cause a crash.
+    app.pdialog.add_selected() # no crash
+
 #---
 def app_one_name_ends_with_number():
     dupes = [
