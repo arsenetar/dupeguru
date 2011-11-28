@@ -5,9 +5,6 @@
 /* Class = "NSTextFieldCell"; title = "Marked: 0 files, 0 B. Total: 0 files, 0 B."; ObjectID = "6"; */
 "6.title" = "Marcati: 0 files, 0 B. Totale: 0 files, 0 B.";
 
-/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "11"; */
-"11.headerCell.title" = "Nome";
-
 /* Class = "NSToolbarItem"; label = "Options"; ObjectID = "15"; */
 "15.label" = "Opzioni";
 
