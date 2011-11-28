@@ -15,6 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithNibName:@"ProblemDialog" pyClassName:@"PyProblemDialog" pyParent:aPy];
     [self window]; //So the detailsTable is initialized.
     problemTable = [[HSTable alloc] initWithPyClassName:@"PyProblemTable" pyParent:[self py] view:problemTableView];
+    [self initializeColumns];
     [self connect];
     [problemTable connect];
     return self;
@@ -31,6 +32,16 @@ http://www.hardcoded.net/licenses/bsd_license
 - (PyProblemDialog *)py
 {
     return (PyProblemDialog *)py;
+}
+
+- (void)initializeColumns
+{
+    HSColumnDef defs[] = {
+        {@"path", 202, 40, 0, NO, nil},
+        {@"msg", 228, 40, 0, NO, nil},
+        nil
+    };
+    [[problemTable columns] initializeColumns:defs];
 }
 
 - (IBAction)revealSelected:(id)sender

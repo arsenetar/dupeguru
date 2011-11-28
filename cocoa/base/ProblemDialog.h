@@ -21,5 +21,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPy:(PyApp *)aPy;
 - (PyProblemDialog *)py;
 
+- (void)initializeColumns;
 - (IBAction)revealSelected:(id)sender;
 @end

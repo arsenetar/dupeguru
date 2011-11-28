@@ -21,7 +21,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPy:(id)aPy view:(NSTableView *)aTableView
 {
     self = [super initWithPy:aPy view:aTableView];
-    columns = [[HSColumns alloc] initWithPy:[[self py] columns] tableView:aTableView];
     _deltaColumns = [[NSSet setWithArray:[[self py] deltaColumns]] retain];
     [self connect];
     return self;
@@ -30,7 +29,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [self disconnect];
-    [columns release];
     [_deltaColumns release];
     [super dealloc];
 }
@@ -61,11 +59,6 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Public */
-- (HSColumns *)columns
-{
-    return columns;
-}
-
 - (BOOL)powerMarkerMode
 {
     return [[self py] powerMarkerMode];

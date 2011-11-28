@@ -5,12 +5,6 @@
 /* Class = "NSTextFieldCell"; title = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results."; ObjectID = "4"; */
 "4.title" = "Při zpracování některých (nebo všech) souborů se vyskytly problémy. Jejich příčina je popsána v tabulce dole. Dotčené soubory nebyli odstraněny z výsledků.";
 
-/* Class = "NSTableColumn"; headerCell.title = "File Path"; ObjectID = "10"; */
-"10.headerCell.title" = "Cesta k souboru";
-
-/* Class = "NSTableColumn"; headerCell.title = "Error Message"; ObjectID = "11"; */
-"11.headerCell.title" = "Chybové hlášení";
-
 /* Class = "NSButtonCell"; title = "Close"; ObjectID = "19"; */
 "19.title" = "Zavřít";
 
