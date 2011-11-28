@@ -18,6 +18,7 @@ from ..base.app import DupeGuru as DupeGuruBase
 from .block import getblocks
 from .details_dialog import DetailsDialog
 from .result_window import ResultWindow
+from .results_model import ResultsModel
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
@@ -70,6 +71,12 @@ class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_pe'
     NAME = __appname__
     
+    DETAILS_DIALOG_CLASS = DetailsDialog
+    RESULT_WINDOW_CLASS = ResultWindow
+    RESULT_MODEL_CLASS = ResultsModel
+    PREFERENCES_CLASS = Preferences
+    PREFERENCES_DIALOG_CLASS = PreferencesDialog
+    
     def _setup(self):
         self.model.directories.fileclasses = [File]
         DupeGuruBase._setup(self)
@@ -79,16 +86,4 @@ class DupeGuru(DupeGuruBase):
         self.model.scanner.scan_type = self.prefs.scan_type
         self.model.scanner.match_scaled = self.prefs.match_scaled
         self.model.scanner.threshold = self.prefs.filter_hardness
-    
-    def _create_details_dialog(self, parent):
-        return DetailsDialog(parent, self)
-    
-    def _create_result_window(self):
-        return ResultWindow(app=self)
-    
-    def _create_preferences(self):
-        return Preferences()
-    
-    def _create_preferences_dialog(self, parent):
-        return PreferencesDialog(parent, self)
     

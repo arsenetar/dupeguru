@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-04-12
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -9,11 +8,21 @@
 
 from hscommon.notify import Listener
 from hscommon.gui.table import GUITable, Row
+from hscommon.gui.column import Column, Columns
+from hscommon.trans import trget
+
+coltr = trget('columns')
 
 class ProblemTable(GUITable, Listener):
+    COLUMNS = [
+        Column('path', coltr("File Path")),
+        Column('msg', coltr("Error Message")),
+    ]
+    
     def __init__(self, view, problem_dialog):
         GUITable.__init__(self)
         Listener.__init__(self, problem_dialog)
+        self.columns = Columns(self)
         self.view = view
         self.dialog = problem_dialog
     

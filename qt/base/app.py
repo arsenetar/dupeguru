@@ -53,6 +53,12 @@ class DupeGuru(QObject):
     LOGO_NAME = '<replace this>'
     NAME = '<replace this>'
     
+    DETAILS_DIALOG_CLASS = None
+    RESULT_WINDOW_CLASS = ResultWindow
+    RESULT_MODEL_CLASS = None
+    PREFERENCES_CLASS = None
+    PREFERENCES_DIALOG_CLASS = None
+    
     def __init__(self):
         QObject.__init__(self)
         appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
@@ -65,7 +71,7 @@ class DupeGuru(QObject):
             sys.stderr = SysWrapper()
         if sys.stdout is None:
             sys.stdout = SysWrapper()
-        self.prefs = self._create_preferences()
+        self.prefs = self.PREFERENCES_CLASS()
         self.prefs.load()
         self.model = self.MODELCLASS(view=self, appdata=appdata)
         self._setup()
@@ -77,12 +83,12 @@ class DupeGuru(QObject):
         self._update_options()
         self.recentResults = Recent(self, 'recentResults')
         self.recentResults.mustOpenItem.connect(self.model.load_from)
-        self.resultWindow = self._create_result_window()
+        self.resultWindow = self.RESULT_WINDOW_CLASS(self)
         self._progress = Progress(self.resultWindow)
         self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
-        self.details_dialog = self._create_details_dialog(self.resultWindow)
+        self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
         self.problemDialog = ProblemDialog(parent=self.resultWindow, app=self)
-        self.preferences_dialog = self._create_preferences_dialog(self.resultWindow)
+        self.preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.resultWindow, self)
         self.about_box = AboutBox(self.resultWindow, self)
                 
         self.directories_dialog.show()
@@ -118,19 +124,6 @@ class DupeGuru(QObject):
         self.model.options['escape_filter_regexp'] = self.prefs.use_regexp
         self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
-    
-    #--- Virtual
-    def _create_details_dialog(self, parent):
-        raise NotImplementedError()
-    
-    def _create_result_window(self):
-        return ResultWindow(app=self)
-    
-    def _create_preferences(self):
-        raise NotImplementedError()
-    
-    def _create_preferences_dialog(self, parent):
-        raise NotImplementedError()
     
     #--- Public
     def add_selected_to_ignore_list(self):

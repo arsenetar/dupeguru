@@ -11,28 +11,6 @@ from core.scanner import ScanType
 from ..base.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
-    # (width, is_visible)
-    COLUMNS_DEFAULT_ATTRS = [ 
-        (200, True), # name
-        (180, True), # path
-        (60, True), # size
-        (60, True), # Time
-        (50, True), # Bitrate
-        (60, False), # Sample Rate
-        (40, False), # Kind
-        (120, False), # modification
-        (120, False), # Title
-        (120, False), # Artist
-        (120, False), # Album
-        (80, False), # Genre
-        (40, False), # Year
-        (40, False), # Track Number
-        (120, False), # Comment
-        (60, True), # match %
-        (120, False), # Words Used
-        (80, False), # dupe count
-    ]
-    
     def _load_specific(self, settings):
         get = self.get_value
         self.scan_type = get('ScanType', self.scan_type)

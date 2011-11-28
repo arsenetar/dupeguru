@@ -6,17 +6,14 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.trans import trget
 from qtlib.column import Column
 from qtlib.table import Table
 from core.gui.problem_table import ProblemTable as ProblemTableModel
 
-tr = trget('ui')
-
 class ProblemTable(Table):
     COLUMNS = [
-        Column('path', tr("File Path"), 150),
-        Column('msg', tr("Error Message"), 150),
+        Column('path', defaultWidth=150),
+        Column('msg', defaultWidth=150),
     ]
     
     def __init__(self, problem_dialog, view):

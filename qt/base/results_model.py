@@ -15,31 +15,31 @@ from core.gui.result_table import ResultTable as ResultTableModel
 
 class ResultsModel(Table):
     def __init__(self, app, view):
-        model = ResultTableModel(self, app.model)
-        self._app = app.model
-        self._delta_columns = app.model.DELTA_COLUMNS
+        model = app.model.result_table
         Table.__init__(self, model, view)
         self.model.connect()
         
         app.prefsChanged.connect(self.appPrefsChanged)
+        app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def columnCount(self, parent):
-        return len(self._app.COLUMNS)
+        return len(self.model.COLUMNS)
     
     def data(self, index, role):
         if not index.isValid():
             return None
         row = self.model[index.row()]
+        column = self.model.COLUMNS[index.column()]
         if role == Qt.DisplayRole:
             data = row.data_delta if self.model.delta_values else row.data
-            return data[index.column()]
+            return data[column.name]
         elif role == Qt.CheckStateRole:
             if index.column() == 0 and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
         elif role == Qt.ForegroundRole:
             if row.isref:
                 return QBrush(Qt.blue)
-            elif self.model.delta_values and index.column() in self._delta_columns:
+            elif self.model.delta_values and column.name in self.model.DELTA_COLUMNS:
                 return QBrush(QColor(255, 142, 40)) # orange
         elif role == Qt.FontRole:
             isBold = row.isref
@@ -47,8 +47,8 @@ class ResultsModel(Table):
             font.setBold(isBold)
             return font
         elif role == Qt.EditRole:
-            if index.column() == 0:
-                return row.data[index.column()]
+            if column.name == 'name':
+                return row.data[column.name]
         return None
     
     def flags(self, index):
@@ -64,26 +64,28 @@ class ResultsModel(Table):
     
     def headerData(self, section, orientation, role):
         if role == Qt.DisplayRole:
-            if orientation == Qt.Horizontal and section < len(self._app.COLUMNS):
-                return self._app.COLUMNS[section].display
+            if orientation == Qt.Horizontal and section < len(self.model.COLUMNS):
+                return self.model.COLUMNS[section].display
         return None
     
     def setData(self, index, value, role):
         if not index.isValid():
             return False
         row = self.model[index.row()]
+        column = self.model.COLUMNS[index.column()]
         if role == Qt.CheckStateRole:
-            if index.column() == 0:
-                self._app.mark_dupe(row._dupe, value.toBool())
+            if column.name == 'name':
+                self.model.app.mark_dupe(row._dupe, value.toBool())
                 return True
         elif role == Qt.EditRole:
-            if index.column() == 0:
+            if column.name == 'name':
                 value = str(value.toString())
                 return self.model.rename_selected(value)
         return False
     
     def sort(self, column, order):
-        self.model.sort(column, order == Qt.AscendingOrder)
+        column = self.model.COLUMNS[column]
+        self.model.sort(column.name, order == Qt.AscendingOrder)
     
     #--- Properties
     @property
@@ -109,6 +111,9 @@ class ResultsModel(Table):
         self.view.setFont(font)
         fm = QFontMetrics(font)
         self.view.verticalHeader().setDefaultSectionSize(fm.height()+2)
+    
+    def appWillSavePrefs(self):
+        self.model.columns.save_columns()
     
     #--- model --> view
     def invalidate_markings(self):

@@ -12,6 +12,7 @@ from core.directories import Directories as DirectoriesBase, DirectoryState
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog
+from .results_model import ResultsModel
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
@@ -30,6 +31,11 @@ class DupeGuru(DupeGuruBase):
     LOGO_NAME = 'logo_se'
     NAME = __appname__
     
+    DETAILS_DIALOG_CLASS = DetailsDialog
+    RESULT_MODEL_CLASS = ResultsModel
+    PREFERENCES_CLASS = Preferences
+    PREFERENCES_DIALOG_CLASS = PreferencesDialog
+    
     def _setup(self):
         self.directories = Directories()
         DupeGuruBase._setup(self)
@@ -42,13 +48,4 @@ class DupeGuru(DupeGuruBase):
         self.model.scanner.match_similar_words = self.prefs.match_similar
         threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
         self.model.scanner.size_threshold = threshold * 1024 # threshold is in KB. the scanner wants bytes
-    
-    def _create_details_dialog(self, parent):
-        return DetailsDialog(parent, self)
-    
-    def _create_preferences(self):
-        return Preferences()
-    
-    def _create_preferences_dialog(self, parent):
-        return PreferencesDialog(parent, self)
     

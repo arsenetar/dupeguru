@@ -11,6 +11,7 @@ from core_me.app import DupeGuru as DupeGuruModel
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog
+from .results_model import ResultsModel
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog
 
@@ -19,6 +20,11 @@ class DupeGuru(DupeGuruBase):
     EDITION = 'me'
     LOGO_NAME = 'logo_me'
     NAME = __appname__
+    
+    DETAILS_DIALOG_CLASS = DetailsDialog
+    RESULT_MODEL_CLASS = ResultsModel
+    PREFERENCES_CLASS = Preferences
+    PREFERENCES_DIALOG_CLASS = PreferencesDialog
     
     def _update_options(self):
         DupeGuruBase._update_options(self)
@@ -40,13 +46,4 @@ class DupeGuru(DupeGuruBase):
         if self.prefs.scan_tag_year:
             scanned_tags.add('year')
         self.model.scanner.scanned_tags = scanned_tags
-    
-    def _create_details_dialog(self, parent):
-        return DetailsDialog(parent, self)
-    
-    def _create_preferences(self):
-        return Preferences()
-    
-    def _create_preferences_dialog(self, parent):
-        return PreferencesDialog(parent, self)
     

@@ -11,13 +11,6 @@ from PyQt4.QtGui import QApplication
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
-    # (width, is_visible)
-    COLUMNS_DEFAULT_ATTRS = []
-    
-    def __init__(self):
-        PreferencesBase.__init__(self)
-        self.reset_columns()
-    
     def _load_specific(self, settings):
         # load prefs specific to the dg edition
         pass
@@ -33,13 +26,6 @@ class Preferences(PreferencesBase):
         self.destination_type = get('DestinationType', self.destination_type)
         self.custom_command = get('CustomCommand', self.custom_command)
         self.language = get('Language', self.language)
-        
-        widths = get('ColumnsWidth', self.columns_width)
-        # only set nonzero values
-        for index, width in enumerate(widths[:len(self.columns_width)]):
-            if width > 0:
-                self.columns_width[index] = width
-        self.columns_visible = get('ColumnsVisible', self.columns_visible)
         
         self.tableFontSize = get('TableFontSize', self.tableFontSize)
         self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
@@ -76,10 +62,6 @@ class Preferences(PreferencesBase):
         
         self._reset_specific()
     
-    def reset_columns(self):
-        self.columns_width = [width for width, _ in self.COLUMNS_DEFAULT_ATTRS]
-        self.columns_visible = [visible for _, visible in self.COLUMNS_DEFAULT_ATTRS]
-    
     def _save_specific(self, settings):
         # save prefs specific to the dg edition
         pass
@@ -94,8 +76,6 @@ class Preferences(PreferencesBase):
         set_('DebugMode', self.debug_mode)
         set_('DestinationType', self.destination_type)
         set_('CustomCommand', self.custom_command)
-        set_('ColumnsWidth', self.columns_width)
-        set_('ColumnsVisible', self.columns_visible)
         set_('Language', self.language)
         
         set_('TableFontSize', self.tableFontSize)

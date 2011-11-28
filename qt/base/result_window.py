@@ -7,16 +7,16 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
-from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QHeaderView, QMessageBox, QInputDialog,
-    QLineEdit, QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView,
-    QStatusBar, QDialog)
+from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QMessageBox, QInputDialog, QLineEdit,
+    QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar,
+    QDialog)
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from hscommon.util import nonone
 from qtlib.util import moveToScreenCenter
 
-from .results_model import ResultsModel, ResultsView
+from .results_model import ResultsView
 from .stats_label import StatsLabel
 from .util import createActions
 from .prioritize_dialog import PrioritizeDialog
@@ -29,9 +29,8 @@ class ResultWindow(QMainWindow):
         self.app = app
         self._last_filter = None
         self._setupUi()
-        self.resultsModel = ResultsModel(self.app, self.resultsView) 
+        self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)
         self.stats = StatsLabel(app, self.statusLabel)
-        self._load_columns()
         self._update_column_actions_status()
         
         self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
@@ -141,14 +140,15 @@ class ResultWindow(QMainWindow):
         # Columns menu
         menu = self.menuColumns
         self._column_actions = []
-        for index, column in enumerate(self.app.model.COLUMNS):
-            action = menu.addAction(column.display)
+        for index, (display, visible) in enumerate(self.app.model.result_table.columns.menu_items()):
+            action = menu.addAction(display)
             action.setCheckable(True)
-            action.column_index = index
+            action.setChecked(visible)
+            action.item_index = index
             self._column_actions.append(action)
         menu.addSeparator()
         action = menu.addAction(tr("Reset to Defaults"))
-        action.column_index = -1
+        action.item_index = -1
         
         # Action menu
         actionMenu = QMenu(tr("Actions"), self.menubar)
@@ -203,21 +203,11 @@ class ResultWindow(QMainWindow):
                 moveToScreenCenter(self)
     
     #--- Private
-    def _load_columns(self):
-        h = self.resultsView.horizontalHeader()
-        h.setResizeMode(QHeaderView.Interactive)
-        prefs = self.app.prefs
-        attrs = list(zip(prefs.columns_width, prefs.columns_visible))
-        for index, (width, visible) in enumerate(attrs):
-            h.resizeSection(index, width)
-            h.setSectionHidden(index, not visible)
-        h.setResizeMode(0, QHeaderView.Stretch)
-    
     def _update_column_actions_status(self):
-        h = self.resultsView.horizontalHeader()
-        for action in self._column_actions:
-            colid = action.column_index
-            action.setChecked(not h.isSectionHidden(colid))
+        # Update menu checked state
+        menu_items = self.app.model.result_table.columns.menu_items()
+        for action, (display, visible) in zip(self._column_actions, menu_items):
+            action.setChecked(visible)
     
     #--- Actions
     def actionsTriggered(self):
@@ -352,26 +342,17 @@ class ResultWindow(QMainWindow):
     #--- Events
     def appWillSavePrefs(self):
         prefs = self.app.prefs
-        h = self.resultsView.horizontalHeader()
-        widths = []
-        visible = []
-        for i in range(len(self.app.model.COLUMNS)):
-            widths.append(h.sectionSize(i))
-            visible.append(not h.isSectionHidden(i))
-        prefs.columns_width = widths
-        prefs.columns_visible = visible
         prefs.resultWindowIsMaximized = self.isMaximized()
         prefs.resultWindowRect = self.geometry()
     
     def columnToggled(self, action):
-        colid = action.column_index
-        if colid == -1:
-            self.app.prefs.reset_columns()
-            self._load_columns()
+        index = action.item_index
+        if index == -1:
+            self.app.model.result_table.columns.reset_to_defaults()
+            self._update_column_actions_status()
         else:
-            h = self.resultsView.horizontalHeader()
-            h.setSectionHidden(colid, not h.isSectionHidden(colid))
-        self._update_column_actions_status()
+            visible = self.app.model.result_table.columns.toggle_menu_item(index)
+            action.setChecked(visible)
     
     def contextMenuEvent(self, event):
         self.actionActions.menu().exec_(event.globalPos())

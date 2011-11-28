@@ -11,18 +11,6 @@ from core.scanner import ScanType
 from ..base.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
-    # (width, is_visible)
-    COLUMNS_DEFAULT_ATTRS = [ 
-        (200, True), # name
-        (180, True), # path
-        (60, True), # size
-        (40, False), # kind
-        (100, True), # dimensions
-        (120, False), # modification
-        (60, True), # match %
-        (80, False), # dupe count
-    ]
-    
     def _load_specific(self, settings):
         get = self.get_value
         self.scan_type = get('ScanType', self.scan_type)
