@@ -715,6 +715,13 @@ class TestCaseResultsFilter:
         expected = '1 / 1 (1.00 B / 1.00 B) duplicates marked. filter: foo'
         eq_(expected, self.results.stat_line)
     
+    def test_mark_all_only_affects_filtered_items(self):
+        # When performing actions like mark_all() and mark_none in a filtered environment, only mark
+        # items that are actually in the filter.
+        self.results.mark_all()
+        self.results.apply_filter(None)
+        eq_(self.results.mark_count, 1)
+    
     def test_sort_groups(self):
         self.results.apply_filter(None)
         self.results.make_ref(self.objects[1]) # to have the 1024 b obkect as ref
