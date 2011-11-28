@@ -19,5 +19,3 @@ http://www.hardcoded.net/licenses/bsd_license
 #define jobDelete @"job_delete"
 
 #define DGPrioritizeIndexPasteboardType @"DGPrioritizeIndexPasteboardType"
-
-#define TRCOL(s) NSLocalizedStringFromTable(s, @"columns", @"")
