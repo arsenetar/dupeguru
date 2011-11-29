@@ -25,7 +25,8 @@ Frequently Asked Questions
 
 .. topic:: What are the demo limitations of dupeGuru?
 
-    None, |appname| is `Fairware <http://open.hardcoded.net/about/>`_.
+    In demo mode, you can only perform actions on 10 duplicates at once. In 
+    `Fairware <http://open.hardcoded.net/about/>`_ mode, however, there are no limitations.
 
 .. topic:: The mark box of a file I want to delete is disabled. What must I do?
 
