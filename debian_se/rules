@@ -44,6 +44,7 @@ install: build
 	chmod +x src/run.py
 	cp -R src/ $(CURDIR)/debian/dupeguru-se/usr/share/dupeguru_se
 	cp $(CURDIR)/debian/dupeguru_se.desktop $(CURDIR)/debian/dupeguru-se/usr/share/applications
+	mkdir $(CURDIR)/debian/dupeguru-se/usr/bin
 	ln -s /usr/share/dupeguru_se/run.py $(CURDIR)/debian/dupeguru-se/usr/bin/dupeguru_se
 
 

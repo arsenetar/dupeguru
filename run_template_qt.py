@@ -17,6 +17,7 @@ from hscommon.plat import ISWINDOWS
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
 from qt.base import dg_rc
+from qt.base.platform import BASE_PATH
 from core_{{edition}} import __version__, __appname__
 
 if ISWINDOWS:
@@ -29,11 +30,7 @@ if __name__ == "__main__":
     QCoreApplication.setApplicationVersion(__version__)
     settings = QSettings()
     lang = settings.value('Language').toString()
-    try:
-        locale_folder = op.join(op.dirname(__file__), 'locale')
-    except NameError:
-        # We're in a freezed environment (no __file__)
-        locale_folder = 'locale'
+    locale_folder = op.join(BASE_PATH, 'locale')
     install_gettext_trans_under_qt(locale_folder, lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed

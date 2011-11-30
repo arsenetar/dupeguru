@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-12-30
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -101,6 +100,7 @@ def package_debian(edition):
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
     build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version)
     shutil.copytree(op.join('build', 'help'), op.join(srcpath, 'help'))
+    shutil.copytree(op.join('build', 'locale'), op.join(srcpath, 'locale'))
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
     compileall.compile_dir(srcpath)
     os.chdir(destpath)
