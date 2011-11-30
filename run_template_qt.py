@@ -6,6 +6,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
+import os.path as op
 import sip
 sip.setapi('QVariant', 1)
 
@@ -28,7 +29,8 @@ if __name__ == "__main__":
     QCoreApplication.setApplicationVersion(__version__)
     settings = QSettings()
     lang = settings.value('Language').toString()
-    install_gettext_trans_under_qt(lang)
+    locale_folder = op.join(op.dirname(__file__), 'locale')
+    install_gettext_trans_under_qt(locale_folder, lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
     from qt.{{edition}}.app import DupeGuru

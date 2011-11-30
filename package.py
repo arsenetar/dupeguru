@@ -55,8 +55,11 @@ def package_windows(edition, dev):
             print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
     
     help_path = op.join('build', 'help')
-    print("Copying {0} to dist\\help".format(help_path))
+    print("Copying {} to dist\\help".format(help_path))
     shutil.copytree(help_path, op.join(distdir, 'help'))
+    locale_path = op.join('build', 'locale')
+    print("Copying {} to dist\\locale".format(locale_path))
+    shutil.copytree(locale_path, op.join(distdir, 'locale'))
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change

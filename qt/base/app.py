@@ -236,7 +236,7 @@ class DupeGuru(QObject):
         self.about_box.show()
     
     def showHelpTriggered(self):
-        base_path = platform.HELP_PATH.format(self.EDITION)
+        base_path = platform.HELP_PATH
         url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'index.html')))
         QDesktopServices.openUrl(url)
     
