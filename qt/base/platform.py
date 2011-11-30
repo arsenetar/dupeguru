@@ -9,9 +9,13 @@
 import os.path as op
 from hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
 
-# We want to get the absolute path or our root folder. We know that in that folder we're inside
-# qt/base, so we just fo back two levels.
-BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..', '..'))
+if op.exists(__file__):
+    # We want to get the absolute path or our root folder. We know that in that folder we're
+    # inside qt/base, so we just fo back two levels.
+    BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..', '..'))
+else:
+    # We're under a freezed environment. Our base path is ''.
+    BASE_PATH = ''
 HELP_PATH = op.join(BASE_PATH, 'help')
 
 if ISWINDOWS:

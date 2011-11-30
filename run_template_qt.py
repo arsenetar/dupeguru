@@ -29,7 +29,11 @@ if __name__ == "__main__":
     QCoreApplication.setApplicationVersion(__version__)
     settings = QSettings()
     lang = settings.value('Language').toString()
-    locale_folder = op.join(op.dirname(__file__), 'locale')
+    try:
+        locale_folder = op.join(op.dirname(__file__), 'locale')
+    except NameError:
+        # We're in a freezed environment (no __file__)
+        locale_folder = 'locale'
     install_gettext_trans_under_qt(locale_folder, lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
