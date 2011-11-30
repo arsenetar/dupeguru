@@ -1,3 +1,12 @@
+=== 3.3.0 (2011-11-30)
+
+* Added multiple-selection in folder selection dialog for a more efficient folder removal. (#179)
+* Fixed a crash in the prioritize dialog. (#178)
+* Fixed a bug where mass marking with a filter would mark more than filtered duplicates. (#181)
+* Fixed random hard crashes. [Mac OS X] (#183 #184)
+* Added Czech localization by Aleš Nehyba.
+* Added Italian localization by Paolo Rossi.
+
 === 3.2.1 (2011-10-02)
 
 * Fixed a couple of broken action bindings from v3.2.0.
