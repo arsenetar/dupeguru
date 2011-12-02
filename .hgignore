@@ -15,6 +15,7 @@ install
 installer_tmp-cache
 cocoa/*/Info.plist
 cocoa/*/build
+cocoa/*/*.app
 cocoa/*/dg_cocoa.plugin
 cocoa/*/fr.lproj/*.xib
 cocoa/*/de.lproj/*.xib

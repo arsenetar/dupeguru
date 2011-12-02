@@ -19,9 +19,9 @@ from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_pac
 
 def package_cocoa(edition):
     app_path = {
-        'se': 'cocoa/se/build/release/dupeGuru.app',
-        'me': 'cocoa/me/build/release/dupeGuru ME.app',
-        'pe': 'cocoa/pe/build/release/dupeGuru PE.app',
+        'se': 'cocoa/se/dupeGuru.app',
+        'me': 'cocoa/me/dupeGuru ME.app',
+        'pe': 'cocoa/pe/dupeGuru PE.app',
     }[edition]
     build_dmg(app_path, '.')
 

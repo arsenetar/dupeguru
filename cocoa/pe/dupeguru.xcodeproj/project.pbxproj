@@ -823,8 +823,12 @@
 		C01FCF4C08A954540054247B /* release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(PROJECT_DIR)";
 				PRODUCT_NAME = "dupeGuru PE";
 				WRAPPER_EXTENSION = app;
 			};
@@ -857,7 +861,11 @@
 		CEE00FF1111AF37400BC1A77 /* dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(PROJECT_DIR)";
 				PRODUCT_NAME = "dupeGuru PE";
 				WRAPPER_EXTENSION = app;
 			};

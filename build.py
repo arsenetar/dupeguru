@@ -78,12 +78,11 @@ def build_cocoa(edition, dev):
     os.system('xcodebuild {0}'.format(args))
     os.chdir('../..')
     print("Creating the run.py file")
-    subfolder = 'dev' if dev else 'release'
     app_path = {
-        'se': 'cocoa/se/build/{0}/dupeGuru.app',
-        'me': 'cocoa/me/build/{0}/dupeGuru\\ ME.app',
-        'pe': 'cocoa/pe/build/{0}/dupeGuru\\ PE.app',
-    }[edition].format(subfolder)
+        'se': 'cocoa/se/dupeGuru.app',
+        'me': 'cocoa/me/dupeGuru\\ ME.app',
+        'pe': 'cocoa/pe/dupeGuru\\ PE.app',
+    }[edition]
     tmpl = open('run_template_cocoa.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app_path)
     open('run.py', 'wt').write(run_contents)
