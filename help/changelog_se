@@ -1,3 +1,7 @@
+=== 3.3.1 (2011-12-02)
+
+* Fixed a couple of nasty crashes.
+
 === 3.3.0 (2011-11-30)
 
 * Added multiple-selection in folder selection dialog for a more efficient folder removal. (#179)
