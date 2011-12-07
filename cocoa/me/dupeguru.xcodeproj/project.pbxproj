@@ -42,6 +42,7 @@
 		CE1425890AFB718500BD5167 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE14259F0AFB719300BD5167 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE1425880AFB718500BD5167 /* Sparkle.framework */; };
 		CE1EAA0A12DF3E81009BA949 /* HSRecentFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */; };
+		CE2239A2148FFE6600B3DC99 /* HSColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2239A1148FFE6600B3DC99 /* HSColumns.m */; };
 		CE2E87F9142BC90A00519A68 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2E87F8142BC90A00519A68 /* Quartz.framework */; };
 		CE2E87FD142BC92C00519A68 /* HSQuicklook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E87FC142BC92C00519A68 /* HSQuicklook.m */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -146,6 +147,9 @@
 		CE1425880AFB718500BD5167 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE1EAA0812DF3E81009BA949 /* HSRecentFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSRecentFiles.h; path = ../../cocoalib/HSRecentFiles.h; sourceTree = SOURCE_ROOT; };
 		CE1EAA0912DF3E81009BA949 /* HSRecentFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSRecentFiles.m; path = ../../cocoalib/HSRecentFiles.m; sourceTree = SOURCE_ROOT; };
+		CE22399E148FFE4F00B3DC99 /* PyColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyColumns.h; sourceTree = "<group>"; };
+		CE2239A0148FFE6600B3DC99 /* HSColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSColumns.h; sourceTree = "<group>"; };
+		CE2239A1148FFE6600B3DC99 /* HSColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColumns.m; sourceTree = "<group>"; };
 		CE2B2B5A1406ABDA0038D15A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE2E87F8142BC90A00519A68 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		CE2E87FB142BC92C00519A68 /* HSQuicklook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSQuicklook.h; path = ../../cocoalib/HSQuicklook.h; sourceTree = "<group>"; };
@@ -370,6 +374,8 @@
 		CE003CB211242D00004B0AA7 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE2239A0148FFE6600B3DC99 /* HSColumns.h */,
+				CE2239A1148FFE6600B3DC99 /* HSColumns.m */,
 				CE003CB311242D00004B0AA7 /* HSGUIController.h */,
 				CE003CB411242D00004B0AA7 /* HSGUIController.m */,
 				CE003CB511242D00004B0AA7 /* HSOutline.h */,
@@ -390,6 +396,7 @@
 		CE003CBB11242D00004B0AA7 /* proxies */ = {
 			isa = PBXGroup;
 			children = (
+				CE22399E148FFE4F00B3DC99 /* PyColumns.h */,
 				CE003CBC11242D00004B0AA7 /* PyGUI.h */,
 				CE003CBD11242D00004B0AA7 /* PyOutline.h */,
 				CE0A0C131175A28100DCA3C6 /* PyTable.h */,
@@ -647,6 +654,7 @@
 				CE84C9B91423AE410050A6AD /* HSPopUpList.m in Sources */,
 				CE84C9BA1423AE410050A6AD /* HSSelectableList.m in Sources */,
 				CE2E87FD142BC92C00519A68 /* HSQuicklook.m in Sources */,
+				CE2239A2148FFE6600B3DC99 /* HSColumns.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
