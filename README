@@ -29,7 +29,7 @@ General dependencies
 - Python 3.2 (http://www.python.org)
 - Send2Trash3k (http://hg.hardcoded.net/send2trash)
 - hsaudiotag3k 1.1.0 (for ME) (http://hg.hardcoded.net/hsaudiotag)
-- jobprogress 1.0.2 (http://hg.hardcoded.net/jobprogress)
+- jobprogress 1.0.3 (http://hg.hardcoded.net/jobprogress)
 - Sphinx 1.1 (http://sphinx.pocoo.org/)
 - polib 0.7.0 (http://bitbucket.org/izi/polib)
 - pytest 2.0.0, to run unit tests. (http://pytest.org/)
