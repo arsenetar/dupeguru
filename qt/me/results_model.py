@@ -7,7 +7,7 @@
 
 from qtlib.column import Column
 from ..base.results_model import ResultsModel as ResultsModelBase
-from core_se.result_table import ResultTable
+from core_me.result_table import ResultTable
 
 # Little hack to remove the 'marked' column which isn't there in the Qt GUI.
 del ResultTable.COLUMNS[0]
