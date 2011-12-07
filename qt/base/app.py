@@ -185,6 +185,12 @@ class DupeGuru(QObject):
     #--- Events
     def finishedLaunching(self):
         self.model.initial_registration_setup()
+        if sys.getfilesystemencoding() == 'ascii':
+            # No need to localize this, it's a debugging message.
+            msg = "Something is wrong with the way your system locale is set. If the files you're "\
+               "scanning have accented letters, you'll probably get a crash. It is advised that "\
+               "you set your system locale properly."
+            QMessageBox.warning(self.directories_dialog, "Wrong Locale", msg)
     
     def application_will_terminate(self):
         self.willSavePrefs.emit()
