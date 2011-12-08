@@ -28,11 +28,11 @@ http://www.hardcoded.net/licenses/bsd_license
         {@"dupe_count", 80, 16, 0, YES, nil},
         nil
     };
-    [[self columns] initializeColumns:defs];
+    [[table columns] initializeColumns:defs];
     NSTableColumn *c = [matches tableColumnWithIdentifier:@"marked"];
     [[c dataCell] setButtonType:NSSwitchButton];
     [[c dataCell] setControlSize:NSSmallControlSize];
-    c = [[self tableView] tableColumnWithIdentifier:@"size"];
+    c = [matches tableColumnWithIdentifier:@"size"];
     [[c dataCell] setAlignment:NSRightTextAlignment];
     [[table columns] restoreColumns];
 }

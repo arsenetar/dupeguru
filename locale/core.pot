@@ -11,15 +11,15 @@ msgstr ""
 msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
 msgstr ""
 
-#: core/app.py:420
+#: core/app.py:422
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:431
+#: core/app.py:433
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:470
+#: core/app.py:472
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -75,11 +75,11 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core/results.py:95
+#: core/results.py:113
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr ""
 
-#: core/results.py:102
+#: core/results.py:120
 msgid " filter: %s"
 msgstr ""
 

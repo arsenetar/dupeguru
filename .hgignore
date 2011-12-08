@@ -22,10 +22,9 @@ cocoa/*/de.lproj/*.xib
 cocoa/*/zh_CN.lproj/*.xib
 cocoa/*/cs.lproj/*.xib
 cocoa/*/it.lproj/*.xib
+# We keep old strings files in the repo for a while to be sure that auto-generated strings work
+# fine, but we'll eventually only have en.lproj in the repo.
+hy.lproj
 qt/base/*_rc.py
-qt/lang/fr.qm
-qt/lang/en.qm
-qt/lang/de.qm
-qt/lang/zh.qm
 help/*/conf.py
 help/*/changelog.rst

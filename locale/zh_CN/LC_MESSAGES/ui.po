@@ -26,7 +26,7 @@ msgstr "将文件移到回收站"
 msgid "Quit"
 msgstr "退出"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:130
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
 msgid "Preferences"
 msgstr "首选项"
 
@@ -89,23 +89,23 @@ msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 msgid "Custom Command"
 msgstr "自定义命令"
 
-#: qt/base/app.py:203
+#: qt/base/app.py:209
 msgid "All files were processed successfully."
 msgstr "所有文件已成功处理。"
 
-#: qt/base/app.py:204
+#: qt/base/app.py:210
 msgid "Operation Complete"
 msgstr "执行完成"
 
-#: qt/base/app.py:207
+#: qt/base/app.py:213
 msgid "Scan complete"
 msgstr "扫描完成"
 
-#: qt/base/app.py:208 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:214 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: qt/base/app.py:260 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:266 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -128,86 +128,85 @@ msgstr "已选择"
 msgid "Reference"
 msgstr "参照文件"
 
-#: qt/base/directories_dialog.py:56 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Results..."
 msgstr "载入结果..."
 
-#: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:59 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Results Window"
 msgstr "结果窗口"
 
-#: qt/base/directories_dialog.py:58
+#: qt/base/directories_dialog.py:60
 msgid "Add Folder..."
 msgstr "增加文件夹..."
 
-#: qt/base/directories_dialog.py:66 qt/base/result_window.py:82
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:82
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "文件"
 
-#: qt/base/directories_dialog.py:68 qt/base/result_window.py:90
+#: qt/base/directories_dialog.py:70 qt/base/result_window.py:90
 msgid "View"
 msgstr "视图"
 
-#: qt/base/directories_dialog.py:70 qt/base/result_window.py:92
+#: qt/base/directories_dialog.py:72 qt/base/result_window.py:92
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "帮助"
 
-#: qt/base/directories_dialog.py:72 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:74 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Recent Results"
 msgstr "载入最近的结果"
 
-#: qt/base/directories_dialog.py:106
+#: qt/base/directories_dialog.py:108
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "请选择要扫描的文件夹，然后点击 \"扫描\"。"
 
-#: qt/base/directories_dialog.py:135
+#: qt/base/directories_dialog.py:132
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Load Results"
 msgstr "载入结果"
 
-#: qt/base/directories_dialog.py:138
+#: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Scan"
 msgstr "扫描"
 
-#: qt/base/directories_dialog.py:175
+#: qt/base/directories_dialog.py:179
 msgid "Unsaved results"
 msgstr "未保存的结果"
 
-#: qt/base/directories_dialog.py:176 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "您还没有保存扫描结果，确定要退出吗?"
 
-#: qt/base/directories_dialog.py:184 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "请选择一个文件夹并加入到扫描列表中"
 
-#: qt/base/directories_dialog.py:201 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "选择一个结果文件并载入"
 
-#: qt/base/directories_dialog.py:202
+#: qt/base/directories_dialog.py:206
 msgid "All Files (*.*)"
 msgstr "所有文件 (*.*)"
 
-#: qt/base/directories_dialog.py:202 qt/base/result_window.py:334
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:334
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru结果 (*.dupeguru)"
 
-#: qt/base/directories_dialog.py:220
+#: qt/base/directories_dialog.py:217
 msgid "Start a new scan"
 msgstr "开始新的扫描"
 
-#: qt/base/directories_dialog.py:221 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "目前还有结果尚未保存，确定要继续吗?"
 
 #: qt/base/directories_model.py:22
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
-#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Name"
 msgstr "名称"
 
@@ -270,29 +269,29 @@ msgstr "捐助"
 msgid "Continue"
 msgstr "继续"
 
-#: qt/base/preferences_dialog.py:44
+#: qt/base/preferences_dialog.py:45
 msgid "Scan Type:"
 msgstr "扫描类型:"
 
-#: qt/base/preferences_dialog.py:57
+#: qt/base/preferences_dialog.py:58
 msgid "Filter Hardness:"
 msgstr "筛选强度:"
 
-#: qt/base/preferences_dialog.py:83
+#: qt/base/preferences_dialog.py:84
 msgid "More Results"
 msgstr "较多结果"
 
-#: qt/base/preferences_dialog.py:88
+#: qt/base/preferences_dialog.py:89
 msgid "Fewer Results"
 msgstr "较少结果"
 
-#: qt/base/preferences_dialog.py:95 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:99
+#: qt/base/preferences_dialog.py:100
 msgid "Language:"
 msgstr "语言:"
 
@@ -312,36 +311,36 @@ msgstr "德语"
 msgid "Chinese (Simplified)"
 msgstr "简体中文"
 
-#: qt/base/preferences_dialog.py:105 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:108 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "目标位置"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "重建相对路径"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "重建绝对路径"
 
-#: qt/base/preferences_dialog.py:113 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "自定义命令 (参数: %d 指重复文件, %r 指参照文件):"
 
-#: qt/base/preferences_dialog.py:191
+#: qt/base/preferences_dialog.py:192
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru将重新启动以使语言修改生效。"
 
@@ -1028,4 +1027,8 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
+msgstr ""
+
+#: qt/base/preferences_dialog.py:27
+msgid "Armenian"
 msgstr ""

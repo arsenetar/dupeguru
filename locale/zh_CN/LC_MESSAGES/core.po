@@ -12,15 +12,15 @@ msgid ""
 "mode."
 msgstr ""
 
-#: core/app.py:420
+#: core/app.py:422
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:431
+#: core/app.py:433
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:470
+#: core/app.py:472
 msgid "%s (%d discarded)"
 msgstr "%s (%d 无效)"
 
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core/results.py:95
+#: core/results.py:113
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "已标记 %d / %d (%s / %s) 个重复项。"
 
-#: core/results.py:102
+#: core/results.py:120
 msgid " filter: %s"
 msgstr " 筛选: %s"
 
