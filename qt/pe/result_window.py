@@ -25,6 +25,6 @@ class ResultWindow(ResultWindowBase):
         title = tr("Clear Picture Cache")
         msg = tr("Do you really want to remove all your cached picture analysis?")
         if self.app.confirm(title, msg, QMessageBox.No):
-            self.app.scanner.clear_picture_cache()
+            self.app.model.scanner.clear_picture_cache()
             QMessageBox.information(self, title, tr("Picture cache cleared."))
     
