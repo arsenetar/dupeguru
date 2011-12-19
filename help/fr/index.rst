@@ -3,15 +3,15 @@ Aide |appname|
 
 .. only:: edition_se
 
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru/help/en/>`__ et en `allemand <http://www.hardcoded.net/dupeguru/help/de/>`__.
+    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru/help/hy/>`__.
 
 .. only:: edition_me
 
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_me/help/en/>`__ et en `allemand <http://www.hardcoded.net/dupeguru_me/help/de/>`__.
+    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_me/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru_me/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru_me/help/hy/>`__.
 
 .. only:: edition_pe
 
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_pe/help/en/>`__ et en `allemand <http://www.hardcoded.net/dupeguru_pe/help/de/>`__.
+    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_pe/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru_pe/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru_pe/help/hy/>`__.
 
 .. only:: edition_se or edition_me
 
