@@ -6,6 +6,7 @@ run.py
 *.so
 *.mo
 *.pyd
+.tm_*
 *.xcodeproj/xcuserdata
 *.xcodeproj/project.xcworkspace/xcuserdata
 conf.json

@@ -12,8 +12,7 @@ from optparse import OptionParser
 import shutil
 import json
 
-from setuptools import setup
-from distutils.extension import Extension
+from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
@@ -38,6 +37,7 @@ def parse_args():
 
 def build_cocoa(edition, dev):
     from pluginbuilder import build_plugin
+    build_cocoa_proxy_module()
     print("Building dg_cocoa.plugin")
     if dev:
         tocopy = ['cocoa/inter']
@@ -161,6 +161,20 @@ def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
+
+def build_cocoa_proxy_module():
+    print("Building Cocoa Proxy")
+    import objp.p2o
+    objp.p2o.generate_python_proxy_code('hscommon/cocoa/Cocoa.h', 'build/CocoaProxy.m')
+    exts = [
+        Extension("CocoaProxy", ['hscommon/cocoa/Cocoa.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
+            extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
+    ]
+    setup(
+        script_args = ['build_ext', '--inplace'],
+        ext_modules = exts,
+    )
+    move_all('CocoaProxy*', 'hscommon/cocoa')
 
 def build_pe_modules(ui):
     print("Building PE Modules")
