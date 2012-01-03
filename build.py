@@ -161,6 +161,7 @@ def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
+    loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
 
 def build_pe_modules(ui):
     print("Building PE Modules")

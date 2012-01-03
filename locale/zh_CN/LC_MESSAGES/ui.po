@@ -26,7 +26,7 @@ msgstr "将文件移到回收站"
 msgid "Quit"
 msgstr "退出"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
 msgid "Preferences"
 msgstr "首选项"
 
@@ -269,78 +269,62 @@ msgstr "捐助"
 msgid "Continue"
 msgstr "继续"
 
-#: qt/base/preferences_dialog.py:45
+#: qt/base/preferences_dialog.py:38
 msgid "Scan Type:"
 msgstr "扫描类型:"
 
-#: qt/base/preferences_dialog.py:58
+#: qt/base/preferences_dialog.py:51
 msgid "Filter Hardness:"
 msgstr "筛选强度:"
 
-#: qt/base/preferences_dialog.py:84
+#: qt/base/preferences_dialog.py:77
 msgid "More Results"
 msgstr "较多结果"
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:82
 msgid "Fewer Results"
 msgstr "较少结果"
 
-#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:93
 msgid "Language:"
 msgstr "语言:"
 
-#: qt/base/preferences_dialog.py:21
-msgid "English"
-msgstr "英语"
-
-#: qt/base/preferences_dialog.py:22
-msgid "French"
-msgstr "法语"
-
-#: qt/base/preferences_dialog.py:23
-msgid "German"
-msgstr "德语"
-
-#: qt/base/preferences_dialog.py:24
-msgid "Chinese (Simplified)"
-msgstr "简体中文"
-
-#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "目标位置"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "重建相对路径"
 
-#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "重建绝对路径"
 
-#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "自定义命令 (参数: %d 指重复文件, %r 指参照文件):"
 
-#: qt/base/preferences_dialog.py:192
+#: qt/base/preferences_dialog.py:185
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru将重新启动以使语言修改生效。"
 
@@ -943,10 +927,6 @@ msgstr "Remove empty folders after delete and move"
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE Preferences"
 
-#: qt/base/preferences_dialog.py:25
-msgid "Czech"
-msgstr ""
-
 #: cocoa/inter/app.py:21
 msgid "Sending to Trash"
 msgstr "移到垃圾桶"
@@ -970,10 +950,6 @@ msgstr ""
 #: cocoa/inter/app_pe.py:196
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
-
-#: qt/base/preferences_dialog.py:26
-msgid "Italian"
-msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a directory to copy marked files to"
@@ -1027,8 +1003,4 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:27
-msgid "Armenian"
 msgstr ""

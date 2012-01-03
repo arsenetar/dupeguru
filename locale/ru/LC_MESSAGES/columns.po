@@ -1,15 +1,16 @@
+# 
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: Russian translation\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Pavlov <IgorPavlov87@mail.ru>\n"
 "Language-Team: Igor Pavlov <IgorPavlov87@mail.ru>\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-Language: Russian\n"
 
 #: core/gui/problem_table.py:18
 msgid "File Path"
@@ -19,23 +20,17 @@ msgstr "Путь к файлу"
 msgid "Error Message"
 msgstr "Сообщение об ошибке"
 
-#: core/prioritize.py:63
-#: core_me/result_table.py:24
-#: core_pe/result_table.py:21
+#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
 #: core_se/result_table.py:21
 msgid "Kind"
 msgstr "Тип"
 
-#: core/prioritize.py:72
-#: core_me/result_table.py:19
-#: core_pe/result_table.py:19
+#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
 #: core_se/result_table.py:19
 msgid "Folder"
 msgstr "Папка"
 
-#: core/prioritize.py:88
-#: core_me/result_table.py:18
-#: core_pe/result_table.py:18
+#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
 #: core_se/result_table.py:18
 msgid "Filename"
 msgstr "Имя файла"
@@ -44,10 +39,8 @@ msgstr "Имя файла"
 msgid "Size"
 msgstr "Размер"
 
-#: core/prioritize.py:138
-#: core_me/result_table.py:25
-#: core_pe/result_table.py:23
-#: core_se/result_table.py:22
+#: core/prioritize.py:138 core_me/result_table.py:25
+#: core_pe/result_table.py:23 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Модификация"
 
@@ -55,8 +48,7 @@ msgstr "Модификация"
 msgid "Duration"
 msgstr "Продолжительность"
 
-#: core_me/prioritize.py:22
-#: core_me/result_table.py:22
+#: core_me/prioritize.py:22 core_me/result_table.py:22
 msgid "Bitrate"
 msgstr "Битрейт"
 
@@ -104,30 +96,24 @@ msgstr "Номер дорожки"
 msgid "Comment"
 msgstr "Комментарий"
 
-#: core_me/result_table.py:33
-#: core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:24
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Совпадение %"
 
-#: core_me/result_table.py:34
-#: core_se/result_table.py:24
+#: core_me/result_table.py:34 core_se/result_table.py:24
 msgid "Words Used"
 msgstr "Слов, используемых"
 
-#: core_me/result_table.py:35
-#: core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:25
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Dupe графа"
 
-#: core_pe/prioritize.py:16
-#: core_pe/result_table.py:22
+#: core_pe/prioritize.py:16 core_pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Размеры"
 
-#: core_pe/result_table.py:20
-#: core_se/result_table.py:20
+#: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Размер (KB)"
-

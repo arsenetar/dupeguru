@@ -50,7 +50,7 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
 msgid "Preferences"
 msgstr ""
 
@@ -301,83 +301,63 @@ msgstr "Contribuisci"
 msgid "Continue"
 msgstr "Continua"
 
-#: qt/base/preferences_dialog.py:21
-msgid "English"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:22
-msgid "French"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:23
-msgid "German"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:24
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:25
-msgid "Czech"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:45
+#: qt/base/preferences_dialog.py:38
 msgid "Scan Type:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:58
+#: qt/base/preferences_dialog.py:51
 msgid "Filter Hardness:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:84
+#: qt/base/preferences_dialog.py:77
 msgid "More Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:82
 msgid "Fewer Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Dimensione carattere:"
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:93
 msgid "Language:"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Copia e sposta:"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Tutti gli elementi in una cartella"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Ricrea il percorso relativo"
 
-#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Ricrea il percorso assoluto"
 
-#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 "Comando personalizzato (argomenti: %d per duplicare, %r per riferimento):"
 
-#: qt/base/preferences_dialog.py:192
+#: qt/base/preferences_dialog.py:185
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr ""
 
@@ -989,10 +969,6 @@ msgstr "Rimuovi le cartelle vuote dopo aver cancellato e spostato"
 msgid "dupeGuru PE Preferences"
 msgstr "Preferenze di dupeGuru PE"
 
-#: qt/base/preferences_dialog.py:26
-msgid "Italian"
-msgstr ""
-
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a directory to copy marked files to"
 msgstr "Seleziona una cartella in cui copiare i file marcati"
@@ -1046,8 +1022,4 @@ msgstr "No"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:27
-msgid "Armenian"
 msgstr ""

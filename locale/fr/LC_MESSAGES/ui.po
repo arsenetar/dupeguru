@@ -26,7 +26,7 @@ msgstr "Envoi de fichiers à la corbeille"
 msgid "Quit"
 msgstr "Quitter"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -273,78 +273,62 @@ msgstr "Contribuer"
 msgid "Continue"
 msgstr "Continuer"
 
-#: qt/base/preferences_dialog.py:45
+#: qt/base/preferences_dialog.py:38
 msgid "Scan Type:"
 msgstr "Type de scan:"
 
-#: qt/base/preferences_dialog.py:58
+#: qt/base/preferences_dialog.py:51
 msgid "Filter Hardness:"
 msgstr "Seuil du filtre:"
 
-#: qt/base/preferences_dialog.py:84
+#: qt/base/preferences_dialog.py:77
 msgid "More Results"
 msgstr "+ de doublons"
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:82
 msgid "Fewer Results"
 msgstr "- de doublons"
 
-#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Taille de police:"
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:93
 msgid "Language:"
 msgstr "Langue:"
 
-#: qt/base/preferences_dialog.py:21
-msgid "English"
-msgstr "Anglais"
-
-#: qt/base/preferences_dialog.py:22
-msgid "French"
-msgstr "Français"
-
-#: qt/base/preferences_dialog.py:23
-msgid "German"
-msgstr "Allemand"
-
-#: qt/base/preferences_dialog.py:24
-msgid "Chinese (Simplified)"
-msgstr "Chinois (Simplifié)"
-
-#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Déplacements de fichiers:"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Directement à la destination"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Re-créer chemins relatifs"
 
-#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Re-créer chemins absolus"
 
-#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Commande perso. (arguments: %d pour doublon, %r pour réf):"
 
-#: qt/base/preferences_dialog.py:192
+#: qt/base/preferences_dialog.py:185
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru doit redémarrer pour appliquer le changement de langue."
 
@@ -953,10 +937,6 @@ msgstr "Effacer les dossiers vides après un déplacement"
 msgid "dupeGuru PE Preferences"
 msgstr "Préférences de dupeGuru PE"
 
-#: qt/base/preferences_dialog.py:25
-msgid "Czech"
-msgstr ""
-
 #: cocoa/inter/app.py:21
 msgid "Sending to Trash"
 msgstr "Envoi vers corbeille"
@@ -980,10 +960,6 @@ msgstr ""
 #: cocoa/inter/app_pe.py:196
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
-
-#: qt/base/preferences_dialog.py:26
-msgid "Italian"
-msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a directory to copy marked files to"
@@ -1040,7 +1016,3 @@ msgstr "Non"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
 msgstr "OK"
-
-#: qt/base/preferences_dialog.py:27
-msgid "Armenian"
-msgstr ""

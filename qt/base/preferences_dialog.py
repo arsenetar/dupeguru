@@ -6,8 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from collections import OrderedDict
-
 from PyQt4.QtCore import SIGNAL, Qt, QSize
 from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox)
@@ -15,20 +13,11 @@ from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QL
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from qtlib.util import horizontalWrap
+from qtlib.preferences import LANGNAMES
 
 tr = trget('ui')
 
-LANGNAMES = OrderedDict([
-    ('en', tr("English")),
-    ('fr', tr("French")),
-    ('de', tr("German")),
-    ('zh_CN', tr("Chinese (Simplified)")),
-    ('cs', tr("Czech")),
-    ('it', tr("Italian")),
-    ('hy', tr("Armenian")),
-    ('ru', tr("Russian")),
-])
-SUPPORTED_LANGUAGES = list(LANGNAMES.keys())
+SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru']
 
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app):

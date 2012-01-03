@@ -61,7 +61,7 @@ msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
 msgid "Quit"
 msgstr "Փակել"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
 msgid "Preferences"
 msgstr "Կարգավորումներ"
 
@@ -307,86 +307,62 @@ msgstr "Կամավորներ"
 msgid "Continue"
 msgstr "Շարունակել"
 
-#: qt/base/preferences_dialog.py:21
-msgid "English"
-msgstr "Անգլերեն"
-
-#: qt/base/preferences_dialog.py:22
-msgid "French"
-msgstr "Ֆրանսերեն"
-
-#: qt/base/preferences_dialog.py:23
-msgid "German"
-msgstr "Գերմաներեն"
-
-#: qt/base/preferences_dialog.py:24
-msgid "Chinese (Simplified)"
-msgstr "Չինարեն (Պարզեցված)"
-
-#: qt/base/preferences_dialog.py:25
-msgid "Czech"
-msgstr "Չեխերեն"
-
-#: qt/base/preferences_dialog.py:26
-msgid "Italian"
-msgstr "Իտալերեն"
-
-#: qt/base/preferences_dialog.py:45
+#: qt/base/preferences_dialog.py:38
 msgid "Scan Type:"
 msgstr "Ստուգելու տեսակը."
 
-#: qt/base/preferences_dialog.py:58
+#: qt/base/preferences_dialog.py:51
 msgid "Filter Hardness:"
 msgstr "Ֆիլտրի կարգը."
 
-#: qt/base/preferences_dialog.py:84
+#: qt/base/preferences_dialog.py:77
 msgid "More Results"
 msgstr "Լր. արդյունքներ"
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:82
 msgid "Fewer Results"
 msgstr "Քիչ արդյունքներ"
 
-#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Տառի չափը."
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:93
 msgid "Language:"
 msgstr "Լեզուն."
 
-#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Պատճենել և Տեղափոխել."
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Նշվածից աջ"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Վերաստեղծել հարաբերական ճ-ը"
 
-#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Վերաստեղծել բացարձակ ճ-ը"
 
-#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Հրամանի կատարում (փաստարկներ. %d խաբկանքի, %r հղման համար)"
 
-#: qt/base/preferences_dialog.py:192
+#: qt/base/preferences_dialog.py:185
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru-ը պետք է վերագործարկվի՝ լեզուն կիրառելու համար:"
 
@@ -1037,7 +1013,3 @@ msgstr "Ջնջել դատարկ թղթապանակները ջնջելուց կա
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE կարգավորումները"
-
-#: qt/base/preferences_dialog.py:27
-msgid "Armenian"
-msgstr ""

@@ -26,7 +26,7 @@ msgstr "Sende Dateien in den Mülleimer"
 msgid "Quit"
 msgstr "Beenden"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:131
+#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
 msgid "Preferences"
 msgstr "Einstellungen"
 
@@ -273,78 +273,62 @@ msgstr "Spenden"
 msgid "Continue"
 msgstr "Fortfahren"
 
-#: qt/base/preferences_dialog.py:45
+#: qt/base/preferences_dialog.py:38
 msgid "Scan Type:"
 msgstr "Scantyp:"
 
-#: qt/base/preferences_dialog.py:58
+#: qt/base/preferences_dialog.py:51
 msgid "Filter Hardness:"
 msgstr "Filter Empfindlichkeit:"
 
-#: qt/base/preferences_dialog.py:84
+#: qt/base/preferences_dialog.py:77
 msgid "More Results"
 msgstr "mehr Ergebnisse"
 
-#: qt/base/preferences_dialog.py:89
+#: qt/base/preferences_dialog.py:82
 msgid "Fewer Results"
 msgstr "weniger Ergebnisse"
 
-#: qt/base/preferences_dialog.py:96 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Font size:"
 
-#: qt/base/preferences_dialog.py:100
+#: qt/base/preferences_dialog.py:93
 msgid "Language:"
 msgstr "Sprache:"
 
-#: qt/base/preferences_dialog.py:21
-msgid "English"
-msgstr "Englisch"
-
-#: qt/base/preferences_dialog.py:22
-msgid "French"
-msgstr "Französisch"
-
-#: qt/base/preferences_dialog.py:23
-msgid "German"
-msgstr "Deutsch"
-
-#: qt/base/preferences_dialog.py:24
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:106 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Kopieren und Verschieben:"
 
-#: qt/base/preferences_dialog.py:109 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Direkt im Ziel"
 
-#: qt/base/preferences_dialog.py:110 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Relativen Pfad neu erstellen"
 
-#: qt/base/preferences_dialog.py:111 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Absoluten Pfad neu erstellen"
 
-#: qt/base/preferences_dialog.py:114 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Eigener Befehl (Argumente: %d für Duplikat, %r für Referenz):"
 
-#: qt/base/preferences_dialog.py:192
+#: qt/base/preferences_dialog.py:185
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru muss neustarten, um die Sprachänderung durchzuführen."
 
@@ -943,10 +927,6 @@ msgstr "Remove empty folders after delete and move"
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE Preferences"
 
-#: qt/base/preferences_dialog.py:25
-msgid "Czech"
-msgstr ""
-
 #: cocoa/inter/app.py:21
 msgid "Sending to Trash"
 msgstr "Verschiebe in den Mülleimer"
@@ -970,10 +950,6 @@ msgstr ""
 #: cocoa/inter/app_pe.py:196
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
-
-#: qt/base/preferences_dialog.py:26
-msgid "Italian"
-msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a directory to copy marked files to"
@@ -1027,8 +1003,4 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
-msgstr ""
-
-#: qt/base/preferences_dialog.py:27
-msgid "Armenian"
 msgstr ""
