@@ -18,6 +18,8 @@
 
 | **Hrant Ohanyan, Հայերեն թարգմանիչը**
 
+| **Igor Pavlov, Russian localization**
+
 | **Python, Ծրագրավորման լեզուն** (`Վեբ կայքը <http://www.python.org>`__)
 | Լավագույներից լավագույնը
 

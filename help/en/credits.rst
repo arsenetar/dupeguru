@@ -16,6 +16,10 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Paolo Rossi, Italian localization**
 
+| **Hrant Ohanyan, Armenian localization**
+
+| **Igor Pavlov, Russian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 
