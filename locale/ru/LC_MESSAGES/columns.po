@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: Russian translation\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Igor Pavlov <IgorPavlov87@mail.ru>\n"
+"Language-Team: Igor Pavlov <IgorPavlov87@mail.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: core/gui/problem_table.py:18
+msgid "File Path"
+msgstr "Путь к файлу"
+
+#: core/gui/problem_table.py:19
+msgid "Error Message"
+msgstr "Сообщение об ошибке"
+
+#: core/prioritize.py:63
+#: core_me/result_table.py:24
+#: core_pe/result_table.py:21
+#: core_se/result_table.py:21
+msgid "Kind"
+msgstr "Тип"
+
+#: core/prioritize.py:72
+#: core_me/result_table.py:19
+#: core_pe/result_table.py:19
+#: core_se/result_table.py:19
+msgid "Folder"
+msgstr "Папка"
+
+#: core/prioritize.py:88
+#: core_me/result_table.py:18
+#: core_pe/result_table.py:18
+#: core_se/result_table.py:18
+msgid "Filename"
+msgstr "Имя файла"
+
+#: core/prioritize.py:132
+msgid "Size"
+msgstr "Размер"
+
+#: core/prioritize.py:138
+#: core_me/result_table.py:25
+#: core_pe/result_table.py:23
+#: core_se/result_table.py:22
+msgid "Modification"
+msgstr "Модификация"
+
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: core_me/prioritize.py:22
+#: core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Битрейт"
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr "Частота оцифровки"
+
+#: core_me/result_table.py:20
+msgid "Size (MB)"
+msgstr "Размер (Мб)"
+
+#: core_me/result_table.py:21
+msgid "Time"
+msgstr "Время"
+
+#: core_me/result_table.py:23
+msgid "Sample Rate"
+msgstr "Частота"
+
+#: core_me/result_table.py:26
+msgid "Title"
+msgstr "Название"
+
+#: core_me/result_table.py:27
+msgid "Artist"
+msgstr "Артист"
+
+#: core_me/result_table.py:28
+msgid "Album"
+msgstr "Альбом"
+
+#: core_me/result_table.py:29
+msgid "Genre"
+msgstr "Жанр"
+
+#: core_me/result_table.py:30
+msgid "Year"
+msgstr "Год"
+
+#: core_me/result_table.py:31
+msgid "Track Number"
+msgstr "Номер дорожки"
+
+#: core_me/result_table.py:32
+msgid "Comment"
+msgstr "Комментарий"
+
+#: core_me/result_table.py:33
+#: core_pe/result_table.py:24
+#: core_se/result_table.py:23
+msgid "Match %"
+msgstr "Совпадение %"
+
+#: core_me/result_table.py:34
+#: core_se/result_table.py:24
+msgid "Words Used"
+msgstr "Слов, используемых"
+
+#: core_me/result_table.py:35
+#: core_pe/result_table.py:25
+#: core_se/result_table.py:25
+msgid "Dupe Count"
+msgstr "Dupe графа"
+
+#: core_pe/prioritize.py:16
+#: core_pe/result_table.py:22
+msgid "Dimensions"
+msgstr "Размеры"
+
+#: core_pe/result_table.py:20
+#: core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Размер (KB)"
+

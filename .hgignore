@@ -25,6 +25,7 @@ cocoa/*/it.lproj/*.xib
 # We keep old strings files in the repo for a while to be sure that auto-generated strings work
 # fine, but we'll eventually only have en.lproj in the repo.
 hy.lproj
+ru.lproj
 qt/base/*_rc.py
 help/*/conf.py
 help/*/changelog.rst

@@ -8,6 +8,7 @@
 
 from PyQt4.QtGui import QApplication
 
+from hscommon import trans
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
@@ -26,6 +27,8 @@ class Preferences(PreferencesBase):
         self.destination_type = get('DestinationType', self.destination_type)
         self.custom_command = get('CustomCommand', self.custom_command)
         self.language = get('Language', self.language)
+        if not self.language and trans.installed_lang:
+            self.language = trans.installed_lang
         
         self.tableFontSize = get('TableFontSize', self.tableFontSize)
         self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
@@ -50,7 +53,7 @@ class Preferences(PreferencesBase):
         self.debug_mode = False
         self.destination_type = 1
         self.custom_command = ''
-        self.language = ''
+        self.language = trans.installed_lang if trans.installed_lang else ''
         
         self.tableFontSize = QApplication.font().pointSize()
         self.resultWindowIsMaximized = False
