@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import signature, PySelectableList
+from cocoa.inter import signature, PySelectableList
 
 class PyPrioritizeList(PySelectableList):
     @signature('v@:@i')

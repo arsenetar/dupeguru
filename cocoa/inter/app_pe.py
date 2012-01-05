@@ -16,8 +16,8 @@ from appscript import app, its, CommandError, ApplicationNotFoundError
 from hscommon import io
 from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
-from hscommon.cocoa.objcmin import NSUserDefaults, NSURL
 from hscommon.trans import tr
+from cocoa import proxy
 
 from core import directories
 from core_pe import _block_osx
@@ -49,14 +49,11 @@ class IPhoto(Photo):
         return IPHOTO_PATH
     
 def get_iphoto_database_path():
-    ud = NSUserDefaults.standardUserDefaults()
-    prefs = ud.persistentDomainForName_('com.apple.iApps')
-    if prefs is None:
+    plisturls = proxy.prefValue_inDomain_('iPhotoRecentDatabases', 'com.apple.iApps')
+    if not plisturls:
         raise directories.InvalidPathError()
-    if 'iPhotoRecentDatabases' not in prefs:
-        raise directories.InvalidPathError()
-    plisturl = NSURL.URLWithString_(prefs['iPhotoRecentDatabases'][0])
-    return Path(plisturl.path())
+    plistpath = proxy.url2path_(plisturls[0])
+    return Path(plistpath)
 
 def get_iphoto_pictures(plistpath):
     if not io.exists(plistpath):

@@ -1,11 +1,9 @@
 import logging
 
 from jobprogress import job
-from hscommon import cocoa
-from hscommon.cocoa import install_exception_hook
-from hscommon.cocoa.inter import signature, subproxy, PyFairware
-from hscommon.cocoa.objcmin import (NSNotificationCenter, NSSearchPathForDirectoriesInDomains,
-    NSApplicationSupportDirectory, NSUserDomainMask, NSWorkspace)
+import cocoa
+from cocoa import install_exception_hook, proxy
+from cocoa.inter import signature, subproxy, PyFairware
 from hscommon.trans import trget
 
 from core.app import JobType
@@ -25,7 +23,7 @@ class PyDupeGuruBase(PyFairware):
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook()
-        appdata = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, True)[0]
+        appdata = proxy.getAppdataPath()
         self.py = modelclass(self, appdata)
         self.progress = cocoa.ThreadedJobPerformer()
     
@@ -166,10 +164,10 @@ class PyDupeGuruBase(PyFairware):
     
     #--- model --> view
     def open_path(self, path):
-        NSWorkspace.sharedWorkspace().openFile_(str(path))
+        proxy.openPath_(str(path))
     
     def reveal_path(self, path):
-        NSWorkspace.sharedWorkspace().selectFile_inFileViewerRootedAtPath_(str(path), '')
+        proxy.revealPath_(str(path))
     
     def start_job(self, jobid, func, args=()):
         try:
@@ -177,10 +175,10 @@ class PyDupeGuruBase(PyFairware):
             args = tuple([j] + list(args))
             self.progress.run_threaded(func, args=args)
         except job.JobInProgressError:
-            NSNotificationCenter.defaultCenter().postNotificationName_object_('JobInProgress', self)
+            proxy.postNotification_userInfo_('JobInProgress', None)
         else:
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
-            NSNotificationCenter.defaultCenter().postNotificationName_object_userInfo_('JobStarted', self, ud)
+            proxy.postNotification_userInfo_('JobStarted', ud)
     
     def show_extra_fairware_reminder(self):
         self.cocoa.showExtraFairwareReminder()

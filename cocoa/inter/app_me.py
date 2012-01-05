@@ -11,7 +11,7 @@ from appscript import app, k, CommandError
 import time
 import os.path as op
 
-from hscommon.cocoa import as_fetch
+from cocoa import as_fetch
 from hscommon.trans import tr
 
 from core.app import JobType

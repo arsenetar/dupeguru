@@ -2,3 +2,4 @@
 pyobjc-core>=2.3
 pluginbuilder>=1.0.0
 appscript>=1.0.0
+objp>=0.1.0

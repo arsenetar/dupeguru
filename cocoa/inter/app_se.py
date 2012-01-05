@@ -11,18 +11,17 @@ import os.path as op
 
 from hscommon import io
 from hscommon.path import Path
-from hscommon.cocoa.objcmin import NSWorkspace
+from cocoa import proxy
 
 from core import fs
 from core.directories import Directories as DirectoriesBase, DirectoryState
 from core_se.app import DupeGuru as DupeGuruBase
 
 def is_bundle(str_path):
-    sw = NSWorkspace.sharedWorkspace()
-    uti, error = sw.typeOfFile_error_(str_path, None)
-    if error is not None:
+    uti = proxy.getUTI_(str_path)
+    if uti is None:
         logging.warning('There was an error trying to detect the UTI of %s', str_path)
-    return sw.type_conformsToType_(uti, 'com.apple.bundle') or sw.type_conformsToType_(uti, 'com.apple.package')
+    return proxy.type_conformsToType_(uti, 'com.apple.bundle') or proxy.type_conformsToType_(uti, 'com.apple.package')
 
 class Bundle(fs.Folder):
     @classmethod

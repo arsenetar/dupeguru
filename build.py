@@ -12,8 +12,7 @@ from optparse import OptionParser
 import shutil
 import json
 
-from setuptools import setup
-from distutils.extension import Extension
+from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
@@ -38,17 +37,15 @@ def parse_args():
 
 def build_cocoa(edition, dev):
     from pluginbuilder import build_plugin
+    build_cocoa_proxy_module()
     print("Building dg_cocoa.plugin")
-    if dev:
-        tocopy = ['cocoa/inter']
-    else:
-        specific_packages = {
-            'se': ['core_se'],
-            'me': ['core_me'],
-            'pe': ['core_pe'],
-        }[edition]
-        tocopy = ['core', 'hscommon', 'cocoa/inter'] + specific_packages
-    copy_packages(tocopy, 'build')
+    specific_packages = {
+        'se': ['core_se'],
+        'me': ['core_me'],
+        'pe': ['core_pe'],
+    }[edition]
+    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
+    copy_packages(tocopy, 'build', create_links=dev)
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     os.chdir('build')
@@ -59,11 +56,6 @@ def build_cocoa(edition, dev):
     if op.exists(pluginpath):
         shutil.rmtree(pluginpath)
     shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
-    if dev:
-        # In alias mode, the tweakings we do to the pythonpath aren't counted in. We have to
-        # manually put a .pth in the plugin
-        pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
-        open(pthpath, 'w').write(op.abspath('.'))
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
     app_version = get_module_version('core_{}'.format(edition))
@@ -162,6 +154,20 @@ def build_mergepot():
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
+
+def build_cocoa_proxy_module():
+    print("Building Cocoa Proxy")
+    import objp.p2o
+    objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
+    exts = [
+        Extension("CocoaProxy", ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
+            extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
+    ]
+    setup(
+        script_args = ['build_ext', '--inplace'],
+        ext_modules = exts,
+    )
+    move_all('CocoaProxy*', 'cocoalib/cocoa')
 
 def build_pe_modules(ui):
     print("Building PE Modules")

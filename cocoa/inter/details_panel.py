@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import signature, PyGUIObject
+from cocoa.inter import signature, PyGUIObject
 
 from core.gui.details_panel import DetailsPanel
 
