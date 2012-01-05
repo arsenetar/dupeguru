@@ -39,16 +39,13 @@ def build_cocoa(edition, dev):
     from pluginbuilder import build_plugin
     build_cocoa_proxy_module()
     print("Building dg_cocoa.plugin")
-    if dev:
-        tocopy = ['cocoa/inter', 'cocoalib/cocoa']
-    else:
-        specific_packages = {
-            'se': ['core_se'],
-            'me': ['core_me'],
-            'pe': ['core_pe'],
-        }[edition]
-        tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
-    copy_packages(tocopy, 'build')
+    specific_packages = {
+        'se': ['core_se'],
+        'me': ['core_me'],
+        'pe': ['core_pe'],
+    }[edition]
+    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
+    copy_packages(tocopy, 'build', create_links=dev)
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     os.chdir('build')
@@ -59,11 +56,6 @@ def build_cocoa(edition, dev):
     if op.exists(pluginpath):
         shutil.rmtree(pluginpath)
     shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
-    if dev:
-        # In alias mode, the tweakings we do to the pythonpath aren't counted in. We have to
-        # manually put a .pth in the plugin
-        pthpath = op.join(pluginpath, 'Contents/Resources/dev.pth')
-        open(pthpath, 'w').write(op.abspath('.'))
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
     app_version = get_module_version('core_{}'.format(edition))
