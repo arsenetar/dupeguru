@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import PyTable
+from cocoa.inter import PyTable
 
 from core.gui.problem_table import ProblemTable
 

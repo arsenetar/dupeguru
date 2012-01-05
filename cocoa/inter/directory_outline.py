@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import PyOutline
+from cocoa.inter import PyOutline
 
 from core.gui.directory_tree import DirectoryTree
 

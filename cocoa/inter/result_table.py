@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import signature, PyTable
+from cocoa.inter import signature, PyTable
 
 class PyResultTable(PyTable):
     @signature('c@:')

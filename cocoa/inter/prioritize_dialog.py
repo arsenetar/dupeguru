@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import PyGUIObject, PySelectableList
+from cocoa.inter import PyGUIObject, PySelectableList
 
 from core.gui.prioritize_dialog import PrioritizeDialog
 from .prioritize_list import PyPrioritizeList

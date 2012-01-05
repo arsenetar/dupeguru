@@ -16,8 +16,8 @@ from appscript import app, its, CommandError, ApplicationNotFoundError
 from hscommon import io
 from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
-from hscommon.cocoa import proxy
 from hscommon.trans import tr
+from cocoa import proxy
 
 from core import directories
 from core_pe import _block_osx

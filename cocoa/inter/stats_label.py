@@ -1,4 +1,4 @@
-from hscommon.cocoa.inter import PyGUIObject
+from cocoa.inter import PyGUIObject
 
 from core.gui.stats_label import StatsLabel
 

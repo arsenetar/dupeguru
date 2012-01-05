@@ -40,14 +40,14 @@ def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
     print("Building dg_cocoa.plugin")
     if dev:
-        tocopy = ['cocoa/inter']
+        tocopy = ['cocoa/inter', 'cocoalib/cocoa']
     else:
         specific_packages = {
             'se': ['core_se'],
             'me': ['core_me'],
             'pe': ['core_pe'],
         }[edition]
-        tocopy = ['core', 'hscommon', 'cocoa/inter'] + specific_packages
+        tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
     copy_packages(tocopy, 'build')
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
@@ -165,16 +165,16 @@ def build_mergepot():
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
-    objp.p2o.generate_python_proxy_code('hscommon/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
+    objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     exts = [
-        Extension("CocoaProxy", ['hscommon/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
+        Extension("CocoaProxy", ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
             extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
     ]
     setup(
         script_args = ['build_ext', '--inplace'],
         ext_modules = exts,
     )
-    move_all('CocoaProxy*', 'hscommon/cocoa')
+    move_all('CocoaProxy*', 'cocoalib/cocoa')
 
 def build_pe_modules(ui):
     print("Building PE Modules")

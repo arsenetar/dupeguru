@@ -11,7 +11,7 @@ import os.path as op
 
 from hscommon import io
 from hscommon.path import Path
-from hscommon.cocoa import proxy
+from cocoa import proxy
 
 from core import fs
 from core.directories import Directories as DirectoriesBase, DirectoryState

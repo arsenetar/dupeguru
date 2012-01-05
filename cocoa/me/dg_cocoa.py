@@ -7,7 +7,7 @@
 from hscommon.trans import install_gettext_trans_under_cocoa
 install_gettext_trans_under_cocoa()
 
-from hscommon.cocoa.inter import signature
+from cocoa.inter import signature
 
 from core.scanner import ScanType
 

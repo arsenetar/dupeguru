@@ -1,9 +1,9 @@
 import logging
 
 from jobprogress import job
-from hscommon import cocoa
-from hscommon.cocoa import install_exception_hook, proxy
-from hscommon.cocoa.inter import signature, subproxy, PyFairware
+import cocoa
+from cocoa import install_exception_hook, proxy
+from cocoa.inter import signature, subproxy, PyFairware
 from hscommon.trans import trget
 
 from core.app import JobType
