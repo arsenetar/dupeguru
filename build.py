@@ -165,9 +165,9 @@ def build_mergepot():
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
-    objp.p2o.generate_python_proxy_code('hscommon/cocoa/Cocoa.h', 'build/CocoaProxy.m')
+    objp.p2o.generate_python_proxy_code('hscommon/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     exts = [
-        Extension("CocoaProxy", ['hscommon/cocoa/Cocoa.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
+        Extension("CocoaProxy", ['hscommon/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
             extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
     ]
     setup(
