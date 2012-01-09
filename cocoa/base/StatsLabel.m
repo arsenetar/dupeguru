@@ -10,10 +10,9 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation StatsLabel
-- (id)initWithPyParent:(id)aPyParent labelView:(NSTextField *)aLabelView
+- (id)initWithPy:(id)aPy labelView:(NSTextField *)aLabelView
 {
-    self = [super initWithPyClassName:@"PyStatsLabel" pyParent:aPyParent];
-    labelView = [aLabelView retain];
+    self = [super initWithPy:aPy view:aLabelView];
     [self connect];
     return self;
 }
@@ -21,7 +20,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [self disconnect];
-    [labelView release];
     [super dealloc];
 }
 
@@ -30,9 +28,14 @@ http://www.hardcoded.net/licenses/bsd_license
     return (PyStatsLabel *)py;
 }
 
+- (NSTextField *)labelView
+{
+    return (NSTextField *)[self view];
+}
+
 /* Python --> Cocoa */
 - (void)refresh
 {
-    [labelView setStringValue:[[self py] display]];
+    [[self labelView] setStringValue:[[self py] display]];
 }
 @end

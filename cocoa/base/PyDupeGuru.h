@@ -8,11 +8,13 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "PyResultTable.h"
+#import "PyStatsLabel.h"
 #import "PyApp.h"
 
 @interface PyDupeGuruBase : PyApp
 - (void)bindCocoa:(id)cocoa;
 - (PyResultTable *)resultTable;
+- (PyStatsLabel *)statsLabel;
 //Actions
 - (NSNumber *)addDirectory:(NSString *)name;
 - (void)loadResultsFrom:(NSString *)filename;

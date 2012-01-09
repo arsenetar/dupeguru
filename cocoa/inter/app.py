@@ -8,6 +8,7 @@ from hscommon.trans import trget
 
 from core.app import JobType
 from .result_table import PyResultTable
+from .stats_label import PyStatsLabel
 
 tr = trget('ui')
 
@@ -31,6 +32,7 @@ class PyDupeGuruBase(PyFairware):
         self.cocoa = cocoa
     
     resultTable = subproxy('resultTable', 'result_table', PyResultTable)
+    statsLabel = subproxy('statsLabel', 'stats_label', PyStatsLabel)
     
     #---Directories
     def addDirectory_(self, directory):
