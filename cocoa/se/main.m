@@ -7,17 +7,32 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "Utils.h"
+#import <Python.h>
+#import <wchar.h>
 
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [Utils setPluginName:@"dg_cocoa"];
-    NSString *pluginPath = [[NSBundle mainBundle]
-                                pathForResource:@"dg_cocoa"
-                                         ofType:@"plugin"];
-    NSBundle *pluginBundle = [NSBundle bundleWithPath:pluginPath];
-    [pluginBundle load];
+    NSString *respath = [[NSBundle mainBundle] resourcePath];
+    NSString *mainpy = [respath stringByAppendingPathComponent:@"dg_cocoa.py"];
+    wchar_t wPythonPath[PATH_MAX+1];
+    NSString *pypath = [respath stringByAppendingPathComponent:@"py"];
+    mbstowcs(wPythonPath, [pypath fileSystemRepresentation], PATH_MAX+1);
+    Py_SetPath(wPythonPath);
+    Py_SetPythonHome(wPythonPath);
+    Py_Initialize();
+    PyEval_InitThreads();
+    PyGILState_STATE gilState = PyGILState_Ensure();
+    FILE* fp = fopen([mainpy UTF8String], "r");
+    PyRun_SimpleFile(fp, [mainpy UTF8String]);
+    fclose(fp);
+    PyGILState_Release(gilState);
+    if (gilState == PyGILState_LOCKED) {
+        PyThreadState_Swap(NULL);
+        PyEval_ReleaseLock();
+    }
+    int result = NSApplicationMain(argc,  (const char **) argv);
+    Py_Finalize();
     [pool release];
-    return NSApplicationMain(argc,  (const char **) argv);
+    return result;
 }

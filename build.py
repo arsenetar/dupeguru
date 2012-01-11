@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import sys
 import os
 import os.path as op
 from optparse import OptionParser
@@ -16,7 +17,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all)
+    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed)
 from hscommon import loc
 
 def parse_args():
@@ -36,7 +37,6 @@ def parse_args():
     return options
 
 def build_cocoa(edition, dev):
-    from pluginbuilder import build_plugin
     build_cocoa_proxy_module()
     print("Building dg_cocoa.plugin")
     specific_packages = {
@@ -48,14 +48,16 @@ def build_cocoa(edition, dev):
     copy_packages(tocopy, 'build', create_links=dev)
     cocoa_project_path = 'cocoa/{0}'.format(edition)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
-    os.chdir('build')
-    # We have to exclude PyQt4 specifically because it's conditionally imported in hscommon.trans
-    build_plugin('dg_cocoa.py', excludes=['PyQt4'], alias=dev)
-    os.chdir('..')
-    pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
-    if op.exists(pluginpath):
-        shutil.rmtree(pluginpath)
-    shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
+    from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
+    copy_embeddable_python_dylib('build')
+    if not op.exists('build/PythonHeaders'):
+        os.symlink(get_python_header_folder(), 'build/PythonHeaders')
+    if not op.exists('build/py'):
+        os.mkdir('build/py')
+    sys.path.insert(0, 'build')
+    collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+    del sys.path[0]
+    copy_sysconfig_files_for_embed('build/py')
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
     app_version = get_module_version('core_{}'.format(edition))
