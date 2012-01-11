@@ -25,7 +25,7 @@ http://www.hardcoded.net/licenses/bsd_license
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     table = [[ResultTable alloc] initWithPy:[py resultTable] view:matches];
-    statsLabel = [[StatsLabel alloc] initWithPy:[py statsLabel] labelView:stats];
+    statsLabel = [[StatsLabel alloc] initWithLabelView:stats];
     problemDialog = [[ProblemDialog alloc] initWithPy:py];
     [self initResultColumns];
     [self fillColumnsMenu];

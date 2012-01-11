@@ -7,11 +7,13 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSGUIController.h"
 #import "PyStatsLabel.h"
 
-@interface StatsLabel : HSGUIController {}
-- (id)initWithPy:(id)aPy labelView:(NSTextField *)aLabelView;
+@interface StatsLabel : NSObject {
+    PyStatsLabel *py;
+    NSTextField *view;
+}
+- (id)initWithLabelView:(NSTextField *)aLabelView;
 - (PyStatsLabel *)py;
 - (NSTextField *)labelView;
 @end

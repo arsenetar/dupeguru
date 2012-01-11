@@ -22,10 +22,15 @@ from inter.result_table import PyResultTable
 from inter.stats_label import PyStatsLabel
 from inter.app_se import DupeGuru
 
+# XXX temporary hack
+APP_INSTANCE = None
+
 class PyDupeGuru(PyDupeGuruBase):
     def init(self):
         self = super(PyDupeGuru,self).init()
         self._init(DupeGuru)
+        global APP_INSTANCE
+        APP_INSTANCE = self.py
         return self
     
     #---Properties

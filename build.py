@@ -17,7 +17,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed)
+    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all)
 from hscommon import loc
 
 def parse_args():
@@ -38,6 +38,7 @@ def parse_args():
 
 def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
+    build_cocoa_bridging_interfaces()
     print("Building dg_cocoa.plugin")
     specific_packages = {
         'se': ['core_se'],
@@ -56,6 +57,8 @@ def build_cocoa(edition, dev):
         os.mkdir('build/py')
     sys.path.insert(0, 'build')
     collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+    # Views are not referenced by python code, so they're not found by the collector.
+    copy_all('build/inter/*.so', 'build/py/inter')
     del sys.path[0]
     copy_sysconfig_files_for_embed('build/py')
     os.chdir(cocoa_project_path)
@@ -169,6 +172,25 @@ def build_cocoa_proxy_module():
         ext_modules = exts,
     )
     move_all('CocoaProxy*', 'cocoalib/cocoa')
+
+def build_cocoa_bridging_interfaces():
+    print("Building Cocoa Bridging Interfaces")
+    import objp.o2p
+    import objp.p2o
+    add_to_pythonpath('cocoa')
+    add_to_pythonpath('cocoalib')
+    from inter.stats_label import PyStatsLabel
+    objp.o2p.generate_objc_code(PyStatsLabel, 'cocoa/autogen')
+    objp.p2o.generate_python_proxy_code('cocoa/base/bridge/StatsLabelView.h', 'build/StatsLabelView.m')
+    exts = [
+        Extension("StatsLabelView", ['build/StatsLabelView.m', 'build/ObjP.m'],
+            extra_link_args=["-framework", "Foundation"]),
+    ]
+    setup(
+        script_args = ['build_ext', '--inplace'],
+        ext_modules = exts,
+    )
+    move_all('StatsLabelView*', 'cocoa/inter')
 
 def build_pe_modules(ui):
     print("Building PE Modules")

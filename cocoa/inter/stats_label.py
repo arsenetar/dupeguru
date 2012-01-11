@@ -1,5 +1,6 @@
-from cocoa.inter import PyGUIObject
+from cocoa.inter2 import PyGUIObject
 
 class PyStatsLabel(PyGUIObject):
-    def display(self):
-        return self.py.display
+    
+    def display(self) -> str:
+        return self.model.display

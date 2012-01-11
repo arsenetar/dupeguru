@@ -6,20 +6,31 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
+#import <Python.h>
 #import "StatsLabel.h"
-#import "Utils.h"
+#import "ObjP.h"
 
 @implementation StatsLabel
-- (id)initWithPy:(id)aPy labelView:(NSTextField *)aLabelView
+- (id)initWithLabelView:(NSTextField *)aLabelView
 {
-    self = [super initWithPy:aPy view:aLabelView];
-    [self connect];
+    self = [self init];
+    view = [aLabelView retain];
+    PyGILState_STATE gilState = PyGILState_Ensure();
+    PyObject *pModule = PyImport_AddModule("__main__");
+    PyObject *pAppInstance = PyObject_GetAttrString(pModule, "APP_INSTANCE");
+    PyObject *pStatsLabel = PyObject_GetAttrString(pAppInstance, "stats_label");
+    PyObject *pCallback = ObjP_classInstanceWithRef(@"StatsLabelView", @"inter.StatsLabelView", self);
+    py = [[PyStatsLabel alloc] initWithModel:pStatsLabel Callback:pCallback];
+    PyGILState_Release(gilState);
+    [[self py] connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [self disconnect];
+    [[self py] disconnect];
+    [py release];
+    [view release];
     [super dealloc];
 }
 
@@ -30,7 +41,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (NSTextField *)labelView
 {
-    return (NSTextField *)[self view];
+    return (NSTextField *)view;
 }
 
 /* Python --> Cocoa */

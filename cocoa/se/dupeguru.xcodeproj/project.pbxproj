@@ -14,6 +14,8 @@
 		CE18004F14BDD854001B6329 /* Python in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE18004C14BDD837001B6329 /* Python */; };
 		CE18005114BDD87B001B6329 /* py in Resources */ = {isa = PBXBuildFile; fileRef = CE18005014BDD87B001B6329 /* py */; };
 		CE19BC6411199231007CCEB0 /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BC6111199231007CCEB0 /* progress.xib */; };
+		CE1D091814BE0C6400CA6B8C /* ObjP.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D091514BE0C6400CA6B8C /* ObjP.m */; };
+		CE1D091914BE0C6400CA6B8C /* PyStatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D091714BE0C6400CA6B8C /* PyStatsLabel.m */; };
 		CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE27D3C312CCA43800859E67 /* HSAboutBox.m */; };
 		CE31819D13D85D9B00B6D649 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819913D85D9B00B6D649 /* about.xib */; };
 		CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819B13D85D9B00B6D649 /* ErrorReportWindow.xib */; };
@@ -123,6 +125,10 @@
 		CE18004C14BDD837001B6329 /* Python */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = Python; path = ../../build/Python; sourceTree = "<group>"; };
 		CE18005014BDD87B001B6329 /* py */ = {isa = PBXFileReference; lastKnownFileType = folder; name = py; path = ../../build/py; sourceTree = "<group>"; };
 		CE19BC6111199231007CCEB0 /* progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = progress.xib; sourceTree = "<group>"; };
+		CE1D091414BE0C6400CA6B8C /* ObjP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjP.h; sourceTree = "<group>"; };
+		CE1D091514BE0C6400CA6B8C /* ObjP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjP.m; sourceTree = "<group>"; };
+		CE1D091614BE0C6400CA6B8C /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyStatsLabel.h; sourceTree = "<group>"; };
+		CE1D091714BE0C6400CA6B8C /* PyStatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyStatsLabel.m; sourceTree = "<group>"; };
 		CE27D3C212CCA43800859E67 /* HSAboutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox.h; path = ../../cocoalib/HSAboutBox.h; sourceTree = SOURCE_ROOT; };
 		CE27D3C312CCA43800859E67 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CE31819A13D85D9B00B6D649 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/about.xib; sourceTree = "<group>"; };
@@ -214,7 +220,6 @@
 		CE89240914239CC30024CE4E /* PyPrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeList.h; path = ../base/PyPrioritizeList.h; sourceTree = "<group>"; };
 		CE8C53B61173248F0011B41F /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE8C53BB117324CE0011B41F /* HSTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTable.m; sourceTree = "<group>"; };
-		CE91F210113BC22D0010360B /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyStatsLabel.h; path = ../base/PyStatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE91F213113BC22D0010360B /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
 		CE91F214113BC22D0010360B /* StatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsLabel.m; path = ../base/StatsLabel.m; sourceTree = SOURCE_ROOT; };
 		CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeDialog.h; path = ../base/PrioritizeDialog.h; sourceTree = "<group>"; };
@@ -384,6 +389,18 @@
 			path = ../../cocoalib/xib;
 			sourceTree = SOURCE_ROOT;
 		};
+		CE1D091314BE0C6400CA6B8C /* autogen */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D091414BE0C6400CA6B8C /* ObjP.h */,
+				CE1D091514BE0C6400CA6B8C /* ObjP.m */,
+				CE1D091614BE0C6400CA6B8C /* PyStatsLabel.h */,
+				CE1D091714BE0C6400CA6B8C /* PyStatsLabel.m */,
+			);
+			name = autogen;
+			path = ../autogen;
+			sourceTree = "<group>";
+		};
 		CE76FDBD111EE37C006618EA /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,10 +512,10 @@
 		CEFC7FB00FC9518F00CD5728 /* dgbase */ = {
 			isa = PBXGroup;
 			children = (
+				CE1D091314BE0C6400CA6B8C /* autogen */,
 				CE6DD4E4124CA3070089A48D /* PyResultTable.h */,
 				CE6DD4E5124CA3070089A48D /* ResultTable.h */,
 				CE6DD4E6124CA3070089A48D /* ResultTable.m */,
-				CE91F210113BC22D0010360B /* PyStatsLabel.h */,
 				CE91F213113BC22D0010360B /* StatsLabel.h */,
 				CE91F214113BC22D0010360B /* StatsLabel.m */,
 				CE76FDD1111EE3A7006618EA /* DirectoryOutline.h */,
@@ -658,6 +675,8 @@
 				CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */,
 				CE5335FC142BBFAF008E5374 /* HSQuicklook.m in Sources */,
 				CE54A87E148046F9008EEA77 /* HSColumns.m in Sources */,
+				CE1D091814BE0C6400CA6B8C /* ObjP.m in Sources */,
+				CE1D091914BE0C6400CA6B8C /* PyStatsLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
