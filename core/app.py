@@ -25,6 +25,7 @@ from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
 from .gui.stats_label import StatsLabel
+from .gui.extra_fairware_reminder import ExtraFairwareReminder
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
@@ -102,6 +103,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         }
         self.selected_dupes = []
         self.stats_label = StatsLabel(None, self)
+        self.extra_fairware_reminder = ExtraFairwareReminder(None, self)
         # subclasses must create self.result_table
     
     #--- Virtual

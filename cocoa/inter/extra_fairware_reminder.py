@@ -1,25 +1,21 @@
-from cocoa.inter import PyGUIObject
-
-from core.gui.extra_fairware_reminder import ExtraFairwareReminder
+from cocoa.inter2 import PyGUIObject
 
 class PyExtraFairwareReminder(PyGUIObject):
-    py_class = ExtraFairwareReminder
-    
     def start(self):
-        self.py.start()
+        self.model.start()
     
     def updateButton(self):
-        self.py.update_button()
+        self.model.update_button()
     
     # model --> view
     def start_timer(self):
-        self.cocoa.startTimer()
+        self.callback.startTimer()
     
     def stop_timer(self):
-        self.cocoa.stopTimer()
+        self.callback.stopTimer()
     
     def enable_button(self):
-        self.cocoa.enableButton()
+        self.callback.enableButton()
     
     def set_button_text(self, text):
-        self.cocoa.setButtonText_(text)
+        self.callback.setButtonText_(text)

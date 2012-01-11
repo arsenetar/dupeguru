@@ -6,19 +6,29 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
+#import <Python.h>
 #import "ExtraFairwareReminder.h"
+#import "ObjP.h"
 
 @implementation ExtraFairwareReminder
-- (id)initWithPy:(PyApp *)aPy
+- (id)init
 {
-    self = [super initWithNibName:@"ExtraFairwareReminder" pyClassName:@"PyExtraFairwareReminder" pyParent:aPy];
+    self = [super initWithWindowNibName:@"ExtraFairwareReminder"];
     [self window];
     [continueButton setEnabled:NO];
+    PyGILState_STATE gilState = PyGILState_Ensure();
+    PyObject *pModule = PyImport_AddModule("__main__");
+    PyObject *pAppInstance = PyObject_GetAttrString(pModule, "APP_INSTANCE");
+    PyObject *pStatsLabel = PyObject_GetAttrString(pAppInstance, "extra_fairware_reminder");
+    PyObject *pCallback = ObjP_classInstanceWithRef(@"ExtraFairwareReminderView", @"inter.ExtraFairwareReminderView", self);
+    py = [[PyExtraFairwareReminder alloc] initWithModel:pStatsLabel Callback:pCallback];
+    PyGILState_Release(gilState);
     return self;
 }
 
 - (void)dealloc
 {
+    [py release];
     [timer release];
     [super dealloc];
 }

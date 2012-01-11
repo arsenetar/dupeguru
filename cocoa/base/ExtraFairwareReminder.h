@@ -11,13 +11,14 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSWindowController.h"
 #import "PyApp.h"
 
-@interface ExtraFairwareReminder : HSWindowController
+@interface ExtraFairwareReminder : NSWindowController
 {
     IBOutlet NSButton *continueButton;
     
+    PyExtraFairwareReminder *py;
     NSTimer *timer;
 }
-- (id)initWithPy:(PyApp *)aPy;
+- (id)init;
 - (PyExtraFairwareReminder *)py;
 
 - (void)start;

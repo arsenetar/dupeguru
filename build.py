@@ -180,17 +180,23 @@ def build_cocoa_bridging_interfaces():
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
     from inter.stats_label import PyStatsLabel
-    objp.o2p.generate_objc_code(PyStatsLabel, 'cocoa/autogen')
-    objp.p2o.generate_python_proxy_code('cocoa/base/bridge/StatsLabelView.h', 'build/StatsLabelView.m')
-    exts = [
-        Extension("StatsLabelView", ['build/StatsLabelView.m', 'build/ObjP.m'],
-            extra_link_args=["-framework", "Foundation"]),
-    ]
-    setup(
-        script_args = ['build_ext', '--inplace'],
-        ext_modules = exts,
-    )
-    move_all('StatsLabelView*', 'cocoa/inter')
+    from inter.extra_fairware_reminder import PyExtraFairwareReminder
+    for class_ in [PyStatsLabel, PyExtraFairwareReminder]:
+        objp.o2p.generate_objc_code(class_, 'cocoa/autogen')
+    for fn in os.listdir('cocoa/base/bridge'):
+        basename = fn[:-2]
+        header_path = op.join('cocoa/base/bridge', fn)
+        extmodule_path = op.join('build', basename + '.m')
+        objp.p2o.generate_python_proxy_code(header_path, extmodule_path)
+        exts = [
+            Extension(basename, [extmodule_path, 'build/ObjP.m'],
+                extra_link_args=["-framework", "Foundation"]),
+        ]
+        setup(
+            script_args = ['build_ext', '--inplace'],
+            ext_modules = exts,
+        )
+    move_all('*.so', 'cocoa/inter')
 
 def build_pe_modules(ui):
     print("Building PE Modules")
