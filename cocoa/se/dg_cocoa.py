@@ -16,6 +16,7 @@ from inter.details_panel import PyDetailsPanel
 from inter.directory_outline import PyDirectoryOutline
 from inter.extra_fairware_reminder import PyExtraFairwareReminder
 from inter.prioritize_dialog import PyPrioritizeDialog
+from inter.prioritize_list import PyPrioritizeList
 from inter.problem_dialog import PyProblemDialog
 from inter.problem_table import PyProblemTable
 from inter.result_table import PyResultTable

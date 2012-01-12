@@ -11,6 +11,15 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 
 @implementation PrioritizeList
+- (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView
+{
+    PyPrioritizeList *model = [[PyPrioritizeList alloc] initWithModel:aPyRef];
+    self = [super initWithPy:model tableView:aTableView];
+    [model bindCallback:createCallback(@"PrioritizeListView", self)];
+    [model release];
+    return self;
+}
+
 - (PyPrioritizeList *)py
 {
     return (PyPrioritizeList *)py;

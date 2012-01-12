@@ -183,10 +183,16 @@ def build_cocoa_bridging_interfaces():
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
     from inter.extra_fairware_reminder import PyExtraFairwareReminder, ExtraFairwareReminderView
+    from inter.prioritize_dialog import PyPrioritizeDialog, PrioritizeDialogView
+    from inter.prioritize_list import PyPrioritizeList, PrioritizeListView
     from inter.stats_label import PyStatsLabel, StatsLabelView
-    for class_ in [PyColumns2, PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder, PyStatsLabel]:
+    allclasses = [PyColumns2, PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder,
+        PyPrioritizeDialog, PyPrioritizeList, PyStatsLabel]
+    for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen')
-    for class_ in [ColumnsView, DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView, StatsLabelView]:
+    allclasses = [ColumnsView, DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView,
+        PrioritizeDialogView, PrioritizeListView, StatsLabelView]
+    for class_ in allclasses:
         clsspec = objp.o2p.spec_from_python_class(class_)
         clsname = class_.__name__
         extmodule_path = op.join('build', clsname + '.m')

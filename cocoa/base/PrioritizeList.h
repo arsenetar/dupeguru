@@ -7,9 +7,10 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSSelectableList.h"
+#import "HSSelectableList2.h"
 #import "PyPrioritizeList.h"
 
-@interface PrioritizeList : HSSelectableList {}
+@interface PrioritizeList : HSSelectableList2 {}
+- (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView;
 - (PyPrioritizeList *)py;
 @end

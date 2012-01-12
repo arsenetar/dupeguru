@@ -272,7 +272,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)reprioritizeResults:(id)sender
 {
-    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithPy:py];
+    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] init];
     NSInteger result = [NSApp runModalForWindow:[dlg window]];
     if (result == NSRunStoppedResponse) {
         [[dlg py] performReprioritization];

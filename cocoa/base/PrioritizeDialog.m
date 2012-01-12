@@ -7,22 +7,25 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "PrioritizeDialog.h"
+#import "Utils.h"
 
 @implementation PrioritizeDialog
-- (id)initWithPy:(PyApp *)aPy
+- (id)init
 {
-    self = [super initWithNibName:@"PrioritizeDialog" pyClassName:@"PyPrioritizeDialog" pyParent:aPy];
+    self = [super initWithWindowNibName:@"PrioritizeDialog"];
     [self window];
-    categoryPopUp = [[HSPopUpList alloc] initWithPy:[[self py] categoryList] view:categoryPopUpView];
-    criteriaList = [[HSSelectableList alloc] initWithPy:[[self py] criteriaList] view:criteriaTableView];
-    prioritizationList = [[PrioritizeList alloc] initWithPy:[[self py] prioritizationList] view:prioritizationTableView];
-    [self connect];
+    py = [[PyPrioritizeDialog alloc] initWithModel:findHackishModel(@"prioritize_dialog")];
+    [py bindCallback:createCallback(@"PrioritizeDialogView", self)];
+    categoryPopUp = [[HSPopUpList2 alloc] initWithPyRef:[[self py] categoryList] popupView:categoryPopUpView];
+    criteriaList = [[PrioritizeList alloc] initWithPyRef:[[self py] criteriaList] tableView:criteriaTableView];
+    prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self py] prioritizationList] tableView:prioritizationTableView];
+    [py connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [self disconnect];
+    [py disconnect];
     [categoryPopUp release];
     [criteriaList release];
     [prioritizationList release];
@@ -47,10 +50,12 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)ok:(id)sender
 {
     [NSApp stopModal];
+    [self close];
 }
 
 - (IBAction)cancel:(id)sender
 {
     [NSApp abortModal];
+    [self close];
 }
 @end

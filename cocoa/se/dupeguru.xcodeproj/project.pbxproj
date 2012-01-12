@@ -26,11 +26,14 @@
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE3A3B4914BF19B8007898AB /* PyDetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3B4814BF19B8007898AB /* PyDetailsPanel.m */; };
-		CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41672B141FE1E5004F3F0B /* HSSelectableList.m */; };
 		CE45579B0AE3BC2B005A9546 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE4557B40AE3BC50005A9546 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE45579A0AE3BC2B005A9546 /* Sparkle.framework */; };
 		CE5335FC142BBFAF008E5374 /* HSQuicklook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5335FB142BBFAF008E5374 /* HSQuicklook.m */; };
 		CE533603142BC034008E5374 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE533602142BC034008E5374 /* Quartz.framework */; };
+		CE548CC014BF902000D180CB /* HSPopUpList2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE548CBD14BF902000D180CB /* HSPopUpList2.m */; };
+		CE548CC114BF902000D180CB /* HSSelectableList2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE548CBF14BF902000D180CB /* HSSelectableList2.m */; };
+		CE548CC614BF903D00D180CB /* PyPrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE548CC314BF903D00D180CB /* PyPrioritizeDialog.m */; };
+		CE548CC714BF903D00D180CB /* PyPrioritizeList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE548CC514BF903D00D180CB /* PyPrioritizeList.m */; };
 		CE54A87E148046F9008EEA77 /* HSColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54A87D148046F9008EEA77 /* HSColumns.m */; };
 		CE647E571173024A006D28BA /* ProblemDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE647E551173024A006D28BA /* ProblemDialog.m */; };
 		CE665B3013225ADD003F5CFB /* ExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE665B2E13225ADD003F5CFB /* ExtraFairwareReminder.m */; };
@@ -59,7 +62,6 @@
 		CE91F216113BC22D0010360B /* StatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F214113BC22D0010360B /* StatsLabel.m */; };
 		CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */; };
 		CE9777D1141F8CB400C13FB5 /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */; };
-		CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */; };
 		CE9D842A14BE2AE900184165 /* PyExtraFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9D842914BE2AE900184165 /* PyExtraFairwareReminder.m */; };
 		CEA175CA1461E8E600776591 /* locale in Resources */ = {isa = PBXBuildFile; fileRef = CEA175C91461E8E600776591 /* locale */; };
 		CEA450B814BDDFD7002DAAF2 /* dg_cocoa.py in Resources */ = {isa = PBXBuildFile; fileRef = CEA450B714BDDFD7002DAAF2 /* dg_cocoa.py */; };
@@ -160,13 +162,20 @@
 		CE381C9B09914ADF003581CE /* ResultWindow.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = ResultWindow.h; sourceTree = SOURCE_ROOT; };
 		CE3A3B4714BF19B8007898AB /* PyDetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDetailsPanel.h; sourceTree = "<group>"; };
 		CE3A3B4814BF19B8007898AB /* PyDetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyDetailsPanel.m; sourceTree = "<group>"; };
-		CE41672A141FE1E5004F3F0B /* HSSelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSelectableList.h; sourceTree = "<group>"; };
-		CE41672B141FE1E5004F3F0B /* HSSelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSelectableList.m; sourceTree = "<group>"; };
 		CE41672C141FE1E5004F3F0B /* HSTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTable.h; sourceTree = "<group>"; };
 		CE45579A0AE3BC2B005A9546 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = /Library/Frameworks/Sparkle.framework; sourceTree = "<absolute>"; };
 		CE5335FA142BBFAF008E5374 /* HSQuicklook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSQuicklook.h; path = ../../cocoalib/HSQuicklook.h; sourceTree = "<group>"; };
 		CE5335FB142BBFAF008E5374 /* HSQuicklook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQuicklook.m; path = ../../cocoalib/HSQuicklook.m; sourceTree = "<group>"; };
 		CE533602142BC034008E5374 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		CE548CBB14BF8FFE00D180CB /* PySelectableList2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList2.h; sourceTree = "<group>"; };
+		CE548CBC14BF902000D180CB /* HSPopUpList2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopUpList2.h; sourceTree = "<group>"; };
+		CE548CBD14BF902000D180CB /* HSPopUpList2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPopUpList2.m; sourceTree = "<group>"; };
+		CE548CBE14BF902000D180CB /* HSSelectableList2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSelectableList2.h; sourceTree = "<group>"; };
+		CE548CBF14BF902000D180CB /* HSSelectableList2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSelectableList2.m; sourceTree = "<group>"; };
+		CE548CC214BF903D00D180CB /* PyPrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyPrioritizeDialog.h; sourceTree = "<group>"; };
+		CE548CC314BF903D00D180CB /* PyPrioritizeDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyPrioritizeDialog.m; sourceTree = "<group>"; };
+		CE548CC414BF903D00D180CB /* PyPrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyPrioritizeList.h; sourceTree = "<group>"; };
+		CE548CC514BF903D00D180CB /* PyPrioritizeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyPrioritizeList.m; sourceTree = "<group>"; };
 		CE54A87C148046F9008EEA77 /* HSColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSColumns.h; sourceTree = "<group>"; };
 		CE54A87D148046F9008EEA77 /* HSColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColumns.m; sourceTree = "<group>"; };
 		CE647E541173024A006D28BA /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
@@ -230,8 +239,6 @@
 		CE8113EC12E5CEA800A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE89240614239CC30024CE4E /* PrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeList.h; path = ../base/PrioritizeList.h; sourceTree = "<group>"; };
 		CE89240714239CC30024CE4E /* PrioritizeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeList.m; path = ../base/PrioritizeList.m; sourceTree = "<group>"; };
-		CE89240814239CC30024CE4E /* PyPrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeDialog.h; path = ../base/PyPrioritizeDialog.h; sourceTree = "<group>"; };
-		CE89240914239CC30024CE4E /* PyPrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyPrioritizeList.h; path = ../base/PyPrioritizeList.h; sourceTree = "<group>"; };
 		CE8C53B61173248F0011B41F /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE8C53BB117324CE0011B41F /* HSTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTable.m; sourceTree = "<group>"; };
 		CE91F213113BC22D0010360B /* StatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsLabel.h; path = ../base/StatsLabel.h; sourceTree = SOURCE_ROOT; };
@@ -239,9 +246,6 @@
 		CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeDialog.h; path = ../base/PrioritizeDialog.h; sourceTree = "<group>"; };
 		CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrioritizeDialog.m; path = ../base/PrioritizeDialog.m; sourceTree = "<group>"; };
 		CE9777D0141F8CB400C13FB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CE9777D2141F9D6500C13FB5 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
-		CE9777D3141F9D7600C13FB5 /* HSPopUpList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSPopUpList.h; sourceTree = "<group>"; };
-		CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSPopUpList.m; sourceTree = "<group>"; };
 		CE9D842814BE2AE900184165 /* PyExtraFairwareReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyExtraFairwareReminder.h; sourceTree = "<group>"; };
 		CE9D842914BE2AE900184165 /* PyExtraFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyExtraFairwareReminder.m; sourceTree = "<group>"; };
 		CEA175C91461E8E600776591 /* locale */ = {isa = PBXFileReference; lastKnownFileType = folder; name = locale; path = ../../build/locale; sourceTree = "<group>"; };
@@ -421,6 +425,10 @@
 				CE275C5914BF71DF00265960 /* PyColumns2.m */,
 				CE275C5414BF712B00265960 /* PyDirectoryOutline.h */,
 				CE275C5514BF712B00265960 /* PyDirectoryOutline.m */,
+				CE548CC214BF903D00D180CB /* PyPrioritizeDialog.h */,
+				CE548CC314BF903D00D180CB /* PyPrioritizeDialog.m */,
+				CE548CC414BF903D00D180CB /* PyPrioritizeList.h */,
+				CE548CC514BF903D00D180CB /* PyPrioritizeList.m */,
 			);
 			name = autogen;
 			path = ../autogen;
@@ -459,10 +467,10 @@
 				CE76FDC9111EE38E006618EA /* HSGUIController.m */,
 				CE41672C141FE1E5004F3F0B /* HSTable.h */,
 				CE8C53BB117324CE0011B41F /* HSTable.m */,
-				CE9777D3141F9D7600C13FB5 /* HSPopUpList.h */,
-				CE9777D4141F9D7600C13FB5 /* HSPopUpList.m */,
-				CE41672A141FE1E5004F3F0B /* HSSelectableList.h */,
-				CE41672B141FE1E5004F3F0B /* HSSelectableList.m */,
+				CE548CBC14BF902000D180CB /* HSPopUpList2.h */,
+				CE548CBD14BF902000D180CB /* HSPopUpList2.m */,
+				CE548CBE14BF902000D180CB /* HSSelectableList2.h */,
+				CE548CBF14BF902000D180CB /* HSSelectableList2.m */,
 			);
 			name = controllers;
 			path = ../../cocoalib/controllers;
@@ -476,8 +484,8 @@
 				CED569C614BF312900C6AC25 /* PyGUI2.h */,
 				CE76FDCE111EE38E006618EA /* PyOutline.h */,
 				CE275C4A14BF6C3700265960 /* PyOutline2.h */,
+				CE548CBB14BF8FFE00D180CB /* PySelectableList2.h */,
 				CE8C53B61173248F0011B41F /* PyTable.h */,
-				CE9777D2141F9D6500C13FB5 /* PySelectableList.h */,
 			);
 			name = proxies;
 			path = ../../cocoalib/proxies;
@@ -568,10 +576,8 @@
 				CE647E561173024A006D28BA /* PyProblemDialog.h */,
 				CE9777CB141F8C2500C13FB5 /* PrioritizeDialog.h */,
 				CE9777CC141F8C2500C13FB5 /* PrioritizeDialog.m */,
-				CE89240814239CC30024CE4E /* PyPrioritizeDialog.h */,
 				CE89240614239CC30024CE4E /* PrioritizeList.h */,
 				CE89240714239CC30024CE4E /* PrioritizeList.m */,
-				CE89240914239CC30024CE4E /* PyPrioritizeList.h */,
 			);
 			name = dgbase;
 			sourceTree = "<group>";
@@ -698,8 +704,6 @@
 				CEF0ACCE12DF3C2000B32F7E /* HSRecentFiles.m in Sources */,
 				CE665B3013225ADD003F5CFB /* ExtraFairwareReminder.m in Sources */,
 				CE9777CD141F8C2500C13FB5 /* PrioritizeDialog.m in Sources */,
-				CE9777D5141F9D7600C13FB5 /* HSPopUpList.m in Sources */,
-				CE41672D141FE1E5004F3F0B /* HSSelectableList.m in Sources */,
 				CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */,
 				CE5335FC142BBFAF008E5374 /* HSQuicklook.m in Sources */,
 				CE54A87E148046F9008EEA77 /* HSColumns.m in Sources */,
@@ -711,6 +715,10 @@
 				CE275C5114BF6C5600265960 /* HSOutline2.m in Sources */,
 				CE275C5714BF712B00265960 /* PyDirectoryOutline.m in Sources */,
 				CE275C5A14BF71DF00265960 /* PyColumns2.m in Sources */,
+				CE548CC014BF902000D180CB /* HSPopUpList2.m in Sources */,
+				CE548CC114BF902000D180CB /* HSSelectableList2.m in Sources */,
+				CE548CC614BF903D00D180CB /* PyPrioritizeDialog.m in Sources */,
+				CE548CC714BF903D00D180CB /* PyPrioritizeList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

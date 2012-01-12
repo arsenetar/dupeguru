@@ -1,7 +1,10 @@
-from cocoa.inter import signature, PySelectableList
+from cocoa.inter2 import PySelectableList2, SelectableListView
 
-class PyPrioritizeList(PySelectableList):
-    @signature('v@:@i')
-    def moveIndexes_toIndex_(self, indexes, dest_index):
-        self.py.move_indexes(indexes, dest_index)
+class PrioritizeListView(SelectableListView):
+    pass
+
+class PyPrioritizeList(PySelectableList2):
+    FOLLOW_PROTOCOLS = ['PySelectableList2']
     
+    def moveIndexes_toIndex_(self, indexes: list, dest_index: int):
+        self.model.move_indexes(indexes, dest_index)

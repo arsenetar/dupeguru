@@ -27,6 +27,7 @@ from . import directories, results, scanner, export, fs
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
+from .gui.prioritize_dialog import PrioritizeDialog
 from .gui.stats_label import StatsLabel
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
@@ -107,6 +108,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.details_panel = DetailsPanel(None, self)
         self.directory_tree = DirectoryTree(None, self)
         self.extra_fairware_reminder = ExtraFairwareReminder(None, self)
+        self.prioritize_dialog = PrioritizeDialog(None, self)
         self.stats_label = StatsLabel(None, self)
         # subclasses must create self.result_table
     

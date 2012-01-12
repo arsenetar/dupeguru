@@ -7,24 +7,25 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSWindowController.h"
 #import "PyApp.h"
 #import "PyPrioritizeDialog.h"
-#import "HSPopUpList.h"
-#import "HSSelectableList.h"
+#import "HSPopUpList2.h"
+#import "HSSelectableList2.h"
 #import "PrioritizeList.h"
 
-@interface PrioritizeDialog : HSWindowController
+@interface PrioritizeDialog : NSWindowController
 {
     IBOutlet NSPopUpButton *categoryPopUpView;
     IBOutlet NSTableView *criteriaTableView;
     IBOutlet NSTableView *prioritizationTableView;
     
-    HSPopUpList *categoryPopUp;
-    HSSelectableList *criteriaList;
+    PyPrioritizeDialog *py;
+    HSPopUpList2 *categoryPopUp;
+    // XXX Just to make it work temporarily, fix this asap (support to be HSSelectableList)
+    PrioritizeList *criteriaList;
     PrioritizeList *prioritizationList;
 }
-- (id)initWithPy:(PyApp *)aPy;
+- (id)init;
 - (PyPrioritizeDialog *)py;
 
 - (IBAction)addSelected:(id)sender;
