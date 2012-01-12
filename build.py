@@ -179,18 +179,18 @@ def build_cocoa_bridging_interfaces():
     import objp.p2o
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
-    from inter.details_panel import PyDetailsPanel
-    from inter.extra_fairware_reminder import PyExtraFairwareReminder
-    from inter.stats_label import PyStatsLabel
+    from inter.details_panel import PyDetailsPanel, DetailsPanelView
+    from inter.extra_fairware_reminder import PyExtraFairwareReminder, ExtraFairwareReminderView
+    from inter.stats_label import PyStatsLabel, StatsLabelView
     for class_ in [PyDetailsPanel, PyExtraFairwareReminder, PyStatsLabel]:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen')
-    for fn in os.listdir('cocoa/base/bridge'):
-        basename = fn[:-2]
-        header_path = op.join('cocoa/base/bridge', fn)
-        extmodule_path = op.join('build', basename + '.m')
-        objp.p2o.generate_python_proxy_code(header_path, extmodule_path)
+    for class_ in [DetailsPanelView, ExtraFairwareReminderView, StatsLabelView]:
+        clsspec = objp.o2p.spec_from_python_class(class_)
+        clsname = class_.__name__
+        extmodule_path = op.join('build', clsname + '.m')
+        objp.p2o.generate_python_proxy_code_from_clsspec(clsspec, extmodule_path)
         exts = [
-            Extension(basename, [extmodule_path, 'build/ObjP.m'],
+            Extension(clsname, [extmodule_path, 'build/ObjP.m'],
                 extra_link_args=["-framework", "Foundation"]),
         ]
         setup(
