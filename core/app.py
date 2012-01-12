@@ -25,6 +25,7 @@ from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
 from .gui.details_panel import DetailsPanel
+from .gui.directory_tree import DirectoryTree
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
 from .gui.stats_label import StatsLabel
 
@@ -104,6 +105,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(None, self)
+        self.directory_tree = DirectoryTree(None, self)
         self.extra_fairware_reminder = ExtraFairwareReminder(None, self)
         self.stats_label = StatsLabel(None, self)
         # subclasses must create self.result_table

@@ -7,19 +7,23 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DirectoryOutline.h"
+#import "Utils.h"
 
 @implementation DirectoryOutline
-- (id)initWithPyParent:(id)aPyParent view:(HSOutlineView *)aOutlineView
+- (id)initWithOutlineView:(HSOutlineView *)aOutlineView
 {
-    self = [super initWithPyClassName:@"PyDirectoryOutline" pyParent:aPyParent view:aOutlineView];
+    PyDirectoryOutline *model = [[PyDirectoryOutline alloc] initWithModel:findHackishModel(@"directory_tree")];
+    self = [super initWithPy:model view:aOutlineView];
+    [model bindCallback:createCallback(@"DirectoryOutlineView", self)];
+    [model release];
     [outlineView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
-    [self connect];
+    [[self py] connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [self disconnect];
+    [[self py] disconnect];
     [super dealloc];
 }
 
