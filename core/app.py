@@ -24,8 +24,9 @@ from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_d
 from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
-from .gui.stats_label import StatsLabel
+from .gui.details_panel import DetailsPanel
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
+from .gui.stats_label import StatsLabel
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
@@ -102,8 +103,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
-        self.stats_label = StatsLabel(None, self)
+        self.details_panel = DetailsPanel(None, self)
         self.extra_fairware_reminder = ExtraFairwareReminder(None, self)
+        self.stats_label = StatsLabel(None, self)
         # subclasses must create self.result_table
     
     #--- Virtual

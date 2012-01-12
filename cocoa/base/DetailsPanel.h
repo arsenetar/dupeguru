@@ -11,11 +11,13 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyApp.h"
 #import "PyDetailsPanel.h"
 
-@interface DetailsPanel : HSWindowController
+@interface DetailsPanel : NSWindowController
 {
     IBOutlet NSTableView *detailsTable;
+    
+    PyDetailsPanel *py;
 }
-- (id)initWithPy:(PyApp *)aPy;
+- (id)init;
 - (PyDetailsPanel *)py;
 
 - (BOOL)isVisible;

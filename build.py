@@ -179,9 +179,10 @@ def build_cocoa_bridging_interfaces():
     import objp.p2o
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
-    from inter.stats_label import PyStatsLabel
+    from inter.details_panel import PyDetailsPanel
     from inter.extra_fairware_reminder import PyExtraFairwareReminder
-    for class_ in [PyStatsLabel, PyExtraFairwareReminder]:
+    from inter.stats_label import PyStatsLabel
+    for class_ in [PyDetailsPanel, PyExtraFairwareReminder, PyStatsLabel]:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen')
     for fn in os.listdir('cocoa/base/bridge'):
         basename = fn[:-2]

@@ -19,9 +19,9 @@ http://www.hardcoded.net/licenses/bsd_license
     PyGILState_STATE gilState = PyGILState_Ensure();
     PyObject *pModule = PyImport_AddModule("__main__");
     PyObject *pAppInstance = PyObject_GetAttrString(pModule, "APP_INSTANCE");
-    PyObject *pStatsLabel = PyObject_GetAttrString(pAppInstance, "extra_fairware_reminder");
+    PyObject *pExtraFairwareReminder = PyObject_GetAttrString(pAppInstance, "extra_fairware_reminder");
     PyObject *pCallback = ObjP_classInstanceWithRef(@"ExtraFairwareReminderView", @"inter.ExtraFairwareReminderView", self);
-    py = [[PyExtraFairwareReminder alloc] initWithModel:pStatsLabel Callback:pCallback];
+    py = [[PyExtraFairwareReminder alloc] initWithModel:pExtraFairwareReminder Callback:pCallback];
     PyGILState_Release(gilState);
     return self;
 }

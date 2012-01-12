@@ -59,7 +59,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanel alloc] initWithPy:py];
+    return [[DetailsPanel alloc] init];
 }
 
 - (NSString *)homepageURL
