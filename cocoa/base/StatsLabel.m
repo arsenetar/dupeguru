@@ -14,7 +14,8 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     self = [self init];
     view = [aLabelView retain];
-    py = createPyWrapper(@"PyStatsLabel", @"stats_label", @"StatsLabelView", self);
+    py = [[PyStatsLabel alloc] initWithModel:findHackishModel(@"stats_label")];
+    [py bindCallback:createCallback(@"StatsLabelView", self)];
     [[self py] connect];
     return self;
 }

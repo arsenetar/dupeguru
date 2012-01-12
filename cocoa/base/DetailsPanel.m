@@ -14,7 +14,8 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     self = [super initWithWindowNibName:@"DetailsPanel"];
     [self window]; //So the detailsTable is initialized.
-    py = createPyWrapper(@"PyDetailsPanel", @"details_panel", @"DetailsPanelView", self);
+    py = [[PyDetailsPanel alloc] initWithModel:findHackishModel(@"details_panel")];
+    [py bindCallback:createCallback(@"DetailsPanelView", self)];
     [py connect];
     return self;
 }

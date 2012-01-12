@@ -15,7 +15,8 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithWindowNibName:@"ExtraFairwareReminder"];
     [self window];
     [continueButton setEnabled:NO];
-    py = createPyWrapper(@"PyExtraFairwareReminder", @"extra_fairware_reminder", @"ExtraFairwareReminderView", self);
+    py = [[PyExtraFairwareReminder alloc] initWithModel:findHackishModel(@"extra_fairware_reminder")];
+    [py bindCallback:createCallback(@"ExtraFairwareReminderView", self)];
     return self;
 }
 
