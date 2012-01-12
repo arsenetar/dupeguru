@@ -244,6 +244,7 @@
 		CECFFF2013CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF2113CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF2413CDF8E5003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CED569C614BF312900C6AC25 /* PyGUI2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyGUI2.h; sourceTree = "<group>"; };
 		CED64CEB145EF06000572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED64CF8145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
 		CED64CF9145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
@@ -452,6 +453,7 @@
 			children = (
 				CE54A87A14804687008EEA77 /* PyColumns.h */,
 				CE76FDCD111EE38E006618EA /* PyGUI.h */,
+				CED569C614BF312900C6AC25 /* PyGUI2.h */,
 				CE76FDCE111EE38E006618EA /* PyOutline.h */,
 				CE8C53B61173248F0011B41F /* PyTable.h */,
 				CE9777D2141F9D6500C13FB5 /* PySelectableList.h */,

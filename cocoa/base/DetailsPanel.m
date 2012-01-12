@@ -6,22 +6,15 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import <Python.h>
 #import "DetailsPanel.h"
-#import "ObjP.h"
+#import "Utils.h"
 
 @implementation DetailsPanel
 - (id)init
 {
     self = [super initWithWindowNibName:@"DetailsPanel"];
     [self window]; //So the detailsTable is initialized.
-    PyGILState_STATE gilState = PyGILState_Ensure();
-    PyObject *pModule = PyImport_AddModule("__main__");
-    PyObject *pAppInstance = PyObject_GetAttrString(pModule, "APP_INSTANCE");
-    PyObject *pDetailsPanel = PyObject_GetAttrString(pAppInstance, "details_panel");
-    PyObject *pCallback = ObjP_classInstanceWithRef(@"DetailsPanelView", @"inter.DetailsPanelView", self);
-    py = [[PyDetailsPanel alloc] initWithModel:pDetailsPanel Callback:pCallback];
-    PyGILState_Release(gilState);
+    py = createPyWrapper(@"PyDetailsPanel", @"details_panel", @"DetailsPanelView", self);
     [py connect];
     return self;
 }
