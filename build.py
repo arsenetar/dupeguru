@@ -17,7 +17,8 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all)
+    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all,
+    move)
 from hscommon import loc
 
 def parse_args():
@@ -40,26 +41,31 @@ def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces()
     print("Building dg_cocoa.plugin")
-    specific_packages = {
-        'se': ['core_se'],
-        'me': ['core_me'],
-        'pe': ['core_pe'],
-    }[edition]
-    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
-    copy_packages(tocopy, 'build', create_links=dev)
-    cocoa_project_path = 'cocoa/{0}'.format(edition)
-    shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
     copy_embeddable_python_dylib('build')
     if not op.exists('build/PythonHeaders'):
         os.symlink(get_python_header_folder(), 'build/PythonHeaders')
     if not op.exists('build/py'):
         os.mkdir('build/py')
-    sys.path.insert(0, 'build')
-    collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+    cocoa_project_path = 'cocoa/{0}'.format(edition)
+    shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
+    specific_packages = {
+        'se': ['core_se'],
+        'me': ['core_me'],
+        'pe': ['core_pe'],
+    }[edition]
+    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
+    if dev:
+        # collect dependencies, then override our own pckages with symlinks
+        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+        copy_packages(tocopy, 'build/py', create_links=True)
+    else:
+        copy_packages(tocopy, 'build')
+        sys.path.insert(0, 'build')
+        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+        del sys.path[0]
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', 'build/py/inter')
-    del sys.path[0]
     copy_sysconfig_files_for_embed('build/py')
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
@@ -159,19 +165,22 @@ def build_mergepot():
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
 
+def build_cocoa_ext(extname, dest, source_files, extra_frameworks=()):
+    extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
+    for extra in extra_frameworks:
+        extra_link_args += ['-framework', extra]
+    ext = Extension(extname, source_files, extra_link_args=extra_link_args)
+    setup(script_args=['build_ext', '--inplace'], ext_modules=[ext])
+    fn = extname + '.so'
+    assert op.exists(fn)
+    move(fn, op.join(dest, fn))
+
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
-    exts = [
-        Extension("CocoaProxy", ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
-            extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
-    ]
-    setup(
-        script_args = ['build_ext', '--inplace'],
-        ext_modules = exts,
-    )
-    move_all('CocoaProxy*', 'cocoalib/cocoa')
+    build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
+        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'], ['AppKit'])
 
 def build_cocoa_bridging_interfaces():
     print("Building Cocoa Bridging Interfaces")
@@ -204,15 +213,7 @@ def build_cocoa_bridging_interfaces():
         clsname = class_.__name__
         extmodule_path = op.join('build', clsname + '.m')
         objp.p2o.generate_python_proxy_code_from_clsspec(clsspec, extmodule_path)
-        exts = [
-            Extension(clsname, [extmodule_path, 'build/ObjP.m'],
-                extra_link_args=["-framework", "Foundation"]),
-        ]
-        setup(
-            script_args = ['build_ext', '--inplace'],
-            ext_modules = exts,
-        )
-    move_all('*.so', 'cocoa/inter')
+        build_cocoa_ext(clsname, 'cocoa/inter', [extmodule_path, 'build/ObjP.m'])
 
 def build_pe_modules(ui):
     print("Building PE Modules")
