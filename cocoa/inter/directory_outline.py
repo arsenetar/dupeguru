@@ -1,10 +1,10 @@
 from objp.util import dontwrap
-from cocoa.inter2 import PyOutline2, GUIObjectView
+from cocoa.inter2 import PyOutline, GUIObjectView
 
 class DirectoryOutlineView(GUIObjectView):
     pass
 
-class PyDirectoryOutline(PyOutline2):
+class PyDirectoryOutline(PyOutline):
     def addDirectory_(self, path: str):
         self.model.add_directory(path)
     

@@ -16,8 +16,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window];
     py = [[PyPrioritizeDialog alloc] initWithModel:findHackishModel(@"prioritize_dialog")];
     [py bindCallback:createCallback(@"PrioritizeDialogView", self)];
-    categoryPopUp = [[HSPopUpList2 alloc] initWithPyRef:[[self py] categoryList] popupView:categoryPopUpView];
-    criteriaList = [[HSSelectableList2 alloc] initWithPyRef:[[self py] criteriaList] tableView:criteriaTableView];
+    categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self py] categoryList] popupView:categoryPopUpView];
+    criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self py] criteriaList] tableView:criteriaTableView];
     prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self py] prioritizationList] tableView:prioritizationTableView];
     [py connect];
     return self;

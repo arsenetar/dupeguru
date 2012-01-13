@@ -18,8 +18,8 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithWindowNibName:@"DirectoryPanel"];
     [self window];
     _app = aParentApp;
-    _py = [_app py];
-    [[self window] setTitle:[_py appName]];
+    model = [_app model];
+    [[self window] setTitle:[model appName]];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
@@ -107,7 +107,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Public */
 - (void)addDirectory:(NSString *)directory
 {
-    NSInteger r = [[_py addDirectory:directory] intValue];
+    NSInteger r = [model addDirectory:directory];
     if (r) {
         NSString *m = @"";
         if (r == 1) {

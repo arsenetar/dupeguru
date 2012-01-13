@@ -15,7 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithWindowNibName:@"ProblemDialog"];
     [self window]; //So the detailsTable is initialized.
     model = [[PyProblemDialog alloc] initWithModel:findHackishModel(@"problem_dialog")];
-    problemTable = [[HSTable2 alloc] initWithPyRef:[model problemTable] tableView:problemTableView];
+    problemTable = [[HSTable alloc] initWithPyRef:[model problemTable] tableView:problemTableView];
     [self initializeColumns];
     [model connect];
     [[problemTable model] connect];

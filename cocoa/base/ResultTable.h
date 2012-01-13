@@ -8,10 +8,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-#import "HSTable2.h"
+#import "HSTable.h"
 #import "PyResultTable.h"
 
-@interface ResultTable : HSTable2 <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
+@interface ResultTable : HSTable <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 {
     NSSet *_deltaColumns;
 }

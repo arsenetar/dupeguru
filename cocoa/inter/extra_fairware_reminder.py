@@ -1,5 +1,5 @@
 from objp.util import dontwrap
-from cocoa.inter2 import PyGUIObject2
+from cocoa.inter2 import PyGUIObject
 
 class ExtraFairwareReminderView:
     def startTimer(self): pass
@@ -7,7 +7,7 @@ class ExtraFairwareReminderView:
     def setButtonText_(self, text: str): pass;
     def enableButton(self): pass
 
-class PyExtraFairwareReminder(PyGUIObject2):
+class PyExtraFairwareReminder(PyGUIObject):
     def start(self):
         self.model.start()
     

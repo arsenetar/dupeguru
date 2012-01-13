@@ -8,8 +8,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "PyExtraFairwareReminder.h"
-#import "HSWindowController.h"
-#import "PyApp.h"
 
 @interface ExtraFairwareReminder : NSWindowController
 {

@@ -7,12 +7,12 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSOutline2.h"
+#import "HSOutline.h"
 #import "PyDirectoryOutline.h"
 
 #define DGAddedFoldersNotification @"DGAddedFoldersNotification"
 
-@interface DirectoryOutline : HSOutline2 {}
+@interface DirectoryOutline : HSOutline {}
 - (id)initWithOutlineView:(HSOutlineView *)aOutlineView;
 - (PyDirectoryOutline *)py;
 @end;

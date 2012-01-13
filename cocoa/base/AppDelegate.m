@@ -25,7 +25,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)awakeFromNib
 {
-    [py bindCocoa:self];
+    model = [[PyDupeGuru alloc] init];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     /* Because the pref pane is lazily loaded, we have to manually do the update check if the
        preference is set.
@@ -45,7 +45,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Virtual */
 
-- (PyDupeGuruBase *)py { return py; }
+- (PyDupeGuru *)model
+{
+    return model;
+}
 
 - (ResultWindowBase *)createResultWindow
 {
@@ -104,7 +107,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setTitle:TR(@"Select a results file to load")];
     if ([op runModal] == NSOKButton) {
         NSString *filename = [[op filenames] objectAtIndex:0];
-        [py loadResultsFrom:filename];
+        [model loadResultsFrom:filename];
         [[self recentResults] addFile:filename];
     }
 }
@@ -125,7 +128,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showAboutBox:(id)sender
 {
     if (_aboutBox == nil) {
-        _aboutBox = [[HSAboutBox alloc] initWithApp:py];
+        _aboutBox = [[HSAboutBox alloc] initWithApp:model];
     }
     [[_aboutBox window] makeKeyAndOrderFront:sender];
 }
@@ -157,9 +160,9 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[ProgressController mainProgressController] setWorker:py];
-    [py initialRegistrationSetup];
-    [py loadSession];
+    [[ProgressController mainProgressController] setWorker:model];
+    [model initialRegistrationSetup];
+    [model loadSession];
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)aNotification
@@ -171,7 +174,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-    if ([py resultsAreModified]) {
+    if ([model resultsAreModified]) {
         NSString *msg = TR(@"You have unsaved results, do you really want to quit?");
         if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) { // NO
             return NSTerminateCancel;
@@ -186,10 +189,10 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger sc = [ud integerForKey:@"sessionCountSinceLastIgnorePurge"];
     if (sc >= 10) {
         sc = -1;
-        [py purgeIgnoreList];
+        [model purgeIgnoreList];
     }
     sc++;
-    [py saveSession];
+    [model saveSession];
     [ud setInteger:sc forKey:@"sessionCountSinceLastIgnorePurge"];
     // NSApplication does not release nib instances objects, we must do it manually
     // Well, it isn't needed because the memory is freed anyway (we are quitting the application
@@ -200,7 +203,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)recentFileClicked:(NSString *)path
 {
-    [py loadResultsFrom:path];
+    [model loadResultsFrom:path];
 }
 
 
@@ -226,11 +229,11 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)showFairwareNagWithPrompt:(NSString *)prompt
 {
-    [HSFairwareReminder showFairwareNagWithApp:[self py] prompt:prompt];
+    [HSFairwareReminder showFairwareNagWithApp:[self model] prompt:prompt];
 }
 
 - (void)showDemoNagWithPrompt:(NSString *)prompt
 {
-    [HSFairwareReminder showDemoNagWithApp:[self py] prompt:prompt];
+    [HSFairwareReminder showDemoNagWithApp:[self model] prompt:prompt];
 }
 @end

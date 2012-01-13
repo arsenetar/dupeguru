@@ -8,14 +8,14 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "PyProblemDialog.h"
-#import "HSTable2.h"
+#import "HSTable.h"
 
 @interface ProblemDialog : NSWindowController
 {
     IBOutlet NSTableView *problemTableView;
     
     PyProblemDialog *model;
-    HSTable2 *problemTable;
+    HSTable *problemTable;
 }
 - (id)init;
 

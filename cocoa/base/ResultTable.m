@@ -12,7 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 #import "HSQuicklook.h"
 
-@interface HSTable2 (private)
+@interface HSTable (private)
 - (void)setPySelection;
 - (void)setViewSelection;
 @end

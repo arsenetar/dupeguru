@@ -1,10 +1,10 @@
 from objp.util import dontwrap
-from cocoa.inter2 import PyTable2, TableView
+from cocoa.inter2 import PyTable, TableView
 
 class ResultTableView(TableView):
     def invalidateMarkings(self): pass
 
-class PyResultTable(PyTable2):
+class PyResultTable(PyTable):
     def powerMarkerMode(self) -> bool:
         return self.model.power_marker
     

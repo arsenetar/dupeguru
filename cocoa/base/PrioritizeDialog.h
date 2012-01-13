@@ -7,10 +7,9 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "PyApp.h"
 #import "PyPrioritizeDialog.h"
-#import "HSPopUpList2.h"
-#import "HSSelectableList2.h"
+#import "HSPopUpList.h"
+#import "HSSelectableList.h"
 #import "PrioritizeList.h"
 
 @interface PrioritizeDialog : NSWindowController
@@ -20,8 +19,8 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSTableView *prioritizationTableView;
     
     PyPrioritizeDialog *py;
-    HSPopUpList2 *categoryPopUp;
-    HSSelectableList2 *criteriaList;
+    HSPopUpList *categoryPopUp;
+    HSSelectableList *criteriaList;
     PrioritizeList *prioritizationList;
 }
 - (id)init;
