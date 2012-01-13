@@ -26,7 +26,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     table = [[ResultTable alloc] initWithView:matches];
     statsLabel = [[StatsLabel alloc] initWithLabelView:stats];
-    problemDialog = [[ProblemDialog alloc] initWithPy:py];
+    problemDialog = [[ProblemDialog alloc] init];
     [self initResultColumns];
     [self fillColumnsMenu];
     [matches setTarget:self];

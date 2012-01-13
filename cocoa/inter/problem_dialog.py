@@ -1,10 +1,9 @@
-from cocoa.inter import PyGUIObject
+from objp.util import pyref
+from cocoa.inter2 import PyGUIObject2
 
-from core.gui.problem_dialog import ProblemDialog
-
-class PyProblemDialog(PyGUIObject):
-    py_class = ProblemDialog
+class PyProblemDialog(PyGUIObject2):
+    def problemTable(self) -> pyref:
+        return self.model.problem_table
     
     def revealSelected(self):
-        self.py.reveal_selected_dupe()
-    
+        self.model.reveal_selected_dupe()

@@ -8,7 +8,7 @@ from hscommon.trans import install_gettext_trans_under_cocoa
 install_gettext_trans_under_cocoa()
 
 from cocoa.inter import signature
-from cocoa.inter2 import PySelectableList2, PyColumns2
+from cocoa.inter2 import PySelectableList2, PyColumns2, PyTable2
 
 from core.scanner import ScanType
 
@@ -19,7 +19,6 @@ from inter.extra_fairware_reminder import PyExtraFairwareReminder
 from inter.prioritize_dialog import PyPrioritizeDialog
 from inter.prioritize_list import PyPrioritizeList
 from inter.problem_dialog import PyProblemDialog
-from inter.problem_table import PyProblemTable
 from inter.result_table import PyResultTable
 from inter.stats_label import PyStatsLabel
 from inter.app_se import DupeGuru
