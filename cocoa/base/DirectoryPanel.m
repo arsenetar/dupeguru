@@ -24,7 +24,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
     [_recentDirectories setDelegate:self];
-    outline = [[DirectoryOutline alloc] initWithOutlineView:outlineView];
+    outline = [[DirectoryOutline alloc] initWithPyRef:[model directoryTree] outlineView:outlineView];
     [self refreshRemoveButtonText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directorySelectionChanged:)
         name:NSOutlineViewSelectionDidChangeNotification object:outlineView];

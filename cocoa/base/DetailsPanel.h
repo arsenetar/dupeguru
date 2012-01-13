@@ -7,16 +7,17 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import <Python.h>
 #import "PyDetailsPanel.h"
 
 @interface DetailsPanel : NSWindowController
 {
     IBOutlet NSTableView *detailsTable;
     
-    PyDetailsPanel *py;
+    PyDetailsPanel *model;
 }
-- (id)init;
-- (PyDetailsPanel *)py;
+- (id)initWithPyRef:(PyObject *)aPyRef;
+- (PyDetailsPanel *)model;
 
 - (BOOL)isVisible;
 - (void)toggleVisibility;

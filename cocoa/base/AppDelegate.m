@@ -62,7 +62,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanel alloc] init];
+    return [[DetailsPanel alloc] initWithPyRef:[model detailsPanel]];
 }
 
 - (NSString *)homepageURL
@@ -210,7 +210,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* model --> view */
 - (void)showExtraFairwareReminder
 {
-    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] init];
+    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithPyRef:[model extraFairwareReminder]];
     [dialog start];
     [NSApp runModalForWindow:[dialog window]];
     [dialog close];

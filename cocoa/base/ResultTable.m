@@ -18,9 +18,9 @@ http://www.hardcoded.net/licenses/bsd_license
 @end
 
 @implementation ResultTable
-- (id)initWithView:(NSTableView *)aTableView;
+- (id)initWithPyRef:(PyObject *)aPyRef view:(NSTableView *)aTableView
 {
-    PyResultTable *m = [[PyResultTable alloc] initWithModel:findHackishModel(@"result_table")];
+    PyResultTable *m = [[PyResultTable alloc] initWithModel:aPyRef];
     self = [super initWithModel:m tableView:aTableView];
     [m bindCallback:createCallback(@"ResultTableView", self)];
     [m release];

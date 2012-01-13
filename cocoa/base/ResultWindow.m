@@ -24,9 +24,9 @@ http://www.hardcoded.net/licenses/bsd_license
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
-    table = [[ResultTable alloc] initWithView:matches];
-    statsLabel = [[StatsLabel alloc] initWithLabelView:stats];
-    problemDialog = [[ProblemDialog alloc] init];
+    table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];
+    statsLabel = [[StatsLabel alloc] initWithPyRef:[model statsLabel] view:stats];
+    problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
     [self initResultColumns];
     [self fillColumnsMenu];
     [matches setTarget:self];
@@ -272,10 +272,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)reprioritizeResults:(id)sender
 {
-    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] init];
+    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithPyRef:[model prioritizeDialog]];
     NSInteger result = [NSApp runModalForWindow:[dlg window]];
     if (result == NSRunStoppedResponse) {
-        [[dlg py] performReprioritization];
+        [[dlg model] performReprioritization];
     }
     [dlg release];
     [[self window] makeKeyAndOrderFront:nil];

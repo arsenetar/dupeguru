@@ -4,7 +4,7 @@ from objp.util import pyref, dontwrap
 from jobprogress import job
 import cocoa
 from cocoa import install_exception_hook, proxy
-from cocoa.inter2 import PyFairware, FairwareView
+from cocoa.inter import PyFairware, FairwareView
 from hscommon.trans import trget
 
 from core.app import JobType
@@ -44,6 +44,9 @@ class PyDupeGuruBase(PyFairware):
     
     def prioritizeDialog(self) -> pyref:
         return self.model.prioritize_dialog
+    
+    def problemDialog(self) -> pyref:
+        return self.model.problem_dialog
     
     def statsLabel(self) -> pyref:
         return self.model.stats_label

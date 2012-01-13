@@ -17,7 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
     PyProblemDialog *model;
     HSTable *problemTable;
 }
-- (id)init;
+- (id)initWithPyRef:(PyObject *)aPyRef;
 
 - (void)initializeColumns;
 - (IBAction)revealSelected:(id)sender;

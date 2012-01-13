@@ -18,13 +18,13 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSTableView *criteriaTableView;
     IBOutlet NSTableView *prioritizationTableView;
     
-    PyPrioritizeDialog *py;
+    PyPrioritizeDialog *model;
     HSPopUpList *categoryPopUp;
     HSSelectableList *criteriaList;
     PrioritizeList *prioritizationList;
 }
-- (id)init;
-- (PyPrioritizeDialog *)py;
+- (id)initWithPyRef:(PyObject *)aPyRef;
+- (PyPrioritizeDialog *)model;
 
 - (IBAction)addSelected:(id)sender;
 - (IBAction)removeSelected:(id)sender;

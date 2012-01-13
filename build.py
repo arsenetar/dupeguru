@@ -179,7 +179,7 @@ def build_cocoa_bridging_interfaces():
     import objp.p2o
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
-    from cocoa.inter2 import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
+    from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
         OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyFairware)
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView

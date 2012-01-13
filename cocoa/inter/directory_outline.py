@@ -1,5 +1,5 @@
 from objp.util import dontwrap
-from cocoa.inter2 import PyOutline, GUIObjectView
+from cocoa.inter import PyOutline, GUIObjectView
 
 class DirectoryOutlineView(GUIObjectView):
     pass

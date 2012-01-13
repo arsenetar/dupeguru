@@ -13,11 +13,11 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     IBOutlet NSButton *continueButton;
     
-    PyExtraFairwareReminder *py;
+    PyExtraFairwareReminder *model;
     NSTimer *timer;
 }
-- (id)init;
-- (PyExtraFairwareReminder *)py;
+- (id)initWithPyRef:(PyObject *)aPyRef;
+- (PyExtraFairwareReminder *)model;
 
 - (void)start;
 - (void)updateButton;

@@ -7,7 +7,7 @@
 from hscommon.trans import install_gettext_trans_under_cocoa
 install_gettext_trans_under_cocoa()
 
-from cocoa.inter2 import PySelectableList, PyColumns, PyTable
+from cocoa.inter import PySelectableList, PyColumns, PyTable
 
 from inter.details_panel import PyDetailsPanel
 from inter.directory_outline import PyDirectoryOutline

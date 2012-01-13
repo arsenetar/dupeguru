@@ -1,5 +1,5 @@
 from objp.util import pyref
-from cocoa.inter2 import PyGUIObject
+from cocoa.inter import PyGUIObject
 
 class PyProblemDialog(PyGUIObject):
     def problemTable(self) -> pyref:

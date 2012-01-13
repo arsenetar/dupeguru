@@ -1,4 +1,4 @@
-from cocoa.inter2 import PySelectableList, SelectableListView
+from cocoa.inter import PySelectableList, SelectableListView
 
 class PrioritizeListView(SelectableListView):
     pass

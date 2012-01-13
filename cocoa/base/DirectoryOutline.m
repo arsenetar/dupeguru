@@ -10,9 +10,9 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation DirectoryOutline
-- (id)initWithOutlineView:(HSOutlineView *)aOutlineView
+- (id)initWithPyRef:(PyObject *)aPyRef outlineView:(HSOutlineView *)aOutlineView
 {
-    PyDirectoryOutline *model = [[PyDirectoryOutline alloc] initWithModel:findHackishModel(@"directory_tree")];
+    PyDirectoryOutline *model = [[PyDirectoryOutline alloc] initWithModel:aPyRef];
     self = [super initWithPy:model view:aOutlineView];
     [model bindCallback:createCallback(@"DirectoryOutlineView", self)];
     [model release];

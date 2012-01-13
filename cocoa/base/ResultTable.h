@@ -15,7 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     NSSet *_deltaColumns;
 }
-- (id)initWithView:(NSTableView *)aTableView;
+- (id)initWithPyRef:(PyObject *)aPyRef view:(NSTableView *)aTableView;
 - (PyResultTable *)model;
 - (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;

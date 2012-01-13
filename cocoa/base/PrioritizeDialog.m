@@ -10,41 +10,42 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation PrioritizeDialog
-- (id)init
+- (id)initWithPyRef:(PyObject *)aPyRef
 {
     self = [super initWithWindowNibName:@"PrioritizeDialog"];
     [self window];
-    py = [[PyPrioritizeDialog alloc] initWithModel:findHackishModel(@"prioritize_dialog")];
-    [py bindCallback:createCallback(@"PrioritizeDialogView", self)];
-    categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self py] categoryList] popupView:categoryPopUpView];
-    criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self py] criteriaList] tableView:criteriaTableView];
-    prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self py] prioritizationList] tableView:prioritizationTableView];
-    [py connect];
+    model = [[PyPrioritizeDialog alloc] initWithModel:aPyRef];
+    [model bindCallback:createCallback(@"PrioritizeDialogView", self)];
+    categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self model] categoryList] popupView:categoryPopUpView];
+    criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self model] criteriaList] tableView:criteriaTableView];
+    prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self model] prioritizationList] tableView:prioritizationTableView];
+    [model connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [py disconnect];
+    [model disconnect];
     [categoryPopUp release];
     [criteriaList release];
     [prioritizationList release];
+    [model release];
     [super dealloc];
 }
 
-- (PyPrioritizeDialog *)py
+- (PyPrioritizeDialog *)model
 {
-    return (PyPrioritizeDialog *)py;
+    return (PyPrioritizeDialog *)model;
 }
 
 - (IBAction)addSelected:(id)sender
 {
-    [[self py] addSelected];
+    [[self model] addSelected];
 }
 
 - (IBAction)removeSelected:(id)sender
 {
-    [[self py] removeSelected];
+    [[self model] removeSelected];
 }
 
 - (IBAction)ok:(id)sender

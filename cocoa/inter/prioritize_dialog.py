@@ -1,5 +1,5 @@
 from objp.util import pyref
-from cocoa.inter2 import PyGUIObject, GUIObjectView
+from cocoa.inter import PyGUIObject, GUIObjectView
 
 class PrioritizeDialogView(GUIObjectView):
     pass

@@ -1,5 +1,5 @@
 from objp.util import dontwrap
-from cocoa.inter2 import PyTable, TableView
+from cocoa.inter import PyTable, TableView
 
 class ResultTableView(TableView):
     def invalidateMarkings(self): pass

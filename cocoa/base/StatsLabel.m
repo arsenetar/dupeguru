@@ -10,27 +10,27 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation StatsLabel
-- (id)initWithLabelView:(NSTextField *)aLabelView
+- (id)initWithPyRef:(PyObject *)aPyRef view:(NSTextField *)aLabelView
 {
-    self = [self init];
-    view = [aLabelView retain];
-    py = [[PyStatsLabel alloc] initWithModel:findHackishModel(@"stats_label")];
-    [py bindCallback:createCallback(@"StatsLabelView", self)];
-    [[self py] connect];
+    PyStatsLabel *m = [[PyStatsLabel alloc] initWithModel:aPyRef];
+    self = [self initWithModel:m view:aLabelView];
+    [m bindCallback:createCallback(@"StatsLabelView", self)];
+    [m connect];
+    [m release];
     return self;
 }
 
 - (void)dealloc
 {
-    [[self py] disconnect];
-    [py release];
+    [[self model] disconnect];
+    [model release];
     [view release];
     [super dealloc];
 }
 
-- (PyStatsLabel *)py
+- (PyStatsLabel *)model
 {
-    return (PyStatsLabel *)py;
+    return (PyStatsLabel *)model;
 }
 
 - (NSTextField *)labelView
@@ -41,6 +41,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Python --> Cocoa */
 - (void)refresh
 {
-    [[self labelView] setStringValue:[[self py] display]];
+    [[self labelView] setStringValue:[[self model] display]];
 }
 @end

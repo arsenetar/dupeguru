@@ -76,8 +76,6 @@ class DupeGuru(DupeGuruBase):
 class PyDupeGuru(PyDupeGuruBase):
     def __init__(self):
         self._init(DupeGuru)
-        import __main__
-        __main__.APP_INSTANCE = self.model
     
     #---Properties
     def setMinMatchPercentage_(self, percentage: int):
