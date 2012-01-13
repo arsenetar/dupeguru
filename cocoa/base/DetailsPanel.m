@@ -16,13 +16,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [self window]; //So the detailsTable is initialized.
     model = [[PyDetailsPanel alloc] initWithModel:aPyRef];
     [model bindCallback:createCallback(@"DetailsPanelView", self)];
-    [model connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [model disconnect];
     [model release];
     [super dealloc];
 }

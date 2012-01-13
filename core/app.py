@@ -112,7 +112,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.prioritize_dialog = PrioritizeDialog(self)
         self.problem_dialog = ProblemDialog(self)
         self.stats_label = StatsLabel(self)
-        # subclasses must create self.result_table
+        self.result_table = self._create_result_table()
+        children = [self.result_table, self.directory_tree, self.problem_dialog, self.stats_label,
+            self.details_panel]
+        for child in children:
+            child.connect()
+        # subclasses must create and connect self.result_table
     
     #--- Virtual
     def _get_display_info(self, dupe, group, delta):
@@ -125,6 +130,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         raise NotImplementedError()
     
     def _prioritization_categories(self):
+        raise NotImplementedError()
+    
+    def _create_result_table(self):
         raise NotImplementedError()
     
     #--- Private

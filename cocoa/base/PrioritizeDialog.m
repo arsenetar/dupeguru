@@ -19,13 +19,11 @@ http://www.hardcoded.net/licenses/bsd_license
     categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self model] categoryList] popupView:categoryPopUpView];
     criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self model] criteriaList] tableView:criteriaTableView];
     prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self model] prioritizationList] tableView:prioritizationTableView];
-    [model connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [model disconnect];
     [categoryPopUp release];
     [criteriaList release];
     [prioritizationList release];

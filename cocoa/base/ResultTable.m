@@ -25,13 +25,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [m bindCallback:createCallback(@"ResultTableView", self)];
     [m release];
     _deltaColumns = [[NSSet setWithArray:[[self model] deltaColumns]] retain];
-    [model connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [model disconnect];
     [_deltaColumns release];
     [super dealloc];
 }

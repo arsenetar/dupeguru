@@ -17,14 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [model bindCallback:createCallback(@"DirectoryOutlineView", self)];
     [model release];
     [outlineView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
-    [[self py] connect];
     return self;
-}
-
-- (void)dealloc
-{
-    [[self py] disconnect];
-    [super dealloc];
 }
 
 - (PyDirectoryOutline *)py

@@ -17,6 +17,7 @@ class ProblemDialog(GUIObject, Broadcaster):
         Broadcaster.__init__(self)
         self._selected_dupe = None
         self.problem_table = ProblemTable(self)
+        self.problem_table.connect()
     
     def reveal_selected_dupe(self):
         if self._selected_dupe is not None:

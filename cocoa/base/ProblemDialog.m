@@ -17,15 +17,11 @@ http://www.hardcoded.net/licenses/bsd_license
     model = [[PyProblemDialog alloc] initWithModel:aPyRef];
     problemTable = [[HSTable alloc] initWithPyRef:[model problemTable] tableView:problemTableView];
     [self initializeColumns];
-    [model connect];
-    [[problemTable model] connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [[problemTable model] disconnect];
-    [model disconnect];
     [problemTable release];
     [model release];
     [super dealloc];

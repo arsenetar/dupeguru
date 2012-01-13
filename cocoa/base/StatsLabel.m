@@ -15,17 +15,8 @@ http://www.hardcoded.net/licenses/bsd_license
     PyStatsLabel *m = [[PyStatsLabel alloc] initWithModel:aPyRef];
     self = [self initWithModel:m view:aLabelView];
     [m bindCallback:createCallback(@"StatsLabelView", self)];
-    [m connect];
     [m release];
     return self;
-}
-
-- (void)dealloc
-{
-    [[self model] disconnect];
-    [model release];
-    [view release];
-    [super dealloc];
 }
 
 - (PyStatsLabel *)model

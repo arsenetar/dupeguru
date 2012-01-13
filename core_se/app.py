@@ -17,10 +17,6 @@ class DupeGuru(DupeGuruBase):
     NAME = __appname__
     METADATA_TO_READ = ['size', 'mtime']
     
-    def __init__(self, view, appdata):
-        DupeGuruBase.__init__(self, view, appdata)
-        self.result_table = ResultTable(self)
-    
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size
         mtime = dupe.mtime
@@ -66,4 +62,7 @@ class DupeGuru(DupeGuruBase):
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
+    
+    def _create_result_table(self):
+        return ResultTable(self)
     
