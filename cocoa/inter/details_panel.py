@@ -1,9 +1,9 @@
-from cocoa.inter2 import PyGUIObject, GUIObjectView
+from cocoa.inter2 import PyGUIObject2, GUIObjectView
 
 class DetailsPanelView(GUIObjectView):
     pass
 
-class PyDetailsPanel(PyGUIObject):
+class PyDetailsPanel(PyGUIObject2):
     def numberOfRows(self) -> int:
         return self.model.row_count()
     

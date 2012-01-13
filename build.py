@@ -179,19 +179,21 @@ def build_cocoa_bridging_interfaces():
     import objp.p2o
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
-    from cocoa.inter2 import PyColumns2, ColumnsView
+    from cocoa.inter2 import (PyGUIObject2, PyColumns2, ColumnsView, PyOutline2, OutlineView,
+        PySelectableList2, SelectableListView)
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
     from inter.extra_fairware_reminder import PyExtraFairwareReminder, ExtraFairwareReminderView
     from inter.prioritize_dialog import PyPrioritizeDialog, PrioritizeDialogView
     from inter.prioritize_list import PyPrioritizeList, PrioritizeListView
     from inter.stats_label import PyStatsLabel, StatsLabelView
-    allclasses = [PyColumns2, PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder,
-        PyPrioritizeDialog, PyPrioritizeList, PyStatsLabel]
+    allclasses = [PyGUIObject2, PyColumns2, PyOutline2, PySelectableList2, PyDetailsPanel,
+        PyDirectoryOutline, PyExtraFairwareReminder, PyPrioritizeDialog, PyPrioritizeList,
+        PyStatsLabel]
     for class_ in allclasses:
-        objp.o2p.generate_objc_code(class_, 'cocoa/autogen')
-    allclasses = [ColumnsView, DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView,
-        PrioritizeDialogView, PrioritizeListView, StatsLabelView]
+        objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
+    allclasses = [ColumnsView, OutlineView, SelectableListView, DetailsPanelView, DirectoryOutlineView,
+        ExtraFairwareReminderView, PrioritizeDialogView, PrioritizeListView, StatsLabelView]
     for class_ in allclasses:
         clsspec = objp.o2p.spec_from_python_class(class_)
         clsname = class_.__name__

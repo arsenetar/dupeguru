@@ -21,8 +21,7 @@ http://www.hardcoded.net/licenses/bsd_license
     
     PyPrioritizeDialog *py;
     HSPopUpList2 *categoryPopUp;
-    // XXX Just to make it work temporarily, fix this asap (support to be HSSelectableList)
-    PrioritizeList *criteriaList;
+    HSSelectableList2 *criteriaList;
     PrioritizeList *prioritizationList;
 }
 - (id)init;

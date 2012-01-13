@@ -12,5 +12,5 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface PrioritizeList : HSSelectableList2 {}
 - (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView;
-- (PyPrioritizeList *)py;
+- (PyPrioritizeList *)model;
 @end

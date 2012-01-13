@@ -4,7 +4,5 @@ class PrioritizeListView(SelectableListView):
     pass
 
 class PyPrioritizeList(PySelectableList2):
-    FOLLOW_PROTOCOLS = ['PySelectableList2']
-    
     def moveIndexes_toIndex_(self, indexes: list, dest_index: int):
         self.model.move_indexes(indexes, dest_index)

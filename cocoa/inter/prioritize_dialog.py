@@ -1,10 +1,10 @@
 from objp.util import pyref
-from cocoa.inter2 import PyGUIObject, GUIObjectView
+from cocoa.inter2 import PyGUIObject2, GUIObjectView
 
 class PrioritizeDialogView(GUIObjectView):
     pass
 
-class PyPrioritizeDialog(PyGUIObject):
+class PyPrioritizeDialog(PyGUIObject2):
     def categoryList(self) -> pyref:
         return self.model.category_list
     

@@ -13,16 +13,16 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation PrioritizeList
 - (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView
 {
-    PyPrioritizeList *model = [[PyPrioritizeList alloc] initWithModel:aPyRef];
-    self = [super initWithPy:model tableView:aTableView];
-    [model bindCallback:createCallback(@"PrioritizeListView", self)];
-    [model release];
+    PyPrioritizeList *m = [[PyPrioritizeList alloc] initWithModel:aPyRef];
+    self = [super initWithModel:m tableView:aTableView];
+    [m bindCallback:createCallback(@"PrioritizeListView", self)];
+    [m release];
     return self;
 }
 
-- (PyPrioritizeList *)py
+- (PyPrioritizeList *)model
 {
-    return (PyPrioritizeList *)py;
+    return (PyPrioritizeList *)model;
 }
 
 - (void)setView:(NSTableView *)aTableView
@@ -54,7 +54,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSPasteboard* pboard = [info draggingPasteboard];
     NSData* rowData = [pboard dataForType:DGPrioritizeIndexPasteboardType];
     NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-    [[self py] moveIndexes:[Utils indexSet2Array:rowIndexes] toIndex:row];
+    [[self model] moveIndexes:[Utils indexSet2Array:rowIndexes] toIndex:row];
     return YES;
 }
 @end
