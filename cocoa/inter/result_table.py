@@ -1,53 +1,49 @@
-from cocoa.inter import signature, PyTable
+from objp.util import dontwrap
+from cocoa.inter2 import PyTable2, TableView
 
-class PyResultTable(PyTable):
-    @signature('c@:')
-    def powerMarkerMode(self):
-        return self.py.power_marker
+class ResultTableView(TableView):
+    def invalidateMarkings(self): pass
+
+class PyResultTable(PyTable2):
+    def powerMarkerMode(self) -> bool:
+        return self.model.power_marker
     
-    @signature('v@:c')
-    def setPowerMarkerMode_(self, value):
-        self.py.power_marker = value
+    def setPowerMarkerMode_(self, value: bool):
+        self.model.power_marker = value
     
-    @signature('c@:')
-    def deltaValuesMode(self):
-        return self.py.delta_values
+    def deltaValuesMode(self) -> bool:
+        return self.model.delta_values
     
-    @signature('v@:c')
-    def setDeltaValuesMode_(self, value):
-        self.py.delta_values = value
+    def setDeltaValuesMode_(self, value: bool):
+        self.model.delta_values = value
     
-    def deltaColumns(self):
-        return list(self.py.DELTA_COLUMNS)
+    def deltaColumns(self) -> list:
+        return list(self.model.DELTA_COLUMNS)
     
-    @signature('@@:i@')
-    def valueForRow_column_(self, row_index, column):
-        return self.py.get_row_value(row_index, column)
+    def valueForRow_column_(self, row_index: int, column: str) -> object:
+        return self.model.get_row_value(row_index, column)
     
-    @signature('c@:@')
-    def renameSelected_(self, newname):
-        return self.py.rename_selected(newname)
+    def renameSelected_(self, newname: str) -> bool:
+        return self.model.rename_selected(newname)
     
-    @signature('v@:@c')
-    def sortBy_ascending_(self, key, asc):
-        self.py.sort(key, asc)
+    def sortBy_ascending_(self, key: str, asc: bool):
+        self.model.sort(key, asc)
     
     def markSelected(self):
-        self.py.app.toggle_selected_mark_state()
+        self.model.app.toggle_selected_mark_state()
     
     def removeSelected(self):
-        self.py.app.remove_selected()
+        self.model.app.remove_selected()
     
-    @signature('i@:')
-    def selectedDupeCount(self):
-        return self.py.selected_dupe_count
+    def selectedDupeCount(self) -> int:
+        return self.model.selected_dupe_count
     
-    @signature('@@:i')
-    def pathAtIndex_(self, index):
-        row = self.py[index]
+    def pathAtIndex_(self, index: int) -> str:
+        row = self.model[index]
         return str(row._dupe.path)
     
     # python --> cocoa
+    @dontwrap
     def invalidate_markings(self):
-        self.cocoa.invalidateMarkings()
+        self.callback.invalidateMarkings()
     

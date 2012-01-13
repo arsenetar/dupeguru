@@ -8,15 +8,15 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-#import "HSTable.h"
+#import "HSTable2.h"
 #import "PyResultTable.h"
 
-@interface ResultTable : HSTable <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
+@interface ResultTable : HSTable2 <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 {
     NSSet *_deltaColumns;
 }
-- (id)initWithPy:(id)aPy view:(NSTableView *)aTableView;
-- (PyResultTable *)py;
+- (id)initWithView:(NSTableView *)aTableView;
+- (PyResultTable *)model;
 - (BOOL)powerMarkerMode;
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode;
 - (BOOL)deltaValuesMode;

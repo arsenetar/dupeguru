@@ -12,30 +12,33 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 #import "HSQuicklook.h"
 
-@interface HSTable (private)
+@interface HSTable2 (private)
 - (void)setPySelection;
 - (void)setViewSelection;
 @end
 
 @implementation ResultTable
-- (id)initWithPy:(id)aPy view:(NSTableView *)aTableView
+- (id)initWithView:(NSTableView *)aTableView;
 {
-    self = [super initWithPy:aPy view:aTableView];
-    _deltaColumns = [[NSSet setWithArray:[[self py] deltaColumns]] retain];
-    [self connect];
+    PyResultTable *m = [[PyResultTable alloc] initWithModel:findHackishModel(@"result_table")];
+    self = [super initWithModel:m tableView:aTableView];
+    [m bindCallback:createCallback(@"ResultTableView", self)];
+    [m release];
+    _deltaColumns = [[NSSet setWithArray:[[self model] deltaColumns]] retain];
+    [model connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [self disconnect];
+    [model disconnect];
     [_deltaColumns release];
     [super dealloc];
 }
 
-- (PyResultTable *)py
+- (PyResultTable *)model
 {
-    return (PyResultTable *)py;
+    return (PyResultTable *)model;
 }
 
 /* Private */
@@ -61,27 +64,27 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Public */
 - (BOOL)powerMarkerMode
 {
-    return [[self py] powerMarkerMode];
+    return [[self model] powerMarkerMode];
 }
 
 - (void)setPowerMarkerMode:(BOOL)aPowerMarkerMode
 {
-    [[self py] setPowerMarkerMode:aPowerMarkerMode];
+    [[self model] setPowerMarkerMode:aPowerMarkerMode];
 }
 
 - (BOOL)deltaValuesMode
 {
-    return [[self py] deltaValuesMode];
+    return [[self model] deltaValuesMode];
 }
 
 - (void)setDeltaValuesMode:(BOOL)aDeltaValuesMode
 {
-    [[self py] setDeltaValuesMode:aDeltaValuesMode];
+    [[self model] setDeltaValuesMode:aDeltaValuesMode];
 }
 
 - (NSInteger)selectedDupeCount
 {
-    return [[self py] selectedDupeCount];
+    return [[self model] selectedDupeCount];
 }
 
 - (void)removeSelected
@@ -93,7 +96,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *msg = [NSString stringWithFormat:msgFmt,selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [[self py] removeSelected];
+    [[self model] removeSelected];
 }
 
 /* Datasource */
@@ -101,27 +104,27 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     NSString *identifier = [column identifier];
     if ([identifier isEqual:@"marked"]) {
-        return [[self py] valueForColumn:@"marked" row:row];
+        return [[self model] valueForColumn:@"marked" row:row];
     }
-    return [[self py] valueForRow:row column:identifier];
+    return [[self model] valueForRow:row column:identifier];
 }
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
     NSString *identifier = [column identifier];
     if ([identifier isEqual:@"marked"]) {
-        [[self py] setValue:object forColumn:identifier row:row];
+        [[self model] setValue:object forColumn:identifier row:row];
     }
     else if ([identifier isEqual:@"name"]) {
-        NSString *oldName = [[self py] valueForRow:row column:identifier];
+        NSString *oldName = [[self model] valueForRow:row column:identifier];
         NSString *newName = object;
         if (![newName isEqual:oldName]) {
-            BOOL renamed = [[self py] renameSelected:newName];
+            BOOL renamed = [[self model] renameSelected:newName];
             if (!renamed) {
                 [Dialogs showMessage:[NSString stringWithFormat:TR(@"The name '%@' already exists."), newName]];
             }
             else {
-                [tableView setNeedsDisplay:YES];
+                [[self view] setNeedsDisplay:YES];
             }
         }
     }
@@ -130,16 +133,16 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Delegate */
 - (void)tableView:(NSTableView *)aTableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
-    if ([[tableView sortDescriptors] count] < 1)
+    if ([[[self view] sortDescriptors] count] < 1)
         return;
-    NSSortDescriptor *sd = [[tableView sortDescriptors] objectAtIndex:0];
-    [[self py] sortBy:[sd key] ascending:[sd ascending]];
+    NSSortDescriptor *sd = [[[self view] sortDescriptors] objectAtIndex:0];
+    [[self model] sortBy:[sd key] ascending:[sd ascending]];
 }
 
 - (void)tableView:(NSTableView *)aTableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
-    BOOL isSelected = [tableView isRowSelected:row];
-    BOOL isMarkable = n2b([[self py] valueForColumn:@"markable" row:row]);
+    BOOL isSelected = [[self view] isRowSelected:row];
+    BOOL isMarkable = n2b([[self model] valueForColumn:@"markable" row:row]);
     if ([[column identifier] isEqual:@"marked"]) {
         [cell setEnabled:isMarkable];
         // Low-tech solution, for indentation, but it works...
@@ -173,21 +176,21 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (BOOL)tableViewHadSpacePressed:(NSTableView *)tableView
 {
-    [[self py] markSelected];
+    [[self model] markSelected];
     return YES;
 }
 
 /* Quicklook */
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
-    return [[[self py] selectedRows] count];
+    return [[[self model] selectedRows] count];
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index
 {
-    NSArray *selectedRows = [[self py] selectedRows];
+    NSArray *selectedRows = [[self model] selectedRows];
     NSInteger absIndex = n2i([selectedRows objectAtIndex:index]);
-    NSString *path = [[self py] pathAtIndex:absIndex];
+    NSString *path = [[self model] pathAtIndex:absIndex];
     return [[HSQLPreviewItem alloc] initWithUrl:[NSURL fileURLWithPath:path] title:path];
 }
 
@@ -204,6 +207,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Python --> Cocoa */
 - (void)invalidateMarkings
 {
-    [tableView setNeedsDisplay:YES];
+    [[self view] setNeedsDisplay:YES];
 }
 @end

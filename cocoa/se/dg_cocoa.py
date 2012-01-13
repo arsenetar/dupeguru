@@ -8,7 +8,7 @@ from hscommon.trans import install_gettext_trans_under_cocoa
 install_gettext_trans_under_cocoa()
 
 from cocoa.inter import signature
-from cocoa.inter2 import PySelectableList2
+from cocoa.inter2 import PySelectableList2, PyColumns2
 
 from core.scanner import ScanType
 

@@ -24,7 +24,7 @@ http://www.hardcoded.net/licenses/bsd_license
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
-    table = [[ResultTable alloc] initWithPy:[py resultTable] view:matches];
+    table = [[ResultTable alloc] initWithView:matches];
     statsLabel = [[StatsLabel alloc] initWithLabelView:stats];
     problemDialog = [[ProblemDialog alloc] initWithPy:py];
     [self initResultColumns];
@@ -58,7 +58,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Helpers */
 - (void)fillColumnsMenu
 {
-    NSArray *menuItems = [[[table columns] py] menuItems];
+    NSArray *menuItems = [[[table columns] model] menuItems];
     for (NSInteger i=0; i < [menuItems count]; i++) {
         NSArray *pair = [menuItems objectAtIndex:i];
         NSString *display = [pair objectAtIndex:0];
@@ -283,7 +283,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)resetColumnsToDefault:(id)sender
 {
-    [[[table columns] py] resetToDefaults];
+    [[[table columns] model] resetToDefaults];
 }
 
 - (IBAction)revealSelected:(id)sender
@@ -321,7 +321,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)toggleColumn:(id)sender
 {
     NSMenuItem *mi = sender;
-    BOOL checked = [[[table columns] py] toggleMenuItem:[mi tag]];
+    BOOL checked = [[[table columns] model] toggleMenuItem:[mi tag]];
     [mi setState:checked ? NSOnState : NSOffState];
 }
 
@@ -406,7 +406,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
     }
     else if ([lastAction isEqualTo:jobScan]) {
-        NSInteger rowCount = [[table py] numberOfRows];
+        NSInteger rowCount = [[table model] numberOfRows];
         if (rowCount == 0) {
             [Dialogs showMessage:TR(@"No duplicates found.")];
         }
