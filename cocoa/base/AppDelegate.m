@@ -26,6 +26,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)awakeFromNib
 {
     model = [[PyDupeGuru alloc] init];
+    [model bindCallback:createCallback(@"DupeGuruView", self)];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     /* Because the pref pane is lazily loaded, we have to manually do the update check if the
        preference is set.
