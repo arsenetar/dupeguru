@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2010-02-06
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
@@ -8,12 +7,12 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.notify import Listener
+from hscommon.gui.base import NoopGUI
 
 class GUIObject(Listener):
-    def __init__(self, view, app):
+    def __init__(self, app):
         Listener.__init__(self, app)
-        if view is not None:
-            self.view = view
+        self.view = NoopGUI()
         self.app = app
     
     def directories_changed(self):

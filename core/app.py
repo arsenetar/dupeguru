@@ -106,12 +106,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
-        self.details_panel = DetailsPanel(None, self)
-        self.directory_tree = DirectoryTree(None, self)
-        self.extra_fairware_reminder = ExtraFairwareReminder(None, self)
-        self.prioritize_dialog = PrioritizeDialog(None, self)
-        self.problem_dialog = ProblemDialog(None, self)
-        self.stats_label = StatsLabel(None, self)
+        self.details_panel = DetailsPanel(self)
+        self.directory_tree = DirectoryTree(self)
+        self.extra_fairware_reminder = ExtraFairwareReminder(self)
+        self.prioritize_dialog = PrioritizeDialog(self)
+        self.problem_dialog = ProblemDialog(self)
+        self.stats_label = StatsLabel(self)
         # subclasses must create self.result_table
     
     #--- Virtual
