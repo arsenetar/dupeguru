@@ -10,11 +10,11 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation PrioritizeDialog
-- (id)initWithPyRef:(PyObject *)aPyRef
+- (id)initWithApp:(PyDupeGuru *)aApp
 {
     self = [super initWithWindowNibName:@"PrioritizeDialog"];
     [self window];
-    model = [[PyPrioritizeDialog alloc] initWithModel:aPyRef];
+    model = [[PyPrioritizeDialog alloc] initWithApp:[aApp pyRef]];
     [model bindCallback:createCallback(@"PrioritizeDialogView", self)];
     categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self model] categoryList] popupView:categoryPopUpView];
     criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self model] criteriaList] tableView:criteriaTableView];

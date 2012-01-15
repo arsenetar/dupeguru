@@ -27,7 +27,6 @@ from . import directories, results, scanner, export, fs
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.extra_fairware_reminder import ExtraFairwareReminder
-from .gui.prioritize_dialog import PrioritizeDialog
 from .gui.problem_dialog import ProblemDialog
 from .gui.stats_label import StatsLabel
 
@@ -109,7 +108,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.details_panel = DetailsPanel(self)
         self.directory_tree = DirectoryTree(self)
         self.extra_fairware_reminder = ExtraFairwareReminder(self)
-        self.prioritize_dialog = PrioritizeDialog(self)
         self.problem_dialog = ProblemDialog(self)
         self.stats_label = StatsLabel(self)
         self.result_table = self._create_result_table()

@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSPopUpList.h"
 #import "HSSelectableList.h"
 #import "PrioritizeList.h"
+#import "PyDupeGuru.h"
 
 @interface PrioritizeDialog : NSWindowController
 {
@@ -23,7 +24,7 @@ http://www.hardcoded.net/licenses/bsd_license
     HSSelectableList *criteriaList;
     PrioritizeList *prioritizationList;
 }
-- (id)initWithPyRef:(PyObject *)aPyRef;
+- (id)initWithApp:(PyDupeGuru *)aApp;
 - (PyPrioritizeDialog *)model;
 
 - (IBAction)addSelected:(id)sender;

@@ -43,9 +43,6 @@ class PyDupeGuruBase(PyFairware):
     def extraFairwareReminder(self) -> pyref:
         return self.model.extra_fairware_reminder
     
-    def prioritizeDialog(self) -> pyref:
-        return self.model.prioritize_dialog
-    
     def problemDialog(self) -> pyref:
         return self.model.problem_dialog
     
