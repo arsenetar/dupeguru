@@ -30,6 +30,8 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
+    parser.add_option('--cocoamod', action='store_true', dest='cocoamod',
+        help="Build only Cocoa modules")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
         help="Generate .pot files from source code.")
     parser.add_option('--mergepot', action='store_true', dest='mergepot',
@@ -165,11 +167,11 @@ def build_mergepot():
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
 
-def build_cocoa_ext(extname, dest, source_files, extra_frameworks=()):
+def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
     extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
     for extra in extra_frameworks:
         extra_link_args += ['-framework', extra]
-    ext = Extension(extname, source_files, extra_link_args=extra_link_args)
+    ext = Extension(extname, source_files, extra_link_args=extra_link_args, include_dirs=extra_includes)
     setup(script_args=['build_ext', '--inplace'], ext_modules=[ext])
     fn = extname + '.so'
     assert op.exists(fn)
@@ -180,7 +182,9 @@ def build_cocoa_proxy_module():
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
-        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'], ['AppKit'])
+        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m', 'cocoalib/HSErrorReportWindow.m'],
+        ['AppKit', 'CoreServices'],
+        ['cocoalib'])
 
 def build_cocoa_bridging_interfaces():
     print("Building Cocoa Bridging Interfaces")
@@ -273,6 +277,9 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
+    elif options.cocoamod:
+        build_cocoa_proxy_module()
+        build_cocoa_bridging_interfaces()
     else:
         build_normal(edition, ui, dev)
 

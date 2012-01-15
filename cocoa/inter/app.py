@@ -25,6 +25,7 @@ class DupeGuruView(FairwareView):
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
     
+    @dontwrap
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook()
