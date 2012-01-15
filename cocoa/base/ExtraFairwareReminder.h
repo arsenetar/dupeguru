@@ -8,6 +8,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "PyExtraFairwareReminder.h"
+#import "PyDupeGuru.h"
 
 @interface ExtraFairwareReminder : NSWindowController
 {
@@ -16,7 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
     PyExtraFairwareReminder *model;
     NSTimer *timer;
 }
-- (id)initWithPyRef:(PyObject *)aPyRef;
+- (id)initWithApp:(PyDupeGuru *)aApp;
 - (PyExtraFairwareReminder *)model;
 
 - (void)start;

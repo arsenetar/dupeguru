@@ -1,5 +1,6 @@
-from objp.util import dontwrap
+from objp.util import pyref, dontwrap
 from cocoa.inter import PyGUIObject
+from core.gui.extra_fairware_reminder import ExtraFairwareReminder
 
 class ExtraFairwareReminderView:
     def startTimer(self): pass
@@ -8,6 +9,10 @@ class ExtraFairwareReminderView:
     def enableButton(self): pass
 
 class PyExtraFairwareReminder(PyGUIObject):
+    def __init__(self, app: pyref):
+        model = ExtraFairwareReminder(app.model)
+        PyGUIObject.__init__(self, model)
+    
     def start(self):
         self.model.start()
     

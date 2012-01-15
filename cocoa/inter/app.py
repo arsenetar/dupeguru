@@ -40,9 +40,6 @@ class PyDupeGuruBase(PyFairware):
     def directoryTree(self) -> pyref:
         return self.model.directory_tree
     
-    def extraFairwareReminder(self) -> pyref:
-        return self.model.extra_fairware_reminder
-    
     def problemDialog(self) -> pyref:
         return self.model.problem_dialog
     

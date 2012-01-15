@@ -211,7 +211,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* model --> view */
 - (void)showExtraFairwareReminder
 {
-    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithPyRef:[model extraFairwareReminder]];
+    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithApp:model];
     [dialog start];
     [NSApp runModalForWindow:[dialog window]];
     [dialog close];

@@ -10,12 +10,12 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation ExtraFairwareReminder
-- (id)initWithPyRef:(PyObject *)aPyRef
+- (id)initWithApp:(PyDupeGuru *)aApp
 {
     self = [super initWithWindowNibName:@"ExtraFairwareReminder"];
     [self window];
     [continueButton setEnabled:NO];
-    model = [[PyExtraFairwareReminder alloc] initWithModel:aPyRef];
+    model = [[PyExtraFairwareReminder alloc] initWithApp:[aApp pyRef]];
     [model bindCallback:createCallback(@"ExtraFairwareReminderView", self)];
     return self;
 }
