@@ -100,7 +100,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)removeSelectedDirectory:(id)sender
 {
     [[self window] makeKeyAndOrderFront:nil];
-    [[outline py] removeSelectedDirectory];
+    [[outline model] removeSelectedDirectory];
     [self refreshRemoveButtonText];
 }
 

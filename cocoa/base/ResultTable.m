@@ -20,10 +20,7 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation ResultTable
 - (id)initWithPyRef:(PyObject *)aPyRef view:(NSTableView *)aTableView
 {
-    PyResultTable *m = [[PyResultTable alloc] initWithModel:aPyRef];
-    self = [super initWithModel:m tableView:aTableView];
-    [m bindCallback:createCallback(@"ResultTableView", self)];
-    [m release];
+    self = [super initWithPyRef:aPyRef wrapperClass:[PyResultTable class] callbackClassName:@"ResultTableView" view:aTableView];
     _deltaColumns = [[NSSet setWithArray:[[self model] deltaColumns]] retain];
     return self;
 }

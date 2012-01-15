@@ -15,5 +15,5 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface DirectoryOutline : HSOutline {}
 - (id)initWithPyRef:(PyObject *)aPyRef outlineView:(HSOutlineView *)aOutlineView;
-- (PyDirectoryOutline *)py;
+- (PyDirectoryOutline *)model;
 @end;

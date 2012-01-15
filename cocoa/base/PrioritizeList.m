@@ -13,10 +13,8 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation PrioritizeList
 - (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView
 {
-    PyPrioritizeList *m = [[PyPrioritizeList alloc] initWithModel:aPyRef];
-    self = [super initWithModel:m tableView:aTableView];
-    [m bindCallback:createCallback(@"PrioritizeListView", self)];
-    [m release];
+    self = [super initWithPyRef:aPyRef wrapperClass:[PyPrioritizeList class]
+        callbackClassName:@"PrioritizeListView" view:aTableView];
     return self;
 }
 

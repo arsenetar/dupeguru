@@ -12,11 +12,8 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation StatsLabel
 - (id)initWithPyRef:(PyObject *)aPyRef view:(NSTextField *)aLabelView
 {
-    PyStatsLabel *m = [[PyStatsLabel alloc] initWithModel:aPyRef];
-    self = [self initWithModel:m view:aLabelView];
-    [m bindCallback:createCallback(@"StatsLabelView", self)];
-    [m release];
-    return self;
+    return [super initWithPyRef:aPyRef wrapperClass:[PyStatsLabel class]
+        callbackClassName:@"StatsLabelView" view:aLabelView];
 }
 
 - (PyStatsLabel *)model

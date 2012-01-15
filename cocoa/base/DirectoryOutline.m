@@ -7,22 +7,19 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DirectoryOutline.h"
-#import "Utils.h"
 
 @implementation DirectoryOutline
 - (id)initWithPyRef:(PyObject *)aPyRef outlineView:(HSOutlineView *)aOutlineView
 {
-    PyDirectoryOutline *model = [[PyDirectoryOutline alloc] initWithModel:aPyRef];
-    self = [super initWithPy:model view:aOutlineView];
-    [model bindCallback:createCallback(@"DirectoryOutlineView", self)];
-    [model release];
-    [outlineView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+    self = [super initWithPyRef:aPyRef wrapperClass:[PyDirectoryOutline class]
+        callbackClassName:@"DirectoryOutlineView" view:aOutlineView];
+    [[self view] registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
     return self;
 }
 
-- (PyDirectoryOutline *)py
+- (PyDirectoryOutline *)model
 {
-    return (PyDirectoryOutline *)py;
+    return (PyDirectoryOutline *)model;
 }
 
 /* Delegate */
@@ -50,7 +47,7 @@ http://www.hardcoded.net/licenses/bsd_license
         if (!(sourceDragMask & NSDragOperationLink))
             return NO;
         for (NSString *foldername in foldernames) {
-            [[self py] addDirectory:foldername];
+            [[self model] addDirectory:foldername];
         }
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:foldernames forKey:@"foldernames"];
         [[NSNotificationCenter defaultCenter] postNotificationName:DGAddedFoldersNotification
@@ -64,7 +61,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([cell isKindOfClass:[NSTextFieldCell class]]) {
         NSTextFieldCell *textCell = cell;
         NSIndexPath *path = item;
-        BOOL selected = [path isEqualTo:[outlineView selectedPath]];
+        BOOL selected = [path isEqualTo:[[self view] selectedPath]];
         if (selected) {
             [textCell setTextColor:[NSColor blackColor]];
             return;
