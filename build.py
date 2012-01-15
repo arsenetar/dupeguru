@@ -212,12 +212,9 @@ def build_cocoa_bridging_interfaces():
     allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
         DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView, PrioritizeDialogView,
         PrioritizeListView, ResultTableView, StatsLabelView, DupeGuruView]
-    for class_ in allclasses:
-        clsspec = objp.o2p.spec_from_python_class(class_)
-        clsname = class_.__name__
-        extmodule_path = op.join('build', clsname + '.m')
-        objp.p2o.generate_python_proxy_code_from_clsspec(clsspec, extmodule_path)
-        build_cocoa_ext(clsname, 'cocoa/inter', [extmodule_path, 'build/ObjP.m'])
+    clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
+    objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
+    build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])
 
 def build_pe_modules(ui):
     print("Building PE Modules")
