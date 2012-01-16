@@ -1,5 +1,4 @@
 -r requirements.txt
-pyobjc-core>=2.3
-pluginbuilder>=1.0.0
+objp>=1.0.0
+pluginbuilder>=1.1.0
 appscript>=1.0.0
-objp>=0.1.0
