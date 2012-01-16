@@ -30,7 +30,6 @@ class DupeGuru(DupeGuruBase):
         DupeGuruBase.__init__(self, view, appdata)
         self.scanner = ScannerPE()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
-        self.result_table = ResultTable(self)
     
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size
@@ -91,3 +90,5 @@ class DupeGuru(DupeGuruBase):
     def _prioritization_categories(self):
         return prioritize.all_categories()
     
+    def _create_result_table(self):
+        return ResultTable(self)

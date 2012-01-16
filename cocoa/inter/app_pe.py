@@ -19,10 +19,12 @@ from hscommon.path import Path
 from hscommon.trans import tr
 from cocoa import proxy
 
+from core.scanner import ScanType
 from core import directories
 from core_pe import _block_osx
 from core_pe.photo import Photo as PhotoBase
 from core_pe.app import DupeGuru as DupeGuruBase
+from .app import PyDupeGuruBase
 
 IPHOTO_PATH = Path('iPhoto Library')
 
@@ -194,3 +196,32 @@ class DupeGuruPE(DupeGuruBase):
                 return
         DupeGuruBase.start_scanning(self)
     
+class PyDupeGuru(PyDupeGuruBase):
+    def __init__(self):
+        self._init(DupeGuruPE)
+    
+    def clearPictureCache(self):
+        self.model.scanner.clear_picture_cache()
+    
+    #---Information    
+    def getSelectedDupePath(self) -> str:
+        return str(self.model.selected_dupe_path())
+    
+    def getSelectedDupeRefPath(self) -> str:
+        return str(self.model.selected_dupe_ref_path())
+    
+    #---Properties
+    def setScanType_(self, scan_type: int):
+        try:
+            self.model.scanner.scan_type = [
+                ScanType.FuzzyBlock,
+                ScanType.ExifTimestamp,
+            ][scan_type]
+        except IndexError:
+            pass
+    
+    def setMatchScaled_(self, match_scaled: bool):
+        self.model.scanner.match_scaled = match_scaled
+    
+    def setMinMatchPercentage_(self, percentage: int):
+        self.model.scanner.threshold = percentage

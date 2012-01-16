@@ -64,10 +64,8 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanelPE alloc] initWithPy:py];
+    return [[DetailsPanelPE alloc] initWithApp:model];
 }
-
-- (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 
 //Delegate
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

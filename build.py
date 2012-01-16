@@ -12,6 +12,7 @@ import os.path as op
 from optparse import OptionParser
 import shutil
 import json
+import importlib
 
 from setuptools import setup, Extension
 
@@ -41,8 +42,8 @@ def parse_args():
 
 def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
-    build_cocoa_bridging_interfaces()
-    print("Building dg_cocoa.plugin")
+    build_cocoa_bridging_interfaces(edition)
+    print("Building the cocoa layer")
     from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
     copy_embeddable_python_dylib('build')
     if not op.exists('build/PythonHeaders'):
@@ -186,7 +187,7 @@ def build_cocoa_proxy_module():
         ['AppKit', 'CoreServices'],
         ['cocoalib'])
 
-def build_cocoa_bridging_interfaces():
+def build_cocoa_bridging_interfaces(edition):
     print("Building Cocoa Bridging Interfaces")
     import objp.o2p
     import objp.p2o
@@ -203,10 +204,11 @@ def build_cocoa_bridging_interfaces():
     from inter.result_table import PyResultTable, ResultTableView
     from inter.stats_label import PyStatsLabel, StatsLabelView
     from inter.app import PyDupeGuruBase, DupeGuruView
-    from inter.app_se import PyDupeGuru
+    appmod = importlib.import_module('inter.app_{}'.format(edition))
     allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyFairware,
         PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder, PyPrioritizeDialog,
-        PyPrioritizeList, PyProblemDialog, PyResultTable, PyStatsLabel, PyDupeGuruBase, PyDupeGuru]
+        PyPrioritizeList, PyProblemDialog, PyResultTable, PyStatsLabel, PyDupeGuruBase,
+        appmod.PyDupeGuru]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
     allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
@@ -276,7 +278,7 @@ def main():
         build_mergepot()
     elif options.cocoamod:
         build_cocoa_proxy_module()
-        build_cocoa_bridging_interfaces()
+        build_cocoa_bridging_interfaces(edition)
     else:
         build_normal(edition, ui, dev)
 

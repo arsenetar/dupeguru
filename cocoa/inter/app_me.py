@@ -15,8 +15,9 @@ from cocoa import as_fetch
 from hscommon.trans import tr
 
 from core.app import JobType
+from core.scanner import ScanType
 from core_me.app import DupeGuru as DupeGuruBase
-from .app import JOBID2TITLE
+from .app import JOBID2TITLE, PyDupeGuruBase
 
 JobType.RemoveDeadTracks = 'jobRemoveDeadTracks'
 JobType.ScanDeadTracks = 'jobScanDeadTracks'
@@ -67,3 +68,45 @@ class DupeGuruME(DupeGuruBase):
         
         self.view.start_job(JobType.ScanDeadTracks, do)
     
+class PyDupeGuru(PyDupeGuruBase):
+    def __init__(self):
+        self._init(DupeGuruME)
+    
+    def removeDeadTracks(self):
+        self.model.remove_dead_tracks()
+    
+    def scanDeadTracks(self):
+        self.model.scan_dead_tracks()
+    
+    #---Information
+    def deadTrackCount(self) -> int:
+        return len(self.model.dead_tracks)
+    
+    #---Properties
+    def setMinMatchPercentage_(self, percentage: int):
+        self.model.scanner.min_match_percentage = percentage
+    
+    def setScanType_(self, scan_type: int):
+        try:
+            self.model.scanner.scan_type = [
+                ScanType.Filename,
+                ScanType.Fields,
+                ScanType.FieldsNoOrder,
+                ScanType.Tag,
+                ScanType.Contents,
+                ScanType.ContentsAudio,
+            ][scan_type]
+        except IndexError:
+            pass
+    
+    def setWordWeighting_(self, words_are_weighted: bool):
+        self.model.scanner.word_weighting = words_are_weighted
+    
+    def setMatchSimilarWords_(self, match_similar_words: bool):
+        self.model.scanner.match_similar_words = match_similar_words
+    
+    def enable_scanForTag_(self, enable: bool, scan_tag: str):
+        if enable:
+            self.model.scanner.scanned_tags.add(scan_tag)
+        else:
+            self.model.scanner.scanned_tags.discard(scan_tag)

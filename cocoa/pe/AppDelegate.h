@@ -8,8 +8,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "../base/AppDelegate.h"
-#import "PyDupeGuru.h"
 
 @interface AppDelegate : AppDelegateBase {}
-- (PyDupeGuru *)py;
 @end

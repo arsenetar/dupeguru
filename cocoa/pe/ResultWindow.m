@@ -40,12 +40,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setScanOptions
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    PyDupeGuru *_py = (PyDupeGuru *)py;
-    [_py setScanType:[ud objectForKey:@"scanType"]];
-    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
-    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
-    [_py setMatchScaled:[ud objectForKey:@"matchScaled"]];
+    [model setScanType:n2i([ud objectForKey:@"scanType"])];
+    [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
+    [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [model setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [model setMatchScaled:n2b([ud objectForKey:@"matchScaled"])];
 }
 
 /* Actions */
@@ -54,6 +53,6 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *msg = TR(@"Do you really want to remove all your cached picture analysis?");
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [(PyDupeGuru *)py clearPictureCache];
+    [model clearPictureCache];
 }
 @end

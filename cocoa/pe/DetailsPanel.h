@@ -8,6 +8,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "../base/DetailsPanel.h"
+#import "PyDupeGuru.h"
 
 @interface DetailsPanelPE : DetailsPanel
 {
@@ -16,9 +17,11 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSImageView *refImage;
     IBOutlet NSProgressIndicator *refProgressIndicator;
     
-    PyApp *pyApp;
+    PyDupeGuru *pyApp;
     BOOL _needsRefresh;
     NSString *_dupePath;
     NSString *_refPath;
 }
+
+- (id)initWithApp:(PyDupeGuru *)aApp;
 @end
