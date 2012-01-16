@@ -6,13 +6,11 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from core.gui.stats_label import StatsLabel as StatsLabelModel
-
-class StatsLabel(object):
-    def __init__(self, app, view):
+class StatsLabel:
+    def __init__(self, model, view):
         self.view = view
-        self.model = StatsLabelModel(self, app.model)
-        self.model.connect()
+        self.model = model
+        self.model.view = self
     
     def refresh(self):
         self.view.setText(self.model.display)

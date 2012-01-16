@@ -87,7 +87,7 @@ class DupeGuru(QObject):
         self._progress = Progress(self.resultWindow)
         self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
         self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
-        self.problemDialog = ProblemDialog(parent=self.resultWindow, app=self)
+        self.problemDialog = ProblemDialog(parent=self.resultWindow, model=self.model.problem_dialog)
         self.preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.resultWindow, self)
         self.about_box = AboutBox(self.resultWindow, self)
                 

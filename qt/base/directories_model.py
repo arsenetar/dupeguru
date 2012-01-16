@@ -15,8 +15,6 @@ from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, Q
 from hscommon.trans import trget
 from qtlib.tree_model import RefNode, TreeModel
 
-from core.gui.directory_tree import DirectoryTree
-
 tr = trget('ui')
 
 HEADERS = [tr("Name"), tr("State")]
@@ -60,12 +58,12 @@ class DirectoriesDelegate(QStyledItemDelegate):
     
 
 class DirectoriesModel(TreeModel):
-    def __init__(self, app, view):
+    def __init__(self, model, view):
         TreeModel.__init__(self)
-        self.model = DirectoryTree(self, app.model)
+        self.model = model
+        self.model.view = self
         self.view = view
         self.view.setModel(self)
-        self.model.connect()
         
         self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
     

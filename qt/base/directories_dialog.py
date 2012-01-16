@@ -28,7 +28,7 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
         self._setupUi()
-        self.directoriesModel = DirectoriesModel(self.app, view=self.treeView)
+        self.directoriesModel = DirectoriesModel(self.app.model.directory_tree, view=self.treeView)
         self.directoriesDelegate = DirectoriesDelegate()
         self.treeView.setItemDelegate(self.directoriesDelegate)
         self._setupColumns()

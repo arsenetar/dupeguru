@@ -30,7 +30,7 @@ class ResultWindow(QMainWindow):
         self._last_filter = None
         self._setupUi()
         self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)
-        self.stats = StatsLabel(app, self.statusLabel)
+        self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
         self._update_column_actions_status()
         
         self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
