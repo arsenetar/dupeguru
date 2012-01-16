@@ -260,12 +260,7 @@ class ResultWindow(QMainWindow):
         self.app.show_details()
     
     def exportTriggered(self):
-        h = self.resultsView.horizontalHeader()
-        column_ids = []
-        for i in range(len(self.app.model.COLUMNS)):
-            if not h.isSectionHidden(i):
-                column_ids.append(str(i))
-        exported_path = self.app.model.export_to_xhtml(column_ids)
+        exported_path = self.app.model.export_to_xhtml()
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
     
