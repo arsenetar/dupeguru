@@ -9,10 +9,13 @@ http://www.hardcoded.net/licenses/bsd_license
 #import <Cocoa/Cocoa.h>
 #import <Python.h>
 #import <wchar.h>
+#import <locale.h>
 
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    /* We have to set the locate to UTF8 for mbstowcs() to correctly convert non-ascii chars in paths */
+    setlocale(LC_ALL, "en_US.UTF-8");
     NSString *respath = [[NSBundle mainBundle] resourcePath];
     NSString *mainpy = [respath stringByAppendingPathComponent:@"dg_cocoa.py"];
     wchar_t wPythonPath[PATH_MAX+1];
