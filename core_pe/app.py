@@ -72,7 +72,7 @@ class DupeGuru(DupeGuruBase):
         r = cmp_value(dupe, key)
         if delta and (key in self.result_table.DELTA_COLUMNS):
             ref_value = cmp_value(get_group().ref, key)
-            if key == 4: # dimensions
+            if key == 'dimensions':
                 r = get_delta_dimensions(r, ref_value)
             else:
                 r -= ref_value
