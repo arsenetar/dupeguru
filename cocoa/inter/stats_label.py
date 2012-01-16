@@ -1,9 +1,9 @@
-from cocoa.inter import PyGUIObject
+from cocoa.inter import PyGUIObject, GUIObjectView
 
-from core.gui.stats_label import StatsLabel
+class StatsLabelView(GUIObjectView):
+    pass
 
 class PyStatsLabel(PyGUIObject):
-    py_class = StatsLabel
     
-    def display(self):
-        return self.py.display
+    def display(self) -> str:
+        return self.model.display

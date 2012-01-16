@@ -22,7 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSButton *removeButton;
     
     AppDelegateBase *_app;
-    PyDupeGuruBase *_py;
+    PyDupeGuru *model;
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
     BOOL _alwaysShowPopUp;

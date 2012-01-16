@@ -11,9 +11,16 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 
 @implementation PrioritizeList
-- (PyPrioritizeList *)py
+- (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView
 {
-    return (PyPrioritizeList *)py;
+    self = [super initWithPyRef:aPyRef wrapperClass:[PyPrioritizeList class]
+        callbackClassName:@"PrioritizeListView" view:aTableView];
+    return self;
+}
+
+- (PyPrioritizeList *)model
+{
+    return (PyPrioritizeList *)model;
 }
 
 - (void)setView:(NSTableView *)aTableView
@@ -45,7 +52,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSPasteboard* pboard = [info draggingPasteboard];
     NSData* rowData = [pboard dataForType:DGPrioritizeIndexPasteboardType];
     NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-    [[self py] moveIndexes:[Utils indexSet2Array:rowIndexes] toIndex:row];
+    [[self model] moveIndexes:[Utils indexSet2Array:rowIndexes] toIndex:row];
     return YES;
 }
 @end

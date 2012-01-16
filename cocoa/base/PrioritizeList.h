@@ -11,5 +11,6 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyPrioritizeList.h"
 
 @interface PrioritizeList : HSSelectableList {}
-- (PyPrioritizeList *)py;
+- (id)initWithPyRef:(PyObject *)aPyRef tableView:(NSTableView *)aTableView;
+- (PyPrioritizeList *)model;
 @end

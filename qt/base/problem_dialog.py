@@ -11,21 +11,18 @@ from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacer
     QLabel, QTableView, QAbstractItemView, QApplication)
 
 from hscommon.trans import trget
-from core.gui.problem_dialog import ProblemDialog as ProblemDialogModel
 from .problem_table import ProblemTable
 
 tr = trget('ui')
 
 class ProblemDialog(QDialog):
-    def __init__(self, parent, app):
+    def __init__(self, parent, model):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         QDialog.__init__(self, parent, flags)
-        self.app = app
         self._setupUi()
-        self.model = ProblemDialogModel(view=self, app=app.model)
-        self.table = ProblemTable(problem_dialog=self, view=self.tableView)
-        self.model.connect()
-        self.table.model.connect()
+        self.model = model
+        self.model.view = self
+        self.table = ProblemTable(self.model.problem_table, view=self.tableView)
         
         self.revealButton.clicked.connect(self.model.reveal_selected_dupe)
         self.closeButton.clicked.connect(self.accept)

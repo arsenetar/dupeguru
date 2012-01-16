@@ -74,8 +74,6 @@ http://www.hardcoded.net/licenses/bsd_license
     return [[DirectoryPanelME alloc] initWithParentApp:self];
 }
 
-- (PyDupeGuru *)py { return (PyDupeGuru *)py; }
-
 //Delegate
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

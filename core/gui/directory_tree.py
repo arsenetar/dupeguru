@@ -59,8 +59,8 @@ class DirectoryTree(GUIObject, Tree):
     # refresh()
     # refresh_states() # when only states label need to be refreshed
     #
-    def __init__(self, view, app):
-        GUIObject.__init__(self, view, app)
+    def __init__(self, app):
+        GUIObject.__init__(self, app)
         Tree.__init__(self)
     
     def connect(self):

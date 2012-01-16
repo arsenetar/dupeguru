@@ -11,25 +11,25 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 #import "PyDupeGuru.h"
 #import "Consts.h"
+#import "ProgressController.h"
 
 @implementation ResultWindow
 /* Override */
 - (void)setScanOptions
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    PyDupeGuru *_py = (PyDupeGuru *)py;
-    [_py setScanType:[ud objectForKey:@"scanType"]];
-    [_py enable:[ud objectForKey:@"scanTagTrack"] scanForTag:@"track"];
-    [_py enable:[ud objectForKey:@"scanTagArtist"] scanForTag:@"artist"];
-    [_py enable:[ud objectForKey:@"scanTagAlbum"] scanForTag:@"album"];
-    [_py enable:[ud objectForKey:@"scanTagTitle"] scanForTag:@"title"];
-    [_py enable:[ud objectForKey:@"scanTagGenre"] scanForTag:@"genre"];
-    [_py enable:[ud objectForKey:@"scanTagYear"] scanForTag:@"year"];
-    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
-    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
-    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
-    [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
+    [model setScanType:n2i([ud objectForKey:@"scanType"])];
+    [model enable:n2b([ud objectForKey:@"scanTagTrack"]) scanForTag:@"track"];
+    [model enable:n2b([ud objectForKey:@"scanTagArtist"]) scanForTag:@"artist"];
+    [model enable:n2b([ud objectForKey:@"scanTagAlbum"]) scanForTag:@"album"];
+    [model enable:n2b([ud objectForKey:@"scanTagTitle"]) scanForTag:@"title"];
+    [model enable:n2b([ud objectForKey:@"scanTagGenre"]) scanForTag:@"genre"];
+    [model enable:n2b([ud objectForKey:@"scanTagYear"]) scanForTag:@"year"];
+    [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
+    [model setWordWeighting:n2b([ud objectForKey:@"wordWeighting"])];
+    [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [model setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [model setMatchSimilarWords:n2b([ud objectForKey:@"matchSimilarWords"])];
 }
 
 - (void)initResultColumns
@@ -72,7 +72,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Actions */
 - (IBAction)removeDeadTracks:(id)sender
 {
-    [(PyDupeGuru *)py scanDeadTracks];
+    [model scanDeadTracks];
 }
 
 /* Notifications */
@@ -81,11 +81,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [super jobCompleted:aNotification];
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobScanDeadTracks]) {
-        NSInteger deadTrackCount = [(PyDupeGuru *)py deadTrackCount];
+        NSInteger deadTrackCount = [model deadTrackCount];
         if (deadTrackCount > 0) {
             NSString *msg = TR(@"Your iTunes Library contains %d dead tracks ready to be removed. Continue?");
             if ([Dialogs askYesNo:[NSString stringWithFormat:msg,deadTrackCount]] == NSAlertFirstButtonReturn)
-                [(PyDupeGuru *)py removeDeadTracks];
+                [model removeDeadTracks];
         }
         else {
             [Dialogs showMessage:TR(@"You have no dead tracks in your iTunes Library")];

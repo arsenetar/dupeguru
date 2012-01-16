@@ -11,5 +11,4 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyDupeGuru.h"
 
 @interface AppDelegate : AppDelegateBase {}
-- (PyDupeGuru *)py;
 @end

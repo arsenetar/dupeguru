@@ -7,25 +7,25 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSWindowController.h"
-#import "PyApp.h"
 #import "PyPrioritizeDialog.h"
 #import "HSPopUpList.h"
 #import "HSSelectableList.h"
 #import "PrioritizeList.h"
+#import "PyDupeGuru.h"
 
-@interface PrioritizeDialog : HSWindowController
+@interface PrioritizeDialog : NSWindowController
 {
     IBOutlet NSPopUpButton *categoryPopUpView;
     IBOutlet NSTableView *criteriaTableView;
     IBOutlet NSTableView *prioritizationTableView;
     
+    PyPrioritizeDialog *model;
     HSPopUpList *categoryPopUp;
     HSSelectableList *criteriaList;
     PrioritizeList *prioritizationList;
 }
-- (id)initWithPy:(PyApp *)aPy;
-- (PyPrioritizeDialog *)py;
+- (id)initWithApp:(PyDupeGuru *)aApp;
+- (PyPrioritizeDialog *)model;
 
 - (IBAction)addSelected:(id)sender;
 - (IBAction)removeSelected:(id)sender;

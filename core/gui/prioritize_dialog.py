@@ -40,7 +40,7 @@ class PrioritizationList(GUISelectableList):
         self._refresh_contents()
 
 class PrioritizeDialog:
-    def __init__(self, view, app):
+    def __init__(self, app):
         self.app = app
         self.categories = [cat(app.results) for cat in app._prioritization_categories()]
         self.category_list = CriterionCategoryList(self)

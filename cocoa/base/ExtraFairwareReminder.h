@@ -8,17 +8,17 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import <Cocoa/Cocoa.h>
 #import "PyExtraFairwareReminder.h"
-#import "HSWindowController.h"
-#import "PyApp.h"
+#import "PyDupeGuru.h"
 
-@interface ExtraFairwareReminder : HSWindowController
+@interface ExtraFairwareReminder : NSWindowController
 {
     IBOutlet NSButton *continueButton;
     
+    PyExtraFairwareReminder *model;
     NSTimer *timer;
 }
-- (id)initWithPy:(PyApp *)aPy;
-- (PyExtraFairwareReminder *)py;
+- (id)initWithApp:(PyDupeGuru *)aApp;
+- (PyExtraFairwareReminder *)model;
 
 - (void)start;
 - (void)updateButton;

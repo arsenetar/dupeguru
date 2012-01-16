@@ -17,7 +17,6 @@ class ResultsModel(Table):
     def __init__(self, app, view):
         model = app.model.result_table
         Table.__init__(self, model, view)
-        self.model.connect()
         
         app.prefsChanged.connect(self.appPrefsChanged)
         app.willSavePrefs.connect(self.appWillSavePrefs)

@@ -19,14 +19,14 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     self = [super initWithWindowNibName:@"ResultWindow"];
     app = aApp;
-    py = [app py];
-    [[self window] setTitle:fmt(@"%@ Results", [py appName])];
+    model = [app model];
+    [[self window] setTitle:fmt(@"%@ Results", [model appName])];
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
-    table = [[ResultTable alloc] initWithPy:[py resultTable] view:matches];
-    statsLabel = [[StatsLabel alloc] initWithPyParent:py labelView:stats];
-    problemDialog = [[ProblemDialog alloc] initWithPy:py];
+    table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];
+    statsLabel = [[StatsLabel alloc] initWithPyRef:[model statsLabel] view:stats];
+    problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
     [self initResultColumns];
     [self fillColumnsMenu];
     [matches setTarget:self];
@@ -58,7 +58,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Helpers */
 - (void)fillColumnsMenu
 {
-    NSArray *menuItems = [[[table columns] py] menuItems];
+    NSArray *menuItems = [[[table columns] model] menuItems];
     for (NSInteger i=0; i < [menuItems count]; i++) {
         NSArray *pair = [menuItems objectAtIndex:i];
         NSString *display = [pair objectAtIndex:0];
@@ -76,7 +76,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
 {
-    NSInteger mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [model getMarkCount];
     if (!mark_count) {
         return;
     }
@@ -88,12 +88,12 @@ http://www.hardcoded.net/licenses/bsd_license
         return;
     }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+    [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
     if (hardlinkDeleted) {
-        [py hardlinkMarked];
+        [model hardlinkMarked];
     }
     else {
-        [py deleteMarked];
+        [model deleteMarked];
     }
 }
 
@@ -107,13 +107,13 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
-    NSInteger i = n2i([py getIgnoreListCount]);
+    NSInteger i = [model getIgnoreListCount];
     if (!i)
         return;
     NSString *msg = [NSString stringWithFormat:TR(@"Do you really want to remove all %d items from the ignore list?"),i];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [py clearIgnoreList];
+    [model clearIgnoreList];
 }
 
 - (IBAction)changeOptions:(id)sender
@@ -132,7 +132,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)copyMarked:(id)sender
 {
-    NSInteger mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [model getMarkCount];
     if (!mark_count)
         return;
     NSOpenPanel *op = [NSOpenPanel openPanel];
@@ -144,7 +144,7 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [py copyOrMove:b2n(YES) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
+        [model copyOrMove:YES markedTo:directory recreatePath:n2b([ud objectForKey:@"recreatePathType"])];
     }
 }
 
@@ -160,15 +160,15 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)exportToXHTML:(id)sender
 {
-    NSString *exported = [py exportToXHTML];
+    NSString *exported = [model exportToXHTML];
     [[NSWorkspace sharedWorkspace] openFile:exported];
 }
 
 - (IBAction)filter:(id)sender
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [py setEscapeFilterRegexp:!n2b([ud objectForKey:@"useRegexpFilter"])];
-    [py applyFilter:[filterField stringValue]];
+    [model setEscapeFilterRegexp:!n2b([ud objectForKey:@"useRegexpFilter"])];
+    [model applyFilter:[filterField stringValue]];
 }
 
 - (IBAction)ignoreSelected:(id)sender
@@ -179,7 +179,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSString *msg = [NSString stringWithFormat:TR(@"All selected %d matches are going to be ignored in all subsequent scans. Continue?"),selectedDupeCount];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [py addSelectedToIgnoreList];
+    [model addSelectedToIgnoreList];
 }
 
 - (IBAction)invokeCustomCommand:(id)sender
@@ -187,7 +187,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *cmd = [ud stringForKey:@"CustomCommand"];
     if ((cmd != nil) && ([cmd length] > 0)) {
-        [py invokeCommand:cmd];
+        [model invokeCommand:cmd];
     }
     else {
         [Dialogs showMessage:TR(@"You have no custom command set up. Set it up in your preferences.")];
@@ -196,27 +196,27 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)markAll:(id)sender
 {
-    [py markAll];
+    [model markAll];
 }
 
 - (IBAction)markInvert:(id)sender
 {
-    [py markInvert];
+    [model markInvert];
 }
 
 - (IBAction)markNone:(id)sender
 {
-    [py markNone];
+    [model markNone];
 }
 
 - (IBAction)markSelected:(id)sender
 {
-    [py toggleSelectedMark];
+    [model toggleSelectedMark];
 }
 
 - (IBAction)moveMarked:(id)sender
 {
-    NSInteger mark_count = [[py getMarkCount] intValue];
+    NSInteger mark_count = [model getMarkCount];
     if (!mark_count)
         return;
     NSOpenPanel *op = [NSOpenPanel openPanel];
@@ -228,8 +228,8 @@ http://www.hardcoded.net/licenses/bsd_license
     if ([op runModal] == NSOKButton) {
         NSString *directory = [[op filenames] objectAtIndex:0];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [py setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
-        [py copyOrMove:b2n(NO) markedTo:directory recreatePath:[ud objectForKey:@"recreatePathType"]];
+        [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+        [model copyOrMove:NO markedTo:directory recreatePath:n2b([ud objectForKey:@"recreatePathType"])];
     }
 }
 
@@ -239,23 +239,23 @@ http://www.hardcoded.net/licenses/bsd_license
         return;
     }
     [matches selectRowIndexes:[NSIndexSet indexSetWithIndex:[matches clickedRow]] byExtendingSelection:NO];
-    [py openSelected];
+    [model openSelected];
 }
 
 - (IBAction)openSelected:(id)sender
 {
-    [py openSelected];
+    [model openSelected];
 }
 
 - (IBAction)removeMarked:(id)sender
 {
-    int mark_count = [[py getMarkCount] intValue];
+    int mark_count = [model getMarkCount];
     if (!mark_count)
         return;
     NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count];
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
         return;
-    [py removeMarked];
+    [model removeMarked];
 }
 
 - (IBAction)removeSelected:(id)sender
@@ -272,10 +272,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)reprioritizeResults:(id)sender
 {
-    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithPy:py];
+    PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithApp:model];
     NSInteger result = [NSApp runModalForWindow:[dlg window]];
     if (result == NSRunStoppedResponse) {
-        [[dlg py] performReprioritization];
+        [[dlg model] performReprioritization];
     }
     [dlg release];
     [[self window] makeKeyAndOrderFront:nil];
@@ -283,12 +283,12 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)resetColumnsToDefault:(id)sender
 {
-    [[[table columns] py] resetToDefaults];
+    [[[table columns] model] resetToDefaults];
 }
 
 - (IBAction)revealSelected:(id)sender
 {
-    [py revealSelected];
+    [model revealSelected];
 }
 
 - (IBAction)saveResults:(id)sender
@@ -298,30 +298,30 @@ http://www.hardcoded.net/licenses/bsd_license
     [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
     [sp setTitle:TR(@"Select a file to save your results to")];
     if ([sp runModal] == NSOKButton) {
-        [py saveResultsAs:[sp filename]];
+        [model saveResultsAs:[sp filename]];
         [[app recentResults] addFile:[sp filename]];
     }
 }
 
 - (IBAction)startDuplicateScan:(id)sender
 {
-    if ([py resultsAreModified]) {
+    if ([model resultsAreModified]) {
         if ([Dialogs askYesNo:TR(@"You have unsaved results, do you really want to continue?")] == NSAlertSecondButtonReturn) // NO
             return;
     }
     [self setScanOptions];
-    [py doScan];
+    [model doScan];
 }
 
 - (IBAction)switchSelected:(id)sender
 {
-    [py makeSelectedReference];
+    [model makeSelectedReference];
 }
 
 - (IBAction)toggleColumn:(id)sender
 {
     NSMenuItem *mi = sender;
-    BOOL checked = [[[table columns] py] toggleMenuItem:[mi tag]];
+    BOOL checked = [[[table columns] model] toggleMenuItem:[mi tag]];
     [mi setState:checked ? NSOnState : NSOffState];
 }
 
@@ -382,7 +382,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     id lastAction = [[ProgressController mainProgressController] jobId];
     if ([lastAction isEqualTo:jobCopy]) {
-        if ([py scanWasProblematic]) {
+        if ([model scanWasProblematic]) {
             [problemDialog showWindow:self];
         }
         else {
@@ -390,7 +390,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
     }
     else if ([lastAction isEqualTo:jobMove]) {
-        if ([py scanWasProblematic]) {
+        if ([model scanWasProblematic]) {
             [problemDialog showWindow:self];
         }
         else {
@@ -398,7 +398,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
     }
     else if ([lastAction isEqualTo:jobDelete]) {
-        if ([py scanWasProblematic]) {
+        if ([model scanWasProblematic]) {
             [problemDialog showWindow:self];
         }
         else {
@@ -406,7 +406,7 @@ http://www.hardcoded.net/licenses/bsd_license
         }
     }
     else if ([lastAction isEqualTo:jobScan]) {
-        NSInteger rowCount = [[table py] numberOfRows];
+        NSInteger rowCount = [[table model] numberOfRows];
         if (rowCount == 0) {
             [Dialogs showMessage:TR(@"No duplicates found.")];
         }

@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1938</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSMenu</string>
@@ -18,7 +18,10 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="248533267">
 			<object class="NSCustomObject" id="77446904">
 				<string key="NSClassName">NSApplication</string>
@@ -668,31 +671,12 @@
 			<object class="NSCustomObject" id="91622651">
 				<string key="NSClassName">AppDelegate</string>
 			</object>
-			<object class="NSCustomObject" id="875360857">
-				<string key="NSClassName">PyDupeGuru</string>
-			</object>
 			<object class="NSCustomObject" id="23220930">
 				<string key="NSClassName">SUUpdater</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performMiniaturize:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="1033736835"/>
-					</object>
-					<int key="connectionID">37</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">arrangeInFront:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="941358624"/>
-					</object>
-					<int key="connectionID">39</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">terminate:</string>
@@ -726,14 +710,6 @@
 					<int key="connectionID">153</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performZoom:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="781972485"/>
-					</object>
-					<int key="connectionID">198</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="77446904"/>
@@ -742,20 +718,28 @@
 					<int key="connectionID">207</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="133452984"/>
-						<reference key="destination" ref="91622651"/>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">performMiniaturize:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="1033736835"/>
 					</object>
-					<int key="connectionID">208</int>
+					<int key="connectionID">37</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">py</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="875360857"/>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">arrangeInFront:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="941358624"/>
 					</object>
-					<int key="connectionID">614</int>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">performZoom:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="781972485"/>
+					</object>
+					<int key="connectionID">198</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -764,14 +748,6 @@
 						<reference key="destination" ref="762484626"/>
 					</object>
 					<int key="connectionID">925</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">checkForUpdates:</string>
-						<reference key="source" ref="23220930"/>
-						<reference key="destination" ref="688262014"/>
-					</object>
-					<int key="connectionID">951</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -796,46 +772,6 @@
 						<reference key="destination" ref="652691785"/>
 					</object>
 					<int key="connectionID">1005</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">openWebsite:</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="440547877"/>
-					</object>
-					<int key="connectionID">1024</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="23220930"/>
-						<reference key="destination" ref="91622651"/>
-					</object>
-					<int key="connectionID">1175</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showAboutBox:</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="436112936"/>
-					</object>
-					<int key="connectionID">1232</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">openHelp:</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="914881560"/>
-					</object>
-					<int key="connectionID">1233</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">recentResultsMenu</string>
-						<reference key="source" ref="91622651"/>
-						<reference key="destination" ref="782784943"/>
-					</object>
-					<int key="connectionID">1242</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1014,6 +950,70 @@
 					<int key="connectionID">1266</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">reprioritizeResults:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="200019883"/>
+					</object>
+					<int key="connectionID">1278</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeMarked:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="733607971"/>
+					</object>
+					<int key="connectionID">1279</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleQuicklookPanel:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="343354529"/>
+					</object>
+					<int key="connectionID">1282</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="133452984"/>
+						<reference key="destination" ref="91622651"/>
+					</object>
+					<int key="connectionID">208</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openWebsite:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="440547877"/>
+					</object>
+					<int key="connectionID">1024</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showAboutBox:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="436112936"/>
+					</object>
+					<int key="connectionID">1232</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openHelp:</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="914881560"/>
+					</object>
+					<int key="connectionID">1233</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">recentResultsMenu</string>
+						<reference key="source" ref="91622651"/>
+						<reference key="destination" ref="782784943"/>
+					</object>
+					<int key="connectionID">1242</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">columnsMenu</string>
 						<reference key="source" ref="91622651"/>
@@ -1063,27 +1063,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">reprioritizeResults:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="200019883"/>
+						<string key="label">checkForUpdates:</string>
+						<reference key="source" ref="23220930"/>
+						<reference key="destination" ref="688262014"/>
 					</object>
-					<int key="connectionID">1278</int>
+					<int key="connectionID">951</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">removeMarked:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="733607971"/>
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="23220930"/>
+						<reference key="destination" ref="91622651"/>
 					</object>
-					<int key="connectionID">1279</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleQuicklookPanel:</string>
-						<reference key="source" ref="83466988"/>
-						<reference key="destination" ref="343354529"/>
-					</object>
-					<int key="connectionID">1282</int>
+					<int key="connectionID">1175</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1509,12 +1501,6 @@
 						<string key="objectName">AppDelegate</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">613</int>
-						<reference key="object" ref="875360857"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">PyDupeGuru</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">949</int>
 						<reference key="object" ref="23220930"/>
 						<reference key="parent" ref="0"/>
@@ -1654,7 +1640,6 @@
 				<string key="603.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="604.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="605.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="613.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="618.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="619.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="707.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1773,6 +1758,25 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">HSOutlineView</string>
+					<string key="superclassName">NSOutlineView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">copy:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">copy:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">copy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HSOutlineView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">HSTableView</string>
 					<string key="superclassName">NSTableView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -1781,16 +1785,8 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">HSWindowController</string>
-					<string key="superclassName">NSWindowController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/HSWindowController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">PrioritizeDialog</string>
-					<string key="superclassName">HSWindowController</string>
+					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="addSelected:">id</string>
 						<string key="cancel:">id</string>
@@ -1841,7 +1837,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">ProblemDialog</string>
-					<string key="superclassName">HSWindowController</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">revealSelected:</string>
 						<string key="NS.object.0">id</string>
@@ -1867,38 +1863,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ProblemDialog.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyApp</string>
-					<string key="superclassName">PyFairware</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyApp.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyDupeGuru</string>
-					<string key="superclassName">PyDupeGuruBase</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyDupeGuru.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyDupeGuruBase</string>
-					<string key="superclassName">PyApp</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyDupeGuruBase.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyFairware</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyFairware.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2127,7 +2091,7 @@
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<integer value="1050" key="NS.object.0"/>
+			<real value="1060" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

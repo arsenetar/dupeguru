@@ -25,7 +25,7 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSSearchField *filterField;
     
     AppDelegateBase *app;
-    PyDupeGuruBase *py;
+    PyDupeGuru *model;
     NSMenu *columnsMenu;
     ResultTable *table;
     StatsLabel *statsLabel;

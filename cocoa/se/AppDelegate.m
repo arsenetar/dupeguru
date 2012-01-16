@@ -62,6 +62,4 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     return [[ResultWindow alloc] initWithParentApp:self];
 }
-
-- (PyDupeGuru *)py { return (PyDupeGuru *)py; }
 @end

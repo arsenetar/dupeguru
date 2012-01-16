@@ -1,17 +1,18 @@
-from cocoa.inter import PyOutline
+from objp.util import dontwrap
+from cocoa.inter import PyOutline, GUIObjectView
 
-from core.gui.directory_tree import DirectoryTree
+class DirectoryOutlineView(GUIObjectView):
+    pass
 
 class PyDirectoryOutline(PyOutline):
-    py_class = DirectoryTree
-    
-    def addDirectory_(self, path):
-        self.py.add_directory(path)
+    def addDirectory_(self, path: str):
+        self.model.add_directory(path)
     
     def removeSelectedDirectory(self):
-        self.py.remove_selected()
+        self.model.remove_selected()
     
     # python --> cocoa
+    @dontwrap
     def refresh_states(self):
         # Under cocoa, both refresh() and refresh_states() do the same thing.
-        self.cocoa.refresh()
+        self.callback.refresh()

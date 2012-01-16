@@ -13,9 +13,11 @@ from hscommon import io
 from hscommon.path import Path
 from cocoa import proxy
 
+from core.scanner import ScanType
 from core import fs
 from core.directories import Directories as DirectoriesBase, DirectoryState
 from core_se.app import DupeGuru as DupeGuruBase
+from .app import PyDupeGuruBase
 
 def is_bundle(str_path):
     uti = proxy.getUTI_(str_path)
@@ -69,4 +71,32 @@ class DupeGuru(DupeGuruBase):
         appdata = op.join(appdata, 'dupeGuru')
         DupeGuruBase.__init__(self, view, appdata)
         self.directories = Directories()
+    
+
+class PyDupeGuru(PyDupeGuruBase):
+    def __init__(self):
+        self._init(DupeGuru)
+    
+    #---Properties
+    def setMinMatchPercentage_(self, percentage: int):
+        self.model.scanner.min_match_percentage = int(percentage)
+    
+    def setScanType_(self, scan_type: int):
+        try:
+            self.model.scanner.scan_type = [
+                ScanType.Filename,
+                ScanType.Contents,
+                ScanType.Folders,
+            ][scan_type]
+        except IndexError:
+            pass
+    
+    def setWordWeighting_(self, words_are_weighted: bool):
+        self.model.scanner.word_weighting = words_are_weighted
+    
+    def setMatchSimilarWords_(self, match_similar_words: bool):
+        self.model.scanner.match_similar_words = match_similar_words
+    
+    def setSizeThreshold_(self, size_threshold: int):
+        self.model.scanner.size_threshold = size_threshold
     

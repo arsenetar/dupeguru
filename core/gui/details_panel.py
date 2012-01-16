@@ -9,8 +9,8 @@
 from .base import GUIObject
 
 class DetailsPanel(GUIObject):
-    def __init__(self, view, app):
-        GUIObject.__init__(self, view, app)
+    def __init__(self, app):
+        GUIObject.__init__(self, app)
         self._table = []
     
     def connect(self):

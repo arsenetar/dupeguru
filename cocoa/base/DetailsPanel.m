@@ -10,23 +10,24 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation DetailsPanel
-- (id)initWithPy:(PyApp *)aPy
+- (id)initWithPyRef:(PyObject *)aPyRef
 {
-    self = [super initWithNibName:@"DetailsPanel" pyClassName:@"PyDetailsPanel" pyParent:aPy];
+    self = [super initWithWindowNibName:@"DetailsPanel"];
     [self window]; //So the detailsTable is initialized.
-    [self connect];
+    model = [[PyDetailsPanel alloc] initWithModel:aPyRef];
+    [model bindCallback:createCallback(@"DetailsPanelView", self)];
     return self;
 }
 
 - (void)dealloc
 {
-    [self disconnect];
+    [model release];
     [super dealloc];
 }
 
-- (PyDetailsPanel *)py
+- (PyDetailsPanel *)model
 {
-    return (PyDetailsPanel *)py;
+    return (PyDetailsPanel *)model;
 }
 
 - (void)refreshDetails
@@ -53,12 +54,12 @@ http://www.hardcoded.net/licenses/bsd_license
 /* NSTableView Delegate */
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [[self py] numberOfRows];
+    return [[self model] numberOfRows];
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
-    return [[self py] valueForColumn:[column identifier] row:row];
+    return [[self model] valueForColumn:[column identifier] row:row];
 }
 
 /* Python --> Cocoa */

@@ -16,11 +16,11 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface AppDelegateBase : NSObject
 {
-    IBOutlet PyDupeGuruBase *py;
     IBOutlet NSMenu *recentResultsMenu;
     IBOutlet NSMenu *actionsMenu;
     IBOutlet NSMenu *columnsMenu;
     
+    PyDupeGuru *model;
     ResultWindowBase *_resultWindow;
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
@@ -30,7 +30,7 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Virtual */
-- (PyDupeGuruBase *)py;
+- (PyDupeGuru *)model;
 - (ResultWindowBase *)createResultWindow;
 - (DirectoryPanel *)createDirectoryPanel;
 - (DetailsPanel *)createDetailsPanel;

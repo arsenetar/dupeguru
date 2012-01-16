@@ -10,28 +10,21 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 
 @implementation ProblemDialog
-- (id)initWithPy:(PyApp *)aPy
+- (id)initWithPyRef:(PyObject *)aPyRef
 {
-    self = [super initWithNibName:@"ProblemDialog" pyClassName:@"PyProblemDialog" pyParent:aPy];
+    self = [super initWithWindowNibName:@"ProblemDialog"];
     [self window]; //So the detailsTable is initialized.
-    problemTable = [[HSTable alloc] initWithPyClassName:@"PyProblemTable" pyParent:[self py] view:problemTableView];
+    model = [[PyProblemDialog alloc] initWithModel:aPyRef];
+    problemTable = [[HSTable alloc] initWithPyRef:[model problemTable] tableView:problemTableView];
     [self initializeColumns];
-    [self connect];
-    [problemTable connect];
     return self;
 }
 
 - (void)dealloc
 {
-    [problemTable disconnect];
-    [self disconnect];
     [problemTable release];
+    [model release];
     [super dealloc];
-}
-
-- (PyProblemDialog *)py
-{
-    return (PyProblemDialog *)py;
 }
 
 - (void)initializeColumns
@@ -46,6 +39,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)revealSelected:(id)sender
 {
-    [[self py] revealSelected];
+    [model revealSelected];
 }
 @end

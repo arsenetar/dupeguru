@@ -9,12 +9,15 @@
 from hscommon.notify import Broadcaster
 
 from .base import GUIObject
+from .problem_table import ProblemTable
 
 class ProblemDialog(GUIObject, Broadcaster):
-    def __init__(self, view, app):
-        GUIObject.__init__(self, view, app)
+    def __init__(self, app):
+        GUIObject.__init__(self, app)
         Broadcaster.__init__(self)
         self._selected_dupe = None
+        self.problem_table = ProblemTable(self)
+        self.problem_table.connect()
     
     def reveal_selected_dupe(self):
         if self._selected_dupe is not None:

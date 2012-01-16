@@ -1,31 +1,29 @@
-from cocoa.inter import PyGUIObject, PySelectableList
-
+from objp.util import pyref
+from cocoa.inter import PyGUIObject, GUIObjectView
 from core.gui.prioritize_dialog import PrioritizeDialog
-from .prioritize_list import PyPrioritizeList
+
+class PrioritizeDialogView(GUIObjectView):
+    pass
 
 class PyPrioritizeDialog(PyGUIObject):
-    py_class = PrioritizeDialog
+    def __init__(self, app: pyref):
+        model = PrioritizeDialog(app.model)
+        PyGUIObject.__init__(self, model)
     
-    def categoryList(self):
-        if not hasattr(self, '_categoryList'):
-            self._categoryList = PySelectableList.alloc().initWithPy_(self.py.category_list)
-        return self._categoryList
+    def categoryList(self) -> pyref:
+        return self.model.category_list
     
-    def criteriaList(self):
-        if not hasattr(self, '_criteriaList'):
-            self._criteriaList = PySelectableList.alloc().initWithPy_(self.py.criteria_list)
-        return self._criteriaList
+    def criteriaList(self) -> pyref:
+        return self.model.criteria_list
     
-    def prioritizationList(self):
-        if not hasattr(self, '_prioritizationList'):
-            self._prioritizationList = PyPrioritizeList.alloc().initWithPy_(self.py.prioritization_list)
-        return self._prioritizationList
+    def prioritizationList(self) -> pyref:
+        return self.model.prioritization_list
     
     def addSelected(self):
-        self.py.add_selected()
+        self.model.add_selected()
     
     def removeSelected(self):
-        self.py.remove_selected()
+        self.model.remove_selected()
     
     def performReprioritization(self):
-        self.py.perform_reprioritization()
+        self.model.perform_reprioritization()

@@ -8,7 +8,6 @@
 
 from qtlib.column import Column
 from qtlib.table import Table
-from core.gui.problem_table import ProblemTable as ProblemTableModel
 
 class ProblemTable(Table):
     COLUMNS = [
@@ -16,8 +15,7 @@ class ProblemTable(Table):
         Column('msg', defaultWidth=150),
     ]
     
-    def __init__(self, problem_dialog, view):
-        model = ProblemTableModel(view=self, problem_dialog=problem_dialog.model)
+    def __init__(self, model, view):
         Table.__init__(self, model, view)
         # we have to prevent Return from initiating editing.
         # self.view.editSelected = lambda: None

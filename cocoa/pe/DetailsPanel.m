@@ -14,10 +14,10 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 
 @implementation DetailsPanelPE
-- (id)initWithPy:(PyApp *)aPy
+- (id)initWithApp:(PyDupeGuru *)aApp
 {
-    self = [super initWithPy:aPy];
-    pyApp = aPy;
+    self = [super initWithPyRef:[aApp detailsPanel]];
+    pyApp = aApp;
     _needsRefresh = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageLoaded:) name:ImageLoadedNotification object:self];
     return self;
@@ -42,12 +42,12 @@ http://www.hardcoded.net/licenses/bsd_license
         return;
     [detailsTable reloadData];
     
-    NSString *refPath = [(PyDupeGuru *)pyApp getSelectedDupeRefPath];
+    NSString *refPath = [pyApp getSelectedDupeRefPath];
     if (_refPath != nil)
         [_refPath autorelease];
     _refPath = [refPath retain];
     [NSThread detachNewThreadSelector:@selector(loadImageAsync:) toTarget:self withObject:refPath];
-    NSString *dupePath = [(PyDupeGuru *)pyApp getSelectedDupePath];
+    NSString *dupePath = [pyApp getSelectedDupePath];
     if (_dupePath != nil)
         [_dupePath autorelease];
     _dupePath = [dupePath retain];

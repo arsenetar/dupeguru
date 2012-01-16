@@ -18,13 +18,13 @@ http://www.hardcoded.net/licenses/bsd_license
     self = [super initWithWindowNibName:@"DirectoryPanel"];
     [self window];
     _app = aParentApp;
-    _py = [_app py];
-    [[self window] setTitle:[_py appName]];
+    model = [_app model];
+    [[self window] setTitle:[model appName]];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
     [_recentDirectories setDelegate:self];
-    outline = [[DirectoryOutline alloc] initWithPyParent:_py view:outlineView];
+    outline = [[DirectoryOutline alloc] initWithPyRef:[model directoryTree] outlineView:outlineView];
     [self refreshRemoveButtonText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directorySelectionChanged:)
         name:NSOutlineViewSelectionDidChangeNotification object:outlineView];
@@ -100,14 +100,14 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)removeSelectedDirectory:(id)sender
 {
     [[self window] makeKeyAndOrderFront:nil];
-    [[outline py] removeSelectedDirectory];
+    [[outline model] removeSelectedDirectory];
     [self refreshRemoveButtonText];
 }
 
 /* Public */
 - (void)addDirectory:(NSString *)directory
 {
-    NSInteger r = [[_py addDirectory:directory] intValue];
+    NSInteger r = [model addDirectory:directory];
     if (r) {
         NSString *m = @"";
         if (r == 1) {

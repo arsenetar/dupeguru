@@ -1,25 +1,37 @@
+from objp.util import pyref, dontwrap
 from cocoa.inter import PyGUIObject
-
 from core.gui.extra_fairware_reminder import ExtraFairwareReminder
 
+class ExtraFairwareReminderView:
+    def startTimer(self): pass
+    def stopTimer(self): pass
+    def setButtonText_(self, text: str): pass;
+    def enableButton(self): pass
+
 class PyExtraFairwareReminder(PyGUIObject):
-    py_class = ExtraFairwareReminder
+    def __init__(self, app: pyref):
+        model = ExtraFairwareReminder(app.model)
+        PyGUIObject.__init__(self, model)
     
     def start(self):
-        self.py.start()
+        self.model.start()
     
     def updateButton(self):
-        self.py.update_button()
+        self.model.update_button()
     
     # model --> view
+    @dontwrap
     def start_timer(self):
-        self.cocoa.startTimer()
+        self.callback.startTimer()
     
+    @dontwrap
     def stop_timer(self):
-        self.cocoa.stopTimer()
+        self.callback.stopTimer()
     
+    @dontwrap
     def enable_button(self):
-        self.cocoa.enableButton()
+        self.callback.enableButton()
     
+    @dontwrap
     def set_button_text(self, text):
-        self.cocoa.setButtonText_(text)
+        self.callback.setButtonText_(text)

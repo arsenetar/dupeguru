@@ -6,17 +6,20 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import sys
 import os
 import os.path as op
 from optparse import OptionParser
 import shutil
 import json
+import importlib
 
 from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all)
+    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all,
+    move)
 from hscommon import loc
 
 def parse_args():
@@ -28,6 +31,8 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
+    parser.add_option('--cocoamod', action='store_true', dest='cocoamod',
+        help="Build only Cocoa modules")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
         help="Generate .pot files from source code.")
     parser.add_option('--mergepot', action='store_true', dest='mergepot',
@@ -36,26 +41,35 @@ def parse_args():
     return options
 
 def build_cocoa(edition, dev):
-    from pluginbuilder import build_plugin
     build_cocoa_proxy_module()
-    print("Building dg_cocoa.plugin")
+    build_cocoa_bridging_interfaces(edition)
+    print("Building the cocoa layer")
+    from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
+    copy_embeddable_python_dylib('build')
+    if not op.exists('build/PythonHeaders'):
+        os.symlink(get_python_header_folder(), 'build/PythonHeaders')
+    if not op.exists('build/py'):
+        os.mkdir('build/py')
+    cocoa_project_path = 'cocoa/{0}'.format(edition)
+    shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     specific_packages = {
         'se': ['core_se'],
         'me': ['core_me'],
         'pe': ['core_pe'],
     }[edition]
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
-    copy_packages(tocopy, 'build', create_links=dev)
-    cocoa_project_path = 'cocoa/{0}'.format(edition)
-    shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
-    os.chdir('build')
-    # We have to exclude PyQt4 specifically because it's conditionally imported in hscommon.trans
-    build_plugin('dg_cocoa.py', excludes=['PyQt4'], alias=dev)
-    os.chdir('..')
-    pluginpath = op.join(cocoa_project_path, 'dg_cocoa.plugin')
-    if op.exists(pluginpath):
-        shutil.rmtree(pluginpath)
-    shutil.move('build/dist/dg_cocoa.plugin', pluginpath)
+    if dev:
+        # collect dependencies, then override our own pckages with symlinks
+        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+        copy_packages(tocopy, 'build/py', create_links=True)
+    else:
+        copy_packages(tocopy, 'build')
+        sys.path.insert(0, 'build')
+        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+        del sys.path[0]
+    # Views are not referenced by python code, so they're not found by the collector.
+    copy_all('build/inter/*.so', 'build/py/inter')
+    copy_sysconfig_files_for_embed('build/py')
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
     app_version = get_module_version('core_{}'.format(edition))
@@ -155,19 +169,55 @@ def build_mergepot():
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
 
+def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
+    extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
+    for extra in extra_frameworks:
+        extra_link_args += ['-framework', extra]
+    ext = Extension(extname, source_files, extra_link_args=extra_link_args, include_dirs=extra_includes)
+    setup(script_args=['build_ext', '--inplace'], ext_modules=[ext])
+    fn = extname + '.so'
+    assert op.exists(fn)
+    move(fn, op.join(dest, fn))
+
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
-    exts = [
-        Extension("CocoaProxy", ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m'],
-            extra_link_args=["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "AppKit"]),
-    ]
-    setup(
-        script_args = ['build_ext', '--inplace'],
-        ext_modules = exts,
-    )
-    move_all('CocoaProxy*', 'cocoalib/cocoa')
+    build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
+        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m', 'cocoalib/HSErrorReportWindow.m'],
+        ['AppKit', 'CoreServices'],
+        ['cocoalib'])
+
+def build_cocoa_bridging_interfaces(edition):
+    print("Building Cocoa Bridging Interfaces")
+    import objp.o2p
+    import objp.p2o
+    add_to_pythonpath('cocoa')
+    add_to_pythonpath('cocoalib')
+    from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
+        OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyFairware)
+    from inter.details_panel import PyDetailsPanel, DetailsPanelView
+    from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
+    from inter.extra_fairware_reminder import PyExtraFairwareReminder, ExtraFairwareReminderView
+    from inter.prioritize_dialog import PyPrioritizeDialog, PrioritizeDialogView
+    from inter.prioritize_list import PyPrioritizeList, PrioritizeListView
+    from inter.problem_dialog import PyProblemDialog
+    from inter.result_table import PyResultTable, ResultTableView
+    from inter.stats_label import PyStatsLabel, StatsLabelView
+    from inter.app import PyDupeGuruBase, DupeGuruView
+    appmod = importlib.import_module('inter.app_{}'.format(edition))
+    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyFairware,
+        PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder, PyPrioritizeDialog,
+        PyPrioritizeList, PyProblemDialog, PyResultTable, PyStatsLabel, PyDupeGuruBase,
+        appmod.PyDupeGuru]
+    for class_ in allclasses:
+        objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
+    allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
+        DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView, PrioritizeDialogView,
+        PrioritizeListView, ResultTableView, StatsLabelView, DupeGuruView]
+    clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
+    objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
+    build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])
 
 def build_pe_modules(ui):
     print("Building PE Modules")
@@ -227,6 +277,9 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
+    elif options.cocoamod:
+        build_cocoa_proxy_module()
+        build_cocoa_bridging_interfaces(edition)
     else:
         build_normal(edition, ui, dev)
 

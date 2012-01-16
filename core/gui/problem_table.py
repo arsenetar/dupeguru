@@ -19,11 +19,11 @@ class ProblemTable(GUITable, Listener):
         Column('msg', coltr("Error Message")),
     ]
     
-    def __init__(self, view, problem_dialog):
+    def __init__(self, problem_dialog):
         GUITable.__init__(self)
         Listener.__init__(self, problem_dialog)
         self.columns = Columns(self)
-        self.view = view
+        self.view = None
         self.dialog = problem_dialog
     
     #--- Override

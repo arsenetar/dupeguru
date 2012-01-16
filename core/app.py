@@ -24,6 +24,10 @@ from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_d
 from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
+from .gui.details_panel import DetailsPanel
+from .gui.directory_tree import DirectoryTree
+from .gui.problem_dialog import ProblemDialog
+from .gui.stats_label import StatsLabel
 
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
@@ -100,7 +104,16 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'ignore_hardlink_matches': False,
         }
         self.selected_dupes = []
-        # subclasses must create self.result_table
+        self.details_panel = DetailsPanel(self)
+        self.directory_tree = DirectoryTree(self)
+        self.problem_dialog = ProblemDialog(self)
+        self.stats_label = StatsLabel(self)
+        self.result_table = self._create_result_table()
+        children = [self.result_table, self.directory_tree, self.problem_dialog, self.stats_label,
+            self.details_panel]
+        for child in children:
+            child.connect()
+        # subclasses must create and connect self.result_table
     
     #--- Virtual
     def _get_display_info(self, dupe, group, delta):
@@ -113,6 +126,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         raise NotImplementedError()
     
     def _prioritization_categories(self):
+        raise NotImplementedError()
+    
+    def _create_result_table(self):
         raise NotImplementedError()
     
     #--- Private

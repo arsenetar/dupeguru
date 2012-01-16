@@ -7,19 +7,17 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "HSWindowController.h"
-#import "PyApp.h"
 #import "PyProblemDialog.h"
 #import "HSTable.h"
 
-@interface ProblemDialog : HSWindowController
+@interface ProblemDialog : NSWindowController
 {
     IBOutlet NSTableView *problemTableView;
     
+    PyProblemDialog *model;
     HSTable *problemTable;
 }
-- (id)initWithPy:(PyApp *)aPy;
-- (PyProblemDialog *)py;
+- (id)initWithPyRef:(PyObject *)aPyRef;
 
 - (void)initializeColumns;
 - (IBAction)revealSelected:(id)sender;

@@ -39,15 +39,14 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setScanOptions
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    PyDupeGuru *_py = (PyDupeGuru *)py;
-    [_py setScanType:[ud objectForKey:@"scanType"]];
-    [_py setMinMatchPercentage:[ud objectForKey:@"minMatchPercentage"]];
-    [_py setWordWeighting:[ud objectForKey:@"wordWeighting"]];
-    [_py setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
-    [_py setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
-    [_py setMatchSimilarWords:[ud objectForKey:@"matchSimilarWords"]];
+    [model setScanType:n2b([ud objectForKey:@"scanType"])];
+    [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
+    [model setWordWeighting:n2b([ud objectForKey:@"wordWeighting"])];
+    [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [model setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [model setMatchSimilarWords:n2b([ud objectForKey:@"matchSimilarWords"])];
     int smallFileThreshold = [ud integerForKey:@"smallFileThreshold"]; // In KB
     int sizeThreshold = [ud boolForKey:@"ignoreSmallFiles"] ? smallFileThreshold * 1024 : 0; // The py side wants bytes
-    [_py setSizeThreshold:sizeThreshold];
+    [model setSizeThreshold:sizeThreshold];
 }
 @end
