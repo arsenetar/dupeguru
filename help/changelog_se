@@ -1,3 +1,10 @@
+=== 3.3.2 (2012-01-16)
+
+* Fixed random hard crashes (yeah, again). [Mac OS X]
+* Fixed crash on Export to HTML. [Windows, Linux]
+* Added Armenian localization by Hrant Ohanyan.
+* Added Russian localization by Igor Pavlov.
+
 === 3.3.1 (2011-12-02)
 
 * Fixed a couple of nasty crashes.
