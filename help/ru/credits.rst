@@ -25,9 +25,6 @@
 | **Python, Язык программирования** (`Веб сайт  <http://www.python.org>`__)
 | Самая лучшая 
 
-| **PyObjC, Python-to-Cocoa bridge** (`Веб сайт  <http://pyobjc.sourceforge.net>`__)
-| Используется для Mac OS X версии
-
 | **PyQt, Python-to-Qt bridge** (`Веб сайт  <http://www.riverbankcomputing.co.uk>`__)
 | Используется для версии для Windows
 

@@ -25,9 +25,6 @@
 | **Python, Ծրագրավորման լեզուն** (`Վեբ կայքը <http://www.python.org>`__)
 | Լավագույներից լավագույնը
 
-| **PyObjC, Python-ից Cocoa կամուրջ** (`Վեբ կայքը <http://pyobjc.sourceforge.net>`__)
-| Օգտագործվում է Mac OS X տարբերակի համար
-
 | **PyQt, Python-ից Qt կամուրջ** (`Վեբ կայքը <http://www.riverbankcomputing.co.uk>`__)
 | Օգտագործվում է Windows-ի տարբերակի
 
