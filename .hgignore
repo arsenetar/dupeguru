@@ -28,6 +28,7 @@ cocoa/*/it.lproj/*.xib
 # fine, but we'll eventually only have en.lproj in the repo.
 hy.lproj
 ru.lproj
+uk.lproj
 qt/base/*_rc.py
 help/*/conf.py
 help/*/changelog.rst

@@ -174,6 +174,18 @@
 		CE335AFC14B393EE0000AF1A /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE335AFD14B393EE0000AF1A /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE335B0514B393FB0000AF1A /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CE35FCEC14C637B8004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../uk.lproj/about.xib; sourceTree = "<group>"; };
+		CE35FCED14C637B8004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../uk.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
+		CE35FCEE14C637B8004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../uk.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
+		CE35FCF314C637C8004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = ../base/uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE35FCF514C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/DetailsPanel.xib; sourceTree = "<group>"; };
+		CE35FCF614C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
+		CE35FCF714C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/ExtraFairwareReminder.xib; sourceTree = "<group>"; };
+		CE35FCF814C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CE35FCF914C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
+		CE35FCFA14C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
+		CE35FCFB14C637DD004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/ResultWindow.xib; sourceTree = "<group>"; };
+		CE35FD0314C637EC004E4864 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -649,6 +661,7 @@
 				it,
 				hy,
 				ru,
+				uk,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* dupeguru */;
 			projectDirPath = "";
@@ -762,6 +775,7 @@
 				CE7A6998146443090007D927 /* it */,
 				CEC3D37C14911253006B1A91 /* hy */,
 				CE335AF714B393EE0000AF1A /* ru */,
+				CE35FCF514C637DD004E4864 /* uk */,
 			);
 			name = DetailsPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -777,6 +791,7 @@
 				CE7A6999146443090007D927 /* it */,
 				CEC3D37D14911253006B1A91 /* hy */,
 				CE335AF814B393EE0000AF1A /* ru */,
+				CE35FCF614C637DD004E4864 /* uk */,
 			);
 			name = DirectoryPanel.xib;
 			sourceTree = SOURCE_ROOT;
@@ -792,6 +807,7 @@
 				CE7A699B146443090007D927 /* it */,
 				CEC3D37F14911253006B1A91 /* hy */,
 				CE335AFA14B393EE0000AF1A /* ru */,
+				CE35FCF814C637DD004E4864 /* uk */,
 			);
 			name = MainMenu.xib;
 			sourceTree = SOURCE_ROOT;
@@ -807,6 +823,7 @@
 				CE7A699D146443090007D927 /* it */,
 				CEC3D38114911253006B1A91 /* hy */,
 				CE335AFC14B393EE0000AF1A /* ru */,
+				CE35FCFA14C637DD004E4864 /* uk */,
 			);
 			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
@@ -822,6 +839,7 @@
 				CE7A699E146443090007D927 /* it */,
 				CEC3D38214911253006B1A91 /* hy */,
 				CE335AFD14B393EE0000AF1A /* ru */,
+				CE35FCFB14C637DD004E4864 /* uk */,
 			);
 			name = ResultWindow.xib;
 			sourceTree = SOURCE_ROOT;
@@ -837,6 +855,7 @@
 				CE7A69A6146443170007D927 /* it */,
 				CEC3D38B14911263006B1A91 /* hy */,
 				CE335B0514B393FB0000AF1A /* ru */,
+				CE35FD0314C637EC004E4864 /* uk */,
 			);
 			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;
@@ -852,6 +871,7 @@
 				CE7A6992146442F80007D927 /* it */,
 				CEC3D38D14911274006B1A91 /* hy */,
 				CE335AF514B393DC0000AF1A /* ru */,
+				CE35FCF314C637C8004E4864 /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -867,6 +887,7 @@
 				CE7A69AA146443360007D927 /* it */,
 				CEC3D39114911288006B1A91 /* hy */,
 				CE335AF014B393C60000AF1A /* ru */,
+				CE35FCEE14C637B8004E4864 /* uk */,
 			);
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
@@ -883,6 +904,7 @@
 				CE7A699C146443090007D927 /* it */,
 				CEC3D38014911253006B1A91 /* hy */,
 				CE335AFB14B393EE0000AF1A /* ru */,
+				CE35FCF914C637DD004E4864 /* uk */,
 			);
 			name = PrioritizeDialog.xib;
 			sourceTree = "<group>";
@@ -898,6 +920,7 @@
 				CE7A699A146443090007D927 /* it */,
 				CEC3D37E14911253006B1A91 /* hy */,
 				CE335AF914B393EE0000AF1A /* ru */,
+				CE35FCF714C637DD004E4864 /* uk */,
 			);
 			name = ExtraFairwareReminder.xib;
 			sourceTree = SOURCE_ROOT;
@@ -913,6 +936,7 @@
 				CE7A69A8146443360007D927 /* it */,
 				CEC3D38F14911288006B1A91 /* hy */,
 				CE335AEE14B393C60000AF1A /* ru */,
+				CE35FCEC14C637B8004E4864 /* uk */,
 			);
 			name = about.xib;
 			sourceTree = "<group>";
@@ -928,6 +952,7 @@
 				CE7A69A9146443360007D927 /* it */,
 				CEC3D39014911288006B1A91 /* hy */,
 				CE335AEF14B393C60000AF1A /* ru */,
+				CE35FCED14C637B8004E4864 /* uk */,
 			);
 			name = ErrorReportWindow.xib;
 			sourceTree = "<group>";

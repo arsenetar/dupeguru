@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: Ukrainian\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: YuriPetrashko <Petrashko@mail.ua>\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+
+#: core/app.py:83
+msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr "зможете тільки для видалення, переміщення або копіювання 10 копій відразу"
+
+#: core/app.py:190
+msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
+msgstr "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу в демонстраційному режимі."
+
+#: core/app.py:422
+msgid "Collecting files to scan"
+msgstr "Збір файлів для сканування"
+
+#: core/app.py:433
+msgid "The selected directories contain no scannable file."
+msgstr "Вибраних директорій не містять сканованих файлів."
+
+#: core/app.py:472
+msgid "%s (%d discarded)"
+msgstr "%s (%d відкидаються)"
+
+#: core/engine.py:178
+#: core/engine.py:215
+msgid "0 matches found"
+msgstr "0 зіставлень знайдено"
+
+#: core/engine.py:196
+#: core/engine.py:223
+msgid "%d matches found"
+msgstr "%d  знайдено"
+
+#: core/engine.py:208
+#: core/scanner.py:56
+msgid "Read size of %d/%d files"
+msgstr "Прочитано розмір %d/%d файлів"
+
+#: core/engine.py:355
+msgid "Grouped %d/%d matches"
+msgstr "Угруповання %d/%d матчів"
+
+#: core/gui/extra_fairware_reminder.py:23
+msgid "Continue ({})"
+msgstr "Продовжувати ({})"
+
+#: core/gui/extra_fairware_reminder.py:25
+msgid "Continue"
+msgstr "Продовжувати "
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr "Жоден"
+
+#: core/prioritize.py:94
+msgid "Ends with number"
+msgstr "Закінчується номер"
+
+#: core/prioritize.py:96
+msgid "Doesn't end with number"
+msgstr "Не закінчується з номером"
+
+#: core/prioritize.py:117
+msgid "Highest"
+msgstr "Найвищий"
+
+#: core/prioritize.py:117
+msgid "Lowest"
+msgstr "Найнижча"
+
+#: core/prioritize.py:144
+msgid "Newest"
+msgstr "Новітній"
+
+#: core/prioritize.py:144
+msgid "Oldest"
+msgstr "Найстарші"
+
+#: core/results.py:113
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s / %s) дублікати позначені."
+
+#: core/results.py:120
+msgid " filter: %s"
+msgstr "фільтр: %s"
+
+#: core/scanner.py:76
+msgid "Read metadata of %d/%d files"
+msgstr "Прочитано метаданих %d/%d файли"
+
+#: core/scanner.py:106
+msgid "Removing false matches"
+msgstr "Видалення помилкових матчів"
+
+#: core/scanner.py:124
+msgid "Processed %d/%d matches against the ignore list"
+msgstr "Опрацьовано %d/%d  матчів проти ігнор-лист"
+
+#: core/scanner.py:133
+msgid "Doing group prioritization"
+msgstr "Роблячи групи пріоритетів"
+
+#: core_pe/matchblock.py:60
+msgid "Analyzed %d/%d pictures"
+msgstr "Аналізується %d/%d  фотографії"
+
+#: core_pe/matchblock.py:144
+msgid "Performed %d/%d chunk matches"
+msgstr "Виконує %d/%d  матчів шматок"
+
+#: core_pe/matchblock.py:149
+msgid "Preparing for matching"
+msgstr "Підготовка для порівняння"
+
+#: core_pe/matchblock.py:184
+msgid "Verified %d/%d matches"
+msgstr "Перевірені %d/%d матчів"
+
+#: core_pe/matchexif.py:21
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Прочитано EXIF %d/%d фотографії"
+

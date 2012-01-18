@@ -20,6 +20,8 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Igor Pavlov, Russian localization**
 
+| **Yuri Petrashko, Ukrainian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 

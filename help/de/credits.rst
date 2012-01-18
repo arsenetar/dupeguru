@@ -16,6 +16,10 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Paolo Rossi, Italian localization**
 
+| **Igor Pavlov, Russian localization**
+
+| **Yuri Petrashko, Ukrainian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 

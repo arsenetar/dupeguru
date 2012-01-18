@@ -20,6 +20,8 @@
 
 | **Igor Pavlov, Russian localization**
 
+| **Yuri Petrashko, Ukrainian localization**
+
 | **Python, Язык программирования** (`Веб сайт  <http://www.python.org>`__)
 | Самая лучшая 
 

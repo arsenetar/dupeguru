@@ -20,6 +20,8 @@
 
 | **Igor Pavlov, Russian localization**
 
+| **Yuri Petrashko, Ukrainian localization**
+
 | **Python, Ծրագրավորման լեզուն** (`Վեբ կայքը <http://www.python.org>`__)
 | Լավագույներից լավագույնը
 
