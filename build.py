@@ -58,15 +58,12 @@ def build_cocoa(edition, dev):
         'pe': ['core_pe'],
     }[edition]
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
+    copy_packages(tocopy, 'build')
+    sys.path.insert(0, 'build')
+    collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+    del sys.path[0]
     if dev:
-        # collect dependencies, then override our own pckages with symlinks
-        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
         copy_packages(tocopy, 'build/py', create_links=True)
-    else:
-        copy_packages(tocopy, 'build')
-        sys.path.insert(0, 'build')
-        collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
-        del sys.path[0]
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', 'build/py/inter')
     copy_sysconfig_files_for_embed('build/py')
