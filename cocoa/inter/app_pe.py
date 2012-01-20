@@ -154,7 +154,11 @@ class DupeGuruPE(DupeGuruBase):
         if isinstance(dupe, IPhoto):
             try:
                 a = app('iPhoto')
-                [photo] = a.photo_library_album().photos[its.image_path == str(dupe.path)]()
+                album = a.photo_library_album()
+                if album is None:
+                    msg = "There are communication problems with iPhoto. Try opening iPhoto first, it might solve it."
+                    raise EnvironmentError(msg)
+                [photo] = album.photos[its.image_path == str(dupe.path)]()
                 a.remove(photo, timeout=0)
             except ValueError:
                 msg = "Could not find photo '{}' in iPhoto Library".format(str(dupe.path))
