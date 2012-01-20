@@ -1,3 +1,11 @@
+=== 6.2.1 (2012-01-20)
+
+* Fixed random hard crashes (yeah, again). [Mac OS X]
+* Fixed crash on Export to HTML. [Windows, Linux]
+* Added Armenian localization by Hrant Ohanyan.
+* Added Russian localization by Igor Pavlov.
+* Added Ukrainian localization by Yuri Petrashko.
+
 === 6.2.0 (2011-12-07)
 
 * Added multiple-selection in folder selection dialog for a more efficient folder removal. (#179)
