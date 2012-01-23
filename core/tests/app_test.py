@@ -168,10 +168,10 @@ class TestCaseDupeGuruWithResults:
         self.app = DupeGuru()
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
-        self.dpanel_gui = CallLogger()
-        self.dpanel = DetailsPanel(self.dpanel_gui, self.app)
-        self.dtree_gui = CallLogger()
-        self.dtree = DirectoryTree(self.dtree_gui, self.app)
+        self.dpanel = self.app.details_panel
+        self.dpanel.view = CallLogger()
+        self.dtree = self.app.directory_tree
+        self.dtree.view = CallLogger()
         self.rtable_gui = CallLogger()
         self.rtable = self.app.result_table
         self.rtable.view = self.rtable_gui
@@ -299,10 +299,10 @@ class TestCaseDupeGuruWithResults:
     def test_refreshDetailsWithSelected(self, do_setup):
         self.rtable.select([1, 4])
         eq_(self.dpanel.row(0), ('Filename', 'bar bleh', 'foo bar'))
-        self.dpanel_gui.check_gui_calls(['refresh'])
+        self.dpanel.view.check_gui_calls(['refresh'])
         self.rtable.select([])
         eq_(self.dpanel.row(0), ('Filename', '---', '---'))
-        self.dpanel_gui.check_gui_calls(['refresh'])
+        self.dpanel.view.check_gui_calls(['refresh'])
     
     def test_makeSelectedReference(self, do_setup):
         app = self.app
@@ -478,11 +478,11 @@ class TestAppWithDirectoriesInTree:
         io.mkdir(p + 'sub2')
         io.mkdir(p + 'sub3')
         self.app = DupeGuru()
-        self.dtree_gui = CallLogger()
-        self.dtree = DirectoryTree(self.dtree_gui, self.app)
+        self.dtree = self.app.directory_tree
+        self.dtree.view = CallLogger()
         self.dtree.connect()
         self.dtree.add_directory(p)
-        self.dtree_gui.clear_calls()
+        self.dtree.view.clear_calls()
     
     def test_set_root_as_ref_makes_subfolders_ref_as_well(self, do_setup):
         # Setting a node state to something also affect subnodes. These subnodes must be correctly
@@ -495,5 +495,5 @@ class TestAppWithDirectoriesInTree:
         eq_(len(node), 3)
         subnode = node[0]
         eq_(subnode.state, 1)
-        self.dtree_gui.check_gui_calls(['refresh_states'])
+        self.dtree.view.check_gui_calls(['refresh_states'])
     

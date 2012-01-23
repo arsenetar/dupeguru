@@ -52,7 +52,6 @@ class DupeGuru(DupeGuruBase):
     
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
-        self.result_table = ResultTable(self)
     
     def _get_display_info(self, dupe, group, delta):
         size = dupe.size
@@ -78,6 +77,10 @@ class DupeGuru(DupeGuruBase):
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
+    
+    def _create_result_table(self):
+        return ResultTable(self)
+    
 
 class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
@@ -136,11 +139,9 @@ class TestApp(TestAppBase):
         self.app = DupeGuru()
         self.default_parent = self.app
         self.rtable = link_gui(self.app.result_table)
-        make_gui('dtree', DirectoryTree)
-        make_gui('dpanel', DetailsPanel)
-        make_gui('pdialog', PrioritizeDialog)
-        for elem in [self.rtable, self.dtree, self.dpanel]:
-            elem.connect()
+        self.dtree = link_gui(self.app.directory_tree)
+        self.dpanel = link_gui(self.app.details_panel)
+        self.pdialog = PrioritizeDialog(self.app)
     
     #--- Helpers
     def select_pri_criterion(self, name):
