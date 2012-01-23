@@ -1,4 +1,4 @@
 -r requirements.txt
-objp>=1.0.0
+objp>=1.1.0
 pluginbuilder>=1.1.0
 appscript>=1.0.0

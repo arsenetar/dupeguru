@@ -1,3 +1,10 @@
+=== 2.4.1 (2012-01-23)
+
+* Fixed a crash on sorting by dimensions.
+* Improved communications with iPhoto. [Cocoa] (#185)
+* Fixed crash on Export to HTML. [Windows, Linux]
+* Added Ukrainian localization by Yuri Petrashko.
+
 === 2.4.0 (2012-01-06)
 
 * Added multiple-selection in folder selection dialog for a more efficient folder removal. (#179)
