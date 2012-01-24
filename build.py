@@ -108,7 +108,9 @@ def build_help(edition):
     appname = {'se': 'dupeGuru', 'me': 'dupeGuru Music Edition', 'pe': 'dupeGuru Picture Edition'}[edition]
     homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
     confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage}
-    sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl)
+    changelogtmpl = op.join(current_path, 'help', 'changelog.tmpl')
+    conftmpl = op.join(current_path, 'help', 'conf.tmpl')
+    sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
 
 def build_localizations(ui, edition):
     print("Building localizations")
