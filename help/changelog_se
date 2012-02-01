@@ -1,3 +1,8 @@
+=== 3.3.3 (2012-02-01)
+
+* Fixed crash on adding some folders. [Mac OS X]
+* Added Ukrainian localization by Yuri Petrashko.
+
 === 3.3.2 (2012-01-16)
 
 * Fixed random hard crashes (yeah, again). [Mac OS X]
