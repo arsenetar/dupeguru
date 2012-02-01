@@ -107,7 +107,7 @@ def build_help(edition):
     tixurl = "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
     appname = {'se': 'dupeGuru', 'me': 'dupeGuru Music Edition', 'pe': 'dupeGuru Picture Edition'}[edition]
     homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
-    confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage}
+    confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage, 'language': 'en'}
     changelogtmpl = op.join(current_path, 'help', 'changelog.tmpl')
     conftmpl = op.join(current_path, 'help', 'conf.tmpl')
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
