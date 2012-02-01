@@ -155,6 +155,8 @@ def build_updatepot():
     loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
+    print("Building cocoalib.pot")
+    loc.allstrings2pot(op.join('cocoalib', 'en.lproj'), op.join('cocoalib', 'locale', 'cocoalib.pot'))
     print("Enhancing ui.pot with Cocoa's strings files")
     loc.allstrings2pot(op.join('cocoa', 'base', 'en.lproj'), op.join('locale', 'ui.pot'),
         excludes={'core', 'message', 'columns'})
@@ -167,6 +169,7 @@ def build_mergepot():
     loc.merge_pots_into_pos('locale')
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
+    loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
 
 def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
     extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
