@@ -443,7 +443,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))
-            self.results.groups = self.scanner.GetDupeGroups(files, j)
+            self.results.groups = self.scanner.get_dupe_groups(files, j)
         
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))

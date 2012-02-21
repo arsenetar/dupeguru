@@ -35,6 +35,6 @@ def test_priorize_me(fake_fileexists):
     o1, o2 = no('foo'), no('foo')
     o1.bitrate = 1
     o2.bitrate = 2
-    [group] = s.GetDupeGroups([o1, o2])
+    [group] = s.get_dupe_groups([o1, o2])
     assert group.ref is o2
 

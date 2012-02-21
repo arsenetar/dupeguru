@@ -8,6 +8,7 @@
 
 import logging
 import re
+import os.path as op
 
 from jobprogress import job
 from hscommon import io
@@ -44,6 +45,29 @@ def is_same_with_digit(name, refname):
         return False
     end = name[len(refname):].strip()
     return RE_DIGIT_ENDING.match(end) is not None
+
+def remove_dupe_paths(files):
+    # Returns files with duplicates-by-path removed. Files with the exact same path are considered
+    # duplicates and only the first file to have a path is kept. In certain cases, we have files
+    # that have the same path, but not with the same case, that's why we normalize. However, we also
+    # have case-sensitive filesystems, and in those, we don't want to falsely remove duplicates,
+    # that's why we have a `samefile` mechanism.
+    result = []
+    path2file = {}
+    for f in files:
+        normalized = str(f.path).lower()
+        if normalized in path2file:
+            try:
+                if op.samefile(normalized, str(path2file[normalized].path)):
+                    continue # same file, it's a dupe
+                else:
+                    pass # We don't treat them as dupes
+            except OSError:
+                continue # File doesn't exist? Well, treat them as dupes
+        else:
+            path2file[normalized] = f
+        result.append(f)
+    return result
 
 class Scanner:
     def __init__(self):
@@ -96,10 +120,11 @@ class Scanner:
             return True
         return len(dupe.path) > len(ref.path)
     
-    def GetDupeGroups(self, files, j=job.nulljob):
+    def get_dupe_groups(self, files, j=job.nulljob):
         j = j.start_subjob([8, 2])
-        for f in [f for f in files if not hasattr(f, 'is_ref')]:
+        for f in (f for f in files if not hasattr(f, 'is_ref')):
             f.is_ref = False
+        files = remove_dupe_paths(files)
         logging.info("Getting matches. Scan type: %d", self.scan_type)
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
@@ -139,6 +164,6 @@ class Scanner:
     min_match_percentage = 80
     mix_file_kind        = True
     scan_type            = ScanType.Filename
-    scanned_tags         = set(['artist', 'title'])
+    scanned_tags         = {'artist', 'title'}
     size_threshold       = 0
     word_weighting       = False

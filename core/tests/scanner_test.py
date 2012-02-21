@@ -17,10 +17,14 @@ from ..ignore import IgnoreList
 from ..scanner import *
 
 class NamedObject:
-    def __init__(self, name="foobar", size=1):
+    def __init__(self, name="foobar", size=1, path=None):
+        if path is None:
+            path = Path(name)
+        else:
+            path = Path(path) + name
         self.name = name
         self.size = size
-        self.path = Path('')
+        self.path = path
         self.words = getwords(name)
     
     def __repr__(self):
@@ -37,7 +41,7 @@ def pytest_funcarg__fake_fileexists(request):
 
 def test_empty(fake_fileexists):
     s = Scanner()
-    r = s.GetDupeGroups([])
+    r = s.get_dupe_groups([])
     eq_(r, [])
 
 def test_default_settings(fake_fileexists):
@@ -51,8 +55,8 @@ def test_default_settings(fake_fileexists):
 
 def test_simple_with_default_settings(fake_fileexists):
     s = Scanner()
-    f = [no('foo bar'), no('foo bar'), no('foo bleh')]
-    r = s.GetDupeGroups(f)
+    f = [no('foo bar', path='p1'), no('foo bar', path='p2'), no('foo bleh')]
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     g = r[0]
     #'foo bleh' cannot be in the group because the default min match % is 80
@@ -63,8 +67,8 @@ def test_simple_with_default_settings(fake_fileexists):
 def test_simple_with_lower_min_match(fake_fileexists):
     s = Scanner()
     s.min_match_percentage = 50
-    f = [no('foo bar'), no('foo bar'), no('foo bleh')]
-    r = s.GetDupeGroups(f)
+    f = [no('foo bar', path='p1'), no('foo bar', path='p2'), no('foo bleh')]
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g), 3)
@@ -73,20 +77,20 @@ def test_trim_all_ref_groups(fake_fileexists):
     # When all files of a group are ref, don't include that group in the results, but also don't
     # count the files from that group as discarded.
     s = Scanner()
-    f = [no('foo'), no('foo'), no('bar'), no('bar')]
+    f = [no('foo', path='p1'), no('foo', path='p2'), no('bar', path='p1'), no('bar', path='p2')]
     f[2].is_ref = True
     f[3].is_ref = True
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(s.discarded_file_count, 0)
 
 def test_priorize(fake_fileexists):
     s = Scanner()
-    f = [no('foo'), no('foo'), no('bar'), no('bar')]
+    f = [no('foo', path='p1'), no('foo', path='p2'), no('bar', path='p1'), no('bar', path='p2')]
     f[1].size = 2
     f[2].size = 3
     f[3].is_ref = True
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     g1, g2 = r
     assert f[1] in (g1.ref,g2.ref)
     assert f[0] in (g1.dupes[0],g2.dupes[0])
@@ -100,7 +104,7 @@ def test_content_scan(fake_fileexists):
     f[0].md5 = f[0].md5partial = 'foobar'
     f[1].md5 = f[1].md5partial = 'foobar'
     f[2].md5 = f[2].md5partial = 'bleh'
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
     eq_(s.discarded_file_count, 0) # don't count the different md5 as discarded!
@@ -114,7 +118,7 @@ def test_content_scan_compare_sizes_first(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.Contents
     f = [MyFile('foo', 1), MyFile('bar', 2)]
-    eq_(len(s.GetDupeGroups(f)), 0)
+    eq_(len(s.get_dupe_groups(f)), 0)
 
 def test_min_match_perc_doesnt_matter_for_content_scan(fake_fileexists):
     s = Scanner()
@@ -124,11 +128,11 @@ def test_min_match_perc_doesnt_matter_for_content_scan(fake_fileexists):
     f[1].md5 = f[1].md5partial = 'foobar'
     f[2].md5 = f[2].md5partial = 'bleh'
     s.min_match_percentage = 101
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
     s.min_match_percentage = 0
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
 
@@ -138,14 +142,14 @@ def test_content_scan_doesnt_put_md5_in_words_at_the_end(fake_fileexists):
     f = [no('foo'),no('bar')]
     f[0].md5 = f[0].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     g = r[0]
 
 def test_extension_is_not_counted_in_filename_scan(fake_fileexists):
     s = Scanner()
     s.min_match_percentage = 100
     f = [no('foo.bar'), no('foo.bleh')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
 
@@ -157,7 +161,7 @@ def test_job(fake_fileexists):
     s = Scanner()
     log = []
     f = [no('foo bar'), no('foo bar'), no('foo bleh')]
-    r = s.GetDupeGroups(f, job.Job(1, do_progress))
+    r = s.get_dupe_groups(f, job.Job(1, do_progress))
     eq_(log[0], 0)
     eq_(log[-1], 100)
 
@@ -165,7 +169,7 @@ def test_mix_file_kind(fake_fileexists):
     s = Scanner()
     s.mix_file_kind = False
     f = [no('foo.1'), no('foo.2')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 0)
 
 def test_word_weighting(fake_fileexists):
@@ -173,7 +177,7 @@ def test_word_weighting(fake_fileexists):
     s.min_match_percentage = 75
     s.word_weighting = True
     f = [no('foo bar'), no('foo bar bleh')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     g = r[0]
     m = g.get_match_of(g.dupes[0])
@@ -183,21 +187,21 @@ def test_similar_words(fake_fileexists):
     s = Scanner()
     s.match_similar_words = True
     f = [no('The White Stripes'), no('The Whites Stripe'), no('Limp Bizkit'), no('Limp Bizkitt')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 2)
 
 def test_fields(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.Fields
     f = [no('The White Stripes - Little Ghost'), no('The White Stripes - Little Acorn')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 0)
 
 def test_fields_no_order(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.FieldsNoOrder
     f = [no('The White Stripes - Little Ghost'), no('Little Ghost - The White Stripes')]
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
 
 def test_tag_scan(fake_fileexists):
@@ -209,7 +213,7 @@ def test_tag_scan(fake_fileexists):
     o1.title = 'The Air Near My Fingers'
     o2.artist = 'The White Stripes'
     o2.title = 'The Air Near My Fingers'
-    r = s.GetDupeGroups([o1,o2])
+    r = s.get_dupe_groups([o1,o2])
     eq_(len(r), 1)
 
 def test_tag_with_album_scan(fake_fileexists):
@@ -228,7 +232,7 @@ def test_tag_with_album_scan(fake_fileexists):
     o3.artist = 'The White Stripes'
     o3.title = 'The Air Near My Fingers'
     o3.album = 'foobar'
-    r = s.GetDupeGroups([o1,o2,o3])
+    r = s.get_dupe_groups([o1,o2,o3])
     eq_(len(r), 1)
 
 def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
@@ -244,7 +248,7 @@ def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
     o2.artist = 'The White Stripes - b'
     o2.title = 'The Air Near My Fingers - b'
     o2.album = 'Elephant - b'
-    r = s.GetDupeGroups([o1,o2])
+    r = s.get_dupe_groups([o1,o2])
     eq_(len(r), 1)
 
 def test_tag_scan_with_different_scanned(fake_fileexists):
@@ -261,7 +265,7 @@ def test_tag_scan_with_different_scanned(fake_fileexists):
     o2.title = 'another title'
     o2.track = 'foo'
     o2.year = 'bar'
-    r = s.GetDupeGroups([o1, o2])
+    r = s.get_dupe_groups([o1, o2])
     eq_(len(r), 1)
 
 def test_tag_scan_only_scans_existing_tags(fake_fileexists):
@@ -274,7 +278,7 @@ def test_tag_scan_only_scans_existing_tags(fake_fileexists):
     o1.foo = 'foo'
     o2.artist = 'The White Stripes'
     o2.foo = 'bar'
-    r = s.GetDupeGroups([o1, o2])
+    r = s.get_dupe_groups([o1, o2])
     eq_(len(r), 1) # Because 'foo' is not scanned, they match
 
 def test_tag_scan_converts_to_str(fake_fileexists):
@@ -286,7 +290,7 @@ def test_tag_scan_converts_to_str(fake_fileexists):
     o1.track = 42
     o2.track = 42
     try:
-        r = s.GetDupeGroups([o1, o2])
+        r = s.get_dupe_groups([o1, o2])
     except TypeError:
         raise AssertionError()
     eq_(len(r), 1)
@@ -300,7 +304,7 @@ def test_tag_scan_non_ascii(fake_fileexists):
     o1.title = 'foobar\u00e9'
     o2.title = 'foobar\u00e9'
     try:
-        r = s.GetDupeGroups([o1, o2])
+        r = s.get_dupe_groups([o1, o2])
     except UnicodeEncodeError:
         raise AssertionError()
     eq_(len(r), 1)
@@ -318,7 +322,7 @@ def test_audio_content_scan(fake_fileexists):
     f[0].audiosize = 1
     f[1].audiosize = 1
     f[2].audiosize = 1
-    r = s.GetDupeGroups(f)
+    r = s.get_dupe_groups(f)
     eq_(len(r), 1)
     eq_(len(r[0]), 2)
 
@@ -333,7 +337,7 @@ def test_audio_content_scan_compare_sizes_first(fake_fileexists):
     f = [MyFile('foo'), MyFile('bar')]
     f[0].audiosize = 1
     f[1].audiosize = 2
-    eq_(len(s.GetDupeGroups(f)), 0)
+    eq_(len(s.get_dupe_groups(f)), 0)
 
 def test_ignore_list(fake_fileexists):
     s = Scanner()
@@ -345,7 +349,7 @@ def test_ignore_list(fake_fileexists):
     f3.path = Path('dir3/foobar')
     s.ignore_list.Ignore(str(f1.path),str(f2.path))
     s.ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.GetDupeGroups([f1,f2,f3])
+    r = s.get_dupe_groups([f1,f2,f3])
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)
@@ -367,7 +371,7 @@ def test_ignore_list_checks_for_unicode(fake_fileexists):
     f3.path = Path('foo3\u00e9')
     s.ignore_list.Ignore(str(f1.path),str(f2.path))
     s.ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.GetDupeGroups([f1,f2,f3])
+    r = s.get_dupe_groups([f1,f2,f3])
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)
@@ -384,19 +388,19 @@ def test_file_evaluates_to_false(fake_fileexists):
     
 
     s = Scanner()
-    f1 = FalseNamedObject('foobar')
-    f2 = FalseNamedObject('foobar')
-    r = s.GetDupeGroups([f1, f2])
+    f1 = FalseNamedObject('foobar', path='p1')
+    f2 = FalseNamedObject('foobar', path='p2')
+    r = s.get_dupe_groups([f1, f2])
     eq_(len(r), 1)
 
 def test_size_threshold(fake_fileexists):
     # Only file equal or higher than the size_threshold in size are scanned
     s = Scanner()
-    f1 = no('foo', 1)
-    f2 = no('foo', 2)
-    f3 = no('foo', 3)
+    f1 = no('foo', 1, path='p1')
+    f2 = no('foo', 2, path='p2')
+    f3 = no('foo', 3, path='p3')
     s.size_threshold = 2
-    groups = s.GetDupeGroups([f1,f2,f3])
+    groups = s.get_dupe_groups([f1,f2,f3])
     eq_(len(groups), 1)
     [group] = groups
     eq_(len(group), 2)
@@ -410,7 +414,7 @@ def test_tie_breaker_path_deepness(fake_fileexists):
     o1, o2 = no('foo'), no('foo')
     o1.path = Path('foo')
     o2.path = Path('foo/bar')
-    [group] = s.GetDupeGroups([o1, o2])
+    [group] = s.get_dupe_groups([o1, o2])
     assert group.ref is o2
 
 def test_tie_breaker_copy(fake_fileexists):
@@ -419,7 +423,7 @@ def test_tie_breaker_copy(fake_fileexists):
     o1, o2 = no('foo bar Copy'), no('foo bar')
     o1.path = Path('deeper/path')
     o2.path = Path('foo')
-    [group] = s.GetDupeGroups([o1, o2])
+    [group] = s.get_dupe_groups([o1, o2])
     assert group.ref is o2
 
 def test_tie_breaker_same_name_plus_digit(fake_fileexists):
@@ -438,7 +442,7 @@ def test_tie_breaker_same_name_plus_digit(fake_fileexists):
     o3.path = Path('deeper/path')
     o4.path = Path('deeper/path')
     o5.path = Path('foo')
-    [group] = s.GetDupeGroups([o1, o2, o3, o4, o5])
+    [group] = s.get_dupe_groups([o1, o2, o3, o4, o5])
     assert group.ref is o5
 
 def test_partial_group_match(fake_fileexists):
@@ -447,7 +451,7 @@ def test_partial_group_match(fake_fileexists):
     s = Scanner()
     o1, o2, o3 = no('a b'), no('a'), no('b')
     s.min_match_percentage = 50
-    [group] = s.GetDupeGroups([o1, o2, o3])
+    [group] = s.get_dupe_groups([o1, o2, o3])
     eq_(len(group), 2)
     assert o1 in group
     assert o2 in group
@@ -470,7 +474,7 @@ def test_dont_group_files_that_dont_exist(tmpdir):
         return [Match(file1, file2, 100)]
     s._getmatches = getmatches
     
-    assert not s.GetDupeGroups([file1, file2])
+    assert not s.get_dupe_groups([file1, file2])
 
 def test_folder_scan_exclude_subfolder_matches(fake_fileexists):
     # when doing a Folders scan type, don't include matches for folders whose parent folder already
@@ -489,9 +493,17 @@ def test_folder_scan_exclude_subfolder_matches(fake_fileexists):
     subf2 = no("sub folder 2", size=41)
     subf2.md5 = subf2.md5partial = b"some_md5_2"
     subf2.path = Path('/topf2/sub')
-    eq_(len(s.GetDupeGroups([topf1, topf2, subf1, subf2])), 1) # only top folders
+    eq_(len(s.get_dupe_groups([topf1, topf2, subf1, subf2])), 1) # only top folders
     # however, if another folder matches a subfolder, keep in in the matches
     otherf = no("other folder", size=41)
     otherf.md5 = otherf.md5partial = b"some_md5_2"
     otherf.path = Path('/otherfolder')
-    eq_(len(s.GetDupeGroups([topf1, topf2, subf1, subf2, otherf])), 2)
+    eq_(len(s.get_dupe_groups([topf1, topf2, subf1, subf2, otherf])), 2)
+
+def test_ignore_files_with_same_path(fake_fileexists):
+    # It's possible that the scanner is fed with two file instances pointing to the same path. One
+    # of these files has to be ignored
+    s = Scanner()
+    f1 = no('foobar', path='path1/foobar')
+    f2 = no('foobar', path='path1/foobar')
+    eq_(s.get_dupe_groups([f1, f2]), [])
