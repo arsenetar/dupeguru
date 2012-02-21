@@ -44,9 +44,10 @@ class DupeGuru(DupeGuruBase):
         else:
             percentage = group.percentage
             dupe_count = len(group.dupes)
+        dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
         return {
             'name': dupe.name,
-            'folder_path': str(dupe.folder_path),
+            'folder_path': str(dupe_folder_path),
             'size': format_size(size, 2, 2, False),
             'duration': format_time(duration, with_hours=False),
             'bitrate': str(bitrate),

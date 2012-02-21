@@ -21,13 +21,13 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [super fillPopUpMenu];
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m insertItemWithTitle:TR(@"Add iTunes Directory") action:@selector(addiTunes:)
+    NSMenuItem *mi = [m insertItemWithTitle:TR(@"Add iTunes Library") action:@selector(addiTunes:)
         keyEquivalent:@"" atIndex:1];
     [mi setTarget:self];
 }
 
 - (IBAction)addiTunes:(id)sender
 {
-    [self addDirectory:[@"~/Music/iTunes/iTunes Music" stringByExpandingTildeInPath]];
+    [self addDirectory:@"iTunes Library"];
 }
 @end
