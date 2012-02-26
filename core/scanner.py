@@ -152,7 +152,20 @@ class Scanner:
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
         matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
-        self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
+        if self.scan_type in {ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder, ScanType.Tag}:
+            self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
+        else:
+            # Ticket #195
+            # To speed up the scan, we don't bother comparing contents of files that are both ref
+            # files. However, this messes up "discarded" counting because there's a missing match
+            # in cases where we end up with a dupe group anyway (with a non-ref file). Because it's
+            # impossible to have discarded matches in exact dupe scans, we simply set it at 0, thus
+            # bypassing our tricky problem.
+            # Also, although ScanType.FuzzyBlock is not always doing exact comparisons, we also
+            # bypass ref comparison, thus messing up with our "discarded" count. So we're
+            # effectively disabling the "discarded" feature in PE, but it's better than falsely
+            # reporting discarded matches.
+            self.discarded_file_count = 0
         groups = [g for g in groups if any(not f.is_ref for f in g)]
         logging.info('Created %d groups' % len(groups))
         j.set_progress(100, tr("Doing group prioritization"))

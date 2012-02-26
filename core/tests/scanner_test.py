@@ -28,7 +28,7 @@ class NamedObject:
         self.words = getwords(name)
     
     def __repr__(self):
-        return '<NamedObject %r>' % self.name
+        return '<NamedObject %r %r>' % (self.name, self.path)
     
 
 no = NamedObject
@@ -507,3 +507,20 @@ def test_ignore_files_with_same_path(fake_fileexists):
     f1 = no('foobar', path='path1/foobar')
     f2 = no('foobar', path='path1/foobar')
     eq_(s.get_dupe_groups([f1, f2]), [])
+
+def test_dont_count_ref_files_as_discarded(fake_fileexists):
+    # To speed up the scan, we don't bother comparing contents of files that are both ref files.
+    # However, this causes problems in "discarded" counting and we make sure here that we don't
+    # report discarded matches in exact duplicate scans.
+    s = Scanner()
+    s.scan_type = ScanType.Contents
+    o1 = no("foo", path="p1")
+    o2 = no("foo", path="p2")
+    o3 = no("foo", path="p3")
+    o1.md5 = o1.md5partial = 'foobar'
+    o2.md5 = o2.md5partial = 'foobar'
+    o3.md5 = o3.md5partial = 'foobar'
+    o1.is_ref = True
+    o2.is_ref = True
+    eq_(len(s.get_dupe_groups([o1, o2, o3])), 1)
+    eq_(s.discarded_file_count, 0)
