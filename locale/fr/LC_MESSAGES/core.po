@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:83
+#: core/app.py:86
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:190
+#: core/app.py:205
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:422
+#: core/app.py:431
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:433
+#: core/app.py:442
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:472
+#: core/app.py:481
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -32,21 +32,13 @@ msgstr "0 paires trouvées"
 msgid "%d matches found"
 msgstr "%d paires trouvées"
 
-#: core/engine.py:208 core/scanner.py:56
+#: core/engine.py:208 core/scanner.py:80
 msgid "Read size of %d/%d files"
 msgstr "Lu la taille de %d/%d fichiers"
 
 #: core/engine.py:355
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d paires groupées"
-
-#: core/gui/extra_fairware_reminder.py:23
-msgid "Continue ({})"
-msgstr "Continuer ({})"
-
-#: core/gui/extra_fairware_reminder.py:25
-msgid "Continue"
-msgstr "Continuer"
 
 #: core/prioritize.py:68
 msgid "None"
@@ -84,19 +76,19 @@ msgstr "%d / %d (%s / %s) doublons marqués."
 msgid " filter: %s"
 msgstr " filtre: %s"
 
-#: core/scanner.py:76
+#: core/scanner.py:100
 msgid "Read metadata of %d/%d files"
 msgstr "Lu les métadonnées de %d/%d fichiers"
 
-#: core/scanner.py:106
+#: core/scanner.py:131
 msgid "Removing false matches"
 msgstr "Retrait des paires invalides"
 
-#: core/scanner.py:124
+#: core/scanner.py:149
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Vérification de %d/%d paires dans la ignore list"
 
-#: core/scanner.py:133
+#: core/scanner.py:171
 msgid "Doing group prioritization"
 msgstr "Prioritization des groupes"
 

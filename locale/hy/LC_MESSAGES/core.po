@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: core/app.py:83
+#: core/app.py:86
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "միաժամանակ հնարավոր է ջնջել, տեղափոխել կամ պատճենել միայն 10 օրինակներ"
 
-#: core/app.py:190
+#: core/app.py:205
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:422
+#: core/app.py:431
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:433
+#: core/app.py:442
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:472
+#: core/app.py:481
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -46,21 +46,13 @@ msgstr "0 համընկնում է գտնվել"
 msgid "%d matches found"
 msgstr "%d համընկնում է գտնվել"
 
-#: core/engine.py:208 core/scanner.py:56
+#: core/engine.py:208 core/scanner.py:80
 msgid "Read size of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի չափը"
 
 #: core/engine.py:355
 msgid "Grouped %d/%d matches"
 msgstr "Խմբավորվել է %d/%d համընկնում"
-
-#: core/gui/extra_fairware_reminder.py:23
-msgid "Continue ({})"
-msgstr "Շարունակել ({})"
-
-#: core/gui/extra_fairware_reminder.py:25
-msgid "Continue"
-msgstr "Շարունակել"
 
 #: core/prioritize.py:68
 msgid "None"
@@ -98,19 +90,19 @@ msgstr "%d / %d (%s / %s) նշված կրկնօրինակներ:"
 msgid " filter: %s"
 msgstr "ֆիլտր. %s"
 
-#: core/scanner.py:76
+#: core/scanner.py:100
 msgid "Read metadata of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի մետատվյալները"
 
-#: core/scanner.py:106
+#: core/scanner.py:131
 msgid "Removing false matches"
 msgstr "Սխալ համընկնումների հեռացում"
 
-#: core/scanner.py:124
+#: core/scanner.py:149
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Ընթացքում է %d/%d համընկնումները ընդդեմ անտեսվող ցանկի"
 
-#: core/scanner.py:133
+#: core/scanner.py:171
 msgid "Doing group prioritization"
 msgstr "Խմբի առաջնայնացում"
 

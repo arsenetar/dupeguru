@@ -2,111 +2,111 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:39
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "Scan de doublons en cours"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:40
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "Chargement en cours"
 
-#: cocoa/inter/app.py:19 qt/base/app.py:41
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "Déplacement en cours"
 
-#: cocoa/inter/app.py:20 qt/base/app.py:42
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "Copie en cours"
 
-#: qt/base/app.py:43
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Envoi de fichiers à la corbeille"
 
-#: qt/base/app.py:109
+#: qt/base/app.py:108
 msgid "Quit"
 msgstr "Quitter"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
+#: qt/base/app.py:109 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Préférences"
 
-#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:110 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "Aide dupeGuru"
 
-#: qt/base/app.py:112 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "À propos de dupeGuru"
 
-#: qt/base/app.py:113
+#: qt/base/app.py:112
 msgid "Register dupeGuru"
 msgstr "Enregistrer dupeGuru"
 
-#: qt/base/app.py:114
+#: qt/base/app.py:113
 msgid "Check for Update"
 msgstr "Vérifier les mises à jour"
 
-#: qt/base/app.py:115
+#: qt/base/app.py:114
 msgid "Open Debug Log"
 msgstr "Ouvrir logs de déboguage"
 
-#: qt/base/app.py:133
+#: qt/base/app.py:132
 msgid "Add to Ignore List"
 msgstr "Ignorer ces doublons à l'avenir"
 
-#: qt/base/app.py:134 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:133 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "copy"
 msgstr "copier"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "move"
 msgstr "déplacer"
 
-#: qt/base/app.py:140
+#: qt/base/app.py:139
 msgid "Select a directory to {} marked files to"
 msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 
-#: qt/base/app.py:152 qt/base/result_window.py:312
+#: qt/base/app.py:151 qt/base/result_window.py:307
 msgid "Remove duplicates"
 msgstr "Retirer des doublons"
 
-#: qt/base/app.py:153 qt/base/result_window.py:313
+#: qt/base/app.py:152 qt/base/result_window.py:308
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: qt/base/app.py:172 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: qt/base/app.py:173
+#: qt/base/app.py:172
 msgid "Custom Command"
 msgstr "Commande personnalisée"
 
-#: qt/base/app.py:209
+#: qt/base/app.py:208
 msgid "All files were processed successfully."
 msgstr "Tous les fichiers ont été traités avec succès."
 
-#: qt/base/app.py:210
+#: qt/base/app.py:209
 msgid "Operation Complete"
 msgstr "Opération complétée"
 
-#: qt/base/app.py:213
+#: qt/base/app.py:212
 msgid "Scan complete"
 msgstr "Scan complété"
 
-#: qt/base/app.py:214 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:213 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr "Aucun doublon trouvé."
 
-#: qt/base/app.py:266 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:265 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -124,7 +124,7 @@ msgstr "Attribut"
 msgid "Selected"
 msgstr "Sélectionné"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:23
+#: qt/base/details_table.py:16 qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DetailsPanel.strings:0
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 #: cocoa/pe/en.lproj/DetailsPanel.strings:0
@@ -196,7 +196,7 @@ msgstr "Sélectionnez un fichier résultats à charger"
 msgid "All Files (*.*)"
 msgstr "Tout les fichiers (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:334
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:329
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Résultats dupeGuru (*.dupeguru)"
 
@@ -209,126 +209,82 @@ msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Name"
 msgstr "Nom"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "State"
 msgstr "Type"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Excluded"
 msgstr "Exclu"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Normal"
 msgstr "Normal"
 
-#: qt/base/extra_fairware_reminder.py:36
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Sorry, I must insist"
-msgstr "Désolé, je dois insister"
-
-#: qt/base/extra_fairware_reminder.py:41
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
-msgstr ""
-"Il semble que vous ayez trouvé beaucoup de doublons. Super! Je dois par contre insister que des contributions sont attendues lorsqu'il y'a des heures non-payées au projet.\n"
-"\n"
-"Vous pensez peut-être \"je n'utiliserai ce programme qu'une fois, pas besoin de contribuer\". Le problème c'est que la plupart des utilisateurs de dupeGuru ne l'utilisent qu'une fois. Si tous suivent ce raisonnement, le développement de dupeGuru ne peut pas continuer. C'est à cause de cette tendance inhérente à la nature de dupeGuru que je me vois contraint d'insister ici.\n"
-"\n"
-"Si vous n'avez pas les moyens de contribuer, ignorez ce message ou envoyez moi un message à hsoft@hardcoded.net pour que je vous envoie une clé d'enregistrement."
-
-#: qt/base/extra_fairware_reminder.py:55
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"Ce rappel apparaît parce que:\n"
-"\n"
-"1. Plus de 100 doublons sont traités\n"
-"2. Vous n'avez pas encore contribué à dupeGuru\n"
-"3. Il y a des heures non-payées au projet"
-
-#: qt/base/extra_fairware_reminder.py:71
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Contribute"
-msgstr "Contribuer"
-
-#: qt/base/extra_fairware_reminder.py:74
-msgid "Continue"
-msgstr "Continuer"
-
-#: qt/base/preferences_dialog.py:38
+#: qt/base/preferences_dialog.py:37
 msgid "Scan Type:"
 msgstr "Type de scan:"
 
-#: qt/base/preferences_dialog.py:51
+#: qt/base/preferences_dialog.py:50
 msgid "Filter Hardness:"
 msgstr "Seuil du filtre:"
 
-#: qt/base/preferences_dialog.py:77
+#: qt/base/preferences_dialog.py:76
 msgid "More Results"
 msgstr "+ de doublons"
 
-#: qt/base/preferences_dialog.py:82
+#: qt/base/preferences_dialog.py:81
 msgid "Fewer Results"
 msgstr "- de doublons"
 
-#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:88 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Taille de police:"
 
-#: qt/base/preferences_dialog.py:93
+#: qt/base/preferences_dialog.py:92
 msgid "Language:"
 msgstr "Langue:"
 
-#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:98 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Déplacements de fichiers:"
 
-#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:101 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Directement à la destination"
 
-#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Re-créer chemins relatifs"
 
-#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Re-créer chemins absolus"
 
-#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:106 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Commande perso. (arguments: %d pour doublon, %r pour réf):"
 
-#: qt/base/preferences_dialog.py:185
+#: qt/base/preferences_dialog.py:184
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru doit redémarrer pour appliquer le changement de langue."
 
@@ -348,11 +304,11 @@ msgstr ""
 "correspondent le plus à ces critère à la position de référence. Une lecture "
 "préalable du fichier d'aide est conseillée."
 
-#: qt/base/problem_dialog.py:34 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Problems!"
 msgstr "Problèmes!"
 
-#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:35 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
@@ -362,11 +318,11 @@ msgstr ""
 " nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers "
 "n'ont pas été retirés des résultats."
 
-#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Révéler Fichier"
 
-#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Fermer"
 
@@ -532,18 +488,18 @@ msgstr "Effacement de doublons"
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "%d fichiers seront envoyés à la corbeille. Continuer?"
 
-#: qt/base/result_window.py:276
+#: qt/base/result_window.py:271
 msgid "Delete and hardlink duplicates"
 msgstr "Hardlinking de doublons"
 
-#: qt/base/result_window.py:277 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:272 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
 msgstr ""
 "%d fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
 
-#: qt/base/result_window.py:333 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:328 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
 
@@ -937,27 +893,27 @@ msgstr "Effacer les dossiers vides après un déplacement"
 msgid "dupeGuru PE Preferences"
 msgstr "Préférences de dupeGuru PE"
 
-#: cocoa/inter/app.py:21
+#: cocoa/inter/app.py:19
 msgid "Sending to Trash"
 msgstr "Envoi vers corbeille"
 
-#: cocoa/inter/app_me.py:25
+#: cocoa/inter/app_me.py:31
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Retrait des tracks mortes de votre librairie iTunes"
 
-#: cocoa/inter/app_me.py:26
+#: cocoa/inter/app_me.py:32
 msgid "Scanning the iTunes Library"
 msgstr "Scan de la librairie iTunes en cours"
 
-#: cocoa/inter/app_pe.py:143
+#: cocoa/inter/app_me.py:152 cocoa/inter/app_pe.py:142
 msgid "Sending dupes to the Trash"
 msgstr "Envoi de doublons à la corbeille en cours"
 
-#: cocoa/inter/app_pe.py:145
+#: cocoa/inter/app_pe.py:144
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_pe.py:196
+#: cocoa/inter/app_pe.py:199
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
 
@@ -1016,3 +972,11 @@ msgstr "Non"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
 msgstr "OK"
+
+#: cocoa/inter/app_me.py:154
+msgid "Talking to iTunes. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_me.py:182
+msgid "The iTunes application couldn't be found."
+msgstr ""

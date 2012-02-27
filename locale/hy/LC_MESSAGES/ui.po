@@ -13,135 +13,135 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:39
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "Ստուգվում են կրկնօրինակները"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:40
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "Բացվում է"
 
-#: cocoa/inter/app.py:19 qt/base/app.py:41
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "Տեղափոխվում է"
 
-#: cocoa/inter/app.py:20 qt/base/app.py:42
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "Պատճենվում է"
 
-#: cocoa/inter/app.py:21
+#: cocoa/inter/app.py:19
 msgid "Sending to Trash"
 msgstr "Ուղարկվում է Աղբարկղ"
 
-#: cocoa/inter/app_me.py:25
+#: cocoa/inter/app_me.py:31
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Հեռացվում են վնասված շավիղները iTunes-ի Շտեմարանից"
 
-#: cocoa/inter/app_me.py:26
+#: cocoa/inter/app_me.py:32
 msgid "Scanning the iTunes Library"
 msgstr "Ստուգվում է iTunes-ի Շտեմարանը"
 
-#: cocoa/inter/app_pe.py:143
+#: cocoa/inter/app_me.py:152 cocoa/inter/app_pe.py:142
 msgid "Sending dupes to the Trash"
 msgstr "Խաբկանքները տեղափոխվում են Աղբարկղ"
 
-#: cocoa/inter/app_pe.py:145
+#: cocoa/inter/app_pe.py:144
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "Զրույց iPhoto-ի հետ: Մի կպեք! "
 
-#: cocoa/inter/app_pe.py:196
+#: cocoa/inter/app_pe.py:199
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto ծրագիրը չի գտնվել:"
 
-#: qt/base/app.py:43
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
 
-#: qt/base/app.py:109
+#: qt/base/app.py:108
 msgid "Quit"
 msgstr "Փակել"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
+#: qt/base/app.py:109 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Կարգավորումներ"
 
-#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:110 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "dupeGuru-ի Օգնությունը"
 
-#: qt/base/app.py:112 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "dupeGuru-ի մասին"
 
-#: qt/base/app.py:113
+#: qt/base/app.py:112
 msgid "Register dupeGuru"
 msgstr "Գրանցել dupeGuru-ն"
 
-#: qt/base/app.py:114
+#: qt/base/app.py:113
 msgid "Check for Update"
 msgstr "Ստուգել թարմացումները"
 
-#: qt/base/app.py:115
+#: qt/base/app.py:114
 msgid "Open Debug Log"
 msgstr "Բացել Սխալների մատյանը"
 
-#: qt/base/app.py:133
+#: qt/base/app.py:132
 msgid "Add to Ignore List"
 msgstr "Ավելացնել Անտեսման ցանկին"
 
-#: qt/base/app.py:134 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:133 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "copy"
 msgstr "պատճենել"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "move"
 msgstr "տեղափոխել"
 
-#: qt/base/app.py:140
+#: qt/base/app.py:139
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
-#: qt/base/app.py:152 qt/base/result_window.py:312
+#: qt/base/app.py:151 qt/base/result_window.py:307
 msgid "Remove duplicates"
 msgstr "Ջնջել կրկնօրինակները"
 
-#: qt/base/app.py:153 qt/base/result_window.py:313
+#: qt/base/app.py:152 qt/base/result_window.py:308
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: qt/base/app.py:172 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: qt/base/app.py:173
+#: qt/base/app.py:172
 msgid "Custom Command"
 msgstr "Հրամանի ընտրություն"
 
-#: qt/base/app.py:209
+#: qt/base/app.py:208
 msgid "All files were processed successfully."
 msgstr "Բոլոր ֆայլերը հաջողությամբ են կատարվել:"
 
-#: qt/base/app.py:210
+#: qt/base/app.py:209
 msgid "Operation Complete"
 msgstr "Գործողությունը ավարտվեց"
 
-#: qt/base/app.py:213
+#: qt/base/app.py:212
 msgid "Scan complete"
 msgstr "Ստուգումը ավարտվեց"
 
-#: qt/base/app.py:214 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:213 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: qt/base/app.py:266 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:265 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -159,7 +159,7 @@ msgstr "Հատկանիշը"
 msgid "Selected"
 msgstr "Ընտրված"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:23
+#: qt/base/details_table.py:16 qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DetailsPanel.strings:0
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 #: cocoa/pe/en.lproj/DetailsPanel.strings:0
@@ -231,7 +231,7 @@ msgstr "Ընտրեք արդյունքի ֆայլը՝ բացելու համար"
 msgid "All Files (*.*)"
 msgstr "Բոլոր ֆայլերը  (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:334
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:329
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru-ի արդյունքները (*.dupeguru)"
 
@@ -243,126 +243,82 @@ msgstr "Սկսել նոր ստուգումը"
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Ունեք չպահպանված արդյունքներ, իրո՞ք շարունակել:"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Name"
 msgstr "Անունը"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "State"
 msgstr "Վիճակը"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Excluded"
 msgstr "Բացառված"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Normal"
 msgstr "Նորմալ"
 
-#: qt/base/extra_fairware_reminder.py:36
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Sorry, I must insist"
-msgstr "Կներեք, մենք պնդում ենք"
-
-#: qt/base/extra_fairware_reminder.py:41
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
-msgstr ""
-"Թվում է, որ Դուք գտել եք բազմաթիվ կրկնօրինակներ: Պետք է պնդենք, այնուհանդերձ, որ կամավորները սպասում են, թե երբ կլինեն չվճարված շամեր:\n"
-"\n"
-"Կարող եք մտածել \"բայց ես չեմ օգտագործելու այս մեկը, ես չպետք է մասնակցեմ\": Խնդիրը կայանում է նրանում, որ շատ մարդիկ օգտագործում են dupeGuru-ն միայն մեկ անգամ: Եթե բոլորը այդպես մտածեն, dupeGuru-ի զարգացումը հնարավոր չի լինի շարունակել: Դա այն պատճառով, որ այդ միտումը բնորոշ է dupeGuru-ի բնությանը, որ ստիպված եմ պնդել այստեղ:\n"
-"\n"
-"Եթե Դուք չեք կարող օգնել մեզ, ապա պարզապես անտեսեք այս հիշեցումը կամ նամակ ուղարկեք ինձ hsoft@hardcoded.net հասցեով, որպեսզի ես կարողանամ տալ Ձեզ տրամադրել այս հիշեցումը անջատող բանալին:"
-
-#: qt/base/extra_fairware_reminder.py:55
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"Այս հիշեցումը ցուցարվում է, որովհետև.\n"
-"\n"
-"1. Ընթացքի մեջ է ավելի քան 100 կրկնօրինակներ\n"
-"2. Դուք դեռ չեք մասնակցել dupeGuru-ին\n"
-"3. Կան չվճարված շամեր նախագծում"
-
-#: qt/base/extra_fairware_reminder.py:71
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Contribute"
-msgstr "Կամավորներ"
-
-#: qt/base/extra_fairware_reminder.py:74
-msgid "Continue"
-msgstr "Շարունակել"
-
-#: qt/base/preferences_dialog.py:38
+#: qt/base/preferences_dialog.py:37
 msgid "Scan Type:"
 msgstr "Ստուգելու տեսակը."
 
-#: qt/base/preferences_dialog.py:51
+#: qt/base/preferences_dialog.py:50
 msgid "Filter Hardness:"
 msgstr "Ֆիլտրի կարգը."
 
-#: qt/base/preferences_dialog.py:77
+#: qt/base/preferences_dialog.py:76
 msgid "More Results"
 msgstr "Լր. արդյունքներ"
 
-#: qt/base/preferences_dialog.py:82
+#: qt/base/preferences_dialog.py:81
 msgid "Fewer Results"
 msgstr "Քիչ արդյունքներ"
 
-#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:88 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "Տառի չափը."
 
-#: qt/base/preferences_dialog.py:93
+#: qt/base/preferences_dialog.py:92
 msgid "Language:"
 msgstr "Լեզուն."
 
-#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:98 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "Պատճենել և Տեղափոխել."
 
-#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:101 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "Նշվածից աջ"
 
-#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "Վերաստեղծել հարաբերական ճ-ը"
 
-#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "Վերաստեղծել բացարձակ ճ-ը"
 
-#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:106 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "Հրամանի կատարում (փաստարկներ. %d խաբկանքի, %r հղման համար)"
 
-#: qt/base/preferences_dialog.py:185
+#: qt/base/preferences_dialog.py:184
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru-ը պետք է վերագործարկվի՝ լեզուն կիրառելու համար:"
 
@@ -381,11 +337,11 @@ msgstr ""
 "Ավելացրեք պահանջներ աջ վանդակում և սեղմեք ԼԱՎ՝ ուղարկելու համար պատճեները, "
 "որոնք համապատասխանում են այս պահանջներին: Մանրամասները Օգնությունում:"
 
-#: qt/base/problem_dialog.py:34 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Problems!"
 msgstr "Խնդիրներ!"
 
-#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:35 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
@@ -395,11 +351,11 @@ msgstr ""
 "խնդիրների լուծումը նկարագրված է հետևյալ աղյուսակում: Այս ֆայլերը չեն հեռացվի"
 " արդյունքներից:"
 
-#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "Ցուցադրել ընտրվածը"
 
-#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Փակել"
 
@@ -565,17 +521,17 @@ msgstr "Ջնջել կրկնօրինակները"
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "%d ֆայլերը տեղափոխվելու են Աղբարկղ: Շարունակե՞լ:"
 
-#: qt/base/result_window.py:276
+#: qt/base/result_window.py:271
 msgid "Delete and hardlink duplicates"
 msgstr "Ջնջել և ձեռքի կրկնօրինակները"
 
-#: qt/base/result_window.py:277 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:272 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
 msgstr "Դուք ուղարկում եք %d ֆայլերը Աղբարկղ: Շարունակե՞լ:"
 
-#: qt/base/result_window.py:333 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:328 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Ընտրեք ֆայլը՝ պահպանելու արդյունքները՝"
 
@@ -1013,3 +969,11 @@ msgstr "Ջնջել դատարկ թղթապանակները ջնջելուց կա
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE կարգավորումները"
+
+#: cocoa/inter/app_me.py:154
+msgid "Talking to iTunes. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_me.py:182
+msgid "The iTunes application couldn't be found."
+msgstr ""

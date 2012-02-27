@@ -12,12 +12,12 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: core/app.py:83
+#: core/app.py:86
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "сможете только для удаления, перемещения или копирования 10 копий сразу"
 
-#: core/app.py:190
+#: core/app.py:205
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -25,15 +25,15 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов сразу в "
 "демонстрационном режиме."
 
-#: core/app.py:422
+#: core/app.py:431
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:433
+#: core/app.py:442
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранных директорий не содержат сканируемых файлов."
 
-#: core/app.py:472
+#: core/app.py:481
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -45,21 +45,13 @@ msgstr "0 сопоставлений найдено"
 msgid "%d matches found"
 msgstr "%d сопоставлений найдено"
 
-#: core/engine.py:208 core/scanner.py:56
+#: core/engine.py:208 core/scanner.py:80
 msgid "Read size of %d/%d files"
 msgstr "Реалний размер %d/%d файлов"
 
 #: core/engine.py:355
 msgid "Grouped %d/%d matches"
 msgstr "Группировка %d/%d совпадений"
-
-#: core/gui/extra_fairware_reminder.py:23
-msgid "Continue ({})"
-msgstr "Продолжать ({})"
-
-#: core/gui/extra_fairware_reminder.py:25
-msgid "Continue"
-msgstr "Продолжать "
 
 #: core/prioritize.py:68
 msgid "None"
@@ -97,19 +89,19 @@ msgstr "%d / %d (%s / %s) дубликаты обозначены."
 msgid " filter: %s"
 msgstr "филтр. %s"
 
-#: core/scanner.py:76
+#: core/scanner.py:100
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитано метаданных %d/%d файлов"
 
-#: core/scanner.py:106
+#: core/scanner.py:131
 msgid "Removing false matches"
 msgstr "Удаление ложных совпадениях"
 
-#: core/scanner.py:124
+#: core/scanner.py:149
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Обработано %d/%d матчей против игнор-лист"
 
-#: core/scanner.py:133
+#: core/scanner.py:171
 msgid "Doing group prioritization"
 msgstr "Делая группы приоритетов"
 

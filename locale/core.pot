@@ -3,23 +3,23 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:83
+#: core/app.py:86
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:190
+#: core/app.py:205
 msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
 msgstr ""
 
-#: core/app.py:422
+#: core/app.py:431
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:433
+#: core/app.py:442
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:472
+#: core/app.py:481
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -31,20 +31,12 @@ msgstr ""
 msgid "%d matches found"
 msgstr ""
 
-#: core/engine.py:208 core/scanner.py:56
+#: core/engine.py:208 core/scanner.py:80
 msgid "Read size of %d/%d files"
 msgstr ""
 
 #: core/engine.py:355
 msgid "Grouped %d/%d matches"
-msgstr ""
-
-#: core/gui/extra_fairware_reminder.py:23
-msgid "Continue ({})"
-msgstr ""
-
-#: core/gui/extra_fairware_reminder.py:25
-msgid "Continue"
 msgstr ""
 
 #: core/prioritize.py:68
@@ -83,19 +75,19 @@ msgstr ""
 msgid " filter: %s"
 msgstr ""
 
-#: core/scanner.py:76
+#: core/scanner.py:100
 msgid "Read metadata of %d/%d files"
 msgstr ""
 
-#: core/scanner.py:106
+#: core/scanner.py:131
 msgid "Removing false matches"
 msgstr ""
 
-#: core/scanner.py:124
+#: core/scanner.py:149
 msgid "Processed %d/%d matches against the ignore list"
 msgstr ""
 
-#: core/scanner.py:133
+#: core/scanner.py:171
 msgid "Doing group prioritization"
 msgstr ""
 

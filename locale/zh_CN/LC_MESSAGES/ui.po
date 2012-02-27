@@ -2,110 +2,110 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:39
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "重复文件扫描中"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:40
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "载入中"
 
-#: cocoa/inter/app.py:19 qt/base/app.py:41
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "移动中"
 
-#: cocoa/inter/app.py:20 qt/base/app.py:42
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "复制中"
 
-#: qt/base/app.py:43
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "将文件移到回收站"
 
-#: qt/base/app.py:109
+#: qt/base/app.py:108
 msgid "Quit"
 msgstr "退出"
 
-#: qt/base/app.py:110 qt/base/preferences_dialog.py:124
+#: qt/base/app.py:109 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "首选项"
 
-#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:110 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "dupeGuru帮助"
 
-#: qt/base/app.py:112 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "关于dupeGuru"
 
-#: qt/base/app.py:113
+#: qt/base/app.py:112
 msgid "Register dupeGuru"
 msgstr "注册dupeGuru"
 
-#: qt/base/app.py:114
+#: qt/base/app.py:113
 msgid "Check for Update"
 msgstr "检查更新"
 
-#: qt/base/app.py:115
+#: qt/base/app.py:114
 msgid "Open Debug Log"
 msgstr "打开调试记录"
 
-#: qt/base/app.py:133
+#: qt/base/app.py:132
 msgid "Add to Ignore List"
 msgstr "添加到忽略列表中"
 
-#: qt/base/app.py:134 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:133 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "copy"
 msgstr "复制"
 
-#: qt/base/app.py:139
+#: qt/base/app.py:138
 msgid "move"
 msgstr "移动"
 
-#: qt/base/app.py:140
+#: qt/base/app.py:139
 msgid "Select a directory to {} marked files to"
 msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
-#: qt/base/app.py:152 qt/base/result_window.py:312
+#: qt/base/app.py:151 qt/base/result_window.py:307
 msgid "Remove duplicates"
 msgstr "移除重复文件"
 
-#: qt/base/app.py:153 qt/base/result_window.py:313
+#: qt/base/app.py:152 qt/base/result_window.py:308
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "你将从结果中移除 %d 个文件。继续吗?"
 
-#: qt/base/app.py:172 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
-#: qt/base/app.py:173
+#: qt/base/app.py:172
 msgid "Custom Command"
 msgstr "自定义命令"
 
-#: qt/base/app.py:209
+#: qt/base/app.py:208
 msgid "All files were processed successfully."
 msgstr "所有文件已成功处理。"
 
-#: qt/base/app.py:210
+#: qt/base/app.py:209
 msgid "Operation Complete"
 msgstr "执行完成"
 
-#: qt/base/app.py:213
+#: qt/base/app.py:212
 msgid "Scan complete"
 msgstr "扫描完成"
 
-#: qt/base/app.py:214 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:213 cocoa/base/en.lproj/Localizable.strings:0
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: qt/base/app.py:266 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:265 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -121,7 +121,7 @@ msgstr "属性"
 msgid "Selected"
 msgstr "已选择"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:23
+#: qt/base/details_table.py:16 qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DetailsPanel.strings:0
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 #: cocoa/pe/en.lproj/DetailsPanel.strings:0
@@ -193,7 +193,7 @@ msgstr "选择一个结果文件并载入"
 msgid "All Files (*.*)"
 msgstr "所有文件 (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:334
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:329
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru结果 (*.dupeguru)"
 
@@ -205,126 +205,82 @@ msgstr "开始新的扫描"
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "目前还有结果尚未保存，确定要继续吗?"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Name"
 msgstr "名称"
 
-#: qt/base/directories_model.py:22
+#: qt/base/directories_model.py:20
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "State"
 msgstr "说明"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Excluded"
 msgstr "不包含"
 
-#: qt/base/directories_model.py:23
+#: qt/base/directories_model.py:21
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Normal"
 msgstr "正常"
 
-#: qt/base/extra_fairware_reminder.py:36
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Sorry, I must insist"
-msgstr "抱歉,现在仍要继续"
-
-#: qt/base/extra_fairware_reminder.py:41
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"It seems that you found a lot of duplicates. Nice! I must insist, however, that contributions are expected when there are unpaid hours on the project.\n"
-"\n"
-"You might think \"but I'm only going to use this once, I don't have to contribute\". The problem is that most people use dupeGuru only once in a while. If everyone thinks like that, dupeGuru development cannot be funded. It's because of this tendency inherent to dupeGuru's nature that I have to insist here.\n"
-"\n"
-"If you can't afford to contribute, you can ignore this reminder or send me an e-mail at hsoft@hardcoded.net so I can give you a key to remove this reminder."
-msgstr ""
-"看起来似乎您找到了很多重复文件。这也是我继续精进这个软件的动力之一。然而，我衷心的希望能够得到您的捐助，因为我会日夜奋战于这个软件并且没有任何报酬。\n"
-"\n"
-"您可能会觉得 \"反正这个软件我只用一次，我不需要给开发者任何捐助\". 问题是大多数人都只用一次dupeGuru。如果每一位都这样想，dupeGuru的开发也就没有资金支持了。也正是因为dupeGuru自身的性质决定了它有着仅用一次的内在倾向，所以我还必须坚持致力于这个软件的开发与精进。\n"
-"\n"
-"如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。"
-
-#: qt/base/extra_fairware_reminder.py:55
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid ""
-"This reminder showed up because:\n"
-"\n"
-"1. You are processing more than 100 duplicates\n"
-"2. You have not yet contributed to dupeGuru\n"
-"3. There are unpaid hours in the project"
-msgstr ""
-"此提醒框弹出的原因如下:\n"
-"\n"
-"1. 您正在处理超过100个重复文件\n"
-"2. 您没有捐助过dupeGuru\n"
-"3. 此软件中还有未支付时间"
-
-#: qt/base/extra_fairware_reminder.py:71
-#: cocoa/base/en.lproj/ExtraFairwareReminder.strings:0
-msgid "Contribute"
-msgstr "捐助"
-
-#: qt/base/extra_fairware_reminder.py:74
-msgid "Continue"
-msgstr "继续"
-
-#: qt/base/preferences_dialog.py:38
+#: qt/base/preferences_dialog.py:37
 msgid "Scan Type:"
 msgstr "扫描类型:"
 
-#: qt/base/preferences_dialog.py:51
+#: qt/base/preferences_dialog.py:50
 msgid "Filter Hardness:"
 msgstr "筛选强度:"
 
-#: qt/base/preferences_dialog.py:77
+#: qt/base/preferences_dialog.py:76
 msgid "More Results"
 msgstr "较多结果"
 
-#: qt/base/preferences_dialog.py:82
+#: qt/base/preferences_dialog.py:81
 msgid "Fewer Results"
 msgstr "较少结果"
 
-#: qt/base/preferences_dialog.py:89 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:88 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:93
+#: qt/base/preferences_dialog.py:92
 msgid "Language:"
 msgstr "语言:"
 
-#: qt/base/preferences_dialog.py:99 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:98 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Copy and Move:"
 msgstr "复制和移动:"
 
-#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:101 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
 msgstr "目标位置"
 
-#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate relative path"
 msgstr "重建相对路径"
 
-#: qt/base/preferences_dialog.py:104 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:103 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Recreate absolute path"
 msgstr "重建绝对路径"
 
-#: qt/base/preferences_dialog.py:107 cocoa/me/en.lproj/Preferences.strings:0
+#: qt/base/preferences_dialog.py:106 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr "自定义命令 (参数: %d 指重复文件, %r 指参照文件):"
 
-#: qt/base/preferences_dialog.py:185
+#: qt/base/preferences_dialog.py:184
 msgid "dupeGuru has to restart for language changes to take effect."
 msgstr "dupeGuru将重新启动以使语言修改生效。"
 
@@ -344,22 +300,22 @@ msgstr ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 
-#: qt/base/problem_dialog.py:34 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Problems!"
 msgstr "有问题!"
 
-#: qt/base/problem_dialog.py:38 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:35 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr "在处理部分或全部文件时发现问题。产生问题的原因在下表中进行描述。这些文件将不会从结果中移除。"
 
-#: qt/base/problem_dialog.py:55 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Reveal Selected"
 msgstr "显示选择"
 
-#: qt/base/problem_dialog.py:60 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "关闭"
 
@@ -523,17 +479,17 @@ msgstr "删除重复文件"
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "即将有 %d 个文件被移到回收站。继续吗?"
 
-#: qt/base/result_window.py:276
+#: qt/base/result_window.py:271
 msgid "Delete and hardlink duplicates"
 msgstr "删除及硬连接重复文件"
 
-#: qt/base/result_window.py:277 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:272 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
 msgstr "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?"
 
-#: qt/base/result_window.py:333 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:328 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "将结果保存为..."
 
@@ -927,27 +883,27 @@ msgstr "Remove empty folders after delete and move"
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE Preferences"
 
-#: cocoa/inter/app.py:21
+#: cocoa/inter/app.py:19
 msgid "Sending to Trash"
 msgstr "移到垃圾桶"
 
-#: cocoa/inter/app_me.py:25
+#: cocoa/inter/app_me.py:31
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "从你的iTunes库中移除无效的音轨"
 
-#: cocoa/inter/app_me.py:26
+#: cocoa/inter/app_me.py:32
 msgid "Scanning the iTunes Library"
 msgstr "正在扫描iTunes库"
 
-#: cocoa/inter/app_pe.py:143
+#: cocoa/inter/app_me.py:152 cocoa/inter/app_pe.py:142
 msgid "Sending dupes to the Trash"
 msgstr "将重复文件移到垃圾桶"
 
-#: cocoa/inter/app_pe.py:145
+#: cocoa/inter/app_pe.py:144
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_pe.py:196
+#: cocoa/inter/app_pe.py:199
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
 
@@ -1003,4 +959,12 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "OK"
+msgstr ""
+
+#: cocoa/inter/app_me.py:154
+msgid "Talking to iTunes. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_me.py:182
+msgid "The iTunes application couldn't be found."
 msgstr ""
