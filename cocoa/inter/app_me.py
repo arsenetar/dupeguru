@@ -14,7 +14,7 @@ import os.path as op
 
 from cocoa import as_fetch, proxy
 from hscommon import io
-from hscommon.trans import tr
+from hscommon.trans import trget
 from hscommon.path import Path
 
 from core import directories
@@ -23,6 +23,8 @@ from core.scanner import ScanType
 from core_me.app import DupeGuru as DupeGuruBase
 from core_me import fs
 from .app import JOBID2TITLE, PyDupeGuruBase
+
+tr = trget('ui')
 
 JobType.RemoveDeadTracks = 'jobRemoveDeadTracks'
 JobType.ScanDeadTracks = 'jobScanDeadTracks'

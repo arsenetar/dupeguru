@@ -16,7 +16,7 @@ from appscript import app, its, CommandError, ApplicationNotFoundError
 from hscommon import io
 from hscommon.util import remove_invalid_xml
 from hscommon.path import Path
-from hscommon.trans import tr
+from hscommon.trans import trget
 from cocoa import proxy
 
 from core.scanner import ScanType
@@ -25,6 +25,8 @@ from core_pe import _block_osx
 from core_pe.photo import Photo as PhotoBase
 from core_pe.app import DupeGuru as DupeGuruBase
 from .app import PyDupeGuruBase
+
+tr = trget('ui')
 
 IPHOTO_PATH = Path('iPhoto Library')
 
