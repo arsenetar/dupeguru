@@ -80,7 +80,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # start_job(jobid, func, args=()) ( func(j, *args) )
-    # show_extra_fairware_reminder()
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
@@ -236,10 +235,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.results.apply_filter(filter)
         self._results_changed()
     
-    def show_extra_fairware_reminder_if_needed(self):
-        if self.results.mark_count > 100 and self.should_show_fairware_reminder:
-            self.view.show_extra_fairware_reminder()
-    
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
@@ -278,14 +273,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         
         if not self._check_demo():
             return
-        self.show_extra_fairware_reminder_if_needed()
         jobid = JobType.Copy if copy else JobType.Move
         self.view.start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
         if not self._check_demo():
             return
-        self.show_extra_fairware_reminder_if_needed()
         self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
     
     def export_to_xhtml(self):

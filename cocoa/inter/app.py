@@ -20,7 +20,7 @@ JOBID2TITLE = {
 }
 
 class DupeGuruView(FairwareView):
-    def showExtraFairwareReminder(self): pass
+    pass
 
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
@@ -190,8 +190,4 @@ class PyDupeGuruBase(PyFairware):
         else:
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             proxy.postNotification_userInfo_('JobStarted', ud)
-    
-    @dontwrap
-    def show_extra_fairware_reminder(self):
-        self.cocoa.showExtraFairwareReminder()
     

@@ -9,7 +9,6 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "AppDelegate.h"
 #import "ProgressController.h"
 #import "HSFairwareReminder.h"
-#import "ExtraFairwareReminder.h"
 #import "Utils.h"
 #import "Consts.h"
 #import "Dialogs.h"
@@ -209,15 +208,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 
 /* model --> view */
-- (void)showExtraFairwareReminder
-{
-    ExtraFairwareReminder *dialog = [[ExtraFairwareReminder alloc] initWithApp:model];
-    [dialog start];
-    [NSApp runModalForWindow:[dialog window]];
-    [dialog close];
-    [dialog release];
-}
-
 - (void)showMessage:(NSString *)msg
 {
     [Dialogs showMessage:msg];

@@ -27,7 +27,6 @@ from qtlib.recent import Recent
 from qtlib.reg import Registration
 
 from . import platform
-from .extra_fairware_reminder import ExtraFairwareReminder
 from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
@@ -284,10 +283,6 @@ class DupeGuru(QObject):
     def show_demo_nag(self, prompt):
         reg = Registration(self.model)
         reg.show_demo_nag(prompt)
-    
-    def show_extra_fairware_reminder(self):
-        dialog = ExtraFairwareReminder(self.directories_dialog, self)
-        dialog.exec()
     
     def show_message(self, msg):
         window = QApplication.activeWindow()

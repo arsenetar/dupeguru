@@ -200,7 +200,6 @@ def build_cocoa_bridging_interfaces(edition):
         OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyFairware)
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
-    from inter.extra_fairware_reminder import PyExtraFairwareReminder, ExtraFairwareReminderView
     from inter.prioritize_dialog import PyPrioritizeDialog, PrioritizeDialogView
     from inter.prioritize_list import PyPrioritizeList, PrioritizeListView
     from inter.problem_dialog import PyProblemDialog
@@ -209,14 +208,13 @@ def build_cocoa_bridging_interfaces(edition):
     from inter.app import PyDupeGuruBase, DupeGuruView
     appmod = importlib.import_module('inter.app_{}'.format(edition))
     allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyFairware,
-        PyDetailsPanel, PyDirectoryOutline, PyExtraFairwareReminder, PyPrioritizeDialog,
-        PyPrioritizeList, PyProblemDialog, PyResultTable, PyStatsLabel, PyDupeGuruBase,
-        appmod.PyDupeGuru]
+        PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
+        PyResultTable, PyStatsLabel, PyDupeGuruBase, appmod.PyDupeGuru]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
     allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
-        DetailsPanelView, DirectoryOutlineView, ExtraFairwareReminderView, PrioritizeDialogView,
-        PrioritizeListView, ResultTableView, StatsLabelView, DupeGuruView]
+        DetailsPanelView, DirectoryOutlineView, PrioritizeDialogView, PrioritizeListView,
+        ResultTableView, StatsLabelView, DupeGuruView]
     clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
     objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
     build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])

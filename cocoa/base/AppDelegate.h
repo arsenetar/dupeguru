@@ -61,7 +61,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)startScanning:(id)sender;
 
 /* model --> view */
-- (void)showExtraFairwareReminder;
 - (void)showMessage:(NSString *)msg;
 - (void)setupAsRegistered;
 - (void)showFairwareNagWithPrompt:(NSString *)prompt;
