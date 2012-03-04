@@ -32,23 +32,23 @@ msgstr "Копіювання"
 msgid "Sending to Trash"
 msgstr "Отправка в корзину"
 
-#: cocoa/inter/app_me.py:31
+#: cocoa/inter/app_me.py:33
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Видалення мертвих треки з вашої бібліотеки iTunes Library "
 
-#: cocoa/inter/app_me.py:32
+#: cocoa/inter/app_me.py:34
 msgid "Scanning the iTunes Library"
 msgstr "Сканування ITunes Library"
 
-#: cocoa/inter/app_me.py:152 cocoa/inter/app_pe.py:142
+#: cocoa/inter/app_me.py:154 cocoa/inter/app_pe.py:144
 msgid "Sending dupes to the Trash"
 msgstr "Відправлення ошуканих в кошик"
 
-#: cocoa/inter/app_pe.py:144
+#: cocoa/inter/app_pe.py:146
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "У бесіді з iPhoto. Не чіпайте його!"
 
-#: cocoa/inter/app_pe.py:199
+#: cocoa/inter/app_pe.py:201
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto програма не може бути знайдене."
 
@@ -108,11 +108,11 @@ msgstr "переміщати"
 msgid "Select a directory to {} marked files to"
 msgstr "Виберіть каталог на {} відмічені файли"
 
-#: qt/base/app.py:151 qt/base/result_window.py:307
+#: qt/base/app.py:151 qt/base/result_window.py:311
 msgid "Remove duplicates"
 msgstr "Видалення дублікатів"
 
-#: qt/base/app.py:152 qt/base/result_window.py:308
+#: qt/base/app.py:152 qt/base/result_window.py:312
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити файли %d результату пошуку. Продовжити?"
@@ -180,16 +180,16 @@ msgstr "Вікно результатів"
 msgid "Add Folder..."
 msgstr "Додати папку ..."
 
-#: qt/base/directories_dialog.py:68 qt/base/result_window.py:82
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:84
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "Файл"
 
-#: qt/base/directories_dialog.py:70 qt/base/result_window.py:90
+#: qt/base/directories_dialog.py:70 qt/base/result_window.py:92
 msgid "View"
 msgstr "Вид"
 
-#: qt/base/directories_dialog.py:72 qt/base/result_window.py:92
+#: qt/base/directories_dialog.py:72 qt/base/result_window.py:94
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Допомога"
@@ -233,7 +233,7 @@ msgstr "Виберіть файл результатів для завантаж
 msgid "All Files (*.*)"
 msgstr "Всі файли (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:329
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:333
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru Результати (*.dupeguru) "
 
@@ -361,132 +361,125 @@ msgstr "Показати вибраного"
 msgid "Close"
 msgstr "Закриття"
 
-#: qt/base/result_window.py:44 qt/me/details_dialog.py:20
-#: qt/pe/details_dialog.py:25 qt/se/details_dialog.py:20
-#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:48 qt/base/result_window.py:179
+#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
+#: qt/se/details_dialog.py:20 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Деталі"
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:86
-#: qt/base/result_window.py:154 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:49 qt/base/result_window.py:88
+#: qt/base/result_window.py:153 qt/base/result_window.py:178
+#: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Дії"
 
-#: qt/base/result_window.py:46 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:50 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Dupes Only"
 msgstr "Показати тільки ошукані"
 
-#: qt/base/result_window.py:47 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:51 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Delta Values"
 msgstr "Показати Дельта значення"
 
-#: qt/base/result_window.py:48
+#: qt/base/result_window.py:52
 msgid "Send Marked to Recycle Bin"
 msgstr "Надіслати Позначено до кошику"
 
-#: qt/base/result_window.py:49 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Delete Marked and Replace with Hardlinks"
 msgstr "Видалити Помічені і заміна з Жорсткі"
 
-#: qt/base/result_window.py:50 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Move Marked to..."
 msgstr "Переміщення Позначено в к ..."
 
-#: qt/base/result_window.py:51 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Copy Marked to..."
 msgstr "Скопіюйте Позначено в к ..."
 
-#: qt/base/result_window.py:52 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Marked from Results"
 msgstr "Видалити Помічені від результатів"
 
-#: qt/base/result_window.py:53
+#: qt/base/result_window.py:57
 msgid "Re-Prioritize Results..."
 msgstr "Змінити пріоритети Результати ..."
 
-#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Selected from Results"
 msgstr "Видалити вибрані з результатів"
 
-#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Додати обрані в чорний список"
 
-#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
 msgstr "Зробити вибраної посилання"
 
-#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Відкрити вибраний з додатків за умовчанням"
 
-#: qt/base/result_window.py:58
+#: qt/base/result_window.py:62
 msgid "Open Containing Folder of Selected"
 msgstr "Відкрити містить папку вибіркових"
 
-#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Rename Selected"
 msgstr "Перейменувати вибраного"
 
-#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark All"
 msgstr "Відзначити всі"
 
-#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark None"
 msgstr "Ні Марк"
 
-#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:66 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invert Marking"
 msgstr "Звернути Маркування"
 
-#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark Selected"
 msgstr "Марк Обраний"
 
-#: qt/base/result_window.py:64 qt/base/result_window.py:234
+#: qt/base/result_window.py:68 qt/base/result_window.py:232
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Clear Ignore List"
 msgstr "Очистити список друзів"
 
-#: qt/base/result_window.py:65 qt/base/result_window.py:220
-msgid "Apply Filter"
-msgstr "Застосувати фільтр"
-
-#: qt/base/result_window.py:66
-msgid "Cancel Filter"
-msgstr "Скасування фільтра"
-
-#: qt/base/result_window.py:67
+#: qt/base/result_window.py:69
 msgid "Export To HTML"
 msgstr "Експорт в HTML"
 
-#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:70 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Зберегти результати ..."
 
-#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:71 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Викликати спеціальної команди"
 
-#: qt/base/result_window.py:84
+#: qt/base/result_window.py:86
 msgid "Mark"
 msgstr "Марк"
 
-#: qt/base/result_window.py:88 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:90 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Колони"
 
-#: qt/base/result_window.py:150 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/result_window.py:149 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
@@ -496,37 +489,31 @@ msgstr "Відновити налаштування за замовчуванн�
 msgid "{} Results"
 msgstr "{} Результати"
 
-#: qt/base/result_window.py:221
-msgid ""
-"Type the filter you want to apply on your results. See help for details."
-msgstr ""
-"Тип фільтру, який ви хочете застосувати на ваші результати. Див. довідку."
-
-#: qt/base/result_window.py:237
+#: qt/base/result_window.py:235
 msgid "Nothing to clear."
 msgstr "Нічого не ясно."
 
-#: qt/base/result_window.py:239 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:237 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ви дійсно хочете видалити всі елементи %d з чорного списку?"
 
-#: qt/base/result_window.py:242
+#: qt/base/result_window.py:240
 msgid "Ignore list cleared."
 msgstr "Чорний список очищається."
 
-#: qt/base/result_window.py:251
+#: qt/base/result_window.py:249
 msgid "Delete duplicates"
 msgstr "Видалення дублікатів"
 
-#: qt/base/result_window.py:252 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:250 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "Ви збираєтеся відправити %d файли в корзину. Продовжити?"
 
-#: qt/base/result_window.py:271
+#: qt/base/result_window.py:272
 msgid "Delete and hardlink duplicates"
 msgstr "Видалити і жорстку дублікатів"
 
-#: qt/base/result_window.py:272 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:273 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
@@ -534,7 +521,7 @@ msgstr ""
 "Ви збираєтеся відправити %d файли до кошика (і жорстку них пізніше). "
 "Продовжити?"
 
-#: qt/base/result_window.py:328 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:332 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Виберіть файл, щоб зберегти ваші результати"
 
@@ -886,7 +873,7 @@ msgstr "Дія"
 msgid "Directories"
 msgstr "Каталоги"
 
-#: cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:180 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
 msgstr "Тільки ошукані"
 
@@ -973,10 +960,14 @@ msgstr "Видалити порожні папки після видалення
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE переваги"
 
-#: cocoa/inter/app_me.py:154
+#: cocoa/inter/app_me.py:156
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:182
+#: cocoa/inter/app_me.py:184
 msgid "The iTunes application couldn't be found."
+msgstr ""
+
+#: qt/base/result_window.py:181
+msgid "Delta Values"
 msgstr ""
