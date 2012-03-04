@@ -6,12 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL, Qt, QSize
+from PyQt4.QtCore import Qt, pyqtSignal
 from PyQt4.QtGui import QBrush, QFont, QFontMetrics, QTableView, QColor
 
 from qtlib.table import Table
-
-from core.gui.result_table import ResultTable as ResultTableModel
 
 class ResultsModel(Table):
     def __init__(self, app, view):
@@ -126,11 +124,13 @@ class ResultsView(QTableView):
     #--- Override
     def keyPressEvent(self, event):
         if event.text() == ' ':
-            self.emit(SIGNAL('spacePressed()'))
+            self.spacePressed.emit()
             return
         QTableView.keyPressEvent(self, event)
     
     def mouseDoubleClickEvent(self, event):
-        self.emit(SIGNAL('doubleClicked()'))
+        self.doubleClicked.emit(None)
         # We don't call the superclass' method because the default behavior is to rename the cell.
     
+    #--- Signals
+    spacePressed = pyqtSignal()

@@ -6,10 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, SIGNAL, QUrl, QRect
+from PyQt4.QtCore import Qt, QUrl, QRect
 from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QMessageBox, QInputDialog, QLineEdit,
     QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar,
-    QDialog)
+    QDialog, QAction)
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
@@ -33,9 +33,9 @@ class ResultWindow(QMainWindow):
         self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
         self._update_column_actions_status()
         
-        self.connect(self.menuColumns, SIGNAL('triggered(QAction*)'), self.columnToggled)
-        self.connect(self.resultsView, SIGNAL('doubleClicked()'), self.resultsDoubleClicked)
-        self.connect(self.resultsView, SIGNAL('spacePressed()'), self.resultsSpacePressed)
+        self.menuColumns.triggered[QAction].connect(self.columnToggled)
+        self.resultsView.doubleClicked.connect(self.resultsDoubleClicked)
+        self.resultsView.spacePressed.connect(self.resultsSpacePressed)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _setupActions(self):
@@ -352,7 +352,7 @@ class ResultWindow(QMainWindow):
     def contextMenuEvent(self, event):
         self.actionActions.menu().exec_(event.globalPos())
     
-    def resultsDoubleClicked(self):
+    def resultsDoubleClicked(self, modelIndex):
         self.app.model.open_selected()
     
     def resultsSpacePressed(self):
