@@ -9,12 +9,13 @@
 from PyQt4.QtCore import Qt, QUrl, QRect
 from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QMessageBox, QInputDialog, QLineEdit,
     QDesktopServices, QFileDialog, QMenuBar, QWidget, QVBoxLayout, QAbstractItemView, QStatusBar,
-    QDialog, QAction)
+    QDialog, QAction, QPushButton, QCheckBox)
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from hscommon.util import nonone
-from qtlib.util import moveToScreenCenter
+from qtlib.util import moveToScreenCenter, horizontalWrap
+from qtlib.search_edit import SearchEdit
 
 from .results_model import ResultsView
 from .stats_label import StatsLabel
@@ -27,7 +28,6 @@ class ResultWindow(QMainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self, None)
         self.app = app
-        self._last_filter = None
         self._setupUi()
         self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)
         self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
@@ -36,6 +36,10 @@ class ResultWindow(QMainWindow):
         self.menuColumns.triggered[QAction].connect(self.columnToggled)
         self.resultsView.doubleClicked.connect(self.resultsDoubleClicked)
         self.resultsView.spacePressed.connect(self.resultsSpacePressed)
+        self.detailsButton.clicked.connect(self.actionDetails.triggered)
+        self.dupesOnlyCheckBox.stateChanged.connect(self.powerMarkerTriggered)
+        self.deltaValuesCheckBox.stateChanged.connect(self.deltaTriggered)
+        self.searchEdit.searchChanged.connect(self.searchChanged)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _setupActions(self):
@@ -62,8 +66,6 @@ class ResultWindow(QMainWindow):
             ('actionInvertMarking', 'Ctrl+Alt+A', '', tr("Invert Marking"), self.markInvertTriggered),
             ('actionMarkSelected', '', '', tr("Mark Selected"), self.markSelectedTriggered),
             ('actionClearIgnoreList', '', '', tr("Clear Ignore List"), self.clearIgnoreListTriggered),
-            ('actionApplyFilter', 'Ctrl+F', '', tr("Apply Filter"), self.applyFilterTriggered),
-            ('actionCancelFilter', 'Ctrl+Shift+F', '', tr("Cancel Filter"), self.cancelFilterTriggered),
             ('actionExport', '', '', tr("Export To HTML"), self.exportTriggered),
             ('actionSaveResults', 'Ctrl+S', '', tr("Save Results..."), self.saveResultsTriggered),
             ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', tr("Invoke Custom Command"), self.app.invokeCustomCommand),
@@ -107,9 +109,6 @@ class ResultWindow(QMainWindow):
         self.menuActions.addAction(self.actionRevealSelected)
         self.menuActions.addAction(self.actionInvokeCustomCommand)
         self.menuActions.addAction(self.actionRenameSelected)
-        self.menuActions.addSeparator()
-        self.menuActions.addAction(self.actionApplyFilter)
-        self.menuActions.addAction(self.actionCancelFilter)
         self.menuMark.addAction(self.actionMarkAll)
         self.menuMark.addAction(self.actionMarkNone)
         self.menuMark.addAction(self.actionInvertMarking)
@@ -167,13 +166,25 @@ class ResultWindow(QMainWindow):
         actionMenu.addAction(self.actionInvokeCustomCommand)
         actionMenu.addAction(self.actionRenameSelected)
         self.actionActions.setMenu(actionMenu)
+        self.actionsButton.setMenu(self.actionActions.menu())
     
     def _setupUi(self):
         self.setWindowTitle(tr("{} Results").format(self.app.NAME))
         self.resize(630, 514)
         self.centralwidget = QWidget(self)
-        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setMargin(0)
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setSpacing(0)
+        self.actionsButton = QPushButton(tr("Actions"))
+        self.detailsButton = QPushButton(tr("Details"))
+        self.dupesOnlyCheckBox = QCheckBox(tr("Dupes Only"))
+        self.deltaValuesCheckBox = QCheckBox(tr("Delta Values"))
+        self.searchEdit = SearchEdit()
+        self.searchEdit.setMaximumWidth(300)
+        self.horizontalLayout = horizontalWrap([self.actionsButton, self.detailsButton,
+            self.dupesOnlyCheckBox, self.deltaValuesCheckBox, None, self.searchEdit, 8])
+        self.horizontalLayout.setSpacing(8)
+        self.verticalLayout.addLayout(self.horizontalLayout)
         self.resultsView = ResultsView(self.centralwidget)
         self.resultsView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.resultsView.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -184,7 +195,7 @@ class ResultWindow(QMainWindow):
         h.setMovable(True)
         h.setStretchLastSection(False)
         h.setDefaultAlignment(Qt.AlignLeft)
-        self.verticalLayout_2.addWidget(self.resultsView)
+        self.verticalLayout.addWidget(self.resultsView)
         self.setCentralWidget(self.centralwidget)
         self._setupActions()
         self._setupMenu()
@@ -216,20 +227,6 @@ class ResultWindow(QMainWindow):
     def addToIgnoreListTriggered(self):
         self.app.model.add_selected_to_ignore_list()
     
-    def applyFilterTriggered(self):
-        title = tr("Apply Filter")
-        msg = tr("Type the filter you want to apply on your results. See help for details.")
-        text = nonone(self._last_filter, '[*]')
-        answer, ok = QInputDialog.getText(self, title, msg, QLineEdit.Normal, text)
-        if not ok:
-            return
-        answer = str(answer)
-        self.app.model.apply_filter(answer)
-        self._last_filter = answer
-    
-    def cancelFilterTriggered(self):
-        self.app.model.apply_filter('')
-    
     def clearIgnoreListTriggered(self):
         title = tr("Clear Ignore List")
         count = len(self.app.model.scanner.ignore_list)
@@ -253,8 +250,11 @@ class ResultWindow(QMainWindow):
         if self.app.confirm(title, msg):
             self.app.model.delete_marked()
     
-    def deltaTriggered(self):
-        self.resultsModel.delta_values = self.actionDelta.isChecked()
+    def deltaTriggered(self, state=None):
+        # The sender can be either the action or the checkbox, but both have a isChecked() method.
+        self.resultsModel.delta_values = self.sender().isChecked()
+        self.actionDelta.setChecked(self.resultsModel.delta_values)
+        self.deltaValuesCheckBox.setChecked(self.resultsModel.delta_values)
     
     def detailsTriggered(self):
         self.app.show_details()
@@ -294,8 +294,11 @@ class ResultWindow(QMainWindow):
     def openTriggered(self):
         self.app.model.open_selected()
     
-    def powerMarkerTriggered(self):
-        self.resultsModel.power_marker = self.actionPowerMarker.isChecked()
+    def powerMarkerTriggered(self, state=None):
+        # see deltaTriggered
+        self.resultsModel.power_marker = self.sender().isChecked()
+        self.actionPowerMarker.setChecked(self.resultsModel.power_marker)
+        self.dupesOnlyCheckBox.setChecked(self.resultsModel.power_marker)
     
     def preferencesTriggered(self):
         self.app.show_preferences()
@@ -357,4 +360,7 @@ class ResultWindow(QMainWindow):
     
     def resultsSpacePressed(self):
         self.app.model.toggle_selected_mark_state()
+    
+    def searchChanged(self):
+        self.app.model.apply_filter(self.searchEdit.text())
     
