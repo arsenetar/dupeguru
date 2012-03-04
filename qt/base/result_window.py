@@ -14,12 +14,11 @@ from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QMessageBox, QInputDialog, 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from hscommon.util import nonone
-from qtlib.util import moveToScreenCenter, horizontalWrap
+from qtlib.util import moveToScreenCenter, horizontalWrap, createActions
 from qtlib.search_edit import SearchEdit
 
 from .results_model import ResultsView
 from .stats_label import StatsLabel
-from .util import createActions
 from .prioritize_dialog import PrioritizeDialog
 
 tr = trget('ui')

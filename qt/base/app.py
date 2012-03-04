@@ -25,12 +25,12 @@ from core.app import JobType
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
 from qtlib.reg import Registration
+from qtlib.util import createActions
 
 from . import platform
 from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
-from .util import createActions
 
 tr = trget('ui')
 

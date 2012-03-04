@@ -13,11 +13,10 @@ from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLa
 
 from hscommon.trans import trget
 from qtlib.recent import Recent
-from qtlib.util import moveToScreenCenter
+from qtlib.util import moveToScreenCenter, createActions
 
 from . import platform
 from .directories_model import DirectoriesModel, DirectoriesDelegate
-from .util import createActions
 
 tr = trget('ui')
 
