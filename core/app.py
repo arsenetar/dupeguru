@@ -169,13 +169,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if self.results.get_group_of_duplicate(d) is not None]
         self.notify('results_changed')
     
-    def _job_completed(self, jobid):
-        # Must be called by subclasses when they detect that an async job is completed.
+    def _job_completed(self, jobid, exc):
+        # Must be called by subclasses when they detect that an async job is completed. If an
+        # exception was raised during the job, `exc` will be set. Return True when the error was
+        # handled. If we return False when exc is set, a the exception will be re-raised.
         if jobid == JobType.Scan:
             self._results_changed()
         elif jobid in {JobType.Load, JobType.Move, JobType.Delete}:
             self._results_changed()
-        
         if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
             self.notify('problems_changed')
     

@@ -200,7 +200,9 @@ class DupeGuru(QObject):
         QProcess.execute('updater.exe', ['/checknow'])
     
     def job_finished(self, jobid):
-        self.model._job_completed(jobid)
+        result = self.model._job_completed(jobid, self._progress.last_error)
+        if not result:
+            self._progress.reraise_if_error()
         if jobid in {JobType.Move, JobType.Copy, JobType.Delete}:
             if self.model.results.problems:
                 self.problemDialog.show()

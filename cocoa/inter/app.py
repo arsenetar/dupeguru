@@ -168,7 +168,9 @@ class PyDupeGuruBase(PyFairware):
         self.progress.job_cancelled = True
     
     def jobCompleted_(self, jobid: str):
-        self.model._job_completed(jobid)
+        result = self.model._job_completed(jobid, self.progress.last_error)
+        if not result:
+            self.progress.reraise_if_error()
     
     #--- model --> view
     @dontwrap
