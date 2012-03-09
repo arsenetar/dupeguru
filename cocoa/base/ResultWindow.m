@@ -32,7 +32,6 @@ http://www.hardcoded.net/licenses/bsd_license
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobCompleted:) name:JobCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
     return self;
@@ -102,6 +101,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [optionsSwitch setSelected:[[app detailsPanel] isVisible] forSegment:0];
     [optionsSwitch setSelected:[table powerMarkerMode] forSegment:1];
     [optionsSwitch setSelected:[table deltaValuesMode] forSegment:2];
+}
+
+- (void)showProblemDialog
+{
+    [problemDialog showWindow:self];
 }
 
 /* Actions */
@@ -375,42 +379,6 @@ http://www.hardcoded.net/licenses/bsd_license
     // change the panel's delegate, data source or refresh it.
     [previewPanel release];
     previewPanel = nil;
-}
-
-/* Notifications */
-- (void)jobCompleted:(NSNotification *)aNotification
-{
-    id lastAction = [[ProgressController mainProgressController] jobId];
-    if ([lastAction isEqualTo:jobCopy]) {
-        if ([model scanWasProblematic]) {
-            [problemDialog showWindow:self];
-        }
-        else {
-            [Dialogs showMessage:TR(@"All marked files were copied sucessfully.")];
-        }
-    }
-    else if ([lastAction isEqualTo:jobMove]) {
-        if ([model scanWasProblematic]) {
-            [problemDialog showWindow:self];
-        }
-        else {
-            [Dialogs showMessage:TR(@"All marked files were moved sucessfully.")];
-        }
-    }
-    else if ([lastAction isEqualTo:jobDelete]) {
-        if ([model scanWasProblematic]) {
-            [problemDialog showWindow:self];
-        }
-        else {
-            [Dialogs showMessage:TR(@"All marked files were sucessfully sent to Trash.")];
-        }
-    }
-    else if ([lastAction isEqualTo:jobScan]) {
-        NSInteger rowCount = [[table model] numberOfRows];
-        if (rowCount == 0) {
-            [Dialogs showMessage:TR(@"No duplicates found.")];
-        }
-    }
 }
 
 - (void)jobInProgress:(NSNotification *)aNotification

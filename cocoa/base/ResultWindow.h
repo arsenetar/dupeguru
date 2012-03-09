@@ -42,6 +42,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)fillColumnsMenu;
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 - (void)updateOptionSegments;
+- (void)showProblemDialog;
 
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender;
@@ -74,7 +75,4 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)toggleDetailsPanel:(id)sender;
 - (IBAction)togglePowerMarker:(id)sender;
 - (IBAction)toggleQuicklookPanel:(id)sender;
-
-/* Notifications */
-- (void)jobCompleted:(NSNotification *)aNotification;
 @end

@@ -81,6 +81,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # reveal_path(path)
     # start_job(jobid, func, args=()) ( func(j, *args) )
     # ask_yes_no(prompt) --> bool
+    # show_results_window()
+    # show_problem_dialog()
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
@@ -174,12 +176,29 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         # Must be called by subclasses when they detect that an async job is completed. If an
         # exception was raised during the job, `exc` will be set. Return True when the error was
         # handled. If we return False when exc is set, a the exception will be re-raised.
+        if exc is not None:
+            return False # We don't handle any exception in here
         if jobid == JobType.Scan:
             self._results_changed()
-        elif jobid in {JobType.Load, JobType.Move, JobType.Delete}:
+            if not self.results.groups:
+                self.view.show_message(tr("No duplicates found."))
+            else:
+                self.view.show_results_window()
+        if jobid in {JobType.Load, JobType.Move, JobType.Delete}:
             self._results_changed()
+        if jobid == JobType.Load:
+            self.view.show_results_window()
         if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
-            self.notify('problems_changed')
+            if self.results.problems:
+                self.notify('problems_changed')
+                self.view.show_problem_dialog()
+            else:
+                msg = {
+                    JobType.Copy: tr("All marked files were copied sucessfully."),
+                    JobType.Move: tr("All marked files were moved sucessfully."),
+                    JobType.Delete: tr("All marked files were sucessfully sent to Trash."),
+                }[jobid]
+                self.view.show_message(msg)
     
     @staticmethod
     def _remove_hardlink_dupes(files):

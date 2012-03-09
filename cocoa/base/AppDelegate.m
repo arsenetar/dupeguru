@@ -218,6 +218,11 @@ http://www.hardcoded.net/licenses/bsd_license
     return [Dialogs askYesNo:prompt] == NSAlertFirstButtonReturn;
 }
 
+- (void)showProblemDialog
+{
+    [[self resultWindow] showProblemDialog];
+}
+
 - (void)setupAsRegistered
 {
     // Nothing to do.

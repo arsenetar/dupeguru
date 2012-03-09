@@ -21,6 +21,7 @@ JOBID2TITLE = {
 
 class DupeGuruView(FairwareView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
+    def showProblemDialog(self): pass
 
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
@@ -128,9 +129,6 @@ class PyDupeGuruBase(PyFairware):
     def getMarkCount(self) -> int:
         return self.model.results.mark_count
     
-    def scanWasProblematic(self) -> bool:
-        return bool(self.model.results.problems)
-    
     def resultsAreModified(self) -> bool:
         return self.model.results.is_modified
     
@@ -196,4 +194,15 @@ class PyDupeGuruBase(PyFairware):
     @dontwrap
     def ask_yes_no(self, prompt):
         return self.callback.askYesNoWithPrompt_(prompt)
+    
+    @dontwrap
+    def show_results_window(self):
+        # Not needed yet because our progress dialog is shown as a sheet of the results window,
+        # which causes it to be already visible when the scan/load ends.
+        # XXX Make progress sheet be a child of the folder selection window.
+        pass
+    
+    @dontwrap
+    def show_problem_dialog(self):
+        self.callback.showProblemDialog()
     

@@ -203,21 +203,6 @@ class DupeGuru(QObject):
         result = self.model._job_completed(jobid, self._progress.last_error)
         if not result:
             self._progress.reraise_if_error()
-        if jobid in {JobType.Move, JobType.Copy, JobType.Delete}:
-            if self.model.results.problems:
-                self.problemDialog.show()
-            else:
-                msg = tr("All files were processed successfully.")
-                QMessageBox.information(self.resultWindow, tr("Operation Complete"), msg)
-        elif jobid == JobType.Scan:
-            if not self.model.results.groups:
-                title = tr("Scan complete")
-                msg = tr("No duplicates found.")
-                QMessageBox.information(self.resultWindow, title, msg)
-            else:
-                self.showResultsWindow()
-        elif jobid == JobType.Load:
-            self.showResultsWindow()
     
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, 'debug.log')
@@ -293,4 +278,10 @@ class DupeGuru(QObject):
     def open_url(self, url):
         url = QUrl(url)
         QDesktopServices.openUrl(url)
+    
+    def show_results_window(self):
+        self.showResultsWindow()
+    
+    def show_problem_dialog(self):
+        self.problemDialog.show()
     
