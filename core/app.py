@@ -80,6 +80,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # start_job(jobid, func, args=()) ( func(j, *args) )
+    # ask_yes_no(prompt) --> bool
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"

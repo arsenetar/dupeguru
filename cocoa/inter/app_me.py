@@ -171,6 +171,22 @@ class DupeGuruME(DupeGuruBase):
             return ITunesSong(path)
         return DupeGuruBase._create_file(self, path)
     
+    def _job_completed(self, jobid, exc):
+        if (jobid in {JobType.RemoveDeadTracks, JobType.ScanDeadTracks}) and (exc is not None):
+            msg = tr("There were communication problems with iTunes. The operation couldn't be completed.")
+            self.view.show_message(msg)
+            return True
+        if jobid == JobType.ScanDeadTracks:
+            dead_tracks_count = len(self.dead_tracks)
+            if dead_tracks_count > 0:
+                msg = tr("Your iTunes Library contains %d dead tracks ready to be removed. Continue?")
+                if self.view.ask_yes_no(msg % dead_tracks_count):
+                    self.remove_dead_tracks()
+            else:
+                msg = tr("You have no dead tracks in your iTunes Library")
+                self.view.show_message(msg)
+        DupeGuruBase._job_completed(self, jobid, exc)
+    
     def copy_or_move(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, ITunesSong):
             copy = True
@@ -221,15 +237,8 @@ class PyDupeGuru(PyDupeGuruBase):
     def __init__(self):
         self._init(DupeGuruME)
     
-    def removeDeadTracks(self):
-        self.model.remove_dead_tracks()
-    
     def scanDeadTracks(self):
         self.model.scan_dead_tracks()
-    
-    #---Information
-    def deadTrackCount(self) -> int:
-        return len(self.model.dead_tracks)
     
     #---Properties
     def setMinMatchPercentage_(self, percentage: int):

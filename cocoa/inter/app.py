@@ -20,7 +20,7 @@ JOBID2TITLE = {
 }
 
 class DupeGuruView(FairwareView):
-    pass
+    def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
 
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
@@ -192,4 +192,8 @@ class PyDupeGuruBase(PyFairware):
         else:
             ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
             proxy.postNotification_userInfo_('JobStarted', ud)
+    
+    @dontwrap
+    def ask_yes_no(self, prompt):
+        return self.callback.askYesNoWithPrompt_(prompt)
     

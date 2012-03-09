@@ -213,6 +213,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [Dialogs showMessage:msg];
 }
 
+- (BOOL)askYesNoWithPrompt:(NSString *)prompt
+{
+    return [Dialogs askYesNo:prompt] == NSAlertFirstButtonReturn;
+}
+
 - (void)setupAsRegistered
 {
     // Nothing to do.

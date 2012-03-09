@@ -74,22 +74,4 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [model scanDeadTracks];
 }
-
-/* Notifications */
-- (void)jobCompleted:(NSNotification *)aNotification
-{
-    [super jobCompleted:aNotification];
-    id lastAction = [[ProgressController mainProgressController] jobId];
-    if ([lastAction isEqualTo:jobScanDeadTracks]) {
-        NSInteger deadTrackCount = [model deadTrackCount];
-        if (deadTrackCount > 0) {
-            NSString *msg = TR(@"Your iTunes Library contains %d dead tracks ready to be removed. Continue?");
-            if ([Dialogs askYesNo:[NSString stringWithFormat:msg,deadTrackCount]] == NSAlertFirstButtonReturn)
-                [model removeDeadTracks];
-        }
-        else {
-            [Dialogs showMessage:TR(@"You have no dead tracks in your iTunes Library")];
-        }
-    }
-}
 @end
