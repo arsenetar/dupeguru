@@ -230,16 +230,10 @@ class ResultWindow(QMainWindow):
         self.app.model.clear_ignore_list()
     
     def copyTriggered(self):
-        self.app.copy_or_move_marked(True)
+        self.app.model.copy_or_move_marked(True)
     
     def deleteTriggered(self):
-        count = self.app.model.results.mark_count
-        if not count:
-            return
-        title = tr("Delete duplicates")
-        msg = tr("You are about to send %d files to Trash. Continue?") % count
-        if self.app.confirm(title, msg):
-            self.app.model.delete_marked()
+        self.app.model.delete_marked()
     
     def deltaTriggered(self, state=None):
         # The sender can be either the action or the checkbox, but both have a isChecked() method.
@@ -256,13 +250,7 @@ class ResultWindow(QMainWindow):
         QDesktopServices.openUrl(url)
     
     def hardlinkTriggered(self):
-        count = self.app.model.results.mark_count
-        if not count:
-            return
-        title = tr("Delete and hardlink duplicates")
-        msg = tr("You are about to send %d files to Trash (and hardlink them afterwards). Continue?") % count
-        if self.app.confirm(title, msg):
-            self.app.model.delete_marked(replace_with_hardlinks=True)
+        self.app.model.delete_marked(replace_with_hardlinks=True)
     
     def makeReferenceTriggered(self):
         self.app.model.make_selected_reference()
@@ -280,7 +268,7 @@ class ResultWindow(QMainWindow):
         self.app.model.toggle_selected_mark_state()
     
     def moveTriggered(self):
-        self.app.copy_or_move_marked(False)
+        self.app.model.copy_or_move_marked(False)
     
     def openTriggered(self):
         self.app.model.open_selected()

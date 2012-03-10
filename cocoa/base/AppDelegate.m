@@ -237,4 +237,21 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [HSFairwareReminder showDemoNagWithApp:[self model] prompt:prompt];
 }
+
+- (NSString *)selectDestFolderWithPrompt:(NSString *)prompt
+{
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setCanChooseFiles:NO];
+    [op setCanChooseDirectories:YES];
+    [op setCanCreateDirectories:YES];
+    [op setAllowsMultipleSelection:NO];
+    [op setTitle:prompt];
+    if ([op runModal] == NSOKButton) {
+        return [[op filenames] objectAtIndex:0];
+    }
+    else {
+        return nil;
+    }
+}
+
 @end

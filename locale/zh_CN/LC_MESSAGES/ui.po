@@ -50,19 +50,7 @@ msgstr "检查更新"
 msgid "Open Debug Log"
 msgstr "打开调试记录"
 
-#: qt/base/app.py:132
-msgid "copy"
-msgstr "复制"
-
-#: qt/base/app.py:132
-msgid "move"
-msgstr "移动"
-
-#: qt/base/app.py:133
-msgid "Select a directory to {} marked files to"
-msgstr "选择一个文件夹将标记的 {} 个文件进行..."
-
-#: qt/base/app.py:235 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:226 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -150,7 +138,7 @@ msgstr "选择一个结果文件并载入"
 msgid "All Files (*.*)"
 msgstr "所有文件 (*.*)"
 
-#: qt/base/directories_dialog.py:205 qt/base/result_window.py:317
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:305
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru结果 (*.dupeguru)"
 
@@ -403,25 +391,7 @@ msgstr "重置为默认值"
 msgid "{} Results"
 msgstr "{} (结果)"
 
-#: qt/base/result_window.py:239
-msgid "Delete duplicates"
-msgstr "删除重复文件"
-
-#: qt/base/result_window.py:240 cocoa/base/en.lproj/Localizable.strings:0
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "即将有 %d 个文件被移到回收站。继续吗?"
-
-#: qt/base/result_window.py:262
-msgid "Delete and hardlink duplicates"
-msgstr "删除及硬连接重复文件"
-
-#: qt/base/result_window.py:263 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
-msgstr "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?"
-
-#: qt/base/result_window.py:316 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:304 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "将结果保存为..."
 
@@ -838,14 +808,6 @@ msgstr ""
 #: cocoa/inter/app_pe.py:201
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to copy marked files to"
-msgstr "Select a directory to copy marked files to"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to move marked files to"
-msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "'%@' already is in the list."

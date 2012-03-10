@@ -50,19 +50,7 @@ msgstr "Vérifier les mises à jour"
 msgid "Open Debug Log"
 msgstr "Ouvrir logs de déboguage"
 
-#: qt/base/app.py:132
-msgid "copy"
-msgstr "copier"
-
-#: qt/base/app.py:132
-msgid "move"
-msgstr "déplacer"
-
-#: qt/base/app.py:133
-msgid "Select a directory to {} marked files to"
-msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
-
-#: qt/base/app.py:235 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:226 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -152,7 +140,7 @@ msgstr "Sélectionnez un fichier résultats à charger"
 msgid "All Files (*.*)"
 msgstr "Tout les fichiers (*.*)"
 
-#: qt/base/directories_dialog.py:205 qt/base/result_window.py:317
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:305
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Résultats dupeGuru (*.dupeguru)"
 
@@ -409,26 +397,7 @@ msgstr "Réinitialiser"
 msgid "{} Results"
 msgstr "{} (Résultats)"
 
-#: qt/base/result_window.py:239
-msgid "Delete duplicates"
-msgstr "Effacement de doublons"
-
-#: qt/base/result_window.py:240 cocoa/base/en.lproj/Localizable.strings:0
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "%d fichiers seront envoyés à la corbeille. Continuer?"
-
-#: qt/base/result_window.py:262
-msgid "Delete and hardlink duplicates"
-msgstr "Hardlinking de doublons"
-
-#: qt/base/result_window.py:263 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
-msgstr ""
-"%d fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
-
-#: qt/base/result_window.py:316 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:304 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
 
@@ -845,14 +814,6 @@ msgstr ""
 #: cocoa/inter/app_pe.py:201
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to copy marked files to"
-msgstr "Sélectionnez un dossier vers lequel copier les fichiers"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to move marked files to"
-msgstr "Sélectionnez un dossier vers lequel déplacer les fichiers"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "'%@' already is in the list."

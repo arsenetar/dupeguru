@@ -123,20 +123,11 @@ class DupeGuru(QObject):
         self.model.options['escape_filter_regexp'] = self.prefs.use_regexp
         self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
+        self.model.options['copymove_dest_type'] = self.prefs.destination_type
     
     #--- Public
     def add_selected_to_ignore_list(self):
         self.model.add_selected_to_ignore_list()
-    
-    def copy_or_move_marked(self, copy):
-        opname = tr("copy") if copy else tr("move")
-        title = tr("Select a directory to {} marked files to").format(opname)
-        flags = QFileDialog.ShowDirsOnly
-        destination = str(QFileDialog.getExistingDirectory(self.resultWindow, title, '', flags))
-        if not destination:
-            return
-        recreate_path = self.prefs.destination_type
-        self.model.copy_or_move_marked(copy, destination, recreate_path)
     
     def remove_selected(self):
         self.model.remove_selected(self)
@@ -270,4 +261,8 @@ class DupeGuru(QObject):
     
     def show_problem_dialog(self):
         self.problemDialog.show()
+    
+    def select_dest_folder(self, prompt):
+        flags = QFileDialog.ShowDirsOnly
+        return QFileDialog.getExistingDirectory(self.resultWindow, prompt, '', flags)
     

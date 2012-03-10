@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: core/app.py:92
+#: core/app.py:93
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "միաժամանակ հնարավոր է ջնջել, տեղափոխել կամ պատճենել միայն 10 օրինակներ"
 
-#: core/app.py:229
+#: core/app.py:231
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:489
+#: core/app.py:508
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:500
+#: core/app.py:519
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:539
+#: core/app.py:558
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -134,45 +134,67 @@ msgstr ""
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:187
+#: core/app.py:189
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:200
+#: core/app.py:202
 msgid "All marked files were copied sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:201
+#: core/app.py:203
 msgid "All marked files were moved sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:202
+#: core/app.py:204
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:250
+#: core/app.py:252
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core/app.py:278
+#: core/app.py:280
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը անտեսումների ցանկից:"
 
-#: core/app.py:281
+#: core/app.py:283
 msgid "Ignore list cleared."
 msgstr "Անտեսումների ցանկը մաքրվեց:"
 
-#: core/app.py:357
+#: core/app.py:376
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:442 core/app.py:453
+#: core/app.py:461 core/app.py:472
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:275
+#: core/app.py:277
 msgid "The ignore list is already empty. Nothing to clear."
 msgstr ""
+
+#: core/app.py:321
+msgid "copy"
+msgstr "պատճենել"
+
+#: core/app.py:321
+msgid "move"
+msgstr "տեղափոխել"
+
+#: core/app.py:322
+msgid "Select a directory to {} marked files to"
+msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
+
+#: core/app.py:336
+msgid ""
+"You are about to send %d files to Trash (and hardlink them afterwards). "
+"Continue?"
+msgstr "Դուք ուղարկում եք %d ֆայլերը Աղբարկղ: Շարունակե՞լ:"
+
+#: core/app.py:338
+msgid "You are about to send %d files to Trash. Continue?"
+msgstr "%d ֆայլերը տեղափոխվելու են Աղբարկղ: Շարունակե՞լ:"

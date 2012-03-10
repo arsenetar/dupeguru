@@ -86,6 +86,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # ask_yes_no(prompt) --> bool
     # show_results_window()
     # show_problem_dialog()
+    # select_dest_folder(prompt: str) --> str
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
@@ -107,6 +108,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
             'ignore_hardlink_matches': False,
+            'copymove_dest_type': DestType.Relative,
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -302,22 +304,39 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             smart_move(source_path, dest_path)
             self.clean_empty_dirs(source_path[:-1])
     
-    def copy_or_move_marked(self, copy, destination, recreate_path):
+    def copy_or_move_marked(self, copy):
         def do(j):
             def op(dupe):
                 j.add_progress()
-                self.copy_or_move(dupe, copy, destination, recreate_path)
+                self.copy_or_move(dupe, copy, destination, desttype)
             
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
         if not self._check_demo():
             return
-        jobid = JobType.Copy if copy else JobType.Move
-        self.view.start_job(jobid, do)
+        if not self.results.mark_count:
+            self.view.show_message(MSG_NO_MARKED_DUPES)
+            return
+        opname = tr("copy") if copy else tr("move")
+        prompt = tr("Select a directory to {} marked files to").format(opname)
+        destination = self.view.select_dest_folder(prompt)
+        if destination:
+            desttype = self.options['copymove_dest_type']
+            jobid = JobType.Copy if copy else JobType.Move
+            self.view.start_job(jobid, do)
     
     def delete_marked(self, replace_with_hardlinks=False):
         if not self._check_demo():
+            return
+        if not self.results.mark_count:
+            self.view.show_message(MSG_NO_MARKED_DUPES)
+            return
+        if replace_with_hardlinks:
+            msg = tr("You are about to send %d files to Trash (and hardlink them afterwards). Continue?")
+        else:
+            msg = tr("You are about to send %d files to Trash. Continue?")
+        if not self.view.ask_yes_no(msg % self.results.mark_count):
             return
         self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
     

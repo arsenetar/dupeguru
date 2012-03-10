@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:92
+#: core/app.py:93
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:229
+#: core/app.py:231
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:489
+#: core/app.py:508
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:500
+#: core/app.py:519
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:539
+#: core/app.py:558
 msgid "%s (%d discarded)"
 msgstr "%s (%d 无效)"
 
@@ -120,44 +120,66 @@ msgstr ""
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:187
+#: core/app.py:189
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: core/app.py:200
+#: core/app.py:202
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:201
+#: core/app.py:203
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:202
+#: core/app.py:204
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:250
+#: core/app.py:252
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
 
-#: core/app.py:278
+#: core/app.py:280
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "确定要从忽略列表中移除 %d 项吗?"
 
-#: core/app.py:281
+#: core/app.py:283
 msgid "Ignore list cleared."
 msgstr "忽略列表已清空。"
 
-#: core/app.py:357
+#: core/app.py:376
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
-#: core/app.py:442 core/app.py:453
+#: core/app.py:461 core/app.py:472
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "你将从结果中移除 %d 个文件。继续吗?"
 
-#: core/app.py:275
+#: core/app.py:277
 msgid "The ignore list is already empty. Nothing to clear."
 msgstr ""
+
+#: core/app.py:321
+msgid "copy"
+msgstr "复制"
+
+#: core/app.py:321
+msgid "move"
+msgstr "移动"
+
+#: core/app.py:322
+msgid "Select a directory to {} marked files to"
+msgstr "选择一个文件夹将标记的 {} 个文件进行..."
+
+#: core/app.py:336
+msgid ""
+"You are about to send %d files to Trash (and hardlink them afterwards). "
+"Continue?"
+msgstr "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?"
+
+#: core/app.py:338
+msgid "You are about to send %d files to Trash. Continue?"
+msgstr "即将有 %d 个文件被移到回收站。继续吗?"

@@ -22,6 +22,7 @@ JOBID2TITLE = {
 class DupeGuruView(FairwareView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
     def showProblemDialog(self): pass
+    def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
 
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
@@ -107,8 +108,11 @@ class PyDupeGuruBase(PyFairware):
     def makeSelectedReference(self):
         self.model.make_selected_reference()
     
-    def copyOrMove_markedTo_recreatePath_(self, copy: bool, destination: str, recreate_path: bool):
-        self.model.copy_or_move_marked(copy, destination, recreate_path)
+    def copyMarked(self):
+        self.model.copy_or_move_marked(copy=True)
+    
+    def moveMarked(self):
+        self.model.copy_or_move_marked(copy=False)
     
     def openSelected(self):
         self.model.open_selected()
@@ -126,9 +130,6 @@ class PyDupeGuruBase(PyFairware):
         self.model.invoke_custom_command()
     
     #---Information
-    def getMarkCount(self) -> int:
-        return self.model.results.mark_count
-    
     def resultsAreModified(self) -> bool:
         return self.model.results.is_modified
     
@@ -144,6 +145,9 @@ class PyDupeGuruBase(PyFairware):
     
     def setIgnoreHardlinkMatches_(self, ignore_hardlink_matches: bool):
         self.model.options['ignore_hardlink_matches'] = ignore_hardlink_matches
+    
+    def setCopyMoveDestType_(self, copymove_dest_type: int):
+        self.model.options['copymove_dest_type'] = copymove_dest_type
     
     #---Worker
     def getJobProgress(self) -> object: # NSNumber
@@ -205,4 +209,8 @@ class PyDupeGuruBase(PyFairware):
     @dontwrap
     def show_problem_dialog(self):
         self.callback.showProblemDialog()
+    
+    @dontwrap
+    def select_dest_folder(self, prompt):
+        return self.callback.selectDestFolderWithPrompt_(prompt)
     

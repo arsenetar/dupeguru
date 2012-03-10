@@ -75,17 +75,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
 {
-    NSInteger mark_count = [model getMarkCount];
-    if (!mark_count) {
-        return;
-    }
-    NSString *msg = TR(@"You are about to send %d files to Trash. Continue?");
-    if (hardlinkDeleted) {
-        msg = TR(@"You are about to send %d files to Trash (and hardlink them afterwards). Continue?");
-    }
-    if ([Dialogs askYesNo:[NSString stringWithFormat:msg,mark_count]] == NSAlertSecondButtonReturn) { // NO
-        return;
-    }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
     if (hardlinkDeleted) {
@@ -130,20 +119,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)copyMarked:(id)sender
 {
-    NSInteger mark_count = [model getMarkCount];
-    if (!mark_count)
-        return;
-    NSOpenPanel *op = [NSOpenPanel openPanel];
-    [op setCanChooseFiles:NO];
-    [op setCanChooseDirectories:YES];
-    [op setCanCreateDirectories:YES];
-    [op setAllowsMultipleSelection:NO];
-    [op setTitle:TR(@"Select a directory to copy marked files to")];
-    if ([op runModal] == NSOKButton) {
-        NSString *directory = [[op filenames] objectAtIndex:0];
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [model copyOrMove:YES markedTo:directory recreatePath:n2b([ud objectForKey:@"recreatePathType"])];
-    }
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+    [model setCopyMoveDestType:n2i([ud objectForKey:@"recreatePathType"])];
+    [model copyMarked];
 }
 
 - (IBAction)deleteMarked:(id)sender
@@ -201,21 +180,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)moveMarked:(id)sender
 {
-    NSInteger mark_count = [model getMarkCount];
-    if (!mark_count)
-        return;
-    NSOpenPanel *op = [NSOpenPanel openPanel];
-    [op setCanChooseFiles:NO];
-    [op setCanChooseDirectories:YES];
-    [op setCanCreateDirectories:YES];
-    [op setAllowsMultipleSelection:NO];
-    [op setTitle:TR(@"Select a directory to move marked files to")];
-    if ([op runModal] == NSOKButton) {
-        NSString *directory = [[op filenames] objectAtIndex:0];
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
-        [model copyOrMove:NO markedTo:directory recreatePath:n2b([ud objectForKey:@"recreatePathType"])];
-    }
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+    [model setCopyMoveDestType:n2i([ud objectForKey:@"recreatePathType"])];
+    [model moveMarked];
 }
 
 - (IBAction)openClicked:(id)sender

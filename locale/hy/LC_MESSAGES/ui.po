@@ -85,19 +85,7 @@ msgstr "Ստուգել թարմացումները"
 msgid "Open Debug Log"
 msgstr "Բացել Սխալների մատյանը"
 
-#: qt/base/app.py:132
-msgid "copy"
-msgstr "պատճենել"
-
-#: qt/base/app.py:132
-msgid "move"
-msgstr "տեղափոխել"
-
-#: qt/base/app.py:133
-msgid "Select a directory to {} marked files to"
-msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
-
-#: qt/base/app.py:235 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:226 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -187,7 +175,7 @@ msgstr "Ընտրեք արդյունքի ֆայլը՝ բացելու համար"
 msgid "All Files (*.*)"
 msgstr "Բոլոր ֆայլերը  (*.*)"
 
-#: qt/base/directories_dialog.py:205 qt/base/result_window.py:317
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:305
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru-ի արդյունքները (*.dupeguru)"
 
@@ -442,25 +430,7 @@ msgstr "Ետարկել ծրագրայինի"
 msgid "{} Results"
 msgstr "{} Արդյունքներ"
 
-#: qt/base/result_window.py:239
-msgid "Delete duplicates"
-msgstr "Ջնջել կրկնօրինակները"
-
-#: qt/base/result_window.py:240 cocoa/base/en.lproj/Localizable.strings:0
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "%d ֆայլերը տեղափոխվելու են Աղբարկղ: Շարունակե՞լ:"
-
-#: qt/base/result_window.py:262
-msgid "Delete and hardlink duplicates"
-msgstr "Ջնջել և ձեռքի կրկնօրինակները"
-
-#: qt/base/result_window.py:263 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
-msgstr "Դուք ուղարկում եք %d ֆայլերը Աղբարկղ: Շարունակե՞լ:"
-
-#: qt/base/result_window.py:316 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:304 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Ընտրեք ֆայլը՝ պահպանելու արդյունքները՝"
 
@@ -614,14 +584,6 @@ msgstr "Բացել ֆայլից..."
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Ետարկել ծրագրայինի"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to copy marked files to"
-msgstr "Ընտրել թղթապանակ՝ պատճենելու համար ֆայլերը՝"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select a directory to move marked files to"
-msgstr "Ընտրել թղթապանակ՝ տեղափոխելու համար ֆայլերը՝"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "'%@' already is in the list."
