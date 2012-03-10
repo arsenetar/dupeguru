@@ -32,6 +32,9 @@ from .gui.stats_label import StatsLabel
 HAD_FIRST_LAUNCH_PREFERENCE = 'HadFirstLaunch'
 DEBUG_MODE_PREFERENCE = 'DebugMode'
 
+MSG_NO_MARKED_DUPES = tr("There are no marked duplicates. Nothing has been done.")
+MSG_NO_SELECTED_DUPES = tr("There are no selected duplicates. Nothing has been done.")
+
 class DestType:
     Direct = 0
     Relative = 1
@@ -241,6 +244,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)
+        if not dupes:
+            self.view.show_message(MSG_NO_SELECTED_DUPES)
+            return
+        msg = tr("All selected %d matches are going to be ignored in all subsequent scans. Continue?")
+        if not self.view.ask_yes_no(msg % len(dupes)):
+            return
         for dupe in dupes:
             g = self.results.get_group_of_duplicate(dupe)
             for other in g:
@@ -260,6 +269,16 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
                 path = path[:-1]
+    
+    def clear_ignore_list(self):
+        if not self.scanner.ignore_list:
+            msg = tr("The ignore list is already empty. Nothing to clear.")
+            self.view.show_message(msg)
+            return
+        msg = tr("Do you really want to remove all %d items from the ignore list?") % len(self.scanner.ignore_list)
+        if self.view.ask_yes_no(msg):
+            self.scanner.ignore_list.Clear()
+            self.view.show_message(tr("Ignore list cleared."))
     
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -326,13 +345,18 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
             return empty_data()
     
-    def invoke_command(self, cmd):
-        """Calls command `cmd` with %d and %r placeholders replaced.
+    def invoke_custom_command(self):
+        """Calls command in 'CustomCommand' pref with %d and %r placeholders replaced.
         
         Using the current selection, %d is replaced with the currently selected dupe and %r is
         replaced with that dupe's ref file. If there's no selection, the command is not invoked.
         If the dupe is a ref, %d and %r will be the same.
         """
+        cmd = self.view.get_default('CustomCommand')
+        if not cmd:
+            msg = tr("You have no custom command set up. Set it up in your preferences.")
+            self.view.show_message(msg)
+            return
         if not self.selected_dupes:
             return
         dupe = self.selected_dupes[0]
@@ -412,11 +436,24 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('results_changed_but_keep_selection')
     
     def remove_marked(self):
+        if not self.results.mark_count:
+            self.view.show_message(MSG_NO_MARKED_DUPES)
+            return
+        msg = tr("You are about to remove %d files from results. Continue?") 
+        if not self.view.ask_yes_no(msg % self.results.mark_count):
+            return
         self.results.perform_on_marked(lambda x:None, True)
         self._results_changed()
     
     def remove_selected(self):
-        self.remove_duplicates(self.selected_dupes)
+        dupes = self.without_ref(self.selected_dupes)
+        if not dupes:
+            self.view.show_message(MSG_NO_SELECTED_DUPES)
+            return
+        msg = tr("You are about to remove %d files from results. Continue?") 
+        if not self.view.ask_yes_no(msg % len(dupes)):
+            return
+        self.remove_duplicates(dupes)
     
     def rename_selected(self, newname):
         try:

@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:86
+#: core/app.py:92
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:205
+#: core/app.py:229
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:431
+#: core/app.py:489
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:442
+#: core/app.py:500
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:481
+#: core/app.py:539
 msgid "%s (%d discarded)"
 msgstr "%s (%d 无效)"
 
@@ -110,4 +110,54 @@ msgstr "验证 %d/%d 匹配项"
 
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
+msgstr ""
+
+#: core/app.py:35
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:36
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:187
+msgid "No duplicates found."
+msgstr "没有找到重复文件。"
+
+#: core/app.py:200
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: core/app.py:201
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: core/app.py:202
+msgid "All marked files were sucessfully sent to Trash."
+msgstr ""
+
+#: core/app.py:250
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
+
+#: core/app.py:278
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "确定要从忽略列表中移除 %d 项吗?"
+
+#: core/app.py:281
+msgid "Ignore list cleared."
+msgstr "忽略列表已清空。"
+
+#: core/app.py:357
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "你没有设定自定义命令。请在首选项中进行设定。"
+
+#: core/app.py:442 core/app.py:453
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "你将从结果中移除 %d 个文件。继续吗?"
+
+#: core/app.py:275
+msgid "The ignore list is already empty. Nothing to clear."
 msgstr ""

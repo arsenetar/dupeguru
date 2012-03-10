@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:86
+#: core/app.py:92
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:205
+#: core/app.py:229
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:431
+#: core/app.py:489
 msgid "Collecting files to scan"
 msgstr "Shromažďuji prohlížené soubory"
 
-#: core/app.py:442
+#: core/app.py:500
 msgid "The selected directories contain no scannable file."
 msgstr "Vybrané adresáře neobsahují žádné soubory vhodné k prohledávání."
 
-#: core/app.py:481
+#: core/app.py:539
 msgid "%s (%d discarded)"
 msgstr "%s (%d vyřazeno)"
 
@@ -110,4 +110,57 @@ msgstr "Ověřeno %d/%d shod"
 
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
+msgstr ""
+
+#: core/app.py:35
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:36
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:187
+msgid "No duplicates found."
+msgstr "Nebyli nalezeny žádné duplicity."
+
+#: core/app.py:200
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: core/app.py:201
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: core/app.py:202
+msgid "All marked files were sucessfully sent to Trash."
+msgstr ""
+
+#: core/app.py:250
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr ""
+"Všech %d vybraných shod bude v následujících hledáních ignorováno. "
+"Pokračovat?"
+
+#: core/app.py:278
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
+
+#: core/app.py:281
+msgid "Ignore list cleared."
+msgstr ""
+
+#: core/app.py:357
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr ""
+"Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
+
+#: core/app.py:442 core/app.py:453
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
+
+#: core/app.py:275
+msgid "The ignore list is already empty. Nothing to clear."
 msgstr ""

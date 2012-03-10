@@ -56,7 +56,7 @@ class PyDupeGuruBase(PyFairware):
     
     #---Results
     def clearIgnoreList(self):
-        self.model.scanner.ignore_list.Clear()
+        self.model.clear_ignore_list()
     
     def doScan(self):
         self.model.start_scanning()
@@ -116,16 +116,16 @@ class PyDupeGuruBase(PyFairware):
     def removeMarked(self):
         self.model.remove_marked()
     
+    def removeSelected(self):
+        self.model.remove_selected()
+    
     def revealSelected(self):
         self.model.reveal_selected()
-    
-    def invokeCommand_(self, cmd: str):
-        self.model.invoke_command(cmd)
+
+    def invokeCustomCommand(self):
+        self.model.invoke_custom_command()
     
     #---Information
-    def getIgnoreListCount(self) -> int:
-        return len(self.model.scanner.ignore_list)
-    
     def getMarkCount(self) -> int:
         return self.model.results.mark_count
     

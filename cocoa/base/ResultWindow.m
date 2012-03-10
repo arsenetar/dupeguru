@@ -111,12 +111,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Actions */
 - (IBAction)clearIgnoreList:(id)sender
 {
-    NSInteger i = [model getIgnoreListCount];
-    if (!i)
-        return;
-    NSString *msg = [NSString stringWithFormat:TR(@"Do you really want to remove all %d items from the ignore list?"),i];
-    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
-        return;
     [model clearIgnoreList];
 }
 
@@ -177,25 +171,12 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)ignoreSelected:(id)sender
 {
-    NSInteger selectedDupeCount = [table selectedDupeCount];
-    if (!selectedDupeCount)
-        return;
-    NSString *msg = [NSString stringWithFormat:TR(@"All selected %d matches are going to be ignored in all subsequent scans. Continue?"),selectedDupeCount];
-    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
-        return;
     [model addSelectedToIgnoreList];
 }
 
 - (IBAction)invokeCustomCommand:(id)sender
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *cmd = [ud stringForKey:@"CustomCommand"];
-    if ((cmd != nil) && ([cmd length] > 0)) {
-        [model invokeCommand:cmd];
-    }
-    else {
-        [Dialogs showMessage:TR(@"You have no custom command set up. Set it up in your preferences.")];
-    }
+    [model invokeCustomCommand];
 }
 
 - (IBAction)markAll:(id)sender
@@ -253,18 +234,12 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (IBAction)removeMarked:(id)sender
 {
-    int mark_count = [model getMarkCount];
-    if (!mark_count)
-        return;
-    NSString *msg = [NSString stringWithFormat:@"You are about to remove %d files from results. Continue?",mark_count];
-    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
-        return;
     [model removeMarked];
 }
 
 - (IBAction)removeSelected:(id)sender
 {
-    [table removeSelected];
+    [model removeSelected];
 }
 
 - (IBAction)renameSelected:(id)sender

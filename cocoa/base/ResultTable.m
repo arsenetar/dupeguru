@@ -77,23 +77,6 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self model] setDeltaValuesMode:aDeltaValuesMode];
 }
 
-- (NSInteger)selectedDupeCount
-{
-    return [[self model] selectedDupeCount];
-}
-
-- (void)removeSelected
-{
-    NSInteger selectedDupeCount = [self selectedDupeCount];
-    if (!selectedDupeCount)
-        return;
-    NSString *msgFmt = TR(@"You are about to remove %d files from results. Continue?");
-    NSString *msg = [NSString stringWithFormat:msgFmt,selectedDupeCount];
-    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
-        return;
-    [[self model] removeSelected];
-}
-
 /* Datasource */
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
@@ -165,7 +148,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (BOOL)tableViewHadDeletePressed:(NSTableView *)tableView
 {
-    [self removeSelected];
+    [[self model] removeSelected];
     return YES;
 }
 

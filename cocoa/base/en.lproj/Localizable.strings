@@ -11,17 +11,9 @@
 "You have unsaved results, do you really want to continue?" = "You have unsaved results, do you really want to continue?";
 "'%@' already is in the list." = "'%@' already is in the list.";
 "'%@' does not exist." = "'%@' does not exist.";
-"You are about to remove %d files from results. Continue?" = "You are about to remove %d files from results. Continue?";
 "The name '%@' already exists." = "The name '%@' already exists.";
 "You are about to send %d files to Trash. Continue?" = "You are about to send %d files to Trash. Continue?";
 "You are about to send %d files to Trash (and hardlink them afterwards). Continue?" = "You are about to send %d files to Trash (and hardlink them afterwards). Continue?";
-"Do you really want to remove all %d items from the ignore list?" = "Do you really want to remove all %d items from the ignore list?";
-"All selected %d matches are going to be ignored in all subsequent scans. Continue?" = "All selected %d matches are going to be ignored in all subsequent scans. Continue?";
-"You have no custom command set up. Set it up in your preferences." = "You have no custom command set up. Set it up in your preferences.";
-"All marked files were copied sucessfully." = "All marked files were copied sucessfully.";
-"All marked files were moved sucessfully." = "All marked files were moved sucessfully.";
-"All marked files were sucessfully sent to Trash." = "All marked files were sucessfully sent to Trash.";
-"No duplicates found." = "No duplicates found.";
 "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again." = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.";
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?" = "Your iTunes Library contains %d dead tracks ready to be removed. Continue?";
 "You have no dead tracks in your iTunes Library" = "You have no dead tracks in your iTunes Library";

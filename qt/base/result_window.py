@@ -227,15 +227,7 @@ class ResultWindow(QMainWindow):
         self.app.model.add_selected_to_ignore_list()
     
     def clearIgnoreListTriggered(self):
-        title = tr("Clear Ignore List")
-        count = len(self.app.model.scanner.ignore_list)
-        if not count:
-            QMessageBox.information(self, title, tr("Nothing to clear."))
-            return
-        msg = tr("Do you really want to remove all %d items from the ignore list?") % count
-        if self.app.confirm(title, msg, QMessageBox.No):
-            self.app.model.scanner.ignore_list.Clear()
-            QMessageBox.information(self, title, tr("Ignore list cleared."))
+        self.app.model.clear_ignore_list()
     
     def copyTriggered(self):
         self.app.copy_or_move_marked(True)
@@ -303,13 +295,7 @@ class ResultWindow(QMainWindow):
         self.app.show_preferences()
     
     def removeMarkedTriggered(self):
-        count = self.app.model.results.mark_count
-        if not count:
-            return
-        title = tr("Remove duplicates")
-        msg = tr("You are about to remove %d files from results. Continue?") % count
-        if self.app.confirm(title, msg):
-            self.app.model.remove_marked()
+        self.app.model.remove_marked()
     
     def removeSelectedTriggered(self):
         self.app.model.remove_selected()

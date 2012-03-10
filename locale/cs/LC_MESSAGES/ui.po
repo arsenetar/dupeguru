@@ -51,64 +51,18 @@ msgid "Open Debug Log"
 msgstr ""
 
 #: qt/base/app.py:132
-msgid "Add to Ignore List"
-msgstr ""
-
-#: qt/base/app.py:133 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"All selected %d matches are going to be ignored in all subsequent scans. "
-"Continue?"
-msgstr ""
-"Všech %d vybraných shod bude v následujících hledáních ignorováno. "
-"Pokračovat?"
-
-#: qt/base/app.py:138
 msgid "copy"
 msgstr ""
 
-#: qt/base/app.py:138
+#: qt/base/app.py:132
 msgid "move"
 msgstr ""
 
-#: qt/base/app.py:139
+#: qt/base/app.py:133
 msgid "Select a directory to {} marked files to"
 msgstr "Select a directory to {} marked files to"
 
-#: qt/base/app.py:151 qt/base/result_window.py:311
-msgid "Remove duplicates"
-msgstr ""
-
-#: qt/base/app.py:152 qt/base/result_window.py:312
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "You are about to remove %d files from results. Continue?"
-msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
-
-#: qt/base/app.py:171 cocoa/base/en.lproj/Localizable.strings:0
-msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
-
-#: qt/base/app.py:172
-msgid "Custom Command"
-msgstr ""
-
-#: qt/base/app.py:208
-msgid "All files were processed successfully."
-msgstr "All files were processed successfully."
-
-#: qt/base/app.py:209
-msgid "Operation Complete"
-msgstr ""
-
-#: qt/base/app.py:212
-msgid "Scan complete"
-msgstr ""
-
-#: qt/base/app.py:213 cocoa/base/en.lproj/Localizable.strings:0
-msgid "No duplicates found."
-msgstr "Nebyli nalezeny žádné duplicity."
-
-#: qt/base/app.py:265 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:235 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -133,80 +87,80 @@ msgstr "Vybráno"
 msgid "Reference"
 msgstr "Referenční"
 
-#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Results..."
 msgstr "Nahrát výsledky..."
 
-#: qt/base/directories_dialog.py:59 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Results Window"
 msgstr "Okno s výsledky"
 
-#: qt/base/directories_dialog.py:60
+#: qt/base/directories_dialog.py:59
 msgid "Add Folder..."
 msgstr ""
 
-#: qt/base/directories_dialog.py:68 qt/base/result_window.py:84
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:83
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "Soubor"
 
-#: qt/base/directories_dialog.py:70 qt/base/result_window.py:92
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:91
 msgid "View"
 msgstr ""
 
-#: qt/base/directories_dialog.py:72 qt/base/result_window.py:94
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:93
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Nápověda"
 
-#: qt/base/directories_dialog.py:74 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/directories_dialog.py:73 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Recent Results"
 msgstr "Nahrát nedávné výsledky"
 
-#: qt/base/directories_dialog.py:108
+#: qt/base/directories_dialog.py:107
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Vyberte složky, které chcete prohledat a stiskněte \"Prohledat\"."
 
-#: qt/base/directories_dialog.py:132
+#: qt/base/directories_dialog.py:131
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Load Results"
 msgstr "Nahrát výsledky"
 
-#: qt/base/directories_dialog.py:135
+#: qt/base/directories_dialog.py:134
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Scan"
 msgstr "Prohledat"
 
-#: qt/base/directories_dialog.py:179
+#: qt/base/directories_dialog.py:178
 msgid "Unsaved results"
 msgstr ""
 
-#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Máte neuložené výsledky, opravdu si přejete skončit?"
 
-#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:187 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Vyberte složku, kterou chcete přidat do prohledávacího seznamu"
 
-#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:204 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Vyberte soubor s výsledky, který chcete nahrát"
 
-#: qt/base/directories_dialog.py:206
+#: qt/base/directories_dialog.py:205
 msgid "All Files (*.*)"
 msgstr ""
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:333
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:317
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr ""
 
-#: qt/base/directories_dialog.py:217
+#: qt/base/directories_dialog.py:216
 msgid "Start a new scan"
 msgstr ""
 
-#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Máte neuložené výsledky, opravdu si přejete pokračovat?"
 
@@ -317,159 +271,146 @@ msgstr "Ukázat vybrané ve správci souborů"
 msgid "Close"
 msgstr "Zavřít"
 
-#: qt/base/result_window.py:48 qt/base/result_window.py:179
+#: qt/base/result_window.py:47 qt/base/result_window.py:178
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Detaily"
 
-#: qt/base/result_window.py:49 qt/base/result_window.py:88
-#: qt/base/result_window.py:153 qt/base/result_window.py:178
+#: qt/base/result_window.py:48 qt/base/result_window.py:87
+#: qt/base/result_window.py:152 qt/base/result_window.py:177
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Akce"
 
-#: qt/base/result_window.py:50 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:49 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Dupes Only"
 msgstr "Zobrazit pouze duplicity"
 
-#: qt/base/result_window.py:51 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:50 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show Delta Values"
 msgstr "Zobrazit rozdíly"
 
-#: qt/base/result_window.py:52
+#: qt/base/result_window.py:51
 msgid "Send Marked to Recycle Bin"
 msgstr ""
 
-#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:52 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Delete Marked and Replace with Hardlinks"
 msgstr "Označené nahradit pevnými odkazy"
 
-#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Move Marked to..."
 msgstr "Označené přesunout..."
 
-#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Copy Marked to..."
 msgstr "Označené kopírovat..."
 
-#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Marked from Results"
 msgstr "Odstranit označené z výsledků"
 
-#: qt/base/result_window.py:57
+#: qt/base/result_window.py:56
 msgid "Re-Prioritize Results..."
 msgstr ""
 
-#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Selected from Results"
 msgstr "Odstranit výběr z výsledků"
 
-#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Přidat výběr na seznam výjimek"
 
-#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
 msgstr "Výběr jako reference"
 
-#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Vybrané otevřít výchozí aplikací"
 
-#: qt/base/result_window.py:62
+#: qt/base/result_window.py:61
 msgid "Open Containing Folder of Selected"
 msgstr ""
 
-#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Rename Selected"
 msgstr "Vybrané přejmenovat"
 
-#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark All"
 msgstr "Označit vše"
 
-#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark None"
 msgstr "Zrušit označení"
 
-#: qt/base/result_window.py:66 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invert Marking"
 msgstr "Invertovat označení"
 
-#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:66 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark Selected"
 msgstr "Označit vybrané"
 
-#: qt/base/result_window.py:68 qt/base/result_window.py:232
-#: cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Clear Ignore List"
 msgstr "Vyčistit seznam výjimek"
 
-#: qt/base/result_window.py:69
+#: qt/base/result_window.py:68
 msgid "Export To HTML"
 msgstr ""
 
-#: qt/base/result_window.py:70 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Uložit výsledky..."
 
-#: qt/base/result_window.py:71 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:70 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Spustit vlastní příkaz"
 
-#: qt/base/result_window.py:86
+#: qt/base/result_window.py:85
 msgid "Mark"
 msgstr ""
 
-#: qt/base/result_window.py:90 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:89 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Sloupce"
 
-#: qt/base/result_window.py:149 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/result_window.py:148 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
 msgstr "Výchozí nastavení"
 
-#: qt/base/result_window.py:172
+#: qt/base/result_window.py:171
 msgid "{} Results"
 msgstr ""
 
-#: qt/base/result_window.py:235
-msgid "Nothing to clear."
-msgstr "Nothing to clear."
-
-#: qt/base/result_window.py:237 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
-
-#: qt/base/result_window.py:240
-msgid "Ignore list cleared."
-msgstr "Ignore list cleared."
-
-#: qt/base/result_window.py:249
+#: qt/base/result_window.py:239
 msgid "Delete duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:250 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:240 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"
 
-#: qt/base/result_window.py:272
+#: qt/base/result_window.py:262
 msgid "Delete and hardlink duplicates"
 msgstr ""
 
-#: qt/base/result_window.py:273 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:263 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
@@ -477,7 +418,7 @@ msgstr ""
 "Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit "
 "hardlinky). Pokračovat?"
 
-#: qt/base/result_window.py:332 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:316 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Vyberte soubor pro uložení výsledků"
 
@@ -784,7 +725,7 @@ msgstr "Akce"
 msgid "Directories"
 msgstr "Adresáře"
 
-#: qt/base/result_window.py:180 cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:179 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
 msgstr "Jen duplicity"
 
@@ -915,25 +856,13 @@ msgstr "'%@' does not exist."
 msgid "The name '%@' already exists."
 msgstr "The name '%@' already exists."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were copied sucessfully."
-msgstr "All marked files were copied sucessfully."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were moved sucessfully."
-msgstr "All marked files were moved sucessfully."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "All marked files were sucessfully sent to Trash."
-msgstr "All marked files were sucessfully sent to Trash."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:182 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:186 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "You have no dead tracks in your iTunes Library"
 
@@ -953,10 +882,16 @@ msgstr ""
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:184
+#: cocoa/inter/app_me.py:200
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
-#: qt/base/result_window.py:181
+#: qt/base/result_window.py:180
 msgid "Delta Values"
+msgstr ""
+
+#: cocoa/inter/app_me.py:176
+msgid ""
+"There were communication problems with iTunes. The operation couldn't be "
+"completed."
 msgstr ""

@@ -126,13 +126,7 @@ class DupeGuru(QObject):
     
     #--- Public
     def add_selected_to_ignore_list(self):
-        dupes = self.model.without_ref(self.model.selected_dupes)
-        if not dupes:
-            return
-        title = tr("Add to Ignore List")
-        msg = tr("All selected %d matches are going to be ignored in all subsequent scans. Continue?") % len(dupes)
-        if self.confirm(title, msg):
-            self.model.add_selected_to_ignore_list(self)
+        self.model.add_selected_to_ignore_list()
     
     def copy_or_move_marked(self, copy):
         opname = tr("copy") if copy else tr("move")
@@ -145,13 +139,7 @@ class DupeGuru(QObject):
         self.model.copy_or_move_marked(copy, destination, recreate_path)
     
     def remove_selected(self):
-        dupes = self.model.without_ref(self.model.selected_dupes)
-        if not dupes:
-            return
-        title = tr("Remove duplicates")
-        msg = tr("You are about to remove %d files from results. Continue?") % len(dupes)
-        if self.confirm(title, msg):
-            self.model.remove_selected(self)
+        self.model.remove_selected(self)
     
     def askForRegCode(self):
         reg = Registration(self.model)
@@ -164,12 +152,7 @@ class DupeGuru(QObject):
         return answer == QMessageBox.Yes
     
     def invokeCustomCommand(self):
-        cmd = self.prefs.custom_command
-        if cmd:
-            self.model.invoke_command(cmd)
-        else:
-            msg = tr("You have no custom command set up. Set it up in your preferences.")
-            QMessageBox.warning(self.resultWindow, tr("Custom Command"), msg)
+        self.model.invoke_custom_command()
     
     def show_details(self):
         self.details_dialog.show()
@@ -274,6 +257,9 @@ class DupeGuru(QObject):
     def show_message(self, msg):
         window = QApplication.activeWindow()
         QMessageBox.information(window, '', msg)
+    
+    def ask_yes_no(self, prompt):
+        return self.confirm('', prompt)
     
     def open_url(self, url):
         url = QUrl(url)

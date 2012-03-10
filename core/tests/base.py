@@ -36,6 +36,9 @@ class DupeGuruView:
     def set_default(self, key_name, value):
         pass
     
+    def ask_yes_no(self, prompt):
+        return True # always answer yes
+    
 
 class ResultTable(ResultTableBase):
     COLUMNS = [

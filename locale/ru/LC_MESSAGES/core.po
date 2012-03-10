@@ -12,12 +12,12 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: core/app.py:86
+#: core/app.py:92
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "сможете только для удаления, перемещения или копирования 10 копий сразу"
 
-#: core/app.py:205
+#: core/app.py:229
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -25,15 +25,15 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов сразу в "
 "демонстрационном режиме."
 
-#: core/app.py:431
+#: core/app.py:489
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:442
+#: core/app.py:500
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранных директорий не содержат сканируемых файлов."
 
-#: core/app.py:481
+#: core/app.py:539
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -124,3 +124,57 @@ msgstr "Проверенные  %d/%d совпадениях"
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF %d/%d из фотографии"
+
+#: core/app.py:35
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:36
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:187
+msgid "No duplicates found."
+msgstr "Дубликаты не найдены."
+
+#: core/app.py:200
+msgid "All marked files were copied sucessfully."
+msgstr "Все выбранные файлы были скопированы успешно."
+
+#: core/app.py:201
+msgid "All marked files were moved sucessfully."
+msgstr "Все выбранные файлы были перемещены успешно."
+
+#: core/app.py:202
+msgid "All marked files were sucessfully sent to Trash."
+msgstr "Все выбранные файлы были успешно отправлены в корзину."
+
+#: core/app.py:250
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr ""
+"Все выбранные %d матчей будут игнорироваться во всех последующих проверок. "
+"Продолжить?"
+
+#: core/app.py:278
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "Вы действительно хотите удалить все элементы %d из черного списка?"
+
+#: core/app.py:281
+msgid "Ignore list cleared."
+msgstr "Черный список очищается."
+
+#: core/app.py:357
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr ""
+"У вас нет пользовательской команды создали. Установите его в ваших "
+"предпочтениях."
+
+#: core/app.py:442 core/app.py:453
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "Вы собираетесь удалить файлы %d из результата поиска. Продолжить?"
+
+#: core/app.py:275
+msgid "The ignore list is already empty. Nothing to clear."
+msgstr ""
