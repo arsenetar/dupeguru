@@ -6,18 +6,17 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.notify import Broadcaster
-
-from .base import GUIObject
 from .problem_table import ProblemTable
 
-class ProblemDialog(GUIObject, Broadcaster):
+class ProblemDialog:
     def __init__(self, app):
-        GUIObject.__init__(self, app)
-        Broadcaster.__init__(self)
+        self.app = app
         self._selected_dupe = None
         self.problem_table = ProblemTable(self)
-        self.problem_table.connect()
+    
+    def refresh(self):
+        self._selected_dupe = None
+        self.problem_table.refresh()
     
     def reveal_selected_dupe(self):
         if self._selected_dupe is not None:
@@ -25,9 +24,4 @@ class ProblemDialog(GUIObject, Broadcaster):
     
     def select_dupe(self, dupe):
         self._selected_dupe = dupe
-    
-    #--- Event Handlers
-    def problems_changed(self):
-        self._selected_dupe = None
-        self.notify('problems_changed')
     

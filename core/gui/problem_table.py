@@ -6,14 +6,13 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.notify import Listener
 from hscommon.gui.table import GUITable, Row
 from hscommon.gui.column import Column, Columns
 from hscommon.trans import trget
 
 coltr = trget('columns')
 
-class ProblemTable(GUITable, Listener):
+class ProblemTable(GUITable):
     COLUMNS = [
         Column('path', coltr("File Path")),
         Column('msg', coltr("Error Message")),
@@ -21,7 +20,6 @@ class ProblemTable(GUITable, Listener):
     
     def __init__(self, problem_dialog):
         GUITable.__init__(self)
-        Listener.__init__(self, problem_dialog)
         self.columns = Columns(self)
         self.view = None
         self.dialog = problem_dialog
@@ -36,10 +34,6 @@ class ProblemTable(GUITable, Listener):
         problems = self.dialog.app.results.problems
         for dupe, msg in problems:
             self.append(ProblemRow(self, dupe, msg))
-    
-    #--- Event handlers
-    def problems_changed(self):
-        self.refresh()
     
 
 class ProblemRow(Row):

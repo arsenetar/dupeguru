@@ -116,8 +116,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.problem_dialog = ProblemDialog(self)
         self.stats_label = StatsLabel(self)
         self.result_table = self._create_result_table()
-        children = [self.result_table, self.directory_tree, self.problem_dialog, self.stats_label,
-            self.details_panel]
+        children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
         # subclasses must create and connect self.result_table
@@ -195,7 +194,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.view.show_results_window()
         if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
             if self.results.problems:
-                self.notify('problems_changed')
+                self.problem_dialog.refresh()
                 self.view.show_problem_dialog()
             else:
                 msg = {
