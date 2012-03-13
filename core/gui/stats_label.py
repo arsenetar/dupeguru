@@ -6,11 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from .base import GUIObject
+from .base import DupeGuruGUIObject
 
-class StatsLabel(GUIObject):
-    def connect(self):
-        GUIObject.connect(self)
+class StatsLabel(DupeGuruGUIObject):
+    def _view_updated(self):
         self.view.refresh()
     
     @property

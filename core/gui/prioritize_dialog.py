@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from hscommon.gui.base import GUIObject
 from hscommon.gui.selectable_list import GUISelectableList
 
 class CriterionCategoryList(GUISelectableList):
@@ -39,8 +40,9 @@ class PrioritizationList(GUISelectableList):
             del prilist[i]
         self._refresh_contents()
 
-class PrioritizeDialog:
+class PrioritizeDialog(GUIObject):
     def __init__(self, app):
+        GUIObject.__init__(self)
         self.app = app
         self.categories = [cat(app.results) for cat in app._prioritization_categories()]
         self.category_list = CriterionCategoryList(self)
@@ -48,6 +50,9 @@ class PrioritizeDialog:
         self.criteria_list = GUISelectableList()
         self.prioritizations = []
         self.prioritization_list = PrioritizationList(self)
+    
+    #--- Override
+    def _view_updated(self):
         self.category_list.select(0)
     
     #--- Private

@@ -6,15 +6,16 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from .base import GUIObject
+from hscommon.gui.base import GUIObject
+from .base import DupeGuruGUIObject
 
-class DetailsPanel(GUIObject):
+class DetailsPanel(GUIObject, DupeGuruGUIObject):
     def __init__(self, app):
-        GUIObject.__init__(self, app)
+        GUIObject.__init__(self)
+        DupeGuruGUIObject.__init__(self, app)
         self._table = []
     
-    def connect(self):
-        GUIObject.connect(self)
+    def _view_updated(self):
         self._refresh()
         self.view.refresh()
     

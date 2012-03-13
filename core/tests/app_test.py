@@ -18,7 +18,7 @@ import hscommon.util
 from hscommon.testutil import CallLogger, eq_, log_calls
 from jobprogress.job import Job
 
-from .base import DupeGuru
+from .base import DupeGuru, TestApp
 from .results_test import GetTestGroups
 from .. import app, fs, engine
 from ..gui.details_panel import DetailsPanel
@@ -32,7 +32,7 @@ def add_fake_files_to_directories(directories, files):
 
 class TestCaseDupeGuru:
     def test_apply_filter_calls_results_apply_filter(self, monkeypatch):
-        dgapp = DupeGuru()
+        dgapp = TestApp().app
         monkeypatch.setattr(dgapp.results, 'apply_filter', log_calls(dgapp.results.apply_filter))
         dgapp.apply_filter('foo')
         eq_(2, len(dgapp.results.apply_filter.calls))
@@ -42,7 +42,7 @@ class TestCaseDupeGuru:
         eq_('foo', call['filter_str'])
     
     def test_apply_filter_escapes_regexp(self, monkeypatch):
-        dgapp = DupeGuru()
+        dgapp = TestApp().app
         monkeypatch.setattr(dgapp.results, 'apply_filter', log_calls(dgapp.results.apply_filter))
         dgapp.apply_filter('()[]\\.|+?^abc')
         call = dgapp.results.apply_filter.calls[1]
@@ -65,7 +65,7 @@ class TestCaseDupeGuru:
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
         monkeypatch.setattr(app, 'smart_copy', hscommon.conflict.smart_copy)
         monkeypatch.setattr(os, 'makedirs', lambda path: None) # We don't want the test to create that fake directory
-        dgapp = DupeGuru()
+        dgapp = TestApp().app
         dgapp.directories.add_path(p)
         [f] = dgapp.directories.get_files()
         dgapp.copy_or_move(f, True, 'some_destination', 0)
@@ -79,7 +79,7 @@ class TestCaseDupeGuru:
         sourcepath = tmppath + 'source'
         io.mkdir(sourcepath)
         io.open(sourcepath + 'myfile', 'w')
-        app = DupeGuru()
+        app = TestApp().app
         app.directories.add_path(tmppath)
         [myfile] = app.directories.get_files()
         monkeypatch.setattr(app, 'clean_empty_dirs', log_calls(lambda path: None))
@@ -95,7 +95,7 @@ class TestCaseDupeGuru:
             
         
         # At some point, any() was used in a wrong way that made Scan() wrongly return 1
-        app = DupeGuru()
+        app = TestApp().app
         f1, f2 = [FakeFile('foo') for i in range(2)]
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
@@ -109,7 +109,7 @@ class TestCaseDupeGuru:
         tmppath = Path(str(tmpdir))
         io.open(tmppath + 'myfile', 'w').write('foo')
         os.link(str(tmppath + 'myfile'), str(tmppath + 'hardlink'))
-        app = DupeGuru()
+        app = TestApp().app
         app.directories.add_path(tmppath)
         app.scanner.scan_type = ScanType.Contents
         app.options['ignore_hardlink_matches'] = True
@@ -120,7 +120,7 @@ class TestCaseDupeGuru:
         # Issue #140
         # It's possible that rename operation has its selected row swept off from under it, thus
         # making the selected row None. Don't crash when it happens.
-        dgapp = DupeGuru()
+        dgapp = TestApp().app
         # selected_row is None because there's no result.
         assert not dgapp.result_table.rename_selected('foo') # no crash
 
@@ -130,7 +130,7 @@ class TestCaseDupeGuru_clean_empty_dirs:
         monkeypatch.setattr(hscommon.util, 'delete_if_empty', log_calls(lambda path, files_to_delete=[]: None))
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
         monkeypatch.setattr(app, 'delete_if_empty', hscommon.util.delete_if_empty)
-        self.app = DupeGuru()
+        self.app = TestApp().app
     
     def test_option_off(self, do_setup):
         self.app.clean_empty_dirs(Path('/foo/bar'))
@@ -164,20 +164,14 @@ class TestCaseDupeGuru_clean_empty_dirs:
 
 class TestCaseDupeGuruWithResults:
     def pytest_funcarg__do_setup(self, request):
-        # XXX eventually, convert this to TestApp-based tests
-        self.app = DupeGuru()
+        app = TestApp()
+        self.app = app.app
         self.objects,self.matches,self.groups = GetTestGroups()
         self.app.results.groups = self.groups
-        self.dpanel = self.app.details_panel
-        self.dpanel.view = CallLogger()
-        self.dtree = self.app.directory_tree
-        self.dtree.view = CallLogger()
-        self.rtable_gui = CallLogger()
-        self.rtable = self.app.result_table
-        self.rtable.view = self.rtable_gui
-        self.dpanel.connect()
-        self.dtree.connect()
-        self.rtable.connect()
+        self.dpanel = app.dpanel
+        self.dtree = app.dtree
+        self.rtable = app.rtable
+        self.rtable.refresh()
         tmpdir = request.getfuncargvalue('tmpdir')
         tmppath = Path(str(tmpdir))
         io.mkdir(tmppath + 'foo')
@@ -422,16 +416,14 @@ class TestCaseDupeGuru_renameSelected:
         groups = engine.get_groups(matches)
         g = groups[0]
         g.prioritize(lambda x:x.name)
-        app = DupeGuru()
-        app.results.groups = groups
-        self.app = app
+        app = TestApp()
+        app.app.results.groups = groups
+        self.app = app.app
+        self.rtable = app.rtable
+        self.rtable.refresh()
         self.groups = groups
         self.p = p
         self.files = files
-        self.rtable_gui = CallLogger()
-        self.rtable = self.app.result_table
-        self.rtable.view = self.rtable_gui
-        self.rtable.connect()
     
     def test_simple(self, do_setup):
         app = self.app
@@ -477,10 +469,9 @@ class TestAppWithDirectoriesInTree:
         io.mkdir(p + 'sub1')
         io.mkdir(p + 'sub2')
         io.mkdir(p + 'sub3')
-        self.app = DupeGuru()
-        self.dtree = self.app.directory_tree
-        self.dtree.view = CallLogger()
-        self.dtree.connect()
+        app = TestApp()
+        self.app = app.app
+        self.dtree = app.dtree
         self.dtree.add_directory(p)
         self.dtree.view.clear_calls()
     

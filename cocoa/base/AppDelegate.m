@@ -37,7 +37,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [_recentResults setDelegate:self];
     _resultWindow = [self createResultWindow];
     _directoryPanel = [self createDirectoryPanel];
-    _detailsPanel = nil; // Lazily loaded
+    _detailsPanel = [self createDetailsPanel];
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
@@ -83,8 +83,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)detailsPanel
 {
-    if (!_detailsPanel)
-        _detailsPanel = [self createDetailsPanel];
     return _detailsPanel;
 }
 

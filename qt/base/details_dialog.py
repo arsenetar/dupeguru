@@ -16,13 +16,13 @@ class DetailsDialog(QDialog):
         QDialog.__init__(self, parent, Qt.Tool)
         self.app = app
         self.model = app.model.details_panel
-        self.model.view = self
         self._setupUi()
         if self.app.prefs.detailsWindowRect is not None:
             self.setGeometry(self.app.prefs.detailsWindowRect)
         self.tableModel = DetailsModel(self.model)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
+        self.model.view = self
         
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
     

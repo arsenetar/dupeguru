@@ -9,10 +9,9 @@
 from hscommon.notify import Listener
 from hscommon.gui.base import NoopGUI
 
-class GUIObject(Listener):
+class DupeGuruGUIObject(Listener):
     def __init__(self, app):
         Listener.__init__(self, app)
-        self.view = NoopGUI()
         self.app = app
     
     def directories_changed(self):

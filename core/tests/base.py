@@ -36,6 +36,9 @@ class DupeGuruView:
     def set_default(self, key_name, value):
         pass
     
+    def show_message(self, msg):
+        pass
+    
     def ask_yes_no(self, prompt):
         return True # always answer yes
     
@@ -144,7 +147,11 @@ class TestApp(TestAppBase):
         self.rtable = link_gui(self.app.result_table)
         self.dtree = link_gui(self.app.directory_tree)
         self.dpanel = link_gui(self.app.details_panel)
+        self.slabel = link_gui(self.app.stats_label)
         self.pdialog = PrioritizeDialog(self.app)
+        link_gui(self.pdialog.category_list)
+        link_gui(self.pdialog.criteria_list)
+        link_gui(self.pdialog.prioritization_list)
     
     #--- Helpers
     def select_pri_criterion(self, name):
