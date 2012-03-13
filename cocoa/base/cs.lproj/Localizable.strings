@@ -4,24 +4,12 @@
 
 "Select a results file to load" = "Vyberte soubor s výsledky, který chcete nahrát";
 "You have unsaved results, do you really want to quit?" = "Máte neuložené výsledky, opravdu si přejete skončit?";
-"Select a directory to copy marked files to" = "Select a directory to copy marked files to";
-"Select a directory to move marked files to" = "Select a directory to move marked files to";
 "Select a file to save your results to" = "Vyberte soubor pro uložení výsledků";
 "Select a folder to add to the scanning list" = "Vyberte složku, kterou chcete přidat do prohledávacího seznamu";
 "You have unsaved results, do you really want to continue?" = "Máte neuložené výsledky, opravdu si přejete pokračovat?";
 "'%@' already is in the list." = "'%@' already is in the list.";
 "'%@' does not exist." = "'%@' does not exist.";
-"You are about to remove %d files from results. Continue?" = "Chystáte se z výsledků odstranit %d souborů. Pokračovat?";
 "The name '%@' already exists." = "The name '%@' already exists.";
-"You are about to send %d files to Trash. Continue?" = "Chystáte se vyhodit %d souborů do koše. Pokračovat?";
-"You are about to send %d files to Trash (and hardlink them afterwards). Continue?" = "Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit hardlinky). Pokračovat?";
-"Do you really want to remove all %d items from the ignore list?" = "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?";
-"All selected %d matches are going to be ignored in all subsequent scans. Continue?" = "Všech %d vybraných shod bude v následujících hledáních ignorováno. Pokračovat?";
-"You have no custom command set up. Set it up in your preferences." = "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách.";
-"All marked files were copied sucessfully." = "All marked files were copied sucessfully.";
-"All marked files were moved sucessfully." = "All marked files were moved sucessfully.";
-"All marked files were sucessfully sent to Trash." = "All marked files were sucessfully sent to Trash.";
-"No duplicates found." = "Nebyli nalezeny žádné duplicity.";
 "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again." = "Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte pár sekund a zkuste to znovu.";
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?" = "Your iTunes Library contains %d dead tracks ready to be removed. Continue?";
 "You have no dead tracks in your iTunes Library" = "You have no dead tracks in your iTunes Library";

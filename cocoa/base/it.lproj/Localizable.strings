@@ -4,24 +4,12 @@
 
 "Select a results file to load" = "Seleziona un risultato (file) da caricare";
 "You have unsaved results, do you really want to quit?" = "Hai dei risultati non salvati. Vuoi veramente chiudere?";
-"Select a directory to copy marked files to" = "Seleziona una cartella in cui copiare i file marcati";
-"Select a directory to move marked files to" = "Seleziona una cartella in cui spostare i file marcati";
 "Select a file to save your results to" = "Seleziona un file dove salvare i tuoi risultati";
 "Select a folder to add to the scanning list" = "Seleziona una cartella da aggiungere alla lista delle cartelle da scansionare";
 "You have unsaved results, do you really want to continue?" = "Hai dei risultati non salvati. Vuoi veramente continuare?";
 "'%@' already is in the list." = "'%@' è già nella lista.";
 "'%@' does not exist." = "'%@' non esiste.";
-"You are about to remove %d files from results. Continue?" = "Stai per rimuovere %d file dai risultati. Continuare?";
 "The name '%@' already exists." = "Il nome '%@' è già esistente.";
-"You are about to send %d files to Trash. Continue?" = "Stai per inviare %d file nel cestino. Continuare?";
-"You are about to send %d files to Trash (and hardlink them afterwards). Continue?" = "Stai per inviare %d file nel cestino (compresi gli hardlink). Continuare?";
-"Do you really want to remove all %d items from the ignore list?" = "Vuoi veramente rimuovere tutti i %d elementi dalla lista dei file da ignorare?";
-"All selected %d matches are going to be ignored in all subsequent scans. Continue?" = "Tutti i %d elementi che coincidono verranno ignorati in tutte le scansioni successive. Continuare?";
-"You have no custom command set up. Set it up in your preferences." = "Non hai impostato nessun comando personalizzato. Impostalo nelle tue preferenze.";
-"All marked files were copied sucessfully." = "Tutti i file marcati sono stati copiati correttamente.";
-"All marked files were moved sucessfully." = "Tutti i file marcati sono stati spostati correttamente.";
-"All marked files were sucessfully sent to Trash." = "Tutti i file marcati sono stati inviati nel cestino.";
-"No duplicates found." = "Non sono stati trovati dei duplicati.";
 "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again." = "Un'azione precedente è ancora in corso. Non puoi cominciarne una nuova. Aspetta qualche secondo e quindi riprova.";
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?" = "La tua libreria di iTunes contiene %d tracce inesistenti pronte per essere rimosse. Continuare?";
 "You have no dead tracks in your iTunes Library" = "La tua libreria di iTunes non contiene tracce inesistenti";
