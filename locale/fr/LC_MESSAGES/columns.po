@@ -100,10 +100,11 @@ msgstr "Taille (KB)"
 msgid "Dimensions"
 msgstr "Dimensions"
 
-#: core/gui/problem_table.py:18
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Chemin du fichier"
 
-#: core/gui/problem_table.py:19
+#: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Message d'erreur"

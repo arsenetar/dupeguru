@@ -14,6 +14,7 @@ from inter.directory_outline import PyDirectoryOutline
 from inter.prioritize_dialog import PyPrioritizeDialog
 from inter.prioritize_list import PyPrioritizeList
 from inter.problem_dialog import PyProblemDialog
+from inter.ignore_list_dialog import PyIgnoreListDialog
 from inter.result_table import PyResultTable
 from inter.stats_label import PyStatsLabel
 from inter.app_pe import PyDupeGuru

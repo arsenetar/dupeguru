@@ -203,18 +203,19 @@ def build_cocoa_bridging_interfaces(edition):
     from inter.prioritize_dialog import PyPrioritizeDialog, PrioritizeDialogView
     from inter.prioritize_list import PyPrioritizeList, PrioritizeListView
     from inter.problem_dialog import PyProblemDialog
+    from inter.ignore_list_dialog import PyIgnoreListDialog, IgnoreListDialogView
     from inter.result_table import PyResultTable, ResultTableView
     from inter.stats_label import PyStatsLabel, StatsLabelView
     from inter.app import PyDupeGuruBase, DupeGuruView
     appmod = importlib.import_module('inter.app_{}'.format(edition))
     allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyFairware,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
-        PyResultTable, PyStatsLabel, PyDupeGuruBase, appmod.PyDupeGuru]
+        PyIgnoreListDialog, PyResultTable, PyStatsLabel, PyDupeGuruBase, appmod.PyDupeGuru]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
     allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
         DetailsPanelView, DirectoryOutlineView, PrioritizeDialogView, PrioritizeListView,
-        ResultTableView, StatsLabelView, DupeGuruView]
+        IgnoreListDialogView, ResultTableView, StatsLabelView, DupeGuruView]
     clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
     objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
     build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])

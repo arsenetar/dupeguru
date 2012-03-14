@@ -12,7 +12,7 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: core/app.py:93
+#: core/app.py:94
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "сможете только для удаления, перемещения или копирования 10 копий сразу"
@@ -25,15 +25,15 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов сразу в "
 "демонстрационном режиме."
 
-#: core/app.py:508
+#: core/app.py:501
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:519
+#: core/app.py:512
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранных директорий не содержат сканируемых файлов."
 
-#: core/app.py:558
+#: core/app.py:551
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -125,11 +125,11 @@ msgstr "Проверенные  %d/%d совпадениях"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF %d/%d из фотографии"
 
-#: core/app.py:35
+#: core/app.py:36
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:36
+#: core/app.py:37
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
@@ -157,41 +157,33 @@ msgstr ""
 "Все выбранные %d матчей будут игнорироваться во всех последующих проверок. "
 "Продолжить?"
 
-#: core/app.py:280
+#: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Вы действительно хотите удалить все элементы %d из черного списка?"
 
-#: core/app.py:283
-msgid "Ignore list cleared."
-msgstr "Черный список очищается."
-
-#: core/app.py:376
+#: core/app.py:367
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "У вас нет пользовательской команды создали. Установите его в ваших "
 "предпочтениях."
 
-#: core/app.py:461 core/app.py:472
+#: core/app.py:454 core/app.py:465
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить файлы %d из результата поиска. Продолжить?"
 
-#: core/app.py:277
-msgid "The ignore list is already empty. Nothing to clear."
-msgstr ""
-
-#: core/app.py:321
+#: core/app.py:312
 msgid "copy"
 msgstr "копия"
 
-#: core/app.py:321
+#: core/app.py:312
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:322
+#: core/app.py:313
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог на {} отмеченные файлы"
 
-#: core/app.py:336
+#: core/app.py:327
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
@@ -199,6 +191,6 @@ msgstr ""
 "Вы собираетесь отправить%d файлы в корзину (и жесткую них позже). "
 "Продолжить?"
 
-#: core/app.py:338
+#: core/app.py:329
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "Вы собираетесь отправить %d файлы в корзину. Продолжить?"

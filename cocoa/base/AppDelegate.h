@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "ResultWindow.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
+#import "IgnoreListDialog.h"
 #import "HSAboutBox.h"
 #import "HSRecentFiles.h"
 
@@ -24,6 +25,7 @@ http://www.hardcoded.net/licenses/bsd_license
     ResultWindowBase *_resultWindow;
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
+    IgnoreListDialog *_ignoreListDialog;
     NSWindowController *_preferencesPanel;
     HSAboutBox *_aboutBox;
     HSRecentFiles *_recentResults;
@@ -58,6 +60,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showDirectoryWindow:(id)sender;
 - (IBAction)showPreferencesPanel:(id)sender;
 - (IBAction)showResultWindow:(id)sender;
+- (IBAction)showIgnoreList:(id)sender;
 - (IBAction)startScanning:(id)sender;
 
 /* model --> view */

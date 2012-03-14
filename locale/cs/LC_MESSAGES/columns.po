@@ -100,10 +100,11 @@ msgstr "Velikost (KB)"
 msgid "Dimensions"
 msgstr "Rozměry"
 
-#: core/gui/problem_table.py:18
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Cesta k souboru"
 
-#: core/gui/problem_table.py:19
+#: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Chybové hlášení"

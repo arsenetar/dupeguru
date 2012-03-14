@@ -45,7 +45,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showProblemDialog;
 
 /* Actions */
-- (IBAction)clearIgnoreList:(id)sender;
 - (IBAction)changeOptions:(id)sender;
 - (IBAction)copyMarked:(id)sender;
 - (IBAction)deleteMarked:(id)sender;

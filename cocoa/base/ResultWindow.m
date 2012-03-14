@@ -98,11 +98,6 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Actions */
-- (IBAction)clearIgnoreList:(id)sender
-{
-    [model clearIgnoreList];
-}
-
 - (IBAction)changeOptions:(id)sender
 {
     NSInteger seg = [optionsSwitch selectedSegment];

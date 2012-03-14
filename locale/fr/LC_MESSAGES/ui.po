@@ -2,55 +2,55 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:38
+#: cocoa/inter/app.py:15 qt/base/app.py:39
 msgid "Scanning for duplicates"
 msgstr "Scan de doublons en cours"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:39
+#: cocoa/inter/app.py:16 qt/base/app.py:40
 msgid "Loading"
 msgstr "Chargement en cours"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:40
+#: cocoa/inter/app.py:17 qt/base/app.py:41
 msgid "Moving"
 msgstr "Déplacement en cours"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:41
+#: cocoa/inter/app.py:18 qt/base/app.py:42
 msgid "Copying"
 msgstr "Copie en cours"
 
-#: qt/base/app.py:42
+#: qt/base/app.py:43
 msgid "Sending files to the recycle bin"
 msgstr "Envoi de fichiers à la corbeille"
 
-#: qt/base/app.py:108
+#: qt/base/app.py:110
 msgid "Quit"
 msgstr "Quitter"
 
-#: qt/base/app.py:109 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:111 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Préférences"
 
-#: qt/base/app.py:110 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:113 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "Aide dupeGuru"
 
-#: qt/base/app.py:111 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:114 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "À propos de dupeGuru"
 
-#: qt/base/app.py:112
+#: qt/base/app.py:115
 msgid "Register dupeGuru"
 msgstr "Enregistrer dupeGuru"
 
-#: qt/base/app.py:113
+#: qt/base/app.py:116
 msgid "Check for Update"
 msgstr "Vérifier les mises à jour"
 
-#: qt/base/app.py:114
+#: qt/base/app.py:117
 msgid "Open Debug Log"
 msgstr "Ouvrir logs de déboguage"
 
-#: qt/base/app.py:226 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:232 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -87,16 +87,16 @@ msgstr "Fenêtre de résultats"
 msgid "Add Folder..."
 msgstr "Ajouter dossier..."
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:83
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:82
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "Fichier"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:91
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:90
 msgid "View"
 msgstr "Voir"
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:93
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:92
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Aide"
@@ -105,50 +105,50 @@ msgstr "Aide"
 msgid "Load Recent Results"
 msgstr "Charger résultats récents"
 
-#: qt/base/directories_dialog.py:107
+#: qt/base/directories_dialog.py:108
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Sélectionnez les dossiers à scanner puis faites \"Scan\"."
 
-#: qt/base/directories_dialog.py:131
+#: qt/base/directories_dialog.py:132
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Load Results"
 msgstr "Charger"
 
-#: qt/base/directories_dialog.py:134
+#: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Scan"
 msgstr "Scan"
 
-#: qt/base/directories_dialog.py:178
+#: qt/base/directories_dialog.py:179
 msgid "Unsaved results"
 msgstr "Résultats non sauvegardés"
 
-#: qt/base/directories_dialog.py:179 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment quitter?"
 
-#: qt/base/directories_dialog.py:187 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Sélectionnez un dossier à ajouter à la liste"
 
-#: qt/base/directories_dialog.py:204 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Sélectionnez un fichier résultats à charger"
 
-#: qt/base/directories_dialog.py:205
+#: qt/base/directories_dialog.py:206
 msgid "All Files (*.*)"
 msgstr "Tout les fichiers (*.*)"
 
-#: qt/base/directories_dialog.py:205 qt/base/result_window.py:305
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:301
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Résultats dupeGuru (*.dupeguru)"
 
-#: qt/base/directories_dialog.py:216
+#: qt/base/directories_dialog.py:217
 msgid "Start a new scan"
 msgstr "Commencer un nouveau scan"
 
-#: qt/base/directories_dialog.py:217 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
@@ -266,18 +266,19 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Révéler Fichier"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/ProblemDialog.strings:0
+#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/IgnoreListDialog.strings:0
+#: cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Fermer"
 
-#: qt/base/result_window.py:47 qt/base/result_window.py:178
+#: qt/base/result_window.py:47 qt/base/result_window.py:177
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Détails"
 
-#: qt/base/result_window.py:48 qt/base/result_window.py:87
-#: qt/base/result_window.py:152 qt/base/result_window.py:177
+#: qt/base/result_window.py:48 qt/base/result_window.py:86
+#: qt/base/result_window.py:151 qt/base/result_window.py:176
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Actions"
@@ -363,41 +364,37 @@ msgstr "Inverser le marquage"
 msgid "Mark Selected"
 msgstr "Marquer sélectionnés"
 
-#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
-msgid "Clear Ignore List"
-msgstr "Vider la liste de fichiers ignorés"
-
-#: qt/base/result_window.py:68
+#: qt/base/result_window.py:67
 msgid "Export To HTML"
 msgstr "Exporter vers HTML"
 
-#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Sauvegarder résultats..."
 
-#: qt/base/result_window.py:70 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Invoquer commande personnalisée"
 
-#: qt/base/result_window.py:85
+#: qt/base/result_window.py:84
 msgid "Mark"
 msgstr "Marquer"
 
-#: qt/base/result_window.py:89 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:88 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Colonnes"
 
-#: qt/base/result_window.py:148 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/result_window.py:147 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
 msgstr "Réinitialiser"
 
-#: qt/base/result_window.py:171
+#: qt/base/result_window.py:170
 msgid "{} Results"
 msgstr "{} (Résultats)"
 
-#: qt/base/result_window.py:304 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:300 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
 
@@ -704,7 +701,7 @@ msgstr "Action"
 msgid "Directories"
 msgstr "Dossiers"
 
-#: qt/base/result_window.py:179 cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:178 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
 msgstr "Sans réf."
 
@@ -858,7 +855,7 @@ msgstr ""
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
-#: qt/base/result_window.py:180
+#: qt/base/result_window.py:179
 msgid "Delta Values"
 msgstr ""
 
@@ -867,3 +864,19 @@ msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr ""
+
+#: qt/base/app.py:112 qt/base/ignore_list_dialog.py:31
+#: cocoa/base/en.lproj/IgnoreListDialog.strings:0
+#: cocoa/base/en.lproj/MainMenu.strings:0
+msgid "Ignore List"
+msgstr "Liste de doublons ignorés"
+
+#: qt/base/ignore_list_dialog.py:44
+#: cocoa/base/en.lproj/IgnoreListDialog.strings:0
+msgid "Remove Selected"
+msgstr "Effacer sélection"
+
+#: qt/base/ignore_list_dialog.py:45
+#: cocoa/base/en.lproj/IgnoreListDialog.strings:0
+msgid "Clear"
+msgstr "Vider"

@@ -12,11 +12,12 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 
-#: core/gui/problem_table.py:18
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Шлях до файлу"
 
-#: core/gui/problem_table.py:19
+#: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Повідомлення про помилку"
 

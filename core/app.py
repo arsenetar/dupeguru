@@ -26,6 +26,7 @@ from hscommon.trans import tr
 from . import directories, results, scanner, export, fs
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
+from .gui.ignore_list_dialog import IgnoreListDialog
 from .gui.problem_dialog import ProblemDialog
 from .gui.stats_label import StatsLabel
 
@@ -114,12 +115,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.details_panel = DetailsPanel(self)
         self.directory_tree = DirectoryTree(self)
         self.problem_dialog = ProblemDialog(self)
+        self.ignore_list_dialog = IgnoreListDialog(self)
         self.stats_label = StatsLabel(self)
         self.result_table = self._create_result_table()
         children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
-        # subclasses must create and connect self.result_table
     
     #--- Virtual
     def _get_display_info(self, dupe, group, delta):
@@ -257,6 +258,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 if other is not dupe:
                     self.scanner.ignore_list.Ignore(str(other.path), str(dupe.path))
         self.remove_duplicates(dupes)
+        self.ignore_list_dialog.refresh()
     
     def apply_filter(self, filter):
         self.results.apply_filter(None)
@@ -270,16 +272,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
                 path = path[:-1]
-    
-    def clear_ignore_list(self):
-        if not self.scanner.ignore_list:
-            msg = tr("The ignore list is already empty. Nothing to clear.")
-            self.view.show_message(msg)
-            return
-        msg = tr("Do you really want to remove all %d items from the ignore list?") % len(self.scanner.ignore_list)
-        if self.view.ask_yes_no(msg):
-            self.scanner.ignore_list.Clear()
-            self.view.show_message(tr("Ignore list cleared."))
     
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -398,6 +390,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('directories_changed')
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.load_from_xml(p)
+        self.ignore_list_dialog.refresh()
     
     def load_from(self, filename):
         def do(j):
@@ -439,6 +432,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def purge_ignore_list(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
+        self.ignore_list_dialog.refresh()
     
     def remove_directories(self, indexes):
         try:

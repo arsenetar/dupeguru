@@ -152,6 +152,8 @@ class TestApp(TestAppBase):
         link_gui(self.pdialog.category_list)
         link_gui(self.pdialog.criteria_list)
         link_gui(self.pdialog.prioritization_list)
+        link_gui(self.app.ignore_list_dialog)
+        link_gui(self.app.ignore_list_dialog.ignore_list_table)
     
     #--- Helpers
     def select_pri_criterion(self, name):

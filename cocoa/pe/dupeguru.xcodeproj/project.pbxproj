@@ -8,17 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CE03DD6C14FBD31300E998AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339512E5DA350029EF25 /* MainMenu.xib */; };
-		CE03DD6D14FBD31300E998AC /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339712E5DA350029EF25 /* ProblemDialog.xib */; };
-		CE03DD6E14FBD31300E998AC /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339912E5DA350029EF25 /* ResultWindow.xib */; };
-		CE03DD6F14FBD31300E998AC /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */; };
-		CE03DD7014FBD31300E998AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A512E5DA4D0029EF25 /* Preferences.xib */; };
-		CE03DD7414FBD33600E998AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A512E5DA4D0029EF25 /* Preferences.xib */; };
-		CE03DD7514FBD33600E998AC /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */; };
-		CE03DD7714FBD34600E998AC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
-		CE03DD7B14FBD36600E998AC /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECB2AC113D867AD0081E295 /* about.xib */; };
-		CE03DD7C14FBD36600E998AC /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECB2AC313D867AD0081E295 /* ErrorReportWindow.xib */; };
-		CE03DD7D14FBD36600E998AC /* FairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1EB5FF12537FB90034AABB /* FairwareReminder.xib */; };
 		CE05339B12E5DA350029EF25 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339312E5DA350029EF25 /* DirectoryPanel.xib */; };
 		CE05339C12E5DA350029EF25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339512E5DA350029EF25 /* MainMenu.xib */; };
 		CE05339D12E5DA350029EF25 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339712E5DA350029EF25 /* ProblemDialog.xib */; };
@@ -61,6 +50,17 @@
 		CE7501AC14C477B100E2A349 /* PySelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75019914C477B100E2A349 /* PySelectableList.m */; };
 		CE7501AD14C477B100E2A349 /* PyStatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75019B14C477B100E2A349 /* PyStatsLabel.m */; };
 		CE7501AE14C477B100E2A349 /* PyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75019D14C477B100E2A349 /* PyTable.m */; };
+		CE7857971511019400174D51 /* IgnoreListDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7857951511019400174D51 /* IgnoreListDialog.xib */; };
+		CE78579B151101B000174D51 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339312E5DA350029EF25 /* DirectoryPanel.xib */; };
+		CE78579C151101B000174D51 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339512E5DA350029EF25 /* MainMenu.xib */; };
+		CE78579D151101B000174D51 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339712E5DA350029EF25 /* ProblemDialog.xib */; };
+		CE7857A1151101C900174D51 /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339912E5DA350029EF25 /* ResultWindow.xib */; };
+		CE7857A2151101C900174D51 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */; };
+		CE7857A3151101C900174D51 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A512E5DA4D0029EF25 /* Preferences.xib */; };
+		CE7857A6151101DD00174D51 /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05339912E5DA350029EF25 /* ResultWindow.xib */; };
+		CE7857A7151101DD00174D51 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */; };
+		CE7857AA1511021200174D51 /* PyIgnoreListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7857A91511021200174D51 /* PyIgnoreListDialog.m */; };
+		CE7857AD1511022A00174D51 /* IgnoreListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7857AC1511022A00174D51 /* IgnoreListDialog.m */; };
 		CE7AC9191119911200D02F6C /* progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7AC9161119911200D02F6C /* progress.xib */; };
 		CE7D249D1423B0BD002E2297 /* HSPopUpList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D249A1423B0BD002E2297 /* HSPopUpList.m */; };
 		CE7D249E1423B0BD002E2297 /* HSSelectableList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D249C1423B0BD002E2297 /* HSSelectableList.m */; };
@@ -215,6 +215,19 @@
 		CE75019B14C477B100E2A349 /* PyStatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyStatsLabel.m; sourceTree = "<group>"; };
 		CE75019C14C477B100E2A349 /* PyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyTable.h; sourceTree = "<group>"; };
 		CE75019D14C477B100E2A349 /* PyTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyTable.m; sourceTree = "<group>"; };
+		CE7857961511019400174D51 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE785798151101B000174D51 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE785799151101B000174D51 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE78579A151101B000174D51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE78579E151101C900174D51 /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE78579F151101C900174D51 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE7857A0151101C900174D51 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE7857A4151101DD00174D51 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE7857A5151101DD00174D51 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/IgnoreListDialog.xib; sourceTree = "<group>"; };
+		CE7857A81511021200174D51 /* PyIgnoreListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyIgnoreListDialog.h; sourceTree = "<group>"; };
+		CE7857A91511021200174D51 /* PyIgnoreListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyIgnoreListDialog.m; sourceTree = "<group>"; };
+		CE7857AB1511022A00174D51 /* IgnoreListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IgnoreListDialog.h; path = ../base/IgnoreListDialog.h; sourceTree = "<group>"; };
+		CE7857AC1511022A00174D51 /* IgnoreListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IgnoreListDialog.m; path = ../base/IgnoreListDialog.m; sourceTree = "<group>"; };
 		CE78759D13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CE78759F13CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		CE7875A013CDFA7100F23771 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
@@ -441,6 +454,7 @@
 				CE05339312E5DA350029EF25 /* DirectoryPanel.xib */,
 				CE05339512E5DA350029EF25 /* MainMenu.xib */,
 				CE05339712E5DA350029EF25 /* ProblemDialog.xib */,
+				CE7857951511019400174D51 /* IgnoreListDialog.xib */,
 				CE05339912E5DA350029EF25 /* ResultWindow.xib */,
 				CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */,
 				CE0533A512E5DA4D0029EF25 /* Preferences.xib */,
@@ -475,6 +489,8 @@
 				CE75019214C477B100E2A349 /* PyPrioritizeList.h */,
 				CE75019314C477B100E2A349 /* PyPrioritizeList.m */,
 				CE75019414C477B100E2A349 /* PyProblemDialog.h */,
+				CE7857A81511021200174D51 /* PyIgnoreListDialog.h */,
+				CE7857A91511021200174D51 /* PyIgnoreListDialog.m */,
 				CE75019514C477B100E2A349 /* PyProblemDialog.m */,
 				CE75019614C477B100E2A349 /* PyResultTable.h */,
 				CE75019714C477B100E2A349 /* PyResultTable.m */,
@@ -549,6 +565,8 @@
 				CE9EA7701122CA0B008CD2BC /* DirectoryOutline.m */,
 				CE0C2ABA1177014200BC749F /* ProblemDialog.h */,
 				CE0C2ABB1177014200BC749F /* ProblemDialog.m */,
+				CE7857AB1511022A00174D51 /* IgnoreListDialog.h */,
+				CE7857AC1511022A00174D51 /* IgnoreListDialog.m */,
 				CE80DB880FC1951C0086DCA6 /* ResultWindow.h */,
 				CE80DB890FC1951C0086DCA6 /* ResultWindow.m */,
 				CE95865C112C516400F95FD2 /* StatsLabel.h */,
@@ -634,7 +652,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "dupeguru" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -688,17 +706,15 @@
 				CE63D9D31461EDC000A8CADD /* locale in Resources */,
 				CE75017514C4771800E2A349 /* py in Resources */,
 				CE75017714C4772100E2A349 /* dg_cocoa.py in Resources */,
-				CE03DD6C14FBD31300E998AC /* MainMenu.xib in Resources */,
-				CE03DD6D14FBD31300E998AC /* ProblemDialog.xib in Resources */,
-				CE03DD6E14FBD31300E998AC /* ResultWindow.xib in Resources */,
-				CE03DD6F14FBD31300E998AC /* DetailsPanel.xib in Resources */,
-				CE03DD7014FBD31300E998AC /* Preferences.xib in Resources */,
-				CE03DD7414FBD33600E998AC /* Preferences.xib in Resources */,
-				CE03DD7514FBD33600E998AC /* PrioritizeDialog.xib in Resources */,
-				CE03DD7714FBD34600E998AC /* dsa_pub.pem in Resources */,
-				CE03DD7B14FBD36600E998AC /* about.xib in Resources */,
-				CE03DD7C14FBD36600E998AC /* ErrorReportWindow.xib in Resources */,
-				CE03DD7D14FBD36600E998AC /* FairwareReminder.xib in Resources */,
+				CE7857971511019400174D51 /* IgnoreListDialog.xib in Resources */,
+				CE78579B151101B000174D51 /* DirectoryPanel.xib in Resources */,
+				CE78579C151101B000174D51 /* MainMenu.xib in Resources */,
+				CE78579D151101B000174D51 /* ProblemDialog.xib in Resources */,
+				CE7857A1151101C900174D51 /* ResultWindow.xib in Resources */,
+				CE7857A2151101C900174D51 /* DetailsPanel.xib in Resources */,
+				CE7857A3151101C900174D51 /* Preferences.xib in Resources */,
+				CE7857A6151101DD00174D51 /* ResultWindow.xib in Resources */,
+				CE7857A7151101DD00174D51 /* DetailsPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +777,8 @@
 				CE7501AC14C477B100E2A349 /* PySelectableList.m in Sources */,
 				CE7501AD14C477B100E2A349 /* PyStatsLabel.m in Sources */,
 				CE7501AE14C477B100E2A349 /* PyTable.m in Sources */,
+				CE7857AA1511021200174D51 /* PyIgnoreListDialog.m in Sources */,
+				CE7857AD1511022A00174D51 /* IgnoreListDialog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,6 +913,22 @@
 			name = FairwareReminder.xib;
 			path = ../../cocoalib/xib;
 			sourceTree = SOURCE_ROOT;
+		};
+		CE7857951511019400174D51 /* IgnoreListDialog.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE7857961511019400174D51 /* en */,
+				CE785798151101B000174D51 /* cs */,
+				CE785799151101B000174D51 /* de */,
+				CE78579A151101B000174D51 /* fr */,
+				CE78579E151101C900174D51 /* hy */,
+				CE78579F151101C900174D51 /* it */,
+				CE7857A0151101C900174D51 /* ru */,
+				CE7857A4151101DD00174D51 /* uk */,
+				CE7857A5151101DD00174D51 /* zh_CN */,
+			);
+			name = IgnoreListDialog.xib;
+			sourceTree = "<group>";
 		};
 		CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */ = {
 			isa = PBXVariantGroup;

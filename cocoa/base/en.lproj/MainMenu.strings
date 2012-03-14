@@ -92,9 +92,6 @@
 /* Class = "NSMenuItem"; title = "Start Duplicate Scan"; ObjectID = "926"; */
 "926.title" = "Start Duplicate Scan";
 
-/* Class = "NSMenuItem"; title = "Clear Ignore List"; ObjectID = "927"; */
-"927.title" = "Clear Ignore List";
-
 /* Class = "NSMenuItem"; title = "Rename Selected"; ObjectID = "933"; */
 "933.title" = "Rename Selected";
 
@@ -175,3 +172,6 @@
 
 /* Class = "NSMenuItem"; title = "Re-Prioritize Results"; ObjectID = "1276"; */
 "1276.title" = "Re-Prioritize Results";
+
+/* Class = "NSMenuItem"; title = "Ignore List"; ObjectID = "1283"; */
+"1283.title" = "Ignore List";

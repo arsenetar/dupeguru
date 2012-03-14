@@ -64,7 +64,6 @@ class ResultWindow(QMainWindow):
             ('actionMarkNone', 'Ctrl+Shift+A', '', tr("Mark None"), self.markNoneTriggered),
             ('actionInvertMarking', 'Ctrl+Alt+A', '', tr("Invert Marking"), self.markInvertTriggered),
             ('actionMarkSelected', '', '', tr("Mark Selected"), self.markSelectedTriggered),
-            ('actionClearIgnoreList', '', '', tr("Clear Ignore List"), self.clearIgnoreListTriggered),
             ('actionExport', '', '', tr("Export To HTML"), self.exportTriggered),
             ('actionSaveResults', 'Ctrl+S', '', tr("Save Results..."), self.saveResultsTriggered),
             ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', tr("Invoke Custom Command"), self.app.invokeCustomCommand),
@@ -116,6 +115,7 @@ class ResultWindow(QMainWindow):
         self.menuView.addAction(self.actionDelta)
         self.menuView.addSeparator()
         self.menuView.addAction(self.actionDetails)
+        self.menuView.addAction(self.app.actionIgnoreList)
         self.menuView.addAction(self.app.actionPreferences)
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionRegister)
@@ -124,7 +124,6 @@ class ResultWindow(QMainWindow):
         self.menuHelp.addAction(self.app.actionAbout)
         self.menuFile.addAction(self.actionSaveResults)
         self.menuFile.addAction(self.actionExport)
-        self.menuFile.addAction(self.actionClearIgnoreList)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
         
@@ -225,9 +224,6 @@ class ResultWindow(QMainWindow):
     
     def addToIgnoreListTriggered(self):
         self.app.model.add_selected_to_ignore_list()
-    
-    def clearIgnoreListTriggered(self):
-        self.app.model.clear_ignore_list()
     
     def copyTriggered(self):
         self.app.model.copy_or_move_marked(True)

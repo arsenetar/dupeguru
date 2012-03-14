@@ -2,7 +2,7 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:93
+#: core/app.py:94
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
@@ -12,15 +12,15 @@ msgid ""
 "mode."
 msgstr ""
 
-#: core/app.py:508
+#: core/app.py:501
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:519
+#: core/app.py:512
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:558
+#: core/app.py:551
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -112,11 +112,11 @@ msgstr "Vérifié %d/%d paires"
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:35
+#: core/app.py:36
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Aucun doublon marqué. Rien à faire."
 
-#: core/app.py:36
+#: core/app.py:37
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Aucun doublon sélectionné. Rien à faire."
 
@@ -143,47 +143,40 @@ msgid ""
 "Continue?"
 msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
 
-#: core/app.py:280
+#: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
 "Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle "
 "contient?"
 
-#: core/app.py:283
-msgid "Ignore list cleared."
-msgstr "La liste de doublons ignorés a été vidée."
-
-#: core/app.py:376
+#: core/app.py:367
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: core/app.py:461 core/app.py:472
+#: core/app.py:454 core/app.py:465
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: core/app.py:277
-msgid "The ignore list is already empty. Nothing to clear."
-msgstr "La liste est vide. Il n'y a rien à vider"
-
-#: core/app.py:321
+#: core/app.py:312
 msgid "copy"
 msgstr "copier"
 
-#: core/app.py:321
+#: core/app.py:312
 msgid "move"
 msgstr "déplacer"
 
-#: core/app.py:322
+#: core/app.py:313
 msgid "Select a directory to {} marked files to"
 msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 
-#: core/app.py:336
+#: core/app.py:327
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
-msgstr "%d fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
+msgstr ""
+"%d fichiers seront envoyés à la corbeille (puis 'hardlinkés'). Continuer?"
 
-#: core/app.py:338
+#: core/app.py:329
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "%d fichiers seront envoyés à la corbeille. Continuer?"

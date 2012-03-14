@@ -38,6 +38,7 @@ http://www.hardcoded.net/licenses/bsd_license
     _resultWindow = [self createResultWindow];
     _directoryPanel = [self createDirectoryPanel];
     _detailsPanel = [self createDetailsPanel];
+    _ignoreListDialog = [[IgnoreListDialog alloc] initWithPyRef:[model ignoreListDialog]];
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
@@ -147,6 +148,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showResultWindow:(id)sender
 {
     [[[self resultWindow] window] makeKeyAndOrderFront:nil];
+}
+
+- (IBAction)showIgnoreList:(id)sender
+{
+    [model showIgnoreList];
 }
 
 - (IBAction)startScanning:(id)sender

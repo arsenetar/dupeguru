@@ -13,11 +13,12 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: core/gui/problem_table.py:18
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Ֆայլի ճ-ը"
 
-#: core/gui/problem_table.py:19
+#: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Սխալի գրությունը"
 

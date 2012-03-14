@@ -31,6 +31,7 @@ from . import platform
 from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
+from .ignore_list_dialog import IgnoreListDialog
 
 tr = trget('ui')
 
@@ -87,6 +88,7 @@ class DupeGuru(QObject):
         self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
         self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
         self.problemDialog = ProblemDialog(parent=self.resultWindow, model=self.model.problem_dialog)
+        self.ignoreListDialog = IgnoreListDialog(parent=self.resultWindow, model=self.model.ignore_list_dialog)
         self.preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.resultWindow, self)
         self.about_box = AboutBox(self.resultWindow, self)
                 
@@ -107,6 +109,7 @@ class DupeGuru(QObject):
         ACTIONS = [
             ('actionQuit', 'Ctrl+Q', '', tr("Quit"), self.quitTriggered),
             ('actionPreferences', 'Ctrl+P', '', tr("Preferences"), self.preferencesTriggered),
+            ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
             ('actionRegister', '', '', tr("Register dupeGuru"), self.registerTriggered),
@@ -172,6 +175,9 @@ class DupeGuru(QObject):
     
     def checkForUpdateTriggered(self):
         QProcess.execute('updater.exe', ['/checknow'])
+    
+    def ignoreListTriggered(self):
+        self.model.ignore_list_dialog.show()
     
     def job_finished(self, jobid):
         result = self.model._job_completed(jobid, self._progress.last_error)

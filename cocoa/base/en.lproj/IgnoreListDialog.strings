@@ -1,0 +1,12 @@
+﻿
+/* Class = "NSWindow"; title = "Ignore List"; ObjectID = "1"; */
+"1.title" = "Ignore List";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "19"; */
+"19.title" = "Close";
+
+/* Class = "NSButtonCell"; title = "Remove Selected"; ObjectID = "21"; */
+"21.title" = "Remove Selected";
+
+/* Class = "NSButtonCell"; title = "Clear"; ObjectID = "28"; */
+"28.title" = "Clear";

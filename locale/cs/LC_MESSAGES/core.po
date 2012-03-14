@@ -2,7 +2,7 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:93
+#: core/app.py:94
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
@@ -12,15 +12,15 @@ msgid ""
 "mode."
 msgstr ""
 
-#: core/app.py:508
+#: core/app.py:501
 msgid "Collecting files to scan"
 msgstr "Shromažďuji prohlížené soubory"
 
-#: core/app.py:519
+#: core/app.py:512
 msgid "The selected directories contain no scannable file."
 msgstr "Vybrané adresáře neobsahují žádné soubory vhodné k prohledávání."
 
-#: core/app.py:558
+#: core/app.py:551
 msgid "%s (%d discarded)"
 msgstr "%s (%d vyřazeno)"
 
@@ -112,11 +112,11 @@ msgstr "Ověřeno %d/%d shod"
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:35
+#: core/app.py:36
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:36
+#: core/app.py:37
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
@@ -144,40 +144,32 @@ msgstr ""
 "Všech %d vybraných shod bude v následujících hledáních ignorováno. "
 "Pokračovat?"
 
-#: core/app.py:280
+#: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
 
-#: core/app.py:283
-msgid "Ignore list cleared."
-msgstr ""
-
-#: core/app.py:376
+#: core/app.py:367
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
 
-#: core/app.py:461 core/app.py:472
+#: core/app.py:454 core/app.py:465
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
-#: core/app.py:277
-msgid "The ignore list is already empty. Nothing to clear."
-msgstr ""
-
-#: core/app.py:321
+#: core/app.py:312
 msgid "copy"
 msgstr ""
 
-#: core/app.py:321
+#: core/app.py:312
 msgid "move"
 msgstr ""
 
-#: core/app.py:322
+#: core/app.py:313
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:336
+#: core/app.py:327
 msgid ""
 "You are about to send %d files to Trash (and hardlink them afterwards). "
 "Continue?"
@@ -185,6 +177,6 @@ msgstr ""
 "Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit "
 "hardlinky). Pokračovat?"
 
-#: core/app.py:338
+#: core/app.py:329
 msgid "You are about to send %d files to Trash. Continue?"
 msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"

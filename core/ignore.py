@@ -71,6 +71,25 @@ class IgnoreList:
                 self._ignored[first] = matches
         self._count += 1
     
+    def remove(self, first, second):
+        def inner(first, second):
+            try:
+                matches = self._ignored[first]
+                if second in matches:
+                    matches.discard(second)
+                    if not matches:
+                        del self._ignored[first]
+                    self._count -= 1
+                    return True
+                else:
+                    return False
+            except KeyError:
+                return False
+        
+        if not inner(first, second):
+            if not inner(second, first):
+                raise ValueError()
+    
     def load_from_xml(self, infile):
         """Loads the ignore list from a XML created with save_to_xml.
         

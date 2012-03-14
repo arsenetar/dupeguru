@@ -51,14 +51,14 @@ class PyDupeGuruBase(PyFairware):
     def resultTable(self) -> pyref:
         return self.model.result_table
     
+    def ignoreListDialog(self) -> pyref:
+        return self.model.ignore_list_dialog
+    
     #---Directories
     def addDirectory_(self, directory: str) -> int:
         return self.model.add_directory(directory)
     
     #---Results
-    def clearIgnoreList(self):
-        self.model.clear_ignore_list()
-    
     def doScan(self):
         self.model.start_scanning()
     
@@ -128,6 +128,9 @@ class PyDupeGuruBase(PyFairware):
 
     def invokeCustomCommand(self):
         self.model.invoke_custom_command()
+    
+    def showIgnoreList(self):
+        self.model.ignore_list_dialog.show()
     
     #---Information
     def resultsAreModified(self) -> bool:

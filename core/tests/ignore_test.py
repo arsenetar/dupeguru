@@ -9,6 +9,7 @@
 import io
 from xml.etree import ElementTree as ET
 
+from pytest import raises
 from hscommon.testutil import eq_
 
 from ..ignore import *
@@ -147,3 +148,18 @@ def test_nonzero():
     assert not il
     il.Ignore('foo','bar')
     assert il
+
+def test_remove():
+    il = IgnoreList()
+    il.Ignore('foo', 'bar')
+    il.Ignore('foo', 'baz')
+    il.remove('bar', 'foo')
+    eq_(len(il), 1)
+    assert not il.AreIgnored('foo', 'bar')
+
+def test_remove_non_existant():
+    il = IgnoreList()
+    il.Ignore('foo', 'bar')
+    il.Ignore('foo', 'baz')
+    with raises(ValueError):
+        il.remove('foo', 'bleh')
