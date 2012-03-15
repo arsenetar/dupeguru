@@ -26,6 +26,7 @@ class IgnoreListDialog(QDialog):
         
         self.removeSelectedButton.clicked.connect(self.model.remove_selected)
         self.clearButton.clicked.connect(self.model.clear)
+        self.closeButton.clicked.connect(self.accept)
     
     def _setupUi(self):
         self.setWindowTitle(tr("Ignore List"))
@@ -43,8 +44,9 @@ class IgnoreListDialog(QDialog):
         self.verticalLayout.addWidget(self.tableView)
         self.removeSelectedButton = QPushButton(tr("Remove Selected"))
         self.clearButton = QPushButton(tr("Clear"))
+        self.closeButton = QPushButton(tr("Close"))
         self.verticalLayout.addLayout(horizontalWrap([self.removeSelectedButton, self.clearButton,
-            None]))
+            None, self.closeButton]))
     
     #--- model --> view
     def show(self):
