@@ -126,12 +126,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _get_display_info(self, dupe, group, delta):
         raise NotImplementedError()
     
-    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        raise NotImplementedError()
-    
-    def _get_group_sort_key(self, group, key):
-        raise NotImplementedError()
-    
     def _prioritization_categories(self):
         raise NotImplementedError()
     
@@ -139,6 +133,24 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         raise NotImplementedError()
     
     #--- Private
+    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
+        if key == 'percentage':
+            m = get_group().get_match_of(dupe)
+            return m.percentage
+        if key == 'dupe_count':
+            return 0
+        r = cmp_value(dupe, key)
+        if delta and (key in self.result_table.DELTA_COLUMNS):
+            r -= cmp_value(get_group().ref, key)
+        return r
+    
+    def _get_group_sort_key(self, group, key):
+        if key == 'percentage':
+            return group.percentage
+        if key == 'dupe_count':
+            return len(group)
+        return cmp_value(group.ref, key)
+    
     def _do_delete(self, j, replace_with_hardlinks):
         def op(dupe):
             j.add_progress()

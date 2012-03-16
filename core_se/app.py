@@ -8,7 +8,7 @@
 from hscommon.util import format_size
 
 from core.app import (DupeGuru as DupeGuruBase, format_timestamp, format_perc,
-    format_words, format_dupe_count, cmp_value)
+    format_words, format_dupe_count)
 from core import prioritize
 from . import __appname__
 from .result_table import ResultTable
@@ -41,24 +41,6 @@ class DupeGuru(DupeGuruBase):
             'words': format_words(dupe.words) if hasattr(dupe, 'words') else '',
             'dupe_count': format_dupe_count(dupe_count),
         }
-    
-    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        if key == 'percentage':
-            m = get_group().get_match_of(dupe)
-            return m.percentage
-        if key == 'dupe_count':
-            return 0
-        r = cmp_value(dupe, key)
-        if delta and (key in self.result_table.DELTA_COLUMNS):
-            r -= cmp_value(get_group().ref, key)
-        return r
-    
-    def _get_group_sort_key(self, group, key):
-        if key == 'percentage':
-            return group.percentage
-        if key == 'dupe_count':
-            return len(group)
-        return cmp_value(group.ref, key)
     
     def _prioritization_categories(self):
         return prioritize.all_categories()

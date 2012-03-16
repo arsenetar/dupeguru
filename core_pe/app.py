@@ -60,32 +60,20 @@ class DupeGuru(DupeGuruBase):
         }
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        if key == 'percentage':
-            m = get_group().get_match_of(dupe)
-            return m.percentage
-        if key == 'dupe_count':
-            return 0
         if key == 'folder_path':
             dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
             return str(dupe_folder_path).lower()
-        r = cmp_value(dupe, key)
-        if delta and (key in self.result_table.DELTA_COLUMNS):
+        if delta and key == 'dimensions':
+            r = cmp_value(dupe, key)
             ref_value = cmp_value(get_group().ref, key)
-            if key == 'dimensions':
-                r = get_delta_dimensions(r, ref_value)
-            else:
-                r -= ref_value
-        return r
+            return get_delta_dimensions(r, ref_value)
+        return DupeGuruBase._get_dupe_sort_key(self, dupe, get_group, key, delta)
     
     def _get_group_sort_key(self, group, key):
-        if key == 'percentage':
-            return group.percentage
-        if key == 'dupe_count':
-            return len(group)
         if key == 'folder_path':
             dupe_folder_path = getattr(group.ref, 'display_folder_path', group.ref.folder_path)
             return str(dupe_folder_path).lower()
-        return cmp_value(group.ref, key)
+        return DupeGuruBase._get_group_sort_key(self, group, key)
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
