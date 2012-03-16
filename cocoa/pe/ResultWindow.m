@@ -17,7 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)initResultColumns
 {
     HSColumnDef defs[] = {
-        {@"marked", 26, 26, 26, NO, [NSButtonCell class]},
+        {@"marked", 26, 26, 26, YES, [NSButtonCell class]},
         {@"name", 162, 16, 0, YES, nil},
         {@"folder_path", 142, 16, 0, YES, nil},
         {@"size", 63, 16, 0, YES, nil},
