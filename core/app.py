@@ -139,6 +139,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return m.percentage
         if key == 'dupe_count':
             return 0
+        if key == 'marked':
+            return self.results.is_marked(dupe)
         r = cmp_value(dupe, key)
         if delta and (key in self.result_table.DELTA_COLUMNS):
             r -= cmp_value(get_group().ref, key)
@@ -149,6 +151,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return group.percentage
         if key == 'dupe_count':
             return len(group)
+        if key == 'marked':
+            return len([dupe for dupe in group.dupes if self.results.is_marked(dupe)])
         return cmp_value(group.ref, key)
     
     def _do_delete(self, j, replace_with_hardlinks):

@@ -7,13 +7,10 @@
 
 from qtlib.column import Column
 from ..base.results_model import ResultsModel as ResultsModelBase
-from core_pe.result_table import ResultTable
-
-# Little hack to remove the 'marked' column which isn't there in the Qt GUI.
-del ResultTable.COLUMNS[0]
 
 class ResultsModel(ResultsModelBase):
     COLUMNS = [
+        Column('marked', defaultWidth=30),
         Column('name', defaultWidth=200),
         Column('folder_path', defaultWidth=180),
         Column('size', defaultWidth=60),

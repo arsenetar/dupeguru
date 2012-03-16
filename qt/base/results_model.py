@@ -15,17 +15,19 @@ class ResultsModel(Table):
     def __init__(self, app, view):
         model = app.model.result_table
         Table.__init__(self, model, view)
+        view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
         
         app.prefsChanged.connect(self.appPrefsChanged)
         app.willSavePrefs.connect(self.appWillSavePrefs)
     
     def _getData(self, row, column, role):
+        if column.name == 'marked':
+            if role == Qt.CheckStateRole and row.markable:    
+                return Qt.Checked if row.marked else Qt.Unchecked
+            return None
         if role == Qt.DisplayRole:
             data = row.data_delta if self.model.delta_values else row.data
             return data[column.name]
-        elif role == Qt.CheckStateRole:
-            if column.name == 'name' and row.markable:
-                return Qt.Checked if row.marked else Qt.Unchecked
         elif role == Qt.ForegroundRole:
             if row.isref:
                 return QBrush(Qt.blue)
@@ -43,7 +45,7 @@ class ResultsModel(Table):
     
     def _getFlags(self, row, column):
         flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
-        if column.name == 'name':
+        if column.name == 'marked':
             flags |= Qt.ItemIsEditable
             if row.markable:
                 flags |= Qt.ItemIsUserCheckable
@@ -51,8 +53,8 @@ class ResultsModel(Table):
     
     def _setData(self, row, column, value, role):
         if role == Qt.CheckStateRole:
-            if column.name == 'name':
-                self.model.app.mark_dupe(row._dupe, bool(value))
+            if column.name == 'marked':
+                row.marked = bool(value)
                 return True
         elif role == Qt.EditRole:
             if column.name == 'name':
