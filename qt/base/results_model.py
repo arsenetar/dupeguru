@@ -52,11 +52,10 @@ class ResultsModel(Table):
     def _setData(self, row, column, value, role):
         if role == Qt.CheckStateRole:
             if column.name == 'name':
-                self.model.app.mark_dupe(row._dupe, value.toBool())
+                self.model.app.mark_dupe(row._dupe, bool(value))
                 return True
         elif role == Qt.EditRole:
             if column.name == 'name':
-                value = value.toString()
                 return self.model.rename_selected(value)
         return False
     
