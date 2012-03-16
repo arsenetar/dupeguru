@@ -19,19 +19,12 @@ class ResultsModel(Table):
         app.prefsChanged.connect(self.appPrefsChanged)
         app.willSavePrefs.connect(self.appWillSavePrefs)
     
-    def columnCount(self, parent):
-        return len(self.model.COLUMNS)
-    
-    def data(self, index, role):
-        if not index.isValid():
-            return None
-        row = self.model[index.row()]
-        column = self.model.COLUMNS[index.column()]
+    def _getData(self, row, column, role):
         if role == Qt.DisplayRole:
             data = row.data_delta if self.model.delta_values else row.data
             return data[column.name]
         elif role == Qt.CheckStateRole:
-            if index.column() == 0 and row.markable:
+            if column.name == 'name' and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
         elif role == Qt.ForegroundRole:
             if row.isref:
@@ -48,35 +41,22 @@ class ResultsModel(Table):
                 return row.data[column.name]
         return None
     
-    def flags(self, index):
-        if not index.isValid():
-            return Qt.ItemIsEnabled
+    def _getFlags(self, row, column):
         flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
-        if index.column() == 0:
+        if column.name == 'name':
             flags |= Qt.ItemIsEditable
-            row = self.model[index.row()]
             if row.markable:
                 flags |= Qt.ItemIsUserCheckable
         return flags
     
-    def headerData(self, section, orientation, role):
-        if role == Qt.DisplayRole:
-            if orientation == Qt.Horizontal and section < len(self.model.COLUMNS):
-                return self.model.COLUMNS[section].display
-        return None
-    
-    def setData(self, index, value, role):
-        if not index.isValid():
-            return False
-        row = self.model[index.row()]
-        column = self.model.COLUMNS[index.column()]
+    def _setData(self, row, column, value, role):
         if role == Qt.CheckStateRole:
             if column.name == 'name':
                 self.model.app.mark_dupe(row._dupe, value.toBool())
                 return True
         elif role == Qt.EditRole:
             if column.name == 'name':
-                value = str(value.toString())
+                value = value.toString()
                 return self.model.rename_selected(value)
         return False
     
