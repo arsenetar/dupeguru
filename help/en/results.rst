@@ -92,3 +92,7 @@ Action Menu
 * **Reveal Selected in Finder:** Open the folder containing selected file.
 * **Invoke Custom Command:** Invokes the external application you've set up in your preferences using the current selection as arguments in the invocation.
 * **Rename Selected:** Prompts you for a new name, and then rename the selected file.
+
+**Warning about moving files in iPhoto/iTunes:** When using the "Move Marked" action on duplicates 
+that come from iPhoto or iTunes, files are copied, not moved. dupeGuru cannot use the Move action
+on those files.

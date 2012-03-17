@@ -92,3 +92,5 @@ Aktionen Menü
 * **Zeige Ausgewählte:** Öffnet den Ordner der die ausgewählte Datei enthält.
 * **Eigenen Befehl ausführen:** Ruft die in den Einstellungen definierte externe Anwendung auf und nutzt die aktuelle Auswahl als Argumente für den Aufruf.
 * **Ausgewählte umbenennen:** Fragt nach einem neuen Namen und benennt die ausgewählte Datei um.
+
+.. todo:: Add Move and iPhoto/iTunes warning
