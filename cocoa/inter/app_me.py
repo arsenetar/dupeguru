@@ -61,7 +61,7 @@ class ITunesSong(fs.MusicFile):
             [song] = library.file_tracks[its.database_ID == self.id]()
             a.delete(song, timeout=0)
         except ValueError:
-            msg = "Could not find song '{}' in iTunes Library".format(str(self.path))
+            msg = "Could not find song '{}' (trackid: {}) in iTunes Library".format(str(self.path), self.id)
             raise EnvironmentError(msg)
         except (CommandError, RuntimeError) as e:
             raise EnvironmentError(str(e))
@@ -168,7 +168,13 @@ class DupeGuruME(DupeGuruBase):
     
     def _create_file(self, path):
         if (self.directories.itunes_libpath is not None) and (path in self.directories.itunes_libpath[:-1]):
-            return ITunesSong(path)
+            if not hasattr(self, 'itunes_songs'):
+                songs = get_itunes_songs(self.directories.itunes_libpath)
+                self.itunes_songs = {song.path: song for song in songs}
+            if path in self.itunes_songs:
+                return self.itunes_songs[path]
+            else:
+                pass # We'll return the default file type, as per the last line of this method
         return DupeGuruBase._create_file(self, path)
     
     def _job_completed(self, jobid, exc):
@@ -185,6 +191,10 @@ class DupeGuruME(DupeGuruBase):
             else:
                 msg = tr("You have no dead tracks in your iTunes Library")
                 self.view.show_message(msg)
+        if jobid == JobType.Load:
+            if hasattr(self, 'itunes_songs'):
+                # If we load another file, we want a refresh song list
+                del self.itunes_songs
         DupeGuruBase._job_completed(self, jobid, exc)
     
     def copy_or_move(self, dupe, copy, destination, dest_type):
