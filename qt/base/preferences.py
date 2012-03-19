@@ -33,7 +33,6 @@ class Preferences(PreferencesBase):
         self.tableFontSize = get('TableFontSize', self.tableFontSize)
         self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.resultWindowRect = self.get_rect('ResultWindowRect', self.resultWindowRect)
-        self.detailsWindowRect = self.get_rect('DetailsWindowRect', self.detailsWindowRect)
         self.directoriesWindowRect = self.get_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         self.recentResults = get('RecentResults', self.recentResults)
         self.recentFolders = get('RecentFolders', self.recentFolders)
@@ -58,7 +57,6 @@ class Preferences(PreferencesBase):
         self.tableFontSize = QApplication.font().pointSize()
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
-        self.detailsWindowRect = None
         self.directoriesWindowRect = None
         self.recentResults = []
         self.recentFolders = []
@@ -84,7 +82,6 @@ class Preferences(PreferencesBase):
         set_('TableFontSize', self.tableFontSize)
         set_('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.set_rect('ResultWindowRect', self.resultWindowRect)
-        self.set_rect('DetailsWindowRect', self.detailsWindowRect)
         self.set_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         set_('RecentResults', self.recentResults)
         set_('RecentFolders', self.recentFolders)

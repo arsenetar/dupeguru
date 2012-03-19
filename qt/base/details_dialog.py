@@ -17,8 +17,10 @@ class DetailsDialog(QDialog):
         self.app = app
         self.model = app.model.details_panel
         self._setupUi()
-        if self.app.prefs.detailsWindowRect is not None:
-            self.setGeometry(self.app.prefs.detailsWindowRect)
+        # To avoid saving uninitialized geometry on appWillSavePrefs, we track whether our dialog
+        # has been shown. If it has, we know that our geometry should be saved.
+        self._shown_once = False
+        self.app.prefs.restoreGeometry('DetailsWindowRect', self)
         self.tableModel = DetailsModel(self.model)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
@@ -29,9 +31,14 @@ class DetailsDialog(QDialog):
     def _setupUi(self): # Virtual
         pass
     
+    def show(self):
+        self._shown_once = True
+        QDialog.show(self)
+
     #--- Events
     def appWillSavePrefs(self):
-        self.app.prefs.detailsWindowRect = self.geometry()
+        if self._shown_once:
+            self.app.prefs.saveGeometry('DetailsWindowRect', self)
     
     #--- model --> view
     def refresh(self):
