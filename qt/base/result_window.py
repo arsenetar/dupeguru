@@ -285,7 +285,11 @@ class ResultWindow(QMainWindow):
         self.app.model.remove_selected()
     
     def renameTriggered(self):
-        self.resultsView.edit(self.resultsView.selectionModel().currentIndex())
+        index = self.resultsView.selectionModel().currentIndex()
+        # Our index is the current row, with column set to 0. Our filename column is 1 and that's
+        # what we want.
+        index = index.sibling(index.row(), 1)
+        self.resultsView.edit(index)
     
     def reprioritizeTriggered(self):
         dlg = PrioritizeDialog(self, self.app)

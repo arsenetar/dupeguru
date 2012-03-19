@@ -46,9 +46,10 @@ class ResultsModel(Table):
     def _getFlags(self, row, column):
         flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
         if column.name == 'marked':
-            flags |= Qt.ItemIsEditable
             if row.markable:
                 flags |= Qt.ItemIsUserCheckable
+        elif column.name == 'name':
+            flags |= Qt.ItemIsEditable
         return flags
     
     def _setData(self, row, column, value, role):
