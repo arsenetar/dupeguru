@@ -16,6 +16,7 @@ class CriterionCategoryList(GUISelectableList):
     
     def _update_selection(self):
         self.dialog.select_category(self.dialog.categories[self.selected_index])
+        GUISelectableList._update_selection(self)
 
 class PrioritizationList(GUISelectableList):
     def __init__(self, dialog):
