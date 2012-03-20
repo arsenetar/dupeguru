@@ -66,6 +66,18 @@ class DupeGuru(DupeGuruBase):
             'dupe_count': format_dupe_count(dupe_count),
         }
     
+    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
+        if key == 'folder_path':
+            dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
+            return str(dupe_folder_path).lower()
+        return DupeGuruBase._get_dupe_sort_key(self, dupe, get_group, key, delta)
+    
+    def _get_group_sort_key(self, group, key):
+        if key == 'folder_path':
+            dupe_folder_path = getattr(group.ref, 'display_folder_path', group.ref.folder_path)
+            return str(dupe_folder_path).lower()
+        return DupeGuruBase._get_group_sort_key(self, group, key)
+    
     def _prioritization_categories(self):
         return prioritize.all_categories()
     
