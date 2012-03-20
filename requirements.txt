@@ -1,4 +1,4 @@
-jobprogress>=1.0.3
+jobprogress>=1.0.4
 Send2Trash3k>=1.2.0
 sphinx>=1.1.0
 polib>=0.7.0
