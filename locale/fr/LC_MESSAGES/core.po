@@ -4,13 +4,15 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: core/app.py:94
 msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr ""
+msgstr "ne peut effacer, déplacer ou copier que  10 doublons à la fois"
 
 #: core/app.py:231
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
+"Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la "
+"fois en mode démo."
 
 #: core/app.py:501
 msgid "Collecting files to scan"
