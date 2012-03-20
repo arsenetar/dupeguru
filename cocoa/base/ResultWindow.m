@@ -31,6 +31,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self fillColumnsMenu];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked:)];
+    [self adjustUIToLocalization];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobInProgress:) name:JobInProgress object:nil];
@@ -95,6 +96,30 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showProblemDialog
 {
     [problemDialog showWindow:self];
+}
+
+- (void)adjustUIToLocalization
+{
+    NSString *lang = [[NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations]] objectAtIndex:0];
+    NSInteger seg1delta = 0;
+    NSInteger seg2delta = 0;
+    if ([lang isEqual:@"ru"]) {
+        seg2delta = 20;
+    }
+    else if ([lang isEqual:@"uk"]) {
+        seg2delta = 20;
+    }
+    else if ([lang isEqual:@"hy"]) {
+        seg1delta = 20;
+    }
+    if (seg1delta || seg2delta) {
+        [optionsSwitch setWidth:[optionsSwitch widthForSegment:0]+seg1delta forSegment:0];
+        [optionsSwitch setWidth:[optionsSwitch widthForSegment:1]+seg2delta forSegment:1];
+        NSSize s = [optionsToolbarItem maxSize];
+        s.width += seg1delta + seg2delta;
+        [optionsToolbarItem setMaxSize:s];
+        [optionsToolbarItem setMinSize:s];
+    }
 }
 
 /* Actions */

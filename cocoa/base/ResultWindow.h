@@ -20,6 +20,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
 @protected
     IBOutlet NSSegmentedControl *optionsSwitch;
+    IBOutlet NSToolbarItem *optionsToolbarItem;
     IBOutlet HSTableView *matches;
     IBOutlet NSTextField *stats;
     IBOutlet NSSearchField *filterField;
@@ -43,6 +44,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 - (void)updateOptionSegments;
 - (void)showProblemDialog;
+- (void)adjustUIToLocalization;
 
 /* Actions */
 - (IBAction)changeOptions:(id)sender;

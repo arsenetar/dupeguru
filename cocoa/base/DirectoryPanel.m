@@ -26,6 +26,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [_recentDirectories setDelegate:self];
     outline = [[DirectoryOutline alloc] initWithPyRef:[model directoryTree] outlineView:outlineView];
     [self refreshRemoveButtonText];
+    [self adjustUIToLocalization];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directorySelectionChanged:)
         name:NSOutlineViewSelectionDidChangeNotification object:outlineView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outlineAddedFolders:)
@@ -40,7 +42,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [super dealloc];
 }
 
-/* Virtual */
+/* Private */
 
 - (void)fillPopUpMenu
 {
@@ -48,6 +50,27 @@ http://www.hardcoded.net/licenses/bsd_license
     NSMenuItem *mi = [m addItemWithTitle:TR(@"Add New Folder...") action:@selector(askForDirectory:) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
+}
+
+- (void)adjustUIToLocalization
+{
+    NSString *lang = [[NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations]] objectAtIndex:0];
+    NSInteger loadResultsWidthDelta = 0;
+    if ([lang isEqual:@"ru"]) {
+        loadResultsWidthDelta = 50;
+    }
+    else if ([lang isEqual:@"uk"]) {
+        loadResultsWidthDelta = 70;
+    }
+    else if ([lang isEqual:@"hy"]) {
+        loadResultsWidthDelta = 30;
+    }
+    if (loadResultsWidthDelta) {
+        NSRect r = [loadResultsButton frame];
+        r.size.width += loadResultsWidthDelta;
+        r.origin.x -= loadResultsWidthDelta;
+        [loadResultsButton setFrame:r];
+    }
 }
 
 /* Actions */

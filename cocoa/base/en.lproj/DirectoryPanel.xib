@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2182</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSTextField</string>
@@ -48,7 +48,7 @@
 			<object class="NSWindowTemplate" id="970147395">
 				<int key="NSWindowStyleMask">11</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{387, 265}, {395, 294}}</string>
+				<string key="NSWindowRect">{{387, 265}, {422, 294}}</string>
 				<int key="NSWTFlags">1886913536</int>
 				<string key="NSWindowTitle">dupeGuru</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -72,14 +72,14 @@
 										<object class="NSOutlineView" id="10140319">
 											<reference key="NSNextResponder" ref="514281221"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{353, 183}</string>
+											<string key="NSFrameSize">{380, 183}</string>
 											<reference key="NSSuperview" ref="514281221"/>
 											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="885660940">
 												<reference key="NSNextResponder" ref="395832192"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrameSize">{353, 17}</string>
+												<string key="NSFrameSize">{380, 17}</string>
 												<reference key="NSSuperview" ref="395832192"/>
 												<reference key="NSWindow"/>
 												<reference key="NSTableView" ref="10140319"/>
@@ -94,7 +94,7 @@
 											<array class="NSMutableArray" key="NSTableColumns">
 												<object class="NSTableColumn" id="547470852">
 													<string key="NSIdentifier">name</string>
-													<double key="NSWidth">262</double>
+													<double key="NSWidth">289</double>
 													<double key="NSMinWidth">16</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -247,7 +247,7 @@
 											<int key="NSTableViewGroupRowStyle">1</int>
 										</object>
 									</array>
-									<string key="NSFrame">{{1, 17}, {353, 183}}</string>
+									<string key="NSFrame">{{1, 17}, {380, 183}}</string>
 									<reference key="NSSuperview" ref="242279311"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="10140319"/>
@@ -282,7 +282,7 @@
 									<array class="NSMutableArray" key="NSSubviews">
 										<reference ref="885660940"/>
 									</array>
-									<string key="NSFrame">{{1, 0}, {353, 17}}</string>
+									<string key="NSFrame">{{1, 0}, {380, 17}}</string>
 									<reference key="NSSuperview" ref="242279311"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="885660940"/>
@@ -292,7 +292,7 @@
 								</object>
 								<reference ref="950325122"/>
 							</array>
-							<string key="NSFrame">{{20, 48}, {355, 201}}</string>
+							<string key="NSFrame">{{20, 48}, {382, 201}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="514281221"/>
@@ -387,7 +387,7 @@
 						<object class="NSButton" id="580397230">
 							<reference key="NSNextResponder" ref="53314480"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{251, 12}, {130, 32}}</string>
+							<string key="NSFrame">{{278, 13}, {130, 32}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
@@ -459,7 +459,7 @@
 						<object class="NSTextField" id="186572573">
 							<reference key="NSNextResponder" ref="53314480"/>
 							<int key="NSvFlags">266</int>
-							<string key="NSFrame">{{17, 257}, {361, 17}}</string>
+							<string key="NSFrame">{{17, 257}, {388, 17}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
@@ -481,7 +481,7 @@
 						<object class="NSButton" id="84918337">
 							<reference key="NSNextResponder" ref="53314480"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{121, 12}, {130, 32}}</string>
+							<string key="NSFrame">{{148, 13}, {130, 32}}</string>
 							<reference key="NSSuperview" ref="53314480"/>
 							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
@@ -500,7 +500,7 @@
 							</object>
 						</object>
 					</array>
-					<string key="NSFrameSize">{395, 294}</string>
+					<string key="NSFrameSize">{422, 294}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 				</object>
@@ -576,6 +576,14 @@
 						<reference key="destination" ref="84918337"/>
 					</object>
 					<int key="connectionID">78</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loadResultsButton</string>
+						<reference key="source" ref="566600593"/>
+						<reference key="destination" ref="84918337"/>
+					</object>
+					<int key="connectionID">79</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -889,7 +897,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">78</int>
+			<int key="maxID">79</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -902,6 +910,7 @@
 						<string key="openWebsite:">id</string>
 						<string key="showAboutBox:">id</string>
 						<string key="showDirectoryWindow:">id</string>
+						<string key="showIgnoreList:">id</string>
 						<string key="showPreferencesPanel:">id</string>
 						<string key="showResultWindow:">id</string>
 						<string key="startScanning:">id</string>
@@ -927,6 +936,10 @@
 							<string key="name">showDirectoryWindow:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showIgnoreList:">
+							<string key="name">showIgnoreList:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showPreferencesPanel:">
 							<string key="name">showPreferencesPanel:</string>
 							<string key="candidateClassName">id</string>
@@ -943,7 +956,6 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="actionsMenu">NSMenu</string>
 						<string key="columnsMenu">NSMenu</string>
-						<string key="py">PyDupeGuruBase</string>
 						<string key="recentResultsMenu">NSMenu</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -954,10 +966,6 @@
 						<object class="IBToOneOutletInfo" key="columnsMenu">
 							<string key="name">columnsMenu</string>
 							<string key="candidateClassName">NSMenu</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="py">
-							<string key="name">py</string>
-							<string key="candidateClassName">PyDupeGuruBase</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="recentResultsMenu">
 							<string key="name">recentResultsMenu</string>
@@ -999,6 +1007,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addButtonPopUp">NSPopUpButton</string>
 						<string key="loadRecentButtonPopUp">NSPopUpButton</string>
+						<string key="loadResultsButton">NSButton</string>
 						<string key="outlineView">HSOutlineView</string>
 						<string key="removeButton">NSButton</string>
 					</dictionary>
@@ -1010,6 +1019,10 @@
 						<object class="IBToOneOutletInfo" key="loadRecentButtonPopUp">
 							<string key="name">loadRecentButtonPopUp</string>
 							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loadResultsButton">
+							<string key="name">loadResultsButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineView">
 							<string key="name">outlineView</string>
@@ -1042,30 +1055,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HSOutlineView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyApp</string>
-					<string key="superclassName">PyFairware</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyApp.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyDupeGuruBase</string>
-					<string key="superclassName">PyApp</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyDupeGuruBase.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PyFairware</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PyFairware.h</string>
 					</object>
 				</object>
 			</array>

@@ -20,6 +20,7 @@ http://www.hardcoded.net/licenses/bsd_license
     IBOutlet NSPopUpButton *loadRecentButtonPopUp;
     IBOutlet HSOutlineView *outlineView;
     IBOutlet NSButton *removeButton;
+    IBOutlet NSButton *loadResultsButton;
     
     AppDelegateBase *_app;
     PyDupeGuru *model;
@@ -30,6 +31,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithParentApp:(AppDelegateBase *)aParentApp;
 
 - (void)fillPopUpMenu; // Virtual
+- (void)adjustUIToLocalization;
 
 - (IBAction)askForDirectory:(id)sender;
 - (IBAction)popupAddDirectoryMenu:(id)sender;
