@@ -166,6 +166,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def _do_delete_dupe(self, dupe, replace_with_hardlinks):
         if not io.exists(dupe.path):
             return
+        logging.debug("Sending '%s' to trash", dupe.path)
         send2trash(str(dupe.path)) # Raises OSError when there's a problem
         if replace_with_hardlinks:
             group = self.results.get_group_of_duplicate(dupe)
