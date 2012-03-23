@@ -58,8 +58,16 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     prepared = [] # only pictures for which there was no error getting blocks
     try:
         for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):
+            if not picture.path:
+                # XXX Find the root cause of this. I've received reports of crashes where we had
+                # "Analyzing picture at " (without a path) in the debug log. It was an iPhoto scan.
+                # For now, I'm simply working around the crash by ignoring those, but it would be
+                # interesting to know exactly why this happens. I'm suspecting a malformed
+                # entry in iPhoto library.
+                logging.warning("We have a picture with a null path here")
+                continue
             picture.unicode_path = str(picture.path)
-            logging.debug("Analyzing picture at {}".format(picture.unicode_path))
+            logging.debug("Analyzing picture at %s", picture.unicode_path)
             if with_dimensions:
                 picture.dimensions # pre-read dimensions
             try:
@@ -70,7 +78,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
             except (IOError, ValueError) as e:
                 logging.warning(str(e))
             except MemoryError:
-                logging.warning('Ran out of memory while reading %s of size %d' % (picture.unicode_path, picture.size))
+                logging.warning("Ran out of memory while reading %s of size %d", picture.unicode_path, picture.size)
                 if picture.size < 10 * 1024 * 1024: # We're really running out of memory
                     raise
     except MemoryError:
@@ -84,8 +92,8 @@ def get_chunks(pictures):
     chunk_count = max(min_chunk_count, chunk_count)
     chunk_size = (len(pictures) // chunk_count) + 1
     chunk_size = max(MIN_CHUNK_SIZE, chunk_size)
-    logging.info("Creating {} chunks with a chunk size of {} for {} pictures".format(
-        chunk_count, chunk_size, len(pictures)))
+    logging.info("Creating %d chunks with a chunk size of %d for %d pictures", chunk_count,
+        chunk_size, len(pictures))
     chunks = [pictures[i:i+chunk_size] for i in range(0, len(pictures), chunk_size)]
     return chunks
 
