@@ -1,3 +1,16 @@
+=== 6.3.0 (2012-03-27)
+
+* Improved iTunes support. [Mac]
+* Improved results window UI. [Windows, Linux]
+* Improved error messages when communicating with iTunes. (#188) [Mac]
+* Added a dialog to edit the Ignore List.
+* Added the ability to sort results by "marked" status.
+* Fixed "Open with default application". (#190)
+* Fixed a bug where there would be a false reporting of discarded matches. (#195)
+* Fixed various localization glitches.
+* Fixed hard crashes on crash reporting. (#196)
+* Fixed bug where the details panel would show up at inconvenient places in the screen. [Windows, Linux]
+
 === 6.2.1 (2012-01-20)
 
 * Fixed random hard crashes (yeah, again). [Mac OS X]
