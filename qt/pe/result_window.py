@@ -6,7 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QMessageBox, QAction
 
 from hscommon.trans import trget
@@ -15,11 +14,11 @@ from ..base.result_window import ResultWindow as ResultWindowBase
 tr = trget('ui')
 
 class ResultWindow(ResultWindowBase):
-    def _setupUi(self):
-        ResultWindowBase._setupUi(self)
+    def _setupMenu(self):
+        ResultWindowBase._setupMenu(self)
         self.actionClearPictureCache = QAction(tr("Clear Picture Cache"), self)
-        self.menuFile.insertAction(self.actionClearIgnoreList, self.actionClearPictureCache)
-        self.connect(self.actionClearPictureCache, SIGNAL("triggered()"), self.clearPictureCacheTriggered)
+        self.menuFile.insertAction(self.actionSaveResults, self.actionClearPictureCache)
+        self.actionClearPictureCache.triggered.connect(self.clearPictureCacheTriggered)
     
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")

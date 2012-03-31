@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT type="Advanced Installer" CreateVersion="4.4.1" version="7.5.2" modules="professional" RootPath="." Language="en">
+<DOCUMENT Type="Advanced Installer" CreateVersion="4.4.1" version="8.0.2" Modules="professional" RootPath="." Language="en">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_SHORTCUTSREG" Value="0|0|0|"/>
@@ -20,85 +20,42 @@
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{33E0D6C8-D7C6-46ED-B1A9-ECFE409EC9D5}"/>
-    <ROW Property="WindowsFamily9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT" MultiBuildValue="DefaultBuild:Windows NT 4.0, Windows NT 4.0 Service Pack 1, Windows NT 4.0 Service Pack 2, Windows NT 4.0 Service Pack 3, Windows NT 4.0 Service Pack 4, Windows NT 4.0 Service Pack 5, Windows NT 4.0 Service Pack 6" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNTDisplay" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
-    <ROW Directory="accessible_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="access~1|accessible"/>
-    <ROW Directory="codecs_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="codecs"/>
-    <ROW Directory="iconengines_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="iconen~1|iconengines"/>
-    <ROW Directory="imageformats_DIR" Directory_Parent="qt4_plugins_DIR" DefaultDir="imagef~1|imageformats"/>
-    <ROW Directory="qt4_plugins_DIR" Directory_Parent="APPDIR" DefaultDir="qt4_pl~1|qt4_plugins"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="AIShRegAnswer" ComponentId="{775090B3-2E56-40F5-9DD8-24A2F82DA601}" Directory_="APPDIR" Attributes="4" KeyPath="AIShRegAnswer"/>
     <ROW Component="AI_ExePath" ComponentId="{56EC90C1-F906-4F6E-95B2-1876CAA651C2}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="CurrentVersion" ComponentId="{398CD484-F093-4CEC-BE84-1BD0DD461942}" Directory_="APPDIR" Attributes="4" KeyPath="CurrentVersion"/>
-    <ROW Component="QtCore4.dll" ComponentId="{F517476C-BC6D-40B6-A063-5A10680ECA05}" Directory_="APPDIR" Attributes="0" KeyPath="QtCore4.dll"/>
-    <ROW Component="QtGui4.dll" ComponentId="{4915BAC4-AFB0-42E1-BF2E-D4C3E58D4BEE}" Directory_="APPDIR" Attributes="0" KeyPath="QtGui4.dll"/>
-    <ROW Component="bz2.pyd" ComponentId="{E03E8F51-0E8D-40A2-9ED0-A8EA0ED4CD19}" Directory_="APPDIR" Attributes="0" KeyPath="bz2.pyd" Type="0"/>
     <ROW Component="dupeGuru.exe" ComponentId="{A8FFC84F-B54B-4883-B9FD-5C545AF0E51C}" Directory_="APPDIR" Attributes="0" KeyPath="dupeGuru.exe"/>
-    <ROW Component="python26.dll" ComponentId="{C47E3AEB-FCE1-4A7D-90AF-26D52100756F}" Directory_="APPDIR" Attributes="0" KeyPath="python26.dll"/>
-    <ROW Component="qcncodecs4.dll" ComponentId="{1FA15E05-79B4-490E-8BE7-2915DAFECDA0}" Directory_="codecs_DIR" Attributes="0" KeyPath="qcncodecs4.dll"/>
-    <ROW Component="qgif4.dll" ComponentId="{12390BD7-63E5-4BAE-A760-84D6E47387F3}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qgif4.dll"/>
-    <ROW Component="qico4.dll" ComponentId="{7EC94828-5141-4383-BB9C-89C6AE543237}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qico4.dll"/>
-    <ROW Component="qjpcodecs4.dll" ComponentId="{A607689B-97DD-4F1F-9655-7EEC2D934A75}" Directory_="codecs_DIR" Attributes="0" KeyPath="qjpcodecs4.dll"/>
-    <ROW Component="qjpeg4.dll" ComponentId="{58EB6546-1E7D-48E3-A407-08B945D68317}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qjpeg4.dll"/>
-    <ROW Component="qkrcodecs4.dll" ComponentId="{3D322ADA-9D38-4B5F-8335-44BDE935D5D7}" Directory_="codecs_DIR" Attributes="0" KeyPath="qkrcodecs4.dll"/>
-    <ROW Component="qmng4.dll" ComponentId="{11B243B6-A6E5-4282-A58B-5A4F5A2CB253}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qmng4.dll"/>
-    <ROW Component="qsvg4.dll" ComponentId="{D689DDEB-D4E9-4DE0-B32B-85FD25C40726}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qsvg4.dll"/>
-    <ROW Component="qsvgicon4.dll" ComponentId="{6EF94FDD-3E92-4886-925F-B264C962E7EF}" Directory_="iconengines_DIR" Attributes="0" KeyPath="qsvgicon4.dll"/>
-    <ROW Component="qtaccessiblewidgets4.dll" ComponentId="{0DB9EE4C-922F-42AC-80CC-4EA3CBBB1629}" Directory_="accessible_DIR" Attributes="0" KeyPath="qtaccessiblewidgets4.dll"/>
-    <ROW Component="qtiff4.dll" ComponentId="{660F482B-9508-4A26-BC1A-610E84829CA4}" Directory_="imageformats_DIR" Attributes="0" KeyPath="qtiff4.dll"/>
-    <ROW Component="qtwcodecs4.dll" ComponentId="{68610953-B652-4340-BBB9-B1EEB3A6AF7A}" Directory_="codecs_DIR" Attributes="0" KeyPath="qtwcodecs4.dll"/>
     <ROW Component="updater.exe" ComponentId="{CB63C33D-EB1B-420A-8BAA-CD380923F12B}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru.exe AIShRegAnswer python26.dll QtCore4.dll QtGui4.dll bz2.pyd qtaccessiblewidgets4.dll qcncodecs4.dll qjpcodecs4.dll qkrcodecs4.dll qtwcodecs4.dll qsvgicon4.dll qgif4.dll qico4.dll qjpeg4.dll qmng4.dll qsvg4.dll qtiff4.dll AI_ExePath CurrentVersion"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru.exe AIShRegAnswer AI_ExePath CurrentVersion"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="PyQt4.QtCore.pyd" Component_="bz2.pyd" FileName="PyQt4Q~1.pyd|PyQt4.QtCore.pyd" Attributes="0" SourcePath="dist\PyQt4.QtCore.pyd" SelfReg="false" Sequence="7"/>
-    <ROW File="PyQt4.QtGui.pyd" Component_="bz2.pyd" FileName="PyQt4Q~2.pyd|PyQt4.QtGui.pyd" Attributes="0" SourcePath="dist\PyQt4.QtGui.pyd" SelfReg="false" Sequence="8"/>
-    <ROW File="QtCore4.dll" Component_="QtCore4.dll" FileName="QtCore4.dll" Attributes="0" SourcePath="dist\QtCore4.dll" SelfReg="false" Sequence="4"/>
-    <ROW File="QtGui4.dll" Component_="QtGui4.dll" FileName="QtGui4.dll" Attributes="0" SourcePath="dist\QtGui4.dll" SelfReg="false" Sequence="5"/>
-    <ROW File="bz2.pyd" Component_="bz2.pyd" FileName="bz2.pyd" Attributes="0" SourcePath="dist\bz2.pyd" SelfReg="false" Sequence="6"/>
     <ROW File="dupeGuru.exe" Component_="dupeGuru.exe" FileName="dupeGuru.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="dist\dupeGuru.exe" SelfReg="false" Sequence="2"/>
-    <ROW File="dupeGuru.upx" Component_="bz2.pyd" FileName="dupeGuru.upx" Attributes="0" SourcePath="dist\dupeGuru.upx" SelfReg="false" Sequence="27"/>
-    <ROW File="hashlib.pyd" Component_="bz2.pyd" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\_hashlib.pyd" SelfReg="false" Sequence="24"/>
-    <ROW File="lxml.etree.pyd" Component_="bz2.pyd" FileName="lxmlet~1.pyd|lxml.etree.pyd" Attributes="0" SourcePath="dist\lxml.etree.pyd" SelfReg="false" Sequence="28"/>
-    <ROW File="python26.dll" Component_="python26.dll" FileName="python26.dll" Attributes="0" SourcePath="dist\python26.dll" SelfReg="false" Sequence="3"/>
-    <ROW File="qcncodecs4.dll" Component_="qcncodecs4.dll" FileName="qcncod~1.dll|qcncodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qcncodecs4.dll" SelfReg="false" Sequence="10"/>
-    <ROW File="qgif4.dll" Component_="qgif4.dll" FileName="qgif4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qgif4.dll" SelfReg="false" Sequence="15"/>
-    <ROW File="qico4.dll" Component_="qico4.dll" FileName="qico4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qico4.dll" SelfReg="false" Sequence="16"/>
-    <ROW File="qjpcodecs4.dll" Component_="qjpcodecs4.dll" FileName="qjpcod~1.dll|qjpcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qjpcodecs4.dll" SelfReg="false" Sequence="11"/>
-    <ROW File="qjpeg4.dll" Component_="qjpeg4.dll" FileName="qjpeg4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qjpeg4.dll" SelfReg="false" Sequence="17"/>
-    <ROW File="qkrcodecs4.dll" Component_="qkrcodecs4.dll" FileName="qkrcod~1.dll|qkrcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qkrcodecs4.dll" SelfReg="false" Sequence="12"/>
-    <ROW File="qmng4.dll" Component_="qmng4.dll" FileName="qmng4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qmng4.dll" SelfReg="false" Sequence="18"/>
-    <ROW File="qsvg4.dll" Component_="qsvg4.dll" FileName="qsvg4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qsvg4.dll" SelfReg="false" Sequence="19"/>
-    <ROW File="qsvgicon4.dll" Component_="qsvgicon4.dll" FileName="qsvgic~1.dll|qsvgicon4.dll" Attributes="0" SourcePath="dist\qt4_plugins\iconengines\qsvgicon4.dll" SelfReg="false" Sequence="14"/>
-    <ROW File="qtaccessiblewidgets4.dll" Component_="qtaccessiblewidgets4.dll" FileName="qtacce~2.dll|qtaccessiblewidgets4.dll" Attributes="0" SourcePath="dist\qt4_plugins\accessible\qtaccessiblewidgets4.dll" SelfReg="false" Sequence="9"/>
-    <ROW File="qtiff4.dll" Component_="qtiff4.dll" FileName="qtiff4.dll" Attributes="0" SourcePath="dist\qt4_plugins\imageformats\qtiff4.dll" SelfReg="false" Sequence="20"/>
-    <ROW File="qtwcodecs4.dll" Component_="qtwcodecs4.dll" FileName="qtwcod~1.dll|qtwcodecs4.dll" Attributes="0" SourcePath="dist\qt4_plugins\codecs\qtwcodecs4.dll" SelfReg="false" Sequence="13"/>
-    <ROW File="select.pyd" Component_="bz2.pyd" FileName="select.pyd" Attributes="0" SourcePath="dist\select.pyd" SelfReg="false" Sequence="21"/>
-    <ROW File="send2trash_win.pyd" Component_="bz2.pyd" FileName="_send2~1.pyd|_send2trash_win.pyd" Attributes="0" SourcePath="dist\_send2trash_win.pyd" SelfReg="false" Sequence="29"/>
-    <ROW File="sip.pyd" Component_="bz2.pyd" FileName="sip.pyd" Attributes="0" SourcePath="dist\sip.pyd" SelfReg="false" Sequence="22"/>
-    <ROW File="socket.pyd" Component_="bz2.pyd" FileName="_socket.pyd" Attributes="0" SourcePath="dist\_socket.pyd" SelfReg="false" Sequence="25"/>
-    <ROW File="ssl.pyd" Component_="bz2.pyd" FileName="_ssl.pyd" Attributes="0" SourcePath="dist\_ssl.pyd" SelfReg="false" Sequence="26"/>
-    <ROW File="unicodedata.pyd" Component_="bz2.pyd" FileName="unicod~1.pyd|unicodedata.pyd" Attributes="0" SourcePath="dist\unicodedata.pyd" SelfReg="false" Sequence="23"/>
-    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_HOME&gt;updater.exe" SelfReg="false" Sequence="1"/>
+    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" Sequence="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageName="install\dupeguru_win_[|ProductVersion]" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" CreateMd5="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\install" ExtUI="true" ExeName="dupeguru_win_[|ProductVersion]"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="install" PackageFileName="dupeguru_win_[|ProductVersion]" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" CreateMd5="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\install" ExtUI="true" ExeName="dupeguru_win_[|ProductVersion]"/>
     <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
+    <ROW DigitalCertificate="\\vmware-host\Shared Folders\Public\mac_app.pfx" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
@@ -148,6 +105,14 @@
     <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="3"/>
     <ROW Dialog_="ShortcutsDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
     <ROW Dialog_="ShortcutsDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="301"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="201"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
@@ -205,8 +170,8 @@
     <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
-    <ROW Condition="Version9X OR VersionNT64 OR (VersionNT &gt;= 500 )" Description="[ProductName] cannot be installed on systems earlier than [WindowsTypeNT]" DescriptionLocId="AI.LaunchCondition.NoSpecificNT" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsFamily9X]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="( Version9X OR VersionNT64 OR ( VersionNT AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &gt;= 1))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 1))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 2))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 3))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 4))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 5))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 6))) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNTDisplay]" DescriptionLocId="AI.LaunchCondition.NoSpecificNT" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
     <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
