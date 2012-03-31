@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		CE073F6309CAE1A3005C1D2F /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
-		CE148035151100EC00CD5DAD /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE148038151100FB00CD5DAD /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE14803A1511010500CD5DAD /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE14803C1511011000CD5DAD /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
 		CE18004D14BDD837001B6329 /* Python in Frameworks */ = {isa = PBXBuildFile; fileRef = CE18004C14BDD837001B6329 /* Python */; };
 		CE18004F14BDD854001B6329 /* Python in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE18004C14BDD837001B6329 /* Python */; };
 		CE18005114BDD87B001B6329 /* py in Resources */ = {isa = PBXBuildFile; fileRef = CE18005014BDD87B001B6329 /* py */; };
@@ -24,10 +20,6 @@
 		CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE27D3C312CCA43800859E67 /* HSAboutBox.m */; };
 		CE31819D13D85D9B00B6D649 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819913D85D9B00B6D649 /* about.xib */; };
 		CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819B13D85D9B00B6D649 /* ErrorReportWindow.xib */; };
-		CE3491E3151100A40030B64C /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE3491E6151100AD0030B64C /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE3491E9151100BB0030B64C /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
-		CE3491EA151100BB0030B64C /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81135612E5CE6D00A36C80 /* Preferences.xib */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
 		CE381C9C09914ADF003581CE /* ResultWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9A09914ADF003581CE /* ResultWindow.m */; };
 		CE3A3B4914BF19B8007898AB /* PyDetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3B4814BF19B8007898AB /* PyDetailsPanel.m */; };
@@ -690,14 +682,6 @@
 				CE18005114BDD87B001B6329 /* py in Resources */,
 				CEA450B814BDDFD7002DAAF2 /* dg_cocoa.py in Resources */,
 				CE412C111510ECCA00484122 /* IgnoreListDialog.xib in Resources */,
-				CE3491E3151100A40030B64C /* ResultWindow.xib in Resources */,
-				CE3491E6151100AD0030B64C /* ResultWindow.xib in Resources */,
-				CE3491E9151100BB0030B64C /* ResultWindow.xib in Resources */,
-				CE3491EA151100BB0030B64C /* Preferences.xib in Resources */,
-				CE148035151100EC00CD5DAD /* ResultWindow.xib in Resources */,
-				CE148038151100FB00CD5DAD /* ResultWindow.xib in Resources */,
-				CE14803A1511010500CD5DAD /* ResultWindow.xib in Resources */,
-				CE14803C1511011000CD5DAD /* ResultWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,6 +947,7 @@
 		C01FCF4C08A954540054247B /* release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
@@ -1001,6 +986,7 @@
 		CE85E850111AF63D00187B0D /* dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
