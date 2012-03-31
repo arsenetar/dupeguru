@@ -1,3 +1,14 @@
+=== 2.5.0 (2012-03-31)
+
+* Improved results window UI. [Windows, Linux]
+* Added a dialog to edit the Ignore List.
+* Added the ability to sort results by "marked" status.
+* Fixed "Open with default application". (#190)
+* Fixed a bug where there would be a false reporting of discarded matches. (#195)
+* Fixed various localization glitches.
+* Fixed hard crashes on crash reporting. (#196)
+* Fixed bug where the details panel would show up at inconvenient places in the screen. [Windows, Linux]
+
 === 2.4.1 (2012-01-23)
 
 * Fixed a crash on sorting by dimensions.
