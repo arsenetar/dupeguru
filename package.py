@@ -6,23 +6,38 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import sys
 import os
 import os.path as op
 import compileall
 import shutil
 import json
+from argparse import ArgumentParser
 
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
     build_debian_changelog, copy_qt_plugins, get_module_version)
 
-def package_cocoa(edition):
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('--sign', dest='sign_identity',
+        help="Sign app under specified identity before packaging (OS X only)")
+    args = parser.parse_args()
+    return args
+
+def package_cocoa(edition, sign_identity):
     app_path = {
         'se': 'cocoa/se/dupeGuru.app',
         'me': 'cocoa/me/dupeGuru ME.app',
         'pe': 'cocoa/pe/dupeGuru PE.app',
     }[edition]
+    # Rather than signing our app in XCode during the build phase, we sign it during the package
+    # phase because running the app before packaging can modify it and we want to be sure to have
+    # a valid signature.
+    if sign_identity:
+        sign_identity = "Developer ID Application: {}".format(sign_identity)
+        print_and_do('codesign --force --sign "{}" "{}"'.format(sign_identity, app_path))
+    else:
+        print("WARNING: packaging an unsigned application")
     build_dmg(app_path, '.')
 
 def package_windows(edition, dev):
@@ -107,13 +122,14 @@ def package_debian(edition):
     os.system("dpkg-buildpackage")
 
 def main():
+    args = parse_args()
     conf = json.load(open('conf.json'))
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
     print("Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if ui == 'cocoa':
-        package_cocoa(edition)
+        package_cocoa(edition, args.sign_identity)
     elif ui == 'qt':
         if ISWINDOWS:
             package_windows(edition, dev)
