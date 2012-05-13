@@ -39,7 +39,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setScanOptions
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [model setScanType:n2b([ud objectForKey:@"scanType"])];
+    [model setScanType:n2i([ud objectForKey:@"scanType"])];
     [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
     [model setWordWeighting:n2b([ud objectForKey:@"wordWeighting"])];
     [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
