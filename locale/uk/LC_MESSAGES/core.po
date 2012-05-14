@@ -4,54 +4,53 @@ msgstr ""
 "Project-Id-Version: Ukrainian\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Nickolas Pohilets <pohilets@gmail.com>\n"
 "Language-Team: YuriPetrashko <Petrashko@mail.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Basepath: /Users/user/repos/dupeguru/dupeguru\n"
 
 #: core/app.py:94
 msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr ""
-"зможете тільки для видалення, переміщення або копіювання 10 копій відразу"
+msgstr "може видаляти, переміщувати або копіювати лише 10 копій відразу"
 
 #: core/app.py:231
-msgid ""
-"You cannot delete, move or copy more than 10 duplicates at once in demo "
-"mode."
-msgstr ""
-"Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
-" в демонстраційному режимі."
+msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
+msgstr "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу в демонстраційному режимі."
 
 #: core/app.py:501
 msgid "Collecting files to scan"
-msgstr "Збір файлів для сканування"
+msgstr "Збір файлів для пошуку"
 
 #: core/app.py:512
 msgid "The selected directories contain no scannable file."
-msgstr "Вибраних директорій не містять сканованих файлів."
+msgstr "Обрані папки не містять файлів придатних для пошуку."
 
 #: core/app.py:551
 msgid "%s (%d discarded)"
-msgstr "%s (%d відкидаються)"
+msgstr "%s (%d відкинуто)"
 
-#: core/engine.py:178 core/engine.py:215
+#: core/engine.py:178
+#: core/engine.py:215
 msgid "0 matches found"
-msgstr "0 зіставлень знайдено"
+msgstr "0 результатів знайдено"
 
-#: core/engine.py:196 core/engine.py:223
+#: core/engine.py:196
+#: core/engine.py:223
 msgid "%d matches found"
-msgstr "%d  знайдено"
+msgstr "%d результатів знайдено"
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208
+#: core/scanner.py:80
 msgid "Read size of %d/%d files"
 msgstr "Прочитано розмір %d/%d файлів"
 
 #: core/engine.py:355
 msgid "Grouped %d/%d matches"
-msgstr "Угруповання %d/%d матчів"
+msgstr "Згруповано %d/%d результатів"
 
 #: core/prioritize.py:68
 msgid "None"
@@ -59,31 +58,35 @@ msgstr "Жоден"
 
 #: core/prioritize.py:94
 msgid "Ends with number"
-msgstr "Закінчується номер"
+msgstr "Закінчується номером"
 
 #: core/prioritize.py:96
 msgid "Doesn't end with number"
-msgstr "Не закінчується з номером"
+msgstr "Не закінчується номером"
 
 #: core/prioritize.py:117
+#, fuzzy
 msgid "Highest"
 msgstr "Найвищий"
 
 #: core/prioritize.py:117
+#, fuzzy
 msgid "Lowest"
-msgstr "Найнижча"
+msgstr "Найнижчий"
 
 #: core/prioritize.py:144
+#, fuzzy
 msgid "Newest"
-msgstr "Новітній"
+msgstr "Найновіший"
 
 #: core/prioritize.py:144
+#, fuzzy
 msgid "Oldest"
-msgstr "Найстарші"
+msgstr "Найстарший"
 
 #: core/results.py:113
 msgid "%d / %d (%s / %s) duplicates marked."
-msgstr "%d / %d (%s / %s) дублікати позначені."
+msgstr "%d / %d (%s / %s) дублікатів позначено."
 
 #: core/results.py:120
 msgid " filter: %s"
@@ -91,106 +94,98 @@ msgstr "фільтр: %s"
 
 #: core/scanner.py:100
 msgid "Read metadata of %d/%d files"
-msgstr "Прочитано метаданих %d/%d файли"
+msgstr "Прочитано метаданих з %d/%d файлів"
 
 #: core/scanner.py:131
 msgid "Removing false matches"
-msgstr "Видалення помилкових матчів"
+msgstr "Видалення помилкових результатів"
 
 #: core/scanner.py:149
 msgid "Processed %d/%d matches against the ignore list"
-msgstr "Опрацьовано %d/%d  матчів проти ігнор-лист"
+msgstr "Порівняно %d/%d результатів з чорним списком"
 
 #: core/scanner.py:171
 msgid "Doing group prioritization"
-msgstr "Роблячи групи пріоритетів"
+msgstr "Виконується пріорітизація груп"
 
 #: core_pe/matchblock.py:60
 msgid "Analyzed %d/%d pictures"
-msgstr "Аналізується %d/%d  фотографії"
+msgstr "Проаналізовано %d/%d фотографій"
 
 #: core_pe/matchblock.py:144
 msgid "Performed %d/%d chunk matches"
-msgstr "Виконує %d/%d  матчів шматок"
+msgstr "Виконано %d/%d порівнянь шматків"
 
 #: core_pe/matchblock.py:149
 msgid "Preparing for matching"
-msgstr "Підготовка для порівняння"
+msgstr "Підготовка до порівняння"
 
 #: core_pe/matchblock.py:184
 msgid "Verified %d/%d matches"
-msgstr "Перевірені %d/%d матчів"
+msgstr "Перевірено %d/%d результатів"
 
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
-msgstr "Прочитано EXIF %d/%d фотографії"
+msgstr "Прочитано EXIF з %d/%d фотографій"
 
 #: core/app.py:36
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "Немає позначених дублікатів - нічого робити."
 
 #: core/app.py:37
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "Немає обраних дублікатів - нічого робити."
 
 #: core/app.py:189
 msgid "No duplicates found."
-msgstr "Ні дублікати знайдені."
+msgstr "Не знайдено жодного дублікату."
 
 #: core/app.py:202
 msgid "All marked files were copied sucessfully."
-msgstr "Всі вибрані файли були скопійовані успішно."
+msgstr "Усі позначені файли були скопійовані успішно."
 
 #: core/app.py:203
 msgid "All marked files were moved sucessfully."
-msgstr "Всі вибрані файли були переміщені успішно."
+msgstr "Усі позначені файли були переміщені успішно."
 
 #: core/app.py:204
 msgid "All marked files were sucessfully sent to Trash."
-msgstr "Всі вибрані файли були успішно відправлені в корзину."
+msgstr "Усі позначені файли були успішно відправлені до кошика."
 
 #: core/app.py:252
-msgid ""
-"All selected %d matches are going to be ignored in all subsequent scans. "
-"Continue?"
-msgstr ""
-"Всі вибрані %d матчів будуть ігноруватися у всіх наступних перевірок. "
-"Продовжити?"
+msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
+msgstr "Усі обрані %d результатів будуть ігноруватися під час усіх наступних пошуків. Продовжити?"
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Ви дійсно хочете видалити всі елементи %d з чорного списку?"
+msgstr "Ви дійсно хочете видалити всі %d елементів з чорного списку?"
 
 #: core/app.py:367
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"У вас немає користувальницької команди створили. Встановіть його в ваші "
-"уподобання."
+msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:454 core/app.py:465
+#: core/app.py:454
+#: core/app.py:465
 msgid "You are about to remove %d files from results. Continue?"
-msgstr "Ви збираєтеся видалити файли %d результату пошуку. Продовжити?"
+msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
 #: core/app.py:312
 msgid "copy"
-msgstr "копія"
+msgstr "копіювання"
 
 #: core/app.py:312
 msgid "move"
-msgstr "переміщати"
+msgstr "переміщення"
 
 #: core/app.py:313
 msgid "Select a directory to {} marked files to"
-msgstr "Виберіть каталог на {} відмічені файли"
+msgstr "Оберіть цільову папку для {} позначених файлів"
 
 #: core/app.py:327
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
-msgstr ""
-"Ви збираєтеся відправити %d файли до кошика (і жорстку них пізніше). "
-"Продовжити?"
+msgid "You are about to send %d files to Trash (and hardlink them afterwards). Continue?"
+msgstr "Ви збираєтеся відправити %d файлів до кошика (та потім створити жорсткі посилання замість них). Продовжити?"
 
 #: core/app.py:329
 msgid "You are about to send %d files to Trash. Continue?"
-msgstr "Ви збираєтеся відправити %d файли в корзину. Продовжити?"
+msgstr "Ви збираєтеся відправити %d файлів до кошику. Продовжити?"
+
