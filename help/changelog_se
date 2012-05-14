@@ -1,3 +1,8 @@
+=== 3.4.1 (2012-04-14)
+
+* Fixed the "Folders" scan type. [Mac]
+* Nothing changed under Linux and Windows other than the version.
+
 === 3.4.0 (2012-03-29)
 
 * Improved results window UI. [Windows, Linux]
