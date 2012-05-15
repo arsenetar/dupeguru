@@ -1,3 +1,8 @@
+=== 6.3.1 (2012-04-15)
+
+* Fixed crash on iTunes library parsing. [Mac]
+* Fixed localization issues. [Windows, Linux]
+
 === 6.3.0 (2012-03-27)
 
 * Improved iTunes support. [Mac]
