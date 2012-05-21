@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Ukrainian\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Nickolas Pohilets <pohilets@gmail.com>\n"
 "Language-Team: Yuri  Petrashko <Petrashko@mail.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,7 +12,8 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 
-#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/ignore_list_table.py:18
+#: core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Шлях до файлу"
@@ -21,35 +22,44 @@ msgstr "Шлях до файлу"
 msgid "Error Message"
 msgstr "Повідомлення про помилку"
 
-#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
+#: core/prioritize.py:63
+#: core_me/result_table.py:24
+#: core_pe/result_table.py:21
 #: core_se/result_table.py:21
 msgid "Kind"
-msgstr "Вид"
+msgstr "Тип"
 
-#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
+#: core/prioritize.py:72
+#: core_me/result_table.py:19
+#: core_pe/result_table.py:19
 #: core_se/result_table.py:19
 msgid "Folder"
 msgstr "Папка"
 
-#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
+#: core/prioritize.py:88
+#: core_me/result_table.py:18
+#: core_pe/result_table.py:18
 #: core_se/result_table.py:18
 msgid "Filename"
-msgstr "Файл"
+msgstr "Ім’я файлу"
 
 #: core/prioritize.py:132
 msgid "Size"
 msgstr "Розмір"
 
-#: core/prioritize.py:138 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core/prioritize.py:138
+#: core_me/result_table.py:25
+#: core_pe/result_table.py:23
+#: core_se/result_table.py:22
 msgid "Modification"
-msgstr "Модифікація"
+msgstr "Дата модифікації"
 
 #: core_me/prioritize.py:16
 msgid "Duration"
 msgstr "Тривалість"
 
-#: core_me/prioritize.py:22 core_me/result_table.py:22
+#: core_me/prioritize.py:22
+#: core_me/result_table.py:22
 msgid "Bitrate"
 msgstr "Якість звуку"
 
@@ -75,7 +85,7 @@ msgstr "Назва"
 
 #: core_me/result_table.py:27
 msgid "Artist"
-msgstr "Назва художник"
+msgstr "Виконавець"
 
 #: core_me/result_table.py:28
 msgid "Album"
@@ -97,24 +107,30 @@ msgstr "Номер доріжки"
 msgid "Comment"
 msgstr "Коментар"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33
+#: core_pe/result_table.py:24
 #: core_se/result_table.py:23
 msgid "Match %"
-msgstr "Збігатися %"
+msgstr "Збіг (%)"
 
-#: core_me/result_table.py:34 core_se/result_table.py:24
+#: core_me/result_table.py:34
+#: core_se/result_table.py:24
 msgid "Words Used"
-msgstr "Сслів, що використовуються"
+msgstr "Використані слова"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35
+#: core_pe/result_table.py:25
 #: core_se/result_table.py:25
 msgid "Dupe Count"
-msgstr "Dupe графа"
+msgstr "Кількість дублікатів"
 
-#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+#: core_pe/prioritize.py:16
+#: core_pe/result_table.py:22
 msgid "Dimensions"
-msgstr "Розміри"
+msgstr "Виміри"
 
-#: core_pe/result_table.py:20 core_se/result_table.py:20
+#: core_pe/result_table.py:20
+#: core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Розмір (KB)"
+
