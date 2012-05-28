@@ -22,6 +22,8 @@
 
 | **Yuri Petrashko, Ukrainian localization**
 
+| **Nickolas Pohilets, Ukrainian localization**
+
 | **Python, Мова програмування** (`Веб-сайт <http://www.python.org>`__)
 | Кращі рекорди
 

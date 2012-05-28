@@ -21,6 +21,8 @@ Voici la liste des contributeurs de dupeGuru. Merci!
 
 | **Yuri Petrashko, localisation ukrainienne**
 
+| **Nickolas Pohilets, localisation ukrainienne**
+
 | **Python, Langage de programmation** (`Website <http://www.python.org>`__)
 | Le meilleur des meilleurs
 
