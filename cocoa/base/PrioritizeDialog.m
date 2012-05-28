@@ -7,7 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "PrioritizeDialog.h"
-#import "Utils.h"
+#import "HSPyUtil.h"
 
 @implementation PrioritizeDialog
 - (id)initWithApp:(PyDupeGuru *)aApp

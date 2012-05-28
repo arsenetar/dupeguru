@@ -7,7 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "IgnoreListDialog.h"
-#import "Utils.h"
+#import "HSPyUtil.h"
 
 @implementation IgnoreListDialog
 - (id)initWithPyRef:(PyObject *)aPyRef

@@ -63,6 +63,7 @@
 		CEA175CA1461E8E600776591 /* locale in Resources */ = {isa = PBXBuildFile; fileRef = CEA175C91461E8E600776591 /* locale */; };
 		CEA450B814BDDFD7002DAAF2 /* dg_cocoa.py in Resources */ = {isa = PBXBuildFile; fileRef = CEA450B714BDDFD7002DAAF2 /* dg_cocoa.py */; };
 		CEB2AF5614C49AC800F907A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2AF5514C49AC800F907A9 /* main.m */; };
+		CEBCE2D81573FE49000402E1 /* HSPyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE2D71573FE49000402E1 /* HSPyUtil.m */; };
 		CEE7EA130FE675C80004E467 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7EA120FE675C80004E467 /* DetailsPanel.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEEF2A1814C0A5A60082545A /* PyDupeGuru.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF2A1714C0A5A60082545A /* PyDupeGuru.m */; };
@@ -247,6 +248,9 @@
 		CEA450B714BDDFD7002DAAF2 /* dg_cocoa.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = dg_cocoa.py; path = ../../build/dg_cocoa.py; sourceTree = "<group>"; };
 		CEB2AF5514C49AC800F907A9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../base/main.m; sourceTree = "<group>"; };
 		CEB57990146ADC5100EDF7D7 /* HSConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSConsts.h; path = ../../cocoalib/HSConsts.h; sourceTree = "<group>"; };
+		CEBCE2D61573FE49000402E1 /* HSPyUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSPyUtil.h; path = ../../cocoalib/HSPyUtil.h; sourceTree = "<group>"; };
+		CEBCE2D71573FE49000402E1 /* HSPyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSPyUtil.m; path = ../../cocoalib/HSPyUtil.m; sourceTree = "<group>"; };
+		CEBCE2DA1573FEBF000402E1 /* HSFairwareProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSFairwareProtocol.h; path = ../../cocoalib/HSFairwareProtocol.h; sourceTree = "<group>"; };
 		CECFFF1C13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DetailsPanel.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF1D13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF1F13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
@@ -548,6 +552,7 @@
 				CEB57990146ADC5100EDF7D7 /* HSConsts.h */,
 				CEFC7F8A0FC9517500CD5728 /* Dialogs.h */,
 				CEFC7F8B0FC9517500CD5728 /* Dialogs.m */,
+				CEBCE2DA1573FEBF000402E1 /* HSFairwareProtocol.h */,
 				CE79638A12536F4E008D405B /* HSFairwareReminder.h */,
 				CE79638B12536F4E008D405B /* HSFairwareReminder.m */,
 				CE27D3C212CCA43800859E67 /* HSAboutBox.h */,
@@ -561,6 +566,8 @@
 				CEFC7F910FC9517500CD5728 /* ProgressController.m */,
 				CEFC7F9A0FC9517500CD5728 /* Utils.h */,
 				CEFC7F9B0FC9517500CD5728 /* Utils.m */,
+				CEBCE2D61573FE49000402E1 /* HSPyUtil.h */,
+				CEBCE2D71573FE49000402E1 /* HSPyUtil.m */,
 				CEFC7F9C0FC9517500CD5728 /* ValueTransformers.h */,
 				CEFC7F9D0FC9517500CD5728 /* ValueTransformers.m */,
 			);
@@ -742,6 +749,7 @@
 				CEB2AF5614C49AC800F907A9 /* main.m in Sources */,
 				CE412C0D1510ECAA00484122 /* PyIgnoreListDialog.m in Sources */,
 				CE412C141510ED2E00484122 /* IgnoreListDialog.m in Sources */,
+				CEBCE2D81573FE49000402E1 /* HSPyUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

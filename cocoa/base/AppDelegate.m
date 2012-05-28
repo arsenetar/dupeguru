@@ -9,7 +9,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "AppDelegate.h"
 #import "ProgressController.h"
 #import "HSFairwareReminder.h"
-#import "Utils.h"
+#import "HSPyUtil.h"
 #import "Consts.h"
 #import "Dialogs.h"
 #import "ValueTransformers.h"

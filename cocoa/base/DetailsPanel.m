@@ -7,7 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DetailsPanel.h"
-#import "Utils.h"
+#import "HSPyUtil.h"
 
 @implementation DetailsPanel
 - (id)initWithPyRef:(PyObject *)aPyRef
