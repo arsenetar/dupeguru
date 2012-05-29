@@ -16,6 +16,8 @@ class Photo(fs.File):
     INITIAL_INFO.update({
         'dimensions': (0,0),
     })
+    __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
+    
     # These extensions are supported on all platforms
     HANDLED_EXTS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'}
     

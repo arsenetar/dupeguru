@@ -15,7 +15,9 @@ import hashlib
 import logging
 
 from hscommon import io
-from hscommon.util import nonone, flatten, get_file_ext
+from hscommon.util import nonone, get_file_ext
+
+NOT_SET = object()
 
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
@@ -55,29 +57,35 @@ class File:
         'md5': '',
         'md5partial': '',
     }
+    # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
+    # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
+    # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
+    __slots__ = ('path', 'is_ref', 'words') + tuple(INITIAL_INFO.keys())
     
     def __init__(self, path):
         self.path = path
-        #This offset is where we should start reading the file to get a partial md5
-        #For audio file, it should be where audio data starts
-        self._md5partial_offset = 0x4000 #16Kb
-        self._md5partial_size   = 0x4000 #16Kb
+        for attrname in self.INITIAL_INFO:
+            setattr(self, attrname, NOT_SET)
     
     def __repr__(self):
         return "<{} {}>".format(self.__class__.__name__, str(self.path))
     
-    def __getattr__(self, attrname):
-        # Only called when attr is not there
-        if attrname in self.INITIAL_INFO:
+    def __getattribute__(self, attrname):
+        result = object.__getattribute__(self, attrname)
+        if result is NOT_SET:
             try:
                 self._read_info(attrname)
             except Exception as e:
                 logging.warning("An error '%s' was raised while decoding '%s'", e, repr(self.path))
-            try:
-                return self.__dict__[attrname]
-            except KeyError:
-                return self.INITIAL_INFO[attrname]
-        raise AttributeError()
+            result = object.__getattribute__(self, attrname)
+            if result is NOT_SET:
+                result = self.INITIAL_INFO[attrname]
+        return result
+    
+    #This offset is where we should start reading the file to get a partial md5
+    #For audio file, it should be where audio data starts
+    def _get_md5partial_offset_and_size(self):
+        return (0x4000, 0x4000) #16Kb
     
     def _read_info(self, field):
         if field in ('size', 'mtime'):
@@ -87,8 +95,7 @@ class File:
         elif field == 'md5partial':
             try:
                 fp = io.open(self.path, 'rb')
-                offset = self._md5partial_offset
-                size = self._md5partial_size
+                offset, size = self._get_md5partial_offset_and_size()
                 fp.seek(offset)
                 partialdata = fp.read(size)
                 md5 = hashlib.md5(partialdata)
@@ -116,10 +123,9 @@ class File:
         If `attrnames` is not None, caches only attrnames.
         """
         if attrnames is None:
-            attrnames = list(self.INITIAL_INFO.keys())
+            attrnames = self.INITIAL_INFO.keys()
         for attrname in attrnames:
-            if attrname not in self.__dict__:
-                self._read_info(attrname)
+            getattr(self, attrname)
     
     #--- Public
     @classmethod
@@ -159,6 +165,8 @@ class Folder(File):
     
     It has the size/md5 info of a File, but it's value are the sum of its subitems.
     """
+    __slots__ = File.__slots__ + ('_subfolders', )
+    
     def __init__(self, path):
         File.__init__(self, path)
         self._subfolders = None

@@ -28,6 +28,7 @@ class MusicFile(fs.File):
         'year'    : '',
         'track'   : 0,
     })
+    __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
     
     @classmethod
     def can_handle(cls, path):
@@ -35,11 +36,11 @@ class MusicFile(fs.File):
             return False
         return get_file_ext(path[-1]) in auto.EXT2CLASS
     
+    def _get_md5partial_offset_and_size(self):
+        f = auto.File(str(self.path))
+        return (f.audio_offset, f.audio_size)
+    
     def _read_info(self, field):
-        if field == 'md5partial':
-            f = auto.File(str(self.path))
-            self._md5partial_offset = f.audio_offset
-            self._md5partial_size = f.audio_size
         fs.File._read_info(self, field)
         if field in TAG_FIELDS:
             f = auto.File(str(self.path))
