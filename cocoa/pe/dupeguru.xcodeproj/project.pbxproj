@@ -83,6 +83,7 @@
 		CECB2AC513D867AD0081E295 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECB2AC113D867AD0081E295 /* about.xib */; };
 		CECB2AC613D867AD0081E295 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECB2AC313D867AD0081E295 /* ErrorReportWindow.xib */; };
 		CEE6D562149113570087CDFC /* HSColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE6D561149113570087CDFC /* HSColumns.m */; };
+		CEE8D3E2157576FD00E1A1B8 /* HSPyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8D3E1157576FD00E1A1B8 /* HSPyUtil.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
 		CEF12A7E124DFD400087B51D /* HSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A7D124DFD400087B51D /* HSTableView.m */; };
 		CEF12A84124DFD620087B51D /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF12A83124DFD620087B51D /* ResultTable.m */; };
@@ -321,6 +322,9 @@
 		CEE6D55B149113320087CDFC /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../hy.lproj/FairwareReminder.xib; sourceTree = "<group>"; };
 		CEE6D560149113570087CDFC /* HSColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSColumns.h; sourceTree = "<group>"; };
 		CEE6D561149113570087CDFC /* HSColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColumns.m; sourceTree = "<group>"; };
+		CEE8D3DF157576FD00E1A1B8 /* HSFairwareProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSFairwareProtocol.h; path = ../../cocoalib/HSFairwareProtocol.h; sourceTree = "<group>"; };
+		CEE8D3E0157576FD00E1A1B8 /* HSPyUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSPyUtil.h; path = ../../cocoalib/HSPyUtil.h; sourceTree = "<group>"; };
+		CEE8D3E1157576FD00E1A1B8 /* HSPyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSPyUtil.m; path = ../../cocoalib/HSPyUtil.m; sourceTree = "<group>"; };
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEEE156E1460325B00783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/about.xib; sourceTree = "<group>"; };
 		CEEE156F1460325B00783E91 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 				CE9EA74A1122C96C008CD2BC /* NSEventAdditions.m */,
 				CE80DB1B0FC192D60086DCA6 /* Dialogs.h */,
 				CE80DB1C0FC192D60086DCA6 /* Dialogs.m */,
+				CEE8D3DF157576FD00E1A1B8 /* HSFairwareProtocol.h */,
 				CE1EB5FB12537F9D0034AABB /* HSFairwareReminder.h */,
 				CE1EB5FC12537F9D0034AABB /* HSFairwareReminder.m */,
 				CEC9DB4A12CCAA7D003102F0 /* HSAboutBox.h */,
@@ -535,6 +540,8 @@
 				CE80DB220FC192D60086DCA6 /* ProgressController.m */,
 				CE80DB2A0FC192D60086DCA6 /* Utils.h */,
 				CE80DB2B0FC192D60086DCA6 /* Utils.m */,
+				CEE8D3E0157576FD00E1A1B8 /* HSPyUtil.h */,
+				CEE8D3E1157576FD00E1A1B8 /* HSPyUtil.m */,
 				CE80DB2C0FC192D60086DCA6 /* ValueTransformers.h */,
 				CE80DB2D0FC192D60086DCA6 /* ValueTransformers.m */,
 			);
@@ -763,6 +770,7 @@
 				CE7501AE14C477B100E2A349 /* PyTable.m in Sources */,
 				CE7857AA1511021200174D51 /* PyIgnoreListDialog.m in Sources */,
 				CE7857AD1511022A00174D51 /* IgnoreListDialog.m in Sources */,
+				CEE8D3E2157576FD00E1A1B8 /* HSPyUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
