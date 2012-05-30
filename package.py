@@ -99,15 +99,6 @@ def package_debian(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
-    import sip, PyQt4
-    shutil.copy(sip.__file__, srcpath)
-    qtsrcpath = op.dirname(PyQt4.__file__)
-    qtdestpath = op.join(srcpath, 'PyQt4')
-    os.makedirs(qtdestpath)
-    shutil.copy(op.join(qtsrcpath, '__init__.py'), qtdestpath)
-    shutil.copy(op.join(qtsrcpath, 'Qt.so'), qtdestpath)
-    shutil.copy(op.join(qtsrcpath, 'QtCore.so'), qtdestpath)
-    shutil.copy(op.join(qtsrcpath, 'QtGui.so'), qtdestpath)
     shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
     changelogpath = op.join('help', ed('changelog_{}'))
     changelog_dest = op.join(destpath, 'debian', 'changelog')
