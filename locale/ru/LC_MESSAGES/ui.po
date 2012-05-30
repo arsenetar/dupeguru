@@ -12,19 +12,19 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:39
+#: cocoa/inter/app.py:15 qt/base/app.py:40
 msgid "Scanning for duplicates"
 msgstr "Проверка на наличие дубликатов"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:40
+#: cocoa/inter/app.py:16 qt/base/app.py:41
 msgid "Loading"
 msgstr "Загрузка"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:41
+#: cocoa/inter/app.py:17 qt/base/app.py:42
 msgid "Moving"
 msgstr "Перемещение"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:42
+#: cocoa/inter/app.py:18 qt/base/app.py:43
 msgid "Copying"
 msgstr "Копирование"
 
@@ -40,7 +40,7 @@ msgstr "Удаление мертвых треков из вашей библи�
 msgid "Scanning the iTunes Library"
 msgstr "Сканирование ITunes библиотеки"
 
-#: cocoa/inter/app_me.py:154 cocoa/inter/app_pe.py:144
+#: cocoa/inter/app_me.py:157 cocoa/inter/app_pe.py:144
 msgid "Sending dupes to the Trash"
 msgstr "Отправка обманов в корзину"
 
@@ -52,39 +52,39 @@ msgstr "В контакте с iPhoto. Не трогайте!"
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto приложение не может быть найдено."
 
-#: qt/base/app.py:43
+#: qt/base/app.py:44
 msgid "Sending files to the recycle bin"
 msgstr "Отправка файлов в корзину"
 
-#: qt/base/app.py:110
+#: qt/base/app.py:112
 msgid "Quit"
 msgstr "Выход"
 
-#: qt/base/app.py:111 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Предпочтения"
 
-#: qt/base/app.py:113 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:115 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "Справка dupeGuru"
 
-#: qt/base/app.py:114 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:116 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "О dupeGuru"
 
-#: qt/base/app.py:115
+#: qt/base/app.py:117
 msgid "Register dupeGuru"
 msgstr "Регистрация dupeGuru"
 
-#: qt/base/app.py:116
+#: qt/base/app.py:118
 msgid "Check for Update"
 msgstr "Проверить обновления"
 
-#: qt/base/app.py:117
+#: qt/base/app.py:119
 msgid "Open Debug Log"
 msgstr "Открыть журнал Debug"
 
-#: qt/base/app.py:232 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -121,16 +121,16 @@ msgstr "Окно результатов"
 msgid "Add Folder..."
 msgstr "Добавить папку ..."
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:82
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:78
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "Файл"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:90
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:86
 msgid "View"
 msgstr "Вид"
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:92
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:88
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Помощь"
@@ -174,7 +174,7 @@ msgstr "Выберите файл результатов для загрузки
 msgid "All Files (*.*)"
 msgstr "Все файлы (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:301
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:296
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "dupeGuru результаты (*. dupeguru)"
 
@@ -302,19 +302,20 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Показать выбранное"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/IgnoreListDialog.strings:0
+#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
+#: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 #: cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Закрывать"
 
-#: qt/base/result_window.py:47 qt/base/result_window.py:177
+#: qt/base/result_window.py:47 qt/base/result_window.py:171
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Детали"
 
-#: qt/base/result_window.py:48 qt/base/result_window.py:86
-#: qt/base/result_window.py:151 qt/base/result_window.py:176
+#: qt/base/result_window.py:48 qt/base/result_window.py:82
+#: qt/base/result_window.py:146 qt/base/result_window.py:170
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Действия"
@@ -333,104 +334,99 @@ msgstr "Отправить Помечено в Корзину"
 
 #: qt/base/result_window.py:52 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
-msgid "Delete Marked and Replace with Hardlinks"
-msgstr "Удалить Помеченные и заменить с Жестким"
-
-#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
-#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Move Marked to..."
 msgstr "Перемещение Помечено в ..."
 
-#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Copy Marked to..."
 msgstr "Скопировть Помечено в ..."
 
-#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Marked from Results"
 msgstr "Удалить Помеченные от результатов"
 
-#: qt/base/result_window.py:56
+#: qt/base/result_window.py:55
 msgid "Re-Prioritize Results..."
 msgstr "Изменить приоритеты Результатов ..."
 
-#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Selected from Results"
 msgstr "Удалить выбранные из результатов"
 
-#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Добавить выбранные в черный список"
 
-#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
 msgstr "Сделать выбранной ссылки"
 
-#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Открыть выбранный с приложений по умолчанию"
 
-#: qt/base/result_window.py:61
+#: qt/base/result_window.py:60
 msgid "Open Containing Folder of Selected"
 msgstr "Открыть содержащую папку выборных "
 
-#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Rename Selected"
 msgstr "Переименовать выбранное"
 
-#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark All"
 msgstr "Отметить все"
 
-#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark None"
 msgstr "Не отметить"
 
-#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invert Marking"
 msgstr "Обратить Маркировку"
 
-#: qt/base/result_window.py:66 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark Selected"
 msgstr "Отметить Выбранные"
 
-#: qt/base/result_window.py:67
+#: qt/base/result_window.py:66
 msgid "Export To HTML"
 msgstr "Экспорт в HTML"
 
-#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Сохранить результаты ..."
 
-#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Вызвать специальную команду"
 
-#: qt/base/result_window.py:84
+#: qt/base/result_window.py:80
 msgid "Mark"
 msgstr "Отметить"
 
-#: qt/base/result_window.py:88 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:84 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Колонны"
 
-#: qt/base/result_window.py:147 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/result_window.py:142 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
 msgstr "Восстановить значения по умолчанию"
 
-#: qt/base/result_window.py:170
+#: qt/base/result_window.py:164
 msgid "{} Results"
 msgstr "{} Результаты"
 
-#: qt/base/result_window.py:300 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:295 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Выберите файл, чтобы сохранить ваши результаты"
 
@@ -543,16 +539,16 @@ msgstr "EXIF Timestamp"
 msgid "Match pictures of different dimensions"
 msgstr "Совпадения рисунков разных размеров"
 
-#: qt/pe/result_window.py:20 qt/pe/result_window.py:25
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Очистить кэш фото"
 
-#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Вы действительно хотите удалить все кэшированные анализ картины?"
 
-#: qt/pe/result_window.py:29
+#: qt/pe/result_window.py:28
 msgid "Picture cache cleared."
 msgstr "Кэш-память изображений очищается."
 
@@ -597,14 +593,14 @@ msgstr "'%@' не существует."
 msgid "The name '%@' already exists."
 msgstr " Имя '%@' уже существует."
 
-#: cocoa/inter/app_me.py:182 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:191 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Ваш ITunes библиотека содержит %d мертвых треков готовы быть удалены. "
 "Продолжить?"
 
-#: cocoa/inter/app_me.py:186 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:195 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "У вас нет мертвых треков в вашей библиотеке ITunes"
 
@@ -734,6 +730,8 @@ msgstr "Изменить приоритеты Результатов"
 msgid "Ok"
 msgstr "ОК"
 
+#: qt/base/deletion_options.py:50
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Cancel"
 msgstr "Отменить"
@@ -762,7 +760,7 @@ msgstr "Действие"
 msgid "Directories"
 msgstr "Каталоги"
 
-#: qt/base/result_window.py:178 cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:172 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
 msgstr "Только обманки"
 
@@ -849,36 +847,70 @@ msgstr "Удалить пустые папки после удаления и п
 msgid "dupeGuru PE Preferences"
 msgstr "dupeGuru PE предпочтения"
 
-#: cocoa/inter/app_me.py:156
+#: cocoa/inter/app_me.py:159
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:213
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
-#: qt/base/result_window.py:179
+#: qt/base/result_window.py:173
 msgid "Delta Values"
 msgstr ""
 
-#: cocoa/inter/app_me.py:176
+#: cocoa/inter/app_me.py:185
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr ""
 
-#: qt/base/app.py:112 qt/base/ignore_list_dialog.py:31
+#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Ignore List"
 msgstr ""
 
-#: qt/base/ignore_list_dialog.py:44
+#: qt/base/ignore_list_dialog.py:45
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 msgid "Remove Selected"
 msgstr ""
 
-#: qt/base/ignore_list_dialog.py:45
+#: qt/base/ignore_list_dialog.py:46
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 msgid "Clear"
+msgstr ""
+
+#: qt/base/deletion_options.py:29
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Deletion Options"
+msgstr ""
+
+#: qt/base/deletion_options.py:34
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Hardlink deleted files"
+msgstr ""
+
+#: qt/base/deletion_options.py:36
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid ""
+"After having deleted a duplicate, place a hardlink targeting the reference "
+"file to replace the deleted file."
+msgstr ""
+
+#: qt/base/deletion_options.py:41
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Directly delete files"
+msgstr ""
+
+#: qt/base/deletion_options.py:43
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr ""
+
+#: qt/base/deletion_options.py:49
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Proceed"
 msgstr ""

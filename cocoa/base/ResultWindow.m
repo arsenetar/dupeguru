@@ -27,6 +27,7 @@ http://www.hardcoded.net/licenses/bsd_license
     table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyRef:[model statsLabel] view:stats];
     problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
+    deletionOptions = [[DeletionOptions alloc] initWithPyRef:[model deletionOptions]];
     [self initResultColumns];
     [self fillColumnsMenu];
     [matches setTarget:self];
@@ -72,18 +73,6 @@ http://www.hardcoded.net/licenses/bsd_license
     NSMenuItem *mi = [columnsMenu addItemWithTitle:TR(@"Reset to Default")
         action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
     [mi setTarget:self];
-}
-
-- (void)sendMarkedToTrash:(BOOL)hardlinkDeleted
-{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
-    if (hardlinkDeleted) {
-        [model hardlinkMarked];
-    }
-    else {
-        [model deleteMarked];
-    }
 }
 
 - (void)updateOptionSegments
@@ -145,14 +134,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [model copyMarked];
 }
 
-- (IBAction)deleteMarked:(id)sender
+- (IBAction)trashMarked:(id)sender
 {
-    [self sendMarkedToTrash:NO];
-}
-
-- (IBAction)hardlinkMarked:(id)sender
-{
-    [self sendMarkedToTrash:YES];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
+    [model deleteMarked];
 }
 
 - (IBAction)exportToXHTML:(id)sender

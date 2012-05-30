@@ -49,7 +49,6 @@ class ResultWindow(QMainWindow):
             ('actionPowerMarker', 'Ctrl+1', '', tr("Show Dupes Only"), self.powerMarkerTriggered),
             ('actionDelta', 'Ctrl+2', '', tr("Show Delta Values"), self.deltaTriggered),
             ('actionDeleteMarked', 'Ctrl+D', '', tr("Send Marked to Recycle Bin"), self.deleteTriggered),
-            ('actionHardlinkMarked', 'Ctrl+Shift+D', '', tr("Delete Marked and Replace with Hardlinks"), self.hardlinkTriggered),
             ('actionMoveMarked', 'Ctrl+M', '', tr("Move Marked to..."), self.moveTriggered),
             ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
             ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
@@ -72,9 +71,6 @@ class ResultWindow(QMainWindow):
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
         
-        if (not ISOSX) and (not ISLINUX):
-            self.actionHardlinkMarked.setVisible(False)
-    
     def _setupMenu(self):
         self.menubar = QMenuBar(self)
         self.menubar.setGeometry(QRect(0, 0, 630, 22))
@@ -93,7 +89,6 @@ class ResultWindow(QMainWindow):
         self.setMenuBar(self.menubar)
         
         self.menuActions.addAction(self.actionDeleteMarked)
-        self.menuActions.addAction(self.actionHardlinkMarked)
         self.menuActions.addAction(self.actionMoveMarked)
         self.menuActions.addAction(self.actionCopyMarked)
         self.menuActions.addAction(self.actionRemoveMarked)
@@ -150,7 +145,6 @@ class ResultWindow(QMainWindow):
         # Action menu
         actionMenu = QMenu(tr("Actions"), self.menubar)
         actionMenu.addAction(self.actionDeleteMarked)
-        actionMenu.addAction(self.actionHardlinkMarked)
         actionMenu.addAction(self.actionMoveMarked)
         actionMenu.addAction(self.actionCopyMarked)
         actionMenu.addAction(self.actionRemoveMarked)
@@ -244,9 +238,6 @@ class ResultWindow(QMainWindow):
         exported_path = self.app.model.export_to_xhtml()
         url = QUrl.fromLocalFile(exported_path)
         QDesktopServices.openUrl(url)
-    
-    def hardlinkTriggered(self):
-        self.app.model.delete_marked(replace_with_hardlinks=True)
     
     def makeReferenceTriggered(self):
         self.app.model.make_selected_reference()

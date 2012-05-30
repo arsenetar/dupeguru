@@ -54,6 +54,9 @@ class PyDupeGuruBase(PyFairware):
     def ignoreListDialog(self) -> pyref:
         return self.model.ignore_list_dialog
     
+    def deletionOptions(self) -> pyref:
+        return self.model.deletion_options
+    
     #---Directories
     def addDirectory_(self, directory: str) -> int:
         return self.model.add_directory(directory)
@@ -98,9 +101,6 @@ class PyDupeGuruBase(PyFairware):
     
     def deleteMarked(self):
         self.model.delete_marked()
-    
-    def hardlinkMarked(self):
-        self.model.delete_marked(replace_with_hardlinks=True)
     
     def applyFilter_(self, filter: str):
         self.model.apply_filter(filter)

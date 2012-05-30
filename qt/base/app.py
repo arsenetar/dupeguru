@@ -32,6 +32,7 @@ from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .ignore_list_dialog import IgnoreListDialog
+from .deletion_options import DeletionOptions
 
 tr = trget('ui')
 
@@ -89,6 +90,7 @@ class DupeGuru(QObject):
         self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
         self.problemDialog = ProblemDialog(parent=self.resultWindow, model=self.model.problem_dialog)
         self.ignoreListDialog = IgnoreListDialog(parent=self.resultWindow, model=self.model.ignore_list_dialog)
+        self.deletionOptions = DeletionOptions(parent=self.resultWindow, model=self.model.deletion_options)
         self.preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.resultWindow, self)
         self.about_box = AboutBox(self.resultWindow, self)
                 

@@ -158,9 +158,6 @@
 /* Class = "NSMenuItem"; title = "Save Results..."; ObjectID = "1206"; */
 "1206.title" = "Save Results...";
 
-/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "1227"; */
-"1227.title" = "Delete Marked and Replace with Hardlinks";
-
 /* Class = "NSMenuItem"; title = "Load Recent Results"; ObjectID = "1239"; */
 "1239.title" = "Load Recent Results";
 

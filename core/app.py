@@ -12,6 +12,7 @@ import logging
 import subprocess
 import re
 import time
+import shutil
 
 from send2trash import send2trash
 from hscommon import io
@@ -24,6 +25,7 @@ from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_d
 from hscommon.trans import tr
 
 from . import directories, results, scanner, export, fs
+from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.ignore_list_dialog import IgnoreListDialog
@@ -118,6 +120,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.ignore_list_dialog = IgnoreListDialog(self)
         self.stats_label = StatsLabel(self)
         self.result_table = self._create_result_table()
+        self.deletion_options = DeletionOptions()
         children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
@@ -155,23 +158,30 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return len([dupe for dupe in group.dupes if self.results.is_marked(dupe)])
         return cmp_value(group.ref, key)
     
-    def _do_delete(self, j, replace_with_hardlinks):
+    def _do_delete(self, j, replace_with_hardlinks, direct_deletion):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe, replace_with_hardlinks)
+            return self._do_delete_dupe(dupe, replace_with_hardlinks, direct_deletion)
         
         j.start_job(self.results.mark_count)
         self.results.perform_on_marked(op, True)
     
-    def _do_delete_dupe(self, dupe, replace_with_hardlinks):
+    def _do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion):
         if not io.exists(dupe.path):
             return
         logging.debug("Sending '%s' to trash", dupe.path)
-        send2trash(str(dupe.path)) # Raises OSError when there's a problem
+        str_path = str(dupe.path)
+        if direct_deletion:
+            if op.isdir(str_path):
+                shutil.rmtree(str_path)
+            else:
+                os.remove(str_path)
+        else:
+            send2trash(str_path) # Raises OSError when there's a problem
         if replace_with_hardlinks:
             group = self.results.get_group_of_duplicate(dupe)
             ref = group.ref
-            os.link(str(ref.path), str(dupe.path))
+            os.link(str(ref.path), str_path)
         self.clean_empty_dirs(dupe.path[:-1])
     
     def _create_file(self, path):
@@ -334,19 +344,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             jobid = JobType.Copy if copy else JobType.Move
             self.view.start_job(jobid, do)
     
-    def delete_marked(self, replace_with_hardlinks=False):
+    def delete_marked(self):
         if not self._check_demo():
             return
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
-        if replace_with_hardlinks:
-            msg = tr("You are about to send %d files to Trash (and hardlink them afterwards). Continue?")
-        else:
-            msg = tr("You are about to send %d files to Trash. Continue?")
-        if not self.view.ask_yes_no(msg % self.results.mark_count):
+        if not self.deletion_options.show(self.results.mark_count):
             return
-        self.view.start_job(JobType.Delete, self._do_delete, args=[replace_with_hardlinks])
+        args = [self.deletion_options.hardlink, self.deletion_options.direct]
+        logging.debug("Starting deletion job with args %r", args)
+        self.view.start_job(JobType.Delete, self._do_delete, args=args)
     
     def export_to_xhtml(self):
         columns = [col for col in self.result_table.columns.ordered_columns

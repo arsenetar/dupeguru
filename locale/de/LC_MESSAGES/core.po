@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:94
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:258
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:501
+#: core/app.py:526
 msgid "Collecting files to scan"
 msgstr "Sammle Dateien zum Scannen"
 
-#: core/app.py:512
+#: core/app.py:537
 msgid "The selected directories contain no scannable file."
 msgstr "Der ausgewählte Ordner enthält keine scannbare Dateien."
 
-#: core/app.py:551
+#: core/app.py:576
 msgid "%s (%d discarded)"
 msgstr "%s (%d verworfen)"
 
@@ -96,15 +96,15 @@ msgstr "Gruppenpriorisierung"
 msgid "Analyzed %d/%d pictures"
 msgstr "Analysiere %d/%d Bilder"
 
-#: core_pe/matchblock.py:144
+#: core_pe/matchblock.py:152
 msgid "Performed %d/%d chunk matches"
 msgstr "Performed %d/%d chunk matches"
 
-#: core_pe/matchblock.py:149
+#: core_pe/matchblock.py:157
 msgid "Preparing for matching"
 msgstr "Vorbereitung auf den Vergleich"
 
-#: core_pe/matchblock.py:184
+#: core_pe/matchblock.py:192
 msgid "Verified %d/%d matches"
 msgstr "%d/%d verifizierte Paare"
 
@@ -112,31 +112,31 @@ msgstr "%d/%d verifizierte Paare"
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:36
+#: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:37
+#: core/app.py:39
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:189
+#: core/app.py:216
 msgid "No duplicates found."
 msgstr "Keine Duplikate gefunden."
 
-#: core/app.py:202
+#: core/app.py:229
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:203
+#: core/app.py:230
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:204
+#: core/app.py:231
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:252
+#: core/app.py:279
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -146,36 +146,28 @@ msgstr "%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?"
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Möchten Sie wirklich alle %d Einträge aus der Ignorier-Liste löschen?"
 
-#: core/app.py:367
+#: core/app.py:392
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen "
 "konfigurieren."
 
-#: core/app.py:454 core/app.py:465
+#: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "copy"
 msgstr "kopieren"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "move"
 msgstr "verschieben"
 
-#: core/app.py:313
+#: core/app.py:340
 msgid "Select a directory to {} marked files to"
 msgstr "Wählen sie einen Ordner zum {} der ausgewählten Dateien"
 
-#: core/app.py:327
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
+#: core/gui/deletion_options.py:20
+msgid "You are sending {} file(s) to the Trash."
 msgstr ""
-"%d Dateien werden gelöscht und mit physikalischen Verknüpfungen ersetzt. "
-"Fortfahren?"
-
-#: core/app.py:329
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "%d Dateien werden in den Mülleimer zu verschoben. Fortfahren?"

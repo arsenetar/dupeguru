@@ -12,12 +12,12 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: core/app.py:94
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "сможете только для удаления, перемещения или копирования 10 копий сразу"
 
-#: core/app.py:231
+#: core/app.py:258
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -25,15 +25,15 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов сразу в "
 "демонстрационном режиме."
 
-#: core/app.py:501
+#: core/app.py:526
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:512
+#: core/app.py:537
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранных директорий не содержат сканируемых файлов."
 
-#: core/app.py:551
+#: core/app.py:576
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -109,15 +109,15 @@ msgstr "Делая группы приоритетов"
 msgid "Analyzed %d/%d pictures"
 msgstr "Анализируется %d/%d фотографии"
 
-#: core_pe/matchblock.py:144
+#: core_pe/matchblock.py:152
 msgid "Performed %d/%d chunk matches"
 msgstr "Исполняет %d/%d совпадениях кусоков"
 
-#: core_pe/matchblock.py:149
+#: core_pe/matchblock.py:157
 msgid "Preparing for matching"
 msgstr "Подготовка для сравнения"
 
-#: core_pe/matchblock.py:184
+#: core_pe/matchblock.py:192
 msgid "Verified %d/%d matches"
 msgstr "Проверенные  %d/%d совпадениях"
 
@@ -125,31 +125,31 @@ msgstr "Проверенные  %d/%d совпадениях"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF %d/%d из фотографии"
 
-#: core/app.py:36
+#: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:37
+#: core/app.py:39
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:189
+#: core/app.py:216
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
-#: core/app.py:202
+#: core/app.py:229
 msgid "All marked files were copied sucessfully."
 msgstr "Все выбранные файлы были скопированы успешно."
 
-#: core/app.py:203
+#: core/app.py:230
 msgid "All marked files were moved sucessfully."
 msgstr "Все выбранные файлы были перемещены успешно."
 
-#: core/app.py:204
+#: core/app.py:231
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Все выбранные файлы были успешно отправлены в корзину."
 
-#: core/app.py:252
+#: core/app.py:279
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -161,36 +161,28 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Вы действительно хотите удалить все элементы %d из черного списка?"
 
-#: core/app.py:367
+#: core/app.py:392
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "У вас нет пользовательской команды создали. Установите его в ваших "
 "предпочтениях."
 
-#: core/app.py:454 core/app.py:465
+#: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить файлы %d из результата поиска. Продолжить?"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "copy"
 msgstr "копия"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:313
+#: core/app.py:340
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог на {} отмеченные файлы"
 
-#: core/app.py:327
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
+#: core/gui/deletion_options.py:20
+msgid "You are sending {} file(s) to the Trash."
 msgstr ""
-"Вы собираетесь отправить%d файлы в корзину (и жесткую них позже). "
-"Продолжить?"
-
-#: core/app.py:329
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "Вы собираетесь отправить %d файлы в корзину. Продолжить?"

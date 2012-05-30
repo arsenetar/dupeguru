@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:94
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:258
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:501
+#: core/app.py:526
 msgid "Collecting files to scan"
 msgstr "Shromažďuji prohlížené soubory"
 
-#: core/app.py:512
+#: core/app.py:537
 msgid "The selected directories contain no scannable file."
 msgstr "Vybrané adresáře neobsahují žádné soubory vhodné k prohledávání."
 
-#: core/app.py:551
+#: core/app.py:576
 msgid "%s (%d discarded)"
 msgstr "%s (%d vyřazeno)"
 
@@ -96,15 +96,15 @@ msgstr "Přiřazuji prioritu skupině"
 msgid "Analyzed %d/%d pictures"
 msgstr "Analyzováno %d/%d snímků"
 
-#: core_pe/matchblock.py:144
+#: core_pe/matchblock.py:152
 msgid "Performed %d/%d chunk matches"
 msgstr "Provedeno %d/%d porovnání bloků"
 
-#: core_pe/matchblock.py:149
+#: core_pe/matchblock.py:157
 msgid "Preparing for matching"
 msgstr "Připravuji porovnávání"
 
-#: core_pe/matchblock.py:184
+#: core_pe/matchblock.py:192
 msgid "Verified %d/%d matches"
 msgstr "Ověřeno %d/%d shod"
 
@@ -112,31 +112,31 @@ msgstr "Ověřeno %d/%d shod"
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:36
+#: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:37
+#: core/app.py:39
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:189
+#: core/app.py:216
 msgid "No duplicates found."
 msgstr "Nebyli nalezeny žádné duplicity."
 
-#: core/app.py:202
+#: core/app.py:229
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:203
+#: core/app.py:230
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:204
+#: core/app.py:231
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:252
+#: core/app.py:279
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -148,35 +148,27 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
 
-#: core/app.py:367
+#: core/app.py:392
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
 
-#: core/app.py:454 core/app.py:465
+#: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "copy"
 msgstr ""
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "move"
 msgstr ""
 
-#: core/app.py:313
+#: core/app.py:340
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:327
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
+#: core/gui/deletion_options.py:20
+msgid "You are sending {} file(s) to the Trash."
 msgstr ""
-"Chystáte se vyhodit %d souborů do koše (a následně na ně vytvořit "
-"hardlinky). Pokračovat?"
-
-#: core/app.py:329
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "Chystáte se vyhodit %d souborů do koše. Pokračovat?"

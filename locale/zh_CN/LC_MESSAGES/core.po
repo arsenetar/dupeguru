@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:94
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:258
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:501
+#: core/app.py:526
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:512
+#: core/app.py:537
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:551
+#: core/app.py:576
 msgid "%s (%d discarded)"
 msgstr "%s (%d 无效)"
 
@@ -96,15 +96,15 @@ msgstr "优化分组"
 msgid "Analyzed %d/%d pictures"
 msgstr "分析 %d/%d 图像"
 
-#: core_pe/matchblock.py:144
+#: core_pe/matchblock.py:152
 msgid "Performed %d/%d chunk matches"
 msgstr ""
 
-#: core_pe/matchblock.py:149
+#: core_pe/matchblock.py:157
 msgid "Preparing for matching"
 msgstr "准备进行匹配"
 
-#: core_pe/matchblock.py:184
+#: core_pe/matchblock.py:192
 msgid "Verified %d/%d matches"
 msgstr "验证 %d/%d 匹配项"
 
@@ -112,31 +112,31 @@ msgstr "验证 %d/%d 匹配项"
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:36
+#: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:37
+#: core/app.py:39
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:189
+#: core/app.py:216
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: core/app.py:202
+#: core/app.py:229
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:203
+#: core/app.py:230
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:204
+#: core/app.py:231
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:252
+#: core/app.py:279
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -146,32 +146,26 @@ msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继�
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "确定要从忽略列表中移除 %d 项吗?"
 
-#: core/app.py:367
+#: core/app.py:392
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
-#: core/app.py:454 core/app.py:465
+#: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "你将从结果中移除 %d 个文件。继续吗?"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "copy"
 msgstr "复制"
 
-#: core/app.py:312
+#: core/app.py:339
 msgid "move"
 msgstr "移动"
 
-#: core/app.py:313
+#: core/app.py:340
 msgid "Select a directory to {} marked files to"
 msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
-#: core/app.py:327
-msgid ""
-"You are about to send %d files to Trash (and hardlink them afterwards). "
-"Continue?"
-msgstr "即将有 %d 个文件被移动垃圾桶并删除硬盘上的文件。继续吗?"
-
-#: core/app.py:329
-msgid "You are about to send %d files to Trash. Continue?"
-msgstr "即将有 %d 个文件被移到回收站。继续吗?"
+#: core/gui/deletion_options.py:20
+msgid "You are sending {} file(s) to the Trash."
+msgstr ""

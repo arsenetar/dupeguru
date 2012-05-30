@@ -29,9 +29,6 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Directories"; ObjectID = "19"; */
 "19.paletteLabel" = "Directories";
 
-/* Class = "NSMenuItem"; title = "Delete Marked and Replace with Hardlinks"; ObjectID = "27"; */
-"27.title" = "Delete Marked and Replace with Hardlinks";
-
 /* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "29"; */
 "29.title" = "Send Marked to Trash";
 

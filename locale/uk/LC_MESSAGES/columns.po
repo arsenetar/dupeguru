@@ -12,8 +12,7 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 
-#: core/gui/ignore_list_table.py:18
-#: core/gui/ignore_list_table.py:19
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Шлях до файлу"
@@ -22,23 +21,17 @@ msgstr "Шлях до файлу"
 msgid "Error Message"
 msgstr "Повідомлення про помилку"
 
-#: core/prioritize.py:63
-#: core_me/result_table.py:24
-#: core_pe/result_table.py:21
+#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
 #: core_se/result_table.py:21
 msgid "Kind"
 msgstr "Тип"
 
-#: core/prioritize.py:72
-#: core_me/result_table.py:19
-#: core_pe/result_table.py:19
+#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
 #: core_se/result_table.py:19
 msgid "Folder"
 msgstr "Папка"
 
-#: core/prioritize.py:88
-#: core_me/result_table.py:18
-#: core_pe/result_table.py:18
+#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
 #: core_se/result_table.py:18
 msgid "Filename"
 msgstr "Ім’я файлу"
@@ -47,10 +40,8 @@ msgstr "Ім’я файлу"
 msgid "Size"
 msgstr "Розмір"
 
-#: core/prioritize.py:138
-#: core_me/result_table.py:25
-#: core_pe/result_table.py:23
-#: core_se/result_table.py:22
+#: core/prioritize.py:138 core_me/result_table.py:25
+#: core_pe/result_table.py:23 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Дата модифікації"
 
@@ -58,8 +49,7 @@ msgstr "Дата модифікації"
 msgid "Duration"
 msgstr "Тривалість"
 
-#: core_me/prioritize.py:22
-#: core_me/result_table.py:22
+#: core_me/prioritize.py:22 core_me/result_table.py:22
 msgid "Bitrate"
 msgstr "Якість звуку"
 
@@ -107,30 +97,24 @@ msgstr "Номер доріжки"
 msgid "Comment"
 msgstr "Коментар"
 
-#: core_me/result_table.py:33
-#: core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:24
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Збіг (%)"
 
-#: core_me/result_table.py:34
-#: core_se/result_table.py:24
+#: core_me/result_table.py:34 core_se/result_table.py:24
 msgid "Words Used"
 msgstr "Використані слова"
 
-#: core_me/result_table.py:35
-#: core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:25
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Кількість дублікатів"
 
-#: core_pe/prioritize.py:16
-#: core_pe/result_table.py:22
+#: core_pe/prioritize.py:16 core_pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Виміри"
 
-#: core_pe/result_table.py:20
-#: core_se/result_table.py:20
+#: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Розмір (KB)"
-

@@ -11,6 +11,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "StatsLabel.h"
 #import "ResultTable.h"
 #import "ProblemDialog.h"
+#import "DeletionOptions.h"
 #import "HSTableView.h"
 #import "PyDupeGuru.h"
 
@@ -31,6 +32,7 @@ http://www.hardcoded.net/licenses/bsd_license
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
+    DeletionOptions *deletionOptions;
     QLPreviewPanel* previewPanel;
 }
 - (id)initWithParentApp:(AppDelegateBase *)app;
@@ -41,7 +43,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Helpers */
 - (void)fillColumnsMenu;
-- (void)sendMarkedToTrash:(BOOL)hardlinkDeleted;
 - (void)updateOptionSegments;
 - (void)showProblemDialog;
 - (void)adjustUIToLocalization;
@@ -49,8 +50,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Actions */
 - (IBAction)changeOptions:(id)sender;
 - (IBAction)copyMarked:(id)sender;
-- (IBAction)deleteMarked:(id)sender;
-- (IBAction)hardlinkMarked:(id)sender;
+- (IBAction)trashMarked:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;

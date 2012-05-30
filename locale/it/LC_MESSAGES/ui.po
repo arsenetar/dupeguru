@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:39
+#: cocoa/inter/app.py:15 qt/base/app.py:40
 msgid "Scanning for duplicates"
 msgstr "Scansione per i duplicati"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:40
+#: cocoa/inter/app.py:16 qt/base/app.py:41
 msgid "Loading"
 msgstr "Caricamento"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:41
+#: cocoa/inter/app.py:17 qt/base/app.py:42
 msgid "Moving"
 msgstr "Spostamento"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:42
+#: cocoa/inter/app.py:18 qt/base/app.py:43
 msgid "Copying"
 msgstr "Copia in corso"
 
@@ -30,7 +30,7 @@ msgstr "Rimozione delle tracce insistenti dalla libreria di iTunes"
 msgid "Scanning the iTunes Library"
 msgstr "Scansione della libreria di iTunes"
 
-#: cocoa/inter/app_me.py:154 cocoa/inter/app_pe.py:144
+#: cocoa/inter/app_me.py:157 cocoa/inter/app_pe.py:144
 msgid "Sending dupes to the Trash"
 msgstr "Spostamento dei duplicati nel cestino"
 
@@ -42,39 +42,39 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "Non trovo l'applicazione iPhoto."
 
-#: qt/base/app.py:43
+#: qt/base/app.py:44
 msgid "Sending files to the recycle bin"
 msgstr ""
 
-#: qt/base/app.py:110
+#: qt/base/app.py:112
 msgid "Quit"
 msgstr ""
 
-#: qt/base/app.py:111 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr ""
 
-#: qt/base/app.py:113 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:115 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "dupeGuru Help"
 msgstr "Aiuto di dupeGuru"
 
-#: qt/base/app.py:114 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/app.py:116 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "About dupeGuru"
 msgstr "Informazioni su dupeGuru"
 
-#: qt/base/app.py:115
+#: qt/base/app.py:117
 msgid "Register dupeGuru"
 msgstr ""
 
-#: qt/base/app.py:116
+#: qt/base/app.py:118
 msgid "Check for Update"
 msgstr ""
 
-#: qt/base/app.py:117
+#: qt/base/app.py:119
 msgid "Open Debug Log"
 msgstr ""
 
-#: qt/base/app.py:232 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -111,16 +111,16 @@ msgstr "Finestra dei risultati"
 msgid "Add Folder..."
 msgstr ""
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:82
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:78
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "File"
 msgstr "File"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:90
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:86
 msgid "View"
 msgstr ""
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:92
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:88
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Help"
 msgstr "Aiuto"
@@ -166,7 +166,7 @@ msgstr "Seleziona un risultato (file) da caricare"
 msgid "All Files (*.*)"
 msgstr ""
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:301
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:296
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr ""
 
@@ -292,19 +292,20 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Mostra i selezionati"
 
-#: qt/base/problem_dialog.py:57 cocoa/base/en.lproj/IgnoreListDialog.strings:0
+#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
+#: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 #: cocoa/base/en.lproj/ProblemDialog.strings:0
 msgid "Close"
 msgstr "Chiudi"
 
-#: qt/base/result_window.py:47 qt/base/result_window.py:177
+#: qt/base/result_window.py:47 qt/base/result_window.py:171
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Details"
 msgstr "Dettagli"
 
-#: qt/base/result_window.py:48 qt/base/result_window.py:86
-#: qt/base/result_window.py:151 qt/base/result_window.py:176
+#: qt/base/result_window.py:48 qt/base/result_window.py:82
+#: qt/base/result_window.py:146 qt/base/result_window.py:170
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Actions"
 msgstr "Azioni"
@@ -323,104 +324,99 @@ msgstr ""
 
 #: qt/base/result_window.py:52 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
-msgid "Delete Marked and Replace with Hardlinks"
-msgstr "Cancella gli elementi marcati e sostituiscili con degli Hardlinks"
-
-#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
-#: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Move Marked to..."
 msgstr "Sposta gli elementi marcati nel..."
 
-#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:53 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Copy Marked to..."
 msgstr "Copia gli elementi evidenziati nel..."
 
-#: qt/base/result_window.py:55 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:54 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Marked from Results"
 msgstr "Rimuovi gli elementi marcati dai risultati"
 
-#: qt/base/result_window.py:56
+#: qt/base/result_window.py:55
 msgid "Re-Prioritize Results..."
 msgstr ""
 
-#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:56 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Remove Selected from Results"
 msgstr "Rimuovi gli elementi selezionati dai risultati"
 
-#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Aggiungi gli elementi selezionati alla lista da ignorare"
 
-#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Make Selected Reference"
 msgstr "Imposta gli elementi selezionati come riferimento"
 
-#: qt/base/result_window.py:60 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:59 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Apri gli elementi selezionati con l'applicazione predefinita"
 
-#: qt/base/result_window.py:61
+#: qt/base/result_window.py:60
 msgid "Open Containing Folder of Selected"
 msgstr ""
 
-#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:61 cocoa/base/en.lproj/MainMenu.strings:0
 #: cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Rename Selected"
 msgstr "Rinomina gli elementi selezionati"
 
-#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:62 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark All"
 msgstr "Marca tutti"
 
-#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:63 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark None"
 msgstr "Deseleziona tutti"
 
-#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:64 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invert Marking"
 msgstr "Inverti la selezione"
 
-#: qt/base/result_window.py:66 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:65 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Mark Selected"
 msgstr "Marca i selezionati"
 
-#: qt/base/result_window.py:67
+#: qt/base/result_window.py:66
 msgid "Export To HTML"
 msgstr ""
 
-#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:67 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Save Results..."
 msgstr "Salva i risultati..."
 
-#: qt/base/result_window.py:69 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:68 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Invoke Custom Command"
 msgstr "Invoca comando personalizzato"
 
-#: qt/base/result_window.py:84
+#: qt/base/result_window.py:80
 msgid "Mark"
 msgstr ""
 
-#: qt/base/result_window.py:88 cocoa/base/en.lproj/MainMenu.strings:0
+#: qt/base/result_window.py:84 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Columns"
 msgstr "Colonne"
 
-#: qt/base/result_window.py:147 cocoa/se/en.lproj/Preferences.strings:0
+#: qt/base/result_window.py:142 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Reset to Defaults"
 msgstr "Ripristina impostazioni predefinite"
 
-#: qt/base/result_window.py:170
+#: qt/base/result_window.py:164
 msgid "{} Results"
 msgstr ""
 
-#: qt/base/result_window.py:300 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:295 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Seleziona un file dove salvare i tuoi risultati"
 
@@ -533,18 +529,18 @@ msgstr "Data e ora EXIF"
 msgid "Match pictures of different dimensions"
 msgstr "Includi immagini di dimensione differente"
 
-#: qt/pe/result_window.py:20 qt/pe/result_window.py:25
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Cancella la cache delle immagini"
 
-#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr ""
 "Vuoi veramente rimuovere tutte le analisi delle immagini memorizzate nella "
 "cache?"
 
-#: qt/pe/result_window.py:29
+#: qt/pe/result_window.py:28
 msgid "Picture cache cleared."
 msgstr ""
 
@@ -691,6 +687,8 @@ msgstr "Cambia la priorità dei risultati"
 msgid "Ok"
 msgstr "Ok"
 
+#: qt/base/deletion_options.py:50
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Cancel"
 msgstr "Cancella"
@@ -729,7 +727,7 @@ msgstr "Azione"
 msgid "Directories"
 msgstr "Cartelle"
 
-#: qt/base/result_window.py:178 cocoa/base/en.lproj/ResultWindow.strings:0
+#: qt/base/result_window.py:172 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
 msgstr "Solo duplicati"
 
@@ -829,14 +827,14 @@ msgstr "'%@' non esiste."
 msgid "The name '%@' already exists."
 msgstr "Il nome '%@' è già esistente."
 
-#: cocoa/inter/app_me.py:182 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:191 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "La tua libreria di iTunes contiene %d tracce inesistenti pronte per essere "
 "rimosse. Continuare?"
 
-#: cocoa/inter/app_me.py:186 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:195 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "La tua libreria di iTunes non contiene tracce inesistenti"
 
@@ -852,36 +850,70 @@ msgstr "No"
 msgid "OK"
 msgstr ""
 
-#: cocoa/inter/app_me.py:156
+#: cocoa/inter/app_me.py:159
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:213
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
-#: qt/base/result_window.py:179
+#: qt/base/result_window.py:173
 msgid "Delta Values"
 msgstr ""
 
-#: cocoa/inter/app_me.py:176
+#: cocoa/inter/app_me.py:185
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr ""
 
-#: qt/base/app.py:112 qt/base/ignore_list_dialog.py:31
+#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Ignore List"
 msgstr ""
 
-#: qt/base/ignore_list_dialog.py:44
+#: qt/base/ignore_list_dialog.py:45
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 msgid "Remove Selected"
 msgstr ""
 
-#: qt/base/ignore_list_dialog.py:45
+#: qt/base/ignore_list_dialog.py:46
 #: cocoa/base/en.lproj/IgnoreListDialog.strings:0
 msgid "Clear"
+msgstr ""
+
+#: qt/base/deletion_options.py:29
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Deletion Options"
+msgstr ""
+
+#: qt/base/deletion_options.py:34
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Hardlink deleted files"
+msgstr ""
+
+#: qt/base/deletion_options.py:36
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid ""
+"After having deleted a duplicate, place a hardlink targeting the reference "
+"file to replace the deleted file."
+msgstr ""
+
+#: qt/base/deletion_options.py:41
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Directly delete files"
+msgstr ""
+
+#: qt/base/deletion_options.py:43
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr ""
+
+#: qt/base/deletion_options.py:49
+#: cocoa/base/en.lproj/DeletionOptions.strings:0
+msgid "Proceed"
 msgstr ""
