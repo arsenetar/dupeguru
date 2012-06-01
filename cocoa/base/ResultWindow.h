@@ -53,6 +53,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)trashMarked:(id)sender;
 - (IBAction)exportToXHTML:(id)sender;
 - (IBAction)filter:(id)sender;
+- (IBAction)focusOnFilterField:(id)sender;
 - (IBAction)ignoreSelected:(id)sender;
 - (IBAction)invokeCustomCommand:(id)sender;
 - (IBAction)markAll:(id)sender;

@@ -154,6 +154,11 @@ http://www.hardcoded.net/licenses/bsd_license
     [model applyFilter:[filterField stringValue]];
 }
 
+- (IBAction)focusOnFilterField:(id)sender
+{
+    [[self window] makeFirstResponder:filterField];
+}
+
 - (IBAction)ignoreSelected:(id)sender
 {
     [model addSelectedToIgnoreList];

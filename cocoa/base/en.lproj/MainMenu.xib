@@ -294,6 +294,26 @@
 									<reference key="NSOnImage" ref="34697260"/>
 									<reference key="NSMixedImage" ref="201180191"/>
 								</object>
+								<object class="NSMenuItem" id="1047465480">
+									<reference key="NSMenu" ref="649942443"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="34697260"/>
+									<reference key="NSMixedImage" ref="201180191"/>
+								</object>
+								<object class="NSMenuItem" id="820963618">
+									<reference key="NSMenu" ref="649942443"/>
+									<string key="NSTitle">Filter Results...</string>
+									<string key="NSKeyEquiv">f</string>
+									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="34697260"/>
+									<reference key="NSMixedImage" ref="201180191"/>
+								</object>
 							</array>
 						</object>
 					</object>
@@ -948,6 +968,14 @@
 					<int key="connectionID">1286</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">focusOnFilterField:</string>
+						<reference key="source" ref="83466988"/>
+						<reference key="destination" ref="820963618"/>
+					</object>
+					<int key="connectionID">1289</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="133452984"/>
@@ -1427,6 +1455,8 @@
 							<reference ref="666519843"/>
 							<reference ref="996047427"/>
 							<reference ref="956279291"/>
+							<reference ref="1047465480"/>
+							<reference ref="820963618"/>
 						</array>
 						<reference key="parent" ref="551331186"/>
 					</object>
@@ -1560,6 +1590,16 @@
 						<reference key="object" ref="361987512"/>
 						<reference key="parent" ref="472719764"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1287</int>
+						<reference key="object" ref="1047465480"/>
+						<reference key="parent" ref="649942443"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1288</int>
+						<reference key="object" ref="820963618"/>
+						<reference key="parent" ref="649942443"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1586,6 +1626,8 @@
 				<string key="1276.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1280.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1283.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1287.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1288.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1644,7 +1686,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1286</int>
+			<int key="maxID">1289</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1881,6 +1923,7 @@
 						<string key="copyMarked:">id</string>
 						<string key="exportToXHTML:">id</string>
 						<string key="filter:">id</string>
+						<string key="focusOnFilterField:">id</string>
 						<string key="ignoreSelected:">id</string>
 						<string key="invokeCustomCommand:">id</string>
 						<string key="markAll:">id</string>
@@ -1921,6 +1964,10 @@
 						</object>
 						<object class="IBActionInfo" key="filter:">
 							<string key="name">filter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="focusOnFilterField:">
+							<string key="name">focusOnFilterField:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="ignoreSelected:">
@@ -2088,17 +2135,9 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1060" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
-			<real value="4100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
