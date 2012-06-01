@@ -1,3 +1,9 @@
+=== 3.5.0 (2012-06-01)
+
+* Added a Deletion Options panel.
+* Greatly improved memory usage for big scans.
+* Added a keybinding for the filter field. (#182) [Mac]
+
 === 3.4.1 (2012-04-14)
 
 * Fixed the "Folders" scan type. [Mac]
