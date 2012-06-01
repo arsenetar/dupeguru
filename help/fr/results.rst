@@ -94,3 +94,4 @@ Voici la liste des actions qu'il est possible d'appliquer aux résultats.
 * **Renommer sélectionné:** Renomme le fichier sélectionné après vous avoir demandé d'entrer un nouveau nom.
 
 .. todo:: Add Move and iPhoto/iTunes warning
+.. todo:: Add "Deletion Options" section.

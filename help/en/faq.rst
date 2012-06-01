@@ -103,13 +103,21 @@ Frequently Asked Questions
 
 .. topic:: I tried to send my duplicates to Trash, but dupeGuru is telling me it can't do it. Why? What can I do?
 
-    Most of the time, the reason why dupeGuru can't send files to Trash is because of file permissions. You need *write* permissions on files you want to send to Trash. If you're not familiar with the command line, you can use utilities such as `BatChmod <http://macchampion.com/arbysoft/BatchMod>`_ to fix your permissions.
+    Most of the time, the reason why dupeGuru can't send files to Trash is because of file
+    permissions. You need *write* permissions on files you want to send to Trash. If you're not
+    familiar with the command line, you can use utilities such as `BatChmod`_ to fix your
+    permissions.
 
-    If dupeGuru still gives you troubles after fixing your permissions, there have been some cases where using "Move Marked to..." as a workaround did the trick. So instead of sending your files to Trash, you send them to a temporary folder with the "Move Marked to..." action, and then you delete that temporary folder manually.
+    If dupeGuru still gives you troubles after fixing your permissions, try enabling the "Directly
+    delete files" option that is offered to you when you activate Send to Trash. This will not send
+    files to the Trash, but delete them immediately. In some cases, for example on network storage
+    (NAS), this has been known to work when normal deletion didn't.
 
     .. only:: edition_pe
 
         If you're trying to delete *iPhoto* pictures, then the reason for the failure is different. The deletion fails because dupeGuru can't communicate with iPhoto. Be aware that for the deletion to work correctly, you're not supposed to play around iPhoto while dupeGuru is working. Also, sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
 
-    If all of this fail, `contact HS support <http://www.hardcoded.net/support>`_, we'll figure it out.
+    If all of this fail, `contact HS support`_, we'll figure it out.
 
+.. _BatChmod: http://www.lagentesoft.com/batchmod/index.html
+.. _contact HS support: http://www.hardcoded.net/support

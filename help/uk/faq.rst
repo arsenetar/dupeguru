@@ -113,3 +113,5 @@
 
     Якщо все це не так, `контакт УГ підтримки <http://www.hardcoded.net/support>`_, ми зрозуміти це.
 
+.. todo:: This FAQ qestion is outdated, see english version.
+

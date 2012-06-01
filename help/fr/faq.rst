@@ -113,3 +113,5 @@ Foire aux questions
         Si vous essayez d'effacer des photos dans iPhoto, alors la raison du problème est différente. L'opération rate parce que dupeGuru ne peut pas communiquer avec iPhoto. Il faut garder à l'esprit qu'il ne faut pas toucher à iPhoto pendant l'opération parce que ça peut déranger la communication entre dupeGuru et iPhoto. Aussi, quelque fois, dupeGuru ne peut pas trouver l'application iPhoto. Il faut mieux alors démarrer iPhoto avant l'opération.
 
     Dans le pire des cas, `contactez le support HS <http://www.hardcoded.net/support>`_, on trouvera bien.
+
+.. todo:: This FAQ qestion is outdated, see english version.

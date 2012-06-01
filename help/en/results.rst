@@ -78,21 +78,54 @@ You might notice that not all duplicates in the filtered results will match your
 Action Menu
 -----------
 
-* **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the newly cleared ignore list to be effective.
-* **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The columns that are visible when you click on this button will be the columns present in the XHTML file. The file will automatically be opened in your default browser.
-* **Send Marked to Trash:** Send all marked duplicates to trash, obviously.
-* **Delete Marked and Replace with Hardlinks:** Sends all marked duplicates to trash, but after having done that, the deleted files are replaced by a `hard link <http://en.wikipedia.org/wiki/Hard_link>`_ to the reference file. (Only for OS X and Linux)
-* **Move Marked to...:** Prompt you for a destination, and then move all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
-* **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that destination. Source file's path might be re-created in destination, depending on the "Copy and Move" preference.
-* **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will not be touched and will stay where they are.
-* **Remove Selected from Results:** Remove all selected duplicates from results. Note that all selected reference files will be ignored, only duplicates can be removed with this action.
-* **Make Selected Reference:** Promote all selected duplicates to reference. If a duplicate is a part of a group having a reference file coming from a reference folder (in blue color), no action will be taken for this duplicate. If more than one duplicate among the same group are selected, only the first of each group will be promoted.
-* **Add Selected to Ignore List:** This first removes all selected duplicates from results, and then add the match of that duplicate and the current reference in the ignore list. This match will not come up again in further scan. The duplicate itself might come back, but it will be matched with another reference file. You can clear the ignore list with the Clear Ignore List command.
-* **Open Selected with Default Application:** Open the file with the application associated with selected file's type.
+* **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the
+  newly cleared ignore list to be effective.
+* **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The
+  columns that are visible when you click on this button will be the columns present in the XHTML
+  file. The file will automatically be opened in your default browser.
+* **Send Marked to Trash:** Send all marked duplicates to trash, obviously. Before proceeding,
+  you'll be presented deletion options (see below).
+* **Move Marked to...:** Prompt you for a destination, and then move all marked files to that
+  destination. Source file's path might be re-created in destination, depending on the
+  "Copy and Move" preference.
+* **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that
+  destination. Source file's path might be re-created in destination, depending on the
+  "Copy and Move" preference.
+* **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will
+  not be touched and will stay where they are.
+* **Remove Selected from Results:** Remove all selected duplicates from results. Note that all
+  selected reference files will be ignored, only duplicates can be removed with this action.
+* **Make Selected Reference:** Promote all selected duplicates to reference. If a duplicate is a
+  part of a group having a reference file coming from a reference folder (in blue color), no action
+  will be taken for this duplicate. If more than one duplicate among the same group are selected,
+  only the first of each group will be promoted.
+* **Add Selected to Ignore List:** This first removes all selected duplicates from results, and
+  then add the match of that duplicate and the current reference in the ignore list. This match
+  will not come up again in further scan. The duplicate itself might come back, but it will be
+  matched with another reference file. You can clear the ignore list with the Clear Ignore List
+  command.
+* **Open Selected with Default Application:** Open the file with the application associated with
+  selected file's type.
 * **Reveal Selected in Finder:** Open the folder containing selected file.
-* **Invoke Custom Command:** Invokes the external application you've set up in your preferences using the current selection as arguments in the invocation.
+* **Invoke Custom Command:** Invokes the external application you've set up in your preferences
+  using the current selection as arguments in the invocation.
 * **Rename Selected:** Prompts you for a new name, and then rename the selected file.
 
 **Warning about moving files in iPhoto/iTunes:** When using the "Move Marked" action on duplicates 
 that come from iPhoto or iTunes, files are copied, not moved. dupeGuru cannot use the Move action
 on those files.
+
+Deletion Options
+----------------
+
+These options affect how duplicate deletion takes place. Most of the time, you don't need to enable
+any of them.
+
+* **Hardlink deleted files:** The deleted files are replaced by a `hard link`_ to the reference
+  file. (Only for OS X and Linux)
+* **Directly delete files:** Instead of sending files to trash, directly delete them. This is used
+  for troubleshooting and you normally don't need to enable this unless dupeGuru has problems
+  deleting files normally, something that can happens when you try to delete files on network
+  storage (NAS).
+
+.. _hard link: http://en.wikipedia.org/wiki/Hard_link

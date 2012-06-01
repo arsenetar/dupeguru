@@ -94,3 +94,4 @@ dupeGuru-ն աջակցում է հետստուգման ֆիլտրում։ Սրա
 * **Անվանափոխել ընտրվածը.** Ձեզ հարցում կկատարվի նոր անվան համար, ապա ընտրված ֆայլը կանվանափոխվի։
 
 .. todo:: Add Move and iPhoto/iTunes warning
+.. todo:: Add "Deletion Options" section.

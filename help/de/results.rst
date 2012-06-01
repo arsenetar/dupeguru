@@ -94,3 +94,4 @@ Aktionen Menü
 * **Ausgewählte umbenennen:** Fragt nach einem neuen Namen und benennt die ausgewählte Datei um.
 
 .. todo:: Add Move and iPhoto/iTunes warning
+.. todo:: Add "Deletion Options" section.

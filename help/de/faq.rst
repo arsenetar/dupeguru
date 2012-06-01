@@ -112,3 +112,4 @@ Häufig gestellte Fragen
 
     Wenn dies alles fehlschlägt, kontaktieren Sie `HS support <http://www.hardcoded.net/support>`_, wir werden das Problem lösen.
 
+.. todo:: This FAQ qestion is outdated, see english version.

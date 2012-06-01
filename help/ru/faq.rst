@@ -113,3 +113,4 @@
 
     Если все это не так, `контакт с поддержки HS <http://www.hardcoded.net/support>`_, мы поможем Вас.
 
+.. todo:: This FAQ qestion is outdated, see english version.
