@@ -80,25 +80,15 @@ If you didn't use mercurial to download this source, you probably have an incomp
 External projects (hscommon, qtlib, cocoalib) need to be at the root of the dupeGuru project folder.
 You'll have to download those separately. Or use mercurial, it's much easier.
 
-As far as I can tell, you don't *have* to compile/install everything manually and you can normally
-use `easy_install` to install python dependencies. However, be aware that compiling/installing
-manually from the repositories of each project is what I personally do, so if you hit a snag 
-somewhere, you might want to try the manual way.
-
-PyObjC's website is badly outdated. Also, as far as I can tell, the package installable with
-`easy_install` has good chances of not working. Your best bet is to download the latest tagged
-version from the repository and compile it from source.
-
 Another one on OS X: I wouldn't use macports/fink/whatever. Whenever I tried using those, I always 
 ended up with problems.
 
-On OSX Lion, for dupeGuru PE, make sure that you installed the latest version of macholib because there was a
-10.7 related bug that was fixed recently. Right now, the fix hasn't even been released yet so you 
-have to install directly from the repo ( http://bitbucket.org/ronaldoussoren/macholib ). The fix
-in question is at http://bitbucket.org/ronaldoussoren/macholib/changeset/4ab0de0f5b60
-
 Whenever you have a problem, always double-check that you're running the correct python version. 
 You'll probably have to tweak your $PATH.
+
+To setup a build machine under Ubuntu 12.04 and up, install those packages: python3, python3-pyqt4,
+pyqt4-dev-tools, mercurial and then python3-setuptools. Once you've done that, install pip with
+`easy_install`. Once you've done that, you can then perform "The easy way!" installation.
 
 Building dupeGuru
 =================

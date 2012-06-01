@@ -7,6 +7,6 @@ Standards-Version: 3.8.1
 Homepage: http://www.hardcoded.net
 
 Package: dupeguru-me
-Architecture: any
-Depends: python3 (>=3.2), libqtgui4
+Architecture: all
+Depends: python3 (>=3.2), python3-pyqt4
 Description: dupeGuru Music Edition
