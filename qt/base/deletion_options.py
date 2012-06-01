@@ -9,8 +9,8 @@
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
 
+from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
-from qtlib.util import horizontalWrap
 
 tr = trget('ui')
 
@@ -32,6 +32,9 @@ class DeletionOptions(QDialog):
         self.msgLabel = QLabel()
         self.verticalLayout.addWidget(self.msgLabel)
         self.hardlinkCheckbox = QCheckBox(tr("Hardlink deleted files"))
+        if not (ISOSX or ISLINUX):
+            self.hardlinkCheckbox.setEnabled(False)
+            self.hardlinkCheckbox.setText(self.hardlinkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
         self.verticalLayout.addWidget(self.hardlinkCheckbox)
         text = tr("After having deleted a duplicate, place a hardlink targeting the reference file "
             "to replace the deleted file.")
