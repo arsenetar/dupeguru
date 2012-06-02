@@ -1,3 +1,10 @@
+=== 6.4.0 (2012-06-02)
+
+* Added a Deletion Options panel.
+* Greatly improved memory usage for big scans.
+* Added a keybinding for the filter field. (#182) [Mac]
+* Upgraded minimum requirements for Ubuntu to 12.04.
+
 === 6.3.1 (2012-04-15)
 
 * Fixed crash on iTunes library parsing. [Mac]
