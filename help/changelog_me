@@ -1,3 +1,7 @@
+=== 6.4.1 (2012-06-04)
+
+* Fixed bug introduced in 6.4.0 preventing deletions from working. [Mac]
+
 === 6.4.0 (2012-06-02)
 
 * Added a Deletion Options panel.
