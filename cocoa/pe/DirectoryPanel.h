@@ -13,4 +13,5 @@ http://www.hardcoded.net/licenses/bsd_license
 {
 }
 - (IBAction)addiPhoto:(id)sender;
+- (IBAction)addAperture:(id)sender;
 @end

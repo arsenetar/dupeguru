@@ -24,10 +24,18 @@ http://www.hardcoded.net/licenses/bsd_license
     NSMenuItem *mi = [m insertItemWithTitle:TR(@"Add iPhoto Library") action:@selector(addiPhoto:)
         keyEquivalent:@"" atIndex:1];
     [mi setTarget:self];
+    mi = [m insertItemWithTitle:TR(@"Add Aperture Library") action:@selector(addAperture:)
+        keyEquivalent:@"" atIndex:2];
+    [mi setTarget:self];
 }
 
 - (IBAction)addiPhoto:(id)sender
 {
     [self addDirectory:@"iPhoto Library"];
+}
+
+- (IBAction)addAperture:(id)sender
+{
+    [self addDirectory:@"Aperture Library"];
 }
 @end
