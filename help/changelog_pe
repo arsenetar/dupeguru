@@ -1,3 +1,11 @@
+=== 2.6.0 (2012-06-06)
+
+* Added Aperture support. (#42)
+* Added a Deletion Options panel.
+* Greatly improved memory usage for big scans.
+* Added a keybinding for the filter field. (#182) [Mac]
+* Upgraded minimum requirements for Ubuntu to 12.04.
+
 === 2.5.0 (2012-03-31)
 
 * Improved results window UI. [Windows, Linux]
