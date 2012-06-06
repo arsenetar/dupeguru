@@ -351,7 +351,7 @@
 								</object>
 								<object class="NSMenuItem" id="894871136">
 									<reference key="NSMenu" ref="600111647"/>
-									<string key="NSTitle">Send Marked to Trash</string>
+									<string key="NSTitle">Send Marked to Trash...</string>
 									<string key="NSKeyEquiv">t</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>

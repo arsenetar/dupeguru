@@ -45,7 +45,7 @@ class ResultWindow(QMainWindow):
             ('actionActions', '', '', tr("Actions"), self.actionsTriggered),
             ('actionPowerMarker', 'Ctrl+1', '', tr("Show Dupes Only"), self.powerMarkerTriggered),
             ('actionDelta', 'Ctrl+2', '', tr("Show Delta Values"), self.deltaTriggered),
-            ('actionDeleteMarked', 'Ctrl+D', '', tr("Send Marked to Recycle Bin"), self.deleteTriggered),
+            ('actionDeleteMarked', 'Ctrl+D', '', tr("Send Marked to Recycle Bin..."), self.deleteTriggered),
             ('actionMoveMarked', 'Ctrl+M', '', tr("Move Marked to..."), self.moveTriggered),
             ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
             ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
