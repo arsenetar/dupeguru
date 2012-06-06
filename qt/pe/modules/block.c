@@ -35,7 +35,7 @@ getblock(PyObject *image, int width, int height)
     red = green = blue = 0;
     pixel_count = width * height;
     if (pixel_count) {
-        PyObject *sipptr, *pi;
+        PyObject *sipptr, *bits_capsule, *pi;
         char *s;
         int i;
         
@@ -44,11 +44,10 @@ getblock(PyObject *image, int width, int height)
         Py_DECREF(pi);
         
         sipptr = PyObject_CallMethod(image, "bits", NULL);
-        /* int(sipptr) returns the address of the pointer */
-        pi = PyObject_CallMethod(sipptr, "__int__", NULL);
+        bits_capsule = PyObject_CallMethod(sipptr, "ascapsule", NULL);
         Py_DECREF(sipptr);
-        s = (char *)PyLong_AsLong(pi);
-        Py_DECREF(pi);
+        s = (char *)PyCapsule_GetPointer(bits_capsule, NULL);
+        Py_DECREF(bits_capsule);
         /* Qt aligns all its lines on 32bit, which means that if the number of bytes per
          * line for image is not divisible by 4, there's going to be crap inserted in "s"
          * We have to take this into account when calculating offsets
