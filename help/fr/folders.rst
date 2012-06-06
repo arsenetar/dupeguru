@@ -21,3 +21,5 @@ Tout dossier ajouté à la liste est d'un type parmis ces trois:
 Le type par défaut pour un dossier est, bien entendu, **Normal**. Vous pouvez utiliser le type **Référence** pour les dossiers desquels vous ne voulez pas effacer de fichiers.
 
 Le type d'un dossier s'applique à ses sous-dossiers, excepté si un sous-dossier a un autre type explicitement défini.
+
+.. todo:: Add iPhoto/Aperture/iTunes libraries notes

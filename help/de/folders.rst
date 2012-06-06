@@ -19,3 +19,5 @@ Jeder Ordner kann in einem von 3 Zuständen sein:
 Der Standardzustand eines Ordners ist natürlich **Normal**. Sie können den **Referenz** Zustand für Ordner nutzen, in denen auf keinen Fall eine Datei gelöscht werden soll. 
 
 Wenn sie einen Zustand für ein Verzeichnis setzen, erben alle Unterordner automatisch diesen Zustand, es sei denn Sie ändern den Zustand der Unterordner explizit.
+
+.. todo:: Add iPhoto/Aperture/iTunes libraries notes

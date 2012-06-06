@@ -21,3 +21,33 @@ Every folder can be in one of these 3 states:
 The default state of a folder is, of course, **Normal**. You can use **Reference** state for a folder if you want to be sure that you won't delete any file from it.
 
 When you set the state of a directory, all subfolders of this folder automatically inherit this state unless you explicitly set a subfolder's state.
+
+.. only:: edition_pe
+
+    iPhoto and Aperture libraries
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+    dupeGuru PE supports iPhoto and Aperture, which means that it knows how to read these libraries
+    and how to communicate with iPhoto and Aperture to remove photos from them. To use this feature,
+    use the special "Add iPhoto Library" and "Add Aperture Library" buttons in the menu that pops
+    up when you click the "+" button. This will then add a special folder for those libraries.
+    
+    When duplicates are deleted from an iPhoto library, it's sent to iPhoto's trash.
+    
+    When duplicates are deleted from an Aperture library, it unfortunately can't send it directly
+    to trash, but it creates a special project called "dupeGuru Trash" in Aperture and send all
+    photos in there. You can then send this project to the trash manually.
+
+.. only:: edition_me
+
+    iTunes library
+    ^^^^^^^^^^^^^^
+    
+    dupeGuru ME supports iTunes, which means that it knows how to read its libraries and how to
+    communicate with iTunes to remove songs from it. To use this feature, use the special
+    "Add iTunes Library" button in the menu that pops up when you click the "+" button. This will
+    then add a special folder for those libraries.
+    
+    When duplicates are deleted from an iTunes library, it's sent to the system trash, like a
+    normal file, but it's also removed from iTunes, thus avoiding ending up with missing entries
+    (entries with the "!" logo next to them).
