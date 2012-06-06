@@ -53,8 +53,8 @@
 /* Class = "NSMenu"; title = "Actions"; ObjectID = "598"; */
 "598.title" = "Actions";
 
-/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "599"; */
-"599.title" = "Send Marked to Trash";
+/* Class = "NSMenuItem"; title = "Send Marked to Trash..."; ObjectID = "599"; */
+"599.title" = "Send Marked to Trash...";
 
 /* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "600"; */
 "600.title" = "Move Marked to...";
@@ -170,5 +170,11 @@
 /* Class = "NSMenuItem"; title = "Re-Prioritize Results"; ObjectID = "1276"; */
 "1276.title" = "Re-Prioritize Results";
 
+/* Class = "NSMenuItem"; title = "Quicklook"; ObjectID = "1280"; */
+"1280.title" = "Quick Look";
+
 /* Class = "NSMenuItem"; title = "Ignore List"; ObjectID = "1283"; */
 "1283.title" = "Ignore List";
+
+/* Class = "NSMenuItem"; title = "Filter Results..."; ObjectID = "1288"; */
+"1288.title" = "Filter Results...";

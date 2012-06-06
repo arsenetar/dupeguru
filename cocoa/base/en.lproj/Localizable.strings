@@ -16,10 +16,11 @@
 "Do you really want to remove all your cached picture analysis?" = "Do you really want to remove all your cached picture analysis?";
 
 
-"Add iTunes Directory" = "Add iTunes Directory";
+"Add iTunes Library" = "Add iTunes Library";
 "Remove Dead Tracks in iTunes" = "Remove Dead Tracks in iTunes";
 
 "Add iPhoto Library" = "Add iPhoto Library";
+"Add Aperture Library" = "Add Aperture Library";
 "Clear Picture Cache" = "Clear Picture Cache";
 
 "Yes" = "Yes";

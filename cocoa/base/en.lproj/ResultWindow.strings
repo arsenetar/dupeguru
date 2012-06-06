@@ -29,8 +29,8 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Directories"; ObjectID = "19"; */
 "19.paletteLabel" = "Directories";
 
-/* Class = "NSMenuItem"; title = "Send Marked to Trash"; ObjectID = "29"; */
-"29.title" = "Send Marked to Trash";
+/* Class = "NSMenuItem"; title = "Send Marked to Trash..."; ObjectID = "29"; */
+"29.title" = "Send Marked to Trash...";
 
 /* Class = "NSMenuItem"; title = "Move Marked to..."; ObjectID = "30"; */
 "30.title" = "Move Marked to...";
@@ -91,3 +91,9 @@
 
 /* Class = "NSMenuItem"; title = "Open Selected with Default Application"; ObjectID = "74"; */
 "74.title" = "Open Selected with Default Application";
+
+/* Class = "NSToolbarItem"; label = "Quick Look"; ObjectID = "86"; */
+"86.label" = "Quick Look";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Quick Look"; ObjectID = "86"; */
+"86.paletteLabel" = "Quick Look";
