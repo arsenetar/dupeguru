@@ -574,7 +574,7 @@
 								</object>
 								<object class="NSMenuItem" id="343354529">
 									<reference key="NSMenu" ref="472719764"/>
-									<string key="NSTitle">Quicklook</string>
+									<string key="NSTitle">Quick Look</string>
 									<string key="NSKeyEquiv">l</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
