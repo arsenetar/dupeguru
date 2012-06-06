@@ -5,6 +5,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from objp.util import dontwrap
 from cocoa.inter import PyGUIObject, GUIObjectView
 
 class DeletionOptionsView(GUIObjectView):
@@ -19,9 +20,11 @@ class PyDeletionOptions(PyGUIObject):
         self.model.direct = direct
     
     #--- model --> view
+    @dontwrap
     def update_msg(self, msg):
         self.callback.updateMsg_(msg)
     
+    @dontwrap
     def show(self):
         return self.callback.show()
     

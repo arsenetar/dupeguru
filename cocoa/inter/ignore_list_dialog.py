@@ -1,4 +1,4 @@
-from objp.util import pyref
+from objp.util import pyref, dontwrap
 from cocoa.inter import PyGUIObject, GUIObjectView
 
 class IgnoreListDialogView(GUIObjectView):
@@ -15,6 +15,7 @@ class PyIgnoreListDialog(PyGUIObject):
         self.model.clear()
     
     #--- model --> view
+    @dontwrap
     def show(self):
         self.callback.show()
     
