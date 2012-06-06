@@ -4,6 +4,7 @@
 * Added a Deletion Options panel.
 * Greatly improved memory usage for big scans.
 * Added a keybinding for the filter field. (#182) [Mac]
+* Fixed occasional hard crashes during scans. [Linux]
 * Upgraded minimum requirements for Ubuntu to 12.04.
 
 === 2.5.0 (2012-03-31)
