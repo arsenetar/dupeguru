@@ -16,6 +16,7 @@ from cocoa import as_fetch, proxy
 from hscommon import io
 from hscommon.trans import trget
 from hscommon.path import Path
+from hscommon.util import remove_invalid_xml
 
 from core import directories
 from core.app import JobType
@@ -78,7 +79,10 @@ def get_itunes_database_path():
 def get_itunes_songs(plistpath):
     if not io.exists(plistpath):
         return []
-    plist = plistlib.readPlist(str(plistpath))
+    s = io.open(plistpath, 'rt', encoding='utf-8').read()
+    # iTunes sometimes produces XML files with invalid characters in it.
+    s = remove_invalid_xml(s, replace_with='')
+    plist = plistlib.readPlistFromBytes(s.encode('utf-8'))
     result = []
     for song_data in plist['Tracks'].values():
         if song_data['Track Type'] != 'File':
