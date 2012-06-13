@@ -91,14 +91,6 @@
 		CE97060314C471F2007A28F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97060214C471F2007A28F6 /* main.m */; };
 		CEA14F431461ED63007F01A5 /* locale in Resources */ = {isa = PBXBuildFile; fileRef = CEA14F421461ED63007F01A5 /* locale */; };
 		CEA39FA1157679FB00F294DE /* DeletionOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA39F97157679FB00F294DE /* DeletionOptions.xib */; };
-		CEA39FA2157679FB00F294DE /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05330D12E5D3ED0029EF25 /* DetailsPanel.xib */; };
-		CEA39FA3157679FB00F294DE /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05330F12E5D3ED0029EF25 /* DirectoryPanel.xib */; };
-		CEA39FA4157679FB00F294DE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05331112E5D3ED0029EF25 /* MainMenu.xib */; };
-		CEA39FA5157679FB00F294DE /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05331312E5D3ED0029EF25 /* ProblemDialog.xib */; };
-		CEA39FA6157679FB00F294DE /* IgnoreListDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1195941510FFB20063C8AF /* IgnoreListDialog.xib */; };
-		CEA39FA7157679FB00F294DE /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05331512E5D3ED0029EF25 /* ResultWindow.xib */; };
-		CEA39FA8157679FB00F294DE /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05332112E5D4100029EF25 /* Preferences.xib */; };
-		CEA39FA9157679FB00F294DE /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE84C9BB1423AF200050A6AD /* PrioritizeDialog.xib */; };
 		CEA39FAD15767A2900F294DE /* PyDeletionOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA39FAC15767A2900F294DE /* PyDeletionOptions.m */; };
 		CEA39FB015767A3A00F294DE /* DeletionOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA39FAF15767A3A00F294DE /* DeletionOptions.m */; };
 		CEB14D29124DFC2800FA7481 /* ResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB14D28124DFC2800FA7481 /* ResultTable.m */; };
@@ -734,14 +726,6 @@
 				CE97060114C46F70007A28F6 /* dg_cocoa.py in Resources */,
 				CE1195961510FFB20063C8AF /* IgnoreListDialog.xib in Resources */,
 				CEA39FA1157679FB00F294DE /* DeletionOptions.xib in Resources */,
-				CEA39FA2157679FB00F294DE /* DetailsPanel.xib in Resources */,
-				CEA39FA3157679FB00F294DE /* DirectoryPanel.xib in Resources */,
-				CEA39FA4157679FB00F294DE /* MainMenu.xib in Resources */,
-				CEA39FA5157679FB00F294DE /* ProblemDialog.xib in Resources */,
-				CEA39FA6157679FB00F294DE /* IgnoreListDialog.xib in Resources */,
-				CEA39FA7157679FB00F294DE /* ResultWindow.xib in Resources */,
-				CEA39FA8157679FB00F294DE /* Preferences.xib in Resources */,
-				CEA39FA9157679FB00F294DE /* PrioritizeDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,8 +961,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA39F9A157679FB00F294DE /* en */,
-                CEA39F98157679FB00F294DE /* cs */,
-                CEA39F99157679FB00F294DE /* de */,
+				CEA39F98157679FB00F294DE /* cs */,
+				CEA39F99157679FB00F294DE /* de */,
 				CEA39F9B157679FB00F294DE /* fr */,
 				CEA39F9C157679FB00F294DE /* hy */,
 				CEA39F9D157679FB00F294DE /* it */,
