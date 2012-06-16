@@ -15,7 +15,7 @@ from argparse import ArgumentParser
 
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
-    build_debian_changelog, copy_qt_plugins, get_module_version)
+    build_debian_changelog, copy_qt_plugins, get_module_version, filereplace, copy)
 
 def parse_args():
     parser = ArgumentParser()
@@ -99,10 +99,17 @@ def package_debian(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
-    shutil.copytree(ed('debian_{0}'), op.join(destpath, 'debian'))
+    debdest = op.join(destpath, 'debian')
+    os.makedirs(debdest)
+    debopts = json.load(open(op.join('debian', ed('{}.json'))))
+    for fn in ['compat', 'copyright', 'dirs']:
+        copy(op.join('debian', fn), op.join(debdest, fn))
+    for fn in ['control', 'rules']:
+        filereplace(op.join('debian', fn), op.join(debdest, fn), **debopts)
+    filereplace(op.join('debian', 'dupeguru.desktop'), op.join(debdest, ed('dupeguru_{}.desktop')), **debopts)
     changelogpath = op.join('help', ed('changelog_{}'))
-    changelog_dest = op.join(destpath, 'debian', 'changelog')
-    project_name = ed('dupeguru-{0}')
+    changelog_dest = op.join(debdest, 'changelog')
+    project_name = debopts['pkgname']
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
     build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version)
     shutil.copytree(op.join('build', 'help'), op.join(srcpath, 'help'))

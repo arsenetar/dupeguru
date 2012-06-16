@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=dupeGuru Music Edition
-Comment=Find duplicate songs in your collection.
-Exec=dupeguru_me
-Icon=/usr/share/dupeguru_me/dgme_logo_128.png
-Terminal=false
-Type=Application
-Categories=Utility;

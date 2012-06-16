@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=dupeGuru Picture Edition
-Comment=Find duplicate pictures in your library.
-Exec=dupeguru_pe
-Icon=/usr/share/dupeguru_pe/dgpe_logo_128.png
-Terminal=false
-Type=Application
-Categories=Utility;

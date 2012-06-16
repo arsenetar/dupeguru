@@ -1,4 +1,4 @@
-Source: dupeguru-me
+Source: {pkgname}
 Section: devel
 Priority: extra
 Maintainer: Virgil Dupras <hsoft@hardcoded.net>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7)
 Standards-Version: 3.8.1
 Homepage: http://www.hardcoded.net
 
-Package: dupeguru-me
+Package: {pkgname}
 Architecture: all
 Depends: python3 (>=3.2), python3-pyqt4
-Description: dupeGuru Music Edition
+Description: {longname}

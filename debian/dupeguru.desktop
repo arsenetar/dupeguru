@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=dupeGuru
+Name={longname}
 Comment=Find duplicate files.
-Exec=dupeguru_se
-Icon=/usr/share/dupeguru_se/dgse_logo_128.png
+Exec={execname}
+Icon={iconpath}
 Terminal=false
 Type=Application
 Categories=Utility;
