@@ -14,31 +14,22 @@ import json
 from argparse import ArgumentParser
 
 from hscommon.plat import ISWINDOWS, ISLINUX
-from hscommon.build import (build_dmg, add_to_pythonpath, print_and_do, copy_packages,
-    build_debian_changelog, copy_qt_plugins, get_module_version, filereplace, copy)
+from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
+    copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
+    package_cocoa_app_in_dmg)
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument('--sign', dest='sign_identity',
-        help="Sign app under specified identity before packaging (OS X only)")
-    args = parser.parse_args()
-    return args
+    setup_package_argparser(parser)
+    return parser.parse_args()
 
-def package_cocoa(edition, sign_identity):
+def package_cocoa(edition, args):
     app_path = {
         'se': 'cocoa/se/dupeGuru.app',
         'me': 'cocoa/me/dupeGuru ME.app',
         'pe': 'cocoa/pe/dupeGuru PE.app',
     }[edition]
-    # Rather than signing our app in XCode during the build phase, we sign it during the package
-    # phase because running the app before packaging can modify it and we want to be sure to have
-    # a valid signature.
-    if sign_identity:
-        sign_identity = "Developer ID Application: {}".format(sign_identity)
-        print_and_do('codesign --force --sign "{}" "{}"'.format(sign_identity, app_path))
-    else:
-        print("WARNING: packaging an unsigned application")
-    build_dmg(app_path, '.')
+    package_cocoa_app_in_dmg(app_path, '.', args)
 
 def package_windows(edition, dev):
     if not ISWINDOWS:
@@ -127,7 +118,7 @@ def main():
     dev = conf['dev']
     print("Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if ui == 'cocoa':
-        package_cocoa(edition, args.sign_identity)
+        package_cocoa(edition, args)
     elif ui == 'qt':
         if ISWINDOWS:
             package_windows(edition, dev)
