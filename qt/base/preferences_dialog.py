@@ -17,7 +17,7 @@ from qtlib.preferences import LANGNAMES
 
 tr = trget('ui')
 
-SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk']
+SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR']
 
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app):

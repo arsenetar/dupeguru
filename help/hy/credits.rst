@@ -24,6 +24,8 @@
 
 | **Nickolas Pohilets, Ukrainian localization**
 
+| **Victor Figueiredo, Brazilian localization**
+
 | **Python, Ծրագրավորման լեզուն** (`Վեբ կայքը <http://www.python.org>`__)
 | Լավագույներից լավագույնը
 

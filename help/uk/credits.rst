@@ -24,6 +24,8 @@
 
 | **Nickolas Pohilets, Ukrainian localization**
 
+| **Victor Figueiredo, Brazilian localization**
+
 | **Python, Мова програмування** (`Веб-сайт <http://www.python.org>`__)
 | Кращі рекорди
 

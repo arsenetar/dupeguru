@@ -1,0 +1,169 @@
+
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+
+#: core/app.py:38
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr "Não há duplicadas marcadas. Nada foi feito."
+
+#: core/app.py:39
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr "Não há duplicadas selecionadas. Nada foi feito."
+
+#: core/app.py:96
+msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr "será possível apagar, mover ou copiar somente 10 duplicatas por vez"
+
+#: core/app.py:216
+msgid "No duplicates found."
+msgstr "Nenhuma duplicata encontrada"
+
+#: core/app.py:229
+msgid "All marked files were copied sucessfully."
+msgstr "Todos os arquivos marcados foram copiados com sucesso"
+
+#: core/app.py:230
+msgid "All marked files were moved sucessfully."
+msgstr "Todos os arquivos marcados foram relocados com sucesso"
+
+#: core/app.py:231
+msgid "All marked files were sucessfully sent to Trash."
+msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
+
+#: core/app.py:258
+msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
+msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 duplicatas por vez."
+
+#: core/app.py:279
+msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
+msgstr "Todos arquivos com %d de precisão serão ignorados em escaneamentos posteriores. Continuar?"
+
+#: core/app.py:339
+msgid "copy"
+msgstr "copiar"
+
+#: core/app.py:339
+msgid "move"
+msgstr "mover"
+
+#: core/app.py:340
+msgid "Select a directory to {} marked files to"
+msgstr "Selecione uma pasta para {} os arquivos marcados"
+
+#: core/app.py:392
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "Você não possui nenhum comando personalizado. Crie um nas preferências."
+
+#: core/app.py:479 core/app.py:490
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "Você removerá %d arquivos dos resultados. Continuar?"
+
+#: core/app.py:526
+msgid "Collecting files to scan"
+msgstr "Juntando arquivos para escanear"
+
+#: core/app.py:537
+msgid "The selected directories contain no scannable file."
+msgstr "As pastas selecionadas não contém arquivos escaneáveis."
+
+#: core/app.py:576
+msgid "%s (%d discarded)"
+msgstr "%s (%d rejeitado)"
+
+#: core/engine.py:178 core/engine.py:215
+msgid "0 matches found"
+msgstr "0 coincidentes encontrados"
+
+#: core/engine.py:196 core/engine.py:223
+msgid "%d matches found"
+msgstr "%d coincidentes encontrados"
+
+#: core/engine.py:208 core/scanner.py:80
+msgid "Read size of %d/%d files"
+msgstr "Tamanho de leitura de %d/%d arquivos"
+
+#: core/engine.py:355
+msgid "Grouped %d/%d matches"
+msgstr "%d/%d coincidentes agrupados"
+
+#: core/gui/deletion_options.py:20
+msgid "You are sending {} file(s) to the Trash."
+msgstr "Você está movendo {} arquivo(s) para o Lixo"
+
+#: core/gui/ignore_list_dialog.py:24
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "Deseja remover todos os %d itens da lista Ignorar?"
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr "Nenhum"
+
+#: core/prioritize.py:94
+msgid "Ends with number"
+msgstr "Termina com número"
+
+#: core/prioritize.py:96
+msgid "Doesn't end with number"
+msgstr "Não termina com número"
+
+#: core/prioritize.py:117
+msgid "Highest"
+msgstr "Maior"
+
+#: core/prioritize.py:117
+msgid "Lowest"
+msgstr "Menor"
+
+#: core/prioritize.py:144
+msgid "Newest"
+msgstr "Mais recente"
+
+#: core/prioritize.py:144
+msgid "Oldest"
+msgstr "Mais velho"
+
+#: core/results.py:113
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s / %s) duplicatas marcadas"
+
+#: core/results.py:120
+msgid " filter: %s"
+msgstr " filtro: %s"
+
+#: core/scanner.py:100
+msgid "Read metadata of %d/%d files"
+msgstr "Metadados lidos em %d/%d arquivos"
+
+#: core/scanner.py:131
+msgid "Removing false matches"
+msgstr "Removendo coincidentes falsos"
+
+#: core/scanner.py:149
+msgid "Processed %d/%d matches against the ignore list"
+msgstr "%d/%d coincidentes processados em oposição a lista Ignorar"
+
+#: core/scanner.py:171
+msgid "Doing group prioritization"
+msgstr "Executando priorização de grupo"
+
+#: core_pe/matchblock.py:60
+msgid "Analyzed %d/%d pictures"
+msgstr "%d/%d fotos analizadas"
+
+#: core_pe/matchblock.py:152
+msgid "Performed %d/%d chunk matches"
+msgstr "%d/%d coincidentes em bloco executados"
+
+#: core_pe/matchblock.py:157
+msgid "Preparing for matching"
+msgstr "Preparando para coincidentes"
+
+#: core_pe/matchblock.py:192
+msgid "Verified %d/%d matches"
+msgstr "%d/%d coincidentes verificados"
+
+#: core_pe/matchexif.py:21
+msgid "Read EXIF of %d/%d pictures"
+msgstr "EXIF de %d/%d fotos lidos"
+

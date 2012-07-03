@@ -24,6 +24,8 @@
 
 | **Nickolas Pohilets, Ukrainian localization**
 
+| **Victor Figueiredo, Brazilian localization**
+
 | **Python, Язык программирования** (`Веб сайт  <http://www.python.org>`__)
 | Самая лучшая 
 

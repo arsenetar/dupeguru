@@ -22,6 +22,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Nickolas Pohilets, Ukrainian localization**
 
+| **Victor Figueiredo, Brazilian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 

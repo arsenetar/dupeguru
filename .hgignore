@@ -18,12 +18,6 @@ cocoa/autogen
 cocoa/*/Info.plist
 cocoa/*/build
 cocoa/*/*.app
-cocoa/*/dg_cocoa.plugin
-cocoa/*/fr.lproj/*.xib
-cocoa/*/de.lproj/*.xib
-cocoa/*/zh_CN.lproj/*.xib
-cocoa/*/cs.lproj/*.xib
-cocoa/*/it.lproj/*.xib
 cs.lproj
 de.lproj
 fr.lproj
@@ -32,6 +26,7 @@ hy.lproj
 ru.lproj
 uk.lproj
 zh_CN.lproj
+pt_BR.lproj
 qt/base/*_rc.py
 help/*/conf.py
 help/*/changelog.rst

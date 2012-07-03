@@ -24,11 +24,10 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Nickolas Pohilets, Ukrainian localization**
 
+| **Victor Figueiredo, Brazilian localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
-
-| **PyObjC, Python-to-Cocoa bridge** (`Website <http://pyobjc.sourceforge.net>`__)
-| Used for the Mac OS X version
 
 | **PyQt, Python-to-Qt bridge** (`Website <http://www.riverbankcomputing.co.uk>`__)
 | Used for the Windows version
