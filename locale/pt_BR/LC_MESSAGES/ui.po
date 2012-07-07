@@ -128,7 +128,7 @@ msgstr "Opções de Apagamento"
 #: qt/base/deletion_options.py:34
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
 msgid "Hardlink deleted files"
-msgstr "Arquivos apagados de Hardlink"
+msgstr "Criar hardlink de arquivos apagados"
 
 #: qt/base/deletion_options.py:37
 msgid " (Mac OS X or Linux only)"
@@ -146,7 +146,7 @@ msgstr ""
 #: qt/base/deletion_options.py:44
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
 msgid "Directly delete files"
-msgstr "Apagar arquivos diretamente"
+msgstr "Apagar arquivos imediatamente"
 
 #: qt/base/deletion_options.py:46
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
@@ -154,8 +154,8 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Apagar arquivos diretamente ao invés de movê-los para o Lixo. Essa opção é "
-"normalmente usada como alternativa para quando o método normal falhar."
+"Apagar arquivos imediatamente ao invés de movê-los para o Lixo. Essa opção é "
+"usada como alternativa para quando o método normal falhar."
 
 #: qt/base/deletion_options.py:52
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
@@ -166,7 +166,7 @@ msgstr "Continuar"
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
 #: cocoa/base/en.lproj/PrioritizeDialog.strings:0
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Cancelar"
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/DetailsPanel.strings:0
 #: cocoa/pe/en.lproj/DetailsPanel.strings:0
@@ -187,7 +187,7 @@ msgstr "Referência"
 
 #: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Load Results..."
-msgstr "Carregar Resultados…"
+msgstr "Carregar…"
 
 #: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Results Window"
@@ -244,7 +244,7 @@ msgstr "Selecione a pasta a ser adicionada à lista de escaneamento"
 
 #: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr "Selecione um arquivo de resultados para carregar"
+msgstr "Selecione um resultado para carregar"
 
 #: qt/base/directories_dialog.py:206
 msgid "All Files (*.*)"
@@ -300,25 +300,25 @@ msgstr "Fechar"
 
 #: qt/base/preferences_dialog.py:37
 msgid "Scan Type:"
-msgstr "Tipo de Escaneamento:"
+msgstr "Tipo de Scan:"
 
 #: qt/base/preferences_dialog.py:50
 msgid "Filter Hardness:"
-msgstr "Ímpeto do Filtro"
+msgstr "Pressão do Filtro"
 
 #: qt/base/preferences_dialog.py:76
 msgid "More Results"
-msgstr "Mais Resultados"
+msgstr "+ Resultados"
 
 #: qt/base/preferences_dialog.py:81
 msgid "Fewer Results"
-msgstr "Menos Resultados"
+msgstr "- Resultados"
 
 #: qt/base/preferences_dialog.py:88 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Font size:"
-msgstr "Tamanho da fonte:"
+msgstr "Tam. fonte:"
 
 #: qt/base/preferences_dialog.py:92
 msgid "Language:"
@@ -334,7 +334,7 @@ msgstr "Copiar e Mover:"
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Right in destination"
-msgstr "Bem no destino"
+msgstr "Exatamente no destino"
 
 #: qt/base/preferences_dialog.py:102 cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
@@ -369,8 +369,8 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Adicione um critério à caixa da direita e clique OK para enviar as duplicatas"
-" que melhor correspondam a este critério à posição de referência em seus respectivos grupos. "
+"Adicione critérios à caixa da direita e clique OK para elevar as duplicatas"
+" à posição de referência em seus respectivos grupos, baseado nos critérios escolhidos. "
 "Leia a Ajuda para maiores informações."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/ProblemDialog.strings:0
@@ -511,7 +511,7 @@ msgstr "{} Resultados"
 
 #: qt/base/result_window.py:169 cocoa/base/en.lproj/ResultWindow.strings:0
 msgid "Dupes Only"
-msgstr "Somente Duplicatas"
+msgstr "Duplicatas"
 
 #: qt/base/result_window.py:170
 msgid "Delta Values"
@@ -580,7 +580,7 @@ msgstr "Ano"
 #: cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 msgid "Word weighting"
-msgstr "Importância de palavra"
+msgstr "Importância da palavra"
 
 #: qt/me/preferences_dialog.py:77 qt/se/preferences_dialog.py:51
 #: cocoa/se/en.lproj/Preferences.strings:0
@@ -613,7 +613,7 @@ msgstr "Remover pastas vazias ao apagar ou mover"
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Ignorar duplicatas de hardlink ao mesmo arquivo"
+msgstr "Ignorar duplicatas de hardlink a um mesmo arquivo"
 
 #: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
 #: qt/se/preferences_dialog.py:78 cocoa/se/en.lproj/Preferences.strings:0
@@ -738,7 +738,7 @@ msgstr "Ocultar Outros"
 
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Show All"
-msgstr "Mostrar Todos"
+msgstr "Mostrar Tudo"
 
 #: cocoa/base/en.lproj/MainMenu.strings:0
 msgid "Zoom"
@@ -875,13 +875,13 @@ msgstr "Menos resultados"
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Filter hardness:"
-msgstr "Ímpeto do filtro:"
+msgstr "Pressão do filtro:"
 
 #: cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Scan type:"
-msgstr "Tipo de escaneamento:"
+msgstr "Tipo de scan:"
 
 #: cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
@@ -912,7 +912,7 @@ msgstr "Avançado"
 
 #: cocoa/se/en.lproj/Preferences.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Comando personalizado (argumentos: %d para duplicata, %r para referência):"
+msgstr "Comando personalizado (argumentos: %d (dup), %r (ref)):"
 
 #: cocoa/me/en.lproj/Preferences.strings:0
 msgid "dupeGuru ME Preferences"

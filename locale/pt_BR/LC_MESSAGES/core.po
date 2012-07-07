@@ -5,15 +5,15 @@ msgstr ""
 
 #: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr "Não há duplicadas marcadas. Nada foi feito."
+msgstr "Não há duplicatas marcadas. Nada foi feito."
 
 #: core/app.py:39
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr "Não há duplicadas selecionadas. Nada foi feito."
+msgstr "Não há duplicatas selecionadas. Nada foi feito."
 
 #: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr "será possível apagar, mover ou copiar somente 10 duplicatas por vez"
+msgstr "poderá apagar, mover ou copiar somente 10 duplicatas por vez"
 
 #: core/app.py:216
 msgid "No duplicates found."
@@ -37,7 +37,7 @@ msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 
 
 #: core/app.py:279
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
-msgstr "Todos arquivos com %d de precisão serão ignorados em escaneamentos posteriores. Continuar?"
+msgstr "%d duplicatas selecionadas serão ignoradas em escaneamentos posteriores. Continuar?"
 
 #: core/app.py:339
 msgid "copy"
@@ -57,7 +57,7 @@ msgstr "Você não possui nenhum comando personalizado. Crie um nas preferência
 
 #: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
-msgstr "Você removerá %d arquivos dos resultados. Continuar?"
+msgstr "Você removerá %d arquivo(s) dos resultados. Continuar?"
 
 #: core/app.py:526
 msgid "Collecting files to scan"
@@ -121,7 +121,7 @@ msgstr "Mais recente"
 
 #: core/prioritize.py:144
 msgid "Oldest"
-msgstr "Mais velho"
+msgstr "Mais antigo"
 
 #: core/results.py:113
 msgid "%d / %d (%s / %s) duplicates marked."
