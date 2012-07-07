@@ -1,3 +1,9 @@
+=== 6.4.2 (2012-07-07)
+
+* Fixed iTunes integration which was broken since iTunes 10.6.3. [Mac]
+* Fixed a crash caused by invalid XML in iTunes libraries. [Mac]
+* Added Brazilian localization by Victor Figueiredo.
+
 === 6.4.1 (2012-06-04)
 
 * Fixed bug introduced in 6.4.0 preventing deletions from working. [Mac]
