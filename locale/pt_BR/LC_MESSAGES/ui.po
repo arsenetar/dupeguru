@@ -223,7 +223,7 @@ msgstr "Selecione as pastas a serem escaneadas e pressione \"Escanear\"."
 #: qt/base/directories_dialog.py:132
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
 msgid "Load Results"
-msgstr "Carregar Resultados"
+msgstr "Carregar"
 
 #: qt/base/directories_dialog.py:135
 #: cocoa/base/en.lproj/DirectoryPanel.strings:0
@@ -863,13 +863,13 @@ msgstr "Preferências do dupeGuru"
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "More results"
-msgstr "Mais resultados"
+msgstr "+ resultados"
 
 #: cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Fewer results"
-msgstr "Menos resultados"
+msgstr "- resultados"
 
 #: cocoa/se/en.lproj/Preferences.strings:0
 #: cocoa/me/en.lproj/Preferences.strings:0
