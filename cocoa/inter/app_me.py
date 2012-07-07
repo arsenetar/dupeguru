@@ -7,10 +7,11 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
-from appscript import app, its, k, CommandError, ApplicationNotFoundError
 import plistlib
 import time
 import os.path as op
+from appscript import app, its, k, CommandError, ApplicationNotFoundError
+from . import tunes
 
 from cocoa import as_fetch, proxy
 from hscommon import io
@@ -55,7 +56,7 @@ class ITunesSong(fs.MusicFile):
     
     def remove_from_library(self):
         try:
-            a = app(ITUNES)
+            a = app(ITUNES, terms=tunes)
             library = get_itunes_library(a)
             if library is None:
                 return
@@ -162,7 +163,7 @@ class DupeGuruME(DupeGuruBase):
         if any(isinstance(dupe, ITunesSong) for dupe in marked):
             j.add_progress(0, desc=tr("Talking to iTunes. Don't touch it!"))
             try:
-                a = app(ITUNES)
+                a = app(ITUNES, terms=tunes)
                 a.activate(timeout=0)
             except (CommandError, RuntimeError, ApplicationNotFoundError):
                 pass
@@ -212,7 +213,7 @@ class DupeGuruME(DupeGuruBase):
     def start_scanning(self):
         if self.directories.has_itunes_path():
             try:
-                app(ITUNES)
+                app(ITUNES, terms=tunes)
             except ApplicationNotFoundError:
                 self.view.show_message(tr("The iTunes application couldn't be found."))
                 return
@@ -220,7 +221,7 @@ class DupeGuruME(DupeGuruBase):
     
     def remove_dead_tracks(self):
         def do(j):
-            a = app(ITUNES)
+            a = app(ITUNES, terms=tunes)
             a.activate(timeout=0)
             for index, track in enumerate(j.iter_with_progress(self.dead_tracks)):
                 if index % 100 == 0:
@@ -234,7 +235,7 @@ class DupeGuruME(DupeGuruBase):
     
     def scan_dead_tracks(self):
         def do(j):
-            a = app(ITUNES)
+            a = app(ITUNES, terms=tunes)
             a.activate(timeout=0)
             library = get_itunes_library(a)
             if library is None:
