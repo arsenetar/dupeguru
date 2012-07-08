@@ -446,7 +446,7 @@ def test_tie_breaker_same_name_plus_digit(fake_fileexists):
     assert group.ref is o5
 
 def test_partial_group_match(fake_fileexists):
-    # Count the number od discarded matches (when a file doesn't match all other dupes of the 
+    # Count the number of discarded matches (when a file doesn't match all other dupes of the 
     # group) in Scanner.discarded_file_count
     s = Scanner()
     o1, o2, o3 = no('a b'), no('a'), no('b')
@@ -454,8 +454,12 @@ def test_partial_group_match(fake_fileexists):
     [group] = s.get_dupe_groups([o1, o2, o3])
     eq_(len(group), 2)
     assert o1 in group
-    assert o2 in group
-    assert o3 not in group
+    # The file that will actually be counted as a dupe is undefined. The only thing we want to test
+    # is that we don't have both
+    if o2 in group:
+        assert o3 not in group
+    else:
+        assert o3 in group
     eq_(s.discarded_file_count, 1)
 
 def test_dont_group_files_that_dont_exist(tmpdir):
