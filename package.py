@@ -21,6 +21,8 @@ from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, buil
 def parse_args():
     parser = ArgumentParser()
     setup_package_argparser(parser)
+    parser.add_argument('--source', action='store_true', dest='source_pkg',
+        help="Build only a source debian package (Linux only).")
     return parser.parse_args()
 
 def package_cocoa(edition, args):
@@ -76,7 +78,7 @@ def package_windows(edition, dev):
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
-def package_debian(edition):
+def package_debian(edition, source_pkg):
     app_version = get_module_version('core_{}'.format(edition))
     ed = lambda s: s.format(edition)
     destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, app_version))
@@ -113,7 +115,10 @@ def package_debian(edition):
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
     compileall.compile_dir(srcpath)
     os.chdir(destpath)
-    os.system("dpkg-buildpackage")
+    cmd = "dpkg-buildpackage"
+    if source_pkg:
+        cmd += " -S"
+    os.system(cmd)
 
 def main():
     args = parse_args()
@@ -128,7 +133,7 @@ def main():
         if ISWINDOWS:
             package_windows(edition, dev)
         elif ISLINUX:
-            package_debian(edition)
+            package_debian(edition, source_pkg=args.source_pkg)
         else:
             print("Qt packaging only works under Windows or Linux.")
 
