@@ -16,7 +16,7 @@ from argparse import ArgumentParser
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
     copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
-    package_cocoa_app_in_dmg)
+    package_cocoa_app_in_dmg, copy_all)
 
 def parse_args():
     parser = ArgumentParser()
@@ -90,6 +90,11 @@ def package_debian(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
+    if edition == 'pe':
+        os.mkdir(op.join(destpath, 'modules'))
+        copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
+        copy(op.join('qt', 'pe', 'modules', 'block.c'), op.join(destpath, 'modules', 'block_qt.c'))
+        copy(op.join('debian', 'build_pe_modules.py'), op.join(destpath, 'build_pe_modules.py'))
     debdest = op.join(destpath, 'debian')
     os.makedirs(debdest)
     debopts = json.load(open(op.join('debian', ed('{}.json'))))

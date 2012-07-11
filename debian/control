@@ -2,7 +2,7 @@ Source: {pkgname}
 Section: devel
 Priority: extra
 Maintainer: Virgil Dupras <hsoft@hardcoded.net>
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7), python3-dev
 Standards-Version: 3.8.1
 Homepage: http://www.hardcoded.net
 
