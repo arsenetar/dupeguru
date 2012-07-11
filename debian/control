@@ -7,6 +7,6 @@ Standards-Version: 3.8.1
 Homepage: http://www.hardcoded.net
 
 Package: {pkgname}
-Architecture: all
+Architecture: {arch}
 Depends: python3 (>=3.2), python3-pyqt4
 Description: {longname}
