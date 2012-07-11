@@ -98,10 +98,10 @@ def package_debian(edition):
     debdest = op.join(destpath, 'debian')
     os.makedirs(debdest)
     debopts = json.load(open(op.join('debian', ed('{}.json'))))
-    for fn in ['compat', 'copyright', 'dirs']:
+    for fn in ['compat', 'copyright', 'dirs', 'rules']:
         copy(op.join('debian', fn), op.join(debdest, fn))
-    for fn in ['control', 'rules']:
-        filereplace(op.join('debian', fn), op.join(debdest, fn), **debopts)
+    filereplace(op.join('debian', 'control'), op.join(debdest, 'control'), **debopts)
+    filereplace(op.join('debian', 'Makefile'), op.join(destpath, 'Makefile'), **debopts)
     filereplace(op.join('debian', 'dupeguru.desktop'), op.join(debdest, ed('dupeguru_{}.desktop')), **debopts)
     changelogpath = op.join('help', ed('changelog_{}'))
     changelog_dest = op.join(debdest, 'changelog')
