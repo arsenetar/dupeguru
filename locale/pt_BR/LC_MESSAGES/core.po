@@ -37,7 +37,7 @@ msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 
 
 #: core/app.py:279
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
-msgstr "%d duplicatas selecionadas serão ignoradas em escaneamentos posteriores. Continuar?"
+msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
 #: core/app.py:339
 msgid "copy"
@@ -57,7 +57,7 @@ msgstr "Você não possui nenhum comando personalizado. Crie um nas preferência
 
 #: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
-msgstr "Você removerá %d arquivo(s) dos resultados. Continuar?"
+msgstr "Remover %d arquivo(s) dos resultados?"
 
 #: core/app.py:526
 msgid "Collecting files to scan"

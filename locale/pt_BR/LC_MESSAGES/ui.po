@@ -140,7 +140,7 @@ msgid ""
 "After having deleted a duplicate, place a hardlink targeting the reference "
 "file to replace the deleted file."
 msgstr ""
-"Após apagar uma duplicata, criar um hardlink direcionado ao arquivo "
+"Após apagar uma duplicata, cria um hardlink direcionado ao arquivo "
 "original para substituir o arquivo apagado."
 
 #: qt/base/deletion_options.py:44
@@ -154,8 +154,8 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Apagar arquivos imediatamente ao invés de movê-los para o Lixo. Essa opção é "
-"usada como alternativa para quando o método normal falhar."
+"Apaga os arquivos imediatamente ao invés de movê-los para o Lixo. Essa "
+"opção é usada como alternativa para quando o método normal falha."
 
 #: qt/base/deletion_options.py:52
 #: cocoa/base/en.lproj/DeletionOptions.strings:0
@@ -240,7 +240,7 @@ msgstr "Você possui resultados não salvos, deseja encerrar assim mesmo?"
 
 #: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr "Selecione a pasta a ser adicionada à lista de escaneamento"
+msgstr "Selecione uma pasta para escanear"
 
 #: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
@@ -351,7 +351,7 @@ msgstr "Recriar caminho absoluto"
 #: qt/base/preferences_dialog.py:106 cocoa/me/en.lproj/Preferences.strings:0
 #: cocoa/pe/en.lproj/Preferences.strings:0
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "Comando Personalizado (argumentos: %d para duplicata, %r para referência):"
+msgstr "Comando personalizado (argumentos: %d (dup), %r (ref)):"
 
 #: qt/base/preferences_dialog.py:184
 msgid "dupeGuru has to restart for language changes to take effect."
@@ -519,7 +519,7 @@ msgstr "Valores Delta"
 
 #: qt/base/result_window.py:292 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr "Selecione um arquivo para salvar seus resultados"
+msgstr "Selecione onde salvar seus resultados"
 
 #: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
 #: cocoa/se/en.lproj/Preferences.strings:0
@@ -662,7 +662,7 @@ msgstr "Detalhes do Arquivo Selecionado"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr "Criar Nova Pasta…"
+msgstr "Adicionar Pasta…"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
@@ -690,7 +690,7 @@ msgstr "Adicionar Biblioteca do iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
-msgstr "Remover Faixas sem Referência no iTunes"
+msgstr "Remover Faixas sem Referência do iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
