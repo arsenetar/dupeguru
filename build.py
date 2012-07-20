@@ -33,6 +33,8 @@ def parse_args():
         help="Build only localization")
     parser.add_option('--cocoamod', action='store_true', dest='cocoamod',
         help="Build only Cocoa modules")
+    parser.add_option('--xibless', action='store_true', dest='xibless',
+        help="Build only xibless UIs")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
         help="Generate .pot files from source code.")
     parser.add_option('--mergepot', action='store_true', dest='mergepot',
@@ -40,7 +42,19 @@ def parse_args():
     (options, args) = parser.parse_args()
     return options
 
+def build_xibless():
+    import xibless
+    if not op.exists('cocoalib/autogen'):
+        os.mkdir('cocoalib/autogen')
+    xibless.generate('cocoalib/ui/progress.py', 'cocoalib/autogen/ProgressController_UI')
+    xibless.generate('cocoalib/ui/about.py', 'cocoalib/autogen/HSAboutBox_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoalib/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoalib/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/enter_code.py', 'cocoalib/autogen/HSEnterCode_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/error_report.py', 'cocoalib/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
+
 def build_cocoa(edition, dev):
+    build_xibless()
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
@@ -130,8 +144,7 @@ def build_localizations(ui, edition):
                 if edition_folder == 'base':
                     loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-            loc.po2allxibstrings(pofile, op.join('cocoalib', 'en.lproj'), op.join('cocoalib', lang + '.lproj'))
-        build_all_cocoa_locs('cocoalib')
+            loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join('cocoalib', lang + '.lproj', 'cocoalib.strings'))
         build_all_cocoa_locs(op.join('cocoa', 'base'))
         build_all_cocoa_locs(op.join('cocoa', edition))
     elif ui == 'qt':
@@ -186,9 +199,10 @@ def build_cocoa_proxy_module():
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
-        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m', 'cocoalib/HSErrorReportWindow.m'],
+        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m',
+            'cocoalib/HSErrorReportWindow.m', 'cocoalib/autogen/HSErrorReportWindow_UI.m'],
         ['AppKit', 'CoreServices'],
-        ['cocoalib'])
+        ['cocoalib', 'cocoalib/autogen'])
 
 def build_cocoa_bridging_interfaces(edition):
     print("Building Cocoa Bridging Interfaces")
@@ -283,6 +297,8 @@ def main():
     elif options.cocoamod:
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
+    elif options.xibless:
+        build_xibless()
     else:
         build_normal(edition, ui, dev)
 
