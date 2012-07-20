@@ -105,6 +105,7 @@
 		CED3BC2A15767B200028F3C9 /* DetailsPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A312E5DA4D0029EF25 /* DetailsPanel.xib */; };
 		CED3BC2B15767B200028F3C9 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0533A512E5DA4D0029EF25 /* Preferences.xib */; };
 		CED3BC2C15767B200028F3C9 /* PrioritizeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7D24A71423B123002E2297 /* PrioritizeDialog.xib */; };
+		CED3EA5015B9D1DF00557437 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0F3C1054EC62008D9390 /* dsa_pub.pem */; };
 		CEE6D562149113570087CDFC /* HSColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE6D561149113570087CDFC /* HSColumns.m */; };
 		CEE8D3E2157576FD00E1A1B8 /* HSPyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE8D3E1157576FD00E1A1B8 /* HSPyUtil.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -357,6 +358,7 @@
 		CED3BC2115767B200028F3C9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
 		CED3BC2215767B200028F3C9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
 		CED3BC2315767B200028F3C9 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
+		CED3EA4F15B9D1DF00557437 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = ../base/pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE6D5461491130D0087CDFC /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CEE6D5481491130D0087CDFC /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CEE6D5491491130D0087CDFC /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				CE09AF5915A2852600BD431C /* ResultWindow.xib in Resources */,
 				CE09AF5A15A2852600BD431C /* DetailsPanel.xib in Resources */,
 				CE09AF5B15A2852600BD431C /* Preferences.xib in Resources */,
+				CED3EA5015B9D1DF00557437 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +971,7 @@
 				CEE6D557149113250087CDFC /* hy */,
 				CE905DE814C6388E00C0ECEF /* uk */,
 				CE03DD7614FBD34600E998AC /* ru */,
+				CED3EA4F15B9D1DF00557437 /* pt_BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;

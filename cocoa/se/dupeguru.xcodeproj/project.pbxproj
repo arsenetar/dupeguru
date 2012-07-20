@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		CE066CEF15B9D15B007084A6 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = CE6E0DFD1054E9EF008D9390 /* dsa_pub.pem */; };
 		CE073F6309CAE1A3005C1D2F /* help in Resources */ = {isa = PBXBuildFile; fileRef = CE073F5409CAE1A3005C1D2F /* help */; };
 		CE18004D14BDD837001B6329 /* Python in Frameworks */ = {isa = PBXBuildFile; fileRef = CE18004C14BDD837001B6329 /* Python */; };
 		CE18004F14BDD854001B6329 /* Python in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE18004C14BDD837001B6329 /* Python */; };
@@ -152,6 +153,7 @@
 		CE0564B714169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE0564B814169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE0564BF14169DDC00D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
+		CE066CEE15B9D15B007084A6 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = ../base/pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE073F5409CAE1A3005C1D2F /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = "<group>"; };
 		CE112F5F145EF28D009C9E3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/about.xib; sourceTree = "<group>"; };
 		CE112F60145EF28D009C9E3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../cs.lproj/ErrorReportWindow.xib; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				CE5A5CAE15A283C200C4E461 /* Preferences.xib in Resources */,
 				CE5A5CAF15A283C200C4E461 /* PrioritizeDialog.xib in Resources */,
 				CE5A5CB115A283D700C4E461 /* DetailsPanel.xib in Resources */,
+				CE066CEF15B9D15B007084A6 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1019,7 @@
 				CE00BBCE14910C8E006A717C /* hy */,
 				CED638EC14B38D0900B88D00 /* ru */,
 				CEECCD0D14C636F100A2F3A0 /* uk */,
+				CE066CEE15B9D15B007084A6 /* pt_BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
