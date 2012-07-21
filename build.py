@@ -42,7 +42,7 @@ def parse_args():
     (options, args) = parser.parse_args()
     return options
 
-def build_xibless():
+def build_xibless(edition):
     import xibless
     if not op.exists('cocoalib/autogen'):
         os.mkdir('cocoalib/autogen')
@@ -54,10 +54,13 @@ def build_xibless():
     xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoalib/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/enter_code.py', 'cocoalib/autogen/HSEnterCode_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/error_report.py', 'cocoalib/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
-    xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+    if edition == 'pe':
+        xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+    else:
+        xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
-    build_xibless()
+    build_xibless(edition)
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
@@ -301,7 +304,7 @@ def main():
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
     elif options.xibless:
-        build_xibless()
+        build_xibless(edition)
     else:
         build_normal(edition, ui, dev)
 

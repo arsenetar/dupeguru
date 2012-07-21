@@ -27,8 +27,8 @@ col.autoResizable = True
 col = table.addColumn('2', "Reference", 172)
 col.autoResizable = True
 
-table.x = 0
-table.y = 0
-table.width = result.width
-table.height = result.height
+result.ignoreMargin = True
+table.packToCorner(Pack.UpperLeft)
+table.fill(Pack.Right)
+table.fill(Pack.Below)
 table.setAnchor(Pack.UpperLeft, growX=True, growY=True)

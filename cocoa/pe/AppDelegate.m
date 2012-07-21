@@ -11,7 +11,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 #import "ValueTransformers.h"
 #import "Consts.h"
-#import "DetailsPanel.h"
+#import "DetailsPanelPE.h"
 #import "DirectoryPanel.h"
 #import "ResultWindow.h"
 

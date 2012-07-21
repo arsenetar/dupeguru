@@ -10,10 +10,16 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "NSNotificationAdditions.h"
 #import "NSImageAdditions.h"
 #import "PyDupeGuru.h"
-#import "DetailsPanel.h"
+#import "DetailsPanelPE.h"
 #import "Consts.h"
 
 @implementation DetailsPanelPE
+
+@synthesize dupeImage;
+@synthesize dupeProgressIndicator;
+@synthesize refImage;
+@synthesize refProgressIndicator;
+
 - (id)initWithApp:(PyDupeGuru *)aApp
 {
     self = [super initWithPyRef:[aApp detailsPanel]];
