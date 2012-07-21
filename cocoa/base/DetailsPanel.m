@@ -7,13 +7,17 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DetailsPanel.h"
+#import "DetailsPanel_UI.h"
 #import "HSPyUtil.h"
 
 @implementation DetailsPanel
+
+@synthesize detailsTable;
+
 - (id)initWithPyRef:(PyObject *)aPyRef
 {
-    self = [super initWithWindowNibName:@"DetailsPanel"];
-    [self window]; //So the detailsTable is initialized.
+    self = [super initWithWindow:nil];
+    [self setWindow:createDetailsPanel_UI(self)];
     model = [[PyDetailsPanel alloc] initWithModel:aPyRef];
     [model bindCallback:createCallback(@"DetailsPanelView", self)];
     return self;

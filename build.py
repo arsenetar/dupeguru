@@ -46,12 +46,15 @@ def build_xibless():
     import xibless
     if not op.exists('cocoalib/autogen'):
         os.mkdir('cocoalib/autogen')
+    if not op.exists('cocoa/autogen'):
+        os.mkdir('cocoa/autogen')
     xibless.generate('cocoalib/ui/progress.py', 'cocoalib/autogen/ProgressController_UI')
     xibless.generate('cocoalib/ui/about.py', 'cocoalib/autogen/HSAboutBox_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoalib/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoalib/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/enter_code.py', 'cocoalib/autogen/HSEnterCode_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/error_report.py', 'cocoalib/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
+    xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
     build_xibless()

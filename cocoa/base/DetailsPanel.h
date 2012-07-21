@@ -10,12 +10,15 @@ http://www.hardcoded.net/licenses/bsd_license
 #import <Python.h>
 #import "PyDetailsPanel.h"
 
-@interface DetailsPanel : NSWindowController
+@interface DetailsPanel : NSWindowController <NSTableViewDataSource>
 {
-    IBOutlet NSTableView *detailsTable;
+    NSTableView *detailsTable;
     
     PyDetailsPanel *model;
 }
+
+@property (readwrite, retain) NSTableView *detailsTable;
+
 - (id)initWithPyRef:(PyObject *)aPyRef;
 - (PyDetailsPanel *)model;
 
