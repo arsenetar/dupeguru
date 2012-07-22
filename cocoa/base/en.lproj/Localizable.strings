@@ -27,7 +27,14 @@
 "No" = "No";
 "OK" = "OK";
 
+/* Details Panel */
 "Details of Selected File" = "Details of Selected File";
 "Selected" = "Selected";
 "Reference" = "Reference";
 "Attribute" = "Attribute";
+
+/* Ignore List Dialog */
+"Ignore List" = "Ignore List";
+"Close" = "Close";
+"Remove Selected" = "Remove Selected";
+"Clear" = "Clear";

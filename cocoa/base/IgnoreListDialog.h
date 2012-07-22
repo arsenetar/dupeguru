@@ -12,14 +12,14 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface IgnoreListDialog : NSWindowController
 {
-    IBOutlet NSTableView *ignoreListTableView;
-    
     PyIgnoreListDialog *model;
     HSTable *ignoreListTable;
+    NSTableView *ignoreListTableView;
 }
-- (id)initWithPyRef:(PyObject *)aPyRef;
 
+@property (readwrite, retain) PyIgnoreListDialog *model;
+@property (readwrite, retain) NSTableView *ignoreListTableView;
+
+- (id)initWithPyRef:(PyObject *)aPyRef;
 - (void)initializeColumns;
-- (IBAction)removeSelected:(id)sender;
-- (IBAction)clear:(id)sender;
 @end
