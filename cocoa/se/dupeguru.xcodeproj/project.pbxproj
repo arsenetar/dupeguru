@@ -18,6 +18,7 @@
 		CE275C5A14BF71DF00265960 /* PyColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE275C5914BF71DF00265960 /* PyColumns.m */; };
 		CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE27D3C312CCA43800859E67 /* HSAboutBox.m */; };
 		CE2EC62915BD931E00698FF3 /* DeletionOptions_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2EC62815BD931E00698FF3 /* DeletionOptions_UI.m */; };
+		CE2EC62C15BD9D2C00698FF3 /* ProblemDialog_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2EC62B15BD9D2C00698FF3 /* ProblemDialog_UI.m */; };
 		CE31819D13D85D9B00B6D649 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819913D85D9B00B6D649 /* about.xib */; };
 		CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819B13D85D9B00B6D649 /* ErrorReportWindow.xib */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -48,7 +49,6 @@
 		CE79638C12536F4E008D405B /* HSFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79638B12536F4E008D405B /* HSFairwareReminder.m */; };
 		CE81134D12E5CE4D00A36C80 /* DirectoryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134412E5CE4D00A36C80 /* DirectoryPanel.xib */; };
 		CE81134E12E5CE4D00A36C80 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134612E5CE4D00A36C80 /* MainMenu.xib */; };
-		CE81134F12E5CE4D00A36C80 /* ProblemDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134812E5CE4D00A36C80 /* ProblemDialog.xib */; };
 		CE81135012E5CE4D00A36C80 /* ResultWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */; };
 		CE81135812E5CE6D00A36C80 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81135612E5CE6D00A36C80 /* Preferences.xib */; };
 		CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8113E912E5CE9A00A36C80 /* Localizable.strings */; };
@@ -119,14 +119,12 @@
 		CE00BBBE14910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE00BBC014910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CE00BBC114910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CE00BBC214910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE00BBC314910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE00BBCC14910C72006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = hy.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE00BBCE14910C8E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hy; path = ../base/hy.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE0564B014169D9E00D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE0564B414169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE0564B614169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CE0564B714169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE0564B814169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE0564BF14169DDC00D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE066CEE15B9D15B007084A6 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = ../base/pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -145,6 +143,8 @@
 		CE27D3C312CCA43800859E67 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
 		CE2EC62715BD931E00698FF3 /* DeletionOptions_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletionOptions_UI.h; sourceTree = "<group>"; };
 		CE2EC62815BD931E00698FF3 /* DeletionOptions_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletionOptions_UI.m; sourceTree = "<group>"; };
+		CE2EC62A15BD9D2C00698FF3 /* ProblemDialog_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProblemDialog_UI.h; sourceTree = "<group>"; };
+		CE2EC62B15BD9D2C00698FF3 /* ProblemDialog_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProblemDialog_UI.m; sourceTree = "<group>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -174,7 +174,6 @@
 		CE5A5CA215A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE5A5CA415A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CE5A5CA515A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CE5A5CA615A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE5A5CA715A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE5A5CB015A283D700C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = pt_BR.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE647E541173024A006D28BA /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
@@ -200,16 +199,13 @@
 		CE7A6978146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE7A697A146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CE7A697B146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CE7A697C146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CE7A697D146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CE7A698B1464425A0007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE81134512E5CE4D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CE81134712E5CE4D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
-		CE81134912E5CE4D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CE81134B12E5CE4D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CE81135212E5CE6100A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CE81135312E5CE6100A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
-		CE81135412E5CE6100A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CE81135512E5CE6100A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CE81135712E5CE6D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE81135912E5CE7B00A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/Preferences.xib; sourceTree = "<group>"; };
@@ -251,13 +247,11 @@
 		CEC3F8FE1576697700B26F0C /* PyDeletionOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyDeletionOptions.m; sourceTree = "<group>"; };
 		CECFFF1D13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DirectoryPanel.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF1F13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
-		CECFFF2013CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ProblemDialog.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF2113CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/ResultWindow.xib; sourceTree = SOURCE_ROOT; };
 		CECFFF2413CDF8E5003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED638DD14B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CED638DF14B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CED638E014B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CED638E114B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CED638E214B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CED638EA14B38CF800B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED638EC14B38D0900B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../base/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -265,7 +259,6 @@
 		CED64CF9145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CED64CFB145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CED64CFC145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CED64CFD145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CED64CFE145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CED64D06145EF16300572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED939551406ABB70072C4E8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -290,7 +283,6 @@
 		CEECCD1014C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CEECCD1214C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CEECCD1314C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
-		CEECCD1414C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/ProblemDialog.xib; sourceTree = "<group>"; };
 		CEECCD1514C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/ResultWindow.xib; sourceTree = "<group>"; };
 		CEECCD1D14C6370C00A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CEEF2A1614C0A5A60082545A /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = "<group>"; };
@@ -433,6 +425,8 @@
 		CE1D091314BE0C6400CA6B8C /* autogen */ = {
 			isa = PBXGroup;
 			children = (
+				CE2EC62A15BD9D2C00698FF3 /* ProblemDialog_UI.h */,
+				CE2EC62B15BD9D2C00698FF3 /* ProblemDialog_UI.m */,
 				CE3A298915BAEA600008BDB9 /* DetailsPanel_UI.h */,
 				CE3A298A15BAEA600008BDB9 /* DetailsPanel_UI.m */,
 				CEEACCF415BC63E200960A6A /* IgnoreListDialog_UI.h */,
@@ -540,7 +534,6 @@
 			children = (
 				CE81134412E5CE4D00A36C80 /* DirectoryPanel.xib */,
 				CE81134612E5CE4D00A36C80 /* MainMenu.xib */,
-				CE81134812E5CE4D00A36C80 /* ProblemDialog.xib */,
 				CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */,
 				CE81135612E5CE6D00A36C80 /* Preferences.xib */,
 				CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */,
@@ -695,7 +688,6 @@
 				CE79638612536C94008D405B /* FairwareReminder.xib in Resources */,
 				CE81134D12E5CE4D00A36C80 /* DirectoryPanel.xib in Resources */,
 				CE81134E12E5CE4D00A36C80 /* MainMenu.xib in Resources */,
-				CE81134F12E5CE4D00A36C80 /* ProblemDialog.xib in Resources */,
 				CE81135012E5CE4D00A36C80 /* ResultWindow.xib in Resources */,
 				CE81135812E5CE6D00A36C80 /* Preferences.xib in Resources */,
 				CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */,
@@ -778,6 +770,7 @@
 				CE3A298B15BAEA600008BDB9 /* DetailsPanel_UI.m in Sources */,
 				CEEACCF615BC63E200960A6A /* IgnoreListDialog_UI.m in Sources */,
 				CE2EC62915BD931E00698FF3 /* DeletionOptions_UI.m in Sources */,
+				CE2EC62C15BD9D2C00698FF3 /* ProblemDialog_UI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,23 +833,6 @@
 				CE5A5CA415A283C200C4E461 /* pt_BR */,
 			);
 			name = MainMenu.xib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE81134812E5CE4D00A36C80 /* ProblemDialog.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE81134912E5CE4D00A36C80 /* en */,
-				CE81135412E5CE6100A36C80 /* fr */,
-				CECFFF2013CDF8D0003A4518 /* de */,
-				CE0564B714169DB100D3D907 /* zh_CN */,
-				CED64CFD145EF07700572B00 /* cs */,
-				CE7A697C146442160007D927 /* it */,
-				CE00BBC214910C5E006A717C /* hy */,
-				CED638E114B38CEC00B88D00 /* ru */,
-				CEECCD1414C6370000A2F3A0 /* uk */,
-				CE5A5CA615A283C200C4E461 /* pt_BR */,
-			);
-			name = ProblemDialog.xib;
 			sourceTree = SOURCE_ROOT;
 		};
 		CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */ = {

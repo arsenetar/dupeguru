@@ -47,3 +47,8 @@
 "Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work." = "Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work.";
 "Proceed" = "Proceed";
 "Cancel" = "Cancel";
+
+/* Problem Dialog */
+"Problems!" = "Problems!";
+"There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results." = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results.";
+"Reveal Selected" = "Reveal Selected";
