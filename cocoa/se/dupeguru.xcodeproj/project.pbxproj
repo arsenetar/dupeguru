@@ -17,6 +17,7 @@
 		CE275C5714BF712B00265960 /* PyDirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE275C5514BF712B00265960 /* PyDirectoryOutline.m */; };
 		CE275C5A14BF71DF00265960 /* PyColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE275C5914BF71DF00265960 /* PyColumns.m */; };
 		CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE27D3C312CCA43800859E67 /* HSAboutBox.m */; };
+		CE2EC62915BD931E00698FF3 /* DeletionOptions_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2EC62815BD931E00698FF3 /* DeletionOptions_UI.m */; };
 		CE31819D13D85D9B00B6D649 /* about.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819913D85D9B00B6D649 /* about.xib */; };
 		CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31819B13D85D9B00B6D649 /* ErrorReportWindow.xib */; };
 		CE381C9609914ACE003581CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE381C9409914ACE003581CE /* AppDelegate.m */; };
@@ -63,7 +64,6 @@
 		CEA450B814BDDFD7002DAAF2 /* dg_cocoa.py in Resources */ = {isa = PBXBuildFile; fileRef = CEA450B714BDDFD7002DAAF2 /* dg_cocoa.py */; };
 		CEB2AF5614C49AC800F907A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2AF5514C49AC800F907A9 /* main.m */; };
 		CEBCE2D81573FE49000402E1 /* HSPyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE2D71573FE49000402E1 /* HSPyUtil.m */; };
-		CEC3F8F815765F9F00B26F0C /* DeletionOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3F8F615765F9F00B26F0C /* DeletionOptions.xib */; };
 		CEC3F8FC157668A300B26F0C /* DeletionOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC3F8FB157668A300B26F0C /* DeletionOptions.m */; };
 		CEC3F8FF1576697700B26F0C /* PyDeletionOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC3F8FE1576697700B26F0C /* PyDeletionOptions.m */; };
 		CEE49F4015B9F4E1002BD78B /* HSAboutBox_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE49F3515B9F4E1002BD78B /* HSAboutBox_UI.m */; };
@@ -143,6 +143,8 @@
 		CE275C5914BF71DF00265960 /* PyColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyColumns.m; sourceTree = "<group>"; };
 		CE27D3C212CCA43800859E67 /* HSAboutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox.h; path = ../../cocoalib/HSAboutBox.h; sourceTree = SOURCE_ROOT; };
 		CE27D3C312CCA43800859E67 /* HSAboutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox.m; path = ../../cocoalib/HSAboutBox.m; sourceTree = SOURCE_ROOT; };
+		CE2EC62715BD931E00698FF3 /* DeletionOptions_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletionOptions_UI.h; sourceTree = "<group>"; };
+		CE2EC62815BD931E00698FF3 /* DeletionOptions_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletionOptions_UI.m; sourceTree = "<group>"; };
 		CE381C9409914ACE003581CE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		CE381C9509914ACE003581CE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		CE381C9A09914ADF003581CE /* ResultWindow.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = ResultWindow.m; sourceTree = SOURCE_ROOT; };
@@ -169,7 +171,6 @@
 		CE587E9814C07BCF004CA031 /* PyOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyOutline.m; sourceTree = "<group>"; };
 		CE587E9C14C0801F004CA031 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
 		CE587E9D14C0801F004CA031 /* PySelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PySelectableList.m; sourceTree = "<group>"; };
-		CE5A5CA015A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
 		CE5A5CA215A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/DirectoryPanel.xib; sourceTree = "<group>"; };
 		CE5A5CA415A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CE5A5CA515A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
@@ -244,7 +245,6 @@
 		CEBCE2D61573FE49000402E1 /* HSPyUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSPyUtil.h; path = ../../cocoalib/HSPyUtil.h; sourceTree = "<group>"; };
 		CEBCE2D71573FE49000402E1 /* HSPyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSPyUtil.m; path = ../../cocoalib/HSPyUtil.m; sourceTree = "<group>"; };
 		CEBCE2DA1573FEBF000402E1 /* HSFairwareProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSFairwareProtocol.h; path = ../../cocoalib/HSFairwareProtocol.h; sourceTree = "<group>"; };
-		CEC3F8F715765F9F00B26F0C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
 		CEC3F8FA157668A300B26F0C /* DeletionOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeletionOptions.h; path = ../base/DeletionOptions.h; sourceTree = "<group>"; };
 		CEC3F8FB157668A300B26F0C /* DeletionOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeletionOptions.m; path = ../base/DeletionOptions.m; sourceTree = "<group>"; };
 		CEC3F8FD1576697700B26F0C /* PyDeletionOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDeletionOptions.h; sourceTree = "<group>"; };
@@ -318,14 +318,6 @@
 		CEF27A9D1423EAD90048ADFA /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CEF27A9E1423EAD90048ADFA /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/PrioritizeDialog.xib; sourceTree = "<group>"; };
 		CEFC294509C89E3D00D9F998 /* folder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder32.png; path = ../../images/folder32.png; sourceTree = SOURCE_ROOT; };
-		CEFC64DD157678A500664D8C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E0157678AF00664D8C /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E2157678C000664D8C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E4157678CA00664D8C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E6157678DE00664D8C /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E7157678DE00664D8C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E8157678DE00664D8C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
-		CEFC64E9157678DE00664D8C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/DeletionOptions.xib; sourceTree = "<group>"; };
 		CEFC7F8A0FC9517500CD5728 /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ../../cocoalib/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CEFC7F8B0FC9517500CD5728 /* Dialogs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dialogs.m; path = ../../cocoalib/Dialogs.m; sourceTree = SOURCE_ROOT; };
 		CEFC7F900FC9517500CD5728 /* ProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController.h; path = ../../cocoalib/ProgressController.h; sourceTree = SOURCE_ROOT; };
@@ -445,6 +437,8 @@
 				CE3A298A15BAEA600008BDB9 /* DetailsPanel_UI.m */,
 				CEEACCF415BC63E200960A6A /* IgnoreListDialog_UI.h */,
 				CEEACCF515BC63E200960A6A /* IgnoreListDialog_UI.m */,
+				CE2EC62715BD931E00698FF3 /* DeletionOptions_UI.h */,
+				CE2EC62815BD931E00698FF3 /* DeletionOptions_UI.m */,
 				CE9FC22B14C080CF005C31FD /* PyGUIObject.h */,
 				CE9FC22C14C080CF005C31FD /* PyGUIObject.m */,
 				CE275C5814BF71DF00265960 /* PyColumns.h */,
@@ -550,7 +544,6 @@
 				CE81134A12E5CE4D00A36C80 /* ResultWindow.xib */,
 				CE81135612E5CE6D00A36C80 /* Preferences.xib */,
 				CE9777CF141F8CB400C13FB5 /* PrioritizeDialog.xib */,
-				CEC3F8F615765F9F00B26F0C /* DeletionOptions.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -712,7 +705,6 @@
 				CEA175CA1461E8E600776591 /* locale in Resources */,
 				CE18005114BDD87B001B6329 /* py in Resources */,
 				CEA450B814BDDFD7002DAAF2 /* dg_cocoa.py in Resources */,
-				CEC3F8F815765F9F00B26F0C /* DeletionOptions.xib in Resources */,
 				CE8C25CD15B9FCC100D44175 /* cocoalib.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -785,6 +777,7 @@
 				CEE49F4515B9F4E1002BD78B /* ProgressController_UI.m in Sources */,
 				CE3A298B15BAEA600008BDB9 /* DetailsPanel_UI.m in Sources */,
 				CEEACCF615BC63E200960A6A /* IgnoreListDialog_UI.m in Sources */,
+				CE2EC62915BD931E00698FF3 /* DeletionOptions_UI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,23 +942,6 @@
 				CE5A5CA515A283C200C4E461 /* pt_BR */,
 			);
 			name = PrioritizeDialog.xib;
-			sourceTree = "<group>";
-		};
-		CEC3F8F615765F9F00B26F0C /* DeletionOptions.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEC3F8F715765F9F00B26F0C /* en */,
-				CEFC64DD157678A500664D8C /* de */,
-				CEFC64E0157678AF00664D8C /* cs */,
-				CEFC64E2157678C000664D8C /* fr */,
-				CEFC64E4157678CA00664D8C /* hy */,
-				CEFC64E6157678DE00664D8C /* it */,
-				CEFC64E7157678DE00664D8C /* ru */,
-				CEFC64E8157678DE00664D8C /* uk */,
-				CEFC64E9157678DE00664D8C /* zh_CN */,
-				CE5A5CA015A283C200C4E461 /* pt_BR */,
-			);
-			name = DeletionOptions.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

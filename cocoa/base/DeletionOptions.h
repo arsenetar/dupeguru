@@ -11,15 +11,21 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface DeletionOptions : NSWindowController
 {
-    IBOutlet NSTextField *messageTextField;
-    IBOutlet NSButton *hardlinkButton;
-    IBOutlet NSButton *directButton;
     
     PyDeletionOptions *model;
+    
+    NSTextField *messageTextField;
+    NSButton *hardlinkButton;
+    NSButton *directButton;
 }
+
+@property (readwrite, retain) NSTextField *messageTextField;
+@property (readwrite, retain) NSButton *hardlinkButton;
+@property (readwrite, retain) NSButton *directButton;
+
 - (id)initWithPyRef:(PyObject *)aPyRef;
 
-- (IBAction)updateOptions:(id)sender;
-- (IBAction)proceed:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (void)updateOptions;
+- (void)proceed;
+- (void)cancel;
 @end

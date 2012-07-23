@@ -7,14 +7,20 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DeletionOptions.h"
+#import "DeletionOptions_UI.h"
 #import "HSPyUtil.h"
 
 @implementation DeletionOptions
+
+@synthesize messageTextField;
+@synthesize hardlinkButton;
+@synthesize directButton;
+
 - (id)initWithPyRef:(PyObject *)aPyRef
 {
-    self = [super initWithWindowNibName:@"DeletionOptions"];
-    [self window];
+    self = [super initWithWindow:nil];
     model = [[PyDeletionOptions alloc] initWithModel:aPyRef];
+    [self setWindow:createDeletionOptions_UI(self)];
     [model bindCallback:createCallback(@"DeletionOptionsView", self)];
     return self;
 }
@@ -25,18 +31,18 @@ http://www.hardcoded.net/licenses/bsd_license
     [super dealloc];
 }
 
-- (IBAction)updateOptions:(id)sender
+- (void)updateOptions
 {
     [model setHardlink:[hardlinkButton state] == NSOnState];
     [model setDirect:[directButton state] == NSOnState];
 }
 
-- (IBAction)proceed:(id)sender
+- (void)proceed
 {
     [NSApp stopModalWithCode:NSOKButton];
 }
 
-- (IBAction)cancel:(id)sender
+- (void)cancel
 {
     [NSApp stopModalWithCode:NSCancelButton];
 }
