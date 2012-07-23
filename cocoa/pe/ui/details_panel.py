@@ -50,25 +50,21 @@ for subSplit, label, image, spinner in sides:
     spinner.controlSize = const.NSSmallControlSize
     spinner.displayedWhenStopped = False
     
-    subSplit.ignoreMargin = True
-    label.packToCorner(Pack.UpperLeft)
-    label.fill(Pack.Right)
+    label.packToCorner(Pack.UpperLeft, margin=0)
+    label.fill(Pack.Right, margin=0)
     label.setAnchor(Pack.UpperLeft, growX=True)
     image.packRelativeTo(label, Pack.Below)
-    image.fill(Pack.Right)
-    image.fill(Pack.Below)
+    image.fill(Pack.LowerRight, margin=0)
     image.setAnchor(Pack.UpperLeft, growX=True, growY=True)
     spinner.y = label.y
     spinner.x = subSplit.width - 30
     spinner.setAnchor(Pack.UpperRight)
 
-result.ignoreMargin = True
-table.packToCorner(Pack.UpperLeft)
-table.fill(Pack.Right)
+table.packToCorner(Pack.UpperLeft, margin=0)
+table.fill(Pack.Right, margin=0)
 table.setAnchor(Pack.UpperLeft, growX=True)
 
 split.packRelativeTo(table, Pack.Below)
-split.fill(Pack.Right)
-split.fill(Pack.Below)
+split.fill(Pack.LowerRight, margin=0)
 split.setAnchor(Pack.UpperLeft, growX=True, growY=True)
 

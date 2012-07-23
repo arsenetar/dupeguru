@@ -16,27 +16,33 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface DirectoryPanel : NSWindowController <NSOpenSavePanelDelegate>
 {
-    IBOutlet NSPopUpButton *addButtonPopUp;
-    IBOutlet NSPopUpButton *loadRecentButtonPopUp;
-    IBOutlet HSOutlineView *outlineView;
-    IBOutlet NSButton *removeButton;
-    IBOutlet NSButton *loadResultsButton;
-    
     AppDelegateBase *_app;
     PyDupeGuru *model;
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
     BOOL _alwaysShowPopUp;
+    NSPopUpButton *addButtonPopUp;
+    NSPopUpButton *loadRecentButtonPopUp;
+    HSOutlineView *outlineView;
+    NSButton *removeButton;
+    NSButton *loadResultsButton;
 }
+
+@property (readwrite, retain) NSPopUpButton *addButtonPopUp;
+@property (readwrite, retain) NSPopUpButton *loadRecentButtonPopUp;
+@property (readwrite, retain) HSOutlineView *outlineView;
+@property (readwrite, retain) NSButton *removeButton;
+@property (readwrite, retain) NSButton *loadResultsButton;
+
 - (id)initWithParentApp:(AppDelegateBase *)aParentApp;
 
 - (void)fillPopUpMenu; // Virtual
 - (void)adjustUIToLocalization;
 
-- (IBAction)askForDirectory:(id)sender;
-- (IBAction)popupAddDirectoryMenu:(id)sender;
-- (IBAction)popupLoadRecentMenu:(id)sender;
-- (IBAction)removeSelectedDirectory:(id)sender;
+- (void)askForDirectory;
+- (void)popupAddDirectoryMenu:(id)sender;
+- (void)popupLoadRecentMenu:(id)sender;
+- (void)removeSelectedDirectory;
 
 - (void)addDirectory:(NSString *)directory;
 - (void)refreshRemoveButtonText;

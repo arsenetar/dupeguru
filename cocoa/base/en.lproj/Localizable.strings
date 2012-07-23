@@ -52,3 +52,13 @@
 "Problems!" = "Problems!";
 "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results." = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results.";
 "Reveal Selected" = "Reveal Selected";
+
+/* Directory Panel */
+"State" = "State";
+"Name" = "Name";
+"Scan" = "Scan";
+"Normal" = "Normal";
+"Reference" = "Reference";
+"Excluded" = "Excluded";
+"Select folders to scan and press \"Scan\"." = "Select folders to scan and press \"Scan\".";
+"Load Results" = "Load Results";
