@@ -38,3 +38,12 @@
 "Close" = "Close";
 "Remove Selected" = "Remove Selected";
 "Clear" = "Clear";
+
+/* Deletion Options */
+"Deletion Options" = "Deletion Options";
+"Hardlink deleted files" = "Hardlink deleted files";
+"After having deleted a duplicate, place a hardlink targeting the reference file to replace the deleted file." = "After having deleted a duplicate, place a hardlink targeting the reference file to replace the deleted file.";
+"Directly delete files" = "Directly delete files";
+"Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work." = "Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work.";
+"Proceed" = "Proceed";
+"Cancel" = "Cancel";
