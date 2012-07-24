@@ -21,7 +21,7 @@ table.allowsMultipleSelection = True
 removeSelectedButton.width = 142
 clearButton.width = 142
 closeButton.width = 84
-buttonLayout = HLayout(left=[removeSelectedButton, clearButton], right=[closeButton])
+buttonLayout = HLayout([removeSelectedButton, clearButton, None, closeButton])
 buttonLayout.packToCorner(Pack.LowerLeft)
 buttonLayout.fill(Pack.Right)
 buttonLayout.setAnchor(Pack.Below)

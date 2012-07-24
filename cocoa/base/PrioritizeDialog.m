@@ -7,14 +7,20 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "PrioritizeDialog.h"
+#import "PrioritizeDialog_UI.h"
 #import "HSPyUtil.h"
 
 @implementation PrioritizeDialog
+
+@synthesize categoryPopUpView;
+@synthesize criteriaTableView;
+@synthesize prioritizationTableView;
+
 - (id)initWithApp:(PyDupeGuru *)aApp
 {
     self = [super initWithWindowNibName:@"PrioritizeDialog"];
-    [self window];
     model = [[PyPrioritizeDialog alloc] initWithApp:[aApp pyRef]];
+    [self setWindow:createPrioritizeDialog_UI(self)];
     categoryPopUp = [[HSPopUpList alloc] initWithPyRef:[[self model] categoryList] popupView:categoryPopUpView];
     criteriaList = [[HSSelectableList alloc] initWithPyRef:[[self model] criteriaList] tableView:criteriaTableView];
     prioritizationList = [[PrioritizeList alloc] initWithPyRef:[[self model] prioritizationList] tableView:prioritizationTableView];
@@ -36,23 +42,13 @@ http://www.hardcoded.net/licenses/bsd_license
     return (PyPrioritizeDialog *)model;
 }
 
-- (IBAction)addSelected:(id)sender
-{
-    [[self model] addSelected];
-}
-
-- (IBAction)removeSelected:(id)sender
-{
-    [[self model] removeSelected];
-}
-
-- (IBAction)ok:(id)sender
+- (void)ok
 {
     [NSApp stopModal];
     [self close];
 }
 
-- (IBAction)cancel:(id)sender
+- (void)cancel
 {
     [NSApp abortModal];
     [self close];

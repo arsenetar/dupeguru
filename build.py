@@ -62,6 +62,7 @@ def build_xibless(edition):
     xibless.generate('cocoa/base/ui/deletion_options.py', 'cocoa/autogen/DeletionOptions_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/problem_dialog.py', 'cocoa/autogen/ProblemDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
     build_xibless(edition)

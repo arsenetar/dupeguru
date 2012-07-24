@@ -62,3 +62,8 @@
 "Excluded" = "Excluded";
 "Select folders to scan and press \"Scan\"." = "Select folders to scan and press \"Scan\".";
 "Load Results" = "Load Results";
+
+/* Prioritize Dialog */
+"Re-Prioritize duplicates" = "Re-Prioritize duplicates";
+"Ok" = "Ok";
+"Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information." = "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.";

@@ -47,12 +47,13 @@ for button in (addButton, removeButton):
 for button in (loadResultsButton, scanButton):
     button.width = 118
 
-buttonLayout = HLayout(left=[addButton, removeButton], right=[loadResultsButton, scanButton])
+buttonLayout = HLayout([addButton, removeButton, None, loadResultsButton, scanButton])
 promptLabel.packToCorner(Pack.UpperLeft)
 promptLabel.fill(Pack.Right)
 directoryOutline.packRelativeTo(promptLabel, Pack.Below)
 buttonLayout.packRelativeTo(directoryOutline, Pack.Below, margin=8)
 directoryOutline.fill(Pack.LowerRight)
+buttonLayout.fill(Pack.Right)
 
 promptLabel.setAnchor(Pack.UpperLeft, growX=True)
 directoryOutline.setAnchor(Pack.UpperLeft, growX=True, growY=True)
