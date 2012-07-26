@@ -12,3 +12,6 @@ from cocoa.inter import PySelectableList, PyColumns, PyTable
 from inter.all import *
 from inter.app_pe import PyDupeGuru
     
+# When built under virtualenv, the dependency collector misses this module, so we have to force it
+# to see the module.
+import distutils.sysconfig
