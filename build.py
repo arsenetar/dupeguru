@@ -155,7 +155,10 @@ def build_localizations(ui, edition):
                 if edition_folder == 'base':
                     loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-            loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join('cocoalib', lang + '.lproj', 'cocoalib.strings'))
+            cocoalib_dest = op.join('cocoalib', lang + '.lproj', 'cocoalib.strings')
+            if not op.exists(op.dirname(cocoalib_dest)):
+                os.makedirs(op.dirname(cocoalib_dest))
+            loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), cocoalib_dest)
         build_all_cocoa_locs(op.join('cocoa', 'base'))
         build_all_cocoa_locs(op.join('cocoa', edition))
     elif ui == 'qt':
