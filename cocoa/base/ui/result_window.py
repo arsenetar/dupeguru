@@ -67,6 +67,7 @@ owner.matches = table
 owner.optionsSwitch = optionsSegments
 owner.optionsToolbarItem = optionsToolItem
 owner.stats = statsLabel
+table.bind('rowHeight', defaults, 'values.TableFontSize', valueTransformer='vtRowHeightOffset')
 
 # Rest of the setup
 result.minSize = Size(340, 340)
@@ -74,6 +75,13 @@ result.autosaveName = 'MainWindow'
 statsLabel.alignment = TextAlignment.Center
 table.alternatingRows = True
 table.menu = contextMenu
+table.allowsColumnReordering = True
+table.allowsColumnResizing = True
+table.allowsColumnSelection = False
+table.allowsEmptySelection = False
+table.allowsMultipleSelection = True
+table.allowsTypeSelect = True
+table.gridStyleMask = const.NSTableViewSolidHorizontalGridLineMask
 table.setAnchor(Pack.UpperLeft, growX=True, growY=True)
 statsLabel.setAnchor(Pack.LowerLeft, growX=True)
 
