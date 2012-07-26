@@ -20,11 +20,11 @@ http://www.hardcoded.net/licenses/bsd_license
 @interface ResultWindowBase : NSWindowController
 {
 @protected
-    IBOutlet NSSegmentedControl *optionsSwitch;
-    IBOutlet NSToolbarItem *optionsToolbarItem;
-    IBOutlet HSTableView *matches;
-    IBOutlet NSTextField *stats;
-    IBOutlet NSSearchField *filterField;
+    NSSegmentedControl *optionsSwitch;
+    NSToolbarItem *optionsToolbarItem;
+    HSTableView *matches;
+    NSTextField *stats;
+    NSSearchField *filterField;
     
     AppDelegateBase *app;
     PyDupeGuru *model;
@@ -35,6 +35,13 @@ http://www.hardcoded.net/licenses/bsd_license
     DeletionOptions *deletionOptions;
     QLPreviewPanel* previewPanel;
 }
+
+@property (readwrite, retain) NSSegmentedControl *optionsSwitch;
+@property (readwrite, retain) NSToolbarItem *optionsToolbarItem;
+@property (readwrite, retain) HSTableView *matches;
+@property (readwrite, retain) NSTextField *stats;
+@property (readwrite, retain) NSSearchField *filterField;
+
 - (id)initWithParentApp:(AppDelegateBase *)app;
 
 /* Virtual */

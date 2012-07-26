@@ -7,6 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "ResultWindow.h"
+#import "ResultWindow_UI.h"
 #import "Dialogs.h"
 #import "ProgressController.h"
 #import "Utils.h"
@@ -15,11 +16,19 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PrioritizeDialog.h"
 
 @implementation ResultWindowBase
+
+@synthesize optionsSwitch;
+@synthesize optionsToolbarItem;
+@synthesize matches;
+@synthesize stats;
+@synthesize filterField;
+
 - (id)initWithParentApp:(AppDelegateBase *)aApp;
 {
-    self = [super initWithWindowNibName:@"ResultWindow"];
+    self = [super initWithWindow:nil];
     app = aApp;
     model = [app model];
+    [self setWindow:createResultWindow_UI(self)];
     [[self window] setTitle:fmt(@"%@ Results", [model appName])];
     columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */

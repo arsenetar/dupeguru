@@ -71,6 +71,7 @@
 		CEE49F4315B9F4E1002BD78B /* HSErrorReportWindow_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE49F3B15B9F4E1002BD78B /* HSErrorReportWindow_UI.m */; };
 		CEE49F4415B9F4E1002BD78B /* HSFairwareReminder_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE49F3D15B9F4E1002BD78B /* HSFairwareReminder_UI.m */; };
 		CEE49F4515B9F4E1002BD78B /* ProgressController_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE49F3F15B9F4E1002BD78B /* ProgressController_UI.m */; };
+		CEE5B05415C1A2B20077BA7A /* ResultWindow_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE5B05315C1A2B20077BA7A /* ResultWindow_UI.m */; };
 		CEE7EA130FE675C80004E467 /* DetailsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7EA120FE675C80004E467 /* DetailsPanel.m */; };
 		CEEACCF615BC63E200960A6A /* IgnoreListDialog_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEACCF515BC63E200960A6A /* IgnoreListDialog_UI.m */; };
 		CEEB135209C837A2004D2330 /* dupeguru.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEEB135109C837A2004D2330 /* dupeguru.icns */; };
@@ -261,6 +262,8 @@
 		CEE49F3D15B9F4E1002BD78B /* HSFairwareReminder_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSFairwareReminder_UI.m; path = ../../cocoalib/autogen/HSFairwareReminder_UI.m; sourceTree = "<group>"; };
 		CEE49F3E15B9F4E1002BD78B /* ProgressController_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressController_UI.h; path = ../../cocoalib/autogen/ProgressController_UI.h; sourceTree = "<group>"; };
 		CEE49F3F15B9F4E1002BD78B /* ProgressController_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressController_UI.m; path = ../../cocoalib/autogen/ProgressController_UI.m; sourceTree = "<group>"; };
+		CEE5B05215C1A2B20077BA7A /* ResultWindow_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultWindow_UI.h; sourceTree = "<group>"; };
+		CEE5B05315C1A2B20077BA7A /* ResultWindow_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultWindow_UI.m; sourceTree = "<group>"; };
 		CEE7EA110FE675C80004E467 /* DetailsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsPanel.h; path = ../base/DetailsPanel.h; sourceTree = SOURCE_ROOT; };
 		CEE7EA120FE675C80004E467 /* DetailsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsPanel.m; path = ../base/DetailsPanel.m; sourceTree = SOURCE_ROOT; };
 		CEEACCF415BC63E200960A6A /* IgnoreListDialog_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreListDialog_UI.h; sourceTree = "<group>"; };
@@ -409,6 +412,8 @@
 		CE1D091314BE0C6400CA6B8C /* autogen */ = {
 			isa = PBXGroup;
 			children = (
+				CEE5B05215C1A2B20077BA7A /* ResultWindow_UI.h */,
+				CEE5B05315C1A2B20077BA7A /* ResultWindow_UI.m */,
 				CEBAC7B315BEF3EE0012FDB2 /* PrioritizeDialog_UI.h */,
 				CEBAC7B415BEF3EE0012FDB2 /* PrioritizeDialog_UI.m */,
 				CEFC030615BDEFA5005A2559 /* DirectoryPanel_UI.h */,
@@ -757,6 +762,7 @@
 				CE2EC62C15BD9D2C00698FF3 /* ProblemDialog_UI.m in Sources */,
 				CEFC030815BDEFA5005A2559 /* DirectoryPanel_UI.m in Sources */,
 				CEBAC7B515BEF3EE0012FDB2 /* PrioritizeDialog_UI.m in Sources */,
+				CEE5B05415C1A2B20077BA7A /* ResultWindow_UI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
