@@ -14,6 +14,7 @@
 		CE18005114BDD87B001B6329 /* py in Resources */ = {isa = PBXBuildFile; fileRef = CE18005014BDD87B001B6329 /* py */; };
 		CE1D091814BE0C6400CA6B8C /* ObjP.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D091514BE0C6400CA6B8C /* ObjP.m */; };
 		CE1D091914BE0C6400CA6B8C /* PyStatsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D091714BE0C6400CA6B8C /* PyStatsLabel.m */; };
+		CE272B5C15C31BAA0085F4CD /* PreferencesPanel_UI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE272B5B15C31BAA0085F4CD /* PreferencesPanel_UI.m */; };
 		CE275C5714BF712B00265960 /* PyDirectoryOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE275C5514BF712B00265960 /* PyDirectoryOutline.m */; };
 		CE275C5A14BF71DF00265960 /* PyColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = CE275C5914BF71DF00265960 /* PyColumns.m */; };
 		CE27D3C412CCA43800859E67 /* HSAboutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE27D3C312CCA43800859E67 /* HSAboutBox.m */; };
@@ -48,7 +49,6 @@
 		CE79638612536C94008D405B /* FairwareReminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE79638412536C94008D405B /* FairwareReminder.xib */; };
 		CE79638C12536F4E008D405B /* HSFairwareReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79638B12536F4E008D405B /* HSFairwareReminder.m */; };
 		CE81134E12E5CE4D00A36C80 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81134612E5CE4D00A36C80 /* MainMenu.xib */; };
-		CE81135812E5CE6D00A36C80 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81135612E5CE6D00A36C80 /* Preferences.xib */; };
 		CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8113E912E5CE9A00A36C80 /* Localizable.strings */; };
 		CE89240A14239CC30024CE4E /* PrioritizeList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE89240714239CC30024CE4E /* PrioritizeList.m */; };
 		CE8C25CD15B9FCC100D44175 /* cocoalib.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8C25CB15B9FCC100D44175 /* cocoalib.strings */; };
@@ -117,11 +117,9 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* dupeGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dupeGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE00BBC014910C5E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = ../base/hy.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CE00BBCC14910C72006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = hy; path = hy.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE00BBCE14910C8E006A717C /* hy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hy; path = ../base/hy.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE0564B014169D9E00D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../base/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE0564B614169DB100D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = ../base/zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CE0564BF14169DDC00D3D907 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE066CEE15B9D15B007084A6 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = ../base/pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE073F5409CAE1A3005C1D2F /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = ../../build/help; sourceTree = "<group>"; };
 		CE18004C14BDD837001B6329 /* Python */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = Python; path = ../../build/Python; sourceTree = "<group>"; };
@@ -130,6 +128,8 @@
 		CE1D091514BE0C6400CA6B8C /* ObjP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjP.m; sourceTree = "<group>"; };
 		CE1D091614BE0C6400CA6B8C /* PyStatsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyStatsLabel.h; sourceTree = "<group>"; };
 		CE1D091714BE0C6400CA6B8C /* PyStatsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyStatsLabel.m; sourceTree = "<group>"; };
+		CE272B5A15C31BAA0085F4CD /* PreferencesPanel_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesPanel_UI.h; sourceTree = "<group>"; };
+		CE272B5B15C31BAA0085F4CD /* PreferencesPanel_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesPanel_UI.m; sourceTree = "<group>"; };
 		CE275C5414BF712B00265960 /* PyDirectoryOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDirectoryOutline.h; sourceTree = "<group>"; };
 		CE275C5514BF712B00265960 /* PyDirectoryOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyDirectoryOutline.m; sourceTree = "<group>"; };
 		CE275C5814BF71DF00265960 /* PyColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyColumns.h; sourceTree = "<group>"; };
@@ -167,7 +167,6 @@
 		CE587E9C14C0801F004CA031 /* PySelectableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PySelectableList.h; sourceTree = "<group>"; };
 		CE587E9D14C0801F004CA031 /* PySelectableList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PySelectableList.m; sourceTree = "<group>"; };
 		CE5A5CA415A283C200C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = ../base/pt_BR.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CE5A5CB015A283D700C4E461 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = pt_BR.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE647E541173024A006D28BA /* ProblemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProblemDialog.h; path = ../base/ProblemDialog.h; sourceTree = SOURCE_ROOT; };
 		CE647E551173024A006D28BA /* ProblemDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProblemDialog.m; path = ../base/ProblemDialog.m; sourceTree = SOURCE_ROOT; };
 		CE6DD4E5124CA3070089A48D /* ResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultTable.h; path = ../base/ResultTable.h; sourceTree = SOURCE_ROOT; };
@@ -189,11 +188,8 @@
 		CE79638B12536F4E008D405B /* HSFairwareReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSFairwareReminder.m; path = ../../cocoalib/HSFairwareReminder.m; sourceTree = SOURCE_ROOT; };
 		CE7A6971146442010007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = ../base/it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A697A146442160007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = ../base/it.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CE7A698B1464425A0007D927 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE81134712E5CE4D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../base/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		CE81135312E5CE6100A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ../base/fr.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
-		CE81135712E5CE6D00A36C80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Preferences.xib; sourceTree = "<group>"; };
-		CE81135912E5CE7B00A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CE8113EA12E5CE9A00A36C80 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = ../base/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE8113EC12E5CEA800A36C80 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../base/fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE89240614239CC30024CE4E /* PrioritizeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrioritizeList.h; path = ../base/PrioritizeList.h; sourceTree = "<group>"; };
@@ -232,13 +228,10 @@
 		CEC3F8FD1576697700B26F0C /* PyDeletionOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDeletionOptions.h; sourceTree = "<group>"; };
 		CEC3F8FE1576697700B26F0C /* PyDeletionOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyDeletionOptions.m; sourceTree = "<group>"; };
 		CECFFF1F13CDF8D0003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = ../base/de.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
-		CECFFF2413CDF8E5003A4518 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED638DF14B38CEC00B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ../base/ru.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CED638EA14B38CF800B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED638EC14B38D0900B88D00 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../base/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED64CEB145EF06000572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../base/cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED64CFB145EF07700572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = ../base/cs.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CED64D06145EF16300572B00 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CED939551406ABB70072C4E8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../base/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE49F3415B9F4E1002BD78B /* HSAboutBox_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSAboutBox_UI.h; path = ../../cocoalib/autogen/HSAboutBox_UI.h; sourceTree = "<group>"; };
 		CEE49F3515B9F4E1002BD78B /* HSAboutBox_UI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSAboutBox_UI.m; path = ../../cocoalib/autogen/HSAboutBox_UI.m; sourceTree = "<group>"; };
@@ -261,7 +254,6 @@
 		CEEB135109C837A2004D2330 /* dupeguru.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dupeguru.icns; sourceTree = "<group>"; };
 		CEECCD0D14C636F100A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = ../base/uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEECCD1214C6370000A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = ../base/uk.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CEECCD1D14C6370C00A2F3A0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/Preferences.xib; sourceTree = "<group>"; };
 		CEEF2A1614C0A5A60082545A /* PyDupeGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDupeGuru.h; sourceTree = "<group>"; };
 		CEEF2A1714C0A5A60082545A /* PyDupeGuru.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PyDupeGuru.m; sourceTree = "<group>"; };
 		CEEF2A1914C0A8480082545A /* PyDupeGuruBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyDupeGuruBase.h; sourceTree = "<group>"; };
@@ -401,6 +393,8 @@
 		CE1D091314BE0C6400CA6B8C /* autogen */ = {
 			isa = PBXGroup;
 			children = (
+				CE272B5A15C31BAA0085F4CD /* PreferencesPanel_UI.h */,
+				CE272B5B15C31BAA0085F4CD /* PreferencesPanel_UI.m */,
 				CEE5B05215C1A2B20077BA7A /* ResultWindow_UI.h */,
 				CEE5B05315C1A2B20077BA7A /* ResultWindow_UI.m */,
 				CEBAC7B315BEF3EE0012FDB2 /* PrioritizeDialog_UI.h */,
@@ -515,7 +509,6 @@
 			isa = PBXGroup;
 			children = (
 				CE81134612E5CE4D00A36C80 /* MainMenu.xib */,
-				CE81135612E5CE6D00A36C80 /* Preferences.xib */,
 			);
 			name = xib;
 			sourceTree = "<group>";
@@ -666,7 +659,6 @@
 				CE6E0DFE1054E9EF008D9390 /* dsa_pub.pem in Resources */,
 				CE79638612536C94008D405B /* FairwareReminder.xib in Resources */,
 				CE81134E12E5CE4D00A36C80 /* MainMenu.xib in Resources */,
-				CE81135812E5CE6D00A36C80 /* Preferences.xib in Resources */,
 				CE8113EB12E5CE9A00A36C80 /* Localizable.strings in Resources */,
 				CE31819D13D85D9B00B6D649 /* about.xib in Resources */,
 				CE31819E13D85D9B00B6D649 /* ErrorReportWindow.xib in Resources */,
@@ -750,6 +742,7 @@
 				CEFC030815BDEFA5005A2559 /* DirectoryPanel_UI.m in Sources */,
 				CEBAC7B515BEF3EE0012FDB2 /* PrioritizeDialog_UI.m in Sources */,
 				CEE5B05415C1A2B20077BA7A /* ResultWindow_UI.m in Sources */,
+				CE272B5C15C31BAA0085F4CD /* PreferencesPanel_UI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,23 +788,6 @@
 				CE5A5CA415A283C200C4E461 /* pt_BR */,
 			);
 			name = MainMenu.xib;
-			sourceTree = SOURCE_ROOT;
-		};
-		CE81135612E5CE6D00A36C80 /* Preferences.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE81135712E5CE6D00A36C80 /* en */,
-				CE81135912E5CE7B00A36C80 /* fr */,
-				CECFFF2413CDF8E5003A4518 /* de */,
-				CE0564BF14169DDC00D3D907 /* zh_CN */,
-				CED64D06145EF16300572B00 /* cs */,
-				CE7A698B1464425A0007D927 /* it */,
-				CE00BBCC14910C72006A717C /* hy */,
-				CED638EA14B38CF800B88D00 /* ru */,
-				CEECCD1D14C6370C00A2F3A0 /* uk */,
-				CE5A5CB015A283D700C4E461 /* pt_BR */,
-			);
-			name = Preferences.xib;
 			sourceTree = SOURCE_ROOT;
 		};
 		CE8113E912E5CE9A00A36C80 /* Localizable.strings */ = {

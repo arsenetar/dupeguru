@@ -13,6 +13,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 #import "Dialogs.h"
 #import "ValueTransformers.h"
+#import "PreferencesPanel_UI.h"
 #import <Sparkle/SUUpdater.h>
 
 @implementation AppDelegateBase
@@ -140,7 +141,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (IBAction)showPreferencesPanel:(id)sender
 {
     if (_preferencesPanel == nil) {
-        _preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
+        _preferencesPanel = [[NSWindowController alloc] initWithWindow:createPreferencesPanel_UI(nil)];
     }
     [_preferencesPanel showWindow:sender];
 }

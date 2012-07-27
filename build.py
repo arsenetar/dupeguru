@@ -54,16 +54,19 @@ def build_xibless(edition):
     xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoalib/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/enter_code.py', 'cocoalib/autogen/HSEnterCode_UI', localizationTable='cocoalib')
     xibless.generate('cocoalib/ui/error_report.py', 'cocoalib/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
-    if edition == 'pe':
-        xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
-    else:
-        xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/ignore_list_dialog.py', 'cocoa/autogen/IgnoreListDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/deletion_options.py', 'cocoa/autogen/DeletionOptions_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/problem_dialog.py', 'cocoa/autogen/ProblemDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
+    if edition == 'pe':
+        xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+    else:
+        xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+    if edition == 'se':
+        xibless.generate('cocoa/se/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI', localizationTable='Localizable')
+        
 
 def build_cocoa(edition, dev):
     build_xibless(edition)

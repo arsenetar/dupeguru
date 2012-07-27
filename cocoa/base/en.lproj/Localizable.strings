@@ -94,3 +94,33 @@
 "Reveal Selected in Finder" = "Reveal Selected in Finder";
 "Open Selected with Default Application" = "Open Selected with Default Application";
 "Quick Look" = "Quick Look";
+
+/* Preferences */
+"dupeGuru Preferences" = "dupeGuru Preferences";
+"More results" = "More results";
+"Fewer results" = "Fewer results";
+"Filter hardness:" = "Filter hardness:";
+"Scan type:" = "Scan type:";
+"Content" = "Content";
+"Filename" = "Filename";
+"Word weighting" = "Word weighting";
+"Can mix file kind" = "Can mix file kind";
+"Reset to Defaults" = "Reset to Defaults";
+"Match similar words" = "Match similar words";
+"Copy and Move:" = "Copy and Move:";
+"Recreate relative path" = "Recreate relative path";
+"Recreate absolute path" = "Recreate absolute path";
+"Right in destination" = "Right in destination";
+"Automatically check for updates" = "Automatically check for updates";
+"Remove empty folders on delete or move" = "Remove empty folders on delete or move";
+"Ignore files smaller than:" = "Ignore files smaller than:";
+"KB" = "KB";
+"Basic" = "Basic";
+"Advanced" = "Advanced";
+"Use regular expressions when filtering" = "Use regular expressions when filtering";
+"Custom command (arguments: %d for dupe, %r for ref):" = "Custom command (arguments: %d for dupe, %r for ref):";
+"Ignore duplicates hardlinking to the same file" = "Ignore duplicates hardlinking to the same file";
+"Debug mode (restart required)" = "Debug mode (restart required)";
+"Folders" = "Folders";
+"Font size:" = "Font size:";
+
