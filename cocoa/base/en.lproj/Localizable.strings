@@ -67,3 +67,30 @@
 "Re-Prioritize duplicates" = "Re-Prioritize duplicates";
 "Ok" = "Ok";
 "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information." = "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.";
+
+/* Results Window */
+"dupeGuru Results" = "dupeGuru Results";
+"Options" = "Options";
+"Filter" = "Filter";
+"Action" = "Action";
+"Directories" = "Directories";
+"Send Marked to Trash..." = "Send Marked to Trash...";
+"Move Marked to..." = "Move Marked to...";
+"Copy Marked to..." = "Copy Marked to...";
+"Remove Marked from Results" = "Remove Marked from Results";
+"Remove Selected from Results" = "Remove Selected from Results";
+"Add Selected to Ignore List" = "Add Selected to Ignore List";
+"Make Selected Reference" = "Make Selected Reference";
+"Open Selected with Default Application" = "Open Selected with Default Application";
+"Reveal Selected in Finder" = "Reveal Selected in Finder";
+"Rename Selected" = "Rename Selected";
+"Details" = "Details";
+"Dupes Only" = "Dupes Only";
+"Delta" = "Delta";
+"Add Selected to Ignore List" = "Add Selected to Ignore List";
+"Rename Selected" = "Rename Selected";
+"Remove Selected from Results" = "Remove Selected from Results";
+"Make Selected Reference" = "Make Selected Reference";
+"Reveal Selected in Finder" = "Reveal Selected in Finder";
+"Open Selected with Default Application" = "Open Selected with Default Application";
+"Quick Look" = "Quick Look";

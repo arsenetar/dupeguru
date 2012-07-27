@@ -5,7 +5,7 @@ result = Window(557, 400, "dupeGuru Results")
 toolbar = result.createToolbar('ResultsToolbar')
 table = TableView(result)
 table.OBJC_CLASS = 'HSTableView'
-statsLabel = Label(result, "Hello")
+statsLabel = Label(result, "")
 contextMenu = Menu("")
 
 #Setup toolbar items
@@ -27,6 +27,7 @@ actionPopup.width = 44
 actionToolItem.view = actionPopup
 filterField = SearchField(None, "Filter")
 filterField.action = Action(owner, 'filter:')
+filterField.sendsWholeSearchString = True
 filterToolItem.view = filterField
 filterToolItem.minSize = Size(80, 22)
 filterToolItem.maxSize = Size(300, 22)
@@ -86,8 +87,10 @@ table.setAnchor(Pack.UpperLeft, growX=True, growY=True)
 statsLabel.setAnchor(Pack.LowerLeft, growX=True)
 
 # Layout
-table.packToCorner(Pack.UpperLeft, margin=0)
+# It's a little weird to pack with a margin of -1, but if I don't do that, I get too thick of a
+# border on the upper side of the table.
+table.packToCorner(Pack.UpperLeft, margin=-1)
 table.fill(Pack.Right, margin=0)
 statsLabel.packRelativeTo(table, Pack.Below, margin=6)
 statsLabel.fill(Pack.Right, margin=0)
-table.fill(Pack.Below, margin=6)
+table.fill(Pack.Below, margin=5)
