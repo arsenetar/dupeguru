@@ -26,8 +26,6 @@
     <string>{version}</string>
 	<key>CFBundleVersion</key>
 	<string>{version}</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHumanReadableCopyright</key>

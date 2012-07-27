@@ -50,7 +50,7 @@ optionsToolItem.view = optionsSegments
 # Popuplate menus
 actionPopup.menu.addItem("Send Marked to Trash...", action=Action(owner, 'trashMarked:'))
 actionPopup.menu.addItem("Move Marked to...", action=Action(owner, 'moveMarked:'))
-actionPopup.menu.addItem("Copy Marked to...", action=Action(owner, 'moveMarked:'))
+actionPopup.menu.addItem("Copy Marked to...", action=Action(owner, 'copyMarked:'))
 actionPopup.menu.addItem("Remove Marked from Results", action=Action(owner, 'removeMarked:'))
 actionPopup.menu.addSeparator()
 for menu in (actionPopup.menu, contextMenu):

@@ -18,8 +18,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all,
-    move)
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move)
 from hscommon import loc
 
 def parse_args():
@@ -60,6 +59,7 @@ def build_xibless(edition):
     xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI', localizationTable='Localizable')
     if edition == 'pe':
         xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
     else:
@@ -152,19 +152,16 @@ def build_localizations(ui, edition):
             if lang == 'en':
                 continue
             pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-            for edition_folder in ['base', 'se', 'me', 'pe']:
-                enlproj = op.join('cocoa', edition_folder, 'en.lproj')
-                dest_lproj = op.join('cocoa', edition_folder, lang + '.lproj')
-                loc.po2allxibstrings(pofile, enlproj, dest_lproj)
-                if edition_folder == 'base':
-                    loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
+            enlproj = op.join('cocoa', 'base', 'en.lproj')
+            dest_lproj = op.join('cocoa', 'base', lang + '.lproj')
+            if not op.exists(dest_lproj):
+                os.makedirs(dest_lproj)
+            loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
             cocoalib_dest = op.join('cocoalib', lang + '.lproj', 'cocoalib.strings')
             if not op.exists(op.dirname(cocoalib_dest)):
                 os.makedirs(op.dirname(cocoalib_dest))
             loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), cocoalib_dest)
-        build_all_cocoa_locs(op.join('cocoa', 'base'))
-        build_all_cocoa_locs(op.join('cocoa', edition))
     elif ui == 'qt':
         loc.compile_all_po(op.join('qtlib', 'locale'))
         loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')

@@ -28,7 +28,6 @@ http://www.hardcoded.net/licenses/bsd_license
     
     AppDelegateBase *app;
     PyDupeGuru *model;
-    NSMenu *columnsMenu;
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;

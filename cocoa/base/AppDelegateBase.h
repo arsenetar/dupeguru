@@ -7,6 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
+#import <Sparkle/SUUpdater.h>
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
 #import "DetailsPanel.h"
@@ -17,9 +18,10 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface AppDelegateBase : NSObject
 {
-    IBOutlet NSMenu *recentResultsMenu;
-    IBOutlet NSMenu *actionsMenu;
-    IBOutlet NSMenu *columnsMenu;
+    NSMenu *recentResultsMenu;
+    NSMenu *actionsMenu;
+    NSMenu *columnsMenu;
+    SUUpdater *updater;
     
     PyDupeGuru *model;
     ResultWindowBase *_resultWindow;
@@ -31,6 +33,11 @@ http://www.hardcoded.net/licenses/bsd_license
     HSRecentFiles *_recentResults;
 }
 
+@property (readwrite, retain) NSMenu *recentResultsMenu;
+@property (readwrite, retain) NSMenu *actionsMenu;
+@property (readwrite, retain) NSMenu *columnsMenu;
+@property (readwrite, retain) SUUpdater *updater;
+
 /* Virtual */
 - (PyDupeGuru *)model;
 - (ResultWindowBase *)createResultWindow;
@@ -39,11 +46,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (NSString *)homepageURL;
 
 /* Public */
+- (void)finalizeInit;
 - (ResultWindowBase *)resultWindow;
 - (DirectoryPanel *)directoryPanel;
 - (DetailsPanel *)detailsPanel;
 - (HSRecentFiles *)recentResults;
-- (NSMenu *)columnsMenu;
 
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
@@ -53,15 +60,15 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)recentFileClicked:(NSString *)path;
 
 /* Actions */
-- (IBAction)loadResults:(id)sender;
-- (IBAction)openWebsite:(id)sender;
-- (IBAction)openHelp:(id)sender;
-- (IBAction)showAboutBox:(id)sender;
-- (IBAction)showDirectoryWindow:(id)sender;
-- (IBAction)showPreferencesPanel:(id)sender;
-- (IBAction)showResultWindow:(id)sender;
-- (IBAction)showIgnoreList:(id)sender;
-- (IBAction)startScanning:(id)sender;
+- (void)loadResults;
+- (void)openWebsite;
+- (void)openHelp;
+- (void)showAboutBox;
+- (void)showDirectoryWindow;
+- (void)showPreferencesPanel;
+- (void)showResultWindow;
+- (void)showIgnoreList;
+- (void)startScanning;
 
 /* model --> view */
 - (void)showMessage:(NSString *)msg;

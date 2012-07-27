@@ -10,6 +10,8 @@ http://www.hardcoded.net/licenses/bsd_license
 #import <Python.h>
 #import <wchar.h>
 #import <locale.h>
+#import "AppDelegate.h"
+#import "MainMenu_UI.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,8 +36,14 @@ int main(int argc, char *argv[])
         PyThreadState_Swap(NULL);
         PyEval_ReleaseLock();
     }
-    int result = NSApplicationMain(argc,  (const char **) argv);
-    Py_Finalize();
+    
+    [NSApplication sharedApplication];
+    AppDelegate *appDelegate = [[AppDelegate alloc] init];
+    [NSApp setDelegate:appDelegate];
+    [NSApp setMainMenu:createMainMenu_UI(appDelegate)];
+    [appDelegate finalizeInit];
     [pool release];
-    return result;
+    [NSApp run];
+    Py_Finalize();
+    return 0;
 }

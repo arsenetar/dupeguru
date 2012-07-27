@@ -30,7 +30,6 @@ http://www.hardcoded.net/licenses/bsd_license
     model = [app model];
     [self setWindow:createResultWindow_UI(self)];
     [[self window] setTitle:fmt(@"%@ Results", [model appName])];
-    columnsMenu = [app columnsMenu];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];
@@ -73,13 +72,13 @@ http://www.hardcoded.net/licenses/bsd_license
         NSArray *pair = [menuItems objectAtIndex:i];
         NSString *display = [pair objectAtIndex:0];
         BOOL marked = n2b([pair objectAtIndex:1]);
-        NSMenuItem *mi = [columnsMenu addItemWithTitle:display action:@selector(toggleColumn:) keyEquivalent:@""];
+        NSMenuItem *mi = [[app columnsMenu] addItemWithTitle:display action:@selector(toggleColumn:) keyEquivalent:@""];
         [mi setTarget:self];
         [mi setState:marked ? NSOnState : NSOffState];
         [mi setTag:i];
     }
-    [columnsMenu addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *mi = [columnsMenu addItemWithTitle:TR(@"Reset to Default")
+    [[app columnsMenu] addItem:[NSMenuItem separatorItem]];
+    NSMenuItem *mi = [[app columnsMenu] addItemWithTitle:TR(@"Reset to Default")
         action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
     [mi setTarget:self];
 }
