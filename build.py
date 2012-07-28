@@ -19,7 +19,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move,
     create_osx_app_structure)
 from hscommon import loc
 
@@ -66,7 +66,8 @@ def build_xibless(edition):
         xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
     if edition == 'se':
         xibless.generate('cocoa/se/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI', localizationTable='Localizable')
-        
+    if edition == 'me':
+        xibless.generate('cocoa/se/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI', localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
     ed = lambda s: s.format(edition)
@@ -74,10 +75,8 @@ def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
-    from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
+    from pluginbuilder import copy_embeddable_python_dylib, collect_dependencies
     copy_embeddable_python_dylib('build')
-    if not op.exists('build/PythonHeaders'):
-        os.symlink(get_python_header_folder(), 'build/PythonHeaders')
     if not op.exists('build/py'):
         os.mkdir('build/py')
     cocoa_project_path = ed('cocoa/{}')
@@ -103,21 +102,21 @@ def build_cocoa(edition, dev):
     filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
     print("Compiling with WAF")
     os.chdir('..')
-    os.system('{0} waf configure && {0} waf'.format(sys.executable))
+    os.system('{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition))
     os.chdir('..')
     print("Creating the .app folder")
     image_path = ed('cocoa/{}/dupeguru.icns')
     resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py',
         'build/py', 'build/help'] + glob.glob('cocoa/base/*.lproj')
     frameworks = ['build/Python', 'cocoalib/Sparkle.framework']
-    create_osx_app_structure('build/dupeGuru.app', 'cocoa/build/dupeGuru', ed('cocoa/{}/Info.plist'),
-        resources, frameworks, symlink_resources=dev)
-    print("Creating the run.py file")
     app_path = {
         'se': 'build/dupeGuru.app',
-        'me': 'build/dupeGuru\\ ME.app',
-        'pe': 'build/dupeGuru\\ PE.app',
+        'me': 'build/dupeGuru ME.app',
+        'pe': 'build/dupeGuru PE.app',
     }[edition]
+    create_osx_app_structure(app_path, 'cocoa/build/dupeGuru', ed('cocoa/{}/Info.plist'),
+        resources, frameworks, symlink_resources=dev)
+    print("Creating the run.py file")
     tmpl = open('run_template_cocoa.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app_path)
     open('run.py', 'wt').write(run_contents)
