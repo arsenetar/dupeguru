@@ -1,8 +1,25 @@
-result = Window(410, 345, "dupeGuru Preferences")
+edition = args.get('edition', 'se')
+dialogTitles = {
+    'se': "dupeGuru Preferences",
+    'me': "dupeGuru ME Preferences",
+    'pe': "dupeGuru PE Preferences",
+}
+dialogHeights = {
+    'se': 345,
+    'me': 365,
+    'pe': 270,
+}
+scanTypeNames = {
+    'se': ["Filename", "Content", "Folders"],
+    'me': ["Filename", "Filename - Fields", "Filename - Fields (No Order)", "Tags", "Content", "Audio Content"],
+    'pe': ["Contents", "EXIF Timestamp"],
+}
+
+result = Window(410, dialogHeights[edition], dialogTitles[edition])
 tabView = TabView(result)
 basicTab = tabView.addTab("Basic")
 advancedTab = tabView.addTab("Advanced")
-scanTypePopup = Popup(basicTab.view, ["Filename", "Content", "Folders"])
+scanTypePopup = Popup(basicTab.view, scanTypeNames[edition])
 scanTypeLabel = Label(basicTab.view, "Scan Type:")
 thresholdSlider = Slider(basicTab.view, 1, 100, 80)
 # XXX add a number formatter to this
@@ -16,10 +33,20 @@ wordWeightingBox = Checkbox(basicTab.view, "Word weighting")
 matchSimilarWordsBox = Checkbox(basicTab.view, "Match similar words")
 mixKindBox = Checkbox(basicTab.view, "Can mix file kind")
 removeEmptyFoldersBox = Checkbox(basicTab.view, "Remove empty folders on delete or move")
-ignoreSmallFilesBox = Checkbox(basicTab.view, "Ignore files smaller than:")
-smallFilesThresholdText = TextField(basicTab.view, "")
-smallFilesThresholdSuffixLabel = Label(basicTab.view, "KB")
 checkForUpdatesBox = Checkbox(basicTab.view, "Automatically check for updates")
+if edition == 'se':
+    ignoreSmallFilesBox = Checkbox(basicTab.view, "Ignore files smaller than:")
+    smallFilesThresholdText = TextField(basicTab.view, "")
+    smallFilesThresholdSuffixLabel = Label(basicTab.view, "KB")
+elif edition == 'me':
+    tagsToScanLabel = Label(basicTab.view, "Tags to scan:")
+    trackBox = Checkbox(basicTab.view, "Track")
+    artistBox = Checkbox(basicTab.view, "Artist")
+    albumBox = Checkbox(basicTab.view, "Album")
+    titleBox = Checkbox(basicTab.view, "Title")
+    genreBox = Checkbox(basicTab.view, "Genre")
+    yearBox = Checkbox(basicTab.view, "Year")
+    tagBoxes = [trackBox, artistBox, albumBox, titleBox, genreBox, yearBox]
 
 regexpCheckbox = Checkbox(advancedTab.view, "Use regular expressions when filtering")
 ignoreHardlinksBox = Checkbox(advancedTab.view, "Ignore duplicates hardlinking to the same file")
@@ -39,8 +66,6 @@ wordWeightingBox.bind('value', defaults, 'values.wordWeighting')
 matchSimilarWordsBox.bind('value', defaults, 'values.matchSimilarWords')
 mixKindBox.bind('value', defaults, 'values.mixFileKind')
 removeEmptyFoldersBox.bind('value', defaults, 'values.removeEmptyFolders')
-ignoreSmallFilesBox.bind('value', defaults, 'values.ignoreSmallFiles')
-smallFilesThresholdText.bind('value', defaults, 'values.smallFileThreshold')
 checkForUpdatesBox.bind('value', defaults, 'values.SUEnableAutomaticChecks')
 regexpCheckbox.bind('value', defaults, 'values.useRegexpFilter')
 ignoreHardlinksBox.bind('value', defaults, 'values.ignoreHardlinkMatches')
@@ -50,17 +75,34 @@ copyMovePopup.bind('selectedIndex', defaults, 'values.recreatePathType')
 disableWhenContentScan = [thresholdSlider, wordWeightingBox, matchSimilarWordsBox]
 for control in disableWhenContentScan:
     control.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsNotContent')
+if edition == 'se':
+    ignoreSmallFilesBox.bind('value', defaults, 'values.ignoreSmallFiles')
+    smallFilesThresholdText.bind('value', defaults, 'values.smallFileThreshold')
+elif edition == 'me':
+    for box in tagBoxes:
+        box.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsTag')
+    trackBox.bind('value', defaults, 'values.scanTagTrack')
+    artistBox.bind('value', defaults, 'values.scanTagArtist')
+    albumBox.bind('value', defaults, 'values.scanTagAlbum')
+    titleBox.bind('value', defaults, 'values.scanTagTitle')
+    genreBox.bind('value', defaults, 'values.scanTagGenre')
+    yearBox.bind('value', defaults, 'values.scanTagYear')
 
 result.canResize = False
 result.canMinimize = False
 allLabels = [scanTypeLabel, thresholdValuelabel, moreResultsLabel, fewerResultsLabel,
-    thresholdLabel, fontSizeLabel, smallFilesThresholdSuffixLabel, customCommandLabel,
-    copyMoveLabel]
+    thresholdLabel, fontSizeLabel, customCommandLabel, copyMoveLabel]
+allCheckboxes = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
+    checkForUpdatesBox, regexpCheckbox, ignoreHardlinksBox, debugModeCheckbox]
+if edition == 'se':
+    allLabels += [smallFilesThresholdSuffixLabel]
+    allCheckboxes += [ignoreSmallFilesBox]
+elif edition == 'me':
+    allLabels += [tagsToScanLabel]
+    allCheckboxes += tagBoxes
 for label in allLabels:
     label.controlSize = ControlSize.Small
 fewerResultsLabel.alignment = TextAlignment.Right
-allCheckboxes = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
-    ignoreSmallFilesBox, checkForUpdatesBox, regexpCheckbox, ignoreHardlinksBox, debugModeCheckbox]
 for checkbox in allCheckboxes:
     checkbox.font = scanTypeLabel.font
 resetToDefaultsButton.action = Action(defaults, 'revertToInitialValues:')
@@ -69,8 +111,12 @@ scanTypeLabel.width = thresholdLabel.width = fontSizeLabel.width = 94
 fontSizeCombo.width = 66
 thresholdValuelabel.width = 25
 resetToDefaultsButton.width = 136
-smallFilesThresholdText.width = 60
-smallFilesThresholdSuffixLabel.width = 40
+if edition == 'se':
+    smallFilesThresholdText.width = 60
+    smallFilesThresholdSuffixLabel.width = 40
+elif edition == 'me':
+    for box in tagBoxes:
+        box.width = 70
 
 tabView.packToCorner(Pack.UpperLeft)
 tabView.fill(Pack.Right)
@@ -92,17 +138,37 @@ thresholdLabel.packRelativeTo(thresholdSlider, Pack.Left)
 fontSizeCombo.packRelativeTo(moreResultsLabel, Pack.Below)
 fontSizeLabel.packRelativeTo(fontSizeCombo, Pack.Left)
 
-checkboxLayout = VLayout([wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
-    ignoreSmallFilesBox])
-checkboxLayout.packRelativeTo(fontSizeCombo, Pack.Below)
+if edition == 'me':
+    tagsToScanLabel.packRelativeTo(fontSizeCombo, Pack.Below)
+    tagsToScanLabel.fill(Pack.Left)
+    tagsToScanLabel.fill(Pack.Right)
+    trackBox.packRelativeTo(tagsToScanLabel, Pack.Below)
+    trackBox.x += 10
+    artistBox.packRelativeTo(trackBox, Pack.Right)
+    albumBox.packRelativeTo(artistBox, Pack.Right)
+    titleBox.packRelativeTo(trackBox, Pack.Below)
+    genreBox.packRelativeTo(titleBox, Pack.Right)
+    yearBox.packRelativeTo(genreBox, Pack.Right)
+    viewToPackCheckboxesUnder = titleBox
+else:
+    viewToPackCheckboxesUnder = fontSizeCombo
+
+checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox]
+if edition == 'se':
+    checkboxesToLayout.append(ignoreSmallFilesBox)
+else:
+    checkboxesToLayout.append(checkForUpdatesBox)
+checkboxLayout = VLayout(checkboxesToLayout)
+checkboxLayout.packRelativeTo(viewToPackCheckboxesUnder, Pack.Below)
 checkboxLayout.fill(Pack.Left)
 checkboxLayout.fill(Pack.Right)
 
-smallFilesThresholdText.packRelativeTo(ignoreSmallFilesBox, Pack.Below, margin=4)
-checkForUpdatesBox.packRelativeTo(smallFilesThresholdText, Pack.Below, margin=4)
-checkForUpdatesBox.fill(Pack.Right)
-smallFilesThresholdText.x += 20
-smallFilesThresholdSuffixLabel.packRelativeTo(smallFilesThresholdText, Pack.Right)
+if edition == 'se':
+    smallFilesThresholdText.packRelativeTo(ignoreSmallFilesBox, Pack.Below, margin=4)
+    checkForUpdatesBox.packRelativeTo(smallFilesThresholdText, Pack.Below, margin=4)
+    checkForUpdatesBox.fill(Pack.Right)
+    smallFilesThresholdText.x += 20
+    smallFilesThresholdSuffixLabel.packRelativeTo(smallFilesThresholdText, Pack.Right)
 
 advancedLayout = VLayout(advancedTab.view.subviews[:])
 advancedLayout.packToCorner(Pack.UpperLeft)

@@ -19,7 +19,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move,
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
     create_osx_app_structure)
 from hscommon import loc
 
@@ -32,8 +32,8 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
-    parser.add_option('--cocoamod', action='store_true', dest='cocoamod',
-        help="Build only Cocoa modules")
+    parser.add_option('--cocoa-compile', action='store_true', dest='cocoa_compile',
+        help="Build only Cocoa modules and executables")
     parser.add_option('--xibless', action='store_true', dest='xibless',
         help="Build only xibless UIs")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
@@ -42,6 +42,16 @@ def parse_args():
         help="Update all .po files based on .pot files.")
     (options, args) = parser.parse_args()
     return options
+
+def cocoa_compile_command(edition):
+    return '{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition)
+
+def cocoa_app_path(edition):
+    return {
+        'se': 'build/dupeGuru.app',
+        'me': 'build/dupeGuru ME.app',
+        'pe': 'build/dupeGuru PE.app',
+    }[edition]
 
 def build_xibless(edition):
     import xibless
@@ -60,14 +70,12 @@ def build_xibless(edition):
     xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI',
+        localizationTable='Localizable', args={'edition': edition})
     if edition == 'pe':
         xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
     else:
         xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
-    if edition == 'se':
-        xibless.generate('cocoa/se/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI', localizationTable='Localizable')
-    if edition == 'me':
-        xibless.generate('cocoa/se/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI', localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
     ed = lambda s: s.format(edition)
@@ -102,18 +110,14 @@ def build_cocoa(edition, dev):
     filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
     print("Compiling with WAF")
     os.chdir('..')
-    os.system('{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition))
+    os.system(cocoa_compile_command(edition))
     os.chdir('..')
     print("Creating the .app folder")
     image_path = ed('cocoa/{}/dupeguru.icns')
     resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py',
         'build/py', 'build/help'] + glob.glob('cocoa/base/*.lproj')
     frameworks = ['build/Python', 'cocoalib/Sparkle.framework']
-    app_path = {
-        'se': 'build/dupeGuru.app',
-        'me': 'build/dupeGuru ME.app',
-        'pe': 'build/dupeGuru PE.app',
-    }[edition]
+    app_path = cocoa_app_path(edition)
     create_osx_app_structure(app_path, 'cocoa/build/dupeGuru', ed('cocoa/{}/Info.plist'),
         resources, frameworks, symlink_resources=dev)
     print("Creating the run.py file")
@@ -308,9 +312,13 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
-    elif options.cocoamod:
+    elif options.cocoa_compile:
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
+        os.chdir('cocoa')
+        os.system(cocoa_compile_command(edition))
+        os.chdir('..')
+        copy('cocoa/build/dupeGuru', op.join(cocoa_app_path(edition), 'Contents/MacOS/dupeGuru'))
     elif options.xibless:
         build_xibless(edition)
     else:

@@ -124,6 +124,19 @@
 "Folders" = "Folders";
 "Font size:" = "Font size:";
 
+"dupeGuru ME Preferences" = "dupeGuru ME Preferences";
+"Filename - Fields" = "Filename - Fields";
+"Tags" = "Tags";
+"Audio Content" = "Audio Content";
+"Filename - Fields (No Order)" = "Filename - Fields (No Order)";
+"Tags to scan:" = "Tags to scan:";
+"Track" = "Track";
+"Artist" = "Artist";
+"Album" = "Album";
+"Title" = "Title";
+"Genre" = "Genre";
+"Year" = "Year";
+
 /* Main Menu */
 "Bring All to Front" = "Bring All to Front";
 "Window" = "Window";
