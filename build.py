@@ -45,16 +45,14 @@ def parse_args():
 
 def build_xibless(edition):
     import xibless
-    if not op.exists('cocoalib/autogen'):
-        os.mkdir('cocoalib/autogen')
     if not op.exists('cocoa/autogen'):
         os.mkdir('cocoa/autogen')
-    xibless.generate('cocoalib/ui/progress.py', 'cocoalib/autogen/ProgressController_UI')
-    xibless.generate('cocoalib/ui/about.py', 'cocoalib/autogen/HSAboutBox_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoalib/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoalib/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/enter_code.py', 'cocoalib/autogen/HSEnterCode_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/error_report.py', 'cocoalib/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/progress.py', 'cocoa/autogen/ProgressController_UI')
+    xibless.generate('cocoalib/ui/about.py', 'cocoa/autogen/HSAboutBox_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoa/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoa/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/enter_code.py', 'cocoa/autogen/HSEnterCode_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/error_report.py', 'cocoa/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
     xibless.generate('cocoa/base/ui/ignore_list_dialog.py', 'cocoa/autogen/IgnoreListDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/deletion_options.py', 'cocoa/autogen/DeletionOptions_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/problem_dialog.py', 'cocoa/autogen/ProblemDialog_UI', localizationTable='Localizable')
@@ -217,9 +215,9 @@ def build_cocoa_proxy_module():
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
         ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m',
-            'cocoalib/HSErrorReportWindow.m', 'cocoalib/autogen/HSErrorReportWindow_UI.m'],
+            'cocoalib/HSErrorReportWindow.m', 'cocoa/autogen/HSErrorReportWindow_UI.m'],
         ['AppKit', 'CoreServices'],
-        ['cocoalib', 'cocoalib/autogen'])
+        ['cocoalib', 'cocoa/autogen'])
 
 def build_cocoa_bridging_interfaces(edition):
     print("Building Cocoa Bridging Interfaces")
