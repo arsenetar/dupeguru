@@ -7,7 +7,6 @@ appMenu = result.addMenu("dupeGuru")
 fileMenu = result.addMenu("File")
 editMenu = result.addMenu("Edit")
 actionMenu = result.addMenu("Actions")
-owner.actionsMenu = actionMenu
 owner.columnsMenu = result.addMenu("Columns")
 modeMenu = result.addMenu("Mode")
 windowMenu = result.addMenu("Window")
@@ -32,6 +31,8 @@ fileMenu.addItem("Save Results...", Action(None, 'saveResults'), 'cmd+s')
 fileMenu.addItem("Export Results to XHTML", Action(None, 'exportToXHTML'), 'cmd+shift+e')
 if edition == 'pe':
     fileMenu.addItem("Clear Picture Cache", Action(owner, 'clearPictureCache'), 'cmd+shift+p')
+elif edition == 'me':
+    fileMenu.addItem("Remove Dead Tracks in iTunes", Action(owner, 'removeDeadTracks'))
 
 editMenu.addItem("Mark All", Action(None, 'markAll'), 'cmd+a')
 editMenu.addItem("Mark None", Action(None, 'markNone'), 'cmd+shift+a')

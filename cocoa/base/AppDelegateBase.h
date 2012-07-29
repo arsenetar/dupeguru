@@ -19,7 +19,6 @@ http://www.hardcoded.net/licenses/bsd_license
 @interface AppDelegateBase : NSObject
 {
     NSMenu *recentResultsMenu;
-    NSMenu *actionsMenu;
     NSMenu *columnsMenu;
     SUUpdater *updater;
     
@@ -34,7 +33,6 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 @property (readwrite, retain) NSMenu *recentResultsMenu;
-@property (readwrite, retain) NSMenu *actionsMenu;
 @property (readwrite, retain) NSMenu *columnsMenu;
 @property (readwrite, retain) SUUpdater *updater;
 

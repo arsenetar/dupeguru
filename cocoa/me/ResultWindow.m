@@ -70,7 +70,7 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Actions */
-- (IBAction)removeDeadTracks:(id)sender
+- (void)removeDeadTracks
 {
     [model scanDeadTracks];
 }

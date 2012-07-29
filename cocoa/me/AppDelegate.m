@@ -74,13 +74,8 @@ http://www.hardcoded.net/licenses/bsd_license
     return [[DirectoryPanelME alloc] initWithParentApp:self];
 }
 
-//Delegate
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)removeDeadTracks
 {
-    // index 3 is just after "Export Results to XHTML"
-    NSMenuItem *mi = [actionsMenu insertItemWithTitle:TR(@"Remove Dead Tracks in iTunes")
-        action:@selector(removeDeadTracks:) keyEquivalent:@"" atIndex:3];
-    [mi setTarget:[self resultWindow]];
-    [super applicationDidFinishLaunching:aNotification];
+    [(ResultWindow *)[self resultWindow] removeDeadTracks];
 }
 @end

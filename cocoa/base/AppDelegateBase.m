@@ -18,7 +18,6 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation AppDelegateBase
 
 @synthesize recentResultsMenu;
-@synthesize actionsMenu;
 @synthesize columnsMenu;
 @synthesize updater;
 
