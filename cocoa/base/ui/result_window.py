@@ -20,6 +20,7 @@ toolbar.defaultItems = [actionToolItem, optionsToolItem, quicklookToolItem, dire
 actionPopup = Popup(None)
 actionPopup.pullsdown = True
 actionPopup.bezelStyle = const.NSTexturedRoundedBezelStyle
+actionPopup.arrowPosition = const.NSPopUpArrowAtBottom
 item = actionPopup.menu.addItem("") # First item is invisible
 item.hidden = True
 item.image = 'NSActionTemplate'
