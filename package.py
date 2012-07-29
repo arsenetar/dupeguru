@@ -27,9 +27,9 @@ def parse_args():
 
 def package_cocoa(edition, args):
     app_path = {
-        'se': 'cocoa/se/dupeGuru.app',
-        'me': 'cocoa/me/dupeGuru ME.app',
-        'pe': 'cocoa/pe/dupeGuru PE.app',
+        'se': 'build/dupeGuru.app',
+        'me': 'build/dupeGuru ME.app',
+        'pe': 'build/dupeGuru PE.app',
     }[edition]
     package_cocoa_app_in_dmg(app_path, '.', args)
 
