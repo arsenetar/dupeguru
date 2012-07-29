@@ -7,7 +7,7 @@ dialogTitles = {
 dialogHeights = {
     'se': 345,
     'me': 365,
-    'pe': 270,
+    'pe': 275,
 }
 scanTypeNames = {
     'se': ["Filename", "Content", "Folders"],
@@ -29,8 +29,11 @@ fewerResultsLabel = Label(basicTab.view, "Fewer results")
 thresholdValuelabel = Label(basicTab.view, "")
 fontSizeCombo = Combobox(basicTab.view, ["11", "12", "13", "14", "18", "24"])
 fontSizeLabel = Label(basicTab.view, "Font Size:")
-wordWeightingBox = Checkbox(basicTab.view, "Word weighting")
-matchSimilarWordsBox = Checkbox(basicTab.view, "Match similar words")
+if edition in ('se', 'me'):
+    wordWeightingBox = Checkbox(basicTab.view, "Word weighting")
+    matchSimilarWordsBox = Checkbox(basicTab.view, "Match similar words")
+elif edition == 'pe':
+    matchDifferentDimensionsBox = Checkbox(basicTab.view, "Match pictures of different dimensions")
 mixKindBox = Checkbox(basicTab.view, "Can mix file kind")
 removeEmptyFoldersBox = Checkbox(basicTab.view, "Remove empty folders on delete or move")
 checkForUpdatesBox = Checkbox(basicTab.view, "Automatically check for updates")
@@ -62,8 +65,6 @@ scanTypePopup.bind('selectedIndex', defaults, 'values.scanType')
 thresholdSlider.bind('value', defaults, 'values.minMatchPercentage')
 thresholdValuelabel.bind('value', defaults, 'values.minMatchPercentage')
 fontSizeCombo.bind('value', defaults, 'values.TableFontSize')
-wordWeightingBox.bind('value', defaults, 'values.wordWeighting')
-matchSimilarWordsBox.bind('value', defaults, 'values.matchSimilarWords')
 mixKindBox.bind('value', defaults, 'values.mixFileKind')
 removeEmptyFoldersBox.bind('value', defaults, 'values.removeEmptyFolders')
 checkForUpdatesBox.bind('value', defaults, 'values.SUEnableAutomaticChecks')
@@ -72,34 +73,42 @@ ignoreHardlinksBox.bind('value', defaults, 'values.ignoreHardlinkMatches')
 debugModeCheckbox.bind('value', defaults, 'values.DebugMode')
 customCommandText.bind('value', defaults, 'values.CustomCommand')
 copyMovePopup.bind('selectedIndex', defaults, 'values.recreatePathType')
-disableWhenContentScan = [thresholdSlider, wordWeightingBox, matchSimilarWordsBox]
-for control in disableWhenContentScan:
-    control.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsNotContent')
-if edition == 'se':
-    ignoreSmallFilesBox.bind('value', defaults, 'values.ignoreSmallFiles')
-    smallFilesThresholdText.bind('value', defaults, 'values.smallFileThreshold')
-elif edition == 'me':
-    for box in tagBoxes:
-        box.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsTag')
-    trackBox.bind('value', defaults, 'values.scanTagTrack')
-    artistBox.bind('value', defaults, 'values.scanTagArtist')
-    albumBox.bind('value', defaults, 'values.scanTagAlbum')
-    titleBox.bind('value', defaults, 'values.scanTagTitle')
-    genreBox.bind('value', defaults, 'values.scanTagGenre')
-    yearBox.bind('value', defaults, 'values.scanTagYear')
+if edition in ('se', 'me'):
+    wordWeightingBox.bind('value', defaults, 'values.wordWeighting')
+    matchSimilarWordsBox.bind('value', defaults, 'values.matchSimilarWords')
+    disableWhenContentScan = [thresholdSlider, wordWeightingBox, matchSimilarWordsBox]
+    for control in disableWhenContentScan:
+        control.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsNotContent')
+    if edition == 'se':
+        ignoreSmallFilesBox.bind('value', defaults, 'values.ignoreSmallFiles')
+        smallFilesThresholdText.bind('value', defaults, 'values.smallFileThreshold')
+    elif edition == 'me':
+        for box in tagBoxes:
+            box.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsTag')
+        trackBox.bind('value', defaults, 'values.scanTagTrack')
+        artistBox.bind('value', defaults, 'values.scanTagArtist')
+        albumBox.bind('value', defaults, 'values.scanTagAlbum')
+        titleBox.bind('value', defaults, 'values.scanTagTitle')
+        genreBox.bind('value', defaults, 'values.scanTagGenre')
+        yearBox.bind('value', defaults, 'values.scanTagYear')
+elif edition == 'pe':
+    matchDifferentDimensionsBox.bind('value', defaults, 'values.matchScaled')
+    thresholdSlider.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsFuzzy')
 
 result.canResize = False
 result.canMinimize = False
 allLabels = [scanTypeLabel, thresholdValuelabel, moreResultsLabel, fewerResultsLabel,
     thresholdLabel, fontSizeLabel, customCommandLabel, copyMoveLabel]
-allCheckboxes = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
-    checkForUpdatesBox, regexpCheckbox, ignoreHardlinksBox, debugModeCheckbox]
+allCheckboxes = [mixKindBox, removeEmptyFoldersBox, checkForUpdatesBox, regexpCheckbox,
+    ignoreHardlinksBox, debugModeCheckbox]
 if edition == 'se':
     allLabels += [smallFilesThresholdSuffixLabel]
-    allCheckboxes += [ignoreSmallFilesBox]
+    allCheckboxes += [ignoreSmallFilesBox, wordWeightingBox, matchSimilarWordsBox]
 elif edition == 'me':
     allLabels += [tagsToScanLabel]
-    allCheckboxes += tagBoxes
+    allCheckboxes += tagBoxes + [wordWeightingBox, matchSimilarWordsBox]
+elif edition == 'pe':
+    allCheckboxes += [matchDifferentDimensionsBox]
 for label in allLabels:
     label.controlSize = ControlSize.Small
 fewerResultsLabel.alignment = TextAlignment.Right
@@ -153,11 +162,15 @@ if edition == 'me':
 else:
     viewToPackCheckboxesUnder = fontSizeCombo
 
-checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox]
 if edition == 'se':
-    checkboxesToLayout.append(ignoreSmallFilesBox)
-else:
-    checkboxesToLayout.append(checkForUpdatesBox)
+    checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
+        ignoreSmallFilesBox]
+elif edition == 'me':
+    checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
+        checkForUpdatesBox]
+elif edition == 'pe':
+    checkboxesToLayout = [matchDifferentDimensionsBox, mixKindBox, removeEmptyFoldersBox,
+        checkForUpdatesBox]
 checkboxLayout = VLayout(checkboxesToLayout)
 checkboxLayout.packRelativeTo(viewToPackCheckboxesUnder, Pack.Below)
 checkboxLayout.fill(Pack.Left)

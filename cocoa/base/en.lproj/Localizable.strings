@@ -137,6 +137,11 @@
 "Genre" = "Genre";
 "Year" = "Year";
 
+"dupeGuru PE Preferences" = "dupeGuru PE Preferences";
+"Match pictures of different dimensions" = "Match pictures of different dimensions";
+"EXIF Timestamp" = "EXIF Timestamp";
+"Contents" = "Contents";
+
 /* Main Menu */
 "Bring All to Front" = "Bring All to Front";
 "Window" = "Window";
