@@ -44,6 +44,7 @@ def build(ctx):
     cocoalib_includes = [cocoalib_node] + [cocoalib_node.find_dir(folder) for folder in cocoalib_folders]
     cocoalib_uses = ['NSEventAdditions', 'Dialogs', 'HSAboutBox', 'HSFairwareReminder', 'Utils',
         'HSPyUtil', 'ProgressController', 'HSRecentFiles', 'HSQuicklook', 'ValueTransformers',
+        'NSImageAdditions', 'NSNotificationAdditions',
         'views/HSTableView', 'views/HSOutlineView', 'views/NSIndexPathAdditions',
         'views/NSTableViewAdditions',
         'controllers/HSColumns', 'controllers/HSGUIController', 'controllers/HSTable',
