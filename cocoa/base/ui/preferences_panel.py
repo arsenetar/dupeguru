@@ -22,11 +22,10 @@ advancedTab = tabView.addTab("Advanced")
 scanTypePopup = Popup(basicTab.view, scanTypeNames[edition])
 scanTypeLabel = Label(basicTab.view, "Scan Type:")
 thresholdSlider = Slider(basicTab.view, 1, 100, 80)
-# XXX add a number formatter to this
 thresholdLabel = Label(basicTab.view, "Filter hardness:")
 moreResultsLabel = Label(basicTab.view, "More results")
 fewerResultsLabel = Label(basicTab.view, "Fewer results")
-thresholdValuelabel = Label(basicTab.view, "")
+thresholdValueLabel = Label(basicTab.view, "")
 fontSizeCombo = Combobox(basicTab.view, ["11", "12", "13", "14", "18", "24"])
 fontSizeLabel = Label(basicTab.view, "Font Size:")
 if edition in ('se', 'me'):
@@ -63,7 +62,7 @@ resetToDefaultsButton = Button(result, "Reset To Defaults")
 
 scanTypePopup.bind('selectedIndex', defaults, 'values.scanType')
 thresholdSlider.bind('value', defaults, 'values.minMatchPercentage')
-thresholdValuelabel.bind('value', defaults, 'values.minMatchPercentage')
+thresholdValueLabel.bind('value', defaults, 'values.minMatchPercentage')
 fontSizeCombo.bind('value', defaults, 'values.TableFontSize')
 mixKindBox.bind('value', defaults, 'values.mixFileKind')
 removeEmptyFoldersBox.bind('value', defaults, 'values.removeEmptyFolders')
@@ -97,7 +96,9 @@ elif edition == 'pe':
 
 result.canResize = False
 result.canMinimize = False
-allLabels = [scanTypeLabel, thresholdValuelabel, moreResultsLabel, fewerResultsLabel,
+thresholdValueLabel.formatter = NumberFormatter(NumberStyle.Decimal)
+thresholdValueLabel.formatter.maximumFractionDigits = 0
+allLabels = [scanTypeLabel, thresholdValueLabel, moreResultsLabel, fewerResultsLabel,
     thresholdLabel, fontSizeLabel, customCommandLabel, copyMoveLabel]
 allCheckboxes = [mixKindBox, removeEmptyFoldersBox, checkForUpdatesBox, regexpCheckbox,
     ignoreHardlinksBox, debugModeCheckbox]
@@ -118,7 +119,7 @@ resetToDefaultsButton.action = Action(defaults, 'revertToInitialValues:')
 
 scanTypeLabel.width = thresholdLabel.width = fontSizeLabel.width = 94
 fontSizeCombo.width = 66
-thresholdValuelabel.width = 25
+thresholdValueLabel.width = 25
 resetToDefaultsButton.width = 136
 if edition == 'se':
     smallFilesThresholdText.width = 60
@@ -136,7 +137,7 @@ scanTypePopup.packToCorner(Pack.UpperRight)
 scanTypeLabel.packRelativeTo(scanTypePopup, Pack.Left)
 scanTypePopup.fill(Pack.Left)
 thresholdSlider.packRelativeTo(scanTypePopup, Pack.Below)
-thresholdValuelabel.packRelativeTo(thresholdSlider, Pack.Right)
+thresholdValueLabel.packRelativeTo(thresholdSlider, Pack.Right)
 thresholdSlider.fill(Pack.Right)
 # We want to give the labels as much space as possible, and we only "know" how much is available
 # after the slider's fill operation.
