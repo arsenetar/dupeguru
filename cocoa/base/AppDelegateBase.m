@@ -170,7 +170,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)startScanning
 {
-    [[self resultWindow] startDuplicateScan:nil];
+    [[self resultWindow] startDuplicateScan];
 }
 
 

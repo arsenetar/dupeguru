@@ -39,7 +39,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [self initResultColumns];
     [self fillColumnsMenu];
     [matches setTarget:self];
-    [matches setDoubleAction:@selector(openClicked:)];
+    [matches setDoubleAction:@selector(openClicked)];
     [self adjustUIToLocalization];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobStarted:) name:JobStarted object:nil];
@@ -79,7 +79,7 @@ http://www.hardcoded.net/licenses/bsd_license
     }
     [[app columnsMenu] addItem:[NSMenuItem separatorItem]];
     NSMenuItem *mi = [[app columnsMenu] addItemWithTitle:TR(@"Reset to Default")
-        action:@selector(resetColumnsToDefault:) keyEquivalent:@""];
+        action:@selector(resetColumnsToDefault) keyEquivalent:@""];
     [mi setTarget:self];
 }
 
@@ -120,21 +120,21 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Actions */
-- (IBAction)changeOptions:(id)sender
+- (void)changeOptions
 {
     NSInteger seg = [optionsSwitch selectedSegment];
     if (seg == 0) {
-        [self toggleDetailsPanel:sender];
+        [self toggleDetailsPanel];
     }
     else if (seg == 1) {
-        [self togglePowerMarker:sender];
+        [self togglePowerMarker];
     }
     else if (seg == 2) {
-        [self toggleDelta:sender];
+        [self toggleDelta];
     }
 }
 
-- (IBAction)copyMarked:(id)sender
+- (void)copyMarked
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
@@ -142,62 +142,62 @@ http://www.hardcoded.net/licenses/bsd_license
     [model copyMarked];
 }
 
-- (IBAction)trashMarked:(id)sender
+- (void)trashMarked
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
     [model deleteMarked];
 }
 
-- (IBAction)exportToXHTML:(id)sender
+- (void)exportToXHTML
 {
     NSString *exported = [model exportToXHTML];
     [[NSWorkspace sharedWorkspace] openFile:exported];
 }
 
-- (IBAction)filter:(id)sender
+- (void)filter
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [model setEscapeFilterRegexp:!n2b([ud objectForKey:@"useRegexpFilter"])];
     [model applyFilter:[filterField stringValue]];
 }
 
-- (IBAction)focusOnFilterField:(id)sender
+- (void)focusOnFilterField
 {
     [[self window] makeFirstResponder:filterField];
 }
 
-- (IBAction)ignoreSelected:(id)sender
+- (void)ignoreSelected
 {
     [model addSelectedToIgnoreList];
 }
 
-- (IBAction)invokeCustomCommand:(id)sender
+- (void)invokeCustomCommand
 {
     [model invokeCustomCommand];
 }
 
-- (IBAction)markAll:(id)sender
+- (void)markAll
 {
     [model markAll];
 }
 
-- (IBAction)markInvert:(id)sender
+- (void)markInvert
 {
     [model markInvert];
 }
 
-- (IBAction)markNone:(id)sender
+- (void)markNone
 {
     [model markNone];
 }
 
-- (IBAction)markSelected:(id)sender
+- (void)markSelected
 {
     [model toggleSelectedMark];
 }
 
-- (IBAction)moveMarked:(id)sender
+- (void)moveMarked
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [model setRemoveEmptyFolders:n2b([ud objectForKey:@"removeEmptyFolders"])];
@@ -205,7 +205,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [model moveMarked];
 }
 
-- (IBAction)openClicked:(id)sender
+- (void)openClicked
 {
     if ([matches clickedRow] < 0) {
         return;
@@ -214,29 +214,29 @@ http://www.hardcoded.net/licenses/bsd_license
     [model openSelected];
 }
 
-- (IBAction)openSelected:(id)sender
+- (void)openSelected
 {
     [model openSelected];
 }
 
-- (IBAction)removeMarked:(id)sender
+- (void)removeMarked
 {
     [model removeMarked];
 }
 
-- (IBAction)removeSelected:(id)sender
+- (void)removeSelected
 {
     [model removeSelected];
 }
 
-- (IBAction)renameSelected:(id)sender
+- (void)renameSelected
 {
     NSInteger col = [matches columnWithIdentifier:@"0"];
     NSInteger row = [matches selectedRow];
     [matches editColumn:col row:row withEvent:[NSApp currentEvent] select:YES];
 }
 
-- (IBAction)reprioritizeResults:(id)sender
+- (void)reprioritizeResults
 {
     PrioritizeDialog *dlg = [[PrioritizeDialog alloc] initWithApp:model];
     NSInteger result = [NSApp runModalForWindow:[dlg window]];
@@ -247,17 +247,17 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self window] makeKeyAndOrderFront:nil];
 }
 
-- (IBAction)resetColumnsToDefault:(id)sender
+- (void)resetColumnsToDefault
 {
     [[[table columns] model] resetToDefaults];
 }
 
-- (IBAction)revealSelected:(id)sender
+- (void)revealSelected
 {
     [model revealSelected];
 }
 
-- (IBAction)saveResults:(id)sender
+- (void)saveResults
 {
     NSSavePanel *sp = [NSSavePanel savePanel];
     [sp setCanCreateDirectories:YES];
@@ -269,7 +269,7 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)startDuplicateScan:(id)sender
+- (void)startDuplicateScan
 {
     if ([model resultsAreModified]) {
         if ([Dialogs askYesNo:TR(@"You have unsaved results, do you really want to continue?")] == NSAlertSecondButtonReturn) // NO
@@ -279,37 +279,37 @@ http://www.hardcoded.net/licenses/bsd_license
     [model doScan];
 }
 
-- (IBAction)switchSelected:(id)sender
+- (void)switchSelected
 {
     [model makeSelectedReference];
 }
 
-- (IBAction)toggleColumn:(id)sender
+- (void)toggleColumn:(id)sender
 {
     NSMenuItem *mi = sender;
     BOOL checked = [[[table columns] model] toggleMenuItem:[mi tag]];
     [mi setState:checked ? NSOnState : NSOffState];
 }
 
-- (IBAction)toggleDetailsPanel:(id)sender
+- (void)toggleDetailsPanel
 {
     [[app detailsPanel] toggleVisibility];
     [self updateOptionSegments];
 }
 
-- (IBAction)toggleDelta:(id)sender
+- (void)toggleDelta
 {
     [table setDeltaValuesMode:![table deltaValuesMode]];
     [self updateOptionSegments];
 }
 
-- (IBAction)togglePowerMarker:(id)sender
+- (void)togglePowerMarker
 {
     [table setPowerMarkerMode:![table powerMarkerMode]];
     [self updateOptionSegments];
 }
 
-- (IBAction)toggleQuicklookPanel:(id)sender
+- (void)toggleQuicklookPanel
 {
     if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
         [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];

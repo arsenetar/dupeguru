@@ -26,7 +26,7 @@ item.image = 'NSActionTemplate'
 actionPopup.width = 44
 actionToolItem.view = actionPopup
 filterField = SearchField(None, "Filter")
-filterField.action = Action(owner, 'filter:')
+filterField.action = Action(owner, 'filter')
 filterField.sendsWholeSearchString = True
 filterToolItem.view = filterField
 filterToolItem.minSize = Size(80, 22)
@@ -35,7 +35,7 @@ quickLookButton = Button(None, "")
 quickLookButton.bezelStyle = const.NSTexturedRoundedBezelStyle
 quickLookButton.image = 'NSQuickLookTemplate'
 quickLookButton.width = 44
-quickLookButton.action = Action(owner, 'toggleQuicklookPanel:')
+quickLookButton.action = Action(owner, 'toggleQuicklookPanel')
 quicklookToolItem.view = quickLookButton
 optionsSegments = SegmentedControl(None)
 optionsSegments.segmentStyle = const.NSSegmentStyleCapsule
@@ -44,23 +44,23 @@ optionsSegments.font = Font(FontFamily.System, 11)
 optionsSegments.addSegment("Details", 57)
 optionsSegments.addSegment("Dupes Only", 82)
 optionsSegments.addSegment("Delta", 48)
-optionsSegments.action = Action(owner, 'changeOptions:')
+optionsSegments.action = Action(owner, 'changeOptions')
 optionsToolItem.view = optionsSegments
 
 # Popuplate menus
-actionPopup.menu.addItem("Send Marked to Trash...", action=Action(owner, 'trashMarked:'))
-actionPopup.menu.addItem("Move Marked to...", action=Action(owner, 'moveMarked:'))
-actionPopup.menu.addItem("Copy Marked to...", action=Action(owner, 'copyMarked:'))
-actionPopup.menu.addItem("Remove Marked from Results", action=Action(owner, 'removeMarked:'))
+actionPopup.menu.addItem("Send Marked to Trash...", action=Action(owner, 'trashMarked'))
+actionPopup.menu.addItem("Move Marked to...", action=Action(owner, 'moveMarked'))
+actionPopup.menu.addItem("Copy Marked to...", action=Action(owner, 'copyMarked'))
+actionPopup.menu.addItem("Remove Marked from Results", action=Action(owner, 'removeMarked'))
 actionPopup.menu.addSeparator()
 for menu in (actionPopup.menu, contextMenu):
-    menu.addItem("Remove Selected from Results", action=Action(owner, 'removeSelected:'))
-    menu.addItem("Add Selected to Ignore List", action=Action(owner, 'ignoreSelected:'))
-    menu.addItem("Make Selected Reference", action=Action(owner, 'switchSelected:'))
+    menu.addItem("Remove Selected from Results", action=Action(owner, 'removeSelected'))
+    menu.addItem("Add Selected to Ignore List", action=Action(owner, 'ignoreSelected'))
+    menu.addItem("Make Selected Reference", action=Action(owner, 'switchSelected'))
     menu.addSeparator()
-    menu.addItem("Open Selected with Default Application", action=Action(owner, 'openSelected:'))
-    menu.addItem("Reveal Selected in Finder", action=Action(owner, 'revealSelected:'))
-    menu.addItem("Rename Selected", action=Action(owner, 'renameSelected:'))
+    menu.addItem("Open Selected with Default Application", action=Action(owner, 'openSelected'))
+    menu.addItem("Reveal Selected in Finder", action=Action(owner, 'revealSelected'))
+    menu.addItem("Rename Selected", action=Action(owner, 'renameSelected'))
 
 # Doing connections
 owner.filterField = filterField
