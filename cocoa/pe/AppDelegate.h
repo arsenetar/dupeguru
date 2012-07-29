@@ -10,4 +10,5 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "AppDelegateBase.h"
 
 @interface AppDelegate : AppDelegateBase {}
+- (void)clearPictureCache;
 @end

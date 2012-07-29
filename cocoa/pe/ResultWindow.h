@@ -10,5 +10,5 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "../base/ResultWindow.h"
 
 @interface ResultWindow : ResultWindowBase {}
-- (IBAction)clearPictureCache:(id)sender;
+- (void)clearPictureCache;
 @end

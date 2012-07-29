@@ -69,7 +69,8 @@ def build_xibless(edition):
     xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
     xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI',
+        localizationTable='Localizable', args={'edition': edition})
     xibless.generate('cocoa/base/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI',
         localizationTable='Localizable', args={'edition': edition})
     if edition == 'pe':

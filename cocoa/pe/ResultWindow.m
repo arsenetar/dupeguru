@@ -48,7 +48,7 @@ http://www.hardcoded.net/licenses/bsd_license
 }
 
 /* Actions */
-- (IBAction)clearPictureCache:(id)sender
+- (void)clearPictureCache
 {
     NSString *msg = TR(@"Do you really want to remove all your cached picture analysis?");
     if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
