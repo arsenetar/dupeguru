@@ -7,10 +7,10 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "DetailsPanel.h"
+#import "DetailsPanelBase.h"
 #import "PyDupeGuru.h"
 
-@interface DetailsPanelPE : DetailsPanel
+@interface DetailsPanel : DetailsPanelBase
 {
     NSImageView *dupeImage;
     NSProgressIndicator *dupeProgressIndicator;

@@ -6,18 +6,17 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import "DetailsPanel.h"
-#import "DetailsPanel_UI.h"
+#import "DetailsPanelBase.h"
 #import "HSPyUtil.h"
 
-@implementation DetailsPanel
+@implementation DetailsPanelBase
 
 @synthesize detailsTable;
 
 - (id)initWithPyRef:(PyObject *)aPyRef
 {
     self = [super initWithWindow:nil];
-    [self setWindow:createDetailsPanel_UI(self)];
+    [self setWindow:[self createWindow]];
     model = [[PyDetailsPanel alloc] initWithModel:aPyRef];
     [model bindCallback:createCallback(@"DetailsPanelView", self)];
     return self;
@@ -32,6 +31,11 @@ http://www.hardcoded.net/licenses/bsd_license
 - (PyDetailsPanel *)model
 {
     return (PyDetailsPanel *)model;
+}
+
+- (NSWindow *)createWindow
+{
+    return nil; // Virtual
 }
 
 - (void)refreshDetails

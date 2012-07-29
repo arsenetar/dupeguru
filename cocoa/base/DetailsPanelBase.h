@@ -10,7 +10,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import <Python.h>
 #import "PyDetailsPanel.h"
 
-@interface DetailsPanel : NSWindowController <NSTableViewDataSource>
+@interface DetailsPanelBase : NSWindowController <NSTableViewDataSource>
 {
     NSTableView *detailsTable;
     
@@ -22,6 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPyRef:(PyObject *)aPyRef;
 - (PyDetailsPanel *)model;
 
+- (NSWindow *)createWindow;
 - (BOOL)isVisible;
 - (void)toggleVisibility;
 

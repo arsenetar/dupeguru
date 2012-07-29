@@ -10,10 +10,11 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "NSNotificationAdditions.h"
 #import "NSImageAdditions.h"
 #import "PyDupeGuru.h"
-#import "DetailsPanelPE.h"
+#import "DetailsPanel.h"
 #import "Consts.h"
+#import "DetailsPanel_UI.h"
 
-@implementation DetailsPanelPE
+@implementation DetailsPanel
 
 @synthesize dupeImage;
 @synthesize dupeProgressIndicator;
@@ -27,6 +28,11 @@ http://www.hardcoded.net/licenses/bsd_license
     _needsRefresh = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageLoaded:) name:ImageLoadedNotification object:self];
     return self;
+}
+
+- (NSWindow *)createWindow
+{
+    return createDetailsPanel_UI(self);
 }
 
 - (void)loadImageAsync:(NSString *)imagePath

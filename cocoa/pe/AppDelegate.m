@@ -11,7 +11,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Utils.h"
 #import "ValueTransformers.h"
 #import "Consts.h"
-#import "DetailsPanelPE.h"
+#import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 #import "ResultWindow.h"
 
@@ -64,7 +64,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanelPE alloc] initWithApp:model];
+    return [[DetailsPanel alloc] initWithApp:model];
 }
 
 - (void)clearPictureCache
