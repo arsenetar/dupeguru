@@ -21,6 +21,7 @@ owner.loadRecentButtonPopUp = loadRecentPopup
 result.autosaveName = 'DirectoryPanel'
 result.canMinimize = False
 result.minSize = Size(370, 270)
+addButton.bezelStyle = removeButton.bezelStyle = const.NSTexturedRoundedBezelStyle
 addButton.image = 'NSAddTemplate'
 removeButton.image = 'NSRemoveTemplate'
 for button in (addButton, removeButton):
