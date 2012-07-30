@@ -37,11 +37,11 @@ General dependencies
 OS X prerequisites
 ------------------
 
-- XCode 4.1
-- Sparkle (http://sparkle.andymatuschak.org/)
+- XCode's command line tools
 - objp 1.1.0 (http://bitbucket.org/hsoft/objp)
 - pluginbuilder 1.1.0 (http://bitbucket.org/hsoft/pluginbuilder)
 - appscript 1.0.0 for ME and PE (http://appscript.sourceforge.net/)
+- xibless 0.4.0 (https://bitbucket.org/hsoft/xibless)
 
 Windows prerequisites
 ---------------------
