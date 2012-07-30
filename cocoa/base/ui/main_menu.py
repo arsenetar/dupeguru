@@ -60,7 +60,7 @@ actionMenu.addSeparator()
 actionMenu.addItem("Open Selected with Default Application", Action(None, 'openSelected'), 'cmd+return')
 actionMenu.addItem("Reveal Selected in Finder", Action(None, 'revealSelected'), 'cmd+alt+return')
 actionMenu.addItem("Invoke Custom Command", Action(None, 'invokeCustomCommand'), 'cmd+shift+c')
-actionMenu.addItem("Rename Selected", Action(None, 'renameSelected'))
+actionMenu.addItem("Rename Selected", Action(None, 'renameSelected'), 'enter')
 
 modeMenu.addItem("Show Dupes Only", Action(None, 'togglePowerMarker'), 'cmd+1')
 modeMenu.addItem("Show Delta Values", Action(None, 'toggleDelta'), 'cmd+2')
