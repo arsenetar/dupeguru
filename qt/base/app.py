@@ -274,3 +274,7 @@ class DupeGuru(QObject):
         flags = QFileDialog.ShowDirsOnly
         return QFileDialog.getExistingDirectory(self.resultWindow, prompt, '', flags)
     
+    def select_dest_file(self, prompt, extension):
+        files = tr("{} file (*.{})").format(extension.upper(), extension)
+        return QFileDialog.getSaveFileName(self.resultWindow, prompt, '', files)
+    

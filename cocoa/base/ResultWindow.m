@@ -151,12 +151,6 @@ http://www.hardcoded.net/licenses/bsd_license
     [model deleteMarked];
 }
 
-- (void)exportToXHTML
-{
-    NSString *exported = [model exportToXHTML];
-    [[NSWorkspace sharedWorkspace] openFile:exported];
-}
-
 - (void)filter
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];

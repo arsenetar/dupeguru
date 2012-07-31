@@ -28,7 +28,8 @@ appMenu.addItem("Quit dupeGuru", Action(NSApp, 'terminate:'), 'cmd+q')
 fileMenu.addItem("Load Results...", Action(None, 'loadResults'), 'cmd+o')
 owner.recentResultsMenu = fileMenu.addMenu("Load Recent Results")
 fileMenu.addItem("Save Results...", Action(None, 'saveResults'), 'cmd+s')
-fileMenu.addItem("Export Results to XHTML", Action(None, 'exportToXHTML'), 'cmd+shift+e')
+fileMenu.addItem("Export Results to XHTML", Action(owner.model, 'exportToXHTML'), 'cmd+shift+e')
+fileMenu.addItem("Export Results to CSV", Action(owner.model, 'exportToCSV'))
 if edition == 'pe':
     fileMenu.addItem("Clear Picture Cache", Action(owner, 'clearPictureCache'), 'cmd+shift+p')
 elif edition == 'me':

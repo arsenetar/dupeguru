@@ -23,6 +23,7 @@ class DupeGuruView(FairwareView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
     def showProblemDialog(self): pass
     def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
+    def selectDestFileWithPrompt_extension_(self, prompt: str, extension: str) -> str: pass
 
 class PyDupeGuruBase(PyFairware):
     FOLLOW_PROTOCOLS = ['Worker']
@@ -65,8 +66,11 @@ class PyDupeGuruBase(PyFairware):
     def doScan(self):
         self.model.start_scanning()
     
-    def exportToXHTML(self) -> str:
-        return self.model.export_to_xhtml()
+    def exportToXHTML(self):
+        self.model.export_to_xhtml()
+    
+    def exportToCSV(self):
+        self.model.export_to_csv()
     
     def loadSession(self):
         self.model.load()
@@ -216,4 +220,8 @@ class PyDupeGuruBase(PyFairware):
     @dontwrap
     def select_dest_folder(self, prompt):
         return self.callback.selectDestFolderWithPrompt_(prompt)
+    
+    @dontwrap
+    def select_dest_file(self, prompt, extension):
+        return self.callback.selectDestFileWithPrompt_extension_(prompt, extension)
     

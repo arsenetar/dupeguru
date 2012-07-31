@@ -291,4 +291,18 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
+- (NSString *)selectDestFileWithPrompt:(NSString *)prompt extension:(NSString *)extension
+{
+    NSSavePanel *sp = [NSSavePanel savePanel];
+    [sp setCanCreateDirectories:YES];
+    [sp setAllowedFileTypes:[NSArray arrayWithObject:extension]];
+    [sp setTitle:prompt];
+    if ([sp runModal] == NSOKButton) {
+        return [sp filename];
+    }
+    else {
+        return nil;
+    }
+}
+
 @end

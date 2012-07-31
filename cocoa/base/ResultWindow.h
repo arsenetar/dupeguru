@@ -57,7 +57,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)changeOptions;
 - (void)copyMarked;
 - (void)trashMarked;
-- (void)exportToXHTML;
 - (void)filter;
 - (void)focusOnFilterField;
 - (void)ignoreSelected;

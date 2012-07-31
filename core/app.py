@@ -90,6 +90,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     # show_results_window()
     # show_problem_dialog()
     # select_dest_folder(prompt: str) --> str
+    # select_dest_file(prompt: str, ext: str) --> str
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
@@ -198,6 +199,19 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return f
         except EnvironmentError:
             return None
+    
+    def _get_export_data(self):
+        columns = [col for col in self.result_table.columns.ordered_columns
+            if col.visible and col.name != 'marked']
+        colnames = [col.display for col in columns]
+        rows = []
+        for group_id, group in enumerate(self.results.groups):
+            for dupe in group:
+                data = self.get_display_info(dupe, group)
+                row = [data[col.name] for col in columns]
+                row.insert(0, group_id)
+                rows.append(row)
+        return colnames, rows
     
     def _results_changed(self):
         self.selected_dupes = [d for d in self.selected_dupes
@@ -356,17 +370,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.view.start_job(JobType.Delete, self._do_delete, args=args)
     
     def export_to_xhtml(self):
-        columns = [col for col in self.result_table.columns.ordered_columns
-            if col.visible and col.name != 'marked']
-        colnames = [col.display for col in columns]
-        rows = []
-        for group in self.results.groups:
-            for dupe in group:
-                data = self.get_display_info(dupe, group)
-                row = [data[col.name] for col in columns]
-                row.insert(0, dupe is not group.ref)
-                rows.append(row)
-        return export.export_to_xhtml(colnames, rows)
+        colnames, rows = self._get_export_data()
+        export_path = export.export_to_xhtml(colnames, rows)
+        self.view.open_path(export_path)
+    
+    def export_to_csv(self):
+        dest_file = self.view.select_dest_file(tr("Select a destination for your exported CSV"), 'csv')
+        if dest_file:
+            colnames, rows = self._get_export_data()
+            export.export_to_csv(dest_file, colnames, rows)
     
     def get_display_info(self, dupe, group, delta=False):
         def empty_data():

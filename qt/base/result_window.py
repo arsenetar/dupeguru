@@ -60,7 +60,8 @@ class ResultWindow(QMainWindow):
             ('actionMarkNone', 'Ctrl+Shift+A', '', tr("Mark None"), self.markNoneTriggered),
             ('actionInvertMarking', 'Ctrl+Alt+A', '', tr("Invert Marking"), self.markInvertTriggered),
             ('actionMarkSelected', '', '', tr("Mark Selected"), self.markSelectedTriggered),
-            ('actionExport', '', '', tr("Export To HTML"), self.exportTriggered),
+            ('actionExportToHTML', '', '', tr("Export To HTML"), self.app.model.export_to_xhtml),
+            ('actionExportToCSV', '', '', tr("Export To CSV"), self.app.model.export_to_csv),
             ('actionSaveResults', 'Ctrl+S', '', tr("Save Results..."), self.saveResultsTriggered),
             ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', tr("Invoke Custom Command"), self.app.invokeCustomCommand),
         ]
@@ -115,7 +116,8 @@ class ResultWindow(QMainWindow):
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)
         self.menuFile.addAction(self.actionSaveResults)
-        self.menuFile.addAction(self.actionExport)
+        self.menuFile.addAction(self.actionExportToHTML)
+        self.menuFile.addAction(self.actionExportToCSV)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
         
@@ -230,11 +232,6 @@ class ResultWindow(QMainWindow):
     
     def detailsTriggered(self):
         self.app.show_details()
-    
-    def exportTriggered(self):
-        exported_path = self.app.model.export_to_xhtml()
-        url = QUrl.fromLocalFile(exported_path)
-        QDesktopServices.openUrl(url)
     
     def makeReferenceTriggered(self):
         self.app.model.make_selected_reference()
