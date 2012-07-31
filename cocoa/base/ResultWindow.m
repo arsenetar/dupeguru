@@ -37,6 +37,7 @@ http://www.hardcoded.net/licenses/bsd_license
     problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
     deletionOptions = [[DeletionOptions alloc] initWithPyRef:[model deletionOptions]];
     [self initResultColumns];
+    [[table columns] setColumnsAsReadOnly];
     [self fillColumnsMenu];
     [matches setTarget:self];
     [matches setDoubleAction:@selector(openClicked)];
@@ -232,7 +233,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)renameSelected
 {
-    NSInteger col = [matches columnWithIdentifier:@"0"];
+    NSInteger col = [matches columnWithIdentifier:@"name"];
     NSInteger row = [matches selectedRow];
     [matches editColumn:col row:row withEvent:[NSApp currentEvent] select:YES];
 }
