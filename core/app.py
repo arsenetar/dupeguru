@@ -502,9 +502,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return False
     
     def reprioritize_groups(self, sort_key):
+        count = 0
         for group in self.results.groups:
-            group.prioritize(key_func=sort_key)
+            if group.prioritize(key_func=sort_key):
+                count += 1
         self._results_changed()
+        msg = tr("{} duplicate groups were changed by the re-prioritization.").format(count)
+        self.view.show_message(msg)
     
     def reveal_selected(self):
         if self.selected_dupes:

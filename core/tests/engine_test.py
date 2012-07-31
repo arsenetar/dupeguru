@@ -656,7 +656,7 @@ class TestCaseGroup:
         g.add_match(m2)
         g.add_match(m3)
         assert o1 is g.ref
-        g.prioritize(lambda x:x.name)
+        assert g.prioritize(lambda x:x.name)
         assert o3 is g.ref
     
     def test_prioritize_with_tie_breaker(self):
@@ -703,6 +703,14 @@ class TestCaseGroup:
         g.prioritize(lambda x: -x.size)
         assert g.ref is o1
     
+    def test_prioritize_nothing_changes(self):
+        # prioritize() returns False when nothing changes in the group.
+        g = get_test_group()
+        g[0].name = 'a'
+        g[1].name = 'b'
+        g[2].name = 'c'
+        assert not g.prioritize(lambda x:x.name)
+        
     def test_list_like(self):
         g = Group()
         o1,o2 = (NamedObject("foo",True),NamedObject("bar",True))

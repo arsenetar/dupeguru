@@ -290,10 +290,13 @@ class Group:
     
     def prioritize(self, key_func, tie_breaker=None):
         # tie_breaker(ref, dupe) --> True if dupe should be ref
+        # Returns True if anything changed during prioritization.
         master_key_func = lambda x: (-x.is_ref, key_func(x))
-        self.ordered.sort(key=master_key_func)
+        new_order = sorted(self.ordered, key=master_key_func)
+        changed = new_order != self.ordered
+        self.ordered = new_order
         if tie_breaker is None:
-            return
+            return changed
         ref = self.ref
         key_value = key_func(ref)
         for dupe in self.dupes:
@@ -303,6 +306,8 @@ class Group:
                 ref = dupe
         if ref is not self.ref:
             self.switch_ref(ref)
+            return True
+        return changed
     
     def remove_dupe(self, item, discard_matches=True):
         try:
