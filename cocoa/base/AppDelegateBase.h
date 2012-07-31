@@ -37,6 +37,7 @@ http://www.hardcoded.net/licenses/bsd_license
 @property (readwrite, retain) SUUpdater *updater;
 
 /* Virtual */
++ (NSDictionary *)defaultPreferences;
 - (PyDupeGuru *)model;
 - (ResultWindowBase *)createResultWindow;
 - (DirectoryPanel *)createDirectoryPanel;

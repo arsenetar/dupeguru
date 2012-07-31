@@ -12,6 +12,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "HSPyUtil.h"
 #import "Consts.h"
 #import "Dialogs.h"
+#import "Utils.h"
 #import "ValueTransformers.h"
 #import "PreferencesPanel_UI.h"
 
@@ -21,10 +22,30 @@ http://www.hardcoded.net/licenses/bsd_license
 @synthesize columnsMenu;
 @synthesize updater;
 
++ (NSDictionary *)defaultPreferences
+{
+    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    [d setObject:i2n(1) forKey:@"recreatePathType"];
+    [d setObject:i2n(11) forKey:TableFontSize];
+    [d setObject:b2n(YES) forKey:@"mixFileKind"];
+    [d setObject:b2n(NO) forKey:@"useRegexpFilter"];
+    [d setObject:b2n(NO) forKey:@"ignoreHardlinkMatches"];
+    [d setObject:b2n(NO) forKey:@"removeEmptyFolders"];
+    [d setObject:b2n(NO) forKey:@"DebugMode"];
+    [d setObject:@"" forKey:@"CustomCommand"];
+    [d setObject:[NSArray array] forKey:@"recentDirectories"];
+    [d setObject:[NSArray array] forKey:@"columnsOrder"];
+    [d setObject:[NSDictionary dictionary] forKey:@"columnsWidth"];
+    return d;
+}
+
 + (void)initialize
 {
     HSVTAdd *vt = [[[HSVTAdd alloc] initWithValue:4] autorelease];
     [NSValueTransformer setValueTransformer:vt forName:@"vtRowHeightOffset"];
+    NSDictionary *d = [self defaultPreferences];
+    [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:d];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:d];
 }
 
 - (id)init

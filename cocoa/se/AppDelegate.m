@@ -16,29 +16,16 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Consts.h"
 
 @implementation AppDelegate
-+ (void)initialize
++ (NSDictionary *)defaultPreferences
 {
-    [super initialize];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:[super defaultPreferences]];
     [d setObject:i2n(1) forKey:@"scanType"];
     [d setObject:i2n(80) forKey:@"minMatchPercentage"];
     [d setObject:i2n(30) forKey:@"smallFileThreshold"];
-    [d setObject:i2n(1) forKey:@"recreatePathType"];
-    [d setObject:i2n(11) forKey:TableFontSize];
     [d setObject:b2n(YES) forKey:@"wordWeighting"];
     [d setObject:b2n(NO) forKey:@"matchSimilarWords"];
-    [d setObject:b2n(YES) forKey:@"mixFileKind"];
-    [d setObject:b2n(NO) forKey:@"useRegexpFilter"];
-    [d setObject:b2n(NO) forKey:@"ignoreHardlinkMatches"];
-    [d setObject:b2n(NO) forKey:@"removeEmptyFolders"];
     [d setObject:b2n(YES) forKey:@"ignoreSmallFiles"];
-    [d setObject:b2n(NO) forKey:@"debug"];
-    [d setObject:[NSArray array] forKey:@"recentDirectories"];
-    [d setObject:[NSArray array] forKey:@"columnsOrder"];
-    [d setObject:[NSDictionary dictionary] forKey:@"columnsWidth"];
-    [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:d];
-    [ud registerDefaults:d];
+    return d;
 }
 
 - (id)init

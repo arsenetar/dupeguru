@@ -16,26 +16,13 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "ResultWindow.h"
 
 @implementation AppDelegate
-+ (void)initialize
++ (NSDictionary *)defaultPreferences
 {
-    [super initialize];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:[super defaultPreferences]];
     [d setObject:i2n(0) forKey:@"scanType"];
     [d setObject:i2n(95) forKey:@"minMatchPercentage"];
-    [d setObject:i2n(1) forKey:@"recreatePathType"];
-    [d setObject:i2n(11) forKey:TableFontSize];
     [d setObject:b2n(NO) forKey:@"matchScaled"];
-    [d setObject:b2n(YES) forKey:@"mixFileKind"];
-    [d setObject:b2n(NO) forKey:@"useRegexpFilter"];
-    [d setObject:b2n(NO) forKey:@"ignoreHardlinkMatches"];
-    [d setObject:b2n(NO) forKey:@"removeEmptyFolders"];
-    [d setObject:b2n(NO) forKey:@"debug"];
-    [d setObject:[NSArray array] forKey:@"recentDirectories"];
-    [d setObject:[NSArray array] forKey:@"columnsOrder"];
-    [d setObject:[NSDictionary dictionary] forKey:@"columnsWidth"];
-    [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:d];
-    [ud registerDefaults:d];
+    return d;
 }
 
 - (id)init
