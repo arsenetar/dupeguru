@@ -188,13 +188,11 @@ def build_updatepot():
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
     print("Building cocoalib.pot")
-    loc.allstrings2pot(op.join('cocoalib', 'en.lproj'), op.join('cocoalib', 'locale', 'cocoalib.pot'))
+    loc.strings2pot(op.join('cocoalib', 'en.lproj', 'cocoalib.strings'),
+        op.join('cocoalib', 'locale', 'cocoalib.pot'))
     print("Enhancing ui.pot with Cocoa's strings files")
-    loc.allstrings2pot(op.join('cocoa', 'base', 'en.lproj'), op.join('locale', 'ui.pot'),
-        excludes={'core', 'message', 'columns'})
-    loc.allstrings2pot(op.join('cocoa', 'se', 'en.lproj'), op.join('locale', 'ui.pot'))
-    loc.allstrings2pot(op.join('cocoa', 'me', 'en.lproj'), op.join('locale', 'ui.pot'))
-    loc.allstrings2pot(op.join('cocoa', 'pe', 'en.lproj'), op.join('locale', 'ui.pot'))
+    loc.strings2pot(op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
+        op.join('locale', 'ui.pot'))
 
 def build_mergepot():
     print("Updating .po files using .pot files")
