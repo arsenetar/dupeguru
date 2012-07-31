@@ -170,6 +170,7 @@
 "Start Duplicate Scan" = "Start Duplicate Scan";
 "Rename Selected" = "Rename Selected";
 "Export Results to XHTML" = "Export Results to XHTML";
+"Export Results to CSV" = "Export Results to CSV";
 "Check for update..." = "Check for update...";
 "Mode" = "Mode";
 "Show Dupes Only" = "Show Dupes Only";

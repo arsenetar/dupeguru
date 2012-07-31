@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: core/app.py:96
+#: core/app.py:97
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "միաժամանակ հնարավոր է ջնջել, տեղափոխել կամ պատճենել միայն 10 օրինակներ"
 
-#: core/app.py:258
+#: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:529
+#: core/app.py:541
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:540
+#: core/app.py:552
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:579
+#: core/app.py:591
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -134,23 +134,23 @@ msgstr ""
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:216
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:229
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:230
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:231
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:278
+#: core/app.py:292
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -161,23 +161,23 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը անտեսումների ցանկից:"
 
-#: core/app.py:391
+#: core/app.py:403
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:478 core/app.py:489
+#: core/app.py:490 core/app.py:501
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:338
+#: core/app.py:352
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:338
+#: core/app.py:352
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:339
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
@@ -193,14 +193,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:509
+#: core/app.py:521
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:269
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core/app.py:271
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
+
+#: core/app.py:378
+msgid "Select a destination for your exported CSV"
+msgstr ""

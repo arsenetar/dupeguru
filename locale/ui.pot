@@ -116,6 +116,10 @@ msgid ""
 "Wait a few seconds, then try again."
 msgstr ""
 
+#: qt/base/app.py:278
+msgid "{} file (*.{})"
+msgstr ""
+
 #: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr ""
@@ -177,16 +181,16 @@ msgstr ""
 msgid "Add Folder..."
 msgstr ""
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:75
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:76
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "File"
 msgstr ""
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:83
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:84
 msgid "View"
 msgstr ""
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:85
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:86
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Help"
 msgstr ""
@@ -227,7 +231,7 @@ msgstr ""
 msgid "All Files (*.*)"
 msgstr ""
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:293
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:290
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr ""
 
@@ -342,14 +346,14 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr ""
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:168
+#: qt/base/result_window.py:44 qt/base/result_window.py:170
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr ""
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:79
-#: qt/base/result_window.py:143 qt/base/result_window.py:167
+#: qt/base/result_window.py:45 qt/base/result_window.py:80
+#: qt/base/result_window.py:145 qt/base/result_window.py:169
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr ""
@@ -426,39 +430,43 @@ msgstr ""
 msgid "Export To HTML"
 msgstr ""
 
-#: qt/base/result_window.py:64 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Save Results..."
+#: qt/base/result_window.py:64
+msgid "Export To CSV"
 msgstr ""
 
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Save Results..."
+msgstr ""
+
+#: qt/base/result_window.py:66 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
 msgstr ""
 
-#: qt/base/result_window.py:77
+#: qt/base/result_window.py:78
 msgid "Mark"
 msgstr ""
 
-#: qt/base/result_window.py:81 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:82 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Columns"
 msgstr ""
 
-#: qt/base/result_window.py:139 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:141 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Defaults"
 msgstr ""
 
-#: qt/base/result_window.py:161
+#: qt/base/result_window.py:163
 msgid "{} Results"
 msgstr ""
 
-#: qt/base/result_window.py:169 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr ""
 
-#: qt/base/result_window.py:170
+#: qt/base/result_window.py:172
 msgid "Delta Values"
 msgstr ""
 
-#: qt/base/result_window.py:292 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr ""
 
@@ -782,6 +790,10 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to CSV"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0

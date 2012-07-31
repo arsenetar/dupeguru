@@ -117,16 +117,16 @@ msgstr "Вікно результатів"
 msgid "Add Folder..."
 msgstr "Додати папку ..."
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:75
+#: qt/base/directories_dialog.py:67 qt/base/result_window.py:76
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "File"
 msgstr "Файл"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:83
+#: qt/base/directories_dialog.py:69 qt/base/result_window.py:84
 msgid "View"
 msgstr "Вид"
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:85
+#: qt/base/directories_dialog.py:71 qt/base/result_window.py:86
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Help"
 msgstr "Допомога"
@@ -167,7 +167,7 @@ msgstr "Виберіть файл результатів для завантаж
 msgid "All Files (*.*)"
 msgstr "Всі файли (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:293
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:290
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Результати dupeGuru (*.dupeguru) "
 
@@ -281,14 +281,14 @@ msgstr "Показати вибрані"
 msgid "Close"
 msgstr "Закрити"
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:168
+#: qt/base/result_window.py:44 qt/base/result_window.py:170
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Деталі"
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:79
-#: qt/base/result_window.py:143 qt/base/result_window.py:167
+#: qt/base/result_window.py:45 qt/base/result_window.py:80
+#: qt/base/result_window.py:145 qt/base/result_window.py:169
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr "Дії"
@@ -361,31 +361,31 @@ msgstr "Позначити обране"
 msgid "Export To HTML"
 msgstr "Експорт в HTML"
 
-#: qt/base/result_window.py:64 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
 msgstr "Зберегти результати ..."
 
-#: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:66 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
 msgstr "Викликати власну команду"
 
-#: qt/base/result_window.py:77
+#: qt/base/result_window.py:78
 msgid "Mark"
 msgstr "Позначити"
 
-#: qt/base/result_window.py:81 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:82 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Columns"
 msgstr "Колонки"
 
-#: qt/base/result_window.py:139 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:141 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Defaults"
 msgstr "Відновити налаштування за замовчуванням"
 
-#: qt/base/result_window.py:161
+#: qt/base/result_window.py:163
 msgid "{} Results"
 msgstr "{} Результати"
 
-#: qt/base/result_window.py:292 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Оберіть файл у який слід зберегти ваші результати"
 
@@ -682,7 +682,7 @@ msgstr "Дія"
 msgid "Directories"
 msgstr "Папки"
 
-#: qt/base/result_window.py:169 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr "Тільки дублікати"
 
@@ -754,7 +754,7 @@ msgstr "Виконується взаємодія з програмою iTunes. 
 msgid "The iTunes application couldn't be found."
 msgstr "Не можливо знайти програму iTunes"
 
-#: qt/base/result_window.py:170
+#: qt/base/result_window.py:172
 msgid "Delta Values"
 msgstr "Різниця"
 
@@ -839,4 +839,16 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
+msgstr ""
+
+#: qt/base/app.py:278
+msgid "{} file (*.{})"
+msgstr ""
+
+#: qt/base/result_window.py:64
+msgid "Export To CSV"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to CSV"
 msgstr ""
