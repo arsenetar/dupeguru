@@ -12,15 +12,15 @@ msgid ""
 "mode."
 msgstr ""
 
-#: core/app.py:526
+#: core/app.py:530
 msgid "Collecting files to scan"
 msgstr "Raccolta file da scansionare"
 
-#: core/app.py:537
+#: core/app.py:541
 msgid "The selected directories contain no scannable file."
 msgstr "Le cartelle selezionate non contengono file da scansionare."
 
-#: core/app.py:576
+#: core/app.py:580
 msgid "%s (%d discarded)"
 msgstr "%s (%d scartati)"
 
@@ -36,7 +36,7 @@ msgstr "Trovato/i %d duplicato/i"
 msgid "Read size of %d/%d files"
 msgstr "Lettura dimensione di %d/%d file"
 
-#: core/engine.py:355
+#: core/engine.py:360
 msgid "Grouped %d/%d matches"
 msgstr "Raggruppati %d/%d duplicati"
 
@@ -183,4 +183,8 @@ msgstr ""
 
 #: core/prioritize.py:99
 msgid "Shortest"
+msgstr ""
+
+#: core/app.py:510
+msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""

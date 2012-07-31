@@ -59,15 +59,19 @@ msgstr ""
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core/app.py:526
+#: core/app.py:510
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr ""
+
+#: core/app.py:530
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:537
+#: core/app.py:541
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:576
+#: core/app.py:580
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -83,7 +87,7 @@ msgstr ""
 msgid "Read size of %d/%d files"
 msgstr ""
 
-#: core/engine.py:355
+#: core/engine.py:360
 msgid "Grouped %d/%d matches"
 msgstr ""
 

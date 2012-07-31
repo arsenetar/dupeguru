@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:526
+#: core/app.py:530
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:537
+#: core/app.py:541
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:576
+#: core/app.py:580
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -50,7 +50,7 @@ msgstr "%d համընկնում է գտնվել"
 msgid "Read size of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի չափը"
 
-#: core/engine.py:355
+#: core/engine.py:360
 msgid "Grouped %d/%d matches"
 msgstr "Խմբավորվել է %d/%d համընկնում"
 
@@ -191,4 +191,8 @@ msgstr ""
 
 #: core/prioritize.py:99
 msgid "Shortest"
+msgstr ""
+
+#: core/app.py:510
+msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""

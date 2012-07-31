@@ -14,15 +14,15 @@ msgstr ""
 "Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la fois"
 " en mode démo."
 
-#: core/app.py:526
+#: core/app.py:530
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:537
+#: core/app.py:541
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:576
+#: core/app.py:580
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -38,7 +38,7 @@ msgstr "%d paires trouvées"
 msgid "Read size of %d/%d files"
 msgstr "Lu la taille de %d/%d fichiers"
 
-#: core/engine.py:355
+#: core/engine.py:360
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d paires groupées"
 
@@ -182,4 +182,8 @@ msgstr ""
 
 #: core/prioritize.py:99
 msgid "Shortest"
+msgstr ""
+
+#: core/app.py:510
+msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
