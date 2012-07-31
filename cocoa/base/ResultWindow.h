@@ -20,21 +20,27 @@ http://www.hardcoded.net/licenses/bsd_license
 @interface ResultWindowBase : NSWindowController
 {
 @protected
-    IBOutlet NSSegmentedControl *optionsSwitch;
-    IBOutlet NSToolbarItem *optionsToolbarItem;
-    IBOutlet HSTableView *matches;
-    IBOutlet NSTextField *stats;
-    IBOutlet NSSearchField *filterField;
+    NSSegmentedControl *optionsSwitch;
+    NSToolbarItem *optionsToolbarItem;
+    HSTableView *matches;
+    NSTextField *stats;
+    NSSearchField *filterField;
     
     AppDelegateBase *app;
     PyDupeGuru *model;
-    NSMenu *columnsMenu;
     ResultTable *table;
     StatsLabel *statsLabel;
     ProblemDialog *problemDialog;
     DeletionOptions *deletionOptions;
     QLPreviewPanel* previewPanel;
 }
+
+@property (readwrite, retain) NSSegmentedControl *optionsSwitch;
+@property (readwrite, retain) NSToolbarItem *optionsToolbarItem;
+@property (readwrite, retain) HSTableView *matches;
+@property (readwrite, retain) NSTextField *stats;
+@property (readwrite, retain) NSSearchField *filterField;
+
 - (id)initWithParentApp:(AppDelegateBase *)app;
 
 /* Virtual */
@@ -48,33 +54,33 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)adjustUIToLocalization;
 
 /* Actions */
-- (IBAction)changeOptions:(id)sender;
-- (IBAction)copyMarked:(id)sender;
-- (IBAction)trashMarked:(id)sender;
-- (IBAction)exportToXHTML:(id)sender;
-- (IBAction)filter:(id)sender;
-- (IBAction)focusOnFilterField:(id)sender;
-- (IBAction)ignoreSelected:(id)sender;
-- (IBAction)invokeCustomCommand:(id)sender;
-- (IBAction)markAll:(id)sender;
-- (IBAction)markInvert:(id)sender;
-- (IBAction)markNone:(id)sender;
-- (IBAction)markSelected:(id)sender;
-- (IBAction)moveMarked:(id)sender;
-- (IBAction)openClicked:(id)sender;
-- (IBAction)openSelected:(id)sender;
-- (IBAction)removeMarked:(id)sender;
-- (IBAction)removeSelected:(id)sender;
-- (IBAction)renameSelected:(id)sender;
-- (IBAction)reprioritizeResults:(id)sender;
-- (IBAction)resetColumnsToDefault:(id)sender;
-- (IBAction)revealSelected:(id)sender;
-- (IBAction)saveResults:(id)sender;
-- (IBAction)startDuplicateScan:(id)sender;
-- (IBAction)switchSelected:(id)sender;
-- (IBAction)toggleColumn:(id)sender;
-- (IBAction)toggleDelta:(id)sender;
-- (IBAction)toggleDetailsPanel:(id)sender;
-- (IBAction)togglePowerMarker:(id)sender;
-- (IBAction)toggleQuicklookPanel:(id)sender;
+- (void)changeOptions;
+- (void)copyMarked;
+- (void)trashMarked;
+- (void)exportToXHTML;
+- (void)filter;
+- (void)focusOnFilterField;
+- (void)ignoreSelected;
+- (void)invokeCustomCommand;
+- (void)markAll;
+- (void)markInvert;
+- (void)markNone;
+- (void)markSelected;
+- (void)moveMarked;
+- (void)openClicked;
+- (void)openSelected;
+- (void)removeMarked;
+- (void)removeSelected;
+- (void)renameSelected;
+- (void)reprioritizeResults;
+- (void)resetColumnsToDefault;
+- (void)revealSelected;
+- (void)saveResults;
+- (void)startDuplicateScan;
+- (void)switchSelected;
+- (void)toggleColumn:(id)sender;
+- (void)toggleDelta;
+- (void)toggleDetailsPanel;
+- (void)togglePowerMarker;
+- (void)toggleQuicklookPanel;
 @end

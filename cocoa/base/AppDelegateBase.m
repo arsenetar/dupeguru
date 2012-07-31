@@ -6,26 +6,40 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import "AppDelegate.h"
+#import "AppDelegateBase.h"
 #import "ProgressController.h"
 #import "HSFairwareReminder.h"
 #import "HSPyUtil.h"
 #import "Consts.h"
 #import "Dialogs.h"
 #import "ValueTransformers.h"
-#import <Sparkle/SUUpdater.h>
+#import "PreferencesPanel_UI.h"
 
 @implementation AppDelegateBase
+
+@synthesize recentResultsMenu;
+@synthesize columnsMenu;
+@synthesize updater;
+
 + (void)initialize
 {
     HSVTAdd *vt = [[[HSVTAdd alloc] initWithValue:4] autorelease];
     [NSValueTransformer setValueTransformer:vt forName:@"vtRowHeightOffset"];
 }
 
-- (void)awakeFromNib
+- (id)init
 {
+    self = [super init];
     model = [[PyDupeGuru alloc] init];
     [model bindCallback:createCallback(@"DupeGuruView", self)];
+    [self setUpdater:[SUUpdater sharedUpdater]];
+    return self;
+}
+
+- (void)finalizeInit
+{
+    // We can only finalize initialization once the main menu has been created, which cannot happen
+    // before AppDelegate is created.
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     /* Because the pref pane is lazily loaded, we have to manually do the update check if the
        preference is set.
@@ -92,10 +106,8 @@ http://www.hardcoded.net/licenses/bsd_license
     return _recentResults;
 }
 
-- (NSMenu *)columnsMenu { return columnsMenu; }
-
 /* Actions */
-- (IBAction)loadResults:(id)sender
+- (void)loadResults
 {
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setCanChooseFiles:YES];
@@ -111,12 +123,12 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)openWebsite:(id)sender
+- (void)openWebsite
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[self homepageURL]]];
 }
 
-- (IBAction)openHelp:(id)sender
+- (void)openHelp
 {
     NSBundle *b = [NSBundle mainBundle];
     NSString *p = [b pathForResource:@"index" ofType:@"html" inDirectory:@"help"];
@@ -124,40 +136,40 @@ http://www.hardcoded.net/licenses/bsd_license
     [[NSWorkspace sharedWorkspace] openURL:u];
 }
 
-- (IBAction)showAboutBox:(id)sender
+- (void)showAboutBox
 {
     if (_aboutBox == nil) {
         _aboutBox = [[HSAboutBox alloc] initWithApp:model];
     }
-    [[_aboutBox window] makeKeyAndOrderFront:sender];
+    [[_aboutBox window] makeKeyAndOrderFront:nil];
 }
 
-- (IBAction)showDirectoryWindow:(id)sender
+- (void)showDirectoryWindow
 {
     [[[self directoryPanel] window] makeKeyAndOrderFront:nil];
 }
 
-- (IBAction)showPreferencesPanel:(id)sender
+- (void)showPreferencesPanel
 {
     if (_preferencesPanel == nil) {
-        _preferencesPanel = [[NSWindowController alloc] initWithWindowNibName:@"Preferences"];
+        _preferencesPanel = [[NSWindowController alloc] initWithWindow:createPreferencesPanel_UI(nil)];
     }
-    [_preferencesPanel showWindow:sender];
+    [_preferencesPanel showWindow:nil];
 }
 
-- (IBAction)showResultWindow:(id)sender
+- (void)showResultWindow
 {
     [[[self resultWindow] window] makeKeyAndOrderFront:nil];
 }
 
-- (IBAction)showIgnoreList:(id)sender
+- (void)showIgnoreList
 {
     [model showIgnoreList];
 }
 
-- (IBAction)startScanning:(id)sender
+- (void)startScanning
 {
-    [[self resultWindow] startDuplicateScan:sender];
+    [[self resultWindow] startDuplicateScan];
 }
 
 

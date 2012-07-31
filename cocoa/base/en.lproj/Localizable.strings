@@ -26,3 +26,172 @@
 "Yes" = "Yes";
 "No" = "No";
 "OK" = "OK";
+
+/* Details Panel */
+"Details of Selected File" = "Details of Selected File";
+"Selected" = "Selected";
+"Reference" = "Reference";
+"Attribute" = "Attribute";
+
+/* Ignore List Dialog */
+"Ignore List" = "Ignore List";
+"Close" = "Close";
+"Remove Selected" = "Remove Selected";
+"Clear" = "Clear";
+
+/* Deletion Options */
+"Deletion Options" = "Deletion Options";
+"Hardlink deleted files" = "Hardlink deleted files";
+"After having deleted a duplicate, place a hardlink targeting the reference file to replace the deleted file." = "After having deleted a duplicate, place a hardlink targeting the reference file to replace the deleted file.";
+"Directly delete files" = "Directly delete files";
+"Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work." = "Instead of sending files to trash, delete them directly. This option is usually used as a workaround when the normal deletion method doesn't work.";
+"Proceed" = "Proceed";
+"Cancel" = "Cancel";
+
+/* Problem Dialog */
+"Problems!" = "Problems!";
+"There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results." = "There were problems processing some (or all) of the files. The cause of these problems are described in the table below. Those files were not removed from your results.";
+"Reveal Selected" = "Reveal Selected";
+
+/* Directory Panel */
+"State" = "State";
+"Name" = "Name";
+"Scan" = "Scan";
+"Normal" = "Normal";
+"Reference" = "Reference";
+"Excluded" = "Excluded";
+"Select folders to scan and press \"Scan\"." = "Select folders to scan and press \"Scan\".";
+"Load Results" = "Load Results";
+
+/* Prioritize Dialog */
+"Re-Prioritize duplicates" = "Re-Prioritize duplicates";
+"Ok" = "Ok";
+"Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information." = "Add criteria to the right box and click OK to send the dupes that correspond the best to these criteria to their respective group's reference position. Read the help file for more information.";
+
+/* Results Window */
+"dupeGuru Results" = "dupeGuru Results";
+"Options" = "Options";
+"Filter" = "Filter";
+"Action" = "Action";
+"Directories" = "Directories";
+"Send Marked to Trash..." = "Send Marked to Trash...";
+"Move Marked to..." = "Move Marked to...";
+"Copy Marked to..." = "Copy Marked to...";
+"Remove Marked from Results" = "Remove Marked from Results";
+"Remove Selected from Results" = "Remove Selected from Results";
+"Add Selected to Ignore List" = "Add Selected to Ignore List";
+"Make Selected Reference" = "Make Selected Reference";
+"Open Selected with Default Application" = "Open Selected with Default Application";
+"Reveal Selected in Finder" = "Reveal Selected in Finder";
+"Rename Selected" = "Rename Selected";
+"Details" = "Details";
+"Dupes Only" = "Dupes Only";
+"Delta" = "Delta";
+"Add Selected to Ignore List" = "Add Selected to Ignore List";
+"Rename Selected" = "Rename Selected";
+"Remove Selected from Results" = "Remove Selected from Results";
+"Make Selected Reference" = "Make Selected Reference";
+"Reveal Selected in Finder" = "Reveal Selected in Finder";
+"Open Selected with Default Application" = "Open Selected with Default Application";
+"Quick Look" = "Quick Look";
+
+/* Preferences */
+"dupeGuru Preferences" = "dupeGuru Preferences";
+"More results" = "More results";
+"Fewer results" = "Fewer results";
+"Filter hardness:" = "Filter hardness:";
+"Scan type:" = "Scan type:";
+"Content" = "Content";
+"Filename" = "Filename";
+"Word weighting" = "Word weighting";
+"Can mix file kind" = "Can mix file kind";
+"Reset to Defaults" = "Reset to Defaults";
+"Match similar words" = "Match similar words";
+"Copy and Move:" = "Copy and Move:";
+"Recreate relative path" = "Recreate relative path";
+"Recreate absolute path" = "Recreate absolute path";
+"Right in destination" = "Right in destination";
+"Automatically check for updates" = "Automatically check for updates";
+"Remove empty folders on delete or move" = "Remove empty folders on delete or move";
+"Ignore files smaller than:" = "Ignore files smaller than:";
+"KB" = "KB";
+"Basic" = "Basic";
+"Advanced" = "Advanced";
+"Use regular expressions when filtering" = "Use regular expressions when filtering";
+"Custom command (arguments: %d for dupe, %r for ref):" = "Custom command (arguments: %d for dupe, %r for ref):";
+"Ignore duplicates hardlinking to the same file" = "Ignore duplicates hardlinking to the same file";
+"Debug mode (restart required)" = "Debug mode (restart required)";
+"Folders" = "Folders";
+"Font size:" = "Font size:";
+
+"dupeGuru ME Preferences" = "dupeGuru ME Preferences";
+"Filename - Fields" = "Filename - Fields";
+"Tags" = "Tags";
+"Audio Content" = "Audio Content";
+"Filename - Fields (No Order)" = "Filename - Fields (No Order)";
+"Tags to scan:" = "Tags to scan:";
+"Track" = "Track";
+"Artist" = "Artist";
+"Album" = "Album";
+"Title" = "Title";
+"Genre" = "Genre";
+"Year" = "Year";
+
+"dupeGuru PE Preferences" = "dupeGuru PE Preferences";
+"Match pictures of different dimensions" = "Match pictures of different dimensions";
+"EXIF Timestamp" = "EXIF Timestamp";
+"Contents" = "Contents";
+
+/* Main Menu */
+"Bring All to Front" = "Bring All to Front";
+"Window" = "Window";
+"Minimize" = "Minimize";
+"About dupeGuru" = "About dupeGuru";
+"Help" = "Help";
+"dupeGuru Help" = "dupeGuru Help";
+"Hide dupeGuru" = "Hide dupeGuru";
+"Quit dupeGuru" = "Quit dupeGuru";
+"Hide Others" = "Hide Others";
+"Show All" = "Show All";
+"Zoom" = "Zoom";
+"Details Panel" = "Details Panel";
+"Preferences..." = "Preferences...";
+"Folder Selection Window" = "Folder Selection Window";
+"Actions" = "Actions";
+"Send Marked to Trash..." = "Send Marked to Trash...";
+"Move Marked to..." = "Move Marked to...";
+"Copy Marked to..." = "Copy Marked to...";
+"Make Selected Reference" = "Make Selected Reference";
+"Remove Marked from Results" = "Remove Marked from Results";
+"Remove Selected from Results" = "Remove Selected from Results";
+"Columns" = "Columns";
+"Open Selected with Default Application" = "Open Selected with Default Application";
+"Reveal Selected in Finder" = "Reveal Selected in Finder";
+"Add Selected to Ignore List" = "Add Selected to Ignore List";
+"Close Window" = "Close Window";
+"Start Duplicate Scan" = "Start Duplicate Scan";
+"Rename Selected" = "Rename Selected";
+"Export Results to XHTML" = "Export Results to XHTML";
+"Check for update..." = "Check for update...";
+"Mode" = "Mode";
+"Show Dupes Only" = "Show Dupes Only";
+"Show Delta Values" = "Show Delta Values";
+"Edit" = "Edit";
+"Cut" = "Cut";
+"Copy" = "Copy";
+"Paste" = "Paste";
+"Mark All" = "Mark All";
+"Mark None" = "Mark None";
+"Invert Marking" = "Invert Marking";
+"Mark Selected" = "Mark Selected";
+"dupeGuru Website" = "dupeGuru Website";
+"Invoke Custom Command" = "Invoke Custom Command";
+"File" = "File";
+"Load Results..." = "Load Results...";
+"Save Results..." = "Save Results...";
+"Load Recent Results" = "Load Recent Results";
+"Results Window" = "Results Window";
+"Re-Prioritize Results" = "Re-Prioritize Results";
+"Quick Look" = "Quick Look";
+"Ignore List" = "Ignore List";
+"Filter Results..." = "Filter Results...";

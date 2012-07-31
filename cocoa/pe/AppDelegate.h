@@ -7,7 +7,8 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "../base/AppDelegate.h"
+#import "AppDelegateBase.h"
 
 @interface AppDelegate : AppDelegateBase {}
+- (void)clearPictureCache;
 @end

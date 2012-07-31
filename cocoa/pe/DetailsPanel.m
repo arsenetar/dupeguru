@@ -12,8 +12,15 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "PyDupeGuru.h"
 #import "DetailsPanel.h"
 #import "Consts.h"
+#import "DetailsPanel_UI.h"
 
-@implementation DetailsPanelPE
+@implementation DetailsPanel
+
+@synthesize dupeImage;
+@synthesize dupeProgressIndicator;
+@synthesize refImage;
+@synthesize refProgressIndicator;
+
 - (id)initWithApp:(PyDupeGuru *)aApp
 {
     self = [super initWithPyRef:[aApp detailsPanel]];
@@ -21,6 +28,11 @@ http://www.hardcoded.net/licenses/bsd_license
     _needsRefresh = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageLoaded:) name:ImageLoadedNotification object:self];
     return self;
+}
+
+- (NSWindow *)createWindow
+{
+    return createDetailsPanel_UI(self);
 }
 
 - (void)loadImageAsync:(NSString *)imagePath

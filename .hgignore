@@ -6,7 +6,8 @@ run.py
 *.so
 *.mo
 *.pyd
-.tm_*
+*.waf*
+.lock-waf*
 *.xcodeproj/xcuserdata
 *.xcodeproj/project.xcworkspace/xcuserdata
 conf.json

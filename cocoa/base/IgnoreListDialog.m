@@ -7,15 +7,20 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "IgnoreListDialog.h"
+#import "IgnoreListDialog_UI.h"
 #import "HSPyUtil.h"
 
 @implementation IgnoreListDialog
+
+@synthesize model;
+@synthesize ignoreListTableView;
+
 - (id)initWithPyRef:(PyObject *)aPyRef
 {
-    self = [super initWithWindowNibName:@"IgnoreListDialog"];
-    [self window]; //So the detailsTable is initialized.
-    model = [[PyIgnoreListDialog alloc] initWithModel:aPyRef];
-    [model bindCallback:createCallback(@"IgnoreListDialogView", self)];
+    self = [super initWithWindow:nil];
+    self.model = [[[PyIgnoreListDialog alloc] initWithModel:aPyRef] autorelease];
+    [self.model bindCallback:createCallback(@"IgnoreListDialogView", self)];
+    [self setWindow:createIgnoreListDialog_UI(self)];
     ignoreListTable = [[HSTable alloc] initWithPyRef:[model ignoreListTable] tableView:ignoreListTableView];
     [self initializeColumns];
     return self;
@@ -24,7 +29,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)dealloc
 {
     [ignoreListTable release];
-    [model release];
     [super dealloc];
 }
 
@@ -37,16 +41,6 @@ http://www.hardcoded.net/licenses/bsd_license
     };
     [[ignoreListTable columns] initializeColumns:defs];
     [[ignoreListTable columns] setColumnsAsReadOnly];
-}
-
-- (IBAction)removeSelected:(id)sender
-{
-    [model removeSelected];
-}
-
-- (IBAction)clear:(id)sender
-{
-    [model clear];
 }
 
 /* model --> view */

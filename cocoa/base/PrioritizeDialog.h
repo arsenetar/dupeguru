@@ -15,20 +15,23 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface PrioritizeDialog : NSWindowController
 {
-    IBOutlet NSPopUpButton *categoryPopUpView;
-    IBOutlet NSTableView *criteriaTableView;
-    IBOutlet NSTableView *prioritizationTableView;
+    NSPopUpButton *categoryPopUpView;
+    NSTableView *criteriaTableView;
+    NSTableView *prioritizationTableView;
     
     PyPrioritizeDialog *model;
     HSPopUpList *categoryPopUp;
     HSSelectableList *criteriaList;
     PrioritizeList *prioritizationList;
 }
+
+@property (readwrite, retain) NSPopUpButton *categoryPopUpView;
+@property (readwrite, retain) NSTableView *criteriaTableView;
+@property (readwrite, retain) NSTableView *prioritizationTableView;
+
 - (id)initWithApp:(PyDupeGuru *)aApp;
 - (PyPrioritizeDialog *)model;
 
-- (IBAction)addSelected:(id)sender;
-- (IBAction)removeSelected:(id)sender;
-- (IBAction)ok:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (void)ok;
+- (void)cancel;
 @end;

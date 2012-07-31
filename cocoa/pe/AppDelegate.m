@@ -64,17 +64,11 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanelPE alloc] initWithApp:model];
+    return [[DetailsPanel alloc] initWithApp:model];
 }
 
-//Delegate
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)clearPictureCache
 {
-    // index 2 is just after "Clear Ingore List"
-    NSMenuItem *mi = [actionsMenu insertItemWithTitle:TR(@"Clear Picture Cache")
-        action:@selector(clearPictureCache:) keyEquivalent:@"P" atIndex:2];
-    [mi setTarget:[self resultWindow]];
-    [mi setKeyEquivalentModifierMask:NSCommandKeyMask|NSShiftKeyMask];
-    [super applicationDidFinishLaunching:aNotification];
+    [(ResultWindow *)[self resultWindow] clearPictureCache];
 }
 @end

@@ -12,13 +12,15 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface ProblemDialog : NSWindowController
 {
-    IBOutlet NSTableView *problemTableView;
-    
     PyProblemDialog *model;
     HSTable *problemTable;
+    NSTableView *problemTableView;
 }
+
+@property (readwrite, retain) PyProblemDialog *model;
+@property (readwrite, retain) NSTableView *problemTableView;
+
 - (id)initWithPyRef:(PyObject *)aPyRef;
 
 - (void)initializeColumns;
-- (IBAction)revealSelected:(id)sender;
 @end

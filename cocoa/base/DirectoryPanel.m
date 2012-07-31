@@ -7,16 +7,24 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DirectoryPanel.h"
+#import "DirectoryPanel_UI.h"
 #import "Dialogs.h"
 #import "Utils.h"
 #import "AppDelegate.h"
 #import "Consts.h"
 
 @implementation DirectoryPanel
+
+@synthesize addButtonPopUp;
+@synthesize loadRecentButtonPopUp;
+@synthesize outlineView;
+@synthesize removeButton;
+@synthesize loadResultsButton;
+
 - (id)initWithParentApp:(AppDelegateBase *)aParentApp
 {
-    self = [super initWithWindowNibName:@"DirectoryPanel"];
-    [self window];
+    self = [super initWithWindow:nil];
+    [self setWindow:createDirectoryPanel_UI(self)];
     _app = aParentApp;
     model = [_app model];
     [[self window] setTitle:[model appName]];
@@ -47,7 +55,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)fillPopUpMenu
 {
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m addItemWithTitle:TR(@"Add New Folder...") action:@selector(askForDirectory:) keyEquivalent:@""];
+    NSMenuItem *mi = [m addItemWithTitle:TR(@"Add New Folder...") action:@selector(askForDirectory) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
 }
@@ -75,7 +83,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 /* Actions */
 
-- (IBAction)askForDirectory:(id)sender
+- (void)askForDirectory
 {
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setCanChooseFiles:YES];
@@ -90,10 +98,10 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)popupAddDirectoryMenu:(id)sender
+- (void)popupAddDirectoryMenu:(id)sender
 {
     if ((!_alwaysShowPopUp) && ([[_recentDirectories filepaths] count] == 0)) {
-        [self askForDirectory:sender];
+        [self askForDirectory];
     }
     else {
         [addButtonPopUp selectItem:nil];
@@ -101,14 +109,14 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
-- (IBAction)popupLoadRecentMenu:(id)sender
+- (void)popupLoadRecentMenu:(id)sender
 {
     if ([[[_app recentResults] filepaths] count] > 0) {
         NSMenu *m = [loadRecentButtonPopUp menu];
         while ([m numberOfItems] > 0) {
             [m removeItemAtIndex:0];
         }
-        NSMenuItem *mi = [m addItemWithTitle:TR(@"Load from file...") action:@selector(loadResults:) keyEquivalent:@""];
+        NSMenuItem *mi = [m addItemWithTitle:TR(@"Load from file...") action:@selector(loadResults) keyEquivalent:@""];
         [mi setTarget:_app];
         [m addItem:[NSMenuItem separatorItem]];
         [[_app recentResults] fillMenu:m];
@@ -116,11 +124,11 @@ http://www.hardcoded.net/licenses/bsd_license
         [[loadRecentButtonPopUp cell] performClickWithFrame:[sender frame] inView:[sender superview]];
     }
     else {
-        [_app loadResults:nil];
+        [_app loadResults];
     }
 }
 
-- (IBAction)removeSelectedDirectory:(id)sender
+- (void)removeSelectedDirectory
 {
     [[self window] makeKeyAndOrderFront:nil];
     [[outline model] removeSelectedDirectory];

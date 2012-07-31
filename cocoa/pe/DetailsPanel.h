@@ -7,21 +7,26 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "../base/DetailsPanel.h"
+#import "DetailsPanelBase.h"
 #import "PyDupeGuru.h"
 
-@interface DetailsPanelPE : DetailsPanel
+@interface DetailsPanel : DetailsPanelBase
 {
-    IBOutlet NSImageView *dupeImage;
-    IBOutlet NSProgressIndicator *dupeProgressIndicator;
-    IBOutlet NSImageView *refImage;
-    IBOutlet NSProgressIndicator *refProgressIndicator;
+    NSImageView *dupeImage;
+    NSProgressIndicator *dupeProgressIndicator;
+    NSImageView *refImage;
+    NSProgressIndicator *refProgressIndicator;
     
     PyDupeGuru *pyApp;
     BOOL _needsRefresh;
     NSString *_dupePath;
     NSString *_refPath;
 }
+
+@property (readwrite, retain) NSImageView *dupeImage;
+@property (readwrite, retain) NSProgressIndicator *dupeProgressIndicator;
+@property (readwrite, retain) NSImageView *refImage;
+@property (readwrite, retain) NSProgressIndicator *refProgressIndicator;
 
 - (id)initWithApp:(PyDupeGuru *)aApp;
 @end

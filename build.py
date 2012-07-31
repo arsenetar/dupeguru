@@ -13,13 +13,14 @@ from optparse import OptionParser
 import shutil
 import json
 import importlib
+import glob
 
 from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, build_all_cocoa_locs, move_all, copy_sysconfig_files_for_embed, copy_all,
-    move)
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
+    create_osx_app_structure)
 from hscommon import loc
 
 def parse_args():
@@ -31,8 +32,10 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
-    parser.add_option('--cocoamod', action='store_true', dest='cocoamod',
-        help="Build only Cocoa modules")
+    parser.add_option('--cocoa-compile', action='store_true', dest='cocoa_compile',
+        help="Build only Cocoa modules and executables")
+    parser.add_option('--xibless', action='store_true', dest='xibless',
+        help="Build only xibless UIs")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
         help="Generate .pot files from source code.")
     parser.add_option('--mergepot', action='store_true', dest='mergepot',
@@ -40,17 +43,52 @@ def parse_args():
     (options, args) = parser.parse_args()
     return options
 
+def cocoa_compile_command(edition):
+    return '{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition)
+
+def cocoa_app_path(edition):
+    return {
+        'se': 'build/dupeGuru.app',
+        'me': 'build/dupeGuru ME.app',
+        'pe': 'build/dupeGuru PE.app',
+    }[edition]
+
+def build_xibless(edition):
+    import xibless
+    if not op.exists('cocoa/autogen'):
+        os.mkdir('cocoa/autogen')
+    xibless.generate('cocoalib/ui/progress.py', 'cocoa/autogen/ProgressController_UI')
+    xibless.generate('cocoalib/ui/about.py', 'cocoa/autogen/HSAboutBox_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoa/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoa/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/enter_code.py', 'cocoa/autogen/HSEnterCode_UI', localizationTable='cocoalib')
+    xibless.generate('cocoalib/ui/error_report.py', 'cocoa/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
+    xibless.generate('cocoa/base/ui/ignore_list_dialog.py', 'cocoa/autogen/IgnoreListDialog_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/deletion_options.py', 'cocoa/autogen/DeletionOptions_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/problem_dialog.py', 'cocoa/autogen/ProblemDialog_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
+    xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI',
+        localizationTable='Localizable', args={'edition': edition})
+    xibless.generate('cocoa/base/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI',
+        localizationTable='Localizable', args={'edition': edition})
+    if edition == 'pe':
+        xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+    else:
+        xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+
 def build_cocoa(edition, dev):
+    ed = lambda s: s.format(edition)
+    build_xibless(edition)
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
-    from pluginbuilder import copy_embeddable_python_dylib, get_python_header_folder, collect_dependencies
+    from pluginbuilder import copy_embeddable_python_dylib, collect_dependencies
     copy_embeddable_python_dylib('build')
-    if not op.exists('build/PythonHeaders'):
-        os.symlink(get_python_header_folder(), 'build/PythonHeaders')
     if not op.exists('build/py'):
         os.mkdir('build/py')
-    cocoa_project_path = 'cocoa/{0}'.format(edition)
+    cocoa_project_path = ed('cocoa/{}')
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     specific_packages = {
         'se': ['core_se'],
@@ -69,23 +107,21 @@ def build_cocoa(edition, dev):
     copy_sysconfig_files_for_embed('build/py')
     os.chdir(cocoa_project_path)
     print('Generating Info.plist')
-    app_version = get_module_version('core_{}'.format(edition))
+    app_version = get_module_version(ed('core_{}'))
     filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
-    print("Building the XCode project")
-    args = ['-project dupeguru.xcodeproj']
-    if dev:
-        args.append('-configuration dev')
-    else:
-        args.append('-configuration release')
-    args = ' '.join(args)
-    os.system('xcodebuild {0}'.format(args))
-    os.chdir('../..')
+    print("Compiling with WAF")
+    os.chdir('..')
+    os.system(cocoa_compile_command(edition))
+    os.chdir('..')
+    print("Creating the .app folder")
+    image_path = ed('cocoa/{}/dupeguru.icns')
+    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py',
+        'build/py', 'build/help'] + glob.glob('cocoa/base/*.lproj')
+    frameworks = ['build/Python', 'cocoalib/Sparkle.framework']
+    app_path = cocoa_app_path(edition)
+    create_osx_app_structure(app_path, 'cocoa/build/dupeGuru', ed('cocoa/{}/Info.plist'),
+        resources, frameworks, symlink_resources=dev)
     print("Creating the run.py file")
-    app_path = {
-        'se': 'cocoa/se/dupeGuru.app',
-        'me': 'cocoa/me/dupeGuru\\ ME.app',
-        'pe': 'cocoa/pe/dupeGuru\\ PE.app',
-    }[edition]
     tmpl = open('run_template_cocoa.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app_path)
     open('run.py', 'wt').write(run_contents)
@@ -123,17 +159,13 @@ def build_localizations(ui, edition):
             if lang == 'en':
                 continue
             pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-            for edition_folder in ['base', 'se', 'me', 'pe']:
-                enlproj = op.join('cocoa', edition_folder, 'en.lproj')
-                dest_lproj = op.join('cocoa', edition_folder, lang + '.lproj')
-                loc.po2allxibstrings(pofile, enlproj, dest_lproj)
-                if edition_folder == 'base':
-                    loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
+            enlproj = op.join('cocoa', 'base', 'en.lproj')
+            dest_lproj = op.join('cocoa', 'base', lang + '.lproj')
+            if not op.exists(dest_lproj):
+                os.makedirs(dest_lproj)
+            loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
             pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-            loc.po2allxibstrings(pofile, op.join('cocoalib', 'en.lproj'), op.join('cocoalib', lang + '.lproj'))
-        build_all_cocoa_locs('cocoalib')
-        build_all_cocoa_locs(op.join('cocoa', 'base'))
-        build_all_cocoa_locs(op.join('cocoa', edition))
+            loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join(dest_lproj, 'cocoalib.strings'))
     elif ui == 'qt':
         loc.compile_all_po(op.join('qtlib', 'locale'))
         loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
@@ -186,9 +218,10 @@ def build_cocoa_proxy_module():
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
     build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
-        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m', 'cocoalib/HSErrorReportWindow.m'],
+        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m',
+            'cocoalib/HSErrorReportWindow.m', 'cocoa/autogen/HSErrorReportWindow_UI.m'],
         ['AppKit', 'CoreServices'],
-        ['cocoalib'])
+        ['cocoalib', 'cocoa/autogen'])
 
 def build_cocoa_bridging_interfaces(edition):
     print("Building Cocoa Bridging Interfaces")
@@ -280,9 +313,15 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
-    elif options.cocoamod:
+    elif options.cocoa_compile:
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
+        os.chdir('cocoa')
+        os.system(cocoa_compile_command(edition))
+        os.chdir('..')
+        copy('cocoa/build/dupeGuru', op.join(cocoa_app_path(edition), 'Contents/MacOS/dupeGuru'))
+    elif options.xibless:
+        build_xibless(edition)
     else:
         build_normal(edition, ui, dev)
 

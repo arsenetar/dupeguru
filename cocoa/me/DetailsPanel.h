@@ -7,10 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "AppDelegateBase.h"
-#import "ResultWindow.h"
-#import "PyDupeGuru.h"
+#import "DetailsPanelBase.h"
 
-@interface AppDelegate : AppDelegateBase {}
-- (void)removeDeadTracks;
+@interface DetailsPanel : DetailsPanelBase
 @end

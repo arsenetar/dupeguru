@@ -10,5 +10,5 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "../base/ResultWindow.h"
 
 @interface ResultWindow : ResultWindowBase {}
-- (IBAction)removeDeadTracks:(id)sender;
+- (void)removeDeadTracks;
 @end

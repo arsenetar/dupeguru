@@ -6,11 +6,12 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import <Cocoa/Cocoa.h>
-#import "AppDelegateBase.h"
-#import "ResultWindow.h"
-#import "PyDupeGuru.h"
+#import "DetailsPanel.h"
+#import "DetailsPanel_UI.h"
 
-@interface AppDelegate : AppDelegateBase {}
-- (void)removeDeadTracks;
+@implementation DetailsPanel
+- (NSWindow *)createWindow
+{
+    return createDetailsPanel_UI(self);
+}
 @end
