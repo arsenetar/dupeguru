@@ -138,17 +138,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Public */
 - (void)addDirectory:(NSString *)directory
 {
-    NSInteger r = [model addDirectory:directory];
-    if (r) {
-        NSString *m = @"";
-        if (r == 1) {
-            m = TR(@"'%@' already is in the list.");
-        }
-        else if (r == 2) {
-            m = TR(@"'%@' does not exist.");
-        }
-        [Dialogs showMessage:[NSString stringWithFormat:m,directory]];
-    }
+    [model addDirectory:directory];
     [_recentDirectories addFile:directory];
     [[self window] makeKeyAndOrderFront:nil];
 }

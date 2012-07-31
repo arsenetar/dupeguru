@@ -58,8 +58,8 @@ class PyDupeGuruBase(PyFairware):
         return self.model.deletion_options
     
     #---Directories
-    def addDirectory_(self, directory: str) -> int:
-        return self.model.add_directory(directory)
+    def addDirectory_(self, directory: str):
+        self.model.add_directory(directory)
     
     #---Results
     def doScan(self):

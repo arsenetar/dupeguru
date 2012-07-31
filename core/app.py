@@ -265,11 +265,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         try:
             self.directories.add_path(Path(d))
             self.notify('directories_changed')
-            return 0
         except directories.AlreadyThereError:
-            return 1
+            self.view.show_message(tr("'{}' already is in the list.").format(d))
         except directories.InvalidPathError:
-            return 2
+            self.view.show_message(tr("'{}' does not exist.").format(d))
     
     def add_selected_to_ignore_list(self):
         dupes = self.without_ref(self.selected_dupes)

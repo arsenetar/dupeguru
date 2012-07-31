@@ -720,14 +720,6 @@ msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' already is in the list."
-msgstr "'%@' est déjà dans la liste."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' does not exist."
-msgstr "'%@' n'existe pas."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
 msgstr "Le nom '%@' existe déjà."
 

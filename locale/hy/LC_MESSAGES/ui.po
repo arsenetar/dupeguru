@@ -527,14 +527,6 @@ msgid "Reset to Default"
 msgstr "Ետարկել ծրագրայինի"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' already is in the list."
-msgstr "'%@'-ը արդեն առկա է ցանկում:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' does not exist."
-msgstr "'%@'-ը գոյություն չունի:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
 msgstr "'%@' անունը արդեն առկա է:"
 

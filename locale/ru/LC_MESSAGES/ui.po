@@ -530,14 +530,6 @@ msgid "Reset to Default"
 msgstr "Восстановить значения по умолчанию"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' already is in the list."
-msgstr "'%@' Уже есть в списке. "
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' does not exist."
-msgstr "'%@' не существует."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
 msgstr " Имя '%@' уже существует."
 

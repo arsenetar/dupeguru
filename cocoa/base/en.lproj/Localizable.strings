@@ -7,8 +7,6 @@
 "Select a file to save your results to" = "Select a file to save your results to";
 "Select a folder to add to the scanning list" = "Select a folder to add to the scanning list";
 "You have unsaved results, do you really want to continue?" = "You have unsaved results, do you really want to continue?";
-"'%@' already is in the list." = "'%@' already is in the list.";
-"'%@' does not exist." = "'%@' does not exist.";
 "The name '%@' already exists." = "The name '%@' already exists.";
 "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again." = "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.";
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?" = "Your iTunes Library contains %d dead tracks ready to be removed. Continue?";

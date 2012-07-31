@@ -35,43 +35,51 @@ msgstr ""
 msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
 msgstr ""
 
-#: core/app.py:279
+#: core/app.py:269
+msgid "'{}' already is in the list."
+msgstr ""
+
+#: core/app.py:271
+msgid "'{}' does not exist."
+msgstr ""
+
+#: core/app.py:278
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "copy"
 msgstr ""
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "move"
 msgstr ""
 
-#: core/app.py:340
+#: core/app.py:339
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:392
+#: core/app.py:391
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core/app.py:479 core/app.py:490
+#: core/app.py:478 core/app.py:489
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core/app.py:510
+#: core/app.py:509
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:530
+#: core/app.py:529
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:541
+#: core/app.py:540
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:580
+#: core/app.py:579
 msgid "%s (%d discarded)"
 msgstr ""
 

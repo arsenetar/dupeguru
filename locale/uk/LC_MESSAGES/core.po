@@ -24,15 +24,15 @@ msgstr ""
 "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
 " в демонстраційному режимі."
 
-#: core/app.py:530
+#: core/app.py:529
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:541
+#: core/app.py:540
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:580
+#: core/app.py:579
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
@@ -152,7 +152,7 @@ msgstr "Усі позначені файли були переміщені ус�
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:279
+#: core/app.py:278
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -164,23 +164,23 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ви дійсно хочете видалити всі %d елементів з чорного списку?"
 
-#: core/app.py:392
+#: core/app.py:391
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:479 core/app.py:490
+#: core/app.py:478 core/app.py:489
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:340
+#: core/app.py:339
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
@@ -196,6 +196,14 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:510
+#: core/app.py:509
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
+
+#: core/app.py:269
+msgid "'{}' already is in the list."
+msgstr "'{}' вже є в списку."
+
+#: core/app.py:271
+msgid "'{}' does not exist."
+msgstr "'{}' не існує."

@@ -25,15 +25,15 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов сразу в "
 "демонстрационном режиме."
 
-#: core/app.py:530
+#: core/app.py:529
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:541
+#: core/app.py:540
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранных директорий не содержат сканируемых файлов."
 
-#: core/app.py:580
+#: core/app.py:579
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -149,7 +149,7 @@ msgstr "Все выбранные файлы были перемещены ус�
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Все выбранные файлы были успешно отправлены в корзину."
 
-#: core/app.py:279
+#: core/app.py:278
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -161,25 +161,25 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Вы действительно хотите удалить все элементы %d из черного списка?"
 
-#: core/app.py:392
+#: core/app.py:391
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "У вас нет пользовательской команды создали. Установите его в ваших "
 "предпочтениях."
 
-#: core/app.py:479 core/app.py:490
+#: core/app.py:478 core/app.py:489
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить файлы %d из результата поиска. Продолжить?"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "copy"
 msgstr "копия"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:340
+#: core/app.py:339
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог на {} отмеченные файлы"
 
@@ -195,6 +195,14 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:510
+#: core/app.py:509
 msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr ""
+
+#: core/app.py:269
+msgid "'{}' already is in the list."
+msgstr ""
+
+#: core/app.py:271
+msgid "'{}' does not exist."
 msgstr ""

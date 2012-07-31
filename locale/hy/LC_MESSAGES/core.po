@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:530
+#: core/app.py:529
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:541
+#: core/app.py:540
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:580
+#: core/app.py:579
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -150,7 +150,7 @@ msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափ
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:279
+#: core/app.py:278
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -161,23 +161,23 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը անտեսումների ցանկից:"
 
-#: core/app.py:392
+#: core/app.py:391
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:479 core/app.py:490
+#: core/app.py:478 core/app.py:489
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:339
+#: core/app.py:338
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:340
+#: core/app.py:339
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
@@ -193,6 +193,14 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:510
+#: core/app.py:509
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
+
+#: core/app.py:269
+msgid "'{}' already is in the list."
+msgstr "'{}'-ը արդեն առկա է ցանկում:"
+
+#: core/app.py:271
+msgid "'{}' does not exist."
+msgstr "'{}'-ը գոյություն չունի:"

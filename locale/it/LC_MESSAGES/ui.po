@@ -725,14 +725,6 @@ msgid "dupeGuru PE Preferences"
 msgstr "Preferenze di dupeGuru PE"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' already is in the list."
-msgstr "'%@' è già nella lista."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "'%@' does not exist."
-msgstr "'%@' non esiste."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
 msgstr "Il nome '%@' è già esistente."
 
