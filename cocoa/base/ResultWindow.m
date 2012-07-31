@@ -67,6 +67,7 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Helpers */
 - (void)fillColumnsMenu
 {
+    [[app columnsMenu] removeAllItems];
     NSArray *menuItems = [[[table columns] model] menuItems];
     for (NSInteger i=0; i < [menuItems count]; i++) {
         NSArray *pair = [menuItems objectAtIndex:i];
@@ -250,6 +251,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)resetColumnsToDefault
 {
     [[[table columns] model] resetToDefaults];
+    [self fillColumnsMenu];
 }
 
 - (void)revealSelected
