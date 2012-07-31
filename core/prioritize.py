@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.util import dedupe, flatten,  rem_file_ext
+from hscommon.util import dedupe, flatten, rem_file_ext
 from hscommon.trans import trget, tr
 
 coltr = trget('columns')
@@ -88,26 +88,41 @@ class FilenameCategory(CriterionCategory):
     NAME = coltr("Filename")
     ENDS_WITH_NUMBER = 0
     DOESNT_END_WITH_NUMBER = 1
+    LONGEST = 2
+    SHORTEST = 3
     
     def format_criterion_value(self, value):
-        if value == self.ENDS_WITH_NUMBER:
-            return tr("Ends with number")
-        else:
-            return tr("Doesn't end with number")
+        return {
+            self.ENDS_WITH_NUMBER: tr("Ends with number"),
+            self.DOESNT_END_WITH_NUMBER: tr("Doesn't end with number"),
+            self.LONGEST: tr("Longest"),
+            self.SHORTEST: tr("Shortest"),
+        }[value]
     
     def extract_value(self, dupe):
         return rem_file_ext(dupe.name)
     
     def sort_key(self, dupe, crit_value):
         value = self.extract_value(dupe)
-        ends_with_digit = value.strip()[-1:].isdigit()
-        if crit_value == self.ENDS_WITH_NUMBER:
-            return 0 if ends_with_digit else 1
+        if crit_value in {self.ENDS_WITH_NUMBER, self.DOESNT_END_WITH_NUMBER}:
+            ends_with_digit = value.strip()[-1:].isdigit()
+            if crit_value == self.ENDS_WITH_NUMBER:
+                return 0 if ends_with_digit else 1
+            else:
+                return 1 if ends_with_digit else 0
         else:
-            return 1 if ends_with_digit else 0
+            value = len(value)
+            if crit_value == self.LONGEST:
+                value *= -1 # We want the biggest values on top
+            return value
     
     def criteria_list(self):
-        return [Criterion(self, self.ENDS_WITH_NUMBER), Criterion(self, self.DOESNT_END_WITH_NUMBER)]
+        return [Criterion(self, crit_value) for crit_value in [
+            self.ENDS_WITH_NUMBER,
+            self.DOESNT_END_WITH_NUMBER,
+            self.LONGEST,
+            self.SHORTEST,
+        ]]
 
 class NumericalCategory(CriterionCategory):
     HIGHEST = 0

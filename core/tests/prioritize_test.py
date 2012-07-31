@@ -179,3 +179,19 @@ def test_display_something_on_empty_extensions(app):
     # When there's no extension, display "None" instead of nothing at all.
     app.select_pri_criterion("Kind")
     eq_(app.pdialog.criteria_list[:], ['None'])
+
+#---
+def app_one_name_longer_than_the_other():
+    dupes = [
+        [
+            no('shortest.ext'),
+            no('loooongest.ext'),
+        ],
+    ]
+    return app_with_dupes(dupes)
+
+@with_app(app_one_name_longer_than_the_other)
+def test_longest_filename_prioritization(app):
+    app.add_pri_criterion("Filename", 2) # Longest
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data['name'], 'loooongest.ext')
