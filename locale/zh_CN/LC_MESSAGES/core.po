@@ -44,27 +44,27 @@ msgstr "%d/%d 匹配项组合在一起"
 msgid "None"
 msgstr ""
 
-#: core/prioritize.py:94
+#: core/prioritize.py:96
 msgid "Ends with number"
 msgstr "文件名称"
 
-#: core/prioritize.py:96
+#: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr ""
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Highest"
 msgstr ""
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Lowest"
 msgstr ""
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Newest"
 msgstr ""
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Oldest"
 msgstr ""
 
@@ -168,4 +168,12 @@ msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
 #: core/gui/deletion_options.py:20
 msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
 msgstr ""

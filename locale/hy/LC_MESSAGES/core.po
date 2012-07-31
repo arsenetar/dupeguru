@@ -58,27 +58,27 @@ msgstr "Խմբավորվել է %d/%d համընկնում"
 msgid "None"
 msgstr "Ոչինչ"
 
-#: core/prioritize.py:94
+#: core/prioritize.py:96
 msgid "Ends with number"
 msgstr "Ավարտվում է թվով"
 
-#: core/prioritize.py:96
+#: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Չի ավարտվում է թվով"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Highest"
 msgstr "Ամենաբարձրը"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Lowest"
 msgstr "Ամենացածրը"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Newest"
 msgstr "Նորագույնը"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Oldest"
 msgstr "Ամենահինը"
 
@@ -183,4 +183,12 @@ msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համա�
 
 #: core/gui/deletion_options.py:20
 msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
 msgstr ""

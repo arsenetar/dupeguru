@@ -17,11 +17,11 @@ msgstr "Cartella"
 msgid "Filename"
 msgstr "Nome del file"
 
-#: core/prioritize.py:132
+#: core/prioritize.py:147
 msgid "Size"
 msgstr "Dimensione"
 
-#: core/prioritize.py:138 core_me/result_table.py:25
+#: core/prioritize.py:153 core_me/result_table.py:25
 #: core_pe/result_table.py:23 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Modificato"

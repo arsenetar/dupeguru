@@ -56,30 +56,30 @@ msgstr "Згруповано %d/%d результатів"
 msgid "None"
 msgstr "Жоден"
 
-#: core/prioritize.py:94
+#: core/prioritize.py:96
 msgid "Ends with number"
 msgstr "Закінчується номером"
 
-#: core/prioritize.py:96
+#: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Не закінчується номером"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 #, fuzzy
 msgid "Highest"
 msgstr "Найвищий"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 #, fuzzy
 msgid "Lowest"
 msgstr "Найнижчий"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 #, fuzzy
 msgid "Newest"
 msgstr "Найновіший"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 #, fuzzy
 msgid "Oldest"
 msgstr "Найстарший"
@@ -186,4 +186,12 @@ msgstr "Оберіть цільову папку для {} позначених 
 
 #: core/gui/deletion_options.py:20
 msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
 msgstr ""

@@ -1,7 +1,6 @@
-
+# 
 msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17
@@ -27,11 +26,11 @@ msgstr "Pasta"
 msgid "Filename"
 msgstr "Nome do Arquivo"
 
-#: core/prioritize.py:132
+#: core/prioritize.py:147
 msgid "Size"
 msgstr "Tamanho"
 
-#: core/prioritize.py:138 core_me/result_table.py:25
+#: core/prioritize.py:153 core_me/result_table.py:25
 #: core_pe/result_table.py:23 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Modificado"
@@ -109,4 +108,3 @@ msgstr "Dimensões"
 #: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Tamanho"
-

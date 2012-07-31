@@ -1,7 +1,6 @@
-
+# 
 msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 #: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
@@ -32,11 +31,17 @@ msgid "All marked files were sucessfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 
 #: core/app.py:258
-msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
-msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 duplicatas por vez."
+msgid ""
+"You cannot delete, move or copy more than 10 duplicates at once in demo "
+"mode."
+msgstr ""
+"Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 "
+"duplicatas por vez."
 
 #: core/app.py:279
-msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
 msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
 #: core/app.py:339
@@ -53,7 +58,8 @@ msgstr "Selecione uma pasta para {} os arquivos marcados"
 
 #: core/app.py:392
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr "Você não possui nenhum comando personalizado. Crie um nas preferências."
+msgstr ""
+"Você não possui nenhum comando personalizado. Crie um nas preferências."
 
 #: core/app.py:479 core/app.py:490
 msgid "You are about to remove %d files from results. Continue?"
@@ -99,27 +105,27 @@ msgstr "Deseja remover todos os %d itens da lista Ignorar?"
 msgid "None"
 msgstr "Nenhum"
 
-#: core/prioritize.py:94
+#: core/prioritize.py:96
 msgid "Ends with number"
 msgstr "Termina com número"
 
-#: core/prioritize.py:96
+#: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Não termina com número"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Highest"
 msgstr "Maior"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Lowest"
 msgstr "Menor"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Newest"
 msgstr "Mais recente"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Oldest"
 msgstr "Mais antigo"
 
@@ -167,3 +173,10 @@ msgstr "%d/%d coincidentes verificados"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF de %d/%d fotos lidos"
 
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
+msgstr ""

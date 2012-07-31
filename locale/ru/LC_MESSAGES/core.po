@@ -57,27 +57,27 @@ msgstr "Группировка %d/%d совпадений"
 msgid "None"
 msgstr "Ни один"
 
-#: core/prioritize.py:94
+#: core/prioritize.py:96
 msgid "Ends with number"
 msgstr "Заканчивается номером"
 
-#: core/prioritize.py:96
+#: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Не заканчивается с номером"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Highest"
 msgstr "Наивысший"
 
-#: core/prioritize.py:117
+#: core/prioritize.py:132
 msgid "Lowest"
 msgstr "Самая низкая"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Newest"
 msgstr "Новейший"
 
-#: core/prioritize.py:144
+#: core/prioritize.py:159
 msgid "Oldest"
 msgstr "Старейшие"
 
@@ -185,4 +185,12 @@ msgstr "Выберите каталог на {} отмеченные файлы"
 
 #: core/gui/deletion_options.py:20
 msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
 msgstr ""
