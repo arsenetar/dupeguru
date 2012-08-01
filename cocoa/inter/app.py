@@ -3,7 +3,7 @@ import logging
 from objp.util import pyref, dontwrap
 from jobprogress import job
 import cocoa
-from cocoa import install_exception_hook, proxy
+from cocoa import install_exception_hook, install_cocoa_logger, proxy
 from cocoa.inter import PyFairware, FairwareView
 from hscommon.trans import trget
 
@@ -32,6 +32,7 @@ class PyDupeGuruBase(PyFairware):
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook()
+        install_cocoa_logger()
         appdata = proxy.getAppdataPath()
         self.model = modelclass(self, appdata)
         self.progress = cocoa.ThreadedJobPerformer()
