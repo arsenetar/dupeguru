@@ -15,12 +15,14 @@ http://www.hardcoded.net/licenses/bsd_license
     PyDeletionOptions *model;
     
     NSTextField *messageTextField;
-    NSButton *hardlinkButton;
+    NSButton *linkButton;
+    NSMatrix *linkTypeRadio;
     NSButton *directButton;
 }
 
 @property (readwrite, retain) NSTextField *messageTextField;
-@property (readwrite, retain) NSButton *hardlinkButton;
+@property (readwrite, retain) NSButton *linkButton;
+@property (readwrite, retain) NSMatrix *linkTypeRadio;
 @property (readwrite, retain) NSButton *directButton;
 
 - (id)initWithPyRef:(PyObject *)aPyRef;

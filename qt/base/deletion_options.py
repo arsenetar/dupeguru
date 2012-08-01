@@ -11,6 +11,7 @@ from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBo
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
+from qtlib.radio_box import RadioBox
 
 tr = trget('ui')
 
@@ -27,20 +28,22 @@ class DeletionOptions(QDialog):
     
     def _setupUi(self):
         self.setWindowTitle(tr("Deletion Options"))
-        self.resize(400, 250)
+        self.resize(400, 270)
         self.verticalLayout = QVBoxLayout(self)
         self.msgLabel = QLabel()
         self.verticalLayout.addWidget(self.msgLabel)
-        self.hardlinkCheckbox = QCheckBox(tr("Hardlink deleted files"))
+        self.linkCheckbox = QCheckBox(tr("Link deleted files"))
         if not (ISOSX or ISLINUX):
-            self.hardlinkCheckbox.setEnabled(False)
-            self.hardlinkCheckbox.setText(self.hardlinkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
-        self.verticalLayout.addWidget(self.hardlinkCheckbox)
-        text = tr("After having deleted a duplicate, place a hardlink targeting the reference file "
+            self.linkCheckbox.setEnabled(False)
+            self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
+        self.verticalLayout.addWidget(self.linkCheckbox)
+        text = tr("After having deleted a duplicate, place a link targeting the reference file "
             "to replace the deleted file.")
-        self.hardlinkMessageLabel = QLabel(text)
-        self.hardlinkMessageLabel.setWordWrap(True)
-        self.verticalLayout.addWidget(self.hardlinkMessageLabel)
+        self.linkMessageLabel = QLabel(text)
+        self.linkMessageLabel.setWordWrap(True)
+        self.verticalLayout.addWidget(self.linkMessageLabel)
+        self.linkTypeRadio = RadioBox(items=[tr("Symlink"), tr("Hardlink")], spread=False)
+        self.verticalLayout.addWidget(self.linkTypeRadio)
         self.directCheckbox = QCheckBox(tr("Directly delete files"))
         self.verticalLayout.addWidget(self.directCheckbox)
         text = tr("Instead of sending files to trash, delete them directly. This option is usually "
@@ -58,10 +61,12 @@ class DeletionOptions(QDialog):
         self.msgLabel.setText(msg)
     
     def show(self):
-        self.hardlinkCheckbox.setChecked(self.model.hardlink)
+        self.linkCheckbox.setChecked(self.model.link_deleted)
+        self.linkTypeRadio.selected_index = 1 if self.model.use_hardlinks else 0
         self.directCheckbox.setChecked(self.model.direct)
         result = self.exec()
-        self.model.hardlink = self.hardlinkCheckbox.isChecked()
+        self.model.link_deleted = self.linkCheckbox.isChecked()
+        self.model.use_hardlinks = self.linkTypeRadio.selected_index == 1
         self.model.direct = self.directCheckbox.isChecked()
         return result == QDialog.Accepted
     

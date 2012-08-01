@@ -176,10 +176,10 @@ class DupeGuruPE(DupeGuruBase):
         DupeGuruBase.__init__(self, view, appdata)
         self.directories = Directories()
     
-    def _do_delete(self, j, replace_with_hardlinks, direct_deletion):
+    def _do_delete(self, j, *args):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe, replace_with_hardlinks, direct_deletion)
+            return self._do_delete_dupe(dupe, *args)
         
         self.deleted_aperture_photos = False
         marked = [dupe for dupe in self.results.dupes if self.results.is_marked(dupe)]
@@ -202,7 +202,7 @@ class DupeGuruPE(DupeGuruBase):
                 pass
         self.results.perform_on_marked(op, True)
     
-    def _do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion):
+    def _do_delete_dupe(self, dupe, *args):
         if isinstance(dupe, IPhoto):
             try:
                 a = app('iPhoto')
@@ -244,7 +244,7 @@ class DupeGuruPE(DupeGuruBase):
             except (CommandError, RuntimeError) as e:
                 raise EnvironmentError(str(e))
         else:
-            DupeGuruBase._do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion)
+            DupeGuruBase._do_delete_dupe(self, dupe, *args)
     
     def _create_file(self, path):
         if (self.directories.iphoto_libpath is not None) and (path in self.directories.iphoto_libpath[:-1]):

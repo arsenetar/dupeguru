@@ -151,12 +151,12 @@ class DupeGuruME(DupeGuruBase):
         self.directories = Directories(fileclasses=self.directories.fileclasses)
         self.dead_tracks = []
     
-    def _do_delete(self, j, replace_with_hardlinks, direct_deletion):
+    def _do_delete(self, j, *args):
         # XXX If I read correctly, Python 3.3 will allow us to go fetch inner function easily, so
         # we'll be able to replace "op" below with DupeGuruBase._do_delete.op.
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe, replace_with_hardlinks, direct_deletion)
+            return self._do_delete_dupe(dupe, *args)
         
         marked = [dupe for dupe in self.results.dupes if self.results.is_marked(dupe)]
         j.start_job(self.results.mark_count, tr("Sending dupes to the Trash"))
@@ -169,10 +169,10 @@ class DupeGuruME(DupeGuruBase):
                 pass
         self.results.perform_on_marked(op, True)
     
-    def _do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion):
+    def _do_delete_dupe(self, dupe, *args):
         if isinstance(dupe, ITunesSong):
             dupe.remove_from_library()
-        DupeGuruBase._do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion)
+        DupeGuruBase._do_delete_dupe(self, dupe, *args)
     
     def _create_file(self, path):
         if (self.directories.itunes_libpath is not None) and (path in self.directories.itunes_libpath[:-1]):

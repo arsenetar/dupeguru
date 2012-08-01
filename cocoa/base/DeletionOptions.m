@@ -13,7 +13,8 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation DeletionOptions
 
 @synthesize messageTextField;
-@synthesize hardlinkButton;
+@synthesize linkButton;
+@synthesize linkTypeRadio;
 @synthesize directButton;
 
 - (id)initWithPyRef:(PyObject *)aPyRef
@@ -33,7 +34,8 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)updateOptions
 {
-    [model setHardlink:[hardlinkButton state] == NSOnState];
+    [model setLinkDeleted:[linkButton state] == NSOnState];
+    [model setUseHardlinks:[linkTypeRadio selectedColumn] == 1];
     [model setDirect:[directButton state] == NSOnState];
 }
 
@@ -55,8 +57,9 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (BOOL)show
 {
-    [hardlinkButton setState:NSOffState];
+    [linkButton setState:NSOffState];
     [directButton setState:NSOffState];
+    [linkTypeRadio selectCellAtRow:0 column:0];
     NSInteger r = [NSApp runModalForWindow:[self window]];
     [[self window] close];
     return r == NSOKButton;

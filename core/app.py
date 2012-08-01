@@ -159,15 +159,15 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return len([dupe for dupe in group.dupes if self.results.is_marked(dupe)])
         return cmp_value(group.ref, key)
     
-    def _do_delete(self, j, replace_with_hardlinks, direct_deletion):
+    def _do_delete(self, j, link_deleted, use_hardlinks, direct_deletion):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(dupe, replace_with_hardlinks, direct_deletion)
+            return self._do_delete_dupe(dupe, link_deleted, use_hardlinks, direct_deletion)
         
         j.start_job(self.results.mark_count)
         self.results.perform_on_marked(op, True)
     
-    def _do_delete_dupe(self, dupe, replace_with_hardlinks, direct_deletion):
+    def _do_delete_dupe(self, dupe, link_deleted, use_hardlinks, direct_deletion):
         if not io.exists(dupe.path):
             return
         logging.debug("Sending '%s' to trash", dupe.path)
@@ -179,10 +179,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 os.remove(str_path)
         else:
             send2trash(str_path) # Raises OSError when there's a problem
-        if replace_with_hardlinks:
+        if link_deleted:
             group = self.results.get_group_of_duplicate(dupe)
             ref = group.ref
-            os.link(str(ref.path), str_path)
+            linkfunc = os.link if use_hardlinks else os.symlink
+            linkfunc(str(ref.path), str_path)
         self.clean_empty_dirs(dupe.path[:-1])
     
     def _create_file(self, path):
@@ -365,7 +366,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return
         if not self.deletion_options.show(self.results.mark_count):
             return
-        args = [self.deletion_options.hardlink, self.deletion_options.direct]
+        args = [self.deletion_options.link_deleted, self.deletion_options.use_hardlinks,
+            self.deletion_options.direct]
         logging.debug("Starting deletion job with args %r", args)
         self.view.start_job(JobType.Delete, self._do_delete, args=args)
     

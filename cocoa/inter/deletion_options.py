@@ -13,8 +13,11 @@ class DeletionOptionsView(GUIObjectView):
     def show(self) -> bool: pass
 
 class PyDeletionOptions(PyGUIObject):
-    def setHardlink_(self, hardlink: bool):
-        self.model.hardlink = hardlink
+    def setLinkDeleted_(self, link_deleted: bool):
+        self.model.link_deleted = link_deleted
+    
+    def setUseHardlinks_(self, use_hardlinks: bool):
+        self.model.use_hardlinks = use_hardlinks
     
     def setDirect_(self, direct: bool):
         self.model.direct = direct

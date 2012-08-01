@@ -15,7 +15,8 @@ class DeletionOptions(GUIObject):
     #
     
     def show(self, mark_count):
-        self.hardlink = False
+        self.link_deleted = False
+        self.use_hardlinks = False
         self.direct = False
         msg = tr("You are sending {} file(s) to the Trash.").format(mark_count)
         self.view.update_msg(msg)
