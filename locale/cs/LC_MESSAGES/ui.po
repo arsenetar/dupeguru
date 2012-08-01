@@ -161,7 +161,7 @@ msgstr "Vyjmuto"
 msgid "Normal"
 msgstr "Normální"
 
-#: qt/base/preferences_dialog.py:37
+#: qt/base/preferences_dialog.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Fewer Results"
 msgstr ""
 
-#: qt/base/preferences_dialog.py:88 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/preferences_dialog.py:88
 msgid "Font size:"
 msgstr "Velikost písma:"
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "Problems!"
 msgstr "Problémy!"
 
-#: qt/base/problem_dialog.py:52 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
 msgstr "Ukázat vybrané ve správci souborů"
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Columns"
 msgstr "Sloupce"
 
-#: qt/base/result_window.py:141 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:141
 msgid "Reset to Defaults"
 msgstr "Výchozí nastavení"
 
@@ -586,7 +586,7 @@ msgstr "Změnit prioritu výsledků"
 msgid "Ok"
 msgstr "Ok"
 
-#: qt/base/deletion_options.py:53 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -643,10 +643,6 @@ msgstr "Méně výsledků"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
 msgstr "Tvrdost filtru:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Scan type:"
-msgstr "Typ prohledávání:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Content"
@@ -712,27 +708,15 @@ msgstr "Nelze najít aplikaci iPhoto."
 msgid "The name '%@' already exists."
 msgstr "The name '%@' already exists."
 
-#: cocoa/inter/app_me.py:196 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:196
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 
-#: cocoa/inter/app_me.py:200 cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/inter/app_me.py:200
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "You have no dead tracks in your iTunes Library"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Yes"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "No"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "OK"
-msgstr ""
 
 #: cocoa/inter/app_me.py:164
 msgid "Talking to iTunes. Don't touch it!"
@@ -765,31 +749,21 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr ""
 
-#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hardlink deleted files"
-msgstr ""
-
-#: qt/base/deletion_options.py:39 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"After having deleted a duplicate, place a hardlink targeting the reference "
-"file to replace the deleted file."
-msgstr ""
-
-#: qt/base/deletion_options.py:44 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
 
-#: qt/base/deletion_options.py:46 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 
-#: qt/base/deletion_options.py:52 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr ""
 
@@ -801,7 +775,7 @@ msgstr ""
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 
-#: qt/base/deletion_options.py:37
+#: qt/base/deletion_options.py:38
 msgid " (Mac OS X or Linux only)"
 msgstr ""
 
@@ -839,4 +813,42 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
+msgstr ""
+
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Link deleted files"
+msgstr ""
+
+#: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"After having deleted a duplicate, place a link targeting the reference file "
+"to replace the deleted file."
+msgstr ""
+
+#: qt/base/deletion_options.py:45
+msgid "Hardlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:45
+msgid "Symlink"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Font Size:"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reset To Defaults"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reveal"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Services"
 msgstr ""

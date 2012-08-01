@@ -14,23 +14,23 @@ msgstr "Não há duplicatas selecionadas. Nada foi feito."
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "poderá apagar, mover ou copiar somente 10 duplicatas por vez"
 
-#: core/app.py:230
+#: core/app.py:231
 msgid "No duplicates found."
 msgstr "Nenhuma duplicata encontrada"
 
-#: core/app.py:243
+#: core/app.py:244
 msgid "All marked files were copied sucessfully."
 msgstr "Todos os arquivos marcados foram copiados com sucesso"
 
-#: core/app.py:244
+#: core/app.py:245
 msgid "All marked files were moved sucessfully."
 msgstr "Todos os arquivos marcados foram relocados com sucesso"
 
-#: core/app.py:245
+#: core/app.py:246
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 
-#: core/app.py:272
+#: core/app.py:273
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -38,42 +38,42 @@ msgstr ""
 "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 "
 "duplicatas por vez."
 
-#: core/app.py:292
+#: core/app.py:293
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "copy"
 msgstr "copiar"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "move"
 msgstr "mover"
 
-#: core/app.py:353
+#: core/app.py:354
 msgid "Select a directory to {} marked files to"
 msgstr "Selecione uma pasta para {} os arquivos marcados"
 
-#: core/app.py:403
+#: core/app.py:405
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Você não possui nenhum comando personalizado. Crie um nas preferências."
 
-#: core/app.py:490 core/app.py:501
+#: core/app.py:492 core/app.py:503
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Remover %d arquivo(s) dos resultados?"
 
-#: core/app.py:541
+#: core/app.py:543
 msgid "Collecting files to scan"
 msgstr "Juntando arquivos para escanear"
 
-#: core/app.py:552
+#: core/app.py:554
 msgid "The selected directories contain no scannable file."
 msgstr "As pastas selecionadas não contém arquivos escaneáveis."
 
-#: core/app.py:591
+#: core/app.py:593
 msgid "%s (%d discarded)"
 msgstr "%s (%d rejeitado)"
 
@@ -93,7 +93,7 @@ msgstr "Tamanho de leitura de %d/%d arquivos"
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d coincidentes agrupados"
 
-#: core/gui/deletion_options.py:20
+#: core/gui/deletion_options.py:21
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Você está movendo {} arquivo(s) para o Lixo"
 
@@ -181,18 +181,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:521
+#: core/app.py:523
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:283
+#: core/app.py:284
 msgid "'{}' already is in the list."
 msgstr "'{}' já está na lista"
 
-#: core/app.py:285
+#: core/app.py:286
 msgid "'{}' does not exist."
 msgstr "'{}' não existe"
 
-#: core/app.py:378
+#: core/app.py:380
 msgid "Select a destination for your exported CSV"
 msgstr ""

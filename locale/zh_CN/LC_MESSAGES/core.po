@@ -6,21 +6,21 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:272
+#: core/app.py:273
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:541
+#: core/app.py:543
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:552
+#: core/app.py:554
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:591
+#: core/app.py:593
 msgid "%s (%d discarded)"
 msgstr "%s (%d 无效)"
 
@@ -120,23 +120,23 @@ msgstr ""
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:230
+#: core/app.py:231
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: core/app.py:243
+#: core/app.py:244
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:244
+#: core/app.py:245
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:245
+#: core/app.py:246
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:292
+#: core/app.py:293
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -146,27 +146,27 @@ msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继�
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "确定要从忽略列表中移除 %d 项吗?"
 
-#: core/app.py:403
+#: core/app.py:405
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
-#: core/app.py:490 core/app.py:501
+#: core/app.py:492 core/app.py:503
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "你将从结果中移除 %d 个文件。继续吗?"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "copy"
 msgstr "复制"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "move"
 msgstr "移动"
 
-#: core/app.py:353
+#: core/app.py:354
 msgid "Select a directory to {} marked files to"
 msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
-#: core/gui/deletion_options.py:20
+#: core/gui/deletion_options.py:21
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
@@ -178,18 +178,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:521
+#: core/app.py:523
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:283
+#: core/app.py:284
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:285
+#: core/app.py:286
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:378
+#: core/app.py:380
 msgid "Select a destination for your exported CSV"
 msgstr ""

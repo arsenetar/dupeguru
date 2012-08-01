@@ -6,7 +6,7 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "ne peut effacer, déplacer ou copier que  10 doublons à la fois"
 
-#: core/app.py:272
+#: core/app.py:273
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -14,15 +14,15 @@ msgstr ""
 "Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la fois"
 " en mode démo."
 
-#: core/app.py:541
+#: core/app.py:543
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:552
+#: core/app.py:554
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:591
+#: core/app.py:593
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -122,24 +122,24 @@ msgstr "Aucun doublon marqué. Rien à faire."
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Aucun doublon sélectionné. Rien à faire."
 
-#: core/app.py:230
+#: core/app.py:231
 msgid "No duplicates found."
 msgstr "Aucun doublon trouvé."
 
-#: core/app.py:243
+#: core/app.py:244
 msgid "All marked files were copied sucessfully."
 msgstr "Tous les fichiers marqués ont été copiés correctement."
 
-#: core/app.py:244
+#: core/app.py:245
 msgid "All marked files were moved sucessfully."
 msgstr "Tous les fichiers marqués ont été déplacés correctement."
 
-#: core/app.py:245
+#: core/app.py:246
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 "Tous les fichiers marqués ont été correctement envoyés à la corbeille."
 
-#: core/app.py:292
+#: core/app.py:293
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -151,28 +151,28 @@ msgstr ""
 "Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle "
 "contient?"
 
-#: core/app.py:403
+#: core/app.py:405
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: core/app.py:490 core/app.py:501
+#: core/app.py:492 core/app.py:503
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "copy"
 msgstr "copier"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "move"
 msgstr "déplacer"
 
-#: core/app.py:353
+#: core/app.py:354
 msgid "Select a directory to {} marked files to"
 msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 
-#: core/gui/deletion_options.py:20
+#: core/gui/deletion_options.py:21
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Vous envoyez {} fichier(s) à la corbeille."
 
@@ -184,18 +184,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:521
+#: core/app.py:523
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:283
+#: core/app.py:284
 msgid "'{}' already is in the list."
 msgstr "'{}' est déjà dans la liste."
 
-#: core/app.py:285
+#: core/app.py:286
 msgid "'{}' does not exist."
 msgstr "'{}' n'existe pas."
 
-#: core/app.py:378
+#: core/app.py:380
 msgid "Select a destination for your exported CSV"
 msgstr ""

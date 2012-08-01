@@ -16,7 +16,7 @@ msgstr ""
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "може видаляти, переміщувати або копіювати лише 10 копій відразу"
 
-#: core/app.py:272
+#: core/app.py:273
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -24,15 +24,15 @@ msgstr ""
 "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
 " в демонстраційному режимі."
 
-#: core/app.py:541
+#: core/app.py:543
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:552
+#: core/app.py:554
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:591
+#: core/app.py:593
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
@@ -136,23 +136,23 @@ msgstr "Немає позначених дублікатів - нічого ро
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Немає обраних дублікатів - нічого робити."
 
-#: core/app.py:230
+#: core/app.py:231
 msgid "No duplicates found."
 msgstr "Не знайдено жодного дублікату."
 
-#: core/app.py:243
+#: core/app.py:244
 msgid "All marked files were copied sucessfully."
 msgstr "Усі позначені файли були скопійовані успішно."
 
-#: core/app.py:244
+#: core/app.py:245
 msgid "All marked files were moved sucessfully."
 msgstr "Усі позначені файли були переміщені успішно."
 
-#: core/app.py:245
+#: core/app.py:246
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:292
+#: core/app.py:293
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -164,27 +164,27 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ви дійсно хочете видалити всі %d елементів з чорного списку?"
 
-#: core/app.py:403
+#: core/app.py:405
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:490 core/app.py:501
+#: core/app.py:492 core/app.py:503
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:352
+#: core/app.py:353
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:353
+#: core/app.py:354
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
-#: core/gui/deletion_options.py:20
+#: core/gui/deletion_options.py:21
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
@@ -196,18 +196,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:521
+#: core/app.py:523
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:283
+#: core/app.py:284
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
 
-#: core/app.py:285
+#: core/app.py:286
 msgid "'{}' does not exist."
 msgstr "'{}' не існує."
 
-#: core/app.py:378
+#: core/app.py:380
 msgid "Select a destination for your exported CSV"
 msgstr ""
