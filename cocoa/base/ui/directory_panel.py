@@ -42,6 +42,9 @@ col.editable = True
 col.autoResizable = False
 col.dataCell = Popup(None, ["Normal", "Reference", "Excluded"])
 col.dataCell.controlSize = const.NSSmallControlSize
+directoryOutline.allowsColumnReordering = False
+directoryOutline.allowsColumnSelection = False
+directoryOutline.allowsMultipleSelection = True
 
 for button in (addButton, removeButton):
     button.width = 28
