@@ -9,7 +9,6 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "ResultTable.h"
 #import "Dialogs.h"
 #import "Utils.h"
-#import "Consts.h"
 #import "HSQuicklook.h"
 
 @interface HSTable (private)
@@ -99,7 +98,7 @@ http://www.hardcoded.net/licenses/bsd_license
         if (![newName isEqual:oldName]) {
             BOOL renamed = [[self model] renameSelected:newName];
             if (!renamed) {
-                [Dialogs showMessage:[NSString stringWithFormat:TR(@"The name '%@' already exists."), newName]];
+                [Dialogs showMessage:[NSString stringWithFormat:NSLocalizedString(@"The name '%@' already exists.", @""), newName]];
             }
             else {
                 [[self view] setNeedsDisplay:YES];

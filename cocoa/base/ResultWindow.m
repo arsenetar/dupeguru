@@ -80,7 +80,7 @@ http://www.hardcoded.net/licenses/bsd_license
         [mi setTag:i];
     }
     [[app columnsMenu] addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *mi = [[app columnsMenu] addItemWithTitle:TR(@"Reset to Default")
+    NSMenuItem *mi = [[app columnsMenu] addItemWithTitle:NSLocalizedString(@"Reset to Default", @"")
         action:@selector(resetColumnsToDefault) keyEquivalent:@""];
     [mi setTarget:self];
 }
@@ -259,7 +259,7 @@ http://www.hardcoded.net/licenses/bsd_license
     NSSavePanel *sp = [NSSavePanel savePanel];
     [sp setCanCreateDirectories:YES];
     [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
-    [sp setTitle:TR(@"Select a file to save your results to")];
+    [sp setTitle:NSLocalizedString(@"Select a file to save your results to", @"")];
     if ([sp runModal] == NSOKButton) {
         [model saveResultsAs:[sp filename]];
         [[app recentResults] addFile:[sp filename]];
@@ -269,7 +269,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)startDuplicateScan
 {
     if ([model resultsAreModified]) {
-        if ([Dialogs askYesNo:TR(@"You have unsaved results, do you really want to continue?")] == NSAlertSecondButtonReturn) // NO
+        if ([Dialogs askYesNo:NSLocalizedString(@"You have unsaved results, do you really want to continue?", @"")] == NSAlertSecondButtonReturn) // NO
             return;
     }
     [self setScanOptions];
@@ -342,7 +342,7 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)jobInProgress:(NSNotification *)aNotification
 {
-    [Dialogs showMessage:TR(@"A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")];
+    [Dialogs showMessage:NSLocalizedString(@"A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.", @"")];
 }
 
 - (void)jobStarted:(NSNotification *)aNotification

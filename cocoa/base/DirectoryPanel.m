@@ -11,7 +11,6 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "Dialogs.h"
 #import "Utils.h"
 #import "AppDelegate.h"
-#import "Consts.h"
 
 @implementation DirectoryPanel
 
@@ -55,7 +54,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)fillPopUpMenu
 {
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m addItemWithTitle:TR(@"Add New Folder...") action:@selector(askForDirectory) keyEquivalent:@""];
+    NSMenuItem *mi = [m addItemWithTitle:NSLocalizedString(@"Add New Folder...", @"") action:@selector(askForDirectory) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
 }
@@ -89,7 +88,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setCanChooseFiles:YES];
     [op setCanChooseDirectories:YES];
     [op setAllowsMultipleSelection:YES];
-    [op setTitle:TR(@"Select a folder to add to the scanning list")];
+    [op setTitle:NSLocalizedString(@"Select a folder to add to the scanning list", @"")];
     [op setDelegate:self];
     if ([op runModal] == NSOKButton) {
         for (NSString *directory in [op filenames]) {
@@ -116,7 +115,7 @@ http://www.hardcoded.net/licenses/bsd_license
         while ([m numberOfItems] > 0) {
             [m removeItemAtIndex:0];
         }
-        NSMenuItem *mi = [m addItemWithTitle:TR(@"Load from file...") action:@selector(loadResults) keyEquivalent:@""];
+        NSMenuItem *mi = [m addItemWithTitle:NSLocalizedString(@"Load from file...", @"") action:@selector(loadResults) keyEquivalent:@""];
         [mi setTarget:_app];
         [m addItem:[NSMenuItem separatorItem]];
         [[_app recentResults] fillMenu:m];

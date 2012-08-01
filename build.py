@@ -22,6 +22,8 @@ from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, file
     get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
     create_osx_app_structure)
 from hscommon import loc
+from hscommon.plat import ISOSX
+from hscommon.util import ensure_folder
 
 def parse_args():
     usage = "usage: %prog [options]"
@@ -32,8 +34,10 @@ def parse_args():
         help="Build only the help file")
     parser.add_option('--loc', action='store_true', dest='loc',
         help="Build only localization")
+    parser.add_option('--cocoa-ext', action='store_true', dest='cocoa_ext',
+        help="Build only Cocoa extensions")
     parser.add_option('--cocoa-compile', action='store_true', dest='cocoa_compile',
-        help="Build only Cocoa modules and executables")
+        help="Build only Cocoa executable")
     parser.add_option('--xibless', action='store_true', dest='xibless',
         help="Build only xibless UIs")
     parser.add_option('--updatepot', action='store_true', dest='updatepot',
@@ -53,33 +57,44 @@ def cocoa_app_path(edition):
         'pe': 'build/dupeGuru PE.app',
     }[edition]
 
-def build_xibless(edition):
+def build_cocoalib_xibless(dest='cocoa/autogen'):
     import xibless
-    if not op.exists('cocoa/autogen'):
-        os.mkdir('cocoa/autogen')
-    xibless.generate('cocoalib/ui/progress.py', 'cocoa/autogen/ProgressController_UI')
-    xibless.generate('cocoalib/ui/about.py', 'cocoa/autogen/HSAboutBox_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/fairware_reminder.py', 'cocoa/autogen/HSFairwareReminder_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/demo_reminder.py', 'cocoa/autogen/HSDemoReminder_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/enter_code.py', 'cocoa/autogen/HSEnterCode_UI', localizationTable='cocoalib')
-    xibless.generate('cocoalib/ui/error_report.py', 'cocoa/autogen/HSErrorReportWindow_UI', localizationTable='cocoalib')
-    xibless.generate('cocoa/base/ui/ignore_list_dialog.py', 'cocoa/autogen/IgnoreListDialog_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/deletion_options.py', 'cocoa/autogen/DeletionOptions_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/problem_dialog.py', 'cocoa/autogen/ProblemDialog_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/directory_panel.py', 'cocoa/autogen/DirectoryPanel_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/prioritize_dialog.py', 'cocoa/autogen/PrioritizeDialog_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/result_window.py', 'cocoa/autogen/ResultWindow_UI', localizationTable='Localizable')
-    xibless.generate('cocoa/base/ui/main_menu.py', 'cocoa/autogen/MainMenu_UI',
-        localizationTable='Localizable', args={'edition': edition})
-    xibless.generate('cocoa/base/ui/preferences_panel.py', 'cocoa/autogen/PreferencesPanel_UI',
-        localizationTable='Localizable', args={'edition': edition})
+    ensure_folder(dest)
+    FNPAIRS = [
+        ('progress.py', 'ProgressController_UI'),
+        ('about.py', 'HSAboutBox_UI'),
+        ('fairware_reminder.py', 'HSFairwareReminder_UI'),
+        ('demo_reminder.py', 'HSDemoReminder_UI'),
+        ('enter_code.py', 'HSEnterCode_UI'),
+        ('error_report.py', 'HSErrorReportWindow_UI'),
+    ]
+    for srcname, dstname in FNPAIRS:
+        xibless.generate(op.join('cocoalib', 'ui', srcname), op.join(dest, dstname), localizationTable='cocoalib')
+
+def build_xibless(edition, dest='cocoa/autogen'):
+    import xibless
+    ensure_folder(dest)
+    FNPAIRS = [
+        ('ignore_list_dialog.py', 'IgnoreListDialog_UI'),
+        ('deletion_options.py', 'DeletionOptions_UI'),
+        ('problem_dialog.py', 'ProblemDialog_UI'),
+        ('directory_panel.py', 'DirectoryPanel_UI'),
+        ('prioritize_dialog.py', 'PrioritizeDialog_UI'),
+        ('result_window.py', 'ResultWindow_UI'),
+        ('main_menu.py', 'MainMenu_UI'),
+        ('preferences_panel.py', 'PreferencesPanel_UI'),
+    ]
+    for srcname, dstname in FNPAIRS:
+        xibless.generate(op.join('cocoa', 'base', 'ui', srcname), op.join(dest, dstname),
+            localizationTable='Localizable', args={'edition': edition})
     if edition == 'pe':
-        xibless.generate('cocoa/pe/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+        xibless.generate('cocoa/pe/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'), localizationTable='Localizable')
     else:
-        xibless.generate('cocoa/base/ui/details_panel.py', 'cocoa/autogen/DetailsPanel_UI', localizationTable='Localizable')
+        xibless.generate('cocoa/base/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'), localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
     ed = lambda s: s.format(edition)
+    build_cocoalib_xibless()
     build_xibless(edition)
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
@@ -174,6 +189,15 @@ def build_localizations(ui, edition):
     shutil.copytree('locale', op.join('build', 'locale'), ignore=shutil.ignore_patterns('*.po', '*.pot'))
 
 def build_updatepot():
+    if ISOSX:
+        print("Updating Cocoa strings file.")
+        # We need to have strings from *all* editions in here, so we'll call xibless for all editions
+        # in dummy subfolders.
+        build_cocoalib_xibless('cocoalib/autogen')
+        loc.generate_cocoa_strings_from_code('cocoalib', 'cocoalib/en.lproj')
+        for edition in ('se', 'me', 'pe'):
+            build_xibless(edition, op.join('cocoa', 'autogen', edition))
+        loc.generate_cocoa_strings_from_code('cocoa', 'cocoa/base/en.lproj')
     print("Building .pot files from source files")
     print("Building core.pot")
     all_cores = ['core', 'core_se', 'core_me', 'core_pe']
@@ -187,12 +211,14 @@ def build_updatepot():
     loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
-    print("Building cocoalib.pot")
-    loc.strings2pot(op.join('cocoalib', 'en.lproj', 'cocoalib.strings'),
-        op.join('cocoalib', 'locale', 'cocoalib.pot'))
-    print("Enhancing ui.pot with Cocoa's strings files")
-    loc.strings2pot(op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
-        op.join('locale', 'ui.pot'))
+    if ISOSX:
+        print("Building cocoalib.pot")
+        cocoalib_pot = op.join('cocoalib', 'locale', 'cocoalib.pot')
+        os.remove(cocoalib_pot)
+        loc.strings2pot(op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), cocoalib_pot)
+        print("Enhancing ui.pot with Cocoa's strings files")
+        loc.strings2pot(op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
+            op.join('locale', 'ui.pot'))
 
 def build_mergepot():
     print("Updating .po files using .pot files")
@@ -311,14 +337,16 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
-    elif options.cocoa_compile:
+    elif options.cocoa_ext:
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
+    elif options.cocoa_compile:
         os.chdir('cocoa')
         os.system(cocoa_compile_command(edition))
         os.chdir('..')
         copy('cocoa/build/dupeGuru', op.join(cocoa_app_path(edition), 'Contents/MacOS/dupeGuru'))
     elif options.xibless:
+        build_cocoalib_xibless()
         build_xibless(edition)
     else:
         build_normal(edition, ui, dev)

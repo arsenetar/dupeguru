@@ -6,8 +6,6 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import "HSConsts.h"
-
 #define JobStarted @"JobStarted"
 #define JobInProgress @"JobInProgress"
 #define TableFontSize @"TableFontSize"

@@ -7,7 +7,6 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DirectoryPanel.h"
-#import "Consts.h"
 
 @implementation DirectoryPanelPE
 - (id)initWithParentApp:(id)aParentApp
@@ -21,10 +20,10 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [super fillPopUpMenu];
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m insertItemWithTitle:TR(@"Add iPhoto Library") action:@selector(addiPhoto:)
+    NSMenuItem *mi = [m insertItemWithTitle:NSLocalizedString(@"Add iPhoto Library", @"") action:@selector(addiPhoto:)
         keyEquivalent:@"" atIndex:1];
     [mi setTarget:self];
-    mi = [m insertItemWithTitle:TR(@"Add Aperture Library") action:@selector(addAperture:)
+    mi = [m insertItemWithTitle:NSLocalizedString(@"Add Aperture Library", @"") action:@selector(addAperture:)
         keyEquivalent:@"" atIndex:2];
     [mi setTarget:self];
 }

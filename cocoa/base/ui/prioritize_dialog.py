@@ -8,8 +8,8 @@ promptLabel = Label(result, "Add criteria to the right box and click OK to send 
 categoryPopup = Popup(result)
 criteriaTable = ListView(result)
 prioritizationTable = ListView(result)
-addButton = Button(result, "-->")
-removeButton = Button(result, "<--")
+addButton = Button(result, NLSTR("-->"))
+removeButton = Button(result, NLSTR("<--"))
 okButton = Button(result, "Ok")
 cancelButton = Button(result, "Cancel")
 

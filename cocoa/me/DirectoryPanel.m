@@ -7,7 +7,6 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import "DirectoryPanel.h"
-#import "Consts.h"
 
 @implementation DirectoryPanelME
 - (id)initWithParentApp:(id)aParentApp
@@ -21,7 +20,7 @@ http://www.hardcoded.net/licenses/bsd_license
 {
     [super fillPopUpMenu];
     NSMenu *m = [addButtonPopUp menu];
-    NSMenuItem *mi = [m insertItemWithTitle:TR(@"Add iTunes Library") action:@selector(addiTunes:)
+    NSMenuItem *mi = [m insertItemWithTitle:NSLocalizedString(@"Add iTunes Library", @"") action:@selector(addiTunes:)
         keyEquivalent:@"" atIndex:1];
     [mi setTarget:self];
 }
