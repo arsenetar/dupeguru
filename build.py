@@ -98,8 +98,9 @@ def build_cocoa(edition, dev):
     print("Building the cocoa layer")
     from pluginbuilder import copy_embeddable_python_dylib, collect_dependencies
     copy_embeddable_python_dylib('build')
-    if not op.exists('build/py'):
-        os.mkdir('build/py')
+    pydep_folder = op.join(app.resources, 'py')
+    if not op.exists(pydep_folder):
+        os.mkdir(pydep_folder)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     specific_packages = {
         'se': ['core_se'],
@@ -109,13 +110,13 @@ def build_cocoa(edition, dev):
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
     copy_packages(tocopy, 'build')
     sys.path.insert(0, 'build')
-    collect_dependencies('build/dg_cocoa.py', 'build/py', excludes=['PyQt4'])
+    collect_dependencies('build/dg_cocoa.py', pydep_folder, excludes=['PyQt4'])
     del sys.path[0]
     if dev:
-        copy_packages(tocopy, 'build/py', create_links=True)
+        copy_packages(tocopy, pydep_folder, create_links=True)
     # Views are not referenced by python code, so they're not found by the collector.
-    copy_all('build/inter/*.so', 'build/py/inter')
-    copy_sysconfig_files_for_embed('build/py')
+    copy_all('build/inter/*.so', op.join(pydep_folder, 'inter'))
+    copy_sysconfig_files_for_embed(pydep_folder)
     print("Compiling with WAF")
     os.chdir('cocoa')
     print_and_do(cocoa_compile_command(edition))
@@ -123,7 +124,7 @@ def build_cocoa(edition, dev):
     app.copy_executable('cocoa/build/dupeGuru')
     print("Copying resources and frameworks")
     image_path = ed('cocoa/{}/dupeguru.icns')
-    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/py', 'build/help']
+    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
     app.copy_resources(*resources, use_symlinks=dev)
     app.copy_frameworks('build/Python', 'cocoalib/Sparkle.framework')
     print("Creating the run.py file")
