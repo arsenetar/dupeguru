@@ -121,11 +121,16 @@ Deletion Options
 These options affect how duplicate deletion takes place. Most of the time, you don't need to enable
 any of them.
 
-* **Hardlink deleted files:** The deleted files are replaced by a `hard link`_ to the reference
-  file. (Only for OS X and Linux)
+* **Link deleted files:** The deleted files are replaced by a link to the reference file. You have
+  a choice of replacing it either with a `symlink`_ or a `hardlink`_. It's better to read the whole
+  wikipedia pages about them to make a informed choice, but in short, a symlink is a shortcut to
+  the file's path. If the original file is deleted or moved, the link is broken. A hardlink is a
+  link to the file *itself*. That link is as good as a "real" file. Only when *all* hardlinks to a
+  file are deleted is the file itself deleted. (Only for OS X and Linux)
 * **Directly delete files:** Instead of sending files to trash, directly delete them. This is used
   for troubleshooting and you normally don't need to enable this unless dupeGuru has problems
   deleting files normally, something that can happens when you try to delete files on network
   storage (NAS).
 
-.. _hard link: http://en.wikipedia.org/wiki/Hard_link
+.. _hardlink: http://en.wikipedia.org/wiki/Hard_link
+.. _symlink: http://en.wikipedia.org/wiki/Symbolic_link
