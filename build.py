@@ -19,8 +19,8 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
-    create_osx_app_structure, build_cocoalib_xibless)
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move,
+    OSXAppStructure, build_cocoalib_xibless)
 from hscommon import loc
 from hscommon.plat import ISOSX
 from hscommon.util import ensure_folder
@@ -50,12 +50,13 @@ def parse_args():
 def cocoa_compile_command(edition):
     return '{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition)
 
-def cocoa_app_path(edition):
-    return {
+def cocoa_app(edition):
+    app_path = {
         'se': 'build/dupeGuru.app',
         'me': 'build/dupeGuru ME.app',
         'pe': 'build/dupeGuru PE.app',
     }[edition]
+    return OSXAppStructure(app_path)
 
 def build_xibless(edition, dest='cocoa/autogen'):
     import xibless
@@ -79,9 +80,19 @@ def build_xibless(edition, dest='cocoa/autogen'):
         xibless.generate('cocoa/base/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'), localizationTable='Localizable')
 
 def build_cocoa(edition, dev):
+    print("Creating OS X app structure")
     ed = lambda s: s.format(edition)
+    app = cocoa_app(edition)
+    app_version = get_module_version(ed('core_{}'))
+    cocoa_project_path = ed('cocoa/{}')
+    filereplace(op.join(cocoa_project_path, 'InfoTemplate.plist'), op.join('build', 'Info.plist'), version=app_version)
+    app.create(op.join('build', 'Info.plist'))
+    print("Building localizations")
+    build_localizations('cocoa', edition)
+    print("Building xibless UIs")
     build_cocoalib_xibless()
     build_xibless(edition)
+    print("Building Python extensions")
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
@@ -89,7 +100,6 @@ def build_cocoa(edition, dev):
     copy_embeddable_python_dylib('build')
     if not op.exists('build/py'):
         os.mkdir('build/py')
-    cocoa_project_path = ed('cocoa/{}')
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     specific_packages = {
         'se': ['core_se'],
@@ -106,28 +116,24 @@ def build_cocoa(edition, dev):
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', 'build/py/inter')
     copy_sysconfig_files_for_embed('build/py')
-    os.chdir(cocoa_project_path)
-    print('Generating Info.plist')
-    app_version = get_module_version(ed('core_{}'))
-    filereplace('InfoTemplate.plist', 'Info.plist', version=app_version)
     print("Compiling with WAF")
+    os.chdir('cocoa')
+    print_and_do(cocoa_compile_command(edition))
     os.chdir('..')
-    os.system(cocoa_compile_command(edition))
-    os.chdir('..')
-    print("Creating the .app folder")
+    app.copy_executable('cocoa/build/dupeGuru')
+    print("Copying resources and frameworks")
     image_path = ed('cocoa/{}/dupeguru.icns')
-    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py',
-        'build/py', 'build/help'] + glob.glob('cocoa/base/*.lproj')
-    frameworks = ['build/Python', 'cocoalib/Sparkle.framework']
-    app_path = cocoa_app_path(edition)
-    create_osx_app_structure(app_path, 'cocoa/build/dupeGuru', ed('cocoa/{}/Info.plist'),
-        resources, frameworks, symlink_resources=dev)
+    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/py', 'build/help']
+    app.copy_resources(*resources, use_symlinks=dev)
+    app.copy_frameworks('build/Python', 'cocoalib/Sparkle.framework')
     print("Creating the run.py file")
     tmpl = open('run_template_cocoa.py', 'rt').read()
-    run_contents = tmpl.replace('{{app_path}}', app_path)
+    run_contents = tmpl.replace('{{app_path}}', app.dest)
     open('run.py', 'wt').write(run_contents)
 
 def build_qt(edition, dev):
+    print("Building localizations")
+    build_localizations('qt', edition)
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     print("Creating the run.py file")
@@ -149,30 +155,40 @@ def build_help(edition):
     conftmpl = op.join(current_path, 'help', 'conf.tmpl')
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
 
-def build_localizations(ui, edition):
-    print("Building localizations")
+def build_base_localizations():
     loc.compile_all_po('locale')
     loc.compile_all_po(op.join('hscommon', 'locale'))
     loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
+
+def build_cocoa_localizations(edition):
+    print("Creating lproj folders based on .po files")
+    app = cocoa_app(edition)
+    for lang in loc.get_langs('locale'):
+        if lang == 'en':
+            continue
+        pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
+        stringsfile = op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings')
+        dest_lproj = op.join(app.resources, lang + '.lproj')
+        if not op.exists(dest_lproj):
+            os.makedirs(dest_lproj)
+        loc.po2strings(pofile, stringsfile, op.join(dest_lproj, 'Localizable.strings'))
+        pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
+        loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join(dest_lproj, 'cocoalib.strings'))
+
+def build_qt_localizations():
+    loc.compile_all_po(op.join('qtlib', 'locale'))
+    loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
+
+def build_localizations(ui, edition):
+    build_base_localizations()
     if ui == 'cocoa':
-        print("Creating lproj folders based on .po files")
-        for lang in loc.get_langs('locale'):
-            if lang == 'en':
-                continue
-            pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-            enlproj = op.join('cocoa', 'base', 'en.lproj')
-            dest_lproj = op.join('cocoa', 'base', lang + '.lproj')
-            if not op.exists(dest_lproj):
-                os.makedirs(dest_lproj)
-            loc.po2strings(pofile, op.join(enlproj, 'Localizable.strings'), op.join(dest_lproj, 'Localizable.strings'))
-            pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-            loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join(dest_lproj, 'cocoalib.strings'))
+        build_cocoa_localizations(edition)
     elif ui == 'qt':
-        loc.compile_all_po(op.join('qtlib', 'locale'))
-        loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
-    if op.exists(op.join('build', 'locale')):
-        shutil.rmtree(op.join('build', 'locale'))
-    shutil.copytree('locale', op.join('build', 'locale'), ignore=shutil.ignore_patterns('*.po', '*.pot'))
+        build_qt_localizations()
+    locale_dest = op.join('build', 'locale')
+    if op.exists(locale_dest):
+        shutil.rmtree(locale_dest)
+    shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
 
 def build_updatepot():
     if ISOSX:
@@ -293,7 +309,6 @@ def build_normal(edition, ui, dev):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
     build_help(edition)
-    build_localizations(ui, edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
@@ -328,9 +343,9 @@ def main():
         build_cocoa_bridging_interfaces(edition)
     elif options.cocoa_compile:
         os.chdir('cocoa')
-        os.system(cocoa_compile_command(edition))
+        print_and_do(cocoa_compile_command(edition))
         os.chdir('..')
-        copy('cocoa/build/dupeGuru', op.join(cocoa_app_path(edition), 'Contents/MacOS/dupeGuru'))
+        cocoa_app(edition).copy_executable('cocoa/build/dupeGuru')
     elif options.xibless:
         build_cocoalib_xibless()
         build_xibless(edition)
