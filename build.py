@@ -184,9 +184,10 @@ def build_localizations(ui, edition):
     build_base_localizations()
     if ui == 'cocoa':
         build_cocoa_localizations(edition)
+        locale_dest = op.join(cocoa_app(edition).resources, 'locale')
     elif ui == 'qt':
         build_qt_localizations()
-    locale_dest = op.join('build', 'locale')
+        locale_dest = op.join('build', 'locale')
     if op.exists(locale_dest):
         shutil.rmtree(locale_dest)
     shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
