@@ -20,7 +20,7 @@ from setuptools import setup, Extension
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
     get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
-    create_osx_app_structure)
+    create_osx_app_structure, build_cocoalib_xibless)
 from hscommon import loc
 from hscommon.plat import ISOSX
 from hscommon.util import ensure_folder
@@ -56,20 +56,6 @@ def cocoa_app_path(edition):
         'me': 'build/dupeGuru ME.app',
         'pe': 'build/dupeGuru PE.app',
     }[edition]
-
-def build_cocoalib_xibless(dest='cocoa/autogen'):
-    import xibless
-    ensure_folder(dest)
-    FNPAIRS = [
-        ('progress.py', 'ProgressController_UI'),
-        ('about.py', 'HSAboutBox_UI'),
-        ('fairware_reminder.py', 'HSFairwareReminder_UI'),
-        ('demo_reminder.py', 'HSDemoReminder_UI'),
-        ('enter_code.py', 'HSEnterCode_UI'),
-        ('error_report.py', 'HSErrorReportWindow_UI'),
-    ]
-    for srcname, dstname in FNPAIRS:
-        xibless.generate(op.join('cocoalib', 'ui', srcname), op.join(dest, dstname), localizationTable='cocoalib')
 
 def build_xibless(edition, dest='cocoa/autogen'):
     import xibless
