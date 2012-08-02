@@ -86,7 +86,7 @@ msgstr "# Doublons"
 
 #: core_me/prioritize.py:16
 msgid "Duration"
-msgstr ""
+msgstr "Durée"
 
 #: core_me/prioritize.py:28
 msgid "Samplerate"

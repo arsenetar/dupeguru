@@ -709,7 +709,7 @@ msgstr "Envoi de doublons à la corbeille en cours"
 
 #: cocoa/inter/app_pe.py:188
 msgid "Talking to iPhoto. Don't touch it!"
-msgstr ""
+msgstr "En communication avec iPhoto. N'y touchez pas!"
 
 #: cocoa/inter/app_pe.py:296
 msgid "The iPhoto application couldn't be found."
@@ -732,15 +732,15 @@ msgstr "Votre librairie iTunes ne contient aucune track morte."
 
 #: cocoa/inter/app_me.py:164
 msgid "Talking to iTunes. Don't touch it!"
-msgstr ""
+msgstr "En communication avec iTunes. N'y touchez pas!"
 
 #: cocoa/inter/app_me.py:218
 msgid "The iTunes application couldn't be found."
-msgstr ""
+msgstr "L'application iTunes n'a pas pu être trouvée"
 
 #: qt/base/result_window.py:172
 msgid "Delta Values"
-msgstr ""
+msgstr "Delta"
 
 #: cocoa/inter/app_me.py:190
 msgid ""
@@ -821,25 +821,26 @@ msgstr "Filtrer les résultats..."
 
 #: qt/base/app.py:278
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "Fichier {} (*.{})"
 
 #: qt/base/result_window.py:64
 msgid "Export To CSV"
-msgstr ""
+msgstr "Exporter vers CSV"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "Exporter les résultats vers CSV"
 
 #: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "Remplacer les fichiers effacés par des liens"
 
 #: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr ""
+msgstr "Après avoir effacé un fichier, remplacer celui-ci par un lien vers le "
+"fichier référence."
 
 #: qt/base/deletion_options.py:45
 msgid "Hardlink"
@@ -855,15 +856,15 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "Taille de police:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "Valeurs par défaut"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "Révéler"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"

@@ -44,7 +44,7 @@ msgstr "%d/%d paires groupées"
 
 #: core/prioritize.py:68
 msgid "None"
-msgstr ""
+msgstr "Aucune"
 
 #: core/prioritize.py:96
 msgid "Ends with number"
@@ -112,7 +112,7 @@ msgstr "Vérifié %d/%d paires"
 
 #: core_pe/matchexif.py:21
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "Lu l'EXIF de %d/%d images"
 
 #: core/app.py:38
 msgid "There are no marked duplicates. Nothing has been done."
@@ -178,15 +178,15 @@ msgstr "Vous envoyez {} fichier(s) à la corbeille."
 
 #: core/prioritize.py:98
 msgid "Longest"
-msgstr ""
+msgstr "Le plus long"
 
 #: core/prioritize.py:99
 msgid "Shortest"
-msgstr ""
+msgstr "Le plus court"
 
 #: core/app.py:523
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} groupes de doublons ont été modifiés par la re-prioritisation."
 
 #: core/app.py:284
 msgid "'{}' already is in the list."
@@ -198,4 +198,4 @@ msgstr "'{}' n'existe pas."
 
 #: core/app.py:380
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Choisissez une destination pour votre exportation CSV"
