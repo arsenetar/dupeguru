@@ -14,6 +14,7 @@ from PyQt4.QtGui import QApplication, QIcon, QPixmap
 from hscommon.plat import ISWINDOWS
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
+from qtlib.util import setupQtLogging
 from qt.base import dg_rc
 from qt.base.platform import BASE_PATH
 from core_{{edition}} import __version__, __appname__
@@ -26,6 +27,7 @@ if __name__ == "__main__":
     QCoreApplication.setOrganizationName('Hardcoded Software')
     QCoreApplication.setApplicationName(__appname__)
     QCoreApplication.setApplicationVersion(__version__)
+    setupQtLogging()
     settings = QSettings()
     lang = settings.value('Language')
     locale_folder = op.join(BASE_PATH, 'locale')

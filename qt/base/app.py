@@ -7,10 +7,8 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-import logging
 import os
 import os.path as op
-import io
 
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QApplication
@@ -25,7 +23,7 @@ from core.app import JobType
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
 from qtlib.reg import Registration
-from qtlib.util import createActions
+from qtlib.util import createActions, getAppData
 
 from . import platform
 from .result_window import ResultWindow
@@ -44,11 +42,6 @@ JOBID2TITLE = {
     JobType.Delete: tr("Sending files to the recycle bin"),
 }
 
-class SysWrapper(io.IOBase):
-    def write(self, s):
-        if s.strip(): # don't log empty stuff
-            logging.warning(s)
-
 class DupeGuru(QObject):
     MODELCLASS = None
     LOGO_NAME = '<replace this>'
@@ -62,19 +55,9 @@ class DupeGuru(QObject):
     
     def __init__(self):
         QObject.__init__(self)
-        appdata = str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
-        if not op.exists(appdata):
-            os.makedirs(appdata)
-        # For basicConfig() to work, we have to be sure that no logging has taken place before this call.
-        logging.basicConfig(filename=op.join(appdata, 'debug.log'), level=logging.WARNING,
-            format='%(asctime)s - %(levelname)s - %(message)s')
-        if sys.stderr is None: # happens under a cx_freeze environment
-            sys.stderr = SysWrapper()
-        if sys.stdout is None:
-            sys.stdout = SysWrapper()
         self.prefs = self.PREFERENCES_CLASS()
         self.prefs.load()
-        self.model = self.MODELCLASS(view=self, appdata=appdata)
+        self.model = self.MODELCLASS(view=self, appdata=getAppData())
         self._setup()
         self.prefsChanged.emit(self.prefs)
     
