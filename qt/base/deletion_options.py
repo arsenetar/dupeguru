@@ -33,9 +33,6 @@ class DeletionOptions(QDialog):
         self.msgLabel = QLabel()
         self.verticalLayout.addWidget(self.msgLabel)
         self.linkCheckbox = QCheckBox(tr("Link deleted files"))
-        if not (ISOSX or ISLINUX):
-            self.linkCheckbox.setEnabled(False)
-            self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
         self.verticalLayout.addWidget(self.linkCheckbox)
         text = tr("After having deleted a duplicate, place a link targeting the reference file "
             "to replace the deleted file.")
@@ -44,6 +41,10 @@ class DeletionOptions(QDialog):
         self.verticalLayout.addWidget(self.linkMessageLabel)
         self.linkTypeRadio = RadioBox(items=[tr("Symlink"), tr("Hardlink")], spread=False)
         self.verticalLayout.addWidget(self.linkTypeRadio)
+        if not (ISOSX or ISLINUX):
+            self.linkCheckbox.setEnabled(False)
+            self.linkTypeRadio.setEnabled(False)
+            self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
         self.directCheckbox = QCheckBox(tr("Directly delete files"))
         self.verticalLayout.addWidget(self.directCheckbox)
         text = tr("Instead of sending files to trash, delete them directly. This option is usually "
