@@ -20,7 +20,7 @@ from setuptools import setup, Extension
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
     get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move,
-    OSXAppStructure, build_cocoalib_xibless)
+    OSXAppStructure, build_cocoalib_xibless, fix_qt_resource_file)
 from hscommon import loc
 from hscommon.plat import ISOSX
 from hscommon.util import ensure_folder
@@ -137,6 +137,7 @@ def build_qt(edition, dev):
     build_localizations('qt', edition)
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
+    fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
     print("Creating the run.py file")
     tmpl = open('run_template_qt.py', 'rt').read()
     run_contents = tmpl.replace('{{edition}}', edition)
