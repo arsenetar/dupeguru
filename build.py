@@ -13,13 +13,12 @@ from optparse import OptionParser
 import shutil
 import json
 import importlib
-import glob
 
 from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move,
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
     OSXAppStructure, build_cocoalib_xibless, fix_qt_resource_file)
 from hscommon import loc
 from hscommon.plat import ISOSX
@@ -165,17 +164,20 @@ def build_base_localizations():
 def build_cocoa_localizations(edition):
     print("Creating lproj folders based on .po files")
     app = cocoa_app(edition)
+    en_stringsfile = op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings')
+    en_cocoastringsfile = op.join('cocoalib', 'en.lproj', 'cocoalib.strings')
     for lang in loc.get_langs('locale'):
-        if lang == 'en':
-            continue
         pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-        stringsfile = op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings')
         dest_lproj = op.join(app.resources, lang + '.lproj')
-        if not op.exists(dest_lproj):
-            os.makedirs(dest_lproj)
-        loc.po2strings(pofile, stringsfile, op.join(dest_lproj, 'Localizable.strings'))
+        ensure_folder(dest_lproj)
+        loc.po2strings(pofile, en_stringsfile, op.join(dest_lproj, 'Localizable.strings'))
         pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-        loc.po2strings(pofile, op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), op.join(dest_lproj, 'cocoalib.strings'))
+        loc.po2strings(pofile, en_cocoastringsfile, op.join(dest_lproj, 'cocoalib.strings'))
+    # We also have to copy the "en.lproj" strings
+    en_lproj = op.join(app.resources, 'en.lproj')
+    ensure_folder(en_lproj)
+    copy(en_stringsfile, en_lproj)
+    copy(en_cocoastringsfile, en_lproj)
 
 def build_qt_localizations():
     loc.compile_all_po(op.join('qtlib', 'locale'))
