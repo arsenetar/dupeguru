@@ -1,3 +1,14 @@
+=== 3.6.0 (2012-08-08)
+
+* Added "Export to CSV". (#189)
+* Added "Replace with symlinks" to complement "Replace with hardlinks". [Mac, Linux] (#194)
+* dupeGuru now tells how many duplicates were affected after each re-prioritization operation. (#204)
+* Added Longest/Shortest filename criteria in the re-prioritize dialog. (#198)
+* Fixed result table cells which mistakenly became writable in v3.5.0. [Mac] (#203)
+* Fixed "Rename Selected" which was broken since v3.5.0. [Mac] (#202)
+* Fixed a bug where "Reset to Defaults" in the Columns menu wouldn't refresh menu items' marked state.
+* Added Brazilian localization by Victor Figueiredo.
+
 === 3.5.0 (2012-06-01)
 
 * Added a Deletion Options panel.
