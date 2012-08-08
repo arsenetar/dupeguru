@@ -18,6 +18,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Igor Pavlov, Russian localization**
 
+| **Kyrill Detinov, Russian localization**
+
 | **Yuri Petrashko, Ukrainian localization**
 
 | **Nickolas Pohilets, Ukrainian localization**

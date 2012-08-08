@@ -20,6 +20,8 @@
 
 | **Igor Pavlov, Russian localization**
 
+| **Kyrill Detinov, Russian localization**
+
 | **Yuri Petrashko, Ukrainian localization**
 
 | **Nickolas Pohilets, Ukrainian localization**

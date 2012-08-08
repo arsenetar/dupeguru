@@ -19,6 +19,8 @@ Voici la liste des contributeurs de dupeGuru. Merci!
 
 | **Igor Pavlov, localisation russe**
 
+| **Kyrill Detinov, localisation russe**
+
 | **Yuri Petrashko, localisation ukrainienne**
 
 | **Nickolas Pohilets, localisation ukrainienne**
