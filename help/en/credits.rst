@@ -20,6 +20,8 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Igor Pavlov, Russian localization**
 
+| **Kyrill Detinov, Russian localization**
+
 | **Yuri Petrashko, Ukrainian localization**
 
 | **Nickolas Pohilets, Ukrainian localization**
