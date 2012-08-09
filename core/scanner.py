@@ -11,7 +11,6 @@ import re
 import os.path as op
 
 from jobprogress import job
-from hscommon import io
 from hscommon.util import dedupe, rem_file_ext, get_file_ext
 from hscommon.trans import tr
 
@@ -129,6 +128,11 @@ class Scanner:
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
         j.set_progress(100, tr("Removing false matches"))
+        # In removing what we call here "false matches", we first want to remove, if we scan by
+        # folders, we want to remove folder matches for which the parent is also in a match (they're
+        # "duplicated duplicates if you will). Then, we also don't want mixed file kinds if the
+        # option isn't enabled, we want matches for which both files exist and, lastly, we don't
+        # want matches with both files as ref.
         if self.scan_type == ScanType.Folders and matches:
             allpath = {m.first.path for m in matches}
             allpath |= {m.second.path for m in matches}
@@ -143,7 +147,8 @@ class Scanner:
             matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
         if not self.mix_file_kind:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
-        matches = [m for m in matches if io.exists(m.first.path) and io.exists(m.second.path)]
+        matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
+        matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if self.ignore_list:
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
