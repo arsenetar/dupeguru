@@ -14,7 +14,6 @@
 import hashlib
 import logging
 
-from hscommon import io
 from hscommon.util import nonone, get_file_ext
 
 NOT_SET = object()
@@ -89,12 +88,12 @@ class File:
     
     def _read_info(self, field):
         if field in ('size', 'mtime'):
-            stats = io.stat(self.path)
+            stats = self.path.stat()
             self.size = nonone(stats.st_size, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == 'md5partial':
             try:
-                fp = io.open(self.path, 'rb')
+                fp = self.path.open('rb')
                 offset, size = self._get_md5partial_offset_and_size()
                 fp.seek(offset)
                 partialdata = fp.read(size)
@@ -105,7 +104,7 @@ class File:
                 pass
         elif field == 'md5':
             try:
-                fp = io.open(self.path, 'rb')
+                fp = self.path.open('rb')
                 md5 = hashlib.md5()
                 CHUNK_SIZE = 8192
                 filedata = fp.read(CHUNK_SIZE)
@@ -130,19 +129,19 @@ class File:
     #--- Public
     @classmethod
     def can_handle(cls, path):
-        return not io.islink(path) and io.isfile(path)
+        return not path.islink() and path.isfile()
     
     def rename(self, newname):
         if newname == self.name:
             return
         destpath = self.path[:-1] + newname
-        if io.exists(destpath):
+        if destpath.exists():
             raise AlreadyExistsError(newname, self.path[:-1])
         try:
-            io.rename(self.path, destpath)
+            self.path.rename(destpath)
         except EnvironmentError:
             raise OperationError(self)
-        if not io.exists(destpath):
+        if not destpath.exists():
             raise OperationError(self)
         self.path = destpath
     
@@ -180,7 +179,7 @@ class Folder(File):
         if field in {'size', 'mtime'}:
             size = sum((f.size for f in self._all_items()), 0)
             self.size = size
-            stats = io.stat(self.path)
+            stats = self.path.stat()
             self.mtime = nonone(stats.st_mtime, 0)
         elif field in {'md5', 'md5partial'}:
             # What's sensitive here is that we must make sure that subfiles'
@@ -199,14 +198,14 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subpaths = [self.path + name for name in io.listdir(self.path)]
-            subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p)]
+            subpaths = [self.path + name for name in self.path.listdir()]
+            subfolders = [p for p in subpaths if not p.islink() and p.isdir()]
             self._subfolders = [Folder(p) for p in subfolders]
         return self._subfolders
     
     @classmethod
     def can_handle(cls, path):
-        return not io.islink(path) and io.isdir(path)
+        return not path.islink() and path.isdir()
     
 
 def get_file(path, fileclasses=[File]):
@@ -225,7 +224,7 @@ def get_files(path, fileclasses=[File]):
             raise
     
     try:
-        paths = [combine_paths(path, name) for name in io.listdir(path)]
+        paths = [combine_paths(path, name) for name in path.listdir()]
         result = []
         for path in paths:
             file = get_file(path, fileclasses=fileclasses)

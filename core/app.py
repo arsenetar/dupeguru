@@ -15,7 +15,6 @@ import time
 import shutil
 
 from send2trash import send2trash
-from hscommon import io
 from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
@@ -168,7 +167,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.results.perform_on_marked(op, True)
     
     def _do_delete_dupe(self, dupe, link_deleted, use_hardlinks, direct_deletion):
-        if not io.exists(dupe.path):
+        if not dupe.path.exists():
             return
         logging.debug("Sending '%s' to trash", dupe.path)
         str_path = str(dupe.path)
@@ -253,7 +252,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         result = []
         for file in files:
             try:
-                inode = io.stat(file.path).st_ino
+                inode = file.path.stat().st_ino
             except OSError:
                 # The file was probably deleted or something
                 continue
@@ -324,8 +323,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if dest_type == DestType.Relative:
                 source_base = source_base[location_path:]
             dest_path = dest_path + source_base
-        if not io.exists(dest_path):
-            io.makedirs(dest_path)
+        if not dest_path.exists():
+            dest_path.makedirs()
         # Add filename to dest_path. For file move/copy, it's not required, but for folders, yes.
         dest_path = dest_path + source_path[-1]
         logging.debug("Copy/Move operation from '%s' to '%s'", source_path, dest_path)

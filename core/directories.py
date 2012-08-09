@@ -10,7 +10,6 @@ from xml.etree import ElementTree as ET
 import logging
 
 from jobprogress import job
-from hscommon import io
 from hscommon.path import Path
 from hscommon.util import FileOrPath
 
@@ -73,9 +72,9 @@ class Directories:
                     file.is_ref = state == DirectoryState.Reference
                     filepaths.add(file.path)
                     yield file
-            subpaths = [from_path + name for name in io.listdir(from_path)]
+            subpaths = [from_path + name for name in from_path.listdir()]
             # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
-            subfolders = [p for p in subpaths if not io.islink(p) and io.isdir(p) and p not in filepaths]
+            subfolders = [p for p in subpaths if not p.islink() and p.isdir() and p not in filepaths]
             for subfolder in subfolders:
                 for file in self._get_files(subfolder, j):
                     yield file
@@ -106,7 +105,7 @@ class Directories:
         """
         if path in self:
             raise AlreadyThereError()
-        if not io.exists(path):
+        if not path.exists():
             raise InvalidPathError()
         self._dirs = [p for p in self._dirs if p not in path]
         self._dirs.append(path)
@@ -115,7 +114,7 @@ class Directories:
     def get_subfolders(path):
         """returns a sorted list of paths corresponding to subfolders in `path`"""
         try:
-            names = [name for name in io.listdir(path) if io.isdir(path + name)]
+            names = [name for name in path.listdir() if (path + name).isdir()]
             names.sort(key=lambda x:x.lower())
             return [path + name for name in names]
         except EnvironmentError:

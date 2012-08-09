@@ -14,7 +14,6 @@ from appscript import app, its, k, CommandError, ApplicationNotFoundError
 from . import tunes
 
 from cocoa import as_fetch, proxy
-from hscommon import io
 from hscommon.trans import trget
 from hscommon.path import Path
 from hscommon.util import remove_invalid_xml
@@ -78,9 +77,9 @@ def get_itunes_database_path():
     return Path(plistpath)
 
 def get_itunes_songs(plistpath):
-    if not io.exists(plistpath):
+    if not plistpath.exists():
         return []
-    s = io.open(plistpath, 'rt', encoding='utf-8').read()
+    s = plistpath.open('rt', encoding='utf-8').read()
     # iTunes sometimes produces XML files with invalid characters in it.
     s = remove_invalid_xml(s, replace_with='')
     plist = plistlib.readPlistFromBytes(s.encode('utf-8'))
@@ -92,7 +91,7 @@ def get_itunes_songs(plistpath):
             song = ITunesSong(song_data)
         except KeyError: # No "Track Type", "Location" or "Track ID" key in track
             continue
-        if io.exists(song.path):
+        if song.path.exists():
             result.append(song)
     return result
 
