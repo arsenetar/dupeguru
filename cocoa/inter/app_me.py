@@ -86,11 +86,11 @@ def get_itunes_songs(plistpath):
     plist = plistlib.readPlistFromBytes(s.encode('utf-8'))
     result = []
     for song_data in plist['Tracks'].values():
-        if song_data['Track Type'] != 'File':
-            continue
         try:
+            if song_data['Track Type'] != 'File':
+                continue
             song = ITunesSong(song_data)
-        except KeyError: # No "Location" or "Track ID" key in track
+        except KeyError: # No "Track Type", "Location" or "Track ID" key in track
             continue
         if io.exists(song.path):
             result.append(song)
