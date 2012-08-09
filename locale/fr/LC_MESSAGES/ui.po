@@ -839,7 +839,8 @@ msgstr "Remplacer les fichiers effacés par des liens"
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr "Après avoir effacé un fichier, remplacer celui-ci par un lien vers le "
+msgstr ""
+"Après avoir effacé un fichier, remplacer celui-ci par un lien vers le "
 "fichier référence."
 
 #: qt/base/deletion_options.py:45
