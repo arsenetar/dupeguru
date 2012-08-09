@@ -330,18 +330,22 @@ class TestCaseDupeGuruWithResults:
         app = self.app
         # any other path that isn't a parent or child of the already added path
         otherpath = Path(op.dirname(__file__))
-        eq_(app.add_directory(otherpath), 0)
+        app.add_directory(otherpath)
         eq_(len(app.directories), 2)
     
     def test_addDirectory_already_there(self, do_setup):
         app = self.app
         otherpath = Path(op.dirname(__file__))
-        eq_(app.add_directory(otherpath), 0)
-        eq_(app.add_directory(otherpath), 1)
+        app.add_directory(otherpath)
+        app.add_directory(otherpath)
+        eq_(len(app.view.messages), 1)
+        assert "already" in app.view.messages[0]
     
     def test_addDirectory_does_not_exist(self, do_setup):
         app = self.app
-        eq_(2,app.add_directory('/does_not_exist'))
+        app.add_directory('/does_not_exist')
+        eq_(len(app.view.messages), 1)
+        assert "exist" in app.view.messages[0]
     
     def test_ignore(self, do_setup):
         app = self.app

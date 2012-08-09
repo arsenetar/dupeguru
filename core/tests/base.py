@@ -24,6 +24,9 @@ from ..gui.prioritize_dialog import PrioritizeDialog
 class DupeGuruView:
     JOB = nulljob
     
+    def __init__(self):
+        self.messages = []
+    
     def start_job(self, jobid, func, args=()):
         try:
             func(self.JOB, *args)
@@ -37,7 +40,7 @@ class DupeGuruView:
         pass
     
     def show_message(self, msg):
-        pass
+        self.messages.append(msg)
     
     def ask_yes_no(self, prompt):
         return True # always answer yes
