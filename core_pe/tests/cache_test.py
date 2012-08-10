@@ -141,5 +141,5 @@ class TestCaseCacheSQLEscape:
         try:
             del c["foo'bar"]
         except KeyError:
-            self.fail()
+            assert False
     

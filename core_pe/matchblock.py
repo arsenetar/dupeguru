@@ -55,6 +55,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # MemoryError happens when trying to read an image file, which is freed from memory by the
     # time that MemoryError is raised.
     cache = Cache(cache_path)
+    cache.purge_outdated()
     prepared = [] # only pictures for which there was no error getting blocks
     try:
         for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):

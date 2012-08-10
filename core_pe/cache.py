@@ -7,6 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os
+import os.path as op
 import logging
 import sqlite3 as sqlite
 
@@ -30,7 +31,7 @@ def colors_to_string(colors):
 #         result.append((number >> 16, (number >> 8) & 0xff, number & 0xff))
 #     return result
 
-class Cache(object):
+class Cache:
     """A class to cache picture blocks.
     """
     def __init__(self, db=':memory:'):
@@ -72,29 +73,34 @@ class Cache(object):
         result = self.con.execute(sql).fetchall()
         return result[0][0]
     
-    def __setitem__(self, key, value):
-        value = colors_to_string(value)
-        if key in self:
-            sql = "update pictures set blocks = ? where path = ?"
+    def __setitem__(self, path_str, blocks):
+        blocks = colors_to_string(blocks)
+        if op.exists(path_str):
+            mtime = int(os.stat(path_str).st_mtime)
         else:
-            sql = "insert into pictures(blocks,path) values(?,?)"
+            mtime = 0
+        if path_str in self:
+            sql = "update pictures set blocks = ?, mtime = ? where path = ?"
+        else:
+            sql = "insert into pictures(blocks,mtime,path) values(?,?,?)"
         try:
-            self.con.execute(sql, [value, key])
+            self.con.execute(sql, [blocks, mtime, path_str])
         except sqlite.OperationalError:
-            logging.warning('Picture cache could not set value for key %r', key)
+            logging.warning('Picture cache could not set value for key %r', path_str)
         except sqlite.DatabaseError as e:
-            logging.warning('DatabaseError while setting value for key %r: %s', key, str(e))
+            logging.warning('DatabaseError while setting value for key %r: %s', path_str, str(e))
     
     def _create_con(self, second_try=False):
         def create_tables():
-            sql = "create table pictures(path TEXT, blocks TEXT)"
-            self.con.execute(sql);
-            sql = "create index idx_path on pictures (path)"
-            self.con.execute(sql)
+            logging.debug("Creating picture cache tables.")
+            self.con.execute("drop table if exists pictures");
+            self.con.execute("drop index if exists idx_path");
+            self.con.execute("create table pictures(path TEXT, mtime INTEGER, blocks TEXT)");
+            self.con.execute("create index idx_path on pictures (path)")
         
         self.con = sqlite.connect(self.dbname, isolation_level=None)
         try:
-            self.con.execute("select * from pictures where 1=2")
+            self.con.execute("select path, mtime, blocks from pictures where 1=2")
         except sqlite.OperationalError: # new db
             create_tables()
         except sqlite.DatabaseError as e: # corrupted db
@@ -133,4 +139,24 @@ class Cache(object):
         sql = "select rowid, blocks from pictures where rowid in (%s)" % ','.join(map(str, rowids))
         cur = self.con.execute(sql)
         return ((rowid, string_to_colors(blocks)) for rowid, blocks in cur)
+    
+    def purge_outdated(self):
+        """Go through the cache and purge outdated records.
+        
+        A record is outdated if the picture doesn't exist or if its mtime is greater than the one in
+        the db.
+        """
+        todelete = []
+        sql = "select rowid, path, mtime from pictures"
+        cur = self.con.execute(sql)
+        for rowid, path_str, mtime in cur:
+            if mtime and op.exists(path_str):
+                picture_mtime = os.stat(path_str).st_mtime
+                if int(picture_mtime) <= mtime:
+                    # not outdated
+                    continue
+            todelete.append(rowid)
+        if todelete:
+            sql = "delete from pictures where rowid in (%s)" % ','.join(map(str, todelete))
+            self.con.execute(sql)
     
