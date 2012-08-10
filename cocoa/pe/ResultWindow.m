@@ -22,6 +22,7 @@ http://www.hardcoded.net/licenses/bsd_license
         {@"size", 63, 16, 0, YES, nil},
         {@"extension", 40, 16, 0, YES, nil},
         {@"dimensions", 73, 16, 0, YES, nil},
+        {@"exif_timestamp", 120, 16, 0, YES, nil},
         {@"mtime", 120, 16, 0, YES, nil},
         {@"percentage", 58, 16, 0, YES, nil},
         {@"dupe_count", 80, 16, 0, YES, nil},

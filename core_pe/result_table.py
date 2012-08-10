@@ -20,6 +20,7 @@ class ResultTable(ResultTableBase):
         Column('size', coltr("Size (KB)"), optional=True),
         Column('extension', coltr("Kind"), visible=False, optional=True),
         Column('dimensions', coltr("Dimensions"), optional=True),
+        Column('exif_timestamp', coltr("EXIF Timestamp"), visible=False, optional=True),
         Column('mtime', coltr("Modification"), visible=False, optional=True),
         Column('percentage', coltr("Match %"), optional=True),
         Column('dupe_count', coltr("Dupe Count"), visible=False, optional=True),

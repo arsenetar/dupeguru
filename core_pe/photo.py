@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon import io
+import logging
 from hscommon.util import get_file_ext
 from core import fs
 from . import exif
@@ -15,6 +15,7 @@ class Photo(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
     INITIAL_INFO.update({
         'dimensions': (0,0),
+        'exif_timestamp': '',
     })
     __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
     
@@ -30,7 +31,7 @@ class Photo(fs.File):
     def _get_orientation(self):
         if not hasattr(self, '_cached_orientation'):
             try:
-                with io.open(self.path, 'rb') as fp:
+                with self.path.open('rb') as fp:
                     exifdata = exif.get_fields(fp)
                     # the value is a list (probably one-sized) of ints
                     orientations = exifdata['Orientation']
@@ -49,6 +50,13 @@ class Photo(fs.File):
             self.dimensions = self._plat_get_dimensions()
             if self._get_orientation() in {5, 6, 7, 8}:
                 self.dimensions = (self.dimensions[1], self.dimensions[0])
+        elif field == 'exif_timestamp':
+            try:
+                with self.path.open('rb') as fp:
+                    exifdata = exif.get_fields(fp)
+                    self.exif_timestamp = exifdata['DateTimeOriginal']
+            except Exception:
+                logging.info("Couldn't read EXIF of picture: %s", self.path)
     
     def get_blocks(self, block_count_per_side):
         return self._plat_get_blocks(block_count_per_side, self._get_orientation())

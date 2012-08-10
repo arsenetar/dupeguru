@@ -24,7 +24,7 @@ def get_delta_dimensions(value, ref_value):
 
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
-    METADATA_TO_READ = ['size', 'mtime', 'dimensions']
+    METADATA_TO_READ = ['size', 'mtime', 'dimensions', 'exif_timestamp']
     
     def __init__(self, view, appdata):
         DupeGuruBase.__init__(self, view, appdata)
@@ -54,6 +54,7 @@ class DupeGuru(DupeGuruBase):
             'size': format_size(size, 0, 1, False),
             'extension': dupe.extension,
             'dimensions': format_dimensions(dimensions),
+            'exif_timestamp': dupe.exif_timestamp,
             'mtime': format_timestamp(mtime, delta and m),
             'percentage': format_perc(percentage),
             'dupe_count': format_dupe_count(dupe_count),
