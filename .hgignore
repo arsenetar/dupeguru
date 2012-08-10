@@ -8,8 +8,6 @@ run.py
 *.pyd
 *.waf*
 .lock-waf*
-*.xcodeproj/xcuserdata
-*.xcodeproj/project.xcworkspace/xcuserdata
 conf.json
 build
 dist
@@ -18,16 +16,6 @@ installer_tmp-cache
 cocoa/autogen
 cocoa/*/Info.plist
 cocoa/*/build
-cocoa/*/*.app
-cs.lproj
-de.lproj
-fr.lproj
-it.lproj
-hy.lproj
-ru.lproj
-uk.lproj
-zh_CN.lproj
-pt_BR.lproj
 qt/base/*_rc.py
 help/*/conf.py
 help/*/changelog.rst
