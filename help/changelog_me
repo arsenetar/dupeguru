@@ -4,8 +4,8 @@
 * Added "Replace with symlinks" to complement "Replace with hardlinks". [Mac, Linux] (#194)
 * dupeGuru now tells how many duplicates were affected after each re-prioritization operation. (#204)
 * Added Longest/Shortest filename criteria in the re-prioritize dialog. (#198)
-* Fixed result table cells which mistakenly became writable in v3.5.0. [Mac] (#203)
-* Fixed "Rename Selected" which was broken since v3.5.0. [Mac] (#202)
+* Fixed result table cells which mistakenly became writable in v6.4.0. [Mac] (#203)
+* Fixed "Rename Selected" which was broken since v6.4.0. [Mac] (#202)
 * Fixed a bug where "Reset to Defaults" in the Columns menu wouldn't refresh menu items' marked state.
 * Improved OGG metadata reading.
 * Improved Russian localization by Kyrill Detinov.
