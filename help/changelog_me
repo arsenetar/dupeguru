@@ -7,6 +7,7 @@
 * Fixed result table cells which mistakenly became writable in v3.5.0. [Mac] (#203)
 * Fixed "Rename Selected" which was broken since v3.5.0. [Mac] (#202)
 * Fixed a bug where "Reset to Defaults" in the Columns menu wouldn't refresh menu items' marked state.
+* Improved OGG metadata reading.
 * Improved Russian localization by Kyrill Detinov.
 
 === 6.4.2 (2012-07-07)
