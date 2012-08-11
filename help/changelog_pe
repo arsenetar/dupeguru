@@ -1,3 +1,17 @@
+=== 2.7.0 (2012-08-11)
+
+* Added "Export to CSV". (#189)
+* Added "Replace with symlinks" to complement "Replace with hardlinks". [Mac, Linux] (#194)
+* Added "Exif Timestamp" column. (#201)
+* dupeGuru now tells how many duplicates were affected after each re-prioritization operation. (#204)
+* Added Longest/Shortest filename criteria in the re-prioritize dialog. (#198)
+* Fixed result table cells which mistakenly became writable in v2.6.0. [Mac] (#203)
+* Fixed "Rename Selected" which was broken since v2.6.0. [Mac] (#202)
+* Fixed a bug where "Reset to Defaults" in the Columns menu wouldn't refresh menu items' marked state.
+* Fixed a bug where outdated picture cache entries would result in false matches. (#199)
+* Added Brazilian localization by Victor Figueiredo.
+* Improved Russian localization by Kyrill Detinov.
+
 === 2.6.0 (2012-06-06)
 
 * Added Aperture support. (#42)
