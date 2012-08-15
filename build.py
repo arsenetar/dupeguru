@@ -127,7 +127,7 @@ def build_cocoa(edition, dev):
     app.copy_resources(*resources, use_symlinks=dev)
     app.copy_frameworks('build/Python', 'cocoalib/Sparkle.framework')
     print("Creating the run.py file")
-    tmpl = open('run_template_cocoa.py', 'rt').read()
+    tmpl = open('cocoa/run_template.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app.dest)
     open('run.py', 'wt').write(run_contents)
 
@@ -138,7 +138,7 @@ def build_qt(edition, dev):
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
     print("Creating the run.py file")
-    tmpl = open('run_template_qt.py', 'rt').read()
+    tmpl = open(op.join('qt', 'run_template.py'), 'rt').read()
     run_contents = tmpl.replace('{{edition}}', edition)
     open('run.py', 'wt').write(run_contents)
 
