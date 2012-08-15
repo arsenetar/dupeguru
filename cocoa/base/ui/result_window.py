@@ -1,4 +1,4 @@
-wnerclass = 'ResultWindow'
+ownerclass = 'ResultWindow'
 ownerimport = 'ResultWindow.h'
 
 result = Window(557, 400, "dupeGuru Results")
