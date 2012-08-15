@@ -92,6 +92,7 @@ def package_debian(edition, source_pkg):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_packages(packages, srcpath)
+    os.remove(op.join(srcpath, 'qt', 'run_template.py')) # It doesn't belong in the package.
     if edition == 'pe':
         os.mkdir(op.join(destpath, 'modules'))
         copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
