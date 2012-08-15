@@ -131,16 +131,18 @@ def build_cocoa(edition, dev):
     run_contents = tmpl.replace('{{app_path}}', app.dest)
     open('run.py', 'wt').write(run_contents)
 
-def build_qt(edition, dev):
+def build_qt(edition, dev, conf):
     print("Building localizations")
     build_localizations('qt', edition)
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
     print("Creating the run.py file")
-    tmpl = open(op.join('qt', 'run_template.py'), 'rt').read()
-    run_contents = tmpl.replace('{{edition}}', edition)
-    open('run.py', 'wt').write(run_contents)
+    if conf.get('ubuntu_store'):
+        ubuntu_store_setup = "dgapp.model.registered = True; dgapp.model.registration_email = \"Ubuntu Store\""
+    else:
+        ubuntu_store_setup = ""
+    filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition, ubuntu_store_setup=ubuntu_store_setup)
 
 def build_help(edition):
     print("Generating Help")
@@ -310,7 +312,7 @@ def build_pe_modules(ui):
     move_all('_block*', 'core_pe')
     move_all('_cache*', 'core_pe')
 
-def build_normal(edition, ui, dev):
+def build_normal(edition, ui, dev, conf):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
     build_help(edition)
@@ -320,7 +322,7 @@ def build_normal(edition, ui, dev):
     if ui == 'cocoa':
         build_cocoa(edition, dev)
     elif ui == 'qt':
-        build_qt(edition, dev)
+        build_qt(edition, dev, conf)
 
 def main():
     options = parse_args()
@@ -355,7 +357,7 @@ def main():
         build_cocoalib_xibless()
         build_xibless(edition)
     else:
-        build_normal(edition, ui, dev)
+        build_normal(edition, ui, dev, conf)
 
 if __name__ == '__main__':
     main()

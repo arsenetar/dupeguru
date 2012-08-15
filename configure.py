@@ -12,17 +12,18 @@ import json
 
 from hscommon.plat import ISOSX
 
-def main(edition, ui, dev):
-    if edition not in {'se', 'me', 'pe'}:
-        edition = 'se'
-    if ui not in {'cocoa', 'qt'}:
-        ui = 'cocoa' if ISOSX else 'qt'
-    build_type = 'Dev' if dev else 'Release'
-    print("Configuring dupeGuru {0} for UI {1} ({2})".format(edition.upper(), ui, build_type))
+def main(options):
+    if options.edition not in {'se', 'me', 'pe'}:
+        options.edition = 'se'
+    if options.ui not in {'cocoa', 'qt'}:
+        options.ui = 'cocoa' if ISOSX else 'qt'
+    build_type = 'Dev' if options.dev else 'Release'
+    print("Configuring dupeGuru {0} for UI {1} ({2})".format(options.edition.upper(), options.ui, build_type))
     conf = {
-        'edition': edition,
-        'ui': ui,
-        'dev': dev,
+        'edition': options.edition,
+        'ui': options.ui,
+        'dev': options.dev,
+        'ubuntu_store': options.ubuntu_store,
     }
     json.dump(conf, open('conf.json', 'w'))
 
@@ -35,5 +36,7 @@ if __name__ == '__main__':
         help="Type of UI to build. 'qt' or 'cocoa'. Default is determined by your system.")
     parser.add_option('--dev', action='store_true', dest='dev', default=False,
         help="If this flag is set, will configure for dev builds.")
+    parser.add_option('--ubuntu-store', action='store_true', dest='ubuntu_store', default=False,
+        help="Set registration for the Ubuntu Store.")
     (options, args) = parser.parse_args()
-    main(options.edition, options.ui, options.dev)
+    main(options)
