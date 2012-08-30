@@ -42,7 +42,7 @@ msgid "Size"
 msgstr "Չափը"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Փոփոխությունը"
 
@@ -98,7 +98,7 @@ msgstr "Շավիղի համարը"
 msgid "Comment"
 msgstr "Մեկնաբանություն"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:25
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Համընկնում %-ին"
@@ -107,7 +107,7 @@ msgstr "Համընկնում %-ին"
 msgid "Words Used"
 msgstr "Բառ է օգտ."
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Խաբկանքի ք-ը"
@@ -119,3 +119,7 @@ msgstr "Չափերը"
 #: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Չափը (ԿԲ)"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr ""

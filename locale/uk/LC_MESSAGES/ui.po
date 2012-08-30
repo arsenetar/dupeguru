@@ -12,19 +12,19 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "Пошук дублікатів"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "Завантаження"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "Переміщення"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:43
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "Копіювання"
 
@@ -32,15 +32,15 @@ msgstr "Копіювання"
 msgid "Sending to Trash"
 msgstr "Відправка до кошику"
 
-#: cocoa/inter/app_me.py:35
+#: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Видалення мертвих треків з вашої бібліотеки iTunes "
 
-#: cocoa/inter/app_me.py:36
+#: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
 msgstr "Сканування бібліотеки iTunes"
 
-#: cocoa/inter/app_me.py:162 cocoa/inter/app_pe.py:186
+#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
 msgid "Sending dupes to the Trash"
 msgstr "Відправлення дублікатів до кошика"
 
@@ -52,39 +52,39 @@ msgstr "Виконується взаємодія з програмою iPhoto. 
 msgid "The iPhoto application couldn't be found."
 msgstr "Не вдалося знайти програму iPhoto."
 
-#: qt/base/app.py:44
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Відправлення файлів до кошика"
 
-#: qt/base/app.py:112
+#: qt/base/app.py:95
 msgid "Quit"
 msgstr "Вихід"
 
-#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: qt/base/app.py:115 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Довідка dupeGuru"
 
-#: qt/base/app.py:116 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Про dupeGuru"
 
-#: qt/base/app.py:117
+#: qt/base/app.py:100
 msgid "Register dupeGuru"
 msgstr "Зареєструвати dupeGuru"
 
-#: qt/base/app.py:118
+#: qt/base/app.py:101
 msgid "Check for Update"
 msgstr "Перевірити оновлення"
 
-#: qt/base/app.py:119
+#: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Відкрити журнал налагодження"
 
-#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -531,14 +531,14 @@ msgstr "Відновити налаштування за замовчуванн�
 msgid "The name '%@' already exists."
 msgstr "Ім’я '%@' вже існує."
 
-#: cocoa/inter/app_me.py:196
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Ваша бібліотека iTunes містить %d мертвих треків, які готові до видалення. "
 "Продовжити?"
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "У вашій бібліотеці iTunes немає мертвих треків "
 
@@ -646,7 +646,7 @@ msgstr "Змінити пріоритети Результати"
 msgid "Ok"
 msgstr "Ok"
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -730,11 +730,11 @@ msgstr "Аудіо-контент"
 msgid "dupeGuru PE Preferences"
 msgstr "Налаштування dupeGuru PE"
 
-#: cocoa/inter/app_me.py:164
+#: cocoa/inter/app_me.py:163
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Виконується взаємодія з програмою iTunes. Не чіпайте її!"
 
-#: cocoa/inter/app_me.py:218
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr "Не можливо знайти програму iTunes"
 
@@ -742,13 +742,13 @@ msgstr "Не можливо знайти програму iTunes"
 msgid "Delta Values"
 msgstr "Різниця"
 
-#: cocoa/inter/app_me.py:190
+#: cocoa/inter/app_me.py:189
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr "Виникла проблема зв'язку з iTunes. Операція не може бути завершена."
 
-#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Чорний список"
@@ -765,17 +765,17 @@ msgstr "Очистити"
 msgid "Deletion Options"
 msgstr ""
 
-#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
 
-#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 
-#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr ""
 
@@ -787,7 +787,7 @@ msgstr ""
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 
-#: qt/base/deletion_options.py:38
+#: qt/base/deletion_options.py:47
 msgid " (Mac OS X or Linux only)"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgstr ""
 msgid "Filter Results..."
 msgstr ""
 
-#: qt/base/app.py:278
+#: qt/base/app.py:261
 msgid "{} file (*.{})"
 msgstr ""
 
@@ -831,17 +831,17 @@ msgstr ""
 msgid "Link deleted files"
 msgstr ""
 
-#: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr ""
 
@@ -863,4 +863,8 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "%@ Results"
 msgstr ""

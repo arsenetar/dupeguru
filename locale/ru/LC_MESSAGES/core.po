@@ -24,7 +24,7 @@ msgstr "%d / %d (%s / %s) дубликатов отмечено."
 msgid "%d matches found"
 msgstr "%d совпадений найдено"
 
-#: core/app.py:593
+#: core/app.py:592
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -32,19 +32,19 @@ msgstr "%s. (%d отменено)"
 msgid "0 matches found"
 msgstr "0 совпадений найдено"
 
-#: core/app.py:244
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr "Все отмеченные файлы были скопированы успешно."
 
-#: core/app.py:245
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr "Все отмеченные файлы были перемещены успешно."
 
-#: core/app.py:246
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Все отмеченные файлы были успешно отправлены в Корзину."
 
-#: core/app.py:293
+#: core/app.py:292
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -52,11 +52,11 @@ msgstr ""
 "Все выбранные %d совпадений будут игнорироваться при всех последующих "
 "проверках. Продолжить?"
 
-#: core_pe/matchblock.py:60
+#: core_pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Анализируется %d/%d изображений"
 
-#: core/app.py:543
+#: core/app.py:542
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Doesn't end with number"
 msgstr "Не заканчивается номером"
 
-#: core/scanner.py:171
+#: core/scanner.py:176
 msgid "Doing group prioritization"
 msgstr "Выполняется приоритезация групп"
 
@@ -93,7 +93,7 @@ msgstr "Самый низкий"
 msgid "Newest"
 msgstr "Новейший"
 
-#: core/app.py:231
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
@@ -106,52 +106,52 @@ msgid "Oldest"
 msgstr "Старейшие"
 
 # Not sure.
-#: core_pe/matchblock.py:152
+#: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
 msgstr "Выполнено %d/%d совпадений блоков"
 
-#: core_pe/matchblock.py:157
+#: core_pe/matchblock.py:158
 msgid "Preparing for matching"
 msgstr "Подготовка для сравнения"
 
 # Not sure.
-#: core/scanner.py:149
+#: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Обработано %d/%d совпадений используя список игнорирования"
 
-#: core_pe/matchexif.py:21
+#: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитана EXIF-информация %d/%d фотографий"
 
-#: core/scanner.py:100
+#: core/scanner.py:99
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитаны метаданные %d/%d файлов"
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Подсчитан размер %d/%d файлов"
 
-#: core/scanner.py:131
+#: core/scanner.py:130
 msgid "Removing false matches"
 msgstr "Удаление ложных совпадений"
 
-#: core/app.py:354
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог {} для отмеченных файлов"
 
-#: core/app.py:554
+#: core/app.py:553
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core_pe/matchblock.py:192
+#: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
 msgstr "Проверено %d/%d совпадений"
 
-#: core/app.py:492 core/app.py:503
+#: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core/app.py:273
+#: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -159,45 +159,45 @@ msgstr ""
 "Вы не можете удалять, перемещать или копировать более 10 дубликатов за один "
 "раз в демонстрационном режиме."
 
-#: core/app.py:405
+#: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "copy"
 msgstr "копирование"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:97
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "вы сможете удалить, переместить или скопировать только 10 дубликатов за один"
 " раз"
 
-#: core/app.py:38
+#: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:38
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:284
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:286
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:380
+#: core/app.py:379
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:523
+#: core/app.py:522
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 

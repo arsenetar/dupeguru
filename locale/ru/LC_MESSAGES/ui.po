@@ -12,7 +12,7 @@ msgstr ""
 "Language: ru_RU\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -20,7 +20,7 @@ msgstr ""
 "Предыдущее действие до сих пор выполняется. Вы не можете начать новое. "
 "Подождите несколько секунд, затем повторите попытку."
 
-#: qt/base/app.py:116 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "О dupeGuru"
 
@@ -110,11 +110,11 @@ msgstr "Все на передний план"
 msgid "Can mix file kind"
 msgstr "Можно смешивать типы файлов"
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Отменить"
 
-#: qt/base/app.py:118
+#: qt/base/app.py:101
 msgid "Check for Update"
 msgstr "Проверить обновления"
 
@@ -161,7 +161,7 @@ msgstr "Скопировать отмеченные в…"
 msgid "Copy and Move:"
 msgstr "Копирование и перемещение:"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:43
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "Копирование"
 
@@ -346,7 +346,7 @@ msgstr "Загрузка результатов…"
 msgid "Load from file..."
 msgstr "Загрузить из файла…"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "Загрузка"
 
@@ -399,7 +399,7 @@ msgstr "Доп. результаты"
 msgid "Move Marked to..."
 msgstr "Переместить отмеченные в…"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "Перемещение"
 
@@ -419,7 +419,7 @@ msgstr "OK"
 msgid "Open Containing Folder of Selected"
 msgstr "Открыть каталог с выбранными"
 
-#: qt/base/app.py:119
+#: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Открыть журнал отладки"
 
@@ -439,7 +439,7 @@ msgstr "Вставить"
 msgid "Picture cache cleared."
 msgstr "Кэш изображений очищен."
 
-#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Настройки"
 
@@ -451,7 +451,7 @@ msgstr "Настройки…"
 msgid "Problems!"
 msgstr "Проблемы!"
 
-#: qt/base/app.py:112
+#: qt/base/app.py:95
 msgid "Quit"
 msgstr "Выйти"
 
@@ -484,7 +484,7 @@ msgstr "Восстановить относительный путь"
 msgid "Reference"
 msgstr "Эталон"
 
-#: qt/base/app.py:117
+#: qt/base/app.py:100
 msgid "Register dupeGuru"
 msgstr "Регистрация dupeGuru"
 
@@ -507,7 +507,7 @@ msgid "Remove empty folders on delete or move"
 msgstr "Удалять пустые каталоги при удалении или перемещении"
 
 # I'm not sure about "dead". Never used iTunes.
-#: cocoa/inter/app_me.py:35
+#: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Удаление «мёртвых» треков из библиотеки iTunes"
 
@@ -551,11 +551,11 @@ msgstr "Сканирование"
 msgid "Scan Type:"
 msgstr "Тип поиска:"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "Проверка на наличие дубликатов"
 
-#: cocoa/inter/app_me.py:36
+#: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
 msgstr "Сканирование библиотеки iTunes"
 
@@ -587,11 +587,11 @@ msgstr "Переместить отмеченные в Корзину…"
 msgid "Send Marked to Trash..."
 msgstr "Переместить отмеченные в Корзину…"
 
-#: cocoa/inter/app_me.py:162 cocoa/inter/app_pe.py:186
+#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
 msgid "Sending dupes to the Trash"
 msgstr "Перемещение дубликатов в Корзину"
 
-#: qt/base/app.py:44
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Перемещение файлов в Корзину"
 
@@ -686,7 +686,7 @@ msgstr "Вес слова"
 msgid "Year"
 msgstr "Год"
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "У вас нет «мёртвых» треков в библиотеке iTunes"
 
@@ -698,7 +698,7 @@ msgstr "Имеются несохранённые результаты, вы д�
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Имеются несохранённые результаты, вы действительно хотите выйти?"
 
-#: cocoa/inter/app_me.py:196
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
@@ -709,7 +709,7 @@ msgstr ""
 msgid "Zoom"
 msgstr "Увеличить"
 
-#: qt/base/app.py:115 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Справка dupeGuru"
 
@@ -746,17 +746,17 @@ msgstr ""
 msgid "{} Results"
 msgstr "{} Результаты"
 
-#: cocoa/inter/app_me.py:164
+#: cocoa/inter/app_me.py:163
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:190
+#: cocoa/inter/app_me.py:189
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr ""
 
-#: cocoa/inter/app_me.py:218
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
@@ -768,12 +768,12 @@ msgstr ""
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 
-#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr ""
 
-#: qt/base/app.py:278
+#: qt/base/app.py:261
 msgid "{} file (*.{})"
 msgstr ""
 
@@ -785,35 +785,35 @@ msgstr ""
 msgid "Link deleted files"
 msgstr ""
 
-#: qt/base/deletion_options.py:38
+#: qt/base/deletion_options.py:47
 msgid " (Mac OS X or Linux only)"
 msgstr ""
 
-#: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
 
-#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 
-#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr ""
 
@@ -867,6 +867,10 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "%@ Results"
 msgstr ""
 
 #~ msgid "'%@' already is in the list."

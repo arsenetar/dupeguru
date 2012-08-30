@@ -33,7 +33,7 @@ msgstr "Комментарий"
 msgid "Dimensions"
 msgstr "Размеры"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Количество дубликатов"
@@ -70,13 +70,13 @@ msgstr "Жанр"
 msgid "Kind"
 msgstr "Тип"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:25
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Совпадение %"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Время изменения"
 
@@ -119,3 +119,7 @@ msgstr "Использованные слова"
 #: core_me/result_table.py:30
 msgid "Year"
 msgstr "Год"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr ""

@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: core/app.py:97
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "միաժամանակ հնարավոր է ջնջել, տեղափոխել կամ պատճենել միայն 10 օրինակներ"
 
-#: core/app.py:273
+#: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -26,15 +26,15 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:543
+#: core/app.py:542
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:554
+#: core/app.py:553
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:593
+#: core/app.py:592
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -46,7 +46,7 @@ msgstr "0 համընկնում է գտնվել"
 msgid "%d matches found"
 msgstr "%d համընկնում է գտնվել"
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի չափը"
 
@@ -90,67 +90,67 @@ msgstr "%d / %d (%s / %s) նշված կրկնօրինակներ:"
 msgid " filter: %s"
 msgstr "ֆիլտր. %s"
 
-#: core/scanner.py:100
+#: core/scanner.py:99
 msgid "Read metadata of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի մետատվյալները"
 
-#: core/scanner.py:131
+#: core/scanner.py:130
 msgid "Removing false matches"
 msgstr "Սխալ համընկնումների հեռացում"
 
-#: core/scanner.py:149
+#: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Ընթացքում է %d/%d համընկնումները ընդդեմ անտեսվող ցանկի"
 
-#: core/scanner.py:171
+#: core/scanner.py:176
 msgid "Doing group prioritization"
 msgstr "Խմբի առաջնայնացում"
 
-#: core_pe/matchblock.py:60
+#: core_pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Ստուգվում է %d/%d նկարները"
 
-#: core_pe/matchblock.py:152
+#: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
 msgstr "Կատարվում է %d/%d տվյալի համընկնում"
 
-#: core_pe/matchblock.py:157
+#: core_pe/matchblock.py:158
 msgid "Preparing for matching"
 msgstr "Նախապատրաստեցվում է համընկնումը"
 
-#: core_pe/matchblock.py:192
+#: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
 msgstr "Ստուգում է %d/%d համընկնումները"
 
-#: core_pe/matchexif.py:21
+#: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Կարդալ EXIF-ը d/%d նկարներից"
 
-#: core/app.py:38
+#: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:38
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:244
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:245
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:246
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:293
+#: core/app.py:292
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -161,23 +161,23 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը անտեսումների ցանկից:"
 
-#: core/app.py:405
+#: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:492 core/app.py:503
+#: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:354
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
@@ -193,18 +193,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:523
+#: core/app.py:522
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:284
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core/app.py:286
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
 
-#: core/app.py:380
+#: core/app.py:379
 msgid "Select a destination for your exported CSV"
 msgstr ""

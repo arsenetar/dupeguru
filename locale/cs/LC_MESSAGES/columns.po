@@ -22,7 +22,7 @@ msgid "Size"
 msgstr "Velikost"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Změna"
 
@@ -70,7 +70,7 @@ msgstr "Číslo stopy"
 msgid "Comment"
 msgstr "Komentář"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:25
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Shoda %"
@@ -79,7 +79,7 @@ msgstr "Shoda %"
 msgid "Words Used"
 msgstr "Slov"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Počet kopií"
@@ -108,3 +108,7 @@ msgstr "Cesta k souboru"
 #: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Chybové hlášení"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr ""

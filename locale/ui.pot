@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr ""
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr ""
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr ""
 
-#: cocoa/inter/app.py:18 qt/base/app.py:43
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr ""
 
@@ -22,38 +22,38 @@ msgstr ""
 msgid "Sending to Trash"
 msgstr ""
 
-#: cocoa/inter/app_me.py:35
+#: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr ""
 
-#: cocoa/inter/app_me.py:36
+#: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
 msgstr ""
 
-#: cocoa/inter/app_me.py:162 cocoa/inter/app_pe.py:186
+#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
 msgid "Sending dupes to the Trash"
 msgstr ""
 
-#: cocoa/inter/app_me.py:164
+#: cocoa/inter/app_me.py:163
 msgid "Talking to iTunes. Don't touch it!"
 msgstr ""
 
-#: cocoa/inter/app_me.py:190
+#: cocoa/inter/app_me.py:189
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
 msgstr ""
 
-#: cocoa/inter/app_me.py:196
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr ""
 
-#: cocoa/inter/app_me.py:218
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr ""
 
@@ -73,50 +73,50 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr ""
 
-#: qt/base/app.py:44
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr ""
 
-#: qt/base/app.py:112
+#: qt/base/app.py:95
 msgid "Quit"
 msgstr ""
 
-#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr ""
 
-#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr ""
 
-#: qt/base/app.py:115 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr ""
 
-#: qt/base/app.py:116 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr ""
 
-#: qt/base/app.py:117
+#: qt/base/app.py:100
 msgid "Register dupeGuru"
 msgstr ""
 
-#: qt/base/app.py:118
+#: qt/base/app.py:101
 msgid "Check for Update"
 msgstr ""
 
-#: qt/base/app.py:119
+#: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr ""
 
-#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
 
-#: qt/base/app.py:278
+#: qt/base/app.py:261
 msgid "{} file (*.{})"
 msgstr ""
 
@@ -128,39 +128,39 @@ msgstr ""
 msgid "Link deleted files"
 msgstr ""
 
-#: qt/base/deletion_options.py:38
-msgid " (Mac OS X or Linux only)"
-msgstr ""
-
-#: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:47
+msgid " (Mac OS X or Linux only)"
+msgstr ""
+
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
 
-#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 
-#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr ""
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr ""
 
@@ -598,6 +598,10 @@ msgstr ""
 
 #: qt/se/preferences_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
 msgid "KB"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "%@ Results"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0

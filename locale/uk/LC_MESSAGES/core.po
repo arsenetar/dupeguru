@@ -12,11 +12,11 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 
-#: core/app.py:97
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "може видаляти, переміщувати або копіювати лише 10 копій відразу"
 
-#: core/app.py:273
+#: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -24,15 +24,15 @@ msgstr ""
 "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
 " в демонстраційному режимі."
 
-#: core/app.py:543
+#: core/app.py:542
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:554
+#: core/app.py:553
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:593
+#: core/app.py:592
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
@@ -44,7 +44,7 @@ msgstr "0 результатів знайдено"
 msgid "%d matches found"
 msgstr "%d результатів знайдено"
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Прочитано розмір %d/%d файлів"
 
@@ -92,67 +92,67 @@ msgstr "%d / %d (%s / %s) дублікатів позначено."
 msgid " filter: %s"
 msgstr "фільтр: %s"
 
-#: core/scanner.py:100
+#: core/scanner.py:99
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитано метаданих з %d/%d файлів"
 
-#: core/scanner.py:131
+#: core/scanner.py:130
 msgid "Removing false matches"
 msgstr "Видалення помилкових результатів"
 
-#: core/scanner.py:149
+#: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Порівняно %d/%d результатів з чорним списком"
 
-#: core/scanner.py:171
+#: core/scanner.py:176
 msgid "Doing group prioritization"
 msgstr "Виконується пріорітизація груп"
 
-#: core_pe/matchblock.py:60
+#: core_pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Проаналізовано %d/%d фотографій"
 
-#: core_pe/matchblock.py:152
+#: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
 msgstr "Виконано %d/%d порівнянь шматків"
 
-#: core_pe/matchblock.py:157
+#: core_pe/matchblock.py:158
 msgid "Preparing for matching"
 msgstr "Підготовка до порівняння"
 
-#: core_pe/matchblock.py:192
+#: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
 msgstr "Перевірено %d/%d результатів"
 
-#: core_pe/matchexif.py:21
+#: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF з %d/%d фотографій"
 
-#: core/app.py:38
+#: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Немає позначених дублікатів - нічого робити."
 
-#: core/app.py:39
+#: core/app.py:38
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Немає обраних дублікатів - нічого робити."
 
-#: core/app.py:231
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr "Не знайдено жодного дублікату."
 
-#: core/app.py:244
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr "Усі позначені файли були скопійовані успішно."
 
-#: core/app.py:245
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr "Усі позначені файли були переміщені успішно."
 
-#: core/app.py:246
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:293
+#: core/app.py:292
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -164,23 +164,23 @@ msgstr ""
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ви дійсно хочете видалити всі %d елементів з чорного списку?"
 
-#: core/app.py:405
+#: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:492 core/app.py:503
+#: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:354
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
@@ -196,18 +196,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:523
+#: core/app.py:522
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:284
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
 
-#: core/app.py:286
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr "'{}' не існує."
 
-#: core/app.py:380
+#: core/app.py:379
 msgid "Select a destination for your exported CSV"
 msgstr ""

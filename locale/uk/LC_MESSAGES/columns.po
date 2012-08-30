@@ -41,7 +41,7 @@ msgid "Size"
 msgstr "Розмір"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Дата модифікації"
 
@@ -97,7 +97,7 @@ msgstr "Номер доріжки"
 msgid "Comment"
 msgstr "Коментар"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:25
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Збіг (%)"
@@ -106,7 +106,7 @@ msgstr "Збіг (%)"
 msgid "Words Used"
 msgstr "Використані слова"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Кількість дублікатів"
@@ -118,3 +118,7 @@ msgstr "Виміри"
 #: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Розмір (KB)"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr ""

@@ -2,25 +2,25 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:97
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:273
+#: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:543
+#: core/app.py:542
 msgid "Collecting files to scan"
 msgstr "Sammle Dateien zum Scannen"
 
-#: core/app.py:554
+#: core/app.py:553
 msgid "The selected directories contain no scannable file."
 msgstr "Der ausgewählte Ordner enthält keine scannbare Dateien."
 
-#: core/app.py:593
+#: core/app.py:592
 msgid "%s (%d discarded)"
 msgstr "%s (%d verworfen)"
 
@@ -32,7 +32,7 @@ msgstr "0 Paare gefunden"
 msgid "%d matches found"
 msgstr "%d Paare gefunden"
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Lese Größe von %d/%d Dateien"
 
@@ -76,67 +76,67 @@ msgstr "%d / %d (%s / %s) Duplikate markiert."
 msgid " filter: %s"
 msgstr " Filter: %s"
 
-#: core/scanner.py:100
+#: core/scanner.py:99
 msgid "Read metadata of %d/%d files"
 msgstr "Lese Metadaten von %d/%d Dateien"
 
-#: core/scanner.py:131
+#: core/scanner.py:130
 msgid "Removing false matches"
 msgstr "Entferne Falschpositive."
 
-#: core/scanner.py:149
+#: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
 msgstr "Verarbeitung von %d/%d Paaren gegen die Ignorier-Liste"
 
-#: core/scanner.py:171
+#: core/scanner.py:176
 msgid "Doing group prioritization"
 msgstr "Gruppenpriorisierung"
 
-#: core_pe/matchblock.py:60
+#: core_pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Analysiere %d/%d Bilder"
 
-#: core_pe/matchblock.py:152
+#: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
 msgstr "Performed %d/%d chunk matches"
 
-#: core_pe/matchblock.py:157
+#: core_pe/matchblock.py:158
 msgid "Preparing for matching"
 msgstr "Vorbereitung auf den Vergleich"
 
-#: core_pe/matchblock.py:192
+#: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
 msgstr "%d/%d verifizierte Paare"
 
-#: core_pe/matchexif.py:21
+#: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core/app.py:38
+#: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:38
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr "Keine Duplikate gefunden."
 
-#: core/app.py:244
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:245
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:246
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:293
+#: core/app.py:292
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -146,25 +146,25 @@ msgstr "%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?"
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Möchten Sie wirklich alle %d Einträge aus der Ignorier-Liste löschen?"
 
-#: core/app.py:405
+#: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen "
 "konfigurieren."
 
-#: core/app.py:492 core/app.py:503
+#: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "copy"
 msgstr "kopieren"
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "move"
 msgstr "verschieben"
 
-#: core/app.py:354
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr "Wählen sie einen Ordner zum {} der ausgewählten Dateien"
 
@@ -180,18 +180,18 @@ msgstr ""
 msgid "Shortest"
 msgstr ""
 
-#: core/app.py:523
+#: core/app.py:522
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:284
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:286
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:380
+#: core/app.py:379
 msgid "Select a destination for your exported CSV"
 msgstr ""

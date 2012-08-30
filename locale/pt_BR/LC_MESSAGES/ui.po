@@ -2,19 +2,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:40
+#: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
 msgstr "Buscando por duplicatas"
 
-#: cocoa/inter/app.py:16 qt/base/app.py:41
+#: cocoa/inter/app.py:16 qt/base/app.py:39
 msgid "Loading"
 msgstr "Carregando"
 
-#: cocoa/inter/app.py:17 qt/base/app.py:42
+#: cocoa/inter/app.py:17 qt/base/app.py:40
 msgid "Moving"
 msgstr "Movendo"
 
-#: cocoa/inter/app.py:18 qt/base/app.py:43
+#: cocoa/inter/app.py:18 qt/base/app.py:41
 msgid "Copying"
 msgstr "Copiando"
 
@@ -22,23 +22,23 @@ msgstr "Copiando"
 msgid "Sending to Trash"
 msgstr "Movendo para o Lixo"
 
-#: cocoa/inter/app_me.py:35
+#: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Removendo faixas sem referência da sua Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:36
+#: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
 msgstr "Escaneando Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:162 cocoa/inter/app_pe.py:186
+#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
 msgid "Sending dupes to the Trash"
 msgstr "Movendo duplicatas para o Lixo"
 
-#: cocoa/inter/app_me.py:164
+#: cocoa/inter/app_me.py:163
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Comunicando com o iTunes. Não mexa!"
 
-#: cocoa/inter/app_me.py:190
+#: cocoa/inter/app_me.py:189
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
@@ -46,18 +46,18 @@ msgstr ""
 "Ocorreu um erro de comunicação com o iTunes. A operação não pode ser "
 "finalizada."
 
-#: cocoa/inter/app_me.py:196
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Sua Biblioteca do iTunes contém %d faixas sem referência prontas a serem "
 "removidas. Continuar?"
 
-#: cocoa/inter/app_me.py:200
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "Você não possui nenhuma faixa sem referência na Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:218
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr "O aplicativo iTunes não foi encontrado."
 
@@ -79,44 +79,44 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "O aplicativo iPhoto não foi encontrado."
 
-#: qt/base/app.py:44
+#: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Enviando arquivos para o Lixo"
 
-#: qt/base/app.py:112
+#: qt/base/app.py:95
 msgid "Quit"
 msgstr "Encerrar"
 
-#: qt/base/app.py:113 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Preferências"
 
-#: qt/base/app.py:114 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Lista Ignorar"
 
-#: qt/base/app.py:115 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Ajuda dupeGuru"
 
-#: qt/base/app.py:116 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Sobre o dupeGuru"
 
-#: qt/base/app.py:117
+#: qt/base/app.py:100
 msgid "Register dupeGuru"
 msgstr "Registrar dupeGuru"
 
-#: qt/base/app.py:118
+#: qt/base/app.py:101
 msgid "Check for Update"
 msgstr "Buscar Atualizaçõs"
 
-#: qt/base/app.py:119
+#: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Abrir Log de Debug"
 
-#: qt/base/app.py:234 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -128,15 +128,15 @@ msgstr ""
 msgid "Deletion Options"
 msgstr "Opções de Apagamento"
 
-#: qt/base/deletion_options.py:38
+#: qt/base/deletion_options.py:47
 msgid " (Mac OS X or Linux only)"
 msgstr " (Mac OS X ou Linux somente)"
 
-#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Apagar arquivos imediatamente"
 
-#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
@@ -144,11 +144,11 @@ msgstr ""
 "Apaga os arquivos imediatamente ao invés de movê-los para o Lixo. Essa opção"
 " é usada como alternativa para quando o método normal falha."
 
-#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr "Continuar"
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -812,7 +812,7 @@ msgstr "Conteúdo de Áudio"
 msgid "dupeGuru PE Preferences"
 msgstr "Preferências do dupeGuru PE"
 
-#: qt/base/app.py:278
+#: qt/base/app.py:261
 msgid "{} file (*.{})"
 msgstr ""
 
@@ -822,23 +822,24 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "Exportar Resultados para CSV"
 
 #: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "Criar link dos arquivos apagados"
 
-#: qt/base/deletion_options.py:40 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr ""
+msgstr "Após apagar uma duplicata, cria um link direcionado ao arquivo "
+"original para substituir o arquivo apagado."
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:45
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr ""
 
@@ -848,11 +849,11 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "Tam. Fonte:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "Restaurar Padrões"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reveal"
@@ -860,4 +861,8 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "Serviços"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "%@ Results"
+msgstr "Resultados do %@"

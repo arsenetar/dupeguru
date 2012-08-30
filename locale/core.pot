@@ -3,87 +3,87 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 
-#: core/app.py:38
+#: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:38
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:97
+#: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:231
+#: core/app.py:230
 msgid "No duplicates found."
 msgstr ""
 
-#: core/app.py:244
+#: core/app.py:243
 msgid "All marked files were copied sucessfully."
 msgstr ""
 
-#: core/app.py:245
+#: core/app.py:244
 msgid "All marked files were moved sucessfully."
 msgstr ""
 
-#: core/app.py:246
+#: core/app.py:245
 msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
-#: core/app.py:273
+#: core/app.py:272
 msgid "You cannot delete, move or copy more than 10 duplicates at once in demo mode."
 msgstr ""
 
-#: core/app.py:284
+#: core/app.py:283
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:286
+#: core/app.py:285
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:293
+#: core/app.py:292
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "copy"
 msgstr ""
 
-#: core/app.py:353
+#: core/app.py:352
 msgid "move"
 msgstr ""
 
-#: core/app.py:354
+#: core/app.py:353
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:380
+#: core/app.py:379
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:405
+#: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core/app.py:492 core/app.py:503
+#: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core/app.py:523
+#: core/app.py:522
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:543
+#: core/app.py:542
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:554
+#: core/app.py:553
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:593
+#: core/app.py:592
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "%d matches found"
 msgstr ""
 
-#: core/engine.py:208 core/scanner.py:80
+#: core/engine.py:208 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr ""
 
@@ -155,39 +155,39 @@ msgstr ""
 msgid " filter: %s"
 msgstr ""
 
-#: core/scanner.py:100
+#: core/scanner.py:99
 msgid "Read metadata of %d/%d files"
 msgstr ""
 
-#: core/scanner.py:131
+#: core/scanner.py:130
 msgid "Removing false matches"
 msgstr ""
 
-#: core/scanner.py:149
+#: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
 msgstr ""
 
-#: core/scanner.py:171
+#: core/scanner.py:176
 msgid "Doing group prioritization"
 msgstr ""
 
-#: core_pe/matchblock.py:60
+#: core_pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr ""
 
-#: core_pe/matchblock.py:152
+#: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
 msgstr ""
 
-#: core_pe/matchblock.py:157
+#: core_pe/matchblock.py:158
 msgid "Preparing for matching"
 msgstr ""
 
-#: core_pe/matchblock.py:192
+#: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
 msgstr ""
 
-#: core_pe/matchexif.py:21
+#: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 

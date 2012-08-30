@@ -22,7 +22,7 @@ msgid "Size"
 msgstr "Dimensione"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:23 core_se/result_table.py:22
+#: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Modificato"
 
@@ -70,7 +70,7 @@ msgstr "Numero traccia"
 msgid "Comment"
 msgstr "Commento"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:24
+#: core_me/result_table.py:33 core_pe/result_table.py:25
 #: core_se/result_table.py:23
 msgid "Match %"
 msgstr "Somiglianza %"
@@ -79,7 +79,7 @@ msgstr "Somiglianza %"
 msgid "Words Used"
 msgstr "Parole usate"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:25
+#: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Conteggio duplicati"
@@ -108,3 +108,7 @@ msgstr "Percorso del file"
 #: core/gui/problem_table.py:18
 msgid "Error Message"
 msgstr "Messaggio di errore"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr ""
