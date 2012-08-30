@@ -7,7 +7,7 @@ http://www.hardcoded.net/licenses/bsd_license
 */
 
 #import <Cocoa/Cocoa.h>
-#import "../base/ResultWindow.h"
+#import "ResultWindowBase.h"
 
 @interface ResultWindow : ResultWindowBase {}
 @end

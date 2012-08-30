@@ -6,7 +6,7 @@ which should be included with this package. The terms are also available at
 http://www.hardcoded.net/licenses/bsd_license
 */
 
-#import "ResultWindow.h"
+#import "ResultWindowBase.h"
 #import "ResultWindow_UI.h"
 #import "Dialogs.h"
 #import "ProgressController.h"
@@ -29,7 +29,7 @@ http://www.hardcoded.net/licenses/bsd_license
     app = aApp;
     model = [app model];
     [self setWindow:createResultWindow_UI(self)];
-    [[self window] setTitle:fmt(@"%@ Results", [model appName])];
+    [[self window] setTitle:fmt(NSLocalizedString(@"%@ Results", @""), [model appName])];
     /* Put a cute iTunes-like bottom bar */
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];

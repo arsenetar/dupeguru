@@ -1,5 +1,5 @@
-ownerclass = 'ResultWindow'
-ownerimport = 'ResultWindow.h'
+ownerclass = 'ResultWindowBase'
+ownerimport = 'ResultWindowBase.h'
 
 result = Window(557, 400, "dupeGuru Results")
 toolbar = result.createToolbar('ResultsToolbar')
