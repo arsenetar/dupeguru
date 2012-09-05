@@ -2,6 +2,7 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: utf-8\n"
 
 #: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17
