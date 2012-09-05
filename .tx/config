@@ -1,0 +1,21 @@
+[main]
+host = https://www.transifex.net
+
+[dupeguru.core]
+file_filter = locale/<lang>/LC_MESSAGES/core.po
+source_file = locale/core.pot
+source_lang = en
+type = PO
+
+[dupeguru.columns]
+file_filter = locale/<lang>/LC_MESSAGES/columns.po
+source_file = locale/columns.pot
+source_lang = en
+type = PO
+
+[dupeguru.ui]
+file_filter = locale/<lang>/LC_MESSAGES/ui.po
+source_file = locale/ui.pot
+source_lang = en
+type = PO
+
