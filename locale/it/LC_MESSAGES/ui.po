@@ -630,16 +630,6 @@ msgstr "Ok"
 msgid "Cancel"
 msgstr "Cancella"
 
-#: cocoa/base/en.lproj/ProblemDialog.strings:0
-msgid ""
-"There were problems processing some (or all) of the files. The cause of "
-"these problems are described in the table below. Those files were not "
-"removed from your results."
-msgstr ""
-"Sono stati riscontrati dei problemi elaborando alcuni (o tutti) i file. La "
-"causa di questi problemi è descritta nella tabella sottostante. Questi file "
-"non stati rimossi dai vostri risultati."
-
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
 msgstr "Risultati di dupeGuru"
