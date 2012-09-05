@@ -1,6 +1,7 @@
 # 
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: utf-8\n"
 
 #: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
