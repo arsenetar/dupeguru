@@ -13,16 +13,18 @@ from optparse import OptionParser
 import shutil
 import json
 import importlib
+import compileall
 
 from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, copy, OSXAppStructure,
-    build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext)
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, OSXAppStructure,
+    build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext, copy_embeddable_python_dylib,
+    collect_stdlib_dependencies)
 from hscommon import loc
 from hscommon.plat import ISOSX
-from hscommon.util import ensure_folder
+from hscommon.util import ensure_folder, delete_files_with_pattern
 
 def parse_args():
     usage = "usage: %prog [options]"
@@ -95,7 +97,6 @@ def build_cocoa(edition, dev):
     build_cocoa_proxy_module()
     build_cocoa_bridging_interfaces(edition)
     print("Building the cocoa layer")
-    from pluginbuilder import copy_embeddable_python_dylib, collect_dependencies
     copy_embeddable_python_dylib('build')
     pydep_folder = op.join(app.resources, 'py')
     if not op.exists(pydep_folder):
@@ -106,16 +107,20 @@ def build_cocoa(edition, dev):
         'me': ['core_me'],
         'pe': ['core_pe'],
     }[edition]
-    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa'] + specific_packages
-    copy_packages(tocopy, 'build')
+    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'jobprogress', 'objp',
+        'send2trash'] + specific_packages
+    copy_packages(tocopy, pydep_folder)
     sys.path.insert(0, 'build')
-    collect_dependencies('build/dg_cocoa.py', pydep_folder, excludes=['PyQt4'])
+    collect_stdlib_dependencies('build/dg_cocoa.py', pydep_folder)
     del sys.path[0]
     if dev:
         copy_packages(tocopy, pydep_folder, create_links=True)
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', op.join(pydep_folder, 'inter'))
     copy_sysconfig_files_for_embed(pydep_folder)
+    compileall.compile_dir(pydep_folder, force=True, legacy=True)
+    delete_files_with_pattern(pydep_folder, '*.py')
+    delete_files_with_pattern(pydep_folder, '__pycache__')
     print("Compiling with WAF")
     os.chdir('cocoa')
     print_and_do(cocoa_compile_command(edition))
