@@ -18,8 +18,8 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, move, copy,
-    OSXAppStructure, build_cocoalib_xibless, fix_qt_resource_file)
+    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, copy, OSXAppStructure,
+    build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext)
 from hscommon import loc
 from hscommon.plat import ISOSX
 from hscommon.util import ensure_folder
@@ -163,24 +163,6 @@ def build_base_localizations():
     loc.compile_all_po(op.join('hscommon', 'locale'))
     loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
 
-def build_cocoa_localizations(edition):
-    print("Creating lproj folders based on .po files")
-    app = cocoa_app(edition)
-    en_stringsfile = op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings')
-    en_cocoastringsfile = op.join('cocoalib', 'en.lproj', 'cocoalib.strings')
-    for lang in loc.get_langs('locale'):
-        pofile = op.join('locale', lang, 'LC_MESSAGES', 'ui.po')
-        dest_lproj = op.join(app.resources, lang + '.lproj')
-        ensure_folder(dest_lproj)
-        loc.po2strings(pofile, en_stringsfile, op.join(dest_lproj, 'Localizable.strings'))
-        pofile = op.join('cocoalib', 'locale', lang, 'LC_MESSAGES', 'cocoalib.po')
-        loc.po2strings(pofile, en_cocoastringsfile, op.join(dest_lproj, 'cocoalib.strings'))
-    # We also have to copy the "en.lproj" strings
-    en_lproj = op.join(app.resources, 'en.lproj')
-    ensure_folder(en_lproj)
-    copy(en_stringsfile, en_lproj)
-    copy(en_cocoastringsfile, en_lproj)
-
 def build_qt_localizations():
     loc.compile_all_po(op.join('qtlib', 'locale'))
     loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
@@ -188,8 +170,9 @@ def build_qt_localizations():
 def build_localizations(ui, edition):
     build_base_localizations()
     if ui == 'cocoa':
-        build_cocoa_localizations(edition)
-        locale_dest = op.join(cocoa_app(edition).resources, 'locale')
+        app = cocoa_app(edition)
+        loc.build_cocoa_localizations(app, en_stringsfile=op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'))
+        locale_dest = op.join(app.resources, 'locale')
     elif ui == 'qt':
         build_qt_localizations()
         locale_dest = op.join('build', 'locale')
@@ -235,16 +218,6 @@ def build_mergepot():
     loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
     loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
-
-def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
-    extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
-    for extra in extra_frameworks:
-        extra_link_args += ['-framework', extra]
-    ext = Extension(extname, source_files, extra_link_args=extra_link_args, include_dirs=extra_includes)
-    setup(script_args=['build_ext', '--inplace'], ext_modules=[ext])
-    fn = extname + '.so'
-    assert op.exists(fn)
-    move(fn, op.join(dest, fn))
 
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
