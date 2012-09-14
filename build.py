@@ -109,18 +109,19 @@ def build_cocoa(edition, dev):
     }[edition]
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'jobprogress', 'objp',
         'send2trash'] + specific_packages
-    copy_packages(tocopy, pydep_folder)
+    copy_packages(tocopy, pydep_folder, create_links=dev)
     sys.path.insert(0, 'build')
     collect_stdlib_dependencies('build/dg_cocoa.py', pydep_folder)
     del sys.path[0]
-    if dev:
-        copy_packages(tocopy, pydep_folder, create_links=True)
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', op.join(pydep_folder, 'inter'))
     copy_sysconfig_files_for_embed(pydep_folder)
-    compileall.compile_dir(pydep_folder, force=True, legacy=True)
-    delete_files_with_pattern(pydep_folder, '*.py')
-    delete_files_with_pattern(pydep_folder, '__pycache__')
+    if not dev:
+        # Important: Don't ever run delete_files_with_pattern('*.py') on dev builds because you'll
+        # be deleting all py files in symlinked folders.
+        compileall.compile_dir(pydep_folder, force=True, legacy=True)
+        delete_files_with_pattern(pydep_folder, '*.py')
+        delete_files_with_pattern(pydep_folder, '__pycache__')
     print("Compiling with WAF")
     os.chdir('cocoa')
     print_and_do(cocoa_compile_command(edition))
