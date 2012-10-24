@@ -1,7 +1,16 @@
 # 
+# Translators:
+#   <hsoft@hardcoded.net>, 2012.
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:39+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
@@ -19,6 +28,61 @@ msgstr "Déplacement en cours"
 msgid "Copying"
 msgstr "Copie en cours"
 
+#: cocoa/inter/app.py:19
+msgid "Sending to Trash"
+msgstr "Envoi vers corbeille"
+
+#: cocoa/inter/app_me.py:34
+msgid "Removing dead tracks from your iTunes Library"
+msgstr "Retrait des tracks mortes de votre librairie iTunes"
+
+#: cocoa/inter/app_me.py:35
+msgid "Scanning the iTunes Library"
+msgstr "Scan de la librairie iTunes en cours"
+
+#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
+msgid "Sending dupes to the Trash"
+msgstr "Envoi de doublons à la corbeille en cours"
+
+#: cocoa/inter/app_me.py:163
+msgid "Talking to iTunes. Don't touch it!"
+msgstr "En communication avec iTunes. N'y touchez pas!"
+
+#: cocoa/inter/app_me.py:189
+msgid ""
+"There were communication problems with iTunes. The operation couldn't be "
+"completed."
+msgstr "Il y a eu des problèmes de communication avec iTunes. L'opération n'a pas pu être complétée."
+
+#: cocoa/inter/app_me.py:195
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr "Votre librairie iTunes contient %d tracks mortes qui seront retirées. Continuer?"
+
+#: cocoa/inter/app_me.py:199
+msgid "You have no dead tracks in your iTunes Library"
+msgstr "Votre librairie iTunes ne contient aucune track morte."
+
+#: cocoa/inter/app_me.py:217
+msgid "The iTunes application couldn't be found."
+msgstr "L'application iTunes n'a pas pu être trouvée"
+
+#: cocoa/inter/app_pe.py:188
+msgid "Talking to iPhoto. Don't touch it!"
+msgstr "En communication avec iPhoto. N'y touchez pas!"
+
+#: cocoa/inter/app_pe.py:197
+msgid "Talking to Aperture. Don't touch it!"
+msgstr "En communication avec Aperture. N'y touchez pas!"
+
+#: cocoa/inter/app_pe.py:270
+msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
+msgstr "Les photos supprimés d'Aperture sont dans le projet nommé \"dupeGuru Trash\"."
+
+#: cocoa/inter/app_pe.py:296
+msgid "The iPhoto application couldn't be found."
+msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
+
 #: qt/base/app.py:42
 msgid "Sending files to the recycle bin"
 msgstr "Envoi de fichiers à la corbeille"
@@ -30,6 +94,11 @@ msgstr "Quitter"
 #: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Préférences"
+
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore List"
+msgstr "Liste de doublons ignorés"
 
 #: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -55,9 +124,55 @@ msgstr "Ouvrir logs de déboguage"
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
-msgstr ""
-"Une action précédente est encore en cours. Attendez quelques secondes avant "
-"d'en repartir une nouvelle."
+msgstr "Une action précédente est encore en cours. Attendez quelques secondes avant d'en repartir une nouvelle."
+
+#: qt/base/app.py:261
+msgid "{} file (*.{})"
+msgstr "Fichier {} (*.{})"
+
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Deletion Options"
+msgstr "Options de suppression"
+
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Link deleted files"
+msgstr "Remplacer les fichiers effacés par des liens"
+
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"After having deleted a duplicate, place a link targeting the reference file "
+"to replace the deleted file."
+msgstr "Après avoir effacé un fichier, remplacer celui-ci par un lien vers le fichier référence."
+
+#: qt/base/deletion_options.py:42
+msgid "Hardlink"
+msgstr "Hardlink"
+
+#: qt/base/deletion_options.py:42
+msgid "Symlink"
+msgstr "Symlink"
+
+#: qt/base/deletion_options.py:47
+msgid " (Mac OS X or Linux only)"
+msgstr " (Mac OS X ou Linux seulement)"
+
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directly delete files"
+msgstr "Supprimer les fichiers directement"
+
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr "Au lieu de passer par la corbeille, supprimer directement. Cette option n'est généralement utilisée qu'en cas de problème."
+
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Proceed"
+msgstr "Continuer"
+
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cancel"
+msgstr "Annuler"
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Attribute"
@@ -144,8 +259,7 @@ msgstr "Commencer un nouveau scan"
 
 #: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr ""
-"Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
+msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
 
 #: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -162,6 +276,19 @@ msgstr "Exclu"
 #: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Normal"
 msgstr "Normal"
+
+#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Selected"
+msgstr "Effacer sélection"
+
+#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Clear"
+msgstr "Vider"
+
+#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close"
+msgstr "Fermer"
 
 #: qt/base/preferences_dialog.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
@@ -220,10 +347,7 @@ msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
-msgstr ""
-"Ajoutez des critères dans la liste de droite pour envoyer les doublons qui "
-"correspondent le plus à ces critère à la position de référence. Une lecture "
-"préalable du fichier d'aide est conseillée."
+msgstr "Ajoutez des critères dans la liste de droite pour envoyer les doublons qui correspondent le plus à ces critère à la position de référence. Une lecture préalable du fichier d'aide est conseillée."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -234,19 +358,11 @@ msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr ""
-"Des problèmes ont été rencontrés lors du traitement de certains fichiers. La"
-" nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers "
-"n'ont pas été retirés des résultats."
+msgstr "Des problèmes ont été rencontrés lors du traitement de certains fichiers. La nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers n'ont pas été retirés des résultats."
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
 msgstr "Révéler Fichier"
-
-#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close"
-msgstr "Fermer"
 
 #: qt/base/result_window.py:44 qt/base/result_window.py:170
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
@@ -267,6 +383,10 @@ msgstr "Ne pas montrer les références"
 #: qt/base/result_window.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
 msgstr "Montrer les valeurs en tant que delta"
+
+#: qt/base/result_window.py:48
+msgid "Send Marked to Recycle Bin..."
+msgstr "Envoyer marqués à la corbeille..."
 
 #: qt/base/result_window.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
@@ -328,6 +448,10 @@ msgstr "Marquer sélectionnés"
 msgid "Export To HTML"
 msgstr "Exporter vers HTML"
 
+#: qt/base/result_window.py:64
+msgid "Export To CSV"
+msgstr "Exporter vers CSV"
+
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
 msgstr "Sauvegarder résultats..."
@@ -351,6 +475,14 @@ msgstr "Réinitialiser"
 #: qt/base/result_window.py:163
 msgid "{} Results"
 msgstr "{} (Résultats)"
+
+#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Dupes Only"
+msgstr "Sans réf."
+
+#: qt/base/result_window.py:172
+msgid "Delta Values"
+msgstr "Delta"
 
 #: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -479,376 +611,212 @@ msgid "KB"
 msgstr "KB"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details of Selected File"
-msgstr "Détails du fichier sélectionné"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add New Folder..."
-msgstr "Ajouter dossier..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Load from file..."
-msgstr "Charger un fichier..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reset to Default"
-msgstr "Colonnes par défault"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Dead Tracks in iTunes"
-msgstr "Retirer les tracks mortes dans iTunes"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add iPhoto Library"
-msgstr "Ajouter librairie iPhoto"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Bring All to Front"
-msgstr "Tout ramener au premier plan"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Window"
-msgstr "Fenêtre"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Minimize"
-msgstr "Placer dans le Dock"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide dupeGuru"
-msgstr "Masquer dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quit dupeGuru"
-msgstr "Quitter dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide Others"
-msgstr "Masquer les autres"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Show All"
-msgstr "Tout afficher"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Zoom"
-msgstr "Réduire/agrandir"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details Panel"
-msgstr "Fenêtre de détails"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Preferences..."
-msgstr "Préférences..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Folder Selection Window"
-msgstr "Fenêtre de sélection de dossiers"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reveal Selected in Finder"
-msgstr "Révéler sélectionné dans Finder"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close Window"
-msgstr "Fermer"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Start Duplicate Scan"
-msgstr "Commencer à scanner"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Export Results to XHTML"
-msgstr "Exporter les résultats vers HTML"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Check for update..."
-msgstr "Mise à jour..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Mode"
-msgstr "Mode"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Edit"
-msgstr "Édition"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cut"
-msgstr "Couper"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Copy"
-msgstr "Copier"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Paste"
-msgstr "Coller"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Website"
-msgstr "Site web de dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Re-Prioritize Results"
-msgstr "Re-prioriser les résultats"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ok"
-msgstr "Ok"
-
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cancel"
-msgstr "Annuler"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Results"
-msgstr "dupeGuru (Résultats)"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Options"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter"
-msgstr "Filtre"
+msgid "%@ Results"
+msgstr "Résultats de %@"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Action"
 msgstr "Action"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directories"
-msgstr "Dossiers"
-
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Dupes Only"
-msgstr "Sans réf."
+msgid "Add Aperture Library"
+msgstr "Ajouter librairie Aperture"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Delta"
-msgstr "Delta"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Preferences"
-msgstr "Préférences de dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "More results"
-msgstr "+ de doubles"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Fewer results"
-msgstr "- de doubles"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter hardness:"
-msgstr "Seuil du filtre:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Content"
-msgstr "Contenu"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Automatically check for updates"
-msgstr "Vérifier automatiquement les mises à jour"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore files smaller than:"
-msgstr "Ignorer les fichiers plus petits que:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Basic"
-msgstr "Simple"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Advanced"
-msgstr "Avancé"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Commande perso. (arguments: %d pour doublon, %r pour réf):"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru ME Preferences"
-msgstr "Préférences de dupeGuru ME"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Audio Content"
-msgstr "Contenu Audio"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru PE Preferences"
-msgstr "Préférences de dupeGuru PE"
-
-#: cocoa/inter/app.py:19
-msgid "Sending to Trash"
-msgstr "Envoi vers corbeille"
-
-#: cocoa/inter/app_me.py:34
-msgid "Removing dead tracks from your iTunes Library"
-msgstr "Retrait des tracks mortes de votre librairie iTunes"
-
-#: cocoa/inter/app_me.py:35
-msgid "Scanning the iTunes Library"
-msgstr "Scan de la librairie iTunes en cours"
-
-#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
-msgid "Sending dupes to the Trash"
-msgstr "Envoi de doublons à la corbeille en cours"
-
-#: cocoa/inter/app_pe.py:188
-msgid "Talking to iPhoto. Don't touch it!"
-msgstr "En communication avec iPhoto. N'y touchez pas!"
-
-#: cocoa/inter/app_pe.py:296
-msgid "The iPhoto application couldn't be found."
-msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "The name '%@' already exists."
-msgstr "Le nom '%@' existe déjà."
-
-#: cocoa/inter/app_me.py:195
-msgid ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr ""
-"Votre librairie iTunes contient %d tracks mortes qui seront retirées. "
-"Continuer?"
-
-#: cocoa/inter/app_me.py:199
-msgid "You have no dead tracks in your iTunes Library"
-msgstr "Votre librairie iTunes ne contient aucune track morte."
-
-#: cocoa/inter/app_me.py:163
-msgid "Talking to iTunes. Don't touch it!"
-msgstr "En communication avec iTunes. N'y touchez pas!"
-
-#: cocoa/inter/app_me.py:217
-msgid "The iTunes application couldn't be found."
-msgstr "L'application iTunes n'a pas pu être trouvée"
-
-#: qt/base/result_window.py:172
-msgid "Delta Values"
-msgstr "Delta"
-
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr ""
-
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore List"
-msgstr "Liste de doublons ignorés"
-
-#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Selected"
-msgstr "Effacer sélection"
-
-#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Clear"
-msgstr "Vider"
-
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Deletion Options"
-msgstr "Options de suppression"
-
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directly delete files"
-msgstr "Supprimer les fichiers directement"
-
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"Instead of sending files to trash, delete them directly. This option is "
-"usually used as a workaround when the normal deletion method doesn't work."
-msgstr ""
-"Au lieu de passer par la corbeille, supprimer directement. Cette option "
-"n'est généralement utilisée qu'en cas de problème."
-
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Proceed"
-msgstr "Continuer"
-
-#: cocoa/inter/app_pe.py:197
-msgid "Talking to Aperture. Don't touch it!"
-msgstr "En communication avec Aperture. N'y touchez pas!"
-
-#: cocoa/inter/app_pe.py:270
-msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr ""
-"Les photos supprimés d'Aperture sont dans le projet nommé \"dupeGuru "
-"Trash\"."
-
-#: qt/base/deletion_options.py:47
-msgid " (Mac OS X or Linux only)"
-msgstr " (Mac OS X ou Linux seulement)"
-
-#: qt/base/result_window.py:48
-msgid "Send Marked to Recycle Bin..."
-msgstr "Envoyer marqués à la corbeille..."
+msgid "Add iPhoto Library"
+msgstr "Ajouter librairie iPhoto"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Library"
 msgstr "Ajouter librairie iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add Aperture Library"
-msgstr "Ajouter librairie Aperture"
+msgid "Add New Folder..."
+msgstr "Ajouter dossier..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Send Marked to Trash..."
-msgstr "Envoyer marqués à la corbeille..."
+msgid "Advanced"
+msgstr "Avancé"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quick Look"
-msgstr ""
+msgid "Audio Content"
+msgstr "Contenu Audio"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter Results..."
-msgstr "Filtrer les résultats..."
+msgid "Automatically check for updates"
+msgstr "Vérifier automatiquement les mises à jour"
 
-#: qt/base/app.py:261
-msgid "{} file (*.{})"
-msgstr "Fichier {} (*.{})"
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Basic"
+msgstr "Simple"
 
-#: qt/base/result_window.py:64
-msgid "Export To CSV"
-msgstr "Exporter vers CSV"
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Bring All to Front"
+msgstr "Tout ramener au premier plan"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Check for update..."
+msgstr "Mise à jour..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close Window"
+msgstr "Fermer"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Content"
+msgstr "Contenu"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Copy"
+msgstr "Copier"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "Commande perso. (arguments: %d pour doublon, %r pour réf):"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cut"
+msgstr "Couper"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Delta"
+msgstr "Delta"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details of Selected File"
+msgstr "Détails du fichier sélectionné"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details Panel"
+msgstr "Fenêtre de détails"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directories"
+msgstr "Dossiers"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru"
+msgstr "dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru ME Preferences"
+msgstr "Préférences de dupeGuru ME"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru PE Preferences"
+msgstr "Préférences de dupeGuru PE"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Preferences"
+msgstr "Préférences de dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Results"
+msgstr "dupeGuru (Résultats)"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Website"
+msgstr "Site web de dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Edit"
+msgstr "Édition"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
 msgstr "Exporter les résultats vers CSV"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Link deleted files"
-msgstr "Remplacer les fichiers effacés par des liens"
-
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"After having deleted a duplicate, place a link targeting the reference file "
-"to replace the deleted file."
-msgstr ""
-"Après avoir effacé un fichier, remplacer celui-ci par un lien vers le "
-"fichier référence."
-
-#: qt/base/deletion_options.py:42
-msgid "Hardlink"
-msgstr ""
-
-#: qt/base/deletion_options.py:42
-msgid "Symlink"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to XHTML"
+msgstr "Exporter les résultats vers HTML"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru"
-msgstr ""
+msgid "Fewer results"
+msgstr "- de doubles"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter"
+msgstr "Filtre"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter hardness:"
+msgstr "Seuil du filtre:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter Results..."
+msgstr "Filtrer les résultats..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Folder Selection Window"
+msgstr "Fenêtre de sélection de dossiers"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
 msgstr "Taille de police:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide dupeGuru"
+msgstr "Masquer dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide Others"
+msgstr "Masquer les autres"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore files smaller than:"
+msgstr "Ignorer les fichiers plus petits que:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Load from file..."
+msgstr "Charger un fichier..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Minimize"
+msgstr "Placer dans le Dock"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Mode"
+msgstr "Mode"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "More results"
+msgstr "+ de doubles"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ok"
+msgstr "Ok"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Options"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Paste"
+msgstr "Coller"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Preferences..."
+msgstr "Préférences..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quick Look"
+msgstr "Quick Look"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quit dupeGuru"
+msgstr "Quitter dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Re-Prioritize Results"
+msgstr "Re-prioriser les résultats"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Dead Tracks in iTunes"
+msgstr "Retirer les tracks mortes dans iTunes"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reset to Default"
+msgstr "Colonnes par défault"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
@@ -859,9 +827,33 @@ msgid "Reveal"
 msgstr "Révéler"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Services"
-msgstr ""
+msgid "Reveal Selected in Finder"
+msgstr "Révéler sélectionné dans Finder"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "%@ Results"
-msgstr ""
+msgid "Send Marked to Trash..."
+msgstr "Envoyer marqués à la corbeille..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Services"
+msgstr "Services"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Show All"
+msgstr "Tout afficher"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Start Duplicate Scan"
+msgstr "Commencer à scanner"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr "Le nom '%@' existe déjà."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Window"
+msgstr "Fenêtre"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Zoom"
+msgstr "Réduire/agrandir"

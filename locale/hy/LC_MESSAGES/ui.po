@@ -1,17 +1,14 @@
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Armenian\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Hrant Ohanyan <hrantohanyan@mail.am>\n"
-"Language-Team: HaySoft <hrantaohanyan@mail.am>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:29+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: ARMENIA\n"
-"X-Poedit-Language: Armenian\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: hy\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
@@ -45,9 +42,40 @@ msgstr "Ստուգվում է iTunes-ի Շտեմարանը"
 msgid "Sending dupes to the Trash"
 msgstr "Խաբկանքները տեղափոխվում են Աղբարկղ"
 
+#: cocoa/inter/app_me.py:163
+msgid "Talking to iTunes. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_me.py:189
+msgid ""
+"There were communication problems with iTunes. The operation couldn't be "
+"completed."
+msgstr ""
+
+#: cocoa/inter/app_me.py:195
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr "Ձեր iTunes- Շտեմարանը պարունակում է %d մահացած շավիղներ, որոնք կարող են ջնջվել: Շարունակե՞լ:"
+
+#: cocoa/inter/app_me.py:199
+msgid "You have no dead tracks in your iTunes Library"
+msgstr "Դուք չունեք շավիղներ Ձեր iTunes Շտեմարանում"
+
+#: cocoa/inter/app_me.py:217
+msgid "The iTunes application couldn't be found."
+msgstr ""
+
 #: cocoa/inter/app_pe.py:188
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "Զրույց iPhoto-ի հետ: Մի կպեք! "
+
+#: cocoa/inter/app_pe.py:197
+msgid "Talking to Aperture. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:270
+msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
+msgstr ""
 
 #: cocoa/inter/app_pe.py:296
 msgid "The iPhoto application couldn't be found."
@@ -64,6 +92,11 @@ msgstr "Փակել"
 #: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Կարգավորումներ"
+
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore List"
+msgstr ""
 
 #: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -89,9 +122,55 @@ msgstr "Բացել Սխալների մատյանը"
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
+msgstr "Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: Սպասեք մի քանի վայրկյան և կրկին փորձեք:"
+
+#: qt/base/app.py:261
+msgid "{} file (*.{})"
 msgstr ""
-"Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: "
-"Սպասեք մի քանի վայրկյան և կրկին փորձեք:"
+
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Deletion Options"
+msgstr ""
+
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Link deleted files"
+msgstr ""
+
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"After having deleted a duplicate, place a link targeting the reference file "
+"to replace the deleted file."
+msgstr ""
+
+#: qt/base/deletion_options.py:42
+msgid "Hardlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:42
+msgid "Symlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:47
+msgid " (Mac OS X or Linux only)"
+msgstr ""
+
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directly delete files"
+msgstr ""
+
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr ""
+
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Proceed"
+msgstr ""
+
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cancel"
+msgstr "Չեղարկել"
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Attribute"
@@ -196,6 +275,19 @@ msgstr "Բացառված"
 msgid "Normal"
 msgstr "Նորմալ"
 
+#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Selected"
+msgstr ""
+
+#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Clear"
+msgstr ""
+
+#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close"
+msgstr "Փակել"
+
 #: qt/base/preferences_dialog.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
 msgstr "Ստուգելու տեսակը."
@@ -253,9 +345,7 @@ msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
-msgstr ""
-"Ավելացրեք պահանջներ աջ վանդակում և սեղմեք ԼԱՎ՝ ուղարկելու համար պատճեները, "
-"որոնք համապատասխանում են այս պահանջներին: Մանրամասները Օգնությունում:"
+msgstr "Ավելացրեք պահանջներ աջ վանդակում և սեղմեք ԼԱՎ՝ ուղարկելու համար պատճեները, որոնք համապատասխանում են այս պահանջներին: Մանրամասները Օգնությունում:"
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -266,19 +356,11 @@ msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr ""
-"Խնդիրներ են առկա որոշ (կամ բոլոր) ֆայլերի հետ գործողություններում: Այդ "
-"խնդիրների լուծումը նկարագրված է հետևյալ աղյուսակում: Այս ֆայլերը չեն հեռացվի"
-" արդյունքներից:"
+msgstr "Խնդիրներ են առկա որոշ (կամ բոլոր) ֆայլերի հետ գործողություններում: Այդ խնդիրների լուծումը նկարագրված է հետևյալ աղյուսակում: Այս ֆայլերը չեն հեռացվի արդյունքներից:"
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
 msgstr "Ցուցադրել ընտրվածը"
-
-#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close"
-msgstr "Փակել"
 
 #: qt/base/result_window.py:44 qt/base/result_window.py:170
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
@@ -299,6 +381,10 @@ msgstr "Ցուցադրել միայն պատճեները"
 #: qt/base/result_window.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
 msgstr "Ցուցադրել դելտա նշան-ը"
+
+#: qt/base/result_window.py:48
+msgid "Send Marked to Recycle Bin..."
+msgstr "Ուղարկել նշվածները Աղբարկղ..."
 
 #: qt/base/result_window.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
@@ -360,6 +446,10 @@ msgstr "Նշել ընտրվածը"
 msgid "Export To HTML"
 msgstr "Արտածել HTML-ով"
 
+#: qt/base/result_window.py:64
+msgid "Export To CSV"
+msgstr ""
+
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
 msgstr "Պահպանել արդյունքները..."
@@ -383,6 +473,14 @@ msgstr "Ետարկել ծրագրայինի"
 #: qt/base/result_window.py:163
 msgid "{} Results"
 msgstr "{} Արդյունքներ"
+
+#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Dupes Only"
+msgstr "Միայն կրկ."
+
+#: qt/base/result_window.py:172
+msgid "Delta Values"
+msgstr ""
 
 #: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -511,346 +609,212 @@ msgid "KB"
 msgstr "ԿԲ"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details of Selected File"
-msgstr "Ընտրված ֆայլի մանրամասները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add New Folder..."
-msgstr "Ավելացնել նոր թղթապանակ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Load from file..."
-msgstr "Բացել ֆայլից..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reset to Default"
-msgstr "Ետարկել ծրագրայինի"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "The name '%@' already exists."
-msgstr "'%@' անունը արդեն առկա է:"
-
-#: cocoa/inter/app_me.py:195
-msgid ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgid "%@ Results"
 msgstr ""
-"Ձեր iTunes- Շտեմարանը պարունակում է %d մահացած շավիղներ, որոնք կարող են "
-"ջնջվել: Շարունակե՞լ:"
-
-#: cocoa/inter/app_me.py:199
-msgid "You have no dead tracks in your iTunes Library"
-msgstr "Դուք չունեք շավիղներ Ձեր iTunes Շտեմարանում"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Dead Tracks in iTunes"
-msgstr "Հեռացնել մահացած շավիղները iTunes-ից"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add iPhoto Library"
-msgstr "Ավելացնել iPhoto-ի Շտեմարանին"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Bring All to Front"
-msgstr "Բոլորի առջևում"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Window"
-msgstr "Պատուհանը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Minimize"
-msgstr "Թաքցնել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide dupeGuru"
-msgstr "Թաքցնել dupeGuru-ին"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quit dupeGuru"
-msgstr "Փակել dupeGuru-ը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide Others"
-msgstr "Թաքցնել մյուսները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Show All"
-msgstr "Ցուցադրել բոլորը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Zoom"
-msgstr "Չափը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details Panel"
-msgstr "Մանրամասների վահանակը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Preferences..."
-msgstr "Կարգավորումներ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Folder Selection Window"
-msgstr "Թղթապանակը ընտրելու պատուհանը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reveal Selected in Finder"
-msgstr "Ցուցադրել ընտրվածը Գտնվածում"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close Window"
-msgstr "Փակել պատուհանը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Start Duplicate Scan"
-msgstr "Սկսել կրկնօրինակների ստուգումը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Export Results to XHTML"
-msgstr "Արտածել արդյունքները XHTML-ով"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Check for update..."
-msgstr "Ստուգել թարմացումները..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Mode"
-msgstr "Եղանակը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Edit"
-msgstr "Խմբագրել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cut"
-msgstr "Կտրել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Copy"
-msgstr "Պատճենել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Paste"
-msgstr "Տեղադրել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Website"
-msgstr "dupeGuru-ի վեբ կայքը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Re-Prioritize Results"
-msgstr "Վերաառաջնայնավորել արդյունքները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ok"
-msgstr "ԼԱՎ"
-
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cancel"
-msgstr "Չեղարկել"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Results"
-msgstr "dupeGuru-ի արդյունքները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Ընտրանքներ"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter"
-msgstr "Ֆիլտրը"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Action"
 msgstr "Գործողությունը"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directories"
-msgstr "Թղթապանակներ"
-
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Dupes Only"
-msgstr "Միայն կրկ."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Delta"
-msgstr "Դելտա"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Preferences"
-msgstr "dupeGuru-ի կարգավորումները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "More results"
-msgstr "Լր. արդյունքներ"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Fewer results"
-msgstr "Քիչ արդյունքներ"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter hardness:"
-msgstr "Ֆիլտրի կարգը."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Content"
-msgstr "Բովանդակությունը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Automatically check for updates"
-msgstr "Ինքնաշխատ ստուգել թարմացումները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore files smaller than:"
-msgstr "Անտեսել նմանատիպ ֆայլերը."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Basic"
-msgstr "Բազային"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Advanced"
-msgstr "Ընդլայնված"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Հրամանի կատարում (փաստարկները. %d խաբկանքի զոհ, %r հղման համար)."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru ME Preferences"
-msgstr "dupeGuru-ի ME կարգավորումները"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Audio Content"
-msgstr "Ձայնային բովանդակությունը"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru PE Preferences"
-msgstr "dupeGuru PE կարգավորումները"
-
-#: cocoa/inter/app_me.py:163
-msgid "Talking to iTunes. Don't touch it!"
+msgid "Add Aperture Library"
 msgstr ""
 
-#: cocoa/inter/app_me.py:217
-msgid "The iTunes application couldn't be found."
-msgstr ""
-
-#: qt/base/result_window.py:172
-msgid "Delta Values"
-msgstr ""
-
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr ""
-
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore List"
-msgstr ""
-
-#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Selected"
-msgstr ""
-
-#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Clear"
-msgstr ""
-
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Deletion Options"
-msgstr ""
-
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directly delete files"
-msgstr ""
-
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"Instead of sending files to trash, delete them directly. This option is "
-"usually used as a workaround when the normal deletion method doesn't work."
-msgstr ""
-
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Proceed"
-msgstr ""
-
-#: cocoa/inter/app_pe.py:197
-msgid "Talking to Aperture. Don't touch it!"
-msgstr ""
-
-#: cocoa/inter/app_pe.py:270
-msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr ""
-
-#: qt/base/deletion_options.py:47
-msgid " (Mac OS X or Linux only)"
-msgstr ""
-
-#: qt/base/result_window.py:48
-msgid "Send Marked to Recycle Bin..."
-msgstr "Ուղարկել նշվածները Աղբարկղ..."
+msgid "Add iPhoto Library"
+msgstr "Ավելացնել iPhoto-ի Շտեմարանին"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Library"
 msgstr "Ավելացնել iTunes թղթապանակ"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add Aperture Library"
-msgstr ""
+msgid "Add New Folder..."
+msgstr "Ավելացնել նոր թղթապանակ..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Send Marked to Trash..."
-msgstr "Ուղարկել նշվածները Աղբարկղ..."
+msgid "Advanced"
+msgstr "Ընդլայնված"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quick Look"
-msgstr ""
+msgid "Audio Content"
+msgstr "Ձայնային բովանդակությունը"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter Results..."
-msgstr ""
-
-#: qt/base/app.py:261
-msgid "{} file (*.{})"
-msgstr ""
-
-#: qt/base/result_window.py:64
-msgid "Export To CSV"
-msgstr ""
+msgid "Automatically check for updates"
+msgstr "Ինքնաշխատ ստուգել թարմացումները"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Export Results to CSV"
-msgstr ""
+msgid "Basic"
+msgstr "Բազային"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Link deleted files"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Bring All to Front"
+msgstr "Բոլորի առջևում"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"After having deleted a duplicate, place a link targeting the reference file "
-"to replace the deleted file."
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Check for update..."
+msgstr "Ստուգել թարմացումները..."
 
-#: qt/base/deletion_options.py:42
-msgid "Hardlink"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close Window"
+msgstr "Փակել պատուհանը"
 
-#: qt/base/deletion_options.py:42
-msgid "Symlink"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Content"
+msgstr "Բովանդակությունը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Copy"
+msgstr "Պատճենել"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "Հրամանի կատարում (փաստարկները. %d խաբկանքի զոհ, %r հղման համար)."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cut"
+msgstr "Կտրել"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Delta"
+msgstr "Դելտա"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details of Selected File"
+msgstr "Ընտրված ֆայլի մանրամասները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details Panel"
+msgstr "Մանրամասների վահանակը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directories"
+msgstr "Թղթապանակներ"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru ME Preferences"
+msgstr "dupeGuru-ի ME կարգավորումները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru PE Preferences"
+msgstr "dupeGuru PE կարգավորումները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Preferences"
+msgstr "dupeGuru-ի կարգավորումները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Results"
+msgstr "dupeGuru-ի արդյունքները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Website"
+msgstr "dupeGuru-ի վեբ կայքը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Edit"
+msgstr "Խմբագրել"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to CSV"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to XHTML"
+msgstr "Արտածել արդյունքները XHTML-ով"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Fewer results"
+msgstr "Քիչ արդյունքներ"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter"
+msgstr "Ֆիլտրը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter hardness:"
+msgstr "Ֆիլտրի կարգը."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter Results..."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Folder Selection Window"
+msgstr "Թղթապանակը ընտրելու պատուհանը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
 msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide dupeGuru"
+msgstr "Թաքցնել dupeGuru-ին"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide Others"
+msgstr "Թաքցնել մյուսները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore files smaller than:"
+msgstr "Անտեսել նմանատիպ ֆայլերը."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Load from file..."
+msgstr "Բացել ֆայլից..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Minimize"
+msgstr "Թաքցնել"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Mode"
+msgstr "Եղանակը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "More results"
+msgstr "Լր. արդյունքներ"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ok"
+msgstr "ԼԱՎ"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Ընտրանքներ"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Paste"
+msgstr "Տեղադրել"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Preferences..."
+msgstr "Կարգավորումներ..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quick Look"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quit dupeGuru"
+msgstr "Փակել dupeGuru-ը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Re-Prioritize Results"
+msgstr "Վերաառաջնայնավորել արդյունքները"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Dead Tracks in iTunes"
+msgstr "Հեռացնել մահացած շավիղները iTunes-ից"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reset to Default"
+msgstr "Ետարկել ծրագրայինի"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
@@ -861,9 +825,33 @@ msgid "Reveal"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reveal Selected in Finder"
+msgstr "Ցուցադրել ընտրվածը Գտնվածում"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Send Marked to Trash..."
+msgstr "Ուղարկել նշվածները Աղբարկղ..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "%@ Results"
-msgstr ""
+msgid "Show All"
+msgstr "Ցուցադրել բոլորը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Start Duplicate Scan"
+msgstr "Սկսել կրկնօրինակների ստուգումը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr "'%@' անունը արդեն առկա է:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Window"
+msgstr "Պատուհանը"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Zoom"
+msgstr "Չափը"

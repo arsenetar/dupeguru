@@ -1,16 +1,14 @@
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Ukrainian\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Nickolas Pohilets <pohilets@gmail.com>\n"
-"Language-Team: Yuri  Petrashko <Petrashko@mail.ua>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:22+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: UKRAINE\n"
-"X-Poedit-Language: Ukrainian\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17

@@ -1,16 +1,89 @@
 # 
+# Translators:
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:18+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/app.py:37
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:38
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
 
 #: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr ""
+
+#: core/app.py:230
+msgid "No duplicates found."
+msgstr "Keine Duplikate gefunden."
+
+#: core/app.py:243
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: core/app.py:244
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: core/app.py:245
+msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
 #: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
+msgstr ""
+
+#: core/app.py:283
+msgid "'{}' already is in the list."
+msgstr ""
+
+#: core/app.py:285
+msgid "'{}' does not exist."
+msgstr ""
+
+#: core/app.py:292
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr "%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?"
+
+#: core/app.py:352
+msgid "copy"
+msgstr "kopieren"
+
+#: core/app.py:352
+msgid "move"
+msgstr "verschieben"
+
+#: core/app.py:353
+msgid "Select a directory to {} marked files to"
+msgstr "Wählen sie einen Ordner zum {} der ausgewählten Dateien"
+
+#: core/app.py:379
+msgid "Select a destination for your exported CSV"
+msgstr ""
+
+#: core/app.py:404
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen konfigurieren."
+
+#: core/app.py:491 core/app.py:502
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
+
+#: core/app.py:522
+msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
 #: core/app.py:542
@@ -41,6 +114,14 @@ msgstr "Lese Größe von %d/%d Dateien"
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d Paare gruppiert"
 
+#: core/gui/deletion_options.py:21
+msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/gui/ignore_list_dialog.py:24
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "Möchten Sie wirklich alle %d Einträge aus der Ignorier-Liste löschen?"
+
 #: core/prioritize.py:68
 msgid "None"
 msgstr ""
@@ -52,6 +133,14 @@ msgstr "Ends with number"
 #: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Doesn't end with number"
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
+msgstr ""
 
 #: core/prioritize.py:132
 msgid "Highest"
@@ -111,88 +200,4 @@ msgstr "%d/%d verifizierte Paare"
 
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
-
-#: core/app.py:37
-msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
-
-#: core/app.py:38
-msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
-
-#: core/app.py:230
-msgid "No duplicates found."
-msgstr "Keine Duplikate gefunden."
-
-#: core/app.py:243
-msgid "All marked files were copied sucessfully."
-msgstr ""
-
-#: core/app.py:244
-msgid "All marked files were moved sucessfully."
-msgstr ""
-
-#: core/app.py:245
-msgid "All marked files were sucessfully sent to Trash."
-msgstr ""
-
-#: core/app.py:292
-msgid ""
-"All selected %d matches are going to be ignored in all subsequent scans. "
-"Continue?"
-msgstr "%d Dateien werden in zukünftigen Scans ignoriert werden. Fortfahren?"
-
-#: core/gui/ignore_list_dialog.py:24
-msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Möchten Sie wirklich alle %d Einträge aus der Ignorier-Liste löschen?"
-
-#: core/app.py:404
-msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen "
-"konfigurieren."
-
-#: core/app.py:491 core/app.py:502
-msgid "You are about to remove %d files from results. Continue?"
-msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
-
-#: core/app.py:352
-msgid "copy"
-msgstr "kopieren"
-
-#: core/app.py:352
-msgid "move"
-msgstr "verschieben"
-
-#: core/app.py:353
-msgid "Select a directory to {} marked files to"
-msgstr "Wählen sie einen Ordner zum {} der ausgewählten Dateien"
-
-#: core/gui/deletion_options.py:21
-msgid "You are sending {} file(s) to the Trash."
-msgstr ""
-
-#: core/prioritize.py:98
-msgid "Longest"
-msgstr ""
-
-#: core/prioritize.py:99
-msgid "Shortest"
-msgstr ""
-
-#: core/app.py:522
-msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
-
-#: core/app.py:283
-msgid "'{}' already is in the list."
-msgstr ""
-
-#: core/app.py:285
-msgid "'{}' does not exist."
-msgstr ""
-
-#: core/app.py:379
-msgid "Select a destination for your exported CSV"
 msgstr ""

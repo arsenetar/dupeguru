@@ -1,7 +1,23 @@
 # 
+# Translators:
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:23+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
+msgid "File Path"
+msgstr "Percorso del file"
+
+#: core/gui/problem_table.py:18
+msgid "Error Message"
+msgstr "Messaggio di errore"
 
 #: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
 #: core_se/result_table.py:21
@@ -27,6 +43,18 @@ msgstr "Dimensione"
 msgid "Modification"
 msgstr "Modificato"
 
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr ""
+
+#: core_me/prioritize.py:22 core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr ""
+
 #: core_me/result_table.py:20
 msgid "Size (MB)"
 msgstr "Dimensione (MB)"
@@ -34,10 +62,6 @@ msgstr "Dimensione (MB)"
 #: core_me/result_table.py:21
 msgid "Time"
 msgstr "Tempo"
-
-#: core_me/prioritize.py:22 core_me/result_table.py:22
-msgid "Bitrate"
-msgstr "Bitrate"
 
 #: core_me/result_table.py:23
 msgid "Sample Rate"
@@ -85,30 +109,13 @@ msgstr "Parole usate"
 msgid "Dupe Count"
 msgstr "Conteggio duplicati"
 
-#: core_me/prioritize.py:16
-msgid "Duration"
-msgstr ""
-
-#: core_me/prioritize.py:28
-msgid "Samplerate"
-msgstr ""
-
-#: core_pe/result_table.py:20 core_se/result_table.py:20
-msgid "Size (KB)"
-msgstr "Dimensione (KB)"
-
 #: core_pe/prioritize.py:16 core_pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Dimensioni"
 
-#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
-#: core/gui/problem_table.py:17
-msgid "File Path"
-msgstr "Percorso del file"
-
-#: core/gui/problem_table.py:18
-msgid "Error Message"
-msgstr "Messaggio di errore"
+#: core_pe/result_table.py:20 core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Dimensione (KB)"
 
 #: core_pe/result_table.py:23
 msgid "EXIF Timestamp"

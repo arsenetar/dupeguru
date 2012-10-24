@@ -1,100 +1,59 @@
 # 
+# Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Kyrill Detinov <lazy.kent@opensuse.org>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2012-09-05 15:22+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Poedit-Country: RUSSIAN FEDERATION\n"
-"X-Poedit-Language: Russian\n"
-
-#: core_me/result_table.py:28
-msgid "Album"
-msgstr "Альбом"
-
-#: core_me/result_table.py:27
-msgid "Artist"
-msgstr "Исполнитель"
-
-#: core_me/prioritize.py:22 core_me/result_table.py:22
-msgid "Bitrate"
-msgstr "Битрейт"
-
-#: core_me/result_table.py:32
-msgid "Comment"
-msgstr "Комментарий"
-
-#: core_pe/prioritize.py:16 core_pe/result_table.py:22
-msgid "Dimensions"
-msgstr "Размеры"
-
-#: core_me/result_table.py:35 core_pe/result_table.py:26
-#: core_se/result_table.py:25
-msgid "Dupe Count"
-msgstr "Количество дубликатов"
-
-#: core_me/prioritize.py:16
-msgid "Duration"
-msgstr "Продолжительность"
-
-#: core/gui/problem_table.py:18
-msgid "Error Message"
-msgstr "Сообщение об ошибке"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
 #: core/gui/problem_table.py:17
 msgid "File Path"
 msgstr "Путь к файлу"
 
-#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
-#: core_se/result_table.py:18
-msgid "Filename"
-msgstr "Имя файла"
-
-#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
-#: core_se/result_table.py:19
-msgid "Folder"
-msgstr "Каталог"
-
-#: core_me/result_table.py:29
-msgid "Genre"
-msgstr "Жанр"
+#: core/gui/problem_table.py:18
+msgid "Error Message"
+msgstr "Сообщение об ошибке"
 
 #: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
 #: core_se/result_table.py:21
 msgid "Kind"
 msgstr "Тип"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:25
-#: core_se/result_table.py:23
-msgid "Match %"
-msgstr "Совпадение %"
+#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
+#: core_se/result_table.py:19
+msgid "Folder"
+msgstr "Каталог"
+
+#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
+#: core_se/result_table.py:18
+msgid "Filename"
+msgstr "Имя файла"
+
+#: core/prioritize.py:147
+msgid "Size"
+msgstr "Размер"
 
 #: core/prioritize.py:153 core_me/result_table.py:25
 #: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
 msgstr "Время изменения"
 
-#: core_me/result_table.py:23
-msgid "Sample Rate"
-msgstr "Частота"
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: core_me/prioritize.py:22 core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Битрейт"
 
 #: core_me/prioritize.py:28
 msgid "Samplerate"
 msgstr "Частота оцифровки"
-
-#: core/prioritize.py:147
-msgid "Size"
-msgstr "Размер"
-
-#: core_pe/result_table.py:20 core_se/result_table.py:20
-msgid "Size (KB)"
-msgstr "Размер (КБ)"
 
 #: core_me/result_table.py:20
 msgid "Size (MB)"
@@ -104,21 +63,59 @@ msgstr "Размер (МБ)"
 msgid "Time"
 msgstr "Время"
 
+#: core_me/result_table.py:23
+msgid "Sample Rate"
+msgstr "Частота"
+
 #: core_me/result_table.py:26
 msgid "Title"
 msgstr "Название"
+
+#: core_me/result_table.py:27
+msgid "Artist"
+msgstr "Исполнитель"
+
+#: core_me/result_table.py:28
+msgid "Album"
+msgstr "Альбом"
+
+#: core_me/result_table.py:29
+msgid "Genre"
+msgstr "Жанр"
+
+#: core_me/result_table.py:30
+msgid "Year"
+msgstr "Год"
 
 #: core_me/result_table.py:31
 msgid "Track Number"
 msgstr "Номер дорожки"
 
+#: core_me/result_table.py:32
+msgid "Comment"
+msgstr "Комментарий"
+
+#: core_me/result_table.py:33 core_pe/result_table.py:25
+#: core_se/result_table.py:23
+msgid "Match %"
+msgstr "Совпадение %"
+
 #: core_me/result_table.py:34 core_se/result_table.py:24
 msgid "Words Used"
 msgstr "Использованные слова"
 
-#: core_me/result_table.py:30
-msgid "Year"
-msgstr "Год"
+#: core_me/result_table.py:35 core_pe/result_table.py:26
+#: core_se/result_table.py:25
+msgid "Dupe Count"
+msgstr "Количество дубликатов"
+
+#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+msgid "Dimensions"
+msgstr "Размеры"
+
+#: core_pe/result_table.py:20 core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Размер (КБ)"
 
 #: core_pe/result_table.py:23
 msgid "EXIF Timestamp"

@@ -1,7 +1,16 @@
 # 
+# Translators:
+#   <xcoisas@me.com>, 2012.
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-08 20:46+0000\n"
+"Last-Translator: Vitu <xcoisas@me.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: core/app.py:37
 msgid "There are no marked duplicates. Nothing has been done."
@@ -35,9 +44,15 @@ msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
-msgstr ""
-"Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 "
-"duplicatas por vez."
+msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 duplicatas por vez."
+
+#: core/app.py:283
+msgid "'{}' already is in the list."
+msgstr "'{}' já está na lista"
+
+#: core/app.py:285
+msgid "'{}' does not exist."
+msgstr "'{}' não existe"
 
 #: core/app.py:292
 msgid ""
@@ -57,14 +72,21 @@ msgstr "mover"
 msgid "Select a directory to {} marked files to"
 msgstr "Selecione uma pasta para {} os arquivos marcados"
 
+#: core/app.py:379
+msgid "Select a destination for your exported CSV"
+msgstr "Selecione uma pasta para o CSV exportado"
+
 #: core/app.py:404
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"Você não possui nenhum comando personalizado. Crie um nas preferências."
+msgstr "Você não possui nenhum comando personalizado. Crie um nas preferências."
 
 #: core/app.py:491 core/app.py:502
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Remover %d arquivo(s) dos resultados?"
+
+#: core/app.py:522
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr "{} grupos de duplicatas alterados ao re-priorizar."
 
 #: core/app.py:542
 msgid "Collecting files to scan"
@@ -113,6 +135,14 @@ msgstr "Termina com número"
 #: core/prioritize.py:97
 msgid "Doesn't end with number"
 msgstr "Não termina com número"
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr "Mais longo"
+
+#: core/prioritize.py:99
+msgid "Shortest"
+msgstr "Mais curto"
 
 #: core/prioritize.py:132
 msgid "Highest"
@@ -173,27 +203,3 @@ msgstr "%d/%d coincidentes verificados"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF de %d/%d fotos lidos"
-
-#: core/prioritize.py:98
-msgid "Longest"
-msgstr ""
-
-#: core/prioritize.py:99
-msgid "Shortest"
-msgstr ""
-
-#: core/app.py:522
-msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
-
-#: core/app.py:283
-msgid "'{}' already is in the list."
-msgstr "'{}' já está na lista"
-
-#: core/app.py:285
-msgid "'{}' does not exist."
-msgstr "'{}' não existe"
-
-#: core/app.py:379
-msgid "Select a destination for your exported CSV"
-msgstr ""

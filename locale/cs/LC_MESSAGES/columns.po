@@ -1,7 +1,23 @@
 # 
+# Translators:
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:23+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
+msgid "File Path"
+msgstr "Cesta k souboru"
+
+#: core/gui/problem_table.py:18
+msgid "Error Message"
+msgstr "Chybové hlášení"
 
 #: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
 #: core_se/result_table.py:21
@@ -27,6 +43,18 @@ msgstr "Velikost"
 msgid "Modification"
 msgstr "Změna"
 
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr ""
+
+#: core_me/prioritize.py:22 core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr ""
+
 #: core_me/result_table.py:20
 msgid "Size (MB)"
 msgstr "Velikost (MB)"
@@ -34,10 +62,6 @@ msgstr "Velikost (MB)"
 #: core_me/result_table.py:21
 msgid "Time"
 msgstr "Čas"
-
-#: core_me/prioritize.py:22 core_me/result_table.py:22
-msgid "Bitrate"
-msgstr "Bitrate"
 
 #: core_me/result_table.py:23
 msgid "Sample Rate"
@@ -85,30 +109,13 @@ msgstr "Slov"
 msgid "Dupe Count"
 msgstr "Počet kopií"
 
-#: core_me/prioritize.py:16
-msgid "Duration"
-msgstr ""
-
-#: core_me/prioritize.py:28
-msgid "Samplerate"
-msgstr ""
-
-#: core_pe/result_table.py:20 core_se/result_table.py:20
-msgid "Size (KB)"
-msgstr "Velikost (KB)"
-
 #: core_pe/prioritize.py:16 core_pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Rozměry"
 
-#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
-#: core/gui/problem_table.py:17
-msgid "File Path"
-msgstr "Cesta k souboru"
-
-#: core/gui/problem_table.py:18
-msgid "Error Message"
-msgstr "Chybové hlášení"
+#: core_pe/result_table.py:20 core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Velikost (KB)"
 
 #: core_pe/result_table.py:23
 msgid "EXIF Timestamp"

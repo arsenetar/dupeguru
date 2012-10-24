@@ -1,16 +1,89 @@
 # 
+# Translators:
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:18+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: core/app.py:37
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:38
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
 
 #: core/app.py:96
 msgid "will only be able to delete, move or copy 10 duplicates at once"
+msgstr ""
+
+#: core/app.py:230
+msgid "No duplicates found."
+msgstr "没有找到重复文件。"
+
+#: core/app.py:243
+msgid "All marked files were copied sucessfully."
+msgstr ""
+
+#: core/app.py:244
+msgid "All marked files were moved sucessfully."
+msgstr ""
+
+#: core/app.py:245
+msgid "All marked files were sucessfully sent to Trash."
 msgstr ""
 
 #: core/app.py:272
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
+msgstr ""
+
+#: core/app.py:283
+msgid "'{}' already is in the list."
+msgstr ""
+
+#: core/app.py:285
+msgid "'{}' does not exist."
+msgstr ""
+
+#: core/app.py:292
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
+
+#: core/app.py:352
+msgid "copy"
+msgstr "复制"
+
+#: core/app.py:352
+msgid "move"
+msgstr "移动"
+
+#: core/app.py:353
+msgid "Select a directory to {} marked files to"
+msgstr "选择一个文件夹将标记的 {} 个文件进行..."
+
+#: core/app.py:379
+msgid "Select a destination for your exported CSV"
+msgstr ""
+
+#: core/app.py:404
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "你没有设定自定义命令。请在首选项中进行设定。"
+
+#: core/app.py:491 core/app.py:502
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "你将从结果中移除 %d 个文件。继续吗?"
+
+#: core/app.py:522
+msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
 #: core/app.py:542
@@ -41,6 +114,14 @@ msgstr "读取 %d/%d 文件大小"
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d 匹配项组合在一起"
 
+#: core/gui/deletion_options.py:21
+msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/gui/ignore_list_dialog.py:24
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "确定要从忽略列表中移除 %d 项吗?"
+
 #: core/prioritize.py:68
 msgid "None"
 msgstr ""
@@ -51,6 +132,14 @@ msgstr "文件名称"
 
 #: core/prioritize.py:97
 msgid "Doesn't end with number"
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
 msgstr ""
 
 #: core/prioritize.py:132
@@ -111,86 +200,4 @@ msgstr "验证 %d/%d 匹配项"
 
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
-
-#: core/app.py:37
-msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
-
-#: core/app.py:38
-msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
-
-#: core/app.py:230
-msgid "No duplicates found."
-msgstr "没有找到重复文件。"
-
-#: core/app.py:243
-msgid "All marked files were copied sucessfully."
-msgstr ""
-
-#: core/app.py:244
-msgid "All marked files were moved sucessfully."
-msgstr ""
-
-#: core/app.py:245
-msgid "All marked files were sucessfully sent to Trash."
-msgstr ""
-
-#: core/app.py:292
-msgid ""
-"All selected %d matches are going to be ignored in all subsequent scans. "
-"Continue?"
-msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
-
-#: core/gui/ignore_list_dialog.py:24
-msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "确定要从忽略列表中移除 %d 项吗?"
-
-#: core/app.py:404
-msgid "You have no custom command set up. Set it up in your preferences."
-msgstr "你没有设定自定义命令。请在首选项中进行设定。"
-
-#: core/app.py:491 core/app.py:502
-msgid "You are about to remove %d files from results. Continue?"
-msgstr "你将从结果中移除 %d 个文件。继续吗?"
-
-#: core/app.py:352
-msgid "copy"
-msgstr "复制"
-
-#: core/app.py:352
-msgid "move"
-msgstr "移动"
-
-#: core/app.py:353
-msgid "Select a directory to {} marked files to"
-msgstr "选择一个文件夹将标记的 {} 个文件进行..."
-
-#: core/gui/deletion_options.py:21
-msgid "You are sending {} file(s) to the Trash."
-msgstr ""
-
-#: core/prioritize.py:98
-msgid "Longest"
-msgstr ""
-
-#: core/prioritize.py:99
-msgid "Shortest"
-msgstr ""
-
-#: core/app.py:522
-msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
-
-#: core/app.py:283
-msgid "'{}' already is in the list."
-msgstr ""
-
-#: core/app.py:285
-msgid "'{}' does not exist."
-msgstr ""
-
-#: core/app.py:379
-msgid "Select a destination for your exported CSV"
 msgstr ""

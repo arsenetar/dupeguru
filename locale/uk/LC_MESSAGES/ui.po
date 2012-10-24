@@ -1,16 +1,14 @@
 # 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Ukrainian\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Nickolas Pohilets <pohilets@gmail.com>\n"
-"Language-Team: YuriPetrashko <Petrashko@mail.ua>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2012-09-05 15:29+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: UKRAINE\n"
-"X-Poedit-Language: Ukrainian\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: cocoa/inter/app.py:15 qt/base/app.py:38
 msgid "Scanning for duplicates"
@@ -44,9 +42,40 @@ msgstr "Сканування бібліотеки iTunes"
 msgid "Sending dupes to the Trash"
 msgstr "Відправлення дублікатів до кошика"
 
+#: cocoa/inter/app_me.py:163
+msgid "Talking to iTunes. Don't touch it!"
+msgstr "Виконується взаємодія з програмою iTunes. Не чіпайте її!"
+
+#: cocoa/inter/app_me.py:189
+msgid ""
+"There were communication problems with iTunes. The operation couldn't be "
+"completed."
+msgstr "Виникла проблема зв'язку з iTunes. Операція не може бути завершена."
+
+#: cocoa/inter/app_me.py:195
+msgid ""
+"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr "Ваша бібліотека iTunes містить %d мертвих треків, які готові до видалення. Продовжити?"
+
+#: cocoa/inter/app_me.py:199
+msgid "You have no dead tracks in your iTunes Library"
+msgstr "У вашій бібліотеці iTunes немає мертвих треків "
+
+#: cocoa/inter/app_me.py:217
+msgid "The iTunes application couldn't be found."
+msgstr "Не можливо знайти програму iTunes"
+
 #: cocoa/inter/app_pe.py:188
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "Виконується взаємодія з програмою iPhoto. Не чіпайте її!"
+
+#: cocoa/inter/app_pe.py:197
+msgid "Talking to Aperture. Don't touch it!"
+msgstr ""
+
+#: cocoa/inter/app_pe.py:270
+msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
+msgstr ""
 
 #: cocoa/inter/app_pe.py:296
 msgid "The iPhoto application couldn't be found."
@@ -63,6 +92,11 @@ msgstr "Вихід"
 #: qt/base/app.py:96 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Налаштування"
+
+#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore List"
+msgstr "Чорний список"
 
 #: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -88,9 +122,55 @@ msgstr "Відкрити журнал налагодження"
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
+msgstr "Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте кілька секунд, потім повторіть спробу."
+
+#: qt/base/app.py:261
+msgid "{} file (*.{})"
 msgstr ""
-"Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
-" кілька секунд, потім повторіть спробу."
+
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Deletion Options"
+msgstr ""
+
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Link deleted files"
+msgstr ""
+
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"After having deleted a duplicate, place a link targeting the reference file "
+"to replace the deleted file."
+msgstr ""
+
+#: qt/base/deletion_options.py:42
+msgid "Hardlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:42
+msgid "Symlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:47
+msgid " (Mac OS X or Linux only)"
+msgstr ""
+
+#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directly delete files"
+msgstr ""
+
+#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr ""
+
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Proceed"
+msgstr ""
+
+#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cancel"
+msgstr "Скасувати"
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Attribute"
@@ -195,6 +275,19 @@ msgstr "Виключений"
 msgid "Normal"
 msgstr "Нормальний"
 
+#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Selected"
+msgstr "Видалити обрані"
+
+#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Clear"
+msgstr "Очистити"
+
+#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close"
+msgstr "Закрити"
+
 #: qt/base/preferences_dialog.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
 msgstr "Тип пошуку:"
@@ -252,11 +345,7 @@ msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
-msgstr ""
-"Додайте критерії в праве поле і натисніть кнопку ОК, щоб відправити "
-"дублікати, які найкраще відповідають цим критеріям, до вихідної позиції "
-"відповідних груп. Прочитайте файл довідки для отримання додаткової "
-"інформації."
+msgstr "Додайте критерії в праве поле і натисніть кнопку ОК, щоб відправити дублікати, які найкраще відповідають цим критеріям, до вихідної позиції відповідних груп. Прочитайте файл довідки для отримання додаткової інформації."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -267,19 +356,11 @@ msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr ""
-"Виникли проблеми під час обробки деяких (або всіх) файлів. Причини цих "
-"проблем описані в таблиці нижче. Ці файли не були видалені з результатів "
-"пошуку."
+msgstr "Виникли проблеми під час обробки деяких (або всіх) файлів. Причини цих проблем описані в таблиці нижче. Ці файли не були видалені з результатів пошуку."
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
 msgstr "Показати вибрані"
-
-#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close"
-msgstr "Закрити"
 
 #: qt/base/result_window.py:44 qt/base/result_window.py:170
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
@@ -300,6 +381,10 @@ msgstr "Показати тільки дуплікати"
 #: qt/base/result_window.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
 msgstr "Показати різницю"
+
+#: qt/base/result_window.py:48
+msgid "Send Marked to Recycle Bin..."
+msgstr "Надіслати позначене до кошику..."
 
 #: qt/base/result_window.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
@@ -361,6 +446,10 @@ msgstr "Позначити обране"
 msgid "Export To HTML"
 msgstr "Експорт в HTML"
 
+#: qt/base/result_window.py:64
+msgid "Export To CSV"
+msgstr ""
+
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
 msgstr "Зберегти результати ..."
@@ -384,6 +473,14 @@ msgstr "Відновити налаштування за замовчуванн�
 #: qt/base/result_window.py:163
 msgid "{} Results"
 msgstr "{} Результати"
+
+#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+msgid "Dupes Only"
+msgstr "Тільки дублікати"
+
+#: qt/base/result_window.py:172
+msgid "Delta Values"
+msgstr "Різниця"
 
 #: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -512,346 +609,212 @@ msgid "KB"
 msgstr "КБ"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details of Selected File"
-msgstr "Інформація про обраний файл"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add New Folder..."
-msgstr "Додати нову папку ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Load from file..."
-msgstr "Завантажити з файлу ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reset to Default"
-msgstr "Відновити налаштування за замовчуванням"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "The name '%@' already exists."
-msgstr "Ім’я '%@' вже існує."
-
-#: cocoa/inter/app_me.py:195
-msgid ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgid "%@ Results"
 msgstr ""
-"Ваша бібліотека iTunes містить %d мертвих треків, які готові до видалення. "
-"Продовжити?"
-
-#: cocoa/inter/app_me.py:199
-msgid "You have no dead tracks in your iTunes Library"
-msgstr "У вашій бібліотеці iTunes немає мертвих треків "
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Dead Tracks in iTunes"
-msgstr "Видалити мертві треки в iTunes"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add iPhoto Library"
-msgstr "Додати бібліотеку iPhoto"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Bring All to Front"
-msgstr "Всі на передній план"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Window"
-msgstr "Вікно"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Minimize"
-msgstr "Мінімізувати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide dupeGuru"
-msgstr "Приховати dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quit dupeGuru"
-msgstr "Вийти з dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Hide Others"
-msgstr "Сховати інші"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Show All"
-msgstr "Показати всі"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Zoom"
-msgstr "Збільшити"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Details Panel"
-msgstr "Панель інформації"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Preferences..."
-msgstr "Налаштування ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Folder Selection Window"
-msgstr "Вікно вибору папок"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Reveal Selected in Finder"
-msgstr "Показати вибране у Finder"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Close Window"
-msgstr "Закрити вікно"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Start Duplicate Scan"
-msgstr "Почати пошук дублікатів"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Export Results to XHTML"
-msgstr "Експорт результатів в XHTML"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Check for update..."
-msgstr "Перевірити оновлення ..."
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Mode"
-msgstr "Режим"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Edit"
-msgstr "Редагувати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cut"
-msgstr "Вирізати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Copy"
-msgstr "Копіювати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Paste"
-msgstr "Вставити"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Website"
-msgstr "Веб-сайт dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Re-Prioritize Results"
-msgstr "Змінити пріоритети Результати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ok"
-msgstr "Ok"
-
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Results"
-msgstr "Результати dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Опції"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter"
-msgstr "Фільтр"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Action"
 msgstr "Дія"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directories"
-msgstr "Папки"
-
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Dupes Only"
-msgstr "Тільки дублікати"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Delta"
-msgstr "Різниця"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru Preferences"
-msgstr "Налаштування dupeGuru"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "More results"
-msgstr "Більше результатів"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Fewer results"
-msgstr "Менше результатів"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter hardness:"
-msgstr "Жорсткість фільтру:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Content"
-msgstr "Зміст"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Automatically check for updates"
-msgstr "Автоматично перевіряти наявність оновлень"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore files smaller than:"
-msgstr "Ігнорувати файли менші ніж:"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Basic"
-msgstr "Основні"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Advanced"
-msgstr "Розширені"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Власна комада (аргументи: %d для дублікату, %r для посилання):"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru ME Preferences"
-msgstr "Налаштування dupeGuru ME"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Audio Content"
-msgstr "Аудіо-контент"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru PE Preferences"
-msgstr "Налаштування dupeGuru PE"
-
-#: cocoa/inter/app_me.py:163
-msgid "Talking to iTunes. Don't touch it!"
-msgstr "Виконується взаємодія з програмою iTunes. Не чіпайте її!"
-
-#: cocoa/inter/app_me.py:217
-msgid "The iTunes application couldn't be found."
-msgstr "Не можливо знайти програму iTunes"
-
-#: qt/base/result_window.py:172
-msgid "Delta Values"
-msgstr "Різниця"
-
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr "Виникла проблема зв'язку з iTunes. Операція не може бути завершена."
-
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Ignore List"
-msgstr "Чорний список"
-
-#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Selected"
-msgstr "Видалити обрані"
-
-#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Clear"
-msgstr "Очистити"
-
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Deletion Options"
+msgid "Add Aperture Library"
 msgstr ""
 
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Directly delete files"
-msgstr ""
-
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"Instead of sending files to trash, delete them directly. This option is "
-"usually used as a workaround when the normal deletion method doesn't work."
-msgstr ""
-
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Proceed"
-msgstr ""
-
-#: cocoa/inter/app_pe.py:197
-msgid "Talking to Aperture. Don't touch it!"
-msgstr ""
-
-#: cocoa/inter/app_pe.py:270
-msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr ""
-
-#: qt/base/deletion_options.py:47
-msgid " (Mac OS X or Linux only)"
-msgstr ""
-
-#: qt/base/result_window.py:48
-msgid "Send Marked to Recycle Bin..."
-msgstr "Надіслати позначене до кошику..."
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Add iPhoto Library"
+msgstr "Додати бібліотеку iPhoto"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Library"
 msgstr "Додати папку iTunes"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add Aperture Library"
-msgstr ""
+msgid "Add New Folder..."
+msgstr "Додати нову папку ..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Send Marked to Trash..."
-msgstr "Надіслати позначене до кошику..."
+msgid "Advanced"
+msgstr "Розширені"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Quick Look"
-msgstr ""
+msgid "Audio Content"
+msgstr "Аудіо-контент"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filter Results..."
-msgstr ""
-
-#: qt/base/app.py:261
-msgid "{} file (*.{})"
-msgstr ""
-
-#: qt/base/result_window.py:64
-msgid "Export To CSV"
-msgstr ""
+msgid "Automatically check for updates"
+msgstr "Автоматично перевіряти наявність оновлень"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Export Results to CSV"
-msgstr ""
+msgid "Basic"
+msgstr "Основні"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Link deleted files"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Bring All to Front"
+msgstr "Всі на передній план"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"After having deleted a duplicate, place a link targeting the reference file "
-"to replace the deleted file."
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Check for update..."
+msgstr "Перевірити оновлення ..."
 
-#: qt/base/deletion_options.py:42
-msgid "Hardlink"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Close Window"
+msgstr "Закрити вікно"
 
-#: qt/base/deletion_options.py:42
-msgid "Symlink"
-msgstr ""
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Content"
+msgstr "Зміст"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Copy"
+msgstr "Копіювати"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "Власна комада (аргументи: %d для дублікату, %r для посилання):"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Cut"
+msgstr "Вирізати"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Delta"
+msgstr "Різниця"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details of Selected File"
+msgstr "Інформація про обраний файл"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Details Panel"
+msgstr "Панель інформації"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Directories"
+msgstr "Папки"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru ME Preferences"
+msgstr "Налаштування dupeGuru ME"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru PE Preferences"
+msgstr "Налаштування dupeGuru PE"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Preferences"
+msgstr "Налаштування dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Results"
+msgstr "Результати dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "dupeGuru Website"
+msgstr "Веб-сайт dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Edit"
+msgstr "Редагувати"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to CSV"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Export Results to XHTML"
+msgstr "Експорт результатів в XHTML"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Fewer results"
+msgstr "Менше результатів"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter"
+msgstr "Фільтр"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter hardness:"
+msgstr "Жорсткість фільтру:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Filter Results..."
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Folder Selection Window"
+msgstr "Вікно вибору папок"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
 msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide dupeGuru"
+msgstr "Приховати dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Hide Others"
+msgstr "Сховати інші"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ignore files smaller than:"
+msgstr "Ігнорувати файли менші ніж:"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Load from file..."
+msgstr "Завантажити з файлу ..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Minimize"
+msgstr "Мінімізувати"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Mode"
+msgstr "Режим"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "More results"
+msgstr "Більше результатів"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Ok"
+msgstr "Ok"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Опції"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Paste"
+msgstr "Вставити"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Preferences..."
+msgstr "Налаштування ..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quick Look"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Quit dupeGuru"
+msgstr "Вийти з dupeGuru"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Re-Prioritize Results"
+msgstr "Змінити пріоритети Результати"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Remove Dead Tracks in iTunes"
+msgstr "Видалити мертві треки в iTunes"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reset to Default"
+msgstr "Відновити налаштування за замовчуванням"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
@@ -862,9 +825,33 @@ msgid "Reveal"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Reveal Selected in Finder"
+msgstr "Показати вибране у Finder"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Send Marked to Trash..."
+msgstr "Надіслати позначене до кошику..."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
 msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "%@ Results"
-msgstr ""
+msgid "Show All"
+msgstr "Показати всі"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Start Duplicate Scan"
+msgstr "Почати пошук дублікатів"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr "Ім’я '%@' вже існує."
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Window"
+msgstr "Вікно"
+
+#: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Zoom"
+msgstr "Збільшити"
