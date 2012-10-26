@@ -21,8 +21,6 @@ from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, buil
 def parse_args():
     parser = ArgumentParser()
     setup_package_argparser(parser)
-    parser.add_argument('--source', action='store_true', dest='source_pkg',
-        help="Build only a source debian package (Linux only).")
     return parser.parse_args()
 
 def package_cocoa(edition, args):
@@ -78,10 +76,11 @@ def package_windows(edition, dev):
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
-def package_debian(edition, source_pkg):
+def package_debian_distribution(edition, distribution):
     app_version = get_module_version('core_{}'.format(edition))
+    version = '{}~{}'.format(app_version, distribution)
     ed = lambda s: s.format(edition)
-    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, app_version))
+    destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, version))
     if op.exists(destpath):
         shutil.rmtree(destpath)
     srcpath = op.join(destpath, 'src')
@@ -110,16 +109,20 @@ def package_debian(edition, source_pkg):
     changelog_dest = op.join(debdest, 'changelog')
     project_name = debopts['pkgname']
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
-    build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version)
+    build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version,
+        distribution=distribution)
     shutil.copytree(op.join('build', 'help'), op.join(srcpath, 'help'))
     shutil.copytree(op.join('build', 'locale'), op.join(srcpath, 'locale'))
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
     compileall.compile_dir(srcpath)
     os.chdir(destpath)
-    cmd = "dpkg-buildpackage"
-    if source_pkg:
-        cmd += " -S"
+    cmd = "dpkg-buildpackage -S"
     os.system(cmd)
+    os.chdir('../..')
+
+def package_debian(edition):
+    for distribution in ['precise', 'quantal']:
+        package_debian_distribution(edition, distribution)
 
 def main():
     args = parse_args()
@@ -134,7 +137,7 @@ def main():
         if ISWINDOWS:
             package_windows(edition, dev)
         elif ISLINUX:
-            package_debian(edition, source_pkg=args.source_pkg)
+            package_debian(edition)
         else:
             print("Qt packaging only works under Windows or Linux.")
 
