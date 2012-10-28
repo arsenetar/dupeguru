@@ -265,7 +265,7 @@ class Results(Markable):
             try:
                 func(dupe)
                 to_remove.append(dupe)
-            except EnvironmentError as e:
+            except (EnvironmentError, UnicodeEncodeError) as e:
                 self.problems.append((dupe, str(e)))
         if remove_from_results:
             self.remove_duplicates(to_remove)
