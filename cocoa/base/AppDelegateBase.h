@@ -13,7 +13,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 #import "IgnoreListDialog.h"
-#import "HSAboutBox.h"
+#import "HSFairwareAboutBox.h"
 #import "HSRecentFiles.h"
 
 @interface AppDelegateBase : NSObject
@@ -28,7 +28,7 @@ http://www.hardcoded.net/licenses/bsd_license
     DetailsPanel *_detailsPanel;
     IgnoreListDialog *_ignoreListDialog;
     NSWindowController *_preferencesPanel;
-    HSAboutBox *_aboutBox;
+    HSFairwareAboutBox *_aboutBox;
     HSRecentFiles *_recentResults;
 }
 
@@ -72,6 +72,5 @@ http://www.hardcoded.net/licenses/bsd_license
 /* model --> view */
 - (void)showMessage:(NSString *)msg;
 - (void)setupAsRegistered;
-- (void)showFairwareNagWithPrompt:(NSString *)prompt;
 - (void)showDemoNagWithPrompt:(NSString *)prompt;
 @end

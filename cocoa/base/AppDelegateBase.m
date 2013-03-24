@@ -160,7 +160,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showAboutBox
 {
     if (_aboutBox == nil) {
-        _aboutBox = [[HSAboutBox alloc] initWithApp:model];
+        _aboutBox = [[HSFairwareAboutBox alloc] initWithApp:model];
     }
     [[_aboutBox window] makeKeyAndOrderFront:nil];
 }
@@ -263,11 +263,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)setupAsRegistered
 {
     // Nothing to do.
-}
-
-- (void)showFairwareNagWithPrompt:(NSString *)prompt
-{
-    [HSFairwareReminder showFairwareNagWithApp:[self model] prompt:prompt];
 }
 
 - (void)showDemoNagWithPrompt:(NSString *)prompt

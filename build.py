@@ -249,7 +249,7 @@ def build_cocoa_bridging_interfaces(edition):
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
     from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
-        OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyFairware)
+        OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyBaseApp, PyFairware)
     from inter.deletion_options import PyDeletionOptions, DeletionOptionsView
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
@@ -261,7 +261,7 @@ def build_cocoa_bridging_interfaces(edition):
     from inter.stats_label import PyStatsLabel, StatsLabelView
     from inter.app import PyDupeGuruBase, DupeGuruView
     appmod = importlib.import_module('inter.app_{}'.format(edition))
-    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyFairware,
+    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp, PyFairware,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
         PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuruBase,
         appmod.PyDupeGuru]
