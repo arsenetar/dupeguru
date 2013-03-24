@@ -21,7 +21,7 @@ from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
     get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, OSXAppStructure,
     build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext, copy_embeddable_python_dylib,
-    collect_stdlib_dependencies)
+    collect_stdlib_dependencies, copy)
 from hscommon import loc
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.util import ensure_folder, delete_files_with_pattern
