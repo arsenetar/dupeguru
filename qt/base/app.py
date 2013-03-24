@@ -228,10 +228,6 @@ class DupeGuru(QObject):
         self.about_box.registerButton.hide()
         self.about_box.registeredEmailLabel.setText(self.model.registration_email)
     
-    def show_fairware_nag(self, prompt):
-        reg = Registration(self.model)
-        reg.show_fairware_nag(prompt)
-    
     def show_demo_nag(self, prompt):
         reg = Registration(self.model)
         reg.show_demo_nag(prompt)
