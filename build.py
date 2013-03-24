@@ -144,11 +144,7 @@ def build_qt(edition, dev, conf):
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
     print("Creating the run.py file")
-    if conf.get('ubuntu_store'):
-        ubuntu_store_setup = "dgapp.model.registered = True; dgapp.model.registration_email = \"Ubuntu Store\""
-    else:
-        ubuntu_store_setup = ""
-    filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition, ubuntu_store_setup=ubuntu_store_setup)
+    filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition)
 
 def build_help(edition):
     print("Generating Help")

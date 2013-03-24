@@ -23,7 +23,6 @@ def main(options):
         'edition': options.edition,
         'ui': options.ui,
         'dev': options.dev,
-        'ubuntu_store': options.ubuntu_store,
     }
     json.dump(conf, open('conf.json', 'w'))
 
@@ -36,7 +35,5 @@ if __name__ == '__main__':
         help="Type of UI to build. 'qt' or 'cocoa'. Default is determined by your system.")
     parser.add_option('--dev', action='store_true', dest='dev', default=False,
         help="If this flag is set, will configure for dev builds.")
-    parser.add_option('--ubuntu-store', action='store_true', dest='ubuntu_store', default=False,
-        help="Set registration for the Ubuntu Store.")
     (options, args) = parser.parse_args()
     main(options)

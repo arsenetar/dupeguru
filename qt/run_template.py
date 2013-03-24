@@ -37,6 +37,7 @@ if __name__ == "__main__":
     from qt.{edition}.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
-    {ubuntu_store_setup}
+    if not ISWINDOWS:
+        dgapp.model.registered = True
     install_excepthook()
     sys.exit(app.exec_())
