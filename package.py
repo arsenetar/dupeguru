@@ -12,11 +12,13 @@ import compileall
 import shutil
 import json
 from argparse import ArgumentParser
+import platform
 
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
     copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
     package_cocoa_app_in_dmg, copy_all)
+from hscommon.util import find_in_path
 
 def parse_args():
     parser = ArgumentParser()
@@ -42,6 +44,7 @@ def package_windows(edition, dev):
     if op.exists(distdir):
         shutil.rmtree(distdir)
     
+    is64bit = platform.architecture()[0] == '64bit'
     # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it explicitly because of that.
     cmd = 'cxfreeze --base-name Win32GUI --target-dir "{0}" --target-name "{1}.exe" --icon {2} --exclude-modules tkinter run.py'
     target_name = {'se': 'dupeGuru', 'me': 'dupeGuru ME', 'pe': 'dupeGuru PE'}[edition]
@@ -55,9 +58,10 @@ def package_windows(edition, dev):
         copy_qt_plugins(plugin_names, plugin_dest)
         
         # Compress with UPX 
-        libs = [name for name in os.listdir(distdir) if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
-        for lib in libs:
-            print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
+        if not is64bit: # UPX doesn't work on 64 bit
+            libs = [name for name in os.listdir(distdir) if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
+            for lib in libs:
+                print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
     
     help_path = op.join('build', 'help')
     print("Copying {} to dist\\help".format(help_path))
@@ -65,10 +69,16 @@ def package_windows(edition, dev):
     locale_path = op.join('build', 'locale')
     print("Copying {} to dist\\locale".format(locale_path))
     shutil.copytree(locale_path, op.join(distdir, 'locale'))
+    if is64bit:
+        # In 64bit mode, we don't install the VC redist as a prerequisite. We just bundle the
+        # appropriate dlls.
+        shutil.copy(find_in_path('msvcr100.dll'), distdir)
+        shutil.copy(find_in_path('msvcp100.dll'), distdir)
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change
-    installer_path = op.join('qt', edition, 'installer.aip')
+    installer_file = 'installer64.aip' if is64bit else 'installer.aip'
+    installer_path = op.join('qt', edition, installer_file)
     shutil.copy(installer_path, 'installer_tmp.aip')
     print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % app_version)
     print_and_do('AdvancedInstaller.com /build installer_tmp.aip -force')
