@@ -23,7 +23,7 @@ from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, file
     build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext, copy_embeddable_python_dylib,
     collect_stdlib_dependencies)
 from hscommon import loc
-from hscommon.plat import ISOSX
+from hscommon.plat import ISOSX, ISLINUX
 from hscommon.util import ensure_folder, delete_files_with_pattern
 
 def parse_args():
@@ -185,6 +185,15 @@ def build_localizations(ui, edition):
     if op.exists(locale_dest):
         shutil.rmtree(locale_dest)
     shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
+    if ui == 'qt' and not ISLINUX:
+        print("Copying qt_*.qm files into the 'locale' folder")
+        from PyQt4.QtCore import QLibraryInfo
+        trfolder = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
+        for lang in loc.get_langs('locale'):
+            qmname = 'qt_%s.qm' % lang
+            src = op.join(trfolder, qmname)
+            if op.exists(src):
+                copy(src, op.join('build', 'locale', qmname))
 
 def build_updatepot():
     if ISOSX:
