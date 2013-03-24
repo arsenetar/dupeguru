@@ -203,8 +203,10 @@ def build_updatepot():
     print("Building columns.pot")
     loc.generate_pot(all_cores, op.join('locale', 'columns.pot'), ['coltr'])
     print("Building ui.pot")
+    # When we're not under OS X, we don't want to overwrite ui.pot because it contains Cocoa locs
+    # We want to merge the generated pot with the old pot in the most preserving way possible.
     ui_packages = ['qt', op.join('cocoa', 'inter')]
-    loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'])
+    loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'], merge=(not ISOSX))
     print("Building hscommon.pot")
     loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
