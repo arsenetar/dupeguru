@@ -143,7 +143,7 @@ def package_arch(edition):
     # need to include them).
     print("Packaging for Arch")
     ed = lambda s: s.format(edition)
-    srcpath = op.join('build', 'moneyguru-arch')
+    srcpath = op.join('build', ed('dupeguru-{}-arch'))
     packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
     if edition == 'me':
         packages.append('hsaudiotag')
