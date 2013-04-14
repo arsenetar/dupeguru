@@ -13,6 +13,7 @@ build
 dist
 install
 installer_tmp-cache
+env
 cocoa/autogen
 cocoa/*/Info.plist
 cocoa/*/build

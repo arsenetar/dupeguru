@@ -86,22 +86,27 @@ def package_windows(edition, dev):
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
+def copy_source_files(destpath, packages):
+    if op.exists(destpath):
+        shutil.rmtree(destpath)
+    os.makedirs(destpath)
+    shutil.copy('run.py', op.join(destpath, 'run.py'))
+    copy_packages(packages, destpath)
+    os.remove(op.join(destpath, 'qt', 'run_template.py')) # It doesn't belong in the package.
+    shutil.copytree(op.join('build', 'help'), op.join(destpath, 'help'))
+    shutil.copytree(op.join('build', 'locale'), op.join(destpath, 'locale'))
+    compileall.compile_dir(destpath)
+
 def package_debian_distribution(edition, distribution):
     app_version = get_module_version('core_{}'.format(edition))
     version = '{}~{}'.format(app_version, distribution)
     ed = lambda s: s.format(edition)
     destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, version))
-    if op.exists(destpath):
-        shutil.rmtree(destpath)
     srcpath = op.join(destpath, 'src')
-    os.makedirs(destpath)
-    os.makedirs(srcpath)
-    shutil.copy('run.py', op.join(srcpath, 'run.py'))
     packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
     if edition == 'me':
         packages.append('hsaudiotag')
-    copy_packages(packages, srcpath)
-    os.remove(op.join(srcpath, 'qt', 'run_template.py')) # It doesn't belong in the package.
+    copy_source_files(srcpath, packages)
     if edition == 'pe':
         os.mkdir(op.join(destpath, 'modules'))
         copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
@@ -121,18 +126,28 @@ def package_debian_distribution(edition, distribution):
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
     build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version,
         distribution=distribution)
-    shutil.copytree(op.join('build', 'help'), op.join(srcpath, 'help'))
-    shutil.copytree(op.join('build', 'locale'), op.join(srcpath, 'locale'))
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
-    compileall.compile_dir(srcpath)
     os.chdir(destpath)
     cmd = "dpkg-buildpackage -S"
     os.system(cmd)
     os.chdir('../..')
 
 def package_debian(edition):
+    print("Packaging for Ubuntu")
     for distribution in ['precise', 'quantal']:
         package_debian_distribution(edition, distribution)
+
+def package_arch(edition):
+    # For now, package_arch() will only copy the source files into build/. It copies less packages
+    # than package_debian because there are more python packages available in Arch (so we don't
+    # need to include them).
+    print("Packaging for Arch")
+    ed = lambda s: s.format(edition)
+    srcpath = op.join('build', 'moneyguru-arch')
+    packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
+    if edition == 'me':
+        packages.append('hsaudiotag')
+    copy_source_files(srcpath, packages)
 
 def main():
     args = parse_args()
@@ -147,7 +162,11 @@ def main():
         if ISWINDOWS:
             package_windows(edition, dev)
         elif ISLINUX:
-            package_debian(edition)
+            distname, _, _ = platform.dist()
+            if distname == 'arch':
+                package_arch(edition)
+            else:
+                package_debian(edition)
         else:
             print("Qt packaging only works under Windows or Linux.")
 
