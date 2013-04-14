@@ -148,6 +148,7 @@ def package_arch(edition):
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_source_files(srcpath, packages)
+    shutil.copy(op.join('images', ed('dg{}_logo_128.png')), srcpath)
 
 def main():
     args = parse_args()
