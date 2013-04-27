@@ -57,7 +57,7 @@ actionPopup.menu.addSeparator()
 for menu in (actionPopup.menu, contextMenu):
     menu.addItem("Remove Selected from Results", action=Action(owner, 'removeSelected'))
     menu.addItem("Add Selected to Ignore List", action=Action(owner, 'ignoreSelected'))
-    menu.addItem("Make Selected Reference", action=Action(owner, 'switchSelected'))
+    menu.addItem("Make Selected into Reference", action=Action(owner, 'switchSelected'))
     menu.addSeparator()
     menu.addItem("Open Selected with Default Application", action=Action(owner, 'openSelected'))
     menu.addItem("Reveal Selected in Finder", action=Action(owner, 'revealSelected'))

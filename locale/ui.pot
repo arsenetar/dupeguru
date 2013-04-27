@@ -1,6 +1,7 @@
 # 
 msgid ""
-msgstr "Content-Type: text/plain; charset=utf-8\n"
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 
 #: cocoa/inter/app.py:15 qt/base/app.py:38
@@ -404,7 +405,7 @@ msgid "Add Selected to Ignore List"
 msgstr ""
 
 #: qt/base/result_window.py:55 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Make Selected Reference"
+msgid "Make Selected into Reference"
 msgstr ""
 
 #: qt/base/result_window.py:56 cocoa/base/en.lproj/Localizable.strings:0

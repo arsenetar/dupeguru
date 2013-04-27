@@ -52,7 +52,7 @@ class ResultWindow(QMainWindow):
             ('actionReprioritize', '', '', tr("Re-Prioritize Results..."), self.reprioritizeTriggered),
             ('actionRemoveSelected', 'Ctrl+Del', '', tr("Remove Selected from Results"), self.removeSelectedTriggered),
             ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered),
-            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected Reference"), self.makeReferenceTriggered),
+            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected into Reference"), self.makeReferenceTriggered),
             ('actionOpenSelected', 'Ctrl+O', '', tr("Open Selected with Default Application"), self.openTriggered),
             ('actionRevealSelected', 'Ctrl+Shift+O', '', tr("Open Containing Folder of Selected"), self.revealTriggered),
             ('actionRenameSelected', 'F2', '', tr("Rename Selected"), self.renameTriggered),

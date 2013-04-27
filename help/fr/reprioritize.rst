@@ -3,9 +3,9 @@ Re-Prioritizing duplicates
 
 dupeGuru tries to automatically determine which duplicate should go in each group's reference
 position, but sometimes it gets it wrong. In many cases, clever dupe sorting with "Delta Values"
-and "Dupes Only" options in addition to the "Make Selected Reference" action does the trick, but
-sometimes, a more powerful option is needed. This is where the Re-Prioritization dialog comes into
-play. You can summon it through the "Re-Prioritize Results" item in the "Actions" menu.
+and "Dupes Only" options in addition to the "Make Selected into Reference" action does the trick,
+but sometimes, a more powerful option is needed. This is where the Re-Prioritization dialog comes
+into play. You can summon it through the "Re-Prioritize Results" item in the "Actions" menu.
 
 This dialog allows you to select criteria according to which a reference dupe will be selected in
 each dupe group. The list of available criteria is on the left and the list of criteria you've

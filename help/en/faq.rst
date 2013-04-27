@@ -30,7 +30,11 @@ Frequently Asked Questions
 
 .. topic:: The mark box of a file I want to delete is disabled. What must I do?
 
-    You cannot mark the reference (The first file) of a duplicate group. However, what you can do is to promote a duplicate file to reference. Thus, if a file you want to mark is reference, select a duplicate file in the group that you want to promote to reference, and click on **Actions-->Make Selected Reference**. If the reference file is from a reference folder (filename written in blue letters), you cannot remove it from the reference position.
+    You cannot mark the reference (The first file) of a duplicate group. However, what you can do
+    is to promote a duplicate file to reference. Thus, if a file you want to mark is reference,
+    select a duplicate file in the group that you want to promote to reference, and click on
+    **Actions-->Make Selected into Reference**. If the reference file is from a reference folder
+    (filename written in blue letters), you cannot remove it from the reference position.
 
 .. topic:: I have a folder from which I really don't want to delete files.
 
@@ -63,7 +67,7 @@ Frequently Asked Questions
         * Click on the "Modification" column to sort the results by modification date.
         * Click on the "Modification" column again to reverse the sort order.
         * Select all duplicates over 0.
-        * Click on **Make Selected Reference**.
+        * Click on **Make Selected into Reference**.
 
     .. topic:: I want to mark all duplicates containing the word "copy". How do I do that?
 
@@ -90,7 +94,7 @@ Frequently Asked Questions
         * Click on the "Bitrate" column to sort the results by bitrate.
         * Click on the "Bitrate" column again to reverse the sort order.
         * Select all duplicates over 0.
-        * Click on **Make Selected Reference**.
+        * Click on **Make Selected into Reference**.
 
     .. topic:: I don't want [live] and [remix] versions of my songs counted as duplicates. How do I do that?
     
