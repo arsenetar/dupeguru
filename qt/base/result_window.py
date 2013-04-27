@@ -52,7 +52,7 @@ class ResultWindow(QMainWindow):
             ('actionReprioritize', '', '', tr("Re-Prioritize Results..."), self.reprioritizeTriggered),
             ('actionRemoveSelected', 'Ctrl+Del', '', tr("Remove Selected from Results"), self.removeSelectedTriggered),
             ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered),
-            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected into Reference"), self.makeReferenceTriggered),
+            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected into Reference"), self.app.model.make_selected_reference),
             ('actionOpenSelected', 'Ctrl+O', '', tr("Open Selected with Default Application"), self.openTriggered),
             ('actionRevealSelected', 'Ctrl+Shift+O', '', tr("Open Containing Folder of Selected"), self.revealTriggered),
             ('actionRenameSelected', 'F2', '', tr("Rename Selected"), self.renameTriggered),
@@ -232,9 +232,6 @@ class ResultWindow(QMainWindow):
     
     def detailsTriggered(self):
         self.app.show_details()
-    
-    def makeReferenceTriggered(self):
-        self.app.model.make_selected_reference()
     
     def markAllTriggered(self):
         self.app.model.mark_all()
