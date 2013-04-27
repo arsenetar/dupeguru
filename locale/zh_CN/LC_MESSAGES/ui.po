@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-05 15:29+0000\n"
+"PO-Revision-Date: 2013-04-27 14:38+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -411,8 +411,8 @@ msgid "Add Selected to Ignore List"
 msgstr "将所选文件添加到忽略列表中"
 
 #: qt/base/result_window.py:55 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Make Selected Reference"
-msgstr "将所选文件设定为参照文件"
+msgid "Make Selected into Reference"
+msgstr ""
 
 #: qt/base/result_window.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"

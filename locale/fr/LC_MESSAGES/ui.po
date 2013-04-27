@@ -1,10 +1,11 @@
 # 
 # Translators:
-#   <hsoft@hardcoded.net>, 2012.
+# hsoft <hsoft@hardcoded.net>, 2012
+# hsoft <hsoft@hardcoded.net>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-05 15:39+0000\n"
+"PO-Revision-Date: 2013-04-27 14:40+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -413,7 +414,7 @@ msgid "Add Selected to Ignore List"
 msgstr "Ajouter sélectionnés à la liste de fichiers ignorés"
 
 #: qt/base/result_window.py:55 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Make Selected Reference"
+msgid "Make Selected into Reference"
 msgstr "Transformer sélectionnés en références"
 
 #: qt/base/result_window.py:56 cocoa/base/en.lproj/Localizable.strings:0

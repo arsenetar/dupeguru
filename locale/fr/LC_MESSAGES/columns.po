@@ -1,10 +1,10 @@
 # 
 # Translators:
-#   <hsoft@hardcoded.net>, 2012.
+# hsoft <hsoft@hardcoded.net>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-05 15:42+0000\n"
+"PO-Revision-Date: 2013-04-27 14:40+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
