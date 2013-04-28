@@ -1,11 +1,13 @@
 # 
 # Translators:
 # Vitu <xcoisas@me.com>, 2012
+# Vitu <xcoisas@me.com>, 2013
+# Vitu <xcoisas@me.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-28 13:56+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2013-04-28 18:40+0000\n"
+"Last-Translator: Vitu <xcoisas@me.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -24,7 +26,7 @@ msgstr "Não há duplicatas selecionadas. Nada foi feito."
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr ""
+msgstr "Você pretende abrir muitos arquivos de uma vez. Problemas podem surgir dependendo de qual app seja usado para abri-los. Continuar?"
 
 #: core/app.py:98
 msgid "will only be able to delete, move or copy 10 duplicates at once"
@@ -32,7 +34,7 @@ msgstr "poderá apagar, mover ou copiar somente 10 duplicatas por vez"
 
 #: core/app.py:232
 msgid "No duplicates found."
-msgstr "Nenhuma duplicata encontrada"
+msgstr "Nenhuma duplicata encontrada."
 
 #: core/app.py:245
 msgid "All marked files were copied successfully."
@@ -50,15 +52,15 @@ msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
-msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 duplicatas por vez."
+msgstr "Em modo demo, você não pode apagar, mover ou copiar mais do que 10 duplicatas por vez."
 
 #: core/app.py:285
 msgid "'{}' already is in the list."
-msgstr "'{}' já está na lista"
+msgstr "'{}' já está na lista."
 
 #: core/app.py:287
 msgid "'{}' does not exist."
-msgstr "'{}' não existe"
+msgstr "'{}' não existe."
 
 #: core/app.py:294
 msgid ""
@@ -104,7 +106,7 @@ msgstr "As pastas selecionadas não contém arquivos escaneáveis."
 
 #: core/app.py:603
 msgid "%s (%d discarded)"
-msgstr "%s (%d rejeitado)"
+msgstr "%s (%d rejeitado(s))"
 
 #: core/engine.py:178 core/engine.py:215
 msgid "0 matches found"
