@@ -244,8 +244,9 @@ class Results(Markable):
     def make_ref(self, dupe):
         g = self.get_group_of_duplicate(dupe)
         r = g.ref
+        if not g.switch_ref(dupe):
+            return False
         self._remove_mark_flag(dupe)
-        g.switch_ref(dupe);
         if not r.is_ref:
             self.__total_count += 1
             self.__total_size += r.size
@@ -254,6 +255,7 @@ class Results(Markable):
             self.__total_size -= dupe.size
         self.__dupes = None
         self.is_modified = True
+        return True
     
     def perform_on_marked(self, func, remove_from_results):
         # Performs `func` on all marked dupes. If an EnvironmentError is raised during the call,

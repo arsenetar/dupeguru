@@ -442,14 +442,16 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         for dupe in dupes:
             g = self.results.get_group_of_duplicate(dupe)
             if g not in changed_groups:
-                self.results.make_ref(dupe)
-                changed_groups.add(g)
+                if self.results.make_ref(dupe):
+                    changed_groups.add(g)
         # It's not always obvious to users what this action does, so to make it a bit clearer,
         # we change our selection to the ref of all changed groups. However, we also want to keep
         # the files that were ref before and weren't changed by the action. In effect, what this
         # does is that we keep our old selection, but remove all non-ref dupes from it.
-        self.selected_dupes = [d for d in self.selected_dupes
-            if self.results.get_group_of_duplicate(d).ref is d]
+        # If no group was changed, however, we don't touch the selection.
+        if changed_groups:
+            self.selected_dupes = [d for d in self.selected_dupes
+                if self.results.get_group_of_duplicate(d).ref is d]
         self.notify('results_changed')
     
     def mark_all(self):
