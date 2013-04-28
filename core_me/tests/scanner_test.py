@@ -19,6 +19,7 @@ def pytest_funcarg__fake_fileexists(request):
     # for file existence before doing the match grouping.
     monkeypatch = request.getfuncargvalue('monkeypatch')
     monkeypatch.setattr(io, 'exists', lambda _: True)
+    monkeypatch.setattr(Path, 'exists', lambda _: True)
 
 def test_priorize_me(fake_fileexists):
     # in ScannerME, bitrate goes first (right after is_ref) in priorization
