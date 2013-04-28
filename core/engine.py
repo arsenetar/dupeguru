@@ -325,14 +325,15 @@ class Group:
     
     def switch_ref(self, with_dupe):
         if self.ref.is_ref:
-            return
+            return False
         try:
             self.ordered.remove(with_dupe)
             self.ordered.insert(0, with_dupe)
             self._percentage = None
             self._matches_for_ref = None
+            return True
         except ValueError:
-            pass
+            return False
     
     dupes = property(lambda self: self[1:])
     
