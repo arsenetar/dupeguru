@@ -35,15 +35,15 @@ msgid "No duplicates found."
 msgstr "Nenhuma duplicata encontrada"
 
 #: core/app.py:245
-msgid "All marked files were copied sucessfully."
+msgid "All marked files were copied successfully."
 msgstr "Todos os arquivos marcados foram copiados com sucesso"
 
 #: core/app.py:246
-msgid "All marked files were moved sucessfully."
+msgid "All marked files were moved successfully."
 msgstr "Todos os arquivos marcados foram relocados com sucesso"
 
 #: core/app.py:247
-msgid "All marked files were sucessfully sent to Trash."
+msgid "All marked files were successfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 
 #: core/app.py:274

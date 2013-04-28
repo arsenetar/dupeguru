@@ -242,9 +242,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
                 self.view.show_problem_dialog()
             else:
                 msg = {
-                    JobType.Copy: tr("All marked files were copied sucessfully."),
-                    JobType.Move: tr("All marked files were moved sucessfully."),
-                    JobType.Delete: tr("All marked files were sucessfully sent to Trash."),
+                    JobType.Copy: tr("All marked files were copied successfully."),
+                    JobType.Move: tr("All marked files were moved successfully."),
+                    JobType.Delete: tr("All marked files were successfully sent to Trash."),
                 }[jobid]
                 self.view.show_message(msg)
     
