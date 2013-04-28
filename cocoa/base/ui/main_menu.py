@@ -52,7 +52,7 @@ actionMenu.addItem("Send Marked to Trash...", Action(None, 'trashMarked'), 'cmd+
 actionMenu.addItem("Move Marked to...", Action(None, 'moveMarked'), 'cmd+m')
 actionMenu.addItem("Copy Marked to...", Action(None, 'copyMarked'), 'cmd+alt+m')
 actionMenu.addItem("Remove Marked from Results", Action(None, 'removeMarked'), 'cmd+r')
-actionMenu.addItem("Re-Prioritize Results", Action(None, 'reprioritizeResults'))
+actionMenu.addItem("Re-Prioritize Results...", Action(None, 'reprioritizeResults'))
 actionMenu.addSeparator()
 actionMenu.addItem("Remove Selected from Results", Action(None, 'removeSelected'), 'cmd+backspace')
 actionMenu.addItem("Add Selected to Ignore List", Action(None, 'ignoreSelected'), 'cmd+g')
