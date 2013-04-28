@@ -36,6 +36,8 @@ DEBUG_MODE_PREFERENCE = 'DebugMode'
 
 MSG_NO_MARKED_DUPES = tr("There are no marked duplicates. Nothing has been done.")
 MSG_NO_SELECTED_DUPES = tr("There are no selected duplicates. Nothing has been done.")
+MSG_MANY_FILES_TO_OPEN = tr("You're about to open many files at once. Depending on what those "
+    "files are opened with, doing so can create quite a mess. Continue?")
 
 class DestType:
     Direct = 0
@@ -470,8 +472,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('marking_changed')
     
     def open_selected(self):
-        if self.selected_dupes:
-            self.view.open_path(self.selected_dupes[0].path)
+        if len(self.selected_dupes) > 10:
+            if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
+                return
+        for dupe in self.selected_dupes:
+            self.view.open_path(dupe.path)
     
     def purge_ignore_list(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-05 15:15+0000\n"
+"PO-Revision-Date: 2013-04-28 13:56+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -18,83 +18,89 @@ msgstr ""
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:96
+#: core/app.py:39
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr ""
+
+#: core/app.py:98
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "вы сможете удалить, переместить или скопировать только 10 дубликатов за один раз"
 
-#: core/app.py:230
+#: core/app.py:232
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
-#: core/app.py:243
+#: core/app.py:245
 msgid "All marked files were copied sucessfully."
 msgstr "Все отмеченные файлы были скопированы успешно."
 
-#: core/app.py:244
+#: core/app.py:246
 msgid "All marked files were moved sucessfully."
 msgstr "Все отмеченные файлы были перемещены успешно."
 
-#: core/app.py:245
+#: core/app.py:247
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Все отмеченные файлы были успешно отправлены в Корзину."
 
-#: core/app.py:272
+#: core/app.py:274
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr "Вы не можете удалять, перемещать или копировать более 10 дубликатов за один раз в демонстрационном режиме."
 
-#: core/app.py:283
+#: core/app.py:285
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:285
+#: core/app.py:287
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:292
+#: core/app.py:294
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "Все выбранные %d совпадений будут игнорироваться при всех последующих проверках. Продолжить?"
 
-#: core/app.py:352
+#: core/app.py:354
 msgid "copy"
 msgstr "копирование"
 
-#: core/app.py:352
+#: core/app.py:354
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:353
+#: core/app.py:355
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог {} для отмеченных файлов"
 
-#: core/app.py:379
+#: core/app.py:381
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:404
+#: core/app.py:406
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core/app.py:491 core/app.py:502
+#: core/app.py:502 core/app.py:513
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core/app.py:522
+#: core/app.py:533
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:542
+#: core/app.py:553
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:553
+#: core/app.py:564
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core/app.py:592
+#: core/app.py:603
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 

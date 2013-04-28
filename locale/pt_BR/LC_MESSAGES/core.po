@@ -1,11 +1,11 @@
 # 
 # Translators:
-#   <xcoisas@me.com>, 2012.
+# Vitu <xcoisas@me.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-08 20:46+0000\n"
-"Last-Translator: Vitu <xcoisas@me.com>\n"
+"PO-Revision-Date: 2013-04-28 13:56+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -20,83 +20,89 @@ msgstr "Não há duplicatas marcadas. Nada foi feito."
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Não há duplicatas selecionadas. Nada foi feito."
 
-#: core/app.py:96
+#: core/app.py:39
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr ""
+
+#: core/app.py:98
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "poderá apagar, mover ou copiar somente 10 duplicatas por vez"
 
-#: core/app.py:230
+#: core/app.py:232
 msgid "No duplicates found."
 msgstr "Nenhuma duplicata encontrada"
 
-#: core/app.py:243
+#: core/app.py:245
 msgid "All marked files were copied sucessfully."
 msgstr "Todos os arquivos marcados foram copiados com sucesso"
 
-#: core/app.py:244
+#: core/app.py:246
 msgid "All marked files were moved sucessfully."
 msgstr "Todos os arquivos marcados foram relocados com sucesso"
 
-#: core/app.py:245
+#: core/app.py:247
 msgid "All marked files were sucessfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
 
-#: core/app.py:272
+#: core/app.py:274
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr "Enquanto em modo demo, você não pode apagar, mover ou copiar mais que 10 duplicatas por vez."
 
-#: core/app.py:283
+#: core/app.py:285
 msgid "'{}' already is in the list."
 msgstr "'{}' já está na lista"
 
-#: core/app.py:285
+#: core/app.py:287
 msgid "'{}' does not exist."
 msgstr "'{}' não existe"
 
-#: core/app.py:292
+#: core/app.py:294
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
-#: core/app.py:352
+#: core/app.py:354
 msgid "copy"
 msgstr "copiar"
 
-#: core/app.py:352
+#: core/app.py:354
 msgid "move"
 msgstr "mover"
 
-#: core/app.py:353
+#: core/app.py:355
 msgid "Select a directory to {} marked files to"
 msgstr "Selecione uma pasta para {} os arquivos marcados"
 
-#: core/app.py:379
+#: core/app.py:381
 msgid "Select a destination for your exported CSV"
 msgstr "Selecione uma pasta para o CSV exportado"
 
-#: core/app.py:404
+#: core/app.py:406
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Você não possui nenhum comando personalizado. Crie um nas preferências."
 
-#: core/app.py:491 core/app.py:502
+#: core/app.py:502 core/app.py:513
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Remover %d arquivo(s) dos resultados?"
 
-#: core/app.py:522
+#: core/app.py:533
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} grupos de duplicatas alterados ao re-priorizar."
 
-#: core/app.py:542
+#: core/app.py:553
 msgid "Collecting files to scan"
 msgstr "Juntando arquivos para escanear"
 
-#: core/app.py:553
+#: core/app.py:564
 msgid "The selected directories contain no scannable file."
 msgstr "As pastas selecionadas não contém arquivos escaneáveis."
 
-#: core/app.py:592
+#: core/app.py:603
 msgid "%s (%d discarded)"
 msgstr "%s (%d rejeitado)"
 
