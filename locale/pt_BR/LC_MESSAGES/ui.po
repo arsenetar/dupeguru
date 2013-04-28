@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Vitu <xcoisas@me.com>, 2012-2013
 # Vitu <xcoisas@me.com>, 2013
 # Vitu <xcoisas@me.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-27 16:43+0000\n"
+"PO-Revision-Date: 2013-04-28 19:25+0000\n"
 "Last-Translator: Vitu <xcoisas@me.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,12 +54,12 @@ msgstr "Comunicando com o iTunes. Não mexa!"
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
-msgstr "Ocorreu um erro de comunicação com o iTunes. A operação não pode ser finalizada."
+msgstr "Ocorreu um erro de comunicação com o iTunes. A operação não pôde ser finalizada."
 
 #: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr "Sua Biblioteca do iTunes contém %d faixas sem referência prontas a serem removidas. Continuar?"
+msgstr "Remover %d faixas sem referência da Biblioteca do iTunes?"
 
 #: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
@@ -78,7 +79,7 @@ msgstr "Comunicando com o Aperture. Não mexa!"
 
 #: cocoa/inter/app_pe.py:270
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr "As Fotos apagadas do Aperture foram movidas a um projeto chamado \"dupeGuru Trash\"."
+msgstr "As fotos apagadas do Aperture foram movidas para o projeto \"dupeGuru Trash\"."
 
 #: cocoa/inter/app_pe.py:296
 msgid "The iPhoto application couldn't be found."
@@ -119,7 +120,7 @@ msgstr "Buscar Atualizaçõs"
 
 #: qt/base/app.py:102
 msgid "Open Debug Log"
-msgstr "Abrir Log de Debug"
+msgstr "Abrir Registro de Depuração"
 
 #: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
@@ -220,7 +221,7 @@ msgstr "Carregar Resultados Recentes"
 
 #: qt/base/directories_dialog.py:108 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "Selecione as pastas a serem escaneadas e pressione \"Escanear\"."
+msgstr "Selecione as pastas desejadas e clique em \"Escanear\"."
 
 #: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -236,11 +237,11 @@ msgstr "Resultados não salvos"
 
 #: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr "Você possui resultados não salvos, deseja encerrar assim mesmo?"
+msgstr "Você possui resultados não salvos, deseja encerrar mesmo assim?"
 
 #: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr "Selecione uma pasta para escanear"
+msgstr "Selecione uma pasta para adicionar ao escaneamento"
 
 #: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
@@ -260,7 +261,7 @@ msgstr "Iniciar um novo escaneamento"
 
 #: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "Você possui resultados não salvos, deseja continuar assim mesmo?"
+msgstr "Você possui resultados não salvos, deseja continuar mesmo assim?"
 
 #: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -297,7 +298,7 @@ msgstr "Tipo de Scan:"
 
 #: qt/base/preferences_dialog.py:50
 msgid "Filter Hardness:"
-msgstr "Pressão do Filtro"
+msgstr "Pressão do Filtro:"
 
 #: qt/base/preferences_dialog.py:76
 msgid "More Results"
@@ -337,7 +338,7 @@ msgstr "Comando personalizado (argumentos: %d (dup), %r (ref)):"
 
 #: qt/base/preferences_dialog.py:184
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "É necessário reiniciar o dupeGuru para que as mudanças de idioma surtam efeito"
+msgstr "É necessário reiniciar o dupeGuru para que as mudanças de idioma surtam efeito."
 
 #: qt/base/prioritize_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
@@ -359,7 +360,7 @@ msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr "Problemas ao processar alguns (ou todos) os arquivos. A causa desses problemas vem detalhada abaixo. Esses arquivos não foram removidos dos seus resultados."
+msgstr "Problemas ao processar alguns (ou todos) os arquivos. A causa dos problemas está detalhada abaixo. Esses arquivos não foram removidos dos seus resultados."
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
@@ -387,7 +388,7 @@ msgstr "Mostrar Valores Delta"
 
 #: qt/base/result_window.py:48
 msgid "Send Marked to Recycle Bin..."
-msgstr "Mover Marcados ao Lixo…"
+msgstr "Mover Marcados para o Lixo…"
 
 #: qt/base/result_window.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
@@ -451,7 +452,7 @@ msgstr "Exportar como HTML"
 
 #: qt/base/result_window.py:64
 msgid "Export To CSV"
-msgstr "Exportar Resultados para CSV"
+msgstr "Exportar como CSV"
 
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
@@ -475,7 +476,7 @@ msgstr "Restaurar Padrões"
 
 #: qt/base/result_window.py:163
 msgid "{} Results"
-msgstr "{} Resultados"
+msgstr "Resultados do {}"
 
 #: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
@@ -576,7 +577,7 @@ msgstr "Ignorar duplicatas de hardlink a um mesmo arquivo"
 #: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
 #: qt/se/preferences_dialog.py:78 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
-msgstr "Modo Debug (requer reinício)"
+msgstr "Modo de Depuração (requer reinício)"
 
 #: qt/pe/preferences_dialog.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "EXIF Timestamp"
@@ -589,7 +590,7 @@ msgstr "Coincidir fotos de dimensões diferentes"
 #: qt/pe/result_window.py:19 qt/pe/result_window.py:24
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
-msgstr "Apagar Cache de fotos"
+msgstr "Apagar Cache de Fotos"
 
 #: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
@@ -849,7 +850,7 @@ msgstr "Iniciar Escaneamento de Duplicata"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "O nome '%@' já existe"
+msgstr "O nome '%@' já existe."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Window"

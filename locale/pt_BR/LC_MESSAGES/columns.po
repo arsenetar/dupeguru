@@ -1,10 +1,11 @@
 # 
 # Translators:
-#   <xcoisas@me.com>, 2012.
+# Vitu <xcoisas@me.com>, 2013
+# Vitu <xcoisas@me.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2012-09-05 17:36+0000\n"
+"PO-Revision-Date: 2013-04-28 18:52+0000\n"
 "Last-Translator: Vitu <xcoisas@me.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgstr "Taxa de Bits"
 
 #: core_me/prioritize.py:28
 msgid "Samplerate"
-msgstr "Taxa de Bits"
+msgstr "Amostragem"
 
 #: core_me/result_table.py:20
 msgid "Size (MB)"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-28 18:40+0000\n"
+"PO-Revision-Date: 2013-04-28 18:47+0000\n"
 "Last-Translator: Vitu <xcoisas@me.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,15 +38,15 @@ msgstr "Nenhuma duplicata encontrada."
 
 #: core/app.py:245
 msgid "All marked files were copied successfully."
-msgstr "Todos os arquivos marcados foram copiados com sucesso"
+msgstr "Todos os arquivos marcados foram copiados com sucesso."
 
 #: core/app.py:246
 msgid "All marked files were moved successfully."
-msgstr "Todos os arquivos marcados foram relocados com sucesso"
+msgstr "Todos os arquivos marcados foram relocados com sucesso."
 
 #: core/app.py:247
 msgid "All marked files were successfully sent to Trash."
-msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso"
+msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso."
 
 #: core/app.py:274
 msgid ""
@@ -126,7 +126,7 @@ msgstr "%d/%d coincidentes agrupados"
 
 #: core/gui/deletion_options.py:21
 msgid "You are sending {} file(s) to the Trash."
-msgstr "Você está movendo {} arquivo(s) para o Lixo"
+msgstr "Você está movendo {} arquivo(s) para o Lixo."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -170,7 +170,7 @@ msgstr "Mais antigo"
 
 #: core/results.py:113
 msgid "%d / %d (%s / %s) duplicates marked."
-msgstr "%d / %d (%s / %s) duplicatas marcadas"
+msgstr "%d / %d (%s / %s) duplicatas marcadas."
 
 #: core/results.py:120
 msgid " filter: %s"
@@ -186,7 +186,7 @@ msgstr "Removendo coincidentes falsos"
 
 #: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
-msgstr "%d/%d coincidentes processados em oposição a lista Ignorar"
+msgstr "%d/%d coincidentes processados em oposição à lista Ignorar"
 
 #: core/scanner.py:176
 msgid "Doing group prioritization"
