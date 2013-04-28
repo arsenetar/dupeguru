@@ -449,10 +449,18 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         # the files that were ref before and weren't changed by the action. In effect, what this
         # does is that we keep our old selection, but remove all non-ref dupes from it.
         # If no group was changed, however, we don't touch the selection.
-        if changed_groups:
-            self.selected_dupes = [d for d in self.selected_dupes
-                if self.results.get_group_of_duplicate(d).ref is d]
-        self.notify('results_changed')
+        if not self.result_table.power_marker:
+            if changed_groups:
+                self.selected_dupes = [d for d in self.selected_dupes
+                    if self.results.get_group_of_duplicate(d).ref is d]
+            self.notify('results_changed')
+        else:
+            # If we're in "Dupes Only" mode (previously called Power Marker), things are a bit
+            # different. The refs are not shown in the table, and if our operation is successful,
+            # this means that there's no way to follow our dupe selection. Then, the best thing to
+            # do is to keep our selection index-wise (different dupe selection, but same index
+            # selection).
+            self.notify('results_changed_but_keep_selection')
     
     def mark_all(self):
         self.results.mark_all()
