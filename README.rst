@@ -1,18 +1,19 @@
 Contents
 ========
 
-This package contains the source for dupeGuru. To learn how to build it, refer to the "Build dupeGuru" section. Below is the description of the various subfolders:
+This package contains the source for dupeGuru. To learn how to build it, refer to the
+"Build dupeGuru" section. Below is the description of the various subfolders:
 
-- core: Contains the core logic code for dupeGuru. It's Python code written in TDD style.
+- core: Contains the core logic code for dupeGuru. It's Python code.
 - core_*: Edition-specific-cross-toolkit code written in Python.
 - cocoa: UI code for the Cocoa toolkit. It's Objective-C code.
 - qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
 - images: Images used by the different UI codebases.
-- debian_*: Skeleton files required to create a .deb package
+- debian: Skeleton files required to create a .deb package
 - help: Help document, written for Sphinx.
 
 There are also other sub-folder that comes from external repositories (automatically checked out
-with as mercurial subrepos):
+as mercurial subrepos):
 
 - hscommon: A collection of helpers used across HS applications.
 - cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
@@ -21,7 +22,8 @@ with as mercurial subrepos):
 dupeGuru Dependencies
 =====================
 
-Before being able to build dupeGuru, a few dependencies have to be installed:
+Before being able to build dupeGuru, a few dependencies have to be installed. If you use pip, you
+will not have to install them all manually (see "The easy way!" below):
 
 General dependencies
 --------------------
@@ -46,14 +48,14 @@ Windows prerequisites
 ---------------------
 
 - Visual Studio 2008 (Express is enough) is needed to build C extensions. (http://www.microsoft.com/Express/)
-- PyQt 4.7.5 (http://www.riverbankcomputing.co.uk/news)
+- PyQt 4.7+ (http://www.riverbankcomputing.co.uk/news)
 - cx_Freeze, if you want to build a exe. You don't need it if you just want to run dupeGuru. (http://cx-freeze.sourceforge.net/)
 - Advanced Installer, if you want to build the installer file. (http://www.advancedinstaller.com/)
 
 Linux prerequisites
 -------------------
 
-- PyQt 4.7.5 (http://www.riverbankcomputing.co.uk/news)
+- PyQt 4.7+ (http://www.riverbankcomputing.co.uk/news)
 
 The easy way!
 -------------
@@ -63,11 +65,14 @@ There's an easy way to install the majority of the prerequisites above, and it's
     pip install -r requirements-[osx|win].txt
 
 ([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt). 
-You might have to compile PyObjC manually (see gotchas below). Sparkle and 
-Advanced Installer, having nothing to do with Python, are also manual installs.
+
+Advanced Installer, having nothing to do with Python, needs to be installed manually.
 
 PyQt isn't in the requirements file either (there's no package uploaded on PyPI) and you also have
 to install it manually.
+
+If you use a virtualenv (which you should), you have to enable the "site-packages" option because
+dupeGuru will need the PyQt library which you'll have installed on your system.
 
 Prerequisite gotchas
 --------------------
@@ -92,17 +97,21 @@ pyqt4-dev-tools, mercurial and then python3-setuptools. Once you've done that, i
 Building dupeGuru
 =================
 
-First, make sure you meet the dependencies listed in the section above. Then you need to configure your build with:
+First, make sure you meet the dependencies listed in the section above. Then you need to configure
+your build with::
 
 	python configure.py
-	
-If you want, you can specify a UI to use with the `--ui` option. So, if you want to build dupeGuru with Qt on OS X, then you have to type `python configure.py --ui=qt`. You can also use the `--dev` flag to indicate a dev build (it will build `dg_cocoa.plugin` in alias mode and use the "dev" config in XCode).
 
-Then, just build the thing and then run it with:
+If you want, you can specify a UI to use with the ``--ui`` option. So, if you want to build dupeGuru
+with Qt on OS X, then you have to type ``python configure.py --ui=qt``. You can also use the
+``--dev`` flag to indicate a dev build (it will build `dg_cocoa.plugin` in alias mode and use the
+"dev" config in XCode).
+
+Then, just build the thing and then run it with::
 
 	python build.py
 	python run.py
 
-If you want to create ready-to-upload package, run:
+If you want to create ready-to-upload package, run::
 
 	python package.py
