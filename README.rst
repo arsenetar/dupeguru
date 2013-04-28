@@ -104,7 +104,7 @@ your build with::
 
 If you want, you can specify a UI to use with the ``--ui`` option. So, if you want to build dupeGuru
 with Qt on OS X, then you have to type ``python configure.py --ui=qt``. You can also use the
-``--dev`` flag to indicate a dev build (it will build `dg_cocoa.plugin` in alias mode and use the
+``--dev`` flag to indicate a dev build (it will build ``dg_cocoa.plugin`` in alias mode and use the
 "dev" config in XCode).
 
 Then, just build the thing and then run it with::
