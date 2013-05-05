@@ -102,16 +102,22 @@ def build_cocoa(edition, dev):
     if not op.exists(pydep_folder):
         os.mkdir(pydep_folder)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
+    appscript_pkgs = ['appscript', 'aem', 'mactypes']
     specific_packages = {
         'se': ['core_se'],
-        'me': ['core_me'],
-        'pe': ['core_pe'],
+        'me': ['core_me'] + appscript_pkgs,
+        'pe': ['core_pe'] + appscript_pkgs,
     }[edition]
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'jobprogress', 'objp',
         'send2trash'] + specific_packages
     copy_packages(tocopy, pydep_folder, create_links=dev)
     sys.path.insert(0, 'build')
-    collect_stdlib_dependencies('build/dg_cocoa.py', pydep_folder)
+    extra_deps = None
+    if edition == 'pe':
+        # ModuleFinder can't seem to correctly detect the multiprocessing dependency, so we have
+        # to manually specify it.
+        extra_deps=['multiprocessing']
+    collect_stdlib_dependencies('build/dg_cocoa.py', pydep_folder, extra_deps=extra_deps)
     del sys.path[0]
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', op.join(pydep_folder, 'inter'))
