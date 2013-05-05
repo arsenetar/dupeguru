@@ -1,3 +1,14 @@
+=== 2.7.1 (2013-05-05)
+
+* Fixed false matching bug in EXIF matching. (#219)
+* Improved "Make Selection Reference" to make it clearer. (#222)
+* Improved "Open Selected" to allow opening more than one file at once. (#142)
+* Fixed a few typos here and there. (#216 #225)
+* Tweaked the fairware dialog ([More Info](http://www.hardcoded.net/articles/phasing-out-fairware)).
+* Added Arch Linux packaging
+* Added a 64-bit build for Windows.
+* Improved Brazilian localization by Victor Figueiredo.
+
 === 2.7.0 (2012-08-11)
 
 * Added "Export to CSV". (#189)
