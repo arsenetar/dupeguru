@@ -17,7 +17,8 @@ def getmatches(files, match_scaled, j):
     timestamp2pic = defaultdict(set)
     for picture in j.iter_with_progress(files, tr("Read EXIF of %d/%d pictures")):
         timestamp = picture.exif_timestamp
-        timestamp2pic[timestamp].add(picture)
+        if timestamp:
+            timestamp2pic[timestamp].add(picture)
     if '0000:00:00 00:00:00' in timestamp2pic: # very likely false matches
         del timestamp2pic['0000:00:00 00:00:00']
     matches = []
