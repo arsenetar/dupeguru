@@ -150,12 +150,22 @@ def package_arch(edition):
     copy_source_files(srcpath, packages)
     shutil.copy(op.join('images', ed('dg{}_logo_128.png')), srcpath)
 
+def package_source_tgz(edition):
+    app_version = get_module_version('core_{}'.format(edition))
+    name = 'dupeguru-{}-src-{}.tar.gz'.format(edition, app_version)
+    dest = op.join('build', name)
+    print_and_do('hg archive -t tgz -S {}'.format(dest))
+
 def main():
     args = parse_args()
     conf = json.load(open('conf.json'))
     edition = conf['edition']
     ui = conf['ui']
     dev = conf['dev']
+    if args.src_pkg:
+        print("Creating source package for dupeGuru {}".format(edition.upper()))
+        package_source_tgz(edition)
+        return
     print("Packaging dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     if ui == 'cocoa':
         package_cocoa(edition, args)
