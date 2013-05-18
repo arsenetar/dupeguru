@@ -105,7 +105,7 @@ def build_cocoa(edition, dev):
     appscript_pkgs = ['appscript', 'aem', 'mactypes']
     specific_packages = {
         'se': ['core_se'],
-        'me': ['core_me'] + appscript_pkgs,
+        'me': ['core_me'] + appscript_pkgs + ['hsaudiotag'],
         'pe': ['core_pe'] + appscript_pkgs,
     }[edition]
     tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'jobprogress', 'objp',
