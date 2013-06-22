@@ -12,12 +12,18 @@ This package contains the source for dupeGuru. To learn how to build it, refer t
 - debian: Skeleton files required to create a .deb package
 - help: Help document, written for Sphinx.
 
-There are also other sub-folder that comes from external repositories (automatically checked out
-as mercurial subrepos):
+There are also other sub-folder that comes from external repositories and are part of this repo as
+git submodules:
 
 - hscommon: A collection of helpers used across HS applications.
 - cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
 - qtlib: A collection of helpers used across Qt UI codebases of HS applications.
+
+*Important:* For the build process to work, you have to initialize the subrepos with these
+commands::
+
+    $ git submodule init
+    $ git submodule update
 
 dupeGuru Dependencies
 =====================
@@ -80,9 +86,10 @@ Prerequisite gotchas
 Correctly installing the prerequisites is tricky. Make sure you have at least the version number 
 required for each prerequisite.
 
-If you didn't use mercurial to download this source, you probably have an incomplete source folder!
+If you didn't use git to download this source, you probably have an incomplete source folder!
 External projects (hscommon, qtlib, cocoalib) need to be at the root of the dupeGuru project folder.
-You'll have to download those separately. Or use mercurial, it's much easier.
+You'll have to download those separately. Or use git, it's much easier, and if you do, make sure
+that the submodules are correctly checked out.
 
 Another one on OS X: I wouldn't use macports/fink/whatever. Whenever I tried using those, I always 
 ended up with problems.
@@ -90,9 +97,9 @@ ended up with problems.
 Whenever you have a problem, always double-check that you're running the correct python version. 
 You'll probably have to tweak your $PATH.
 
-To setup a build machine under Ubuntu 12.04 and up, install those packages: python3-dev, python3-pyqt4,
-pyqt4-dev-tools, mercurial and then python3-setuptools. Once you've done that, install pip with
-`easy_install`. Once you've done that, you can then perform "The easy way!" installation.
+To setup a build machine under Ubuntu 12.04 and up, install those packages: python3-dev,
+python3-pyqt4, pyqt4-dev-tools, git and then python3-setuptools. Once you've done that, install pip
+with `easy_install`. Once you've done that, you can then perform "The easy way!" installation.
 
 Building dupeGuru
 =================
