@@ -154,7 +154,7 @@ def package_source_tgz(edition):
     app_version = get_module_version('core_{}'.format(edition))
     name = 'dupeguru-{}-src-{}.tar.gz'.format(edition, app_version)
     dest = op.join('build', name)
-    print_and_do('hg archive -t tgz -S {}'.format(dest))
+    print_and_do('git archive -o {} HEAD'.format(dest))
 
 def main():
     args = parse_args()
