@@ -1,0 +1,125 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:26+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "%@ is Fairware"
+msgstr "%@ is Fairware"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Although the application should continue to run after this error, it may be "
+"in an instable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Buy"
+msgstr "Buy"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Clear List"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Contribute"
+msgstr "Contribute"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Don't Send"
+msgstr "Don't Send"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Enter Key"
+msgstr "Enter Key"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Enter your key"
+msgstr "Enter your key"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Error Report"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Fairware?"
+msgstr "Fairware?"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "No"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "OK"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Please wait..."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Register"
+msgstr "Register"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Registration e-mail:"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Registration key:"
+msgstr "Registration key:"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Send"
+msgstr "Send"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
+msgstr "Something went wrong. Would you like to send the error report to Hardcoded Software?"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Status: Working..."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Submit"
+msgstr "Submit"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "This app is registered, thanks!"
+msgstr "This app is registered, thanks!"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Try"
+msgstr "Try"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Type the key you received when you contributed to %@, as well as the e-mail "
+"used as a reference for the purchase."
+msgstr "Type the key you received when you contributed to %@, as well as the e-mail used as a reference for the purchase."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress, please wait."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress..."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Yes"
+msgstr ""

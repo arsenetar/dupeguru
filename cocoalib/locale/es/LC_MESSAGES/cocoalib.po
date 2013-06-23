@@ -1,0 +1,125 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:26+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "%@ is Fairware"
+msgstr "%@ es Fairware"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Although the application should continue to run after this error, it may be "
+"in an instable state, so it is recommended that you restart the application."
+msgstr "Aunque la aplicación debería continuar funcionado tras el fallo, sin embargo podría volverse inestable. Se recomienda reiniciar la aplicación."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Buy"
+msgstr "Comprar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Clear List"
+msgstr "Limpiar lista"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Contribute"
+msgstr "Donar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Don't Send"
+msgstr "No envíar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Enter Key"
+msgstr "Introducir clave"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Enter your key"
+msgstr "Introduzca su clave"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Error Report"
+msgstr "Informe de error"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Fairware?"
+msgstr "¿Fairware?"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "No"
+msgstr "No"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "OK"
+msgstr "Aceptar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Please wait..."
+msgstr "Por favor, espere..."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Register"
+msgstr "Registrar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Registration e-mail:"
+msgstr "Correo electrónico de registro:"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Registration key:"
+msgstr "Clave de registro"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Send"
+msgstr "Enviar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
+msgstr "Se ha producido un error. ¿Desea enviar un informe de error a Harcoded Software?"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Status: Working..."
+msgstr "Estado: procesando..."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Submit"
+msgstr "Enviar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "This app is registered, thanks!"
+msgstr "La aplicación está registrada. ¡Gracias!"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Try"
+msgstr "Probar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Type the key you received when you contributed to %@, as well as the e-mail "
+"used as a reference for the purchase."
+msgstr "Escriba la clave que recibió al donar a %@, así como el correo electrónico que usó en el proceso."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress, please wait."
+msgstr "En proceso, por favor, espere."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress..."
+msgstr "En proceso..."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Yes"
+msgstr "Sí"

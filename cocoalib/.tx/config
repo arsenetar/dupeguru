@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.net
+
+[hscommon.cocoalib]
+file_filter = locale/<lang>/LC_MESSAGES/cocoalib.po
+source_file = locale/cocoalib.pot
+source_lang = en
+type = PO
