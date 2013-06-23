@@ -1,0 +1,161 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:31+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: qtlib/about_box.py:31
+msgid "About {}"
+msgstr ""
+
+#: qtlib/about_box.py:51
+msgid "Version {}"
+msgstr ""
+
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2013"
+msgstr ""
+
+#: qtlib/about_box.py:64
+msgid "UNREGISTERED"
+msgstr ""
+
+#: qtlib/about_box.py:70
+msgid "Register"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:38
+msgid "Error Report"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:42
+msgid ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:48
+msgid ""
+"Although the application should continue to run after this error, it may be "
+"in an instable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: qtlib/error_report_dialog.py:56
+msgid "Don't Send"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:60
+msgid "Send"
+msgstr ""
+
+#: qtlib/preferences.py:17
+msgid "English"
+msgstr "英语"
+
+#: qtlib/preferences.py:18
+msgid "French"
+msgstr "法语"
+
+#: qtlib/preferences.py:19
+msgid "German"
+msgstr "德语"
+
+#: qtlib/preferences.py:20
+msgid "Chinese (Simplified)"
+msgstr "简体中文"
+
+#: qtlib/preferences.py:21
+msgid "Czech"
+msgstr ""
+
+#: qtlib/preferences.py:22
+msgid "Italian"
+msgstr ""
+
+#: qtlib/preferences.py:23
+msgid "Armenian"
+msgstr ""
+
+#: qtlib/preferences.py:24
+msgid "Russian"
+msgstr ""
+
+#: qtlib/preferences.py:25
+msgid "Ukrainian"
+msgstr ""
+
+#: qtlib/preferences.py:26
+msgid "Dutch"
+msgstr ""
+
+#: qtlib/preferences.py:27
+msgid "Brazilian"
+msgstr ""
+
+#: qtlib/preferences.py:28
+msgid "Spanish"
+msgstr ""
+
+#: qtlib/recent.py:53
+msgid "Clear List"
+msgstr "清空列表"
+
+#: qtlib/reg_demo_dialog.py:35
+msgid "$appname is Fairware"
+msgstr "$appname 是一款捐助型软件"
+
+#: qtlib/reg_demo_dialog.py:49
+msgid "Try"
+msgstr "捐助"
+
+#: qtlib/reg_demo_dialog.py:52
+msgid "Enter Key"
+msgstr "输入密钥"
+
+#: qtlib/reg_demo_dialog.py:55
+msgid "Buy"
+msgstr ""
+
+#: qtlib/reg_demo_dialog.py:57
+msgid "Fairware?"
+msgstr ""
+
+#: qtlib/reg_submit_dialog.py:31
+msgid "Enter your registration key"
+msgstr "输入密钥"
+
+#: qtlib/reg_submit_dialog.py:36
+msgid ""
+"Type the key you received when you contributed to $appname, as well as the "
+"e-mail used as a reference for the purchase."
+msgstr "当您捐助 $appname 后，请输入收到的注册密钥以及电子邮件，这将作为购买凭证。"
+
+#: qtlib/reg_submit_dialog.py:48
+msgid "Registration key:"
+msgstr "密钥:"
+
+#: qtlib/reg_submit_dialog.py:51
+msgid "Registered e-mail:"
+msgstr "电子邮箱:"
+
+#: qtlib/reg_submit_dialog.py:60
+msgid "Contribute"
+msgstr "捐助"
+
+#: qtlib/reg_submit_dialog.py:71
+msgid "Cancel"
+msgstr "取消"
+
+#: qtlib/reg_submit_dialog.py:80
+msgid "Submit"
+msgstr "提交"
+
+#: qtlib/search_edit.py:41
+msgid "Search..."
+msgstr ""

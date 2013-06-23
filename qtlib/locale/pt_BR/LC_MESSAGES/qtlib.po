@@ -1,0 +1,161 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:31+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: qtlib/about_box.py:31
+msgid "About {}"
+msgstr ""
+
+#: qtlib/about_box.py:51
+msgid "Version {}"
+msgstr ""
+
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2013"
+msgstr "Direitos Autorais Hardcoded Software 2013"
+
+#: qtlib/about_box.py:64
+msgid "UNREGISTERED"
+msgstr "NÃO REGISTRADO"
+
+#: qtlib/about_box.py:70
+msgid "Register"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:38
+msgid "Error Report"
+msgstr "Relatório de Erro"
+
+#: qtlib/error_report_dialog.py:42
+msgid ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
+msgstr "Algo deu errado. Deseja enviar o relatório de erro à Hardcoded Software?"
+
+#: qtlib/error_report_dialog.py:48
+msgid ""
+"Although the application should continue to run after this error, it may be "
+"in an instable state, so it is recommended that you restart the application."
+msgstr "Embora o aplicativo continue a funcionar após este erro, ele pode estar instável. É recomendável reiniciá-lo."
+
+#: qtlib/error_report_dialog.py:56
+msgid "Don't Send"
+msgstr "Não Enviar"
+
+#: qtlib/error_report_dialog.py:60
+msgid "Send"
+msgstr "Enviar"
+
+#: qtlib/preferences.py:17
+msgid "English"
+msgstr "Inglês"
+
+#: qtlib/preferences.py:18
+msgid "French"
+msgstr "Francês"
+
+#: qtlib/preferences.py:19
+msgid "German"
+msgstr "Alemão"
+
+#: qtlib/preferences.py:20
+msgid "Chinese (Simplified)"
+msgstr "Chinês (Simplificado)"
+
+#: qtlib/preferences.py:21
+msgid "Czech"
+msgstr "Tcheco"
+
+#: qtlib/preferences.py:22
+msgid "Italian"
+msgstr "Italiano"
+
+#: qtlib/preferences.py:23
+msgid "Armenian"
+msgstr "Armênio"
+
+#: qtlib/preferences.py:24
+msgid "Russian"
+msgstr "Russo"
+
+#: qtlib/preferences.py:25
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: qtlib/preferences.py:26
+msgid "Dutch"
+msgstr "Holandês"
+
+#: qtlib/preferences.py:27
+msgid "Brazilian"
+msgstr ""
+
+#: qtlib/preferences.py:28
+msgid "Spanish"
+msgstr ""
+
+#: qtlib/recent.py:53
+msgid "Clear List"
+msgstr "Limpar Lista"
+
+#: qtlib/reg_demo_dialog.py:35
+msgid "$appname is Fairware"
+msgstr "$appname é Fairware"
+
+#: qtlib/reg_demo_dialog.py:49
+msgid "Try"
+msgstr "Testar"
+
+#: qtlib/reg_demo_dialog.py:52
+msgid "Enter Key"
+msgstr "Entrar Chave"
+
+#: qtlib/reg_demo_dialog.py:55
+msgid "Buy"
+msgstr "Comprar"
+
+#: qtlib/reg_demo_dialog.py:57
+msgid "Fairware?"
+msgstr "Fairware?"
+
+#: qtlib/reg_submit_dialog.py:31
+msgid "Enter your registration key"
+msgstr "Entre sua chave de registro"
+
+#: qtlib/reg_submit_dialog.py:36
+msgid ""
+"Type the key you received when you contributed to $appname, as well as the "
+"e-mail used as a reference for the purchase."
+msgstr "Digite a chave que você recebeu ao contribuir com o $appname, assim como o e-mail usado para a compra."
+
+#: qtlib/reg_submit_dialog.py:48
+msgid "Registration key:"
+msgstr "Chave de registro:"
+
+#: qtlib/reg_submit_dialog.py:51
+msgid "Registered e-mail:"
+msgstr "e-mail registrado:"
+
+#: qtlib/reg_submit_dialog.py:60
+msgid "Contribute"
+msgstr "Contribuir"
+
+#: qtlib/reg_submit_dialog.py:71
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: qtlib/reg_submit_dialog.py:80
+msgid "Submit"
+msgstr "Enviar"
+
+#: qtlib/search_edit.py:41
+msgid "Search..."
+msgstr "Buscar…"
