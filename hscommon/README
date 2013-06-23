@@ -1,0 +1,9 @@
+The documentation has to be built with Sphinx. You can get Sphinx at http://sphinx.pocoo.org/
+
+Once you installed it, you can build the documentation with:
+
+cd docs
+sphinx-build . ../docs_html
+
+The reason why you have to move in 'docs' is because hscommon.io conflicts with the builtin 'io'
+module. The documentation is also available online at http://www.hardcoded.net/docs/hscommon

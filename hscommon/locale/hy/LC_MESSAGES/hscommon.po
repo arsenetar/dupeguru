@@ -1,0 +1,20 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:29+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: hy\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: hscommon/reg.py:32
+msgid ""
+"{name} is fairware, which means \"open source software developed with expectation of fair contributions from users\". It's a very interesting concept, but one year of fairware has shown that most people just want to know how much it costs and not be bothered with theories about intellectual property.\n"
+"\n"
+"So I won't bother you and will be very straightforward: You can try {name} for free but you have to buy it in order to use it without limitations. In demo mode, {name} {limitation}.\n"
+"\n"
+"So it's as simple as this. If you're curious about fairware, however, I encourage you to read more about it by clicking on the \"Fairware?\" button."
+msgstr "{name}-ը fairware է, ինչը նշանակում է \"ազատ կոդով ծրագիր, որը զարգացվում է՝ ակնկալելով օգտվողների աջակցությունը\": Սա շատ հետաքրքիր սկզբունք է, սակայն մեկ տարվա fairware-ի արդյունքը ցույց է տալիս, որ շատ մարդիկ  պարզապես ցանկանում են իմանալ, թե այն ինչ արժե, բայց չեն մտահոգվում ինտելեկտուալ սեփականության մասին:\n\nՈւստի ես չեմ ցանկանում խանգարել Ձեզ և կլինեմ շատ պարզ. Կարող եք փորձել {name}-ը ազատորեն, բայց պետք է գնեք ծրագիրը՝ հանելու համար բոլոր սահմանափակումները: Փորձնական եղանակում {name} {limitation}:\n\nԱմեն ինչ պարզ է, եթե Ձեզ հետաքրքիր է fairware-ը, ապա կարող եք մանրամասն կարդաք՝ սեղմելով այս հղմանը՝ \"Fairware է՞\":"

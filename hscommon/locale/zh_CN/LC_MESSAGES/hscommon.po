@@ -1,0 +1,31 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+
+#: hscommon/reg.py:39
+msgid ""
+"{name} is Fairware, which means \"open source software developed with expectation of fair contributions from users\". Hours have been invested in this software with the expectation that users will be fair enough to compensate them. The \"Unpaid hours\" figure you see below is the hours that have yet to be compensated for this project.\n"
+"\n"
+"If you like this application, please make a contribution that you consider fair. Thanks!\n"
+"\n"
+"If you cannot afford to contribute, you can either ignore this reminder or send an e-mail at support@hardcoded.net so I can send you a registration key.\n"
+"\n"
+"This dialog doesn't show when there are no unpaid hours or when you have a valid contribution key."
+msgstr ""
+"{name} 是一款捐助软件,也就是说 \"用户对研发开源软件所花费的时间进行符合用户意愿的捐助\"。用户可以根据研发人员花费在开发软件上的时间进行合理的补偿。用户在下面看到的 \"未支付的时间\" (Unpaid hours)表示需要对该软件进行补偿的时间。\n"
+"    \n"
+"如果您喜欢这款软件，我诚挚的希望您可以进行必要的捐助。谢谢！\n"
+"\n"
+"如果您无法承担捐助，您也可以忽略此提醒，或者发送电子邮件至 support@hardcoded.net ，我会发送给您一个注册密钥。\n"
+"\n"
+"当软件没有未支付的时间或您已使用一个有效的注册密钥，此对话框将不会再显示。"
+
+#: hscommon/reg.py:51
+msgid ""
+"{name} is fairware, which means \"open source software developed with expectation of fair contributions from users\". It's a very interesting concept, but one year of fairware has shown that most people just want to know how much it costs and not be bothered with theories about intellectual property.\n"
+"\n"
+"So I won't bother you and will be very straightforward: You can try {name} for free but you have to buy it in order to use it without limitations. In demo mode, {name} {limitation}.\n"
+"\n"
+"So it's as simple as this. If you're curious about fairware, however, I encourage you to read more about it by clicking on the \"Fairware?\" button."
+msgstr ""
