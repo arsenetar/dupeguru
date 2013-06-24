@@ -1,7 +1,7 @@
-# dupeGuru README
+# dupeGuru
 
-This package contains the source for dupeGuru. To learn how to build it, refer to the
-"How to build dupeGuru from source" section. Below is the description of the various subfolders:
+This package contains the source for dupeGuru. Its documentation is
+[available online][documentation]. Here's how this source tree is organised:
 
 * core: Contains the core logic code for dupeGuru. It's Python code.
 * core_*: Edition-specific-cross-toolkit code written in Python.
@@ -10,6 +10,7 @@ This package contains the source for dupeGuru. To learn how to build it, refer t
 * images: Images used by the different UI codebases.
 * debian: Skeleton files required to create a .deb package
 * help: Help document, written for Sphinx.
+* locale: .po files for localisation.
 
 There are also other sub-folder that comes from external repositories and are part of this repo as
 git subtrees:
@@ -24,9 +25,10 @@ git subtrees:
 
 Then, you have to make sure that your system has to "non-pip-installable" prerequisites installed:
 
-* All systems: Python 3.2+
+* All systems: [Python 3.2+][python] and [distribute][distribute]
 * Mac OS X: The last XCode to have the 10.6 SDK included.
-* Windows: Visual Studio 2008, PyQt 4.7+, cx_Freeze and Advanced Installer
+* Windows: Visual Studio 2008, [PyQt 4.7+][pyqt], [cx_Freeze][cxfreeze] and
+  [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
 
 On Ubuntu, the apt-get command to install all pre-requisites is:
 
@@ -50,6 +52,18 @@ Then, you can install pip requirements in your virtualenv:
     
 ([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt).
 
+## Alternative: pyvenv
+
+If you're on Python 3.3+, you can use the built-in `pyvenv` instead of `virtualenv`. `pyvenv` is
+pretty much the same thing as `virtualenv`, except that it doesn't install distribute and pip, so it
+has to be installed manually:
+
+    $ pyvenv --system-site-packages env
+    $ source env/bin/activate
+    $ curl -O http://python-distribute.org/distribute_setup.py
+    $ python distribute_setup.py
+    $ easy_install pip
+
 ## Actual building and running
 
 With your virtualenv activated, you can build and run dupeGuru with these commands:
@@ -61,3 +75,10 @@ With your virtualenv activated, you can build and run dupeGuru with these comman
 You can also package dupeGuru into an installable package with:
     
     $ python package.py
+
+[documentation]: http://www.hardcoded.net/dupeguru/help/en/
+[python]: http://www.python.org/
+[distribute]: https://pypi.python.org/pypi/distribute
+[pyqt]: http://www.riverbankcomputing.com
+[cxfreeze]: http://cx-freeze.sourceforge.net/
+[advinst]: http://www.advancedinstaller.com
