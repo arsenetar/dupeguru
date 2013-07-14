@@ -7,9 +7,18 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
-from hscommon.util import get_file_ext
+from hscommon.util import get_file_ext, format_size
+
+from core.app import format_timestamp, format_perc, format_dupe_count
 from core import fs
 from . import exif
+
+def format_dimensions(dimensions):
+    return '%d x %d' % (dimensions[0], dimensions[1])
+
+def get_delta_dimensions(value, ref_value):
+    return (value[0]-ref_value[0], value[1]-ref_value[1])
+
 
 class Photo(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
@@ -43,6 +52,35 @@ class Photo(fs.File):
     @classmethod
     def can_handle(cls, path):
         return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
+    
+    def get_display_info(self, group, delta):
+        size = self.size
+        mtime = self.mtime
+        dimensions = self.dimensions
+        m = group.get_match_of(self)
+        if m:
+            percentage = m.percentage
+            dupe_count = 0
+            if delta:
+                r = group.ref
+                size -= r.size
+                mtime -= r.mtime
+                dimensions = get_delta_dimensions(dimensions, r.dimensions)
+        else:
+            percentage = group.percentage
+            dupe_count = len(group.dupes)
+        dupe_folder_path = getattr(self, 'display_folder_path', self.folder_path)
+        return {
+            'name': self.name,
+            'folder_path': str(dupe_folder_path),
+            'size': format_size(size, 0, 1, False),
+            'extension': self.extension,
+            'dimensions': format_dimensions(dimensions),
+            'exif_timestamp': self.exif_timestamp,
+            'mtime': format_timestamp(mtime, delta and m),
+            'percentage': format_perc(percentage),
+            'dupe_count': format_dupe_count(dupe_count),
+        }
     
     def _read_info(self, field):
         fs.File._read_info(self, field)

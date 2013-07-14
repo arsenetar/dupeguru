@@ -62,19 +62,6 @@ class DupeGuru(DupeGuruBase):
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
     
-    def _get_display_info(self, dupe, group, delta):
-        size = dupe.size
-        m = group.get_match_of(dupe)
-        if m and delta:
-            r = group.ref
-            size -= r.size
-        return {
-            'name': dupe.name,
-            'folder_path': str(dupe.folder_path),
-            'size': format_size(size, 0, 1, False),
-            'extension': dupe.extension if hasattr(dupe, 'extension') else '---',
-        }
-    
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         r = cmp_value(dupe, key)
         if delta and (key in self.result_table.DELTA_COLUMNS):
@@ -106,6 +93,19 @@ class NamedObject:
     
     def __bool__(self):
         return False #Make sure that operations are made correctly when the bool value of files is false.
+    
+    def get_display_info(self, group, delta):
+        size = self.size
+        m = group.get_match_of(self)
+        if m and delta:
+            r = group.ref
+            size -= r.size
+        return {
+            'name': self.name,
+            'folder_path': str(self.folder_path),
+            'size': format_size(size, 0, 1, False),
+            'extension': self.extension if hasattr(self, 'extension') else '---',
+        }
     
     @property
     def path(self):

@@ -5,10 +5,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon.util import format_size, format_time
-
-from core.app import (DupeGuru as DupeGuruBase, format_timestamp,
-    format_perc, format_words, format_dupe_count)
+from core.app import DupeGuru as DupeGuruBase
 from . import prioritize
 from . import __appname__
 from . import scanner, fs
@@ -23,48 +20,6 @@ class DupeGuru(DupeGuruBase):
         DupeGuruBase.__init__(self, view, appdata)
         self.scanner = scanner.ScannerME()
         self.directories.fileclasses = [fs.MusicFile]
-    
-    def _get_display_info(self, dupe, group, delta):
-        size = dupe.size
-        duration = dupe.duration
-        bitrate = dupe.bitrate
-        samplerate = dupe.samplerate
-        mtime = dupe.mtime
-        m = group.get_match_of(dupe)
-        if m:
-            percentage = m.percentage
-            dupe_count = 0
-            if delta:
-                r = group.ref
-                size -= r.size
-                duration -= r.duration
-                bitrate -= r.bitrate
-                samplerate -= r.samplerate
-                mtime -= r.mtime
-        else:
-            percentage = group.percentage
-            dupe_count = len(group.dupes)
-        dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
-        return {
-            'name': dupe.name,
-            'folder_path': str(dupe_folder_path),
-            'size': format_size(size, 2, 2, False),
-            'duration': format_time(duration, with_hours=False),
-            'bitrate': str(bitrate),
-            'samplerate': str(samplerate),
-            'extension': dupe.extension,
-            'mtime': format_timestamp(mtime,delta and m),
-            'title': dupe.title,
-            'artist': dupe.artist,
-            'album': dupe.album,
-            'genre': dupe.genre,
-            'year': dupe.year,
-            'track': str(dupe.track),
-            'comment': dupe.comment,
-            'percentage': format_perc(percentage),
-            'words': format_words(dupe.words) if hasattr(dupe, 'words') else '',
-            'dupe_count': format_dupe_count(dupe_count),
-        }
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if key == 'folder_path':

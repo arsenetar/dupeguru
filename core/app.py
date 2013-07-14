@@ -128,9 +128,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             child.connect()
     
     #--- Virtual
-    def _get_display_info(self, dupe, group, delta):
-        raise NotImplementedError()
-    
     def _prioritization_categories(self):
         raise NotImplementedError()
     
@@ -389,7 +386,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if (dupe is None) or (group is None):
             return empty_data()
         try:
-            return self._get_display_info(dupe, group, delta)
+            return dupe.get_display_info(group, delta)
         except Exception as e:
             logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
             return empty_data()

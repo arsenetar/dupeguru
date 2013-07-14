@@ -145,6 +145,11 @@ class File:
             raise OperationError(self)
         self.path = destpath
     
+    def get_display_info(self, group, delta):
+        """Returns a display-ready dict of dupe's data.
+        """
+        raise NotImplementedError()
+    
     #--- Properties
     @property
     def extension(self):
