@@ -31,6 +31,10 @@ class DeletionOptions(GUIObject):
         try:
             os.symlink()
         except NotImplementedError:
+            # Windows XP, not supported
+            return False
+        except OSError:
+            # Vista+, symbolic link privilege not held
             return False
         except TypeError:
             # wrong number of arguments
