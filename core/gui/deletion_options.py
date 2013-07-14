@@ -5,6 +5,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import os
+
 from hscommon.gui.base import GUIObject
 from hscommon.trans import tr
 
@@ -21,4 +23,16 @@ class DeletionOptions(GUIObject):
         msg = tr("You are sending {} file(s) to the Trash.").format(mark_count)
         self.view.update_msg(msg)
         return self.view.show()
+    
+    def supports_links(self):
+        # When on a platform that doesn't implement it, calling os.symlink() (with the wrong number
+        # of arguments) raises NotImplementedError, which allows us to gracefully check for the
+        # feature.
+        try:
+            os.symlink()
+        except NotImplementedError:
+            return False
+        except TypeError:
+            # wrong number of arguments
+            return True
     

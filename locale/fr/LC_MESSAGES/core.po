@@ -1,4 +1,3 @@
-# 
 # Translators:
 # hsoft <hsoft@hardcoded.net>, 2013
 msgid ""
@@ -24,7 +23,9 @@ msgstr "Aucun doublon sélectionné. Rien à faire."
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr "Beaucoup de fichiers seront ouverts en même temps. Cela peut gravement encombrer votre système. Continuer?"
+msgstr ""
+"Beaucoup de fichiers seront ouverts en même temps. Cela peut gravement "
+"encombrer votre système. Continuer?"
 
 #: core/app.py:98
 msgid "will only be able to delete, move or copy 10 duplicates at once"
@@ -44,13 +45,16 @@ msgstr "Tous les fichiers marqués ont été déplacés correctement."
 
 #: core/app.py:247
 msgid "All marked files were successfully sent to Trash."
-msgstr "Tous les fichiers marqués ont été correctement envoyés à la corbeille."
+msgstr ""
+"Tous les fichiers marqués ont été correctement envoyés à la corbeille."
 
 #: core/app.py:274
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
-msgstr "Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la fois en mode démo."
+msgstr ""
+"Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la fois"
+" en mode démo."
 
 #: core/app.py:285
 msgid "'{}' already is in the list."
@@ -84,25 +88,26 @@ msgstr "Choisissez une destination pour votre exportation CSV"
 
 #: core/app.py:406
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
+msgstr ""
+"Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: core/app.py:502 core/app.py:513
+#: core/app.py:512 core/app.py:523
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: core/app.py:533
+#: core/app.py:543
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} groupes de doublons ont été modifiés par la re-prioritisation."
 
-#: core/app.py:553
+#: core/app.py:563
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:564
+#: core/app.py:574
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:603
+#: core/app.py:613
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -118,17 +123,19 @@ msgstr "%d paires trouvées"
 msgid "Read size of %d/%d files"
 msgstr "Lu la taille de %d/%d fichiers"
 
-#: core/engine.py:360
+#: core/engine.py:361
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d paires groupées"
 
-#: core/gui/deletion_options.py:21
+#: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Vous envoyez {} fichier(s) à la corbeille."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle contient?"
+msgstr ""
+"Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle "
+"contient?"
 
 #: core/prioritize.py:68
 msgid "None"

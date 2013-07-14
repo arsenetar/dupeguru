@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -26,7 +25,9 @@ msgstr ""
 
 #: core/app.py:98
 msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr "вы сможете удалить, переместить или скопировать только 10 дубликатов за один раз"
+msgstr ""
+"вы сможете удалить, переместить или скопировать только 10 дубликатов за один"
+" раз"
 
 #: core/app.py:232
 msgid "No duplicates found."
@@ -48,7 +49,9 @@ msgstr "Все отмеченные файлы были успешно отпр�
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
-msgstr "Вы не можете удалять, перемещать или копировать более 10 дубликатов за один раз в демонстрационном режиме."
+msgstr ""
+"Вы не можете удалять, перемещать или копировать более 10 дубликатов за один "
+"раз в демонстрационном режиме."
 
 #: core/app.py:285
 msgid "'{}' already is in the list."
@@ -62,7 +65,9 @@ msgstr ""
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "Все выбранные %d совпадений будут игнорироваться при всех последующих проверках. Продолжить?"
+msgstr ""
+"Все выбранные %d совпадений будут игнорироваться при всех последующих "
+"проверках. Продолжить?"
 
 #: core/app.py:354
 msgid "copy"
@@ -84,23 +89,23 @@ msgstr ""
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core/app.py:502 core/app.py:513
+#: core/app.py:512 core/app.py:523
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core/app.py:533
+#: core/app.py:543
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:553
+#: core/app.py:563
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:564
+#: core/app.py:574
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core/app.py:603
+#: core/app.py:613
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -116,17 +121,18 @@ msgstr "%d совпадений найдено"
 msgid "Read size of %d/%d files"
 msgstr "Подсчитан размер %d/%d файлов"
 
-#: core/engine.py:360
+#: core/engine.py:361
 msgid "Grouped %d/%d matches"
 msgstr "Группировка %d/%d совпадений"
 
-#: core/gui/deletion_options.py:21
+#: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Вы действительно хотите удалить все элементы %d из списка игнорирования?"
+msgstr ""
+"Вы действительно хотите удалить все элементы %d из списка игнорирования?"
 
 #: core/prioritize.py:68
 msgid "None"

@@ -1,4 +1,3 @@
-# 
 # Translators:
 # hsoft <hsoft@hardcoded.net>, 2012
 # hsoft <hsoft@hardcoded.net>, 2013
@@ -53,12 +52,16 @@ msgstr "En communication avec iTunes. N'y touchez pas!"
 msgid ""
 "There were communication problems with iTunes. The operation couldn't be "
 "completed."
-msgstr "Il y a eu des problèmes de communication avec iTunes. L'opération n'a pas pu être complétée."
+msgstr ""
+"Il y a eu des problèmes de communication avec iTunes. L'opération n'a pas pu"
+" être complétée."
 
 #: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr "Votre librairie iTunes contient %d tracks mortes qui seront retirées. Continuer?"
+msgstr ""
+"Votre librairie iTunes contient %d tracks mortes qui seront retirées. "
+"Continuer?"
 
 #: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
@@ -78,7 +81,9 @@ msgstr "En communication avec Aperture. N'y touchez pas!"
 
 #: cocoa/inter/app_pe.py:270
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr "Les photos supprimés d'Aperture sont dans le projet nommé \"dupeGuru Trash\"."
+msgstr ""
+"Les photos supprimés d'Aperture sont dans le projet nommé \"dupeGuru "
+"Trash\"."
 
 #: cocoa/inter/app_pe.py:296
 msgid "The iPhoto application couldn't be found."
@@ -125,9 +130,11 @@ msgstr "Ouvrir logs de déboguage"
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
-msgstr "Une action précédente est encore en cours. Attendez quelques secondes avant d'en repartir une nouvelle."
+msgstr ""
+"Une action précédente est encore en cours. Attendez quelques secondes avant "
+"d'en repartir une nouvelle."
 
-#: qt/base/app.py:261
+#: qt/base/app.py:257
 msgid "{} file (*.{})"
 msgstr "Fichier {} (*.{})"
 
@@ -143,7 +150,9 @@ msgstr "Remplacer les fichiers effacés par des liens"
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr "Après avoir effacé un fichier, remplacer celui-ci par un lien vers le fichier référence."
+msgstr ""
+"Après avoir effacé un fichier, remplacer celui-ci par un lien vers le "
+"fichier référence."
 
 #: qt/base/deletion_options.py:42
 msgid "Hardlink"
@@ -153,10 +162,6 @@ msgstr "Hardlink"
 msgid "Symlink"
 msgstr "Symlink"
 
-#: qt/base/deletion_options.py:47
-msgid " (Mac OS X or Linux only)"
-msgstr " (Mac OS X ou Linux seulement)"
-
 #: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Supprimer les fichiers directement"
@@ -165,7 +170,9 @@ msgstr "Supprimer les fichiers directement"
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
-msgstr "Au lieu de passer par la corbeille, supprimer directement. Cette option n'est généralement utilisée qu'en cas de problème."
+msgstr ""
+"Au lieu de passer par la corbeille, supprimer directement. Cette option "
+"n'est généralement utilisée qu'en cas de problème."
 
 #: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
@@ -250,7 +257,7 @@ msgstr "Sélectionnez un fichier résultats à charger"
 msgid "All Files (*.*)"
 msgstr "Tout les fichiers (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:290
+#: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Résultats dupeGuru (*.dupeguru)"
 
@@ -260,7 +267,8 @@ msgstr "Commencer un nouveau scan"
 
 #: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
+msgstr ""
+"Vos résultats ne sont pas sauvegardés. Voulez-vous vraiment continuer?"
 
 #: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -348,7 +356,10 @@ msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
-msgstr "Ajoutez des critères dans la liste de droite pour envoyer les doublons qui correspondent le plus à ces critère à la position de référence. Une lecture préalable du fichier d'aide est conseillée."
+msgstr ""
+"Ajoutez des critères dans la liste de droite pour envoyer les doublons qui "
+"correspondent le plus à ces critère à la position de référence. Une lecture "
+"préalable du fichier d'aide est conseillée."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -359,7 +370,10 @@ msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr "Des problèmes ont été rencontrés lors du traitement de certains fichiers. La nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers n'ont pas été retirés des résultats."
+msgstr ""
+"Des problèmes ont été rencontrés lors du traitement de certains fichiers. La"
+" nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers "
+"n'ont pas été retirés des résultats."
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
@@ -401,7 +415,7 @@ msgstr "Copier marqués vers..."
 msgid "Remove Marked from Results"
 msgstr "Retirer marqués des résultats"
 
-#: qt/base/result_window.py:52
+#: qt/base/result_window.py:52 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
 msgstr "Re-prioriser les résultats"
 
@@ -485,7 +499,7 @@ msgstr "Sans réf."
 msgid "Delta Values"
 msgstr "Delta"
 
-#: qt/base/result_window.py:289 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Sélectionnez un fichier résultats dans lequel sauvegarder"
 
@@ -808,10 +822,6 @@ msgid "Quit dupeGuru"
 msgstr "Quitter dupeGuru"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Re-Prioritize Results"
-msgstr "Re-prioriser les résultats"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
 msgstr "Retirer les tracks mortes dans iTunes"
 
@@ -858,3 +868,13 @@ msgstr "Fenêtre"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Réduire/agrandir"
+
+#: qt/base/deletion_options.py:46
+msgid " (unsupported)"
+msgstr ""
+
+#~ msgid " (Mac OS X or Linux only)"
+#~ msgstr " (Mac OS X ou Linux seulement)"
+
+#~ msgid "Re-Prioritize Results"
+#~ msgstr "Re-prioriser les résultats"

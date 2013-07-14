@@ -144,10 +144,6 @@ msgstr ""
 msgid "Symlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:47
-msgid " (Mac OS X or Linux only)"
-msgstr ""
-
 #: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
@@ -844,4 +840,8 @@ msgstr ""
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
+msgstr ""
+
+#: qt/base/deletion_options.py:46
+msgid " (unsupported)"
 msgstr ""

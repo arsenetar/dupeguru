@@ -72,23 +72,23 @@ msgstr ""
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core/app.py:504 core/app.py:515
+#: core/app.py:512 core/app.py:523
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core/app.py:535
+#: core/app.py:543
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:555
+#: core/app.py:563
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core/app.py:566
+#: core/app.py:574
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core/app.py:605
+#: core/app.py:613
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Grouped %d/%d matches"
 msgstr ""
 
-#: core/gui/deletion_options.py:21
+#: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 

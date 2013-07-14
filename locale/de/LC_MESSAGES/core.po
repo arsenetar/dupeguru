@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -82,25 +81,27 @@ msgstr ""
 
 #: core/app.py:406
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr "Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen konfigurieren."
+msgstr ""
+"Sie haben keinen eigenen Befehl erstellt. Bitte in den Einstellungen "
+"konfigurieren."
 
-#: core/app.py:502 core/app.py:513
+#: core/app.py:512 core/app.py:523
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
 
-#: core/app.py:533
+#: core/app.py:543
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:553
+#: core/app.py:563
 msgid "Collecting files to scan"
 msgstr "Sammle Dateien zum Scannen"
 
-#: core/app.py:564
+#: core/app.py:574
 msgid "The selected directories contain no scannable file."
 msgstr "Der ausgewählte Ordner enthält keine scannbare Dateien."
 
-#: core/app.py:603
+#: core/app.py:613
 msgid "%s (%d discarded)"
 msgstr "%s (%d verworfen)"
 
@@ -116,11 +117,11 @@ msgstr "%d Paare gefunden"
 msgid "Read size of %d/%d files"
 msgstr "Lese Größe von %d/%d Dateien"
 
-#: core/engine.py:360
+#: core/engine.py:361
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d Paare gruppiert"
 
-#: core/gui/deletion_options.py:21
+#: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 

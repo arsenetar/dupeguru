@@ -9,7 +9,6 @@
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
 
-from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from qtlib.radio_box import RadioBox
 
@@ -19,8 +18,8 @@ class DeletionOptions(QDialog):
     def __init__(self, parent, model):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         QDialog.__init__(self, parent, flags)
-        self._setupUi()
         self.model = model
+        self._setupUi()
         self.model.view = self
         
         self.buttonBox.accepted.connect(self.accept)
@@ -41,10 +40,10 @@ class DeletionOptions(QDialog):
         self.verticalLayout.addWidget(self.linkMessageLabel)
         self.linkTypeRadio = RadioBox(items=[tr("Symlink"), tr("Hardlink")], spread=False)
         self.verticalLayout.addWidget(self.linkTypeRadio)
-        if not (ISOSX or ISLINUX):
+        if not self.model.supports_links():
             self.linkCheckbox.setEnabled(False)
             self.linkTypeRadio.setEnabled(False)
-            self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (Mac OS X or Linux only)"))
+            self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (unsupported)"))
         self.directCheckbox = QCheckBox(tr("Directly delete files"))
         self.verticalLayout.addWidget(self.directCheckbox)
         text = tr("Instead of sending files to trash, delete them directly. This option is usually "

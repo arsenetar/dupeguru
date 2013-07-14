@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -48,7 +47,9 @@ msgstr "Усі позначені файли були успішно відпр�
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
-msgstr "Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу в демонстраційному режимі."
+msgstr ""
+"Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
+" в демонстраційному режимі."
 
 #: core/app.py:285
 msgid "'{}' already is in the list."
@@ -62,7 +63,9 @@ msgstr "'{}' не існує."
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "Усі обрані %d результатів будуть ігноруватися під час усіх наступних пошуків. Продовжити?"
+msgstr ""
+"Усі обрані %d результатів будуть ігноруватися під час усіх наступних "
+"пошуків. Продовжити?"
 
 #: core/app.py:354
 msgid "copy"
@@ -84,23 +87,23 @@ msgstr ""
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:502 core/app.py:513
+#: core/app.py:512 core/app.py:523
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:533
+#: core/app.py:543
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:553
+#: core/app.py:563
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:564
+#: core/app.py:574
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:603
+#: core/app.py:613
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
@@ -116,11 +119,11 @@ msgstr "%d результатів знайдено"
 msgid "Read size of %d/%d files"
 msgstr "Прочитано розмір %d/%d файлів"
 
-#: core/engine.py:360
+#: core/engine.py:361
 msgid "Grouped %d/%d matches"
 msgstr "Згруповано %d/%d результатів"
 
-#: core/gui/deletion_options.py:21
+#: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
