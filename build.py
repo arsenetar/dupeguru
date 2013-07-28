@@ -158,7 +158,7 @@ def build_help(edition):
     help_basepath = op.join(current_path, 'help', 'en')
     help_destpath = op.join(current_path, 'build', 'help'.format(edition))
     changelog_path = op.join(current_path, 'help', 'changelog_{}'.format(edition))
-    tixurl = "https://hardcoded.lighthouseapp.com/projects/31699-dupeguru/tickets/{0}"
+    tixurl = "https://github.com/hsoft/dupeguru/issues/{}"
     appname = {'se': 'dupeGuru', 'me': 'dupeGuru Music Edition', 'pe': 'dupeGuru Picture Edition'}[edition]
     homepage = 'http://www.hardcoded.net/dupeguru{}/'.format('_' + edition if edition != 'se' else '')
     confrepl = {'edition': edition, 'appname': appname, 'homepage': homepage, 'language': 'en'}
