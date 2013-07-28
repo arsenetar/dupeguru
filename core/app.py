@@ -136,17 +136,25 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     #--- Private
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        if key == 'percentage':
-            m = get_group().get_match_of(dupe)
-            return m.percentage
-        if key == 'dupe_count':
-            return 0
         if key == 'marked':
             return self.results.is_marked(dupe)
-        r = cmp_value(dupe, key)
-        if delta and (key in self.result_table.DELTA_COLUMNS):
-            r -= cmp_value(get_group().ref, key)
-        return r
+        if key == 'percentage':
+            m = get_group().get_match_of(dupe)
+            result = m.percentage
+        elif key == 'dupe_count':
+            result = 0
+        else:
+            result = cmp_value(dupe, key)
+        if delta:
+            refval = getattr(get_group().ref, key)
+            if key in self.result_table.DELTA_COLUMNS:
+                result -= refval
+            else:
+                # We use directly getattr() because cmp_value() does thing that we don't want to do
+                # when we want to determine whether two values are exactly the same.
+                same = getattr(dupe, key) == refval
+                result = (same, result)
+        return result
     
     def _get_group_sort_key(self, group, key):
         if key == 'percentage':

@@ -31,7 +31,7 @@ class ResultsModel(Table):
         elif role == Qt.ForegroundRole:
             if row.isref:
                 return QBrush(Qt.blue)
-            elif self.model.delta_values and column.name in self.model.DELTA_COLUMNS:
+            elif row.is_cell_delta(column.name):
                 return QBrush(QColor(255, 142, 40)) # orange
         elif role == Qt.FontRole:
             isBold = row.isref

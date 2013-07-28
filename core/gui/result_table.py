@@ -21,6 +21,30 @@ class DupeRow(Row):
         self._dupe = dupe
         self._data = None
         self._data_delta = None
+        self._delta_columns = None
+    
+    def is_cell_delta(self, column_name):
+        """Returns whether a cell is in delta mode (orange color).
+        
+        If the result table is in delta mode, returns True if the column is one of the "delta
+        columns", that is, one of the columns that display a a differential value rather than an
+        absolute value.
+        
+        If not, returns True if the dupe's value is different from its ref value.
+        """
+        if not self.table.delta_values:
+            return False
+        if self.isref:
+            return False
+        if self._delta_columns is None:
+            # table.DELTA_COLUMNS are always "delta"
+            self._delta_columns = self.table.DELTA_COLUMNS.copy()
+            dupe_info = self.data
+            ref_info = self._group.ref.get_display_info(group=self._group, delta=False)
+            for key, value in dupe_info.items():
+                if ref_info[key] != value:
+                    self._delta_columns.add(key)
+        return column_name in self._delta_columns
     
     @property
     def data(self):

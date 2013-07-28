@@ -54,6 +54,8 @@ Les deux modes ensemble
 
 Quand on active ces deux modes ensemble, il est alors possible de faire de la sélection de ficher assez avancée parce que le tri de fichier se fait alors en fonction des valeurs delta. Il devient alors possible de, par exemple, sélectionner tous les fichiers qui ont une différence de plus de 300 KB par rapport à leur référence, ou d'autres trucs comme ça.
 
+.. todo:: Add "Non-numerical delta" information.
+
 Filtrer les résultats
 ----------------------
 

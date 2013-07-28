@@ -62,15 +62,6 @@ class DupeGuru(DupeGuruBase):
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
     
-    def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        r = cmp_value(dupe, key)
-        if delta and (key in self.result_table.DELTA_COLUMNS):
-            r -= cmp_value(get_group().ref, key)
-        return r
-    
-    def _get_group_sort_key(self, group, key):
-        return cmp_value(group.ref, key)
-    
     def _prioritization_categories(self):
         return prioritize.all_categories()
     

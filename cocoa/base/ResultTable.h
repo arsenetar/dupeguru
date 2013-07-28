@@ -13,7 +13,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @interface ResultTable : HSTable <QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 {
-    NSSet *_deltaColumns;
 }
 - (id)initWithPyRef:(PyObject *)aPyRef view:(NSTableView *)aTableView;
 - (PyResultTable *)model;

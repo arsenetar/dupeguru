@@ -20,14 +20,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (id)initWithPyRef:(PyObject *)aPyRef view:(NSTableView *)aTableView
 {
     self = [super initWithPyRef:aPyRef wrapperClass:[PyResultTable class] callbackClassName:@"ResultTableView" view:aTableView];
-    _deltaColumns = [[NSSet setWithArray:[[self model] deltaColumns]] retain];
     return self;
-}
-
-- (void)dealloc
-{
-    [_deltaColumns release];
-    [super dealloc];
 }
 
 - (PyResultTable *)model
@@ -132,10 +125,8 @@ http://www.hardcoded.net/licenses/bsd_license
             color = [NSColor selectedTextColor];
         }
         else if (isMarkable) {
-            if ([self deltaValuesMode]) {
-                if ([_deltaColumns containsObject:[column identifier]]) {
-                    color = [NSColor orangeColor];
-                }
+            if ([[self model] isDeltaAtRow:row column:[column identifier]]) {
+                color = [NSColor orangeColor];
             }
         }
         else {

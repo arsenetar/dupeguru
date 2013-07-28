@@ -21,9 +21,6 @@ from jobprogress.job import Job
 from .base import DupeGuru, TestApp
 from .results_test import GetTestGroups
 from .. import app, fs, engine
-from ..gui.details_panel import DetailsPanel
-from ..gui.directory_tree import DirectoryTree
-from ..gui.result_table import ResultTable
 from ..scanner import ScanType
 
 def add_fake_files_to_directories(directories, files):

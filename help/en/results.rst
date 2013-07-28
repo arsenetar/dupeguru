@@ -48,12 +48,29 @@ The dupeGuru results, when in normal mode, are sorted according to duplicate gro
 Delta Values
 ------------
 
-If you turn this switch on, some columns will display the value relative to the duplicate's reference instead of the absolute values. These delta values will also be displayed in a different color so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference is 1.4 MB, the Size column will display -0.2 MB.
+If you turn this switch on, numerical columns will display the value relative to the duplicate's
+reference instead of the absolute values. These delta values will also be displayed in a different
+color, orange,  so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference
+is 1.4 MB, the Size column will display -0.2 MB.
+
+Moreover, non-numerical values will also be in orange if their value is different from their
+reference, and stay black if their value is the same. Combined with column sorting in Dupes Only
+mode, this allows for very powerful post-scan filtering.
 
 Dupes Only and Delta Values
 ---------------------------
 
-The Dupes Only mode unveil its true power when you use it with the Delta Values switch turned on. When you turn it on, relative values will be displayed instead of absolute ones. So if, for example, you want to remove from your results all duplicates that are more than 300 KB away from their reference, you could sort the dupes only results by Size, select all duplicates under -300 in the Size column, delete them, and then do the same for duplicates over 300 at the bottom of the list.
+The Dupes Only mode unveil its true power when you use it with the Delta Values switch turned on.
+When you turn it on, relative values will be displayed instead of absolute ones. So if, for example,
+you want to remove from your results all duplicates that are more than 300 KB away from their
+reference, you could sort the dupes only results by Size, select all duplicates under -300 in the
+Size column, delete them, and then do the same for duplicates over 300 at the bottom of the list.
+
+Same thing for non-numerical values: When Dupes Only and Delta Values are enabled at the same time,
+column sorting groups rows depending on whether they're orange or not. Example: You ran a contents
+scan, but you would only like to delete duplicates that have the same filename? Sort by filename
+and all dupes with their filename attribute being the same as the reference will be grouped
+together, their value being in black.
 
 You could also use it to change the reference priority of your duplicate list. When you make a fresh
 scan, if there are no reference folders, the reference file of every group is the biggest file. If
@@ -61,9 +78,10 @@ you want to change that, for example, to the latest modification time, you can s
 results by modification time in **descending** order, select all duplicates with a modification time
 delta value higher than 0 and click on **Make Selected into Reference**. The reason why you must
 make the sort order descending is because if 2 files among the same duplicate group are selected
-when you click on **Make Selected into Reference**, only the first of the list will be made reference,
-the other will be ignored. And since you want the last modified file to be reference, having the
-sort order descending assures you that the first item of the list will be the last modified.
+when you click on **Make Selected into Reference**, only the first of the list will be made
+reference, the other will be ignored. And since you want the last modified file to be reference,
+having the sort order descending assures you that the first item of the list will be the last
+modified.
 
 Filtering
 ---------

@@ -17,11 +17,12 @@ class PyResultTable(PyTable):
     def setDeltaValuesMode_(self, value: bool):
         self.model.delta_values = value
     
-    def deltaColumns(self) -> list:
-        return list(self.model.DELTA_COLUMNS)
-    
     def valueForRow_column_(self, row_index: int, column: str) -> object:
         return self.model.get_row_value(row_index, column)
+    
+    def isDeltaAtRow_column_(self, row_index: int, column: str) -> bool:
+        row = self.model[row_index]
+        return row.is_cell_delta(column)
     
     def renameSelected_(self, newname: str) -> bool:
         return self.model.rename_selected(newname)

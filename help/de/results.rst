@@ -28,6 +28,8 @@ Markierung und Auswahl
 
 Ein **markiertes** Duplikat ist ein Duplikat, dessen kleine Box ein Häkchen hat. Ein **ausgewähltes** Duplikat ist hervorgehoben. Mehrfachauswahl wird in dupeGuru über den normalen Weg erreicht (Shift/Command/Steuerung Klick). Sie können die Markierung aller Duplikate umschalten, indem sie **Leertaste** drücken.
 
+.. todo:: Add "Non-numerical delta" information.
+
 Nur Duplikate anzeigen
 ----------------------
 
