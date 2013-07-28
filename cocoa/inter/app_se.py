@@ -17,6 +17,7 @@ from core.scanner import ScanType
 from core import fs
 from core.directories import Directories as DirectoriesBase, DirectoryState
 from core_se.app import DupeGuru as DupeGuruBase
+from core_se.fs import File
 from .app import PyDupeGuruBase
 
 def is_bundle(str_path):
@@ -35,7 +36,7 @@ class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = list(map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev']))
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
-        DirectoriesBase.__init__(self, fileclasses=[Bundle, fs.File])
+        DirectoriesBase.__init__(self, fileclasses=[Bundle, File])
     
     def _default_state_for_path(self, path):
         result = DirectoriesBase._default_state_for_path(self, path)
