@@ -243,6 +243,38 @@ class PyTable(PyGUIObject):
     def update_selection(self):
         self.callback.updateSelection()
 
+class ProgressWindowView(GUIObjectView):
+    def setProgress_(self, progress: int): pass
+    def showWindow(self): pass
+    def closeWindow(self): pass
+
+class PyProgressWindow(PyGUIObject):
+    def jobdescTextField(self) -> pyref:
+        return self.model.jobdesc_textfield
+    
+    def progressdescTextField(self) -> pyref:
+        return self.model.progressdesc_textfield
+    
+    def pulse(self):
+        self.model.pulse()
+    
+    def cancel(self):
+        self.model.cancel()
+    
+    #--- Python -> Cocoa
+    @dontwrap
+    def set_progress(self, last_progress):
+        self.callback.setProgress_(last_progress)
+        
+    @dontwrap
+    def show(self):
+        self.callback.showWindow()
+    
+    @dontwrap
+    def close(self):
+        self.callback.closeWindow()
+    
+
 class BaseAppView:
     def showMessage_(self, msg: str): pass
     
