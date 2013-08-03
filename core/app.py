@@ -247,7 +247,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.view.show_message(msg)
     
     def _job_completed(self, jobid):
-        print("complete!", jobid)
         if jobid == JobType.Scan:
             self._results_changed()
             if not self.results.groups:
@@ -456,7 +455,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def load_from(self, filename):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
-            print("load finished")
         self._start_job(JobType.Load, do)
     
     def make_selected_reference(self):
