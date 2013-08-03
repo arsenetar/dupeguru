@@ -26,6 +26,7 @@ LANGNAMES = {
     'nl': tr('Dutch'),
     'pt_BR': tr("Brazilian"),
     'es': tr("Spanish"),
+    'vi': tr("Vietnamese"),
 }
 
 def normalize_for_serialization(v):
