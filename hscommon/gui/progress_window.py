@@ -30,6 +30,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         last_desc = self.last_desc
         if not self._job_running or last_progress is None:
             self.view.close()
+            self.reraise_if_error()
             if not self.job_cancelled:
                 self._finish_func(self.jobid)
             return

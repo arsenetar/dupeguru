@@ -11,15 +11,15 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: core/app.py:37
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Aucun doublon marqué. Rien à faire."
 
-#: core/app.py:38
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Aucun doublon sélectionné. Rien à faire."
 
-#: core/app.py:39
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -27,28 +27,28 @@ msgstr ""
 "Beaucoup de fichiers seront ouverts en même temps. Cela peut gravement "
 "encombrer votre système. Continuer?"
 
-#: core/app.py:98
+#: core/app.py:110
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "ne peut effacer, déplacer ou copier que  10 doublons à la fois"
 
-#: core/app.py:232
+#: core/app.py:254
 msgid "No duplicates found."
 msgstr "Aucun doublon trouvé."
 
-#: core/app.py:245
+#: core/app.py:267
 msgid "All marked files were copied successfully."
 msgstr "Tous les fichiers marqués ont été copiés correctement."
 
-#: core/app.py:246
+#: core/app.py:268
 msgid "All marked files were moved successfully."
 msgstr "Tous les fichiers marqués ont été déplacés correctement."
 
-#: core/app.py:247
+#: core/app.py:269
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tous les fichiers marqués ont été correctement envoyés à la corbeille."
 
-#: core/app.py:274
+#: core/app.py:296
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -56,58 +56,58 @@ msgstr ""
 "Vous ne pouvez pas effacer, déplacer ou copier plus de 10 doublons à la fois"
 " en mode démo."
 
-#: core/app.py:285
+#: core/app.py:307
 msgid "'{}' already is in the list."
 msgstr "'{}' est déjà dans la liste."
 
-#: core/app.py:287
+#: core/app.py:309
 msgid "'{}' does not exist."
 msgstr "'{}' n'existe pas."
 
-#: core/app.py:294
+#: core/app.py:316
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "copy"
 msgstr "copier"
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "move"
 msgstr "déplacer"
 
-#: core/app.py:355
+#: core/app.py:377
 msgid "Select a directory to {} marked files to"
 msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 
-#: core/app.py:381
+#: core/app.py:403
 msgid "Select a destination for your exported CSV"
 msgstr "Choisissez une destination pour votre exportation CSV"
 
-#: core/app.py:406
+#: core/app.py:428
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: core/app.py:512 core/app.py:523
+#: core/app.py:535 core/app.py:546
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: core/app.py:543
+#: core/app.py:566
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} groupes de doublons ont été modifiés par la re-prioritisation."
 
-#: core/app.py:563
+#: core/app.py:586
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:574
+#: core/app.py:597
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:613
+#: core/app.py:636
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -216,3 +216,35 @@ msgstr "Vérifié %d/%d paires"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Lu l'EXIF de %d/%d images"
+
+#: core/app.py:58
+msgid "Scanning for duplicates"
+msgstr "Scan de doublons en cours"
+
+#: core/app.py:59
+msgid "Loading"
+msgstr "Chargement en cours"
+
+#: core/app.py:60
+msgid "Moving"
+msgstr "Déplacement en cours"
+
+#: core/app.py:61
+msgid "Copying"
+msgstr "Copie en cours"
+
+#: core/app.py:62
+msgid "Sending to Trash"
+msgstr "Envoi de fichiers à la corbeille"
+
+#: core/app.py:65
+msgid "Sending files to the recycle bin"
+msgstr "Envoi de fichiers à la corbeille"
+
+#: core/app.py:246
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Une action précédente est encore en cours. Attendez quelques secondes avant "
+"d'en repartir une nouvelle."

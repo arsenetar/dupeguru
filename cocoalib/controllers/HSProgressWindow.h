@@ -17,10 +17,12 @@ http://www.hardcoded.net/licenses/bsd_license
     NSInteger progress;
     HSTextField *jobdescTextField;
     HSTextField *progressdescTextField;
+    NSWindow *parentWindow;
 }
 
 - (id)initWithPyRef:(PyObject *)aPyRef view:(NSView *)aView;
 - (PyProgressWindow *)model;
+- (void)setParentWindow:(NSWindow *)aParentWindow;
 
 - (void)setProgress:(NSInteger)aProgress;
 - (void)showWindow;

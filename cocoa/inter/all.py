@@ -1,3 +1,4 @@
+from cocoa.inter import PyTextField, PyProgressWindow
 from .deletion_options import PyDeletionOptions
 from .details_panel import PyDetailsPanel
 from .directory_outline import PyDirectoryOutline

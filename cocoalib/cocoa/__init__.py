@@ -16,19 +16,14 @@ from .CocoaProxy import CocoaProxy
 
 proxy = CocoaProxy()
 
-try:
-    from jobprogress.performer import ThreadedJobPerformer as ThreadedJobPerformerBase
-    class ThreadedJobPerformer(ThreadedJobPerformerBase):
-        def _async_run(self, *args):
-            proxy.createPool()
-            try:
-                ThreadedJobPerformerBase._async_run(self, *args)
-            finally:
-                proxy.destroyPool()
-except ImportError:
-    # jobprogress isn't used in all HS apps
-    pass
-
+def autoreleasepool(func):
+    def wrapper(*args, **kwargs):
+        proxy.createPool()
+        try:
+            func(*args, **kwargs)
+        finally:
+            proxy.destroyPool()
+    return wrapper
 
 def as_fetch(as_list, as_type, step_size=1000):
     """When fetching items from a very big list through applescript, the connection with the app
@@ -113,3 +108,10 @@ class CocoaHandler(logging.Handler):
 
 def install_cocoa_logger():
     logging.getLogger().addHandler(CocoaHandler())
+
+def patch_threaded_job_performer():
+    # _async_run, under cocoa, has to be run within an autorelease pool to prevent leaks.
+    # You only need this patch is you use one of CocoaProxy's function (which allocate objc
+    # structures) inside a threaded job.
+    from jobprogress.performer import ThreadedJobPerformer
+    ThreadedJobPerformer._async_run = autoreleasepool(ThreadedJobPerformer._async_run)

@@ -9,26 +9,6 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:38
-msgid "Scanning for duplicates"
-msgstr "Проверка на наличие дубликатов"
-
-#: cocoa/inter/app.py:16 qt/base/app.py:39
-msgid "Loading"
-msgstr "Загрузка"
-
-#: cocoa/inter/app.py:17 qt/base/app.py:40
-msgid "Moving"
-msgstr "Перемещение"
-
-#: cocoa/inter/app.py:18 qt/base/app.py:41
-msgid "Copying"
-msgstr "Копирование"
-
-#: cocoa/inter/app.py:19
-msgid "Sending to Trash"
-msgstr "Перемещение в Корзину"
-
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Удаление «мёртвых» треков из библиотеки iTunes"
@@ -82,10 +62,6 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "Приложение iPhoto не найдено."
 
-#: qt/base/app.py:42
-msgid "Sending files to the recycle bin"
-msgstr "Перемещение файлов в Корзину"
-
 #: qt/base/app.py:95
 msgid "Quit"
 msgstr "Выйти"
@@ -118,14 +94,6 @@ msgstr "Проверить обновления"
 #: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Открыть журнал отладки"
-
-#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr ""
-"Предыдущее действие до сих пор выполняется. Вы не можете начать новое. "
-"Подождите несколько секунд, затем повторите попытку."
 
 #: qt/base/app.py:257
 msgid "{} file (*.{})"
@@ -863,9 +831,3 @@ msgstr "Увеличить"
 #: qt/base/deletion_options.py:46
 msgid " (unsupported)"
 msgstr ""
-
-#~ msgid " (Mac OS X or Linux only)"
-#~ msgstr ""
-
-#~ msgid "Re-Prioritize Results"
-#~ msgstr "Изменить приоритеты результатов"

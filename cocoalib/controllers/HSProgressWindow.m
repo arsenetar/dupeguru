@@ -17,6 +17,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [[ProgressController mainProgressController] setWorker:self];
     jobdescTextField = [[HSTextField alloc] initWithPyRef:[[self model] jobdescTextField] view:[[ProgressController mainProgressController] descText]];
     progressdescTextField = [[HSTextField alloc] initWithPyRef:[[self model] progressdescTextField] view:[[ProgressController mainProgressController] statusText]];
+    parentWindow = nil;
     return self;
 }
 
@@ -26,6 +27,11 @@ http://www.hardcoded.net/licenses/bsd_license
 }       
 
 /* Public */
+- (void)setParentWindow:(NSWindow *)aParentWindow
+{
+    parentWindow = aParentWindow;
+}
+
 - (void)setProgress:(NSInteger)aProgress
 {
     progress = aProgress;
@@ -33,7 +39,12 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)showWindow
 {
-    [[ProgressController mainProgressController] show];
+    if (parentWindow != nil) {
+        [[ProgressController mainProgressController] showSheetForParent:parentWindow];
+    }
+    else {
+        [[ProgressController mainProgressController] show];
+    }
 }
 
 - (void)closeWindow

@@ -9,26 +9,6 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:38
-msgid "Scanning for duplicates"
-msgstr "重复文件扫描中"
-
-#: cocoa/inter/app.py:16 qt/base/app.py:39
-msgid "Loading"
-msgstr "载入中"
-
-#: cocoa/inter/app.py:17 qt/base/app.py:40
-msgid "Moving"
-msgstr "移动中"
-
-#: cocoa/inter/app.py:18 qt/base/app.py:41
-msgid "Copying"
-msgstr "复制中"
-
-#: cocoa/inter/app.py:19
-msgid "Sending to Trash"
-msgstr "移到垃圾桶"
-
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "从你的iTunes库中移除无效的音轨"
@@ -81,10 +61,6 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
 
-#: qt/base/app.py:42
-msgid "Sending files to the recycle bin"
-msgstr "将文件移到回收站"
-
 #: qt/base/app.py:95
 msgid "Quit"
 msgstr "退出"
@@ -117,12 +93,6 @@ msgstr "检查更新"
 #: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "打开调试记录"
-
-#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr "目前还有任务在执行，新任务无法开启。请等待几秒钟后再重新试一次。"
 
 #: qt/base/app.py:257
 msgid "{} file (*.{})"
@@ -854,9 +824,3 @@ msgstr "Zoom"
 #: qt/base/deletion_options.py:46
 msgid " (unsupported)"
 msgstr ""
-
-#~ msgid " (Mac OS X or Linux only)"
-#~ msgstr ""
-
-#~ msgid "Re-Prioritize Results"
-#~ msgstr "Re-Prioritize Results"

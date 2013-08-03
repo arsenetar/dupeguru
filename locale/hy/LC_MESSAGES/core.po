@@ -9,42 +9,42 @@ msgstr ""
 "Language: hy\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/app.py:37
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:38
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core/app.py:98
+#: core/app.py:110
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 "միաժամանակ հնարավոր է ջնջել, տեղափոխել կամ պատճենել միայն 10 օրինակներ"
 
-#: core/app.py:232
+#: core/app.py:254
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:245
+#: core/app.py:267
 msgid "All marked files were copied successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:246
+#: core/app.py:268
 msgid "All marked files were moved successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:247
+#: core/app.py:269
 msgid "All marked files were successfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:274
+#: core/app.py:296
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
@@ -52,58 +52,58 @@ msgstr ""
 "Չեք կարող ջնջել, տեղափձոխել կամ պատճենել ավելի քան 10 օրինակներ փորձնական "
 "եղանակում:"
 
-#: core/app.py:285
+#: core/app.py:307
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core/app.py:287
+#: core/app.py:309
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
 
-#: core/app.py:294
+#: core/app.py:316
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:355
+#: core/app.py:377
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
-#: core/app.py:381
+#: core/app.py:403
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:406
+#: core/app.py:428
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:512 core/app.py:523
+#: core/app.py:535 core/app.py:546
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:543
+#: core/app.py:566
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:563
+#: core/app.py:586
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:574
+#: core/app.py:597
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:613
+#: core/app.py:636
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -210,3 +210,35 @@ msgstr "Ստուգում է %d/%d համընկնումները"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Կարդալ EXIF-ը d/%d նկարներից"
+
+#: core/app.py:58
+msgid "Scanning for duplicates"
+msgstr "Ստուգվում են կրկնօրինակները"
+
+#: core/app.py:59
+msgid "Loading"
+msgstr "Բացվում է"
+
+#: core/app.py:60
+msgid "Moving"
+msgstr "Տեղափոխվում է"
+
+#: core/app.py:61
+msgid "Copying"
+msgstr "Պատճենվում է"
+
+#: core/app.py:62
+msgid "Sending to Trash"
+msgstr "Ուղարկվում է Աղբարկղ"
+
+#: core/app.py:65
+msgid "Sending files to the recycle bin"
+msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
+
+#: core/app.py:246
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: "
+"Սպասեք մի քանի վայրկյան և կրկին փորձեք:"

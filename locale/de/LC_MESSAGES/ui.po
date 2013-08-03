@@ -9,26 +9,6 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:38
-msgid "Scanning for duplicates"
-msgstr "Suche nach Duplikaten"
-
-#: cocoa/inter/app.py:16 qt/base/app.py:39
-msgid "Loading"
-msgstr "Laden"
-
-#: cocoa/inter/app.py:17 qt/base/app.py:40
-msgid "Moving"
-msgstr "Verschieben"
-
-#: cocoa/inter/app.py:18 qt/base/app.py:41
-msgid "Copying"
-msgstr "Kopieren"
-
-#: cocoa/inter/app.py:19
-msgid "Sending to Trash"
-msgstr "Verschiebe in den Mülleimer"
-
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Entferne tote Stücke aus Ihrer iTunes Bibliothek."
@@ -81,10 +61,6 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "The iPhoto application couldn't be found."
 
-#: qt/base/app.py:42
-msgid "Sending files to the recycle bin"
-msgstr "Sende Dateien in den Mülleimer"
-
 #: qt/base/app.py:95
 msgid "Quit"
 msgstr "Beenden"
@@ -117,14 +93,6 @@ msgstr "Auf Updates überprüfen"
 #: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Debug Log öffnen"
-
-#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr ""
-"Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine "
-"Neue starten. Warten Sie einige Sekunden und versuchen es erneut."
 
 #: qt/base/app.py:257
 msgid "{} file (*.{})"
@@ -403,7 +371,7 @@ msgstr "Entferne Markierte aus den Ergebnissen"
 
 #: qt/base/result_window.py:52 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr "Entferne Ausgewählte aus den Ergebnissen"
+msgstr "Entferne Ausgewählte aus den Ergebnissen..."
 
 #: qt/base/result_window.py:53 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
@@ -859,9 +827,3 @@ msgstr "Zoomen"
 #: qt/base/deletion_options.py:46
 msgid " (unsupported)"
 msgstr ""
-
-#~ msgid " (Mac OS X or Linux only)"
-#~ msgstr ""
-
-#~ msgid "Re-Prioritize Results"
-#~ msgstr "Re-Prioritize Results"

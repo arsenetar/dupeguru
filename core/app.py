@@ -15,13 +15,16 @@ import time
 import shutil
 
 from send2trash import send2trash
+from jobprogress import job
 from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
+from hscommon.gui.progress_window import ProgressWindow
 from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_decimal, allsame,
     rem_file_ext)
 from hscommon.trans import tr
+from hscommon.plat import ISWINDOWS
 
 from . import directories, results, scanner, export, fs
 from .gui.deletion_options import DeletionOptions
@@ -50,6 +53,16 @@ class JobType:
     Move = 'job_move'
     Copy = 'job_copy'
     Delete = 'job_delete'
+
+JOBID2TITLE = {
+    JobType.Scan: tr("Scanning for duplicates"),
+    JobType.Load: tr("Loading"),
+    JobType.Move: tr("Moving"),
+    JobType.Copy: tr("Copying"),
+    JobType.Delete: tr("Sending to Trash"),
+}
+if ISWINDOWS:
+    JOBID2TITLE[JobType.Delete] = tr("Sending files to the recycle bin")
 
 def format_timestamp(t, delta):
     if delta:
@@ -86,7 +99,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     #--- View interface
     # open_path(path)
     # reveal_path(path)
-    # start_job(jobid, func, args=()) ( func(j, *args) )
     # ask_yes_no(prompt) --> bool
     # show_results_window()
     # show_problem_dialog()
@@ -123,6 +135,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.stats_label = StatsLabel(self)
         self.result_table = self._create_result_table()
         self.deletion_options = DeletionOptions()
+        self.progress_window = ProgressWindow(self._job_completed)
         children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
@@ -225,12 +238,16 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if self.results.get_group_of_duplicate(d) is not None]
         self.notify('results_changed')
     
-    def _job_completed(self, jobid, exc):
-        # Must be called by subclasses when they detect that an async job is completed. If an
-        # exception was raised during the job, `exc` will be set. Return True when the error was
-        # handled. If we return False when exc is set, a the exception will be re-raised.
-        if exc is not None:
-            return False # We don't handle any exception in here
+    def _start_job(self, jobid, func, args=()):
+        title = JOBID2TITLE[jobid]
+        try:
+            self.progress_window.run(jobid, title, func, args=args) 
+        except job.JobInProgressError:
+            msg = tr("A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")
+            self.view.show_message(msg)
+    
+    def _job_completed(self, jobid):
+        print("complete!", jobid)
         if jobid == JobType.Scan:
             self._results_changed()
             if not self.results.groups:
@@ -362,7 +379,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         if destination:
             desttype = self.options['copymove_dest_type']
             jobid = JobType.Copy if copy else JobType.Move
-            self.view.start_job(jobid, do)
+            self._start_job(jobid, do)
     
     def delete_marked(self):
         if not self._check_demo():
@@ -375,7 +392,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         args = [self.deletion_options.link_deleted, self.deletion_options.use_hardlinks,
             self.deletion_options.direct]
         logging.debug("Starting deletion job with args %r", args)
-        self.view.start_job(JobType.Delete, self._do_delete, args=args)
+        self._start_job(JobType.Delete, self._do_delete, args=args)
     
     def export_to_xhtml(self):
         colnames, rows = self._get_export_data()
@@ -439,7 +456,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def load_from(self, filename):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
-        self.view.start_job(JobType.Load, do)
+            print("load finished")
+        self._start_job(JobType.Load, do)
     
     def make_selected_reference(self):
         dupes = self.without_ref(self.selected_dupes)
@@ -580,7 +598,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return
         self.results.groups = []
         self._results_changed()
-        self.view.start_job(JobType.Scan, do)
+        self._start_job(JobType.Scan, do)
     
     def toggle_selected_mark_state(self):
         selected = self.without_ref(self.selected_dupes)

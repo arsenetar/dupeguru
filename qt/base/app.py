@@ -13,17 +13,14 @@ import os.path as op
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
 from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QApplication
 
-from jobprogress import job
-from jobprogress.qt import Progress
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-
-from core.app import JobType
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
 from qtlib.reg import Registration
 from qtlib.util import createActions, getAppData
+from qtlib.progress_window import ProgressWindow 
 
 from . import platform
 from .result_window import ResultWindow
@@ -33,14 +30,6 @@ from .ignore_list_dialog import IgnoreListDialog
 from .deletion_options import DeletionOptions
 
 tr = trget('ui')
-
-JOBID2TITLE = {
-    JobType.Scan: tr("Scanning for duplicates"),
-    JobType.Load: tr("Loading"),
-    JobType.Move: tr("Moving"),
-    JobType.Copy: tr("Copying"),
-    JobType.Delete: tr("Sending files to the recycle bin"),
-}
 
 class DupeGuru(QObject):
     MODELCLASS = None
@@ -68,7 +57,7 @@ class DupeGuru(QObject):
         self.recentResults = Recent(self, 'recentResults')
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = self.RESULT_WINDOW_CLASS(self)
-        self._progress = Progress(self.resultWindow)
+        self.progress_window = ProgressWindow(self.resultWindow, self.model.progress_window) 
         self.directories_dialog = DirectoriesDialog(self.resultWindow, self)
         self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
         self.problemDialog = ProblemDialog(parent=self.resultWindow, model=self.model.problem_dialog)
@@ -86,7 +75,6 @@ class DupeGuru(QObject):
         # that the application haven't launched.
         QTimer.singleShot(0, self.finishedLaunching)
         self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
-        self.connect(self._progress, SIGNAL('finished(QString)'), self.job_finished)
     
     def _setupActions(self):
         # Setup actions that are common to both the directory dialog and the results window.
@@ -164,11 +152,6 @@ class DupeGuru(QObject):
     def ignoreListTriggered(self):
         self.model.ignore_list_dialog.show()
     
-    def job_finished(self, jobid):
-        result = self.model._job_completed(jobid, self._progress.last_error)
-        if not result:
-            self._progress.reraise_if_error()
-    
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, 'debug.log')
         self.open_path(debugLogPath)
@@ -206,16 +189,6 @@ class DupeGuru(QObject):
     @staticmethod
     def reveal_path(path):
         DupeGuru.open_path(path[:-1])
-    
-    def start_job(self, jobid, func, args=()):
-        title = JOBID2TITLE[jobid]
-        try:
-            j = self._progress.create_job()
-            args = (j, ) + tuple(args)
-            self._progress.run(jobid, title, func, args=args)
-        except job.JobInProgressError:
-            msg = tr("A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")
-            QMessageBox.information(self.resultWindow, 'Action in progress', msg)
     
     def get_default(self, key):
         return self.prefs.get_value(key)

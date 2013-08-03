@@ -15,6 +15,7 @@ http://www.hardcoded.net/licenses/bsd_license
 #import "IgnoreListDialog.h"
 #import "HSFairwareAboutBox.h"
 #import "HSRecentFiles.h"
+#import "HSProgressWindow.h"
 
 @interface AppDelegateBase : NSObject
 {
@@ -27,6 +28,7 @@ http://www.hardcoded.net/licenses/bsd_license
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
     IgnoreListDialog *_ignoreListDialog;
+    HSProgressWindow *_progressWindow;
     NSWindowController *_preferencesPanel;
     HSFairwareAboutBox *_aboutBox;
     HSRecentFiles *_recentResults;

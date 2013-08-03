@@ -1,23 +1,8 @@
 import logging
 
 from objp.util import pyref, dontwrap
-from jobprogress import job
-import cocoa
-from cocoa import install_exception_hook, install_cocoa_logger, proxy
+from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer, proxy
 from cocoa.inter import PyFairware, FairwareView
-from hscommon.trans import trget
-
-from core.app import JobType
-
-tr = trget('ui')
-
-JOBID2TITLE = {
-    JobType.Scan: tr("Scanning for duplicates"),
-    JobType.Load: tr("Loading"),
-    JobType.Move: tr("Moving"),
-    JobType.Copy: tr("Copying"),
-    JobType.Delete: tr("Sending to Trash"),
-}
 
 class DupeGuruView(FairwareView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
@@ -26,16 +11,14 @@ class DupeGuruView(FairwareView):
     def selectDestFileWithPrompt_extension_(self, prompt: str, extension: str) -> str: pass
 
 class PyDupeGuruBase(PyFairware):
-    FOLLOW_PROTOCOLS = ['Worker']
-    
     @dontwrap
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook()
         install_cocoa_logger()
+        patch_threaded_job_performer()
         appdata = proxy.getAppdataPath()
         self.model = modelclass(self, appdata)
-        self.progress = cocoa.ThreadedJobPerformer()
     
     #---Sub-proxies
     def detailsPanel(self) -> pyref:
@@ -55,6 +38,9 @@ class PyDupeGuruBase(PyFairware):
     
     def ignoreListDialog(self) -> pyref:
         return self.model.ignore_list_dialog
+    
+    def progressWindow(self) -> pyref:
+        return self.model.progress_window
     
     def deletionOptions(self) -> pyref:
         return self.model.deletion_options
@@ -157,31 +143,6 @@ class PyDupeGuruBase(PyFairware):
     def setCopyMoveDestType_(self, copymove_dest_type: int):
         self.model.options['copymove_dest_type'] = copymove_dest_type
     
-    #---Worker
-    def getJobProgress(self) -> object: # NSNumber
-        try:
-            return self.progress.last_progress
-        except AttributeError:
-            # I have *no idea* why this can possible happen (last_progress is always set by
-            # create_job() *before* any threaded job notification, which shows the progress panel,
-            # is sent), but it happens anyway, so there we go. ref: #106
-            return -1
-    
-    def getJobDesc(self) -> str:
-        try:
-            return self.progress.last_desc
-        except AttributeError:
-            # see getJobProgress
-            return ''
-    
-    def cancelJob(self):
-        self.progress.job_cancelled = True
-    
-    def jobCompleted_(self, jobid: str):
-        result = self.model._job_completed(jobid, self.progress.last_error)
-        if not result:
-            self.progress.reraise_if_error()
-    
     #--- model --> view
     @dontwrap
     def open_path(self, path):
@@ -190,18 +151,6 @@ class PyDupeGuruBase(PyFairware):
     @dontwrap
     def reveal_path(self, path):
         proxy.revealPath_(str(path))
-    
-    @dontwrap
-    def start_job(self, jobid, func, args=()):
-        try:
-            j = self.progress.create_job()
-            args = tuple([j] + list(args))
-            self.progress.run_threaded(func, args=args)
-        except job.JobInProgressError:
-            proxy.postNotification_userInfo_('JobInProgress', None)
-        else:
-            ud = {'desc': JOBID2TITLE[jobid], 'jobid':jobid}
-            proxy.postNotification_userInfo_('JobStarted', ud)
     
     @dontwrap
     def ask_yes_no(self, prompt):

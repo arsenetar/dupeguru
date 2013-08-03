@@ -74,6 +74,8 @@ http://www.hardcoded.net/licenses/bsd_license
     _directoryPanel = [self createDirectoryPanel];
     _detailsPanel = [self createDetailsPanel];
     _ignoreListDialog = [[IgnoreListDialog alloc] initWithPyRef:[model ignoreListDialog]];
+    _progressWindow = [[HSProgressWindow alloc] initWithPyRef:[[self model] progressWindow] view:nil];
+    [_progressWindow setParentWindow:[_resultWindow window]];
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
@@ -197,7 +199,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[ProgressController mainProgressController] setWorker:model];
     [model initialRegistrationSetup];
     [model loadSession];
 }

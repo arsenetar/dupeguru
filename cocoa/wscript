@@ -50,7 +50,8 @@ def build(ctx):
         'views/HSTableView', 'views/HSOutlineView', 'views/NSIndexPathAdditions',
         'views/NSTableViewAdditions',
         'controllers/HSColumns', 'controllers/HSGUIController', 'controllers/HSTable',
-        'controllers/HSOutline', 'controllers/HSPopUpList', 'controllers/HSSelectableList']
+        'controllers/HSOutline', 'controllers/HSPopUpList', 'controllers/HSSelectableList',
+        'controllers/HSTextField', 'controllers/HSProgressWindow']
     cocoalib_src = [cocoalib_node.find_node(usename + '.m') for usename in cocoalib_uses] + cocoalib_node.ant_glob('autogen/*.m')
     project_folders = ['autogen', 'base', ctx.env.DGEDITION]
     project_src = sum([ctx.srcnode.ant_glob('%s/*.m' % folder) for folder in project_folders], [])

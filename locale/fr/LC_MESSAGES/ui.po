@@ -12,26 +12,6 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cocoa/inter/app.py:15 qt/base/app.py:38
-msgid "Scanning for duplicates"
-msgstr "Scan de doublons en cours"
-
-#: cocoa/inter/app.py:16 qt/base/app.py:39
-msgid "Loading"
-msgstr "Chargement en cours"
-
-#: cocoa/inter/app.py:17 qt/base/app.py:40
-msgid "Moving"
-msgstr "Déplacement en cours"
-
-#: cocoa/inter/app.py:18 qt/base/app.py:41
-msgid "Copying"
-msgstr "Copie en cours"
-
-#: cocoa/inter/app.py:19
-msgid "Sending to Trash"
-msgstr "Envoi vers corbeille"
-
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Retrait des tracks mortes de votre librairie iTunes"
@@ -89,10 +69,6 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "iPhoto n'a pas pu être trouvée dans vos applications."
 
-#: qt/base/app.py:42
-msgid "Sending files to the recycle bin"
-msgstr "Envoi de fichiers à la corbeille"
-
 #: qt/base/app.py:95
 msgid "Quit"
 msgstr "Quitter"
@@ -125,14 +101,6 @@ msgstr "Vérifier les mises à jour"
 #: qt/base/app.py:102
 msgid "Open Debug Log"
 msgstr "Ouvrir logs de déboguage"
-
-#: qt/base/app.py:217 cocoa/base/en.lproj/Localizable.strings:0
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr ""
-"Une action précédente est encore en cours. Attendez quelques secondes avant "
-"d'en repartir une nouvelle."
 
 #: qt/base/app.py:257
 msgid "{} file (*.{})"
@@ -872,9 +840,3 @@ msgstr "Réduire/agrandir"
 #: qt/base/deletion_options.py:46
 msgid " (unsupported)"
 msgstr ""
-
-#~ msgid " (Mac OS X or Linux only)"
-#~ msgstr " (Mac OS X ou Linux seulement)"
-
-#~ msgid "Re-Prioritize Results"
-#~ msgstr "Re-prioriser les résultats"

@@ -9,55 +9,55 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: core/app.py:37
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:38
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:39
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core/app.py:98
+#: core/app.py:110
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
 
-#: core/app.py:232
+#: core/app.py:254
 msgid "No duplicates found."
 msgstr "Nebyli nalezeny žádné duplicity."
 
-#: core/app.py:245
+#: core/app.py:267
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core/app.py:246
+#: core/app.py:268
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core/app.py:247
+#: core/app.py:269
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core/app.py:274
+#: core/app.py:296
 msgid ""
 "You cannot delete, move or copy more than 10 duplicates at once in demo "
 "mode."
 msgstr ""
 
-#: core/app.py:285
+#: core/app.py:307
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core/app.py:287
+#: core/app.py:309
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core/app.py:294
+#: core/app.py:316
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -65,44 +65,44 @@ msgstr ""
 "Všech %d vybraných shod bude v následujících hledáních ignorováno. "
 "Pokračovat?"
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "copy"
 msgstr ""
 
-#: core/app.py:354
+#: core/app.py:376
 msgid "move"
 msgstr ""
 
-#: core/app.py:355
+#: core/app.py:377
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:381
+#: core/app.py:403
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:406
+#: core/app.py:428
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
 
-#: core/app.py:512 core/app.py:523
+#: core/app.py:535 core/app.py:546
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
-#: core/app.py:543
+#: core/app.py:566
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:563
+#: core/app.py:586
 msgid "Collecting files to scan"
 msgstr "Shromažďuji prohlížené soubory"
 
-#: core/app.py:574
+#: core/app.py:597
 msgid "The selected directories contain no scannable file."
 msgstr "Vybrané adresáře neobsahují žádné soubory vhodné k prohledávání."
 
-#: core/app.py:613
+#: core/app.py:636
 msgid "%s (%d discarded)"
 msgstr "%s (%d vyřazeno)"
 
@@ -209,3 +209,35 @@ msgstr "Ověřeno %d/%d shod"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
+
+#: core/app.py:58
+msgid "Scanning for duplicates"
+msgstr "Vyhledávám duplicity"
+
+#: core/app.py:59
+msgid "Loading"
+msgstr "Nahrávám"
+
+#: core/app.py:60
+msgid "Moving"
+msgstr "Přesouvám"
+
+#: core/app.py:61
+msgid "Copying"
+msgstr "Kopíruji"
+
+#: core/app.py:62
+msgid "Sending to Trash"
+msgstr "Vyhazuji do koše"
+
+#: core/app.py:65
+msgid "Sending files to the recycle bin"
+msgstr ""
+
+#: core/app.py:246
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte"
+" pár sekund a zkuste to znovu."

@@ -255,7 +255,8 @@ def build_cocoa_bridging_interfaces(edition):
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
     from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
-        OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyBaseApp, PyFairware)
+        OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyBaseApp,
+        PyFairware, PyTextField, ProgressWindowView, PyProgressWindow)
     from inter.deletion_options import PyDeletionOptions, DeletionOptionsView
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
@@ -270,12 +271,13 @@ def build_cocoa_bridging_interfaces(edition):
     allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp, PyFairware,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
         PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuruBase,
-        appmod.PyDupeGuru]
+        PyTextField, PyProgressWindow, appmod.PyDupeGuru]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
     allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
         DetailsPanelView, DirectoryOutlineView, PrioritizeDialogView, PrioritizeListView,
-        IgnoreListDialogView, DeletionOptionsView, ResultTableView, StatsLabelView, DupeGuruView]
+        IgnoreListDialogView, DeletionOptionsView, ResultTableView, StatsLabelView,
+        ProgressWindowView, DupeGuruView]
     clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
     objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
     build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])
