@@ -11,7 +11,7 @@ from core.app import DupeGuru as DupeGuruBase, cmp_value
 from .scanner import ScannerPE
 from . import prioritize
 from . import __appname__
-from .fs import get_delta_dimensions
+from .photo import get_delta_dimensions
 from .result_table import ResultTable
 
 class DupeGuru(DupeGuruBase):
