@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -88,7 +87,9 @@ msgstr "Send"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Something went wrong. Would you like to send the error report to Hardcoded Software?"
+msgstr ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
@@ -110,7 +111,9 @@ msgstr "Try"
 msgid ""
 "Type the key you received when you contributed to %@, as well as the e-mail "
 "used as a reference for the purchase."
-msgstr "Geben Sie den empfangenen Schlüssel und die E-Mail-Adresse als Referenz für den Kauf an, wenn Sie für %@ gespendet haben."
+msgstr ""
+"Geben Sie den empfangenen Schlüssel und die E-Mail-Adresse als Referenz für "
+"den Kauf an, wenn Sie für %@ gespendet haben."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-28 13:56+0000\n"
+"PO-Revision-Date: 2013-08-03 20:35+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/dupeguru/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: uk\n"
@@ -23,9 +24,41 @@ msgid ""
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
+#: core/app.py:58
+msgid "Scanning for duplicates"
+msgstr "Пошук дублікатів"
+
+#: core/app.py:59
+msgid "Loading"
+msgstr "Завантаження"
+
+#: core/app.py:60
+msgid "Moving"
+msgstr "Переміщення"
+
+#: core/app.py:61
+msgid "Copying"
+msgstr "Копіювання"
+
+#: core/app.py:62
+msgid "Sending to Trash"
+msgstr "Відправка до кошику"
+
+#: core/app.py:65
+msgid "Sending files to the recycle bin"
+msgstr "Відправлення файлів до кошика"
+
 #: core/app.py:110
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr "може видаляти, переміщувати або копіювати лише 10 копій відразу"
+
+#: core/app.py:246
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
+" кілька секунд, потім повторіть спробу."
 
 #: core/app.py:254
 msgid "No duplicates found."
@@ -210,35 +243,3 @@ msgstr "Перевірено %d/%d результатів"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF з %d/%d фотографій"
-
-#: core/app.py:58
-msgid "Scanning for duplicates"
-msgstr "Пошук дублікатів"
-
-#: core/app.py:59
-msgid "Loading"
-msgstr "Завантаження"
-
-#: core/app.py:60
-msgid "Moving"
-msgstr "Переміщення"
-
-#: core/app.py:61
-msgid "Copying"
-msgstr "Копіювання"
-
-#: core/app.py:62
-msgid "Sending to Trash"
-msgstr "Відправка до кошику"
-
-#: core/app.py:65
-msgid "Sending files to the recycle bin"
-msgstr "Відправлення файлів до кошика"
-
-#: core/app.py:246
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr ""
-"Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
-" кілька секунд, потім повторіть спробу."

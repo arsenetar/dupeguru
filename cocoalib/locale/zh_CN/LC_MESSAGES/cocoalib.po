@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -88,7 +87,9 @@ msgstr "Send"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Something went wrong. Would you like to send the error report to Hardcoded Software?"
+msgstr ""
+"Something went wrong. Would you like to send the error report to Hardcoded "
+"Software?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."

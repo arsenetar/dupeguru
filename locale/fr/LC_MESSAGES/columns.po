@@ -1,5 +1,5 @@
-# 
 # Translators:
+# hsoft <hsoft@hardcoded.net>, 2012
 # hsoft <hsoft@hardcoded.net>, 2012
 msgid ""
 msgstr ""

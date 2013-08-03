@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -38,7 +37,8 @@ msgstr "Սխալի զեկույցը"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Ինչ-որ բան սխալ էր: Ուղարկե՞լ սխալի մասին զեկույց Hardcoded Software-ին:"
+msgstr ""
+"Ինչ-որ բան սխալ էր: Ուղարկե՞լ սխալի մասին զեկույց Hardcoded Software-ին:"
 
 #: qtlib/error_report_dialog.py:48
 msgid ""
@@ -134,7 +134,9 @@ msgstr "Գրեք գրանցման բանալին"
 msgid ""
 "Type the key you received when you contributed to $appname, as well as the "
 "e-mail used as a reference for the purchase."
-msgstr "Մուտքագրեք այն բանալին, որը ստացել եք $appname-ին աջակցելիս, քանզի Ձեր էլ. հասցեն օգտագործվել է գնման ժամանակ:"
+msgstr ""
+"Մուտքագրեք այն բանալին, որը ստացել եք $appname-ին աջակցելիս, քանզի Ձեր էլ. "
+"հասցեն օգտագործվել է գնման ժամանակ:"
 
 #: qtlib/reg_submit_dialog.py:48
 msgid "Registration key:"

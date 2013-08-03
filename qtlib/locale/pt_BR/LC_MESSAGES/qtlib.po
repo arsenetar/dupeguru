@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -38,13 +37,16 @@ msgstr "Relatório de Erro"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Algo deu errado. Deseja enviar o relatório de erro à Hardcoded Software?"
+msgstr ""
+"Algo deu errado. Deseja enviar o relatório de erro à Hardcoded Software?"
 
 #: qtlib/error_report_dialog.py:48
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
-msgstr "Embora o aplicativo continue a funcionar após este erro, ele pode estar instável. É recomendável reiniciá-lo."
+msgstr ""
+"Embora o aplicativo continue a funcionar após este erro, ele pode estar "
+"instável. É recomendável reiniciá-lo."
 
 #: qtlib/error_report_dialog.py:56
 msgid "Don't Send"
@@ -134,7 +136,9 @@ msgstr "Entre sua chave de registro"
 msgid ""
 "Type the key you received when you contributed to $appname, as well as the "
 "e-mail used as a reference for the purchase."
-msgstr "Digite a chave que você recebeu ao contribuir com o $appname, assim como o e-mail usado para a compra."
+msgstr ""
+"Digite a chave que você recebeu ao contribuir com o $appname, assim como o "
+"e-mail usado para a compra."
 
 #: qtlib/reg_submit_dialog.py:48
 msgid "Registration key:"

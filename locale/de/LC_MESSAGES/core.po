@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-28 13:56+0000\n"
+"PO-Revision-Date: 2013-08-03 20:35+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/dupeguru/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: de\n"
@@ -23,9 +24,41 @@ msgid ""
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
+#: core/app.py:58
+msgid "Scanning for duplicates"
+msgstr "Suche nach Duplikaten"
+
+#: core/app.py:59
+msgid "Loading"
+msgstr "Laden"
+
+#: core/app.py:60
+msgid "Moving"
+msgstr "Verschieben"
+
+#: core/app.py:61
+msgid "Copying"
+msgstr "Kopieren"
+
+#: core/app.py:62
+msgid "Sending to Trash"
+msgstr "Verschiebe in den Mülleimer"
+
+#: core/app.py:65
+msgid "Sending files to the recycle bin"
+msgstr "Sende Dateien in den Mülleimer"
+
 #: core/app.py:110
 msgid "will only be able to delete, move or copy 10 duplicates at once"
 msgstr ""
+
+#: core/app.py:246
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine "
+"Neue starten. Warten Sie einige Sekunden und versuchen es erneut."
 
 #: core/app.py:254
 msgid "No duplicates found."
@@ -208,35 +241,3 @@ msgstr "%d/%d verifizierte Paare"
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
-
-#: core/app.py:58
-msgid "Scanning for duplicates"
-msgstr "Suche nach Duplikaten"
-
-#: core/app.py:59
-msgid "Loading"
-msgstr "Laden"
-
-#: core/app.py:60
-msgid "Moving"
-msgstr "Verschieben"
-
-#: core/app.py:61
-msgid "Copying"
-msgstr "Kopieren"
-
-#: core/app.py:62
-msgid "Sending to Trash"
-msgstr "Verschiebe in den Mülleimer"
-
-#: core/app.py:65
-msgid "Sending files to the recycle bin"
-msgstr "Sende Dateien in den Mülleimer"
-
-#: core/app.py:246
-msgid ""
-"A previous action is still hanging in there. You can't start a new one yet. "
-"Wait a few seconds, then try again."
-msgstr ""
-"Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine "
-"Neue starten. Warten Sie einige Sekunden und versuchen es erneut."

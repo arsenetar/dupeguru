@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -38,13 +37,16 @@ msgstr "Повідомлення про помилки"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Щось пішло не так. Хочете відправити звіт про помилку до Hardcoded Software?"
+msgstr ""
+"Щось пішло не так. Хочете відправити звіт про помилку до Hardcoded Software?"
 
 #: qtlib/error_report_dialog.py:48
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
-msgstr "Хоча програма має продовжувати роботу після цієї помилки, вона може перебувати у нестабільному стані, тож рекомендується перезапустити програму."
+msgstr ""
+"Хоча програма має продовжувати роботу після цієї помилки, вона може "
+"перебувати у нестабільному стані, тож рекомендується перезапустити програму."
 
 #: qtlib/error_report_dialog.py:56
 msgid "Don't Send"
@@ -134,7 +136,9 @@ msgstr "Введіть Ваш реєстраційний ключ"
 msgid ""
 "Type the key you received when you contributed to $appname, as well as the "
 "e-mail used as a reference for the purchase."
-msgstr "Введіть ключ, який Ви отримали зробивши внесок за $appname, а також адресу електронної пошти, яка була вказана під час покупки."
+msgstr ""
+"Введіть ключ, який Ви отримали зробивши внесок за $appname, а також адресу "
+"електронної пошти, яка була вказана під час покупки."
 
 #: qtlib/reg_submit_dialog.py:48
 msgid "Registration key:"

@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -134,7 +133,9 @@ msgstr "Geben Sie ihren Schlüssel ein"
 msgid ""
 "Type the key you received when you contributed to $appname, as well as the "
 "e-mail used as a reference for the purchase."
-msgstr "Geben Sie den empfangenen Schlüssel und die E-Mail-Adresse als Referenz für den Kauf an, wenn Sie für $appname gespendet haben."
+msgstr ""
+"Geben Sie den empfangenen Schlüssel und die E-Mail-Adresse als Referenz für "
+"den Kauf an, wenn Sie für $appname gespendet haben."
 
 #: qtlib/reg_submit_dialog.py:48
 msgid "Registration key:"

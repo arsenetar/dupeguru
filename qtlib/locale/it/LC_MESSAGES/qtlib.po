@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -134,7 +133,9 @@ msgstr ""
 msgid ""
 "Type the key you received when you contributed to $appname, as well as the "
 "e-mail used as a reference for the purchase."
-msgstr "Type the key you received when you contributed to $appname, as well as the e-mail used as a reference for the purchase."
+msgstr ""
+"Type the key you received when you contributed to $appname, as well as the "
+"e-mail used as a reference for the purchase."
 
 #: qtlib/reg_submit_dialog.py:48
 msgid "Registration key:"

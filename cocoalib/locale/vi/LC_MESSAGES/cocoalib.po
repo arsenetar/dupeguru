@@ -2,52 +2,51 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2013-04-28 18:26+0000\n"
+"PO-Revision-Date: 2013-07-05 11:23+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/hscommon/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "%@ is Fairware"
-msgstr "%@ é Fairware"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
 msgstr ""
-"Embora o aplicativo continue a funcionar após este erro, ele pode estar "
-"instável. É recomendável reiniciá-lo."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Buy"
-msgstr "Comprar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Clear List"
-msgstr "Limpar Lista"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Contribute"
-msgstr "Contribuir"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Don't Send"
-msgstr "Não Enviar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Enter Key"
-msgstr "Entrar Chave"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Enter your key"
-msgstr "Entre sua chave"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
@@ -55,11 +54,11 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Fairware?"
-msgstr "Fairware?"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "No"
-msgstr "Não"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "OK"
@@ -67,11 +66,11 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Please wait..."
-msgstr "Aguarde..."
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Register"
-msgstr "Registrar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Registration e-mail:"
@@ -79,18 +78,17 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Registration key:"
-msgstr "Chave de registro:"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Send"
-msgstr "Enviar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
 msgstr ""
-"Algo deu errado. Deseja enviar o relatório de erro à Hardcoded Software?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
@@ -98,23 +96,21 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Submit"
-msgstr "Enviar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "This app is registered, thanks!"
-msgstr "O app está registrado, obrigado!"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Try"
-msgstr "Testar"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Type the key you received when you contributed to %@, as well as the e-mail "
 "used as a reference for the purchase."
 msgstr ""
-"Digite a chave que você recebeu ao contribuir com o %@, assim como o e-mail "
-"usado para a compra."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."
@@ -126,4 +122,4 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Yes"
-msgstr "Sim"
+msgstr ""

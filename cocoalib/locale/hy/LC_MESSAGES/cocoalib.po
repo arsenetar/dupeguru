@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -88,7 +87,8 @@ msgstr "Ուղարկել"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Ինչ-որ բան սխալ էր: Ուղարկե՞լ սխալի մասին զեկույց Hardcoded Software-ին:"
+msgstr ""
+"Ինչ-որ բան սխալ էր: Ուղարկե՞լ սխալի մասին զեկույց Hardcoded Software-ին:"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
@@ -110,7 +110,9 @@ msgstr "Փորձել"
 msgid ""
 "Type the key you received when you contributed to %@, as well as the e-mail "
 "used as a reference for the purchase."
-msgstr "Մուտքագրեք այն բանալին, որը ստացել եք %@-ին աջակցելիս, քանզի Ձեր էլ. հասցեն օգտագործվել է գնման ժամանակ:"
+msgstr ""
+"Մուտքագրեք այն բանալին, որը ստացել եք %@-ին աջակցելիս, քանզի Ձեր էլ. հասցեն "
+"օգտագործվել է գնման ժամանակ:"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

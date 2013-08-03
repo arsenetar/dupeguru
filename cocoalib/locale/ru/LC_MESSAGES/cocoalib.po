@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -88,7 +87,8 @@ msgstr "Отправить"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Что-то пошло не так. Хотите отправить отчет об ошибке в Hardcoded Software?"
+msgstr ""
+"Что-то пошло не так. Хотите отправить отчет об ошибке в Hardcoded Software?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
@@ -110,7 +110,9 @@ msgstr "Пробовать"
 msgid ""
 "Type the key you received when you contributed to %@, as well as the e-mail "
 "used as a reference for the purchase."
-msgstr "Тип ключа, который вы получили при способствовала %@, а также электронной почты используется в качестве ссылки для покупки."
+msgstr ""
+"Тип ключа, который вы получили при способствовала %@, а также электронной "
+"почты используется в качестве ссылки для покупки."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

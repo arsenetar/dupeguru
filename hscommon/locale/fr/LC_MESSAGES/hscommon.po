@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -17,4 +16,9 @@ msgid ""
 "So I won't bother you and will be very straightforward: You can try {name} for free but you have to buy it in order to use it without limitations. In demo mode, {name} {limitation}.\n"
 "\n"
 "So it's as simple as this. If you're curious about fairware, however, I encourage you to read more about it by clicking on the \"Fairware?\" button."
-msgstr "{name} est Fairware, ce qui signifie \"open source développé avec des attentes de contributions justes de la part des utilisateurs\". C'est un concept excessivement intéressant, mais un an de fairware a révélé que la plupart des gens ne sont que peu intéressés à des discours sur la propriété intellectuelle et veulent simplement savoir combien ça coûte.\n\nDonc, je serai bref et direct: Vous pouvez essayer {name} gratuitement, mais un achat est requis pour un usage sans limitation. En mode démo, {name} {limitation}.\n\nC'est aussi simple que ça. Par contre, si vous êtes curieux, je vous encourage à cliquer sur le bouton \"Fairware?\" pour en savoir plus."
+msgstr ""
+"{name} est Fairware, ce qui signifie \"open source développé avec des attentes de contributions justes de la part des utilisateurs\". C'est un concept excessivement intéressant, mais un an de fairware a révélé que la plupart des gens ne sont que peu intéressés à des discours sur la propriété intellectuelle et veulent simplement savoir combien ça coûte.\n"
+"\n"
+"Donc, je serai bref et direct: Vous pouvez essayer {name} gratuitement, mais un achat est requis pour un usage sans limitation. En mode démo, {name} {limitation}.\n"
+"\n"
+"C'est aussi simple que ça. Par contre, si vous êtes curieux, je vous encourage à cliquer sur le bouton \"Fairware?\" pour en savoir plus."

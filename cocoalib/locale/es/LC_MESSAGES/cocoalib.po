@@ -1,4 +1,3 @@
-# 
 # Translators:
 msgid ""
 msgstr ""
@@ -18,7 +17,9 @@ msgstr "%@ es Fairware"
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
-msgstr "Aunque la aplicación debería continuar funcionado tras el fallo, sin embargo podría volverse inestable. Se recomienda reiniciar la aplicación."
+msgstr ""
+"Aunque la aplicación debería continuar funcionado tras el fallo, sin embargo"
+" podría volverse inestable. Se recomienda reiniciar la aplicación."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Buy"
@@ -88,7 +89,9 @@ msgstr "Enviar"
 msgid ""
 "Something went wrong. Would you like to send the error report to Hardcoded "
 "Software?"
-msgstr "Se ha producido un error. ¿Desea enviar un informe de error a Harcoded Software?"
+msgstr ""
+"Se ha producido un error. ¿Desea enviar un informe de error a Harcoded "
+"Software?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
@@ -110,7 +113,9 @@ msgstr "Probar"
 msgid ""
 "Type the key you received when you contributed to %@, as well as the e-mail "
 "used as a reference for the purchase."
-msgstr "Escriba la clave que recibió al donar a %@, así como el correo electrónico que usó en el proceso."
+msgstr ""
+"Escriba la clave que recibió al donar a %@, así como el correo electrónico "
+"que usó en el proceso."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

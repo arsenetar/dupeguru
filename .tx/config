@@ -1,5 +1,5 @@
 [main]
-host = https://www.transifex.net
+host = https://www.transifex.com
 
 [dupeguru.core]
 file_filter = locale/<lang>/LC_MESSAGES/core.po
