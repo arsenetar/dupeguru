@@ -21,7 +21,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         self.jobid = None
     
     def cancel(self):
-        self.user_cancelled = True
+        self.job_cancelled = True
     
     def pulse(self):
         # Call this regularly from the GUI main run loop.
@@ -44,7 +44,6 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         # target is a function with its first argument being a Job. It can then be followed by other
         # arguments which are passed as `args`.
         self.jobid = jobid
-        self.user_cancelled = False
         self.progressdesc_textfield.text = ''
         j = self.create_job()
         args = tuple([j] + list(args))

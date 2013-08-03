@@ -24,6 +24,7 @@ class ProgressWindow(QProgressDialog):
         self.setAutoClose(False)
         self._timer = QTimer()
         self._timer.timeout.connect(self.model.pulse)
+        self.canceled.connect(self.model.cancel)
     
     # --- Callbacks
     def refresh(self): # Labels
