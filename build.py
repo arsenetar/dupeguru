@@ -45,6 +45,8 @@ def parse_args():
         help="Generate .pot files from source code.")
     parser.add_option('--mergepot', action='store_true', dest='mergepot',
         help="Update all .po files based on .pot files.")
+    parser.add_option('--normpo', action='store_true', dest='normpo',
+        help="Normalize all PO files (do this before commit).")
     (options, args) = parser.parse_args()
     return options
 
@@ -238,6 +240,12 @@ def build_mergepot():
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
     loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
 
+def build_normpo():
+    loc.normalize_all_pos('locale')
+    loc.normalize_all_pos(op.join('hscommon', 'locale'))
+    loc.normalize_all_pos(op.join('qtlib', 'locale'))
+    loc.normalize_all_pos(op.join('cocoalib', 'locale'))
+
 def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
@@ -339,6 +347,8 @@ def main():
         build_updatepot()
     elif options.mergepot:
         build_mergepot()
+    elif options.normpo:
+        build_normpo()
     elif options.cocoa_ext:
         build_cocoa_proxy_module()
         build_cocoa_bridging_interfaces(edition)
