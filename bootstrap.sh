@@ -4,9 +4,10 @@ command -v pyvenv >/dev/null 2>&1 || { echo >&2 "Python 3.3 required. Install it
 
 if [ ! -d "env" ]; then
     echo "No virtualenv. Creating one"
+    command -v curl >/dev/null 2>&1 || { echo >&2 "curl required. Install it and try again. Aborting"; exit 1; }
     pyvenv --system-site-packages env
     source env/bin/activate
-    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
+    curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
     easy_install pip
 else
     echo "There's already an env. Activating it"
