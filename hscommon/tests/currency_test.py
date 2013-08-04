@@ -11,7 +11,9 @@ import sqlite3 as sqlite
 
 from .. import io
 from ..testutil import eq_, assert_almost_equal
-from ..currency import Currency, RatesDB, CAD, EUR, PLN, USD
+from ..currency import Currency, RatesDB, CAD, EUR, USD
+
+PLN = Currency(code='PLN')
 
 def setup_module(module):
     global FOO

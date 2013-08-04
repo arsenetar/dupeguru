@@ -148,6 +148,9 @@ class TestApp(TestAppBase):
         link_gui(self.pdialog.prioritization_list)
         link_gui(self.app.ignore_list_dialog)
         link_gui(self.app.ignore_list_dialog.ignore_list_table)
+        link_gui(self.app.progress_window)
+        link_gui(self.app.progress_window.jobdesc_textfield)
+        link_gui(self.app.progress_window.progressdesc_textfield)
     
     #--- Helpers
     def select_pri_criterion(self, name):
