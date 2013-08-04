@@ -3,5 +3,3 @@ Send2Trash>=1.3.0
 sphinx>=1.1.3
 polib>=0.7.0
 hsaudiotag3k>=1.1.3
-pytest>=2.0.0
-pytest-monkeyplus>=1.0.0
