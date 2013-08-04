@@ -8,7 +8,7 @@
 
 from PyQt4.QtCore import Qt, QMimeData, QByteArray
 from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
-    QDialogButtonBox, QAbstractItemView, QLabel)
+    QDialogButtonBox, QAbstractItemView, QLabel, QStyle, QSplitter, QWidget, QSizePolicy)
 
 from hscommon.trans import trget
 from qtlib.selectable_list import ComboboxModel, ListviewModel
@@ -79,8 +79,8 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
-        self.addCriteriaButton = QPushButton("-->")
-        self.removeCriteriaButton = QPushButton("<--")
+        self.addCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowRight), "")
+        self.removeCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowLeft), "")
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
         self.prioritizationListView.setDragEnabled(True)
@@ -92,17 +92,26 @@ class PrioritizeDialog(QDialog):
         # layout
         self.mainLayout = QVBoxLayout(self)
         self.mainLayout.addWidget(self.promptLabel)
-        self.widgetsLayout = QHBoxLayout()
+        self.splitter = QSplitter()
+        sp = self.splitter.sizePolicy()
+        sp.setVerticalPolicy(QSizePolicy.Expanding)
+        self.splitter.setSizePolicy(sp)
+        self.leftSide = QWidget()
         self.leftWidgetsLayout = QVBoxLayout()
         self.leftWidgetsLayout.addWidget(self.categoryCombobox)
         self.leftWidgetsLayout.addWidget(self.criteriaListView)
-        self.widgetsLayout.addLayout(self.leftWidgetsLayout)
+        self.leftSide.setLayout(self.leftWidgetsLayout)
+        self.splitter.addWidget(self.leftSide)
+        self.rightSide = QWidget()
+        self.rightWidgetsLayout = QHBoxLayout()
         self.addRemoveButtonsLayout = QVBoxLayout()
         self.addRemoveButtonsLayout.addItem(verticalSpacer())
         self.addRemoveButtonsLayout.addWidget(self.addCriteriaButton)
         self.addRemoveButtonsLayout.addWidget(self.removeCriteriaButton)
         self.addRemoveButtonsLayout.addItem(verticalSpacer())
-        self.widgetsLayout.addLayout(self.addRemoveButtonsLayout)
-        self.widgetsLayout.addWidget(self.prioritizationListView)
-        self.mainLayout.addLayout(self.widgetsLayout)
+        self.rightWidgetsLayout.addLayout(self.addRemoveButtonsLayout)
+        self.rightWidgetsLayout.addWidget(self.prioritizationListView)
+        self.rightSide.setLayout(self.rightWidgetsLayout)
+        self.splitter.addWidget(self.rightSide)
+        self.mainLayout.addWidget(self.splitter)
         self.mainLayout.addWidget(self.buttonBox)
