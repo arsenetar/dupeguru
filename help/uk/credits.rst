@@ -28,6 +28,8 @@
 
 | **Victor Figueiredo, Brazilian localization**
 
+| **Phan Anh, Vietnamese localization**
+
 | **Python, Мова програмування** (`Веб-сайт <http://www.python.org>`__)
 | Кращі рекорди
 

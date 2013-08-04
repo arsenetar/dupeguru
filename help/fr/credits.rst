@@ -27,6 +27,8 @@ Voici la liste des contributeurs de dupeGuru. Merci!
 
 | **Victor Figueiredo, localisation brésilienne**
 
+| **Phan Anh, localisation vietnamienne**
+
 | **Python, Langage de programmation** (`Website <http://www.python.org>`__)
 | Le meilleur des meilleurs
 

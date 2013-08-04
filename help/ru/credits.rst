@@ -28,6 +28,8 @@
 
 | **Victor Figueiredo, Brazilian localization**
 
+| **Phan Anh, Vietnamese localization**
+
 | **Python, Язык программирования** (`Веб сайт  <http://www.python.org>`__)
 | Самая лучшая 
 

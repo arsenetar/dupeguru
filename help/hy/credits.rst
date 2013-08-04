@@ -28,6 +28,8 @@
 
 | **Victor Figueiredo, Brazilian localization**
 
+| **Phan Anh, Vietnamese localization**
+
 | **Python, Ծրագրավորման լեզուն** (`Վեբ կայքը <http://www.python.org>`__)
 | Լավագույներից լավագույնը
 

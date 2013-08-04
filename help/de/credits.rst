@@ -26,6 +26,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Victor Figueiredo, Brazilian localization**
 
+| **Phan Anh, Vietnamese localization**
+
 | **Python, Programming language** (`Website <http://www.python.org>`__)
 | The bestest of the bests
 
