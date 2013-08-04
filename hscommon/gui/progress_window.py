@@ -21,7 +21,11 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         self.jobid = None
     
     def cancel(self):
-        self.job_cancelled = True
+        # The UI is sometimes a bit buggy and calls cancel() on self.view.close(). We just want to
+        # make sure that this doesn't lead us to think that the user acually cancelled the task, so
+        # we verify that the job is still running.
+        if self._job_running:
+            self.job_cancelled = True
     
     def pulse(self):
         # Call this regularly from the GUI main run loop.
