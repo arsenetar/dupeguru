@@ -22,9 +22,8 @@ class ProgressWindow(QProgressDialog):
         self.setModal(True)
         self.setAutoReset(False)
         self.setAutoClose(False)
-        self._timer = QTimer()
+        self._timer = QTimer(self)
         self._timer.timeout.connect(self.model.pulse)
-        self.canceled.connect(self.model.cancel)
     
     # --- Callbacks
     def refresh(self): # Labels
@@ -35,10 +34,15 @@ class ProgressWindow(QProgressDialog):
         self.setValue(last_progress)
     
     def show(self):
+        self.reset()
         QProgressDialog.show(self)
+        self.canceled.connect(self.model.cancel)
         self._timer.start(500)
     
     def close(self):
         self._timer.stop()
+        # For some weird reason, canceled() signal is sent upon close, whether the user canceled
+        # or not. If we don't want a false cancellation, we have to disconnect it.
+        self.canceled.disconnect()
         QProgressDialog.close(self)
     
