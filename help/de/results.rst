@@ -63,6 +63,8 @@ Filtern
 
 DupeGuru unterstützt das Filtern nach dem Scandurchlauf. Damit können Sie ihre Ergebnisse einschränken und diverse Aktionen auf einer Teilmenge ausführen. Beispielsweise ist es möglich alle Duplikate, deren Dateiname "copy" enthält mithilfe dieser Filterfunktion zu markieren.
 
+.. todo:: Qt has a toolbar search field now, not a menu item.
+
 **Windows/Linux:** Um diese Filterfunktion zu nutzen, klicken Sie Aktionen --> Filter anwenden, geben den Filter ein und drücken OK. Um zurück zu den ungefilterten Ergebnissen zu gelangen, gehen Sie auf Aktionen --> Filter entfernen.
 
 **Mac OS X:** Um diese Filterfunktion zu nutzen, geben Sie ihren Filter im "Filter" Suchfeld in der Symbolleiste ein. Um zurück zu den ungefilterten Ergebnissen zu gelangen, leeren Sie das Feld oder drücken auf "X".

@@ -86,21 +86,32 @@ modified.
 Filtering
 ---------
 
-dupeGuru supports post-scan filtering. With it, you can narrow down your results so you can perform actions on a subset of it. For example, you could easily mark all duplicates with their filename containing "copy" from your results using the filter.
+dupeGuru supports post-scan filtering. With it, you can narrow down your results so you can perform
+actions on a subset of it. For example, you could easily mark all duplicates with their filename
+containing "copy" from your results using the filter.
 
-**Windows:** To use the filtering feature, click on Actions --> Apply Filter, write down the filter you want to apply and click OK. To go back to unfiltered results, click on Actions --> Cancel Filter.
+To use the filtering feature, type your filter in the "Filter" search field at the top-right corner
+of the results window. To go back to unfiltered result, blank out the field or click on the "X".
 
-**Mac OS X:** To use the filtering feature, type your filter in the "Filter" search field in the toolbar. To go back to unfiltered result, blank out the field, or click on the "X".
+In simple mode (the default mode), whatever you type as the filter is the string used to perform the
+actual filtering, with the exception of one wildcard: **\***. Thus, if you type "[*]" as your
+filter, it will match anything with [] brackets in it, whatever is in between those brackets.
 
-In simple mode (the default mode), whatever you type as the filter is the string used to perform the actual filtering, with the exception of one wildcard: **\***. Thus, if you type "[*]" as your filter, it will match anything with [] brackets in it, whatever is in between those brackets.
-
-For more advanced filtering, you can turn "Use regular expressions when filtering" on. The filtering feature will then use **regular expressions**. A regular expression is a language for matching text. Explaining them is beyond the scope of this document. A good place to start learning it is `regular-expressions.info <http://www.regular-expressions.info>`_.
+For more advanced filtering, you can turn "Use regular expressions when filtering" on. The filtering
+feature will then use **regular expressions**. A regular expression is a language for matching text.
+Explaining them is beyond the scope of this document. A good place to start learning it is
+`regular-expressions.info`_.
 
 Matches are case insensitive in both simple and regexp mode.
 
-For the filter to match, your regular expression don't have to match the whole filename, it just have to contain a string matching the expression.
+For the filter to match, your regular expression don't have to match the whole filename, it just
+have to contain a string matching the expression.
 
-You might notice that not all duplicates in the filtered results will match your filter. That is because as soon as one single duplicate in a group matches the filter, the whole group stays in the results so you can have a better view of the duplicate's context. However, non-matching duplicates are in "reference mode". Therefore, you can perform actions like Mark All and be sure to only mark filtered duplicates.
+You might notice that not all duplicates in the filtered results will match your filter. That is
+because as soon as one single duplicate in a group matches the filter, the whole group stays in the
+results so you can have a better view of the duplicate's context. However, non-matching duplicates
+are in "reference mode". Therefore, you can perform actions like Mark All and be sure to only mark
+filtered duplicates.
 
 Action Menu
 -----------
@@ -164,5 +175,6 @@ any of them.
   deleting files normally, something that can happens when you try to delete files on network
   storage (NAS).
 
+.. _regular-expressions.info: http://www.regular-expressions.info
 .. _hardlink: http://en.wikipedia.org/wiki/Hard_link
 .. _symlink: http://en.wikipedia.org/wiki/Symbolic_link

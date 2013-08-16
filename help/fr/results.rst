@@ -61,6 +61,8 @@ Filtrer les résultats
 
 Il est possible de filtrer les résultats pour agir sur un sous-ensemble de ceux-ci, par exemple tous les fichiers qui contiennent le mot "copie".
 
+.. todo:: Qt has a toolbar search field now, not a menu item.
+
 **Windows/Linux:** Pour filtrer les résultats, cliquez sur l'action **Appliquer Filtre**. Pour annuler le filtre, il faut cliquer sur **Annuler filtre**.
 
 **Mac OS X:** Pour filtrer les résultats, entrer le filtrer dans le champ de la barre d;outils, puis appuyer sur Entrée. Pour annuler le filtre, appuyez sur le X dans le champ.
