@@ -108,8 +108,7 @@ press Space to mark all selected duplicates.
     I want to mark all duplicates containing the word "copy". How do I do that?
     ---------------------------------------------------------------------------
 
-    * **Windows**: Click on **Actions --> Apply Filter**, then type "copy", then click OK.
-    * **Mac OS X**: Type "copy" in the "Filter" field in the toolbar.
+    * Type "copy" in the "Filter" field in the top-right corner of the result window.
     * Click on **Mark --> Mark All**.
 
 .. only:: edition_me
@@ -144,8 +143,7 @@ press Space to mark all selected duplicates.
     filtering. If, for example, you want to remove every song with anything inside square brackets
     []:
 
-    * **Windows**: Click on **Actions --> Apply Filter**, then type "[*]", then click OK.
-    * **Mac OS X**: Type "[*]" in the "Filter" field in the toolbar.
+    * Type "[*]" in the "Filter" field in the top-right corner of the result window.
     * Click on **Mark --> Mark All**.
     * Click on **Actions --> Remove Selected from Results**.    
 
