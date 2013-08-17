@@ -1,11 +1,11 @@
 #!/bin/bash
 
-command -v pyvenv >/dev/null 2>&1 || { echo >&2 "Python 3.3 required. Install it and try again. Aborting"; exit 1; }
+command -v python3 -m venv >/dev/null 2>&1 || { echo >&2 "Python 3.3 required. Install it and try again. Aborting"; exit 1; }
 
 if [ ! -d "env" ]; then
     echo "No virtualenv. Creating one"
     command -v curl >/dev/null 2>&1 || { echo >&2 "curl required. Install it and try again. Aborting"; exit 1; }
-    pyvenv --system-site-packages env
+    python3 -m venv --system-site-packages env
     source env/bin/activate
     curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
     easy_install pip
