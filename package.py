@@ -69,11 +69,9 @@ def package_windows(edition, dev):
     locale_path = op.join('build', 'locale')
     print("Copying {} to dist\\locale".format(locale_path))
     shutil.copytree(locale_path, op.join(distdir, 'locale'))
-    if is64bit:
-        # In 64bit mode, we don't install the VC redist as a prerequisite. We just bundle the
-        # appropriate dlls.
-        shutil.copy(find_in_path('msvcr100.dll'), distdir)
-        shutil.copy(find_in_path('msvcp100.dll'), distdir)
+    # We don't install the VC redist as a prerequisite. We just bundle the appropriate dlls.
+    shutil.copy(find_in_path('msvcr100.dll'), distdir)
+    shutil.copy(find_in_path('msvcp100.dll'), distdir)
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT type="Advanced Installer" CreateVersion="4.7.2" version="7.5.2" modules="professional" RootPath="." Language="en">
+<DOCUMENT Type="Advanced Installer" CreateVersion="4.7.2" version="8.0.2" Modules="professional" RootPath="." Language="en">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
-    <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_SHORTCUTSREG" Value="0|0|0|"/>
     <ROW Property="ALLUSERS" Value="2"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -18,78 +17,36 @@
     <ROW Property="ProductName" Value="dupeGuru Picture Edition" ValueLocId="*"/>
     <ROW Property="ProductVersion" Value="1.7.0"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
-    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{B1E28F97-9CE2-45E2-B19D-C4137F4DEB85}"/>
-    <ROW Property="WindowsFamily9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT" MultiBuildValue="DefaultBuild:Windows NT 4.0, Windows NT 4.0 Service Pack 1, Windows NT 4.0 Service Pack 2, Windows NT 4.0 Service Pack 3, Windows NT 4.0 Service Pack 4, Windows NT 4.0 Service Pack 5, Windows NT 4.0 Service Pack 6" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNTDisplay" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
-    <ROW Directory="help_DIR" Directory_Parent="APPDIR" DefaultDir="help"/>
-    <ROW Directory="images_DIR" Directory_Parent="help_DIR" DefaultDir="images"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="AIShRegAnswer" ComponentId="{F315B3C7-7C86-41EB-BE7D-2A6A8E3073B4}" Directory_="APPDIR" Attributes="4" KeyPath="AIShRegAnswer"/>
-    <ROW Component="AI_ExePath" ComponentId="{8D009995-D5B9-4E68-A969-45A06F69ACB8}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="CurrentVersion" ComponentId="{1A0BFEFD-F9D9-4861-93AC-D9717B7A635E}" Directory_="APPDIR" Attributes="4" KeyPath="CurrentVersion"/>
-    <ROW Component="QtCore4.dll" ComponentId="{5BB6B87D-BE40-4240-B529-23A303942E18}" Directory_="APPDIR" Attributes="0" KeyPath="QtCore4.dll"/>
-    <ROW Component="QtGui4.dll" ComponentId="{EF519048-F252-4FA0-9875-A6B45C7F3020}" Directory_="APPDIR" Attributes="0" KeyPath="QtGui4.dll"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{29E7E841-7820-418B-8542-7F8CCC9777A8}" Directory_="SHORTCUTDIR" Attributes="0"/>
-    <ROW Component="bz2.pyd" ComponentId="{F7FDAE87-233A-45B0-8976-021B8264E176}" Directory_="APPDIR" Attributes="0" KeyPath="bz2.pyd" Type="0"/>
-    <ROW Component="credits.htm" ComponentId="{CF738E4F-8E05-4B2D-99FD-A035FC25D710}" Directory_="help_DIR" Attributes="0" KeyPath="credits.htm" Type="0"/>
     <ROW Component="dupeGuru_PE.exe" ComponentId="{4A31F2AE-F42E-4B0F-BC4D-A09F312D469B}" Directory_="APPDIR" Attributes="0" KeyPath="dupeGuru_PE.exe"/>
-    <ROW Component="hs_title.png" ComponentId="{ACCD16EE-68BE-4EDA-AE6B-013621EAB3B2}" Directory_="images_DIR" Attributes="0" KeyPath="hs_title.png" Type="0"/>
-    <ROW Component="python26.dll" ComponentId="{20529423-B717-4C53-AE3A-B82E53207A62}" Directory_="APPDIR" Attributes="0" KeyPath="python26.dll"/>
-    <ROW Component="sqlite3.dll" ComponentId="{B5D4B746-A65D-4F4A-B31A-D1C3C7F59952}" Directory_="APPDIR" Attributes="0" KeyPath="sqlite3.dll"/>
     <ROW Component="updater.exe" ComponentId="{D1DDB6CB-B336-4112-BC40-1ABD36C3ABDA}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_PE.exe AIShRegAnswer SHORTCUTDIR bz2.pyd python26.dll QtCore4.dll QtGui4.dll sqlite3.dll AI_ExePath credits.htm hs_title.png CurrentVersion"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="updater.exe dupeGuru_PE.exe AIShRegAnswer SHORTCUTDIR CurrentVersion"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="PIL._imaging.pyd" Component_="bz2.pyd" FileName="PIL_im~1.pyd|PIL._imaging.pyd" Attributes="0" SourcePath="dist\PIL._imaging.pyd" SelfReg="false" Sequence="4"/>
-    <ROW File="PyQt4.QtCore.pyd" Component_="bz2.pyd" FileName="PyQt4Q~1.pyd|PyQt4.QtCore.pyd" Attributes="0" SourcePath="dist\PyQt4.QtCore.pyd" SelfReg="false" Sequence="6"/>
-    <ROW File="PyQt4.QtGui.pyd" Component_="bz2.pyd" FileName="PyQt4Q~2.pyd|PyQt4.QtGui.pyd" Attributes="0" SourcePath="dist\PyQt4.QtGui.pyd" SelfReg="false" Sequence="7"/>
-    <ROW File="QtCore4.dll" Component_="QtCore4.dll" FileName="QtCore4.dll" Attributes="0" SourcePath="dist\QtCore4.dll" SelfReg="false" Sequence="9"/>
-    <ROW File="QtGui4.dll" Component_="QtGui4.dll" FileName="QtGui4.dll" Attributes="0" SourcePath="dist\QtGui4.dll" SelfReg="false" Sequence="10"/>
-    <ROW File="block.pyd" Component_="bz2.pyd" FileName="_block.pyd" Attributes="0" SourcePath="dist\_block.pyd" SelfReg="false" Sequence="15"/>
-    <ROW File="bz2.pyd" Component_="bz2.pyd" FileName="bz2.pyd" Attributes="0" SourcePath="dist\bz2.pyd" SelfReg="false" Sequence="3"/>
-    <ROW File="core_pe._block.pyd" Component_="bz2.pyd" FileName="core_p~1.pyd|core_pe._block.pyd" Attributes="0" SourcePath="dist\core_pe._block.pyd" SelfReg="false" Sequence="22"/>
-    <ROW File="core_pe._cache.pyd" Component_="bz2.pyd" FileName="core_p~2.pyd|core_pe._cache.pyd" Attributes="0" SourcePath="dist\core_pe._cache.pyd" SelfReg="false" Sequence="23"/>
-    <ROW File="credits.htm" Component_="credits.htm" FileName="credits.htm" Attributes="0" SourcePath="dist\help\credits.htm" SelfReg="false" Sequence="24"/>
-    <ROW File="ctypes.pyd" Component_="bz2.pyd" FileName="_ctypes.pyd" Attributes="0" SourcePath="dist\_ctypes.pyd" SelfReg="false" Sequence="16"/>
-    <ROW File="directories.htm" Component_="credits.htm" FileName="direct~1.htm|directories.htm" Attributes="0" SourcePath="dist\help\directories.htm" SelfReg="false" Sequence="25"/>
     <ROW File="dupeGuru_PE.exe" Component_="dupeGuru_PE.exe" FileName="dupeGu~2.exe|dupeGuru PE.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="dist\dupeGuru PE.exe" SelfReg="false" Sequence="2"/>
-    <ROW File="faq.htm" Component_="credits.htm" FileName="faq.htm" Attributes="0" SourcePath="dist\help\faq.htm" SelfReg="false" Sequence="26"/>
-    <ROW File="hardcoded.css" Component_="credits.htm" FileName="hardco~1.css|hardcoded.css" Attributes="0" SourcePath="dist\help\hardcoded.css" SelfReg="false" Sequence="27"/>
-    <ROW File="hashlib.pyd" Component_="bz2.pyd" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\_hashlib.pyd" SelfReg="false" Sequence="17"/>
-    <ROW File="hs_title.png" Component_="hs_title.png" FileName="hs_title.png" Attributes="0" SourcePath="dist\help\images\hs_title.png" SelfReg="false" Sequence="28"/>
-    <ROW File="intro.htm" Component_="credits.htm" FileName="intro.htm" Attributes="0" SourcePath="dist\help\intro.htm" SelfReg="false" Sequence="29"/>
-    <ROW File="lxml.etree.pyd" Component_="bz2.pyd" FileName="lxmlet~1.pyd|lxml.etree.pyd" Attributes="0" SourcePath="dist\lxml.etree.pyd" SelfReg="false" Sequence="35"/>
-    <ROW File="multiprocessing.pyd" Component_="bz2.pyd" FileName="_multi~1.pyd|_multiprocessing.pyd" Attributes="0" SourcePath="dist\_multiprocessing.pyd" SelfReg="false" Sequence="18"/>
-    <ROW File="power_marker.htm" Component_="credits.htm" FileName="power_~1.htm|power_marker.htm" Attributes="0" SourcePath="dist\help\power_marker.htm" SelfReg="false" Sequence="30"/>
-    <ROW File="preferences.htm" Component_="credits.htm" FileName="prefer~1.htm|preferences.htm" Attributes="0" SourcePath="dist\help\preferences.htm" SelfReg="false" Sequence="31"/>
-    <ROW File="pyexpat.pyd" Component_="bz2.pyd" FileName="pyexpat.pyd" Attributes="0" SourcePath="dist\pyexpat.pyd" SelfReg="false" Sequence="5"/>
-    <ROW File="python26.dll" Component_="python26.dll" FileName="python26.dll" Attributes="0" SourcePath="dist\python26.dll" SelfReg="false" Sequence="8"/>
-    <ROW File="quick_start.htm" Component_="credits.htm" FileName="quick_~1.htm|quick_start.htm" Attributes="0" SourcePath="dist\help\quick_start.htm" SelfReg="false" Sequence="32"/>
-    <ROW File="results.htm" Component_="credits.htm" FileName="results.htm" Attributes="0" SourcePath="dist\help\results.htm" SelfReg="false" Sequence="33"/>
-    <ROW File="select.pyd" Component_="bz2.pyd" FileName="select.pyd" Attributes="0" SourcePath="dist\select.pyd" SelfReg="false" Sequence="11"/>
-    <ROW File="send2trash_win.pyd" Component_="bz2.pyd" FileName="_send2~1.pyd|_send2trash_win.pyd" Attributes="0" SourcePath="dist\_send2trash_win.pyd" SelfReg="false" Sequence="36"/>
-    <ROW File="sip.pyd" Component_="bz2.pyd" FileName="sip.pyd" Attributes="0" SourcePath="dist\sip.pyd" SelfReg="false" Sequence="12"/>
-    <ROW File="socket.pyd" Component_="bz2.pyd" FileName="_socket.pyd" Attributes="0" SourcePath="dist\_socket.pyd" SelfReg="false" Sequence="19"/>
-    <ROW File="sqlite3.dll" Component_="sqlite3.dll" FileName="sqlite3.dll" Attributes="0" SourcePath="dist\sqlite3.dll" SelfReg="false" Sequence="13"/>
-    <ROW File="sqlite3.pyd" Component_="bz2.pyd" FileName="_sqlite3.pyd" Attributes="0" SourcePath="dist\_sqlite3.pyd" SelfReg="false" Sequence="20"/>
-    <ROW File="ssl.pyd" Component_="bz2.pyd" FileName="_ssl.pyd" Attributes="0" SourcePath="dist\_ssl.pyd" SelfReg="false" Sequence="21"/>
-    <ROW File="unicodedata.pyd" Component_="bz2.pyd" FileName="unicod~1.pyd|unicodedata.pyd" Attributes="0" SourcePath="dist\unicodedata.pyd" SelfReg="false" Sequence="14"/>
-    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_HOME&gt;updater.exe" SelfReg="false" Sequence="1" DigSign="true"/>
-    <ROW File="versions.htm" Component_="credits.htm" FileName="versions.htm" Attributes="0" SourcePath="dist\help\versions.htm" SelfReg="false" Sequence="34"/>
+    <ROW File="updater.exe" Component_="updater.exe" FileName="updater.exe" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" Sequence="1" DigSign="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageName="install\dupeguru_pe_win_[|ProductVersion]" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" CreateMd5="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\install" ExtUI="true"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="install" PackageFileName="dupeguru_pe_win_[|ProductVersion]" Languages="en" InstallationType="4" CreateMd5="true" ExtUI="true"/>
     <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
@@ -106,23 +63,14 @@
     <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
     <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
-    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
-    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
-    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
-    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
-    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
     <ROW Property="AI_SHORTCUTSREG" Signature_="AI_ShRegOptionMachine"/>
     <ROW Property="AI_SHORTCUTSREG" Signature_="AI_ShRegOptionUser"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
-    <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="banner_image.jpg" SourcePath="&lt;AI_THEMES&gt;classic\resources\banner-image.jpg"/>
     <ROW Name="dialog_image.jpg" SourcePath="&lt;AI_THEMES&gt;classic\resources\dialog-image.jpg"/>
-    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
     <ATTRIBUTE name="FixedSizeBitmaps" value="0"/>
@@ -144,21 +92,21 @@
     <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="3"/>
     <ROW Dialog_="ShortcutsDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
     <ROW Dialog_="ShortcutsDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="301"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="201"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
-    <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
     <ROW Action="AI_DELETE_SHORTCUTS" Type="1" Source="aicustact.dll" Target="DeleteShortcuts"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
-    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
-    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
-    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
-    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
     <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#dupeGuru_PE.exe]"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
@@ -188,34 +136,22 @@
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1300"/>
     <ROW Action="AI_UPDATER_UNINSTALL" Condition="($updater.exe = 2) AND (?updater.exe = 3) AND NOT (UPGRADINGPRODUCTCODE)" Sequence="1547"/>
     <ROW Action="AI_DELETE_SHORTCUTS" Condition="NOT (REMOVE=&quot;ALL&quot;)" Sequence="1449"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
-    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
-    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
-    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
-    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
     <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="740"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
     <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
-    <ROW Condition="Version9X OR VersionNT64 OR (VersionNT &gt;= 500 )" Description="[ProductName] cannot be installed on systems earlier than [WindowsTypeNT]" DescriptionLocId="AI.LaunchCondition.NoSpecificNT" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsFamily9X]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="( Version9X OR VersionNT64 OR ( VersionNT AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &gt;= 1))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 1))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 2))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 3))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 4))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 5))) AND ((VersionNT &lt;&gt; 400) OR ((VersionNT = 400) AND (ServicePackLevel &lt;&gt; 6))) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNTDisplay]" DescriptionLocId="AI.LaunchCondition.NoSpecificNT" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
-    <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
-    <ROW Signature_="AI_EXE_PATH_LM" Root="2" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
     <ROW Signature_="AI_ShRegOptionMachine" Root="2" Key="Software\Caphyon\Advanced Installer\Installs\[ProductCode]" Name="AIShRegAnswer" Type="2"/>
     <ROW Signature_="AI_ShRegOptionUser" Root="1" Key="Software\Caphyon\Advanced Installer\Installs\[ProductCode]" Name="AIShRegAnswer" Type="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="AIShRegAnswer" Root="-1" Key="Software\Caphyon\Advanced Installer\Installs\[ProductCode]" Name="AIShRegAnswer" Value="[AI_SHORTCUTSREG]" Component_="AIShRegAnswer"/>
-    <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
     <ROW Registry="CurrentVersion" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="CurrentVersion" Value="[ProductVersion]" Component_="CurrentVersion"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
@@ -230,13 +166,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
     <ROW UpgradeCode="[|UpgradeCode]" VersionMax="[|ProductVersion]" Attributes="1025" ActionProperty="OLDPRODUCTS"/>
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="0" DisplayName="Visual C++ 2008 SP1 Redistributable" SetupFileUrl="http://download.hardcoded.net/vcredist_90sp1_x86.exe" Location="1" ExactSize="4216840" MinWin9xVer="37" MinWinNTVer="17" Operator="1" ComLine="/q" MD5="5689d43c3b201dd3810fa3bba4a6476a"/>
-    <ATTRIBUTE name="PrereqsOrder" value="0"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
-    <ROW SearchKey="SP" Prereq="0" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\DevDiv\VC\Servicing\9.0\RED\1033\SP" RefContent="M1" Order="1" Property="PreReqSearch"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.SynchronizedFolderComponent">
     <ROW Directory_="APPDIR" SourcePath="dist" Feature="MainFeature" ExcludePattern="*~|#*#|%*%|._|CVS|.cvsignore|SCCS|vssver.scc|mssccprj.scc|vssver2.scc|.svn|.DS_Store" ExcludeFlags="6"/>
