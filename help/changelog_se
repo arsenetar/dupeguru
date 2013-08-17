@@ -1,3 +1,11 @@
+=== 3.7.0 (2013-08-17)
+
+* Improved delta values to support non-numerical values. (#213)
+* Improved the Re-Prioritize dialog's UI. (#224)
+* Added hardlink/symlink support on Windows Vista+. (#220)
+* Dropped 32bit support on Mac OS X.
+* Added Vietnamese localization by Phan Anh.
+
 === 3.6.1 (2013-04-28)
 
 * Improved "Make Selection Reference" to make it clearer. (#222)
