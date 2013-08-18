@@ -19,11 +19,11 @@ from hscommon.path import Path
 from hscommon.util import remove_invalid_xml
 
 from core import directories
-from core.app import JobType
+from core.app import JobType, JOBID2TITLE
 from core.scanner import ScanType
 from core_me.app import DupeGuru as DupeGuruBase
 from core_me import fs
-from .app import JOBID2TITLE, PyDupeGuruBase
+from .app import PyDupeGuruBase
 
 tr = trget('ui')
 
