@@ -184,11 +184,14 @@ class DupeGuruME(DupeGuruBase):
                 pass # We'll return the default file type, as per the last line of this method
         return DupeGuruBase._create_file(self, path)
     
-    def _job_completed(self, jobid, exc):
-        if (jobid in {JobType.RemoveDeadTracks, JobType.ScanDeadTracks}) and (exc is not None):
-            msg = tr("There were communication problems with iTunes. The operation couldn't be completed.")
-            self.view.show_message(msg)
-            return True
+    def _job_completed(self, jobid):
+        # XXX Just before release, I'm realizing that this piece of code below is why I was passing
+        # job exception as an argument to _job_completed(). I have to comment it for now. It's not
+        # the end of the world, but I should find an elegant solution to this at some point.
+        # if (jobid in {JobType.RemoveDeadTracks, JobType.ScanDeadTracks}) and (exc is not None):
+        #     msg = tr("There were communication problems with iTunes. The operation couldn't be completed.")
+        #     self.view.show_message(msg)
+        #     return True
         if jobid == JobType.ScanDeadTracks:
             dead_tracks_count = len(self.dead_tracks)
             if dead_tracks_count > 0:
@@ -202,7 +205,7 @@ class DupeGuruME(DupeGuruBase):
             if hasattr(self, 'itunes_songs'):
                 # If we load another file, we want a refresh song list
                 del self.itunes_songs
-        DupeGuruBase._job_completed(self, jobid, exc)
+        DupeGuruBase._job_completed(self, jobid)
     
     def copy_or_move(self, dupe, copy, destination, dest_type):
         if isinstance(dupe, ITunesSong):
@@ -230,7 +233,7 @@ class DupeGuruME(DupeGuruBase):
                 except CommandError as e:
                     logging.warning('Error while trying to remove a track from iTunes: %s' % str(e))
         
-        self.view.start_job(JobType.RemoveDeadTracks, do)
+        self._start_job(JobType.RemoveDeadTracks, do)
     
     def scan_dead_tracks(self):
         def do(j):
@@ -248,7 +251,7 @@ class DupeGuruME(DupeGuruBase):
                     self.dead_tracks.append(track)
             logging.info('Found %d dead tracks' % len(self.dead_tracks))
         
-        self.view.start_job(JobType.ScanDeadTracks, do)
+        self._start_job(JobType.ScanDeadTracks, do)
     
 class PyDupeGuru(PyDupeGuruBase):
     def __init__(self):

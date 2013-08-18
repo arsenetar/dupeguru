@@ -104,7 +104,7 @@ def build_cocoa(edition, dev):
     if not op.exists(pydep_folder):
         os.mkdir(pydep_folder)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
-    appscript_pkgs = ['appscript', 'aem', 'mactypes']
+    appscript_pkgs = ['appscript', 'aem', 'mactypes', 'osax']
     specific_packages = {
         'se': ['core_se'],
         'me': ['core_me'] + appscript_pkgs + ['hsaudiotag'],
