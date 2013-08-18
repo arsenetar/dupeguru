@@ -96,6 +96,32 @@ def cmp_value(dupe, attrname):
     return value.lower() if isinstance(value, str) else value
 
 class DupeGuru(RegistrableApplication, Broadcaster):
+    """Holds everything together.
+    
+    Instantiated once per running application, it holds a reference to every high-level object
+    whose reference needs to be held: :class:`Results`, :class:`Scanner`,
+    :class:`~core.directories.Directories`, :mod:`core.gui` instances, etc..
+    
+    It also hosts high level methods and acts as a coordinator for all those elements.
+    
+    .. attribute:: directories
+    
+        Instance of :class:`~core.directories.Directories`. It holds the current folder selection.
+    
+    .. attribute:: results
+    
+        Instance of :class:`core.results.Results`. Holds the results of the latest scan.
+    
+    .. attribute:: selected_dupes
+    
+        List of currently selected dupes from our :attr:`results`. Whenever the user changes its
+        selection at the UI level, :attr:`result_table` takes care of updating this attribute, so
+        you can trust that it's always up-to-date.
+    
+    .. attribute:: result_table
+    
+        Instance of :mod:`meta-gui <core.gui>` table listing the results from :attr:`results`
+    """
     #--- View interface
     # open_path(path)
     # reveal_path(path)
@@ -299,6 +325,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             
     #--- Public
     def add_directory(self, d):
+        """Adds folder ``d`` to :attr:`directories`.
+        
+        Shows an error message dialog if something bad happens.
+        
+        :param str d: path of folder to add
+        """
         try:
             self.directories.add_path(Path(d))
             self.notify('directories_changed')
@@ -308,6 +340,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.view.show_message(tr("'{}' does not exist.").format(d))
     
     def add_selected_to_ignore_list(self):
+        """Adds :attr:`selected_dupes` to :attr:`scanner`'s ignore list.
+        """
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             self.view.show_message(MSG_NO_SELECTED_DUPES)
@@ -324,6 +358,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.ignore_list_dialog.refresh()
     
     def apply_filter(self, filter):
+        """Apply a filter ``filter`` to the results so that it shows only dupe groups that match it.
+        
+        :param str filter: filter to apply
+        """
         self.results.apply_filter(None)
         if self.options['escape_filter_regexp']:
             filter = escape(filter, set('()[]\\.|+?^'))
@@ -359,6 +397,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.clean_empty_dirs(source_path[:-1])
     
     def copy_or_move_marked(self, copy):
+        """Start an async move (or copy) job on marked duplicates.
+        
+        :param bool copy: If True, duplicates will be copied instead of moved
+        """
         def do(j):
             def op(dupe):
                 j.add_progress()
@@ -381,6 +423,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self._start_job(jobid, do)
     
     def delete_marked(self):
+        """Start an async job to send marked duplicates to the trash.
+        """
         if not self._check_demo():
             return
         if not self.results.mark_count:
@@ -416,11 +460,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return empty_data()
     
     def invoke_custom_command(self):
-        """Calls command in 'CustomCommand' pref with %d and %r placeholders replaced.
+        """Calls command in ``CustomCommand`` pref with ``%d`` and ``%r`` placeholders replaced.
         
-        Using the current selection, %d is replaced with the currently selected dupe and %r is
-        replaced with that dupe's ref file. If there's no selection, the command is not invoked.
-        If the dupe is a ref, %d and %r will be the same.
+        Using the current selection, ``%d`` is replaced with the currently selected dupe and ``%r``
+        is replaced with that dupe's ref file. If there's no selection, the command is not invoked.
+        If the dupe is a ref, ``%d`` and ``%r`` will be the same.
         """
         cmd = self.view.get_default('CustomCommand')
         if not cmd:
@@ -453,6 +497,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.ignore_list_dialog.refresh()
     
     def load_from(self, filename):
+        """Start an async job to load results from ``filename``.
+        
+        :param str filename: path of the XML file (created with :meth:`save_as`) to load
+        """
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
         self._start_job(JobType.Load, do)
@@ -503,6 +551,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('marking_changed')
     
     def open_selected(self):
+        """Open :attr:`selected_dupes` with their associated application.
+        """
         if len(self.selected_dupes) > 10:
             if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
                 return
@@ -527,6 +577,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('results_changed_but_keep_selection')
     
     def remove_marked(self):
+        """Removed marked duplicates from the results (without touching the files themselves).
+        """
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -537,6 +589,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self._results_changed()
     
     def remove_selected(self):
+        """Removed :attr:`selected_dupes` from the results (without touching the files themselves).
+        """
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             self.view.show_message(MSG_NO_SELECTED_DUPES)
@@ -577,9 +631,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('save_session')
     
     def save_as(self, filename):
+        """Save results in ``filename``.
+        
+        :param str filename: path of the file to save results (as XML) to.
+        """
         self.results.save_to_xml(filename)
     
     def start_scanning(self):
+        """Starts an async job to scan for duplicates.
+        
+        Scans folders selected in :attr:`directories` and put the results in :attr:`results`
+        """
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if self.scanner.scan_type == scanner.ScanType.Folders:
@@ -611,6 +673,8 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.notify('marking_changed')
     
     def without_ref(self, dupes):
+        """Returns ``dupes`` with all reference elements removed.
+        """
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
     
     def get_default(self, key, fallback_value=None):

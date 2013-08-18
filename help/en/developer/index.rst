@@ -44,3 +44,16 @@ a list of matches and returns a list of ``Group`` instances (a ``Group`` is basi
 When a scan is over, the final result (the list of groups from ``get_groups()``) is placed into
 ``app.DupeGuru.results``, which is a ``results.Results`` instance. The ``Results`` instance is where
 all the dupe marking, sorting, removing, power marking, etc. takes place.
+
+API
+---
+
+.. toctree::
+    :maxdepth: 2
+    
+    core/app
+    core/fs
+    core/engine
+    core/directories
+    core/results
+    core/gui

@@ -21,6 +21,19 @@ from . import engine
 from .markable import Markable
 
 class Results(Markable):
+    """Manages a collection of duplicate :class:`~core.engine.Group`.
+    
+    This class takes care or marking, sorting and filtering duplicate groups.
+    
+    .. attribute:: groups
+    
+        The list of :class:`~core.engine.Group` contained managed by this instance.
+    
+    .. attribute:: dupes
+    
+        A list of all duplicates (:class:`~core.fs.File` instances), without ref, contained in the
+        currently managed :attr:`groups`.
+    """
     #---Override
     def __init__(self, app):
         Markable.__init__(self)
@@ -145,17 +158,17 @@ class Results(Markable):
     
     #---Public
     def apply_filter(self, filter_str):
-        ''' Applies a filter 'filter_str' to self.groups
+        """Applies a filter ``filter_str`` to :attr:`groups`
         
-            When you apply the filter, only  dupes with the filename matching 'filter_str' will be in
-            in the results. To cancel the filter, just call apply_filter with 'filter_str' to None, 
-            and the results will go back to normal.
+        When you apply the filter, only  dupes with the filename matching ``filter_str`` will be in
+        in the results. To cancel the filter, just call apply_filter with ``filter_str`` to None, 
+        and the results will go back to normal.
             
-            If call apply_filter on a filtered results, the filter will be applied 
-            *on the filtered results*.
+        If call apply_filter on a filtered results, the filter will be applied 
+        *on the filtered results*.
             
-            'filter_str' is a string containing a regexp to filter dupes with.
-        '''
+        :param str filter_str: a string containing a regexp to filter dupes with.
+        """
         if not filter_str:
             self.__filtered_dupes = None
             self.__filtered_groups = None
@@ -276,8 +289,10 @@ class Results(Markable):
                 self.mark(dupe)
     
     def remove_duplicates(self, dupes):
-        '''Remove 'dupes' from their respective group, and remove the group is it ends up empty.
-        '''
+        """Remove ``dupes`` from their respective :class:`~core.engine.Group`.
+        
+        Also, remove the group from :attr:`groups` if it ends up empty.
+        """
         affected_groups = set()
         for dupe in dupes:
             group = self.get_group_of_duplicate(dupe)

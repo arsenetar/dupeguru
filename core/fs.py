@@ -16,6 +16,18 @@ import logging
 
 from hscommon.util import nonone, get_file_ext
 
+__all__ = [
+    'File',
+    'Folder',
+    'get_file',
+    'get_files',
+    'FSError',
+    'AlreadyExistsError',
+    'InvalidPath',
+    'InvalidDestinationError',
+    'OperationError',
+]
+
 NOT_SET = object()
 
 class FSError(Exception):
@@ -50,6 +62,8 @@ class OperationError(FSError):
     cls_message = "Operation on '{name}' failed."
 
 class File:
+    """Represents a file and holds metadata to be used for scanning.
+    """
     INITIAL_INFO = {
         'size': 0,
         'mtime': 0,
@@ -129,6 +143,8 @@ class File:
     #--- Public
     @classmethod
     def can_handle(cls, path):
+        """Returns whether this file wrapper class can handle ``path``.
+        """
         return not path.islink() and path.isfile()
     
     def rename(self, newname):
@@ -214,11 +230,25 @@ class Folder(File):
     
 
 def get_file(path, fileclasses=[File]):
+    """Wraps ``path`` around its appropriate :class:`File` class.
+    
+    Whether a class is "appropriate" is decided by :meth:`File.can_handle`
+    
+    :param Path path: path to wrap
+    :param fileclasses: List of candidate :class:`File` classes
+    """
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
             return fileclass(path)
 
 def get_files(path, fileclasses=[File]):
+    """Returns a list of :class:`File` for each file contained in ``path``.
+    
+    Subfolders are recursively scanned.
+    
+    :param Path path: path to scan
+    :param fileclasses: List of candidate :class:`File` classes
+    """
     assert all(issubclass(fileclass, File) for fileclass in fileclasses)
     def combine_paths(p1, p2):
         try:

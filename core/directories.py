@@ -15,7 +15,20 @@ from hscommon.util import FileOrPath
 
 from . import fs
 
+__all__ = [
+    'Directories',
+    'DirectoryState',
+    'AlreadyThereError',
+    'InvalidPathError',
+]
+
 class DirectoryState:
+    """Enum describing how a folder should be considered.
+    
+    * DirectoryState.Normal: Scan all files normally
+    * DirectoryState.Reference: Scan files, but make sure never to delete any of them
+    * DirectoryState.Excluded: Don't scan this folder
+    """
     Normal = 0
     Reference = 1
     Excluded = 2
@@ -27,6 +40,14 @@ class InvalidPathError(Exception):
     """The path being added is invalid"""
 
 class Directories:
+    """Holds user folder selection.
+    
+    Manages the selection that the user make through the folder selection dialog. It also manages
+    folder states, and how recursion applies to them.
+    
+    Then, when the user starts the scan, :meth:`get_files` is called to retrieve all files (wrapped
+    in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
+    """
     #---Override
     def __init__(self, fileclasses=[fs.File]):
         self._dirs = []
@@ -97,11 +118,14 @@ class Directories:
     
     #---Public
     def add_path(self, path):
-        """Adds 'path' to self, if not already there.
+        """Adds ``path`` to self, if not already there.
         
-        Raises AlreadyThereError if 'path' is already in self. If path is a directory containing
-        some of the directories already present in self, 'path' will be added, but all directories
-        under it will be removed. Can also raise InvalidPathError if 'path' does not exist.
+        Raises :exc:`AlreadyThereError` if ``path`` is already in self. If path is a directory
+        containing some of the directories already present in self, ``path`` will be added, but all
+        directories under it will be removed. Can also raise :exc:`InvalidPathError` if ``path``
+        does not exist.
+        
+        :param Path path: path to add
         """
         if path in self:
             raise AlreadyThereError()
@@ -112,7 +136,11 @@ class Directories:
     
     @staticmethod
     def get_subfolders(path):
-        """returns a sorted list of paths corresponding to subfolders in `path`"""
+        """Returns a sorted list of paths corresponding to subfolders in ``path``.
+        
+        :param Path path: get subfolders from there
+        :rtype: list of Path
+        """
         try:
             names = [name for name in path.listdir() if (path + name).isdir()]
             names.sort(key=lambda x:x.lower())
@@ -123,7 +151,7 @@ class Directories:
     def get_files(self, j=job.nulljob):
         """Returns a list of all files that are not excluded.
         
-        Returned files also have their 'is_ref' attr set.
+        Returned files also have their ``is_ref`` attr set if applicable.
         """
         for path in self._dirs:
             for file in self._get_files(path, j):
@@ -132,7 +160,7 @@ class Directories:
     def get_folders(self, j=job.nulljob):
         """Returns a list of all folders that are not excluded.
         
-        Returned folders also have their 'is_ref' attr set.
+        Returned folders also have their ``is_ref`` attr set if applicable.
         """
         for path in self._dirs:
             from_folder = fs.Folder(path)
@@ -140,7 +168,9 @@ class Directories:
                 yield folder
     
     def get_state(self, path):
-        """Returns the state of 'path' (One of the STATE_* const.)
+        """Returns the state of ``path``.
+        
+        :rtype: :class:`DirectoryState`
         """
         if path in self.states:
             return self.states[path]
@@ -154,6 +184,12 @@ class Directories:
             return DirectoryState.Normal
     
     def has_any_file(self):
+        """Returns whether selected folders contain any file.
+        
+        Because it stops at the first file it finds, it's much faster than get_files().
+        
+        :rtype: bool
+        """
         try:
             next(self.get_files())
             return True
@@ -161,6 +197,10 @@ class Directories:
             return False
     
     def load_from_file(self, infile):
+        """Load folder selection from ``infile``.
+        
+        :param file infile: path or file pointer to XML generated through :meth:`save_to_file`
+        """
         try:
             root = ET.parse(infile).getroot()
         except Exception:
@@ -183,6 +223,10 @@ class Directories:
             self.set_state(Path(path), int(state))
     
     def save_to_file(self, outfile):
+        """Save folder selection as XML to ``outfile``.
+        
+        :param file outfile: path or file pointer to XML file to save to.
+        """
         with FileOrPath(outfile, 'wb') as fp:
             root = ET.Element('directories')
             for root_path in self:
@@ -196,6 +240,12 @@ class Directories:
             tree.write(fp, encoding='utf-8')
     
     def set_state(self, path, state):
+        """Set the state of folder at ``path``.
+        
+        :param Path path: path of the target folder
+        :param state: state to set folder to
+        :type state: :class:`DirectoryState`
+        """
         if self.get_state(path) == state:
             return
         # we don't want to needlessly fill self.states. if get_state returns the same thing

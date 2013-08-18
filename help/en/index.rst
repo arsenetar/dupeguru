@@ -54,6 +54,6 @@ Contents:
     results
     reprioritize
     faq
-    developer
+    developer/index
     changelog
     credits

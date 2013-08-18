@@ -224,6 +224,23 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
     return result
 
 class Group:
+    """A group of :class:`~core.fs.File` that match together.
+
+    This manages match pairs into groups and ensures that all files in the group match to each
+    other.
+    
+    .. attribute:: ref
+    
+        The "reference" file, which is the file among the group that isn't going to be deleted.
+    
+    .. attribute:: ordered
+    
+        Ordered list of duplicates in the group (including the :attr:`ref`).
+    
+    .. attribute:: unordered
+    
+        Set duplicates in the group (including the :attr:`ref`).
+    """
     #---Override
     def __init__(self):
         self._clear()
@@ -257,6 +274,15 @@ class Group:
     
     #---Public
     def add_match(self, match):
+        """Adds ``match`` to internal match list and possibly add duplicates to the group.
+        
+        A duplicate can only be considered as such if it matches all other duplicates in the group.
+        This method registers that pair (A, B) represented in ``match`` as possible candidates and,
+        if A and/or B end up matching every other duplicates in the group, add these duplicates to
+        the group.
+        
+        :param tuple match: pair of :class:`~core.fs.File` to add
+        """
         def add_candidate(item, match):
             matches = self.candidates[item]
             matches.add(match)
@@ -276,12 +302,18 @@ class Group:
         self._matches_for_ref = None
     
     def discard_matches(self):
+        """Remove all recorded matches that didn't result in a duplicate being added to the group.
+        
+        You can call this after the duplicate scanning process to free a bit of memory.
+        """
         discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
         self.matches -= discarded
         self.candidates = defaultdict(set)
         return discarded
     
     def get_match_of(self, item):
+        """Returns the match pair between ``item`` and :attr:`ref`.
+        """
         if item is self.ref:
             return
         for m in self._get_matches_for_ref():
@@ -289,6 +321,12 @@ class Group:
                 return m
     
     def prioritize(self, key_func, tie_breaker=None):
+        """Reorders :attr:`ordered` according to ``key_func``.
+        
+        :param key_func: Key (f(x)) to be used for sorting
+        :param tie_breaker: function to be used to select the reference position in case the top
+                            duplicates have the same key_func() result.
+        """
         # tie_breaker(ref, dupe) --> True if dupe should be ref
         # Returns True if anything changed during prioritization.
         master_key_func = lambda x: (-x.is_ref, key_func(x))
