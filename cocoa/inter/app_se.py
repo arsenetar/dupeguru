@@ -36,6 +36,7 @@ class Directories(DirectoriesBase):
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
         DirectoriesBase.__init__(self, fileclasses=[Bundle, fs.File])
+        self.folderclass = fs.Folder
     
     def _default_state_for_path(self, path):
         result = DirectoriesBase._default_state_for_path(self, path)
