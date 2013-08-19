@@ -221,7 +221,7 @@ class Folder(File):
         if self._subfolders is None:
             subpaths = [self.path + name for name in self.path.listdir()]
             subfolders = [p for p in subpaths if not p.islink() and p.isdir()]
-            self._subfolders = [Folder(p) for p in subfolders]
+            self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
     
     @classmethod
@@ -243,8 +243,6 @@ def get_file(path, fileclasses=[File]):
 
 def get_files(path, fileclasses=[File]):
     """Returns a list of :class:`File` for each file contained in ``path``.
-    
-    Subfolders are recursively scanned.
     
     :param Path path: path to scan
     :param fileclasses: List of candidate :class:`File` classes

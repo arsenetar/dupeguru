@@ -53,6 +53,7 @@ class Directories:
         self._dirs = []
         self.states = {}
         self.fileclasses = fileclasses
+        self.folderclass = fs.Folder
     
     def __contains__(self, path):
         for p in self._dirs:
@@ -163,7 +164,7 @@ class Directories:
         Returned folders also have their ``is_ref`` attr set if applicable.
         """
         for path in self._dirs:
-            from_folder = fs.Folder(path)
+            from_folder = self.folderclass(path)
             for folder in self._get_folders(from_folder, j):
                 yield folder
     
