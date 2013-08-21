@@ -195,6 +195,8 @@ class Results(Markable):
         self.__dupes = None
     
     def get_group_of_duplicate(self, dupe):
+        """Returns :class:`~core.engine.Group` in which ``dupe`` belongs.
+        """
         try:
             return self.__group_of_duplicate[dupe]
         except (TypeError, KeyError):
@@ -203,6 +205,12 @@ class Results(Markable):
     is_markable = _is_markable
     
     def load_from_xml(self, infile, get_file, j=nulljob):
+        """Load results from ``infile``.
+        
+        :param infile: a file or path pointing to an XML file created with :meth:`save_to_xml`.
+        :param get_file: a function f(path) returning a :class:`~core.fs.File` wrapping the path.
+        :param j: A :ref:`job progress instance <jobs>`.
+        """
         def do_match(ref_file, other_files, group):
             if not other_files:
                 return
@@ -255,6 +263,8 @@ class Results(Markable):
         self.is_modified = False
     
     def make_ref(self, dupe):
+        """Make ``dupe`` take the :attr:`~core.engine.Group.ref` position of its group.
+        """
         g = self.get_group_of_duplicate(dupe)
         r = g.ref
         if not g.switch_ref(dupe):
@@ -271,8 +281,14 @@ class Results(Markable):
         return True
     
     def perform_on_marked(self, func, remove_from_results):
-        # Performs `func` on all marked dupes. If an EnvironmentError is raised during the call,
-        # the problematic dupe is added to self.problems.
+        """Performs ``func`` on all marked dupes.
+        
+        If an ``EnvironmentError`` is raised during the call, the problematic dupe is added to
+        self.problems.
+        
+        :param bool remove_from_results: If true, dupes which had ``func`` applied and didn't cause
+                                         any problem.
+        """
         self.problems = []
         to_remove = []
         marked = (dupe for dupe in self.dupes if self.is_marked(dupe))
@@ -317,9 +333,12 @@ class Results(Markable):
         self.is_modified = bool(self.__groups)
     
     def save_to_xml(self, outfile):
+        """Save results to ``outfile`` in XML.
+        
+        :param outfile: file object or path.
+        """
         self.apply_filter(None)
         root = ET.Element('results')
-        # writer = XMLGenerator(outfile, 'utf-8')
         for g in self.groups:
             group_elem = ET.SubElement(root, 'group')
             dupe2index = {}
@@ -364,13 +383,26 @@ class Results(Markable):
         self.is_modified = False
     
     def sort_dupes(self, key, asc=True, delta=False):
+        """Sort :attr:`dupes` according to ``key``.
+        
+        :param str key: key attribute name to sort with.
+        :param bool asc: If false, sorting is reversed.
+        :param bool delta: If true, sorting occurs using :ref:`delta values <deltavalues>`.
+        """
         if not self.__dupes:
             self.__get_dupe_list()
         keyfunc = lambda d: self.app._get_dupe_sort_key(d, lambda: self.get_group_of_duplicate(d), key, delta)
         self.__dupes.sort(key=keyfunc, reverse=not asc)
         self.__dupes_sort_descriptor = (key,asc,delta)
     
-    def sort_groups(self,key,asc=True):
+    def sort_groups(self, key, asc=True):
+        """Sort :attr:`groups` according to ``key``.
+        
+        The :attr:`~core.engine.Group.ref` of each group is used to extract values for sorting.
+        
+        :param str key: key attribute name to sort with.
+        :param bool asc: If false, sorting is reversed.
+        """
         keyfunc = lambda g: self.app._get_group_sort_key(g, key)
         self.groups.sort(key=keyfunc, reverse=not asc)
         self.__groups_sort_descriptor = (key,asc)

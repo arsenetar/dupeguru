@@ -44,10 +44,10 @@ def unpack_fields(fields):
     return result
 
 def compare(first, second, flags=()):
-    """Returns the % of words that match between first and second
+    """Returns the % of words that match between ``first`` and ``second``
     
-    The result is a int in the range 0..100.
-    First and second can be either a string or a list.
+    The result is a ``int`` in the range 0..100.
+    ``first`` and ``second`` can be either a string or a list (of words).
     """
     if not (first and second):
         return 0
@@ -76,9 +76,10 @@ def compare(first, second, flags=()):
     return result
 
 def compare_fields(first, second, flags=()):
-    """Returns the score for the lowest matching fields.
+    """Returns the score for the lowest matching :ref:`fields`.
     
-    first and second must be lists of lists of string.
+    ``first`` and ``second`` must be lists of lists of string. Each sub-list is then compared with
+    :func:`compare`. 
     """
     if len(first) != len(second):
         return 0
@@ -98,13 +99,14 @@ def compare_fields(first, second, flags=()):
             if matched_field:
                 second.remove(matched_field)
     else:
-        results = [compare(word1, word2, flags) for word1, word2 in zip(first, second)]
+        results = [compare(field1, field2, flags) for field1, field2 in zip(first, second)]
     return min(results) if results else 0
 
 def build_word_dict(objects, j=job.nulljob):
     """Returns a dict of objects mapped by their words.
     
-    objects must have a 'words' attribute being a list of strings or a list of lists of strings.
+    objects must have a ``words`` attribute being a list of strings or a list of lists of strings
+    (:ref:`fields`).
     
     The result will be a dict with words as keys, lists of objects as values.
     """
@@ -115,7 +117,11 @@ def build_word_dict(objects, j=job.nulljob):
     return result
 
 def merge_similar_words(word_dict):
-    """Take all keys in word_dict that are similar, and merge them together.
+    """Take all keys in ``word_dict`` that are similar, and merge them together.
+    
+    ``word_dict`` has been built with :func:`build_word_dict`. Similarity is computed with Python's
+    ``difflib.get_close_matches()``, which computes the number of edits that are necessary to make
+    a word equal to the other.
     """
     keys = list(word_dict.keys())
     keys.sort(key=len)# we want the shortest word to stay
@@ -131,7 +137,9 @@ def merge_similar_words(word_dict):
             keys.remove(similar)
 
 def reduce_common_words(word_dict, threshold):
-    """Remove all objects from word_dict values where the object count >= threshold
+    """Remove all objects from ``word_dict`` values where the object count >= ``threshold``
+    
+    ``word_dict`` has been built with :func:`build_word_dict`.
     
     The exception to this removal are the objects where all the words of the object are common.
     Because if we remove them, we will miss some duplicates!
@@ -150,13 +158,42 @@ def reduce_common_words(word_dict, threshold):
             del word_dict[word]
 
 Match = namedtuple('Match', 'first second percentage')
+Match.__doc__ = """Represents a match between two :class:`~core.fs.File`.
+
+Regarless of the matching method, when two files are determined to match, a Match pair is created,
+which holds, of course, the two matched files, but also their match "level".
+
+.. attribute:: first
+
+    first file of the pair.
+
+.. attribute:: second
+
+    second file of the pair.
+
+.. attribute:: percentage
+
+    their match level according to the scan method which found the match. int from 1 to 100. For
+    exact scan methods, such as Contents scans, this will always be 100.
+"""
+
 def get_match(first, second, flags=()):
     #it is assumed here that first and second both have a "words" attribute
     percentage = compare(first.words, second.words, flags)
     return Match(first, second, percentage)
 
-def getmatches(objects, min_match_percentage=0, match_similar_words=False, weight_words=False, 
-    no_field_order=False, j=job.nulljob):
+def getmatches(
+        objects, min_match_percentage=0, match_similar_words=False, weight_words=False, 
+        no_field_order=False, j=job.nulljob):
+    """Returns a list of :class:`Match` within ``objects`` after fuzzily matching their words.
+    
+    :param objects: List of :class:`~core.fs.File` to match.
+    :param int min_match_percentage: minimum % of words that have to match.
+    :param bool match_similar_words: make similar words (see :func:`merge_similar_words`) match.
+    :param bool weight_words: longer words are worth more in match % computations.
+    :param bool no_field_order: match :ref:`fields` regardless of their order.
+    :param j: A :ref:`job progress instance <jobs>`.
+    """
     COMMON_WORD_THRESHOLD = 50
     LIMIT = 5000000
     j = j.start_subjob(2)
@@ -203,6 +240,14 @@ def getmatches(objects, min_match_percentage=0, match_similar_words=False, weigh
     return result
 
 def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob):
+    """Returns a list of :class:`Match` within ``files`` if their contents is the same.
+    
+    :param str sizeattr: attibute name of the :class:`~core.fs.file` that returns the size of the
+                         file to use for comparison.
+    :param bool partial: if true, will use the "md5partial" attribute instead of "md5" to compute
+                         contents hash.
+    :param j: A :ref:`job progress instance <jobs>`.
+    """
     j = j.start_subjob([2, 8])
     size2files = defaultdict(set)
     for file in j.iter_with_progress(files, tr("Read size of %d/%d files")):
@@ -240,6 +285,15 @@ class Group:
     .. attribute:: unordered
     
         Set duplicates in the group (including the :attr:`ref`).
+    
+    .. attribute:: dupes
+    
+        An ordered list of the group's duplicate, without :attr:`ref`. Equivalent to
+        ``ordered[1:]``
+    
+    .. attribute:: percentage
+    
+        Average match percentage of match pairs containing :attr:`ref`.
     """
     #---Override
     def __init__(self):
@@ -362,6 +416,8 @@ class Group:
             pass
     
     def switch_ref(self, with_dupe):
+        """Make the :attr:`ref` dupe of the group switch position with ``with_dupe``.
+        """
         if self.ref.is_ref:
             return False
         try:
@@ -392,6 +448,10 @@ class Group:
     
 
 def get_groups(matches, j=job.nulljob):
+    """Returns a list of :class:`Group` from ``matches``.
+    
+    Create groups out of match pairs in the smartest way possible.
+    """
     matches.sort(key=lambda match: -match.percentage)
     dupe2group = {}
     groups = []

@@ -45,6 +45,8 @@ The dupeGuru results, when in normal mode, are sorted according to duplicate gro
 * Hold Shift and click on it.
 * Press Space to mark all selected duplicates.
 
+.. _deltavalues:
+
 Delta Values
 ------------
 

@@ -23,6 +23,8 @@ codebase. For example, when performing "Remove Selected From Results",
 ``base.app.DupeGuru.remove_duplicates()`` on the PyQt side, are respectively called to perform the
 thing. All of this is quite ugly, I know (see the "Refactoring" section below).
 
+.. _jobs:
+
 Jobs
 ----
 
