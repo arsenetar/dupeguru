@@ -259,8 +259,8 @@ class DupeGuruPE(DupeGuruBase):
             return self.path2aperture.get(path)
         return DupeGuruBase._create_file(self, path)
     
-    def _job_completed(self, jobid, exc):
-        DupeGuruBase._job_completed(self, jobid, exc)
+    def _job_completed(self, jobid):
+        DupeGuruBase._job_completed(self, jobid)
         if jobid == JobType.Load:
             if hasattr(self, 'path2iphoto'):
                 del self.path2iphoto
