@@ -80,6 +80,9 @@ class DupeGuru(DupeGuruBase):
     def _setup(self):
         self.model.directories.fileclasses = [File]
         DupeGuruBase._setup(self)
+        self.directories_dialog.menuFile.insertAction(
+            self.directories_dialog.actionLoadResults, self.resultWindow.actionClearPictureCache
+        )
     
     def _update_options(self):
         DupeGuruBase._update_options(self)

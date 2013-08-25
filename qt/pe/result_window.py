@@ -17,6 +17,7 @@ class ResultWindow(ResultWindowBase):
     def _setupMenu(self):
         ResultWindowBase._setupMenu(self)
         self.actionClearPictureCache = QAction(tr("Clear Picture Cache"), self)
+        self.actionClearPictureCache.setShortcut('Ctrl+Shift+P')
         self.menuFile.insertAction(self.actionSaveResults, self.actionClearPictureCache)
         self.actionClearPictureCache.triggered.connect(self.clearPictureCacheTriggered)
     
