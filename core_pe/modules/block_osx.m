@@ -32,7 +32,7 @@ pystring2cfstring(PyObject *pystring)
     }
     
     s = (UInt8*)PyBytes_AS_STRING(encoded);
-    size = PyUnicode_GET_SIZE(encoded);
+    size = PyBytes_GET_SIZE(encoded);
     result = CFStringCreateWithBytes(NULL, s, size, kCFStringEncodingUTF8, FALSE);
     Py_DECREF(encoded);
     return result;
