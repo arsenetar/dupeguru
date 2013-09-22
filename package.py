@@ -84,12 +84,16 @@ def package_windows(edition, dev):
     if op.exists('installer_tmp.back.aip'):
         os.remove('installer_tmp.back.aip')
 
-def copy_source_files(destpath, packages):
+def copy_files_to_package(destpath, packages, with_so):
+    # when with_so is true, we keep .so files in the package, and otherwise, we don't. We need this
+    # flag because when building debian src pkg, we *don't* want .so files (they're compiled later)
+    # and when we're packaging under Arch, we're packaging a binary package, so we want them.
     if op.exists(destpath):
         shutil.rmtree(destpath)
     os.makedirs(destpath)
     shutil.copy('run.py', op.join(destpath, 'run.py'))
-    copy_packages(packages, destpath)
+    extra_ignores = ['*.so'] if not with_so else None
+    copy_packages(packages, destpath, extra_ignores=extra_ignores)
     os.remove(op.join(destpath, 'qt', 'run_template.py')) # It doesn't belong in the package.
     shutil.copytree(op.join('build', 'help'), op.join(destpath, 'help'))
     shutil.copytree(op.join('build', 'locale'), op.join(destpath, 'locale'))
@@ -104,7 +108,7 @@ def package_debian_distribution(edition, distribution):
     packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
     if edition == 'me':
         packages.append('hsaudiotag')
-    copy_source_files(srcpath, packages)
+    copy_files_to_package(srcpath, packages, with_so=False)
     if edition == 'pe':
         os.mkdir(op.join(destpath, 'modules'))
         copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
@@ -145,7 +149,7 @@ def package_arch(edition):
     packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
     if edition == 'me':
         packages.append('hsaudiotag')
-    copy_source_files(srcpath, packages)
+    copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join('images', ed('dg{}_logo_128.png')), srcpath)
 
 def package_source_tgz(edition):
