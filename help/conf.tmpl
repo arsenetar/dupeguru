@@ -12,6 +12,7 @@
 # serve to show the default.
 
 import sys, os
+import re
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -19,6 +20,16 @@ import sys, os
 
 # for autodocs
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
+
+# -- Misc fixes for autodoc
+
+def fix_nulljob_in_sig(app, what, name, obj, options, signature, return_annotation):
+    if signature:
+        signature = re.sub(r"<jobprogress.job.NullJob object at 0x[\da-f]+>", "nulljob", signature)
+    return signature, return_annotation
+
+def setup(app):
+    app.connect('autodoc-process-signature', fix_nulljob_in_sig)
 
 # -- General configuration -----------------------------------------------------
 
