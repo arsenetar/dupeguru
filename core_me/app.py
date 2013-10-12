@@ -16,8 +16,8 @@ class DupeGuru(DupeGuruBase):
     METADATA_TO_READ = ['size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
         'album', 'genre', 'year', 'track', 'comment']
 
-    def __init__(self, view, appdata):
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
         self.scanner = scanner.ScannerME()
         self.directories.fileclasses = [fs.MusicFile]
     

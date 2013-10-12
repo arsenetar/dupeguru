@@ -1,7 +1,7 @@
 import logging
 
 from objp.util import pyref, dontwrap
-from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer, proxy
+from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer
 from cocoa.inter import PyFairware, FairwareView
 
 class DupeGuruView(FairwareView):
@@ -17,8 +17,7 @@ class PyDupeGuruBase(PyFairware):
         install_exception_hook()
         install_cocoa_logger()
         patch_threaded_job_performer()
-        appdata = proxy.getAppdataPath()
-        self.model = modelclass(self, appdata)
+        self.model = modelclass(self)
     
     #---Sub-proxies
     def detailsPanel(self) -> pyref:
@@ -144,14 +143,6 @@ class PyDupeGuruBase(PyFairware):
         self.model.options['copymove_dest_type'] = copymove_dest_type
     
     #--- model --> view
-    @dontwrap
-    def open_path(self, path):
-        proxy.openPath_(str(path))
-    
-    @dontwrap
-    def reveal_path(self, path):
-        proxy.revealPath_(str(path))
-    
     @dontwrap
     def ask_yes_no(self, prompt):
         return self.callback.askYesNoWithPrompt_(prompt)

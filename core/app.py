@@ -25,6 +25,7 @@ from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_d
     rem_file_ext)
 from hscommon.trans import tr
 from hscommon.plat import ISWINDOWS
+from hscommon import desktop
 
 from . import directories, results, scanner, export, fs
 from .gui.deletion_options import DeletionOptions
@@ -123,8 +124,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         Instance of :mod:`meta-gui <core.gui>` table listing the results from :attr:`results`
     """
     #--- View interface
-    # open_path(path)
-    # reveal_path(path)
     # ask_yes_no(prompt) --> bool
     # show_results_window()
     # show_problem_dialog()
@@ -135,13 +134,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     PROMPT_NAME = "dupeGuru"
     DEMO_LIMITATION = tr("will only be able to delete, move or copy 10 duplicates at once")
     
-    def __init__(self, view, appdata):
+    def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
         RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
-        self.appdata = appdata
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.directories = directories.Directories()
@@ -440,7 +439,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def export_to_xhtml(self):
         colnames, rows = self._get_export_data()
         export_path = export.export_to_xhtml(colnames, rows)
-        self.view.open_path(export_path)
+        desktop.open_path(export_path)
     
     def export_to_csv(self):
         dest_file = self.view.select_dest_file(tr("Select a destination for your exported CSV"), 'csv')
@@ -557,7 +556,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
                 return
         for dupe in self.selected_dupes:
-            self.view.open_path(dupe.path)
+            desktop.open_path(dupe.path)
     
     def purge_ignore_list(self):
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
@@ -620,7 +619,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def reveal_selected(self):
         if self.selected_dupes:
-            self.view.reveal_path(self.selected_dupes[0].path)
+            desktop.reveal_path(self.selected_dupes[0].path)
     
     def save(self):
         if not op.exists(self.appdata):

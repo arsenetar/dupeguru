@@ -18,8 +18,8 @@ class DupeGuru(DupeGuruBase):
     NAME = __appname__
     METADATA_TO_READ = ['size', 'mtime', 'dimensions', 'exif_timestamp']
     
-    def __init__(self, view, appdata):
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
         self.scanner = ScannerPE()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     

@@ -7,7 +7,6 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-import os
 import os.path as op
 
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
@@ -15,11 +14,12 @@ from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QAp
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
+from hscommon import desktop
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
 from qtlib.reg import Registration
-from qtlib.util import createActions, getAppData
+from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow 
 
 from . import platform
@@ -46,7 +46,7 @@ class DupeGuru(QObject):
         QObject.__init__(self)
         self.prefs = self.PREFERENCES_CLASS()
         self.prefs.load()
-        self.model = self.MODELCLASS(view=self, appdata=getAppData())
+        self.model = self.MODELCLASS(view=self)
         self._setup()
         self.prefsChanged.emit(self.prefs)
     
@@ -154,7 +154,7 @@ class DupeGuru(QObject):
     
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, 'debug.log')
-        self.open_path(debugLogPath)
+        desktop.open_path(debugLogPath)
     
     def preferencesTriggered(self):
         self.preferences_dialog.load()
@@ -181,15 +181,6 @@ class DupeGuru(QObject):
         QDesktopServices.openUrl(url)
     
     #--- model --> view
-    @staticmethod
-    def open_path(path):
-        url = QUrl.fromLocalFile(str(path))
-        QDesktopServices.openUrl(url)
-    
-    @staticmethod
-    def reveal_path(path):
-        DupeGuru.open_path(path[:-1])
-    
     def get_default(self, key):
         return self.prefs.get_value(key)
     
@@ -211,10 +202,6 @@ class DupeGuru(QObject):
     
     def ask_yes_no(self, prompt):
         return self.confirm('', prompt)
-    
-    def open_url(self, url):
-        url = QUrl(url)
-        QDesktopServices.openUrl(url)
     
     def show_results_window(self):
         self.showResultsWindow()

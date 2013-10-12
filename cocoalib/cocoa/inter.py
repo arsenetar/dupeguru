@@ -295,10 +295,6 @@ class PyBaseApp(PyGUIObject):
         proxy.setPrefValue_value_(key_name, value)
     
     @dontwrap
-    def open_url(self, url):
-        proxy.openURL_(url)
-    
-    @dontwrap
     def show_message(self, msg):
         self.callback.showMessage_(msg)
 
