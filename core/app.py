@@ -99,10 +99,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     """Holds everything together.
     
     Instantiated once per running application, it holds a reference to every high-level object
-    whose reference needs to be held: :class:`Results`, :class:`Scanner`,
+    whose reference needs to be held: :class:`~core.results.Results`, :class:`Scanner`,
     :class:`~core.directories.Directories`, :mod:`core.gui` instances, etc..
     
-    It also hosts high level methods and acts as a coordinator for all those elements.
+    It also hosts high level methods and acts as a coordinator for all those elements. This is why
+    some of its methods seem a bit shallow, like for example :meth:`mark_all` and
+    :meth:`remove_duplicates`. These methos are just proxies for a method in :attr:`results`, but
+    they are also followed by a notification call which is very important if we want GUI elements
+    to be correctly notified of a change in the data they're presenting.
     
     .. attribute:: directories
     
@@ -438,11 +442,22 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self._start_job(JobType.Delete, self._do_delete, args=args)
     
     def export_to_xhtml(self):
+        """Export current results to XHTML.
+        
+        The configuration of the :attr:`result_table` (columns order and visibility) is used to
+        determine how the data is presented in the export. In other words, the exported table in
+        the resulting XHTML will look just like the results table.
+        """
         colnames, rows = self._get_export_data()
         export_path = export.export_to_xhtml(colnames, rows)
         self.view.open_path(export_path)
     
     def export_to_csv(self):
+        """Export current results to CSV.
+        
+        The columns and their order in the resulting CSV file is determined in the same way as in
+        :meth:`export_to_xhtml`.
+        """
         dest_file = self.view.select_dest_file(tr("Select a destination for your exported CSV"), 'csv')
         if dest_file:
             colnames, rows = self._get_export_data()
@@ -490,6 +505,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             subprocess.Popen(cmd, shell=True)
     
     def load(self):
+        """Load directory selection and ignore list from files in appdata.
+        
+        This method is called during startup so that directory selection and ignore list, which
+        is persistent data, is the same as when the last session was closed (when :meth:`save` was
+        called).
+        """
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
         self.notify('directories_changed')
         p = op.join(self.appdata, 'ignore_list.xml')
@@ -506,6 +527,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self._start_job(JobType.Load, do)
     
     def make_selected_reference(self):
+        """Promote :attr:`selected_dupes` to reference position within their respective groups.
+        
+        Each selected dupe will become the :attr:`~core.engine.Group.ref` of its group. If there's
+        more than one dupe selected for the same group, only the first (in the order currently shown
+        in :attr:`result_table`) dupe will be promoted.
+        """
         dupes = self.without_ref(self.selected_dupes)
         changed_groups = set()
         for dupe in dupes:
@@ -532,18 +559,30 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.notify('results_changed_but_keep_selection')
     
     def mark_all(self):
+        """Set all dupes in the results as marked.
+        """
         self.results.mark_all()
         self.notify('marking_changed')
     
     def mark_none(self):
+        """Set all dupes in the results as unmarked.
+        """
         self.results.mark_none()
         self.notify('marking_changed')
     
     def mark_invert(self):
+        """Invert the marked state of all dupes in the results.
+        """
         self.results.mark_invert()
         self.notify('marking_changed')
     
     def mark_dupe(self, dupe, marked):
+        """Change marked status of ``dupe``.
+        
+        :param dupe: dupe to mark/unmark
+        :type dupe: :class:`~core.fs.File`
+        :param bool marked: True = mark, False = unmark
+        """
         if marked:
             self.results.mark(dupe)
         else:
@@ -560,10 +599,17 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             self.view.open_path(dupe.path)
     
     def purge_ignore_list(self):
+        """Remove files that don't exist from :attr:`ignore_list`.
+        """
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
     
     def remove_directories(self, indexes):
+        """Remove root directories at ``indexes`` from :attr:`directories`.
+        
+        :param indexes: Indexes of the directories to remove.
+        :type indexes: list of int
+        """
         try:
             indexes = sorted(indexes, reverse=True)
             for index in indexes:
@@ -573,6 +619,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             pass
     
     def remove_duplicates(self, duplicates):
+        """Remove ``duplicates`` from :attr:`results`.
+        
+        Calls :meth:`~core.results.Results.remove_duplicates` and send appropriate notifications.
+        
+        :param duplicates: duplicates to remove.
+        :type duplicates: list of :class:`~core.fs.File`
+        """
         self.results.remove_duplicates(self.without_ref(duplicates))
         self.notify('results_changed_but_keep_selection')
     
@@ -601,6 +654,12 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.remove_duplicates(dupes)
     
     def rename_selected(self, newname):
+        """Renames the selected dupes's file to ``newname``.
+        
+        If there's more than one selected dupes, the first one is used.
+        
+        :param str newname: The filename to rename the dupe's file to.
+        """
         try:
             d = self.selected_dupes[0]
             d.rename(newname)
@@ -610,6 +669,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         return False
     
     def reprioritize_groups(self, sort_key):
+        """Sort dupes in each group (in :attr:`results`) according to ``sort_key``.
+        
+        Called by the re-prioritize dialog. Calls :meth:`~core.engine.Group.prioritize` and, once
+        the sorting is done, show a message that confirms the action.
+        
+        :param sort_key: The key being sent to :meth:`~core.engine.Group.prioritize`
+        :type sort_key: f(dupe)
+        """
         count = 0
         for group in self.results.groups:
             if group.prioritize(key_func=sort_key):
