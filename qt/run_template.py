@@ -23,7 +23,7 @@ from core_{edition} import __version__, __appname__
 if ISWINDOWS:
     import qt.base.cxfreeze_fix
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     QCoreApplication.setOrganizationName('Hardcoded Software')
     QCoreApplication.setApplicationName(__appname__)
@@ -41,4 +41,7 @@ if __name__ == "__main__":
     if not ISWINDOWS:
         dgapp.model.registered = True
     install_excepthook()
-    sys.exit(app.exec_())
+    return app.exec()
+
+if __name__ == "__main__":
+    sys.exit(main())
