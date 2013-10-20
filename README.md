@@ -36,38 +36,23 @@ and follow instructions from the script. You can then ignore the rest of the bui
 Prerequisites are installed through `pip`. However, some of them are not "pip installable" and have
 to be installed manually.
 
-* All systems: [Python 3.2+][python] and [setuptools][setuptools]
+* All systems: [Python 3.3+][python] and [setuptools][setuptools]
 * Mac OS X: The last XCode to have the 10.6 SDK included.
-* Windows: Visual Studio 2008, [PyQt 4.7+][pyqt], [cx_Freeze][cxfreeze] and
+* Windows: Visual Studio 2010, [PyQt 5.0+][pyqt], [cx_Freeze][cxfreeze] and
   [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
 
-On Ubuntu, the apt-get command to install all pre-requisites is:
+On Ubuntu (13.10+), the apt-get command to install all pre-requisites is:
 
-    $ apt-get install python3-dev python3-pyqt4 pyqt4-dev-tools python3-setuptools
+    $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools
+
+On Arch, it's:
+
+    $ pacman -S python-pyqt5
 
 ## Virtualenv setup
 
-First, you need `pip` and `virtualenv` in your system Python install:
-
-    $ sudo easy_install pip
-    $ sudo pip install virtualenv
-
-Then, in dupeGuru's source folder, create a virtual environment and activate it:
-
-    $ virtualenv --system-site-packages env
-    $ source env/bin/activate
-
-Then, you can install pip requirements in your virtualenv:
-
-    $ pip install -r requirements-[osx|win].txt
-    
-([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt).
-
-## Alternative: pyvenv
-
-If you're on Python 3.3+, you can use the built-in `pyvenv` instead of `virtualenv`. `pyvenv` is
-pretty much the same thing as `virtualenv`, except that it doesn't install setuptools and pip, so it
-has to be installed manually:
+Use the built-in `pyvenv` to setup a virtual environment, and then install `pip` and run the
+requirements in it:
 
     $ pyvenv --system-site-packages env
     $ source env/bin/activate
