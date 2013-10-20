@@ -6,8 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, pyqtSignal
-from PyQt4.QtGui import QBrush, QFont, QFontMetrics, QTableView, QColor
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QBrush, QFont, QFontMetrics, QColor
+from PyQt5.QtWidgets import QTableView
 
 from qtlib.table import Table
 

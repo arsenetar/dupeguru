@@ -5,8 +5,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import pyqtSignal
-from PyQt4.QtGui import QWidget, QHBoxLayout, QRadioButton
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QRadioButton
 
 from .util import horizontalSpacer
 

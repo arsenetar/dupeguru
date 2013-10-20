@@ -10,9 +10,10 @@ import traceback
 import sys
 import os
 
-from PyQt4.QtCore import Qt, QUrl, QCoreApplication, QSize
-from PyQt4.QtGui import (QDialog, QDesktopServices, QVBoxLayout, QHBoxLayout, QLabel,
-    QPlainTextEdit, QPushButton, QApplication)
+from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QSize
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton,
+    QApplication)
 
 from hscommon.trans import trget
 from .util import horizontalSpacer

@@ -9,8 +9,9 @@
 import sys
 import os.path as op
 
-from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
-from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QApplication
+from PyQt5.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, pyqtSignal
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
@@ -74,7 +75,7 @@ class DupeGuru(QObject):
         # In some circumstances, the nag is hidden by other window, which may make the user think
         # that the application haven't launched.
         QTimer.singleShot(0, self.finishedLaunching)
-        self.connect(QCoreApplication.instance(), SIGNAL('aboutToQuit()'), self.application_will_terminate)
+        QCoreApplication.instance().aboutToQuit.connect(self.application_will_terminate)
     
     def _setupActions(self):
         # Setup actions that are common to both the directory dialog and the results window.

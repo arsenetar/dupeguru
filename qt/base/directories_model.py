@@ -8,9 +8,10 @@
 
 import urllib.parse
 
-from PyQt4.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex
-from PyQt4.QtGui import (QComboBox, QStyledItemDelegate, QApplication, QBrush, QStyle,
-    QStyleOptionComboBox, QStyleOptionViewItemV4, QItemSelection)
+from PyQt5.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
+from PyQt5.QtWidgets import (QComboBox, QStyledItemDelegate, QStyle, QStyleOptionComboBox,
+    QStyleOptionViewItem, QApplication)
+from PyQt5.QtGui import QBrush
 
 from hscommon.trans import trget
 from qtlib.tree_model import RefNode, TreeModel
@@ -29,7 +30,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
     def paint(self, painter, option, index):
         self.initStyleOption(option, index)
         # No idea why, but this cast is required if we want to have access to the V4 valuess
-        option = QStyleOptionViewItemV4(option)
+        option = QStyleOptionViewItem(option)
         if (index.column() == 1) and (option.state & QStyle.State_Selected):
             cboption = QStyleOptionComboBox()
             cboption.rect = option.rect

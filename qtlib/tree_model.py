@@ -8,7 +8,7 @@
 
 import logging
 
-from PyQt4.QtCore import QAbstractItemModel, QModelIndex
+from PyQt5.QtCore import QAbstractItemModel, QModelIndex
 
 class NodeContainer:
     def __init__(self):
@@ -128,10 +128,11 @@ class TreeModel(QAbstractItemModel, NodeContainer):
             return self.createIndex(node.parent.row, 0, node.parent)
     
     def reset(self):
+        QAbstractItemModel.beginResetModel(self)
         self.invalidate()
         self._ref2node = {}
         self._dummyNodes = set()
-        QAbstractItemModel.reset(self)
+        QAbstractItemModel.endResetModel(self)
     
     def rowCount(self, parent=QModelIndex()):
         node = parent.internalPointer() if parent.isValid() else self

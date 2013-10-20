@@ -7,7 +7,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL, QTimer, QObject
+from PyQt5.QtCore import SIGNAL, QTimer, QObject
 
 class Application(QObject):
     def __init__(self):

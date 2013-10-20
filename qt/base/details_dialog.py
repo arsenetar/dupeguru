@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QDialog
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog
 
 from .details_table import DetailsModel
 
@@ -42,5 +42,6 @@ class DetailsDialog(QDialog):
     
     #--- model --> view
     def refresh(self):
-        self.tableModel.reset()
+        self.tableModel.beginResetModel()
+        self.tableModel.endResetModel()
     

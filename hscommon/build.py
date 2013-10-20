@@ -196,7 +196,7 @@ def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
                 shutil.copy(source_path, dest_path)
 
 def copy_qt_plugins(folder_names, dest): # This is only for Windows
-    from PyQt4.QtCore import QLibraryInfo
+    from PyQt5.QtCore import QLibraryInfo
     qt_plugin_dir = QLibraryInfo.location(QLibraryInfo.PluginsPath)
     def ignore(path, names):
         if path == qt_plugin_dir:
@@ -444,7 +444,7 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
     delete_files_with_pattern(op.join(dest_folder, 'distutils'), '*.exe')
 
 def fix_qt_resource_file(path):
-    # pyrcc4 under Windows, if the locale is non-english, can produce a source file with a date
+    # pyrcc5 under Windows, if the locale is non-english, can produce a source file with a date
     # containing accented characters. If it does, the encoding is wrong and it prevents the file
     # from being correctly frozen by cx_freeze. To work around that, we open the file, strip all
     # comments, and save.

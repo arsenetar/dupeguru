@@ -149,7 +149,7 @@ def build_qt(edition, dev, conf):
     print("Building localizations")
     build_localizations('qt', edition)
     print("Building Qt stuff")
-    print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
+    print_and_do("pyrcc5 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
     print("Creating the run.py file")
     filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition)
@@ -191,7 +191,7 @@ def build_localizations(ui, edition):
     shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
     if ui == 'qt' and not ISLINUX:
         print("Copying qt_*.qm files into the 'locale' folder")
-        from PyQt4.QtCore import QLibraryInfo
+        from PyQt5.QtCore import QLibraryInfo
         trfolder = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
         for lang in loc.get_langs('locale'):
             qmname = 'qt_%s.qm' % lang

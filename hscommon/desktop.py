@@ -46,8 +46,8 @@ try:
     
 except ImportError:
     try:
-        from PyQt4.QtCore import QUrl
-        from PyQt4.QtGui import QDesktopServices
+        from PyQt5.QtCore import QUrl, QStandardPaths
+        from PyQt5.QtGui import QDesktopServices
         import os.path as op
         def _open_path(path):
             url = QUrl.fromLocalFile(str(path))
@@ -58,10 +58,10 @@ except ImportError:
         
         def _special_folder_path(special_folder):
             if special_folder == SpecialFolder.Cache:
-                qtfolder = QDesktopServices.CacheLocation
+                qtfolder = QStandardPaths.CacheLocation
             else:
-                qtfolder = QDesktopServices.DataLocation
-            return str(QDesktopServices.storageLocation(qtfolder))
+                qtfolder = QStandardPaths.DataLocation
+            return QStandardPaths.standardLocations(qtfolder)[0]
         
     except ImportError:
         raise Exception("Can't setup desktop functions!")

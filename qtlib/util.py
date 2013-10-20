@@ -14,8 +14,9 @@ import logging
 
 from hscommon.util import first
 
-from PyQt4.QtGui import (QDesktopWidget, QSpacerItem, QSizePolicy, QPixmap, QIcon, QAction,
-    QHBoxLayout, QDesktopServices)
+from PyQt5.QtCore import QStandardPaths
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QDesktopWidget, QSpacerItem, QSizePolicy, QAction, QHBoxLayout
 
 def moveToScreenCenter(widget):
     frame = widget.frameGeometry()
@@ -75,7 +76,7 @@ def setAccelKeys(menu):
         action.setText(newtext)
 
 def getAppData():
-    return str(QDesktopServices.storageLocation(QDesktopServices.DataLocation))
+    return QStandardPaths.standardLocations(QStandardPaths.DataLocation)[0]
 
 class SysWrapper(io.IOBase):
     def write(self, s):

@@ -6,8 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QAbstractTableModel, QModelIndex
-from PyQt4.QtGui import QItemSelectionModel, QItemSelection
+from PyQt5.QtCore import Qt, QAbstractTableModel, QModelIndex, QItemSelectionModel, QItemSelection
 
 from .column import Columns
 
@@ -135,7 +134,8 @@ class Table(QAbstractTableModel):
     
     #--- model --> view
     def refresh(self):
-        self.reset()
+        self.beginResetModel()
+        self.endResetModel()
         self._updateViewSelection()
     
     def show_selected_row(self):

@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QUrl, QRect
-from PyQt4.QtGui import (QMainWindow, QMenu, QLabel, QDesktopServices, QFileDialog, QMenuBar,
-    QWidget, QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QAction, QPushButton, QCheckBox)
+from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtWidgets import (QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
+    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QAction, QPushButton, QCheckBox)
 
 from hscommon.trans import trget
 from qtlib.util import moveToScreenCenter, horizontalWrap, createActions
@@ -164,7 +164,7 @@ class ResultWindow(QMainWindow):
         self.resize(630, 514)
         self.centralwidget = QWidget(self)
         self.verticalLayout = QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.actionsButton = QPushButton(tr("Actions"))
         self.detailsButton = QPushButton(tr("Details"))
@@ -183,7 +183,7 @@ class ResultWindow(QMainWindow):
         self.resultsView.verticalHeader().setVisible(False)
         h = self.resultsView.horizontalHeader()
         h.setHighlightSections(False)
-        h.setMovable(True)
+        h.setSectionsMovable(True)
         h.setStretchLastSection(False)
         h.setDefaultAlignment(Qt.AlignLeft)
         self.verticalLayout.addWidget(self.resultsView)

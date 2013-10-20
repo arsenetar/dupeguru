@@ -8,8 +8,8 @@
 
 import sys
 
-from PyQt4.QtCore import Qt, QCoreApplication
-from PyQt4.QtGui import (QDialog, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QFormLayout,
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtWidgets import (QDialog, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QFormLayout,
     QLayout, QLineEdit, QPushButton, QSpacerItem, QSizePolicy)
 
 from hscommon.trans import trget

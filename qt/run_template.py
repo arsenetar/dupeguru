@@ -8,8 +8,9 @@
 import sys
 import os.path as op
 
-from PyQt4.QtCore import QCoreApplication, QSettings
-from PyQt4.QtGui import QApplication, QIcon, QPixmap
+from PyQt5.QtCore import QCoreApplication, QSettings
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QApplication
 
 from hscommon.plat import ISWINDOWS
 from hscommon.trans import install_gettext_trans_under_qt

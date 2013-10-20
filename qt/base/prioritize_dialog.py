@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QMimeData, QByteArray
-from PyQt4.QtGui import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
+from PyQt5.QtCore import Qt, QMimeData, QByteArray
+from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
     QDialogButtonBox, QAbstractItemView, QLabel, QStyle, QSplitter, QWidget, QSizePolicy)
 
 from hscommon.trans import trget

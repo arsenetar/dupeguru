@@ -18,7 +18,7 @@ echo "Installing pip requirements"
 if [ "$(uname)" == "Darwin" ]; then
     pip install -r requirements-osx.txt
 else
-    python3 -c "import PyQt4" >/dev/null 2>&1 || { echo >&2 "PyQt 4.8+ required. Install it and try again. Aborting"; exit 1; }
+    python3 -c "import PyQt5" >/dev/null 2>&1 || { echo >&2 "PyQt 5.1+ required. Install it and try again. Aborting"; exit 1; }
     pip install -r requirements.txt
 fi
 

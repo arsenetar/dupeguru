@@ -6,8 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QAbstractListModel
-from PyQt4.QtGui import QItemSelection, QItemSelectionModel
+from PyQt5.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
 
 class SelectableList(QAbstractListModel):
     def __init__(self, model, view):

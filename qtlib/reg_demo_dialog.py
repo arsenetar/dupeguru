@@ -8,9 +8,9 @@
 
 import sys
 
-from PyQt4.QtCore import Qt, QCoreApplication
-from PyQt4.QtGui import (QDialog, QApplication, QVBoxLayout, QHBoxLayout, QLabel,
-    QFont, QSpacerItem, QSizePolicy, QPushButton)
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtWidgets import (QDialog, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QSpacerItem,
+    QSizePolicy, QPushButton)
 
 from hscommon.plat import ISLINUX
 from hscommon.trans import trget

@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import SIGNAL, Qt, QSize
-from PyQt4.QtGui import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
     QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox)
 
 from hscommon.plat import ISOSX, ISLINUX
@@ -26,8 +26,8 @@ class PreferencesDialogBase(QDialog):
         self.app = app
         self._setupUi()
         
-        self.connect(self.filterHardnessSlider, SIGNAL("valueChanged(int)"), self.filterHardnessLabel.setNum)
-        self.connect(self.buttonBox, SIGNAL('clicked(QAbstractButton*)'), self.buttonClicked)
+        self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
+        self.buttonBox.clicked['QAbstractButton*'].connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
     

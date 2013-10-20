@@ -7,8 +7,8 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-from PyQt4.QtCore import QSize
-from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
     QApplication)
 
 from hscommon.trans import trget

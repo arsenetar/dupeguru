@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import pyqtSignal, Qt
-from PyQt4.QtGui import (QToolButton, QLineEdit, QIcon, QPixmap, QStyle, QStyleOptionFrameV2,
-    QPainter, QPalette)
+from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtGui import QIcon, QPixmap, QPainter, QPalette
+from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
 from hscommon.trans import trget
 
@@ -66,7 +66,7 @@ class SearchEdit(QLineEdit):
     def paintEvent(self, event):
         QLineEdit.paintEvent(self, event)
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
-            panel = QStyleOptionFrameV2()
+            panel = QStyleOptionFrame()
             self.initStyleOption(panel)
             textRect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
             leftMargin = 2

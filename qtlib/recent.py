@@ -8,8 +8,8 @@
 
 from collections import namedtuple
 
-from PyQt4.QtCore import pyqtSignal, QObject
-from PyQt4.QtGui import QAction
+from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtWidgets import QAction
 
 from hscommon.trans import trget
 from hscommon.util import dedupe
