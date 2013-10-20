@@ -13,6 +13,7 @@ import re
 from math import ceil
 import glob
 import shutil
+from datetime import timedelta
 
 from . import io
 from .path import Path
@@ -253,6 +254,16 @@ def multi_replace(s, replace_from, replace_to=''):
     for r_from, r_to in [r for r in replace if r[0] in s]:
         s = s.replace(r_from, r_to)
     return s
+
+#--- Date related
+
+def iterdaterange(start, end):
+    """Yields every day between ``start`` and ``end``.
+    """
+    date = start
+    while date <= end:
+        yield date
+        date += timedelta(1)
 
 #--- Files related
 

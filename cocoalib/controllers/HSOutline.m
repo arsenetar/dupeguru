@@ -101,7 +101,13 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self view] setDelegate:nil];
     [[self view] reloadData];
     [[self view] setDelegate:self];
-    [oldRetainer release];
+    /* Item retainer and releasing
+    
+    In theory, [oldRetainer release] should work, but in practice, doing so causes occasional
+    crashes during drag & drop, which I guess keep the reference of an item a bit longer than it
+    should. This is why we autorelease here. See #354.
+    */
+    [oldRetainer autorelease];
     [self updateSelection];
 }
 
