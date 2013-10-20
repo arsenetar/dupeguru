@@ -15,8 +15,8 @@ class ProblemTable(Table):
         Column('msg', defaultWidth=150),
     ]
     
-    def __init__(self, model, view):
-        Table.__init__(self, model, view)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(model, view, **kwargs)
         # we have to prevent Return from initiating editing.
         # self.view.editSelected = lambda: None
     

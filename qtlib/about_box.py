@@ -16,9 +16,9 @@ from hscommon.trans import trget
 tr = trget('qtlib')
 
 class AboutBox(QDialog):
-    def __init__(self, parent, app, withreg=True):
+    def __init__(self, parent, app, withreg=True, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.MSWindowsFixedSizeDialogHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self.app = app
         self.withreg = withreg
         self._setupUi()

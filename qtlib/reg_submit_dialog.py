@@ -17,9 +17,9 @@ from hscommon.trans import trget
 tr = trget('qtlib')
 
 class RegSubmitDialog(QDialog):
-    def __init__(self, parent, reg):
+    def __init__(self, parent, reg, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.reg = reg
         

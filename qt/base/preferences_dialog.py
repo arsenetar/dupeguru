@@ -20,9 +20,9 @@ tr = trget('ui')
 SUPPORTED_LANGUAGES = ['en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi']
 
 class PreferencesDialogBase(QDialog):
-    def __init__(self, parent, app):
+    def __init__(self, parent, app, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self.app = app
         self._setupUi()
         

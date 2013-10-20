@@ -15,9 +15,9 @@ from qtlib.radio_box import RadioBox
 tr = trget('ui')
 
 class DeletionOptions(QDialog):
-    def __init__(self, parent, model):
+    def __init__(self, parent, model, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self.model = model
         self._setupUi()
         self.model.view = self

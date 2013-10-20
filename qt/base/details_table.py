@@ -16,8 +16,8 @@ tr = trget('ui')
 HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
 
 class DetailsModel(QAbstractTableModel):
-    def __init__(self, model):
-        QAbstractTableModel.__init__(self)
+    def __init__(self, model, **kwargs):
+        super().__init__(**kwargs)
         self.model = model
     
     def columnCount(self, parent):

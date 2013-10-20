@@ -29,8 +29,8 @@ SCAN_TYPE_ORDER = [
 ]
 
 class PreferencesDialog(PreferencesDialogBase):
-    def __init__(self, parent, app):
-        PreferencesDialogBase.__init__(self, parent, app)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(parent, app, **kwargs)
         
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     

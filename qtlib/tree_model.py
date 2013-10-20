@@ -79,9 +79,8 @@ class DummyNode(TreeNode):
     pass
 
 class TreeModel(QAbstractItemModel, NodeContainer):
-    def __init__(self):
-        QAbstractItemModel.__init__(self)
-        NodeContainer.__init__(self)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._dummyNodes = set() # dummy nodes' reference have to be kept to avoid segfault
     
     #--- Private
@@ -128,11 +127,11 @@ class TreeModel(QAbstractItemModel, NodeContainer):
             return self.createIndex(node.parent.row, 0, node.parent)
     
     def reset(self):
-        QAbstractItemModel.beginResetModel(self)
+        super().beginResetModel()
         self.invalidate()
         self._ref2node = {}
         self._dummyNodes = set()
-        QAbstractItemModel.endResetModel(self)
+        super().endResetModel()
     
     def rowCount(self, parent=QModelIndex()):
         node = parent.internalPointer() if parent.isValid() else self

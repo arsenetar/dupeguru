@@ -12,8 +12,8 @@ from PyQt5.QtWidgets import QDialog
 from .details_table import DetailsModel
 
 class DetailsDialog(QDialog):
-    def __init__(self, parent, app):
-        QDialog.__init__(self, parent, Qt.Tool)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(parent, Qt.Tool, **kwargs)
         self.app = app
         self.model = app.model.details_panel
         self._setupUi()
@@ -33,7 +33,7 @@ class DetailsDialog(QDialog):
     
     def show(self):
         self._shown_once = True
-        QDialog.show(self)
+        super().show()
 
     #--- Events
     def appWillSavePrefs(self):

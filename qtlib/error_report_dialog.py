@@ -21,9 +21,9 @@ from .util import horizontalSpacer
 tr = trget('qtlib')
 
 class ErrorReportDialog(QDialog):
-    def __init__(self, parent, error):
+    def __init__(self, parent, error, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
@@ -68,7 +68,7 @@ class ErrorReportDialog(QDialog):
         text = self.errorTextEdit.toPlainText()
         url = QUrl("mailto:support@hardcoded.net?SUBJECT=Error Report&BODY=%s" % text)
         QDesktopServices.openUrl(url)
-        QDialog.accept(self)
+        super().accept()
     
 
 def install_excepthook():

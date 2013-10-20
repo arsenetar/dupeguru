@@ -13,9 +13,9 @@ from PyQt5.QtWidgets import QTableView
 from qtlib.table import Table
 
 class ResultsModel(Table):
-    def __init__(self, app, view):
+    def __init__(self, app, view, **kwargs):
         model = app.model.result_table
-        Table.__init__(self, model, view)
+        super().__init__(model, view, **kwargs)
         view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
         
         app.prefsChanged.connect(self.appPrefsChanged)
@@ -109,7 +109,7 @@ class ResultsView(QTableView):
         if event.text() == ' ':
             self.spacePressed.emit()
             return
-        QTableView.keyPressEvent(self, event)
+        super().keyPressEvent(event)
     
     def mouseDoubleClickEvent(self, event):
         self.doubleClicked.emit(None)

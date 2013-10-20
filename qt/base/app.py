@@ -43,8 +43,8 @@ class DupeGuru(QObject):
     PREFERENCES_CLASS = None
     PREFERENCES_DIALOG_CLASS = None
     
-    def __init__(self):
-        QObject.__init__(self)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.prefs = self.PREFERENCES_CLASS()
         self.prefs.load()
         self.model = self.MODELCLASS(view=self)

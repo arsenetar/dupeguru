@@ -43,7 +43,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
             rect.setLeft(rect.left()+4)
             painter.drawText(rect, Qt.AlignLeft, option.text)
         else:
-            QStyledItemDelegate.paint(self, painter, option, index)
+            super().paint(painter, option, index)
     
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
@@ -59,8 +59,8 @@ class DirectoriesDelegate(QStyledItemDelegate):
     
 
 class DirectoriesModel(TreeModel):
-    def __init__(self, model, view):
-        TreeModel.__init__(self)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(**kwargs)
         self.model = model
         self.model.view = self
         self.view = view

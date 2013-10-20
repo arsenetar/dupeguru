@@ -15,8 +15,8 @@ class Table(QAbstractTableModel):
     INVALID_INDEX_FLAGS = Qt.ItemIsEnabled
     COLUMNS = []
     
-    def __init__(self, model, view):
-        QAbstractTableModel.__init__(self)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(**kwargs)
         self.model = model
         self.view = view
         self.view.setModel(self)

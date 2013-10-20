@@ -9,8 +9,8 @@
 from PyQt5.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
 
 class SelectableList(QAbstractListModel):
-    def __init__(self, model, view):
-        QAbstractListModel.__init__(self)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(**kwargs)
         self._updating = False
         self.view = view
         self.model = model
@@ -49,8 +49,8 @@ class SelectableList(QAbstractListModel):
         self._restoreSelection()
 
 class ComboboxModel(SelectableList):
-    def __init__(self, model, view):
-        SelectableList.__init__(self, model, view)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(model, view, **kwargs)
         self.view.currentIndexChanged[int].connect(self.selectionChanged)
     
     #--- Override
@@ -70,8 +70,8 @@ class ComboboxModel(SelectableList):
             self._updateSelection()
 
 class ListviewModel(SelectableList):
-    def __init__(self, model, view):
-        SelectableList.__init__(self, model, view)
+    def __init__(self, model, view, **kwargs):
+        super().__init__(model, view, **kwargs)
         self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(
             self.selectionChanged)
     

@@ -52,9 +52,9 @@ class PrioritizationList(ListviewModel):
         return Qt.MoveAction
 
 class PrioritizeDialog(QDialog):
-    def __init__(self, parent, app):
+    def __init__(self, parent, app, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.model = PrioritizeDialogModel(app=app.model)
         self.categoryList = ComboboxModel(model=self.model.category_list, view=self.categoryCombobox)

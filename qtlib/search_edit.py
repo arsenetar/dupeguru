@@ -18,8 +18,8 @@ tr = trget('qtlib')
 # "images" folder in your resources.
 
 class LineEditButton(QToolButton):
-    def __init__(self, parent):
-        QToolButton.__init__(self, parent)
+    def __init__(self, parent, **kwargs):
+        super().__init__(parent, **kwargs)
         pixmap = QPixmap(':/search_clear_13')
         self.setIcon(QIcon(pixmap))
         self.setIconSize(pixmap.size())
@@ -30,9 +30,9 @@ class LineEditButton(QToolButton):
     
 
 class SearchEdit(QLineEdit):
-    def __init__(self, parent=None, immediate=False):
+    def __init__(self, parent=None, immediate=False, **kwargs):
         # immediate: send searchChanged signals at each keystroke.
-        QLineEdit.__init__(self, parent)
+        super().__init__(parent, **kwargs)
         self._clearButton = LineEditButton(self)
         frameWidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
         paddingRight = self._clearButton.sizeHint().width() + frameWidth + 1

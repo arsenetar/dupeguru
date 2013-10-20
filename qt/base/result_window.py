@@ -21,8 +21,8 @@ from .prioritize_dialog import PrioritizeDialog
 tr = trget('ui')
 
 class ResultWindow(QMainWindow):
-    def __init__(self, app):
-        QMainWindow.__init__(self, None)
+    def __init__(self, app, **kwargs):
+        super().__init__(None, **kwargs)
         self.app = app
         self._setupUi()
         self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)

@@ -16,9 +16,9 @@ from .problem_table import ProblemTable
 tr = trget('ui')
 
 class ProblemDialog(QDialog):
-    def __init__(self, parent, model):
+    def __init__(self, parent, model, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.model = model
         self.model.view = self

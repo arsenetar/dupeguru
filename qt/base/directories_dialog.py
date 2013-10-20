@@ -22,8 +22,8 @@ from .directories_model import DirectoriesModel, DirectoriesDelegate
 tr = trget('ui')
 
 class DirectoriesDialog(QMainWindow):
-    def __init__(self, parent, app):
-        QMainWindow.__init__(self, None)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(None, **kwargs)
         self.app = app
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')

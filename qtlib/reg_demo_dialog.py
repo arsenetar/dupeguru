@@ -18,9 +18,9 @@ from hscommon.trans import trget
 tr = trget('qtlib')
 
 class RegDemoDialog(QDialog):
-    def __init__(self, parent, reg, prompt):
+    def __init__(self, parent, reg, prompt, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self.reg = reg
         self._setupUi()
         self.descLabel.setText(prompt)
