@@ -14,6 +14,7 @@ from queue import Queue, Empty
 
 from . import io
 from .path import Path
+from .util import iterdaterange
 
 class Currency:
     all = []
@@ -270,6 +271,9 @@ EUR = Currency(code='EUR')
 class CurrencyNotSupportedException(Exception):
     """The current exchange rate provider doesn't support the requested currency."""
 
+def date2str(date):
+    return '%d%02d%02d' % (date.year, date.month, date.day)
+
 class RatesDB:
     """Stores exchange rates for currencies.
     
@@ -329,12 +333,35 @@ class RatesDB:
                 return row[0]
         return seek('<=', 'desc') or seek('>=', '') or Currency(currency_code).latest_rate
     
+    def _ensure_filled(self, date_start, date_end, currency_code):
+        """Make sure that the cache contains *something* for each of the dates in the range.
+        
+        Sometimes, our provider doesn't return us the range we sought. When it does, it usually
+        means that it never will and to avoid repeatedly querying those ranges forever, we have to
+        fill them. We use the closest rate for this.
+        """
+        # We don't want to fill today, because we want to repeatedly fetch that one until the
+        # provider gives it to us.
+        if date_end >= date.today():
+            date_end = date.today() - timedelta(1)
+        sql = "select rate from rates where date = ? and currency = ?"
+        for curdate in iterdaterange(date_start, date_end):
+            cur = self._execute(sql, [date2str(curdate), currency_code])
+            if cur.fetchone() is None:
+                nearby_rate = self._seek_value_in_CAD(date2str(curdate), currency_code)
+                self.set_CAD_value(curdate, currency_code, nearby_rate)
+                logging.debug("Filled currency void for %s at %s (value: %2.2f)", currency_code, curdate, nearby_rate)
+                
     def _save_fetched_rates(self):
         while True:
             try:
-                rates, currency = self._fetched_values.get_nowait()
+                rates, currency, fetch_start, fetch_end = self._fetched_values.get_nowait()
+                logging.debug("Saving %d rates for the currency %s", len(rates), currency)
                 for rate_date, rate in rates:
+                    logging.debug("Saving rate %2.2f for %s", rate, rate_date)
                     self.set_CAD_value(rate_date, currency, rate)
+                self._ensure_filled(fetch_start, fetch_end, currency)
+                logging.debug("Finished saving rates for currency %s", currency)
             except Empty:
                 break
     
@@ -374,7 +401,7 @@ class RatesDB:
         else:
             value2 = self._cache.get((date, currency2_code))
         if value1 is None or value2 is None:
-            str_date = '%d%02d%02d' % (date.year, date.month, date.day)
+            str_date = date2str(date)
             if value1 is None:
                 value1 = self._seek_value_in_CAD(str_date, currency1_code)
                 self._cache[(date, currency1_code)] = value1
@@ -388,7 +415,7 @@ class RatesDB:
         # we must clear the whole cache because there might be other dates affected by this change
         # (dates when the currency server has no rates).
         self.clear_cache()
-        str_date = '%d%02d%02d' % (date.year, date.month, date.day)
+        str_date = date2str(date)
         sql = "replace into rates(date, currency, rate) values(?, ?, ?)"
         self._execute(sql, [str_date, currency_code, value])
         self.con.commit()
@@ -419,6 +446,7 @@ class RatesDB:
         """
         def do():
             for currency, fetch_start, fetch_end in currencies_and_range:
+                logging.debug("Fetching rates for %s for date range %s to %s", currency, fetch_start, fetch_end)
                 for rate_provider in self._rate_providers:
                     try:
                         values = rate_provider(currency, fetch_start, fetch_end)
@@ -426,7 +454,11 @@ class RatesDB:
                         continue
                     else:
                         if values:
-                            self._fetched_values.put((values, currency))
+                            self._fetched_values.put((values, currency, fetch_start, fetch_end))
+                            logging.debug("Fetching successful!")
+                            break
+                else:
+                    logging.debug("Fetching failed!")
         
         currencies_and_range = []
         for currency in currencies:
@@ -437,7 +469,9 @@ class RatesDB:
             except KeyError:
                 cached_range = self.date_range(currency)
             range_start = start_date
-            range_end = date.today()
+            # Don't try to fetch today's rate, it's never there and results in useless server
+            # hitting.
+            range_end = date.today() - timedelta(1)
             if cached_range is not None:
                 cached_start, cached_end = cached_range
                 if range_start >= cached_start:
@@ -446,6 +480,10 @@ class RatesDB:
                 else:
                     # Make a backward fetch
                     range_end = cached_start - timedelta(days=1)
+            # We don't want to fetch ranges that are too big. It can cause various problems, such
+            # as hangs. We prefer to take smaller bites.
+            if (range_end - range_start).days > 30:
+                range_start = range_end - timedelta(days=30)
             if range_start <= range_end:
                 currencies_and_range.append((currency, range_start, range_end))
             self._fetched_ranges[currency] = (start_date, date.today())
