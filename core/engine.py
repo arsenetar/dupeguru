@@ -157,26 +157,31 @@ def reduce_common_words(word_dict, threshold):
         else:
             del word_dict[word]
 
-Match = namedtuple('Match', 'first second percentage')
-Match.__doc__ = """Represents a match between two :class:`~core.fs.File`.
+# Writing docstrings in a namedtuple is tricky. From Python 3.3, it's possible to set __doc__, but
+# some research allowed me to find a more elegant solution, which is what is done here. See
+# http://stackoverflow.com/questions/1606436/adding-docstrings-to-namedtuples-in-python
 
-Regarless of the matching method, when two files are determined to match, a Match pair is created,
-which holds, of course, the two matched files, but also their match "level".
+class Match(namedtuple('Match', 'first second percentage')):
+    """Represents a match between two :class:`~core.fs.File`.
 
-.. attribute:: first
+    Regarless of the matching method, when two files are determined to match, a Match pair is created,
+    which holds, of course, the two matched files, but also their match "level".
 
-    first file of the pair.
+    .. attribute:: first
 
-.. attribute:: second
+        first file of the pair.
 
-    second file of the pair.
+    .. attribute:: second
 
-.. attribute:: percentage
+        second file of the pair.
 
-    their match level according to the scan method which found the match. int from 1 to 100. For
-    exact scan methods, such as Contents scans, this will always be 100.
-"""
+    .. attribute:: percentage
 
+        their match level according to the scan method which found the match. int from 1 to 100. For
+        exact scan methods, such as Contents scans, this will always be 100.
+    """
+    __slots__ = ()
+    
 def get_match(first, second, flags=()):
     #it is assumed here that first and second both have a "words" attribute
     percentage = compare(first.words, second.words, flags)
