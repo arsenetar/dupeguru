@@ -60,7 +60,8 @@ class DupeGuru(DupeGuruBase):
     METADATA_TO_READ = ['size']
     
     def __init__(self):
-        DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
+        DupeGuruBase.__init__(self, DupeGuruView())
+        self.appdata = '/tmp'
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
