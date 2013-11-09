@@ -183,9 +183,9 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             return self.results.is_marked(dupe)
         if key == 'percentage':
             m = get_group().get_match_of(dupe)
-            result = m.percentage
+            return m.percentage
         elif key == 'dupe_count':
-            result = 0
+            return 0
         else:
             result = cmp_value(dupe, key)
         if delta:

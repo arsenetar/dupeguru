@@ -399,6 +399,19 @@ class TestCaseDupeGuruWithResults:
         app.remove_marked()
         eq_(len(self.rtable), 0)
         eq_(app.selected_dupes, [])
+    
+    def test_dont_crash_on_delta_powermarker_dupecount_sort(self, do_setup):
+        # Don't crash when sorting by dupe count or percentage while delta+powermarker are enabled.
+        # Ref #238
+        app = self.app
+        objects = self.objects
+        self.rtable.delta_values = True
+        self.rtable.power_marker = True
+        self.rtable.sort('dupe_count', False)
+        # don't crash
+        self.rtable.sort('percentage', False)
+        # don't crash
+        
 
 class TestCaseDupeGuru_renameSelected:
     def pytest_funcarg__do_setup(self, request):
