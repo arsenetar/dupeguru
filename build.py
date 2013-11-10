@@ -135,6 +135,7 @@ def build_cocoa(edition, dev):
     print_and_do(cocoa_compile_command(edition))
     os.chdir('..')
     app.copy_executable('cocoa/build/dupeGuru')
+    build_help(edition)
     print("Copying resources and frameworks")
     image_path = ed('cocoa/{}/dupeguru.icns')
     resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
@@ -151,6 +152,7 @@ def build_qt(edition, dev, conf):
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
+    build_help(edition)
     print("Creating the run.py file")
     filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition)
 
@@ -324,9 +326,6 @@ def build_normal(edition, ui, dev, conf):
         build_cocoa(edition, dev)
     elif ui == 'qt':
         build_qt(edition, dev, conf)
-    # We used to build the help first, but autodoc building messes up with pythonpaths and makes our
-    # whole build process buggy. We do it last.
-    build_help(edition)
 
 def main():
     options = parse_args()
