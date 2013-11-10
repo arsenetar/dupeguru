@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import os.path as op
+
 class SpecialFolder:
     AppData = 1
     Cache = 2
@@ -25,12 +27,15 @@ def reveal_path(path):
     """
     _reveal_path(str(path))
 
-def special_folder_path(special_folder):
+def special_folder_path(special_folder, appname=None):
     """Returns the path of ``special_folder``.
     
-    ``special_folder`` is a SpecialFolder.* const.
+    ``special_folder`` is a SpecialFolder.* const. The result is the special folder for the current
+    application. The running process' application info is used to determine relevant information.
+    
+    You can override the application name with ``appname``. This argument is ingored under Qt.
     """
-    return _special_folder_path(special_folder)
+    return _special_folder_path(special_folder, appname)
 
 try:
     from cocoa import proxy
@@ -38,17 +43,19 @@ try:
     _open_path = proxy.openPath_
     _reveal_path = proxy.revealPath_
     
-    def _special_folder_path(special_folder):
+    def _special_folder_path(special_folder, appname=None):
         if special_folder == SpecialFolder.Cache:
-            return proxy.getCachePath()
+            base = proxy.getCachePath()
         else:
-            return proxy.getAppdataPath()
+            base = proxy.getAppdataPath()
+        if not appname:
+            appname = proxy.bundleInfo_('CFBundleName')
+        return op.join(base, appname)
     
 except ImportError:
     try:
         from PyQt4.QtCore import QUrl
         from PyQt4.QtGui import QDesktopServices
-        import os.path as op
         def _open_path(path):
             url = QUrl.fromLocalFile(str(path))
             QDesktopServices.openUrl(url)
@@ -56,7 +63,7 @@ except ImportError:
         def _reveal_path(path):
             _open_path(op.dirname(str(path)))
         
-        def _special_folder_path(special_folder):
+        def _special_folder_path(special_folder, appname=None):
             if special_folder == SpecialFolder.Cache:
                 qtfolder = QDesktopServices.CacheLocation
             else:

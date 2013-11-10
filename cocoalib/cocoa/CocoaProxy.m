@@ -92,6 +92,11 @@
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
+- (NSString *)bundleInfo:(NSString *)key
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+}
+
 - (NSString *)osxVersion
 {
     SInt32 major, minor, bugfix;

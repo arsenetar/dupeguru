@@ -171,9 +171,8 @@ class Directories(directories.Directories):
     
 
 class DupeGuruPE(DupeGuruBase):
-    def __init__(self, view, appdata):
-        appdata = op.join(appdata, 'dupeGuru Picture Edition')
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
         self.directories = Directories()
     
     def _do_delete(self, j, *args):

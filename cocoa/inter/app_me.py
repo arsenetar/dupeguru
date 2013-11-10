@@ -143,9 +143,8 @@ class Directories(directories.Directories):
     
 
 class DupeGuruME(DupeGuruBase):
-    def __init__(self, view, appdata):
-        appdata = op.join(appdata, 'dupeGuru Music Edition')
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
         # Use fileclasses set in DupeGuruBase.__init__()
         self.directories = Directories(fileclasses=self.directories.fileclasses)
         self.dead_tracks = []

@@ -317,7 +317,6 @@ def build_pe_modules(ui):
 def build_normal(edition, ui, dev, conf):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
-    build_help(edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
@@ -325,6 +324,9 @@ def build_normal(edition, ui, dev, conf):
         build_cocoa(edition, dev)
     elif ui == 'qt':
         build_qt(edition, dev, conf)
+    # We used to build the help first, but autodoc building messes up with pythonpaths and makes our
+    # whole build process buggy. We do it last.
+    build_help(edition)
 
 def main():
     options = parse_args()

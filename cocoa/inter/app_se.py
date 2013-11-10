@@ -68,9 +68,10 @@ class Directories(DirectoriesBase):
     
 
 class DupeGuru(DupeGuruBase):
-    def __init__(self, view, appdata):
-        appdata = op.join(appdata, 'dupeGuru')
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        # appdata = op.join(appdata, 'dupeGuru')
+        # print(repr(appdata))
+        DupeGuruBase.__init__(self, view)
         self.directories = Directories()
     
 

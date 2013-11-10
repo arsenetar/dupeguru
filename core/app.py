@@ -144,7 +144,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             logging.debug("Debug mode enabled")
         RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
-        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData)
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.directories = directories.Directories()

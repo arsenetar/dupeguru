@@ -20,6 +20,7 @@
 - (NSString *)bundleIdentifier;
 - (NSString *)appVersion;
 - (NSString *)osxVersion;
+- (NSString *)bundleInfo:(NSString *)key;
 - (void)postNotification:(NSString *)name userInfo:(NSDictionary *)userInfo;
 - (id)prefValue:(NSString *)prefname;
 - (void)setPrefValue:(NSString *)prefname value:(id)value;
