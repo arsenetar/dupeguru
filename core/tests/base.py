@@ -57,6 +57,7 @@ class ResultTable(ResultTableBase):
     DELTA_COLUMNS = {'size', }
     
 class DupeGuru(DupeGuruBase):
+    NAME = 'dupeGuru'
     METADATA_TO_READ = ['size']
     
     def __init__(self):
