@@ -140,7 +140,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
     [op setTitle:NSLocalizedString(@"Select a results file to load", @"")];
     if ([op runModal] == NSOKButton) {
-        NSString *filename = [[op filenames] objectAtIndex:0];
+        NSString *filename = [[[op URLs] objectAtIndex:0] path];
         [model loadResultsFrom:filename];
         [[self recentResults] addFile:filename];
     }
@@ -280,7 +280,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setAllowsMultipleSelection:NO];
     [op setTitle:prompt];
     if ([op runModal] == NSOKButton) {
-        return [[op filenames] objectAtIndex:0];
+        return [[[op URLs] objectAtIndex:0] path];
     }
     else {
         return nil;
@@ -294,7 +294,7 @@ http://www.hardcoded.net/licenses/bsd_license
     [sp setAllowedFileTypes:[NSArray arrayWithObject:extension]];
     [sp setTitle:prompt];
     if ([sp runModal] == NSOKButton) {
-        return [sp filename];
+        return [[sp URL] path];
     }
     else {
         return nil;

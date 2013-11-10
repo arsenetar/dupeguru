@@ -1,5 +1,4 @@
 #import "CocoaProxy.h"
-#import <CoreServices/CoreServices.h>
 #import "HSErrorReportWindow.h"
 
 @implementation CocoaProxy
@@ -99,11 +98,7 @@
 
 - (NSString *)osxVersion
 {
-    SInt32 major, minor, bugfix;
-    Gestalt(gestaltSystemVersionMajor, &major);
-    Gestalt(gestaltSystemVersionMinor, &minor);
-    Gestalt(gestaltSystemVersionBugFix, &bugfix);
-    return [NSString stringWithFormat:@"%d.%d.%d", major, minor, bugfix];
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
 - (void)postNotification:(NSString *)name userInfo:(NSDictionary *)userInfo
