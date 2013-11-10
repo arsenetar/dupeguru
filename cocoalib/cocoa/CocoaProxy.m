@@ -157,4 +157,20 @@
 {
     NSLog(@"%@", s);
 }
+
+- (NSDictionary *)readExifData:(NSString *)imagePath
+{
+    NSDictionary *result = nil;
+    NSURL* url = [NSURL fileURLWithPath:imagePath];
+    CGImageSourceRef source = CGImageSourceCreateWithURL((CFURLRef)url, nil);
+    if (source != nil) {
+        CFDictionaryRef metadataRef = CGImageSourceCopyPropertiesAtIndex (source, 0, nil);
+        if (metadataRef != nil) {
+            result = [NSDictionary dictionaryWithDictionary:(NSDictionary *)metadataRef];
+            CFRelease(metadataRef);
+        }
+        CFRelease(source);
+    }
+    return result;
+}
 @end

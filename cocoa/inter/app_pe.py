@@ -6,7 +6,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import os.path as op
 import plistlib
 import logging
 import re
@@ -47,6 +46,16 @@ class Photo(PhotoBase):
         if not blocks:
             raise IOError('The picture %s could not be read' % str(self.path))
         return blocks
+    
+    def _get_exif_timestamp(self):
+        exifdata = proxy.readExifData_(str(self.path))
+        if exifdata:
+            try:
+                return exifdata['{Exif}']['DateTimeOriginal']
+            except KeyError:
+                return ''
+        else:
+            return ''
     
 
 class IPhoto(Photo):

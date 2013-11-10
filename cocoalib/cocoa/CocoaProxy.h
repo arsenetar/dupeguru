@@ -30,4 +30,5 @@
 - (void)destroyPool;
 - (void)reportCrash:(NSString *)crashReport;
 - (void)log:(NSString *)s;
+- (NSDictionary *)readExifData:(NSString *)imagePath;
 @end
