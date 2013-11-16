@@ -57,10 +57,12 @@ class ResultTable(ResultTableBase):
     DELTA_COLUMNS = {'size', }
     
 class DupeGuru(DupeGuruBase):
+    NAME = 'dupeGuru'
     METADATA_TO_READ = ['size']
     
     def __init__(self):
-        DupeGuruBase.__init__(self, DupeGuruView(), '/tmp')
+        DupeGuruBase.__init__(self, DupeGuruView())
+        self.appdata = '/tmp'
     
     def _prioritization_categories(self):
         return prioritize.all_categories()
@@ -100,11 +102,11 @@ class NamedObject:
     
     @property
     def path(self):
-        return self._folder + self.name
+        return self._folder[self.name]
     
     @property
     def folder_path(self):
-        return self.path[:-1]
+        return self.path.parent()
     
     @property
     def extension(self):

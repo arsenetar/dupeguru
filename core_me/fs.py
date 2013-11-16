@@ -36,7 +36,7 @@ class MusicFile(fs.File):
     def can_handle(cls, path):
         if not fs.File.can_handle(path):
             return False
-        return get_file_ext(path[-1]) in auto.EXT2CLASS
+        return get_file_ext(path.name) in auto.EXT2CLASS
     
     def get_display_info(self, group, delta):
         size = self.size

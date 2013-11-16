@@ -31,7 +31,7 @@ class DirectoryNode(Node):
         self.clear()
         subpaths = self._tree.app.directories.get_subfolders(self._directory_path)
         for path in subpaths:
-            self.append(DirectoryNode(self._tree, path, path[-1]))
+            self.append(DirectoryNode(self._tree, path, path.name))
         self._loaded = True
     
     def update_all_states(self):

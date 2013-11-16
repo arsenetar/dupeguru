@@ -113,7 +113,7 @@ MyCreateBitmapContext(int width, int height)
     }
     
     context = CGBitmapContextCreate(bitmapData, width, height, 8, bitmapBytesPerRow, colorSpace,
-        kCGImageAlphaNoneSkipLast);
+        (CGBitmapInfo)kCGImageAlphaNoneSkipLast);
     if (context== NULL) {
         free(bitmapData);
         fprintf(stderr, "Context not created!");

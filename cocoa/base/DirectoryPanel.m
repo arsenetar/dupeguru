@@ -91,8 +91,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [op setTitle:NSLocalizedString(@"Select a folder to add to the scanning list", @"")];
     [op setDelegate:self];
     if ([op runModal] == NSOKButton) {
-        for (NSString *directory in [op filenames]) {
-            [self addDirectory:directory];
+        for (NSURL *directoryURL in [op URLs]) {
+            [self addDirectory:[directoryURL path]];
         }
     }
 }

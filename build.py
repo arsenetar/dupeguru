@@ -135,6 +135,7 @@ def build_cocoa(edition, dev):
     print_and_do(cocoa_compile_command(edition))
     os.chdir('..')
     app.copy_executable('cocoa/build/dupeGuru')
+    build_help(edition)
     print("Copying resources and frameworks")
     image_path = ed('cocoa/{}/dupeguru.icns')
     resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
@@ -151,6 +152,7 @@ def build_qt(edition, dev, conf):
     print("Building Qt stuff")
     print_and_do("pyrcc5 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
+    build_help(edition)
     print("Creating the run.py file")
     filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition)
 
@@ -317,7 +319,6 @@ def build_pe_modules(ui):
 def build_normal(edition, ui, dev, conf):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
-    build_help(edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
