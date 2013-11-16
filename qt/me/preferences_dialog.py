@@ -50,7 +50,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widget.setMinimumSize(QSize(0, 40))
         self.verticalLayout_4 = QVBoxLayout(self.widget)
         self.verticalLayout_4.setSpacing(0)
-        self.verticalLayout_4.setMargin(0)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.label_6 = QLabel(self.widget)
         self.label_6.setText(tr("Tags to scan:"))
         self.verticalLayout_4.addWidget(self.label_6)
