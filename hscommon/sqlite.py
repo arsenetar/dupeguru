@@ -114,6 +114,10 @@ class _ActualThread(threading.Thread):
     
 
 class ThreadedConn:
+    """``sqlite`` connections can't be used across threads. ``TheadedConn`` opens a sqlite
+    connection in its own thread and sends it queries through a queue, making it suitable in
+    multi-threaded environment.
+    """
     def __init__(self, dbname, autocommit):
         self._t = _ActualThread(dbname, autocommit)
         self.lastrowid = -1

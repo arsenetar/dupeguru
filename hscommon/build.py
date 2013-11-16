@@ -6,6 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+"""This module is a collection of function to help in HS apps build process.
+"""
+
 import os
 import sys
 import os.path as op
@@ -26,6 +29,8 @@ from .plat import ISWINDOWS
 from .util import modified_after, find_in_path, ensure_folder, delete_files_with_pattern
 
 def print_and_do(cmd):
+    """Prints ``cmd`` and executes it in the shell.
+    """
     print(cmd)
     p = Popen(cmd, shell=True)
     return p.wait()
@@ -125,6 +130,10 @@ def package_cocoa_app_in_dmg(app_path, destfolder, args):
     build_dmg(app_path, destfolder)
 
 def build_dmg(app_path, destfolder):
+    """Builds a DMG volume with application at ``app_path`` and puts it in ``dest_path``.
+    
+    The name of the resulting DMG volume is determined by the app's name and version.
+    """
     print(repr(op.join(app_path, 'Contents', 'Info.plist')))
     plist = plistlib.readPlist(op.join(app_path, 'Contents', 'Info.plist'))
     workpath = tempfile.mkdtemp()
@@ -153,7 +162,7 @@ sysconfig.get_config_h_filename = lambda: op.join(op.dirname(__file__), 'pyconfi
 """)
 
 def add_to_pythonpath(path):
-    """Adds `path` to both PYTHONPATH env and sys.path.
+    """Adds ``path`` to both ``PYTHONPATH`` env and ``sys.path``.
     """
     abspath = op.abspath(path)
     pythonpath = os.environ.get('PYTHONPATH', '')
@@ -166,6 +175,12 @@ def add_to_pythonpath(path):
 # in setuptools. We copy the packages *without data* in a build folder and then build the plugin
 # from there.
 def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
+    """Copy python packages ``packages_names`` to ``dest``, spurious data.
+    
+    Copy will happen without tests, testdata, mercurial data or C extension module source with it.
+    ``py2app`` include and exclude rules are **quite** funky, and doing this is the only reliable
+    way to make sure we don't end up with useless stuff in our app.
+    """
     if ISWINDOWS:
         create_links = False
     if not extra_ignores:

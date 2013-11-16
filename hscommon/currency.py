@@ -6,6 +6,10 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+"""This module facilitates currencies management. It exposes :class:`Currency` which lets you
+easily figure out their exchange value.
+"""
+
 import os
 from datetime import datetime, date, timedelta
 import logging
@@ -17,6 +21,21 @@ from .path import Path
 from .util import iterdaterange
 
 class Currency:
+    """Represents a currency and allow easy exchange rate lookups.
+    
+    A ``Currency`` instance is created with either a 3-letter ISO code or with a full name. If it's
+    present in the database, an instance will be returned. If not, ``ValueError`` is raised. The
+    easiest way to access a currency instance, however, if by using module-level constants. For
+    example::
+
+        >>> from hscommon.currency import USD, EUR
+        >>> from datetime import date
+        >>> USD.value_in(EUR, date.today())
+        0.6339119851386843
+
+    Unless a :class:`RatesDB` global instance is set through :meth:`Currency.set_rate_db` however,
+    only fallback values will be used as exchange rates.
+    """
     all = []
     by_code = {}
     by_name = {}
@@ -68,12 +87,16 @@ class Currency:
 
     @staticmethod
     def set_rates_db(db):
+        """Sets a new currency ``RatesDB`` instance to be used with all ``Currency`` instances.
+        """
         Currency.rates_db = db
 
     @staticmethod
     def get_rates_db():
+        """Returns the current ``RatesDB`` instance.
+        """
         if Currency.rates_db is None:
-            Currency.rates_db = RatesDB()      # Make sure we always have some db to work with
+            Currency.rates_db = RatesDB() # Make sure we always have some db to work with
         return Currency.rates_db
 
     def rates_date_range(self):
@@ -372,7 +395,12 @@ class RatesDB:
         self._cache = {}
     
     def date_range(self, currency_code):
-        """Returns (start, end) of the cached rates for currency"""
+        """Returns (start, end) of the cached rates for currency.
+        
+        Returns a tuple ``(start_date, end_date)`` representing dates covered in the database for
+        currency ``currency_code``. If there are gaps, they are not accounted for (subclasses that
+        automatically update themselves are not supposed to introduce gaps in the db).
+        """
         sql = "select min(date), max(date) from rates where currency = '%s'" % currency_code
         cur = self._execute(sql)
         start, end = cur.fetchone()

@@ -18,20 +18,12 @@ from inspect import signature
 class Path(tuple):
     """A handy class to work with paths.
     
-    path[index] returns a string
-    path[start:stop] returns a Path
-    start and stop can be int, but the can also be path instances. When start
-    or stop are Path like in refpath[p1:p2], it is the same thing as typing
-    refpath[len(p1):-len(p2)], except that it will only slice out stuff that are
-    equal. For example, 'a/b/c/d'['a/z':'z/d'] returns 'b/c', not ''.
-    See the test units for more details.
+    We subclass ``tuple``, each element of the tuple represents an element of the path.
     
-    You can use the + operator, which is the same thing as with tuples, but
-    returns a Path.
-    
-    In HS applications, all paths variable should be Path instances. These Path instances should
-    be converted to str only at the last moment (when it is needed in an external function, such
-    as os.rename)
+    * ``Path('/foo/bar/baz')[1]`` --> ``'bar'``
+    * ``Path('/foo/bar/baz')[1:2]`` --> ``Path('bar/baz')``
+    * ``Path('/foo/bar')['baz']`` --> ``Path('/foo/bar/baz')``
+    * ``str(Path('/foo/bar/baz'))`` --> ``'/foo/bar/baz'``
     """
     # Saves a little bit of memory usage
     __slots__ = ()
@@ -135,10 +127,18 @@ class Path(tuple):
         return str(self).encode(sys.getfilesystemencoding())
     
     def parent(self):
+        """Returns the parent path.
+        
+        ``Path('/foo/bar/baz').parent()`` --> ``Path('/foo/bar')``
+        """
         return self[:-1]
     
     @property
     def name(self):
+        """Last element of the path (filename), with extension.
+        
+        ``Path('/foo/bar/baz').name`` --> ``'baz'``
+        """
         return self[-1]
     
     # OS method wrappers
