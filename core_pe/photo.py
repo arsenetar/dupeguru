@@ -60,7 +60,7 @@ class Photo(fs.File):
     
     @classmethod
     def can_handle(cls, path):
-        return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
+        return fs.File.can_handle(path) and get_file_ext(path.name) in cls.HANDLED_EXTS
     
     def get_display_info(self, group, delta):
         size = self.size

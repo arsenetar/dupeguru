@@ -9,8 +9,7 @@
 import logging
 import os.path as op
 
-from hscommon import io
-from hscommon.path import Path
+from hscommon.path import Path, pathify
 from cocoa import proxy
 
 from core.scanner import ScanType
@@ -27,8 +26,9 @@ def is_bundle(str_path):
 
 class Bundle(fs.Folder):
     @classmethod
-    def can_handle(cls, path):
-        return not io.islink(path) and io.isdir(path) and is_bundle(str(path))
+    @pathify
+    def can_handle(cls, path: Path):
+        return not path.islink() and path.isdir() and is_bundle(str(path))
     
 
 class Directories(DirectoriesBase):

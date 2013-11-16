@@ -102,11 +102,11 @@ class NamedObject:
     
     @property
     def path(self):
-        return self._folder + self.name
+        return self._folder[self.name]
     
     @property
     def folder_path(self):
-        return self.path[:-1]
+        return self.path.parent()
     
     @property
     def extension(self):

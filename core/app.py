@@ -232,7 +232,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             ref = group.ref
             linkfunc = os.link if use_hardlinks else os.symlink
             linkfunc(str(ref.path), str_path)
-        self.clean_empty_dirs(dupe.path[:-1])
+        self.clean_empty_dirs(dupe.path.parent())
     
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
@@ -375,7 +375,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
-                path = path[:-1]
+                path = path.parent()
     
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -383,21 +383,21 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         dest_path = Path(destination)
         if dest_type in {DestType.Relative, DestType.Absolute}:
             # no filename, no windows drive letter
-            source_base = source_path.remove_drive_letter()[:-1]
+            source_base = source_path.remove_drive_letter().parent()
             if dest_type == DestType.Relative:
                 source_base = source_base[location_path:]
-            dest_path = dest_path + source_base
+            dest_path = dest_path[source_base]
         if not dest_path.exists():
             dest_path.makedirs()
         # Add filename to dest_path. For file move/copy, it's not required, but for folders, yes.
-        dest_path = dest_path + source_path[-1]
+        dest_path = dest_path[source_path.name]
         logging.debug("Copy/Move operation from '%s' to '%s'", source_path, dest_path)
         # Raises an EnvironmentError if there's a problem
         if copy:
             smart_copy(source_path, dest_path)
         else:
             smart_move(source_path, dest_path)
-            self.clean_empty_dirs(source_path[:-1])
+            self.clean_empty_dirs(source_path.parent())
     
     def copy_or_move_marked(self, copy):
         """Start an async move (or copy) job on marked duplicates.

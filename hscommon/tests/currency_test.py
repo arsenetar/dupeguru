@@ -9,7 +9,6 @@
 from datetime import date
 import sqlite3 as sqlite
 
-from .. import io
 from ..testutil import eq_, assert_almost_equal
 from ..currency import Currency, RatesDB, CAD, EUR, USD
 
@@ -64,7 +63,7 @@ def test_db_with_connection():
 
 def test_corrupt_db(tmpdir):
     dbpath = str(tmpdir.join('foo.db'))
-    fh = io.open(dbpath, 'w')
+    fh = open(dbpath, 'w')
     fh.write('corrupted')
     fh.close()
     db = RatesDB(dbpath) # no crash. deletes the old file and start a new db

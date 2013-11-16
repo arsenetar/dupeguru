@@ -6,13 +6,13 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+import os
 from datetime import datetime, date, timedelta
 import logging
 import sqlite3 as sqlite
 import threading
 from queue import Queue, Empty
 
-from . import io
 from .path import Path
 from .util import iterdaterange
 
@@ -271,6 +271,9 @@ EUR = Currency(code='EUR')
 class CurrencyNotSupportedException(Exception):
     """The current exchange rate provider doesn't support the requested currency."""
 
+class RateProviderUnavailable(Exception):
+    """The rate provider is temporarily unavailable."""
+
 def date2str(date):
     return '%d%02d%02d' % (date.year, date.month, date.day)
 
@@ -314,7 +317,7 @@ class RatesDB:
             logging.warning("Corrupt currency database at {0}. Starting over.".format(repr(self.db_or_path)))
             if isinstance(self.db_or_path, (str, Path)):
                 self.con.close()
-                io.remove(Path(self.db_or_path))
+                os.remove(str(self.db_or_path))
                 self.con = sqlite.connect(str(self.db_or_path))
             else:
                 logging.warning("Can't re-use the file, using a memory table")
@@ -452,11 +455,19 @@ class RatesDB:
                         values = rate_provider(currency, fetch_start, fetch_end)
                     except CurrencyNotSupportedException:
                         continue
+                    except RateProviderUnavailable:
+                        logging.debug("Fetching failed due to temporary problems.")
+                        break
                     else:
-                        if values:
-                            self._fetched_values.put((values, currency, fetch_start, fetch_end))
-                            logging.debug("Fetching successful!")
-                            break
+                        if not values:
+                            # We didn't get any value from the server, which means that we asked for
+                            # rates that couldn't be delivered. Still, we report empty values so
+                            # that the cache can correctly remember this unavailability so that we
+                            # don't repeatedly fetch those ranges.
+                            values = []
+                        self._fetched_values.put((values, currency, fetch_start, fetch_end))
+                        logging.debug("Fetching successful!")
+                        break
                 else:
                     logging.debug("Fetching failed!")
         

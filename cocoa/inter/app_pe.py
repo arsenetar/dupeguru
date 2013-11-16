@@ -12,9 +12,8 @@ import re
 
 from appscript import app, its, k, CommandError, ApplicationNotFoundError
 
-from hscommon import io
 from hscommon.util import remove_invalid_xml, first
-from hscommon.path import Path
+from hscommon.path import Path, pathify
 from hscommon.trans import trget
 from cocoa import proxy
 
@@ -76,11 +75,12 @@ class AperturePhoto(Photo):
     def display_folder_path(self):
         return APERTURE_PATH
 
-def get_iphoto_or_aperture_pictures(plistpath, photo_class):
+@pathify
+def get_iphoto_or_aperture_pictures(plistpath: Path, photo_class):
     # The structure of iPhoto and Aperture libraries for the base photo list are excactly the same.
-    if not io.exists(plistpath):
+    if not plistpath.exists():
         return []
-    s = io.open(plistpath, 'rt', encoding='utf-8').read()
+    s = plistpath.open('rt', encoding='utf-8').read()
     # There was a case where a guy had 0x10 chars in his plist, causing expat errors on loading
     s = remove_invalid_xml(s, replace_with='')
     # It seems that iPhoto sometimes doesn't properly escape & chars. The regexp below is to find
@@ -123,12 +123,12 @@ class Directories(directories.Directories):
         directories.Directories.__init__(self, fileclasses=[Photo])
         try:
             self.iphoto_libpath = get_iphoto_database_path()
-            self.set_state(self.iphoto_libpath[:-1], directories.DirectoryState.Excluded)
+            self.set_state(self.iphoto_libpath.parent(), directories.DirectoryState.Excluded)
         except directories.InvalidPathError:
             self.iphoto_libpath = None
         try:
             self.aperture_libpath = get_aperture_database_path()
-            self.set_state(self.aperture_libpath[:-1], directories.DirectoryState.Excluded)
+            self.set_state(self.aperture_libpath.parent(), directories.DirectoryState.Excluded)
         except directories.InvalidPathError:
             self.aperture_libpath = None
     
@@ -255,12 +255,12 @@ class DupeGuruPE(DupeGuruBase):
             DupeGuruBase._do_delete_dupe(self, dupe, *args)
     
     def _create_file(self, path):
-        if (self.directories.iphoto_libpath is not None) and (path in self.directories.iphoto_libpath[:-1]):
+        if (self.directories.iphoto_libpath is not None) and (path in self.directories.iphoto_libpath.parent()):
             if not hasattr(self, 'path2iphoto'):
                 photos = get_iphoto_pictures(self.directories.iphoto_libpath)
                 self.path2iphoto = {p.path: p for p in photos}
             return self.path2iphoto.get(path)
-        if (self.directories.aperture_libpath is not None) and (path in self.directories.aperture_libpath[:-1]):
+        if (self.directories.aperture_libpath is not None) and (path in self.directories.aperture_libpath.parent()):
             if not hasattr(self, 'path2aperture'):
                 photos = get_aperture_pictures(self.directories.aperture_libpath)
                 self.path2aperture = {p.path: p for p in photos}

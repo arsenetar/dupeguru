@@ -25,12 +25,12 @@ def test_md5_aggregate_subfiles_sorted(tmpdir):
     #same order everytime.
     p = create_fake_fs(Path(str(tmpdir)))
     b = fs.Folder(p)
-    md51 = fs.File(p + ('dir1', 'file1.test')).md5
-    md52 = fs.File(p + ('dir2', 'file2.test')).md5
-    md53 = fs.File(p + ('dir3', 'file3.test')).md5
-    md54 = fs.File(p + 'file1.test').md5
-    md55 = fs.File(p + 'file2.test').md5
-    md56 = fs.File(p + 'file3.test').md5
+    md51 = fs.File(p['dir1']['file1.test']).md5
+    md52 = fs.File(p['dir2']['file2.test']).md5
+    md53 = fs.File(p['dir3']['file3.test']).md5
+    md54 = fs.File(p['file1.test']).md5
+    md55 = fs.File(p['file2.test']).md5
+    md56 = fs.File(p['file3.test']).md5
     # The expected md5 is the md5 of md5s for folders and the direct md5 for files
     folder_md51 = hashlib.md5(md51).digest()
     folder_md52 = hashlib.md5(md52).digest()

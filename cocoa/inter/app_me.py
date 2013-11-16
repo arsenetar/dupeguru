@@ -173,7 +173,7 @@ class DupeGuruME(DupeGuruBase):
         DupeGuruBase._do_delete_dupe(self, dupe, *args)
     
     def _create_file(self, path):
-        if (self.directories.itunes_libpath is not None) and (path in self.directories.itunes_libpath[:-1]):
+        if (self.directories.itunes_libpath is not None) and (path in self.directories.itunes_libpath.parent()):
             if not hasattr(self, 'itunes_songs'):
                 songs = get_itunes_songs(self.directories.itunes_libpath)
                 self.itunes_songs = {song.path: song for song in songs}
