@@ -29,7 +29,7 @@ What makes it better than other duplicate scanners?
 ---------------------------------------------------
 
 The scanning engine is extremely flexible. You can tweak it to really get the kind of results you
-want. You can read more about dupeGuru tweaking option at the :doc:`Preferences page <preferences>`.
+want. You can read more about dupeGuru tweaking option in :doc:`scan`.
 
 How safe is it to use dupeGuru?
 -------------------------------

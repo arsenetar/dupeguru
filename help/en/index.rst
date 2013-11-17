@@ -51,9 +51,16 @@ Contents:
     quick_start
     folders
     preferences
+    scan
     results
     reprioritize
     faq
     developer/index
     changelog
     credits
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`
