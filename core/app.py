@@ -21,8 +21,7 @@ from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.gui.progress_window import ProgressWindow
-from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_decimal, allsame,
-    rem_file_ext)
+from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal, allsame
 from hscommon.trans import tr
 from hscommon.plat import ISWINDOWS
 from hscommon import desktop
@@ -90,10 +89,7 @@ def format_dupe_count(c):
     return str(c) if c else '---'
 
 def cmp_value(dupe, attrname):
-    if attrname == 'name':
-        value = rem_file_ext(dupe.name)
-    else:
-        value = getattr(dupe, attrname, '')
+    value = getattr(dupe, attrname, '')
     return value.lower() if isinstance(value, str) else value
 
 def fix_surrogate_encoding(s, encoding='utf-8'):
@@ -205,13 +201,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         else:
             result = cmp_value(dupe, key)
         if delta:
-            refval = getattr(get_group().ref, key)
+            refval = cmp_value(get_group().ref, key)
             if key in self.result_table.DELTA_COLUMNS:
                 result -= refval
             else:
-                # We use directly getattr() because cmp_value() does thing that we don't want to do
-                # when we want to determine whether two values are exactly the same.
-                same = getattr(dupe, key) == refval
+                same = cmp_value(dupe, key) == refval
                 result = (same, result)
         return result
     
