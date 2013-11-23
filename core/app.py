@@ -95,6 +95,23 @@ def cmp_value(dupe, attrname):
         value = getattr(dupe, attrname, '')
     return value.lower() if isinstance(value, str) else value
 
+def fix_surrogate_encoding(s, encoding='utf-8'):
+    # ref #210. It's possible to end up with file paths that, while correct unicode strings, are
+    # decoded with the 'surrogateescape' option, which make the string unencodable to utf-8. We fix
+    # these strings here by trying to encode them and, if it fails, we do an encode/decode dance
+    # to remove the problematic characters. This dance is *lossy* but there's not much we can do
+    # because if we end up with this type of string, it means that we don't know the encoding of the
+    # underlying filesystem that brought them. Don't use this for strings you're going to re-use in
+    # fs-related functions because you're going to lose your path (it's going to change). Use this
+    # if you need to export the path somewhere else, outside of the unicode realm.
+    # See http://lucumr.pocoo.org/2013/7/2/the-updated-guide-to-unicode/
+    try:
+        s.encode(encoding)
+    except UnicodeEncodeError:
+        return s.encode(encoding, 'replace').decode(encoding)
+    else:
+        return s
+
 class DupeGuru(RegistrableApplication, Broadcaster):
     """Holds everything together.
     
@@ -258,7 +275,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         for group_id, group in enumerate(self.results.groups):
             for dupe in group:
                 data = self.get_display_info(dupe, group)
-                row = [data[col.name] for col in columns]
+                row = [fix_surrogate_encoding(data[col.name]) for col in columns]
                 row.insert(0, group_id)
                 rows.append(row)
         return colnames, rows
