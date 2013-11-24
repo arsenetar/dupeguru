@@ -91,6 +91,10 @@ class DirectoryTree(Tree, DupeGuruGUIObject):
             for node in nodes:
                 node.state = newstate
     
+    def select_all(self):
+        self.selected_nodes = list(self)
+        self.view.refresh()
+    
     def update_all_states(self):
         for node in self:
             node.update_all_states()

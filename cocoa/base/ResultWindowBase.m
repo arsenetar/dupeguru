@@ -344,6 +344,9 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item
 {
+    if ([item action] == @selector(markAll)) {
+        [item setTitle:NSLocalizedString(@"Mark All", @"")];
+    }
     return ![[ProgressController mainProgressController] isShown];
 }
 @end

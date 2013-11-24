@@ -158,6 +158,14 @@ http://www.hardcoded.net/licenses/bsd_license
     }
 }
 
+- (void)markAll
+{
+    /* markAll isn't very descriptive of what we do, but since we re-use the Mark All button from
+       the result window, we don't have much choice.
+    */
+    [outline selectAll];
+}
+
 /* Delegate */
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)path
 {
@@ -169,6 +177,14 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)recentFileClicked:(NSString *)path
 {
     [self addDirectory:path];
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)item
+{
+    if ([item action] == @selector(markAll)) {
+        [item setTitle:NSLocalizedString(@"Select All", @"")];
+    }
+    return YES;
 }
 
 /* Notifications */
