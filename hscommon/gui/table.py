@@ -18,7 +18,7 @@ class Table(MutableSequence, Selectable):
     
     In fact, the Table is very similar to :class:`~hscommon.gui.selectable_list.SelectableList` in
     practice and differs mostly in principle. Their difference lies in the nature of their items
-    theiy manage. With the Table, rows usually have many properties, presented in columns, and they
+    they manage. With the Table, rows usually have many properties, presented in columns, and they
     have to subclass :class:`Row`.
     
     Usually used with :class:`~hscommon.gui.column.Column`.
