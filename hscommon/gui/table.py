@@ -11,15 +11,57 @@ from collections import MutableSequence, namedtuple
 from .base import GUIObject
 from .selectable_list import Selectable
 
-# We used to directly subclass list, but it caused problems at some point with deepcopy
 
-# Adding and removing footer here and there might seem (and is) hackish, but it's much simpler than
-# the alternative, which is to override magic methods and adjust the results. When we do that, there
-# the slice stuff that we have to implement and it gets quite complex.
-# Moreover, the most frequent operation on a table is __getitem__, and making checks to know whether
-# the key is a header or footer at each call would make that operation, which is the most used,
-# slower.
+# We used to directly subclass list, but it caused problems at some point with deepcopy
 class Table(MutableSequence, Selectable):
+    """Sortable and selectable sequence of :class:`Row`.
+    
+    In fact, the Table is very similar to :class:`~hscommon.gui.selectable_list.SelectableList` in
+    practice and differs mostly in principle. Their difference lies in the nature of their items
+    theiy manage. With the Table, rows usually have many properties, presented in columns, and they
+    have to subclass :class:`Row`.
+    
+    Usually used with :class:`~hscommon.gui.column.Column`.
+    
+    Subclasses :class:`~hscommon.gui.selectable_list.Selectable`.
+    
+    .. attribute:: header
+    .. attribute:: footer
+    
+        When set to something else than ``None``, represent rows that will always be kept in first
+        and/or last position, regardless of sorting. ``len()`` and indexing will include them, which
+        means that if there's a header, ``table[0]`` returns it and if there's a footer,
+        ``table[-1]`` returns it. To make things short, all list-like functions work with header and
+        footer "on". But things get fuzzy for ``append()`` and ``insert()`` because these will
+        ensure that no "normal" row gets inserted before the header or after the footer.
+        
+        Adding and removing footer here and there might seem (and is) hackish, but it's much simpler
+        than the alternative (when, of course, you need such a feature), which is to override magic
+        methods and adjust the results. When we do that, there the slice stuff that we have to
+        implement and it gets quite complex. Moreover, the most frequent operation on a table is
+        ``__getitem__``, and making checks to know whether the key is a header or footer at each
+        call would make that operation, which is the most used, slower.
+    
+    .. attribute:: row_count
+    
+        Number or rows in the table (without counting header and footer).
+    
+    .. attribute:: rows
+        
+        List of rows in the table, excluding header and footer.
+    
+    .. attribute:: selected_row
+        
+        :class:`Row`. *get/set*. Selected row, based on
+        :attr:`~hscommon.gui.selectable_list.Selectable.selected_index`. When setting this
+        attribute, we look up the index of the row and set the selected index from there. If the
+        row isn't in the list, selection isn't changed.
+    
+    .. attribute:: selected_rows
+        
+        List of :class:`Row`. *read-only*. List of selected rows based on
+        :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`.
+    """
     def __init__(self):
         Selectable.__init__(self)
         self._rows = []
@@ -44,12 +86,21 @@ class Table(MutableSequence, Selectable):
         self._rows.__setitem__(key, value)
     
     def append(self, item):
+        """Appends ``item`` at the end of the table.
+        
+        If there's a footer, the item is inserted before it.
+        """
         if self._footer is not None:
             self._rows.insert(-1, item)
         else:
             self._rows.append(item)
     
     def insert(self, index, item):
+        """Inserts ``item`` at ``index`` in the table.
+        
+        If there's a header, will make sure we don't insert before it, and if there's a footer, will
+        make sure that we don't insert after it.
+        """
         if (self._header is not None) and (index == 0):
             index = 1
         if (self._footer is not None) and (index >= len(self)):
@@ -57,6 +108,10 @@ class Table(MutableSequence, Selectable):
         self._rows.insert(index, item)
     
     def remove(self, row):
+        """Removes ``row`` from table.
+        
+        If ``row`` is a header or footer, that header or footer will be set to ``None``.
+        """
         if row is self._header:
             self._header = None
         if row is self._footer:
@@ -65,6 +120,14 @@ class Table(MutableSequence, Selectable):
         self._check_selection_range()
     
     def sort_by(self, column_name, desc=False):
+        """Sort table by ``column_name``.
+        
+        Sort key for each row is computed from :meth:`Row.sort_key_for_column`.
+        
+        If ``desc`` is ``True``, sort order is reversed.
+        
+        If present, header and footer will always be first and last, respectively.
+        """
         if self._header is not None:
             self._rows.pop(0)
         if self._footer is not None:
@@ -236,6 +299,28 @@ class GUITable(Table, GUIObject):
     
 
 class Row:
+    """Represents a row in a :class:`Table`.
+    
+    It holds multiple values to be represented through columns. It's its role to prepare data
+    fetched from model instances into ready-to-present-in-a-table fashion. You will do this in
+    :meth:`load`.
+    
+    When you do this, you'll put the result into arbitrary attributes, which will later be fetched
+    by your table for presentation to the user.
+    
+    You can organize your attributes in whatever way you want, but there's a convention you can
+    follow if you want to minimize subclassing and use default behavior:
+    
+    1. Attribute name = column name. If your attribute is ``foobar``, whenever we refer to
+       ``column_name``, you refer to that attribute with the column name ``foobar``.
+    2. Public attributes are for *formatted* value, that is, user readable strings.
+    3. Underscore prefix is the unformatted (computable) value. For example, you could have
+       ``_foobar`` at ``42`` and ``foobar`` at ``"42 seconds"`` (what you present to the user).
+    4. Unformatted values are used for sorting.
+    5. If your column name is a python keyword, add an underscore suffix (``from_``).
+    
+    Of course, this is only default behavior. This can be overriden.
+    """
     def __init__(self, table):
         super(Row, self).__init__()
         self.table = table
@@ -248,19 +333,38 @@ class Row:
     
     #--- Virtual
     def can_edit(self):
+        """(Virtual) Whether the whole row can be edited.
+        
+        By default, always returns ``True``. This is for the *whole* row. For individual cells, it's
+        :meth:`can_edit_cell`.
+        """
         return True
     
     def load(self):
+        """(Virtual/Required) Loads up values from the model to be presented in the table.
+        
+        Usually, our model instances contain values that are not quite ready for display. If you
+        have number formatting, display calculations and other whatnots to perform, you do it here
+        and then you put the result in an arbitrary attribute of the row.
+        """
         raise NotImplementedError()
     
     def save(self):
+        """(Virtual/Required) Saves user edits into your model.
+        
+        If your table is editable, this is called when the user commits his changes. Usually, these
+        are typed up stuff, or selected indexes. You have to do proper parsing and reference
+        linking, and save that stuff into your model.
+        """
         raise NotImplementedError()
     
     def sort_key_for_column(self, column_name):
-        # Most of the time, the adequate sort key for a column is the column name with '_' prepended
-        # to it. This member usually corresponds to the unformated version of the column. If it's
-        # not there, we try the column_name without underscores
-        # Of course, override for exceptions.
+        """(Virtual) Return the value that is to be used to sort by column ``column_name``.
+        
+        By default, looks for an attribute with the same name as ``column_name``, but with an
+        underscore prefix ("unformatted value"). If there's none, tries without the underscore. If
+        there's none, raises ``AttributeError``.
+        """
         try:
             return getattr(self, '_' + column_name)
         except AttributeError:
@@ -268,6 +372,18 @@ class Row:
     
     #--- Public
     def can_edit_cell(self, column_name):
+        """Returns whether cell for column ``column_name`` can be edited.
+        
+        By the default, the check is done in many steps:
+        
+        1. We check whether the whole row can be edited with :meth:`can_edit`. If it can't, the cell
+           can't either.
+        2. If the column doesn't exist as an attribute, we can't edit.
+        3. If we have an attribute ``can_edit_<column_name>``, return that.
+        4. Check if our attribute is a property. If it's not, it's not editable.
+        5. If our attribute is in fact a property, check whether the property is "settable" (has a
+           ``fset`` method). The cell is editable only if the property is "settable".
+        """
         if not self.can_edit():
             return False
         # '_' is in case column is a python keyword
@@ -286,11 +402,21 @@ class Row:
         return bool(getattr(prop, 'fset', None))
     
     def get_cell_value(self, attrname):
+        """Get cell value for ``attrname``.
+        
+        By default, does a simple ``getattr()``, but it is used to allow subclasses to have
+        alternative value storage mechanisms.
+        """
         if attrname == 'from':
            attrname = 'from_'
         return getattr(self, attrname)
     
     def set_cell_value(self, attrname, value):
+        """Set cell value to ``value`` for ``attrname``.
+        
+        By default, does a simple ``setattr()``, but it is used to allow subclasses to have
+        alternative value storage mechanisms.
+        """
         if attrname == 'from':
             attrname = 'from_'
         setattr(self, attrname, value)

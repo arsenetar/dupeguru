@@ -13,3 +13,4 @@ hscommon
     gui/base
     gui/text_field
     gui/selectable_list
+    gui/table
