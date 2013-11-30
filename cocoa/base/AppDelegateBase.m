@@ -8,7 +8,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 #import "AppDelegateBase.h"
 #import "ProgressController.h"
-#import "HSFairwareReminder.h"
 #import "HSPyUtil.h"
 #import "Consts.h"
 #import "Dialogs.h"
@@ -162,7 +161,7 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showAboutBox
 {
     if (_aboutBox == nil) {
-        _aboutBox = [[HSFairwareAboutBox alloc] initWithApp:model];
+        _aboutBox = [[HSAboutBox alloc] initWithApp:model];
     }
     [[_aboutBox window] makeKeyAndOrderFront:nil];
 }
@@ -199,7 +198,6 @@ http://www.hardcoded.net/licenses/bsd_license
 /* Delegate */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [model initialRegistrationSetup];
     [model loadSession];
 }
 
@@ -259,16 +257,6 @@ http://www.hardcoded.net/licenses/bsd_license
 - (void)showProblemDialog
 {
     [[self resultWindow] showProblemDialog];
-}
-
-- (void)setupAsRegistered
-{
-    // Nothing to do.
-}
-
-- (void)showDemoNagWithPrompt:(NSString *)prompt
-{
-    [HSFairwareReminder showDemoNagWithApp:[self model] prompt:prompt];
 }
 
 - (NSString *)selectDestFolderWithPrompt:(NSString *)prompt

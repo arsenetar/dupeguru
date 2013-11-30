@@ -16,7 +16,6 @@ import shutil
 
 from send2trash import send2trash
 from jobprogress import job
-from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
@@ -112,7 +111,7 @@ def fix_surrogate_encoding(s, encoding='utf-8'):
     else:
         return s
 
-class DupeGuru(RegistrableApplication, Broadcaster):
+class DupeGuru(Broadcaster):
     """Holds everything together.
     
     Instantiated once per running application, it holds a reference to every high-level object
@@ -144,6 +143,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         Instance of :mod:`meta-gui <core.gui>` table listing the results from :attr:`results`
     """
     #--- View interface
+    # get_default(key_name)
+    # set_default(key_name, value)
+    # show_message(msg)
+    # open_url(url)
     # open_path(path)
     # reveal_path(path)
     # ask_yes_no(prompt) --> bool
@@ -154,14 +157,13 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
-    DEMO_LIMITATION = tr("will only be able to delete, move or copy 10 duplicates at once")
     
     def __init__(self, view, appdata):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
-        RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
+        self.view = view
         self.appdata = appdata
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
@@ -337,13 +339,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.selected_dupes = dupes
         self.notify('dupes_selected')
     
-    def _check_demo(self):
-        if self.should_apply_demo_limitation and self.results.mark_count > 10:
-            msg = tr("You cannot delete, move or copy more than 10 duplicates at once in demo mode.")
-            self.view.show_message(msg)
-            return False
-        return True
-            
     #--- Public
     def add_directory(self, d):
         """Adds folder ``d`` to :attr:`directories`.
@@ -430,8 +425,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
-        if not self._check_demo():
-            return
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -446,8 +439,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def delete_marked(self):
         """Start an async job to send marked duplicates to the trash.
         """
-        if not self._check_demo():
-            return
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
