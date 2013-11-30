@@ -32,7 +32,7 @@ class TextField(GUIObject):
     When our model value isn't a string, we have a built-in parsing/formatting mechanism allowing
     us to directly retrieve/set our non-string value through :attr:`value`.
     
-    Subclasses :class:`hscommon.gui.base.GUIObject`. Expected view: :class:`TextFieldView`.
+    Subclasses :class:`.GUIObject`. Expected view: :class:`TextFieldView`.
     """
     def __init__(self):
         GUIObject.__init__(self)

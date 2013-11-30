@@ -15,14 +15,14 @@ from .selectable_list import Selectable
 class Table(MutableSequence, Selectable):
     """Sortable and selectable sequence of :class:`Row`.
     
-    In fact, the Table is very similar to :class:`~hscommon.gui.selectable_list.SelectableList` in
+    In fact, the Table is very similar to :class:`.SelectableList` in
     practice and differs mostly in principle. Their difference lies in the nature of their items
     they manage. With the Table, rows usually have many properties, presented in columns, and they
     have to subclass :class:`Row`.
     
     Usually used with :class:`~hscommon.gui.column.Column`.
     
-    Subclasses :class:`~hscommon.gui.selectable_list.Selectable`.
+    Subclasses :class:`.Selectable`.
     """
     def __init__(self):
         Selectable.__init__(self)
@@ -178,7 +178,7 @@ class Table(MutableSequence, Selectable):
     
     @property
     def selected_row(self):
-        """Selected row according to :attr:`~hscommon.gui.selectable_list.Selectable.selected_index`.
+        """Selected row according to :attr:`.selected_index`.
         
         :class:`Row`. *get/set*.
         
@@ -196,7 +196,7 @@ class Table(MutableSequence, Selectable):
     
     @property
     def selected_rows(self):
-        """List of selected rows based on :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`.
+        """List of selected rows based on :attr:`.selected_indexes`.
         
         List of :class:`Row`. *read-only*.
         """
@@ -246,12 +246,12 @@ class GUITable(Table, GUIObject):
     table view.
     
     Behaves like the :class:`Table` which it subclasses, but is more focused on being the presenter
-    of some model data to its :attr:`~hscommon.gui.base.GUIObject.view`. There's a :meth:`refresh`
+    of some model data to its :attr:`.GUIObject.view`. There's a :meth:`refresh`
     mechanism which ensures fresh data while preserving sorting order and selection. There's also an
     editing mechanism which tracks whether (and which) row is being edited (or added) and
     save/cancel edits when appropriate.
     
-    Subclasses :class:`Table` and :class:`~hscommon.gui.base.GUIObject`. Expected view:
+    Subclasses :class:`Table` and :class:`.GUIObject`. Expected view:
     :class:`GUITableView`.
     """
     def __init__(self):
@@ -298,8 +298,7 @@ class GUITable(Table, GUIObject):
         many cases, such as in :meth:`refresh`, our selection will be lost. After the operation is
         over, we call this method with our previously selected indexes (in ``previous_selection``).
         
-        The default behavior is (if we indeed have an empty
-        :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`) to re-select
+        The default behavior is (if we indeed have an empty :attr:`.selected_indexes`) to re-select
         ``previous_selection``. If it was empty, we select the last row of the table.
         
         This behavior can, of course, be overriden.
@@ -407,7 +406,7 @@ class GUITable(Table, GUIObject):
         """Sort table by ``column_name``.
         
         Overrides :meth:`Table.sort_by`. After having performed sorting, calls
-        :meth:`~hscommon.gui.selectable_list.Selectable._update_selection` to give you the chance,
+        :meth:`~.Selectable._update_selection` to give you the chance,
         if appropriate, to update your selected indexes according to, maybe, the selection that you
         have in your model.
         

@@ -177,7 +177,7 @@ class GUISelectableList(SelectableList, GUIObject):
     
     Represents a UI element presenting the user with a selectable list of items.
     
-    Subclasses :class:`SelectableList` and :class:`~hscommon.gui.base.GUIObject`. Expected view:
+    Subclasses :class:`SelectableList` and :class:`.GUIObject`. Expected view:
     :class:`GUISelectableListView`.
     
     :param iterable items: If specified, items to fill the list with initially.
