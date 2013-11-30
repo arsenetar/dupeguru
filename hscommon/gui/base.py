@@ -28,16 +28,6 @@ class GUIObject:
     When you subclass ``GUIObject``, you will likely want to update its view on instantiation. That
     is why we call ``self.view.refresh()`` in :meth:`_view_updated`. If you need another type of
     action on view instantiation, just override the method.
-    
-    .. attribute:: view
-    
-        A reference to our toolkit-specific view controller. This view starts as ``None`` and has to
-        be set "manually". There's two times at which we set the view property: On initialization,
-        where we set the view that we'll use for our lifetime, and just before the view is
-        deallocated. We need to unset our view at that time to avoid calls to a deallocated instance
-        (which means a crash).
-        
-        To unset our view, we simple assign it to ``None``.
     """
     def __init__(self):
         self._view = None
@@ -55,6 +45,17 @@ class GUIObject:
     
     @property
     def view(self):
+        """A reference to our toolkit-specific view controller.
+        
+        *view answering to GUIObject sublass's view protocol*. *get/set*
+        
+        This view starts as ``None`` and has to be set "manually". There's two times at which we set
+        the view property: On initialization, where we set the view that we'll use for our lifetime,
+        and just before the view is deallocated. We need to unset our view at that time to avoid
+        calls to a deallocated instance (which means a crash).
+        
+        To unset our view, we simple assign it to ``None``.
+        """
         return self._view
     
     @view.setter

@@ -3,6 +3,13 @@ hscommon.gui.selectable_list
 
 .. automodule:: hscommon.gui.selectable_list
 
+    .. autosummary::
+        
+        Selectable
+        SelectableList
+        GUISelectableList
+        GUISelectableListView
+    
     .. autoclass:: Selectable
         :members:
         :private-members:

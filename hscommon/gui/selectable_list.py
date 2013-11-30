@@ -15,17 +15,6 @@ class Selectable(Sequence):
     
     When mixed in with a ``Sequence``, we enable it to manage its selection status. The selection
     is held as a list of ``int`` indexes. Multiple selection is supported.
-    
-    .. attribute:: selected_index
-        
-        *int*. *get/set*. Thin wrapper around :attr:`selected_indexes`. Points to the first selected
-        index or ``None`` if it's empty. Using this property only makes sense if your selectable
-        sequence supports single selection only.
-    
-    .. attribute:: selected_indexes
-        
-        *list*. *get/set*. List of selected indexes. When setting the value, automatically removes
-        out-of-bounds indexes. The list is kept sorted.
     """
     def __init__(self):
         self._selected_indexes = []
@@ -74,6 +63,13 @@ class Selectable(Sequence):
     #--- Properties
     @property
     def selected_index(self):
+        """Points to the first selected index.
+        
+        *int*. *get/set*. 
+        
+        Thin wrapper around :attr:`selected_indexes`. ``None`` if selection is empty. Using this
+        property only makes sense if your selectable sequence supports single selection only.
+        """
         return self._selected_indexes[0] if self._selected_indexes else None
     
     @selected_index.setter
@@ -82,6 +78,13 @@ class Selectable(Sequence):
     
     @property
     def selected_indexes(self):
+        """List of selected indexes.
+        
+        *list of int*. *get/set*.
+        
+        When setting the value, automatically removes out-of-bounds indexes. The list is kept
+        sorted.
+        """
         return self._selected_indexes
     
     @selected_indexes.setter
@@ -170,7 +173,7 @@ class GUISelectableListView:
         """
 
 class GUISelectableList(SelectableList, GUIObject):
-    """Cross-toolkit list view.
+    """Cross-toolkit GUI-enabled list view.
     
     Represents a UI element presenting the user with a selectable list of items.
     

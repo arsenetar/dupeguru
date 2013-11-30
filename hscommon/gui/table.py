@@ -11,7 +11,6 @@ from collections import MutableSequence, namedtuple
 from .base import GUIObject
 from .selectable_list import Selectable
 
-
 # We used to directly subclass list, but it caused problems at some point with deepcopy
 class Table(MutableSequence, Selectable):
     """Sortable and selectable sequence of :class:`Row`.
@@ -24,43 +23,6 @@ class Table(MutableSequence, Selectable):
     Usually used with :class:`~hscommon.gui.column.Column`.
     
     Subclasses :class:`~hscommon.gui.selectable_list.Selectable`.
-    
-    .. attribute:: header
-    .. attribute:: footer
-    
-        When set to something else than ``None``, represent rows that will always be kept in first
-        and/or last position, regardless of sorting. ``len()`` and indexing will include them, which
-        means that if there's a header, ``table[0]`` returns it and if there's a footer,
-        ``table[-1]`` returns it. To make things short, all list-like functions work with header and
-        footer "on". But things get fuzzy for ``append()`` and ``insert()`` because these will
-        ensure that no "normal" row gets inserted before the header or after the footer.
-        
-        Adding and removing footer here and there might seem (and is) hackish, but it's much simpler
-        than the alternative (when, of course, you need such a feature), which is to override magic
-        methods and adjust the results. When we do that, there the slice stuff that we have to
-        implement and it gets quite complex. Moreover, the most frequent operation on a table is
-        ``__getitem__``, and making checks to know whether the key is a header or footer at each
-        call would make that operation, which is the most used, slower.
-    
-    .. attribute:: row_count
-    
-        Number or rows in the table (without counting header and footer).
-    
-    .. attribute:: rows
-        
-        List of rows in the table, excluding header and footer.
-    
-    .. attribute:: selected_row
-        
-        :class:`Row`. *get/set*. Selected row, based on
-        :attr:`~hscommon.gui.selectable_list.Selectable.selected_index`. When setting this
-        attribute, we look up the index of the row and set the selected index from there. If the
-        row isn't in the list, selection isn't changed.
-    
-    .. attribute:: selected_rows
-        
-        List of :class:`Row`. *read-only*. List of selected rows based on
-        :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`.
     """
     def __init__(self):
         Selectable.__init__(self)
@@ -142,6 +104,25 @@ class Table(MutableSequence, Selectable):
     #--- Properties
     @property
     def footer(self):
+        """If set, a row that always stay at the bottom of the table.
+        
+        :class:`Row`. *get/set*.
+        
+        When set to something else than ``None``, ``header`` and ``footer`` represent rows that will
+        always be kept in first and/or last position, regardless of sorting. ``len()`` and indexing
+        will include them, which means that if there's a header, ``table[0]`` returns it and if
+        there's a footer, ``table[-1]`` returns it. To make things short, all list-like functions
+        work with header and footer "on". But things get fuzzy for ``append()`` and ``insert()``
+        because these will ensure that no "normal" row gets inserted before the header or after the
+        footer.
+        
+        Adding and removing footer here and there might seem (and is) hackish, but it's much simpler
+        than the alternative (when, of course, you need such a feature), which is to override magic
+        methods and adjust the results. When we do that, there the slice stuff that we have to
+        implement and it gets quite complex. Moreover, the most frequent operation on a table is
+        ``__getitem__``, and making checks to know whether the key is a header or footer at each
+        call would make that operation, which is the most used, slower.
+        """
         return self._footer
     
     @footer.setter
@@ -154,6 +135,10 @@ class Table(MutableSequence, Selectable):
     
     @property
     def header(self):
+        """If set, a row that always stay at the bottom of the table.
+        
+        See :attr:`footer` for details.
+        """
         return self._header
     
     @header.setter
@@ -166,6 +151,10 @@ class Table(MutableSequence, Selectable):
     
     @property
     def row_count(self):
+        """Number or rows in the table (without counting header and footer).
+        
+        *int*. *read-only*.
+        """
         result = len(self)
         if self._footer is not None:
             result -= 1
@@ -175,6 +164,10 @@ class Table(MutableSequence, Selectable):
     
     @property
     def rows(self):
+        """List of rows in the table, excluding header and footer.
+        
+        List of :class:`Row`. *read-only*.
+        """
         start = None
         end = None
         if self._footer is not None:
@@ -185,6 +178,13 @@ class Table(MutableSequence, Selectable):
     
     @property
     def selected_row(self):
+        """Selected row according to :attr:`~hscommon.gui.selectable_list.Selectable.selected_index`.
+        
+        :class:`Row`. *get/set*.
+        
+        When setting this attribute, we look up the index of the row and set the selected index from
+        there. If the row isn't in the list, selection isn't changed.
+        """
         return self[self.selected_index] if self.selected_index is not None else None
     
     @selected_row.setter
@@ -196,35 +196,114 @@ class Table(MutableSequence, Selectable):
     
     @property
     def selected_rows(self):
+        """List of selected rows based on :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`.
+        
+        List of :class:`Row`. *read-only*.
+        """
         return [self[index] for index in self.selected_indexes]
 
 
+class GUITableView:
+    """Expected interface for :class:`GUITable`'s view.
+    
+    *Not actually used in the code. For documentation purposes only.*
+    
+    Our view, some kind of table view, is expected to sync with the table's contents by
+    appropriately behave to all callbacks in this interface.
+    
+    When in edit mode, the content types by the user is expected to be sent as soon as possible
+    to the :class:`Row`.
+    
+    Whenever the user changes the selection, we expect the view to call :meth:`Table.select`.
+    """
+    def refresh(self):
+        """Refreshes the contents of the table widget.
+        
+        Ensures that the contents of the table widget is synced with the model. This includes
+        selection.
+        """
+    
+    def start_editing(self):
+        """Start editing the currently selected row.
+        
+        Begin whatever inline editing support that the view supports.
+        """
+    
+    def stop_editing(self):
+        """Stop editing if there's an inline editing in effect.
+        
+        There's no "aborting" implied in this call, so it's appropriate to send whatever the user
+        has typed and might not have been sent down to the :class:`Row` yet. After you've done that,
+        stop the editing mechanism.
+        """
+    
+
 SortDescriptor = namedtuple('SortDescriptor', 'column desc')
 class GUITable(Table, GUIObject):
+    """Cross-toolkit GUI-enabled table view.
+    
+    Represents a UI element presenting the user with a sortable, selectable, possibly editable,
+    table view.
+    
+    Behaves like the :class:`Table` which it subclasses, but is more focused on being the presenter
+    of some model data to its :attr:`~hscommon.gui.base.GUIObject.view`. There's a :meth:`refresh`
+    mechanism which ensures fresh data while preserving sorting order and selection. There's also an
+    editing mechanism which tracks whether (and which) row is being edited (or added) and
+    save/cancel edits when appropriate.
+    
+    Subclasses :class:`Table` and :class:`~hscommon.gui.base.GUIObject`. Expected view:
+    :class:`GUITableView`.
+    """
     def __init__(self):
         GUIObject.__init__(self)
         Table.__init__(self)
+        #: The row being currently edited by the user. ``None`` if no edit is taking place.
         self.edited = None
         self._sort_descriptor = None
     
     #--- Virtual
     def _do_add(self):
-        # Creates a new row, adds it in the table and returns (row, insert_index)
+        """(Virtual) Creates a new row, adds it in the table.
+        
+        Returns ``(row, insert_index)``.
+        """
         raise NotImplementedError()
     
     def _do_delete(self):
-        # Delete the selected rows
+        """(Virtual) Delete the selected rows.
+        """
         pass
     
     def _fill(self):
-        # Called by refresh()
-        # Fills the table with all the rows that this table is supposed to have.
+        """(Virtual/Required) Fills the table with all the rows that this table is supposed to have.
+        
+        Called by :meth:`refresh`. Does nothing by default.
+        """
         pass
     
     def _is_edited_new(self):
+        """(Virtual) Returns whether the currently edited row should be considered "new".
+        
+        This is used in :meth:`cancel_edits` to know whether the cancellation of the edit means a
+        revert of the row's value or the removal of the row.
+        
+        By default, always false.
+        """
         return False
     
     def _restore_selection(self, previous_selection):
+        """(Virtual) Restores row selection after a contents-changing operation.
+        
+        Before each contents changing operation, we store our previously selected indexes because in
+        many cases, such as in :meth:`refresh`, our selection will be lost. After the operation is
+        over, we call this method with our previously selected indexes (in ``previous_selection``).
+        
+        The default behavior is (if we indeed have an empty
+        :attr:`~hscommon.gui.selectable_list.Selectable.selected_indexes`) to re-select
+        ``previous_selection``. If it was empty, we select the last row of the table.
+        
+        This behavior can, of course, be overriden.
+        """
         if not self.selected_indexes:
             if previous_selection:
                 self.select(previous_selection)
@@ -233,6 +312,11 @@ class GUITable(Table, GUIObject):
     
     #--- Public
     def add(self):
+        """Add a new row in edit mode.
+        
+        Requires :meth:`do_add` to be implemented. The newly added row will be selected and in edit
+        mode.
+        """
         self.view.stop_editing()
         if self.edited is not None:
             self.save_edits()
@@ -244,13 +328,22 @@ class GUITable(Table, GUIObject):
         self.view.start_editing()
     
     def can_edit_cell(self, column_name, row_index):
-        # A row is, by default, editable as soon as it has an attr with the same name as `column`.
-        # If can_edit() returns False, the row is not editable at all. You can set editability of
-        # rows at the attribute level with can_edit_* properties
+        """Returns whether the cell at ``row_index`` and ``column_name`` can be edited.
+        
+        A row is, by default, editable as soon as it has an attr with the same name as `column`.
+        If :meth:`Row.can_edit` returns False, the row is not editable at all. You can set
+        editability of rows at the attribute level with can_edit_* properties.
+        
+        Mostly just a shortcut to :meth:`Row.can_edit_cell`.
+        """
         row = self[row_index]
         return row.can_edit_cell(column_name)
     
     def cancel_edits(self):
+        """Cancels the current edit operation.
+        
+        If there's an :attr:`edited` row, it will be re-initialized (with :meth:`Row.load`).
+        """
         if self.edited is None:
             return
         self.view.stop_editing()
@@ -265,6 +358,11 @@ class GUITable(Table, GUIObject):
         self.view.refresh()
     
     def delete(self):
+        """Delete the currently selected rows.
+        
+        Requires :meth:`_do_delete` for this to have any effect on the model. Cancels editing if
+        relevant.
+        """
         self.view.stop_editing()
         if self.edited is not None:
             self.cancel_edits()
@@ -273,6 +371,16 @@ class GUITable(Table, GUIObject):
             self._do_delete()
     
     def refresh(self, refresh_view=True):
+        """Empty the table and re-create its rows.
+        
+        :meth:`_fill` is called after we emptied the table to create our rows. Previous sort order
+        will be preserved, regardless of the order in which the rows were filled. If there was any
+        edit operation taking place, it's cancelled.
+        
+        :param bool refresh_view: Whether we tell our view to refresh after our refill operation.
+                                  Most of the time, it's what we want, but there's some cases where
+                                  we don't.
+        """
         self.cancel_edits()
         previous_selection = self.selected_indexes
         del self[:]
@@ -285,6 +393,10 @@ class GUITable(Table, GUIObject):
             self.view.refresh()
     
     def save_edits(self):
+        """Commit user edits to the model.
+        
+        This is done by calling :meth:`Row.save`.
+        """
         if self.edited is None:
             return
         row = self.edited
@@ -292,6 +404,15 @@ class GUITable(Table, GUIObject):
         row.save()
     
     def sort_by(self, column_name, desc=False):
+        """Sort table by ``column_name``.
+        
+        Overrides :meth:`Table.sort_by`. After having performed sorting, calls
+        :meth:`~hscommon.gui.selectable_list.Selectable._update_selection` to give you the chance,
+        if appropriate, to update your selected indexes according to, maybe, the selection that you
+        have in your model.
+        
+        Then, we refresh our view.
+        """
         Table.sort_by(self, column_name=column_name, desc=desc)
         self._sort_descriptor = SortDescriptor(column_name, desc)
         self._update_selection()

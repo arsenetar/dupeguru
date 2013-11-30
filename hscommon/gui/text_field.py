@@ -33,18 +33,6 @@ class TextField(GUIObject):
     us to directly retrieve/set our non-string value through :attr:`value`.
     
     Subclasses :class:`hscommon.gui.base.GUIObject`. Expected view: :class:`TextFieldView`.
-    
-    .. attribute:: text
-        
-        *str*. The text that is currently displayed in the widget. This property can be set. When it
-        is, :meth:`refresh` is called and the view is synced with our value. Always in sync with
-        :attr:`value`.
-    
-    .. attribute:: value
-        
-        The "parsed" representation of :attr:`text`. By default, it's a mirror of :attr:`text`, but
-        a subclass can override :meth:`_parse` and :meth:`_format` to have anything else. Always in
-        sync with :attr:`text`.
     """
     def __init__(self):
         GUIObject.__init__(self)
@@ -85,6 +73,13 @@ class TextField(GUIObject):
     
     @property
     def text(self):
+        """The text that is currently displayed in the widget.
+        
+        *str*. *get/set*.
+        
+        This property can be set. When it is, :meth:`refresh` is called and the view is synced with
+        our value. Always in sync with :attr:`value`.
+        """
         return self._text
     
     @text.setter
@@ -93,6 +88,13 @@ class TextField(GUIObject):
     
     @property
     def value(self):
+        """The "parsed" representation of :attr:`text`.
+        
+        *arbitrary type*. *get/set*.
+        
+        By default, it's a mirror of :attr:`text`, but a subclass can override :meth:`_parse` and
+        :meth:`_format` to have anything else. Always in sync with :attr:`text`.
+        """
         return self._value
     
     @value.setter
