@@ -168,17 +168,12 @@ def build_help(edition):
     conftmpl = op.join(current_path, 'help', 'conf.tmpl')
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
 
-def build_base_localizations():
-    loc.compile_all_po('locale')
-    loc.compile_all_po(op.join('hscommon', 'locale'))
-    loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
-
 def build_qt_localizations():
     loc.compile_all_po(op.join('qtlib', 'locale'))
     loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
 
 def build_localizations(ui, edition):
-    build_base_localizations()
+    loc.compile_all_po('locale')
     if ui == 'cocoa':
         app = cocoa_app(edition)
         loc.build_cocoa_localizations(app, en_stringsfile=op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'))
@@ -220,8 +215,6 @@ def build_updatepot():
     # We want to merge the generated pot with the old pot in the most preserving way possible.
     ui_packages = ['qt', op.join('cocoa', 'inter')]
     loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'], merge=(not ISOSX))
-    print("Building hscommon.pot")
-    loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
     if ISOSX:
@@ -236,13 +229,11 @@ def build_updatepot():
 def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos('locale')
-    loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
     loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
 
 def build_normpo():
     loc.normalize_all_pos('locale')
-    loc.normalize_all_pos(op.join('hscommon', 'locale'))
     loc.normalize_all_pos(op.join('qtlib', 'locale'))
     loc.normalize_all_pos(op.join('cocoalib', 'locale'))
 

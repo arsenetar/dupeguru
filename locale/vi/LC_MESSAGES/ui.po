@@ -27,26 +27,18 @@ msgstr "Đang gửi các đối tượng bị lỗi đến Thùng Rác"
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Đang giao tiếp với iTunes. Đừng chạm vào!"
 
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr ""
-"Xảy ra vấn đề khi giao tiếp với iTunes. Tiến trình này không thể được thực "
-"hiện."
-
-#: cocoa/inter/app_me.py:195
+#: cocoa/inter/app_me.py:198
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Thư viện iTunes của bạn chứa %d các track bị lỗi và đang chuẩn bị được loại "
 "bỏ. Tiếp tục?"
 
-#: cocoa/inter/app_me.py:199
+#: cocoa/inter/app_me.py:202
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "Bạn không có track bị lỗi trong thư viện iTunes"
 
-#: cocoa/inter/app_me.py:217
+#: cocoa/inter/app_me.py:220
 msgid "The iTunes application couldn't be found."
 msgstr "Không tìm thấy ứng dụng iTunes."
 
@@ -68,52 +60,48 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "Không tìm thấy ứng dụng iPhoto."
 
-#: qt/base/app.py:95
+#: qt/base/app.py:82
 msgid "Quit"
 msgstr "Thoát"
 
-#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:83 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Tùy biến"
 
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:84 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Danh sách bỏ qua"
 
-#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:85 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Trợ giúp"
 
-#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Dịch bởi Phan Anh"
 
-#: qt/base/app.py:100
-msgid "Register dupeGuru"
-msgstr "Đăng ký chương trình"
-
-#: qt/base/app.py:101
+#: qt/base/app.py:87
 msgid "Check for Update"
 msgstr "Kiểm tra cập nhật"
 
-#: qt/base/app.py:102
+#: qt/base/app.py:88
 msgid "Open Debug Log"
 msgstr "Mở nhật trình gỡ rối"
 
-#: qt/base/app.py:257
+#: qt/base/app.py:210
 msgid "{} file (*.{})"
 msgstr "{} tập tin (*.{})"
 
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Xóa tùy chọn"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Liên kết đến các tập tin đã bị xóa"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
@@ -121,19 +109,19 @@ msgstr ""
 "Sau khi đã xóa một đối tượng bị trùng, đặt một liên kết chỉ thẳng nhằm tham "
 "chiếu đến tập tin để thay thế tập tin đã được xóa."
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Hardlink"
 msgstr "Liên kết cứng"
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Symlink"
 msgstr "Liên kết biểu tượng"
 
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Trực tiếp xóa các tập tin"
 
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
@@ -142,11 +130,11 @@ msgstr ""
 " này thường được dùng trong các môi trường làm việc nơi mà các tác dụng xóa "
 "những tập tin theo cách thông thường không được áp dụng."
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr "Tiếp tục"
 
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
@@ -193,47 +181,47 @@ msgstr "Trợ giúp"
 msgid "Load Recent Results"
 msgstr "Tải các kết quả gần đây"
 
-#: qt/base/directories_dialog.py:108 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:107 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Chọn thư mục để quét và nhấn \"Quét\"."
 
-#: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:131 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results"
 msgstr "Tải kết quả"
 
-#: qt/base/directories_dialog.py:135 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:134 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan"
 msgstr "Quét"
 
-#: qt/base/directories_dialog.py:179
+#: qt/base/directories_dialog.py:178
 msgid "Unsaved results"
 msgstr "Các kết quả chưa lưu"
 
-#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Bạn vẫn chưa lưu các kết quả, bạn có thực sự muốn thoát?"
 
-#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:187 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Chọn một thư mục để thêm vào danh sách quét"
 
-#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:204 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Chọn một tập tin kết quả để tải"
 
-#: qt/base/directories_dialog.py:206
+#: qt/base/directories_dialog.py:205
 msgid "All Files (*.*)"
 msgstr "Tất cả tập tin (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:286
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "tập tin kết quả của dupeGuru (*.dupeguru)"
 
-#: qt/base/directories_dialog.py:217
+#: qt/base/directories_dialog.py:216
 msgid "Start a new scan"
 msgstr "Bắt đầu quá trình quét mới"
 
-#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 "Bạn vẫn chưa lưu các kết quả vừa quét, bạn có muốn tiếp tục hay không?"
@@ -349,14 +337,14 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Biểu hiện các phần được chọn"
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:170
+#: qt/base/result_window.py:44 qt/base/result_window.py:169
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Chi tiết"
 
 #: qt/base/result_window.py:45 qt/base/result_window.py:80
-#: qt/base/result_window.py:145 qt/base/result_window.py:169
+#: qt/base/result_window.py:144 qt/base/result_window.py:168
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr "Thao tác"
@@ -453,23 +441,23 @@ msgstr "Đánh dấu"
 msgid "Columns"
 msgstr "Cột"
 
-#: qt/base/result_window.py:141
+#: qt/base/result_window.py:140
 msgid "Reset to Defaults"
 msgstr "Thiết đặt lại về mặc định"
 
-#: qt/base/result_window.py:163
+#: qt/base/result_window.py:162
 msgid "{} Results"
 msgstr "{} Kết quả"
 
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:170 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr "Chỉ trùng nhau"
 
-#: qt/base/result_window.py:172
+#: qt/base/result_window.py:171
 msgid "Delta Values"
 msgstr "Giá trị Delta"
 
-#: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:285 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Chọn một tập tin để lưu kết quả vào"
 
@@ -570,18 +558,18 @@ msgstr "EXIF Timestamp"
 msgid "Match pictures of different dimensions"
 msgstr "Chỉ các hình ảnh khớp nhau với các chiều khác nhau"
 
-#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Dọn dẹp bộ nhớ đệm của hình ảnh"
 
-#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr ""
 "Bạn có muốn loại bỏ toàn bộ các phân tích trong bộ nhớ đệm về hình ảnh hay "
 "không?"
 
-#: qt/pe/result_window.py:28
+#: qt/pe/result_window.py:29
 msgid "Picture cache cleared."
 msgstr "Đã dọn dẹp bộ nhớ đệm xử lý hình ảnh."
 

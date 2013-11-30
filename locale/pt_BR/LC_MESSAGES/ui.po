@@ -30,24 +30,16 @@ msgstr "Movendo duplicatas para o Lixo"
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Comunicando com o iTunes. Não mexa!"
 
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr ""
-"Ocorreu um erro de comunicação com o iTunes. A operação não pôde ser "
-"finalizada."
-
-#: cocoa/inter/app_me.py:195
+#: cocoa/inter/app_me.py:198
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr "Remover %d faixas sem referência da Biblioteca do iTunes?"
 
-#: cocoa/inter/app_me.py:199
+#: cocoa/inter/app_me.py:202
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "Você não possui nenhuma faixa sem referência na Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:217
+#: cocoa/inter/app_me.py:220
 msgid "The iTunes application couldn't be found."
 msgstr "O aplicativo iTunes não foi encontrado."
 
@@ -69,52 +61,48 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "O aplicativo iPhoto não foi encontrado."
 
-#: qt/base/app.py:95
+#: qt/base/app.py:82
 msgid "Quit"
 msgstr "Encerrar"
 
-#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:83 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Preferências"
 
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:84 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Lista Ignorar"
 
-#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:85 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Ajuda dupeGuru"
 
-#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Sobre o dupeGuru"
 
-#: qt/base/app.py:100
-msgid "Register dupeGuru"
-msgstr "Registrar dupeGuru"
-
-#: qt/base/app.py:101
+#: qt/base/app.py:87
 msgid "Check for Update"
 msgstr "Buscar Atualizaçõs"
 
-#: qt/base/app.py:102
+#: qt/base/app.py:88
 msgid "Open Debug Log"
 msgstr "Abrir Registro de Depuração"
 
-#: qt/base/app.py:257
+#: qt/base/app.py:210
 msgid "{} file (*.{})"
 msgstr "Arquivo {} (*.{})"
 
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Opções de Apagamento"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Criar link dos arquivos apagados"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
@@ -122,19 +110,19 @@ msgstr ""
 "Após apagar uma duplicata, cria um link direcionado ao arquivo original para"
 " substituir o arquivo apagado."
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Hardlink"
 msgstr "Hardlink"
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Symlink"
 msgstr "Symlink"
 
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Apagar arquivos imediatamente"
 
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
@@ -142,11 +130,11 @@ msgstr ""
 "Apaga os arquivos imediatamente ao invés de movê-los para o Lixo. Essa opção"
 " é usada como alternativa para quando o método normal falha."
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr "Continuar"
 
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -193,47 +181,47 @@ msgstr "Ajuda"
 msgid "Load Recent Results"
 msgstr "Carregar Resultados Recentes"
 
-#: qt/base/directories_dialog.py:108 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:107 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Selecione as pastas desejadas e clique em \"Escanear\"."
 
-#: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:131 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results"
 msgstr "Carregar"
 
-#: qt/base/directories_dialog.py:135 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:134 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan"
 msgstr "Escanear"
 
-#: qt/base/directories_dialog.py:179
+#: qt/base/directories_dialog.py:178
 msgid "Unsaved results"
 msgstr "Resultados não salvos"
 
-#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Você possui resultados não salvos, deseja encerrar mesmo assim?"
 
-#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:187 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Selecione uma pasta para adicionar ao escaneamento"
 
-#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:204 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Selecione um resultado para carregar"
 
-#: qt/base/directories_dialog.py:206
+#: qt/base/directories_dialog.py:205
 msgid "All Files (*.*)"
 msgstr "Todos os Arquivos (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:286
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Resultados do dupeGuru (*.dupeguru)"
 
-#: qt/base/directories_dialog.py:217
+#: qt/base/directories_dialog.py:216
 msgid "Start a new scan"
 msgstr "Iniciar um novo escaneamento"
 
-#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Você possui resultados não salvos, deseja continuar mesmo assim?"
 
@@ -348,14 +336,14 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Mostrar no Finder"
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:170
+#: qt/base/result_window.py:44 qt/base/result_window.py:169
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Detalhes"
 
 #: qt/base/result_window.py:45 qt/base/result_window.py:80
-#: qt/base/result_window.py:145 qt/base/result_window.py:169
+#: qt/base/result_window.py:144 qt/base/result_window.py:168
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr "Ações"
@@ -452,23 +440,23 @@ msgstr "Marcar"
 msgid "Columns"
 msgstr "Colunas"
 
-#: qt/base/result_window.py:141
+#: qt/base/result_window.py:140
 msgid "Reset to Defaults"
 msgstr "Restaurar Padrões"
 
-#: qt/base/result_window.py:163
+#: qt/base/result_window.py:162
 msgid "{} Results"
 msgstr "Resultados do {}"
 
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:170 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr "Duplicatas"
 
-#: qt/base/result_window.py:172
+#: qt/base/result_window.py:171
 msgid "Delta Values"
 msgstr "Valores Delta"
 
-#: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:285 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Selecione onde salvar seus resultados"
 
@@ -569,16 +557,16 @@ msgstr "Timestamp EXIF"
 msgid "Match pictures of different dimensions"
 msgstr "Coincidir fotos de dimensões diferentes"
 
-#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Apagar Cache de Fotos"
 
-#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Deseja remover todo o cache das fotos já analizadas?"
 
-#: qt/pe/result_window.py:28
+#: qt/pe/result_window.py:29
 msgid "Picture cache cleared."
 msgstr "Cache de fotos apagado."
 

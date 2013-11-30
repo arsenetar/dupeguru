@@ -11,17 +11,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "%@ is Fairware"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Buy"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
@@ -33,27 +25,11 @@ msgid "Clear List"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Contribute"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Don't Send"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter Key"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter your key"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Fairware?"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
@@ -69,18 +45,6 @@ msgid "Please wait..."
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Register"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration e-mail:"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration key:"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Send"
 msgstr ""
 
@@ -92,24 +56,6 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Submit"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "This app is registered, thanks!"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Try"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Type the key you received when you contributed to %@, as well as the e-mail "
-"used as a reference for the purchase."
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0

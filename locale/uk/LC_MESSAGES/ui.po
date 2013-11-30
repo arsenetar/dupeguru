@@ -26,24 +26,18 @@ msgstr "Відправлення дублікатів до кошика"
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Виконується взаємодія з програмою iTunes. Не чіпайте її!"
 
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr "Виникла проблема зв'язку з iTunes. Операція не може бути завершена."
-
-#: cocoa/inter/app_me.py:195
+#: cocoa/inter/app_me.py:198
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Ваша бібліотека iTunes містить %d мертвих треків, які готові до видалення. "
 "Продовжити?"
 
-#: cocoa/inter/app_me.py:199
+#: cocoa/inter/app_me.py:202
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "У вашій бібліотеці iTunes немає мертвих треків "
 
-#: cocoa/inter/app_me.py:217
+#: cocoa/inter/app_me.py:220
 msgid "The iTunes application couldn't be found."
 msgstr "Не можливо знайти програму iTunes"
 
@@ -63,80 +57,76 @@ msgstr ""
 msgid "The iPhoto application couldn't be found."
 msgstr "Не вдалося знайти програму iPhoto."
 
-#: qt/base/app.py:95
+#: qt/base/app.py:82
 msgid "Quit"
 msgstr "Вихід"
 
-#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:83 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:84 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Чорний список"
 
-#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:85 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Довідка dupeGuru"
 
-#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Про dupeGuru"
 
-#: qt/base/app.py:100
-msgid "Register dupeGuru"
-msgstr "Зареєструвати dupeGuru"
-
-#: qt/base/app.py:101
+#: qt/base/app.py:87
 msgid "Check for Update"
 msgstr "Перевірити оновлення"
 
-#: qt/base/app.py:102
+#: qt/base/app.py:88
 msgid "Open Debug Log"
 msgstr "Відкрити журнал налагодження"
 
-#: qt/base/app.py:257
+#: qt/base/app.py:210
 msgid "{} file (*.{})"
 msgstr ""
 
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr ""
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr ""
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Symlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr ""
 
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr ""
 
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -183,47 +173,47 @@ msgstr "Допомога"
 msgid "Load Recent Results"
 msgstr "Завантажити нещодавні результати"
 
-#: qt/base/directories_dialog.py:108 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:107 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Оберіть папки для пошуку і натисніть \"Шукати\"."
 
-#: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:131 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results"
 msgstr "Завантажити результати"
 
-#: qt/base/directories_dialog.py:135 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:134 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan"
 msgstr "Шукати"
 
-#: qt/base/directories_dialog.py:179
+#: qt/base/directories_dialog.py:178
 msgid "Unsaved results"
 msgstr "Незбережені результати"
 
-#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:179 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr "Ви маєте незбережені результати, ви дійсно хочете вийти?"
 
-#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:187 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Оберіть папку для додання в список пошуку"
 
-#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:204 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Виберіть файл результатів для завантаження"
 
-#: qt/base/directories_dialog.py:206
+#: qt/base/directories_dialog.py:205
 msgid "All Files (*.*)"
 msgstr "Всі файли (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
+#: qt/base/directories_dialog.py:205 qt/base/result_window.py:286
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Результати dupeGuru (*.dupeguru) "
 
-#: qt/base/directories_dialog.py:217
+#: qt/base/directories_dialog.py:216
 msgid "Start a new scan"
 msgstr "Почати новий пошук"
 
-#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:217 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Ви маєте незбережені результати, ви дійсно хочете продовжити?"
 
@@ -337,14 +327,14 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Показати вибрані"
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:170
+#: qt/base/result_window.py:44 qt/base/result_window.py:169
 #: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Деталі"
 
 #: qt/base/result_window.py:45 qt/base/result_window.py:80
-#: qt/base/result_window.py:145 qt/base/result_window.py:169
+#: qt/base/result_window.py:144 qt/base/result_window.py:168
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr "Дії"
@@ -441,23 +431,23 @@ msgstr "Позначити"
 msgid "Columns"
 msgstr "Колонки"
 
-#: qt/base/result_window.py:141
+#: qt/base/result_window.py:140
 msgid "Reset to Defaults"
 msgstr "Відновити налаштування за замовчуванням"
 
-#: qt/base/result_window.py:163
+#: qt/base/result_window.py:162
 msgid "{} Results"
 msgstr "{} Результати"
 
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:170 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr "Тільки дублікати"
 
-#: qt/base/result_window.py:172
+#: qt/base/result_window.py:171
 msgid "Delta Values"
 msgstr "Різниця"
 
-#: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:285 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Оберіть файл у який слід зберегти ваші результати"
 
@@ -558,16 +548,16 @@ msgstr "Часова мітка EXIF"
 msgid "Match pictures of different dimensions"
 msgstr "Порівнювати малюнки різних розмірів"
 
-#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Очистити кеш зображень"
 
-#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Ви дійсно хочете видалити всі кешовані результати аналізу зображень?"
 
-#: qt/pe/result_window.py:28
+#: qt/pe/result_window.py:29
 msgid "Picture cache cleared."
 msgstr "Кеш зображень очищено."
 
