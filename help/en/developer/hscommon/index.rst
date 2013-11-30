@@ -14,3 +14,6 @@ hscommon
     gui/text_field
     gui/selectable_list
     gui/table
+    gui/tree
+    gui/column
+    gui/progress_window
