@@ -1,7 +1,17 @@
 # dupeGuru
 
-This package contains the source for dupeGuru. Its documentation is
-[available online][documentation]. Here's how this source tree is organised:
+[dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
+a system. It's written mostly in Python 3 and has the peculiarity of using
+[multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
+is written in Objective-C and uses Cocoa. On Linux and Windows, it's written in Python and uses Qt4.
+
+dupeGuru comes in 3 editions (standard, music and picture) which are all buildable from this same
+source tree. You choose the edition you want to build in a ``configure.py`` flag.
+
+# Contents of this folder
+
+This folder contains the source for dupeGuru. Its documentation is in ``help``, but is also
+[available online][documentation] in its built form. Here's how this source tree is organised:
 
 * core: Contains the core logic code for dupeGuru. It's Python code.
 * core_*: Edition-specific-cross-toolkit code written in Python.
@@ -86,6 +96,8 @@ You can also package dupeGuru into an installable package with:
     
     $ python package.py
 
+[dupeguru]: http://www.hardcoded.net/dupeguru/
+[cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
 [setuptools]: https://pypi.python.org/pypi/setuptools
