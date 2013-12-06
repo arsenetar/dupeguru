@@ -22,6 +22,7 @@ class DeletionOptions(QDialog):
         self._setupUi()
         self.model.view = self
         
+        self.linkCheckbox.stateChanged.connect(self.linkCheckboxChanged)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
     
@@ -42,7 +43,6 @@ class DeletionOptions(QDialog):
         self.verticalLayout.addWidget(self.linkTypeRadio)
         if not self.model.supports_links():
             self.linkCheckbox.setEnabled(False)
-            self.linkTypeRadio.setEnabled(False)
             self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (unsupported)"))
         self.directCheckbox = QCheckBox(tr("Directly delete files"))
         self.verticalLayout.addWidget(self.directCheckbox)
@@ -56,8 +56,12 @@ class DeletionOptions(QDialog):
         self.buttonBox.addButton(tr("Cancel"), QDialogButtonBox.RejectRole)
         self.verticalLayout.addWidget(self.buttonBox)
     
+    #--- Signals
+    def linkCheckboxChanged(self, changed: int):
+        self.model.link_deleted = bool(changed)
+    
     #--- model --> view
-    def update_msg(self, msg):
+    def update_msg(self, msg: str):
         self.msgLabel.setText(msg)
     
     def show(self):
@@ -69,4 +73,7 @@ class DeletionOptions(QDialog):
         self.model.use_hardlinks = self.linkTypeRadio.selected_index == 1
         self.model.direct = self.directCheckbox.isChecked()
         return result == QDialog.Accepted
+    
+    def set_hardlink_option_enabled(self, is_enabled: bool):
+        self.linkTypeRadio.setEnabled(is_enabled)
     

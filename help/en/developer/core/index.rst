@@ -9,4 +9,4 @@ core
     engine
     directories
     results
-    gui
+    gui/index
