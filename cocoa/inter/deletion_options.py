@@ -11,6 +11,7 @@ from cocoa.inter import PyGUIObject, GUIObjectView
 class DeletionOptionsView(GUIObjectView):
     def updateMsg_(self, msg: str): pass
     def show(self) -> bool: pass
+    def setHardlinkOptionEnabled_(self, enabled: bool): pass
 
 class PyDeletionOptions(PyGUIObject):
     def setLinkDeleted_(self, link_deleted: bool):
@@ -31,3 +32,6 @@ class PyDeletionOptions(PyGUIObject):
     def show(self):
         return self.callback.show()
     
+    @dontwrap
+    def set_hardlink_option_enabled(self, enabled):
+        self.callback.setHardlinkOptionEnabled_(enabled)
