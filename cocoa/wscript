@@ -31,7 +31,7 @@ def configure(conf):
         os.symlink('../build/Python', versioned_dylib_path)
     # The rest is standard WAF code that you can find the the python and macapp demos.
     conf.load('compiler_c python')
-    conf.check_python_version((3,2,0))
+    conf.check_python_version((3,3,0))
     conf.check_python_headers()
     conf.env.FRAMEWORK_COCOA = 'Cocoa'
     conf.env.ARCH_COCOA = ['x86_64']

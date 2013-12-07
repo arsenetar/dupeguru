@@ -150,8 +150,6 @@ class DupeGuruME(DupeGuruBase):
         self.dead_tracks = []
     
     def _do_delete(self, j, *args):
-        # XXX If I read correctly, Python 3.3 will allow us to go fetch inner function easily, so
-        # we'll be able to replace "op" below with DupeGuruBase._do_delete.op.
         def op(dupe):
             j.add_progress()
             return self._do_delete_dupe(dupe, *args)
