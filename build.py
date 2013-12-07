@@ -327,8 +327,9 @@ def main():
     if dev:
         print("Building in Dev mode")
     if options.clean:
-        if op.exists('build'):
-            shutil.rmtree('build')
+        for path in ['build', op.join('cocoa', 'build'), op.join('cocoa', 'autogen')]:
+            if op.exists(path):
+                shutil.rmtree(path)
     if not op.exists('build'):
         os.mkdir('build')
     if options.doc:
