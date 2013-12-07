@@ -1,5 +1,4 @@
 #import "CocoaProxy.h"
-#import <CoreServices/CoreServices.h>
 #import "HSErrorReportWindow.h"
 
 @implementation CocoaProxy
@@ -92,13 +91,14 @@
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
+- (NSString *)bundleInfo:(NSString *)key
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+}
+
 - (NSString *)osxVersion
 {
-    SInt32 major, minor, bugfix;
-    Gestalt(gestaltSystemVersionMajor, &major);
-    Gestalt(gestaltSystemVersionMinor, &minor);
-    Gestalt(gestaltSystemVersionBugFix, &bugfix);
-    return [NSString stringWithFormat:@"%d.%d.%d", major, minor, bugfix];
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
 - (void)postNotification:(NSString *)name userInfo:(NSDictionary *)userInfo
@@ -151,5 +151,21 @@
 - (void)log:(NSString *)s
 {
     NSLog(@"%@", s);
+}
+
+- (NSDictionary *)readExifData:(NSString *)imagePath
+{
+    NSDictionary *result = nil;
+    NSURL* url = [NSURL fileURLWithPath:imagePath];
+    CGImageSourceRef source = CGImageSourceCreateWithURL((CFURLRef)url, nil);
+    if (source != nil) {
+        CFDictionaryRef metadataRef = CGImageSourceCopyPropertiesAtIndex (source, 0, nil);
+        if (metadataRef != nil) {
+            result = [NSDictionary dictionaryWithDictionary:(NSDictionary *)metadataRef];
+            CFRelease(metadataRef);
+        }
+        CFRelease(source);
+    }
+    return result;
 }
 @end

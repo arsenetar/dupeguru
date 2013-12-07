@@ -9,25 +9,17 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: qtlib/about_box.py:31
+#: qtlib/about_box.py:28
 msgid "About {}"
 msgstr ""
 
-#: qtlib/about_box.py:51
+#: qtlib/about_box.py:48
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:55
+#: qtlib/about_box.py:52
 msgid "Copyright Hardcoded Software 2013"
 msgstr "Direitos Autorais Hardcoded Software 2013"
-
-#: qtlib/about_box.py:64
-msgid "UNREGISTERED"
-msgstr "NÃO REGISTRADO"
-
-#: qtlib/about_box.py:70
-msgid "Register"
-msgstr ""
 
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
@@ -108,58 +100,10 @@ msgstr ""
 msgid "Clear List"
 msgstr "Limpar Lista"
 
-#: qtlib/reg_demo_dialog.py:35
-msgid "$appname is Fairware"
-msgstr "$appname é Fairware"
-
-#: qtlib/reg_demo_dialog.py:49
-msgid "Try"
-msgstr "Testar"
-
-#: qtlib/reg_demo_dialog.py:52
-msgid "Enter Key"
-msgstr "Entrar Chave"
-
-#: qtlib/reg_demo_dialog.py:55
-msgid "Buy"
-msgstr "Comprar"
-
-#: qtlib/reg_demo_dialog.py:57
-msgid "Fairware?"
-msgstr "Fairware?"
-
-#: qtlib/reg_submit_dialog.py:31
-msgid "Enter your registration key"
-msgstr "Entre sua chave de registro"
-
-#: qtlib/reg_submit_dialog.py:36
-msgid ""
-"Type the key you received when you contributed to $appname, as well as the "
-"e-mail used as a reference for the purchase."
-msgstr ""
-"Digite a chave que você recebeu ao contribuir com o $appname, assim como o "
-"e-mail usado para a compra."
-
-#: qtlib/reg_submit_dialog.py:48
-msgid "Registration key:"
-msgstr "Chave de registro:"
-
-#: qtlib/reg_submit_dialog.py:51
-msgid "Registered e-mail:"
-msgstr "e-mail registrado:"
-
-#: qtlib/reg_submit_dialog.py:60
-msgid "Contribute"
-msgstr "Contribuir"
-
-#: qtlib/reg_submit_dialog.py:71
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: qtlib/reg_submit_dialog.py:80
-msgid "Submit"
-msgstr "Enviar"
-
 #: qtlib/search_edit.py:41
 msgid "Search..."
 msgstr "Buscar…"
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
+msgstr ""

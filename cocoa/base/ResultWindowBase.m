@@ -258,8 +258,8 @@ http://www.hardcoded.net/licenses/bsd_license
     [sp setAllowedFileTypes:[NSArray arrayWithObject:@"dupeguru"]];
     [sp setTitle:NSLocalizedString(@"Select a file to save your results to", @"")];
     if ([sp runModal] == NSOKButton) {
-        [model saveResultsAs:[sp filename]];
-        [[app recentResults] addFile:[sp filename]];
+        [model saveResultsAs:[[sp URL] path]];
+        [[app recentResults] addFile:[[sp URL] path]];
     }
 }
 
@@ -344,6 +344,9 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item
 {
+    if ([item action] == @selector(markAll)) {
+        [item setTitle:NSLocalizedString(@"Mark All", @"")];
+    }
     return ![[ProgressController mainProgressController] isShown];
 }
 @end

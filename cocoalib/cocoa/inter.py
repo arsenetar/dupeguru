@@ -295,44 +295,6 @@ class PyBaseApp(PyGUIObject):
         proxy.setPrefValue_value_(key_name, value)
     
     @dontwrap
-    def open_url(self, url):
-        proxy.openURL_(url)
-    
-    @dontwrap
     def show_message(self, msg):
         self.callback.showMessage_(msg)
 
-class FairwareView(BaseAppView):
-    def setupAsRegistered(self): pass
-    def showDemoNagWithPrompt_(self, prompt: str): pass
-
-class PyFairware(PyBaseApp):
-    FOLLOW_PROTOCOLS = ['HSFairwareProtocol']
-    
-    def initialRegistrationSetup(self):
-        self.model.initial_registration_setup()
-    
-    def isRegistered(self) -> bool:
-        return self.model.registered
-    
-    def setRegisteredCode_andEmail_(self, code: str, email: str) -> bool:
-        return self.model.set_registration(code, email, False)
-    
-    def contribute(self):
-        self.model.contribute()
-    
-    def buy(self):
-        self.model.buy()
-    
-    def aboutFairware(self):
-        self.model.about_fairware()
-    
-    #--- Python --> Cocoa
-    @dontwrap
-    def setup_as_registered(self):
-        self.callback.setupAsRegistered()
-    
-    @dontwrap
-    def show_demo_nag(self, prompt):
-        self.callback.showDemoNagWithPrompt_(prompt)
-    

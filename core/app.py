@@ -16,15 +16,14 @@ import shutil
 
 from send2trash import send2trash
 from jobprogress import job
-from hscommon.reg import RegistrableApplication
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.gui.progress_window import ProgressWindow
-from hscommon.util import (delete_if_empty, first, escape, nonone, format_time_decimal, allsame,
-    rem_file_ext)
+from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal, allsame
 from hscommon.trans import tr
 from hscommon.plat import ISWINDOWS
+from hscommon import desktop
 
 from . import directories, results, scanner, export, fs
 from .gui.deletion_options import DeletionOptions
@@ -89,10 +88,7 @@ def format_dupe_count(c):
     return str(c) if c else '---'
 
 def cmp_value(dupe, attrname):
-    if attrname == 'name':
-        value = rem_file_ext(dupe.name)
-    else:
-        value = getattr(dupe, attrname, '')
+    value = getattr(dupe, attrname, '')
     return value.lower() if isinstance(value, str) else value
 
 def fix_surrogate_encoding(s, encoding='utf-8'):
@@ -112,7 +108,7 @@ def fix_surrogate_encoding(s, encoding='utf-8'):
     else:
         return s
 
-class DupeGuru(RegistrableApplication, Broadcaster):
+class DupeGuru(Broadcaster):
     """Holds everything together.
     
     Instantiated once per running application, it holds a reference to every high-level object
@@ -144,6 +140,10 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         Instance of :mod:`meta-gui <core.gui>` table listing the results from :attr:`results`
     """
     #--- View interface
+    # get_default(key_name)
+    # set_default(key_name, value)
+    # show_message(msg)
+    # open_url(url)
     # open_path(path)
     # reveal_path(path)
     # ask_yes_no(prompt) --> bool
@@ -154,15 +154,14 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     # in fairware prompts, we don't mention the edition, it's too long.
     PROMPT_NAME = "dupeGuru"
-    DEMO_LIMITATION = tr("will only be able to delete, move or copy 10 duplicates at once")
     
-    def __init__(self, view, appdata):
+    def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
-        RegistrableApplication.__init__(self, view, appid=1)
         Broadcaster.__init__(self)
-        self.appdata = appdata
+        self.view = view
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.directories = directories.Directories()
@@ -206,13 +205,11 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         else:
             result = cmp_value(dupe, key)
         if delta:
-            refval = getattr(get_group().ref, key)
+            refval = cmp_value(get_group().ref, key)
             if key in self.result_table.DELTA_COLUMNS:
                 result -= refval
             else:
-                # We use directly getattr() because cmp_value() does thing that we don't want to do
-                # when we want to determine whether two values are exactly the same.
-                same = getattr(dupe, key) == refval
+                same = cmp_value(dupe, key) == refval
                 result = (same, result)
         return result
     
@@ -250,7 +247,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             ref = group.ref
             linkfunc = os.link if use_hardlinks else os.symlink
             linkfunc(str(ref.path), str_path)
-        self.clean_empty_dirs(dupe.path[:-1])
+        self.clean_empty_dirs(dupe.path.parent())
     
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
@@ -337,13 +334,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         self.selected_dupes = dupes
         self.notify('dupes_selected')
     
-    def _check_demo(self):
-        if self.should_apply_demo_limitation and self.results.mark_count > 10:
-            msg = tr("You cannot delete, move or copy more than 10 duplicates at once in demo mode.")
-            self.view.show_message(msg)
-            return False
-        return True
-            
     #--- Public
     def add_directory(self, d):
         """Adds folder ``d`` to :attr:`directories`.
@@ -393,7 +383,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
-                path = path[:-1]
+                path = path.parent()
     
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -401,21 +391,21 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         dest_path = Path(destination)
         if dest_type in {DestType.Relative, DestType.Absolute}:
             # no filename, no windows drive letter
-            source_base = source_path.remove_drive_letter()[:-1]
+            source_base = source_path.remove_drive_letter().parent()
             if dest_type == DestType.Relative:
                 source_base = source_base[location_path:]
-            dest_path = dest_path + source_base
+            dest_path = dest_path[source_base]
         if not dest_path.exists():
             dest_path.makedirs()
         # Add filename to dest_path. For file move/copy, it's not required, but for folders, yes.
-        dest_path = dest_path + source_path[-1]
+        dest_path = dest_path[source_path.name]
         logging.debug("Copy/Move operation from '%s' to '%s'", source_path, dest_path)
         # Raises an EnvironmentError if there's a problem
         if copy:
             smart_copy(source_path, dest_path)
         else:
             smart_move(source_path, dest_path)
-            self.clean_empty_dirs(source_path[:-1])
+            self.clean_empty_dirs(source_path.parent())
     
     def copy_or_move_marked(self, copy):
         """Start an async move (or copy) job on marked duplicates.
@@ -430,8 +420,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
         
-        if not self._check_demo():
-            return
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -446,8 +434,6 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     def delete_marked(self):
         """Start an async job to send marked duplicates to the trash.
         """
-        if not self._check_demo():
-            return
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -467,7 +453,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
         """
         colnames, rows = self._get_export_data()
         export_path = export.export_to_xhtml(colnames, rows)
-        self.view.open_path(export_path)
+        desktop.open_path(export_path)
     
     def export_to_csv(self):
         """Export current results to CSV.
@@ -613,7 +599,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
             if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
                 return
         for dupe in self.selected_dupes:
-            self.view.open_path(dupe.path)
+            desktop.open_path(dupe.path)
     
     def purge_ignore_list(self):
         """Remove files that don't exist from :attr:`ignore_list`.
@@ -704,7 +690,7 @@ class DupeGuru(RegistrableApplication, Broadcaster):
     
     def reveal_selected(self):
         if self.selected_dupes:
-            self.view.reveal_path(self.selected_dupes[0].path)
+            desktop.reveal_path(self.selected_dupes[0].path)
     
     def save(self):
         if not op.exists(self.appdata):

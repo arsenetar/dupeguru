@@ -230,6 +230,23 @@ class TestCaseResultsWithSomeGroups:
         # also remove group ref
         assert self.results.get_group_of_duplicate(ref) is None
     
+    def test_dupe_list_sort_delta_values_nonnumeric(self):
+        # When sorting dupes in delta mode on a non-numeric column, our first sort criteria is if
+        # the string is the same as its ref.
+        g1r, g1d1, g1d2, g2r, g2d1 = self.objects
+        # "aaa" makes our dupe go first in alphabetical order, but since we have the same value as
+        # ref, we're going last.
+        g2r.name = g2d1.name = "aaa"
+        self.results.sort_dupes('name', delta=True)
+        eq_("aaa", self.results.dupes[2].name)
+    
+    def test_dupe_list_sort_delta_values_nonnumeric_case_insensitive(self):
+        # Non-numeric delta sorting comparison is case insensitive
+        g1r, g1d1, g1d2, g2r, g2d1 = self.objects
+        g2r.name = "AaA"
+        g2d1.name = "aAa"
+        self.results.sort_dupes('name', delta=True)
+        eq_("aAa", self.results.dupes[2].name)
 
 class TestCaseResultsWithSavedResults:
     def setup_method(self, method):

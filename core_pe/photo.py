@@ -49,9 +49,18 @@ class Photo(fs.File):
                 self._cached_orientation = 0
         return self._cached_orientation
     
+    def _get_exif_timestamp(self):
+        try:
+            with self.path.open('rb') as fp:
+                exifdata = exif.get_fields(fp)
+                return exifdata['DateTimeOriginal']
+        except Exception:
+            logging.info("Couldn't read EXIF of picture: %s", self.path)
+        return ''
+    
     @classmethod
     def can_handle(cls, path):
-        return fs.File.can_handle(path) and get_file_ext(path[-1]) in cls.HANDLED_EXTS
+        return fs.File.can_handle(path) and get_file_ext(path.name) in cls.HANDLED_EXTS
     
     def get_display_info(self, group, delta):
         size = self.size
@@ -89,12 +98,7 @@ class Photo(fs.File):
             if self._get_orientation() in {5, 6, 7, 8}:
                 self.dimensions = (self.dimensions[1], self.dimensions[0])
         elif field == 'exif_timestamp':
-            try:
-                with self.path.open('rb') as fp:
-                    exifdata = exif.get_fields(fp)
-                    self.exif_timestamp = exifdata['DateTimeOriginal']
-            except Exception:
-                logging.info("Couldn't read EXIF of picture: %s", self.path)
+            self.exif_timestamp = self._get_exif_timestamp()
     
     def get_blocks(self, block_count_per_side):
         return self._plat_get_blocks(block_count_per_side, self._get_orientation())

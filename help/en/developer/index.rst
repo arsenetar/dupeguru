@@ -53,9 +53,5 @@ API
 .. toctree::
     :maxdepth: 2
     
-    core/app
-    core/fs
-    core/engine
-    core/directories
-    core/results
-    core/gui
+    core/index
+    hscommon/index

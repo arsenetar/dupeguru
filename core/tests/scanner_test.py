@@ -7,7 +7,6 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 from jobprogress import job
-from hscommon import io
 from hscommon.path import Path
 from hscommon.testutil import eq_
 
@@ -21,7 +20,7 @@ class NamedObject:
         if path is None:
             path = Path(name)
         else:
-            path = Path(path) + name
+            path = Path(path)[name]
         self.name = name
         self.size = size
         self.path = path
@@ -37,7 +36,6 @@ def pytest_funcarg__fake_fileexists(request):
     # This is a hack to avoid invalidating all previous tests since the scanner started to test
     # for file existence before doing the match grouping.
     monkeypatch = request.getfuncargvalue('monkeypatch')
-    monkeypatch.setattr(io, 'exists', lambda _: True)
     monkeypatch.setattr(Path, 'exists', lambda _: True)
 
 def test_empty(fake_fileexists):
@@ -471,11 +469,11 @@ def test_dont_group_files_that_dont_exist(tmpdir):
     s = Scanner()
     s.scan_type = ScanType.Contents
     p = Path(str(tmpdir))
-    io.open(p + 'file1', 'w').write('foo')
-    io.open(p + 'file2', 'w').write('foo')
+    p['file1'].open('w').write('foo')
+    p['file2'].open('w').write('foo')
     file1, file2 = fs.get_files(p)
     def getmatches(*args, **kw):
-        io.remove(file2.path)
+        file2.path.remove()
         return [Match(file1, file2, 100)]
     s._getmatches = getmatches
     

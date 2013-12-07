@@ -31,7 +31,7 @@ class DirectoryNode(Node):
         self.clear()
         subpaths = self._tree.app.directories.get_subfolders(self._directory_path)
         for path in subpaths:
-            self.append(DirectoryNode(self._tree, path, path[-1]))
+            self.append(DirectoryNode(self._tree, path, path.name))
         self._loaded = True
     
     def update_all_states(self):
@@ -90,6 +90,10 @@ class DirectoryTree(Tree, DupeGuruGUIObject):
                 newstate = DirectoryState.Normal
             for node in nodes:
                 node.state = newstate
+    
+    def select_all(self):
+        self.selected_nodes = list(self)
+        self.view.refresh()
     
     def update_all_states(self):
         for node in self:

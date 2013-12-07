@@ -1,6 +1,8 @@
 Results
 =======
 
+.. contents::
+
 When dupeGuru is finished scanning for duplicates, it will show its results in the form of duplicate group list.
 
 About duplicate groups
@@ -118,42 +120,54 @@ filtered duplicates.
 Action Menu
 -----------
 
-* **Clear Ignore List:** Remove all ignored matches you added. You have to start a new scan for the
-  newly cleared ignore list to be effective.
-* **Export Results to XHTML:** Take the current results, and create an XHTML file out of it. The
-  columns that are visible when you click on this button will be the columns present in the XHTML
-  file. The file will automatically be opened in your default browser.
-* **Send Marked to Trash:** Send all marked duplicates to trash, obviously. Before proceeding,
-  you'll be presented deletion options (see below).
-* **Move Marked to...:** Prompt you for a destination, and then move all marked files to that
-  destination. Source file's path might be re-created in destination, depending on the
-  "Copy and Move" preference.
-* **Copy Marked to...:** Prompt you for a destination, and then copy all marked files to that
-  destination. Source file's path might be re-created in destination, depending on the
-  "Copy and Move" preference.
-* **Remove Marked from Results:** Remove all marked duplicates from results. The actual files will
-  not be touched and will stay where they are.
-* **Remove Selected from Results:** Remove all selected duplicates from results. Note that all
-  selected reference files will be ignored, only duplicates can be removed with this action.
-* **Make Selected into Reference:** Promote all selected duplicates to reference. If a duplicate is
-  a part of a group having a reference file coming from a reference folder (in blue color), no
-  action will be taken for this duplicate. If more than one duplicate among the same group are
-  selected, only the first of each group will be promoted.
-* **Add Selected to Ignore List:** This first removes all selected duplicates from results, and
-  then add the match of that duplicate and the current reference in the ignore list. This match
-  will not come up again in further scan. The duplicate itself might come back, but it will be
-  matched with another reference file. You can clear the ignore list with the Clear Ignore List
-  command.
-* **Open Selected with Default Application:** Open the file with the application associated with
-  selected file's type.
-* **Reveal Selected in Finder:** Open the folder containing selected file.
-* **Invoke Custom Command:** Invokes the external application you've set up in your preferences
-  using the current selection as arguments in the invocation.
-* **Rename Selected:** Prompts you for a new name, and then rename the selected file.
+**Clear Ignore List:**
+    Remove all ignored matches you added. You have to start a new scan for the
+    newly cleared ignore list to be effective.
+**Export Results to XHTML:**
+    Take the current results, and create an XHTML file out of it. The
+    columns that are visible when you click on this button will be the columns present in the XHTML
+    file. The file will automatically be opened in your default browser.
+**Send Marked to Trash:**
+    Send all marked duplicates to trash, obviously. Before proceeding,
+    you'll be presented deletion options (see below).
+**Move Marked to...:**
+    Prompt you for a destination, and then move all marked files to that
+    destination. Source file's path might be re-created in destination, depending on the
+    "Copy and Move" preference.
+**Copy Marked to...:**
+    Prompt you for a destination, and then copy all marked files to that
+    destination. Source file's path might be re-created in destination, depending on the
+    "Copy and Move" preference.
+**Remove Marked from Results:**
+    Remove all marked duplicates from results. The actual files will
+    not be touched and will stay where they are.
+**Remove Selected from Results:**
+    Remove all selected duplicates from results. Note that all
+    selected reference files will be ignored, only duplicates can be removed with this action.
+**Make Selected into Reference:**
+    Promote all selected duplicates to reference. If a duplicate is
+    a part of a group having a reference file coming from a reference folder (in blue color), no
+    action will be taken for this duplicate. If more than one duplicate among the same group are
+    selected, only the first of each group will be promoted.
+**Add Selected to Ignore List:**
+    This first removes all selected duplicates from results, and
+    then add the match of that duplicate and the current reference in the ignore list. This match
+    will not come up again in further scan. The duplicate itself might come back, but it will be
+    matched with another reference file. You can clear the ignore list with the Clear Ignore List
+    command.
+**Open Selected with Default Application:**
+    Open the file with the application associated with selected file's type.
+**Reveal Selected in Finder:**
+    Open the folder containing selected file.
+**Invoke Custom Command:**
+    Invokes the external application you've set up in your preferences using the current selection
+    as arguments in the invocation.
+**Rename Selected:**
+    Prompts you for a new name, and then rename the selected file.
 
-**Warning about moving files in iPhoto/iTunes:** When using the "Move Marked" action on duplicates 
-that come from iPhoto or iTunes, files are copied, not moved. dupeGuru cannot use the Move action
-on those files.
+**Warning about moving files in iPhoto/iTunes/Aperture:** When using the "Move Marked" action on
+duplicates that come from iPhoto, Aperture or iTunes, files are copied, not moved. dupeGuru cannot
+use the Move action on those files.
 
 Deletion Options
 ----------------
@@ -161,21 +175,23 @@ Deletion Options
 These options affect how duplicate deletion takes place. Most of the time, you don't need to enable
 any of them.
 
-* **Link deleted files:** The deleted files are replaced by a link to the reference file. You have
-  a choice of replacing it either with a `symlink`_ or a `hardlink`_. It's better to read the whole
-  wikipedia pages about them to make a informed choice, but in short, a symlink is a shortcut to
-  the file's path. If the original file is deleted or moved, the link is broken. A hardlink is a
-  link to the file *itself*. That link is as good as a "real" file. Only when *all* hardlinks to a
-  file are deleted is the file itself deleted.
+**Link deleted files:**
+    The deleted files are replaced by a link to the reference file. You have a choice of replacing
+    it either with a `symlink`_ or a `hardlink`_. It's better to read the whole
+    wikipedia pages about them to make a informed choice, but in short, a symlink is a shortcut to
+    the file's path. If the original file is deleted or moved, the link is broken. A hardlink is a
+    link to the file *itself*. That link is as good as a "real" file. Only when *all* hardlinks to a
+    file are deleted is the file itself deleted.
   
-  On OSX and Linux, this feature is supported fully, but under Windows, it's a bit complicated.
-  Windows XP doesn't support it, but Vista and up support it. However, for the feature to work,
-  dupeGuru has to run with administrative privileges.
+    On OSX and Linux, this feature is supported fully, but under Windows, it's a bit complicated.
+    Windows XP doesn't support it, but Vista and up support it. However, for the feature to work,
+    dupeGuru has to run with administrative privileges.
 
-* **Directly delete files:** Instead of sending files to trash, directly delete them. This is used
-  for troubleshooting and you normally don't need to enable this unless dupeGuru has problems
-  deleting files normally, something that can happens when you try to delete files on network
-  storage (NAS).
+**Directly delete files:**
+    Instead of sending files to trash, directly delete them. This is used
+    for troubleshooting and you normally don't need to enable this unless dupeGuru has problems
+    deleting files normally, something that can happens when you try to delete files on network
+    storage (NAS).
 
 .. _regular-expressions.info: http://www.regular-expressions.info
 .. _hardlink: http://en.wikipedia.org/wiki/Hard_link

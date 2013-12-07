@@ -14,8 +14,8 @@ class DupeGuru(DupeGuruBase):
     NAME = __appname__
     METADATA_TO_READ = ['size', 'mtime']
     
-    def __init__(self, view, appdata):
-        DupeGuruBase.__init__(self, view, appdata)
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
         self.directories.fileclasses = [fs.File]
         self.directories.folderclass = fs.Folder
     

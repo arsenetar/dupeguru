@@ -150,9 +150,9 @@ class File:
     def rename(self, newname):
         if newname == self.name:
             return
-        destpath = self.path[:-1] + newname
+        destpath = self.path.parent()[newname]
         if destpath.exists():
-            raise AlreadyExistsError(newname, self.path[:-1])
+            raise AlreadyExistsError(newname, self.path.parent())
         try:
             self.path.rename(destpath)
         except EnvironmentError:
@@ -173,11 +173,11 @@ class File:
     
     @property
     def name(self):
-        return self.path[-1]
+        return self.path.name
     
     @property
     def folder_path(self):
-        return self.path[:-1]
+        return self.path.parent()
     
 
 class Folder(File):
@@ -219,8 +219,7 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subpaths = [self.path + name for name in self.path.listdir()]
-            subfolders = [p for p in subpaths if not p.islink() and p.isdir()]
+            subfolders = [p for p in self.path.listdir() if not p.islink() and p.isdir()]
             self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
     
@@ -248,18 +247,9 @@ def get_files(path, fileclasses=[File]):
     :param fileclasses: List of candidate :class:`File` classes
     """
     assert all(issubclass(fileclass, File) for fileclass in fileclasses)
-    def combine_paths(p1, p2):
-        try:
-            return p1 + p2
-        except Exception:
-            # This is temporary debug logging for #84.
-            logging.warning("Failed to combine %r and %r.", p1, p2)
-            raise
-    
     try:
-        paths = [combine_paths(path, name) for name in path.listdir()]
         result = []
-        for path in paths:
+        for path in path.listdir():
             file = get_file(path, fileclasses=fileclasses)
             if file is not None:
                 result.append(file)

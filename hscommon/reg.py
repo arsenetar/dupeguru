@@ -9,6 +9,7 @@
 import re
 from hashlib import md5
 
+from . import desktop
 from .trans import trget
 
 tr = trget('hscommon')
@@ -47,7 +48,6 @@ class RegistrableApplication:
     # setup_as_registered()
     # show_message(msg)
     # show_demo_nag(prompt)
-    # open_url(url)
     
     PROMPT_NAME = "<undefined>"
     DEMO_LIMITATION = "<undefined>"
@@ -154,13 +154,13 @@ class RegistrableApplication:
         pass
     
     def contribute(self):
-        self.view.open_url("http://open.hardcoded.net/contribute/")
+        desktop.open_url("http://open.hardcoded.net/contribute/")
     
     def buy(self):
-        self.view.open_url("http://www.hardcoded.net/purchase.htm")
+        desktop.open_url("http://www.hardcoded.net/purchase.htm")
     
     def about_fairware(self):
-        self.view.open_url("http://open.hardcoded.net/about/")
+        desktop.open_url("http://open.hardcoded.net/about/")
     
     @property
     def should_show_fairware_reminder(self):

@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+from hscommon import desktop
+
 from .problem_table import ProblemTable
 
 class ProblemDialog:
@@ -20,7 +22,7 @@ class ProblemDialog:
     
     def reveal_selected_dupe(self):
         if self._selected_dupe is not None:
-            self.app.view.reveal_path(self._selected_dupe.path)
+            desktop.reveal_path(self._selected_dupe.path)
     
     def select_dupe(self, dupe):
         self._selected_dupe = dupe

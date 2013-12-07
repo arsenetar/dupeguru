@@ -6,16 +6,36 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
+"""This module facilitates currencies management. It exposes :class:`Currency` which lets you
+easily figure out their exchange value.
+"""
+
+import os
 from datetime import datetime, date, timedelta
 import logging
 import sqlite3 as sqlite
 import threading
 from queue import Queue, Empty
 
-from . import io
 from .path import Path
+from .util import iterdaterange
 
 class Currency:
+    """Represents a currency and allow easy exchange rate lookups.
+    
+    A ``Currency`` instance is created with either a 3-letter ISO code or with a full name. If it's
+    present in the database, an instance will be returned. If not, ``ValueError`` is raised. The
+    easiest way to access a currency instance, however, if by using module-level constants. For
+    example::
+
+        >>> from hscommon.currency import USD, EUR
+        >>> from datetime import date
+        >>> USD.value_in(EUR, date.today())
+        0.6339119851386843
+
+    Unless a :class:`RatesDB` global instance is set through :meth:`Currency.set_rate_db` however,
+    only fallback values will be used as exchange rates.
+    """
     all = []
     by_code = {}
     by_name = {}
@@ -67,12 +87,16 @@ class Currency:
 
     @staticmethod
     def set_rates_db(db):
+        """Sets a new currency ``RatesDB`` instance to be used with all ``Currency`` instances.
+        """
         Currency.rates_db = db
 
     @staticmethod
     def get_rates_db():
+        """Returns the current ``RatesDB`` instance.
+        """
         if Currency.rates_db is None:
-            Currency.rates_db = RatesDB()      # Make sure we always have some db to work with
+            Currency.rates_db = RatesDB() # Make sure we always have some db to work with
         return Currency.rates_db
 
     def rates_date_range(self):
@@ -270,6 +294,12 @@ EUR = Currency(code='EUR')
 class CurrencyNotSupportedException(Exception):
     """The current exchange rate provider doesn't support the requested currency."""
 
+class RateProviderUnavailable(Exception):
+    """The rate provider is temporarily unavailable."""
+
+def date2str(date):
+    return '%d%02d%02d' % (date.year, date.month, date.day)
+
 class RatesDB:
     """Stores exchange rates for currencies.
     
@@ -310,7 +340,7 @@ class RatesDB:
             logging.warning("Corrupt currency database at {0}. Starting over.".format(repr(self.db_or_path)))
             if isinstance(self.db_or_path, (str, Path)):
                 self.con.close()
-                io.remove(Path(self.db_or_path))
+                os.remove(str(self.db_or_path))
                 self.con = sqlite.connect(str(self.db_or_path))
             else:
                 logging.warning("Can't re-use the file, using a memory table")
@@ -329,12 +359,35 @@ class RatesDB:
                 return row[0]
         return seek('<=', 'desc') or seek('>=', '') or Currency(currency_code).latest_rate
     
+    def _ensure_filled(self, date_start, date_end, currency_code):
+        """Make sure that the cache contains *something* for each of the dates in the range.
+        
+        Sometimes, our provider doesn't return us the range we sought. When it does, it usually
+        means that it never will and to avoid repeatedly querying those ranges forever, we have to
+        fill them. We use the closest rate for this.
+        """
+        # We don't want to fill today, because we want to repeatedly fetch that one until the
+        # provider gives it to us.
+        if date_end >= date.today():
+            date_end = date.today() - timedelta(1)
+        sql = "select rate from rates where date = ? and currency = ?"
+        for curdate in iterdaterange(date_start, date_end):
+            cur = self._execute(sql, [date2str(curdate), currency_code])
+            if cur.fetchone() is None:
+                nearby_rate = self._seek_value_in_CAD(date2str(curdate), currency_code)
+                self.set_CAD_value(curdate, currency_code, nearby_rate)
+                logging.debug("Filled currency void for %s at %s (value: %2.2f)", currency_code, curdate, nearby_rate)
+                
     def _save_fetched_rates(self):
         while True:
             try:
-                rates, currency = self._fetched_values.get_nowait()
+                rates, currency, fetch_start, fetch_end = self._fetched_values.get_nowait()
+                logging.debug("Saving %d rates for the currency %s", len(rates), currency)
                 for rate_date, rate in rates:
+                    logging.debug("Saving rate %2.2f for %s", rate, rate_date)
                     self.set_CAD_value(rate_date, currency, rate)
+                self._ensure_filled(fetch_start, fetch_end, currency)
+                logging.debug("Finished saving rates for currency %s", currency)
             except Empty:
                 break
     
@@ -342,7 +395,12 @@ class RatesDB:
         self._cache = {}
     
     def date_range(self, currency_code):
-        """Returns (start, end) of the cached rates for currency"""
+        """Returns (start, end) of the cached rates for currency.
+        
+        Returns a tuple ``(start_date, end_date)`` representing dates covered in the database for
+        currency ``currency_code``. If there are gaps, they are not accounted for (subclasses that
+        automatically update themselves are not supposed to introduce gaps in the db).
+        """
         sql = "select min(date), max(date) from rates where currency = '%s'" % currency_code
         cur = self._execute(sql)
         start, end = cur.fetchone()
@@ -374,7 +432,7 @@ class RatesDB:
         else:
             value2 = self._cache.get((date, currency2_code))
         if value1 is None or value2 is None:
-            str_date = '%d%02d%02d' % (date.year, date.month, date.day)
+            str_date = date2str(date)
             if value1 is None:
                 value1 = self._seek_value_in_CAD(str_date, currency1_code)
                 self._cache[(date, currency1_code)] = value1
@@ -388,7 +446,7 @@ class RatesDB:
         # we must clear the whole cache because there might be other dates affected by this change
         # (dates when the currency server has no rates).
         self.clear_cache()
-        str_date = '%d%02d%02d' % (date.year, date.month, date.day)
+        str_date = date2str(date)
         sql = "replace into rates(date, currency, rate) values(?, ?, ?)"
         self._execute(sql, [str_date, currency_code, value])
         self.con.commit()
@@ -419,14 +477,27 @@ class RatesDB:
         """
         def do():
             for currency, fetch_start, fetch_end in currencies_and_range:
+                logging.debug("Fetching rates for %s for date range %s to %s", currency, fetch_start, fetch_end)
                 for rate_provider in self._rate_providers:
                     try:
                         values = rate_provider(currency, fetch_start, fetch_end)
                     except CurrencyNotSupportedException:
                         continue
+                    except RateProviderUnavailable:
+                        logging.debug("Fetching failed due to temporary problems.")
+                        break
                     else:
-                        if values:
-                            self._fetched_values.put((values, currency))
+                        if not values:
+                            # We didn't get any value from the server, which means that we asked for
+                            # rates that couldn't be delivered. Still, we report empty values so
+                            # that the cache can correctly remember this unavailability so that we
+                            # don't repeatedly fetch those ranges.
+                            values = []
+                        self._fetched_values.put((values, currency, fetch_start, fetch_end))
+                        logging.debug("Fetching successful!")
+                        break
+                else:
+                    logging.debug("Fetching failed!")
         
         currencies_and_range = []
         for currency in currencies:
@@ -437,7 +508,9 @@ class RatesDB:
             except KeyError:
                 cached_range = self.date_range(currency)
             range_start = start_date
-            range_end = date.today()
+            # Don't try to fetch today's rate, it's never there and results in useless server
+            # hitting.
+            range_end = date.today() - timedelta(1)
             if cached_range is not None:
                 cached_start, cached_end = cached_range
                 if range_start >= cached_start:
@@ -446,6 +519,10 @@ class RatesDB:
                 else:
                     # Make a backward fetch
                     range_end = cached_start - timedelta(days=1)
+            # We don't want to fetch ranges that are too big. It can cause various problems, such
+            # as hangs. We prefer to take smaller bites.
+            if (range_end - range_start).days > 30:
+                range_start = range_end - timedelta(days=30)
             if range_start <= range_end:
                 currencies_and_range.append((currency, range_start, range_end))
             self._fetched_ranges[currency] = (start_date, date.today())

@@ -61,44 +61,44 @@ class TestCase_move_copy:
     def pytest_funcarg__do_setup(self, request):
         tmpdir = request.getfuncargvalue('tmpdir')
         self.path = Path(str(tmpdir))
-        io.open(self.path + 'foo', 'w').close()
-        io.open(self.path + 'bar', 'w').close()
-        io.mkdir(self.path + 'dir')
+        self.path['foo'].open('w').close()
+        self.path['bar'].open('w').close()
+        self.path['dir'].mkdir()
     
     def test_move_no_conflict(self, do_setup):
         smart_move(self.path + 'foo', self.path + 'baz')
-        assert io.exists(self.path + 'baz')
-        assert not io.exists(self.path + 'foo')
+        assert self.path['baz'].exists()
+        assert not self.path['foo'].exists()
     
     def test_copy_no_conflict(self, do_setup): # No need to duplicate the rest of the tests... Let's just test on move
         smart_copy(self.path + 'foo', self.path + 'baz')
-        assert io.exists(self.path + 'baz')
-        assert io.exists(self.path + 'foo')
+        assert self.path['baz'].exists()
+        assert self.path['foo'].exists()
     
     def test_move_no_conflict_dest_is_dir(self, do_setup):
         smart_move(self.path + 'foo', self.path + 'dir')
-        assert io.exists(self.path + ('dir', 'foo'))
-        assert not io.exists(self.path + 'foo')
+        assert self.path['dir']['foo'].exists()
+        assert not self.path['foo'].exists()
     
     def test_move_conflict(self, do_setup):
         smart_move(self.path + 'foo', self.path + 'bar')
-        assert io.exists(self.path + '[000] bar')
-        assert not io.exists(self.path + 'foo')
+        assert self.path['[000] bar'].exists()
+        assert not self.path['foo'].exists()
     
     def test_move_conflict_dest_is_dir(self, do_setup):
-        smart_move(self.path + 'foo', self.path + 'dir')
-        smart_move(self.path + 'bar', self.path + 'foo')
-        smart_move(self.path + 'foo', self.path + 'dir')
-        assert io.exists(self.path + ('dir', 'foo'))
-        assert io.exists(self.path + ('dir', '[000] foo'))
-        assert not io.exists(self.path + 'foo')
-        assert not io.exists(self.path + 'bar')
+        smart_move(self.path['foo'], self.path['dir'])
+        smart_move(self.path['bar'], self.path['foo'])
+        smart_move(self.path['foo'], self.path['dir'])
+        assert self.path['dir']['foo'].exists()
+        assert self.path['dir']['[000] foo'].exists()
+        assert not self.path['foo'].exists()
+        assert not self.path['bar'].exists()
     
     def test_copy_folder(self, tmpdir):
         # smart_copy also works on folders
         path = Path(str(tmpdir))
-        io.mkdir(path + 'foo')
-        io.mkdir(path + 'bar')
-        smart_copy(path + 'foo', path + 'bar') # no crash
-        assert io.exists(path + '[000] bar')
+        path['foo'].mkdir()
+        path['bar'].mkdir()
+        smart_copy(path['foo'], path['bar']) # no crash
+        assert path['[000] bar'].exists()
     

@@ -378,7 +378,7 @@ def main(source_files, outpath, keywords=None):
     # initialize list of strings to exclude
     if options.excludefilename:
         try:
-            fp = open(options.excludefilename)
+            fp = open(options.excludefilename, encoding='utf-8')
             options.toexclude = fp.readlines()
             fp.close()
         except IOError:
@@ -392,7 +392,7 @@ def main(source_files, outpath, keywords=None):
     for filename in source_files:
         if options.verbose:
             print('Working on %s' % filename)
-        fp = open(filename)
+        fp = open(filename, encoding='utf-8')
         closep = 1
         try:
             eater.set_filename(filename)
@@ -408,7 +408,7 @@ def main(source_files, outpath, keywords=None):
             if closep:
                 fp.close()
 
-    fp = open(options.outfile, 'w')
+    fp = open(options.outfile, 'w', encoding='utf-8')
     closep = 1
     try:
         eater.write(fp)

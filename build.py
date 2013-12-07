@@ -135,6 +135,7 @@ def build_cocoa(edition, dev):
     print_and_do(cocoa_compile_command(edition))
     os.chdir('..')
     app.copy_executable('cocoa/build/dupeGuru')
+    build_help(edition)
     print("Copying resources and frameworks")
     image_path = ed('cocoa/{}/dupeguru.icns')
     resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
@@ -151,6 +152,7 @@ def build_qt(edition, dev, conf):
     print("Building Qt stuff")
     print_and_do("pyrcc4 -py3 {0} > {1}".format(op.join('qt', 'base', 'dg.qrc'), op.join('qt', 'base', 'dg_rc.py')))
     fix_qt_resource_file(op.join('qt', 'base', 'dg_rc.py'))
+    build_help(edition)
     print("Creating the run.py file")
     filereplace(op.join('qt', 'run_template.py'), 'run.py', edition=edition)
 
@@ -168,17 +170,12 @@ def build_help(edition):
     conftmpl = op.join(current_path, 'help', 'conf.tmpl')
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
 
-def build_base_localizations():
-    loc.compile_all_po('locale')
-    loc.compile_all_po(op.join('hscommon', 'locale'))
-    loc.merge_locale_dir(op.join('hscommon', 'locale'), 'locale')
-
 def build_qt_localizations():
     loc.compile_all_po(op.join('qtlib', 'locale'))
     loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
 
 def build_localizations(ui, edition):
-    build_base_localizations()
+    loc.compile_all_po('locale')
     if ui == 'cocoa':
         app = cocoa_app(edition)
         loc.build_cocoa_localizations(app, en_stringsfile=op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'))
@@ -220,8 +217,6 @@ def build_updatepot():
     # We want to merge the generated pot with the old pot in the most preserving way possible.
     ui_packages = ['qt', op.join('cocoa', 'inter')]
     loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'], merge=(not ISOSX))
-    print("Building hscommon.pot")
-    loc.generate_pot(['hscommon'], op.join('hscommon', 'locale', 'hscommon.pot'), ['tr'])
     print("Building qtlib.pot")
     loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
     if ISOSX:
@@ -236,13 +231,11 @@ def build_updatepot():
 def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos('locale')
-    loc.merge_pots_into_pos(op.join('hscommon', 'locale'))
     loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
     loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
 
 def build_normpo():
     loc.normalize_all_pos('locale')
-    loc.normalize_all_pos(op.join('hscommon', 'locale'))
     loc.normalize_all_pos(op.join('qtlib', 'locale'))
     loc.normalize_all_pos(op.join('cocoalib', 'locale'))
 
@@ -264,7 +257,7 @@ def build_cocoa_bridging_interfaces(edition):
     add_to_pythonpath('cocoalib')
     from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
         OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyBaseApp,
-        PyFairware, PyTextField, ProgressWindowView, PyProgressWindow)
+        PyTextField, ProgressWindowView, PyProgressWindow)
     from inter.deletion_options import PyDeletionOptions, DeletionOptionsView
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
@@ -276,7 +269,7 @@ def build_cocoa_bridging_interfaces(edition):
     from inter.stats_label import PyStatsLabel, StatsLabelView
     from inter.app import PyDupeGuruBase, DupeGuruView
     appmod = importlib.import_module('inter.app_{}'.format(edition))
-    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp, PyFairware,
+    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
         PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuruBase,
         PyTextField, PyProgressWindow, appmod.PyDupeGuru]
@@ -317,7 +310,6 @@ def build_pe_modules(ui):
 def build_normal(edition, ui, dev, conf):
     print("Building dupeGuru {0} with UI {1}".format(edition.upper(), ui))
     add_to_pythonpath('.')
-    build_help(edition)
     print("Building dupeGuru")
     if edition == 'pe':
         build_pe_modules(ui)
@@ -335,8 +327,9 @@ def main():
     if dev:
         print("Building in Dev mode")
     if options.clean:
-        if op.exists('build'):
-            shutil.rmtree('build')
+        for path in ['build', op.join('cocoa', 'build'), op.join('cocoa', 'autogen')]:
+            if op.exists(path):
+                shutil.rmtree(path)
     if not op.exists('build'):
         os.mkdir('build')
     if options.doc:

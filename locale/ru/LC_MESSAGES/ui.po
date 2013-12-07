@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-08-03 23:20+0000\n"
-"Last-Translator: Kyrill Detinov <lazy.kent@opensuse.org>\n"
+"PO-Revision-Date: 2013-12-07 15:22+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/dupeguru/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -19,98 +19,92 @@ msgstr "Удаление отсутствующих треков из библи
 msgid "Scanning the iTunes Library"
 msgstr "Сканирование библиотеки iTunes"
 
-#: cocoa/inter/app_me.py:161 cocoa/inter/app_pe.py:186
+#: cocoa/inter/app_me.py:160 cocoa/inter/app_pe.py:194
 msgid "Sending dupes to the Trash"
 msgstr "Перемещение дубликатов в Корзину"
 
-#: cocoa/inter/app_me.py:163
+#: cocoa/inter/app_me.py:162
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Соединение с iTunes. Не трогайте!"
 
-#: cocoa/inter/app_me.py:189
-msgid ""
-"There were communication problems with iTunes. The operation couldn't be "
-"completed."
-msgstr "Проблема соединения с iTunes. Операция не может быть завершена."
-
-#: cocoa/inter/app_me.py:195
+#: cocoa/inter/app_me.py:197
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Ваш библиотека iTunes содержит %d отсутствующих треков готовых для удаления."
 " Продолжить?"
 
-#: cocoa/inter/app_me.py:199
+#: cocoa/inter/app_me.py:201
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "У вас нет отсутствующих треков в библиотеке iTunes"
 
-#: cocoa/inter/app_me.py:217
+#: cocoa/inter/app_me.py:219
 msgid "The iTunes application couldn't be found."
 msgstr "Приложение iTunes не найдено."
 
-#: cocoa/inter/app_pe.py:188
+#: cocoa/inter/app_pe.py:196
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "В контакте с iPhoto. Не трогайте!"
 
-#: cocoa/inter/app_pe.py:197
+#: cocoa/inter/app_pe.py:205
 msgid "Talking to Aperture. Don't touch it!"
 msgstr "Соединение с Aperture. Не трогайте!"
 
-#: cocoa/inter/app_pe.py:270
+#: cocoa/inter/app_pe.py:278
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 "Удалённые фотографии Aperture были перемещены в проект «dupeGuru Trash»."
 
-#: cocoa/inter/app_pe.py:296
+#: cocoa/inter/app_pe.py:304
 msgid "The iPhoto application couldn't be found."
 msgstr "Приложение iPhoto не найдено."
 
-#: qt/base/app.py:95
+#: qt/base/app.py:83
 msgid "Quit"
 msgstr "Выйти"
 
-#: qt/base/app.py:96 qt/base/preferences_dialog.py:123
+#: qt/base/app.py:84 qt/base/preferences_dialog.py:123
 msgid "Preferences"
 msgstr "Настройки"
 
-#: qt/base/app.py:97 qt/base/ignore_list_dialog.py:32
+#: qt/base/app.py:85 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Список игнорирования"
 
-#: qt/base/app.py:98 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Справка dupeGuru"
 
-#: qt/base/app.py:99 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/app.py:87 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "О dupeGuru"
 
-#: qt/base/app.py:100
+#: qt/base/app.py:88
 msgid "Register dupeGuru"
 msgstr "Регистрация dupeGuru"
 
-#: qt/base/app.py:101
+#: qt/base/app.py:89
 msgid "Check for Update"
 msgstr "Проверить обновления"
 
-#: qt/base/app.py:102
+#: qt/base/app.py:90
 msgid "Open Debug Log"
 msgstr "Открыть журнал отладки"
 
-#: qt/base/app.py:257
+#: qt/base/app.py:217
 msgid "{} file (*.{})"
 msgstr "{} файл (*.{})"
 
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Параметры удаления"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Создать ссылку вместо удалённого файла"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
@@ -118,19 +112,23 @@ msgstr ""
 "После удаления дубликата создать ссылку на эталонный файл на месте "
 "удалённого."
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Hardlink"
 msgstr "Жёсткая ссылка"
 
-#: qt/base/deletion_options.py:42
+#: qt/base/deletion_options.py:41
 msgid "Symlink"
 msgstr "Символьная ссылка"
 
-#: qt/base/deletion_options.py:48 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:46
+msgid " (unsupported)"
+msgstr "(не поддерживается)"
+
+#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Удалить файл с диска"
 
-#: qt/base/deletion_options.py:50 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
@@ -138,11 +136,11 @@ msgstr ""
 "Вместо отправки файлов в Корзину удалить их с диска. Этот параметр обычно "
 "используется как обходной путь, когда нормальный метод удаления не работает."
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr "Выполняется"
 
-#: qt/base/deletion_options.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -565,16 +563,16 @@ msgstr "Временная отметка EXIF"
 msgid "Match pictures of different dimensions"
 msgstr "Совпадение рисунков разных размеров"
 
-#: qt/pe/result_window.py:19 qt/pe/result_window.py:24
+#: qt/pe/result_window.py:19 qt/pe/result_window.py:25
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Очистить кэш изображений"
 
-#: qt/pe/result_window.py:25 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr "Вы действительно хотите удалить все кэшированные данные изображений?"
 
-#: qt/pe/result_window.py:28
+#: qt/pe/result_window.py:29
 msgid "Picture cache cleared."
 msgstr "Кэш изображений очищен."
 
@@ -808,6 +806,10 @@ msgid "Reveal Selected in Finder"
 msgstr "Показать выбранное в Finder-е"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select All"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
 msgstr "Переместить отмеченные в Корзину…"
 
@@ -834,7 +836,3 @@ msgstr "Окно"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Увеличить"
-
-#: qt/base/deletion_options.py:46
-msgid " (unsupported)"
-msgstr "(не поддерживается)"

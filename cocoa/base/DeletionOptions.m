@@ -64,4 +64,9 @@ http://www.hardcoded.net/licenses/bsd_license
     [[self window] close];
     return r == NSOKButton;
 }
+
+- (void)setHardlinkOptionEnabled:(BOOL)enabled
+{
+    [linkTypeRadio setEnabled:enabled];
+}
 @end

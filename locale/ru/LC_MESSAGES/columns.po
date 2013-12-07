@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-06-02 11:27+0000\n"
+"PO-Revision-Date: 2013-11-20 11:53+0000\n"
 "Last-Translator: Kyrill Detinov <lazy.kent@opensuse.org>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/dupeguru/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"

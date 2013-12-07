@@ -10,18 +10,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "%@ is Fairware"
-msgstr "%@ est Fairware"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Buy"
-msgstr "Acheter"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
@@ -32,28 +24,12 @@ msgid "Clear List"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Contribute"
-msgstr "Contribuer"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Don't Send"
 msgstr "Ignorer"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter Key"
-msgstr "Enregistrer"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter your key"
-msgstr "Entrez votre clé"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Fairware?"
-msgstr "Fairware?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "No"
@@ -66,18 +42,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Please wait..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Register"
-msgstr "Enregistrer"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration e-mail:"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration key:"
-msgstr "Clé d'enregistrement:"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Send"
@@ -93,26 +57,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Submit"
-msgstr "Soumettre"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "This app is registered, thanks!"
-msgstr "L'application est enregistrée, merci!"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Try"
-msgstr "Essayer"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Type the key you received when you contributed to %@, as well as the e-mail "
-"used as a reference for the purchase."
-msgstr ""
-"Entrez la clé que vous avez reçue en contribuant à %@, ainsi que le courriel"
-" utilisé pour la contribution."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

@@ -1,27 +1,27 @@
 # Translators:
-# ppanhh <ppanhh@gmail.com>, 2013
+# ppanhh <vietnamesel10n@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-08-04 03:40+0000\n"
-"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"PO-Revision-Date: 2013-12-07 15:22+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/dupeguru/language/vi/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core/app.py:40
+#: core/app.py:39
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core/app.py:41
+#: core/app.py:40
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core/app.py:42
+#: core/app.py:41
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -29,37 +29,31 @@ msgstr ""
 "Bạn chuẩn bị mở nhiều tập tin cùng lúc. Dựa trên chương trình các tập tin "
 "được mở, thao tác này có thể gây ra trạng thái lộn xộn. Vẫn muốn tiếp tục?"
 
-#: core/app.py:58
+#: core/app.py:57
 msgid "Scanning for duplicates"
 msgstr "Quét các phần trùng nhau"
 
-#: core/app.py:59
+#: core/app.py:58
 msgid "Loading"
 msgstr "Đang tải"
 
-#: core/app.py:60
+#: core/app.py:59
 msgid "Moving"
 msgstr "Đang di chuyển"
 
-#: core/app.py:61
+#: core/app.py:60
 msgid "Copying"
 msgstr "Đang sao chép"
 
-#: core/app.py:62
+#: core/app.py:61
 msgid "Sending to Trash"
 msgstr "Đang gửi vào thùng rác"
 
-#: core/app.py:65
+#: core/app.py:64
 msgid "Sending files to the recycle bin"
 msgstr "Đang chuyển các tập tin vào thùng rác trong Windows"
 
-#: core/app.py:110
-msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr ""
-"chỉ được xóa, di chuyển hoặc sao chép 10 thành phần trùng nhau trong cùng "
-"một lần"
-
-#: core/app.py:246
+#: core/app.py:295
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -67,40 +61,32 @@ msgstr ""
 "Hiện đã có một tiến trình đang được tiến hành. Bạn không thể bắt đầu một "
 "phần khác. Hãy đợi trong vài giây, và sau đó thử lại lần nữa."
 
-#: core/app.py:254
+#: core/app.py:302
 msgid "No duplicates found."
 msgstr "Không tìm thấy thành phần trùng nhau."
 
-#: core/app.py:267
+#: core/app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Tất cả tập tin được đánh dấu đã được sao chép thành công."
 
-#: core/app.py:268
+#: core/app.py:316
 msgid "All marked files were moved successfully."
 msgstr "Tất cả các tập tin được đánh dấu đã được di chuyển thành công."
 
-#: core/app.py:269
+#: core/app.py:317
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tất cả các tập tin được đánh dấu đã được gửi đến Thùng Rác thành công."
 
-#: core/app.py:296
-msgid ""
-"You cannot delete, move or copy more than 10 duplicates at once in demo "
-"mode."
-msgstr ""
-"Bạn không thể xóa, di chuyển hoặc sao chép nhiều hơn 10 đối tượng trùng nhau"
-" trong cùng một lần ở chế độ xài thử."
-
-#: core/app.py:307
+#: core/app.py:354
 msgid "'{}' already is in the list."
 msgstr "'{}' đã tồn tại trong danh sách."
 
-#: core/app.py:309
+#: core/app.py:356
 msgid "'{}' does not exist."
 msgstr "'{}' không tồn tại."
 
-#: core/app.py:316
+#: core/app.py:365
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -108,61 +94,61 @@ msgstr ""
 "Các phần được chọn %d khớp với nhau sẽ được bỏ qua trong các lần quét sau. "
 "Tiếp tục?"
 
-#: core/app.py:376
+#: core/app.py:431
 msgid "copy"
 msgstr "sao chép"
 
-#: core/app.py:376
+#: core/app.py:431
 msgid "move"
 msgstr "di chuyển"
 
-#: core/app.py:377
+#: core/app.py:432
 msgid "Select a directory to {} marked files to"
 msgstr "Chọn một thư mục để {} các tập tin được đánh dấu đến"
 
-#: core/app.py:403
+#: core/app.py:469
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
-#: core/app.py:428
+#: core/app.py:494
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Bạn vẫn chưa chỉnh sửa phần thiết lập dòng lệnh. Hãy sử dụng tính năng này "
 "trong phần tùy biến của bạn."
 
-#: core/app.py:535 core/app.py:546
+#: core/app.py:646 core/app.py:659
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Tiếp tục?"
 
-#: core/app.py:566
+#: core/app.py:693
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core/app.py:586
+#: core/app.py:721
 msgid "Collecting files to scan"
 msgstr "Đang thu thập các tập tin để quét"
 
-#: core/app.py:597
+#: core/app.py:732
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
 
-#: core/app.py:636
+#: core/app.py:773
 msgid "%s (%d discarded)"
 msgstr "%s (%d bị bỏ qua)"
 
-#: core/engine.py:178 core/engine.py:215
+#: core/engine.py:220 core/engine.py:265
 msgid "0 matches found"
 msgstr "đã tìm thấy 0 phần khớp nhau"
 
-#: core/engine.py:196 core/engine.py:223
+#: core/engine.py:238 core/engine.py:273
 msgid "%d matches found"
 msgstr "đã tìm thấy %d phần khớp nhau"
 
-#: core/engine.py:208 core/scanner.py:79
+#: core/engine.py:258 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Đọc kích thước của các tập tin %d/%d"
 
-#: core/engine.py:361
+#: core/engine.py:464
 msgid "Grouped %d/%d matches"
 msgstr "Đã nhóm %d/%d phần khớp nhau"
 
@@ -210,11 +196,11 @@ msgstr "Mới nhất"
 msgid "Oldest"
 msgstr "Cũ nhất"
 
-#: core/results.py:113
+#: core/results.py:126
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) phần trùng nhau đã được đánh dấu."
 
-#: core/results.py:120
+#: core/results.py:133
 msgid " filter: %s"
 msgstr " bộ lọc: %s"
 

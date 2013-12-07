@@ -11,6 +11,9 @@ class PyDirectoryOutline(PyOutline):
     def removeSelectedDirectory(self):
         self.model.remove_selected()
     
+    def selectAll(self):
+        self.model.select_all()
+    
     # python --> cocoa
     @dontwrap
     def refresh_states(self):

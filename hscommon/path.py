@@ -12,24 +12,18 @@ import os.path as op
 import shutil
 import sys
 from itertools import takewhile
+from functools import wraps
+from inspect import signature
 
 class Path(tuple):
     """A handy class to work with paths.
     
-    path[index] returns a string
-    path[start:stop] returns a Path
-    start and stop can be int, but the can also be path instances. When start
-    or stop are Path like in refpath[p1:p2], it is the same thing as typing
-    refpath[len(p1):-len(p2)], except that it will only slice out stuff that are
-    equal. For example, 'a/b/c/d'['a/z':'z/d'] returns 'b/c', not ''.
-    See the test units for more details.
+    We subclass ``tuple``, each element of the tuple represents an element of the path.
     
-    You can use the + operator, which is the same thing as with tuples, but
-    returns a Path.
-    
-    In HS applications, all paths variable should be Path instances. These Path instances should
-    be converted to str only at the last moment (when it is needed in an external function, such
-    as os.rename)
+    * ``Path('/foo/bar/baz')[1]`` --> ``'bar'``
+    * ``Path('/foo/bar/baz')[1:2]`` --> ``Path('bar/baz')``
+    * ``Path('/foo/bar')['baz']`` --> ``Path('/foo/bar/baz')``
+    * ``str(Path('/foo/bar/baz'))`` --> ``'/foo/bar/baz'``
     """
     # Saves a little bit of memory usage
     __slots__ = ()
@@ -94,11 +88,10 @@ class Path(tuple):
                 stop = -len(equal_elems) if equal_elems else None
                 key = slice(key.start, stop, key.step)
             return Path(tuple.__getitem__(self, key))
+        elif isinstance(key, (str, Path)):
+            return self + key
         else:
             return tuple.__getitem__(self, key)
-    
-    def __getslice__(self, i, j): #I have to override it because tuple uses it.
-        return Path(tuple.__getslice__(self, i, j))
     
     def __hash__(self):
         return tuple.__hash__(self)
@@ -133,6 +126,21 @@ class Path(tuple):
     def tobytes(self):
         return str(self).encode(sys.getfilesystemencoding())
     
+    def parent(self):
+        """Returns the parent path.
+        
+        ``Path('/foo/bar/baz').parent()`` --> ``Path('/foo/bar')``
+        """
+        return self[:-1]
+    
+    @property
+    def name(self):
+        """Last element of the path (filename), with extension.
+        
+        ``Path('/foo/bar/baz').name`` --> ``'baz'``
+        """
+        return self[-1]
+    
     # OS method wrappers
     def exists(self):
         return op.exists(str(self))
@@ -153,7 +161,7 @@ class Path(tuple):
         return op.islink(str(self))
 
     def listdir(self):
-        return os.listdir(str(self))
+        return [self[name] for name in os.listdir(str(self))]
 
     def mkdir(self, *args, **kwargs):
         return os.mkdir(str(self), *args, **kwargs)
@@ -182,3 +190,43 @@ class Path(tuple):
     def stat(self):
         return os.stat(str(self))
     
+def pathify(f):
+    """Ensure that every annotated :class:`Path` arguments are actually paths.
+    
+    When a function is decorated with ``@pathify``, every argument with annotated as Path will be
+    converted to a Path if it wasn't already. Example::
+    
+        @pathify
+        def foo(path: Path, otherarg):
+            return path.listdir()
+    
+    Calling ``foo('/bar', 0)`` will convert ``'/bar'`` to ``Path('/bar')``.
+    """
+    sig = signature(f)
+    pindexes = {i for i, p in enumerate(sig.parameters.values()) if p.annotation is Path}
+    pkeys = {k: v for k, v in sig.parameters.items() if v.annotation is Path}
+    def path_or_none(p):
+        return None if p is None else Path(p)
+    
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        args = tuple((path_or_none(a) if i in pindexes else a) for i, a in enumerate(args))
+        kwargs = {k: (path_or_none(v) if k in pkeys else v) for k, v in kwargs.items()}
+        return f(*args, **kwargs)
+    
+    return wrapped
+
+def log_io_error(func):
+    """ Catches OSError, IOError and WindowsError and log them
+    """
+    @wraps(func)
+    def wrapper(path, *args, **kwargs):
+        try:
+            return func(path, *args, **kwargs)
+        except (IOError, OSError) as e:
+            msg = 'Error "{0}" during operation "{1}" on "{2}": "{3}"'
+            classname = e.__class__.__name__
+            funcname = func.__name__
+            logging.warn(msg.format(classname, funcname, str(path), str(e)))
+    
+    return wrapper

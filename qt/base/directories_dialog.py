@@ -81,7 +81,6 @@ class DirectoriesDialog(QMainWindow):
         self.menuView.addAction(self.actionShowResultsWindow)
         self.menuView.addAction(self.app.actionIgnoreList)
         self.menuHelp.addAction(self.app.actionShowHelp)
-        self.menuHelp.addAction(self.app.actionRegister)
         self.menuHelp.addAction(self.app.actionCheckForUpdate)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)

@@ -46,4 +46,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)addDirectory:(NSString *)directory;
 - (void)refreshRemoveButtonText;
+- (void)markAll;
+
 @end

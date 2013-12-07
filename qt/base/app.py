@@ -7,7 +7,6 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-import os
 import os.path as op
 
 from PyQt4.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, SIGNAL, pyqtSignal
@@ -15,11 +14,11 @@ from PyQt4.QtGui import QDesktopServices, QFileDialog, QDialog, QMessageBox, QAp
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
+from hscommon import desktop
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
-from qtlib.reg import Registration
-from qtlib.util import createActions, getAppData
+from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow 
 
 from . import platform
@@ -46,7 +45,7 @@ class DupeGuru(QObject):
         QObject.__init__(self)
         self.prefs = self.PREFERENCES_CLASS()
         self.prefs.load()
-        self.model = self.MODELCLASS(view=self, appdata=getAppData())
+        self.model = self.MODELCLASS(view=self)
         self._setup()
         self.prefsChanged.emit(self.prefs)
     
@@ -85,7 +84,6 @@ class DupeGuru(QObject):
             ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
-            ('actionRegister', '', '', tr("Register dupeGuru"), self.registerTriggered),
             ('actionCheckForUpdate', '', '', tr("Check for Update"), self.checkForUpdateTriggered),
             ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
         ]
@@ -108,10 +106,6 @@ class DupeGuru(QObject):
     def remove_selected(self):
         self.model.remove_selected(self)
     
-    def askForRegCode(self):
-        reg = Registration(self.model)
-        reg.ask_for_code()
-    
     def confirm(self, title, msg, default_button=QMessageBox.Yes):
         active = QApplication.activeWindow()
         buttons = QMessageBox.Yes | QMessageBox.No
@@ -133,7 +127,6 @@ class DupeGuru(QObject):
     
     #--- Events
     def finishedLaunching(self):
-        self.model.initial_registration_setup()
         if sys.getfilesystemencoding() == 'ascii':
             # No need to localize this, it's a debugging message.
             msg = "Something is wrong with the way your system locale is set. If the files you're "\
@@ -154,7 +147,7 @@ class DupeGuru(QObject):
     
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, 'debug.log')
-        self.open_path(debugLogPath)
+        desktop.open_path(debugLogPath)
     
     def preferencesTriggered(self):
         self.preferences_dialog.load()
@@ -168,10 +161,6 @@ class DupeGuru(QObject):
     def quitTriggered(self):
         self.directories_dialog.close()
     
-    def registerTriggered(self):
-        reg = Registration(self.model)
-        reg.ask_for_code()
-    
     def showAboutBoxTriggered(self):
         self.about_box.show()
     
@@ -181,29 +170,11 @@ class DupeGuru(QObject):
         QDesktopServices.openUrl(url)
     
     #--- model --> view
-    @staticmethod
-    def open_path(path):
-        url = QUrl.fromLocalFile(str(path))
-        QDesktopServices.openUrl(url)
-    
-    @staticmethod
-    def reveal_path(path):
-        DupeGuru.open_path(path[:-1])
-    
     def get_default(self, key):
         return self.prefs.get_value(key)
     
     def set_default(self, key, value):
         self.prefs.set_value(key, value)
-    
-    def setup_as_registered(self):
-        self.actionRegister.setVisible(False)
-        self.about_box.registerButton.hide()
-        self.about_box.registeredEmailLabel.setText(self.model.registration_email)
-    
-    def show_demo_nag(self, prompt):
-        reg = Registration(self.model)
-        reg.show_demo_nag(prompt)
     
     def show_message(self, msg):
         window = QApplication.activeWindow()
@@ -211,10 +182,6 @@ class DupeGuru(QObject):
     
     def ask_yes_no(self, prompt):
         return self.confirm('', prompt)
-    
-    def open_url(self, url):
-        url = QUrl(url)
-        QDesktopServices.openUrl(url)
     
     def show_results_window(self):
         self.showResultsWindow()

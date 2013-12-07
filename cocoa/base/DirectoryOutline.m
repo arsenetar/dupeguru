@@ -22,6 +22,12 @@ http://www.hardcoded.net/licenses/bsd_license
     return (PyDirectoryOutline *)model;
 }
 
+/* Public */
+- (void)selectAll
+{
+    [[self model] selectAll];
+}
+
 /* Delegate */
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
 {

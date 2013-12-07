@@ -111,7 +111,6 @@ class ResultWindow(QMainWindow):
         self.menuView.addAction(self.app.actionIgnoreList)
         self.menuView.addAction(self.app.actionPreferences)
         self.menuHelp.addAction(self.app.actionShowHelp)
-        self.menuHelp.addAction(self.app.actionRegister)
         self.menuHelp.addAction(self.app.actionCheckForUpdate)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)

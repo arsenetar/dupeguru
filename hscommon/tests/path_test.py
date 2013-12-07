@@ -7,10 +7,11 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
+import os
 
 from pytest import raises, mark
 
-from ..path import *
+from ..path import Path, pathify
 from ..testutil import eq_
 
 def pytest_funcarg__force_ossep(request):
@@ -44,7 +45,7 @@ def test_init_with_tuple_and_list(force_ossep):
 def test_init_with_invalid_value(force_ossep):
     try:
         path = Path(42)
-        self.fail()
+        assert False
     except TypeError:
         pass
 
@@ -62,6 +63,16 @@ def test_slicing(force_ossep):
     subpath = path[:2]
     eq_('foo/bar',subpath)
     assert isinstance(subpath,Path)
+
+def test_parent(force_ossep):
+    path = Path('foo/bar/bleh')
+    subpath = path.parent()
+    eq_('foo/bar', subpath)
+    assert isinstance(subpath, Path)
+
+def test_filename(force_ossep):
+    path = Path('foo/bar/bleh.ext')
+    eq_(path.name, 'bleh.ext')
 
 def test_deal_with_empty_components(force_ossep):
     """Keep ONLY a leading space, which means we want a leading slash.
@@ -99,7 +110,7 @@ def test_add(force_ossep):
     #Invalid concatenation
     try:
         Path(('foo','bar')) + 1
-        self.fail()
+        assert False
     except TypeError:
         pass
 
@@ -180,6 +191,16 @@ def test_Path_of_a_Path_returns_self(force_ossep):
     p = Path('foo/bar')
     assert Path(p) is p
 
+def test_getitem_str(force_ossep):
+    # path['something'] returns the child path corresponding to the name
+    p = Path('/foo/bar')
+    eq_(p['baz'], Path('/foo/bar/baz'))
+
+def test_getitem_path(force_ossep):
+    # path[Path('something')] returns the child path corresponding to the name (or subpath)
+    p = Path('/foo/bar')
+    eq_(p[Path('baz/bleh')], Path('/foo/bar/baz/bleh'))
+
 @mark.xfail(reason="pytest's capture mechanism is flaky, I have to investigate")
 def test_log_unicode_errors(force_ossep, monkeypatch, capsys):
     # When an there's a UnicodeDecodeError on path creation, log it so it can be possible
@@ -207,3 +228,24 @@ def test_remove_drive_letter(monkeypatch):
     eq_(p.remove_drive_letter(), Path(''))
     p = Path('z:\\foo')
     eq_(p.remove_drive_letter(), Path('foo'))
+
+def test_pathify():
+    @pathify
+    def foo(a: Path, b, c:Path):
+        return a, b, c
+    
+    a, b, c = foo('foo', 0, c=Path('bar'))
+    assert isinstance(a, Path)
+    assert a == Path('foo')
+    assert b == 0
+    assert isinstance(c, Path)
+    assert c == Path('bar')
+
+def test_pathify_preserve_none():
+    # @pathify preserves None value and doesn't try to return a Path
+    @pathify
+    def foo(a: Path):
+        return a
+    
+    a = foo(None)
+    assert a is None
