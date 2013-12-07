@@ -19,7 +19,7 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
-    get_module_version, move_all, copy_sysconfig_files_for_embed, copy_all, OSXAppStructure,
+    get_module_version, move_all, copy_all, OSXAppStructure,
     build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext, copy_embeddable_python_dylib,
     collect_stdlib_dependencies, copy)
 from hscommon import loc
@@ -123,7 +123,6 @@ def build_cocoa(edition, dev):
     del sys.path[0]
     # Views are not referenced by python code, so they're not found by the collector.
     copy_all('build/inter/*.so', op.join(pydep_folder, 'inter'))
-    copy_sysconfig_files_for_embed(pydep_folder)
     if not dev:
         # Important: Don't ever run delete_files_with_pattern('*.py') on dev builds because you'll
         # be deleting all py files in symlinked folders.

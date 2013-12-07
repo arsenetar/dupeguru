@@ -8,5 +8,5 @@ Homepage: http://www.hardcoded.net
 
 Package: {pkgname}
 Architecture: {arch}
-Depends: python3 (>=3.2), python3-pyqt4
+Depends: python3 (>=3.3), python3-pyqt4
 Description: {longname}
