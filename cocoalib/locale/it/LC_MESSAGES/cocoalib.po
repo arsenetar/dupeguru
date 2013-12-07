@@ -10,18 +10,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "%@ is Fairware"
-msgstr "%@ è Fairware"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Buy"
-msgstr "Acquista"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
@@ -32,28 +24,12 @@ msgid "Clear List"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Contribute"
-msgstr "Contribuisci"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Don't Send"
 msgstr "Non inviare"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter Key"
-msgstr "Inserisci Codice"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter your key"
-msgstr "Inserisci il tuo codice"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Fairware?"
-msgstr "Fairware?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "No"
@@ -66,18 +42,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Please wait..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Register"
-msgstr "Registra"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration e-mail:"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration key:"
-msgstr "Codice di registrazione:"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Send"
@@ -94,26 +58,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Submit"
-msgstr "Invia"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "This app is registered, thanks!"
-msgstr "Questa applicazione è registrata, grazie!"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Try"
-msgstr "Prova"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Type the key you received when you contributed to %@, as well as the e-mail "
-"used as a reference for the purchase."
-msgstr ""
-"Inserisci il codice che hai ricevuto quando hai contribuito a %@, così come "
-"l'email di riferimento utilizzata per l'acquisto."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

@@ -9,25 +9,17 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: qtlib/about_box.py:31
+#: qtlib/about_box.py:28
 msgid "About {}"
 msgstr ""
 
-#: qtlib/about_box.py:51
+#: qtlib/about_box.py:48
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:55
+#: qtlib/about_box.py:52
 msgid "Copyright Hardcoded Software 2013"
 msgstr "Copyright Hardcoded Software 2013"
-
-#: qtlib/about_box.py:64
-msgid "UNREGISTERED"
-msgstr "НЕЗАРЕГИСТРИРОВАННАЯ"
-
-#: qtlib/about_box.py:70
-msgid "Register"
-msgstr ""
 
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
@@ -106,58 +98,10 @@ msgstr ""
 msgid "Clear List"
 msgstr "Очистить список"
 
-#: qtlib/reg_demo_dialog.py:35
-msgid "$appname is Fairware"
-msgstr "$appname является Fairware"
-
-#: qtlib/reg_demo_dialog.py:49
-msgid "Try"
-msgstr "Попробовать"
-
-#: qtlib/reg_demo_dialog.py:52
-msgid "Enter Key"
-msgstr "Ввод ключа"
-
-#: qtlib/reg_demo_dialog.py:55
-msgid "Buy"
-msgstr "Купить"
-
-#: qtlib/reg_demo_dialog.py:57
-msgid "Fairware?"
-msgstr "Fairware?"
-
-#: qtlib/reg_submit_dialog.py:31
-msgid "Enter your registration key"
-msgstr "Введите ваш регистрационный ключ"
-
-#: qtlib/reg_submit_dialog.py:36
-msgid ""
-"Type the key you received when you contributed to $appname, as well as the "
-"e-mail used as a reference for the purchase."
-msgstr ""
-"Введите ключ, который вы получили при вкладе в $appname, а также адрес "
-"электронной почты использованный для покупки."
-
-#: qtlib/reg_submit_dialog.py:48
-msgid "Registration key:"
-msgstr "Регистрационный ключ:"
-
-#: qtlib/reg_submit_dialog.py:51
-msgid "Registered e-mail:"
-msgstr "Зарегистрированный e-mail:"
-
-#: qtlib/reg_submit_dialog.py:60
-msgid "Contribute"
-msgstr "Поддержите"
-
-#: qtlib/reg_submit_dialog.py:71
-msgid "Cancel"
-msgstr "Отменить"
-
-#: qtlib/reg_submit_dialog.py:80
-msgid "Submit"
-msgstr "Подтвердить"
-
 #: qtlib/search_edit.py:41
 msgid "Search..."
+msgstr ""
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
 msgstr ""

@@ -14,8 +14,6 @@ http://www.hardcoded.net/licenses/bsd_license
     NSTextField *titleTextField;
     NSTextField *versionTextField;
     NSTextField *copyrightTextField;
-    NSTextField *registeredTextField;
-    NSButton *registerButton;
     
     PyBaseApp *app;
 }

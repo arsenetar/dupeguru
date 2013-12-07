@@ -18,7 +18,6 @@ from hscommon import desktop
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
-from qtlib.reg import Registration
 from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow 
 
@@ -85,7 +84,6 @@ class DupeGuru(QObject):
             ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
-            ('actionRegister', '', '', tr("Register dupeGuru"), self.registerTriggered),
             ('actionCheckForUpdate', '', '', tr("Check for Update"), self.checkForUpdateTriggered),
             ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
         ]
@@ -108,10 +106,6 @@ class DupeGuru(QObject):
     def remove_selected(self):
         self.model.remove_selected(self)
     
-    def askForRegCode(self):
-        reg = Registration(self.model)
-        reg.ask_for_code()
-    
     def confirm(self, title, msg, default_button=QMessageBox.Yes):
         active = QApplication.activeWindow()
         buttons = QMessageBox.Yes | QMessageBox.No
@@ -133,7 +127,6 @@ class DupeGuru(QObject):
     
     #--- Events
     def finishedLaunching(self):
-        self.model.initial_registration_setup()
         if sys.getfilesystemencoding() == 'ascii':
             # No need to localize this, it's a debugging message.
             msg = "Something is wrong with the way your system locale is set. If the files you're "\
@@ -168,10 +161,6 @@ class DupeGuru(QObject):
     def quitTriggered(self):
         self.directories_dialog.close()
     
-    def registerTriggered(self):
-        reg = Registration(self.model)
-        reg.ask_for_code()
-    
     def showAboutBoxTriggered(self):
         self.about_box.show()
     
@@ -186,15 +175,6 @@ class DupeGuru(QObject):
     
     def set_default(self, key, value):
         self.prefs.set_value(key, value)
-    
-    def setup_as_registered(self):
-        self.actionRegister.setVisible(False)
-        self.about_box.registerButton.hide()
-        self.about_box.registeredEmailLabel.setText(self.model.registration_email)
-    
-    def show_demo_nag(self, prompt):
-        reg = Registration(self.model)
-        reg.show_demo_nag(prompt)
     
     def show_message(self, msg):
         window = QApplication.activeWindow()

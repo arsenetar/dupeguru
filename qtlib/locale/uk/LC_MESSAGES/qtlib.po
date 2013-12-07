@@ -9,25 +9,17 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: qtlib/about_box.py:31
+#: qtlib/about_box.py:28
 msgid "About {}"
 msgstr ""
 
-#: qtlib/about_box.py:51
+#: qtlib/about_box.py:48
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:55
+#: qtlib/about_box.py:52
 msgid "Copyright Hardcoded Software 2013"
 msgstr "Авторське право Hardcoded Software 2013"
-
-#: qtlib/about_box.py:64
-msgid "UNREGISTERED"
-msgstr "НЕЗАРЕЄСТРОВАНИЙ"
-
-#: qtlib/about_box.py:70
-msgid "Register"
-msgstr ""
 
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
@@ -108,58 +100,10 @@ msgstr ""
 msgid "Clear List"
 msgstr "Очистити список"
 
-#: qtlib/reg_demo_dialog.py:35
-msgid "$appname is Fairware"
-msgstr "$appname є Fairware"
-
-#: qtlib/reg_demo_dialog.py:49
-msgid "Try"
-msgstr "Спробувати"
-
-#: qtlib/reg_demo_dialog.py:52
-msgid "Enter Key"
-msgstr "Введіть Ваш ключ"
-
-#: qtlib/reg_demo_dialog.py:55
-msgid "Buy"
-msgstr "Купити"
-
-#: qtlib/reg_demo_dialog.py:57
-msgid "Fairware?"
-msgstr "Fairware?"
-
-#: qtlib/reg_submit_dialog.py:31
-msgid "Enter your registration key"
-msgstr "Введіть Ваш реєстраційний ключ"
-
-#: qtlib/reg_submit_dialog.py:36
-msgid ""
-"Type the key you received when you contributed to $appname, as well as the "
-"e-mail used as a reference for the purchase."
-msgstr ""
-"Введіть ключ, який Ви отримали зробивши внесок за $appname, а також адресу "
-"електронної пошти, яка була вказана під час покупки."
-
-#: qtlib/reg_submit_dialog.py:48
-msgid "Registration key:"
-msgstr "Реєстраційний ключ:"
-
-#: qtlib/reg_submit_dialog.py:51
-msgid "Registered e-mail:"
-msgstr "Адреса електронної пошти:"
-
-#: qtlib/reg_submit_dialog.py:60
-msgid "Contribute"
-msgstr "Зробити внесок"
-
-#: qtlib/reg_submit_dialog.py:71
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: qtlib/reg_submit_dialog.py:80
-msgid "Submit"
-msgstr "Надіслати"
-
 #: qtlib/search_edit.py:41
 msgid "Search..."
 msgstr "Шукати..."
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
+msgstr ""

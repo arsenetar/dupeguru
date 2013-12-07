@@ -10,18 +10,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "%@ is Fairware"
-msgstr "%@ is Fairware"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
 "Although the application should continue to run after this error, it may be "
 "in an instable state, so it is recommended that you restart the application."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Buy"
-msgstr "Buy"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
@@ -32,28 +24,12 @@ msgid "Clear List"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Contribute"
-msgstr "捐助"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Don't Send"
 msgstr "Don't Send"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter Key"
-msgstr "输入密钥"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Enter your key"
-msgstr "Enter your key"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Fairware?"
-msgstr "Fairware?"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "No"
@@ -66,18 +42,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Please wait..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Register"
-msgstr "Register"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration e-mail:"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Registration key:"
-msgstr "密钥:"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Send"
@@ -94,24 +58,6 @@ msgstr ""
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Submit"
-msgstr "提交"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "This app is registered, thanks!"
-msgstr "This app is registered, thanks!"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Try"
-msgstr "Try"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Type the key you received when you contributed to %@, as well as the e-mail "
-"used as a reference for the purchase."
-msgstr "当您捐助 %@ 后，请输入收到的注册密钥以及电子邮件，这将作为购买凭证。"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Work in progress, please wait."

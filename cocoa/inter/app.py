@@ -2,15 +2,15 @@ import logging
 
 from objp.util import pyref, dontwrap
 from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer
-from cocoa.inter import PyFairware, FairwareView
+from cocoa.inter import PyBaseApp, BaseAppView
 
-class DupeGuruView(FairwareView):
+class DupeGuruView(BaseAppView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
     def showProblemDialog(self): pass
     def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
     def selectDestFileWithPrompt_extension_(self, prompt: str, extension: str) -> str: pass
 
-class PyDupeGuruBase(PyFairware):
+class PyDupeGuruBase(PyBaseApp):
     @dontwrap
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')

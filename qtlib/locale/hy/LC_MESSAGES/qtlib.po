@@ -9,25 +9,17 @@ msgstr ""
 "Language: hy\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: qtlib/about_box.py:31
+#: qtlib/about_box.py:28
 msgid "About {}"
 msgstr ""
 
-#: qtlib/about_box.py:51
+#: qtlib/about_box.py:48
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:55
+#: qtlib/about_box.py:52
 msgid "Copyright Hardcoded Software 2013"
 msgstr "Հեղ. իրավունքը Hardcoded Software 2013"
-
-#: qtlib/about_box.py:64
-msgid "UNREGISTERED"
-msgstr "ՉԳՐԱՆՑՎԱԾ"
-
-#: qtlib/about_box.py:70
-msgid "Register"
-msgstr ""
 
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
@@ -106,58 +98,10 @@ msgstr ""
 msgid "Clear List"
 msgstr "Մաքրել ցանկը"
 
-#: qtlib/reg_demo_dialog.py:35
-msgid "$appname is Fairware"
-msgstr "$appname-ը Fairware է"
-
-#: qtlib/reg_demo_dialog.py:49
-msgid "Try"
-msgstr "Փորձել"
-
-#: qtlib/reg_demo_dialog.py:52
-msgid "Enter Key"
-msgstr "Գրել բանալին"
-
-#: qtlib/reg_demo_dialog.py:55
-msgid "Buy"
-msgstr "Գնել"
-
-#: qtlib/reg_demo_dialog.py:57
-msgid "Fairware?"
-msgstr "Fairware է՞"
-
-#: qtlib/reg_submit_dialog.py:31
-msgid "Enter your registration key"
-msgstr "Գրեք գրանցման բանալին"
-
-#: qtlib/reg_submit_dialog.py:36
-msgid ""
-"Type the key you received when you contributed to $appname, as well as the "
-"e-mail used as a reference for the purchase."
-msgstr ""
-"Մուտքագրեք այն բանալին, որը ստացել եք $appname-ին աջակցելիս, քանզի Ձեր էլ. "
-"հասցեն օգտագործվել է գնման ժամանակ:"
-
-#: qtlib/reg_submit_dialog.py:48
-msgid "Registration key:"
-msgstr "Գրանցման բանալին."
-
-#: qtlib/reg_submit_dialog.py:51
-msgid "Registered e-mail:"
-msgstr "Գրանցված էլ. հասցեն."
-
-#: qtlib/reg_submit_dialog.py:60
-msgid "Contribute"
-msgstr "Մասնակցել"
-
-#: qtlib/reg_submit_dialog.py:71
-msgid "Cancel"
-msgstr "Չեղարկել"
-
-#: qtlib/reg_submit_dialog.py:80
-msgid "Submit"
-msgstr "Հաստատել"
-
 #: qtlib/search_edit.py:41
 msgid "Search..."
+msgstr ""
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
 msgstr ""

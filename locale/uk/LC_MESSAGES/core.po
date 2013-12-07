@@ -10,49 +10,45 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: core/app.py:40
+#: core/app.py:39
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Немає позначених дублікатів - нічого робити."
 
-#: core/app.py:41
+#: core/app.py:40
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Немає обраних дублікатів - нічого робити."
 
-#: core/app.py:42
+#: core/app.py:41
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core/app.py:58
+#: core/app.py:57
 msgid "Scanning for duplicates"
 msgstr "Пошук дублікатів"
 
-#: core/app.py:59
+#: core/app.py:58
 msgid "Loading"
 msgstr "Завантаження"
 
-#: core/app.py:60
+#: core/app.py:59
 msgid "Moving"
 msgstr "Переміщення"
 
-#: core/app.py:61
+#: core/app.py:60
 msgid "Copying"
 msgstr "Копіювання"
 
-#: core/app.py:62
+#: core/app.py:61
 msgid "Sending to Trash"
 msgstr "Відправка до кошику"
 
-#: core/app.py:65
+#: core/app.py:64
 msgid "Sending files to the recycle bin"
 msgstr "Відправлення файлів до кошика"
 
-#: core/app.py:110
-msgid "will only be able to delete, move or copy 10 duplicates at once"
-msgstr "може видаляти, переміщувати або копіювати лише 10 копій відразу"
-
-#: core/app.py:246
+#: core/app.py:295
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -60,39 +56,31 @@ msgstr ""
 "Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
 " кілька секунд, потім повторіть спробу."
 
-#: core/app.py:254
+#: core/app.py:302
 msgid "No duplicates found."
 msgstr "Не знайдено жодного дублікату."
 
-#: core/app.py:267
+#: core/app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Усі позначені файли були скопійовані успішно."
 
-#: core/app.py:268
+#: core/app.py:316
 msgid "All marked files were moved successfully."
 msgstr "Усі позначені файли були переміщені успішно."
 
-#: core/app.py:269
+#: core/app.py:317
 msgid "All marked files were successfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:296
-msgid ""
-"You cannot delete, move or copy more than 10 duplicates at once in demo "
-"mode."
-msgstr ""
-"Ви не можете видаляти, переміщати або копіювати більше 10 дублікатів відразу"
-" в демонстраційному режимі."
-
-#: core/app.py:307
+#: core/app.py:354
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
 
-#: core/app.py:309
+#: core/app.py:356
 msgid "'{}' does not exist."
 msgstr "'{}' не існує."
 
-#: core/app.py:316
+#: core/app.py:365
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -100,59 +88,59 @@ msgstr ""
 "Усі обрані %d результатів будуть ігноруватися під час усіх наступних "
 "пошуків. Продовжити?"
 
-#: core/app.py:376
+#: core/app.py:431
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:376
+#: core/app.py:431
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:377
+#: core/app.py:432
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
-#: core/app.py:403
+#: core/app.py:469
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:428
+#: core/app.py:494
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:535 core/app.py:546
+#: core/app.py:646 core/app.py:659
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:566
+#: core/app.py:693
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:586
+#: core/app.py:721
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:597
+#: core/app.py:732
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:636
+#: core/app.py:773
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
-#: core/engine.py:178 core/engine.py:215
+#: core/engine.py:220 core/engine.py:265
 msgid "0 matches found"
 msgstr "0 результатів знайдено"
 
-#: core/engine.py:196 core/engine.py:223
+#: core/engine.py:238 core/engine.py:273
 msgid "%d matches found"
 msgstr "%d результатів знайдено"
 
-#: core/engine.py:208 core/scanner.py:79
+#: core/engine.py:258 core/scanner.py:79
 msgid "Read size of %d/%d files"
 msgstr "Прочитано розмір %d/%d файлів"
 
-#: core/engine.py:361
+#: core/engine.py:464
 msgid "Grouped %d/%d matches"
 msgstr "Згруповано %d/%d результатів"
 
@@ -200,11 +188,11 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core/results.py:113
+#: core/results.py:126
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) дублікатів позначено."
 
-#: core/results.py:120
+#: core/results.py:133
 msgid " filter: %s"
 msgstr "фільтр: %s"
 

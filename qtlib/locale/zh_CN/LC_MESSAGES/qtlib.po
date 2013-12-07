@@ -9,24 +9,16 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: qtlib/about_box.py:31
+#: qtlib/about_box.py:28
 msgid "About {}"
 msgstr ""
 
-#: qtlib/about_box.py:51
+#: qtlib/about_box.py:48
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:55
+#: qtlib/about_box.py:52
 msgid "Copyright Hardcoded Software 2013"
-msgstr ""
-
-#: qtlib/about_box.py:64
-msgid "UNREGISTERED"
-msgstr ""
-
-#: qtlib/about_box.py:70
-msgid "Register"
 msgstr ""
 
 #: qtlib/error_report_dialog.py:38
@@ -105,56 +97,10 @@ msgstr ""
 msgid "Clear List"
 msgstr "清空列表"
 
-#: qtlib/reg_demo_dialog.py:35
-msgid "$appname is Fairware"
-msgstr "$appname 是一款捐助型软件"
-
-#: qtlib/reg_demo_dialog.py:49
-msgid "Try"
-msgstr "捐助"
-
-#: qtlib/reg_demo_dialog.py:52
-msgid "Enter Key"
-msgstr "输入密钥"
-
-#: qtlib/reg_demo_dialog.py:55
-msgid "Buy"
-msgstr ""
-
-#: qtlib/reg_demo_dialog.py:57
-msgid "Fairware?"
-msgstr ""
-
-#: qtlib/reg_submit_dialog.py:31
-msgid "Enter your registration key"
-msgstr "输入密钥"
-
-#: qtlib/reg_submit_dialog.py:36
-msgid ""
-"Type the key you received when you contributed to $appname, as well as the "
-"e-mail used as a reference for the purchase."
-msgstr "当您捐助 $appname 后，请输入收到的注册密钥以及电子邮件，这将作为购买凭证。"
-
-#: qtlib/reg_submit_dialog.py:48
-msgid "Registration key:"
-msgstr "密钥:"
-
-#: qtlib/reg_submit_dialog.py:51
-msgid "Registered e-mail:"
-msgstr "电子邮箱:"
-
-#: qtlib/reg_submit_dialog.py:60
-msgid "Contribute"
-msgstr "捐助"
-
-#: qtlib/reg_submit_dialog.py:71
-msgid "Cancel"
-msgstr "取消"
-
-#: qtlib/reg_submit_dialog.py:80
-msgid "Submit"
-msgstr "提交"
-
 #: qtlib/search_edit.py:41
 msgid "Search..."
+msgstr ""
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
 msgstr ""
