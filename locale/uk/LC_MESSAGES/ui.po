@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-08-03 20:36+0000\n"
+"PO-Revision-Date: 2013-12-07 15:22+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/dupeguru/language/uk/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,6 +114,10 @@ msgstr ""
 
 #: qt/base/deletion_options.py:41
 msgid "Symlink"
+msgstr ""
+
+#: qt/base/deletion_options.py:46
+msgid " (unsupported)"
 msgstr ""
 
 #: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
@@ -794,6 +798,10 @@ msgid "Reveal Selected in Finder"
 msgstr "Показати вибране у Finder"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select All"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
 msgstr "Надіслати позначене до кошику..."
 
@@ -820,16 +828,3 @@ msgstr "Вікно"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Збільшити"
-
-#: qt/base/deletion_options.py:46
-msgid " (unsupported)"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select All"
-msgstr ""
-
-#~ msgid ""
-#~ "There were communication problems with iTunes. The operation couldn't be "
-#~ "completed."
-#~ msgstr "Виникла проблема зв'язку з iTunes. Операція не може бути завершена."

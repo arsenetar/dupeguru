@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-08-03 20:43+0000\n"
-"Last-Translator: Vitu <contact@brlingo.com>\n"
+"PO-Revision-Date: 2013-12-07 15:22+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -27,8 +27,8 @@ msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
-"Você pretende abrir muitos arquivos de uma vez. Problemas podem surgir "
-"dependendo de qual app seja usado para abri-los. Continuar?"
+"Você está prestes a abrir muitos arquivos de uma vez. Problemas podem surgir"
+" dependendo de qual app seja usado para abri-los. Deseja continuar?"
 
 #: core/app.py:57
 msgid "Scanning for duplicates"
@@ -59,7 +59,7 @@ msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
-"Ainda há uma ação em execução. Não é possível iniciar outra agora. Espere "
+"Ainda há uma ação em andamento. Não é possível iniciar outra agora. Espere "
 "alguns segundos e tente novamente."
 
 #: core/app.py:302
@@ -68,23 +68,23 @@ msgstr "Nenhuma duplicata encontrada."
 
 #: core/app.py:315
 msgid "All marked files were copied successfully."
-msgstr "Todos os arquivos marcados foram copiados com sucesso."
+msgstr "Todos os arquivos marcados foram copiados corretamente."
 
 #: core/app.py:316
 msgid "All marked files were moved successfully."
-msgstr "Todos os arquivos marcados foram relocados com sucesso."
+msgstr "Todos os arquivos marcados foram relocados corretamente."
 
 #: core/app.py:317
 msgid "All marked files were successfully sent to Trash."
-msgstr "Todos os arquivos marcados foram movidos para o Lixo com sucesso."
+msgstr "Todos os arquivos marcados foram movidos para o Lixo corretamente."
 
 #: core/app.py:354
 msgid "'{}' already is in the list."
-msgstr "'{}' já está na lista."
+msgstr "‘{}’ já está na lista."
 
 #: core/app.py:356
 msgid "'{}' does not exist."
-msgstr "'{}' não existe."
+msgstr "‘{}’ não existe."
 
 #: core/app.py:365
 msgid ""
@@ -119,7 +119,7 @@ msgstr "Remover %d arquivo(s) dos resultados?"
 
 #: core/app.py:693
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr "{} grupos de duplicatas alterados ao re-priorizar."
+msgstr "{} grupos de duplicatas alterados ao repriorizar."
 
 #: core/app.py:721
 msgid "Collecting files to scan"
@@ -135,19 +135,19 @@ msgstr "%s (%d rejeitado(s))"
 
 #: core/engine.py:220 core/engine.py:265
 msgid "0 matches found"
-msgstr "0 coincidentes encontrados"
+msgstr "0 resultados encontrados"
 
 #: core/engine.py:238 core/engine.py:273
 msgid "%d matches found"
-msgstr "%d coincidentes encontrados"
+msgstr "%d resultados encontrados"
 
 #: core/engine.py:258 core/scanner.py:79
 msgid "Read size of %d/%d files"
-msgstr "Tamanho de leitura de %d/%d arquivos"
+msgstr "Tamanho lido em %d/%d arquivos"
 
 #: core/engine.py:464
 msgid "Grouped %d/%d matches"
-msgstr "%d/%d coincidentes agrupados"
+msgstr "%d/%d resultados agrupados"
 
 #: core/gui/deletion_options.py:23
 msgid "You are sending {} file(s) to the Trash."
@@ -155,7 +155,7 @@ msgstr "Você está movendo {} arquivo(s) para o Lixo."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr "Deseja remover todos os %d itens da lista Ignorar?"
+msgstr "Tem certeza de que deseja remover todos os %d itens da lista Ignorar?"
 
 #: core/prioritize.py:68
 msgid "None"
@@ -207,11 +207,11 @@ msgstr "Metadados lidos em %d/%d arquivos"
 
 #: core/scanner.py:130
 msgid "Removing false matches"
-msgstr "Removendo coincidentes falsos"
+msgstr "Removendo resultados falsos"
 
 #: core/scanner.py:154
 msgid "Processed %d/%d matches against the ignore list"
-msgstr "%d/%d coincidentes processados em oposição à lista Ignorar"
+msgstr "%d/%d resultados processados em oposição à lista Ignorar"
 
 #: core/scanner.py:176
 msgid "Doing group prioritization"
@@ -223,16 +223,16 @@ msgstr "%d/%d fotos analizadas"
 
 #: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
-msgstr "%d/%d coincidentes em blocos executados"
+msgstr "%d/%d resultados em blocos executados"
 
 #: core_pe/matchblock.py:158
 msgid "Preparing for matching"
-msgstr "Preparando para coincidentes"
+msgstr "Preparando para comparação"
 
 #: core_pe/matchblock.py:193
 msgid "Verified %d/%d matches"
-msgstr "%d/%d coincidentes verificados"
+msgstr "%d/%d resultados verificados"
 
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr "EXIF de %d/%d fotos lidos"
+msgstr "EXIF lido em %d/%d fotos"

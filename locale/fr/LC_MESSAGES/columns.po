@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-04-27 14:40+0000\n"
+"PO-Revision-Date: 2013-11-20 11:53+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"

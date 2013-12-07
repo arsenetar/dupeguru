@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-08-03 20:36+0000\n"
+"PO-Revision-Date: 2013-12-07 15:22+0000\n"
 "Last-Translator: hsoft <hsoft@hardcoded.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,6 +122,10 @@ msgstr "Hardlink"
 #: qt/base/deletion_options.py:41
 msgid "Symlink"
 msgstr "Symlink"
+
+#: qt/base/deletion_options.py:46
+msgid " (unsupported)"
+msgstr ""
 
 #: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
@@ -803,6 +807,10 @@ msgid "Reveal Selected in Finder"
 msgstr "Révéler sélectionné dans Finder"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
+msgid "Select All"
+msgstr ""
+
+#: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
 msgstr "Envoyer marqués à la corbeille..."
 
@@ -829,18 +837,3 @@ msgstr "Fenêtre"
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Réduire/agrandir"
-
-#: qt/base/deletion_options.py:46
-msgid " (unsupported)"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Select All"
-msgstr ""
-
-#~ msgid ""
-#~ "There were communication problems with iTunes. The operation couldn't be "
-#~ "completed."
-#~ msgstr ""
-#~ "Il y a eu des problèmes de communication avec iTunes. L'opération n'a pas pu"
-#~ " être complétée."
