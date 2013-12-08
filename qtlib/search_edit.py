@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import pyqtSignal, Qt
-from PyQt4.QtGui import (QToolButton, QLineEdit, QIcon, QPixmap, QStyle, QStyleOptionFrameV2,
-    QPainter, QPalette)
+from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtGui import QIcon, QPixmap, QPainter, QPalette
+from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
 from hscommon.trans import trget
 
@@ -18,8 +18,8 @@ tr = trget('qtlib')
 # "images" folder in your resources.
 
 class LineEditButton(QToolButton):
-    def __init__(self, parent):
-        QToolButton.__init__(self, parent)
+    def __init__(self, parent, **kwargs):
+        super().__init__(parent, **kwargs)
         pixmap = QPixmap(':/search_clear_13')
         self.setIcon(QIcon(pixmap))
         self.setIconSize(pixmap.size())
@@ -30,9 +30,9 @@ class LineEditButton(QToolButton):
     
 
 class SearchEdit(QLineEdit):
-    def __init__(self, parent=None, immediate=False):
+    def __init__(self, parent=None, immediate=False, **kwargs):
         # immediate: send searchChanged signals at each keystroke.
-        QLineEdit.__init__(self, parent)
+        super().__init__(parent, **kwargs)
         self._clearButton = LineEditButton(self)
         frameWidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
         paddingRight = self._clearButton.sizeHint().width() + frameWidth + 1
@@ -66,7 +66,7 @@ class SearchEdit(QLineEdit):
     def paintEvent(self, event):
         QLineEdit.paintEvent(self, event)
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
-            panel = QStyleOptionFrameV2()
+            panel = QStyleOptionFrame()
             self.initStyleOption(panel)
             textRect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
             leftMargin = 2

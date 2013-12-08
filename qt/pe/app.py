@@ -8,7 +8,7 @@
 
 import logging
 
-from PyQt4.QtGui import QImage, QImageReader, QTransform
+from PyQt5.QtGui import QImage, QImageReader, QTransform
 
 from core_pe import __appname__
 from core_pe.photo import Photo as PhotoBase

@@ -8,8 +8,9 @@
 import sys
 import os.path as op
 
-from PyQt4.QtCore import QCoreApplication, QSettings
-from PyQt4.QtGui import QApplication, QIcon, QPixmap
+from PyQt5.QtCore import QCoreApplication, QSettings
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QApplication
 
 from hscommon.plat import ISWINDOWS
 from hscommon.trans import install_gettext_trans_under_qt
@@ -22,7 +23,7 @@ from core_{edition} import __version__, __appname__
 if ISWINDOWS:
     import qt.base.cxfreeze_fix
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     QCoreApplication.setOrganizationName('Hardcoded Software')
     QCoreApplication.setApplicationName(__appname__)
@@ -38,4 +39,7 @@ if __name__ == "__main__":
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
     install_excepthook()
-    sys.exit(app.exec_())
+    return app.exec()
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -7,8 +7,8 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-from PyQt4.QtCore import QSize
-from PyQt4.QtGui import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
     QLineEdit, QApplication)
 
 from hscommon.plat import ISWINDOWS, ISLINUX
@@ -29,8 +29,8 @@ SCAN_TYPE_ORDER = [
 ]
 
 class PreferencesDialog(PreferencesDialogBase):
-    def __init__(self, parent, app):
-        PreferencesDialogBase.__init__(self, parent, app)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(parent, app, **kwargs)
         
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
     

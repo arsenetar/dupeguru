@@ -6,18 +6,19 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QCoreApplication
-from PyQt4.QtGui import (QDialog, QDialogButtonBox, QPixmap, QSizePolicy, QHBoxLayout, QVBoxLayout,
-    QLabel, QFont, QApplication)
+from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QSizePolicy, QHBoxLayout, QVBoxLayout,
+    QLabel, QApplication)
 
 from hscommon.trans import trget
 
 tr = trget('qtlib')
 
 class AboutBox(QDialog):
-    def __init__(self, parent, app):
+    def __init__(self, parent, app, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.MSWindowsFixedSizeDialogHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self.app = app
         self._setupUi()
         

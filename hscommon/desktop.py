@@ -61,8 +61,8 @@ try:
     
 except ImportError:
     try:
-        from PyQt4.QtCore import QUrl
-        from PyQt4.QtGui import QDesktopServices
+        from PyQt5.QtCore import QUrl, QStandardPaths
+        from PyQt5.QtGui import QDesktopServices
         def _open_path(path):
             url = QUrl.fromLocalFile(str(path))
             QDesktopServices.openUrl(url)
@@ -72,10 +72,10 @@ except ImportError:
         
         def _special_folder_path(special_folder, appname=None):
             if special_folder == SpecialFolder.Cache:
-                qtfolder = QDesktopServices.CacheLocation
+                qtfolder = QStandardPaths.CacheLocation
             else:
-                qtfolder = QDesktopServices.DataLocation
-            return str(QDesktopServices.storageLocation(qtfolder))
+                qtfolder = QStandardPaths.DataLocation
+            return QStandardPaths.standardLocations(qtfolder)[0]
         
     except ImportError:
         # We're either running tests, and these functions don't matter much or we're in a really

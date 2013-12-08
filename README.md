@@ -48,12 +48,16 @@ to be installed manually.
 
 * All systems: [Python 3.3+][python] and [setuptools][setuptools]
 * Mac OS X: The last XCode to have the 10.6 SDK included.
-* Windows: Visual Studio 2008, [PyQt 4.7+][pyqt], [cx_Freeze][cxfreeze] and
+* Windows: Visual Studio 2010, [PyQt 5.0+][pyqt], [cx_Freeze][cxfreeze] and
   [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
 
-On Ubuntu, the apt-get command to install all pre-requisites is:
+On Ubuntu (13.10+), the apt-get command to install all pre-requisites is:
 
-    $ apt-get install python3-dev python3-pyqt4 pyqt4-dev-tools python3-setuptools
+    $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools
+
+On Arch, it's:
+
+    $ pacman -S python-pyqt5
 
 ## Setting up the virtual environment
 

@@ -6,8 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QSize
-from PyQt4.QtGui import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy, QPixmap
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy
 
 from hscommon.trans import trget
 from ..base.details_dialog import DetailsDialog as DetailsDialogBase
@@ -27,7 +28,7 @@ class DetailsDialog(DetailsDialogBase):
         self.setMinimumSize(QSize(250, 250))
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(4)
         self.selectedImage = QLabel(self)

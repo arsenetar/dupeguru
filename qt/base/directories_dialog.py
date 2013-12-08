@@ -6,10 +6,11 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import QRect
-from PyQt4.QtGui import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
-    QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QApplication, QMainWindow, QMenuBar,
-    QMenu, QIcon, QPixmap, QLabel)
+from PyQt5.QtCore import QRect
+from PyQt5.QtWidgets import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
+    QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QMainWindow, QMenuBar, QMenu, QLabel,
+    QApplication)
+from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
 from qtlib.recent import Recent
@@ -21,8 +22,8 @@ from .directories_model import DirectoriesModel, DirectoriesDelegate
 tr = trget('ui')
 
 class DirectoriesDialog(QMainWindow):
-    def __init__(self, parent, app):
-        QMainWindow.__init__(self, None)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(None, **kwargs)
         self.app = app
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
@@ -148,8 +149,8 @@ class DirectoriesDialog(QMainWindow):
     def _setupColumns(self):
         header = self.treeView.header()
         header.setStretchLastSection(False)
-        header.setResizeMode(0, QHeaderView.Stretch)
-        header.setResizeMode(1, QHeaderView.Fixed)
+        header.setSectionResizeMode(0, QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.Fixed)
         header.resizeSection(1, 100)
     
     def _updateAddButton(self):

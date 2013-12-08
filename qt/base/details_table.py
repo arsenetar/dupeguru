@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, SIGNAL, QAbstractTableModel
-from PyQt4.QtGui import QHeaderView, QTableView
+from PyQt5.QtCore import Qt, QAbstractTableModel
+from PyQt5.QtWidgets import QHeaderView, QTableView
 
 from hscommon.trans import trget
 
@@ -16,8 +16,8 @@ tr = trget('ui')
 HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
 
 class DetailsModel(QAbstractTableModel):
-    def __init__(self, model):
-        QAbstractTableModel.__init__(self)
+    def __init__(self, model, **kwargs):
+        super().__init__(**kwargs)
         self.model = model
     
     def columnCount(self, parent):
@@ -55,9 +55,9 @@ class DetailsTable(QTableView):
         hheader.setHighlightSections(False)
         hheader.setStretchLastSection(False)
         hheader.resizeSection(0, 100)
-        hheader.setResizeMode(0, QHeaderView.Fixed)
-        hheader.setResizeMode(1, QHeaderView.Stretch)
-        hheader.setResizeMode(2, QHeaderView.Stretch)
+        hheader.setSectionResizeMode(0, QHeaderView.Fixed)
+        hheader.setSectionResizeMode(1, QHeaderView.Stretch)
+        hheader.setSectionResizeMode(2, QHeaderView.Stretch)
         vheader = self.verticalHeader()
         vheader.setVisible(False)
         vheader.setDefaultSectionSize(18)

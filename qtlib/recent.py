@@ -8,8 +8,8 @@
 
 from collections import namedtuple
 
-from PyQt4.QtCore import pyqtSignal, QObject
-from PyQt4.QtGui import QAction
+from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtWidgets import QAction
 
 from hscommon.trans import trget
 from hscommon.util import dedupe
@@ -19,8 +19,8 @@ tr = trget('qtlib')
 MenuEntry = namedtuple('MenuEntry', 'menu fixedItemCount')
 
 class Recent(QObject):
-    def __init__(self, app, prefName, maxItemCount=10):
-        QObject.__init__(self)
+    def __init__(self, app, prefName, maxItemCount=10, **kwargs):
+        super().__init__(**kwargs)
         self._app = app
         self._menuEntries = []
         self._prefName = prefName

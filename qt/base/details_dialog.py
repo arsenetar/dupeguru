@@ -6,14 +6,14 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QDialog
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog
 
 from .details_table import DetailsModel
 
 class DetailsDialog(QDialog):
-    def __init__(self, parent, app):
-        QDialog.__init__(self, parent, Qt.Tool)
+    def __init__(self, parent, app, **kwargs):
+        super().__init__(parent, Qt.Tool, **kwargs)
         self.app = app
         self.model = app.model.details_panel
         self._setupUi()
@@ -33,7 +33,7 @@ class DetailsDialog(QDialog):
     
     def show(self):
         self._shown_once = True
-        QDialog.show(self)
+        super().show()
 
     #--- Events
     def appWillSavePrefs(self):
@@ -42,5 +42,6 @@ class DetailsDialog(QDialog):
     
     #--- model --> view
     def refresh(self):
-        self.tableModel.reset()
+        self.tableModel.beginResetModel()
+        self.tableModel.endResetModel()
     

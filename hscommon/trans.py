@@ -59,7 +59,7 @@ def get_locale_name(lang):
 
 #--- Qt
 def install_qt_trans(lang=None):
-    from PyQt4.QtCore import QCoreApplication, QTranslator, QLocale
+    from PyQt5.QtCore import QCoreApplication, QTranslator, QLocale
     if not lang:
         lang = str(QLocale.system().name())[:2]
     localename = get_locale_name(lang)
@@ -116,7 +116,7 @@ def install_gettext_trans_under_qt(base_folder, lang=None):
     # So, we install the gettext locale, great, but we also should try to install qt_*.qm if
     # available so that strings that are inside Qt itself over which I have no control are in the
     # right language.
-    from PyQt4.QtCore import QCoreApplication, QTranslator, QLocale, QLibraryInfo
+    from PyQt5.QtCore import QCoreApplication, QTranslator, QLocale, QLibraryInfo
     if not lang:
         lang = str(QLocale.system().name())[:2]
     localename = get_locale_name(lang)

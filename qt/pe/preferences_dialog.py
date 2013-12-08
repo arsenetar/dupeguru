@@ -7,7 +7,7 @@
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
-from PyQt4.QtGui import QApplication
+from PyQt5.QtWidgets import QApplication
 
 from hscommon.trans import trget
 from core.scanner import ScanType

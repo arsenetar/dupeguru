@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import QSize
-from PyQt4.QtGui import QVBoxLayout, QAbstractItemView
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView
 
 from hscommon.trans import trget
 from ..base.details_dialog import DetailsDialog as DetailsDialogBase
@@ -22,7 +22,7 @@ class DetailsDialog(DetailsDialogBase):
         self.setMinimumSize(QSize(250, 250))
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.tableView = DetailsTable(self)
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)

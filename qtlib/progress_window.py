@@ -6,13 +6,13 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import Qt, QTimer
-from PyQt4.QtGui import QProgressDialog
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtWidgets import QProgressDialog
 
 class ProgressWindow(QProgressDialog):
-    def __init__(self, parent, model):
+    def __init__(self, parent, model, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QProgressDialog.__init__(self, '', "Cancel", 0, 100, parent, flags)
+        super().__init__('', "Cancel", 0, 100, parent, flags, **kwargs)
         self.model = model
         model.view = self
         # We don't have access to QProgressDialog's labels directly, so we se the model label's view
@@ -35,7 +35,7 @@ class ProgressWindow(QProgressDialog):
     
     def show(self):
         self.reset()
-        QProgressDialog.show(self)
+        super().show()
         self.canceled.connect(self.model.cancel)
         self._timer.start(500)
     
@@ -44,5 +44,5 @@ class ProgressWindow(QProgressDialog):
         # For some weird reason, canceled() signal is sent upon close, whether the user canceled
         # or not. If we don't want a false cancellation, we have to disconnect it.
         self.canceled.disconnect()
-        QProgressDialog.close(self)
+        super().close()
     

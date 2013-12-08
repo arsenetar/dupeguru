@@ -5,18 +5,18 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt4.QtCore import pyqtSignal
-from PyQt4.QtGui import QWidget, QHBoxLayout, QRadioButton
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QRadioButton
 
 from .util import horizontalSpacer
 
 class RadioBox(QWidget):
-    def __init__(self, parent=None, items=None, spread=True):
+    def __init__(self, parent=None, items=None, spread=True, **kwargs):
         # If spread is False, insert a spacer in the layout so that the items don't use all the
         # space they're given but rather align left.
         if items is None:
             items = []
-        QWidget.__init__(self, parent)
+        super().__init__(parent, **kwargs)
         self._buttons = []
         self._labels = items
         self._selected_index = 0

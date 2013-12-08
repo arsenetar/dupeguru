@@ -10,9 +10,10 @@ import traceback
 import sys
 import os
 
-from PyQt4.QtCore import Qt, QUrl, QCoreApplication, QSize
-from PyQt4.QtGui import (QDialog, QDesktopServices, QVBoxLayout, QHBoxLayout, QLabel,
-    QPlainTextEdit, QPushButton, QApplication)
+from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QSize
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton,
+    QApplication)
 
 from hscommon.trans import trget
 from .util import horizontalSpacer
@@ -20,9 +21,9 @@ from .util import horizontalSpacer
 tr = trget('qtlib')
 
 class ErrorReportDialog(QDialog):
-    def __init__(self, parent, error):
+    def __init__(self, parent, error, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QDialog.__init__(self, parent, flags)
+        super().__init__(parent, flags, **kwargs)
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
@@ -67,7 +68,7 @@ class ErrorReportDialog(QDialog):
         text = self.errorTextEdit.toPlainText()
         url = QUrl("mailto:support@hardcoded.net?SUBJECT=Error Report&BODY=%s" % text)
         QDesktopServices.openUrl(url)
-        QDialog.accept(self)
+        super().accept()
     
 
 def install_excepthook():
