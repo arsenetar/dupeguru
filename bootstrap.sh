@@ -19,7 +19,13 @@ if [ "$(uname)" == "Darwin" ]; then
     pip install -r requirements-osx.txt
 else
     python3 -c "import PyQt5" >/dev/null 2>&1 || { echo >&2 "PyQt 5.1+ required. Install it and try again. Aborting"; exit 1; }
-    pip install -r requirements.txt
+    if [ -d "deps" ]; then
+        # We have a collection of dependencies in our source package. We might as well use it instead
+        # of downloading it from PyPI.
+        pip install --no-index --find-links=deps -r requirements.txt
+    else
+        pip install -r requirements.txt
+    fi
 fi
 
 echo "Bootstrapping complete! You can now configure, build and run dupeGuru with:"
