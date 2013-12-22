@@ -7,6 +7,7 @@
 * Fixed crash on Dupe Count sorting with Delta + Dupes Only. (#238)
 * Improved documentation.
 * Important internal refactorings.
+* Dropped Ubuntu 12.04 and 12.10 support.
 * Removed the fairware dialog ([More Info](http://www.hardcoded.net/articles/phasing-out-fairware)).
 
 === 3.7.1 (2013-08-19)
