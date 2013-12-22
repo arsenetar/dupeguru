@@ -448,6 +448,8 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
     # There's a couple of rather big exe files in the distutils folder that we absolutely don't
     # need. Remove them.
     delete_files_with_pattern(op.join(dest_folder, 'distutils'), '*.exe')
+    # And, finally, create an empty "site.py" that Python needs around on startup.
+    open(op.join(dest_folder, 'site.py'), 'w').close()
 
 def fix_qt_resource_file(path):
     # pyrcc4 under Windows, if the locale is non-english, can produce a source file with a date
