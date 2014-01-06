@@ -39,12 +39,6 @@ First, there is the reference folder system that lets you define folders where y
 **don't** want dupeGuru to let you delete files there, and then there is the group reference system
 that makes sure that you will **always** keep at least one member of the duplicate group.
 
-What are the demo limitations of dupeGuru?
-------------------------------------------
-
-In demo mode, you can only perform actions on 10 duplicates at once. In 
-`Fairware <http://open.hardcoded.net/about/>`_ mode, however, there are no limitations.
-
 The mark box of a file I want to delete is disabled. What must I do?
 --------------------------------------------------------------------
 
