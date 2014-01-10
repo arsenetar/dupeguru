@@ -141,6 +141,15 @@ press Space to mark all selected duplicates.
     * Click on **Mark --> Mark All**.
     * Click on **Actions --> Remove Selected from Results**.    
 
+The "Filter Hardness" slider in the preferences won't move!
+-----------------------------------------------------------
+
+This slider is only relevant for scan types that support "fuzziness". Many scan types, such as the
+"Contents" type, only support exact matches. When these types are selected, the slider is disabled.
+
+On some OS, the fact that it's disabled is harder to see than on others, but if you can't move the
+slider, it means that this preference is irrelevant in your current scan type.
+
 I've tried to send my duplicates to Trash, but dupeGuru is telling me it can't do it. Why? What can I do?
 ---------------------------------------------------------------------------------------------------------
 
