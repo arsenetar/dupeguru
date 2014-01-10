@@ -1,3 +1,16 @@
+=== 2.9.0 (2013-12-22)
+
+* Read RAW pictures EXIF tags. [Mac] (#234)
+* Disable symlink/hardlink deletion option when not relevant. (#247)
+* Make Cmd+A select all folders in the Folder Selection dialog. [Mac] (#228)
+* Make non-numeric delta comparison case insensitive. (#239)
+* Fix surrogate-related UnicodeEncodeError on CSV export. (#210)
+* Fixed crash on Dupe Count sorting with Delta + Dupes Only. (#238)
+* Improved documentation.
+* Important internal refactorings.
+* Dropped Ubuntu 12.04 and 12.10 support.
+* Removed the fairware dialog ([More Info](http://www.hardcoded.net/articles/phasing-out-fairware)).
+
 === 2.8.0 (2013-08-25)
 
 * Improved delta values to support non-numerical values. (#213)
