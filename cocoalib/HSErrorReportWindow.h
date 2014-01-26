@@ -15,7 +15,8 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @property (readwrite, retain) NSTextView *contentTextView;
 
-+ (void)showErrorReportWithContent:(NSString *)content;
+// True if the user wants to send the report
++ (BOOL)showErrorReportWithContent:(NSString *)content;
 - (id)initWithContent:(NSString *)content;
 
 - (void)send;

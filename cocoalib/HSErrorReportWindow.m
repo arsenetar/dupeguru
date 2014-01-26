@@ -13,11 +13,12 @@ http://www.hardcoded.net/licenses/bsd_license
 
 @synthesize contentTextView;
 
-+ (void)showErrorReportWithContent:(NSString *)content
++ (BOOL)showErrorReportWithContent:(NSString *)content
 {
     HSErrorReportWindow *report = [[HSErrorReportWindow alloc] initWithContent:content];
-    [NSApp runModalForWindow:[report window]];
+    NSInteger result = [NSApp runModalForWindow:[report window]];
     [report release];
+    return result == NSOKButton;
 }
 
 - (id)initWithContent:(NSString *)content
@@ -31,11 +32,6 @@ http://www.hardcoded.net/licenses/bsd_license
 
 - (void)send
 {
-    NSString *text = [[contentTextView textStorage] string];
-    NSString *URL = [NSString stringWithFormat:@"mailto:support@hardcoded.net?SUBJECT=Error Report&BODY=%@",text];
-    NSString *encodedURL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:encodedURL]];
-
     [[self window] orderOut:self];
     [NSApp stopModalWithCode:NSOKButton];
 }

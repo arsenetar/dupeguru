@@ -10,14 +10,18 @@ import ftplib
 import io
 import time
 import threading
+import logging
 
 def send_error_report(text):
     def do():
-        conn = ftplib.FTP('drop.hardcoded.net')
-        conn.login()
-        conn.cwd('/drop')
-        textfp = io.BytesIO(text.encode('utf-8'))
-        cmd = 'STOR report%d.txt' % time.time()
-        conn.storbinary(cmd, textfp)
+        try:
+            conn = ftplib.FTP('drop.hardcoded.net')
+            conn.login()
+            conn.cwd('/drop')
+            textfp = io.BytesIO(text.encode('utf-8'))
+            cmd = 'STOR report%d.txt' % time.time()
+            conn.storbinary(cmd, textfp)
+        except Exception as e:
+            logging.warning("Couldn't send error report: %s", e)
 
     threading.Thread(target=do).start()

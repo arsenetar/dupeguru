@@ -12,6 +12,7 @@ import traceback
 import subprocess
 import sys
 
+from hscommon.error_report import send_error_report
 from .CocoaProxy import CocoaProxy
 
 proxy = CocoaProxy()
@@ -97,7 +98,8 @@ def report_crash(type, value, tb):
         except IndexError:
             # This can happen if something went wrong with the grep (permission errors?)
             pass
-    proxy.reportCrash_(s)
+    if proxy.reportCrash_(s):
+        send_error_report(s)
 
 def install_exception_hook():
     sys.excepthook = report_crash

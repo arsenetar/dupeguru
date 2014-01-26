@@ -28,7 +28,7 @@
 - (NSString *)url2path:(NSString *)url;
 - (void)createPool;
 - (void)destroyPool;
-- (void)reportCrash:(NSString *)crashReport;
+- (BOOL)reportCrash:(NSString *)crashReport;
 - (void)log:(NSString *)s;
 - (NSDictionary *)readExifData:(NSString *)imagePath;
 @end

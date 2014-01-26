@@ -143,9 +143,9 @@
     }
 }
 
-- (void)reportCrash:(NSString *)crashReport
+- (BOOL)reportCrash:(NSString *)crashReport
 {
-    [HSErrorReportWindow showErrorReportWithContent:crashReport];
+    return [HSErrorReportWindow showErrorReportWithContent:crashReport];
 }
 
 - (void)log:(NSString *)s
