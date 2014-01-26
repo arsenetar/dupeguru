@@ -16,10 +16,10 @@ fi
 
 echo "Installing pip requirements"
 if [ "$(uname)" == "Darwin" ]; then
-    pip install -r requirements-osx.txt --allow-external polib --allow-unverified polib
+    pip install -r requirements-osx.txt
 else
     python3 -c "import PyQt4" >/dev/null 2>&1 || { echo >&2 "PyQt 4.8+ required. Install it and try again. Aborting"; exit 1; }
-    pip install -r requirements.txt --allow-external polib --allow-unverified polib
+    pip install -r requirements.txt
 fi
 
 echo "Bootstrapping complete! You can now configure, build and run dupeGuru with:"
