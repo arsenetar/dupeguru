@@ -10,12 +10,12 @@ import traceback
 import sys
 import os
 
-from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QSize
-from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtCore import Qt, QCoreApplication, QSize
 from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton,
     QApplication)
 
 from hscommon.trans import trget
+from hscommon.error_report import send_error_report
 from .util import horizontalSpacer
 
 tr = trget('qtlib')
@@ -27,7 +27,7 @@ class ErrorReportDialog(QDialog):
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
-        errorText = "Application Name: {0}\nVersion: {1}\n\n{2}".format(name, version, error)
+        errorText = "Application Name: {}\nVersion: {}\n\n{}".format(name, version, error)
         # Under windows, we end up with an error report without linesep if we don't mangle it
         errorText = errorText.replace('\n', os.linesep)
         self.errorTextEdit.setPlainText(errorText)
@@ -65,9 +65,7 @@ class ErrorReportDialog(QDialog):
         self.verticalLayout.addLayout(self.horizontalLayout)
     
     def accept(self):
-        text = self.errorTextEdit.toPlainText()
-        url = QUrl("mailto:support@hardcoded.net?SUBJECT=Error Report&BODY=%s" % text)
-        QDesktopServices.openUrl(url)
+        send_error_report(self.errorTextEdit.toPlainText())
         super().accept()
     
 
