@@ -76,11 +76,6 @@ Then, you can install pip requirements in your virtualenv:
     
 ([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt).
 
-**Temporary problem:** The author of polib, which is a dependency here,
-[hasn't yet uploaded packages to PyPI][polib], which will make the command fail if you use
-pip >= 1.5. You'll have to add `--allow-external polib --allow-unverified polib` to your command.
-This is, hopefully, a temporary situation.
-
 ## Actual building and running
 
 With your virtualenv activated, you can build and run dupeGuru with these commands:
@@ -101,4 +96,3 @@ You can also package dupeGuru into an installable package with:
 [pyqt]: http://www.riverbankcomputing.com
 [cxfreeze]: http://cx-freeze.sourceforge.net/
 [advinst]: http://www.advancedinstaller.com
-[polib]: https://bitbucket.org/izi/polib/issue/42

@@ -11,6 +11,7 @@ dist
 install
 installer_tmp-cache
 env
+/deps
 cocoa/autogen
 
 /run.py

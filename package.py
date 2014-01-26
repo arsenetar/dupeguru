@@ -155,7 +155,7 @@ def package_arch(edition):
 def package_source_tgz(edition):
     if not op.exists('deps'):
         print("Downloading PyPI dependencies")
-        print_and_do('pip install --download=deps -r requirements.txt')
+        print_and_do('./download_deps.sh')
     print("Creating git archive")
     app_version = get_module_version('core_{}'.format(edition))
     name = 'dupeguru-{}-src-{}.tar'.format(edition, app_version)
