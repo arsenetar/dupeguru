@@ -17,10 +17,6 @@ msgstr ""
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:52
-msgid "Copyright Hardcoded Software 2013"
-msgstr ""
-
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
 msgstr ""
@@ -99,6 +95,10 @@ msgstr "清空列表"
 
 #: qtlib/search_edit.py:41
 msgid "Search..."
+msgstr ""
+
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2014"
 msgstr ""
 
 #: qtlib/preferences.py:29

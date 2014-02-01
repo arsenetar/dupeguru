@@ -1,6 +1,6 @@
 # Created By: Virgil Dupras
 # Created On: 2009-05-09
-# Copyright 2013 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
 # 
 # This software is licensed under the "BSD" License as described in the "LICENSE" file, 
 # which should be included with this package. The terms are also available at 
@@ -50,7 +50,7 @@ class AboutBox(QDialog):
         self.verticalLayout.addWidget(self.versionLabel)
         self.label_3 = QLabel(self)
         self.verticalLayout.addWidget(self.label_3)
-        self.label_3.setText(tr("Copyright Hardcoded Software 2013"))
+        self.label_3.setText(tr("Copyright Hardcoded Software 2014"))
         self.label = QLabel(self)
         font = QFont()
         font.setWeight(75)

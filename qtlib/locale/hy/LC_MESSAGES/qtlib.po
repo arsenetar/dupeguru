@@ -17,10 +17,6 @@ msgstr ""
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:52
-msgid "Copyright Hardcoded Software 2013"
-msgstr "Հեղ. իրավունքը Hardcoded Software 2013"
-
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
 msgstr "Սխալի զեկույցը"
@@ -100,6 +96,10 @@ msgstr "Մաքրել ցանկը"
 
 #: qtlib/search_edit.py:41
 msgid "Search..."
+msgstr ""
+
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2014"
 msgstr ""
 
 #: qtlib/preferences.py:29

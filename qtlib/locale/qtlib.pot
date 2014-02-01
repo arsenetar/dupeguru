@@ -12,8 +12,8 @@ msgstr ""
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:52
-msgid "Copyright Hardcoded Software 2013"
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2014"
 msgstr ""
 
 #: qtlib/error_report_dialog.py:38

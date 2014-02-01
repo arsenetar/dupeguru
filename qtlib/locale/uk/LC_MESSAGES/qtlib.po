@@ -17,10 +17,6 @@ msgstr ""
 msgid "Version {}"
 msgstr ""
 
-#: qtlib/about_box.py:52
-msgid "Copyright Hardcoded Software 2013"
-msgstr "Авторське право Hardcoded Software 2013"
-
 #: qtlib/error_report_dialog.py:38
 msgid "Error Report"
 msgstr "Повідомлення про помилки"
@@ -103,6 +99,10 @@ msgstr "Очистити список"
 #: qtlib/search_edit.py:41
 msgid "Search..."
 msgstr "Шукати..."
+
+#: qtlib/about_box.py:55
+msgid "Copyright Hardcoded Software 2014"
+msgstr "Авторське право Hardcoded Software 2014"
 
 #: qtlib/preferences.py:29
 msgid "Vietnamese"
