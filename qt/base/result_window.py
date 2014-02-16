@@ -70,7 +70,8 @@ class ResultWindow(QMainWindow):
         self.actionPowerMarker.setCheckable(True)
         
     def _setupMenu(self):
-        self.menubar = QMenuBar(self)
+        self.menubar = QMenuBar()
+        self.menubar.setNativeMenuBar(False)
         self.menubar.setGeometry(QRect(0, 0, 630, 22))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setTitle(tr("File"))
