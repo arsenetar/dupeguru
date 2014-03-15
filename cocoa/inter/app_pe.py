@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-import plistlib
 import logging
 import re
+import io
 
 from appscript import app, its, k, CommandError, ApplicationNotFoundError
 
@@ -23,6 +23,7 @@ from core.app import JobType
 from core_pe import _block_osx
 from core_pe.photo import Photo as PhotoBase
 from core_pe.app import DupeGuru as DupeGuruBase
+from core_pe.iphoto_plist import IPhotoPlistParser
 from .app import PyDupeGuruBase
 
 tr = trget('ui')
@@ -89,7 +90,12 @@ def get_iphoto_or_aperture_pictures(plistpath: Path, photo_class):
     s, count = re.subn(r'&(?![a-zA-Z0-9_-]+|#[0-9]+|#x[0-9a-fA-F]+;)', '', s)
     if count:
         logging.warning("%d invalid XML entities replacement made", count)
-    plist = plistlib.readPlistFromBytes(s.encode('utf-8'))
+    parser = IPhotoPlistParser()
+    try:
+        plist = parser.parse(io.BytesIO(s.encode('utf-8')))
+    except Exception:
+        logging.warning("iPhoto plist parsing choked on data: %r", parser.lastdata)
+        raise
     result = []
     for key, photo_data in plist['Master Image List'].items():
         if photo_data['MediaType'] != 'Image':
