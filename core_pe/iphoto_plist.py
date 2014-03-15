@@ -23,3 +23,9 @@ class IPhotoPlistParser(plistlib.PlistParser):
     def getData(self):
         self.lastdata = plistlib.PlistParser.getData(self)
         return self.lastdata
+
+    def end_integer(self):
+        try:
+            self.addObject(int(self.getData()))
+        except ValueError:
+            self.addObject(0)
