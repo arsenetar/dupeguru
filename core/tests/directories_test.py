@@ -135,31 +135,18 @@ def test_get_state_with_path_not_there():
     d.add_path(testpath['onefile'])
     eq_(d.get_state(testpath), DirectoryState.Normal)
 
-def test_states_remain_when_larger_directory_eat_smaller_ones():
+def test_states_overwritten_when_larger_directory_eat_smaller_ones():
+    # ref #248
+    # When setting the state of a folder, we overwrite previously set states for subfolders.
     d = Directories()
     p = testpath['onefile']
     d.add_path(p)
     d.set_state(p, DirectoryState.Excluded)
     d.add_path(testpath)
     d.set_state(testpath, DirectoryState.Reference)
-    eq_(DirectoryState.Excluded ,d.get_state(p))
-    eq_(DirectoryState.Excluded ,d.get_state(p['dir1']))
-    eq_(DirectoryState.Reference ,d.get_state(testpath))
-
-def test_set_state_keep_state_dict_size_to_minimum():
-    d = Directories()
-    p = testpath['fs']
-    d.add_path(p)
-    d.set_state(p, DirectoryState.Reference)
-    d.set_state(p['dir1'], DirectoryState.Reference)
-    eq_(1,len(d.states))
-    eq_(DirectoryState.Reference ,d.get_state(p['dir1']))
-    d.set_state(p['dir1'], DirectoryState.Normal)
-    eq_(2,len(d.states))
-    eq_(DirectoryState.Normal ,d.get_state(p['dir1']))
-    d.set_state(p['dir1'], DirectoryState.Reference)
-    eq_(1,len(d.states))
-    eq_(DirectoryState.Reference ,d.get_state(p['dir1']))
+    eq_(d.get_state(p), DirectoryState.Reference)
+    eq_(d.get_state(p['dir1']), DirectoryState.Reference)
+    eq_(d.get_state(testpath), DirectoryState.Reference)
 
 def test_get_files():
     d = Directories()

@@ -163,6 +163,11 @@ def test_contains(force_ossep):
     assert 'bleh' not in p
     assert Path('foo') not in p
 
+def test_is_parent_of(force_ossep):
+    assert Path(('foo','bar')).is_parent_of(Path(('foo','bar','bleh')))
+    assert not Path(('foo','bar')).is_parent_of(Path(('foo','baz')))
+    assert not Path(('foo','bar')).is_parent_of(Path(('foo','bar')))
+
 def test_windows_drive_letter(force_ossep):
     p = Path(('c:',))
     eq_('c:\\',str(p))

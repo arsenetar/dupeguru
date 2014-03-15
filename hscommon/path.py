@@ -117,6 +117,17 @@ class Path(tuple):
         first = self[0]
         return (len(first) == 2) and (first[1] == ':')
     
+    def is_parent_of(self, other):
+        """Whether ``other`` is a subpath of ``self``.
+
+        Almost the same as ``other in self``, but it's a bit more self-explicative and when
+        ``other == self``, returns False.
+        """
+        if other == self:
+            return False
+        else:
+            return other in self
+
     def remove_drive_letter(self):
         if self.has_drive_letter():
             return self[1:]

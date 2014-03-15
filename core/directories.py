@@ -51,6 +51,7 @@ class Directories:
     #---Override
     def __init__(self, fileclasses=[fs.File]):
         self._dirs = []
+        # {path: state}
         self.states = {}
         self.fileclasses = fileclasses
         self.folderclass = fs.Folder
@@ -220,7 +221,7 @@ class Directories:
                 continue
             path = attrib['path']
             state = attrib['value']
-            self.set_state(Path(path), int(state))
+            self.states[Path(path)] = int(state)
     
     def save_to_file(self, outfile):
         """Save folder selection as XML to ``outfile``.
@@ -248,11 +249,8 @@ class Directories:
         """
         if self.get_state(path) == state:
             return
-        # we don't want to needlessly fill self.states. if get_state returns the same thing
-        # without an explicit entry, remove that entry
-        if path in self.states:
-            del self.states[path]
-            if self.get_state(path) == state: # no need for an entry
-                return
+        for iter_path in list(self.states.keys()):
+            if path.is_parent_of(iter_path):
+                del self.states[iter_path]
         self.states[path] = state
     
