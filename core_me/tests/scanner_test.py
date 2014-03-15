@@ -7,7 +7,6 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from hscommon import io
 from hscommon.path import Path
 
 from core.engine import getwords
@@ -18,7 +17,6 @@ def pytest_funcarg__fake_fileexists(request):
     # This is a hack to avoid invalidating all previous tests since the scanner started to test
     # for file existence before doing the match grouping.
     monkeypatch = request.getfuncargvalue('monkeypatch')
-    monkeypatch.setattr(io, 'exists', lambda _: True)
     monkeypatch.setattr(Path, 'exists', lambda _: True)
 
 def test_priorize_me(fake_fileexists):
