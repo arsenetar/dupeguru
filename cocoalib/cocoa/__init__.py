@@ -9,7 +9,6 @@
 import logging
 import time
 import traceback
-import subprocess
 import sys
 
 from hscommon.error_report import send_error_report
@@ -90,23 +89,24 @@ def report_crash(type, value, tb):
     s += "Application Version: {}\n".format(app_version)
     s += "Mac OS X Version: {}\n\n".format(osx_version)
     s += ''.join(safe_format_exception(type, value, tb))
-    if app_identifier:
+    if LOG_BUFFER:
         s += '\nRelevant Console logs:\n\n'
-        p = subprocess.Popen(['grep', app_identifier, '/var/log/system.log'], stdout=subprocess.PIPE)
-        try:
-            s += str(p.communicate()[0], encoding='utf-8')
-        except IndexError:
-            # This can happen if something went wrong with the grep (permission errors?)
-            pass
+        s += '\n'.join(LOG_BUFFER)
     if proxy.reportCrash_(s):
         send_error_report(s)
 
 def install_exception_hook():
     sys.excepthook = report_crash
 
+# A global log buffer to use for error reports
+LOG_BUFFER = []
+
 class CocoaHandler(logging.Handler):
     def emit(self, record):
-        proxy.log_(record.getMessage())
+        msg = record.getMessage()
+        proxy.log_(msg)
+        LOG_BUFFER.append(msg)
+        del LOG_BUFFER[:-20]
 
 def install_cocoa_logger():
     logging.getLogger().addHandler(CocoaHandler())
