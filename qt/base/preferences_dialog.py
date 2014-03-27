@@ -27,7 +27,7 @@ class PreferencesDialogBase(QDialog):
         self._setupUi()
         
         self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
-        self.buttonBox.clicked['QAbstractButton*'].connect(self.buttonClicked)
+        self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
     

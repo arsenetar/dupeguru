@@ -8,7 +8,7 @@
 
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtWidgets import (QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
-    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QAction, QPushButton, QCheckBox)
+    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox)
 
 from hscommon.trans import trget
 from qtlib.util import moveToScreenCenter, horizontalWrap, createActions
@@ -29,7 +29,7 @@ class ResultWindow(QMainWindow):
         self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
         self._update_column_actions_status()
         
-        self.menuColumns.triggered[QAction].connect(self.columnToggled)
+        self.menuColumns.triggered.connect(self.columnToggled)
         self.resultsView.doubleClicked.connect(self.resultsDoubleClicked)
         self.resultsView.spacePressed.connect(self.resultsSpacePressed)
         self.detailsButton.clicked.connect(self.actionDetails.triggered)
