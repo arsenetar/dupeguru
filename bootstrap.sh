@@ -21,7 +21,7 @@ if [ ! -d "env" ]; then
         python get-pip.py $PIPARGS --force-reinstall
     fi
     deactivate
-    python3 -m venv env --system-site-packages
+    python3 -m venv env --upgrade --system-site-packages
 fi
 
 source env/bin/activate
