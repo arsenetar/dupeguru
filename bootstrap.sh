@@ -10,21 +10,21 @@ fi
 
 if [ ! -d "env" ]; then
     echo "No virtualenv. Creating one"
-    python3 -m venv --system-site-packages env
+    # We need a "system-site-packages" env to have PyQt, but we also need to ensure a local pip
+    # install. To achieve our latter goal, we start with a normal venv, which we later upgrade to
+    # a system-site-packages once pip is installed.
+    python3 -m venv env
     source env/bin/activate
-    # With a new venv, we want to force (without checking if it exists first) installing a venv pip
-    # or else we'll end up with the system one.
-    python get-pip.py $PIPARGS --force-reinstall
-else
-    echo "There's already an env. Activating it"
-    source env/bin/activate
+    if python -m ensurepip; then
+        echo "We're under Python 3.4+, no need to try to install pip!"
+    else
+        python get-pip.py $PIPARGS --force-reinstall
+    fi
+    deactivate
+    python3 -m venv env --system-site-packages
 fi
 
-command -v pip
-if [ $? -ne 0 ]; then
-    echo "pip not installed. Installing."
-    python get-pip.py $PIPARGS
-fi
+source env/bin/activate
 
 echo "Installing pip requirements"
 if [ "$(uname)" == "Darwin" ]; then
