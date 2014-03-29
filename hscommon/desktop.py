@@ -63,6 +63,9 @@ except ImportError:
     try:
         from PyQt5.QtCore import QUrl, QStandardPaths
         from PyQt5.QtGui import QDesktopServices
+        def _open_url(url):
+            QDesktopServices.openUrl(QUrl(url))
+
         def _open_path(path):
             url = QUrl.fromLocalFile(str(path))
             QDesktopServices.openUrl(url)

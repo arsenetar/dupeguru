@@ -38,7 +38,7 @@ def main():
     from qt.{edition}.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
-    install_excepthook()
+    install_excepthook('https://github.com/hsoft/dupeguru/issues')
     return app.exec()
 
 if __name__ == "__main__":
