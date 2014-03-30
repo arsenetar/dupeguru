@@ -21,7 +21,10 @@ if [ ! -d "env" ]; then
         python get-pip.py $PIPARGS --force-reinstall
     fi
     deactivate
-    python3 -m venv env --upgrade --system-site-packages
+    if [ "$(uname)" != "Darwin" ]; then
+        # We only need system site packages for PyQt, so under OS X, we don't enable it
+        python3 -m venv env --upgrade --system-site-packages
+    fi
 fi
 
 source env/bin/activate
