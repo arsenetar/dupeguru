@@ -3,27 +3,22 @@ Frequently Asked Questions
 
 .. contents::
 
-What is |appname|?
-------------------
+What is dupeGuru?
+-----------------
 
-.. only:: edition_se
+dupeGuru is a tool to find duplicate files on your computer. It can scan either filenames or
+contents. The filename scan features a fuzzy matching algorithm that can find duplicate
+filenames even when they are not exactly the same.
 
-    dupeGuru is a tool to find duplicate files on your computer. It can scan either filenames or
-    content. The filename scan features a fuzzy matching algorithm that can find duplicate
-    filenames even when they are not exactly the same.
+dupeGuru also comes in two extra flavors: Music Edition and Picture Edition. These editions behave
+like the normal dupeGuru, but has specialized options.
 
-.. only:: edition_me
+dupeGuru Music Edition [ME] is made to scan songs. It can base its scan on filenames, tags or
+contents. The filename and tag scans feature a fuzzy matching algorithm that can find duplicate
+filenames or tags even when they are not exactly the same.
 
-    dupeGuru Music Edition is a tool to find duplicate songs in your music collection. It can
-    base its scan on filenames, tags or content. The filename and tag scans feature a fuzzy
-    matching algorithm that can find duplicate filenames or tags even when they are not exactly
-    the same.
-
-.. only:: edition_pe
-
-    dupeGuru Picture Edition (PE for short) is a tool to find duplicate pictures on your
-    computer. Not only can it find exact matches, but it can also find duplicates among pictures
-    of different kind (PNG, JPG, GIF etc..) and quality.
+dupeGuru Picture Edition [PE] is made to scan pictures. Not only can it find exact matches, but it
+can also find duplicates among pictures of different kind (PNG, JPG, GIF etc..) and quality.
 
 What makes it better than other duplicate scanners?
 ---------------------------------------------------
@@ -76,70 +71,70 @@ Enable the :doc:`Dupes Only <results>` mode and click on the Folder column to so
 by folder. It will then be easy for you to select all duplicates from the same folder, and then
 press Space to mark all selected duplicates.
 
-.. only:: edition_se or edition_pe
+I want to remove all files that are more than 300 KB away from their reference file. What can I do?
+---------------------------------------------------------------------------------------------------
 
-    I want to remove all files that are more than 300 KB away from their reference file. What can I do?
-    ---------------------------------------------------------------------------------------------------
+* Enable the :doc:`Dupes Only <results>` mode.
+* Enable the **Delta Values** mode.
+* Click on the "Size" column to sort the results by size.
+* Select all duplicates below -300.
+* Click on **Remove Selected from Results**.
+* Select all duplicates over 300.
+* Click on **Remove Selected from Results**.
 
-    * Enable the :doc:`Dupes Only <results>` mode.
-    * Enable the **Delta Values** mode.
-    * Click on the "Size" column to sort the results by size.
-    * Select all duplicates below -300.
-    * Click on **Remove Selected from Results**.
-    * Select all duplicates over 300.
-    * Click on **Remove Selected from Results**.
+I want to make my latest modified files reference files. What can I do?
+-----------------------------------------------------------------------
 
-    I want to make my latest modified files reference files. What can I do?
-    -----------------------------------------------------------------------
+* Enable the :doc:`Dupes Only <results>` mode.
+* Enable the **Delta Values** mode.
+* Click on the "Modification" column to sort the results by modification date.
+* Click on the "Modification" column again to reverse the sort order.
+* Select all duplicates over 0.
+* Click on **Make Selected into Reference**.
 
-    * Enable the :doc:`Dupes Only <results>` mode.
-    * Enable the **Delta Values** mode.
-    * Click on the "Modification" column to sort the results by modification date.
-    * Click on the "Modification" column again to reverse the sort order.
-    * Select all duplicates over 0.
-    * Click on **Make Selected into Reference**.
+I want to mark all duplicates containing the word "copy". How do I do that?
+---------------------------------------------------------------------------
 
-    I want to mark all duplicates containing the word "copy". How do I do that?
-    ---------------------------------------------------------------------------
+* Type "copy" in the "Filter" field in the top-right corner of the result window.
+* Click on **Mark --> Mark All**.
 
-    * Type "copy" in the "Filter" field in the top-right corner of the result window.
-    * Click on **Mark --> Mark All**.
+I want to remove all songs that are more than 3 seconds away from their reference file. What can I do?
+------------------------------------------------------------------------------------------------------
 
-.. only:: edition_me
-    
-    I want to remove all songs that are more than 3 seconds away from their reference file. What can I do?
-    ------------------------------------------------------------------------------------------------------
+*ME only*
 
-    * Enable the :doc:`Dupes Only <results>` mode.
-    * Enable the **Delta Values** mode.
-    * Click on the "Time" column to sort the results by time.
-    * Select all duplicates below -00:03.
-    * Click on **Remove Selected from Results**.
-    * Select all duplicates over 00:03.
-    * Click on **Remove Selected from Results**.
+* Enable the :doc:`Dupes Only <results>` mode.
+* Enable the **Delta Values** mode.
+* Click on the "Time" column to sort the results by time.
+* Select all duplicates below -00:03.
+* Click on **Remove Selected from Results**.
+* Select all duplicates over 00:03.
+* Click on **Remove Selected from Results**.
 
-    I want to make my highest bitrate songs reference files. What can I do?
-    -----------------------------------------------------------------------
-    
-    * Enable the :doc:`Dupes Only <results>` mode.
-    * Enable the **Delta Values** mode.
-    * Click on the "Bitrate" column to sort the results by bitrate.
-    * Click on the "Bitrate" column again to reverse the sort order.
-    * Select all duplicates over 0.
-    * Click on **Make Selected into Reference**.
+I want to make my highest bitrate songs reference files. What can I do?
+-----------------------------------------------------------------------
 
-    I don't want [live] and [remix] versions of my songs counted as duplicates. How do I do that?
-    ---------------------------------------------------------------------------------------------
-    
-    If your comparison threshold is low enough, you will probably end up with live and remix
-    versions of your songs in your results. There's nothing you can do to prevent that, but there's
-    something you can do to easily remove them from your results after the scan: post-scan
-    filtering. If, for example, you want to remove every song with anything inside square brackets
-    []:
+*ME only*
 
-    * Type "[*]" in the "Filter" field in the top-right corner of the result window.
-    * Click on **Mark --> Mark All**.
-    * Click on **Actions --> Remove Selected from Results**.    
+* Enable the :doc:`Dupes Only <results>` mode.
+* Enable the **Delta Values** mode.
+* Click on the "Bitrate" column to sort the results by bitrate.
+* Click on the "Bitrate" column again to reverse the sort order.
+* Select all duplicates over 0.
+* Click on **Make Selected into Reference**.
+
+I don't want [live] and [remix] versions of my songs counted as duplicates. How do I do that?
+---------------------------------------------------------------------------------------------
+
+If your comparison threshold is low enough, you will probably end up with live and remix
+versions of your songs in your results. There's nothing you can do to prevent that, but there's
+something you can do to easily remove them from your results after the scan: post-scan
+filtering. If, for example, you want to remove every song with anything inside square brackets
+[]:
+
+* Type "[*]" in the "Filter" field in the top-right corner of the result window.
+* Click on **Mark --> Mark All**.
+* Click on **Actions --> Remove Selected from Results**.
 
 The "Filter Hardness" slider in the preferences won't move!
 -----------------------------------------------------------
@@ -162,15 +157,24 @@ delete files" option that is offered to you when you activate Send to Trash. Thi
 files to the Trash, but delete them immediately. In some cases, for example on network storage
 (NAS), this has been known to work when normal deletion didn't.
 
-.. only:: edition_pe
-
-    If you're trying to delete *iPhoto* pictures, then the reason for the failure is different. The
-    deletion fails because dupeGuru can't communicate with iPhoto. Be aware that for the deletion
-    to work correctly, you're not supposed to play around iPhoto while dupeGuru is working. Also,
-    sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It
-    might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
+*PE only.* If you're trying to delete *iPhoto* pictures, then the reason for the failure is
+different. The deletion fails because dupeGuru can't communicate with iPhoto. Be aware that for the
+deletion to work correctly, you're not supposed to play around iPhoto while dupeGuru is working.
+Also, sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It
+might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
 
 If all of this fail, `contact HS support`_, we'll figure it out.
+
+Why is dupeGuru PE so slower than other editions?
+-------------------------------------------------
+
+dupeGuru PE's scanning method is very different from dupeGuru's. dupeGuru PE can detect duplicate
+photos even if they are not exactly the same. This very cool capability has a cost: time. Every
+picture has to be individually and fuzzily matched to all others, and this takes a lot of CPU power.
+
+If all you need to find is exact duplicates, just use the standard edition of dupeGuru with the
+Contents scan method. If your photos have EXIF tags, you can also try PE's "EXIF" scan method which
+is much faster.
 
 Where are user files located?
 -----------------------------
