@@ -285,7 +285,7 @@ class ResultWindow(QMainWindow):
     def saveResultsTriggered(self):
         title = tr("Select a file to save your results to")
         files = tr("dupeGuru Results (*.dupeguru)")
-        destination = QFileDialog.getSaveFileName(self, title, '', files)
+        destination, chosen_filter = QFileDialog.getSaveFileName(self, title, '', files)
         if destination:
             if not destination.endswith('.dupeguru'):
                 destination = '{}.dupeguru'.format(destination)

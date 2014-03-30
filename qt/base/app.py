@@ -196,5 +196,7 @@ class DupeGuru(QObject):
     
     def select_dest_file(self, prompt, extension):
         files = tr("{} file (*.{})").format(extension.upper(), extension)
-        return QFileDialog.getSaveFileName(self.resultWindow, prompt, '', files)
-    
+        destination, chosen_filter = QFileDialog.getSaveFileName(self.resultWindow, prompt, '', files)
+        if not destination.endswith('.{}'.format(extension)):
+            destination = '{}.{}'.format(destination, extension)
+        return destination
