@@ -52,7 +52,7 @@ msgstr "Перемещение в Корзину"
 msgid "Sending files to the recycle bin"
 msgstr "Перемещение файлов в Корзину"
 
-#: core/app.py:295
+#: core/app.py:290
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -60,31 +60,31 @@ msgstr ""
 "Предыдущее действие до сих пор выполняется. Вы не можете начать новое. "
 "Подождите несколько секунд, затем повторите попытку."
 
-#: core/app.py:302
+#: core/app.py:297
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
-#: core/app.py:315
+#: core/app.py:310
 msgid "All marked files were copied successfully."
 msgstr "Все отмеченные файлы были скопированы успешно."
 
-#: core/app.py:316
+#: core/app.py:311
 msgid "All marked files were moved successfully."
 msgstr "Все отмеченные файлы были перемещены успешно."
 
-#: core/app.py:317
+#: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
 msgstr "Все отмеченные файлы были успешно отправлены в Корзину."
 
-#: core/app.py:354
+#: core/app.py:349
 msgid "'{}' already is in the list."
 msgstr "'{}' уже присутствует в списке."
 
-#: core/app.py:356
+#: core/app.py:351
 msgid "'{}' does not exist."
 msgstr "'{}' не существует."
 
-#: core/app.py:365
+#: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -92,43 +92,43 @@ msgstr ""
 "Все выбранные %d совпадений будут игнорироваться при всех последующих "
 "проверках. Продолжить?"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "copy"
 msgstr "копирование"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "move"
 msgstr "перемещение"
 
-#: core/app.py:432
+#: core/app.py:427
 msgid "Select a directory to {} marked files to"
 msgstr "Выберите каталог {} для отмеченных файлов"
 
-#: core/app.py:469
+#: core/app.py:464
 msgid "Select a destination for your exported CSV"
 msgstr "Выберите назначение для экспортируемого "
 
-#: core/app.py:494
+#: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core/app.py:646 core/app.py:659
+#: core/app.py:641 core/app.py:654
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core/app.py:693
+#: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} групп дубликатов было изменено при реприоритезации."
 
-#: core/app.py:721
+#: core/app.py:716
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core/app.py:732
+#: core/app.py:727
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core/app.py:773
+#: core/app.py:768
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
@@ -148,7 +148,7 @@ msgstr "Подсчитан размер %d/%d файлов"
 msgid "Grouped %d/%d matches"
 msgstr "Группировка %d/%d совпадений"
 
-#: core/gui/deletion_options.py:23
+#: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Вы перемещаете {} файлов в Корзину."
 

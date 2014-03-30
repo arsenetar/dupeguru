@@ -48,7 +48,7 @@ msgstr "Ուղարկվում է Աղբարկղ"
 msgid "Sending files to the recycle bin"
 msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
 
-#: core/app.py:295
+#: core/app.py:290
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,74 +56,74 @@ msgstr ""
 "Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: "
 "Սպասեք մի քանի վայրկյան և կրկին փորձեք:"
 
-#: core/app.py:302
+#: core/app.py:297
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:315
+#: core/app.py:310
 msgid "All marked files were copied successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:316
+#: core/app.py:311
 msgid "All marked files were moved successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:317
+#: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:354
+#: core/app.py:349
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core/app.py:356
+#: core/app.py:351
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
 
-#: core/app.py:365
+#: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:432
+#: core/app.py:427
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
-#: core/app.py:469
+#: core/app.py:464
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:494
+#: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:646 core/app.py:659
+#: core/app.py:641 core/app.py:654
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:693
+#: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:721
+#: core/app.py:716
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:732
+#: core/app.py:727
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:773
+#: core/app.py:768
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
@@ -143,7 +143,7 @@ msgstr "Կարդալ %d/%d ֆայլերի չափը"
 msgid "Grouped %d/%d matches"
 msgstr "Խմբավորվել է %d/%d համընկնում"
 
-#: core/gui/deletion_options.py:23
+#: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 

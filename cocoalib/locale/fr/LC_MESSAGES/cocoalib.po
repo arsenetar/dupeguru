@@ -10,22 +10,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Although the application should continue to run after this error, it may be "
-"in an instable state, so it is recommended that you restart the application."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
 msgstr "Annuler"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Clear List"
 msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Don't Send"
-msgstr "Ignorer"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
@@ -44,17 +34,6 @@ msgid "Please wait..."
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Send"
-msgstr "Envoyer"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Something went wrong. Would you like to send the error report to Hardcoded "
-"Software?"
-msgstr ""
-"Il y a eu une erreur, voulez vous envoyer le rapport à Hardcoded Software?"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Status: Working..."
 msgstr ""
 
@@ -68,4 +47,23 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Yes"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Close"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Go to Github"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Something went wrong. How about reporting the error?"
 msgstr ""

@@ -22,42 +22,42 @@ msgstr "Removendo faixas sem referência da sua Biblioteca do iTunes"
 msgid "Scanning the iTunes Library"
 msgstr "Escaneando Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:160 cocoa/inter/app_pe.py:194
+#: cocoa/inter/app_me.py:158 cocoa/inter/app_pe.py:200
 msgid "Sending dupes to the Trash"
 msgstr "Movendo duplicatas para o Lixo"
 
-#: cocoa/inter/app_me.py:162
+#: cocoa/inter/app_me.py:160
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Comunicando com o iTunes. Não mexa!"
 
-#: cocoa/inter/app_me.py:197
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr "Remover %d faixas sem referência da Biblioteca do iTunes?"
 
-#: cocoa/inter/app_me.py:201
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "Você não possui nenhuma faixa sem referência na Biblioteca do iTunes"
 
-#: cocoa/inter/app_me.py:219
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr "O aplicativo iTunes não foi encontrado."
 
-#: cocoa/inter/app_pe.py:196
+#: cocoa/inter/app_pe.py:202
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "Comunicando com o iPhoto. Não mexa!"
 
-#: cocoa/inter/app_pe.py:205
+#: cocoa/inter/app_pe.py:211
 msgid "Talking to Aperture. Don't touch it!"
 msgstr "Comunicando com o Aperture. Não mexa!"
 
-#: cocoa/inter/app_pe.py:278
+#: cocoa/inter/app_pe.py:284
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 "As fotos apagadas do Aperture foram movidas para o projeto \"dupeGuru "
 "Trash\"."
 
-#: cocoa/inter/app_pe.py:304
+#: cocoa/inter/app_pe.py:310
 msgid "The iPhoto application couldn't be found."
 msgstr "O aplicativo iPhoto não foi encontrado."
 
@@ -83,30 +83,26 @@ msgid "About dupeGuru"
 msgstr "Sobre o dupeGuru"
 
 #: qt/base/app.py:88
-msgid "Register dupeGuru"
-msgstr "Registrar o dupeGuru"
-
-#: qt/base/app.py:89
 msgid "Check for Update"
 msgstr "Buscar Atualizaçõs"
 
-#: qt/base/app.py:90
+#: qt/base/app.py:89
 msgid "Open Debug Log"
 msgstr "Abrir Registro de Depuração"
 
-#: qt/base/app.py:217
+#: qt/base/app.py:198
 msgid "{} file (*.{})"
 msgstr "Arquivo {} (*.{})"
 
-#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Opções de Apagamento"
 
-#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Criar link dos arquivos apagados"
 
-#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
@@ -114,11 +110,11 @@ msgstr ""
 "Após apagar uma duplicata, cria um link direcionado ao arquivo original para"
 " substituir o arquivo apagado."
 
-#: qt/base/deletion_options.py:41
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr "Hardlink"
 
-#: qt/base/deletion_options.py:41
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr "Symlink"
 
@@ -154,38 +150,38 @@ msgstr "Atributo"
 msgid "Selected"
 msgstr "Seleção"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:21
+#: qt/base/details_table.py:16 qt/base/directories_model.py:22
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reference"
 msgstr "Referência"
 
-#: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results..."
 msgstr "Carregar…"
 
-#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:59 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Results Window"
 msgstr "Janela de Resultados"
 
-#: qt/base/directories_dialog.py:59
+#: qt/base/directories_dialog.py:60
 msgid "Add Folder..."
 msgstr "Adicionar Pasta…"
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:76
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:77
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "File"
 msgstr "Arquivo"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:84
+#: qt/base/directories_dialog.py:70 qt/base/result_window.py:85
 msgid "View"
 msgstr "Visualização"
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:86
+#: qt/base/directories_dialog.py:72 qt/base/result_window.py:87
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Help"
 msgstr "Ajuda"
 
-#: qt/base/directories_dialog.py:73 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:74 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
 msgstr "Carregar Resultados Recentes"
 
@@ -233,19 +229,19 @@ msgstr "Iniciar um novo escaneamento"
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Você possui resultados não salvos, deseja continuar mesmo assim?"
 
-#: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
 msgstr "Nome"
 
-#: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "State"
 msgstr "Estado"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Excluded"
 msgstr "Excluído"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Normal"
 msgstr "Normal"
 
@@ -345,12 +341,12 @@ msgid "Reveal Selected"
 msgstr "Mostrar Seleção"
 
 #: qt/base/result_window.py:44 qt/base/result_window.py:170
-#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
+#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:26
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Detalhes"
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:80
+#: qt/base/result_window.py:45 qt/base/result_window.py:81
 #: qt/base/result_window.py:145 qt/base/result_window.py:169
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
@@ -440,11 +436,11 @@ msgstr "Salvar Resultados…"
 msgid "Invoke Custom Command"
 msgstr "Executar Comando Personalizado"
 
-#: qt/base/result_window.py:78
+#: qt/base/result_window.py:79
 msgid "Mark"
 msgstr "Marcar"
 
-#: qt/base/result_window.py:82 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:83 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Columns"
 msgstr "Colunas"
 

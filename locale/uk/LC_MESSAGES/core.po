@@ -48,7 +48,7 @@ msgstr "Відправка до кошику"
 msgid "Sending files to the recycle bin"
 msgstr "Відправлення файлів до кошика"
 
-#: core/app.py:295
+#: core/app.py:290
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,31 +56,31 @@ msgstr ""
 "Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
 " кілька секунд, потім повторіть спробу."
 
-#: core/app.py:302
+#: core/app.py:297
 msgid "No duplicates found."
 msgstr "Не знайдено жодного дублікату."
 
-#: core/app.py:315
+#: core/app.py:310
 msgid "All marked files were copied successfully."
 msgstr "Усі позначені файли були скопійовані успішно."
 
-#: core/app.py:316
+#: core/app.py:311
 msgid "All marked files were moved successfully."
 msgstr "Усі позначені файли були переміщені успішно."
 
-#: core/app.py:317
+#: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:354
+#: core/app.py:349
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
 
-#: core/app.py:356
+#: core/app.py:351
 msgid "'{}' does not exist."
 msgstr "'{}' не існує."
 
-#: core/app.py:365
+#: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -88,43 +88,43 @@ msgstr ""
 "Усі обрані %d результатів будуть ігноруватися під час усіх наступних "
 "пошуків. Продовжити?"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:432
+#: core/app.py:427
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
-#: core/app.py:469
+#: core/app.py:464
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:494
+#: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:646 core/app.py:659
+#: core/app.py:641 core/app.py:654
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:693
+#: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:721
+#: core/app.py:716
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:732
+#: core/app.py:727
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:773
+#: core/app.py:768
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
@@ -144,7 +144,7 @@ msgstr "Прочитано розмір %d/%d файлів"
 msgid "Grouped %d/%d matches"
 msgstr "Згруповано %d/%d результатів"
 
-#: core/gui/deletion_options.py:23
+#: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 

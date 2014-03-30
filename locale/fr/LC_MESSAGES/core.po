@@ -52,7 +52,7 @@ msgstr "Envoi de fichiers à la corbeille"
 msgid "Sending files to the recycle bin"
 msgstr "Envoi de fichiers à la corbeille"
 
-#: core/app.py:295
+#: core/app.py:290
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -60,75 +60,75 @@ msgstr ""
 "Une action précédente est encore en cours. Attendez quelques secondes avant "
 "d'en repartir une nouvelle."
 
-#: core/app.py:302
+#: core/app.py:297
 msgid "No duplicates found."
 msgstr "Aucun doublon trouvé."
 
-#: core/app.py:315
+#: core/app.py:310
 msgid "All marked files were copied successfully."
 msgstr "Tous les fichiers marqués ont été copiés correctement."
 
-#: core/app.py:316
+#: core/app.py:311
 msgid "All marked files were moved successfully."
 msgstr "Tous les fichiers marqués ont été déplacés correctement."
 
-#: core/app.py:317
+#: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tous les fichiers marqués ont été correctement envoyés à la corbeille."
 
-#: core/app.py:354
+#: core/app.py:349
 msgid "'{}' already is in the list."
 msgstr "'{}' est déjà dans la liste."
 
-#: core/app.py:356
+#: core/app.py:351
 msgid "'{}' does not exist."
 msgstr "'{}' n'existe pas."
 
-#: core/app.py:365
+#: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "%d fichiers seront ignorés des prochains scans. Continuer?"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "copy"
 msgstr "copier"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "move"
 msgstr "déplacer"
 
-#: core/app.py:432
+#: core/app.py:427
 msgid "Select a directory to {} marked files to"
 msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 
-#: core/app.py:469
+#: core/app.py:464
 msgid "Select a destination for your exported CSV"
 msgstr "Choisissez une destination pour votre exportation CSV"
 
-#: core/app.py:494
+#: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Vous n'avez pas de commande personnalisée. Ajoutez-la dans vos préférences."
 
-#: core/app.py:646 core/app.py:659
+#: core/app.py:641 core/app.py:654
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d fichiers seront retirés des résultats. Continuer?"
 
-#: core/app.py:693
+#: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} groupes de doublons ont été modifiés par la re-prioritisation."
 
-#: core/app.py:721
+#: core/app.py:716
 msgid "Collecting files to scan"
 msgstr "Collecte des fichiers à scanner"
 
-#: core/app.py:732
+#: core/app.py:727
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
 
-#: core/app.py:773
+#: core/app.py:768
 msgid "%s (%d discarded)"
 msgstr "%s (%d hors-groupe)"
 
@@ -148,7 +148,7 @@ msgstr "Lu la taille de %d/%d fichiers"
 msgid "Grouped %d/%d matches"
 msgstr "%d/%d paires groupées"
 
-#: core/gui/deletion_options.py:23
+#: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Vous envoyez {} fichier(s) à la corbeille."
 

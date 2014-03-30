@@ -1,14 +1,14 @@
 
-"Although the application should continue to run after this error, it may be in an instable state, so it is recommended that you restart the application." = "Although the application should continue to run after this error, it may be in an instable state, so it is recommended that you restart the application.";
 "Cancel" = "Cancel";
 "Clear List" = "Clear List";
-"Don't Send" = "Don't Send";
+"Close" = "Close";
 "Error Report" = "Error Report";
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n\nAlthough the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application." = "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n\nAlthough the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application.";
+"Go to Github" = "Go to Github";
 "No" = "No";
 "OK" = "OK";
 "Please wait..." = "Please wait...";
-"Send" = "Send";
-"Something went wrong. Would you like to send the error report to Hardcoded Software?" = "Something went wrong. Would you like to send the error report to Hardcoded Software?";
+"Something went wrong. How about reporting the error?" = "Something went wrong. How about reporting the error?";
 "Status: Working..." = "Status: Working...";
 "Work in progress, please wait." = "Work in progress, please wait.";
 "Work in progress..." = "Work in progress...";

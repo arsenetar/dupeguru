@@ -20,44 +20,44 @@ msgstr "Đang loại bỏ các track bị lỗi khỏi thư viện iTunes của 
 msgid "Scanning the iTunes Library"
 msgstr "Đang quét thư viện iTunes"
 
-#: cocoa/inter/app_me.py:160 cocoa/inter/app_pe.py:194
+#: cocoa/inter/app_me.py:158 cocoa/inter/app_pe.py:200
 msgid "Sending dupes to the Trash"
 msgstr "Đang gửi các đối tượng bị lỗi đến Thùng Rác"
 
-#: cocoa/inter/app_me.py:162
+#: cocoa/inter/app_me.py:160
 msgid "Talking to iTunes. Don't touch it!"
 msgstr "Đang giao tiếp với iTunes. Đừng chạm vào!"
 
-#: cocoa/inter/app_me.py:197
+#: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
 msgstr ""
 "Thư viện iTunes của bạn chứa %d các track bị lỗi và đang chuẩn bị được loại "
 "bỏ. Tiếp tục?"
 
-#: cocoa/inter/app_me.py:201
+#: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
 msgstr "Bạn không có track bị lỗi trong thư viện iTunes"
 
-#: cocoa/inter/app_me.py:219
+#: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
 msgstr "Không tìm thấy ứng dụng iTunes."
 
-#: cocoa/inter/app_pe.py:196
+#: cocoa/inter/app_pe.py:202
 msgid "Talking to iPhoto. Don't touch it!"
 msgstr "Đang giao tiếp với iPhoto. Đừng chạm vào!"
 
-#: cocoa/inter/app_pe.py:205
+#: cocoa/inter/app_pe.py:211
 msgid "Talking to Aperture. Don't touch it!"
 msgstr "Đang giao tiếp với Aperture. Đừng chạm vào!"
 
-#: cocoa/inter/app_pe.py:278
+#: cocoa/inter/app_pe.py:284
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
 msgstr ""
 "Đã xóa các hình chụp thuộc Aperture và được gửi đến dự án có tên \"Thùng rác"
 " dupeGuru\"."
 
-#: cocoa/inter/app_pe.py:304
+#: cocoa/inter/app_pe.py:310
 msgid "The iPhoto application couldn't be found."
 msgstr "Không tìm thấy ứng dụng iPhoto."
 
@@ -83,30 +83,26 @@ msgid "About dupeGuru"
 msgstr "Dịch bởi Phan Anh"
 
 #: qt/base/app.py:88
-msgid "Register dupeGuru"
-msgstr "Đăng ký chương trình"
-
-#: qt/base/app.py:89
 msgid "Check for Update"
 msgstr "Kiểm tra cập nhật"
 
-#: qt/base/app.py:90
+#: qt/base/app.py:89
 msgid "Open Debug Log"
 msgstr "Mở nhật trình gỡ rối"
 
-#: qt/base/app.py:217
+#: qt/base/app.py:198
 msgid "{} file (*.{})"
 msgstr "{} tập tin (*.{})"
 
-#: qt/base/deletion_options.py:29 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Xóa tùy chọn"
 
-#: qt/base/deletion_options.py:34 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Liên kết đến các tập tin đã bị xóa"
 
-#: qt/base/deletion_options.py:36 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
@@ -114,11 +110,11 @@ msgstr ""
 "Sau khi đã xóa một đối tượng bị trùng, đặt một liên kết chỉ thẳng nhằm tham "
 "chiếu đến tập tin để thay thế tập tin đã được xóa."
 
-#: qt/base/deletion_options.py:41
+#: qt/base/deletion_options.py:42
 msgid "Hardlink"
 msgstr "Liên kết cứng"
 
-#: qt/base/deletion_options.py:41
+#: qt/base/deletion_options.py:42
 msgid "Symlink"
 msgstr "Liên kết biểu tượng"
 
@@ -155,38 +151,38 @@ msgstr "Thuộc tính"
 msgid "Selected"
 msgstr "Được chọn"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:21
+#: qt/base/details_table.py:16 qt/base/directories_model.py:22
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reference"
 msgstr "Tham chiếu"
 
-#: qt/base/directories_dialog.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results..."
 msgstr "Tải kết quả..."
 
-#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:59 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Results Window"
 msgstr "Cửa sổ hiển thị kết quả"
 
-#: qt/base/directories_dialog.py:59
+#: qt/base/directories_dialog.py:60
 msgid "Add Folder..."
 msgstr "Thêm thư mục..."
 
-#: qt/base/directories_dialog.py:67 qt/base/result_window.py:76
+#: qt/base/directories_dialog.py:68 qt/base/result_window.py:77
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "File"
 msgstr "Tập tin"
 
-#: qt/base/directories_dialog.py:69 qt/base/result_window.py:84
+#: qt/base/directories_dialog.py:70 qt/base/result_window.py:85
 msgid "View"
 msgstr "Xem"
 
-#: qt/base/directories_dialog.py:71 qt/base/result_window.py:86
+#: qt/base/directories_dialog.py:72 qt/base/result_window.py:87
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Help"
 msgstr "Trợ giúp"
 
-#: qt/base/directories_dialog.py:73 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_dialog.py:74 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
 msgstr "Tải các kết quả gần đây"
 
@@ -235,19 +231,19 @@ msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
 "Bạn vẫn chưa lưu các kết quả vừa quét, bạn có muốn tiếp tục hay không?"
 
-#: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
 msgstr "Tên"
 
-#: qt/base/directories_model.py:20 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "State"
 msgstr "Trạng thái"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Excluded"
 msgstr "Bao gồm"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Normal"
 msgstr "Bình thường"
 
@@ -347,12 +343,12 @@ msgid "Reveal Selected"
 msgstr "Biểu hiện các phần được chọn"
 
 #: qt/base/result_window.py:44 qt/base/result_window.py:170
-#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:25
+#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:26
 #: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Chi tiết"
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:80
+#: qt/base/result_window.py:45 qt/base/result_window.py:81
 #: qt/base/result_window.py:145 qt/base/result_window.py:169
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Actions"
@@ -442,11 +438,11 @@ msgstr "Lưu kết quả..."
 msgid "Invoke Custom Command"
 msgstr "Dòng lệnh tùy chọn khẩn cấp"
 
-#: qt/base/result_window.py:78
+#: qt/base/result_window.py:79
 msgid "Mark"
 msgstr "Đánh dấu"
 
-#: qt/base/result_window.py:82 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/base/result_window.py:83 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Columns"
 msgstr "Cột"
 

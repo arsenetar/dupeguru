@@ -53,7 +53,7 @@ msgstr "Đang gửi vào thùng rác"
 msgid "Sending files to the recycle bin"
 msgstr "Đang chuyển các tập tin vào thùng rác trong Windows"
 
-#: core/app.py:295
+#: core/app.py:290
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -61,32 +61,32 @@ msgstr ""
 "Hiện đã có một tiến trình đang được tiến hành. Bạn không thể bắt đầu một "
 "phần khác. Hãy đợi trong vài giây, và sau đó thử lại lần nữa."
 
-#: core/app.py:302
+#: core/app.py:297
 msgid "No duplicates found."
 msgstr "Không tìm thấy thành phần trùng nhau."
 
-#: core/app.py:315
+#: core/app.py:310
 msgid "All marked files were copied successfully."
 msgstr "Tất cả tập tin được đánh dấu đã được sao chép thành công."
 
-#: core/app.py:316
+#: core/app.py:311
 msgid "All marked files were moved successfully."
 msgstr "Tất cả các tập tin được đánh dấu đã được di chuyển thành công."
 
-#: core/app.py:317
+#: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tất cả các tập tin được đánh dấu đã được gửi đến Thùng Rác thành công."
 
-#: core/app.py:354
+#: core/app.py:349
 msgid "'{}' already is in the list."
 msgstr "'{}' đã tồn tại trong danh sách."
 
-#: core/app.py:356
+#: core/app.py:351
 msgid "'{}' does not exist."
 msgstr "'{}' không tồn tại."
 
-#: core/app.py:365
+#: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -94,45 +94,45 @@ msgstr ""
 "Các phần được chọn %d khớp với nhau sẽ được bỏ qua trong các lần quét sau. "
 "Tiếp tục?"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "copy"
 msgstr "sao chép"
 
-#: core/app.py:431
+#: core/app.py:426
 msgid "move"
 msgstr "di chuyển"
 
-#: core/app.py:432
+#: core/app.py:427
 msgid "Select a directory to {} marked files to"
 msgstr "Chọn một thư mục để {} các tập tin được đánh dấu đến"
 
-#: core/app.py:469
+#: core/app.py:464
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
-#: core/app.py:494
+#: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Bạn vẫn chưa chỉnh sửa phần thiết lập dòng lệnh. Hãy sử dụng tính năng này "
 "trong phần tùy biến của bạn."
 
-#: core/app.py:646 core/app.py:659
+#: core/app.py:641 core/app.py:654
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Tiếp tục?"
 
-#: core/app.py:693
+#: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core/app.py:721
+#: core/app.py:716
 msgid "Collecting files to scan"
 msgstr "Đang thu thập các tập tin để quét"
 
-#: core/app.py:732
+#: core/app.py:727
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
 
-#: core/app.py:773
+#: core/app.py:768
 msgid "%s (%d discarded)"
 msgstr "%s (%d bị bỏ qua)"
 
@@ -152,7 +152,7 @@ msgstr "Đọc kích thước của các tập tin %d/%d"
 msgid "Grouped %d/%d matches"
 msgstr "Đã nhóm %d/%d phần khớp nhau"
 
-#: core/gui/deletion_options.py:23
+#: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Bạn sắp sửa gửi {} (các)tập tin đến Thùng Rác."
 
