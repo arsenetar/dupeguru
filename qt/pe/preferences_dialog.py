@@ -20,6 +20,7 @@ tr = trget('ui')
 SCAN_TYPE_ORDER = [
     ScanType.FuzzyBlock,
     ScanType.ExifTimestamp,
+    ScanType.TriggerHappyMode,
 ]
 
 class PreferencesDialog(PreferencesDialogBase):
@@ -32,6 +33,7 @@ class PreferencesDialog(PreferencesDialogBase):
         scanTypeLabels = [
             tr("Contents"),
             tr("EXIF Timestamp"),
+            tr("Trigger-happy mode"),
         ]
         self._setupScanTypeBox(scanTypeLabels)
         self._setupFilterHardnessBox()

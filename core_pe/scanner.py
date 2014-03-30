@@ -20,7 +20,17 @@ class ScannerPE(Scanner):
         if self.scan_type == ScanType.FuzzyBlock:
             return matchblock.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
         elif self.scan_type == ScanType.ExifTimestamp:
-            return matchexif.getmatches(files, self.match_scaled, j)
+            return matchexif.getmatches(files, match_scaled=self.match_scaled, j=j)
+        elif self.scan_type == ScanType.TriggerHappyMode:
+            j = j.start_subjob([1, 9])
+            groups = matchexif.group_by_timestamp(files, date_only=True, j=j)
+            j = j.start_subjob(len(groups))
+            matches = []
+            for subfiles in groups.values():
+                matches += matchblock.getmatches(
+                    list(subfiles), self.cache_path, self.threshold, self.match_scaled, j
+                )
+            return matches
         else:
             raise Exception("Invalid scan type")
     

@@ -12,7 +12,7 @@ dialogHeights = {
 scanTypeNames = {
     'se': ["Filename", "Content", "Folders"],
     'me': ["Filename", "Filename - Fields", "Filename - Fields (No Order)", "Tags", "Content", "Audio Content"],
-    'pe': ["Contents", "EXIF Timestamp"],
+    'pe': ["Contents", "EXIF Timestamp", "Trigger-happy mode"],
 }
 
 result = Window(410, dialogHeights[edition], dialogTitles[edition])

@@ -33,6 +33,7 @@ class ScanType:
     #PE
     FuzzyBlock = 10
     ExifTimestamp = 11
+    TriggerHappyMode = 12
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 

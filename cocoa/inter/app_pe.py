@@ -331,6 +331,7 @@ class PyDupeGuru(PyDupeGuruBase):
             self.model.scanner.scan_type = [
                 ScanType.FuzzyBlock,
                 ScanType.ExifTimestamp,
+                ScanType.TriggerHappyMode,
             ][scan_type]
         except IndexError:
             pass
