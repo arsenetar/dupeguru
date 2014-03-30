@@ -12,33 +12,33 @@ http://www.hardcoded.net/licenses/bsd_license
 @implementation HSErrorReportWindow
 
 @synthesize contentTextView;
+@synthesize githubUrl;
 
-+ (BOOL)showErrorReportWithContent:(NSString *)content
++ (void)showErrorReportWithContent:(NSString *)content githubUrl:(NSString *)githubUrl
 {
-    HSErrorReportWindow *report = [[HSErrorReportWindow alloc] initWithContent:content];
-    NSInteger result = [NSApp runModalForWindow:[report window]];
+    HSErrorReportWindow *report = [[HSErrorReportWindow alloc] initWithContent:content githubUrl:githubUrl];
+    [NSApp runModalForWindow:[report window]];
     [report release];
-    return result == NSOKButton;
 }
 
-- (id)initWithContent:(NSString *)content
+- (id)initWithContent:(NSString *)content githubUrl:(NSString *)aGithubUrl
 {
     self = [super initWithWindow:nil];
     [self setWindow:createHSErrorReportWindow_UI(self)];
     [contentTextView alignLeft:nil];
     [[[contentTextView textStorage] mutableString] setString:content];
+    self.githubUrl = aGithubUrl;
     return self;
 }
 
-- (void)send
+- (void)goToGithub
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.githubUrl]];
+}
+
+- (void)close
 {
     [[self window] orderOut:self];
     [NSApp stopModalWithCode:NSOKButton];
-}
-
-- (void)dontSend
-{
-    [[self window] orderOut:self];
-    [NSApp stopModalWithCode:NSCancelButton];
 }
 @end

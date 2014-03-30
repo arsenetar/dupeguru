@@ -11,14 +11,16 @@ http://www.hardcoded.net/licenses/bsd_license
 @interface HSErrorReportWindow : NSWindowController
 {
     NSTextView *contentTextView;
+    NSString *githubUrl;
 }
 
 @property (readwrite, retain) NSTextView *contentTextView;
+@property (readwrite, retain) NSString *githubUrl;
 
 // True if the user wants to send the report
-+ (BOOL)showErrorReportWithContent:(NSString *)content;
-- (id)initWithContent:(NSString *)content;
++ (void)showErrorReportWithContent:(NSString *)content githubUrl:(NSString *)githubUrl;
+- (id)initWithContent:(NSString *)content githubUrl:(NSString *)githubUrl;
 
-- (void)send;
-- (void)dontSend;
+- (void)goToGithub;
+- (void)close;
 @end

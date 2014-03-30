@@ -143,9 +143,9 @@
     }
 }
 
-- (BOOL)reportCrash:(NSString *)crashReport
+- (void)reportCrash:(NSString *)crashReport withGithubUrl:(NSString *)githubUrl
 {
-    return [HSErrorReportWindow showErrorReportWithContent:crashReport];
+    return [HSErrorReportWindow showErrorReportWithContent:crashReport githubUrl:githubUrl];
 }
 
 - (void)log:(NSString *)s

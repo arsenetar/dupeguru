@@ -11,7 +11,6 @@ import time
 import traceback
 import sys
 
-from hscommon.error_report import send_error_report
 from .CocoaProxy import CocoaProxy
 
 proxy = CocoaProxy()
@@ -81,21 +80,20 @@ def safe_format_exception(type, value, tb):
         result.extend(traceback.format_exception_only(type, value))
         return result
 
-def report_crash(type, value, tb):
-    app_identifier = proxy.bundleIdentifier()
-    app_version = proxy.appVersion()
-    osx_version = proxy.osxVersion()
-    s = "Application Identifier: {}\n".format(app_identifier)
-    s += "Application Version: {}\n".format(app_version)
-    s += "Mac OS X Version: {}\n\n".format(osx_version)
-    s += ''.join(safe_format_exception(type, value, tb))
-    if LOG_BUFFER:
-        s += '\nRelevant Console logs:\n\n'
-        s += '\n'.join(LOG_BUFFER)
-    if proxy.reportCrash_(s):
-        send_error_report(s)
+def install_exception_hook(github_url):
+    def report_crash(type, value, tb):
+        app_identifier = proxy.bundleIdentifier()
+        app_version = proxy.appVersion()
+        osx_version = proxy.osxVersion()
+        s = "Application Identifier: {}\n".format(app_identifier)
+        s += "Application Version: {}\n".format(app_version)
+        s += "Mac OS X Version: {}\n\n".format(osx_version)
+        s += ''.join(safe_format_exception(type, value, tb))
+        if LOG_BUFFER:
+            s += '\nRelevant Console logs:\n\n'
+            s += '\n'.join(LOG_BUFFER)
+        proxy.reportCrash_withGithubUrl_(s, github_url)
 
-def install_exception_hook():
     sys.excepthook = report_crash
 
 # A global log buffer to use for error reports

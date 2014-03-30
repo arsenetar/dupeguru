@@ -14,7 +14,7 @@ class PyDupeGuruBase(PyBaseApp):
     @dontwrap
     def _init(self, modelclass):
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
-        install_exception_hook()
+        install_exception_hook('https://github.com/hsoft/dupeguru/issues')
         install_cocoa_logger()
         patch_threaded_job_performer()
         self.model = modelclass(self)
