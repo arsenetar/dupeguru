@@ -7,6 +7,7 @@
 
 import sys
 import os.path as op
+import gc
 
 from PyQt5.QtCore import QCoreApplication, QSettings
 from PyQt5.QtGui import QIcon, QPixmap
@@ -39,7 +40,14 @@ def main():
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
     install_excepthook('https://github.com/hsoft/dupeguru/issues')
-    return app.exec()
+    result = app.exec()
+    # I was getting weird crashes when quitting under Windows, and manually deleting main app
+    # references with gc.collect() in between seems to fix the problem.
+    del dgapp
+    gc.collect()
+    del app
+    gc.collect()
+    return result
 
 if __name__ == "__main__":
     sys.exit(main())
