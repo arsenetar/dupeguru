@@ -5,5 +5,3 @@ import xml.etree.ElementPath
 import gzip
 
 import os
-
-os.environ['QT_PLUGIN_PATH'] = 'qt4_plugins'

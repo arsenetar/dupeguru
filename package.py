@@ -13,6 +13,7 @@ import shutil
 import json
 from argparse import ArgumentParser
 import platform
+import glob
 
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
@@ -37,6 +38,7 @@ def package_windows(edition, dev):
     if not ISWINDOWS:
         print("Qt packaging only works under Windows.")
         return
+    from cx_Freeze import setup, Executable
     add_to_pythonpath('.')
     app_version = get_module_version('core_{}'.format(edition))
     distdir = 'dist'
@@ -44,38 +46,58 @@ def package_windows(edition, dev):
     if op.exists(distdir):
         shutil.rmtree(distdir)
     
-    is64bit = platform.architecture()[0] == '64bit'
-    # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it explicitly because of that.
-    cmd = 'cxfreeze --base-name Win32GUI --target-dir "{0}" --target-name "{1}.exe" --icon {2} --exclude-modules tkinter run.py'
-    target_name = {'se': 'dupeGuru', 'me': 'dupeGuru ME', 'pe': 'dupeGuru PE'}[edition]
-    icon_path = 'images\\dg{0}_logo.ico'.format(edition)
-    print_and_do(cmd.format(distdir, target_name, icon_path))
-    
     if not dev:
         # Copy qt plugins
-        plugin_dest = op.join(distdir, 'qt4_plugins')
+        plugin_dest = distdir
         plugin_names = ['accessible', 'codecs', 'iconengines', 'imageformats']
         copy_qt_plugins(plugin_names, plugin_dest)
-        
-        # Compress with UPX 
-        if not is64bit: # UPX doesn't work on 64 bit
-            libs = [name for name in os.listdir(distdir) if op.splitext(name)[1] in ('.pyd', '.dll', '.exe')]
-            for lib in libs:
-                print_and_do("upx --best \"{0}\"".format(op.join(distdir, lib)))
-    
+
+    # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it explicitly because of that.
+    options = {
+        'build_exe': {
+            'includes': 'atexit',
+            'excludes': ['tkinter'],
+            'bin_excludes': ['icudt51', 'icuin51.dll', 'icuuc51.dll'],
+            'icon': 'images\\dg{0}_logo.ico'.format(edition),
+            'include_msvcr': True,
+        },
+        'install_exe': {
+            'install_dir': 'dist',
+        }
+    }
+
+    executables = [
+        Executable(
+            'run.py',
+            base='Win32GUI',
+            targetDir=distdir,
+            targetName={'se': 'dupeGuru', 'me': 'dupeGuru ME', 'pe': 'dupeGuru PE'}[edition] + '.exe',
+        )
+    ]
+
+    setup(
+        script_args=['install'],
+        options=options,
+        executables=executables
+    )
+
+    print("Removing useless DLLs")
+    # Huge useless dll that appeared with Qt5
+    for fn in glob.glob(op.join(distdir, 'icu*.dll')):
+        os.remove(fn)
+    # Debug info that cx_freeze brings in.
+    for fn in glob.glob(op.join(distdir, '*', '*.pdb')):
+        os.remove(fn)
     help_path = op.join('build', 'help')
     print("Copying {} to dist\\help".format(help_path))
     shutil.copytree(help_path, op.join(distdir, 'help'))
     locale_path = op.join('build', 'locale')
     print("Copying {} to dist\\locale".format(locale_path))
     shutil.copytree(locale_path, op.join(distdir, 'locale'))
-    # We don't install the VC redist as a prerequisite. We just bundle the appropriate dlls.
-    shutil.copy(find_in_path('msvcr100.dll'), distdir)
-    shutil.copy(find_in_path('msvcp100.dll'), distdir)
 
     # AdvancedInstaller.com has to be in your PATH
     # this is so we don'a have to re-commit installer.aip at every version change
-    installer_file = 'installer64.aip' if is64bit else 'installer.aip'
+    installer_file = 'installer.aip'
     installer_path = op.join('qt', edition, installer_file)
     shutil.copy(installer_path, 'installer_tmp.aip')
     print_and_do('AdvancedInstaller.com /edit installer_tmp.aip /SetVersion %s' % app_version)
