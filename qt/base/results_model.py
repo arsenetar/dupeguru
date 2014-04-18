@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at 
 # http://www.hardcoded.net/licenses/bsd_license
 
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
 from PyQt5.QtGui import QBrush, QFont, QFontMetrics, QColor
 from PyQt5.QtWidgets import QTableView
 
@@ -112,7 +112,7 @@ class ResultsView(QTableView):
         super().keyPressEvent(event)
     
     def mouseDoubleClickEvent(self, event):
-        self.doubleClicked.emit(None)
+        self.doubleClicked.emit(QModelIndex())
         # We don't call the superclass' method because the default behavior is to rename the cell.
     
     #--- Signals
