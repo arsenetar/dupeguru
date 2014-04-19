@@ -9,7 +9,7 @@
 import sys
 import os.path as op
 
-from PyQt5.QtCore import QTimer, QObject, QCoreApplication, QUrl, QProcess, pyqtSignal
+from PyQt5.QtCore import QTimer, QObject, QCoreApplication, QUrl, pyqtSignal
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
 
@@ -85,13 +85,9 @@ class DupeGuru(QObject):
             ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
-            ('actionCheckForUpdate', '', '', tr("Check for Update"), self.checkForUpdateTriggered),
             ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
         ]
         createActions(ACTIONS, self)
-        
-        if ISLINUX:
-            self.actionCheckForUpdate.setVisible(False) # This only works on Windows
     
     def _update_options(self):
         self.model.scanner.mix_file_kind = self.prefs.mix_file_kind
@@ -139,9 +135,6 @@ class DupeGuru(QObject):
         self.willSavePrefs.emit()
         self.prefs.save()
         self.model.save()
-    
-    def checkForUpdateTriggered(self):
-        QProcess.execute('updater.exe', ['/checknow'])
     
     def ignoreListTriggered(self):
         self.model.ignore_list_dialog.show()
