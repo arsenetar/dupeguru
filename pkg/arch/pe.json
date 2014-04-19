@@ -1,0 +1,7 @@
+{
+	"pkgname": "dupeguru-pe",
+	"longname": "dupeGuru Picture Edition",
+	"execname": "dupeguru-pe",
+	"arch": "any",
+	"iconpath": "/usr/share/dupeguru-pe/dgpe_logo_128.png"
+}

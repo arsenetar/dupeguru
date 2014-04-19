@@ -18,7 +18,7 @@ This folder contains the source for dupeGuru. Its documentation is in ``help``, 
 * cocoa: UI code for the Cocoa toolkit. It's Objective-C code.
 * qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
 * images: Images used by the different UI codebases.
-* debian: Skeleton files required to create a .deb package
+* pkg: Skeleton files required to create different packages
 * help: Help document, written for Sphinx.
 * locale: .po files for localisation.
 

@@ -19,7 +19,6 @@ from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
     copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
     package_cocoa_app_in_dmg, copy_all)
-from hscommon.util import find_in_path
 
 def parse_args():
     parser = ArgumentParser()
@@ -135,15 +134,16 @@ def package_debian_distribution(edition, distribution):
         os.mkdir(op.join(destpath, 'modules'))
         copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
         copy(op.join('qt', 'pe', 'modules', 'block.c'), op.join(destpath, 'modules', 'block_qt.c'))
-        copy(op.join('debian', 'build_pe_modules.py'), op.join(destpath, 'build_pe_modules.py'))
+        copy(op.join('pkg', 'debian', 'build_pe_modules.py'), op.join(destpath, 'build_pe_modules.py'))
     debdest = op.join(destpath, 'debian')
+    debskel = op.join('pkg', 'debian')
     os.makedirs(debdest)
-    debopts = json.load(open(op.join('debian', ed('{}.json'))))
+    debopts = json.load(open(op.join(debskel, ed('{}.json'))))
     for fn in ['compat', 'copyright', 'dirs', 'rules']:
-        copy(op.join('debian', fn), op.join(debdest, fn))
-    filereplace(op.join('debian', 'control'), op.join(debdest, 'control'), **debopts)
-    filereplace(op.join('debian', 'Makefile'), op.join(destpath, 'Makefile'), **debopts)
-    filereplace(op.join('debian', 'dupeguru.desktop'), op.join(debdest, ed('dupeguru_{}.desktop')), **debopts)
+        copy(op.join(debskel, fn), op.join(debdest, fn))
+    filereplace(op.join(debskel, 'control'), op.join(debdest, 'control'), **debopts)
+    filereplace(op.join(debskel, 'Makefile'), op.join(destpath, 'Makefile'), **debopts)
+    filereplace(op.join(debskel, 'dupeguru.desktop'), op.join(debdest, ed('dupeguru_{}.desktop')), **debopts)
     changelogpath = op.join('help', ed('changelog_{}'))
     changelog_dest = op.join(debdest, 'changelog')
     project_name = debopts['pkgname']
@@ -173,6 +173,8 @@ def package_arch(edition):
         packages.append('hsaudiotag')
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join('images', ed('dg{}_logo_128.png')), srcpath)
+    debopts = json.load(open(op.join('pkg', 'arch', ed('{}.json'))))
+    filereplace(op.join('pkg', 'arch', 'dupeguru.desktop'), op.join(srcpath, ed('dupeguru-{}.desktop')), **debopts)
 
 def package_source_tgz(edition):
     if not op.exists('deps'):
