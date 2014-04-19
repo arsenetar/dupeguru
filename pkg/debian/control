@@ -2,11 +2,11 @@ Source: {pkgname}
 Section: devel
 Priority: extra
 Maintainer: Virgil Dupras <hsoft@hardcoded.net>
-Build-Depends: debhelper (>= 7), python3-dev, python3-setuptools
+Build-Depends: debhelper (>= 7), python3-dev
 Standards-Version: 3.8.1
 Homepage: http://www.hardcoded.net
 
 Package: {pkgname}
 Architecture: {arch}
-Depends: python3 (>=3.3), python3-pyqt4
+Depends: python3 (>=3.3), python3-pyqt5
 Description: {longname}
