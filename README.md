@@ -51,7 +51,7 @@ to be installed manually.
 * Windows: Visual Studio 2010, [PyQt 5.0+][pyqt], [cx_Freeze][cxfreeze] and
   [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
 
-On Ubuntu (13.10+), the apt-get command to install all pre-requisites is:
+On Ubuntu (14.04+), the apt-get command to install all pre-requisites is:
 
     $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools
 

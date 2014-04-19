@@ -1,5 +1,5 @@
 jobprogress>=1.0.4
 Send2Trash>=1.3.0
-sphinx>=1.1.3
-polib>=0.7.0
+sphinx>=1.2.2
+polib>=1.0.4
 hsaudiotag3k>=1.1.3
