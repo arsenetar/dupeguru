@@ -18,7 +18,7 @@ import glob
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
     copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
-    package_cocoa_app_in_dmg, copy_all)
+    package_cocoa_app_in_dmg, copy_all, find_in_path)
 
 def parse_args():
     parser = ArgumentParser()
@@ -38,6 +38,7 @@ def package_windows(edition, dev):
         print("Qt packaging only works under Windows.")
         return
     from cx_Freeze import setup, Executable
+    from PyQt5.QtCore import QLibraryInfo
     add_to_pythonpath('.')
     app_version = get_module_version('core_{}'.format(edition))
     distdir = 'dist'
@@ -80,13 +81,15 @@ def package_windows(edition, dev):
         executables=executables
     )
 
-    print("Removing useless DLLs")
-    # Huge useless dll that appeared with Qt5
-    for fn in glob.glob(op.join(distdir, 'icu*.dll')):
-        os.remove(fn)
+    print("Removing useless files")
     # Debug info that cx_freeze brings in.
     for fn in glob.glob(op.join(distdir, '*', '*.pdb')):
         os.remove(fn)
+    print("Copying forgotten DLLs")
+    qtlibpath = QLibraryInfo.location(QLibraryInfo.LibrariesPath)
+    shutil.copy(op.join(qtlibpath, 'libEGL.dll'), distdir)
+    shutil.copy(find_in_path('msvcp110.dll'), distdir)
+    print("Copying the rest")
     help_path = op.join('build', 'help')
     print("Copying {} to dist\\help".format(help_path))
     shutil.copytree(help_path, op.join(distdir, 'help'))
