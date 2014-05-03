@@ -5,6 +5,7 @@
 *.pyd
 *.waf*
 .lock-waf*
+.idea
 
 build
 dist
