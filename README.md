@@ -47,7 +47,7 @@ Prerequisites are installed through `pip`. However, some of them are not "pip in
 to be installed manually.
 
 * All systems: [Python 3.3+][python] and [setuptools][setuptools]
-* Mac OS X: The last XCode to have the 10.7 SDK included.
+* Mac OS X: The last XCode to have the 10.7 SDK included. Python 3.4+.
 * Windows: Visual Studio 2010, [PyQt 5.0+][pyqt], [cx_Freeze][cxfreeze] and
   [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
 

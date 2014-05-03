@@ -8,24 +8,24 @@
 
 import plistlib
 
-class IPhotoPlistParser(plistlib.PlistParser):
+class IPhotoPlistParser(plistlib._PlistParser):
     """A parser for iPhoto plists.
 
     iPhoto plists tend to be malformed, so we have to subclass the built-in parser to be a bit more
     lenient.
     """
     def __init__(self):
-        plistlib.PlistParser.__init__(self)
+        plistlib._PlistParser.__init__(self, use_builtin_types=True, dict_type=dict)
         # For debugging purposes, we remember the last bit of data to be analyzed so that we can
         # log it in case of an exception
         self.lastdata = ''
 
-    def getData(self):
-        self.lastdata = plistlib.PlistParser.getData(self)
+    def get_data(self):
+        self.lastdata = plistlib._PlistParser.get_data(self)
         return self.lastdata
 
     def end_integer(self):
         try:
-            self.addObject(int(self.getData()))
+            self.add_object(int(self.get_data()))
         except ValueError:
-            self.addObject(0)
+            self.add_object(0)
