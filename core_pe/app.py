@@ -17,10 +17,10 @@ from .result_table import ResultTable
 class DupeGuru(DupeGuruBase):
     NAME = __appname__
     METADATA_TO_READ = ['size', 'mtime', 'dimensions', 'exif_timestamp']
+    SCANNER_CLASS = ScannerPE
     
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
-        self.scanner = ScannerPE()
         self.scanner.cache_path = op.join(self.appdata, 'cached_pictures.db')
     
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):

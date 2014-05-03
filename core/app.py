@@ -151,9 +151,9 @@ class DupeGuru(Broadcaster):
     # show_problem_dialog()
     # select_dest_folder(prompt: str) --> str
     # select_dest_file(prompt: str, ext: str) --> str
-    
-    # in fairware prompts, we don't mention the edition, it's too long.
+
     PROMPT_NAME = "dupeGuru"
+    SCANNER_CLASS = scanner.Scanner
     
     def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
@@ -166,7 +166,7 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.directories = directories.Directories()
         self.results = results.Results(self)
-        self.scanner = scanner.Scanner()
+        self.scanner = self.SCANNER_CLASS()
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
