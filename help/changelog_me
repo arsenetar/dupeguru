@@ -1,3 +1,16 @@
+=== 6.8.0 (2014-05-11)
+
+* This is mostly a dependencies upgrade.
+* Upgraded to Python 3.3.
+* Upgraded to Qt 5.
+* Minimum Windows version is now Windows 7 64bit.
+* Minimum Ubuntu version is now 14.04.
+* Minimum OS X version is now 10.7 (Lion).
+* ... But with a couple of little improvements.
+* Improved documentation.
+* Overwrite subfolders' state when setting states in folder dialog (#248)
+* The error report dialog now brings the user to Github issues.
+
 === 6.7.0 (2013-12-08)
 
 * Disable symlink/hardlink deletion option when not relevant. (#247)
