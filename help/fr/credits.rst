@@ -9,6 +9,8 @@ Voici la liste des contributeurs de dupeGuru. Merci!
 
 | **Gregor Tätzner, localisation allemande**
 
+| **Frank Weber, localisation allemande**
+
 | **Eric Dee, localisation choinoise**
 
 | **Aleš Nehyba, localisation tchèque**

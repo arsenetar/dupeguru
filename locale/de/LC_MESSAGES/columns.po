@@ -1,9 +1,10 @@
 # Translators:
+# Harakiri1337, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-11-20 11:53+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2014-06-03 21:56+0000\n"
+"Last-Translator: Harakiri1337\n"
 "Language-Team: German (http://www.transifex.com/projects/p/dupeguru/language/de/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -32,7 +33,7 @@ msgstr "Ordner"
 #: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
 #: core_se/result_table.py:18
 msgid "Filename"
-msgstr "Filename"
+msgstr "Dateiname"
 
 #: core/prioritize.py:147
 msgid "Size"
@@ -41,11 +42,11 @@ msgstr "Größe"
 #: core/prioritize.py:153 core_me/result_table.py:25
 #: core_pe/result_table.py:24 core_se/result_table.py:22
 msgid "Modification"
-msgstr "Modifikation"
+msgstr "Geändert"
 
 #: core_me/prioritize.py:16
 msgid "Duration"
-msgstr ""
+msgstr "Dauer"
 
 #: core_me/prioritize.py:22 core_me/result_table.py:22
 msgid "Bitrate"
@@ -53,7 +54,7 @@ msgstr "Bitrate"
 
 #: core_me/prioritize.py:28
 msgid "Samplerate"
-msgstr ""
+msgstr "Abtastrate"
 
 #: core_me/result_table.py:20
 msgid "Size (MB)"
@@ -89,7 +90,7 @@ msgstr "Jahr"
 
 #: core_me/result_table.py:31
 msgid "Track Number"
-msgstr "Stück Nummer"
+msgstr "Titel Nummer"
 
 #: core_me/result_table.py:32
 msgid "Comment"
@@ -102,16 +103,16 @@ msgstr "Übereinstimmung %"
 
 #: core_me/result_table.py:34 core_se/result_table.py:24
 msgid "Words Used"
-msgstr "Wörter genutzt"
+msgstr "genutzte Wörter"
 
 #: core_me/result_table.py:35 core_pe/result_table.py:26
 #: core_se/result_table.py:25
 msgid "Dupe Count"
-msgstr "Anzahl Duplikate"
+msgstr "Anzahl der Duplikate"
 
 #: core_pe/prioritize.py:16 core_pe/result_table.py:22
 msgid "Dimensions"
-msgstr "Dimensionen"
+msgstr "Auflösung"
 
 #: core_pe/result_table.py:20 core_se/result_table.py:20
 msgid "Size (KB)"
@@ -119,4 +120,4 @@ msgstr "Größe (KB)"
 
 #: core_pe/result_table.py:23
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "EXIF Zeitstempel"

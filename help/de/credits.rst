@@ -10,6 +10,8 @@ Unten befindet sich die Liste aller Menschen, die direkt oder indirekt zu dupeGu
 
 | **Gregor Tätzner, deutsche Übersetzung**
 
+| **Frank Weber, deutsche Übersetzung**
+
 | **Eric Dee, chinesische Übersetzung**
 
 | **Aleš Nehyba, Czech localization**

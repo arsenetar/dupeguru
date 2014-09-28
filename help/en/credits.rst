@@ -10,6 +10,8 @@ Below is the list of people who contributed, directly or indirectly to dupeGuru.
 
 | **Gregor Tätzner, German localization**
 
+| **Frank Weber, German localization**
+
 | **Eric Dee, Chinese localization**
 
 | **Aleš Nehyba, Czech localization**
