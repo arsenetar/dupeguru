@@ -63,12 +63,12 @@ On Arch, it's:
 
 Use Python's built-in `pyvenv` to create a virtual environment in which we're going to install our.
 Python-related dependencies. `pyvenv` is built-in Python but, unlike its `virtualenv` predecessor,
-it doesn't install setuptools and pip, so it has to be installed manually:
+it doesn't install setuptools and pip (unless you use Python 3.4+), so it has to be installed
+manually:
 
     $ pyvenv --system-site-packages env
     $ source env/bin/activate
-    $ wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
-    $ easy_install pip
+    $ python get-pip.py
 
 Then, you can install pip requirements in your virtualenv:
 
@@ -96,3 +96,4 @@ You can also package dupeGuru into an installable package with:
 [pyqt]: http://www.riverbankcomputing.com
 [cxfreeze]: http://cx-freeze.sourceforge.net/
 [advinst]: http://www.advancedinstaller.com
+
