@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2006/01/29
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import difflib
@@ -15,7 +15,7 @@ from unicodedata import normalize
 
 from hscommon.util import flatten, multi_replace
 from hscommon.trans import tr
-from jobprogress import job
+from hscommon.jobprogress import job
 
 (WEIGHT_WORDS,
 MATCH_SIMILAR_WORDS,
@@ -45,7 +45,7 @@ def unpack_fields(fields):
 
 def compare(first, second, flags=()):
     """Returns the % of words that match between ``first`` and ``second``
-    
+
     The result is a ``int`` in the range 0..100.
     ``first`` and ``second`` can be either a string or a list (of words).
     """
@@ -53,7 +53,7 @@ def compare(first, second, flags=()):
         return 0
     if any(isinstance(element, list) for element in first):
         return compare_fields(first, second, flags)
-    second = second[:] #We must use a copy of second because we remove items from it        
+    second = second[:] #We must use a copy of second because we remove items from it
     match_similar = MATCH_SIMILAR_WORDS in flags
     weight_words = WEIGHT_WORDS in flags
     joined = first + second
@@ -77,9 +77,9 @@ def compare(first, second, flags=()):
 
 def compare_fields(first, second, flags=()):
     """Returns the score for the lowest matching :ref:`fields`.
-    
+
     ``first`` and ``second`` must be lists of lists of string. Each sub-list is then compared with
-    :func:`compare`. 
+    :func:`compare`.
     """
     if len(first) != len(second):
         return 0
@@ -104,10 +104,10 @@ def compare_fields(first, second, flags=()):
 
 def build_word_dict(objects, j=job.nulljob):
     """Returns a dict of objects mapped by their words.
-    
+
     objects must have a ``words`` attribute being a list of strings or a list of lists of strings
     (:ref:`fields`).
-    
+
     The result will be a dict with words as keys, lists of objects as values.
     """
     result = defaultdict(set)
@@ -118,7 +118,7 @@ def build_word_dict(objects, j=job.nulljob):
 
 def merge_similar_words(word_dict):
     """Take all keys in ``word_dict`` that are similar, and merge them together.
-    
+
     ``word_dict`` has been built with :func:`build_word_dict`. Similarity is computed with Python's
     ``difflib.get_close_matches()``, which computes the number of edits that are necessary to make
     a word equal to the other.
@@ -138,9 +138,9 @@ def merge_similar_words(word_dict):
 
 def reduce_common_words(word_dict, threshold):
     """Remove all objects from ``word_dict`` values where the object count >= ``threshold``
-    
+
     ``word_dict`` has been built with :func:`build_word_dict`.
-    
+
     The exception to this removal are the objects where all the words of the object are common.
     Because if we remove them, we will miss some duplicates!
     """
@@ -181,17 +181,17 @@ class Match(namedtuple('Match', 'first second percentage')):
         exact scan methods, such as Contents scans, this will always be 100.
     """
     __slots__ = ()
-    
+
 def get_match(first, second, flags=()):
     #it is assumed here that first and second both have a "words" attribute
     percentage = compare(first.words, second.words, flags)
     return Match(first, second, percentage)
 
 def getmatches(
-        objects, min_match_percentage=0, match_similar_words=False, weight_words=False, 
+        objects, min_match_percentage=0, match_similar_words=False, weight_words=False,
         no_field_order=False, j=job.nulljob):
     """Returns a list of :class:`Match` within ``objects`` after fuzzily matching their words.
-    
+
     :param objects: List of :class:`~core.fs.File` to match.
     :param int min_match_percentage: minimum % of words that have to match.
     :param bool match_similar_words: make similar words (see :func:`merge_similar_words`) match.
@@ -246,7 +246,7 @@ def getmatches(
 
 def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob):
     """Returns a list of :class:`Match` within ``files`` if their contents is the same.
-    
+
     :param str sizeattr: attibute name of the :class:`~core.fs.file` that returns the size of the
                          file to use for comparison.
     :param bool partial: if true, will use the "md5partial" attribute instead of "md5" to compute
@@ -278,44 +278,44 @@ class Group:
 
     This manages match pairs into groups and ensures that all files in the group match to each
     other.
-    
+
     .. attribute:: ref
-    
+
         The "reference" file, which is the file among the group that isn't going to be deleted.
-    
+
     .. attribute:: ordered
-    
+
         Ordered list of duplicates in the group (including the :attr:`ref`).
-    
+
     .. attribute:: unordered
-    
+
         Set duplicates in the group (including the :attr:`ref`).
-    
+
     .. attribute:: dupes
-    
+
         An ordered list of the group's duplicate, without :attr:`ref`. Equivalent to
         ``ordered[1:]``
-    
+
     .. attribute:: percentage
-    
+
         Average match percentage of match pairs containing :attr:`ref`.
     """
     #---Override
     def __init__(self):
         self._clear()
-    
+
     def __contains__(self, item):
         return item in self.unordered
-    
+
     def __getitem__(self, key):
         return self.ordered.__getitem__(key)
-    
+
     def __iter__(self):
         return iter(self.ordered)
-    
+
     def __len__(self):
         return len(self.ordered)
-    
+
     #---Private
     def _clear(self):
         self._percentage = None
@@ -324,22 +324,22 @@ class Group:
         self.candidates = defaultdict(set)
         self.ordered = []
         self.unordered = set()
-    
+
     def _get_matches_for_ref(self):
         if self._matches_for_ref is None:
             ref = self.ref
             self._matches_for_ref = [match for match in self.matches if ref in match]
         return self._matches_for_ref
-    
+
     #---Public
     def add_match(self, match):
         """Adds ``match`` to internal match list and possibly add duplicates to the group.
-        
+
         A duplicate can only be considered as such if it matches all other duplicates in the group.
         This method registers that pair (A, B) represented in ``match`` as possible candidates and,
         if A and/or B end up matching every other duplicates in the group, add these duplicates to
         the group.
-        
+
         :param tuple match: pair of :class:`~core.fs.File` to add
         """
         def add_candidate(item, match):
@@ -348,7 +348,7 @@ class Group:
             if self.unordered <= matches:
                 self.ordered.append(item)
                 self.unordered.add(item)
-        
+
         if match in self.matches:
             return
         self.matches.add(match)
@@ -359,17 +359,17 @@ class Group:
             add_candidate(second, first)
         self._percentage = None
         self._matches_for_ref = None
-    
+
     def discard_matches(self):
         """Remove all recorded matches that didn't result in a duplicate being added to the group.
-        
+
         You can call this after the duplicate scanning process to free a bit of memory.
         """
         discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
         self.matches -= discarded
         self.candidates = defaultdict(set)
         return discarded
-    
+
     def get_match_of(self, item):
         """Returns the match pair between ``item`` and :attr:`ref`.
         """
@@ -378,10 +378,10 @@ class Group:
         for m in self._get_matches_for_ref():
             if item in m:
                 return m
-    
+
     def prioritize(self, key_func, tie_breaker=None):
         """Reorders :attr:`ordered` according to ``key_func``.
-        
+
         :param key_func: Key (f(x)) to be used for sorting
         :param tie_breaker: function to be used to select the reference position in case the top
                             duplicates have the same key_func() result.
@@ -405,7 +405,7 @@ class Group:
             self.switch_ref(ref)
             return True
         return changed
-    
+
     def remove_dupe(self, item, discard_matches=True):
         try:
             self.ordered.remove(item)
@@ -419,7 +419,7 @@ class Group:
                 self._clear()
         except ValueError:
             pass
-    
+
     def switch_ref(self, with_dupe):
         """Make the :attr:`ref` dupe of the group switch position with ``with_dupe``.
         """
@@ -433,9 +433,9 @@ class Group:
             return True
         except ValueError:
             return False
-    
+
     dupes = property(lambda self: self[1:])
-    
+
     @property
     def percentage(self):
         if self._percentage is None:
@@ -445,16 +445,16 @@ class Group:
             else:
                 self._percentage = 0
         return self._percentage
-    
+
     @property
     def ref(self):
         if self:
             return self[0]
-    
+
 
 def get_groups(matches, j=job.nulljob):
     """Returns a list of :class:`Group` from ``matches``.
-    
+
     Create groups out of match pairs in the smartest way possible.
     """
     matches.sort(key=lambda match: -match.percentage)

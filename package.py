@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2009-12-30
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os
@@ -42,10 +42,10 @@ def package_windows(edition, dev):
     add_to_pythonpath('.')
     app_version = get_module_version('core_{}'.format(edition))
     distdir = 'dist'
-    
+
     if op.exists(distdir):
         shutil.rmtree(distdir)
-    
+
     if not dev:
         # Copy qt plugins
         plugin_dest = distdir
@@ -129,7 +129,7 @@ def package_debian_distribution(edition, distribution):
     ed = lambda s: s.format(edition)
     destpath = op.join('build', 'dupeguru-{0}-{1}'.format(edition, version))
     srcpath = op.join(destpath, 'src')
-    packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
+    packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash']
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_files_to_package(srcpath, packages, with_so=False)
@@ -171,7 +171,7 @@ def package_arch(edition):
     print("Packaging for Arch")
     ed = lambda s: s.format(edition)
     srcpath = op.join('build', ed('dupeguru-{}-arch'))
-    packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash', 'jobprogress']
+    packages = ['hscommon', 'core', ed('core_{0}'), 'qtlib', 'qt', 'send2trash']
     if edition == 'me':
         packages.append('hsaudiotag')
     copy_files_to_package(srcpath, packages, with_so=True)

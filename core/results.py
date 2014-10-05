@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2006/02/23
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
@@ -12,7 +12,7 @@ import os
 import os.path as op
 from xml.etree import ElementTree as ET
 
-from jobprogress.job import nulljob
+from hscommon.jobprogress.job import nulljob
 from hscommon.conflict import get_conflicted_name
 from hscommon.util import flatten, nonone, FileOrPath, format_size
 from hscommon.trans import tr
@@ -22,15 +22,15 @@ from .markable import Markable
 
 class Results(Markable):
     """Manages a collection of duplicate :class:`~core.engine.Group`.
-    
+
     This class takes care or marking, sorting and filtering duplicate groups.
-    
+
     .. attribute:: groups
-    
+
         The list of :class:`~core.engine.Group` contained managed by this instance.
-    
+
     .. attribute:: dupes
-    
+
         A list of all duplicates (:class:`~core.fs.File` instances), without ref, contained in the
         currently managed :attr:`groups`.
     """
@@ -50,16 +50,16 @@ class Results(Markable):
         self.app = app
         self.problems = [] # (dupe, error_msg)
         self.is_modified = False
-    
+
     def _did_mark(self, dupe):
         self.__marked_size += dupe.size
-    
+
     def _did_unmark(self, dupe):
         self.__marked_size -= dupe.size
-    
+
     def _get_markable_count(self):
         return self.__total_count
-    
+
     def _is_markable(self, dupe):
         if dupe.is_ref:
             return False
@@ -71,25 +71,25 @@ class Results(Markable):
         if self.__filtered_dupes and dupe not in self.__filtered_dupes:
             return False
         return True
-    
+
     def mark_all(self):
         if self.__filters:
             self.mark_multiple(self.__filtered_dupes)
         else:
             Markable.mark_all(self)
-    
+
     def mark_invert(self):
         if self.__filters:
             self.mark_toggle_multiple(self.__filtered_dupes)
         else:
             Markable.mark_invert(self)
-    
+
     def mark_none(self):
         if self.__filters:
             self.unmark_multiple(self.__filtered_dupes)
         else:
             Markable.mark_none(self)
-    
+
     #---Private
     def __get_dupe_list(self):
         if self.__dupes is None:
@@ -103,13 +103,13 @@ class Results(Markable):
             if sd:
                 self.sort_dupes(sd[0], sd[1], sd[2])
         return self.__dupes
-    
+
     def __get_groups(self):
         if self.__filtered_groups is None:
             return self.__groups
         else:
             return self.__filtered_groups
-    
+
     def __get_stat_line(self):
         if self.__filtered_dupes is None:
             mark_count = self.mark_count
@@ -132,7 +132,7 @@ class Results(Markable):
         if self.__filters:
             result += tr(" filter: %s") % ' --> '.join(self.__filters)
         return result
-    
+
     def __recalculate_stats(self):
         self.__total_size = 0
         self.__total_count = 0
@@ -140,7 +140,7 @@ class Results(Markable):
             markable = [dupe for dupe in group.dupes if self._is_markable(dupe)]
             self.__total_count += len(markable)
             self.__total_size += sum(dupe.size for dupe in markable)
-    
+
     def __set_groups(self, new_groups):
         self.mark_none()
         self.__groups = new_groups
@@ -155,18 +155,18 @@ class Results(Markable):
         self.apply_filter(None)
         for filter_str in old_filters:
             self.apply_filter(filter_str)
-    
+
     #---Public
     def apply_filter(self, filter_str):
         """Applies a filter ``filter_str`` to :attr:`groups`
-        
+
         When you apply the filter, only  dupes with the filename matching ``filter_str`` will be in
-        in the results. To cancel the filter, just call apply_filter with ``filter_str`` to None, 
+        in the results. To cancel the filter, just call apply_filter with ``filter_str`` to None,
         and the results will go back to normal.
-            
-        If call apply_filter on a filtered results, the filter will be applied 
+
+        If call apply_filter on a filtered results, the filter will be applied
         *on the filtered results*.
-            
+
         :param str filter_str: a string containing a regexp to filter dupes with.
         """
         if not filter_str:
@@ -193,7 +193,7 @@ class Results(Markable):
         if sd:
             self.sort_groups(sd[0], sd[1])
         self.__dupes = None
-    
+
     def get_group_of_duplicate(self, dupe):
         """Returns :class:`~core.engine.Group` in which ``dupe`` belongs.
         """
@@ -201,12 +201,12 @@ class Results(Markable):
             return self.__group_of_duplicate[dupe]
         except (TypeError, KeyError):
             return None
-    
+
     is_markable = _is_markable
-    
+
     def load_from_xml(self, infile, get_file, j=nulljob):
         """Load results from ``infile``.
-        
+
         :param infile: a file or path pointing to an XML file created with :meth:`save_to_xml`.
         :param get_file: a function f(path) returning a :class:`~core.fs.File` wrapping the path.
         :param j: A :ref:`job progress instance <jobs>`.
@@ -217,7 +217,7 @@ class Results(Markable):
             for other_file in other_files:
                 group.add_match(engine.get_match(ref_file, other_file))
             do_match(other_files[0], other_files[1:], group)
-        
+
         self.apply_filter(None)
         try:
             root = ET.parse(infile).getroot()
@@ -255,13 +255,13 @@ class Results(Markable):
                 do_match(dupes[0], dupes[1:], group)
             group.prioritize(lambda x: dupes.index(x))
             if len(group):
-                groups.append(group)    
+                groups.append(group)
             j.add_progress()
         self.groups = groups
         for dupe_file in marked:
             self.mark(dupe_file)
         self.is_modified = False
-    
+
     def make_ref(self, dupe):
         """Make ``dupe`` take the :attr:`~core.engine.Group.ref` position of its group.
         """
@@ -279,13 +279,13 @@ class Results(Markable):
         self.__dupes = None
         self.is_modified = True
         return True
-    
+
     def perform_on_marked(self, func, remove_from_results):
         """Performs ``func`` on all marked dupes.
-        
+
         If an ``EnvironmentError`` is raised during the call, the problematic dupe is added to
         self.problems.
-        
+
         :param bool remove_from_results: If true, dupes which had ``func`` applied and didn't cause
                                          any problem.
         """
@@ -303,10 +303,10 @@ class Results(Markable):
             self.mark_none()
             for dupe, _ in self.problems:
                 self.mark(dupe)
-    
+
     def remove_duplicates(self, dupes):
         """Remove ``dupes`` from their respective :class:`~core.engine.Group`.
-        
+
         Also, remove the group from :attr:`groups` if it ends up empty.
         """
         affected_groups = set()
@@ -331,10 +331,10 @@ class Results(Markable):
             group.discard_matches()
         self.__dupes = None
         self.is_modified = bool(self.__groups)
-    
+
     def save_to_xml(self, outfile):
         """Save results to ``outfile`` in XML.
-        
+
         :param outfile: file object or path.
         """
         self.apply_filter(None)
@@ -362,11 +362,11 @@ class Results(Markable):
                 match_elem.set('second', str(dupe2index[match.second]))
                 match_elem.set('percentage', str(int(match.percentage)))
         tree = ET.ElementTree(root)
-        
+
         def do_write(outfile):
             with FileOrPath(outfile, 'wb') as fp:
                 tree.write(fp, encoding='utf-8')
-        
+
         try:
             do_write(outfile)
         except IOError as e:
@@ -381,10 +381,10 @@ class Results(Markable):
             else:
                 raise
         self.is_modified = False
-    
+
     def sort_dupes(self, key, asc=True, delta=False):
         """Sort :attr:`dupes` according to ``key``.
-        
+
         :param str key: key attribute name to sort with.
         :param bool asc: If false, sorting is reversed.
         :param bool delta: If true, sorting occurs using :ref:`delta values <deltavalues>`.
@@ -394,19 +394,19 @@ class Results(Markable):
         keyfunc = lambda d: self.app._get_dupe_sort_key(d, lambda: self.get_group_of_duplicate(d), key, delta)
         self.__dupes.sort(key=keyfunc, reverse=not asc)
         self.__dupes_sort_descriptor = (key,asc,delta)
-    
+
     def sort_groups(self, key, asc=True):
         """Sort :attr:`groups` according to ``key``.
-        
+
         The :attr:`~core.engine.Group.ref` of each group is used to extract values for sorting.
-        
+
         :param str key: key attribute name to sort with.
         :param bool asc: If false, sorting is reversed.
         """
         keyfunc = lambda g: self.app._get_group_sort_key(g, key)
         self.groups.sort(key=keyfunc, reverse=not asc)
         self.__groups_sort_descriptor = (key,asc)
-    
+
     #---Properties
     dupes     = property(__get_dupe_list)
     groups    = property(__get_groups, __set_groups)

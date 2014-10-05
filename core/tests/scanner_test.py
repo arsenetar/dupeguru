@@ -1,12 +1,12 @@
 # Created By: Virgil Dupras
 # Created On: 2006/03/03
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
-from jobprogress import job
+from hscommon.jobprogress import job
 from hscommon.path import Path
 from hscommon.testutil import eq_
 
@@ -25,10 +25,10 @@ class NamedObject:
         self.size = size
         self.path = path
         self.words = getwords(name)
-    
+
     def __repr__(self):
         return '<NamedObject %r %r>' % (self.name, self.path)
-    
+
 
 no = NamedObject
 
@@ -384,7 +384,7 @@ def test_file_evaluates_to_false(fake_fileexists):
     class FalseNamedObject(NamedObject):
         def __bool__(self):
             return False
-    
+
 
     s = Scanner()
     f1 = FalseNamedObject('foobar', path='p1')
@@ -445,7 +445,7 @@ def test_tie_breaker_same_name_plus_digit(fake_fileexists):
     assert group.ref is o5
 
 def test_partial_group_match(fake_fileexists):
-    # Count the number of discarded matches (when a file doesn't match all other dupes of the 
+    # Count the number of discarded matches (when a file doesn't match all other dupes of the
     # group) in Scanner.discarded_file_count
     s = Scanner()
     o1, o2, o3 = no('a b'), no('a'), no('b')
@@ -476,7 +476,7 @@ def test_dont_group_files_that_dont_exist(tmpdir):
         file2.path.remove()
         return [Match(file1, file2, 100)]
     s._getmatches = getmatches
-    
+
     assert not s.get_dupe_groups([file1, file2])
 
 def test_folder_scan_exclude_subfolder_matches(fake_fileexists):

@@ -1,16 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2006/03/03
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
 import re
 import os.path as op
 
-from jobprogress import job
+from hscommon.jobprogress import job
 from hscommon.util import dedupe, rem_file_ext, get_file_ext
 from hscommon.trans import tr
 
@@ -29,7 +29,7 @@ class ScanType:
     Folders = 4
     Contents = 5
     ContentsAudio = 6
-    
+
     #PE
     FuzzyBlock = 10
     ExifTimestamp = 11
@@ -72,7 +72,7 @@ class Scanner:
     def __init__(self):
         self.ignore_list = IgnoreList()
         self.discarded_file_count = 0
-    
+
     def _getmatches(self, files, j):
         if self.size_threshold:
             j = j.start_subjob([2, 8])
@@ -100,11 +100,11 @@ class Scanner:
                 logging.debug("Reading metadata of {}".format(str(f.path)))
                 f.words = func(f)
             return engine.getmatches(files, j=j, **kw)
-    
+
     @staticmethod
     def _key_func(dupe):
         return -dupe.size
-    
+
     @staticmethod
     def _tie_breaker(ref, dupe):
         refname = rem_file_ext(ref.name).lower()
@@ -118,7 +118,7 @@ class Scanner:
         if is_same_with_digit(refname, dupename):
             return True
         return len(dupe.path) > len(ref.path)
-    
+
     def get_dupe_groups(self, files, j=job.nulljob):
         j = j.start_subjob([8, 2])
         for f in (f for f in files if not hasattr(f, 'is_ref')):
@@ -152,7 +152,7 @@ class Scanner:
         if self.ignore_list:
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
-            matches = [m for m in iter_matches 
+            matches = [m for m in iter_matches
                 if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
@@ -177,7 +177,7 @@ class Scanner:
         for g in groups:
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
-    
+
     match_similar_words  = False
     min_match_percentage = 80
     mix_file_kind        = True

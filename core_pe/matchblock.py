@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2007/02/25
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
@@ -12,7 +12,7 @@ from itertools import combinations
 
 from hscommon.util import extract
 from hscommon.trans import tr
-from jobprogress import job
+from hscommon.jobprogress import job
 
 from core.engine import Match
 from .block import avgdiff, DifferentBlockCountError, NoBlocksError
@@ -132,14 +132,14 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
             results.append((ref_id, other_id, percentage))
     cache.close()
     return results
-    
+
 def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
             return (None, p.is_ref)
         else:
             return (p.dimensions, p.is_ref)
-    
+
     def collect_results(collect_all=False):
         # collect results and wait until the queue is small enough to accomodate a new results.
         nonlocal async_results, matches, comparison_count
@@ -152,7 +152,7 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
                 comparison_count += 1
         progress_msg = tr("Performed %d/%d chunk matches") % (comparison_count, len(comparisons_to_do))
         j.set_progress(comparison_count, progress_msg)
-    
+
     j = j.start_subjob([3, 7])
     pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
@@ -188,9 +188,14 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
         collect_results()
     collect_results(collect_all=True)
     pool.close()
-    
+
     result = []
-    for ref_id, other_id, percentage in j.iter_with_progress(matches, tr("Verified %d/%d matches"), every=10):
+    myiter = j.iter_with_progress(
+        matches,
+        tr("Verified %d/%d matches"),
+        every=10
+    )
+    for ref_id, other_id, percentage in myiter:
         ref = id2picture[ref_id]
         other = id2picture[other_id]
         if percentage == 100 and ref.md5 != other.md5:
@@ -202,3 +207,4 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
     return result
 
 multiprocessing.freeze_support()
+

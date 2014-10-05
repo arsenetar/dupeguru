@@ -1,16 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2011/09/07
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hscommon.testutil import TestApp as TestAppBase, eq_, with_app
 from hscommon.path import Path
 from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
-from jobprogress.job import nulljob, JobCancelled
+from hscommon.jobprogress.job import nulljob, JobCancelled
 
 from .. import engine
 from .. import prioritize
@@ -23,28 +23,28 @@ from ..gui.prioritize_dialog import PrioritizeDialog
 
 class DupeGuruView:
     JOB = nulljob
-    
+
     def __init__(self):
         self.messages = []
-    
+
     def start_job(self, jobid, func, args=()):
         try:
             func(self.JOB, *args)
         except JobCancelled:
             return
-    
+
     def get_default(self, key_name):
         return None
-    
+
     def set_default(self, key_name, value):
         pass
-    
+
     def show_message(self, msg):
         self.messages.append(msg)
-    
+
     def ask_yes_no(self, prompt):
         return True # always answer yes
-    
+
 
 class ResultTable(ResultTableBase):
     COLUMNS = [
@@ -55,21 +55,21 @@ class ResultTable(ResultTableBase):
         Column('extension', 'Kind'),
     ]
     DELTA_COLUMNS = {'size', }
-    
+
 class DupeGuru(DupeGuruBase):
     NAME = 'dupeGuru'
     METADATA_TO_READ = ['size']
-    
+
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView())
         self.appdata = '/tmp'
-    
+
     def _prioritization_categories(self):
         return prioritize.all_categories()
-    
+
     def _create_result_table(self):
         return ResultTable(self)
-    
+
 
 class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
@@ -83,10 +83,10 @@ class NamedObject:
         if with_words:
             self.words = getwords(name)
         self.is_ref = False
-    
+
     def __bool__(self):
         return False #Make sure that operations are made correctly when the bool value of files is false.
-    
+
     def get_display_info(self, group, delta):
         size = self.size
         m = group.get_match_of(self)
@@ -99,19 +99,19 @@ class NamedObject:
             'size': format_size(size, 0, 1, False),
             'extension': self.extension if hasattr(self, 'extension') else '---',
         }
-    
+
     @property
     def path(self):
         return self._folder[self.name]
-    
+
     @property
     def folder_path(self):
         return self.path.parent()
-    
+
     @property
     def extension(self):
         return get_file_ext(self.name)
-    
+
 # Returns a group set that looks like that:
 # "foo bar" (1)
 #   "bar bleh" (1024)
@@ -135,7 +135,7 @@ class TestApp(TestAppBase):
             if hasattr(gui, 'columns'): # tables
                 gui.columns.view = self.make_logger()
             return gui
-        
+
         TestAppBase.__init__(self)
         make_gui = self.make_gui
         self.app = DupeGuru()
@@ -153,14 +153,14 @@ class TestApp(TestAppBase):
         link_gui(self.app.progress_window)
         link_gui(self.app.progress_window.jobdesc_textfield)
         link_gui(self.app.progress_window.progressdesc_textfield)
-    
+
     #--- Helpers
     def select_pri_criterion(self, name):
         # Select a main prioritize criterion by name instead of by index. Makes tests more
         # maintainable.
         index = self.pdialog.category_list.index(name)
         self.pdialog.category_list.select(index)
-    
+
     def add_pri_criterion(self, name, index):
         self.select_pri_criterion(name)
         self.pdialog.criteria_list.select([index])

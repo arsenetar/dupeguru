@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2006/11/11
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os
@@ -15,7 +15,7 @@ import time
 import shutil
 
 from send2trash import send2trash
-from jobprogress import job
+from hscommon.jobprogress import job
 from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
@@ -78,7 +78,7 @@ def format_words(w):
             return '(%s)' % ', '.join(do_format(item) for item in w)
         else:
             return w.replace('\n', ' ')
-    
+
     return ', '.join(do_format(item) for item in w)
 
 def format_perc(p):
@@ -110,33 +110,33 @@ def fix_surrogate_encoding(s, encoding='utf-8'):
 
 class DupeGuru(Broadcaster):
     """Holds everything together.
-    
+
     Instantiated once per running application, it holds a reference to every high-level object
     whose reference needs to be held: :class:`~core.results.Results`, :class:`Scanner`,
     :class:`~core.directories.Directories`, :mod:`core.gui` instances, etc..
-    
+
     It also hosts high level methods and acts as a coordinator for all those elements. This is why
     some of its methods seem a bit shallow, like for example :meth:`mark_all` and
     :meth:`remove_duplicates`. These methos are just proxies for a method in :attr:`results`, but
     they are also followed by a notification call which is very important if we want GUI elements
     to be correctly notified of a change in the data they're presenting.
-    
+
     .. attribute:: directories
-    
+
         Instance of :class:`~core.directories.Directories`. It holds the current folder selection.
-    
+
     .. attribute:: results
-    
+
         Instance of :class:`core.results.Results`. Holds the results of the latest scan.
-    
+
     .. attribute:: selected_dupes
-    
+
         List of currently selected dupes from our :attr:`results`. Whenever the user changes its
         selection at the UI level, :attr:`result_table` takes care of updating this attribute, so
         you can trust that it's always up-to-date.
-    
+
     .. attribute:: result_table
-    
+
         Instance of :mod:`meta-gui <core.gui>` table listing the results from :attr:`results`
     """
     #--- View interface
@@ -154,7 +154,7 @@ class DupeGuru(Broadcaster):
 
     PROMPT_NAME = "dupeGuru"
     SCANNER_CLASS = scanner.Scanner
-    
+
     def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
@@ -185,14 +185,14 @@ class DupeGuru(Broadcaster):
         children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
-    
+
     #--- Virtual
     def _prioritization_categories(self):
         raise NotImplementedError()
-    
+
     def _create_result_table(self):
         raise NotImplementedError()
-    
+
     #--- Private
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if key == 'marked':
@@ -212,7 +212,7 @@ class DupeGuru(Broadcaster):
                 same = cmp_value(dupe, key) == refval
                 result = (same, result)
         return result
-    
+
     def _get_group_sort_key(self, group, key):
         if key == 'percentage':
             return group.percentage
@@ -221,15 +221,15 @@ class DupeGuru(Broadcaster):
         if key == 'marked':
             return len([dupe for dupe in group.dupes if self.results.is_marked(dupe)])
         return cmp_value(group.ref, key)
-    
+
     def _do_delete(self, j, link_deleted, use_hardlinks, direct_deletion):
         def op(dupe):
             j.add_progress()
             return self._do_delete_dupe(dupe, link_deleted, use_hardlinks, direct_deletion)
-        
+
         j.start_job(self.results.mark_count)
         self.results.perform_on_marked(op, True)
-    
+
     def _do_delete_dupe(self, dupe, link_deleted, use_hardlinks, direct_deletion):
         if not dupe.path.exists():
             return
@@ -248,11 +248,11 @@ class DupeGuru(Broadcaster):
             linkfunc = os.link if use_hardlinks else os.symlink
             linkfunc(str(ref.path), str_path)
         self.clean_empty_dirs(dupe.path.parent())
-    
+
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
         return fs.get_file(path, self.directories.fileclasses + [fs.Folder])
-    
+
     def _get_file(self, str_path):
         path = Path(str_path)
         f = self._create_file(path)
@@ -263,7 +263,7 @@ class DupeGuru(Broadcaster):
             return f
         except EnvironmentError:
             return None
-    
+
     def _get_export_data(self):
         columns = [col for col in self.result_table.columns.ordered_columns
             if col.visible and col.name != 'marked']
@@ -276,20 +276,20 @@ class DupeGuru(Broadcaster):
                 row.insert(0, group_id)
                 rows.append(row)
         return colnames, rows
-    
+
     def _results_changed(self):
         self.selected_dupes = [d for d in self.selected_dupes
             if self.results.get_group_of_duplicate(d) is not None]
         self.notify('results_changed')
-    
+
     def _start_job(self, jobid, func, args=()):
         title = JOBID2TITLE[jobid]
         try:
-            self.progress_window.run(jobid, title, func, args=args) 
+            self.progress_window.run(jobid, title, func, args=args)
         except job.JobInProgressError:
             msg = tr("A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")
             self.view.show_message(msg)
-    
+
     def _job_completed(self, jobid):
         if jobid == JobType.Scan:
             self._results_changed()
@@ -312,7 +312,7 @@ class DupeGuru(Broadcaster):
                     JobType.Delete: tr("All marked files were successfully sent to Trash."),
                 }[jobid]
                 self.view.show_message(msg)
-    
+
     @staticmethod
     def _remove_hardlink_dupes(files):
         seen_inodes = set()
@@ -327,19 +327,19 @@ class DupeGuru(Broadcaster):
                 seen_inodes.add(inode)
                 result.append(file)
         return result
-    
+
     def _select_dupes(self, dupes):
         if dupes == self.selected_dupes:
             return
         self.selected_dupes = dupes
         self.notify('dupes_selected')
-    
+
     #--- Public
     def add_directory(self, d):
         """Adds folder ``d`` to :attr:`directories`.
-        
+
         Shows an error message dialog if something bad happens.
-        
+
         :param str d: path of folder to add
         """
         try:
@@ -349,7 +349,7 @@ class DupeGuru(Broadcaster):
             self.view.show_message(tr("'{}' already is in the list.").format(d))
         except directories.InvalidPathError:
             self.view.show_message(tr("'{}' does not exist.").format(d))
-    
+
     def add_selected_to_ignore_list(self):
         """Adds :attr:`selected_dupes` to :attr:`scanner`'s ignore list.
         """
@@ -367,10 +367,10 @@ class DupeGuru(Broadcaster):
                     self.scanner.ignore_list.Ignore(str(other.path), str(dupe.path))
         self.remove_duplicates(dupes)
         self.ignore_list_dialog.refresh()
-    
+
     def apply_filter(self, filter):
         """Apply a filter ``filter`` to the results so that it shows only dupe groups that match it.
-        
+
         :param str filter: filter to apply
         """
         self.results.apply_filter(None)
@@ -379,12 +379,12 @@ class DupeGuru(Broadcaster):
             filter = escape(filter, '*', '.')
         self.results.apply_filter(filter)
         self._results_changed()
-    
+
     def clean_empty_dirs(self, path):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
                 path = path.parent()
-    
+
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
         location_path = first(p for p in self.directories if dupe.path in p)
@@ -406,20 +406,20 @@ class DupeGuru(Broadcaster):
         else:
             smart_move(source_path, dest_path)
             self.clean_empty_dirs(source_path.parent())
-    
+
     def copy_or_move_marked(self, copy):
         """Start an async move (or copy) job on marked duplicates.
-        
+
         :param bool copy: If True, duplicates will be copied instead of moved
         """
         def do(j):
             def op(dupe):
                 j.add_progress()
                 self.copy_or_move(dupe, copy, destination, desttype)
-            
+
             j.start_job(self.results.mark_count)
             self.results.perform_on_marked(op, not copy)
-        
+
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -430,7 +430,7 @@ class DupeGuru(Broadcaster):
             desttype = self.options['copymove_dest_type']
             jobid = JobType.Copy if copy else JobType.Move
             self._start_job(jobid, do)
-    
+
     def delete_marked(self):
         """Start an async job to send marked duplicates to the trash.
         """
@@ -443,10 +443,10 @@ class DupeGuru(Broadcaster):
             self.deletion_options.direct]
         logging.debug("Starting deletion job with args %r", args)
         self._start_job(JobType.Delete, self._do_delete, args=args)
-    
+
     def export_to_xhtml(self):
         """Export current results to XHTML.
-        
+
         The configuration of the :attr:`result_table` (columns order and visibility) is used to
         determine how the data is presented in the export. In other words, the exported table in
         the resulting XHTML will look just like the results table.
@@ -454,10 +454,10 @@ class DupeGuru(Broadcaster):
         colnames, rows = self._get_export_data()
         export_path = export.export_to_xhtml(colnames, rows)
         desktop.open_path(export_path)
-    
+
     def export_to_csv(self):
         """Export current results to CSV.
-        
+
         The columns and their order in the resulting CSV file is determined in the same way as in
         :meth:`export_to_xhtml`.
         """
@@ -465,7 +465,7 @@ class DupeGuru(Broadcaster):
         if dest_file:
             colnames, rows = self._get_export_data()
             export.export_to_csv(dest_file, colnames, rows)
-    
+
     def get_display_info(self, dupe, group, delta=False):
         def empty_data():
             return {c.name: '---' for c in self.result_table.COLUMNS[1:]}
@@ -476,10 +476,10 @@ class DupeGuru(Broadcaster):
         except Exception as e:
             logging.warning("Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e))
             return empty_data()
-    
+
     def invoke_custom_command(self):
         """Calls command in ``CustomCommand`` pref with ``%d`` and ``%r`` placeholders replaced.
-        
+
         Using the current selection, ``%d`` is replaced with the currently selected dupe and ``%r``
         is replaced with that dupe's ref file. If there's no selection, the command is not invoked.
         If the dupe is a ref, ``%d`` and ``%r`` will be the same.
@@ -506,10 +506,10 @@ class DupeGuru(Broadcaster):
             subprocess.Popen(exename + args, shell=True, cwd=path)
         else:
             subprocess.Popen(cmd, shell=True)
-    
+
     def load(self):
         """Load directory selection and ignore list from files in appdata.
-        
+
         This method is called during startup so that directory selection and ignore list, which
         is persistent data, is the same as when the last session was closed (when :meth:`save` was
         called).
@@ -519,19 +519,19 @@ class DupeGuru(Broadcaster):
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.load_from_xml(p)
         self.ignore_list_dialog.refresh()
-    
+
     def load_from(self, filename):
         """Start an async job to load results from ``filename``.
-        
+
         :param str filename: path of the XML file (created with :meth:`save_as`) to load
         """
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
         self._start_job(JobType.Load, do)
-    
+
     def make_selected_reference(self):
         """Promote :attr:`selected_dupes` to reference position within their respective groups.
-        
+
         Each selected dupe will become the :attr:`~core.engine.Group.ref` of its group. If there's
         more than one dupe selected for the same group, only the first (in the order currently shown
         in :attr:`result_table`) dupe will be promoted.
@@ -560,28 +560,28 @@ class DupeGuru(Broadcaster):
             # do is to keep our selection index-wise (different dupe selection, but same index
             # selection).
             self.notify('results_changed_but_keep_selection')
-    
+
     def mark_all(self):
         """Set all dupes in the results as marked.
         """
         self.results.mark_all()
         self.notify('marking_changed')
-    
+
     def mark_none(self):
         """Set all dupes in the results as unmarked.
         """
         self.results.mark_none()
         self.notify('marking_changed')
-    
+
     def mark_invert(self):
         """Invert the marked state of all dupes in the results.
         """
         self.results.mark_invert()
         self.notify('marking_changed')
-    
+
     def mark_dupe(self, dupe, marked):
         """Change marked status of ``dupe``.
-        
+
         :param dupe: dupe to mark/unmark
         :type dupe: :class:`~core.fs.File`
         :param bool marked: True = mark, False = unmark
@@ -591,7 +591,7 @@ class DupeGuru(Broadcaster):
         else:
             self.results.unmark(dupe)
         self.notify('marking_changed')
-    
+
     def open_selected(self):
         """Open :attr:`selected_dupes` with their associated application.
         """
@@ -600,16 +600,16 @@ class DupeGuru(Broadcaster):
                 return
         for dupe in self.selected_dupes:
             desktop.open_path(dupe.path)
-    
+
     def purge_ignore_list(self):
         """Remove files that don't exist from :attr:`ignore_list`.
         """
         self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
-    
+
     def remove_directories(self, indexes):
         """Remove root directories at ``indexes`` from :attr:`directories`.
-        
+
         :param indexes: Indexes of the directories to remove.
         :type indexes: list of int
         """
@@ -620,30 +620,30 @@ class DupeGuru(Broadcaster):
             self.notify('directories_changed')
         except IndexError:
             pass
-    
+
     def remove_duplicates(self, duplicates):
         """Remove ``duplicates`` from :attr:`results`.
-        
+
         Calls :meth:`~core.results.Results.remove_duplicates` and send appropriate notifications.
-        
+
         :param duplicates: duplicates to remove.
         :type duplicates: list of :class:`~core.fs.File`
         """
         self.results.remove_duplicates(self.without_ref(duplicates))
         self.notify('results_changed_but_keep_selection')
-    
+
     def remove_marked(self):
         """Removed marked duplicates from the results (without touching the files themselves).
         """
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
-        msg = tr("You are about to remove %d files from results. Continue?") 
+        msg = tr("You are about to remove %d files from results. Continue?")
         if not self.view.ask_yes_no(msg % self.results.mark_count):
             return
         self.results.perform_on_marked(lambda x:None, True)
         self._results_changed()
-    
+
     def remove_selected(self):
         """Removed :attr:`selected_dupes` from the results (without touching the files themselves).
         """
@@ -651,16 +651,16 @@ class DupeGuru(Broadcaster):
         if not dupes:
             self.view.show_message(MSG_NO_SELECTED_DUPES)
             return
-        msg = tr("You are about to remove %d files from results. Continue?") 
+        msg = tr("You are about to remove %d files from results. Continue?")
         if not self.view.ask_yes_no(msg % len(dupes)):
             return
         self.remove_duplicates(dupes)
-    
+
     def rename_selected(self, newname):
         """Renames the selected dupes's file to ``newname``.
-        
+
         If there's more than one selected dupes, the first one is used.
-        
+
         :param str newname: The filename to rename the dupe's file to.
         """
         try:
@@ -670,13 +670,13 @@ class DupeGuru(Broadcaster):
         except (IndexError, fs.FSError) as e:
             logging.warning("dupeGuru Warning: %s" % str(e))
         return False
-    
+
     def reprioritize_groups(self, sort_key):
         """Sort dupes in each group (in :attr:`results`) according to ``sort_key``.
-        
+
         Called by the re-prioritize dialog. Calls :meth:`~core.engine.Group.prioritize` and, once
         the sorting is done, show a message that confirms the action.
-        
+
         :param sort_key: The key being sent to :meth:`~core.engine.Group.prioritize`
         :type sort_key: f(dupe)
         """
@@ -687,11 +687,11 @@ class DupeGuru(Broadcaster):
         self._results_changed()
         msg = tr("{} duplicate groups were changed by the re-prioritization.").format(count)
         self.view.show_message(msg)
-    
+
     def reveal_selected(self):
         if self.selected_dupes:
             desktop.reveal_path(self.selected_dupes[0].path)
-    
+
     def save(self):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
@@ -699,17 +699,17 @@ class DupeGuru(Broadcaster):
         p = op.join(self.appdata, 'ignore_list.xml')
         self.scanner.ignore_list.save_to_xml(p)
         self.notify('save_session')
-    
+
     def save_as(self, filename):
         """Save results in ``filename``.
-        
+
         :param str filename: path of the file to save results (as XML) to.
         """
         self.results.save_to_xml(filename)
-    
+
     def start_scanning(self):
         """Starts an async job to scan for duplicates.
-        
+
         Scans folders selected in :attr:`directories` and put the results in :attr:`results`
         """
         def do(j):
@@ -722,14 +722,14 @@ class DupeGuru(Broadcaster):
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))
             self.results.groups = self.scanner.get_dupe_groups(files, j)
-        
+
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return
         self.results.groups = []
         self._results_changed()
         self._start_job(JobType.Scan, do)
-    
+
     def toggle_selected_mark_state(self):
         selected = self.without_ref(self.selected_dupes)
         if not selected:
@@ -741,12 +741,12 @@ class DupeGuru(Broadcaster):
         for dupe in selected:
             markfunc(dupe)
         self.notify('marking_changed')
-    
+
     def without_ref(self, dupes):
         """Returns ``dupes`` with all reference elements removed.
         """
         return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
-    
+
     def get_default(self, key, fallback_value=None):
         result = nonone(self.view.get_default(key), fallback_value)
         if fallback_value is not None and not isinstance(result, type(fallback_value)):
@@ -756,10 +756,10 @@ class DupeGuru(Broadcaster):
             except Exception:
                 result = fallback_value
         return result
-    
+
     def set_default(self, key, value):
         self.view.set_default(key, value)
-    
+
     #--- Properties
     @property
     def stat_line(self):
@@ -767,4 +767,4 @@ class DupeGuru(Broadcaster):
         if self.scanner.discarded_file_count:
             result = tr("%s (%d discarded)") % (result, self.scanner.discarded_file_count)
         return result
-    
+

@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2009-12-30
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
@@ -110,8 +110,9 @@ def build_cocoa(edition, dev):
         'me': ['core_me'] + appscript_pkgs + ['hsaudiotag'],
         'pe': ['core_pe'] + appscript_pkgs,
     }[edition]
-    tocopy = ['core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'jobprogress', 'objp',
-        'send2trash'] + specific_packages
+    tocopy = [
+        'core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'objp', 'send2trash'
+    ] + specific_packages
     copy_packages(tocopy, pydep_folder, create_links=dev)
     sys.path.insert(0, 'build')
     extra_deps = None

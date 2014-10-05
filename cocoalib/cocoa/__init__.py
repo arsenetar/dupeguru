@@ -2,8 +2,8 @@
 # Created On: 2007-10-06
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
@@ -26,7 +26,7 @@ def autoreleasepool(func):
 
 def as_fetch(as_list, as_type, step_size=1000):
     """When fetching items from a very big list through applescript, the connection with the app
-    will timeout. This function is to circumvent that. 'as_type' is the type of the items in the 
+    will timeout. This function is to circumvent that. 'as_type' is the type of the items in the
     list (found in appscript.k). If we don't pass it to the 'each' arg of 'count()', it doesn't work.
     applescript is rather stupid..."""
     result = []
@@ -66,7 +66,7 @@ def extract_tb_noline(tb):
 
 def safe_format_exception(type, value, tb):
     """Format exception from type, value and tb and fallback if there's a problem.
-    
+
     In some cases in threaded exceptions under Cocoa, I get tracebacks targeting pyc files instead
     of py files, which results in traceback.format_exception() trying to print lines from pyc files
     and then crashing when trying to interpret that binary data as utf-8. We want a fallback in
@@ -113,5 +113,6 @@ def patch_threaded_job_performer():
     # _async_run, under cocoa, has to be run within an autorelease pool to prevent leaks.
     # You only need this patch is you use one of CocoaProxy's function (which allocate objc
     # structures) inside a threaded job.
-    from jobprogress.performer import ThreadedJobPerformer
+    from hscommon.jobprogress.performer import ThreadedJobPerformer
     ThreadedJobPerformer._async_run = autoreleasepool(ThreadedJobPerformer._async_run)
+
