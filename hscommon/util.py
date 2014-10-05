@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2011-01-11
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
@@ -42,7 +42,7 @@ def minmax(value, min_value, max_value):
 
 def dedupe(iterable):
     """Returns a list of elements in ``iterable`` with all dupes removed.
-    
+
     The order of the elements is preserved.
     """
     result = []
@@ -56,7 +56,7 @@ def dedupe(iterable):
 
 def flatten(iterables, start_with=None):
     """Takes a list of lists ``iterables`` and returns a list containing elements of every list.
-    
+
     If ``start_with`` is not ``None``, the result will start with ``start_with`` items, exactly as
     if ``start_with`` would be the first item of lists.
     """
@@ -104,7 +104,7 @@ def allsame(iterable):
 
 def trailiter(iterable, skipfirst=False):
     """Yields (prev_element, element), starting with (None, first_element).
-    
+
     If skipfirst is True, there will be no (None, item1) element and we'll start
     directly with (item1, item2).
     """
@@ -116,6 +116,24 @@ def trailiter(iterable, skipfirst=False):
     for item in it:
         yield prev, item
         prev = item
+
+def iterconsume(seq):
+    """Iterate over ``seq`` and discard yielded objects.
+
+    Right after the ``yield``, we replace the element we've just yielded by ``None`` in the
+    sequence.
+
+    This is useful in tight memory situation where you are looping over a sequence of objects that
+    are going to be discarded afterwards. If you're creating other objects during that iteration
+    you might want to use this to avoid ``MemoryError``.
+
+    Note that this only works for sequence (index accessible), not all iterables.
+    """
+    # We don't use ``del``, because it would be disastrous performance-wise as the array would have
+    # to be constantly re-allocated.
+    for index, elem in enumerate(seq):
+        seq[index] = None
+        yield elem
 
 #--- String related
 
@@ -144,7 +162,7 @@ def rem_file_ext(filename):
 
 def pluralize(number, word, decimals=0, plural_word=None):
     """Returns a pluralized string with ``number`` in front of ``word``.
-    
+
     Adds a 's' to s if ``number`` > 1.
     ``number``: The number to go in front of s
     ``word``: The word to go after number
@@ -162,7 +180,7 @@ def pluralize(number, word, decimals=0, plural_word=None):
 
 def format_time(seconds, with_hours=True):
     """Transforms seconds in a hh:mm:ss string.
-    
+
     If ``with_hours`` if false, the format is mm:ss.
     """
     minus = seconds < 0
@@ -202,14 +220,14 @@ SIZE_DESC = ('B','KB','MB','GB','TB','PB','EB','ZB','YB')
 SIZE_VALS = tuple(1024 ** i for i in range(1,9))
 def format_size(size, decimal=0, forcepower=-1, showdesc=True):
     """Transform a byte count in a formatted string (KB, MB etc..).
-    
+
     ``size`` is the number of bytes to format.
     ``decimal`` is the number digits after the dot.
     ``forcepower`` is the desired suffix. 0 is B, 1 is KB, 2 is MB etc.. if kept at -1, the suffix
     will be automatically chosen (so the resulting number is always below 1024).
     if ``showdesc`` is ``True``, the suffix will be shown after the number.
     Usage example::
-    
+
         >>> format_size(1234, decimal=2, showdesc=True)
         '1.21 KB'
     """
@@ -283,7 +301,7 @@ def iterdaterange(start, end):
 @pathify
 def modified_after(first_path: Path, second_path: Path):
     """Returns ``True`` if first_path's mtime is higher than second_path's mtime.
-    
+
     If one of the files doesn't exist or is ``None``, it is considered "never modified".
     """
     try:
@@ -326,11 +344,11 @@ def delete_if_empty(path: Path, files_to_delete=[]):
 
 def open_if_filename(infile, mode='rb'):
     """If ``infile`` is a string, it opens and returns it. If it's already a file object, it simply returns it.
-    
+
     This function returns ``(file, should_close_flag)``. The should_close_flag is True is a file has
     effectively been opened (if we already pass a file object, we assume that the responsibility for
     closing the file has already been taken). Example usage::
-    
+
         fp, shouldclose = open_if_filename(infile)
         dostuff()
         if shouldclose:
@@ -370,9 +388,9 @@ def delete_files_with_pattern(folder_path, pattern, recursive=True):
 
 class FileOrPath:
     """Does the same as :func:`open_if_filename`, but it can be used with a ``with`` statement.
-    
+
     Example::
-    
+
         with FileOrPath(infile):
             dostuff()
     """
@@ -381,12 +399,12 @@ class FileOrPath:
         self.mode = mode
         self.mustclose = False
         self.fp = None
-    
+
     def __enter__(self):
         self.fp, self.mustclose = open_if_filename(self.file_or_path, self.mode)
         return self.fp
-    
+
     def __exit__(self, exc_type, exc_value, traceback):
         if self.fp and self.mustclose:
             self.fp.close()
-    
+

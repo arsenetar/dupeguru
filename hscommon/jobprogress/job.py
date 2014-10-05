@@ -2,14 +2,14 @@
 # Created On: 2004/12/20
 # Copyright 2011 Hardcoded Software (http://www.hardcoded.net)
 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 class JobCancelled(Exception):
     "The user has cancelled the job"
 
-class JobInProgressError(Exception): 
+class JobInProgressError(Exception):
     "A job is already being performed, you can't perform more than one at the same time."
 
 class JobCountError(Exception):
@@ -17,7 +17,7 @@ class JobCountError(Exception):
 
 class Job:
     """Manages a job's progression and return it's progression through a callback.
-    
+
     Note that this class is not foolproof. For example, you could call
     start_subjob, and then call add_progress from the parent job, and nothing
     would stop you from doing it. However, it would mess your progression
@@ -48,17 +48,17 @@ class Job:
         self._passed_jobs = 0
         self._progress = 0
         self._currmax = 1
-    
+
     #---Private
     def _subjob_callback(self, progress, desc=''):
         """This is the callback passed to children jobs.
         """
         self.set_progress(progress, desc)
         return True #if JobCancelled has to be raised, it will be at the highest level
-    
+
     def _do_update(self, desc):
         """Calls the callback function with a % progress as a parameter.
-        
+
         The parameter is a int in the 0-100 range.
         """
         if self._current_job:
@@ -72,31 +72,37 @@ class Job:
         result = self._callback(progress, desc) if desc else self._callback(progress)
         if not result:
             raise JobCancelled()
-    
+
     #---Public
     def add_progress(self, progress=1, desc=''):
         self.set_progress(self._progress + progress, desc)
-    
+
     def check_if_cancelled(self):
         self._do_update('')
-    
-    def iter_with_progress(self, sequence, desc_format=None, every=1):
-        ''' Iterate through sequence while automatically adding progress.
-        '''
+
+    def iter_with_progress(self, iterable, desc_format=None, every=1, count=None):
+        """Iterate through ``iterable`` while automatically adding progress.
+
+        WARNING: We need our iterable's length. If ``iterable`` is not a sequence (that is,
+        something we can call ``len()`` on), you *have* to specify a count through the ``count``
+        argument. If ``count`` is ``None``, ``len(iterable)`` is used.
+        """
+        if count is None:
+            count = len(iterable)
         desc = ''
         if desc_format:
-            desc = desc_format % (0, len(sequence))
-        self.start_job(len(sequence), desc)
-        for i, element in enumerate(sequence, start=1):
+            desc = desc_format % (0, count)
+        self.start_job(count, desc)
+        for i, element in enumerate(iterable, start=1):
             yield element
             if i % every == 0:
                 if desc_format:
-                    desc = desc_format % (i, len(sequence))
+                    desc = desc_format % (i, count)
                 self.add_progress(progress=every, desc=desc)
         if desc_format:
-            desc = desc_format % (len(sequence), len(sequence))
+            desc = desc_format % (count, count)
         self.set_progress(100, desc)
-    
+
     def start_job(self, max_progress=100, desc=''):
         """Begin work on the next job. You must not call start_job more than
         'jobcount' (in __init__) times.
@@ -111,7 +117,7 @@ class Job:
         self._progress = 0
         self._currmax = max(1, max_progress)
         self._do_update(desc)
-    
+
     def start_subjob(self, job_proportions, desc=''):
         """Starts a sub job. Use this when you want to split a job into
         multiple smaller jobs. Pretty handy when starting a process where you
@@ -121,7 +127,7 @@ class Job:
         """
         self.start_job(100, desc)
         return Job(job_proportions, self._subjob_callback)
-    
+
     def set_progress(self, progress, desc=''):
         """Sets the progress of the current job to 'progress', and call the
         callback
@@ -132,29 +138,29 @@ class Job:
         if self._progress < 0:
             self._progress = 0
         self._do_update(desc)
-    
+
 
 class NullJob:
     def __init__(self, *args, **kwargs):
         pass
-    
+
     def add_progress(self, *args, **kwargs):
         pass
-    
+
     def check_if_cancelled(self):
         pass
-    
+
     def iter_with_progress(self, sequence, *args, **kwargs):
         return iter(sequence)
-    
+
     def start_job(self, *args, **kwargs):
         pass
-    
+
     def start_subjob(self, *args, **kwargs):
         return NullJob()
-    
+
     def set_progress(self, *args, **kwargs):
         pass
-    
+
 
 nulljob = NullJob()

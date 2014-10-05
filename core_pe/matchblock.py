@@ -10,7 +10,7 @@ import logging
 import multiprocessing
 from itertools import combinations
 
-from hscommon.util import extract
+from hscommon.util import extract, iterconsume
 from hscommon.trans import tr
 from hscommon.jobprogress import job
 
@@ -175,25 +175,34 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
     comparisons_to_do = list(combinations(chunks + [None], 2))
     comparison_count = 0
     j.start_job(len(comparisons_to_do))
-    for ref_chunk, other_chunk in comparisons_to_do:
-        picinfo = {p.cache_id: get_picinfo(p) for p in ref_chunk}
-        ref_ids = [p.cache_id for p in ref_chunk]
-        if other_chunk is not None:
-            other_ids = [p.cache_id for p in other_chunk]
-            picinfo.update({p.cache_id: get_picinfo(p) for p in other_chunk})
-        else:
-            other_ids = None
-        args = (ref_ids, other_ids, cache_path, threshold, picinfo)
-        async_results.append(pool.apply_async(async_compare, args))
-        collect_results()
-    collect_results(collect_all=True)
+    try:
+        for ref_chunk, other_chunk in comparisons_to_do:
+            picinfo = {p.cache_id: get_picinfo(p) for p in ref_chunk}
+            ref_ids = [p.cache_id for p in ref_chunk]
+            if other_chunk is not None:
+                other_ids = [p.cache_id for p in other_chunk]
+                picinfo.update({p.cache_id: get_picinfo(p) for p in other_chunk})
+            else:
+                other_ids = None
+            args = (ref_ids, other_ids, cache_path, threshold, picinfo)
+            async_results.append(pool.apply_async(async_compare, args))
+            collect_results()
+        collect_results(collect_all=True)
+    except MemoryError:
+        # Rare, but possible, even in 64bit situations (ref #264). What do we do now? We free us
+        # some wiggle room, log about the incident, and stop matching right here. We then process
+        # the matches we have. The rest of the process doesn't allocate much and we should be
+        # alright.
+        del matches[-1000:] # some wiggle room to ensure we don't run out of memory again.
+        logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches) + 1000)
     pool.close()
 
     result = []
     myiter = j.iter_with_progress(
-        matches,
+        iterconsume(matches),
         tr("Verified %d/%d matches"),
-        every=10
+        every=10,
+        count=len(matches),
     )
     for ref_id, other_id, percentage in myiter:
         ref = id2picture[ref_id]
