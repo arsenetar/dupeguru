@@ -48,7 +48,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
     :meth:`pulse` in the main thread because GUI toolkit usually only support calling UI-related
     functions from the main thread.
 
-    We subclass :class:`.GUIObject` and :class:`ThreadedJobPerformer`.
+    We subclass :class:`.GUIObject` and :class:`.ThreadedJobPerformer`.
     Expected view: :class:`ProgressWindowView`.
 
     :param finishfunc: A function ``f(jobid)`` that is called when a job is completed. ``jobid`` is
@@ -102,7 +102,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
     def run(self, jobid, title, target, args=()):
         """Starts a threaded job.
 
-        The ``target`` function will be sent, as its first argument, a :class:`Job` instance which
+        The ``target`` function will be sent, as its first argument, a :class:`.Job` instance which
         it can use to report on its progress.
 
         :param jobid: Arbitrary identifier which will be passed to ``finish_func()`` at the end.

@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
 
 def fix_nulljob_in_sig(app, what, name, obj, options, signature, return_annotation):
     if signature:
-        signature = re.sub(r"<jobprogress.job.NullJob object at 0x[\da-f]+>", "nulljob", signature)
+        signature = re.sub(r"<hscommon.jobprogress.job.NullJob object at 0x[\da-f]+>", "nulljob", signature)
     return signature, return_annotation
 
 def setup(app):
