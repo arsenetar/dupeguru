@@ -117,23 +117,20 @@ def trailiter(iterable, skipfirst=False):
         yield prev, item
         prev = item
 
-def iterconsume(seq):
-    """Iterate over ``seq`` and discard yielded objects.
+def iterconsume(seq, reverse=True):
+    """Iterate over ``seq`` and pops yielded objects.
 
-    Right after the ``yield``, we replace the element we've just yielded by ``None`` in the
-    sequence.
+    Because we use the ``pop()`` method, we reverse ``seq`` before proceeding. If you don't need
+    to do that, set ``reverse`` to ``False``.
 
     This is useful in tight memory situation where you are looping over a sequence of objects that
     are going to be discarded afterwards. If you're creating other objects during that iteration
     you might want to use this to avoid ``MemoryError``.
-
-    Note that this only works for sequence (index accessible), not all iterables.
     """
-    # We don't use ``del``, because it would be disastrous performance-wise as the array would have
-    # to be constantly re-allocated.
-    for index, elem in enumerate(seq):
-        seq[index] = None
-        yield elem
+    if reverse:
+        seq.reverse()
+    while seq:
+        yield seq.pop()
 
 #--- String related
 

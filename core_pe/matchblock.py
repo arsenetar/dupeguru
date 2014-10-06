@@ -193,13 +193,13 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
         # some wiggle room, log about the incident, and stop matching right here. We then process
         # the matches we have. The rest of the process doesn't allocate much and we should be
         # alright.
-        del matches[-1000:] # some wiggle room to ensure we don't run out of memory again.
-        logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches) + 1000)
+        del comparisons_to_do, chunks, pictures # some wiggle room for the next statements
+        logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches))
+        del matches[-len(matches)//3:] # some wiggle room to ensure we don't run out of memory again.
     pool.close()
-
     result = []
     myiter = j.iter_with_progress(
-        iterconsume(matches),
+        iterconsume(matches, reverse=False),
         tr("Verified %d/%d matches"),
         every=10,
         count=len(matches),
