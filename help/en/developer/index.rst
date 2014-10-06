@@ -12,16 +12,16 @@ dupeGuru's codebase has quite a few design flaws. The Model, View and Controller
 different classes, scattered around. If you're aware of that, it might help you to understand what
 the heck is going on.
 
-The central piece of dupeGuru is ``dupeguru.app.DupeGuru`` (in the ``core`` code). It's the only
+The central piece of dupeGuru is :class:`core.app.DupeGuru`. It's the only
 interface to the python's code for the GUI code. A duplicate scan is started with
-``start_scanning()``, directories are added through ``add_directory()``, etc..
+:meth:`core.app.DupeGuru.start_scanning()`, directories are added through
+:meth:`core.app.DupeGuru.add_directory()`, etc..
 
 A lot of functionalities of the App are implemented in the platform-specific subclasses of
-``app.DupeGuru``, like ``app_cocoa.DupeGuru``, or the ``base.app.DupeGuru`` class in the PyQt
-codebase. For example, when performing "Remove Selected From Results",
-``app_cocoa.Dupeguru.RemoveSelected()`` on the Obj-C side, and
-``base.app.DupeGuru.remove_duplicates()`` on the PyQt side, are respectively called to perform the
-thing. All of this is quite ugly, I know (see the "Refactoring" section below).
+:class:`core.app.DupeGuru`, like ``DupeGuru`` in ``cocoa/inter/app.py``, or the ``DupeGuru`` class
+in ``qt/base/app.py``. For example, when performing "Remove Selected From Results",
+``RemoveSelected()`` on the cocoa side, and ``remove_duplicates()`` on the PyQt side, are
+respectively called to perform the thing.
 
 .. _jobs:
 
@@ -29,23 +29,26 @@ Jobs
 ----
 
 A lot of operations in dupeGuru take a significant amount of time. This is why there's a generalized
-threaded job mechanism built-in ``app.DupeGuru``. First, ``app.DupeGuru`` has a ``progress`` member
-which is an instance of ``jobprogress.job.ThreadedJobPerformer``. It lets the GUI code know of the
-progress of the current threaded job. When ``app.DupeGuru`` needs to start a job, it calls
+threaded job mechanism built-in :class:`~core.app.DupeGuru`. First, :class:`~core.app.DupeGuru` has
+a ``progress`` member which is an instance of
+:class:`~hscommon.jobprogress.performer.ThreadedJobPerformer`. It lets the GUI code know of the progress
+of the current threaded job. When :class:`~core.app.DupeGuru` needs to start a job, it calls
 ``_start_job()`` and the platform specific subclass deals with the details of starting the job.
 
 Core principles
 ---------------
 
-The core of the duplicate matching takes place (for SE and ME, not PE) in ``dupeguru.engine``.
-There's ``MatchFactory.getmatches()`` which take a list of ``fs.File`` instances and return a list
-of ``(firstfile, secondfile, match_percentage)`` matches. Then, there's ``get_groups()`` which takes
-a list of matches and returns a list of ``Group`` instances (a ``Group`` is basically a list of
-``fs.File`` matching together).
+The core of the duplicate matching takes place (for SE and ME, not PE) in :mod:`core.engine`.
+There's :func:`core.engine.getmatches` which take a list of :class:`core.fs.File` instances and
+return a list of ``(firstfile, secondfile, match_percentage)`` matches. Then, there's
+:func:`core.engine.get_groups` which takes a list of matches and returns a list of
+:class:`.Group` instances (a :class:`.Group` is basically a list of :class:`.File` matching
+together).
 
-When a scan is over, the final result (the list of groups from ``get_groups()``) is placed into
-``app.DupeGuru.results``, which is a ``results.Results`` instance. The ``Results`` instance is where
-all the dupe marking, sorting, removing, power marking, etc. takes place.
+When a scan is over, the final result (the list of groups from :func:`.get_groups`) is placed into
+:attr:`core.app.DupeGuru.results`, which is a :class:`core.results.Results` instance. The
+:class:`~.Results` instance is where all the dupe marking, sorting, removing, power marking, etc.
+takes place.
 
 API
 ---
