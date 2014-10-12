@@ -69,4 +69,5 @@ def gen(basepath, destpath, changelogpath, tixurl, confrepl=None, confpath=None,
     try:
         cmd(['sphinx-build', basepath, destpath])
     except SystemExit:
-        print("Sphinx called sys.exit(), but we're cancelling it because we don't acutally want to exit")
+        print("Sphinx called sys.exit(), but we're cancelling it because we don't actually want to exit")
+
