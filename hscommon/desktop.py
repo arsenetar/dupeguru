@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2013-10-12
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os.path as op
@@ -30,10 +30,10 @@ def reveal_path(path):
 
 def special_folder_path(special_folder, appname=None):
     """Returns the path of ``special_folder``.
-    
+
     ``special_folder`` is a SpecialFolder.* const. The result is the special folder for the current
     application. The running process' application info is used to determine relevant information.
-    
+
     You can override the application name with ``appname``. This argument is ingored under Qt.
     """
     return _special_folder_path(special_folder, appname)
@@ -49,7 +49,7 @@ try:
     _open_url = proxy.openURL_
     _open_path = proxy.openPath_
     _reveal_path = proxy.revealPath_
-    
+
     def _special_folder_path(special_folder, appname=None):
         if special_folder == SpecialFolder.Cache:
             base = proxy.getCachePath()
@@ -58,7 +58,7 @@ try:
         if not appname:
             appname = proxy.bundleInfo_('CFBundleName')
         return op.join(base, appname)
-    
+
 except ImportError:
     try:
         from PyQt5.QtCore import QUrl, QStandardPaths
@@ -69,26 +69,25 @@ except ImportError:
         def _open_path(path):
             url = QUrl.fromLocalFile(str(path))
             QDesktopServices.openUrl(url)
-        
+
         def _reveal_path(path):
             _open_path(op.dirname(str(path)))
-        
+
         def _special_folder_path(special_folder, appname=None):
             if special_folder == SpecialFolder.Cache:
                 qtfolder = QStandardPaths.CacheLocation
             else:
                 qtfolder = QStandardPaths.DataLocation
             return QStandardPaths.standardLocations(qtfolder)[0]
-        
     except ImportError:
         # We're either running tests, and these functions don't matter much or we're in a really
         # weird situation. Let's just have dummy fallbacks.
         logging.warning("Can't setup desktop functions!")
         def _open_path(path):
             pass
-        
+
         def _reveal_path(path):
             pass
-        
+
         def _special_folder_path(special_folder, appname=None):
             return '/tmp'
