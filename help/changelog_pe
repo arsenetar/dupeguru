@@ -1,3 +1,12 @@
+=== 2.10.1 (2014-10-12)
+
+* Catch MemoryError better in block matching algo. (#264)
+* Fix crash when reading some EXIF tags. [Mac] (#263, #265)
+* Fixed ``AttributeError: 'ComboboxModel' object has no attribute 'reset'``.
+[Linux, Windows] (#254)
+* Fixed a build problem introduced by Sphinx 1.2.3.
+* Updated German localisation, by Frank Weber.
+
 === 2.10.0 (2014-05-03)
 
 * This is mostly a dependencies upgrade.
