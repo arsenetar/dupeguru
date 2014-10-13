@@ -18,10 +18,12 @@ import compileall
 from setuptools import setup, Extension
 
 from hscommon import sphinxgen
-from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, filereplace,
+from hscommon.build import (
+    add_to_pythonpath, print_and_do, copy_packages, filereplace,
     get_module_version, move_all, copy_all, OSXAppStructure,
     build_cocoalib_xibless, fix_qt_resource_file, build_cocoa_ext, copy_embeddable_python_dylib,
-    collect_stdlib_dependencies, copy)
+    collect_stdlib_dependencies, copy
+)
 from hscommon import loc
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.util import ensure_folder, delete_files_with_pattern
@@ -29,24 +31,42 @@ from hscommon.util import ensure_folder, delete_files_with_pattern
 def parse_args():
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
-    parser.add_option('--clean', action='store_true', dest='clean',
-        help="Clean build folder before building")
-    parser.add_option('--doc', action='store_true', dest='doc',
-        help="Build only the help file")
-    parser.add_option('--loc', action='store_true', dest='loc',
-        help="Build only localization")
-    parser.add_option('--cocoa-ext', action='store_true', dest='cocoa_ext',
-        help="Build only Cocoa extensions")
-    parser.add_option('--cocoa-compile', action='store_true', dest='cocoa_compile',
-        help="Build only Cocoa executable")
-    parser.add_option('--xibless', action='store_true', dest='xibless',
-        help="Build only xibless UIs")
-    parser.add_option('--updatepot', action='store_true', dest='updatepot',
-        help="Generate .pot files from source code.")
-    parser.add_option('--mergepot', action='store_true', dest='mergepot',
-        help="Update all .po files based on .pot files.")
-    parser.add_option('--normpo', action='store_true', dest='normpo',
-        help="Normalize all PO files (do this before commit).")
+    parser.add_option(
+        '--clean', action='store_true', dest='clean',
+        help="Clean build folder before building"
+    )
+    parser.add_option(
+        '--doc', action='store_true', dest='doc',
+        help="Build only the help file"
+    )
+    parser.add_option(
+        '--loc', action='store_true', dest='loc',
+        help="Build only localization"
+    )
+    parser.add_option(
+        '--cocoa-ext', action='store_true', dest='cocoa_ext',
+        help="Build only Cocoa extensions"
+    )
+    parser.add_option(
+        '--cocoa-compile', action='store_true', dest='cocoa_compile',
+        help="Build only Cocoa executable"
+    )
+    parser.add_option(
+        '--xibless', action='store_true', dest='xibless',
+        help="Build only xibless UIs"
+    )
+    parser.add_option(
+        '--updatepot', action='store_true', dest='updatepot',
+        help="Generate .pot files from source code."
+    )
+    parser.add_option(
+        '--mergepot', action='store_true', dest='mergepot',
+        help="Update all .po files based on .pot files."
+    )
+    parser.add_option(
+        '--normpo', action='store_true', dest='normpo',
+        help="Normalize all PO files (do this before commit)."
+    )
     (options, args) = parser.parse_args()
     return options
 
@@ -75,12 +95,20 @@ def build_xibless(edition, dest='cocoa/autogen'):
         ('preferences_panel.py', 'PreferencesPanel_UI'),
     ]
     for srcname, dstname in FNPAIRS:
-        xibless.generate(op.join('cocoa', 'base', 'ui', srcname), op.join(dest, dstname),
-            localizationTable='Localizable', args={'edition': edition})
+        xibless.generate(
+            op.join('cocoa', 'base', 'ui', srcname), op.join(dest, dstname),
+            localizationTable='Localizable', args={'edition': edition}
+        )
     if edition == 'pe':
-        xibless.generate('cocoa/pe/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'), localizationTable='Localizable')
+        xibless.generate(
+            'cocoa/pe/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'),
+            localizationTable='Localizable'
+        )
     else:
-        xibless.generate('cocoa/base/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'), localizationTable='Localizable')
+        xibless.generate(
+            'cocoa/base/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'),
+            localizationTable='Localizable'
+        )
 
 def build_cocoa(edition, dev):
     print("Creating OS X app structure")
@@ -119,7 +147,7 @@ def build_cocoa(edition, dev):
     if edition == 'pe':
         # ModuleFinder can't seem to correctly detect the multiprocessing dependency, so we have
         # to manually specify it.
-        extra_deps=['multiprocessing']
+        extra_deps = ['multiprocessing']
     collect_stdlib_dependencies('build/dg_cocoa.py', pydep_folder, extra_deps=extra_deps)
     del sys.path[0]
     # Views are not referenced by python code, so they're not found by the collector.
@@ -225,8 +253,10 @@ def build_updatepot():
         os.remove(cocoalib_pot)
         loc.strings2pot(op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), cocoalib_pot)
         print("Enhancing ui.pot with Cocoa's strings files")
-        loc.strings2pot(op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
-            op.join('locale', 'ui.pot'))
+        loc.strings2pot(
+            op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
+            op.join('locale', 'ui.pot')
+        )
 
 def build_mergepot():
     print("Updating .po files using .pot files")
@@ -243,11 +273,15 @@ def build_cocoa_proxy_module():
     print("Building Cocoa Proxy")
     import objp.p2o
     objp.p2o.generate_python_proxy_code('cocoalib/cocoa/CocoaProxy.h', 'build/CocoaProxy.m')
-    build_cocoa_ext("CocoaProxy", 'cocoalib/cocoa',
-        ['cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m',
-            'cocoalib/HSErrorReportWindow.m', 'cocoa/autogen/HSErrorReportWindow_UI.m'],
+    build_cocoa_ext(
+        "CocoaProxy", 'cocoalib/cocoa',
+        [
+            'cocoalib/cocoa/CocoaProxy.m', 'build/CocoaProxy.m', 'build/ObjP.m',
+            'cocoalib/HSErrorReportWindow.m', 'cocoa/autogen/HSErrorReportWindow_UI.m'
+        ],
         ['AppKit', 'CoreServices'],
-        ['cocoalib', 'cocoa/autogen'])
+        ['cocoalib', 'cocoa/autogen']
+    )
 
 def build_cocoa_bridging_interfaces(edition):
     print("Building Cocoa Bridging Interfaces")
@@ -255,9 +289,11 @@ def build_cocoa_bridging_interfaces(edition):
     import objp.p2o
     add_to_pythonpath('cocoa')
     add_to_pythonpath('cocoalib')
-    from cocoa.inter import (PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
+    from cocoa.inter import (
+        PyGUIObject, GUIObjectView, PyColumns, ColumnsView, PyOutline,
         OutlineView, PySelectableList, SelectableListView, PyTable, TableView, PyBaseApp,
-        PyTextField, ProgressWindowView, PyProgressWindow)
+        PyTextField, ProgressWindowView, PyProgressWindow
+    )
     from inter.deletion_options import PyDeletionOptions, DeletionOptionsView
     from inter.details_panel import PyDetailsPanel, DetailsPanelView
     from inter.directory_outline import PyDirectoryOutline, DirectoryOutlineView
@@ -269,16 +305,20 @@ def build_cocoa_bridging_interfaces(edition):
     from inter.stats_label import PyStatsLabel, StatsLabelView
     from inter.app import PyDupeGuruBase, DupeGuruView
     appmod = importlib.import_module('inter.app_{}'.format(edition))
-    allclasses = [PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp,
+    allclasses = [
+        PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
         PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuruBase,
-        PyTextField, PyProgressWindow, appmod.PyDupeGuru]
+        PyTextField, PyProgressWindow, appmod.PyDupeGuru
+    ]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
-    allclasses = [GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
+    allclasses = [
+        GUIObjectView, ColumnsView, OutlineView, SelectableListView, TableView,
         DetailsPanelView, DirectoryOutlineView, PrioritizeDialogView, PrioritizeListView,
         IgnoreListDialogView, DeletionOptionsView, ResultTableView, StatsLabelView,
-        ProgressWindowView, DupeGuruView]
+        ProgressWindowView, DupeGuruView
+    ]
     clsspecs = [objp.o2p.spec_from_python_class(class_) for class_ in allclasses]
     objp.p2o.generate_python_proxy_code_from_clsspec(clsspecs, 'build/CocoaViews.m')
     build_cocoa_ext('CocoaViews', 'cocoa/inter', ['build/CocoaViews.m', 'build/ObjP.m'])
@@ -297,11 +337,12 @@ def build_pe_modules(ui):
             extra_link_args=[
                 "-framework", "CoreFoundation",
                 "-framework", "Foundation",
-                "-framework", "ApplicationServices",]
+                "-framework", "ApplicationServices",
+            ]
         ))
     setup(
-        script_args = ['build_ext', '--inplace'],
-        ext_modules = exts,
+        script_args=['build_ext', '--inplace'],
+        ext_modules=exts,
     )
     move_all('_block_qt*', op.join('qt', 'pe'))
     move_all('_block*', 'core_pe')

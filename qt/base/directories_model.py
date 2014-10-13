@@ -1,16 +1,18 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-25
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import urllib.parse
 
 from PyQt5.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
-from PyQt5.QtWidgets import (QComboBox, QStyledItemDelegate, QStyle, QStyleOptionComboBox,
-    QStyleOptionViewItem, QApplication)
+from PyQt5.QtWidgets import (
+    QComboBox, QStyledItemDelegate, QStyle, QStyleOptionComboBox,
+    QStyleOptionViewItem, QApplication
+)
 from PyQt5.QtGui import QBrush
 
 from hscommon.trans import trget
@@ -23,10 +25,10 @@ STATES = [tr("Normal"), tr("Reference"), tr("Excluded")]
 
 class DirectoriesDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
-        editor = QComboBox(parent);
+        editor = QComboBox(parent)
         editor.addItems(STATES)
         return editor
-    
+
     def paint(self, painter, option, index):
         self.initStyleOption(option, index)
         # No idea why, but this cast is required if we want to have access to the V4 valuess
@@ -44,19 +46,19 @@ class DirectoriesDelegate(QStyledItemDelegate):
             painter.drawText(rect, Qt.AlignLeft, option.text)
         else:
             super().paint(painter, option, index)
-    
+
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
-        editor.setCurrentIndex(value);
+        editor.setCurrentIndex(value)
         editor.showPopup()
-    
+
     def setModelData(self, editor, model, index):
         value = editor.currentIndex()
         model.setData(index, value, Qt.EditRole)
-    
+
     def updateEditorGeometry(self, editor, option, index):
         editor.setGeometry(option.rect)
-    
+
 
 class DirectoriesModel(TreeModel):
     def __init__(self, model, view, **kwargs):
@@ -65,18 +67,18 @@ class DirectoriesModel(TreeModel):
         self.model.view = self
         self.view = view
         self.view.setModel(self)
-        
+
         self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
-    
+
     def _createNode(self, ref, row):
         return RefNode(self, None, ref, row)
-    
+
     def _getChildren(self):
         return list(self.model)
-    
+
     def columnCount(self, parent=QModelIndex()):
         return 2
-    
+
     def data(self, index, role):
         if not index.isValid():
             return None
@@ -96,7 +98,7 @@ class DirectoriesModel(TreeModel):
             elif state == 2:
                 return QBrush(Qt.red)
         return None
-    
+
     def dropMimeData(self, mimeData, action, row, column, parentIndex):
         # the data in mimeData is urlencoded **in utf-8**!!! What we do is to decode, the mime data
         # with 'ascii', which works since it's urlencoded. Then, we pass that to urllib.
@@ -111,7 +113,7 @@ class DirectoriesModel(TreeModel):
         self.foldersAdded.emit(paths)
         self.reset()
         return True
-    
+
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
@@ -119,16 +121,16 @@ class DirectoriesModel(TreeModel):
         if index.column() == 1:
             result |= Qt.ItemIsEditable
         return result
-    
+
     def headerData(self, section, orientation, role):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole and section < len(HEADERS):
                 return HEADERS[section]
         return None
-    
+
     def mimeTypes(self):
         return ['text/uri-list']
-    
+
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
             return False
@@ -136,24 +138,24 @@ class DirectoriesModel(TreeModel):
         ref = node.ref
         ref.state = value
         return True
-    
+
     def supportedDropActions(self):
         # Normally, the correct action should be ActionLink, but the drop doesn't work. It doesn't
         # work with ActionMove either. So screw that, and accept anything.
         return Qt.ActionMask
-    
+
     #--- Events
     def selectionChanged(self, selected, deselected):
         newNodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
         self.model.selected_nodes = newNodes
-    
+
     #--- Signals
     foldersAdded = pyqtSignal(list)
-    
+
     #--- model --> view
     def refresh(self):
         self.reset()
-    
+
     def refresh_states(self):
         self.refreshData()
-    
+

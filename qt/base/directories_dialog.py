@@ -1,15 +1,17 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-25
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import QRect
-from PyQt5.QtWidgets import (QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
+from PyQt5.QtWidgets import (
+    QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QMainWindow, QMenuBar, QMenu, QLabel,
-    QApplication)
+    QApplication
+)
 from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
@@ -39,7 +41,7 @@ class DirectoriesDialog(QMainWindow):
         self._updateRemoveButton()
         self._updateLoadResultsButton()
         self._setupBindings()
-    
+
     def _setupBindings(self):
         self.scanButton.clicked.connect(self.scanButtonClicked)
         self.loadResultsButton.clicked.connect(self.actionLoadResults.trigger)
@@ -51,7 +53,7 @@ class DirectoriesDialog(QMainWindow):
         self.recentFolders.mustOpenItem.connect(self.app.model.add_directory)
         self.directoriesModel.foldersAdded.connect(self.directoriesModelAddedFolders)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
-        
+
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
@@ -60,7 +62,7 @@ class DirectoriesDialog(QMainWindow):
             ('actionAddFolder', '', '', tr("Add Folder..."), self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
-    
+
     def _setupMenu(self):
         self.menubar = QMenuBar(self)
         self.menubar.setGeometry(QRect(0, 0, 42, 22))
@@ -73,7 +75,7 @@ class DirectoriesDialog(QMainWindow):
         self.menuLoadRecent = QMenu(self.menuFile)
         self.menuLoadRecent.setTitle(tr("Load Recent Results"))
         self.setMenuBar(self.menubar)
-        
+
         self.menuFile.addAction(self.actionLoadResults)
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
         self.menuFile.addSeparator()
@@ -84,21 +86,21 @@ class DirectoriesDialog(QMainWindow):
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)
-        
+
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
-        
+
         # Recent folders menu
         self.menuRecentFolders = QMenu()
         self.menuRecentFolders.addAction(self.actionAddFolder)
         self.menuRecentFolders.addSeparator()
-        
+
         # Recent results menu
         self.menuRecentResults = QMenu()
         self.menuRecentResults.addAction(self.actionLoadResults)
         self.menuRecentResults.addSeparator()
-    
+
     def _setupUi(self):
         self.setWindowTitle(self.app.NAME)
         self.resize(420, 338)
@@ -110,8 +112,8 @@ class DirectoriesDialog(QMainWindow):
         self.treeView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.treeView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.treeView.setAcceptDrops(True)
-        triggers = QAbstractItemView.DoubleClicked|QAbstractItemView.EditKeyPressed\
-            |QAbstractItemView.SelectedClicked
+        triggers = QAbstractItemView.DoubleClicked | QAbstractItemView.EditKeyPressed\
+            | QAbstractItemView.SelectedClicked
         self.treeView.setEditTriggers(triggers)
         self.treeView.setDragDropOverwriteMode(True)
         self.treeView.setDragDropMode(QAbstractItemView.DropOnly)
@@ -136,41 +138,41 @@ class DirectoriesDialog(QMainWindow):
         self.horizontalLayout.addWidget(self.scanButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.setCentralWidget(self.centralwidget)
-        
+
         self._setupActions()
         self._setupMenu()
-        
+
         if self.app.prefs.directoriesWindowRect is not None:
             self.setGeometry(self.app.prefs.directoriesWindowRect)
         else:
             moveToScreenCenter(self)
-    
+
     def _setupColumns(self):
         header = self.treeView.header()
         header.setStretchLastSection(False)
         header.setSectionResizeMode(0, QHeaderView.Stretch)
         header.setSectionResizeMode(1, QHeaderView.Fixed)
         header.resizeSection(1, 100)
-    
+
     def _updateAddButton(self):
         if self.recentFolders.isEmpty():
             self.addFolderButton.setMenu(None)
         else:
             self.addFolderButton.setMenu(self.menuRecentFolders)
-    
+
     def _updateRemoveButton(self):
         indexes = self.treeView.selectedIndexes()
         if not indexes:
             self.removeFolderButton.setEnabled(False)
             return
         self.removeFolderButton.setEnabled(True)
-    
+
     def _updateLoadResultsButton(self):
         if self.app.recentResults.isEmpty():
             self.loadResultsButton.setMenu(None)
         else:
             self.loadResultsButton.setMenu(self.menuRecentResults)
-    
+
     #--- QWidget overrides
     def closeEvent(self, event):
         event.accept()
@@ -181,7 +183,7 @@ class DirectoriesDialog(QMainWindow):
                 event.ignore()
         if event.isAccepted():
             QApplication.quit()
-    
+
     #--- Events
     def addFolderTriggered(self):
         title = tr("Select a folder to add to the scanning list")
@@ -192,14 +194,14 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = dirpath
         self.app.model.add_directory(dirpath)
         self.recentFolders.insertItem(dirpath)
-    
+
     def appWillSavePrefs(self):
         self.app.prefs.directoriesWindowRect = self.geometry()
-    
+
     def directoriesModelAddedFolders(self, folders):
         for folder in folders:
             self.recentFolders.insertItem(folder)
-    
+
     def loadResultsTriggered(self):
         title = tr("Select a results file to load")
         files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
@@ -207,10 +209,10 @@ class DirectoriesDialog(QMainWindow):
         if destination:
             self.app.model.load_from(destination)
             self.app.recentResults.insertItem(destination)
-    
+
     def removeFolderButtonClicked(self):
         self.directoriesModel.model.remove_selected()
-    
+
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:
             title = tr("Start a new scan")
@@ -218,14 +220,14 @@ class DirectoriesDialog(QMainWindow):
             if not self.app.confirm(title, msg):
                 return
         self.app.model.start_scanning()
-    
+
     def selectionChanged(self, selected, deselected):
         self._updateRemoveButton()
-    
+
 
 if __name__ == '__main__':
     import sys
-    from . import dg_rc
+    from . import dg_rc # NOQA
     from ..testapp import TestApp
     app = QApplication([])
     dgapp = TestApp()

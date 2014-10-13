@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2006/09/16
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import os.path as op
@@ -19,56 +19,56 @@ MAIN_TEMPLATE = """
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-	<title>dupeGuru Results</title>
-	<style type="text/css">
+        <title>dupeGuru Results</title>
+        <style type="text/css">
 BODY
 {
-	background-color:white;
+    background-color:white;
 }
 
 BODY,A,P,UL,TABLE,TR,TD
 {
-	font-family:Tahoma,Arial,sans-serif;
-	font-size:10pt;
-	color: #4477AA;
+    font-family:Tahoma,Arial,sans-serif;
+    font-size:10pt;
+    color: #4477AA;
 }
 
 TABLE
 {
-	background-color: #225588;
-	margin-left: auto;
-  	margin-right: auto;
-	width: 90%;
+    background-color: #225588;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
 }
 
-TR 
+TR
 {
     background-color: white;
 }
 
-TH 
-{ 
-	font-weight: bold; 
-	color: black;
-	background-color: #C8D6E5;
+TH
+{
+    font-weight: bold;
+    color: black;
+    background-color: #C8D6E5;
 }
 
-TH TD 
+TH TD
 {
     color:black;
 }
 
-TD 
+TD
 {
     padding-left: 2pt;
 }
 
 TD.rightelem
 {
-	text-align:right;
-	/*padding-left:0pt;*/
-	padding-right: 2pt;
-	width: 17%;
+    text-align:right;
+    /*padding-left:0pt;*/
+    padding-right: 2pt;
+    width: 17%;
 }
 
 TD.indented
@@ -78,19 +78,19 @@ TD.indented
 
 H1
 {
-	font-family:&quot;Courier New&quot;,monospace;
-	color:#6699CC;
-    font-size:18pt; 
-	color:#6da500;
-	border-color: #70A0CF;
-	border-width: 1pt;
-	border-style: solid;
-	margin-top:   16pt;
-	margin-left:  5%;
-	margin-right: 5%;
-	padding-top:  2pt;
-	padding-bottom:2pt;
-	text-align:   center;
+    font-family:&quot;Courier New&quot;,monospace;
+    color:#6699CC;
+    font-size:18pt;
+    color:#6da500;
+    border-color: #70A0CF;
+    border-width: 1pt;
+    border-style: solid;
+    margin-top:   16pt;
+    margin-left:  5%;
+    margin-right: 5%;
+    padding-top:  2pt;
+    padding-bottom:2pt;
+    text-align:   center;
 }
 </style>
 </head>

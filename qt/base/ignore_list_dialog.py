@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2012-03-13
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt
@@ -23,11 +23,11 @@ class IgnoreListDialog(QDialog):
         self.model = model
         self.model.view = self
         self.table = IgnoreListTable(self.model.ignore_list_table, view=self.tableView)
-        
+
         self.removeSelectedButton.clicked.connect(self.model.remove_selected)
         self.clearButton.clicked.connect(self.model.clear)
         self.closeButton.clicked.connect(self.accept)
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("Ignore List"))
         self.resize(540, 330)
@@ -45,10 +45,14 @@ class IgnoreListDialog(QDialog):
         self.removeSelectedButton = QPushButton(tr("Remove Selected"))
         self.clearButton = QPushButton(tr("Clear"))
         self.closeButton = QPushButton(tr("Close"))
-        self.verticalLayout.addLayout(horizontalWrap([self.removeSelectedButton, self.clearButton,
-            None, self.closeButton]))
-    
+        self.verticalLayout.addLayout(
+            horizontalWrap([
+                self.removeSelectedButton, self.clearButton,
+                None, self.closeButton
+            ])
+        )
+
     #--- model --> view
     def show(self):
         super().show()
-    
+

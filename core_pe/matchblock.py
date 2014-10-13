@@ -93,8 +93,10 @@ def get_chunks(pictures):
     chunk_count = max(min_chunk_count, chunk_count)
     chunk_size = (len(pictures) // chunk_count) + 1
     chunk_size = max(MIN_CHUNK_SIZE, chunk_size)
-    logging.info("Creating %d chunks with a chunk size of %d for %d pictures", chunk_count,
-        chunk_size, len(pictures))
+    logging.info(
+        "Creating %d chunks with a chunk size of %d for %d pictures", chunk_count,
+        chunk_size, len(pictures)
+    )
     chunks = [pictures[i:i+chunk_size] for i in range(0, len(pictures), chunk_size)]
     return chunks
 
@@ -142,7 +144,7 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
 
     def collect_results(collect_all=False):
         # collect results and wait until the queue is small enough to accomodate a new results.
-        nonlocal async_results, matches, comparison_count
+        nonlocal async_results, matches, comparison_count, comparisons_to_do
         limit = 0 if collect_all else RESULTS_QUEUE_LIMIT
         while len(async_results) > limit:
             ready, working = extract(lambda r: r.ready(), async_results)
@@ -150,7 +152,8 @@ def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nul
                 matches += result.get()
                 async_results.remove(result)
                 comparison_count += 1
-        progress_msg = tr("Performed %d/%d chunk matches") % (comparison_count, len(comparisons_to_do))
+        # About the NOQA below: I think there's a bug in pyflakes. To investigate...
+        progress_msg = tr("Performed %d/%d chunk matches") % (comparison_count, len(comparisons_to_do)) # NOQA
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])

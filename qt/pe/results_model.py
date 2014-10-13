@@ -1,8 +1,8 @@
 # Created On: 2011-11-27
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from qtlib.column import Column
@@ -21,3 +21,4 @@ class ResultsModel(ResultsModelBase):
         Column('percentage', defaultWidth=60),
         Column('dupe_count', defaultWidth=80),
     ]
+

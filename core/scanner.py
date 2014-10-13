@@ -81,7 +81,9 @@ class Scanner:
             files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in {ScanType.Contents, ScanType.ContentsAudio, ScanType.Folders}:
             sizeattr = 'audiosize' if self.scan_type == ScanType.ContentsAudio else 'size'
-            return engine.getmatches_by_contents(files, sizeattr, partial=self.scan_type==ScanType.ContentsAudio, j=j)
+            return engine.getmatches_by_contents(
+                files, sizeattr, partial=self.scan_type == ScanType.ContentsAudio, j=j
+            )
         else:
             j = j.start_subjob([2, 8])
             kw = {}
@@ -94,7 +96,11 @@ class Scanner:
             func = {
                 ScanType.Filename: lambda f: engine.getwords(rem_file_ext(f.name)),
                 ScanType.Fields: lambda f: engine.getfields(rem_file_ext(f.name)),
-                ScanType.Tag: lambda f: [engine.getwords(str(getattr(f, attrname))) for attrname in SCANNABLE_TAGS if attrname in self.scanned_tags],
+                ScanType.Tag: lambda f: [
+                    engine.getwords(str(getattr(f, attrname)))
+                    for attrname in SCANNABLE_TAGS
+                    if attrname in self.scanned_tags
+                ],
             }[self.scan_type]
             for f in j.iter_with_progress(files, tr("Read metadata of %d/%d files")):
                 logging.debug("Reading metadata of {}".format(str(f.path)))
@@ -152,8 +158,10 @@ class Scanner:
         if self.ignore_list:
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
-            matches = [m for m in iter_matches
-                if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
+            matches = [
+                m for m in iter_matches
+                if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
+            ]
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)
         matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
@@ -178,10 +186,11 @@ class Scanner:
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
 
-    match_similar_words  = False
+    match_similar_words = False
     min_match_percentage = 80
-    mix_file_kind        = True
-    scan_type            = ScanType.Filename
-    scanned_tags         = {'artist', 'title'}
-    size_threshold       = 0
-    word_weighting       = False
+    mix_file_kind = True
+    scan_type = ScanType.Filename
+    scanned_tags = {'artist', 'title'}
+    size_threshold = 0
+    word_weighting = False
+

@@ -17,9 +17,11 @@ from hscommon.util import flatten, multi_replace
 from hscommon.trans import tr
 from hscommon.jobprogress import job
 
-(WEIGHT_WORDS,
-MATCH_SIMILAR_WORDS,
-NO_FIELD_ORDER) = range(3)
+(
+    WEIGHT_WORDS,
+    MATCH_SIMILAR_WORDS,
+    NO_FIELD_ORDER,
+) = range(3)
 
 JOB_REFRESH_RATE = 100
 
@@ -259,6 +261,7 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
         filesize = getattr(file, sizeattr)
         if filesize:
             size2files[filesize].add(file)
+    del files
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
     result = []
@@ -495,7 +498,10 @@ def get_groups(matches, j=job.nulljob):
     matched_files = set(flatten(groups))
     orphan_matches = []
     for group in groups:
-        orphan_matches += set(m for m in group.discard_matches() if not any(obj in matched_files for obj in [m.first, m.second]))
+        orphan_matches += {
+            m for m in group.discard_matches()
+            if not any(obj in matched_files for obj in [m.first, m.second])
+        }
     if groups and orphan_matches:
         groups += get_groups(orphan_matches) # no job, as it isn't supposed to take a long time
     return groups

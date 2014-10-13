@@ -1,17 +1,17 @@
 # Created By: Virgil Dupras
 # Created On: 2006/09/01
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
-from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
+from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2 # NOQA
 
 # Converted to C
 # def getblock(image):
 #     """Returns a 3 sized tuple containing the mean color of 'image'.
-#     
+#
 #     image: a PIL image or crop.
 #     """
 #     if image.size[0]:
@@ -28,7 +28,7 @@ from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 # This is not used anymore
 # def getblocks(image,blocksize):
 #     """Returns a list of blocks (3 sized tuples).
-#     
+#
 #     image: A PIL image to base the blocks on.
 #     blocksize: The size of the blocks to be create. This is a single integer, defining
 #         both width and height (blocks are square).
@@ -46,7 +46,7 @@ from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 # Converted to C
 # def getblocks2(image,block_count_per_side):
 #     """Returns a list of blocks (3 sized tuples).
-#     
+#
 #     image: A PIL image to base the blocks on.
 #     block_count_per_side: This integer determine the number of blocks the function will return.
 #     If it is 10, for example, 100 blocks will be returns (10 width, 10 height). The blocks will not
@@ -73,7 +73,7 @@ from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 # Converted to C
 # def diff(first, second):
 #     """Returns the difference between the first block and the second.
-#     
+#
 #     It returns an absolute sum of the 3 differences (RGB).
 #     """
 #     r1, g1, b1 = first
@@ -83,7 +83,7 @@ from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 # Converted to C
 # def avgdiff(first, second, limit=768, min_iterations=1):
 #     """Returns the average diff between first blocks and seconds.
-#     
+#
 #     If the result surpasses limit, limit + 1 is returned, except if less than min_iterations
 #     iterations have been made in the blocks.
 #     """
@@ -106,7 +106,7 @@ from ._block import NoBlocksError, DifferentBlockCountError, avgdiff, getblocks2
 # This is not used anymore
 # def maxdiff(first,second,limit=768):
 #     """Returns the max diff between first blocks and seconds.
-#     
+#
 #     If the result surpasses limit, the first max being over limit is returned.
 #     """
 #     if len(first) != len(second):

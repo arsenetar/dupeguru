@@ -1,14 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-25
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt, QRect
-from PyQt5.QtWidgets import (QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
-    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox)
+from PyQt5.QtWidgets import (
+    QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
+    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox
+)
 
 from hscommon.trans import trget
 from qtlib.util import moveToScreenCenter, horizontalWrap, createActions
@@ -28,7 +30,7 @@ class ResultWindow(QMainWindow):
         self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)
         self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
         self._update_column_actions_status()
-        
+
         self.menuColumns.triggered.connect(self.columnToggled)
         self.resultsView.doubleClicked.connect(self.resultsDoubleClicked)
         self.resultsView.spacePressed.connect(self.resultsSpacePressed)
@@ -37,7 +39,7 @@ class ResultWindow(QMainWindow):
         self.deltaValuesCheckBox.stateChanged.connect(self.deltaTriggered)
         self.searchEdit.searchChanged.connect(self.searchChanged)
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
-    
+
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
@@ -50,11 +52,23 @@ class ResultWindow(QMainWindow):
             ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
             ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
             ('actionReprioritize', '', '', tr("Re-Prioritize Results..."), self.reprioritizeTriggered),
-            ('actionRemoveSelected', 'Ctrl+Del', '', tr("Remove Selected from Results"), self.removeSelectedTriggered),
-            ('actionIgnoreSelected', 'Ctrl+Shift+Del', '', tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered),
-            ('actionMakeSelectedReference', 'Ctrl+Space', '', tr("Make Selected into Reference"), self.app.model.make_selected_reference),
+            (
+                'actionRemoveSelected', 'Ctrl+Del', '',
+                tr("Remove Selected from Results"), self.removeSelectedTriggered
+            ),
+            (
+                'actionIgnoreSelected', 'Ctrl+Shift+Del', '',
+                tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered
+            ),
+            (
+                'actionMakeSelectedReference', 'Ctrl+Space', '',
+                tr("Make Selected into Reference"), self.app.model.make_selected_reference
+            ),
             ('actionOpenSelected', 'Ctrl+O', '', tr("Open Selected with Default Application"), self.openTriggered),
-            ('actionRevealSelected', 'Ctrl+Shift+O', '', tr("Open Containing Folder of Selected"), self.revealTriggered),
+            (
+                'actionRevealSelected', 'Ctrl+Shift+O', '',
+                tr("Open Containing Folder of Selected"), self.revealTriggered
+            ),
             ('actionRenameSelected', 'F2', '', tr("Rename Selected"), self.renameTriggered),
             ('actionMarkAll', 'Ctrl+A', '', tr("Mark All"), self.markAllTriggered),
             ('actionMarkNone', 'Ctrl+Shift+A', '', tr("Mark None"), self.markNoneTriggered),
@@ -68,7 +82,7 @@ class ResultWindow(QMainWindow):
         createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
-        
+
     def _setupMenu(self):
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 630, 22))
@@ -85,7 +99,7 @@ class ResultWindow(QMainWindow):
         self.menuHelp = QMenu(self.menubar)
         self.menuHelp.setTitle(tr("Help"))
         self.setMenuBar(self.menubar)
-        
+
         self.menuActions.addAction(self.actionDeleteMarked)
         self.menuActions.addAction(self.actionMoveMarked)
         self.menuActions.addAction(self.actionCopyMarked)
@@ -118,14 +132,14 @@ class ResultWindow(QMainWindow):
         self.menuFile.addAction(self.actionExportToCSV)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
-        
+
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuMark.menuAction())
         self.menubar.addAction(self.menuActions.menuAction())
         self.menubar.addAction(self.menuColumns.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
-        
+
         # Columns menu
         menu = self.menuColumns
         self._column_actions = []
@@ -138,7 +152,7 @@ class ResultWindow(QMainWindow):
         menu.addSeparator()
         action = menu.addAction(tr("Reset to Defaults"))
         action.item_index = -1
-        
+
         # Action menu
         actionMenu = QMenu(tr("Actions"), self.menubar)
         actionMenu.addAction(self.actionDeleteMarked)
@@ -156,7 +170,7 @@ class ResultWindow(QMainWindow):
         actionMenu.addAction(self.actionRenameSelected)
         self.actionActions.setMenu(actionMenu)
         self.actionsButton.setMenu(self.actionActions.menu())
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("{} Results").format(self.app.NAME))
         self.resize(630, 514)
@@ -170,8 +184,10 @@ class ResultWindow(QMainWindow):
         self.deltaValuesCheckBox = QCheckBox(tr("Delta Values"))
         self.searchEdit = SearchEdit()
         self.searchEdit.setMaximumWidth(300)
-        self.horizontalLayout = horizontalWrap([self.actionsButton, self.detailsButton,
-            self.dupesOnlyCheckBox, self.deltaValuesCheckBox, None, self.searchEdit, 8])
+        self.horizontalLayout = horizontalWrap([
+            self.actionsButton, self.detailsButton,
+            self.dupesOnlyCheckBox, self.deltaValuesCheckBox, None, self.searchEdit, 8
+        ])
         self.horizontalLayout.setSpacing(8)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.resultsView = ResultsView(self.centralwidget)
@@ -193,7 +209,7 @@ class ResultWindow(QMainWindow):
         self.setStatusBar(self.statusbar)
         self.statusLabel = QLabel(self)
         self.statusbar.addPermanentWidget(self.statusLabel, 1)
-        
+
         if self.app.prefs.resultWindowIsMaximized:
             self.setWindowState(self.windowState() | Qt.WindowMaximized)
         else:
@@ -201,85 +217,85 @@ class ResultWindow(QMainWindow):
                 self.setGeometry(self.app.prefs.resultWindowRect)
             else:
                 moveToScreenCenter(self)
-    
+
     #--- Private
     def _update_column_actions_status(self):
         # Update menu checked state
         menu_items = self.app.model.result_table.columns.menu_items()
         for action, (display, visible) in zip(self._column_actions, menu_items):
             action.setChecked(visible)
-    
+
     #--- Actions
     def actionsTriggered(self):
         self.actionsButton.showMenu()
-    
+
     def addToIgnoreListTriggered(self):
         self.app.model.add_selected_to_ignore_list()
-    
+
     def copyTriggered(self):
         self.app.model.copy_or_move_marked(True)
-    
+
     def deleteTriggered(self):
         self.app.model.delete_marked()
-    
+
     def deltaTriggered(self, state=None):
         # The sender can be either the action or the checkbox, but both have a isChecked() method.
         self.resultsModel.delta_values = self.sender().isChecked()
         self.actionDelta.setChecked(self.resultsModel.delta_values)
         self.deltaValuesCheckBox.setChecked(self.resultsModel.delta_values)
-    
+
     def detailsTriggered(self):
         self.app.show_details()
-    
+
     def markAllTriggered(self):
         self.app.model.mark_all()
-    
+
     def markInvertTriggered(self):
         self.app.model.mark_invert()
-    
+
     def markNoneTriggered(self):
         self.app.model.mark_none()
-    
+
     def markSelectedTriggered(self):
         self.app.model.toggle_selected_mark_state()
-    
+
     def moveTriggered(self):
         self.app.model.copy_or_move_marked(False)
-    
+
     def openTriggered(self):
         self.app.model.open_selected()
-    
+
     def powerMarkerTriggered(self, state=None):
         # see deltaTriggered
         self.resultsModel.power_marker = self.sender().isChecked()
         self.actionPowerMarker.setChecked(self.resultsModel.power_marker)
         self.dupesOnlyCheckBox.setChecked(self.resultsModel.power_marker)
-    
+
     def preferencesTriggered(self):
         self.app.show_preferences()
-    
+
     def removeMarkedTriggered(self):
         self.app.model.remove_marked()
-    
+
     def removeSelectedTriggered(self):
         self.app.model.remove_selected()
-    
+
     def renameTriggered(self):
         index = self.resultsView.selectionModel().currentIndex()
         # Our index is the current row, with column set to 0. Our filename column is 1 and that's
         # what we want.
         index = index.sibling(index.row(), 1)
         self.resultsView.edit(index)
-    
+
     def reprioritizeTriggered(self):
         dlg = PrioritizeDialog(self, self.app)
         result = dlg.exec()
         if result == QDialog.Accepted:
             dlg.model.perform_reprioritization()
-    
+
     def revealTriggered(self):
         self.app.model.reveal_selected()
-    
+
     def saveResultsTriggered(self):
         title = tr("Select a file to save your results to")
         files = tr("dupeGuru Results (*.dupeguru)")
@@ -289,13 +305,13 @@ class ResultWindow(QMainWindow):
                 destination = '{}.dupeguru'.format(destination)
             self.app.model.save_as(destination)
             self.app.recentResults.insertItem(destination)
-    
+
     #--- Events
     def appWillSavePrefs(self):
         prefs = self.app.prefs
         prefs.resultWindowIsMaximized = self.isMaximized()
         prefs.resultWindowRect = self.geometry()
-    
+
     def columnToggled(self, action):
         index = action.item_index
         if index == -1:
@@ -304,16 +320,16 @@ class ResultWindow(QMainWindow):
         else:
             visible = self.app.model.result_table.columns.toggle_menu_item(index)
             action.setChecked(visible)
-    
+
     def contextMenuEvent(self, event):
         self.actionActions.menu().exec_(event.globalPos())
-    
+
     def resultsDoubleClicked(self, modelIndex):
         self.app.model.open_selected()
-    
+
     def resultsSpacePressed(self):
         self.app.model.toggle_selected_mark_state()
-    
+
     def searchChanged(self):
         self.app.model.apply_filter(self.searchEdit.text())
-    
+

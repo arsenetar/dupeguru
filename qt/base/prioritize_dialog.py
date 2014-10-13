@@ -1,14 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2011-09-06
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt, QMimeData, QByteArray
-from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
-    QDialogButtonBox, QAbstractItemView, QLabel, QStyle, QSplitter, QWidget, QSizePolicy)
+from PyQt5.QtWidgets import (
+    QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
+    QDialogButtonBox, QAbstractItemView, QLabel, QStyle, QSplitter, QWidget, QSizePolicy
+)
 
 from hscommon.trans import trget
 from qtlib.selectable_list import ComboboxModel, ListviewModel
@@ -24,7 +26,7 @@ class PrioritizationList(ListviewModel):
         if not index.isValid():
             return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled
-    
+
     #--- Drag & Drop
     def dropMimeData(self, mimeData, action, row, column, parentIndex):
         if not mimeData.hasFormat(MIME_INDEXES):
@@ -37,17 +39,17 @@ class PrioritizationList(ListviewModel):
         indexes = list(map(int, strMimeData.split(',')))
         self.model.move_indexes(indexes, row)
         return True
-    
+
     def mimeData(self, indexes):
         rows = {str(index.row()) for index in indexes}
         data = ','.join(rows)
         mimeData = QMimeData()
         mimeData.setData(MIME_INDEXES, QByteArray(data.encode()))
         return mimeData
-    
+
     def mimeTypes(self):
         return [MIME_INDEXES]
-    
+
     def supportedDropActions(self):
         return Qt.MoveAction
 
@@ -59,9 +61,11 @@ class PrioritizeDialog(QDialog):
         self.model = PrioritizeDialogModel(app=app.model)
         self.categoryList = ComboboxModel(model=self.model.category_list, view=self.categoryCombobox)
         self.criteriaList = ListviewModel(model=self.model.criteria_list, view=self.criteriaListView)
-        self.prioritizationList = PrioritizationList(model=self.model.prioritization_list, view=self.prioritizationListView)
+        self.prioritizationList = PrioritizationList(
+            model=self.model.prioritization_list, view=self.prioritizationListView
+        )
         self.model.view = self
-        
+
         self.addCriteriaButton.clicked.connect(self.model.add_selected)
         self.removeCriteriaButton.clicked.connect(self.model.remove_selected)
         self.buttonBox.accepted.connect(self.accept)
@@ -70,11 +74,13 @@ class PrioritizeDialog(QDialog):
     def _setupUi(self):
         self.setWindowTitle(tr("Re-Prioritize duplicates"))
         self.resize(700, 400)
-        
+
         #widgets
-        msg = tr("Add criteria to the right box and click OK to send the dupes that correspond the "
+        msg = tr(
+            "Add criteria to the right box and click OK to send the dupes that correspond the "
             "best to these criteria to their respective group's "
-            "reference position. Read the help file for more information.")
+            "reference position. Read the help file for more information."
+        )
         self.promptLabel = QLabel(msg)
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
@@ -88,7 +94,7 @@ class PrioritizeDialog(QDialog):
         self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
-        
+
         # layout
         self.mainLayout = QVBoxLayout(self)
         self.mainLayout.addWidget(self.promptLabel)

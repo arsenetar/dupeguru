@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2012-05-30
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt
@@ -21,11 +21,11 @@ class DeletionOptions(QDialog):
         self.model = model
         self._setupUi()
         self.model.view = self
-        
+
         self.linkCheckbox.stateChanged.connect(self.linkCheckboxChanged)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("Deletion Options"))
         self.resize(400, 270)
@@ -34,8 +34,10 @@ class DeletionOptions(QDialog):
         self.verticalLayout.addWidget(self.msgLabel)
         self.linkCheckbox = QCheckBox(tr("Link deleted files"))
         self.verticalLayout.addWidget(self.linkCheckbox)
-        text = tr("After having deleted a duplicate, place a link targeting the reference file "
-            "to replace the deleted file.")
+        text = tr(
+            "After having deleted a duplicate, place a link targeting the reference file "
+            "to replace the deleted file."
+        )
         self.linkMessageLabel = QLabel(text)
         self.linkMessageLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.linkMessageLabel)
@@ -46,8 +48,10 @@ class DeletionOptions(QDialog):
             self.linkCheckbox.setText(self.linkCheckbox.text() + tr(" (unsupported)"))
         self.directCheckbox = QCheckBox(tr("Directly delete files"))
         self.verticalLayout.addWidget(self.directCheckbox)
-        text = tr("Instead of sending files to trash, delete them directly. This option is usually "
-            "used as a workaround when the normal deletion method doesn't work.")
+        text = tr(
+            "Instead of sending files to trash, delete them directly. This option is usually "
+            "used as a workaround when the normal deletion method doesn't work."
+        )
         self.directMessageLabel = QLabel(text)
         self.directMessageLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.directMessageLabel)
@@ -55,15 +59,15 @@ class DeletionOptions(QDialog):
         self.buttonBox.addButton(tr("Proceed"), QDialogButtonBox.AcceptRole)
         self.buttonBox.addButton(tr("Cancel"), QDialogButtonBox.RejectRole)
         self.verticalLayout.addWidget(self.buttonBox)
-    
+
     #--- Signals
     def linkCheckboxChanged(self, changed: int):
         self.model.link_deleted = bool(changed)
-    
+
     #--- model --> view
     def update_msg(self, msg: str):
         self.msgLabel.setText(msg)
-    
+
     def show(self):
         self.linkCheckbox.setChecked(self.model.link_deleted)
         self.linkTypeRadio.selected_index = 1 if self.model.use_hardlinks else 0
@@ -73,7 +77,7 @@ class DeletionOptions(QDialog):
         self.model.use_hardlinks = self.linkTypeRadio.selected_index == 1
         self.model.direct = self.directCheckbox.isChecked()
         return result == QDialog.Accepted
-    
+
     def set_hardlink_option_enabled(self, is_enabled: bool):
         self.linkTypeRadio.setEnabled(is_enabled)
-    
+

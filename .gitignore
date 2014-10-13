@@ -6,6 +6,7 @@
 *.waf*
 .lock-waf*
 .idea
+.tox
 
 build
 dist

@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2011-05-29
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import logging
@@ -23,20 +23,20 @@ def get_delta_dimensions(value, ref_value):
 class Photo(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
     INITIAL_INFO.update({
-        'dimensions': (0,0),
+        'dimensions': (0, 0),
         'exif_timestamp': '',
     })
     __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
-    
+
     # These extensions are supported on all platforms
     HANDLED_EXTS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif'}
-    
+
     def _plat_get_dimensions(self):
         raise NotImplementedError()
-    
+
     def _plat_get_blocks(self, block_count_per_side, orientation):
         raise NotImplementedError()
-    
+
     def _get_orientation(self):
         if not hasattr(self, '_cached_orientation'):
             try:
@@ -48,7 +48,7 @@ class Photo(fs.File):
             except Exception: # Couldn't read EXIF data, no transforms
                 self._cached_orientation = 0
         return self._cached_orientation
-    
+
     def _get_exif_timestamp(self):
         try:
             with self.path.open('rb') as fp:
@@ -57,11 +57,11 @@ class Photo(fs.File):
         except Exception:
             logging.info("Couldn't read EXIF of picture: %s", self.path)
         return ''
-    
+
     @classmethod
     def can_handle(cls, path):
         return fs.File.can_handle(path) and get_file_ext(path.name) in cls.HANDLED_EXTS
-    
+
     def get_display_info(self, group, delta):
         size = self.size
         mtime = self.mtime
@@ -90,7 +90,7 @@ class Photo(fs.File):
             'percentage': format_perc(percentage),
             'dupe_count': format_dupe_count(dupe_count),
         }
-    
+
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field == 'dimensions':
@@ -99,7 +99,7 @@ class Photo(fs.File):
                 self.dimensions = (self.dimensions[1], self.dimensions[0])
         elif field == 'exif_timestamp':
             self.exif_timestamp = self._get_exif_timestamp()
-    
+
     def get_blocks(self, block_count_per_side):
         return self._plat_get_blocks(block_count_per_side, self._get_orientation())
-    
+

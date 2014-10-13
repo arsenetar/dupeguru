@@ -1,14 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2010-04-12
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
-    QLabel, QTableView, QAbstractItemView, QApplication)
+from PyQt5.QtWidgets import (
+    QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
+    QLabel, QTableView, QAbstractItemView, QApplication
+)
 
 from hscommon.trans import trget
 from .problem_table import ProblemTable
@@ -23,18 +25,20 @@ class ProblemDialog(QDialog):
         self.model = model
         self.model.view = self
         self.table = ProblemTable(self.model.problem_table, view=self.tableView)
-        
+
         self.revealButton.clicked.connect(self.model.reveal_selected_dupe)
         self.closeButton.clicked.connect(self.accept)
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("Problems!"))
         self.resize(413, 323)
         self.verticalLayout = QVBoxLayout(self)
         self.label = QLabel(self)
-        msg = tr("There were problems processing some (or all) of the files. The cause of "
+        msg = tr(
+            "There were problems processing some (or all) of the files. The cause of "
             "these problems are described in the table below. Those files were not "
-            "removed from your results.")
+            "removed from your results."
+        )
         self.label.setText(msg)
         self.label.setWordWrap(True)
         self.verticalLayout.addWidget(self.label)
@@ -58,7 +62,7 @@ class ProblemDialog(QDialog):
         self.closeButton.setDefault(True)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-    
+
 
 if __name__ == '__main__':
     import sys

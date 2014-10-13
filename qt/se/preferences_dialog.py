@@ -1,15 +1,17 @@
 # Created By: Virgil Dupras
 # Created On: 2009-05-24
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 import sys
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import (QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
-    QLineEdit, QApplication)
+from PyQt5.QtWidgets import (
+    QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
+    QLineEdit, QApplication
+)
 
 from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.trans import trget
@@ -31,9 +33,9 @@ SCAN_TYPE_ORDER = [
 class PreferencesDialog(PreferencesDialogBase):
     def __init__(self, parent, app, **kwargs):
         super().__init__(parent, app, **kwargs)
-        
+
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
-    
+
     def _setupPreferenceWidgets(self):
         scanTypeLabels = [
             tr("Filename"),
@@ -73,23 +75,26 @@ class PreferencesDialog(PreferencesDialogBase):
         spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
-        self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"), self.widget)
+        self._setupAddCheckbox(
+            'ignoreHardlinkMatches',
+            tr("Ignore duplicates hardlinking to the same file"), self.widget
+        )
         self.verticalLayout_4.addWidget(self.ignoreHardlinkMatches)
         self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"), self.widget)
         self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
-    
+
     def _setupUi(self):
         PreferencesDialogBase._setupUi(self)
-        
+
         if ISLINUX:
             # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
             # doesn't have enough space, so we make the pref pane higher to compensate.
             self.resize(self.width(), 530)
         elif ISWINDOWS:
             self.resize(self.width(), 440)
-    
+
     def _load(self, prefs, setchecked):
         scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
         self.scanTypeComboBox.setCurrentIndex(scan_type_index)
@@ -97,17 +102,17 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
         self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
-    
+
     def _save(self, prefs, ischecked):
         prefs.scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
         prefs.small_file_threshold = tryint(self.sizeThresholdEdit.text())
-    
+
     def resetToDefaults(self):
         self.load(preferences.Preferences())
-    
+
     #--- Events
     def scanTypeChanged(self, index):
         scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
@@ -115,7 +120,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)
-    
+
 
 if __name__ == '__main__':
     from ..testapp import TestApp

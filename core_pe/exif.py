@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2011-04-20
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 # Heavily based on http://topo.math.u-psud.fr/~bousch/exifdump.py by Thierry Bousch (Public Domain)
@@ -181,7 +181,7 @@ class Fraction:
 
     def __repr__(self):
         return '%d/%d' % (self.num, self.den)
-    
+
 
 class TIFF_file:
     def __init__(self, data):
@@ -201,14 +201,14 @@ class TIFF_file:
             logging.debug(self.endian)
             logging.debug("Slice for offset %d length %d: %r and value: %d", offset, length, slice, val)
         return val
-    
+
     def first_IFD(self):
         return self.s2n(4, 4)
-    
+
     def next_IFD(self, ifd):
         entries = self.s2n(ifd, 2)
         return self.s2n(ifd + 2 + 12 * entries, 4)
-    
+
     def list_IFDs(self):
         i = self.first_IFD()
         a = []
@@ -216,7 +216,7 @@ class TIFF_file:
             a.append(i)
             i = self.next_IFD(i)
         return a
-    
+
     def dump_IFD(self, ifd):
         entries = self.s2n(ifd, 2)
         logging.debug("Entries for IFD %d: %d", ifd, entries)
@@ -230,7 +230,7 @@ class TIFF_file:
             type = self.s2n(entry+2, 2)
             if not 1 <= type <= 10:
                 continue # not handled
-            typelen = [ 1, 1, 2, 4, 8, 1, 1, 2, 4, 8 ] [type-1]
+            typelen = [1, 1, 2, 4, 8, 1, 1, 2, 4, 8][type-1]
             count = self.s2n(entry+4, 4)
             if count > MAX_COUNT:
                 logging.debug("Probably corrupt. Aborting.")
@@ -247,7 +247,7 @@ class TIFF_file:
                 for j in range(count):
                     if type in {5, 10}:
                         # The type is either 5 or 10
-                        value_j = Fraction(self.s2n(offset,   4, signed),
+                        value_j = Fraction(self.s2n(offset, 4, signed),
                                            self.s2n(offset+4, 4, signed))
                     else:
                         # Not a fraction
@@ -255,7 +255,7 @@ class TIFF_file:
                     values.append(value_j)
                     offset = offset + typelen
             # Now "values" is either a string or an array
-            a.append((tag,type,values))
+            a.append((tag, type, values))
         return a
 
 def read_exif_header(fp):
@@ -283,13 +283,13 @@ def get_fields(fp):
     logging.debug("Exif header length: %d bytes", length)
     data = fp.read(length-8)
     data_format = data[0]
-    logging.debug("%s format", {INTEL_ENDIAN:'Intel', MOTOROLA_ENDIAN:'Motorola'}[data_format])
+    logging.debug("%s format", {INTEL_ENDIAN: 'Intel', MOTOROLA_ENDIAN: 'Motorola'}[data_format])
     T = TIFF_file(data)
     # There may be more than one IFD per file, but we only read the first one because others are
     # most likely thumbnails.
     main_IFD_offset = T.first_IFD()
     result = {}
-    
+
     def add_tag_to_result(tag, values):
         try:
             stag = EXIF_TAGS[tag]
@@ -298,7 +298,7 @@ def get_fields(fp):
         if stag in result:
             return # don't overwrite data
         result[stag] = values
-    
+
     logging.debug("IFD at offset %d", main_IFD_offset)
     IFD = T.dump_IFD(main_IFD_offset)
     exif_off = gps_off = 0

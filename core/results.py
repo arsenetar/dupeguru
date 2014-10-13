@@ -96,7 +96,10 @@ class Results(Markable):
             self.__dupes = flatten(group.dupes for group in self.groups)
             if None in self.__dupes:
                 # This is debug logging to try to figure out #44
-                logging.warning("There is a None value in the Results' dupe list. dupes: %r groups: %r", self.__dupes, self.groups)
+                logging.warning(
+                    "There is a None value in the Results' dupe list. dupes: %r groups: %r",
+                    self.__dupes, self.groups
+                )
             if self.__filtered_dupes:
                 self.__dupes = [dupe for dupe in self.__dupes if dupe in self.__filtered_dupes]
             sd = self.__dupes_sort_descriptor
@@ -249,7 +252,8 @@ class Results(Markable):
                     second_file = dupes[int(attrs['second'])]
                     percentage = int(attrs['percentage'])
                     group.add_match(engine.Match(first_file, second_file, percentage))
-                except (IndexError, KeyError, ValueError): # Covers missing attr, non-int values and indexes out of bounds
+                except (IndexError, KeyError, ValueError):
+                    # Covers missing attr, non-int values and indexes out of bounds
                     pass
             if (not group.matches) and (len(dupes) >= 2):
                 do_match(dupes[0], dupes[1:], group)
@@ -393,7 +397,7 @@ class Results(Markable):
             self.__get_dupe_list()
         keyfunc = lambda d: self.app._get_dupe_sort_key(d, lambda: self.get_group_of_duplicate(d), key, delta)
         self.__dupes.sort(key=keyfunc, reverse=not asc)
-        self.__dupes_sort_descriptor = (key,asc,delta)
+        self.__dupes_sort_descriptor = (key, asc, delta)
 
     def sort_groups(self, key, asc=True):
         """Sort :attr:`groups` according to ``key``.
@@ -405,9 +409,10 @@ class Results(Markable):
         """
         keyfunc = lambda g: self.app._get_group_sort_key(g, key)
         self.groups.sort(key=keyfunc, reverse=not asc)
-        self.__groups_sort_descriptor = (key,asc)
+        self.__groups_sort_descriptor = (key, asc)
 
     #---Properties
-    dupes     = property(__get_dupe_list)
-    groups    = property(__get_groups, __set_groups)
+    dupes = property(__get_dupe_list)
+    groups = property(__get_groups, __set_groups)
     stat_line = property(__get_stat_line)
+

@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2006/05/02
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from xml.etree import ElementTree as ET
@@ -12,7 +12,7 @@ from hscommon.util import FileOrPath
 
 class IgnoreList:
     """An ignore list implementation that is iterable, filterable and exportable to XML.
-    
+
     Call Ignore to add an ignore list entry, and AreIgnore to check if 2 items are in the list.
     When iterated, 2 sized tuples will be returned, the tuples containing 2 items ignored together.
     """
@@ -20,43 +20,43 @@ class IgnoreList:
     def __init__(self):
         self._ignored = {}
         self._count = 0
-    
+
     def __iter__(self):
-        for first,seconds in self._ignored.items():
+        for first, seconds in self._ignored.items():
             for second in seconds:
-                yield (first,second)
-    
+                yield (first, second)
+
     def __len__(self):
         return self._count
-    
+
     #---Public
-    def AreIgnored(self,first,second):
-        def do_check(first,second):
+    def AreIgnored(self, first, second):
+        def do_check(first, second):
             try:
                 matches = self._ignored[first]
                 return second in matches
             except KeyError:
                 return False
-        
-        return do_check(first,second) or do_check(second,first)
-    
+
+        return do_check(first, second) or do_check(second, first)
+
     def Clear(self):
         self._ignored = {}
         self._count = 0
-    
-    def Filter(self,func):
+
+    def Filter(self, func):
         """Applies a filter on all ignored items, and remove all matches where func(first,second)
         doesn't return True.
         """
         filtered = IgnoreList()
-        for first,second in self:
-            if func(first,second):
-                filtered.Ignore(first,second)
+        for first, second in self:
+            if func(first, second):
+                filtered.Ignore(first, second)
         self._ignored = filtered._ignored
         self._count = filtered._count
-    
-    def Ignore(self,first,second):
-        if self.AreIgnored(first,second):
+
+    def Ignore(self, first, second):
+        if self.AreIgnored(first, second):
             return
         try:
             matches = self._ignored[first]
@@ -70,7 +70,7 @@ class IgnoreList:
                 matches.add(second)
                 self._ignored[first] = matches
         self._count += 1
-    
+
     def remove(self, first, second):
         def inner(first, second):
             try:
@@ -85,14 +85,14 @@ class IgnoreList:
                     return False
             except KeyError:
                 return False
-        
+
         if not inner(first, second):
             if not inner(second, first):
                 raise ValueError()
-    
+
     def load_from_xml(self, infile):
         """Loads the ignore list from a XML created with save_to_xml.
-        
+
         infile can be a file object or a filename.
         """
         try:
@@ -109,10 +109,10 @@ class IgnoreList:
                 subfile_path = sfn.get('path')
                 if subfile_path:
                     self.Ignore(file_path, subfile_path)
-    
+
     def save_to_xml(self, outfile):
         """Create a XML file that can be used by load_from_xml.
-        
+
         outfile can be a file object or a filename.
         """
         root = ET.Element('ignore_list')
@@ -125,5 +125,5 @@ class IgnoreList:
         tree = ET.ElementTree(root)
         with FileOrPath(outfile, 'wb') as fp:
             tree.write(fp, encoding='utf-8')
-    
+
 

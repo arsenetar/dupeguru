@@ -16,9 +16,11 @@ import platform
 import glob
 
 from hscommon.plat import ISWINDOWS, ISLINUX
-from hscommon.build import (add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
+from hscommon.build import (
+    add_to_pythonpath, print_and_do, copy_packages, build_debian_changelog,
     copy_qt_plugins, get_module_version, filereplace, copy, setup_package_argparser,
-    package_cocoa_app_in_dmg, copy_all, find_in_path)
+    package_cocoa_app_in_dmg, copy_all, find_in_path
+)
 
 def parse_args():
     parser = ArgumentParser()
@@ -52,7 +54,8 @@ def package_windows(edition, dev):
         plugin_names = ['accessible', 'codecs', 'iconengines', 'imageformats']
         copy_qt_plugins(plugin_names, plugin_dest)
 
-    # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it explicitly because of that.
+    # Since v4.2.3, cx_freeze started to falsely include tkinter in the package. We exclude it
+    # explicitly because of that.
     options = {
         'build_exe': {
             'includes': 'atexit',
@@ -151,8 +154,10 @@ def package_debian_distribution(edition, distribution):
     changelog_dest = op.join(debdest, 'changelog')
     project_name = debopts['pkgname']
     from_version = {'se': '2.9.2', 'me': '5.7.2', 'pe': '1.8.5'}[edition]
-    build_debian_changelog(changelogpath, changelog_dest, project_name, from_version=from_version,
-        distribution=distribution)
+    build_debian_changelog(
+        changelogpath, changelog_dest, project_name, from_version=from_version,
+        distribution=distribution
+    )
     shutil.copy(op.join('images', ed('dg{0}_logo_128.png')), srcpath)
     os.chdir(destpath)
     cmd = "dpkg-buildpackage -S"

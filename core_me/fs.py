@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2009-10-23
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from hsaudiotag import auto
@@ -12,32 +12,34 @@ from hscommon.util import get_file_ext, format_size, format_time
 from core.app import format_timestamp, format_perc, format_words, format_dupe_count
 from core import fs
 
-TAG_FIELDS = {'audiosize', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
-    'album', 'genre', 'year', 'track', 'comment'}
+TAG_FIELDS = {
+    'audiosize', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
+    'album', 'genre', 'year', 'track', 'comment'
+}
 
 class MusicFile(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
     INITIAL_INFO.update({
         'audiosize': 0,
-        'bitrate'  : 0,
-        'duration' : 0,
-        'samplerate':0,
-        'artist'  : '',
-        'album'   : '',
-        'title'   : '',
-        'genre'   : '',
-        'comment' : '',
-        'year'    : '',
-        'track'   : 0,
+        'bitrate': 0,
+        'duration': 0,
+        'samplerate': 0,
+        'artist': '',
+        'album': '',
+        'title': '',
+        'genre': '',
+        'comment': '',
+        'year': '',
+        'track': 0,
     })
     __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
-    
+
     @classmethod
     def can_handle(cls, path):
         if not fs.File.can_handle(path):
             return False
         return get_file_ext(path.name) in auto.EXT2CLASS
-    
+
     def get_display_info(self, group, delta):
         size = self.size
         duration = self.duration
@@ -67,7 +69,7 @@ class MusicFile(fs.File):
             'bitrate': str(bitrate),
             'samplerate': str(samplerate),
             'extension': self.extension,
-            'mtime': format_timestamp(mtime,delta and m),
+            'mtime': format_timestamp(mtime, delta and m),
             'title': self.title,
             'artist': self.artist,
             'album': self.album,
@@ -79,11 +81,11 @@ class MusicFile(fs.File):
             'words': format_words(self.words) if hasattr(self, 'words') else '',
             'dupe_count': format_dupe_count(dupe_count),
         }
-    
+
     def _get_md5partial_offset_and_size(self):
         f = auto.File(str(self.path))
         return (f.audio_offset, f.audio_size)
-    
+
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field in TAG_FIELDS:
@@ -99,4 +101,4 @@ class MusicFile(fs.File):
             self.comment = f.comment
             self.year = f.year
             self.track = f.track
-    
+

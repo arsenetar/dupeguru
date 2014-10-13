@@ -38,8 +38,10 @@ DEBUG_MODE_PREFERENCE = 'DebugMode'
 
 MSG_NO_MARKED_DUPES = tr("There are no marked duplicates. Nothing has been done.")
 MSG_NO_SELECTED_DUPES = tr("There are no selected duplicates. Nothing has been done.")
-MSG_MANY_FILES_TO_OPEN = tr("You're about to open many files at once. Depending on what those "
-    "files are opened with, doing so can create quite a mess. Continue?")
+MSG_MANY_FILES_TO_OPEN = tr(
+    "You're about to open many files at once. Depending on what those "
+    "files are opened with, doing so can create quite a mess. Continue?"
+)
 
 class DestType:
     Direct = 0
@@ -265,8 +267,10 @@ class DupeGuru(Broadcaster):
             return None
 
     def _get_export_data(self):
-        columns = [col for col in self.result_table.columns.ordered_columns
-            if col.visible and col.name != 'marked']
+        columns = [
+            col for col in self.result_table.columns.ordered_columns
+            if col.visible and col.name != 'marked'
+        ]
         colnames = [col.display for col in columns]
         rows = []
         for group_id, group in enumerate(self.results.groups):
@@ -278,8 +282,10 @@ class DupeGuru(Broadcaster):
         return colnames, rows
 
     def _results_changed(self):
-        self.selected_dupes = [d for d in self.selected_dupes
-            if self.results.get_group_of_duplicate(d) is not None]
+        self.selected_dupes = [
+            d for d in self.selected_dupes
+            if self.results.get_group_of_duplicate(d) is not None
+        ]
         self.notify('results_changed')
 
     def _start_job(self, jobid, func, args=()):
@@ -287,7 +293,10 @@ class DupeGuru(Broadcaster):
         try:
             self.progress_window.run(jobid, title, func, args=args)
         except job.JobInProgressError:
-            msg = tr("A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again.")
+            msg = tr(
+                "A previous action is still hanging in there. You can't start a new one yet. Wait "
+                "a few seconds, then try again."
+            )
             self.view.show_message(msg)
 
     def _job_completed(self, jobid):
@@ -439,8 +448,10 @@ class DupeGuru(Broadcaster):
             return
         if not self.deletion_options.show(self.results.mark_count):
             return
-        args = [self.deletion_options.link_deleted, self.deletion_options.use_hardlinks,
-            self.deletion_options.direct]
+        args = [
+            self.deletion_options.link_deleted, self.deletion_options.use_hardlinks,
+            self.deletion_options.direct
+        ]
         logging.debug("Starting deletion job with args %r", args)
         self._start_job(JobType.Delete, self._do_delete, args=args)
 
@@ -550,8 +561,10 @@ class DupeGuru(Broadcaster):
         # If no group was changed, however, we don't touch the selection.
         if not self.result_table.power_marker:
             if changed_groups:
-                self.selected_dupes = [d for d in self.selected_dupes
-                    if self.results.get_group_of_duplicate(d).ref is d]
+                self.selected_dupes = [
+                    d for d in self.selected_dupes
+                    if self.results.get_group_of_duplicate(d).ref is d
+                ]
             self.notify('results_changed')
         else:
             # If we're in "Dupes Only" mode (previously called Power Marker), things are a bit
@@ -604,7 +617,7 @@ class DupeGuru(Broadcaster):
     def purge_ignore_list(self):
         """Remove files that don't exist from :attr:`ignore_list`.
         """
-        self.scanner.ignore_list.Filter(lambda f,s:op.exists(f) and op.exists(s))
+        self.scanner.ignore_list.Filter(lambda f, s: op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
 
     def remove_directories(self, indexes):
@@ -641,7 +654,7 @@ class DupeGuru(Broadcaster):
         msg = tr("You are about to remove %d files from results. Continue?")
         if not self.view.ask_yes_no(msg % self.results.mark_count):
             return
-        self.results.perform_on_marked(lambda x:None, True)
+        self.results.perform_on_marked(lambda x: None, True)
         self._results_changed()
 
     def remove_selected(self):

@@ -1,14 +1,16 @@
 # Created By: Virgil Dupras
 # Created On: 2011-01-21
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
 from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
-    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox)
+from PyQt5.QtWidgets import (
+    QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
+    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox
+)
 
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
@@ -25,12 +27,12 @@ class PreferencesDialogBase(QDialog):
         super().__init__(parent, flags, **kwargs)
         self.app = app
         self._setupUi()
-        
+
         self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
         self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
-    
+
     def _setupScanTypeBox(self, labels):
         self.scanTypeHLayout = QHBoxLayout()
         self.scanTypeLabel = QLabel(self)
@@ -43,7 +45,7 @@ class PreferencesDialogBase(QDialog):
             self.scanTypeComboBox.addItem(label)
         self.scanTypeHLayout.addWidget(self.scanTypeComboBox)
         self.widgetsVLayout.addLayout(self.scanTypeHLayout)
-    
+
     def _setupFilterHardnessBox(self):
         self.filterHardnessHLayout = QHBoxLayout()
         self.filterHardnessLabel = QLabel(self)
@@ -82,7 +84,7 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessHLayoutSub2.addWidget(self.fewerResultsLabel)
         self.filterHardnessVLayout.addLayout(self.filterHardnessHLayoutSub2)
         self.filterHardnessHLayout.addLayout(self.filterHardnessVLayout)
-    
+
     def _setupBottomPart(self):
         # The bottom part of the pref panel is always the same in all editions.
         self.fontSizeLabel = QLabel(tr("Font size:"))
@@ -107,18 +109,18 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandLabel)
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
-    
+
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
             parent = self
         cb = QCheckBox(parent)
         cb.setText(label)
         setattr(self, name, cb)
-    
+
     def _setupPreferenceWidgets(self):
         # Edition-specific
         pass
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("Preferences"))
         self.resize(304, 263)
@@ -134,15 +136,15 @@ class PreferencesDialogBase(QDialog):
         if (not ISOSX) and (not ISLINUX):
             self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
-    
+
     def _load(self, prefs, setchecked):
         # Edition-specific
         pass
-    
+
     def _save(self, prefs, ischecked):
         # Edition-specific
         pass
-    
+
     def load(self, prefs=None):
         if prefs is None:
             prefs = self.app.prefs
@@ -163,7 +165,7 @@ class PreferencesDialogBase(QDialog):
             langindex = 0
         self.languageComboBox.setCurrentIndex(langindex)
         self._load(prefs, setchecked)
-    
+
     def save(self):
         prefs = self.app.prefs
         prefs.filter_hardness = self.filterHardnessSlider.value()
@@ -184,9 +186,10 @@ class PreferencesDialogBase(QDialog):
             QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
-    
+
     #--- Events
     def buttonClicked(self, button):
         role = self.buttonBox.buttonRole(button)
         if role == QDialogButtonBox.ResetRole:
             self.resetToDefaults()
+

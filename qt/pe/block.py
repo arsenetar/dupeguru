@@ -1,12 +1,12 @@
 # Created By: Virgil Dupras
 # Created On: 2009-05-10
 # Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.hardcoded.net/licenses/bsd_license
 
-from ._block_qt import getblocks
+from ._block_qt import getblocks # NOQA
 
 # Converted to C
 # def getblock(image):
@@ -24,7 +24,7 @@ from ._block_qt import getblocks
 #         return (red // pixel_count, green // pixel_count, blue // pixel_count)
 #     else:
 #         return (0, 0, 0)
-# 
+#
 # def getblocks(image, block_count_per_side):
 #     width = image.width()
 #     height = image.height()

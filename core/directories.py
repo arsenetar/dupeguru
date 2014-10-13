@@ -62,10 +62,10 @@ class Directories:
                 return True
         return False
 
-    def __delitem__(self,key):
+    def __delitem__(self, key):
         self._dirs.__delitem__(key)
 
-    def __getitem__(self,key):
+    def __getitem__(self, key):
         return self._dirs.__getitem__(key)
 
     def __len__(self):
@@ -95,7 +95,8 @@ class Directories:
                     file.is_ref = state == DirectoryState.Reference
                     filepaths.add(file.path)
                     yield file
-            # it's possible that a folder (bundle) gets into the file list. in that case, we don't want to recurse into it
+            # it's possible that a folder (bundle) gets into the file list. in that case, we don't
+            # want to recurse into it
             subfolders = [p for p in from_path.listdir() if not p.islink() and p.isdir() and p not in filepaths]
             for subfolder in subfolders:
                 for file in self._get_files(subfolder, j):
@@ -144,7 +145,7 @@ class Directories:
         """
         try:
             subpaths = [p for p in path.listdir() if p.isdir()]
-            subpaths.sort(key=lambda x:x.name.lower())
+            subpaths.sort(key=lambda x: x.name.lower())
             return subpaths
         except EnvironmentError:
             return []
