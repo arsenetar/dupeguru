@@ -1,3 +1,10 @@
+=== 3.9.1 (2014-10-17)
+
+* Fixed ``AttributeError: 'ComboboxModel' object has no attribute 'reset'``. [Linux, Windows] (#254)
+* Fixed ``PermissionError`` on saving results. (#266)
+* Fixed a build problem introduced by Sphinx 1.2.3.
+* Updated German localisation, by Frank Weber.
+
 === 3.9.0 (2014-04-19)
 
 * This is mostly a dependencies upgrade.
