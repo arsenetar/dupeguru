@@ -475,7 +475,10 @@ class DupeGuru(Broadcaster):
         dest_file = self.view.select_dest_file(tr("Select a destination for your exported CSV"), 'csv')
         if dest_file:
             colnames, rows = self._get_export_data()
-            export.export_to_csv(dest_file, colnames, rows)
+            try:
+                export.export_to_csv(dest_file, colnames, rows)
+            except OSError as e:
+                self.view.show_message(tr("Couldn't write to file: {}").format(str(e)))
 
     def get_display_info(self, dupe, group, delta=False):
         def empty_data():
@@ -718,7 +721,10 @@ class DupeGuru(Broadcaster):
 
         :param str filename: path of the file to save results (as XML) to.
         """
-        self.results.save_to_xml(filename)
+        try:
+            self.results.save_to_xml(filename)
+        except OSError as e:
+            self.view.show_message(tr("Couldn't write to file: {}").format(str(e)))
 
     def start_scanning(self):
         """Starts an async job to scan for duplicates.
