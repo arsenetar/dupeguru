@@ -214,7 +214,10 @@ def main():
         if ISWINDOWS:
             package_windows(edition, dev)
         elif ISLINUX:
-            distname, _, _ = platform.dist()
+            if not args.arch_pkg:
+                distname, _, _ = platform.dist()
+            else:
+                distname = 'arch'
             if distname == 'arch':
                 package_arch(edition)
             else:
@@ -224,3 +227,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
