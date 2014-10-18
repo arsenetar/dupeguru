@@ -130,7 +130,7 @@ def package_cocoa_app_in_dmg(app_path, destfolder, args):
     # a valid signature.
     if args.sign_identity:
         sign_identity = "Developer ID Application: {}".format(args.sign_identity)
-        result = print_and_do('codesign --force --sign "{}" "{}"'.format(sign_identity, app_path))
+        result = print_and_do('codesign --force --deep --sign "{}" "{}"'.format(sign_identity, app_path))
         if result != 0:
             print("ERROR: Signing failed. Aborting packaging.")
             return
