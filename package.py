@@ -166,7 +166,7 @@ def package_debian_distribution(edition, distribution):
 
 def package_debian(edition):
     print("Packaging for Ubuntu")
-    for distribution in ['trusty']:
+    for distribution in ['trusty', 'utopic']:
         package_debian_distribution(edition, distribution)
 
 def package_arch(edition):
