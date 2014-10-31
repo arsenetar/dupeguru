@@ -1,3 +1,10 @@
+# About the "rust" branch
+
+I'm really excited about Rust and I'm trying out a Rust implementation of dupeGuru's bottlenecks
+(PE's image comparison).
+
+For fun.
+
 # dupeGuru
 
 [dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
