@@ -95,7 +95,15 @@ actions on a subset of it. For example, you could easily mark all duplicates wit
 containing "copy" from your results using the filter.
 
 To use the filtering feature, type your filter in the "Filter" search field at the top-right corner
-of the results window. To go back to unfiltered result, blank out the field or click on the "X".
+of the results window. What you type in that box will be applied to the *whole path* of every
+duplicate in the results. Only duplicate *groups* having at least one duplicate matching the filter
+will be shown.
+
+When having groups where not all duplicates match the filter, we still show all duplicates of
+the group. However, non-matching duplicates are in "reference mode". Therefore, you can perform
+actions like "Mark All" and be sure to only mark filtered duplicates.
+
+To go back to unfiltered result, blank out the field or click on the "X".
 
 In simple mode (the default mode), whatever you type as the filter is the string used to perform the
 actual filtering, with the exception of one wildcard: **\***. Thus, if you type "[*]" as your
@@ -110,12 +118,6 @@ Matches are case insensitive in both simple and regexp mode.
 
 For the filter to match, your regular expression don't have to match the whole filename, it just
 have to contain a string matching the expression.
-
-You might notice that not all duplicates in the filtered results will match your filter. That is
-because as soon as one single duplicate in a group matches the filter, the whole group stays in the
-results so you can have a better view of the duplicate's context. However, non-matching duplicates
-are in "reference mode". Therefore, you can perform actions like Mark All and be sure to only mark
-filtered duplicates.
 
 Action Menu
 -----------
