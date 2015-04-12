@@ -17,7 +17,7 @@ The goal is to eventually have another active maintainer, but before we can get 
 needs more contributors. It is very much lacking on that side right now.
 
 Whatever your skills, if you are remotely interestested in being a contributor, I'm interested in
-mentoring you. If that's the casem please refer to [the open ticket on the subject](contrib-issue)
+mentoring you. If that's the case, please refer to [the open ticket on the subject](contrib-issue)
 and let's get started.
 
 # Contents of this folder
