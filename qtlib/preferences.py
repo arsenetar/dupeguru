@@ -21,6 +21,7 @@ LANGNAMES = {
     'cs': tr("Czech"),
     'it': tr("Italian"),
     'hy': tr("Armenian"),
+    'ko': tr("Korean"),
     'ru': tr("Russian"),
     'uk': tr("Ukrainian"),
     'nl': tr('Dutch'),

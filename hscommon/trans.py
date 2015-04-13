@@ -50,6 +50,7 @@ def get_locale_name(lang):
             'es': 'esn',
             'fr': 'fra',
             'it': 'ita',
+            'ko': 'korean',
             'nl': 'nld',
             'pl_PL': 'polish_poland',
             'pt_BR': 'ptb',
@@ -58,19 +59,20 @@ def get_locale_name(lang):
         }
     else:
         LANG2LOCALENAME = {
-            'fr': 'fr_FR',
-            'de': 'de_DE',
-            'it': 'it_IT',
-            'zh_CN': 'zh_CN',
             'cs': 'cs_CZ',
+            'de': 'de_DE',
+            'es': 'es_ES',
+            'fr': 'fr_FR',
+            'it': 'it_IT',
             'nl': 'nl_NL',
             'hy': 'hy_AM',
-            'ru': 'ru_RU',
-            'uk': 'uk_UA',
+            'ko': 'ko_KR',
             'pl_PL': 'pl_PL',
             'pt_BR': 'pt_BR',
-            'es': 'es_ES',
+            'ru': 'ru_RU',
+            'uk': 'uk_UA',
             'vi': 'vi_VN',
+            'zh_CN': 'zh_CN',
         }
     if lang not in LANG2LOCALENAME:
         return None
