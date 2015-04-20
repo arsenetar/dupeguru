@@ -1,10 +1,10 @@
 # Created By: Virgil Dupras
 # Created On: 2010-06-23
-# Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "BSD" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
-# http://www.hardcoded.net/licenses/bsd_license
+# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
+# http://www.gnu.org/licenses/gpl-3.0.html
 
 # Doing i18n with GNU gettext for the core text gets complicated, so what I do is that I make the
 # GUI layer responsible for supplying a tr() function.
@@ -44,12 +44,36 @@ def set_tr(new_tr, new_trget=None):
 def get_locale_name(lang):
     if ISWINDOWS:
         # http://msdn.microsoft.com/en-us/library/39cwe7zf(vs.71).aspx
-        LANG2LOCALENAME = {'fr': 'fra', 'de': 'deu', 'it': 'ita', 'zh_CN': 'chs', 'cs': 'czy',
-            'nl': 'nld', 'ru': 'rus', 'pt_BR': 'ptb', 'es': 'esn'}
+        LANG2LOCALENAME = {
+            'cs': 'czy',
+            'de': 'deu',
+            'es': 'esn',
+            'fr': 'fra',
+            'it': 'ita',
+            'ko': 'korean',
+            'nl': 'nld',
+            'pl_PL': 'polish_poland',
+            'pt_BR': 'ptb',
+            'ru': 'rus',
+            'zh_CN': 'chs',
+        }
     else:
-        LANG2LOCALENAME = {'fr': 'fr_FR', 'de': 'de_DE', 'it': 'it_IT', 'zh_CN': 'zh_CN',
-            'cs': 'cs_CZ', 'nl': 'nl_NL', 'hy': 'hy_AM', 'ru': 'ru_RU', 'uk': 'uk_UA',
-            'pt_BR': 'pt_BR', 'es': 'es_ES', 'vi': 'vi_VN'}
+        LANG2LOCALENAME = {
+            'cs': 'cs_CZ',
+            'de': 'de_DE',
+            'es': 'es_ES',
+            'fr': 'fr_FR',
+            'it': 'it_IT',
+            'nl': 'nl_NL',
+            'hy': 'hy_AM',
+            'ko': 'ko_KR',
+            'pl_PL': 'pl_PL',
+            'pt_BR': 'pt_BR',
+            'ru': 'ru_RU',
+            'uk': 'uk_UA',
+            'vi': 'vi_VN',
+            'zh_CN': 'zh_CN',
+        }
     if lang not in LANG2LOCALENAME:
         return None
     result = LANG2LOCALENAME[lang]
@@ -90,7 +114,7 @@ def install_gettext_trans(base_folder, lang):
             return gettext.translation(domain, localedir=base_folder, languages=[lang]).gettext
         except IOError:
             return lambda s: s
-    
+
     default_gettext = gettext_trget('core')
     def gettext_tr(s, context=None):
         if not context:

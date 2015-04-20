@@ -1,9 +1,12 @@
+# 
 # Translators:
+# Igor Fokusov <igor@fokusov.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2013-04-28 18:31+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2015-04-14 21:16+0000\n"
+"Last-Translator: Igor Fokusov <igor@fokusov.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/hscommon/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: ru\n"
@@ -11,63 +14,90 @@ msgstr ""
 
 #: qtlib/about_box.py:29
 msgid "About {}"
-msgstr ""
+msgstr "О {}"
 
 #: qtlib/about_box.py:49
 msgid "Version {}"
-msgstr ""
+msgstr "Версия {}"
+
+#: qtlib/about_box.py:53
+msgid "Copyright Hardcoded Software 2014"
+msgstr "Copyright Hardcoded Software 2014"
 
 #: qtlib/error_report_dialog.py:39
 msgid "Error Report"
 msgstr "Сообщение об ошибке"
 
+#: qtlib/error_report_dialog.py:43
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Что-то пошло не так. Хотите отправить отчёт об ошибке?"
+
+#: qtlib/error_report_dialog.py:49
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr "Отчеты об ошибках нужно отправлять в Github issues проекта. Скопируйте текст ошибки выше и вставьте в созданную заметку о проблеме (перед этим желательно проверить - не создано ли уже такой проблемы до вас). Также нам очень поможет краткое описание как вы получили такую ошибку. Спасибо!\n\nВ принципе, программа может продолжать работу, но стабильная работа не гарантируется. Поэтому желательно перезапустить программу."
+
+#: qtlib/error_report_dialog.py:64
+msgid "Close"
+msgstr "Закрыть"
+
+#: qtlib/error_report_dialog.py:68
+msgid "Go to Github"
+msgstr "Перейти на Github"
+
 #: qtlib/preferences.py:17
 msgid "English"
-msgstr ""
+msgstr "Английский"
 
 #: qtlib/preferences.py:18
 msgid "French"
-msgstr ""
+msgstr "Французский"
 
 #: qtlib/preferences.py:19
 msgid "German"
-msgstr ""
+msgstr "Немецкий"
 
 #: qtlib/preferences.py:20
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Китайский (упрощенный)"
 
 #: qtlib/preferences.py:21
 msgid "Czech"
-msgstr ""
+msgstr "Чешский"
 
 #: qtlib/preferences.py:22
 msgid "Italian"
-msgstr ""
+msgstr "Итальянский"
 
 #: qtlib/preferences.py:23
 msgid "Armenian"
-msgstr ""
+msgstr "Армянский"
 
 #: qtlib/preferences.py:24
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 #: qtlib/preferences.py:25
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украинский"
 
 #: qtlib/preferences.py:26
 msgid "Dutch"
-msgstr ""
+msgstr "Голландский"
 
 #: qtlib/preferences.py:27
 msgid "Brazilian"
-msgstr ""
+msgstr "Бразильский"
 
 #: qtlib/preferences.py:28
 msgid "Spanish"
-msgstr ""
+msgstr "Испанский"
+
+#: qtlib/preferences.py:29
+msgid "Vietnamese"
+msgstr "Вьетнамский"
 
 #: qtlib/recent.py:53
 msgid "Clear List"
@@ -75,31 +105,4 @@ msgstr "Очистить список"
 
 #: qtlib/search_edit.py:41
 msgid "Search..."
-msgstr ""
-
-#: qtlib/about_box.py:53
-msgid "Copyright Hardcoded Software 2014"
-msgstr ""
-
-#: qtlib/preferences.py:29
-msgid "Vietnamese"
-msgstr ""
-
-#: qtlib/error_report_dialog.py:43
-msgid "Something went wrong. How about reporting the error?"
-msgstr ""
-
-#: qtlib/error_report_dialog.py:49
-msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-"\n"
-"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr ""
-
-#: qtlib/error_report_dialog.py:64
-msgid "Close"
-msgstr ""
-
-#: qtlib/error_report_dialog.py:68
-msgid "Go to Github"
-msgstr ""
+msgstr "Искать..."

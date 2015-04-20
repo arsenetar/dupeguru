@@ -13,11 +13,23 @@ a system. It's written mostly in Python 3 and has the peculiarity of using
 is written in Objective-C and uses Cocoa. On Linux and Windows, it's written in Python and uses Qt5.
 
 dupeGuru comes in 3 editions (standard, music and picture) which are all buildable from this same
-source tree. You choose the edition you want to build in a ``configure.py`` flag.
+source tree. You choose the edition you want to build in a `configure.py` flag.
+
+# Current status: People wanted
+
+dupeGuru has currently only one maintainer, me. This is a dangerous situation that needs to be
+corrected.
+
+The goal is to eventually have another active maintainer, but before we can get there, the project
+needs more contributors. It is very much lacking on that side right now.
+
+Whatever your skills, if you are remotely interestested in being a contributor, I'm interested in
+mentoring you. If that's the case, please refer to [the open ticket on the subject][contrib-issue]
+and let's get started.
 
 # Contents of this folder
 
-This folder contains the source for dupeGuru. Its documentation is in ``help``, but is also
+This folder contains the source for dupeGuru. Its documentation is in `help`, but is also
 [available online][documentation] in its built form. Here's how this source tree is organised:
 
 * core: Contains the core logic code for dupeGuru. It's Python code.
@@ -97,6 +109,7 @@ You can also package dupeGuru into an installable package with:
 
 [dupeguru]: http://www.hardcoded.net/dupeguru/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
+[contrib-issue]: https://github.com/hsoft/dupeguru/issues/300
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
 [setuptools]: https://pypi.python.org/pypi/setuptools

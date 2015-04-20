@@ -1,0 +1,231 @@
+# 
+# Translators:
+# woosuk park <bjh13579@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2015-01-24 07:38+0000\n"
+"Last-Translator: woosuk park <bjh13579@gmail.com>\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/dupeguru/language/ko/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: core/app.py:39
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:40
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr ""
+
+#: core/app.py:41
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr ""
+
+#: core/app.py:57
+msgid "Scanning for duplicates"
+msgstr ""
+
+#: core/app.py:58
+msgid "Loading"
+msgstr "불러오는중"
+
+#: core/app.py:59
+msgid "Moving"
+msgstr "이동중"
+
+#: core/app.py:60
+msgid "Copying"
+msgstr "복사중"
+
+#: core/app.py:61
+msgid "Sending to Trash"
+msgstr "휴지통으로 보내기"
+
+#: core/app.py:64
+msgid "Sending files to the recycle bin"
+msgstr "휴지통으로 보내기"
+
+#: core/app.py:290
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+
+#: core/app.py:297
+msgid "No duplicates found."
+msgstr "중복 파일이 없습니다."
+
+#: core/app.py:310
+msgid "All marked files were copied successfully."
+msgstr ""
+
+#: core/app.py:311
+msgid "All marked files were moved successfully."
+msgstr ""
+
+#: core/app.py:312
+msgid "All marked files were successfully sent to Trash."
+msgstr ""
+
+#: core/app.py:349
+msgid "'{}' already is in the list."
+msgstr "'{}' 는 이미 목록에 있습니다."
+
+#: core/app.py:351
+msgid "'{}' does not exist."
+msgstr "'{}' 가 존재하지 않습니다."
+
+#: core/app.py:360
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr ""
+
+#: core/app.py:426
+msgid "copy"
+msgstr "복사"
+
+#: core/app.py:426
+msgid "move"
+msgstr "이동"
+
+#: core/app.py:427
+msgid "Select a directory to {} marked files to"
+msgstr ""
+
+#: core/app.py:464
+msgid "Select a destination for your exported CSV"
+msgstr ""
+
+#: core/app.py:489
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr ""
+
+#: core/app.py:641 core/app.py:654
+msgid "You are about to remove %d files from results. Continue?"
+msgstr ""
+
+#: core/app.py:688
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr ""
+
+#: core/app.py:716
+msgid "Collecting files to scan"
+msgstr ""
+
+#: core/app.py:727
+msgid "The selected directories contain no scannable file."
+msgstr ""
+
+#: core/app.py:768
+msgid "%s (%d discarded)"
+msgstr ""
+
+#: core/engine.py:220 core/engine.py:265
+msgid "0 matches found"
+msgstr ""
+
+#: core/engine.py:238 core/engine.py:273
+msgid "%d matches found"
+msgstr ""
+
+#: core/engine.py:258 core/scanner.py:79
+msgid "Read size of %d/%d files"
+msgstr ""
+
+#: core/engine.py:464
+msgid "Grouped %d/%d matches"
+msgstr ""
+
+#: core/gui/deletion_options.py:69
+msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core/gui/ignore_list_dialog.py:24
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr ""
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr ""
+
+#: core/prioritize.py:96
+msgid "Ends with number"
+msgstr ""
+
+#: core/prioritize.py:97
+msgid "Doesn't end with number"
+msgstr ""
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr ""
+
+#: core/prioritize.py:99
+msgid "Shortest"
+msgstr ""
+
+#: core/prioritize.py:132
+msgid "Highest"
+msgstr ""
+
+#: core/prioritize.py:132
+msgid "Lowest"
+msgstr ""
+
+#: core/prioritize.py:159
+msgid "Newest"
+msgstr ""
+
+#: core/prioritize.py:159
+msgid "Oldest"
+msgstr ""
+
+#: core/results.py:126
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr ""
+
+#: core/results.py:133
+msgid " filter: %s"
+msgstr ""
+
+#: core/scanner.py:99
+msgid "Read metadata of %d/%d files"
+msgstr ""
+
+#: core/scanner.py:130
+msgid "Removing false matches"
+msgstr ""
+
+#: core/scanner.py:154
+msgid "Processed %d/%d matches against the ignore list"
+msgstr ""
+
+#: core/scanner.py:176
+msgid "Doing group prioritization"
+msgstr ""
+
+#: core_pe/matchblock.py:61
+msgid "Analyzed %d/%d pictures"
+msgstr ""
+
+#: core_pe/matchblock.py:153
+msgid "Performed %d/%d chunk matches"
+msgstr ""
+
+#: core_pe/matchblock.py:158
+msgid "Preparing for matching"
+msgstr ""
+
+#: core_pe/matchblock.py:193
+msgid "Verified %d/%d matches"
+msgstr ""
+
+#: core_pe/matchexif.py:18
+msgid "Read EXIF of %d/%d pictures"
+msgstr ""

@@ -1,10 +1,10 @@
 # Created By: Virgil Dupras
 # Created On: 2009-10-22
-# Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
 #
-# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
-# http://www.hardcoded.net/licenses/bsd_license
+# http://www.gnu.org/licenses/gpl-3.0.html
 
 # This is a fork from hsfs. The reason for this fork is that hsfs has been designed for musicGuru
 # and was re-used for dupeGuru. The problem is that hsfs is way over-engineered for dupeGuru,

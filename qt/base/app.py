@@ -1,10 +1,10 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-25
-# Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
 #
-# This software is licensed under the "BSD" License as described in the "LICENSE" file,
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
-# http://www.hardcoded.net/licenses/bsd_license
+# http://www.gnu.org/licenses/gpl-3.0.html
 
 import sys
 import os.path as op
@@ -90,7 +90,7 @@ class DupeGuru(QObject):
 
     def _update_options(self):
         self.model.scanner.mix_file_kind = self.prefs.mix_file_kind
-        self.model.options['escape_filter_regexp'] = self.prefs.use_regexp
+        self.model.options['escape_filter_regexp'] = not self.prefs.use_regexp
         self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
         self.model.options['copymove_dest_type'] = self.prefs.destination_type
