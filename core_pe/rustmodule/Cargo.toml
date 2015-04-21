@@ -1,0 +1,12 @@
+[package]
+name = "block"
+version = "0.0.1"
+authors = ["Virgil Dupras <hsoft@hardcoded.net>"]
+
+[lib]
+name = "block"
+crate-type = ["dylib"]
+
+[dependencies]
+image = "*"
+
