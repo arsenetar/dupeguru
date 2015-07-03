@@ -20,6 +20,18 @@ Whatever your skills, if you are remotely interestested in being a contributor, 
 mentoring you. If that's the case, please refer to [the open ticket on the subject][contrib-issue]
 and let's get started.
 
+## Slowed development
+
+Until I manage to find contributors, I'm slowing the development pace of dupeGuru. I'm not much
+interested in maintaining it alone, I personally have no use for this app (it's been a *loooong*,
+time since I had dupe problems :) )
+
+I don't want to let it die, however, so I will still do normal maintainership, that is, issue
+triaging, code review, critical bugfixes, releases management.
+
+But anything non-critical, I'm not going to implement it myself because I see every issue as a
+contribution opportunity.
+
 # Contents of this folder
 
 This folder contains the source for dupeGuru. Its documentation is in `help`, but is also
