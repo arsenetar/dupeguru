@@ -1,0 +1,123 @@
+# Translators:
+# Kees Duvekot, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2015-07-11 12:36+0000\n"
+"Last-Translator: Kees Duvekot\n"
+"Language-Team: Dutch (http://www.transifex.com/p/dupeguru/language/nl/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
+msgid "File Path"
+msgstr "Bestand locatie"
+
+#: core/gui/problem_table.py:18
+msgid "Error Message"
+msgstr "Fout Melding"
+
+#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
+#: core_se/result_table.py:21
+msgid "Kind"
+msgstr "Kind"
+
+#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
+#: core_se/result_table.py:19
+msgid "Folder"
+msgstr "Folder"
+
+#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
+#: core_se/result_table.py:18
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: core/prioritize.py:147
+msgid "Size"
+msgstr "Grote"
+
+#: core/prioritize.py:153 core_me/result_table.py:25
+#: core_pe/result_table.py:24 core_se/result_table.py:22
+msgid "Modification"
+msgstr "Aanpassing"
+
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr "Tijdsduur"
+
+#: core_me/prioritize.py:22 core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr "Sample frequentie"
+
+#: core_me/result_table.py:20
+msgid "Size (MB)"
+msgstr "Grote (MB)"
+
+#: core_me/result_table.py:21
+msgid "Time"
+msgstr "Tijd"
+
+#: core_me/result_table.py:23
+msgid "Sample Rate"
+msgstr "Sample Frequentie"
+
+#: core_me/result_table.py:26
+msgid "Title"
+msgstr "Titel"
+
+#: core_me/result_table.py:27
+msgid "Artist"
+msgstr "Artiest"
+
+#: core_me/result_table.py:28
+msgid "Album"
+msgstr "Album"
+
+#: core_me/result_table.py:29
+msgid "Genre"
+msgstr "Genre"
+
+#: core_me/result_table.py:30
+msgid "Year"
+msgstr "Jaar"
+
+#: core_me/result_table.py:31
+msgid "Track Number"
+msgstr "Track nummer"
+
+#: core_me/result_table.py:32
+msgid "Comment"
+msgstr "Commentaar"
+
+#: core_me/result_table.py:33 core_pe/result_table.py:25
+#: core_se/result_table.py:23
+msgid "Match %"
+msgstr "Zekerheid %"
+
+#: core_me/result_table.py:34 core_se/result_table.py:24
+msgid "Words Used"
+msgstr "Woorden gebruikt"
+
+#: core_me/result_table.py:35 core_pe/result_table.py:26
+#: core_se/result_table.py:25
+msgid "Dupe Count"
+msgstr "Dubbel telling"
+
+#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+msgid "Dimensions"
+msgstr "Afmetingen"
+
+#: core_pe/result_table.py:20 core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Grote (KB)"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr "EXIF Tijdstip"

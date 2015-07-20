@@ -20,7 +20,8 @@ from qtlib.preferences import LANGNAMES
 tr = trget('ui')
 
 SUPPORTED_LANGUAGES = [
-    'en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi', 'pl_PL', 'ko',
+    'en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi', 'pl_PL', 'ko', 'es',
+    'nl',
 ]
 
 class PreferencesDialogBase(QDialog):
@@ -28,6 +29,7 @@ class PreferencesDialogBase(QDialog):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
+        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: LANGNAMES[lang])
         self._setupUi()
 
         self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
@@ -95,7 +97,7 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addLayout(horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None]))
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
-        for lang in SUPPORTED_LANGUAGES:
+        for lang in self.supportedLanguages:
             self.languageComboBox.addItem(LANGNAMES[lang])
         self.widgetsVLayout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self.copyMoveLabel = QLabel(self)
@@ -162,7 +164,7 @@ class PreferencesDialogBase(QDialog):
         self.customCommandEdit.setText(prefs.custom_command)
         self.fontSizeSpinBox.setValue(prefs.tableFontSize)
         try:
-            langindex = SUPPORTED_LANGUAGES.index(self.app.prefs.language)
+            langindex = self.supportedLanguages.index(self.app.prefs.language)
         except ValueError:
             langindex = 0
         self.languageComboBox.setCurrentIndex(langindex)
@@ -180,9 +182,9 @@ class PreferencesDialogBase(QDialog):
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
-        lang = SUPPORTED_LANGUAGES[self.languageComboBox.currentIndex()]
+        lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
-        if oldlang not in SUPPORTED_LANGUAGES:
+        if oldlang not in self.supportedLanguages:
             oldlang = 'en'
         if lang != oldlang:
             QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))

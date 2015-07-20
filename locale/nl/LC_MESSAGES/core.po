@@ -1,0 +1,245 @@
+# Translators:
+# Kees Duvekot, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2015-07-11 12:39+0000\n"
+"Last-Translator: Kees Duvekot\n"
+"Language-Team: Dutch (http://www.transifex.com/p/dupeguru/language/nl/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/app.py:39
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr "Er zijn geen gemarkeerde dubbelingen. Er is niks gedaam"
+
+#: core/app.py:40
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr "Er zijn geen dubelingen geselecteerd. Er is niks gedaan"
+
+#: core/app.py:41
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr ""
+"Je staat op het punt om zeer veel bestanden tegelijkertijd te openen. "
+"Afhankelijk met welke applicaties die bestanden worden geopened kan het best"
+" een rommeltje worden. Doorgaan?"
+
+#: core/app.py:57
+msgid "Scanning for duplicates"
+msgstr "Dubbelingen aan het opsporen"
+
+#: core/app.py:58
+msgid "Loading"
+msgstr "Laden"
+
+#: core/app.py:59
+msgid "Moving"
+msgstr "Verplaatsen"
+
+#: core/app.py:60
+msgid "Copying"
+msgstr "Kopieeren"
+
+#: core/app.py:61
+msgid "Sending to Trash"
+msgstr "Naar de prullebak verplaatsen"
+
+#: core/app.py:64
+msgid "Sending files to the recycle bin"
+msgstr "Bestanden naar de prullebak aan het verplaatsen"
+
+#: core/app.py:290
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Er is nog een vorige actie bezig. Je kan nu nog geen nieuwe actie starten. "
+"Wacht een paar seconden en probeer het opnieuw"
+
+#: core/app.py:297
+msgid "No duplicates found."
+msgstr "Geen dubbelingen gevonden"
+
+#: core/app.py:310
+msgid "All marked files were copied successfully."
+msgstr "Alle gemarkeerde bestanden zijn succesvol gekopieerd."
+
+#: core/app.py:311
+msgid "All marked files were moved successfully."
+msgstr "Alle gemarkeerde bestanden zijn succesvol verplaatst."
+
+#: core/app.py:312
+msgid "All marked files were successfully sent to Trash."
+msgstr "Alle gemarkeerde bestanden zijn met succes in de prullenbak gedaan."
+
+#: core/app.py:349
+msgid "'{}' already is in the list."
+msgstr "'{}'staat al in de lijst."
+
+#: core/app.py:351
+msgid "'{}' does not exist."
+msgstr "'{}' bestaat niet."
+
+#: core/app.py:360
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr ""
+"Alle geselecteerde %d overeenkomsten zullen in toekomstige onderzoeken "
+"worden overgslagen. Doorgaan?"
+
+#: core/app.py:426
+msgid "copy"
+msgstr "kopieer"
+
+#: core/app.py:426
+msgid "move"
+msgstr "verplaats"
+
+#: core/app.py:427
+msgid "Select a directory to {} marked files to"
+msgstr ""
+
+#: core/app.py:464
+msgid "Select a destination for your exported CSV"
+msgstr "Selecteer een locatie voor de CSV export"
+
+#: core/app.py:489
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr ""
+"Er is nog geen \"aangepaste opdracht\" ingericht. Je kan dit doen bij de "
+"voorkeuren."
+
+#: core/app.py:641 core/app.py:654
+msgid "You are about to remove %d files from results. Continue?"
+msgstr ""
+"Je staat op het punt om %d bestanden te verwijderen uit de resultaten. "
+"Doorgaan?"
+
+#: core/app.py:688
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr ""
+"{} dubbelingen groepen waren veranderd door de prioriteits verschuiving."
+
+#: core/app.py:716
+msgid "Collecting files to scan"
+msgstr "Bestanden aan het verzamelen om te onderzoeken"
+
+#: core/app.py:727
+msgid "The selected directories contain no scannable file."
+msgstr ""
+"De geselecteerde folders bevatten geen bestanden die onderzocht kunnen "
+"worden."
+
+#: core/app.py:768
+msgid "%s (%d discarded)"
+msgstr "%s (%d weggelaten)"
+
+#: core/engine.py:220 core/engine.py:265
+msgid "0 matches found"
+msgstr "0 overeenkomsten gevonden"
+
+#: core/engine.py:238 core/engine.py:273
+msgid "%d matches found"
+msgstr "%d overeenkomsten gevonden"
+
+#: core/engine.py:258 core/scanner.py:79
+msgid "Read size of %d/%d files"
+msgstr "Bestands grote van %d/%d bestanden aan het lezen."
+
+#: core/engine.py:464
+msgid "Grouped %d/%d matches"
+msgstr "%d van %d overeenkomsten gegroepeerd"
+
+#: core/gui/deletion_options.py:69
+msgid "You are sending {} file(s) to the Trash."
+msgstr "Je verplaatst {} bestanden naar de prullenbak"
+
+#: core/gui/ignore_list_dialog.py:24
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr ""
+"Weet je zeker dat je all %d regels uit de overslaan lijst wilt verwijderen?"
+
+#: core/prioritize.py:68
+msgid "None"
+msgstr "Geen"
+
+#: core/prioritize.py:96
+msgid "Ends with number"
+msgstr "Eindigt met nummer"
+
+#: core/prioritize.py:97
+msgid "Doesn't end with number"
+msgstr "Eindigt niet met een nummer"
+
+#: core/prioritize.py:98
+msgid "Longest"
+msgstr "langste"
+
+#: core/prioritize.py:99
+msgid "Shortest"
+msgstr "kortste"
+
+#: core/prioritize.py:132
+msgid "Highest"
+msgstr "hoogste"
+
+#: core/prioritize.py:132
+msgid "Lowest"
+msgstr "laagste"
+
+#: core/prioritize.py:159
+msgid "Newest"
+msgstr "nieuwste"
+
+#: core/prioritize.py:159
+msgid "Oldest"
+msgstr "oudste"
+
+#: core/results.py:126
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s /%s) dubbelingen gemarkeerd"
+
+#: core/results.py:133
+msgid " filter: %s"
+msgstr "filter: %s"
+
+#: core/scanner.py:99
+msgid "Read metadata of %d/%d files"
+msgstr "Metadata van %d/%d bestanden gelezen"
+
+#: core/scanner.py:130
+msgid "Removing false matches"
+msgstr "Verkeerde overeenkomsten aan het verwijderen"
+
+#: core/scanner.py:154
+msgid "Processed %d/%d matches against the ignore list"
+msgstr "% d van de %d overeenkomsten vergeleken met de overslaan lijst"
+
+#: core/scanner.py:176
+msgid "Doing group prioritization"
+msgstr "Groepen aan het priotiriseren"
+
+#: core_pe/matchblock.py:61
+msgid "Analyzed %d/%d pictures"
+msgstr "%d van de %d afbeeldingen aan het analyseren"
+
+#: core_pe/matchblock.py:153
+msgid "Performed %d/%d chunk matches"
+msgstr "%d van de %d bulk overeenkomsten uitgevoerd"
+
+#: core_pe/matchblock.py:158
+msgid "Preparing for matching"
+msgstr "Voorbereiden voor dubbelingen bepaling"
+
+#: core_pe/matchblock.py:193
+msgid "Verified %d/%d matches"
+msgstr "%d van de %d overeenkomsten nagekeken"
+
+#: core_pe/matchexif.py:18
+msgid "Read EXIF of %d/%d pictures"
+msgstr "EXIF informatie van %d van de %d afbeeldingen gelezen"
