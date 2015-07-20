@@ -1,10 +1,11 @@
 # Translators:
+# YF <yfdyh000@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/dupeguru/language/zh_CN/)\n"
+"PO-Revision-Date: 2015-05-01 14:24+0000\n"
+"Last-Translator: YF <yfdyh000@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/p/dupeguru/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: zh_CN\n"
@@ -12,21 +13,21 @@ msgstr ""
 
 #: core/app.py:39
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "没有已标记的重复项。没有需要处理的。"
 
 #: core/app.py:40
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "没有已选定的重复项。没有需要处理的。"
 
 #: core/app.py:41
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr ""
+msgstr "您即将一次打开许多文件。依赖于这些文件的打开方式，打开可能导致非常混乱的状况。是否继续？"
 
 #: core/app.py:57
 msgid "Scanning for duplicates"
-msgstr "重复文件扫描中"
+msgstr "正在扫描重复内容"
 
 #: core/app.py:58
 msgid "Loading"
@@ -42,7 +43,7 @@ msgstr "复制中"
 
 #: core/app.py:61
 msgid "Sending to Trash"
-msgstr "移到垃圾桶"
+msgstr "正在移到垃圾桶"
 
 #: core/app.py:64
 msgid "Sending files to the recycle bin"
@@ -60,29 +61,29 @@ msgstr "没有找到重复文件。"
 
 #: core/app.py:310
 msgid "All marked files were copied successfully."
-msgstr ""
+msgstr "所有已标记的文件已复制成功。"
 
 #: core/app.py:311
 msgid "All marked files were moved successfully."
-msgstr ""
+msgstr "所有已标记的文件已移动成功。"
 
 #: core/app.py:312
 msgid "All marked files were successfully sent to Trash."
-msgstr ""
+msgstr "所有已标记的文件已成功发送到垃圾桶。"
 
 #: core/app.py:349
 msgid "'{}' already is in the list."
-msgstr ""
+msgstr "'{}' 已在列表中。"
 
 #: core/app.py:351
 msgid "'{}' does not exist."
-msgstr ""
+msgstr "'{}' 不存在。"
 
 #: core/app.py:360
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。继续吗?"
+msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。是否继续？"
 
 #: core/app.py:426
 msgid "copy"
@@ -98,7 +99,7 @@ msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
 #: core/app.py:464
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "选择您导出 CSV 的目标"
 
 #: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -122,7 +123,7 @@ msgstr "所选文件夹中不包含可供扫描的文件。"
 
 #: core/app.py:768
 msgid "%s (%d discarded)"
-msgstr "%s (%d 无效)"
+msgstr "%s (%d 项已丢弃)"
 
 #: core/engine.py:220 core/engine.py:265
 msgid "0 matches found"
@@ -142,7 +143,7 @@ msgstr "%d/%d 匹配项组合在一起"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "您正在发送 {} 个文件到垃圾桶。"
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -150,7 +151,7 @@ msgstr "确定要从忽略列表中移除 %d 项吗?"
 
 #: core/prioritize.py:68
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: core/prioritize.py:96
 msgid "Ends with number"
@@ -158,31 +159,31 @@ msgstr "文件名称"
 
 #: core/prioritize.py:97
 msgid "Doesn't end with number"
-msgstr ""
+msgstr "不带数字结尾"
 
 #: core/prioritize.py:98
 msgid "Longest"
-msgstr ""
+msgstr "最长"
 
 #: core/prioritize.py:99
 msgid "Shortest"
-msgstr ""
+msgstr "最短"
 
 #: core/prioritize.py:132
 msgid "Highest"
-msgstr ""
+msgstr "最高"
 
 #: core/prioritize.py:132
 msgid "Lowest"
-msgstr ""
+msgstr "最低"
 
 #: core/prioritize.py:159
 msgid "Newest"
-msgstr ""
+msgstr "最新"
 
 #: core/prioritize.py:159
 msgid "Oldest"
-msgstr ""
+msgstr "最旧"
 
 #: core/results.py:126
 msgid "%d / %d (%s / %s) duplicates marked."
@@ -214,7 +215,7 @@ msgstr "分析 %d/%d 图像"
 
 #: core_pe/matchblock.py:153
 msgid "Performed %d/%d chunk matches"
-msgstr ""
+msgstr "已执行 %d/%d 个区块匹配"
 
 #: core_pe/matchblock.py:158
 msgid "Preparing for matching"
@@ -226,4 +227,4 @@ msgstr "验证 %d/%d 匹配项"
 
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "读取 %d/%d 张图片的 EXIF"

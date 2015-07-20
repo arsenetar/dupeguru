@@ -3,13 +3,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/dupeguru/language/ru/)\n"
+"PO-Revision-Date: 2014-03-30 14:48+0000\n"
+"Last-Translator: Virgil Dupras <hsoft@hardcoded.net>\n"
+"Language-Team: Russian (http://www.transifex.com/p/dupeguru/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
@@ -803,7 +803,7 @@ msgstr "Показать выбранное в Finder-е"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "Выбрать все"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."

@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/dupeguru/language/pt_BR/)\n"
+"PO-Revision-Date: 2014-03-31 00:15+0000\n"
+"Last-Translator: Vitu <contact@brlingo.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/p/dupeguru/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: pt_BR\n"
@@ -804,7 +804,7 @@ msgstr "Mostrar Seleção no Finder"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "Selecionar Tudo"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."

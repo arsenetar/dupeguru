@@ -1,10 +1,11 @@
 # Translators:
+# YF <yfdyh000@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/dupeguru/language/zh_CN/)\n"
+"PO-Revision-Date: 2015-05-01 14:25+0000\n"
+"Last-Translator: YF <yfdyh000@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/p/dupeguru/language/zh_CN/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: zh_CN\n"
@@ -12,11 +13,11 @@ msgstr ""
 
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
-msgstr "从你的iTunes库中移除无效的音轨"
+msgstr "从您的 iTunes 库中移除无效的音轨"
 
 #: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
-msgstr "正在扫描iTunes库"
+msgstr "正在扫描 iTunes 库"
 
 #: cocoa/inter/app_me.py:158 cocoa/inter/app_pe.py:200
 msgid "Sending dupes to the Trash"
@@ -24,37 +25,36 @@ msgstr "将重复文件移到垃圾桶"
 
 #: cocoa/inter/app_me.py:160
 msgid "Talking to iTunes. Don't touch it!"
-msgstr ""
+msgstr "正在与 iTunes 通讯。请勿碰它！"
 
 #: cocoa/inter/app_me.py:195
 msgid ""
 "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+msgstr "您的 iTunes 库含有 %d 个无效音轨正待移除。是否继续？"
 
 #: cocoa/inter/app_me.py:199
 msgid "You have no dead tracks in your iTunes Library"
-msgstr "You have no dead tracks in your iTunes Library"
+msgstr "您的 iTunes 库中没有无效音轨"
 
 #: cocoa/inter/app_me.py:217
 msgid "The iTunes application couldn't be found."
-msgstr ""
+msgstr "无法找到 iTunes 应用程序。"
 
 #: cocoa/inter/app_pe.py:202
 msgid "Talking to iPhoto. Don't touch it!"
-msgstr ""
+msgstr "正在与 iPhoto 通讯。请勿碰它！"
 
 #: cocoa/inter/app_pe.py:211
 msgid "Talking to Aperture. Don't touch it!"
-msgstr ""
+msgstr "正在与 Aperture 通讯。请勿碰它！"
 
 #: cocoa/inter/app_pe.py:284
 msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr ""
+msgstr "已删除的 Aperture 照片已发送到一个名为“dupeGuru Trash”的项目。"
 
 #: cocoa/inter/app_pe.py:310
 msgid "The iPhoto application couldn't be found."
-msgstr "The iPhoto application couldn't be found."
+msgstr "无法找到 iPhoto 应用程序。"
 
 #: qt/base/app.py:83
 msgid "Quit"
@@ -67,15 +67,15 @@ msgstr "首选项"
 #: qt/base/app.py:85 qt/base/ignore_list_dialog.py:32
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr ""
+msgstr "忽略列表"
 
 #: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
-msgstr "dupeGuru帮助"
+msgstr "dupeGuru 帮助"
 
 #: qt/base/app.py:87 cocoa/base/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
-msgstr "关于dupeGuru"
+msgstr "关于 dupeGuru"
 
 #: qt/base/app.py:88
 msgid "Check for Update"
@@ -87,15 +87,15 @@ msgstr "打开调试记录"
 
 #: qt/base/app.py:198
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "{} 文件 (*.{})"
 
 #: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr ""
+msgstr "删除选项"
 
 #: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "链接已删除的文件"
 
 #: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
@@ -105,33 +105,33 @@ msgstr ""
 
 #: qt/base/deletion_options.py:42
 msgid "Hardlink"
-msgstr ""
+msgstr "硬链接"
 
 #: qt/base/deletion_options.py:42
 msgid "Symlink"
-msgstr ""
+msgstr "符号链接"
 
 #: qt/base/deletion_options.py:46
 msgid " (unsupported)"
-msgstr ""
+msgstr " (不支持)"
 
 #: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr ""
+msgstr "直接删除文件"
 
 #: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
-msgstr ""
+msgstr "相比将文件发送到垃圾桶，直接将它们删除。此选项通常作为正常删除方法不能正常使用时作为替代方法使用。"
 
 #: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr ""
+msgstr "继续"
 
 #: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "取消"
 
 #: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Attribute"
@@ -210,7 +210,7 @@ msgstr "所有文件 (*.*)"
 
 #: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr "dupeGuru结果 (*.dupeguru)"
+msgstr "dupeGuru 结果 (*.dupeguru)"
 
 #: qt/base/directories_dialog.py:217
 msgid "Start a new scan"
@@ -218,7 +218,7 @@ msgstr "开始新的扫描"
 
 #: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "目前还有结果尚未保存，确定要继续吗?"
+msgstr "您还有结果尚未保存，确定要继续吗？"
 
 #: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -238,11 +238,11 @@ msgstr "正常"
 
 #: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr ""
+msgstr "移除选定"
 
 #: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
 #: cocoa/base/en.lproj/Localizable.strings:0
@@ -299,7 +299,7 @@ msgstr "dupeGuru将重新启动以使语言修改生效。"
 
 #: qt/base/prioritize_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
-msgstr "Re-Prioritize duplicates"
+msgstr ""
 
 #: qt/base/prioritize_dialog.py:75 cocoa/base/en.lproj/Localizable.strings:0
 msgid ""
@@ -307,9 +307,6 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Add criteria to the right box and click OK to send the dupes that correspond"
-" the best to these criteria to their respective group's reference position. "
-"Read the help file for more information."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -344,7 +341,7 @@ msgstr "仅显示重复文件"
 
 #: qt/base/result_window.py:47 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
-msgstr "显示Delta值"
+msgstr "显示 Delta 值"
 
 #: qt/base/result_window.py:48
 msgid "Send Marked to Recycle Bin..."
@@ -412,7 +409,7 @@ msgstr "导出为 HTML"
 
 #: qt/base/result_window.py:64
 msgid "Export To CSV"
-msgstr ""
+msgstr "导出到 CSV"
 
 #: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Save Results..."
@@ -440,11 +437,11 @@ msgstr "{} (结果)"
 
 #: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr "Dupes Only"
+msgstr "仅 Dupes"
 
 #: qt/base/result_window.py:172
 msgid "Delta Values"
-msgstr ""
+msgstr "Delta 值"
 
 #: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -541,7 +538,7 @@ msgstr "调试模式 (需要重新启动)"
 
 #: qt/pe/preferences_dialog.py:34 cocoa/base/en.lproj/Localizable.strings:0
 msgid "EXIF Timestamp"
-msgstr "EXIF Timestamp"
+msgstr "EXIF 时间戳"
 
 #: qt/pe/preferences_dialog.py:39 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
@@ -574,7 +571,7 @@ msgstr "KB"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr ""
+msgstr "%@ 结果"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Action"
@@ -582,63 +579,63 @@ msgstr "Action"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add Aperture Library"
-msgstr ""
+msgstr "添加 Aperture 库"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iPhoto Library"
-msgstr "Add iPhoto Library"
+msgstr "添加 iPhoto 库"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add iTunes Library"
-msgstr ""
+msgstr "添加 iTunes 库"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr "Add New Folder..."
+msgstr "添加新文件夹..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Advanced"
-msgstr "Advanced"
+msgstr "高级"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Audio Content"
-msgstr "Audio Content"
+msgstr "音频内容"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
-msgstr "Automatically check for updates"
+msgstr "自动检查更新"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Basic"
-msgstr "Basic"
+msgstr "基本"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
-msgstr "Bring All to Front"
+msgstr "全部前置"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr "Check for update..."
+msgstr "检查更新..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Close Window"
-msgstr "Close Window"
+msgstr "关闭窗口"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Content"
-msgstr "Content"
+msgstr "内容"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Copy"
-msgstr "Copy"
+msgstr "复制"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "自定义命令 (参数: %d 对重复, %r 对参考):"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Cut"
-msgstr "Cut"
+msgstr "剪切"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Delta"
@@ -646,83 +643,83 @@ msgstr "Delta"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr "Details of Selected File"
+msgstr "选定文件的详细信息"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Details Panel"
-msgstr "Details Panel"
+msgstr "详细信息面板"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr "Directories"
+msgstr "目录"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
-msgstr ""
+msgstr "dupeGuru"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru ME Preferences"
-msgstr "dupeGuru ME Preferences"
+msgstr "dupeGuru ME 首选项"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru PE Preferences"
-msgstr "dupeGuru PE Preferences"
+msgstr "dupeGuru PE 首选项"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
-msgstr "dupeGuru Preferences"
+msgstr "dupeGuru 首选项"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr "dupeGuru Results"
+msgstr "dupeGuru 结果"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr "dupeGuru Website"
+msgstr "dupeGuru 网站"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Edit"
-msgstr "Edit"
+msgstr "编辑"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "导出结果到 CSV"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
-msgstr "Export Results to XHTML"
+msgstr "导出结果到 XHTML"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr "Fewer results"
+msgstr "较少结果"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Filter"
-msgstr "Filter"
+msgstr "过滤器"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr "Filter hardness:"
+msgstr "过滤器强度:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr ""
+msgstr "过滤器结果..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
-msgstr "Folder Selection Window"
+msgstr "文件夹选择窗口"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "字体大小:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
-msgstr "Hide dupeGuru"
+msgstr "隐藏 dupeGuru"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Hide Others"
-msgstr "Hide Others"
+msgstr "隐藏其他"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
@@ -730,92 +727,92 @@ msgstr "忽略文件当其小于:"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "Load from file..."
+msgstr "从文件载入..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr "Minimize"
+msgstr "最小化"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Mode"
-msgstr "Mode"
+msgstr "模式"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr "More results"
+msgstr "更多结果"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Ok"
-msgstr "Ok"
+msgstr "确定"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr "Options"
+msgstr "选项"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr "Paste"
+msgstr "粘贴"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr "Preferences..."
+msgstr "首选项..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr ""
+msgstr "快速查找"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
-msgstr "Quit dupeGuru"
+msgstr "退出 dupeGuru"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Remove Dead Tracks in iTunes"
-msgstr "Remove Dead Tracks in iTunes"
+msgstr "移除 iTunes 中的无效音轨"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr "Reset to Default"
+msgstr "重置为默认值"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "重置为默认值"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "显示"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
-msgstr "Reveal Selected in Finder"
+msgstr "在 Finder 中显示选定项"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "全选"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr ""
+msgstr "发送标记的到垃圾桶..."
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "服务"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Show All"
-msgstr "Show All"
+msgstr "全选"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
-msgstr "Start Duplicate Scan"
+msgstr "开始重复内容扫描"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "The name '%@' already exists."
+msgstr "名称 '%@' 已存在。"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Window"
-msgstr "Window"
+msgstr "窗口"
 
 #: cocoa/base/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "缩放"

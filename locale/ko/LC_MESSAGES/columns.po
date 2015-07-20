@@ -1,4 +1,3 @@
-# 
 # Translators:
 # woosuk park <bjh13579@gmail.com>, 2015
 msgid ""

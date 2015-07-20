@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Igor Fokusov <igor@fokusov.com>, 2015
 msgid ""
@@ -6,11 +5,11 @@ msgstr ""
 "Project-Id-Version: hscommon\n"
 "PO-Revision-Date: 2015-04-14 21:20+0000\n"
 "Last-Translator: Igor Fokusov <igor@fokusov.com>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/hscommon/language/ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/p/hscommon/language/ru/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
@@ -33,7 +32,10 @@ msgid ""
 "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr "Отчеты об ошибках нужно отправлять в Github issues проекта. Скопируйте текст ошибки выше и вставьте в созданную заметку о проблеме (перед этим желательно проверить - не создано ли уже такой проблемы до вас). Также нам очень поможет краткое описание как вы получили такую ошибку. Спасибо!\n\nВ принципе, программа может продолжать работу, но стабильная работа не гарантируется. Поэтому желательно перезапустить программу."
+msgstr ""
+"Отчеты об ошибках нужно отправлять в Github issues проекта. Скопируйте текст ошибки выше и вставьте в созданную заметку о проблеме (перед этим желательно проверить - не создано ли уже такой проблемы до вас). Также нам очень поможет краткое описание как вы получили такую ошибку. Спасибо!\n"
+"\n"
+"В принципе, программа может продолжать работу, но стабильная работа не гарантируется. Поэтому желательно перезапустить программу."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Go to Github"

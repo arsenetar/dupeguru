@@ -1,9 +1,11 @@
 # Translators:
+# Vitu <contact@brlingo.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2013-04-28 18:26+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2014-04-30 19:00+0000\n"
+"Last-Translator: Vitu <contact@brlingo.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/p/hscommon/language/pt_BR/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: pt_BR\n"
@@ -18,40 +20,12 @@ msgid "Clear List"
 msgstr "Limpar Lista"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Error Report"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "No"
-msgstr "Não"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "OK"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Please wait..."
-msgstr "Aguarde..."
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Status: Working..."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Work in progress, please wait."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Work in progress..."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Yes"
-msgstr "Sim"
-
-#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Error Report"
+msgstr "Relatório de Erro"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid ""
@@ -59,11 +33,42 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Os erros devem ser relatados como problemas no Github. Copie o código de rastreamento acima e cole-o em um problema novo (pontos bônus caso você busque o erro, certificando-se de que ele ainda não exista). O que mais ajuda é adicionar uma descrição de como o erro ocorreu. Obrigado!\n"
+"\n"
+"Embora o aplicativo continue a funcionar após esse erro, ele pode estar “instável”. É recomendável reiniciá-lo."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Go to Github"
-msgstr ""
+msgstr "Ir para o Github"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "No"
+msgstr "Não"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "OK"
+msgstr "OK"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Please wait..."
+msgstr "Aguarde..."
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Something went wrong. How about reporting the error?"
-msgstr ""
+msgstr "Algo deu errado. Deseja relatar o erro?"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Status: Working..."
+msgstr "Estado: em andamento…"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress, please wait."
+msgstr "Tarefa em andamento. Aguarde."
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Work in progress..."
+msgstr "Tarefa em andamento…"
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Yes"
+msgstr "Sim"

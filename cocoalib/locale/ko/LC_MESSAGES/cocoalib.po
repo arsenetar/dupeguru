@@ -2,17 +2,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2014-03-30 14:54+0000\n"
+"PO-Revision-Date: 2015-07-20 16:42+0000\n"
 "Last-Translator: Virgil Dupras <hsoft@hardcoded.net>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/p/hscommon/language/zh_CN/)\n"
+"Language-Team: Korean (http://www.transifex.com/p/hscommon/language/ko/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Language: zh_CN\n"
+"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Cancel"
-msgstr "取消"
+msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Clear List"

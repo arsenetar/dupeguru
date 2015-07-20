@@ -1,4 +1,3 @@
-# 
 # Translators:
 # mstefanski1987 <mstefanski1987@gmail.com>, 2014
 msgid ""
@@ -6,7 +5,7 @@ msgstr ""
 "Project-Id-Version: dupeGuru\n"
 "PO-Revision-Date: 2014-06-09 16:28+0000\n"
 "Last-Translator: mstefanski1987 <mstefanski1987@gmail.com>\n"
-"Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/dupeguru/language/pl_PL/)\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/p/dupeguru/language/pl_PL/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: pl_PL\n"
@@ -84,7 +83,9 @@ msgstr "'{}' nie istnieje."
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "Wszystkie zaznaczone %d duplikaty będą ignorowane w kolejnych skanach. Kontynuować?"
+msgstr ""
+"Wszystkie zaznaczone %d duplikaty będą ignorowane w kolejnych skanach. "
+"Kontynuować?"
 
 #: core/app.py:426
 msgid "copy"

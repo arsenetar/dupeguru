@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2013-04-28 18:26+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2014-03-30 14:54+0000\n"
+"Last-Translator: Virgil Dupras <hsoft@hardcoded.net>\n"
+"Language-Team: Dutch (http://www.transifex.com/p/hscommon/language/nl/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: nl\n"
@@ -18,7 +19,22 @@ msgid "Clear List"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Close"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Error Report"
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Go to Github"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
@@ -31,6 +47,10 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Please wait..."
+msgstr ""
+
+#: cocoalib/en.lproj/cocoalib.strings:0
+msgid "Something went wrong. How about reporting the error?"
 msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
@@ -47,23 +67,4 @@ msgstr ""
 
 #: cocoalib/en.lproj/cocoalib.strings:0
 msgid "Yes"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Close"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-"\n"
-"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Go to Github"
-msgstr ""
-
-#: cocoalib/en.lproj/cocoalib.strings:0
-msgid "Something went wrong. How about reporting the error?"
 msgstr ""
