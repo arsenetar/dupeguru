@@ -70,9 +70,6 @@ def parse_args():
     (options, args) = parser.parse_args()
     return options
 
-def cocoa_compile_command(edition):
-    return '{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition)
-
 def cocoa_app(edition):
     app_path = {
         'se': 'build/dupeGuru.app',
@@ -160,7 +157,7 @@ def build_cocoa(edition, dev):
         delete_files_with_pattern(pydep_folder, '__pycache__')
     print("Compiling with WAF")
     os.chdir('cocoa')
-    print_and_do(cocoa_compile_command(edition))
+    print_and_do('python2.7 waf configure --edition {} && python2.7 waf'.format(edition))
     os.chdir('..')
     app.copy_executable('cocoa/build/dupeGuru')
     build_help(edition)

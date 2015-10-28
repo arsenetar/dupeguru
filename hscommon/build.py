@@ -479,6 +479,8 @@ def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_incl
         extra_link_args += ['-framework', extra]
     ext = Extension(extname, source_files, extra_link_args=extra_link_args, include_dirs=extra_includes)
     setup(script_args=['build_ext', '--inplace'], ext_modules=[ext])
-    fn = extname + '.so'
+    # Our problem here is to get the fully qualified filename of the resulting .so but I couldn't
+    # find a documented way to do so. The only thing I could find is this below :(
+    fn = ext._file_name
     assert op.exists(fn)
     move(fn, op.join(dest, fn))

@@ -83,6 +83,14 @@ On Arch, it's:
 
     $ pacman -S python-pyqt5
 
+### OS X and pyenv
+
+[pyenv][pyenv] is a popular way to manage multiple python versions. However, be aware that dupeGuru
+will not compile with a pyenv's python unless it's been built with `--enable-framework`. You can do
+this with:
+
+    $ env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.4.3
+
 ## Setting up the virtual environment
 
 Use Python's built-in `pyvenv` to create a virtual environment in which we're going to install our.
@@ -121,4 +129,4 @@ You can also package dupeGuru into an installable package with:
 [pyqt]: http://www.riverbankcomputing.com
 [cxfreeze]: http://cx-freeze.sourceforge.net/
 [advinst]: http://www.advancedinstaller.com
-
+[pyenv]: https://github.com/yyuu/pyenv
