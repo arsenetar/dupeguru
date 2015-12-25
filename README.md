@@ -32,6 +32,20 @@ triaging, code review, critical bugfixes, releases management.
 But anything non-critical, I'm not going to implement it myself because I see every issue as a
 contribution opportunity.
 
+## Windows maintainer wanted
+
+As [described on my website][nowindows], v3.9.x/6.8.x/2.10.x series of dupeGuru are the last ones
+to support Windows unless someone steps up to maintain it. If you're a Windows developer and are
+interested in taking this task, [don't hesitate to let me know][contrib-issue].
+
+## OS X maintainer wanted
+
+My Mac Mini is already a couple of years old and is likely to be my last Apple purchase. When it
+dies, I will be unable maintain the OS X version of moneyGuru. I've already stopped paying for the
+Mac Developer membership so I can't sign the apps anymore (in the "official way" I mean. The
+download is still PGP signed) If you're a Mac developer and are interested in taking this task,
+[don't hesitate to let me know][contrib-issue].
+
 # Contents of this folder
 
 This folder contains the source for dupeGuru. Its documentation is in `help`, but is also
@@ -123,6 +137,7 @@ You can also package dupeGuru into an installable package with:
 [dupeguru]: http://www.hardcoded.net/dupeguru/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
 [contrib-issue]: https://github.com/hsoft/dupeguru/issues/300
+[nowindows]: https://www.hardcoded.net/archive2015#2015-11-01
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
 [setuptools]: https://pypi.python.org/pypi/setuptools
