@@ -157,7 +157,7 @@ def build_cocoa(edition, dev):
         delete_files_with_pattern(pydep_folder, '__pycache__')
     print("Compiling with WAF")
     os.chdir('cocoa')
-    print_and_do('python2.7 waf configure --edition {} && python2.7 waf'.format(edition))
+    print_and_do('{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition))
     os.chdir('..')
     app.copy_executable('cocoa/build/dupeGuru')
     build_help(edition)
