@@ -20,11 +20,11 @@ filenames or tags even when they are not exactly the same.
 dupeGuru Picture Edition [PE] is made to scan pictures. Not only can it find exact matches, but it
 can also find duplicates among pictures of different kind (PNG, JPG, GIF etc..) and quality.
 
-What makes it better than other duplicate scanners?
----------------------------------------------------
+What makes it special?
+----------------------
 
-The scanning engine is extremely flexible. You can tweak it to really get the kind of results you
-want. You can read more about dupeGuru tweaking option in :doc:`scan`.
+It's mostly about customizability. There's a lot of scanning options that allow you to get the
+type of results you're really looking for.
 
 How safe is it to use dupeGuru?
 -------------------------------
@@ -33,6 +33,12 @@ Very safe. dupeGuru has been designed to make sure you don't delete files you di
 First, there is the reference folder system that lets you define folders where you absolutely
 **don't** want dupeGuru to let you delete files there, and then there is the group reference system
 that makes sure that you will **always** keep at least one member of the duplicate group.
+
+How can I report a bug a suggest a feature?
+-------------------------------------------
+
+dupeGuru is hosted on `Github`_ and it's also where issues are tracked. The best way to report a
+bug or suggest a feature is to sign up on Github and `open an issue`_. 
 
 The mark box of a file I want to delete is disabled. What must I do?
 --------------------------------------------------------------------
@@ -163,7 +169,7 @@ deletion to work correctly, you're not supposed to play around iPhoto while dupe
 Also, sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It
 might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
 
-If all of this fail, `contact HS support`_, we'll figure it out.
+If all of this fail, `HS forums`_ might be of some help.
 
 Why is dupeGuru PE so slower than other editions?
 -------------------------------------------------
@@ -196,4 +202,7 @@ For Music Edition and Picture Edition, replace "dupeGuru" by "dupeGuru Music Edi
 "dupeGuru Picture Edition".
 
 .. _BatChmod: http://www.lagentesoft.com/batchmod/index.html
-.. _contact HS support: http://www.hardcoded.net/support
+.. _HS forums: https://forum.hardcoded.net/
+.. _Github: https://github.com/hsoft/dupeguru
+.. _open an issue: https://github.com/hsoft/dupeguru/wiki/issue-labels
+
