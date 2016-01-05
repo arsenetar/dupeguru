@@ -385,7 +385,7 @@ def main():
         build_cocoa_bridging_interfaces(edition)
     elif options.cocoa_compile:
         os.chdir('cocoa')
-        print_and_do(cocoa_compile_command(edition))
+        print_and_do('{0} waf configure --edition {1} && {0} waf'.format(sys.executable, edition))
         os.chdir('..')
         cocoa_app(edition).copy_executable('cocoa/build/dupeGuru')
     elif options.xibless:
