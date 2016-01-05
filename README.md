@@ -134,6 +134,18 @@ You can also package dupeGuru into an installable package with:
     
     $ python package.py
 
+# Running tests
+
+The complete test suite is ran with [Tox 1.7+][tox]. If you have it installed system-wide, you
+don't even need to set up a virtualenv. Just `cd` into the root project folder and run `tox`.
+
+If you don't have Tox system-wide, install it in your virtualenv with `pip install tox` and then
+run `tox`.
+
+You can also run automated tests without Tox. Extra requirements for running tests are in
+`requirements-extra.txt`. So, you can do `pip install -r requirements-extra.txt` inside your
+virtualenv and then `py.test core hscommon`
+
 [dupeguru]: http://www.hardcoded.net/dupeguru/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
 [contrib-issue]: https://github.com/hsoft/dupeguru/issues/300
@@ -145,3 +157,5 @@ You can also package dupeGuru into an installable package with:
 [cxfreeze]: http://cx-freeze.sourceforge.net/
 [advinst]: http://www.advancedinstaller.com
 [pyenv]: https://github.com/yyuu/pyenv
+[tox]: https://tox.readthedocs.org/en/latest/
+
