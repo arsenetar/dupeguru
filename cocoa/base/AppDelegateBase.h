@@ -17,7 +17,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "HSRecentFiles.h"
 #import "HSProgressWindow.h"
 
-@interface AppDelegateBase : NSObject
+@interface AppDelegateBase : NSObject <NSFileManagerDelegate>
 {
     NSMenu *recentResultsMenu;
     NSMenu *columnsMenu;
