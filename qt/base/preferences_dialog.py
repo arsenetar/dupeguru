@@ -37,18 +37,17 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
-    def _setupScanTypeBox(self, labels):
-        self.scanTypeHLayout = QHBoxLayout()
-        self.scanTypeLabel = QLabel(self)
-        self.scanTypeLabel.setText(tr("Scan Type:"))
-        self.scanTypeLabel.setMinimumSize(QSize(100, 0))
-        self.scanTypeLabel.setMaximumSize(QSize(100, 16777215))
-        self.scanTypeHLayout.addWidget(self.scanTypeLabel)
+    def _setupScanTypeBox(self):
+        hl = QHBoxLayout()
+        label = QLabel(tr("Scan Type:"), self)
+        label.setMinimumSize(QSize(100, 0))
+        label.setMaximumSize(QSize(100, 16777215))
+        hl.addWidget(label)
         self.scanTypeComboBox = QComboBox(self)
-        for label in labels:
-            self.scanTypeComboBox.addItem(label)
-        self.scanTypeHLayout.addWidget(self.scanTypeComboBox)
-        self.widgetsVLayout.addLayout(self.scanTypeHLayout)
+        for scan_option in self.app.model.scanner.get_scan_options():
+            self.scanTypeComboBox.addItem(scan_option.label)
+        hl.addWidget(self.scanTypeComboBox)
+        self.widgetsVLayout.addLayout(hl)
 
     def _setupFilterHardnessBox(self):
         self.filterHardnessHLayout = QHBoxLayout()
@@ -141,9 +140,18 @@ class PreferencesDialogBase(QDialog):
             self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
 
+    def _load_scan_type(self, prefs):
+        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.scanner.get_scan_options()]
+        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
+        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+
     def _load(self, prefs, setchecked):
         # Edition-specific
         pass
+
+    def _save_scan_type(self, prefs):
+        scan_options = self.app.model.scanner.get_scan_options()
+        prefs.scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
 
     def _save(self, prefs, ischecked):
         # Edition-specific

@@ -1,16 +1,12 @@
-# Created By: Virgil Dupras
-# Created On: 2009-05-24
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
-    QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
-    QLineEdit, QApplication
+    QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QLineEdit
 )
 
 from hscommon.plat import ISWINDOWS, ISLINUX
@@ -24,12 +20,6 @@ from . import preferences
 
 tr = trget('ui')
 
-SCAN_TYPE_ORDER = [
-    ScanType.Filename,
-    ScanType.Contents,
-    ScanType.Folders,
-]
-
 class PreferencesDialog(PreferencesDialogBase):
     def __init__(self, parent, app, **kwargs):
         super().__init__(parent, app, **kwargs)
@@ -37,12 +27,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
 
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [
-            tr("Filename"),
-            tr("Contents"),
-            tr("Folders"),
-        ]
-        self._setupScanTypeBox(scanTypeLabels)
+        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -96,15 +81,14 @@ class PreferencesDialog(PreferencesDialogBase):
             self.resize(self.width(), 440)
 
     def _load(self, prefs, setchecked):
-        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
-        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+        self._load_scan_type(prefs)
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
         self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
 
     def _save(self, prefs, ischecked):
-        prefs.scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        self._save_scan_type(prefs)
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
@@ -115,17 +99,10 @@ class PreferencesDialog(PreferencesDialogBase):
 
     #--- Events
     def scanTypeChanged(self, index):
-        scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        scan_options = self.app.model.scanner.get_scan_options()
+        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
         word_based = scan_type == ScanType.Filename
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)
 
-
-if __name__ == '__main__':
-    from ..testapp import TestApp
-    app = QApplication([])
-    dgapp = TestApp()
-    dialog = PreferencesDialog(None, dgapp)
-    dialog.show()
-    sys.exit(app.exec_())

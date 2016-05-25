@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2006/03/03
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -9,6 +7,7 @@
 import logging
 import re
 import os.path as op
+from collections import namedtuple
 
 from hscommon.jobprogress import job
 from hscommon.util import dedupe, rem_file_ext, get_file_ext
@@ -33,6 +32,8 @@ class ScanType:
     #PE
     FuzzyBlock = 10
     ExifTimestamp = 11
+
+ScanOption = namedtuple('ScanOption', 'scan_type label')
 
 SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
 
@@ -124,6 +125,13 @@ class Scanner:
         if is_same_with_digit(refname, dupename):
             return True
         return len(dupe.path) > len(ref.path)
+
+    def get_scan_options(self):
+        """Returns a list of scanning options for this scanner.
+
+        Returns a list of ``ScanOption``.
+        """
+        raise NotImplementedError()
 
     def get_dupe_groups(self, files, j=job.nulljob):
         j = j.start_subjob([8, 2])

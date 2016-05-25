@@ -1,16 +1,14 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-29
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
-    QApplication
 )
 
 from hscommon.trans import trget
@@ -21,15 +19,6 @@ from . import preferences
 
 tr = trget('ui')
 
-SCAN_TYPE_ORDER = [
-    ScanType.Filename,
-    ScanType.Fields,
-    ScanType.FieldsNoOrder,
-    ScanType.Tag,
-    ScanType.Contents,
-    ScanType.ContentsAudio,
-]
-
 class PreferencesDialog(PreferencesDialogBase):
     def __init__(self, parent, app):
         PreferencesDialogBase.__init__(self, parent, app)
@@ -37,15 +26,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
 
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [
-            tr("Filename"),
-            tr("Filename - Fields"),
-            tr("Filename - Fields (No Order)"),
-            tr("Tags"),
-            tr("Contents"),
-            tr("Audio Contents"),
-        ]
-        self._setupScanTypeBox(scanTypeLabels)
+        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -91,8 +72,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupBottomPart()
 
     def _load(self, prefs, setchecked):
-        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
-        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+        self._load_scan_type(prefs)
         setchecked(self.tagTrackBox, prefs.scan_tag_track)
         setchecked(self.tagArtistBox, prefs.scan_tag_artist)
         setchecked(self.tagAlbumBox, prefs.scan_tag_album)
@@ -103,7 +83,7 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.wordWeightingBox, prefs.word_weighting)
 
     def _save(self, prefs, ischecked):
-        prefs.scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        self._save_scan_type(prefs)
         prefs.scan_tag_track = ischecked(self.tagTrackBox)
         prefs.scan_tag_artist = ischecked(self.tagArtistBox)
         prefs.scan_tag_album = ischecked(self.tagAlbumBox)
@@ -118,7 +98,8 @@ class PreferencesDialog(PreferencesDialogBase):
 
     #--- Events
     def scanTypeChanged(self, index):
-        scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        scan_options = self.app.model.scanner.get_scan_options()
+        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
         word_based = scan_type in (
             ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder,
             ScanType.Tag
@@ -133,13 +114,4 @@ class PreferencesDialog(PreferencesDialogBase):
         self.tagTitleBox.setEnabled(tag_based)
         self.tagGenreBox.setEnabled(tag_based)
         self.tagYearBox.setEnabled(tag_based)
-
-
-if __name__ == '__main__':
-    from ..testapp import TestApp
-    app = QApplication([])
-    dgapp = TestApp()
-    dialog = PreferencesDialog(None, dgapp)
-    dialog.show()
-    sys.exit(app.exec_())
 

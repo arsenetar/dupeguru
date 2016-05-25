@@ -1,13 +1,8 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-29
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
-
-import sys
-from PyQt5.QtWidgets import QApplication
 
 from hscommon.trans import trget
 from core.scanner import ScanType
@@ -17,11 +12,6 @@ from . import preferences
 
 tr = trget('ui')
 
-SCAN_TYPE_ORDER = [
-    ScanType.FuzzyBlock,
-    ScanType.ExifTimestamp,
-]
-
 class PreferencesDialog(PreferencesDialogBase):
     def __init__(self, parent, app):
         PreferencesDialogBase.__init__(self, parent, app)
@@ -29,11 +19,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
 
     def _setupPreferenceWidgets(self):
-        scanTypeLabels = [
-            tr("Contents"),
-            tr("EXIF Timestamp"),
-        ]
-        self._setupScanTypeBox(scanTypeLabels)
+        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self._setupAddCheckbox('matchScaledBox', tr("Match pictures of different dimensions"))
@@ -51,12 +37,11 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupBottomPart()
 
     def _load(self, prefs, setchecked):
-        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
-        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+        self._load_scan_type(prefs)
         setchecked(self.matchScaledBox, prefs.match_scaled)
 
     def _save(self, prefs, ischecked):
-        prefs.scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        self._save_scan_type(prefs)
         prefs.match_scaled = ischecked(self.matchScaledBox)
 
     def resetToDefaults(self):
@@ -64,16 +49,8 @@ class PreferencesDialog(PreferencesDialogBase):
 
     #--- Events
     def scanTypeChanged(self, index):
-        scan_type = SCAN_TYPE_ORDER[self.scanTypeComboBox.currentIndex()]
+        scan_options = self.app.model.scanner.get_scan_options()
+        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
         fuzzy_scan = scan_type == ScanType.FuzzyBlock
         self.filterHardnessSlider.setEnabled(fuzzy_scan)
-
-
-if __name__ == '__main__':
-    from ..testapp import TestApp
-    app = QApplication([])
-    dgapp = TestApp()
-    dialog = PreferencesDialog(None, dgapp)
-    dialog.show()
-    sys.exit(app.exec_())
 
