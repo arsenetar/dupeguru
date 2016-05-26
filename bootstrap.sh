@@ -3,6 +3,11 @@
 PYTHON=python3
 command -v $PYTHON -m venv >/dev/null 2>&1 || { echo >&2 "Python 3.3 required. Install it and try again. Aborting"; exit 1; }
 
+if [ -d ".git" ]; then
+    git submodule init
+    git submodule update
+fi
+
 if [ -d "deps" ]; then
     # We have a collection of dependencies in our source package. We might as well use it instead
     # of downloading it from PyPI.
