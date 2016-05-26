@@ -61,7 +61,7 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 * locale: .po files for localisation.
 
 There are also other sub-folder that comes from external repositories and are part of this repo as
-git subtrees:
+git submodules:
 
 * hscommon: A collection of helpers used across HS applications.
 * cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.

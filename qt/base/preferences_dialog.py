@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import (
 from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from qtlib.util import horizontalWrap
-from qtlib.preferences import LANGNAMES
+from qtlib.preferences import get_langnames
 
 tr = trget('ui')
 
@@ -29,7 +29,8 @@ class PreferencesDialogBase(QDialog):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
-        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: LANGNAMES[lang])
+        all_languages = get_langnames()
+        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang])
         self._setupUi()
 
         self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
@@ -97,7 +98,7 @@ class PreferencesDialogBase(QDialog):
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
-            self.languageComboBox.addItem(LANGNAMES[lang])
+            self.languageComboBox.addItem(get_langnames()[lang])
         self.widgetsVLayout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
