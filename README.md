@@ -3,7 +3,7 @@
 [dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
 a system. It's written mostly in Python 3 and has the peculiarity of using
 [multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
-is written in Objective-C and uses Cocoa. On Linux and Windows, it's written in Python and uses Qt5.
+is written in Objective-C and uses Cocoa. On Linux, it's written in Python and uses Qt5.
 
 dupeGuru comes in 3 editions (standard, music and picture) which are all buildable from this same
 source tree. You choose the edition you want to build in a `configure.py` flag.
@@ -69,33 +69,25 @@ git submodules:
 
 # How to build dupeGuru from source
 
-## The very, very, very easy way
-
-If you're on Linux or Mac, there's a bootstrap script that will make building very, very easy. There
+If you're on Linux or Mac, there's a bootstrap script that will make building very easy. There
 might be some things that you need to install manually on your system, but the bootstrap script will
 tell you when what you need to install. You can run the bootstrap with:
 
     ./bootstrap.sh
 
-and follow instructions from the script. You can then ignore the rest of the build documentation.
+and follow instructions from the script.
 
 ## Prerequisites installation
 
 Prerequisites are installed through `pip`. However, some of them are not "pip installable" and have
 to be installed manually.
 
-* All systems: [Python 3.3+][python] and [setuptools][setuptools]
-* Mac OS X: The last XCode to have the 10.7 SDK included. Python 3.4+.
-* Windows: Visual Studio 2010, [PyQt 5.0+][pyqt], [cx_Freeze][cxfreeze] and
-  [Advanced Installer][advinst] (you only need the last two if you want to create an installer)
+* All systems: [Python 3.4+][python]
+* Mac OS X: The last XCode to have the 10.7 SDK included.
 
 On Ubuntu (14.04+), the apt-get command to install all pre-requisites is:
 
-    $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools
-
-On Arch, it's:
-
-    $ pacman -S python-pyqt5
+    $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools python3-venv
 
 ### OS X and pyenv
 
@@ -107,20 +99,23 @@ this with:
 
 ## Setting up the virtual environment
 
+*This is done automatically by the bootstrap script. This is a reference in case you need to do it
+manually.*
+
 Use Python's built-in `pyvenv` to create a virtual environment in which we're going to install our.
-Python-related dependencies. `pyvenv` is built-in Python but, unlike its `virtualenv` predecessor,
-it doesn't install setuptools and pip (unless you use Python 3.4+), so it has to be installed
-manually:
+Python-related dependencies. In that environment, we then install our requirements with pip.
+
+For Linux (`--system-site-packages` is to be able to import PyQt):
 
     $ pyvenv --system-site-packages env
     $ source env/bin/activate
-    $ python get-pip.py
+    $ pip install -r requirements.txt
 
-Then, you can install pip requirements in your virtualenv:
+For OS X:
 
-    $ pip install -r requirements-[osx|win].txt
-    
-([osx|win] depends, of course, on your platform. On other platforms, just use requirements.txt).
+    $ pyvenv  env
+    $ source env/bin/activate
+    $ pip install -r requirements-osx.txt
 
 ## Actual building and running
 
@@ -152,10 +147,7 @@ virtualenv and then `py.test core hscommon`
 [nowindows]: https://www.hardcoded.net/archive2015#2015-11-01
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
-[setuptools]: https://pypi.python.org/pypi/setuptools
 [pyqt]: http://www.riverbankcomputing.com
-[cxfreeze]: http://cx-freeze.sourceforge.net/
-[advinst]: http://www.advancedinstaller.com
 [pyenv]: https://github.com/yyuu/pyenv
 [tox]: https://tox.readthedocs.org/en/latest/
 

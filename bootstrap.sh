@@ -1,7 +1,12 @@
 #!/bin/bash
 
 PYTHON=python3
-command -v $PYTHON -m venv >/dev/null 2>&1 || { echo >&2 "Python 3.3 required. Install it and try again. Aborting"; exit 1; }
+ret=`$PYTHON -c "import sys; print(int(sys.version_info[:2] >= (3, 4)))"`
+if [ $ret -ne 1 ]; then
+    echo "Python 3.4+ required. Aborting."
+    exit 1
+fi
+
 
 if [ -d ".git" ]; then
     git submodule init
@@ -20,27 +25,11 @@ if [ ! -d "env" ]; then
     # install. To achieve our latter goal, we start with a normal venv, which we later upgrade to
     # a system-site-packages once pip is installed.
     if ! $PYTHON -m venv env ; then
-        # We're probably under braindead Ubuntu 14.04 which completely messed up ensurepip.
-        # Work around it :(
-        echo "Ubuntu 14.04's version of Python 3.4 is braindead stupid, but we work around it anyway..."
-        $PYTHON -m venv --without-pip env
+        echo "Creation of our virtualenv failed. If you're on Ubuntu, you probably need python3-venv."
+        exit 1
     fi
-    source env/bin/activate
-    if python -m ensurepip; then
-        echo "We're under Python 3.4+, no need to try to install pip!"
-    else
-        python get-pip.py $PIPARGS --force-reinstall
-    fi
-    deactivate
     if [ "$(uname)" != "Darwin" ]; then
-        # We only need system site packages for PyQt, so under OS X, we don't enable it
-        if ! $PYTHON -m venv env --upgrade --system-site-packages ; then
-            # We're probably under v3.4.1 and experiencing http://bugs.python.org/issue21643
-            # Work around it.
-            echo "Oops, can't upgrade our venv. Trying to work around it."
-            rm env/lib64
-            $PYTHON -m venv env --upgrade --system-site-packages
-        fi
+        $PYTHON -m venv env --upgrade --system-site-packages
     fi
 fi
 
@@ -48,10 +37,10 @@ source env/bin/activate
 
 echo "Installing pip requirements"
 if [ "$(uname)" == "Darwin" ]; then
-    pip install $PIPARGS -r requirements-osx.txt
+    ./env/bin/pip install $PIPARGS -r requirements-osx.txt
 else
-    python -c "import PyQt5" >/dev/null 2>&1 || { echo >&2 "PyQt 5.1+ required. Install it and try again. Aborting"; exit 1; }
-    pip install $PIPARGS -r requirements.txt
+    ./env/bin/python -c "import PyQt5" >/dev/null 2>&1 || { echo >&2 "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
+    ./env/bin/pip install $PIPARGS -r requirements.txt
 fi
 
 echo "Bootstrapping complete! You can now configure, build and run dupeGuru with:"
