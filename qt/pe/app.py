@@ -76,7 +76,7 @@ class DupeGuru(DupeGuruBase):
     PREFERENCES_DIALOG_CLASS = PreferencesDialog
 
     def _setup(self):
-        self.model.directories.fileclasses = [File]
+        self.model.fileclasses = [File]
         DupeGuruBase._setup(self)
         self.directories_dialog.menuFile.insertAction(
             self.directories_dialog.actionLoadResults, self.resultWindow.actionClearPictureCache

@@ -16,8 +16,8 @@ class DupeGuru(DupeGuruBase):
 
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
-        self.directories.fileclasses = [fs.File]
-        self.directories.folderclass = fs.Folder
+        self.fileclasses = [fs.File]
+        self.folderclass = fs.Folder
 
     def _prioritization_categories(self):
         return prioritize.all_categories()

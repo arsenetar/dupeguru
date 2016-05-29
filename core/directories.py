@@ -49,12 +49,10 @@ class Directories:
     in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
     """
     #---Override
-    def __init__(self, fileclasses=[fs.File]):
+    def __init__(self):
         self._dirs = []
         # {path: state}
         self.states = {}
-        self.fileclasses = fileclasses
-        self.folderclass = fs.Folder
 
     def __contains__(self, path):
         for p in self._dirs:
@@ -77,7 +75,7 @@ class Directories:
         if path.name.startswith('.'): # hidden
             return DirectoryState.Excluded
 
-    def _get_files(self, from_path, j):
+    def _get_files(self, from_path, fileclasses, j):
         j.check_if_cancelled()
         state = self.get_state(from_path)
         if state == DirectoryState.Excluded:
@@ -89,7 +87,7 @@ class Directories:
         try:
             filepaths = set()
             if state != DirectoryState.Excluded:
-                found_files = fs.get_files(from_path, fileclasses=self.fileclasses)
+                found_files = fs.get_files(from_path, fileclasses=fileclasses)
                 logging.debug("Collected %d files in folder %s", len(found_files), str(from_path))
                 for file in found_files:
                     file.is_ref = state == DirectoryState.Reference
@@ -99,7 +97,7 @@ class Directories:
             # want to recurse into it
             subfolders = [p for p in from_path.listdir() if not p.islink() and p.isdir() and p not in filepaths]
             for subfolder in subfolders:
-                for file in self._get_files(subfolder, j):
+                for file in self._get_files(subfolder, fileclasses=fileclasses, j=j):
                     yield file
         except (EnvironmentError, fs.InvalidPath):
             pass
@@ -150,22 +148,26 @@ class Directories:
         except EnvironmentError:
             return []
 
-    def get_files(self, j=job.nulljob):
+    def get_files(self, fileclasses=None, j=job.nulljob):
         """Returns a list of all files that are not excluded.
 
         Returned files also have their ``is_ref`` attr set if applicable.
         """
+        if fileclasses is None:
+            fileclasses = [fs.File]
         for path in self._dirs:
-            for file in self._get_files(path, j):
+            for file in self._get_files(path, fileclasses=fileclasses, j=j):
                 yield file
 
-    def get_folders(self, j=job.nulljob):
+    def get_folders(self, folderclass=None, j=job.nulljob):
         """Returns a list of all folders that are not excluded.
 
         Returned folders also have their ``is_ref`` attr set if applicable.
         """
+        if folderclass is None:
+            folderclass = fs.Folder
         for path in self._dirs:
-            from_folder = self.folderclass(path)
+            from_folder = folderclass(path)
             for folder in self._get_folders(from_folder, j):
                 yield folder
 

@@ -167,6 +167,8 @@ class DupeGuru(Broadcaster):
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.discarded_file_count = 0
+        self.fileclasses = [fs.File]
+        self.folderclass = fs.Folder
         self.directories = directories.Directories()
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
@@ -257,7 +259,7 @@ class DupeGuru(Broadcaster):
 
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
-        return fs.get_file(path, self.directories.fileclasses + [fs.Folder])
+        return fs.get_file(path, self.fileclasses + [fs.Folder])
 
     def _get_file(self, str_path):
         path = Path(str_path)
@@ -749,9 +751,9 @@ class DupeGuru(Broadcaster):
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.Folders:
-                files = list(self.directories.get_folders(j))
+                files = list(self.directories.get_folders(folderclass=self.folderclass, j=j))
             else:
-                files = list(self.directories.get_files(j))
+                files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))

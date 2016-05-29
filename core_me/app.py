@@ -21,7 +21,7 @@ class DupeGuru(DupeGuruBase):
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
         self.scanner = scanner.ScannerME()
-        self.directories.fileclasses = [fs.MusicFile]
+        self.fileclasses = [fs.MusicFile]
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if key == 'folder_path':
