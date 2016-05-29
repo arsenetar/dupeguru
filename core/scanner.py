@@ -14,7 +14,6 @@ from hscommon.util import dedupe, rem_file_ext, get_file_ext
 from hscommon.trans import tr
 
 from . import engine
-from .ignore import IgnoreList
 
 # It's quite ugly to have scan types from all editions all put in the same class, but because there's
 # there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be
@@ -71,7 +70,6 @@ def remove_dupe_paths(files):
 
 class Scanner:
     def __init__(self):
-        self.ignore_list = IgnoreList()
         self.discarded_file_count = 0
 
     def _getmatches(self, files, j):
@@ -133,7 +131,7 @@ class Scanner:
         """
         raise NotImplementedError()
 
-    def get_dupe_groups(self, files, j=job.nulljob):
+    def get_dupe_groups(self, files, ignore_list=None, j=job.nulljob):
         j = j.start_subjob([8, 2])
         for f in (f for f in files if not hasattr(f, 'is_ref')):
             f.is_ref = False
@@ -163,12 +161,12 @@ class Scanner:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
         matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
-        if self.ignore_list:
+        if ignore_list:
             j = j.start_subjob(2)
             iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
             matches = [
                 m for m in iter_matches
-                if not self.ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
+                if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
             ]
         logging.info('Grouping matches')
         groups = engine.get_groups(matches, j)

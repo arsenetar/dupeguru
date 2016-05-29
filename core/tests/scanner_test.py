@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2006/03/03
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -13,7 +11,7 @@ from hscommon.testutil import eq_
 from .. import fs
 from ..engine import getwords, Match
 from ..ignore import IgnoreList
-from ..scanner import *
+from ..scanner import Scanner, ScanType
 
 class NamedObject:
     def __init__(self, name="foobar", size=1, path=None):
@@ -50,7 +48,6 @@ def test_default_settings(fake_fileexists):
     eq_(s.mix_file_kind, True)
     eq_(s.word_weighting, False)
     eq_(s.match_similar_words, False)
-    assert isinstance(s.ignore_list, IgnoreList)
 
 def test_simple_with_default_settings(fake_fileexists):
     s = Scanner()
@@ -142,7 +139,7 @@ def test_content_scan_doesnt_put_md5_in_words_at_the_end(fake_fileexists):
     f[0].md5 = f[0].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     r = s.get_dupe_groups(f)
-    g = r[0]
+    r[0]
 
 def test_extension_is_not_counted_in_filename_scan(fake_fileexists):
     s = Scanner()
@@ -160,7 +157,7 @@ def test_job(fake_fileexists):
     s = Scanner()
     log = []
     f = [no('foo bar'), no('foo bar'), no('foo bleh')]
-    r = s.get_dupe_groups(f, job.Job(1, do_progress))
+    s.get_dupe_groups(f, j=job.Job(1, do_progress))
     eq_(log[0], 0)
     eq_(log[-1], 100)
 
@@ -346,9 +343,10 @@ def test_ignore_list(fake_fileexists):
     f1.path = Path('dir1/foobar')
     f2.path = Path('dir2/foobar')
     f3.path = Path('dir3/foobar')
-    s.ignore_list.Ignore(str(f1.path),str(f2.path))
-    s.ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.get_dupe_groups([f1,f2,f3])
+    ignore_list = IgnoreList()
+    ignore_list.Ignore(str(f1.path),str(f2.path))
+    ignore_list.Ignore(str(f1.path),str(f3.path))
+    r = s.get_dupe_groups([f1,f2,f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)
@@ -368,9 +366,10 @@ def test_ignore_list_checks_for_unicode(fake_fileexists):
     f1.path = Path('foo1\u00e9')
     f2.path = Path('foo2\u00e9')
     f3.path = Path('foo3\u00e9')
-    s.ignore_list.Ignore(str(f1.path),str(f2.path))
-    s.ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.get_dupe_groups([f1,f2,f3])
+    ignore_list = IgnoreList()
+    ignore_list.Ignore(str(f1.path),str(f2.path))
+    ignore_list.Ignore(str(f1.path),str(f3.path))
+    r = s.get_dupe_groups([f1,f2,f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)

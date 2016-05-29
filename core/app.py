@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2006/11/11
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -26,6 +24,7 @@ from hscommon.plat import ISWINDOWS
 from hscommon import desktop
 
 from . import directories, results, scanner, export, fs
+from .ignore import IgnoreList
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -168,6 +167,7 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.directories = directories.Directories()
         self.results = results.Results(self)
+        self.ignore_list = IgnoreList()
         self.scanner = self.SCANNER_CLASS()
         self.options = {
             'escape_filter_regexp': True,
@@ -373,7 +373,7 @@ class DupeGuru(Broadcaster):
             g = self.results.get_group_of_duplicate(dupe)
             for other in g:
                 if other is not dupe:
-                    self.scanner.ignore_list.Ignore(str(other.path), str(dupe.path))
+                    self.ignore_list.Ignore(str(other.path), str(dupe.path))
         self.remove_duplicates(dupes)
         self.ignore_list_dialog.refresh()
 
@@ -531,7 +531,7 @@ class DupeGuru(Broadcaster):
         self.directories.load_from_file(op.join(self.appdata, 'last_directories.xml'))
         self.notify('directories_changed')
         p = op.join(self.appdata, 'ignore_list.xml')
-        self.scanner.ignore_list.load_from_xml(p)
+        self.ignore_list.load_from_xml(p)
         self.ignore_list_dialog.refresh()
 
     def load_from(self, filename):
@@ -620,7 +620,7 @@ class DupeGuru(Broadcaster):
     def purge_ignore_list(self):
         """Remove files that don't exist from :attr:`ignore_list`.
         """
-        self.scanner.ignore_list.Filter(lambda f, s: op.exists(f) and op.exists(s))
+        self.ignore_list.Filter(lambda f, s: op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
 
     def remove_directories(self, indexes):
@@ -713,7 +713,7 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.directories.save_to_file(op.join(self.appdata, 'last_directories.xml'))
         p = op.join(self.appdata, 'ignore_list.xml')
-        self.scanner.ignore_list.save_to_xml(p)
+        self.ignore_list.save_to_xml(p)
         self.notify('save_session')
 
     def save_as(self, filename):
@@ -740,7 +740,7 @@ class DupeGuru(Broadcaster):
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))
-            self.results.groups = self.scanner.get_dupe_groups(files, j)
+            self.results.groups = self.scanner.get_dupe_groups(files, self.ignore_list, j)
 
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))

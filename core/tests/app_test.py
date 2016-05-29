@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2007-06-23
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -14,10 +12,10 @@ from pytest import mark
 from hscommon.path import Path
 import hscommon.conflict
 import hscommon.util
-from hscommon.testutil import CallLogger, eq_, log_calls
+from hscommon.testutil import eq_, log_calls
 from hscommon.jobprogress.job import Job
 
-from .base import DupeGuru, TestApp
+from .base import TestApp
 from .results_test import GetTestGroups
 from .. import app, fs, engine
 from ..scanner import ScanType
@@ -347,11 +345,11 @@ class TestCaseDupeGuruWithResults:
         app = self.app
         self.rtable.select([4]) #The dupe of the second, 2 sized group
         app.add_selected_to_ignore_list()
-        eq_(len(app.scanner.ignore_list), 1)
+        eq_(len(app.ignore_list), 1)
         self.rtable.select([1]) #first dupe of the 3 dupes group
         app.add_selected_to_ignore_list()
         #BOTH the ref and the other dupe should have been added
-        eq_(len(app.scanner.ignore_list), 3)
+        eq_(len(app.ignore_list), 3)
 
     def test_purgeIgnoreList(self, do_setup, tmpdir):
         app = self.app
@@ -360,13 +358,13 @@ class TestCaseDupeGuruWithResults:
         open(p1, 'w').close()
         open(p2, 'w').close()
         dne = '/does_not_exist'
-        app.scanner.ignore_list.Ignore(dne,p1)
-        app.scanner.ignore_list.Ignore(p2,dne)
-        app.scanner.ignore_list.Ignore(p1,p2)
+        app.ignore_list.Ignore(dne,p1)
+        app.ignore_list.Ignore(p2,dne)
+        app.ignore_list.Ignore(p1,p2)
         app.purge_ignore_list()
-        eq_(1,len(app.scanner.ignore_list))
-        assert app.scanner.ignore_list.AreIgnored(p1,p2)
-        assert not app.scanner.ignore_list.AreIgnored(dne,p1)
+        eq_(1,len(app.ignore_list))
+        assert app.ignore_list.AreIgnored(p1,p2)
+        assert not app.ignore_list.AreIgnored(dne,p1)
 
     def test_only_unicode_is_added_to_ignore_list(self, do_setup):
         def FakeIgnore(first,second):
@@ -376,7 +374,7 @@ class TestCaseDupeGuruWithResults:
                 self.fail()
 
         app = self.app
-        app.scanner.ignore_list.Ignore = FakeIgnore
+        app.ignore_list.Ignore = FakeIgnore
         self.rtable.select([4])
         app.add_selected_to_ignore_list()
 
