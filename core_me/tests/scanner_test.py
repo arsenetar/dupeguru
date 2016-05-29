@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
-# Created By: Virgil Dupras
-# Created On: 2009-10-23
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.path import Path
 
-from core.engine import getwords
-from core.tests.scanner_test import NamedObject, no
-from ..scanner import *
+from core.tests.scanner_test import no
+from ..scanner import ScannerME
 
 def pytest_funcarg__fake_fileexists(request):
     # This is a hack to avoid invalidating all previous tests since the scanner started to test

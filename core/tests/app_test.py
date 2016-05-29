@@ -160,7 +160,7 @@ class TestCaseDupeGuruWithResults:
     def pytest_funcarg__do_setup(self, request):
         app = TestApp()
         self.app = app.app
-        self.objects,self.matches,self.groups = GetTestGroups()
+        self.objects, self.matches, self.groups = GetTestGroups()
         self.app.results.groups = self.groups
         self.dpanel = app.dpanel
         self.dtree = app.dtree
@@ -273,7 +273,6 @@ class TestCaseDupeGuruWithResults:
         # When marking selected dupes with a heterogenous selection, mark all selected dupes. When
         # it's homogenous, simply toggle.
         app = self.app
-        objects = self.objects
         self.rtable.select([1])
         app.toggle_selected_mark_state()
         # index 0 is unmarkable, but we throw it in the bunch to be sure that it doesn't make the
@@ -358,19 +357,19 @@ class TestCaseDupeGuruWithResults:
         open(p1, 'w').close()
         open(p2, 'w').close()
         dne = '/does_not_exist'
-        app.ignore_list.Ignore(dne,p1)
-        app.ignore_list.Ignore(p2,dne)
-        app.ignore_list.Ignore(p1,p2)
+        app.ignore_list.Ignore(dne, p1)
+        app.ignore_list.Ignore(p2, dne)
+        app.ignore_list.Ignore(p1, p2)
         app.purge_ignore_list()
-        eq_(1,len(app.ignore_list))
-        assert app.ignore_list.AreIgnored(p1,p2)
-        assert not app.ignore_list.AreIgnored(dne,p1)
+        eq_(1, len(app.ignore_list))
+        assert app.ignore_list.AreIgnored(p1, p2)
+        assert not app.ignore_list.AreIgnored(dne, p1)
 
     def test_only_unicode_is_added_to_ignore_list(self, do_setup):
-        def FakeIgnore(first,second):
-            if not isinstance(first,str):
+        def FakeIgnore(first, second):
+            if not isinstance(first, str):
                 self.fail()
-            if not isinstance(second,str):
+            if not isinstance(second, str):
                 self.fail()
 
         app = self.app
@@ -400,8 +399,6 @@ class TestCaseDupeGuruWithResults:
     def test_dont_crash_on_delta_powermarker_dupecount_sort(self, do_setup):
         # Don't crash when sorting by dupe count or percentage while delta+powermarker are enabled.
         # Ref #238
-        app = self.app
-        objects = self.objects
         self.rtable.delta_values = True
         self.rtable.power_marker = True
         self.rtable.sort('dupe_count', False)
@@ -414,11 +411,11 @@ class TestCaseDupeGuru_renameSelected:
     def pytest_funcarg__do_setup(self, request):
         tmpdir = request.getfuncargvalue('tmpdir')
         p = Path(str(tmpdir))
-        fp = open(str(p['foo bar 1']),mode='w')
+        fp = open(str(p['foo bar 1']), mode='w')
         fp.close()
-        fp = open(str(p['foo bar 2']),mode='w')
+        fp = open(str(p['foo bar 2']), mode='w')
         fp.close()
-        fp = open(str(p['foo bar 3']),mode='w')
+        fp = open(str(p['foo bar 3']), mode='w')
         fp.close()
         files = fs.get_files(p)
         for f in files:
@@ -426,7 +423,7 @@ class TestCaseDupeGuru_renameSelected:
         matches = engine.getmatches(files)
         groups = engine.get_groups(matches)
         g = groups[0]
-        g.prioritize(lambda x:x.name)
+        g.prioritize(lambda x: x.name)
         app = TestApp()
         app.app.results.groups = groups
         self.app = app.app

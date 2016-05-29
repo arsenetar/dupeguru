@@ -1,12 +1,10 @@
-# Created By: Virgil Dupras
-# Created On: 2011/09/07
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.testutil import TestApp as TestAppBase, eq_, with_app
+from hscommon.testutil import TestApp as TestAppBase, eq_, with_app # noqa
 from hscommon.path import Path
 from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
@@ -15,9 +13,7 @@ from hscommon.jobprogress.job import nulljob, JobCancelled
 from .. import engine
 from .. import prioritize
 from ..engine import getwords
-from ..app import DupeGuru as DupeGuruBase, cmp_value
-from ..gui.details_panel import DetailsPanel
-from ..gui.directory_tree import DirectoryTree
+from ..app import DupeGuru as DupeGuruBase
 from ..gui.result_table import ResultTable as ResultTableBase
 from ..gui.prioritize_dialog import PrioritizeDialog
 
@@ -119,14 +115,20 @@ class NamedObject:
 # "ibabtu" (1)
 #   "ibabtu" (1)
 def GetTestGroups():
-    objects = [NamedObject("foo bar"),NamedObject("bar bleh"),NamedObject("foo bleh"),NamedObject("ibabtu"),NamedObject("ibabtu")]
+    objects = [
+        NamedObject("foo bar"),
+        NamedObject("bar bleh"),
+        NamedObject("foo bleh"),
+        NamedObject("ibabtu"),
+        NamedObject("ibabtu")
+    ]
     objects[1].size = 1024
     matches = engine.getmatches(objects) #we should have 5 matches
     groups = engine.get_groups(matches) #We should have 2 groups
     for g in groups:
-        g.prioritize(lambda x:objects.index(x)) #We want the dupes to be in the same order as the list is
+        g.prioritize(lambda x: objects.index(x)) #We want the dupes to be in the same order as the list is
     groups.sort(key=len, reverse=True) # We want the group with 3 members to be first.
-    return (objects,matches,groups)
+    return (objects, matches, groups)
 
 class TestApp(TestAppBase):
     def __init__(self):
@@ -137,7 +139,6 @@ class TestApp(TestAppBase):
             return gui
 
         TestAppBase.__init__(self)
-        make_gui = self.make_gui
         self.app = DupeGuru()
         self.default_parent = self.app
         self.rtable = link_gui(self.app.result_table)

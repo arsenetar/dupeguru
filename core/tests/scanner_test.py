@@ -88,10 +88,10 @@ def test_priorize(fake_fileexists):
     f[3].is_ref = True
     r = s.get_dupe_groups(f)
     g1, g2 = r
-    assert f[1] in (g1.ref,g2.ref)
-    assert f[0] in (g1.dupes[0],g2.dupes[0])
-    assert f[3] in (g1.ref,g2.ref)
-    assert f[2] in (g1.dupes[0],g2.dupes[0])
+    assert f[1] in (g1.ref, g2.ref)
+    assert f[0] in (g1.dupes[0], g2.dupes[0])
+    assert f[3] in (g1.ref, g2.ref)
+    assert f[2] in (g1.dupes[0], g2.dupes[0])
 
 def test_content_scan(fake_fileexists):
     s = Scanner()
@@ -135,7 +135,7 @@ def test_min_match_perc_doesnt_matter_for_content_scan(fake_fileexists):
 def test_content_scan_doesnt_put_md5_in_words_at_the_end(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.Contents
-    f = [no('foo'),no('bar')]
+    f = [no('foo'), no('bar')]
     f[0].md5 = f[0].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     f[1].md5 = f[1].md5partial = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f'
     r = s.get_dupe_groups(f)
@@ -209,7 +209,7 @@ def test_tag_scan(fake_fileexists):
     o1.title = 'The Air Near My Fingers'
     o2.artist = 'The White Stripes'
     o2.title = 'The Air Near My Fingers'
-    r = s.get_dupe_groups([o1,o2])
+    r = s.get_dupe_groups([o1, o2])
     eq_(len(r), 1)
 
 def test_tag_with_album_scan(fake_fileexists):
@@ -228,7 +228,7 @@ def test_tag_with_album_scan(fake_fileexists):
     o3.artist = 'The White Stripes'
     o3.title = 'The Air Near My Fingers'
     o3.album = 'foobar'
-    r = s.get_dupe_groups([o1,o2,o3])
+    r = s.get_dupe_groups([o1, o2, o3])
     eq_(len(r), 1)
 
 def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
@@ -244,7 +244,7 @@ def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
     o2.artist = 'The White Stripes - b'
     o2.title = 'The Air Near My Fingers - b'
     o2.album = 'Elephant - b'
-    r = s.get_dupe_groups([o1,o2])
+    r = s.get_dupe_groups([o1, o2])
     eq_(len(r), 1)
 
 def test_tag_scan_with_different_scanned(fake_fileexists):
@@ -344,9 +344,9 @@ def test_ignore_list(fake_fileexists):
     f2.path = Path('dir2/foobar')
     f3.path = Path('dir3/foobar')
     ignore_list = IgnoreList()
-    ignore_list.Ignore(str(f1.path),str(f2.path))
-    ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.get_dupe_groups([f1,f2,f3], ignore_list=ignore_list)
+    ignore_list.Ignore(str(f1.path), str(f2.path))
+    ignore_list.Ignore(str(f1.path), str(f3.path))
+    r = s.get_dupe_groups([f1, f2, f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)
@@ -367,9 +367,9 @@ def test_ignore_list_checks_for_unicode(fake_fileexists):
     f2.path = Path('foo2\u00e9')
     f3.path = Path('foo3\u00e9')
     ignore_list = IgnoreList()
-    ignore_list.Ignore(str(f1.path),str(f2.path))
-    ignore_list.Ignore(str(f1.path),str(f3.path))
-    r = s.get_dupe_groups([f1,f2,f3], ignore_list=ignore_list)
+    ignore_list.Ignore(str(f1.path), str(f2.path))
+    ignore_list.Ignore(str(f1.path), str(f3.path))
+    r = s.get_dupe_groups([f1, f2, f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
     eq_(len(g.dupes), 1)
@@ -398,7 +398,7 @@ def test_size_threshold(fake_fileexists):
     f2 = no('foo', 2, path='p2')
     f3 = no('foo', 3, path='p3')
     s.size_threshold = 2
-    groups = s.get_dupe_groups([f1,f2,f3])
+    groups = s.get_dupe_groups([f1, f2, f3])
     eq_(len(groups), 1)
     [group] = groups
     eq_(len(group), 2)
@@ -471,9 +471,11 @@ def test_dont_group_files_that_dont_exist(tmpdir):
     p['file1'].open('w').write('foo')
     p['file2'].open('w').write('foo')
     file1, file2 = fs.get_files(p)
+
     def getmatches(*args, **kw):
         file2.path.remove()
         return [Match(file1, file2, 100)]
+
     s._getmatches = getmatches
 
     assert not s.get_dupe_groups([file1, file2])

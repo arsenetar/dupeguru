@@ -1,9 +1,7 @@
-# Created By: Virgil Dupras
-# Created On: 2006/02/27
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os
@@ -15,7 +13,7 @@ from pytest import raises
 from hscommon.path import Path
 from hscommon.testutil import eq_
 
-from ..directories import *
+from ..directories import Directories, DirectoryState, AlreadyThereError, InvalidPathError
 
 def create_fake_fs(rootpath):
     # We have it as a separate function because other units are using it.
@@ -44,6 +42,8 @@ def create_fake_fs(rootpath):
     fp.close()
     return rootpath
 
+testpath = None
+
 def setup_module(module):
     # In this unit, we have tests depending on two directory structure. One with only one file in it
     # and another with a more complex structure.
@@ -68,13 +68,13 @@ def test_add_path():
     d = Directories()
     p = testpath['onefile']
     d.add_path(p)
-    eq_(1,len(d))
+    eq_(1, len(d))
     assert p in d
     assert (p['foobar']) in d
     assert p.parent() not in d
     p = testpath['fs']
     d.add_path(p)
-    eq_(2,len(d))
+    eq_(2, len(d))
     assert p in d
 
 def test_AddPath_when_path_is_already_there():
@@ -96,14 +96,14 @@ def test_add_path_containing_paths_already_there():
     eq_(d[0], testpath)
 
 def test_AddPath_non_latin(tmpdir):
-	p = Path(str(tmpdir))
-	to_add = p['unicode\u201a']
-	os.mkdir(str(to_add))
-	d = Directories()
-	try:
-		d.add_path(to_add)
-	except UnicodeDecodeError:
-		assert False
+    p = Path(str(tmpdir))
+    to_add = p['unicode\u201a']
+    os.mkdir(str(to_add))
+    d = Directories()
+    try:
+        d.add_path(to_add)
+    except UnicodeDecodeError:
+        assert False
 
 def test_del():
     d = Directories()
@@ -121,13 +121,13 @@ def test_states():
     d = Directories()
     p = testpath['onefile']
     d.add_path(p)
-    eq_(DirectoryState.Normal ,d.get_state(p))
+    eq_(DirectoryState.Normal, d.get_state(p))
     d.set_state(p, DirectoryState.Reference)
-    eq_(DirectoryState.Reference ,d.get_state(p))
-    eq_(DirectoryState.Reference ,d.get_state(p['dir1']))
-    eq_(1,len(d.states))
-    eq_(p,list(d.states.keys())[0])
-    eq_(DirectoryState.Reference ,d.states[p])
+    eq_(DirectoryState.Reference, d.get_state(p))
+    eq_(DirectoryState.Reference, d.get_state(p['dir1']))
+    eq_(1, len(d.states))
+    eq_(p, list(d.states.keys())[0])
+    eq_(DirectoryState.Reference, d.states[p])
 
 def test_get_state_with_path_not_there():
     # When the path's not there, just return DirectoryState.Normal
@@ -199,8 +199,8 @@ def test_save_and_load(tmpdir):
     d1.save_to_file(tmpxml)
     d2.load_from_file(tmpxml)
     eq_(2, len(d2))
-    eq_(DirectoryState.Reference ,d2.get_state(p1))
-    eq_(DirectoryState.Excluded ,d2.get_state(p1['dir1']))
+    eq_(DirectoryState.Reference, d2.get_state(p1))
+    eq_(DirectoryState.Excluded, d2.get_state(p1['dir1']))
 
 def test_invalid_path():
     d = Directories()
@@ -280,7 +280,7 @@ def test_default_path_state_override(tmpdir):
         def _default_state_for_path(self, path):
             if 'foobar' in path:
                 return DirectoryState.Excluded
-    
+
     d = MyDirectories()
     p1 = Path(str(tmpdir))
     p1['foobar'].mkdir()
