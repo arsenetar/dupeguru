@@ -16,7 +16,8 @@ class ScannerPE(Scanner):
     match_scaled = False
     threshold = 75
 
-    def get_scan_options(self):
+    @staticmethod
+    def get_scan_options():
         return [
             ScanOption(ScanType.FuzzyBlock, tr("Contents")),
             ScanOption(ScanType.ExifTimestamp, tr("EXIF Timestamp")),

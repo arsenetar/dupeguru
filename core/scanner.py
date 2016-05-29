@@ -124,7 +124,8 @@ class Scanner:
             return True
         return len(dupe.path) > len(ref.path)
 
-    def get_scan_options(self):
+    @staticmethod
+    def get_scan_options():
         """Returns a list of scanning options for this scanner.
 
         Returns a list of ``ScanOption``.

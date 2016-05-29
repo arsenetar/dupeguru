@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2009-05-24
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -43,10 +41,10 @@ class DupeGuru(DupeGuruBase):
 
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.model.scanner.min_match_percentage = self.prefs.filter_hardness
-        self.model.scanner.scan_type = self.prefs.scan_type
-        self.model.scanner.word_weighting = self.prefs.word_weighting
-        self.model.scanner.match_similar_words = self.prefs.match_similar
+        self.model.options['min_match_percentage'] = self.prefs.filter_hardness
+        self.model.options['scan_type'] = self.prefs.scan_type
+        self.model.options['word_weighting'] = self.prefs.word_weighting
+        self.model.options['match_similar_words'] = self.prefs.match_similar
         threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
-        self.model.scanner.size_threshold = threshold * 1024 # threshold is in KB. the scanner wants bytes
+        self.model.options['size_threshold'] = threshold * 1024 # threshold is in KB. the scanner wants bytes
 

@@ -105,7 +105,7 @@ class TestCaseDupeGuru:
         os.link(str(tmppath['myfile']), str(tmppath['hardlink']))
         app = TestApp().app
         app.directories.add_path(tmppath)
-        app.scanner.scan_type = ScanType.Contents
+        app.options['scan_type'] = ScanType.Contents
         app.options['ignore_hardlink_matches'] = True
         app.start_scanning()
         eq_(len(app.results.groups), 0)

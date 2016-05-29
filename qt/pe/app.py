@@ -1,9 +1,7 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-25
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import logging
@@ -34,7 +32,7 @@ class File(PhotoBase):
         except EnvironmentError:
             logging.warning("Could not read image '%s'", str(self.path))
             return (0, 0)
-    
+
     def _plat_get_blocks(self, block_count_per_side, orientation):
         image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
@@ -63,30 +61,30 @@ class File(PhotoBase):
                 t.rotate(270)
             image = image.transformed(t)
         return getblocks(image, block_count_per_side)
-    
+
 
 class DupeGuru(DupeGuruBase):
     MODELCLASS = DupeGuruModel
     EDITION = 'pe'
     LOGO_NAME = 'logo_pe'
     NAME = __appname__
-    
+
     DETAILS_DIALOG_CLASS = DetailsDialog
     RESULT_WINDOW_CLASS = ResultWindow
     RESULT_MODEL_CLASS = ResultsModel
     PREFERENCES_CLASS = Preferences
     PREFERENCES_DIALOG_CLASS = PreferencesDialog
-    
+
     def _setup(self):
         self.model.directories.fileclasses = [File]
         DupeGuruBase._setup(self)
         self.directories_dialog.menuFile.insertAction(
             self.directories_dialog.actionLoadResults, self.resultWindow.actionClearPictureCache
         )
-    
+
     def _update_options(self):
         DupeGuruBase._update_options(self)
-        self.model.scanner.scan_type = self.prefs.scan_type
-        self.model.scanner.match_scaled = self.prefs.match_scaled
-        self.model.scanner.threshold = self.prefs.filter_hardness
-    
+        self.model.options['scan_type'] = self.prefs.scan_type
+        self.model.options['match_scaled'] = self.prefs.match_scaled
+        self.model.options['threshold'] = self.prefs.filter_hardness
+

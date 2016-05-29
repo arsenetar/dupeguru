@@ -23,8 +23,9 @@ from hscommon.trans import tr
 from hscommon.plat import ISWINDOWS
 from hscommon import desktop
 
-from . import directories, results, scanner, export, fs
+from . import directories, results, export, fs
 from .ignore import IgnoreList
+from .scanner import ScanType, Scanner
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -113,7 +114,7 @@ class DupeGuru(Broadcaster):
     """Holds everything together.
 
     Instantiated once per running application, it holds a reference to every high-level object
-    whose reference needs to be held: :class:`~core.results.Results`, :class:`Scanner`,
+    whose reference needs to be held: :class:`~core.results.Results`,
     :class:`~core.directories.Directories`, :mod:`core.gui` instances, etc..
 
     It also hosts high level methods and acts as a coordinator for all those elements. This is why
@@ -154,7 +155,7 @@ class DupeGuru(Broadcaster):
     # select_dest_file(prompt: str, ext: str) --> str
 
     PROMPT_NAME = "dupeGuru"
-    SCANNER_CLASS = scanner.Scanner
+    SCANNER_CLASS = Scanner
 
     def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
@@ -165,10 +166,13 @@ class DupeGuru(Broadcaster):
         self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
+        self.discarded_file_count = 0
         self.directories = directories.Directories()
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
-        self.scanner = self.SCANNER_CLASS()
+        # In addition to "app-level" options, this dictionary also holds options that will be
+        # sent to the scanner. They don't have default values because those defaults values are
+        # defined in the scanner class.
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
@@ -360,7 +364,7 @@ class DupeGuru(Broadcaster):
             self.view.show_message(tr("'{}' does not exist.").format(d))
 
     def add_selected_to_ignore_list(self):
-        """Adds :attr:`selected_dupes` to :attr:`scanner`'s ignore list.
+        """Adds :attr:`selected_dupes` to :attr:`ignore_list`.
         """
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
@@ -731,22 +735,29 @@ class DupeGuru(Broadcaster):
 
         Scans folders selected in :attr:`directories` and put the results in :attr:`results`
         """
+        scanner = self.SCANNER_CLASS()
+        if not self.directories.has_any_file():
+            self.view.show_message(tr("The selected directories contain no scannable file."))
+            return
+        # Send relevant options down to the scanner instance
+        for k, v in self.options.items():
+            if hasattr(scanner, k):
+                setattr(scanner, k, v)
+        self.results.groups = []
+        self._results_changed()
+
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
-            if self.scanner.scan_type == scanner.ScanType.Folders:
+            if scanner.scan_type == ScanType.Folders:
                 files = list(self.directories.get_folders(j))
             else:
                 files = list(self.directories.get_files(j))
             if self.options['ignore_hardlink_matches']:
                 files = self._remove_hardlink_dupes(files)
             logging.info('Scanning %d files' % len(files))
-            self.results.groups = self.scanner.get_dupe_groups(files, self.ignore_list, j)
+            self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
+            self.discarded_file_count = scanner.discarded_file_count
 
-        if not self.directories.has_any_file():
-            self.view.show_message(tr("The selected directories contain no scannable file."))
-            return
-        self.results.groups = []
-        self._results_changed()
         self._start_job(JobType.Scan, do)
 
     def toggle_selected_mark_state(self):
@@ -783,7 +794,7 @@ class DupeGuru(Broadcaster):
     @property
     def stat_line(self):
         result = self.results.stat_line
-        if self.scanner.discarded_file_count:
-            result = tr("%s (%d discarded)") % (result, self.scanner.discarded_file_count)
+        if self.discarded_file_count:
+            result = tr("%s (%d discarded)") % (result, self.discarded_file_count)
         return result
 

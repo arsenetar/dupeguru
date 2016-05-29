@@ -89,7 +89,7 @@ class DupeGuru(QObject):
         createActions(ACTIONS, self)
 
     def _update_options(self):
-        self.model.scanner.mix_file_kind = self.prefs.mix_file_kind
+        self.model.options['mix_file_kind'] = self.prefs.mix_file_kind
         self.model.options['escape_filter_regexp'] = not self.prefs.use_regexp
         self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches

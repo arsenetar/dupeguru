@@ -28,7 +28,7 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
         self._setupUi()
-        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.scanner.get_scan_options()]
+        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.SCANNER_CLASS.get_scan_options()]
         scan_type_index = SCAN_TYPE_ORDER.index(self.app.prefs.scan_type)
         self.scanTypeComboBox.setCurrentIndex(scan_type_index)
         self.directoriesModel = DirectoriesModel(self.app.model.directory_tree, view=self.treeView)
@@ -130,7 +130,7 @@ class DirectoriesDialog(QMainWindow):
         self.scanTypeComboBox = QComboBox(self)
         self.scanTypeComboBox.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.scanTypeComboBox.setMaximumWidth(400)
-        for scan_option in self.app.model.scanner.get_scan_options():
+        for scan_option in self.app.model.SCANNER_CLASS.get_scan_options():
             self.scanTypeComboBox.addItem(scan_option.label)
         hl.addWidget(self.scanTypeComboBox)
         self.showPreferencesButton = QPushButton(tr("Options"), self.centralwidget)
@@ -240,7 +240,7 @@ class DirectoriesDialog(QMainWindow):
         self.app.model.start_scanning()
 
     def scanTypeChanged(self, index):
-        scan_options = self.app.model.scanner.get_scan_options()
+        scan_options = self.app.model.SCANNER_CLASS.get_scan_options()
         self.app.prefs.scan_type = scan_options[index].scan_type
         self.app._update_options()
 

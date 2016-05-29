@@ -13,7 +13,8 @@ class ScannerME(ScannerBase):
     def _key_func(dupe):
         return (-dupe.bitrate, -dupe.size)
 
-    def get_scan_options(self):
+    @staticmethod
+    def get_scan_options():
         return [
             ScanOption(ScanType.Filename, tr("Filename")),
             ScanOption(ScanType.Fields, tr("Filename - Fields")),

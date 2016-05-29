@@ -9,7 +9,8 @@ from hscommon.trans import tr
 from core.scanner import Scanner as ScannerBase, ScanOption, ScanType
 
 class ScannerSE(ScannerBase):
-    def get_scan_options(self):
+    @staticmethod
+    def get_scan_options():
         return [
             ScanOption(ScanType.Filename, tr("Filename")),
             ScanOption(ScanType.Contents, tr("Contents")),
