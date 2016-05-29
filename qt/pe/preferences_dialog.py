@@ -13,13 +13,7 @@ from . import preferences
 tr = trget('ui')
 
 class PreferencesDialog(PreferencesDialogBase):
-    def __init__(self, parent, app):
-        PreferencesDialogBase.__init__(self, parent, app)
-
-        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
-
     def _setupPreferenceWidgets(self):
-        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self._setupAddCheckbox('matchScaledBox', tr("Match pictures of different dimensions"))
@@ -37,20 +31,16 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupBottomPart()
 
     def _load(self, prefs, setchecked):
-        self._load_scan_type(prefs)
         setchecked(self.matchScaledBox, prefs.match_scaled)
 
+        # Update UI state based on selected scan type
+        scan_type = prefs.scan_type
+        fuzzy_scan = scan_type == ScanType.FuzzyBlock
+        self.filterHardnessSlider.setEnabled(fuzzy_scan)
+
     def _save(self, prefs, ischecked):
-        self._save_scan_type(prefs)
         prefs.match_scaled = ischecked(self.matchScaledBox)
 
     def resetToDefaults(self):
         self.load(preferences.Preferences())
-
-    #--- Events
-    def scanTypeChanged(self, index):
-        scan_options = self.app.model.scanner.get_scan_options()
-        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
-        fuzzy_scan = scan_type == ScanType.FuzzyBlock
-        self.filterHardnessSlider.setEnabled(fuzzy_scan)
 

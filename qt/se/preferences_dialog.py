@@ -21,13 +21,7 @@ from . import preferences
 tr = trget('ui')
 
 class PreferencesDialog(PreferencesDialogBase):
-    def __init__(self, parent, app, **kwargs):
-        super().__init__(parent, app, **kwargs)
-
-        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
-
     def _setupPreferenceWidgets(self):
-        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -81,14 +75,19 @@ class PreferencesDialog(PreferencesDialogBase):
             self.resize(self.width(), 440)
 
     def _load(self, prefs, setchecked):
-        self._load_scan_type(prefs)
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
         self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
 
+        # Update UI state based on selected scan type
+        scan_type = prefs.scan_type
+        word_based = scan_type == ScanType.Filename
+        self.filterHardnessSlider.setEnabled(word_based)
+        self.matchSimilarBox.setEnabled(word_based)
+        self.wordWeightingBox.setEnabled(word_based)
+
     def _save(self, prefs, ischecked):
-        self._save_scan_type(prefs)
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
@@ -96,13 +95,4 @@ class PreferencesDialog(PreferencesDialogBase):
 
     def resetToDefaults(self):
         self.load(preferences.Preferences())
-
-    #--- Events
-    def scanTypeChanged(self, index):
-        scan_options = self.app.model.scanner.get_scan_options()
-        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
-        word_based = scan_type == ScanType.Filename
-        self.filterHardnessSlider.setEnabled(word_based)
-        self.matchSimilarBox.setEnabled(word_based)
-        self.wordWeightingBox.setEnabled(word_based)
 

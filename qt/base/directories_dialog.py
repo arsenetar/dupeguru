@@ -1,16 +1,14 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-25
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (
     QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QMainWindow, QMenuBar, QMenu, QLabel,
-    QApplication
+    QApplication, QComboBox
 )
 from PyQt5.QtGui import QPixmap, QIcon
 
@@ -30,6 +28,9 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
         self._setupUi()
+        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.scanner.get_scan_options()]
+        scan_type_index = SCAN_TYPE_ORDER.index(self.app.prefs.scan_type)
+        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
         self.directoriesModel = DirectoriesModel(self.app.model.directory_tree, view=self.treeView)
         self.directoriesDelegate = DirectoriesDelegate()
         self.treeView.setItemDelegate(self.directoriesDelegate)
@@ -43,6 +44,8 @@ class DirectoriesDialog(QMainWindow):
         self._setupBindings()
 
     def _setupBindings(self):
+        self.showPreferencesButton.clicked.connect(self.app.actionPreferences.trigger)
+        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
         self.scanButton.clicked.connect(self.scanButtonClicked)
         self.loadResultsButton.clicked.connect(self.actionLoadResults.trigger)
         self.addFolderButton.clicked.connect(self.actionAddFolder.trigger)
@@ -119,6 +122,21 @@ class DirectoriesDialog(QMainWindow):
         self.treeView.setDragDropMode(QAbstractItemView.DropOnly)
         self.treeView.setUniformRowHeights(True)
         self.verticalLayout.addWidget(self.treeView)
+        hl = QHBoxLayout()
+        hl.setAlignment(Qt.AlignLeft)
+        label = QLabel(tr("Scan Type:"), self)
+        label.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        hl.addWidget(label)
+        self.scanTypeComboBox = QComboBox(self)
+        self.scanTypeComboBox.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.scanTypeComboBox.setMaximumWidth(400)
+        for scan_option in self.app.model.scanner.get_scan_options():
+            self.scanTypeComboBox.addItem(scan_option.label)
+        hl.addWidget(self.scanTypeComboBox)
+        self.showPreferencesButton = QPushButton(tr("Options"), self.centralwidget)
+        self.showPreferencesButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        hl.addWidget(self.showPreferencesButton)
+        self.verticalLayout.addLayout(hl)
         self.horizontalLayout = QHBoxLayout()
         self.removeFolderButton = QPushButton(self.centralwidget)
         self.removeFolderButton.setIcon(QIcon(QPixmap(":/minus")))
@@ -221,16 +239,11 @@ class DirectoriesDialog(QMainWindow):
                 return
         self.app.model.start_scanning()
 
+    def scanTypeChanged(self, index):
+        scan_options = self.app.model.scanner.get_scan_options()
+        self.app.prefs.scan_type = scan_options[index].scan_type
+        self.app._update_options()
+
     def selectionChanged(self, selected, deselected):
         self._updateRemoveButton()
 
-
-if __name__ == '__main__':
-    import sys
-    from . import dg_rc # NOQA
-    from ..testapp import TestApp
-    app = QApplication([])
-    dgapp = TestApp()
-    dialog = DirectoriesDialog(None, dgapp)
-    dialog.show()
-    sys.exit(app.exec_())

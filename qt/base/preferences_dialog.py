@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2011-01-21
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -37,18 +35,6 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
-
-    def _setupScanTypeBox(self):
-        hl = QHBoxLayout()
-        label = QLabel(tr("Scan Type:"), self)
-        label.setMinimumSize(QSize(100, 0))
-        label.setMaximumSize(QSize(100, 16777215))
-        hl.addWidget(label)
-        self.scanTypeComboBox = QComboBox(self)
-        for scan_option in self.app.model.scanner.get_scan_options():
-            self.scanTypeComboBox.addItem(scan_option.label)
-        hl.addWidget(self.scanTypeComboBox)
-        self.widgetsVLayout.addLayout(hl)
 
     def _setupFilterHardnessBox(self):
         self.filterHardnessHLayout = QHBoxLayout()
@@ -126,7 +112,7 @@ class PreferencesDialogBase(QDialog):
         pass
 
     def _setupUi(self):
-        self.setWindowTitle(tr("Preferences"))
+        self.setWindowTitle(tr("Options"))
         self.resize(304, 263)
         self.setSizeGripEnabled(False)
         self.setModal(True)
@@ -141,18 +127,9 @@ class PreferencesDialogBase(QDialog):
             self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
             self.ignoreHardlinkMatches.setHidden(True)
 
-    def _load_scan_type(self, prefs):
-        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.scanner.get_scan_options()]
-        scan_type_index = SCAN_TYPE_ORDER.index(prefs.scan_type)
-        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
-
     def _load(self, prefs, setchecked):
         # Edition-specific
         pass
-
-    def _save_scan_type(self, prefs):
-        scan_options = self.app.model.scanner.get_scan_options()
-        prefs.scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
 
     def _save(self, prefs, ischecked):
         # Edition-specific

@@ -80,7 +80,7 @@ class DupeGuru(QObject):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
             ('actionQuit', 'Ctrl+Q', '', tr("Quit"), self.quitTriggered),
-            ('actionPreferences', 'Ctrl+P', '', tr("Preferences"), self.preferencesTriggered),
+            ('actionPreferences', 'Ctrl+P', '', tr("Options"), self.preferencesTriggered),
             ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),

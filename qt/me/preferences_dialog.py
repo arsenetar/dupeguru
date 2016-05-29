@@ -1,5 +1,3 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-29
 # Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
@@ -20,13 +18,7 @@ from . import preferences
 tr = trget('ui')
 
 class PreferencesDialog(PreferencesDialogBase):
-    def __init__(self, parent, app):
-        PreferencesDialogBase.__init__(self, parent, app)
-
-        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
-
     def _setupPreferenceWidgets(self):
-        self._setupScanTypeBox()
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -72,7 +64,6 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupBottomPart()
 
     def _load(self, prefs, setchecked):
-        self._load_scan_type(prefs)
         setchecked(self.tagTrackBox, prefs.scan_tag_track)
         setchecked(self.tagArtistBox, prefs.scan_tag_artist)
         setchecked(self.tagAlbumBox, prefs.scan_tag_album)
@@ -82,24 +73,8 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
 
-    def _save(self, prefs, ischecked):
-        self._save_scan_type(prefs)
-        prefs.scan_tag_track = ischecked(self.tagTrackBox)
-        prefs.scan_tag_artist = ischecked(self.tagArtistBox)
-        prefs.scan_tag_album = ischecked(self.tagAlbumBox)
-        prefs.scan_tag_title = ischecked(self.tagTitleBox)
-        prefs.scan_tag_genre = ischecked(self.tagGenreBox)
-        prefs.scan_tag_year = ischecked(self.tagYearBox)
-        prefs.match_similar = ischecked(self.matchSimilarBox)
-        prefs.word_weighting = ischecked(self.wordWeightingBox)
-
-    def resetToDefaults(self):
-        self.load(preferences.Preferences())
-
-    #--- Events
-    def scanTypeChanged(self, index):
-        scan_options = self.app.model.scanner.get_scan_options()
-        scan_type = scan_options[self.scanTypeComboBox.currentIndex()].scan_type
+        # Update UI state based on selected scan type
+        scan_type = prefs.scan_type
         word_based = scan_type in (
             ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder,
             ScanType.Tag
@@ -114,4 +89,17 @@ class PreferencesDialog(PreferencesDialogBase):
         self.tagTitleBox.setEnabled(tag_based)
         self.tagGenreBox.setEnabled(tag_based)
         self.tagYearBox.setEnabled(tag_based)
+
+    def _save(self, prefs, ischecked):
+        prefs.scan_tag_track = ischecked(self.tagTrackBox)
+        prefs.scan_tag_artist = ischecked(self.tagArtistBox)
+        prefs.scan_tag_album = ischecked(self.tagAlbumBox)
+        prefs.scan_tag_title = ischecked(self.tagTitleBox)
+        prefs.scan_tag_genre = ischecked(self.tagGenreBox)
+        prefs.scan_tag_year = ischecked(self.tagYearBox)
+        prefs.match_similar = ischecked(self.matchSimilarBox)
+        prefs.word_weighting = ischecked(self.wordWeightingBox)
+
+    def resetToDefaults(self):
+        self.load(preferences.Preferences())
 

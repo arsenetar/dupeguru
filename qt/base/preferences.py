@@ -1,9 +1,7 @@
-# Created By: Virgil Dupras
-# Created On: 2009-05-03
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtWidgets import QApplication
@@ -12,10 +10,12 @@ from hscommon import trans
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
+    DEFAULT_SCAN_TYPE = None # edition-specific
+
     def _load_specific(self, settings):
         # load prefs specific to the dg edition
         pass
-    
+
     def _load_values(self, settings):
         get = self.get_value
         self.filter_hardness = get('FilterHardness', self.filter_hardness)
@@ -29,20 +29,20 @@ class Preferences(PreferencesBase):
         self.language = get('Language', self.language)
         if not self.language and trans.installed_lang:
             self.language = trans.installed_lang
-        
+
         self.tableFontSize = get('TableFontSize', self.tableFontSize)
         self.resultWindowIsMaximized = get('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.resultWindowRect = self.get_rect('ResultWindowRect', self.resultWindowRect)
         self.directoriesWindowRect = self.get_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         self.recentResults = get('RecentResults', self.recentResults)
         self.recentFolders = get('RecentFolders', self.recentFolders)
-        
+
         self._load_specific(settings)
-    
+
     def _reset_specific(self):
         # reset prefs specific to the dg edition
         pass
-    
+
     def reset(self):
         self.filter_hardness = 95
         self.mix_file_kind = True
@@ -53,20 +53,20 @@ class Preferences(PreferencesBase):
         self.destination_type = 1
         self.custom_command = ''
         self.language = trans.installed_lang if trans.installed_lang else ''
-        
+
         self.tableFontSize = QApplication.font().pointSize()
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.directoriesWindowRect = None
         self.recentResults = []
         self.recentFolders = []
-        
+
         self._reset_specific()
-    
+
     def _save_specific(self, settings):
         # save prefs specific to the dg edition
         pass
-    
+
     def _save_values(self, settings):
         set_ = self.set_value
         set_('FilterHardness', self.filter_hardness)
@@ -78,13 +78,21 @@ class Preferences(PreferencesBase):
         set_('DestinationType', self.destination_type)
         set_('CustomCommand', self.custom_command)
         set_('Language', self.language)
-        
+
         set_('TableFontSize', self.tableFontSize)
         set_('ResultWindowIsMaximized', self.resultWindowIsMaximized)
         self.set_rect('ResultWindowRect', self.resultWindowRect)
         self.set_rect('DirectoriesWindowRect', self.directoriesWindowRect)
         set_('RecentResults', self.recentResults)
         set_('RecentFolders', self.recentFolders)
-        
+
         self._save_specific(settings)
-    
+
+    # scan_type is special because we save it immediately when we set it.
+    @property
+    def scan_type(self):
+        return self.get_value('ScanType', self.DEFAULT_SCAN_TYPE)
+
+    @scan_type.setter
+    def scan_type(self, value):
+        self.set_value('ScanType', value)
