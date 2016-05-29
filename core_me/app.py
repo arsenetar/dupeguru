@@ -1,5 +1,4 @@
-# Created On: 2011/09/20
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -17,10 +16,10 @@ class DupeGuru(DupeGuruBase):
         'size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
         'album', 'genre', 'year', 'track', 'comment'
     ]
+    SCANNER_CLASS = scanner.ScannerME
 
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
-        self.scanner = scanner.ScannerME()
         self.fileclasses = [fs.MusicFile]
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
