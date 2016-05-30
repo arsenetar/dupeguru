@@ -55,6 +55,11 @@ class JobType:
     Copy = 'job_copy'
     Delete = 'job_delete'
 
+class AppMode:
+    Standard = 0
+    Music = 1
+    Picture = 2
+
 JOBID2TITLE = {
     JobType.Scan: tr("Scanning for duplicates"),
     JobType.Load: tr("Loading"),
@@ -149,6 +154,7 @@ class DupeGuru(Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # ask_yes_no(prompt) --> bool
+    # create_results_window()
     # show_results_window()
     # show_problem_dialog()
     # select_dest_folder(prompt: str) --> str
@@ -166,9 +172,8 @@ class DupeGuru(Broadcaster):
         self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
+        self.app_mode = AppMode.Standard
         self.discarded_file_count = 0
-        self.fileclasses = [fs.File]
-        self.folderclass = fs.Folder
         self.directories = directories.Directories()
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
@@ -187,10 +192,10 @@ class DupeGuru(Broadcaster):
         self.problem_dialog = ProblemDialog(self)
         self.ignore_list_dialog = IgnoreListDialog(self)
         self.stats_label = StatsLabel(self)
-        self.result_table = self._create_result_table()
+        self.result_table = None
         self.deletion_options = DeletionOptions()
         self.progress_window = ProgressWindow(self._job_completed)
-        children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
+        children = [self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
 
@@ -746,6 +751,11 @@ class DupeGuru(Broadcaster):
             if hasattr(scanner, k):
                 setattr(scanner, k, v)
         self.results.groups = []
+        if self.result_table is not None:
+            self.result_table.disconnect()
+        self.result_table = self._create_result_table()
+        self.result_table.connect()
+        self.view.create_results_window()
         self._results_changed()
 
         def do(j):

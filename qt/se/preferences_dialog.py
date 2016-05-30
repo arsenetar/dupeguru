@@ -13,6 +13,7 @@ from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.trans import trget
 from hscommon.util import tryint
 
+from core.app import AppMode
 from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
@@ -81,7 +82,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
 
         # Update UI state based on selected scan type
-        scan_type = prefs.scan_type
+        scan_type = prefs.get_scan_type(AppMode.Standard)
         word_based = scan_type == ScanType.Filename
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)

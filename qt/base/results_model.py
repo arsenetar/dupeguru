@@ -1,9 +1,9 @@
 # Created By: Virgil Dupras
 # Created On: 2009-04-23
 # Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
@@ -17,13 +17,17 @@ class ResultsModel(Table):
         model = app.model.result_table
         super().__init__(model, view, **kwargs)
         view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
-        
-        app.prefsChanged.connect(self.appPrefsChanged)
+        font = view.font()
+        font.setPointSize(app.prefs.tableFontSize)
+        self.view.setFont(font)
+        fm = QFontMetrics(font)
+        view.verticalHeader().setDefaultSectionSize(fm.height()+2)
+
         app.willSavePrefs.connect(self.appWillSavePrefs)
-    
+
     def _getData(self, row, column, role):
         if column.name == 'marked':
-            if role == Qt.CheckStateRole and row.markable:    
+            if role == Qt.CheckStateRole and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
             return None
         if role == Qt.DisplayRole:
@@ -43,7 +47,7 @@ class ResultsModel(Table):
             if column.name == 'name':
                 return row.data[column.name]
         return None
-    
+
     def _getFlags(self, row, column):
         flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
         if column.name == 'marked':
@@ -52,7 +56,7 @@ class ResultsModel(Table):
         elif column.name == 'name':
             flags |= Qt.ItemIsEditable
         return flags
-    
+
     def _setData(self, row, column, value, role):
         if role == Qt.CheckStateRole:
             if column.name == 'marked':
@@ -62,46 +66,39 @@ class ResultsModel(Table):
             if column.name == 'name':
                 return self.model.rename_selected(value)
         return False
-    
+
     def sort(self, column, order):
         column = self.model.COLUMNS[column]
         self.model.sort(column.name, order == Qt.AscendingOrder)
-    
+
     #--- Properties
     @property
     def power_marker(self):
         return self.model.power_marker
-    
+
     @power_marker.setter
     def power_marker(self, value):
         self.model.power_marker = value
-    
+
     @property
     def delta_values(self):
         return self.model.delta_values
-    
+
     @delta_values.setter
     def delta_values(self, value):
         self.model.delta_values = value
-    
+
     #--- Events
-    def appPrefsChanged(self, prefs):
-        font = self.view.font()
-        font.setPointSize(prefs.tableFontSize)
-        self.view.setFont(font)
-        fm = QFontMetrics(font)
-        self.view.verticalHeader().setDefaultSectionSize(fm.height()+2)
-    
     def appWillSavePrefs(self):
         self.model.columns.save_columns()
-    
+
     #--- model --> view
     def invalidate_markings(self):
         # redraw view
         # HACK. this is the only way I found to update the widget without reseting everything
         self.view.scroll(0, 1)
         self.view.scroll(0, -1)
-    
+
 
 class ResultsView(QTableView):
     #--- Override
@@ -110,10 +107,10 @@ class ResultsView(QTableView):
             self.spacePressed.emit()
             return
         super().keyPressEvent(event)
-    
+
     def mouseDoubleClickEvent(self, event):
         self.doubleClicked.emit(QModelIndex())
         # We don't call the superclass' method because the default behavior is to rename the cell.
-    
+
     #--- Signals
     spacePressed = pyqtSignal()

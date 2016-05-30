@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
+from core.app import AppMode
+from qtlib.radio_box import RadioBox
 from qtlib.recent import Recent
 from qtlib.util import moveToScreenCenter, createActions
 
@@ -28,9 +30,7 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, 'recentFolders')
         self._setupUi()
-        SCAN_TYPE_ORDER = [so.scan_type for so in self.app.model.SCANNER_CLASS.get_scan_options()]
-        scan_type_index = SCAN_TYPE_ORDER.index(self.app.prefs.scan_type)
-        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+        self._updateScanTypeList()
         self.directoriesModel = DirectoriesModel(self.app.model.directory_tree, view=self.treeView)
         self.directoriesDelegate = DirectoriesDelegate()
         self.treeView.setItemDelegate(self.directoriesDelegate)
@@ -41,11 +41,12 @@ class DirectoriesDialog(QMainWindow):
         self._updateAddButton()
         self._updateRemoveButton()
         self._updateLoadResultsButton()
+        self._updateActionsState()
         self._setupBindings()
 
     def _setupBindings(self):
+        self.appModeRadioBox.itemSelected.connect(self.appModeButtonSelected)
         self.showPreferencesButton.clicked.connect(self.app.actionPreferences.trigger)
-        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
         self.scanButton.clicked.connect(self.scanButtonClicked)
         self.loadResultsButton.clicked.connect(self.actionLoadResults.trigger)
         self.addFolderButton.clicked.connect(self.actionAddFolder.trigger)
@@ -123,6 +124,13 @@ class DirectoriesDialog(QMainWindow):
         self.treeView.setUniformRowHeights(True)
         self.verticalLayout.addWidget(self.treeView)
         hl = QHBoxLayout()
+        label = QLabel(tr("Application Mode:"), self)
+        label.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        hl.addWidget(label)
+        self.appModeRadioBox = RadioBox(self, items=[tr("Standard"), tr("Music")], spread=False)
+        hl.addWidget(self.appModeRadioBox)
+        self.verticalLayout.addLayout(hl)
+        hl = QHBoxLayout()
         hl.setAlignment(Qt.AlignLeft)
         label = QLabel(tr("Scan Type:"), self)
         label.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -130,10 +138,8 @@ class DirectoriesDialog(QMainWindow):
         self.scanTypeComboBox = QComboBox(self)
         self.scanTypeComboBox.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.scanTypeComboBox.setMaximumWidth(400)
-        for scan_option in self.app.model.SCANNER_CLASS.get_scan_options():
-            self.scanTypeComboBox.addItem(scan_option.label)
         hl.addWidget(self.scanTypeComboBox)
-        self.showPreferencesButton = QPushButton(tr("Options"), self.centralwidget)
+        self.showPreferencesButton = QPushButton(tr("More Options"), self.centralwidget)
         self.showPreferencesButton.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         hl.addWidget(self.showPreferencesButton)
         self.verticalLayout.addLayout(hl)
@@ -172,6 +178,9 @@ class DirectoriesDialog(QMainWindow):
         header.setSectionResizeMode(1, QHeaderView.Fixed)
         header.resizeSection(1, 100)
 
+    def _updateActionsState(self):
+        self.actionShowResultsWindow.setEnabled(self.app.resultWindow is not None)
+
     def _updateAddButton(self):
         if self.recentFolders.isEmpty():
             self.addFolderButton.setMenu(None)
@@ -190,6 +199,23 @@ class DirectoriesDialog(QMainWindow):
             self.loadResultsButton.setMenu(None)
         else:
             self.loadResultsButton.setMenu(self.menuRecentResults)
+
+    def _updateScanTypeList(self):
+        try:
+            self.scanTypeComboBox.currentIndexChanged[int].disconnect(self.scanTypeChanged)
+        except TypeError:
+            # Not connected, ignore
+            pass
+        self.scanTypeComboBox.clear()
+        scan_options = self.app.model.SCANNER_CLASS.get_scan_options()
+        for scan_option in scan_options:
+            self.scanTypeComboBox.addItem(scan_option.label)
+        SCAN_TYPE_ORDER = [so.scan_type for so in scan_options]
+        selected_scan_type = self.app.prefs.get_scan_type(self.app.model.app_mode)
+        scan_type_index = SCAN_TYPE_ORDER.index(selected_scan_type)
+        self.scanTypeComboBox.setCurrentIndex(scan_type_index)
+        self.scanTypeComboBox.currentIndexChanged[int].connect(self.scanTypeChanged)
+        self.app._update_options()
 
     #--- QWidget overrides
     def closeEvent(self, event):
@@ -212,6 +238,14 @@ class DirectoriesDialog(QMainWindow):
         self.lastAddedFolder = dirpath
         self.app.model.add_directory(dirpath)
         self.recentFolders.insertItem(dirpath)
+
+    def appModeButtonSelected(self, index):
+        if index == 1:
+            mode = AppMode.Music
+        else:
+            mode = AppMode.Standard
+        self.app.model.app_mode = mode
+        self._updateScanTypeList()
 
     def appWillSavePrefs(self):
         self.app.prefs.directoriesWindowRect = self.geometry()
@@ -241,7 +275,7 @@ class DirectoriesDialog(QMainWindow):
 
     def scanTypeChanged(self, index):
         scan_options = self.app.model.SCANNER_CLASS.get_scan_options()
-        self.app.prefs.scan_type = scan_options[index].scan_type
+        self.app.prefs.set_scan_type(self.app.model.app_mode, scan_options[index].scan_type)
         self.app._update_options()
 
     def selectionChanged(self, selected, deselected):

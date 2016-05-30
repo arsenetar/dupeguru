@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.testutil import TestApp as TestAppBase, eq_, with_app # noqa
+from hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app # noqa
 from hscommon.path import Path
 from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
@@ -41,6 +41,8 @@ class DupeGuruView:
     def ask_yes_no(self, prompt):
         return True # always answer yes
 
+    def create_results_window(self):
+        pass
 
 class ResultTable(ResultTableBase):
     COLUMNS = [
@@ -59,12 +61,16 @@ class DupeGuru(DupeGuruBase):
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView())
         self.appdata = '/tmp'
+        self.result_table = self._create_result_table()
+        self.result_table.connect()
 
     def _prioritization_categories(self):
         return prioritize.all_categories()
 
     def _create_result_table(self):
-        return ResultTable(self)
+        result = ResultTable(self)
+        result.view = CallLogger()
+        return result
 
 
 class NamedObject:
@@ -141,7 +147,6 @@ class TestApp(TestAppBase):
         TestAppBase.__init__(self)
         self.app = DupeGuru()
         self.default_parent = self.app
-        self.rtable = link_gui(self.app.result_table)
         self.dtree = link_gui(self.app.directory_tree)
         self.dpanel = link_gui(self.app.details_panel)
         self.slabel = link_gui(self.app.stats_label)
@@ -154,6 +159,11 @@ class TestApp(TestAppBase):
         link_gui(self.app.progress_window)
         link_gui(self.app.progress_window.jobdesc_textfield)
         link_gui(self.app.progress_window.progressdesc_textfield)
+
+    @property
+    def rtable(self):
+        # rtable is a property because its instance can be replaced during execution
+        return self.app.result_table
 
     #--- Helpers
     def select_pri_criterion(self, name):

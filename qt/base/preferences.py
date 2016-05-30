@@ -7,6 +7,8 @@
 from PyQt5.QtWidgets import QApplication
 
 from hscommon import trans
+from core.app import AppMode
+from core.scanner import ScanType
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
@@ -89,10 +91,14 @@ class Preferences(PreferencesBase):
         self._save_specific(settings)
 
     # scan_type is special because we save it immediately when we set it.
-    @property
-    def scan_type(self):
-        return self.get_value('ScanType', self.DEFAULT_SCAN_TYPE)
+    def get_scan_type(self, app_mode):
+        if app_mode == AppMode.Music:
+            return self.get_value('ScanTypeMusic', ScanType.Tag)
+        else:
+            return self.get_value('ScanTypeStandard', ScanType.Contents)
 
-    @scan_type.setter
-    def scan_type(self, value):
-        self.set_value('ScanType', value)
+    def set_scan_type(self, app_mode, value):
+        if app_mode == AppMode.Music:
+            self.set_value('ScanTypeMusic', value)
+        else:
+            self.set_value('ScanTypeStandard', value)

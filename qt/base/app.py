@@ -47,7 +47,6 @@ class DupeGuru(QObject):
         self.prefs.load()
         self.model = self.MODELCLASS(view=self)
         self._setup()
-        self.prefsChanged.emit(self.prefs)
 
     #--- Private
     def _setup(self):
@@ -55,15 +54,14 @@ class DupeGuru(QObject):
         self._update_options()
         self.recentResults = Recent(self, 'recentResults')
         self.recentResults.mustOpenItem.connect(self.model.load_from)
+        self.resultWindow = None
+        self.details_dialog = None
         self.directories_dialog = DirectoriesDialog(self)
-        self.resultWindow = self.RESULT_WINDOW_CLASS(self.directories_dialog, self)
-        self.progress_window = ProgressWindow(self.resultWindow, self.model.progress_window)
-        self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
-        self.problemDialog = ProblemDialog(parent=self.resultWindow, model=self.model.problem_dialog)
-        self.ignoreListDialog = IgnoreListDialog(parent=self.resultWindow, model=self.model.ignore_list_dialog)
-        self.deletionOptions = DeletionOptions(parent=self.resultWindow, model=self.model.deletion_options)
-        self.preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.resultWindow, self)
-        self.about_box = AboutBox(self.resultWindow, self)
+        self.progress_window = ProgressWindow(self.directories_dialog, self.model.progress_window)
+        self.problemDialog = ProblemDialog(parent=self.directories_dialog, model=self.model.problem_dialog)
+        self.ignoreListDialog = IgnoreListDialog(parent=self.directories_dialog, model=self.model.ignore_list_dialog)
+        self.deletionOptions = DeletionOptions(parent=self.directories_dialog, model=self.model.deletion_options)
+        self.about_box = AboutBox(self.directories_dialog, self)
 
         self.directories_dialog.show()
         self.model.load()
@@ -94,6 +92,7 @@ class DupeGuru(QObject):
         self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
         self.model.options['copymove_dest_type'] = self.prefs.destination_type
+        self.model.options['scan_type'] = self.prefs.get_scan_type(self.model.app_mode)
 
     #--- Public
     def add_selected_to_ignore_list(self):
@@ -112,14 +111,15 @@ class DupeGuru(QObject):
         self.model.invoke_custom_command()
 
     def show_details(self):
-        self.details_dialog.show()
+        if self.details_dialog is not None:
+            self.details_dialog.show()
 
     def showResultsWindow(self):
-        self.resultWindow.show()
+        if self.resultWindow is not None:
+            self.resultWindow.show()
 
     #--- Signals
     willSavePrefs = pyqtSignal()
-    prefsChanged = pyqtSignal(object)
 
     #--- Events
     def finishedLaunching(self):
@@ -143,13 +143,14 @@ class DupeGuru(QObject):
         desktop.open_path(debugLogPath)
 
     def preferencesTriggered(self):
-        self.preferences_dialog.load()
-        result = self.preferences_dialog.exec()
+        preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.directories_dialog, self)
+        preferences_dialog.load()
+        result = preferences_dialog.exec()
         if result == QDialog.Accepted:
-            self.preferences_dialog.save()
+            preferences_dialog.save()
             self.prefs.save()
             self._update_options()
-            self.prefsChanged.emit(self.prefs)
+        preferences_dialog.setParent(None)
 
     def quitTriggered(self):
         self.directories_dialog.close()
@@ -175,6 +176,18 @@ class DupeGuru(QObject):
 
     def ask_yes_no(self, prompt):
         return self.confirm('', prompt)
+
+    def create_results_window(self):
+        """Creates resultWindow and details_dialog depending on the selected ``app_mode``.
+        """
+        if self.details_dialog is not None:
+            self.details_dialog.close()
+            self.details_dialog.setParent(None)
+        if self.resultWindow is not None:
+            self.resultWindow.close()
+            self.resultWindow.setParent(None)
+        self.resultWindow = self.RESULT_WINDOW_CLASS(self.directories_dialog, self)
+        self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
 
     def show_results_window(self):
         self.showResultsWindow()
