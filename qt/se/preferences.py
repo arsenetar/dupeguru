@@ -19,9 +19,10 @@ class Preferences(PreferencesBase):
         self.scan_tag_title = get('ScanTagTitle', self.scan_tag_title)
         self.scan_tag_genre = get('ScanTagGenre', self.scan_tag_genre)
         self.scan_tag_year = get('ScanTagYear', self.scan_tag_year)
+        self.match_scaled = get('MatchScaled', self.match_scaled)
 
     def _reset_specific(self):
-        self.filter_hardness = 80
+        self.filter_hardness = 95
         self.word_weighting = True
         self.match_similar = False
         self.ignore_small_files = True
@@ -32,6 +33,7 @@ class Preferences(PreferencesBase):
         self.scan_tag_title = True
         self.scan_tag_genre = False
         self.scan_tag_year = False
+        self.match_scaled = False
 
     def _save_specific(self, settings):
         set_ = self.set_value
@@ -45,4 +47,5 @@ class Preferences(PreferencesBase):
         set_('ScanTagTitle', self.scan_tag_title)
         set_('ScanTagGenre', self.scan_tag_genre)
         set_('ScanTagYear', self.scan_tag_year)
+        set_('MatchScaled', self.match_scaled)
 

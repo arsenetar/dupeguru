@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2011-05-29
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -12,6 +10,9 @@ from hscommon.util import get_file_ext, format_size
 from core.app import format_timestamp, format_perc, format_dupe_count
 from core import fs
 from . import exif
+
+# This global value is set by the platform-specific subclasser of the Photo base class
+PLAT_SPECIFIC_PHOTO_CLASS = None
 
 def format_dimensions(dimensions):
     return '%d x %d' % (dimensions[0], dimensions[1])

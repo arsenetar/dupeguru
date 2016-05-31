@@ -8,15 +8,20 @@ from core_se import __appname__
 from core_se.app import DupeGuru as DupeGuruModel
 from core.directories import Directories as DirectoriesBase, DirectoryState
 from core.app import AppMode
+import core_pe.photo
 
 from ..base.app import DupeGuru as DupeGuruBase
 from .details_dialog import DetailsDialog as DetailsDialogStandard
 from ..me.details_dialog import DetailsDialog as DetailsDialogMusic
+from ..pe.details_dialog import DetailsDialog as DetailsDialogPicture
 from .results_model import ResultsModel as ResultsModelStandard
 from ..me.results_model import ResultsModel as ResultsModelMusic
+from ..pe.results_model import ResultsModel as ResultsModelPicture
 from .preferences import Preferences
 from .preferences_dialog import PreferencesDialog as PreferencesDialogStandard
 from ..me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
+from ..pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from ..pe.photo import File as PlatSpecificPhoto
 
 class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = frozenset(['windows', 'program files'])
@@ -39,6 +44,7 @@ class DupeGuru(DupeGuruBase):
     def _setup(self):
         self.directories = Directories()
         DupeGuruBase._setup(self)
+        core_pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
 
     def _update_options(self):
         DupeGuruBase._update_options(self)
@@ -61,24 +67,31 @@ class DupeGuru(DupeGuruBase):
         if self.prefs.scan_tag_year:
             scanned_tags.add('year')
         self.model.options['scanned_tags'] = scanned_tags
+        self.model.options['match_scaled'] = self.prefs.match_scaled
 
     @property
     def DETAILS_DIALOG_CLASS(self):
-        if self.model.app_mode == AppMode.Music:
+        if self.model.app_mode == AppMode.Picture:
+            return DetailsDialogPicture
+        elif self.model.app_mode == AppMode.Music:
             return DetailsDialogMusic
         else:
             return DetailsDialogStandard
 
     @property
     def RESULT_MODEL_CLASS(self):
-        if self.model.app_mode == AppMode.Music:
+        if self.model.app_mode == AppMode.Picture:
+            return ResultsModelPicture
+        elif self.model.app_mode == AppMode.Music:
             return ResultsModelMusic
         else:
             return ResultsModelStandard
 
     @property
     def PREFERENCES_DIALOG_CLASS(self):
-        if self.model.app_mode == AppMode.Music:
+        if self.model.app_mode == AppMode.Picture:
+            return PreferencesDialogPicture
+        elif self.model.app_mode == AppMode.Music:
             return PreferencesDialogMusic
         else:
             return PreferencesDialogStandard
