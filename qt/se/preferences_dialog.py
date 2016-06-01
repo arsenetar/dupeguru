@@ -17,7 +17,6 @@ from core.app import AppMode
 from core.scanner import ScanType
 
 from ..base.preferences_dialog import PreferencesDialogBase
-from . import preferences
 
 tr = trget('ui')
 
@@ -93,7 +92,4 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
         prefs.small_file_threshold = tryint(self.sizeThresholdEdit.text())
-
-    def resetToDefaults(self):
-        self.load(preferences.Preferences())
 

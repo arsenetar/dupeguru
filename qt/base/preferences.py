@@ -12,12 +12,6 @@ from core.scanner import ScanType
 from qtlib.preferences import Preferences as PreferencesBase
 
 class Preferences(PreferencesBase):
-    DEFAULT_SCAN_TYPE = None # edition-specific
-
-    def _load_specific(self, settings):
-        # load prefs specific to the dg edition
-        pass
-
     def _load_values(self, settings):
         get = self.get_value
         self.filter_hardness = get('FilterHardness', self.filter_hardness)
@@ -39,11 +33,17 @@ class Preferences(PreferencesBase):
         self.recentResults = get('RecentResults', self.recentResults)
         self.recentFolders = get('RecentFolders', self.recentFolders)
 
-        self._load_specific(settings)
-
-    def _reset_specific(self):
-        # reset prefs specific to the dg edition
-        pass
+        self.word_weighting = get('WordWeighting', self.word_weighting)
+        self.match_similar = get('MatchSimilar', self.match_similar)
+        self.ignore_small_files = get('IgnoreSmallFiles', self.ignore_small_files)
+        self.small_file_threshold = get('SmallFileThreshold', self.small_file_threshold)
+        self.scan_tag_track = get('ScanTagTrack', self.scan_tag_track)
+        self.scan_tag_artist = get('ScanTagArtist', self.scan_tag_artist)
+        self.scan_tag_album = get('ScanTagAlbum', self.scan_tag_album)
+        self.scan_tag_title = get('ScanTagTitle', self.scan_tag_title)
+        self.scan_tag_genre = get('ScanTagGenre', self.scan_tag_genre)
+        self.scan_tag_year = get('ScanTagYear', self.scan_tag_year)
+        self.match_scaled = get('MatchScaled', self.match_scaled)
 
     def reset(self):
         self.filter_hardness = 95
@@ -63,11 +63,17 @@ class Preferences(PreferencesBase):
         self.recentResults = []
         self.recentFolders = []
 
-        self._reset_specific()
-
-    def _save_specific(self, settings):
-        # save prefs specific to the dg edition
-        pass
+        self.word_weighting = True
+        self.match_similar = False
+        self.ignore_small_files = True
+        self.small_file_threshold = 10 # KB
+        self.scan_tag_track = False
+        self.scan_tag_artist = True
+        self.scan_tag_album = True
+        self.scan_tag_title = True
+        self.scan_tag_genre = False
+        self.scan_tag_year = False
+        self.match_scaled = False
 
     def _save_values(self, settings):
         set_ = self.set_value
@@ -88,7 +94,17 @@ class Preferences(PreferencesBase):
         set_('RecentResults', self.recentResults)
         set_('RecentFolders', self.recentFolders)
 
-        self._save_specific(settings)
+        set_('WordWeighting', self.word_weighting)
+        set_('MatchSimilar', self.match_similar)
+        set_('IgnoreSmallFiles', self.ignore_small_files)
+        set_('SmallFileThreshold', self.small_file_threshold)
+        set_('ScanTagTrack', self.scan_tag_track)
+        set_('ScanTagArtist', self.scan_tag_artist)
+        set_('ScanTagAlbum', self.scan_tag_album)
+        set_('ScanTagTitle', self.scan_tag_title)
+        set_('ScanTagGenre', self.scan_tag_genre)
+        set_('ScanTagYear', self.scan_tag_year)
+        set_('MatchScaled', self.match_scaled)
 
     # scan_type is special because we save it immediately when we set it.
     def get_scan_type(self, app_mode):

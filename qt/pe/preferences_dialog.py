@@ -9,7 +9,6 @@ from core.scanner import ScanType
 from core.app import AppMode
 
 from ..base.preferences_dialog import PreferencesDialogBase
-from ..se import preferences
 
 tr = trget('ui')
 
@@ -41,7 +40,4 @@ class PreferencesDialog(PreferencesDialogBase):
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
-
-    def resetToDefaults(self):
-        self.load(preferences.Preferences())
 

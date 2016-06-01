@@ -1,6 +1,4 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-25
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -21,34 +19,40 @@ from qtlib.recent import Recent
 from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow
 
+from core.app import AppMode
+from core_se.app import DupeGuru as DupeGuruModel
+import core_pe.photo
 from . import platform
+from .preferences import Preferences
 from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .ignore_list_dialog import IgnoreListDialog
 from .deletion_options import DeletionOptions
+from ..se.details_dialog import DetailsDialog as DetailsDialogStandard
+from ..me.details_dialog import DetailsDialog as DetailsDialogMusic
+from ..pe.details_dialog import DetailsDialog as DetailsDialogPicture
+from ..se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
+from ..me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
+from ..pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from ..pe.photo import File as PlatSpecificPhoto
 
 tr = trget('ui')
 
 class DupeGuru(QObject):
-    MODELCLASS = None
-    LOGO_NAME = '<replace this>'
-    NAME = '<replace this>'
-
-    DETAILS_DIALOG_CLASS = None
-    RESULT_MODEL_CLASS = None
-    PREFERENCES_CLASS = None
-    PREFERENCES_DIALOG_CLASS = None
+    LOGO_NAME = 'logo_se'
+    NAME = 'dupeGuru'
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.prefs = self.PREFERENCES_CLASS()
+        self.prefs = Preferences()
         self.prefs.load()
-        self.model = self.MODELCLASS(view=self)
+        self.model = DupeGuruModel(view=self)
         self._setup()
 
     #--- Private
     def _setup(self):
+        core_pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
         self._update_options()
         self.recentResults = Recent(self, 'recentResults')
@@ -93,6 +97,43 @@ class DupeGuru(QObject):
         self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
         self.model.options['copymove_dest_type'] = self.prefs.destination_type
         self.model.options['scan_type'] = self.prefs.get_scan_type(self.model.app_mode)
+        self.model.options['min_match_percentage'] = self.prefs.filter_hardness
+        self.model.options['word_weighting'] = self.prefs.word_weighting
+        self.model.options['match_similar_words'] = self.prefs.match_similar
+        threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
+        self.model.options['size_threshold'] = threshold * 1024 # threshold is in KB. the scanner wants bytes
+        scanned_tags = set()
+        if self.prefs.scan_tag_track:
+            scanned_tags.add('track')
+        if self.prefs.scan_tag_artist:
+            scanned_tags.add('artist')
+        if self.prefs.scan_tag_album:
+            scanned_tags.add('album')
+        if self.prefs.scan_tag_title:
+            scanned_tags.add('title')
+        if self.prefs.scan_tag_genre:
+            scanned_tags.add('genre')
+        if self.prefs.scan_tag_year:
+            scanned_tags.add('year')
+        self.model.options['scanned_tags'] = scanned_tags
+        self.model.options['match_scaled'] = self.prefs.match_scaled
+
+    #--- Private
+    def _get_details_dialog_class(self):
+        if self.model.app_mode == AppMode.Picture:
+            return DetailsDialogPicture
+        elif self.model.app_mode == AppMode.Music:
+            return DetailsDialogMusic
+        else:
+            return DetailsDialogStandard
+
+    def _get_preferences_dialog_class(self):
+        if self.model.app_mode == AppMode.Picture:
+            return PreferencesDialogPicture
+        elif self.model.app_mode == AppMode.Music:
+            return PreferencesDialogMusic
+        else:
+            return PreferencesDialogStandard
 
     #--- Public
     def add_selected_to_ignore_list(self):
@@ -151,7 +192,7 @@ class DupeGuru(QObject):
         desktop.open_path(debugLogPath)
 
     def preferencesTriggered(self):
-        preferences_dialog = self.PREFERENCES_DIALOG_CLASS(self.directories_dialog, self)
+        preferences_dialog = self._get_preferences_dialog_class()(self.directories_dialog, self)
         preferences_dialog.load()
         result = preferences_dialog.exec()
         if result == QDialog.Accepted:
@@ -195,7 +236,7 @@ class DupeGuru(QObject):
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         self.resultWindow = ResultWindow(self.directories_dialog, self)
-        self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
+        self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
 
     def show_results_window(self):
         self.showResultsWindow()

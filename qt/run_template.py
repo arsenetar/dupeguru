@@ -32,7 +32,7 @@ def main():
     install_gettext_trans_under_qt(locale_folder, lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
-    from qt.se.app import DupeGuru
+    from qt.base.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
     install_excepthook('https://github.com/hsoft/dupeguru/issues')
