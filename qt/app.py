@@ -28,13 +28,13 @@ from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .ignore_list_dialog import IgnoreListDialog
 from .deletion_options import DeletionOptions
-from ..se.details_dialog import DetailsDialog as DetailsDialogStandard
-from ..me.details_dialog import DetailsDialog as DetailsDialogMusic
-from ..pe.details_dialog import DetailsDialog as DetailsDialogPicture
-from ..se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
-from ..me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
-from ..pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
-from ..pe.photo import File as PlatSpecificPhoto
+from .se.details_dialog import DetailsDialog as DetailsDialogStandard
+from .me.details_dialog import DetailsDialog as DetailsDialogMusic
+from .pe.details_dialog import DetailsDialog as DetailsDialogPicture
+from .se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
+from .me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
+from .pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from .pe.photo import File as PlatSpecificPhoto
 
 tr = trget('ui')
 

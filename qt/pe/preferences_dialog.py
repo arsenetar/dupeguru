@@ -8,7 +8,7 @@ from hscommon.trans import trget
 from core.scanner import ScanType
 from core.app import AppMode
 
-from ..base.preferences_dialog import PreferencesDialogBase
+from ..preferences_dialog import PreferencesDialogBase
 
 tr = trget('ui')
 
