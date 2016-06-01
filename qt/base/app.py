@@ -19,8 +19,7 @@ from qtlib.recent import Recent
 from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow
 
-from core.app import AppMode
-from core_se.app import DupeGuru as DupeGuruModel
+from core.app import AppMode, DupeGuru as DupeGuruModel
 import core_pe.photo
 from . import platform
 from .preferences import Preferences

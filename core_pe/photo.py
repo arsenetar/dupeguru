@@ -7,7 +7,7 @@
 import logging
 from hscommon.util import get_file_ext, format_size
 
-from core.app import format_timestamp, format_perc, format_dupe_count
+from core.util import format_timestamp, format_perc, format_dupe_count
 from core import fs
 from . import exif
 
