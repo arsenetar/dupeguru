@@ -9,7 +9,6 @@ from hscommon.trans import tr
 from core.scanner import Scanner, ScanType, ScanOption
 
 from . import matchblock, matchexif
-from .cache import Cache
 
 class ScannerPE(Scanner):
     cache_path = None
@@ -30,9 +29,4 @@ class ScannerPE(Scanner):
             return matchexif.getmatches(files, self.match_scaled, j)
         else:
             raise Exception("Invalid scan type")
-
-    def clear_picture_cache(self):
-        cache = Cache(self.cache_path)
-        cache.clear()
-        cache.close()
 

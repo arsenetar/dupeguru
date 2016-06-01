@@ -36,7 +36,6 @@ class DupeGuru(QObject):
     NAME = '<replace this>'
 
     DETAILS_DIALOG_CLASS = None
-    RESULT_WINDOW_CLASS = ResultWindow
     RESULT_MODEL_CLASS = None
     PREFERENCES_CLASS = None
     PREFERENCES_DIALOG_CLASS = None
@@ -80,6 +79,7 @@ class DupeGuru(QObject):
             ('actionQuit', 'Ctrl+Q', '', tr("Quit"), self.quitTriggered),
             ('actionPreferences', 'Ctrl+P', '', tr("Options"), self.preferencesTriggered),
             ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
+            ('actionClearPictureCache', 'Ctrl+Shift+P', '', tr("Clear Picture Cache"), self.clearPictureCacheTriggered),
             ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
             ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
             ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
@@ -135,6 +135,14 @@ class DupeGuru(QObject):
         self.prefs.save()
         self.model.save()
 
+    def clearPictureCacheTriggered(self):
+        title = tr("Clear Picture Cache")
+        msg = tr("Do you really want to remove all your cached picture analysis?")
+        if self.confirm(title, msg, QMessageBox.No):
+            self.model.clear_picture_cache()
+            active = QApplication.activeWindow()
+            QMessageBox.information(active, title, tr("Picture cache cleared."))
+
     def ignoreListTriggered(self):
         self.model.ignore_list_dialog.show()
 
@@ -186,7 +194,7 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             self.resultWindow.close()
             self.resultWindow.setParent(None)
-        self.resultWindow = self.RESULT_WINDOW_CLASS(self.directories_dialog, self)
+        self.resultWindow = ResultWindow(self.directories_dialog, self)
         self.details_dialog = self.DETAILS_DIALOG_CLASS(self.resultWindow, self)
 
     def show_results_window(self):

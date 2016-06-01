@@ -405,6 +405,12 @@ class DupeGuru(Broadcaster):
             while delete_if_empty(path, ['.DS_Store']):
                 path = path.parent()
 
+    def clear_picture_cache(self):
+        from core_pe.cache import Cache
+        cache = Cache(self.options['cache_path'])
+        cache.clear()
+        cache.close()
+
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
         location_path = first(p for p in self.directories if dupe.path in p)

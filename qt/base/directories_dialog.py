@@ -83,6 +83,8 @@ class DirectoriesDialog(QMainWindow):
         self.menuFile.addAction(self.actionLoadResults)
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
         self.menuFile.addSeparator()
+        self.menuFile.addAction(self.app.actionClearPictureCache)
+        self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
         self.menuView.addAction(self.app.actionPreferences)
         self.menuView.addAction(self.actionShowResultsWindow)
