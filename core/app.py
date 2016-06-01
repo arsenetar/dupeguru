@@ -21,18 +21,8 @@ from hscommon.util import delete_if_empty, first, escape, nonone, allsame
 from hscommon.trans import tr
 from hscommon import desktop
 
-import core_se.fs
-import core_se.result_table
-import core_se.scanner
-import core_me.fs
-import core_me.prioritize
-import core_me.result_table
-import core_me.scanner
-import core_pe.photo
-import core_pe.prioritize
-import core_pe.result_table
-import core_pe.scanner
-from core_pe.photo import get_delta_dimensions
+from . import se, me, pe
+from .pe.photo import get_delta_dimensions
 from .util import cmp_value, fix_surrogate_encoding
 from . import directories, results, export, fs, prioritize
 from .ignore import IgnoreList
@@ -166,11 +156,11 @@ class DupeGuru(Broadcaster):
     #--- Private
     def _create_result_table(self):
         if self.app_mode == AppMode.Picture:
-            return core_pe.result_table.ResultTable(self)
+            return pe.result_table.ResultTable(self)
         elif self.app_mode == AppMode.Music:
-            return core_me.result_table.ResultTable(self)
+            return me.result_table.ResultTable(self)
         else:
-            return core_se.result_table.ResultTable(self)
+            return se.result_table.ResultTable(self)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if self.app_mode in (AppMode.Music, AppMode.Picture):
@@ -335,9 +325,9 @@ class DupeGuru(Broadcaster):
     #--- Protected
     def _prioritization_categories(self):
         if self.app_mode == AppMode.Picture:
-            return core_pe.prioritize.all_categories()
+            return pe.prioritize.all_categories()
         elif self.app_mode == AppMode.Music:
-            return core_me.prioritize.all_categories()
+            return me.prioritize.all_categories()
         else:
             return prioritize.all_categories()
 
@@ -393,8 +383,7 @@ class DupeGuru(Broadcaster):
                 path = path.parent()
 
     def clear_picture_cache(self):
-        from core_pe.cache import Cache
-        cache = Cache(self.options['cache_path'])
+        cache = pe.cache.Cache(self.options['cache_path'])
         cache.clear()
         cache.close()
 
@@ -754,7 +743,7 @@ class DupeGuru(Broadcaster):
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.Folders:
-                files = list(self.directories.get_folders(folderclass=core_se.fs.folder, j=j))
+                files = list(self.directories.get_folders(folderclass=se.fs.folder, j=j))
             else:
                 files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
             if self.options['ignore_hardlink_matches']:
@@ -806,20 +795,20 @@ class DupeGuru(Broadcaster):
     @property
     def fileclasses(self):
         if self.app_mode == AppMode.Picture:
-            return [core_pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
+            return [pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
         elif self.app_mode == AppMode.Music:
-            return [core_me.fs.MusicFile]
+            return [me.fs.MusicFile]
         else:
-            return [core_se.fs.File]
+            return [se.fs.File]
 
     @property
     def SCANNER_CLASS(self):
         if self.app_mode == AppMode.Picture:
-            return core_pe.scanner.ScannerPE
+            return pe.scanner.ScannerPE
         elif self.app_mode == AppMode.Music:
-            return core_me.scanner.ScannerME
+            return me.scanner.ScannerME
         else:
-            return core_se.scanner.ScannerSE
+            return se.scanner.ScannerSE
 
     @property
     def METADATA_TO_READ(self):

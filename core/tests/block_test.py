@@ -9,7 +9,7 @@ from pytest import raises, skip
 from hscommon.testutil import eq_
 
 try:
-    from ..block import avgdiff, getblocks2, NoBlocksError, DifferentBlockCountError
+    from ..pe.block import avgdiff, getblocks2, NoBlocksError, DifferentBlockCountError
 except ImportError:
     skip("Can't import the block module, probably hasn't been compiled.")
 

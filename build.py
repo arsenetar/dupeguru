@@ -113,7 +113,7 @@ def build_xibless(dest='cocoa/autogen'):
 def build_cocoa(dev):
     print("Creating OS X app structure")
     app = cocoa_app()
-    app_version = get_module_version('core_se')
+    app_version = get_module_version('core')
     cocoa_project_path = 'cocoa/se'
     filereplace(op.join(cocoa_project_path, 'InfoTemplate.plist'), op.join('build', 'Info.plist'), version=app_version)
     app.create(op.join('build', 'Info.plist'))
@@ -133,8 +133,7 @@ def build_cocoa(dev):
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
     appscript_pkgs = ['appscript', 'aem', 'mactypes', 'osax']
     tocopy = [
-        'core', 'core_se', 'core_me', 'core_pe', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa',
-        'objp', 'send2trash', 'hsaudiotag',
+        'core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'objp', 'send2trash', 'hsaudiotag',
     ] + appscript_pkgs
     copy_packages(tocopy, pydep_folder, create_links=dev)
     sys.path.insert(0, 'build')
@@ -217,10 +216,9 @@ def build_updatepot():
         loc.generate_cocoa_strings_from_code('cocoa', 'cocoa/base/en.lproj')
     print("Building .pot files from source files")
     print("Building core.pot")
-    all_cores = ['core', 'core_se', 'core_me', 'core_pe']
-    loc.generate_pot(all_cores, op.join('locale', 'core.pot'), ['tr'])
+    loc.generate_pot(['core'], op.join('locale', 'core.pot'), ['tr'])
     print("Building columns.pot")
-    loc.generate_pot(all_cores, op.join('locale', 'columns.pot'), ['coltr'])
+    loc.generate_pot(['core'], op.join('locale', 'columns.pot'), ['coltr'])
     print("Building ui.pot")
     # When we're not under OS X, we don't want to overwrite ui.pot because it contains Cocoa locs
     # We want to merge the generated pot with the old pot in the most preserving way possible.
@@ -307,14 +305,21 @@ def build_cocoa_bridging_interfaces():
 def build_pe_modules(ui):
     print("Building PE Modules")
     exts = [
-        Extension("_block", [op.join('core_pe', 'modules', 'block.c'), op.join('core_pe', 'modules', 'common.c')]),
-        Extension("_cache", [op.join('core_pe', 'modules', 'cache.c'), op.join('core_pe', 'modules', 'common.c')]),
+        Extension(
+            "_block",
+            [op.join('core', 'pe', 'modules', 'block.c'), op.join('core', 'pe', 'modules', 'common.c')]
+        ),
+        Extension(
+            "_cache",
+            [op.join('core', 'pe', 'modules', 'cache.c'), op.join('core', 'pe', 'modules', 'common.c')]
+        ),
     ]
     if ui == 'qt':
         exts.append(Extension("_block_qt", [op.join('qt', 'pe', 'modules', 'block.c')]))
     elif ui == 'cocoa':
         exts.append(Extension(
-            "_block_osx", [op.join('core_pe', 'modules', 'block_osx.m'), op.join('core_pe', 'modules', 'common.c')],
+            "_block_osx",
+            [op.join('core', 'pe', 'modules', 'block_osx.m'), op.join('core', 'pe', 'modules', 'common.c')],
             extra_link_args=[
                 "-framework", "CoreFoundation",
                 "-framework", "Foundation",
@@ -326,8 +331,8 @@ def build_pe_modules(ui):
         ext_modules=exts,
     )
     move_all('_block_qt*', op.join('qt', 'pe'))
-    move_all('_block*', 'core_pe')
-    move_all('_cache*', 'core_pe')
+    move_all('_block*', op.join('core', 'pe'))
+    move_all('_cache*', op.join('core', 'pe'))
 
 def build_normal(ui, dev):
     print("Building dupeGuru with UI {}".format(ui))

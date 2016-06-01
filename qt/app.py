@@ -20,7 +20,7 @@ from qtlib.util import createActions
 from qtlib.progress_window import ProgressWindow
 
 from core.app import AppMode, DupeGuru as DupeGuruModel
-import core_pe.photo
+import core.pe.photo
 from . import platform
 from .preferences import Preferences
 from .result_window import ResultWindow
@@ -51,7 +51,7 @@ class DupeGuru(QObject):
 
     #--- Private
     def _setup(self):
-        core_pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
+        core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
         self._update_options()
         self.recentResults = Recent(self, 'recentResults')

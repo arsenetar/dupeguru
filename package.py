@@ -44,17 +44,16 @@ def copy_files_to_package(destpath, packages, with_so):
     compileall.compile_dir(destpath)
 
 def package_debian_distribution(distribution):
-    app_version = get_module_version('core_se')
+    app_version = get_module_version('core')
     version = '{}~{}'.format(app_version, distribution)
     destpath = op.join('build', 'dupeguru-{}'.format(version))
     srcpath = op.join(destpath, 'src')
     packages = [
-        'hscommon', 'core', 'core_se', 'core_me', 'core_pe', 'qtlib', 'qt', 'send2trash',
-        'hsaudiotag'
+        'hscommon', 'core', 'qtlib', 'qt', 'send2trash', 'hsaudiotag'
     ]
     copy_files_to_package(srcpath, packages, with_so=False)
     os.mkdir(op.join(destpath, 'modules'))
-    copy_all(op.join('core_pe', 'modules', '*.*'), op.join(destpath, 'modules'))
+    copy_all(op.join('core', 'pe', 'modules', '*.*'), op.join(destpath, 'modules'))
     copy(op.join('qt', 'pe', 'modules', 'block.c'), op.join(destpath, 'modules', 'block_qt.c'))
     copy(op.join('pkg', 'debian', 'build_pe_modules.py'), op.join(destpath, 'build_pe_modules.py'))
     debdest = op.join(destpath, 'debian')
@@ -92,8 +91,7 @@ def package_arch():
     print("Packaging for Arch")
     srcpath = op.join('build', 'dupeguru-arch')
     packages = [
-        'hscommon', 'core', 'core_se', 'core_me', 'core_pe', 'qtlib', 'qt', 'send2trash',
-        'hsaudiotag',
+        'hscommon', 'core', 'qtlib', 'qt', 'send2trash', 'hsaudiotag',
     ]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join('images', 'dgse_logo_128.png'), srcpath)
@@ -105,7 +103,7 @@ def package_source_tgz():
         print("Downloading PyPI dependencies")
         print_and_do('./download_deps.sh')
     print("Creating git archive")
-    app_version = get_module_version('core_se')
+    app_version = get_module_version('core')
     name = 'dupeguru-src-{}.tar'.format(app_version)
     dest = op.join('build', name)
     print_and_do('git archive -o {} HEAD'.format(dest))

@@ -12,6 +12,7 @@ from .. import fs
 from ..engine import getwords, Match
 from ..ignore import IgnoreList
 from ..scanner import Scanner, ScanType
+from ..me.scanner import ScannerME
 
 class NamedObject:
     def __init__(self, name="foobar", size=1, path=None):
@@ -528,3 +529,13 @@ def test_dont_count_ref_files_as_discarded(fake_fileexists):
     o2.is_ref = True
     eq_(len(s.get_dupe_groups([o1, o2, o3])), 1)
     eq_(s.discarded_file_count, 0)
+
+def test_priorize_me(fake_fileexists):
+    # in ScannerME, bitrate goes first (right after is_ref) in priorization
+    s = ScannerME()
+    o1, o2 = no('foo', path='p1'), no('foo', path='p2')
+    o1.bitrate = 1
+    o2.bitrate = 2
+    [group] = s.get_dupe_groups([o1, o2])
+    assert group.ref is o2
+
