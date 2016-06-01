@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import sys
@@ -13,16 +13,12 @@ from PyQt5.QtCore import QCoreApplication, QSettings
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication
 
-from hscommon.plat import ISWINDOWS
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
 from qtlib.util import setupQtLogging
 from qt.base import dg_rc
 from qt.base.platform import BASE_PATH
-from core_{edition} import __version__, __appname__
-
-if ISWINDOWS:
-    import qt.base.cxfreeze_fix
+from core_se import __version__, __appname__
 
 def main():
     app = QApplication(sys.argv)
@@ -36,7 +32,7 @@ def main():
     install_gettext_trans_under_qt(locale_folder, lang)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
-    from qt.{edition}.app import DupeGuru
+    from qt.se.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     dgapp = DupeGuru()
     install_excepthook('https://github.com/hsoft/dupeguru/issues')
