@@ -129,11 +129,10 @@ def build_cocoa(edition, dev):
     if not op.exists(pydep_folder):
         os.mkdir(pydep_folder)
     shutil.copy(op.join(cocoa_project_path, 'dg_cocoa.py'), 'build')
-    appscript_pkgs = ['appscript', 'aem', 'mactypes', 'osax']
     specific_packages = {
         'se': ['core_se'],
-        'me': ['core_me'] + appscript_pkgs + ['hsaudiotag'],
-        'pe': ['core_pe'] + appscript_pkgs,
+        'me': ['core_me', 'hsaudiotag'],
+        'pe': ['core_pe'],
     }[edition]
     tocopy = [
         'core', 'hscommon', 'cocoa/inter', 'cocoalib/cocoa', 'objp', 'send2trash'

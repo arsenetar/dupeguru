@@ -12,7 +12,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "ValueTransformers.h"
 #import "Consts.h"
 #import "DetailsPanel.h"
-#import "DirectoryPanel.h"
 #import "ResultWindow.h"
 
 @implementation AppDelegate
@@ -36,17 +35,12 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (NSString *)homepageURL
 {
-    return @"http://www.hardcoded.net/dupeguru_pe/";
+    return @"https://www.hardcoded.net/dupeguru_pe/";
 }
 
 - (ResultWindowBase *)createResultWindow
 {
     return [[ResultWindow alloc] initWithParentApp:self];
-}
-
-- (DirectoryPanel *)createDirectoryPanel
-{
-    return [[DirectoryPanelPE alloc] initWithParentApp:self];
 }
 
 - (DetailsPanel *)createDetailsPanel
