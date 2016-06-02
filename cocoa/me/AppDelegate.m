@@ -1,5 +1,5 @@
 /* 
-Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
 
 This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
 which should be included with this package. The terms are also available at 
@@ -12,7 +12,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "ValueTransformers.h"
 #import "Dialogs.h"
 #import "DetailsPanel.h"
-#import "DirectoryPanel.h"
 #import "ResultWindow.h"
 #import "Consts.h"
 
@@ -48,21 +47,11 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (NSString *)homepageURL
 {
-    return @"http://www.hardcoded.net/dupeguru_me/";
+    return @"https://www.hardcoded.net/dupeguru_me/";
 }
 
 - (ResultWindowBase *)createResultWindow
 {
     return [[ResultWindow alloc] initWithParentApp:self];
-}
-
-- (DirectoryPanel *)createDirectoryPanel
-{
-    return [[DirectoryPanelME alloc] initWithParentApp:self];
-}
-
-- (void)removeDeadTracks
-{
-    [(ResultWindow *)[self resultWindow] removeDeadTracks];
 }
 @end

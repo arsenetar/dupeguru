@@ -68,10 +68,4 @@ http://www.gnu.org/licenses/gpl-3.0.html
     [[c dataCell] setAlignment:NSRightTextAlignment];
     [[table columns] restoreColumns];
 }
-
-/* Actions */
-- (void)removeDeadTracks
-{
-    [model scanDeadTracks];
-}
 @end

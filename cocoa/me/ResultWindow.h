@@ -10,5 +10,4 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "ResultWindowBase.h"
 
 @interface ResultWindow : ResultWindowBase {}
-- (void)removeDeadTracks;
 @end

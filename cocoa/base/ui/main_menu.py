@@ -32,8 +32,6 @@ fileMenu.addItem("Export Results to XHTML", Action(owner.model, 'exportToXHTML')
 fileMenu.addItem("Export Results to CSV", Action(owner.model, 'exportToCSV'))
 if edition == 'pe':
     fileMenu.addItem("Clear Picture Cache", Action(owner, 'clearPictureCache'), 'cmd+shift+p')
-elif edition == 'me':
-    fileMenu.addItem("Remove Dead Tracks in iTunes", Action(owner, 'removeDeadTracks'))
 
 editMenu.addItem("Mark All", Action(None, 'markAll'), 'cmd+a')
 editMenu.addItem("Mark None", Action(None, 'markNone'), 'cmd+shift+a')

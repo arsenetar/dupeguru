@@ -12,5 +12,4 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "PyDupeGuru.h"
 
 @interface AppDelegate : AppDelegateBase {}
-- (void)removeDeadTracks;
 @end
