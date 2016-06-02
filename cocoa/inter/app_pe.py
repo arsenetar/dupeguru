@@ -126,7 +126,7 @@ def get_aperture_database_path():
 
 class Directories(directories.Directories):
     def __init__(self):
-        directories.Directories.__init__(self, fileclasses=[Photo])
+        directories.Directories.__init__(self)
         try:
             self.iphoto_libpath = get_iphoto_database_path()
             self.set_state(self.iphoto_libpath.parent(), directories.DirectoryState.Excluded)
@@ -138,7 +138,7 @@ class Directories(directories.Directories):
         except directories.InvalidPathError:
             self.aperture_libpath = None
     
-    def _get_files(self, from_path, j):
+    def _get_files(self, from_path, fileclasses, j):
         if from_path == IPHOTO_PATH:
             if self.iphoto_libpath is None:
                 return []
@@ -156,7 +156,7 @@ class Directories(directories.Directories):
                 photo.is_ref = is_ref
             return photos
         else:
-            return directories.Directories._get_files(self, from_path, j)
+            return directories.Directories._get_files(self, from_path, fileclasses, j)
     
     @staticmethod
     def get_subfolders(path):
@@ -188,6 +188,7 @@ class Directories(directories.Directories):
 class DupeGuruPE(DupeGuruBase):
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
+        self.fileclasses = [Photo]
         self.directories = Directories()
     
     def _do_delete(self, j, *args):
@@ -316,7 +317,7 @@ class PyDupeGuru(PyDupeGuruBase):
         self._init(DupeGuruPE)
     
     def clearPictureCache(self):
-        self.model.scanner.clear_picture_cache()
+        self.model.clear_picture_cache()
     
     #---Information    
     def getSelectedDupePath(self) -> str:
@@ -328,7 +329,7 @@ class PyDupeGuru(PyDupeGuruBase):
     #---Properties
     def setScanType_(self, scan_type: int):
         try:
-            self.model.scanner.scan_type = [
+            self.model.options['scan_type'] = [
                 ScanType.FuzzyBlock,
                 ScanType.ExifTimestamp,
             ][scan_type]
@@ -336,7 +337,7 @@ class PyDupeGuru(PyDupeGuruBase):
             pass
     
     def setMatchScaled_(self, match_scaled: bool):
-        self.model.scanner.match_scaled = match_scaled
+        self.model.options['match_scaled'] = match_scaled
     
     def setMinMatchPercentage_(self, percentage: int):
-        self.model.scanner.threshold = percentage
+        self.model.options['threshold'] = percentage

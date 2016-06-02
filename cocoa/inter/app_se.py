@@ -35,7 +35,7 @@ class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = list(map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev']))
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
     def __init__(self):
-        DirectoriesBase.__init__(self, fileclasses=[Bundle, fs.File])
+        DirectoriesBase.__init__(self)
         self.folderclass = fs.Folder
     
     def _default_state_for_path(self, path):
@@ -72,6 +72,7 @@ class DupeGuru(DupeGuruBase):
         # appdata = op.join(appdata, 'dupeGuru')
         # print(repr(appdata))
         DupeGuruBase.__init__(self, view)
+        self.fileclasses = [Bundle, fs.File]
         self.directories = Directories()
     
 
@@ -81,11 +82,11 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Properties
     def setMinMatchPercentage_(self, percentage: int):
-        self.model.scanner.min_match_percentage = int(percentage)
+        self.model.options['min_match_percentage'] = int(percentage)
     
     def setScanType_(self, scan_type: int):
         try:
-            self.model.scanner.scan_type = [
+            self.model.options['scan_type'] = [
                 ScanType.Filename,
                 ScanType.Contents,
                 ScanType.Folders,
@@ -94,11 +95,11 @@ class PyDupeGuru(PyDupeGuruBase):
             pass
     
     def setWordWeighting_(self, words_are_weighted: bool):
-        self.model.scanner.word_weighting = words_are_weighted
+        self.model.options['word_weighting'] = words_are_weighted
     
     def setMatchSimilarWords_(self, match_similar_words: bool):
-        self.model.scanner.match_similar_words = match_similar_words
+        self.model.options['match_similar_words'] = match_similar_words
     
     def setSizeThreshold_(self, size_threshold: int):
-        self.model.scanner.size_threshold = size_threshold
+        self.model.options['size_threshold'] = size_threshold
     

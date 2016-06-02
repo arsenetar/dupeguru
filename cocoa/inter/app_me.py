@@ -96,14 +96,14 @@ def get_itunes_songs(plistpath):
     return result
 
 class Directories(directories.Directories):
-    def __init__(self, fileclasses):
-        directories.Directories.__init__(self, fileclasses)
+    def __init__(self):
+        directories.Directories.__init__(self)
         try:
             self.itunes_libpath = get_itunes_database_path()
         except directories.InvalidPathError:
             self.itunes_libpath = None
     
-    def _get_files(self, from_path, j):
+    def _get_files(self, from_path, fileclasses, j):
         if from_path == ITUNES_PATH:
             if self.itunes_libpath is None:
                 return []
@@ -113,7 +113,7 @@ class Directories(directories.Directories):
                 song.is_ref = is_ref
             return songs
         else:
-            return directories.Directories._get_files(self, from_path, j)
+            return directories.Directories._get_files(self, from_path, fileclasses, j)
     
     @staticmethod
     def get_subfolders(path):
@@ -145,8 +145,7 @@ class Directories(directories.Directories):
 class DupeGuruME(DupeGuruBase):
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
-        # Use fileclasses set in DupeGuruBase.__init__()
-        self.directories = Directories(fileclasses=self.directories.fileclasses)
+        self.directories = Directories()
         self.dead_tracks = []
     
     def _do_delete(self, j, *args):
@@ -259,11 +258,11 @@ class PyDupeGuru(PyDupeGuruBase):
     
     #---Properties
     def setMinMatchPercentage_(self, percentage: int):
-        self.model.scanner.min_match_percentage = percentage
+        self.model.options['min_match_percentage'] = percentage
     
     def setScanType_(self, scan_type: int):
         try:
-            self.model.scanner.scan_type = [
+            self.model.options['scan_type'] = [
                 ScanType.Filename,
                 ScanType.Fields,
                 ScanType.FieldsNoOrder,
@@ -275,13 +274,15 @@ class PyDupeGuru(PyDupeGuruBase):
             pass
     
     def setWordWeighting_(self, words_are_weighted: bool):
-        self.model.scanner.word_weighting = words_are_weighted
+        self.model.options['word_weighting'] = words_are_weighted
     
     def setMatchSimilarWords_(self, match_similar_words: bool):
-        self.model.scanner.match_similar_words = match_similar_words
+        self.model.options['match_similar_words'] = match_similar_words
     
     def enable_scanForTag_(self, enable: bool, scan_tag: str):
+        if 'scanned_tags' not in self.model.options:
+            self.model.options['scanned_tags'] = set()
         if enable:
-            self.model.scanner.scanned_tags.add(scan_tag)
+            self.model.options['scanned_tags'].add(scan_tag)
         else:
-            self.model.scanner.scanned_tags.discard(scan_tag)
+            self.model.options['scanned_tags'].discard(scan_tag)

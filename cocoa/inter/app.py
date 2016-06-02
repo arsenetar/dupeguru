@@ -128,7 +128,7 @@ class PyDupeGuruBase(PyBaseApp):
     
     #---Properties
     def setMixFileKind_(self, mix_file_kind: bool):
-        self.model.scanner.mix_file_kind = mix_file_kind
+        self.model.options['mix_file_kind'] = mix_file_kind
     
     def setEscapeFilterRegexp_(self, escape_filter_regexp: bool):
         self.model.options['escape_filter_regexp'] = escape_filter_regexp
