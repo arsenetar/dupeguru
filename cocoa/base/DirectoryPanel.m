@@ -14,6 +14,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 @implementation DirectoryPanel
 
+@synthesize scanTypePopup;
 @synthesize addButtonPopUp;
 @synthesize loadRecentButtonPopUp;
 @synthesize outlineView;
@@ -27,6 +28,8 @@ http://www.gnu.org/licenses/gpl-3.0.html
     _app = aParentApp;
     model = [_app model];
     [[self window] setTitle:[model appName]];
+    [[self scanTypePopup] addItemsWithTitles:[[aParentApp model] getScanOptions]];
+    [[self scanTypePopup] bind:@"selectedIndex" toObject:[NSUserDefaultsController sharedUserDefaultsController] withKeyPath:@"values.scanType" options:nil];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];

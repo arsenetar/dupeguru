@@ -123,6 +123,9 @@ class PyDupeGuruBase(PyBaseApp):
         self.model.ignore_list_dialog.show()
     
     #---Information
+    def getScanOptions(self) -> list:
+        return [o.label for o in self.model.SCANNER_CLASS.get_scan_options()]
+    
     def resultsAreModified(self) -> bool:
         return self.model.results.is_modified
     

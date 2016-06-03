@@ -5,22 +5,15 @@ dialogTitles = {
     'pe': "dupeGuru PE Preferences",
 }
 dialogHeights = {
-    'se': 345,
-    'me': 365,
-    'pe': 275,
-}
-scanTypeNames = {
-    'se': ["Filename", "Content", "Folders"],
-    'me': ["Filename", "Filename - Fields", "Filename - Fields (No Order)", "Tags", "Content", "Audio Content"],
-    'pe': ["Contents", "EXIF Timestamp"],
+    'se': 325,
+    'me': 345,
+    'pe': 255,
 }
 
 result = Window(410, dialogHeights[edition], dialogTitles[edition])
 tabView = TabView(result)
 basicTab = tabView.addTab("Basic")
 advancedTab = tabView.addTab("Advanced")
-scanTypePopup = Popup(basicTab.view, scanTypeNames[edition])
-scanTypeLabel = Label(basicTab.view, "Scan Type:")
 thresholdSlider = Slider(basicTab.view, 1, 100, 80)
 thresholdLabel = Label(basicTab.view, "Filter hardness:")
 moreResultsLabel = Label(basicTab.view, "More results")
@@ -59,8 +52,6 @@ copyMoveLabel = Label(advancedTab.view, "Copy and Move:")
 copyMovePopup = Popup(advancedTab.view, ["Right in destination", "Recreate relative path", "Recreate absolute path"])
 
 resetToDefaultsButton = Button(result, "Reset To Defaults")
-
-scanTypePopup.bind('selectedIndex', defaults, 'values.scanType')
 thresholdSlider.bind('value', defaults, 'values.minMatchPercentage')
 thresholdValueLabel.bind('value', defaults, 'values.minMatchPercentage')
 fontSizeCombo.bind('value', defaults, 'values.TableFontSize')
@@ -98,7 +89,7 @@ result.canResize = False
 result.canMinimize = False
 thresholdValueLabel.formatter = NumberFormatter(NumberStyle.Decimal)
 thresholdValueLabel.formatter.maximumFractionDigits = 0
-allLabels = [scanTypeLabel, thresholdValueLabel, moreResultsLabel, fewerResultsLabel,
+allLabels = [thresholdValueLabel, moreResultsLabel, fewerResultsLabel,
     thresholdLabel, fontSizeLabel, customCommandLabel, copyMoveLabel]
 allCheckboxes = [mixKindBox, removeEmptyFoldersBox, checkForUpdatesBox, regexpCheckbox,
     ignoreHardlinksBox, debugModeCheckbox]
@@ -114,10 +105,10 @@ for label in allLabels:
     label.controlSize = ControlSize.Small
 fewerResultsLabel.alignment = TextAlignment.Right
 for checkbox in allCheckboxes:
-    checkbox.font = scanTypeLabel.font
+    checkbox.font = thresholdValueLabel.font
 resetToDefaultsButton.action = Action(defaults, 'revertToInitialValues:')
 
-scanTypeLabel.width = thresholdLabel.width = fontSizeLabel.width = 94
+thresholdLabel.width = fontSizeLabel.width = 94
 fontSizeCombo.width = 66
 thresholdValueLabel.width = 25
 resetToDefaultsButton.width = 136
@@ -133,18 +124,14 @@ tabView.fill(Pack.Right)
 resetToDefaultsButton.packRelativeTo(tabView, Pack.Below, align=Pack.Right)
 tabView.fill(Pack.Below, margin=14)
 tabView.setAnchor(Pack.UpperLeft, growX=True, growY=True)
-scanTypePopup.packToCorner(Pack.UpperRight)
-scanTypeLabel.packRelativeTo(scanTypePopup, Pack.Left)
-scanTypePopup.fill(Pack.Left)
-thresholdSlider.packRelativeTo(scanTypePopup, Pack.Below)
-thresholdValueLabel.packRelativeTo(thresholdSlider, Pack.Right)
-thresholdSlider.fill(Pack.Right)
+thresholdLayout = HLayout([thresholdLabel, thresholdSlider, thresholdValueLabel], filler=thresholdSlider)
+thresholdLayout.packToCorner(Pack.UpperLeft)
+thresholdLayout.fill(Pack.Right)
 # We want to give the labels as much space as possible, and we only "know" how much is available
 # after the slider's fill operation.
 moreResultsLabel.width = fewerResultsLabel.width = thresholdSlider.width // 2
 moreResultsLabel.packRelativeTo(thresholdSlider, Pack.Below, align=Pack.Left, margin=6)
 fewerResultsLabel.packRelativeTo(thresholdSlider, Pack.Below, align=Pack.Right, margin=6)
-thresholdLabel.packRelativeTo(thresholdSlider, Pack.Left)
 fontSizeCombo.packRelativeTo(moreResultsLabel, Pack.Below)
 fontSizeLabel.packRelativeTo(fontSizeCombo, Pack.Left)
 

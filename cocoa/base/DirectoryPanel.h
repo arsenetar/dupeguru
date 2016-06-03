@@ -21,6 +21,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
     BOOL _alwaysShowPopUp;
+    NSPopUpButton *scanTypePopup;
     NSPopUpButton *addButtonPopUp;
     NSPopUpButton *loadRecentButtonPopUp;
     HSOutlineView *outlineView;
@@ -28,6 +29,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     NSButton *loadResultsButton;
 }
 
+@property (readwrite, retain) NSPopUpButton *scanTypePopup;
 @property (readwrite, retain) NSPopUpButton *addButtonPopUp;
 @property (readwrite, retain) NSPopUpButton *loadRecentButtonPopUp;
 @property (readwrite, retain) HSOutlineView *outlineView;
