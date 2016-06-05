@@ -69,12 +69,12 @@ http://www.gnu.org/licenses/gpl-3.0.html
     }
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
-    _resultWindow = [self createResultWindow];
-    _directoryPanel = [self createDirectoryPanel];
+    _resultWindow = [[ResultWindow alloc] initWithParentApp:self];
+    _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
     _detailsPanel = [self createDetailsPanel];
     _ignoreListDialog = [[IgnoreListDialog alloc] initWithPyRef:[model ignoreListDialog]];
     _progressWindow = [[HSProgressWindow alloc] initWithPyRef:[[self model] progressWindow] view:nil];
-    [_progressWindow setParentWindow:[_resultWindow window]];
+    [_progressWindow setParentWindow:[_directoryPanel window]];
     _aboutBox = nil; // Lazily loaded
     _preferencesPanel = nil; // Lazily loaded
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
@@ -87,16 +87,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     return model;
 }
 
-- (ResultWindowBase *)createResultWindow
-{
-    return nil; // must be overriden by all editions
-}
-
-- (DirectoryPanel *)createDirectoryPanel
-{
-    return [[DirectoryPanel alloc] initWithParentApp:self];
-}
-
 - (DetailsPanel *)createDetailsPanel
 {
     return [[DetailsPanel alloc] initWithPyRef:[model detailsPanel]];
@@ -107,8 +97,16 @@ http://www.gnu.org/licenses/gpl-3.0.html
     return @""; // must be overriden by all editions
 }
 
+- (void)setScanOptions
+{
+}
+
+- (void)initResultColumns:(ResultTable *)aTable
+{
+}
+
 /* Public */
-- (ResultWindowBase *)resultWindow
+- (ResultWindow *)resultWindow
 {
     return _resultWindow;
 }
@@ -191,7 +189,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (void)startScanning
 {
-    [[self resultWindow] startDuplicateScan];
+    [[self directoryPanel] startDuplicateScan];
 }
 
 
@@ -252,6 +250,11 @@ http://www.gnu.org/licenses/gpl-3.0.html
 - (BOOL)askYesNoWithPrompt:(NSString *)prompt
 {
     return [Dialogs askYesNo:prompt] == NSAlertFirstButtonReturn;
+}
+
+- (void)showResultsWindow
+{
+    [[[self resultWindow] window] makeKeyAndOrderFront:nil];
 }
 
 - (void)showProblemDialog

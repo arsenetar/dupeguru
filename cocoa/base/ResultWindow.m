@@ -6,7 +6,7 @@ which should be included with this package. The terms are also available at
 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-#import "ResultWindowBase.h"
+#import "ResultWindow.h"
 #import "ResultWindow_UI.h"
 #import "Dialogs.h"
 #import "ProgressController.h"
@@ -15,7 +15,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "Consts.h"
 #import "PrioritizeDialog.h"
 
-@implementation ResultWindowBase
+@implementation ResultWindow
 
 @synthesize optionsSwitch;
 @synthesize optionsToolbarItem;
@@ -36,7 +36,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     statsLabel = [[StatsLabel alloc] initWithPyRef:[model statsLabel] view:stats];
     problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
     deletionOptions = [[DeletionOptions alloc] initWithPyRef:[model deletionOptions]];
-    [self initResultColumns];
+    [aApp initResultColumns:table];
     [[table columns] setColumnsAsReadOnly];
     [self fillColumnsMenu];
     [matches setTarget:self];
@@ -51,15 +51,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     [statsLabel release];
     [problemDialog release];
     [super dealloc];
-}
-
-/* Virtual */
-- (void)initResultColumns
-{
-}
-
-- (void)setScanOptions
-{
 }
 
 /* Helpers */
@@ -261,16 +252,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
         [model saveResultsAs:[[sp URL] path]];
         [[app recentResults] addFile:[[sp URL] path]];
     }
-}
-
-- (void)startDuplicateScan
-{
-    if ([model resultsAreModified]) {
-        if ([Dialogs askYesNo:NSLocalizedString(@"You have unsaved results, do you really want to continue?", @"")] == NSAlertSecondButtonReturn) // NO
-            return;
-    }
-    [self setScanOptions];
-    [model doScan];
 }
 
 - (void)switchSelected

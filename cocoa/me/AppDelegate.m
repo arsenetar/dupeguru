@@ -50,8 +50,57 @@ http://www.gnu.org/licenses/gpl-3.0.html
     return @"https://www.hardcoded.net/dupeguru_me/";
 }
 
-- (ResultWindowBase *)createResultWindow
+- (void)setScanOptions
 {
-    return [[ResultWindow alloc] initWithParentApp:self];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [model setScanType:n2i([ud objectForKey:@"scanType"])];
+    [model enable:n2b([ud objectForKey:@"scanTagTrack"]) scanForTag:@"track"];
+    [model enable:n2b([ud objectForKey:@"scanTagArtist"]) scanForTag:@"artist"];
+    [model enable:n2b([ud objectForKey:@"scanTagAlbum"]) scanForTag:@"album"];
+    [model enable:n2b([ud objectForKey:@"scanTagTitle"]) scanForTag:@"title"];
+    [model enable:n2b([ud objectForKey:@"scanTagGenre"]) scanForTag:@"genre"];
+    [model enable:n2b([ud objectForKey:@"scanTagYear"]) scanForTag:@"year"];
+    [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
+    [model setWordWeighting:n2b([ud objectForKey:@"wordWeighting"])];
+    [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [model setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [model setMatchSimilarWords:n2b([ud objectForKey:@"matchSimilarWords"])];
+}
+
+- (void)initResultColumns:(ResultTable *)aTable
+{
+    HSColumnDef defs[] = {
+        {@"marked", 26, 26, 26, YES, [NSButtonCell class]},
+        {@"name", 235, 16, 0, YES, nil},
+        {@"folder_path", 120, 16, 0, YES, nil},
+        {@"size", 63, 16, 0, YES, nil},
+        {@"duration", 50, 16, 0, YES, nil},
+        {@"bitrate", 50, 16, 0, YES, nil},
+        {@"samplerate", 60, 16, 0, YES, nil},
+        {@"extension", 40, 16, 0, YES, nil},
+        {@"mtime", 120, 16, 0, YES, nil},
+        {@"title", 120, 16, 0, YES, nil},
+        {@"artist", 120, 16, 0, YES, nil},
+        {@"album", 120, 16, 0, YES, nil},
+        {@"genre", 80, 16, 0, YES, nil},
+        {@"year", 40, 16, 0, YES, nil},
+        {@"track", 40, 16, 0, YES, nil},
+        {@"comment", 120, 16, 0, YES, nil},
+        {@"percentage", 57, 16, 0, YES, nil},
+        {@"words", 120, 16, 0, YES, nil},
+        {@"dupe_count", 80, 16, 0, YES, nil},
+        nil
+    };
+    [[aTable columns] initializeColumns:defs];
+    NSTableColumn *c = [[aTable view] tableColumnWithIdentifier:@"marked"];
+    [[c dataCell] setButtonType:NSSwitchButton];
+    [[c dataCell] setControlSize:NSSmallControlSize];
+    c = [[aTable view] tableColumnWithIdentifier:@"size"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    c = [[aTable view] tableColumnWithIdentifier:@"duration"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    c = [[aTable view] tableColumnWithIdentifier:@"bitrate"];
+    [[c dataCell] setAlignment:NSRightTextAlignment];
+    [[aTable columns] restoreColumns];
 }
 @end

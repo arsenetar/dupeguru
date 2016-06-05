@@ -10,6 +10,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import <Sparkle/SUUpdater.h>
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
+#import "ResultTable.h"
 #import "DetailsPanel.h"
 #import "DirectoryPanel.h"
 #import "IgnoreListDialog.h"
@@ -24,7 +25,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     SUUpdater *updater;
     
     PyDupeGuru *model;
-    ResultWindowBase *_resultWindow;
+    ResultWindow *_resultWindow;
     DirectoryPanel *_directoryPanel;
     DetailsPanel *_detailsPanel;
     IgnoreListDialog *_ignoreListDialog;
@@ -41,14 +42,14 @@ http://www.gnu.org/licenses/gpl-3.0.html
 /* Virtual */
 + (NSDictionary *)defaultPreferences;
 - (PyDupeGuru *)model;
-- (ResultWindowBase *)createResultWindow;
-- (DirectoryPanel *)createDirectoryPanel;
 - (DetailsPanel *)createDetailsPanel;
 - (NSString *)homepageURL;
+- (void)setScanOptions;
+- (void)initResultColumns:(ResultTable *)aTable;
 
 /* Public */
 - (void)finalizeInit;
-- (ResultWindowBase *)resultWindow;
+- (ResultWindow *)resultWindow;
 - (DirectoryPanel *)directoryPanel;
 - (DetailsPanel *)detailsPanel;
 - (HSRecentFiles *)recentResults;

@@ -17,7 +17,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 @class AppDelegateBase;
 
-@interface ResultWindowBase : NSWindowController
+@interface ResultWindow : NSWindowController
 {
 @protected
     NSSegmentedControl *optionsSwitch;
@@ -42,10 +42,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 @property (readwrite, retain) NSSearchField *filterField;
 
 - (id)initWithParentApp:(AppDelegateBase *)app;
-
-/* Virtual */
-- (void)initResultColumns;
-- (void)setScanOptions;
 
 /* Helpers */
 - (void)fillColumnsMenu;
@@ -75,7 +71,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 - (void)resetColumnsToDefault;
 - (void)revealSelected;
 - (void)saveResults;
-- (void)startDuplicateScan;
 - (void)switchSelected;
 - (void)toggleColumn:(id)sender;
 - (void)toggleDelta;

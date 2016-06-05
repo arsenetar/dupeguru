@@ -137,6 +137,16 @@ http://www.gnu.org/licenses/gpl-3.0.html
     [self refreshRemoveButtonText];
 }
 
+- (void)startDuplicateScan
+{
+    if ([model resultsAreModified]) {
+        if ([Dialogs askYesNo:NSLocalizedString(@"You have unsaved results, do you really want to continue?", @"")] == NSAlertSecondButtonReturn) // NO
+            return;
+    }
+    [_app setScanOptions];
+    [model doScan];
+}
+
 /* Public */
 - (void)addDirectory:(NSString *)directory
 {

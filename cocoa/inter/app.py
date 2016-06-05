@@ -6,6 +6,7 @@ from cocoa.inter import PyBaseApp, BaseAppView
 
 class DupeGuruView(BaseAppView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
+    def showResultsWindow(self): pass
     def showProblemDialog(self): pass
     def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
     def selectDestFileWithPrompt_extension_(self, prompt: str, extension: str) -> str: pass
@@ -152,10 +153,7 @@ class PyDupeGuruBase(PyBaseApp):
     
     @dontwrap
     def show_results_window(self):
-        # Not needed yet because our progress dialog is shown as a sheet of the results window,
-        # which causes it to be already visible when the scan/load ends.
-        # XXX Make progress sheet be a child of the folder selection window.
-        pass
+        self.callback.showResultsWindow()
     
     @dontwrap
     def show_problem_dialog(self):

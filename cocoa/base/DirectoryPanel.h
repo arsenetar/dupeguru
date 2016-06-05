@@ -45,6 +45,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 - (void)popupAddDirectoryMenu:(id)sender;
 - (void)popupLoadRecentMenu:(id)sender;
 - (void)removeSelectedDirectory;
+- (void)startDuplicateScan;
 
 - (void)addDirectory:(NSString *)directory;
 - (void)refreshRemoveButtonText;
