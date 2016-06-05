@@ -1,15 +1,15 @@
 # Created By: Virgil Dupras
 # Created On: 2013-07-14
 # Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.util import format_size
 
 from core import fs
-from core.app import format_timestamp, format_perc, format_words, format_dupe_count
+from core.util import format_timestamp, format_perc, format_words, format_dupe_count
 
 def get_display_info(dupe, group, delta):
     size = dupe.size
@@ -39,9 +39,9 @@ def get_display_info(dupe, group, delta):
 class File(fs.File):
     def get_display_info(self, group, delta):
         return get_display_info(self, group, delta)
-    
+
 
 class Folder(fs.Folder):
     def get_display_info(self, group, delta):
         return get_display_info(self, group, delta)
-    
+

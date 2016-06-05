@@ -10,10 +10,11 @@ from PyQt5.QtWidgets import (
     QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox
 )
 
-from hscommon.plat import ISOSX, ISLINUX
 from hscommon.trans import trget
 from qtlib.util import horizontalWrap
 from qtlib.preferences import get_langnames
+
+from .preferences import Preferences
 
 tr = trget('ui')
 
@@ -123,9 +124,6 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
         self.mainVLayout.addWidget(self.buttonBox)
-        if (not ISOSX) and (not ISLINUX):
-            self.mainVLayout.removeWidget(self.ignoreHardlinkMatches)
-            self.ignoreHardlinkMatches.setHidden(True)
 
     def _load(self, prefs, setchecked):
         # Edition-specific
@@ -176,6 +174,9 @@ class PreferencesDialogBase(QDialog):
             QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
+
+    def resetToDefaults(self):
+        self.load(Preferences())
 
     #--- Events
     def buttonClicked(self, button):

@@ -16,9 +16,13 @@ from hscommon.trans import trget
 from qtlib.util import moveToScreenCenter, horizontalWrap, createActions
 from qtlib.search_edit import SearchEdit
 
+from core.app import AppMode
 from .results_model import ResultsView
 from .stats_label import StatsLabel
 from .prioritize_dialog import PrioritizeDialog
+from .se.results_model import ResultsModel as ResultsModelStandard
+from .me.results_model import ResultsModel as ResultsModelMusic
+from .pe.results_model import ResultsModel as ResultsModelPicture
 
 tr = trget('ui')
 
@@ -27,7 +31,13 @@ class ResultWindow(QMainWindow):
         super().__init__(parent, **kwargs)
         self.app = app
         self._setupUi()
-        self.resultsModel = app.RESULT_MODEL_CLASS(self.app, self.resultsView)
+        if app.model.app_mode == AppMode.Picture:
+            MODEL_CLASS = ResultsModelPicture
+        elif app.model.app_mode == AppMode.Music:
+            MODEL_CLASS = ResultsModelMusic
+        else:
+            MODEL_CLASS = ResultsModelStandard
+        self.resultsModel = MODEL_CLASS(self.app, self.resultsView)
         self.stats = StatsLabel(app.model.stats_label, self.statusLabel)
         self._update_column_actions_status()
 

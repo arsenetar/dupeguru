@@ -8,17 +8,9 @@ import logging
 
 from PyQt5.QtGui import QImage, QImageReader, QTransform
 
-from core_pe import __appname__
-from core_pe.photo import Photo as PhotoBase
-from core_pe.app import DupeGuru as DupeGuruModel
+from core.pe.photo import Photo as PhotoBase
 
-from ..base.app import DupeGuru as DupeGuruBase
 from .block import getblocks
-from .details_dialog import DetailsDialog
-from .result_window import ResultWindow
-from .results_model import ResultsModel
-from .preferences import Preferences
-from .preferences_dialog import PreferencesDialog
 
 class File(PhotoBase):
     def _plat_get_dimensions(self):
@@ -61,30 +53,4 @@ class File(PhotoBase):
                 t.rotate(270)
             image = image.transformed(t)
         return getblocks(image, block_count_per_side)
-
-
-class DupeGuru(DupeGuruBase):
-    MODELCLASS = DupeGuruModel
-    EDITION = 'pe'
-    LOGO_NAME = 'logo_pe'
-    NAME = __appname__
-
-    DETAILS_DIALOG_CLASS = DetailsDialog
-    RESULT_WINDOW_CLASS = ResultWindow
-    RESULT_MODEL_CLASS = ResultsModel
-    PREFERENCES_CLASS = Preferences
-    PREFERENCES_DIALOG_CLASS = PreferencesDialog
-
-    def _setup(self):
-        self.model.fileclasses = [File]
-        DupeGuruBase._setup(self)
-        self.directories_dialog.menuFile.insertAction(
-            self.directories_dialog.actionLoadResults, self.resultWindow.actionClearPictureCache
-        )
-
-    def _update_options(self):
-        DupeGuruBase._update_options(self)
-        self.model.options['scan_type'] = self.prefs.scan_type
-        self.model.options['match_scaled'] = self.prefs.match_scaled
-        self.model.options['threshold'] = self.prefs.filter_hardness
 

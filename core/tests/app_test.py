@@ -384,7 +384,7 @@ class TestCaseDupeGuruWithResults:
         app.JOB = Job(1, lambda *args, **kw: False) # Cancels the task
         add_fake_files_to_directories(app.directories, self.objects) # We want the scan to at least start
         app.start_scanning() # will be cancelled immediately
-        eq_(len(self.rtable), 0)
+        eq_(len(app.result_table), 0)
 
     def test_selected_dupes_after_removal(self, do_setup):
         # Purge the app's `selected_dupes` attribute when removing dupes, or else it might cause a

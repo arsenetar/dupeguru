@@ -5,9 +5,6 @@ a system. It's written mostly in Python 3 and has the peculiarity of using
 [multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
 is written in Objective-C and uses Cocoa. On Linux, it's written in Python and uses Qt5.
 
-dupeGuru comes in 3 editions (standard, music and picture) which are all buildable from this same
-source tree. You choose the edition you want to build in a `configure.py` flag.
-
 # Current status: People wanted
 
 dupeGuru has currently only one maintainer, me. This is a dangerous situation that needs to be
@@ -121,7 +118,6 @@ For OS X:
 
 With your virtualenv activated, you can build and run dupeGuru with these commands:
 
-    $ python configure.py
     $ python build.py
     $ python run.py
 

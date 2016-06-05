@@ -1,9 +1,7 @@
-# Created By: Virgil Dupras
-# Created On: 2009-04-27
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QSize
@@ -11,8 +9,8 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy
 
 from hscommon.trans import trget
-from ..base.details_dialog import DetailsDialog as DetailsDialogBase
-from ..base.details_table import DetailsTable
+from ..details_dialog import DetailsDialog as DetailsDialogBase
+from ..details_table import DetailsTable
 
 tr = trget('ui')
 
@@ -21,7 +19,7 @@ class DetailsDialog(DetailsDialogBase):
         DetailsDialogBase.__init__(self, parent, app)
         self.selectedPixmap = None
         self.referencePixmap = None
-    
+
     def _setupUi(self):
         self.setWindowTitle(tr("Details"))
         self.resize(502, 295)
@@ -61,21 +59,21 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
-    
+
     def _update(self):
         if not self.app.model.selected_dupes:
             return
         dupe = self.app.model.selected_dupes[0]
         group = self.app.model.results.get_group_of_duplicate(dupe)
         ref = group.ref
-        
+
         self.selectedPixmap = QPixmap(str(dupe.path))
         if ref is dupe:
             self.referencePixmap = None
         else:
             self.referencePixmap = QPixmap(str(ref.path))
         self._updateImages()
-    
+
     def _updateImages(self):
         if self.selectedPixmap is not None:
             target_size = self.selectedImage.size()
@@ -89,18 +87,18 @@ class DetailsDialog(DetailsDialogBase):
             self.referenceImage.setPixmap(scaledPixmap)
         else:
             self.referenceImage.setPixmap(QPixmap())
-    
+
     #--- Override
     def resizeEvent(self, event):
         self._updateImages()
-    
+
     def show(self):
         DetailsDialogBase.show(self)
         self._update()
-    
+
     # model --> view
     def refresh(self):
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
-    
+

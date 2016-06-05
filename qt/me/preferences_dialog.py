@@ -10,10 +10,10 @@ from PyQt5.QtWidgets import (
 )
 
 from hscommon.trans import trget
+from core.app import AppMode
 from core.scanner import ScanType
 
-from ..base.preferences_dialog import PreferencesDialogBase
-from . import preferences
+from ..preferences_dialog import PreferencesDialogBase
 
 tr = trget('ui')
 
@@ -74,7 +74,7 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.wordWeightingBox, prefs.word_weighting)
 
         # Update UI state based on selected scan type
-        scan_type = prefs.scan_type
+        scan_type = prefs.get_scan_type(AppMode.Music)
         word_based = scan_type in (
             ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder,
             ScanType.Tag
@@ -99,7 +99,4 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.scan_tag_year = ischecked(self.tagYearBox)
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
-
-    def resetToDefaults(self):
-        self.load(preferences.Preferences())
 

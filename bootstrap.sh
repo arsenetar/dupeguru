@@ -44,4 +44,4 @@ else
 fi
 
 echo "Bootstrapping complete! You can now configure, build and run dupeGuru with:"
-echo ". env/bin/activate && python configure.py && python build.py && python run.py"
+echo ". env/bin/activate && python build.py && python run.py"

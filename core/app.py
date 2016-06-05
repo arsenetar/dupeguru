@@ -9,7 +9,6 @@ import os.path as op
 import logging
 import subprocess
 import re
-import time
 import shutil
 
 from send2trash import send2trash
@@ -18,14 +17,16 @@ from hscommon.notify import Broadcaster
 from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.gui.progress_window import ProgressWindow
-from hscommon.util import delete_if_empty, first, escape, nonone, format_time_decimal, allsame
+from hscommon.util import delete_if_empty, first, escape, nonone, allsame
 from hscommon.trans import tr
-from hscommon.plat import ISWINDOWS
 from hscommon import desktop
 
-from . import directories, results, export, fs
+from . import se, me, pe
+from .pe.photo import get_delta_dimensions
+from .util import cmp_value, fix_surrogate_encoding
+from . import directories, results, export, fs, prioritize
 from .ignore import IgnoreList
-from .scanner import ScanType, Scanner
+from .scanner import ScanType
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
@@ -55,6 +56,11 @@ class JobType:
     Copy = 'job_copy'
     Delete = 'job_delete'
 
+class AppMode:
+    Standard = 0
+    Music = 1
+    Picture = 2
+
 JOBID2TITLE = {
     JobType.Scan: tr("Scanning for duplicates"),
     JobType.Load: tr("Loading"),
@@ -62,53 +68,6 @@ JOBID2TITLE = {
     JobType.Copy: tr("Copying"),
     JobType.Delete: tr("Sending to Trash"),
 }
-if ISWINDOWS:
-    JOBID2TITLE[JobType.Delete] = tr("Sending files to the recycle bin")
-
-def format_timestamp(t, delta):
-    if delta:
-        return format_time_decimal(t)
-    else:
-        if t > 0:
-            return time.strftime('%Y/%m/%d %H:%M:%S', time.localtime(t))
-        else:
-            return '---'
-
-def format_words(w):
-    def do_format(w):
-        if isinstance(w, list):
-            return '(%s)' % ', '.join(do_format(item) for item in w)
-        else:
-            return w.replace('\n', ' ')
-
-    return ', '.join(do_format(item) for item in w)
-
-def format_perc(p):
-    return "%0.0f" % p
-
-def format_dupe_count(c):
-    return str(c) if c else '---'
-
-def cmp_value(dupe, attrname):
-    value = getattr(dupe, attrname, '')
-    return value.lower() if isinstance(value, str) else value
-
-def fix_surrogate_encoding(s, encoding='utf-8'):
-    # ref #210. It's possible to end up with file paths that, while correct unicode strings, are
-    # decoded with the 'surrogateescape' option, which make the string unencodable to utf-8. We fix
-    # these strings here by trying to encode them and, if it fails, we do an encode/decode dance
-    # to remove the problematic characters. This dance is *lossy* but there's not much we can do
-    # because if we end up with this type of string, it means that we don't know the encoding of the
-    # underlying filesystem that brought them. Don't use this for strings you're going to re-use in
-    # fs-related functions because you're going to lose your path (it's going to change). Use this
-    # if you need to export the path somewhere else, outside of the unicode realm.
-    # See http://lucumr.pocoo.org/2013/7/2/the-updated-guide-to-unicode/
-    try:
-        s.encode(encoding)
-    except UnicodeEncodeError:
-        return s.encode(encoding, 'replace').decode(encoding)
-    else:
-        return s
 
 class DupeGuru(Broadcaster):
     """Holds everything together.
@@ -149,13 +108,13 @@ class DupeGuru(Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # ask_yes_no(prompt) --> bool
+    # create_results_window()
     # show_results_window()
     # show_problem_dialog()
     # select_dest_folder(prompt: str) --> str
     # select_dest_file(prompt: str, ext: str) --> str
 
-    PROMPT_NAME = "dupeGuru"
-    SCANNER_CLASS = Scanner
+    NAME = PROMPT_NAME = "dupeGuru"
 
     def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
@@ -166,9 +125,8 @@ class DupeGuru(Broadcaster):
         self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
+        self.app_mode = AppMode.Standard
         self.discarded_file_count = 0
-        self.fileclasses = [fs.File]
-        self.folderclass = fs.Folder
         self.directories = directories.Directories()
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
@@ -180,6 +138,7 @@ class DupeGuru(Broadcaster):
             'clean_empty_dirs': False,
             'ignore_hardlink_matches': False,
             'copymove_dest_type': DestType.Relative,
+            'cache_path': op.join(self.appdata, 'cached_pictures.db'),
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -187,22 +146,32 @@ class DupeGuru(Broadcaster):
         self.problem_dialog = ProblemDialog(self)
         self.ignore_list_dialog = IgnoreListDialog(self)
         self.stats_label = StatsLabel(self)
-        self.result_table = self._create_result_table()
+        self.result_table = None
         self.deletion_options = DeletionOptions()
         self.progress_window = ProgressWindow(self._job_completed)
-        children = [self.result_table, self.directory_tree, self.stats_label, self.details_panel]
+        children = [self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
 
-    #--- Virtual
-    def _prioritization_categories(self):
-        raise NotImplementedError()
-
-    def _create_result_table(self):
-        raise NotImplementedError()
-
     #--- Private
+    def _create_result_table(self):
+        if self.app_mode == AppMode.Picture:
+            return pe.result_table.ResultTable(self)
+        elif self.app_mode == AppMode.Music:
+            return me.result_table.ResultTable(self)
+        else:
+            return se.result_table.ResultTable(self)
+
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
+        if self.app_mode in (AppMode.Music, AppMode.Picture):
+            if key == 'folder_path':
+                dupe_folder_path = getattr(dupe, 'display_folder_path', dupe.folder_path)
+                return str(dupe_folder_path).lower()
+        if self.app_mode == AppMode.Picture:
+            if delta and key == 'dimensions':
+                r = cmp_value(dupe, key)
+                ref_value = cmp_value(get_group().ref, key)
+                return get_delta_dimensions(r, ref_value)
         if key == 'marked':
             return self.results.is_marked(dupe)
         if key == 'percentage':
@@ -222,6 +191,10 @@ class DupeGuru(Broadcaster):
         return result
 
     def _get_group_sort_key(self, group, key):
+        if self.app_mode in (AppMode.Music, AppMode.Picture):
+            if key == 'folder_path':
+                dupe_folder_path = getattr(group.ref, 'display_folder_path', group.ref.folder_path)
+                return str(dupe_folder_path).lower()
         if key == 'percentage':
             return group.percentage
         if key == 'dupe_count':
@@ -349,6 +322,15 @@ class DupeGuru(Broadcaster):
         self.selected_dupes = dupes
         self.notify('dupes_selected')
 
+    #--- Protected
+    def _prioritization_categories(self):
+        if self.app_mode == AppMode.Picture:
+            return pe.prioritize.all_categories()
+        elif self.app_mode == AppMode.Music:
+            return me.prioritize.all_categories()
+        else:
+            return prioritize.all_categories()
+
     #--- Public
     def add_directory(self, d):
         """Adds folder ``d`` to :attr:`directories`.
@@ -399,6 +381,11 @@ class DupeGuru(Broadcaster):
         if self.options['clean_empty_dirs']:
             while delete_if_empty(path, ['.DS_Store']):
                 path = path.parent()
+
+    def clear_picture_cache(self):
+        cache = pe.cache.Cache(self.options['cache_path'])
+        cache.clear()
+        cache.close()
 
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -746,12 +733,17 @@ class DupeGuru(Broadcaster):
             if hasattr(scanner, k):
                 setattr(scanner, k, v)
         self.results.groups = []
+        if self.result_table is not None:
+            self.result_table.disconnect()
+        self.result_table = self._create_result_table()
+        self.result_table.connect()
+        self.view.create_results_window()
         self._results_changed()
 
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.Folders:
-                files = list(self.directories.get_folders(folderclass=self.folderclass, j=j))
+                files = list(self.directories.get_folders(folderclass=se.fs.folder, j=j))
             else:
                 files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
             if self.options['ignore_hardlink_matches']:
@@ -799,4 +791,34 @@ class DupeGuru(Broadcaster):
         if self.discarded_file_count:
             result = tr("%s (%d discarded)") % (result, self.discarded_file_count)
         return result
+
+    @property
+    def fileclasses(self):
+        if self.app_mode == AppMode.Picture:
+            return [pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
+        elif self.app_mode == AppMode.Music:
+            return [me.fs.MusicFile]
+        else:
+            return [se.fs.File]
+
+    @property
+    def SCANNER_CLASS(self):
+        if self.app_mode == AppMode.Picture:
+            return pe.scanner.ScannerPE
+        elif self.app_mode == AppMode.Music:
+            return me.scanner.ScannerME
+        else:
+            return se.scanner.ScannerSE
+
+    @property
+    def METADATA_TO_READ(self):
+        if self.app_mode == AppMode.Picture:
+            return ['size', 'mtime', 'dimensions', 'exif_timestamp']
+        elif self.app_mode == AppMode.Music:
+            return [
+                'size', 'mtime', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
+                'album', 'genre', 'year', 'track', 'comment'
+            ]
+        else:
+            return ['size', 'mtime']
 

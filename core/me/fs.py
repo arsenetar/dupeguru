@@ -9,7 +9,7 @@
 from hsaudiotag import auto
 from hscommon.util import get_file_ext, format_size, format_time
 
-from core.app import format_timestamp, format_perc, format_words, format_dupe_count
+from core.util import format_timestamp, format_perc, format_words, format_dupe_count
 from core import fs
 
 TAG_FIELDS = {

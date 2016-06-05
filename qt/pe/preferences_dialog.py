@@ -6,9 +6,9 @@
 
 from hscommon.trans import trget
 from core.scanner import ScanType
+from core.app import AppMode
 
-from ..base.preferences_dialog import PreferencesDialogBase
-from . import preferences
+from ..preferences_dialog import PreferencesDialogBase
 
 tr = trget('ui')
 
@@ -34,13 +34,10 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.matchScaledBox, prefs.match_scaled)
 
         # Update UI state based on selected scan type
-        scan_type = prefs.scan_type
+        scan_type = prefs.get_scan_type(AppMode.Picture)
         fuzzy_scan = scan_type == ScanType.FuzzyBlock
         self.filterHardnessSlider.setEnabled(fuzzy_scan)
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
-
-    def resetToDefaults(self):
-        self.load(preferences.Preferences())
 

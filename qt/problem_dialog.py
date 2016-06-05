@@ -9,7 +9,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
-    QLabel, QTableView, QAbstractItemView, QApplication
+    QLabel, QTableView, QAbstractItemView
 )
 
 from hscommon.trans import trget
@@ -63,12 +63,3 @@ class ProblemDialog(QDialog):
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-
-if __name__ == '__main__':
-    import sys
-    from ..testapp import TestApp
-    app = QApplication([])
-    dgapp = TestApp()
-    dialog = ProblemDialog(None, dgapp)
-    dialog.show()
-    sys.exit(app.exec_())

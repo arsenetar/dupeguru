@@ -10,7 +10,7 @@ from pytest import raises, skip
 from hscommon.testutil import eq_
 
 try:
-    from ..cache import Cache, colors_to_string, string_to_colors
+    from ..pe.cache import Cache, colors_to_string, string_to_colors
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 
