@@ -126,7 +126,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 {
     NSInteger appMode = [self getAppMode];
     if (appMode == AppModePicture) {
-        return [[DetailsPanelPicture alloc] initWithPyRef:[model detailsPanel]];
+        return [[DetailsPanelPicture alloc] initWithApp:model];
     }
     else {
         return [[DetailsPanel alloc] initWithPyRef:[model detailsPanel]];
