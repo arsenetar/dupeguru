@@ -1,8 +1,38 @@
 import logging
 
 from objp.util import pyref, dontwrap
+from hscommon.path import Path, pathify
 from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer
 from cocoa.inter import PyBaseApp, BaseAppView
+
+import core.pe.photo
+from core.app import DupeGuru as DupeGuruBase, AppMode
+from .directories import Directories, Bundle
+from .photo import Photo
+
+class DupeGuru(DupeGuruBase):
+    def __init__(self, view):
+        DupeGuruBase.__init__(self, view)
+        self.directories = Directories()
+    
+    def selected_dupe_path(self):
+        if not self.selected_dupes:
+            return None
+        return self.selected_dupes[0].path
+    
+    def selected_dupe_ref_path(self):
+        if not self.selected_dupes:
+            return None
+        ref = self.results.get_group_of_duplicate(self.selected_dupes[0]).ref
+        if ref is self.selected_dupes[0]: # we don't want the same pic to be displayed on both sides
+            return None
+        return ref.path
+    
+    def _get_fileclasses(self):
+        result = DupeGuruBase._get_fileclasses(self)
+        if self.app_mode == AppMode.Standard:
+            result = [Bundle] + result
+        return result
 
 class DupeGuruView(BaseAppView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
@@ -12,14 +42,15 @@ class DupeGuruView(BaseAppView):
     def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
     def selectDestFileWithPrompt_extension_(self, prompt: str, extension: str) -> str: pass
 
-class PyDupeGuruBase(PyBaseApp):
+class PyDupeGuru(PyBaseApp):
     @dontwrap
-    def _init(self, modelclass):
+    def __init__(self):
+        core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = Photo
         logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(message)s')
         install_exception_hook('https://github.com/hsoft/dupeguru/issues')
         install_cocoa_logger()
         patch_threaded_job_performer()
-        self.model = modelclass(self)
+        self.model = DupeGuru(self)
     
     #---Sub-proxies
     def detailsPanel(self) -> pyref:

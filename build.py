@@ -277,13 +277,12 @@ def build_cocoa_bridging_interfaces():
     from inter.ignore_list_dialog import PyIgnoreListDialog, IgnoreListDialogView
     from inter.result_table import PyResultTable, ResultTableView
     from inter.stats_label import PyStatsLabel, StatsLabelView
-    from inter.app import PyDupeGuruBase, DupeGuruView
-    appmod = importlib.import_module('inter.app_se')
+    from inter.app import PyDupeGuru, DupeGuruView
     allclasses = [
         PyGUIObject, PyColumns, PyOutline, PySelectableList, PyTable, PyBaseApp,
         PyDetailsPanel, PyDirectoryOutline, PyPrioritizeDialog, PyPrioritizeList, PyProblemDialog,
-        PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuruBase,
-        PyTextField, PyProgressWindow, appmod.PyDupeGuru
+        PyIgnoreListDialog, PyDeletionOptions, PyResultTable, PyStatsLabel, PyDupeGuru,
+        PyTextField, PyProgressWindow
     ]
     for class_ in allclasses:
         objp.o2p.generate_objc_code(class_, 'cocoa/autogen', inherit=True)
