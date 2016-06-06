@@ -306,36 +306,6 @@ def test_tag_scan_non_ascii(fake_fileexists):
         raise AssertionError()
     eq_(len(r), 1)
 
-def test_audio_content_scan(fake_fileexists):
-    s = Scanner()
-    s.scan_type = ScanType.ContentsAudio
-    f = [no('foo'), no('bar'), no('bleh')]
-    f[0].md5 = 'foo'
-    f[1].md5 = 'bar'
-    f[2].md5 = 'bleh'
-    f[0].md5partial = 'foo'
-    f[1].md5partial = 'foo'
-    f[2].md5partial = 'bleh'
-    f[0].audiosize = 1
-    f[1].audiosize = 1
-    f[2].audiosize = 1
-    r = s.get_dupe_groups(f)
-    eq_(len(r), 1)
-    eq_(len(r[0]), 2)
-
-def test_audio_content_scan_compare_sizes_first(fake_fileexists):
-    class MyFile(no):
-        @property
-        def md5partial(file):
-            raise AssertionError()
-
-    s = Scanner()
-    s.scan_type = ScanType.ContentsAudio
-    f = [MyFile('foo'), MyFile('bar')]
-    f[0].audiosize = 1
-    f[1].audiosize = 2
-    eq_(len(s.get_dupe_groups(f)), 0)
-
 def test_ignore_list(fake_fileexists):
     s = Scanner()
     f1 = no('foobar')

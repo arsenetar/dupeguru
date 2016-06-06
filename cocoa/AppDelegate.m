@@ -80,7 +80,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     VTIsIntIn *vtScanTypeIsFuzzy = [[[VTIsIntIn alloc] initWithValues:i reverse:NO] autorelease];
     [NSValueTransformer setValueTransformer:vtScanTypeIsFuzzy forName:@"vtScanTypeIsFuzzy"];
     i = [NSMutableIndexSet indexSetWithIndex:4];
-    [i addIndex:5];
     VTIsIntIn *vtScanTypeIsNotContent = [[[VTIsIntIn alloc] initWithValues:i reverse:YES] autorelease];
     [NSValueTransformer setValueTransformer:vtScanTypeIsNotContent forName:@"vtScanTypeMusicIsNotContent"];
     VTIsIntIn *vtScanTypeIsTag = [[[VTIsIntIn alloc] initWithValues:[NSIndexSet indexSetWithIndex:3] reverse:NO] autorelease];

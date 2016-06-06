@@ -21,7 +21,6 @@ class ScannerME(ScannerBase):
             ScanOption(ScanType.FieldsNoOrder, tr("Filename - Fields (No Order)")),
             ScanOption(ScanType.Tag, tr("Tags")),
             ScanOption(ScanType.Contents, tr("Contents")),
-            ScanOption(ScanType.ContentsAudio, tr("Audio Contents")),
         ]
 
 

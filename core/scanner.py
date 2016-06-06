@@ -26,7 +26,6 @@ class ScanType:
     Tag = 3
     Folders = 4
     Contents = 5
-    ContentsAudio = 6
 
     #PE
     FuzzyBlock = 10
@@ -78,11 +77,8 @@ class Scanner:
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
             files = [f for f in files if f.size >= self.size_threshold]
-        if self.scan_type in {ScanType.Contents, ScanType.ContentsAudio, ScanType.Folders}:
-            sizeattr = 'audiosize' if self.scan_type == ScanType.ContentsAudio else 'size'
-            return engine.getmatches_by_contents(
-                files, sizeattr, partial=self.scan_type == ScanType.ContentsAudio, j=j
-            )
+        if self.scan_type in {ScanType.Contents, ScanType.Folders}:
+            return engine.getmatches_by_contents(files, sizeattr='size', partial=False, j=j)
         else:
             j = j.start_subjob([2, 8])
             kw = {}
