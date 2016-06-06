@@ -1,16 +1,11 @@
-edition = args.get('edition', 'se')
-dialogTitles = {
-    'se': "dupeGuru Preferences",
-    'me': "dupeGuru ME Preferences",
-    'pe': "dupeGuru PE Preferences",
-}
+appmode = args.get('appmode', 'standard')
 dialogHeights = {
-    'se': 325,
-    'me': 345,
-    'pe': 255,
+    'standard': 325,
+    'music': 345,
+    'picture': 255,
 }
 
-result = Window(410, dialogHeights[edition], dialogTitles[edition])
+result = Window(410, dialogHeights[appmode], "dupeGuru Preferences")
 tabView = TabView(result)
 basicTab = tabView.addTab("Basic")
 advancedTab = tabView.addTab("Advanced")
@@ -21,19 +16,19 @@ fewerResultsLabel = Label(basicTab.view, "Fewer results")
 thresholdValueLabel = Label(basicTab.view, "")
 fontSizeCombo = Combobox(basicTab.view, ["11", "12", "13", "14", "18", "24"])
 fontSizeLabel = Label(basicTab.view, "Font Size:")
-if edition in ('se', 'me'):
+if appmode in ('standard', 'music'):
     wordWeightingBox = Checkbox(basicTab.view, "Word weighting")
     matchSimilarWordsBox = Checkbox(basicTab.view, "Match similar words")
-elif edition == 'pe':
+elif appmode == 'picture':
     matchDifferentDimensionsBox = Checkbox(basicTab.view, "Match pictures of different dimensions")
 mixKindBox = Checkbox(basicTab.view, "Can mix file kind")
 removeEmptyFoldersBox = Checkbox(basicTab.view, "Remove empty folders on delete or move")
 checkForUpdatesBox = Checkbox(basicTab.view, "Automatically check for updates")
-if edition == 'se':
+if appmode == 'standard':
     ignoreSmallFilesBox = Checkbox(basicTab.view, "Ignore files smaller than:")
     smallFilesThresholdText = TextField(basicTab.view, "")
     smallFilesThresholdSuffixLabel = Label(basicTab.view, "KB")
-elif edition == 'me':
+elif appmode == 'music':
     tagsToScanLabel = Label(basicTab.view, "Tags to scan:")
     trackBox = Checkbox(basicTab.view, "Track")
     artistBox = Checkbox(basicTab.view, "Artist")
@@ -63,27 +58,29 @@ ignoreHardlinksBox.bind('value', defaults, 'values.ignoreHardlinkMatches')
 debugModeCheckbox.bind('value', defaults, 'values.DebugMode')
 customCommandText.bind('value', defaults, 'values.CustomCommand')
 copyMovePopup.bind('selectedIndex', defaults, 'values.recreatePathType')
-if edition in ('se', 'me'):
+if appmode in ('standard', 'music'):
     wordWeightingBox.bind('value', defaults, 'values.wordWeighting')
     matchSimilarWordsBox.bind('value', defaults, 'values.matchSimilarWords')
     disableWhenContentScan = [thresholdSlider, wordWeightingBox, matchSimilarWordsBox]
     for control in disableWhenContentScan:
-        control.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsNotContent')
-    if edition == 'se':
+        vtname = 'vtScanTypeMusicIsNotContent' if appmode == 'music' else 'vtScanTypeIsNotContent'
+        prefname = 'values.scanTypeMusic' if appmode == 'music' else 'values.scanTypeStandard'
+        control.bind('enabled', defaults, prefname, valueTransformer=vtname)
+    if appmode == 'standard':
         ignoreSmallFilesBox.bind('value', defaults, 'values.ignoreSmallFiles')
         smallFilesThresholdText.bind('value', defaults, 'values.smallFileThreshold')
-    elif edition == 'me':
+    elif appmode == 'music':
         for box in tagBoxes:
-            box.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsTag')
+            box.bind('enabled', defaults, 'values.scanTypeMusic', valueTransformer='vtScanTypeIsTag')
         trackBox.bind('value', defaults, 'values.scanTagTrack')
         artistBox.bind('value', defaults, 'values.scanTagArtist')
         albumBox.bind('value', defaults, 'values.scanTagAlbum')
         titleBox.bind('value', defaults, 'values.scanTagTitle')
         genreBox.bind('value', defaults, 'values.scanTagGenre')
         yearBox.bind('value', defaults, 'values.scanTagYear')
-elif edition == 'pe':
+elif appmode == 'picture':
     matchDifferentDimensionsBox.bind('value', defaults, 'values.matchScaled')
-    thresholdSlider.bind('enabled', defaults, 'values.scanType', valueTransformer='vtScanTypeIsFuzzy')
+    thresholdSlider.bind('enabled', defaults, 'values.scanTypePicture', valueTransformer='vtScanTypeIsFuzzy')
 
 result.canResize = False
 result.canMinimize = False
@@ -93,13 +90,13 @@ allLabels = [thresholdValueLabel, moreResultsLabel, fewerResultsLabel,
     thresholdLabel, fontSizeLabel, customCommandLabel, copyMoveLabel]
 allCheckboxes = [mixKindBox, removeEmptyFoldersBox, checkForUpdatesBox, regexpCheckbox,
     ignoreHardlinksBox, debugModeCheckbox]
-if edition == 'se':
+if appmode == 'standard':
     allLabels += [smallFilesThresholdSuffixLabel]
     allCheckboxes += [ignoreSmallFilesBox, wordWeightingBox, matchSimilarWordsBox]
-elif edition == 'me':
+elif appmode == 'music':
     allLabels += [tagsToScanLabel]
     allCheckboxes += tagBoxes + [wordWeightingBox, matchSimilarWordsBox]
-elif edition == 'pe':
+elif appmode == 'picture':
     allCheckboxes += [matchDifferentDimensionsBox]
 for label in allLabels:
     label.controlSize = ControlSize.Small
@@ -112,10 +109,10 @@ thresholdLabel.width = fontSizeLabel.width = 94
 fontSizeCombo.width = 66
 thresholdValueLabel.width = 25
 resetToDefaultsButton.width = 136
-if edition == 'se':
+if appmode == 'standard':
     smallFilesThresholdText.width = 60
     smallFilesThresholdSuffixLabel.width = 40
-elif edition == 'me':
+elif appmode == 'music':
     for box in tagBoxes:
         box.width = 70
 
@@ -135,7 +132,7 @@ fewerResultsLabel.packRelativeTo(thresholdSlider, Pack.Below, align=Pack.Right, 
 fontSizeCombo.packRelativeTo(moreResultsLabel, Pack.Below)
 fontSizeLabel.packRelativeTo(fontSizeCombo, Pack.Left)
 
-if edition == 'me':
+if appmode == 'music':
     tagsToScanLabel.packRelativeTo(fontSizeCombo, Pack.Below)
     tagsToScanLabel.fill(Pack.Left)
     tagsToScanLabel.fill(Pack.Right)
@@ -150,13 +147,13 @@ if edition == 'me':
 else:
     viewToPackCheckboxesUnder = fontSizeCombo
 
-if edition == 'se':
+if appmode == 'standard':
     checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
         ignoreSmallFilesBox]
-elif edition == 'me':
+elif appmode == 'music':
     checkboxesToLayout = [wordWeightingBox, matchSimilarWordsBox, mixKindBox, removeEmptyFoldersBox,
         checkForUpdatesBox]
-elif edition == 'pe':
+elif appmode == 'picture':
     checkboxesToLayout = [matchDifferentDimensionsBox, mixKindBox, removeEmptyFoldersBox,
         checkForUpdatesBox]
 checkboxLayout = VLayout(checkboxesToLayout)
@@ -164,7 +161,7 @@ checkboxLayout.packRelativeTo(viewToPackCheckboxesUnder, Pack.Below)
 checkboxLayout.fill(Pack.Left)
 checkboxLayout.fill(Pack.Right)
 
-if edition == 'se':
+if appmode == 'standard':
     smallFilesThresholdText.packRelativeTo(ignoreSmallFilesBox, Pack.Below, margin=4)
     checkForUpdatesBox.packRelativeTo(smallFilesThresholdText, Pack.Below, margin=4)
     checkForUpdatesBox.fill(Pack.Right)

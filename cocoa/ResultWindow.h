@@ -10,12 +10,10 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import <Quartz/Quartz.h>
 #import "StatsLabel.h"
 #import "ResultTable.h"
-#import "ProblemDialog.h"
-#import "DeletionOptions.h"
 #import "HSTableView.h"
 #import "PyDupeGuru.h"
 
-@class AppDelegateBase;
+@class AppDelegate;
 
 @interface ResultWindow : NSWindowController
 {
@@ -26,12 +24,10 @@ http://www.gnu.org/licenses/gpl-3.0.html
     NSTextField *stats;
     NSSearchField *filterField;
     
-    AppDelegateBase *app;
+    AppDelegate *app;
     PyDupeGuru *model;
     ResultTable *table;
     StatsLabel *statsLabel;
-    ProblemDialog *problemDialog;
-    DeletionOptions *deletionOptions;
     QLPreviewPanel* previewPanel;
 }
 
@@ -41,13 +37,13 @@ http://www.gnu.org/licenses/gpl-3.0.html
 @property (readwrite, retain) NSTextField *stats;
 @property (readwrite, retain) NSSearchField *filterField;
 
-- (id)initWithParentApp:(AppDelegateBase *)app;
+- (id)initWithParentApp:(AppDelegate *)app;
 
 /* Helpers */
 - (void)fillColumnsMenu;
 - (void)updateOptionSegments;
-- (void)showProblemDialog;
 - (void)adjustUIToLocalization;
+- (void)initResultColumns:(ResultTable *)aTable;
 
 /* Actions */
 - (void)changeOptions;

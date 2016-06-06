@@ -1,6 +1,5 @@
-ownerclass = 'AppDelegateBase'
-ownerimport = 'AppDelegateBase.h'
-edition = args.get('edition', 'se')
+ownerclass = 'AppDelegate'
+ownerimport = 'AppDelegate.h'
 
 result = Menu("")
 appMenu = result.addMenu("dupeGuru")
@@ -30,8 +29,7 @@ owner.recentResultsMenu = fileMenu.addMenu("Load Recent Results")
 fileMenu.addItem("Save Results...", Action(None, 'saveResults'), 'cmd+s')
 fileMenu.addItem("Export Results to XHTML", Action(owner.model, 'exportToXHTML'), 'cmd+shift+e')
 fileMenu.addItem("Export Results to CSV", Action(owner.model, 'exportToCSV'))
-if edition == 'pe':
-    fileMenu.addItem("Clear Picture Cache", Action(owner, 'clearPictureCache'), 'cmd+shift+p')
+fileMenu.addItem("Clear Picture Cache", Action(owner, 'clearPictureCache'), 'cmd+shift+p')
 
 editMenu.addItem("Mark All", Action(None, 'markAll'), 'cmd+a')
 editMenu.addItem("Mark None", Action(None, 'markNone'), 'cmd+shift+a')

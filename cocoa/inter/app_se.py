@@ -12,10 +12,12 @@ import os.path as op
 from hscommon.path import Path, pathify
 from cocoa import proxy
 
-from core.scanner import ScanType
 from core.directories import Directories as DirectoriesBase, DirectoryState
-from core_se.app import DupeGuru as DupeGuruBase
-from core_se import fs
+import core.pe.photo
+from core.pe import _block_osx
+from core.pe.photo import Photo as PhotoBase
+from core.app import DupeGuru as DupeGuruBase, AppMode
+from core.se import fs
 from .app import PyDupeGuruBase
 
 def is_bundle(str_path):
@@ -31,13 +33,37 @@ class Bundle(fs.Folder):
         return not path.islink() and path.isdir() and is_bundle(str(path))
     
 
+class Photo(PhotoBase):
+    HANDLED_EXTS = PhotoBase.HANDLED_EXTS.copy()
+    HANDLED_EXTS.update({'psd', 'nef', 'cr2', 'orf'})
+    
+    def _plat_get_dimensions(self):
+        return _block_osx.get_image_size(str(self.path))
+    
+    def _plat_get_blocks(self, block_count_per_side, orientation):
+        try:
+            blocks = _block_osx.getblocks(str(self.path), block_count_per_side, orientation)
+        except Exception as e:
+            raise IOError('The reading of "%s" failed with "%s"' % (str(self.path), str(e)))
+        if not blocks:
+            raise IOError('The picture %s could not be read' % str(self.path))
+        return blocks
+    
+    def _get_exif_timestamp(self):
+        exifdata = proxy.readExifData_(str(self.path))
+        if exifdata:
+            try:
+                return exifdata['{Exif}']['DateTimeOriginal']
+            except KeyError:
+                return ''
+        else:
+            return ''
+
+
 class Directories(DirectoriesBase):
     ROOT_PATH_TO_EXCLUDE = list(map(Path, ['/Library', '/Volumes', '/System', '/bin', '/sbin', '/opt', '/private', '/dev']))
     HOME_PATH_TO_EXCLUDE = [Path('Library')]
-    def __init__(self):
-        DirectoriesBase.__init__(self)
-        self.folderclass = fs.Folder
-    
+
     def _default_state_for_path(self, path):
         result = DirectoriesBase._default_state_for_path(self, path)
         if result is not None:
@@ -58,8 +84,7 @@ class Directories(DirectoriesBase):
                 yield from_folder
             return
         else:
-            for folder in DirectoriesBase._get_folders(self, from_folder, j):
-                yield folder
+            yield from DirectoriesBase._get_folders(self, from_folder, j)
     
     @staticmethod
     def get_subfolders(path):
@@ -69,37 +94,31 @@ class Directories(DirectoriesBase):
 
 class DupeGuru(DupeGuruBase):
     def __init__(self, view):
-        # appdata = op.join(appdata, 'dupeGuru')
-        # print(repr(appdata))
         DupeGuruBase.__init__(self, view)
-        self.fileclasses = [Bundle, fs.File]
         self.directories = Directories()
     
+    def selected_dupe_path(self):
+        if not self.selected_dupes:
+            return None
+        return self.selected_dupes[0].path
+    
+    def selected_dupe_ref_path(self):
+        if not self.selected_dupes:
+            return None
+        ref = self.results.get_group_of_duplicate(self.selected_dupes[0]).ref
+        if ref is self.selected_dupes[0]: # we don't want the same pic to be displayed on both sides
+            return None
+        return ref.path
+    
+    def _get_fileclasses(self):
+        result = DupeGuruBase._get_fileclasses(self)
+        if self.app_mode == AppMode.Standard:
+            result = [Bundle] + result
+        return result
 
 class PyDupeGuru(PyDupeGuruBase):
     def __init__(self):
+        core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = Photo
         self._init(DupeGuru)
-    
-    #---Properties
-    def setMinMatchPercentage_(self, percentage: int):
-        self.model.options['min_match_percentage'] = int(percentage)
-    
-    def setScanType_(self, scan_type: int):
-        try:
-            self.model.options['scan_type'] = [
-                ScanType.Filename,
-                ScanType.Contents,
-                ScanType.Folders,
-            ][scan_type]
-        except IndexError:
-            pass
-    
-    def setWordWeighting_(self, words_are_weighted: bool):
-        self.model.options['word_weighting'] = words_are_weighted
-    
-    def setMatchSimilarWords_(self, match_similar_words: bool):
-        self.model.options['match_similar_words'] = match_similar_words
-    
-    def setSizeThreshold_(self, size_threshold: int):
-        self.model.options['size_threshold'] = size_threshold
+
     

@@ -6,6 +6,7 @@ from cocoa.inter import PyBaseApp, BaseAppView
 
 class DupeGuruView(BaseAppView):
     def askYesNoWithPrompt_(self, prompt: str) -> bool: pass
+    def createResultsWindow(self): pass
     def showResultsWindow(self): pass
     def showProblemDialog(self): pass
     def selectDestFolderWithPrompt_(self, prompt: str) -> str: pass
@@ -123,6 +124,9 @@ class PyDupeGuruBase(PyBaseApp):
     def showIgnoreList(self):
         self.model.ignore_list_dialog.show()
     
+    def clearPictureCache(self):
+        self.model.clear_picture_cache()
+    
     #---Information
     def getScanOptions(self) -> list:
         return [o.label for o in self.model.SCANNER_CLASS.get_scan_options()]
@@ -130,7 +134,50 @@ class PyDupeGuruBase(PyBaseApp):
     def resultsAreModified(self) -> bool:
         return self.model.results.is_modified
     
+    def getSelectedDupePath(self) -> str:
+        return str(self.model.selected_dupe_path())
+    
+    def getSelectedDupeRefPath(self) -> str:
+        return str(self.model.selected_dupe_ref_path())
+    
     #---Properties
+    def getAppMode(self) -> int:
+        return self.model.app_mode
+
+    def setAppMode_(self, app_mode: int):
+        self.model.app_mode = app_mode
+    
+    def setScanType_(self, scan_type_index: int):
+        scan_options = self.model.SCANNER_CLASS.get_scan_options()
+        try:
+            so = scan_options[scan_type_index]
+            self.model.options['scan_type'] = so.scan_type
+        except IndexError:
+            pass
+
+    def setMinMatchPercentage_(self, percentage: int):
+        self.model.options['min_match_percentage'] = int(percentage)
+    
+    def setWordWeighting_(self, words_are_weighted: bool):
+        self.model.options['word_weighting'] = words_are_weighted
+    
+    def setMatchSimilarWords_(self, match_similar_words: bool):
+        self.model.options['match_similar_words'] = match_similar_words
+    
+    def setSizeThreshold_(self, size_threshold: int):
+        self.model.options['size_threshold'] = size_threshold
+
+    def enable_scanForTag_(self, enable: bool, scan_tag: str):
+        if 'scanned_tags' not in self.model.options:
+            self.model.options['scanned_tags'] = set()
+        if enable:
+            self.model.options['scanned_tags'].add(scan_tag)
+        else:
+            self.model.options['scanned_tags'].discard(scan_tag)
+
+    def setMatchScaled_(self, match_scaled: bool):
+        self.model.options['match_scaled'] = match_scaled
+    
     def setMixFileKind_(self, mix_file_kind: bool):
         self.model.options['mix_file_kind'] = mix_file_kind
     
@@ -150,6 +197,10 @@ class PyDupeGuruBase(PyBaseApp):
     @dontwrap
     def ask_yes_no(self, prompt):
         return self.callback.askYesNoWithPrompt_(prompt)
+    
+    @dontwrap
+    def create_results_window(self):
+        self.callback.createResultsWindow()
     
     @dontwrap
     def show_results_window(self):

@@ -90,31 +90,27 @@ def build_xibless(dest='cocoa/autogen'):
         ('prioritize_dialog.py', 'PrioritizeDialog_UI'),
         ('result_window.py', 'ResultWindow_UI'),
         ('main_menu.py', 'MainMenu_UI'),
-        ('preferences_panel.py', 'PreferencesPanel_UI'),
+        ('details_panel.py', 'DetailsPanel_UI'),
+        ('details_panel_picture.py', 'DetailsPanelPicture_UI'),
     ]
     for srcname, dstname in FNPAIRS:
         xibless.generate(
-            op.join('cocoa', 'base', 'ui', srcname), op.join(dest, dstname),
+            op.join('cocoa', 'ui', srcname), op.join(dest, dstname),
             localizationTable='Localizable'
         )
-    # XXX This is broken
-    assert False
-    #  if edition == 'pe':
-    #      xibless.generate(
-    #          'cocoa/pe/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'),
-    #          localizationTable='Localizable'
-    #      )
-    #  else:
-    #      xibless.generate(
-    #          'cocoa/base/ui/details_panel.py', op.join(dest, 'DetailsPanel_UI'),
-    #          localizationTable='Localizable'
-    #      )
+    for appmode in ('standard', 'music', 'picture'):
+        xibless.generate(
+            op.join('cocoa', 'ui', 'preferences_panel.py'),
+            op.join(dest, 'PreferencesPanel%s_UI' % appmode.capitalize()),
+            localizationTable='Localizable',
+            args={'appmode': appmode},
+        )
 
 def build_cocoa(dev):
     print("Creating OS X app structure")
     app = cocoa_app()
     app_version = get_module_version('core')
-    cocoa_project_path = 'cocoa/se'
+    cocoa_project_path = 'cocoa'
     filereplace(op.join(cocoa_project_path, 'InfoTemplate.plist'), op.join('build', 'Info.plist'), version=app_version)
     app.create(op.join('build', 'Info.plist'))
     print("Building localizations")
@@ -156,8 +152,8 @@ def build_cocoa(dev):
     app.copy_executable('cocoa/build/dupeGuru')
     build_help()
     print("Copying resources and frameworks")
-    image_path = 'cocoa/se/dupeguru.icns'
-    resources = [image_path, 'cocoa/base/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
+    image_path = 'cocoa/dupeguru.icns'
+    resources = [image_path, 'cocoa/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
     app.copy_resources(*resources, use_symlinks=dev)
     app.copy_frameworks('build/Python', 'cocoalib/Sparkle.framework')
     print("Creating the run.py file")
@@ -197,7 +193,7 @@ def build_localizations(ui):
     loc.compile_all_po('locale')
     if ui == 'cocoa':
         app = cocoa_app()
-        loc.build_cocoa_localizations(app, en_stringsfile=op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'))
+        loc.build_cocoa_localizations(app, en_stringsfile=op.join('cocoa', 'en.lproj', 'Localizable.strings'))
         locale_dest = op.join(app.resources, 'locale')
     elif ui == 'qt':
         build_qt_localizations()
@@ -212,7 +208,7 @@ def build_updatepot():
         build_cocoalib_xibless('cocoalib/autogen')
         loc.generate_cocoa_strings_from_code('cocoalib', 'cocoalib/en.lproj')
         build_xibless('se', op.join('cocoa', 'autogen', 'se'))
-        loc.generate_cocoa_strings_from_code('cocoa', 'cocoa/base/en.lproj')
+        loc.generate_cocoa_strings_from_code('cocoa', 'cocoa/en.lproj')
     print("Building .pot files from source files")
     print("Building core.pot")
     loc.generate_pot(['core'], op.join('locale', 'core.pot'), ['tr'])
@@ -232,7 +228,7 @@ def build_updatepot():
         loc.strings2pot(op.join('cocoalib', 'en.lproj', 'cocoalib.strings'), cocoalib_pot)
         print("Enhancing ui.pot with Cocoa's strings files")
         loc.strings2pot(
-            op.join('cocoa', 'base', 'en.lproj', 'Localizable.strings'),
+            op.join('cocoa', 'en.lproj', 'Localizable.strings'),
             op.join('locale', 'ui.pot')
         )
 

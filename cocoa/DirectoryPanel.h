@@ -12,15 +12,16 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "DirectoryOutline.h"
 #import "PyDupeGuru.h"
 
-@class AppDelegateBase;
+@class AppDelegate;
 
 @interface DirectoryPanel : NSWindowController <NSOpenSavePanelDelegate>
 {
-    AppDelegateBase *_app;
+    AppDelegate *_app;
     PyDupeGuru *model;
     HSRecentFiles *_recentDirectories;
     DirectoryOutline *outline;
     BOOL _alwaysShowPopUp;
+    NSSegmentedControl *appModeSelector;
     NSPopUpButton *scanTypePopup;
     NSPopUpButton *addButtonPopUp;
     NSPopUpButton *loadRecentButtonPopUp;
@@ -29,6 +30,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     NSButton *loadResultsButton;
 }
 
+@property (readwrite, retain) NSSegmentedControl *appModeSelector;
 @property (readwrite, retain) NSPopUpButton *scanTypePopup;
 @property (readwrite, retain) NSPopUpButton *addButtonPopUp;
 @property (readwrite, retain) NSPopUpButton *loadRecentButtonPopUp;
@@ -36,9 +38,10 @@ http://www.gnu.org/licenses/gpl-3.0.html
 @property (readwrite, retain) NSButton *removeButton;
 @property (readwrite, retain) NSButton *loadResultsButton;
 
-- (id)initWithParentApp:(AppDelegateBase *)aParentApp;
+- (id)initWithParentApp:(AppDelegate *)aParentApp;
 
-- (void)fillPopUpMenu; // Virtual
+- (void)fillPopUpMenu;
+- (void)fillScanTypeMenu;
 - (void)adjustUIToLocalization;
 
 - (void)askForDirectory;

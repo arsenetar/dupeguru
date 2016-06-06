@@ -6,16 +6,19 @@ which should be included with this package. The terms are also available at
 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-#import "AppDelegateBase.h"
+#import "AppDelegate.h"
 #import "ProgressController.h"
 #import "HSPyUtil.h"
 #import "Consts.h"
 #import "Dialogs.h"
 #import "Utils.h"
 #import "ValueTransformers.h"
-#import "PreferencesPanel_UI.h"
+#import "DetailsPanelPicture.h"
+#import "PreferencesPanelStandard_UI.h"
+#import "PreferencesPanelMusic_UI.h"
+#import "PreferencesPanelPicture_UI.h"
 
-@implementation AppDelegateBase
+@implementation AppDelegate
 
 @synthesize recentResultsMenu;
 @synthesize columnsMenu;
@@ -24,6 +27,21 @@ http://www.gnu.org/licenses/gpl-3.0.html
 + (NSDictionary *)defaultPreferences
 {
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    [d setObject:i2n(1) forKey:@"scanTypeStandard"];
+    [d setObject:i2n(3) forKey:@"scanTypeMusic"];
+    [d setObject:i2n(0) forKey:@"scanTypePicture"];
+    [d setObject:i2n(95) forKey:@"minMatchPercentage"];
+    [d setObject:i2n(30) forKey:@"smallFileThreshold"];
+    [d setObject:b2n(YES) forKey:@"wordWeighting"];
+    [d setObject:b2n(NO) forKey:@"matchSimilarWords"];
+    [d setObject:b2n(YES) forKey:@"ignoreSmallFiles"];
+    [d setObject:b2n(NO) forKey:@"scanTagTrack"];
+    [d setObject:b2n(YES) forKey:@"scanTagArtist"];
+    [d setObject:b2n(YES) forKey:@"scanTagAlbum"];
+    [d setObject:b2n(YES) forKey:@"scanTagTitle"];
+    [d setObject:b2n(NO) forKey:@"scanTagGenre"];
+    [d setObject:b2n(NO) forKey:@"scanTagYear"];
+    [d setObject:b2n(NO) forKey:@"matchScaled"];
     [d setObject:i2n(1) forKey:@"recreatePathType"];
     [d setObject:i2n(11) forKey:TableFontSize];
     [d setObject:b2n(YES) forKey:@"mixFileKind"];
@@ -53,6 +71,20 @@ http://www.gnu.org/licenses/gpl-3.0.html
     model = [[PyDupeGuru alloc] init];
     [model bindCallback:createCallback(@"DupeGuruView", self)];
     [self setUpdater:[SUUpdater sharedUpdater]];
+    NSMutableIndexSet *contentsIndexes = [NSMutableIndexSet indexSet];
+    [contentsIndexes addIndex:1];
+    [contentsIndexes addIndex:2];
+    VTIsIntIn *vt = [[[VTIsIntIn alloc] initWithValues:contentsIndexes reverse:YES] autorelease];
+    [NSValueTransformer setValueTransformer:vt forName:@"vtScanTypeIsNotContent"];
+    NSMutableIndexSet *i = [NSMutableIndexSet indexSetWithIndex:0];
+    VTIsIntIn *vtScanTypeIsFuzzy = [[[VTIsIntIn alloc] initWithValues:i reverse:NO] autorelease];
+    [NSValueTransformer setValueTransformer:vtScanTypeIsFuzzy forName:@"vtScanTypeIsFuzzy"];
+    i = [NSMutableIndexSet indexSetWithIndex:4];
+    [i addIndex:5];
+    VTIsIntIn *vtScanTypeIsNotContent = [[[VTIsIntIn alloc] initWithValues:i reverse:YES] autorelease];
+    [NSValueTransformer setValueTransformer:vtScanTypeIsNotContent forName:@"vtScanTypeMusicIsNotContent"];
+    VTIsIntIn *vtScanTypeIsTag = [[[VTIsIntIn alloc] initWithValues:[NSIndexSet indexSetWithIndex:3] reverse:NO] autorelease];
+    [NSValueTransformer setValueTransformer:vtScanTypeIsTag forName:@"vtScanTypeIsTag"];
     return self;
 }
 
@@ -69,14 +101,17 @@ http://www.gnu.org/licenses/gpl-3.0.html
     }
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
-    _resultWindow = [[ResultWindow alloc] initWithParentApp:self];
     _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];
-    _detailsPanel = [self createDetailsPanel];
     _ignoreListDialog = [[IgnoreListDialog alloc] initWithPyRef:[model ignoreListDialog]];
+    _problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
+    _deletionOptions = [[DeletionOptions alloc] initWithPyRef:[model deletionOptions]];
     _progressWindow = [[HSProgressWindow alloc] initWithPyRef:[[self model] progressWindow] view:nil];
     [_progressWindow setParentWindow:[_directoryPanel window]];
-    _aboutBox = nil; // Lazily loaded
-    _preferencesPanel = nil; // Lazily loaded
+     // Lazily loaded
+    _aboutBox = nil;
+    _preferencesPanel = nil;
+    _resultWindow = nil;
+    _detailsPanel = nil;
     [[[self directoryPanel] window] makeKeyAndOrderFront:self];
 }
 
@@ -89,20 +124,45 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (DetailsPanel *)createDetailsPanel
 {
-    return [[DetailsPanel alloc] initWithPyRef:[model detailsPanel]];
-}
-
-- (NSString *)homepageURL
-{
-    return @""; // must be overriden by all editions
+    NSInteger appMode = [self getAppMode];
+    if (appMode == AppModePicture) {
+        return [[DetailsPanelPicture alloc] initWithPyRef:[model detailsPanel]];
+    }
+    else {
+        return [[DetailsPanel alloc] initWithPyRef:[model detailsPanel]];
+    }
 }
 
 - (void)setScanOptions
 {
-}
-
-- (void)initResultColumns:(ResultTable *)aTable
-{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *scanTypeOptionName;
+    NSInteger appMode = [self getAppMode];
+    if (appMode == AppModePicture) {
+        scanTypeOptionName = @"scanTypePicture";
+    }
+    else if (appMode == AppModeMusic) {
+        scanTypeOptionName = @"scanTypeMusic";
+    }
+    else {
+        scanTypeOptionName = @"scanTypeStandard";
+    }
+    [model setScanType:n2i([ud objectForKey:scanTypeOptionName])];
+    [model setMinMatchPercentage:n2i([ud objectForKey:@"minMatchPercentage"])];
+    [model setWordWeighting:n2b([ud objectForKey:@"wordWeighting"])];
+    [model setMixFileKind:n2b([ud objectForKey:@"mixFileKind"])];
+    [model setIgnoreHardlinkMatches:n2b([ud objectForKey:@"ignoreHardlinkMatches"])];
+    [model setMatchSimilarWords:n2b([ud objectForKey:@"matchSimilarWords"])];
+    int smallFileThreshold = [ud integerForKey:@"smallFileThreshold"]; // In KB
+    int sizeThreshold = [ud boolForKey:@"ignoreSmallFiles"] ? smallFileThreshold * 1024 : 0; // The py side wants bytes
+    [model setSizeThreshold:sizeThreshold];
+    [model enable:n2b([ud objectForKey:@"scanTagTrack"]) scanForTag:@"track"];
+    [model enable:n2b([ud objectForKey:@"scanTagArtist"]) scanForTag:@"artist"];
+    [model enable:n2b([ud objectForKey:@"scanTagAlbum"]) scanForTag:@"album"];
+    [model enable:n2b([ud objectForKey:@"scanTagTitle"]) scanForTag:@"title"];
+    [model enable:n2b([ud objectForKey:@"scanTagGenre"]) scanForTag:@"genre"];
+    [model enable:n2b([ud objectForKey:@"scanTagYear"]) scanForTag:@"year"];
+    [model setMatchScaled:n2b([ud objectForKey:@"matchScaled"])];
 }
 
 /* Public */
@@ -126,7 +186,29 @@ http://www.gnu.org/licenses/gpl-3.0.html
     return _recentResults;
 }
 
+- (NSInteger)getAppMode
+{
+    return [model getAppMode];
+}
+
+- (void)setAppMode:(NSInteger)appMode
+{
+    [model setAppMode:appMode];
+    if (_preferencesPanel != nil) {
+        [_preferencesPanel release];
+        _preferencesPanel = nil;
+    }
+}
+
 /* Actions */
+- (void)clearPictureCache
+{
+    NSString *msg = NSLocalizedString(@"Do you really want to remove all your cached picture analysis?", @"");
+    if ([Dialogs askYesNo:msg] == NSAlertSecondButtonReturn) // NO
+        return;
+    [model clearPictureCache];
+}
+
 - (void)loadResults
 {
     NSOpenPanel *op = [NSOpenPanel openPanel];
@@ -145,7 +227,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (void)openWebsite
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[self homepageURL]]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.hardcoded.net/dupeguru/"]];
 }
 
 - (void)openHelp
@@ -172,7 +254,18 @@ http://www.gnu.org/licenses/gpl-3.0.html
 - (void)showPreferencesPanel
 {
     if (_preferencesPanel == nil) {
-        _preferencesPanel = [[NSWindowController alloc] initWithWindow:createPreferencesPanel_UI(nil)];
+        NSWindow *window;
+        NSInteger appMode = [model getAppMode];
+        if (appMode == AppModePicture) {
+            window = createPreferencesPanelPicture_UI(nil);
+        }
+        else if (appMode == AppModeMusic) {
+            window = createPreferencesPanelMusic_UI(nil);
+        }
+        else {
+            window = createPreferencesPanelStandard_UI(nil);
+        }
+        _preferencesPanel = [[NSWindowController alloc] initWithWindow:window];
     }
     [_preferencesPanel showWindow:nil];
 }
@@ -252,6 +345,17 @@ http://www.gnu.org/licenses/gpl-3.0.html
     return [Dialogs askYesNo:prompt] == NSAlertFirstButtonReturn;
 }
 
+- (void)createResultsWindow
+{
+    if (_resultWindow != nil) {
+        [_resultWindow release];
+    }
+    if (_detailsPanel != nil) {
+        [_detailsPanel release];
+    }
+    _resultWindow = [[ResultWindow alloc] initWithParentApp:self];
+    _detailsPanel = [self createDetailsPanel];
+}
 - (void)showResultsWindow
 {
     [[[self resultWindow] window] makeKeyAndOrderFront:nil];
@@ -259,7 +363,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (void)showProblemDialog
 {
-    [[self resultWindow] showProblemDialog];
+    [_problemDialog showWindow:self];
 }
 
 - (NSString *)selectDestFolderWithPrompt:(NSString *)prompt

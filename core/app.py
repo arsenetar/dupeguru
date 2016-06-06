@@ -323,6 +323,14 @@ class DupeGuru(Broadcaster):
         self.notify('dupes_selected')
 
     #--- Protected
+    def _get_fileclasses(self):
+        if self.app_mode == AppMode.Picture:
+            return [pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
+        elif self.app_mode == AppMode.Music:
+            return [me.fs.MusicFile]
+        else:
+            return [se.fs.File]
+    
     def _prioritization_categories(self):
         if self.app_mode == AppMode.Picture:
             return pe.prioritize.all_categories()
@@ -743,7 +751,7 @@ class DupeGuru(Broadcaster):
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.Folders:
-                files = list(self.directories.get_folders(folderclass=se.fs.folder, j=j))
+                files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
             else:
                 files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
             if self.options['ignore_hardlink_matches']:
@@ -794,12 +802,7 @@ class DupeGuru(Broadcaster):
 
     @property
     def fileclasses(self):
-        if self.app_mode == AppMode.Picture:
-            return [pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
-        elif self.app_mode == AppMode.Music:
-            return [me.fs.MusicFile]
-        else:
-            return [se.fs.File]
+        return self._get_fileclasses()
 
     @property
     def SCANNER_CLASS(self):

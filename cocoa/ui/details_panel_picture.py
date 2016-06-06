@@ -1,5 +1,5 @@
-ownerclass = 'DetailsPanel'
-ownerimport = 'DetailsPanel.h'
+ownerclass = 'DetailsPanelPicture'
+ownerimport = 'DetailsPanelPicture.h'
 
 result = Panel(593, 398, "Details of Selected File")
 table = TableView(result)

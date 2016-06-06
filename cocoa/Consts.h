@@ -17,3 +17,8 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #define jobDelete @"job_delete"
 
 #define DGPrioritizeIndexPasteboardType @"DGPrioritizeIndexPasteboardType"
+#define ImageLoadedNotification @"ImageLoadedNotification"
+
+#define AppModeStandard 0
+#define AppModeMusic 1
+#define AppModePicture 2

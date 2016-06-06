@@ -10,7 +10,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import <Python.h>
 #import "PyDetailsPanel.h"
 
-@interface DetailsPanelBase : NSWindowController <NSTableViewDataSource>
+@interface DetailsPanel : NSWindowController <NSTableViewDataSource>
 {
     NSTableView *detailsTable;
     

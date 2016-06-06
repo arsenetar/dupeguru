@@ -9,13 +9,8 @@ out = 'build'
 
 def options(opt):
     opt.load('compiler_c python')
-    opt.add_option('--edition', default='se', help="dupeGuru edition to build (se, me pe)")
 
 def configure(conf):
-    if conf.options.edition not in ('se', 'me', 'pe'):
-        conf.options.edition = 'se'
-    print("Building dupeGuru {}".format(conf.options.edition.upper()))
-    conf.env.DGEDITION = conf.options.edition
     # We use clang to compile our app
     conf.env.CC = 'clang'
     # WAF has a "pyembed" feature allowing us to automatically find Python and compile by linking
@@ -31,7 +26,7 @@ def configure(conf):
         os.symlink('../build/Python', versioned_dylib_path)
     # The rest is standard WAF code that you can find the the python and macapp demos.
     conf.load('compiler_c python')
-    conf.check_python_version((3,3,0))
+    conf.check_python_version((3,4,0))
     conf.check_python_headers()
     conf.env.FRAMEWORK_COCOA = 'Cocoa'
     conf.env.ARCH_COCOA = ['x86_64']
@@ -53,8 +48,8 @@ def build(ctx):
         'controllers/HSOutline', 'controllers/HSPopUpList', 'controllers/HSSelectableList',
         'controllers/HSTextField', 'controllers/HSProgressWindow']
     cocoalib_src = [cocoalib_node.find_node(usename + '.m') for usename in cocoalib_uses] + cocoalib_node.ant_glob('autogen/*.m')
-    project_folders = ['autogen', 'base', ctx.env.DGEDITION]
-    project_src = sum([ctx.srcnode.ant_glob('%s/*.m' % folder) for folder in project_folders], [])
+    project_folders = [ctx.srcnode, ctx.srcnode.find_dir('autogen')]
+    project_src = ctx.srcnode.ant_glob('autogen/*.m') + ctx.srcnode.ant_glob('*.m')
     
     # Compile
     ctx.program(

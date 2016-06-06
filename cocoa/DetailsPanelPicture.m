@@ -10,11 +10,11 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "NSNotificationAdditions.h"
 #import "NSImageAdditions.h"
 #import "PyDupeGuru.h"
-#import "DetailsPanel.h"
+#import "DetailsPanelPicture.h"
 #import "Consts.h"
-#import "DetailsPanel_UI.h"
+#import "DetailsPanelPicture_UI.h"
 
-@implementation DetailsPanel
+@implementation DetailsPanelPicture
 
 @synthesize dupeImage;
 @synthesize dupeProgressIndicator;
@@ -32,7 +32,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (NSWindow *)createWindow
 {
-    return createDetailsPanel_UI(self);
+    return createDetailsPanelPicture_UI(self);
 }
 
 - (void)loadImageAsync:(NSString *)imagePath

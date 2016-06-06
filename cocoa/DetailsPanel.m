@@ -6,10 +6,11 @@ which should be included with this package. The terms are also available at
 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-#import "DetailsPanelBase.h"
+#import "DetailsPanel.h"
 #import "HSPyUtil.h"
+#import "DetailsPanel_UI.h"
 
-@implementation DetailsPanelBase
+@implementation DetailsPanel
 
 @synthesize detailsTable;
 
@@ -35,7 +36,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 - (NSWindow *)createWindow
 {
-    return nil; // Virtual
+    return createDetailsPanel_UI(self);
 }
 
 - (void)refreshDetails

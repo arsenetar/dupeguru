@@ -7,10 +7,10 @@ http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 #import <Cocoa/Cocoa.h>
-#import "DetailsPanelBase.h"
+#import "DetailsPanel.h"
 #import "PyDupeGuru.h"
 
-@interface DetailsPanel : DetailsPanelBase
+@interface DetailsPanelPicture : DetailsPanel
 {
     NSImageView *dupeImage;
     NSProgressIndicator *dupeProgressIndicator;

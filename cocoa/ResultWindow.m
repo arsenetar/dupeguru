@@ -23,7 +23,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
 @synthesize stats;
 @synthesize filterField;
 
-- (id)initWithParentApp:(AppDelegateBase *)aApp;
+- (id)initWithParentApp:(AppDelegate *)aApp;
 {
     self = [super initWithWindow:nil];
     app = aApp;
@@ -34,9 +34,7 @@ http://www.gnu.org/licenses/gpl-3.0.html
     [[self window] setContentBorderThickness:28 forEdge:NSMinYEdge];
     table = [[ResultTable alloc] initWithPyRef:[model resultTable] view:matches];
     statsLabel = [[StatsLabel alloc] initWithPyRef:[model statsLabel] view:stats];
-    problemDialog = [[ProblemDialog alloc] initWithPyRef:[model problemDialog]];
-    deletionOptions = [[DeletionOptions alloc] initWithPyRef:[model deletionOptions]];
-    [aApp initResultColumns:table];
+    [self initResultColumns:table];
     [[table columns] setColumnsAsReadOnly];
     [self fillColumnsMenu];
     [matches setTarget:self];
@@ -49,7 +47,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 {
     [table release];
     [statsLabel release];
-    [problemDialog release];
     [super dealloc];
 }
 
@@ -80,11 +77,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     [optionsSwitch setSelected:[table deltaValuesMode] forSegment:2];
 }
 
-- (void)showProblemDialog
-{
-    [problemDialog showWindow:self];
-}
-
 - (void)adjustUIToLocalization
 {
     NSString *lang = [[NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations]] objectAtIndex:0];
@@ -107,6 +99,87 @@ http://www.gnu.org/licenses/gpl-3.0.html
         [optionsToolbarItem setMaxSize:s];
         [optionsToolbarItem setMinSize:s];
     }
+}
+
+- (void)initResultColumns:(ResultTable *)aTable
+{
+    NSInteger appMode = [app getAppMode];
+    if (appMode == AppModePicture) {
+        HSColumnDef defs[] = {
+            {@"marked", 26, 26, 26, YES, [NSButtonCell class]},
+            {@"name", 162, 16, 0, YES, nil},
+            {@"folder_path", 142, 16, 0, YES, nil},
+            {@"size", 63, 16, 0, YES, nil},
+            {@"extension", 40, 16, 0, YES, nil},
+            {@"dimensions", 73, 16, 0, YES, nil},
+            {@"exif_timestamp", 120, 16, 0, YES, nil},
+            {@"mtime", 120, 16, 0, YES, nil},
+            {@"percentage", 58, 16, 0, YES, nil},
+            {@"dupe_count", 80, 16, 0, YES, nil},
+            nil
+        };
+        [[aTable columns] initializeColumns:defs];
+        NSTableColumn *c = [[aTable view] tableColumnWithIdentifier:@"marked"];
+        [[c dataCell] setButtonType:NSSwitchButton];
+        [[c dataCell] setControlSize:NSSmallControlSize];
+        c = [[aTable view] tableColumnWithIdentifier:@"size"];
+        [[c dataCell] setAlignment:NSRightTextAlignment];
+    }
+    else if (appMode == AppModeMusic) {
+        HSColumnDef defs[] = {
+            {@"marked", 26, 26, 26, YES, [NSButtonCell class]},
+            {@"name", 235, 16, 0, YES, nil},
+            {@"folder_path", 120, 16, 0, YES, nil},
+            {@"size", 63, 16, 0, YES, nil},
+            {@"duration", 50, 16, 0, YES, nil},
+            {@"bitrate", 50, 16, 0, YES, nil},
+            {@"samplerate", 60, 16, 0, YES, nil},
+            {@"extension", 40, 16, 0, YES, nil},
+            {@"mtime", 120, 16, 0, YES, nil},
+            {@"title", 120, 16, 0, YES, nil},
+            {@"artist", 120, 16, 0, YES, nil},
+            {@"album", 120, 16, 0, YES, nil},
+            {@"genre", 80, 16, 0, YES, nil},
+            {@"year", 40, 16, 0, YES, nil},
+            {@"track", 40, 16, 0, YES, nil},
+            {@"comment", 120, 16, 0, YES, nil},
+            {@"percentage", 57, 16, 0, YES, nil},
+            {@"words", 120, 16, 0, YES, nil},
+            {@"dupe_count", 80, 16, 0, YES, nil},
+            nil
+        };
+        [[aTable columns] initializeColumns:defs];
+        NSTableColumn *c = [[aTable view] tableColumnWithIdentifier:@"marked"];
+        [[c dataCell] setButtonType:NSSwitchButton];
+        [[c dataCell] setControlSize:NSSmallControlSize];
+        c = [[aTable view] tableColumnWithIdentifier:@"size"];
+        [[c dataCell] setAlignment:NSRightTextAlignment];
+        c = [[aTable view] tableColumnWithIdentifier:@"duration"];
+        [[c dataCell] setAlignment:NSRightTextAlignment];
+        c = [[aTable view] tableColumnWithIdentifier:@"bitrate"];
+        [[c dataCell] setAlignment:NSRightTextAlignment];
+    }
+    else {
+        HSColumnDef defs[] = {
+            {@"marked", 26, 26, 26, YES, [NSButtonCell class]},
+            {@"name", 195, 16, 0, YES, nil},
+            {@"folder_path", 183, 16, 0, YES, nil},
+            {@"size", 63, 16, 0, YES, nil},
+            {@"extension", 40, 16, 0, YES, nil},
+            {@"mtime", 120, 16, 0, YES, nil},
+            {@"percentage", 60, 16, 0, YES, nil},
+            {@"words", 120, 16, 0, YES, nil},
+            {@"dupe_count", 80, 16, 0, YES, nil},
+            nil
+        };
+        [[aTable columns] initializeColumns:defs];
+        NSTableColumn *c = [[aTable view] tableColumnWithIdentifier:@"marked"];
+        [[c dataCell] setButtonType:NSSwitchButton];
+        [[c dataCell] setControlSize:NSSmallControlSize];
+        c = [[aTable view] tableColumnWithIdentifier:@"size"];
+        [[c dataCell] setAlignment:NSRightTextAlignment];
+    }
+    [[aTable columns] restoreColumns];
 }
 
 /* Actions */

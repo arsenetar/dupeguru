@@ -11,9 +11,11 @@ http://www.gnu.org/licenses/gpl-3.0.html
 #import "Dialogs.h"
 #import "Utils.h"
 #import "AppDelegate.h"
+#import "Consts.h"
 
 @implementation DirectoryPanel
 
+@synthesize appModeSelector;
 @synthesize scanTypePopup;
 @synthesize addButtonPopUp;
 @synthesize loadRecentButtonPopUp;
@@ -21,15 +23,15 @@ http://www.gnu.org/licenses/gpl-3.0.html
 @synthesize removeButton;
 @synthesize loadResultsButton;
 
-- (id)initWithParentApp:(AppDelegateBase *)aParentApp
+- (id)initWithParentApp:(AppDelegate *)aParentApp
 {
     self = [super initWithWindow:nil];
     [self setWindow:createDirectoryPanel_UI(self)];
     _app = aParentApp;
     model = [_app model];
     [[self window] setTitle:[model appName]];
-    [[self scanTypePopup] addItemsWithTitles:[[aParentApp model] getScanOptions]];
-    [[self scanTypePopup] bind:@"selectedIndex" toObject:[NSUserDefaultsController sharedUserDefaultsController] withKeyPath:@"values.scanType" options:nil];
+    self.appModeSelector.selectedSegment = 0;
+    [self fillScanTypeMenu];
     _alwaysShowPopUp = NO;
     [self fillPopUpMenu];
     _recentDirectories = [[HSRecentFiles alloc] initWithName:@"recentDirectories" menu:[addButtonPopUp menu]];
@@ -60,6 +62,25 @@ http://www.gnu.org/licenses/gpl-3.0.html
     NSMenuItem *mi = [m addItemWithTitle:NSLocalizedString(@"Add New Folder...", @"") action:@selector(askForDirectory) keyEquivalent:@""];
     [mi setTarget:self];
     [m addItem:[NSMenuItem separatorItem]];
+}
+
+- (void)fillScanTypeMenu
+{
+    [[self scanTypePopup] unbind:@"selectedIndex"];
+    [[self scanTypePopup] removeAllItems];
+    [[self scanTypePopup] addItemsWithTitles:[[_app model] getScanOptions]];
+    NSString *keypath;
+    NSInteger appMode = [_app getAppMode];
+    if (appMode == AppModePicture) {
+        keypath = @"values.scanTypePicture";
+    }
+    else if (appMode == AppModeMusic) {
+        keypath = @"values.scanTypeMusic";
+    }
+    else {
+        keypath = @"values.scanTypeStandard";
+    }
+    [[self scanTypePopup] bind:@"selectedIndex" toObject:[NSUserDefaultsController sharedUserDefaultsController] withKeyPath:keypath options:nil];
 }
 
 - (void)adjustUIToLocalization
@@ -98,6 +119,23 @@ http://www.gnu.org/licenses/gpl-3.0.html
             [self addDirectory:[directoryURL path]];
         }
     }
+}
+
+- (void)changeAppMode:(id)sender
+{
+    NSInteger appMode;
+    NSUInteger selectedSegment = self.appModeSelector.selectedSegment;
+    if (selectedSegment == 2) {
+        appMode = AppModePicture;
+    }
+    else if (selectedSegment == 1) {
+        appMode = AppModeMusic;
+    }
+    else {
+        appMode = AppModeStandard;
+    }
+    [_app setAppMode:appMode];
+    [self fillScanTypeMenu];
 }
 
 - (void)popupAddDirectoryMenu:(id)sender
