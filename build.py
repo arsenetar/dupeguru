@@ -9,7 +9,6 @@ import os
 import os.path as op
 from optparse import OptionParser
 import shutil
-import importlib
 import compileall
 
 from setuptools import setup, Extension
