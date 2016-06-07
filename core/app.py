@@ -154,13 +154,17 @@ class DupeGuru(Broadcaster):
             child.connect()
 
     #--- Private
-    def _create_result_table(self):
+    def _recreate_result_table(self):
+        if self.result_table is not None:
+            self.result_table.disconnect()
         if self.app_mode == AppMode.Picture:
-            return pe.result_table.ResultTable(self)
+            self.result_table = pe.result_table.ResultTable(self)
         elif self.app_mode == AppMode.Music:
-            return me.result_table.ResultTable(self)
+            self.result_table = me.result_table.ResultTable(self)
         else:
-            return se.result_table.ResultTable(self)
+            self.result_table = se.result_table.ResultTable(self)
+        self.result_table.connect()
+        self.view.create_results_window()
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if self.app_mode in (AppMode.Music, AppMode.Picture):
@@ -285,9 +289,11 @@ class DupeGuru(Broadcaster):
                 self.view.show_message(tr("No duplicates found."))
             else:
                 self.view.show_results_window()
-        if jobid in {JobType.Load, JobType.Move, JobType.Delete}:
+        if jobid in {JobType.Move, JobType.Delete}:
             self._results_changed()
         if jobid == JobType.Load:
+            self._recreate_result_table()
+            self._results_changed()
             self.view.show_results_window()
         if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
             if self.results.problems:
@@ -330,7 +336,7 @@ class DupeGuru(Broadcaster):
             return [me.fs.MusicFile]
         else:
             return [se.fs.File]
-    
+
     def _prioritization_categories(self):
         if self.app_mode == AppMode.Picture:
             return pe.prioritize.all_categories()
@@ -741,11 +747,7 @@ class DupeGuru(Broadcaster):
             if hasattr(scanner, k):
                 setattr(scanner, k, v)
         self.results.groups = []
-        if self.result_table is not None:
-            self.result_table.disconnect()
-        self.result_table = self._create_result_table()
-        self.result_table.connect()
-        self.view.create_results_window()
+        self._recreate_result_table()
         self._results_changed()
 
         def do(j):
