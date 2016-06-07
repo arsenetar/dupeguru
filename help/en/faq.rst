@@ -6,19 +6,12 @@ Frequently Asked Questions
 What is dupeGuru?
 -----------------
 
-dupeGuru is a tool to find duplicate files on your computer. It can scan either filenames or
-contents. The filename scan features a fuzzy matching algorithm that can find duplicate
-filenames even when they are not exactly the same.
+dupeGuru is a tool to find duplicate files on your computer. It has three operational modes:
+Standard, Music and Picture. Each mode has its own specialized preferences.
 
-dupeGuru also comes in two extra flavors: Music Edition and Picture Edition. These editions behave
-like the normal dupeGuru, but has specialized options.
-
-dupeGuru Music Edition [ME] is made to scan songs. It can base its scan on filenames, tags or
-contents. The filename and tag scans feature a fuzzy matching algorithm that can find duplicate
-filenames or tags even when they are not exactly the same.
-
-dupeGuru Picture Edition [PE] is made to scan pictures. Not only can it find exact matches, but it
-can also find duplicates among pictures of different kind (PNG, JPG, GIF etc..) and quality.
+Each mode has multiple scan types, such as filename, contents, tags. Some scan types feature
+advanced fuzzy matching algorithm, allowing you to find duplicates that other more rigid duplicate
+scanners can't.
 
 What makes it special?
 ----------------------
@@ -107,8 +100,6 @@ I want to mark all duplicates containing the word "copy". How do I do that?
 I want to remove all songs that are more than 3 seconds away from their reference file. What can I do?
 ------------------------------------------------------------------------------------------------------
 
-*ME only*
-
 * Enable the :doc:`Dupes Only <results>` mode.
 * Enable the **Delta Values** mode.
 * Click on the "Time" column to sort the results by time.
@@ -119,8 +110,6 @@ I want to remove all songs that are more than 3 seconds away from their referenc
 
 I want to make my highest bitrate songs reference files. What can I do?
 -----------------------------------------------------------------------
-
-*ME only*
 
 * Enable the :doc:`Dupes Only <results>` mode.
 * Enable the **Delta Values** mode.
@@ -155,31 +144,24 @@ I've tried to send my duplicates to Trash, but dupeGuru is telling me it can't d
 ---------------------------------------------------------------------------------------------------------
 
 Most of the time, the reason why dupeGuru can't send files to Trash is because of file permissions.
-You need *write* permissions on files you want to send to Trash. If you're not familiar with the
-command line, you can use utilities such as `BatChmod`_ to fix your permissions.
+You need *write* permissions on files you want to send to Trash.
 
 If dupeGuru still gives you troubles after fixing your permissions, try enabling the "Directly
 delete files" option that is offered to you when you activate Send to Trash. This will not send
 files to the Trash, but delete them immediately. In some cases, for example on network storage
 (NAS), this has been known to work when normal deletion didn't.
 
-*PE only.* If you're trying to delete *iPhoto* pictures, then the reason for the failure is
-different. The deletion fails because dupeGuru can't communicate with iPhoto. Be aware that for the
-deletion to work correctly, you're not supposed to play around iPhoto while dupeGuru is working.
-Also, sometimes, the Applescript system doesn't seem to know where to find iPhoto to launch it. It
-might help in these cases to launch iPhoto *before* you send your duplicates to Trash.
+If this fail, `HS forums`_ might be of some help.
 
-If all of this fail, `HS forums`_ might be of some help.
+Why is Picture mode's contents scan so slow?
+--------------------------------------------
 
-Why is dupeGuru PE so slower than other editions?
--------------------------------------------------
+This scanning method is very different from methods. It can detect duplicate photos even if they
+are not exactly the same. This very cool capability has a cost: time. Every picture has to be
+individually and fuzzily matched to all others, and this takes a lot of CPU power.
 
-dupeGuru PE's scanning method is very different from dupeGuru's. dupeGuru PE can detect duplicate
-photos even if they are not exactly the same. This very cool capability has a cost: time. Every
-picture has to be individually and fuzzily matched to all others, and this takes a lot of CPU power.
-
-If all you need to find is exact duplicates, just use the standard edition of dupeGuru with the
-Contents scan method. If your photos have EXIF tags, you can also try PE's "EXIF" scan method which
+If all you need to find is exact duplicates, just use the standard mode of dupeGuru with the
+Contents scan method. If your photos have EXIF tags, you can also try the "EXIF" scan method which
 is much faster.
 
 Where are user files located?
@@ -190,18 +172,12 @@ Where they're located depends on your platform:
 
 * Linux: ``~/.local/share/data/Hardcoded Software/dupeGuru``
 * Mac OS X: ``~/Library/Application Support/dupeGuru``
-* Windows: ``\Users\<username>\AppData\Local\Hardcoded Software\dupeGuru``
 
 Preferences are stored elsewhere:
 
 * Linux: ``~/.config/Hardcoded Software/dupeGuru.conf``
 * Mac OS X: In the built-in ``defaults`` system, as ``com.hardcoded-software.dupeguru``
-* Windows: In the registry, as ``HKEY_CURRENT_USER\Software\Hardcoded Software\dupeGuru``
 
-For Music Edition and Picture Edition, replace "dupeGuru" by "dupeGuru Music Edition" and
-"dupeGuru Picture Edition".
-
-.. _BatChmod: http://www.lagentesoft.com/batchmod/index.html
 .. _HS forums: https://forum.hardcoded.net/
 .. _Github: https://github.com/hsoft/dupeguru
 .. _open an issue: https://github.com/hsoft/dupeguru/wiki/issue-labels

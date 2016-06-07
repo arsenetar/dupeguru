@@ -167,10 +167,6 @@ Action Menu
 **Rename Selected:**
     Prompts you for a new name, and then rename the selected file.
 
-**Warning about moving files in iPhoto/iTunes/Aperture:** When using the "Move Marked" action on
-duplicates that come from iPhoto, Aperture or iTunes, files are copied, not moved. dupeGuru cannot
-use the Move action on those files.
-
 Deletion Options
 ----------------
 

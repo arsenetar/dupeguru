@@ -65,7 +65,7 @@ def package_debian_distribution(distribution):
     filereplace(op.join(debskel, 'control'), op.join(debdest, 'control'), **debopts)
     filereplace(op.join(debskel, 'Makefile'), op.join(destpath, 'Makefile'), **debopts)
     filereplace(op.join(debskel, 'dupeguru.desktop'), op.join(debdest, 'dupeguru.desktop'), **debopts)
-    changelogpath = op.join('help', 'changelog_se')
+    changelogpath = op.join('help', 'changelog')
     changelog_dest = op.join(debdest, 'changelog')
     project_name = debopts['pkgname']
     from_version = '2.9.2'

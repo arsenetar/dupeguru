@@ -1,27 +1,18 @@
 Preferences
 ===========
 
-**Scan Type:**
-    Basic scan type to use. See :doc:`scan` for details.
+**Tags to scan:**
+    When using the **Tags** scan type, you can select the tags that will be used for comparison.
 
-.. only:: edition_me
+**Word weighting:**
+    See :ref:`word-weighting`.
 
-    **Tags to scan:**
-        When using the **Tags** scan type, you can select the tags that will be used for comparison.
+**Match similar words:**
+    See :ref:`similarity-matching`.
 
-.. only:: edition_se or edition_me
-
-    **Word weighting:**
-        See :ref:`word-weighting`.
-
-    **Match similar words:**
-        See :ref:`similarity-matching`.
-
-.. only:: edition_pe
-
-    **Match pictures of different dimensions:**
-        If you check this box, pictures of different dimensions will be allowed in the same
-        duplicate group.
+**Match pictures of different dimensions:**
+    If you check this box, pictures of different dimensions will be allowed in the same
+    duplicate group.
 
 .. _filter-hardness:
 

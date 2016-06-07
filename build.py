@@ -175,11 +175,9 @@ def build_help():
     current_path = op.abspath('.')
     help_basepath = op.join(current_path, 'help', 'en')
     help_destpath = op.join(current_path, 'build', 'help')
-    changelog_path = op.join(current_path, 'help', 'changelog_se')
+    changelog_path = op.join(current_path, 'help', 'changelog')
     tixurl = "https://github.com/hsoft/dupeguru/issues/{}"
-    appname = 'dupeGuru'
-    homepage = 'https://www.hardcoded.net/dupeguru/'
-    confrepl = {'appname': appname, 'homepage': homepage, 'language': 'en'}
+    confrepl = {'language': 'en'}
     changelogtmpl = op.join(current_path, 'help', 'changelog.tmpl')
     conftmpl = op.join(current_path, 'help', 'conf.tmpl')
     sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)

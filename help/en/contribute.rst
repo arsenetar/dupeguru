@@ -28,12 +28,16 @@ dupeGuru's source code is on Github and thus managed in a Git repository. At all
 be able to build from source a fresh checkout of the ``master`` branch using instructions from the
 ``README.md`` file at the root of this project. If you can't, it's a bug. Please report it.
 
-Bugfixes happen directly in the ``master`` branch, but feature development takes place in the
-``develop`` branch. When implementing a big feature, it's possible that it gets its own branch until
-it's stable enough to merge into ``develop``.
+``master`` is the main development branch, and thus represents what going to be included in the
+next feature release. When needed, we create maintenance branches for bugfixes of the current
+feature release.
 
-Every release is tagged, the tag name containing the edition and its version. For example, release
-6.6.0 of dupeGuru ME is tagged ``me6.6.0``.
+When implementing a big feature, it's possible that it gets its own branch until
+it's stable enough to merge into ``master``.
+
+Every release is tagged, the tag name containing the edition (for old versions) and its version.
+For example, release 6.6.0 of dupeGuru ME is tagged ``me6.6.0``. Newer releases are tagged only
+with the version number (because editions don't exist anymore), for example ``4.0.0``.
 
 Once you're past building the software, the :doc:`developer documentation </developer/index>` should
 be enough to get you started with actual development. Then again, proper documentation is a very
@@ -77,7 +81,7 @@ agree on what should be added to the documentation.
 **Translation**. Creating or improving an existing translation is a very good way to contribute to
 dupeGuru. For more information about how to do that, you can refer to the `translator guide`_.
 
-.. _been open source: http://www.hardcoded.net/articles/free-as-in-speech-fair-as-in-trade
+.. _been open source: https://www.hardcoded.net/articles/free-as-in-speech-fair-as-in-trade
 .. _let me know: mailto:hsoft@hardcoded.net
 .. _Source code repository: https://github.com/hsoft/dupeguru
 .. _Issue Tracker: https://github.com/hsoft/dupeguru/issues

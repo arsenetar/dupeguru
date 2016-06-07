@@ -4,16 +4,14 @@ The scanning process
 .. contents::
 
 dupeGuru has 3 basic ways of scanning: :ref:`worded-scan` and :ref:`contents-scan` and
-:ref:`picture blocks <picture-blocks-scan>`. The first two modes are for the Standard and Music
-editions, the last is for the Picture edition. The scanning process is configured through the
+:ref:`picture blocks <picture-blocks-scan>`. The first two types are for the Standard and Music
+modes, the last is for the Picture mode. The scanning process is configured through the
 :doc:`Preference pane <preferences>`.
 
 .. _worded-scan:
 
 Worded scans
 ------------
-
-*Standard and Music Editions only*.
 
 Worded scans extract a string from each file and split it into words. The string can come from two
 different sources: **Filename** or **Tags** (Music Edition only).
@@ -37,8 +35,6 @@ we have a duplicate match. For example, "a b c d" and "c d e" have a matching pe
 
 Fields
 ^^^^^^
-
-*Music Edition only*.
 
 Song filenames often come with multiple and distinct parts and this can cause problems. For example,
 let's take these two songs: "Dolly Parton - I Will Always Love You" and
@@ -112,23 +108,13 @@ having the same MD5 hash *and* the same size by accident is still very, very sma
 
 The :ref:`filter hardness <filter-hardness>` preference is ignored in this scan.
 
-Audio contents
-^^^^^^^^^^^^^^
-
-*Music Edition only*.
-
-This mode is very much like the normal contents scan. The only difference is that it ignores
-metadata included in the file and only compares audio data. *It doesn't do audio data fuzzy
-matching, only exact matching. It would be really cool to have that, but we aren't there yet.*
-
 Folders
 ^^^^^^^
 
-*Standard Edition only*.
-
-This is a special Contents scan type. It works like a normal contens scan, but instead of trying to
-find duplicate files, it tries to find duplicate folders. A folder is duplicate to another if all
-files it contains have the same contents as the other folder's file.
+This is a special Contents scan type. It works like a normal contents scan, but
+instead of trying to find duplicate files, it tries to find duplicate folders.
+A folder is duplicate to another if all files it contains have the same
+contents as the other folder's file.
 
 This scan is, of course, recursive and subfolders are checked. dupeGuru keeps only the biggest
 fishes. Therefore, if two folders that are considered as matching contain subfolders, these
@@ -141,9 +127,7 @@ With this mode, we end up with folders as results instead of files.
 Picture blocks
 --------------
 
-*Picture Edition only*.
-
-dupeGuru Picture Edition stands apart of its two friends. Its scan types are completely different.
+dupeGuru Picture mode stands apart of its two friends. Its scan types are completely different.
 The first one is its "Contents" scan, which is a bit too generic, hence the name we use here,
 "Picture blocks".
 
@@ -173,8 +157,6 @@ algorithm and want to improve dupeGuru, by all means, let me know!
 
 EXIF Timestamp
 --------------
-
-*Picture Edition only*.
 
 This one is easy. We read the EXIF information of every picture and extract the ``DateTimeOriginal``
 tag. If the tag is the same for two pictures, they're considered duplicates.
