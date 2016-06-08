@@ -61,16 +61,17 @@ class DupeGuru(DupeGuruBase):
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView())
         self.appdata = '/tmp'
-        self.result_table = self._create_result_table()
-        self.result_table.connect()
+        self._recreate_result_table()
 
     def _prioritization_categories(self):
         return prioritize.all_categories()
 
-    def _create_result_table(self):
-        result = ResultTable(self)
-        result.view = CallLogger()
-        return result
+    def _recreate_result_table(self):
+        if self.result_table is not None:
+            self.result_table.disconnect()
+        self.result_table = ResultTable(self)
+        self.result_table.view = CallLogger()
+        self.result_table.connect()
 
 
 class NamedObject:
