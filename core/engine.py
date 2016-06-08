@@ -449,7 +449,7 @@ class Group:
             return self[0]
 
 
-def get_groups(matches, j=job.nulljob):
+def get_groups(matches):
     """Returns a list of :class:`Group` from ``matches``.
 
     Create groups out of match pairs in the smartest way possible.
@@ -458,7 +458,7 @@ def get_groups(matches, j=job.nulljob):
     dupe2group = {}
     groups = []
     try:
-        for match in j.iter_with_progress(matches, tr("Grouped %d/%d matches"), JOB_REFRESH_RATE):
+        for match in matches:
             first, second, _ = match
             first_group = dupe2group.get(first)
             second_group = dupe2group.get(second)

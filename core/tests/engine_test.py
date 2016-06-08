@@ -803,20 +803,6 @@ class TestCaseget_groups:
         r = get_groups([m1, m2, m3])
         eq_(3, len(r[0]))
 
-    def test_job(self):
-        def do_progress(p, d=''):
-            self.log.append(p)
-            return True
-
-        self.log = []
-        j = job.Job(1, do_progress)
-        m1, m2, m3 = get_match_triangle()
-        #101%: To make sure it is processed first so the job test works correctly
-        m4 = Match(NamedObject('a', True), NamedObject('a', True), 101)
-        get_groups([m1, m2, m3, m4], j)
-        eq_(0, self.log[0])
-        eq_(100, self.log[-1])
-
     def test_group_admissible_discarded_dupes(self):
         # If, with a (A, B, C, D) set, all match with A, but C and D don't match with B and that the
         # (A, B) match is the highest (thus resulting in an (A, B) group), still match C and D

@@ -130,14 +130,13 @@ class Scanner:
         raise NotImplementedError()
 
     def get_dupe_groups(self, files, ignore_list=None, j=job.nulljob):
-        j = j.start_subjob([8, 2])
         for f in (f for f in files if not hasattr(f, 'is_ref')):
             f.is_ref = False
         files = remove_dupe_paths(files)
         logging.info("Getting matches. Scan type: %d", self.scan_type)
         matches = self._getmatches(files, j)
         logging.info('Found %d matches' % len(matches))
-        j.set_progress(100, tr("Removing false matches"))
+        j.set_progress(100, tr("Almost done! Fiddling with results..."))
         # In removing what we call here "false matches", we first want to remove, if we scan by
         # folders, we want to remove folder matches for which the parent is also in a match (they're
         # "duplicated duplicates if you will). Then, we also don't want mixed file kinds if the
@@ -160,16 +159,14 @@ class Scanner:
         matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
-            j = j.start_subjob(2)
-            iter_matches = j.iter_with_progress(matches, tr("Processed %d/%d matches against the ignore list"))
             matches = [
-                m for m in iter_matches
+                m for m in matches
                 if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
             ]
         logging.info('Grouping matches')
-        groups = engine.get_groups(matches, j)
-        matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
+        groups = engine.get_groups(matches)
         if self.scan_type in {ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder, ScanType.Tag}:
+            matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
             self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         else:
             # Ticket #195
@@ -185,7 +182,6 @@ class Scanner:
             self.discarded_file_count = 0
         groups = [g for g in groups if any(not f.is_ref for f in g)]
         logging.info('Created %d groups' % len(groups))
-        j.set_progress(100, tr("Doing group prioritization"))
         for g in groups:
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
