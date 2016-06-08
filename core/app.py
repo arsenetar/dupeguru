@@ -148,7 +148,7 @@ class DupeGuru(Broadcaster):
         self.stats_label = StatsLabel(self)
         self.result_table = None
         self.deletion_options = DeletionOptions()
-        self.progress_window = ProgressWindow(self._job_completed)
+        self.progress_window = ProgressWindow(self._job_completed, self._job_error)
         children = [self.directory_tree, self.stats_label, self.details_panel]
         for child in children:
             child.connect()
@@ -306,6 +306,14 @@ class DupeGuru(Broadcaster):
                     JobType.Delete: tr("All marked files were successfully sent to Trash."),
                 }[jobid]
                 self.view.show_message(msg)
+
+    def _job_error(self, jobid, err):
+        if jobid == JobType.Load:
+            msg = tr("Could not load file: {}").format(err)
+            self.view.show_message(msg)
+            return False
+        else:
+            raise err
 
     @staticmethod
     def _remove_hardlink_dupes(files):

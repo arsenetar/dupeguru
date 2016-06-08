@@ -9,6 +9,7 @@ import os.path as op
 
 from xml.etree import ElementTree as ET
 
+from pytest import raises
 from hscommon.testutil import eq_
 from hscommon.util import first
 
@@ -614,16 +615,15 @@ class TestCaseResultsXML:
         f.seek(0)
         app = DupeGuru()
         r = Results(app)
-        r.load_from_xml(f, None)
+        with raises(ET.ParseError):
+            r.load_from_xml(f, None)
         eq_(0, len(r.groups))
 
     def test_load_non_existant_xml(self):
         app = DupeGuru()
         r = Results(app)
-        try:
+        with raises(IOError):
             r.load_from_xml('does_not_exist.xml', None)
-        except IOError:
-            self.fail()
         eq_(0, len(r.groups))
 
     def test_remember_match_percentage(self):

@@ -222,10 +222,7 @@ class Results(Markable):
             do_match(other_files[0], other_files[1:], group)
 
         self.apply_filter(None)
-        try:
-            root = ET.parse(infile).getroot()
-        except Exception:
-            return
+        root = ET.parse(infile).getroot()
         group_elems = list(root.getiterator('group'))
         groups = []
         marked = set()
