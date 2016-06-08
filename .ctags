@@ -1,0 +1,5 @@
+-R
+--exclude=build
+--exclude=env
+--exclude=.tox
+--python-kinds=-i

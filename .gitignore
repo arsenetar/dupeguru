@@ -2,10 +2,10 @@
 __pycache__
 *.so
 *.mo
-*.pyd
 *.waf*
 .lock-waf*
 .tox
+/tags
 
 build
 dist
