@@ -106,6 +106,12 @@ def build_xibless(dest='cocoa/autogen'):
         )
 
 def build_cocoa(dev):
+    sparkle_framework_path = op.join('cocoa', 'Sparkle', 'build', 'Release', 'Sparkle.framework')
+    if not op.exists(sparkle_framework_path):
+        print("Building Sparkle")
+        os.chdir(op.join('cocoa', 'Sparkle'))
+        print_and_do('make build')
+        os.chdir(op.join('..', '..'))
     print("Creating OS X app structure")
     app = cocoa_app()
     app_version = get_module_version('core')
@@ -154,7 +160,7 @@ def build_cocoa(dev):
     image_path = 'cocoa/dupeguru.icns'
     resources = [image_path, 'cocoa/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
     app.copy_resources(*resources, use_symlinks=dev)
-    app.copy_frameworks('build/Python', 'cocoalib/Sparkle.framework')
+    app.copy_frameworks('build/Python', sparkle_framework_path)
     print("Creating the run.py file")
     tmpl = open('cocoa/run_template.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app.dest)

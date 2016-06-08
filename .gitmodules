@@ -7,3 +7,6 @@
 [submodule "cocoalib"]
 	path = cocoalib
 	url = https://github.com/hsoft/cocoalib.git
+[submodule "cocoa/Sparkle"]
+	path = cocoa/Sparkle
+	url = https://github.com/sparkle-project/Sparkle.git
