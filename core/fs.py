@@ -121,7 +121,10 @@ class File:
             try:
                 fp = self.path.open('rb')
                 md5 = hashlib.md5()
-                CHUNK_SIZE = 8192
+                # The goal here is to not run out of memory on really big files. However, the chunk
+                # size has to be large enough so that the python loop isn't too costly in terms of
+                # CPU.
+                CHUNK_SIZE = 1024 * 1024 # 1 mb
                 filedata = fp.read(CHUNK_SIZE)
                 while filedata:
                     md5.update(filedata)
