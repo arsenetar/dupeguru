@@ -72,13 +72,14 @@ class Scanner:
         self.discarded_file_count = 0
 
     def _getmatches(self, files, j):
-        if self.size_threshold:
+        if self.size_threshold or self.scan_type in {ScanType.Contents, ScanType.Folders}:
             j = j.start_subjob([2, 8])
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size # pre-read, makes a smoother progress if read here (especially for bundles)
-            files = [f for f in files if f.size >= self.size_threshold]
+            if self.size_threshold:
+                files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in {ScanType.Contents, ScanType.Folders}:
-            return engine.getmatches_by_contents(files, sizeattr='size', partial=False, j=j)
+            return engine.getmatches_by_contents(files, j=j)
         else:
             j = j.start_subjob([2, 8])
             kw = {}
@@ -98,7 +99,7 @@ class Scanner:
                 ],
             }[self.scan_type]
             for f in j.iter_with_progress(files, tr("Read metadata of %d/%d files")):
-                logging.debug("Reading metadata of {}".format(str(f.path)))
+                logging.debug("Reading metadata of %s", f.path)
                 f.words = func(f)
             return engine.getmatches(files, j=j, **kw)
 

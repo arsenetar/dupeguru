@@ -246,21 +246,15 @@ def getmatches(
         return result
     return result
 
-def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob):
+def getmatches_by_contents(files, j=job.nulljob):
     """Returns a list of :class:`Match` within ``files`` if their contents is the same.
 
-    :param str sizeattr: attibute name of the :class:`~core.fs.file` that returns the size of the
-                         file to use for comparison.
-    :param bool partial: if true, will use the "md5partial" attribute instead of "md5" to compute
-                         contents hash.
     :param j: A :ref:`job progress instance <jobs>`.
     """
-    j = j.start_subjob([2, 8])
     size2files = defaultdict(set)
-    for file in j.iter_with_progress(files, tr("Read size of %d/%d files")):
-        filesize = getattr(file, sizeattr)
-        if filesize:
-            size2files[filesize].add(file)
+    for f in files:
+        if f.size:
+            size2files[f.size].add(f)
     del files
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
@@ -271,7 +265,7 @@ def getmatches_by_contents(files, sizeattr='size', partial=False, j=job.nulljob)
             if first.is_ref and second.is_ref:
                 continue # Don't spend time comparing two ref pics together.
             if first.md5partial == second.md5partial:
-                if partial or first.md5 == second.md5:
+                if first.md5 == second.md5:
                     result.append(Match(first, second, 100))
         j.add_progress(desc=tr("%d matches found") % len(result))
     return result
