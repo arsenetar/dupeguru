@@ -81,7 +81,7 @@ def package_debian_distribution(distribution):
 
 def package_debian():
     print("Packaging for Ubuntu")
-    for distribution in ['trusty', 'utopic']:
+    for distribution in ['trusty', 'xenial']:
         package_debian_distribution(distribution)
 
 def package_arch():
