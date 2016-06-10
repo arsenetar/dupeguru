@@ -1,3 +1,17 @@
+=== 4.0.0 (2016-06-10)
+
+* Merge Standard, Music and Picture editions in the same application!
+* Improve documentation. (#294)
+* Add Polish, Korean, Spanish and Dutch localizations.
+* qt: Fix wrong use_regexp option propagation to core. (#295)
+* qt: Fix progress window mistakenly showing up on startup. (#357)
+* Bump Python requirement to v3.4.
+* Drop Windows support, maybe temporarily.
+  `Details <https://www.hardcoded.net/archive2015#2015-11-01>`_
+* cocoa: Drop iPhoto, Aperture and iTunes support. Was unmaintained and obsolete.
+* Drop "Audio Contents" scan type. Was confusing and seldom useful.
+* Change license to GPLv3
+
 === 3.9.1 (2014-10-17)
 
 * Fixed ``AttributeError: 'ComboboxModel' object has no attribute 'reset'``. [Linux, Windows] (#254)
