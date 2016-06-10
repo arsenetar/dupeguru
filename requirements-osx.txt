@@ -1,5 +1,4 @@
 -r requirements.txt
 objp>=1.3.1
-appscript>=1.0.0
 xibless>=0.4.1
 
