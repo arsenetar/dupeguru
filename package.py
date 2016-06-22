@@ -6,6 +6,7 @@
 
 import os
 import os.path as op
+import stat
 import compileall
 import shutil
 import json
@@ -59,7 +60,7 @@ def package_debian_distribution(distribution):
     debdest = op.join(destpath, 'debian')
     debskel = op.join('pkg', 'debian')
     os.makedirs(debdest)
-    debopts = json.load(open(op.join(debskel, 'se.json')))
+    debopts = json.load(open(op.join(debskel, 'dupeguru.json')))
     for fn in ['compat', 'copyright', 'dirs', 'rules']:
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, 'control'), op.join(debdest, 'control'), **debopts)
@@ -95,7 +96,7 @@ def package_arch():
     ]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join('images', 'dgse_logo_128.png'), srcpath)
-    debopts = json.load(open(op.join('pkg', 'arch', 'se.json')))
+    debopts = json.load(open(op.join('pkg', 'arch', 'dupeguru.json')))
     filereplace(op.join('pkg', 'arch', 'dupeguru.desktop'), op.join(srcpath, 'dupeguru.desktop'), **debopts)
 
 def package_source_tgz():
@@ -111,6 +112,28 @@ def package_source_tgz():
     print_and_do('tar -rf {} deps'.format(dest))
     print_and_do('gzip {}'.format(dest))
 
+def package_runtime():
+    app_version = get_module_version('core')
+    version = '{}'.format(app_version)
+    destpath = op.join('build', 'dupeguru-{}'.format(version))
+    sharepath = op.join(destpath, 'usr/share/dupeguru')
+    apppath = op.join(destpath, 'usr/share/applications')
+    binpath = op.join(destpath, 'usr/bin')
+    packages = [
+        'hscommon', 'core', 'qtlib', 'qt', 'send2trash', 'hsaudiotag'
+    ]
+    copy_files_to_package(sharepath, packages, with_so=True)
+    st = os.stat(op.join(sharepath, 'run.py'))
+    os.chmod(op.join(sharepath, 'run.py'), st.st_mode | stat.S_IEXEC)
+    os.mkdir(binpath)
+    os.symlink(op.join('/usr/share/dupeguru/run.py'), op.join(binpath, 'dupeguru'))
+    shutil.copy(op.join('images', 'dgse_logo_128.png'), sharepath)
+
+    debskel = op.join('pkg', 'debian')
+    debopts = json.load(open(op.join(debskel, 'dupeguru.json')))
+    os.mkdir(apppath)
+    filereplace(op.join(debskel, 'dupeguru.desktop'), op.join(apppath, 'dupeguru.desktop'), **debopts)
+
 def main():
     args = parse_args()
     ui = 'cocoa' if ISOSX else 'qt'
@@ -118,6 +141,12 @@ def main():
         print("Creating source package for dupeGuru")
         package_source_tgz()
         return
+
+    if args.runtime_pkg:
+        print("Creating runtime package for dupeGuru")
+        package_runtime()
+        return
+
     print("Packaging dupeGuru with UI {}".format(ui))
     if ui == 'cocoa':
         package_cocoa(args)
