@@ -19,3 +19,9 @@ cocoa/autogen
 /qt/*_rc.py
 /help/*/conf.py
 /help/*/changelog.rst
+
+debian/dupeguru
+debian/files
+debian/*.log
+debian/*-stamp
+debian/*.substvars
