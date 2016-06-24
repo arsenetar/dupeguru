@@ -20,5 +20,5 @@ setup(
     ext_modules = exts,
 )
 move_all('_block_qt*', op.join('src', 'qt', 'pe'))
-move_all('_cache*', op.join('src', 'core_pe'))
-move_all('_block*', op.join('src', 'core_pe'))
+move_all('_cache*', op.join('src', 'core/pe'))
+move_all('_block*', op.join('src', 'core/pe'))

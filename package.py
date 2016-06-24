@@ -59,7 +59,7 @@ def package_debian_distribution(distribution):
     debdest = op.join(destpath, 'debian')
     debskel = op.join('pkg', 'debian')
     os.makedirs(debdest)
-    debopts = json.load(open(op.join(debskel, 'se.json')))
+    debopts = json.load(open(op.join(debskel, 'dupeguru.json')))
     for fn in ['compat', 'copyright', 'dirs', 'rules']:
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, 'control'), op.join(debdest, 'control'), **debopts)
@@ -95,7 +95,7 @@ def package_arch():
     ]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join('images', 'dgse_logo_128.png'), srcpath)
-    debopts = json.load(open(op.join('pkg', 'arch', 'se.json')))
+    debopts = json.load(open(op.join('pkg', 'arch', 'dupeguru.json')))
     filereplace(op.join('pkg', 'arch', 'dupeguru.desktop'), op.join(srcpath, 'dupeguru.desktop'), **debopts)
 
 def package_source_tgz():
