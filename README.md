@@ -122,8 +122,13 @@ With your virtualenv activated, you can build and run dupeGuru with these comman
     $ python run.py
 
 You can also package dupeGuru into an installable package with:
-    
+
     $ python package.py
+
+
+### Generate Ubuntu packages
+
+    $ bash -c "pyvenv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt && python3 build.py --clean && python3 package.py"
 
 ### Running tests
 

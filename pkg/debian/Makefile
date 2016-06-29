@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 all:
-	dh_prep  
+	dh_prep
 	dh_installdirs
 	touch build_pe_modules.py
 	python3 build_pe_modules.py

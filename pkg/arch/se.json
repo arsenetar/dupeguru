@@ -1,7 +1,0 @@
-{
-	"pkgname": "dupeguru-se",
-	"longname": "dupeGuru",
-	"execname": "dupeguru-se",
-	"arch": "all",
-	"iconpath": "/usr/share/dupeguru-se/dgse_logo_128.png"
-}
