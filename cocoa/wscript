@@ -30,6 +30,7 @@ def configure(conf):
     conf.check_python_headers()
     conf.env.FRAMEWORK_COCOA = 'Cocoa'
     conf.env.ARCH_COCOA = ['x86_64']
+    conf.env.MACOSX_DEPLOYMENT_TARGET = '10.8'
     conf.env.CFLAGS = ['-F'+op.abspath('Sparkle/build/Release')]
     conf.env.LINKFLAGS = ['-F'+op.abspath('Sparkle/build/Release')]
 
