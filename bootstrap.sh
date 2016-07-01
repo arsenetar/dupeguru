@@ -13,12 +13,6 @@ if [ -d ".git" ]; then
     git submodule update
 fi
 
-if [ -d "deps" ]; then
-    # We have a collection of dependencies in our source package. We might as well use it instead
-    # of downloading it from PyPI.
-    PIPARGS="--no-index --find-links=deps"
-fi
-
 if [ ! -d "env" ]; then
     echo "No virtualenv. Creating one"
     # We need a "system-site-packages" env to have PyQt, but we also need to ensure a local pip
@@ -37,10 +31,10 @@ source env/bin/activate
 
 echo "Installing pip requirements"
 if [ "$(uname)" == "Darwin" ]; then
-    ./env/bin/pip install $PIPARGS -r requirements-osx.txt
+    ./env/bin/pip install -r requirements-osx.txt
 else
     ./env/bin/python -c "import PyQt5" >/dev/null 2>&1 || { echo >&2 "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
-    ./env/bin/pip install $PIPARGS -r requirements.txt
+    ./env/bin/pip install -r requirements.txt
 fi
 
 echo "Bootstrapping complete! You can now configure, build and run dupeGuru with:"

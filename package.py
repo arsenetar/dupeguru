@@ -99,16 +99,11 @@ def package_arch():
     filereplace(op.join('pkg', 'arch', 'dupeguru.desktop'), op.join(srcpath, 'dupeguru.desktop'), **debopts)
 
 def package_source_tgz():
-    if not op.exists('deps'):
-        print("Downloading PyPI dependencies")
-        print_and_do('./download_deps.sh')
     print("Creating git archive")
     app_version = get_module_version('core')
     name = 'dupeguru-src-{}.tar'.format(app_version)
     dest = op.join('build', name)
     print_and_do('git archive -o {} HEAD'.format(dest))
-    print("Adding dependencies and wrapping up")
-    print_and_do('tar -rf {} deps'.format(dest))
     print_and_do('gzip {}'.format(dest))
 
 def main():
