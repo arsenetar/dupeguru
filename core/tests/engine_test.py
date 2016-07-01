@@ -455,8 +455,8 @@ class TestCaseGetMatches:
 
     def test_dont_recurse_do_match(self):
         # with nosetests, the stack is increased. The number has to be high enough not to be failing falsely
-        sys.setrecursionlimit(100)
-        files = [NamedObject('foo bar') for i in range(101)]
+        sys.setrecursionlimit(200)
+        files = [NamedObject('foo bar') for i in range(201)]
         try:
             getmatches(files)
         except RuntimeError:
