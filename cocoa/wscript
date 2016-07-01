@@ -21,7 +21,7 @@ def configure(conf):
     # I did a lot of fiddling-around, but I didn't find how to tell WAF the Python library name
     # to look for without making the whole compilation process fail, so I just create a symlink
     # with the name WAF is looking for. 
-    versioned_dylib_path = '../build/libpython{}.dylib'.format(sys.version[:3])
+    versioned_dylib_path = '../build/libpython{}m.dylib'.format(sys.version[:3])
     if not op.exists(versioned_dylib_path):
         os.symlink('../build/Python', versioned_dylib_path)
     # The rest is standard WAF code that you can find the the python and macapp demos.
