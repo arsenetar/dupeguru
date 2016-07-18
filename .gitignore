@@ -1,5 +1,6 @@
 .DS_Store
 __pycache__
+*.pyd
 *.so
 *.mo
 *.waf*
