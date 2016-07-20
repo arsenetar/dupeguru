@@ -19,7 +19,7 @@ from .preferences import Preferences
 tr = trget('ui')
 
 SUPPORTED_LANGUAGES = [
-    'en', 'fr', 'de', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi', 'pl_PL', 'ko', 'es',
+    'en', 'fr', 'de', 'el', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi', 'pl_PL', 'ko', 'es',
     'nl',
 ]
 
@@ -173,6 +173,7 @@ class PreferencesDialogBase(QDialog):
         if lang != oldlang:
             QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
         self.app.prefs.language = lang
+        print(oldlang)
         self._save(prefs, ischecked)
 
     def resetToDefaults(self):
