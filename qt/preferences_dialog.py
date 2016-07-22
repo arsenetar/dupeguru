@@ -173,7 +173,6 @@ class PreferencesDialogBase(QDialog):
         if lang != oldlang:
             QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
         self.app.prefs.language = lang
-        print(oldlang)
         self._save(prefs, ischecked)
 
     def resetToDefaults(self):
