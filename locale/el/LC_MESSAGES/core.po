@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2016-07-22 11:30+0000\n"
+"Last-Translator: 1kakarot"
 
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -12,17 +12,20 @@ msgstr ""
 
 #: core/app.py:39
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "Δεν υπάρχουν μαρκαρισμένα διπλότυπα. Δεν έγινε τίποτα."
 
 #: core/app.py:40
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "Δεν υπάρχουν επιλεγμένα διπλότυπα. Δεν έγινε τίποτα."
 
 #: core/app.py:41
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
+"Πρόκειται να ανοίξετε πολλά αρχεία ταυτόχρονα. Ανάλογα με το ποιο πρόγραμμα ανοίγουν αυτά"
+"τα αρχεία, κάτι τέτοιο μπορεί να προκαλέσει ένα μικρό χάος. Συνέχεια;"
+
 
 #: core/app.py:57
 msgid "Scanning for duplicates"
@@ -90,19 +93,19 @@ msgstr ""
 
 #: core/app.py:426
 msgid "copy"
-msgstr ""
+msgstr "αντιγραφή"
 
 #: core/app.py:426
 msgid "move"
-msgstr ""
+msgstr "μετακίνηση"
 
 #: core/app.py:427
 msgid "Select a directory to {} marked files to"
-msgstr ""
+msgstr "Επιλέξτε ένα φάκελο {} για τα μαρκαρισμένα αρχεία"
 
 #: core/app.py:464
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Επιλέξτε έναν προορισμό για το εξαγόμενο CSV σας"
 
 #: core/app.py:489
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -115,7 +118,7 @@ msgstr "Πρόκειται να αφαιρέσετε %d αρχεία από τα
 
 #: core/app.py:688
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} ομάδες διπλοτύπων άλλαξαν από το επαναπροσδιορισμό."
 
 #: core/app.py:716
 msgid "Collecting files to scan"
@@ -131,7 +134,7 @@ msgstr "%s (%d απορρίφθηκαν)"
 
 #: core/engine.py:220 core/engine.py:265
 msgid "0 matches found"
-msgstr "Δεν βρέθηκαν διπλότυπα"
+msgstr "0 διπλότυπα βρέθηκαν"
 
 #: core/engine.py:238 core/engine.py:273
 msgid "%d matches found"
@@ -147,7 +150,7 @@ msgstr "Ομαδοποιημένα %d/%d διπλότυπα"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Στέλνετε {} αρχεία στα σκουπίδια."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -156,7 +159,7 @@ msgstr ""
 
 #: core/prioritize.py:68
 msgid "None"
-msgstr ""
+msgstr "Καμμία"
 
 #: core/prioritize.py:96
 msgid "Ends with number"
@@ -168,11 +171,11 @@ msgstr "Δεν λήγει με αριθμό"
 
 #: core/prioritize.py:98
 msgid "Longest"
-msgstr ""
+msgstr "Μεγαλύτερο"
 
 #: core/prioritize.py:99
 msgid "Shortest"
-msgstr ""
+msgstr "Μικρότερο"
 
 #: core/prioritize.py:132
 msgid "Highest"
@@ -233,4 +236,4 @@ msgstr "Πιστοποίηση %d/%d ταυτόσημων"
 
 #: core_pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "Ανάγνωση EXIF %d/%d εικόνες"

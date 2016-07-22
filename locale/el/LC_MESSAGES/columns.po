@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-11-20 11:53+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"PO-Revision-Date: 2016-07-22 11:30+0000\n"
+"Last-Translator: 1kakarot"
 
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -119,4 +119,4 @@ msgstr "Μέγεθος (KB)"
 
 #: core_pe/result_table.py:23
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Χρονοσήμανση EXIF"
