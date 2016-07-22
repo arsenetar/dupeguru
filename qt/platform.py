@@ -1,9 +1,7 @@
-# Created By: Virgil Dupras
-# Created On: 2009-09-27
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
-# 
-# This software is licensed under the "GPLv3" License as described in the "LICENSE" file, 
-# which should be included with this package. The terms are also available at 
+# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os.path as op
@@ -11,8 +9,8 @@ from hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
 
 if op.exists(__file__):
     # We want to get the absolute path or our root folder. We know that in that folder we're
-    # inside qt/base, so we just fo back two levels.
-    BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..', '..'))
+    # inside qt/, so we just go back one level.
+    BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..'))
 else:
     # We're under a freezed environment. Our base path is ''.
     BASE_PATH = ''
