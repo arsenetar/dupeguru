@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
 "PO-Revision-Date: 2016-07-22 11:30+0000\n"
-"Last-Translator: 1kakarot"
+"Last-Translator: 1kakarot\n"
 
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -13,6 +13,10 @@ msgstr ""
 #: cocoa/inter/app_me.py:34
 msgid "Removing dead tracks from your iTunes Library"
 msgstr "Αφαίρεση νεκρών κομματιών από την βιβλιοθήκη σας iTunes"
+
+#: qt/directories_dialog.py:116
+msgid "Application Mode:"
+msgstr "Λειτουργία εφαρμογής:"
 
 #: cocoa/inter/app_me.py:35
 msgid "Scanning the iTunes Library"
@@ -186,7 +190,7 @@ msgstr "Επιλέξτε τους φακέλους για να σαρώσετε 
 
 #: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Load Results"
-msgstr "Φόρτωησ αποτελεσμάτων"
+msgstr "Φόρτωση αποτελεσμάτων"
 
 #: qt/base/directories_dialog.py:135 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Scan"
@@ -314,7 +318,7 @@ msgid ""
 msgstr ""
 "Προσθέστε κριτήρια στο πλαίσιο δεξιά και κάντε κλικ στο κουμπί OK για να στείλετε "
 "τα διπλότυπα που αντιστοιχούν καλύτερα σε αυτά τα κριτήρια, στην αντίστοιχη θέση αναφοράς "
-"των ομάδων τους. "Διαβάστε το αρχείο βοήθειας για περισσότερες πληροφορίες."
+"των ομάδων τους. Διαβάστε το αρχείο βοήθειας για περισσότερες πληροφορίες."
 
 #: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -328,7 +332,7 @@ msgid ""
 msgstr ""
 "Υπήρχαν προβλήματα επεξεργασίας για κάποιο (ή όλα) από τα αρχεία. Η αιτία των"
 "Προβλημάτων περιγράφεται στον παρακάτω πίνακα. Τα εν λόγω αρχεία δεν "
-"Αφαιρέθηκαν από τα αποτελέσματα σας.""
+"Αφαιρέθηκαν από τα αποτελέσματα σας."
 
 #: qt/base/problem_dialog.py:52
 msgid "Reveal Selected"
