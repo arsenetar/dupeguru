@@ -21,7 +21,7 @@ from hscommon.build import (
     collect_stdlib_dependencies
 )
 from hscommon import loc
-from hscommon.plat import ISOSX
+from hscommon.plat import ISOSX, ISLINUX, ISWINDOWS
 from hscommon.util import ensure_folder, delete_files_with_pattern
 
 def parse_args():
@@ -204,6 +204,15 @@ def build_localizations(ui):
     if op.exists(locale_dest):
         shutil.rmtree(locale_dest)
     shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
+
+
+
+
+
+
+
+
+
 
 def build_updatepot():
     if ISOSX:
