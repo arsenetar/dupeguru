@@ -1,0 +1,122 @@
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: dupeGuru\n"
+"PO-Revision-Date: 2016-07-22 11:30+0000\n"
+"Last-Translator: 1kakarot\n"
+
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/gui/ignore_list_table.py:18 core/gui/ignore_list_table.py:19
+#: core/gui/problem_table.py:17
+msgid "File Path"
+msgstr "Διαδρομή αρχείου"
+
+#: core/gui/problem_table.py:18
+msgid "Error Message"
+msgstr "Μήνυμα σφάλματος"
+
+#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
+#: core_se/result_table.py:21
+msgid "Kind"
+msgstr "Τύπος"
+
+#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
+#: core_se/result_table.py:19
+msgid "Folder"
+msgstr "Φάκελος"
+
+#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
+#: core_se/result_table.py:18
+msgid "Filename"
+msgstr "Όνομα αρχείου"
+
+#: core/prioritize.py:147
+msgid "Size"
+msgstr "Μέγεθος-Διαστάσεις?"
+
+#: core/prioritize.py:153 core_me/result_table.py:25
+#: core_pe/result_table.py:24 core_se/result_table.py:22
+msgid "Modification"
+msgstr "Τροποποίηση"
+
+#: core_me/prioritize.py:16
+msgid "Duration"
+msgstr "Διάρκεια"
+
+#: core_me/prioritize.py:22 core_me/result_table.py:22
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: core_me/prioritize.py:28
+msgid "Samplerate"
+msgstr ""
+
+#: core_me/result_table.py:20
+msgid "Size (MB)"
+msgstr "Μέγεθος (MB)"
+
+#: core_me/result_table.py:21
+msgid "Time"
+msgstr "Χρόνος"
+
+#: core_me/result_table.py:23
+msgid "Sample Rate"
+msgstr "Ρυθμός δειγματοληψίας"
+
+#: core_me/result_table.py:26
+msgid "Title"
+msgstr "Τίτλος"
+
+#: core_me/result_table.py:27
+msgid "Artist"
+msgstr "Καλλιτέχνης"
+
+#: core_me/result_table.py:28
+msgid "Album"
+msgstr "Αλμπουμ"
+
+#: core_me/result_table.py:29
+msgid "Genre"
+msgstr "Είδος"
+
+#: core_me/result_table.py:30
+msgid "Year"
+msgstr "Έτος"
+
+#: core_me/result_table.py:31
+msgid "Track Number"
+msgstr "Αριθμός κομματιού"
+
+#: core_me/result_table.py:32
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: core_me/result_table.py:33 core_pe/result_table.py:25
+#: core_se/result_table.py:23
+msgid "Match %"
+msgstr "Ταύτιση %"
+
+#: core_me/result_table.py:34 core_se/result_table.py:24
+msgid "Words Used"
+msgstr "Χρησιμοποιημένες λέξεις"
+
+#: core_me/result_table.py:35 core_pe/result_table.py:26
+#: core_se/result_table.py:25
+msgid "Dupe Count"
+msgstr "Αριθμός διπλοτύπων"
+
+#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+msgid "Dimensions"
+msgstr "Διαστάσεις"
+
+#: core_pe/result_table.py:20 core_se/result_table.py:20
+msgid "Size (KB)"
+msgstr "Μέγεθος (KB)"
+
+#: core_pe/result_table.py:23
+msgid "EXIF Timestamp"
+msgstr "Χρονοσήμανση EXIF"
