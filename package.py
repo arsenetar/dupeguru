@@ -112,7 +112,7 @@ def package_source_tgz():
         print("Adding submodule {} to archive".format(submodule))
         os.chdir(submodule)
         archive_path = op.join(build_path, '{}.tar'.format(submodule))
-        print_and_do('git archive -o {} HEAD'.format(archive_path))
+        print_and_do('git archive -o {} --prefix {}/ HEAD'.format(archive_path, submodule))
         os.chdir(base_path)
         print_and_do('tar -A {} -f {}'.format(archive_path, dest))
     print_and_do('gzip {}'.format(dest))
