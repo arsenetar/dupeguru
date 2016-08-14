@@ -102,8 +102,19 @@ def package_source_tgz():
     print("Creating git archive")
     app_version = get_module_version('core')
     name = 'dupeguru-src-{}.tar'.format(app_version)
-    dest = op.join('build', name)
+    base_path = os.getcwd()
+    build_path = op.join(base_path, 'build')
+    dest = op.join(build_path, name)
     print_and_do('git archive -o {} HEAD'.format(dest))
+    # Now, we need to include submodules
+    SUBMODULES = ['hscommon', 'qtlib', 'cocoalib']
+    for submodule in SUBMODULES:
+        print("Adding submodule {} to archive".format(submodule))
+        os.chdir(submodule)
+        archive_path = op.join(build_path, '{}.tar'.format(submodule))
+        print_and_do('git archive -o {} HEAD'.format(archive_path))
+        os.chdir(base_path)
+        print_and_do('tar -A {} -f {}'.format(archive_path, dest))
     print_and_do('gzip {}'.format(dest))
 
 def main():
