@@ -8,7 +8,7 @@ from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (
     QWidget, QFileDialog, QHeaderView, QVBoxLayout, QHBoxLayout, QTreeView,
     QAbstractItemView, QSpacerItem, QSizePolicy, QPushButton, QMainWindow, QMenuBar, QMenu, QLabel,
-    QApplication, QComboBox
+    QComboBox
 )
 from PyQt5.QtGui import QPixmap, QIcon
 
@@ -232,7 +232,7 @@ class DirectoriesDialog(QMainWindow):
             if not self.app.confirm(title, msg):
                 event.ignore()
         if event.isAccepted():
-            QApplication.quit()
+            self.app.shutdown()
 
     #--- Events
     def addFolderTriggered(self):

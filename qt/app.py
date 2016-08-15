@@ -7,7 +7,7 @@
 import sys
 import os.path as op
 
-from PyQt5.QtCore import QTimer, QObject, QCoreApplication, QUrl, pyqtSignal
+from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
 
@@ -73,7 +73,6 @@ class DupeGuru(QObject):
         # In some circumstances, the nag is hidden by other window, which may make the user think
         # that the application haven't launched.
         QTimer.singleShot(0, self.finishedLaunching)
-        QCoreApplication.instance().aboutToQuit.connect(self.application_will_terminate)
 
     def _setupActions(self):
         # Setup actions that are common to both the directory dialog and the results window.
@@ -158,6 +157,12 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             self.resultWindow.show()
 
+    def shutdown(self):
+        self.willSavePrefs.emit()
+        self.prefs.save()
+        self.model.save()
+        QApplication.quit()
+
     #--- Signals
     willSavePrefs = pyqtSignal()
 
@@ -169,11 +174,6 @@ class DupeGuru(QObject):
                 "scanning have accented letters, you'll probably get a crash. It is advised that "\
                 "you set your system locale properly."
             QMessageBox.warning(self.directories_dialog, "Wrong Locale", msg)
-
-    def application_will_terminate(self):
-        self.willSavePrefs.emit()
-        self.prefs.save()
-        self.model.save()
 
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")
