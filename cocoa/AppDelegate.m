@@ -352,8 +352,12 @@ http://www.gnu.org/licenses/gpl-3.0.html
     if (_detailsPanel != nil) {
         [_detailsPanel release];
     }
-    _resultWindow = [[ResultWindow alloc] initWithParentApp:self];
+    // Warning: creation order is important
+    // If the details panel is not created first and that there are some results in the model
+    // (happens if we load results), a dupe selection event triggers a details refresh in the
+    // core before we have the chance to initialize it, and then we crash.
     _detailsPanel = [self createDetailsPanel];
+    _resultWindow = [[ResultWindow alloc] initWithParentApp:self];
 }
 - (void)showResultsWindow
 {
