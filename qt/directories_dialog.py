@@ -265,7 +265,7 @@ class DirectoriesDialog(QMainWindow):
     def loadResultsTriggered(self):
         title = tr("Select a results file to load")
         files = ';;'.join([tr("dupeGuru Results (*.dupeguru)"), tr("All Files (*.*)")])
-        destination = QFileDialog.getOpenFileName(self, title, '', files)
+        destination = QFileDialog.getOpenFileName(self, title, '', files)[0]
         if destination:
             self.app.model.load_from(destination)
             self.app.recentResults.insertItem(destination)
