@@ -31,9 +31,10 @@ contribution opportunity.
 
 ### Windows maintainer wanted
 
-As [described on my website][nowindows], v3.9.x/6.8.x/2.10.x series of dupeGuru are the last ones
-to support Windows unless someone steps up to maintain it. If you're a Windows developer and are
-interested in taking this task, [don't hesitate to let me know][contrib-issue].
+As [described on my website][nowindows], dupeGuru v4.0 dropped Windows support
+because there isn't anyone to bear the burden of Windows maintenance.  If
+you're a Windows developer and are interested in taking this task, [don't
+hesitate to let me know][contrib-issue].
 
 ### OS X maintainer wanted
 
