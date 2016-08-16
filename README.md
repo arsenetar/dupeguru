@@ -66,11 +66,26 @@ git submodules:
 
 ## How to build dupeGuru from source
 
+### make
+
+If you're on linux, you can build the ap for local development with `make`:
+
+    $ make
+    $ make run
+
+The `Makefile` is a recent addition, however. You might have to fallback to the legacy build
+scripts.
+
+### Legacy build
+
+If you're on OS X or that if the `make` method didn't work, you can build dupeGuru with the
+legacy scripts.
+
 There's a bootstrap script that will make building very easy. There might be some things that you
 need to install manually on your system, but the bootstrap script will tell you when what you need
 to install. You can run the bootstrap with:
 
-    ./bootstrap.sh
+    $ ./bootstrap.sh
 
 and follow instructions from the script.
 
