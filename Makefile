@@ -4,16 +4,20 @@ REQ_MINOR_VERSION=4
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 pemodules_target = core/pe/_block.*.so
-mofiles_target = locale/fr/LC_MESSAGES/core.mo
 submodules_target = hscommon/__init__.py
 
+localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
+mofiles = $(patsubst %.po,%.mo,$(pofiles))
+
+vpath %.po $(localedirs)
+vpath %.mo $(localedirs)
 
 .PHONY : default
 default : run.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
-run.py : env $(mofiles_target) $(pemodules_target) qt/dg_rc.py
+run.py : env i18n $(pemodules_target) qt/dg_rc.py
 	cp qt/run_template.py run.py
 
 .PHONY : reqs
@@ -44,8 +48,11 @@ build/help : | env
 qt/dg_rc.py : qt/dg.qrc
 	pyrcc5 qt/dg.qrc > qt/dg_rc.py
 
-$(mofiles_target) : $(pofiles) | env
-	./env/bin/python build.py --loc
+.PHONY : i18n
+i18n: $(mofiles)
+
+%.mo : %.po
+	msgfmt -o $@ $<
 	
 $(pemodules_target) :
 	./env/bin/python -c 'import build; build.build_pe_modules("qt")'
