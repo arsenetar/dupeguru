@@ -37,4 +37,3 @@ Contents:
     reprioritize
     faq
     changelog
-    credits

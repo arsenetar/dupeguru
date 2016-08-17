@@ -35,7 +35,6 @@ Contents:
     faq
     developer/index
     changelog
-    credits
 
 Indices and tables
 ==================
