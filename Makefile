@@ -3,7 +3,6 @@ REQ_MINOR_VERSION=4
 
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
-pemodules_target = core/pe/_block.*.so
 submodules_target = hscommon/__init__.py
 
 localedirs = $(wildcard locale/*/LC_MESSAGES)
@@ -14,10 +13,10 @@ vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
 .PHONY : default
-default : run.py
+default : | run.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
-run.py : env i18n $(pemodules_target) qt/dg_rc.py
+run.py : | env i18n modules qt/dg_rc.py
 	cp qt/run_template.py run.py
 
 .PHONY : reqs
@@ -52,10 +51,22 @@ qt/dg_rc.py : qt/dg.qrc
 i18n: $(mofiles)
 
 %.mo : %.po
-	msgfmt -o $@ $<
-	
-$(pemodules_target) :
-	./env/bin/python -c 'import build; build.build_pe_modules("qt")'
+	msgfmt -o $@ $<	
+
+core/pe/_block.*.so : core/pe/modules/block.c core/pe/modules/common.c | env
+	./env/bin/python hscommon/build_ext.py $^ _block
+	mv _block.*.so core/pe
+
+core/pe/_cache.*.so : core/pe/modules/cache.c core/pe/modules/common.c | env
+	./env/bin/python hscommon/build_ext.py $^ _cache
+	mv _cache.*.so core/pe
+
+qt/pe/_block_qt.*.so : qt/pe/modules/block.c | env
+	./env/bin/python hscommon/build_ext.py $^ _block_qt
+	mv _block_qt.*.so qt/pe
+
+.PHONY: modules
+modules : core/pe/_block.*.so core/pe/_cache.*.so qt/pe/_block_qt.*.so
 
 .PHONY : mergepot
 mergepot :
@@ -66,7 +77,7 @@ normpo :
 	./env/bin/python build.py --normpo
 
 .PHONY : run
-run: run.py
+run: | run.py
 	./env/bin/python run.py
 
 .PHONY : clean
@@ -74,3 +85,4 @@ clean:
 	-rm run.py
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
+	-rm core/pe/*.so qt/pe/*.so
