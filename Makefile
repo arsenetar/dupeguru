@@ -19,6 +19,10 @@ default : | run.py
 run.py : | env i18n modules qt/dg_rc.py
 	cp qt/run_template.py run.py
 
+.PHONY : run
+run: | run.py
+	./env/bin/python run.py
+
 .PHONY : reqs
 reqs :
 	@ret=`${PYTHON} -c "import sys; print(int(sys.version_info[:2] >= (3, ${REQ_MINOR_VERSION})))"`; \
@@ -76,9 +80,9 @@ mergepot :
 normpo :
 	./env/bin/python build.py --normpo
 
-.PHONY : run
-run: | run.py
-	./env/bin/python run.py
+.PHONY : srcpkg
+srcpkg :
+	./scripts/srcpkg.sh
 
 .PHONY : clean
 clean:
