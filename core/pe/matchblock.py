@@ -135,7 +135,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     cache.close()
     return results
 
-def getmatches(pictures, cache_path, threshold=75, match_scaled=False, j=job.nulljob):
+def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
             return (None, p.is_ref)

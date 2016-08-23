@@ -13,7 +13,6 @@ from . import matchblock, matchexif
 class ScannerPE(Scanner):
     cache_path = None
     match_scaled = False
-    threshold = 75
 
     @staticmethod
     def get_scan_options():
@@ -24,7 +23,13 @@ class ScannerPE(Scanner):
 
     def _getmatches(self, files, j):
         if self.scan_type == ScanType.FuzzyBlock:
-            return matchblock.getmatches(files, self.cache_path, self.threshold, self.match_scaled, j)
+            return matchblock.getmatches(
+                files,
+                cache_path=self.cache_path,
+                threshold=self.min_match_percentage,
+                match_scaled=self.match_scaled,
+                j=j
+            )
         elif self.scan_type == ScanType.ExifTimestamp:
             return matchexif.getmatches(files, self.match_scaled, j)
         else:
