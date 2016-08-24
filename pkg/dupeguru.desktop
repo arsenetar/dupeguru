@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=dupeGuru
+Comment=Find duplicate files.
+Exec=dupeguru
+Icon=dupeguru
+Terminal=false
+Type=Application
+Categories=Utility;

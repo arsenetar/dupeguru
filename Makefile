@@ -1,10 +1,13 @@
 PYTHON=python3
 REQ_MINOR_VERSION=4
+PREFIX ?= /usr/local
+MAINDIR = ${PREFIX}/share/dupeguru
 
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 submodules_target = hscommon/__init__.py
 
+packages = hscommon qtlib core qt
 localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
 mofiles = $(patsubst %.po,%.mo,$(pofiles))
@@ -12,18 +15,18 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-.PHONY : default
-default : | run.py
+all : | run.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run.py : | env i18n modules qt/dg_rc.py
 	cp qt/run_template.py run.py
 
-.PHONY : run
 run: | run.py
 	./env/bin/python run.py
 
-.PHONY : reqs
+pyc:
+	${PYTHON} -m compileall ${packages}
+
 reqs :
 	@ret=`${PYTHON} -c "import sys; print(int(sys.version_info[:2] >= (3, ${REQ_MINOR_VERSION})))"`; \
 		if [ $${ret} -ne 1 ]; then \
@@ -51,7 +54,6 @@ build/help : | env
 qt/dg_rc.py : qt/dg.qrc
 	pyrcc5 qt/dg.qrc > qt/dg_rc.py
 
-.PHONY : i18n
 i18n: $(mofiles)
 
 %.mo : %.po
@@ -69,24 +71,39 @@ qt/pe/_block_qt.*.so : qt/pe/modules/block.c | env
 	./env/bin/python hscommon/build_ext.py $^ _block_qt
 	mv _block_qt.*.so qt/pe
 
-.PHONY: modules
 modules : core/pe/_block.*.so core/pe/_cache.*.so qt/pe/_block_qt.*.so
 
-.PHONY : mergepot
 mergepot :
 	./env/bin/python build.py --mergepot
 
-.PHONY : normpo
 normpo :
 	./env/bin/python build.py --normpo
 
-.PHONY : srcpkg
 srcpkg :
 	./scripts/srcpkg.sh
 
-.PHONY : clean
+install: build/help | all pyc
+	mkdir -p ${MAINDIR}
+	cp -rf ${packages} locale build/help ${MAINDIR}
+	cp -f run.py ${MAINDIR}/run.py
+	chmod 755 ${MAINDIR}/run.py
+	mkdir -p ${PREFIX}/bin
+	ln -sf ${MAINDIR}/run.py ${PREFIX}/bin/dupeguru
+	mkdir -p ${PREFIX}/share/applications
+	cp -f pkg/dupeguru.desktop ${PREFIX}/share/applications
+	mkdir -p ${PREFIX}/share/pixmaps
+	cp -f images/dgse_logo_128.png ${PREFIX}/share/pixmaps/dupeguru.png
+
+uninstall :
+	rm -rf "${MAINDIR}"
+	rm -f "${PREFIX}/bin/dupeguru"
+	rm -f "${PREFIX}/share/applications/dupeguru.desktop"
+	rm -f "${PREFIX}/share/pixmaps/dupeguru.png"
+
 clean:
 	-rm run.py
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.so qt/pe/*.so
+
+.PHONY : clean srcpkg normpo mergepot modules i18n reqs run pyc install uninstall all
