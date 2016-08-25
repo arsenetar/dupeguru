@@ -1,7 +1,9 @@
 PYTHON ?= python3
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
-MAINDIR = ${PREFIX}/share/dupeguru
+
+# If you're installing into a path that is not going to be the final path prefix (such as a
+# sandbox), set DESTDIR to that path.
 
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
@@ -83,22 +85,22 @@ srcpkg :
 	./scripts/srcpkg.sh
 
 install: build/help | all pyc
-	mkdir -p ${MAINDIR}
-	cp -rf ${packages} locale build/help ${MAINDIR}
-	cp -f run.py ${MAINDIR}/run.py
-	chmod 755 ${MAINDIR}/run.py
-	mkdir -p ${PREFIX}/bin
-	ln -sf ${MAINDIR}/run.py ${PREFIX}/bin/dupeguru
-	mkdir -p ${PREFIX}/share/applications
-	cp -f pkg/dupeguru.desktop ${PREFIX}/share/applications
-	mkdir -p ${PREFIX}/share/pixmaps
-	cp -f images/dgse_logo_128.png ${PREFIX}/share/pixmaps/dupeguru.png
+	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
+	cp -rf ${packages} locale build/help ${DESTDIR}${PREFIX}/share/dupeguru
+	cp -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	mkdir -p ${DESTDIR}${PREFIX}/bin
+	ln -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
+	mkdir -p ${DESTDIR}${PREFIX}/share/applications
+	cp -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
+	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
+	cp -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
 
 uninstall :
-	rm -rf "${MAINDIR}"
-	rm -f "${PREFIX}/bin/dupeguru"
-	rm -f "${PREFIX}/share/applications/dupeguru.desktop"
-	rm -f "${PREFIX}/share/pixmaps/dupeguru.png"
+	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
+	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru"
+	rm -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
+	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
 
 clean:
 	-rm run.py
