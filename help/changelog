@@ -1,3 +1,12 @@
+=== 4.0.1 (2016-08-24)
+
+* Add Greek localization, by Gabriel Koutilellis. (#382)
+* Fix localization base path. [qt] (#378)
+* Fix broken load results dialog. [qt]
+* Fix crash on load results. [cocoa] (#380)
+* Save preferences more predictably. [qt] (#379)
+* Fix picture mode's fuzzy block scanner threshold. (#387)
+
 === 4.0.0 (2016-07-01)
 
 * Merge Standard, Music and Picture editions in the same application!
