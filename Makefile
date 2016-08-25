@@ -1,5 +1,5 @@
-PYTHON=python3
-REQ_MINOR_VERSION=4
+PYTHON ?= python3
+REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 MAINDIR = ${PREFIX}/share/dupeguru
 
@@ -46,7 +46,7 @@ $(submodules_target) :
 env : | $(submodules_target) reqs
 	@echo "Creating our virtualenv"
 	${PYTHON} -m venv env --system-site-packages
-	./env/bin/pip install -r requirements.txt
+	./env/bin/python -m pip install -r requirements.txt
 
 build/help : | env
 	./env/bin/python build.py --doc
