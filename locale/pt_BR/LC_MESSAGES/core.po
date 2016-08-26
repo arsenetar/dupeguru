@@ -14,15 +14,15 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: core/app.py:39
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Não há duplicatas marcadas. Nada foi feito."
 
-#: core/app.py:40
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Não há duplicatas selecionadas. Nada foi feito."
 
-#: core/app.py:41
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -30,31 +30,27 @@ msgstr ""
 "Você está prestes a abrir muitos arquivos de uma vez. Problemas podem surgir"
 " dependendo de qual app seja usado para abri-los. Deseja continuar?"
 
-#: core/app.py:57
+#: core/app.py:65
 msgid "Scanning for duplicates"
 msgstr "Buscando por duplicatas"
 
-#: core/app.py:58
+#: core/app.py:66
 msgid "Loading"
 msgstr "Carregando"
 
-#: core/app.py:59
+#: core/app.py:67
 msgid "Moving"
 msgstr "Movendo"
 
-#: core/app.py:60
+#: core/app.py:68
 msgid "Copying"
 msgstr "Copiando"
 
-#: core/app.py:61
+#: core/app.py:69
 msgid "Sending to Trash"
 msgstr "Movendo para o Lixo"
 
-#: core/app.py:64
-msgid "Sending files to the recycle bin"
-msgstr "Movendo arquivos para o Lixo"
-
-#: core/app.py:290
+#: core/app.py:279
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -62,92 +58,88 @@ msgstr ""
 "Ainda há uma ação em andamento. Não é possível iniciar outra agora. Espere "
 "alguns segundos e tente novamente."
 
-#: core/app.py:297
+#: core/app.py:289
 msgid "No duplicates found."
 msgstr "Nenhuma duplicata encontrada."
 
-#: core/app.py:310
+#: core/app.py:304
 msgid "All marked files were copied successfully."
 msgstr "Todos os arquivos marcados foram copiados corretamente."
 
-#: core/app.py:311
+#: core/app.py:305
 msgid "All marked files were moved successfully."
 msgstr "Todos os arquivos marcados foram relocados corretamente."
 
-#: core/app.py:312
+#: core/app.py:306
 msgid "All marked files were successfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo corretamente."
 
-#: core/app.py:349
+#: core/app.py:368
 msgid "'{}' already is in the list."
 msgstr "‘{}’ já está na lista."
 
-#: core/app.py:351
+#: core/app.py:370
 msgid "'{}' does not exist."
 msgstr "‘{}’ não existe."
 
-#: core/app.py:360
+#: core/app.py:379
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "copy"
 msgstr "copiar"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "move"
 msgstr "mover"
 
-#: core/app.py:427
+#: core/app.py:451
 msgid "Select a directory to {} marked files to"
 msgstr "Selecione uma pasta para {} os arquivos marcados"
 
-#: core/app.py:464
+#: core/app.py:490
 msgid "Select a destination for your exported CSV"
 msgstr "Selecione uma pasta para o CSV exportado"
 
-#: core/app.py:489
+#: core/app.py:518
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Você não possui nenhum comando personalizado. Crie um nas preferências."
 
-#: core/app.py:641 core/app.py:654
+#: core/app.py:672 core/app.py:685
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Remover %d arquivo(s) dos resultados?"
 
-#: core/app.py:688
+#: core/app.py:719
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} grupos de duplicatas alterados ao repriorizar."
 
-#: core/app.py:716
+#: core/app.py:762
 msgid "Collecting files to scan"
 msgstr "Juntando arquivos para escanear"
 
-#: core/app.py:727
+#: core/app.py:751
 msgid "The selected directories contain no scannable file."
 msgstr "As pastas selecionadas não contém arquivos escaneáveis."
 
-#: core/app.py:768
+#: core/app.py:810
 msgid "%s (%d discarded)"
 msgstr "%s (%d rejeitado(s))"
 
-#: core/engine.py:220 core/engine.py:265
+#: core/engine.py:222 core/engine.py:262
 msgid "0 matches found"
 msgstr "0 resultados encontrados"
 
-#: core/engine.py:238 core/engine.py:273
+#: core/engine.py:240 core/engine.py:270
 msgid "%d matches found"
 msgstr "%d resultados encontrados"
 
-#: core/engine.py:258 core/scanner.py:79
+#: core/scanner.py:77
 msgid "Read size of %d/%d files"
 msgstr "Tamanho lido em %d/%d arquivos"
-
-#: core/engine.py:464
-msgid "Grouped %d/%d matches"
-msgstr "%d/%d resultados agrupados"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
@@ -193,46 +185,89 @@ msgstr "Mais recente"
 msgid "Oldest"
 msgstr "Mais antigo"
 
-#: core/results.py:126
+#: core/results.py:129
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) duplicatas marcadas."
 
-#: core/results.py:133
+#: core/results.py:136
 msgid " filter: %s"
 msgstr " filtro: %s"
 
-#: core/scanner.py:99
+#: core/scanner.py:101
 msgid "Read metadata of %d/%d files"
 msgstr "Metadados lidos em %d/%d arquivos"
 
-#: core/scanner.py:130
-msgid "Removing false matches"
-msgstr "Removendo resultados falsos"
-
-#: core/scanner.py:154
-msgid "Processed %d/%d matches against the ignore list"
-msgstr "%d/%d resultados processados em oposição à lista Ignorar"
-
-#: core/scanner.py:176
-msgid "Doing group prioritization"
-msgstr "Executando priorização de grupo"
-
-#: core_pe/matchblock.py:61
+#: core/pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "%d/%d fotos analizadas"
 
-#: core_pe/matchblock.py:153
+#: core/pe/matchblock.py:156
 msgid "Performed %d/%d chunk matches"
 msgstr "%d/%d resultados em blocos executados"
 
-#: core_pe/matchblock.py:158
+#: core/pe/matchblock.py:161
 msgid "Preparing for matching"
 msgstr "Preparando para comparação"
 
-#: core_pe/matchblock.py:193
+#: core/pe/matchblock.py:206
 msgid "Verified %d/%d matches"
 msgstr "%d/%d resultados verificados"
 
-#: core_pe/matchexif.py:18
+#: core/pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF lido em %d/%d fotos"
+
+#: core/app.py:312
+msgid "Could not load file: {}"
+msgstr ""
+
+#: core/app.py:496 core/app.py:742
+msgid "Couldn't write to file: {}"
+msgstr ""
+
+#: core/me/scanner.py:19 core/se/scanner.py:15
+msgid "Filename"
+msgstr ""
+
+#: core/me/scanner.py:20
+msgid "Filename - Fields"
+msgstr ""
+
+#: core/me/scanner.py:21
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core/me/scanner.py:22
+msgid "Tags"
+msgstr ""
+
+#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+msgid "Contents"
+msgstr ""
+
+#: core/pe/scanner.py:21
+msgid "EXIF Timestamp"
+msgstr ""
+
+#: core/scanner.py:139
+msgid "Almost done! Fiddling with results..."
+msgstr ""
+
+#: core/se/scanner.py:17
+msgid "Folders"
+msgstr ""
+
+#~ msgid "Sending files to the recycle bin"
+#~ msgstr "Movendo arquivos para o Lixo"
+
+#~ msgid "Grouped %d/%d matches"
+#~ msgstr "%d/%d resultados agrupados"
+
+#~ msgid "Removing false matches"
+#~ msgstr "Removendo resultados falsos"
+
+#~ msgid "Processed %d/%d matches against the ignore list"
+#~ msgstr "%d/%d resultados processados em oposição à lista Ignorar"
+
+#~ msgid "Doing group prioritization"
+#~ msgstr "Executando priorização de grupo"

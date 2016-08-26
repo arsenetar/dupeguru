@@ -19,18 +19,18 @@ msgstr "Ֆայլի ճ-ը"
 msgid "Error Message"
 msgstr "Սխալի գրությունը"
 
-#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
-#: core_se/result_table.py:21
+#: core/me/result_table.py:24 core/pe/result_table.py:21 core/prioritize.py:63
+#: core/se/result_table.py:21
 msgid "Kind"
 msgstr "Տեսակ"
 
-#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
-#: core_se/result_table.py:19
+#: core/me/result_table.py:19 core/pe/result_table.py:19 core/prioritize.py:72
+#: core/se/result_table.py:19
 msgid "Folder"
 msgstr "Թղթապանակ"
 
-#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
-#: core_se/result_table.py:18
+#: core/me/result_table.py:18 core/pe/result_table.py:18 core/prioritize.py:88
+#: core/se/result_table.py:18
 msgid "Filename"
 msgstr "Ֆայլի անունը"
 
@@ -38,85 +38,85 @@ msgstr "Ֆայլի անունը"
 msgid "Size"
 msgstr "Չափը"
 
-#: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:24 core_se/result_table.py:22
+#: core/me/result_table.py:25 core/pe/result_table.py:24
+#: core/prioritize.py:153 core/se/result_table.py:22
 msgid "Modification"
 msgstr "Փոփոխությունը"
 
-#: core_me/prioritize.py:16
+#: core/me/prioritize.py:18
 msgid "Duration"
 msgstr "Տևողությունը"
 
-#: core_me/prioritize.py:22 core_me/result_table.py:22
+#: core/me/prioritize.py:24 core/me/result_table.py:22
 msgid "Bitrate"
 msgstr "Բիթրեյթը"
 
-#: core_me/prioritize.py:28
+#: core/me/prioritize.py:30
 msgid "Samplerate"
 msgstr "Սիմպլրեյթը"
 
-#: core_me/result_table.py:20
+#: core/me/result_table.py:20
 msgid "Size (MB)"
 msgstr "Չափը (ՄԲ)"
 
-#: core_me/result_table.py:21
+#: core/me/result_table.py:21
 msgid "Time"
 msgstr "Ժամանակը"
 
-#: core_me/result_table.py:23
+#: core/me/result_table.py:23
 msgid "Sample Rate"
 msgstr "Սեմփլրեյթը"
 
-#: core_me/result_table.py:26
+#: core/me/result_table.py:26
 msgid "Title"
 msgstr "Անունը"
 
-#: core_me/result_table.py:27
+#: core/me/result_table.py:27
 msgid "Artist"
 msgstr "Կատարողը"
 
-#: core_me/result_table.py:28
+#: core/me/result_table.py:28
 msgid "Album"
 msgstr "Ալբոմը"
 
-#: core_me/result_table.py:29
+#: core/me/result_table.py:29
 msgid "Genre"
 msgstr "Ժանրը"
 
-#: core_me/result_table.py:30
+#: core/me/result_table.py:30
 msgid "Year"
 msgstr "Տարին"
 
-#: core_me/result_table.py:31
+#: core/me/result_table.py:31
 msgid "Track Number"
 msgstr "Շավիղի համարը"
 
-#: core_me/result_table.py:32
+#: core/me/result_table.py:32
 msgid "Comment"
 msgstr "Մեկնաբանություն"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:25
-#: core_se/result_table.py:23
+#: core/me/result_table.py:33 core/pe/result_table.py:25
+#: core/se/result_table.py:23
 msgid "Match %"
 msgstr "Համընկնում %-ին"
 
-#: core_me/result_table.py:34 core_se/result_table.py:24
+#: core/me/result_table.py:34 core/se/result_table.py:24
 msgid "Words Used"
 msgstr "Բառ է օգտ."
 
-#: core_me/result_table.py:35 core_pe/result_table.py:26
-#: core_se/result_table.py:25
+#: core/me/result_table.py:35 core/pe/result_table.py:26
+#: core/se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Խաբկանքի ք-ը"
 
-#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+#: core/pe/prioritize.py:18 core/pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Չափերը"
 
-#: core_pe/result_table.py:20 core_se/result_table.py:20
+#: core/pe/result_table.py:20 core/se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Չափը (ԿԲ)"
 
-#: core_pe/result_table.py:23
+#: core/pe/result_table.py:23
 msgid "EXIF Timestamp"
 msgstr ""

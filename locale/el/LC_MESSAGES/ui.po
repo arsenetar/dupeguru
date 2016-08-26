@@ -4,831 +4,824 @@ msgstr ""
 "Project-Id-Version: dupeGuru\n"
 "PO-Revision-Date: 2016-07-22 11:30+0000\n"
 "Last-Translator: 1kakarot\n"
-
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cocoa/inter/app_me.py:34
-msgid "Removing dead tracks from your iTunes Library"
-msgstr "Αφαίρεση νεκρών κομματιών από την βιβλιοθήκη σας iTunes"
-
-#: qt/directories_dialog.py:116
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
 msgstr "Λειτουργία εφαρμογής:"
 
-#: cocoa/inter/app_me.py:35
-msgid "Scanning the iTunes Library"
-msgstr "Σάρωση της βιβλιοθήκης σας iTunes"
-
-#: cocoa/inter/app_me.py:158 cocoa/inter/app_pe.py:200
-msgid "Sending dupes to the Trash"
-msgstr "Αποστολή διπλοτύπων στα Σκουπίδια"
-
-#: cocoa/inter/app_me.py:160
-msgid "Talking to iTunes. Don't touch it!"
-msgstr "Μιλώντας στο iTunes. Μην το αγγίζετε!"
-
-#: cocoa/inter/app_me.py:195
-msgid ""
-"Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-msgstr ""
-"Η βιβλιοθήκη σας iTunes περιέχει %d νεκρά κομμάτια έτοιμα να αφαιρεθούν. Συνέχεια;"
-
-#: cocoa/inter/app_me.py:199
-msgid "You have no dead tracks in your iTunes Library"
-msgstr "Η βιβλιοθήκη σας iTunes δεν περιέχει νεκρά κομμάτια"
-
-#: cocoa/inter/app_me.py:217
-msgid "The iTunes application couldn't be found."
-msgstr "Η εφαρμογή iTunes δεν βρέθηκε."
-
-#: cocoa/inter/app_pe.py:202
-msgid "Talking to iPhoto. Don't touch it!"
-msgstr "Μιλώντας στο iPhoto. Μην το αγγίζετε!"
-
-#: cocoa/inter/app_pe.py:211
-msgid "Talking to Aperture. Don't touch it!"
-msgstr "Μιλώντας στο Aperture. Μην το αγγίζετε!"
-
-#: cocoa/inter/app_pe.py:284
-msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-msgstr "Οι διαγεγραμμένες φωτογραφίες από το Aperture στάλθηκαν σε ένα έργο που ονομάζεται \"dupeGuru Trash\"."
-
-#: cocoa/inter/app_pe.py:310
-msgid "The iPhoto application couldn't be found."
-msgstr "Η εφαρμογή iPhoto δεν βρέθηκε."
-
-#: qt/base/app.py:83
+#: qt/app.py:81
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: qt/base/app.py:84 qt/base/preferences_dialog.py:123
-msgid "Preferences"
-msgstr "Προτιμήσεις"
-
-#: qt/base/app.py:85 qt/base/ignore_list_dialog.py:32
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:83 qt/ignore_list_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Λίστα αγνόησης"
 
-#: qt/base/app.py:86 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
 msgstr "Βοήθεια για το dupeGuru"
 
-#: qt/base/app.py:87 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
 msgstr "Σχετικά με το dupeGuru"
 
-#: qt/base/app.py:88
-msgid "Check for Update"
-msgstr "Έλεγχος για αναβάθμιση"
-
-#: qt/base/app.py:89
+#: qt/app.py:87
 msgid "Open Debug Log"
 msgstr "Άνοιγμα αρχείου αποσφαλμάτωσης"
 
-#: qt/base/app.py:198
+#: qt/app.py:251
 msgid "{} file (*.{})"
 msgstr "{} αρχείο (*.{})"
 
-#: qt/base/deletion_options.py:30 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
 msgstr "Επιλογές διαγραφής"
 
-#: qt/base/deletion_options.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
 msgstr "Σύνδεση διαγεγραμμένων αρχείων"
 
-#: qt/base/deletion_options.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
-"Μετά την αντιγραφή ενός διπλοτύπου, τοποθετήστε ένα σύνδεσμο που στοχεύει το αρχείο"
-"αναφοράς για να αντικαταστήσετε το διαγεγραμμένο αρχείο."
+"Μετά την αντιγραφή ενός διπλοτύπου, τοποθετήστε ένα σύνδεσμο που στοχεύει το"
+" αρχείοαναφοράς για να αντικαταστήσετε το διαγεγραμμένο αρχείο."
 
-#: qt/base/deletion_options.py:42
+#: qt/deletion_options.py:44
 msgid "Hardlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:42
+#: qt/deletion_options.py:44
 msgid "Symlink"
 msgstr ""
 
-#: qt/base/deletion_options.py:46
+#: qt/deletion_options.py:48
 msgid " (unsupported)"
 msgstr " (δεν υποστηρίζεται)"
 
-#: qt/base/deletion_options.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
 msgstr "Απευθείας διαγραφή αρχείων"
 
-#: qt/base/deletion_options.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Αντί για την αποστολή αρχείων στα σκουπίδια, να διαγραφούν άμεσα. Αυτή η επιλογή είναι "
-"Συνήθως μια λύση, όταν η κανονική μέθοδο διαγραφής δεν λειτουργεί."
+"Αντί για την αποστολή αρχείων στα σκουπίδια, να διαγραφούν άμεσα. Αυτή η "
+"επιλογή είναι Συνήθως μια λύση, όταν η κανονική μέθοδο διαγραφής δεν "
+"λειτουργεί."
 
-#: qt/base/deletion_options.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
 msgstr "Προχωρήστε"
 
-#: qt/base/deletion_options.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
 msgstr "Χαρακτηριστικό"
 
-#: qt/base/details_table.py:16 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
 msgstr "Επιλεγμένα"
 
-#: qt/base/details_table.py:16 qt/base/directories_model.py:22
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/details_table.py:16 qt/directories_model.py:24
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
 msgstr "Αναφορά"
 
-#: qt/base/directories_dialog.py:58 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
 msgstr "Φόρτωση αποτελεσμάτων..."
 
-#: qt/base/directories_dialog.py:59 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:65 cocoa/en.lproj/Localizable.strings:0
 msgid "Results Window"
 msgstr "Παράθυρο αποτελεσμάτων"
 
-#: qt/base/directories_dialog.py:60
+#: qt/directories_dialog.py:66
 msgid "Add Folder..."
 msgstr "Προσθήκη φακέλου..."
 
-#: qt/base/directories_dialog.py:68 qt/base/result_window.py:77
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:74 qt/result_window.py:100
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "File"
 msgstr "Αρχείο"
 
-#: qt/base/directories_dialog.py:70 qt/base/result_window.py:85
+#: qt/directories_dialog.py:76 qt/result_window.py:108
 msgid "View"
 msgstr "Προβολή"
 
-#: qt/base/directories_dialog.py:72 qt/base/result_window.py:87
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:78 qt/result_window.py:110
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: qt/base/directories_dialog.py:74 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:80 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
 msgstr "Φόρτωση πρόσφατων αποτελεσμάτων"
 
-#: qt/base/directories_dialog.py:108 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Επιλέξτε τους φακέλους για να σαρώσετε και πατήστε το πλήκτρο \"Σάρωση\"."
 
-#: qt/base/directories_dialog.py:132 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
 msgstr "Φόρτωση αποτελεσμάτων"
 
-#: qt/base/directories_dialog.py:135 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
 msgstr "Σάρωση"
 
-#: qt/base/directories_dialog.py:179
+#: qt/directories_dialog.py:230
 msgid "Unsaved results"
 msgstr "Μη αποθηκευμένα αποτελέσματα"
 
-#: qt/base/directories_dialog.py:180 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr "Έχετε μη αποθηκευμένα αποτελέσματα, θέλετε πραγματικά να κλείσετε το πρόγραμμα;"
+msgstr ""
+"Έχετε μη αποθηκευμένα αποτελέσματα, θέλετε πραγματικά να κλείσετε το "
+"πρόγραμμα;"
 
-#: qt/base/directories_dialog.py:188 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
 msgstr "Επιλέξτε ένα φάκελο για να προσθέσετε στη λίστα σάρωσης"
 
-#: qt/base/directories_dialog.py:205 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
 msgstr "Επιλέξτε αρχείο αποτελεσμάτων προς φόρτωση"
 
-#: qt/base/directories_dialog.py:206
+#: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
 msgstr "Όλα τα αρχεία (*.*)"
 
-#: qt/base/directories_dialog.py:206 qt/base/result_window.py:287
+#: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
 msgstr "Αποτελέσματα dupeGuru (*.dupeguru)"
 
-#: qt/base/directories_dialog.py:217
+#: qt/directories_dialog.py:278
 msgid "Start a new scan"
 msgstr "Έναρξη νέας σάρωσης"
 
-#: qt/base/directories_dialog.py:218 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr "Έχετε μη αποθηκευμένα αποτελέσματα, θέλετε πραγματικά να συνεχίσετε;"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
 msgstr "Όνομα"
 
-#: qt/base/directories_model.py:21 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "State"
 msgstr "Κατάσταση"
 
-#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
 msgstr "Εξαιρούμενο"
 
-#: qt/base/directories_model.py:22 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: qt/base/ignore_list_dialog.py:45 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
 msgstr "Αφαίρεση επιλεγμένων"
 
-#: qt/base/ignore_list_dialog.py:46 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
 msgstr "Αφαίρεση"
 
-#: qt/base/ignore_list_dialog.py:47 qt/base/problem_dialog.py:57
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: qt/base/preferences_dialog.py:37 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
 msgstr "Είδος σάρωσης"
 
-#: qt/base/preferences_dialog.py:50
+#: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
 msgstr "Σκληρότητα φίλτρου"
 
-#: qt/base/preferences_dialog.py:76
+#: qt/preferences_dialog.py:69
 msgid "More Results"
 msgstr "Περισσότερα αποτελέσματα"
 
-#: qt/base/preferences_dialog.py:81
+#: qt/preferences_dialog.py:74
 msgid "Fewer Results"
 msgstr "Λιγότερα αποτελέσματα"
 
-#: qt/base/preferences_dialog.py:88
+#: qt/preferences_dialog.py:81
 msgid "Font size:"
 msgstr "Μέγεθος γραμματοσειράς:"
 
-#: qt/base/preferences_dialog.py:92
+#: qt/preferences_dialog.py:85
 msgid "Language:"
 msgstr "Γλώσσα:"
 
-#: qt/base/preferences_dialog.py:98 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
 msgstr "Αντιγραφή και μετακίνηση:"
 
-#: qt/base/preferences_dialog.py:101 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
 msgstr "Απευθείας στον προορισμό"
 
-#: qt/base/preferences_dialog.py:102 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
 msgstr "Ανασύνθεση σχετικής διαδρομής"
 
-#: qt/base/preferences_dialog.py:103 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
 msgstr "Ανασύνθεση απόλυτης διαδρομής"
 
-#: qt/base/preferences_dialog.py:106
+#: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 "Προσωποποιημένη εντολή (παράμετροι: %d για διπλότυπο, %r για αναφορά):"
 
-#: qt/base/preferences_dialog.py:184
+#: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "Πρέπει να γίνει επανεκκίνηση του dupeGuru για να ισχύσουν οι αλλαγές γλώσσας."
+msgstr ""
+"Πρέπει να γίνει επανεκκίνηση του dupeGuru για να ισχύσουν οι αλλαγές "
+"γλώσσας."
 
-#: qt/base/prioritize_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
 msgstr "Επαναπροσδιορισμός προτεραιότητας διπλοτύπων"
 
-#: qt/base/prioritize_dialog.py:75 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Προσθέστε κριτήρια στο πλαίσιο δεξιά και κάντε κλικ στο κουμπί OK για να στείλετε "
-"τα διπλότυπα που αντιστοιχούν καλύτερα σε αυτά τα κριτήρια, στην αντίστοιχη θέση αναφοράς "
-"των ομάδων τους. Διαβάστε το αρχείο βοήθειας για περισσότερες πληροφορίες."
+"Προσθέστε κριτήρια στο πλαίσιο δεξιά και κάντε κλικ στο κουμπί OK για να "
+"στείλετε τα διπλότυπα που αντιστοιχούν καλύτερα σε αυτά τα κριτήρια, στην "
+"αντίστοιχη θέση αναφοράς των ομάδων τους. Διαβάστε το αρχείο βοήθειας για "
+"περισσότερες πληροφορίες."
 
-#: qt/base/problem_dialog.py:31 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
 msgstr "Προβλήματα!"
 
-#: qt/base/problem_dialog.py:35 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"Υπήρχαν προβλήματα επεξεργασίας για κάποιο (ή όλα) από τα αρχεία. Η αιτία των"
-"Προβλημάτων περιγράφεται στον παρακάτω πίνακα. Τα εν λόγω αρχεία δεν "
+"Υπήρχαν προβλήματα επεξεργασίας για κάποιο (ή όλα) από τα αρχεία. Η αιτία "
+"τωνΠροβλημάτων περιγράφεται στον παρακάτω πίνακα. Τα εν λόγω αρχεία δεν "
 "Αφαιρέθηκαν από τα αποτελέσματα σας."
 
-#: qt/base/problem_dialog.py:52
+#: qt/problem_dialog.py:56
 msgid "Reveal Selected"
 msgstr "Αποκάλυψη επιλεγμένων"
 
-#: qt/base/result_window.py:44 qt/base/result_window.py:170
-#: qt/me/details_dialog.py:20 qt/pe/details_dialog.py:26
-#: qt/se/details_dialog.py:20 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: qt/base/result_window.py:45 qt/base/result_window.py:81
-#: qt/base/result_window.py:145 qt/base/result_window.py:169
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
+#: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
 msgstr "Ενέργειες"
 
-#: qt/base/result_window.py:46 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
 msgstr "Προβολή μόνο διπλοτύπων"
 
-#: qt/base/result_window.py:47 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
 msgstr "Προβολή τιμών διαφοράς (Delta)"
 
-#: qt/base/result_window.py:48
+#: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
 msgstr "Αποστολή των μαρκαρισμένων στον Κάδο Ανακύκλωσης..."
 
-#: qt/base/result_window.py:49 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
 msgstr "Μετακίνηση μαρκαρισμένων σε..."
 
-#: qt/base/result_window.py:50 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
 msgstr "Αντιγραφή μαρκαρισμένων σε..."
 
-#: qt/base/result_window.py:51 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
 msgstr "Αφαίρεση μαρκαρισμένων από τα αποτελέσματα"
 
-#: qt/base/result_window.py:52 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
 msgstr "Επαναπροσδιορισμός προτεραιότητας αποτελεσμάτων..."
 
-#: qt/base/result_window.py:53 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
 msgstr "Αφαίρεση επιλεγμένων από τα αποτελέσματα"
 
-#: qt/base/result_window.py:54 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
 msgstr "Προσθήκη επιλεγμένων στη λίστα αγνόησης"
 
-#: qt/base/result_window.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
 msgstr "Μετατροπή επιλεγμένων σε αναφορά"
 
-#: qt/base/result_window.py:56 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
 msgstr "Άνοιγμα επιλεγμένου/ων με Προεπιλεγμένη εφαρμογή"
 
-#: qt/base/result_window.py:57
+#: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
 msgstr "Άνοιγμα φακέλου που περιέχει το/τα επιλεγμένο/α"
 
-#: qt/base/result_window.py:58 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
 msgstr "Μετονομασία επιλεγμένου/ων"
 
-#: qt/base/result_window.py:59 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
 msgstr "Μαρκάρισμα όλων"
 
-#: qt/base/result_window.py:60 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
 msgstr "Ξεμαρκάρισμα όλων"
 
-#: qt/base/result_window.py:61 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
 msgstr "Αντιστροφή μαρκαρίσματος"
 
-#: qt/base/result_window.py:62 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
 msgstr "Μαρκάρισμα επιλεγμένου/ων"
 
-#: qt/base/result_window.py:63
+#: qt/result_window.py:87
 msgid "Export To HTML"
 msgstr "Εξαγωγή σε HTML"
 
-#: qt/base/result_window.py:64
+#: qt/result_window.py:88
 msgid "Export To CSV"
 msgstr "Εξαγωγή σε CSV"
 
-#: qt/base/result_window.py:65 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
 msgstr "Αποθήκευση αποτελεσμάτων..."
 
-#: qt/base/result_window.py:66 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
 msgstr "Εκτέλεση προσαρμοσμένης εντολής"
 
-#: qt/base/result_window.py:79
+#: qt/result_window.py:102
 msgid "Mark"
 msgstr "Μαρκάρισμα"
 
-#: qt/base/result_window.py:83 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
 msgstr "Στήλες"
 
-#: qt/base/result_window.py:141
+#: qt/result_window.py:163
 msgid "Reset to Defaults"
 msgstr "Επαναφορά προεπιλογών"
 
-#: qt/base/result_window.py:163
+#: qt/result_window.py:185
 msgid "{} Results"
 msgstr "{} Αποτελέσματα"
 
-#: qt/base/result_window.py:171 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
 msgstr "Μόνο διπλότυπα"
 
-#: qt/base/result_window.py:172
+#: qt/result_window.py:194
 msgid "Delta Values"
 msgstr "Τιμές διαφοράς (Delta)"
 
-#: qt/base/result_window.py:286 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Επιλέξτε ένα αρχείο για να αποθηκεύσετε τα αποτελέσματα σας"
 
-#: qt/me/preferences_dialog.py:39 qt/se/preferences_dialog.py:39
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filename"
-msgstr "Όνομα αρχείου"
-
-#: qt/me/preferences_dialog.py:40 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filename - Fields"
-msgstr "Όνομα αρχείου - Πεδία"
-
-#: qt/me/preferences_dialog.py:41 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Filename - Fields (No Order)"
-msgstr "Όνομα αρχείου - Πεδία (Αταξινόμητα)"
-
-#: qt/me/preferences_dialog.py:42 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Tags"
-msgstr "Ετικέτες"
-
-#: qt/me/preferences_dialog.py:43 qt/pe/preferences_dialog.py:33
-#: qt/se/preferences_dialog.py:40 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Contents"
-msgstr "Περιεχόμενα"
-
-#: qt/me/preferences_dialog.py:44
-msgid "Audio Contents"
-msgstr "Μουσικά περιεχόμενα"
-
-#: qt/me/preferences_dialog.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
 msgstr "Ετικέτες προς σάρωση:"
 
-#: qt/me/preferences_dialog.py:61 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
 msgstr "Κομμάτι"
 
-#: qt/me/preferences_dialog.py:63 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
 msgstr "Καλλιτέχνης"
 
-#: qt/me/preferences_dialog.py:65 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
 msgid "Album"
 msgstr "Άλμπουμ"
 
-#: qt/me/preferences_dialog.py:67 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
 msgid "Title"
 msgstr "Τίτλος"
 
-#: qt/me/preferences_dialog.py:69 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
 msgid "Genre"
 msgstr "Είδος"
 
-#: qt/me/preferences_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Year"
 msgstr "Έτος"
 
-#: qt/me/preferences_dialog.py:75 qt/se/preferences_dialog.py:49
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Word weighting"
 msgstr "Στάθμιση λέξης"
 
-#: qt/me/preferences_dialog.py:77 qt/se/preferences_dialog.py:51
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
 msgstr "Ταίριασμα παρόμοιων λέξεων"
 
-#: qt/me/preferences_dialog.py:79 qt/pe/preferences_dialog.py:41
-#: qt/se/preferences_dialog.py:53 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
 msgstr "Να περιλαμβάνουν διαφορετικούς τύπους αρχείων"
 
-#: qt/me/preferences_dialog.py:81 qt/pe/preferences_dialog.py:43
-#: qt/se/preferences_dialog.py:55 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
 msgstr "Χρήση κανονικών εκφράσεων κατά το φιλτράρισμα"
 
-#: qt/me/preferences_dialog.py:83 qt/pe/preferences_dialog.py:45
-#: qt/se/preferences_dialog.py:57 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
 msgstr "Κατάργηση κενών φακέλων για διαγραφή ή μετακίνηση"
 
-#: qt/me/preferences_dialog.py:85 qt/pe/preferences_dialog.py:47
-#: qt/se/preferences_dialog.py:76 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
 msgstr "Αγνόηση διπλοτύπων με hardlinking στο ίδιο αρχείο"
 
-#: qt/me/preferences_dialog.py:87 qt/pe/preferences_dialog.py:49
-#: qt/se/preferences_dialog.py:78 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
 msgstr "Λειτουργία αποσφαλμάτωσης(απαιτείται επανεκκίνηση)"
 
-#: qt/pe/preferences_dialog.py:34 cocoa/base/en.lproj/Localizable.strings:0
-msgid "EXIF Timestamp"
-msgstr "Χρονοσήμανση EXIF"
-
-#: qt/pe/preferences_dialog.py:39 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
 msgstr "Ταίριασμα εικόνων διαφορετικών διαστάσεων"
 
-#: qt/pe/result_window.py:19 qt/pe/result_window.py:25
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
 msgstr "Εκκαθάριση μνήμης cache εικόνων"
 
-#: qt/pe/result_window.py:26 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
-msgstr "Θέλετε πραγματικά να αφαιρέσετε όλη την αποθηκευμένη ανάλυση εικόνων σας;"
+msgstr ""
+"Θέλετε πραγματικά να αφαιρέσετε όλη την αποθηκευμένη ανάλυση εικόνων σας;"
 
-#: qt/pe/result_window.py:29
+#: qt/app.py:184
 msgid "Picture cache cleared."
 msgstr "Μνήμη cache εικόνων εκκαθαρίστηκε."
 
-#: qt/se/preferences_dialog.py:41 cocoa/base/en.lproj/Localizable.strings:0
-msgid "Folders"
-msgstr "Φάκελοι"
-
-#: qt/se/preferences_dialog.py:60
+#: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
 msgstr "Αγνόηση αρχείων μικρότερων από"
 
-#: qt/se/preferences_dialog.py:71 cocoa/base/en.lproj/Localizable.strings:0
+#: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
 msgstr "KB"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
 msgstr "%@ Αποτελέσματα"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Προσθήκη βιβλιοθήκης Aperture"
-msgstr ""
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add iPhoto Library"
-msgstr "Προσθήκη βιβλιοθήκης iPhoto"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Add iTunes Library"
-msgstr "Προσθήκη βιβλιοθήκης iTunes"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
 msgstr "Προσθήκη νέου φακέλου..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Advanced"
 msgstr "Προχωρημένες"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Audio Content"
-msgstr "Μουσικό περιεχόμενο"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
 msgstr "Αυτόματος έλεγχος για ενημερώσεις"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Basic"
 msgstr "Βασική"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
 msgstr "Μεταφορά όλων στο προσκήνιο"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
 msgstr "Έλεγχος για αναβάθμιση..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
 msgstr "Κλείσιμο παραθύρου"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Content"
-msgstr "Περιεχόμενο"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
 msgstr ""
 "Προσωποποιημένη εντολή (παράμετροι: %d για διπλότυπο, %r για αναφορά):"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
 msgstr "Αποκοπή"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Delta"
 msgstr "Delta"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
 msgstr "Λεπτομέρειες επιλεγμένου αρχείου"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
 msgstr "Πίνακας λεπτομερειών"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
 msgstr "Φάκελοι"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
 msgstr ""
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru ME Preferences"
-msgstr "Προτιμήσεις dupeGuru ME"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "dupeGuru PE Preferences"
-msgstr "Προτιμήσεις dupeGuru PE"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
 msgstr "Προτιμήσεις dupeGuru"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
 msgstr "Αποτελέσματα dupeGuru"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
 msgstr "Ιστότοπος dupeGuru"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
 msgstr "Εξαγωγή αποτελεσμάτων σε CSV"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
 msgstr "Εξαγωγή αποτελεσμάτων σε XHTML"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
 msgstr "Λιγότερα αποτελέσματα"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
 msgstr "Σκληρότητα φίλτρου:"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
 msgstr "Φίλτρο αποτελεσμάτων..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
 msgstr "Παράθυρο επιλογής φακέλου"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
 msgstr "Μέγεθος γραμματοσειράς:"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
 msgstr "Απόκρυψη dupeGuru"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide Others"
 msgstr "Απόκρυψη υπολοίπων"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
 msgstr "Αγνόηση αρχείων μικρότερων από:"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
 msgstr "Φόρτωση από αρχείο..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
 msgstr "Ελαχιστοποίηση"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
 msgstr "Λειτουργία"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
 msgstr "Περισσότερα αποτελέσματα"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
 msgstr "Ok"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
 msgstr "Επιλογές"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
 msgstr "Προτιμήσεις..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
 msgstr "Γρήγηορη προβολή"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
 msgstr "Κλείσιμο dupeGuru"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
-msgid "Remove Dead Tracks in iTunes"
-msgstr "Αφαίρεση νεκρών κομματιών από το iTunes"
-
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
 msgstr "Επαναφορά προεπιλογής"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
 msgstr "Επαναφορά προεπιλογών"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
 msgstr "Εμφάνιση"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
 msgstr "Εμφάνιση επιλεγμένων στην Εύρεση"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
 msgstr "Επιλογή όλων"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
 msgstr "Αποστολή μαρκαρισμένων στα Σκουπίδια..."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
 msgstr "Υπηρεσίες"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
 msgstr "Εμφάνιση όλων"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
 msgstr "Έναρξη σάρωσης διπλοτύπων"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
 msgstr "Το όνομα'%@' υπάρχει ήδη."
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
 msgstr "Παράθυρο"
 
-#: cocoa/base/en.lproj/Localizable.strings:0
+#: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Ζουμ"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr ""
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr ""
+
+#~ msgid "Removing dead tracks from your iTunes Library"
+#~ msgstr "Αφαίρεση νεκρών κομματιών από την βιβλιοθήκη σας iTunes"
+
+#~ msgid "Scanning the iTunes Library"
+#~ msgstr "Σάρωση της βιβλιοθήκης σας iTunes"
+
+#~ msgid "Sending dupes to the Trash"
+#~ msgstr "Αποστολή διπλοτύπων στα Σκουπίδια"
+
+#~ msgid "Talking to iTunes. Don't touch it!"
+#~ msgstr "Μιλώντας στο iTunes. Μην το αγγίζετε!"
+
+#~ msgid ""
+#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
+#~ msgstr ""
+#~ "Η βιβλιοθήκη σας iTunes περιέχει %d νεκρά κομμάτια έτοιμα να αφαιρεθούν. "
+#~ "Συνέχεια;"
+
+#~ msgid "You have no dead tracks in your iTunes Library"
+#~ msgstr "Η βιβλιοθήκη σας iTunes δεν περιέχει νεκρά κομμάτια"
+
+#~ msgid "The iTunes application couldn't be found."
+#~ msgstr "Η εφαρμογή iTunes δεν βρέθηκε."
+
+#~ msgid "Talking to iPhoto. Don't touch it!"
+#~ msgstr "Μιλώντας στο iPhoto. Μην το αγγίζετε!"
+
+#~ msgid "Talking to Aperture. Don't touch it!"
+#~ msgstr "Μιλώντας στο Aperture. Μην το αγγίζετε!"
+
+#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
+#~ msgstr ""
+#~ "Οι διαγεγραμμένες φωτογραφίες από το Aperture στάλθηκαν σε ένα έργο που "
+#~ "ονομάζεται \"dupeGuru Trash\"."
+
+#~ msgid "The iPhoto application couldn't be found."
+#~ msgstr "Η εφαρμογή iPhoto δεν βρέθηκε."
+
+#~ msgid "Preferences"
+#~ msgstr "Προτιμήσεις"
+
+#~ msgid "Check for Update"
+#~ msgstr "Έλεγχος για αναβάθμιση"
+
+#~ msgid "Filename"
+#~ msgstr "Όνομα αρχείου"
+
+#~ msgid "Filename - Fields"
+#~ msgstr "Όνομα αρχείου - Πεδία"
+
+#~ msgid "Filename - Fields (No Order)"
+#~ msgstr "Όνομα αρχείου - Πεδία (Αταξινόμητα)"
+
+#~ msgid "Tags"
+#~ msgstr "Ετικέτες"
+
+#~ msgid "Contents"
+#~ msgstr "Περιεχόμενα"
+
+#~ msgid "Audio Contents"
+#~ msgstr "Μουσικά περιεχόμενα"
+
+#~ msgid "EXIF Timestamp"
+#~ msgstr "Χρονοσήμανση EXIF"
+
+#~ msgid "Folders"
+#~ msgstr "Φάκελοι"
+
+#~ msgid "Προσθήκη βιβλιοθήκης Aperture"
+#~ msgstr ""
+
+#~ msgid "Add iPhoto Library"
+#~ msgstr "Προσθήκη βιβλιοθήκης iPhoto"
+
+#~ msgid "Add iTunes Library"
+#~ msgstr "Προσθήκη βιβλιοθήκης iTunes"
+
+#~ msgid "Audio Content"
+#~ msgstr "Μουσικό περιεχόμενο"
+
+#~ msgid "Content"
+#~ msgstr "Περιεχόμενο"
+
+#~ msgid "dupeGuru ME Preferences"
+#~ msgstr "Προτιμήσεις dupeGuru ME"
+
+#~ msgid "dupeGuru PE Preferences"
+#~ msgstr "Προτιμήσεις dupeGuru PE"
+
+#~ msgid "Remove Dead Tracks in iTunes"
+#~ msgstr "Αφαίρεση νεκρών κομματιών από το iTunes"

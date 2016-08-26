@@ -22,18 +22,18 @@ msgstr "Caminho"
 msgid "Error Message"
 msgstr "Mensagem de Erro"
 
-#: core/prioritize.py:63 core_me/result_table.py:24 core_pe/result_table.py:21
-#: core_se/result_table.py:21
+#: core/me/result_table.py:24 core/pe/result_table.py:21 core/prioritize.py:63
+#: core/se/result_table.py:21
 msgid "Kind"
 msgstr "Tipo"
 
-#: core/prioritize.py:72 core_me/result_table.py:19 core_pe/result_table.py:19
-#: core_se/result_table.py:19
+#: core/me/result_table.py:19 core/pe/result_table.py:19 core/prioritize.py:72
+#: core/se/result_table.py:19
 msgid "Folder"
 msgstr "Pasta"
 
-#: core/prioritize.py:88 core_me/result_table.py:18 core_pe/result_table.py:18
-#: core_se/result_table.py:18
+#: core/me/result_table.py:18 core/pe/result_table.py:18 core/prioritize.py:88
+#: core/se/result_table.py:18
 msgid "Filename"
 msgstr "Nome do Arquivo"
 
@@ -41,85 +41,85 @@ msgstr "Nome do Arquivo"
 msgid "Size"
 msgstr "Tamanho"
 
-#: core/prioritize.py:153 core_me/result_table.py:25
-#: core_pe/result_table.py:24 core_se/result_table.py:22
+#: core/me/result_table.py:25 core/pe/result_table.py:24
+#: core/prioritize.py:153 core/se/result_table.py:22
 msgid "Modification"
 msgstr "Modificado"
 
-#: core_me/prioritize.py:16
+#: core/me/prioritize.py:18
 msgid "Duration"
 msgstr "Duração"
 
-#: core_me/prioritize.py:22 core_me/result_table.py:22
+#: core/me/prioritize.py:24 core/me/result_table.py:22
 msgid "Bitrate"
 msgstr "Taxa de Bits"
 
-#: core_me/prioritize.py:28
+#: core/me/prioritize.py:30
 msgid "Samplerate"
 msgstr "Amostragem"
 
-#: core_me/result_table.py:20
+#: core/me/result_table.py:20
 msgid "Size (MB)"
 msgstr "Tamanho"
 
-#: core_me/result_table.py:21
+#: core/me/result_table.py:21
 msgid "Time"
 msgstr "Duração"
 
-#: core_me/result_table.py:23
+#: core/me/result_table.py:23
 msgid "Sample Rate"
 msgstr "Tamanho da Amostra"
 
-#: core_me/result_table.py:26
+#: core/me/result_table.py:26
 msgid "Title"
 msgstr "Nome"
 
-#: core_me/result_table.py:27
+#: core/me/result_table.py:27
 msgid "Artist"
 msgstr "Artista"
 
-#: core_me/result_table.py:28
+#: core/me/result_table.py:28
 msgid "Album"
 msgstr "Álbum"
 
-#: core_me/result_table.py:29
+#: core/me/result_table.py:29
 msgid "Genre"
 msgstr "Gênero"
 
-#: core_me/result_table.py:30
+#: core/me/result_table.py:30
 msgid "Year"
 msgstr "Ano"
 
-#: core_me/result_table.py:31
+#: core/me/result_table.py:31
 msgid "Track Number"
 msgstr "Número da Faixa"
 
-#: core_me/result_table.py:32
+#: core/me/result_table.py:32
 msgid "Comment"
 msgstr "Comentário"
 
-#: core_me/result_table.py:33 core_pe/result_table.py:25
-#: core_se/result_table.py:23
+#: core/me/result_table.py:33 core/pe/result_table.py:25
+#: core/se/result_table.py:23
 msgid "Match %"
 msgstr "% Precisão"
 
-#: core_me/result_table.py:34 core_se/result_table.py:24
+#: core/me/result_table.py:34 core/se/result_table.py:24
 msgid "Words Used"
 msgstr "Palavras Usadas"
 
-#: core_me/result_table.py:35 core_pe/result_table.py:26
-#: core_se/result_table.py:25
+#: core/me/result_table.py:35 core/pe/result_table.py:26
+#: core/se/result_table.py:25
 msgid "Dupe Count"
 msgstr "Duplicatas"
 
-#: core_pe/prioritize.py:16 core_pe/result_table.py:22
+#: core/pe/prioritize.py:18 core/pe/result_table.py:22
 msgid "Dimensions"
 msgstr "Dimensões"
 
-#: core_pe/result_table.py:20 core_se/result_table.py:20
+#: core/pe/result_table.py:20 core/se/result_table.py:20
 msgid "Size (KB)"
 msgstr "Tamanho"
 
-#: core_pe/result_table.py:23
+#: core/pe/result_table.py:23
 msgid "EXIF Timestamp"
 msgstr "Timestamp EXIF"

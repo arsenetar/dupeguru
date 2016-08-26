@@ -4,149 +4,138 @@ msgstr ""
 "Project-Id-Version: dupeGuru\n"
 "PO-Revision-Date: 2016-07-22 11:30+0000\n"
 "Last-Translator: 1kakarot\n"
-
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/app.py:39
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Δεν υπάρχουν μαρκαρισμένα διπλότυπα. Δεν έγινε τίποτα."
 
-#: core/app.py:40
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Δεν υπάρχουν επιλεγμένα διπλότυπα. Δεν έγινε τίποτα."
 
-#: core/app.py:41
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
-"Πρόκειται να ανοίξετε πολλά αρχεία ταυτόχρονα. Ανάλογα με το ποιο πρόγραμμα ανοίγουν αυτά"
-"τα αρχεία, κάτι τέτοιο μπορεί να προκαλέσει ένα μικρό χάος. Συνέχεια;"
+"Πρόκειται να ανοίξετε πολλά αρχεία ταυτόχρονα. Ανάλογα με το ποιο πρόγραμμα "
+"ανοίγουν αυτάτα αρχεία, κάτι τέτοιο μπορεί να προκαλέσει ένα μικρό χάος. "
+"Συνέχεια;"
 
-
-#: core/app.py:57
+#: core/app.py:65
 msgid "Scanning for duplicates"
 msgstr "Σάρωση για διπλότυπα"
 
-#: core/app.py:58
+#: core/app.py:66
 msgid "Loading"
 msgstr "Φόρτωση"
 
-#: core/app.py:59
+#: core/app.py:67
 msgid "Moving"
 msgstr "Μετακίνηση"
 
-#: core/app.py:60
+#: core/app.py:68
 msgid "Copying"
 msgstr "Αντιγραφή"
 
-#: core/app.py:61
+#: core/app.py:69
 msgid "Sending to Trash"
 msgstr "Αποστολή στα σκουπίδια"
 
-#: core/app.py:64
-msgid "Sending files to the recycle bin"
-msgstr "Αποστολή στον κάδο ανακύκλωσης"
-
-#: core/app.py:290
+#: core/app.py:279
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
-"Μια προηγούμενη ενέργεια είναι σε εξέλιξη. Δεν μπορείτε να ξεκινήσετε καινούργια ακόμα. "
-"Περιμένετε λίγα δευτερόλεπτα, έπειτα προσπαθήστε ξανά."
+"Μια προηγούμενη ενέργεια είναι σε εξέλιξη. Δεν μπορείτε να ξεκινήσετε "
+"καινούργια ακόμα. Περιμένετε λίγα δευτερόλεπτα, έπειτα προσπαθήστε ξανά."
 
-#: core/app.py:297
+#: core/app.py:289
 msgid "No duplicates found."
 msgstr "Δεν βρέθηκαν διπλότυπα."
 
-#: core/app.py:310
+#: core/app.py:304
 msgid "All marked files were copied successfully."
 msgstr "Όλα τα επιλεγμένα αρχεία αντιγράφηκαν επιτυχώς."
 
-#: core/app.py:311
+#: core/app.py:305
 msgid "All marked files were moved successfully."
 msgstr "Όλα τα επιλεγμένα αρχεία μετακινήθηκαν επιτυχώς."
 
-#: core/app.py:312
+#: core/app.py:306
 msgid "All marked files were successfully sent to Trash."
 msgstr "Όλα τα επιλεγμένα αρχεία στάλθηκαν με επιτυχία στον κάδο."
 
-#: core/app.py:349
+#: core/app.py:368
 msgid "'{}' already is in the list."
 msgstr "'{}' υπάρχει ήδη στη λίστα."
 
-#: core/app.py:351
+#: core/app.py:370
 msgid "'{}' does not exist."
 msgstr "'{}' δεν υπάρχει."
 
-#: core/app.py:360
+#: core/app.py:379
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
-"Όλα τα επιλεγμένα %d στοιχεία θα αγνοηθούν σε μελλοντικές σαρώσεις."
-"Συνέχεια;"
+"Όλα τα επιλεγμένα %d στοιχεία θα αγνοηθούν σε μελλοντικές σαρώσεις.Συνέχεια;"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "copy"
 msgstr "αντιγραφή"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "move"
 msgstr "μετακίνηση"
 
-#: core/app.py:427
+#: core/app.py:451
 msgid "Select a directory to {} marked files to"
 msgstr "Επιλέξτε ένα φάκελο {} για τα μαρκαρισμένα αρχεία"
 
-#: core/app.py:464
+#: core/app.py:490
 msgid "Select a destination for your exported CSV"
 msgstr "Επιλέξτε έναν προορισμό για το εξαγόμενο CSV σας"
 
-#: core/app.py:489
+#: core/app.py:518
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"Δεν έχετε ορίσει ειδική εντολή. Ρυθμίστε τη στις προτιμήσεις σας. "
+msgstr "Δεν έχετε ορίσει ειδική εντολή. Ρυθμίστε τη στις προτιμήσεις σας. "
 
-#: core/app.py:641 core/app.py:654
+#: core/app.py:672 core/app.py:685
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Πρόκειται να αφαιρέσετε %d αρχεία από τα αποτελέσματα. Συνέχεια;"
 
-#: core/app.py:688
+#: core/app.py:719
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} ομάδες διπλοτύπων άλλαξαν από το επαναπροσδιορισμό."
 
-#: core/app.py:716
+#: core/app.py:762
 msgid "Collecting files to scan"
 msgstr "Συλλογή αρχείων για σάρωση"
 
-#: core/app.py:727
+#: core/app.py:751
 msgid "The selected directories contain no scannable file."
 msgstr "Οι επιλεγμένοι φάκελοι δεν περιέχουν σαρώσιμα αρχεία."
 
-#: core/app.py:768
+#: core/app.py:810
 msgid "%s (%d discarded)"
 msgstr "%s (%d απορρίφθηκαν)"
 
-#: core/engine.py:220 core/engine.py:265
+#: core/engine.py:222 core/engine.py:262
 msgid "0 matches found"
 msgstr "0 διπλότυπα βρέθηκαν"
 
-#: core/engine.py:238 core/engine.py:273
+#: core/engine.py:240 core/engine.py:270
 msgid "%d matches found"
 msgstr "Βρέθηκαν %d διπλότυπα"
 
-#: core/engine.py:258 core/scanner.py:79
+#: core/scanner.py:77
 msgid "Read size of %d/%d files"
 msgstr "Ανάγνωση μεγέθους %d/%d αρχείων"
-
-#: core/engine.py:464
-msgid "Grouped %d/%d matches"
-msgstr "Ομαδοποιημένα %d/%d διπλότυπα"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
@@ -154,8 +143,7 @@ msgstr "Στέλνετε {} αρχεία στα σκουπίδια."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr ""
-"Θέλετε να αφαιρέσετε όλα τα %d στοιχεία από τη λίστα αγνόησης; "
+msgstr "Θέλετε να αφαιρέσετε όλα τα %d στοιχεία από τη λίστα αγνόησης; "
 
 #: core/prioritize.py:68
 msgid "None"
@@ -193,47 +181,89 @@ msgstr "Νεώτερο"
 msgid "Oldest"
 msgstr "Παλαιότερο"
 
-#: core/results.py:126
+#: core/results.py:129
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) επιλεγμένα διπλότυπα."
 
-#: core/results.py:133
+#: core/results.py:136
 msgid " filter: %s"
 msgstr " φίλτρο: %s"
 
-#: core/scanner.py:99
+#: core/scanner.py:101
 msgid "Read metadata of %d/%d files"
 msgstr "Ανάγνωση μεταδεδομένων των %d/%d αρχείων"
 
-#: core/scanner.py:130
-msgid "Removing false matches"
-msgstr "Αφαίρεση ψευδών διπλοτύπων"
-
-#: core/scanner.py:154
-msgid "Processed %d/%d matches against the ignore list"
-msgstr ""
-"Επεξεργάσία %d/%d διπλοτύπων σε σχέση με τη λίστα αγνόησης"
-
-#: core/scanner.py:176
-msgid "Doing group prioritization"
-msgstr "Εργασία ομαδοποιημένης προτεραιότητας"
-
-#: core_pe/matchblock.py:61
+#: core/pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Ανάλυση %d/%d εικόνων"
 
-#: core_pe/matchblock.py:153
+#: core/pe/matchblock.py:156
 msgid "Performed %d/%d chunk matches"
 msgstr "Εκτέλεση %d/%d μερικής ταυτοποίησης"
 
-#: core_pe/matchblock.py:158
+#: core/pe/matchblock.py:161
 msgid "Preparing for matching"
 msgstr "Προετοιμασία για σύγκριση"
 
-#: core_pe/matchblock.py:193
+#: core/pe/matchblock.py:206
 msgid "Verified %d/%d matches"
 msgstr "Πιστοποίηση %d/%d ταυτόσημων"
 
-#: core_pe/matchexif.py:18
+#: core/pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Ανάγνωση EXIF %d/%d εικόνες"
+
+#: core/app.py:312
+msgid "Could not load file: {}"
+msgstr ""
+
+#: core/app.py:496 core/app.py:742
+msgid "Couldn't write to file: {}"
+msgstr ""
+
+#: core/me/scanner.py:19 core/se/scanner.py:15
+msgid "Filename"
+msgstr ""
+
+#: core/me/scanner.py:20
+msgid "Filename - Fields"
+msgstr ""
+
+#: core/me/scanner.py:21
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core/me/scanner.py:22
+msgid "Tags"
+msgstr ""
+
+#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+msgid "Contents"
+msgstr ""
+
+#: core/pe/scanner.py:21
+msgid "EXIF Timestamp"
+msgstr ""
+
+#: core/scanner.py:139
+msgid "Almost done! Fiddling with results..."
+msgstr ""
+
+#: core/se/scanner.py:17
+msgid "Folders"
+msgstr ""
+
+#~ msgid "Sending files to the recycle bin"
+#~ msgstr "Αποστολή στον κάδο ανακύκλωσης"
+
+#~ msgid "Grouped %d/%d matches"
+#~ msgstr "Ομαδοποιημένα %d/%d διπλότυπα"
+
+#~ msgid "Removing false matches"
+#~ msgstr "Αφαίρεση ψευδών διπλοτύπων"
+
+#~ msgid "Processed %d/%d matches against the ignore list"
+#~ msgstr "Επεξεργάσία %d/%d διπλοτύπων σε σχέση με τη λίστα αγνόησης"
+
+#~ msgid "Doing group prioritization"
+#~ msgstr "Εργασία ομαδοποιημένης προτεραιότητας"

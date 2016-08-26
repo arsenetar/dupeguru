@@ -10,45 +10,41 @@ msgstr ""
 "Language: hy\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/app.py:39
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:40
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core/app.py:41
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core/app.py:57
+#: core/app.py:65
 msgid "Scanning for duplicates"
 msgstr "Ստուգվում են կրկնօրինակները"
 
-#: core/app.py:58
+#: core/app.py:66
 msgid "Loading"
 msgstr "Բացվում է"
 
-#: core/app.py:59
+#: core/app.py:67
 msgid "Moving"
 msgstr "Տեղափոխվում է"
 
-#: core/app.py:60
+#: core/app.py:68
 msgid "Copying"
 msgstr "Պատճենվում է"
 
-#: core/app.py:61
+#: core/app.py:69
 msgid "Sending to Trash"
 msgstr "Ուղարկվում է Աղբարկղ"
 
-#: core/app.py:64
-msgid "Sending files to the recycle bin"
-msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
-
-#: core/app.py:290
+#: core/app.py:279
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,92 +52,88 @@ msgstr ""
 "Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: "
 "Սպասեք մի քանի վայրկյան և կրկին փորձեք:"
 
-#: core/app.py:297
+#: core/app.py:289
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core/app.py:310
+#: core/app.py:304
 msgid "All marked files were copied successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core/app.py:311
+#: core/app.py:305
 msgid "All marked files were moved successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core/app.py:312
+#: core/app.py:306
 msgid "All marked files were successfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core/app.py:349
+#: core/app.py:368
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core/app.py:351
+#: core/app.py:370
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
 
-#: core/app.py:360
+#: core/app.py:379
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "copy"
 msgstr "պատճենել"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "move"
 msgstr "տեղափոխել"
 
-#: core/app.py:427
+#: core/app.py:451
 msgid "Select a directory to {} marked files to"
 msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
 
-#: core/app.py:464
+#: core/app.py:490
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:489
+#: core/app.py:518
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core/app.py:641 core/app.py:654
+#: core/app.py:672 core/app.py:685
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core/app.py:688
+#: core/app.py:719
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:716
+#: core/app.py:762
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core/app.py:727
+#: core/app.py:751
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core/app.py:768
+#: core/app.py:810
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
-#: core/engine.py:220 core/engine.py:265
+#: core/engine.py:222 core/engine.py:262
 msgid "0 matches found"
 msgstr "0 համընկնում է գտնվել"
 
-#: core/engine.py:238 core/engine.py:273
+#: core/engine.py:240 core/engine.py:270
 msgid "%d matches found"
 msgstr "%d համընկնում է գտնվել"
 
-#: core/engine.py:258 core/scanner.py:79
+#: core/scanner.py:77
 msgid "Read size of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի չափը"
-
-#: core/engine.py:464
-msgid "Grouped %d/%d matches"
-msgstr "Խմբավորվել է %d/%d համընկնում"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
@@ -187,46 +179,89 @@ msgstr "Նորագույնը"
 msgid "Oldest"
 msgstr "Ամենահինը"
 
-#: core/results.py:126
+#: core/results.py:129
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) նշված կրկնօրինակներ:"
 
-#: core/results.py:133
+#: core/results.py:136
 msgid " filter: %s"
 msgstr "ֆիլտր. %s"
 
-#: core/scanner.py:99
+#: core/scanner.py:101
 msgid "Read metadata of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի մետատվյալները"
 
-#: core/scanner.py:130
-msgid "Removing false matches"
-msgstr "Սխալ համընկնումների հեռացում"
-
-#: core/scanner.py:154
-msgid "Processed %d/%d matches against the ignore list"
-msgstr "Ընթացքում է %d/%d համընկնումները ընդդեմ անտեսվող ցանկի"
-
-#: core/scanner.py:176
-msgid "Doing group prioritization"
-msgstr "Խմբի առաջնայնացում"
-
-#: core_pe/matchblock.py:61
+#: core/pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Ստուգվում է %d/%d նկարները"
 
-#: core_pe/matchblock.py:153
+#: core/pe/matchblock.py:156
 msgid "Performed %d/%d chunk matches"
 msgstr "Կատարվում է %d/%d տվյալի համընկնում"
 
-#: core_pe/matchblock.py:158
+#: core/pe/matchblock.py:161
 msgid "Preparing for matching"
 msgstr "Նախապատրաստեցվում է համընկնումը"
 
-#: core_pe/matchblock.py:193
+#: core/pe/matchblock.py:206
 msgid "Verified %d/%d matches"
 msgstr "Ստուգում է %d/%d համընկնումները"
 
-#: core_pe/matchexif.py:18
+#: core/pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Կարդալ EXIF-ը d/%d նկարներից"
+
+#: core/app.py:312
+msgid "Could not load file: {}"
+msgstr ""
+
+#: core/app.py:496 core/app.py:742
+msgid "Couldn't write to file: {}"
+msgstr ""
+
+#: core/me/scanner.py:19 core/se/scanner.py:15
+msgid "Filename"
+msgstr ""
+
+#: core/me/scanner.py:20
+msgid "Filename - Fields"
+msgstr ""
+
+#: core/me/scanner.py:21
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core/me/scanner.py:22
+msgid "Tags"
+msgstr ""
+
+#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+msgid "Contents"
+msgstr ""
+
+#: core/pe/scanner.py:21
+msgid "EXIF Timestamp"
+msgstr ""
+
+#: core/scanner.py:139
+msgid "Almost done! Fiddling with results..."
+msgstr ""
+
+#: core/se/scanner.py:17
+msgid "Folders"
+msgstr ""
+
+#~ msgid "Sending files to the recycle bin"
+#~ msgstr "Ֆայլերը ուղարկվում են Աղբարկղ"
+
+#~ msgid "Grouped %d/%d matches"
+#~ msgstr "Խմբավորվել է %d/%d համընկնում"
+
+#~ msgid "Removing false matches"
+#~ msgstr "Սխալ համընկնումների հեռացում"
+
+#~ msgid "Processed %d/%d matches against the ignore list"
+#~ msgstr "Ընթացքում է %d/%d համընկնումները ընդդեմ անտեսվող ցանկի"
+
+#~ msgid "Doing group prioritization"
+#~ msgstr "Խմբի առաջնայնացում"

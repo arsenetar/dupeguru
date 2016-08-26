@@ -10,45 +10,41 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: core/app.py:39
+#: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Немає позначених дублікатів - нічого робити."
 
-#: core/app.py:40
+#: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Немає обраних дублікатів - нічого робити."
 
-#: core/app.py:41
+#: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core/app.py:57
+#: core/app.py:65
 msgid "Scanning for duplicates"
 msgstr "Пошук дублікатів"
 
-#: core/app.py:58
+#: core/app.py:66
 msgid "Loading"
 msgstr "Завантаження"
 
-#: core/app.py:59
+#: core/app.py:67
 msgid "Moving"
 msgstr "Переміщення"
 
-#: core/app.py:60
+#: core/app.py:68
 msgid "Copying"
 msgstr "Копіювання"
 
-#: core/app.py:61
+#: core/app.py:69
 msgid "Sending to Trash"
 msgstr "Відправка до кошику"
 
-#: core/app.py:64
-msgid "Sending files to the recycle bin"
-msgstr "Відправлення файлів до кошика"
-
-#: core/app.py:290
+#: core/app.py:279
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,31 +52,31 @@ msgstr ""
 "Попередню дію ще не закінчено. Ви покищо не можете розпочаті нову. Зачекайте"
 " кілька секунд, потім повторіть спробу."
 
-#: core/app.py:297
+#: core/app.py:289
 msgid "No duplicates found."
 msgstr "Не знайдено жодного дублікату."
 
-#: core/app.py:310
+#: core/app.py:304
 msgid "All marked files were copied successfully."
 msgstr "Усі позначені файли були скопійовані успішно."
 
-#: core/app.py:311
+#: core/app.py:305
 msgid "All marked files were moved successfully."
 msgstr "Усі позначені файли були переміщені успішно."
 
-#: core/app.py:312
+#: core/app.py:306
 msgid "All marked files were successfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
-#: core/app.py:349
+#: core/app.py:368
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
 
-#: core/app.py:351
+#: core/app.py:370
 msgid "'{}' does not exist."
 msgstr "'{}' не існує."
 
-#: core/app.py:360
+#: core/app.py:379
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -88,61 +84,57 @@ msgstr ""
 "Усі обрані %d результатів будуть ігноруватися під час усіх наступних "
 "пошуків. Продовжити?"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "copy"
 msgstr "копіювання"
 
-#: core/app.py:426
+#: core/app.py:450
 msgid "move"
 msgstr "переміщення"
 
-#: core/app.py:427
+#: core/app.py:451
 msgid "Select a directory to {} marked files to"
 msgstr "Оберіть цільову папку для {} позначених файлів"
 
-#: core/app.py:464
+#: core/app.py:490
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core/app.py:489
+#: core/app.py:518
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
 
-#: core/app.py:641 core/app.py:654
+#: core/app.py:672 core/app.py:685
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Ви збираєтеся видалити %d файлів з результату пошуку. Продовжити?"
 
-#: core/app.py:688
+#: core/app.py:719
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:716
+#: core/app.py:762
 msgid "Collecting files to scan"
 msgstr "Збір файлів для пошуку"
 
-#: core/app.py:727
+#: core/app.py:751
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
 
-#: core/app.py:768
+#: core/app.py:810
 msgid "%s (%d discarded)"
 msgstr "%s (%d відкинуто)"
 
-#: core/engine.py:220 core/engine.py:265
+#: core/engine.py:222 core/engine.py:262
 msgid "0 matches found"
 msgstr "0 результатів знайдено"
 
-#: core/engine.py:238 core/engine.py:273
+#: core/engine.py:240 core/engine.py:270
 msgid "%d matches found"
 msgstr "%d результатів знайдено"
 
-#: core/engine.py:258 core/scanner.py:79
+#: core/scanner.py:77
 msgid "Read size of %d/%d files"
 msgstr "Прочитано розмір %d/%d файлів"
-
-#: core/engine.py:464
-msgid "Grouped %d/%d matches"
-msgstr "Згруповано %d/%d результатів"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
@@ -188,46 +180,89 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core/results.py:126
+#: core/results.py:129
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) дублікатів позначено."
 
-#: core/results.py:133
+#: core/results.py:136
 msgid " filter: %s"
 msgstr "фільтр: %s"
 
-#: core/scanner.py:99
+#: core/scanner.py:101
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитано метаданих з %d/%d файлів"
 
-#: core/scanner.py:130
-msgid "Removing false matches"
-msgstr "Видалення помилкових результатів"
-
-#: core/scanner.py:154
-msgid "Processed %d/%d matches against the ignore list"
-msgstr "Порівняно %d/%d результатів з чорним списком"
-
-#: core/scanner.py:176
-msgid "Doing group prioritization"
-msgstr "Виконується пріорітизація груп"
-
-#: core_pe/matchblock.py:61
+#: core/pe/matchblock.py:61
 msgid "Analyzed %d/%d pictures"
 msgstr "Проаналізовано %d/%d фотографій"
 
-#: core_pe/matchblock.py:153
+#: core/pe/matchblock.py:156
 msgid "Performed %d/%d chunk matches"
 msgstr "Виконано %d/%d порівнянь шматків"
 
-#: core_pe/matchblock.py:158
+#: core/pe/matchblock.py:161
 msgid "Preparing for matching"
 msgstr "Підготовка до порівняння"
 
-#: core_pe/matchblock.py:193
+#: core/pe/matchblock.py:206
 msgid "Verified %d/%d matches"
 msgstr "Перевірено %d/%d результатів"
 
-#: core_pe/matchexif.py:18
+#: core/pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитано EXIF з %d/%d фотографій"
+
+#: core/app.py:312
+msgid "Could not load file: {}"
+msgstr ""
+
+#: core/app.py:496 core/app.py:742
+msgid "Couldn't write to file: {}"
+msgstr ""
+
+#: core/me/scanner.py:19 core/se/scanner.py:15
+msgid "Filename"
+msgstr ""
+
+#: core/me/scanner.py:20
+msgid "Filename - Fields"
+msgstr ""
+
+#: core/me/scanner.py:21
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core/me/scanner.py:22
+msgid "Tags"
+msgstr ""
+
+#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+msgid "Contents"
+msgstr ""
+
+#: core/pe/scanner.py:21
+msgid "EXIF Timestamp"
+msgstr ""
+
+#: core/scanner.py:139
+msgid "Almost done! Fiddling with results..."
+msgstr ""
+
+#: core/se/scanner.py:17
+msgid "Folders"
+msgstr ""
+
+#~ msgid "Sending files to the recycle bin"
+#~ msgstr "Відправлення файлів до кошика"
+
+#~ msgid "Grouped %d/%d matches"
+#~ msgstr "Згруповано %d/%d результатів"
+
+#~ msgid "Removing false matches"
+#~ msgstr "Видалення помилкових результатів"
+
+#~ msgid "Processed %d/%d matches against the ignore list"
+#~ msgstr "Порівняно %d/%d результатів з чорним списком"
+
+#~ msgid "Doing group prioritization"
+#~ msgstr "Виконується пріорітизація груп"
