@@ -1,3 +1,8 @@
+=== 4.0.2 (2016-10-09)
+
+* Fix systematic crash in Picture Mode under MacOs Sierra. (#394)
+* No change for Linux. Just keeping version in sync.
+
 === 4.0.1 (2016-08-24)
 
 * Add Greek localization, by Gabriel Koutilellis. (#382)
