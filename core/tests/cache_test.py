@@ -1,4 +1,4 @@
-# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2016 Virgil Dupras
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -10,7 +10,8 @@ from pytest import raises, skip
 from hscommon.testutil import eq_
 
 try:
-    from ..pe.cache import Cache, colors_to_string, string_to_colors
+    from ..pe.cache import colors_to_string, string_to_colors
+    from ..pe.cache_sqlite import SqliteCache
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 
@@ -44,21 +45,24 @@ class TestCasestring_to_colors:
         eq_([], string_to_colors('102'))
 
 
-class TestCaseCache:
+class BaseTestCaseCache:
+    def get_cache(self, dbname=None):
+        raise NotImplementedError()
+
     def test_empty(self):
-        c = Cache()
+        c = self.get_cache()
         eq_(0, len(c))
         with raises(KeyError):
             c['foo']
 
     def test_set_then_retrieve_blocks(self):
-        c = Cache()
+        c = self.get_cache()
         b = [(0, 0, 0), (1, 2, 3)]
         c['foo'] = b
         eq_(b, c['foo'])
 
     def test_delitem(self):
-        c = Cache()
+        c = self.get_cache()
         c['foo'] = ''
         del c['foo']
         assert 'foo' not in c
@@ -67,14 +71,14 @@ class TestCaseCache:
 
     def test_persistance(self, tmpdir):
         DBNAME = tmpdir.join('hstest.db')
-        c = Cache(str(DBNAME))
+        c = self.get_cache(str(DBNAME))
         c['foo'] = [(1, 2, 3)]
         del c
-        c = Cache(str(DBNAME))
+        c = self.get_cache(str(DBNAME))
         eq_([(1, 2, 3)], c['foo'])
 
     def test_filter(self):
-        c = Cache()
+        c = self.get_cache()
         c['foo'] = ''
         c['bar'] = ''
         c['baz'] = ''
@@ -85,7 +89,7 @@ class TestCaseCache:
         assert 'bar' not in c
 
     def test_clear(self):
-        c = Cache()
+        c = self.get_cache()
         c['foo'] = ''
         c['bar'] = ''
         c['baz'] = ''
@@ -94,6 +98,22 @@ class TestCaseCache:
         assert 'foo' not in c
         assert 'baz' not in c
         assert 'bar' not in c
+
+    def test_by_id(self):
+        # it's possible to use the cache by referring to the files by their row_id
+        c = self.get_cache()
+        b = [(0, 0, 0), (1, 2, 3)]
+        c['foo'] = b
+        foo_id = c.get_id('foo')
+        eq_(c[foo_id], b)
+
+
+class TestCaseSqliteCache(BaseTestCaseCache):
+    def get_cache(self, dbname=None):
+        if dbname:
+            return SqliteCache(dbname)
+        else:
+            return SqliteCache()
 
     def test_corrupted_db(self, tmpdir, monkeypatch):
         # If we don't do this monkeypatching, we get a weird exception about trying to flush a
@@ -104,37 +124,32 @@ class TestCaseCache:
         fp = open(dbname, 'w')
         fp.write('invalid sqlite content')
         fp.close()
-        c = Cache(dbname) # should not raise a DatabaseError
+        c = self.get_cache(dbname) # should not raise a DatabaseError
         c['foo'] = [(1, 2, 3)]
         del c
-        c = Cache(dbname)
+        c = self.get_cache(dbname)
         eq_(c['foo'], [(1, 2, 3)])
-
-    def test_by_id(self):
-        # it's possible to use the cache by referring to the files by their row_id
-        c = Cache()
-        b = [(0, 0, 0), (1, 2, 3)]
-        c['foo'] = b
-        foo_id = c.get_id('foo')
-        eq_(c[foo_id], b)
 
 
 class TestCaseCacheSQLEscape:
+    def get_cache(self):
+        return SqliteCache()
+
     def test_contains(self):
-        c = Cache()
+        c = self.get_cache()
         assert "foo'bar" not in c
 
     def test_getitem(self):
-        c = Cache()
+        c = self.get_cache()
         with raises(KeyError):
             c["foo'bar"]
 
     def test_setitem(self):
-        c = Cache()
+        c = self.get_cache()
         c["foo'bar"] = []
 
     def test_delitem(self):
-        c = Cache()
+        c = self.get_cache()
         c["foo'bar"] = []
         try:
             del c["foo'bar"]

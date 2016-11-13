@@ -405,7 +405,7 @@ class DupeGuru(Broadcaster):
                 path = path.parent()
 
     def clear_picture_cache(self):
-        cache = pe.cache.Cache(self.options['cache_path'])
+        cache = pe.cache_sqlite.SqliteCache(self.options['cache_path'])
         cache.clear()
         cache.close()
 

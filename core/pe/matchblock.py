@@ -16,7 +16,7 @@ from hscommon.jobprogress import job
 
 from core.engine import Match
 from .block import avgdiff, DifferentBlockCountError, NoBlocksError
-from .cache import Cache
+from .cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -54,7 +54,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # there is enough memory left to carry on the operation because it is assumed that the
     # MemoryError happens when trying to read an image file, which is freed from memory by the
     # time that MemoryError is raised.
-    cache = Cache(cache_path)
+    cache = SqliteCache(cache_path)
     cache.purge_outdated()
     prepared = [] # only pictures for which there was no error getting blocks
     try:
@@ -109,7 +109,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     # The list of ids in ref_ids have to be compared to the list of ids in other_ids. other_ids
     # can be None. In this case, ref_ids has to be compared with itself
     # picinfo is a dictionary {pic_id: (dimensions, is_ref)}
-    cache = Cache(dbname)
+    cache = SqliteCache(dbname)
     limit = 100 - threshold
     ref_pairs = list(cache.get_multiple(ref_ids))
     if other_ids is not None:
@@ -159,7 +159,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
     j = j.start_subjob([3, 7])
     pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
-    cache = Cache(cache_path)
+    cache = SqliteCache(cache_path)
     id2picture = {}
     for picture in pictures:
         try:
