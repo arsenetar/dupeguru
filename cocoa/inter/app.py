@@ -10,6 +10,8 @@ from .directories import Directories, Bundle
 from .photo import Photo
 
 class DupeGuru(DupeGuruBase):
+    PICTURE_CACHE_TYPE = 'shelve'
+
     def __init__(self, view):
         DupeGuruBase.__init__(self, view)
         self.directories = Directories()

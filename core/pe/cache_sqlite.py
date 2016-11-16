@@ -12,9 +12,10 @@ import sqlite3 as sqlite
 from .cache import string_to_colors, colors_to_string
 
 class SqliteCache:
-    """A class to cache picture blocks.
+    """A class to cache picture blocks in a sqlite backend.
     """
-    def __init__(self, db=':memory:'):
+    def __init__(self, db=':memory:', readonly=False):
+        # readonly is not used in the sqlite version of the cache
         self.dbname = db
         self.con = None
         self._create_con()

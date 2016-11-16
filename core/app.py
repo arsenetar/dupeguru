@@ -116,6 +116,8 @@ class DupeGuru(Broadcaster):
 
     NAME = PROMPT_NAME = "dupeGuru"
 
+    PICTURE_CACHE_TYPE = 'sqlite' # set to 'shelve' for a ShelveCache
+
     def __init__(self, view):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
@@ -133,12 +135,13 @@ class DupeGuru(Broadcaster):
         # In addition to "app-level" options, this dictionary also holds options that will be
         # sent to the scanner. They don't have default values because those defaults values are
         # defined in the scanner class.
+        picture_cache_name = 'cached_pictures.shelve' if self.PICTURE_CACHE_TYPE == 'shelve' else 'cached_pictures.db'
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
             'ignore_hardlink_matches': False,
             'copymove_dest_type': DestType.Relative,
-            'cache_path': op.join(self.appdata, 'cached_pictures.db'),
+            'cache_path': op.join(self.appdata, picture_cache_name),
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -405,9 +408,10 @@ class DupeGuru(Broadcaster):
                 path = path.parent()
 
     def clear_picture_cache(self):
-        cache = pe.cache_sqlite.SqliteCache(self.options['cache_path'])
-        cache.clear()
-        cache.close()
+        try:
+            os.remove(self.options['cache_path'])
+        except FileNotFoundError:
+            pass # we don't care
 
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path

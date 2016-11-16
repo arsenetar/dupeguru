@@ -12,6 +12,7 @@ from hscommon.testutil import eq_
 try:
     from ..pe.cache import colors_to_string, string_to_colors
     from ..pe.cache_sqlite import SqliteCache
+    from ..pe.cache_shelve import ShelveCache
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 
@@ -129,6 +130,11 @@ class TestCaseSqliteCache(BaseTestCaseCache):
         del c
         c = self.get_cache(dbname)
         eq_(c['foo'], [(1, 2, 3)])
+
+
+class TestCaseShelveCache(BaseTestCaseCache):
+    def get_cache(self, dbname=None):
+        return ShelveCache(dbname)
 
 
 class TestCaseCacheSQLEscape:

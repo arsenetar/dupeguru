@@ -16,7 +16,6 @@ from hscommon.jobprogress import job
 
 from core.engine import Match
 from .block import avgdiff, DifferentBlockCountError, NoBlocksError
-from .cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -49,12 +48,20 @@ except Exception:
     logging.warning("Had problems to determine cpu count on launch.")
     RESULTS_QUEUE_LIMIT = 8
 
+def get_cache(cache_path, readonly=False):
+    if cache_path.endswith('shelve'):
+        from .cache_shelve import ShelveCache
+        return ShelveCache(cache_path, readonly=readonly)
+    else:
+        from .cache_sqlite import SqliteCache
+        return SqliteCache(cache_path, readonly=readonly)
+
 def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
     # there is enough memory left to carry on the operation because it is assumed that the
     # MemoryError happens when trying to read an image file, which is freed from memory by the
     # time that MemoryError is raised.
-    cache = SqliteCache(cache_path)
+    cache = get_cache(cache_path)
     cache.purge_outdated()
     prepared = [] # only pictures for which there was no error getting blocks
     try:
@@ -109,7 +116,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     # The list of ids in ref_ids have to be compared to the list of ids in other_ids. other_ids
     # can be None. In this case, ref_ids has to be compared with itself
     # picinfo is a dictionary {pic_id: (dimensions, is_ref)}
-    cache = SqliteCache(dbname)
+    cache = get_cache(dbname, readonly=True)
     limit = 100 - threshold
     ref_pairs = list(cache.get_multiple(ref_ids))
     if other_ids is not None:
@@ -159,7 +166,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
     j = j.start_subjob([3, 7])
     pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
-    cache = SqliteCache(cache_path)
+    cache = get_cache(cache_path)
     id2picture = {}
     for picture in pictures:
         try:
