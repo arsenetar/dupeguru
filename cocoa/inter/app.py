@@ -1,7 +1,6 @@
 import logging
 
 from objp.util import pyref, dontwrap
-from hscommon.path import Path, pathify
 from cocoa import install_exception_hook, install_cocoa_logger, patch_threaded_job_performer
 from cocoa.inter import PyBaseApp, BaseAppView
 
