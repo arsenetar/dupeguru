@@ -135,13 +135,12 @@ class DupeGuru(Broadcaster):
         # In addition to "app-level" options, this dictionary also holds options that will be
         # sent to the scanner. They don't have default values because those defaults values are
         # defined in the scanner class.
-        picture_cache_name = 'cached_pictures.shelve' if self.PICTURE_CACHE_TYPE == 'shelve' else 'cached_pictures.db'
         self.options = {
             'escape_filter_regexp': True,
             'clean_empty_dirs': False,
             'ignore_hardlink_matches': False,
             'copymove_dest_type': DestType.Relative,
-            'cache_path': op.join(self.appdata, picture_cache_name),
+            'picture_cache_type': self.PICTURE_CACHE_TYPE
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -168,6 +167,11 @@ class DupeGuru(Broadcaster):
             self.result_table = se.result_table.ResultTable(self)
         self.result_table.connect()
         self.view.create_results_window()
+
+    def _get_picture_cache_path(self):
+        cache_type = self.options['picture_cache_type']
+        cache_name = 'cached_pictures.shelve' if cache_type == 'shelve' else 'cached_pictures.db'
+        return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if self.app_mode in (AppMode.Music, AppMode.Picture):
@@ -758,6 +762,8 @@ class DupeGuru(Broadcaster):
         for k, v in self.options.items():
             if hasattr(scanner, k):
                 setattr(scanner, k, v)
+        if self.app_mode == AppMode.Picture:
+            scanner.cache_path = self._get_picture_cache_path()
         self.results.groups = []
         self._recreate_result_table()
         self._results_changed()

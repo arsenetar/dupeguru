@@ -115,6 +115,7 @@ class DupeGuru(QObject):
             scanned_tags.add('year')
         self.model.options['scanned_tags'] = scanned_tags
         self.model.options['match_scaled'] = self.prefs.match_scaled
+        self.model.options['picture_cache_type'] = self.prefs.picture_cache_type
 
     #--- Private
     def _get_details_dialog_class(self):
