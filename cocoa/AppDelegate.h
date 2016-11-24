@@ -7,7 +7,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 #import <Cocoa/Cocoa.h>
-#import <Sparkle/SUUpdater.h>
 #import "PyDupeGuru.h"
 #import "ResultWindow.h"
 #import "ResultTable.h"
@@ -24,7 +23,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 {
     NSMenu *recentResultsMenu;
     NSMenu *columnsMenu;
-    SUUpdater *updater;
     
     PyDupeGuru *model;
     ResultWindow *_resultWindow;
@@ -41,7 +39,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 @property (readwrite, retain) NSMenu *recentResultsMenu;
 @property (readwrite, retain) NSMenu *columnsMenu;
-@property (readwrite, retain) SUUpdater *updater;
 
 /* Virtual */
 + (NSDictionary *)defaultPreferences;

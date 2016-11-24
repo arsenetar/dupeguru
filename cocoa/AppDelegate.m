@@ -22,7 +22,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 @synthesize recentResultsMenu;
 @synthesize columnsMenu;
-@synthesize updater;
 
 + (NSDictionary *)defaultPreferences
 {
@@ -70,7 +69,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     self = [super init];
     model = [[PyDupeGuru alloc] init];
     [model bindCallback:createCallback(@"DupeGuruView", self)];
-    [self setUpdater:[SUUpdater sharedUpdater]];
     NSMutableIndexSet *contentsIndexes = [NSMutableIndexSet indexSet];
     [contentsIndexes addIndex:1];
     [contentsIndexes addIndex:2];
@@ -92,12 +90,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
     // We can only finalize initialization once the main menu has been created, which cannot happen
     // before AppDelegate is created.
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    /* Because the pref pane is lazily loaded, we have to manually do the update check if the
-       preference is set.
-    */
-    if ([ud boolForKey:@"SUEnableAutomaticChecks"]) {
-        [[SUUpdater sharedUpdater] checkForUpdatesInBackground];
-    }
     _recentResults = [[HSRecentFiles alloc] initWithName:@"recentResults" menu:recentResultsMenu];
     [_recentResults setDelegate:self];
     _directoryPanel = [[DirectoryPanel alloc] initWithParentApp:self];

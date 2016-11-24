@@ -106,12 +106,6 @@ def build_xibless(dest='cocoa/autogen'):
         )
 
 def build_cocoa(dev):
-    sparkle_framework_path = op.join('cocoa', 'Sparkle', 'build', 'Release', 'Sparkle.framework')
-    if not op.exists(sparkle_framework_path):
-        print("Building Sparkle")
-        os.chdir(op.join('cocoa', 'Sparkle'))
-        print_and_do('make build')
-        os.chdir(op.join('..', '..'))
     print("Creating OS X app structure")
     app = cocoa_app()
     app_version = get_module_version('core')

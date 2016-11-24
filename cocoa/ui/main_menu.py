@@ -12,7 +12,6 @@ windowMenu = result.addMenu("Window")
 helpMenu = result.addMenu("Help")
 
 appMenu.addItem("About dupeGuru", Action(owner, 'showAboutBox'))
-appMenu.addItem("Check for update...", Action(owner.updater, 'checkForUpdates:'))
 appMenu.addSeparator()
 appMenu.addItem("Preferences...", Action(owner, 'showPreferencesPanel'), 'cmd+,')
 appMenu.addSeparator()

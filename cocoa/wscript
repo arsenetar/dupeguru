@@ -31,8 +31,6 @@ def configure(conf):
     conf.env.FRAMEWORK_COCOA = 'Cocoa'
     conf.env.ARCH_COCOA = ['x86_64']
     conf.env.MACOSX_DEPLOYMENT_TARGET = '10.8'
-    conf.env.CFLAGS = ['-F'+op.abspath('Sparkle/build/Release')]
-    conf.env.LINKFLAGS = ['-F'+op.abspath('Sparkle/build/Release')]
 
 def build(ctx):
     # What do we compile?
@@ -62,7 +60,7 @@ def build(ctx):
         # Because our python lib's install name is "@rpath/Python", we need to set the executable's
         # rpath. Fortunately, WAF supports it and we just need to supply the "rpath" argument.
         rpath         = '@executable_path/../Frameworks',
-        framework     = ['Sparkle', 'Quartz'],
+        framework     = ['Quartz'],
     )
 
 from waflib import TaskGen

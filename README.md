@@ -60,7 +60,6 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 There are also other sub-folder that comes from external repositories and are part of this repo as
 git submodules:
 
-* Sparkle: An auto-update library for the OS X version.
 * hscommon: A collection of helpers used across HS applications.
 * cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
 * qtlib: A collection of helpers used across Qt UI codebases of HS applications.
