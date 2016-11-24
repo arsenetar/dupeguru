@@ -154,7 +154,7 @@ def build_cocoa(dev):
     image_path = 'cocoa/dupeguru.icns'
     resources = [image_path, 'cocoa/dsa_pub.pem', 'build/dg_cocoa.py', 'build/help']
     app.copy_resources(*resources, use_symlinks=dev)
-    app.copy_frameworks('build/Python', sparkle_framework_path)
+    app.copy_frameworks('build/Python')
     print("Creating the run.py file")
     tmpl = open('cocoa/run_template.py', 'rt').read()
     run_contents = tmpl.replace('{{app_path}}', app.dest)
