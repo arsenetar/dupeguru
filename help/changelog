@@ -1,6 +1,13 @@
+=== 4.0.3 (2016-11-24)
+
+* Add new picture cache backend: shelve
+* Make shelve picture cache backend the active one on MacOS to fix #394 more
+  elegantly. [cocoa]
+* Remove Sparkle (auto-updates) due to technical limitations. [cocoa]
+
 === 4.0.2 (2016-10-09)
 
-* Fix systematic crash in Picture Mode under MacOs Sierra. (#394)
+* Fix systematic crash in Picture Mode under MacOS Sierra. (#394)
 * No change for Linux. Just keeping version in sync.
 
 === 4.0.1 (2016-08-24)
