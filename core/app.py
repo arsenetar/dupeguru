@@ -413,7 +413,7 @@ class DupeGuru(Broadcaster):
 
     def clear_picture_cache(self):
         try:
-            os.remove(self.options['cache_path'])
+            os.remove(self._get_picture_cache_path())
         except FileNotFoundError:
             pass # we don't care
 
