@@ -148,7 +148,7 @@ You can also package dupeGuru into an installable package with:
 
 ### Running tests
 
-The complete test suite is ran with [Tox 1.7+][tox]. If you have it installed system-wide, you
+The complete test suite is run with [Tox 1.7+][tox]. If you have it installed system-wide, you
 don't even need to set up a virtualenv. Just `cd` into the root project folder and run `tox`.
 
 If you don't have Tox system-wide, install it in your virtualenv with `pip install tox` and then
