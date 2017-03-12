@@ -102,7 +102,7 @@ def package_source_tgz():
     dest = op.join(build_path, name)
     print_and_do('git archive -o {} HEAD'.format(dest))
     # Now, we need to include submodules
-    SUBMODULES = ['hscommon', 'qtlib', 'cocoalib']
+    SUBMODULES = ['hscommon', 'qtlib']
     for submodule in SUBMODULES:
         print("Adding submodule {} to archive".format(submodule))
         os.chdir(submodule)
