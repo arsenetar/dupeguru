@@ -17,13 +17,10 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-all : | run.py
+all : | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
-run.py : | env i18n modules qt/dg_rc.py
-	cp qt/run_template.py run.py
-
-run: | run.py
+run:
 	./env/bin/python run.py
 
 pyc:
@@ -103,7 +100,6 @@ uninstall :
 	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
 
 clean:
-	-rm run.py
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.so qt/pe/*.so

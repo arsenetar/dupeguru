@@ -1,4 +1,4 @@
-# Copyright 2016 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2017 Virgil Dupras
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
@@ -12,21 +12,16 @@ import json
 from argparse import ArgumentParser
 import platform
 
-from hscommon.plat import ISOSX
 from hscommon.build import (
     print_and_do, copy_packages, build_debian_changelog,
     get_module_version, filereplace, copy, setup_package_argparser,
-    package_cocoa_app_in_dmg, copy_all
+    copy_all
 )
 
 def parse_args():
     parser = ArgumentParser()
     setup_package_argparser(parser)
     return parser.parse_args()
-
-def package_cocoa(args):
-    app_path = 'build/dupeGuru.app'
-    package_cocoa_app_in_dmg(app_path, '.', args)
 
 def copy_files_to_package(destpath, packages, with_so):
     # when with_so is true, we keep .so files in the package, and otherwise, we don't. We need this
@@ -119,23 +114,19 @@ def package_source_tgz():
 
 def main():
     args = parse_args()
-    ui = 'cocoa' if ISOSX else 'qt'
     if args.src_pkg:
         print("Creating source package for dupeGuru")
         package_source_tgz()
         return
-    print("Packaging dupeGuru with UI {}".format(ui))
-    if ui == 'cocoa':
-        package_cocoa(args)
-    elif ui == 'qt':
-        if not args.arch_pkg:
-            distname, _, _ = platform.dist()
-        else:
-            distname = 'arch'
-        if distname == 'arch':
-            package_arch()
-        else:
-            package_debian()
+    print("Packaging dupeGuru with UI qt")
+    if not args.arch_pkg:
+        distname, _, _ = platform.dist()
+    else:
+        distname = 'arch'
+    if distname == 'arch':
+        package_arch()
+    else:
+        package_debian()
 
 if __name__ == '__main__':
     main()

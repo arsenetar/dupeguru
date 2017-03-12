@@ -5,6 +5,8 @@ a system. It's written mostly in Python 3 and has the peculiarity of using
 [multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
 is written in Objective-C and uses Cocoa. On Linux, it's written in Python and uses Qt5.
 
+The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/dupeguru-cocoa
+
 ## Current status: People wanted
 
 dupeGuru has currently only one maintainer, me. This is a dangerous situation that needs to be
@@ -50,7 +52,6 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 [available online][documentation] in its built form. Here's how this source tree is organised:
 
 * core: Contains the core logic code for dupeGuru. It's Python code.
-* cocoa: UI code for the Cocoa toolkit. It's Objective-C code.
 * qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
 * images: Images used by the different UI codebases.
 * pkg: Skeleton files required to create different packages
@@ -61,86 +62,21 @@ There are also other sub-folder that comes from external repositories and are pa
 git submodules:
 
 * hscommon: A collection of helpers used across HS applications.
-* cocoalib: A collection of helpers used across Cocoa UI codebases of HS applications.
 * qtlib: A collection of helpers used across Qt UI codebases of HS applications.
 
 ## How to build dupeGuru from source
 
+### Prerequisites
+
+* [Python 3.4+][python]
+* PyQt5
+
 ### make
 
-If you're on linux, you can build the ap for local development with `make`:
+dupeGuru is built with "make":
 
     $ make
     $ make run
-
-The `Makefile` is a recent addition, however. You might have to fallback to the legacy build
-scripts.
-
-### Legacy build
-
-If you're on OS X or that if the `make` method didn't work, you can build dupeGuru with the
-legacy scripts.
-
-There's a bootstrap script that will make building very easy. There might be some things that you
-need to install manually on your system, but the bootstrap script will tell you when what you need
-to install. You can run the bootstrap with:
-
-    $ ./bootstrap.sh
-
-and follow instructions from the script.
-
-### Prerequisites installation
-
-Prerequisites are installed through `pip`. However, some of them are not "pip installable" and have
-to be installed manually.
-
-* All systems: [Python 3.4+][python]
-* Mac OS X: OS X 10.10+ with XCode command line tools.
-* Linux: PyQt5
-
-On Ubuntu (14.04+), the apt-get command to install all pre-requisites is:
-
-    $ apt-get install python3-dev python3-pyqt5 pyqt5-dev-tools python3-venv
-
-### OS X and pyenv
-
-[pyenv][pyenv] is a popular way to manage multiple python versions. However, be aware that dupeGuru
-will not compile with a pyenv's python unless it's been built with `--enable-framework`. You can do
-this with:
-
-    $ env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.4.3
-
-### Setting up the virtual environment
-
-*This is done automatically by the bootstrap script. This is a reference in case you need to do it
-manually.*
-
-Use Python's built-in `pyvenv` to create a virtual environment in which we're going to install our.
-Python-related dependencies. In that environment, we then install our requirements with pip.
-
-For Linux (`--system-site-packages` is to be able to import PyQt):
-
-    $ pyvenv --system-site-packages env
-    $ source env/bin/activate
-    $ pip install -r requirements.txt
-
-For OS X:
-
-    $ pyvenv  env
-    $ source env/bin/activate
-    $ pip install -r requirements-osx.txt
-
-### Actual building and running
-
-With your virtualenv activated, you can build and run dupeGuru with these commands:
-
-    $ python build.py
-    $ python run.py
-
-You can also package dupeGuru into an installable package with:
-
-    $ python package.py
-
 
 ### Generate Ubuntu packages
 
@@ -158,13 +94,11 @@ You can also run automated tests without Tox. Extra requirements for running tes
 `requirements-extra.txt`. So, you can do `pip install -r requirements-extra.txt` inside your
 virtualenv and then `py.test core hscommon`
 
-[dupeguru]: http://www.hardcoded.net/dupeguru/
+[dupeguru]: https://www.hardcoded.net/dupeguru/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
 [contrib-issue]: https://github.com/hsoft/dupeguru/issues/300
 [nowindows]: https://www.hardcoded.net/archive2015#2015-11-01
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
 [pyqt]: http://www.riverbankcomputing.com
-[pyenv]: https://github.com/yyuu/pyenv
 [tox]: https://tox.readthedocs.org/en/latest/
-
