@@ -68,6 +68,8 @@ class DupeGuru(QObject):
         self.directories_dialog.show()
         self.model.load()
 
+        self.SIGTERM.connect(self.handleSIGTERM)
+
         # The timer scheme is because if the nag is not shown before the application is
         # completely initialized, the nag will be shown before the app shows up in the task bar
         # In some circumstances, the nag is hidden by other window, which may make the user think
@@ -166,6 +168,7 @@ class DupeGuru(QObject):
 
     #--- Signals
     willSavePrefs = pyqtSignal()
+    SIGTERM = pyqtSignal()
 
     #--- Events
     def finishedLaunching(self):
@@ -211,6 +214,9 @@ class DupeGuru(QObject):
         base_path = platform.HELP_PATH
         url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'index.html')))
         QDesktopServices.openUrl(url)
+
+    def handleSIGTERM(self):
+        self.shutdown()
 
     #--- model --> view
     def get_default(self, key):

@@ -20,6 +20,23 @@ from qt import dg_rc
 from qt.platform import BASE_PATH
 from core import __version__, __appname__
 
+from signal import signal, SIGINT, SIGTERM, SIGQUIT
+
+global dgapp
+dgapp = None
+
+def signalHandler(sig, frame):
+    global dgapp
+    if dgapp is None:
+        return
+    if sig in (SIGINT, SIGTERM, SIGQUIT):
+        dgapp.SIGTERM.emit()
+
+def setUpSignals():
+    signal(SIGINT,  signalHandler)
+    signal(SIGTERM, signalHandler)
+    signal(SIGQUIT, signalHandler)
+
 def main():
     app = QApplication(sys.argv)
     QCoreApplication.setOrganizationName('Hardcoded Software')
@@ -30,10 +47,18 @@ def main():
     lang = settings.value('Language')
     locale_folder = op.join(BASE_PATH, 'locale')
     install_gettext_trans_under_qt(locale_folder, lang)
+    # Handle OS signals
+    setUpSignals()
+    # Let the Python interpreter run every 500ms to handle signals.
+    from PyQt5.QtCore import QTimer
+    timer = QTimer()
+    timer.start(500)
+    timer.timeout.connect(lambda: None)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
     from qt.app import DupeGuru
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
+    global dgapp
     dgapp = DupeGuru()
     install_excepthook('https://github.com/hsoft/dupeguru/issues')
     result = app.exec()
