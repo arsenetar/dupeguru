@@ -49,7 +49,9 @@ def main():
     install_gettext_trans_under_qt(locale_folder, lang)
     # Handle OS signals
     setUpSignals()
-    # Let the Python interpreter run every 500ms to handle signals.
+    # Let the Python interpreter runs every 500ms to handle signals.  This is
+    # required because Python cannot handle signals while the Qt event loop is
+    # running.
     from PyQt5.QtCore import QTimer
     timer = QTimer()
     timer.start(500)
