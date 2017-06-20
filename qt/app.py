@@ -209,7 +209,11 @@ class DupeGuru(QObject):
 
     def showHelpTriggered(self):
         base_path = platform.HELP_PATH
-        url = QUrl.fromLocalFile(op.abspath(op.join(base_path, 'index.html')))
+        help_path = op.abspath(op.join(base_path, 'index.html'))
+        if op.exists(help_path):
+            url = QUrl.fromLocalFile(help_path)
+        else:
+            url = QUrl('https://www.hardcoded.net/dupeguru/help/en/')
         QDesktopServices.openUrl(url)
 
     #--- model --> view

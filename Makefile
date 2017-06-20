@@ -81,9 +81,9 @@ normpo :
 srcpkg :
 	./scripts/srcpkg.sh
 
-install: build/help | all pyc
+install: all pyc
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf ${packages} locale build/help ${DESTDIR}${PREFIX}/share/dupeguru
+	cp -rf ${packages} locale ${DESTDIR}${PREFIX}/share/dupeguru
 	cp -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
 	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -92,6 +92,10 @@ install: build/help | all pyc
 	cp -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
 	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
 	cp -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
+
+installdocs: build/help
+	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
+	cp -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
 
 uninstall :
 	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
