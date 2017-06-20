@@ -2,6 +2,16 @@ PYTHON ?= python3
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 
+# Set this variable if all dependencies are already met on the system. We will then avoid the
+# whole vitualenv creation and pip install dance.
+NO_VENV ?=
+
+ifdef NO_VENV
+	VENV_PYTHON = $(PYTHON)
+else
+	VENV_PYTHON = ./env/bin/python
+endif
+
 # If you're installing into a path that is not going to be the final path prefix (such as a
 # sandbox), set DESTDIR to that path.
 
@@ -21,7 +31,7 @@ all : | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
-	./env/bin/python run.py
+	$(VENV_PYTHON) run.py
 
 pyc:
 	${PYTHON} -m compileall ${packages}
@@ -32,8 +42,10 @@ reqs :
 			echo "Python 3.${REQ_MINOR_VERSION}+ required. Aborting."; \
 			exit 1; \
 		fi
+ifndef NO_VENV
 	@${PYTHON} -m venv -h > /dev/null || \
 		echo "Creation of our virtualenv failed. If you're on Ubuntu, you probably need python3-venv."
+endif
 	@${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 || \
 		{ echo "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
 
@@ -43,12 +55,14 @@ $(submodules_target) :
 	git submodule update
 
 env : | $(submodules_target) reqs
+ifndef NO_VENV
 	@echo "Creating our virtualenv"
 	${PYTHON} -m venv env --system-site-packages
-	./env/bin/python -m pip install -r requirements.txt
+	$(VENV_PYTHON) -m pip install --user -r requirements.txt
+endif
 
 build/help : | env
-	./env/bin/python build.py --doc
+	$(VENV_PYTHON) build.py --doc
 
 qt/dg_rc.py : qt/dg.qrc
 	pyrcc5 qt/dg.qrc > qt/dg_rc.py
@@ -59,24 +73,24 @@ i18n: $(mofiles)
 	msgfmt -o $@ $<	
 
 core/pe/_block.*.so : core/pe/modules/block.c core/pe/modules/common.c | env
-	./env/bin/python hscommon/build_ext.py $^ _block
+	$(VENV_PYTHON) hscommon/build_ext.py $^ _block
 	mv _block.*.so core/pe
 
 core/pe/_cache.*.so : core/pe/modules/cache.c core/pe/modules/common.c | env
-	./env/bin/python hscommon/build_ext.py $^ _cache
+	$(VENV_PYTHON) hscommon/build_ext.py $^ _cache
 	mv _cache.*.so core/pe
 
 qt/pe/_block_qt.*.so : qt/pe/modules/block.c | env
-	./env/bin/python hscommon/build_ext.py $^ _block_qt
+	$(VENV_PYTHON) hscommon/build_ext.py $^ _block_qt
 	mv _block_qt.*.so qt/pe
 
 modules : core/pe/_block.*.so core/pe/_cache.*.so qt/pe/_block_qt.*.so
 
 mergepot :
-	./env/bin/python build.py --mergepot
+	$(VENV_PYTHON) build.py --mergepot
 
 normpo :
-	./env/bin/python build.py --normpo
+	$(VENV_PYTHON) build.py --normpo
 
 srcpkg :
 	./scripts/srcpkg.sh
