@@ -4,6 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import sys
 import os
 import os.path as op
 import compileall
@@ -112,6 +113,62 @@ def package_source_tgz():
         print_and_do('tar -A {} -f {}'.format(archive_path, dest))
     print_and_do('gzip {}'.format(dest))
 
+def package_windows():
+    from cx_Freeze import setup, Executable
+    app_version = get_module_version('core')
+    arch = platform.architecture()[0]
+    buildpath = op.join('build', 'dupeguru-win{}'.format(arch))
+    # remove existing build directory
+    if op.exists(buildpath):
+        shutil.rmtree(buildpath)
+    include_files = []
+    # include locale files if they are built otherwise exit as it will break
+    # the localization
+    if op.exists('build/locale'):
+        include_files.append(('build/locale', 'locale'))
+    else:
+        print("Locale files not built, exiting...")
+        return
+    # include help files if they are built otherwise exit as they should be included?
+    if op.exists('build/help'):
+        include_files.append(('build/help', 'help'))
+    else:
+        print("Help files not built, exiting...")
+        return
+    # options for cx_Freeze
+    # if zip_include packages is not used, the cx_Freeze packager will include
+    # the whole PyQT5 directory
+    options = {
+        'build_exe': {
+            'build_exe': buildpath,
+            'excludes': [],
+            'includes': ['atexit'],
+            'include_files': include_files,
+            'include_msvcr': True,
+            'zip_include_packages': ['*'],
+            'zip_exclude_packages': []
+        },
+    }
+    # executables to build, uses se edition icon
+    executables = [
+        Executable(
+            script='run.py',
+            base='Win32GUI',
+            targetName='dupeguru.exe',
+            icon='images/dgse_logo.ico',
+            copyright='Copyright (C) 2017 Hardcoded Software'
+        )
+    ]
+    # call cx_freeze
+    setup(
+        name='dupeguru',
+        version=app_version,
+        description='Tool to find duplicate files on your computer.',
+        options=options,
+        executables=executables,
+        script_args=['build']
+        )
+
 def main():
     args = parse_args()
     if args.src_pkg:
@@ -119,15 +176,17 @@ def main():
         package_source_tgz()
         return
     print("Packaging dupeGuru with UI qt")
-    if not args.arch_pkg:
-        distname, _, _ = platform.dist()
+    if sys.platform == 'win32':
+        package_windows()
     else:
-        distname = 'arch'
-    if distname == 'arch':
-        package_arch()
-    else:
-        package_debian()
+        if not args.arch_pkg:
+            distname, _, _ = platform.dist()
+        else:
+            distname = 'arch'
+        if distname == 'arch':
+            package_arch()
+        else:
+            package_debian()
 
 if __name__ == '__main__':
     main()
-
