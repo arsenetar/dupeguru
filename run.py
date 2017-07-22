@@ -20,7 +20,12 @@ from qt import dg_rc
 from qt.platform import BASE_PATH
 from core import __version__, __appname__
 
-from signal import signal, SIGINT, SIGTERM, SIGQUIT
+# SIGQUIT is not defined on Windows
+if sys.platform == 'win32':
+    from signal import signal, SIGINT, SIGTERM
+    SIGQUIT = SIGTERM
+else:
+    from signal import signal, SIGINT, SIGTERM, SIGQUIT
 
 global dgapp
 dgapp = None
