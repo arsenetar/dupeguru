@@ -21,3 +21,4 @@ cocoa/autogen
 /help/*/changelog.rst
 
 *.pyd
+*.exe

@@ -167,7 +167,7 @@ def package_windows():
         options=options,
         executables=executables,
         script_args=['build']
-        )
+    )
 
 def main():
     args = parse_args()

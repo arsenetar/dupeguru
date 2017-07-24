@@ -2,6 +2,18 @@ PYTHON ?= python3
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 
+# Window compatability via Msys2 
+# - venv creates Scripts instead of bin
+# - compile generates .pyd instead of .so
+
+ifeq ($(shell uname -o), Msys)
+	BIN = Scripts
+	SO = pyd
+else
+	BIN = bin
+	SO = so
+endif
+
 # Set this variable if all dependencies are already met on the system. We will then avoid the
 # whole vitualenv creation and pip install dance.
 NO_VENV ?=
@@ -9,7 +21,7 @@ NO_VENV ?=
 ifdef NO_VENV
 	VENV_PYTHON = $(PYTHON)
 else
-	VENV_PYTHON = ./env/bin/python
+	VENV_PYTHON = ./env/$(BIN)/python
 endif
 
 # If you're installing into a path that is not going to be the final path prefix (such as a
@@ -72,19 +84,19 @@ i18n: $(mofiles)
 %.mo : %.po
 	msgfmt -o $@ $<	
 
-core/pe/_block.*.so : core/pe/modules/block.c core/pe/modules/common.c | env
+core/pe/_block.*.$(SO) : core/pe/modules/block.c core/pe/modules/common.c | env
 	$(VENV_PYTHON) hscommon/build_ext.py $^ _block
-	mv _block.*.so core/pe
+	mv _block.*.$(SO) core/pe
 
-core/pe/_cache.*.so : core/pe/modules/cache.c core/pe/modules/common.c | env
+core/pe/_cache.*.$(SO) : core/pe/modules/cache.c core/pe/modules/common.c | env
 	$(VENV_PYTHON) hscommon/build_ext.py $^ _cache
-	mv _cache.*.so core/pe
+	mv _cache.*.$(SO) core/pe
 
-qt/pe/_block_qt.*.so : qt/pe/modules/block.c | env
+qt/pe/_block_qt.*.$(SO) : qt/pe/modules/block.c | env
 	$(VENV_PYTHON) hscommon/build_ext.py $^ _block_qt
-	mv _block_qt.*.so qt/pe
+	mv _block_qt.*.$(SO) qt/pe
 
-modules : core/pe/_block.*.so core/pe/_cache.*.so qt/pe/_block_qt.*.so
+modules : core/pe/_block.*.$(SO) core/pe/_cache.*.$(SO) qt/pe/_block_qt.*.$(SO)
 
 mergepot :
 	$(VENV_PYTHON) build.py --mergepot
@@ -120,6 +132,6 @@ uninstall :
 clean:
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
-	-rm core/pe/*.so qt/pe/*.so
+	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
 .PHONY : clean srcpkg normpo mergepot modules i18n reqs run pyc install uninstall all
