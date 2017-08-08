@@ -85,7 +85,7 @@ var InstallSize
 !include MultiUser.nsh
     
 ; Modern UI 2
-!include "MUI2.nsh"
+!include MUI2.nsh
 !define MUI_ICON "${APPICON}"
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING

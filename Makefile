@@ -1,17 +1,23 @@
 PYTHON ?= python3
+PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 
 # Window compatability via Msys2 
 # - venv creates Scripts instead of bin
 # - compile generates .pyd instead of .so
+# - venv with --sytem-site-packages has issues on windows as well...
 
 ifeq ($(shell uname -o), Msys)
 	BIN = Scripts
 	SO = pyd
+	VENV_OPTIONS = 
+	PIP_OPTIONS =
 else
 	BIN = bin
 	SO = so
+	VENV_OPTIONS = --system-site-packages
+	PIP_OPTIONS = --user
 endif
 
 # Set this variable if all dependencies are already met on the system. We will then avoid the
@@ -69,15 +75,15 @@ $(submodules_target) :
 env : | $(submodules_target) reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
-	${PYTHON} -m venv env --system-site-packages
-	$(VENV_PYTHON) -m pip install --user -r requirements.txt
+	${PYTHON} -m venv env ${VENV_OPTIONS}
+	$(VENV_PYTHON) -m pip install ${PIP_OPTIONS} -r requirements.txt
 endif
 
 build/help : | env
 	$(VENV_PYTHON) build.py --doc
 
 qt/dg_rc.py : qt/dg.qrc
-	pyrcc5 qt/dg.qrc > qt/dg_rc.py
+	$(PYRCC5) qt/dg.qrc > qt/dg_rc.py
 
 i18n: $(mofiles)
 

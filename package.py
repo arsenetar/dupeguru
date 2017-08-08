@@ -12,6 +12,7 @@ import shutil
 import json
 from argparse import ArgumentParser
 import platform
+import re
 
 from hscommon.build import (
     print_and_do, copy_packages, build_debian_changelog,
@@ -168,6 +169,14 @@ def package_windows():
         executables=executables,
         script_args=['build']
     )
+    # Information to pass to NSIS
+    version_array = app_version.split('.')
+    match = re.search('[0-9]+', arch)
+    bits = match.group(0)
+    # Call NSIS (TODO update to not use hardcoded path)
+    cmd = ('"C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe" '
+           '/DVERSIONMAJOR={0} /DVERSIONMINOR={1} /DVERSIONPATCH={2} /DBITS={3} setup.nsi')
+    print_and_do(cmd.format(version_array[0], version_array[1], version_array[2], bits))
 
 def main():
     args = parse_args()
