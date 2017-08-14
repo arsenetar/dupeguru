@@ -57,8 +57,11 @@ $(submodules_target) :
 env : | $(submodules_target) reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
-	${PYTHON} -m venv env --system-site-packages
-	$(VENV_PYTHON) -m pip install --user -r requirements.txt
+	${PYTHON} -m venv env
+	$(VENV_PYTHON) -m pip install -r requirements.txt
+# We can't use the "--system-site-packages" flag on creation because otherwise we end up with
+# the system's pip and that messes up things in some cases (notably in Gentoo).
+	${PYTHON} -m venv --upgrade --system-site-packages env
 endif
 
 build/help : | env
