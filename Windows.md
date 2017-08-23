@@ -6,6 +6,7 @@
 - [nsis](http://nsis.sourceforge.net/Main_Page) (for installer creation)
 
 ### With build.py (preferred)
+To build with a different python version 3.5 vs 3.6 or 32 bit vs 64 bit specify that version instead of -3.5 to the `py` command below.  If you want to build additional versions while keeping all virtual environments setup use a different location for each vritual environment.
 
     $ cd <dupeGuru directory>
     $ git submodule init
@@ -28,10 +29,9 @@ Then the following should work
     $ make run
 
 ### Generate Windows Installer Packages
-You need to use the respective x86 or x64 version of python to build the 32 bit and 64 bit versions. The build scripts will automatically detect the python architecture for you. When using build.py make sure the resulting python works before continuing to package.py.
+You need to use the respective x86 or x64 version of python to build the 32 bit and 64 bit versions. The build scripts will automatically detect the python architecture for you. When using build.py make sure the resulting python works before continuing to package.py. NOTE: package.py looks for the 'makensis' executable in the default location for a 64 bit windows system.
 
     $ python package.py
-    $ python package.py --installer_windows    
 
 ### Running tests
 The complete test suite can be run with tox just like on linux.

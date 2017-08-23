@@ -66,6 +66,9 @@ git submodules:
 
 ## How to build dupeGuru from source
 
+### Windows
+For windows instructions see the [Windows Instructions](Windows.md).
+
 ### Prerequisites
 
 * [Python 3.4+][python]

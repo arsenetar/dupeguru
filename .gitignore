@@ -9,7 +9,7 @@ __pycache__
 
 build
 dist
-env
+env*
 /deps
 cocoa/autogen
 
