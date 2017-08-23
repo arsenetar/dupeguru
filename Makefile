@@ -12,12 +12,10 @@ ifeq ($(shell uname -o), Msys)
 	BIN = Scripts
 	SO = pyd
 	VENV_OPTIONS = 
-	PIP_OPTIONS =
 else
 	BIN = bin
 	SO = so
 	VENV_OPTIONS = --system-site-packages
-	PIP_OPTIONS = --user
 endif
 
 # Set this variable if all dependencies are already met on the system. We will then avoid the
@@ -75,8 +73,11 @@ $(submodules_target) :
 env : | $(submodules_target) reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
-	${PYTHON} -m venv env ${VENV_OPTIONS}
-	$(VENV_PYTHON) -m pip install ${PIP_OPTIONS} -r requirements.txt
+	${PYTHON} -m venv env
+	$(VENV_PYTHON) -m pip install -r requirements.txt
+# We can't use the "--system-site-packages" flag on creation because otherwise we end up with
+# the system's pip and that messes up things in some cases (notably in Gentoo).
+	${PYTHON} -m venv --upgrade ${VENV_OPTIONS} env
 endif
 
 build/help : | env
