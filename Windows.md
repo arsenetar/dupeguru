@@ -3,7 +3,7 @@
 ### Prerequisites
 
 - [Python 3.4+][python]
-- [nsis](http://nsis.sourceforge.net/Main_Page) (for installer creation)
+- [nsis][nsis] (for installer creation)
 
 ### With build.py (preferred)
 To build with a different python version 3.5 vs 3.6 or 32 bit vs 64 bit specify that version instead of -3.5 to the `py` command below.  If you want to build additional versions while keeping all virtual environments setup use a different location for each vritual environment.
@@ -35,3 +35,6 @@ You need to use the respective x86 or x64 version of python to build the 32 bit 
 
 ### Running tests
 The complete test suite can be run with tox just like on linux.
+
+[python]: http://www.python.org/
+[nsis]: http://nsis.sourceforge.net/Main_Page
