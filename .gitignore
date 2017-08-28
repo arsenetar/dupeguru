@@ -9,7 +9,7 @@ __pycache__
 
 build
 dist
-env
+env*
 /deps
 cocoa/autogen
 
@@ -19,3 +19,6 @@ cocoa/autogen
 /qt/*_rc.py
 /help/*/conf.py
 /help/*/changelog.rst
+
+*.pyd
+*.exe
