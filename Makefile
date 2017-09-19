@@ -1,4 +1,5 @@
 PYTHON ?= python3
+PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
 PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
@@ -10,11 +11,11 @@ PREFIX ?= /usr/local
 
 ifeq ($(shell uname -o), Msys)
 	BIN = Scripts
-	SO = pyd
+	SO = *.pyd
 	VENV_OPTIONS = 
 else
 	BIN = bin
-	SO = so
+	SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
 	VENV_OPTIONS = --system-site-packages
 endif
 
@@ -53,11 +54,9 @@ pyc:
 	${PYTHON} -m compileall ${packages}
 
 reqs :
-	@ret=`${PYTHON} -c "import sys; print(int(sys.version_info[:2] >= (3, ${REQ_MINOR_VERSION})))"`; \
-		if [ $${ret} -ne 1 ]; then \
-			echo "Python 3.${REQ_MINOR_VERSION}+ required. Aborting."; \
-			exit 1; \
-		fi
+ifneq ($(shell test $(PYTHON_VERSION_MINOR) -gt $(REQ_MINOR_VERSION); echo $$?),0)
+	$(error "Python 3.${REQ_MINOR_VERSION}+ required. Aborting.")
+endif
 ifndef NO_VENV
 	@${PYTHON} -m venv -h > /dev/null || \
 		echo "Creation of our virtualenv failed. If you're on Ubuntu, you probably need python3-venv."
@@ -91,19 +90,19 @@ i18n: $(mofiles)
 %.mo : %.po
 	msgfmt -o $@ $<	
 
-core/pe/_block.*.$(SO) : core/pe/modules/block.c core/pe/modules/common.c | env
-	$(VENV_PYTHON) hscommon/build_ext.py $^ _block
-	mv _block.*.$(SO) core/pe
+core/pe/_block.$(SO) : core/pe/modules/block.c core/pe/modules/common.c
+	$(PYTHON) hscommon/build_ext.py $^ _block
+	mv _block.$(SO) core/pe
 
-core/pe/_cache.*.$(SO) : core/pe/modules/cache.c core/pe/modules/common.c | env
-	$(VENV_PYTHON) hscommon/build_ext.py $^ _cache
-	mv _cache.*.$(SO) core/pe
+core/pe/_cache.$(SO) : core/pe/modules/cache.c core/pe/modules/common.c
+	$(PYTHON) hscommon/build_ext.py $^ _cache
+	mv _cache.$(SO) core/pe
 
-qt/pe/_block_qt.*.$(SO) : qt/pe/modules/block.c | env
-	$(VENV_PYTHON) hscommon/build_ext.py $^ _block_qt
-	mv _block_qt.*.$(SO) qt/pe
+qt/pe/_block_qt.$(SO) : qt/pe/modules/block.c
+	$(PYTHON) hscommon/build_ext.py $^ _block_qt
+	mv _block_qt.$(SO) qt/pe
 
-modules : core/pe/_block.*.$(SO) core/pe/_cache.*.$(SO) qt/pe/_block_qt.*.$(SO)
+modules : core/pe/_block.$(SO) core/pe/_cache.$(SO) qt/pe/_block_qt.$(SO)
 
 mergepot :
 	$(VENV_PYTHON) build.py --mergepot
