@@ -126,6 +126,11 @@ class ShelveCache:
                     continue
             todelete.append(path)
         for path in todelete:
-            del self[path]
-
+            try:
+                del self[path]
+            except KeyError:
+                # I have no idea why a KeyError sometimes happen, but it does, as we can see in
+                # #402 and #439. I don't think it hurts to silently ignore the error, so that's
+                # what we do
+                pass
 
