@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dupeGuru\n"
 "PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Last-Translator: auanasgheps\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/dupeguru/language/it/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -12,17 +12,18 @@ msgstr ""
 
 #: core/app.py:40
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "Non ci sono duplicati marcati. Nessuna operazione è stata completata."
 
 #: core/app.py:41
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "Non ci sono duplicati selezionati. Nessuna operazione è stata completata."
 
 #: core/app.py:42
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr ""
+msgstr "Stai per aprire molti file contemporaneamente. A seconda di quale programma
+li aprirà, potrebbe crearsi un bel casino. Vuoi continuare?"
 
 #: core/app.py:65
 msgid "Scanning for duplicates"
@@ -66,7 +67,7 @@ msgstr "Tutti i file marcati sono stati spostati correttamente."
 
 #: core/app.py:306
 msgid "All marked files were successfully sent to Trash."
-msgstr "Tutti i file marcati sono stati inviati nel cestino."
+msgstr "Tutti i file marcati sono stati spostati nel cestino."
 
 #: core/app.py:368
 msgid "'{}' already is in the list."
@@ -86,19 +87,19 @@ msgstr ""
 
 #: core/app.py:450
 msgid "copy"
-msgstr ""
+msgstr "copiare"
 
 #: core/app.py:450
 msgid "move"
-msgstr ""
+msgstr "spostare"
 
 #: core/app.py:451
 msgid "Select a directory to {} marked files to"
-msgstr ""
+msgstr "Seleziona una cartella per {} in essa i file marcati"
 
 #: core/app.py:490
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Seleziona una destinazione per il file CSV"
 
 #: core/app.py:518
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -112,7 +113,7 @@ msgstr "Stai per rimuovere %d file dai risultati. Continuare?"
 
 #: core/app.py:719
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} gruppi duplicati sono stati cambiati dalla nuova priorirità"
 
 #: core/app.py:762
 msgid "Collecting files to scan"
@@ -140,7 +141,7 @@ msgstr "Lettura dimensione di %d/%d file"
 
 #: core/gui/deletion_options.py:69
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Stai spostando {} file al Cestino."
 
 #: core/gui/ignore_list_dialog.py:24
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -150,7 +151,7 @@ msgstr ""
 
 #: core/prioritize.py:68
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: core/prioritize.py:96
 msgid "Ends with number"
@@ -162,11 +163,11 @@ msgstr "Non termina con un numero"
 
 #: core/prioritize.py:98
 msgid "Longest"
-msgstr ""
+msgstr "Più lungo"
 
 #: core/prioritize.py:99
 msgid "Shortest"
-msgstr ""
+msgstr "Più corto"
 
 #: core/prioritize.py:132
 msgid "Highest"
@@ -214,47 +215,47 @@ msgstr "Verificate %d/%d somiglianze"
 
 #: core/pe/matchexif.py:18
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "Leggi dati EXIF da %d/%d immagini"
 
 #: core/app.py:312
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Impossibile caricare il file: {}"
 
 #: core/app.py:496 core/app.py:742
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Impossibile modificare il file: {}"
 
 #: core/me/scanner.py:19 core/se/scanner.py:15
 msgid "Filename"
-msgstr ""
+msgstr "Nome del file"
 
 #: core/me/scanner.py:20
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Nome file - Campi"
 
 #: core/me/scanner.py:21
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Nome file - Campi (Nessun Ordine)"
 
 #: core/me/scanner.py:22
 msgid "Tags"
-msgstr ""
+msgstr "Tag"
 
 #: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
 msgid "Contents"
-msgstr ""
+msgstr "Contenuti"
 
 #: core/pe/scanner.py:21
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Timestamp EXIF"
 
 #: core/scanner.py:139
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Quasi finito! Sto organizzando i risultati..."
 
 #: core/se/scanner.py:17
 msgid "Folders"
-msgstr ""
+msgstr "Cartelle"
 
 #~ msgid "Sending files to the recycle bin"
 #~ msgstr "Spostamento nel cestino"
