@@ -119,4 +119,4 @@ msgstr "Dimensione (KB)"
 
 #: core/pe/result_table.py:23
 msgid "EXIF Timestamp"
-msgstr "Data EXIF   "
+msgstr "Data EXIF"
