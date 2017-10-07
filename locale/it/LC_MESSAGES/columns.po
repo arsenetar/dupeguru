@@ -45,7 +45,7 @@ msgstr "Modificato"
 
 #: core/me/prioritize.py:18
 msgid "Duration"
-msgstr ""
+msgstr "Durata"
 
 #: core/me/prioritize.py:24 core/me/result_table.py:22
 msgid "Bitrate"
@@ -53,7 +53,7 @@ msgstr "Bitrate"
 
 #: core/me/prioritize.py:30
 msgid "Samplerate"
-msgstr ""
+msgstr "Campionamento"
 
 #: core/me/result_table.py:20
 msgid "Size (MB)"
@@ -119,4 +119,4 @@ msgstr "Dimensione (KB)"
 
 #: core/pe/result_table.py:23
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Data EXIF"
