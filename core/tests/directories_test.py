@@ -13,6 +13,7 @@ from pytest import raises
 from hscommon.path import Path
 from hscommon.testutil import eq_
 
+from ..fs import File
 from ..directories import Directories, DirectoryState, AlreadyThereError, InvalidPathError
 
 def create_fake_fs(rootpath):
@@ -161,6 +162,20 @@ def test_get_files():
             assert f.is_ref
         else:
             assert not f.is_ref
+
+def test_get_files_with_folders():
+    # When fileclasses handle folders, return them and stop recursing!
+    class FakeFile(File):
+        @classmethod
+        def can_handle(cls, path):
+            return True
+
+    d = Directories()
+    p = testpath['fs']
+    d.add_path(p)
+    files = list(d.get_files(fileclasses=[FakeFile]))
+    # We have the 3 root files and the 3 root dirs
+    eq_(6, len(files))
 
 def test_get_folders():
     d = Directories()
