@@ -1,11 +1,10 @@
-# Created By: Virgil Dupras
-# Created On: 2006/02/27
-# Copyright 2015 Hardcoded Software (http://www.hardcoded.net)
+# Copyright 2017 Virgil Dupras
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import os
 from xml.etree import ElementTree as ET
 import logging
 
@@ -76,31 +75,34 @@ class Directories:
             return DirectoryState.Excluded
 
     def _get_files(self, from_path, fileclasses, j):
-        j.check_if_cancelled()
-        state = self.get_state(from_path)
-        if state == DirectoryState.Excluded:
-            # Recursively get files from folders with lots of subfolder is expensive. However, there
-            # might be a subfolder in this path that is not excluded. What we want to do is to skim
-            # through self.states and see if we must continue, or we can stop right here to save time
-            if not any(p[:len(from_path)] == from_path for p in self.states):
-                return
-        try:
-            filepaths = set()
-            if state != DirectoryState.Excluded:
-                found_files = fs.get_files(from_path, fileclasses=fileclasses)
-                logging.debug("Collected %d files in folder %s", len(found_files), str(from_path))
-                for file in found_files:
-                    file.is_ref = state == DirectoryState.Reference
-                    filepaths.add(file.path)
-                    yield file
-            # it's possible that a folder (bundle) gets into the file list. in that case, we don't
-            # want to recurse into it
-            subfolders = [p for p in from_path.listdir() if not p.islink() and p.isdir() and p not in filepaths]
-            for subfolder in subfolders:
-                for file in self._get_files(subfolder, fileclasses=fileclasses, j=j):
-                    yield file
-        except (EnvironmentError, fs.InvalidPath):
-            pass
+        for root, dirs, files in os.walk(str(from_path)):
+            j.check_if_cancelled()
+            root = Path(root)
+            state = self.get_state(root)
+            if state == DirectoryState.Excluded:
+                # Recursively get files from folders with lots of subfolder is expensive. However, there
+                # might be a subfolder in this path that is not excluded. What we want to do is to skim
+                # through self.states and see if we must continue, or we can stop right here to save time
+                if not any(p[:len(root)] == root for p in self.states):
+                    del dirs[:]
+            try:
+                if state != DirectoryState.Excluded:
+                    found_files = [fs.get_file(root + f, fileclasses=fileclasses) for f in files]
+                    found_files = [f for f in found_files if f is not None]
+                    # In some cases, directories can be considered as files by dupeGuru, which is
+                    # why we have this line below. In fact, there only one case: Bundle files under
+                    # OS X... In other situations, this forloop will do nothing.
+                    for d in dirs[:]:
+                        f = fs.get_file(root + d, fileclasses=fileclasses)
+                        if f is not None:
+                            found_files.append(f)
+                            dirs.remove(d)
+                    logging.debug("Collected %d files in folder %s", len(found_files), str(from_path))
+                    for file in found_files:
+                        file.is_ref = state == DirectoryState.Reference
+                        yield file
+            except (EnvironmentError, fs.InvalidPath):
+                pass
 
     def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
@@ -176,16 +178,17 @@ class Directories:
 
         :rtype: :class:`DirectoryState`
         """
+        # direct match? easy result.
         if path in self.states:
             return self.states[path]
-        default_state = self._default_state_for_path(path)
-        if default_state is not None:
-            return default_state
-        parent = path.parent()
-        if parent in self:
-            return self.get_state(parent)
-        else:
-            return DirectoryState.Normal
+        state = self._default_state_for_path(path) or DirectoryState.Normal
+        prevlen = 0
+        # we loop through the states to find the longest matching prefix
+        for p, s in self.states.items():
+            if p.is_parent_of(path) and len(p) > prevlen:
+                prevlen = len(p)
+                state = s
+        return state
 
     def has_any_file(self):
         """Returns whether selected folders contain any file.
