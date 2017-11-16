@@ -22,8 +22,8 @@ msgstr "Non ci sono duplicati selezionati. Nessuna operazione è stata completat
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr "Stai per aprire molti file contemporaneamente. A seconda di quale programma
-li aprirà, potrebbe crearsi un bel casino. Vuoi continuare?"
+msgstr "Stai per aprire molti file contemporaneamente. A seconda di quale programma "
+"li aprirà, potrebbe crearsi un bel casino. Vuoi continuare?"
 
 #: core/app.py:65
 msgid "Scanning for duplicates"
