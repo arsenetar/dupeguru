@@ -221,43 +221,43 @@ msgstr "Lese EXIF von Bild %d/%d"
 
 #: core/app.py:312
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Konnte Datei {} nicht laden."
 
 #: core/app.py:496 core/app.py:742
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Konnte Datei {} nicht schreiben."
 
 #: core/me/scanner.py:19 core/se/scanner.py:15
 msgid "Filename"
-msgstr ""
+msgstr "Dateiname"
 
 #: core/me/scanner.py:20
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Dateiname - Bereiche"
 
 #: core/me/scanner.py:21
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Dateiname - Bereiche (ohne Reihenfolge)"
 
 #: core/me/scanner.py:22
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
 msgid "Contents"
-msgstr ""
+msgstr "Inhalt"
 
 #: core/pe/scanner.py:21
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "EXIF Zeitstempel"
 
 #: core/scanner.py:139
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Fast fertig! Arrangiere Ergebnisse..."
 
 #: core/se/scanner.py:17
 msgid "Folders"
-msgstr ""
+msgstr "Ordner"
 
 #~ msgid "Sending files to the recycle bin"
 #~ msgstr "Verschiebe Dateien in den Papierkorb"
