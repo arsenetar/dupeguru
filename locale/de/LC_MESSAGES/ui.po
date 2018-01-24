@@ -713,23 +713,23 @@ msgstr "Zoom"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr ""
+msgstr "Anwendungsmodus:"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr ""
+msgstr "Bild"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr ""
+msgstr "Optionen"
 
 #~ msgid "Removing dead tracks from your iTunes Library"
 #~ msgstr "Entferne tote Tracks aus Ihrer iTunes Bibliothek"
