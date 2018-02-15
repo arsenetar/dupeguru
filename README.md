@@ -7,44 +7,23 @@ is written in Objective-C and uses Cocoa. On Linux, it's written in Python and u
 
 The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/dupeguru-cocoa
 
-## Current status: People wanted
+## Current status: Unmaintained
 
-dupeGuru has currently only one maintainer, me. This is a dangerous situation that needs to be
-corrected.
+I haven't worked on dupeGuru for a while and frankly, I don't want to. I never had any duplicate
+problems so I don't even care about the *raison d'être* of this thing.
 
-The goal is to eventually have another active maintainer, but before we can get there, the project
-needs more contributors. It is very much lacking on that side right now.
+I don't want to answer incoming issues and I don't want to let them pile off unanswered either,
+that feels rude. So here I am, being straightforward about it.
 
-Whatever your skills, if you are remotely interestested in being a contributor, I'm interested in
-mentoring you. If that's the case, please refer to [the open ticket on the subject][contrib-issue]
-and let's get started.
+If you're considering using dupeGuru, you might want to give it a try but if it doesn't meet your
+needs I suggest that you use another program because it's unlikely to ever be improved again.
 
-### Slowed development
+If you're a developer wanting to pick it up, by all means, do so! Fork it off and release
+something. I will be more than happy to "officially" point to any fork that remotely looks like a
+serious effort. I will also be happy to assist if you have questions about the code.
 
-Until I manage to find contributors, I'm slowing the development pace of dupeGuru. I'm not much
-interested in maintaining it alone, I personally have no use for this app (it's been a *loooong*,
-time since I had dupe problems :) )
-
-I don't want to let it die, however, so I will still do normal maintainership, that is, issue
-triaging, code review, critical bugfixes, releases management.
-
-But anything non-critical, I'm not going to implement it myself because I see every issue as a
-contribution opportunity.
-
-### Windows maintainer wanted
-
-As [described on my website][nowindows], dupeGuru v4.0 dropped Windows support
-because there isn't anyone to bear the burden of Windows maintenance.  If
-you're a Windows developer and are interested in taking this task, [don't
-hesitate to let me know][contrib-issue].
-
-### OS X maintainer wanted
-
-My Mac Mini is already a couple of years old and is likely to be my last Apple purchase. When it
-dies, I will be unable maintain the OS X version of moneyGuru. I've already stopped paying for the
-Mac Developer membership so I can't sign the apps anymore (in the "official way" I mean. The
-download is still PGP signed) If you're a Mac developer and are interested in taking this task,
-[don't hesitate to let me know][contrib-issue].
+Good bye dupeGuru,
+Virgil Dupras
 
 ## Contents of this folder
 
@@ -99,8 +78,6 @@ virtualenv and then `py.test core hscommon`
 
 [dupeguru]: https://www.hardcoded.net/dupeguru/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
-[contrib-issue]: https://github.com/hsoft/dupeguru/issues/300
-[nowindows]: https://www.hardcoded.net/archive2015#2015-11-01
 [documentation]: http://www.hardcoded.net/dupeguru/help/en/
 [python]: http://www.python.org/
 [pyqt]: http://www.riverbankcomputing.com
