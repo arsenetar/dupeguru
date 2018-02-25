@@ -143,7 +143,7 @@ def package_windows():
         'build_exe': {
             'build_exe': buildpath,
             'excludes': [],
-            'includes': ['atexit'],
+            'includes': ['atexit', 'dbm.dumb'],
             'include_files': include_files,
             'include_msvcr': True,
             'zip_include_packages': ['*'],
