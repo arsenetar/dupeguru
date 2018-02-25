@@ -222,6 +222,20 @@ Section "Uninstall"
   !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
   RMDir /r "$SMPROGRAMS\$StartMenuFolder"
 
+  ; Remove Files & Folders in Install Folder
+  RMDir /r "$INSTDIR\help"
+  RMDir /r "$INSTDIR\imageformats"
+  RMDir /r "$INSTDIR\lib"
+  RMDir /r "$INSTDIR\locale"
+  RMDir /r "$INSTDIR\platforms"
+  Delete "$INSTDIR\dupeguru.exe"
+  Delete "$INSTDIR\python36.dll"
+  Delete "$INSTDIR\sqlite3.dll"
+  Delete "$INSTDIR\Uninstall.exe"
+  
+  ; Remove Install Folder if empty
+  RMDir "$INSTDIR"
+
   ; Remove registry keys and vendor keys (if empty)
   DeleteRegKey  SHCTX "${BASEREGKEY}"
   DeleteRegKey /ifempty SHCTX "${VENDORREGKEY}"
