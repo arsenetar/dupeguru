@@ -222,12 +222,19 @@ Section "Uninstall"
   !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
   RMDir /r "$SMPROGRAMS\$StartMenuFolder"
 
-  ; Delete the Install Directory and vendor directory (if empty)
-  Push $R0
-  RMDir /r "$INSTDIR" ;NSIS seems to recomend against this... look into options
-  ${GetParent} "$INSTDIR" $R0
-  RMDir $R0
-  Pop $R0
+  ; Remove Files & Folders in Install Folder
+  RMDir /r "$INSTDIR\help"
+  RMDir /r "$INSTDIR\imageformats"
+  RMDir /r "$INSTDIR\lib"
+  RMDir /r "$INSTDIR\locale"
+  RMDir /r "$INSTDIR\platforms"
+  Delete "$INSTDIR\dupeguru.exe"
+  Delete "$INSTDIR\python36.dll"
+  Delete "$INSTDIR\sqlite3.dll"
+  Delete "$INSTDIR\Uninstall.exe"
+  
+  ; Remove Install Folder if empty
+  RMDir "$INSTDIR"
 
   ; Remove registry keys and vendor keys (if empty)
   DeleteRegKey  SHCTX "${BASEREGKEY}"
@@ -246,6 +253,8 @@ Function .onInit
     SetRegView 32
   !endif
   !insertmacro MULTIUSER_INIT
+  ; it appears that the languages shown may not always be filtered correctly
+  !define MUI_LANGDLL_ALLLANGUAGES
   !insertmacro MUI_LANGDLL_DISPLAY 
 FunctionEnd
 
