@@ -1,0 +1,15 @@
+version: 4.0.3
+files:
+  - name: Windows (x64)
+    link: https://download.hardcoded.net/dupeguru_win64_4.0.3.exe
+    icon: windows
+  - name: Linux (ppa)
+    link: https://launchpad.net/~hsoft/+archive/ppa/+packages
+    icon: linux
+  - name: OS X
+    link: https://download.hardcoded.net/dupeguru_osx_4_0_3.dmg
+    icon: apple
+  - name: Source
+    link: https://download.hardcoded.net/dupeguru-src-4.0.3.tar.gz
+    icon: github
+    

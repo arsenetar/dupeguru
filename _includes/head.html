@@ -1,0 +1,23 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- if page.layout == 'home' -%}
+    <title>{{ site.title }} |&nbsp;{%- if site.tagline -%}{{ site.tagline }}{%- endif -%}</title>
+    {%- seo title=false -%}
+    {%- else -%}
+    {%- seo -%}
+    {%- endif -%}
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ "/apple-touch-icon.png" | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relative_url }}">
+    <link rel="manifest" href="{{ "/site.webmanifest" | relative_url }}">
+    <link rel="mask-icon" href="{{ "/safari-pinned-tab.svg" | relative_url }}" color="#da532c">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+    {%- feed_meta -%}
+    {%- if jekyll.environment == 'production' and site.google_analytics -%}
+      {%- include google-analytics.html -%}
+    {%- endif -%}
+</head>

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+<div class="home">
+<div class="container"><h1>{{ page.title | default: site.title }}</h1> 
+    {%- if site.data.downloads -%}
+    <p>Download Latest Version: <strong>{{ site.data.downloads.version }}</strong></p>
+    <div class="downloads" style="display: flex; flex-wrap: wrap;">
+        {%- for download in site.data.downloads.files -%}
+        <a class="download" href="{{ download.link }}">
+            <svg class="svg-icon" viewBox="0 0 26 28"><use xlink:href="{{ '/assets/icons.svg' | relative_url }}#{{ download.icon }}"></use></svg><span>{{ download.name }}</span>
+        </a>
+        {%- endfor -%}
+    </div>
+    {%- endif -%}
+</div>
+
+{{ content }}
+</div>

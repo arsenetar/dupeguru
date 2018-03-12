@@ -1,0 +1,56 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+.container {
+    margin: 10px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  .container h1 {
+    margin: 30px 0;
+    font-size: 4em;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .downloads {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 2em;
+  }
+  .download, .download:visited {
+      text-align: center;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      min-width: 120px;
+      background-color: #4caf50;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 3px;
+      font-size: 1em;
+      margin: 0.2em;
+      color: #fff;
+      cursor: pointer;
+  }
+  .download:active, .download:hover {
+      text-decoration: none;
+      background-color: #378039;
+      color: #fff;
+  }
+  .svg-icon {
+      width: 0.92em;
+      height: 1em;
+      display: inline-block;
+      padding-right: 5px;
+      vertical-align: text-top;
+      fill: currentColor;
+      color: currentColor;
+  }
+
+  .footer-col-3 {
+      text-align: right;
+  }
