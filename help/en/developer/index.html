@@ -1,0 +1,149 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Developer Guide &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="core" href="core/index.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="../faq.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Developer Guide</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../faq.html">Frequently Asked Questions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="core/index.html">core</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="developer-guide">
+<h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<p>When looking at a non-trivial codebase for the first time, it’s very difficult to understand
+anything of it until you get the “Big Picture”. This page is meant to, hopefully, make you get
+dupeGuru’s big picture.</p>
+<div class="section" id="branches-and-tags">
+<h2>Branches and tags<a class="headerlink" href="#branches-and-tags" title="Permalink to this headline">¶</a></h2>
+<p>The git repo has one main branch, <code class="docutils literal notranslate"><span class="pre">master</span></code>. It represents the latest “stable development commit”,
+that is, the latest commit that doesn’t include in-progress features. This branch should always
+be buildable, <code class="docutils literal notranslate"><span class="pre">tox</span></code> should always run without errors on it.</p>
+<p>When a feature/bugfix has an atomicity of a single commit, it’s alright to commit right into
+<code class="docutils literal notranslate"><span class="pre">master</span></code>. However, if a feature/bugfix needs more than a commit, it should live in a separate
+topic branch until it’s ready.</p>
+<p>Every release is tagged with the version number. For example, there’s a <code class="docutils literal notranslate"><span class="pre">2.8.2</span></code> tag for the
+v2.8.2 release.</p>
+</div>
+<div class="section" id="model-view-controller-nope">
+<h2>Model/View/Controller… nope!<a class="headerlink" href="#model-view-controller-nope" title="Permalink to this headline">¶</a></h2>
+<p>dupeGuru’s codebase has quite a few design flaws. The Model, View and Controller roles are filled by
+different classes, scattered around. If you’re aware of that, it might help you to understand what
+the heck is going on.</p>
+<p>The central piece of dupeGuru is <a class="reference internal" href="core/app.html#core.app.DupeGuru" title="core.app.DupeGuru"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.app.DupeGuru</span></code></a>. It’s the only
+interface to the python’s code for the GUI code. A duplicate scan is started with
+<a class="reference internal" href="core/app.html#core.app.DupeGuru.start_scanning" title="core.app.DupeGuru.start_scanning"><code class="xref py py-meth docutils literal notranslate"><span class="pre">core.app.DupeGuru.start_scanning()</span></code></a>, directories are added through
+<a class="reference internal" href="core/app.html#core.app.DupeGuru.add_directory" title="core.app.DupeGuru.add_directory"><code class="xref py py-meth docutils literal notranslate"><span class="pre">core.app.DupeGuru.add_directory()</span></code></a>, etc..</p>
+<p>A lot of functionalities of the App are implemented in the platform-specific subclasses of
+<a class="reference internal" href="core/app.html#core.app.DupeGuru" title="core.app.DupeGuru"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.app.DupeGuru</span></code></a>, like <code class="docutils literal notranslate"><span class="pre">DupeGuru</span></code> in <code class="docutils literal notranslate"><span class="pre">cocoa/inter/app.py</span></code>, or the <code class="docutils literal notranslate"><span class="pre">DupeGuru</span></code> class
+in <code class="docutils literal notranslate"><span class="pre">qt/base/app.py</span></code>. For example, when performing “Remove Selected From Results”,
+<code class="docutils literal notranslate"><span class="pre">RemoveSelected()</span></code> on the cocoa side, and <code class="docutils literal notranslate"><span class="pre">remove_duplicates()</span></code> on the PyQt side, are
+respectively called to perform the thing.</p>
+</div>
+<div class="section" id="jobs">
+<span id="id1"></span><h2>Jobs<a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h2>
+<p>A lot of operations in dupeGuru take a significant amount of time. This is why there’s a generalized
+threaded job mechanism built-in <a class="reference internal" href="core/app.html#core.app.DupeGuru" title="core.app.DupeGuru"><code class="xref py py-class docutils literal notranslate"><span class="pre">DupeGuru</span></code></a>. First, <a class="reference internal" href="core/app.html#core.app.DupeGuru" title="core.app.DupeGuru"><code class="xref py py-class docutils literal notranslate"><span class="pre">DupeGuru</span></code></a> has
+a <code class="docutils literal notranslate"><span class="pre">progress</span></code> member which is an instance of
+<a class="reference internal" href="hscommon/jobprogress/performer.html#hscommon.jobprogress.performer.ThreadedJobPerformer" title="hscommon.jobprogress.performer.ThreadedJobPerformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadedJobPerformer</span></code></a>. It lets the GUI code know of the progress
+of the current threaded job. When <a class="reference internal" href="core/app.html#core.app.DupeGuru" title="core.app.DupeGuru"><code class="xref py py-class docutils literal notranslate"><span class="pre">DupeGuru</span></code></a> needs to start a job, it calls
+<code class="docutils literal notranslate"><span class="pre">_start_job()</span></code> and the platform specific subclass deals with the details of starting the job.</p>
+</div>
+<div class="section" id="core-principles">
+<h2>Core principles<a class="headerlink" href="#core-principles" title="Permalink to this headline">¶</a></h2>
+<p>The core of the duplicate matching takes place (for SE and ME, not PE) in <a class="reference internal" href="core/engine.html#module-core.engine" title="core.engine"><code class="xref py py-mod docutils literal notranslate"><span class="pre">core.engine</span></code></a>.
+There’s <a class="reference internal" href="core/engine.html#core.engine.getmatches" title="core.engine.getmatches"><code class="xref py py-func docutils literal notranslate"><span class="pre">core.engine.getmatches()</span></code></a> which take a list of <a class="reference internal" href="core/fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.fs.File</span></code></a> instances and
+return a list of <code class="docutils literal notranslate"><span class="pre">(firstfile,</span> <span class="pre">secondfile,</span> <span class="pre">match_percentage)</span></code> matches. Then, there’s
+<a class="reference internal" href="core/engine.html#core.engine.get_groups" title="core.engine.get_groups"><code class="xref py py-func docutils literal notranslate"><span class="pre">core.engine.get_groups()</span></code></a> which takes a list of matches and returns a list of
+<a class="reference internal" href="core/engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> instances (a <a class="reference internal" href="core/engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> is basically a list of <a class="reference internal" href="core/fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> matching
+together).</p>
+<p>When a scan is over, the final result (the list of groups from <a class="reference internal" href="core/engine.html#core.engine.get_groups" title="core.engine.get_groups"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_groups()</span></code></a>) is placed into
+<a class="reference internal" href="core/app.html#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">core.app.DupeGuru.results</span></code></a>, which is a <a class="reference internal" href="core/results.html#core.results.Results" title="core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.results.Results</span></code></a> instance. The
+<a class="reference internal" href="core/results.html#core.results.Results" title="core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a> instance is where all the dupe marking, sorting, removing, power marking, etc.
+takes place.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core/index.html">core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core/app.html">core.app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/fs.html">core.fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/engine.html">core.engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/directories.html">core.directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/results.html">core.results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/gui/index.html">core.gui</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hscommon/index.html">hscommon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/build.html">hscommon.build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/conflict.html">hscommon.conflict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/desktop.html">hscommon.desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/notify.html">hscommon.notify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/path.html">hscommon.path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/util.html">hscommon.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/jobprogress/job.html">hscommon.jobprogress.job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/jobprogress/performer.html">hscommon.jobprogress.performer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/jobprogress/qt.html">hscommon.jobprogress.qt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/base.html">hscommon.gui.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/column.html">hscommon.gui.column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/progress_window.html">hscommon.gui.progress_window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/selectable_list.html">hscommon.gui.selectable_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/table.html">hscommon.gui.table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/text_field.html">hscommon.gui.text_field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hscommon/gui/tree.html">hscommon.gui.tree</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../faq.html">Frequently Asked Questions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="core/index.html">core</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

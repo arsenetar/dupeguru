@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.util &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="hscommon.jobprogress.job" href="jobprogress/job.html" />
+    <link rel="prev" title="hscommon.path" href="path.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.util</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="path.html">hscommon.path</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jobprogress/job.html">hscommon.jobprogress.job</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.util">
+<span id="hscommon-util"></span><h1>hscommon.util<a class="headerlink" href="#module-hscommon.util" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="hscommon.util.FileOrPath">
+<em class="property">class </em><code class="descclassname">hscommon.util.</code><code class="descname">FileOrPath</code><span class="sig-paren">(</span><em>file_or_path</em>, <em>mode='rb'</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.FileOrPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the same as <a class="reference internal" href="#hscommon.util.open_if_filename" title="hscommon.util.open_if_filename"><code class="xref py py-func docutils literal notranslate"><span class="pre">open_if_filename()</span></code></a>, but it can be used with a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">FileOrPath</span><span class="p">(</span><span class="n">infile</span><span class="p">):</span>
+    <span class="n">dostuff</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.RE_INVALID_XML_SUB">
+<code class="descclassname">hscommon.util.</code><code class="descname">RE_INVALID_XML_SUB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.RE_INVALID_XML_SUB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.allsame">
+<code class="descclassname">hscommon.util.</code><code class="descname">allsame</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.allsame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether all elements of ‘iterable’ are the same.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.dedupe">
+<code class="descclassname">hscommon.util.</code><code class="descname">dedupe</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.dedupe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of elements in <code class="docutils literal notranslate"><span class="pre">iterable</span></code> with all dupes removed.</p>
+<p>The order of the elements is preserved.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.delete_files_with_pattern">
+<code class="descclassname">hscommon.util.</code><code class="descname">delete_files_with_pattern</code><span class="sig-paren">(</span><em>folder_path</em>, <em>pattern</em>, <em>recursive=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.delete_files_with_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all files (or folders) in <cite>folder_path</cite> that match the glob <cite>pattern</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.delete_if_empty">
+<code class="descclassname">hscommon.util.</code><code class="descname">delete_if_empty</code><span class="sig-paren">(</span><em>path: hscommon.path.Path</em>, <em>files_to_delete=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.delete_if_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the directory at ‘path’ if it is empty or if it only contains files_to_delete.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.ensure_file">
+<code class="descclassname">hscommon.util.</code><code class="descname">ensure_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.ensure_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create <cite>path</cite> as an empty file if it doesn’t exist.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.ensure_folder">
+<code class="descclassname">hscommon.util.</code><code class="descname">ensure_folder</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.ensure_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create <cite>path</cite> as a folder if it doesn’t exist.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.escape">
+<code class="descclassname">hscommon.util.</code><code class="descname">escape</code><span class="sig-paren">(</span><em>s</em>, <em>to_escape</em>, <em>escape_with='\\'</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.escape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">s</span></code> with characters in <code class="docutils literal notranslate"><span class="pre">to_escape</span></code> all prepended with <code class="docutils literal notranslate"><span class="pre">escape_with</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.extract">
+<code class="descclassname">hscommon.util.</code><code class="descname">extract</code><span class="sig-paren">(</span><em>predicate</em>, <em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separates the wheat from the shaft (<cite>predicate</cite> defines what’s the wheat), and returns both.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.find_in_path">
+<code class="descclassname">hscommon.util.</code><code class="descname">find_in_path</code><span class="sig-paren">(</span><em>name</em>, <em>paths=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.find_in_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for <cite>name</cite> in all directories of <cite>paths</cite> and return the absolute path of the first
+occurrence. If <cite>paths</cite> is None, $PATH is used.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.first">
+<code class="descclassname">hscommon.util.</code><code class="descname">first</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first item of <code class="docutils literal notranslate"><span class="pre">iterable</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.flatten">
+<code class="descclassname">hscommon.util.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iterables</em>, <em>start_with=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a list of lists <code class="docutils literal notranslate"><span class="pre">iterables</span></code> and returns a list containing elements of every list.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">start_with</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, the result will start with <code class="docutils literal notranslate"><span class="pre">start_with</span></code> items, exactly as
+if <code class="docutils literal notranslate"><span class="pre">start_with</span></code> would be the first item of lists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.format_size">
+<code class="descclassname">hscommon.util.</code><code class="descname">format_size</code><span class="sig-paren">(</span><em>size</em>, <em>decimal=0</em>, <em>forcepower=-1</em>, <em>showdesc=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.format_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a byte count in a formatted string (KB, MB etc..).</p>
+<p><code class="docutils literal notranslate"><span class="pre">size</span></code> is the number of bytes to format.
+<code class="docutils literal notranslate"><span class="pre">decimal</span></code> is the number digits after the dot.
+<code class="docutils literal notranslate"><span class="pre">forcepower</span></code> is the desired suffix. 0 is B, 1 is KB, 2 is MB etc.. if kept at -1, the suffix
+will be automatically chosen (so the resulting number is always below 1024).
+if <code class="docutils literal notranslate"><span class="pre">showdesc</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the suffix will be shown after the number.
+Usage example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_size</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">showdesc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;1.21 KB&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.format_time">
+<code class="descclassname">hscommon.util.</code><code class="descname">format_time</code><span class="sig-paren">(</span><em>seconds</em>, <em>with_hours=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.format_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms seconds in a hh:mm:ss string.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">with_hours</span></code> if false, the format is mm:ss.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.format_time_decimal">
+<code class="descclassname">hscommon.util.</code><code class="descname">format_time_decimal</code><span class="sig-paren">(</span><em>seconds</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.format_time_decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms seconds in a strings like ‘3.4 minutes’.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.get_file_ext">
+<code class="descclassname">hscommon.util.</code><code class="descname">get_file_ext</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.get_file_ext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lowercase extension part of filename, without the dot.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.iterconsume">
+<code class="descclassname">hscommon.util.</code><code class="descname">iterconsume</code><span class="sig-paren">(</span><em>seq</em>, <em>reverse=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.iterconsume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over <code class="docutils literal notranslate"><span class="pre">seq</span></code> and pops yielded objects.</p>
+<p>Because we use the <code class="docutils literal notranslate"><span class="pre">pop()</span></code> method, we reverse <code class="docutils literal notranslate"><span class="pre">seq</span></code> before proceeding. If you don’t need
+to do that, set <code class="docutils literal notranslate"><span class="pre">reverse</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>This is useful in tight memory situation where you are looping over a sequence of objects that
+are going to be discarded afterwards. If you’re creating other objects during that iteration
+you might want to use this to avoid <code class="docutils literal notranslate"><span class="pre">MemoryError</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.iterdaterange">
+<code class="descclassname">hscommon.util.</code><code class="descname">iterdaterange</code><span class="sig-paren">(</span><em>start</em>, <em>end</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.iterdaterange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields every day between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.minmax">
+<code class="descclassname">hscommon.util.</code><code class="descname">minmax</code><span class="sig-paren">(</span><em>value</em>, <em>min_value</em>, <em>max_value</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.minmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>value</cite> or one of the min/max bounds if <cite>value</cite> is not between them.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.modified_after">
+<code class="descclassname">hscommon.util.</code><code class="descname">modified_after</code><span class="sig-paren">(</span><em>first_path: hscommon.path.Path</em>, <em>second_path: hscommon.path.Path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.modified_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if first_path’s mtime is higher than second_path’s mtime.</p>
+<p>If one of the files doesn’t exist or is <code class="docutils literal notranslate"><span class="pre">None</span></code>, it is considered “never modified”.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.multi_replace">
+<code class="descclassname">hscommon.util.</code><code class="descname">multi_replace</code><span class="sig-paren">(</span><em>s</em>, <em>replace_from</em>, <em>replace_to=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.multi_replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function like str.replace() with multiple replacements.</p>
+<p><code class="docutils literal notranslate"><span class="pre">replace_from</span></code> is a list of things you want to replace. Ex: [‘a’,’bc’,’d’]
+<code class="docutils literal notranslate"><span class="pre">replace_to</span></code> is a list of what you want to replace to.
+If <code class="docutils literal notranslate"><span class="pre">replace_to</span></code> is a list and has the same length as <code class="docutils literal notranslate"><span class="pre">replace_from</span></code>, <code class="docutils literal notranslate"><span class="pre">replace_from</span></code>
+items will be translated to corresponding <code class="docutils literal notranslate"><span class="pre">replace_to</span></code>. A <code class="docutils literal notranslate"><span class="pre">replace_to</span></code> list must
+have the same length as <code class="docutils literal notranslate"><span class="pre">replace_from</span></code>
+If <code class="docutils literal notranslate"><span class="pre">replace_to</span></code> is a string, all <code class="docutils literal notranslate"><span class="pre">replace_from</span></code> occurence will be replaced
+by that string.
+<code class="docutils literal notranslate"><span class="pre">replace_from</span></code> can also be a str. If it is, every char in it will be translated
+as if <code class="docutils literal notranslate"><span class="pre">replace_from</span></code> would be a list of chars. If <code class="docutils literal notranslate"><span class="pre">replace_to</span></code> is a str and has
+the same length as <code class="docutils literal notranslate"><span class="pre">replace_from</span></code>, it will be transformed into a list.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.nonone">
+<code class="descclassname">hscommon.util.</code><code class="descname">nonone</code><span class="sig-paren">(</span><em>value</em>, <em>replace_value</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.nonone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">value</span></code> if <code class="docutils literal notranslate"><span class="pre">value</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">replace_value</span></code> otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.open_if_filename">
+<code class="descclassname">hscommon.util.</code><code class="descname">open_if_filename</code><span class="sig-paren">(</span><em>infile</em>, <em>mode='rb'</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.open_if_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <code class="docutils literal notranslate"><span class="pre">infile</span></code> is a string, it opens and returns it. If it’s already a file object, it simply returns it.</p>
+<p>This function returns <code class="docutils literal notranslate"><span class="pre">(file,</span> <span class="pre">should_close_flag)</span></code>. The should_close_flag is True is a file has
+effectively been opened (if we already pass a file object, we assume that the responsibility for
+closing the file has already been taken). Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span><span class="p">,</span> <span class="n">shouldclose</span> <span class="o">=</span> <span class="n">open_if_filename</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+<span class="n">dostuff</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">shouldclose</span><span class="p">:</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.pluralize">
+<code class="descclassname">hscommon.util.</code><code class="descname">pluralize</code><span class="sig-paren">(</span><em>number</em>, <em>word</em>, <em>decimals=0</em>, <em>plural_word=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.pluralize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a pluralized string with <code class="docutils literal notranslate"><span class="pre">number</span></code> in front of <code class="docutils literal notranslate"><span class="pre">word</span></code>.</p>
+<p>Adds a ‘s’ to s if <code class="docutils literal notranslate"><span class="pre">number</span></code> &gt; 1.
+<code class="docutils literal notranslate"><span class="pre">number</span></code>: The number to go in front of s
+<code class="docutils literal notranslate"><span class="pre">word</span></code>: The word to go after number
+<code class="docutils literal notranslate"><span class="pre">decimals</span></code>: The number of digits after the dot
+<code class="docutils literal notranslate"><span class="pre">plural_word</span></code>: If the plural rule for word is more complex than adding a ‘s’, specify a plural</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.rem_file_ext">
+<code class="descclassname">hscommon.util.</code><code class="descname">rem_file_ext</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.rem_file_ext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the filename without extension.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.stripfalse">
+<code class="descclassname">hscommon.util.</code><code class="descname">stripfalse</code><span class="sig-paren">(</span><em>seq</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.stripfalse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sequence with all false elements stripped out of seq.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.trailiter">
+<code class="descclassname">hscommon.util.</code><code class="descname">trailiter</code><span class="sig-paren">(</span><em>iterable</em>, <em>skipfirst=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.trailiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields (prev_element, element), starting with (None, first_element).</p>
+<p>If skipfirst is True, there will be no (None, item1) element and we’ll start
+directly with (item1, item2).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.util.tryint">
+<code class="descclassname">hscommon.util.</code><code class="descname">tryint</code><span class="sig-paren">(</span><em>value</em>, <em>default=0</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.util.tryint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to convert <code class="docutils literal notranslate"><span class="pre">value</span></code> to in <code class="docutils literal notranslate"><span class="pre">int</span></code> and returns <code class="docutils literal notranslate"><span class="pre">default</span></code> if it fails.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="path.html">hscommon.path</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jobprogress/job.html">hscommon.jobprogress.job</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

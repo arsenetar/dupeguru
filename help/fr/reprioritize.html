@@ -1,0 +1,83 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Re-Prioritizing duplicates &#8212; Documentation dupeGuru 4.0.3</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Foire aux questions" href="faq.html" />
+    <link rel="prev" title="Résultats" href="results.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Documentation dupeGuru 4.0.3</span></a></h1>
+        <h2 class="heading"><span>Re-Prioritizing duplicates</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="results.html">Résultats</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">Foire aux questions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="re-prioritizing-duplicates">
+<h1>Re-Prioritizing duplicates<a class="headerlink" href="#re-prioritizing-duplicates" title="Lien permanent vers ce titre">¶</a></h1>
+<p>dupeGuru tries to automatically determine which duplicate should go in each group’s reference
+position, but sometimes it gets it wrong. In many cases, clever dupe sorting with «&nbsp;Delta Values&nbsp;»
+and «&nbsp;Dupes Only&nbsp;» options in addition to the «&nbsp;Make Selected into Reference&nbsp;» action does the trick,
+but sometimes, a more powerful option is needed. This is where the Re-Prioritization dialog comes
+into play. You can summon it through the «&nbsp;Re-Prioritize Results&nbsp;» item in the «&nbsp;Actions&nbsp;» menu.</p>
+<p>This dialog allows you to select criteria according to which a reference dupe will be selected in
+each dupe group. The list of available criteria is on the left and the list of criteria you’ve
+selected is on the right.</p>
+<p>A criteria is a category followed by an argument. For example, «&nbsp;Size (Highest)&nbsp;» means that the dupe
+with the biggest size will win. «&nbsp;Folder (/foo/bar)&nbsp;» means that dupes in this folder will win. To add
+a criterion to the rightmost list, first select a category in the combobox, then select a
+subargument in the list below, and then click on the right pointing arrow button.</p>
+<p>The order of the list on the right is important (you can re-order items through drag &amp; drop). When
+picking a dupe for reference position, the first criterion is used. If there’s a tie, the second
+criterion is used and so on and so on. For example, if your arguments are «&nbsp;Size (Highest)&nbsp;» and then
+«&nbsp;Filename (Doesn’t end with a number)&nbsp;», the reference file that will be picked in a group will be
+the biggest file, and if two or more files have the same size, the one that has a filename that
+doesn’t end with a number will be used. When all criteria result in ties, the order in which dupes
+previously were in the group will be used.</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="results.html">Résultats</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">Foire aux questions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

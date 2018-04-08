@@ -1,0 +1,104 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Häufig gestellte Fragen &#8212; dupeGuru 4.0.3 Dokumentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Re-Prioritizing duplicates" href="reprioritize.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 Dokumentation</span></a></h1>
+        <h2 class="heading"><span>Häufig gestellte Fragen</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="reprioritize.html">Re-Prioritizing duplicates</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="haufig-gestellte-fragen">
+<h1>Häufig gestellte Fragen<a class="headerlink" href="#haufig-gestellte-fragen" title="Link zu dieser Überschrift">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">What is dupeGuru?</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Was macht es besser ala andere Duplikatscanner?</p>
+<p>Die Scan-Engine ist extrem flexibel. Sie können sie modifizieren, um die Art von Ergebnissen zu bekommen die Sie möchten. Sie können mehr über die dupeGuru Modifikationen finden auf der <a class="reference internal" href="preferences.html"><span class="doc">Einstellungen Seite</span></a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Wie sicher ist dupeGuru?</p>
+<p>Sehr sicher. DupeGuru wurde entwickelt, um sicherzustellen keine Dateien zu löschen, die nicht gelöscht werden sollen. Erstens, es existiert ein Referenzordnersystem welches Ordner definiert, die auf <strong>keinen</strong> Fall angefasst werden sollen. Dann gibt es noch das Referenzgruppensystem, das sicherstellt das <strong>immer</strong> ein Mitglied einer Duplikatgruppe behalten wird.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Was sind die Demo-Einschränkungen von dupeGuru?</p>
+<p>Keine, dupeGuru ist <a class="reference external" href="http://open.hardcoded.net/about/">Fairware</a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Die Markierungsbox einer Datei, die ich löschen möchte, ist deaktiviert. Was muss ich tun?</p>
+<p>Sie können die Referenz nicht markieren (die erste Datei einer Duplikatgruppe). Wie auch immer, Sie können ein Duplikat zur Referenz befördnern. Wenn eine Datei, die Sie markieren möchten, eine Referenz ist, muss ein Duplikat der Gruppe zur Referenz gemacht werden, indem man es auswählt und auf <strong>Aktionen–&gt;Mache Ausgewählte zur Referenz</strong> gehen. Befindet sich die Referenzdatei in einem Referenzordner (Dateiname in blauen Buchstaben), kann sie nicht aus der Referenzposition entfernt werden.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">ich habe einen Ordner aus dem ich wirklich nichts löschen möchte.</p>
+<p>Möchten Sie sicherstellen, das dupeGuru niemals Dateien aus einem bestimmten Ordner löscht, dann versetzen sie den Ordner in den <strong>Referenzzustand</strong>. Siehe <a class="reference internal" href="folders.html"><span class="doc">Ordnerauswahl</span></a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Was bedeutet diese ‚(X verworfen)‘ Nachricht in der Statusbar?</p>
+<p>In einigen Fällen werden manche Treffer aus Sicherheitsgründen nicht in den Ergebnissen angezeigt. Lassen Sie mich ein Beispiel konstruieren. Wir haben 3 Datein: A, B und C. Wir scannen sie mit einer niedrigen Filterempfindlichkeit. Der Scanner findet heraus das A mit B und C übereinstimmt, aber B <strong>nicht</strong> mit C übereinstimmt. Hier hat dupeGuru ein Problem. Es kann keine Duplikatgruppe erstellen mit A, B und C, weil nicht alle Dateien der Gruppe zusammenpassen. Es könnte 2 Gruppen erstellen: eine A-B Gruppe und eine A-C Gruppe, aber es dies aus Sicherheitsbedenken nicht tun. Denken wir darüber nach: Wenn B nicht zu C passt, heißt das, das entweder B oder C keine echten Duplikate sind. Wären es 2 Gruppen (A-B und A-C), würden Sie damit enden sowohl B als auch C zu löschen. Und ist keine der Beiden ein Duplikat, möchten Sie das ganz sicher nicht tun, richtig? Also verwirft dupeGuru in diesem Fall den A-C Treffer (und fügt eine Notiz in der Statusbar hinzu). Folglich, wenn Sie B löschen und den Scan erneut durchführen, haben Sie einen A-C Treffer nächstes Mal in den Ergebnissen.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Ich möchte alle Dateien aus einem bestimmten Ordner markieren. Was kann ich tun?</p>
+<p>Aktiveren Sie den <a class="reference internal" href="results.html"><span class="doc">Nur Duplikate</span></a> Modus und klicken auf die Ordnerspalte, um die Duplikate nach Ordner zu sortieren. Es wird dann einfach sein, alle Duplikate aus dem selben Ordner auszuwählen und auf die Leertaste zu drücken, um sie alle zu markieren.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Ich habe versucht, meine Duplikate in den Mülleimer zu verschieben, aber dupeGuru sagt es ist nicht möglich. Warum? Was kann ich tun?</p>
+<p>Meistens kann dupeGuru aufgrund von Dateirechten keine Dateien in den Mülleimer schicken. Sie brauchen <strong>Schreib</strong> Rechte für Dateien, die in den Mülleimer sollen. Wenn Sie nicht vertraut mit Kommandozeilenwerkzeugen sind, können dafür auch Dienstprogramme wie <a class="reference external" href="http://macchampion.com/arbysoft/BatchMod">BatChmod</a> verwendet werden, um die Dateirechte zu reparieren.</p>
+<p>Wenn dupeGuru sich nach dem Reparieren der Recht immer noch verweigert, könnte es helfen die Funktion „Verschiebe Markierte nach…“ als Workaround zu verwenden. Anstelle die Dateien in den Mülleimer zu schieben, senden SIe sie in einen temporären Ordner, den Sie dann manuell löschen können.</p>
+<p>Wenn dies alles fehlschlägt, kontaktieren Sie <a class="reference external" href="http://www.hardcoded.net/support">HS support</a>, wir werden das Problem lösen.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Zu tun</p>
+<p class="last">This FAQ qestion is outdated, see english version.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="reprioritize.html">Re-Prioritizing duplicates</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1 erstellt.
+    </div>
+  </body>
+</html>

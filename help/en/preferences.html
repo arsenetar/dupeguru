@@ -1,0 +1,128 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Preferences &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The scanning process" href="scan.html" />
+    <link rel="prev" title="Folder Selection" href="folders.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Preferences</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Folder Selection</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="scan.html">The scanning process</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="preferences">
+<h1>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt><strong>Tags to scan:</strong></dt>
+<dd>When using the <strong>Tags</strong> scan type, you can select the tags that will be used for comparison.</dd>
+<dt><strong>Word weighting:</strong></dt>
+<dd>See <a class="reference internal" href="scan.html#word-weighting"><span class="std std-ref">Word weighting</span></a>.</dd>
+<dt><strong>Match similar words:</strong></dt>
+<dd>See <a class="reference internal" href="scan.html#similarity-matching"><span class="std std-ref">Similarity matching</span></a>.</dd>
+<dt><strong>Match pictures of different dimensions:</strong></dt>
+<dd>If you check this box, pictures of different dimensions will be allowed in the same
+duplicate group.</dd>
+</dl>
+<dl class="docutils" id="filter-hardness">
+<dt><strong>Filter Hardness:</strong></dt>
+<dd>The threshold needed for two files to be considered duplicates. A lower value means more
+duplicates. The meaning of the threshold depends on the scanning type (see <a class="reference internal" href="scan.html"><span class="doc">The scanning process</span></a>).
+Only works for <a class="reference internal" href="scan.html#worded-scan"><span class="std std-ref">worded</span></a> and <a class="reference internal" href="scan.html#picture-blocks-scan"><span class="std std-ref">picture blocks</span></a>
+scans.</dd>
+<dt><strong>Can mix file kind:</strong></dt>
+<dd>If you check this box, duplicate groups are allowed to have files with different extensions. If
+you don’t check it, well, they aren’t!</dd>
+<dt><strong>Ignore duplicates hardlinking to the same file:</strong></dt>
+<dd>If this option is enabled, dupeGuru will verify duplicates to see if they refer to the same
+<a class="reference external" href="http://en.wikipedia.org/wiki/Inode">inode</a>. If they do, they will not be considered duplicates. (Only for OS X and Linux)</dd>
+<dt><strong>Use regular expressions when filtering:</strong></dt>
+<dd>If you check this box, the filtering feature will treat your filter query as a
+<strong>regular expression</strong>. Explaining them is beyond the scope of this document. A good place to
+start learning it is <a class="reference external" href="http://www.regular-expressions.info">regular-expressions.info</a>.</dd>
+<dt><strong>Remove empty folders after delete or move:</strong></dt>
+<dd>When this option is enabled, folders are deleted after a file is deleted or moved and the folder
+is empty.</dd>
+<dt><strong>Copy and Move:</strong></dt>
+<dd>Determines how the Copy and Move operations (in the Action menu) will behave.</dd>
+</dl>
+<ul class="simple">
+<li><strong>Right in destination:</strong> All files will be sent directly in the selected destination, without
+trying to recreate the source path at all.</li>
+<li><strong>Recreate relative path:</strong> The source file’s path will be re-created in the destination folder up
+to the root selection in the Directories panel. For example, if you added
+<code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder</span></code> to your Directories panel and you move
+<code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> to the destination
+<code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code>, the final destination for the file will be
+<code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/SubFolder</span></code> (<code class="docutils literal notranslate"><span class="pre">SomeFolder</span></code> has been trimmed from source’s path in
+the final destination.).</li>
+<li><strong>Recreate absolute path:</strong> The source file’s path will be re-created in the destination folder in
+its entirety. For example, if you move <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> to the
+destination <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code>, the final destination for the file will be
+<code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/Users/foobar/SomeFolder/SubFolder</span></code>.</li>
+</ul>
+<p>In all cases, dupeGuru nicely handles naming conflicts by prepending a number to the destination
+filename if the filename already exists in the destination.</p>
+<dl class="docutils">
+<dt><strong>Custom Command:</strong></dt>
+<dd>This preference determines the command that will be invoked by the “Invoke Custom Command”
+action. You can invoke any external application through this action. This can be useful if,
+for example, you have a nice diffing application installed.</dd>
+</dl>
+<p>The format of the command is the same as what you would write in the command line, except that there
+are 2 placeholders: <strong>%d</strong> and <strong>%r</strong>. These placeholders will be replaced by the path of the
+selected dupe (%d) and the path of the selected dupe’s reference file (%r).</p>
+<p>If the path to your executable contains space characters, you should enclose it in “” quotes. You
+should also enclose placeholders in quotes because it’s very possible that paths to dupes and refs
+will contain spaces. Here’s an example custom command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files\SuperDiffProg\SuperDiffProg.exe&quot;</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Folder Selection</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="scan.html">The scanning process</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

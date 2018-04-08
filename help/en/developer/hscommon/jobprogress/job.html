@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.jobprogress.job &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.jobprogress.performer" href="performer.html" />
+    <link rel="prev" title="hscommon.util" href="../util.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.jobprogress.job</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../util.html">hscommon.util</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="performer.html">hscommon.jobprogress.performer</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.jobprogress.job">
+<span id="hscommon-jobprogress-job"></span><h1>hscommon.jobprogress.job<a class="headerlink" href="#module-hscommon.jobprogress.job" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.jobprogress.job.Job" title="hscommon.jobprogress.job.Job"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Job</span></code></a>(job_proportions,&nbsp;callback)</td>
+<td>Manages a job’s progression and return it’s progression through a callback.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.jobprogress.job.NullJob" title="hscommon.jobprogress.job.NullJob"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NullJob</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.jobprogress.job.Job">
+<em class="property">class </em><code class="descclassname">hscommon.jobprogress.job.</code><code class="descname">Job</code><span class="sig-paren">(</span><em>job_proportions</em>, <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages a job’s progression and return it’s progression through a callback.</p>
+<p>Note that this class is not foolproof. For example, you could call
+start_subjob, and then call add_progress from the parent job, and nothing
+would stop you from doing it. However, it would mess your progression
+because it is the sub job that is supposed to drive the progression.
+Another example would be to start a subjob, then start another, and call
+add_progress from the old subjob. Once again, it would mess your progression.
+There are no stops because it would remove the lightweight aspect of the
+class (A Job would need to have a Parent instead of just a callback,
+and the parent could be None. A lot of checks for nothing.).
+Another one is that nothing stops you from calling add_progress right after
+SkipJob.</p>
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job._do_update">
+<code class="descname">_do_update</code><span class="sig-paren">(</span><em>desc</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job._do_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the callback function with a % progress as a parameter.</p>
+<p>The parameter is a int in the 0-100 range.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job._subjob_callback">
+<code class="descname">_subjob_callback</code><span class="sig-paren">(</span><em>progress</em>, <em>desc=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job._subjob_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the callback passed to children jobs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job.iter_with_progress">
+<code class="descname">iter_with_progress</code><span class="sig-paren">(</span><em>iterable</em>, <em>desc_format=None</em>, <em>every=1</em>, <em>count=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job.iter_with_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through <code class="docutils literal notranslate"><span class="pre">iterable</span></code> while automatically adding progress.</p>
+<p>WARNING: We need our iterable’s length. If <code class="docutils literal notranslate"><span class="pre">iterable</span></code> is not a sequence (that is,
+something we can call <code class="docutils literal notranslate"><span class="pre">len()</span></code> on), you <em>have</em> to specify a count through the <code class="docutils literal notranslate"><span class="pre">count</span></code>
+argument. If <code class="docutils literal notranslate"><span class="pre">count</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">len(iterable)</span></code> is used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job.set_progress">
+<code class="descname">set_progress</code><span class="sig-paren">(</span><em>progress</em>, <em>desc=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job.set_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the progress of the current job to ‘progress’, and call the
+callback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job.start_job">
+<code class="descname">start_job</code><span class="sig-paren">(</span><em>max_progress=100</em>, <em>desc=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job.start_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin work on the next job. You must not call start_job more than
+‘jobcount’ (in __init__) times.
+‘max’ is the job units you are to perform.
+‘desc’ is the description of the job.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.jobprogress.job.Job.start_subjob">
+<code class="descname">start_subjob</code><span class="sig-paren">(</span><em>job_proportions</em>, <em>desc=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.Job.start_subjob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts a sub job. Use this when you want to split a job into
+multiple smaller jobs. Pretty handy when starting a process where you
+know how many subjobs you will have, but don’t know the work unit count
+for every of them.
+returns the Job object</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.jobprogress.job.NullJob">
+<em class="property">class </em><code class="descclassname">hscommon.jobprogress.job.</code><code class="descname">NullJob</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.jobprogress.job.NullJob" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../util.html">hscommon.util</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="performer.html">hscommon.jobprogress.performer</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

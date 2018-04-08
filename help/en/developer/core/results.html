@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.results &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.gui" href="gui/index.html" />
+    <link rel="prev" title="core.directories" href="directories.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>core.results</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="directories.html">core.directories</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="gui/index.html">core.gui</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-core.results">
+<span id="core-results"></span><h1>core.results<a class="headerlink" href="#module-core.results" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="core.results.Results">
+<em class="property">class </em><code class="descclassname">core.results.</code><code class="descname">Results</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages a collection of duplicate <a class="reference internal" href="engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>.</p>
+<p>This class takes care or marking, sorting and filtering duplicate groups.</p>
+<dl class="attribute">
+<dt id="core.results.Results.groups">
+<code class="descname">groups</code><a class="headerlink" href="#core.results.Results.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of <a class="reference internal" href="engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> contained managed by this instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.results.Results.dupes">
+<code class="descname">dupes</code><a class="headerlink" href="#core.results.Results.dupes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all duplicates (<a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> instances), without ref, contained in the
+currently managed <a class="reference internal" href="#core.results.Results.groups" title="core.results.Results.groups"><code class="xref py py-attr docutils literal notranslate"><span class="pre">groups</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.apply_filter">
+<code class="descname">apply_filter</code><span class="sig-paren">(</span><em>filter_str</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.apply_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a filter <code class="docutils literal notranslate"><span class="pre">filter_str</span></code> to <a class="reference internal" href="#core.results.Results.groups" title="core.results.Results.groups"><code class="xref py py-attr docutils literal notranslate"><span class="pre">groups</span></code></a></p>
+<p>When you apply the filter, only  dupes with the filename matching <code class="docutils literal notranslate"><span class="pre">filter_str</span></code> will be in
+in the results. To cancel the filter, just call apply_filter with <code class="docutils literal notranslate"><span class="pre">filter_str</span></code> to None,
+and the results will go back to normal.</p>
+<p>If call apply_filter on a filtered results, the filter will be applied
+<em>on the filtered results</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter_str</strong> (<em>str</em>) – a string containing a regexp to filter dupes with.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.get_group_of_duplicate">
+<code class="descname">get_group_of_duplicate</code><span class="sig-paren">(</span><em>dupe</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.get_group_of_duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <a class="reference internal" href="engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> in which <code class="docutils literal notranslate"><span class="pre">dupe</span></code> belongs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.load_from_xml">
+<code class="descname">load_from_xml</code><span class="sig-paren">(</span><em>infile</em>, <em>get_file</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.load_from_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load results from <code class="docutils literal notranslate"><span class="pre">infile</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>infile</strong> – a file or path pointing to an XML file created with <a class="reference internal" href="#core.results.Results.save_to_xml" title="core.results.Results.save_to_xml"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_to_xml()</span></code></a>.</li>
+<li><strong>get_file</strong> – a function f(path) returning a <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> wrapping the path.</li>
+<li><strong>j</strong> – A <a class="reference internal" href="../index.html#jobs"><span class="std std-ref">job progress instance</span></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.make_ref">
+<code class="descname">make_ref</code><span class="sig-paren">(</span><em>dupe</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.make_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make <code class="docutils literal notranslate"><span class="pre">dupe</span></code> take the <a class="reference internal" href="engine.html#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a> position of its group.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.perform_on_marked">
+<code class="descname">perform_on_marked</code><span class="sig-paren">(</span><em>func</em>, <em>remove_from_results</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.perform_on_marked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs <code class="docutils literal notranslate"><span class="pre">func</span></code> on all marked dupes.</p>
+<p>If an <code class="docutils literal notranslate"><span class="pre">EnvironmentError</span></code> is raised during the call, the problematic dupe is added to
+self.problems.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>remove_from_results</strong> (<em>bool</em>) – If true, dupes which had <code class="docutils literal notranslate"><span class="pre">func</span></code> applied and didn’t cause
+any problem.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.remove_duplicates">
+<code class="descname">remove_duplicates</code><span class="sig-paren">(</span><em>dupes</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.remove_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove <code class="docutils literal notranslate"><span class="pre">dupes</span></code> from their respective <a class="reference internal" href="engine.html#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>.</p>
+<p>Also, remove the group from <a class="reference internal" href="#core.results.Results.groups" title="core.results.Results.groups"><code class="xref py py-attr docutils literal notranslate"><span class="pre">groups</span></code></a> if it ends up empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.save_to_xml">
+<code class="descname">save_to_xml</code><span class="sig-paren">(</span><em>outfile</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.save_to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save results to <code class="docutils literal notranslate"><span class="pre">outfile</span></code> in XML.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outfile</strong> – file object or path.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.sort_dupes">
+<code class="descname">sort_dupes</code><span class="sig-paren">(</span><em>key</em>, <em>asc=True</em>, <em>delta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.sort_dupes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort <a class="reference internal" href="#core.results.Results.dupes" title="core.results.Results.dupes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dupes</span></code></a> according to <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – key attribute name to sort with.</li>
+<li><strong>asc</strong> (<em>bool</em>) – If false, sorting is reversed.</li>
+<li><strong>delta</strong> (<em>bool</em>) – If true, sorting occurs using <a class="reference internal" href="../../results.html#deltavalues"><span class="std std-ref">delta values</span></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.results.Results.sort_groups">
+<code class="descname">sort_groups</code><span class="sig-paren">(</span><em>key</em>, <em>asc=True</em><span class="sig-paren">)</span><a class="headerlink" href="#core.results.Results.sort_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort <a class="reference internal" href="#core.results.Results.groups" title="core.results.Results.groups"><code class="xref py py-attr docutils literal notranslate"><span class="pre">groups</span></code></a> according to <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p>
+<p>The <a class="reference internal" href="engine.html#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a> of each group is used to extract values for sorting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – key attribute name to sort with.</li>
+<li><strong>asc</strong> (<em>bool</em>) – If false, sorting is reversed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="directories.html">core.directories</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="gui/index.html">core.gui</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

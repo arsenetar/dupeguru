@@ -1,0 +1,199 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.progress_window &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.gui.selectable_list" href="selectable_list.html" />
+    <link rel="prev" title="hscommon.gui.column" href="column.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.progress_window</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="column.html">hscommon.gui.column</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="selectable_list.html">hscommon.gui.selectable_list</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.progress_window">
+<span id="hscommon-gui-progress-window"></span><h1>hscommon.gui.progress_window<a class="headerlink" href="#module-hscommon.gui.progress_window" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow" title="hscommon.gui.progress_window.ProgressWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProgressWindow</span></code></a>(finish_func[,&nbsp;error_func])</td>
+<td>Cross-toolkit GUI-enabled progress window.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindowView" title="hscommon.gui.progress_window.ProgressWindowView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProgressWindowView</span></code></a></td>
+<td>Expected interface for <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow" title="hscommon.gui.progress_window.ProgressWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgressWindow</span></code></a>’s view.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.progress_window.ProgressWindow">
+<em class="property">class </em><code class="descclassname">hscommon.gui.progress_window.</code><code class="descname">ProgressWindow</code><span class="sig-paren">(</span><em>finish_func</em>, <em>error_func=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit GUI-enabled progress window.</p>
+<p>This class allows you to run a long running, job enabled function in a separate thread and
+allow the user to follow its progress with a progress dialog.</p>
+<p>To use it, you start your long-running job with <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.run" title="hscommon.gui.progress_window.ProgressWindow.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> and then have your UI layer
+regularly call <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.pulse" title="hscommon.gui.progress_window.ProgressWindow.pulse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pulse()</span></code></a> to refresh the job status in the UI. It is advised that you call
+<a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.pulse" title="hscommon.gui.progress_window.ProgressWindow.pulse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pulse()</span></code></a> in the main thread because GUI toolkit usually only support calling UI-related
+functions from the main thread.</p>
+<p>We subclass <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUIObject</span></code></a> and <a class="reference internal" href="../jobprogress/performer.html#hscommon.jobprogress.performer.ThreadedJobPerformer" title="hscommon.jobprogress.performer.ThreadedJobPerformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadedJobPerformer</span></code></a>.
+Expected view: <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindowView" title="hscommon.gui.progress_window.ProgressWindowView"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgressWindowView</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>finish_func</strong> – A function <code class="docutils literal notranslate"><span class="pre">f(jobid)</span></code> that is called when a job is completed. <code class="docutils literal notranslate"><span class="pre">jobid</span></code> is
+an arbitrary id passed to <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.run" title="hscommon.gui.progress_window.ProgressWindow.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>.</li>
+<li><strong>error_func</strong> – A function <code class="docutils literal notranslate"><span class="pre">f(jobid,</span> <span class="pre">err)</span></code> that is called when an exception is raised and
+unhandled during the job. If not specified, the error will be raised in the
+main thread. If it’s specified, it’s your responsibility to raise the error
+if you want to. If the function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">finish_func()</span></code> will be
+called as if the job terminated normally.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindow.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call for a user-initiated job cancellation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindow.pulse">
+<code class="descname">pulse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow.pulse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update progress reports in the GUI.</p>
+<p>Call this regularly from the GUI main run loop. The values might change before
+<a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindowView.set_progress" title="hscommon.gui.progress_window.ProgressWindowView.set_progress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ProgressWindowView.set_progress()</span></code></a> happens.</p>
+<p>If the job is finished, <code class="docutils literal notranslate"><span class="pre">pulse()</span></code> will take care of closing the window and re-raising any
+exception that might have been raised during the job (in the main thread this time). If
+there was no exception, <code class="docutils literal notranslate"><span class="pre">finish_func(jobid)</span></code> is called to let you take appropriate action.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindow.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>jobid</em>, <em>title</em>, <em>target</em>, <em>args=()</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts a threaded job.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">target</span></code> function will be sent, as its first argument, a <a class="reference internal" href="../jobprogress/job.html#hscommon.jobprogress.job.Job" title="hscommon.jobprogress.job.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a> instance which
+it can use to report on its progress.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>jobid</strong> – Arbitrary identifier which will be passed to <code class="docutils literal notranslate"><span class="pre">finish_func()</span></code> at the end.</li>
+<li><strong>title</strong> – A title for the task you’re starting.</li>
+<li><strong>target</strong> – The function that does your famous long running job.</li>
+<li><strong>args</strong> – additional arguments that you want to send to <code class="docutils literal notranslate"><span class="pre">target</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.progress_window.ProgressWindow.jobdesc_textfield">
+<code class="descname">jobdesc_textfield</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow.jobdesc_textfield" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="text_field.html#hscommon.gui.text_field.TextField" title="hscommon.gui.text_field.TextField"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a>. It contains that title you gave the job on <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.run" title="hscommon.gui.progress_window.ProgressWindow.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.progress_window.ProgressWindow.progressdesc_textfield">
+<code class="descname">progressdesc_textfield</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindow.progressdesc_textfield" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="text_field.html#hscommon.gui.text_field.TextField" title="hscommon.gui.text_field.TextField"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a>. It contains the job textual update that the function might yield
+during its course.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.progress_window.ProgressWindowView">
+<em class="property">class </em><code class="descclassname">hscommon.gui.progress_window.</code><code class="descname">ProgressWindowView</code><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindowView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expected interface for <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow" title="hscommon.gui.progress_window.ProgressWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProgressWindow</span></code></a>’s view.</p>
+<p><em>Not actually used in the code. For documentation purposes only.</em></p>
+<p>Our view, some kind window with a progress bar, two labels and a cancel button, is expected
+to properly respond to its callbacks.</p>
+<p>It’s also expected to call <a class="reference internal" href="#hscommon.gui.progress_window.ProgressWindow.cancel" title="hscommon.gui.progress_window.ProgressWindow.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ProgressWindow.cancel()</span></code></a> when the cancel button is clicked.</p>
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindowView.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindowView.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the dialog.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindowView.set_progress">
+<code class="descname">set_progress</code><span class="sig-paren">(</span><em>progress</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindowView.set_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the progress of the progress bar to <code class="docutils literal notranslate"><span class="pre">progress</span></code>.</p>
+<p>Not all jobs are equally responsive on their job progress report and it is recommended that
+you put your progressbar in “indeterminate” mode as long as you haven’t received the first
+<code class="docutils literal notranslate"><span class="pre">set_progress()</span></code> call to avoid letting the user think that the app is frozen.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>progress</strong> (<em>int</em>) – a value between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">100</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.progress_window.ProgressWindowView.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.progress_window.ProgressWindowView.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the dialog.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="column.html">hscommon.gui.column</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="selectable_list.html">hscommon.gui.selectable_list</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

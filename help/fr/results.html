@@ -1,0 +1,181 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Résultats &#8212; Documentation dupeGuru 4.0.3</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Re-Prioritizing duplicates" href="reprioritize.html" />
+    <link rel="prev" title="Préférences" href="preferences.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Documentation dupeGuru 4.0.3</span></a></h1>
+        <h2 class="heading"><span>Résultats</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Préférences</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="resultats">
+<h1>Résultats<a class="headerlink" href="#resultats" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Quand dupeGuru a terminé de scanner, la fenêtre de résultat apparaît avec la liste de groupes de doublons trouvés.</p>
+<div class="section" id="a-propos-des-groupes-de-doublons">
+<h2>À propos des groupes de doublons<a class="headerlink" href="#a-propos-des-groupes-de-doublons" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un groupe de doublons est un groupe de fichier dans lequel tous les fichiers sont le doublon de tous les autres fichiers. Chaque groupe a son <strong>fichier de référence</strong> (le premier fichier du groupe). Ce fichier est celui qui n’est jamais effacé, et il est donc impossible de le marquer.</p>
+<p>Les critères utilisés pour décider de quel fichier d’un groupe devient la référence sont multiples. Il y a d’abord les dossiers référence. Tout fichier provenant d’un dossier de type «&nbsp;Référence&nbsp;» ne peut être autre chose qu’une référence dans un groupe. Si il n’y a pas de fichiers provenant d’un dossier référence, alors le plus gros fichier est placé comme référence.</p>
+<p>Bien entendu, dans certains cas, il est possible que dupeGuru ne choisisse pas le bon fichier. Dans ce cas, sélectionnez un doublon à placer en position de référence, puis cliquez sur l’action <strong>Transformer sélectionnés en références</strong>.</p>
+</div>
+<div class="section" id="verifier-les-resultats">
+<h2>Vérifier les résultats<a class="headerlink" href="#verifier-les-resultats" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Bien que vous pouvez tout simplement faire <strong>Tout marquer</strong> puis tous envoyer à la corbeille, il est recommandé de vérifier les résultats avant, surtout si votre seuil de filtre est bas.</p>
+<p>Pour vous aider dans cette tâche, vous pouvez utiliser le panneau de détails. Ce panneau montre les détails du fichier sélectionné côte-à-côte avec sa référence. Vous pouvez aussi double-cliquer sur un fichier pour l’ouvrir avec son application associée.</p>
+<p>Si vous avez plus de faux doublons que de vrais (si votre seuil de filtre est très bas), la meilleure façon de procéder, au lieu de retirer les faux doublons des résultat, serait de marquer seulement les vrais doublons.</p>
+</div>
+<div class="section" id="marquer-et-selectionner">
+<h2>Marquer et sélectionner<a class="headerlink" href="#marquer-et-selectionner" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans le vocabulaire de dupeGuru, il y a une nette différence entre sélectionner et marquer. Les fichiers <strong>sélectionnés</strong> sont ceux qui sont surlignés dans la liste. On peut sélectionner plusieurs fichiers à la fois en tenant Shift, Control ou Command lorsqu’on clique sur un fichier.</p>
+<p>Les fichiers <strong>marqués</strong> sont ceux avec la petite boite cochée. Il est possible de marquer les fichiers sélectionnés en appuyant sur <strong>espace</strong>.</p>
+</div>
+<div class="section" id="ne-pas-montrer-les-references">
+<h2>Ne pas montrer les références<a class="headerlink" href="#ne-pas-montrer-les-references" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Quand ce mode est activé, les groupes de doublons sont (momentanément) brisés et les doublons sont montrés individuellement, sans leurs références. On peut agir sur les fichiers sous ce mode de la même façon que sous le mode normal.</p>
+<p>L’attrait principal de ce mode est le tri. En mode normal, les groupes ne peuvent pas être brisés, et donc les résultats sont triés en fonction de leur référence. Sous ce mode spécial, le tri est fait au niveau des fichiers individuels. Il est alors possible, par exemple, de facilement marquer tous les fichiers de type «&nbsp;exe&nbsp;»:</p>
+<ul class="simple">
+<li>Activer le mode <strong>Ne pas montrer les références</strong>.</li>
+<li>Ajouter la colonne «&nbsp;Type&nbsp;» par le menu «&nbsp;Colonnes&nbsp;».</li>
+<li>Cliquez sur la colonne Type pour changer le tri.</li>
+<li>Trouvez le premier fichier avec un type «&nbsp;exe&nbsp;».</li>
+<li>Sélectionnez-le.</li>
+<li>Trouvez le dernier fichier avec un type «&nbsp;exe&nbsp;».</li>
+<li>Tenez Shift et sélectionnez-le.</li>
+<li>Appuyez sur espace pour marquer les fichiers sélectionnés.</li>
+</ul>
+</div>
+<div class="section" id="montrer-les-valeurs-en-tant-que-delta">
+<h2>Montrer les valeurs en tant que delta<a class="headerlink" href="#montrer-les-valeurs-en-tant-que-delta" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Sous ce mode, certaines colonnes montreront leur valeurs relativement à la valeur de la référence du
+groupe (de couleur orange, pour bien les différencier des autres valeurs). Par exemple, si un
+fichier a une taille de 1.2 MB alors que la référence a une taille de 1.4 MB, la valeur affichée
+sous ce mode sera -0.2 MB.</p>
+<p>Les valeurs non numériques sont aussi affectées par le mode delta. Par contre, plutôt que montrer la
+différence avec la valeur de référence (ce qui est impossible), elles indiquent si elles sont
+pareilles en adoptant la couleur orange dans le cas ou la valeur est différent. Il est ainsi
+possible de facilement identifier, par exemple, tous le doublons qui ont un nom de fichier différent
+de leur référence.</p>
+</div>
+<div class="section" id="les-deux-modes-ensemble">
+<h2>Les deux modes ensemble<a class="headerlink" href="#les-deux-modes-ensemble" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Quand on active ces deux modes ensemble, il est alors possible de faire de la sélection de ficher
+assez avancée parce que le tri de fichier se fait alors en fonction des valeurs delta. Il devient
+alors possible de, par exemple, sélectionner tous les fichiers qui ont une différence de plus de 300
+KB par rapport à leur référence, ou d’autres trucs comme ça.</p>
+<p>Même chose pour les valeurs non numériques: quand les deux modes sont activés, les règles de tri
+pour les valeurs non-numériques change. On commence par grouper les doublon selon si leur valeur est
+orange ou non, pour ensuite procéder aux règles de tri normales. Avec ce système, il est alors
+facile de, par exemple, marquer toues les doublons qui ont un nom de fichier différent de leur
+référence: il suffit de trier par nom de fichier.</p>
+</div>
+<div class="section" id="filtrer-les-resultats">
+<h2>Filtrer les résultats<a class="headerlink" href="#filtrer-les-resultats" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il est possible de filtrer les résultats pour agir sur un sous-ensemble de ceux-ci, par exemple tous
+les fichiers qui contiennent le mot «&nbsp;copie&nbsp;».</p>
+<p>Pour filtrer les résultats, entrer le filtrer dans le champ de la barre d’outils, puis appuyer sur
+Entrée. Pour annuler le filtre, appuyez sur le X dans le champ.</p>
+<p>En mode simple (le mode par défaut), ce que vous tapez est ce qui est filtré. Il n’y a qu’un
+caractère spécial: <strong>*</strong>. Ainsi, si vous entrez «&nbsp;[*]&nbsp;», le filtre cherchera pour tout nom contenant
+les «&nbsp;[&nbsp;» et «&nbsp;]&nbsp;» avec quelquechose au milieu.</p>
+<p>Pour un filtrage avancé, activez <strong>Utiliser les expressions régulières pour les filtres</strong> dans les
+<a class="reference internal" href="preferences.html"><span class="doc">Préférences</span></a>. Votre filtre sera alors appliqué comme une <a class="reference external" href="http://www.regular-expressions.info">expression régulière</a>.</p>
+<p>Les filtres sont dans tous les cas insensibles aux majuscules et minuscules.</p>
+<p>Les expression régulière pour s’appliquer à un fichier n’ont pas besoin de correspondre au nom
+entier. Une correspondance partielle suffit.</p>
+<p>Vous remarquerez peut-être que ce ne sont pas tous les fichiers de vos résultats filtrés qui
+s’appliquent au filtre. C’est parce que les groupes ne sont pas brisés par les filtres afin de
+permettre une meilleure mise en context. Par contre, ces fichier seront en mode «&nbsp;Lecture seule&nbsp;» et
+ne pourront être marqués.</p>
+</div>
+<div class="section" id="actions">
+<h2>Actions<a class="headerlink" href="#actions" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Voici la liste des actions qu’il est possible d’appliquer aux résultats.</p>
+<ul class="simple">
+<li><strong>Vider la liste de fichiers ignorés:</strong> Ré-initialise la liste des paires de doublons que vous avez ignorés dans le passé.</li>
+<li><strong>Exporter vers HTML:</strong> Exporte les résultats vers un fichier HTML et l’ouvre dans votre browser.</li>
+<li><strong>Envoyer marqués à la corbeille:</strong> Le nom le dit.</li>
+<li><strong>Déplacer marqués vers…:</strong> Déplace les fichiers marqués vers une destination de votre choix. La destination finale du fichier dépend de l’option «&nbsp;Déplacements de fichiers&nbsp;» dans les <a class="reference internal" href="preferences.html"><span class="doc">Préférences</span></a>.</li>
+<li><strong>Copier marqués vers…:</strong> Même chose que le déplacement, sauf que c’est une copie à la place.</li>
+<li><strong>Retirer marqués des résultats:</strong> Retire les fichiers marqués des résultats. Ils ne seront donc ni effacés, ni déplacés.</li>
+<li><strong>Retirer sélectionnés des résultats:</strong> Retire les fichiers sélectionnés des résultats. Notez que si il y a des fichiers références parmi la sélection, ceux-ci sont ignorés par l’action.</li>
+<li><strong>Transformer sélectionnés en références:</strong> Prend les fichiers sélectionnés et les place à la position de référence de leur groupe respectif. Si l’action est impossible (si la référence provient d’un dossier référence), rien n’est fait.</li>
+<li><strong>Ajouter sélectionnés à la liste de fichiers ignorés:</strong> Retire les fichiers sélctionnés des résultats, puis les place dans une liste afin que les prochains scans ignorent les paires de doublons qui composaient le groupe dans lequel ces fichiers étaient membres.</li>
+<li><strong>Ouvrir sélectionné avec l’application par défaut:</strong> Ouvre le fichier sélectionné avec son application associée.</li>
+<li><strong>Ouvrir le dossier contenant le fichier sélectionné:</strong> Le nom dit tout.</li>
+<li><strong>Invoquer commande personnalisée:</strong> Invoque la commande personnalisé que vous avez définie dans les <a class="reference internal" href="preferences.html"><span class="doc">Préférences</span></a>.</li>
+<li><strong>Renommer sélectionné:</strong> Renomme le fichier sélectionné après vous avoir demandé d’entrer un nouveau nom.</li>
+</ul>
+<p><strong>Déplacer des fichiers dans iPhoto/iTunes:</strong> Attention, quand vous déplacez des fichiers des
+bibliothèques iPhoto ou iTunes, elles ne sont pas vraiment déplacées, mais copiée. Il n’y a pas
+d’action de déplacement possible dans ces bibliothèques.</p>
+</div>
+<div class="section" id="options-de-suppression">
+<h2>Options de suppression<a class="headerlink" href="#options-de-suppression" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ces options, présentées lors de l’action de suppression de doublons, déterminent comment celle-ci
+s’exécute. La plupart du temps, ces options n’ont pas a être activées.</p>
+<ul>
+<li><p class="first"><strong>Remplacer les fichiers effacés par des liens:</strong> les fichiers supprimés seront replacés par des
+liens (<a class="reference external" href="http://en.wikipedia.org/wiki/Symbolic_link">symlink</a> ou <a class="reference external" href="http://en.wikipedia.org/wiki/Hard_link">hardlink</a>) vers leur fichiers de référence respectifs. Un symlink est un
+lien symbolique (qui devient caduque si l’original est supprimé) et un hardlink est un lien direct
+au contenu du fichier (même si l’original est supprimé, le lien reste valide).</p>
+<p>Sur OS X et Linux, cette fonction est supportée pleinement, mais sur Windows, c’est un peu
+compliqué. Windows XP ne le supporte pas, mais Vista oui. De plus, cette fonction ne peut être
+utilisée que si dupeGuru roule avec les privilèges administratifs. Ouaip, Windows c’est la joie.</p>
+</li>
+<li><p class="first"><strong>Supprimer les fichiers directement:</strong> Plutôt que d’envoyer les doublons à la corbeille,
+directement les supprimer. Utiliser cette option si vous avez de la difficulté à supprimer des
+fichiers (ce qui arrive quelquefois quand on travaille avec des partages réseau).</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Préférences</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

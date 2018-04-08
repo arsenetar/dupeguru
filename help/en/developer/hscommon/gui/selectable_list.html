@@ -1,0 +1,232 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.selectable_list &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.gui.table" href="table.html" />
+    <link rel="prev" title="hscommon.gui.progress_window" href="progress_window.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.selectable_list</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="progress_window.html">hscommon.gui.progress_window</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="table.html">hscommon.gui.table</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.selectable_list">
+<span id="hscommon-gui-selectable-list"></span><h1>hscommon.gui.selectable_list<a class="headerlink" href="#module-hscommon.gui.selectable_list" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.selectable_list.Selectable" title="hscommon.gui.selectable_list.Selectable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Selectable</span></code></a>()</td>
+<td>Mix-in for a <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> that manages its selection status.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.selectable_list.SelectableList" title="hscommon.gui.selectable_list.SelectableList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectableList</span></code></a>([items])</td>
+<td>A list that can manage selection of its items.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableList" title="hscommon.gui.selectable_list.GUISelectableList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GUISelectableList</span></code></a>([items])</td>
+<td>Cross-toolkit GUI-enabled list view.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableListView" title="hscommon.gui.selectable_list.GUISelectableListView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GUISelectableListView</span></code></a></td>
+<td>Expected interface for <a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableList" title="hscommon.gui.selectable_list.GUISelectableList"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUISelectableList</span></code></a>’s view.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.selectable_list.Selectable">
+<em class="property">class </em><code class="descclassname">hscommon.gui.selectable_list.</code><code class="descname">Selectable</code><a class="headerlink" href="#hscommon.gui.selectable_list.Selectable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mix-in for a <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> that manages its selection status.</p>
+<p>When mixed in with a <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, we enable it to manage its selection status. The selection
+is held as a list of <code class="docutils literal notranslate"><span class="pre">int</span></code> indexes. Multiple selection is supported.</p>
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.Selectable._update_selection">
+<code class="descname">_update_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.Selectable._update_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Updates the model’s selection appropriately.</p>
+<p>Called after selection has been updated. Takes the table’s selection and does appropriates
+updates on the view and/or model. Common sense would dictate that when the selection doesn’t
+change, we don’t update anything (and thus don’t call <code class="docutils literal notranslate"><span class="pre">_update_selection()</span></code> at all), but
+there are cases where it’s false. For example, if our list updates its items but doesn’t
+change its selection, we probably want to update the model’s selection.</p>
+<p>By default, does nothing.</p>
+<p>Important note: This is only called on <a class="reference internal" href="#hscommon.gui.selectable_list.Selectable.select" title="hscommon.gui.selectable_list.Selectable.select"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select()</span></code></a>, not on changes to
+<a class="reference internal" href="#hscommon.gui.selectable_list.Selectable.selected_indexes" title="hscommon.gui.selectable_list.Selectable.selected_indexes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_indexes</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.Selectable.select">
+<code class="descname">select</code><span class="sig-paren">(</span><em>indexes</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.Selectable.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update selection to <code class="docutils literal notranslate"><span class="pre">indexes</span></code>.</p>
+<p><a class="reference internal" href="#hscommon.gui.selectable_list.Selectable._update_selection" title="hscommon.gui.selectable_list.Selectable._update_selection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_update_selection()</span></code></a> is called afterwards.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indexes</strong> (<em>list</em>) – List of <code class="docutils literal notranslate"><span class="pre">int</span></code> that is to become the new selection.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.selectable_list.Selectable.selected_index">
+<code class="descname">selected_index</code><a class="headerlink" href="#hscommon.gui.selectable_list.Selectable.selected_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Points to the first selected index.</p>
+<p><em>int</em>. <em>get/set</em>.</p>
+<p>Thin wrapper around <a class="reference internal" href="#hscommon.gui.selectable_list.Selectable.selected_indexes" title="hscommon.gui.selectable_list.Selectable.selected_indexes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_indexes</span></code></a>. <code class="docutils literal notranslate"><span class="pre">None</span></code> if selection is empty. Using this
+property only makes sense if your selectable sequence supports single selection only.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.selectable_list.Selectable.selected_indexes">
+<code class="descname">selected_indexes</code><a class="headerlink" href="#hscommon.gui.selectable_list.Selectable.selected_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of selected indexes.</p>
+<p><em>list of int</em>. <em>get/set</em>.</p>
+<p>When setting the value, automatically removes out-of-bounds indexes. The list is kept
+sorted.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.selectable_list.SelectableList">
+<em class="property">class </em><code class="descclassname">hscommon.gui.selectable_list.</code><code class="descname">SelectableList</code><span class="sig-paren">(</span><em>items=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.SelectableList" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list that can manage selection of its items.</p>
+<p>Subclasses <a class="reference internal" href="#hscommon.gui.selectable_list.Selectable" title="hscommon.gui.selectable_list.Selectable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Selectable</span></code></a>. Behaves like a <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.SelectableList._on_change">
+<code class="descname">_on_change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.SelectableList._on_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called whenever the contents of the list changes.</p>
+<p>By default, does nothing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.SelectableList.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.SelectableList.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>S.append(value) – append value to the end of the sequence</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.SelectableList.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>index</em>, <em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.SelectableList.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>S.insert(index, value) – insert value before index</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.SelectableList.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.SelectableList.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>S.remove(value) – remove first occurrence of value.
+Raise ValueError if the value is not present.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.selectable_list.GUISelectableList">
+<em class="property">class </em><code class="descclassname">hscommon.gui.selectable_list.</code><code class="descname">GUISelectableList</code><span class="sig-paren">(</span><em>items=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit GUI-enabled list view.</p>
+<p>Represents a UI element presenting the user with a selectable list of items.</p>
+<p>Subclasses <a class="reference internal" href="#hscommon.gui.selectable_list.SelectableList" title="hscommon.gui.selectable_list.SelectableList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectableList</span></code></a> and <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUIObject</span></code></a>. Expected view:
+<a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableListView" title="hscommon.gui.selectable_list.GUISelectableListView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUISelectableListView</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>items</strong> (<em>iterable</em>) – If specified, items to fill the list with initially.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.GUISelectableList._on_change">
+<code class="descname">_on_change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableList._on_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the view contents with <a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableListView.refresh" title="hscommon.gui.selectable_list.GUISelectableListView.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GUISelectableListView.refresh()</span></code></a>.</p>
+<p>Overrides <a class="reference internal" href="#hscommon.gui.selectable_list.SelectableList._on_change" title="hscommon.gui.selectable_list.SelectableList._on_change"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SelectableList._on_change()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.GUISelectableList._update_selection">
+<code class="descname">_update_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableList._update_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the view selection with <a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableListView.update_selection" title="hscommon.gui.selectable_list.GUISelectableListView.update_selection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GUISelectableListView.update_selection()</span></code></a>.</p>
+<p>Overrides <a class="reference internal" href="#hscommon.gui.selectable_list.Selectable._update_selection" title="hscommon.gui.selectable_list.Selectable._update_selection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Selectable._update_selection()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.GUISelectableList._view_updated">
+<code class="descname">_view_updated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableList._view_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the view contents with <a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableListView.refresh" title="hscommon.gui.selectable_list.GUISelectableListView.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GUISelectableListView.refresh()</span></code></a>.</p>
+<p>Overrides <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject._view_updated" title="hscommon.gui.base.GUIObject._view_updated"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_view_updated()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.selectable_list.GUISelectableListView">
+<em class="property">class </em><code class="descclassname">hscommon.gui.selectable_list.</code><code class="descname">GUISelectableListView</code><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expected interface for <a class="reference internal" href="#hscommon.gui.selectable_list.GUISelectableList" title="hscommon.gui.selectable_list.GUISelectableList"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUISelectableList</span></code></a>’s view.</p>
+<p><em>Not actually used in the code. For documentation purposes only.</em></p>
+<p>Our view, some kind of list view or combobox, is expected to sync with the list’s contents by
+appropriately behave to all callbacks in this interface.</p>
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.GUISelectableListView.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableListView.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the contents of the list widget.</p>
+<p>Ensures that the contents of the list widget is synced with the model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.selectable_list.GUISelectableListView.update_selection">
+<code class="descname">update_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.selectable_list.GUISelectableListView.update_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update selection status.</p>
+<p>Ensures that the list widget’s selection is in sync with the model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="progress_window.html">hscommon.gui.progress_window</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="table.html">hscommon.gui.table</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

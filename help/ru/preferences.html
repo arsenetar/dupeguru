@@ -1,0 +1,81 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Предпочтения &#8212; Документация dupeGuru 4.0.3</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Результаты" href="results.html" />
+    <link rel="prev" title="Выбор папки" href="folders.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Документация dupeGuru 4.0.3</span></a></h1>
+        <h2 class="heading"><span>Предпочтения</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Выбор папки</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Содержание</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Результаты</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="id1">
+<h1>Предпочтения<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p><strong>Можно смешивать файл вида:</strong> Если вы установите этот флажок, дублировать группам разрешается есть файлы с различными расширениями. Если вы не проверить его, ну, они не являются!</p>
+<p><strong>Игнорировать дубликаты hardlinking в тот же файл:</strong> Если эта опция включена, dupeGuru проверит дубликаты, чтобы увидеть если они ссылаются на тот же индексный <a class="reference external" href="http://en.wikipedia.org/wiki/Inode">дескриптор</a>. Если они это сделают, они не будут считаться дубликатами. (Только для OS X и Linux)</p>
+<p><strong>Использование регулярных выражений при фильтрации:</strong> Если вы отметите этот флажок, фильтрация будет рассматривать ваш запрос фильтра, как  <strong>регулярное выражение</strong>. Объясняя их выходит за рамки этого документа.Хорошее место для начала обучения он <a class="reference external" href="http://www.regular-expressions.info">regular-expressions.info</a>.</p>
+<p><strong>Удаление пустых папок после удаления или перемещения:</strong> Когда эта опция включена, папки будут удалены через файл удален или перемещен и папка пуста.</p>
+<p><strong>Копирование и перемещение:</strong> Определяет, как операции копирования и перемещения (в меню Действия) будет себя вести.</p>
+<ul class="simple">
+<li><strong>Право на назначение:</strong> Все файлы будут отправлены непосредственно в пункт назначения, не пытаясь воссоздать исходный путь вообще.</li>
+<li><strong>Повторно относительный путь:</strong> путь исходный файл будет воссоздан в папке назначения, вплоть до корневого выделение в панели директорей. Например, если вы добавили <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder</span></code> на панель Каталоги и перемещении <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> до места назначения <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code>, конечным пунктом назначения для файла будет <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/SubFolder</span></code> (<code class="docutils literal notranslate"><span class="pre">SomeFolder</span></code> были сокращены с пути источника в конечный пункт назначения.).</li>
+<li><strong>Повторно абсолютный путь:</strong> путь исходный файл будет воссоздан в папке назначения в полном комплекте. Например, если вы перемещаете <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> до места назначения <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code>, конечным пунктом назначения для файла будет <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/Users/foobar/SomeFolder/SubFolder</span></code>.</li>
+</ul>
+<p>Во всех случаях, dupeGuru красиво ручки конфликтов имен путем добавления номера назначения имя файла, если имя файла уже существует в месте назначения.</p>
+<p><strong>Специальной команды:</strong> Это предпочтение определяет команду, которая будет вызываться «Вызов специальной команды» действия. Вы можете ссылаться ни на какие внешние приложения через это действие. Это может быть полезно, если, например, у вас есть хорошее приложение сравниваете установлены.</p>
+<p>Формат команды такой же, как то, что вы должны написать в командной строке, за исключением того, что Есть 2 заполнителей: <strong>%d</strong> and <strong>%r</strong>. Эти заполнители будут заменены на путь выбран обманут (%d) и путь к ссылке на файл выбранного обмануть (%r).</p>
+<p>Если путь к исполняемому содержит пробелы, необходимо заключить его в «» кавычки. Вы также должны приложить заполнителей в кавычки, потому что это очень возможно, что путь к обманутых и ссылки будут содержать пробелы. Вот пример пользовательской команды:</p>
+<blockquote>
+<div>«C:Program FilesSuperDiffProgSuperDiffProg.exe» «%d» «%r»</div></blockquote>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Выбор папки</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Содержание</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Результаты</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Создано с помощью <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

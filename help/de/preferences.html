@@ -1,0 +1,80 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Einstellungen &#8212; dupeGuru 4.0.3 Dokumentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Ergebnisse" href="results.html" />
+    <link rel="prev" title="Ordnerauswahl" href="folders.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 Dokumentation</span></a></h1>
+        <h2 class="heading"><span>Einstellungen</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Ordnerauswahl</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Ergebnisse</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="einstellungen">
+<h1>Einstellungen<a class="headerlink" href="#einstellungen" title="Link zu dieser Überschrift">¶</a></h1>
+<p><strong>Dateitypen dürfen gemischt werden:</strong> Wird diese Box gewählt, dürfen Duplikategruppen Bilder mit unterschiedlichen Dateierweiterungen enthalten.</p>
+<p><strong>Ignoriere Duplikate die mit derselben Datei verlinkt sind:</strong> Ist diese Option aktiviert, wird dupeGuru überprüfen ob Duplikate auf den selben <a class="reference external" href="http://en.wikipedia.org/wiki/Inode">inode</a> verweisen. Wenn sie es tun, werden sie nicht als Duplikat erkannt. (Nur für OS X und Linux)</p>
+<p><strong>Nutze reguläre Ausdrücke beim Filtern:</strong> Ist diese Option aktiviert, wird die Filterfunktion Ihre Filteranfrage als <strong>regulären Ausdruck</strong> interpretieren. Sie zu erklären ist außerhalb des Aufgabenbereiches dieser Dokumentation. Ein guter Platz zum Starten ist <a class="reference external" href="http://www.regular-expressions.info">regular-expressions.info</a>.</p>
+<p><strong>Entferne leere Ordner nach dem Löschen oder Verschieben:</strong> Ist diese Option aktiviert, werden Ordner gelöscht nachdem eine Datei gelöscht oder verschoben wurde und der Ordner leer ist.</p>
+<p><strong>Copy and Move:</strong> Determines how the Copy and Move operations (in the Action menu) will behave.</p>
+<ul class="simple">
+<li><strong>Zum Ziel:</strong> Alle Dateien werden direkt in das ausgwählte Verzeichnis gesendet, ohne zu versuchen den Quellpfad wiederherzustellen</li>
+<li><strong>Relativen Pfad neu erstellen:</strong> Der Pfad der Quelldatei wird im Zielverzeichnis wiederhergestellt bis zur Wurzelauswahl im Verzeichnis Panel. Zum Beispiel, wenn Sie <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder</span></code> zu ihrem Verzeichnis Panel hinzufügen und <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> zu dem Ziel <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code> verschieben, wird das endgültige Ziel der Datei <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/SubFolder</span></code> sein (<code class="docutils literal notranslate"><span class="pre">SomeFolder</span></code> wurde vom Pfad der Quelldatei im endgültigen Ziel abgetrennt.).</li>
+<li><strong>Absoluten Pfad neu erstellen:</strong> Der Pfad der Quelldatei wird im Zielverzeichnis vollständig wiederhergestellt. Zum Beispiel, wenn Sie <code class="docutils literal notranslate"><span class="pre">/Users/foobar/SomeFolder/SubFolder/SomeFile.ext</span></code> zu dem Ziel <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination</span></code> verschieben, wird das endgültige Ziel der Datei <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MyDestination/Users/foobar/SomeFolder/SubFolder</span></code> sein.</li>
+</ul>
+<p>Auf jeden Fall behandelt dupeGuru Namenskonflikte indem es dem Ziel-Dateinamen eine Nummer voranstellt, wenn der Dateiname bereits im Zielverzeichnis existiert.</p>
+<p><strong>Eigener Befehl:</strong> Diese Einstellung bestimmt den Befehl der durch „Führe eigenen Befehl aus“ ausgeführt wird. Sie können jede externe Anwendung durch diese Aktion aufrufen. Dies ist zum Beispiel hilfreich, wenn Sie eine gute diff-Anwendung installiert haben.</p>
+<p>Das Format des Befehls ist das Selbe wie in einer Befehlszeile, außer das 2 Platzhalter vorhanden sind: <strong>%d</strong> und <strong>%r</strong>. Diese Platzhalter werden durch den Pfad des markierten Duplikates (%d) und dem Pfad der Duplikatereferenz ersetzt (%r).</p>
+<p>Wenn der Pfad Ihrer ausführbaren Datei Leerzeichen enthält, so schließen sie ihn bitte mit „“ Zeichen ein. Sie sollten auch Platzhalter mit den Zitatzeichen einschließen, denn es ist möglich, das die Pfade der Duplikate und Referenzen ebenfalls Leerzeichen enthalten. Hier ist ein Beispiel eines eigenen Befehls:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files\SuperDiffProg\SuperDiffProg.exe&quot;</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Ordnerauswahl</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Ergebnisse</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1 erstellt.
+    </div>
+  </body>
+</html>

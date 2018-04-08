@@ -1,0 +1,204 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The scanning process &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Results" href="results.html" />
+    <link rel="prev" title="Preferences" href="preferences.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>The scanning process</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Preferences</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Results</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-scanning-process">
+<h1><a class="toc-backref" href="#id3">The scanning process</a><a class="headerlink" href="#the-scanning-process" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-scanning-process" id="id3">The scanning process</a><ul>
+<li><a class="reference internal" href="#worded-scans" id="id4">Worded scans</a><ul>
+<li><a class="reference internal" href="#fields" id="id5">Fields</a></li>
+<li><a class="reference internal" href="#word-weighting" id="id6">Word weighting</a></li>
+<li><a class="reference internal" href="#similarity-matching" id="id7">Similarity matching</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contents-scans" id="id8">Contents scans</a><ul>
+<li><a class="reference internal" href="#folders" id="id9">Folders</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#picture-blocks" id="id10">Picture blocks</a></li>
+<li><a class="reference internal" href="#exif-timestamp" id="id11">EXIF Timestamp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>dupeGuru has 3 basic ways of scanning: <a class="reference internal" href="#worded-scan"><span class="std std-ref">Worded scans</span></a> and <a class="reference internal" href="#contents-scan"><span class="std std-ref">Contents scans</span></a> and
+<a class="reference internal" href="#picture-blocks-scan"><span class="std std-ref">picture blocks</span></a>. The first two types are for the Standard and Music
+modes, the last is for the Picture mode. The scanning process is configured through the
+<a class="reference internal" href="preferences.html"><span class="doc">Preference pane</span></a>.</p>
+<div class="section" id="worded-scans">
+<span id="worded-scan"></span><h2><a class="toc-backref" href="#id4">Worded scans</a><a class="headerlink" href="#worded-scans" title="Permalink to this headline">¶</a></h2>
+<p>Worded scans extract a string from each file and split it into words. The string can come from two
+different sources: <strong>Filename</strong> or <strong>Tags</strong> (Music Edition only).</p>
+<p>When our source is music tags, we have to choose which tags to use. If, for example, we choose to
+analyse <em>artist</em> and <em>title</em> tags, we’d end up with strings like
+“The White Stripes - Seven Nation Army”.</p>
+<p>Words are split by space characters, with all punctuation removed (some are replaced by spaces, some
+by nothing) and all words lowercased. For example, the string “This guy’s song(remix)” yields
+<em>this</em>, <em>guys</em>, <em>song</em> and <em>remix</em>.</p>
+<p>Once this is done, the scanning dance begins. Finding duplicates is only a matter of finding how
+many words in common two given strings have. If the <a class="reference internal" href="preferences.html#filter-hardness"><span class="std std-ref">filter hardness</span></a> is,
+for example, <code class="docutils literal notranslate"><span class="pre">80</span></code>, it means that 80% of the words of two strings must match. To determine the
+matching percentage, dupeGuru first counts the total number of words in <strong>both</strong> strings, then count
+the number of words matching (every word matching count as 2), and then divide the number of words
+matching by the total number of words. If the result is higher or equal than the filter hardness,
+we have a duplicate match. For example, “a b c d” and “c d e” have a matching percentage of 57
+(4 words matching, 7 total words).</p>
+<div class="section" id="fields">
+<h3><a class="toc-backref" href="#id5">Fields</a><a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h3>
+<p>Song filenames often come with multiple and distinct parts and this can cause problems. For example,
+let’s take these two songs: “Dolly Parton - I Will Always Love You” and
+“Whitney Houston - I Will Always Love You”. They are clearly not the same song (they come from
+different artists), but they still still have a matching score of 71%! This means that, with a naive
+scanning method, we would get these songs as a false positive as soon as we try to dig a bit deeper
+in our dupe hunt by lowering the threshold a bit.</p>
+<p>This is why we have the “Fields” concept. Fields are separated by dashes (<code class="docutils literal notranslate"><span class="pre">-</span></code>). When the
+“Filename - Fields” scan type is chosen, each field is compared separately. Our final matching score
+will only be the lowest of all the fields. In our example, the title has a 100% match, but the
+artist has a 0% match, making our final match score 0.</p>
+<p>Sometimes, our song filename policy isn’t completely homogenous, which means that we can end up with
+“The White Stripes - Seven Nation Army” and “Seven Nation Army - The White Stripes”. This is why
+we have the “Filename - Fields (No Order)” scan type. With this scan type, all fields are compared
+with each other, and the highest score is kept. Then, the final matching score is the lowest of them
+all. In our case, the final matching score is 100.</p>
+<p>Note: Each field is used once. Thus, “The White Stripes - The White Stripes” and
+“The White Stripes - Seven Nation Army” have a match score of 0 because the second
+“The White Stripes” can’t be compared with the first field of the other name because it has already
+been “used up” by the first field. Our final match score would be 0.</p>
+<p><em>Tags</em> scanning method is always “fielded”. When choosing this scan method, we also choose which
+tags are going to be compared, each being a field.</p>
+</div>
+<div class="section" id="word-weighting">
+<span id="id1"></span><h3><a class="toc-backref" href="#id6">Word weighting</a><a class="headerlink" href="#word-weighting" title="Permalink to this headline">¶</a></h3>
+<p>When enabled, this option slightly changes how matching percentage is calculated by making bigger
+words worth more. With word weighting, instead of having a value of 1 in the duplicate count and
+total word count, every word have a value equal to the number of characters they have. With word
+weighting, “ab cde fghi” and “ab cde fghij” would have a matching percentage of 53% (19 total
+characters, 10 characters matching (4 for “ab” and 6 for “cde”)).</p>
+</div>
+<div class="section" id="similarity-matching">
+<span id="id2"></span><h3><a class="toc-backref" href="#id7">Similarity matching</a><a class="headerlink" href="#similarity-matching" title="Permalink to this headline">¶</a></h3>
+<p>When enabled, similar words will be counted as matches. For example “The White Stripes” and
+“The White Stripe” would have a match score of 100 instead of 66 with that option turned on.</p>
+<p>Two words are considered similar if they can be made equal with only a few edit operations (removing
+a letter, adding one etc.). The process used is not unlike the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a>. For the technically inclined, the actual function used is
+Python’s <a class="reference external" href="http://docs.python.org/3/library/difflib.html#difflib.get_close_matches">get_close_matches</a> with a <code class="docutils literal notranslate"><span class="pre">0.8</span></code> cutoff.</p>
+<p><strong>Warning:</strong> Use this option with caution. It is likely that you will get a lot of false positives
+in your results when turning it on. However, it will help you to find duplicates that you wouldn’t
+have found otherwise. The scan process also is significantly slower with this option turned on.</p>
+</div>
+</div>
+<div class="section" id="contents-scans">
+<span id="contents-scan"></span><h2><a class="toc-backref" href="#id8">Contents scans</a><a class="headerlink" href="#contents-scans" title="Permalink to this headline">¶</a></h2>
+<p>Contents scans are much simpler than worded scans. We read files and if the contents is exactly the
+same, we consider the two files duplicates.</p>
+<p>This is, of course, quite longer than comparing filenames and, to avoid needlessly reading whole
+file contents, we start by looking at file sizes. After having grouped our files by size, we discard
+every file that is alone in its group. Then, we proceed to read the contents of our remaining files.</p>
+<p>MD5 hashes are used to compute compare contents. Yes, it is widely known that forging files having
+the same MD5 hash is easy, but this file has to be knowingly forged. The possibilities of two files
+having the same MD5 hash <em>and</em> the same size by accident is still very, very small.</p>
+<p>The <a class="reference internal" href="preferences.html#filter-hardness"><span class="std std-ref">filter hardness</span></a> preference is ignored in this scan.</p>
+<div class="section" id="folders">
+<h3><a class="toc-backref" href="#id9">Folders</a><a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h3>
+<p>This is a special Contents scan type. It works like a normal contents scan, but
+instead of trying to find duplicate files, it tries to find duplicate folders.
+A folder is duplicate to another if all files it contains have the same
+contents as the other folder’s file.</p>
+<p>This scan is, of course, recursive and subfolders are checked. dupeGuru keeps only the biggest
+fishes. Therefore, if two folders that are considered as matching contain subfolders, these
+subfolders will not be included in the final results.</p>
+<p>With this mode, we end up with folders as results instead of files.</p>
+</div>
+</div>
+<div class="section" id="picture-blocks">
+<span id="picture-blocks-scan"></span><h2><a class="toc-backref" href="#id10">Picture blocks</a><a class="headerlink" href="#picture-blocks" title="Permalink to this headline">¶</a></h2>
+<p>dupeGuru Picture mode stands apart of its two friends. Its scan types are completely different.
+The first one is its “Contents” scan, which is a bit too generic, hence the name we use here,
+“Picture blocks”.</p>
+<p>We start by opening every picture in RGB bitmap mode, then we “blockify” the picture. We create a
+15x15 grid and compute the average color of each grid tile. This is the “picture analysis” phase.
+It’s very time consuming and the result is cached in a database (the “picture cache”).</p>
+<p>Once we’ve done that, we can start comparing them. Each tile in the grid (an average color) is
+compared to its corresponding grid on the other picture and a color diff is computer (it’s simply
+a sum of the difference of R, G and B on each side). All these sums are added up to a final “score”.</p>
+<p>If that score is smaller or equal to <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">-</span> <span class="pre">threshold</span></code>, we have a match.</p>
+<p>A threshold of 100 adds an additional constraint that pictures have to be exactly the same (it’s
+possible, due to averaging, that the tile comparison yields <code class="docutils literal notranslate"><span class="pre">0</span></code> for pictures that aren’t exactly
+the same, but since “100%” suggests “exactly the same”, we discard those ocurrences). If you want
+to get pictures that are very, very similar but still allow a bit of fuzzy differences, go for 99%.</p>
+<p>This second part of the scan is CPU intensive and can take quite a bit of time. This task has been
+made to take advatange of multi-core CPUs and has been optimized to the best of my abilities, but
+the fact of the matter is that, due to the fuzziness of the task, we still have to compare every picture
+to every other, making the algorithm quadratic (if <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of pictures to compare, the
+number of comparisons to perform is <code class="docutils literal notranslate"><span class="pre">N*N</span></code>).</p>
+<p>This algorithm is very naive, but in the field, it works rather well. If you master a better
+algorithm and want to improve dupeGuru, by all means, let me know!</p>
+</div>
+<div class="section" id="exif-timestamp">
+<h2><a class="toc-backref" href="#id11">EXIF Timestamp</a><a class="headerlink" href="#exif-timestamp" title="Permalink to this headline">¶</a></h2>
+<p>This one is easy. We read the EXIF information of every picture and extract the <code class="docutils literal notranslate"><span class="pre">DateTimeOriginal</span></code>
+tag. If the tag is the same for two pictures, they’re considered duplicates.</p>
+<p><strong>Warning:</strong> Modified pictures often keep the same EXIF timestamp, so watch out for false positives
+when you use that scan type.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Preferences</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Results</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

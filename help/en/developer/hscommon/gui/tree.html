@@ -1,0 +1,260 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.tree &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Changelog" href="../../../changelog.html" />
+    <link rel="prev" title="hscommon.gui.text_field" href="text_field.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.tree</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="text_field.html">hscommon.gui.text_field</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../../../changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.tree">
+<span id="hscommon-gui-tree"></span><h1>hscommon.gui.tree<a class="headerlink" href="#module-hscommon.gui.tree" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.tree.Tree" title="hscommon.gui.tree.Tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tree</span></code></a>()</td>
+<td>Cross-toolkit GUI-enabled tree view.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.tree.Node" title="hscommon.gui.tree.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a>(name)</td>
+<td>Pretty bland node implementation to be used in a <a class="reference internal" href="#hscommon.gui.tree.Tree" title="hscommon.gui.tree.Tree"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tree</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.tree.Tree">
+<em class="property">class </em><code class="descclassname">hscommon.gui.tree.</code><code class="descname">Tree</code><a class="headerlink" href="#hscommon.gui.tree.Tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit GUI-enabled tree view.</p>
+<p>This class is a bit too thin to be used as a tree view controller out of the box and HS apps
+that subclasses it each add quite a bit of logic to it to make it workable. Making this more
+usable out of the box is a work in progress.</p>
+<p>This class is here (in addition to being a <a class="reference internal" href="#hscommon.gui.tree.Node" title="hscommon.gui.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>) mostly to handle selection.</p>
+<p>Subclasses <a class="reference internal" href="#hscommon.gui.tree.Node" title="hscommon.gui.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> (it is the root node of all its children) and <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUIObject</span></code></a>.</p>
+<dl class="method">
+<dt id="hscommon.gui.tree.Tree._select_nodes">
+<code class="descname">_select_nodes</code><span class="sig-paren">(</span><em>nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Tree._select_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Customize node selection behavior.</p>
+<p>By default, simply set <a class="reference internal" href="#hscommon.gui.tree.Tree._selected_nodes" title="hscommon.gui.tree.Tree._selected_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_selected_nodes</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Tree._view_updated">
+<code class="descname">_view_updated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Tree._view_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set.</p>
+<p>Doing nothing by default, this method is called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set (it isn’t
+called when it’s unset, however). Use this for initialization code that requires a view
+(which is often the whole of the initialization code).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Tree.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Tree.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the node of all its children.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Tree._selected_nodes">
+<code class="descname">_selected_nodes</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.tree.Tree._selected_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Where we store selected nodes (as a list of <a class="reference internal" href="#hscommon.gui.tree.Node" title="hscommon.gui.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Tree.selected_node">
+<code class="descname">selected_node</code><a class="headerlink" href="#hscommon.gui.tree.Tree.selected_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently selected node.</p>
+<p><em>:class:`Node`</em>. <em>get/set</em>.</p>
+<p>First of <a class="reference internal" href="#hscommon.gui.tree.Tree.selected_nodes" title="hscommon.gui.tree.Tree.selected_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_nodes</span></code></a>. <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Tree.selected_nodes">
+<code class="descname">selected_nodes</code><a class="headerlink" href="#hscommon.gui.tree.Tree.selected_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of selected nodes in the tree.</p>
+<p><em>List of :class:`Node`</em>. <em>get/set</em>.</p>
+<p>We use nodes instead of indexes to store selection because it’s simpler when it’s time to
+manage selection of multiple node levels.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Tree.selected_path">
+<code class="descname">selected_path</code><a class="headerlink" href="#hscommon.gui.tree.Tree.selected_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently selected path.</p>
+<p><em>:attr:`Node.path`</em>. <em>get/set</em>.</p>
+<p>First of <a class="reference internal" href="#hscommon.gui.tree.Tree.selected_paths" title="hscommon.gui.tree.Tree.selected_paths"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_paths</span></code></a>. <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Tree.selected_paths">
+<code class="descname">selected_paths</code><a class="headerlink" href="#hscommon.gui.tree.Tree.selected_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of selected paths in the tree.</p>
+<p><em>List of :attr:`Node.path`</em>. <em>get/set</em></p>
+<p>Computed from <a class="reference internal" href="#hscommon.gui.tree.Tree.selected_nodes" title="hscommon.gui.tree.Tree.selected_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_nodes</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.tree.Node">
+<em class="property">class </em><code class="descclassname">hscommon.gui.tree.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty bland node implementation to be used in a <a class="reference internal" href="#hscommon.gui.tree.Tree" title="hscommon.gui.tree.Tree"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tree</span></code></a>.</p>
+<p>It has a <a class="reference internal" href="#hscommon.gui.tree.Node.parent" title="hscommon.gui.tree.Node.parent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parent</span></code></a>, behaves like a list, its content being its children. Link integrity
+is somewhat enforced (adding a child to a node will set the child’s <a class="reference internal" href="#hscommon.gui.tree.Node.parent" title="hscommon.gui.tree.Node.parent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parent</span></code></a>, but that’s
+pretty much as far as we go, integrity-wise. Nodes don’t tend to move around much in a GUI
+tree). We don’t even check for infinite node loops. Don’t play around these grounds too much.</p>
+<p>Nodes are designed to be subclassed and given meaningful attributes (those you’ll want to
+display in your tree view), but they all have a <a class="reference internal" href="#hscommon.gui.tree.Node.name" title="hscommon.gui.tree.Node.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a>, which is given on initialization.</p>
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>S.append(value) – append value to the end of the sequence</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the node of all its children.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>predicate</em>, <em>include_self=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first child to match <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
+<p>See <a class="reference internal" href="#hscommon.gui.tree.Node.findall" title="hscommon.gui.tree.Node.findall"><code class="xref py py-meth docutils literal notranslate"><span class="pre">findall()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.findall">
+<code class="descname">findall</code><span class="sig-paren">(</span><em>predicate</em>, <em>include_self=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.findall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield all children matching <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>predicate</strong> – <code class="docutils literal notranslate"><span class="pre">f(node)</span> <span class="pre">--&gt;</span> <span class="pre">bool</span></code></li>
+<li><strong>include_self</strong> – Whether we can return <code class="docutils literal notranslate"><span class="pre">self</span></code> or we return only children.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.get_node">
+<code class="descname">get_node</code><span class="sig-paren">(</span><em>index_path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.get_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the node at <code class="docutils literal notranslate"><span class="pre">index_path</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index_path</strong> – a list of int indexes leading to our node. See <a class="reference internal" href="#hscommon.gui.tree.Node.path" title="hscommon.gui.tree.Node.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.get_path">
+<code class="descname">get_path</code><span class="sig-paren">(</span><em>target_node</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.get_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <a class="reference internal" href="#hscommon.gui.tree.Node.path" title="hscommon.gui.tree.Node.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> of <code class="docutils literal notranslate"><span class="pre">target_node</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">target_node</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.tree.Node.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>index</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.tree.Node.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>S.insert(index, value) – insert value before index</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Node.children_count">
+<code class="descname">children_count</code><a class="headerlink" href="#hscommon.gui.tree.Node.children_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">len(self)</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Node.name">
+<code class="descname">name</code><a class="headerlink" href="#hscommon.gui.tree.Node.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name for the node, supplied on init.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Node.parent">
+<code class="descname">parent</code><a class="headerlink" href="#hscommon.gui.tree.Node.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent of the node.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, we have a root node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Node.path">
+<code class="descname">path</code><a class="headerlink" href="#hscommon.gui.tree.Node.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of node indexes leading from the root node to <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>The path of a node is always related to its <a class="reference internal" href="#hscommon.gui.tree.Node.root" title="hscommon.gui.tree.Node.root"><code class="xref py py-attr docutils literal notranslate"><span class="pre">root</span></code></a>. It’s the sequences of index that
+we have to take to get to our node, starting from the root. For example, if
+<code class="docutils literal notranslate"><span class="pre">node.path</span> <span class="pre">==</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>, it means that <code class="docutils literal notranslate"><span class="pre">node.root[1][2][3][4]</span> <span class="pre">is</span> <span class="pre">node</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.tree.Node.root">
+<code class="descname">root</code><a class="headerlink" href="#hscommon.gui.tree.Node.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root node of current node.</p>
+<p>To get it, we recursively follow our <a class="reference internal" href="#hscommon.gui.tree.Node.parent" title="hscommon.gui.tree.Node.parent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parent</span></code></a> chain until we have <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="text_field.html">hscommon.gui.text_field</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../../../changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

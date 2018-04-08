@@ -1,0 +1,128 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Contribute to dupeGuru &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start" href="quick_start.html" />
+    <link rel="prev" title="dupeGuru help" href="index.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Contribute to dupeGuru</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">dupeGuru help</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="quick_start.html">Quick Start</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="contribute-to-dupeguru">
+<h1>Contribute to dupeGuru<a class="headerlink" href="#contribute-to-dupeguru" title="Permalink to this headline">¶</a></h1>
+<p>dupeGuru was started as shareware (thus proprietary) so it doesn’t have a legacy of
+community-building. It’s <a class="reference external" href="https://www.hardcoded.net/articles/free-as-in-speech-fair-as-in-trade">been open source</a> for a while now and, although I’ve (“I” being Virgil
+Dupras, author of the software) always wanted to have people other than me working on dupeGuru, I’ve
+failed at attracting them.</p>
+<p>Since the end of 2013, I’ve been putting a lot of efforts into dupeGuru’s
+<a class="reference internal" href="developer/index.html"><span class="doc">developer documentation</span></a> and I’m more serious about my commitment to create
+a community around this project.</p>
+<p>So, whatever your skills, if you’re interested in contributing to dupeGuru, please do so. Normally,
+this documentation should be enough to get you started, but if it isn’t, then <strong>please</strong>,
+<a class="reference external" href="mailto:hsoft&#37;&#52;&#48;hardcoded&#46;net">let me know</a> because it’s a problem that I’m committed to fix. If there’s any situation where you’d
+wish to contribute but some doubt you’re having prevent you from going forward, please contact me.
+I’d much prefer to spend the time figuring out with you whether (and how) you can contribute than
+taking the chance of missing that opportunity.</p>
+<div class="section" id="development-process">
+<h2>Development process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/hsoft/dupeguru">Source code repository</a></li>
+<li><a class="reference external" href="https://github.com/hsoft/dupeguru/issues">Issue Tracker</a></li>
+<li><a class="reference external" href="https://github.com/hsoft/dupeguru/wiki/issue-labels">Issue labels meaning</a></li>
+</ul>
+<p>dupeGuru’s source code is on Github and thus managed in a Git repository. At all times, you should
+be able to build from source a fresh checkout of the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch using instructions from the
+<code class="docutils literal notranslate"><span class="pre">README.md</span></code> file at the root of this project. If you can’t, it’s a bug. Please report it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">master</span></code> is the main development branch, and thus represents what going to be included in the
+next feature release. When needed, we create maintenance branches for bugfixes of the current
+feature release.</p>
+<p>When implementing a big feature, it’s possible that it gets its own branch until
+it’s stable enough to merge into <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p>
+<p>Every release is tagged, the tag name containing the edition (for old versions) and its version.
+For example, release 6.6.0 of dupeGuru ME is tagged <code class="docutils literal notranslate"><span class="pre">me6.6.0</span></code>. Newer releases are tagged only
+with the version number (because editions don’t exist anymore), for example <code class="docutils literal notranslate"><span class="pre">4.0.0</span></code>.</p>
+<p>Once you’re past building the software, the <a class="reference internal" href="developer/index.html"><span class="doc">developer documentation</span></a> should
+be enough to get you started with actual development. Then again, proper documentation is a very
+difficult task and, in the case of dupeGuru, this documentation was practically nonexistent until
+late in the project, so it’s still lacking.</p>
+<p>However, I’m committed to fix this situation, so if you’re in a situation where you lack proper
+documentation to figure something out about this code, please contact me.</p>
+</div>
+<div class="section" id="tasks-for-non-developers">
+<h2>Tasks for non-developers<a class="headerlink" href="#tasks-for-non-developers" title="Permalink to this headline">¶</a></h2>
+<p><strong>Create and comment issues</strong>. The single most useful way for a user who is not a developer to
+contribute to a software project is by thoroughly documenting a bug or a feature request. Most of
+the time, what we get as developers are emails like “the app crashes” and we spend a lot of time
+trying to figure out the cause of that bug. By properly describing the nature and context of a crash
+(we learn to do that with experience as a user who reports bugs), you help developers so immensely,
+you have no idea.</p>
+<p>It’s the same thing with feature requests. Description of a feature request, when thoughts have
+already been given to how such a feature would fit in the current design, are precious to developers
+and help them figure out a clear roadmap for the project.</p>
+<p>So, even if you’re not a developer, you can always open a Github account and create/comment issues.
+Your contribution will be much appreciated.</p>
+<p><strong>Documentation</strong>. This is a bit trickier because dupeGuru’s documentation is written with a rather
+complex markup language, <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> (based on <a class="reference external" href="http://en.wikipedia.org/wiki/ReStructuredText">reST</a>). To properly work within the documentation,
+you have to know that language. I don’t think that learning this language is outside the realm of
+possibility for a non-developer, but it might be a daunting task.</p>
+<p>That being said, if it’s a minor modification to the documentation, nothing stops you from opening
+an issue (there’s a label for documentation issues, so this kind of issue is relevant to the
+tracker) describing the change you propose to make and I’ll be happy to make the change myself (if
+relevant, of course).</p>
+<p>Even if it’s a bigger contribution to the documentation you want to make, I probably wouldn’t mind
+doing the formatting myself. But in that case, it’s better to contact me first to make sure that we
+agree on what should be added to the documentation.</p>
+<p><strong>Translation</strong>. Creating or improving an existing translation is a very good way to contribute to
+dupeGuru. For more information about how to do that, you can refer to the <a class="reference external" href="https://github.com/hsoft/dupeguru/wiki/Translator-Guide">translator guide</a>.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">dupeGuru help</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="quick_start.html">Quick Start</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.directories &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.results" href="results.html" />
+    <link rel="prev" title="core.engine" href="engine.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>core.directories</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="engine.html">core.engine</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">core.results</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-core.directories">
+<span id="core-directories"></span><h1>core.directories<a class="headerlink" href="#module-core.directories" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="core.directories.AlreadyThereError">
+<em class="property">exception </em><code class="descclassname">core.directories.</code><code class="descname">AlreadyThereError</code><a class="headerlink" href="#core.directories.AlreadyThereError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path being added is already in the directory list</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="core.directories.InvalidPathError">
+<em class="property">exception </em><code class="descclassname">core.directories.</code><code class="descname">InvalidPathError</code><a class="headerlink" href="#core.directories.InvalidPathError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path being added is invalid</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.directories.Directories">
+<em class="property">class </em><code class="descclassname">core.directories.</code><code class="descname">Directories</code><a class="headerlink" href="#core.directories.Directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds user folder selection.</p>
+<p>Manages the selection that the user make through the folder selection dialog. It also manages
+folder states, and how recursion applies to them.</p>
+<p>Then, when the user starts the scan, <a class="reference internal" href="#core.directories.Directories.get_files" title="core.directories.Directories.get_files"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_files()</span></code></a> is called to retrieve all files (wrapped
+in <a class="reference internal" href="fs.html#module-core.fs" title="core.fs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">core.fs</span></code></a>) that have to be scanned according to the chosen folders/states.</p>
+<dl class="method">
+<dt id="core.directories.Directories.add_path">
+<code class="descname">add_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.add_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <code class="docutils literal notranslate"><span class="pre">path</span></code> to self, if not already there.</p>
+<p>Raises <a class="reference internal" href="#core.directories.AlreadyThereError" title="core.directories.AlreadyThereError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AlreadyThereError</span></code></a> if <code class="docutils literal notranslate"><span class="pre">path</span></code> is already in self. If path is a directory
+containing some of the directories already present in self, <code class="docutils literal notranslate"><span class="pre">path</span></code> will be added, but all
+directories under it will be removed. Can also raise <a class="reference internal" href="#core.directories.InvalidPathError" title="core.directories.InvalidPathError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPathError</span></code></a> if <code class="docutils literal notranslate"><span class="pre">path</span></code>
+does not exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference internal" href="../hscommon/path.html#hscommon.path.Path" title="hscommon.path.Path"><em>Path</em></a>) – path to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.get_files">
+<code class="descname">get_files</code><span class="sig-paren">(</span><em>fileclasses=None</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.get_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all files that are not excluded.</p>
+<p>Returned files also have their <code class="docutils literal notranslate"><span class="pre">is_ref</span></code> attr set if applicable.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.get_folders">
+<code class="descname">get_folders</code><span class="sig-paren">(</span><em>folderclass=None</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.get_folders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all folders that are not excluded.</p>
+<p>Returned folders also have their <code class="docutils literal notranslate"><span class="pre">is_ref</span></code> attr set if applicable.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.get_state">
+<code class="descname">get_state</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.get_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the state of <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#core.directories.DirectoryState" title="core.directories.DirectoryState"><code class="xref py py-class docutils literal notranslate"><span class="pre">DirectoryState</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="core.directories.Directories.get_subfolders">
+<em class="property">static </em><code class="descname">get_subfolders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.get_subfolders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sorted list of paths corresponding to subfolders in <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference internal" href="../hscommon/path.html#hscommon.path.Path" title="hscommon.path.Path"><em>Path</em></a>) – get subfolders from there</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of Path</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.has_any_file">
+<code class="descname">has_any_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.has_any_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether selected folders contain any file.</p>
+<p>Because it stops at the first file it finds, it’s much faster than get_files().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.load_from_file">
+<code class="descname">load_from_file</code><span class="sig-paren">(</span><em>infile</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load folder selection from <code class="docutils literal notranslate"><span class="pre">infile</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>infile</strong> (<em>file</em>) – path or file pointer to XML generated through <a class="reference internal" href="#core.directories.Directories.save_to_file" title="core.directories.Directories.save_to_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_to_file()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.save_to_file">
+<code class="descname">save_to_file</code><span class="sig-paren">(</span><em>outfile</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.save_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save folder selection as XML to <code class="docutils literal notranslate"><span class="pre">outfile</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outfile</strong> (<em>file</em>) – path or file pointer to XML file to save to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.directories.Directories.set_state">
+<code class="descname">set_state</code><span class="sig-paren">(</span><em>path</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#core.directories.Directories.set_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the state of folder at <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<a class="reference internal" href="../hscommon/path.html#hscommon.path.Path" title="hscommon.path.Path"><em>Path</em></a>) – path of the target folder</li>
+<li><strong>state</strong> (<a class="reference internal" href="#core.directories.DirectoryState" title="core.directories.DirectoryState"><code class="xref py py-class docutils literal notranslate"><span class="pre">DirectoryState</span></code></a>) – state to set folder to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.directories.DirectoryState">
+<em class="property">class </em><code class="descclassname">core.directories.</code><code class="descname">DirectoryState</code><a class="headerlink" href="#core.directories.DirectoryState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enum describing how a folder should be considered.</p>
+<ul class="simple">
+<li>DirectoryState.Normal: Scan all files normally</li>
+<li>DirectoryState.Reference: Scan files, but make sure never to delete any of them</li>
+<li>DirectoryState.Excluded: Don’t scan this folder</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="engine.html">core.engine</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">core.results</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

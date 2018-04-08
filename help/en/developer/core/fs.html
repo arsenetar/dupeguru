@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.fs &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.engine" href="engine.html" />
+    <link rel="prev" title="core.app" href="app.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>core.fs</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="app.html">core.app</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="engine.html">core.engine</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-core.fs">
+<span id="core-fs"></span><h1>core.fs<a class="headerlink" href="#module-core.fs" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="core.fs.FSError">
+<em class="property">exception </em><code class="descclassname">core.fs.</code><code class="descname">FSError</code><span class="sig-paren">(</span><em>fsobject</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.FSError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="core.fs.AlreadyExistsError">
+<em class="property">exception </em><code class="descclassname">core.fs.</code><code class="descname">AlreadyExistsError</code><span class="sig-paren">(</span><em>fsobject</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.AlreadyExistsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The directory or file name we’re trying to add already exists</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="core.fs.InvalidPath">
+<em class="property">exception </em><code class="descclassname">core.fs.</code><code class="descname">InvalidPath</code><span class="sig-paren">(</span><em>fsobject</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.InvalidPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path of self is invalid, and cannot be worked with.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="core.fs.InvalidDestinationError">
+<em class="property">exception </em><code class="descclassname">core.fs.</code><code class="descname">InvalidDestinationError</code><span class="sig-paren">(</span><em>fsobject</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.InvalidDestinationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A copy/move operation has been called, but the destination is invalid.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="core.fs.OperationError">
+<em class="property">exception </em><code class="descclassname">core.fs.</code><code class="descname">OperationError</code><span class="sig-paren">(</span><em>fsobject</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.OperationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A copy/move/delete operation has been called, but the checkup after the
+operation shows that it didn’t work.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.fs.File">
+<em class="property">class </em><code class="descclassname">core.fs.</code><code class="descname">File</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a file and holds metadata to be used for scanning.</p>
+<dl class="classmethod">
+<dt id="core.fs.File.can_handle">
+<em class="property">classmethod </em><code class="descname">can_handle</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.File.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether this file wrapper class can handle <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.fs.File.get_display_info">
+<code class="descname">get_display_info</code><span class="sig-paren">(</span><em>group</em>, <em>delta</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.File.get_display_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a display-ready dict of dupe’s data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.fs.Folder">
+<em class="property">class </em><code class="descclassname">core.fs.</code><code class="descname">Folder</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.Folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around a folder path.</p>
+<p>It has the size/md5 info of a File, but it’s value are the sum of its subitems.</p>
+<dl class="classmethod">
+<dt id="core.fs.Folder.can_handle">
+<em class="property">classmethod </em><code class="descname">can_handle</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.Folder.can_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether this file wrapper class can handle <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="core.fs.get_file">
+<code class="descclassname">core.fs.</code><code class="descname">get_file</code><span class="sig-paren">(</span><em>path, fileclasses=[&lt;class 'core.fs.File'&gt;]</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.get_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps <code class="docutils literal notranslate"><span class="pre">path</span></code> around its appropriate <a class="reference internal" href="#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> class.</p>
+<p>Whether a class is “appropriate” is decided by <a class="reference internal" href="#core.fs.File.can_handle" title="core.fs.File.can_handle"><code class="xref py py-meth docutils literal notranslate"><span class="pre">File.can_handle()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<a class="reference internal" href="../hscommon/path.html#hscommon.path.Path" title="hscommon.path.Path"><em>Path</em></a>) – path to wrap</li>
+<li><strong>fileclasses</strong> – List of candidate <a class="reference internal" href="#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> classes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.fs.get_files">
+<code class="descclassname">core.fs.</code><code class="descname">get_files</code><span class="sig-paren">(</span><em>path, fileclasses=[&lt;class 'core.fs.File'&gt;]</em><span class="sig-paren">)</span><a class="headerlink" href="#core.fs.get_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <a class="reference internal" href="#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> for each file contained in <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<a class="reference internal" href="../hscommon/path.html#hscommon.path.Path" title="hscommon.path.Path"><em>Path</em></a>) – path to scan</li>
+<li><strong>fileclasses</strong> – List of candidate <a class="reference internal" href="#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> classes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="app.html">core.app</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="engine.html">core.engine</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.engine &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.directories" href="directories.html" />
+    <link rel="prev" title="core.fs" href="fs.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>core.engine</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fs.html">core.fs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="directories.html">core.directories</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-core.engine">
+<span id="core-engine"></span><h1>core.engine<a class="headerlink" href="#module-core.engine" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="core.engine.Match">
+<em class="property">class </em><code class="descclassname">core.engine.</code><code class="descname">Match</code><a class="headerlink" href="#core.engine.Match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a match between two <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>.</p>
+<p>Regarless of the matching method, when two files are determined to match, a Match pair is created,
+which holds, of course, the two matched files, but also their match “level”.</p>
+<dl class="attribute">
+<dt id="core.engine.Match.first">
+<code class="descname">first</code><a class="headerlink" href="#core.engine.Match.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>first file of the pair.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Match.second">
+<code class="descname">second</code><a class="headerlink" href="#core.engine.Match.second" title="Permalink to this definition">¶</a></dt>
+<dd><p>second file of the pair.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Match.percentage">
+<code class="descname">percentage</code><a class="headerlink" href="#core.engine.Match.percentage" title="Permalink to this definition">¶</a></dt>
+<dd><p>their match level according to the scan method which found the match. int from 1 to 100. For
+exact scan methods, such as Contents scans, this will always be 100.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.engine.Group">
+<em class="property">class </em><code class="descclassname">core.engine.</code><code class="descname">Group</code><a class="headerlink" href="#core.engine.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p>A group of <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> that match together.</p>
+<p>This manages match pairs into groups and ensures that all files in the group match to each
+other.</p>
+<dl class="attribute">
+<dt id="core.engine.Group.ref">
+<code class="descname">ref</code><a class="headerlink" href="#core.engine.Group.ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>The “reference” file, which is the file among the group that isn’t going to be deleted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Group.ordered">
+<code class="descname">ordered</code><a class="headerlink" href="#core.engine.Group.ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ordered list of duplicates in the group (including the <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a>).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Group.unordered">
+<code class="descname">unordered</code><a class="headerlink" href="#core.engine.Group.unordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set duplicates in the group (including the <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a>).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Group.dupes">
+<code class="descname">dupes</code><a class="headerlink" href="#core.engine.Group.dupes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ordered list of the group’s duplicate, without <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a>. Equivalent to
+<code class="docutils literal notranslate"><span class="pre">ordered[1:]</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.engine.Group.percentage">
+<code class="descname">percentage</code><a class="headerlink" href="#core.engine.Group.percentage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average match percentage of match pairs containing <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.engine.Group.add_match">
+<code class="descname">add_match</code><span class="sig-paren">(</span><em>match</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.Group.add_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <code class="docutils literal notranslate"><span class="pre">match</span></code> to internal match list and possibly add duplicates to the group.</p>
+<p>A duplicate can only be considered as such if it matches all other duplicates in the group.
+This method registers that pair (A, B) represented in <code class="docutils literal notranslate"><span class="pre">match</span></code> as possible candidates and,
+if A and/or B end up matching every other duplicates in the group, add these duplicates to
+the group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>match</strong> (<em>tuple</em>) – pair of <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.engine.Group.discard_matches">
+<code class="descname">discard_matches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.Group.discard_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all recorded matches that didn’t result in a duplicate being added to the group.</p>
+<p>You can call this after the duplicate scanning process to free a bit of memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.engine.Group.get_match_of">
+<code class="descname">get_match_of</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.Group.get_match_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the match pair between <code class="docutils literal notranslate"><span class="pre">item</span></code> and <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.engine.Group.prioritize">
+<code class="descname">prioritize</code><span class="sig-paren">(</span><em>key_func</em>, <em>tie_breaker=None</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.Group.prioritize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorders <a class="reference internal" href="#core.engine.Group.ordered" title="core.engine.Group.ordered"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ordered</span></code></a> according to <code class="docutils literal notranslate"><span class="pre">key_func</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key_func</strong> – Key (f(x)) to be used for sorting</li>
+<li><strong>tie_breaker</strong> – function to be used to select the reference position in case the top
+duplicates have the same key_func() result.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.engine.Group.switch_ref">
+<code class="descname">switch_ref</code><span class="sig-paren">(</span><em>with_dupe</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.Group.switch_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the <a class="reference internal" href="#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a> dupe of the group switch position with <code class="docutils literal notranslate"><span class="pre">with_dupe</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.build_word_dict">
+<code class="descclassname">core.engine.</code><code class="descname">build_word_dict</code><span class="sig-paren">(</span><em>objects</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.build_word_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict of objects mapped by their words.</p>
+<p>objects must have a <code class="docutils literal notranslate"><span class="pre">words</span></code> attribute being a list of strings or a list of lists of strings
+(<a class="reference internal" href="#fields"><span class="std std-ref">Fields</span></a>).</p>
+<p>The result will be a dict with words as keys, lists of objects as values.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.compare">
+<code class="descclassname">core.engine.</code><code class="descname">compare</code><span class="sig-paren">(</span><em>first</em>, <em>second</em>, <em>flags=()</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the % of words that match between <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">second</span></code></p>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">int</span></code> in the range 0..100.
+<code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">second</span></code> can be either a string or a list (of words).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.compare_fields">
+<code class="descclassname">core.engine.</code><code class="descname">compare_fields</code><span class="sig-paren">(</span><em>first</em>, <em>second</em>, <em>flags=()</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.compare_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the score for the lowest matching <a class="reference internal" href="#fields"><span class="std std-ref">Fields</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">second</span></code> must be lists of lists of string. Each sub-list is then compared with
+<a class="reference internal" href="#core.engine.compare" title="core.engine.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">compare()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.getmatches">
+<code class="descclassname">core.engine.</code><code class="descname">getmatches</code><span class="sig-paren">(</span><em>objects</em>, <em>min_match_percentage=0</em>, <em>match_similar_words=False</em>, <em>weight_words=False</em>, <em>no_field_order=False</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.getmatches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <a class="reference internal" href="#core.engine.Match" title="core.engine.Match"><code class="xref py py-class docutils literal notranslate"><span class="pre">Match</span></code></a> within <code class="docutils literal notranslate"><span class="pre">objects</span></code> after fuzzily matching their words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> – List of <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> to match.</li>
+<li><strong>min_match_percentage</strong> (<em>int</em>) – minimum % of words that have to match.</li>
+<li><strong>match_similar_words</strong> (<em>bool</em>) – make similar words (see <a class="reference internal" href="#core.engine.merge_similar_words" title="core.engine.merge_similar_words"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge_similar_words()</span></code></a>) match.</li>
+<li><strong>weight_words</strong> (<em>bool</em>) – longer words are worth more in match % computations.</li>
+<li><strong>no_field_order</strong> (<em>bool</em>) – match <a class="reference internal" href="#fields"><span class="std std-ref">Fields</span></a> regardless of their order.</li>
+<li><strong>j</strong> – A <a class="reference internal" href="../index.html#jobs"><span class="std std-ref">job progress instance</span></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.getmatches_by_contents">
+<code class="descclassname">core.engine.</code><code class="descname">getmatches_by_contents</code><span class="sig-paren">(</span><em>files</em>, <em>j=&lt;hscommon.jobprogress.job.NullJob object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.getmatches_by_contents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <a class="reference internal" href="#core.engine.Match" title="core.engine.Match"><code class="xref py py-class docutils literal notranslate"><span class="pre">Match</span></code></a> within <code class="docutils literal notranslate"><span class="pre">files</span></code> if their contents is the same.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>j</strong> – A <a class="reference internal" href="../index.html#jobs"><span class="std std-ref">job progress instance</span></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.get_groups">
+<code class="descclassname">core.engine.</code><code class="descname">get_groups</code><span class="sig-paren">(</span><em>matches</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.get_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <a class="reference internal" href="#core.engine.Group" title="core.engine.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> from <code class="docutils literal notranslate"><span class="pre">matches</span></code>.</p>
+<p>Create groups out of match pairs in the smartest way possible.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.merge_similar_words">
+<code class="descclassname">core.engine.</code><code class="descname">merge_similar_words</code><span class="sig-paren">(</span><em>word_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.merge_similar_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take all keys in <code class="docutils literal notranslate"><span class="pre">word_dict</span></code> that are similar, and merge them together.</p>
+<p><code class="docutils literal notranslate"><span class="pre">word_dict</span></code> has been built with <a class="reference internal" href="#core.engine.build_word_dict" title="core.engine.build_word_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_word_dict()</span></code></a>. Similarity is computed with Python’s
+<code class="docutils literal notranslate"><span class="pre">difflib.get_close_matches()</span></code>, which computes the number of edits that are necessary to make
+a word equal to the other.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.engine.reduce_common_words">
+<code class="descclassname">core.engine.</code><code class="descname">reduce_common_words</code><span class="sig-paren">(</span><em>word_dict</em>, <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#core.engine.reduce_common_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all objects from <code class="docutils literal notranslate"><span class="pre">word_dict</span></code> values where the object count &gt;= <code class="docutils literal notranslate"><span class="pre">threshold</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">word_dict</span></code> has been built with <a class="reference internal" href="#core.engine.build_word_dict" title="core.engine.build_word_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_word_dict()</span></code></a>.</p>
+<p>The exception to this removal are the objects where all the words of the object are common.
+Because if we remove them, we will miss some duplicates!</p>
+</dd></dl>
+
+<div class="section" id="fields">
+<span id="id1"></span><h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<p>Fields are groups of words which each represent a significant part of the whole name. This concept
+is sifnificant in music file names, where we often have names like “My Artist - a very long title
+with many many words”.</p>
+<p>This title has 10 words. If you run as scan with a bit of tolerance, let’s say 90%, you’ll be able
+to find a dupe that has only one “many” in the song title. However, you would also get false
+duplicates from a title like “My Giraffe - a very long title with many many words”, which is of
+course a very different song and it doesn’t make sense to match them.</p>
+<p>When matching by fields, each field (separated by “-“) is considered as a separate string to match
+independently. After all fields are matched, the lowest result is kept. In the “Giraffe” example we
+gave, the result would be 50% instead of 90% in normal mode.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fs.html">core.fs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="directories.html">core.directories</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

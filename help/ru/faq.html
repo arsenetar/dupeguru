@@ -1,0 +1,108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Часто задаваемые вопросы &#8212; Документация dupeGuru 4.0.3</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Повторное приоритетов дубликатов" href="reprioritize.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Документация dupeGuru 4.0.3</span></a></h1>
+        <h2 class="heading"><span>Часто задаваемые вопросы</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="reprioritize.html">Повторное приоритетов дубликатов</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Содержание</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="id1">
+<h1>Часто задаваемые вопросы<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Что такое dupeGuru?</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Что делает его лучше, чем другие сканеры дублировать?</p>
+<p>Сканирования является чрезвычайно гибкой. Вы можете настроить его, чтобы действительно получить, каких результатов вы хотите. Вы можете прочитать больше о опция настройки dupeGuru в <a class="reference internal" href="preferences.html"><span class="doc">Настройки</span></a>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Насколько безопасно использовать dupeGuru?</p>
+<p>Очень безопасной. dupeGuru был разработан, чтобы убедиться, что вы не удаляете файлы, которые вы не хотели удалить. Во-первых, существует система отсчета папку, которая позволяет определить папки, в которых вы абсолютно не хотите dupeGuru, чтобы вы удаляете файлы там, и тогда есть система контрольной группы, что гарантирует, что вы всегда держать по крайней мере один член группы дубликатов.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Каковы ограничения демо dupeGuru?</p>
+<p>В демо-режиме, вы можете только выполнять действия над 10 дубликаты сразу. в
+<a class="reference external" href="http://open.hardcoded.net/about/">Fairware</a> режиме, однако, Есть никаких ограничений.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Знак коробку файл я хочу удалить отключена. Что я должен сделать?</p>
+<p>Вы не можете пометить ссылки (первый файл) дубликат группы. Однако то, что вы можете сделать, заключается в содействии дублировать файл справки. Таким образом, если файл, который Вы хотите, чтобы отметить это ссылки, выделите дубликатов файлов в группу, которую вы хотите продвигать на ссылку, и нажмите на кнопку <strong>Действия -&gt; Добавить выбранной ссылки</strong> . Если ссылка файл из папки ссылки (имя файла написаны на синими буквами), вы не можете удалить его из исходного положения.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">У меня есть папка, из которой я действительно не хочу, чтобы удалить файлы.</p>
+<p>IЕсли вы хотите быть уверены, что dupeGuru никогда не будет удалять файл из определенной папки, убедитесь, что установили в состояние <strong>Ссылка</strong> на: документ: <cite>папки</cite>.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Что это за „(X отбрасывается) «уведомление в строке состояния?</p>
+<p>В некоторых случаях, несколько матчей не включены в окончательные результаты по соображениям безопасности. Позвольте мне привести пример. У нас есть 3 файла: A, B и C. Мы сканируем их с помощью фильтра низких твердости.Сканер определяет, что матчи с B, матчи с С, но делает B ** не ** матч с С. При этом, dupeGuru имеет вид проблемы. Она не может создать дубликат группы А, В и С в это, потому что не все файлы в группе будет соответствовать вместе. Это может создать 2 группы: одна группа AB, а затем одна группа AC, но это не будет, по соображениям безопасности. Давайте думать об этом: если Б не совпадает с С, она, вероятно, означает, что либо B, C или оба на самом деле не дубликаты. Если не было бы 2 группы (АВ и АС), вы бы в конечном итоге удалить оба B и C. И если один из них не дублировать, что на самом деле не то, что вы хотите делать, правильно? Так что dupeGuru делает в таком случае является, чтобы отменить матч AC (и добавляет уведомление в строке состояния). Таким образом, если вы удалите B и повторно запустить сканирование, вам придется соответствовать переменного тока в следующий результат.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Я хочу, чтобы отметить все файлы из определенной папки. Что я могу сделать?</p>
+<p>Включить: документ: <cite>обманутые Только &lt;результаты&gt;</cite> режим и нажать на папку колонки для сортировки дубликатов по папкам. Затем он будет легким для вас, чтобы выбрать все дубликаты из той же папке, а затем нажать клавишу пробел, чтобы отметить все выбранные дубликатов.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Я пытался отправить свои дубликаты в корзину, но dupeGuru говорит мне, он не может это сделать. Почему? Что я могу сделать?</p>
+<p>Большую часть времени, поэтому dupeGuru не можете отправлять файлы в корзину из-за права доступа к файлам. Вы должны написать * * разрешения на файлы, которые вы хотите отправить в корзину. Если вы не знакомы с командной строкой, вы можете использовать утилиты, такие как <cite>BatChmod &lt;http://macchampion.com/arbysoft/BatchMod&gt;</cite> _ исправить Ваши права.</p>
+<blockquote>
+<div>Если dupeGuru еще дает вам неприятности после фиксации ваших прав, было несколько случаев, когда с помощью «Перемещение Помечено к …» в качестве обходного пути сделали свое дело. Таким образом, вместо отправки файлов в корзину, вы посылаете их во временную папку с «Переместить Отмеченные к …» действия, а затем вы удалите эту временную папку вручную.</div></blockquote>
+<p>Если все это не так, <a class="reference external" href="http://www.hardcoded.net/support">контакт с поддержки HS</a>, мы поможем Вас.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">План</p>
+<p class="last">This FAQ qestion is outdated, see english version.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="reprioritize.html">Повторное приоритетов дубликатов</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Содержание</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="changelog.html">Changelog</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Создано с помощью <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

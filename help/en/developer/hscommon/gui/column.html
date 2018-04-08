@@ -1,0 +1,367 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.column &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.gui.progress_window" href="progress_window.html" />
+    <link rel="prev" title="hscommon.gui.base" href="base.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.column</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="base.html">hscommon.gui.base</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="progress_window.html">hscommon.gui.progress_window</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.column">
+<span id="hscommon-gui-column"></span><h1>hscommon.gui.column<a class="headerlink" href="#module-hscommon.gui.column" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.column.Columns" title="hscommon.gui.column.Columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Columns</span></code></a>(table[,&nbsp;prefaccess,&nbsp;savename])</td>
+<td>Cross-toolkit GUI-enabled column set for tables or outlines.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.column.Column" title="hscommon.gui.column.Column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Column</span></code></a>(name[,&nbsp;display,&nbsp;visible,&nbsp;optional])</td>
+<td>Holds column attributes such as its name, width, visibility, etc.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.column.ColumnsView" title="hscommon.gui.column.ColumnsView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColumnsView</span></code></a></td>
+<td>Expected interface for <a class="reference internal" href="#hscommon.gui.column.Columns" title="hscommon.gui.column.Columns"><code class="xref py py-class docutils literal notranslate"><span class="pre">Columns</span></code></a>’s view.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.column.PrefAccessInterface" title="hscommon.gui.column.PrefAccessInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrefAccessInterface</span></code></a></td>
+<td>Expected interface for <a class="reference internal" href="#hscommon.gui.column.Columns" title="hscommon.gui.column.Columns"><code class="xref py py-class docutils literal notranslate"><span class="pre">Columns</span></code></a>’s prefaccess.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.column.Columns">
+<em class="property">class </em><code class="descclassname">hscommon.gui.column.</code><code class="descname">Columns</code><span class="sig-paren">(</span><em>table</em>, <em>prefaccess=None</em>, <em>savename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit GUI-enabled column set for tables or outlines.</p>
+<p>Manages a column set’s order, visibility and width. We also manage the persistence of these
+attributes so that we can restore them on the next run.</p>
+<p>Subclasses <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUIObject</span></code></a>. Expected view: <a class="reference internal" href="#hscommon.gui.column.ColumnsView" title="hscommon.gui.column.ColumnsView"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnsView</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table</strong> – The table the columns belong to. It’s from there that we retrieve our column
+configuration and it must have a <code class="docutils literal notranslate"><span class="pre">COLUMNS</span></code> attribute which is a list of
+<a class="reference internal" href="#hscommon.gui.column.Column" title="hscommon.gui.column.Column"><code class="xref py py-class docutils literal notranslate"><span class="pre">Column</span></code></a>. We also call <a class="reference internal" href="table.html#hscommon.gui.table.GUITable.save_edits" title="hscommon.gui.table.GUITable.save_edits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_edits()</span></code></a> on it from time to
+time. Technically, this argument can also be a tree, but there’s probably some
+sorting in the code to do to support this option cleanly.</li>
+<li><strong>prefaccess</strong> – An object giving access to user preferences for the currently running app.
+We use this to make column attributes persistent. Must follow
+<a class="reference internal" href="#hscommon.gui.column.PrefAccessInterface" title="hscommon.gui.column.PrefAccessInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrefAccessInterface</span></code></a>.</li>
+<li><strong>savename</strong> (<em>str</em>) – The name under which column preferences will be saved. This name is in fact
+a prefix. Preferences are saved under more than one name, but they will all
+have that same prefix.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="hscommon.gui.column.Columns._view_updated">
+<code class="descname">_view_updated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns._view_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set.</p>
+<p>Doing nothing by default, this method is called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set (it isn’t
+called when it’s unset, however). Use this for initialization code that requires a view
+(which is often the whole of the initialization code).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.column_by_index">
+<code class="descname">column_by_index</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.column_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <a class="reference internal" href="#hscommon.gui.column.Column" title="hscommon.gui.column.Column"><code class="xref py py-class docutils literal notranslate"><span class="pre">Column</span></code></a> having the <a class="reference internal" href="#hscommon.gui.column.Column.logical_index" title="hscommon.gui.column.Column.logical_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">logical_index</span></code></a> <code class="docutils literal notranslate"><span class="pre">index</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.column_by_name">
+<code class="descname">column_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.column_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <a class="reference internal" href="#hscommon.gui.column.Column" title="hscommon.gui.column.Column"><code class="xref py py-class docutils literal notranslate"><span class="pre">Column</span></code></a> having the <a class="reference internal" href="#hscommon.gui.column.Column.name" title="hscommon.gui.column.Column.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a> <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.column_display">
+<code class="descname">column_display</code><span class="sig-paren">(</span><em>colname</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.column_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns display name for column named <code class="docutils literal notranslate"><span class="pre">colname</span></code>, or <code class="docutils literal notranslate"><span class="pre">''</span></code> if there’s none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.column_is_visible">
+<code class="descname">column_is_visible</code><span class="sig-paren">(</span><em>colname</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.column_is_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns visibility for column named <code class="docutils literal notranslate"><span class="pre">colname</span></code>, or <code class="docutils literal notranslate"><span class="pre">True</span></code> if there’s none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.column_width">
+<code class="descname">column_width</code><span class="sig-paren">(</span><em>colname</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.column_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns width for column named <code class="docutils literal notranslate"><span class="pre">colname</span></code>, or <code class="docutils literal notranslate"><span class="pre">0</span></code> if there’s none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.columns_count">
+<code class="descname">columns_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.columns_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of columns in our set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.columns_to_right">
+<code class="descname">columns_to_right</code><span class="sig-paren">(</span><em>colname</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.columns_to_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of all columns to the right of <code class="docutils literal notranslate"><span class="pre">colname</span></code>.</p>
+<p>“right” meaning “having a higher <a class="reference internal" href="#hscommon.gui.column.Column.ordered_index" title="hscommon.gui.column.Column.ordered_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Column.ordered_index</span></code></a>” in our left-to-right
+civilization.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.menu_items">
+<code class="descname">menu_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.menu_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of items convenient for quick visibility menu generation.</p>
+<p>Returns a list of <code class="docutils literal notranslate"><span class="pre">(display_name,</span> <span class="pre">is_marked)</span></code> items for each optional column in the
+current view (<code class="docutils literal notranslate"><span class="pre">is_marked</span></code> means that it’s visible).</p>
+<p>You can use this to generate a menu to let the user toggle the visibility of an optional
+column. That is why we only show optional column, because the visibility of mandatory
+columns can’t be toggled.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.move_column">
+<code class="descname">move_column</code><span class="sig-paren">(</span><em>colname</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.move_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves column <code class="docutils literal notranslate"><span class="pre">colname</span></code> to <code class="docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<p>The column will be placed just in front of the column currently having that index, or to the
+end of the list if there’s none.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.reset_to_defaults">
+<code class="descname">reset_to_defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.reset_to_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all columns’ width and visibility to their default values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.resize_column">
+<code class="descname">resize_column</code><span class="sig-paren">(</span><em>colname</em>, <em>newwidth</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.resize_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set column <code class="docutils literal notranslate"><span class="pre">colname</span></code>’s width to <code class="docutils literal notranslate"><span class="pre">newwidth</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.restore_columns">
+<code class="descname">restore_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.restore_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore’s column persistent attributes from the last <a class="reference internal" href="#hscommon.gui.column.Columns.save_columns" title="hscommon.gui.column.Columns.save_columns"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_columns()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.save_columns">
+<code class="descname">save_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.save_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save column attributes in persistent storage for restoration in <a class="reference internal" href="#hscommon.gui.column.Columns.restore_columns" title="hscommon.gui.column.Columns.restore_columns"><code class="xref py py-meth docutils literal notranslate"><span class="pre">restore_columns()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.set_column_order">
+<code class="descname">set_column_order</code><span class="sig-paren">(</span><em>colnames</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.set_column_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the columns order so it matches the order in <code class="docutils literal notranslate"><span class="pre">colnames</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>colnames</strong> – A list of column names in the desired order.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.set_column_visible">
+<code class="descname">set_column_visible</code><span class="sig-paren">(</span><em>colname</em>, <em>visible</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.set_column_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the visibility of column <code class="docutils literal notranslate"><span class="pre">colname</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.set_default_width">
+<code class="descname">set_default_width</code><span class="sig-paren">(</span><em>colname</em>, <em>width</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.set_default_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default width or column <code class="docutils literal notranslate"><span class="pre">colname</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.Columns.toggle_menu_item">
+<code class="descname">toggle_menu_item</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Columns.toggle_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggles the visibility of an optional column.</p>
+<p>You know, that optional column menu you’ve generated in <a class="reference internal" href="#hscommon.gui.column.Columns.menu_items" title="hscommon.gui.column.Columns.menu_items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">menu_items()</span></code></a>? Well, <code class="docutils literal notranslate"><span class="pre">index</span></code>
+is the index of them menu item in <em>that</em> menu that the user has clicked on to toggle it.</p>
+<p>Returns whether the column in question ends up being visible or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Columns.colnames">
+<code class="descname">colnames</code><a class="headerlink" href="#hscommon.gui.column.Columns.colnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of column names in visible order.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Columns.ordered_columns">
+<code class="descname">ordered_columns</code><a class="headerlink" href="#hscommon.gui.column.Columns.ordered_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of <a class="reference internal" href="#hscommon.gui.column.Column" title="hscommon.gui.column.Column"><code class="xref py py-class docutils literal notranslate"><span class="pre">Column</span></code></a> in visible order.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.column.Column">
+<em class="property">class </em><code class="descclassname">hscommon.gui.column.</code><code class="descname">Column</code><span class="sig-paren">(</span><em>name</em>, <em>display=''</em>, <em>visible=True</em>, <em>optional=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.Column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds column attributes such as its name, width, visibility, etc.</p>
+<p>These attributes are then used to correctly configure the column on the “view” side.</p>
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.default_visible">
+<code class="descname">default_visible</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.default_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the column is visible by default. It will be used if column restoration doesn’t
+contain any “remembered” widths.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.default_width">
+<code class="descname">default_width</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.default_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default width of the column. This value usually depends on the platform and is set on
+columns initialisation. It will be used if column restoration doesn’t contain any
+“remembered” widths.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.display">
+<code class="descname">display</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display name (title) of the column.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.logical_index">
+<code class="descname">logical_index</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.logical_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Immutable index of the column. Doesn’t change even when columns are re-ordered. Used in
+<a class="reference internal" href="#hscommon.gui.column.Columns.column_by_index" title="hscommon.gui.column.Columns.column_by_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Columns.column_by_index()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.name">
+<code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>“programmatical” (not for display) name. Used as a reference in a couple of place, such
+as <a class="reference internal" href="#hscommon.gui.column.Columns.column_by_name" title="hscommon.gui.column.Columns.column_by_name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Columns.column_by_name()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.optional">
+<code class="descname">optional</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.optional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the column can have <a class="reference internal" href="#hscommon.gui.column.Column.visible" title="hscommon.gui.column.Column.visible"><code class="xref py py-attr docutils literal notranslate"><span class="pre">visible</span></code></a> set to false.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.ordered_index">
+<code class="descname">ordered_index</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.ordered_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of the column in the ordered set of columns.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.visible">
+<code class="descname">visible</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the column is visible.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.column.Column.width">
+<code class="descname">width</code><em class="property"> = None</em><a class="headerlink" href="#hscommon.gui.column.Column.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Width of the column.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.column.ColumnsView">
+<em class="property">class </em><code class="descclassname">hscommon.gui.column.</code><code class="descname">ColumnsView</code><a class="headerlink" href="#hscommon.gui.column.ColumnsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expected interface for <a class="reference internal" href="#hscommon.gui.column.Columns" title="hscommon.gui.column.Columns"><code class="xref py py-class docutils literal notranslate"><span class="pre">Columns</span></code></a>’s view.</p>
+<p><em>Not actually used in the code. For documentation purposes only.</em></p>
+<p>Our view, the columns controller of a table or outline, is expected to properly respond to
+callbacks.</p>
+<dl class="method">
+<dt id="hscommon.gui.column.ColumnsView.restore_columns">
+<code class="descname">restore_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.ColumnsView.restore_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all columns according to the model.</p>
+<p>When this is called, our view has to update the columns title, order and visibility of all
+columns.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.ColumnsView.set_column_visible">
+<code class="descname">set_column_visible</code><span class="sig-paren">(</span><em>colname</em>, <em>visible</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.ColumnsView.set_column_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update visibility of column <code class="docutils literal notranslate"><span class="pre">colname</span></code>.</p>
+<p>Called when the user toggles the visibility of a column, we must update the column
+<code class="docutils literal notranslate"><span class="pre">colname</span></code>’s visibility status to <code class="docutils literal notranslate"><span class="pre">visible</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.column.PrefAccessInterface">
+<em class="property">class </em><code class="descclassname">hscommon.gui.column.</code><code class="descname">PrefAccessInterface</code><a class="headerlink" href="#hscommon.gui.column.PrefAccessInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expected interface for <a class="reference internal" href="#hscommon.gui.column.Columns" title="hscommon.gui.column.Columns"><code class="xref py py-class docutils literal notranslate"><span class="pre">Columns</span></code></a>’s prefaccess.</p>
+<p><em>Not actually used in the code. For documentation purposes only.</em></p>
+<dl class="method">
+<dt id="hscommon.gui.column.PrefAccessInterface.get_default">
+<code class="descname">get_default</code><span class="sig-paren">(</span><em>key</em>, <em>fallback_value</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.PrefAccessInterface.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the value for <code class="docutils literal notranslate"><span class="pre">key</span></code> in the currently running app’s preference store.</p>
+<p>If the key doesn’t exist, return <code class="docutils literal notranslate"><span class="pre">fallback_value</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.column.PrefAccessInterface.set_default">
+<code class="descname">set_default</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.column.PrefAccessInterface.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value <code class="docutils literal notranslate"><span class="pre">value</span></code> for <code class="docutils literal notranslate"><span class="pre">key</span></code> in the currently running app’s preference store.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="base.html">hscommon.gui.base</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="progress_window.html">hscommon.gui.progress_window</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

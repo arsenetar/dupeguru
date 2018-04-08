@@ -1,0 +1,98 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.conflict &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="hscommon.desktop" href="desktop.html" />
+    <link rel="prev" title="hscommon.build" href="build.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.conflict</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="build.html">hscommon.build</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="desktop.html">hscommon.desktop</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.conflict">
+<span id="hscommon-conflict"></span><h1>hscommon.conflict<a class="headerlink" href="#module-hscommon.conflict" title="Permalink to this headline">¶</a></h1>
+<p>When you have to deal with names that have to be unique and can conflict together, you can use
+this module that deals with conflicts by prepending unique numbers in <code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets to the name.</p>
+<dl class="function">
+<dt id="hscommon.conflict.get_conflicted_name">
+<code class="descclassname">hscommon.conflict.</code><code class="descname">get_conflicted_name</code><span class="sig-paren">(</span><em>other_names</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.conflict.get_conflicted_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns name with a <code class="docutils literal notranslate"><span class="pre">[000]</span></code> number in front of it.</p>
+<p>The number between brackets depends on how many conlicted filenames
+there already are in other_names.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.conflict.get_unconflicted_name">
+<code class="descclassname">hscommon.conflict.</code><code class="descname">get_unconflicted_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.conflict.get_unconflicted_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">name</span></code> without <code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets.</p>
+<p>Brackets which, of course, might have been added by func:<cite>get_conflicted_name</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.conflict.is_conflicted">
+<code class="descclassname">hscommon.conflict.</code><code class="descname">is_conflicted</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.conflict.is_conflicted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether <code class="docutils literal notranslate"><span class="pre">name</span></code> is prepended with a bracketed number.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.conflict.smart_copy">
+<code class="descclassname">hscommon.conflict.</code><code class="descname">smart_copy</code><span class="sig-paren">(</span><em>source_path</em>, <em>dest_path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.conflict.smart_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies <code class="docutils literal notranslate"><span class="pre">source_path</span></code> to <code class="docutils literal notranslate"><span class="pre">dest_path</span></code>, recursively and with conflict resolution.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hscommon.conflict.smart_move">
+<code class="descclassname">hscommon.conflict.</code><code class="descname">smart_move</code><span class="sig-paren">(</span><em>source_path</em>, <em>dest_path</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.conflict.smart_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <a class="reference internal" href="#hscommon.conflict.smart_copy" title="hscommon.conflict.smart_copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">smart_copy()</span></code></a>, but it moves files instead.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="build.html">hscommon.build</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="desktop.html">hscommon.desktop</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

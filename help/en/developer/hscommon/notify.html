@@ -1,0 +1,113 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.notify &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="hscommon.path" href="path.html" />
+    <link rel="prev" title="hscommon.desktop" href="desktop.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.notify</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="desktop.html">hscommon.desktop</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="path.html">hscommon.path</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.notify">
+<span id="hscommon-notify"></span><h1>hscommon.notify<a class="headerlink" href="#module-hscommon.notify" title="Permalink to this headline">¶</a></h1>
+<p>Very simple inter-object notification system.</p>
+<p>This module is a brain-dead simple notification system involving a <a class="reference internal" href="#hscommon.notify.Broadcaster" title="hscommon.notify.Broadcaster"><code class="xref py py-class docutils literal notranslate"><span class="pre">Broadcaster</span></code></a> and a
+<a class="reference internal" href="#hscommon.notify.Listener" title="hscommon.notify.Listener"><code class="xref py py-class docutils literal notranslate"><span class="pre">Listener</span></code></a>. A listener can only listen to one broadcaster. A broadcaster can have multiple
+listeners. If the listener is connected, whenever the broadcaster calls <a class="reference internal" href="#hscommon.notify.Broadcaster.notify" title="hscommon.notify.Broadcaster.notify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">notify()</span></code></a>,
+the method with the same name as the broadcasted message is called on the listener.</p>
+<dl class="class">
+<dt id="hscommon.notify.Broadcaster">
+<em class="property">class </em><code class="descclassname">hscommon.notify.</code><code class="descname">Broadcaster</code><a class="headerlink" href="#hscommon.notify.Broadcaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Broadcasts messages that are received by all listeners.</p>
+<dl class="method">
+<dt id="hscommon.notify.Broadcaster.notify">
+<code class="descname">notify</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Broadcaster.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify all connected listeners of <code class="docutils literal notranslate"><span class="pre">msg</span></code>.</p>
+<p>That means that each listeners will have their method with the same name as <code class="docutils literal notranslate"><span class="pre">msg</span></code> called.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.notify.Listener">
+<em class="property">class </em><code class="descclassname">hscommon.notify.</code><code class="descname">Listener</code><span class="sig-paren">(</span><em>broadcaster</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>A listener is initialized with the broadcaster it’s going to listen to. Initially, it is not connected.</p>
+<dl class="method">
+<dt id="hscommon.notify.Listener.bind_messages">
+<code class="descname">bind_messages</code><span class="sig-paren">(</span><em>messages</em>, <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Listener.bind_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Binds multiple message to the same function.</p>
+<p>Often, we perform the same thing on multiple messages. Instead of having the same function
+repeated again and agin in our class, we can use this method to bind multiple messages to
+the same function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.notify.Listener.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Listener.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects the listener to its broadcaster.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.notify.Listener.disconnect">
+<code class="descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Listener.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnects the listener from its broadcaster.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.notify.Repeater">
+<em class="property">class </em><code class="descclassname">hscommon.notify.</code><code class="descname">Repeater</code><span class="sig-paren">(</span><em>broadcaster</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.notify.Repeater" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="desktop.html">hscommon.desktop</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="path.html">hscommon.path</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

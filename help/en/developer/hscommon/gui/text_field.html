@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.text_field &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.gui.tree" href="tree.html" />
+    <link rel="prev" title="hscommon.gui.table" href="table.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.text_field</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="table.html">hscommon.gui.table</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tree.html">hscommon.gui.tree</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.text_field">
+<span id="hscommon-gui-text-field"></span><h1>hscommon.gui.text_field<a class="headerlink" href="#module-hscommon.gui.text_field" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.text_field.TextField" title="hscommon.gui.text_field.TextField"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextField</span></code></a>()</td>
+<td>Cross-toolkit text field.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hscommon.gui.text_field.TextFieldView" title="hscommon.gui.text_field.TextFieldView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFieldView</span></code></a></td>
+<td>Expected interface for <a class="reference internal" href="#hscommon.gui.text_field.TextField" title="hscommon.gui.text_field.TextField"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a>’s view.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.text_field.TextField">
+<em class="property">class </em><code class="descclassname">hscommon.gui.text_field.</code><code class="descname">TextField</code><a class="headerlink" href="#hscommon.gui.text_field.TextField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit text field.</p>
+<p>Represents a UI element allowing the user to input a text value. Its main attribute is
+<a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a> which acts as the store of the said value.</p>
+<p>When our model value isn’t a string, we have a built-in parsing/formatting mechanism allowing
+us to directly retrieve/set our non-string value through <a class="reference internal" href="#hscommon.gui.text_field.TextField.value" title="hscommon.gui.text_field.TextField.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.</p>
+<p>Subclasses <a class="reference internal" href="base.html#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUIObject</span></code></a>. Expected view: <a class="reference internal" href="#hscommon.gui.text_field.TextFieldView" title="hscommon.gui.text_field.TextFieldView"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextFieldView</span></code></a>.</p>
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextField._format">
+<code class="descname">_format</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextField._format" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Formats <code class="docutils literal notranslate"><span class="pre">value</span></code> to put into <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a>.</p>
+<p>Returns the formatted version of <code class="docutils literal notranslate"><span class="pre">value</span></code>. Called whenever <a class="reference internal" href="#hscommon.gui.text_field.TextField.value" title="hscommon.gui.text_field.TextField.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a> changes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextField._parse">
+<code class="descname">_parse</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextField._parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Parses <code class="docutils literal notranslate"><span class="pre">text</span></code> to put into <a class="reference internal" href="#hscommon.gui.text_field.TextField.value" title="hscommon.gui.text_field.TextField.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.</p>
+<p>Returns the parsed version of <code class="docutils literal notranslate"><span class="pre">text</span></code>. Called whenever <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a> changes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextField._update">
+<code class="descname">_update</code><span class="sig-paren">(</span><em>newvalue</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextField._update" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called whenever we have a new value.</p>
+<p>Whenever our text/value store changes to a new value (different from the old one), this
+method is called. By default, it does nothing but you can override it if you want.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextField._view_updated">
+<code class="descname">_view_updated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextField._view_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set.</p>
+<p>Doing nothing by default, this method is called after <code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code> has been set (it isn’t
+called when it’s unset, however). Use this for initialization code that requires a view
+(which is often the whole of the initialization code).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextField.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextField.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggers a view <a class="reference internal" href="#hscommon.gui.text_field.TextFieldView.refresh" title="hscommon.gui.text_field.TextFieldView.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.text_field.TextField.text">
+<code class="descname">text</code><a class="headerlink" href="#hscommon.gui.text_field.TextField.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>The text that is currently displayed in the widget.</p>
+<p><em>str</em>. <em>get/set</em>.</p>
+<p>This property can be set. When it is, <a class="reference internal" href="#hscommon.gui.text_field.TextField.refresh" title="hscommon.gui.text_field.TextField.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code></a> is called and the view is synced with
+our value. Always in sync with <a class="reference internal" href="#hscommon.gui.text_field.TextField.value" title="hscommon.gui.text_field.TextField.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.text_field.TextField.value">
+<code class="descname">value</code><a class="headerlink" href="#hscommon.gui.text_field.TextField.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The “parsed” representation of <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a>.</p>
+<p><em>arbitrary type</em>. <em>get/set</em>.</p>
+<p>By default, it’s a mirror of <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a>, but a subclass can override <a class="reference internal" href="#hscommon.gui.text_field.TextField._parse" title="hscommon.gui.text_field.TextField._parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_parse()</span></code></a> and
+<a class="reference internal" href="#hscommon.gui.text_field.TextField._format" title="hscommon.gui.text_field.TextField._format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_format()</span></code></a> to have anything else. Always in sync with <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">text</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="hscommon.gui.text_field.TextFieldView">
+<em class="property">class </em><code class="descclassname">hscommon.gui.text_field.</code><code class="descname">TextFieldView</code><a class="headerlink" href="#hscommon.gui.text_field.TextFieldView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expected interface for <a class="reference internal" href="#hscommon.gui.text_field.TextField" title="hscommon.gui.text_field.TextField"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a>’s view.</p>
+<p><em>Not actually used in the code. For documentation purposes only.</em></p>
+<p>Our view is expected to sync with <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TextField.text</span></code></a> “both ways”, that is, update the
+model’s text when the user types something, but also update the text field when <a class="reference internal" href="#hscommon.gui.text_field.TextFieldView.refresh" title="hscommon.gui.text_field.TextFieldView.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code></a>
+is called.</p>
+<dl class="method">
+<dt id="hscommon.gui.text_field.TextFieldView.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.text_field.TextFieldView.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the contents of the input widget.</p>
+<p>Ensures that the contents of the input widget is actually <a class="reference internal" href="#hscommon.gui.text_field.TextField.text" title="hscommon.gui.text_field.TextField.text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TextField.text</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="table.html">hscommon.gui.table</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tree.html">hscommon.gui.tree</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

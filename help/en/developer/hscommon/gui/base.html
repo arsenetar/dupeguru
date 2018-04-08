@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hscommon.gui.base &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hscommon.gui.column" href="column.html" />
+    <link rel="prev" title="hscommon.jobprogress.qt" href="../jobprogress/qt.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>hscommon.gui.base</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../jobprogress/qt.html">hscommon.jobprogress.qt</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="column.html">hscommon.gui.column</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-hscommon.gui.base">
+<span id="hscommon-gui-base"></span><h1>hscommon.gui.base<a class="headerlink" href="#module-hscommon.gui.base" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#hscommon.gui.base.GUIObject" title="hscommon.gui.base.GUIObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GUIObject</span></code></a>([multibind])</td>
+<td>Cross-toolkit “model” representation of a GUI layer object.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="hscommon.gui.base.GUIObject">
+<em class="property">class </em><code class="descclassname">hscommon.gui.base.</code><code class="descname">GUIObject</code><span class="sig-paren">(</span><em>multibind=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.base.GUIObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-toolkit “model” representation of a GUI layer object.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">GUIObject</span></code> is a cross-toolkit “model” representation of a GUI layer object, for example, a
+table. It acts as a cross-toolkit interface to what we call here a <a class="reference internal" href="#hscommon.gui.base.GUIObject.view" title="hscommon.gui.base.GUIObject.view"><code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code></a>. That
+view is a toolkit-specific controller to the actual view (an <code class="docutils literal notranslate"><span class="pre">NSTableView</span></code>, a <code class="docutils literal notranslate"><span class="pre">QTableView</span></code>,
+etc.). In our GUIObject, we need a reference to that toolkit-specific controller because some
+actions have effects on it (for example, prompting it to refresh its data). The <code class="docutils literal notranslate"><span class="pre">GUIObject</span></code>
+is typically instantiated before its <a class="reference internal" href="#hscommon.gui.base.GUIObject.view" title="hscommon.gui.base.GUIObject.view"><code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code></a>, that is why we set it to <code class="docutils literal notranslate"><span class="pre">None</span></code> on init.
+However, the GUI layer is supposed to set the view as soon as its toolkit-specific controller is
+instantiated.</p>
+<p>When you subclass <code class="docutils literal notranslate"><span class="pre">GUIObject</span></code>, you will likely want to update its view on instantiation. That
+is why we call <code class="docutils literal notranslate"><span class="pre">self.view.refresh()</span></code> in <a class="reference internal" href="#hscommon.gui.base.GUIObject._view_updated" title="hscommon.gui.base.GUIObject._view_updated"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_view_updated()</span></code></a>. If you need another type of
+action on view instantiation, just override the method.</p>
+<p>Most of the time, you will only one to bind a view once in the lifetime of your GUI object.
+That is why there are safeguards, when setting <code class="docutils literal notranslate"><span class="pre">view</span></code> to ensure that we don’t double-assign.
+However, sometimes you want to be able to re-bind another view. In this case, set the
+<code class="docutils literal notranslate"><span class="pre">multibind</span></code> flag to <code class="docutils literal notranslate"><span class="pre">True</span></code> and the safeguard will be disabled.</p>
+<dl class="method">
+<dt id="hscommon.gui.base.GUIObject._view_updated">
+<code class="descname">_view_updated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hscommon.gui.base.GUIObject._view_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Virtual) Called after <a class="reference internal" href="#hscommon.gui.base.GUIObject.view" title="hscommon.gui.base.GUIObject.view"><code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code></a> has been set.</p>
+<p>Doing nothing by default, this method is called after <a class="reference internal" href="#hscommon.gui.base.GUIObject.view" title="hscommon.gui.base.GUIObject.view"><code class="xref py py-attr docutils literal notranslate"><span class="pre">view</span></code></a> has been set (it isn’t
+called when it’s unset, however). Use this for initialization code that requires a view
+(which is often the whole of the initialization code).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hscommon.gui.base.GUIObject.view">
+<code class="descname">view</code><a class="headerlink" href="#hscommon.gui.base.GUIObject.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to our toolkit-specific view controller.</p>
+<p><em>view answering to GUIObject sublass’s view protocol</em>. <em>get/set</em></p>
+<p>This view starts as <code class="docutils literal notranslate"><span class="pre">None</span></code> and has to be set “manually”. There’s two times at which we set
+the view property: On initialization, where we set the view that we’ll use for our lifetime,
+and just before the view is deallocated. We need to unset our view at that time to avoid
+calls to a deallocated instance (which means a crash).</p>
+<p>To unset our view, we simple assign it to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../jobprogress/qt.html">hscommon.jobprogress.qt</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="column.html">hscommon.gui.column</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

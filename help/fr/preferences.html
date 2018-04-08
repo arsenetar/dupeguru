@@ -1,0 +1,81 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Préférences &#8212; Documentation dupeGuru 4.0.3</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Résultats" href="results.html" />
+    <link rel="prev" title="Sélection de dossiers" href="folders.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Documentation dupeGuru 4.0.3</span></a></h1>
+        <h2 class="heading"><span>Préférences</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Sélection de dossiers</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Résultats</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="preferences">
+<h1>Préférences<a class="headerlink" href="#preferences" title="Lien permanent vers ce titre">¶</a></h1>
+<p><strong>Comparer les fichiers de différents types:</strong> Sans cette option, seulement les fichiers du même type seront comparés.</p>
+<p><strong>Ignorer doublons avec hardlink vers le même fichier:</strong> Avec cette option, dupeGuru vérifiera si les doublons pointent vers le même <a class="reference external" href="http://en.wikipedia.org/wiki/Inode">inode</a>. Si oui, ils ne seront pas considérés comme doublons. (Seulement pour OS X et Linux)</p>
+<p><strong>Utiliser les expressions régulières pour les filtres:</strong> Avec cette option, les filtres appliqués aux résultats seront lus comme des <a class="reference external" href="http://www.regular-expressions.info">expressions régulières</a>.</p>
+<p><strong>Effacer les dossiers vides après un déplacement:</strong> Avec cette option, les dossiers se retrouvant vides après avoir effacé ou déplacé des fichiers seront effacés aussi.</p>
+<p><strong>Déplacements de fichiers:</strong> Détermine comment les opérations de copie et de déplacement s’organiseront pour déterminer la destination finale des fichiers:</p>
+<ul class="simple">
+<li><strong>Directement à la destination:</strong> Les fichiers sont envoyés directement dans le dossier cible, sans essayer de recréer leur ancienne hierarchie.</li>
+<li><strong>Re-créer chemins relatifs:</strong> Le chemin du fichier relatif au dossier sélectionné dans la <a class="reference internal" href="folders.html"><span class="doc">sélection de dossier</span></a> sera re-créé. Par exemple, si vous ajoutez <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MonDossier</span></code> lors de la sélection de dossier et que vous déplacez <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MonDossier/SousDossier/MonFichier.ext</span></code> vers la destination <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MaDestination</span></code>, la destination finale du fichier sera <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MaDestination/SousDossier</span></code>.</li>
+<li><strong>Re-créer chemins absolus:</strong> Le chemin du fichier est re-créé dans son entièreté. Par exemple, si vous déplacez <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MonDossier/SousDossier/MonFichier.ext</span></code> vers la destination  <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MaDestination</span></code>, la destination finale du fichier sera <code class="docutils literal notranslate"><span class="pre">/Users/foobar/MaDestination/Users/foobar/MonDossier/SousDossier</span></code>.</li>
+</ul>
+<p>Dans tous les cas, dupeGuru résout les conflits de noms de fichier en ajoutant un numéro en face du nom.</p>
+<p><strong>Commande personelle:</strong> Cette option vous permet de définir une ligne de commande à appeler avec le fichier sélectionné (ainsi que sa référence) comme argument. Cette commande sera invoquée quand vous cliquerez sur <strong>Invoquer commande personnalisée</strong>. Cette command est utile si, par exemple, vous avez une application de comparaison visuelle de fichiers que vous aimez bien.</p>
+<p>Le format de la ligne de commande est la même que celle que vous écrireriez manuellement, excepté pour les arguments, <strong>%d</strong> et <strong>%r</strong>. L’endroit où vous placez ces deux arguments sera remplacé par le chemin du fichier sélectionné (%d) et le chemin de son fichier référence dans le groupe (%r).</p>
+<p>Si le chemin de votre executable contient un espace, vous devez le placer entre guillemets «&nbsp;&nbsp;». Vous devriez aussi placer vos arguments %d et %r entre guillemets parce qu’il est très possible d’avoir des chemins de fichier contenant des espaces. Voici un exemple de commande personnelle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files\SuperDiffProg\SuperDiffProg.exe&quot;</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">%r</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="folders.html">Sélection de dossiers</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="results.html">Résultats</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Créé avec <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

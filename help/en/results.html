@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Results &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Re-Prioritizing duplicates" href="reprioritize.html" />
+    <link rel="prev" title="The scanning process" href="scan.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Results</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="scan.html">The scanning process</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="results">
+<h1><a class="toc-backref" href="#id1">Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#results" id="id1">Results</a><ul>
+<li><a class="reference internal" href="#about-duplicate-groups" id="id2">About duplicate groups</a></li>
+<li><a class="reference internal" href="#reviewing-results" id="id3">Reviewing results</a></li>
+<li><a class="reference internal" href="#marking-and-selecting" id="id4">Marking and Selecting</a></li>
+<li><a class="reference internal" href="#show-dupes-only" id="id5">Show Dupes Only</a></li>
+<li><a class="reference internal" href="#delta-values" id="id6">Delta Values</a></li>
+<li><a class="reference internal" href="#dupes-only-and-delta-values" id="id7">Dupes Only and Delta Values</a></li>
+<li><a class="reference internal" href="#filtering" id="id8">Filtering</a></li>
+<li><a class="reference internal" href="#action-menu" id="id9">Action Menu</a></li>
+<li><a class="reference internal" href="#deletion-options" id="id10">Deletion Options</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>When dupeGuru is finished scanning for duplicates, it will show its results in the form of duplicate group list.</p>
+<div class="section" id="about-duplicate-groups">
+<h2><a class="toc-backref" href="#id2">About duplicate groups</a><a class="headerlink" href="#about-duplicate-groups" title="Permalink to this headline">¶</a></h2>
+<p>A duplicate group is a group of files that all match together. Every group has a <strong>reference file</strong> and one or more <strong>duplicate files</strong>. The reference file is the first file of the group. Its mark box is disabled. Below it, and indented, are the duplicate files.</p>
+<p>You can mark duplicate files, but you can never mark the reference file of a group. This is a security measure to prevent dupeGuru from deleting not only duplicate files, but their reference. You sure don’t want that, do you?</p>
+<p>What determines which files are reference and which files are duplicates is first their folder state. A file from a reference folder will always be reference in a duplicate group. If all files are from a normal folder, the size determine which file will be the reference of a duplicate group. dupeGuru assumes that you always want to keep the biggest file, so the biggest files will take the reference position.</p>
+<p>You can change the reference file of a group manually. To do so, select the duplicate file you want
+to promote to reference, and click on <strong>Actions–&gt;Make Selected into Reference</strong>.</p>
+</div>
+<div class="section" id="reviewing-results">
+<h2><a class="toc-backref" href="#id3">Reviewing results</a><a class="headerlink" href="#reviewing-results" title="Permalink to this headline">¶</a></h2>
+<p>Although you can just click on <strong>Edit–&gt;Mark All</strong> and then <strong>Actions–&gt;Send Marked to Recycle bin</strong> to quickly delete all duplicate files in your results, it is always recommended to review all duplicates before deleting them.</p>
+<p>To help you reviewing the results, you can bring up the <strong>Details panel</strong>. This panel shows all the details of the currently selected file as well as its reference’s details. This is very handy to quickly determine if a duplicate really is a duplicate. You can also double-click on a file to open it with its associated application.</p>
+<p>If you have more false duplicates than true duplicates (If your filter hardness is very low), the best way to proceed would be to review duplicates, mark true duplicates and then click on <strong>Actions–&gt;Send Marked to Recycle bin</strong>. If you have more true duplicates than false duplicates, you can instead mark all files that are false duplicates, and use <strong>Actions–&gt;Remove Marked from Results</strong>.</p>
+</div>
+<div class="section" id="marking-and-selecting">
+<h2><a class="toc-backref" href="#id4">Marking and Selecting</a><a class="headerlink" href="#marking-and-selecting" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>marked</strong> duplicate is a duplicate with the little box next to it having a check-mark. A <strong>selected</strong> duplicate is a duplicate being highlighted. The multiple selection actions can be performed in dupeGuru in the standard way (Shift/Command/Control click). You can toggle all selected duplicates’ mark state by pressing <strong>space</strong>.</p>
+</div>
+<div class="section" id="show-dupes-only">
+<h2><a class="toc-backref" href="#id5">Show Dupes Only</a><a class="headerlink" href="#show-dupes-only" title="Permalink to this headline">¶</a></h2>
+<p>When this mode is enabled, the duplicates are shown without their respective reference file. You can select, mark and sort this list, just like in normal mode.</p>
+<p>The dupeGuru results, when in normal mode, are sorted according to duplicate groups’ <strong>reference file</strong>. This means that if you want, for example, to mark all duplicates with the “exe” extension, you cannot just sort the results by “Kind” to have all exe duplicates together because a group can be composed of more than one kind of files. That is where Dupes Only mode comes into play. To mark all your “exe” duplicates, you just have to:</p>
+<ul class="simple">
+<li>Enable the Dupes Only mode.</li>
+<li>Add the “Kind” column with the “Columns” menu.</li>
+<li>Click on that “Kind” column to sort the list by kind.</li>
+<li>Locate the first duplicate with a “exe” kind.</li>
+<li>Select it.</li>
+<li>Scroll down the list to locate the last duplicate with a “exe” kind.</li>
+<li>Hold Shift and click on it.</li>
+<li>Press Space to mark all selected duplicates.</li>
+</ul>
+</div>
+<div class="section" id="delta-values">
+<span id="deltavalues"></span><h2><a class="toc-backref" href="#id6">Delta Values</a><a class="headerlink" href="#delta-values" title="Permalink to this headline">¶</a></h2>
+<p>If you turn this switch on, numerical columns will display the value relative to the duplicate’s
+reference instead of the absolute values. These delta values will also be displayed in a different
+color, orange,  so you can spot them easily. For example, if a duplicate is 1.2 MB and its reference
+is 1.4 MB, the Size column will display -0.2 MB.</p>
+<p>Moreover, non-numerical values will also be in orange if their value is different from their
+reference, and stay black if their value is the same. Combined with column sorting in Dupes Only
+mode, this allows for very powerful post-scan filtering.</p>
+</div>
+<div class="section" id="dupes-only-and-delta-values">
+<h2><a class="toc-backref" href="#id7">Dupes Only and Delta Values</a><a class="headerlink" href="#dupes-only-and-delta-values" title="Permalink to this headline">¶</a></h2>
+<p>The Dupes Only mode unveil its true power when you use it with the Delta Values switch turned on.
+When you turn it on, relative values will be displayed instead of absolute ones. So if, for example,
+you want to remove from your results all duplicates that are more than 300 KB away from their
+reference, you could sort the dupes only results by Size, select all duplicates under -300 in the
+Size column, delete them, and then do the same for duplicates over 300 at the bottom of the list.</p>
+<p>Same thing for non-numerical values: When Dupes Only and Delta Values are enabled at the same time,
+column sorting groups rows depending on whether they’re orange or not. Example: You ran a contents
+scan, but you would only like to delete duplicates that have the same filename? Sort by filename
+and all dupes with their filename attribute being the same as the reference will be grouped
+together, their value being in black.</p>
+<p>You could also use it to change the reference priority of your duplicate list. When you make a fresh
+scan, if there are no reference folders, the reference file of every group is the biggest file. If
+you want to change that, for example, to the latest modification time, you can sort the dupes only
+results by modification time in <strong>descending</strong> order, select all duplicates with a modification time
+delta value higher than 0 and click on <strong>Make Selected into Reference</strong>. The reason why you must
+make the sort order descending is because if 2 files among the same duplicate group are selected
+when you click on <strong>Make Selected into Reference</strong>, only the first of the list will be made
+reference, the other will be ignored. And since you want the last modified file to be reference,
+having the sort order descending assures you that the first item of the list will be the last
+modified.</p>
+</div>
+<div class="section" id="filtering">
+<h2><a class="toc-backref" href="#id8">Filtering</a><a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
+<p>dupeGuru supports post-scan filtering. With it, you can narrow down your results so you can perform
+actions on a subset of it. For example, you could easily mark all duplicates with their filename
+containing “copy” from your results using the filter.</p>
+<p>To use the filtering feature, type your filter in the “Filter” search field at the top-right corner
+of the results window. What you type in that box will be applied to the <em>whole path</em> of every
+duplicate in the results. Only duplicate <em>groups</em> having at least one duplicate matching the filter
+will be shown.</p>
+<p>When having groups where not all duplicates match the filter, we still show all duplicates of
+the group. However, non-matching duplicates are in “reference mode”. Therefore, you can perform
+actions like “Mark All” and be sure to only mark filtered duplicates.</p>
+<p>To go back to unfiltered result, blank out the field or click on the “X”.</p>
+<p>In simple mode (the default mode), whatever you type as the filter is the string used to perform the
+actual filtering, with the exception of one wildcard: <strong>*</strong>. Thus, if you type “[*]” as your
+filter, it will match anything with [] brackets in it, whatever is in between those brackets.</p>
+<p>For more advanced filtering, you can turn “Use regular expressions when filtering” on. The filtering
+feature will then use <strong>regular expressions</strong>. A regular expression is a language for matching text.
+Explaining them is beyond the scope of this document. A good place to start learning it is
+<a class="reference external" href="http://www.regular-expressions.info">regular-expressions.info</a>.</p>
+<p>Matches are case insensitive in both simple and regexp mode.</p>
+<p>For the filter to match, your regular expression don’t have to match the whole filename, it just
+have to contain a string matching the expression.</p>
+</div>
+<div class="section" id="action-menu">
+<h2><a class="toc-backref" href="#id9">Action Menu</a><a class="headerlink" href="#action-menu" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Clear Ignore List:</strong></dt>
+<dd>Remove all ignored matches you added. You have to start a new scan for the
+newly cleared ignore list to be effective.</dd>
+<dt><strong>Export Results to XHTML:</strong></dt>
+<dd>Take the current results, and create an XHTML file out of it. The
+columns that are visible when you click on this button will be the columns present in the XHTML
+file. The file will automatically be opened in your default browser.</dd>
+<dt><strong>Send Marked to Trash:</strong></dt>
+<dd>Send all marked duplicates to trash, obviously. Before proceeding,
+you’ll be presented deletion options (see below).</dd>
+<dt><strong>Move Marked to…:</strong></dt>
+<dd>Prompt you for a destination, and then move all marked files to that
+destination. Source file’s path might be re-created in destination, depending on the
+“Copy and Move” preference.</dd>
+<dt><strong>Copy Marked to…:</strong></dt>
+<dd>Prompt you for a destination, and then copy all marked files to that
+destination. Source file’s path might be re-created in destination, depending on the
+“Copy and Move” preference.</dd>
+<dt><strong>Remove Marked from Results:</strong></dt>
+<dd>Remove all marked duplicates from results. The actual files will
+not be touched and will stay where they are.</dd>
+<dt><strong>Remove Selected from Results:</strong></dt>
+<dd>Remove all selected duplicates from results. Note that all
+selected reference files will be ignored, only duplicates can be removed with this action.</dd>
+<dt><strong>Make Selected into Reference:</strong></dt>
+<dd>Promote all selected duplicates to reference. If a duplicate is
+a part of a group having a reference file coming from a reference folder (in blue color), no
+action will be taken for this duplicate. If more than one duplicate among the same group are
+selected, only the first of each group will be promoted.</dd>
+<dt><strong>Add Selected to Ignore List:</strong></dt>
+<dd>This first removes all selected duplicates from results, and
+then add the match of that duplicate and the current reference in the ignore list. This match
+will not come up again in further scan. The duplicate itself might come back, but it will be
+matched with another reference file. You can clear the ignore list with the Clear Ignore List
+command.</dd>
+<dt><strong>Open Selected with Default Application:</strong></dt>
+<dd>Open the file with the application associated with selected file’s type.</dd>
+<dt><strong>Reveal Selected in Finder:</strong></dt>
+<dd>Open the folder containing selected file.</dd>
+<dt><strong>Invoke Custom Command:</strong></dt>
+<dd>Invokes the external application you’ve set up in your preferences using the current selection
+as arguments in the invocation.</dd>
+<dt><strong>Rename Selected:</strong></dt>
+<dd>Prompts you for a new name, and then rename the selected file.</dd>
+</dl>
+</div>
+<div class="section" id="deletion-options">
+<h2><a class="toc-backref" href="#id10">Deletion Options</a><a class="headerlink" href="#deletion-options" title="Permalink to this headline">¶</a></h2>
+<p>These options affect how duplicate deletion takes place. Most of the time, you don’t need to enable
+any of them.</p>
+<dl class="docutils">
+<dt><strong>Link deleted files:</strong></dt>
+<dd><p class="first">The deleted files are replaced by a link to the reference file. You have a choice of replacing
+it either with a <a class="reference external" href="http://en.wikipedia.org/wiki/Symbolic_link">symlink</a> or a <a class="reference external" href="http://en.wikipedia.org/wiki/Hard_link">hardlink</a>. It’s better to read the whole
+wikipedia pages about them to make a informed choice, but in short, a symlink is a shortcut to
+the file’s path. If the original file is deleted or moved, the link is broken. A hardlink is a
+link to the file <em>itself</em>. That link is as good as a “real” file. Only when <em>all</em> hardlinks to a
+file are deleted is the file itself deleted.</p>
+<p class="last">On OSX and Linux, this feature is supported fully, but under Windows, it’s a bit complicated.
+Windows XP doesn’t support it, but Vista and up support it. However, for the feature to work,
+dupeGuru has to run with administrative privileges.</p>
+</dd>
+<dt><strong>Directly delete files:</strong></dt>
+<dd>Instead of sending files to trash, directly delete them. This is used
+for troubleshooting and you normally don’t need to enable this unless dupeGuru has problems
+deleting files normally, something that can happens when you try to delete files on network
+storage (NAS).</dd>
+</dl>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="scan.html">The scanning process</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

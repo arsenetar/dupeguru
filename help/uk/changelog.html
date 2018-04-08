@@ -1,0 +1,765 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="uk">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Changelog &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Індекс" href="genindex.html" />
+    <link rel="search" title="Пошук" href="search.html" />
+    <link rel="prev" title="Часті питання" href="faq.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Changelog</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="faq.html">Часті питання</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Постійне посилання на цей заголовок">¶</a></h1>
+<p><strong>About the word «crash»:</strong> When reading this changelog, you might be alarmed at the number of fixes
+for «crashes». Be aware that when the word «crash» is used here, it refers to «soft crashes» which
+don’t cause the application to quit. You simply get an error window that asks you if you want to
+send the crash report to Hardcoded Software. Crashes that cause the application to quit are called
+«hard crashes» in this changelog.</p>
+<div class="section" id="id1">
+<h2>4.0.3 (2016-11-24)<a class="headerlink" href="#id1" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Add new picture cache backend: shelve</li>
+<li>Make shelve picture cache backend the active one on MacOS to fix <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/394">#394</a> more
+elegantly. [cocoa]</li>
+<li>Remove Sparkle (auto-updates) due to technical limitations. [cocoa]</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>4.0.2 (2016-10-09)<a class="headerlink" href="#id2" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fix systematic crash in Picture Mode under MacOS Sierra. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/394">#394</a>)</li>
+<li>No change for Linux. Just keeping version in sync.</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>4.0.1 (2016-08-24)<a class="headerlink" href="#id3" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Add Greek localization, by Gabriel Koutilellis. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/382">#382</a>)</li>
+<li>Fix localization base path. [qt] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/378">#378</a>)</li>
+<li>Fix broken load results dialog. [qt]</li>
+<li>Fix crash on load results. [cocoa] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/380">#380</a>)</li>
+<li>Save preferences more predictably. [qt] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/379">#379</a>)</li>
+<li>Fix picture mode’s fuzzy block scanner threshold. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/387">#387</a>)</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>4.0.0 (2016-07-01)<a class="headerlink" href="#id4" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Merge Standard, Music and Picture editions in the same application!</li>
+<li>Improve documentation. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/294">#294</a>)</li>
+<li>Add Polish, Korean, Spanish and Dutch localizations.</li>
+<li>qt: Fix wrong use_regexp option propagation to core. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/295">#295</a>)</li>
+<li>qt: Fix progress window mistakenly showing up on startup. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/357">#357</a>)</li>
+<li>Bump Python requirement to v3.4.</li>
+<li>Bump OS X requirement to 10.8</li>
+<li>Drop Windows support, maybe temporarily.
+<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/2015">Details &lt;https://www.hardcoded.net/archive2015`#2015</a>-11-01&gt;`_</li>
+<li>cocoa: Drop iPhoto, Aperture and iTunes support. Was unmaintained and obsolete.</li>
+<li>Drop «Audio Contents» scan type. Was confusing and seldom useful.</li>
+<li>Change license to GPLv3</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>3.9.1 (2014-10-17)<a class="headerlink" href="#id5" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'ComboboxModel'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'reset'</span></code>. [Linux, Windows] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/254">#254</a>)</li>
+<li>Fixed <code class="docutils literal notranslate"><span class="pre">PermissionError</span></code> on saving results. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/266">#266</a>)</li>
+<li>Fixed a build problem introduced by Sphinx 1.2.3.</li>
+<li>Updated German localisation, by Frank Weber.</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>3.9.0 (2014-04-19)<a class="headerlink" href="#id6" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>This is mostly a dependencies upgrade.</li>
+<li>Upgraded to Python 3.3.</li>
+<li>Upgraded to Qt 5.</li>
+<li>Minimum Windows version is now Windows 7 64bit.</li>
+<li>Minimum Ubuntu version is now 14.04.</li>
+<li>Minimum OS X version is now 10.7 (Lion).</li>
+<li>… But with a couple of little improvements.</li>
+<li>Improved documentation.</li>
+<li>Overwrite subfolders“ state when setting states in folder dialog (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/248">#248</a>)</li>
+<li>The error report dialog now brings the user to Github issues.</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>3.8.0 (2013-12-07)<a class="headerlink" href="#id7" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Disable symlink/hardlink deletion option when not relevant. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/247">#247</a>)</li>
+<li>Make Cmd+A select all folders in the Folder Selection dialog. [Mac] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/228">#228</a>)</li>
+<li>Make non-numeric delta comparison case insensitive. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/239">#239</a>)</li>
+<li>Fix surrogate-related UnicodeEncodeError on CSV export. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/210">#210</a>)</li>
+<li>Fixed crash on Dupe Count sorting with Delta + Dupes Only. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/238">#238</a>)</li>
+<li>Improved documentation.</li>
+<li>Important internal refactorings.</li>
+<li>Dropped Ubuntu 12.04 and 12.10 support.</li>
+<li>Removed the fairware dialog (<a class="reference external" href="http://www.hardcoded.net/articles/phasing-out-fairware">More Info</a>).</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>3.7.1 (2013-08-19)<a class="headerlink" href="#id8" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed folder scan type, which was broken in v3.7.0.</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>3.7.0 (2013-08-17)<a class="headerlink" href="#id9" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved delta values to support non-numerical values. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/213">#213</a>)</li>
+<li>Improved the Re-Prioritize dialog’s UI. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/224">#224</a>)</li>
+<li>Added hardlink/symlink support on Windows Vista+. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/220">#220</a>)</li>
+<li>Dropped 32bit support on Mac OS X.</li>
+<li>Added Vietnamese localization by Phan Anh.</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2>3.6.1 (2013-04-28)<a class="headerlink" href="#id10" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved «Make Selection Reference» to make it clearer. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/222">#222</a>)</li>
+<li>Improved «Open Selected» to allow opening more than one file at once. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/142">#142</a>)</li>
+<li>Fixed a few typos here and there. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/216">#216</a> <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/225">#225</a>)</li>
+<li>Tweaked the fairware dialog (<a class="reference external" href="http://www.hardcoded.net/articles/phasing-out-fairware">More Info</a>).</li>
+<li>Added Arch Linux packaging</li>
+<li>Added a 64-bit build for Windows.</li>
+<li>Improved Russian localization by Kyrill Detinov.</li>
+<li>Improved Brazilian localization by Victor Figueiredo.</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h2>3.6.0 (2012-08-08)<a class="headerlink" href="#id11" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added «Export to CSV». (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/189">#189</a>)</li>
+<li>Added «Replace with symlinks» to complement «Replace with hardlinks». [Mac, Linux] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/194">#194</a>)</li>
+<li>dupeGuru now tells how many duplicates were affected after each re-prioritization operation. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/204">#204</a>)</li>
+<li>Added Longest/Shortest filename criteria in the re-prioritize dialog. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/198">#198</a>)</li>
+<li>Fixed result table cells which mistakenly became writable in v3.5.0. [Mac] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/203">#203</a>)</li>
+<li>Fixed «Rename Selected» which was broken since v3.5.0. [Mac] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/202">#202</a>)</li>
+<li>Fixed a bug where «Reset to Defaults» in the Columns menu wouldn’t refresh menu items“ marked state.</li>
+<li>Added Brazilian localization by Victor Figueiredo.</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h2>3.5.0 (2012-06-01)<a class="headerlink" href="#id12" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added a Deletion Options panel.</li>
+<li>Greatly improved memory usage for big scans.</li>
+<li>Added a keybinding for the filter field. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/182">#182</a>) [Mac]</li>
+<li>Upgraded minimum requirements for Ubuntu to 12.04.</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h2>3.4.1 (2012-04-14)<a class="headerlink" href="#id13" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed the «Folders» scan type. [Mac]</li>
+<li>Fixed localization issues. [Windows, Linux]</li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h2>3.4.0 (2012-03-29)<a class="headerlink" href="#id14" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved results window UI. [Windows, Linux]</li>
+<li>Added a dialog to edit the Ignore List.</li>
+<li>Added the ability to sort results by «marked» status.</li>
+<li>Fixed «Open with default application». (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/190">#190</a>)</li>
+<li>Fixed a bug where there would be a false reporting of discarded matches. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/195">#195</a>)</li>
+<li>Fixed various localization glitches.</li>
+<li>Fixed hard crashes on crash reporting. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/196">#196</a>)</li>
+<li>Fixed bug where the details panel would show up at inconvenient places in the screen. [Windows, Linux]</li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2>3.3.3 (2012-02-01)<a class="headerlink" href="#id15" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed crash on adding some folders. [Mac OS X]</li>
+<li>Added Ukrainian localization by Yuri Petrashko.</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h2>3.3.2 (2012-01-16)<a class="headerlink" href="#id16" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed random hard crashes (yeah, again). [Mac OS X]</li>
+<li>Fixed crash on Export to HTML. [Windows, Linux]</li>
+<li>Added Armenian localization by Hrant Ohanyan.</li>
+<li>Added Russian localization by Igor Pavlov.</li>
+</ul>
+</div>
+<div class="section" id="id17">
+<h2>3.3.1 (2011-12-02)<a class="headerlink" href="#id17" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed a couple of nasty crashes.</li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h2>3.3.0 (2011-11-30)<a class="headerlink" href="#id18" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added multiple-selection in folder selection dialog for a more efficient folder removal. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/179">#179</a>)</li>
+<li>Fixed a crash in the prioritize dialog. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/178">#178</a>)</li>
+<li>Fixed a bug where mass marking with a filter would mark more than filtered duplicates. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/181">#181</a>)</li>
+<li>Fixed random hard crashes. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/183">#183</a> <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/184">#184</a>)</li>
+<li>Added Czech localization by Aleš Nehyba.</li>
+<li>Added Italian localization by Paolo Rossi.</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h2>3.2.1 (2011-10-02)<a class="headerlink" href="#id19" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed a couple of broken action bindings from v3.2.0.</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h2>3.2.0 (2011-09-27)<a class="headerlink" href="#id20" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added duplicate re-prioritization dialog. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/138">#138</a>)</li>
+<li>Added font size preference for duplicate table. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/82">#82</a>)</li>
+<li>Added Quicklook support. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/21">#21</a>)</li>
+<li>Improved behavior of Mark Selected. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/139">#139</a>)</li>
+<li>Improved filename sorting. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/169">#169</a>)</li>
+<li>Added Chinese (Simplified) localization by Eric Dee.</li>
+<li>Tweaked the fairware system.</li>
+<li>Upgraded minimum requirements to OS X 10.6 and Ubuntu 11.04.</li>
+</ul>
+</div>
+<div class="section" id="id21">
+<h2>3.1.2 (2011-08-25)<a class="headerlink" href="#id21" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed a bug preventing the Folders scan from working. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/172">#172</a>)</li>
+</ul>
+</div>
+<div class="section" id="id22">
+<h2>3.1.1 (2011-08-24)<a class="headerlink" href="#id22" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added German localization by Gregor Tätzner.</li>
+<li>Improved OS X Lion compatibility. [Mac OS X]</li>
+<li>Made the file collection phase cancellable. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/168">#168</a>)</li>
+<li>Fixed glitch in folder window upon selecting a folder state. [Windows, Linux] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/165">#165</a>)</li>
+<li>Fixed a text coloring glitch in the results. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/156">#156</a>)</li>
+<li>Fixed glitch in the sorting feature of the Folder column. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/161">#161</a>)</li>
+<li>Make sure that saved results have the «.dupeguru» extension. [Linux] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/157">#157</a>)</li>
+</ul>
+</div>
+<div class="section" id="id23">
+<h2>3.1.0 (2011-04-16)<a class="headerlink" href="#id23" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added the «Folders» scan type. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/89">#89</a>)</li>
+<li>Fixed a couple of crashes. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/140">#140</a> <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/149">#149</a>)</li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h2>3.0.2 (2011-03-16)<a class="headerlink" href="#id24" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed crash after removing marked dupes. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/140">#140</a>)</li>
+<li>Fixed crash on error handling. [Windows] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/144">#144</a>)</li>
+<li>Fixed crash on copy/move. [Windows] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/148">#148</a>)</li>
+<li>Fixed crash when launching dupeGuru from a very long folder name. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/119">#119</a>)</li>
+<li>Fixed a refresh bug in directory panel. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/153">#153</a>)</li>
+<li>Improved reliability of the «Send to Trash» operation. [Linux]</li>
+<li>Tweaked Fairware reminders.</li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h2>3.0.1 (2011-01-27)<a class="headerlink" href="#id25" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Restored the context menu which had been broken in 3.0.0. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/133">#133</a>)</li>
+<li>Fixed a bug where an «unsaved results» warning would be issued on quit even with empty results. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/134">#134</a>)</li>
+<li>Removed focus from the cancel button in the progress dialog to avoid accidental cancellations. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/135">#135</a>)</li>
+<li>Folders added through drag and drop are added to the recent folders list. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/136">#136</a>)</li>
+<li>Added a debugging mode. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/132">#132</a>)</li>
+<li>Fixed french localization glitches.</li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h2>3.0.0 (2011-01-24)<a class="headerlink" href="#id26" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Re-designed the UI. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/129">#129</a>)</li>
+<li>Internationalized dupeGuru and localized it to french. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/32">#32</a>)</li>
+<li>Changed the format of the help file. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/130">#130</a>)</li>
+</ul>
+</div>
+<div class="section" id="id27">
+<h2>2.12.3 (2011-01-01)<a class="headerlink" href="#id27" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed bug causing results to be corrupted after a scan cancellation. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/120">#120</a>)</li>
+<li>Fixed crash when fetching Fairware unpaid hours. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/121">#121</a>)</li>
+<li>Fixed crash when replacing files with hardlinks. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/122">#122</a>)</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h2>2.12.2 (2010-10-05)<a class="headerlink" href="#id28" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed delta column colors which were broken since 2.12.0.</li>
+<li>Fixed column sorting crash. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/108">#108</a>)</li>
+<li>Fixed occasional crash during scan. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/106">#106</a>)</li>
+</ul>
+</div>
+<div class="section" id="id29">
+<h2>2.12.1 (2010-09-30)<a class="headerlink" href="#id29" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Re-licensed dupeGuru to BSD and made it <a class="reference external" href="http://open.hardcoded.net/about/">Fairware</a>.</li>
+</ul>
+</div>
+<div class="section" id="id30">
+<h2>2.12.0 (2010-09-26)<a class="headerlink" href="#id30" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved UI with a little revamp.</li>
+<li>Added the possibility to place hardlinks to references after having deleted duplicates. [Mac OS X, Linux] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/91">#91</a>)</li>
+<li>Added an option to ignore duplicates hardlinking to the same file. [Mac OS X, Linux] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/92">#92</a>)</li>
+<li>Added multiple selection in the «Add Directory» dialog. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/105">#105</a>)</li>
+<li>Fixed a bug preventing drag &amp; drop from working in the Directories panel. [Windows, Linux]</li>
+</ul>
+</div>
+<div class="section" id="id31">
+<h2>2.11.1 (2010-08-26)<a class="headerlink" href="#id31" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed HTML exporting which was broken in 2.11.0.</li>
+</ul>
+</div>
+<div class="section" id="id32">
+<h2>2.11.0 (2010-08-18)<a class="headerlink" href="#id32" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added the ability to save results (and reload them) at arbitrary locations.</li>
+<li>Improved the way reference files in dupe groups are chosen. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/15">#15</a>)</li>
+<li>Remember size/position of all windows between launches. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/102">#102</a>)</li>
+<li>Fixed a bug sometimes preventing dupeGuru from reloading previous results.</li>
+<li>Fixed a bug sometimes causing the progress dialog to be stuck there. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/103">#103</a>)</li>
+<li>Removed the Creation Date column, which wasn’t displaying the correct value anyway. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/101">#101</a>)</li>
+</ul>
+</div>
+<div class="section" id="id33">
+<h2>2.10.1 (2010-07-15)<a class="headerlink" href="#id33" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed a couple of crashes. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/95">#95</a>, <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/97">#97</a>, <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/100">#100</a>)</li>
+</ul>
+</div>
+<div class="section" id="id34">
+<h2>2.10.0 (2010-04-13)<a class="headerlink" href="#id34" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved error messages when files can’t be sent to trash, moved or copied.</li>
+<li>Added a custom command invocation action. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/12">#12</a>)</li>
+<li>Filters are now applied on whole paths. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/4">#4</a>)</li>
+</ul>
+</div>
+<div class="section" id="id35">
+<h2>2.9.2 (2010-02-10)<a class="headerlink" href="#id35" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>dupeGuru is now 64-bit on Mac OS X!</li>
+<li>Fixed a crash upon quitting when support folder is not present. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/83">#83</a>)</li>
+<li>Fixed a crash during sorting. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/85">#85</a>)</li>
+<li>Fixed selection glitches, especially while renaming. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/93">#93</a>)</li>
+</ul>
+</div>
+<div class="section" id="id36">
+<h2>2.9.1 (2010-01-13)<a class="headerlink" href="#id36" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved memory usage for Contents scans. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/75">#75</a>)</li>
+<li>Improved scanning speed when ref directories are involved. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/77">#77</a>)</li>
+<li>Show a message dialog at the end of the scan if no duplicates are found. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/81">#81</a>)</li>
+<li>Fixed a bug sometimes causing the small files threshold pref to be ignored. [Mac OS X] (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/75">#75</a>)</li>
+</ul>
+</div>
+<div class="section" id="id37">
+<h2>2.9.0 (2009-11-03)<a class="headerlink" href="#id37" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Significantly improved speed and memory usage of big contents-based scans.</li>
+<li>Added drag &amp; drop support in the Directories panel. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/9">#9</a>)</li>
+<li>Fixed a bug causing dupeGuru to be confused if a scanned file was moved during the scan. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/72">#72</a>)</li>
+<li>Dropped support for Mac OS X 10.4 (Tiger)</li>
+</ul>
+</div>
+<div class="section" id="id38">
+<h2>2.8.2 (2009-10-14)<a class="headerlink" href="#id38" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Improved directory selection in the Directories panel (Windows). (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/56">#56</a>)</li>
+<li>Fixed a bug preventing dupeGuru from starting on certain machines (Windows). (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/68">#68</a>)</li>
+<li>Fixed a crash during very big scans. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/70">#70</a>)</li>
+</ul>
+</div>
+<div class="section" id="id39">
+<h2>2.8.1 (2009-10-02)<a class="headerlink" href="#id39" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed crash with filtering when regular expressions were enabled. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/60">#60</a>)</li>
+<li>Fixed crash when setting directories“ state. (Mac OS X) (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/66">#66</a>)</li>
+<li>Fixed crash with Make Reference when certain filters are applied. (Mac OS X) (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/55">#55</a>)</li>
+<li>Improved error handling during delete/move/copy actions. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/62">#62</a> <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/65">#65</a>)</li>
+</ul>
+</div>
+<div class="section" id="id40">
+<h2>2.8.0 (2009-09-07)<a class="headerlink" href="#id40" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Added support for all kinds of bundle (not just applications) (Mac OS X) (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/11">#11</a>)</li>
+<li>Re-introduced the Export to XHTML feature to Windows. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/14">#14</a>)</li>
+<li>Improved Export to XHTML speed. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/14">#14</a>)</li>
+<li>Improved Contents scanning speed for large files. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/33">#33</a>)</li>
+<li>Improved the grouping algorithm to reduce the number of discarded files in non-exact scans. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/51">#51</a>)</li>
+<li>Stopped showing the same file on the 2 sides of the details panel when a ref file is selected. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/50">#50</a>)</li>
+<li>Fixed crashes in the Directories panel. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/46">#46</a>)</li>
+</ul>
+</div>
+<div class="section" id="id41">
+<h2>2.7.3 (2009-06-20)<a class="headerlink" href="#id41" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Fixed bugs with selection being jumpy during «Make Reference» actions and Power Marker</dt>
+<dd>switches. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/3">#3</a>)</dd>
+</dl>
+</li>
+<li>Fixed crash happening when a file with non-roman characters couldn’t be analyzed. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/30">#30</a>)</li>
+<li>Fixed crash sometimes happening during the file collection phase in scanning. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/38">#38</a>)</li>
+<li>Restored double-click and right-click behavior lost in the PyQt move (Windows). (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/34">#34</a> <a class="reference external" href="https://github.com/hsoft/dupeguru/issues/35">#35</a>)</li>
+</ul>
+</div>
+<div class="section" id="id42">
+<h2>2.7.2 (2009-06-10)<a class="headerlink" href="#id42" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed an occasional crash on Copy/Move operations. (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/16">#16</a>)</li>
+<li>Added automatic exclusion for sensible folders (like system folders). (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/20">#20</a>)</li>
+<li>Fixed an occasional crash when application files were part of the results (Mac OS X). (<a class="reference external" href="https://github.com/hsoft/dupeguru/issues/25">#25</a>)</li>
+</ul>
+</div>
+<div class="section" id="id43">
+<h2>2.7.1 (2009-05-29)<a class="headerlink" href="#id43" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Fixed a bug causing crashes when having application files in the results.</li>
+<li>Fixed a bug causing a GUI freeze at the beginning of a scan with a lot of files.</li>
+<li>Fixed a bug that sometimes caused a crash when an action was cancelled, and then started again.</li>
+</ul>
+</div>
+<div class="section" id="id44">
+<h2>2.7.0 (2009-05-25)<a class="headerlink" href="#id44" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Converted the Windows GUI to Qt.</li>
+<li>Improved the reliability of the scanning process.</li>
+</ul>
+</div>
+<div class="section" id="id45">
+<h2>2.6.1 (2009-03-27)<a class="headerlink" href="#id45" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> an occasional crash caused by permission issues.</li>
+<li><dl class="first docutils">
+<dt><strong>Fixed</strong> a bug where the «X discarded» notice would show a too large number of discarded</dt>
+<dd>duplicates.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id46">
+<h2>2.6.0 (2008-09-10)<a class="headerlink" href="#id46" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> a small file threshold preference.</li>
+<li><strong>Added</strong> a notice in the status bar when matches were discarded during the scan.</li>
+<li><strong>Improved</strong> duplicate prioritization (smartly chooses which file you will keep).</li>
+<li><strong>Improved</strong> scan progress feedback.</li>
+<li><strong>Improved</strong> responsiveness of the user interface for certain actions.</li>
+</ul>
+</div>
+<div class="section" id="id47">
+<h2>2.5.4 (2008-08-10)<a class="headerlink" href="#id47" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> the speed of results loading and saving.</li>
+<li><strong>Fixed</strong> a crash sometimes occurring during duplicate deletion.</li>
+</ul>
+</div>
+<div class="section" id="id48">
+<h2>2.5.3 (2008-07-08)<a class="headerlink" href="#id48" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> unicode handling for filenames. dupeGuru will now find a lot more duplicates if your files have non-ascii characters in it.</li>
+<li><strong>Fixed</strong> «Clear Ignore List» crash in Windows.</li>
+</ul>
+</div>
+<div class="section" id="id49">
+<h2>2.5.2 (2008-01-10)<a class="headerlink" href="#id49" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> the handling of low memory situations.</li>
+<li><strong>Improved</strong> the directory panel. The «Remove» button changes to «Put Back» when an excluded directory is selected.</li>
+<li><strong>Improved</strong> scan, delete and move speed in situations where there were a lot of duplicates.</li>
+<li><strong>Fixed</strong> occasional crashes when moving bundles (such as .app files).</li>
+<li><strong>Fixed</strong> occasional crashes when moving a lot of files at once.</li>
+</ul>
+</div>
+<div class="section" id="id50">
+<h2>2.5.1 (2007-11-22)<a class="headerlink" href="#id50" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> the «Remove empty folders» option.</li>
+<li><strong>Fixed</strong> results load/save issues.</li>
+<li><strong>Fixed</strong> occasional status bar inaccuracies when the results are filtered.</li>
+</ul>
+</div>
+<div class="section" id="id51">
+<h2>2.5.0 (2007-09-15)<a class="headerlink" href="#id51" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> post scan filtering.</li>
+<li><strong>Fixed</strong> issues with the rename feature under Windows</li>
+<li><strong>Fixed</strong> some user interface annoyances under Windows</li>
+</ul>
+</div>
+<div class="section" id="id52">
+<h2>2.4.8 (2007-04-14)<a class="headerlink" href="#id52" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> UI responsiveness (using threads) under Mac OS X.</li>
+<li><strong>Improved</strong> result load/save speed and memory usage.</li>
+</ul>
+</div>
+<div class="section" id="id53">
+<h2>2.4.7 (2007-03-10)<a class="headerlink" href="#id53" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a «bad file descriptor» error occasionally popping up.</li>
+<li><strong>Fixed</strong> a bug with non-latin directory names.</li>
+</ul>
+</div>
+<div class="section" id="id54">
+<h2>2.4.6 (2007-02-10)<a class="headerlink" href="#id54" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> Re-orderable columns. In fact, I re-added the feature which was lost in the C# conversion in 2.4.0 (Windows).</li>
+<li><strong>Changed</strong> the behavior of the scanning engine when setting the hardness to 100. It will now only match files that have their words in the same order.</li>
+<li><strong>Fixed</strong> a bug with all the Delete/Move/Copy actions with certain kinds of files.</li>
+</ul>
+</div>
+<div class="section" id="id55">
+<h2>2.4.5 (2007-01-11)<a class="headerlink" href="#id55" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a bug with the Move action.</li>
+</ul>
+</div>
+<div class="section" id="id56">
+<h2>2.4.4 (2007-01-07)<a class="headerlink" href="#id56" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a «ghosting» bug. Dupes deleted by dupeGuru would sometimes come back in subsequent scans (Windows).</li>
+<li><strong>Fixed</strong> bugs sometimes making dupeGuru crash when marking a dupe (Windows).</li>
+<li><strong>Fixed</strong> some minor visual glitches (Windows).</li>
+</ul>
+</div>
+<div class="section" id="id57">
+<h2>2.4.3 (2006-12-08)<a class="headerlink" href="#id57" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a mishandling of «.app» files (OS X).</li>
+<li><strong>Fixed</strong> a bug preventing files from «reference» directories to be displayed in blue in the results (Windows).</li>
+<li><strong>Fixed</strong> a bug preventing some files to be sent to the recycle bin (Windows).</li>
+<li><strong>Fixed</strong> a bug in the packaging preventing certain Windows configurations to start dupeGuru at all.</li>
+</ul>
+</div>
+<div class="section" id="id58">
+<h2>2.4.2 (2006-11-18)<a class="headerlink" href="#id58" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a bug with directory states.</li>
+</ul>
+</div>
+<div class="section" id="id59">
+<h2>2.4.1 (2006-11-15)<a class="headerlink" href="#id59" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a bug causing the ignore list not to be saved.</li>
+<li><strong>Fixed</strong> a bug sometimes making delete and move operations stall.</li>
+</ul>
+</div>
+<div class="section" id="id60">
+<h2>2.4.0 (2006-11-10)<a class="headerlink" href="#id60" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Changed</strong> the Windows interface. It is now .NET based.</li>
+<li><strong>Added</strong> an auto-update feature to the windows version.</li>
+<li><strong>Changed</strong> the way power marking works. It is now a mode instead of a separate window.</li>
+<li><strong>Changed</strong> the «Size (MB)» column for a «Size (KB)» column. The values are now «ceiled» instead of rounded. Therefore, a size «0» is now really 0 bytes, not just a value too small to be rounded up. It is also the case for delta values.</li>
+<li><strong>Removed</strong> the min word length/count options. These came from Mp3 Filter, and just aren’t used anymore. Word weighting does pretty much the same job.</li>
+</ul>
+</div>
+<div class="section" id="id61">
+<h2>2.3.4 (2006-11-07)<a class="headerlink" href="#id61" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> speed and memory usage of the scanning engine, again. Does it mean there was a lot of improvements to be made? Nah…</li>
+</ul>
+</div>
+<div class="section" id="id62">
+<h2>2.3.3 (2006-11-02)<a class="headerlink" href="#id62" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> speed and memory usage of the scanning engine, especially when the scan results in a lot of duplicates.</li>
+<li>Now I wonder if Sparkle is going to work well…</li>
+</ul>
+</div>
+<div class="section" id="id63">
+<h2>2.3.2 (2006-10-16)<a class="headerlink" href="#id63" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> an auto-update feature in the Mac OS X version (with Sparkle).</li>
+<li><strong>Fixed</strong> a bug preventing some duplicate reports to be created correctly under Windows.</li>
+</ul>
+</div>
+<div class="section" id="id64">
+<h2>2.3.1 (2006-10-02)<a class="headerlink" href="#id64" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> a bug preventing some duplicates to be found, especially when scanning lots of files.</li>
+</ul>
+</div>
+<div class="section" id="id65">
+<h2>2.3.0 (2006-09-22)<a class="headerlink" href="#id65" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> XHTML export feature.</li>
+</ul>
+</div>
+<div class="section" id="id66">
+<h2>2.2.10 (2006-08-31)<a class="headerlink" href="#id66" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> sticky columns.</li>
+<li><strong>Fixed</strong> an issue with file caching between scans.</li>
+<li><strong>Fixed</strong> an issue preventing some duplicates from being deleted/moved/copied.</li>
+</ul>
+</div>
+<div class="section" id="id67">
+<h2>2.2.9 (2006-08-27)<a class="headerlink" href="#id67" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> an issue with ignore list and unicode.</li>
+<li><strong>Fixed</strong> an issue with file attribute fetching sometimes causing dupeGuru to crash.</li>
+<li><strong>Fixed</strong> an issue in the directories panel under Windows.</li>
+</ul>
+</div>
+<div class="section" id="id68">
+<h2>2.2.8 (2006-08-17)<a class="headerlink" href="#id68" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> an issue in the duplicate seeking engine preventing some duplicates to be found.</li>
+</ul>
+</div>
+<div class="section" id="id69">
+<h2>2.2.7 (2006-08-12)<a class="headerlink" href="#id69" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> unicode support.</li>
+<li><strong>Improved</strong> the «Reveal in Finder» («Open Containing Folder» in Windows) feature so it selects the file in the folder it opens.</li>
+</ul>
+</div>
+<div class="section" id="id70">
+<h2>2.2.6 (2006-08-07)<a class="headerlink" href="#id70" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> the ignore list system.</li>
+<li>dupeGuru is now a Universal application on Mac OS X.</li>
+</ul>
+</div>
+<div class="section" id="id71">
+<h2>2.2.5 (2006-07-26)<a class="headerlink" href="#id71" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> application (.app) dupe detection on Mac OS X.</li>
+<li><strong>Fixed</strong> an issue that occasionally made dupeGuru crash on startup.</li>
+</ul>
+</div>
+<div class="section" id="id72">
+<h2>2.2.4 (2006-06-27)<a class="headerlink" href="#id72" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> an issue with Move and Copy features.</li>
+</ul>
+</div>
+<div class="section" id="id73">
+<h2>2.2.3 (2006-06-15)<a class="headerlink" href="#id73" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Improved</strong> duplicate scanning speed.</li>
+<li><strong>Added</strong> a warning that a file couldn’t be renamed if a file with the same name already exists.</li>
+</ul>
+</div>
+<div class="section" id="id74">
+<h2>2.2.2 (2006-06-07)<a class="headerlink" href="#id74" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> «Rename Selected» feature.</li>
+<li><strong>Fixed</strong> some minor issues with «Reload Last Results» feature.</li>
+<li><strong>Fixed</strong> ignore list issues.</li>
+</ul>
+</div>
+<div class="section" id="id75">
+<h2>2.2.1 (2006-05-22)<a class="headerlink" href="#id75" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> occasional progress bar woes under Windows.</li>
+<li><strong>Fixed</strong> a bug in the registration system under Windows.</li>
+<li>Nothing has been changed in the Mac OS X version, but I want to keep version in sync.</li>
+</ul>
+</div>
+<div class="section" id="id76">
+<h2>2.2.0 (2006-05-10)<a class="headerlink" href="#id76" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> destination path re-creation options.</li>
+<li><strong>Added</strong> an ignore list.</li>
+<li><strong>Changed</strong> the main icon.</li>
+<li><strong>Improved</strong> dramatically the delta values feature.</li>
+</ul>
+</div>
+<div class="section" id="id77">
+<h2>2.1.2 (2006-04-18)<a class="headerlink" href="#id77" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> the «Match similar words» option.</li>
+<li><strong>Fixed</strong> Power marking issues under Mac.</li>
+</ul>
+</div>
+<div class="section" id="id78">
+<h2>2.1.1 (2006-04-14)<a class="headerlink" href="#id78" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> the «Display delta values» option.</li>
+<li><strong>Improved</strong> Power marking sorting speed under Mac.</li>
+<li><strong>Fixed</strong> Power marking sorting issues.</li>
+</ul>
+</div>
+<div class="section" id="id79">
+<h2>2.1.0 (2006-04-03)<a class="headerlink" href="#id79" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Added</strong> the Power Marker feature.</li>
+<li><strong>Fixed</strong> a column sorting bug. The results would sometimes lose their sort order.</li>
+<li><strong>Fixed</strong> a bug with the Make Reference feature. The results sometimes wasn’t correctly refreshed after the reference switch.</li>
+</ul>
+</div>
+<div class="section" id="id80">
+<h2>2.0.1 (2006-03-23)<a class="headerlink" href="#id80" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li><strong>Fixed</strong> an issue occasionally occurring when trying to reload results from removable media that is no longer present.</li>
+</ul>
+</div>
+<div class="section" id="id81">
+<h2>2.0.0 (2006-03-17)<a class="headerlink" href="#id81" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Complete rewrite.</li>
+<li>Now runs on Mac OS X.</li>
+</ul>
+</div>
+<div class="section" id="id82">
+<h2>1.0.0 (2004-09-24)<a class="headerlink" href="#id82" title="Постійне посилання на цей заголовок">¶</a></h2>
+<ul class="simple">
+<li>Initial release.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="faq.html">Часті питання</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Створено з використанням <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

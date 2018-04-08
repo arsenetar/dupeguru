@@ -1,0 +1,363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.app &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.fs" href="fs.html" />
+    <link rel="prev" title="core" href="index.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>core.app</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">core</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fs.html">core.fs</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-core.app">
+<span id="core-app"></span><h1>core.app<a class="headerlink" href="#module-core.app" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="core.app.DupeGuru">
+<em class="property">class </em><code class="descclassname">core.app.</code><code class="descname">DupeGuru</code><span class="sig-paren">(</span><em>view</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds everything together.</p>
+<p>Instantiated once per running application, it holds a reference to every high-level object
+whose reference needs to be held: <a class="reference internal" href="results.html#core.results.Results" title="core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">Results</span></code></a>,
+<a class="reference internal" href="directories.html#core.directories.Directories" title="core.directories.Directories"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directories</span></code></a>, <a class="reference internal" href="gui/index.html#module-core.gui" title="core.gui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">core.gui</span></code></a> instances, etc..</p>
+<p>It also hosts high level methods and acts as a coordinator for all those elements. This is why
+some of its methods seem a bit shallow, like for example <a class="reference internal" href="#core.app.DupeGuru.mark_all" title="core.app.DupeGuru.mark_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mark_all()</span></code></a> and
+<a class="reference internal" href="#core.app.DupeGuru.remove_duplicates" title="core.app.DupeGuru.remove_duplicates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">remove_duplicates()</span></code></a>. These methos are just proxies for a method in <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a>, but
+they are also followed by a notification call which is very important if we want GUI elements
+to be correctly notified of a change in the data they’re presenting.</p>
+<dl class="attribute">
+<dt id="core.app.DupeGuru.directories">
+<code class="descname">directories</code><a class="headerlink" href="#core.app.DupeGuru.directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of <a class="reference internal" href="directories.html#core.directories.Directories" title="core.directories.Directories"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directories</span></code></a>. It holds the current folder selection.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.app.DupeGuru.results">
+<code class="descname">results</code><a class="headerlink" href="#core.app.DupeGuru.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of <a class="reference internal" href="results.html#core.results.Results" title="core.results.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.results.Results</span></code></a>. Holds the results of the latest scan.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.app.DupeGuru.selected_dupes">
+<code class="descname">selected_dupes</code><a class="headerlink" href="#core.app.DupeGuru.selected_dupes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of currently selected dupes from our <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a>. Whenever the user changes its
+selection at the UI level, <a class="reference internal" href="#core.app.DupeGuru.result_table" title="core.app.DupeGuru.result_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">result_table</span></code></a> takes care of updating this attribute, so
+you can trust that it’s always up-to-date.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.app.DupeGuru.result_table">
+<code class="descname">result_table</code><a class="headerlink" href="#core.app.DupeGuru.result_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of <a class="reference internal" href="gui/index.html#module-core.gui" title="core.gui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">meta-gui</span></code></a> table listing the results from <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.add_directory">
+<code class="descname">add_directory</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.add_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds folder <code class="docutils literal notranslate"><span class="pre">d</span></code> to <a class="reference internal" href="#core.app.DupeGuru.directories" title="core.app.DupeGuru.directories"><code class="xref py py-attr docutils literal notranslate"><span class="pre">directories</span></code></a>.</p>
+<p>Shows an error message dialog if something bad happens.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> (<em>str</em>) – path of folder to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.add_selected_to_ignore_list">
+<code class="descname">add_selected_to_ignore_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.add_selected_to_ignore_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <a class="reference internal" href="#core.app.DupeGuru.selected_dupes" title="core.app.DupeGuru.selected_dupes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_dupes</span></code></a> to <code class="xref py py-attr docutils literal notranslate"><span class="pre">ignore_list</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.apply_filter">
+<code class="descname">apply_filter</code><span class="sig-paren">(</span><em>filter</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.apply_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a filter <code class="docutils literal notranslate"><span class="pre">filter</span></code> to the results so that it shows only dupe groups that match it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<em>str</em>) – filter to apply</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.copy_or_move_marked">
+<code class="descname">copy_or_move_marked</code><span class="sig-paren">(</span><em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.copy_or_move_marked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start an async move (or copy) job on marked duplicates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>copy</strong> (<em>bool</em>) – If True, duplicates will be copied instead of moved</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.delete_marked">
+<code class="descname">delete_marked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.delete_marked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start an async job to send marked duplicates to the trash.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.export_to_csv">
+<code class="descname">export_to_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.export_to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export current results to CSV.</p>
+<p>The columns and their order in the resulting CSV file is determined in the same way as in
+<a class="reference internal" href="#core.app.DupeGuru.export_to_xhtml" title="core.app.DupeGuru.export_to_xhtml"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_to_xhtml()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.export_to_xhtml">
+<code class="descname">export_to_xhtml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.export_to_xhtml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export current results to XHTML.</p>
+<p>The configuration of the <a class="reference internal" href="#core.app.DupeGuru.result_table" title="core.app.DupeGuru.result_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">result_table</span></code></a> (columns order and visibility) is used to
+determine how the data is presented in the export. In other words, the exported table in
+the resulting XHTML will look just like the results table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.invoke_custom_command">
+<code class="descname">invoke_custom_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.invoke_custom_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls command in <code class="docutils literal notranslate"><span class="pre">CustomCommand</span></code> pref with <code class="docutils literal notranslate"><span class="pre">%d</span></code> and <code class="docutils literal notranslate"><span class="pre">%r</span></code> placeholders replaced.</p>
+<p>Using the current selection, <code class="docutils literal notranslate"><span class="pre">%d</span></code> is replaced with the currently selected dupe and <code class="docutils literal notranslate"><span class="pre">%r</span></code>
+is replaced with that dupe’s ref file. If there’s no selection, the command is not invoked.
+If the dupe is a ref, <code class="docutils literal notranslate"><span class="pre">%d</span></code> and <code class="docutils literal notranslate"><span class="pre">%r</span></code> will be the same.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load directory selection and ignore list from files in appdata.</p>
+<p>This method is called during startup so that directory selection and ignore list, which
+is persistent data, is the same as when the last session was closed (when <code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code> was
+called).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.load_from">
+<code class="descname">load_from</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.load_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start an async job to load results from <code class="docutils literal notranslate"><span class="pre">filename</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – path of the XML file (created with <a class="reference internal" href="#core.app.DupeGuru.save_as" title="core.app.DupeGuru.save_as"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_as()</span></code></a>) to load</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.make_selected_reference">
+<code class="descname">make_selected_reference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.make_selected_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Promote <a class="reference internal" href="#core.app.DupeGuru.selected_dupes" title="core.app.DupeGuru.selected_dupes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_dupes</span></code></a> to reference position within their respective groups.</p>
+<p>Each selected dupe will become the <a class="reference internal" href="engine.html#core.engine.Group.ref" title="core.engine.Group.ref"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ref</span></code></a> of its group. If there’s
+more than one dupe selected for the same group, only the first (in the order currently shown
+in <a class="reference internal" href="#core.app.DupeGuru.result_table" title="core.app.DupeGuru.result_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">result_table</span></code></a>) dupe will be promoted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.mark_all">
+<code class="descname">mark_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.mark_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set all dupes in the results as marked.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.mark_dupe">
+<code class="descname">mark_dupe</code><span class="sig-paren">(</span><em>dupe</em>, <em>marked</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.mark_dupe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change marked status of <code class="docutils literal notranslate"><span class="pre">dupe</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dupe</strong> (<a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>) – dupe to mark/unmark</li>
+<li><strong>marked</strong> (<em>bool</em>) – True = mark, False = unmark</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.mark_invert">
+<code class="descname">mark_invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.mark_invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invert the marked state of all dupes in the results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.mark_none">
+<code class="descname">mark_none</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.mark_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set all dupes in the results as unmarked.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.open_selected">
+<code class="descname">open_selected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.open_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open <a class="reference internal" href="#core.app.DupeGuru.selected_dupes" title="core.app.DupeGuru.selected_dupes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_dupes</span></code></a> with their associated application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.purge_ignore_list">
+<code class="descname">purge_ignore_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.purge_ignore_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove files that don’t exist from <code class="xref py py-attr docutils literal notranslate"><span class="pre">ignore_list</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.remove_directories">
+<code class="descname">remove_directories</code><span class="sig-paren">(</span><em>indexes</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.remove_directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove root directories at <code class="docutils literal notranslate"><span class="pre">indexes</span></code> from <a class="reference internal" href="#core.app.DupeGuru.directories" title="core.app.DupeGuru.directories"><code class="xref py py-attr docutils literal notranslate"><span class="pre">directories</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indexes</strong> (<em>list of int</em>) – Indexes of the directories to remove.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.remove_duplicates">
+<code class="descname">remove_duplicates</code><span class="sig-paren">(</span><em>duplicates</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.remove_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove <code class="docutils literal notranslate"><span class="pre">duplicates</span></code> from <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a>.</p>
+<p>Calls <a class="reference internal" href="results.html#core.results.Results.remove_duplicates" title="core.results.Results.remove_duplicates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">remove_duplicates()</span></code></a> and send appropriate notifications.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duplicates</strong> (list of <a class="reference internal" href="fs.html#core.fs.File" title="core.fs.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>) – duplicates to remove.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.remove_marked">
+<code class="descname">remove_marked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.remove_marked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removed marked duplicates from the results (without touching the files themselves).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.remove_selected">
+<code class="descname">remove_selected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.remove_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removed <a class="reference internal" href="#core.app.DupeGuru.selected_dupes" title="core.app.DupeGuru.selected_dupes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">selected_dupes</span></code></a> from the results (without touching the files themselves).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.rename_selected">
+<code class="descname">rename_selected</code><span class="sig-paren">(</span><em>newname</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.rename_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames the selected dupes’s file to <code class="docutils literal notranslate"><span class="pre">newname</span></code>.</p>
+<p>If there’s more than one selected dupes, the first one is used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>newname</strong> (<em>str</em>) – The filename to rename the dupe’s file to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.reprioritize_groups">
+<code class="descname">reprioritize_groups</code><span class="sig-paren">(</span><em>sort_key</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.reprioritize_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort dupes in each group (in <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a>) according to <code class="docutils literal notranslate"><span class="pre">sort_key</span></code>.</p>
+<p>Called by the re-prioritize dialog. Calls <a class="reference internal" href="engine.html#core.engine.Group.prioritize" title="core.engine.Group.prioritize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prioritize()</span></code></a> and, once
+the sorting is done, show a message that confirms the action.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sort_key</strong> (<em>f</em><em>(</em><em>dupe</em><em>)</em>) – The key being sent to <a class="reference internal" href="engine.html#core.engine.Group.prioritize" title="core.engine.Group.prioritize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prioritize()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.save_as">
+<code class="descname">save_as</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.save_as" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save results in <code class="docutils literal notranslate"><span class="pre">filename</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – path of the file to save results (as XML) to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.start_scanning">
+<code class="descname">start_scanning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.start_scanning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts an async job to scan for duplicates.</p>
+<p>Scans folders selected in <a class="reference internal" href="#core.app.DupeGuru.directories" title="core.app.DupeGuru.directories"><code class="xref py py-attr docutils literal notranslate"><span class="pre">directories</span></code></a> and put the results in <a class="reference internal" href="#core.app.DupeGuru.results" title="core.app.DupeGuru.results"><code class="xref py py-attr docutils literal notranslate"><span class="pre">results</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.app.DupeGuru.without_ref">
+<code class="descname">without_ref</code><span class="sig-paren">(</span><em>dupes</em><span class="sig-paren">)</span><a class="headerlink" href="#core.app.DupeGuru.without_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">dupes</span></code> with all reference elements removed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">core</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fs.html">core.fs</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

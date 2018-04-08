@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Folder Selection &#8212; dupeGuru 4.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Preferences" href="preferences.html" />
+    <link rel="prev" title="Quick Start" href="quick_start.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 documentation</span></a></h1>
+        <h2 class="heading"><span>Folder Selection</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quick_start.html">Quick Start</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="preferences.html">Preferences</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="folder-selection">
+<h1>Folder Selection<a class="headerlink" href="#folder-selection" title="Permalink to this headline">¶</a></h1>
+<p>The first window you see when you launch dupeGuru is the folder selection window. This windows
+contains the basic input dupeGuru needs to start a scan:</p>
+<ul class="simple">
+<li>An Application Mode selection</li>
+<li>A Scan Type selection</li>
+<li>Folders to scan</li>
+</ul>
+<div class="section" id="application-mode">
+<h2>Application Mode<a class="headerlink" href="#application-mode" title="Permalink to this headline">¶</a></h2>
+<p>dupeGuru had three main modes: Standard, Music and Picture.</p>
+<p>Standard is for any type of files. This makes this mode the most polyvalent, but it lacks
+specialized features other modes have.</p>
+<p>Music mode scans only music files, but it supports tags comparison and its results window has many
+audio-related informational columns.</p>
+<p>Picture mode scans only pictures, but its contents scan type is a powerful fuzzy matcher that can
+find pictures that are similar without being exactly the same.</p>
+<p>Choosing an application mode not only changes available scan types in the selector below, but also
+changes available options in the preferences panel. Thus, if you want to fine tune your scan, be
+sure to open the preferences panel <strong>after</strong> you’ve selected the application mode.</p>
+</div>
+<div class="section" id="scan-type">
+<h2>Scan Type<a class="headerlink" href="#scan-type" title="Permalink to this headline">¶</a></h2>
+<p>This selector determines the type of the scan we’ll do. See <a class="reference internal" href="scan.html"><span class="doc">The scanning process</span></a> for details about scan
+types.</p>
+</div>
+<div class="section" id="folder-list">
+<h2>Folder List<a class="headerlink" href="#folder-list" title="Permalink to this headline">¶</a></h2>
+<p>To add a folder, click on the <strong>+</strong> button. If you added folder before, a popup
+menu with a list of recent folders you added will pop. You can click on one of
+them to add it directly to your list. If you click on the first item of the
+popup menu, <strong>Add New Folder…</strong>, you will be prompted for a folder to add. If
+you never added a folder, no menu will pop and you will directly be prompted
+for a new folder to add.</p>
+<p>An alternate way to add folders to the list is to drag them in the list.</p>
+<p>To remove a folder, select the folder to remove and click on <strong>-</strong>. If a subfolder is selected when
+you click the button, the selected folder will be set to <strong>excluded</strong> state (see below) instead of
+being removed.</p>
+</div>
+<div class="section" id="folder-states">
+<h2>Folder states<a class="headerlink" href="#folder-states" title="Permalink to this headline">¶</a></h2>
+<p>Every folder can be in one of these 3 states:</p>
+<dl class="docutils">
+<dt><strong>Normal:</strong></dt>
+<dd>Duplicates found in this folder can be deleted.</dd>
+<dt><strong>Reference:</strong></dt>
+<dd>Duplicates found in this folder <strong>cannot</strong> be deleted. Files from this folder can
+only end up in <strong>reference</strong> position in the dupe group. If more than one file from reference
+folders end up in the same dupe group, only one will be kept. The others will be removed from
+the group.</dd>
+<dt><strong>Excluded:</strong></dt>
+<dd>Files in this directory will not be included in the scan.</dd>
+</dl>
+<p>The default state of a folder is, of course, <strong>Normal</strong>. You can use <strong>Reference</strong> state for a
+folder if you want to be sure that you won’t delete any file from it.</p>
+<p>When you set the state of a directory, all subfolders of this folder automatically inherit this
+state unless you explicitly set a subfolder’s state.</p>
+</div>
+<div class="section" id="scan">
+<h2>Scan<a class="headerlink" href="#scan" title="Permalink to this headline">¶</a></h2>
+<p>When you’re ready, click on the <strong>Scan</strong> button to initiate the scanning process. When it’s done,
+you’ll be shown the <a class="reference internal" href="results.html"><span class="doc">Results</span></a>.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quick_start.html">Quick Start</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="preferences.html">Preferences</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    </div>
+  </body>
+</html>

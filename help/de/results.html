@@ -1,0 +1,151 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ergebnisse &#8212; dupeGuru 4.0.3 Dokumentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Re-Prioritizing duplicates" href="reprioritize.html" />
+    <link rel="prev" title="Einstellungen" href="preferences.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>dupeGuru 4.0.3 Dokumentation</span></a></h1>
+        <h2 class="heading"><span>Ergebnisse</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Einstellungen</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="ergebnisse">
+<h1>Ergebnisse<a class="headerlink" href="#ergebnisse" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Sobald dupeGuru den Duplikatescan beendet hat, werden die Ergebnisse in Form einer Duplikate-Gruppenliste gezeigt.</p>
+<div class="section" id="uber-duplikatgruppen">
+<h2>Über Duplikatgruppen<a class="headerlink" href="#uber-duplikatgruppen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Eine Duplikatgruppe ist eine Gruppe von übereinstimmenden Dateien. Jede Gruppe hat eine <strong>Referenzdatei</strong> und ein oder mehrere <strong>Duplikate</strong>. Die Referenzdatei ist die 1. Datei der Gruppe. Die Auswahlbox ist deaktiviert. Darunter befinden sich die eingerückten Duplikate.</p>
+<p>Sie können Duplikate markieren, aber niemals die Referenzdatei der Gruppe. Das ist eine Sicherheitsmaßnahme, die dupeGuru davon abhält nicht nur die Duplikate zu löschen, sondern auch die Referenzdatei. Sie wollen sicher nicht das das passiert, oder?</p>
+<p>Welche Dateien Referenz oder Duplikate sind hängt zuerst von ihrem Ordnerzustand ab. Eine Datei von einem Referenzordner ist immer Referenz einer Duplikatgruppe. Sind alle Dateien aus normalen Ordnern, bestimmt die Größe welche Datei die Referenz einer Gruppe sein wird. DupeGuru nimmt an, das Sie immer die größte Datei behalten wollen. Also übernimmt die größte Datei die Referenzposition.</p>
+<p>Sie können die Referenzdatei manuell verändern. Um das zu tun, wählen Sie das Duplikat aus, das zur Referenz befördert werden soll und drücken auf <strong>Aktionen–&gt;Mache Ausgewählte zur Referenz</strong>.</p>
+</div>
+<div class="section" id="ergebnisse-beurteilen">
+<h2>Ergebnisse beurteilen<a class="headerlink" href="#ergebnisse-beurteilen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Obwohl Sie einfach auf <strong>Markieren–&gt;Alles markieren</strong> gehen und dann <strong>Aktionen–&gt;Verschiebe Markierte in den Mülleimer</strong> ausführen können, um schnell alle Duplikate zu löschen, ist es sinnvoll erst alle Duplikate zu betrachten, bevor man sie löscht.</p>
+<p>Um die Überprüfung zu erleichtern, können Sie das <strong>Detail Panel</strong> öffnen. Dieses Panel zeigt alle Details der gerade ausgewählten Datei sowie deren Referenz Details. Das ist sehr praktisch um schnell zu bestimmen, ob ein Duplikat wirklich ein Duplikat ist. Sie können außerdem auf die Datei doppelt klicken, um sie mit der verknüpften Anwendung zu öffnen.</p>
+<p>Wenn Sie mehr Falschpositive als echte Duplikate haben (die Filterempfindlichkeit sehr niedrig ist), ist es der beste Weg die echten Duplikate zu markieren und mit <strong>Aktionen–&gt;Verschiebe Markierte in den Mülleimer</strong> zu entfernen. Haben Sie mehr echte Duplikate als Falschpositive, können Sie stattdessen alle unechten Duplikate markieren und <strong>Entferne Markierte aus den Ergebnissen</strong> nutzen.</p>
+</div>
+<div class="section" id="markierung-und-auswahl">
+<h2>Markierung und Auswahl<a class="headerlink" href="#markierung-und-auswahl" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Ein <strong>markiertes</strong> Duplikat ist ein Duplikat, dessen kleine Box ein Häkchen hat. Ein <strong>ausgewähltes</strong> Duplikat ist hervorgehoben. Mehrfachauswahl wird in dupeGuru über den normalen Weg erreicht (Shift/Command/Steuerung Klick). Sie können die Markierung aller Duplikate umschalten, indem sie <strong>Leertaste</strong> drücken.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Zu tun</p>
+<p class="last">Add „Non-numerical delta“ information.</p>
+</div>
+</div>
+<div class="section" id="nur-duplikate-anzeigen">
+<h2>Nur Duplikate anzeigen<a class="headerlink" href="#nur-duplikate-anzeigen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wird dieser Modus aktiviert, so werden ausschließlich Duplikate ohne ihre respektive Referenzdatei gezeigt. Sie können diese Liste auswählen, markieren und sortieren, ganz wie im normalen Modus.</p>
+<p>Die dupeGuru Ergebnisse werden, im normalen Modus, nach der <strong>Referenzdatei</strong> der Duplikatgruppen sortiert. Das bedeutet zum Beispiel, um alle Duplikate mit der „exe“ Erweiterung zu markieren, können Sie nicht einfach die Ergebnisse nach „Typ“ ordnen um alle exe Duplikate zu erhalten, denn eine Gruppe kann aus mehreren Typen (Dateiarten) bestehen. Hier kommt der Nur-Duplikate Modus ins Spiel. Um alle „exe“ Duplikate zu markieren, müssen Sie nur:</p>
+<ul class="simple">
+<li>Nur Duplikate anzeigen aktivieren</li>
+<li>Die „Typ“ Spalte über das „Spalten“ Menü hinzufügen</li>
+<li>Auf „Typ“ klicken, um die Liste zu sortieren</li>
+<li>Das erste Duplikat mit dem „exe“ Typ lokalisieren.</li>
+<li>Es auswählen.</li>
+<li>Die Liste herunterscrollen und das letzte Duplikat mit dem „exe“ Typ finden.</li>
+<li>Die Shift Taste halten und es auswählen.</li>
+<li>Leertaste drücken, um alle ausgewählten Duplikate zu markieren.</li>
+</ul>
+</div>
+<div class="section" id="deltawerte">
+<h2>Deltawerte<a class="headerlink" href="#deltawerte" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Wenn Sie diesen Schalter aktivieren, zeigen einige Spalten den Wert relativ zur Duplikate-Referenz anstelle des absoluten Wertes an. Diese Deltawerte werden zusätzlich in einer anderen Farbe dargestellt, um sie leichter zu entdecken. Zum Beispiel, ein Duplikat ist 1,2 MB groß und die Referenz 1,4 MB, dann zeigt die Größe-Spalte -0,2 MB.</p>
+</div>
+<div class="section" id="nur-duplikate-anzeigen-und-deltawerte">
+<h2>Nur Duplikate anzeigen und Deltawerte<a class="headerlink" href="#nur-duplikate-anzeigen-und-deltawerte" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Der Nur-Duplikate Modus enthüllt seine wahre Macht nur, wenn der Deltawerte Schalter aktiviert wurde. Wenn Sie ihn anschalten, werden relative Werte anstelle Absoluter gezeigt. Wenn Sie also, zum Beispiel, alle Duplikate die mehr als 300 KB von der Referenz verschieden sind aus der Ergebnisliste entfernen möchten, so sortieren Sie die Duplikate nach der Größe, wählen alle Duplikate mit weniger als -300 in der Größe-Spalte, löschen sie und tun das selbe für Duplikate mit mehr als +300 auf der Unterseite der Liste.</p>
+<p>Sie können dies außerdem nutzen, um die Referenzpriorität der Duplikateliste zu ändern. Wenn sie einen neuen Scan durchführen ist die größte Datei jeder Gruppe die Referenzdatei, solange keine Referenzordner existieren. Wollen Sie beispielsweise die Referenz nach der letztes Änderungszeit bestimmen, können Sie das Nur-Duplikate Ergebnis nach Änderungszeit in <strong>absteigender</strong> Reihenfolge sortieren, alle Duplikate mit einem Änderungszeit-Deltawert größergleich 0 auswählen und auf <strong>Mache Ausgewählte zur Referenz</strong> klicken. Der Grund warum die Sortierung absteigend erfolgen muss ist, wenn 2 Dateien der selben Duplikatgruppe ausgewählt werden und Sie <strong>Mache Ausgewählte zur Referenz</strong> klicken, dann wird nur der Erste der Liste wirklich als Referenz gesetzt. Da Sie nur die zuletzt geänderte Datei als Referenz haben möchten, stellt die vorangegangene Sortierung sicher, das der erste Eintrag der Liste auch der zuletzt Geänderte ist.</p>
+</div>
+<div class="section" id="filtern">
+<h2>Filtern<a class="headerlink" href="#filtern" title="Link zu dieser Überschrift">¶</a></h2>
+<p>DupeGuru unterstützt das Filtern nach dem Scandurchlauf. Damit können Sie ihre Ergebnisse einschränken und diverse Aktionen auf einer Teilmenge ausführen. Beispielsweise ist es möglich alle Duplikate, deren Dateiname „copy“ enthält mithilfe dieser Filterfunktion zu markieren.</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Zu tun</p>
+<p class="last">Qt has a toolbar search field now, not a menu item.</p>
+</div>
+<p><strong>Windows/Linux:</strong> Um diese Filterfunktion zu nutzen, klicken Sie Aktionen –&gt; Filter anwenden, geben den Filter ein und drücken OK. Um zurück zu den ungefilterten Ergebnissen zu gelangen, gehen Sie auf Aktionen –&gt; Filter entfernen.</p>
+<p><strong>Mac OS X:</strong> Um diese Filterfunktion zu nutzen, geben Sie ihren Filter im „Filter“ Suchfeld in der Symbolleiste ein. Um zurück zu den ungefilterten Ergebnissen zu gelangen, leeren Sie das Feld oder drücken auf „X“.</p>
+<p>Im Einfach-Modus (Voreinstellung) wird jede Zeichenkette die Sie eingeben auch zum Filtern genutzt, mit Ausnahme einer Wildcard: <strong>*</strong>. Wenn Sie „[*]“ als Filter nutzen, wird alles gefunden was die eckigen Klammern [] enthält, was auch immer zwischen diesen Klammern stehen mag.</p>
+<p>Für fortgeschrittenes Filtern, können Sie „Nutze reguläre Ausdrücke beim Filtern“ aktivieren. Diese Funktion erlaubt es Ihnen <strong>reguläre Ausdrücke</strong> zu verwenden. Ein regulärer Ausdruck ist ein Filterkriterium für Text. Das zu erklären sprengt den Rahmen dieses Dokuments. Ein guter Platz für eine Einführung ist <a class="reference external" href="http://www.regular-expressions.info">regular-expressions.info</a>.</p>
+<p>Filter ignorieren, im Einfach- und RegExp-Modus, die Groß- und Kleinschreibung.</p>
+<p>Damit der Filter etwas findet, muss Ihr regulärer Ausdruck nicht auf den gesamten Dateinamen passen. Der Name muss nur eine Zeichenkette enthalten die auf den Ausdruck zutrifft.</p>
+<p>Sie bemerken vielleicht, das nicht alle Duplikate in Ihren gefilterten Ergebnissen auf den Filter passen. Das liegt daran, sobald ein Duplikat einer Gruppe vom Filter gefunden wird, bleiben die restlichen Duplikate der Gruppe mit in der Liste, damit Sie einen besseren Überblick über den Kontext der Duplikate erhalten. Nicht passende Duplikate bleiben allerdings im „Referenz-Modus“. Dadurch können Sie sicher sein Aktionen wie „Alles Markieren“ anzuwenden und nur gefilterte Duplikate zu markieren.</p>
+</div>
+<div class="section" id="aktionen-menu">
+<h2>Aktionen Menü<a class="headerlink" href="#aktionen-menu" title="Link zu dieser Überschrift">¶</a></h2>
+<ul class="simple">
+<li><strong>Ignorier-Liste leeren:</strong> Entfernt alle ignorierten Treffer die Sie hinzugefügt haben. Um wirksam zu sein, muss ein neuer Scan für die gerade gelöschte Ignorier-Liste gestartet werden.</li>
+<li><strong>Exportiere als XHTML:</strong> Nimmt die aktuellen Ergebnisse und erstellt aus ihnen eine XHTML Datei. Die Spalten die sichtbar werden, wenn sie auf diesen Knopf drücken, werden die Spalten in der XHTML Datei sein. Die Datei wird automatisch mit dem Standardbrowser geöffnet.</li>
+<li><strong>Verschiebe Markierte in den Mülleimer:</strong> Verschiebt alle markierten Duplikate in den Mülleimer.</li>
+<li><strong>Lösche Markierte und ersetze mit Hardlinks:</strong> Verschiebt alle Markierten in den Mülleimer. Danach werden die gelöschten Dateien jedoch mit Hardlinks zur Referenzdatei ersetzt <a class="reference external" href="http://en.wikipedia.org/wiki/Hard_link">hard link</a> . (Nur OS X und Linux)</li>
+<li><strong>Verschiebe Markierte nach…:</strong> Fragt nach einem Ziel und verschiebt alle Markierten zum Ziel. Der Quelldateipfad wird vielleicht am Ziel neu erstellt, abhängig von der „Kopieren und Verschieben“ Einstellung.</li>
+<li><strong>Kopiere Markierte nach…:</strong> Fragt nach einem Ziel und kopiert alle Markierten zum Ziel. Der Quelldateipfad wird vielleicht am Ziel neu erstellt, abhängig von der „Kopieren und Verschieben“ Einstellung.</li>
+<li><strong>Entferne Markierte aus den Ergebnissen:</strong> Entfernt alle markierte Duplikate aus den Ergebnissen. Die wirklichen Dateien werden nicht angerührt und bleiben wo sie sind.</li>
+<li><strong>Entferne Ausgewählte aus den Ergebnissen:</strong> Entfernt alle ausgewählten Duplikate aus den Ergebnissen. Beachten Sie das ausgewählte Referenzen ignoriert werden, nur Duplikate können entfernt werden.</li>
+<li><strong>Mache Ausgewählte zur Referenz:</strong> Ernenne alle ausgewählten Duplikate zur Referenz. Ist ein Duplikat Teil einer Gruppe, die eine Referenzdatei aus einem Referenzordner hat (blaue Farbe), wird keine Aktion für dieses Duplikat durchgeführt. Ist mehr als ein Duplikat aus der selben Gruppe ausgewählt, wird nur das Erste jeder Gruppe befördert.</li>
+<li><strong>Füge Ausgewählte der Ignorier-Liste hinzu:</strong> Dies entfernt zuerst alle ausgewählten Duplikate aus den Ergebnissen und fügt danach das aktuelle Duplikat und die Referenz der Ignorier-Liste hinzu. Diese Treffer werden bei zukünftigen Scans nicht mehr angezeigt. Das Duplikat selbst kann wieder auftauchen, es wird dann jedoch zur einer anderen Referenz gehören. Die Ignorier-Liste kann mit dem Ignorier-Liste leeren Kommando gelöscht werden.</li>
+<li><strong>Öffne Ausgewählte mit Standardanwendung:</strong> Öffnet die Datei mit der Anwendung die mit dem Dateityp verknüpft ist.</li>
+<li><strong>Zeige Ausgewählte:</strong> Öffnet den Ordner der die ausgewählte Datei enthält.</li>
+<li><strong>Eigenen Befehl ausführen:</strong> Ruft die in den Einstellungen definierte externe Anwendung auf und nutzt die aktuelle Auswahl als Argumente für den Aufruf.</li>
+<li><strong>Ausgewählte umbenennen:</strong> Fragt nach einem neuen Namen und benennt die ausgewählte Datei um.</li>
+</ul>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Zu tun</p>
+<p class="last">Add Move and iPhoto/iTunes warning</p>
+</div>
+<div class="admonition-todo admonition" id="index-3">
+<p class="first admonition-title">Zu tun</p>
+<p class="last">Add „Deletion Options“ section.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="preferences.html">Einstellungen</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Inhalt</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reprioritize.html">Re-Prioritizing duplicates</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hardcoded Software.
+      Mit <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1 erstellt.
+    </div>
+  </body>
+</html>
