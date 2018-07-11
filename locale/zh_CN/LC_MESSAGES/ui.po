@@ -214,7 +214,7 @@ msgstr "较少结果"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr "复制和移动:"
+msgstr "字体大小:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
