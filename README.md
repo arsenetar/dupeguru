@@ -7,23 +7,21 @@ is written in Objective-C and uses Cocoa. On Linux, it's written in Python and u
 
 The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/dupeguru-cocoa
 
-## Current status: Unmaintained
+## Current status: Additional Maintainers Wanted (/ Note on Things in General)
 
-I haven't worked on dupeGuru for a while and frankly, I don't want to. I never had any duplicate
-problems so I don't even care about the *raison d'être* of this thing.
+When I started contributing to dupeGuru, it was to help provide an updated Windows build for dupeGuru.  I hoped to contribute more over time and help work through some of the general issues as well.  Since Virgil Dupras left as the lead maintainer, I have not been able to devote enough time to work through as many issues as I had hoped.  Now I am going to be devoting a more consistent amount of time each month to work on dupeGuru, however I will not be able to get to all issues.  Additionally there are a few specific areas where additional help would be appreciated:
 
-I don't want to answer incoming issues and I don't want to let them pile off unanswered either,
-that feels rude. So here I am, being straightforward about it.
+- OSX maintenance
+  - UI issues (I have no experience with cocoa)
+  - General issues & releases (I lack OSX environments / hardware to develop and test on, looking into doing builds through Travis CI.)
+- Linux maintenance
+  - Packaging (I have not really done much linux packaging yet, although will be spending some time trying to get at least .deb and potentially ppa's updated.)
 
-If you're considering using dupeGuru, you might want to give it a try but if it doesn't meet your
-needs I suggest that you use another program because it's unlikely to ever be improved again.
+I am still working to update the new site & update links within the help and the repository to use the new urls.  Additionally, hoping to get a 4.0.4 release out this year for at least Windows and Linux.
 
-If you're a developer wanting to pick it up, by all means, do so! Fork it off and release
-something. I will be more than happy to "officially" point to any fork that remotely looks like a
-serious effort. I will also be happy to assist if you have questions about the code.
+Thanks,
 
-Good bye dupeGuru,
-Virgil Dupras
+Andrew Senetar
 
 ## Contents of this folder
 
@@ -76,9 +74,9 @@ You can also run automated tests without Tox. Extra requirements for running tes
 `requirements-extra.txt`. So, you can do `pip install -r requirements-extra.txt` inside your
 virtualenv and then `py.test core hscommon`
 
-[dupeguru]: https://www.hardcoded.net/dupeguru/
+[dupeguru]: https://dupeguru.voltaicideas.net/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
-[documentation]: http://www.hardcoded.net/dupeguru/help/en/
+[documentation]: http://dupeguru.voltaicideas.net/help/en/
 [python]: http://www.python.org/
 [pyqt]: http://www.riverbankcomputing.com
 [tox]: https://tox.readthedocs.org/en/latest/
