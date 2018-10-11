@@ -231,7 +231,7 @@ class ResultWindow(QMainWindow):
                 frame = self.frameGeometry()
                 if QDesktopWidget().screenNumber(self) == -1:
                     moveToScreenCenter(self)
-                elif QDesktopWidget().availableGeometry(self).contains(frame) == False:
+                elif QDesktopWidget().availableGeometry(self).contains(frame) is False:
                     frame.moveCenter(QDesktopWidget().availableGeometry(self).center())
                     self.move(frame.topLeft())
             else:
