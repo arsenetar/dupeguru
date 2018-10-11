@@ -9,7 +9,8 @@
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtWidgets import (
     QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
-    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox
+    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox, 
+    QDesktopWidget
 )
 
 from hscommon.trans import trget
@@ -225,6 +226,14 @@ class ResultWindow(QMainWindow):
         else:
             if self.app.prefs.resultWindowRect is not None:
                 self.setGeometry(self.app.prefs.resultWindowRect)
+                # if not on any screen move to center of default screen
+                # moves to center of closest screen if partially off screen
+                frame = self.frameGeometry()
+                if QDesktopWidget().screenNumber(self) == -1:
+                    moveToScreenCenter(self)
+                elif QDesktopWidget().availableGeometry(self).contains(frame) is False:
+                    frame.moveCenter(QDesktopWidget().availableGeometry(self).center())
+                    self.move(frame.topLeft())
             else:
                 moveToScreenCenter(self)
 
@@ -343,3 +352,6 @@ class ResultWindow(QMainWindow):
     def searchChanged(self):
         self.app.model.apply_filter(self.searchEdit.text())
 
+    def closeEvent(self, event):
+        # this saves the location of the results window when it is closed
+        self.appWillSavePrefs()
