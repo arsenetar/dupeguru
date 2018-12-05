@@ -43,7 +43,7 @@ class TestCaseDupeGuru:
         eq_('\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc', call['filter_str'])
         dgapp.apply_filter('(*)') # In "simple mode", we want the * to behave as a wilcard
         call = dgapp.results.apply_filter.calls[3]
-        eq_('\(.*\)', call['filter_str'])
+        eq_(r'\(.*\)', call['filter_str'])
         dgapp.options['escape_filter_regexp'] = False
         dgapp.apply_filter('(abc)')
         call = dgapp.results.apply_filter.calls[5]
