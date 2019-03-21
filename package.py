@@ -35,7 +35,6 @@ def copy_files_to_package(destpath, packages, with_so):
     shutil.copy('run.py', op.join(destpath, 'run.py'))
     extra_ignores = ['*.so'] if not with_so else None
     copy_packages(packages, destpath, extra_ignores=extra_ignores)
-    os.remove(op.join(destpath, 'qt', 'run_template.py')) # It doesn't belong in the package.
     shutil.copytree(op.join('build', 'help'), op.join(destpath, 'help'))
     shutil.copytree(op.join('build', 'locale'), op.join(destpath, 'locale'))
     compileall.compile_dir(destpath)
