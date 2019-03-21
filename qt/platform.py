@@ -23,4 +23,5 @@ elif ISOSX:
 elif ISLINUX:
     INITIAL_FOLDER_IN_DIALOGS = '/'
 else:
-    pass # unsupported platform
+    # unsupported platform, however '/' is a good guess for a path which is available
+    INITIAL_FOLDER_IN_DIALOGS = '/'
