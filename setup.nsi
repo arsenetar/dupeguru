@@ -34,7 +34,7 @@ SetCompressor /SOLID lzma
 !endif
 !ifndef SOURCEPATH
   !echo "SOURCEPATH is NOT defined"
-  !define SOURCEPATH "build"
+  !define SOURCEPATH "dist"
 !endif
 !ifndef VERSIONMAJOR | VERSIONMINOR | VERSIONPATCH | BITS | SOURCEPATH
   !error "Command line Defines missing use /DDEFINE=VALUE to define before script"
@@ -161,12 +161,12 @@ Section "!Application" AppSec
   SetOutPath "$INSTDIR" ; set from result of installer pages
   
   ; Files to install
-  File /r "${SOURCEPATH}\${APPNAME}-win${BITS}bit\*"
+  File /r "${SOURCEPATH}\${APPNAME}-win${BITS}\*"
  
   ; Create Start Menu Items
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-    CreateShortcut "$SMPROGRAMS\$StartMenuFolder\${APPNAME}.lnk" "$INSTDIR\${APPNAME}.exe"
+    CreateShortcut "$SMPROGRAMS\$StartMenuFolder\${APPNAME}.lnk" "$INSTDIR\${APPNAME}-win${BITS}.exe"
     CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 
@@ -223,15 +223,16 @@ Section "Uninstall"
   RMDir /r "$SMPROGRAMS\$StartMenuFolder"
 
   ; Remove Files & Folders in Install Folder
+  RMDir /r "$INSTDIR\core"
   RMDir /r "$INSTDIR\help"
-  RMDir /r "$INSTDIR\imageformats"
-  RMDir /r "$INSTDIR\lib"
+  RMDir /r "$INSTDIR\PyQt5"
+  RMDir /r "$INSTDIR\qt"
   RMDir /r "$INSTDIR\locale"
-  RMDir /r "$INSTDIR\platforms"
-  Delete "$INSTDIR\dupeguru.exe"
-  Delete "$INSTDIR\python36.dll"
-  Delete "$INSTDIR\sqlite3.dll"
-  Delete "$INSTDIR\Uninstall.exe"
+  Delete "$INSTDIR\*.exe"
+  Delete "$INSTDIR\*.dll"
+  Delete "$INSTDIR\*.pyd"
+  Delete "$INSTDIR\*.zip"
+  Delete "$INSTDIR\*.manifest"
   
   ; Remove Install Folder if empty
   RMDir "$INSTDIR"

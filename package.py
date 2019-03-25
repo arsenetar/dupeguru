@@ -114,64 +114,38 @@ def package_source_tgz():
     print_and_do('gzip {}'.format(dest))
 
 def package_windows():
-    from cx_Freeze import setup, Executable
     app_version = get_module_version('core')
     arch = platform.architecture()[0]
-    buildpath = op.join('build', 'dupeguru-win{}'.format(arch))
-    # remove existing build directory
-    if op.exists(buildpath):
-        shutil.rmtree(buildpath)
-    include_files = []
-    # include locale files if they are built otherwise exit as it will break
-    # the localization
-    if op.exists('build/locale'):
-        include_files.append(('build/locale', 'locale'))
-    else:
-        print("Locale files not built, exiting...")
-        return
-    # include help files if they are built otherwise exit as they should be included?
-    if op.exists('build/help'):
-        include_files.append(('build/help', 'help'))
-    else:
-        print("Help files not built, exiting...")
-        return
-    # options for cx_Freeze
-    # if zip_include packages is not used, the cx_Freeze packager will include
-    # the whole PyQT5 directory
-    options = {
-        'build_exe': {
-            'build_exe': buildpath,
-            'excludes': [],
-            'includes': ['atexit', 'dbm.dumb'],
-            'include_files': include_files,
-            'include_msvcr': True,
-            'zip_include_packages': ['*'],
-            'zip_exclude_packages': []
-        },
-    }
-    # executables to build, uses se edition icon
-    executables = [
-        Executable(
-            script='run.py',
-            base='Win32GUI',
-            targetName='dupeguru.exe',
-            icon='images/dgse_logo.ico',
-            copyright='Copyright (C) 2017 Hardcoded Software'
-        )
-    ]
-    # call cx_freeze
-    setup(
-        name='dupeguru',
-        version=app_version,
-        description='Tool to find duplicate files on your computer.',
-        options=options,
-        executables=executables,
-        script_args=['build']
-    )
-    # Information to pass to NSIS
+    # Information to pass to pyinstaller and NSIS
     version_array = app_version.split('.')
     match = re.search('[0-9]+', arch)
     bits = match.group(0)
+    # include locale files if they are built otherwise exit as it will break
+    # the localization
+    if not op.exists('build/locale'):
+        print("Locale files not built, exiting...")
+        return
+    # include help files if they are built otherwise exit as they should be included?
+    if not op.exists('build/help'):
+        print("Help files not built, exiting...")
+        return
+    # create version information file from template
+    try:
+        version_template = open("win_version_info.temp", "r")
+        version_info = version_template.read()
+        version_template.close()      
+        version_info_file = open("win_version_info.txt", "w")
+        version_info_file.write(version_info.format(version_array[0], version_array[1], version_array[2], bits))
+        version_info_file.close()
+    except Exception:
+        print("Error creating version info file, exiting...")
+        return
+    # run pyinstaller via command line    
+    print_and_do('pyinstaller -w --name=dupeguru-win{0} --icon=images/dgse_logo.ico '
+                 '--add-data "build/locale;locale" --add-data "build/help;help" '
+                 '--version-file win_version_info.txt run.py'.format(bits))
+    # remove version info file
+    os.remove('win_version_info.txt')
     # Call NSIS (TODO update to not use hardcoded path)
     cmd = ('"C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe" '
            '/DVERSIONMAJOR={0} /DVERSIONMINOR={1} /DVERSIONPATCH={2} /DBITS={3} setup.nsi')
