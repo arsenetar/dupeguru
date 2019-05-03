@@ -7,7 +7,7 @@
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import (
     QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
-    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox
+    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox, QLayout
 )
 
 from hscommon.trans import trget
@@ -114,7 +114,6 @@ class PreferencesDialogBase(QDialog):
 
     def _setupUi(self):
         self.setWindowTitle(tr("Options"))
-        self.resize(304, 263)
         self.setSizeGripEnabled(False)
         self.setModal(True)
         self.mainVLayout = QVBoxLayout(self)
@@ -124,6 +123,7 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
         self.mainVLayout.addWidget(self.buttonBox)
+        self.layout().setSizeConstraint(QLayout.SetFixedSize)
 
     def _load(self, prefs, setchecked):
         # Edition-specific

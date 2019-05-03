@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QLineEdit
 )
 
-from hscommon.plat import ISWINDOWS, ISLINUX
 from hscommon.trans import trget
 from hscommon.util import tryint
 
@@ -63,16 +62,6 @@ class PreferencesDialog(PreferencesDialogBase):
         self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
-
-    def _setupUi(self):
-        PreferencesDialogBase._setupUi(self)
-
-        if ISLINUX:
-            # Under linux, whether it's a Qt layout bug or something else, the size threshold text edit
-            # doesn't have enough space, so we make the pref pane higher to compensate.
-            self.resize(self.width(), 530)
-        elif ISWINDOWS:
-            self.resize(self.width(), 440)
 
     def _load(self, prefs, setchecked):
         setchecked(self.matchSimilarBox, prefs.match_similar)
