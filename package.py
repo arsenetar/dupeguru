@@ -117,7 +117,8 @@ def package_windows():
     app_version = get_module_version('core')
     arch = platform.architecture()[0]
     # Information to pass to pyinstaller and NSIS
-    version_array = app_version.split('.')
+    match = re.search('[0-9]+.[0-9]+.[0-9]+', app_version)
+    version_array = match.group(0).split('.')
     match = re.search('[0-9]+', arch)
     bits = match.group(0)
     # include locale files if they are built otherwise exit as it will break
