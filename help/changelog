@@ -1,4 +1,4 @@
-=== 4.0.4 RC (2019-05-13)
+=== 4.0.4 (2019-05-13)
 
 * Update qt/platform.py to support other Unix style OSes (#444)
 * Fix font size scaling issue in properties dialog [qt] (#504)
