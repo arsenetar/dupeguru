@@ -1,3 +1,21 @@
+=== 4.0.4 RC (2019-05-13)
+
+* Update qt/platform.py to support other Unix style OSes (#444)
+* Fix font size scaling issue in properties dialog [qt] (#504)
+* Updates to support Python 3.7
+* Fix issue with result window appearing partially off-screen [qt] (#521)
+* Fix translation error for Simplified Chinese
+* Updates to language files for German (#479)
+* Fix error with multiple close calls to the progress window [qt] (#460, #449)
+* Add Travis CI Builds
+* Un-recurse methods get_files() and get_state() to improve stability (#421)
+* Updates to language files for Italian (#445, #446, #447, #448)
+* Fix issue with cache_shelve (#402, #439)
+* Updated Windows packaging and builds (#438, #456, #461, #491, #474, #490, #565)
+* Handle OS termination signals (#425)
+* Make documentation installation optional
+* Move cocoa UI to dupeguru-cocoa [cocoa]
+
 === 4.0.3 (2016-11-24)
 
 * Add new picture cache backend: shelve
