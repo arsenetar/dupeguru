@@ -6,7 +6,7 @@
 
 .container {
     margin: 10px auto;
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
   }
   .container h1 {
@@ -19,13 +19,16 @@
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 2em;
+      align-items: center;
+      justify-content: center;
   }
   .download, .download:visited {
       text-align: center;
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: 0;
-      min-width: 120px;
+      min-width: 200px;
+      max-width: 300px;
       background-color: #4caf50;
       border-color: transparent;
       border-width: 1px;
@@ -46,7 +49,7 @@
       height: 1em;
       display: inline-block;
       padding-right: 5px;
-      vertical-align: text-top;
+      vertical-align: baseline;
       fill: currentColor;
       color: currentColor;
   }

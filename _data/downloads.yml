@@ -1,15 +1,27 @@
-version: 4.0.3
-files:
-  - name: Windows (x64)
-    link: https://github.com/arsenetar/dupeguru/releases/download/4.0.3-InstallFix/dupeGuru_win64_4.0.3.exe
-    icon: windows
-  - name: Linux (ppa)
-    link: https://launchpad.net/~hsoft/+archive/ppa/+packages
+oses:
+  - name: Windows
+    icon: windows 
+    packages: 
+      - arch: x64
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.0.4/dupeGuru_win64_4.0.4.exe
+      - arch: x32
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.0.4/dupeGuru_win32_4.0.4.exe
+  - name: Ubuntu
     icon: linux
+    packages:
+      - arch: x32, x64
+        link: https://launchpad.net/~hsoft/+archive/ppa/+packages
   - name: OS X
-    link: https://download.hardcoded.net/dupeguru_osx_4_0_3.dmg
+    icon: apple
+    packages:
+      - arch: "10.10+"
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.0.3/dupeguru_osx_4_0_3.dmg
     icon: apple
   - name: Source
-    link: https://github.com/arsenetar/dupeguru/archive/4.0.3-InstallFix.tar.gz
     icon: github
+    packages:
+      - arch: zip
+        link: https://github.com/arsenetar/dupeguru/archive/4.0.4.zip
+      - arch: tar.gz
+        link: https://github.com/arsenetar/dupeguru/archive/4.0.4.tar.gz
     
