@@ -13,3 +13,10 @@ matrix:
                 - os: "linux"
                   dist: "xenial"
                   python: "3.7"
+                - os: "windows"
+                  language: shell
+                  python: "3.7"
+                  env: "PATH=/c/python37:/c/python37/Scripts:$PATH"
+                  before_install:
+                          - choco install python make
+                          - cp /c/python37/python.exe /c/python37/python3.exe
