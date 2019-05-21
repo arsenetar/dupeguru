@@ -1,6 +1,7 @@
 sudo: false
 language: python
-install: pip3 install tox-travis
+install: 
+        - pip3 install -r requirements.txt -r requirements-extra.txt
 script: tox -vv
 matrix:
         include:
@@ -21,4 +22,5 @@ matrix:
                           - choco install python make
                           - cp /c/python37/python.exe /c/python37/python3.exe
                   before_script:
+                          - pip install -r requirements-windows.txt
                           - python build.py
