@@ -1,7 +1,7 @@
 sudo: false
 language: python
 install: pip3 install tox-travis
-script: tox
+script: tox -vv
 matrix:
         include:
                 - os: "linux"
