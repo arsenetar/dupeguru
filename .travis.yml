@@ -20,3 +20,5 @@ matrix:
                   before_install:
                           - choco install python make
                           - cp /c/python37/python.exe /c/python37/python3.exe
+                  before_script:
+                          - python build.py
