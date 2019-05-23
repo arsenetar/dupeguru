@@ -22,7 +22,7 @@ matrix:
                           - choco install python make
                           - cp /c/python37/python.exe /c/python37/python3.exe
                   before_script:
-                          - pip install -r requirements-windows.txt
-                          - python build.py
+                          - pip3 install -r requirements-windows.txt
+                          - python3 build.py
                   script:
                           - tox -e WINDOWS
