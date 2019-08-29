@@ -56,7 +56,7 @@ def package_debian_distribution(distribution):
     debskel = op.join('pkg', 'debian')
     os.makedirs(debdest)
     debopts = json.load(open(op.join(debskel, 'dupeguru.json')))
-    for fn in ['compat', 'copyright', 'dirs', 'rules']:
+    for fn in ['compat', 'copyright', 'dirs', 'rules', 'source']:
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, 'control'), op.join(debdest, 'control'), **debopts)
     filereplace(op.join(debskel, 'Makefile'), op.join(destpath, 'Makefile'), **debopts)
@@ -71,13 +71,13 @@ def package_debian_distribution(distribution):
     )
     shutil.copy(op.join('images', 'dgse_logo_128.png'), srcpath)
     os.chdir(destpath)
-    cmd = "dpkg-buildpackage -S"
+    cmd = "dpkg-buildpackage -S -us -uc"
     os.system(cmd)
     os.chdir('../..')
 
 def package_debian():
-    print("Packaging for Ubuntu")
-    for distribution in ['trusty', 'xenial']:
+    print("Packaging for Debian/Ubuntu")
+    for distribution in ['unstable']:
         package_debian_distribution(distribution)
 
 def package_arch():
@@ -94,7 +94,7 @@ def package_arch():
     debopts = json.load(open(op.join('pkg', 'arch', 'dupeguru.json')))
     filereplace(op.join('pkg', 'arch', 'dupeguru.desktop'), op.join(srcpath, 'dupeguru.desktop'), **debopts)
 
-def package_source_tgz():
+def package_source_txz():
     print("Creating git archive")
     app_version = get_module_version('core')
     name = 'dupeguru-src-{}.tar'.format(app_version)
@@ -111,7 +111,7 @@ def package_source_tgz():
         print_and_do('git archive -o {} --prefix {}/ HEAD'.format(archive_path, submodule))
         os.chdir(base_path)
         print_and_do('tar -A {} -f {}'.format(archive_path, dest))
-    print_and_do('gzip {}'.format(dest))
+    print_and_do('xz {}'.format(dest))
 
 def package_windows():
     app_version = get_module_version('core')
@@ -156,7 +156,7 @@ def main():
     args = parse_args()
     if args.src_pkg:
         print("Creating source package for dupeGuru")
-        package_source_tgz()
+        package_source_txz()
         return
     print("Packaging dupeGuru with UI qt")
     if sys.platform == 'win32':

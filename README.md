@@ -58,9 +58,9 @@ dupeGuru is built with "make":
     $ make
     $ make run
 
-### Generate Ubuntu packages
+### Generate Debian/Ubuntu package
 
-    $ bash -c "pyvenv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt && python3 build.py --clean && python3 package.py"
+    $ bash -c "python3 -m venv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt && python3 build.py --clean && python3 package.py"
 
 ### Running tests
 
