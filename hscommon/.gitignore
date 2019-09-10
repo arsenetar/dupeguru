@@ -1,0 +1,5 @@
+*.pyc
+*.mo
+*.so
+.DS_Store
+/docs_html

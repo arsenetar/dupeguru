@@ -1,0 +1,136 @@
+#
+# Translators:
+# Victor Figueiredo <contact@brlingo.com>, 2013-2014
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2014-04-30 18:58+0000\n"
+"Last-Translator: Victor Figueiredo <contact@brlingo.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/hsoft/hscommon/"
+"language/pt_BR/)\n"
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: qtlib/about_box.py:29
+msgid "About {}"
+msgstr "Sobre o {}"
+
+#: qtlib/about_box.py:49
+msgid "Version {}"
+msgstr "Versão {}"
+
+#: qtlib/about_box.py:53
+msgid "Licensed under GPLv3"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:39
+msgid "Error Report"
+msgstr "Relatório de Erro"
+
+#: qtlib/error_report_dialog.py:43
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Algo deu errado. Deseja relatar o erro?"
+
+#: qtlib/error_report_dialog.py:49
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error "
+"traceback above and paste it in a new issue (bonus point if you run a search "
+"to make sure the issue doesn't already exist). What usually really helps is "
+"if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be "
+"in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Os erros devem ser relatados como problemas no Github. Copie o código de "
+"rastreamento acima e cole-o em um problema novo (pontos bônus caso você "
+"busque o erro, certificando-se de que ele ainda não exista). O que mais "
+"ajuda é adicionar uma descrição de como o erro ocorreu. Obrigado!\n"
+"\n"
+"Embora o aplicativo continue a funcionar após esse erro, ele pode estar "
+"“instável”. É recomendável reiniciá-lo."
+
+#: qtlib/error_report_dialog.py:64
+msgid "Close"
+msgstr "Fechar"
+
+#: qtlib/error_report_dialog.py:68
+msgid "Go to Github"
+msgstr "Ir para o Github"
+
+#: qtlib/preferences.py:18
+msgid "English"
+msgstr "Inglês"
+
+#: qtlib/preferences.py:19
+msgid "French"
+msgstr "Francês"
+
+#: qtlib/preferences.py:20
+msgid "German"
+msgstr "Alemão"
+
+#: qtlib/preferences.py:21
+msgid "Greek"
+msgstr ""
+
+#: qtlib/preferences.py:22
+msgid "Chinese (Simplified)"
+msgstr "Chinês (Simplificado)"
+
+#: qtlib/preferences.py:23
+msgid "Czech"
+msgstr "Tcheco"
+
+#: qtlib/preferences.py:24
+msgid "Italian"
+msgstr "Italiano"
+
+#: qtlib/preferences.py:25
+msgid "Armenian"
+msgstr "Armênio"
+
+#: qtlib/preferences.py:26
+msgid "Korean"
+msgstr ""
+
+#: qtlib/preferences.py:27
+msgid "Russian"
+msgstr "Russo"
+
+#: qtlib/preferences.py:28
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: qtlib/preferences.py:29
+msgid "Dutch"
+msgstr "Holandês"
+
+#: qtlib/preferences.py:30
+#, fuzzy
+msgid "Polish"
+msgstr "Inglês"
+
+#: qtlib/preferences.py:31
+msgid "Brazilian"
+msgstr "Português Brasileiro"
+
+#: qtlib/preferences.py:32
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: qtlib/preferences.py:33
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: qtlib/recent.py:53
+msgid "Clear List"
+msgstr "Limpar Lista"
+
+#: qtlib/search_edit.py:77
+msgid "Search..."
+msgstr "Buscar…"
+
+#~ msgid "Copyright Hardcoded Software 2014"
+#~ msgstr "Copyright Hardcoded Software 2014"

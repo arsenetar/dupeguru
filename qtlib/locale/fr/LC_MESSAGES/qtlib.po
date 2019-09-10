@@ -1,0 +1,121 @@
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: hscommon\n"
+"PO-Revision-Date: 2013-04-28 18:31+0000\n"
+"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: qtlib/about_box.py:29
+msgid "About {}"
+msgstr ""
+
+#: qtlib/about_box.py:49
+msgid "Version {}"
+msgstr ""
+
+#: qtlib/about_box.py:53
+msgid "Licensed under GPLv3"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:39
+msgid "Error Report"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:43
+msgid "Something went wrong. How about reporting the error?"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:49
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error "
+"traceback above and paste it in a new issue (bonus point if you run a search "
+"to make sure the issue doesn't already exist). What usually really helps is "
+"if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be "
+"in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: qtlib/error_report_dialog.py:64
+msgid "Close"
+msgstr ""
+
+#: qtlib/error_report_dialog.py:68
+msgid "Go to Github"
+msgstr ""
+
+#: qtlib/preferences.py:18
+msgid "English"
+msgstr "Anglais"
+
+#: qtlib/preferences.py:19
+msgid "French"
+msgstr "Français"
+
+#: qtlib/preferences.py:20
+msgid "German"
+msgstr "Allemand"
+
+#: qtlib/preferences.py:21
+msgid "Greek"
+msgstr ""
+
+#: qtlib/preferences.py:22
+msgid "Chinese (Simplified)"
+msgstr "Chinois (Simplifié)"
+
+#: qtlib/preferences.py:23
+msgid "Czech"
+msgstr "Tchèque"
+
+#: qtlib/preferences.py:24
+msgid "Italian"
+msgstr "Italien"
+
+#: qtlib/preferences.py:25
+msgid "Armenian"
+msgstr "Arménien"
+
+#: qtlib/preferences.py:26
+msgid "Korean"
+msgstr ""
+
+#: qtlib/preferences.py:27
+msgid "Russian"
+msgstr "Russe"
+
+#: qtlib/preferences.py:28
+msgid "Ukrainian"
+msgstr "Ukrainien"
+
+#: qtlib/preferences.py:29
+msgid "Dutch"
+msgstr "Néerlandais"
+
+#: qtlib/preferences.py:30
+msgid "Polish"
+msgstr ""
+
+#: qtlib/preferences.py:31
+msgid "Brazilian"
+msgstr ""
+
+#: qtlib/preferences.py:32
+msgid "Spanish"
+msgstr ""
+
+#: qtlib/preferences.py:33
+msgid "Vietnamese"
+msgstr ""
+
+#: qtlib/recent.py:53
+msgid "Clear List"
+msgstr "Vider la liste"
+
+#: qtlib/search_edit.py:77
+msgid "Search..."
+msgstr "Recherche..."
