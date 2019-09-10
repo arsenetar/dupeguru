@@ -9,7 +9,7 @@ PREFIX ?= /usr/local
 # - compile generates .pyd instead of .so
 # - venv with --sytem-site-packages has issues on windows as well...
 
-ifeq ($(shell uname -o), Msys)
+ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows)
 	BIN = Scripts
 	SO = *.pyd
 	VENV_OPTIONS = 
