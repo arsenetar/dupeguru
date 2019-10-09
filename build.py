@@ -131,6 +131,9 @@ def build_normal():
 
 def main():
     options = parse_args()
+    if options.clean:
+        if op.exists('build'):
+            shutil.rmtree('build')
     if not op.exists('build'):
         os.mkdir('build')
     if options.doc:

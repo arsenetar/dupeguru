@@ -1,10 +1,12 @@
 Source: {pkgname}
 Section: devel
 Priority: extra
-Maintainer: Virgil Dupras <hsoft@hardcoded.net>
+Maintainer: Virgil Dupras <hsoft@hardcoded.net>, Eugene San (eugenesan) <eugenesan@gmail.com>
 Build-Depends: debhelper (>= 7), python3-dev, python3-setuptools
 Standards-Version: 3.9.2
-Homepage: http://www.hardcoded.net
+Homepage: https://dupeguru.voltaicideas.net
+Vcs-Browser: https://github.com/arsenetar/dupeguru
+Vcs-Git: https://github.com/arsenetar/dupeguru.git
 
 Package: {pkgname}
 Architecture: {arch}
