@@ -244,7 +244,7 @@ def build_debian_changelog(changelogpath, destfile, pkgname, from_version=None,
         result = desc.split('*')
         return [s.strip() for s in result if s.strip()]
 
-    ENTRY_MODEL = "{pkg} ({version}~{distribution}) {distribution}; urgency=low\n\n{changes}\n -- Virgil Dupras <hsoft@hardcoded.net>  {date}\n\n"
+    ENTRY_MODEL = "{pkg} ({version}-1) {distribution}; urgency=low\n\n{changes}\n -- Virgil Dupras <hsoft@hardcoded.net>  {date}\n\n"
     CHANGE_MODEL = "  * {description}\n"
     changelogs = read_changelog_file(changelogpath)
     if from_version:
