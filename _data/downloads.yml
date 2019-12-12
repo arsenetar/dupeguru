@@ -10,7 +10,7 @@ oses:
     icon: linux
     packages:
       - arch: x32, x64
-        link: https://launchpad.net/~hsoft/+archive/ppa/+packages
+        link: https://launchpad.net/~dupeguru/+archive/ubuntu/ppa/+packages
   - name: OS X
     icon: apple
     packages:
