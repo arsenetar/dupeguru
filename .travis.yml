@@ -19,7 +19,8 @@ matrix:
                   python: "3.7"
                   env: "PATH=/c/python37:/c/python37/Scripts:$PATH"
                   before_install:
-                          - choco install python make
+                          - choco install python --version=3.7.6
+                          - choco install make
                           - cp /c/python37/python.exe /c/python37/python3.exe
                   before_script:
                           - pip3 install -r requirements-windows.txt

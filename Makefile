@@ -34,7 +34,6 @@ endif
 
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
-submodules_target = hscommon/__init__.py
 
 packages = hscommon qtlib core qt
 localedirs = $(wildcard locale/*/LC_MESSAGES)
@@ -64,12 +63,7 @@ endif
 	@${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 || \
 		{ echo "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
 
-# Ensure that submodules are initialized
-$(submodules_target) :
-	git submodule init
-	git submodule update
-
-env : | $(submodules_target) reqs
+env : | reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
 	${PYTHON} -m venv env
