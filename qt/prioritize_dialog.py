@@ -8,8 +8,19 @@
 
 from PyQt5.QtCore import Qt, QMimeData, QByteArray
 from PyQt5.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QListView,
-    QDialogButtonBox, QAbstractItemView, QLabel, QStyle, QSplitter, QWidget, QSizePolicy
+    QDialog,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QComboBox,
+    QListView,
+    QDialogButtonBox,
+    QAbstractItemView,
+    QLabel,
+    QStyle,
+    QSplitter,
+    QWidget,
+    QSizePolicy,
 )
 
 from hscommon.trans import trget
@@ -17,9 +28,10 @@ from qtlib.selectable_list import ComboboxModel, ListviewModel
 from qtlib.util import verticalSpacer
 from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 
-tr = trget('ui')
+tr = trget("ui")
 
-MIME_INDEXES = 'application/dupeguru.rowindexes'
+MIME_INDEXES = "application/dupeguru.rowindexes"
+
 
 class PrioritizationList(ListviewModel):
     def flags(self, index):
@@ -27,7 +39,7 @@ class PrioritizationList(ListviewModel):
             return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled
 
-    #--- Drag & Drop
+    # --- Drag & Drop
     def dropMimeData(self, mimeData, action, row, column, parentIndex):
         if not mimeData.hasFormat(MIME_INDEXES):
             return False
@@ -36,13 +48,13 @@ class PrioritizationList(ListviewModel):
         if parentIndex.isValid():
             return False
         strMimeData = bytes(mimeData.data(MIME_INDEXES)).decode()
-        indexes = list(map(int, strMimeData.split(',')))
+        indexes = list(map(int, strMimeData.split(",")))
         self.model.move_indexes(indexes, row)
         return True
 
     def mimeData(self, indexes):
         rows = {str(index.row()) for index in indexes}
-        data = ','.join(rows)
+        data = ",".join(rows)
         mimeData = QMimeData()
         mimeData.setData(MIME_INDEXES, QByteArray(data.encode()))
         return mimeData
@@ -53,14 +65,19 @@ class PrioritizationList(ListviewModel):
     def supportedDropActions(self):
         return Qt.MoveAction
 
+
 class PrioritizeDialog(QDialog):
     def __init__(self, parent, app, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.model = PrioritizeDialogModel(app=app.model)
-        self.categoryList = ComboboxModel(model=self.model.category_list, view=self.categoryCombobox)
-        self.criteriaList = ListviewModel(model=self.model.criteria_list, view=self.criteriaListView)
+        self.categoryList = ComboboxModel(
+            model=self.model.category_list, view=self.categoryCombobox
+        )
+        self.criteriaList = ListviewModel(
+            model=self.model.criteria_list, view=self.criteriaListView
+        )
         self.prioritizationList = PrioritizationList(
             model=self.model.prioritization_list, view=self.prioritizationListView
         )
@@ -75,7 +92,7 @@ class PrioritizeDialog(QDialog):
         self.setWindowTitle(tr("Re-Prioritize duplicates"))
         self.resize(700, 400)
 
-        #widgets
+        # widgets
         msg = tr(
             "Add criteria to the right box and click OK to send the dupes that correspond the "
             "best to these criteria to their respective group's "
@@ -85,15 +102,19 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
-        self.addCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowRight), "")
-        self.removeCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowLeft), "")
+        self.addCriteriaButton = QPushButton(
+            self.style().standardIcon(QStyle.SP_ArrowRight), ""
+        )
+        self.removeCriteriaButton = QPushButton(
+            self.style().standardIcon(QStyle.SP_ArrowLeft), ""
+        )
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
         self.prioritizationListView.setDragEnabled(True)
         self.prioritizationListView.setDragDropMode(QAbstractItemView.InternalMove)
         self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
 
         # layout
         self.mainLayout = QVBoxLayout(self)

@@ -21,14 +21,16 @@ from qt.platform import BASE_PATH
 from core import __version__, __appname__
 
 # SIGQUIT is not defined on Windows
-if sys.platform == 'win32':
+if sys.platform == "win32":
     from signal import signal, SIGINT, SIGTERM
+
     SIGQUIT = SIGTERM
 else:
     from signal import signal, SIGINT, SIGTERM, SIGQUIT
 
 global dgapp
 dgapp = None
+
 
 def signalHandler(sig, frame):
     global dgapp
@@ -37,20 +39,22 @@ def signalHandler(sig, frame):
     if sig in (SIGINT, SIGTERM, SIGQUIT):
         dgapp.SIGTERM.emit()
 
+
 def setUpSignals():
-    signal(SIGINT,  signalHandler)
+    signal(SIGINT, signalHandler)
     signal(SIGTERM, signalHandler)
     signal(SIGQUIT, signalHandler)
 
+
 def main():
     app = QApplication(sys.argv)
-    QCoreApplication.setOrganizationName('Hardcoded Software')
+    QCoreApplication.setOrganizationName("Hardcoded Software")
     QCoreApplication.setApplicationName(__appname__)
     QCoreApplication.setApplicationVersion(__version__)
     setupQtLogging()
     settings = QSettings()
-    lang = settings.value('Language')
-    locale_folder = op.join(BASE_PATH, 'locale')
+    lang = settings.value("Language")
+    locale_folder = op.join(BASE_PATH, "locale")
     install_gettext_trans_under_qt(locale_folder, lang)
     # Handle OS signals
     setUpSignals()
@@ -58,16 +62,18 @@ def main():
     # required because Python cannot handle signals while the Qt event loop is
     # running.
     from PyQt5.QtCore import QTimer
+
     timer = QTimer()
     timer.start(500)
     timer.timeout.connect(lambda: None)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
     from qt.app import DupeGuru
+
     app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
     global dgapp
     dgapp = DupeGuru()
-    install_excepthook('https://github.com/hsoft/dupeguru/issues')
+    install_excepthook("https://github.com/hsoft/dupeguru/issues")
     result = app.exec()
     # I was getting weird crashes when quitting under Windows, and manually deleting main app
     # references with gc.collect() in between seems to fix the problem.
@@ -76,6 +82,7 @@ def main():
     del app
     gc.collect()
     return result
+
 
 if __name__ == "__main__":
     sys.exit(main())

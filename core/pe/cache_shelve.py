@@ -12,29 +12,36 @@ from collections import namedtuple
 
 from .cache import string_to_colors, colors_to_string
 
+
 def wrap_path(path):
-    return 'path:{}'.format(path)
+    return "path:{}".format(path)
+
 
 def unwrap_path(key):
     return key[5:]
 
+
 def wrap_id(path):
-    return 'id:{}'.format(path)
+    return "id:{}".format(path)
+
 
 def unwrap_id(key):
     return int(key[3:])
 
-CacheRow = namedtuple('CacheRow', 'id path blocks mtime')
+
+CacheRow = namedtuple("CacheRow", "id path blocks mtime")
+
 
 class ShelveCache:
     """A class to cache picture blocks in a shelve backend.
     """
+
     def __init__(self, db=None, readonly=False):
         self.istmp = db is None
         if self.istmp:
             self.dtmp = tempfile.mkdtemp()
-            self.ftmp = db = op.join(self.dtmp, 'tmpdb')
-        flag = 'r' if readonly else 'c'
+            self.ftmp = db = op.join(self.dtmp, "tmpdb")
+        flag = "r" if readonly else "c"
         self.shelve = shelve.open(db, flag)
         self.maxid = self._compute_maxid()
 
@@ -54,10 +61,10 @@ class ShelveCache:
         return string_to_colors(self.shelve[skey].blocks)
 
     def __iter__(self):
-        return (unwrap_path(k) for k in self.shelve if k.startswith('path:'))
+        return (unwrap_path(k) for k in self.shelve if k.startswith("path:"))
 
     def __len__(self):
-        return sum(1 for k in self.shelve if k.startswith('path:'))
+        return sum(1 for k in self.shelve if k.startswith("path:"))
 
     def __setitem__(self, path_str, blocks):
         blocks = colors_to_string(blocks)
@@ -74,7 +81,9 @@ class ShelveCache:
         self.shelve[wrap_id(rowid)] = wrap_path(path_str)
 
     def _compute_maxid(self):
-        return max((unwrap_id(k) for k in self.shelve if k.startswith('id:')), default=1)
+        return max(
+            (unwrap_id(k) for k in self.shelve if k.startswith("id:")), default=1
+        )
 
     def _get_new_id(self):
         self.maxid += 1
@@ -133,4 +142,3 @@ class ShelveCache:
                 # #402 and #439. I don't think it hurts to silently ignore the error, so that's
                 # what we do
                 pass
-

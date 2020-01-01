@@ -8,6 +8,7 @@
 
 from PyQt5.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
 
+
 class SelectableList(QAbstractListModel):
     def __init__(self, model, view, **kwargs):
         super().__init__(**kwargs)
@@ -17,7 +18,7 @@ class SelectableList(QAbstractListModel):
         self.view.setModel(self)
         self.model.view = self
 
-    #--- Override
+    # --- Override
     def data(self, index, role):
         if not index.isValid():
             return None
@@ -31,14 +32,14 @@ class SelectableList(QAbstractListModel):
             return 0
         return len(self.model)
 
-    #--- Virtual
+    # --- Virtual
     def _updateSelection(self):
         raise NotImplementedError()
 
     def _restoreSelection(self):
         raise NotImplementedError()
 
-    #--- model --> view
+    # --- model --> view
     def refresh(self):
         self._updating = True
         self.beginResetModel()
@@ -49,12 +50,13 @@ class SelectableList(QAbstractListModel):
     def update_selection(self):
         self._restoreSelection()
 
+
 class ComboboxModel(SelectableList):
     def __init__(self, model, view, **kwargs):
         super().__init__(model, view, **kwargs)
         self.view.currentIndexChanged[int].connect(self.selectionChanged)
 
-    #--- Override
+    # --- Override
     def _updateSelection(self):
         index = self.view.currentIndex()
         if index != self.model.selected_index:
@@ -65,20 +67,24 @@ class ComboboxModel(SelectableList):
         if index is not None:
             self.view.setCurrentIndex(index)
 
-    #--- Events
+    # --- Events
     def selectionChanged(self, index):
         if not self._updating:
             self._updateSelection()
 
+
 class ListviewModel(SelectableList):
     def __init__(self, model, view, **kwargs):
         super().__init__(model, view, **kwargs)
-        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(
-            self.selectionChanged)
+        self.view.selectionModel().selectionChanged[
+            (QItemSelection, QItemSelection)
+        ].connect(self.selectionChanged)
 
-    #--- Override
+    # --- Override
     def _updateSelection(self):
-        newIndexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
+        newIndexes = [
+            modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()
+        ]
         if newIndexes != self.model.selected_indexes:
             self.model.select(newIndexes)
 
@@ -86,13 +92,17 @@ class ListviewModel(SelectableList):
         newSelection = QItemSelection()
         for index in self.model.selected_indexes:
             newSelection.select(self.createIndex(index, 0), self.createIndex(index, 0))
-        self.view.selectionModel().select(newSelection, QItemSelectionModel.ClearAndSelect)
+        self.view.selectionModel().select(
+            newSelection, QItemSelectionModel.ClearAndSelect
+        )
         if len(newSelection.indexes()):
             currentIndex = newSelection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(currentIndex, QItemSelectionModel.Current)
+            self.view.selectionModel().setCurrentIndex(
+                currentIndex, QItemSelectionModel.Current
+            )
             self.view.scrollTo(currentIndex)
-    #--- Events
+
+    # --- Events
     def selectionChanged(self, index):
         if not self._updating:
             self._updateSelection()
-

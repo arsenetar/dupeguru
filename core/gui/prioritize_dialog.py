@@ -9,6 +9,7 @@
 from hscommon.gui.base import GUIObject
 from hscommon.gui.selectable_list import GUISelectableList
 
+
 class CriterionCategoryList(GUISelectableList):
     def __init__(self, dialog):
         self.dialog = dialog
@@ -17,6 +18,7 @@ class CriterionCategoryList(GUISelectableList):
     def _update_selection(self):
         self.dialog.select_category(self.dialog.categories[self.selected_index])
         GUISelectableList._update_selection(self)
+
 
 class PrioritizationList(GUISelectableList):
     def __init__(self, dialog):
@@ -41,6 +43,7 @@ class PrioritizationList(GUISelectableList):
             del prilist[i]
         self._refresh_contents()
 
+
 class PrioritizeDialog(GUIObject):
     def __init__(self, app):
         GUIObject.__init__(self)
@@ -52,15 +55,15 @@ class PrioritizeDialog(GUIObject):
         self.prioritizations = []
         self.prioritization_list = PrioritizationList(self)
 
-    #--- Override
+    # --- Override
     def _view_updated(self):
         self.category_list.select(0)
 
-    #--- Private
+    # --- Private
     def _sort_key(self, dupe):
         return tuple(crit.sort_key(dupe) for crit in self.prioritizations)
 
-    #--- Public
+    # --- Public
     def select_category(self, category):
         self.criteria = category.criteria_list()
         self.criteria_list[:] = [c.display_value for c in self.criteria]

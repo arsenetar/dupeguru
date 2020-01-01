@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app # noqa
+from hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app  # noqa
 from hscommon.path import Path
 from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
@@ -16,6 +16,7 @@ from ..engine import getwords
 from ..app import DupeGuru as DupeGuruBase
 from ..gui.result_table import ResultTable as ResultTableBase
 from ..gui.prioritize_dialog import PrioritizeDialog
+
 
 class DupeGuruView:
     JOB = nulljob
@@ -39,28 +40,32 @@ class DupeGuruView:
         self.messages.append(msg)
 
     def ask_yes_no(self, prompt):
-        return True # always answer yes
+        return True  # always answer yes
 
     def create_results_window(self):
         pass
 
+
 class ResultTable(ResultTableBase):
     COLUMNS = [
-        Column('marked', ''),
-        Column('name', 'Filename'),
-        Column('folder_path', 'Directory'),
-        Column('size', 'Size (KB)'),
-        Column('extension', 'Kind'),
+        Column("marked", ""),
+        Column("name", "Filename"),
+        Column("folder_path", "Directory"),
+        Column("size", "Size (KB)"),
+        Column("extension", "Kind"),
     ]
-    DELTA_COLUMNS = {'size', }
+    DELTA_COLUMNS = {
+        "size",
+    }
+
 
 class DupeGuru(DupeGuruBase):
-    NAME = 'dupeGuru'
-    METADATA_TO_READ = ['size']
+    NAME = "dupeGuru"
+    METADATA_TO_READ = ["size"]
 
     def __init__(self):
         DupeGuruBase.__init__(self, DupeGuruView())
-        self.appdata = '/tmp'
+        self.appdata = "/tmp"
         self._recreate_result_table()
 
     def _prioritization_categories(self):
@@ -78,7 +83,7 @@ class NamedObject:
     def __init__(self, name="foobar", with_words=False, size=1, folder=None):
         self.name = name
         if folder is None:
-            folder = 'basepath'
+            folder = "basepath"
         self._folder = Path(folder)
         self.size = size
         self.md5partial = name
@@ -88,7 +93,7 @@ class NamedObject:
         self.is_ref = False
 
     def __bool__(self):
-        return False #Make sure that operations are made correctly when the bool value of files is false.
+        return False  # Make sure that operations are made correctly when the bool value of files is false.
 
     def get_display_info(self, group, delta):
         size = self.size
@@ -97,10 +102,10 @@ class NamedObject:
             r = group.ref
             size -= r.size
         return {
-            'name': self.name,
-            'folder_path': str(self.folder_path),
-            'size': format_size(size, 0, 1, False),
-            'extension': self.extension if hasattr(self, 'extension') else '---',
+            "name": self.name,
+            "folder_path": str(self.folder_path),
+            "size": format_size(size, 0, 1, False),
+            "extension": self.extension if hasattr(self, "extension") else "---",
         }
 
     @property
@@ -115,6 +120,7 @@ class NamedObject:
     def extension(self):
         return get_file_ext(self.name)
 
+
 # Returns a group set that looks like that:
 # "foo bar" (1)
 #   "bar bleh" (1024)
@@ -127,21 +133,24 @@ def GetTestGroups():
         NamedObject("bar bleh"),
         NamedObject("foo bleh"),
         NamedObject("ibabtu"),
-        NamedObject("ibabtu")
+        NamedObject("ibabtu"),
     ]
     objects[1].size = 1024
-    matches = engine.getmatches(objects) #we should have 5 matches
-    groups = engine.get_groups(matches) #We should have 2 groups
+    matches = engine.getmatches(objects)  # we should have 5 matches
+    groups = engine.get_groups(matches)  # We should have 2 groups
     for g in groups:
-        g.prioritize(lambda x: objects.index(x)) #We want the dupes to be in the same order as the list is
-    groups.sort(key=len, reverse=True) # We want the group with 3 members to be first.
+        g.prioritize(
+            lambda x: objects.index(x)
+        )  # We want the dupes to be in the same order as the list is
+    groups.sort(key=len, reverse=True)  # We want the group with 3 members to be first.
     return (objects, matches, groups)
+
 
 class TestApp(TestAppBase):
     def __init__(self):
         def link_gui(gui):
             gui.view = self.make_logger()
-            if hasattr(gui, 'columns'): # tables
+            if hasattr(gui, "columns"):  # tables
                 gui.columns.view = self.make_logger()
             return gui
 
@@ -166,7 +175,7 @@ class TestApp(TestAppBase):
         # rtable is a property because its instance can be replaced during execution
         return self.app.result_table
 
-    #--- Helpers
+    # --- Helpers
     def select_pri_criterion(self, name):
         # Select a main prioritize criterion by name instead of by index. Makes tests more
         # maintainable.

@@ -11,6 +11,7 @@ from hscommon.util import format_size
 from core import fs
 from core.util import format_timestamp, format_perc, format_words, format_dupe_count
 
+
 def get_display_info(dupe, group, delta):
     size = dupe.size
     mtime = dupe.mtime
@@ -26,15 +27,16 @@ def get_display_info(dupe, group, delta):
         percentage = group.percentage
         dupe_count = len(group.dupes)
     return {
-        'name': dupe.name,
-        'folder_path': str(dupe.folder_path),
-        'size': format_size(size, 0, 1, False),
-        'extension': dupe.extension,
-        'mtime': format_timestamp(mtime, delta and m),
-        'percentage': format_perc(percentage),
-        'words': format_words(dupe.words) if hasattr(dupe, 'words') else '',
-        'dupe_count': format_dupe_count(dupe_count),
+        "name": dupe.name,
+        "folder_path": str(dupe.folder_path),
+        "size": format_size(size, 0, 1, False),
+        "extension": dupe.extension,
+        "mtime": format_timestamp(mtime, delta and m),
+        "percentage": format_perc(percentage),
+        "words": format_words(dupe.words) if hasattr(dupe, "words") else "",
+        "dupe_count": format_dupe_count(dupe_count),
     }
+
 
 class File(fs.File):
     def get_display_info(self, group, delta):
@@ -44,4 +46,3 @@ class File(fs.File):
 class Folder(fs.Folder):
     def get_display_info(self, group, delta):
         return get_display_info(self, group, delta)
-

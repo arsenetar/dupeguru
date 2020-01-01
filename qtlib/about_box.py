@@ -8,16 +8,29 @@
 
 from PyQt5.QtCore import Qt, QCoreApplication
 from PyQt5.QtGui import QPixmap, QFont
-from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QSizePolicy, QHBoxLayout, QVBoxLayout,
-    QLabel, QApplication)
+from PyQt5.QtWidgets import (
+    QDialog,
+    QDialogButtonBox,
+    QSizePolicy,
+    QHBoxLayout,
+    QVBoxLayout,
+    QLabel,
+    QApplication,
+)
 
 from hscommon.trans import trget
 
-tr = trget('qtlib')
+tr = trget("qtlib")
+
 
 class AboutBox(QDialog):
     def __init__(self, parent, app, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.MSWindowsFixedSizeDialogHint
+        flags = (
+            Qt.CustomizeWindowHint
+            | Qt.WindowTitleHint
+            | Qt.WindowSystemMenuHint
+            | Qt.MSWindowsFixedSizeDialogHint
+        )
         super().__init__(parent, flags, **kwargs)
         self.app = app
         self._setupUi()
@@ -26,7 +39,9 @@ class AboutBox(QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
     def _setupUi(self):
-        self.setWindowTitle(tr("About {}").format(QCoreApplication.instance().applicationName()))
+        self.setWindowTitle(
+            tr("About {}").format(QCoreApplication.instance().applicationName())
+        )
         self.resize(400, 190)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -35,7 +50,7 @@ class AboutBox(QDialog):
         self.setSizePolicy(sizePolicy)
         self.horizontalLayout = QHBoxLayout(self)
         self.logoLabel = QLabel(self)
-        self.logoLabel.setPixmap(QPixmap(':/%s_big' % self.app.LOGO_NAME))
+        self.logoLabel.setPixmap(QPixmap(":/%s_big" % self.app.LOGO_NAME))
         self.horizontalLayout.addWidget(self.logoLabel)
         self.verticalLayout = QVBoxLayout()
         self.nameLabel = QLabel(self)
@@ -46,7 +61,9 @@ class AboutBox(QDialog):
         self.nameLabel.setText(QCoreApplication.instance().applicationName())
         self.verticalLayout.addWidget(self.nameLabel)
         self.versionLabel = QLabel(self)
-        self.versionLabel.setText(tr("Version {}").format(QCoreApplication.instance().applicationVersion()))
+        self.versionLabel.setText(
+            tr("Version {}").format(QCoreApplication.instance().applicationVersion())
+        )
         self.verticalLayout.addWidget(self.versionLabel)
         self.label_3 = QLabel(self)
         self.verticalLayout.addWidget(self.label_3)
@@ -64,13 +81,14 @@ class AboutBox(QDialog):
         self.horizontalLayout.addLayout(self.verticalLayout)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     app = QApplication([])
-    QCoreApplication.setOrganizationName('Hardcoded Software')
-    QCoreApplication.setApplicationName('FooApp')
-    QCoreApplication.setApplicationVersion('1.2.3')
-    app.LOGO_NAME = ''
+    QCoreApplication.setOrganizationName("Hardcoded Software")
+    QCoreApplication.setApplicationName("FooApp")
+    QCoreApplication.setApplicationVersion("1.2.3")
+    app.LOGO_NAME = ""
     dialog = AboutBox(None, app)
     dialog.show()
     sys.exit(app.exec_())

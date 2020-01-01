@@ -13,25 +13,37 @@ from core.util import format_timestamp, format_perc, format_words, format_dupe_c
 from core import fs
 
 TAG_FIELDS = {
-    'audiosize', 'duration', 'bitrate', 'samplerate', 'title', 'artist',
-    'album', 'genre', 'year', 'track', 'comment'
+    "audiosize",
+    "duration",
+    "bitrate",
+    "samplerate",
+    "title",
+    "artist",
+    "album",
+    "genre",
+    "year",
+    "track",
+    "comment",
 }
+
 
 class MusicFile(fs.File):
     INITIAL_INFO = fs.File.INITIAL_INFO.copy()
-    INITIAL_INFO.update({
-        'audiosize': 0,
-        'bitrate': 0,
-        'duration': 0,
-        'samplerate': 0,
-        'artist': '',
-        'album': '',
-        'title': '',
-        'genre': '',
-        'comment': '',
-        'year': '',
-        'track': 0,
-    })
+    INITIAL_INFO.update(
+        {
+            "audiosize": 0,
+            "bitrate": 0,
+            "duration": 0,
+            "samplerate": 0,
+            "artist": "",
+            "album": "",
+            "title": "",
+            "genre": "",
+            "comment": "",
+            "year": "",
+            "track": 0,
+        }
+    )
     __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
 
     @classmethod
@@ -60,26 +72,26 @@ class MusicFile(fs.File):
         else:
             percentage = group.percentage
             dupe_count = len(group.dupes)
-        dupe_folder_path = getattr(self, 'display_folder_path', self.folder_path)
+        dupe_folder_path = getattr(self, "display_folder_path", self.folder_path)
         return {
-            'name': self.name,
-            'folder_path': str(dupe_folder_path),
-            'size': format_size(size, 2, 2, False),
-            'duration': format_time(duration, with_hours=False),
-            'bitrate': str(bitrate),
-            'samplerate': str(samplerate),
-            'extension': self.extension,
-            'mtime': format_timestamp(mtime, delta and m),
-            'title': self.title,
-            'artist': self.artist,
-            'album': self.album,
-            'genre': self.genre,
-            'year': self.year,
-            'track': str(self.track),
-            'comment': self.comment,
-            'percentage': format_perc(percentage),
-            'words': format_words(self.words) if hasattr(self, 'words') else '',
-            'dupe_count': format_dupe_count(dupe_count),
+            "name": self.name,
+            "folder_path": str(dupe_folder_path),
+            "size": format_size(size, 2, 2, False),
+            "duration": format_time(duration, with_hours=False),
+            "bitrate": str(bitrate),
+            "samplerate": str(samplerate),
+            "extension": self.extension,
+            "mtime": format_timestamp(mtime, delta and m),
+            "title": self.title,
+            "artist": self.artist,
+            "album": self.album,
+            "genre": self.genre,
+            "year": self.year,
+            "track": str(self.track),
+            "comment": self.comment,
+            "percentage": format_perc(percentage),
+            "words": format_words(self.words) if hasattr(self, "words") else "",
+            "dupe_count": format_dupe_count(dupe_count),
         }
 
     def _get_md5partial_offset_and_size(self):
@@ -101,4 +113,3 @@ class MusicFile(fs.File):
             self.comment = f.comment
             self.year = f.year
             self.track = f.track
-

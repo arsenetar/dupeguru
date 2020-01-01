@@ -6,13 +6,20 @@
 
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView, QHBoxLayout, QLabel, QSizePolicy
+from PyQt5.QtWidgets import (
+    QVBoxLayout,
+    QAbstractItemView,
+    QHBoxLayout,
+    QLabel,
+    QSizePolicy,
+)
 
 from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
@@ -33,7 +40,9 @@ class DetailsDialog(DetailsDialogBase):
         sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.selectedImage.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.selectedImage.sizePolicy().hasHeightForWidth()
+        )
         self.selectedImage.setSizePolicy(sizePolicy)
         self.selectedImage.setScaledContents(False)
         self.selectedImage.setAlignment(Qt.AlignCenter)
@@ -42,7 +51,9 @@ class DetailsDialog(DetailsDialogBase):
         sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.referenceImage.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.referenceImage.sizePolicy().hasHeightForWidth()
+        )
         self.referenceImage.setSizePolicy(sizePolicy)
         self.referenceImage.setAlignment(Qt.AlignCenter)
         self.horizontalLayout.addWidget(self.referenceImage)
@@ -77,18 +88,22 @@ class DetailsDialog(DetailsDialogBase):
     def _updateImages(self):
         if self.selectedPixmap is not None:
             target_size = self.selectedImage.size()
-            scaledPixmap = self.selectedPixmap.scaled(target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            scaledPixmap = self.selectedPixmap.scaled(
+                target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
+            )
             self.selectedImage.setPixmap(scaledPixmap)
         else:
             self.selectedImage.setPixmap(QPixmap())
         if self.referencePixmap is not None:
             target_size = self.referenceImage.size()
-            scaledPixmap = self.referencePixmap.scaled(target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            scaledPixmap = self.referencePixmap.scaled(
+                target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
+            )
             self.referenceImage.setPixmap(scaledPixmap)
         else:
             self.referenceImage.setPixmap(QPixmap())
 
-    #--- Override
+    # --- Override
     def resizeEvent(self, event):
         self._updateImages()
 
@@ -101,4 +116,3 @@ class DetailsDialog(DetailsDialogBase):
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
-

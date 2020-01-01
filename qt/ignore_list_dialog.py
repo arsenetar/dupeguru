@@ -7,13 +7,20 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QPushButton, QTableView, QAbstractItemView
+from PyQt5.QtWidgets import (
+    QDialog,
+    QVBoxLayout,
+    QPushButton,
+    QTableView,
+    QAbstractItemView,
+)
 
 from hscommon.trans import trget
 from qtlib.util import horizontalWrap
 from .ignore_list_table import IgnoreListTable
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class IgnoreListDialog(QDialog):
     def __init__(self, parent, model, **kwargs):
@@ -46,13 +53,11 @@ class IgnoreListDialog(QDialog):
         self.clearButton = QPushButton(tr("Clear"))
         self.closeButton = QPushButton(tr("Close"))
         self.verticalLayout.addLayout(
-            horizontalWrap([
-                self.removeSelectedButton, self.clearButton,
-                None, self.closeButton
-            ])
+            horizontalWrap(
+                [self.removeSelectedButton, self.clearButton, None, self.closeButton]
+            )
         )
 
-    #--- model --> view
+    # --- model --> view
     def show(self):
         super().show()
-

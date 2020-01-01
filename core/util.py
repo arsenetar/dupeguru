@@ -8,35 +8,41 @@ import time
 
 from hscommon.util import format_time_decimal
 
+
 def format_timestamp(t, delta):
     if delta:
         return format_time_decimal(t)
     else:
         if t > 0:
-            return time.strftime('%Y/%m/%d %H:%M:%S', time.localtime(t))
+            return time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(t))
         else:
-            return '---'
+            return "---"
+
 
 def format_words(w):
     def do_format(w):
         if isinstance(w, list):
-            return '(%s)' % ', '.join(do_format(item) for item in w)
+            return "(%s)" % ", ".join(do_format(item) for item in w)
         else:
-            return w.replace('\n', ' ')
+            return w.replace("\n", " ")
 
-    return ', '.join(do_format(item) for item in w)
+    return ", ".join(do_format(item) for item in w)
+
 
 def format_perc(p):
     return "%0.0f" % p
 
+
 def format_dupe_count(c):
-    return str(c) if c else '---'
+    return str(c) if c else "---"
+
 
 def cmp_value(dupe, attrname):
-    value = getattr(dupe, attrname, '')
+    value = getattr(dupe, attrname, "")
     return value.lower() if isinstance(value, str) else value
 
-def fix_surrogate_encoding(s, encoding='utf-8'):
+
+def fix_surrogate_encoding(s, encoding="utf-8"):
     # ref #210. It's possible to end up with file paths that, while correct unicode strings, are
     # decoded with the 'surrogateescape' option, which make the string unencodable to utf-8. We fix
     # these strings here by trying to encode them and, if it fails, we do an encode/decode dance
@@ -49,8 +55,6 @@ def fix_surrogate_encoding(s, encoding='utf-8'):
     try:
         s.encode(encoding)
     except UnicodeEncodeError:
-        return s.encode(encoding, 'replace').decode(encoding)
+        return s.encode(encoding, "replace").decode(encoding)
     else:
         return s
-
-

@@ -4,12 +4,15 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+
 def noop(*args, **kwargs):
     pass
+
 
 class NoopGUI:
     def __getattr__(self, func_name):
         return noop
+
 
 class GUIObject:
     """Cross-toolkit "model" representation of a GUI layer object.
@@ -32,6 +35,7 @@ class GUIObject:
     However, sometimes you want to be able to re-bind another view. In this case, set the
     ``multibind`` flag to ``True`` and the safeguard will be disabled.
     """
+
     def __init__(self, multibind=False):
         self._view = None
         self._multibind = multibind
@@ -77,4 +81,3 @@ class GUIObject:
             # Instead of None, we put a NoopGUI() there to avoid rogue view callback raising an
             # exception.
             self._view = NoopGUI()
-

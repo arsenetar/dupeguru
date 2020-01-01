@@ -8,11 +8,16 @@
 from hscommon.trans import trget
 
 from core.prioritize import (
-    KindCategory, FolderCategory, FilenameCategory, NumericalCategory,
-    SizeCategory, MtimeCategory
+    KindCategory,
+    FolderCategory,
+    FilenameCategory,
+    NumericalCategory,
+    SizeCategory,
+    MtimeCategory,
 )
 
-coltr = trget('columns')
+coltr = trget("columns")
+
 
 class DimensionsCategory(NumericalCategory):
     NAME = coltr("Dimensions")
@@ -24,8 +29,13 @@ class DimensionsCategory(NumericalCategory):
         width, height = value
         return (-width, -height)
 
+
 def all_categories():
     return [
-        KindCategory, FolderCategory, FilenameCategory, SizeCategory, DimensionsCategory,
-        MtimeCategory
+        KindCategory,
+        FolderCategory,
+        FilenameCategory,
+        SizeCategory,
+        DimensionsCategory,
+        MtimeCategory,
     ]

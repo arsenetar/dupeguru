@@ -10,13 +10,15 @@ from xml.etree import ElementTree as ET
 
 from hscommon.util import FileOrPath
 
+
 class IgnoreList:
     """An ignore list implementation that is iterable, filterable and exportable to XML.
 
     Call Ignore to add an ignore list entry, and AreIgnore to check if 2 items are in the list.
     When iterated, 2 sized tuples will be returned, the tuples containing 2 items ignored together.
     """
-    #---Override
+
+    # ---Override
     def __init__(self):
         self._ignored = {}
         self._count = 0
@@ -29,7 +31,7 @@ class IgnoreList:
     def __len__(self):
         return self._count
 
-    #---Public
+    # ---Public
     def AreIgnored(self, first, second):
         def do_check(first, second):
             try:
@@ -99,14 +101,14 @@ class IgnoreList:
             root = ET.parse(infile).getroot()
         except Exception:
             return
-        file_elems = (e for e in root if e.tag == 'file')
+        file_elems = (e for e in root if e.tag == "file")
         for fn in file_elems:
-            file_path = fn.get('path')
+            file_path = fn.get("path")
             if not file_path:
                 continue
-            subfile_elems = (e for e in fn if e.tag == 'file')
+            subfile_elems = (e for e in fn if e.tag == "file")
             for sfn in subfile_elems:
-                subfile_path = sfn.get('path')
+                subfile_path = sfn.get("path")
                 if subfile_path:
                     self.Ignore(file_path, subfile_path)
 
@@ -115,15 +117,13 @@ class IgnoreList:
 
         outfile can be a file object or a filename.
         """
-        root = ET.Element('ignore_list')
+        root = ET.Element("ignore_list")
         for filename, subfiles in self._ignored.items():
-            file_node = ET.SubElement(root, 'file')
-            file_node.set('path', filename)
+            file_node = ET.SubElement(root, "file")
+            file_node.set("path", filename)
             for subfilename in subfiles:
-                subfile_node = ET.SubElement(file_node, 'file')
-                subfile_node.set('path', subfilename)
+                subfile_node = ET.SubElement(file_node, "file")
+                subfile_node.set("path", subfilename)
         tree = ET.ElementTree(root)
-        with FileOrPath(outfile, 'wb') as fp:
-            tree.write(fp, encoding='utf-8')
-
-
+        with FileOrPath(outfile, "wb") as fp:
+            tree.write(fp, encoding="utf-8")

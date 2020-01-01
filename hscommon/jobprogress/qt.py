@@ -11,17 +11,18 @@ from PyQt5.QtWidgets import QProgressDialog
 
 from . import performer
 
+
 class Progress(QProgressDialog, performer.ThreadedJobPerformer):
-    finished = pyqtSignal(['QString'])
+    finished = pyqtSignal(["QString"])
 
     def __init__(self, parent):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        QProgressDialog.__init__(self, '', "Cancel", 0, 100, parent, flags)
+        QProgressDialog.__init__(self, "", "Cancel", 0, 100, parent, flags)
         self.setModal(True)
         self.setAutoReset(False)
         self.setAutoClose(False)
         self._timer = QTimer()
-        self._jobid = ''
+        self._jobid = ""
         self._timer.timeout.connect(self.updateProgress)
 
     def updateProgress(self):
@@ -44,9 +45,8 @@ class Progress(QProgressDialog, performer.ThreadedJobPerformer):
     def run(self, jobid, title, target, args=()):
         self._jobid = jobid
         self.reset()
-        self.setLabelText('')
+        self.setLabelText("")
         self.run_threaded(target, args)
         self.setWindowTitle(title)
         self.show()
         self._timer.start(500)
-

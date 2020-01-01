@@ -114,36 +114,42 @@ ROW_TEMPLATE = """
 
 CELL_TEMPLATE = """<td>{value}</td>"""
 
+
 def export_to_xhtml(colnames, rows):
     # a row is a list of values with the first value being a flag indicating if the row should be indented
     if rows:
-        assert len(rows[0]) == len(colnames) + 1 # + 1 is for the "indented" flag
-    colheaders = ''.join(COLHEADERS_TEMPLATE.format(name=name) for name in colnames)
+        assert len(rows[0]) == len(colnames) + 1  # + 1 is for the "indented" flag
+    colheaders = "".join(COLHEADERS_TEMPLATE.format(name=name) for name in colnames)
     rendered_rows = []
     previous_group_id = None
     for row in rows:
         # [2:] is to remove the indented flag + filename
         if row[0] != previous_group_id:
             # We've just changed dupe group, which means that this dupe is a ref. We don't indent it.
-            indented = ''
+            indented = ""
         else:
-            indented = 'indented'
+            indented = "indented"
         filename = row[1]
-        cells = ''.join(CELL_TEMPLATE.format(value=value) for value in row[2:])
-        rendered_rows.append(ROW_TEMPLATE.format(indented=indented, filename=filename, cells=cells))
+        cells = "".join(CELL_TEMPLATE.format(value=value) for value in row[2:])
+        rendered_rows.append(
+            ROW_TEMPLATE.format(indented=indented, filename=filename, cells=cells)
+        )
         previous_group_id = row[0]
-    rendered_rows = ''.join(rendered_rows)
+    rendered_rows = "".join(rendered_rows)
     # The main template can't use format because the css code uses {}
-    content = MAIN_TEMPLATE.replace('$colheaders', colheaders).replace('$rows', rendered_rows)
+    content = MAIN_TEMPLATE.replace("$colheaders", colheaders).replace(
+        "$rows", rendered_rows
+    )
     folder = mkdtemp()
-    destpath = op.join(folder, 'export.htm')
-    fp = open(destpath, 'wt', encoding='utf-8')
+    destpath = op.join(folder, "export.htm")
+    fp = open(destpath, "wt", encoding="utf-8")
     fp.write(content)
     fp.close()
     return destpath
 
+
 def export_to_csv(dest, colnames, rows):
-    writer = csv.writer(open(dest, 'wt', encoding='utf-8'))
+    writer = csv.writer(open(dest, "wt", encoding="utf-8"))
     writer.writerow(["Group ID"] + colnames)
     for row in rows:
         writer.writerow(row)

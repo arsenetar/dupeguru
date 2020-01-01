@@ -6,7 +6,12 @@
 
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
-    QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QSizePolicy,
+    QSpacerItem,
+    QWidget,
 )
 
 from hscommon.trans import trget
@@ -15,7 +20,8 @@ from core.scanner import ScanType
 
 from ..preferences_dialog import PreferencesDialogBase
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class PreferencesDialog(PreferencesDialogBase):
     def _setupPreferenceWidgets(self):
@@ -33,33 +39,40 @@ class PreferencesDialog(PreferencesDialogBase):
         self.horizontalLayout_2.setSpacing(0)
         spacerItem1 = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-        self._setupAddCheckbox('tagTrackBox', tr("Track"), self.widget)
+        self._setupAddCheckbox("tagTrackBox", tr("Track"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagTrackBox)
-        self._setupAddCheckbox('tagArtistBox', tr("Artist"), self.widget)
+        self._setupAddCheckbox("tagArtistBox", tr("Artist"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagArtistBox)
-        self._setupAddCheckbox('tagAlbumBox', tr("Album"), self.widget)
+        self._setupAddCheckbox("tagAlbumBox", tr("Album"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagAlbumBox)
-        self._setupAddCheckbox('tagTitleBox', tr("Title"), self.widget)
+        self._setupAddCheckbox("tagTitleBox", tr("Title"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagTitleBox)
-        self._setupAddCheckbox('tagGenreBox', tr("Genre"), self.widget)
+        self._setupAddCheckbox("tagGenreBox", tr("Genre"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagGenreBox)
-        self._setupAddCheckbox('tagYearBox', tr("Year"), self.widget)
+        self._setupAddCheckbox("tagYearBox", tr("Year"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagYearBox)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self.widgetsVLayout.addWidget(self.widget)
-        self._setupAddCheckbox('wordWeightingBox', tr("Word weighting"))
+        self._setupAddCheckbox("wordWeightingBox", tr("Word weighting"))
         self.widgetsVLayout.addWidget(self.wordWeightingBox)
-        self._setupAddCheckbox('matchSimilarBox', tr("Match similar words"))
+        self._setupAddCheckbox("matchSimilarBox", tr("Match similar words"))
         self.widgetsVLayout.addWidget(self.matchSimilarBox)
-        self._setupAddCheckbox('mixFileKindBox', tr("Can mix file kind"))
+        self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"))
         self.widgetsVLayout.addWidget(self.mixFileKindBox)
-        self._setupAddCheckbox('useRegexpBox', tr("Use regular expressions when filtering"))
+        self._setupAddCheckbox(
+            "useRegexpBox", tr("Use regular expressions when filtering")
+        )
         self.widgetsVLayout.addWidget(self.useRegexpBox)
-        self._setupAddCheckbox('removeEmptyFoldersBox', tr("Remove empty folders on delete or move"))
+        self._setupAddCheckbox(
+            "removeEmptyFoldersBox", tr("Remove empty folders on delete or move")
+        )
         self.widgetsVLayout.addWidget(self.removeEmptyFoldersBox)
-        self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"))
+        self._setupAddCheckbox(
+            "ignoreHardlinkMatches",
+            tr("Ignore duplicates hardlinking to the same file"),
+        )
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"))
+        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self.widgetsVLayout.addWidget(self.debugModeBox)
         self._setupBottomPart()
 
@@ -76,8 +89,10 @@ class PreferencesDialog(PreferencesDialogBase):
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.Music)
         word_based = scan_type in (
-            ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder,
-            ScanType.Tag
+            ScanType.Filename,
+            ScanType.Fields,
+            ScanType.FieldsNoOrder,
+            ScanType.Tag,
         )
         tag_based = scan_type == ScanType.Tag
         self.filterHardnessSlider.setEnabled(word_based)
@@ -99,4 +114,3 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.scan_tag_year = ischecked(self.tagYearBox)
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
-

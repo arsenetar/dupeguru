@@ -7,26 +7,26 @@
 from qtlib.column import Column
 from ..results_model import ResultsModel as ResultsModelBase
 
+
 class ResultsModel(ResultsModelBase):
     COLUMNS = [
-        Column('marked', defaultWidth=30),
-        Column('name', defaultWidth=200),
-        Column('folder_path', defaultWidth=180),
-        Column('size', defaultWidth=60),
-        Column('duration', defaultWidth=60),
-        Column('bitrate', defaultWidth=50),
-        Column('samplerate', defaultWidth=60),
-        Column('extension', defaultWidth=40),
-        Column('mtime', defaultWidth=120),
-        Column('title', defaultWidth=120),
-        Column('artist', defaultWidth=120),
-        Column('album', defaultWidth=120),
-        Column('genre', defaultWidth=80),
-        Column('year', defaultWidth=40),
-        Column('track', defaultWidth=40),
-        Column('comment', defaultWidth=120),
-        Column('percentage', defaultWidth=60),
-        Column('words', defaultWidth=120),
-        Column('dupe_count', defaultWidth=80),
+        Column("marked", defaultWidth=30),
+        Column("name", defaultWidth=200),
+        Column("folder_path", defaultWidth=180),
+        Column("size", defaultWidth=60),
+        Column("duration", defaultWidth=60),
+        Column("bitrate", defaultWidth=50),
+        Column("samplerate", defaultWidth=60),
+        Column("extension", defaultWidth=40),
+        Column("mtime", defaultWidth=120),
+        Column("title", defaultWidth=120),
+        Column("artist", defaultWidth=120),
+        Column("album", defaultWidth=120),
+        Column("genre", defaultWidth=80),
+        Column("year", defaultWidth=40),
+        Column("track", defaultWidth=40),
+        Column("comment", defaultWidth=120),
+        Column("percentage", defaultWidth=60),
+        Column("words", defaultWidth=120),
+        Column("dupe_count", defaultWidth=80),
     ]
-

@@ -36,11 +36,12 @@ from .me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
 from .pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
 from .pe.photo import File as PlatSpecificPhoto
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class DupeGuru(QObject):
-    LOGO_NAME = 'logo_se'
-    NAME = 'dupeGuru'
+    LOGO_NAME = "logo_se"
+    NAME = "dupeGuru"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -49,20 +50,28 @@ class DupeGuru(QObject):
         self.model = DupeGuruModel(view=self)
         self._setup()
 
-    #--- Private
+    # --- Private
     def _setup(self):
         core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
         self._update_options()
-        self.recentResults = Recent(self, 'recentResults')
+        self.recentResults = Recent(self, "recentResults")
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = None
         self.details_dialog = None
         self.directories_dialog = DirectoriesDialog(self)
-        self.progress_window = ProgressWindow(self.directories_dialog, self.model.progress_window)
-        self.problemDialog = ProblemDialog(parent=self.directories_dialog, model=self.model.problem_dialog)
-        self.ignoreListDialog = IgnoreListDialog(parent=self.directories_dialog, model=self.model.ignore_list_dialog)
-        self.deletionOptions = DeletionOptions(parent=self.directories_dialog, model=self.model.deletion_options)
+        self.progress_window = ProgressWindow(
+            self.directories_dialog, self.model.progress_window
+        )
+        self.problemDialog = ProblemDialog(
+            parent=self.directories_dialog, model=self.model.problem_dialog
+        )
+        self.ignoreListDialog = IgnoreListDialog(
+            parent=self.directories_dialog, model=self.model.ignore_list_dialog
+        )
+        self.deletionOptions = DeletionOptions(
+            parent=self.directories_dialog, model=self.model.deletion_options
+        )
         self.about_box = AboutBox(self.directories_dialog, self)
 
         self.directories_dialog.show()
@@ -80,46 +89,70 @@ class DupeGuru(QObject):
         # Setup actions that are common to both the directory dialog and the results window.
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionQuit', 'Ctrl+Q', '', tr("Quit"), self.quitTriggered),
-            ('actionPreferences', 'Ctrl+P', '', tr("Options"), self.preferencesTriggered),
-            ('actionIgnoreList', '', '', tr("Ignore List"), self.ignoreListTriggered),
-            ('actionClearPictureCache', 'Ctrl+Shift+P', '', tr("Clear Picture Cache"), self.clearPictureCacheTriggered),
-            ('actionShowHelp', 'F1', '', tr("dupeGuru Help"), self.showHelpTriggered),
-            ('actionAbout', '', '', tr("About dupeGuru"), self.showAboutBoxTriggered),
-            ('actionOpenDebugLog', '', '', tr("Open Debug Log"), self.openDebugLogTriggered),
+            ("actionQuit", "Ctrl+Q", "", tr("Quit"), self.quitTriggered),
+            (
+                "actionPreferences",
+                "Ctrl+P",
+                "",
+                tr("Options"),
+                self.preferencesTriggered,
+            ),
+            ("actionIgnoreList", "", "", tr("Ignore List"), self.ignoreListTriggered),
+            (
+                "actionClearPictureCache",
+                "Ctrl+Shift+P",
+                "",
+                tr("Clear Picture Cache"),
+                self.clearPictureCacheTriggered,
+            ),
+            ("actionShowHelp", "F1", "", tr("dupeGuru Help"), self.showHelpTriggered),
+            ("actionAbout", "", "", tr("About dupeGuru"), self.showAboutBoxTriggered),
+            (
+                "actionOpenDebugLog",
+                "",
+                "",
+                tr("Open Debug Log"),
+                self.openDebugLogTriggered,
+            ),
         ]
         createActions(ACTIONS, self)
 
     def _update_options(self):
-        self.model.options['mix_file_kind'] = self.prefs.mix_file_kind
-        self.model.options['escape_filter_regexp'] = not self.prefs.use_regexp
-        self.model.options['clean_empty_dirs'] = self.prefs.remove_empty_folders
-        self.model.options['ignore_hardlink_matches'] = self.prefs.ignore_hardlink_matches
-        self.model.options['copymove_dest_type'] = self.prefs.destination_type
-        self.model.options['scan_type'] = self.prefs.get_scan_type(self.model.app_mode)
-        self.model.options['min_match_percentage'] = self.prefs.filter_hardness
-        self.model.options['word_weighting'] = self.prefs.word_weighting
-        self.model.options['match_similar_words'] = self.prefs.match_similar
-        threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
-        self.model.options['size_threshold'] = threshold * 1024 # threshold is in KB. the scanner wants bytes
+        self.model.options["mix_file_kind"] = self.prefs.mix_file_kind
+        self.model.options["escape_filter_regexp"] = not self.prefs.use_regexp
+        self.model.options["clean_empty_dirs"] = self.prefs.remove_empty_folders
+        self.model.options[
+            "ignore_hardlink_matches"
+        ] = self.prefs.ignore_hardlink_matches
+        self.model.options["copymove_dest_type"] = self.prefs.destination_type
+        self.model.options["scan_type"] = self.prefs.get_scan_type(self.model.app_mode)
+        self.model.options["min_match_percentage"] = self.prefs.filter_hardness
+        self.model.options["word_weighting"] = self.prefs.word_weighting
+        self.model.options["match_similar_words"] = self.prefs.match_similar
+        threshold = (
+            self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
+        )
+        self.model.options["size_threshold"] = (
+            threshold * 1024
+        )  # threshold is in KB. the scanner wants bytes
         scanned_tags = set()
         if self.prefs.scan_tag_track:
-            scanned_tags.add('track')
+            scanned_tags.add("track")
         if self.prefs.scan_tag_artist:
-            scanned_tags.add('artist')
+            scanned_tags.add("artist")
         if self.prefs.scan_tag_album:
-            scanned_tags.add('album')
+            scanned_tags.add("album")
         if self.prefs.scan_tag_title:
-            scanned_tags.add('title')
+            scanned_tags.add("title")
         if self.prefs.scan_tag_genre:
-            scanned_tags.add('genre')
+            scanned_tags.add("genre")
         if self.prefs.scan_tag_year:
-            scanned_tags.add('year')
-        self.model.options['scanned_tags'] = scanned_tags
-        self.model.options['match_scaled'] = self.prefs.match_scaled
-        self.model.options['picture_cache_type'] = self.prefs.picture_cache_type
+            scanned_tags.add("year")
+        self.model.options["scanned_tags"] = scanned_tags
+        self.model.options["match_scaled"] = self.prefs.match_scaled
+        self.model.options["picture_cache_type"] = self.prefs.picture_cache_type
 
-    #--- Private
+    # --- Private
     def _get_details_dialog_class(self):
         if self.model.app_mode == AppMode.Picture:
             return DetailsDialogPicture
@@ -136,7 +169,7 @@ class DupeGuru(QObject):
         else:
             return PreferencesDialogStandard
 
-    #--- Public
+    # --- Public
     def add_selected_to_ignore_list(self):
         self.model.add_selected_to_ignore_list()
 
@@ -166,17 +199,19 @@ class DupeGuru(QObject):
         self.model.save()
         QApplication.quit()
 
-    #--- Signals
+    # --- Signals
     willSavePrefs = pyqtSignal()
     SIGTERM = pyqtSignal()
 
-    #--- Events
+    # --- Events
     def finishedLaunching(self):
-        if sys.getfilesystemencoding() == 'ascii':
+        if sys.getfilesystemencoding() == "ascii":
             # No need to localize this, it's a debugging message.
-            msg = "Something is wrong with the way your system locale is set. If the files you're "\
-                "scanning have accented letters, you'll probably get a crash. It is advised that "\
+            msg = (
+                "Something is wrong with the way your system locale is set. If the files you're "
+                "scanning have accented letters, you'll probably get a crash. It is advised that "
                 "you set your system locale properly."
+            )
             QMessageBox.warning(self.directories_dialog, "Wrong Locale", msg)
 
     def clearPictureCacheTriggered(self):
@@ -191,11 +226,13 @@ class DupeGuru(QObject):
         self.model.ignore_list_dialog.show()
 
     def openDebugLogTriggered(self):
-        debugLogPath = op.join(self.model.appdata, 'debug.log')
+        debugLogPath = op.join(self.model.appdata, "debug.log")
         desktop.open_path(debugLogPath)
 
     def preferencesTriggered(self):
-        preferences_dialog = self._get_preferences_dialog_class()(self.directories_dialog, self)
+        preferences_dialog = self._get_preferences_dialog_class()(
+            self.directories_dialog, self
+        )
         preferences_dialog.load()
         result = preferences_dialog.exec()
         if result == QDialog.Accepted:
@@ -212,17 +249,17 @@ class DupeGuru(QObject):
 
     def showHelpTriggered(self):
         base_path = platform.HELP_PATH
-        help_path = op.abspath(op.join(base_path, 'index.html'))
+        help_path = op.abspath(op.join(base_path, "index.html"))
         if op.exists(help_path):
             url = QUrl.fromLocalFile(help_path)
         else:
-            url = QUrl('https://www.hardcoded.net/dupeguru/help/en/')
+            url = QUrl("https://www.hardcoded.net/dupeguru/help/en/")
         QDesktopServices.openUrl(url)
 
     def handleSIGTERM(self):
         self.shutdown()
 
-    #--- model --> view
+    # --- model --> view
     def get_default(self, key):
         return self.prefs.get_value(key)
 
@@ -231,10 +268,10 @@ class DupeGuru(QObject):
 
     def show_message(self, msg):
         window = QApplication.activeWindow()
-        QMessageBox.information(window, '', msg)
+        QMessageBox.information(window, "", msg)
 
     def ask_yes_no(self, prompt):
-        return self.confirm('', prompt)
+        return self.confirm("", prompt)
 
     def create_results_window(self):
         """Creates resultWindow and details_dialog depending on the selected ``app_mode``.
@@ -256,11 +293,13 @@ class DupeGuru(QObject):
 
     def select_dest_folder(self, prompt):
         flags = QFileDialog.ShowDirsOnly
-        return QFileDialog.getExistingDirectory(self.resultWindow, prompt, '', flags)
+        return QFileDialog.getExistingDirectory(self.resultWindow, prompt, "", flags)
 
     def select_dest_file(self, prompt, extension):
         files = tr("{} file (*.{})").format(extension.upper(), extension)
-        destination, chosen_filter = QFileDialog.getSaveFileName(self.resultWindow, prompt, '', files)
-        if not destination.endswith('.{}'.format(extension)):
-            destination = '{}.{}'.format(destination, extension)
+        destination, chosen_filter = QFileDialog.getSaveFileName(
+            self.resultWindow, prompt, "", files
+        )
+        if not destination.endswith(".{}".format(extension)):
+            destination = "{}.{}".format(destination, extension)
         return destination

@@ -11,7 +11,8 @@ from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class DetailsDialog(DetailsDialogBase):
     def _setupUi(self):
@@ -26,4 +27,3 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
-

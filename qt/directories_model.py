@@ -10,18 +10,23 @@ import urllib.parse
 
 from PyQt5.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
 from PyQt5.QtWidgets import (
-    QComboBox, QStyledItemDelegate, QStyle, QStyleOptionComboBox,
-    QStyleOptionViewItem, QApplication
+    QComboBox,
+    QStyledItemDelegate,
+    QStyle,
+    QStyleOptionComboBox,
+    QStyleOptionViewItem,
+    QApplication,
 )
 from PyQt5.QtGui import QBrush
 
 from hscommon.trans import trget
 from qtlib.tree_model import RefNode, TreeModel
 
-tr = trget('ui')
+tr = trget("ui")
 
 HEADERS = [tr("Name"), tr("State")]
 STATES = [tr("Normal"), tr("Reference"), tr("Excluded")]
+
 
 class DirectoriesDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
@@ -39,10 +44,12 @@ class DirectoriesDelegate(QStyledItemDelegate):
             # On OS X (with Qt4.6.0), adding State_Enabled to the flags causes the whole drawing to
             # fail (draw nothing), but it's an OS X only glitch. On Windows, it works alright.
             cboption.state |= QStyle.State_Enabled
-            QApplication.style().drawComplexControl(QStyle.CC_ComboBox, cboption, painter)
+            QApplication.style().drawComplexControl(
+                QStyle.CC_ComboBox, cboption, painter
+            )
             painter.setBrush(option.palette.text())
             rect = QRect(option.rect)
-            rect.setLeft(rect.left()+4)
+            rect.setLeft(rect.left() + 4)
             painter.drawText(rect, Qt.AlignLeft, option.text)
         else:
             super().paint(painter, option, index)
@@ -68,7 +75,9 @@ class DirectoriesModel(TreeModel):
         self.view = view
         self.view.setModel(self)
 
-        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
+        self.view.selectionModel().selectionChanged[
+            (QItemSelection, QItemSelection)
+        ].connect(self.selectionChanged)
 
     def _createNode(self, ref, row):
         return RefNode(self, None, ref, row)
@@ -102,11 +111,11 @@ class DirectoriesModel(TreeModel):
     def dropMimeData(self, mimeData, action, row, column, parentIndex):
         # the data in mimeData is urlencoded **in utf-8**!!! What we do is to decode, the mime data
         # with 'ascii', which works since it's urlencoded. Then, we pass that to urllib.
-        if not mimeData.hasFormat('text/uri-list'):
+        if not mimeData.hasFormat("text/uri-list"):
             return False
-        data = bytes(mimeData.data('text/uri-list')).decode('ascii')
+        data = bytes(mimeData.data("text/uri-list")).decode("ascii")
         unquoted = urllib.parse.unquote(data)
-        urls = unquoted.split('\r\n')
+        urls = unquoted.split("\r\n")
         paths = [QUrl(url).toLocalFile() for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
@@ -129,7 +138,7 @@ class DirectoriesModel(TreeModel):
         return None
 
     def mimeTypes(self):
-        return ['text/uri-list']
+        return ["text/uri-list"]
 
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:
@@ -144,18 +153,20 @@ class DirectoriesModel(TreeModel):
         # work with ActionMove either. So screw that, and accept anything.
         return Qt.ActionMask
 
-    #--- Events
+    # --- Events
     def selectionChanged(self, selected, deselected):
-        newNodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
+        newNodes = [
+            modelIndex.internalPointer().ref
+            for modelIndex in self.view.selectionModel().selectedRows()
+        ]
         self.model.selected_nodes = newNodes
 
-    #--- Signals
+    # --- Signals
     foldersAdded = pyqtSignal(list)
 
-    #--- model --> view
+    # --- model --> view
     def refresh(self):
         self.reset()
 
     def refresh_states(self):
         self.refreshData()
-

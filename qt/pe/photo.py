@@ -12,6 +12,7 @@ from core.pe.photo import Photo as PhotoBase
 
 from .block import getblocks
 
+
 class File(PhotoBase):
     def _plat_get_dimensions(self):
         try:
@@ -53,4 +54,3 @@ class File(PhotoBase):
                 t.rotate(270)
             image = image.transformed(t)
         return getblocks(image, block_count_per_side)
-

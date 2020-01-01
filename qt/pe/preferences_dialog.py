@@ -12,23 +12,33 @@ from core.app import AppMode
 
 from ..preferences_dialog import PreferencesDialogBase
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class PreferencesDialog(PreferencesDialogBase):
     def _setupPreferenceWidgets(self):
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
-        self._setupAddCheckbox('matchScaledBox', tr("Match pictures of different dimensions"))
+        self._setupAddCheckbox(
+            "matchScaledBox", tr("Match pictures of different dimensions")
+        )
         self.widgetsVLayout.addWidget(self.matchScaledBox)
-        self._setupAddCheckbox('mixFileKindBox', tr("Can mix file kind"))
+        self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"))
         self.widgetsVLayout.addWidget(self.mixFileKindBox)
-        self._setupAddCheckbox('useRegexpBox', tr("Use regular expressions when filtering"))
+        self._setupAddCheckbox(
+            "useRegexpBox", tr("Use regular expressions when filtering")
+        )
         self.widgetsVLayout.addWidget(self.useRegexpBox)
-        self._setupAddCheckbox('removeEmptyFoldersBox', tr("Remove empty folders on delete or move"))
+        self._setupAddCheckbox(
+            "removeEmptyFoldersBox", tr("Remove empty folders on delete or move")
+        )
         self.widgetsVLayout.addWidget(self.removeEmptyFoldersBox)
-        self._setupAddCheckbox('ignoreHardlinkMatches', tr("Ignore duplicates hardlinking to the same file"))
+        self._setupAddCheckbox(
+            "ignoreHardlinkMatches",
+            tr("Ignore duplicates hardlinking to the same file"),
+        )
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"))
+        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self.widgetsVLayout.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(QLabel(tr("Picture cache mode:")))
         self.cacheTypeRadio = RadioBox(self, items=["Sqlite", "Shelve"], spread=False)
@@ -37,7 +47,9 @@ class PreferencesDialog(PreferencesDialogBase):
 
     def _load(self, prefs, setchecked):
         setchecked(self.matchScaledBox, prefs.match_scaled)
-        self.cacheTypeRadio.selected_index = 1 if prefs.picture_cache_type == 'shelve' else 0
+        self.cacheTypeRadio.selected_index = (
+            1 if prefs.picture_cache_type == "shelve" else 0
+        )
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.Picture)
@@ -46,5 +58,6 @@ class PreferencesDialog(PreferencesDialogBase):
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
-        prefs.picture_cache_type = 'shelve' if self.cacheTypeRadio.selected_index == 1 else 'sqlite'
-
+        prefs.picture_cache_type = (
+            "shelve" if self.cacheTypeRadio.selected_index == 1 else "sqlite"
+        )

@@ -12,7 +12,8 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButt
 from hscommon.trans import trget
 from qtlib.radio_box import RadioBox
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class DeletionOptions(QDialog):
     def __init__(self, parent, model, **kwargs):
@@ -41,7 +42,9 @@ class DeletionOptions(QDialog):
         self.linkMessageLabel = QLabel(text)
         self.linkMessageLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.linkMessageLabel)
-        self.linkTypeRadio = RadioBox(items=[tr("Symlink"), tr("Hardlink")], spread=False)
+        self.linkTypeRadio = RadioBox(
+            items=[tr("Symlink"), tr("Hardlink")], spread=False
+        )
         self.verticalLayout.addWidget(self.linkTypeRadio)
         if not self.model.supports_links():
             self.linkCheckbox.setEnabled(False)
@@ -60,11 +63,11 @@ class DeletionOptions(QDialog):
         self.buttonBox.addButton(tr("Cancel"), QDialogButtonBox.RejectRole)
         self.verticalLayout.addWidget(self.buttonBox)
 
-    #--- Signals
+    # --- Signals
     def linkCheckboxChanged(self, changed: int):
         self.model.link_deleted = bool(changed)
 
-    #--- model --> view
+    # --- model --> view
     def update_msg(self, msg: str):
         self.msgLabel.setText(msg)
 
@@ -80,4 +83,3 @@ class DeletionOptions(QDialog):
 
     def set_hardlink_option_enabled(self, is_enabled: bool):
         self.linkTypeRadio.setEnabled(is_enabled)
-

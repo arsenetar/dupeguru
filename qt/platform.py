@@ -10,18 +10,18 @@ from hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
 if op.exists(__file__):
     # We want to get the absolute path or our root folder. We know that in that folder we're
     # inside qt/, so we just go back one level.
-    BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..'))
+    BASE_PATH = op.abspath(op.join(op.dirname(__file__), ".."))
 else:
     # We're under a freezed environment. Our base path is ''.
-    BASE_PATH = ''
-HELP_PATH = op.join(BASE_PATH, 'help')
+    BASE_PATH = ""
+HELP_PATH = op.join(BASE_PATH, "help")
 
 if ISWINDOWS:
-    INITIAL_FOLDER_IN_DIALOGS = 'C:\\'
+    INITIAL_FOLDER_IN_DIALOGS = "C:\\"
 elif ISOSX:
-    INITIAL_FOLDER_IN_DIALOGS = '/'
+    INITIAL_FOLDER_IN_DIALOGS = "/"
 elif ISLINUX:
-    INITIAL_FOLDER_IN_DIALOGS = '/'
+    INITIAL_FOLDER_IN_DIALOGS = "/"
 else:
     # unsupported platform, however '/' is a good guess for a path which is available
-    INITIAL_FOLDER_IN_DIALOGS = '/'
+    INITIAL_FOLDER_IN_DIALOGS = "/"

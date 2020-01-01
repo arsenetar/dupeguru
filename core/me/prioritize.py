@@ -8,11 +8,16 @@
 from hscommon.trans import trget
 
 from core.prioritize import (
-    KindCategory, FolderCategory, FilenameCategory, NumericalCategory,
-    SizeCategory, MtimeCategory
+    KindCategory,
+    FolderCategory,
+    FilenameCategory,
+    NumericalCategory,
+    SizeCategory,
+    MtimeCategory,
 )
 
-coltr = trget('columns')
+coltr = trget("columns")
+
 
 class DurationCategory(NumericalCategory):
     NAME = coltr("Duration")
@@ -20,11 +25,13 @@ class DurationCategory(NumericalCategory):
     def extract_value(self, dupe):
         return dupe.duration
 
+
 class BitrateCategory(NumericalCategory):
     NAME = coltr("Bitrate")
 
     def extract_value(self, dupe):
         return dupe.bitrate
+
 
 class SamplerateCategory(NumericalCategory):
     NAME = coltr("Samplerate")
@@ -32,9 +39,15 @@ class SamplerateCategory(NumericalCategory):
     def extract_value(self, dupe):
         return dupe.samplerate
 
+
 def all_categories():
     return [
-        KindCategory, FolderCategory, FilenameCategory, SizeCategory, DurationCategory,
-        BitrateCategory, SamplerateCategory, MtimeCategory
+        KindCategory,
+        FolderCategory,
+        FilenameCategory,
+        SizeCategory,
+        DurationCategory,
+        BitrateCategory,
+        SamplerateCategory,
+        MtimeCategory,
     ]
-

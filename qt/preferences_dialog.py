@@ -6,8 +6,20 @@
 
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import (
-    QDialog, QDialogButtonBox, QVBoxLayout, QHBoxLayout, QLabel, QComboBox,
-    QSlider, QSizePolicy, QSpacerItem, QCheckBox, QLineEdit, QMessageBox, QSpinBox, QLayout
+    QDialog,
+    QDialogButtonBox,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QComboBox,
+    QSlider,
+    QSizePolicy,
+    QSpacerItem,
+    QCheckBox,
+    QLineEdit,
+    QMessageBox,
+    QSpinBox,
+    QLayout,
 )
 
 from hscommon.trans import trget
@@ -16,12 +28,27 @@ from qtlib.preferences import get_langnames
 
 from .preferences import Preferences
 
-tr = trget('ui')
+tr = trget("ui")
 
 SUPPORTED_LANGUAGES = [
-    'en', 'fr', 'de', 'el', 'zh_CN', 'cs', 'it', 'hy', 'ru', 'uk', 'pt_BR', 'vi', 'pl_PL', 'ko', 'es',
-    'nl',
+    "en",
+    "fr",
+    "de",
+    "el",
+    "zh_CN",
+    "cs",
+    "it",
+    "hy",
+    "ru",
+    "uk",
+    "pt_BR",
+    "vi",
+    "pl_PL",
+    "ko",
+    "es",
+    "nl",
 ]
+
 
 class PreferencesDialogBase(QDialog):
     def __init__(self, parent, app, **kwargs):
@@ -29,10 +56,14 @@ class PreferencesDialogBase(QDialog):
         super().__init__(parent, flags, **kwargs)
         self.app = app
         all_languages = get_langnames()
-        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang])
+        self.supportedLanguages = sorted(
+            SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang]
+        )
         self._setupUi()
 
-        self.filterHardnessSlider.valueChanged['int'].connect(self.filterHardnessLabel.setNum)
+        self.filterHardnessSlider.valueChanged["int"].connect(
+            self.filterHardnessLabel.setNum
+        )
         self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -51,7 +82,9 @@ class PreferencesDialogBase(QDialog):
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.filterHardnessSlider.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.filterHardnessSlider.sizePolicy().hasHeightForWidth()
+        )
         self.filterHardnessSlider.setSizePolicy(sizePolicy)
         self.filterHardnessSlider.setMinimum(1)
         self.filterHardnessSlider.setMaximum(100)
@@ -81,12 +114,16 @@ class PreferencesDialogBase(QDialog):
         self.fontSizeLabel = QLabel(tr("Font size:"))
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
-        self.widgetsVLayout.addLayout(horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None]))
+        self.widgetsVLayout.addLayout(
+            horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
+        )
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
             self.languageComboBox.addItem(get_langnames()[lang])
-        self.widgetsVLayout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
+        self.widgetsVLayout.addLayout(
+            horizontalWrap([self.languageLabel, self.languageComboBox, None])
+        )
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
         self.widgetsVLayout.addWidget(self.copyMoveLabel)
@@ -96,7 +133,9 @@ class PreferencesDialogBase(QDialog):
         self.copyMoveDestinationComboBox.addItem(tr("Recreate absolute path"))
         self.widgetsVLayout.addWidget(self.copyMoveDestinationComboBox)
         self.customCommandLabel = QLabel(self)
-        self.customCommandLabel.setText(tr("Custom Command (arguments: %d for dupe, %r for ref):"))
+        self.customCommandLabel.setText(
+            tr("Custom Command (arguments: %d for dupe, %r for ref):")
+        )
         self.widgetsVLayout.addWidget(self.customCommandLabel)
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
@@ -121,7 +160,11 @@ class PreferencesDialogBase(QDialog):
         self._setupPreferenceWidgets()
         self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok|QDialogButtonBox.RestoreDefaults)
+        self.buttonBox.setStandardButtons(
+            QDialogButtonBox.Cancel
+            | QDialogButtonBox.Ok
+            | QDialogButtonBox.RestoreDefaults
+        )
         self.mainVLayout.addWidget(self.buttonBox)
         self.layout().setSizeConstraint(QLayout.SetFixedSize)
 
@@ -169,18 +212,21 @@ class PreferencesDialogBase(QDialog):
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:
-            oldlang = 'en'
+            oldlang = "en"
         if lang != oldlang:
-            QMessageBox.information(self, "", tr("dupeGuru has to restart for language changes to take effect."))
+            QMessageBox.information(
+                self,
+                "",
+                tr("dupeGuru has to restart for language changes to take effect."),
+            )
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
 
     def resetToDefaults(self):
         self.load(Preferences())
 
-    #--- Events
+    # --- Events
     def buttonClicked(self, button):
         role = self.buttonBox.buttonRole(button)
         if role == QDialogButtonBox.ResetRole:
             self.resetToDefaults()
-

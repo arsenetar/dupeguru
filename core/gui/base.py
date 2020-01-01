@@ -8,6 +8,7 @@
 
 from hscommon.notify import Listener
 
+
 class DupeGuruGUIObject(Listener):
     def __init__(self, app):
         Listener.__init__(self, app)
@@ -27,4 +28,3 @@ class DupeGuruGUIObject(Listener):
 
     def results_changed_but_keep_selection(self):
         pass
-

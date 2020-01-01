@@ -7,17 +7,17 @@
 from qtlib.column import Column
 from ..results_model import ResultsModel as ResultsModelBase
 
+
 class ResultsModel(ResultsModelBase):
     COLUMNS = [
-        Column('marked', defaultWidth=30),
-        Column('name', defaultWidth=200),
-        Column('folder_path', defaultWidth=180),
-        Column('size', defaultWidth=60),
-        Column('extension', defaultWidth=40),
-        Column('dimensions', defaultWidth=100),
-        Column('exif_timestamp', defaultWidth=120),
-        Column('mtime', defaultWidth=120),
-        Column('percentage', defaultWidth=60),
-        Column('dupe_count', defaultWidth=80),
+        Column("marked", defaultWidth=30),
+        Column("name", defaultWidth=200),
+        Column("folder_path", defaultWidth=180),
+        Column("size", defaultWidth=60),
+        Column("extension", defaultWidth=40),
+        Column("dimensions", defaultWidth=100),
+        Column("exif_timestamp", defaultWidth=120),
+        Column("mtime", defaultWidth=120),
+        Column("percentage", defaultWidth=60),
+        Column("dupe_count", defaultWidth=80),
     ]
-

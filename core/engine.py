@@ -17,24 +17,25 @@ from hscommon.util import flatten, multi_replace
 from hscommon.trans import tr
 from hscommon.jobprogress import job
 
-(
-    WEIGHT_WORDS,
-    MATCH_SIMILAR_WORDS,
-    NO_FIELD_ORDER,
-) = range(3)
+(WEIGHT_WORDS, MATCH_SIMILAR_WORDS, NO_FIELD_ORDER,) = range(3)
 
 JOB_REFRESH_RATE = 100
 
+
 def getwords(s):
     # We decompose the string so that ascii letters with accents can be part of the word.
-    s = normalize('NFD', s)
-    s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", ' ').lower()
-    s = ''.join(c for c in s if c in string.ascii_letters + string.digits + string.whitespace)
-    return [_f for _f in s.split(' ') if _f] # remove empty elements
+    s = normalize("NFD", s)
+    s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", " ").lower()
+    s = "".join(
+        c for c in s if c in string.ascii_letters + string.digits + string.whitespace
+    )
+    return [_f for _f in s.split(" ") if _f]  # remove empty elements
+
 
 def getfields(s):
-    fields = [getwords(field) for field in s.split(' - ')]
+    fields = [getwords(field) for field in s.split(" - ")]
     return [_f for _f in fields if _f]
+
 
 def unpack_fields(fields):
     result = []
@@ -44,6 +45,7 @@ def unpack_fields(fields):
         else:
             result.append(field)
     return result
+
 
 def compare(first, second, flags=()):
     """Returns the % of words that match between ``first`` and ``second``
@@ -55,11 +57,11 @@ def compare(first, second, flags=()):
         return 0
     if any(isinstance(element, list) for element in first):
         return compare_fields(first, second, flags)
-    second = second[:] #We must use a copy of second because we remove items from it
+    second = second[:]  # We must use a copy of second because we remove items from it
     match_similar = MATCH_SIMILAR_WORDS in flags
     weight_words = WEIGHT_WORDS in flags
     joined = first + second
-    total_count = (sum(len(word) for word in joined) if weight_words else len(joined))
+    total_count = sum(len(word) for word in joined) if weight_words else len(joined)
     match_count = 0
     in_order = True
     for word in first:
@@ -71,11 +73,12 @@ def compare(first, second, flags=()):
             if second[0] != word:
                 in_order = False
             second.remove(word)
-            match_count += (len(word) if weight_words else 1)
+            match_count += len(word) if weight_words else 1
     result = round(((match_count * 2) / total_count) * 100)
     if (result == 100) and (not in_order):
-        result = 99 # We cannot consider a match exact unless the ordering is the same
+        result = 99  # We cannot consider a match exact unless the ordering is the same
     return result
+
 
 def compare_fields(first, second, flags=()):
     """Returns the score for the lowest matching :ref:`fields`.
@@ -87,7 +90,7 @@ def compare_fields(first, second, flags=()):
         return 0
     if NO_FIELD_ORDER in flags:
         results = []
-        #We don't want to remove field directly in the list. We must work on a copy.
+        # We don't want to remove field directly in the list. We must work on a copy.
         second = second[:]
         for field1 in first:
             max = 0
@@ -101,8 +104,11 @@ def compare_fields(first, second, flags=()):
             if matched_field:
                 second.remove(matched_field)
     else:
-        results = [compare(field1, field2, flags) for field1, field2 in zip(first, second)]
+        results = [
+            compare(field1, field2, flags) for field1, field2 in zip(first, second)
+        ]
     return min(results) if results else 0
+
 
 def build_word_dict(objects, j=job.nulljob):
     """Returns a dict of objects mapped by their words.
@@ -113,10 +119,13 @@ def build_word_dict(objects, j=job.nulljob):
     The result will be a dict with words as keys, lists of objects as values.
     """
     result = defaultdict(set)
-    for object in j.iter_with_progress(objects, 'Prepared %d/%d files', JOB_REFRESH_RATE):
+    for object in j.iter_with_progress(
+        objects, "Prepared %d/%d files", JOB_REFRESH_RATE
+    ):
         for word in unpack_fields(object.words):
             result[word].add(object)
     return result
+
 
 def merge_similar_words(word_dict):
     """Take all keys in ``word_dict`` that are similar, and merge them together.
@@ -126,7 +135,7 @@ def merge_similar_words(word_dict):
     a word equal to the other.
     """
     keys = list(word_dict.keys())
-    keys.sort(key=len)# we want the shortest word to stay
+    keys.sort(key=len)  # we want the shortest word to stay
     while keys:
         key = keys.pop(0)
         similars = difflib.get_close_matches(key, keys, 100, 0.8)
@@ -138,6 +147,7 @@ def merge_similar_words(word_dict):
             del word_dict[similar]
             keys.remove(similar)
 
+
 def reduce_common_words(word_dict, threshold):
     """Remove all objects from ``word_dict`` values where the object count >= ``threshold``
 
@@ -146,7 +156,9 @@ def reduce_common_words(word_dict, threshold):
     The exception to this removal are the objects where all the words of the object are common.
     Because if we remove them, we will miss some duplicates!
     """
-    uncommon_words = set(word for word, objects in word_dict.items() if len(objects) < threshold)
+    uncommon_words = set(
+        word for word, objects in word_dict.items() if len(objects) < threshold
+    )
     for word, objects in list(word_dict.items()):
         if len(objects) < threshold:
             continue
@@ -159,11 +171,13 @@ def reduce_common_words(word_dict, threshold):
         else:
             del word_dict[word]
 
+
 # Writing docstrings in a namedtuple is tricky. From Python 3.3, it's possible to set __doc__, but
 # some research allowed me to find a more elegant solution, which is what is done here. See
 # http://stackoverflow.com/questions/1606436/adding-docstrings-to-namedtuples-in-python
 
-class Match(namedtuple('Match', 'first second percentage')):
+
+class Match(namedtuple("Match", "first second percentage")):
     """Represents a match between two :class:`~core.fs.File`.
 
     Regarless of the matching method, when two files are determined to match, a Match pair is created,
@@ -182,16 +196,24 @@ class Match(namedtuple('Match', 'first second percentage')):
         their match level according to the scan method which found the match. int from 1 to 100. For
         exact scan methods, such as Contents scans, this will always be 100.
     """
+
     __slots__ = ()
 
+
 def get_match(first, second, flags=()):
-    #it is assumed here that first and second both have a "words" attribute
+    # it is assumed here that first and second both have a "words" attribute
     percentage = compare(first.words, second.words, flags)
     return Match(first, second, percentage)
 
+
 def getmatches(
-        objects, min_match_percentage=0, match_similar_words=False, weight_words=False,
-        no_field_order=False, j=job.nulljob):
+    objects,
+    min_match_percentage=0,
+    match_similar_words=False,
+    weight_words=False,
+    no_field_order=False,
+    j=job.nulljob,
+):
     """Returns a list of :class:`Match` within ``objects`` after fuzzily matching their words.
 
     :param objects: List of :class:`~core.fs.File` to match.
@@ -206,7 +228,7 @@ def getmatches(
     j = j.start_subjob(2)
     sj = j.start_subjob(2)
     for o in objects:
-        if not hasattr(o, 'words'):
+        if not hasattr(o, "words"):
             o.words = getwords(o.name)
     word_dict = build_word_dict(objects, sj)
     reduce_common_words(word_dict, COMMON_WORD_THRESHOLD)
@@ -241,10 +263,14 @@ def getmatches(
     except MemoryError:
         # This is the place where the memory usage is at its peak during the scan.
         # Just continue the process with an incomplete list of matches.
-        del compared # This should give us enough room to call logging.
-        logging.warning('Memory Overflow. Matches: %d. Word dict: %d' % (len(result), len(word_dict)))
+        del compared  # This should give us enough room to call logging.
+        logging.warning(
+            "Memory Overflow. Matches: %d. Word dict: %d"
+            % (len(result), len(word_dict))
+        )
         return result
     return result
+
 
 def getmatches_by_contents(files, j=job.nulljob):
     """Returns a list of :class:`Match` within ``files`` if their contents is the same.
@@ -263,12 +289,13 @@ def getmatches_by_contents(files, j=job.nulljob):
     for group in possible_matches:
         for first, second in itertools.combinations(group, 2):
             if first.is_ref and second.is_ref:
-                continue # Don't spend time comparing two ref pics together.
+                continue  # Don't spend time comparing two ref pics together.
             if first.md5partial == second.md5partial:
                 if first.md5 == second.md5:
                     result.append(Match(first, second, 100))
         j.add_progress(desc=tr("%d matches found") % len(result))
     return result
+
 
 class Group:
     """A group of :class:`~core.fs.File` that match together.
@@ -297,7 +324,8 @@ class Group:
 
         Average match percentage of match pairs containing :attr:`ref`.
     """
-    #---Override
+
+    # ---Override
     def __init__(self):
         self._clear()
 
@@ -313,7 +341,7 @@ class Group:
     def __len__(self):
         return len(self.ordered)
 
-    #---Private
+    # ---Private
     def _clear(self):
         self._percentage = None
         self._matches_for_ref = None
@@ -328,7 +356,7 @@ class Group:
             self._matches_for_ref = [match for match in self.matches if ref in match]
         return self._matches_for_ref
 
-    #---Public
+    # ---Public
     def add_match(self, match):
         """Adds ``match`` to internal match list and possibly add duplicates to the group.
 
@@ -339,6 +367,7 @@ class Group:
 
         :param tuple match: pair of :class:`~core.fs.File` to add
         """
+
         def add_candidate(item, match):
             matches = self.candidates[item]
             matches.add(match)
@@ -362,7 +391,11 @@ class Group:
 
         You can call this after the duplicate scanning process to free a bit of memory.
         """
-        discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
+        discarded = set(
+            m
+            for m in self.matches
+            if not all(obj in self.unordered for obj in [m.first, m.second])
+        )
         self.matches -= discarded
         self.candidates = defaultdict(set)
         return discarded
@@ -409,7 +442,9 @@ class Group:
             self.unordered.remove(item)
             self._percentage = None
             self._matches_for_ref = None
-            if (len(self) > 1) and any(not getattr(item, 'is_ref', False) for item in self):
+            if (len(self) > 1) and any(
+                not getattr(item, "is_ref", False) for item in self
+            ):
                 if discard_matches:
                     self.matches = set(m for m in self.matches if item not in m)
             else:
@@ -438,7 +473,9 @@ class Group:
         if self._percentage is None:
             if self.dupes:
                 matches = self._get_matches_for_ref()
-                self._percentage = sum(match.percentage for match in matches) // len(matches)
+                self._percentage = sum(match.percentage for match in matches) // len(
+                    matches
+                )
             else:
                 self._percentage = 0
         return self._percentage
@@ -485,7 +522,7 @@ def get_groups(matches):
         del dupe2group
         del matches
         # should free enough memory to continue
-        logging.warning('Memory Overflow. Groups: {0}'.format(len(groups)))
+        logging.warning("Memory Overflow. Groups: {0}".format(len(groups)))
     # Now that we have a group, we have to discard groups' matches and see if there're any "orphan"
     # matches, that is, matches that were candidate in a group but that none of their 2 files were
     # accepted in the group. With these orphan groups, it's safe to build additional groups
@@ -493,9 +530,12 @@ def get_groups(matches):
     orphan_matches = []
     for group in groups:
         orphan_matches += {
-            m for m in group.discard_matches()
+            m
+            for m in group.discard_matches()
             if not any(obj in matched_files for obj in [m.first, m.second])
         }
     if groups and orphan_matches:
-        groups += get_groups(orphan_matches) # no job, as it isn't supposed to take a long time
+        groups += get_groups(
+            orphan_matches
+        )  # no job, as it isn't supposed to take a long time
     return groups

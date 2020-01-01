@@ -13,14 +13,15 @@ from hscommon.trans import tr
 
 from core.engine import Match
 
+
 def getmatches(files, match_scaled, j):
     timestamp2pic = defaultdict(set)
     for picture in j.iter_with_progress(files, tr("Read EXIF of %d/%d pictures")):
         timestamp = picture.exif_timestamp
         if timestamp:
             timestamp2pic[timestamp].add(picture)
-    if '0000:00:00 00:00:00' in timestamp2pic: # very likely false matches
-        del timestamp2pic['0000:00:00 00:00:00']
+    if "0000:00:00 00:00:00" in timestamp2pic:  # very likely false matches
+        del timestamp2pic["0000:00:00 00:00:00"]
     matches = []
     for pictures in timestamp2pic.values():
         for p1, p2 in combinations(pictures, 2):
@@ -28,4 +29,3 @@ def getmatches(files, match_scaled, j):
                 continue
             matches.append(Match(p1, p2, 100))
     return matches
-

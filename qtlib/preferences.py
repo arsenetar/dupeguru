@@ -11,27 +11,29 @@ from PyQt5.QtCore import Qt, QSettings, QRect, QObject, pyqtSignal
 from hscommon.trans import trget
 from hscommon.util import tryint
 
-tr = trget('qtlib')
+tr = trget("qtlib")
+
 
 def get_langnames():
     return {
-        'en': tr("English"),
-        'fr': tr("French"),
-        'de': tr("German"),
-        'el': tr("Greek"),
-        'zh_CN': tr("Chinese (Simplified)"),
-        'cs': tr("Czech"),
-        'it': tr("Italian"),
-        'hy': tr("Armenian"),
-        'ko': tr("Korean"),
-        'ru': tr("Russian"),
-        'uk': tr("Ukrainian"),
-        'nl': tr('Dutch'),
-        'pl_PL': tr("Polish"),
-        'pt_BR': tr("Brazilian"),
-        'es': tr("Spanish"),
-        'vi': tr("Vietnamese"),
+        "en": tr("English"),
+        "fr": tr("French"),
+        "de": tr("German"),
+        "el": tr("Greek"),
+        "zh_CN": tr("Chinese (Simplified)"),
+        "cs": tr("Czech"),
+        "it": tr("Italian"),
+        "hy": tr("Armenian"),
+        "ko": tr("Korean"),
+        "ru": tr("Russian"),
+        "uk": tr("Ukrainian"),
+        "nl": tr("Dutch"),
+        "pl_PL": tr("Polish"),
+        "pt_BR": tr("Brazilian"),
+        "es": tr("Spanish"),
+        "vi": tr("Vietnamese"),
     }
+
 
 def normalize_for_serialization(v):
     # QSettings doesn't consider set/tuple as "native" typs for serialization, so if we don't
@@ -43,6 +45,7 @@ def normalize_for_serialization(v):
         v = [normalize_for_serialization(item) for item in v]
     return v
 
+
 def adjust_after_deserialization(v):
     # In some cases, when reading from prefs, we end up with strings that are supposed to be
     # bool or int. Convert these.
@@ -50,17 +53,19 @@ def adjust_after_deserialization(v):
         return [adjust_after_deserialization(sub) for sub in v]
     if isinstance(v, str):
         # might be bool or int, try them
-        if v == 'true':
+        if v == "true":
             return True
-        elif v == 'false':
+        elif v == "false":
             return False
         else:
             return tryint(v, v)
     return v
 
+
 # About QRect conversion:
 # I think Qt supports putting basic structures like QRect directly in QSettings, but I prefer not
 # to rely on it and stay with generic structures.
+
 
 class Preferences(QObject):
     prefsChanged = pyqtSignal()
@@ -123,12 +128,11 @@ class Preferences(QObject):
         self.set_value(name, [m] + rectAsList)
 
     def restoreGeometry(self, name, widget):
-        l = self.get_value(name)
-        if l and len(l) == 5:
-            m, x, y, w, h = l
+        geometry = self.get_value(name)
+        if geometry and len(geometry) == 5:
+            m, x, y, w, h = geometry
             if m:
                 widget.setWindowState(Qt.WindowMaximized)
             else:
                 r = QRect(x, y, w, h)
                 widget.setGeometry(r)
-

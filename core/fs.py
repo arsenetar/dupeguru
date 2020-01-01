@@ -17,18 +17,19 @@ import logging
 from hscommon.util import nonone, get_file_ext
 
 __all__ = [
-    'File',
-    'Folder',
-    'get_file',
-    'get_files',
-    'FSError',
-    'AlreadyExistsError',
-    'InvalidPath',
-    'InvalidDestinationError',
-    'OperationError',
+    "File",
+    "Folder",
+    "get_file",
+    "get_files",
+    "FSError",
+    "AlreadyExistsError",
+    "InvalidPath",
+    "InvalidDestinationError",
+    "OperationError",
 ]
 
 NOT_SET = object()
+
 
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
@@ -40,8 +41,8 @@ class FSError(Exception):
         elif isinstance(fsobject, File):
             name = fsobject.name
         else:
-            name = ''
-        parentname = str(parent) if parent is not None else ''
+            name = ""
+        parentname = str(parent) if parent is not None else ""
         Exception.__init__(self, message.format(name=name, parent=parentname))
 
 
@@ -49,32 +50,39 @@ class AlreadyExistsError(FSError):
     "The directory or file name we're trying to add already exists"
     cls_message = "'{name}' already exists in '{parent}'"
 
+
 class InvalidPath(FSError):
     "The path of self is invalid, and cannot be worked with."
     cls_message = "'{name}' is invalid."
 
+
 class InvalidDestinationError(FSError):
     """A copy/move operation has been called, but the destination is invalid."""
+
     cls_message = "'{name}' is an invalid destination for this operation."
+
 
 class OperationError(FSError):
     """A copy/move/delete operation has been called, but the checkup after the
     operation shows that it didn't work."""
+
     cls_message = "Operation on '{name}' failed."
+
 
 class File:
     """Represents a file and holds metadata to be used for scanning.
     """
+
     INITIAL_INFO = {
-        'size': 0,
-        'mtime': 0,
-        'md5': '',
-        'md5partial': '',
+        "size": 0,
+        "mtime": 0,
+        "md5": "",
+        "md5partial": "",
     }
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
     # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
-    __slots__ = ('path', 'is_ref', 'words') + tuple(INITIAL_INFO.keys())
+    __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
         self.path = path
@@ -90,25 +98,27 @@ class File:
             try:
                 self._read_info(attrname)
             except Exception as e:
-                logging.warning("An error '%s' was raised while decoding '%s'", e, repr(self.path))
+                logging.warning(
+                    "An error '%s' was raised while decoding '%s'", e, repr(self.path)
+                )
             result = object.__getattribute__(self, attrname)
             if result is NOT_SET:
                 result = self.INITIAL_INFO[attrname]
         return result
 
-    #This offset is where we should start reading the file to get a partial md5
-    #For audio file, it should be where audio data starts
+    # This offset is where we should start reading the file to get a partial md5
+    # For audio file, it should be where audio data starts
     def _get_md5partial_offset_and_size(self):
-        return (0x4000, 0x4000) #16Kb
+        return (0x4000, 0x4000)  # 16Kb
 
     def _read_info(self, field):
-        if field in ('size', 'mtime'):
+        if field in ("size", "mtime"):
             stats = self.path.stat()
             self.size = nonone(stats.st_size, 0)
             self.mtime = nonone(stats.st_mtime, 0)
-        elif field == 'md5partial':
+        elif field == "md5partial":
             try:
-                fp = self.path.open('rb')
+                fp = self.path.open("rb")
                 offset, size = self._get_md5partial_offset_and_size()
                 fp.seek(offset)
                 partialdata = fp.read(size)
@@ -117,14 +127,14 @@ class File:
                 fp.close()
             except Exception:
                 pass
-        elif field == 'md5':
+        elif field == "md5":
             try:
-                fp = self.path.open('rb')
+                fp = self.path.open("rb")
                 md5 = hashlib.md5()
                 # The goal here is to not run out of memory on really big files. However, the chunk
                 # size has to be large enough so that the python loop isn't too costly in terms of
                 # CPU.
-                CHUNK_SIZE = 1024 * 1024 # 1 mb
+                CHUNK_SIZE = 1024 * 1024  # 1 mb
                 filedata = fp.read(CHUNK_SIZE)
                 while filedata:
                     md5.update(filedata)
@@ -144,7 +154,7 @@ class File:
         for attrname in attrnames:
             getattr(self, attrname)
 
-    #--- Public
+    # --- Public
     @classmethod
     def can_handle(cls, path):
         """Returns whether this file wrapper class can handle ``path``.
@@ -170,7 +180,7 @@ class File:
         """
         raise NotImplementedError()
 
-    #--- Properties
+    # --- Properties
     @property
     def extension(self):
         return get_file_ext(self.name)
@@ -189,7 +199,8 @@ class Folder(File):
 
     It has the size/md5 info of a File, but it's value are the sum of its subitems.
     """
-    __slots__ = File.__slots__ + ('_subfolders', )
+
+    __slots__ = File.__slots__ + ("_subfolders",)
 
     def __init__(self, path):
         File.__init__(self, path)
@@ -201,12 +212,12 @@ class Folder(File):
         return folders + files
 
     def _read_info(self, field):
-        if field in {'size', 'mtime'}:
+        if field in {"size", "mtime"}:
             size = sum((f.size for f in self._all_items()), 0)
             self.size = size
             stats = self.path.stat()
             self.mtime = nonone(stats.st_mtime, 0)
-        elif field in {'md5', 'md5partial'}:
+        elif field in {"md5", "md5partial"}:
             # What's sensitive here is that we must make sure that subfiles'
             # md5 are always added up in the same order, but we also want a
             # different md5 if a file gets moved in a different subdirectory.
@@ -214,7 +225,7 @@ class Folder(File):
                 items = self._all_items()
                 items.sort(key=lambda f: f.path)
                 md5s = [getattr(f, field) for f in items]
-                return b''.join(md5s)
+                return b"".join(md5s)
 
             md5 = hashlib.md5(get_dir_md5_concat())
             digest = md5.digest()
@@ -223,7 +234,9 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subfolders = [p for p in self.path.listdir() if not p.islink() and p.isdir()]
+            subfolders = [
+                p for p in self.path.listdir() if not p.islink() and p.isdir()
+            ]
             self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
 
@@ -243,6 +256,7 @@ def get_file(path, fileclasses=[File]):
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
             return fileclass(path)
+
 
 def get_files(path, fileclasses=[File]):
     """Returns a list of :class:`File` for each file contained in ``path``.

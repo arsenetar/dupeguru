@@ -83,17 +83,17 @@ EXIF_TAGS = {
     0xA003: "PixelYDimension",
     0xA004: "RelatedSoundFile",
     0xA005: "InteroperabilityIFDPointer",
-    0xA20B: "FlashEnergy",          # 0x920B in TIFF/EP
-    0xA20C: "SpatialFrequencyResponse", # 0x920C    -  -
-    0xA20E: "FocalPlaneXResolution",    # 0x920E    -  -
-    0xA20F: "FocalPlaneYResolution",    # 0x920F    -  -
-    0xA210: "FocalPlaneResolutionUnit", # 0x9210    -  -
-    0xA214: "SubjectLocation",      # 0x9214    -  -
-    0xA215: "ExposureIndex",        # 0x9215    -  -
-    0xA217: "SensingMethod",        # 0x9217    -  -
+    0xA20B: "FlashEnergy",  # 0x920B in TIFF/EP
+    0xA20C: "SpatialFrequencyResponse",  # 0x920C    -  -
+    0xA20E: "FocalPlaneXResolution",  # 0x920E    -  -
+    0xA20F: "FocalPlaneYResolution",  # 0x920F    -  -
+    0xA210: "FocalPlaneResolutionUnit",  # 0x9210    -  -
+    0xA214: "SubjectLocation",  # 0x9214    -  -
+    0xA215: "ExposureIndex",  # 0x9215    -  -
+    0xA217: "SensingMethod",  # 0x9217    -  -
     0xA300: "FileSource",
     0xA301: "SceneType",
-    0xA302: "CFAPattern",           # 0x828E in TIFF/EP
+    0xA302: "CFAPattern",  # 0x828E in TIFF/EP
     0xA401: "CustomRendered",
     0xA402: "ExposureMode",
     0xA403: "WhiteBalance",
@@ -148,23 +148,25 @@ GPS_TA0GS = {
     0x1B: "GPSProcessingMethod",
     0x1C: "GPSAreaInformation",
     0x1D: "GPSDateStamp",
-    0x1E: "GPSDifferential"
+    0x1E: "GPSDifferential",
 }
 
-INTEL_ENDIAN = ord('I')
-MOTOROLA_ENDIAN = ord('M')
+INTEL_ENDIAN = ord("I")
+MOTOROLA_ENDIAN = ord("M")
 
 # About MAX_COUNT: It's possible to have corrupted exif tags where the entry count is way too high
 # and thus makes us loop, not endlessly, but for heck of a long time for nothing. Therefore, we put
 # an arbitrary limit on the entry count we'll allow ourselves to read and any IFD reporting more
 # entries than that will be considered corrupt.
-MAX_COUNT = 0xffff
+MAX_COUNT = 0xFFFF
+
 
 def s2n_motorola(bytes):
     x = 0
     for c in bytes:
         x = (x << 8) | c
     return x
+
 
 def s2n_intel(bytes):
     x = 0
@@ -174,13 +176,14 @@ def s2n_intel(bytes):
         y = y + 8
     return x
 
+
 class Fraction:
     def __init__(self, num, den):
         self.num = num
         self.den = den
 
     def __repr__(self):
-        return '%d/%d' % (self.num, self.den)
+        return "%d/%d" % (self.num, self.den)
 
 
 class TIFF_file:
@@ -190,16 +193,22 @@ class TIFF_file:
         self.s2nfunc = s2n_intel if self.endian == INTEL_ENDIAN else s2n_motorola
 
     def s2n(self, offset, length, signed=0, debug=False):
-        slice = self.data[offset:offset+length]
+        slice = self.data[offset : offset + length]
         val = self.s2nfunc(slice)
         # Sign extension ?
         if signed:
-            msb = 1 << (8*length - 1)
+            msb = 1 << (8 * length - 1)
             if val & msb:
                 val = val - (msb << 1)
         if debug:
             logging.debug(self.endian)
-            logging.debug("Slice for offset %d length %d: %r and value: %d", offset, length, slice, val)
+            logging.debug(
+                "Slice for offset %d length %d: %r and value: %d",
+                offset,
+                length,
+                slice,
+                val,
+            )
         return val
 
     def first_IFD(self):
@@ -225,30 +234,31 @@ class TIFF_file:
             return []
         a = []
         for i in range(entries):
-            entry = ifd + 2 + 12*i
+            entry = ifd + 2 + 12 * i
             tag = self.s2n(entry, 2)
-            type = self.s2n(entry+2, 2)
+            type = self.s2n(entry + 2, 2)
             if not 1 <= type <= 10:
-                continue # not handled
-            typelen = [1, 1, 2, 4, 8, 1, 1, 2, 4, 8][type-1]
-            count = self.s2n(entry+4, 4)
+                continue  # not handled
+            typelen = [1, 1, 2, 4, 8, 1, 1, 2, 4, 8][type - 1]
+            count = self.s2n(entry + 4, 4)
             if count > MAX_COUNT:
                 logging.debug("Probably corrupt. Aborting.")
                 return []
-            offset = entry+8
-            if count*typelen > 4:
+            offset = entry + 8
+            if count * typelen > 4:
                 offset = self.s2n(offset, 4)
             if type == 2:
                 # Special case: nul-terminated ASCII string
-                values = str(self.data[offset:offset+count-1], encoding='latin-1')
+                values = str(self.data[offset : offset + count - 1], encoding="latin-1")
             else:
                 values = []
-                signed = (type == 6 or type >= 8)
+                signed = type == 6 or type >= 8
                 for j in range(count):
                     if type in {5, 10}:
                         # The type is either 5 or 10
-                        value_j = Fraction(self.s2n(offset, 4, signed),
-                                           self.s2n(offset+4, 4, signed))
+                        value_j = Fraction(
+                            self.s2n(offset, 4, signed), self.s2n(offset + 4, 4, signed)
+                        )
                     else:
                         # Not a fraction
                         value_j = self.s2n(offset, typelen, signed)
@@ -258,32 +268,37 @@ class TIFF_file:
             a.append((tag, type, values))
         return a
 
+
 def read_exif_header(fp):
     # If `fp`'s first bytes are not exif, it tries to find it in the next 4kb
     def isexif(data):
-        return data[0:4] == b'\377\330\377\341' and data[6:10] == b'Exif'
+        return data[0:4] == b"\377\330\377\341" and data[6:10] == b"Exif"
+
     data = fp.read(12)
     if isexif(data):
         return data
     # ok, not exif, try to find it
     large_data = fp.read(4096)
     try:
-        index = large_data.index(b'Exif')
-        data = large_data[index-6:index+6]
+        index = large_data.index(b"Exif")
+        data = large_data[index - 6 : index + 6]
         # large_data omits the first 12 bytes, and the index is at the middle of the header, so we
         # must seek index + 18
-        fp.seek(index+18)
+        fp.seek(index + 18)
         return data
     except ValueError:
         raise ValueError("Not an Exif file")
+
 
 def get_fields(fp):
     data = read_exif_header(fp)
     length = data[4] * 256 + data[5]
     logging.debug("Exif header length: %d bytes", length)
-    data = fp.read(length-8)
+    data = fp.read(length - 8)
     data_format = data[0]
-    logging.debug("%s format", {INTEL_ENDIAN: 'Intel', MOTOROLA_ENDIAN: 'Motorola'}[data_format])
+    logging.debug(
+        "%s format", {INTEL_ENDIAN: "Intel", MOTOROLA_ENDIAN: "Motorola"}[data_format]
+    )
     T = TIFF_file(data)
     # There may be more than one IFD per file, but we only read the first one because others are
     # most likely thumbnails.
@@ -294,9 +309,9 @@ def get_fields(fp):
         try:
             stag = EXIF_TAGS[tag]
         except KeyError:
-            stag = '0x%04X' % tag
+            stag = "0x%04X" % tag
         if stag in result:
-            return # don't overwrite data
+            return  # don't overwrite data
         result[stag] = values
 
     logging.debug("IFD at offset %d", main_IFD_offset)

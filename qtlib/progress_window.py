@@ -7,6 +7,7 @@
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QProgressDialog
 
+
 class ProgressWindow:
     def __init__(self, parent, model):
         self._window = None
@@ -19,7 +20,7 @@ class ProgressWindow:
         self.model.progressdesc_textfield.view = self
 
     # --- Callbacks
-    def refresh(self): # Labels
+    def refresh(self):  # Labels
         if self._window is not None:
             self._window.setWindowTitle(self.model.jobdesc_textfield.text)
             self._window.setLabelText(self.model.progressdesc_textfield.text)
@@ -30,7 +31,7 @@ class ProgressWindow:
 
     def show(self):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        self._window = QProgressDialog('', "Cancel", 0, 100, self.parent, flags)
+        self._window = QProgressDialog("", "Cancel", 0, 100, self.parent, flags)
         self._window.setModal(True)
         self._window.setAutoReset(False)
         self._window.setAutoClose(False)
@@ -52,4 +53,3 @@ class ProgressWindow:
             self._window.close()
             self._window.setParent(None)
             self._window = None
-

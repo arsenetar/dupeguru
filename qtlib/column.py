@@ -9,8 +9,18 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QHeaderView
 
+
 class Column:
-    def __init__(self, attrname, defaultWidth, editor=None, alignment=Qt.AlignLeft, cantTruncate=False, painter=None, resizeToFit=False):
+    def __init__(
+        self,
+        attrname,
+        defaultWidth,
+        editor=None,
+        alignment=Qt.AlignLeft,
+        cantTruncate=False,
+        painter=None,
+        resizeToFit=False,
+    ):
         self.attrname = attrname
         self.defaultWidth = defaultWidth
         self.editor = editor
@@ -28,6 +38,7 @@ class Columns:
         self.model = model
         self._headerView = headerView
         self._headerView.setDefaultAlignment(Qt.AlignLeft)
+
         def setspecs(col, modelcol):
             modelcol.default_width = col.defaultWidth
             modelcol.editor = col.editor
@@ -35,12 +46,13 @@ class Columns:
             modelcol.resizeToFit = col.resizeToFit
             modelcol.alignment = col.alignment
             modelcol.cantTruncate = col.cantTruncate
+
         if columns:
             for col in columns:
                 modelcol = self.model.column_by_name(col.attrname)
                 setspecs(col, modelcol)
         else:
-            col = Column('', 100)
+            col = Column("", 100)
             for modelcol in self.model.column_list:
                 setspecs(col, modelcol)
         self.model.view = self
@@ -50,16 +62,18 @@ class Columns:
         # See moneyguru #14 and #15.  This was added in order to allow automatic resizing of columns.
         for column in self.model.column_list:
             if column.resizeToFit:
-                self._headerView.setSectionResizeMode(column.logical_index, QHeaderView.ResizeToContents)
+                self._headerView.setSectionResizeMode(
+                    column.logical_index, QHeaderView.ResizeToContents
+                )
 
-    #--- Public
+    # --- Public
     def setColumnsWidth(self, widths):
-        #`widths` can be None. If it is, then default widths are set.
+        # `widths` can be None. If it is, then default widths are set.
         columns = self.model.column_list
         if not widths:
             widths = [column.default_width for column in columns]
         for column, width in zip(columns, widths):
-            if width == 0: # column was hidden before.
+            if width == 0:  # column was hidden before.
                 width = column.default_width
             self._headerView.resizeSection(column.logical_index, width)
 
@@ -71,7 +85,7 @@ class Columns:
             visualIndex = self._headerView.visualIndex(columnIndex)
             self._headerView.moveSection(visualIndex, destIndex)
 
-    #--- Events
+    # --- Events
     def headerSectionMoved(self, logicalIndex, oldVisualIndex, newVisualIndex):
         attrname = self.model.column_by_index(logicalIndex).name
         self.model.move_column(attrname, newVisualIndex)
@@ -80,7 +94,7 @@ class Columns:
         attrname = self.model.column_by_index(logicalIndex).name
         self.model.resize_column(attrname, newSize)
 
-    #--- model --> view
+    # --- model --> view
     def restore_columns(self):
         columns = self.model.ordered_columns
         indexes = [col.logical_index for col in columns]

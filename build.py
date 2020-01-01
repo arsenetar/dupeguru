@@ -13,129 +13,165 @@ from setuptools import setup, Extension
 
 from hscommon import sphinxgen
 from hscommon.build import (
-    add_to_pythonpath, print_and_do, move_all, fix_qt_resource_file,
+    add_to_pythonpath,
+    print_and_do,
+    move_all,
+    fix_qt_resource_file,
 )
 from hscommon import loc
+
 
 def parse_args():
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
     parser.add_option(
-        '--clean', action='store_true', dest='clean',
-        help="Clean build folder before building"
+        "--clean",
+        action="store_true",
+        dest="clean",
+        help="Clean build folder before building",
     )
     parser.add_option(
-        '--doc', action='store_true', dest='doc',
-        help="Build only the help file"
+        "--doc", action="store_true", dest="doc", help="Build only the help file"
     )
     parser.add_option(
-        '--loc', action='store_true', dest='loc',
-        help="Build only localization"
+        "--loc", action="store_true", dest="loc", help="Build only localization"
     )
     parser.add_option(
-        '--updatepot', action='store_true', dest='updatepot',
-        help="Generate .pot files from source code."
+        "--updatepot",
+        action="store_true",
+        dest="updatepot",
+        help="Generate .pot files from source code.",
     )
     parser.add_option(
-        '--mergepot', action='store_true', dest='mergepot',
-        help="Update all .po files based on .pot files."
+        "--mergepot",
+        action="store_true",
+        dest="mergepot",
+        help="Update all .po files based on .pot files.",
     )
     parser.add_option(
-        '--normpo', action='store_true', dest='normpo',
-        help="Normalize all PO files (do this before commit)."
+        "--normpo",
+        action="store_true",
+        dest="normpo",
+        help="Normalize all PO files (do this before commit).",
     )
     (options, args) = parser.parse_args()
     return options
 
+
 def build_help():
     print("Generating Help")
-    current_path = op.abspath('.')
-    help_basepath = op.join(current_path, 'help', 'en')
-    help_destpath = op.join(current_path, 'build', 'help')
-    changelog_path = op.join(current_path, 'help', 'changelog')
+    current_path = op.abspath(".")
+    help_basepath = op.join(current_path, "help", "en")
+    help_destpath = op.join(current_path, "build", "help")
+    changelog_path = op.join(current_path, "help", "changelog")
     tixurl = "https://github.com/hsoft/dupeguru/issues/{}"
-    confrepl = {'language': 'en'}
-    changelogtmpl = op.join(current_path, 'help', 'changelog.tmpl')
-    conftmpl = op.join(current_path, 'help', 'conf.tmpl')
-    sphinxgen.gen(help_basepath, help_destpath, changelog_path, tixurl, confrepl, conftmpl, changelogtmpl)
+    confrepl = {"language": "en"}
+    changelogtmpl = op.join(current_path, "help", "changelog.tmpl")
+    conftmpl = op.join(current_path, "help", "conf.tmpl")
+    sphinxgen.gen(
+        help_basepath,
+        help_destpath,
+        changelog_path,
+        tixurl,
+        confrepl,
+        conftmpl,
+        changelogtmpl,
+    )
+
 
 def build_qt_localizations():
-    loc.compile_all_po(op.join('qtlib', 'locale'))
-    loc.merge_locale_dir(op.join('qtlib', 'locale'), 'locale')
+    loc.compile_all_po(op.join("qtlib", "locale"))
+    loc.merge_locale_dir(op.join("qtlib", "locale"), "locale")
+
 
 def build_localizations():
-    loc.compile_all_po('locale')
+    loc.compile_all_po("locale")
     build_qt_localizations()
-    locale_dest = op.join('build', 'locale')
+    locale_dest = op.join("build", "locale")
     if op.exists(locale_dest):
         shutil.rmtree(locale_dest)
-    shutil.copytree('locale', locale_dest, ignore=shutil.ignore_patterns('*.po', '*.pot'))
+    shutil.copytree(
+        "locale", locale_dest, ignore=shutil.ignore_patterns("*.po", "*.pot")
+    )
+
 
 def build_updatepot():
     print("Building .pot files from source files")
     print("Building core.pot")
-    loc.generate_pot(['core'], op.join('locale', 'core.pot'), ['tr'])
+    loc.generate_pot(["core"], op.join("locale", "core.pot"), ["tr"])
     print("Building columns.pot")
-    loc.generate_pot(['core'], op.join('locale', 'columns.pot'), ['coltr'])
+    loc.generate_pot(["core"], op.join("locale", "columns.pot"), ["coltr"])
     print("Building ui.pot")
     # When we're not under OS X, we don't want to overwrite ui.pot because it contains Cocoa locs
     # We want to merge the generated pot with the old pot in the most preserving way possible.
-    ui_packages = ['qt', op.join('cocoa', 'inter')]
-    loc.generate_pot(ui_packages, op.join('locale', 'ui.pot'), ['tr'], merge=True)
+    ui_packages = ["qt", op.join("cocoa", "inter")]
+    loc.generate_pot(ui_packages, op.join("locale", "ui.pot"), ["tr"], merge=True)
     print("Building qtlib.pot")
-    loc.generate_pot(['qtlib'], op.join('qtlib', 'locale', 'qtlib.pot'), ['tr'])
+    loc.generate_pot(["qtlib"], op.join("qtlib", "locale", "qtlib.pot"), ["tr"])
+
 
 def build_mergepot():
     print("Updating .po files using .pot files")
-    loc.merge_pots_into_pos('locale')
-    loc.merge_pots_into_pos(op.join('qtlib', 'locale'))
-    loc.merge_pots_into_pos(op.join('cocoalib', 'locale'))
+    loc.merge_pots_into_pos("locale")
+    loc.merge_pots_into_pos(op.join("qtlib", "locale"))
+    loc.merge_pots_into_pos(op.join("cocoalib", "locale"))
+
 
 def build_normpo():
-    loc.normalize_all_pos('locale')
-    loc.normalize_all_pos(op.join('qtlib', 'locale'))
-    loc.normalize_all_pos(op.join('cocoalib', 'locale'))
+    loc.normalize_all_pos("locale")
+    loc.normalize_all_pos(op.join("qtlib", "locale"))
+    loc.normalize_all_pos(op.join("cocoalib", "locale"))
+
 
 def build_pe_modules():
     print("Building PE Modules")
     exts = [
         Extension(
             "_block",
-            [op.join('core', 'pe', 'modules', 'block.c'), op.join('core', 'pe', 'modules', 'common.c')]
+            [
+                op.join("core", "pe", "modules", "block.c"),
+                op.join("core", "pe", "modules", "common.c"),
+            ],
         ),
         Extension(
             "_cache",
-            [op.join('core', 'pe', 'modules', 'cache.c'), op.join('core', 'pe', 'modules', 'common.c')]
+            [
+                op.join("core", "pe", "modules", "cache.c"),
+                op.join("core", "pe", "modules", "common.c"),
+            ],
         ),
     ]
-    exts.append(Extension("_block_qt", [op.join('qt', 'pe', 'modules', 'block.c')]))
+    exts.append(Extension("_block_qt", [op.join("qt", "pe", "modules", "block.c")]))
     setup(
-        script_args=['build_ext', '--inplace'],
-        ext_modules=exts,
+        script_args=["build_ext", "--inplace"], ext_modules=exts,
     )
-    move_all('_block_qt*', op.join('qt', 'pe'))
-    move_all('_block*', op.join('core', 'pe'))
-    move_all('_cache*', op.join('core', 'pe'))
+    move_all("_block_qt*", op.join("qt", "pe"))
+    move_all("_block*", op.join("core", "pe"))
+    move_all("_cache*", op.join("core", "pe"))
+
 
 def build_normal():
     print("Building dupeGuru with UI qt")
-    add_to_pythonpath('.')
+    add_to_pythonpath(".")
     print("Building dupeGuru")
     build_pe_modules()
     print("Building localizations")
     build_localizations()
     print("Building Qt stuff")
-    print_and_do("pyrcc5 {0} > {1}".format(op.join('qt', 'dg.qrc'), op.join('qt', 'dg_rc.py')))
-    fix_qt_resource_file(op.join('qt', 'dg_rc.py'))
+    print_and_do(
+        "pyrcc5 {0} > {1}".format(op.join("qt", "dg.qrc"), op.join("qt", "dg_rc.py"))
+    )
+    fix_qt_resource_file(op.join("qt", "dg_rc.py"))
     build_help()
+
 
 def main():
     options = parse_args()
     if options.clean:
-        if op.exists('build'):
-            shutil.rmtree('build')
-    if not op.exists('build'):
-        os.mkdir('build')
+        if op.exists("build"):
+            shutil.rmtree("build")
+    if not op.exists("build"):
+        os.mkdir("build")
     if options.doc:
         build_help()
     elif options.loc:
@@ -149,5 +185,6 @@ def main():
     else:
         build_normal()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

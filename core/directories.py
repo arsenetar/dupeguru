@@ -15,11 +15,12 @@ from hscommon.util import FileOrPath
 from . import fs
 
 __all__ = [
-    'Directories',
-    'DirectoryState',
-    'AlreadyThereError',
-    'InvalidPathError',
+    "Directories",
+    "DirectoryState",
+    "AlreadyThereError",
+    "InvalidPathError",
 ]
+
 
 class DirectoryState:
     """Enum describing how a folder should be considered.
@@ -28,15 +29,19 @@ class DirectoryState:
     * DirectoryState.Reference: Scan files, but make sure never to delete any of them
     * DirectoryState.Excluded: Don't scan this folder
     """
+
     Normal = 0
     Reference = 1
     Excluded = 2
 
+
 class AlreadyThereError(Exception):
     """The path being added is already in the directory list"""
 
+
 class InvalidPathError(Exception):
     """The path being added is invalid"""
+
 
 class Directories:
     """Holds user folder selection.
@@ -47,7 +52,8 @@ class Directories:
     Then, when the user starts the scan, :meth:`get_files` is called to retrieve all files (wrapped
     in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
     """
-    #---Override
+
+    # ---Override
     def __init__(self):
         self._dirs = []
         # {path: state}
@@ -68,10 +74,10 @@ class Directories:
     def __len__(self):
         return len(self._dirs)
 
-    #---Private
+    # ---Private
     def _default_state_for_path(self, path):
         # Override this in subclasses to specify the state of some special folders.
-        if path.name.startswith('.'): # hidden
+        if path.name.startswith("."):  # hidden
             return DirectoryState.Excluded
 
     def _get_files(self, from_path, fileclasses, j):
@@ -83,11 +89,13 @@ class Directories:
                 # Recursively get files from folders with lots of subfolder is expensive. However, there
                 # might be a subfolder in this path that is not excluded. What we want to do is to skim
                 # through self.states and see if we must continue, or we can stop right here to save time
-                if not any(p[:len(root)] == root for p in self.states):
+                if not any(p[: len(root)] == root for p in self.states):
                     del dirs[:]
             try:
                 if state != DirectoryState.Excluded:
-                    found_files = [fs.get_file(root + f, fileclasses=fileclasses) for f in files]
+                    found_files = [
+                        fs.get_file(root + f, fileclasses=fileclasses) for f in files
+                    ]
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
@@ -97,7 +105,11 @@ class Directories:
                         if f is not None:
                             found_files.append(f)
                             dirs.remove(d)
-                    logging.debug("Collected %d files in folder %s", len(found_files), str(from_path))
+                    logging.debug(
+                        "Collected %d files in folder %s",
+                        len(found_files),
+                        str(from_path),
+                    )
                     for file in found_files:
                         file.is_ref = state == DirectoryState.Reference
                         yield file
@@ -118,7 +130,7 @@ class Directories:
         except (EnvironmentError, fs.InvalidPath):
             pass
 
-    #---Public
+    # ---Public
     def add_path(self, path):
         """Adds ``path`` to self, if not already there.
 
@@ -212,21 +224,21 @@ class Directories:
             root = ET.parse(infile).getroot()
         except Exception:
             return
-        for rdn in root.getiterator('root_directory'):
+        for rdn in root.getiterator("root_directory"):
             attrib = rdn.attrib
-            if 'path' not in attrib:
+            if "path" not in attrib:
                 continue
-            path = attrib['path']
+            path = attrib["path"]
             try:
                 self.add_path(Path(path))
             except (AlreadyThereError, InvalidPathError):
                 pass
-        for sn in root.getiterator('state'):
+        for sn in root.getiterator("state"):
             attrib = sn.attrib
-            if not ('path' in attrib and 'value' in attrib):
+            if not ("path" in attrib and "value" in attrib):
                 continue
-            path = attrib['path']
-            state = attrib['value']
+            path = attrib["path"]
+            state = attrib["value"]
             self.states[Path(path)] = int(state)
 
     def save_to_file(self, outfile):
@@ -234,17 +246,17 @@ class Directories:
 
         :param file outfile: path or file pointer to XML file to save to.
         """
-        with FileOrPath(outfile, 'wb') as fp:
-            root = ET.Element('directories')
+        with FileOrPath(outfile, "wb") as fp:
+            root = ET.Element("directories")
             for root_path in self:
-                root_path_node = ET.SubElement(root, 'root_directory')
-                root_path_node.set('path', str(root_path))
+                root_path_node = ET.SubElement(root, "root_directory")
+                root_path_node.set("path", str(root_path))
             for path, state in self.states.items():
-                state_node = ET.SubElement(root, 'state')
-                state_node.set('path', str(path))
-                state_node.set('value', str(state))
+                state_node = ET.SubElement(root, "state")
+                state_node.set("path", str(path))
+                state_node.set("value", str(state))
             tree = ET.ElementTree(root)
-            tree.write(fp, encoding='utf-8')
+            tree.write(fp, encoding="utf-8")
 
     def set_state(self, path, state):
         """Set the state of folder at ``path``.
@@ -259,4 +271,3 @@ class Directories:
             if path.is_parent_of(iter_path):
                 del self.states[iter_path]
         self.states[path] = state
-

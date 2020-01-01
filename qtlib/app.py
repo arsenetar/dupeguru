@@ -9,6 +9,7 @@
 
 from PyQt5.QtCore import pyqtSignal, QTimer, QObject
 
+
 class Application(QObject):
     finishedLaunching = pyqtSignal()
 
@@ -18,4 +19,3 @@ class Application(QObject):
 
     def __launchTimerTimedOut(self):
         self.finishedLaunching.emit()
-

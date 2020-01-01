@@ -12,15 +12,16 @@ from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
 from hscommon.trans import trget
 
-tr = trget('qtlib')
+tr = trget("qtlib")
 
 # IMPORTANT: For this widget to work propertly, you have to add "search_clear_13" from the
 # "images" folder in your resources.
 
+
 class LineEditButton(QToolButton):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        pixmap = QPixmap(':/search_clear_13')
+        pixmap = QPixmap(":/search_clear_13")
         self.setIcon(QIcon(pixmap))
         self.setIconSize(pixmap.size())
         self.setCursor(Qt.ArrowCursor)
@@ -44,7 +45,7 @@ class ClearableEdit(QLineEdit):
             self._clearButton.clicked.connect(self._clearSearch)
         self.textChanged.connect(self._textChanged)
 
-    #--- Private
+    # --- Private
     def _clearSearch(self):
         self.clear()
 
@@ -54,7 +55,7 @@ class ClearableEdit(QLineEdit):
     def _hasClearableContent(self):
         return bool(self.text())
 
-    #--- QLineEdit overrides
+    # --- QLineEdit overrides
     def resizeEvent(self, event):
         if self._is_clearable:
             frameWidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
@@ -64,7 +65,7 @@ class ClearableEdit(QLineEdit):
             rightY = (rect.bottom() - rightHint.height()) // 2
             self._clearButton.move(rightX, rightY)
 
-    #--- Event Handlers
+    # --- Event Handlers
     def _textChanged(self, text):
         if self._is_clearable:
             self._updateClearButton()
@@ -79,7 +80,7 @@ class SearchEdit(ClearableEdit):
 
         self.returnPressed.connect(self._returnPressed)
 
-    #--- Overrides
+    # --- Overrides
     def _clearSearch(self):
         ClearableEdit._clearSearch(self)
         self.searchChanged.emit()
@@ -101,20 +102,27 @@ class SearchEdit(ClearableEdit):
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
             panel = QStyleOptionFrame()
             self.initStyleOption(panel)
-            textRect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
+            textRect = self.style().subElementRect(
+                QStyle.SE_LineEditContents, panel, self
+            )
             leftMargin = 2
             rightMargin = self._clearButton.iconSize().width()
             textRect.adjust(leftMargin, 0, -rightMargin, 0)
             painter = QPainter(self)
-            disabledColor = self.palette().brush(QPalette.Disabled, QPalette.Text).color()
+            disabledColor = (
+                self.palette().brush(QPalette.Disabled, QPalette.Text).color()
+            )
             painter.setPen(disabledColor)
-            painter.drawText(textRect, Qt.AlignLeft|Qt.AlignVCenter, self.inactiveText)
+            painter.drawText(
+                textRect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText
+            )
 
-    #--- Event Handlers
+    # --- Event Handlers
     def _returnPressed(self):
         if not self.immediate:
             self.searchChanged.emit()
 
-    #--- Signals
-    searchChanged = pyqtSignal() # Emitted when return is pressed or when the test is cleared
-
+    # --- Signals
+    searchChanged = (
+        pyqtSignal()
+    )  # Emitted when return is pressed or when the test is cleared

@@ -10,6 +10,7 @@ from core.scanner import Scanner, ScanType, ScanOption
 
 from . import matchblock, matchexif
 
+
 class ScannerPE(Scanner):
     cache_path = None
     match_scaled = False
@@ -28,10 +29,9 @@ class ScannerPE(Scanner):
                 cache_path=self.cache_path,
                 threshold=self.min_match_percentage,
                 match_scaled=self.match_scaled,
-                j=j
+                j=j,
             )
         elif self.scan_type == ScanType.ExifTimestamp:
             return matchexif.getmatches(files, self.match_scaled, j)
         else:
             raise Exception("Invalid scan type")
-

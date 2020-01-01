@@ -48,13 +48,17 @@ except Exception:
     logging.warning("Had problems to determine cpu count on launch.")
     RESULTS_QUEUE_LIMIT = 8
 
+
 def get_cache(cache_path, readonly=False):
-    if cache_path.endswith('shelve'):
+    if cache_path.endswith("shelve"):
         from .cache_shelve import ShelveCache
+
         return ShelveCache(cache_path, readonly=readonly)
     else:
         from .cache_sqlite import SqliteCache
+
         return SqliteCache(cache_path, readonly=readonly)
+
 
 def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
@@ -63,7 +67,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
     # time that MemoryError is raised.
     cache = get_cache(cache_path)
     cache.purge_outdated()
-    prepared = [] # only pictures for which there was no error getting blocks
+    prepared = []  # only pictures for which there was no error getting blocks
     try:
         for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):
             if not picture.path:
@@ -77,7 +81,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
             picture.unicode_path = str(picture.path)
             logging.debug("Analyzing picture at %s", picture.unicode_path)
             if with_dimensions:
-                picture.dimensions # pre-read dimensions
+                picture.dimensions  # pre-read dimensions
             try:
                 if picture.unicode_path not in cache:
                     blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
@@ -86,31 +90,44 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
             except (IOError, ValueError) as e:
                 logging.warning(str(e))
             except MemoryError:
-                logging.warning("Ran out of memory while reading %s of size %d", picture.unicode_path, picture.size)
-                if picture.size < 10 * 1024 * 1024: # We're really running out of memory
+                logging.warning(
+                    "Ran out of memory while reading %s of size %d",
+                    picture.unicode_path,
+                    picture.size,
+                )
+                if (
+                    picture.size < 10 * 1024 * 1024
+                ):  # We're really running out of memory
                     raise
     except MemoryError:
-        logging.warning('Ran out of memory while preparing pictures')
+        logging.warning("Ran out of memory while preparing pictures")
     cache.close()
     return prepared
 
+
 def get_chunks(pictures):
-    min_chunk_count = multiprocessing.cpu_count() * 2 # have enough chunks to feed all subprocesses
+    min_chunk_count = (
+        multiprocessing.cpu_count() * 2
+    )  # have enough chunks to feed all subprocesses
     chunk_count = len(pictures) // DEFAULT_CHUNK_SIZE
     chunk_count = max(min_chunk_count, chunk_count)
     chunk_size = (len(pictures) // chunk_count) + 1
     chunk_size = max(MIN_CHUNK_SIZE, chunk_size)
     logging.info(
-        "Creating %d chunks with a chunk size of %d for %d pictures", chunk_count,
-        chunk_size, len(pictures)
+        "Creating %d chunks with a chunk size of %d for %d pictures",
+        chunk_count,
+        chunk_size,
+        len(pictures),
     )
-    chunks = [pictures[i:i+chunk_size] for i in range(0, len(pictures), chunk_size)]
+    chunks = [pictures[i : i + chunk_size] for i in range(0, len(pictures), chunk_size)]
     return chunks
+
 
 def get_match(first, second, percentage):
     if percentage < 0:
         percentage = 0
     return Match(first, second, percentage)
+
 
 def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     # The list of ids in ref_ids have to be compared to the list of ids in other_ids. other_ids
@@ -142,6 +159,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     cache.close()
     return results
 
+
 def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
@@ -160,11 +178,16 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
                 async_results.remove(result)
                 comparison_count += 1
         # About the NOQA below: I think there's a bug in pyflakes. To investigate...
-        progress_msg = tr("Performed %d/%d chunk matches") % (comparison_count, len(comparisons_to_do)) # NOQA
+        progress_msg = tr("Performed %d/%d chunk matches") % (
+            comparison_count,
+            len(comparisons_to_do),
+        )  # NOQA
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
+    pictures = prepare_pictures(
+        pictures, cache_path, with_dimensions=not match_scaled, j=j
+    )
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}
@@ -175,7 +198,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
         except ValueError:
             pass
     cache.close()
-    pictures = [p for p in pictures if hasattr(p, 'cache_id')]
+    pictures = [p for p in pictures if hasattr(p, "cache_id")]
     pool = multiprocessing.Pool()
     async_results = []
     matches = []
@@ -203,9 +226,17 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
         # some wiggle room, log about the incident, and stop matching right here. We then process
         # the matches we have. The rest of the process doesn't allocate much and we should be
         # alright.
-        del comparisons_to_do, chunks, pictures # some wiggle room for the next statements
-        logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches))
-        del matches[-len(matches)//3:] # some wiggle room to ensure we don't run out of memory again.
+        del (
+            comparisons_to_do,
+            chunks,
+            pictures,
+        )  # some wiggle room for the next statements
+        logging.warning(
+            "Ran out of memory when scanning! We had %d matches.", len(matches)
+        )
+        del matches[
+            -len(matches) // 3 :
+        ]  # some wiggle room to ensure we don't run out of memory again.
     pool.close()
     result = []
     myiter = j.iter_with_progress(
@@ -220,10 +251,10 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
         if percentage == 100 and ref.md5 != other.md5:
             percentage = 99
         if percentage >= threshold:
-            ref.dimensions # pre-read dimensions for display in results
+            ref.dimensions  # pre-read dimensions for display in results
             other.dimensions
             result.append(get_match(ref, other, percentage))
     return result
 
-multiprocessing.freeze_support()
 
+multiprocessing.freeze_support()

@@ -8,6 +8,7 @@ from hscommon.trans import tr
 
 from core.scanner import Scanner as ScannerBase, ScanOption, ScanType
 
+
 class ScannerSE(ScannerBase):
     @staticmethod
     def get_scan_options():
@@ -16,4 +17,3 @@ class ScannerSE(ScannerBase):
             ScanOption(ScanType.Contents, tr("Contents")),
             ScanOption(ScanType.Folders, tr("Folders")),
         ]
-

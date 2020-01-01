@@ -8,6 +8,7 @@ from ..jobprogress.performer import ThreadedJobPerformer
 from .base import GUIObject
 from .text_field import TextField
 
+
 class ProgressWindowView:
     """Expected interface for :class:`ProgressWindow`'s view.
 
@@ -18,6 +19,7 @@ class ProgressWindowView:
 
     It's also expected to call :meth:`ProgressWindow.cancel` when the cancel button is clicked.
     """
+
     def show(self):
         """Show the dialog.
         """
@@ -35,6 +37,7 @@ class ProgressWindowView:
 
         :param int progress: a value between ``0`` and ``100``.
         """
+
 
 class ProgressWindow(GUIObject, ThreadedJobPerformer):
     """Cross-toolkit GUI-enabled progress window.
@@ -58,6 +61,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
                        if you want to. If the function returns ``True``, ``finish_func()`` will be
                        called as if the job terminated normally.
     """
+
     def __init__(self, finish_func, error_func=None):
         # finish_func(jobid) is the function that is called when a job is completed.
         GUIObject.__init__(self)
@@ -124,10 +128,9 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         # target is a function with its first argument being a Job. It can then be followed by other
         # arguments which are passed as `args`.
         self.jobid = jobid
-        self.progressdesc_textfield.text = ''
+        self.progressdesc_textfield.text = ""
         j = self.create_job()
         args = tuple([j] + list(args))
         self.run_threaded(target, args)
         self.jobdesc_textfield.text = title
         self.view.show()
-

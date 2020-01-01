@@ -8,6 +8,7 @@ from hscommon.trans import tr
 
 from core.scanner import Scanner as ScannerBase, ScanOption, ScanType
 
+
 class ScannerME(ScannerBase):
     @staticmethod
     def _key_func(dupe):
@@ -22,5 +23,3 @@ class ScannerME(ScannerBase):
             ScanOption(ScanType.Tag, tr("Tags")),
             ScanOption(ScanType.Contents, tr("Contents")),
         ]
-
-

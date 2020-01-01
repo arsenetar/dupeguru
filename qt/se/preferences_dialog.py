@@ -6,7 +6,13 @@
 
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
-    QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QLineEdit
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QSizePolicy,
+    QSpacerItem,
+    QWidget,
+    QLineEdit,
 )
 
 from hscommon.trans import trget
@@ -17,7 +23,8 @@ from core.scanner import ScanType
 
 from ..preferences_dialog import PreferencesDialogBase
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class PreferencesDialog(PreferencesDialogBase):
     def _setupPreferenceWidgets(self):
@@ -26,24 +33,36 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widget = QWidget(self)
         self.widget.setMinimumSize(QSize(0, 136))
         self.verticalLayout_4 = QVBoxLayout(self.widget)
-        self._setupAddCheckbox('wordWeightingBox', tr("Word weighting"), self.widget)
+        self._setupAddCheckbox("wordWeightingBox", tr("Word weighting"), self.widget)
         self.verticalLayout_4.addWidget(self.wordWeightingBox)
-        self._setupAddCheckbox('matchSimilarBox', tr("Match similar words"), self.widget)
+        self._setupAddCheckbox(
+            "matchSimilarBox", tr("Match similar words"), self.widget
+        )
         self.verticalLayout_4.addWidget(self.matchSimilarBox)
-        self._setupAddCheckbox('mixFileKindBox', tr("Can mix file kind"), self.widget)
+        self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"), self.widget)
         self.verticalLayout_4.addWidget(self.mixFileKindBox)
-        self._setupAddCheckbox('useRegexpBox', tr("Use regular expressions when filtering"), self.widget)
+        self._setupAddCheckbox(
+            "useRegexpBox", tr("Use regular expressions when filtering"), self.widget
+        )
         self.verticalLayout_4.addWidget(self.useRegexpBox)
-        self._setupAddCheckbox('removeEmptyFoldersBox', tr("Remove empty folders on delete or move"), self.widget)
+        self._setupAddCheckbox(
+            "removeEmptyFoldersBox",
+            tr("Remove empty folders on delete or move"),
+            self.widget,
+        )
         self.verticalLayout_4.addWidget(self.removeEmptyFoldersBox)
         self.horizontalLayout_2 = QHBoxLayout()
-        self._setupAddCheckbox('ignoreSmallFilesBox', tr("Ignore files smaller than"), self.widget)
+        self._setupAddCheckbox(
+            "ignoreSmallFilesBox", tr("Ignore files smaller than"), self.widget
+        )
         self.horizontalLayout_2.addWidget(self.ignoreSmallFilesBox)
         self.sizeThresholdEdit = QLineEdit(self.widget)
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.sizeThresholdEdit.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.sizeThresholdEdit.sizePolicy().hasHeightForWidth()
+        )
         self.sizeThresholdEdit.setSizePolicy(sizePolicy)
         self.sizeThresholdEdit.setMaximumSize(QSize(50, 16777215))
         self.horizontalLayout_2.addWidget(self.sizeThresholdEdit)
@@ -54,11 +73,14 @@ class PreferencesDialog(PreferencesDialogBase):
         self.horizontalLayout_2.addItem(spacerItem1)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self._setupAddCheckbox(
-            'ignoreHardlinkMatches',
-            tr("Ignore duplicates hardlinking to the same file"), self.widget
+            "ignoreHardlinkMatches",
+            tr("Ignore duplicates hardlinking to the same file"),
+            self.widget,
         )
         self.verticalLayout_4.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox('debugModeBox', tr("Debug mode (restart required)"), self.widget)
+        self._setupAddCheckbox(
+            "debugModeBox", tr("Debug mode (restart required)"), self.widget
+        )
         self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
@@ -81,4 +103,3 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
         prefs.small_file_threshold = tryint(self.sizeThresholdEdit.text())
-

@@ -6,14 +6,18 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+
 class JobCancelled(Exception):
     "The user has cancelled the job"
+
 
 class JobInProgressError(Exception):
     "A job is already being performed, you can't perform more than one at the same time."
 
+
 class JobCountError(Exception):
     "The number of jobs started have exceeded the number of jobs allowed"
+
 
 class Job:
     """Manages a job's progression and return it's progression through a callback.
@@ -30,14 +34,15 @@ class Job:
     Another one is that nothing stops you from calling add_progress right after
     SkipJob.
     """
-    #---Magic functions
+
+    # ---Magic functions
     def __init__(self, job_proportions, callback):
         """Initialize the Job with 'jobcount' jobs. Start every job with
         start_job(). Every time the job progress is updated, 'callback' is called
         'callback' takes a 'progress' int param, and a optional 'desc'
         parameter. Callback must return false if the job must be cancelled.
         """
-        if not hasattr(callback, '__call__'):
+        if not hasattr(callback, "__call__"):
             raise TypeError("'callback' MUST be set when creating a Job")
         if isinstance(job_proportions, int):
             job_proportions = [1] * job_proportions
@@ -49,12 +54,12 @@ class Job:
         self._progress = 0
         self._currmax = 1
 
-    #---Private
-    def _subjob_callback(self, progress, desc=''):
+    # ---Private
+    def _subjob_callback(self, progress, desc=""):
         """This is the callback passed to children jobs.
         """
         self.set_progress(progress, desc)
-        return True #if JobCancelled has to be raised, it will be at the highest level
+        return True  # if JobCancelled has to be raised, it will be at the highest level
 
     def _do_update(self, desc):
         """Calls the callback function with a % progress as a parameter.
@@ -67,18 +72,18 @@ class Job:
             total_progress = self._jobcount * self._currmax
             progress = ((passed_progress + current_progress) * 100) // total_progress
         else:
-            progress = -1 # indeterminate
+            progress = -1  # indeterminate
         # It's possible that callback doesn't support a desc arg
         result = self._callback(progress, desc) if desc else self._callback(progress)
         if not result:
             raise JobCancelled()
 
-    #---Public
-    def add_progress(self, progress=1, desc=''):
+    # ---Public
+    def add_progress(self, progress=1, desc=""):
         self.set_progress(self._progress + progress, desc)
 
     def check_if_cancelled(self):
-        self._do_update('')
+        self._do_update("")
 
     def iter_with_progress(self, iterable, desc_format=None, every=1, count=None):
         """Iterate through ``iterable`` while automatically adding progress.
@@ -89,7 +94,7 @@ class Job:
         """
         if count is None:
             count = len(iterable)
-        desc = ''
+        desc = ""
         if desc_format:
             desc = desc_format % (0, count)
         self.start_job(count, desc)
@@ -103,7 +108,7 @@ class Job:
             desc = desc_format % (count, count)
         self.set_progress(100, desc)
 
-    def start_job(self, max_progress=100, desc=''):
+    def start_job(self, max_progress=100, desc=""):
         """Begin work on the next job. You must not call start_job more than
         'jobcount' (in __init__) times.
         'max' is the job units you are to perform.
@@ -118,7 +123,7 @@ class Job:
         self._currmax = max(1, max_progress)
         self._do_update(desc)
 
-    def start_subjob(self, job_proportions, desc=''):
+    def start_subjob(self, job_proportions, desc=""):
         """Starts a sub job. Use this when you want to split a job into
         multiple smaller jobs. Pretty handy when starting a process where you
         know how many subjobs you will have, but don't know the work unit count
@@ -128,7 +133,7 @@ class Job:
         self.start_job(100, desc)
         return Job(job_proportions, self._subjob_callback)
 
-    def set_progress(self, progress, desc=''):
+    def set_progress(self, progress, desc=""):
         """Sets the progress of the current job to 'progress', and call the
         callback
         """

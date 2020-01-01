@@ -8,9 +8,19 @@
 
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtWidgets import (
-    QMainWindow, QMenu, QLabel, QFileDialog, QMenuBar, QWidget,
-    QVBoxLayout, QAbstractItemView, QStatusBar, QDialog, QPushButton, QCheckBox, 
-    QDesktopWidget
+    QMainWindow,
+    QMenu,
+    QLabel,
+    QFileDialog,
+    QMenuBar,
+    QWidget,
+    QVBoxLayout,
+    QAbstractItemView,
+    QStatusBar,
+    QDialog,
+    QPushButton,
+    QCheckBox,
+    QDesktopWidget,
 )
 
 from hscommon.trans import trget
@@ -25,7 +35,8 @@ from .se.results_model import ResultsModel as ResultsModelStandard
 from .me.results_model import ResultsModel as ResultsModelMusic
 from .pe.results_model import ResultsModel as ResultsModelPicture
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class ResultWindow(QMainWindow):
     def __init__(self, parent, app, **kwargs):
@@ -54,41 +65,143 @@ class ResultWindow(QMainWindow):
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
-            ('actionDetails', 'Ctrl+I', '', tr("Details"), self.detailsTriggered),
-            ('actionActions', '', '', tr("Actions"), self.actionsTriggered),
-            ('actionPowerMarker', 'Ctrl+1', '', tr("Show Dupes Only"), self.powerMarkerTriggered),
-            ('actionDelta', 'Ctrl+2', '', tr("Show Delta Values"), self.deltaTriggered),
-            ('actionDeleteMarked', 'Ctrl+D', '', tr("Send Marked to Recycle Bin..."), self.deleteTriggered),
-            ('actionMoveMarked', 'Ctrl+M', '', tr("Move Marked to..."), self.moveTriggered),
-            ('actionCopyMarked', 'Ctrl+Shift+M', '', tr("Copy Marked to..."), self.copyTriggered),
-            ('actionRemoveMarked', 'Ctrl+R', '', tr("Remove Marked from Results"), self.removeMarkedTriggered),
-            ('actionReprioritize', '', '', tr("Re-Prioritize Results..."), self.reprioritizeTriggered),
+            ("actionDetails", "Ctrl+I", "", tr("Details"), self.detailsTriggered),
+            ("actionActions", "", "", tr("Actions"), self.actionsTriggered),
             (
-                'actionRemoveSelected', 'Ctrl+Del', '',
-                tr("Remove Selected from Results"), self.removeSelectedTriggered
+                "actionPowerMarker",
+                "Ctrl+1",
+                "",
+                tr("Show Dupes Only"),
+                self.powerMarkerTriggered,
+            ),
+            ("actionDelta", "Ctrl+2", "", tr("Show Delta Values"), self.deltaTriggered),
+            (
+                "actionDeleteMarked",
+                "Ctrl+D",
+                "",
+                tr("Send Marked to Recycle Bin..."),
+                self.deleteTriggered,
             ),
             (
-                'actionIgnoreSelected', 'Ctrl+Shift+Del', '',
-                tr("Add Selected to Ignore List"), self.addToIgnoreListTriggered
+                "actionMoveMarked",
+                "Ctrl+M",
+                "",
+                tr("Move Marked to..."),
+                self.moveTriggered,
             ),
             (
-                'actionMakeSelectedReference', 'Ctrl+Space', '',
-                tr("Make Selected into Reference"), self.app.model.make_selected_reference
+                "actionCopyMarked",
+                "Ctrl+Shift+M",
+                "",
+                tr("Copy Marked to..."),
+                self.copyTriggered,
             ),
-            ('actionOpenSelected', 'Ctrl+O', '', tr("Open Selected with Default Application"), self.openTriggered),
             (
-                'actionRevealSelected', 'Ctrl+Shift+O', '',
-                tr("Open Containing Folder of Selected"), self.revealTriggered
+                "actionRemoveMarked",
+                "Ctrl+R",
+                "",
+                tr("Remove Marked from Results"),
+                self.removeMarkedTriggered,
             ),
-            ('actionRenameSelected', 'F2', '', tr("Rename Selected"), self.renameTriggered),
-            ('actionMarkAll', 'Ctrl+A', '', tr("Mark All"), self.markAllTriggered),
-            ('actionMarkNone', 'Ctrl+Shift+A', '', tr("Mark None"), self.markNoneTriggered),
-            ('actionInvertMarking', 'Ctrl+Alt+A', '', tr("Invert Marking"), self.markInvertTriggered),
-            ('actionMarkSelected', '', '', tr("Mark Selected"), self.markSelectedTriggered),
-            ('actionExportToHTML', '', '', tr("Export To HTML"), self.app.model.export_to_xhtml),
-            ('actionExportToCSV', '', '', tr("Export To CSV"), self.app.model.export_to_csv),
-            ('actionSaveResults', 'Ctrl+S', '', tr("Save Results..."), self.saveResultsTriggered),
-            ('actionInvokeCustomCommand', 'Ctrl+Alt+I', '', tr("Invoke Custom Command"), self.app.invokeCustomCommand),
+            (
+                "actionReprioritize",
+                "",
+                "",
+                tr("Re-Prioritize Results..."),
+                self.reprioritizeTriggered,
+            ),
+            (
+                "actionRemoveSelected",
+                "Ctrl+Del",
+                "",
+                tr("Remove Selected from Results"),
+                self.removeSelectedTriggered,
+            ),
+            (
+                "actionIgnoreSelected",
+                "Ctrl+Shift+Del",
+                "",
+                tr("Add Selected to Ignore List"),
+                self.addToIgnoreListTriggered,
+            ),
+            (
+                "actionMakeSelectedReference",
+                "Ctrl+Space",
+                "",
+                tr("Make Selected into Reference"),
+                self.app.model.make_selected_reference,
+            ),
+            (
+                "actionOpenSelected",
+                "Ctrl+O",
+                "",
+                tr("Open Selected with Default Application"),
+                self.openTriggered,
+            ),
+            (
+                "actionRevealSelected",
+                "Ctrl+Shift+O",
+                "",
+                tr("Open Containing Folder of Selected"),
+                self.revealTriggered,
+            ),
+            (
+                "actionRenameSelected",
+                "F2",
+                "",
+                tr("Rename Selected"),
+                self.renameTriggered,
+            ),
+            ("actionMarkAll", "Ctrl+A", "", tr("Mark All"), self.markAllTriggered),
+            (
+                "actionMarkNone",
+                "Ctrl+Shift+A",
+                "",
+                tr("Mark None"),
+                self.markNoneTriggered,
+            ),
+            (
+                "actionInvertMarking",
+                "Ctrl+Alt+A",
+                "",
+                tr("Invert Marking"),
+                self.markInvertTriggered,
+            ),
+            (
+                "actionMarkSelected",
+                "",
+                "",
+                tr("Mark Selected"),
+                self.markSelectedTriggered,
+            ),
+            (
+                "actionExportToHTML",
+                "",
+                "",
+                tr("Export To HTML"),
+                self.app.model.export_to_xhtml,
+            ),
+            (
+                "actionExportToCSV",
+                "",
+                "",
+                tr("Export To CSV"),
+                self.app.model.export_to_csv,
+            ),
+            (
+                "actionSaveResults",
+                "Ctrl+S",
+                "",
+                tr("Save Results..."),
+                self.saveResultsTriggered,
+            ),
+            (
+                "actionInvokeCustomCommand",
+                "Ctrl+Alt+I",
+                "",
+                tr("Invoke Custom Command"),
+                self.app.invokeCustomCommand,
+            ),
         ]
         createActions(ACTIONS, self)
         self.actionDelta.setCheckable(True)
@@ -154,7 +267,9 @@ class ResultWindow(QMainWindow):
         # Columns menu
         menu = self.menuColumns
         self._column_actions = []
-        for index, (display, visible) in enumerate(self.app.model.result_table.columns.menu_items()):
+        for index, (display, visible) in enumerate(
+            self.app.model.result_table.columns.menu_items()
+        ):
             action = menu.addAction(display)
             action.setCheckable(True)
             action.setChecked(visible)
@@ -195,10 +310,17 @@ class ResultWindow(QMainWindow):
         self.deltaValuesCheckBox = QCheckBox(tr("Delta Values"))
         self.searchEdit = SearchEdit()
         self.searchEdit.setMaximumWidth(300)
-        self.horizontalLayout = horizontalWrap([
-            self.actionsButton, self.detailsButton,
-            self.dupesOnlyCheckBox, self.deltaValuesCheckBox, None, self.searchEdit, 8
-        ])
+        self.horizontalLayout = horizontalWrap(
+            [
+                self.actionsButton,
+                self.detailsButton,
+                self.dupesOnlyCheckBox,
+                self.deltaValuesCheckBox,
+                None,
+                self.searchEdit,
+                8,
+            ]
+        )
         self.horizontalLayout.setSpacing(8)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.resultsView = ResultsView(self.centralwidget)
@@ -237,14 +359,14 @@ class ResultWindow(QMainWindow):
             else:
                 moveToScreenCenter(self)
 
-    #--- Private
+    # --- Private
     def _update_column_actions_status(self):
         # Update menu checked state
         menu_items = self.app.model.result_table.columns.menu_items()
         for action, (display, visible) in zip(self._column_actions, menu_items):
             action.setChecked(visible)
 
-    #--- Actions
+    # --- Actions
     def actionsTriggered(self):
         self.actionsButton.showMenu()
 
@@ -318,14 +440,14 @@ class ResultWindow(QMainWindow):
     def saveResultsTriggered(self):
         title = tr("Select a file to save your results to")
         files = tr("dupeGuru Results (*.dupeguru)")
-        destination, chosen_filter = QFileDialog.getSaveFileName(self, title, '', files)
+        destination, chosen_filter = QFileDialog.getSaveFileName(self, title, "", files)
         if destination:
-            if not destination.endswith('.dupeguru'):
-                destination = '{}.dupeguru'.format(destination)
+            if not destination.endswith(".dupeguru"):
+                destination = "{}.dupeguru".format(destination)
             self.app.model.save_as(destination)
             self.app.recentResults.insertItem(destination)
 
-    #--- Events
+    # --- Events
     def appWillSavePrefs(self):
         prefs = self.app.prefs
         prefs.resultWindowIsMaximized = self.isMaximized()

@@ -11,6 +11,7 @@ from collections import MutableSequence, namedtuple
 from .base import GUIObject
 from .selectable_list import Selectable
 
+
 # We used to directly subclass list, but it caused problems at some point with deepcopy
 class Table(MutableSequence, Selectable):
     """Sortable and selectable sequence of :class:`Row`.
@@ -24,6 +25,7 @@ class Table(MutableSequence, Selectable):
 
     Subclasses :class:`.Selectable`.
     """
+
     def __init__(self):
         Selectable.__init__(self)
         self._rows = []
@@ -101,7 +103,7 @@ class Table(MutableSequence, Selectable):
         if self._footer is not None:
             self._rows.append(self._footer)
 
-    #--- Properties
+    # --- Properties
     @property
     def footer(self):
         """If set, a row that always stay at the bottom of the table.
@@ -216,6 +218,7 @@ class GUITableView:
 
     Whenever the user changes the selection, we expect the view to call :meth:`Table.select`.
     """
+
     def refresh(self):
         """Refreshes the contents of the table widget.
 
@@ -238,7 +241,9 @@ class GUITableView:
         """
 
 
-SortDescriptor = namedtuple('SortDescriptor', 'column desc')
+SortDescriptor = namedtuple("SortDescriptor", "column desc")
+
+
 class GUITable(Table, GUIObject):
     """Cross-toolkit GUI-enabled table view.
 
@@ -254,6 +259,7 @@ class GUITable(Table, GUIObject):
     Subclasses :class:`Table` and :class:`.GUIObject`. Expected view:
     :class:`GUITableView`.
     """
+
     def __init__(self):
         GUIObject.__init__(self)
         Table.__init__(self)
@@ -261,7 +267,7 @@ class GUITable(Table, GUIObject):
         self.edited = None
         self._sort_descriptor = None
 
-    #--- Virtual
+    # --- Virtual
     def _do_add(self):
         """(Virtual) Creates a new row, adds it in the table.
 
@@ -309,7 +315,7 @@ class GUITable(Table, GUIObject):
             else:
                 self.select([len(self) - 1])
 
-    #--- Public
+    # --- Public
     def add(self):
         """Add a new row in edit mode.
 
@@ -444,6 +450,7 @@ class Row:
 
     Of course, this is only default behavior. This can be overriden.
     """
+
     def __init__(self, table):
         super(Row, self).__init__()
         self.table = table
@@ -454,7 +461,7 @@ class Row:
         assert self.table.edited is None
         self.table.edited = self
 
-    #--- Virtual
+    # --- Virtual
     def can_edit(self):
         """(Virtual) Whether the whole row can be edited.
 
@@ -489,11 +496,11 @@ class Row:
         there's none, raises ``AttributeError``.
         """
         try:
-            return getattr(self, '_' + column_name)
+            return getattr(self, "_" + column_name)
         except AttributeError:
             return getattr(self, column_name)
 
-    #--- Public
+    # --- Public
     def can_edit_cell(self, column_name):
         """Returns whether cell for column ``column_name`` can be edited.
 
@@ -511,18 +518,18 @@ class Row:
             return False
         # '_' is in case column is a python keyword
         if not hasattr(self, column_name):
-            if hasattr(self, column_name + '_'):
-                column_name = column_name + '_'
+            if hasattr(self, column_name + "_"):
+                column_name = column_name + "_"
             else:
                 return False
-        if hasattr(self, 'can_edit_' + column_name):
-            return getattr(self, 'can_edit_' + column_name)
+        if hasattr(self, "can_edit_" + column_name):
+            return getattr(self, "can_edit_" + column_name)
         # If the row has a settable property, we can edit the cell
         rowclass = self.__class__
         prop = getattr(rowclass, column_name, None)
         if prop is None:
             return False
-        return bool(getattr(prop, 'fset', None))
+        return bool(getattr(prop, "fset", None))
 
     def get_cell_value(self, attrname):
         """Get cell value for ``attrname``.
@@ -530,8 +537,8 @@ class Row:
         By default, does a simple ``getattr()``, but it is used to allow subclasses to have
         alternative value storage mechanisms.
         """
-        if attrname == 'from':
-           attrname = 'from_'
+        if attrname == "from":
+            attrname = "from_"
         return getattr(self, attrname)
 
     def set_cell_value(self, attrname, value):
@@ -540,7 +547,6 @@ class Row:
         By default, does a simple ``setattr()``, but it is used to allow subclasses to have
         alternative value storage mechanisms.
         """
-        if attrname == 'from':
-            attrname = 'from_'
+        if attrname == "from":
+            attrname = "from_"
         setattr(self, attrname, value)
-

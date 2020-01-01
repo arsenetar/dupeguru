@@ -19,6 +19,7 @@ from . import engine
 # there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be
 # used in core_*). One day I'll clean this up.
 
+
 class ScanType:
     Filename = 0
     Fields = 1
@@ -27,22 +28,25 @@ class ScanType:
     Folders = 4
     Contents = 5
 
-    #PE
+    # PE
     FuzzyBlock = 10
     ExifTimestamp = 11
 
-ScanOption = namedtuple('ScanOption', 'scan_type label')
 
-SCANNABLE_TAGS = ['track', 'artist', 'album', 'title', 'genre', 'year']
+ScanOption = namedtuple("ScanOption", "scan_type label")
 
-RE_DIGIT_ENDING = re.compile(r'\d+|\(\d+\)|\[\d+\]|{\d+}')
+SCANNABLE_TAGS = ["track", "artist", "album", "title", "genre", "year"]
+
+RE_DIGIT_ENDING = re.compile(r"\d+|\(\d+\)|\[\d+\]|{\d+}")
+
 
 def is_same_with_digit(name, refname):
     # Returns True if name is the same as refname, but with digits (with brackets or not) at the end
     if not name.startswith(refname):
         return False
-    end = name[len(refname):].strip()
+    end = name[len(refname) :].strip()
     return RE_DIGIT_ENDING.match(end) is not None
+
 
 def remove_dupe_paths(files):
     # Returns files with duplicates-by-path removed. Files with the exact same path are considered
@@ -57,25 +61,29 @@ def remove_dupe_paths(files):
         if normalized in path2file:
             try:
                 if op.samefile(normalized, str(path2file[normalized].path)):
-                    continue # same file, it's a dupe
+                    continue  # same file, it's a dupe
                 else:
-                    pass # We don't treat them as dupes
+                    pass  # We don't treat them as dupes
             except OSError:
-                continue # File doesn't exist? Well, treat them as dupes
+                continue  # File doesn't exist? Well, treat them as dupes
         else:
             path2file[normalized] = f
         result.append(f)
     return result
+
 
 class Scanner:
     def __init__(self):
         self.discarded_file_count = 0
 
     def _getmatches(self, files, j):
-        if self.size_threshold or self.scan_type in {ScanType.Contents, ScanType.Folders}:
+        if self.size_threshold or self.scan_type in {
+            ScanType.Contents,
+            ScanType.Folders,
+        }:
             j = j.start_subjob([2, 8])
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
-                f.size # pre-read, makes a smoother progress if read here (especially for bundles)
+                f.size  # pre-read, makes a smoother progress if read here (especially for bundles)
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in {ScanType.Contents, ScanType.Folders}:
@@ -83,12 +91,12 @@ class Scanner:
         else:
             j = j.start_subjob([2, 8])
             kw = {}
-            kw['match_similar_words'] = self.match_similar_words
-            kw['weight_words'] = self.word_weighting
-            kw['min_match_percentage'] = self.min_match_percentage
+            kw["match_similar_words"] = self.match_similar_words
+            kw["weight_words"] = self.word_weighting
+            kw["min_match_percentage"] = self.min_match_percentage
             if self.scan_type == ScanType.FieldsNoOrder:
                 self.scan_type = ScanType.Fields
-                kw['no_field_order'] = True
+                kw["no_field_order"] = True
             func = {
                 ScanType.Filename: lambda f: engine.getwords(rem_file_ext(f.name)),
                 ScanType.Fields: lambda f: engine.getfields(rem_file_ext(f.name)),
@@ -111,9 +119,9 @@ class Scanner:
     def _tie_breaker(ref, dupe):
         refname = rem_file_ext(ref.name).lower()
         dupename = rem_file_ext(dupe.name).lower()
-        if 'copy' in dupename:
+        if "copy" in dupename:
             return False
-        if 'copy' in refname:
+        if "copy" in refname:
             return True
         if is_same_with_digit(dupename, refname):
             return False
@@ -130,12 +138,12 @@ class Scanner:
         raise NotImplementedError()
 
     def get_dupe_groups(self, files, ignore_list=None, j=job.nulljob):
-        for f in (f for f in files if not hasattr(f, 'is_ref')):
+        for f in (f for f in files if not hasattr(f, "is_ref")):
             f.is_ref = False
         files = remove_dupe_paths(files)
         logging.info("Getting matches. Scan type: %d", self.scan_type)
         matches = self._getmatches(files, j)
-        logging.info('Found %d matches' % len(matches))
+        logging.info("Found %d matches" % len(matches))
         j.set_progress(100, tr("Almost done! Fiddling with results..."))
         # In removing what we call here "false matches", we first want to remove, if we scan by
         # folders, we want to remove folder matches for which the parent is also in a match (they're
@@ -153,20 +161,38 @@ class Scanner:
                     toremove.add(p)
                 else:
                     last_parent_path = p
-            matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
+            matches = [
+                m
+                for m in matches
+                if m.first.path not in toremove or m.second.path not in toremove
+            ]
         if not self.mix_file_kind:
-            matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
-        matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
+            matches = [
+                m
+                for m in matches
+                if get_file_ext(m.first.name) == get_file_ext(m.second.name)
+            ]
+        matches = [
+            m for m in matches if m.first.path.exists() and m.second.path.exists()
+        ]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
             matches = [
-                m for m in matches
+                m
+                for m in matches
                 if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
             ]
-        logging.info('Grouping matches')
+        logging.info("Grouping matches")
         groups = engine.get_groups(matches)
-        if self.scan_type in {ScanType.Filename, ScanType.Fields, ScanType.FieldsNoOrder, ScanType.Tag}:
-            matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
+        if self.scan_type in {
+            ScanType.Filename,
+            ScanType.Fields,
+            ScanType.FieldsNoOrder,
+            ScanType.Tag,
+        }:
+            matched_files = dedupe(
+                [m.first for m in matches] + [m.second for m in matches]
+            )
             self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         else:
             # Ticket #195
@@ -181,7 +207,7 @@ class Scanner:
             # reporting discarded matches.
             self.discarded_file_count = 0
         groups = [g for g in groups if any(not f.is_ref for f in g)]
-        logging.info('Created %d groups' % len(groups))
+        logging.info("Created %d groups" % len(groups))
         for g in groups:
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
@@ -190,7 +216,6 @@ class Scanner:
     min_match_percentage = 80
     mix_file_kind = True
     scan_type = ScanType.Filename
-    scanned_tags = {'artist', 'title'}
+    scanned_tags = {"artist", "title"}
     size_threshold = 0
     word_weighting = False
-

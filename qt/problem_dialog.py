@@ -8,14 +8,22 @@
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy,
-    QLabel, QTableView, QAbstractItemView
+    QDialog,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QSpacerItem,
+    QSizePolicy,
+    QLabel,
+    QTableView,
+    QAbstractItemView,
 )
 
 from hscommon.trans import trget
 from .problem_table import ProblemTable
 
-tr = trget('ui')
+tr = trget("ui")
+
 
 class ProblemDialog(QDialog):
     def __init__(self, parent, model, **kwargs):
@@ -62,4 +70,3 @@ class ProblemDialog(QDialog):
         self.closeButton.setDefault(True)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-

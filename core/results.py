@@ -20,6 +20,7 @@ from hscommon.trans import tr
 from . import engine
 from .markable import Markable
 
+
 class Results(Markable):
     """Manages a collection of duplicate :class:`~core.engine.Group`.
 
@@ -34,21 +35,22 @@ class Results(Markable):
         A list of all duplicates (:class:`~core.fs.File` instances), without ref, contained in the
         currently managed :attr:`groups`.
     """
-    #---Override
+
+    # ---Override
     def __init__(self, app):
         Markable.__init__(self)
         self.__groups = []
         self.__group_of_duplicate = {}
-        self.__groups_sort_descriptor = None # This is a tuple (key, asc)
+        self.__groups_sort_descriptor = None  # This is a tuple (key, asc)
         self.__dupes = None
-        self.__dupes_sort_descriptor = None # This is a tuple (key, asc, delta)
+        self.__dupes_sort_descriptor = None  # This is a tuple (key, asc, delta)
         self.__filters = None
         self.__filtered_dupes = None
         self.__filtered_groups = None
         self.__recalculate_stats()
         self.__marked_size = 0
         self.app = app
-        self.problems = [] # (dupe, error_msg)
+        self.problems = []  # (dupe, error_msg)
         self.is_modified = False
 
     def _did_mark(self, dupe):
@@ -90,7 +92,7 @@ class Results(Markable):
         else:
             Markable.mark_none(self)
 
-    #---Private
+    # ---Private
     def __get_dupe_list(self):
         if self.__dupes is None:
             self.__dupes = flatten(group.dupes for group in self.groups)
@@ -98,10 +100,13 @@ class Results(Markable):
                 # This is debug logging to try to figure out #44
                 logging.warning(
                     "There is a None value in the Results' dupe list. dupes: %r groups: %r",
-                    self.__dupes, self.groups
+                    self.__dupes,
+                    self.groups,
                 )
             if self.__filtered_dupes:
-                self.__dupes = [dupe for dupe in self.__dupes if dupe in self.__filtered_dupes]
+                self.__dupes = [
+                    dupe for dupe in self.__dupes if dupe in self.__filtered_dupes
+                ]
             sd = self.__dupes_sort_descriptor
             if sd:
                 self.sort_dupes(sd[0], sd[1], sd[2])
@@ -120,10 +125,18 @@ class Results(Markable):
             total_count = self.__total_count
             total_size = self.__total_size
         else:
-            mark_count = len([dupe for dupe in self.__filtered_dupes if self.is_marked(dupe)])
-            marked_size = sum(dupe.size for dupe in self.__filtered_dupes if self.is_marked(dupe))
-            total_count = len([dupe for dupe in self.__filtered_dupes if self.is_markable(dupe)])
-            total_size = sum(dupe.size for dupe in self.__filtered_dupes if self.is_markable(dupe))
+            mark_count = len(
+                [dupe for dupe in self.__filtered_dupes if self.is_marked(dupe)]
+            )
+            marked_size = sum(
+                dupe.size for dupe in self.__filtered_dupes if self.is_marked(dupe)
+            )
+            total_count = len(
+                [dupe for dupe in self.__filtered_dupes if self.is_markable(dupe)]
+            )
+            total_size = sum(
+                dupe.size for dupe in self.__filtered_dupes if self.is_markable(dupe)
+            )
         if self.mark_inverted:
             marked_size = self.__total_size - marked_size
         result = tr("%d / %d (%s / %s) duplicates marked.") % (
@@ -133,7 +146,7 @@ class Results(Markable):
             format_size(total_size, 2),
         )
         if self.__filters:
-            result += tr(" filter: %s") % ' --> '.join(self.__filters)
+            result += tr(" filter: %s") % " --> ".join(self.__filters)
         return result
 
     def __recalculate_stats(self):
@@ -151,7 +164,7 @@ class Results(Markable):
         for g in self.__groups:
             for dupe in g:
                 self.__group_of_duplicate[dupe] = g
-                if not hasattr(dupe, 'is_ref'):
+                if not hasattr(dupe, "is_ref"):
                     dupe.is_ref = False
         self.is_modified = bool(self.__groups)
         old_filters = nonone(self.__filters, [])
@@ -159,7 +172,7 @@ class Results(Markable):
         for filter_str in old_filters:
             self.apply_filter(filter_str)
 
-    #---Public
+    # ---Public
     def apply_filter(self, filter_str):
         """Applies a filter ``filter_str`` to :attr:`groups`
 
@@ -182,11 +195,15 @@ class Results(Markable):
             try:
                 filter_re = re.compile(filter_str, re.IGNORECASE)
             except re.error:
-                return # don't apply this filter.
+                return  # don't apply this filter.
             self.__filters.append(filter_str)
             if self.__filtered_dupes is None:
                 self.__filtered_dupes = flatten(g[:] for g in self.groups)
-            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(str(dupe.path)))
+            self.__filtered_dupes = set(
+                dupe
+                for dupe in self.__filtered_dupes
+                if filter_re.search(str(dupe.path))
+            )
             filtered_groups = set()
             for dupe in self.__filtered_dupes:
                 filtered_groups.add(self.get_group_of_duplicate(dupe))
@@ -214,6 +231,7 @@ class Results(Markable):
         :param get_file: a function f(path) returning a :class:`~core.fs.File` wrapping the path.
         :param j: A :ref:`job progress instance <jobs>`.
         """
+
         def do_match(ref_file, other_files, group):
             if not other_files:
                 return
@@ -223,31 +241,31 @@ class Results(Markable):
 
         self.apply_filter(None)
         root = ET.parse(infile).getroot()
-        group_elems = list(root.getiterator('group'))
+        group_elems = list(root.getiterator("group"))
         groups = []
         marked = set()
         for group_elem in j.iter_with_progress(group_elems, every=100):
             group = engine.Group()
             dupes = []
-            for file_elem in group_elem.getiterator('file'):
-                path = file_elem.get('path')
-                words = file_elem.get('words', '')
+            for file_elem in group_elem.getiterator("file"):
+                path = file_elem.get("path")
+                words = file_elem.get("words", "")
                 if not path:
                     continue
                 file = get_file(path)
                 if file is None:
                     continue
-                file.words = words.split(',')
-                file.is_ref = file_elem.get('is_ref') == 'y'
+                file.words = words.split(",")
+                file.is_ref = file_elem.get("is_ref") == "y"
                 dupes.append(file)
-                if file_elem.get('marked') == 'y':
+                if file_elem.get("marked") == "y":
                     marked.add(file)
-            for match_elem in group_elem.getiterator('match'):
+            for match_elem in group_elem.getiterator("match"):
                 try:
                     attrs = match_elem.attrib
-                    first_file = dupes[int(attrs['first'])]
-                    second_file = dupes[int(attrs['second'])]
-                    percentage = int(attrs['percentage'])
+                    first_file = dupes[int(attrs["first"])]
+                    second_file = dupes[int(attrs["second"])]
+                    percentage = int(attrs["percentage"])
                     group.add_match(engine.Match(first_file, second_file, percentage))
                 except (IndexError, KeyError, ValueError):
                     # Covers missing attr, non-int values and indexes out of bounds
@@ -339,9 +357,9 @@ class Results(Markable):
         :param outfile: file object or path.
         """
         self.apply_filter(None)
-        root = ET.Element('results')
+        root = ET.Element("results")
         for g in self.groups:
-            group_elem = ET.SubElement(root, 'group')
+            group_elem = ET.SubElement(root, "group")
             dupe2index = {}
             for index, d in enumerate(g):
                 dupe2index[d] = index
@@ -349,24 +367,24 @@ class Results(Markable):
                     words = engine.unpack_fields(d.words)
                 except AttributeError:
                     words = ()
-                file_elem = ET.SubElement(group_elem, 'file')
+                file_elem = ET.SubElement(group_elem, "file")
                 try:
-                    file_elem.set('path', str(d.path))
-                    file_elem.set('words', ','.join(words))
-                except ValueError: # If there's an invalid character, just skip the file
-                    file_elem.set('path', '')
-                file_elem.set('is_ref', ('y' if d.is_ref else 'n'))
-                file_elem.set('marked', ('y' if self.is_marked(d) else 'n'))
+                    file_elem.set("path", str(d.path))
+                    file_elem.set("words", ",".join(words))
+                except ValueError:  # If there's an invalid character, just skip the file
+                    file_elem.set("path", "")
+                file_elem.set("is_ref", ("y" if d.is_ref else "n"))
+                file_elem.set("marked", ("y" if self.is_marked(d) else "n"))
             for match in g.matches:
-                match_elem = ET.SubElement(group_elem, 'match')
-                match_elem.set('first', str(dupe2index[match.first]))
-                match_elem.set('second', str(dupe2index[match.second]))
-                match_elem.set('percentage', str(int(match.percentage)))
+                match_elem = ET.SubElement(group_elem, "match")
+                match_elem.set("first", str(dupe2index[match.first]))
+                match_elem.set("second", str(dupe2index[match.second]))
+                match_elem.set("percentage", str(int(match.percentage)))
         tree = ET.ElementTree(root)
 
         def do_write(outfile):
-            with FileOrPath(outfile, 'wb') as fp:
-                tree.write(fp, encoding='utf-8')
+            with FileOrPath(outfile, "wb") as fp:
+                tree.write(fp, encoding="utf-8")
 
         try:
             do_write(outfile)
@@ -392,7 +410,9 @@ class Results(Markable):
         """
         if not self.__dupes:
             self.__get_dupe_list()
-        keyfunc = lambda d: self.app._get_dupe_sort_key(d, lambda: self.get_group_of_duplicate(d), key, delta)
+        keyfunc = lambda d: self.app._get_dupe_sort_key(
+            d, lambda: self.get_group_of_duplicate(d), key, delta
+        )
         self.__dupes.sort(key=keyfunc, reverse=not asc)
         self.__dupes_sort_descriptor = (key, asc, delta)
 
@@ -408,8 +428,7 @@ class Results(Markable):
         self.groups.sort(key=keyfunc, reverse=not asc)
         self.__groups_sort_descriptor = (key, asc)
 
-    #---Properties
+    # ---Properties
     dupes = property(__get_dupe_list)
     groups = property(__get_groups, __set_groups)
     stat_line = property(__get_stat_line)
-
