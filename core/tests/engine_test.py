@@ -393,7 +393,11 @@ class TestCaseGetMatches:
         eq_(getmatches([]), [])
 
     def test_simple(self):
-        itemList = [NamedObject("foo bar"), NamedObject("bar bleh"), NamedObject("a b c foo")]
+        itemList = [
+            NamedObject("foo bar"),
+            NamedObject("bar bleh"),
+            NamedObject("a b c foo"),
+        ]
         r = getmatches(itemList)
         eq_(2, len(r))
         m = first(m for m in r if m.percentage == 50)  # "foo bar" and "bar bleh"
@@ -514,7 +518,11 @@ class TestCaseGetMatches:
             sys.setrecursionlimit(1000)
 
     def test_min_match_percentage(self):
-        itemList = [NamedObject("foo bar"), NamedObject("bar bleh"), NamedObject("a b c foo")]
+        itemList = [
+            NamedObject("foo bar"),
+            NamedObject("bar bleh"),
+            NamedObject("a b c foo"),
+        ]
         r = getmatches(itemList, min_match_percentage=50)
         eq_(1, len(r))  # Only "foo bar" / "bar bleh" should match
 

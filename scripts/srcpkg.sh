@@ -7,7 +7,7 @@ dest="dupeguru-src-${version}.tar"
 git archive -o ${dest} HEAD
 
 # Now, we need to include submodules
-submodules="hscommon qtlib cocoalib"
+submodules="cocoalib"
 
 for submodule in $submodules; do
     echo "Adding submodule ${submodule} to archive"
@@ -17,5 +17,5 @@ for submodule in $submodules; do
     rm ${archive_name}
 done
 
-gzip -f ${dest}
-echo "Built source package ${dest}.gz"
+xz ${dest}
+echo "Built source package ${dest}.xz"

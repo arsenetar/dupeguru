@@ -133,17 +133,6 @@ def package_source_txz():
     build_path = op.join(base_path, "build")
     dest = op.join(build_path, name)
     print_and_do("git archive -o {} HEAD".format(dest))
-    # Now, we need to include submodules
-    SUBMODULES = ["hscommon", "qtlib"]
-    for submodule in SUBMODULES:
-        print("Adding submodule {} to archive".format(submodule))
-        os.chdir(submodule)
-        archive_path = op.join(build_path, "{}.tar".format(submodule))
-        print_and_do(
-            "git archive -o {} --prefix {}/ HEAD".format(archive_path, submodule)
-        )
-        os.chdir(base_path)
-        print_and_do("tar -A {} -f {}".format(archive_path, dest))
     print_and_do("xz {}".format(dest))
 
 
@@ -155,6 +144,10 @@ def package_windows():
     version_array = match.group(0).split(".")
     match = re.search("[0-9]+", arch)
     bits = match.group(0)
+    if bits == "64":
+        arch = "x64"
+    else:
+        arch = "x86"
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
@@ -179,11 +172,24 @@ def package_windows():
     except Exception:
         print("Error creating version info file, exiting...")
         return
-    # run pyinstaller via command line
-    print_and_do(
-        "pyinstaller -w --name=dupeguru-win{0} --icon=images/dgse_logo.ico "
-        '--add-data "build/locale;locale" --add-data "build/help;help" '
-        "--version-file win_version_info.txt run.py".format(bits)
+    # run pyinstaller from here:
+    import PyInstaller.__main__
+
+    # UCRT dlls are included if the system has the windows kit installed
+    PyInstaller.__main__.run(
+        [
+            "--name=dupeguru-win{0}".format(bits),
+            "--windowed",
+            "--noconfirm",
+            "--icon=images/dgse_logo.ico",
+            "--add-data=build/locale;locale",
+            "--add-data=build/help;help",
+            "--version-file=win_version_info.txt",
+            "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(
+                arch
+            ),
+            "run.py",
+        ]
     )
     # remove version info file
     os.remove("win_version_info.txt")

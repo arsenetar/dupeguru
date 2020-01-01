@@ -480,7 +480,10 @@ def copy_embeddable_python_dylib(dst):
 
 def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
     sysprefix = sys.prefix  # could be a virtualenv
-    real_lib_prefix = sysconfig.get_config_var("LIBDEST")
+    basesysprefix = sys.base_prefix  # seems to be path to non-virtual sys
+    real_lib_prefix = sysconfig.get_config_var(
+        "LIBDEST"
+    )  # leaving this in case it is neede
 
     def is_stdlib_path(path):
         # A module path is only a stdlib path if it's in either sys.prefix or
@@ -490,7 +493,11 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
             return False
         if "site-package" in path:
             return False
-        if not (path.startswith(sysprefix) or path.startswith(real_lib_prefix)):
+        if not (
+            path.startswith(sysprefix)
+            or path.startswith(basesysprefix)
+            or path.startswith(real_lib_prefix)
+        ):
             return False
         return True
 
@@ -507,6 +514,10 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
             assert relpath.startswith(
                 "lib/python3."
             )  # we want to get rid of that lib/python3.x part
+            relpath = relpath[len("lib/python3.X/") :]
+        elif p.startswith(basesysprefix):
+            relpath = op.relpath(p, basesysprefix)
+            assert relpath.startswith("lib/python3.")
             relpath = relpath[len("lib/python3.X/") :]
         else:
             raise AssertionError()
