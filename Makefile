@@ -15,7 +15,7 @@ ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows
 	VENV_OPTIONS = 
 else
 	BIN = bin
-	SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
+	SO = cpython-3$(PYTHON_VERSION_MINOR)*.so
 	VENV_OPTIONS = --system-site-packages
 endif
 
