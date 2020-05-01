@@ -23,3 +23,5 @@ cocoa/autogen
 *.pyd
 *.exe
 *.spec
+
+.vscode

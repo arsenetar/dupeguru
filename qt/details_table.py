@@ -61,7 +61,7 @@ class DetailsTable(QTableView):
         hheader.setHighlightSections(False)
         hheader.setStretchLastSection(False)
         hheader.resizeSection(0, 100)
-        hheader.setSectionResizeMode(0, QHeaderView.Fixed)
+        hheader.setSectionResizeMode(0, QHeaderView.Interactive)
         hheader.setSectionResizeMode(1, QHeaderView.Stretch)
         hheader.setSectionResizeMode(2, QHeaderView.Stretch)
         vheader = self.verticalHeader()
