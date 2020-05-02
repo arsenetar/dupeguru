@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSignal, QModelIndex
+from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtWidgets import (
     QVBoxLayout,
@@ -27,22 +27,13 @@ from qtlib.util import createActions
 
 tr = trget("ui")
 
-class ClickableLabel(QLabel):
-    def __init__(self, parent):
-        QLabel.__init__(self, parent)
-        self.path = ""
-
-    def mouseDoubleClickEvent(self, event):
-        self.doubleClicked.emit()
-
-    doubleClicked = pyqtSignal()
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
         DetailsDialogBase.__init__(self, parent, app)
         self.selectedPixmap = None
         self.referencePixmap = None
-        self.scaleFactor = 0
+        self.scaleFactor = 1.0
 
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
@@ -69,21 +60,21 @@ class DetailsDialog(DetailsDialogBase):
                 self.zoomOut,
             ),
             (
-                "actionZoomReset",
+                "actionNormalSize",
+                QKeySequence.Refresh,
+                "zoom-normal",
+                tr("Normal size"),
+                self.zoomNormalSize,
+            )
+            (
+                "actionBestFit",
                 QKeySequence.Refresh,
                 "zoom-reset",
-                tr("Reset zoom factor"),
-                self.zoomReset,
+                tr("Best fit"),
+                self.zoomBestFit,
             )
         ]
         createActions(ACTIONS, self)
-
-        # special case as it resets when button is released
-        # self.actionSwap = QAction(self)
-        # # self.actionSwap.setIcon(QIcon(QPixmap()))
-        # self.actionSwap.setShortcut(QKeySequence.Backspace)
-        # self.actionSwap.setText(tr("Swap images"))
-        # self.actionSwap.pressed.connect(self.swapImages)
 
     def _setupUi(self):
         self._setupActions()
@@ -100,7 +91,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.setColumnStretch(1,0)
         self.horizontalLayout.setColumnStretch(2,1)
         self.horizontalLayout.setSpacing(4)
-        self.selectedImage = ClickableLabel(self)
+        self.selectedImage = QLabel(self)
         sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -111,7 +102,6 @@ class DetailsDialog(DetailsDialogBase):
         self.selectedImage.setScaledContents(False)
         self.selectedImage.setAlignment(Qt.AlignCenter)
         # self.horizontalLayout.addWidget(self.selectedImage)
-        self.selectedImage.doubleClicked.connect(self.mouseDoubleClickedEvent)
         self.horizontalLayout.addWidget(self.selectedImage, 0, 0, 3, 1)
 
         self.verticalToolBar = QToolBar(self)
@@ -141,17 +131,25 @@ class DetailsDialog(DetailsDialogBase):
         self.buttonZoomOut.setIcon(QIcon.fromTheme('zoom-out'))
         self.buttonZoomOut.setEnabled(False)
 
-        self.buttonResetZoom = QToolButton(self.verticalToolBar)
-        self.buttonResetZoom.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonResetZoom.setDefaultAction(self.actionZoomReset)
-        self.buttonResetZoom.setText('ResetZoom')
-        self.buttonResetZoom.setIcon(QIcon.fromTheme('zoom-original'))
-        self.buttonResetZoom.setEnabled(False)
+        self.buttonNormalSize = QToolButton(self.verticalToolBar)
+        self.buttonNormalSize.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonNormalSize.setDefaultAction(self.actionNormalSize)
+        self.buttonNormalSize.setText('Normal Size')
+        self.buttonNormalSize.setIcon(QIcon.fromTheme('zoom-original'))
+        self.buttonNormalSize.setEnabled(True)
+
+        self.buttonBestFit = QToolButton(self.verticalToolBar)
+        self.buttonBestFit.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonBestFit.setDefaultAction(self.actionZoomReset)
+        self.buttonBestFit.setText('BestFit')
+        self.buttonBestFit.setIcon(QIcon.fromTheme('zoom-best-fit'))
+        self.buttonBestFit.setEnabled(False)
 
         self.verticalToolBar.addWidget(self.buttonImgSwap)
         self.verticalToolBar.addWidget(self.buttonZoomIn)
         self.verticalToolBar.addWidget(self.buttonZoomOut)
-        self.verticalToolBar.addWidget(self.buttonResetZoom)
+        self.verticalToolBar.addWidget(self.buttonNormalSize)
+        self.verticalToolBar.addWidget(self.buttonBestFit)
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
         # self.horizontalLayout.addWidget(self.verticalToolBar, Qt.AlignVCenter)
@@ -182,7 +180,6 @@ class DetailsDialog(DetailsDialogBase):
         self.verticalLayout.addWidget(self.tableView)
 
     def _update(self):
-        self._updateButtons()
         if not self.app.model.selected_dupes:
             return
         dupe = self.app.model.selected_dupes[0]
@@ -196,40 +193,29 @@ class DetailsDialog(DetailsDialogBase):
         else:
             self.referencePixmap = QPixmap(str(ref.path))
             self.buttonImgSwap.setEnabled(True)
-        self.scaleFactor = 0
-        
-        self._updateButtons()
-        self._updateImages()
+       
+        self._resetButtons()
 
-    def _updateButtons(self):
-        if 0 < self.scaleFactor < 10:
-            self.buttonZoomIn.setEnabled(True)
-            self.buttonZoomOut.setEnabled(True)
-            self.buttonResetZoom.setEnabled(True)
-        elif self.scaleFactor >= 10:
-            self.buttonZoomIn.setEnabled(False)
-        else: # scaleFactor == 0
-            self.buttonZoomIn.setEnabled(True)
-            self.buttonZoomOut.setEnabled(False)
-            self.buttonResetZoom.setEnabled(False)
+        self._updateImages()
 
     def _updateImages(self):
         if self.selectedPixmap is not None:
             target_size = self.selectedImage.size()
-            if self.scaleFactor:
+            if self.scaleFactor > 0:
                 scaledPixmap = self.selectedPixmap.scaled(
                     target_size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation) # widget expands here
             else:
                 scaledPixmap = self.selectedPixmap.scaled(
                     target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.selectedImage.setPixmap(scaledPixmap)
+            # self.selectedImage.adjustSize()
         else:
             self.selectedImage.setPixmap(QPixmap())
-            self.scaleFactor = 0
+            self.scaleFactor = 1.0
 
         if self.referencePixmap is not None:
             target_size = self.referenceImage.size()
-            if self.scaleFactor:
+            if self.scaleFactor > 0:
                 scaledPixmap = self.referencePixmap.scaled(
                     target_size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation) # widget expands here
             else:
@@ -238,7 +224,7 @@ class DetailsDialog(DetailsDialogBase):
             self.referenceImage.setPixmap(scaledPixmap)
         else:
             self.referenceImage.setPixmap(QPixmap())
-            self.scaleFactor = 0
+            self.scaleFactor = 1.0
 
     # --- Override
     def resizeEvent(self, event):
@@ -255,9 +241,19 @@ class DetailsDialog(DetailsDialogBase):
             self._update()
 
     def scaleImages(self, factor):
-        self.scaleFactor += factor 
+        self.scaleFactor *= factor 
         print(f'Factor is now = {self.scaleFactor}.')
-        self._updateButtons()
+        self.referenceImage.resize(self.scaleFactor * self.referencePixmap.size())
+        self.selectedImage.resize(self.scaleFactor * self.selectedPixmap.size())
+
+        self.buttonZoomIn.setEnabled(self.scaleFactor < 3.0)
+        self.buttonZoomOut.setEnabled(self.scaleFactor > 1.0)
+        self.buttonBestFit.setEnabled(self.scaleFactor != 1.0)
+
+    def _resetButtons(self):
+        self.buttonZoomIn.setEnabled(True)
+        self.buttonZoomOut.setEnabled(False)
+        self.buttonBestFit.setEnabled(False)
 
     def swapImages(self):
         # self.horizontalLayout.replaceWidget(self.selectedImage, self.referenceImage)
@@ -269,31 +265,26 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.horizontalHeader().swapSections(1, 2)
 
     def zoomIn(self):
-        if self.scaleFactor >= 10: # clamping to x10
-            return
-        print("ZoomIN")
-        self.scaleImages(1)
+        self.scaleImages(1.25)
 
     def zoomOut(self):
-        if self.scaleFactor <= 0:
-            return
-        print("ZoomOut")
-        self.scaleImages(-1)
+        self.scaleImages(0.8)
 
-    def zoomReset(self):
-        print("ZoomReset")
-        self.scaleFactor = 0
-        self.buttonResetZoom.setEnabled(False)
+    def zoomNormalSize(self):
+        self.scaleFactor = 1.0
+
+    def zoomBestFit(self):
+        self.scaleFactor = 1.0
+        self.referenceImage.resize(self.scaleFactor * self.referencePixmap.size())
+        self.selectedImage.resize(self.scaleFactor * self.selectedPixmap.size())
+        self.buttonBestFit.setEnabled(False)
         self.buttonZoomOut.setEnabled(False)
         self.buttonZoomIn.setEnabled(True)
         self._updateImages()
 
     def imagePan(self):
         pass
-    
-    def mouseDoubleClickedEvent(self, path):
-        desktop.open_path(path)
 
-# TODO: open default application when double click on label
 # TODO: place handle above table view to drag and resize (splitter?)
 # TODO: colorize or bolden values in table views when they differ?
+# TODO: double click on details view PATH row opens path in default application
