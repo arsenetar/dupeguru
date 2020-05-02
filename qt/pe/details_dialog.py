@@ -4,8 +4,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
+from PyQt5.QtCore import Qt, QSize, QRectF, QPointF
+from PyQt5.QtGui import QPixmap, QIcon, QKeySequence, QPainter, QPalette
 from PyQt5.QtWidgets import (
     QVBoxLayout,
     QAbstractItemView,
@@ -16,7 +16,10 @@ from PyQt5.QtWidgets import (
     QToolButton,
     QGridLayout,
     QStyle,
-    QAction
+    QAction,
+    QWidget,
+    QScrollArea,
+    QApplication
 )
 
 from hscommon.trans import trget
@@ -27,6 +30,65 @@ from qtlib.util import createActions
 
 tr = trget("ui")
 
+class ImageViewer(QWidget):
+    def __init__(self, parent):
+        QWidget.__init__(self, parent)
+        self.app = QApplication
+        self.pixmap = QPixmap()
+        self.m_rect = QRectF()
+        self.reference = QPointF()
+        self.delta = QPointF()
+        self.scale = 1.0
+        self.label = QLabel(parent)
+        self.area = QScrollArea()
+
+        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setBackgroundRole(QPalette.Base)
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setScaledContents(True)
+    
+        self.area.setBackgroundRole(QPalette.Dark)
+        self.area.setWidget(self.label)
+        self.area.setVisible(False)
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.translate(self.rect().center())
+        painter.scale(self.scale, self.scale)
+        painter.translate(self.delta)
+        painter.drawPixmap(self.m_rect.topLeft(), self.pixmap)
+    
+    def mousePressEvent(self, event):
+        self.reference = event.pos()
+        self.app.setOverrideCursor(Qt.ClosedHandCursor)
+        self.setMouseTracking(True)
+
+    def mouseMoveEvent(self, event):
+        self.delta += (event.pos() - self.reference) * 1.0/self.scale
+        self.reference = event.pos()
+        self.update()
+
+    def mouseReleaseEvent(self, event):
+        self.app.restoreOverrideCursor()
+        self.setMouseTracking(False)
+
+    def setPixmap(self, pixmap):
+        self.pixmap = pixmap
+        self.m_rect = self.pixmap.rect()
+        self.m_rect.translate(-self.m_rect.center())
+        self.update()
+    
+    def scale(self, factor):
+        self.scale *= factor
+        self.update()
+    
+    def sizeHint(self):
+        return QSize(400, 400)
+
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
@@ -34,6 +96,7 @@ class DetailsDialog(DetailsDialogBase):
         self.selectedPixmap = None
         self.referencePixmap = None
         self.scaleFactor = 1.0
+        self.app = app
 
     def _setupActions(self):
         # (name, shortcut, icon, desc, func)
@@ -65,7 +128,7 @@ class DetailsDialog(DetailsDialogBase):
                 "zoom-normal",
                 tr("Normal size"),
                 self.zoomNormalSize,
-            )
+            ),
             (
                 "actionBestFit",
                 QKeySequence.Refresh,
@@ -91,17 +154,18 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.setColumnStretch(1,0)
         self.horizontalLayout.setColumnStretch(2,1)
         self.horizontalLayout.setSpacing(4)
-        self.selectedImage = QLabel(self)
-        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.selectedImage.sizePolicy().hasHeightForWidth()
-        )
-        self.selectedImage.setSizePolicy(sizePolicy)
-        self.selectedImage.setScaledContents(False)
-        self.selectedImage.setAlignment(Qt.AlignCenter)
-        # self.horizontalLayout.addWidget(self.selectedImage)
+        self.selectedImage = ImageViewer(self)
+        # self.selectedImage = QLabel(self)
+        # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(
+        #     self.selectedImage.sizePolicy().hasHeightForWidth()
+        # )
+        # self.selectedImage.setSizePolicy(sizePolicy)
+        # self.selectedImage.setScaledContents(False)
+        # self.selectedImage.setAlignment(Qt.AlignCenter)
+        # # self.horizontalLayout.addWidget(self.selectedImage)
         self.horizontalLayout.addWidget(self.selectedImage, 0, 0, 3, 1)
 
         self.verticalToolBar = QToolBar(self)
@@ -140,7 +204,7 @@ class DetailsDialog(DetailsDialogBase):
 
         self.buttonBestFit = QToolButton(self.verticalToolBar)
         self.buttonBestFit.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonBestFit.setDefaultAction(self.actionZoomReset)
+        self.buttonBestFit.setDefaultAction(self.actionBestFit)
         self.buttonBestFit.setText('BestFit')
         self.buttonBestFit.setIcon(QIcon.fromTheme('zoom-best-fit'))
         self.buttonBestFit.setEnabled(False)
