@@ -117,6 +117,8 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addLayout(
             horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
         )
+        self._setupAddCheckbox("reference_bold_font", tr("Bold font for reference."))
+        self.widgetsVLayout.addWidget(self.reference_bold_font)
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
@@ -187,6 +189,7 @@ class PreferencesDialogBase(QDialog):
         setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
         setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
         setchecked(self.debugModeBox, prefs.debug_mode)
+        setchecked(self.reference_bold_font, prefs.reference_bold_font)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
         self.fontSizeSpinBox.setValue(prefs.tableFontSize)
@@ -206,6 +209,7 @@ class PreferencesDialogBase(QDialog):
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
+        prefs.reference_bold_font = ischecked(self.reference_bold_font)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()

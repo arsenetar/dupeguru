@@ -25,6 +25,7 @@ class ResultsModel(Table):
         view.verticalHeader().setDefaultSectionSize(fm.height() + 2)
 
         app.willSavePrefs.connect(self.appWillSavePrefs)
+        self.prefs = app.prefs
 
     def _getData(self, row, column, role):
         if column.name == "marked":
@@ -40,9 +41,9 @@ class ResultsModel(Table):
             elif row.is_cell_delta(column.name):
                 return QBrush(QColor(255, 142, 40))  # orange
         elif role == Qt.FontRole:
-            isBold = row.isref
             font = QFont(self.view.font())
-            font.setBold(isBold)
+            if self.prefs.reference_bold_font:
+                font.setBold(row.isref)
             return font
         elif role == Qt.EditRole:
             if column.name == "name":
