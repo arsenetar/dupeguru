@@ -169,7 +169,7 @@ class ResultWindow(QMainWindow):
             ),
             (
                 "actionMarkSelected",
-                "",
+                "Space",
                 "",
                 tr("Mark Selected"),
                 self.markSelectedTriggered,
