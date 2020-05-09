@@ -52,6 +52,7 @@ class DetailsTable(QTableView):
         self.setAlternatingRowColors(True)
         self.setSelectionBehavior(QTableView.SelectRows)
         self.setShowGrid(False)
+        self.setWordWrap(False)
 
     def setModel(self, model):
         QTableView.setModel(self, model)

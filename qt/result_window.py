@@ -327,6 +327,7 @@ class ResultWindow(QMainWindow):
         self.resultsView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.resultsView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.resultsView.setSortingEnabled(True)
+        self.resultsView.setWordWrap(False)
         self.resultsView.verticalHeader().setVisible(False)
         h = self.resultsView.horizontalHeader()
         h.setHighlightSections(False)
