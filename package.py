@@ -90,7 +90,7 @@ def package_debian_distribution(distribution):
     )
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     os.chdir(destpath)
-    cmd = "dpkg-buildpackage -S -us -uc"
+    cmd = "dpkg-buildpackage -F -us -uc"
     os.system(cmd)
     os.chdir("../..")
 
