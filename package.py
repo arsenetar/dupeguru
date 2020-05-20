@@ -212,7 +212,11 @@ def main():
         package_windows()
     else:
         if not args.arch_pkg:
-            distname, _, _ = platform.dist()
+            try:
+              distname, _, _ = platform.dist()
+            except AttributeError:
+              import distro
+              distname, _, _ = distro.linux_distribution(full_distribution_name=False)
         else:
             distname = "arch"
         if distname == "arch":
