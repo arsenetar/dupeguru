@@ -7,6 +7,11 @@ matrix:
         include:
                 - os: "linux"
                   dist: "xenial"
+                  python: "3.8"
+                  script:
+                        - tox -e style
+                - os: "linux"
+                  dist: "xenial"
                   python: "3.6"
                 - os: "linux"
                   dist: "xenial"
