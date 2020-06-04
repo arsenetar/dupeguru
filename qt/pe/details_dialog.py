@@ -44,6 +44,7 @@ class ImageViewer(QWidget):
         self.reference = QPointF()
         self.delta = QPointF()
         self.scalefactor = 1.0
+        self.m_drag = False
 
         self.area = QScrollArea(parent)
         self.area.setBackgroundRole(QPalette.Dark)
@@ -75,7 +76,7 @@ class ImageViewer(QWidget):
         painter.scale(self.scalefactor, self.scalefactor)
         painter.translate(self.delta)
         painter.drawPixmap(self.m_rect.topLeft(), self.pixmap)
-        self.mouseMoved.emit(self.delta)
+        # print(f"paint event, delta={self.delta}")
 
     def setCenter(self):
         """ Resets origin """
@@ -86,24 +87,30 @@ class ImageViewer(QWidget):
         if self.parent.bestFit:
             event.ignore()
             return
+        if event.buttons() == Qt.LeftButton:
+            self.m_drag = True
 
         self.reference = event.pos()
         self.app.setOverrideCursor(Qt.ClosedHandCursor)
         self.setMouseTracking(True)
 
     def mouseMoveEvent(self, event):
-        if self.parent.bestFit or event.buttons() != Qt.LeftButton:
+        if self.parent.bestFit:
             event.ignore()
             return
 
         self.delta += (event.pos() - self.reference) * 1.0/self.scalefactor
         self.reference = event.pos()
+        if self.m_drag:
+            self.mouseMoved.emit(self.delta)
         self.update()
 
     def mouseReleaseEvent(self, event):
         if self.parent.bestFit:
             event.ignore()
             return
+        if event.buttons() == Qt.LeftButton:
+            m_drag = False
 
         self.app.restoreOverrideCursor()
         self.setMouseTracking(False)
