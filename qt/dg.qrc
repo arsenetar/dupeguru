@@ -5,6 +5,5 @@
     <file alias="plus">../images/plus_8.png</file>
     <file alias="minus">../images/minus_8.png</file>
     <file alias="search_clear_13">../qtlib/images/search_clear_13.png</file>
-    <file alias="zoom-in">../images/zoom-in.png</file>
 </qresource>
 </RCC>
