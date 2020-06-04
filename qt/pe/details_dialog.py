@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, QRectF, QPointF, pyqtSlot
+from PyQt5.QtCore import Qt, QSize, QRectF, QPointF, pyqtSlot, pyqtSignal, QEvent
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence, QPainter, QPalette
 from PyQt5.QtWidgets import (
     QVBoxLayout,
@@ -33,6 +33,8 @@ tr = trget("ui")
 
 class ImageViewer(QWidget):
     """ Displays image and allow manipulations """
+    mouseMoved = pyqtSignal(QPointF)
+
     def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
@@ -62,16 +64,27 @@ class ImageViewer(QWidget):
         self.area.setWidget(self.label)
         self.area.setVisible(False)
 
+    @pyqtSlot(QPointF)
+    def slot_paint_event(self, delta):
+        self.delta = delta
+        self.update()
+
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.translate(self.rect().center())
         painter.scale(self.scalefactor, self.scalefactor)
         painter.translate(self.delta)
         painter.drawPixmap(self.m_rect.topLeft(), self.pixmap)
+        self.mouseMoved.emit(self.delta)
+
+    def setCenter(self):
+        """ Resets origin """
+        self.delta = QPointF()
+        self.update()
 
     def mousePressEvent(self, event):
         if self.parent.bestFit:
-            event.ignore() # probably not needed
+            event.ignore()
             return
 
         self.reference = event.pos()
@@ -79,8 +92,8 @@ class ImageViewer(QWidget):
         self.setMouseTracking(True)
 
     def mouseMoveEvent(self, event):
-        if self.parent.bestFit:
-            event.ignore() # probably not needed
+        if self.parent.bestFit or event.buttons() != Qt.LeftButton:
+            event.ignore()
             return
 
         self.delta += (event.pos() - self.reference) * 1.0/self.scalefactor
@@ -89,7 +102,7 @@ class ImageViewer(QWidget):
 
     def mouseReleaseEvent(self, event):
         if self.parent.bestFit:
-            event.ignore() # probably not needed
+            event.ignore()
             return
 
         self.app.restoreOverrideCursor()
@@ -97,7 +110,7 @@ class ImageViewer(QWidget):
 
     def wheelEvent(self, event):
         if self.parent.bestFit:
-            event.ignore() # probably not needed
+            event.ignore()
             return
 
         if event.angleDelta().y() > 0:
@@ -115,7 +128,6 @@ class ImageViewer(QWidget):
 
     def scale(self, factor):
         self.scalefactor = factor
-        print(f"ImaveViewer.scalefactor={self.scalefactor}")
         # self.label.resize(self.scalefactor * self.label.size())
         self.update()
 
@@ -287,6 +299,9 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
 
+        self.referenceImage.mouseMoved.connect(self.selectedImage.slot_paint_event)
+        self.selectedImage.mouseMoved.connect(self.referenceImage.slot_paint_event)
+
     def _update(self):
         if not self.app.model.selected_dupes:
             return
@@ -374,7 +389,7 @@ class DetailsDialog(DetailsDialogBase):
         self.referenceImage.scale(self.scaleFactor)
         self.selectedImage.scale(self.scaleFactor)
 
-        self.buttonZoomIn.setEnabled(self.scaleFactor < 6.0)
+        self.buttonZoomIn.setEnabled(self.scaleFactor < 16.0)
         self.buttonZoomOut.setEnabled(self.scaleFactor > 1.0)
         self.buttonBestFit.setEnabled(self.bestFit is False)
         self.buttonNormalSize.setEnabled(self.scaleFactor != 1.0)
@@ -423,6 +438,8 @@ class DetailsDialog(DetailsDialogBase):
     def scale_to_bestfit(self):
         self.referenceImage.scale(self.scaleFactor)
         self.selectedImage.scale(self.scaleFactor)
+        self.referenceImage.setCenter()
+        self.selectedImage.setCenter()
         self._updateImages()
 
     @pyqtSlot()
