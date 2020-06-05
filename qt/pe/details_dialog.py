@@ -4,8 +4,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, QRectF, QPointF, pyqtSlot, pyqtSignal, QEvent
-from PyQt5.QtGui import QPixmap, QIcon, QKeySequence, QPainter, QPalette
+from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
+from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtWidgets import (
     QVBoxLayout,
     QAbstractItemView,
@@ -18,9 +18,7 @@ from PyQt5.QtWidgets import (
     QStyle,
     QAction,
     QWidget,
-    QScrollArea,
     QApplication,
-    QAbstractScrollArea
 )
 
 from hscommon.trans import trget
@@ -28,132 +26,16 @@ from hscommon import desktop
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from qtlib.util import createActions
-
+from qt.pe.image_viewer import ImageViewer
 tr = trget("ui")
-
-class ImageViewer(QWidget):
-    """ Displays image and allow manipulations """
-    mouseMoved = pyqtSignal(QPointF)
-
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.parent = parent
-        self.app = QApplication
-        self.pixmap = QPixmap()
-        self.m_rect = QRectF()
-        self.reference = QPointF()
-        self.delta = QPointF()
-        self.scalefactor = 1.0
-        self.m_drag = False
-
-        self.area = QScrollArea(parent)
-        self.area.setBackgroundRole(QPalette.Dark)
-        self.area.setWidgetResizable(True)
-        self.area.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        # self.area.viewport().setAttribute(Qt.WA_StaticContents)
-
-        self.label = QLabel()
-        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setBackgroundRole(QPalette.Base)
-        self.label.setSizePolicy(sizePolicy)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setScaledContents(True)
-
-        self.area.setWidget(self.label)
-        self.area.setVisible(False)
-
-    @pyqtSlot(QPointF)
-    def slot_paint_event(self, delta):
-        self.delta = delta
-        self.update()
-
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        painter.translate(self.rect().center())
-        painter.scale(self.scalefactor, self.scalefactor)
-        painter.translate(self.delta)
-        painter.drawPixmap(self.m_rect.topLeft(), self.pixmap)
-        # print(f"paint event, delta={self.delta}")
-
-    def setCenter(self):
-        """ Resets origin """
-        self.delta = QPointF()
-        self.update()
-
-    def mousePressEvent(self, event):
-        if self.parent.bestFit:
-            event.ignore()
-            return
-        if event.buttons() == Qt.LeftButton:
-            self.m_drag = True
-
-        self.reference = event.pos()
-        self.app.setOverrideCursor(Qt.ClosedHandCursor)
-        self.setMouseTracking(True)
-
-    def mouseMoveEvent(self, event):
-        if self.parent.bestFit:
-            event.ignore()
-            return
-
-        self.delta += (event.pos() - self.reference) * 1.0/self.scalefactor
-        self.reference = event.pos()
-        if self.m_drag:
-            self.mouseMoved.emit(self.delta)
-        self.update()
-
-    def mouseReleaseEvent(self, event):
-        if self.parent.bestFit:
-            event.ignore()
-            return
-        if event.buttons() == Qt.LeftButton:
-            m_drag = False
-
-        self.app.restoreOverrideCursor()
-        self.setMouseTracking(False)
-
-    def wheelEvent(self, event):
-        if self.parent.bestFit:
-            event.ignore()
-            return
-
-        if event.angleDelta().y() > 0:
-            self.parent.zoomIn()
-        else:
-            self.parent.zoomOut()
-
-    def setPixmap(self, pixmap):
-        self.pixmap = pixmap
-        if pixmap is None:
-            return
-        self.m_rect = self.pixmap.rect()
-        self.m_rect.translate(-self.m_rect.center())
-        self.update()
-
-    def scale(self, factor):
-        self.scalefactor = factor
-        # self.label.resize(self.scalefactor * self.label.size())
-        self.update()
-
-    def sizeHint(self):
-        return QSize(400, 400)
-
-    @pyqtSlot()
-    def pixmapReset(self):
-        self.scalefactor = 1.0
-        self.update()
-
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
         super().__init__(parent, app)
-        self.selectedPixmap = None
-        self.referencePixmap = None
-        self.scaledSelectedPixmap = None
-        self.scaledReferencePixmap = None
+        self.selectedPixmap = QPixmap()
+        self.referencePixmap = QPixmap()
+        self.scaledSelectedPixmap = QPixmap()
+        self.scaledReferencePixmap = QPixmap()
         self.scaleFactor = 1.0
         self.bestFit = True
 
@@ -215,7 +97,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.setColumnStretch(2,1)
         self.horizontalLayout.setSpacing(4)
 
-        self.selectedImage = ImageViewer(self)
+        self.selectedImage = ImageViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -280,7 +162,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
         # self.horizontalLayout.addWidget(self.verticalToolBar, Qt.AlignVCenter)
 
-        self.referenceImage = ImageViewer(self)
+        self.referenceImage = ImageViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -306,11 +188,12 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
 
-        self.referenceImage.mouseMoved.connect(self.selectedImage.slot_paint_event)
-        self.selectedImage.mouseMoved.connect(self.referenceImage.slot_paint_event)
+        self.disable_buttons()
 
     def _update(self):
+        print("_update()")
         if not self.app.model.selected_dupes:
+            self.clear_all()
             return
         dupe = self.app.model.selected_dupes[0]
         group = self.app.model.results.get_group_of_duplicate(dupe)
@@ -318,33 +201,43 @@ class DetailsDialog(DetailsDialogBase):
 
         self.resetState()
         self.selectedPixmap = QPixmap(str(dupe.path))
-        if ref is dupe:
-            self.referencePixmap = None
-            self.scaledReferencePixmap = None
+        if ref is dupe: # currently selected file is the ref
+            self.referencePixmap = QPixmap()
+            self.scaledReferencePixmap = QPixmap()
             self.buttonImgSwap.setEnabled(False)
+            # disable the blank widget.
+            self.disable_widget(self.referenceImage)
         else:
             self.referencePixmap = QPixmap(str(ref.path))
             self.buttonImgSwap.setEnabled(True)
+            self.enable_widget(self.referenceImage)
+
+        self.update_selected_widget()
+        self.update_reference_widget()
 
         self._updateImages()
 
     def _updateImages(self):
         target_size = None
-        if self.selectedPixmap is not None:
+        if self.selectedPixmap.isNull():
+            # self.disable_widget(self.selectedImage, self.referenceImage)
+            pass
+        else:
             target_size = self.selectedImage.size()
             if not self.bestFit:
                 # zoomed in state, expand
                 self.scaledSelectedPixmap = self.selectedPixmap.scaled(
                     target_size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
-            else: # best fit, keep ratio always
+            else: 
+                # best fit, keep ratio always
                 self.scaledSelectedPixmap = self.selectedPixmap.scaled(
                     target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.selectedImage.setPixmap(self.scaledSelectedPixmap)
-            # self.selectedImage.adjustSize()
-        else:
-            self.selectedImage.setPixmap(QPixmap())
 
-        if self.referencePixmap is not None:
+        if self.referencePixmap.isNull():
+            # self.disable_widget(self.referenceImage, self.selectedImage)
+            pass
+        else:
             # the selectedImage viewer widget sometimes ends up being bigger
             # than the referenceImage viewer, which distorts by one pixel the
             # scaled down pixmap for the reference, hence we'll reuse its size here.
@@ -356,8 +249,90 @@ class DetailsDialog(DetailsDialogBase):
                 self.scaledReferencePixmap = self.referencePixmap.scaled(
                     target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.referenceImage.setPixmap(self.scaledReferencePixmap)
+
+    def update_selected_widget(self):
+        print("update_selected_widget()")
+        if not self.selectedPixmap.isNull():
+            self.enable_widget(self.selectedImage)
+            self.connect_signal(self.selectedImage, self.referenceImage)
         else:
-            self.referenceImage.setPixmap(QPixmap())
+            self.disable_widget(self.selectedImage)
+            self.disconnect_signal(self.referenceImage)
+
+    def update_reference_widget(self):
+        print("update_reference_widget()")
+        if not self.referencePixmap.isNull():
+            self.enable_widget(self.referenceImage)
+            self.connect_signal(self.referenceImage, self.selectedImage)
+        else:
+            self.disable_widget(self.referenceImage)
+            self.disconnect_signal(self.selectedImage)
+
+    def enable_widget(self, widget):
+        """We want to receive signals from the other_widget."""
+        print(f"enable_widget({widget})")
+        if not widget.isEnabled():
+            widget.setEnabled(True)
+
+    def disable_widget(self, widget):
+        """Disables this widget and prevents receiving signals from other_widget."""
+        print(f"disable_widget({widget})")
+        widget.setPixmap(QPixmap())
+        widget.setDisabled(True)
+
+    def connect_signal(self, widget, other_widget):
+        """We want this widget to send its signal to the other_widget."""
+        print(f"connect_signal({widget}, {other_widget})")
+        if widget.connection is None:
+            if other_widget.isEnabled():
+                widget.connection = widget.mouseMoved.connect(other_widget.slot_paint_event)
+                print(f"Connected signal from {widget} to slot of {other_widget}")
+
+    def disconnect_signal(self, other_widget):
+        """We don't want this widget to send its signal anymore to the other_widget."""
+        print(f"disconnect_signal({other_widget}")
+        if other_widget.connection:
+            other_widget.mouseMoved.disconnect()
+            other_widget.connection = None
+            print(f"Disconnected signal from {other_widget}")
+
+    def resetState(self):
+        self.referencePixmap = QPixmap()
+        self.scaledReferencePixmap = QPixmap()
+        self.selectedPixmap = QPixmap()
+        self.scaledSelectedPixmap = QPixmap()
+        self.buttonZoomIn.setEnabled(False)
+        self.buttonZoomOut.setEnabled(False)
+        self.buttonBestFit.setEnabled(False) # active mode by default
+        self.buttonNormalSize.setEnabled(True)
+        self.bestFit = True
+        self.scaleFactor = 1.0
+        self.referenceImage.setCenter()
+        self.selectedImage.setCenter()
+
+    def clear_all(self):
+        """No item from the model, disable and clear everything."""
+        self.resetState()
+
+        self.selectedPixmap = QPixmap()
+        self.scaledSelectedPixmap = QPixmap()
+        self.selectedImage.setPixmap(QPixmap())
+        self.selectedImage.setDisabled(True)
+
+        self.referencePixmap = QPixmap()
+        self.scaledReferencePixmap = QPixmap()
+        self.referenceImage.setPixmap(QPixmap())
+        self.referenceImage.setDisabled(True)
+
+        self.buttonImgSwap.setDisabled(True)
+        self.buttonNormalSize.setDisabled(True)
+
+    def disable_buttons(self):
+        self.buttonImgSwap.setEnabled(False)
+        self.buttonZoomIn.setEnabled(False)
+        self.buttonZoomOut.setEnabled(False)
+        self.buttonNormalSize.setEnabled(False)
+        self.buttonBestFit.setEnabled(False)
 
     # --- Override
     def resizeEvent(self, event):
@@ -366,32 +341,22 @@ class DetailsDialog(DetailsDialogBase):
         self._updateImages()
 
     def show(self):
+        print("show()")
         DetailsDialogBase.show(self)
         self._update()
 
     # model --> view
     def refresh(self):
+        print("refresh()")
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
 
-    def resetState(self):
-        self.scaledReferencePixmap = None
-        self.scaledSelectedPixmapPixmap = None
-        self.buttonZoomIn.setEnabled(False)
-        self.buttonZoomOut.setEnabled(False)
-        self.buttonBestFit.setEnabled(False) # active mode by default
-        self.buttonNormalSize.setEnabled(True)
-        self.bestFit = True
-        self.scaleFactor = 1.0
-
+    # ImageViewers
     def scaleImages(self, factor):
         self.scaleFactor *= factor
-        print(f'QDialog scaleFactor = {self.scaleFactor} (+factor {factor})')
 
-        # returns QSize, not good anymore
-        # self.referenceImage.scale(self.scaleFactor * self.referencePixmap.size())
-        # self.selectedImage.scale(self.scaleFactor * self.selectedPixmap.size())
+        print(f'QDialog scaleFactor = {self.scaleFactor} (+factor {factor})')
 
         self.referenceImage.scale(self.scaleFactor)
         self.selectedImage.scale(self.scaleFactor)
@@ -403,14 +368,7 @@ class DetailsDialog(DetailsDialogBase):
 
     @pyqtSlot()
     def swapImages(self):
-        """ Swap pixmaps between ImageViewers """
-        # self.horizontalLayout.replaceWidget(self.selectedImage, self.referenceImage)
-
-        # self._tempPixmap = self.referencePixmap
-        # referencePixmap = self.selectedPixmap
-        # self.selectedPixmap = self._tempPixmap
-        # self._updateImages()
-
+        """Swap pixmaps between ImageViewers."""
         if self.bestFit:
             self.selectedImage.setPixmap(self.scaledReferencePixmap)
             self.referenceImage.setPixmap(self.scaledSelectedPixmap)
@@ -423,7 +381,7 @@ class DetailsDialog(DetailsDialogBase):
 
     @pyqtSlot()
     def deswapImages(self):
-        """ Restore swapped pixmaps """
+        """Restore swapped pixmaps between ImageViewers."""
         if self.bestFit:
             self.selectedImage.setPixmap(self.scaledSelectedPixmap)
             self.referenceImage.setPixmap(self.scaledReferencePixmap)
@@ -465,22 +423,15 @@ class DetailsDialog(DetailsDialogBase):
         self.scaleFactor = 1.0
 
         self.selectedImage.setPixmap(self.selectedPixmap)
-
-        if self.referencePixmap is None:
-            self.referenceImage.setPixmap(QPixmap())
-        else:
-            self.referenceImage.setPixmap(self.referencePixmap)
+        self.referenceImage.setPixmap(self.referencePixmap)
 
         self.selectedImage.pixmapReset()
         self.referenceImage.pixmapReset()
-        # self.referenceImage.label.resize(self.scaleFactor * self.referencePixmap.size())
-        # self.selectedImage.label.resize(self.scaleFactor * self.selectedPixmap.size())
-        # self.referenceImage.label.adjustSize()
-        # self.selectedImage.label.adjustSize()
+
+        self.update_selected_widget()
+        self.update_reference_widget()
 
         self.buttonNormalSize.setEnabled(False)
         self.buttonZoomIn.setEnabled(True)
         self.buttonZoomOut.setEnabled(True)
         self.buttonBestFit.setEnabled(True)
-        # self._updateImages()
-
