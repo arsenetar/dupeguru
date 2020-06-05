@@ -557,7 +557,7 @@ def fix_qt_resource_file(path):
     with open(path, "rb") as fp:
         contents = fp.read()
     lines = contents.split(b"\n")
-    lines = [l for l in lines if not l.startswith(b"#")]
+    lines = [lin for lin in lines if not lin.startswith(b"#")]
     with open(path, "wb") as fp:
         fp.write(b"\n".join(lines))
 
