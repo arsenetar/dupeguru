@@ -19,10 +19,13 @@ class BaseController(QObject):
         super().__init__()
         self.selectedViewer = selectedViewer
         self.referenceViewer = referenceViewer
+
+        # cached pixmaps
         self.selectedPixmap = QPixmap()
         self.referencePixmap = QPixmap()
         self.scaledSelectedPixmap = QPixmap()
         self.scaledReferencePixmap = QPixmap()
+
         self.scaleFactor = 1.0
         self.bestFit = True
         self.parent = parent #needed to change buttons' states
@@ -121,22 +124,13 @@ class BaseController(QObject):
         self.parent.buttonImgSwap.setDisabled(True)
         self.parent.buttonNormalSize.setDisabled(True)
 
-    def swapImages(self):
-        if self.bestFit:
-            self.selectedViewer.setPixmap(self.scaledReferencePixmap)
-            self.referenceViewer.setPixmap(self.scaledSelectedPixmap)
-        else:
-            self.selectedViewer.setPixmap(self.referencePixmap)
-            self.referenceViewer.setPixmap(self.selectedPixmap)
+    @pyqtSlot()
+    def swapPixmaps(self):
+        self.selectedViewer.getPixmap().swap(self.referenceViewer.getPixmap())
+        self.selectedViewer.center_and_update()
+        self.referenceViewer.center_and_update()
 
-    def deswapImages(self):
-        if self.bestFit:
-            self.selectedViewer.setPixmap(self.scaledSelectedPixmap)
-            self.referenceViewer.setPixmap(self.scaledReferencePixmap)
-        else:
-            self.selectedViewer.setPixmap(self.selectedPixmap)
-            self.referenceViewer.setPixmap(self.referencePixmap)
-
+    @pyqtSlot()
     def zoomBestFit(self):
         self.setBestFit(True)
         self.scaleFactor = 1.0
@@ -145,6 +139,7 @@ class BaseController(QObject):
         self.parent.buttonZoomIn.setEnabled(False)
         self.parent.buttonNormalSize.setEnabled(True)
 
+    @pyqtSlot()
     def zoomNormalSize(self):
         self.setBestFit(False)
         self.scaleFactor = 1.0
@@ -302,6 +297,9 @@ class QWidgetImageViewer(QWidget):
     def __repr__(self):
         return f'{self._instance_name}'
 
+    def getPixmap(self):
+        return self._pixmap
+
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.translate(self.rect().center())
@@ -378,6 +376,9 @@ class QWidgetImageViewer(QWidget):
             self.connect_signals()
             self.setEnabled(True)
         self._pixmap = pixmap
+        self.center_and_update()
+
+    def center_and_update(self):
         self._rect = self._pixmap.rect()
         self._rect.translate(-self._rect.center())
         self.update()
@@ -538,7 +539,7 @@ class ScrollAreaImageViewer(QScrollArea):
         self.update()
 
     def scale(self, factor):
-        self._scaleFactor = factor
+        self._scaleFactor *= factor
         self.label.resize(self._scaleFactor * self.label.pixmap().size())
         self.adjustScrollBar(self.scrollarea.horizontalScrollBar(), factor)
         self.adjustScrollBar(self.scrollarea.verticalScrollBar(), factor)

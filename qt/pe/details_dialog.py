@@ -176,7 +176,12 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
 
-        self.disable_buttons()
+        self.buttonImgSwap.setEnabled(False)
+        self.buttonZoomIn.setEnabled(False)
+        self.buttonZoomOut.setEnabled(False)
+        self.buttonNormalSize.setEnabled(False)
+        self.buttonBestFit.setEnabled(False)
+
         # We use different types of controller depending on the
         # underlying widgets we use to display images
         # because their interface methods might differ
@@ -213,14 +218,6 @@ class DetailsDialog(DetailsDialogBase):
         """No item from the model, disable and clear everything."""
         self.vController.clear_all()
 
-    def disable_buttons(self):
-        # FIXME Only called once at startup
-        self.buttonImgSwap.setEnabled(False)
-        self.buttonZoomIn.setEnabled(False)
-        self.buttonZoomOut.setEnabled(False)
-        self.buttonNormalSize.setEnabled(False)
-        self.buttonBestFit.setEnabled(False)
-
     # --- Override
     def resizeEvent(self, event):
         if self.vController is None:
@@ -244,15 +241,8 @@ class DetailsDialog(DetailsDialogBase):
     @pyqtSlot()
     def swapImages(self):
         """Swap pixmaps between ImageViewers."""
-        self.vController.swapImages()
+        self.vController.swapPixmaps()
         # swap the columns in the details table as well
-        self.tableView.horizontalHeader().swapSections(1, 2)
-
-    @pyqtSlot()
-    def deswapImages(self):
-        """Restore swapped pixmaps between ImageViewers."""
-        self.vController.deswapImages()
-        # deswap the columns in the details table as well
         self.tableView.horizontalHeader().swapSections(1, 2)
 
     @pyqtSlot()
