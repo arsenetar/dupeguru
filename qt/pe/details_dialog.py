@@ -15,7 +15,7 @@ from hscommon import desktop
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from qtlib.util import createActions
-from qt.pe.image_viewer import (QWidgetImageViewer,
+from qt.pe.image_viewer import (QWidgetImageViewer, ScrollAreaImageViewer,
     QWidgetImageViewerController, QLabelImageViewerController)
 tr = trget("ui")
 
@@ -186,7 +186,7 @@ class DetailsDialog(DetailsDialogBase):
                             self.referenceImageViewer,
                             self)
         elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
-            self.vController = (
+            self.vController = QLabelImageViewerController(
                             self.selectedImageViewer,
                             self.referenceImageViewer,
                             self)

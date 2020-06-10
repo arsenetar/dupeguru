@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import ( QLabel, QSizePolicy, QWidget, QScrollArea,
 #TODO: add keyboard shortcuts
 
 class BaseController(QObject):
-    """Base interface to keep image viewers synchronized.
+    """Base proxy interface to keep image viewers synchronized.
     Relays function calls. Singleton. """
 
     def __init__(self, selectedViewer, referenceViewer, parent):
@@ -26,6 +26,8 @@ class BaseController(QObject):
         self.scaleFactor = 1.0
         self.bestFit = True
         self.parent = parent #needed to change buttons' states
+        self.selectedViewer.controller = self
+        self.referenceViewer.controller = self
         self._setupConnections()
 
     def _setupConnections(self): #virtual
@@ -34,28 +36,25 @@ class BaseController(QObject):
     def update(self, ref, dupe):
         self.resetState()
         self.selectedPixmap = QPixmap(str(dupe.path))
-        if ref is dupe: # currently selected file is the ref
+        if ref is dupe: # currently selected file is the actual reference file
             self.referencePixmap = QPixmap()
             self.scaledReferencePixmap = QPixmap()
             self.parent.buttonImgSwap.setEnabled(False)
             # disable the blank widget.
-            self.disable_widget(self.referenceViewer)
+            self.referenceViewer.setPixmap(self.referencePixmap)
         else:
             self.referencePixmap = QPixmap(str(ref.path))
             self.parent.buttonImgSwap.setEnabled(True)
-            self.enable_widget(self.referenceViewer)
+            # self.enable_widget(self.referenceViewer)
 
-        self.update_selected_widget()
-        self.update_reference_widget()
+        # self.update_selected_widget()
+        # self.update_reference_widget()
 
         self._updateImages()
 
     def _updateImages(self):
         target_size = None
-        if self.selectedPixmap.isNull():
-            # self.disable_widget(self.selectedViewer, self.referenceViewer)
-            pass
-        else:
+        if not self.selectedPixmap.isNull():
             target_size = self.selectedViewer.size()
             if not self.bestFit:
                 # zoomed in state, expand
@@ -67,10 +66,7 @@ class BaseController(QObject):
                     target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.selectedViewer.setPixmap(self.scaledSelectedPixmap)
 
-        if self.referencePixmap.isNull():
-            # self.disable_widget(self.referenceViewer, self.selectedViewer)
-            pass
-        else:
+        if not self.referencePixmap.isNull():
             # the selectedImage viewer widget sometimes ends up being bigger
             # than the referenceImage viewer, which distorts by one pixel the
             # scaled down pixmap for the reference, hence we'll reuse its size here.
@@ -156,11 +152,11 @@ class BaseController(QObject):
         self.selectedViewer.setPixmap(self.selectedPixmap)
         self.referenceViewer.setPixmap(self.referencePixmap)
 
+        # self.update_selected_widget()
+        # self.update_reference_widget()
+
         self.selectedViewer.pixmapReset()
         self.referenceViewer.pixmapReset()
-
-        self.update_selected_widget()
-        self.update_reference_widget()
 
         self.parent.buttonNormalSize.setEnabled(False)
         self.parent.buttonZoomIn.setEnabled(True)
@@ -177,63 +173,65 @@ class BaseController(QObject):
         self.referenceViewer.setCenter()
 
 
-    def update_selected_widget(self):
-        print("update_selected_widget()")
-        if not self.selectedPixmap.isNull():
-            self.enable_widget(self.selectedViewer)
-            self.connect_signal(self.selectedViewer, self.referenceViewer)
-        else:
-            self.disable_widget(self.selectedViewer)
-            self.disconnect_signal(self.referenceViewer)
+    # def update_selected_widget(self):
+    #     print("update_selected_widget()")
+    #     if not self.selectedPixmap.isNull():
+    #         self.enable_widget(self.selectedViewer)
+    #         self.connect_signal(self.selectedViewer, self.referenceViewer)
+    #     else:
+    #         self.disable_widget(self.selectedViewer)
+    #         self.disconnect_signal(self.referenceViewer)
 
-    def update_reference_widget(self):
-        print("update_reference_widget()")
-        if not self.referencePixmap.isNull():
-            self.enable_widget(self.referenceViewer)
-            self.connect_signal(self.referenceViewer, self.selectedViewer)
-        else:
-            self.disable_widget(self.referenceViewer)
-            self.disconnect_signal(self.selectedViewer)
+    # def update_reference_widget(self):
+    #     print("update_reference_widget()")
+    #     if not self.referencePixmap.isNull():
+    #         self.enable_widget(self.referenceViewer)
+    #         self.connect_signal(self.referenceViewer, self.selectedViewer)
+    #     else:
+    #         self.disable_widget(self.referenceViewer)
+    #         self.disconnect_signal(self.selectedViewer)
 
-    def enable_widget(self, widget):
-        """We want to receive signals from the other_widget."""
-        print(f"enable_widget({widget})")
-        if not widget.isEnabled():
-            widget.setEnabled(True)
+    # def enable_widget(self, widget):
+    #     if not widget.isEnabled():
+    #         widget.setEnabled(True)
 
-    def disable_widget(self, widget):
-        """Disables this widget and prevents receiving signals from other_widget."""
-        print(f"disable_widget({widget})")
-        widget.setPixmap(QPixmap())
-        widget.setDisabled(True)
+    # def disable_widget(self, widget):
+    #     """Disables this widget and prevents receiving signals from other_widget."""
+    #     print(f"disable_widget({widget})")
+    #     widget.setPixmap(QPixmap())
+    #     widget.setDisabled(True)
 
-    def connect_signal(self, widget, other_widget):
-        """We want this widget to send its signal to the other_widget."""
-        print(f"connect_signal({widget}, {other_widget})")
-        if widget.connection is None:
-            if other_widget.isEnabled():
-                widget.connection = widget.mouseDragged.connect(other_widget.slot_paint_event)
-                print(f"Connected signal from {widget} to slot of {other_widget}")
+    # def connect_signal(self, widget, other_widget):
+    #     """We want this widget to send its signal to the other_widget."""
+    #     print(f"connect_signal({widget}, {other_widget})")
+    #     if widget.connection is None:
+    #         if other_widget.isEnabled():
+    #             widget.connection = widget.mouseDragged.connect(other_widget.slot_paint_event)
+    #             print(f"Connected signal from {widget} to slot of {other_widget}")
 
-    def disconnect_signal(self, other_widget):
-        """We don't want this widget to send its signal anymore to the other_widget."""
-        print(f"disconnect_signal({other_widget}")
-        if other_widget.connection:
-            other_widget.mouseDragged.disconnect()
-            other_widget.connection = None
-            print(f"Disconnected signal from {other_widget}")
+    # def disconnect_signal(self, other_widget):
+    #     """We don't want this widget to send its signal anymore to the other_widget."""
+    #     print(f"disconnect_signal({other_widget}")
+    #     if other_widget.connection:
+    #         other_widget.mouseDragged.disconnect()
+    #         other_widget.connection = None
+    #         print(f"Disconnected signal from {other_widget}")
+
 
 
 class QWidgetImageViewerController(BaseController):
+    """Specialized version for QWidget-based viewers"""
     def __init__(self, selectedViewer, referenceViewer, parent):
         super().__init__(selectedViewer, referenceViewer, parent)
         # self._setupConnections()
 
     def _setupConnections(self):
-        self.selectedViewer.mouseWheeled.connect(
-            self.scaleImages)
-        self.referenceViewer.mouseWheeled.connect(
-            self.scaleImages)
+        # self.selectedViewer._wheelConnection = \
+        #     self.selectedViewer.mouseWheeled.connect(self.scaleImages)
+        # self.referenceViewer._wheelConnection = \
+        #     self.referenceViewer.mouseWheeled.connect(self.scaleImages)
+        self.selectedViewer.connect_signals()
+        self.referenceViewer.connect_signals()
 
     def scale(self, factor):
         self.selectedViewer.scale(factor)
@@ -251,10 +249,17 @@ class QWidgetImageViewerController(BaseController):
         super().setCenter()
         super()._updateImages()
 
+    @pyqtSlot(QPointF)
+    def slot_paint_event(self, delta):
+        if self.sender() is self.referenceViewer:
+            self.selectedViewer.slot_paint_event(delta)
+        else:
+            self.referenceViewer.slot_paint_event(delta)
 
 
 
 class QLabelImageViewerController(BaseController):
+    """Specialized version fro QLabel-based viewers"""
     def __init__(self, selectedViewer, referenceViewer, parent):
         super().__init__(selectedViewer, referenceViewer, parent)
 
@@ -269,6 +274,8 @@ class QLabelImageViewerController(BaseController):
         self.referenceViewer.scale(self.scaleFactor)
 
 class GraphicsViewController(BaseController):
+    """Specialized version fro QGraphicsView-based viewers"""
+    #TODO
     pass
 
 
@@ -286,29 +293,11 @@ class QWidgetImageViewer(QWidget):
         self._delta = QPointF()
         self._scaleFactor = 1.0
         self._drag = False
-        self.connection = None # signal bound to a slot
+        self._dragConnection = None
+        self._wheelConnection = None
         self._instance_name = name
         self.bestFit = True
-
-        # self.label = QLabel()
-        # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        # self.label.setBackgroundRole(QPalette.Base)
-        # self.label.setSizePolicy(sizePolicy)
-        # self.label.setAlignment(Qt.AlignCenter)
-        # self.label.setScaledContents(True)
-
-        # self.scrollarea = QScrollArea(self)
-        # self.scrollarea.setBackgroundRole(QPalette.Dark)
-        # self.scrollarea.setWidgetResizable(True)
-        # self.scrollarea.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        # # self.scrollarea.viewport().setAttribute(Qt.WA_StaticContents)
-
-        # self.scrollarea.setWidget(self.label)
-        # self.scrollarea.setVisible(True)
-
+        self.controller = None
 
     def __repr__(self):
         return f'{self._instance_name}'
@@ -331,6 +320,10 @@ class QWidgetImageViewer(QWidget):
     def changeEvent(self, event):
         if event.type() == QEvent.EnabledChange:
             print(f"{self} is now {'enabled' if self.isEnabled() else 'disabled'}")
+            if self.isEnabled():
+                self.connect_signals()
+                return
+            self.disconnect_signals()
 
     def mousePressEvent(self, event):
         if self.bestFit:
@@ -378,14 +371,35 @@ class QWidgetImageViewer(QWidget):
         if pixmap.isNull():
             if not self._pixmap.isNull():
                 self._pixmap = pixmap
+                self.disconnect_signals()
                 self.update()
             return
         elif not self.isEnabled():
+            self.connect_signals()
             self.setEnabled(True)
         self._pixmap = pixmap
         self._rect = self._pixmap.rect()
         self._rect.translate(-self._rect.center())
         self.update()
+
+    def isActive(self):
+        return True if not self.pixmap.isNull() else False
+
+    def disconnect_signals(self):
+        if self._dragConnection:
+            self.mouseDragged.disconnect()
+            self._dragConnection = None
+        if self._wheelConnection:
+            self.mouseWheeled.disconnect()
+            self._wheelConnection = None
+
+    def connect_signals(self):
+        if not self._dragConnection:
+            self._dragConnection = self.mouseDragged.connect(
+                                        self.controller.slot_paint_event)
+        if not self._wheelConnection:
+            self._wheelConnection = self.mouseWheeled.connect(
+                                        self.controller.scaleImages)
 
     def scale(self, factor):
         self._scaleFactor = factor
@@ -404,7 +418,7 @@ class QWidgetImageViewer(QWidget):
     def slot_paint_event(self, delta):
         self._delta = delta
         self.update()
-        print(f"{self} received signal from {self.sender()}")
+        # print(f"{self} received drag signal from {self.sender()}")
 
 
 class ScrollAreaImageViewer(QScrollArea):
@@ -423,6 +437,7 @@ class ScrollAreaImageViewer(QScrollArea):
         self._drag = False
         self.connection = None # signal bound to a slot
         self._instance_name = name
+        self.controller = None
 
         self.label = QLabel()
         sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
