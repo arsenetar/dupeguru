@@ -15,8 +15,9 @@ from hscommon import desktop
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from qtlib.util import createActions
-from qt.pe.image_viewer import (QWidgetImageViewer, ScrollAreaImageViewer,
-    QWidgetImageViewerController, QLabelImageViewerController)
+from qt.pe.image_viewer import (
+    QWidgetImageViewer, ScrollAreaImageViewer, GraphicsViewViewer,
+    QWidgetController, ScrollAreaController, GraphicsViewController)
 tr = trget("ui")
 
 class DetailsDialog(DetailsDialogBase):
@@ -83,7 +84,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.setColumnStretch(2,1)
         self.horizontalLayout.setSpacing(4)
 
-        self.selectedImageViewer = QWidgetImageViewer(
+        self.selectedImageViewer = ScrollAreaImageViewer(
             self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
@@ -111,7 +112,7 @@ class DetailsDialog(DetailsDialogBase):
         self.buttonImgSwap.setText('Swap images')
         self.buttonImgSwap.setToolTip('Swap images')
         self.buttonImgSwap.pressed.connect(self.swapImages)
-        self.buttonImgSwap.released.connect(self.deswapImages)
+        self.buttonImgSwap.released.connect(self.swapImages)
 
         self.buttonZoomIn = QToolButton(self.verticalToolBar)
         self.buttonZoomIn.setToolButtonStyle(Qt.ToolButtonIconOnly)
@@ -149,7 +150,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
         # self.horizontalLayout.addWidget(self.verticalToolBar, Qt.AlignVCenter)
 
-        self.referenceImageViewer = QWidgetImageViewer(
+        self.referenceImageViewer = ScrollAreaImageViewer(
             self, "referenceImage")
         # self.referenceImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
@@ -186,20 +187,25 @@ class DetailsDialog(DetailsDialogBase):
         # underlying widgets we use to display images
         # because their interface methods might differ
         if isinstance(self.selectedImageViewer, QWidgetImageViewer):
-            self.vController = QWidgetImageViewerController(
+            self.vController = QWidgetController(
                             self.selectedImageViewer,
                             self.referenceImageViewer,
                             self)
         elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
-            self.vController = QLabelImageViewerController(
+            self.vController = ScrollAreaController(
+                            self.selectedImageViewer,
+                            self.referenceImageViewer,
+                            self)
+        elif isinstance(self.selectedImageViewer, GraphicsViewViewer):
+            self.vController = GraphicsViewController(
                             self.selectedImageViewer,
                             self.referenceImageViewer,
                             self)
 
-
     def _update(self):
         if not self.app.model.selected_dupes:
-            self.clear_all()
+            # No item from the model, disable and clear everything.
+            self.vController.clear_all()
             return
         dupe = self.app.model.selected_dupes[0]
         group = self.app.model.results.get_group_of_duplicate(dupe)
@@ -214,14 +220,11 @@ class DetailsDialog(DetailsDialogBase):
             return
         self.vController._updateImages()
 
-    def clear_all(self):
-        """No item from the model, disable and clear everything."""
-        self.vController.clear_all()
-
     # --- Override
     def resizeEvent(self, event):
         if self.vController is None:
             return
+        # update scaled down pixmaps
         self._updateImages()
 
     def show(self):
@@ -235,32 +238,23 @@ class DetailsDialog(DetailsDialogBase):
             self._update()
 
     # ImageViewers
-    def scaleImages(self, factor):
-        self.vController.scaleImages(factor)
-
     @pyqtSlot()
     def swapImages(self):
-        """Swap pixmaps between ImageViewers."""
         self.vController.swapPixmaps()
         # swap the columns in the details table as well
         self.tableView.horizontalHeader().swapSections(1, 2)
 
     @pyqtSlot()
     def zoomIn(self):
-        self.vController.scaleImages(1.25)
+        self.vController.zoom_in()
 
     @pyqtSlot()
     def zoomOut(self):
-        self.vController.scaleImages(0.8)
-
-    @pyqtSlot()
-    def scale_to_bestfit(self):
-        self.vController.scale_to_bestfit()
+        self.vController.zoom_out()
 
     @pyqtSlot()
     def zoomBestFit(self):
-        self.vController.zoomBestFit()
-        self.scale_to_bestfit()
+        self.vController.scale_to_bestfit()
 
     @pyqtSlot()
     def zoomNormalSize(self):
