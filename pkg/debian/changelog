@@ -1,0 +1,351 @@
+dupeguru (4.0.4-1) unstable; urgency=low
+
+  * Update qt/platform.py to support other Unix style OSes (#444)
+  * Fix font size scaling issue in properties dialog [qt] (#504)
+  * Updates to support Python 3.7
+  * Fix issue with result window appearing partially off-screen [qt] (#521)
+  * Fix translation error for Simplified Chinese
+  * Updates to language files for German (#479)
+  * Fix error with multiple close calls to the progress window [qt] (#460, #449)
+  * Add Travis CI Builds
+  * Un-recurse methods get_files() and get_state() to improve stability (#421)
+  * Updates to language files for Italian (#445, #446, #447, #448)
+  * Fix issue with cache_shelve (#402, #439)
+  * Updated Windows packaging and builds (#438, #456, #461, #491, #474, #490, #565)
+  * Handle OS termination signals (#425)
+  * Make documentation installation optional
+  * Move cocoa UI to dupeguru-cocoa [cocoa]
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Mon, 13 May 2019 00:00:00 +0000
+
+dupeguru (4.0.3-1) unstable; urgency=low
+
+  * Add new picture cache backend: shelve
+  * Make shelve picture cache backend the active one on MacOS to fix #394 more  elegantly. [cocoa]
+  * Remove Sparkle (auto-updates) due to technical limitations. [cocoa]
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 24 Nov 2016 00:00:00 +0000
+
+dupeguru (4.0.2-1) unstable; urgency=low
+
+  * Fix systematic crash in Picture Mode under MacOS Sierra. (#394)
+  * No change for Linux. Just keeping version in sync.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sun, 09 Oct 2016 00:00:00 +0000
+
+dupeguru (4.0.1-1) unstable; urgency=low
+
+  * Add Greek localization, by Gabriel Koutilellis. (#382)
+  * Fix localization base path. [qt] (#378)
+  * Fix broken load results dialog. [qt]
+  * Fix crash on load results. [cocoa] (#380)
+  * Save preferences more predictably. [qt] (#379)
+  * Fix picture mode's fuzzy block scanner threshold. (#387)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 24 Aug 2016 00:00:00 +0000
+
+dupeguru (4.0.0-1) unstable; urgency=low
+
+  * Merge Standard, Music and Picture editions in the same application!
+  * Improve documentation. (#294)
+  * Add Polish, Korean, Spanish and Dutch localizations.
+  * qt: Fix wrong use_regexp option propagation to core. (#295)
+  * qt: Fix progress window mistakenly showing up on startup. (#357)
+  * Bump Python requirement to v3.4.
+  * Bump OS X requirement to 10.8
+  * Drop Windows support, maybe temporarily.  `Details <https://www.hardcoded.net/archive2015#2015-11-01>`_
+  * cocoa: Drop iPhoto, Aperture and iTunes support. Was unmaintained and obsolete.
+  * Drop "Audio Contents" scan type. Was confusing and seldom useful.
+  * Change license to GPLv3
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Fri, 01 Jul 2016 00:00:00 +0000
+
+dupeguru (3.9.1-1) unstable; urgency=low
+
+  * Fixed ``AttributeError: 'ComboboxModel' object has no attribute 'reset'``. [Linux, Windows] (#254)
+  * Fixed ``PermissionError`` on saving results. (#266)
+  * Fixed a build problem introduced by Sphinx 1.2.3.
+  * Updated German localisation, by Frank Weber.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Fri, 17 Oct 2014 00:00:00 +0000
+
+dupeguru (3.9.0-1) unstable; urgency=low
+
+  * This is mostly a dependencies upgrade.
+  * Upgraded to Python 3.3.
+  * Upgraded to Qt 5.
+  * Minimum Windows version is now Windows 7 64bit.
+  * Minimum Ubuntu version is now 14.04.
+  * Minimum OS X version is now 10.7 (Lion).
+  * ... But with a couple of little improvements.
+  * Improved documentation.
+  * Overwrite subfolders' state when setting states in folder dialog (#248)
+  * The error report dialog now brings the user to Github issues.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 19 Apr 2014 00:00:00 +0000
+
+dupeguru (3.8.0-1) unstable; urgency=low
+
+  * Disable symlink/hardlink deletion option when not relevant. (#247)
+  * Make Cmd+A select all folders in the Folder Selection dialog. [Mac] (#228)
+  * Make non-numeric delta comparison case insensitive. (#239)
+  * Fix surrogate-related UnicodeEncodeError on CSV export. (#210)
+  * Fixed crash on Dupe Count sorting with Delta + Dupes Only. (#238)
+  * Improved documentation.
+  * Important internal refactorings.
+  * Dropped Ubuntu 12.04 and 12.10 support.
+  * Removed the fairware dialog ([More Info](http://www.hardcoded.net/articles/phasing-out-fairware)).
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 07 Dec 2013 00:00:00 +0000
+
+dupeguru (3.7.1-1) unstable; urgency=low
+
+  * Fixed folder scan type, which was broken in v3.7.0.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Mon, 19 Aug 2013 00:00:00 +0000
+
+dupeguru (3.7.0-1) unstable; urgency=low
+
+  * Improved delta values to support non-numerical values. (#213)
+  * Improved the Re-Prioritize dialog's UI. (#224)
+  * Added hardlink/symlink support on Windows Vista+. (#220)
+  * Dropped 32bit support on Mac OS X.
+  * Added Vietnamese localization by Phan Anh.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 17 Aug 2013 00:00:00 +0000
+
+dupeguru (3.6.1-1) unstable; urgency=low
+
+  * Improved "Make Selection Reference" to make it clearer. (#222)
+  * Improved "Open Selected" to allow opening more than one file at once. (#142)
+  * Fixed a few typos here and there. (#216 #225)
+  * Tweaked the fairware dialog ([More Info](http://www.hardcoded.net/articles/phasing-out-fairware)).
+  * Added Arch Linux packaging
+  * Added a 64-bit build for Windows.
+  * Improved Russian localization by Kyrill Detinov.
+  * Improved Brazilian localization by Victor Figueiredo.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sun, 28 Apr 2013 00:00:00 +0000
+
+dupeguru (3.6.0-1) unstable; urgency=low
+
+  * Added "Export to CSV". (#189)
+  * Added "Replace with symlinks" to complement "Replace with hardlinks". [Mac, Linux] (#194)
+  * dupeGuru now tells how many duplicates were affected after each re-prioritization operation. (#204)
+  * Added Longest/Shortest filename criteria in the re-prioritize dialog. (#198)
+  * Fixed result table cells which mistakenly became writable in v3.5.0. [Mac] (#203)
+  * Fixed "Rename Selected" which was broken since v3.5.0. [Mac] (#202)
+  * Fixed a bug where "Reset to Defaults" in the Columns menu wouldn't refresh menu items' marked state.
+  * Added Brazilian localization by Victor Figueiredo.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 08 Aug 2012 00:00:00 +0000
+
+dupeguru (3.5.0-1) unstable; urgency=low
+
+  * Added a Deletion Options panel.
+  * Greatly improved memory usage for big scans.
+  * Added a keybinding for the filter field. (#182) [Mac]
+  * Upgraded minimum requirements for Ubuntu to 12.04.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Fri, 01 Jun 2012 00:00:00 +0000
+
+dupeguru (3.4.1-1) unstable; urgency=low
+
+  * Fixed the "Folders" scan type. [Mac]
+  * Fixed localization issues. [Windows, Linux]
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 14 Apr 2012 00:00:00 +0000
+
+dupeguru (3.4.0-1) unstable; urgency=low
+
+  * Improved results window UI. [Windows, Linux]
+  * Added a dialog to edit the Ignore List.
+  * Added the ability to sort results by "marked" status.
+  * Fixed "Open with default application". (#190)
+  * Fixed a bug where there would be a false reporting of discarded matches. (#195)
+  * Fixed various localization glitches.
+  * Fixed hard crashes on crash reporting. (#196)
+  * Fixed bug where the details panel would show up at inconvenient places in the screen. [Windows, Linux]
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 29 Mar 2012 00:00:00 +0000
+
+dupeguru (3.3.3-1) unstable; urgency=low
+
+  * Fixed crash on adding some folders. [Mac OS X]
+  * Added Ukrainian localization by Yuri Petrashko.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 01 Feb 2012 00:00:00 +0000
+
+dupeguru (3.3.2-1) unstable; urgency=low
+
+  * Fixed random hard crashes (yeah, again). [Mac OS X]
+  * Fixed crash on Export to HTML. [Windows, Linux]
+  * Added Armenian localization by Hrant Ohanyan.
+  * Added Russian localization by Igor Pavlov.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Mon, 16 Jan 2012 00:00:00 +0000
+
+dupeguru (3.3.1-1) unstable; urgency=low
+
+  * Fixed a couple of nasty crashes.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Fri, 02 Dec 2011 00:00:00 +0000
+
+dupeguru (3.3.0-1) unstable; urgency=low
+
+  * Added multiple-selection in folder selection dialog for a more efficient folder removal. (#179)
+  * Fixed a crash in the prioritize dialog. (#178)
+  * Fixed a bug where mass marking with a filter would mark more than filtered duplicates. (#181)
+  * Fixed random hard crashes. [Mac OS X] (#183 #184)
+  * Added Czech localization by Aleš Nehyba.
+  * Added Italian localization by Paolo Rossi.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 30 Nov 2011 00:00:00 +0000
+
+dupeguru (3.2.1-1) unstable; urgency=low
+
+  * Fixed a couple of broken action bindings from v3.2.0.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sun, 02 Oct 2011 00:00:00 +0000
+
+dupeguru (3.2.0-1) unstable; urgency=low
+
+  * Added duplicate re-prioritization dialog. (#138)
+  * Added font size preference for duplicate table. (#82)
+  * Added Quicklook support. [Mac OS X] (#21)
+  * Improved behavior of Mark Selected. (#139)
+  * Improved filename sorting. (#169)
+  * Added Chinese (Simplified) localization by Eric Dee.
+  * Tweaked the fairware system.
+  * Upgraded minimum requirements to OS X 10.6 and Ubuntu 11.04.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Tue, 27 Sep 2011 00:00:00 +0000
+
+dupeguru (3.1.2-1) unstable; urgency=low
+
+  * Fixed a bug preventing the Folders scan from working. (#172)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 25 Aug 2011 00:00:00 +0000
+
+dupeguru (3.1.1-1) unstable; urgency=low
+
+  * Added German localization by Gregor Tätzner.
+  * Improved OS X Lion compatibility. [Mac OS X]
+  * Made the file collection phase cancellable. (#168)
+  * Fixed glitch in folder window upon selecting a folder state. [Windows, Linux] (#165)
+  * Fixed a text coloring glitch in the results. (#156)
+  * Fixed glitch in the sorting feature of the Folder column. (#161)
+  * Make sure that saved results have the ".dupeguru" extension. [Linux] (#157)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 24 Aug 2011 00:00:00 +0000
+
+dupeguru (3.1.0-1) unstable; urgency=low
+
+  * Added the "Folders" scan type. (#89)
+  * Fixed a couple of crashes. (#140 #149)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 16 Apr 2011 00:00:00 +0000
+
+dupeguru (3.0.2-1) unstable; urgency=low
+
+  * Fixed crash after removing marked dupes. (#140)
+  * Fixed crash on error handling. [Windows] (#144)
+  * Fixed crash on copy/move. [Windows] (#148)
+  * Fixed crash when launching dupeGuru from a very long folder name. [Mac OS X] (#119)
+  * Fixed a refresh bug in directory panel. (#153)
+  * Improved reliability of the "Send to Trash" operation. [Linux]
+  * Tweaked Fairware reminders.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 16 Mar 2011 00:00:00 +0000
+
+dupeguru (3.0.1-1) unstable; urgency=low
+
+  * Restored the context menu which had been broken in 3.0.0. [Mac OS X] (#133)
+  * Fixed a bug where an "unsaved results" warning would be issued on quit even with empty results. (#134)
+  * Removed focus from the cancel button in the progress dialog to avoid accidental cancellations. [Mac OS X] (#135)
+  * Folders added through drag and drop are added to the recent folders list. (#136)
+  * Added a debugging mode. (#132)
+  * Fixed french localization glitches.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 27 Jan 2011 00:00:00 +0000
+
+dupeguru (3.0.0-1) unstable; urgency=low
+
+  * Re-designed the UI. (#129)
+  * Internationalized dupeGuru and localized it to french. (#32)
+  * Changed the format of the help file. (#130)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Mon, 24 Jan 2011 00:00:00 +0000
+
+dupeguru (2.12.3-1) unstable; urgency=low
+
+  * Fixed bug causing results to be corrupted after a scan cancellation. (#120)
+  * Fixed crash when fetching Fairware unpaid hours. (#121)
+  * Fixed crash when replacing files with hardlinks. (#122)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sat, 01 Jan 2011 00:00:00 +0000
+
+dupeguru (2.12.2-1) unstable; urgency=low
+
+  * Fixed delta column colors which were broken since 2.12.0.
+  * Fixed column sorting crash. (#108)
+  * Fixed occasional crash during scan. (#106)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Tue, 05 Oct 2010 00:00:00 +0000
+
+dupeguru (2.12.1-1) unstable; urgency=low
+
+  * Re-licensed dupeGuru to BSD and made it [Fairware](http://open.hardcoded.net/about/).
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 30 Sep 2010 00:00:00 +0000
+
+dupeguru (2.12.0-1) unstable; urgency=low
+
+  * Improved UI with a little revamp.
+  * Added the possibility to place hardlinks to references after having deleted duplicates. [Mac OS X, Linux] (#91)
+  * Added an option to ignore duplicates hardlinking to the same file. [Mac OS X, Linux] (#92)
+  * Added multiple selection in the "Add Directory" dialog. [Mac OS X] (#105)
+  * Fixed a bug preventing drag & drop from working in the Directories panel. [Windows, Linux]
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Sun, 26 Sep 2010 00:00:00 +0000
+
+dupeguru (2.11.1-1) unstable; urgency=low
+
+  * Fixed HTML exporting which was broken in 2.11.0.
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 26 Aug 2010 00:00:00 +0000
+
+dupeguru (2.11.0-1) unstable; urgency=low
+
+  * Added the ability to save results (and reload them) at arbitrary locations.
+  * Improved the way reference files in dupe groups are chosen. (#15)
+  * Remember size/position of all windows between launches. (#102)
+  * Fixed a bug sometimes preventing dupeGuru from reloading previous results.
+  * Fixed a bug sometimes causing the progress dialog to be stuck there. [Mac OS X] (#103)
+  * Removed the Creation Date column, which wasn't displaying the correct value anyway. (#101)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 18 Aug 2010 00:00:00 +0000
+
+dupeguru (2.10.1-1) unstable; urgency=low
+
+  * Fixed a couple of crashes. (#95, #97, #100)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Thu, 15 Jul 2010 00:00:00 +0000
+
+dupeguru (2.10.0-1) unstable; urgency=low
+
+  * Improved error messages when files can't be sent to trash, moved or copied.
+  * Added a custom command invocation action. (#12)
+  * Filters are now applied on whole paths. (#4)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Tue, 13 Apr 2010 00:00:00 +0000
+
+dupeguru (2.9.2-1) unstable; urgency=low
+
+  * dupeGuru is now 64-bit on Mac OS X!
+  * Fixed a crash upon quitting when support folder is not present. (#83)
+  * Fixed a crash during sorting. (#85)
+  * Fixed selection glitches, especially while renaming. (#93)
+
+ -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 10 Feb 2010 00:00:00 +0000
+
