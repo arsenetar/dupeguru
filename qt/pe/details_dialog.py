@@ -6,9 +6,9 @@
 
 from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
-from PyQt5.QtWidgets import (QVBoxLayout, QAbstractItemView, QHBoxLayout,
+from PyQt5.QtWidgets import (QLayout, QVBoxLayout, QAbstractItemView, QHBoxLayout,
     QLabel, QSizePolicy, QToolBar, QToolButton, QGridLayout, QStyle, QAction,
-    QWidget, QApplication )
+    QWidget, QApplication, QSpacerItem )
 
 from hscommon.trans import trget
 from hscommon import desktop
@@ -30,25 +30,17 @@ class DetailsDialog(DetailsDialogBase):
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
             (
-                # FIXME probably not used right now
-                "actionSwap",
-                QKeySequence.Backspace,
-                "view-refresh",
-                tr("Swap images"),
-                self.swapImages,
-            ),
-            (
                 "actionZoomIn",
                 QKeySequence.ZoomIn,
                 "zoom-in",
-                tr("Increase zoom factor"),
+                tr("Increase zoom"),
                 self.zoomIn,
             ),
             (
                 "actionZoomOut",
                 QKeySequence.ZoomOut,
                 "zoom-out",
-                tr("Decrease zoom factor"),
+                tr("Decrease zoom"),
                 self.zoomOut,
             ),
             (
@@ -78,14 +70,15 @@ class DetailsDialog(DetailsDialogBase):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         # self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout = QGridLayout()
+        # Minimum width for the toolbar in the middle:
         self.horizontalLayout.setColumnMinimumWidth(1, 30)
         self.horizontalLayout.setColumnStretch(0,1)
         self.horizontalLayout.setColumnStretch(1,0)
         self.horizontalLayout.setColumnStretch(2,1)
-        self.horizontalLayout.setSpacing(4)
+        # self.horizontalLayout.setColumnStretch(3,0)
+        self.horizontalLayout.setSpacing(2)
 
-        self.selectedImageViewer = ScrollAreaImageViewer(
-            self, "selectedImage")
+        self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -99,8 +92,11 @@ class DetailsDialog(DetailsDialogBase):
         # # self.horizontalLayout.addWidget(self.selectedImage)
         self.horizontalLayout.addWidget(self.selectedImageViewer, 0, 0, 3, 1)
 
+        # self.horizontalLayout.addItem(QSpacerItem(5,0, QSizePolicy.Minimum),
+        # 1, 3, 1, 1, Qt.Alignment(Qt.AlignRight))
+
         self.verticalToolBar = QToolBar(self)
-        self.verticalToolBar.setOrientation(Qt.Orientation(2))
+        self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
         # self.subVLayout = QVBoxLayout(self)
         # self.subVLayout.addWidget(self.verticalToolBar)
         # self.horizontalLayout.addLayout(self.subVLayout)
@@ -150,8 +146,7 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
         # self.horizontalLayout.addWidget(self.verticalToolBar, Qt.AlignVCenter)
 
-        self.referenceImageViewer = ScrollAreaImageViewer(
-            self, "referenceImage")
+        self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -159,11 +154,12 @@ class DetailsDialog(DetailsDialogBase):
         # sizePolicy.setHeightForWidth(
         #     self.referenceImage.sizePolicy().hasHeightForWidth()
         # )
-        # self.referenceImage.setSizePolicy(sizePolicy)
-        # self.referenceImage.setAlignment(Qt.AlignCenter)
+        # self.referenceImageViewer.setSizePolicy(sizePolicy)
+        # self.referenceImageViewer.setAlignment(Qt.AlignCenter)
         self.horizontalLayout.addWidget(self.referenceImageViewer, 0, 2, 3, 1)
-        # self.horizontalLayout.addWidget(self.referenceImage)
+        # self.horizontalLayout.addWidget(self.referenceImageViewer)
         self.verticalLayout.addLayout(self.horizontalLayout)
+
         self.tableView = DetailsTable(self)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -176,6 +172,7 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
+        self.tableView.hide()
 
         self.buttonImgSwap.setEnabled(False)
         self.buttonZoomIn.setEnabled(False)
@@ -215,17 +212,21 @@ class DetailsDialog(DetailsDialogBase):
             return
         self.vController.update(ref, dupe)
 
-    def _updateImages(self):
-        if not self.vController.bestFit:
-            return
-        self.vController._updateImages()
-
     # --- Override
     def resizeEvent(self, event):
-        if self.vController is None:
+        # HACK referenceViewer might be 1 pixel shorter in width
+        # due to dynamic resizing in the GridLayout's engine
+        # Couldn't find a way to ensure both viewers have the exact same size
+        # at all time without using resize().
+        self.horizontalLayout.setColumnMinimumWidth(
+            0, self.selectedImageViewer.size().width())
+        self.horizontalLayout.setColumnMinimumWidth(
+            2, self.selectedImageViewer.size().width())
+
+        if self.vController is None or not self.vController.bestFit:
             return
-        # update scaled down pixmaps
-        self._updateImages()
+        # Only update the scaled down pixmaps
+        self.vController._updateImages()
 
     def show(self):
         DetailsDialogBase.show(self)
@@ -246,15 +247,15 @@ class DetailsDialog(DetailsDialogBase):
 
     @pyqtSlot()
     def zoomIn(self):
-        self.vController.zoom_in()
+        self.vController.scaleImagesBy(1.25)
 
     @pyqtSlot()
     def zoomOut(self):
-        self.vController.zoom_out()
+        self.vController.scaleImagesBy(0.8)
 
     @pyqtSlot()
     def zoomBestFit(self):
-        self.vController.scale_to_bestfit()
+        self.vController.ScaleToBestFit()
 
     @pyqtSlot()
     def zoomNormalSize(self):
