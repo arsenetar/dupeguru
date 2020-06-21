@@ -7,9 +7,6 @@ from PyQt5.QtGui import QPixmap, QPainter, QPalette, QCursor
 from PyQt5.QtWidgets import ( QLabel, QSizePolicy, QWidget, QScrollArea,
                               QScrollBar, QApplication, QAbstractScrollArea )
 
-#TODO QWidget version: fix panning while zoomed-in
-#TODO: add keyboard shortcuts
-
 class BaseController(QObject):
     """Abstract Base class. Singleton.
     Base proxy interface to keep image viewers synchronized.
@@ -235,9 +232,11 @@ class ScrollAreaController(BaseController):
     @pyqtSlot(int)
     def onVScrollBarChanged(self, value):
         if self.sender() is self.referenceViewer:
-            self.selectedViewer._verticalScrollBar.setValue(value)
+            if not self.selectedViewer.ignore_signal:
+                self.selectedViewer._verticalScrollBar.setValue(value)
         else:
-            self.referenceViewer._verticalScrollBar.setValue(value)
+            if not self.referenceViewer.ignore_signal:
+                self.referenceViewer._verticalScrollBar.setValue(value)
 
     @pyqtSlot(int)
     def onHScrollBarChanged(self, value):
@@ -277,6 +276,8 @@ class GraphicsViewController(BaseController):
 
 class QWidgetImageViewer(QWidget):
     """Use a QPixmap, but no scrollbars."""
+    #FIXME: panning while zoomed-in is broken (due to delta not interpolated right?)
+    #TODO: keyboard shortcuts for navigation
     mouseDragged = pyqtSignal(QPointF)
     mouseWheeled = pyqtSignal(float)
 
@@ -429,7 +430,7 @@ class QWidgetImageViewer(QWidget):
     def onDraggedMouse(self, delta):
         self._mousePanningDelta = delta
         self.update()
-        print(f"{self} received drag signal from {self.sender()}")
+        # print(f"{self} received drag signal from {self.sender()}")
 
 
 class ScalablePixmap(QWidget):

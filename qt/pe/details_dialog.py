@@ -68,15 +68,15 @@ class DetailsDialog(DetailsDialogBase):
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        # self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout = QGridLayout()
         # Minimum width for the toolbar in the middle:
-        self.horizontalLayout.setColumnMinimumWidth(1, 30)
-        self.horizontalLayout.setColumnStretch(0,1)
-        self.horizontalLayout.setColumnStretch(1,0)
-        self.horizontalLayout.setColumnStretch(2,1)
+        self.horizontalLayout.setColumnMinimumWidth(1, 10)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setColumnStretch(0,24)
+        self.horizontalLayout.setColumnStretch(1,1)
+        self.horizontalLayout.setColumnStretch(2,24)
         # self.horizontalLayout.setColumnStretch(3,0)
-        self.horizontalLayout.setSpacing(2)
+        self.horizontalLayout.setSpacing(1)
 
         self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
@@ -96,6 +96,7 @@ class DetailsDialog(DetailsDialogBase):
         # 1, 3, 1, 1, Qt.Alignment(Qt.AlignRight))
 
         self.verticalToolBar = QToolBar(self)
+        # self.verticalToolBar.setMaximumWidth(10)
         self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
         # self.subVLayout = QVBoxLayout(self)
         # self.subVLayout.addWidget(self.verticalToolBar)
@@ -144,7 +145,6 @@ class DetailsDialog(DetailsDialogBase):
         self.verticalToolBar.addWidget(self.buttonBestFit)
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
-        # self.horizontalLayout.addWidget(self.verticalToolBar, Qt.AlignVCenter)
 
         self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
@@ -157,7 +157,6 @@ class DetailsDialog(DetailsDialogBase):
         # self.referenceImageViewer.setSizePolicy(sizePolicy)
         # self.referenceImageViewer.setAlignment(Qt.AlignCenter)
         self.horizontalLayout.addWidget(self.referenceImageViewer, 0, 2, 3, 1)
-        # self.horizontalLayout.addWidget(self.referenceImageViewer)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.tableView = DetailsTable(self)
@@ -172,7 +171,7 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
-        self.tableView.hide()
+        # self.tableView.hide()
 
         self.buttonImgSwap.setEnabled(False)
         self.buttonZoomIn.setEnabled(False)
@@ -215,13 +214,22 @@ class DetailsDialog(DetailsDialogBase):
     # --- Override
     def resizeEvent(self, event):
         # HACK referenceViewer might be 1 pixel shorter in width
-        # due to dynamic resizing in the GridLayout's engine
-        # Couldn't find a way to ensure both viewers have the exact same size
-        # at all time without using resize().
+        # due to the toolbar in the middle keeping the same width,
+        # so resizing in the GridLayout's engine leads to not enough space
+        # left for the panel on the right.
+        # This ensures same size while shrinking at least:
         self.horizontalLayout.setColumnMinimumWidth(
             0, self.selectedImageViewer.size().width())
         self.horizontalLayout.setColumnMinimumWidth(
             2, self.selectedImageViewer.size().width())
+
+        # This works when expanding but it's ugly:
+#         if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
+#             print(f"Before selected size: {self.selectedImageViewer.size()}\n\
+# Before reference size: {self.referenceImageViewer.size()}")
+#             self.selectedImageViewer.resize(self.referenceImageViewer.size())
+#             print(f"After selected size: {self.selectedImageViewer.size()}\n\
+# After reference size: {self.referenceImageViewer.size()}")
 
         if self.vController is None or not self.vController.bestFit:
             return
