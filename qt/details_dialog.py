@@ -7,12 +7,12 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QMainWindow
 
 from .details_table import DetailsModel
 
 
-class DetailsDialog(QDialog):
+class DetailsDialog(QMainWindow):
     def __init__(self, parent, app, **kwargs):
         super().__init__(parent, Qt.Tool, **kwargs)
         self.app = app

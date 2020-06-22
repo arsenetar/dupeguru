@@ -8,7 +8,7 @@ from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
 from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtWidgets import (QLayout, QVBoxLayout, QAbstractItemView, QHBoxLayout,
     QLabel, QSizePolicy, QToolBar, QToolButton, QGridLayout, QStyle, QAction,
-    QWidget, QApplication, QSpacerItem )
+    QWidget, QApplication, QSpacerItem, QSplitter, QFrame )
 
 from hscommon.trans import trget
 from hscommon import desktop
@@ -24,7 +24,6 @@ class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
         self.vController = None
         super().__init__(parent, app)
-
 
     def setupActions(self):
         # (name, shortcut, icon, desc, func)
@@ -63,11 +62,17 @@ class DetailsDialog(DetailsDialogBase):
     def _setupUi(self):
         self.setupActions()
         self.setWindowTitle(tr("Details"))
-        self.resize(502, 295)
-        self.setMinimumSize(QSize(250, 250))
-        self.verticalLayout = QVBoxLayout(self)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.resize(502, 502)
+        self.setMinimumSize(QSize(500, 500))
+
+        # self.verticalLayout = QVBoxLayout(self)
+        # self.verticalLayout.setSpacing(0)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.splitter = QSplitter(Qt.Vertical, self)
+        self.setCentralWidget(self.splitter)
+        self.topFrame = QFrame()
+        self.topFrame.setFrameShape(QFrame.StyledPanel)
+
         self.horizontalLayout = QGridLayout()
         # Minimum width for the toolbar in the middle:
         self.horizontalLayout.setColumnMinimumWidth(1, 10)
@@ -157,20 +162,33 @@ class DetailsDialog(DetailsDialogBase):
         # self.referenceImageViewer.setSizePolicy(sizePolicy)
         # self.referenceImageViewer.setAlignment(Qt.AlignCenter)
         self.horizontalLayout.addWidget(self.referenceImageViewer, 0, 2, 3, 1)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        # self.verticalLayout.addLayout(self.horizontalLayout)
+        self.topFrame.setLayout(self.horizontalLayout)
+        self.splitter.addWidget(self.topFrame)
+
+        # container = QWidget(self)
+        # container.setLayout(self.horizontalLayout)
+        # self.setLayout(self.horizontalLayout)
+        # self.splitter.addWidget(self)
+        self.splitter.setStretchFactor(0, 8)
 
         self.tableView = DetailsTable(self)
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
+        # sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
-        self.tableView.setMinimumSize(QSize(0, 188))
-        self.tableView.setMaximumSize(QSize(16777215, 190))
+        # self.tableView.setMinimumSize(QSize(0, 190))
+        # self.tableView.setMaximumSize(QSize(16777215, 190))
+
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
-        self.verticalLayout.addWidget(self.tableView)
+        # self.verticalLayout.addLayout(self.tableView)
+
+        self.splitter.addWidget(self.tableView)
+        self.splitter.setStretchFactor(1, 1)
+
         # self.tableView.hide()
 
         self.buttonImgSwap.setEnabled(False)
@@ -207,7 +225,7 @@ class DetailsDialog(DetailsDialogBase):
         group = self.app.model.results.get_group_of_duplicate(dupe)
         ref = group.ref
 
-        if self.vController is None:
+        if self.vController is None: # Not yet constructed!
             return
         self.vController.update(ref, dupe)
 
@@ -237,6 +255,10 @@ class DetailsDialog(DetailsDialogBase):
         self.vController._updateImages()
 
     def show(self):
+        # Compute the maximum size the table view can reach
+        self.tableView.setMaximumHeight(
+            self.tableView.rowHeight(1) * self.tableModel.model.row_count()\
+            + self.tableView.verticalHeader().sectionSize(0))
         DetailsDialogBase.show(self)
         self._update()
 
