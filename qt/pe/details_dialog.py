@@ -63,7 +63,7 @@ class DetailsDialog(DetailsDialogBase):
         self.setupActions()
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
-        self.setMinimumSize(QSize(500, 500))
+        self.setMinimumSize(QSize(250, 250))
 
         # self.verticalLayout = QVBoxLayout(self)
         # self.verticalLayout.setSpacing(0)
@@ -83,7 +83,7 @@ class DetailsDialog(DetailsDialogBase):
         # self.horizontalLayout.setColumnStretch(3,0)
         self.horizontalLayout.setSpacing(1)
 
-        self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
+        self.selectedImageViewer = QWidgetImageViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -151,7 +151,7 @@ class DetailsDialog(DetailsDialogBase):
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
 
-        self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
+        self.referenceImageViewer = QWidgetImageViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -199,7 +199,7 @@ class DetailsDialog(DetailsDialogBase):
 
         # We use different types of controller depending on the
         # underlying widgets we use to display images
-        # because their interface methods might differ
+        # because their interface and methods might differ
         if isinstance(self.selectedImageViewer, QWidgetImageViewer):
             self.vController = QWidgetController(
                             self.selectedImageViewer,
@@ -227,7 +227,7 @@ class DetailsDialog(DetailsDialogBase):
 
         if self.vController is None: # Not yet constructed!
             return
-        self.vController.update(ref, dupe)
+        self.vController.updateView(ref, dupe, group)
 
     # --- Override
     def resizeEvent(self, event):
@@ -252,7 +252,7 @@ class DetailsDialog(DetailsDialogBase):
         if self.vController is None or not self.vController.bestFit:
             return
         # Only update the scaled down pixmaps
-        self.vController._updateImages()
+        self.vController.updateBothImages()
 
     def show(self):
         # Compute the maximum size the table view can reach
