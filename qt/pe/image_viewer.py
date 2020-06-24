@@ -43,6 +43,7 @@ class BaseController(QObject):
         if group != self.cached_group:
             same_group = False
             self.resetState()
+        # self.current_scale = 1.0
 
         self.cached_group = group
 
@@ -51,70 +52,57 @@ class BaseController(QObject):
             self.referencePixmap = QPixmap()
             self.scaledReferencePixmap = QPixmap()
             self.parent.buttonImgSwap.setEnabled(False)
-            # disable the blank widget.
-            self.referenceViewer.setImage(self.referencePixmap)
+            self.parent.buttonNormalSize.setEnabled(True)
         else:
             self.referencePixmap = QPixmap(str(ref.path))
             self.parent.buttonImgSwap.setEnabled(True)
+            self.parent.buttonNormalSize.setEnabled(True)
 
         self.updateBothImages(same_group)
+        self.centerViews(same_group and self.referencePixmap.isNull())
 
     def updateBothImages(self, same_group=False):
+        ignore_update = self.referencePixmap.isNull()
+        if ignore_update:
+            self.selectedViewer.ignore_signal = True
         selected_size = self._updateImage(
-            self.selectedPixmap, self.scaledSelectedPixmap, self.selectedViewer, None, same_group)
+            self.selectedPixmap, self.scaledSelectedPixmap,
+            self.selectedViewer, None, same_group)
         # the SelectedImageViewer widget sometimes ends up being bigger
         # than the ReferenceImageViewer by one pixel, which distorts the
         # scaled down pixmap for the reference, hence we'll reuse its size here.
-        self._updateImage(
-            self.referencePixmap, self.scaledReferencePixmap, self.referenceViewer, selected_size, same_group)
 
+        self._updateImage(
+            self.referencePixmap, self.scaledReferencePixmap,
+            self.referenceViewer, selected_size, same_group)
+        if ignore_update:
+            self.selectedViewer.ignore_signal = False
 
     def _updateImage(self, pixmap, scaledpixmap, viewer, target_size=None, same_group=False):
         # If not same_group, we need full update"""
-        if not pixmap.isNull():
-            target_size = viewer.size()
-            if not self.bestFit:
-                if same_group:
-                    viewer.setImage(pixmap)
-                    viewer.centerViewAndUpdate()
-                    return target_size
-                # zoomed in state, expand
-                scaledpixmap = pixmap.scaled(
-                    target_size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
-            else:
-                # best fit, keep ratio always
-                scaledpixmap = pixmap.scaled(
-                    target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-            viewer.setImage(scaledpixmap)
-            viewer.centerViewAndUpdate()
+        if pixmap.isNull():
+            # disable the blank widget.
+            viewer.setImage(pixmap)
+            return
+
+        target_size = viewer.size()
+        if not viewer.bestFit:
+            if same_group:
+                viewer.setImage(pixmap)
+                return target_size
+            # zoomed in state, expand
+            scaledpixmap = pixmap.scaled(
+                target_size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
+        else:
+            # best fit, keep ratio always
+            scaledpixmap = pixmap.scaled(
+                target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        viewer.setImage(scaledpixmap)
         return target_size
 
-    @pyqtSlot(float)
-    def scaleImagesBy(self, factor):
-        """Compute new scale from factor and scale."""
-        self.current_scale *= factor
-        self.selectedViewer.scaleBy(factor)
-        self.referenceViewer.scaleBy(factor)
-
-        self.parent.buttonZoomIn.setEnabled(self.current_scale < MAX_SCALE)
-        self.parent.buttonZoomOut.setEnabled(self.current_scale > MIN_SCALE)
-        self.parent.buttonBestFit.setEnabled(self.bestFit is False)
-        self.parent.buttonNormalSize.setEnabled(self.current_scale != 1.0)
-
-    @pyqtSlot(float)
-    def scaleImagesAt(self, scale):
-        """Scale at a pre-computed scale."""
-        self.current_scale = scale
-        self.selectedViewer.scaleAt(scale)
-        self.referenceViewer.scaleAt(scale)
-
-        self.parent.buttonZoomIn.setEnabled(self.current_scale < MAX_SCALE)
-        self.parent.buttonZoomOut.setEnabled(self.current_scale > MIN_SCALE)
-        self.parent.buttonBestFit.setEnabled(self.bestFit is False)
-        self.parent.buttonNormalSize.setEnabled(self.current_scale != 1.0)
-
     def resetState(self):
-        """Only called when the group of dupes has changed"""
+        """Only called when the group of dupes has changed. We reset our
+        controller internal state and buttons, center view on viewers."""
         self.selectedPixmap = QPixmap()
         self.scaledSelectedPixmap = QPixmap()
         self.referencePixmap = QPixmap()
@@ -123,24 +111,60 @@ class BaseController(QObject):
         self.current_scale = 1.0
         self.selectedViewer.resetCenter()
         self.referenceViewer.resetCenter()
+        self.centerViews()
 
-        self.selectedViewer.centerViewAndUpdate()
-        self.referenceViewer.centerViewAndUpdate()
-
+        #FIXME move buttons somwhere else
         self.parent.buttonZoomIn.setEnabled(False)
         self.parent.buttonZoomOut.setEnabled(False)
         self.parent.buttonBestFit.setEnabled(False) # active mode by default
         self.parent.buttonNormalSize.setEnabled(True)
 
-    def clear_all(self):
+    def resetViewersState(self):
         """No item from the model, disable and clear everything."""
-        self.resetState()
+        # only called by the details dialog
+        self.selectedPixmap = QPixmap()
+        self.scaledSelectedPixmap = QPixmap()
+        self.referencePixmap = QPixmap()
+        self.scaledReferencePixmap = QPixmap()
+        self.setBestFit(True)
+        self.current_scale = 1.0
+        self.selectedViewer.resetCenter()
+        self.referenceViewer.resetCenter()
+        self.centerViews()
+
+        #FIXME move buttons somwhere else
+        self.parent.buttonZoomIn.setEnabled(False)
+        self.parent.buttonZoomOut.setEnabled(False)
+        self.parent.buttonBestFit.setEnabled(False) # active mode by default
+        self.parent.buttonImgSwap.setEnabled(False)
+        self.parent.buttonNormalSize.setEnabled(False)
+
         self.selectedViewer.setImage(self.selectedPixmap) # null
         self.selectedViewer.setEnabled(False)
         self.referenceViewer.setImage(self.referencePixmap) # null
         self.referenceViewer.setEnabled(False)
-        self.parent.buttonImgSwap.setEnabled(False)
-        self.parent.buttonNormalSize.setEnabled(False)
+
+    @pyqtSlot(float)
+    def scaleImagesBy(self, factor):
+        """Compute new scale from factor and scale."""
+        self.current_scale *= factor
+        self.selectedViewer.scaleBy(factor)
+        self.referenceViewer.scaleBy(factor)
+        self.updateButtons()
+
+    @pyqtSlot(float)
+    def scaleImagesAt(self, scale):
+        """Scale at a pre-computed scale."""
+        self.current_scale = scale
+        self.selectedViewer.scaleAt(scale)
+        self.referenceViewer.scaleAt(scale)
+        self.updateButtons()
+
+    def updateButtons(self):
+        self.parent.buttonZoomIn.setEnabled(self.current_scale < MAX_SCALE)
+        self.parent.buttonZoomOut.setEnabled(self.current_scale > MIN_SCALE)
+        self.parent.buttonBestFit.setEnabled(self.bestFit is False)
+        self.parent.buttonNormalSize.setEnabled(round(self.current_scale, 1) != 1.0)
 
     @pyqtSlot()
     def ScaleToBestFit(self):
@@ -156,6 +180,7 @@ class BaseController(QObject):
 
         target_size = self._updateImage(self.selectedPixmap, self.scaledSelectedPixmap, self.selectedViewer, None, True)
         self._updateImage(self.referencePixmap, self.scaledReferencePixmap, self.referenceViewer, target_size, True)
+        self.centerViews()
 
         self.parent.buttonBestFit.setEnabled(False)
         self.parent.buttonZoomOut.setEnabled(False)
@@ -175,8 +200,7 @@ class BaseController(QObject):
         self.selectedViewer.setImage(self.selectedPixmap)
         self.referenceViewer.setImage(self.referencePixmap)
 
-        self.selectedViewer.centerViewAndUpdate()
-        self.referenceViewer.centerViewAndUpdate()
+        self.centerViews()
 
         self.selectedViewer.scaleToNormalSize()
         self.referenceViewer.scaleToNormalSize()
@@ -185,6 +209,12 @@ class BaseController(QObject):
         self.parent.buttonZoomIn.setEnabled(True)
         self.parent.buttonZoomOut.setEnabled(True)
         self.parent.buttonBestFit.setEnabled(True)
+
+    def centerViews(self, only_selected=False):
+        self.selectedViewer.centerViewAndUpdate()
+        if only_selected:
+            return
+        self.referenceViewer.centerViewAndUpdate()
 
 
 class QWidgetController(BaseController):
@@ -205,11 +235,6 @@ class QWidgetController(BaseController):
         self.selectedViewer.centerViewAndUpdate()
         self.referenceViewer.centerViewAndUpdate()
 
-    def _updateImage(self, pixmap, scaledpixmap, viewer, target_size, same_group):
-        #FIXME might not need this at all, REMOVE?
-        super()._updateImage(pixmap, scaledpixmap, viewer, target_size, same_group)
-        viewer.update()
-
 
 class ScrollAreaController(BaseController):
     """Specialized version fro QLabel-based viewers."""
@@ -220,6 +245,15 @@ class ScrollAreaController(BaseController):
         super()._setupConnections()
         self.selectedViewer.connectScrollBars()
         self.referenceViewer.connectScrollBars()
+
+    def updateBothImages(self, same_group=False):
+        super().updateBothImages(same_group)
+        if not self.referenceViewer.isEnabled():
+            return
+        self.referenceViewer._horizontalScrollBar.setValue(
+            self.selectedViewer._horizontalScrollBar.value())
+        self.referenceViewer._verticalScrollBar.setValue(
+            self.selectedViewer._verticalScrollBar.value())
 
     @pyqtSlot(QPoint)
     def onDraggedMouse(self, delta):
@@ -237,13 +271,6 @@ class ScrollAreaController(BaseController):
         self.referenceViewer._pixmap.swap(self.selectedViewer._pixmap)
         self.referenceViewer.setCachedPixmap()
         self.selectedViewer.setCachedPixmap()
-
-    @pyqtSlot()
-    def syncCenters(self):
-        if self.sender() is self.referenceViewer:
-            self.selectedViewer.setCenter(self.referenceViewer.getCenter())
-        else:
-            self.referenceViewer.setCenter(self.selectedViewer.getCenter())
 
     @pyqtSlot(float, QPointF)
     def onMouseWheel(self, scale, delta):
@@ -283,6 +310,7 @@ class ScrollAreaController(BaseController):
         print("toggling scrollbars")
         self.selectedViewer.toggleScrollBars()
         self.referenceViewer.toggleScrollBars()
+
 
 
 class GraphicsViewController(BaseController):
@@ -366,7 +394,7 @@ class QWidgetImageViewer(QWidget):
             self.disconnectMouseSignals()
 
     def mousePressEvent(self, event):
-        if self.bestFit:
+        if self.bestFit or not self.isEnabled():
             event.ignore()
             return
         if event.button() == Qt.LeftButton:
@@ -382,7 +410,7 @@ class QWidgetImageViewer(QWidget):
         event.accept()
 
     def mouseMoveEvent(self, event):
-        if self.bestFit:
+        if self.bestFit or not self.isEnabled():
             event.ignore()
             return
 
@@ -394,7 +422,7 @@ class QWidgetImageViewer(QWidget):
             self.update()
 
     def mouseReleaseEvent(self, event):
-        if self.bestFit:
+        if self.bestFit or not self.isEnabled():
             event.ignore()
             return
         if event.button() == Qt.LeftButton:
@@ -404,7 +432,7 @@ class QWidgetImageViewer(QWidget):
         self.setMouseTracking(False)
 
     def wheelEvent(self, event):
-        if self.bestFit:
+        if self.bestFit or not self.isEnabled():
             event.ignore()
             return
 
@@ -421,8 +449,9 @@ class QWidgetImageViewer(QWidget):
         if pixmap.isNull():
             if not self._pixmap.isNull():
                 self._pixmap = pixmap
-                self.disconnectMouseSignals()
-                self.update()
+            self.disconnectMouseSignals()
+            self.setEnabled(False)
+            self.update()
             return
         elif not self.isEnabled():
             self.setEnabled(True)
@@ -644,10 +673,9 @@ class ScrollAreaImageViewer(QScrollArea):
         if pixmap.isNull():
             self.setEnabled(False)
             self.disconnectMouseSignals()
-        else:
-            if not self.isEnabled():
-                self.setEnabled(True)
-                self.connectMouseSignals()
+        elif not self.isEnabled():
+            self.setEnabled(True)
+            self.connectMouseSignals()
 
     def centerViewAndUpdate(self):
         self._rect = self.label.rect()
@@ -755,10 +783,9 @@ class ScrollAreaImageViewer(QScrollArea):
     def resetCenter(self):
         """ Resets origin """
         self._mousePanningDelta = QPoint()
-        # self.label._mousePanningDelta = self._mousePanningDelta
         self._current_scale = 1.0
         # self.scaleBy(1.0)
-        # self.label.update() # already called in scaleBy²
+        # self.label.update() # already called in scaleBy
 
     def setCenter(self, point):
         self._lastMouseClickPoint = point

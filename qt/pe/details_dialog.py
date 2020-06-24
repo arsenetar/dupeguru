@@ -83,7 +83,7 @@ class DetailsDialog(DetailsDialogBase):
         # self.horizontalLayout.setColumnStretch(3,0)
         self.horizontalLayout.setSpacing(1)
 
-        self.selectedImageViewer = QWidgetImageViewer(self, "selectedImage")
+        self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -151,7 +151,7 @@ class DetailsDialog(DetailsDialogBase):
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
 
-        self.referenceImageViewer = QWidgetImageViewer(self, "referenceImage")
+        self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -219,7 +219,7 @@ class DetailsDialog(DetailsDialogBase):
     def _update(self):
         if not self.app.model.selected_dupes:
             # No item from the model, disable and clear everything.
-            self.vController.clear_all()
+            self.vController.resetViewersState()
             return
         dupe = self.app.model.selected_dupes[0]
         group = self.app.model.results.get_group_of_duplicate(dupe)
