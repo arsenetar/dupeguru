@@ -537,10 +537,15 @@ class DupeGuru(Broadcaster):
             return empty_data()
         try:
             return dupe.get_display_info(group, delta)
+        except NotImplementedError as e:
+            logging.warning(
+                "Exception (type: %s) on GetDisplayInfo for %s: %s",
+                type(e), str(dupe.path), str(e))
+            return se.fs.Folder.get_display_info(dupe, group, delta)
         except Exception as e:
             logging.warning(
-                "Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e)
-            )
+                "Exception (type: %s) on GetDisplayInfo for %s: %s",
+                type(e), str(dupe.path), str(e))
             return empty_data()
 
     def invoke_custom_command(self):
