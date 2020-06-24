@@ -259,7 +259,7 @@ class DupeGuru(Broadcaster):
 
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
-        return fs.get_file(path, self.fileclasses + [fs.Folder])
+        return fs.get_file(path, self.fileclasses + [se.fs.Folder])
 
     def _get_file(self, str_path):
         path = Path(str_path)
@@ -539,8 +539,8 @@ class DupeGuru(Broadcaster):
             return dupe.get_display_info(group, delta)
         except Exception as e:
             logging.warning(
-                "Exception on GetDisplayInfo for %s: %s", str(dupe.path), str(e)
-            )
+                "Exception (type: %s) on GetDisplayInfo for %s: %s",
+                type(e), str(dupe.path), str(e))
             return empty_data()
 
     def invoke_custom_command(self):
