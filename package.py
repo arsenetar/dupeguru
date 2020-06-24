@@ -12,6 +12,7 @@ import shutil
 import json
 from argparse import ArgumentParser
 import platform
+import distro
 import re
 
 from hscommon.build import (
@@ -90,7 +91,7 @@ def package_debian_distribution(distribution):
     )
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     os.chdir(destpath)
-    cmd = "dpkg-buildpackage -S -us -uc"
+    cmd = "dpkg-buildpackage -F -us -uc"
     os.system(cmd)
     os.chdir("../..")
 
@@ -212,7 +213,7 @@ def main():
         package_windows()
     else:
         if not args.arch_pkg:
-            distname, _, _ = platform.dist()
+            distname = distro.id()
         else:
             distname = "arch"
         if distname == "arch":
