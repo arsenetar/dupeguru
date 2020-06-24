@@ -12,6 +12,7 @@ import shutil
 import json
 from argparse import ArgumentParser
 import platform
+import distro
 import re
 
 from hscommon.build import (
@@ -212,11 +213,7 @@ def main():
         package_windows()
     else:
         if not args.arch_pkg:
-            try:
-              distname, _, _ = platform.dist()
-            except AttributeError:
-              import distro
-              distname, _, _ = distro.linux_distribution(full_distribution_name=False)
+            distname = distro.id()
         else:
             distname = "arch"
         if distname == "arch":
