@@ -1,1 +1,1 @@
-from hscommon.testutil import pytest_funcarg__app  # noqa
+from hscommon.testutil import app  # noqa

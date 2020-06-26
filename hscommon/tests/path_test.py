@@ -9,14 +9,15 @@
 import sys
 import os
 
-from pytest import raises, mark
+import pytest
 
 from ..path import Path, pathify
 from ..testutil import eq_
 
 
-def pytest_funcarg__force_ossep(request):
-    monkeypatch = request.getfuncargvalue("monkeypatch")
+@pytest.fixture
+def force_ossep(request):
+    monkeypatch = request.getfixturevalue("monkeypatch")
     monkeypatch.setattr(os, "sep", "/")
 
 
@@ -236,12 +237,12 @@ def test_getitem_path(force_ossep):
     eq_(p[Path("baz/bleh")], Path("/foo/bar/baz/bleh"))
 
 
-@mark.xfail(reason="pytest's capture mechanism is flaky, I have to investigate")
+@pytest.mark.xfail(reason="pytest's capture mechanism is flaky, I have to investigate")
 def test_log_unicode_errors(force_ossep, monkeypatch, capsys):
     # When an there's a UnicodeDecodeError on path creation, log it so it can be possible
     # to debug the cause of it.
     monkeypatch.setattr(sys, "getfilesystemencoding", lambda: "ascii")
-    with raises(UnicodeDecodeError):
+    with pytest.raises(UnicodeDecodeError):
         Path(["", b"foo\xe9"])
     out, err = capsys.readouterr()
     assert repr(b"foo\xe9") in err

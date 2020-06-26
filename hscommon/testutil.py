@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import pytest
+
 import threading
 import py.path
 
@@ -148,7 +150,7 @@ class TestApp:
         return gui
 
 
-# To use @with_app, you have to import pytest_funcarg__app in your conftest.py file.
+# To use @with_app, you have to import app in your conftest.py file.
 def with_app(setupfunc):
     def decorator(func):
         func.setupfunc = setupfunc
@@ -157,7 +159,8 @@ def with_app(setupfunc):
     return decorator
 
 
-def pytest_funcarg__app(request):
+@pytest.fixture
+def app(request):
     setupfunc = request.function.setupfunc
     if hasattr(setupfunc, "__code__"):
         argnames = setupfunc.__code__.co_varnames[: setupfunc.__code__.co_argcount]

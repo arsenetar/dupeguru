@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import pytest
+
 from ..conflict import *
 from ..path import Path
 from ..testutil import eq_
@@ -59,8 +61,9 @@ class TestCase_IsConflicted:
 
 
 class TestCase_move_copy:
-    def pytest_funcarg__do_setup(self, request):
-        tmpdir = request.getfuncargvalue("tmpdir")
+    @pytest.fixture
+    def do_setup(self, request):
+        tmpdir = request.getfixturevalue("tmpdir")
         self.path = Path(str(tmpdir))
         self.path["foo"].open("w").close()
         self.path["bar"].open("w").close()

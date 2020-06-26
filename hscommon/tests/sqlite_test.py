@@ -95,7 +95,7 @@ def test_make_sure_theres_no_messup_between_queries():
         threads.append(t)
     while threads:
         time.sleep(0.1)
-        threads = [t for t in threads if t.isAlive()]
+        threads = [t for t in threads if t.is_alive()]
 
 
 def test_query_after_close():

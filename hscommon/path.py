@@ -257,6 +257,6 @@ def log_io_error(func):
             msg = 'Error "{0}" during operation "{1}" on "{2}": "{3}"'
             classname = e.__class__.__name__
             funcname = func.__name__
-            logging.warn(msg.format(classname, funcname, str(path), str(e)))
+            logging.warning(msg.format(classname, funcname, str(path), str(e)))
 
     return wrapper

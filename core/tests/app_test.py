@@ -8,7 +8,7 @@ import os
 import os.path as op
 import logging
 
-from pytest import mark
+import pytest
 from hscommon.path import Path
 import hscommon.conflict
 import hscommon.util
@@ -109,7 +109,7 @@ class TestCaseDupeGuru:
         add_fake_files_to_directories(app.directories, [f1, f2])
         app.start_scanning()  # no exception
 
-    @mark.skipif("not hasattr(os, 'link')")
+    @pytest.mark.skipif("not hasattr(os, 'link')")
     def test_ignore_hardlink_matches(self, tmpdir):
         # If the ignore_hardlink_matches option is set, don't match files hardlinking to the same
         # inode.
@@ -133,8 +133,9 @@ class TestCaseDupeGuru:
 
 
 class TestCaseDupeGuru_clean_empty_dirs:
-    def pytest_funcarg__do_setup(self, request):
-        monkeypatch = request.getfuncargvalue("monkeypatch")
+    @pytest.fixture
+    def do_setup(self, request):
+        monkeypatch = request.getfixturevalue("monkeypatch")
         monkeypatch.setattr(
             hscommon.util,
             "delete_if_empty",
@@ -175,7 +176,8 @@ class TestCaseDupeGuru_clean_empty_dirs:
 
 
 class TestCaseDupeGuruWithResults:
-    def pytest_funcarg__do_setup(self, request):
+    @pytest.fixture
+    def do_setup(self, request):
         app = TestApp()
         self.app = app.app
         self.objects, self.matches, self.groups = GetTestGroups()
@@ -184,7 +186,7 @@ class TestCaseDupeGuruWithResults:
         self.dtree = app.dtree
         self.rtable = app.rtable
         self.rtable.refresh()
-        tmpdir = request.getfuncargvalue("tmpdir")
+        tmpdir = request.getfixturevalue("tmpdir")
         tmppath = Path(str(tmpdir))
         tmppath["foo"].mkdir()
         tmppath["bar"].mkdir()
@@ -430,8 +432,9 @@ class TestCaseDupeGuruWithResults:
 
 
 class TestCaseDupeGuru_renameSelected:
-    def pytest_funcarg__do_setup(self, request):
-        tmpdir = request.getfuncargvalue("tmpdir")
+    @pytest.fixture
+    def do_setup(self, request):
+        tmpdir = request.getfixturevalue("tmpdir")
         p = Path(str(tmpdir))
         fp = open(str(p["foo bar 1"]), mode="w")
         fp.close()
@@ -493,8 +496,9 @@ class TestCaseDupeGuru_renameSelected:
 
 
 class TestAppWithDirectoriesInTree:
-    def pytest_funcarg__do_setup(self, request):
-        tmpdir = request.getfuncargvalue("tmpdir")
+    @pytest.fixture
+    def do_setup(self, request):
+        tmpdir = request.getfixturevalue("tmpdir")
         p = Path(str(tmpdir))
         p["sub1"].mkdir()
         p["sub2"].mkdir()

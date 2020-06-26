@@ -4,6 +4,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import pytest
+
 from hscommon.jobprogress import job
 from hscommon.path import Path
 from hscommon.testutil import eq_
@@ -33,10 +35,11 @@ class NamedObject:
 no = NamedObject
 
 
-def pytest_funcarg__fake_fileexists(request):
+@pytest.fixture
+def fake_fileexists(request):
     # This is a hack to avoid invalidating all previous tests since the scanner started to test
     # for file existence before doing the match grouping.
-    monkeypatch = request.getfuncargvalue("monkeypatch")
+    monkeypatch = request.getfixturevalue("monkeypatch")
     monkeypatch.setattr(Path, "exists", lambda _: True)
 
 
