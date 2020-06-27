@@ -147,6 +147,8 @@ def GetTestGroups():
 
 
 class TestApp(TestAppBase):
+    __test__ = False
+
     def __init__(self):
         def link_gui(gui):
             gui.view = self.make_logger()

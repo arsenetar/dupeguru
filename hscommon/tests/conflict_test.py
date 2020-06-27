@@ -8,7 +8,13 @@
 
 import pytest
 
-from ..conflict import *
+from ..conflict import (
+    get_conflicted_name,
+    get_unconflicted_name,
+    is_conflicted,
+    smart_copy,
+    smart_move,
+)
 from ..path import Path
 from ..testutil import eq_
 

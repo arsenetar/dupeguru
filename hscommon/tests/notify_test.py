@@ -28,8 +28,8 @@ class HelloRepeater(Repeater):
 
 def create_pair():
     b = Broadcaster()
-    l = HelloListener(b)
-    return b, l
+    listener = HelloListener(b)
+    return b, listener
 
 
 def test_disconnect_during_notification():
@@ -60,53 +60,53 @@ def test_disconnect_during_notification():
 
 def test_disconnect():
     # After a disconnect, the listener doesn't hear anything.
-    b, l = create_pair()
-    l.connect()
-    l.disconnect()
+    b, listener = create_pair()
+    listener.connect()
+    listener.disconnect()
     b.notify("hello")
-    eq_(l.hello_count, 0)
+    eq_(listener.hello_count, 0)
 
 
 def test_disconnect_when_not_connected():
     # When disconnecting an already disconnected listener, nothing happens.
-    b, l = create_pair()
-    l.disconnect()
+    b, listener = create_pair()
+    listener.disconnect()
 
 
 def test_not_connected_on_init():
     # A listener is not initialized connected.
-    b, l = create_pair()
+    b, listener = create_pair()
     b.notify("hello")
-    eq_(l.hello_count, 0)
+    eq_(listener.hello_count, 0)
 
 
 def test_notify():
     # The listener listens to the broadcaster.
-    b, l = create_pair()
-    l.connect()
+    b, listener = create_pair()
+    listener.connect()
     b.notify("hello")
-    eq_(l.hello_count, 1)
+    eq_(listener.hello_count, 1)
 
 
 def test_reconnect():
     # It's possible to reconnect a listener after disconnection.
-    b, l = create_pair()
-    l.connect()
-    l.disconnect()
-    l.connect()
+    b, listener = create_pair()
+    listener.connect()
+    listener.disconnect()
+    listener.connect()
     b.notify("hello")
-    eq_(l.hello_count, 1)
+    eq_(listener.hello_count, 1)
 
 
 def test_repeater():
     b = Broadcaster()
     r = HelloRepeater(b)
-    l = HelloListener(r)
+    listener = HelloListener(r)
     r.connect()
-    l.connect()
+    listener.connect()
     b.notify("hello")
     eq_(r.hello_count, 1)
-    eq_(l.hello_count, 1)
+    eq_(listener.hello_count, 1)
 
 
 def test_repeater_with_repeated_notifications():
@@ -124,15 +124,15 @@ def test_repeater_with_repeated_notifications():
 
     b = Broadcaster()
     r = MyRepeater(b)
-    l = HelloListener(r)
+    listener = HelloListener(r)
     r.connect()
-    l.connect()
+    listener.connect()
     b.notify("hello")
     b.notify(
         "foo"
     )  # if the repeater repeated this notif, we'd get a crash on HelloListener
     eq_(r.hello_count, 1)
-    eq_(l.hello_count, 1)
+    eq_(listener.hello_count, 1)
     eq_(r.foo_count, 1)
 
 
@@ -140,18 +140,18 @@ def test_repeater_doesnt_try_to_dispatch_to_self_if_it_cant():
     # if a repeater doesn't handle a particular message, it doesn't crash and simply repeats it.
     b = Broadcaster()
     r = Repeater(b)  # doesnt handle hello
-    l = HelloListener(r)
+    listener = HelloListener(r)
     r.connect()
-    l.connect()
+    listener.connect()
     b.notify("hello")  # no crash
-    eq_(l.hello_count, 1)
+    eq_(listener.hello_count, 1)
 
 
 def test_bind_messages():
-    b, l = create_pair()
-    l.bind_messages({"foo", "bar"}, l.hello)
-    l.connect()
+    b, listener = create_pair()
+    listener.bind_messages({"foo", "bar"}, listener.hello)
+    listener.connect()
     b.notify("foo")
     b.notify("bar")
     b.notify("hello")  # Normal dispatching still work
-    eq_(l.hello_count, 3)
+    eq_(listener.hello_count, 3)

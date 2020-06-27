@@ -11,6 +11,8 @@ from ..gui.table import Table, GUITable, Row
 
 
 class TestRow(Row):
+    __test__ = False
+
     def __init__(self, table, index, is_new=False):
         Row.__init__(self, table)
         self.is_new = is_new
@@ -28,6 +30,8 @@ class TestRow(Row):
 
 
 class TestGUITable(GUITable):
+    __test__ = False
+
     def __init__(self, rowcount, viewclass=CallLogger):
         GUITable.__init__(self)
         self.view = viewclass()

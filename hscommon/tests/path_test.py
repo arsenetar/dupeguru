@@ -51,7 +51,7 @@ def test_init_with_tuple_and_list(force_ossep):
 
 def test_init_with_invalid_value(force_ossep):
     try:
-        path = Path(42)
+        path = Path(42)  # noqa: F841
         assert False
     except TypeError:
         pass
@@ -143,8 +143,8 @@ def test_path_slice(force_ossep):
     eq_((), foobar[:foobar])
     abcd = Path("a/b/c/d")
     a = Path("a")
-    b = Path("b")
-    c = Path("c")
+    b = Path("b")  # noqa: #F841
+    c = Path("c")  # noqa: #F841
     d = Path("d")
     z = Path("z")
     eq_("b/c", abcd[a:d])

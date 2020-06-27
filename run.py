@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import QApplication
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
 from qtlib.util import setupQtLogging
-from qt import dg_rc
+from qt import dg_rc  # noqa: F401
 from qt.platform import BASE_PATH
 from core import __version__, __appname__
 

@@ -12,7 +12,31 @@ from pytest import raises
 
 from ..testutil import eq_
 from ..path import Path
-from ..util import *
+from ..util import (
+    nonone,
+    tryint,
+    minmax,
+    first,
+    flatten,
+    dedupe,
+    stripfalse,
+    extract,
+    allsame,
+    trailiter,
+    format_time,
+    format_time_decimal,
+    format_size,
+    remove_invalid_xml,
+    multi_replace,
+    delete_if_empty,
+    open_if_filename,
+    FileOrPath,
+    iterconsume,
+    escape,
+    get_file_ext,
+    rem_file_ext,
+    pluralize,
+)
 
 
 def test_nonone():
