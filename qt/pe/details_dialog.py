@@ -5,10 +5,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
-from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtWidgets import (QLayout, QVBoxLayout, QAbstractItemView, QHBoxLayout,
-    QLabel, QSizePolicy, QToolBar, QToolButton, QGridLayout, QStyle, QAction,
-    QWidget, QApplication, QSpacerItem, QSplitter, QFrame )
+    QSizePolicy, QGridLayout, QWidget, QSpacerItem, QSplitter, QFrame )
 
 from hscommon.trans import trget
 from hscommon import desktop
@@ -16,7 +14,7 @@ from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from qtlib.util import createActions
 from qt.pe.image_viewer import (
-    QWidgetImageViewer, ScrollAreaImageViewer, GraphicsViewViewer,
+    ViewerToolBar, QWidgetImageViewer, ScrollAreaImageViewer, GraphicsViewViewer,
     QWidgetController, ScrollAreaController, GraphicsViewController)
 tr = trget("ui")
 
@@ -25,42 +23,7 @@ class DetailsDialog(DetailsDialogBase):
         self.vController = None
         super().__init__(parent, app)
 
-    def setupActions(self):
-        # (name, shortcut, icon, desc, func)
-        ACTIONS = [
-            (
-                "actionZoomIn",
-                QKeySequence.ZoomIn,
-                "zoom-in",
-                tr("Increase zoom"),
-                self.zoomIn,
-            ),
-            (
-                "actionZoomOut",
-                QKeySequence.ZoomOut,
-                "zoom-out",
-                tr("Decrease zoom"),
-                self.zoomOut,
-            ),
-            (
-                "actionNormalSize",
-                QKeySequence.Refresh,
-                "zoom-original",
-                tr("Normal size"),
-                self.zoomNormalSize,
-            ),
-            (
-                "actionBestFit",
-                tr("Ctrl+p"),
-                "zoom-best-fit",
-                tr("Best fit"),
-                self.zoomBestFit,
-            )
-        ]
-        createActions(ACTIONS, self)
-
     def _setupUi(self):
-        self.setupActions()
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
@@ -80,7 +43,12 @@ class DetailsDialog(DetailsDialogBase):
         self.horizontalLayout.setColumnStretch(0,24)
         self.horizontalLayout.setColumnStretch(1,1)
         self.horizontalLayout.setColumnStretch(2,24)
-        # self.horizontalLayout.setColumnStretch(3,0)
+
+        # This avoids toolbar getting incorrectly resized when window resizes
+        self.horizontalLayout.setRowStretch(0,1)
+        self.horizontalLayout.setRowStretch(1,24)
+        self.horizontalLayout.setRowStretch(2,1)
+
         self.horizontalLayout.setSpacing(1)
 
         self.selectedImageViewer = GraphicsViewViewer(self, "selectedImage")
@@ -97,62 +65,25 @@ class DetailsDialog(DetailsDialogBase):
         # # self.horizontalLayout.addWidget(self.selectedImage)
         self.horizontalLayout.addWidget(self.selectedImageViewer, 0, 0, 3, 1)
 
+        # We use different types of controller depending on the
+        # underlying widgets we use to display images
+        # because their interface and methods might differ
+        if isinstance(self.selectedImageViewer, QWidgetImageViewer):
+            self.vController = QWidgetController(self)
+        elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
+            self.vController = ScrollAreaController(self)
+        elif isinstance(self.selectedImageViewer, GraphicsViewViewer):
+            self.vController = GraphicsViewController(self)
+
         # self.horizontalLayout.addItem(QSpacerItem(5,0, QSizePolicy.Minimum),
         # 1, 3, 1, 1, Qt.Alignment(Qt.AlignRight))
 
-        # FIXME make a subclass to initialize buttons later
-        # FIXME use qwidgetaction to make the popup on resize work -> QWidgetAction::createWidget()
-        # FIXME figure out why margins are changing when the window is updating (after Normal Size, on resize)
-        # it seems toggling the scrollbars reduce viewport size and messes up sizeHint returned?
-        # thus shrinking the space available for the toolbar?
-        self.verticalToolBar = QToolBar(self)
+        self.verticalToolBar = ViewerToolBar(self, self.vController)
         # self.verticalToolBar.setMaximumWidth(10)
         self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
         # self.subVLayout = QVBoxLayout(self)
         # self.subVLayout.addWidget(self.verticalToolBar)
         # self.horizontalLayout.addLayout(self.subVLayout)
-
-        self.buttonImgSwap = QToolButton(self.verticalToolBar)
-        self.buttonImgSwap.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonImgSwap.setIcon(QIcon.fromTheme('view-refresh', \
-            self.style().standardIcon(QStyle.SP_BrowserReload)))
-        self.buttonImgSwap.setText('Swap images')
-        self.buttonImgSwap.setToolTip('Swap images')
-        self.buttonImgSwap.pressed.connect(self.swapImages)
-        self.buttonImgSwap.released.connect(self.swapImages)
-
-        self.buttonZoomIn = QToolButton(self.verticalToolBar)
-        self.buttonZoomIn.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonZoomIn.setDefaultAction(self.actionZoomIn)
-        self.buttonZoomIn.setText('ZoomIn')
-        self.buttonZoomIn.setIcon(QIcon.fromTheme('zoom-in'))
-
-        self.buttonZoomOut = QToolButton(self.verticalToolBar)
-        self.buttonZoomOut.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonZoomOut.setDefaultAction(self.actionZoomOut)
-        self.buttonZoomOut.setText('ZoomOut')
-        self.buttonZoomOut.setIcon(QIcon.fromTheme('zoom-out'))
-        self.buttonZoomOut.setEnabled(False)
-
-        self.buttonNormalSize = QToolButton(self.verticalToolBar)
-        self.buttonNormalSize.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonNormalSize.setDefaultAction(self.actionNormalSize)
-        self.buttonNormalSize.setText('Normal Size')
-        self.buttonNormalSize.setIcon(QIcon.fromTheme('zoom-original'))
-        self.buttonNormalSize.setEnabled(True)
-
-        self.buttonBestFit = QToolButton(self.verticalToolBar)
-        self.buttonBestFit.setToolButtonStyle(Qt.ToolButtonIconOnly)
-        self.buttonBestFit.setDefaultAction(self.actionBestFit)
-        self.buttonBestFit.setText('BestFit')
-        self.buttonBestFit.setIcon(QIcon.fromTheme('zoom-best-fit'))
-        self.buttonBestFit.setEnabled(False)
-
-        self.verticalToolBar.addWidget(self.buttonImgSwap)
-        self.verticalToolBar.addWidget(self.buttonZoomIn)
-        self.verticalToolBar.addWidget(self.buttonZoomOut)
-        self.verticalToolBar.addWidget(self.buttonNormalSize)
-        self.verticalToolBar.addWidget(self.buttonBestFit)
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
 
@@ -197,30 +128,7 @@ class DetailsDialog(DetailsDialogBase):
 
         # self.tableView.hide()
 
-        self.buttonImgSwap.setEnabled(False)
-        self.buttonZoomIn.setEnabled(False)
-        self.buttonZoomOut.setEnabled(False)
-        self.buttonNormalSize.setEnabled(False)
-        self.buttonBestFit.setEnabled(False)
-
-        # We use different types of controller depending on the
-        # underlying widgets we use to display images
-        # because their interface and methods might differ
-        if isinstance(self.selectedImageViewer, QWidgetImageViewer):
-            self.vController = QWidgetController(
-                            self.selectedImageViewer,
-                            self.referenceImageViewer,
-                            self)
-        elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
-            self.vController = ScrollAreaController(
-                            self.selectedImageViewer,
-                            self.referenceImageViewer,
-                            self)
-        elif isinstance(self.selectedImageViewer, GraphicsViewViewer):
-            self.vController = GraphicsViewController(
-                            self.selectedImageViewer,
-                            self.referenceImageViewer,
-                            self)
+        self.vController.setupViewers(self.selectedImageViewer, self.referenceImageViewer)
 
     def _update(self):
         if self.vController is None: # Not yet constructed!
@@ -274,25 +182,3 @@ class DetailsDialog(DetailsDialogBase):
         if self.isVisible():
             self._update()
 
-    # ImageViewers
-    @pyqtSlot()
-    def swapImages(self):
-        self.vController.swapPixmaps()
-        # swap the columns in the details table as well
-        self.tableView.horizontalHeader().swapSections(1, 2)
-
-    @pyqtSlot()
-    def zoomIn(self):
-        self.vController.zoomIn()
-
-    @pyqtSlot()
-    def zoomOut(self):
-        self.vController.zoomOut()
-
-    @pyqtSlot()
-    def zoomBestFit(self):
-        self.vController.ScaleToBestFit()
-
-    @pyqtSlot()
-    def zoomNormalSize(self):
-        self.vController.zoomNormalSize()
