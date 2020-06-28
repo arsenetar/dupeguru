@@ -83,7 +83,7 @@ class DetailsDialog(DetailsDialogBase):
         # self.horizontalLayout.setColumnStretch(3,0)
         self.horizontalLayout.setSpacing(1)
 
-        self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
+        self.selectedImageViewer = GraphicsViewViewer(self, "selectedImage")
         # self.selectedImage = QLabel(self)
         # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -100,6 +100,11 @@ class DetailsDialog(DetailsDialogBase):
         # self.horizontalLayout.addItem(QSpacerItem(5,0, QSizePolicy.Minimum),
         # 1, 3, 1, 1, Qt.Alignment(Qt.AlignRight))
 
+        # FIXME make a subclass to initialize buttons later
+        # FIXME use qwidgetaction to make the popup on resize work -> QWidgetAction::createWidget()
+        # FIXME figure out why margins are changing when the window is updating (after Normal Size, on resize)
+        # it seems toggling the scrollbars reduce viewport size and messes up sizeHint returned?
+        # thus shrinking the space available for the toolbar?
         self.verticalToolBar = QToolBar(self)
         # self.verticalToolBar.setMaximumWidth(10)
         self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
@@ -151,11 +156,12 @@ class DetailsDialog(DetailsDialogBase):
 
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
 
-        self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
+        self.referenceImageViewer = GraphicsViewViewer(self, "referenceImage")
         # self.referenceImage = QLabel(self)
-        # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        # sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         # sizePolicy.setHorizontalStretch(0)
         # sizePolicy.setVerticalStretch(0)
+        # self.verticalToolBar.setSizePolicy(sizePolicy)
         # sizePolicy.setHeightForWidth(
         #     self.referenceImage.sizePolicy().hasHeightForWidth()
         # )
@@ -217,6 +223,8 @@ class DetailsDialog(DetailsDialogBase):
                             self)
 
     def _update(self):
+        if self.vController is None: # Not yet constructed!
+            return
         if not self.app.model.selected_dupes:
             # No item from the model, disable and clear everything.
             self.vController.resetViewersState()
@@ -225,8 +233,6 @@ class DetailsDialog(DetailsDialogBase):
         group = self.app.model.results.get_group_of_duplicate(dupe)
         ref = group.ref
 
-        if self.vController is None: # Not yet constructed!
-            return
         self.vController.updateView(ref, dupe, group)
 
     # --- Override
@@ -277,11 +283,11 @@ class DetailsDialog(DetailsDialogBase):
 
     @pyqtSlot()
     def zoomIn(self):
-        self.vController.scaleImagesBy(1.25)
+        self.vController.zoomIn()
 
     @pyqtSlot()
     def zoomOut(self):
-        self.vController.scaleImagesBy(0.8)
+        self.vController.zoomOut()
 
     @pyqtSlot()
     def zoomBestFit(self):
