@@ -29,7 +29,8 @@ class DetailsModel(QAbstractTableModel):
             return None
         if role != Qt.DisplayRole:
             return None
-        column = index.column() +1
+        # Skip first value "Attribute"
+        column = index.column() + 1
         row = index.row()
         return self.model.row(row)[column]
 
@@ -60,6 +61,7 @@ class DetailsTable(QTableView):
         self.setSelectionMode(QTableView.SingleSelection)
         self.setShowGrid(False)
         self.setWordWrap(False)
+        self.setCornerButtonEnabled(False)
 
     def setModel(self, model):
         QTableView.setModel(self, model)
@@ -73,7 +75,7 @@ class DetailsTable(QTableView):
         vheader = self.verticalHeader()
         vheader.setVisible(True)
         vheader.setDefaultSectionSize(18)
-        # FIXME hardcoded value is not ideal, perhaps resize to contents once first?
+        # hardcoded value above is not ideal, perhaps resize to contents first?
         # vheader.setSectionResizeMode(QHeaderView.ResizeToContents)
         vheader.setSectionResizeMode(QHeaderView.Fixed)
         vheader.setSectionsMovable(True)
