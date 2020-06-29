@@ -4,19 +4,20 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
-from PyQt5.QtWidgets import (QLayout, QVBoxLayout, QAbstractItemView, QHBoxLayout,
-    QSizePolicy, QGridLayout, QWidget, QSpacerItem, QSplitter, QFrame )
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtWidgets import (
+    QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame)
 
 from hscommon.trans import trget
-from hscommon import desktop
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
-from qtlib.util import createActions
-from qt.pe.image_viewer import (
-    ViewerToolBar, QWidgetImageViewer, ScrollAreaImageViewer, GraphicsViewViewer,
-    QWidgetController, ScrollAreaController, GraphicsViewController)
+from .image_viewer import (
+    ViewerToolBar, QWidgetImageViewer,
+    ScrollAreaImageViewer, GraphicsViewViewer,
+    QWidgetController, ScrollAreaController,
+    GraphicsViewController)
 tr = trget("ui")
+
 
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
@@ -27,47 +28,27 @@ class DetailsDialog(DetailsDialogBase):
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
-
-        # self.verticalLayout = QVBoxLayout(self)
-        # self.verticalLayout.setSpacing(0)
-        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.splitter = QSplitter(Qt.Vertical, self)
         self.setCentralWidget(self.splitter)
         self.topFrame = QFrame()
         self.topFrame.setFrameShape(QFrame.StyledPanel)
-
         self.horizontalLayout = QGridLayout()
         # Minimum width for the toolbar in the middle:
         self.horizontalLayout.setColumnMinimumWidth(1, 10)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setColumnStretch(0,24)
-        self.horizontalLayout.setColumnStretch(1,1)
-        self.horizontalLayout.setColumnStretch(2,24)
+        self.horizontalLayout.setColumnStretch(0, 32)
+        # Smaller value for the toolbar in the middle to avoid excessive resize
+        self.horizontalLayout.setColumnStretch(1, 2)
+        self.horizontalLayout.setColumnStretch(2, 32)
+        # This avoids toolbar getting incorrectly partially hidden when window resizes
+        self.horizontalLayout.setRowStretch(0, 1)
+        self.horizontalLayout.setRowStretch(1, 24)
+        self.horizontalLayout.setRowStretch(2, 1)
+        self.horizontalLayout.setSpacing(1)  # probably not important
 
-        # This avoids toolbar getting incorrectly resized when window resizes
-        self.horizontalLayout.setRowStretch(0,1)
-        self.horizontalLayout.setRowStretch(1,24)
-        self.horizontalLayout.setRowStretch(2,1)
-
-        self.horizontalLayout.setSpacing(1)
-
-        self.selectedImageViewer = GraphicsViewViewer(self, "selectedImage")
-        # self.selectedImage = QLabel(self)
-        # sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(
-        #     self.selectedImage.sizePolicy().hasHeightForWidth()
-        # )
-        # self.selectedImage.setSizePolicy(sizePolicy)
-        # self.selectedImage.setScaledContents(False)
-        # self.selectedImage.setAlignment(Qt.AlignCenter)
-        # # self.horizontalLayout.addWidget(self.selectedImage)
+        self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
         self.horizontalLayout.addWidget(self.selectedImageViewer, 0, 0, 3, 1)
-
-        # We use different types of controller depending on the
-        # underlying widgets we use to display images
-        # because their interface and methods might differ
+        # Use a specific type of controller depending on the underlying viewer type
         if isinstance(self.selectedImageViewer, QWidgetImageViewer):
             self.vController = QWidgetController(self)
         elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
@@ -75,63 +56,34 @@ class DetailsDialog(DetailsDialogBase):
         elif isinstance(self.selectedImageViewer, GraphicsViewViewer):
             self.vController = GraphicsViewController(self)
 
-        # self.horizontalLayout.addItem(QSpacerItem(5,0, QSizePolicy.Minimum),
-        # 1, 3, 1, 1, Qt.Alignment(Qt.AlignRight))
-
         self.verticalToolBar = ViewerToolBar(self, self.vController)
-        # self.verticalToolBar.setMaximumWidth(10)
         self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
-        # self.subVLayout = QVBoxLayout(self)
-        # self.subVLayout.addWidget(self.verticalToolBar)
-        # self.horizontalLayout.addLayout(self.subVLayout)
-
         self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
 
-        self.referenceImageViewer = GraphicsViewViewer(self, "referenceImage")
-        # self.referenceImage = QLabel(self)
-        # sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # self.verticalToolBar.setSizePolicy(sizePolicy)
-        # sizePolicy.setHeightForWidth(
-        #     self.referenceImage.sizePolicy().hasHeightForWidth()
-        # )
-        # self.referenceImageViewer.setSizePolicy(sizePolicy)
-        # self.referenceImageViewer.setAlignment(Qt.AlignCenter)
+        self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
         self.horizontalLayout.addWidget(self.referenceImageViewer, 0, 2, 3, 1)
-        # self.verticalLayout.addLayout(self.horizontalLayout)
         self.topFrame.setLayout(self.horizontalLayout)
         self.splitter.addWidget(self.topFrame)
-
-        # container = QWidget(self)
-        # container.setLayout(self.horizontalLayout)
-        # self.setLayout(self.horizontalLayout)
-        # self.splitter.addWidget(self)
         self.splitter.setStretchFactor(0, 8)
 
         self.tableView = DetailsTable(self)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
         # self.tableView.setMinimumSize(QSize(0, 190))
         # self.tableView.setMaximumSize(QSize(16777215, 190))
-
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
-        # self.verticalLayout.addLayout(self.tableView)
-
         self.splitter.addWidget(self.tableView)
         self.splitter.setStretchFactor(1, 1)
-
-        # self.tableView.hide()
-
-        self.vController.setupViewers(self.selectedImageViewer, self.referenceImageViewer)
+        # Late population needed here for connections to the toolbar
+        self.vController.setupViewers(
+            self.selectedImageViewer, self.referenceImageViewer)
 
     def _update(self):
-        if self.vController is None: # Not yet constructed!
+        if self.vController is None:  # Not yet constructed!
             return
         if not self.app.model.selected_dupes:
             # No item from the model, disable and clear everything.
@@ -154,14 +106,13 @@ class DetailsDialog(DetailsDialogBase):
             0, self.selectedImageViewer.size().width())
         self.horizontalLayout.setColumnMinimumWidth(
             2, self.selectedImageViewer.size().width())
-
         # This works when expanding but it's ugly:
-#         if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
-#             print(f"Before selected size: {self.selectedImageViewer.size()}\n\
-# Before reference size: {self.referenceImageViewer.size()}")
-#             self.selectedImageViewer.resize(self.referenceImageViewer.size())
-#             print(f"After selected size: {self.selectedImageViewer.size()}\n\
-# After reference size: {self.referenceImageViewer.size()}")
+        if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
+            # print(f"""Before selected size: {self.selectedImageViewer.size()}\n""",
+            #       f"""Before reference size: {self.referenceImageViewer.size()}""")
+            self.selectedImageViewer.resize(self.referenceImageViewer.size())
+            # print(f"""After selected size: {self.selectedImageViewer.size()}\n""",
+            #       f"""After reference size: {self.referenceImageViewer.size()}""")
 
         if self.vController is None or not self.vController.bestFit:
             return
@@ -170,8 +121,10 @@ class DetailsDialog(DetailsDialogBase):
 
     def show(self):
         # Compute the maximum size the table view can reach
+        # Assuming all rows below headers have the same height
         self.tableView.setMaximumHeight(
-            self.tableView.rowHeight(1) * self.tableModel.model.row_count()\
+            self.tableView.rowHeight(1)
+            * self.tableModel.model.row_count()
             + self.tableView.verticalHeader().sectionSize(0))
         DetailsDialogBase.show(self)
         self._update()
@@ -181,4 +134,3 @@ class DetailsDialog(DetailsDialogBase):
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
-

@@ -7,7 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QAbstractTableModel
-from PyQt5.QtWidgets import QHeaderView, QTableView
+from PyQt5.QtWidgets import QHeaderView, QTableView, QAbstractItemView
 
 from hscommon.trans import trget
 
@@ -51,8 +51,10 @@ class DetailsTable(QTableView):
         QTableView.__init__(self, *args)
         self.setAlternatingRowColors(True)
         self.setSelectionBehavior(QTableView.SelectRows)
+        self.setSelectionMode(QTableView.SingleSelection)
         self.setShowGrid(False)
         self.setWordWrap(False)
+
 
     def setModel(self, model):
         QTableView.setModel(self, model)
