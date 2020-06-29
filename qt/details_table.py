@@ -13,7 +13,7 @@ from hscommon.trans import trget
 
 tr = trget("ui")
 
-HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
+HEADER = [tr("Selected"), tr("Reference")]
 
 
 class DetailsModel(QAbstractTableModel):
@@ -29,7 +29,7 @@ class DetailsModel(QAbstractTableModel):
             return None
         if role != Qt.DisplayRole:
             return None
-        column = index.column()
+        column = index.column() +1
         row = index.row()
         return self.model.row(row)[column]
 
@@ -40,6 +40,12 @@ class DetailsModel(QAbstractTableModel):
             and section < len(HEADER)
         ):
             return HEADER[section]
+        elif (
+            orientation == Qt.Vertical
+            and role == Qt.DisplayRole
+            and section < self.model.row_count()
+        ):
+            return self.model.row(section)[0]
         return None
 
     def rowCount(self, parent):
@@ -51,6 +57,7 @@ class DetailsTable(QTableView):
         QTableView.__init__(self, *args)
         self.setAlternatingRowColors(True)
         self.setSelectionBehavior(QTableView.SelectRows)
+        self.setSelectionMode(QTableView.SingleSelection)
         self.setShowGrid(False)
         self.setWordWrap(False)
 
@@ -61,9 +68,12 @@ class DetailsTable(QTableView):
         hheader.setHighlightSections(False)
         hheader.setStretchLastSection(False)
         hheader.resizeSection(0, 100)
-        hheader.setSectionResizeMode(0, QHeaderView.Fixed)
+        hheader.setSectionResizeMode(0, QHeaderView.Stretch)
         hheader.setSectionResizeMode(1, QHeaderView.Stretch)
-        hheader.setSectionResizeMode(2, QHeaderView.Stretch)
         vheader = self.verticalHeader()
-        vheader.setVisible(False)
+        vheader.setVisible(True)
         vheader.setDefaultSectionSize(18)
+        # FIXME hardcoded value is not ideal, perhaps resize to contents once first?
+        # vheader.setSectionResizeMode(QHeaderView.ResizeToContents)
+        vheader.setSectionResizeMode(QHeaderView.Fixed)
+        vheader.setSectionsMovable(True)
