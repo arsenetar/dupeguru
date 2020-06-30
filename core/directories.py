@@ -224,7 +224,7 @@ class Directories:
             root = ET.parse(infile).getroot()
         except Exception:
             return
-        for rdn in root.getiterator("root_directory"):
+        for rdn in root.iter("root_directory"):
             attrib = rdn.attrib
             if "path" not in attrib:
                 continue
@@ -233,7 +233,7 @@ class Directories:
                 self.add_path(Path(path))
             except (AlreadyThereError, InvalidPathError):
                 pass
-        for sn in root.getiterator("state"):
+        for sn in root.iter("state"):
             attrib = sn.attrib
             if not ("path" in attrib and "value" in attrib):
                 continue

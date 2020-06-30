@@ -241,13 +241,13 @@ class Results(Markable):
 
         self.apply_filter(None)
         root = ET.parse(infile).getroot()
-        group_elems = list(root.getiterator("group"))
+        group_elems = list(root.iter("group"))
         groups = []
         marked = set()
         for group_elem in j.iter_with_progress(group_elems, every=100):
             group = engine.Group()
             dupes = []
-            for file_elem in group_elem.getiterator("file"):
+            for file_elem in group_elem.iter("file"):
                 path = file_elem.get("path")
                 words = file_elem.get("words", "")
                 if not path:
@@ -260,7 +260,7 @@ class Results(Markable):
                 dupes.append(file)
                 if file_elem.get("marked") == "y":
                     marked.add(file)
-            for match_elem in group_elem.getiterator("match"):
+            for match_elem in group_elem.iter("match"):
                 try:
                     attrs = match_elem.attrib
                     first_file = dupes[int(attrs["first"])]
