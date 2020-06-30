@@ -238,7 +238,11 @@ def test_multi_replace():
 
 # --- Files
 
-# TODO need to figure out how to make these work without monkeyplus as it appears to cause issues with newer pytest
+# These test cases needed https://github.com/hsoft/pytest-monkeyplus/ which appears to not be compatible with latest
+# pytest, looking at where this is used only appears to be in hscommon.localize_all_stringfiles at top level.
+# Right now this repo does not seem to utilize any of that functionality so going to leave these tests out for now.
+# TODO decide if fixing these tests is worth it or not.
+
 # class TestCase_modified_after:
 #     def test_first_is_modified_after(self, monkeyplus):
 #         monkeyplus.patch_osstat("first", st_mtime=42)
