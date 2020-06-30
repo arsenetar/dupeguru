@@ -259,7 +259,7 @@ class DupeGuru(Broadcaster):
 
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
-        return fs.get_file(path, self.fileclasses + [se.fs.Folder])
+        return fs.get_file(path, self.fileclasses + [se.fs.Folder] + [fs.Folder])
 
     def _get_file(self, str_path):
         path = Path(str_path)
