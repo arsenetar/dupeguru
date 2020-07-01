@@ -33,9 +33,9 @@ class DetailsModel(QAbstractTableModel):
         row = index.row()
 
         ignored_fields = ["Dupe Count"]
-        if self.model.row(row)[0] in ignored_fields or \
-        self.model.row(row)[1] == "---" or \
-        self.model.row(row)[2] == "---":
+        if (self.model.row(row)[0] in ignored_fields
+                or self.model.row(row)[1] == "---"
+                or self.model.row(row)[2] == "---"):
             if role != Qt.DisplayRole:
                 return None
             return self.model.row(row)[column]
@@ -45,10 +45,10 @@ class DetailsModel(QAbstractTableModel):
         if role == Qt.ForegroundRole and self.model.row(row)[1] != self.model.row(row)[2]:
             return QBrush(QColor(250, 20, 20))  # red
         if role == Qt.FontRole and self.model.row(row)[1] != self.model.row(row)[2]:
-            font = QFont(self.model.view.font()) # or simply QFont()
+            font = QFont(self.model.view.font())  # or simply QFont()
             font.setBold(True)
             return font
-        return None # QVariant()
+        return None  # QVariant()
 
     def headerData(self, section, orientation, role):
         if (
