@@ -283,6 +283,7 @@ class DupeGuru(QObject):
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         self.resultWindow = ResultWindow(self.directories_dialog, self)
+        self.directories_dialog._updateActionsState()
         self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
 
     def show_results_window(self):
