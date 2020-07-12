@@ -35,9 +35,14 @@ class Preferences(PreferencesBase):
             "ResultWindowIsMaximized", self.resultWindowIsMaximized
         )
         self.resultWindowRect = self.get_rect("ResultWindowRect", self.resultWindowRect)
+        self.mainWindowIsMaximized = get(
+            "MainWindowIsMaximized", self.mainWindowIsMaximized
+        )
+        self.mainWindowRect = self.get_rect("MainWindowRect", self.mainWindowRect)
         self.directoriesWindowRect = self.get_rect(
             "DirectoriesWindowRect", self.directoriesWindowRect
         )
+
         self.recentResults = get("RecentResults", self.recentResults)
         self.recentFolders = get("RecentFolders", self.recentFolders)
 
@@ -70,6 +75,8 @@ class Preferences(PreferencesBase):
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.directoriesWindowRect = None
+        self.mainWindowRect = None
+        self.mainWindowIsMaximized = False
         self.recentResults = []
         self.recentFolders = []
 
@@ -101,7 +108,9 @@ class Preferences(PreferencesBase):
         set_("TableFontSize", self.tableFontSize)
         set_('ReferenceBoldFont', self.reference_bold_font)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
+        set_("MainWindowIsMaximized", self.mainWindowIsMaximized)
         self.set_rect("ResultWindowRect", self.resultWindowRect)
+        self.set_rect("MainWindowRect", self.mainWindowRect)
         self.set_rect("DirectoriesWindowRect", self.directoriesWindowRect)
         set_("RecentResults", self.recentResults)
         set_("RecentFolders", self.recentFolders)
