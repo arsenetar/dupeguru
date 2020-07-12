@@ -12,10 +12,7 @@ from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from .image_viewer import (
-    ViewerToolBar, QWidgetImageViewer,
-    ScrollAreaImageViewer, GraphicsViewViewer,
-    QWidgetController, ScrollAreaController,
-    GraphicsViewController)
+    ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController)
 tr = trget("ui")
 
 
@@ -49,12 +46,7 @@ class DetailsDialog(DetailsDialogBase):
         self.selectedImageViewer = ScrollAreaImageViewer(self, "selectedImage")
         self.horizontalLayout.addWidget(self.selectedImageViewer, 0, 0, 3, 1)
         # Use a specific type of controller depending on the underlying viewer type
-        if isinstance(self.selectedImageViewer, QWidgetImageViewer):
-            self.vController = QWidgetController(self)
-        elif isinstance(self.selectedImageViewer, ScrollAreaImageViewer):
-            self.vController = ScrollAreaController(self)
-        elif isinstance(self.selectedImageViewer, GraphicsViewViewer):
-            self.vController = GraphicsViewController(self)
+        self.vController = ScrollAreaController(self)
 
         self.verticalToolBar = ViewerToolBar(self, self.vController)
         self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
