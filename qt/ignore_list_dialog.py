@@ -48,6 +48,7 @@ class IgnoreListDialog(QDialog):
         self.tableView.verticalHeader().setDefaultSectionSize(18)
         self.tableView.verticalHeader().setHighlightSections(False)
         self.tableView.verticalHeader().setVisible(False)
+        self.tableView.setWordWrap(False)
         self.verticalLayout.addWidget(self.tableView)
         self.removeSelectedButton = QPushButton(tr("Remove Selected"))
         self.clearButton = QPushButton(tr("Clear"))
