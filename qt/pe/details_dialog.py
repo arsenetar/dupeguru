@@ -25,8 +25,8 @@ class DetailsDialog(DetailsDialogBase):
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
+        self.setAllowedAreas(Qt.AllDockWidgetAreas)
         self.splitter = QSplitter(Qt.Vertical, self)
-        self.setCentralWidget(self.splitter)
         self.topFrame = QFrame()
         self.topFrame.setFrameShape(QFrame.StyledPanel)
         self.horizontalLayout = QGridLayout()
@@ -73,6 +73,8 @@ class DetailsDialog(DetailsDialogBase):
         # Late population needed here for connections to the toolbar
         self.vController.setupViewers(
             self.selectedImageViewer, self.referenceImageViewer)
+        # self.setCentralWidget(self.splitter)  # only as QMainWindow
+        self.setWidget(self.splitter)  # only as QDockWidget
 
     def _update(self):
         if self.vController is None:  # Not yet constructed!
@@ -89,15 +91,17 @@ class DetailsDialog(DetailsDialogBase):
 
     # --- Override
     def resizeEvent(self, event):
-        # HACK referenceViewer might be 1 pixel shorter in width
+        # HACK This ensures same size while shrinking.
+        # ReferenceViewer might be 1 pixel shorter in width
         # due to the toolbar in the middle keeping the same width,
         # so resizing in the GridLayout's engine leads to not enough space
         # left for the panel on the right.
-        # This ensures same size while shrinking at least:
-        self.horizontalLayout.setColumnMinimumWidth(
-            0, self.selectedImageViewer.size().width())
-        self.horizontalLayout.setColumnMinimumWidth(
-            2, self.selectedImageViewer.size().width())
+        # This doesn't work as a QDockWidget however!
+        # self.horizontalLayout.setColumnMinimumWidth(
+        #     0, self.selectedImageViewer.size().width())
+        # self.horizontalLayout.setColumnMinimumWidth(
+        #     2, self.selectedImageViewer.size().width())
+
         # This works when expanding but it's ugly:
         if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
             # print(f"""Before selected size: {self.selectedImageViewer.size()}\n""",

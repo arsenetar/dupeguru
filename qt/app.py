@@ -7,7 +7,7 @@
 import sys
 import os.path as op
 
-from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal
+from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
 
@@ -284,6 +284,8 @@ class DupeGuru(QObject):
             self.resultWindow.setParent(None)
         self.resultWindow = ResultWindow(self.directories_dialog, self)
         self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
+        self.resultWindow.addDockWidget(
+            Qt.BottomDockWidgetArea, self.details_dialog)
 
     def show_results_window(self):
         self.showResultsWindow()
