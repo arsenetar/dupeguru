@@ -54,11 +54,11 @@ class DupeGuru(QObject):
     def _setup(self):
         core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
+        self.details_dialog = None
         self._update_options()
         self.recentResults = Recent(self, "recentResults")
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = None
-        self.details_dialog = None
         self.directories_dialog = DirectoriesDialog(self)
         self.progress_window = ProgressWindow(
             self.directories_dialog, self.model.progress_window
@@ -151,6 +151,9 @@ class DupeGuru(QObject):
         self.model.options["scanned_tags"] = scanned_tags
         self.model.options["match_scaled"] = self.prefs.match_scaled
         self.model.options["picture_cache_type"] = self.prefs.picture_cache_type
+
+        if self.details_dialog:
+            self.details_dialog.update_options()
 
     # --- Private
     def _get_details_dialog_class(self):

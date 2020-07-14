@@ -25,8 +25,7 @@ class DetailsDialog(DetailsDialogBase):
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
-        self.setAllowedAreas(Qt.AllDockWidgetAreas)
-        self.splitter = QSplitter(Qt.Vertical, self)
+        self.splitter = QSplitter(Qt.Vertical)
         self.topFrame = QFrame()
         self.topFrame.setFrameShape(QFrame.StyledPanel)
         self.horizontalLayout = QGridLayout()
@@ -96,7 +95,8 @@ class DetailsDialog(DetailsDialogBase):
         # due to the toolbar in the middle keeping the same width,
         # so resizing in the GridLayout's engine leads to not enough space
         # left for the panel on the right.
-        # This doesn't work as a QDockWidget however!
+        # This work as a QMainWindow, but doesn't work as a QDockWidget:
+        # resize can only grow. Might need some custom sizeHint somewhere...
         # self.horizontalLayout.setColumnMinimumWidth(
         #     0, self.selectedImageViewer.size().width())
         # self.horizontalLayout.setColumnMinimumWidth(
