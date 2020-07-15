@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView
+from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView, QWidget
 
 from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
@@ -27,3 +27,6 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
         self.verticalLayout.addWidget(self.tableView)
+        self.centralWidget = QWidget()
+        self.centralWidget.setLayout(self.verticalLayout)
+        self.setWidget(self.centralWidget)

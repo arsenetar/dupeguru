@@ -117,8 +117,21 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addLayout(
             horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
         )
-        self._setupAddCheckbox("reference_bold_font", tr("Bold font for reference."))
+        self._setupAddCheckbox("reference_bold_font",
+                               tr("Bold font for reference."))
         self.widgetsVLayout.addWidget(self.reference_bold_font)
+
+        self._setupAddCheckbox("details_dialog_titlebar_enabled",
+                               tr("Details dialog displays a title bar and is dockable"))
+        self.widgetsVLayout.addWidget(self.details_dialog_titlebar_enabled)
+        self._setupAddCheckbox("details_dialog_vertical_titlebar",
+                               tr("Details dialog displays a vertical title bar."))
+        self.widgetsVLayout.addWidget(self.details_dialog_vertical_titlebar)
+        self.details_dialog_vertical_titlebar.setEnabled(
+            self.details_dialog_titlebar_enabled.isChecked())
+        self.details_dialog_titlebar_enabled.stateChanged.connect(
+            self.details_dialog_vertical_titlebar.setEnabled)
+
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
@@ -190,6 +203,8 @@ class PreferencesDialogBase(QDialog):
         setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
         setchecked(self.debugModeBox, prefs.debug_mode)
         setchecked(self.reference_bold_font, prefs.reference_bold_font)
+        setchecked(self.details_dialog_titlebar_enabled , prefs.details_dialog_titlebar_enabled)
+        setchecked(self.details_dialog_vertical_titlebar, prefs.details_dialog_vertical_titlebar)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
         self.fontSizeSpinBox.setValue(prefs.tableFontSize)
@@ -210,6 +225,8 @@ class PreferencesDialogBase(QDialog):
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
+        prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
+        prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
