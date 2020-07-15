@@ -105,7 +105,7 @@ class DetailsDialog(DetailsDialogBase):
             * self.tableModel.model.row_count()
             + self.tableView.verticalHeader().sectionSize(0)
             # Windows seems to add a few pixels more to the table somehow
-            + 5 if ISWINDOWS else 0)
+            + (5 if ISWINDOWS else 0))
         DetailsDialogBase.show(self)
         self.ensure_same_sizes()
         self._update()
