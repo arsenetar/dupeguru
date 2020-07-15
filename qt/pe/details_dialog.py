@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
     QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame)
 
 from hscommon.trans import trget
+from hscommon.plat import ISWINDOWS
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from .image_viewer import (
@@ -117,7 +118,9 @@ class DetailsDialog(DetailsDialogBase):
         self.tableView.setMaximumHeight(
             self.tableView.rowHeight(1)
             * self.tableModel.model.row_count()
-            + self.tableView.verticalHeader().sectionSize(0))
+            + self.tableView.verticalHeader().sectionSize(0)
+            # Windows seems to add a few pixels more to the table somehow
+            + 5 if ISWINDOWS else 0)
         DetailsDialogBase.show(self)
         self._update()
 
