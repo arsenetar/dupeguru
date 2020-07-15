@@ -118,14 +118,14 @@ class PreferencesDialogBase(QDialog):
             horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
         )
         self._setupAddCheckbox("reference_bold_font",
-                               tr("Bold font for reference."))
+                               tr("Bold font for reference"))
         self.widgetsVLayout.addWidget(self.reference_bold_font)
 
         self._setupAddCheckbox("details_dialog_titlebar_enabled",
                                tr("Details dialog displays a title bar and is dockable"))
         self.widgetsVLayout.addWidget(self.details_dialog_titlebar_enabled)
         self._setupAddCheckbox("details_dialog_vertical_titlebar",
-                               tr("Details dialog displays a vertical title bar."))
+                               tr("Details dialog displays a vertical title bar (Linux only)"))
         self.widgetsVLayout.addWidget(self.details_dialog_vertical_titlebar)
         self.details_dialog_vertical_titlebar.setEnabled(
             self.details_dialog_titlebar_enabled.isChecked())

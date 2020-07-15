@@ -21,7 +21,6 @@ class DetailsDialog(QDockWidget):
         self.model = app.model.details_panel
         self.setAllowedAreas(Qt.AllDockWidgetAreas)
         self._setupUi()
-        self.update_options()
         # To avoid saving uninitialized geometry on appWillSavePrefs, we track whether our dialog
         # has been shown. If it has, we know that our geometry should be saved.
         self._shown_once = False
@@ -39,6 +38,7 @@ class DetailsDialog(QDockWidget):
     def show(self):
         self._shown_once = True
         super().show()
+        self.update_options()
 
     def update_options(self):
         # This disables the title bar (if we had not set one before already)
@@ -62,7 +62,7 @@ class DetailsDialog(QDockWidget):
 
     # --- Events
     def appWillSavePrefs(self):
-        if self._shown_once:
+        if self._shown_once and self.isFloating():
             self.app.prefs.saveGeometry("DetailsWindowRect", self)
 
     # --- model --> view
