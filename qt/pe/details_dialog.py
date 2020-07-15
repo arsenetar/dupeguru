@@ -90,23 +90,7 @@ class DetailsDialog(DetailsDialogBase):
 
     # --- Override
     def resizeEvent(self, event):
-        # HACK referenceViewer might be 1 pixel shorter in width
-        # due to the toolbar in the middle keeping the same width,
-        # so resizing in the GridLayout's engine leads to not enough space
-        # left for the panel on the right.
-        # This ensures same size while shrinking at least:
-        self.horizontalLayout.setColumnMinimumWidth(
-            0, self.selectedImageViewer.size().width())
-        self.horizontalLayout.setColumnMinimumWidth(
-            2, self.selectedImageViewer.size().width())
-        # This works when expanding but it's ugly:
-        if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
-            # print(f"""Before selected size: {self.selectedImageViewer.size()}\n""",
-            #       f"""Before reference size: {self.referenceImageViewer.size()}""")
-            self.selectedImageViewer.resize(self.referenceImageViewer.size())
-            # print(f"""After selected size: {self.selectedImageViewer.size()}\n""",
-            #       f"""After reference size: {self.referenceImageViewer.size()}""")
-
+        self.ensure_same_sizes()
         if self.vController is None or not self.vController.bestFit:
             return
         # Only update the scaled down pixmaps
@@ -122,7 +106,27 @@ class DetailsDialog(DetailsDialogBase):
             # Windows seems to add a few pixels more to the table somehow
             + 5 if ISWINDOWS else 0)
         DetailsDialogBase.show(self)
+        self.ensure_same_sizes()
         self._update()
+
+    def ensure_same_sizes(self):
+        # HACK referenceViewer might be 1 pixel shorter in width
+        # due to the toolbar in the middle keeping the same width,
+        # so resizing in the GridLayout's engine leads to not enough space
+        # left for the panel on the right.
+        # This ensures same size while shrinking at least:
+        self.horizontalLayout.setColumnMinimumWidth(
+            0, self.selectedImageViewer.size().width())
+        self.horizontalLayout.setColumnMinimumWidth(
+            2, self.selectedImageViewer.size().width())
+
+        # This works when expanding but it's ugly:
+        if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
+            # print(f"""Before selected size: {self.selectedImageViewer.size()}\n""",
+            #       f"""Before reference size: {self.referenceImageViewer.size()}""")
+            self.selectedImageViewer.resize(self.referenceImageViewer.size())
+            # print(f"""After selected size: {self.selectedImageViewer.size()}\n""",
+            #       f"""After reference size: {self.referenceImageViewer.size()}""")
 
     # model --> view
     def refresh(self):

@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (
     QToolBar, QToolButton, QAction, QWidget, QScrollArea,
     QApplication, QAbstractScrollArea, QStyle)
 from hscommon.trans import trget
+from hscommon.plat import ISLINUX
 tr = trget("ui")
 
 MAX_SCALE = 12.0
@@ -21,7 +22,7 @@ def createActions(actions, target):
     for name, shortcut, icon, desc, func in actions:
         action = QAction(target)
         if icon:
-            action.setIcon(QIcon.fromTheme(icon))
+            action.setIcon(icon)
         if shortcut:
             action.setShortcut(shortcut)
         action.setText(desc)
@@ -48,28 +49,32 @@ class ViewerToolBar(QToolBar):
             (
                 "actionZoomIn",
                 QKeySequence.ZoomIn,
-                "zoom-in",
+                QIcon.fromTheme("zoom-in") if ISLINUX
+                else QIcon(QPixmap(":/" + "zoom_in")),
                 tr("Increase zoom"),
                 controller.zoomIn,
             ),
             (
                 "actionZoomOut",
                 QKeySequence.ZoomOut,
-                "zoom-out",
+                QIcon.fromTheme("zoom-out") if ISLINUX
+                else QIcon(QPixmap(":/" + "zoom_out")),
                 tr("Decrease zoom"),
                 controller.zoomOut,
             ),
             (
                 "actionNormalSize",
                 tr("Ctrl+/"),
-                "zoom-original",
+                QIcon.fromTheme("zoom-original") if ISLINUX
+                else QIcon(QPixmap(":/" + "zoom_original")),
                 tr("Normal size"),
                 controller.zoomNormalSize,
             ),
             (
                 "actionBestFit",
                 tr("Ctrl+*"),
-                "zoom-best-fit",
+                QIcon.fromTheme("zoom-best-fit") if ISLINUX
+                else QIcon(QPixmap(":/" + "zoom_best_fit")),
                 tr("Best fit"),
                 controller.zoomBestFit,
             )
@@ -83,7 +88,9 @@ class ViewerToolBar(QToolBar):
         self.buttonImgSwap.setToolButtonStyle(Qt.ToolButtonIconOnly)
         self.buttonImgSwap.setIcon(
             QIcon.fromTheme('view-refresh',
-                            self.style().standardIcon(QStyle.SP_BrowserReload)))
+                            self.style().standardIcon(QStyle.SP_BrowserReload))
+            if ISLINUX
+            else QIcon(QPixmap(":/" + "exchange")))
         self.buttonImgSwap.setText('Swap images')
         self.buttonImgSwap.setToolTip('Swap images')
         self.buttonImgSwap.pressed.connect(self.controller.swapImages)
