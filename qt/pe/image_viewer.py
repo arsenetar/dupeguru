@@ -178,7 +178,10 @@ class BaseController(QObject):
         else:
             self.referencePixmap = QPixmap(str(ref.path))
             self.parent.verticalToolBar.buttonImgSwap.setEnabled(True)
-            self.parent.verticalToolBar.buttonNormalSize.setEnabled(True)
+            if ref.dimensions != dupe.dimensions:
+                self.parent.verticalToolBar.buttonNormalSize.setEnabled(False)
+            else:
+                self.parent.verticalToolBar.buttonNormalSize.setEnabled(True)
         self.updateBothImages(same_group)
         self.centerViews(same_group and self.referencePixmap.isNull())
 
