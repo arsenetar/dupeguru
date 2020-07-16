@@ -42,7 +42,7 @@ class AboutBox(QDialog):
         self.setWindowTitle(
             tr("About {}").format(QCoreApplication.instance().applicationName())
         )
-        self.resize(400, 190)
+        self.resize(400, 290)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -69,6 +69,21 @@ class AboutBox(QDialog):
         self.verticalLayout.addWidget(self.label_3)
         self.label_3.setText(tr("Licensed under GPLv3"))
         self.label = QLabel(self)
+        self.label_4 = QLabel(self)
+        self.label_4.setWordWrap(True)
+        self.label_4.setTextFormat(Qt.RichText)
+        self.label_4.setOpenExternalLinks(True)
+        self.label_4.setText(tr(
+            """<img src=":/exchange" alt="Exchange" width="16" height="16"> icon
+ made by <a href="http://jasoncho.ca/"> Jason Cho</a> (used with permission).
+<br>
+<img src=":/zoom_in" alt="Zoom In" width="16" height="16">
+<img src=":/zoom_out" alt="Zoom Out" width="16" height="16">
+<img src=":/zoom_best_fit" alt="Zoomt Best Fit" width="16" height="16">
+<img src=":/zoom_original" alt="Zoom Original" width="16" height="16">
+ icons made by <a href="https://findicons.com/pack/1035/human_o2">schollidesign</a>
+ (licensed under GPL)."""))
+        self.verticalLayout.addWidget(self.label_4)
         font = QFont()
         font.setWeight(75)
         font.setBold(True)
