@@ -4,10 +4,10 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import (
     QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame)
-
+from PyQt5.QtGui import QResizeEvent
 from hscommon.trans import trget
 from hscommon.plat import ISWINDOWS
 from ..details_dialog import DetailsDialog as DetailsDialogBase
@@ -27,7 +27,7 @@ class DetailsDialog(DetailsDialogBase):
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
         self.splitter = QSplitter(Qt.Vertical)
-        self.topFrame = QFrame()
+        self.topFrame = EmittingFrame()
         self.topFrame.setFrameShape(QFrame.StyledPanel)
         self.horizontalLayout = QGridLayout()
         # Minimum width for the toolbar in the middle:
@@ -76,6 +76,8 @@ class DetailsDialog(DetailsDialogBase):
         # self.setCentralWidget(self.splitter)  # only as QMainWindow
         self.setWidget(self.splitter)  # only as QDockWidget
 
+        self.topFrame.resized.connect(self.resizeEvent)
+
     def _update(self):
         if self.vController is None:  # Not yet constructed!
             return
@@ -90,6 +92,7 @@ class DetailsDialog(DetailsDialogBase):
         self.vController.updateView(ref, dupe, group)
 
     # --- Override
+    @pyqtSlot(QResizeEvent)
     def resizeEvent(self, event):
         self.ensure_same_sizes()
         if self.vController is None or not self.vController.bestFit:
@@ -136,3 +139,11 @@ class DetailsDialog(DetailsDialogBase):
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
+
+
+class EmittingFrame(QFrame):
+    """Emits a signal whenever is resized"""
+    resized = pyqtSignal(QResizeEvent)
+
+    def resizeEvent(self, event):
+        self.resized.emit(event)
