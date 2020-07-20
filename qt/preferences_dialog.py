@@ -20,6 +20,8 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QSpinBox,
     QLayout,
+    QTabWidget,
+    QWidget,
 )
 
 from hscommon.trans import trget
@@ -111,34 +113,7 @@ class PreferencesDialogBase(QDialog):
 
     def _setupBottomPart(self):
         # The bottom part of the pref panel is always the same in all editions.
-        self.fontSizeLabel = QLabel(tr("Font size:"))
-        self.fontSizeSpinBox = QSpinBox()
-        self.fontSizeSpinBox.setMinimum(5)
-        self.widgetsVLayout.addLayout(
-            horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
-        )
-        self._setupAddCheckbox("reference_bold_font",
-                               tr("Bold font for reference"))
-        self.widgetsVLayout.addWidget(self.reference_bold_font)
-
-        self._setupAddCheckbox("details_dialog_titlebar_enabled",
-                               tr("Details dialog displays a title bar and is dockable"))
-        self.widgetsVLayout.addWidget(self.details_dialog_titlebar_enabled)
-        self._setupAddCheckbox("details_dialog_vertical_titlebar",
-                               tr("Details dialog displays a vertical title bar (Linux only)"))
-        self.widgetsVLayout.addWidget(self.details_dialog_vertical_titlebar)
-        self.details_dialog_vertical_titlebar.setEnabled(
-            self.details_dialog_titlebar_enabled.isChecked())
-        self.details_dialog_titlebar_enabled.stateChanged.connect(
-            self.details_dialog_vertical_titlebar.setEnabled)
-
-        self.languageLabel = QLabel(tr("Language:"), self)
-        self.languageComboBox = QComboBox(self)
-        for lang in self.supportedLanguages:
-            self.languageComboBox.addItem(get_langnames()[lang])
-        self.widgetsVLayout.addLayout(
-            horizontalWrap([self.languageLabel, self.languageComboBox, None])
-        )
+        self._setupDisplayPage()
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
         self.widgetsVLayout.addWidget(self.copyMoveLabel)
@@ -154,6 +129,40 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandLabel)
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
+
+    def _setupDisplayPage(self):
+        self.fontSizeLabel = QLabel(tr("Font size:"))
+        self.fontSizeSpinBox = QSpinBox()
+        self.fontSizeSpinBox.setMinimum(5)
+        self.displayVLayout.addLayout(
+            horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
+        )
+        self._setupAddCheckbox("reference_bold_font",
+                               tr("Bold font for reference"))
+        self.displayVLayout.addWidget(self.reference_bold_font)
+
+        self.details_dialog_label = QLabel(tr("Details window:"))
+        self.displayVLayout.addWidget(self.details_dialog_label)
+        self._setupAddCheckbox("details_dialog_titlebar_enabled",
+                               tr("Show a title bar and is dockable"))
+        self.details_dialog_titlebar_enabled.setToolTip(
+            tr("Title bar can only be disabled while the window is docked"))
+        self.displayVLayout.addWidget(self.details_dialog_titlebar_enabled)
+        self._setupAddCheckbox("details_dialog_vertical_titlebar",
+                               tr("Vertical title bar"))
+        self.displayVLayout.addWidget(self.details_dialog_vertical_titlebar)
+        self.details_dialog_vertical_titlebar.setEnabled(
+            self.details_dialog_titlebar_enabled.isChecked())
+        self.details_dialog_titlebar_enabled.stateChanged.connect(
+            self.details_dialog_vertical_titlebar.setEnabled)
+
+        self.languageLabel = QLabel(tr("Language:"), self)
+        self.languageComboBox = QComboBox(self)
+        for lang in self.supportedLanguages:
+            self.languageComboBox.addItem(get_langnames()[lang])
+        self.displayVLayout.insertLayout(
+            0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
+        )
 
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
@@ -171,17 +180,27 @@ class PreferencesDialogBase(QDialog):
         self.setSizeGripEnabled(False)
         self.setModal(True)
         self.mainVLayout = QVBoxLayout(self)
+        self.tabwidget = QTabWidget()
+        self.page_general = QWidget()
+        self.page_display = QWidget()
         self.widgetsVLayout = QVBoxLayout()
+        self.page_general.setLayout(self.widgetsVLayout)
+        self.displayVLayout = QVBoxLayout()
+        self.page_display.setLayout(self.displayVLayout)
         self._setupPreferenceWidgets()
-        self.mainVLayout.addLayout(self.widgetsVLayout)
+        # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
             QDialogButtonBox.Cancel
             | QDialogButtonBox.Ok
             | QDialogButtonBox.RestoreDefaults
         )
+        self.mainVLayout.addWidget(self.tabwidget)
         self.mainVLayout.addWidget(self.buttonBox)
         self.layout().setSizeConstraint(QLayout.SetFixedSize)
+        self.tabwidget.addTab(self.page_general, "General")
+        self.tabwidget.addTab(self.page_display, "Display")
+        self.displayVLayout.addStretch(0)
 
     def _load(self, prefs, setchecked):
         # Edition-specific
