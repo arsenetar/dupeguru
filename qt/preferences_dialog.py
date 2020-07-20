@@ -27,6 +27,7 @@ from PyQt5.QtWidgets import (
 from hscommon.trans import trget
 from qtlib.util import horizontalWrap
 from qtlib.preferences import get_langnames
+from enum import Flag, auto
 
 from .preferences import Preferences
 
@@ -50,6 +51,13 @@ SUPPORTED_LANGUAGES = [
     "es",
     "nl",
 ]
+
+
+class Sections(Flag):
+    """Filter blocks of preferences when reset or loaded"""
+    GENERAL = auto()
+    DISPLAY = auto()
+    ALL = GENERAL | DISPLAY
 
 
 class PreferencesDialogBase(QDialog):
@@ -202,7 +210,7 @@ class PreferencesDialogBase(QDialog):
         self.tabwidget.addTab(self.page_display, "Display")
         self.displayVLayout.addStretch(0)
 
-    def _load(self, prefs, setchecked):
+    def _load(self, prefs, setchecked, section):
         # Edition-specific
         pass
 
@@ -210,29 +218,31 @@ class PreferencesDialogBase(QDialog):
         # Edition-specific
         pass
 
-    def load(self, prefs=None):
+    def load(self, prefs=None, section=Sections.ALL):
         if prefs is None:
             prefs = self.app.prefs
-        self.filterHardnessSlider.setValue(prefs.filter_hardness)
-        self.filterHardnessLabel.setNum(prefs.filter_hardness)
         setchecked = lambda cb, b: cb.setCheckState(Qt.Checked if b else Qt.Unchecked)
-        setchecked(self.mixFileKindBox, prefs.mix_file_kind)
-        setchecked(self.useRegexpBox, prefs.use_regexp)
-        setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
-        setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
-        setchecked(self.debugModeBox, prefs.debug_mode)
-        setchecked(self.reference_bold_font, prefs.reference_bold_font)
-        setchecked(self.details_dialog_titlebar_enabled , prefs.details_dialog_titlebar_enabled)
-        setchecked(self.details_dialog_vertical_titlebar, prefs.details_dialog_vertical_titlebar)
-        self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
-        self.customCommandEdit.setText(prefs.custom_command)
-        self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-        try:
-            langindex = self.supportedLanguages.index(self.app.prefs.language)
-        except ValueError:
-            langindex = 0
-        self.languageComboBox.setCurrentIndex(langindex)
-        self._load(prefs, setchecked)
+        if section & Sections.GENERAL:
+            self.filterHardnessSlider.setValue(prefs.filter_hardness)
+            self.filterHardnessLabel.setNum(prefs.filter_hardness)
+            setchecked(self.mixFileKindBox, prefs.mix_file_kind)
+            setchecked(self.useRegexpBox, prefs.use_regexp)
+            setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
+            setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
+            setchecked(self.debugModeBox, prefs.debug_mode)
+            self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
+            self.customCommandEdit.setText(prefs.custom_command)
+        if section & Sections.DISPLAY:
+            setchecked(self.reference_bold_font, prefs.reference_bold_font)
+            setchecked(self.details_dialog_titlebar_enabled , prefs.details_dialog_titlebar_enabled)
+            setchecked(self.details_dialog_vertical_titlebar, prefs.details_dialog_vertical_titlebar)
+            self.fontSizeSpinBox.setValue(prefs.tableFontSize)
+            try:
+                langindex = self.supportedLanguages.index(self.app.prefs.language)
+            except ValueError:
+                langindex = 0
+            self.languageComboBox.setCurrentIndex(langindex)
+        self._load(prefs, setchecked, section)
 
     def save(self):
         prefs = self.app.prefs
@@ -262,11 +272,17 @@ class PreferencesDialogBase(QDialog):
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
 
-    def resetToDefaults(self):
-        self.load(Preferences())
+    def resetToDefaults(self, section_to_update):
+        self.load(Preferences(), section_to_update)
 
     # --- Events
     def buttonClicked(self, button):
         role = self.buttonBox.buttonRole(button)
         if role == QDialogButtonBox.ResetRole:
-            self.resetToDefaults()
+            current_tab = self.tabwidget.currentWidget()
+            section_to_update = Sections.ALL
+            if current_tab is self.page_general:
+                section_to_update = Sections.GENERAL
+            if current_tab is self.page_display:
+                section_to_update = Sections.DISPLAY
+            self.resetToDefaults(section_to_update)
