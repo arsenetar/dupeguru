@@ -7,6 +7,7 @@
 from PyQt5.QtWidgets import QApplication
 
 from hscommon import trans
+from hscommon.plat import ISLINUX
 from core.app import AppMode
 from core.scanner import ScanType
 from qtlib.preferences import Preferences as PreferencesBase
@@ -31,8 +32,14 @@ class Preferences(PreferencesBase):
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
         self.reference_bold_font = get('ReferenceBoldFont', self.reference_bold_font)
-        self.details_dialog_titlebar_enabled = get('DetailsDialogTitleBarEnabled', self.details_dialog_titlebar_enabled)
-        self.details_dialog_vertical_titlebar = get('DetailsDialogVerticalTitleBar', self.details_dialog_vertical_titlebar)
+        self.details_dialog_titlebar_enabled = get('DetailsDialogTitleBarEnabled',
+                                                   self.details_dialog_titlebar_enabled)
+        self.details_dialog_vertical_titlebar = get('DetailsDialogVerticalTitleBar',
+                                                    self.details_dialog_vertical_titlebar)
+        # On Windows and MacOS, use internal icons by default
+        self.details_dialog_override_theme_icons =\
+            get('DetailsDialogOverrideThemeIcons',
+                self.details_dialog_override_theme_icons) if ISLINUX else True
         self.resultWindowIsMaximized = get(
             "ResultWindowIsMaximized", self.resultWindowIsMaximized
         )
@@ -71,6 +78,8 @@ class Preferences(PreferencesBase):
         self.reference_bold_font = True
         self.details_dialog_titlebar_enabled = True
         self.details_dialog_vertical_titlebar = True
+        # By default use internal icons on platforms other than Linux for now
+        self.details_dialog_override_theme_icons = False if not ISLINUX else True
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.directoriesWindowRect = None
@@ -106,6 +115,7 @@ class Preferences(PreferencesBase):
         set_('ReferenceBoldFont', self.reference_bold_font)
         set_('DetailsDialogTitleBarEnabled', self.details_dialog_titlebar_enabled)
         set_('DetailsDialogVerticalTitleBar', self.details_dialog_vertical_titlebar)
+        set_('DetailsDialogOverrideThemeIcons', self.details_dialog_override_theme_icons)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
         self.set_rect("ResultWindowRect", self.resultWindowRect)
         self.set_rect("DirectoriesWindowRect", self.directoriesWindowRect)

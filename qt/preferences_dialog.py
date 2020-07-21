@@ -25,6 +25,7 @@ from PyQt5.QtWidgets import (
 )
 
 from hscommon.trans import trget
+from hscommon.plat import ISLINUX
 from qtlib.util import horizontalWrap
 from qtlib.preferences import get_langnames
 from enum import Flag, auto
@@ -163,6 +164,13 @@ class PreferencesDialogBase(QDialog):
             self.details_dialog_titlebar_enabled.isChecked())
         self.details_dialog_titlebar_enabled.stateChanged.connect(
             self.details_dialog_vertical_titlebar.setEnabled)
+        self._setupAddCheckbox("details_dialog_override_theme_icons",
+                               tr("Override theme icons"))
+        self.details_dialog_override_theme_icons.setToolTip(
+            tr("Use our own internal icons instead of those provided by theme engine"))
+        # Prevent changing this on platforms where themes are unpredictable
+        self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
+        self.displayVLayout.addWidget(self.details_dialog_override_theme_icons)
 
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
@@ -237,6 +245,7 @@ class PreferencesDialogBase(QDialog):
             setchecked(self.details_dialog_titlebar_enabled , prefs.details_dialog_titlebar_enabled)
             setchecked(self.details_dialog_vertical_titlebar, prefs.details_dialog_vertical_titlebar)
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
+            setchecked(self.details_dialog_override_theme_icons, prefs.details_dialog_override_theme_icons)
             try:
                 langindex = self.supportedLanguages.index(self.app.prefs.language)
             except ValueError:
@@ -256,6 +265,7 @@ class PreferencesDialogBase(QDialog):
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
         prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
         prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
+        prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
