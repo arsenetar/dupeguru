@@ -76,7 +76,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.debugModeBox)
         self._setupBottomPart()
 
-    def _load(self, prefs, setchecked):
+    def _load(self, prefs, setchecked, section):
         setchecked(self.tagTrackBox, prefs.scan_tag_track)
         setchecked(self.tagArtistBox, prefs.scan_tag_artist)
         setchecked(self.tagAlbumBox, prefs.scan_tag_album)

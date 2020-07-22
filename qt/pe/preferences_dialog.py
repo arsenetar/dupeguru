@@ -45,7 +45,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.cacheTypeRadio)
         self._setupBottomPart()
 
-    def _load(self, prefs, setchecked):
+    def _load(self, prefs, setchecked, section):
         setchecked(self.matchScaledBox, prefs.match_scaled)
         self.cacheTypeRadio.selected_index = (
             1 if prefs.picture_cache_type == "shelve" else 0
