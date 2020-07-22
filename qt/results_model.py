@@ -7,7 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
-from PyQt5.QtGui import QBrush, QFont, QFontMetrics, QColor
+from PyQt5.QtGui import QBrush, QFont, QFontMetrics
 from PyQt5.QtWidgets import QTableView
 
 from qtlib.table import Table
@@ -37,9 +37,9 @@ class ResultsModel(Table):
             return data[column.name]
         elif role == Qt.ForegroundRole:
             if row.isref:
-                return QBrush(Qt.blue)
+                return QBrush(self.prefs.result_table_ref_foreground_color)
             elif row.is_cell_delta(column.name):
-                return QBrush(QColor(255, 142, 40))  # orange
+                return QBrush(self.prefs.result_table_delta_foreground_color)
         elif role == Qt.FontRole:
             font = QFont(self.view.font())
             if self.prefs.reference_bold_font:

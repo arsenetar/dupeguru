@@ -5,6 +5,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
 
 from hscommon import trans
 from hscommon.plat import ISLINUX
@@ -40,6 +42,12 @@ class Preferences(PreferencesBase):
         self.details_dialog_override_theme_icons =\
             get('DetailsDialogOverrideThemeIcons',
                 self.details_dialog_override_theme_icons) if ISLINUX else True
+
+        self.result_table_ref_foreground_color =\
+            get('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
+        self.result_table_delta_foreground_color =\
+            get('ResultTableDeltaForegroundColor', self.result_table_delta_foreground_color)
+
         self.resultWindowIsMaximized = get(
             "ResultWindowIsMaximized", self.resultWindowIsMaximized
         )
@@ -80,6 +88,8 @@ class Preferences(PreferencesBase):
         self.details_dialog_vertical_titlebar = True
         # By default use internal icons on platforms other than Linux for now
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
+        self.result_table_ref_foreground_color = QColor(Qt.blue)
+        self.result_table_delta_foreground_color = QColor(255, 142, 40)  # orange
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.directoriesWindowRect = None
@@ -116,6 +126,8 @@ class Preferences(PreferencesBase):
         set_('DetailsDialogTitleBarEnabled', self.details_dialog_titlebar_enabled)
         set_('DetailsDialogVerticalTitleBar', self.details_dialog_vertical_titlebar)
         set_('DetailsDialogOverrideThemeIcons', self.details_dialog_override_theme_icons)
+        set_('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
+        set_('ResultTableDeltaForegroundColor', self.result_table_delta_foreground_color)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
         self.set_rect("ResultWindowRect", self.resultWindowRect)
         self.set_rect("DirectoriesWindowRect", self.directoriesWindowRect)

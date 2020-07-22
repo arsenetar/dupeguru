@@ -4,12 +4,13 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import (
     QDialog,
     QDialogButtonBox,
     QVBoxLayout,
     QHBoxLayout,
+    QGridLayout,
     QLabel,
     QComboBox,
     QSlider,
@@ -22,7 +23,11 @@ from PyQt5.QtWidgets import (
     QLayout,
     QTabWidget,
     QWidget,
+    QColorDialog,
+    QPushButton,
+    QFrame,
 )
+from PyQt5.QtGui import QPixmap, QColor, QIcon
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
@@ -140,15 +145,42 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandEdit)
 
     def _setupDisplayPage(self):
+        self.languageLabel = QLabel(tr("Language:"), self)
+        self.languageComboBox = QComboBox(self)
+        for lang in self.supportedLanguages:
+            self.languageComboBox.addItem(get_langnames()[lang])
+        self.displayVLayout.insertLayout(
+            0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
+        )
+
+        line = QFrame(self)
+        line.setFrameShape(QFrame.HLine)
+        self.displayVLayout.addWidget(line)
+
+        gridlayout = QGridLayout()
+        self.result_table_label = QLabel(tr("Result Table:"))
+        gridlayout.addWidget(self.result_table_label, 0, 0)
         self.fontSizeLabel = QLabel(tr("Font size:"))
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
-        self.displayVLayout.addLayout(
-            horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
-        )
+        gridlayout.addWidget(self.fontSizeLabel, 1, 0)
+        gridlayout.addWidget(self.fontSizeSpinBox, 1, 1, 1, 1, Qt.AlignLeft)
         self._setupAddCheckbox("reference_bold_font",
                                tr("Bold font for reference"))
-        self.displayVLayout.addWidget(self.reference_bold_font)
+        gridlayout.addWidget(self.reference_bold_font, 2, 0)
+        self.result_table_ref_foreground_color_label = QLabel(tr("Reference foreground color:"))
+        gridlayout.addWidget(self.result_table_ref_foreground_color_label, 3, 0)
+        self.result_table_ref_foreground_color = ColorPickerButton(self)
+        gridlayout.addWidget(self.result_table_ref_foreground_color, 3, 1, 1, 1, Qt.AlignLeft)
+        self.result_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
+        gridlayout.addWidget(self.result_table_delta_foreground_color_label, 4, 0)
+        self.result_table_delta_foreground_color = ColorPickerButton(self)
+        gridlayout.addWidget(self.result_table_delta_foreground_color, 4, 1, 1, 1, Qt.AlignLeft)
+        self.displayVLayout.addLayout(gridlayout)
+
+        line = QFrame(self)
+        line.setFrameShape(QFrame.HLine)
+        self.displayVLayout.addWidget(line)
 
         self.details_dialog_label = QLabel(tr("Details window:"))
         self.displayVLayout.addWidget(self.details_dialog_label)
@@ -167,18 +199,10 @@ class PreferencesDialogBase(QDialog):
         self._setupAddCheckbox("details_dialog_override_theme_icons",
                                tr("Override theme icons"))
         self.details_dialog_override_theme_icons.setToolTip(
-            tr("Use our own internal icons instead of those provided by theme engine"))
+            tr("Use our own internal icons instead of those provided by the theme engine"))
         # Prevent changing this on platforms where themes are unpredictable
         self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
         self.displayVLayout.addWidget(self.details_dialog_override_theme_icons)
-
-        self.languageLabel = QLabel(tr("Language:"), self)
-        self.languageComboBox = QComboBox(self)
-        for lang in self.supportedLanguages:
-            self.languageComboBox.addItem(get_langnames()[lang])
-        self.displayVLayout.insertLayout(
-            0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
-        )
 
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
@@ -242,10 +266,17 @@ class PreferencesDialogBase(QDialog):
             self.customCommandEdit.setText(prefs.custom_command)
         if section & Sections.DISPLAY:
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
-            setchecked(self.details_dialog_titlebar_enabled , prefs.details_dialog_titlebar_enabled)
-            setchecked(self.details_dialog_vertical_titlebar, prefs.details_dialog_vertical_titlebar)
+            setchecked(self.details_dialog_titlebar_enabled,
+                       prefs.details_dialog_titlebar_enabled)
+            setchecked(self.details_dialog_vertical_titlebar,
+                       prefs.details_dialog_vertical_titlebar)
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-            setchecked(self.details_dialog_override_theme_icons, prefs.details_dialog_override_theme_icons)
+            setchecked(self.details_dialog_override_theme_icons,
+                       prefs.details_dialog_override_theme_icons)
+            self.result_table_ref_foreground_color.setColor(
+                prefs.result_table_ref_foreground_color)
+            self.result_table_delta_foreground_color.setColor(
+                prefs.result_table_delta_foreground_color)
             try:
                 langindex = self.supportedLanguages.index(self.app.prefs.language)
             except ValueError:
@@ -266,6 +297,8 @@ class PreferencesDialogBase(QDialog):
         prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
         prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
+        prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
+        prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
@@ -296,3 +329,31 @@ class PreferencesDialogBase(QDialog):
             if current_tab is self.page_display:
                 section_to_update = Sections.DISPLAY
             self.resetToDefaults(section_to_update)
+
+
+class ColorPickerButton(QPushButton):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.color = None
+        self.clicked.connect(self.onClicked)
+
+    @pyqtSlot()
+    def onClicked(self):
+        color = QColorDialog.getColor(
+            self.color if self.color is not None else Qt.white,
+            self.parent)
+        self.setColor(color)
+
+    def setColor(self, color):
+        size = QSize(1, 1)
+        px = QPixmap(size)
+        if color is None:
+            size.width = 0
+            size.height = 0
+        elif not color.isValid():
+            return
+        else:
+            self.color = color
+            px.fill(color)
+        self.setIcon(QIcon(px))
