@@ -43,14 +43,17 @@ def copy_files_to_package(destpath, packages, with_so):
     shutil.copy("run.py", op.join(destpath, "run.py"))
     extra_ignores = ["*.so"] if not with_so else None
     copy_packages(packages, destpath, extra_ignores=extra_ignores)
-    try:
-        shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
-    except Exception as e:
-        print(f"Warning: exception: {e}")
-    try:
-        shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
-    except Exception as e:
-        print(f"Warning: exception: {e}")
+    # include locale files if they are built otherwise exit as it will break
+    # the localization
+    if not op.exists("build/locale"):
+        print("Locale files not built, exiting...")
+        return
+    # include help files if they are built otherwise exit as they should be included?
+    if not op.exists("build/help"):
+        print("Help files not built, exiting...")
+        return
+    shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
+    shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
     compileall.compile_dir(destpath)
 
 
