@@ -46,11 +46,11 @@ def copy_files_to_package(destpath, packages, with_so):
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
-        print("Locale files not built, exiting...")
+        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files not built, exiting...")
+        print("Help files are missing. Have you run \"build.py --help\"? Exiting...")
         return
     shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
     shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
@@ -161,11 +161,11 @@ def package_windows():
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
-        print("Locale files not built, exiting...")
+        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files not built, exiting...")
+        print("Help files are missing. Have you run \"build.py --help\"? Exiting...")
         return
     # create version information file from template
     try:
