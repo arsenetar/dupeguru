@@ -50,7 +50,7 @@ def copy_files_to_package(destpath, packages, with_so):
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files are missing. Have you run \"build.py --help\"? Exiting...")
+        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
         return
     shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
     shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
@@ -165,7 +165,7 @@ def package_windows():
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files are missing. Have you run \"build.py --help\"? Exiting...")
+        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
         return
     # create version information file from template
     try:
