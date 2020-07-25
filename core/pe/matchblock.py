@@ -9,6 +9,7 @@
 import logging
 import multiprocessing
 from itertools import combinations
+from time import sleep
 
 from hscommon.util import extract, iterconsume
 from hscommon.trans import tr
@@ -254,6 +255,9 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
             ref.dimensions  # pre-read dimensions for display in results
             other.dimensions
             result.append(get_match(ref, other, percentage))
+    # HACK this is a workaround for when the progress bar gets stuck sometimes,
+    # as we enter a deadlock somewhere and the sub-processes become zombies.
+    sleep(1)
     return result
 
 
