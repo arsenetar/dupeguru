@@ -245,7 +245,7 @@ class Folder(File):
         return not path.islink() and path.isdir()
 
 
-def get_file(path, fileclasses=[File]):
+def get_file(path, fileclasses=[File], deny_list_re=set()):
     """Wraps ``path`` around its appropriate :class:`File` class.
 
     Whether a class is "appropriate" is decided by :meth:`File.can_handle`
@@ -255,10 +255,15 @@ def get_file(path, fileclasses=[File]):
     """
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
+            # print(f"returning {path}")
+            # for expr in deny_list_re:
+            #     if expr.match(str(path.name)):
+            #         print(f"FOUND {repr(expr)} in {str(path.name)}")
+            #         return
             return fileclass(path)
 
 
-def get_files(path, fileclasses=[File]):
+def get_files(path, fileclasses=[File], deny_list_re=set()):
     """Returns a list of :class:`File` for each file contained in ``path``.
 
     :param Path path: path to scan
@@ -268,7 +273,7 @@ def get_files(path, fileclasses=[File]):
     try:
         result = []
         for path in path.listdir():
-            file = get_file(path, fileclasses=fileclasses)
+            file = get_file(path, fileclasses=fileclasses, deny_list_re=deny_list_re)
             if file is not None:
                 result.append(file)
         return result

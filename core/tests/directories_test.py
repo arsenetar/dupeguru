@@ -323,7 +323,7 @@ def test_get_state_returns_excluded_by_default_for_hidden_directories(tmpdir):
 def test_default_path_state_override(tmpdir):
     # It's possible for a subclass to override the default state of a path
     class MyDirectories(Directories):
-        def _default_state_for_path(self, path):
+        def _default_state_for_path(self, path, denylist):
             if "foobar" in path:
                 return DirectoryState.Excluded
 
@@ -341,3 +341,54 @@ def test_default_path_state_override(tmpdir):
     d.set_state(p1["foobar"], DirectoryState.Normal)
     eq_(d.get_state(p1["foobar"]), DirectoryState.Normal)
     eq_(len(list(d.get_files())), 2)
+
+
+def test_exclude_list_regular_expressions(tmpdir):
+    d = Directories()
+    d.deny_list_str.clear()
+    d.deny_list_re.clear()
+    d.deny_list_re_files.clear()
+    # This should only exlude the directory, but not the contained files if
+    # its status is set to normal after loading it in the directory tree
+    d.deny_list_str.add(r".*Recycle\.Bin$")
+    d.deny_list_str.add(r"denyme.*")
+    # d.deny_list_str.add(r".*denymetoo")
+    # d.deny_list_str.add(r"denyme")
+    d.deny_list_str.add(r".*\/\..*")
+    d.deny_list_str.add(r"^\..*")
+    d.compile_re()
+    p1 = Path(str(tmpdir))
+    # Should be ignored on Windows only (by default)
+    p1["Recycle.Bin"].mkdir()
+    p1["Recycle.Bin/somerecycledfile"].open("w").close()
+
+    p1["denyme_blah.txt"].open("w").close()
+    p1["blah_denymetoo"].open("w").close()
+    p1["blah_denyme"].open("w").close()
+
+    p1[".hidden_file"].open("w").close()
+    p1[".hidden_dir"].mkdir()
+    p1[".hidden_dir/somenormalfile1"].open("w").close()
+    p1[".hidden_dir/somenormalfile2_denyme"].open("w").close()
+
+    p1["foobar"].mkdir()
+    p1["foobar/somefile"].open("w").close()
+    d.add_path(p1)
+    eq_(d.get_state(p1["Recycle.Bin"]), DirectoryState.Excluded)
+    eq_(d.get_state(p1["foobar"]), DirectoryState.Normal)
+    files = list(d.get_files())
+    files = [file.name for file in files]
+    print(f"first files: {files}")
+    assert "somerecycledfile" not in files
+    assert "denyme_blah.txt" not in files
+    assert ".hidden_file" not in files
+    assert "somefile1" not in files
+    assert "somefile2_denyme" not in files
+    # Overriding the default state from the Directory Tree
+    d.set_state(p1["Recycle.Bin"], DirectoryState.Normal)
+    d.set_state(p1[".hidden_dir"], DirectoryState.Normal)
+    files = list(d.get_files())
+    files = [file.name for file in files]
+    print(f"second files: {files}")
+    assert "somerecycledfile" in files
+    assert "somenormalfile1" in files

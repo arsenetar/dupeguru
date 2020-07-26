@@ -5,6 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os
+import re
 from xml.etree import ElementTree as ET
 import logging
 
@@ -52,12 +53,34 @@ class Directories:
     Then, when the user starts the scan, :meth:`get_files` is called to retrieve all files (wrapped
     in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
     """
+    deny_list_str = set()
+    deny_list_re = set()
+    deny_list_re_files = set()
 
     # ---Override
     def __init__(self):
         self._dirs = []
         # {path: state}
         self.states = {}
+        self.deny_list_str.add(r".*Recycle\.Bin$")
+        self.deny_list_str.add(r"denyme.*")
+        self.deny_list_str.add(r".*denyme")
+        self.deny_list_str.add(r".*/test/denyme*")
+        self.deny_list_str.add(r".*/test/*denyme")
+        self.deny_list_str.add(r"denyme")
+        self.deny_list_str.add(r".*\/\..*")
+        self.deny_list_str.add(r"^\..*")
+        self.compile_re()
+
+    def compile_re(self):
+        for expr in self.deny_list_str:
+            try:
+                self.deny_list_re.add(re.compile(expr))
+                if os.sep not in expr:
+                    self.deny_list_re_files.add(re.compile(expr))
+            except Exception as e:
+                logging.debug(f"Invalid regular expression \"{expr}\" in exclude list: {e}")
+        print(f"re_all: {self.deny_list_re}\nre_files: {self.deny_list_re_files}")
 
     def __contains__(self, path):
         for p in self._dirs:
@@ -75,12 +98,15 @@ class Directories:
         return len(self._dirs)
 
     # ---Private
-    def _default_state_for_path(self, path):
+    def _default_state_for_path(self, path, deny_list_re=deny_list_re):
         # Override this in subclasses to specify the state of some special folders.
-        if path.name.startswith("."):  # hidden
-            return DirectoryState.Excluded
+        # if path.name.startswith("."):  # hidden
+        #     return DirectoryState.Excluded
+        for denied_path_re in deny_list_re:
+            if denied_path_re.match(str(path)):
+                return DirectoryState.Excluded
 
-    def _get_files(self, from_path, fileclasses, j):
+    def _get_files(self, from_path, fileclasses, j, deny_list_re=deny_list_re_files):
         for root, dirs, files in os.walk(str(from_path)):
             j.check_if_cancelled()
             root = Path(root)
@@ -93,9 +119,15 @@ class Directories:
                     del dirs[:]
             try:
                 if state != DirectoryState.Excluded:
-                    found_files = [
-                        fs.get_file(root + f, fileclasses=fileclasses) for f in files
-                    ]
+                    found_files = []
+                    for f in files:
+                        found = False
+                        for expr in deny_list_re:
+                            found = expr.match(f)
+                            if found:
+                                break
+                        if not found:
+                            found_files.append(fs.get_file(root + f, fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
@@ -108,7 +140,7 @@ class Directories:
                     logging.debug(
                         "Collected %d files in folder %s",
                         len(found_files),
-                        str(from_path),
+                        str(root),
                     )
                     for file in found_files:
                         file.is_ref = state == DirectoryState.Reference
@@ -116,7 +148,7 @@ class Directories:
             except (EnvironmentError, fs.InvalidPath):
                 pass
 
-    def _get_folders(self, from_folder, j):
+    def _get_folders(self, from_folder, j, deny_list_re=deny_list_re):
         j.check_if_cancelled()
         try:
             for subfolder in from_folder.subfolders:
@@ -162,7 +194,7 @@ class Directories:
         except EnvironmentError:
             return []
 
-    def get_files(self, fileclasses=None, j=job.nulljob):
+    def get_files(self, fileclasses=None, j=job.nulljob, deny_list_re=deny_list_re_files):
         """Returns a list of all files that are not excluded.
 
         Returned files also have their ``is_ref`` attr set if applicable.
@@ -170,7 +202,7 @@ class Directories:
         if fileclasses is None:
             fileclasses = [fs.File]
         for path in self._dirs:
-            for file in self._get_files(path, fileclasses=fileclasses, j=j):
+            for file in self._get_files(path, fileclasses=fileclasses, j=j, deny_list_re=deny_list_re):
                 yield file
 
     def get_folders(self, folderclass=None, j=job.nulljob):
@@ -185,7 +217,7 @@ class Directories:
             for folder in self._get_folders(from_folder, j):
                 yield folder
 
-    def get_state(self, path):
+    def get_state(self, path, denylist=deny_list_re):
         """Returns the state of ``path``.
 
         :rtype: :class:`DirectoryState`
@@ -193,7 +225,7 @@ class Directories:
         # direct match? easy result.
         if path in self.states:
             return self.states[path]
-        state = self._default_state_for_path(path) or DirectoryState.Normal
+        state = self._default_state_for_path(path, denylist) or DirectoryState.Normal
         prevlen = 0
         # we loop through the states to find the longest matching prefix
         for p, s in self.states.items():
