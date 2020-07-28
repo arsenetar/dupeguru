@@ -27,6 +27,7 @@ from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .ignore_list_dialog import IgnoreListDialog
+from .exclude_list_dialog import ExcludeListDialog
 from .deletion_options import DeletionOptions
 from .se.details_dialog import DetailsDialog as DetailsDialogStandard
 from .me.details_dialog import DetailsDialog as DetailsDialogMusic
@@ -87,10 +88,16 @@ class DupeGuru(QObject):
                 parent=self.main_window,
                 model=self.model.ignore_list_dialog)
             self.ignoreListDialog.accepted.connect(self.main_window.onDialogAccepted)
+
+            self.excludeListDialog = self.main_window.createPage(
+                "ExcludeListDialog",
+                app=self,
+                parent=self.main_window,
+                model=self.model.exclude_list_dialog)
         else:
             self.ignoreListDialog = IgnoreListDialog(
-                parent=parent_window, model=self.model.ignore_list_dialog
-            )
+                parent=parent_window, model=self.model.ignore_list_dialog)
+            self.excludeDialog = ExcludeListDialog(parent=parent_window)
 
         self.deletionOptions = DeletionOptions(
             parent=parent_window,
@@ -130,6 +137,7 @@ class DupeGuru(QObject):
                 tr("Clear Picture Cache"),
                 self.clearPictureCacheTriggered,
             ),
+            ("actionExcludeList", "", "", tr("Exclude list"), self.excludeListTriggered),
             ("actionShowHelp", "F1", "", tr("dupeGuru Help"), self.showHelpTriggered),
             ("actionAbout", "", "", tr("About dupeGuru"), self.showAboutBoxTriggered),
             (
@@ -276,9 +284,19 @@ class DupeGuru(QObject):
             # if not self.main_window.tabWidget.isTabVisible(index):
             self.main_window.setTabVisible(index, True)
             self.main_window.setCurrentIndex(index)
-            return
         else:
             self.model.ignore_list_dialog.show()
+
+    def excludeListTriggered(self):
+        if self.main_window:
+            index = self.main_window.indexOfWidget(self.excludeListDialog)
+            if index < 0:
+                index = self.main_window.addTab(
+                    self.excludeListDialog, "Exclude List", switch=True)
+            self.main_window.setTabVisible(index, True)
+            self.main_window.setCurrentIndex(index)
+        else:
+            self.excludeListDialog.show()
 
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, "debug.log")

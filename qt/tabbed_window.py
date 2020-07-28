@@ -18,6 +18,7 @@ from qtlib.util import moveToScreenCenter, createActions
 from .directories_dialog import DirectoriesDialog
 from .result_window import ResultWindow
 from .ignore_list_dialog import IgnoreListDialog
+from .exclude_list_dialog import ExcludeListDialog
 tr = trget("ui")
 
 
@@ -157,6 +158,11 @@ class TabWindow(QMainWindow):
             parent = kwargs.get("parent", self)
             model = kwargs.get("model")
             page = IgnoreListDialog(parent, model)
+        elif cls == "ExcludeListDialog":
+            app = kwargs.get("app", app)
+            parent = kwargs.get("parent", self)
+            model = kwargs.get("model")
+            page = ExcludeListDialog(app, parent, model)
         self.pages[cls] = page
         return page
 
