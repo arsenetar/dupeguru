@@ -37,23 +37,23 @@ class DetailsDialog(QDockWidget):
 
     def show(self):
         self._shown_once = True
-        if not self.isVisible():
-            super().show()
-            self.update_options()
+        super().show()
+        self.update_options()
 
     def update_options(self):
         # This disables the title bar (if we had not set one before already)
         # essentially making it a simple floating window, not dockable anymore
-        if not self.app.prefs.details_dialog_titlebar_enabled \
-                and not self.titleBarWidget():
+        if not self.app.prefs.details_dialog_titlebar_enabled:
+            if not self.titleBarWidget():  # default title bar
+                self.setTitleBarWidget(QWidget())  # disables title bar
+                # Windows (and MacOS?) users cannot move a floating window which
+                # has not native decoration so we force it to dock for now
+                if not ISLINUX:
+                    self.setFloating(False)
+        elif self.titleBarWidget() is not None:  # title bar is disabled
+            self.setTitleBarWidget(None)  # resets to the default title bar
+        elif not self.titleBarWidget() and not self.app.prefs.details_dialog_titlebar_enabled:
             self.setTitleBarWidget(QWidget())
-            # Windows (and MacOS?) users cannot move a floating window which
-            # has not native decoration so we force it to dock for now
-            if not ISLINUX:
-                self.setFloating(False)
-        elif self.titleBarWidget() is not None:
-            # resets to the default title bar
-            self.setTitleBarWidget(None)
 
         features = self.features()
         if self.app.prefs.details_dialog_vertical_titlebar:
