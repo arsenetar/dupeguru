@@ -8,7 +8,7 @@
 
 from PyQt5.QtCore import Qt, QAbstractTableModel
 from PyQt5.QtWidgets import QHeaderView, QTableView
-from PyQt5.QtGui import QFont, QBrush, QColor
+from PyQt5.QtGui import QFont, QBrush
 
 from hscommon.trans import trget
 
@@ -18,9 +18,10 @@ HEADER = [tr("Selected"), tr("Reference")]
 
 
 class DetailsModel(QAbstractTableModel):
-    def __init__(self, model, **kwargs):
+    def __init__(self, model, app, **kwargs):
         super().__init__(**kwargs)
         self.model = model
+        self.prefs = app.prefs
 
     def columnCount(self, parent):
         return len(HEADER)
@@ -43,7 +44,7 @@ class DetailsModel(QAbstractTableModel):
         if role == Qt.DisplayRole:
             return self.model.row(row)[column]
         if role == Qt.ForegroundRole and self.model.row(row)[1] != self.model.row(row)[2]:
-            return QBrush(QColor(250, 20, 20))  # red
+            return QBrush(self.prefs.details_table_delta_foreground_color)
         if role == Qt.FontRole and self.model.row(row)[1] != self.model.row(row)[2]:
             font = QFont(self.model.view.font())  # or simply QFont()
             font.setBold(True)

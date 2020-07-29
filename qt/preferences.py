@@ -42,6 +42,8 @@ class Preferences(PreferencesBase):
         self.details_dialog_override_theme_icons =\
             get('DetailsDialogOverrideThemeIcons',
                 self.details_dialog_override_theme_icons) if ISLINUX else True
+        self.details_table_delta_foreground_color =\
+            get('DetailsTableDeltaForegroundColor', self.details_table_delta_foreground_color)
 
         self.result_table_ref_foreground_color =\
             get('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
@@ -86,6 +88,7 @@ class Preferences(PreferencesBase):
         self.reference_bold_font = True
         self.details_dialog_titlebar_enabled = True
         self.details_dialog_vertical_titlebar = True
+        self.details_table_delta_foreground_color = QColor(250, 20, 20)  # red
         # By default use internal icons on platforms other than Linux for now
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
         self.result_table_ref_foreground_color = QColor(Qt.blue)
@@ -126,6 +129,7 @@ class Preferences(PreferencesBase):
         set_('DetailsDialogTitleBarEnabled', self.details_dialog_titlebar_enabled)
         set_('DetailsDialogVerticalTitleBar', self.details_dialog_vertical_titlebar)
         set_('DetailsDialogOverrideThemeIcons', self.details_dialog_override_theme_icons)
+        set_('DetailsTableDeltaForegroundColor', self.details_table_delta_foreground_color)
         set_('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
         set_('ResultTableDeltaForegroundColor', self.result_table_delta_foreground_color)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)

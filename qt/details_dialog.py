@@ -25,7 +25,7 @@ class DetailsDialog(QDockWidget):
         # has been shown. If it has, we know that our geometry should be saved.
         self._shown_once = False
         self.app.prefs.restoreGeometry("DetailsWindowRect", self)
-        self.tableModel = DetailsModel(self.model)
+        self.tableModel = DetailsModel(self.model, app)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
         self.model.view = self

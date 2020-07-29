@@ -203,6 +203,12 @@ class PreferencesDialogBase(QDialog):
         # Prevent changing this on platforms where themes are unpredictable
         self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
         self.displayVLayout.addWidget(self.details_dialog_override_theme_icons)
+        gridlayout = QGridLayout()
+        self.details_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
+        gridlayout.addWidget(self.details_table_delta_foreground_color_label, 4, 0)
+        self.details_table_delta_foreground_color = ColorPickerButton(self)
+        gridlayout.addWidget(self.details_table_delta_foreground_color, 4, 1, 1, 1, Qt.AlignLeft)
+        self.displayVLayout.addLayout(gridlayout)
 
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
@@ -273,6 +279,8 @@ class PreferencesDialogBase(QDialog):
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
             setchecked(self.details_dialog_override_theme_icons,
                        prefs.details_dialog_override_theme_icons)
+            self.details_table_delta_foreground_color.setColor(
+                prefs.details_table_delta_foreground_color)
             self.result_table_ref_foreground_color.setColor(
                 prefs.result_table_ref_foreground_color)
             self.result_table_delta_foreground_color.setColor(
@@ -297,6 +305,7 @@ class PreferencesDialogBase(QDialog):
         prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
         prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
+        prefs.details_table_delta_foreground_color = self.details_table_delta_foreground_color.color
         prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
         prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
