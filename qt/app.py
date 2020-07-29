@@ -286,6 +286,7 @@ class DupeGuru(QObject):
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         self.resultWindow = ResultWindow(self.directories_dialog, self)
+        self.directories_dialog._updateActionsState()
         self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
         self.resultWindow.addDockWidget(
             Qt.BottomDockWidgetArea, self.details_dialog)
