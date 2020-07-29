@@ -8,12 +8,13 @@
 
 from PyQt5.QtCore import Qt, QAbstractTableModel
 from PyQt5.QtWidgets import QHeaderView, QTableView
+from PyQt5.QtGui import QFont, QBrush, QColor
 
 from hscommon.trans import trget
 
 tr = trget("ui")
 
-HEADER = [tr("Attribute"), tr("Selected"), tr("Reference")]
+HEADER = [tr("Selected"), tr("Reference")]
 
 
 class DetailsModel(QAbstractTableModel):
@@ -27,11 +28,27 @@ class DetailsModel(QAbstractTableModel):
     def data(self, index, role):
         if not index.isValid():
             return None
-        if role != Qt.DisplayRole:
-            return None
-        column = index.column()
+        # Skip first value "Attribute"
+        column = index.column() + 1
         row = index.row()
-        return self.model.row(row)[column]
+
+        ignored_fields = ["Dupe Count"]
+        if (self.model.row(row)[0] in ignored_fields
+                or self.model.row(row)[1] == "---"
+                or self.model.row(row)[2] == "---"):
+            if role != Qt.DisplayRole:
+                return None
+            return self.model.row(row)[column]
+
+        if role == Qt.DisplayRole:
+            return self.model.row(row)[column]
+        if role == Qt.ForegroundRole and self.model.row(row)[1] != self.model.row(row)[2]:
+            return QBrush(QColor(250, 20, 20))  # red
+        if role == Qt.FontRole and self.model.row(row)[1] != self.model.row(row)[2]:
+            font = QFont(self.model.view.font())  # or simply QFont()
+            font.setBold(True)
+            return font
+        return None  # QVariant()
 
     def headerData(self, section, orientation, role):
         if (
@@ -40,6 +57,13 @@ class DetailsModel(QAbstractTableModel):
             and section < len(HEADER)
         ):
             return HEADER[section]
+        elif (
+            orientation == Qt.Vertical
+            and role == Qt.DisplayRole
+            and section < self.model.row_count()
+        ):
+            # Read "Attribute" cell for horizontal header
+            return self.model.row(section)[0]
         return None
 
     def rowCount(self, parent):
@@ -51,8 +75,10 @@ class DetailsTable(QTableView):
         QTableView.__init__(self, *args)
         self.setAlternatingRowColors(True)
         self.setSelectionBehavior(QTableView.SelectRows)
+        self.setSelectionMode(QTableView.NoSelection)
         self.setShowGrid(False)
         self.setWordWrap(False)
+        self.setCornerButtonEnabled(False)
 
     def setModel(self, model):
         QTableView.setModel(self, model)
@@ -61,9 +87,12 @@ class DetailsTable(QTableView):
         hheader.setHighlightSections(False)
         hheader.setStretchLastSection(False)
         hheader.resizeSection(0, 100)
-        hheader.setSectionResizeMode(0, QHeaderView.Fixed)
+        hheader.setSectionResizeMode(0, QHeaderView.Stretch)
         hheader.setSectionResizeMode(1, QHeaderView.Stretch)
-        hheader.setSectionResizeMode(2, QHeaderView.Stretch)
         vheader = self.verticalHeader()
-        vheader.setVisible(False)
+        vheader.setVisible(True)
         vheader.setDefaultSectionSize(18)
+        # hardcoded value above is not ideal, perhaps resize to contents first?
+        # vheader.setSectionResizeMode(QHeaderView.ResizeToContents)
+        vheader.setSectionResizeMode(QHeaderView.Fixed)
+        vheader.setSectionsMovable(True)

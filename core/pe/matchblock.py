@@ -254,6 +254,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
             ref.dimensions  # pre-read dimensions for display in results
             other.dimensions
             result.append(get_match(ref, other, percentage))
+    pool.join()
     return result
 
 
