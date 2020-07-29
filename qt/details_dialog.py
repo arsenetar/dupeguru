@@ -37,8 +37,9 @@ class DetailsDialog(QDockWidget):
 
     def show(self):
         self._shown_once = True
-        super().show()
-        self.update_options()
+        if not self.isVisible():
+            super().show()
+            self.update_options()
 
     def update_options(self):
         # This disables the title bar (if we had not set one before already)
