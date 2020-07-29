@@ -397,7 +397,7 @@ class BaseController(QObject):
     @pyqtSlot()
     def swapImages(self):
         # swap the columns in the details table as well
-        self.parent.tableView.horizontalHeader().swapSections(1, 2)
+        self.parent.tableView.horizontalHeader().swapSections(0, 1)
 
 
 class QWidgetController(BaseController):
