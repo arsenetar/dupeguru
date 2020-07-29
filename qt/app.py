@@ -190,7 +190,10 @@ class DupeGuru(QObject):
 
     def show_details(self):
         if self.details_dialog is not None:
-            self.details_dialog.show()
+            if not self.details_dialog.isVisible():
+                self.details_dialog.show()
+            else:
+                self.details_dialog.hide()
 
     def showResultsWindow(self):
         if self.resultWindow is not None:
