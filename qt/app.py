@@ -248,7 +248,8 @@ class DupeGuru(QObject):
         preferences_dialog.setParent(None)
 
     def quitTriggered(self):
-        self.details_dialog.close()
+        if self.details_dialog is not None:
+            self.details_dialog.close()
         self.directories_dialog.close()
 
     def showAboutBoxTriggered(self):
