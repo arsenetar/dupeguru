@@ -127,7 +127,6 @@ class PreferencesDialogBase(QDialog):
 
     def _setupBottomPart(self):
         # The bottom part of the pref panel is always the same in all editions.
-        self._setupDisplayPage()
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
         self.widgetsVLayout.addWidget(self.copyMoveLabel)
@@ -185,24 +184,21 @@ class PreferencesDialogBase(QDialog):
         self.details_dialog_label = QLabel(tr("Details window:"))
         self.displayVLayout.addWidget(self.details_dialog_label)
         self._setupAddCheckbox("details_dialog_titlebar_enabled",
-                               tr("Show a title bar and is dockable"))
+                               tr("Show the title bar and can be docked"))
         self.details_dialog_titlebar_enabled.setToolTip(
-            tr("Title bar can only be disabled while the window is docked"))
+            tr("While the title bar is hidden, \
+use the modifier key to drag the floating window around") if ISLINUX else
+            tr("The title bar can only be disabled while the window is docked"))
         self.displayVLayout.addWidget(self.details_dialog_titlebar_enabled)
         self._setupAddCheckbox("details_dialog_vertical_titlebar",
                                tr("Vertical title bar"))
+        self.details_dialog_vertical_titlebar.setToolTip(
+            tr("Change the title bar from horizontal on top, to vertical on the left side"))
         self.displayVLayout.addWidget(self.details_dialog_vertical_titlebar)
         self.details_dialog_vertical_titlebar.setEnabled(
             self.details_dialog_titlebar_enabled.isChecked())
         self.details_dialog_titlebar_enabled.stateChanged.connect(
             self.details_dialog_vertical_titlebar.setEnabled)
-        self._setupAddCheckbox("details_dialog_override_theme_icons",
-                               tr("Override theme icons"))
-        self.details_dialog_override_theme_icons.setToolTip(
-            tr("Use our own internal icons instead of those provided by the theme engine"))
-        # Prevent changing this on platforms where themes are unpredictable
-        self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
-        self.displayVLayout.addWidget(self.details_dialog_override_theme_icons)
         gridlayout = QGridLayout()
         self.details_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
         gridlayout.addWidget(self.details_table_delta_foreground_color_label, 4, 0)
@@ -234,6 +230,7 @@ class PreferencesDialogBase(QDialog):
         self.displayVLayout = QVBoxLayout()
         self.page_display.setLayout(self.displayVLayout)
         self._setupPreferenceWidgets()
+        self._setupDisplayPage()
         # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
@@ -277,8 +274,6 @@ class PreferencesDialogBase(QDialog):
             setchecked(self.details_dialog_vertical_titlebar,
                        prefs.details_dialog_vertical_titlebar)
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-            setchecked(self.details_dialog_override_theme_icons,
-                       prefs.details_dialog_override_theme_icons)
             self.details_table_delta_foreground_color.setColor(
                 prefs.details_table_delta_foreground_color)
             self.result_table_ref_foreground_color.setColor(
@@ -304,7 +299,6 @@ class PreferencesDialogBase(QDialog):
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
         prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
         prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
-        prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
         prefs.details_table_delta_foreground_color = self.details_table_delta_foreground_color.color
         prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
         prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color

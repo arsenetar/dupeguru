@@ -33,22 +33,24 @@ class Preferences(PreferencesBase):
             self.language = trans.installed_lang
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
-        self.reference_bold_font = get('ReferenceBoldFont', self.reference_bold_font)
-        self.details_dialog_titlebar_enabled = get('DetailsDialogTitleBarEnabled',
+        self.reference_bold_font = get("ReferenceBoldFont", self.reference_bold_font)
+        self.details_dialog_titlebar_enabled = get("DetailsDialogTitleBarEnabled",
                                                    self.details_dialog_titlebar_enabled)
-        self.details_dialog_vertical_titlebar = get('DetailsDialogVerticalTitleBar',
+        self.details_dialog_vertical_titlebar = get("DetailsDialogVerticalTitleBar",
                                                     self.details_dialog_vertical_titlebar)
         # On Windows and MacOS, use internal icons by default
         self.details_dialog_override_theme_icons =\
-            get('DetailsDialogOverrideThemeIcons',
+            get("DetailsDialogOverrideThemeIcons",
                 self.details_dialog_override_theme_icons) if ISLINUX else True
         self.details_table_delta_foreground_color =\
-            get('DetailsTableDeltaForegroundColor', self.details_table_delta_foreground_color)
+            get("DetailsTableDeltaForegroundColor", self.details_table_delta_foreground_color)
+        self.details_dialog_viewers_show_scrollbars =\
+            get("DetailsDialogViewersShowScrollbars", self.details_dialog_viewers_show_scrollbars)
 
         self.result_table_ref_foreground_color =\
-            get('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
+            get("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
         self.result_table_delta_foreground_color =\
-            get('ResultTableDeltaForegroundColor', self.result_table_delta_foreground_color)
+            get("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
 
         self.resultWindowIsMaximized = get(
             "ResultWindowIsMaximized", self.resultWindowIsMaximized
@@ -91,6 +93,7 @@ class Preferences(PreferencesBase):
         self.details_table_delta_foreground_color = QColor(250, 20, 20)  # red
         # By default use internal icons on platforms other than Linux for now
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
+        self.details_dialog_viewers_show_scrollbars = True
         self.result_table_ref_foreground_color = QColor(Qt.blue)
         self.result_table_delta_foreground_color = QColor(255, 142, 40)  # orange
         self.resultWindowIsMaximized = False
@@ -125,13 +128,14 @@ class Preferences(PreferencesBase):
         set_("Language", self.language)
 
         set_("TableFontSize", self.tableFontSize)
-        set_('ReferenceBoldFont', self.reference_bold_font)
-        set_('DetailsDialogTitleBarEnabled', self.details_dialog_titlebar_enabled)
-        set_('DetailsDialogVerticalTitleBar', self.details_dialog_vertical_titlebar)
-        set_('DetailsDialogOverrideThemeIcons', self.details_dialog_override_theme_icons)
-        set_('DetailsTableDeltaForegroundColor', self.details_table_delta_foreground_color)
-        set_('ResultTableRefForegroundColor', self.result_table_ref_foreground_color)
-        set_('ResultTableDeltaForegroundColor', self.result_table_delta_foreground_color)
+        set_("ReferenceBoldFont", self.reference_bold_font)
+        set_("DetailsDialogTitleBarEnabled", self.details_dialog_titlebar_enabled)
+        set_("DetailsDialogVerticalTitleBar", self.details_dialog_vertical_titlebar)
+        set_("DetailsDialogOverrideThemeIcons", self.details_dialog_override_theme_icons)
+        set_("DetailsDialogViewersShowScrollbars", self.details_dialog_viewers_show_scrollbars)
+        set_("DetailsTableDeltaForegroundColor", self.details_table_delta_foreground_color)
+        set_("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
+        set_("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
         self.set_rect("ResultWindowRect", self.resultWindowRect)
         self.set_rect("DirectoriesWindowRect", self.directoriesWindowRect)

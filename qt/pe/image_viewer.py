@@ -894,7 +894,7 @@ class ScrollAreaImageViewer(QScrollArea):
         self._dragConnection = None
         self._wheelConnection = None
         self._instance_name = name
-        self.wantScrollBars = True
+        self.prefs = parent.app.prefs
         self.bestFit = True
         self.controller = None
         self.label = ScalablePixmap(self)
@@ -906,11 +906,13 @@ class ScrollAreaImageViewer(QScrollArea):
         self.setAlignment(Qt.AlignCenter)
         self._verticalScrollBar = self.verticalScrollBar()
         self._horizontalScrollBar = self.horizontalScrollBar()
-        if self.wantScrollBars:
+
+        if self.prefs.details_dialog_viewers_show_scrollbars:
             self.toggleScrollBars()
         else:
             self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
         self.setWidget(self.label)
         self.setVisible(True)
 
@@ -918,7 +920,7 @@ class ScrollAreaImageViewer(QScrollArea):
         return f'{self._instance_name}'
 
     def toggleScrollBars(self, forceOn=False):
-        if not self.wantScrollBars:
+        if not self.prefs.details_dialog_viewers_show_scrollbars:
             return
         # Ensure that it's off on the first run
         if self.horizontalScrollBarPolicy() == Qt.ScrollBarAsNeeded:
@@ -1135,7 +1137,7 @@ class GraphicsViewViewer(QGraphicsView):
         self._dragConnection = None
         self._wheelConnection = None
         self._instance_name = name
-        self.wantScrollBars = True
+        self.prefs = parent.app.prefs
         self.bestFit = True
         self.controller = None
         self._centerPoint = QPointF()
@@ -1153,7 +1155,7 @@ class GraphicsViewViewer(QGraphicsView):
         self._verticalScrollBar = self.verticalScrollBar()
         self.ignore_signal = False
 
-        if self.wantScrollBars:
+        if self.prefs.details_dialog_viewers_show_scrollbars:
             self.toggleScrollBars()
         else:
             self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -1189,7 +1191,7 @@ class GraphicsViewViewer(QGraphicsView):
             self.controller.onHScrollBarChanged, Qt.UniqueConnection)
 
     def toggleScrollBars(self, forceOn=False):
-        if not self.wantScrollBars:
+        if not self.prefs.details_dialog_viewers_show_scrollbars:
             return
         # Ensure that it's off on the first run
         if self.horizontalScrollBarPolicy() == Qt.ScrollBarAsNeeded:

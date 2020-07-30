@@ -6,6 +6,7 @@
 
 from PyQt5.QtWidgets import QLabel
 from hscommon.trans import trget
+from hscommon.plat import ISLINUX
 from qtlib.radio_box import RadioBox
 from core.scanner import ScanType
 from core.app import AppMode
@@ -45,6 +46,26 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.cacheTypeRadio)
         self._setupBottomPart()
 
+    def _setupDisplayPage(self):
+        super()._setupDisplayPage()
+        self._setupAddCheckbox("details_dialog_override_theme_icons",
+                               tr("Override theme icons in viewer toolbar"))
+        self.details_dialog_override_theme_icons.setToolTip(
+            tr("Use our own internal icons instead of those provided by the theme engine"))
+        # Prevent changing this on platforms where themes are unpredictable
+        self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
+        # Insert this right after the vertical title bar option
+        index = self.displayVLayout.indexOf(self.details_dialog_vertical_titlebar)
+        self.displayVLayout.insertWidget(
+            index + 1, self.details_dialog_override_theme_icons)
+        self._setupAddCheckbox("details_dialog_viewers_show_scrollbars",
+                               tr("Show scrollbars in image viewers"))
+        self.details_dialog_viewers_show_scrollbars.setToolTip(
+            tr("When the image displayed doesn't fit the viewport, \
+show scrollbars to span the view around"))
+        self.displayVLayout.insertWidget(
+            index + 2, self.details_dialog_viewers_show_scrollbars)
+
     def _load(self, prefs, setchecked, section):
         setchecked(self.matchScaledBox, prefs.match_scaled)
         self.cacheTypeRadio.selected_index = (
@@ -55,9 +76,17 @@ class PreferencesDialog(PreferencesDialogBase):
         scan_type = prefs.get_scan_type(AppMode.Picture)
         fuzzy_scan = scan_type == ScanType.FuzzyBlock
         self.filterHardnessSlider.setEnabled(fuzzy_scan)
+        setchecked(self.details_dialog_override_theme_icons,
+                   prefs.details_dialog_override_theme_icons)
+        setchecked(self.details_dialog_viewers_show_scrollbars,
+                   prefs.details_dialog_viewers_show_scrollbars)
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
         prefs.picture_cache_type = (
             "shelve" if self.cacheTypeRadio.selected_index == 1 else "sqlite"
         )
+        prefs.details_dialog_override_theme_icons =\
+            ischecked(self.details_dialog_override_theme_icons)
+        prefs.details_dialog_viewers_show_scrollbars =\
+            ischecked(self.details_dialog_viewers_show_scrollbars)

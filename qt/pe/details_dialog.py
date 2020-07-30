@@ -20,6 +20,7 @@ tr = trget("ui")
 class DetailsDialog(DetailsDialogBase):
     def __init__(self, parent, app):
         self.vController = None
+        self.app = app
         super().__init__(parent, app)
 
     def _setupUi(self):
