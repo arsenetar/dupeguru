@@ -35,7 +35,7 @@ from .se.preferences_dialog import PreferencesDialog as PreferencesDialogStandar
 from .me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
 from .pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
 from .pe.photo import File as PlatSpecificPhoto
-from .tabbed_window import TabBarWindow
+from .tabbed_window import TabBarWindow, TabWindow
 
 tr = trget("ui")
 
@@ -64,7 +64,7 @@ class DupeGuru(QObject):
         self.resultWindow = None
         self.details_dialog = None
         if self.use_tabs:
-            self.main_window = TabBarWindow(self)
+            self.main_window = TabBarWindow(self) if not self.prefs.tabs_default_pos else TabWindow(self)
             parent_window = self.main_window
             self.directories_dialog = self.main_window.createPage("DirectoriesDialog", app=self)
             self.main_window.addTab(

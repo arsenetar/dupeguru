@@ -45,7 +45,7 @@ class Preferences(PreferencesBase):
 
         self.recentResults = get("RecentResults", self.recentResults)
         self.recentFolders = get("RecentFolders", self.recentFolders)
-
+        self.tabs_default_pos = get("TabsDefaultPosition", self.tabs_default_pos)
         self.word_weighting = get("WordWeighting", self.word_weighting)
         self.match_similar = get("MatchSimilar", self.match_similar)
         self.ignore_small_files = get("IgnoreSmallFiles", self.ignore_small_files)
@@ -80,6 +80,7 @@ class Preferences(PreferencesBase):
         self.recentResults = []
         self.recentFolders = []
 
+        self.tabs_default_pos = False
         self.word_weighting = True
         self.match_similar = False
         self.ignore_small_files = True
@@ -115,6 +116,7 @@ class Preferences(PreferencesBase):
         set_("RecentResults", self.recentResults)
         set_("RecentFolders", self.recentFolders)
 
+        set_("TabsDefaultPosition", self.tabs_default_pos)
         set_("WordWeighting", self.word_weighting)
         set_("MatchSimilar", self.match_similar)
         set_("IgnoreSmallFiles", self.ignore_small_files)
