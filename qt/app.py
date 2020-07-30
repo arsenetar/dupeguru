@@ -285,16 +285,18 @@ class DupeGuru(QObject):
         """Creates resultWindow and details_dialog depending on the selected ``app_mode``.
         """
         if self.details_dialog is not None:
+            # The object is not deleted entirely, avoid saving its geometry in the future
+            # self.willSavePrefs.disconnect(self.details_dialog.appWillSavePrefs)
+            # or simply delete it on close which is probably cleaner:
+            self.details_dialog.setAttribute(Qt.WA_DeleteOnClose)
             self.details_dialog.close()
-            self.details_dialog.setParent(None)
+            # self.details_dialog.setParent(None)  # seems unnecessary
         if self.resultWindow is not None:
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         self.resultWindow = ResultWindow(self.directories_dialog, self)
         self.directories_dialog._updateActionsState()
         self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
-        self.resultWindow.addDockWidget(
-            Qt.BottomDockWidgetArea, self.details_dialog)
 
     def show_results_window(self):
         self.showResultsWindow()

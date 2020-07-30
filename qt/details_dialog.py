@@ -24,18 +24,22 @@ class DetailsDialog(QDockWidget):
         # To avoid saving uninitialized geometry on appWillSavePrefs, we track whether our dialog
         # has been shown. If it has, we know that our geometry should be saved.
         self._shown_once = False
-        self.app.prefs.restoreGeometry("DetailsWindowRect", self)
+        self._wasDocked, area = self.app.prefs.restoreGeometry("DetailsWindowRect", self)
         self.tableModel = DetailsModel(self.model, app)
         # tableView is defined in subclasses
         self.tableView.setModel(self.tableModel)
         self.model.view = self
-
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
+        # self.setAttribute(Qt.WA_DeleteOnClose)
+        parent.addDockWidget(
+            area if self._wasDocked else Qt.BottomDockWidgetArea, self)
 
     def _setupUi(self):  # Virtual
         pass
 
     def show(self):
+        if not self._shown_once and self._wasDocked:
+            self.setFloating(False)
         self._shown_once = True
         super().show()
         self.update_options()
@@ -63,7 +67,7 @@ class DetailsDialog(QDockWidget):
 
     # --- Events
     def appWillSavePrefs(self):
-        if self._shown_once and self.isFloating():
+        if self._shown_once:
             self.app.prefs.saveGeometry("DetailsWindowRect", self)
 
     # --- model --> view
