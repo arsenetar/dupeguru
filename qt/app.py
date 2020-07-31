@@ -69,6 +69,7 @@ class DupeGuru(QObject):
             self.directories_dialog = self.main_window.createPage("DirectoriesDialog", app=self)
             self.main_window.addTab(
                 self.directories_dialog, "Directories", switch=False)
+            self.actionDirectoriesWindow.setEnabled(False)
         else:  # floating windows only
             self.main_window = None
             self.directories_dialog = DirectoriesDialog(self)
@@ -121,6 +122,7 @@ class DupeGuru(QObject):
                 self.preferencesTriggered,
             ),
             ("actionIgnoreList", "", "", tr("Ignore List"), self.ignoreListTriggered),
+            ("actionDirectoriesWindow", "", "", tr("Directories"), self.showDirectoriesWindow),
             (
                 "actionClearPictureCache",
                 "Ctrl+Shift+P",
@@ -219,6 +221,16 @@ class DupeGuru(QObject):
                     self.resultWindow, "Results", switch=True)
             else:
                 self.resultWindow.show()
+
+    def showDirectoriesWindow(self):
+        if self.directories_dialog is not None:
+            if self.main_window:
+                index = self.main_window.indexOfWidget(self.directories_dialog)
+                # if not self.main_window.tabWidget.isTabVisible(index):
+                self.main_window.setTabVisible(index, True)
+                self.main_window.setCurrentIndex(index)
+            else:
+                self.directories_dialog.show()
 
     def shutdown(self):
         self.willSavePrefs.emit()

@@ -88,17 +88,17 @@ class DirectoriesDialog(QMainWindow):
                 "actionShowResultsWindow",
                 "",
                 "",
-                tr("Results Window"),
+                tr("Scan Results"),
                 self.app.showResultsWindow,
             ),
             ("actionAddFolder", "", "", tr("Add Folder..."), self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
 
-        if self.app.main_window:  # We use tab widgets in this case
-            # Keep track of actions which should only be accessible from this class
-            for action, _, _, _, _ in ACTIONS:
-                self.specific_actions.add(getattr(self, action))
+        # if self.app.main_window:  # We use tab widgets in this case
+        #     # Keep track of actions which should only be accessible from this class
+        #     for action, _, _, _, _ in ACTIONS:
+        #         self.specific_actions.add(getattr(self, action))
 
     def _setupMenu(self):
         if not self.app.main_window:
@@ -124,7 +124,6 @@ class DirectoriesDialog(QMainWindow):
         self.menuLoadRecent.setTitle(tr("Load Recent Results"))
         self.menuFile.addAction(self.actionLoadResults)
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
-        self.specific_actions.add(self.menuLoadRecent.menuAction())
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionClearPictureCache)
         self.menuFile.addSeparator()
@@ -132,6 +131,7 @@ class DirectoriesDialog(QMainWindow):
         self.menuView.addAction(self.app.actionPreferences)
         self.menuView.addAction(self.actionShowResultsWindow)
         self.menuView.addAction(self.app.actionIgnoreList)
+        self.menuView.addAction(self.app.actionDirectoriesWindow)
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)

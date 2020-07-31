@@ -117,37 +117,32 @@ class TabWindow(QMainWindow):
             self.last_index = current_index
             self.previous_widget_actions = active_widget.specific_actions
             return
-        isResultWindow = isinstance(active_widget, ResultWindow)
-        isIgnoreListDialog = isinstance(active_widget, IgnoreListDialog)
+
+        page_type = type(active_widget).__name__
         for menu in self.menuList:
             if menu is self.menuColumns or menu is self.menuActions or menu is self.menuMark:
-                if not isResultWindow:
+                if not isinstance(active_widget, ResultWindow):
                     menu.setEnabled(False)
                     continue
                 else:
                     menu.setEnabled(True)
+
             for action in menu.actions():
-                if action is self.app.directories_dialog.actionShowResultsWindow:
-                    if isResultWindow:
-                        self.app.actionIgnoreList.setEnabled(self.app.ignoreListDialog is not None)
-                        # Action points to ourselves, always disable it
-                        self.app.directories_dialog.actionShowResultsWindow\
-                            .setEnabled(False)
-                        continue
-                    else:
-                        self.app.directories_dialog.actionShowResultsWindow\
-                            .setEnabled(self.app.resultWindow is not None)
-                    if isIgnoreListDialog:
-                        self.app.actionIgnoreList.setEnabled(False)
-                        continue
-                    else:
-                        self.app.actionIgnoreList.setEnabled(self.app.ignoreListDialog is not None)
-                    continue
                 if action not in active_widget.specific_actions:
                     if action in self.previous_widget_actions:
-                        action.setEnabled(False)
+                        # action.setEnabled(False)
+                        menu.removeAction(action)
                     continue
                 action.setEnabled(True)
+
+        self.app.directories_dialog.actionShowResultsWindow.setEnabled(
+            False if page_type == "ResultWindow"
+            else self.app.resultWindow is not None)
+        self.app.actionIgnoreList.setEnabled(
+            True if self.app.ignoreListDialog is not None
+            and not page_type == "IgnoreListDialog" else False)
+        self.app.actionDirectoriesWindow.setEnabled(
+            False if page_type == "DirectoriesDialog" else True)
 
         self.previous_widget_actions = active_widget.specific_actions
         self.last_index = current_index
