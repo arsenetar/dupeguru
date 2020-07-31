@@ -81,7 +81,7 @@ class DupeGuru(QObject):
         self.problemDialog = ProblemDialog(
             parent=parent_window, model=self.model.problem_dialog
         )
-        if self.main_window:  # we use tab widget
+        if self.use_tabs:
             self.ignoreListDialog = self.main_window.createPage(
                 "IgnoreListDialog",
                 parent=self.main_window,
@@ -216,7 +216,7 @@ class DupeGuru(QObject):
 
     def showResultsWindow(self):
         if self.resultWindow is not None:
-            if self.main_window:
+            if self.use_tabs:
                 self.main_window.addTab(
                     self.resultWindow, "Results", switch=True)
             else:
@@ -224,9 +224,8 @@ class DupeGuru(QObject):
 
     def showDirectoriesWindow(self):
         if self.directories_dialog is not None:
-            if self.main_window:
+            if self.use_tabs:
                 index = self.main_window.indexOfWidget(self.directories_dialog)
-                # if not self.main_window.tabWidget.isTabVisible(index):
                 self.main_window.setTabVisible(index, True)
                 self.main_window.setCurrentIndex(index)
             else:
@@ -264,7 +263,7 @@ class DupeGuru(QObject):
             QMessageBox.information(active, title, tr("Picture cache cleared."))
 
     def ignoreListTriggered(self):
-        if self.main_window:
+        if self.use_tabs:
             # Fetch the index in the TabWidget or the StackWidget (depends on class):
             index = self.main_window.indexOfWidget(self.ignoreListDialog)
             if index < 0:
@@ -339,7 +338,7 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             self.resultWindow.close()
             self.resultWindow.setParent(None)
-        if self.main_window:
+        if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
         else:  # We don't use a tab widget, regular floating QMainWindow

@@ -94,13 +94,13 @@ class DirectoriesDialog(QMainWindow):
             ("actionAddFolder", "", "", tr("Add Folder..."), self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
-        # if self.app.main_window:  # We use tab widgets in this case
+        # if self.app.use_tabs:
         #     # Keep track of actions which should only be accessible from this class
         #     for action, _, _, _, _ in ACTIONS:
         #         self.specific_actions.add(getattr(self, action))
 
     def _setupMenu(self):
-        if not self.app.main_window:
+        if not self.app.use_tabs:
             # we are our own QMainWindow, we need our own menu bar
             self.menubar = QMenuBar(self)
             self.menubar.setGeometry(QRect(0, 0, 42, 22))
