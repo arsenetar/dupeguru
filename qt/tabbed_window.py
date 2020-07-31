@@ -126,12 +126,10 @@ class TabWindow(QMainWindow):
                     continue
                 else:
                     menu.setEnabled(True)
-
             for action in menu.actions():
                 if action not in active_widget.specific_actions:
                     if action in self.previous_widget_actions:
-                        # action.setEnabled(False)
-                        menu.removeAction(action)
+                        action.setEnabled(False)
                     continue
                 action.setEnabled(True)
 

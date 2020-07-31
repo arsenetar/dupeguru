@@ -214,7 +214,7 @@ class ResultWindow(QMainWindow):
                 self.specific_actions.add(getattr(self, action))
 
     def _setupMenu(self):
-        if not self.app.main_window:
+        if not self.app.use_tabs:
             # we are our own QMainWindow, we need our own menu bar
             self.menubar = QMenuBar()  # self.menuBar() works as well here
             self.menubar.setGeometry(QRect(0, 0, 630, 22))
@@ -260,12 +260,18 @@ class ResultWindow(QMainWindow):
         self.menuMark.addAction(self.actionMarkNone)
         self.menuMark.addAction(self.actionInvertMarking)
         self.menuMark.addAction(self.actionMarkSelected)
+
+        self.menuView.addAction(self.actionDetails)
+        self.menuView.addSeparator()
         self.menuView.addAction(self.actionPowerMarker)
         self.menuView.addAction(self.actionDelta)
         self.menuView.addSeparator()
-        self.menuView.addAction(self.actionDetails)
-        self.menuView.addAction(self.app.actionIgnoreList)
+        if not self.app.use_tabs:
+            self.menuView.addAction(self.app.actionIgnoreList)
+        # This also pushes back the options entry to the bottom of the menu
+        self.menuView.addSeparator()
         self.menuView.addAction(self.app.actionPreferences)
+
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)
