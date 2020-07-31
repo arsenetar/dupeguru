@@ -129,6 +129,7 @@ class TabWindow(QMainWindow):
             for action in menu.actions():
                 if action is self.app.directories_dialog.actionShowResultsWindow:
                     if isResultWindow:
+                        self.app.actionIgnoreList.setEnabled(self.app.ignoreListDialog is not None)
                         # Action points to ourselves, always disable it
                         self.app.directories_dialog.actionShowResultsWindow\
                             .setEnabled(False)
