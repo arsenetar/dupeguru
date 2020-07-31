@@ -80,7 +80,7 @@ class Preferences(PreferencesBase):
         self.recentResults = []
         self.recentFolders = []
 
-        self.tabs_default_pos = False
+        self.tabs_default_pos = True
         self.word_weighting = True
         self.match_similar = False
         self.ignore_small_files = True
