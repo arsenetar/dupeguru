@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QFormLayout
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 from qtlib.radio_box import RadioBox
@@ -41,9 +41,11 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
         self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self.widgetsVLayout.addWidget(self.debugModeBox)
-        self.widgetsVLayout.addWidget(QLabel(tr("Picture cache mode:")))
+
         self.cacheTypeRadio = RadioBox(self, items=["Sqlite", "Shelve"], spread=False)
-        self.widgetsVLayout.addWidget(self.cacheTypeRadio)
+        cache_form = QFormLayout()
+        cache_form.addRow(tr("Picture cache mode:"), self.cacheTypeRadio)
+        self.widgetsVLayout.addLayout(cache_form)
         self._setupBottomPart()
 
     def _setupDisplayPage(self):
