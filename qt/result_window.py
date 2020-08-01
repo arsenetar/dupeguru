@@ -360,7 +360,7 @@ class ResultWindow(QMainWindow):
         h = self.resultsView.horizontalHeader()
         h.setHighlightSections(False)
         h.setSectionsMovable(True)
-        h.setStretchLastSection(True)
+        h.setStretchLastSection(False)
         h.setDefaultAlignment(Qt.AlignLeft)
         self.verticalLayout.addWidget(self.resultsView)
         self.setCentralWidget(self.centralwidget)
