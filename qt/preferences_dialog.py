@@ -145,19 +145,21 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandEdit)
 
     def _setupDisplayPage(self):
+        self.ui_groupbox = QGroupBox("&General Interface")
+        layout = QVBoxLayout()
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
             self.languageComboBox.addItem(get_langnames()[lang])
-        self.displayVLayout.insertLayout(
-            0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
-        )
+        layout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self._setupAddCheckbox("tabs_default_pos",
                                tr("Use default position for tab bar (requires restart)"))
         self.tabs_default_pos.setToolTip(
             tr("Place the tab bar below the main menu instead of next to it\n\
 On MacOS, the tab bar will fill up the window's width instead."))
-        self.displayVLayout.addWidget(self.tabs_default_pos)
+        layout.addWidget(self.tabs_default_pos)
+        self.ui_groupbox.setLayout(layout)
+        self.displayVLayout.addWidget(self.ui_groupbox)
 
         gridlayout = QFormLayout()
         result_groupbox = QGroupBox("&Result Table")
@@ -181,7 +183,7 @@ On MacOS, the tab bar will fill up the window's width instead."))
         result_groupbox.setLayout(gridlayout)
         self.displayVLayout.addWidget(result_groupbox)
 
-        details_groupbox = QGroupBox("&Details window")
+        details_groupbox = QGroupBox("&Details Window")
         self.details_groupbox_layout = QVBoxLayout()
         self._setupAddCheckbox("details_dialog_titlebar_enabled",
                                tr("Show the title bar and can be docked"))
