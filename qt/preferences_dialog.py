@@ -26,6 +26,7 @@ from PyQt5.QtWidgets import (
     QColorDialog,
     QPushButton,
     QGroupBox,
+    QFormLayout,
 )
 from PyQt5.QtGui import QPixmap, QIcon
 
@@ -152,40 +153,27 @@ class PreferencesDialogBase(QDialog):
             0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
         )
 
-        # line = QFrame(self)
-        # line.setFrameShape(QFrame.HLine)
-        # self.displayVLayout.addWidget(line)
-
-        gridlayout = QGridLayout()  # We should probably use QFormLayout instead here
-        result_groupbox = QGroupBox("Result Table")
-        self.fontSizeLabel = QLabel(tr("Font size:"))
+        gridlayout = QFormLayout()
+        result_groupbox = QGroupBox("&Result Table")
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
-        gridlayout.addWidget(self.fontSizeLabel, 1, 0)
-        gridlayout.addWidget(self.fontSizeSpinBox, 1, 2, 1, 1, Qt.AlignLeft)
+        gridlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
         self._setupAddCheckbox("reference_bold_font",
                                tr("Use bold font for references"))
-        gridlayout.addWidget(self.reference_bold_font, 2, 0)
-        self.result_table_ref_foreground_color_label = QLabel(tr("Reference foreground color:"))
-        gridlayout.addWidget(self.result_table_ref_foreground_color_label, 3, 0)
+        gridlayout.addRow(self.reference_bold_font)
+
         self.result_table_ref_foreground_color = ColorPickerButton(self)
-        gridlayout.addWidget(self.result_table_ref_foreground_color, 3, 2, 1, 1, Qt.AlignLeft)
-        self.result_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
-        gridlayout.addWidget(self.result_table_delta_foreground_color_label, 4, 0)
+        gridlayout.addRow(tr("Reference foreground color:"), self.result_table_ref_foreground_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
-        gridlayout.addWidget(self.result_table_delta_foreground_color, 4, 2, 1, 1, Qt.AlignLeft)
-        gridlayout.setColumnStretch(1, 0)
-        gridlayout.setColumnStretch(3, 3)
+        gridlayout.addRow(tr("Delta foreground color:"), self.result_table_delta_foreground_color)
+        gridlayout.setLabelAlignment(Qt.AlignLeft)
+
         # Keep same vertical spacing as parent layout for consistency
         gridlayout.setVerticalSpacing(self.displayVLayout.spacing())
         result_groupbox.setLayout(gridlayout)
         self.displayVLayout.addWidget(result_groupbox)
 
-        # line = QFrame(self)
-        # line.setFrameShape(QFrame.HLine)
-        # self.displayVLayout.addWidget(line)
-
-        details_groupbox = QGroupBox("Details window")
+        details_groupbox = QGroupBox("&Details window")
         self.details_groupbox_layout = QVBoxLayout()
         self._setupAddCheckbox("details_dialog_titlebar_enabled",
                                tr("Show the title bar and can be docked"))
@@ -209,7 +197,7 @@ use the modifier key to drag the floating window around") if ISLINUX else
         self.details_table_delta_foreground_color = ColorPickerButton(self)
         gridlayout.addWidget(self.details_table_delta_foreground_color, 4, 2, 1, 1, Qt.AlignLeft)
         gridlayout.setColumnStretch(1, 1)
-        gridlayout.setColumnStretch(3, 3)
+        gridlayout.setColumnStretch(3, 4)
         self.details_groupbox_layout.addLayout(gridlayout)
         details_groupbox.setLayout(self.details_groupbox_layout)
         self.displayVLayout.addWidget(details_groupbox)
