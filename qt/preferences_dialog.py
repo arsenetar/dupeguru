@@ -117,8 +117,12 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addLayout(
             horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
         )
-        self._setupAddCheckbox("reference_bold_font", tr("Bold font for reference."))
+        self._setupAddCheckbox("reference_bold_font", tr("Bold font for reference"))
         self.widgetsVLayout.addWidget(self.reference_bold_font)
+        self._setupAddCheckbox("tabs_default_pos", tr("Use default position for tab bar (requires restart)"))
+        self.tabs_default_pos.setToolTip(tr("Place the tab bar below the main menu instead of next to it"))
+        self.widgetsVLayout.addWidget(self.tabs_default_pos)
+
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
@@ -190,6 +194,7 @@ class PreferencesDialogBase(QDialog):
         setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
         setchecked(self.debugModeBox, prefs.debug_mode)
         setchecked(self.reference_bold_font, prefs.reference_bold_font)
+        setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
         self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
         self.customCommandEdit.setText(prefs.custom_command)
         self.fontSizeSpinBox.setValue(prefs.tableFontSize)
@@ -213,6 +218,7 @@ class PreferencesDialogBase(QDialog):
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
+        prefs.tabs_default_pos = ischecked(self.tabs_default_pos)
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:
