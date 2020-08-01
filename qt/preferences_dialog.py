@@ -349,7 +349,7 @@ class ColorPickerButton(QPushButton):
         self.setColor(color)
 
     def setColor(self, color):
-        size = QSize(1, 1)
+        size = QSize(16, 16)
         px = QPixmap(size)
         if color is None:
             size.width = 0
