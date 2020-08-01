@@ -5,6 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtWidgets import QFormLayout
+from PyQt5.QtCore import Qt
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 from qtlib.radio_box import RadioBox
@@ -44,6 +45,7 @@ class PreferencesDialog(PreferencesDialogBase):
 
         self.cacheTypeRadio = RadioBox(self, items=["Sqlite", "Shelve"], spread=False)
         cache_form = QFormLayout()
+        cache_form.setLabelAlignment(Qt.AlignLeft)
         cache_form.addRow(tr("Picture cache mode:"), self.cacheTypeRadio)
         self.widgetsVLayout.addLayout(cache_form)
         self._setupBottomPart()
