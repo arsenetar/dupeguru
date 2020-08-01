@@ -152,6 +152,12 @@ class PreferencesDialogBase(QDialog):
         self.displayVLayout.insertLayout(
             0, horizontalWrap([self.languageLabel, self.languageComboBox, None])
         )
+        self._setupAddCheckbox("tabs_default_pos",
+                               tr("Use default position for tab bar (requires restart)"))
+        self.tabs_default_pos.setToolTip(
+            tr("Place the tab bar below the main menu instead of next to it\n\
+On MacOS, the tab bar will fill up the window's width instead."))
+        self.displayVLayout.addWidget(self.tabs_default_pos)
 
         gridlayout = QFormLayout()
         result_groupbox = QGroupBox("&Result Table")
@@ -163,9 +169,11 @@ class PreferencesDialogBase(QDialog):
         gridlayout.addRow(self.reference_bold_font)
 
         self.result_table_ref_foreground_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Reference foreground color:"), self.result_table_ref_foreground_color)
+        gridlayout.addRow(tr("Reference foreground color:"),
+                          self.result_table_ref_foreground_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Delta foreground color:"), self.result_table_delta_foreground_color)
+        gridlayout.addRow(tr("Delta foreground color:"),
+                          self.result_table_delta_foreground_color)
         gridlayout.setLabelAlignment(Qt.AlignLeft)
 
         # Keep same vertical spacing as parent layout for consistency
@@ -266,6 +274,7 @@ use the modifier key to drag the floating window around") if ISLINUX else
             self.customCommandEdit.setText(prefs.custom_command)
         if section & Sections.DISPLAY:
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
+            setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
             setchecked(self.details_dialog_titlebar_enabled,
                        prefs.details_dialog_titlebar_enabled)
             setchecked(self.details_dialog_vertical_titlebar,
@@ -302,6 +311,7 @@ use the modifier key to drag the floating window around") if ISLINUX else
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
+        prefs.tabs_default_pos = ischecked(self.tabs_default_pos)
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:

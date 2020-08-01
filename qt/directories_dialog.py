@@ -40,6 +40,7 @@ class DirectoriesDialog(QMainWindow):
     def __init__(self, app, **kwargs):
         super().__init__(None, **kwargs)
         self.app = app
+        self.specific_actions = set()
         self.lastAddedFolder = platform.INITIAL_FOLDER_IN_DIALOGS
         self.recentFolders = Recent(self.app, "recentFolders")
         self._setupUi()
@@ -87,25 +88,39 @@ class DirectoriesDialog(QMainWindow):
                 "actionShowResultsWindow",
                 "",
                 "",
-                tr("Results Window"),
+                tr("Scan Results"),
                 self.app.showResultsWindow,
             ),
             ("actionAddFolder", "", "", tr("Add Folder..."), self.addFolderTriggered),
         ]
         createActions(ACTIONS, self)
+        # if self.app.use_tabs:
+        #     # Keep track of actions which should only be accessible from this class
+        #     for action, _, _, _, _ in ACTIONS:
+        #         self.specific_actions.add(getattr(self, action))
 
     def _setupMenu(self):
-        self.menubar = QMenuBar(self)
-        self.menubar.setGeometry(QRect(0, 0, 42, 22))
-        self.menuFile = QMenu(self.menubar)
-        self.menuFile.setTitle(tr("File"))
-        self.menuView = QMenu(self.menubar)
-        self.menuView.setTitle(tr("View"))
-        self.menuHelp = QMenu(self.menubar)
-        self.menuHelp.setTitle(tr("Help"))
+        if not self.app.use_tabs:
+            # we are our own QMainWindow, we need our own menu bar
+            self.menubar = QMenuBar(self)
+            self.menubar.setGeometry(QRect(0, 0, 42, 22))
+            self.menuFile = QMenu(self.menubar)
+            self.menuFile.setTitle(tr("File"))
+            self.menuView = QMenu(self.menubar)
+            self.menuView.setTitle(tr("View"))
+            self.menuHelp = QMenu(self.menubar)
+            self.menuHelp.setTitle(tr("Help"))
+            self.setMenuBar(self.menubar)
+            menubar = self.menubar
+        else:
+            # we are part of a tab widget, we populate its window's menubar instead
+            self.menuFile = self.app.main_window.menuFile
+            self.menuView = self.app.main_window.menuView
+            self.menuHelp = self.app.main_window.menuHelp
+            menubar = self.app.main_window.menubar
+
         self.menuLoadRecent = QMenu(self.menuFile)
         self.menuLoadRecent.setTitle(tr("Load Recent Results"))
-        self.setMenuBar(self.menubar)
 
         self.menuFile.addAction(self.actionLoadResults)
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
@@ -113,16 +128,20 @@ class DirectoriesDialog(QMainWindow):
         self.menuFile.addAction(self.app.actionClearPictureCache)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
-        self.menuView.addAction(self.app.actionPreferences)
+
+        self.menuView.addAction(self.app.actionDirectoriesWindow)
         self.menuView.addAction(self.actionShowResultsWindow)
         self.menuView.addAction(self.app.actionIgnoreList)
+        self.menuView.addSeparator()
+        self.menuView.addAction(self.app.actionPreferences)
+
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)
 
-        self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menuView.menuAction())
-        self.menubar.addAction(self.menuHelp.menuAction())
+        menubar.addAction(self.menuFile.menuAction())
+        menubar.addAction(self.menuView.menuAction())
+        menubar.addAction(self.menuHelp.menuAction())
 
         # Recent folders menu
         self.menuRecentFolders = QMenu()
@@ -139,6 +158,8 @@ class DirectoriesDialog(QMainWindow):
         self.resize(420, 338)
         self.centralwidget = QWidget(self)
         self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setContentsMargins(4, 0, 4, 0)
+        self.verticalLayout.setSpacing(0)
         hl = QHBoxLayout()
         label = QLabel(tr("Application Mode:"), self)
         label.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)

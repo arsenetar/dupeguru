@@ -56,12 +56,17 @@ class Preferences(PreferencesBase):
             "ResultWindowIsMaximized", self.resultWindowIsMaximized
         )
         self.resultWindowRect = self.get_rect("ResultWindowRect", self.resultWindowRect)
+        self.mainWindowIsMaximized = get(
+            "MainWindowIsMaximized", self.mainWindowIsMaximized
+        )
+        self.mainWindowRect = self.get_rect("MainWindowRect", self.mainWindowRect)
         self.directoriesWindowRect = self.get_rect(
             "DirectoriesWindowRect", self.directoriesWindowRect
         )
+
         self.recentResults = get("RecentResults", self.recentResults)
         self.recentFolders = get("RecentFolders", self.recentFolders)
-
+        self.tabs_default_pos = get("TabsDefaultPosition", self.tabs_default_pos)
         self.word_weighting = get("WordWeighting", self.word_weighting)
         self.match_similar = get("MatchSimilar", self.match_similar)
         self.ignore_small_files = get("IgnoreSmallFiles", self.ignore_small_files)
@@ -99,9 +104,12 @@ class Preferences(PreferencesBase):
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
         self.directoriesWindowRect = None
+        self.mainWindowRect = None
+        self.mainWindowIsMaximized = False
         self.recentResults = []
         self.recentFolders = []
 
+        self.tabs_default_pos = True
         self.word_weighting = True
         self.match_similar = False
         self.ignore_small_files = True
@@ -137,11 +145,14 @@ class Preferences(PreferencesBase):
         set_("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
         set_("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
+        set_("MainWindowIsMaximized", self.mainWindowIsMaximized)
         self.set_rect("ResultWindowRect", self.resultWindowRect)
+        self.set_rect("MainWindowRect", self.mainWindowRect)
         self.set_rect("DirectoriesWindowRect", self.directoriesWindowRect)
         set_("RecentResults", self.recentResults)
         set_("RecentFolders", self.recentFolders)
 
+        set_("TabsDefaultPosition", self.tabs_default_pos)
         set_("WordWeighting", self.word_weighting)
         set_("MatchSimilar", self.match_similar)
         set_("IgnoreSmallFiles", self.ignore_small_files)

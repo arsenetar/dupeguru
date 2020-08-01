@@ -42,6 +42,7 @@ class ResultWindow(QMainWindow):
     def __init__(self, parent, app, **kwargs):
         super().__init__(parent, **kwargs)
         self.app = app
+        self.specific_actions = set()
         self._setupUi()
         if app.model.app_mode == AppMode.Picture:
             MODEL_CLASS = ResultsModelPicture
@@ -207,22 +208,39 @@ class ResultWindow(QMainWindow):
         self.actionDelta.setCheckable(True)
         self.actionPowerMarker.setCheckable(True)
 
+        if self.app.main_window:  # We use tab widgets in this case
+            # Keep track of actions which should only be accessible from this class
+            for action, _, _, _, _ in ACTIONS:
+                self.specific_actions.add(getattr(self, action))
+
     def _setupMenu(self):
-        self.menubar = QMenuBar()
-        self.menubar.setGeometry(QRect(0, 0, 630, 22))
-        self.menuFile = QMenu(self.menubar)
-        self.menuFile.setTitle(tr("File"))
-        self.menuMark = QMenu(self.menubar)
-        self.menuMark.setTitle(tr("Mark"))
-        self.menuActions = QMenu(self.menubar)
-        self.menuActions.setTitle(tr("Actions"))
-        self.menuColumns = QMenu(self.menubar)
-        self.menuColumns.setTitle(tr("Columns"))
-        self.menuView = QMenu(self.menubar)
-        self.menuView.setTitle(tr("View"))
-        self.menuHelp = QMenu(self.menubar)
-        self.menuHelp.setTitle(tr("Help"))
-        self.setMenuBar(self.menubar)
+        if not self.app.use_tabs:
+            # we are our own QMainWindow, we need our own menu bar
+            self.menubar = QMenuBar()  # self.menuBar() works as well here
+            self.menubar.setGeometry(QRect(0, 0, 630, 22))
+            self.menuFile = QMenu(self.menubar)
+            self.menuFile.setTitle(tr("File"))
+            self.menuMark = QMenu(self.menubar)
+            self.menuMark.setTitle(tr("Mark"))
+            self.menuActions = QMenu(self.menubar)
+            self.menuActions.setTitle(tr("Actions"))
+            self.menuColumns = QMenu(self.menubar)
+            self.menuColumns.setTitle(tr("Columns"))
+            self.menuView = QMenu(self.menubar)
+            self.menuView.setTitle(tr("View"))
+            self.menuHelp = QMenu(self.menubar)
+            self.menuHelp.setTitle(tr("Help"))
+            self.setMenuBar(self.menubar)
+            menubar = self.menubar
+        else:
+            # we are part of a tab widget, we populate its window's menubar instead
+            self.menuFile = self.app.main_window.menuFile
+            self.menuMark = self.app.main_window.menuMark
+            self.menuActions = self.app.main_window.menuActions
+            self.menuColumns = self.app.main_window.menuColumns
+            self.menuView = self.app.main_window.menuView
+            self.menuHelp = self.app.main_window.menuHelp
+            menubar = self.app.main_window.menubar
 
         self.menuActions.addAction(self.actionDeleteMarked)
         self.menuActions.addAction(self.actionMoveMarked)
@@ -242,12 +260,18 @@ class ResultWindow(QMainWindow):
         self.menuMark.addAction(self.actionMarkNone)
         self.menuMark.addAction(self.actionInvertMarking)
         self.menuMark.addAction(self.actionMarkSelected)
+
+        self.menuView.addAction(self.actionDetails)
+        self.menuView.addSeparator()
         self.menuView.addAction(self.actionPowerMarker)
         self.menuView.addAction(self.actionDelta)
         self.menuView.addSeparator()
-        self.menuView.addAction(self.actionDetails)
-        self.menuView.addAction(self.app.actionIgnoreList)
+        if not self.app.use_tabs:
+            self.menuView.addAction(self.app.actionIgnoreList)
+        # This also pushes back the options entry to the bottom of the menu
+        self.menuView.addSeparator()
         self.menuView.addAction(self.app.actionPreferences)
+
         self.menuHelp.addAction(self.app.actionShowHelp)
         self.menuHelp.addAction(self.app.actionOpenDebugLog)
         self.menuHelp.addAction(self.app.actionAbout)
@@ -257,15 +281,19 @@ class ResultWindow(QMainWindow):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
 
-        self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menuMark.menuAction())
-        self.menubar.addAction(self.menuActions.menuAction())
-        self.menubar.addAction(self.menuColumns.menuAction())
-        self.menubar.addAction(self.menuView.menuAction())
-        self.menubar.addAction(self.menuHelp.menuAction())
+        menubar.addAction(self.menuFile.menuAction())
+        menubar.addAction(self.menuMark.menuAction())
+        menubar.addAction(self.menuActions.menuAction())
+        menubar.addAction(self.menuColumns.menuAction())
+        menubar.addAction(self.menuView.menuAction())
+        menubar.addAction(self.menuHelp.menuAction())
 
         # Columns menu
         menu = self.menuColumns
+        # Avoid adding duplicate actions in tab widget menu in case we recreated
+        # the Result Window instance.
+        if menu.actions():
+            menu.clear()
         self._column_actions = []
         for index, (display, visible) in enumerate(
             self.app.model.result_table.columns.menu_items()
@@ -280,7 +308,7 @@ class ResultWindow(QMainWindow):
         action.item_index = -1
 
         # Action menu
-        actionMenu = QMenu(tr("Actions"), self.menubar)
+        actionMenu = QMenu(tr("Actions"), menubar)
         actionMenu.addAction(self.actionDeleteMarked)
         actionMenu.addAction(self.actionMoveMarked)
         actionMenu.addAction(self.actionCopyMarked)
