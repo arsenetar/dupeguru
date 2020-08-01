@@ -55,15 +55,15 @@ class PreferencesDialog(PreferencesDialogBase):
         # Prevent changing this on platforms where themes are unpredictable
         self.details_dialog_override_theme_icons.setEnabled(False if not ISLINUX else True)
         # Insert this right after the vertical title bar option
-        index = self.displayVLayout.indexOf(self.details_dialog_vertical_titlebar)
-        self.displayVLayout.insertWidget(
+        index = self.details_groupbox_layout.indexOf(self.details_dialog_vertical_titlebar)
+        self.details_groupbox_layout.insertWidget(
             index + 1, self.details_dialog_override_theme_icons)
         self._setupAddCheckbox("details_dialog_viewers_show_scrollbars",
                                tr("Show scrollbars in image viewers"))
         self.details_dialog_viewers_show_scrollbars.setToolTip(
             tr("When the image displayed doesn't fit the viewport, \
 show scrollbars to span the view around"))
-        self.displayVLayout.insertWidget(
+        self.details_groupbox_layout.insertWidget(
             index + 2, self.details_dialog_viewers_show_scrollbars)
 
     def _load(self, prefs, setchecked, section):
