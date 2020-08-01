@@ -251,6 +251,7 @@ use the modifier key to drag the floating window around") if ISLINUX else
         self.tabwidget.addTab(self.page_general, "General")
         self.tabwidget.addTab(self.page_display, "Display")
         self.displayVLayout.addStretch(0)
+        self.widgetsVLayout.addStretch(0)
 
     def _load(self, prefs, setchecked, section):
         # Edition-specific
