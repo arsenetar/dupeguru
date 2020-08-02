@@ -223,17 +223,14 @@ class DupeGuru(QObject):
     def showResultsWindow(self):
         if self.resultWindow is not None:
             if self.use_tabs:
-                self.main_window.addTab(
-                    self.resultWindow, "Results", switch=True)
+                self.main_window.showTab(self.resultWindow)
             else:
                 self.resultWindow.show()
 
     def showDirectoriesWindow(self):
         if self.directories_dialog is not None:
             if self.use_tabs:
-                index = self.main_window.indexOfWidget(self.directories_dialog)
-                self.main_window.setTabVisible(index, True)
-                self.main_window.setCurrentIndex(index)
+                self.main_window.showTab(self.directories_dialog)
             else:
                 self.directories_dialog.show()
 
@@ -354,6 +351,8 @@ class DupeGuru(QObject):
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
+            self.main_window.addTab(
+                self.resultWindow, "Results", switch=False)
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()

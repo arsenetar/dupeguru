@@ -171,6 +171,11 @@ class TabWindow(QMainWindow):
             self.setCurrentIndex(index)
         return index
 
+    def showTab(self, page):
+        index = self.indexOfWidget(page)
+        self.setTabVisible(index, True)
+        self.setCurrentIndex(index)
+
     def indexOfWidget(self, widget):
         return self.tabWidget.indexOf(widget)
 
@@ -302,7 +307,7 @@ class TabBarWindow(TabWindow):
 
     @pyqtSlot(int)
     def setTabIndex(self, index):
-        if not index:
+        if index is None:
             return
         self.tabBar.setCurrentIndex(index)
 
