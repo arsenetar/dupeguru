@@ -20,7 +20,7 @@ class ResultsModel(Table):
         view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
         font = view.font()
         font.setPointSize(app.prefs.tableFontSize)
-        self.view.setFont(font)
+        view.setFont(font)
         fm = QFontMetrics(font)
         view.verticalHeader().setDefaultSectionSize(fm.height() + 2)
 
