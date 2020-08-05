@@ -29,6 +29,10 @@ class File(PhotoBase):
     def _plat_get_blocks(self, block_count_per_side, orientation):
         image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
+        if type(orientation) == str:
+            logging.warning("Orientation for file '%s' was a str '%s', not an int!",
+                            str(self.path), orientation)
+            return getblocks(image, block_count_per_side)
         # MYSTERY TO SOLVE: For reasons I cannot explain, orientations 5 and 7 don't work for
         # duplicate scanning. The transforms seems to work fine (if I try to save the image after
         # the transform, we see that the image has been correctly flipped and rotated), but the
