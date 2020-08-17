@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
 )
 from .exclude_list_table import ExcludeListTable, ExcludeView
 
+from core.exclude import AlreadyThereException
 from hscommon.trans import trget
 tr = trget("ui")
 
@@ -17,16 +18,18 @@ class ExcludeListDialog(QDialog):
     def __init__(self, app, parent, model, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
+        self.app = app
         self.specific_actions = frozenset()
         self._setupUI()
         self.model = model  # ExcludeListDialogCore
         self.model.view = self
-        self.table = ExcludeListTable(app, view=self.tableView)
+        self.table = ExcludeListTable(app, view=self.tableView)  # Qt ExcludeListTable
 
-        self.buttonAdd.clicked.connect(self.addItem)
-        self.buttonRemove.clicked.connect(self.removeItem)
+        self.buttonAdd.clicked.connect(self.addStringFromLineEdit)
+        self.buttonRemove.clicked.connect(self.removeSelected)
         self.buttonRestore.clicked.connect(self.restoreDefaults)
         self.buttonClose.clicked.connect(self.accept)
+        self.buttonHelp.clicked.connect(self.display_help_message)
 
     def _setupUI(self):
         layout = QVBoxLayout(self)
@@ -35,6 +38,7 @@ class ExcludeListDialog(QDialog):
         self.buttonRemove = QPushButton(tr("Remove Selected"))
         self.buttonRestore = QPushButton(tr("Restore defaults"))
         self.buttonClose = QPushButton(tr("Close"))
+        self.buttonHelp = QPushButton(tr("Help"))
         self.linedit = QLineEdit()
         self.tableView = ExcludeView()
         triggers = (
@@ -43,25 +47,26 @@ class ExcludeListDialog(QDialog):
             | QAbstractItemView.SelectedClicked
         )
         self.tableView.setEditTriggers(triggers)
-        self.tableView.horizontalHeader().setVisible(True)
         self.tableView.setSelectionMode(QTableView.ExtendedSelection)
         self.tableView.setSelectionBehavior(QTableView.SelectRows)
-        # vheader = self.tableView.verticalHeader()
-        # vheader.setSectionsMovable(True)
-        # vheader.setVisible(True)
-        # vheader.setDefaultSectionSize(50)
+        self.tableView.setShowGrid(False)
+        vheader = self.tableView.verticalHeader()
+        vheader.setSectionsMovable(True)
+        vheader.setVisible(False)
         hheader = self.tableView.horizontalHeader()
         hheader.setSectionsMovable(False)
         hheader.setSectionResizeMode(QHeaderView.Fixed)
         hheader.setStretchLastSection(True)
         hheader.setHighlightSections(False)
+        hheader.setVisible(True)
         gridlayout.addWidget(self.linedit, 0, 0)
         gridlayout.addWidget(self.buttonAdd, 0, 1, Qt.AlignLeft)
         gridlayout.addWidget(self.buttonRemove, 1, 1, Qt.AlignLeft)
         gridlayout.addWidget(self.buttonRestore, 2, 1, Qt.AlignLeft)
-        gridlayout.addWidget(self.tableView, 1, 0, 4, 1)
-        gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 3, 1)
-        gridlayout.addWidget(self.buttonClose, 4, 1)
+        gridlayout.addWidget(self.buttonHelp, 3, 1, Qt.AlignLeft)
+        gridlayout.addWidget(self.tableView, 1, 0, 5, 1)
+        gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 4, 1)
+        gridlayout.addWidget(self.buttonClose, 5, 1)
         layout.addLayout(gridlayout)
 
     # --- model --> view
@@ -69,15 +74,28 @@ class ExcludeListDialog(QDialog):
         super().show()
 
     @pyqtSlot()
-    def addItem(self):
+    def addStringFromLineEdit(self):
         text = self.linedit.text()
         if not text:
             return
-        self.model.add(text)
+        try:
+            self.model.add(text)
+        except AlreadyThereException:
+            self.app.show_message("Expression already in the list.")
+            return
+        except Exception as e:
+            self.app.show_message(f"Expression is invalid: {e}")
+            return
         self.linedit.clear()
 
-    def removeItem(self):
+    def removeSelected(self):
         self.model.remove_selected()
 
     def restoreDefaults(self):
         self.model.restore_defaults()
+
+    def display_help_message(self):
+        self.app.show_message("""\
+These python regular expressions will filter out files and directory paths \
+specified here.\nDuring directory selection, paths filtered here will be added as \
+"Skipped" by default, but regular files will be ignored altogether during scans.""")

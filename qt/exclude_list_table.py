@@ -2,8 +2,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QModelIndex, pyqtSignal
-from PyQt5.QtGui import QBrush, QFont, QFontMetrics, QColor
+from PyQt5.QtCore import Qt, QModelIndex
+from PyQt5.QtGui import QFont, QFontMetrics, QIcon
 from PyQt5.QtWidgets import QTableView
 
 from qtlib.column import Column
@@ -20,7 +20,7 @@ class ExcludeListTable(Table):
     def __init__(self, app, view, **kwargs):
         model = app.model.exclude_list_dialog.exclude_list_table  # pointer to GUITable
         super().__init__(model, view, **kwargs)
-        view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
+        # view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
         font = view.font()
         font.setPointSize(app.prefs.tableFontSize)
         view.setFont(font)
@@ -32,6 +32,10 @@ class ExcludeListTable(Table):
         if column.name == "marked":
             if role == Qt.CheckStateRole and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
+            if role == Qt.ToolTipRole and not row.markable:
+                return "Compilation error: " + row.get_cell_value("error")
+            if role == Qt.DecorationRole and not row.markable:
+                return QIcon.fromTheme("dialog-error", QIcon(":/error"))
             return None
         if role == Qt.DisplayRole:
             return row.data[column.name]
@@ -43,12 +47,12 @@ class ExcludeListTable(Table):
         return None
 
     def _getFlags(self, row, column):
-        flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        flags = Qt.ItemIsEnabled
         if column.name == "marked":
             if row.markable:
                 flags |= Qt.ItemIsUserCheckable
         elif column.name == "regex":
-            flags |= Qt.ItemIsEditable
+            flags |= Qt.ItemIsEditable | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled | Qt.ItemIsDropEnabled
         return flags
 
     def _setData(self, row, column, value, role):

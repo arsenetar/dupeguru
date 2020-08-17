@@ -12,21 +12,18 @@ tr = trget("ui")
 class ExcludeListTable(GUITable, DupeGuruGUIObject):
     COLUMNS = [
         Column("marked", ""),
-        Column("regex", tr("Regex"))
+        Column("regex", tr("Regular Expressions"))
     ]
 
     def __init__(self, exclude_list_dialog, app):
         GUITable.__init__(self)
         DupeGuruGUIObject.__init__(self, app)
-        # self.columns = Columns(self, prefaccess=app, savename="ExcludeTable")
         self.columns = Columns(self)
         self.dialog = exclude_list_dialog
 
     def rename_selected(self, newname):
         row = self.selected_row
         if row is None:
-            # There's all kinds of way the current row can be swept off during rename. When it
-            # happens, selected_row will be None.
             return False
         row._data = None
         return self.dialog.rename_selected(newname)
@@ -95,7 +92,7 @@ class ExcludeListRow(Row):
 
     @property
     def markable(self):
-        return True
+        return self._app.exclude_list.is_markable(self.regex)
 
     @property
     def marked(self):
@@ -108,6 +105,14 @@ class ExcludeListRow(Row):
         else:
             self._app.exclude_list.unmark(self.regex)
 
+    @property
+    def error(self):
+        # This assumes error() returns an Exception()
+        message = self._app.exclude_list.error(self.regex)
+        if hasattr(message, "msg"):
+            return self._app.exclude_list.error(self.regex).msg
+        else:
+            return message  # Exception object
     # @property
     # def regex(self):
     #     return self.regex

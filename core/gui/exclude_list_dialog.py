@@ -8,8 +8,6 @@
 # from hscommon.trans import tr
 from .exclude_list_table import ExcludeListTable
 
-default_regexes = [".*thumbs", "\.DS.Store", "\.Trash", "Trash-Bin"]
-
 
 class ExcludeListDialogCore:
     # --- View interface
@@ -22,13 +20,7 @@ class ExcludeListDialogCore:
         self.exclude_list_table = ExcludeListTable(self, app)  # GUITable, this is the "model"
 
     def restore_defaults(self):
-        for _, regex in self.exclude_list:
-            if regex not in default_regexes:
-                self.exclude_list.unmark(regex)
-        for default_regex in default_regexes:
-            if not self.exclude_list.isExcluded(default_regex):
-                self.exclude_list.add(default_regex)
-                self.exclude_list.mark(default_regex)
+        self.exclude_list.restore_defaults()
         self.refresh()
 
     def refresh(self):
@@ -55,9 +47,11 @@ class ExcludeListDialogCore:
         return False
 
     def add(self, regex):
-        self.exclude_list.add(regex)
+        try:
+            self.exclude_list.add(regex)
+        except Exception as e:
+            raise(e)
         self.exclude_list.mark(regex)
-        # TODO make checks here before adding to GUI
         self.exclude_list_table.add(regex)
 
     def show(self):

@@ -26,7 +26,7 @@ from .pe.photo import get_delta_dimensions
 from .util import cmp_value, fix_surrogate_encoding
 from . import directories, results, export, fs, prioritize
 from .ignore import IgnoreList
-from .exclude import ExcludeList
+from .exclude import ExcludeList as ExcludeList
 from .scanner import ScanType
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
@@ -139,10 +139,10 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.Standard
         self.discarded_file_count = 0
+        self.exclude_list = ExcludeList()
         self.directories = directories.Directories()
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
-        self.exclude_list = ExcludeList(self)
         # In addition to "app-level" options, this dictionary also holds options that will be
         # sent to the scanner. They don't have default values because those defaults values are
         # defined in the scanner class.

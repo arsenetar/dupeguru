@@ -5,7 +5,6 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os
-import re
 from xml.etree import ElementTree as ET
 import logging
 
@@ -14,6 +13,7 @@ from hscommon.path import Path
 from hscommon.util import FileOrPath
 
 from . import fs
+from .exclude import ExcludeList
 
 __all__ = [
     "Directories",
@@ -53,34 +53,17 @@ class Directories:
     Then, when the user starts the scan, :meth:`get_files` is called to retrieve all files (wrapped
     in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
     """
+    # FIXME: if there is zero item in these sets, the for each loops will yield NOTHING
     deny_list_str = set()
     deny_list_re = set()
     deny_list_re_files = set()
 
     # ---Override
-    def __init__(self):
+    def __init__(self, excluded=ExcludeList()):
         self._dirs = []
         # {path: state}
         self.states = {}
-        self.deny_list_str.add(r".*Recycle\.Bin$")
-        self.deny_list_str.add(r"denyme.*")
-        self.deny_list_str.add(r".*denyme")
-        self.deny_list_str.add(r".*/test/denyme*")
-        self.deny_list_str.add(r".*/test/*denyme")
-        self.deny_list_str.add(r"denyme")
-        self.deny_list_str.add(r".*\/\..*")
-        self.deny_list_str.add(r"^\..*")
-        self.compile_re()
-
-    def compile_re(self):
-        for expr in self.deny_list_str:
-            try:
-                self.deny_list_re.add(re.compile(expr))
-                if os.sep not in expr:
-                    self.deny_list_re_files.add(re.compile(expr))
-            except Exception as e:
-                logging.debug(f"Invalid regular expression \"{expr}\" in exclude list: {e}")
-        print(f"re_all: {self.deny_list_re}\nre_files: {self.deny_list_re_files}")
+        self._excluded = excluded
 
     def __contains__(self, path):
         for p in self._dirs:
@@ -217,7 +200,7 @@ class Directories:
             for folder in self._get_folders(from_folder, j):
                 yield folder
 
-    def get_state(self, path, denylist=deny_list_re):
+    def get_state(self, path, deny_list_re=deny_list_re):
         """Returns the state of ``path``.
 
         :rtype: :class:`DirectoryState`
@@ -225,7 +208,7 @@ class Directories:
         # direct match? easy result.
         if path in self.states:
             return self.states[path]
-        state = self._default_state_for_path(path, denylist) or DirectoryState.Normal
+        state = self._default_state_for_path(path, deny_list_re) or DirectoryState.Normal
         prevlen = 0
         # we loop through the states to find the longest matching prefix
         for p, s in self.states.items():
