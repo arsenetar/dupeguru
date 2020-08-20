@@ -13,7 +13,6 @@ from hscommon.path import Path
 from hscommon.util import FileOrPath
 
 from . import fs
-from .exclude import ExcludeList
 
 __all__ = [
     "Directories",
@@ -53,17 +52,15 @@ class Directories:
     Then, when the user starts the scan, :meth:`get_files` is called to retrieve all files (wrapped
     in :mod:`core.fs`) that have to be scanned according to the chosen folders/states.
     """
-    # FIXME: if there is zero item in these sets, the for each loops will yield NOTHING
-    deny_list_str = set()
-    deny_list_re = set()
-    deny_list_re_files = set()
 
     # ---Override
-    def __init__(self, excluded=ExcludeList()):
+    def __init__(self, exclude_list=None):
         self._dirs = []
         # {path: state}
         self.states = {}
-        self._excluded = excluded
+        self._exclude_list = exclude_list
+        if exclude_list is not None:
+            exclude_list._combined_regex = False  # TODO make a setter
 
     def __contains__(self, path):
         for p in self._dirs:
@@ -81,49 +78,58 @@ class Directories:
         return len(self._dirs)
 
     # ---Private
-    def _default_state_for_path(self, path, deny_list_re=deny_list_re):
+    def _default_state_for_path(self, path):
+        # New logic with regex filters
+        if self._exclude_list is not None and len(self._exclude_list) > 0:
+            # We iterate even if we only have one item here
+            for denied_path_re in self._exclude_list.compiled_combined:
+                if denied_path_re.match(str(path)):
+                    return DirectoryState.Excluded
+            return None
+        # Old default logic, still used during initialization of DirectoryTree:
         # Override this in subclasses to specify the state of some special folders.
-        # if path.name.startswith("."):  # hidden
-        #     return DirectoryState.Excluded
-        for denied_path_re in deny_list_re:
-            if denied_path_re.match(str(path)):
-                return DirectoryState.Excluded
+        if path.name.startswith("."):
+            return DirectoryState.Excluded
 
-    def _get_files(self, from_path, fileclasses, j, deny_list_re=deny_list_re_files):
+    def _get_files(self, from_path, fileclasses, j):
         for root, dirs, files in os.walk(str(from_path)):
             j.check_if_cancelled()
-            root = Path(root)
+            rootPath = Path(root)
             state = self.get_state(root)
             if state == DirectoryState.Excluded:
                 # Recursively get files from folders with lots of subfolder is expensive. However, there
                 # might be a subfolder in this path that is not excluded. What we want to do is to skim
                 # through self.states and see if we must continue, or we can stop right here to save time
-                if not any(p[: len(root)] == root for p in self.states):
+                if not any(p[: len(rootPath)] == rootPath for p in self.states):
                     del dirs[:]
             try:
                 if state != DirectoryState.Excluded:
-                    found_files = []
-                    for f in files:
-                        found = False
-                        for expr in deny_list_re:
-                            found = expr.match(f)
-                            if found:
-                                break
-                        if not found:
-                            found_files.append(fs.get_file(root + f, fileclasses=fileclasses))
+                    # Old logic
+                    if self._exclude_list is None or not len(self._exclude_list):
+                        found_files = [fs.get_file(rootPath + f, fileclasses=fileclasses) for f in files]
+                    else:
+                        found_files = []
+                        for f in files:
+                            found = False
+                            for expr in self._exclude_list.compiled_files_combined:
+                                found = expr.match(f)
+                                if found:
+                                    break
+                            if not found:
+                                found_files.append(fs.get_file(rootPath + f, fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
                     # OS X... In other situations, this forloop will do nothing.
                     for d in dirs[:]:
-                        f = fs.get_file(root + d, fileclasses=fileclasses)
+                        f = fs.get_file(rootPath + d, fileclasses=fileclasses)
                         if f is not None:
                             found_files.append(f)
                             dirs.remove(d)
                     logging.debug(
                         "Collected %d files in folder %s",
                         len(found_files),
-                        str(root),
+                        str(rootPath),
                     )
                     for file in found_files:
                         file.is_ref = state == DirectoryState.Reference
@@ -131,7 +137,7 @@ class Directories:
             except (EnvironmentError, fs.InvalidPath):
                 pass
 
-    def _get_folders(self, from_folder, j, deny_list_re=deny_list_re):
+    def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
         try:
             for subfolder in from_folder.subfolders:
@@ -177,7 +183,7 @@ class Directories:
         except EnvironmentError:
             return []
 
-    def get_files(self, fileclasses=None, j=job.nulljob, deny_list_re=deny_list_re_files):
+    def get_files(self, fileclasses=None, j=job.nulljob):
         """Returns a list of all files that are not excluded.
 
         Returned files also have their ``is_ref`` attr set if applicable.
@@ -185,7 +191,7 @@ class Directories:
         if fileclasses is None:
             fileclasses = [fs.File]
         for path in self._dirs:
-            for file in self._get_files(path, fileclasses=fileclasses, j=j, deny_list_re=deny_list_re):
+            for file in self._get_files(path, fileclasses=fileclasses, j=j):
                 yield file
 
     def get_folders(self, folderclass=None, j=job.nulljob):
@@ -200,7 +206,7 @@ class Directories:
             for folder in self._get_folders(from_folder, j):
                 yield folder
 
-    def get_state(self, path, deny_list_re=deny_list_re):
+    def get_state(self, path):
         """Returns the state of ``path``.
 
         :rtype: :class:`DirectoryState`
@@ -208,7 +214,7 @@ class Directories:
         # direct match? easy result.
         if path in self.states:
             return self.states[path]
-        state = self._default_state_for_path(path, deny_list_re) or DirectoryState.Normal
+        state = self._default_state_for_path(path) or DirectoryState.Normal
         prevlen = 0
         # we loop through the states to find the longest matching prefix
         for p, s in self.states.items():

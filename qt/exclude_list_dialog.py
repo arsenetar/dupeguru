@@ -68,10 +68,13 @@ class ExcludeListDialog(QDialog):
         gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 4, 1)
         gridlayout.addWidget(self.buttonClose, 5, 1)
         layout.addLayout(gridlayout)
+        self.linedit.setPlaceholderText("Type a regular expression here...")
+        self.linedit.setFocus()
 
     # --- model --> view
     def show(self):
         super().show()
+        self.linedit.setFocus()
 
     @pyqtSlot()
     def addStringFromLineEdit(self):

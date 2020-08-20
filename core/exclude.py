@@ -4,6 +4,8 @@
 
 from .markable import Markable
 from xml.etree import ElementTree as ET
+# TODO: perhaps use regex module for better Unicode support? https://pypi.org/project/regex/
+# or perhaps also https://pypi.org/project/re2/
 import re
 from os import sep
 import logging
@@ -50,14 +52,18 @@ class ExcludeList(Markable):
     The downside is we have to compare strings every time we look for an item in the list
     since we use regex strings as keys.
     [regex:str, compilable:bool, error:Exception, compiled:Pattern])
+    If combined_regex is True, the compiled regexes will be combined into one Pattern
+    instead of returned as separate Patterns.
     """
 
     # ---Override
-    def __init__(self):
+    def __init__(self, combined_regex=False):
         Markable.__init__(self)
+        self._combined_regex = combined_regex
         self._excluded = []
         self._count = 0
         self._excluded_compiled = set()
+        self._dirty = True
 
     def __debug_test(self):
         self.test_regexes = [
@@ -81,30 +87,38 @@ class ExcludeList(Markable):
             yield self.is_marked(regex), regex
 
     def __len__(self):
-        return self._count
+        """Returns the number of marked regexes."""
+        return len([x for marked, x in self if marked])
 
     def is_markable(self, regex):
         return self._is_markable(regex)
 
     def _is_markable(self, regex):
         """Return the cached result of "compilable" property"""
-        # FIXME save result of compilation via memoization
-        # return self._excluded.get(regex)[0]
         for item in self._excluded:
             if item[0] == regex:
                 return item[1]
-        return False  # FIXME should not be needed
+        return False  # should not be needed
 
     def _did_mark(self, regex):
+        self._add_compiled(regex)
+
+    def _did_unmark(self, regex):
+        self._remove_compiled(regex)
+
+    def _add_compiled(self, regex):
+        if self._combined_regex:
+            self._dirty = True
+            return
         for item in self._excluded:
             if item[0] == regex:
                 # no need to test if already present since it's a set()
                 self._excluded_compiled.add(item[3])
 
-    def _did_unmark(self, regex):
-        self._remove_compiled(regex)
-
     def _remove_compiled(self, regex):
+        if self._combined_regex:
+            self._dirty = True
+            return
         for item in self._excluded_compiled:
             if regex in item.pattern:
                 self._excluded_compiled.remove(item)
@@ -137,13 +151,41 @@ class ExcludeList(Markable):
     @property
     def compiled(self):
         """Should be used by other classes to retrieve the up-to-date list of patterns."""
-        return self._excluded_compiled
+        if not self._combined_regex:
+            return self._excluded_compiled
+        else:
+            return self.compiled_combined
 
     @property
     def compiled_files(self):
         """Should be used by other classes to retrieve the up-to-date list of patterns
         for files only."""
-        return [compiled_pattern for compiled_pattern in self.compiled if sep not in compiled_pattern.pattern]
+        if not self._combined_regex:
+            # Return each compiled element separately
+            # return [compiled_pattern for compiled_pattern in self.compiled if sep not in compiled_pattern.pattern]
+            for compiled in self.compiled:
+                if sep not in compiled.pattern:
+                    yield compiled
+        else:
+            return self.compiled_files_combined
+
+    @property
+    def compiled_combined(self):
+        if self._dirty:
+            self._cached_compiled_combined =\
+                re.compile('|'.join(x for marked, x in self if marked))
+            # Must compute the filtered out version as well
+            self._cached_compiled_combined_files =\
+                re.compile('|'.join(x for marked, x in self
+                           if marked and sep not in x))
+            self._dirty = False
+        # returned as a tuple to get a free iterator and to avoid subclassing
+        return (self._cached_compiled_combined,)
+
+    @property
+    def compiled_files_combined(self):
+        # returned as a tuple to get a free iterator and to avoid subclassing
+        return (self._cached_compiled_combined_files,)
 
     # ---Public
     def add(self, regex, forced=False):
@@ -164,7 +206,7 @@ class ExcludeList(Markable):
     def _do_add(self, regex, iscompilable, exception, compiled):
         # We need to insert at the top
         self._excluded.insert(0, [regex, iscompilable, exception, compiled])
-        self._count = len(self._excluded)
+        # self._count = len(self._excluded)
 
     def isExcluded(self, regex):
         for item in self._excluded:
@@ -174,7 +216,6 @@ class ExcludeList(Markable):
 
     def clear(self):
         self._excluded = []
-        self._count = 0
 
     def remove(self, regex):
         for item in self._excluded:
@@ -286,9 +327,6 @@ class ExcludeDict(ExcludeList):
         for regex in ordered_keys(self._excluded):
             yield self.is_marked(regex), regex
 
-    def __len__(self):
-        return self._count
-
     def is_markable(self, regex):
         return self._is_markable(regex)
 
@@ -299,16 +337,15 @@ class ExcludeDict(ExcludeList):
             return exists.get("compilable")
         return False
 
-    def _did_mark(self, regex):
-        # self._excluded[regex][0] = True  # is compilable
+    def _add_compiled(self, regex):
+        if self._combined_regex:
+            self._dirty = True
+            return
         try:
             self._excluded_compiled.add(self._excluded[regex]["compiled"])
         except Exception as e:
             print(f"Exception while adding regex {regex} to compiled set: {e}")
             return
-
-    def _did_unmark(self, regex):
-        self._remove_compiled(regex)
 
     def is_compilable(self, regex):
         """Returns the cached "compilable" value"""
@@ -318,24 +355,13 @@ class ExcludeDict(ExcludeList):
         """Return the compilation error message for regex string"""
         return self._excluded.get(regex).get("error")
 
-    @property
-    def compiled(self):
-        """Should be used by other classes to retrieve the up-to-date list of patterns."""
-        return self._excluded_compiled
-
-    @property
-    def compiled_files(self):
-        """Should be used by other classes to retrieve the up-to-date list of patterns
-        for files only."""
-        return [compiled_pattern for compiled_pattern in self.compiled if sep not in compiled_pattern.pattern]
-
     # ---Public
     def _do_add(self, regex, iscompilable, exception, compiled):
         # We always insert at the top, so index should be 0 and other indices should be pushed by one
         for value in self._excluded.values():
             value["index"] += 1
         self._excluded[regex] = {"index": 0, "compilable": iscompilable, "error": exception, "compiled": compiled}
-        self._count = len(self._excluded)
+        # self._count = len(self._excluded)
 
     def isExcluded(self, regex):
         if regex in self._excluded.keys():
@@ -344,13 +370,13 @@ class ExcludeDict(ExcludeList):
 
     def clear(self):
         self._excluded = {}
-        self._count = 0
 
     def remove(self, regex):
         old_value = self._excluded.pop(regex)
         # Bring down all indices which where above it
         index = old_value["index"]
-        if index == len(self._excluded):
+        if index == len(self._excluded) - 1:  # we start at 0...
+            # Old index was at the end, no need to update other indices
             self._remove_compiled(regex)
             return
 

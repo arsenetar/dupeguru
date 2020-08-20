@@ -140,7 +140,7 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.Standard
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        self.directories = directories.Directories()
+        self.directories = directories.Directories(self.exclude_list)
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
         # In addition to "app-level" options, this dictionary also holds options that will be
