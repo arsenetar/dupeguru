@@ -87,7 +87,6 @@ class DupeGuru(QObject):
                 "IgnoreListDialog",
                 parent=self.main_window,
                 model=self.model.ignore_list_dialog)
-            self.ignoreListDialog.accepted.connect(self.main_window.onDialogAccepted)
 
             self.excludeListDialog = self.main_window.createPage(
                 "ExcludeListDialog",
@@ -97,7 +96,8 @@ class DupeGuru(QObject):
         else:
             self.ignoreListDialog = IgnoreListDialog(
                 parent=parent_window, model=self.model.ignore_list_dialog)
-            self.excludeDialog = ExcludeListDialog(parent=parent_window)
+            self.excludeDialog = ExcludeListDialog(
+                app=self, parent=parent_window, model=self.model.exclude_list_dialog)
 
         self.deletionOptions = DeletionOptions(
             parent=parent_window,
@@ -231,6 +231,10 @@ class DupeGuru(QObject):
     def showResultsWindow(self):
         if self.resultWindow is not None:
             if self.use_tabs:
+                if self.main_window.indexOfWidget(self.resultWindow) < 0:
+                    self.main_window.addTab(
+                        self.resultWindow, "Results", switch=True)
+                    return
                 self.main_window.showTab(self.resultWindow)
             else:
                 self.resultWindow.show()
@@ -281,18 +285,25 @@ class DupeGuru(QObject):
                 # we have not instantiated and populated it in their internal list yet
                 index = self.main_window.addTab(
                     self.ignoreListDialog, "Ignore List", switch=True)
-            # if not self.main_window.tabWidget.isTabVisible(index):
+            elif not self.ignoreListDialog.isVisible() and not self.main_window.isTabVisible(index):
+                index = self.main_window.addTab(
+                    self.ignoreListDialog, "Ignore List", switch=True)
+                # self.main_window.showTab(self.ignoreListDialog)
             self.main_window.setTabVisible(index, True)
             self.main_window.setCurrentIndex(index)
         else:
             self.model.ignore_list_dialog.show()
 
     def excludeListTriggered(self):
-        if self.main_window:
+        if self.use_tabs:
             index = self.main_window.indexOfWidget(self.excludeListDialog)
             if index < 0:
                 index = self.main_window.addTab(
                     self.excludeListDialog, "Exclude List", switch=True)
+            elif not self.excludeListDialog.isVisible() and not self.main_window.isTabVisible(index):
+                index = self.main_window.addTab(
+                    self.excludeListDialog, "Exclude List", switch=True)
+                # self.main_window.showTab(self.excludeListDialog)
             self.main_window.setTabVisible(index, True)
             self.main_window.setCurrentIndex(index)
         else:
@@ -362,15 +373,14 @@ class DupeGuru(QObject):
             # or simply delete it on close which is probably cleaner:
             self.details_dialog.setAttribute(Qt.WA_DeleteOnClose)
             self.details_dialog.close()
-            # self.details_dialog.setParent(None)  # seems unnecessary
+            # if we don't do the following, Qt will crash when we recreate the Results dialog
+            self.details_dialog.setParent(None)
         if self.resultWindow is not None:
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
-            self.main_window.addTab(
-                self.resultWindow, "Results", switch=False)
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()

@@ -26,7 +26,7 @@ class TabWindow(QMainWindow):
     def __init__(self, app, **kwargs):
         super().__init__(None, **kwargs)
         self.app = app
-        self.pages = {}
+        self.pages = {}  # This is currently not used anywhere
         self.menubar = None
         self.menuList = set()
         self.last_index = -1
@@ -142,6 +142,7 @@ class TabWindow(QMainWindow):
             and not page_type == "IgnoreListDialog" else False)
         self.app.actionDirectoriesWindow.setEnabled(
             False if page_type == "DirectoriesDialog" else True)
+        # FIXME add ExcludeListDialog here too
 
         self.previous_widget_actions = active_widget.specific_actions
         self.last_index = current_index
@@ -158,12 +159,14 @@ class TabWindow(QMainWindow):
             parent = kwargs.get("parent", self)
             model = kwargs.get("model")
             page = IgnoreListDialog(parent, model)
+            page.accepted.connect(self.onDialogAccepted)
         elif cls == "ExcludeListDialog":
             app = kwargs.get("app", app)
             parent = kwargs.get("parent", self)
             model = kwargs.get("model")
             page = ExcludeListDialog(app, parent, model)
-        self.pages[cls] = page
+            page.accepted.connect(self.onDialogAccepted)
+        self.pages[cls] = page  # Not used, might remove
         return page
 
     def addTab(self, page, title, switch=False):
@@ -208,7 +211,7 @@ class TabWindow(QMainWindow):
 
     # --- Events
     def appWillSavePrefs(self):
-        # Right now this is useless since the first spawn dialog inside the
+        # Right now this is useless since the first spawned dialog inside the
         # QTabWidget will assign its geometry after restoring it
         prefs = self.app.prefs
         prefs.mainWindowIsMaximized = self.isMaximized()
