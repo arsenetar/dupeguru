@@ -279,35 +279,24 @@ class DupeGuru(QObject):
 
     def ignoreListTriggered(self):
         if self.use_tabs:
-            # Fetch the index in the TabWidget or the StackWidget (depends on class):
-            index = self.main_window.indexOfWidget(self.ignoreListDialog)
-            if index < 0:
-                # we have not instantiated and populated it in their internal list yet
-                index = self.main_window.addTab(
-                    self.ignoreListDialog, "Ignore List", switch=True)
-            elif not self.ignoreListDialog.isVisible() and not self.main_window.isTabVisible(index):
-                index = self.main_window.addTab(
-                    self.ignoreListDialog, "Ignore List", switch=True)
-                # self.main_window.showTab(self.ignoreListDialog)
-            self.main_window.setTabVisible(index, True)
-            self.main_window.setCurrentIndex(index)
-        else:
+            self.showTriggeredTabbedDialog(self.ignoreListDialog, "Ignore List")
+        else:  # floating windows
             self.model.ignore_list_dialog.show()
 
     def excludeListTriggered(self):
         if self.use_tabs:
-            index = self.main_window.indexOfWidget(self.excludeListDialog)
-            if index < 0:
-                index = self.main_window.addTab(
-                    self.excludeListDialog, "Exclude List", switch=True)
-            elif not self.excludeListDialog.isVisible() and not self.main_window.isTabVisible(index):
-                index = self.main_window.addTab(
-                    self.excludeListDialog, "Exclude List", switch=True)
-                # self.main_window.showTab(self.excludeListDialog)
-            self.main_window.setTabVisible(index, True)
-            self.main_window.setCurrentIndex(index)
-        else:
-            self.excludeListDialog.show()
+            self.showTriggeredTabbedDialog(self.excludeListDialog, "Exclude List")
+        else:  # floating windows
+            self.model.exclude_list_dialog.show()
+
+    def showTriggeredTabbedDialog(self, dialog, desc_string):
+        """Add tab for dialog, name the tab with desc_string, then show it."""
+        index = self.main_window.indexOfWidget(dialog)
+        # Create the tab if it doesn't exist already
+        if index < 0:  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
+            index = self.main_window.addTab(dialog, desc_string, switch=True)
+        # Show the tab for that widget
+        self.main_window.setCurrentIndex(index)
 
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, "debug.log")
