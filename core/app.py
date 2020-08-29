@@ -26,7 +26,7 @@ from .pe.photo import get_delta_dimensions
 from .util import cmp_value, fix_surrogate_encoding
 from . import directories, results, export, fs, prioritize
 from .ignore import IgnoreList
-from .exclude import ExcludeList as ExcludeList
+from .exclude import ExcludeDict as ExcludeList
 from .scanner import ScanType
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel

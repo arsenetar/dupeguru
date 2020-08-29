@@ -20,6 +20,7 @@ from ..directories import (
     AlreadyThereError,
     InvalidPathError,
 )
+from ..exclude import ExcludeList, ExcludeDict
 
 
 def create_fake_fs(rootpath):
@@ -323,7 +324,7 @@ def test_get_state_returns_excluded_by_default_for_hidden_directories(tmpdir):
 def test_default_path_state_override(tmpdir):
     # It's possible for a subclass to override the default state of a path
     class MyDirectories(Directories):
-        def _default_state_for_path(self, path, denylist):
+        def _default_state_for_path(self, path):
             if "foobar" in path:
                 return DirectoryState.Excluded
 
@@ -343,52 +344,193 @@ def test_default_path_state_override(tmpdir):
     eq_(len(list(d.get_files())), 2)
 
 
-def test_exclude_list_regular_expressions(tmpdir):
-    d = Directories()
-    d.deny_list_str.clear()
-    d.deny_list_re.clear()
-    d.deny_list_re_files.clear()
-    # This should only exlude the directory, but not the contained files if
-    # its status is set to normal after loading it in the directory tree
-    d.deny_list_str.add(r".*Recycle\.Bin$")
-    d.deny_list_str.add(r"denyme.*")
-    # d.deny_list_str.add(r".*denymetoo")
-    # d.deny_list_str.add(r"denyme")
-    d.deny_list_str.add(r".*\/\..*")
-    d.deny_list_str.add(r"^\..*")
-    d.compile_re()
-    p1 = Path(str(tmpdir))
-    # Should be ignored on Windows only (by default)
-    p1["Recycle.Bin"].mkdir()
-    p1["Recycle.Bin/somerecycledfile"].open("w").close()
+class TestExcludeList():
+    def setup_method(self, method):
+        self.d = Directories(exclude_list=ExcludeList(combined_regex=False))
 
-    p1["denyme_blah.txt"].open("w").close()
-    p1["blah_denymetoo"].open("w").close()
-    p1["blah_denyme"].open("w").close()
+    def get_files_and_expect_num_result(self, num_result):
+        """Calls get_files(), get the filenames only, print for debugging.
+        num_result is how many files are expected as a result."""
+        print(f"EXCLUDED REGEX: paths {self.d._exclude_list.compiled_paths} \
+files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled}")
+        files = list(self.d.get_files())
+        files = [file.name for file in files]
+        print(f"FINAL FILES {files}")
+        eq_(len(files), num_result)
+        return files
 
-    p1[".hidden_file"].open("w").close()
-    p1[".hidden_dir"].mkdir()
-    p1[".hidden_dir/somenormalfile1"].open("w").close()
-    p1[".hidden_dir/somenormalfile2_denyme"].open("w").close()
+    def test_exclude_recycle_bin_by_default(self, tmpdir):
+        regex = r"^.*Recycle\.Bin$"
+        self.d._exclude_list.add(regex)
+        self.d._exclude_list.mark(regex)
+        p1 = Path(str(tmpdir))
+        p1["$Recycle.Bin"].mkdir()
+        p1["$Recycle.Bin"]["subdir"].mkdir()
+        self.d.add_path(p1)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]), DirectoryState.Excluded)
+        # By default, subdirs should be excluded too, but this can be overriden separately
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Excluded)
+        self.d.set_state(p1["$Recycle.Bin"]["subdir"], DirectoryState.Normal)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
 
-    p1["foobar"].mkdir()
-    p1["foobar/somefile"].open("w").close()
-    d.add_path(p1)
-    eq_(d.get_state(p1["Recycle.Bin"]), DirectoryState.Excluded)
-    eq_(d.get_state(p1["foobar"]), DirectoryState.Normal)
-    files = list(d.get_files())
-    files = [file.name for file in files]
-    print(f"first files: {files}")
-    assert "somerecycledfile" not in files
-    assert "denyme_blah.txt" not in files
-    assert ".hidden_file" not in files
-    assert "somefile1" not in files
-    assert "somefile2_denyme" not in files
-    # Overriding the default state from the Directory Tree
-    d.set_state(p1["Recycle.Bin"], DirectoryState.Normal)
-    d.set_state(p1[".hidden_dir"], DirectoryState.Normal)
-    files = list(d.get_files())
-    files = [file.name for file in files]
-    print(f"second files: {files}")
-    assert "somerecycledfile" in files
-    assert "somenormalfile1" in files
+    def test_exclude_refined(self, tmpdir):
+        regex1 = r"^\$Recycle\.Bin$"
+        self.d._exclude_list.add(regex1)
+        self.d._exclude_list.mark(regex1)
+        p1 = Path(str(tmpdir))
+        p1["$Recycle.Bin"].mkdir()
+        p1["$Recycle.Bin"]["somefile.png"].open("w").close()
+        p1["$Recycle.Bin"]["some_unwanted_file.jpg"].open("w").close()
+        p1["$Recycle.Bin"]["subdir"].mkdir()
+        p1["$Recycle.Bin"]["subdir"]["somesubdirfile.png"].open("w").close()
+        p1["$Recycle.Bin"]["subdir"]["unwanted_subdirfile.gif"].open("w").close()
+        p1["$Recycle.Bin"]["subdar"].mkdir()
+        p1["$Recycle.Bin"]["subdar"]["somesubdarfile.jpeg"].open("w").close()
+        p1["$Recycle.Bin"]["subdar"]["unwanted_subdarfile.png"].open("w").close()
+        self.d.add_path(p1["$Recycle.Bin"])
+
+        # Filter should set the default state to Excluded
+        eq_(self.d.get_state(p1["$Recycle.Bin"]), DirectoryState.Excluded)
+        # The subdir should inherit its parent state
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Excluded)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdar"]), DirectoryState.Excluded)
+        # Override a child path's state
+        self.d.set_state(p1["$Recycle.Bin"]["subdir"], DirectoryState.Normal)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
+        # Parent should keep its default state, and the other child too
+        eq_(self.d.get_state(p1["$Recycle.Bin"]), DirectoryState.Excluded)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdar"]), DirectoryState.Excluded)
+        # print(f"get_folders(): {[x for x in self.d.get_folders()]}")
+
+        # only the 2 files directly under the Normal directory
+        files = self.get_files_and_expect_num_result(2)
+        assert "somefile.png" not in files
+        assert "some_unwanted_file.jpg" not in files
+        assert "somesubdarfile.jpeg" not in files
+        assert "unwanted_subdarfile.png" not in files
+        assert "somesubdirfile.png" in files
+        assert "unwanted_subdirfile.gif" in files
+        # Overriding the parent should enable all children
+        self.d.set_state(p1["$Recycle.Bin"], DirectoryState.Normal)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdar"]), DirectoryState.Normal)
+        # all files there
+        files = self.get_files_and_expect_num_result(6)
+        assert "somefile.png" in files
+        assert "some_unwanted_file.jpg" in files
+
+        # This should still filter out files under directory, despite the Normal state
+        regex2 = r".*unwanted.*"
+        self.d._exclude_list.add(regex2)
+        self.d._exclude_list.mark(regex2)
+        files = self.get_files_and_expect_num_result(3)
+        assert "somefile.png" in files
+        assert "some_unwanted_file.jpg" not in files
+        assert "unwanted_subdirfile.gif" not in files
+        assert "unwanted_subdarfile.png" not in files
+
+        regex3 = r".*Recycle\.Bin\/.*unwanted.*subdirfile.*"
+        self.d._exclude_list.rename(regex2, regex3)
+        assert self.d._exclude_list.error(regex3) is None
+        # print(f"get_folders(): {[x for x in self.d.get_folders()]}")
+        # Directory shouldn't change its state here, unless explicitely done by user
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
+        files = self.get_files_and_expect_num_result(5)
+        assert "unwanted_subdirfile.gif" not in files
+        assert "unwanted_subdarfile.png" in files
+
+        # using end of line character should only filter the directory, or file ending with subdir
+        regex4 = r".*subdir$"
+        self.d._exclude_list.rename(regex3, regex4)
+        assert self.d._exclude_list.error(regex4) is None
+        p1["$Recycle.Bin"]["subdar"]["file_ending_with_subdir"].open("w").close()
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Excluded)
+        files = self.get_files_and_expect_num_result(4)
+        assert "file_ending_with_subdir" not in files
+        assert "somesubdarfile.jpeg" in files
+        assert "somesubdirfile.png" not in files
+        assert "unwanted_subdirfile.gif" not in files
+        self.d.set_state(p1["$Recycle.Bin"]["subdir"], DirectoryState.Normal)
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
+        # print(f"get_folders(): {[x for x in self.d.get_folders()]}")
+        files = self.get_files_and_expect_num_result(6)
+        assert "file_ending_with_subdir" not in files
+        assert "somesubdirfile.png" in files
+        assert "unwanted_subdirfile.gif" in files
+
+        regex5 = r".*subdir.*"
+        self.d._exclude_list.rename(regex4, regex5)
+        # Files containing substring should be filtered
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
+        # The path should not match, only the filename, the "subdir" in the directory name shouldn't matter
+        p1["$Recycle.Bin"]["subdir"]["file_which_shouldnt_match"].open("w").close()
+        files = self.get_files_and_expect_num_result(5)
+        assert "somesubdirfile.png" not in files
+        assert "unwanted_subdirfile.gif" not in files
+        assert "file_ending_with_subdir" not in files
+        assert "file_which_shouldnt_match" in files
+
+    def test_japanese_unicode(self, tmpdir):
+        p1 = Path(str(tmpdir))
+        p1["$Recycle.Bin"].mkdir()
+        p1["$Recycle.Bin"]["somerecycledfile.png"].open("w").close()
+        p1["$Recycle.Bin"]["some_unwanted_file.jpg"].open("w").close()
+        p1["$Recycle.Bin"]["subdir"].mkdir()
+        p1["$Recycle.Bin"]["subdir"]["過去白濁物語～]_カラー.jpg"].open("w").close()
+        p1["$Recycle.Bin"]["思叫物語"].mkdir()
+        p1["$Recycle.Bin"]["思叫物語"]["なししろ会う前"].open("w").close()
+        p1["$Recycle.Bin"]["思叫物語"]["堂～ロ"].open("w").close()
+        self.d.add_path(p1["$Recycle.Bin"])
+        regex3 = r".*物語.*"
+        self.d._exclude_list.add(regex3)
+        self.d._exclude_list.mark(regex3)
+        # print(f"get_folders(): {[x for x in self.d.get_folders()]}")
+        eq_(self.d.get_state(p1["$Recycle.Bin"]["思叫物語"]), DirectoryState.Excluded)
+        files = self.get_files_and_expect_num_result(2)
+        assert "過去白濁物語～]_カラー.jpg" not in files
+        assert "なししろ会う前" not in files
+        assert "堂～ロ" not in files
+        # using end of line character should only filter that directory, not affecting its files
+        regex4 = r".*物語$"
+        self.d._exclude_list.rename(regex3, regex4)
+        assert self.d._exclude_list.error(regex4) is None
+        self.d.set_state(p1["$Recycle.Bin"]["思叫物語"], DirectoryState.Normal)
+        files = self.get_files_and_expect_num_result(5)
+        assert "過去白濁物語～]_カラー.jpg" in files
+        assert "なししろ会う前" in files
+        assert "堂～ロ" in files
+
+    def test_get_state_returns_excluded_for_hidden_directories_and_files(self, tmpdir):
+        # This regex only work for files, not paths
+        regex = r"^\..*$"
+        self.d._exclude_list.add(regex)
+        self.d._exclude_list.mark(regex)
+        p1 = Path(str(tmpdir))
+        p1["foobar"].mkdir()
+        p1["foobar"][".hidden_file.txt"].open("w").close()
+        p1["foobar"][".hidden_dir"].mkdir()
+        p1["foobar"][".hidden_dir"]["foobar.jpg"].open("w").close()
+        p1["foobar"][".hidden_dir"][".hidden_subfile.png"].open("w").close()
+        self.d.add_path(p1["foobar"])
+        # It should not inherit its parent's state originally
+        eq_(self.d.get_state(p1["foobar"][".hidden_dir"]), DirectoryState.Excluded)
+        self.d.set_state(p1["foobar"][".hidden_dir"], DirectoryState.Normal)
+        # The files should still be filtered
+        files = self.get_files_and_expect_num_result(1)
+        assert ".hidden_file.txt" not in files
+        assert ".hidden_subfile.png" not in files
+        assert "foobar.jpg" in files
+
+
+class TestExcludeDict(TestExcludeList):
+    def setup_method(self, method):
+        self.d = Directories(exclude_list=ExcludeDict(combined_regex=False))
+
+
+class TestExcludeListCombined(TestExcludeList):
+    def setup_method(self, method):
+        self.d = Directories(exclude_list=ExcludeList(combined_regex=True))
+
+
+class TestExcludeDictCombined(TestExcludeList):
+    def setup_method(self, method):
+        self.d = Directories(exclude_list=ExcludeDict(combined_regex=True))

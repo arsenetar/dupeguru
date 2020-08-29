@@ -80,13 +80,12 @@ class Directories:
     # ---Private
     def _default_state_for_path(self, path):
         # New logic with regex filters
-        if self._exclude_list is not None and len(self._exclude_list) > 0:
+        if self._exclude_list is not None and self._exclude_list.mark_count > 0:
             # We iterate even if we only have one item here
-            for denied_path_re in self._exclude_list.compiled_combined:
-                if denied_path_re.match(str(path)):
+            for denied_path_re in self._exclude_list.compiled:
+                if denied_path_re.match(str(path.name)):
                     return DirectoryState.Excluded
-            return None
-        # Old default logic, still used during initialization of DirectoryTree:
+            # return # We still use the old logic to force state on hidden dirs
         # Override this in subclasses to specify the state of some special folders.
         if path.name.startswith("."):
             return DirectoryState.Excluded
@@ -95,7 +94,7 @@ class Directories:
         for root, dirs, files in os.walk(str(from_path)):
             j.check_if_cancelled()
             rootPath = Path(root)
-            state = self.get_state(root)
+            state = self.get_state(rootPath)
             if state == DirectoryState.Excluded:
                 # Recursively get files from folders with lots of subfolder is expensive. However, there
                 # might be a subfolder in this path that is not excluded. What we want to do is to skim
@@ -105,16 +104,22 @@ class Directories:
             try:
                 if state != DirectoryState.Excluded:
                     # Old logic
-                    if self._exclude_list is None or not len(self._exclude_list):
+                    if self._exclude_list is None or not self._exclude_list.mark_count:
                         found_files = [fs.get_file(rootPath + f, fileclasses=fileclasses) for f in files]
                     else:
                         found_files = []
+                        # print(f"len of files: {len(files)} {files}")
                         for f in files:
                             found = False
-                            for expr in self._exclude_list.compiled_files_combined:
-                                found = expr.match(f)
-                                if found:
+                            for expr in self._exclude_list.compiled_files:
+                                if expr.match(f):
+                                    found = True
                                     break
+                            if not found:
+                                for expr in self._exclude_list.compiled_paths:
+                                    if expr.match(root + os.sep + f):
+                                        found = True
+                                        break
                             if not found:
                                 found_files.append(fs.get_file(rootPath + f, fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
@@ -215,8 +220,14 @@ class Directories:
         if path in self.states:
             return self.states[path]
         state = self._default_state_for_path(path) or DirectoryState.Normal
+        # Save non-default states in cache, necessary for _get_files()
+        if state != DirectoryState.Normal:
+            self.states[path] = state
+            return state
+
         prevlen = 0
         # we loop through the states to find the longest matching prefix
+        # if the parent has a state in cache, return that state
         for p, s in self.states.items():
             if p.is_parent_of(path) and len(p) > prevlen:
                 prevlen = len(p)
