@@ -366,7 +366,8 @@ class DupeGuru(QObject):
             self.details_dialog.setParent(None)
         if self.resultWindow is not None:
             self.resultWindow.close()
-            self.resultWindow.setParent(None)
+            # This is better for tabs, as it takes care of duplicate items in menu bar
+            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(None)
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
