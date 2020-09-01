@@ -96,7 +96,7 @@ class TestCaseDictXMLLoading(TestCaseListXMLLoading):
 class TestCaseListEmpty:
     def setup_method(self, method):
         self.app = DupeGuru()
-        self.app.exclude_list = ExcludeList()
+        self.app.exclude_list = ExcludeList(union_regex=False)
         self.exclude_list = self.app.exclude_list
 
     def test_add_mark_and_remove_regex(self):
@@ -216,29 +216,29 @@ class TestCaseDictEmpty(TestCaseListEmpty):
     """Same, but with dictionary implementation"""
     def setup_method(self, method):
         self.app = DupeGuru()
-        self.app.exclude_list = ExcludeDict()
+        self.app.exclude_list = ExcludeDict(union_regex=False)
         self.exclude_list = self.app.exclude_list
 
 
-def split_combined(pattern_object):
-    """Returns list of strings for each combined pattern"""
+def split_union(pattern_object):
+    """Returns list of strings for each union pattern"""
     return [x for x in pattern_object.pattern.split("|")]
 
 
 class TestCaseCompiledList():
-    """Test consistency between combined or not"""
+    """Test consistency between union or and separate versions."""
     def setup_method(self, method):
-        self.e_separate = ExcludeList(combined_regex=False)
+        self.e_separate = ExcludeList(union_regex=False)
         self.e_separate.restore_defaults()
-        self.e_combined = ExcludeList(combined_regex=True)
-        self.e_combined.restore_defaults()
+        self.e_union = ExcludeList(union_regex=True)
+        self.e_union.restore_defaults()
 
     def test_same_number_of_expressions(self):
-        # We only get one combined Pattern item in a tuple, which is made of however many parts
-        eq_(len(split_combined(self.e_combined.compiled[0])), len(default_regexes))
+        # We only get one union Pattern item in a tuple, which is made of however many parts
+        eq_(len(split_union(self.e_union.compiled[0])), len(default_regexes))
         # We get as many as there are marked items
         eq_(len(self.e_separate.compiled), len(default_regexes))
-        exprs = split_combined(self.e_combined.compiled[0])
+        exprs = split_union(self.e_union.compiled[0])
         # We should have the same number and the same expressions
         eq_(len(exprs), len(self.e_separate.compiled))
         for expr in self.e_separate.compiled:
@@ -249,29 +249,30 @@ class TestCaseCompiledList():
         regex1 = r"test/one/sub"
         self.e_separate.add(regex1)
         self.e_separate.mark(regex1)
-        self.e_combined.add(regex1)
-        self.e_combined.mark(regex1)
+        self.e_union.add(regex1)
+        self.e_union.mark(regex1)
         separate_compiled_dirs = self.e_separate.compiled
         separate_compiled_files = [x for x in self.e_separate.compiled_files]
         # HACK we need to call compiled property FIRST to generate the cache
-        combined_compiled_dirs = self.e_combined.compiled
-        # print(f"type: {type(self.e_combined.compiled_files[0])}")
+        union_compiled_dirs = self.e_union.compiled
+        # print(f"type: {type(self.e_union.compiled_files[0])}")
         # A generator returning only one item... ugh
-        combined_compiled_files = [x for x in self.e_combined.compiled_files][0]
-        print(f"compiled files: {combined_compiled_files}")
+        union_compiled_files = [x for x in self.e_union.compiled_files][0]
+        print(f"compiled files: {union_compiled_files}")
         # Separate should give several plus the one added
         eq_(len(separate_compiled_dirs), len(default_regexes) + 1)
         # regex1 shouldn't be in the "files" version
         eq_(len(separate_compiled_files), len(default_regexes))
         # Only one Pattern returned, which when split should be however many + 1
-        eq_(len(split_combined(combined_compiled_dirs[0])), len(default_regexes) + 1)
+        eq_(len(split_union(union_compiled_dirs[0])), len(default_regexes) + 1)
         # regex1 shouldn't be here either
-        eq_(len(split_combined(combined_compiled_files)), len(default_regexes))
+        eq_(len(split_union(union_compiled_files)), len(default_regexes))
 
 
 class TestCaseCompiledDict(TestCaseCompiledList):
+    """Test the dictionary version"""
     def setup_method(self, method):
-        self.e_separate = ExcludeDict(combined_regex=False)
+        self.e_separate = ExcludeDict(union_regex=False)
         self.e_separate.restore_defaults()
-        self.e_combined = ExcludeDict(combined_regex=True)
-        self.e_combined.restore_defaults()
+        self.e_union = ExcludeDict(union_regex=True)
+        self.e_union.restore_defaults()

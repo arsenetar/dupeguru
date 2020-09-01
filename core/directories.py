@@ -59,8 +59,6 @@ class Directories:
         # {path: state}
         self.states = {}
         self._exclude_list = exclude_list
-        if exclude_list is not None:
-            exclude_list._combined_regex = False  # TODO make a setter
 
     def __contains__(self, path):
         for p in self._dirs:

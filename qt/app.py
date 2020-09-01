@@ -137,7 +137,7 @@ class DupeGuru(QObject):
                 tr("Clear Picture Cache"),
                 self.clearPictureCacheTriggered,
             ),
-            ("actionExcludeList", "", "", tr("Exclude list"), self.excludeListTriggered),
+            ("actionExcludeList", "", "", tr("Exclusion Filters"), self.excludeListTriggered),
             ("actionShowHelp", "F1", "", tr("dupeGuru Help"), self.showHelpTriggered),
             ("actionAbout", "", "", tr("About dupeGuru"), self.showAboutBoxTriggered),
             (
@@ -285,7 +285,7 @@ class DupeGuru(QObject):
 
     def excludeListTriggered(self):
         if self.use_tabs:
-            self.showTriggeredTabbedDialog(self.excludeListDialog, "Exclude List")
+            self.showTriggeredTabbedDialog(self.excludeListDialog, "Exclusion Filters")
         else:  # floating windows
             self.model.exclude_list_dialog.show()
 

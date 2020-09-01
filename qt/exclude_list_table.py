@@ -2,9 +2,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QModelIndex
-from PyQt5.QtGui import QFont, QFontMetrics, QIcon
-from PyQt5.QtWidgets import QTableView
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
 
 from qtlib.column import Column
 from qtlib.table import Table
@@ -20,13 +19,12 @@ class ExcludeListTable(Table):
     def __init__(self, app, view, **kwargs):
         model = app.model.exclude_list_dialog.exclude_list_table  # pointer to GUITable
         super().__init__(model, view, **kwargs)
-        # view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
         font = view.font()
         font.setPointSize(app.prefs.tableFontSize)
         view.setFont(font)
         fm = QFontMetrics(font)
         view.verticalHeader().setDefaultSectionSize(fm.height() + 2)
-        app.willSavePrefs.connect(self.appWillSavePrefs)
+        # app.willSavePrefs.connect(self.appWillSavePrefs)
 
     def _getData(self, row, column, role):
         if column.name == "marked":
@@ -41,6 +39,9 @@ class ExcludeListTable(Table):
             return row.data[column.name]
         elif role == Qt.FontRole:
             return QFont(self.view.font())
+        elif role == Qt.BackgroundRole and column.name == "regex":
+            if row.highlight:
+                return QColor(10, 120, 10)  # green
         elif role == Qt.EditRole:
             if column.name == "regex":
                 return row.data[column.name]
@@ -65,24 +66,10 @@ class ExcludeListTable(Table):
                 return self.model.rename_selected(value)
         return False
 
-    def sort(self, column, order):
-        column = self.model.COLUMNS[column]
-        self.model.sort(column.name, order == Qt.AscendingOrder)
+    # def sort(self, column, order):
+    #     column = self.model.COLUMNS[column]
+    #     self.model.sort(column.name, order == Qt.AscendingOrder)
 
-    # --- Events
-    def appWillSavePrefs(self):
-        self.model.columns.save_columns()
-
-    # --- model --> view
-    def invalidate_markings(self):
-        # redraw view
-        # HACK. this is the only way I found to update the widget without reseting everything
-        self.view.scroll(0, 1)
-        self.view.scroll(0, -1)
-
-
-class ExcludeView(QTableView):
-    def mouseDoubleClickEvent(self, event):
-        # FIXME this doesn't seem to do anything relevant
-        self.doubleClicked.emit(QModelIndex())
-        # We don't call the superclass' method because the default behavior is to rename the cell.
+    # # --- Events
+    # def appWillSavePrefs(self):
+    #     self.model.columns.save_columns()

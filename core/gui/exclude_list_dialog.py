@@ -7,13 +7,10 @@
 
 # from hscommon.trans import tr
 from .exclude_list_table import ExcludeListTable
+import logging
 
 
 class ExcludeListDialogCore:
-    # --- View interface
-    # show()
-    #
-
     def __init__(self, app):
         self.app = app
         self.exclude_list = self.app.exclude_list  # Markable from exclude.py
@@ -43,7 +40,7 @@ class ExcludeListDialogCore:
             self.refresh()
             return True
         except Exception as e:
-            print(f"dupeGuru Warning: {e}")
+            logging.warning(f"Error while renaming regex to {newregex}: {e}")
         return False
 
     def add(self, regex):
@@ -53,6 +50,21 @@ class ExcludeListDialogCore:
             raise(e)
         self.exclude_list.mark(regex)
         self.exclude_list_table.add(regex)
+
+    def test_string(self, test_string):
+        """Sets property on row to highlight if its regex matches test_string supplied."""
+        matched = False
+        for row in self.exclude_list_table.rows:
+            if self.exclude_list.get_compiled(row.regex).match(test_string):
+                matched = True
+                row.highlight = True
+            else:
+                row.highlight = False
+        return matched
+
+    def reset_rows_highlight(self):
+        for row in self.exclude_list_table.rows:
+            row.highlight = False
 
     def show(self):
         self.view.show()

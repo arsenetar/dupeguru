@@ -31,8 +31,7 @@ class ExcludeListTable(GUITable, DupeGuruGUIObject):
     # --- Virtual
     def _do_add(self, regex):
         """(Virtual) Creates a new row, adds it in the table.
-        Returns ``(row, insert_index)``.
-        """
+        Returns ``(row, insert_index)``."""
         # Return index 0 to insert at the top
         return ExcludeListRow(self, self.dialog.exclude_list.is_marked(regex), regex), 0
 
@@ -43,20 +42,11 @@ class ExcludeListTable(GUITable, DupeGuruGUIObject):
     def add(self, regex):
         row, insert_index = self._do_add(regex)
         self.insert(insert_index, row)
-        # self.select([insert_index])
         self.view.refresh()
 
     def _fill(self):
         for enabled, regex in self.dialog.exclude_list:
             self.append(ExcludeListRow(self, enabled, regex))
-
-    # def remove(self):
-    #     super().remove(super().selected_rows)
-
-    # def _update_selection(self):
-    #     # rows = self.selected_rows
-    #     # self.dialog._select_rows(list(map(attrgetter("_dupe"), rows)))
-    #     self.dialog.remove_selected()
 
     def refresh(self, refresh_view=True):
         """Override to avoid keeping previous selection in case of multiple rows
@@ -64,9 +54,6 @@ class ExcludeListTable(GUITable, DupeGuruGUIObject):
         self.cancel_edits()
         del self[:]
         self._fill()
-        # sd = self._sort_descriptor
-        # if sd is not None:
-        #     super().sort_by(self, column_name=sd.column, desc=sd.desc)
         if refresh_view:
             self.view.refresh()
 
@@ -76,18 +63,14 @@ class ExcludeListRow(Row):
         Row.__init__(self, table)
         self._app = table.app
         self._data = None
-        self.enabled_original = enabled
-        self.regex_original = regex
         self.enabled = str(enabled)
         self.regex = str(regex)
+        self.highlight = False
 
     @property
     def data(self):
-        def get_display_info(row):
-            return {"marked": row.enabled, "regex": row.regex}
-
         if self._data is None:
-            self._data = get_display_info(self)
+            self._data = {"marked": self.enabled, "regex": self.regex}
         return self._data
 
     @property
@@ -113,10 +96,3 @@ class ExcludeListRow(Row):
             return self._app.exclude_list.error(self.regex).msg
         else:
             return message  # Exception object
-    # @property
-    # def regex(self):
-    #     return self.regex
-
-    # @regex.setter
-    # def regex(self, value):
-    #     self._app.exclude_list.add(self._regex, value)

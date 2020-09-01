@@ -2,12 +2,13 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import re
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtWidgets import (
     QPushButton, QLineEdit, QVBoxLayout, QGridLayout, QDialog,
     QTableView, QAbstractItemView, QSpacerItem, QSizePolicy, QHeaderView
 )
-from .exclude_list_table import ExcludeListTable, ExcludeView
+from .exclude_list_table import ExcludeListTable
 
 from core.exclude import AlreadyThereException
 from hscommon.trans import trget
@@ -24,12 +25,18 @@ class ExcludeListDialog(QDialog):
         self.model = model  # ExcludeListDialogCore
         self.model.view = self
         self.table = ExcludeListTable(app, view=self.tableView)  # Qt ExcludeListTable
+        self._row_matched = False  # test if at least one row matched our test string
+        self._input_styled = False
 
         self.buttonAdd.clicked.connect(self.addStringFromLineEdit)
         self.buttonRemove.clicked.connect(self.removeSelected)
         self.buttonRestore.clicked.connect(self.restoreDefaults)
         self.buttonClose.clicked.connect(self.accept)
         self.buttonHelp.clicked.connect(self.display_help_message)
+        self.buttonTestString.clicked.connect(self.onTestStringButtonClicked)
+        self.inputLine.textEdited.connect(self.reset_input_style)
+        self.testLine.textEdited.connect(self.reset_input_style)
+        self.testLine.textEdited.connect(self.reset_table_style)
 
     def _setupUI(self):
         layout = QVBoxLayout(self)
@@ -37,10 +44,12 @@ class ExcludeListDialog(QDialog):
         self.buttonAdd = QPushButton(tr("Add"))
         self.buttonRemove = QPushButton(tr("Remove Selected"))
         self.buttonRestore = QPushButton(tr("Restore defaults"))
+        self.buttonTestString = QPushButton(tr("Test string"))
         self.buttonClose = QPushButton(tr("Close"))
         self.buttonHelp = QPushButton(tr("Help"))
-        self.linedit = QLineEdit()
-        self.tableView = ExcludeView()
+        self.inputLine = QLineEdit()
+        self.testLine = QLineEdit()
+        self.tableView = QTableView()
         triggers = (
             QAbstractItemView.DoubleClicked
             | QAbstractItemView.EditKeyPressed
@@ -59,26 +68,31 @@ class ExcludeListDialog(QDialog):
         hheader.setStretchLastSection(True)
         hheader.setHighlightSections(False)
         hheader.setVisible(True)
-        gridlayout.addWidget(self.linedit, 0, 0)
+        gridlayout.addWidget(self.inputLine, 0, 0)
         gridlayout.addWidget(self.buttonAdd, 0, 1, Qt.AlignLeft)
         gridlayout.addWidget(self.buttonRemove, 1, 1, Qt.AlignLeft)
         gridlayout.addWidget(self.buttonRestore, 2, 1, Qt.AlignLeft)
         gridlayout.addWidget(self.buttonHelp, 3, 1, Qt.AlignLeft)
-        gridlayout.addWidget(self.tableView, 1, 0, 5, 1)
+        gridlayout.addWidget(self.buttonClose, 4, 1)
+        gridlayout.addWidget(self.tableView, 1, 0, 6, 1)
         gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 4, 1)
-        gridlayout.addWidget(self.buttonClose, 5, 1)
+        gridlayout.addWidget(self.buttonTestString, 6, 1)
+        gridlayout.addWidget(self.testLine, 6, 0)
+
         layout.addLayout(gridlayout)
-        self.linedit.setPlaceholderText("Type a regular expression here...")
-        self.linedit.setFocus()
+        self.inputLine.setPlaceholderText("Type a python regular expression here...")
+        self.inputLine.setFocus()
+        self.testLine.setPlaceholderText("Type a file system path or filename here...")
+        self.testLine.setClearButtonEnabled(True)
 
     # --- model --> view
     def show(self):
         super().show()
-        self.linedit.setFocus()
+        self.inputLine.setFocus()
 
     @pyqtSlot()
     def addStringFromLineEdit(self):
-        text = self.linedit.text()
+        text = self.inputLine.text()
         if not text:
             return
         try:
@@ -89,7 +103,7 @@ class ExcludeListDialog(QDialog):
         except Exception as e:
             self.app.show_message(f"Expression is invalid: {e}")
             return
-        self.linedit.clear()
+        self.inputLine.clear()
 
     def removeSelected(self):
         self.model.remove_selected()
@@ -97,8 +111,54 @@ class ExcludeListDialog(QDialog):
     def restoreDefaults(self):
         self.model.restore_defaults()
 
+    def onTestStringButtonClicked(self):
+        input_text = self.testLine.text()
+        if not input_text:
+            self.reset_input_style()
+            return
+        # if at least one row matched, we know whether table is highlighted or not
+        self._row_matched = self.model.test_string(input_text)
+        self.tableView.update()
+
+        input_regex = self.inputLine.text()
+        if not input_regex:
+            self.reset_input_style()
+            return
+        try:
+            compiled = re.compile(input_regex)
+        except re.error:
+            self.reset_input_style()
+            return
+        match = compiled.match(input_text)
+        if match:
+            self._input_styled = True
+            self.inputLine.setStyleSheet("background-color: rgb(10, 120, 10);")
+        else:
+            self.reset_input_style()
+
+    def reset_input_style(self):
+        """Reset regex input line background"""
+        if self._input_styled:
+            self._input_styled = False
+            self.inputLine.setStyleSheet(self.styleSheet())
+
+    def reset_table_style(self):
+        if self._row_matched:
+            self._row_matched = False
+            self.model.reset_rows_highlight()
+        self.tableView.update()
+
     def display_help_message(self):
-        self.app.show_message("""\
-These python regular expressions will filter out files and directory paths \
-specified here.\nDuring directory selection, paths filtered here will be added as \
-"Skipped" by default, but regular files will be ignored altogether during scans.""")
+        self.app.show_message(tr("""\
+These (case sensitive) python regular expressions will filter out files during scans.<br>\
+Directores will also have their <strong>default state</strong> set to Excluded \
+in the Directories tab if their name happen to match one of the regular expressions.<br>\
+For each file collected two tests are perfomed on each of them to determine whether or not to filter them out:<br>\
+<li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>
+<li>2. Regular expressions with no path separator in them will be compared to the full path to the file.</li><br>
+Example: if you want to filter out .PNG files from the "My Pictures" directory only:<br>\
+<code>.*My\\sPictures\\\\.*\\.png</code><br><br>\
+You can test the regular expression with the test string feature by pasting a fake path in it:<br>\
+<code>C:\\\\User\\My Pictures\\test.png</code><br><br>
+Matching regular expressions will be highlighted.<br><br>
+Directories and files starting with a period '.' are filtered out by default.<br><br>"""))

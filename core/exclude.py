@@ -20,7 +20,7 @@ default_regexes = [r"^thumbs\.db$",  # Obsolete after WindowsXP
                    r"^\$Recycle\.Bin$",  # Windows
                    r"^\..*"  # Hidden files
                    ]
-# These are too agressive
+# These are too broad
 forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\..*"]
 
 
@@ -53,20 +53,21 @@ class AlreadyThereException(Exception):
 
 
 class ExcludeList(Markable):
-    """Exclude list of regular expression strings to filter out directories
-    and files that we want to avoid scanning.
-    The list() class allows us to preserve item order without too much hassle.
-    The downside is we have to compare strings every time we look for an item in the list
-    since we use regex strings as keys.
-    [regex:str, compilable:bool, error:Exception, compiled:Pattern])
-    If combined_regex is True, the compiled regexes will be combined into one Pattern
-    instead of returned as separate Patterns.
-    """
+    """A list of lists holding regular expression strings and the compiled re.Pattern"""
+
+    # Used to filter out directories and files that we would rather avoid scanning.
+    # The list() class allows us to preserve item order without too much hassle.
+    # The downside is we have to compare strings every time we look for an item in the list
+    # since we use regex strings as keys.
+    # If _use_union is True, the compiled regexes will be combined into one single
+    # Pattern instead of separate Patterns which may or may not give better
+    # performance compared to looping through each Pattern individually.
 
     # ---Override
-    def __init__(self, combined_regex=False):
+    def __init__(self, union_regex=True):
         Markable.__init__(self)
-        self._use_combined = combined_regex
+        self._use_union = union_regex
+        # list([str regex, bool iscompilable, re.error exception, Pattern compiled], ...)
         self._excluded = []
         self._excluded_compiled = set()
         self._dirty = True
@@ -85,6 +86,7 @@ class ExcludeList(Markable):
         return len(self._excluded)
 
     def __getitem__(self, key):
+        """Returns the list item corresponding to key."""
         for item in self._excluded:
             if item[0] == key:
                 return item
@@ -98,6 +100,10 @@ class ExcludeList(Markable):
         # TODO if necessary
         pass
 
+    def get_compiled(self, key):
+        """Returns the (precompiled) Pattern for key"""
+        return self.__getitem__(key)[3]
+
     def is_markable(self, regex):
         return self._is_markable(regex)
 
@@ -106,7 +112,7 @@ class ExcludeList(Markable):
         for item in self._excluded:
             if item[0] == regex:
                 return item[1]
-        return False  # should not be necessary, regex SHOULD be in there
+        return False  # should not be necessary, the regex SHOULD be in there
 
     def _did_mark(self, regex):
         self._add_compiled(regex)
@@ -116,7 +122,7 @@ class ExcludeList(Markable):
 
     def _add_compiled(self, regex):
         self._dirty = True
-        if self._use_combined:
+        if self._use_union:
             return
         for item in self._excluded:
             # FIXME probably faster to just rebuild the set from the compiled instead of comparing strings
@@ -127,7 +133,7 @@ class ExcludeList(Markable):
 
     def _remove_compiled(self, regex):
         self._dirty = True
-        if self._use_combined:
+        if self._use_union:
             return
         for item in self._excluded_compiled:
             if regex in item.pattern:
@@ -153,50 +159,51 @@ class ExcludeList(Markable):
         return True, None, compiled
 
     def error(self, regex):
-        """Return the compilation error Exception for regex. It should have a "msg" attr."""
+        """Return the compilation error Exception for regex.
+        It should have a "msg" attr."""
         for item in self._excluded:
             if item[0] == regex:
                 return item[2]
 
-    def build_compiled_caches(self, combined=False):
-        if not combined:
+    def build_compiled_caches(self, union=False):
+        if not union:
             self._cached_compiled_files =\
                 [x for x in self._excluded_compiled if sep not in x.pattern]
             self._cached_compiled_paths =\
                 [x for x in self._excluded_compiled if sep in x.pattern]
             return
-        # HACK returned as a tuple to get a free iterator to keep interface the same
-        # regardless of whether the client asked for combined or not
         marked_count = [x for marked, x in self if marked]
         # If there is no item, the compiled Pattern will be '' and match everything!
         if not marked_count:
-            self._cached_compiled_combined_all = []
-            self._cached_compiled_combined_files = []
-            self._cached_compiled_combined_paths = []
+            self._cached_compiled_union_all = []
+            self._cached_compiled_union_files = []
+            self._cached_compiled_union_paths = []
         else:
-            self._cached_compiled_combined_all =\
+            # HACK returned as a tuple to get a free iterator and keep interface
+            # the same regardless of whether the client asked for union or not
+            self._cached_compiled_union_all =\
                 (re.compile('|'.join(marked_count)),)
             files_marked = [x for x in marked_count if sep not in x]
             if not files_marked:
-                self._cached_compiled_combined_files = tuple()
+                self._cached_compiled_union_files = tuple()
             else:
-                self._cached_compiled_combined_files =\
+                self._cached_compiled_union_files =\
                     (re.compile('|'.join(files_marked)),)
             paths_marked = [x for x in marked_count if sep in x]
             if not paths_marked:
-                self._cached_compiled_combined_paths = tuple()
+                self._cached_compiled_union_paths = tuple()
             else:
-                self._cached_compiled_combined_paths =\
+                self._cached_compiled_union_paths =\
                     (re.compile('|'.join(paths_marked)),)
 
     @property
     def compiled(self):
         """Should be used by other classes to retrieve the up-to-date list of patterns."""
-        if self._use_combined:
+        if self._use_union:
             if self._dirty:
                 self.build_compiled_caches(True)
                 self._dirty = False
-            return self._cached_compiled_combined_all
+            return self._cached_compiled_union_all
         return self._excluded_compiled
 
     @property
@@ -204,23 +211,26 @@ class ExcludeList(Markable):
         """When matching against filenames only, we probably won't be seeing any
         directory separator, so we filter out regexes with os.sep in them.
         The interface should be expected to be a generator, even if it returns only
-        one item (one Pattern in the combined case)."""
+        one item (one Pattern in the union case)."""
         if self._dirty:
-            self.build_compiled_caches(True if self._use_combined else False)
+            self.build_compiled_caches(True if self._use_union else False)
             self._dirty = False
-        return self._cached_compiled_combined_files if self._use_combined else self._cached_compiled_files
+        return self._cached_compiled_union_files if self._use_union\
+            else self._cached_compiled_files
 
     @property
     def compiled_paths(self):
         """Returns patterns with only separators in them, for more precise filtering."""
         if self._dirty:
-            self.build_compiled_caches(True if self._use_combined else False)
+            self.build_compiled_caches(True if self._use_union else False)
             self._dirty = False
-        return self._cached_compiled_combined_paths if self._use_combined else self._cached_compiled_paths
+        return self._cached_compiled_union_paths if self._use_union\
+            else self._cached_compiled_paths
 
     # ---Public
     def add(self, regex, forced=False):
-        """This interface should throw exceptions if there is an error during regex compilation"""
+        """This interface should throw exceptions if there is an error during
+        regex compilation"""
         if self.isExcluded(regex):
             # This exception should never be ignored
             raise AlreadyThereException()
@@ -229,7 +239,8 @@ class ExcludeList(Markable):
 
         iscompilable, exception, compiled = self.compile_re(regex)
         if not iscompilable and not forced:
-            # This exception can be ignored, but taken into account to avoid adding to compiled set
+            # This exception can be ignored, but taken into account
+            # to avoid adding to compiled set
             raise exception
         else:
             self._do_add(regex, iscompilable, exception, compiled)
@@ -249,10 +260,6 @@ class ExcludeList(Markable):
                 return True
         return False
 
-    def clear(self):
-        """Not used and needs refactoring"""
-        self._excluded = []
-
     def remove(self, regex):
         for item in self._excluded:
             if item[0] == regex:
@@ -260,7 +267,6 @@ class ExcludeList(Markable):
         self._remove_compiled(regex)
 
     def rename(self, regex, newregex):
-        # if regex not in self._excluded: return
         if regex == newregex:
             return
         found = False
@@ -318,7 +324,8 @@ class ExcludeList(Markable):
                 # "forced" avoids compilation exceptions and adds anyway
                 self.add(regex_string, forced=True)
             except AlreadyThereException:
-                logging.error(f"Regex \"{regex_string}\" loaded from XML was already present in the list.")
+                logging.error(f"Regex \"{regex_string}\" \
+loaded from XML was already present in the list.")
                 continue
             if exclude_item.get("marked") == "y":
                 marked.add(regex_string)
@@ -328,9 +335,7 @@ class ExcludeList(Markable):
 
     def save_to_xml(self, outfile):
         """Create a XML file that can be used by load_from_xml.
-
-        outfile can be a file object or a filename.
-        """
+        outfile can be a file object or a filename."""
         root = ET.Element("exclude_list")
         # reversed in order to keep order of entries when reloading from xml later
         for item in reversed(self._excluded):
@@ -343,15 +348,23 @@ class ExcludeList(Markable):
 
 
 class ExcludeDict(ExcludeList):
-    """Version implemented around a dictionary instead of a list, which implies
-    to keep the index of each string-key as its sub-element and keep it updated
-    whenever insert/remove is done."""
+    """Exclusion list holding a set of regular expressions as keys, the compiled
+    Pattern, compilation error and compilable boolean as values."""
+    # Implemntation around a dictionary instead of a list, which implies
+    # to keep the index of each string-key as its sub-element and keep it updated
+    # whenever insert/remove is done.
 
-    def __init__(self, combined_regex=False):
+    def __init__(self, union_regex=False):
         Markable.__init__(self)
-        self._use_combined = combined_regex
-        # { "regex": { "index": int, "compilable": bool, "error": str, "compiled": Pattern or None}}
-        # Note: "compilable" key should only be updated on add / rename
+        self._use_union = union_regex
+        # { "regex string":
+        #   {
+        #       "index": int,
+        #       "compilable": bool,
+        #       "error": str,
+        #       "compiled": Pattern or None
+        #   }
+        # }
         self._excluded = {}
         self._excluded_compiled = set()
         self._dirty = True
@@ -360,6 +373,14 @@ class ExcludeDict(ExcludeList):
         """Iterate in order."""
         for regex in ordered_keys(self._excluded):
             yield self.is_marked(regex), regex
+
+    def __getitem__(self, key):
+        """Returns the dict item correponding to key"""
+        return self._excluded.__getitem__(key)
+
+    def get_compiled(self, key):
+        """Returns the compiled item for key"""
+        return self.__getitem__(key).get("compiled")
 
     def is_markable(self, regex):
         return self._is_markable(regex)
@@ -373,12 +394,12 @@ class ExcludeDict(ExcludeList):
 
     def _add_compiled(self, regex):
         self._dirty = True
-        if self._use_combined:
+        if self._use_union:
             return
         try:
             self._excluded_compiled.add(self._excluded[regex]["compiled"])
         except Exception as e:
-            print(f"Exception while adding regex {regex} to compiled set: {e}")
+            logging.warning(f"Exception while adding regex {regex} to compiled set: {e}")
             return
 
     def is_compilable(self, regex):
@@ -391,7 +412,8 @@ class ExcludeDict(ExcludeList):
 
     # ---Public
     def _do_add(self, regex, iscompilable, exception, compiled):
-        # We always insert at the top, so index should be 0 and other indices should be pushed by one
+        # We always insert at the top, so index should be 0
+        # and other indices should be pushed by one
         for value in self._excluded.values():
             value["index"] += 1
         self._excluded[regex] = {
@@ -405,10 +427,6 @@ class ExcludeDict(ExcludeList):
         if regex in self._excluded.keys():
             return True
         return False
-
-    def clear(self):
-        """Not used, need refactoring"""
-        self._excluded = {}
 
     def remove(self, regex):
         old_value = self._excluded.pop(regex)
