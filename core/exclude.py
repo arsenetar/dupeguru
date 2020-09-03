@@ -15,10 +15,11 @@ from hscommon.util import FileOrPath
 import time
 
 default_regexes = [r"^thumbs\.db$",  # Obsolete after WindowsXP
+                   r"^desktop\.ini$",  # Windows metadata
                    r"^\.DS_Store$",  # MacOS metadata
                    r"^\.Trash\-.*",  # Linux trash directories
                    r"^\$Recycle\.Bin$",  # Windows
-                   r"^\..*"  # Hidden files
+                   r"^\..*",  # Hidden files
                    ]
 # These are too broad
 forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\..*"]
