@@ -63,7 +63,7 @@ endif
 	@${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 || \
 		{ echo "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
 
-env : | reqs
+env : requirements.txt | reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
 	${PYTHON} -m venv env
