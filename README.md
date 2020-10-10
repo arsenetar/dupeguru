@@ -34,6 +34,14 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 ### Windows
 For windows instructions see the [Windows Instructions](Windows.md).
 
+### Ubuntu
+You'll need venv and Python dev tools to make the project. So ensure you've tried this before starting:
+
+```
+$ apt install python3-venv
+$ apt install python3-dev
+```
+
 ### Prerequisites
 
 * [Python 3.5+][python]
