@@ -27,6 +27,7 @@ from .result_window import ResultWindow
 from .directories_dialog import DirectoriesDialog
 from .problem_dialog import ProblemDialog
 from .ignore_list_dialog import IgnoreListDialog
+from .exclude_list_dialog import ExcludeListDialog
 from .deletion_options import DeletionOptions
 from .se.details_dialog import DetailsDialog as DetailsDialogStandard
 from .me.details_dialog import DetailsDialog as DetailsDialogMusic
@@ -86,11 +87,17 @@ class DupeGuru(QObject):
                 "IgnoreListDialog",
                 parent=self.main_window,
                 model=self.model.ignore_list_dialog)
-            self.ignoreListDialog.accepted.connect(self.main_window.onDialogAccepted)
+
+            self.excludeListDialog = self.main_window.createPage(
+                "ExcludeListDialog",
+                app=self,
+                parent=self.main_window,
+                model=self.model.exclude_list_dialog)
         else:
             self.ignoreListDialog = IgnoreListDialog(
-                parent=parent_window, model=self.model.ignore_list_dialog
-            )
+                parent=parent_window, model=self.model.ignore_list_dialog)
+            self.excludeDialog = ExcludeListDialog(
+                app=self, parent=parent_window, model=self.model.exclude_list_dialog)
 
         self.deletionOptions = DeletionOptions(
             parent=parent_window,
@@ -130,6 +137,7 @@ class DupeGuru(QObject):
                 tr("Clear Picture Cache"),
                 self.clearPictureCacheTriggered,
             ),
+            ("actionExcludeList", "", "", tr("Exclusion Filters"), self.excludeListTriggered),
             ("actionShowHelp", "F1", "", tr("dupeGuru Help"), self.showHelpTriggered),
             ("actionAbout", "", "", tr("About dupeGuru"), self.showAboutBoxTriggered),
             (
@@ -223,6 +231,10 @@ class DupeGuru(QObject):
     def showResultsWindow(self):
         if self.resultWindow is not None:
             if self.use_tabs:
+                if self.main_window.indexOfWidget(self.resultWindow) < 0:
+                    self.main_window.addTab(
+                        self.resultWindow, "Results", switch=True)
+                    return
                 self.main_window.showTab(self.resultWindow)
             else:
                 self.resultWindow.show()
@@ -267,18 +279,24 @@ class DupeGuru(QObject):
 
     def ignoreListTriggered(self):
         if self.use_tabs:
-            # Fetch the index in the TabWidget or the StackWidget (depends on class):
-            index = self.main_window.indexOfWidget(self.ignoreListDialog)
-            if index < 0:
-                # we have not instantiated and populated it in their internal list yet
-                index = self.main_window.addTab(
-                    self.ignoreListDialog, "Ignore List", switch=True)
-            # if not self.main_window.tabWidget.isTabVisible(index):
-            self.main_window.setTabVisible(index, True)
-            self.main_window.setCurrentIndex(index)
-            return
-        else:
+            self.showTriggeredTabbedDialog(self.ignoreListDialog, "Ignore List")
+        else:  # floating windows
             self.model.ignore_list_dialog.show()
+
+    def excludeListTriggered(self):
+        if self.use_tabs:
+            self.showTriggeredTabbedDialog(self.excludeListDialog, "Exclusion Filters")
+        else:  # floating windows
+            self.model.exclude_list_dialog.show()
+
+    def showTriggeredTabbedDialog(self, dialog, desc_string):
+        """Add tab for dialog, name the tab with desc_string, then show it."""
+        index = self.main_window.indexOfWidget(dialog)
+        # Create the tab if it doesn't exist already
+        if index < 0:  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
+            index = self.main_window.addTab(dialog, desc_string, switch=True)
+        # Show the tab for that widget
+        self.main_window.setCurrentIndex(index)
 
     def openDebugLogTriggered(self):
         debugLogPath = op.join(self.model.appdata, "debug.log")
@@ -344,15 +362,15 @@ class DupeGuru(QObject):
             # or simply delete it on close which is probably cleaner:
             self.details_dialog.setAttribute(Qt.WA_DeleteOnClose)
             self.details_dialog.close()
-            # self.details_dialog.setParent(None)  # seems unnecessary
+            # if we don't do the following, Qt will crash when we recreate the Results dialog
+            self.details_dialog.setParent(None)
         if self.resultWindow is not None:
             self.resultWindow.close()
-            self.resultWindow.setParent(None)
+            # This is better for tabs, as it takes care of duplicate items in menu bar
+            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(None)
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
-            self.main_window.addTab(
-                self.resultWindow, "Results", switch=False)
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()

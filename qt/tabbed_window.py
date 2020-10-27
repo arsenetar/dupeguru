@@ -18,6 +18,7 @@ from qtlib.util import moveToScreenCenter, createActions
 from .directories_dialog import DirectoriesDialog
 from .result_window import ResultWindow
 from .ignore_list_dialog import IgnoreListDialog
+from .exclude_list_dialog import ExcludeListDialog
 tr = trget("ui")
 
 
@@ -25,7 +26,7 @@ class TabWindow(QMainWindow):
     def __init__(self, app, **kwargs):
         super().__init__(None, **kwargs)
         self.app = app
-        self.pages = {}
+        self.pages = {}  # This is currently not used anywhere
         self.menubar = None
         self.menuList = set()
         self.last_index = -1
@@ -108,7 +109,7 @@ class TabWindow(QMainWindow):
         self.menuList.add(self.menuHelp)
 
     @pyqtSlot(int)
-    def updateMenuBar(self, page_index=None):
+    def updateMenuBar(self, page_index=-1):
         if page_index < 0:
             return
         current_index = self.getCurrentIndex()
@@ -141,6 +142,9 @@ class TabWindow(QMainWindow):
             and not page_type == "IgnoreListDialog" else False)
         self.app.actionDirectoriesWindow.setEnabled(
             False if page_type == "DirectoriesDialog" else True)
+        self.app.actionExcludeList.setEnabled(
+            True if self.app.excludeListDialog is not None
+            and not page_type == "ExcludeListDialog" else False)
 
         self.previous_widget_actions = active_widget.specific_actions
         self.last_index = current_index
@@ -157,7 +161,14 @@ class TabWindow(QMainWindow):
             parent = kwargs.get("parent", self)
             model = kwargs.get("model")
             page = IgnoreListDialog(parent, model)
-        self.pages[cls] = page
+            page.accepted.connect(self.onDialogAccepted)
+        elif cls == "ExcludeListDialog":
+            app = kwargs.get("app", app)
+            parent = kwargs.get("parent", self)
+            model = kwargs.get("model")
+            page = ExcludeListDialog(app, parent, model)
+            page.accepted.connect(self.onDialogAccepted)
+        self.pages[cls] = page  # Not used, might remove
         return page
 
     def addTab(self, page, title, switch=False):
@@ -173,7 +184,6 @@ class TabWindow(QMainWindow):
 
     def showTab(self, page):
         index = self.indexOfWidget(page)
-        self.setTabVisible(index, True)
         self.setCurrentIndex(index)
 
     def indexOfWidget(self, widget):
@@ -181,9 +191,6 @@ class TabWindow(QMainWindow):
 
     def setCurrentIndex(self, index):
         return self.tabWidget.setCurrentIndex(index)
-
-    def setTabVisible(self, index, value):
-        return self.tabWidget.setTabVisible(index, value)
 
     def removeTab(self, index):
         return self.tabWidget.removeTab(index)
@@ -202,7 +209,7 @@ class TabWindow(QMainWindow):
 
     # --- Events
     def appWillSavePrefs(self):
-        # Right now this is useless since the first spawn dialog inside the
+        # Right now this is useless since the first spawned dialog inside the
         # QTabWidget will assign its geometry after restoring it
         prefs = self.app.prefs
         prefs.mainWindowIsMaximized = self.isMaximized()
@@ -223,14 +230,13 @@ class TabWindow(QMainWindow):
             # menu or shortcut. But this is useless if we don't have a button
             # set up to make a close request anyway. This check could be removed.
             return
-        current_widget.close()
-        self.setTabVisible(index, False)
+        # current_widget.close()  # seems unnecessary
         # self.tabWidget.widget(index).hide()
         self.removeTab(index)
 
     @pyqtSlot()
     def onDialogAccepted(self):
-        """Remove tabbed dialog when Accepted/Done."""
+        """Remove tabbed dialog when Accepted/Done (close button clicked)."""
         widget = self.sender()
         index = self.indexOfWidget(widget)
         if index > -1:
@@ -268,7 +274,7 @@ class TabBarWindow(TabWindow):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout.addWidget(self.stackedWidget)
 
-        self.tabBar.currentChanged.connect(self.showWidget)
+        self.tabBar.currentChanged.connect(self.showTabIndex)
         self.tabBar.tabCloseRequested.connect(self.onTabCloseRequested)
 
         self.stackedWidget.currentChanged.connect(self.updateMenuBar)
@@ -278,32 +284,34 @@ class TabBarWindow(TabWindow):
         self.restoreGeometry()
 
     def addTab(self, page, title, switch=True):
-        stack_index = self.stackedWidget.insertWidget(-1, page)
-        tab_index = self.tabBar.addTab(title)
+        stack_index = self.stackedWidget.addWidget(page)
+        self.tabBar.insertTab(stack_index, title)
 
         if isinstance(page, DirectoriesDialog):
             self.tabBar.setTabButton(
-                tab_index, QTabBar.RightSide, None)
+                stack_index, QTabBar.RightSide, None)
         if switch:  # switch to the added tab immediately upon creation
-            self.setTabIndex(tab_index)
-            self.stackedWidget.setCurrentWidget(page)
+            self.setTabIndex(stack_index)
         return stack_index
 
     @pyqtSlot(int)
-    def showWidget(self, index):
-        if index >= 0 and index <= self.stackedWidget.count() - 1:
+    def showTabIndex(self, index):
+        # The tab bar's indices should be aligned with the stackwidget's
+        if index >= 0 and index <= self.stackedWidget.count():
             self.stackedWidget.setCurrentIndex(index)
-            # if not self.tabBar.isTabVisible(index):
-            self.setTabVisible(index, True)
 
     def indexOfWidget(self, widget):
         # Warning: this may return -1 if widget is not a child of stackedwidget
         return self.stackedWidget.indexOf(widget)
 
     def setCurrentIndex(self, tab_index):
-        # The signal will handle switching the stackwidget's widget
         self.setTabIndex(tab_index)
+        # The signal will handle switching the stackwidget's widget
         # self.stackedWidget.setCurrentWidget(self.stackedWidget.widget(tab_index))
+
+    def setCurrentWidget(self, widget):
+        """Sets the current Tab on TabBar for this widget."""
+        self.tabBar.setCurrentIndex(self.indexOfWidget(widget))
 
     @pyqtSlot(int)
     def setTabIndex(self, index):
@@ -311,17 +319,13 @@ class TabBarWindow(TabWindow):
             return
         self.tabBar.setCurrentIndex(index)
 
-    def setTabVisible(self, index, value):
-        return self.tabBar.setTabVisible(index, value)
-
     @pyqtSlot(int)
     def onRemovedWidget(self, index):
         self.removeTab(index)
 
     @pyqtSlot(int)
     def removeTab(self, index):
-        # No need to remove the widget here:
-        # self.stackedWidget.removeWidget(self.stackedWidget.widget(index))
+        """Remove the tab, but not the widget (it should already be removed)"""
         return self.tabBar.removeTab(index)
 
     @pyqtSlot(int)
@@ -348,13 +352,18 @@ class TabBarWindow(TabWindow):
 
     @pyqtSlot(int)
     def onTabCloseRequested(self, index):
-        current_widget = self.getWidgetAtIndex(index)
-        if isinstance(current_widget, DirectoriesDialog):
+        target_widget = self.getWidgetAtIndex(index)
+        if isinstance(target_widget, DirectoriesDialog):
             # On MacOS, the tab has a close button even though we explicitely
             # set it to None in order to hide it. This should prevent
             # the "Directories" tab from closing by mistake.
             return
-        current_widget.close()
-        self.stackedWidget.removeWidget(current_widget)
-        # In this case the signal will take care of the tab itself after removing the widget
-        # self.removeTab(index)
+        # target_widget.close()  # seems unnecessary
+        # Removing the widget should trigger tab removal via the signal
+        self.removeWidget(self.getWidgetAtIndex(index))
+
+    @pyqtSlot()
+    def onDialogAccepted(self):
+        """Remove tabbed dialog when Accepted/Done (close button clicked)."""
+        widget = self.sender()
+        self.removeWidget(widget)

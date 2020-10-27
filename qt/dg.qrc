@@ -10,5 +10,6 @@
     <file alias="zoom_out">../images/old_zoom_out.png</file>
     <file alias="zoom_original">../images/old_zoom_original.png</file>
     <file alias="zoom_best_fit">../images/old_zoom_best_fit.png</file>
+    <file alias="error">../images/dialog-error.png</file>
 </qresource>
 </RCC>

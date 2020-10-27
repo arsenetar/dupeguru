@@ -26,11 +26,13 @@ from .pe.photo import get_delta_dimensions
 from .util import cmp_value, fix_surrogate_encoding
 from . import directories, results, export, fs, prioritize
 from .ignore import IgnoreList
+from .exclude import ExcludeDict as ExcludeList
 from .scanner import ScanType
 from .gui.deletion_options import DeletionOptions
 from .gui.details_panel import DetailsPanel
 from .gui.directory_tree import DirectoryTree
 from .gui.ignore_list_dialog import IgnoreListDialog
+from .gui.exclude_list_dialog import ExcludeListDialogCore
 from .gui.problem_dialog import ProblemDialog
 from .gui.stats_label import StatsLabel
 
@@ -137,7 +139,8 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.Standard
         self.discarded_file_count = 0
-        self.directories = directories.Directories()
+        self.exclude_list = ExcludeList()
+        self.directories = directories.Directories(self.exclude_list)
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
         # In addition to "app-level" options, this dictionary also holds options that will be
@@ -155,6 +158,7 @@ class DupeGuru(Broadcaster):
         self.directory_tree = DirectoryTree(self)
         self.problem_dialog = ProblemDialog(self)
         self.ignore_list_dialog = IgnoreListDialog(self)
+        self.exclude_list_dialog = ExcludeListDialogCore(self)
         self.stats_label = StatsLabel(self)
         self.result_table = None
         self.deletion_options = DeletionOptions()
@@ -587,6 +591,9 @@ class DupeGuru(Broadcaster):
         p = op.join(self.appdata, "ignore_list.xml")
         self.ignore_list.load_from_xml(p)
         self.ignore_list_dialog.refresh()
+        p = op.join(self.appdata, "exclude_list.xml")
+        self.exclude_list.load_from_xml(p)
+        self.exclude_list_dialog.refresh()
 
     def load_from(self, filename):
         """Start an async job to load results from ``filename``.
@@ -773,6 +780,8 @@ class DupeGuru(Broadcaster):
         self.directories.save_to_file(op.join(self.appdata, "last_directories.xml"))
         p = op.join(self.appdata, "ignore_list.xml")
         self.ignore_list.save_to_xml(p)
+        p = op.join(self.appdata, "exclude_list.xml")
+        self.exclude_list.save_to_xml(p)
         self.notify("save_session")
 
     def save_as(self, filename):
