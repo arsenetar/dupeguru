@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QVBoxLayout, QAbstractItemView
+from PyQt5.QtWidgets import QAbstractItemView
 
 from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
@@ -19,11 +19,14 @@ class DetailsDialog(DetailsDialogBase):
         self.setWindowTitle(tr("Details"))
         self.resize(502, 186)
         self.setMinimumSize(QSize(200, 0))
-        self.verticalLayout = QVBoxLayout(self)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        # self.verticalLayout = QVBoxLayout()
+        # self.verticalLayout.setSpacing(0)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.tableView = DetailsTable(self)
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableView.setShowGrid(False)
-        self.verticalLayout.addWidget(self.tableView)
+        # self.verticalLayout.addWidget(self.tableView)
+        # self.centralWidget = QWidget()
+        # self.centralWidget.setLayout(self.verticalLayout)
+        self.setWidget(self.tableView)

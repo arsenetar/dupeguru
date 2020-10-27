@@ -85,7 +85,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
 
-    def _load(self, prefs, setchecked):
+    def _load(self, prefs, setchecked, section):
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
