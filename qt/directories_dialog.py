@@ -92,12 +92,14 @@ class DirectoriesDialog(QMainWindow):
                 self.app.showResultsWindow,
             ),
             ("actionAddFolder", "", "", tr("Add Folder..."), self.addFolderTriggered),
+            ("actionLoadDirectories", "", "", tr("Load Directories..."), self.loadDirectoriesTriggered),
+            ("actionSaveDirectories", "", "", tr("Save Directories..."), self.saveDirectoriesTriggered),
         ]
         createActions(ACTIONS, self)
-        # if self.app.use_tabs:
-        #     # Keep track of actions which should only be accessible from this class
-        #     for action, _, _, _, _ in ACTIONS:
-        #         self.specific_actions.add(getattr(self, action))
+        if self.app.use_tabs:
+            # Keep track of actions which should only be accessible from this window
+            self.specific_actions.add(self.actionLoadDirectories)
+            self.specific_actions.add(self.actionSaveDirectories)
 
     def _setupMenu(self):
         if not self.app.use_tabs:
@@ -126,6 +128,9 @@ class DirectoriesDialog(QMainWindow):
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionClearPictureCache)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionLoadDirectories)
+        self.menuFile.addAction(self.actionSaveDirectories)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.app.actionQuit)
 
@@ -328,8 +333,24 @@ class DirectoriesDialog(QMainWindow):
             self.app.model.load_from(destination)
             self.app.recentResults.insertItem(destination)
 
+    def loadDirectoriesTriggered(self):
+        title = tr("Select a directories file to load")
+        files = ";;".join([tr("dupeGuru Results (*.dupegurudirs)"), tr("All Files (*.*)")])
+        destination = QFileDialog.getOpenFileName(self, title, "", files)[0]
+        if destination:
+            self.app.model.load_directories(destination)
+
     def removeFolderButtonClicked(self):
         self.directoriesModel.model.remove_selected()
+
+    def saveDirectoriesTriggered(self):
+        title = tr("Select a file to save your directories to")
+        files = tr("dupeGuru Directories (*.dupegurudirs)")
+        destination, chosen_filter = QFileDialog.getSaveFileName(self, title, "", files)
+        if destination:
+            if not destination.endswith(".dupegurudirs"):
+                destination = "{}.dupegurudirs".format(destination)
+            self.app.model.save_directories_as(destination)
 
     def scanButtonClicked(self):
         if self.app.model.results.is_modified:
