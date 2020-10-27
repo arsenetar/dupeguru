@@ -49,6 +49,8 @@ class Preferences(PreferencesBase):
 
         self.result_table_ref_foreground_color =\
             get("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
+        self.result_table_ref_background_color =\
+            get("ResultTableRefBackgroundColor", self.result_table_ref_background_color)
         self.result_table_delta_foreground_color =\
             get("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
 
@@ -100,6 +102,7 @@ class Preferences(PreferencesBase):
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
         self.details_dialog_viewers_show_scrollbars = True
         self.result_table_ref_foreground_color = QColor(Qt.blue)
+        self.result_table_ref_background_color = QColor(Qt.darkGray)
         self.result_table_delta_foreground_color = QColor(255, 142, 40)  # orange
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
@@ -143,6 +146,7 @@ class Preferences(PreferencesBase):
         set_("DetailsDialogViewersShowScrollbars", self.details_dialog_viewers_show_scrollbars)
         set_("DetailsTableDeltaForegroundColor", self.details_table_delta_foreground_color)
         set_("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
+        set_("ResultTableRefBackgroundColor", self.result_table_ref_background_color)
         set_("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
         set_("ResultWindowIsMaximized", self.resultWindowIsMaximized)
         set_("MainWindowIsMaximized", self.mainWindowIsMaximized)

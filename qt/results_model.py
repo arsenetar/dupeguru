@@ -29,6 +29,8 @@ class ResultsModel(Table):
 
     def _getData(self, row, column, role):
         if column.name == "marked":
+            if role == Qt.BackgroundRole and row.isref:
+                return QBrush(self.prefs.result_table_ref_background_color)
             if role == Qt.CheckStateRole and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
             return None
@@ -40,6 +42,9 @@ class ResultsModel(Table):
                 return QBrush(self.prefs.result_table_ref_foreground_color)
             elif row.is_cell_delta(column.name):
                 return QBrush(self.prefs.result_table_delta_foreground_color)
+        elif role == Qt.BackgroundRole:
+            if row.isref:
+                return QBrush(self.prefs.result_table_ref_background_color)
         elif role == Qt.FontRole:
             font = QFont(self.view.font())
             if self.prefs.reference_bold_font:
