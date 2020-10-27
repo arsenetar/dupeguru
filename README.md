@@ -9,11 +9,13 @@ The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/
 
 ## Current status
 
-Development has been slow this past year, however very close to getting all the different 4.0.4 releases posted.  Most of the work this past year (2019) has been towards packaging the application and issues related to that.
+* 2020: various bug fixes and small UI improvements have been added. Packaging for MacOS is still a problem.
+
+* 2019: Development has been slow this past year, however very close to getting all the different 4.0.4 releases posted.  Most of the work this past year (2019) has been towards packaging the application and issues related to that.
 
 Still looking for additional help especially with regards to:
 - OSX maintenance (reproducing bugs & cocoa version)
-- Linux maintenance (reproducing bugs)
+- Linux maintenance (reproducing bugs, building package with Cocoa UI)
 
 ## Contents of this folder
 
@@ -43,8 +45,7 @@ For windows instructions see the [Windows Instructions](Windows.md).
 
 dupeGuru is built with "make":
 
-    $ make
-    $ make run
+    $ make && make run
 
 ### Generate Debian/Ubuntu package
 

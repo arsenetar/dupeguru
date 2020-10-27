@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows 10 / OSX 10.15 / Ubuntu 20.04]
- - Version [e.g. 4.0.4]
+ - Version [e.g. 4.0.5]
 
 **Additional context**
 Add any other context about the problem here. You may include the debug log although it is normally best to attach it as a file.
