@@ -758,11 +758,15 @@ class QWidgetImageViewer(QWidget):
                 return
             self.disconnectMouseSignals()
 
+    def contextMenuEvent(self, event):
+        """Block parent's (main window) context menu on right click."""
+        event.accept()
+
     def mousePressEvent(self, event):
         if self.bestFit or not self.isEnabled():
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
+        if event.button() & (Qt.LeftButton | Qt.MidButton | Qt.RightButton):
             self._drag = True
         else:
             self._drag = False
@@ -790,8 +794,8 @@ class QWidgetImageViewer(QWidget):
         if self.bestFit or not self.isEnabled():
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
-            self._drag = False
+        # if event.button() == Qt.LeftButton:
+        self._drag = False
 
         self._app.restoreOverrideCursor()
         self.setMouseTracking(False)
@@ -956,11 +960,18 @@ class ScrollAreaImageViewer(QScrollArea):
         self._horizontalScrollBar.valueChanged.connect(
             self.controller.onHScrollBarChanged, Qt.UniqueConnection)
 
+    def contextMenuEvent(self, event):
+        """Block parent's (main window) context menu on right click."""
+        # Even though we don't have a context menu right now, and the default
+        # contextMenuPolicy is DefaultContextMenu, we leverage that handler to
+        # avoid raising the Result window's Actions menu
+        event.accept()
+
     def mousePressEvent(self, event):
         if self.bestFit:
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
+        if event.button() & (Qt.LeftButton | Qt.MidButton | Qt.RightButton):
             self._drag = True
         else:
             self._drag = False
@@ -985,8 +996,7 @@ class ScrollAreaImageViewer(QScrollArea):
         if self.bestFit:
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
-            self._drag = False
+        self._drag = False
         self._app.restoreOverrideCursor()
         self.setMouseTracking(False)
         super().mouseReleaseEvent(event)
@@ -1203,11 +1213,15 @@ class GraphicsViewViewer(QGraphicsView):
             self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
             self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 
+    def contextMenuEvent(self, event):
+        """Block parent's (main window) context menu on right click."""
+        event.accept()
+
     def mousePressEvent(self, event):
         if self.bestFit:
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
+        if event.button() & (Qt.LeftButton | Qt.MidButton | Qt.RightButton):
             self._drag = True
         else:
             self._drag = False
@@ -1223,8 +1237,7 @@ class GraphicsViewViewer(QGraphicsView):
         if self.bestFit:
             event.ignore()
             return
-        if event.button() == Qt.LeftButton:
-            self._drag = False
+        self._drag = False
         self._app.restoreOverrideCursor()
         self.setMouseTracking(False)
         self.updateCenterPoint()

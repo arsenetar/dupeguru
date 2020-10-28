@@ -588,6 +588,12 @@ class DupeGuru(Broadcaster):
         self.ignore_list.load_from_xml(p)
         self.ignore_list_dialog.refresh()
 
+    def load_directories(self, filepath):
+        # Clear out previous entries
+        self.directories.__init__()
+        self.directories.load_from_file(filepath)
+        self.notify("directories_changed")
+
     def load_from(self, filename):
         """Start an async job to load results from ``filename``.
 
@@ -782,6 +788,16 @@ class DupeGuru(Broadcaster):
         """
         try:
             self.results.save_to_xml(filename)
+        except OSError as e:
+            self.view.show_message(tr("Couldn't write to file: {}").format(str(e)))
+
+    def save_directories_as(self, filename):
+        """Save directories in ``filename``.
+
+        :param str filename: path of the file to save directories (as XML) to.
+        """
+        try:
+            self.directories.save_to_file(filename)
         except OSError as e:
             self.view.show_message(tr("Couldn't write to file: {}").format(str(e)))
 
