@@ -7,6 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QSettings, QRect, QObject, pyqtSignal
+from PyQt5.QtWidgets import QDockWidget
 
 from hscommon.trans import trget
 from hscommon.util import tryint
@@ -120,19 +121,27 @@ class Preferences(QObject):
         self._settings.setValue(name, normalize_for_serialization(value))
 
     def saveGeometry(self, name, widget):
-        # We save geometry under a 5-sized int array: first item is a flag for whether the widget
-        # is maximized and the other 4 are (x, y, w, h).
+        # We save geometry under a 7-sized int array: first item is a flag
+        # for whether the widget is maximized, second item is a flag for whether
+        # the widget is docked, third item is a Qt::DockWidgetArea enum value,
+        # and the other 4 are (x, y, w, h).
         m = 1 if widget.isMaximized() else 0
+        d = 1 if isinstance(widget, QDockWidget) and not widget.isFloating() else 0
+        area = widget.parent.dockWidgetArea(widget) if d else 0
         r = widget.geometry()
         rectAsList = [r.x(), r.y(), r.width(), r.height()]
-        self.set_value(name, [m] + rectAsList)
+        self.set_value(name, [m, d, area] + rectAsList)
 
     def restoreGeometry(self, name, widget):
         geometry = self.get_value(name)
-        if geometry and len(geometry) == 5:
-            m, x, y, w, h = geometry
+        if geometry and len(geometry) == 7:
+            m, d, area, x, y, w, h = geometry
             if m:
                 widget.setWindowState(Qt.WindowMaximized)
             else:
                 r = QRect(x, y, w, h)
                 widget.setGeometry(r)
+                if isinstance(widget, QDockWidget):
+                    # Inform of the previous dock state and the area used
+                    return bool(d), area
+        return False, 0

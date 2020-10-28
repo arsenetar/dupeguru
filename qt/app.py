@@ -7,7 +7,7 @@
 import sys
 import os.path as op
 
-from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal
+from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
 
@@ -58,11 +58,11 @@ class DupeGuru(QObject):
     def _setup(self):
         core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
+        self.details_dialog = None
         self._update_options()
         self.recentResults = Recent(self, "recentResults")
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = None
-        self.details_dialog = None
         if self.use_tabs:
             self.main_window = TabBarWindow(self) if not self.prefs.tabs_default_pos else TabWindow(self)
             parent_window = self.main_window
@@ -177,6 +177,9 @@ class DupeGuru(QObject):
         self.model.options["match_scaled"] = self.prefs.match_scaled
         self.model.options["picture_cache_type"] = self.prefs.picture_cache_type
 
+        if self.details_dialog:
+            self.details_dialog.update_options()
+
     # --- Private
     def _get_details_dialog_class(self):
         if self.model.app_mode == AppMode.Picture:
@@ -212,22 +215,22 @@ class DupeGuru(QObject):
 
     def show_details(self):
         if self.details_dialog is not None:
-            self.details_dialog.show()
+            if not self.details_dialog.isVisible():
+                self.details_dialog.show()
+            else:
+                self.details_dialog.hide()
 
     def showResultsWindow(self):
         if self.resultWindow is not None:
             if self.use_tabs:
-                self.main_window.addTab(
-                    self.resultWindow, "Results", switch=True)
+                self.main_window.showTab(self.resultWindow)
             else:
                 self.resultWindow.show()
 
     def showDirectoriesWindow(self):
         if self.directories_dialog is not None:
             if self.use_tabs:
-                index = self.main_window.indexOfWidget(self.directories_dialog)
-                self.main_window.setTabVisible(index, True)
-                self.main_window.setCurrentIndex(index)
+                self.main_window.showTab(self.directories_dialog)
             else:
                 self.directories_dialog.show()
 
@@ -295,6 +298,9 @@ class DupeGuru(QObject):
         preferences_dialog.setParent(None)
 
     def quitTriggered(self):
+        if self.details_dialog is not None:
+            self.details_dialog.close()
+
         if self.main_window:
             self.main_window.close()
         else:
@@ -333,14 +339,20 @@ class DupeGuru(QObject):
         """Creates resultWindow and details_dialog depending on the selected ``app_mode``.
         """
         if self.details_dialog is not None:
+            # The object is not deleted entirely, avoid saving its geometry in the future
+            # self.willSavePrefs.disconnect(self.details_dialog.appWillSavePrefs)
+            # or simply delete it on close which is probably cleaner:
+            self.details_dialog.setAttribute(Qt.WA_DeleteOnClose)
             self.details_dialog.close()
-            self.details_dialog.setParent(None)
+            # self.details_dialog.setParent(None)  # seems unnecessary
         if self.resultWindow is not None:
             self.resultWindow.close()
             self.resultWindow.setParent(None)
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
                 "ResultWindow", parent=self.main_window, app=self)
+            self.main_window.addTab(
+                self.resultWindow, "Results", switch=False)
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()

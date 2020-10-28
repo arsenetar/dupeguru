@@ -42,7 +42,7 @@ class AboutBox(QDialog):
         self.setWindowTitle(
             tr("About {}").format(QCoreApplication.instance().applicationName())
         )
-        self.resize(400, 190)
+        self.resize(400, 290)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

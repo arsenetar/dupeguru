@@ -4,12 +4,13 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, pyqtSlot
 from PyQt5.QtWidgets import (
     QDialog,
     QDialogButtonBox,
     QVBoxLayout,
     QHBoxLayout,
+    QGridLayout,
     QLabel,
     QComboBox,
     QSlider,
@@ -20,11 +21,20 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QSpinBox,
     QLayout,
+    QTabWidget,
+    QWidget,
+    QColorDialog,
+    QPushButton,
+    QGroupBox,
+    QFormLayout,
 )
+from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
+from hscommon.plat import ISLINUX
 from qtlib.util import horizontalWrap
 from qtlib.preferences import get_langnames
+from enum import Flag, auto
 
 from .preferences import Preferences
 
@@ -48,6 +58,13 @@ SUPPORTED_LANGUAGES = [
     "es",
     "nl",
 ]
+
+
+class Sections(Flag):
+    """Filter blocks of preferences when reset or loaded"""
+    GENERAL = auto()
+    DISPLAY = auto()
+    ALL = GENERAL | DISPLAY
 
 
 class PreferencesDialogBase(QDialog):
@@ -111,25 +128,6 @@ class PreferencesDialogBase(QDialog):
 
     def _setupBottomPart(self):
         # The bottom part of the pref panel is always the same in all editions.
-        self.fontSizeLabel = QLabel(tr("Font size:"))
-        self.fontSizeSpinBox = QSpinBox()
-        self.fontSizeSpinBox.setMinimum(5)
-        self.widgetsVLayout.addLayout(
-            horizontalWrap([self.fontSizeLabel, self.fontSizeSpinBox, None])
-        )
-        self._setupAddCheckbox("reference_bold_font", tr("Bold font for reference"))
-        self.widgetsVLayout.addWidget(self.reference_bold_font)
-        self._setupAddCheckbox("tabs_default_pos", tr("Use default position for tab bar (requires restart)"))
-        self.tabs_default_pos.setToolTip(tr("Place the tab bar below the main menu instead of next to it"))
-        self.widgetsVLayout.addWidget(self.tabs_default_pos)
-
-        self.languageLabel = QLabel(tr("Language:"), self)
-        self.languageComboBox = QComboBox(self)
-        for lang in self.supportedLanguages:
-            self.languageComboBox.addItem(get_langnames()[lang])
-        self.widgetsVLayout.addLayout(
-            horizontalWrap([self.languageLabel, self.languageComboBox, None])
-        )
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
         self.widgetsVLayout.addWidget(self.copyMoveLabel)
@@ -145,6 +143,74 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandLabel)
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
+
+    def _setupDisplayPage(self):
+        self.ui_groupbox = QGroupBox("&General Interface")
+        layout = QVBoxLayout()
+        self.languageLabel = QLabel(tr("Language:"), self)
+        self.languageComboBox = QComboBox(self)
+        for lang in self.supportedLanguages:
+            self.languageComboBox.addItem(get_langnames()[lang])
+        layout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
+        self._setupAddCheckbox("tabs_default_pos",
+                               tr("Use default position for tab bar (requires restart)"))
+        self.tabs_default_pos.setToolTip(
+            tr("Place the tab bar below the main menu instead of next to it\n\
+On MacOS, the tab bar will fill up the window's width instead."))
+        layout.addWidget(self.tabs_default_pos)
+        self.ui_groupbox.setLayout(layout)
+        self.displayVLayout.addWidget(self.ui_groupbox)
+
+        gridlayout = QFormLayout()
+        result_groupbox = QGroupBox("&Result Table")
+        self.fontSizeSpinBox = QSpinBox()
+        self.fontSizeSpinBox.setMinimum(5)
+        gridlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
+        self._setupAddCheckbox("reference_bold_font",
+                               tr("Use bold font for references"))
+        gridlayout.addRow(self.reference_bold_font)
+
+        self.result_table_ref_foreground_color = ColorPickerButton(self)
+        gridlayout.addRow(tr("Reference foreground color:"),
+                          self.result_table_ref_foreground_color)
+        self.result_table_delta_foreground_color = ColorPickerButton(self)
+        gridlayout.addRow(tr("Delta foreground color:"),
+                          self.result_table_delta_foreground_color)
+        gridlayout.setLabelAlignment(Qt.AlignLeft)
+
+        # Keep same vertical spacing as parent layout for consistency
+        gridlayout.setVerticalSpacing(self.displayVLayout.spacing())
+        result_groupbox.setLayout(gridlayout)
+        self.displayVLayout.addWidget(result_groupbox)
+
+        details_groupbox = QGroupBox("&Details Window")
+        self.details_groupbox_layout = QVBoxLayout()
+        self._setupAddCheckbox("details_dialog_titlebar_enabled",
+                               tr("Show the title bar and can be docked"))
+        self.details_dialog_titlebar_enabled.setToolTip(
+            tr("While the title bar is hidden, \
+use the modifier key to drag the floating window around") if ISLINUX else
+            tr("The title bar can only be disabled while the window is docked"))
+        self.details_groupbox_layout.addWidget(self.details_dialog_titlebar_enabled)
+        self._setupAddCheckbox("details_dialog_vertical_titlebar",
+                               tr("Vertical title bar"))
+        self.details_dialog_vertical_titlebar.setToolTip(
+            tr("Change the title bar from horizontal on top, to vertical on the left side"))
+        self.details_groupbox_layout.addWidget(self.details_dialog_vertical_titlebar)
+        self.details_dialog_vertical_titlebar.setEnabled(
+            self.details_dialog_titlebar_enabled.isChecked())
+        self.details_dialog_titlebar_enabled.stateChanged.connect(
+            self.details_dialog_vertical_titlebar.setEnabled)
+        gridlayout = QGridLayout()
+        self.details_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
+        gridlayout.addWidget(self.details_table_delta_foreground_color_label, 4, 0)
+        self.details_table_delta_foreground_color = ColorPickerButton(self)
+        gridlayout.addWidget(self.details_table_delta_foreground_color, 4, 2, 1, 1, Qt.AlignLeft)
+        gridlayout.setColumnStretch(1, 1)
+        gridlayout.setColumnStretch(3, 4)
+        self.details_groupbox_layout.addLayout(gridlayout)
+        details_groupbox.setLayout(self.details_groupbox_layout)
+        self.displayVLayout.addWidget(details_groupbox)
 
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
@@ -162,19 +228,32 @@ class PreferencesDialogBase(QDialog):
         self.setSizeGripEnabled(False)
         self.setModal(True)
         self.mainVLayout = QVBoxLayout(self)
+        self.tabwidget = QTabWidget()
+        self.page_general = QWidget()
+        self.page_display = QWidget()
         self.widgetsVLayout = QVBoxLayout()
+        self.page_general.setLayout(self.widgetsVLayout)
+        self.displayVLayout = QVBoxLayout()
+        self.displayVLayout.setSpacing(5)  # arbitrary value, might conflict with style
+        self.page_display.setLayout(self.displayVLayout)
         self._setupPreferenceWidgets()
-        self.mainVLayout.addLayout(self.widgetsVLayout)
+        self._setupDisplayPage()
+        # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
             QDialogButtonBox.Cancel
             | QDialogButtonBox.Ok
             | QDialogButtonBox.RestoreDefaults
         )
+        self.mainVLayout.addWidget(self.tabwidget)
         self.mainVLayout.addWidget(self.buttonBox)
         self.layout().setSizeConstraint(QLayout.SetFixedSize)
+        self.tabwidget.addTab(self.page_general, "General")
+        self.tabwidget.addTab(self.page_display, "Display")
+        self.displayVLayout.addStretch(0)
+        self.widgetsVLayout.addStretch(0)
 
-    def _load(self, prefs, setchecked):
+    def _load(self, prefs, setchecked, section):
         # Edition-specific
         pass
 
@@ -182,28 +261,40 @@ class PreferencesDialogBase(QDialog):
         # Edition-specific
         pass
 
-    def load(self, prefs=None):
+    def load(self, prefs=None, section=Sections.ALL):
         if prefs is None:
             prefs = self.app.prefs
-        self.filterHardnessSlider.setValue(prefs.filter_hardness)
-        self.filterHardnessLabel.setNum(prefs.filter_hardness)
         setchecked = lambda cb, b: cb.setCheckState(Qt.Checked if b else Qt.Unchecked)
-        setchecked(self.mixFileKindBox, prefs.mix_file_kind)
-        setchecked(self.useRegexpBox, prefs.use_regexp)
-        setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
-        setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
-        setchecked(self.debugModeBox, prefs.debug_mode)
-        setchecked(self.reference_bold_font, prefs.reference_bold_font)
-        setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
-        self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
-        self.customCommandEdit.setText(prefs.custom_command)
-        self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-        try:
-            langindex = self.supportedLanguages.index(self.app.prefs.language)
-        except ValueError:
-            langindex = 0
-        self.languageComboBox.setCurrentIndex(langindex)
-        self._load(prefs, setchecked)
+        if section & Sections.GENERAL:
+            self.filterHardnessSlider.setValue(prefs.filter_hardness)
+            self.filterHardnessLabel.setNum(prefs.filter_hardness)
+            setchecked(self.mixFileKindBox, prefs.mix_file_kind)
+            setchecked(self.useRegexpBox, prefs.use_regexp)
+            setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
+            setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
+            setchecked(self.debugModeBox, prefs.debug_mode)
+            self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
+            self.customCommandEdit.setText(prefs.custom_command)
+        if section & Sections.DISPLAY:
+            setchecked(self.reference_bold_font, prefs.reference_bold_font)
+            setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
+            setchecked(self.details_dialog_titlebar_enabled,
+                       prefs.details_dialog_titlebar_enabled)
+            setchecked(self.details_dialog_vertical_titlebar,
+                       prefs.details_dialog_vertical_titlebar)
+            self.fontSizeSpinBox.setValue(prefs.tableFontSize)
+            self.details_table_delta_foreground_color.setColor(
+                prefs.details_table_delta_foreground_color)
+            self.result_table_ref_foreground_color.setColor(
+                prefs.result_table_ref_foreground_color)
+            self.result_table_delta_foreground_color.setColor(
+                prefs.result_table_delta_foreground_color)
+            try:
+                langindex = self.supportedLanguages.index(self.app.prefs.language)
+            except ValueError:
+                langindex = 0
+            self.languageComboBox.setCurrentIndex(langindex)
+        self._load(prefs, setchecked, section)
 
     def save(self):
         prefs = self.app.prefs
@@ -215,6 +306,11 @@ class PreferencesDialogBase(QDialog):
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
+        prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
+        prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
+        prefs.details_table_delta_foreground_color = self.details_table_delta_foreground_color.color
+        prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
+        prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
@@ -232,11 +328,45 @@ class PreferencesDialogBase(QDialog):
         self.app.prefs.language = lang
         self._save(prefs, ischecked)
 
-    def resetToDefaults(self):
-        self.load(Preferences())
+    def resetToDefaults(self, section_to_update):
+        self.load(Preferences(), section_to_update)
 
     # --- Events
     def buttonClicked(self, button):
         role = self.buttonBox.buttonRole(button)
         if role == QDialogButtonBox.ResetRole:
-            self.resetToDefaults()
+            current_tab = self.tabwidget.currentWidget()
+            section_to_update = Sections.ALL
+            if current_tab is self.page_general:
+                section_to_update = Sections.GENERAL
+            if current_tab is self.page_display:
+                section_to_update = Sections.DISPLAY
+            self.resetToDefaults(section_to_update)
+
+
+class ColorPickerButton(QPushButton):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.color = None
+        self.clicked.connect(self.onClicked)
+
+    @pyqtSlot()
+    def onClicked(self):
+        color = QColorDialog.getColor(
+            self.color if self.color is not None else Qt.white,
+            self.parent)
+        self.setColor(color)
+
+    def setColor(self, color):
+        size = QSize(16, 16)
+        px = QPixmap(size)
+        if color is None:
+            size.width = 0
+            size.height = 0
+        elif not color.isValid():
+            return
+        else:
+            self.color = color
+            px.fill(color)
+        self.setIcon(QIcon(px))

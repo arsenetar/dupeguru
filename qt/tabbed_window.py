@@ -171,6 +171,11 @@ class TabWindow(QMainWindow):
             self.setCurrentIndex(index)
         return index
 
+    def showTab(self, page):
+        index = self.indexOfWidget(page)
+        self.setTabVisible(index, True)
+        self.setCurrentIndex(index)
+
     def indexOfWidget(self, widget):
         return self.tabWidget.indexOf(widget)
 
@@ -302,7 +307,7 @@ class TabBarWindow(TabWindow):
 
     @pyqtSlot(int)
     def setTabIndex(self, index):
-        if not index:
+        if index is None:
             return
         self.tabBar.setCurrentIndex(index)
 
@@ -344,6 +349,11 @@ class TabBarWindow(TabWindow):
     @pyqtSlot(int)
     def onTabCloseRequested(self, index):
         current_widget = self.getWidgetAtIndex(index)
+        if isinstance(current_widget, DirectoriesDialog):
+            # On MacOS, the tab has a close button even though we explicitely
+            # set it to None in order to hide it. This should prevent
+            # the "Directories" tab from closing by mistake.
+            return
         current_widget.close()
         self.stackedWidget.removeWidget(current_widget)
         # In this case the signal will take care of the tab itself after removing the widget
