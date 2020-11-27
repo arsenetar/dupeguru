@@ -138,7 +138,8 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        self.directories = directories.Directories(self.exclude_list)
+        hash_cache_file = op.join(self.appdata, "hash.cache")
+        self.directories = directories.Directories(self.exclude_list, hash_cache_file)
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
         # In addition to "app-level" options, this dictionary also holds options that will be
@@ -293,6 +294,7 @@ class DupeGuru(Broadcaster):
     def _job_completed(self, jobid):
         if jobid == JobType.SCAN:
             self._results_changed()
+            self.directories.save_hashes()
             if not self.results.groups:
                 self.view.show_message(tr("No duplicates found."))
             else:

@@ -85,10 +85,11 @@ class File:
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
     # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
-    __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
+    __slots__ = ("path", "db", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
-    def __init__(self, path):
+    def __init__(self, path, db):
         self.path = path
+        self.db = db
         for attrname in self.INITIAL_INFO:
             setattr(self, attrname, NOT_SET)
 
@@ -107,11 +108,6 @@ class File:
                 result = self.INITIAL_INFO[attrname]
         return result
 
-    # This offset is where we should start reading the file to get a partial md5
-    # For audio file, it should be where audio data starts
-    def _get_md5partial_offset_and_size(self):
-        return (0x4000, 0x4000)  # 16Kb
-
     def _read_info(self, field):
         # print(f"_read_info({field}) for {self}")
         if field in ("size", "mtime"):
@@ -120,28 +116,14 @@ class File:
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == "md5partial":
             try:
-                with self.path.open("rb") as fp:
-                    offset, size = self._get_md5partial_offset_and_size()
-                    fp.seek(offset)
-                    partialdata = fp.read(size)
-                    md5 = hashlib.md5(partialdata)
-                    self.md5partial = md5.digest()
-            except Exception:
-                pass
+                self.md5partial = self.db.get_md5partial(self.path)
+            except Exception as e:
+                logging.warning("Couldn't get md5partial for %s: %s", self.path, e)
         elif field == "md5":
             try:
-                with self.path.open("rb") as fp:
-                    md5 = hashlib.md5()
-                    filedata = fp.read(CHUNK_SIZE)
-                    while filedata:
-                        md5.update(filedata)
-                        filedata = fp.read(CHUNK_SIZE)
-                    # FIXME For python 3.8 and later
-                    # while filedata := fp.read(CHUNK_SIZE):
-                    #     md5.update(filedata)
-                    self.md5 = md5.digest()
-            except Exception:
-                pass
+                self.md5 = self.db.get_md5(self.path)
+            except Exception as e:
+                logging.warning("Couldn't get md5 for %s: %s", self.path, e)
         elif field == "md5samples":
             try:
                 with self.path.open("rb") as fp:
@@ -225,13 +207,13 @@ class Folder(File):
 
     __slots__ = File.__slots__ + ("_subfolders",)
 
-    def __init__(self, path):
-        File.__init__(self, path)
+    def __init__(self, path, db):
+        File.__init__(self, path, db)
         self._subfolders = None
 
     def _all_items(self):
         folders = self.subfolders
-        files = get_files(self.path)
+        files = get_files(self.path, self.db)
         return folders + files
 
     def _read_info(self, field):
@@ -260,7 +242,7 @@ class Folder(File):
     def subfolders(self):
         if self._subfolders is None:
             subfolders = [p for p in self.path.listdir() if not p.islink() and p.isdir()]
-            self._subfolders = [self.__class__(p) for p in subfolders]
+            self._subfolders = [self.__class__(p, self.db) for p in subfolders]
         return self._subfolders
 
     @classmethod
@@ -268,7 +250,7 @@ class Folder(File):
         return not path.islink() and path.isdir()
 
 
-def get_file(path, fileclasses=[File]):
+def get_file(path, db, fileclasses=[File]):
     """Wraps ``path`` around its appropriate :class:`File` class.
 
     Whether a class is "appropriate" is decided by :meth:`File.can_handle`
@@ -278,10 +260,10 @@ def get_file(path, fileclasses=[File]):
     """
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
-            return fileclass(path)
+            return fileclass(path, db)
 
 
-def get_files(path, fileclasses=[File]):
+def get_files(path, db, fileclasses=[File]):
     """Returns a list of :class:`File` for each file contained in ``path``.
 
     :param Path path: path to scan
@@ -291,7 +273,7 @@ def get_files(path, fileclasses=[File]):
     try:
         result = []
         for path in path.listdir():
-            file = get_file(path, fileclasses=fileclasses)
+            file = get_file(path, db, fileclasses=fileclasses)
             if file is not None:
                 result.append(file)
         return result
