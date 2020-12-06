@@ -1,4 +1,4 @@
-=== 4.0.5 (2020-10-27)
+=== 4.1.0 (2020-12-06)
 
 * Use tabs instead of floating windows (#688)
 * Add image comparison features to details dialog (#683)
@@ -14,7 +14,8 @@
 * Add shortcut description to mark selected action (#656)
 * Fix row trimming being too aggressive. (#655, #654)
 * Add a preference option to disable bold font on reference row (#646)
-* Various building and packaging issues
+* Use relative icon path for themes to override more easily (#746)
+* Fix various building and packaging issues
 
 === 4.0.4 (2019-05-13)
 
