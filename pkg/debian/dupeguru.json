@@ -3,5 +3,5 @@
 	"longname": "dupeGuru",
 	"execname": "dupeguru",
 	"arch": "any",
-	"iconpath": "/usr/share/dupeguru/dgse_logo_128.png"
+	"iconpath": "dupeguru"
 }
