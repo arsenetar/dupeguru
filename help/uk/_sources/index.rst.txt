@@ -3,15 +3,15 @@
 
 .. only:: edition_se
 
-    Цей документ також доступна на `французькому <http://www.hardcoded.net/dupeguru/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru/help/hy/>`__.
+    Цей документ також доступна на `французькому <http://dupeguru.voltaicideas.net/help/fr/>`__, `німецький <http://dupeguru.voltaicideas.net/help/de/>`__ і `Вірменський <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_me
 
-    Цей документ також доступна на `французькому  <http://www.hardcoded.net/dupeguru_me/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru_me/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru_me/help/hy/>`__.
+    Цей документ також доступна на `французькому  <http://dupeguru.voltaicideas.net/help/fr/>`__, `німецький <http://dupeguru.voltaicideas.net/help/de/>`__ і `Вірменський <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_pe
 
-    Цей документ також доступна на `французькому <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru_pe/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru_pe/help/hy/>`__.
+    Цей документ також доступна на `французькому <http://dupeguru.voltaicideas.net/help/fr/>`__, `німецький <http://dupeguru.voltaicideas.net/help/de/>`__ і `Вірменський <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_se or edition_me
 
@@ -44,4 +44,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`search`
 
-.. _homepage: https://www.hardcoded.net/dupeguru
+.. _homepage: https://dupeguru.voltaicideas.net

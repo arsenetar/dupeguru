@@ -3,15 +3,15 @@
 
 .. only:: edition_se
 
-    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://www.hardcoded.net/dupeguru/help/fr/>`__ և `Գերմաներեն <http://www.hardcoded.net/dupeguru/help/de/>`__.
+    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://dupeguru.voltaicideas.net/help/fr/>`__ և `Գերմաներեն <http://dupeguru.voltaicideas.net/help/de/>`__.
 
 .. only:: edition_me
 
-    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://www.hardcoded.net/dupeguru_me/help/fr/>`__ և `Գերմաներեն <http://www.hardcoded.net/dupeguru_me/help/de/>`__.
+    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://dupeguru.voltaicideas.net/help/fr/>`__ և `Գերմաներեն <http://dupeguru.voltaicideas.net/help/de/>`__.
 
 .. only:: edition_pe
 
-    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__ և `Գերմաներեն <http://www.hardcoded.net/dupeguru_pe/help/de/>`__.
+    Այս փաստաթուղթը հասանելի է նաև՝ `Ֆրանսերեն <http://dupeguru.voltaicideas.net/help/fr/>`__ և `Գերմաներեն <http://dupeguru.voltaicideas.net/help/de/>`__.
 
 .. only:: edition_se or edition_me
 
@@ -44,4 +44,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`search`
 
-.. _homepage: https://www.hardcoded.net/dupeguru
+.. _homepage: https://dupeguru.voltaicideas.net

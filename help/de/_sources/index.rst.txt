@@ -3,15 +3,15 @@ dupeGuru Hilfe
 
 .. only:: edition_se
 
-    Dieses Dokument ist auch auf `Englisch <http://www.hardcoded.net/dupeguru/help/en/>`__ und `Französisch <http://www.hardcoded.net/dupeguru/help/fr/>`__ verfügbar.
+    Dieses Dokument ist auch auf `Englisch <http://dupeguru.voltaicideas.net/help/en/>`__ und `Französisch <https://dupeguru.voltaicideas.net/help/fr/>`__ verfügbar.
 
 .. only:: edition_me
 
-    Dieses Dokument ist auch auf `Englisch <http://www.hardcoded.net/dupeguru/help/en/>`__ und `Französisch <http://www.hardcoded.net/dupeguru_me/help/fr/>`__ verfügbar.
+    Dieses Dokument ist auch auf `Englisch <http://dupeguru.voltaicideas.net/help/en/>`__ und `Französisch <https://dupeguru.voltaicideas.net/help/fr/>`__ verfügbar.
 
 .. only:: edition_pe
 
-    Dieses Dokument ist auch auf `Englisch <http://www.hardcoded.net/dupeguru/help/en/>`__ und `Französisch <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__ verfügbar.
+    Dieses Dokument ist auch auf `Englisch <http://dupeguru.voltaicideas.net/help/en/>`__ und `Französisch <https://dupeguru.voltaicideas.net/help/fr/>`__ verfügbar.
 
 .. only:: edition_se or edition_me
 
@@ -44,4 +44,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`search`
 
-.. _homepage: https://www.hardcoded.net/dupeguru
+.. _homepage: https://dupeguru.voltaicideas.net

@@ -8,7 +8,7 @@
 
 **dupeGuru** is good with pictures. It has a special Picture mode that can scan pictures **fuzzily**, allowing you to find pictures that are similar, but not exactly the same.
 
-**dupeGuru** is customizable. You can tweak its matching engine to find exactly the kind of duplicates you want to find. The [Preference page](https://www.hardcoded.net/dupeguru/help/en/preferences.html) of the help file lists all the scanning engine settings you can change.
+**dupeGuru** is customizable. You can tweak its matching engine to find exactly the kind of duplicates you want to find. The [Preference page](https://dupeguru.voltaicideas.net/help/en/preferences.html) of the help file lists all the scanning engine settings you can change.
 
 **dupeGuru** is safe. Its engine has been especially designed with safety in mind. Its reference directory system as well as its grouping system prevent you from deleting files you didn't mean to delete.
 
