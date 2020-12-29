@@ -1,3 +1,0 @@
-PyQt5 >=5.4,<6.0
-pywin32>=200
-pyinstaller>=3.4,<4.0

@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
 PYRCC5 ?= pyrcc5
-REQ_MINOR_VERSION = 4
+REQ_MINOR_VERSION = 6
 PREFIX ?= /usr/local
 
 # Window compatability via Msys2 
@@ -15,7 +15,7 @@ ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows
 	VENV_OPTIONS = 
 else
 	BIN = bin
-	SO = cpython-3$(PYTHON_VERSION_MINOR)*.so
+	SO = *.so
 	VENV_OPTIONS = --system-site-packages
 endif
 
@@ -43,16 +43,16 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-all : | env i18n modules qt/dg_rc.py
+all: | env i18n modules qt/dg_rc.py 
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
 	$(VENV_PYTHON) run.py
 
-pyc:
-	${PYTHON} -m compileall ${packages}
+pyc: | env
+	${VENV_PYTHON} -m compileall ${packages}
 
-reqs :
+reqs:
 ifneq ($(shell test $(PYTHON_VERSION_MINOR) -gt $(REQ_MINOR_VERSION); echo $$?),0)
 	$(error "Python 3.${REQ_MINOR_VERSION}+ required. Aborting.")
 endif
@@ -63,7 +63,7 @@ endif
 	@${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 || \
 		{ echo "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
 
-env : | reqs
+env: | reqs
 ifndef NO_VENV
 	@echo "Creating our virtualenv"
 	${PYTHON} -m venv env
@@ -73,39 +73,25 @@ ifndef NO_VENV
 	${PYTHON} -m venv --upgrade ${VENV_OPTIONS} env
 endif
 
-build/help : | env
+build/help: | env
 	$(VENV_PYTHON) build.py --doc
 
-qt/dg_rc.py : qt/dg.qrc
+qt/dg_rc.py: qt/dg.qrc
 	$(PYRCC5) qt/dg.qrc > qt/dg_rc.py
 
 i18n: $(mofiles)
 
-%.mo : %.po
+%.mo: %.po
 	msgfmt -o $@ $<	
 
-core/pe/_block.$(SO) : core/pe/modules/block.c core/pe/modules/common.c
-	$(PYTHON) hscommon/build_ext.py $^ _block
-	mv _block.$(SO) core/pe
+modules: | env
+	$(VENV_PYTHON) build.py --modules
 
-core/pe/_cache.$(SO) : core/pe/modules/cache.c core/pe/modules/common.c
-	$(PYTHON) hscommon/build_ext.py $^ _cache
-	mv _cache.$(SO) core/pe
-
-qt/pe/_block_qt.$(SO) : qt/pe/modules/block.c
-	$(PYTHON) hscommon/build_ext.py $^ _block_qt
-	mv _block_qt.$(SO) qt/pe
-
-modules : core/pe/_block.$(SO) core/pe/_cache.$(SO) qt/pe/_block_qt.$(SO)
-
-mergepot :
+mergepot: | env
 	$(VENV_PYTHON) build.py --mergepot
 
-normpo :
+normpo: | env
 	$(VENV_PYTHON) build.py --normpo
-
-srcpkg :
-	./scripts/srcpkg.sh
 
 install: all pyc
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
@@ -123,7 +109,7 @@ installdocs: build/help
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
 	cp -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
 
-uninstall :
+uninstall:
 	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
 	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru"
 	rm -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
@@ -134,4 +120,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY : clean srcpkg normpo mergepot modules i18n reqs run pyc install uninstall all
+.PHONY: clean normpo mergepot modules i18n reqs run pyc install uninstall all
