@@ -161,28 +161,31 @@ On MacOS, the tab bar will fill up the window's width instead."))
         self.ui_groupbox.setLayout(layout)
         self.displayVLayout.addWidget(self.ui_groupbox)
 
-        gridlayout = QFormLayout()
+        gridlayout = QGridLayout()
+        gridlayout.setColumnStretch(2, 2)
+        formlayout = QFormLayout()
         result_groupbox = QGroupBox("&Result Table")
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
-        gridlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
+        formlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
         self._setupAddCheckbox("reference_bold_font",
                                tr("Use bold font for references"))
-        gridlayout.addRow(self.reference_bold_font)
+        formlayout.addRow(self.reference_bold_font)
 
         self.result_table_ref_foreground_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Reference foreground color:"),
+        formlayout.addRow(tr("Reference foreground color:"),
                           self.result_table_ref_foreground_color)
         self.result_table_ref_background_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Reference background color:"),
+        formlayout.addRow(tr("Reference background color:"),
                           self.result_table_ref_background_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Delta foreground color:"),
+        formlayout.addRow(tr("Delta foreground color:"),
                           self.result_table_delta_foreground_color)
-        gridlayout.setLabelAlignment(Qt.AlignLeft)
+        formlayout.setLabelAlignment(Qt.AlignLeft)
 
         # Keep same vertical spacing as parent layout for consistency
-        gridlayout.setVerticalSpacing(self.displayVLayout.spacing())
+        formlayout.setVerticalSpacing(self.displayVLayout.spacing())
+        gridlayout.addLayout(formlayout, 0, 0)
         result_groupbox.setLayout(gridlayout)
         self.displayVLayout.addWidget(result_groupbox)
 
@@ -205,12 +208,13 @@ use the modifier key to drag the floating window around") if ISLINUX else
         self.details_dialog_titlebar_enabled.stateChanged.connect(
             self.details_dialog_vertical_titlebar.setEnabled)
         gridlayout = QGridLayout()
-        self.details_table_delta_foreground_color_label = QLabel(tr("Delta foreground color:"))
-        gridlayout.addWidget(self.details_table_delta_foreground_color_label, 4, 0)
+        formlayout = QFormLayout()
         self.details_table_delta_foreground_color = ColorPickerButton(self)
-        gridlayout.addWidget(self.details_table_delta_foreground_color, 4, 2, 1, 1, Qt.AlignLeft)
+        # Padding on the right side and space between label and widget to keep it somewhat consistent across themes
         gridlayout.setColumnStretch(1, 1)
-        gridlayout.setColumnStretch(3, 4)
+        formlayout.setHorizontalSpacing(50)
+        formlayout.addRow(tr("Delta foreground color:"), self.details_table_delta_foreground_color)
+        gridlayout.addLayout(formlayout, 0, 0)
         self.details_groupbox_layout.addLayout(gridlayout)
         details_groupbox.setLayout(self.details_groupbox_layout)
         self.displayVLayout.addWidget(details_groupbox)

@@ -17,7 +17,7 @@ class IgnoreListDialog:
     def __init__(self, app):
         self.app = app
         self.ignore_list = self.app.ignore_list
-        self.ignore_list_table = IgnoreListTable(self)
+        self.ignore_list_table = IgnoreListTable(self)  # GUITable
 
     def clear(self):
         if not self.ignore_list:

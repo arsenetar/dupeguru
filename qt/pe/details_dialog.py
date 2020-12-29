@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (
     QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame)
 from PyQt5.QtGui import QResizeEvent
 from hscommon.trans import trget
-from hscommon.plat import ISWINDOWS
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
 from .image_viewer import (
@@ -102,14 +101,14 @@ class DetailsDialog(DetailsDialogBase):
         self.vController.updateBothImages()
 
     def show(self):
-        # Compute the maximum size the table view can reach
-        # Assuming all rows below headers have the same height
+        # Give the splitter a maximum height to reach. This is assuming that
+        # all rows below their headers have the same height
         self.tableView.setMaximumHeight(
             self.tableView.rowHeight(1)
             * self.tableModel.model.row_count()
             + self.tableView.verticalHeader().sectionSize(0)
-            # Windows seems to add a few pixels more to the table somehow
-            + (5 if ISWINDOWS else 0))
+            # looks like the handle is taken into account by the splitter
+            + self.splitter.handle(1).size().height())
         DetailsDialogBase.show(self)
         self.ensure_same_sizes()
         self._update()

@@ -137,6 +137,7 @@ class DirectoriesDialog(QMainWindow):
         self.menuView.addAction(self.app.actionDirectoriesWindow)
         self.menuView.addAction(self.actionShowResultsWindow)
         self.menuView.addAction(self.app.actionIgnoreList)
+        self.menuView.addAction(self.app.actionExcludeList)
         self.menuView.addSeparator()
         self.menuView.addAction(self.app.actionPreferences)
 
