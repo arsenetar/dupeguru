@@ -132,7 +132,7 @@ class ExcludeListDialog(QDialog):
         match = compiled.match(input_text)
         if match:
             self._input_styled = True
-            self.inputLine.setStyleSheet("background-color: rgb(10, 120, 10);")
+            self.inputLine.setStyleSheet("background-color: rgb(10, 220, 10);")
         else:
             self.reset_input_style()
 
