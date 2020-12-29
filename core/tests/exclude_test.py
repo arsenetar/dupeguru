@@ -11,6 +11,7 @@ from xml.etree import ElementTree as ET
 
 # from pytest import raises
 from hscommon.testutil import eq_
+from hscommon.plat import ISWINDOWS
 
 from .base import DupeGuru
 from ..exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
@@ -245,8 +246,11 @@ class TestCaseCompiledList():
             assert expr.pattern in exprs
 
     def test_compiled_files(self):
-        # test is separator is indeed checked properly to yield the output
-        regex1 = r"test/one/sub"
+        # is path separator checked properly to yield the output
+        if ISWINDOWS:
+            regex1 = r"test\\one\\sub"
+        else:
+            regex1 = r"test/one/sub"
         self.e_separate.add(regex1)
         self.e_separate.mark(regex1)
         self.e_union.add(regex1)

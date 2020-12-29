@@ -7,6 +7,8 @@ from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
 
 from qtlib.column import Column
 from qtlib.table import Table
+from hscommon.trans import trget
+tr = trget("ui")
 
 
 class ExcludeListTable(Table):
@@ -31,7 +33,7 @@ class ExcludeListTable(Table):
             if role == Qt.CheckStateRole and row.markable:
                 return Qt.Checked if row.marked else Qt.Unchecked
             if role == Qt.ToolTipRole and not row.markable:
-                return "Compilation error: " + row.get_cell_value("error")
+                return tr("Compilation error: ") + row.get_cell_value("error")
             if role == Qt.DecorationRole and not row.markable:
                 return QIcon.fromTheme("dialog-error", QIcon(":/error"))
             return None
@@ -41,7 +43,7 @@ class ExcludeListTable(Table):
             return QFont(self.view.font())
         elif role == Qt.BackgroundRole and column.name == "regex":
             if row.highlight:
-                return QColor(10, 120, 10)  # green
+                return QColor(10, 200, 10)  # green
         elif role == Qt.EditRole:
             if column.name == "regex":
                 return row.data[column.name]

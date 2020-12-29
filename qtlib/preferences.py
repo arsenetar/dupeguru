@@ -121,8 +121,10 @@ class Preferences(QObject):
         self._settings.setValue(name, normalize_for_serialization(value))
 
     def saveGeometry(self, name, widget):
-        # We save geometry under a 5-sized int array: first item is a flag for whether the widget
-        # is maximized and the other 4 are (x, y, w, h).
+        # We save geometry under a 7-sized int array: first item is a flag
+        # for whether the widget is maximized, second item is a flag for whether
+        # the widget is docked, third item is a Qt::DockWidgetArea enum value,
+        # and the other 4 are (x, y, w, h).
         m = 1 if widget.isMaximized() else 0
         d = 1 if isinstance(widget, QDockWidget) and not widget.isFloating() else 0
         area = widget.parent.dockWidgetArea(widget) if d else 0

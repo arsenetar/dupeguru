@@ -230,8 +230,6 @@ class TabWindow(QMainWindow):
             # menu or shortcut. But this is useless if we don't have a button
             # set up to make a close request anyway. This check could be removed.
             return
-        # current_widget.close()  # seems unnecessary
-        # self.tabWidget.widget(index).hide()
         self.removeTab(index)
 
     @pyqtSlot()

@@ -128,11 +128,7 @@ class DetailsDialog(DetailsDialogBase):
 
         # This works when expanding but it's ugly:
         if self.selectedImageViewer.size().width() > self.referenceImageViewer.size().width():
-            # print(f"""Before selected size: {self.selectedImageViewer.size()}\n""",
-            #       f"""Before reference size: {self.referenceImageViewer.size()}""")
             self.selectedImageViewer.resize(self.referenceImageViewer.size())
-            # print(f"""After selected size: {self.selectedImageViewer.size()}\n""",
-            #       f"""After reference size: {self.referenceImageViewer.size()}""")
 
     # model --> view
     def refresh(self):
