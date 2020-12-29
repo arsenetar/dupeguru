@@ -20,7 +20,7 @@ matrix:
                 - os: "windows"
                   language: shell
                   python: "3.8"
-                  env: "PATH=/c/python38:/c/python39/Scripts:$PATH"
+                  env: "PATH=/c/python38:/c/python38/Scripts:$PATH"
                   before_install:
                           - choco install python --version=3.8.6
                           - cp /c/python38/python.exe /c/python38/python3.exe
