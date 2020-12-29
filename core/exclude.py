@@ -12,6 +12,7 @@ from os import sep
 import logging
 import functools
 from hscommon.util import FileOrPath
+from hscommon.plat import ISWINDOWS
 import time
 
 default_regexes = [r"^thumbs\.db$",  # Obsolete after WindowsXP
@@ -19,10 +20,10 @@ default_regexes = [r"^thumbs\.db$",  # Obsolete after WindowsXP
                    r"^\.DS_Store$",  # MacOS metadata
                    r"^\.Trash\-.*",  # Linux trash directories
                    r"^\$Recycle\.Bin$",  # Windows
-                   r"^\..*",  # Hidden files
+                   r"^\..*",  # Hidden files on Unix-like
                    ]
 # These are too broad
-forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\..*"]
+forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\\\\.*", r".*\..*"]
 
 
 def timer(func):
@@ -168,10 +169,16 @@ class ExcludeList(Markable):
 
     def build_compiled_caches(self, union=False):
         if not union:
-            self._cached_compiled_files =\
-                [x for x in self._excluded_compiled if sep not in x.pattern]
-            self._cached_compiled_paths =\
-                [x for x in self._excluded_compiled if sep in x.pattern]
+            if not ISWINDOWS:
+                self._cached_compiled_files =\
+                    [x for x in self._excluded_compiled if not has_sep(x.pattern)]
+                self._cached_compiled_paths =\
+                    [x for x in self._excluded_compiled if has_sep(x.pattern)]
+            else:
+                self._cached_compiled_files =\
+                    [x for x in self._excluded_compiled if not has_sep(x.pattern)]
+                self._cached_compiled_paths =\
+                    [x for x in self._excluded_compiled if has_sep(x.pattern)]
             return
         marked_count = [x for marked, x in self if marked]
         # If there is no item, the compiled Pattern will be '' and match everything!
@@ -184,13 +191,13 @@ class ExcludeList(Markable):
             # the same regardless of whether the client asked for union or not
             self._cached_compiled_union_all =\
                 (re.compile('|'.join(marked_count)),)
-            files_marked = [x for x in marked_count if sep not in x]
+            files_marked = [x for x in marked_count if not has_sep(x)]
             if not files_marked:
                 self._cached_compiled_union_files = tuple()
             else:
                 self._cached_compiled_union_files =\
                     (re.compile('|'.join(files_marked)),)
-            paths_marked = [x for x in marked_count if sep in x]
+            paths_marked = [x for x in marked_count if has_sep(x)]
             if not paths_marked:
                 self._cached_compiled_union_paths = tuple()
             else:
@@ -488,3 +495,11 @@ def ordered_keys(_dict):
     list_of_items.sort(key=lambda x: x[1].get("index"))
     for item in list_of_items:
         yield item[0]
+
+
+if ISWINDOWS:
+    def has_sep(x):
+        return '\\' + sep in x
+else:
+    def has_sep(x):
+        return sep in x

@@ -12,6 +12,7 @@ import shutil
 from pytest import raises
 from hscommon.path import Path
 from hscommon.testutil import eq_
+from hscommon.plat import ISWINDOWS
 
 from ..fs import File
 from ..directories import (
@@ -428,7 +429,10 @@ files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled
         assert "unwanted_subdirfile.gif" not in files
         assert "unwanted_subdarfile.png" not in files
 
-        regex3 = r".*Recycle\.Bin\/.*unwanted.*subdirfile.*"
+        if ISWINDOWS:
+            regex3 = r".*Recycle\.Bin\\.*unwanted.*subdirfile.*"
+        else:
+            regex3 = r".*Recycle\.Bin\/.*unwanted.*subdirfile.*"
         self.d._exclude_list.rename(regex2, regex3)
         assert self.d._exclude_list.error(regex3) is None
         # print(f"get_folders(): {[x for x in self.d.get_folders()]}")
@@ -516,6 +520,8 @@ files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled
         self.d.set_state(p1["foobar"][".hidden_dir"], DirectoryState.Normal)
         # The files should still be filtered
         files = self.get_files_and_expect_num_result(1)
+        eq_(len(self.d._exclude_list.compiled_paths), 0)
+        eq_(len(self.d._exclude_list.compiled_files), 1)
         assert ".hidden_file.txt" not in files
         assert ".hidden_subfile.png" not in files
         assert "foobar.jpg" in files

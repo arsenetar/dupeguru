@@ -245,7 +245,7 @@ class TestCaseCompiledList():
             assert expr.pattern in exprs
 
     def test_compiled_files(self):
-        # test is separator is indeed checked properly to yield the output
+        # is path separator checked properly to yield the output
         regex1 = r"test/one/sub"
         self.e_separate.add(regex1)
         self.e_separate.mark(regex1)
