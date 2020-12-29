@@ -41,7 +41,7 @@ class ExcludeListTable(Table):
             return QFont(self.view.font())
         elif role == Qt.BackgroundRole and column.name == "regex":
             if row.highlight:
-                return QColor(10, 120, 10)  # green
+                return QColor(10, 200, 10)  # green
         elif role == Qt.EditRole:
             if column.name == "regex":
                 return row.data[column.name]
