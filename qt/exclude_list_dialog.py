@@ -118,6 +118,8 @@ class ExcludeListDialog(QDialog):
             return
         # if at least one row matched, we know whether table is highlighted or not
         self._row_matched = self.model.test_string(input_text)
+        # FIXME There is a bug on Windows (7) where the table rows don't get
+        # repainted until the table receives a mouse click event.
         self.tableView.update()
 
         input_regex = self.inputLine.text()
@@ -160,5 +162,6 @@ Example: if you want to filter out .PNG files from the "My Pictures" directory o
 <code>.*My\\sPictures\\\\.*\\.png</code><br><br>\
 You can test the regular expression with the test string feature by pasting a fake path in it:<br>\
 <code>C:\\\\User\\My Pictures\\test.png</code><br><br>
-Matching regular expressions will be highlighted.<br><br>
+Matching regular expressions will be highlighted.<br>\
+If there is at least one highlight, the path tested will be ignored during scans.<br><br>\
 Directories and files starting with a period '.' are filtered out by default.<br><br>"""))
