@@ -80,9 +80,9 @@ class ExcludeListDialog(QDialog):
         gridlayout.addWidget(self.testLine, 6, 0)
 
         layout.addLayout(gridlayout)
-        self.inputLine.setPlaceholderText("Type a python regular expression here...")
+        self.inputLine.setPlaceholderText(tr("Type a python regular expression here..."))
         self.inputLine.setFocus()
-        self.testLine.setPlaceholderText("Type a file system path or filename here...")
+        self.testLine.setPlaceholderText(tr("Type a file system path or filename here..."))
         self.testLine.setClearButtonEnabled(True)
 
     # --- model --> view
