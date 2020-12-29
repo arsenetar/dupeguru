@@ -21,7 +21,7 @@ To build with a different python version 3.5 vs 3.7 or 32 bit vs 64 bit specify 
     $ cd <dupeGuru directory>
     $ py -3.7 -m venv .\env
     $ .\env\Scripts\activate
-    $ pip install -r requirements.txt -r requirements-windows.txt
+    $ pip install -r requirements.txt
     $ python build.py
     $ python run.py
 
@@ -36,8 +36,6 @@ Then the following execution of the makefile should work.  Pass the correct valu
     $ cd <dupeGuru directory>
     $ make PYTHON='py -3.7'
     $ make run
-
-NOTE: Install PyQt5 & cx-Freeze with requirements-windows.txt into the venv before running the packaging scripts in the section below.
 
 ### Generate Windows Installer Packages
 You need to use the respective x86 or x64 version of python to build the 32 bit and 64 bit versions.  The build scripts will automatically detect the python architecture for you. When using build.py make sure the resulting python works before continuing to package.py.  NOTE: package.py looks for the 'makensis' executable in the default location for a 64 bit windows system.  Run the following in the respective virtual environment.
