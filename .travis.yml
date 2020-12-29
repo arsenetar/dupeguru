@@ -7,28 +7,20 @@ matrix:
         include:
                 - os: "linux"
                   dist: "xenial"
-                  python: "3.8"
-                  script:
-                        - tox -e style
-                - os: "linux"
-                  dist: "xenial"
                   python: "3.6"
                 - os: "linux"
                   dist: "xenial"
                   python: "3.7"
                 - os: "linux"
-                  dist: "xenial"
+                  dist: "focal"
                   python: "3.8"
+                - os: "linux"
+                  dist: "focal"
+                  python: "3.9"
                 - os: "windows"
                   language: shell
-                  python: "3.7"
-                  env: "PATH=/c/python37:/c/python37/Scripts:$PATH"
+                  python: "3.8"
+                  env: "PATH=/c/python38:/c/python39/Scripts:$PATH"
                   before_install:
-                          - choco install python --version=3.7.6
-                          - choco install make
-                          - cp /c/python37/python.exe /c/python37/python3.exe
-                  before_script:
-                          - pip3 install -r requirements-windows.txt
-                          - python3 build.py
-                  script:
-                          - tox -e WINDOWS
+                          - choco install python --version=3.8.6
+                          - cp /c/python38/python.exe /c/python38/python3.exe

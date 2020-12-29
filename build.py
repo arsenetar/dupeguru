@@ -54,6 +54,12 @@ def parse_args():
         dest="normpo",
         help="Normalize all PO files (do this before commit).",
     )
+    parser.add_option(
+        "--modules",
+        action="store_true",
+        dest="modules",
+        help="Build the python modules.",
+    )
     (options, args) = parser.parse_args()
     return options
 
@@ -182,6 +188,8 @@ def main():
         build_mergepot()
     elif options.normpo:
         build_normpo()
+    elif options.modules:
+        build_pe_modules()
     else:
         build_normal()
 
