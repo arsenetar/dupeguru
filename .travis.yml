@@ -24,3 +24,4 @@ matrix:
                   before_install:
                           - choco install python --version=3.8.6
                           - cp /c/python38/python.exe /c/python38/python3.exe
+                  script: tox -e py38
