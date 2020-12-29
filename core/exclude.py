@@ -169,16 +169,10 @@ class ExcludeList(Markable):
 
     def build_compiled_caches(self, union=False):
         if not union:
-            if not ISWINDOWS:
-                self._cached_compiled_files =\
-                    [x for x in self._excluded_compiled if not has_sep(x.pattern)]
-                self._cached_compiled_paths =\
-                    [x for x in self._excluded_compiled if has_sep(x.pattern)]
-            else:
-                self._cached_compiled_files =\
-                    [x for x in self._excluded_compiled if not has_sep(x.pattern)]
-                self._cached_compiled_paths =\
-                    [x for x in self._excluded_compiled if has_sep(x.pattern)]
+            self._cached_compiled_files =\
+                [x for x in self._excluded_compiled if not has_sep(x.pattern)]
+            self._cached_compiled_paths =\
+                [x for x in self._excluded_compiled if has_sep(x.pattern)]
             return
         marked_count = [x for marked, x in self if marked]
         # If there is no item, the compiled Pattern will be '' and match everything!
