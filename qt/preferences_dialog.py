@@ -176,7 +176,7 @@ On MacOS, the tab bar will fill up the window's width instead."))
         formlayout.addRow(tr("Reference foreground color:"),
                           self.result_table_ref_foreground_color)
         self.result_table_ref_background_color = ColorPickerButton(self)
-        gridlayout.addRow(tr("Reference background color:"),
+        formlayout.addRow(tr("Reference background color:"),
                           self.result_table_ref_background_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
         formlayout.addRow(tr("Delta foreground color:"),
