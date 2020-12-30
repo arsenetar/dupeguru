@@ -295,7 +295,7 @@ def build_debian_changelog(
         return [s.strip() for s in result if s.strip()]
 
     ENTRY_MODEL = (
-        "{pkg} ({version}-1) {distribution}; urgency=low\n\n{changes}\n "
+        "{pkg} ({version}) {distribution}; urgency=low\n\n{changes}\n "
         "-- Virgil Dupras <hsoft@hardcoded.net>  {date}\n\n"
     )
     CHANGE_MODEL = "  * {description}\n"
