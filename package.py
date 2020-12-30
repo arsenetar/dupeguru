@@ -210,6 +210,31 @@ def package_windows():
     )
     print_and_do(cmd.format(version_array[0], version_array[1], version_array[2], bits))
 
+def package_macos():
+    # include locale files if they are built otherwise exit as it will break
+    # the localization
+    if not op.exists("build/locale"):
+        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
+        return
+    # include help files if they are built otherwise exit as they should be included?
+    if not op.exists("build/help"):
+        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
+        return
+    # run pyinstaller from here:
+    import PyInstaller.__main__
+
+    PyInstaller.__main__.run(
+        [
+            "--name=dupeguru",
+            "--windowed",
+            "--noconfirm",
+            "--icon=images/dupeguru.icns",
+            "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
+            "--add-data=build/locale:locale",
+            "--add-data=build/help:help",
+            "run.py",
+        ]
+    ) 
 
 def main():
     args = parse_args()
@@ -220,6 +245,8 @@ def main():
     print("Packaging dupeGuru with UI qt")
     if sys.platform == "win32":
         package_windows()
+    elif sys.platform == "darwin":
+        package_macos()
     else:
         if not args.arch_pkg:
             distname = distro.id()
