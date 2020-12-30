@@ -6,11 +6,14 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSettings, QRect, QObject, pyqtSignal
+from PyQt5.QtCore import Qt, QSettings, QRect, QObject, pyqtSignal, QStandardPaths
 from PyQt5.QtWidgets import QDockWidget
 
 from hscommon.trans import trget
 from hscommon.util import tryint
+from hscommon.plat import ISWINDOWS
+
+from os import path as op
 
 tr = trget("qtlib")
 
@@ -74,7 +77,18 @@ class Preferences(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.reset()
-        self._settings = QSettings()
+        # On windows use an ini file in the AppDataLocation instead of registry if possible as it
+        # makes it easier for a user to clear it out when there are issues.
+        if ISWINDOWS:
+            Locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+            if Locations:
+                self._settings = QSettings(
+                    op.join(Locations[0], "settings.ini"), QSettings.IniFormat
+                )
+            else:
+                self._settings = QSettings()
+        else:
+            self._settings = QSettings()
 
     def _load_values(self, settings, get):
         pass
