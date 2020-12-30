@@ -118,8 +118,6 @@ class ExcludeListDialog(QDialog):
             return
         # if at least one row matched, we know whether table is highlighted or not
         self._row_matched = self.model.test_string(input_text)
-        # FIXME There is a bug on Windows (7) where the table rows don't get
-        # repainted until the table receives a mouse click event.
         self.tableView.update()
 
         input_regex = self.inputLine.text()
