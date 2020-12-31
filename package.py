@@ -46,11 +46,11 @@ def copy_files_to_package(destpath, packages, with_so):
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
-        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
+        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
+        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
         return
     shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
     shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
@@ -161,11 +161,11 @@ def package_windows():
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
-        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
+        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
+        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
         return
     # create version information file from template
     try:
@@ -210,15 +210,16 @@ def package_windows():
     )
     print_and_do(cmd.format(version_array[0], version_array[1], version_array[2], bits))
 
+
 def package_macos():
     # include locale files if they are built otherwise exit as it will break
     # the localization
     if not op.exists("build/locale"):
-        print("Locale files are missing. Have you run \"build.py --loc\"? Exiting...")
+        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
         return
     # include help files if they are built otherwise exit as they should be included?
     if not op.exists("build/help"):
-        print("Help files are missing. Have you run \"build.py --doc\"? Exiting...")
+        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
         return
     # run pyinstaller from here:
     import PyInstaller.__main__
@@ -234,7 +235,8 @@ def package_macos():
             "--add-data=build/help:help",
             "run.py",
         ]
-    ) 
+    )
+
 
 def main():
     args = parse_args()
