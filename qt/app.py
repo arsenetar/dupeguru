@@ -65,20 +65,25 @@ class DupeGuru(QObject):
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = None
         if self.use_tabs:
-            self.main_window = TabBarWindow(self) if not self.prefs.tabs_default_pos else TabWindow(self)
+            self.main_window = (
+                TabBarWindow(self)
+                if not self.prefs.tabs_default_pos
+                else TabWindow(self)
+            )
             parent_window = self.main_window
-            self.directories_dialog = self.main_window.createPage("DirectoriesDialog", app=self)
+            self.directories_dialog = self.main_window.createPage(
+                "DirectoriesDialog", app=self
+            )
             self.main_window.addTab(
-                self.directories_dialog, "Directories", switch=False)
+                self.directories_dialog, "Directories", switch=False
+            )
             self.actionDirectoriesWindow.setEnabled(False)
         else:  # floating windows only
             self.main_window = None
             self.directories_dialog = DirectoriesDialog(self)
             parent_window = self.directories_dialog
 
-        self.progress_window = ProgressWindow(
-            parent_window, self.model.progress_window
-        )
+        self.progress_window = ProgressWindow(parent_window, self.model.progress_window)
         self.problemDialog = ProblemDialog(
             parent=parent_window, model=self.model.problem_dialog
         )
@@ -86,22 +91,25 @@ class DupeGuru(QObject):
             self.ignoreListDialog = self.main_window.createPage(
                 "IgnoreListDialog",
                 parent=self.main_window,
-                model=self.model.ignore_list_dialog)
+                model=self.model.ignore_list_dialog,
+            )
 
             self.excludeListDialog = self.main_window.createPage(
                 "ExcludeListDialog",
                 app=self,
                 parent=self.main_window,
-                model=self.model.exclude_list_dialog)
+                model=self.model.exclude_list_dialog,
+            )
         else:
             self.ignoreListDialog = IgnoreListDialog(
-                parent=parent_window, model=self.model.ignore_list_dialog)
+                parent=parent_window, model=self.model.ignore_list_dialog
+            )
             self.excludeDialog = ExcludeListDialog(
-                app=self, parent=parent_window, model=self.model.exclude_list_dialog)
+                app=self, parent=parent_window, model=self.model.exclude_list_dialog
+            )
 
         self.deletionOptions = DeletionOptions(
-            parent=parent_window,
-            model=self.model.deletion_options
+            parent=parent_window, model=self.model.deletion_options
         )
         self.about_box = AboutBox(parent_window, self)
 
@@ -129,7 +137,13 @@ class DupeGuru(QObject):
                 self.preferencesTriggered,
             ),
             ("actionIgnoreList", "", "", tr("Ignore List"), self.ignoreListTriggered),
-            ("actionDirectoriesWindow", "", "", tr("Directories"), self.showDirectoriesWindow),
+            (
+                "actionDirectoriesWindow",
+                "",
+                "",
+                tr("Directories"),
+                self.showDirectoriesWindow,
+            ),
             (
                 "actionClearPictureCache",
                 "Ctrl+Shift+P",
@@ -137,7 +151,13 @@ class DupeGuru(QObject):
                 tr("Clear Picture Cache"),
                 self.clearPictureCacheTriggered,
             ),
-            ("actionExcludeList", "", "", tr("Exclusion Filters"), self.excludeListTriggered),
+            (
+                "actionExcludeList",
+                "",
+                "",
+                tr("Exclusion Filters"),
+                self.excludeListTriggered,
+            ),
             ("actionShowHelp", "F1", "", tr("dupeGuru Help"), self.showHelpTriggered),
             ("actionAbout", "", "", tr("About dupeGuru"), self.showAboutBoxTriggered),
             (
@@ -232,8 +252,7 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             if self.use_tabs:
                 if self.main_window.indexOfWidget(self.resultWindow) < 0:
-                    self.main_window.addTab(
-                        self.resultWindow, "Results", switch=True)
+                    self.main_window.addTab(self.resultWindow, "Results", switch=True)
                     return
                 self.main_window.showTab(self.resultWindow)
             else:
@@ -265,9 +284,11 @@ class DupeGuru(QObject):
                 "scanning have accented letters, you'll probably get a crash. It is advised that "
                 "you set your system locale properly."
             )
-            QMessageBox.warning(self.main_window if self.main_window
-                                else self.directories_dialog,
-                                "Wrong Locale", msg)
+            QMessageBox.warning(
+                self.main_window if self.main_window else self.directories_dialog,
+                "Wrong Locale",
+                msg,
+            )
 
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")
@@ -293,7 +314,9 @@ class DupeGuru(QObject):
         """Add tab for dialog, name the tab with desc_string, then show it."""
         index = self.main_window.indexOfWidget(dialog)
         # Create the tab if it doesn't exist already
-        if index < 0:  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
+        if (
+            index < 0
+        ):  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
             index = self.main_window.addTab(dialog, desc_string, switch=True)
         # Show the tab for that widget
         self.main_window.setCurrentIndex(index)
@@ -304,8 +327,7 @@ class DupeGuru(QObject):
 
     def preferencesTriggered(self):
         preferences_dialog = self._get_preferences_dialog_class()(
-            self.main_window if self.main_window else self.directories_dialog,
-            self
+            self.main_window if self.main_window else self.directories_dialog, self
         )
         preferences_dialog.load()
         result = preferences_dialog.exec()
@@ -333,7 +355,7 @@ class DupeGuru(QObject):
         if op.exists(help_path):
             url = QUrl.fromLocalFile(help_path)
         else:
-            url = QUrl("https://www.hardcoded.net/dupeguru/help/en/")
+            url = QUrl("https://dupeguru.voltaicideas.net/help/en/")
         QDesktopServices.openUrl(url)
 
     def handleSIGTERM(self):
@@ -354,8 +376,7 @@ class DupeGuru(QObject):
         return self.confirm("", prompt)
 
     def create_results_window(self):
-        """Creates resultWindow and details_dialog depending on the selected ``app_mode``.
-        """
+        """Creates resultWindow and details_dialog depending on the selected ``app_mode``."""
         if self.details_dialog is not None:
             # The object is not deleted entirely, avoid saving its geometry in the future
             # self.willSavePrefs.disconnect(self.details_dialog.appWillSavePrefs)
@@ -367,10 +388,13 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             self.resultWindow.close()
             # This is better for tabs, as it takes care of duplicate items in menu bar
-            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(None)
+            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(
+                None
+            )
         if self.use_tabs:
             self.resultWindow = self.main_window.createPage(
-                "ResultWindow", parent=self.main_window, app=self)
+                "ResultWindow", parent=self.main_window, app=self
+            )
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()
