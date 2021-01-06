@@ -35,11 +35,24 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 
 ### Windows & macOS specific additional instructions
 For windows instructions see the [Windows Instructions](Windows.md).
+
 For macos instructions (qt version) see the [macOS Instructions](macos.md).
 
 ### Prerequisites
 * [Python 3.6+][python]
 * PyQt5
+
+### System Setup
+When running in a linux based environment the following system packages or equivalents are needed to build:
+* python3-pyqt5
+* python3-wheel (for hsaudiotag3k)
+* python3-venv (only if using a virtual environment)
+* python3-dev
+* build-essential
+
+To create packages the following are also needed:
+* python3-setuptools
+* debhelper
 
 ### Building with Make
 dupeGuru comes with a makefile that can be used to build and run:
@@ -49,8 +62,8 @@ dupeGuru comes with a makefile that can be used to build and run:
 ### Building without Make
 
     $ cd <dupeGuru directory>
-    $ python3 -m venv --system-site-packages .\env
-    $ source .\env\bin\activate
+    $ python3 -m venv --system-site-packages ./env
+    $ source ./env/bin/activate
     $ pip install -r requirements.txt
     $ python build.py
     $ python run.py
@@ -60,8 +73,8 @@ To generate packages the extra requirements in requirements-extra.txt must be in
 steps are as follows:
 
     $ cd <dupeGuru directory>
-    $ python3 -m venv --system-site-packages .\env
-    $ source .\env\bin\activate
+    $ python3 -m venv --system-site-packages ./env
+    $ source ./env/bin/activate
     $ pip install -r requirements.txt -r requirements-extra.txt
     $ python build.py --clean
     $ python package.py
