@@ -5,7 +5,7 @@ a system. It is written mostly in Python 3 and has the peculiarity of using
 [multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
 is written in Objective-C and uses Cocoa. On Linux, it is written in Python and uses Qt5.
 
-The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/dupeguru-cocoa
+The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa
 
 ## Current status
 
@@ -33,25 +33,44 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 
 ## How to build dupeGuru from source
 
-### Windows
+### Windows & macOS specific additional instructions
 For windows instructions see the [Windows Instructions](Windows.md).
+For macos instructions (qt version) see the [macOS Instructions](macos.md).
 
 ### Prerequisites
-
-* [Python 3.5+][python]
+* [Python 3.6+][python]
 * PyQt5
 
-### make
-
-dupeGuru is built with "make":
+### Building with Make
+dupeGuru comes with a makefile that can be used to build and run:
 
     $ make && make run
 
-### Generate Debian/Ubuntu package
+### Building without Make
 
-    $ bash -c "python3 -m venv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt && python3 build.py --clean && python3 package.py"
+    $ cd <dupeGuru directory>
+    $ python3 -m venv --system-site-packages .\env
+    $ source .\env\bin\activate
+    $ pip install -r requirements.txt
+    $ python build.py
+    $ python run.py
 
-### Running tests
+### Generating Debian/Ubuntu package
+To generate packages the extra requirements in requirements-extra.txt must be installed, the 
+steps are as follows:
+
+    $ cd <dupeGuru directory>
+    $ python3 -m venv --system-site-packages .\env
+    $ source .\env\bin\activate
+    $ pip install -r requirements.txt -r requirements-extra.txt
+    $ python build.py --clean
+    $ python package.py
+
+This can be made a one-liner (once in the directory) as:
+
+    $ bash -c "python3 -m venv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt -r requirements-extra.txt && python build.py --clean && python package.py"
+
+## Running tests
 
 The complete test suite is run with [Tox 1.7+][tox]. If you have it installed system-wide, you
 don't even need to set up a virtualenv. Just `cd` into the root project folder and run `tox`.
