@@ -1,19 +1,21 @@
 # dupeGuru
 
 [dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
-a system. It's written mostly in Python 3 and has the peculiarity of using
+a system. It is written mostly in Python 3 and has the peculiarity of using
 [multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
-is written in Objective-C and uses Cocoa. On Linux, it's written in Python and uses Qt5.
+is written in Objective-C and uses Cocoa. On Linux, it is written in Python and uses Qt5.
 
 The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/dupeguru-cocoa
 
 ## Current status
 
-Development has been slow this past year, however very close to getting all the different 4.0.4 releases posted.  Most of the work this past year (2019) has been towards packaging the application and issues related to that.
+2020: various bug fixes and small UI improvements have been added. Packaging for MacOS is still a problem.
 
 Still looking for additional help especially with regards to:
-- OSX maintenance (reproducing bugs & cocoa version)
-- Linux maintenance (reproducing bugs)
+* OSX maintenance: reproducing bugs & cocoa version, building package with Cocoa UI.
+* Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package.
+* Translations: updating missing strings.
+* Documentation: keeping it up-to-date.
 
 ## Contents of this folder
 
@@ -43,8 +45,7 @@ For windows instructions see the [Windows Instructions](Windows.md).
 
 dupeGuru is built with "make":
 
-    $ make
-    $ make run
+    $ make && make run
 
 ### Generate Debian/Ubuntu package
 

@@ -58,9 +58,10 @@ class ErrorReportDialog(QDialog):
         self.verticalLayout.addWidget(self.errorTextEdit)
         msg = tr(
             "Error reports should be reported as Github issues. You can copy the error traceback "
-            "above and paste it in a new issue (bonus point if you run a search to make sure the "
-            "issue doesn't already exist). What usually really helps is if you add a description "
-            "of how you got the error. Thanks!"
+            "above and paste it in a new issue.\n\nPlease make sure to run a search for any already "
+            "existing issues beforehand. Also make sure to test the very latest version available from the repository, "
+            "since the bug you are experiencing might have already been patched.\n\n"
+            "What usually really helps is if you add a description of how you got the error. Thanks!"
             "\n\n"
             "Although the application should continue to run after this error, it may be in an "
             "unstable state, so it is recommended that you restart the application."
