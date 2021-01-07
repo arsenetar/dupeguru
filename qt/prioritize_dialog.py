@@ -102,6 +102,7 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
+        self.criteriaListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.addCriteriaButton = QPushButton(
             self.style().standardIcon(QStyle.SP_ArrowRight), ""
         )
