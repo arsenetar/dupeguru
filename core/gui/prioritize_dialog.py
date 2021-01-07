@@ -80,6 +80,7 @@ class PrioritizeDialog(GUIObject):
 
     def remove_selected(self):
         self.prioritization_list.remove_selected()
+        self.prioritization_list.select([])
 
     def perform_reprioritization(self):
         self.app.reprioritize_groups(self._sort_key)

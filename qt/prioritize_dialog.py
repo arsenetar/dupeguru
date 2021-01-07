@@ -50,6 +50,7 @@ class PrioritizationList(ListviewModel):
         strMimeData = bytes(mimeData.data(MIME_INDEXES)).decode()
         indexes = list(map(int, strMimeData.split(",")))
         self.model.move_indexes(indexes, row)
+        self.view.selectionModel().clearSelection()
         return True
 
     def mimeData(self, indexes):
@@ -114,6 +115,7 @@ class PrioritizeDialog(QDialog):
         self.prioritizationListView.setDragEnabled(True)
         self.prioritizationListView.setDragDropMode(QAbstractItemView.InternalMove)
         self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.prioritizationListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
 
