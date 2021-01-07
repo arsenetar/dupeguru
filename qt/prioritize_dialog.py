@@ -85,7 +85,9 @@ class PrioritizeDialog(QDialog):
         self.model.view = self
 
         self.addCriteriaButton.clicked.connect(self.model.add_selected)
+        self.criteriaListView.doubleClicked.connect(self.model.add_selected)
         self.removeCriteriaButton.clicked.connect(self.model.remove_selected)
+        self.prioritizationListView.doubleClicked.connect(self.model.remove_selected)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
