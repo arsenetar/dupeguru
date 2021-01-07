@@ -47,6 +47,12 @@ class PrioritizationList(ListviewModel):
         # to know where the drop took place.
         if parentIndex.isValid():
             return False
+        # "When row and column are -1 it means that the dropped data should be considered as
+        # dropped directly on parent."
+        # Moving items to row -1 would put them before the last item. Fix the row to drop the
+        # dragged items after the last item.
+        if row < 0:
+            row = len(self.model) - 1
         strMimeData = bytes(mimeData.data(MIME_INDEXES)).decode()
         indexes = list(map(int, strMimeData.split(",")))
         self.model.move_indexes(indexes, row)
