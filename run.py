@@ -9,13 +9,14 @@ import sys
 import os.path as op
 import gc
 
-from PyQt5.QtCore import QCoreApplication, QSettings
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication
 
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
 from qtlib.util import setupQtLogging
+from qtlib.preferences import createQSettings
 from qt import dg_rc  # noqa: F401
 from qt.platform import BASE_PATH
 from core import __version__, __appname__
@@ -52,7 +53,7 @@ def main():
     QCoreApplication.setApplicationName(__appname__)
     QCoreApplication.setApplicationVersion(__version__)
     setupQtLogging()
-    settings = QSettings()
+    settings = createQSettings()
     lang = settings.value("Language")
     locale_folder = op.join(BASE_PATH, "locale")
     install_gettext_trans_under_qt(locale_folder, lang)

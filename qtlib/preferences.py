@@ -66,6 +66,20 @@ def adjust_after_deserialization(v):
     return v
 
 
+def createQSettings():
+    # Create a QSettings instance with the correct arguments.
+    # On windows use an ini file in the AppDataLocation instead of registry if possible as it
+    # makes it easier for a user to clear it out when there are issues.
+    if ISWINDOWS:
+        Locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+        if Locations:
+            return QSettings(op.join(Locations[0], "settings.ini"), QSettings.IniFormat)
+        else:
+            return QSettings()
+    else:
+        return QSettings()
+
+
 # About QRect conversion:
 # I think Qt supports putting basic structures like QRect directly in QSettings, but I prefer not
 # to rely on it and stay with generic structures.
@@ -77,18 +91,7 @@ class Preferences(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.reset()
-        # On windows use an ini file in the AppDataLocation instead of registry if possible as it
-        # makes it easier for a user to clear it out when there are issues.
-        if ISWINDOWS:
-            Locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
-            if Locations:
-                self._settings = QSettings(
-                    op.join(Locations[0], "settings.ini"), QSettings.IniFormat
-                )
-            else:
-                self._settings = QSettings()
-        else:
-            self._settings = QSettings()
+        self._settings = createQSettings()
 
     def _load_values(self, settings, get):
         pass
