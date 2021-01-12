@@ -6,247 +6,251 @@ msgstr ""
 "PO-Revision-Date: 2015-05-01 14:24+0000\n"
 "Last-Translator: YF <yfdyh000@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/p/dupeguru/language/zh_CN/)\n"
+"Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core/app.py:40
+#: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "没有已标记的重复项。没有需要处理的。"
 
-#: core/app.py:41
+#: core\app.py:43
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "没有已选定的重复项。没有需要处理的。"
 
-#: core/app.py:42
+#: core\app.py:44
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr "您即将一次打开许多文件。依赖于这些文件的打开方式，打开可能导致非常混乱的状况。是否继续？"
 
-#: core/app.py:65
+#: core\app.py:71
 msgid "Scanning for duplicates"
 msgstr "正在扫描重复内容"
 
-#: core/app.py:66
+#: core\app.py:72
 msgid "Loading"
 msgstr "载入中"
 
-#: core/app.py:67
+#: core\app.py:73
 msgid "Moving"
 msgstr "移动中"
 
-#: core/app.py:68
+#: core\app.py:74
 msgid "Copying"
 msgstr "复制中"
 
-#: core/app.py:69
+#: core\app.py:75
 msgid "Sending to Trash"
 msgstr "正在移到垃圾桶"
 
-#: core/app.py:279
+#: core\app.py:308
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr "目前还有任务在执行，新任务无法开启。请等待几秒钟后再重新试一次。"
 
-#: core/app.py:289
+#: core\app.py:318
 msgid "No duplicates found."
 msgstr "没有找到重复文件。"
 
-#: core/app.py:304
+#: core\app.py:333
 msgid "All marked files were copied successfully."
 msgstr "所有已标记的文件已复制成功。"
 
-#: core/app.py:305
+#: core\app.py:334
 msgid "All marked files were moved successfully."
 msgstr "所有已标记的文件已移动成功。"
 
-#: core/app.py:306
+#: core\app.py:335
 msgid "All marked files were successfully sent to Trash."
 msgstr "所有已标记的文件已成功发送到垃圾桶。"
 
-#: core/app.py:368
+#: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}' 已在列表中。"
 
-#: core/app.py:370
+#: core\app.py:401
 msgid "'{}' does not exist."
 msgstr "'{}' 不存在。"
 
-#: core/app.py:379
+#: core\app.py:410
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。是否继续？"
 
-#: core/app.py:450
+#: core\app.py:485
 msgid "copy"
 msgstr "复制"
 
-#: core/app.py:450
+#: core\app.py:485
 msgid "move"
 msgstr "移动"
 
-#: core/app.py:451
+#: core\app.py:486
 msgid "Select a directory to {} marked files to"
 msgstr "选择一个文件夹将标记的 {} 个文件进行..."
 
-#: core/app.py:490
+#: core\app.py:527
 msgid "Select a destination for your exported CSV"
 msgstr "选择您导出 CSV 的目标"
 
-#: core/app.py:518
+#: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "你没有设定自定义命令。请在首选项中进行设定。"
 
-#: core/app.py:672 core/app.py:685
+#: core\app.py:727 core\app.py:740
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "你将从结果中移除 %d 个文件。继续吗?"
 
-#: core/app.py:719
+#: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core/app.py:762
+#: core\app.py:835
 msgid "Collecting files to scan"
 msgstr "收集文件以备扫描"
 
-#: core/app.py:751
+#: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr "所选文件夹中不包含可供扫描的文件。"
 
-#: core/app.py:810
+#: core\app.py:891
 msgid "%s (%d discarded)"
 msgstr "%s (%d 项已丢弃)"
 
-#: core/engine.py:222 core/engine.py:262
+#: core\engine.py:244 core\engine.py:288
 msgid "0 matches found"
 msgstr "未找到匹配项"
 
-#: core/engine.py:240 core/engine.py:270
+#: core\engine.py:262 core\engine.py:296
 msgid "%d matches found"
 msgstr "找到 %d 个匹配项"
 
-#: core/scanner.py:77
+#: core\scanner.py:85
 msgid "Read size of %d/%d files"
 msgstr "读取 %d/%d 文件大小"
 
-#: core/gui/deletion_options.py:69
+#: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
 msgstr "您正在发送 {} 个文件到垃圾桶。"
 
-#: core/gui/ignore_list_dialog.py:24
+#: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "确定要从忽略列表中移除 %d 项吗?"
 
-#: core/prioritize.py:68
+#: core\prioritize.py:70
 msgid "None"
 msgstr "无"
 
-#: core/prioritize.py:96
+#: core\prioritize.py:100
 msgid "Ends with number"
 msgstr "文件名称"
 
-#: core/prioritize.py:97
+#: core\prioritize.py:101
 msgid "Doesn't end with number"
 msgstr "不带数字结尾"
 
-#: core/prioritize.py:98
+#: core\prioritize.py:102
 msgid "Longest"
 msgstr "最长"
 
-#: core/prioritize.py:99
+#: core\prioritize.py:103
 msgid "Shortest"
 msgstr "最短"
 
-#: core/prioritize.py:132
+#: core\prioritize.py:140
 msgid "Highest"
 msgstr "最高"
 
-#: core/prioritize.py:132
+#: core\prioritize.py:140
 msgid "Lowest"
 msgstr "最低"
 
-#: core/prioritize.py:159
+#: core\prioritize.py:169
 msgid "Newest"
 msgstr "最新"
 
-#: core/prioritize.py:159
+#: core\prioritize.py:169
 msgid "Oldest"
 msgstr "最旧"
 
-#: core/results.py:129
+#: core\results.py:142
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "已标记 %d / %d (%s / %s) 个重复项。"
 
-#: core/results.py:136
+#: core\results.py:149
 msgid " filter: %s"
 msgstr " 筛选: %s"
 
-#: core/scanner.py:101
+#: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "读取 %d/%d 文件元数据"
 
-#: core/pe/matchblock.py:61
+#: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
 msgstr "分析 %d/%d 图像"
 
-#: core/pe/matchblock.py:156
+#: core\pe\matchblock.py:181
 msgid "Performed %d/%d chunk matches"
 msgstr "已执行 %d/%d 个区块匹配"
 
-#: core/pe/matchblock.py:161
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "准备进行匹配"
 
-#: core/pe/matchblock.py:206
+#: core\pe\matchblock.py:244
 msgid "Verified %d/%d matches"
 msgstr "验证 %d/%d 匹配项"
 
-#: core/pe/matchexif.py:18
+#: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "读取 %d/%d 张图片的 EXIF"
 
-#: core/app.py:312
+#: core\app.py:343
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core/app.py:496 core/app.py:742
+#: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core/me/scanner.py:19 core/se/scanner.py:15
+#: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
 msgstr ""
 
-#: core/me/scanner.py:20
+#: core\me\scanner.py:21
 msgid "Filename - Fields"
 msgstr ""
 
-#: core/me/scanner.py:21
+#: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr ""
 
-#: core/me/scanner.py:22
+#: core\me\scanner.py:23
 msgid "Tags"
 msgstr ""
 
-#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
 msgstr ""
 
-#: core/pe/scanner.py:21
+#: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
 msgstr ""
 
-#: core/scanner.py:139
+#: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
 msgstr ""
 
-#: core/se/scanner.py:17
+#: core\se\scanner.py:18
 msgid "Folders"
+msgstr ""
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
 msgstr ""
 
 #~ msgid "Sending files to the recycle bin"

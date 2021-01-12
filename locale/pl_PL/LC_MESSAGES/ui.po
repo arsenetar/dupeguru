@@ -6,9 +6,9 @@ msgstr ""
 "PO-Revision-Date: 2014-06-09 16:24+0000\n"
 "Last-Translator: mstefanski1987 <mstefanski1987@gmail.com>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/p/dupeguru/language/pl_PL/)\n"
+"Language: pl_PL\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Language: pl_PL\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: qt/app.py:81
@@ -720,6 +720,170 @@ msgstr ""
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
+msgstr ""
+
+#: qt\app.py:158
+msgid "Exclusion Filters"
+msgstr ""
+
+#: qt\directories_dialog.py:91
+msgid "Scan Results"
+msgstr ""
+
+#: qt\directories_dialog.py:95
+msgid "Load Directories..."
+msgstr ""
+
+#: qt\directories_dialog.py:96
+msgid "Save Directories..."
+msgstr ""
+
+#: qt\directories_dialog.py:337
+msgid "Select a directories file to load"
+msgstr ""
+
+#: qt\directories_dialog.py:338
+msgid "dupeGuru Results (*.dupegurudirs)"
+msgstr ""
+
+#: qt\directories_dialog.py:347
+msgid "Select a file to save your directories to"
+msgstr ""
+
+#: qt\directories_dialog.py:348
+msgid "dupeGuru Directories (*.dupegurudirs)"
+msgstr ""
+
+#: qt\exclude_list_dialog.py:44
+msgid "Add"
+msgstr ""
+
+#: qt\exclude_list_dialog.py:46
+msgid "Restore defaults"
+msgstr ""
+
+#: qt\exclude_list_dialog.py:47
+msgid "Test string"
+msgstr ""
+
+#: qt\exclude_list_dialog.py:83
+msgid "Type a python regular expression here..."
+msgstr ""
+
+#: qt\exclude_list_dialog.py:85
+msgid "Type a file system path or filename here..."
+msgstr ""
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happen to match one of the regular expressions.<br>For each file collected two tests are perfomed on each of them to determine whether or not to filter them out:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with no path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\exclude_list_table.py:36
+msgid "Compilation error: "
+msgstr ""
+
+#: qt\pe\image_viewer.py:56
+msgid "Increase zoom"
+msgstr ""
+
+#: qt\pe\image_viewer.py:66
+msgid "Decrease zoom"
+msgstr ""
+
+#: qt\pe\image_viewer.py:71
+msgid "Ctrl+/"
+msgstr ""
+
+#: qt\pe\image_viewer.py:76
+msgid "Normal size"
+msgstr ""
+
+#: qt\pe\image_viewer.py:81
+msgid "Ctrl+*"
+msgstr ""
+
+#: qt\pe\image_viewer.py:86
+msgid "Best fit"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:49
+msgid "Picture cache mode:"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:56
+msgid "Override theme icons in viewer toolbar"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:58
+msgid ""
+"Use our own internal icons instead of those provided by the theme engine"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:66
+msgid "Show scrollbars in image viewers"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:68
+msgid ""
+"When the image displayed doesn't fit the viewport, show scrollbars to span "
+"the view around"
+msgstr ""
+
+#: qt\preferences_dialog.py:156
+msgid "Use default position for tab bar (requires restart)"
+msgstr ""
+
+#: qt\preferences_dialog.py:158
+msgid ""
+"Place the tab bar below the main menu instead of next to it\n"
+"On MacOS, the tab bar will fill up the window's width instead."
+msgstr ""
+
+#: qt\preferences_dialog.py:172
+msgid "Use bold font for references"
+msgstr ""
+
+#: qt\preferences_dialog.py:176
+msgid "Reference foreground color:"
+msgstr ""
+
+#: qt\preferences_dialog.py:179
+msgid "Reference background color:"
+msgstr ""
+
+#: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
+msgid "Delta foreground color:"
+msgstr ""
+
+#: qt\preferences_dialog.py:195
+msgid "Show the title bar and can be docked"
+msgstr ""
+
+#: qt\preferences_dialog.py:197
+msgid ""
+"While the title bar is hidden, use the modifier key to drag the floating "
+"window around"
+msgstr ""
+
+#: qt\preferences_dialog.py:199
+msgid "The title bar can only be disabled while the window is docked"
+msgstr ""
+
+#: qt\preferences_dialog.py:202
+msgid "Vertical title bar"
+msgstr ""
+
+#: qt\preferences_dialog.py:204
+msgid ""
+"Change the title bar from horizontal on top, to vertical on the left side"
+msgstr ""
+
+#: qt\tabbed_window.py:44
+msgid "Show tab bar"
 msgstr ""
 
 #~ msgid "Removing dead tracks from your iTunes Library"

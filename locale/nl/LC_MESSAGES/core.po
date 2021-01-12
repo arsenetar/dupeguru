@@ -6,20 +6,20 @@ msgstr ""
 "PO-Revision-Date: 2015-07-11 12:39+0000\n"
 "Last-Translator: Kees Duvekot\n"
 "Language-Team: Dutch (http://www.transifex.com/p/dupeguru/language/nl/)\n"
+"Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/app.py:40
+#: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Er zijn geen gemarkeerde dubbelingen. Er is niks gedaam"
 
-#: core/app.py:41
+#: core\app.py:43
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Er zijn geen dubelingen geselecteerd. Er is niks gedaan"
 
-#: core/app.py:42
+#: core\app.py:44
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -28,27 +28,27 @@ msgstr ""
 "Afhankelijk met welke applicaties die bestanden worden geopened kan het best"
 " een rommeltje worden. Doorgaan?"
 
-#: core/app.py:65
+#: core\app.py:71
 msgid "Scanning for duplicates"
 msgstr "Dubbelingen aan het opsporen"
 
-#: core/app.py:66
+#: core\app.py:72
 msgid "Loading"
 msgstr "Laden"
 
-#: core/app.py:67
+#: core\app.py:73
 msgid "Moving"
 msgstr "Verplaatsen"
 
-#: core/app.py:68
+#: core\app.py:74
 msgid "Copying"
 msgstr "Kopieeren"
 
-#: core/app.py:69
+#: core\app.py:75
 msgid "Sending to Trash"
 msgstr "Naar de prullebak verplaatsen"
 
-#: core/app.py:279
+#: core\app.py:308
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,31 +56,31 @@ msgstr ""
 "Er is nog een vorige actie bezig. Je kan nu nog geen nieuwe actie starten. "
 "Wacht een paar seconden en probeer het opnieuw"
 
-#: core/app.py:289
+#: core\app.py:318
 msgid "No duplicates found."
 msgstr "Geen dubbelingen gevonden"
 
-#: core/app.py:304
+#: core\app.py:333
 msgid "All marked files were copied successfully."
 msgstr "Alle gemarkeerde bestanden zijn succesvol gekopieerd."
 
-#: core/app.py:305
+#: core\app.py:334
 msgid "All marked files were moved successfully."
 msgstr "Alle gemarkeerde bestanden zijn succesvol verplaatst."
 
-#: core/app.py:306
+#: core\app.py:335
 msgid "All marked files were successfully sent to Trash."
 msgstr "Alle gemarkeerde bestanden zijn met succes in de prullenbak gedaan."
 
-#: core/app.py:368
+#: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}'staat al in de lijst."
 
-#: core/app.py:370
+#: core\app.py:401
 msgid "'{}' does not exist."
 msgstr "'{}' bestaat niet."
 
-#: core/app.py:379
+#: core\app.py:410
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -88,180 +88,184 @@ msgstr ""
 "Alle geselecteerde %d overeenkomsten zullen in toekomstige onderzoeken "
 "worden overgslagen. Doorgaan?"
 
-#: core/app.py:450
+#: core\app.py:485
 msgid "copy"
 msgstr "kopieer"
 
-#: core/app.py:450
+#: core\app.py:485
 msgid "move"
 msgstr "verplaats"
 
-#: core/app.py:451
+#: core\app.py:486
 msgid "Select a directory to {} marked files to"
 msgstr ""
 
-#: core/app.py:490
+#: core\app.py:527
 msgid "Select a destination for your exported CSV"
 msgstr "Selecteer een locatie voor de CSV export"
 
-#: core/app.py:518
+#: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Er is nog geen \"aangepaste opdracht\" ingericht. Je kan dit doen bij de "
 "voorkeuren."
 
-#: core/app.py:672 core/app.py:685
+#: core\app.py:727 core\app.py:740
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 "Je staat op het punt om %d bestanden te verwijderen uit de resultaten. "
 "Doorgaan?"
 
-#: core/app.py:719
+#: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 "{} dubbelingen groepen waren veranderd door de prioriteits verschuiving."
 
-#: core/app.py:762
+#: core\app.py:835
 msgid "Collecting files to scan"
 msgstr "Bestanden aan het verzamelen om te onderzoeken"
 
-#: core/app.py:751
+#: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr ""
 "De geselecteerde folders bevatten geen bestanden die onderzocht kunnen "
 "worden."
 
-#: core/app.py:810
+#: core\app.py:891
 msgid "%s (%d discarded)"
 msgstr "%s (%d weggelaten)"
 
-#: core/engine.py:222 core/engine.py:262
+#: core\engine.py:244 core\engine.py:288
 msgid "0 matches found"
 msgstr "0 overeenkomsten gevonden"
 
-#: core/engine.py:240 core/engine.py:270
+#: core\engine.py:262 core\engine.py:296
 msgid "%d matches found"
 msgstr "%d overeenkomsten gevonden"
 
-#: core/scanner.py:77
+#: core\scanner.py:85
 msgid "Read size of %d/%d files"
 msgstr "Bestands grote van %d/%d bestanden aan het lezen."
 
-#: core/gui/deletion_options.py:69
+#: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Je verplaatst {} bestanden naar de prullenbak"
 
-#: core/gui/ignore_list_dialog.py:24
+#: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
 "Weet je zeker dat je all %d regels uit de overslaan lijst wilt verwijderen?"
 
-#: core/prioritize.py:68
+#: core\prioritize.py:70
 msgid "None"
 msgstr "Geen"
 
-#: core/prioritize.py:96
+#: core\prioritize.py:100
 msgid "Ends with number"
 msgstr "Eindigt met nummer"
 
-#: core/prioritize.py:97
+#: core\prioritize.py:101
 msgid "Doesn't end with number"
 msgstr "Eindigt niet met een nummer"
 
-#: core/prioritize.py:98
+#: core\prioritize.py:102
 msgid "Longest"
 msgstr "langste"
 
-#: core/prioritize.py:99
+#: core\prioritize.py:103
 msgid "Shortest"
 msgstr "kortste"
 
-#: core/prioritize.py:132
+#: core\prioritize.py:140
 msgid "Highest"
 msgstr "hoogste"
 
-#: core/prioritize.py:132
+#: core\prioritize.py:140
 msgid "Lowest"
 msgstr "laagste"
 
-#: core/prioritize.py:159
+#: core\prioritize.py:169
 msgid "Newest"
 msgstr "nieuwste"
 
-#: core/prioritize.py:159
+#: core\prioritize.py:169
 msgid "Oldest"
 msgstr "oudste"
 
-#: core/results.py:129
+#: core\results.py:142
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s /%s) dubbelingen gemarkeerd"
 
-#: core/results.py:136
+#: core\results.py:149
 msgid " filter: %s"
 msgstr "filter: %s"
 
-#: core/scanner.py:101
+#: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "Metadata van %d/%d bestanden gelezen"
 
-#: core/pe/matchblock.py:61
+#: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
 msgstr "%d van de %d afbeeldingen aan het analyseren"
 
-#: core/pe/matchblock.py:156
+#: core\pe\matchblock.py:181
 msgid "Performed %d/%d chunk matches"
 msgstr "%d van de %d bulk overeenkomsten uitgevoerd"
 
-#: core/pe/matchblock.py:161
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Voorbereiden voor dubbelingen bepaling"
 
-#: core/pe/matchblock.py:206
+#: core\pe\matchblock.py:244
 msgid "Verified %d/%d matches"
 msgstr "%d van de %d overeenkomsten nagekeken"
 
-#: core/pe/matchexif.py:18
+#: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF informatie van %d van de %d afbeeldingen gelezen"
 
-#: core/app.py:312
+#: core\app.py:343
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core/app.py:496 core/app.py:742
+#: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core/me/scanner.py:19 core/se/scanner.py:15
+#: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
 msgstr ""
 
-#: core/me/scanner.py:20
+#: core\me\scanner.py:21
 msgid "Filename - Fields"
 msgstr ""
 
-#: core/me/scanner.py:21
+#: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr ""
 
-#: core/me/scanner.py:22
+#: core\me\scanner.py:23
 msgid "Tags"
 msgstr ""
 
-#: core/me/scanner.py:23 core/pe/scanner.py:20 core/se/scanner.py:16
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
 msgstr ""
 
-#: core/pe/scanner.py:21
+#: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
 msgstr ""
 
-#: core/scanner.py:139
+#: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
 msgstr ""
 
-#: core/se/scanner.py:17
+#: core\se\scanner.py:18
 msgid "Folders"
+msgstr ""
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
 msgstr ""
 
 #~ msgid "Sending files to the recycle bin"
