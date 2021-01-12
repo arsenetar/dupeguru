@@ -47,9 +47,16 @@ class PrioritizationList(ListviewModel):
         # to know where the drop took place.
         if parentIndex.isValid():
             return False
+        # "When row and column are -1 it means that the dropped data should be considered as
+        # dropped directly on parent."
+        # Moving items to row -1 would put them before the last item. Fix the row to drop the
+        # dragged items after the last item.
+        if row < 0:
+            row = len(self.model) - 1
         strMimeData = bytes(mimeData.data(MIME_INDEXES)).decode()
         indexes = list(map(int, strMimeData.split(",")))
         self.model.move_indexes(indexes, row)
+        self.view.selectionModel().clearSelection()
         return True
 
     def mimeData(self, indexes):
@@ -84,7 +91,9 @@ class PrioritizeDialog(QDialog):
         self.model.view = self
 
         self.addCriteriaButton.clicked.connect(self.model.add_selected)
+        self.criteriaListView.doubleClicked.connect(self.model.add_selected)
         self.removeCriteriaButton.clicked.connect(self.model.remove_selected)
+        self.prioritizationListView.doubleClicked.connect(self.model.remove_selected)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
@@ -102,6 +111,7 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
+        self.criteriaListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.addCriteriaButton = QPushButton(
             self.style().standardIcon(QStyle.SP_ArrowRight), ""
         )
@@ -113,6 +123,7 @@ class PrioritizeDialog(QDialog):
         self.prioritizationListView.setDragEnabled(True)
         self.prioritizationListView.setDragDropMode(QAbstractItemView.InternalMove)
         self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.prioritizationListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.buttonBox = QDialogButtonBox()
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
 

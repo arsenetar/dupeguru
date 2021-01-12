@@ -72,13 +72,15 @@ class PrioritizeDialog(GUIObject):
         # Add selected criteria in criteria_list to prioritization_list.
         if self.criteria_list.selected_index is None:
             return
-        crit = self.criteria[self.criteria_list.selected_index]
-        self.prioritizations.append(crit)
-        del crit
+        for i in self.criteria_list.selected_indexes:
+            crit = self.criteria[i]
+            self.prioritizations.append(crit)
+            del crit
         self.prioritization_list[:] = [crit.display for crit in self.prioritizations]
 
     def remove_selected(self):
         self.prioritization_list.remove_selected()
+        self.prioritization_list.select([])
 
     def perform_reprioritization(self):
         self.app.reprioritize_groups(self._sort_key)
