@@ -50,6 +50,8 @@ When running in a linux based environment the following system packages or equiv
 * python3-dev
 * build-essential
 
+Note: On some linux systems pyrcc5 is not put on the path when installing python3-pyqt5, this will cause some issues with the resource files (and icons). It can be checked by running `which pyrcc5`. If there is no result, before building install pyqt5 just into the virtual environment via pip.  (It has not been added to the requirement files at this time on linux due to issues caused in the CI builds if this is done.)
+
 To create packages the following are also needed:
 * python3-setuptools
 * debhelper
