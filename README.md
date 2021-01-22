@@ -62,7 +62,7 @@ dupeGuru comes with a makefile that can be used to build and run:
 ### Building without Make
 
     $ cd <dupeGuru directory>
-    $ python3 -m venv --system-site-packages ./env
+    $ python3 -m venv ./env
     $ source ./env/bin/activate
     $ pip install -r requirements.txt
     $ python build.py
@@ -73,7 +73,7 @@ To generate packages the extra requirements in requirements-extra.txt must be in
 steps are as follows:
 
     $ cd <dupeGuru directory>
-    $ python3 -m venv --system-site-packages ./env
+    $ python3 -m venv ./env
     $ source ./env/bin/activate
     $ pip install -r requirements.txt -r requirements-extra.txt
     $ python build.py --clean
@@ -81,7 +81,7 @@ steps are as follows:
 
 This can be made a one-liner (once in the directory) as:
 
-    $ bash -c "python3 -m venv --system-site-packages env && source env/bin/activate && pip install -r requirements.txt -r requirements-extra.txt && python build.py --clean && python package.py"
+    $ bash -c "python3 -m venv ./env && source env/bin/activate && pip install -r requirements.txt -r requirements-extra.txt && python build.py --clean && python package.py"
 
 ## Running tests
 
