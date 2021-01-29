@@ -14,7 +14,7 @@ The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsene
 Still looking for additional help especially with regards to:
 * OSX maintenance: reproducing bugs & cocoa version, building package with Cocoa UI.
 * Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package.
-* Translations: updating missing strings.
+* Translations: updating missing strings on [transifex](https://www.transifex.com/voltaicideas/dupeguru-1).
 * Documentation: keeping it up-to-date.
 
 ## Contents of this folder
