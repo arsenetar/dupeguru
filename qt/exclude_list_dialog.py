@@ -152,14 +152,14 @@ class ExcludeListDialog(QDialog):
         self.app.show_message(tr("""\
 These (case sensitive) python regular expressions will filter out files during scans.<br>\
 Directores will also have their <strong>default state</strong> set to Excluded \
-in the Directories tab if their name happen to match one of the regular expressions.<br>\
-For each file collected two tests are perfomed on each of them to determine whether or not to filter them out:<br>\
+in the Directories tab if their name happens to match one of the selected regular expressions.<br>\
+For each file collected, two tests are perfomed to determine whether or not to completely ignore it:<br>\
 <li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>
-<li>2. Regular expressions with no path separator in them will be compared to the full path to the file.</li><br>
+<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>
 Example: if you want to filter out .PNG files from the "My Pictures" directory only:<br>\
 <code>.*My\\sPictures\\\\.*\\.png</code><br><br>\
-You can test the regular expression with the test string feature by pasting a fake path in it:<br>\
+You can test the regular expression with the "test string" button after pasting a fake path in the test field:<br>\
 <code>C:\\\\User\\My Pictures\\test.png</code><br><br>
 Matching regular expressions will be highlighted.<br>\
-If there is at least one highlight, the path tested will be ignored during scans.<br><br>\
+If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>\
 Directories and files starting with a period '.' are filtered out by default.<br><br>"""))
