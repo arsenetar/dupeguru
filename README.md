@@ -8,13 +8,10 @@ is written in Objective-C and uses Cocoa. On Linux, it is written in Python and 
 The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa
 
 ## Current status
-
-2020: various bug fixes and small UI improvements have been added. Packaging for MacOS is still a problem.
-
 Still looking for additional help especially with regards to:
 * OSX maintenance: reproducing bugs & cocoa version, building package with Cocoa UI.
 * Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package.
-* Translations: updating missing strings.
+* Translations: updating missing strings, transifex project at https://www.transifex.com/voltaicideas/dupeguru-1
 * Documentation: keeping it up-to-date.
 
 ## Contents of this folder
