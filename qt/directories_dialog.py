@@ -335,7 +335,7 @@ class DirectoriesDialog(QMainWindow):
 
     def loadDirectoriesTriggered(self):
         title = tr("Select a directories file to load")
-        files = ";;".join([tr("dupeGuru Results (*.dupegurudirs)"), tr("All Files (*.*)")])
+        files = ";;".join([tr("dupeGuru Durectories (*.dupegurudirs)"), tr("All Files (*.*)")])
         destination = QFileDialog.getOpenFileName(self, title, "", files)[0]
         if destination:
             self.app.model.load_directories(destination)
