@@ -70,7 +70,7 @@ def build_help():
     help_basepath = op.join(current_path, "help", "en")
     help_destpath = op.join(current_path, "build", "help")
     changelog_path = op.join(current_path, "help", "changelog")
-    tixurl = "https://github.com/hsoft/dupeguru/issues/{}"
+    tixurl = "https://github.com/arsenetar/dupeguru/issues/{}"
     confrepl = {"language": "en"}
     changelogtmpl = op.join(current_path, "help", "changelog.tmpl")
     conftmpl = op.join(current_path, "help", "conf.tmpl")
