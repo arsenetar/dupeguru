@@ -1,0 +1,261 @@
+# 
+# Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+# 
+msgid ""
+msgstr ""
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core\app.py:42
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr "Δεν υπάρχουν μαρκαρισμένα διπλότυπα. Δεν έγινε τίποτα."
+
+#: core\app.py:43
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr "Δεν υπάρχουν επιλεγμένα διπλότυπα. Δεν έγινε τίποτα."
+
+#: core\app.py:44
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr ""
+"Πρόκειται να ανοίξετε πολλά αρχεία ταυτόχρονα. Ανάλογα με το ποιο πρόγραμμα "
+"ανοίγουν αυτάτα αρχεία, κάτι τέτοιο μπορεί να προκαλέσει ένα μικρό χάος. "
+"Συνέχεια;"
+
+#: core\app.py:71
+msgid "Scanning for duplicates"
+msgstr "Σάρωση για διπλότυπα"
+
+#: core\app.py:72
+msgid "Loading"
+msgstr "Φόρτωση"
+
+#: core\app.py:73
+msgid "Moving"
+msgstr "Μετακίνηση"
+
+#: core\app.py:74
+msgid "Copying"
+msgstr "Αντιγραφή"
+
+#: core\app.py:75
+msgid "Sending to Trash"
+msgstr "Αποστολή στα σκουπίδια"
+
+#: core\app.py:308
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr ""
+"Μια προηγούμενη ενέργεια είναι σε εξέλιξη. Δεν μπορείτε να ξεκινήσετε "
+"καινούργια ακόμα. Περιμένετε λίγα δευτερόλεπτα, έπειτα προσπαθήστε ξανά."
+
+#: core\app.py:318
+msgid "No duplicates found."
+msgstr "Δεν βρέθηκαν διπλότυπα."
+
+#: core\app.py:333
+msgid "All marked files were copied successfully."
+msgstr "Όλα τα επιλεγμένα αρχεία αντιγράφηκαν επιτυχώς."
+
+#: core\app.py:334
+msgid "All marked files were moved successfully."
+msgstr "Όλα τα επιλεγμένα αρχεία μετακινήθηκαν επιτυχώς."
+
+#: core\app.py:335
+msgid "All marked files were successfully sent to Trash."
+msgstr "Όλα τα επιλεγμένα αρχεία στάλθηκαν με επιτυχία στον κάδο."
+
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr "Δεν ήταν δυνατή η φόρτωση του αρχείου: {}"
+
+#: core\app.py:399
+msgid "'{}' already is in the list."
+msgstr "'{}' υπάρχει ήδη στη λίστα."
+
+#: core\app.py:401
+msgid "'{}' does not exist."
+msgstr "'{}' δεν υπάρχει."
+
+#: core\app.py:410
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr ""
+"Όλα τα επιλεγμένα %d στοιχεία θα αγνοηθούν σε μελλοντικές σαρώσεις.Συνέχεια;"
+
+#: core\app.py:485
+msgid "copy"
+msgstr "αντιγραφή"
+
+#: core\app.py:485
+msgid "move"
+msgstr "μετακίνηση"
+
+#: core\app.py:486
+msgid "Select a directory to {} marked files to"
+msgstr "Επιλέξτε ένα φάκελο {} για τα μαρκαρισμένα αρχεία"
+
+#: core\app.py:527
+msgid "Select a destination for your exported CSV"
+msgstr "Επιλέξτε έναν προορισμό για το εξαγόμενο CSV σας"
+
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr "Δεν ήταν δυνατή η εγγραφή στο αρχείο: {}"
+
+#: core\app.py:559
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "Δεν έχετε ορίσει ειδική εντολή. Ρυθμίστε τη στις προτιμήσεις σας. "
+
+#: core\app.py:727 core\app.py:740
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "Πρόκειται να αφαιρέσετε %d αρχεία από τα αποτελέσματα. Συνέχεια;"
+
+#: core\app.py:774
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr "{} ομάδες διπλοτύπων άλλαξαν από το επαναπροσδιορισμό."
+
+#: core\app.py:821
+msgid "The selected directories contain no scannable file."
+msgstr "Οι επιλεγμένοι φάκελοι δεν περιέχουν σαρώσιμα αρχεία."
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "Συλλογή αρχείων για σάρωση"
+
+#: core\app.py:891
+msgid "%s (%d discarded)"
+msgstr "%s (%d απορρίφθηκαν)"
+
+#: core\engine.py:244 core\engine.py:288
+msgid "0 matches found"
+msgstr "0 διπλότυπα βρέθηκαν"
+
+#: core\engine.py:262 core\engine.py:296
+msgid "%d matches found"
+msgstr "Βρέθηκαν %d διπλότυπα"
+
+#: core\gui\deletion_options.py:73
+msgid "You are sending {} file(s) to the Trash."
+msgstr "Στέλνετε {} αρχεία στα σκουπίδια."
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
+msgstr "Κανονικές εκφράσεις"
+
+#: core\gui\ignore_list_dialog.py:25
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "Θέλετε να αφαιρέσετε όλα τα %d στοιχεία από τη λίστα αγνόησης; "
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr "Ονομα αρχείου"
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr "Όνομα αρχείου - Πεδία"
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr "Όνομα αρχείου - Πεδία (Χωρίς παραγγελία)"
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr "ετικέτα"
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr "Περιεχόμενα"
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "Ανάλυση %d/%d εικόνων"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "Εκτέλεση %d/%d μερικής ταυτοποίησης"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "Προετοιμασία για σύγκριση"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "Πιστοποίηση %d/%d ταυτόσημων"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Ανάγνωση EXIF %d/%d εικόνες"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr "Χρονική σήμανση EXIF"
+
+#: core\prioritize.py:70
+msgid "None"
+msgstr "Καμμία"
+
+#: core\prioritize.py:100
+msgid "Ends with number"
+msgstr "Λήγει με αριθμό"
+
+#: core\prioritize.py:101
+msgid "Doesn't end with number"
+msgstr "Δεν λήγει με αριθμό"
+
+#: core\prioritize.py:102
+msgid "Longest"
+msgstr "Μεγαλύτερο"
+
+#: core\prioritize.py:103
+msgid "Shortest"
+msgstr "Μικρότερο"
+
+#: core\prioritize.py:140
+msgid "Highest"
+msgstr "Υψηλότερη"
+
+#: core\prioritize.py:140
+msgid "Lowest"
+msgstr "Χαμηλότερη"
+
+#: core\prioritize.py:169
+msgid "Newest"
+msgstr "Νεώτερο"
+
+#: core\prioritize.py:169
+msgid "Oldest"
+msgstr "Παλαιότερο"
+
+#: core\results.py:142
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s / %s) επιλεγμένα διπλότυπα."
+
+#: core\results.py:149
+msgid " filter: %s"
+msgstr " φίλτρο: %s"
+
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "Ανάγνωση μεγέθους %d/%d αρχείων"
+
+#: core\scanner.py:109
+msgid "Read metadata of %d/%d files"
+msgstr "Ανάγνωση μεταδεδομένων των %d/%d αρχείων"
+
+#: core\scanner.py:147
+msgid "Almost done! Fiddling with results..."
+msgstr "Σχεδόν τελείωσα! Παιχνίδι με αποτελέσματα ..."
+
+#: core\se\scanner.py:18
+msgid "Folders"
+msgstr "ντοσιέ"
