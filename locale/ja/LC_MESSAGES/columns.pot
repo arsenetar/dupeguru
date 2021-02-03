@@ -1,0 +1,123 @@
+# 
+# Translators:
+# Fuan Karl <jcfrt@posteo.net>, 2021
+# 
+msgid ""
+msgstr ""
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
+#: core\gui\problem_table.py:18
+msgid "File Path"
+msgstr "ファイルパス"
+
+#: core\gui\problem_table.py:19
+msgid "Error Message"
+msgstr "エラーメッセージ"
+
+#: core\me\prioritize.py:23
+msgid "Duration"
+msgstr "デュレーション"
+
+#: core\me\prioritize.py:30 core\me\result_table.py:23
+msgid "Bitrate"
+msgstr "ビットレート"
+
+#: core\me\prioritize.py:37
+msgid "Samplerate"
+msgstr "サンプルレート"
+
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "ファイル名"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "フォルダ"
+
+#: core\me\result_table.py:21
+msgid "Size (MB)"
+msgstr "サイズ（MB）"
+
+#: core\me\result_table.py:22
+msgid "Time"
+msgstr "デュレーション"
+
+#: core\me\result_table.py:24
+msgid "Sample Rate"
+msgstr "サンプルレート"
+
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "種類"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "変更"
+
+#: core\me\result_table.py:27
+msgid "Title"
+msgstr "タイトル"
+
+#: core\me\result_table.py:28
+msgid "Artist"
+msgstr "アーティスト"
+
+#: core\me\result_table.py:29
+msgid "Album"
+msgstr "アルバム"
+
+#: core\me\result_table.py:30
+msgid "Genre"
+msgstr "ジャンル"
+
+#: core\me\result_table.py:31
+msgid "Year"
+msgstr "年"
+
+#: core\me\result_table.py:32
+msgid "Track Number"
+msgstr "トラック番号"
+
+#: core\me\result_table.py:33
+msgid "Comment"
+msgstr "コメント"
+
+#: core\me\result_table.py:34 core\pe\result_table.py:26
+#: core\se\result_table.py:24
+msgid "Match %"
+msgstr "一致率"
+
+#: core\me\result_table.py:35 core\se\result_table.py:25
+msgid "Words Used"
+msgstr "使用した単語"
+
+#: core\me\result_table.py:36 core\pe\result_table.py:27
+#: core\se\result_table.py:26
+msgid "Dupe Count"
+msgstr "重複カウント"
+
+#: core\pe\prioritize.py:23 core\pe\result_table.py:23
+msgid "Dimensions"
+msgstr "寸法"
+
+#: core\pe\result_table.py:21 core\se\result_table.py:21
+msgid "Size (KB)"
+msgstr "サイズ（KB）"
+
+#: core\pe\result_table.py:24
+msgid "EXIF Timestamp"
+msgstr "EXIFタイムスタンプ"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "サイズ"
