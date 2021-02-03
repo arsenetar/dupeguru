@@ -1,0 +1,254 @@
+# 
+# Translators:
+# Fuan Karl <jcfrt@posteo.net>, 2021
+# 
+msgid ""
+msgstr ""
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: core\app.py:42
+msgid "There are no marked duplicates. Nothing has been done."
+msgstr "マークされた重複はありません。 何も行われていません。"
+
+#: core\app.py:43
+msgid "There are no selected duplicates. Nothing has been done."
+msgstr "選択された重複はありません。 何も行われていません。"
+
+#: core\app.py:44
+msgid ""
+"You're about to open many files at once. Depending on what those files are "
+"opened with, doing so can create quite a mess. Continue?"
+msgstr "一度に多くのファイルを開こうとしています。 これらのファイルを開く対象によっては、これを行うとかなり混乱する可能性があります。 継続する？"
+
+#: core\app.py:71
+msgid "Scanning for duplicates"
+msgstr "重複のスキャン"
+
+#: core\app.py:72
+msgid "Loading"
+msgstr "読み込み中"
+
+#: core\app.py:73
+msgid "Moving"
+msgstr "移動します"
+
+#: core\app.py:74
+msgid "Copying"
+msgstr "コピー中"
+
+#: core\app.py:75
+msgid "Sending to Trash"
+msgstr "ごみ箱に送信します"
+
+#: core\app.py:308
+msgid ""
+"A previous action is still hanging in there. You can't start a new one yet. "
+"Wait a few seconds, then try again."
+msgstr "前のアクションはまだそこにぶら下がっています。 まだ新しいものを始めることはできません。 数秒待ってから、再試行してください。"
+
+#: core\app.py:318
+msgid "No duplicates found."
+msgstr "重複は見つかりませんでした。"
+
+#: core\app.py:333
+msgid "All marked files were copied successfully."
+msgstr "マークされたファイルはすべて正常にコピーされました。"
+
+#: core\app.py:334
+msgid "All marked files were moved successfully."
+msgstr "マークされたファイルはすべて正常に移動されました。"
+
+#: core\app.py:335
+msgid "All marked files were successfully sent to Trash."
+msgstr "マークされたファイルはすべてごみ箱に正常に送信されました。"
+
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr "ファイルを読み込めませんでした：{}"
+
+#: core\app.py:399
+msgid "'{}' already is in the list."
+msgstr "「{}」既にリストに含まれています。"
+
+#: core\app.py:401
+msgid "'{}' does not exist."
+msgstr "'{}' 存在しません。"
+
+#: core\app.py:410
+msgid ""
+"All selected %d matches are going to be ignored in all subsequent scans. "
+"Continue?"
+msgstr "選択した%d個の一致は、以降のすべてのスキャンで無視されます。 継続する？"
+
+#: core\app.py:485
+msgid "copy"
+msgstr "をコピーする"
+
+#: core\app.py:485
+msgid "move"
+msgstr "の移動先の"
+
+#: core\app.py:486
+msgid "Select a directory to {} marked files to"
+msgstr "マークされたファイル{}ディレクトリを選択します。"
+
+#: core\app.py:527
+msgid "Select a destination for your exported CSV"
+msgstr "エクスポートしたCSVの宛先を選択します。"
+
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr "ファイルに書き込めませんでした：{}"
+
+#: core\app.py:559
+msgid "You have no custom command set up. Set it up in your preferences."
+msgstr "カスタムコマンドは設定されていません。 お好みで設定してください。"
+
+#: core\app.py:727 core\app.py:740
+msgid "You are about to remove %d files from results. Continue?"
+msgstr "結果から%d個のファイルを削除しようとしています。 継続する？"
+
+#: core\app.py:774
+msgid "{} duplicate groups were changed by the re-prioritization."
+msgstr "{}重複するグループは、再優先順位付けによって変更されました。"
+
+#: core\app.py:821
+msgid "The selected directories contain no scannable file."
+msgstr "選択したディレクトリにはスキャン可能なファイルが含まれていません。"
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "スキャンするファイルを収集しています"
+
+#: core\app.py:891
+msgid "%s (%d discarded)"
+msgstr "%s (%d 廃棄)"
+
+#: core\engine.py:244 core\engine.py:288
+msgid "0 matches found"
+msgstr "一致するものが見つかりません"
+
+#: core\engine.py:262 core\engine.py:296
+msgid "%d matches found"
+msgstr "%d の一致が見つかりました"
+
+#: core\gui\deletion_options.py:73
+msgid "You are sending {} file(s) to the Trash."
+msgstr "{}個のファイルをゴミ箱に送信しています"
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
+msgstr "正規表現"
+
+#: core\gui\ignore_list_dialog.py:25
+msgid "Do you really want to remove all %d items from the ignore list?"
+msgstr "本当に除外リストから%d個の項目を削除しますか？"
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr "ファイル名"
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr "ファイル名 - フィールド"
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr "ファイル名 - フィールド（順序なし）"
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr "タグ"
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr "内容"
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "%d/%d 枚の写真を分析しました"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "チャンクマッチを%d/%d回実行しました"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "マッチングの準備"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "%d/%d件の一致を確認"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "%d/%d枚の写真のEXIFを読みました"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr "EXIFタイムスタンプ"
+
+#: core\prioritize.py:70
+msgid "None"
+msgstr "無し"
+
+#: core\prioritize.py:100
+msgid "Ends with number"
+msgstr "番号で終わっている"
+
+#: core\prioritize.py:101
+msgid "Doesn't end with number"
+msgstr "数字で終わっていない"
+
+#: core\prioritize.py:102
+msgid "Longest"
+msgstr "最長"
+
+#: core\prioritize.py:103
+msgid "Shortest"
+msgstr "最短"
+
+#: core\prioritize.py:140
+msgid "Highest"
+msgstr "最高"
+
+#: core\prioritize.py:140
+msgid "Lowest"
+msgstr "最低"
+
+#: core\prioritize.py:169
+msgid "Newest"
+msgstr "最新"
+
+#: core\prioritize.py:169
+msgid "Oldest"
+msgstr "最古"
+
+#: core\results.py:142
+msgid "%d / %d (%s / %s) duplicates marked."
+msgstr "%d / %d (%s / %s)マークされた重複。"
+
+#: core\results.py:149
+msgid " filter: %s"
+msgstr "フィルタ: %s"
+
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "%d/%dファイルのサイズを読み取った"
+
+#: core\scanner.py:109
+msgid "Read metadata of %d/%d files"
+msgstr "%d/%dファイルのメタデータを読み取った"
+
+#: core\scanner.py:147
+msgid "Almost done! Fiddling with results..."
+msgstr "ほぼ完了しました！ 結果をいじっています..."
+
+#: core\se\scanner.py:18
+msgid "Folders"
+msgstr "フォルダー"
