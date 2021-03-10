@@ -1,14 +1,14 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/dupeguru/language/uk/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Ukrainian (https://www.transifex.com/voltaicideas/teams/116153/uk/)\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 #: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
@@ -68,6 +68,10 @@ msgstr "Усі позначені файли були переміщені ус�
 msgid "All marked files were successfully sent to Trash."
 msgstr "Усі позначені файли були успішно відправлені до кошика."
 
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr ""
+
 #: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}' вже є в списку."
@@ -100,6 +104,10 @@ msgstr "Оберіть цільову папку для {} позначених 
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr ""
+
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Власна команда не встановлена. Встановіть її у налаштуваннях."
@@ -112,13 +120,13 @@ msgstr "Ви збираєтеся видалити %d файлів з резул
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:835
-msgid "Collecting files to scan"
-msgstr "Збір файлів для пошуку"
-
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr "Обрані папки не містять файлів придатних для пошуку."
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "Збір файлів для пошуку"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
@@ -132,17 +140,61 @@ msgstr "0 результатів знайдено"
 msgid "%d matches found"
 msgstr "%d результатів знайдено"
 
-#: core\scanner.py:85
-msgid "Read size of %d/%d files"
-msgstr "Прочитано розмір %d/%d файлів"
-
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
+msgstr ""
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
 msgstr ""
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ви дійсно хочете видалити всі %d елементів з чорного списку?"
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr ""
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr ""
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr ""
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr ""
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "Проаналізовано %d/%d фотографій"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "Виконано %d/%d порівнянь шматків"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "Підготовка до порівняння"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "Перевірено %d/%d результатів"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Прочитано EXIF з %d/%d фотографій"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr ""
 
 #: core\prioritize.py:70
 msgid "None"
@@ -188,61 +240,13 @@ msgstr "%d / %d (%s / %s) дублікатів позначено."
 msgid " filter: %s"
 msgstr "фільтр: %s"
 
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "Прочитано розмір %d/%d файлів"
+
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитано метаданих з %d/%d файлів"
-
-#: core\pe\matchblock.py:72
-msgid "Analyzed %d/%d pictures"
-msgstr "Проаналізовано %d/%d фотографій"
-
-#: core\pe\matchblock.py:181
-msgid "Performed %d/%d chunk matches"
-msgstr "Виконано %d/%d порівнянь шматків"
-
-#: core\pe\matchblock.py:191
-msgid "Preparing for matching"
-msgstr "Підготовка до порівняння"
-
-#: core\pe\matchblock.py:244
-msgid "Verified %d/%d matches"
-msgstr "Перевірено %d/%d результатів"
-
-#: core\pe\matchexif.py:19
-msgid "Read EXIF of %d/%d pictures"
-msgstr "Прочитано EXIF з %d/%d фотографій"
-
-#: core\app.py:343
-msgid "Could not load file: {}"
-msgstr ""
-
-#: core\app.py:534 core\app.py:801 core\app.py:811
-msgid "Couldn't write to file: {}"
-msgstr ""
-
-#: core\me\scanner.py:20 core\se\scanner.py:16
-msgid "Filename"
-msgstr ""
-
-#: core\me\scanner.py:21
-msgid "Filename - Fields"
-msgstr ""
-
-#: core\me\scanner.py:22
-msgid "Filename - Fields (No Order)"
-msgstr ""
-
-#: core\me\scanner.py:23
-msgid "Tags"
-msgstr ""
-
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
-msgid "Contents"
-msgstr ""
-
-#: core\pe\scanner.py:22
-msgid "EXIF Timestamp"
-msgstr ""
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
@@ -251,22 +255,3 @@ msgstr ""
 #: core\se\scanner.py:18
 msgid "Folders"
 msgstr ""
-
-#: core\gui\exclude_list_table.py:15
-msgid "Regular Expressions"
-msgstr ""
-
-#~ msgid "Sending files to the recycle bin"
-#~ msgstr "Відправлення файлів до кошика"
-
-#~ msgid "Grouped %d/%d matches"
-#~ msgstr "Згруповано %d/%d результатів"
-
-#~ msgid "Removing false matches"
-#~ msgstr "Видалення помилкових результатів"
-
-#~ msgid "Processed %d/%d matches against the ignore list"
-#~ msgstr "Порівняно %d/%d результатів з чорним списком"
-
-#~ msgid "Doing group prioritization"
-#~ msgstr "Виконується пріорітизація груп"

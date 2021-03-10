@@ -1,10 +1,10 @@
 # Translators:
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2015-07-20 16:42+0000\n"
-"Last-Translator: Virgil Dupras <hsoft@hardcoded.net>\n"
-"Language-Team: Korean (http://www.transifex.com/p/hscommon/language/ko/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -12,103 +12,23 @@ msgstr ""
 
 #: qtlib\about_box.py:43
 msgid "About {}"
-msgstr ""
+msgstr "{} 에 대한정보"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "버전 {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "GPLv3에 따라 라이센스"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
-msgstr ""
+msgstr "오류보고"
 
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
-msgstr ""
-
-#: qtlib\error_report_dialog.py:75
-msgid "Close"
-msgstr ""
-
-#: qtlib\error_report_dialog.py:79
-msgid "Go to Github"
-msgstr ""
-
-#: qtlib\preferences.py:23
-msgid "English"
-msgstr ""
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr ""
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr ""
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr ""
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: qtlib\preferences.py:28
-msgid "Czech"
-msgstr ""
-
-#: qtlib\preferences.py:29
-msgid "Italian"
-msgstr ""
-
-#: qtlib\preferences.py:30
-msgid "Armenian"
-msgstr ""
-
-#: qtlib\preferences.py:31
-msgid "Korean"
-msgstr ""
-
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr ""
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr ""
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr ""
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr ""
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr ""
-
-#: qtlib\preferences.py:37
-msgid "Spanish"
-msgstr ""
-
-#: qtlib\preferences.py:38
-msgid "Vietnamese"
-msgstr ""
-
-#: qtlib\recent.py:54
-msgid "Clear List"
-msgstr ""
-
-#: qtlib\search_edit.py:78
-msgid "Search..."
-msgstr ""
+msgstr "문제가 발생했습니다. 오류를보고하는 것은 어떻습니까?"
 
 #: qtlib\error_report_dialog.py:59
 msgid ""
@@ -120,9 +40,90 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"오류 보고서는 Github 문제로보고해야합니다. 위의 오류 추적을 복사하여 새 문제에 붙여 넣을 수 있습니다.\n"
+"\n"
+"이미 존재하는 문제에 대해 사전에 검색을 실행하십시오. 또한 경험하고있는 버그가 이미 패치되었을 수 있으므로 저장소에서 사용 가능한 최신 버전을 테스트해야합니다.\n"
+"\n"
+"일반적으로 실제로 도움이되는 것은 오류가 발생한 방법에 대한 설명을 추가하는 것입니다. 감사!\n"
+"\n"
+"이 오류 후에도 응용 프로그램이 계속 실행되어야하지만 불안정한 상태 일 수 있으므로 응용 프로그램을 다시 시작하는 것이 좋습니다."
 
-#~ msgid ""
-#~ "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-#~ "\n"
-#~ "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-#~ msgstr ""
+#: qtlib\error_report_dialog.py:75
+msgid "Close"
+msgstr "닫기"
+
+#: qtlib\error_report_dialog.py:79
+msgid "Go to Github"
+msgstr "Github로 이동"
+
+#: qtlib\preferences.py:23
+msgid "English"
+msgstr "영어"
+
+#: qtlib\preferences.py:24
+msgid "French"
+msgstr "프랑스어"
+
+#: qtlib\preferences.py:25
+msgid "German"
+msgstr "독일어"
+
+#: qtlib\preferences.py:26
+msgid "Greek"
+msgstr "그리스어"
+
+#: qtlib\preferences.py:27
+msgid "Chinese (Simplified)"
+msgstr "중국어 (간체)"
+
+#: qtlib\preferences.py:28
+msgid "Czech"
+msgstr "체코어"
+
+#: qtlib\preferences.py:29
+msgid "Italian"
+msgstr "이탈리아어"
+
+#: qtlib\preferences.py:30
+msgid "Armenian"
+msgstr "아르메니아어"
+
+#: qtlib\preferences.py:31
+msgid "Korean"
+msgstr "한국어"
+
+#: qtlib\preferences.py:32
+msgid "Russian"
+msgstr "러시아어"
+
+#: qtlib\preferences.py:33
+msgid "Ukrainian"
+msgstr "우크라이나어"
+
+#: qtlib\preferences.py:34
+msgid "Dutch"
+msgstr "네덜란드어"
+
+#: qtlib\preferences.py:35
+msgid "Polish"
+msgstr "폴란드어"
+
+#: qtlib\preferences.py:36
+msgid "Brazilian"
+msgstr "브라질 언어"
+
+#: qtlib\preferences.py:37
+msgid "Spanish"
+msgstr "스페인어"
+
+#: qtlib\preferences.py:38
+msgid "Vietnamese"
+msgstr "베트남어"
+
+#: qtlib\recent.py:54
+msgid "Clear List"
+msgstr "목록 지우기"
+
+#: qtlib\search_edit.py:78
+msgid "Search..."
+msgstr "검색.."

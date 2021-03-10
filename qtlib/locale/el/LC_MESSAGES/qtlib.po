@@ -1,9 +1,11 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2016-07-22 11:30+0000\n"
-"Last-Translator: 1kakarot\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -19,7 +21,7 @@ msgstr "Έκδοση {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Άδεια χρήσης βάσει GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
@@ -28,6 +30,24 @@ msgstr "Αναφορά σφάλματος"
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
 msgstr "Κάτι πήγε στραβά. Μήπως να αναφερθεί το σφάλμα;"
+
+#: qtlib\error_report_dialog.py:59
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Οι αναφορές σφαλμάτων πρέπει να αναφέρονται ως ζητήματα Github. Μπορείτε να αντιγράψετε την ανίχνευση σφαλμάτων παραπάνω και να την επικολλήσετε σε ένα νέο ζήτημα.\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πραγματοποιήσει αναζήτηση για τυχόν υπάρχοντα ζητήματα εκ των προτέρων. Επίσης, φροντίστε να δοκιμάσετε την πιο πρόσφατη διαθέσιμη έκδοση από το αποθετήριο, καθώς το σφάλμα που αντιμετωπίζετε ενδέχεται να έχει ήδη διορθωθεί.\n"
+"\n"
+"Αυτό που συνήθως βοηθάει συνήθως είναι εάν προσθέσετε μια περιγραφή για το πώς λάβατε το σφάλμα. Ευχαριστώ!\n"
+"\n"
+"Παρόλο που η εφαρμογή θα πρέπει να συνεχίσει να εκτελείται μετά από αυτό το σφάλμα, ενδέχεται να βρίσκεται σε ασταθή κατάσταση, επομένως συνιστάται να κάνετε επανεκκίνηση της εφαρμογής."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
@@ -71,7 +91,7 @@ msgstr "Αρμένικα"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "Κορεάτικα"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
@@ -87,7 +107,7 @@ msgstr "Γερμανικά"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "Πολωνικά"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
@@ -108,22 +128,3 @@ msgstr "Εκκαθάριση λίστας"
 #: qtlib\search_edit.py:78
 msgid "Search..."
 msgstr "Αναζήτηση..."
-
-#: qtlib\error_report_dialog.py:59
-msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
-"\n"
-"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
-"\n"
-"What usually really helps is if you add a description of how you got the error. Thanks!\n"
-"\n"
-"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr ""
-
-#~ msgid ""
-#~ "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-#~ "\n"
-#~ "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-#~ msgstr ""
-#~ "Οι αναφορές σφαλμάτων θα πρέπει να αναφέρονται ως θέματα προς επίλυση στο Github. Μπορείτε να αντιγράψετε την ακολουθία σφάλματος παραπάνω και να την επικολλήσετε σε ένα νέο θέμα (Καλό θα ήταν να εκτελέσετε μια αναζήτηση για να βεβαιωθείτε ότι το θέμα δεν υπάρχει ήδη). Αυτό που συνήθως βοηθά πραγματικά είναι αν προσθέσετε μια περιγραφή του πώς πήρατε το σφάλμα. Ευχαριστώ!\n"
-#~ "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application.Παρά το γεγονός ότι η εφαρμογή θα συνεχίσει να εκτελείται μετά από αυτό το σφάλμα, μπορεί να είναι σε μια ασταθή κατάσταση, γι 'αυτό συνιστάται να κάνετε επανεκκίνηση της εφαρμογής."

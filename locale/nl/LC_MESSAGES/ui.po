@@ -1,11 +1,11 @@
 # Translators:
-# Kees Duvekot, 2015
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2015-07-11 12:34+0000\n"
-"Last-Translator: Kees Duvekot\n"
-"Language-Team: Dutch (http://www.transifex.com/p/dupeguru/language/nl/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -15,10 +15,19 @@ msgstr ""
 msgid "Quit"
 msgstr "Afsluiten"
 
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Opties"
+
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Overslaan lijst"
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "Afbeelding cache leegmaken"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -31,6 +40,14 @@ msgstr "Over dupeGuru"
 #: qt/app.py:87
 msgid "Open Debug Log"
 msgstr "Debug Log openen"
+
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr "Weet je zeker dat je de afbeeldings-analyse cache wilt verwijderen"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "Afbeelding cache leeggemaakt"
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
@@ -128,6 +145,30 @@ msgstr "Help"
 msgid "Load Recent Results"
 msgstr "Recente resultaten inlezen"
 
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr "Toepassingsmodus:"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr "Muziek"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr "Beeld"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr "Standaard"
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "Onderzoeks type"
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr "Meer Opties"
+
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr ""
@@ -204,9 +245,78 @@ msgstr "opheffen"
 msgid "Close"
 msgstr "sluiten"
 
-#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
-msgid "Scan Type:"
-msgstr "Onderzoeks type"
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "details"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "Labels die onderzocht moeten worden"
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "Nummer"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "Artiest"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "Album"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "Titel"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "Genre"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "Jaar"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "Word gewicht"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "vergelijk gelijkwaardige woorden"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "Bestandsformaten mogen doorelkaar gebruikt worden"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "Gebruik \"reguliere expressies\" tijdens het filteren"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "Verwijder lege folders tijdens weggooien of verplaatsen"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "negeer dubbelingen die hard gelinkt zijn aan het zelfde bestand"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "Debug stand (herstart is nodig)"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "Afbeeldingen met afwijkende afmetingen toch gebruiken bij onderzoek"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
@@ -283,12 +393,6 @@ msgstr ""
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
 msgstr "Toon selectie"
-
-#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
-#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Details"
-msgstr "details"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
@@ -406,85 +510,6 @@ msgstr "Verschillen"
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Selecteerd een bestand om het resultaat op te slaan"
-
-#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
-msgid "Tags to scan:"
-msgstr "Labels die onderzocht moeten worden"
-
-#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Track"
-msgstr "Nummer"
-
-#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Artist"
-msgstr "Artiest"
-
-#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
-msgid "Album"
-msgstr "Album"
-
-#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
-msgid "Title"
-msgstr "Titel"
-
-#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
-msgid "Genre"
-msgstr "Genre"
-
-#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
-msgid "Year"
-msgstr "Jaar"
-
-#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Word weighting"
-msgstr "Word gewicht"
-
-#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Match similar words"
-msgstr "vergelijk gelijkwaardige woorden"
-
-#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
-#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
-msgid "Can mix file kind"
-msgstr "Bestandsformaten mogen doorelkaar gebruikt worden"
-
-#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
-#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Use regular expressions when filtering"
-msgstr "Gebruik \"reguliere expressies\" tijdens het filteren"
-
-#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
-#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Remove empty folders on delete or move"
-msgstr "Verwijder lege folders tijdens weggooien of verplaatsen"
-
-#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
-#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
-msgid "Ignore duplicates hardlinking to the same file"
-msgstr "negeer dubbelingen die hard gelinkt zijn aan het zelfde bestand"
-
-#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
-#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
-msgid "Debug mode (restart required)"
-msgstr "Debug stand (herstart is nodig)"
-
-#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
-msgid "Match pictures of different dimensions"
-msgstr "Afbeeldingen met afwijkende afmetingen toch gebruiken bij onderzoek"
-
-#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
-msgid "Clear Picture Cache"
-msgstr "Afbeelding cache leegmaken"
-
-#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all your cached picture analysis?"
-msgstr "Weet je zeker dat je de afbeeldings-analyse cache wilt verwijderen"
-
-#: qt/app.py:184
-msgid "Picture cache cleared."
-msgstr "Afbeelding cache leeggemaakt"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
@@ -642,11 +667,6 @@ msgstr "Meer resultaten"
 msgid "Ok"
 msgstr "Ok"
 
-#: qt/app.py:82 qt/preferences_dialog.py:116
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Opties"
-
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
 msgstr "Plakken"
@@ -711,77 +731,57 @@ msgstr "Venster"
 msgid "Zoom"
 msgstr "Zoom"
 
-#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
-msgid "Application Mode:"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Music"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Picture"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Standard"
-msgstr ""
-
-#: qt/directories_dialog.py:135
-msgid "More Options"
-msgstr ""
-
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "Uitsluitingsfilters"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "Scanresultaten"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "Mappen laden ..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "Mappen opslaan ..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "Selecteer een directory-bestand om te laden"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru-mappen (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "Selecteer een bestand om uw mappen in op te slaan"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru-mappen (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "Herstel de standaardinstellingen"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "Test tekenreeks"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "Typ hier een reguliere expressie voor python..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "Typ hier een bestandssysteempad of bestandsnaam ..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -894,97 +894,3 @@ msgstr ""
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr ""
-
-#~ msgid "Removing dead tracks from your iTunes Library"
-#~ msgstr ""
-#~ "Bezig met niet bestaande nummers uit je iTunes bibliotheek te verwijderen"
-
-#~ msgid "Scanning the iTunes Library"
-#~ msgstr "iTunes biliotheek aan het doorzoeken"
-
-#~ msgid "Sending dupes to the Trash"
-#~ msgstr "Dubbelingen naar de prullenbak aan het verplaatsen"
-
-#~ msgid "Talking to iTunes. Don't touch it!"
-#~ msgstr "Bezig met communicatie met iTunes. Afblijven!"
-
-#~ msgid ""
-#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-#~ msgstr ""
-#~ "Je iTunes bibliotheek bevat %d niet bestaande nummer die verwijderd kunnen "
-#~ "worden. Doorgaan?"
-
-#~ msgid "You have no dead tracks in your iTunes Library"
-#~ msgstr ""
-#~ "Er zijn geen niet bestaande nummers in je iTunes bilbiotheek aangetroffen"
-
-#~ msgid "The iTunes application couldn't be found."
-#~ msgstr "De iTunes toepassing kan niet gevonden worden"
-
-#~ msgid "Talking to iPhoto. Don't touch it!"
-#~ msgstr "Bezig met communicatie met iPhoto. Afblijven!"
-
-#~ msgid "Talking to Aperture. Don't touch it!"
-#~ msgstr "Met Aperture aan het communiceren. Afblijven!"
-
-#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-#~ msgstr ""
-#~ "Verwijderde Aperture afbeeldingen zijn verplaats naar de \"dupeGuru Trash\" "
-#~ "project"
-
-#~ msgid "The iPhoto application couldn't be found."
-#~ msgstr "de iPhoto toepassing kan niet gevonden worden"
-
-#~ msgid "Preferences"
-#~ msgstr "Voorkeuren"
-
-#~ msgid "Check for Update"
-#~ msgstr "Controleer nieuwere versie"
-
-#~ msgid "Filename"
-#~ msgstr "Bestandsnaam"
-
-#~ msgid "Filename - Fields"
-#~ msgstr "Bestandsnaam - velden"
-
-#~ msgid "Filename - Fields (No Order)"
-#~ msgstr "Bestandsnaam - velden (geen volgorde)"
-
-#~ msgid "Tags"
-#~ msgstr "Label"
-
-#~ msgid "Contents"
-#~ msgstr "inhoud"
-
-#~ msgid "Audio Contents"
-#~ msgstr "Geluidsinhoud"
-
-#~ msgid "EXIF Timestamp"
-#~ msgstr "EXIF tijdstip"
-
-#~ msgid "Folders"
-#~ msgstr "Folders"
-
-#~ msgid "Add Aperture Library"
-#~ msgstr "Aperture biliotheek toevoegen"
-
-#~ msgid "Add iPhoto Library"
-#~ msgstr "iPhoto bibliotheek toevoegen"
-
-#~ msgid "Add iTunes Library"
-#~ msgstr "iTunes biliotheek toevoegen"
-
-#~ msgid "Audio Content"
-#~ msgstr "geluidsinhoud"
-
-#~ msgid "Content"
-#~ msgstr "inhoud"
-
-#~ msgid "dupeGuru ME Preferences"
-#~ msgstr "dupeGuru ME voorkeuren"
-
-#~ msgid "dupeGuru PE Preferences"
-#~ msgstr "dupeGuru PE voorkeuren"
-
-#~ msgid "Remove Dead Tracks in iTunes"
-#~ msgstr "Niet bestaande nummer verwijderen in iTunes"

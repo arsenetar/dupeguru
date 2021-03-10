@@ -1,11 +1,10 @@
 # Translators:
-# ppanhh <vietnamesel10n@gmail.com>, 2013
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/dupeguru/language/vi/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Vietnamese (https://www.transifex.com/voltaicideas/teams/116153/vi/)\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -74,6 +73,10 @@ msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tất cả các tập tin được đánh dấu đã được gửi đến Thùng Rác thành công."
 
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr ""
+
 #: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}' đã tồn tại trong danh sách."
@@ -106,6 +109,10 @@ msgstr "Chọn một thư mục để {} các tập tin được đánh dấu đ
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr ""
+
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
@@ -120,13 +127,13 @@ msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Ti�
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core\app.py:835
-msgid "Collecting files to scan"
-msgstr "Đang thu thập các tập tin để quét"
-
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "Đang thu thập các tập tin để quét"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
@@ -140,17 +147,61 @@ msgstr "đã tìm thấy 0 phần khớp nhau"
 msgid "%d matches found"
 msgstr "đã tìm thấy %d phần khớp nhau"
 
-#: core\scanner.py:85
-msgid "Read size of %d/%d files"
-msgstr "Đọc kích thước của các tập tin %d/%d"
-
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Bạn sắp sửa gửi {} (các)tập tin đến Thùng Rác."
 
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
+msgstr ""
+
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Bạn có thực sự muốn loại bỏ tất cả %d đối tượng từ danh sách bỏ qua?"
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr ""
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr ""
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr ""
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr ""
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr ""
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "Đã phân tích %d/%d hình ảnh"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "Đã thể thiện %d/%d các phần khớp nhau"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "Đang chuẩn bị phần khớp nhau"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "Đã xác nhận %d/%d phần khớp nhau"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Đọc thông tin EXIF của %d/%d hình ảnh"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr ""
 
 #: core\prioritize.py:70
 msgid "None"
@@ -196,61 +247,13 @@ msgstr "%d / %d (%s / %s) phần trùng nhau đã được đánh dấu."
 msgid " filter: %s"
 msgstr " bộ lọc: %s"
 
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "Đọc kích thước của các tập tin %d/%d"
+
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "Đọc thông tin chi tiết của %d/%d tập tin"
-
-#: core\pe\matchblock.py:72
-msgid "Analyzed %d/%d pictures"
-msgstr "Đã phân tích %d/%d hình ảnh"
-
-#: core\pe\matchblock.py:181
-msgid "Performed %d/%d chunk matches"
-msgstr "Đã thể thiện %d/%d các phần khớp nhau"
-
-#: core\pe\matchblock.py:191
-msgid "Preparing for matching"
-msgstr "Đang chuẩn bị phần khớp nhau"
-
-#: core\pe\matchblock.py:244
-msgid "Verified %d/%d matches"
-msgstr "Đã xác nhận %d/%d phần khớp nhau"
-
-#: core\pe\matchexif.py:19
-msgid "Read EXIF of %d/%d pictures"
-msgstr "Đọc thông tin EXIF của %d/%d hình ảnh"
-
-#: core\app.py:343
-msgid "Could not load file: {}"
-msgstr ""
-
-#: core\app.py:534 core\app.py:801 core\app.py:811
-msgid "Couldn't write to file: {}"
-msgstr ""
-
-#: core\me\scanner.py:20 core\se\scanner.py:16
-msgid "Filename"
-msgstr ""
-
-#: core\me\scanner.py:21
-msgid "Filename - Fields"
-msgstr ""
-
-#: core\me\scanner.py:22
-msgid "Filename - Fields (No Order)"
-msgstr ""
-
-#: core\me\scanner.py:23
-msgid "Tags"
-msgstr ""
-
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
-msgid "Contents"
-msgstr ""
-
-#: core\pe\scanner.py:22
-msgid "EXIF Timestamp"
-msgstr ""
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
@@ -259,22 +262,3 @@ msgstr ""
 #: core\se\scanner.py:18
 msgid "Folders"
 msgstr ""
-
-#: core\gui\exclude_list_table.py:15
-msgid "Regular Expressions"
-msgstr ""
-
-#~ msgid "Sending files to the recycle bin"
-#~ msgstr "Đang chuyển các tập tin vào thùng rác trong Windows"
-
-#~ msgid "Grouped %d/%d matches"
-#~ msgstr "Đã nhóm %d/%d phần khớp nhau"
-
-#~ msgid "Removing false matches"
-#~ msgstr "Đang loại bỏ các phần khớp nhau bị sai"
-
-#~ msgid "Processed %d/%d matches against the ignore list"
-#~ msgstr "Đã xử lý %d/%d phần khớp nhau khỏi danh sách bỏ qua"
-
-#~ msgid "Doing group prioritization"
-#~ msgstr "Đang thực hiện chế độ gom nhóm ưu tiên"

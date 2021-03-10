@@ -1,0 +1,116 @@
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+
+#: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
+#: core\gui\problem_table.py:18
+msgid "File Path"
+msgstr "File Path"
+
+#: core\gui\problem_table.py:19
+msgid "Error Message"
+msgstr "Error Message"
+
+#: core\me\prioritize.py:23
+msgid "Duration"
+msgstr "Duration"
+
+#: core\me\prioritize.py:30 core\me\result_table.py:23
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: core\me\prioritize.py:37
+msgid "Samplerate"
+msgstr "Samplerate"
+
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "Filename"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "Folder"
+
+#: core\me\result_table.py:21
+msgid "Size (MB)"
+msgstr "Size (MB)"
+
+#: core\me\result_table.py:22
+msgid "Time"
+msgstr "Time"
+
+#: core\me\result_table.py:24
+msgid "Sample Rate"
+msgstr "Sample Rate"
+
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "Kind"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "Modification"
+
+#: core\me\result_table.py:27
+msgid "Title"
+msgstr "Title"
+
+#: core\me\result_table.py:28
+msgid "Artist"
+msgstr "Artist"
+
+#: core\me\result_table.py:29
+msgid "Album"
+msgstr "Album"
+
+#: core\me\result_table.py:30
+msgid "Genre"
+msgstr "Genre"
+
+#: core\me\result_table.py:31
+msgid "Year"
+msgstr "Year"
+
+#: core\me\result_table.py:32
+msgid "Track Number"
+msgstr "Track Number"
+
+#: core\me\result_table.py:33
+msgid "Comment"
+msgstr "Comment"
+
+#: core\me\result_table.py:34 core\pe\result_table.py:26
+#: core\se\result_table.py:24
+msgid "Match %"
+msgstr "Match %"
+
+#: core\me\result_table.py:35 core\se\result_table.py:25
+msgid "Words Used"
+msgstr "Words Used"
+
+#: core\me\result_table.py:36 core\pe\result_table.py:27
+#: core\se\result_table.py:26
+msgid "Dupe Count"
+msgstr "Dupe Count"
+
+#: core\pe\prioritize.py:23 core\pe\result_table.py:23
+msgid "Dimensions"
+msgstr "Dimensions"
+
+#: core\pe\result_table.py:21 core\se\result_table.py:21
+msgid "Size (KB)"
+msgstr "Size (KB)"
+
+#: core\pe\result_table.py:24
+msgid "EXIF Timestamp"
+msgstr "EXIF Timestamp"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "Size"

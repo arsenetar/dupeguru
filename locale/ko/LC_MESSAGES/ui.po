@@ -1,11 +1,11 @@
 # Translators:
-# woosuk park <bjh13579@gmail.com>, 2015
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2015-01-24 07:36+0000\n"
-"Last-Translator: woosuk park <bjh13579@gmail.com>\n"
-"Language-Team: Korean (http://www.transifex.com/projects/p/dupeguru/language/ko/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -15,10 +15,19 @@ msgstr ""
 msgid "Quit"
 msgstr "나가기"
 
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "옵션"
+
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "무시 목록"
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "사진 캐시 지우기"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -32,9 +41,17 @@ msgstr "dupeGuru에 대하여"
 msgid "Open Debug Log"
 msgstr "디버그 로그 열기"
 
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr "캐시 된 모든 사진 분석을 정말로 제거 하시겠습니까?"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "사진 캐시가 삭제되었습니다."
+
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "{} 파일 (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
@@ -42,13 +59,13 @@ msgstr "삭제 옵션"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "삭제 된 파일 연결"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr ""
+msgstr "복제본을 삭제 한 후 참조 파일을 대상으로하는 링크를 배치하여 삭제 된 파일을 대체합니다."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
@@ -71,10 +88,11 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
+"파일을 휴지통으로 보내는 대신 직접 삭제하십시오. 이 옵션은 일반적으로 일반 삭제 방법이 작동하지 않는 경우 해결 방법으로 사용됩니다."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr ""
+msgstr "계속하다"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
@@ -82,7 +100,7 @@ msgstr "취소"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
-msgstr ""
+msgstr "속성"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
@@ -91,7 +109,7 @@ msgstr "선택됨"
 #: qt/details_table.py:16 qt/directories_model.py:24
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
-msgstr ""
+msgstr "참조"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
@@ -123,9 +141,33 @@ msgstr "도움말"
 msgid "Load Recent Results"
 msgstr "최근 결과 불러오기"
 
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr "애플리케이션 모드 :"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr "음악"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr "그림"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr "표준"
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "스캔 유형 :"
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr "더 많은 옵션"
+
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr ""
+msgstr "스캔 할 폴더를 선택하고 \"스캔\"을 누르십시오."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -133,39 +175,39 @@ msgstr "결과 불러오기"
 
 #: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
-msgstr ""
+msgstr "스캔"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr ""
+msgstr "저장되지 않은 결과"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr ""
+msgstr "저장되지 않은 결과가 있습니다. 종료 하시겠습니까?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr ""
+msgstr "스캔 목록에 추가 할 폴더를 선택하십시오"
 
 #: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr ""
+msgstr "로드 할 결과 파일을 선택하십시오"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
-msgstr ""
+msgstr "모든 파일 (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr ""
+msgstr "dupeGuru 결과 (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
-msgstr ""
+msgstr "새 스캔 시작"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr ""
+msgstr "저장되지 않은 결과가 있습니다. 계속 하시겠습니까?"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -177,7 +219,7 @@ msgstr "상태"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr ""
+msgstr "제외된"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
@@ -189,28 +231,97 @@ msgstr "선택에서 제거"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr ""
+msgstr "삭제"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close"
 msgstr "닫기"
 
-#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
-msgid "Scan Type:"
-msgstr ""
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "세부사항"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "스캔 할 태그 :"
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "트랙"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "아티스트"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "앨범"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "제목"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "장르"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "년"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "단어 가중치"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "유사한 단어와 일치"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "파일 종류 혼합 가능"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "필터링 할 때 정규식 사용"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "삭제 또는 이동시 빈 폴더 제거"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "동일한 파일에 대한 중복 하드 링크 무시"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "디버그 모드 (다시 시작 필요)"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "다른 차원의 사진 일치"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr ""
+msgstr "필터 경도 :"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr ""
+msgstr "더 많은 결과"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr ""
+msgstr "더 적은 결과"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
@@ -222,31 +333,31 @@ msgstr "언어:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr ""
+msgstr "복사 및 이동 :"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
-msgstr ""
+msgstr "목적지에 직접"
 
 #: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
-msgstr ""
+msgstr "상대 경로 재생성"
 
 #: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
-msgstr ""
+msgstr "절대 경로 재생성"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr ""
+msgstr "사용자 지정 명령 (인수: %d 은 중복, %r 은 참조):"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr ""
+msgstr "언어 변경 사항을 적용하려면 dupeGuru를 다시 시작해야합니다."
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
-msgstr ""
+msgstr "중복 우선 순위 재 지정"
 
 #: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -254,10 +365,12 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
+"오른쪽 상자에 기준을 추가하고 확인을 클릭하여 이러한 기준에 가장 적합한 복제를 해당 그룹의 참조 위치로 보냅니다. 자세한 정보는 도움말"
+" 파일을 읽으십시오."
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr ""
+msgstr "문제!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -265,21 +378,17 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
+"일부 (또는 전체) 파일을 처리하는 데 문제가 있습니다. 이러한 문제의 원인은 아래 표에 설명되어 있습니다. 해당 파일은 결과에서 "
+"제거되지 않았습니다."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
-msgstr ""
-
-#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
-#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Details"
-msgstr "세부사항"
+msgstr "선택한 항목 표시"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
-msgstr ""
+msgstr "행위"
 
 #: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
@@ -303,471 +412,367 @@ msgstr "선택항목을 복사..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr ""
+msgstr "결과에서 표시된 항목을 제거하다."
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr ""
+msgstr "결과 우선 순위 재 지정..."
 
 #: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
-msgstr ""
+msgstr "결과에서 선택한 항목 제거"
 
 #: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
-msgstr ""
+msgstr "무시 목록에 선택 항목 추가"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr ""
+msgstr "선택한 항목을 참조 항목으로 만들기"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
-msgstr ""
+msgstr "기본 응용 프로그램으로 선택한 항목 열기"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr ""
+msgstr "선택한 항목의 포함 폴더 열기"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
-msgstr ""
+msgstr "선택한 이름 변경"
 
 #: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
-msgstr ""
+msgstr "모두 표시"
 
 #: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
-msgstr ""
+msgstr "없음으로 표시"
 
 #: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
-msgstr ""
+msgstr "마킹 반전"
 
 #: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
-msgstr ""
+msgstr "선택한 항목 표시"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
-msgstr ""
+msgstr "HTML로 내보내기"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr ""
+msgstr "CSV로 내보내기"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr ""
+msgstr "결과 저장 ..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
-msgstr ""
+msgstr "사용자 지정 명령 호출"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr ""
+msgstr "표시"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
-msgstr ""
+msgstr "열"
 
 #: qt/result_window.py:163
 msgid "Reset to Defaults"
-msgstr ""
+msgstr "기본값으로 재설정"
 
 #: qt/result_window.py:185
 msgid "{} Results"
-msgstr ""
+msgstr "{} 결과"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr ""
+msgstr "복제 만"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr ""
+msgstr "델타 값"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
-msgid "Tags to scan:"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Track"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Artist"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
-msgid "Album"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
-msgid "Title"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
-msgid "Genre"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
-msgid "Year"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Word weighting"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Match similar words"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
-#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
-msgid "Can mix file kind"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
-#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Use regular expressions when filtering"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
-#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Remove empty folders on delete or move"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
-#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
-msgid "Ignore duplicates hardlinking to the same file"
-msgstr ""
-
-#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
-#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
-msgid "Debug mode (restart required)"
-msgstr ""
-
-#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
-msgid "Match pictures of different dimensions"
-msgstr ""
-
-#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
-msgid "Clear Picture Cache"
-msgstr ""
-
-#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all your cached picture analysis?"
-msgstr ""
-
-#: qt/app.py:184
-msgid "Picture cache cleared."
-msgstr ""
+msgstr "결과를 저장할 파일을 선택하십시오."
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr ""
+msgstr "다음보다 작은 파일 무시"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr ""
+msgstr "%@ 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
-msgstr ""
+msgstr "행위"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr ""
+msgstr "새 폴더 추가..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Advanced"
-msgstr ""
+msgstr "고급"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
-msgstr ""
+msgstr "자동으로 업데이트 확인"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Basic"
-msgstr ""
+msgstr "기본"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
-msgstr ""
+msgstr "모두 앞으로 가져 오기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr ""
+msgstr "업데이트를 확인..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
-msgstr ""
+msgstr "창 닫기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr ""
+msgstr "사용자 지정 명령 (인수: %d 은 중복, %r 은 참조):"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
-msgstr ""
+msgstr "컷"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Delta"
-msgstr ""
+msgstr "델타"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr ""
+msgstr "선택한 파일의 세부 정보"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
-msgstr ""
+msgstr "세부 정보 패널"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr ""
+msgstr "디렉토리"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
-msgstr ""
+msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
-msgstr ""
+msgstr "dupeGuru 기본 설정"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr ""
+msgstr "dupeGuru 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr ""
+msgstr "dupeGuru 웹 사이트"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
-msgstr ""
+msgstr "편집"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "CSV로 결과 내보내기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
-msgstr ""
+msgstr "XHTML로 결과 내보내기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr ""
+msgstr "더 적은 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
-msgstr ""
+msgstr "필터"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr ""
+msgstr "필터 경도 :"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr ""
+msgstr "Filter Results..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
-msgstr ""
+msgstr "폴더 선택 창"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "글꼴 크기 :"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
-msgstr ""
+msgstr "dupeGuru 숨기기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide Others"
-msgstr ""
+msgstr "다른 숨기기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr ""
+msgstr "이보다 작은 파일 무시 :"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr ""
+msgstr "파일에서로드..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr ""
+msgstr "최소화"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
-msgstr ""
+msgstr "모드"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr ""
+msgstr "더 많은 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
-msgstr ""
-
-#: qt/app.py:82 qt/preferences_dialog.py:116
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr ""
+msgstr "확인"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr ""
+msgstr "붙여 넣다"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr ""
+msgstr "환경 설정..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr ""
+msgstr "한눈에"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
-msgstr ""
+msgstr "dupeGuru 종료"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr ""
+msgstr "기본값으로 재설정"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "기본값으로 재설정"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "공개"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
-msgstr ""
+msgstr "Finder에서 선택한 항목 표시"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "모두 선택"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr ""
+msgstr "표시된 항목을 휴지통으로 보내기 ..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "서비스"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
-msgstr ""
+msgstr "모두 표시"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
-msgstr ""
+msgstr "중복 스캔 시작"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr ""
+msgstr "'%@' 이름이 이미 존재합니다."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
-msgstr ""
+msgstr "창"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr ""
-
-#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
-msgid "Application Mode:"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Music"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Picture"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Standard"
-msgstr ""
-
-#: qt/directories_dialog.py:135
-msgid "More Options"
-msgstr ""
+msgstr "줌"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "제외 필터"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "스캔 결과"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "디렉토리로드 ..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "디렉토리 저장 ..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "로드 할 디렉토리 파일을 선택하십시오"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeguru 디렉토리 파일 (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "디렉토리를 저장할 파일을 선택하십시오"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeguru 디렉토리 파일 (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "기본값으로 복원"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "테스트 문자열"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "여기에 파이썬 정규식을 입력하십시오 ..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "여기에 파일 시스템 경로 또는 파일 이름을 입력하십시오 ..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -776,195 +781,113 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"이러한 (대소 문자 구분) 파이썬 정규식은 스캔 중에 파일을 필터링합니다.<br>또한 디렉토리 이름이 선택한 정규식 중 하나와 일치하는 경우 디렉토리 탭에서 <strong>기본 상태</strong>가 제외됨으로 설정됩니다.<br>수집 된 각 파일에 대해 완전히 무시할지 여부를 결정하기 위해 두 가지 테스트가 수행됩니다.<br><li>1. 경로 구분자가없는 정규식은 파일 이름과 만 비교됩니다.</li>\n"
+"<li>2. 경로 구분자가 하나 이상 포함 된 정규식은 파일의 전체 경로와 비교됩니다.</li><br>\n"
+"예 : \"내 그림\"디렉토리에서만 .PNG 파일을 필터링하려는 경우 :<br><code>.*내\\s그림\\\\.*\\.png</code><br><br>테스트 필드에 가짜 경로를 붙여 넣은 후 \"test string\"버튼으로 정규 표현식을 테스트 할 수 있습니다.<br><code>C:\\\\사용자\\내 그림\\test.png</code><br><br>\n"
+"일치하는 정규 표현식이 강조 표시됩니다.<br>강조 표시가 하나 이상있는 경우 검사하는 동안 테스트 된 경로 또는 파일 이름이 무시됩니다.<br><br>마침표 '.'로 시작하는 디렉토리 및 파일 기본적으로 필터링됩니다.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "컴파일 오류 :"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "줌을 증가"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "줌을 감소"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "보통 크기"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "최고로 잘 맞는"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "사진 캐시 모드 :"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr ""
+msgstr "뷰어 도구 모음에서 테마 아이콘 재정의"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
-msgstr ""
+msgstr "테마 엔진에서 제공하는 아이콘 대신 자체 내부 아이콘 사용"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "이미지 뷰어에 스크롤바 표시"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
-msgstr ""
+msgstr "표시된 이미지가 뷰포트에 맞지 않으면 스크롤바를 표시하여 뷰를 확장합니다."
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr ""
+msgstr "탭 표시 줄에 기본 위치를 사용 (다시 시작해야 함)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"탭 바를 메인 메뉴 옆이 아닌 아래에 놓습니다.\n"
+"MacOS에서는 탭 막대가 대신 창의 너비를 채 웁니다."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "참조 용으로 굵은 글꼴 사용"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "참조 전경색 :"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "참조 배경색 :"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "델타의 전경색 :"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "제목 표시 줄을 표시하고 고정 할 수 있습니다."
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
-msgstr ""
+msgstr "제목 표시 줄이 숨겨져있는 경우 수정 자 키를 사용하여 부동 창을 주위로 드래그하십시오."
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
-msgstr ""
+msgstr "제목 표시 줄은 창이 고정되어있는 동안에 만 비활성화 할 수 있습니다."
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "세로 제목 표시 줄"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr ""
+msgstr "제목 표시 줄을 상단 가로에서 왼쪽 세로로 변경"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr ""
-
-#~ msgid "Removing dead tracks from your iTunes Library"
-#~ msgstr ""
-
-#~ msgid "Scanning the iTunes Library"
-#~ msgstr "iTunes 라이브러리 검색중"
-
-#~ msgid "Sending dupes to the Trash"
-#~ msgstr "중복 파일 휴지통으로 보내기"
-
-#~ msgid "Talking to iTunes. Don't touch it!"
-#~ msgstr "iTunes와 작업중입니다. 건들지 마세요!"
-
-#~ msgid ""
-#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-#~ msgstr ""
-
-#~ msgid "You have no dead tracks in your iTunes Library"
-#~ msgstr ""
-
-#~ msgid "The iTunes application couldn't be found."
-#~ msgstr "iTunes를 찾을수 없습니다."
-
-#~ msgid "Talking to iPhoto. Don't touch it!"
-#~ msgstr "iPhoto와 작업중입니다. 건들지 마세요!"
-
-#~ msgid "Talking to Aperture. Don't touch it!"
-#~ msgstr "Aperture와 작업중입니다. 건들지 마세요!"
-
-#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-#~ msgstr ""
-
-#~ msgid "The iPhoto application couldn't be found."
-#~ msgstr "iPhoto 어플리케이션을 찾을수 없습니다."
-
-#~ msgid "Preferences"
-#~ msgstr "설정"
-
-#~ msgid "Check for Update"
-#~ msgstr "업데이트 확인"
-
-#~ msgid "Filename"
-#~ msgstr ""
-
-#~ msgid "Filename - Fields"
-#~ msgstr ""
-
-#~ msgid "Filename - Fields (No Order)"
-#~ msgstr ""
-
-#~ msgid "Tags"
-#~ msgstr ""
-
-#~ msgid "Contents"
-#~ msgstr ""
-
-#~ msgid "Audio Contents"
-#~ msgstr ""
-
-#~ msgid "EXIF Timestamp"
-#~ msgstr ""
-
-#~ msgid "Folders"
-#~ msgstr ""
-
-#~ msgid "Add Aperture Library"
-#~ msgstr ""
-
-#~ msgid "Add iPhoto Library"
-#~ msgstr ""
-
-#~ msgid "Add iTunes Library"
-#~ msgstr ""
-
-#~ msgid "Audio Content"
-#~ msgstr ""
-
-#~ msgid "Content"
-#~ msgstr ""
-
-#~ msgid "dupeGuru ME Preferences"
-#~ msgstr ""
-
-#~ msgid "dupeGuru PE Preferences"
-#~ msgstr ""
-
-#~ msgid "Remove Dead Tracks in iTunes"
-#~ msgstr ""
+msgstr "탭 표시 줄 표시"

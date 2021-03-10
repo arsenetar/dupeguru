@@ -1,10 +1,11 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: auanasgheps\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/dupeguru/language/it/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Italian (https://www.transifex.com/voltaicideas/teams/116153/it/)\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -14,10 +15,19 @@ msgstr ""
 msgid "Quit"
 msgstr "Esci"
 
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Opzioni"
+
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Lista elementi ignorati"
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "Cancella la cache delle immagini"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -30,6 +40,16 @@ msgstr "Informazioni su dupeGuru"
 #: qt/app.py:87
 msgid "Open Debug Log"
 msgstr "Apri registro eventi"
+
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr ""
+"Vuoi veramente rimuovere tutte le analisi delle immagini memorizzate nella "
+"cache?"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "La cache delle immagini è stata cancellata."
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
@@ -127,6 +147,30 @@ msgstr "Aiuto"
 msgid "Load Recent Results"
 msgstr "Carica i risultati recenti"
 
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr "Modalità applicazione:"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr "Musica"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr "Foto"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr "Standard"
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "Tipo di scansione:"
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr "Più Opzioni"
+
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Seleziona le cartelle da scansionare e premi \"Scansiona\"."
@@ -202,9 +246,78 @@ msgstr "Deseleziona"
 msgid "Close"
 msgstr "Chiudi"
 
-#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
-msgid "Scan Type:"
-msgstr "Tipo di scansione:"
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "Dettagli"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "Etichette da scansionare:"
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "Traccia"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "Artista"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "Album"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "Titolo"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "Genere"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "Anno"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "'Peso' della parola"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "Fai coincidere parole simili"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "Includi tipi diversi di file"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "Usa le espressioni regolari per filtrare"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "Rimuovi le cartelle vuote dopo aver cancellato o spostato"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "Non creare gli hardlink per i duplicati verso il medesimo file"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "Modalità 'Debug'(è richiesta la riapertura del programma)"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "Includi immagini di dimensione differente"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
@@ -283,12 +396,6 @@ msgstr ""
 msgid "Reveal Selected"
 msgstr "Mostra i selezionati"
 
-#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
-#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Details"
-msgstr "Dettagli"
-
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
@@ -332,7 +439,7 @@ msgstr "Aggiungi gli elementi selezionati alla lista da ignorare"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr ""
+msgstr "Rendi selezionato un Riferimento"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
@@ -405,87 +512,6 @@ msgstr "Valori Delta"
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Seleziona un file dove salvare i tuoi risultati"
-
-#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
-msgid "Tags to scan:"
-msgstr "Etichette da scansionare:"
-
-#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Track"
-msgstr "Traccia"
-
-#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Artist"
-msgstr "Artista"
-
-#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
-msgid "Album"
-msgstr "Album"
-
-#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
-msgid "Title"
-msgstr "Titolo"
-
-#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
-msgid "Genre"
-msgstr "Genere"
-
-#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
-msgid "Year"
-msgstr "Anno"
-
-#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Word weighting"
-msgstr "'Peso' della parola"
-
-#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Match similar words"
-msgstr "Fai coincidere parole simili"
-
-#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
-#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
-msgid "Can mix file kind"
-msgstr "Includi tipi diversi di file"
-
-#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
-#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Use regular expressions when filtering"
-msgstr "Usa le espressioni regolari per filtrare"
-
-#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
-#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Remove empty folders on delete or move"
-msgstr "Rimuovi le cartelle vuote dopo aver cancellato o spostato"
-
-#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
-#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
-msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Non creare gli hardlink per i duplicati verso il medesimo file"
-
-#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
-#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
-msgid "Debug mode (restart required)"
-msgstr "Modalità 'Debug'(è richiesta la riapertura del programma)"
-
-#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
-msgid "Match pictures of different dimensions"
-msgstr "Includi immagini di dimensione differente"
-
-#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
-msgid "Clear Picture Cache"
-msgstr "Cancella la cache delle immagini"
-
-#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all your cached picture analysis?"
-msgstr ""
-"Vuoi veramente rimuovere tutte le analisi delle immagini memorizzate nella "
-"cache?"
-
-#: qt/app.py:184
-msgid "Picture cache cleared."
-msgstr ""
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
@@ -644,11 +670,6 @@ msgstr "Più risultati"
 msgid "Ok"
 msgstr "Ok"
 
-#: qt/app.py:82 qt/preferences_dialog.py:116
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Opzioni"
-
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
 msgstr "Incolla"
@@ -675,7 +696,7 @@ msgstr "Imposta prefefinite"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "Rivelare"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
@@ -713,77 +734,57 @@ msgstr "Finestra"
 msgid "Zoom"
 msgstr "Zoom"
 
-#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
-msgid "Application Mode:"
-msgstr "Modalità applicazione:"
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Music"
-msgstr "Musica"
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Picture"
-msgstr "Foto"
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Standard"
-msgstr "Standard"
-
-#: qt/directories_dialog.py:135
-msgid "More Options"
-msgstr "Più Opzioni"
-
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "Filtri di esclusione"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "Risultati della scansione"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "Carica cartelle..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "Salva cartelle..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "Seleziona un file delle cartelle da caricare"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "cartelle di dupeGuru (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "Seleziona un file in cui salvare le cartelle"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "cartelle di dupeGuru (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "Addizionare"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "Ripristina i valori predefiniti"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "Stringa di prova"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "Digita qui un'espressione regolare Python..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "Digitare un percorso del file system o un nome file qui..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -792,197 +793,125 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>I direttori avranno anche il loro <strong>stato predefinito</strong> impostato su Escluso nella scheda Directory se il loro nome corrisponde a una delle espressioni regolari selezionate.<br>Per ogni file raccolto vengono eseguiti due test per determinare se ignorarlo o meno completamente:<br><li>1. Le espressioni regolari prive di separatori di percorso verranno confrontate solo con il nome del file.</li>\n"
+"<li>2. Le espressioni regolari contenenti almeno un separatore di percorso verranno confrontate con il percorso completo del file.</li><br>\n"
+"Esempio: se desideri filtrare i file .PNG solo dalla directory \"Mie Immagini\":<br><code>.*Mie\\sImmagini\\\\.*\\.png</code><br><br>Puoi testare l'espressione regolare con il pulsante \"stringa di prova\" dopo aver incollato un percorso falso nel campo di prova:<br><code>C:\\\\Utente\\Mie Immagini\\test.png</code><br><br>\n"
+"Verranno evidenziate le espressioni regolari corrispondenti.<br>Se è presente almeno un'evidenziazione, il percorso o il nome del file testato verrà ignorato durante le scansioni.<br><br>Directory e file che iniziano con un punto \".\" vengono filtrati per impostazione predefinita.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "Errore di compilazione:"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "Aumenta lo zoom"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "Diminuisci lo zoom"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "Dimensione normale"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "Il più adatto"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "Modalità cache immagini:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
 msgstr ""
+"Ignora le icone del tema nella barra degli strumenti del visualizzatore"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
+"Usa le nostre icone interne invece di quelle fornite dal motore del tema"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "Mostra le barre di scorrimento nei visualizzatori di immagini"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
+"Quando l'immagine visualizzata non si adatta alla visualizzazione, mostra le"
+" barre di scorrimento per estendere la visualizzazione"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
 msgstr ""
+"Usa la posizione predefinita per la barra di tabulazione (richiede il "
+"riavvio)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"Posiziona la barra di tabulazione sotto il menu principale anziché accanto ad esso\n"
+"Su MacOS, la barra delle schede riempirà invece la larghezza della finestra."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "Usa caratteri in grassetto per i riferimenti"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "Colore di primo piano per i riferimenti:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "Colore di sfondo per i riferimenti:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "colore di primo piano per i delta:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "Mostra la barra del titolo e può essere agganciata"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
+"Mentre la barra del titolo è nascosta, usa il tasto modificatore per "
+"trascinare la finestra mobile"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
 msgstr ""
+"La barra del titolo può essere disabilitata solo mentre la finestra è "
+"agganciata"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "Barra del titolo verticale"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
 msgstr ""
+"Cambia la barra del titolo da orizzontale in alto a verticale sul lato "
+"sinistro"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr ""
-
-#~ msgid "Removing dead tracks from your iTunes Library"
-#~ msgstr "Rimozione delle tracce insistenti dalla libreria di iTunes"
-
-#~ msgid "Scanning the iTunes Library"
-#~ msgstr "Scansione della libreria di iTunes"
-
-#~ msgid "Sending dupes to the Trash"
-#~ msgstr "Spostamento dei duplicati nel cestino"
-
-#~ msgid "Talking to iTunes. Don't touch it!"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-#~ msgstr ""
-#~ "La tua libreria di iTunes contiene %d tracce inesistenti pronte per essere "
-#~ "rimosse. Continuare?"
-
-#~ msgid "You have no dead tracks in your iTunes Library"
-#~ msgstr "La tua libreria di iTunes non contiene tracce inesistenti"
-
-#~ msgid "The iTunes application couldn't be found."
-#~ msgstr ""
-
-#~ msgid "Talking to iPhoto. Don't touch it!"
-#~ msgstr ""
-
-#~ msgid "Talking to Aperture. Don't touch it!"
-#~ msgstr ""
-
-#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-#~ msgstr ""
-
-#~ msgid "The iPhoto application couldn't be found."
-#~ msgstr "Non trovo l'applicazione iPhoto."
-
-#~ msgid "Preferences"
-#~ msgstr "Impostazioni"
-
-#~ msgid "Check for Update"
-#~ msgstr "Controlla aggiornamenti"
-
-#~ msgid "Filename"
-#~ msgstr "Nome del file"
-
-#~ msgid "Filename - Fields"
-#~ msgstr "Nome del file - Campi"
-
-#~ msgid "Filename - Fields (No Order)"
-#~ msgstr "Nome del file - Campi (senza ordine)"
-
-#~ msgid "Tags"
-#~ msgstr "Tags"
-
-#~ msgid "Contents"
-#~ msgstr "Contenuti"
-
-#~ msgid "Audio Contents"
-#~ msgstr "Contenuti Audio"
-
-#~ msgid "EXIF Timestamp"
-#~ msgstr "Data e ora EXIF"
-
-#~ msgid "Folders"
-#~ msgstr "Cartelle"
-
-#~ msgid "Add Aperture Library"
-#~ msgstr ""
-
-#~ msgid "Add iPhoto Library"
-#~ msgstr "Aggiungi alla libreria di iPhoto"
-
-#~ msgid "Add iTunes Library"
-#~ msgstr "Aggiungi alla lista di iTunes"
-
-#~ msgid "Audio Content"
-#~ msgstr "Contenuto audio"
-
-#~ msgid "Content"
-#~ msgstr "Contenuto"
-
-#~ msgid "dupeGuru ME Preferences"
-#~ msgstr "Preferenze di dupeGuru ME"
-
-#~ msgid "dupeGuru PE Preferences"
-#~ msgstr "Preferenze di dupeGuru PE"
-
-#~ msgid "Remove Dead Tracks in iTunes"
-#~ msgstr "Rimuovi le tracce inesistenti da iTunes"
+msgstr "Mostra la barra di tabulazione"

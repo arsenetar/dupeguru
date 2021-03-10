@@ -1,10 +1,10 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Armenian (http://www.transifex.com/projects/p/dupeguru/language/hy/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -14,10 +14,19 @@ msgstr ""
 msgid "Quit"
 msgstr "Փակել"
 
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Ընտրանքներ"
+
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr ""
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "Մաքրել նկարի պահոցը"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -30,6 +39,14 @@ msgstr "dupeGuru-ի մասին"
 #: qt/app.py:87
 msgid "Open Debug Log"
 msgstr "Բացել Սխալների մատյանը"
+
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr "Ցանկանու՞մ եք հեռացնել բոլոր պահված նկարները ստուգելուց:"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "Նկարի պահոցը մաքրվել է:"
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
@@ -122,6 +139,30 @@ msgstr "Օգնություն"
 msgid "Load Recent Results"
 msgstr "Բացել Վերջին արդյունքները"
 
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr ""
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "Ստուգելու տեսակը."
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr ""
+
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Ընտրեք ստուգելու թղթապանակները և սեղմեք  \"Ստուգել\":"
@@ -195,9 +236,78 @@ msgstr ""
 msgid "Close"
 msgstr "Փակել"
 
-#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
-msgid "Scan Type:"
-msgstr "Ստուգելու տեսակը."
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "Մանրամասն"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "Ստուգվող կցապիտակները."
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "Շավիղը"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "Կատարողը"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "Ալբոմը"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "Վերնագիրը"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "Ժանրը"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "Տարին"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "Բառի չափը"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "Ըստ նման բառերի համընկնման"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "Կարող է խառը տեսակի"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "Օգտ. կանոնավոր սահմանումներ ֆիլտրելիս"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "Հեռացնել"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "Անտեսել կրկնօրինակները հարդ նույն ֆայլը"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "Սխալի եղանակը (պահանջում է վերագործարկում)"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "Նկարների համընկնում տարբեր չափերով"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
@@ -273,12 +383,6 @@ msgstr ""
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
 msgstr "Ցուցադրել ընտրվածը"
-
-#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
-#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Details"
-msgstr "Մանրամասն"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
@@ -396,85 +500,6 @@ msgstr ""
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Ընտրեք ֆայլը՝ պահպանելու արդյունքները՝"
-
-#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
-msgid "Tags to scan:"
-msgstr "Ստուգվող կցապիտակները."
-
-#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Track"
-msgstr "Շավիղը"
-
-#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Artist"
-msgstr "Կատարողը"
-
-#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
-msgid "Album"
-msgstr "Ալբոմը"
-
-#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
-msgid "Title"
-msgstr "Վերնագիրը"
-
-#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
-msgid "Genre"
-msgstr "Ժանրը"
-
-#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
-msgid "Year"
-msgstr "Տարին"
-
-#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Word weighting"
-msgstr "Բառի չափը"
-
-#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Match similar words"
-msgstr "Ըստ նման բառերի համընկնման"
-
-#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
-#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
-msgid "Can mix file kind"
-msgstr "Կարող է խառը տեսակի"
-
-#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
-#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Use regular expressions when filtering"
-msgstr "Օգտ. կանոնավոր սահմանումներ ֆիլտրելիս"
-
-#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
-#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Remove empty folders on delete or move"
-msgstr "Հեռացնել"
-
-#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
-#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
-msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Անտեսել կրկնօրինակները հարդ նույն ֆայլը"
-
-#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
-#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
-msgid "Debug mode (restart required)"
-msgstr "Սխալի եղանակը (պահանջում է վերագործարկում)"
-
-#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
-msgid "Match pictures of different dimensions"
-msgstr "Նկարների համընկնում տարբեր չափերով"
-
-#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
-msgid "Clear Picture Cache"
-msgstr "Մաքրել նկարի պահոցը"
-
-#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all your cached picture analysis?"
-msgstr "Ցանկանու՞մ եք հեռացնել բոլոր պահված նկարները ստուգելուց:"
-
-#: qt/app.py:184
-msgid "Picture cache cleared."
-msgstr "Նկարի պահոցը մաքրվել է:"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
@@ -632,11 +657,6 @@ msgstr "Լր. արդյունքներ"
 msgid "Ok"
 msgstr "ԼԱՎ"
 
-#: qt/app.py:82 qt/preferences_dialog.py:116
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Ընտրանքներ"
-
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
 msgstr "Տեղադրել"
@@ -700,26 +720,6 @@ msgstr "Պատուհանը"
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Չափը"
-
-#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
-msgid "Application Mode:"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Music"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Picture"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Standard"
-msgstr ""
-
-#: qt/directories_dialog.py:135
-msgid "More Options"
-msgstr ""
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
@@ -884,93 +884,3 @@ msgstr ""
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr ""
-
-#~ msgid "Removing dead tracks from your iTunes Library"
-#~ msgstr "Հեռացվում են վնասված շավիղները iTunes-ի Շտեմարանից"
-
-#~ msgid "Scanning the iTunes Library"
-#~ msgstr "Ստուգվում է iTunes-ի Շտեմարանը"
-
-#~ msgid "Sending dupes to the Trash"
-#~ msgstr "Խաբկանքները տեղափոխվում են Աղբարկղ"
-
-#~ msgid "Talking to iTunes. Don't touch it!"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-#~ msgstr ""
-#~ "Ձեր iTunes- Շտեմարանը պարունակում է %d մահացած շավիղներ, որոնք կարող են "
-#~ "ջնջվել: Շարունակե՞լ:"
-
-#~ msgid "You have no dead tracks in your iTunes Library"
-#~ msgstr "Դուք չունեք շավիղներ Ձեր iTunes Շտեմարանում"
-
-#~ msgid "The iTunes application couldn't be found."
-#~ msgstr ""
-
-#~ msgid "Talking to iPhoto. Don't touch it!"
-#~ msgstr "Զրույց iPhoto-ի հետ: Մի կպեք! "
-
-#~ msgid "Talking to Aperture. Don't touch it!"
-#~ msgstr ""
-
-#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-#~ msgstr ""
-
-#~ msgid "The iPhoto application couldn't be found."
-#~ msgstr "iPhoto ծրագիրը չի գտնվել:"
-
-#~ msgid "Preferences"
-#~ msgstr "Կարգավորումներ"
-
-#~ msgid "Check for Update"
-#~ msgstr "Ստուգել թարմացումները"
-
-#~ msgid "Filename"
-#~ msgstr "Ֆայլի անունը"
-
-#~ msgid "Filename - Fields"
-#~ msgstr "Ֆայլի անունը - Դաշտերը"
-
-#~ msgid "Filename - Fields (No Order)"
-#~ msgstr "Ֆայլի անունը - Դաշտերը (անկարգ)"
-
-#~ msgid "Tags"
-#~ msgstr "Կցապիտակներ"
-
-#~ msgid "Contents"
-#~ msgstr "Բովանդակությունը"
-
-#~ msgid "Audio Contents"
-#~ msgstr "Ձայնային բովանդակությունը"
-
-#~ msgid "EXIF Timestamp"
-#~ msgstr "EXIF Timestamp"
-
-#~ msgid "Folders"
-#~ msgstr "Թղթապանակներ"
-
-#~ msgid "Add Aperture Library"
-#~ msgstr ""
-
-#~ msgid "Add iPhoto Library"
-#~ msgstr "Ավելացնել iPhoto-ի Շտեմարանին"
-
-#~ msgid "Add iTunes Library"
-#~ msgstr "Ավելացնել iTunes թղթապանակ"
-
-#~ msgid "Audio Content"
-#~ msgstr "Ձայնային բովանդակությունը"
-
-#~ msgid "Content"
-#~ msgstr "Բովանդակությունը"
-
-#~ msgid "dupeGuru ME Preferences"
-#~ msgstr "dupeGuru-ի ME կարգավորումները"
-
-#~ msgid "dupeGuru PE Preferences"
-#~ msgstr "dupeGuru PE կարգավորումները"
-
-#~ msgid "Remove Dead Tracks in iTunes"
-#~ msgstr "Հեռացնել մահացած շավիղները iTunes-ից"

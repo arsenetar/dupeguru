@@ -1,11 +1,10 @@
 # Translators:
-# Josep <tu154m@gmail.com>, 2015
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2015-04-16 22:52+0000\n"
-"Last-Translator: Josep <tu154m@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/p/dupeguru/language/es/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Spanish (https://www.transifex.com/voltaicideas/teams/116153/es/)\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -20,30 +19,6 @@ msgstr "Ruta de Fichero"
 msgid "Error Message"
 msgstr "Mensaje de error"
 
-#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
-#: core\se\result_table.py:22
-msgid "Kind"
-msgstr "Clase"
-
-#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
-#: core\se\result_table.py:20
-msgid "Folder"
-msgstr "Carpeta"
-
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
-#: core\se\result_table.py:19
-msgid "Filename"
-msgstr "Nombre de fichero"
-
-#: core\prioritize.py:156
-msgid "Size"
-msgstr "Tamaño"
-
-#: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
-msgid "Modification"
-msgstr "Modificación"
-
 #: core\me\prioritize.py:23
 msgid "Duration"
 msgstr "Duración"
@@ -56,6 +31,16 @@ msgstr "Tasa de bits"
 msgid "Samplerate"
 msgstr "Tasa de Muestreo"
 
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "Nombre de fichero"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "Carpeta"
+
 #: core\me\result_table.py:21
 msgid "Size (MB)"
 msgstr "Tamaño (MB)"
@@ -67,6 +52,16 @@ msgstr "Hora"
 #: core\me\result_table.py:24
 msgid "Sample Rate"
 msgstr "Tasa de Muestreo"
+
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "Clase"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "Modificación"
 
 #: core\me\result_table.py:27
 msgid "Title"
@@ -121,3 +116,7 @@ msgstr "Tamaño (KB)"
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
 msgstr "Marca horaria EXIF"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "Tamaño"

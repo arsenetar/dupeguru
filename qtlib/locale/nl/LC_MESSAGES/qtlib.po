@@ -1,9 +1,11 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2013-04-28 18:31+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -11,31 +13,49 @@ msgstr ""
 
 #: qtlib\about_box.py:43
 msgid "About {}"
-msgstr ""
+msgstr "Over {}"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "Versie {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Licentie verleend onder GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
-msgstr ""
+msgstr "Foutenrapport"
 
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
+msgstr "Er is iets fout gegaan. Hoe zit het met het melden van de fout?"
+
+#: qtlib\error_report_dialog.py:59
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Foutrapporten moeten worden gerapporteerd als Github-problemen. U kunt de bovenstaande foutopsporing kopiëren en in een nieuwe uitgave plakken.\n"
+"\n"
+"Zorg ervoor dat u van tevoren een zoekopdracht uitvoert naar reeds bestaande problemen. Zorg er ook voor dat u de allernieuwste versie uit de repository test, aangezien de bug die u ondervindt mogelijk al gepatcht is.\n"
+"\n"
+"Wat meestal echt helpt, is als je een beschrijving toevoegt van hoe je de fout hebt gekregen. Bedankt!\n"
+"\n"
+"Hoewel de toepassing na deze fout zou moeten blijven werken, kan deze in een onstabiele toestand verkeren, dus het wordt aanbevolen de toepassing opnieuw te starten."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
-msgstr ""
+msgstr "Sluit"
 
 #: qtlib\error_report_dialog.py:79
 msgid "Go to Github"
-msgstr ""
+msgstr "Ga naar Github"
 
 #: qtlib\preferences.py:23
 msgid "English"
@@ -51,11 +71,11 @@ msgstr "Duits"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "Grieks"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "(Versimpeld) Chinees"
 
 #: qtlib\preferences.py:28
 msgid "Czech"
@@ -67,61 +87,44 @@ msgstr "Italiaans"
 
 #: qtlib\preferences.py:30
 msgid "Armenian"
-msgstr ""
+msgstr "Armeens"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "Koreaans"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: qtlib\preferences.py:33
 msgid "Ukrainian"
-msgstr ""
+msgstr "Oekraïens"
 
 #: qtlib\preferences.py:34
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlands"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "Pools"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
-msgstr ""
+msgstr "Braziliaans"
 
 #: qtlib\preferences.py:37
 msgid "Spanish"
-msgstr ""
+msgstr "Spaans"
 
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamees"
 
 #: qtlib\recent.py:54
 msgid "Clear List"
-msgstr ""
+msgstr "Duidelijke lijst"
 
 #: qtlib\search_edit.py:78
 msgid "Search..."
-msgstr ""
-
-#: qtlib\error_report_dialog.py:59
-msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
-"\n"
-"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
-"\n"
-"What usually really helps is if you add a description of how you got the error. Thanks!\n"
-"\n"
-"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr ""
-
-#~ msgid ""
-#~ "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-#~ "\n"
-#~ "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-#~ msgstr ""
+msgstr "Zoeken..."

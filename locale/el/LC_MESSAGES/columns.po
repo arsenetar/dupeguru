@@ -1,9 +1,11 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2016-07-22 11:30+0000\n"
-"Last-Translator: 1kakarot\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -18,30 +20,6 @@ msgstr "Διαδρομή αρχείου"
 msgid "Error Message"
 msgstr "Μήνυμα σφάλματος"
 
-#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
-#: core\se\result_table.py:22
-msgid "Kind"
-msgstr "Τύπος"
-
-#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
-#: core\se\result_table.py:20
-msgid "Folder"
-msgstr "Φάκελος"
-
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
-#: core\se\result_table.py:19
-msgid "Filename"
-msgstr "Όνομα αρχείου"
-
-#: core\prioritize.py:156
-msgid "Size"
-msgstr "Μέγεθος-Διαστάσεις?"
-
-#: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
-msgid "Modification"
-msgstr "Τροποποίηση"
-
 #: core\me\prioritize.py:23
 msgid "Duration"
 msgstr "Διάρκεια"
@@ -52,7 +30,17 @@ msgstr "Bitrate"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr ""
+msgstr "Ρυθμός δειγματοληψίας"
+
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "Όνομα αρχείου"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "Φάκελος"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
@@ -65,6 +53,16 @@ msgstr "Χρόνος"
 #: core\me\result_table.py:24
 msgid "Sample Rate"
 msgstr "Ρυθμός δειγματοληψίας"
+
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "Τύπος"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "Τροποποίηση"
 
 #: core\me\result_table.py:27
 msgid "Title"
@@ -119,3 +117,7 @@ msgstr "Μέγεθος (KB)"
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
 msgstr "Χρονοσήμανση EXIF"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "Μέγεθος-Διαστάσεις?"

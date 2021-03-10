@@ -1,12 +1,10 @@
 # Translators:
-# ppanhh <vietnamesel10n@gmail.com>, 2013
-# ppanhh <vietnamesel10n@gmail.com>, 2013
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/dupeguru/language/vi/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Vietnamese (https://www.transifex.com/voltaicideas/teams/116153/vi/)\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -16,10 +14,19 @@ msgstr ""
 msgid "Quit"
 msgstr "Thoát"
 
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "Tùy chọn"
+
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
 msgstr "Danh sách bỏ qua"
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "Dọn dẹp bộ nhớ đệm của hình ảnh"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
@@ -32,6 +39,16 @@ msgstr "Dịch bởi Phan Anh"
 #: qt/app.py:87
 msgid "Open Debug Log"
 msgstr "Mở nhật trình gỡ rối"
+
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr ""
+"Bạn có muốn loại bỏ toàn bộ các phân tích trong bộ nhớ đệm về hình ảnh hay "
+"không?"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "Đã dọn dẹp bộ nhớ đệm xử lý hình ảnh."
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
@@ -129,6 +146,30 @@ msgstr "Trợ giúp"
 msgid "Load Recent Results"
 msgstr "Tải các kết quả gần đây"
 
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr ""
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr ""
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "Loại thao tác quét:"
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr ""
+
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
 msgstr "Chọn thư mục để quét và nhấn \"Quét\"."
@@ -203,9 +244,78 @@ msgstr "Dọn dẹp"
 msgid "Close"
 msgstr "Đóng lại"
 
-#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
-msgid "Scan Type:"
-msgstr "Loại thao tác quét:"
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "Chi tiết"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "Thẻ đánh dấu để quét:"
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "Track"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "Nghệ sĩ"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "Album"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "Loại nhạc"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "Năm"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "Độ rộng của từ"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "Các từ tương tự và khớp lẫn nhau"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "Có thể pha trộn loại tập tin"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "Sử dụng các biểu thức thông thường khi lọc dữ liệu"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "Loại bỏ các thư mục rỗng khi xóa hoặc di chuyển"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "Bỏ qua các liên kết cứng đến phần trùng nhau trong cùng một tập tin"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "Chế độ gỡ rối (yêu cầu khởi động lại)"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "Chỉ các hình ảnh khớp nhau với các chiều khác nhau"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
@@ -284,12 +394,6 @@ msgstr ""
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
 msgstr "Biểu hiện các phần được chọn"
-
-#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
-#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Details"
-msgstr "Chi tiết"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
@@ -407,87 +511,6 @@ msgstr "Giá trị Delta"
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
 msgstr "Chọn một tập tin để lưu kết quả vào"
-
-#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
-msgid "Tags to scan:"
-msgstr "Thẻ đánh dấu để quét:"
-
-#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Track"
-msgstr "Track"
-
-#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Artist"
-msgstr "Nghệ sĩ"
-
-#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
-msgid "Album"
-msgstr "Album"
-
-#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
-msgid "Title"
-msgstr "Tiêu đề"
-
-#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
-msgid "Genre"
-msgstr "Loại nhạc"
-
-#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
-msgid "Year"
-msgstr "Năm"
-
-#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Word weighting"
-msgstr "Độ rộng của từ"
-
-#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Match similar words"
-msgstr "Các từ tương tự và khớp lẫn nhau"
-
-#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
-#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
-msgid "Can mix file kind"
-msgstr "Có thể pha trộn loại tập tin"
-
-#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
-#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
-msgid "Use regular expressions when filtering"
-msgstr "Sử dụng các biểu thức thông thường khi lọc dữ liệu"
-
-#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
-#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
-msgid "Remove empty folders on delete or move"
-msgstr "Loại bỏ các thư mục rỗng khi xóa hoặc di chuyển"
-
-#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
-#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
-msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Bỏ qua các liên kết cứng đến phần trùng nhau trong cùng một tập tin"
-
-#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
-#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
-msgid "Debug mode (restart required)"
-msgstr "Chế độ gỡ rối (yêu cầu khởi động lại)"
-
-#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
-msgid "Match pictures of different dimensions"
-msgstr "Chỉ các hình ảnh khớp nhau với các chiều khác nhau"
-
-#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
-msgid "Clear Picture Cache"
-msgstr "Dọn dẹp bộ nhớ đệm của hình ảnh"
-
-#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
-msgid "Do you really want to remove all your cached picture analysis?"
-msgstr ""
-"Bạn có muốn loại bỏ toàn bộ các phân tích trong bộ nhớ đệm về hình ảnh hay "
-"không?"
-
-#: qt/app.py:184
-msgid "Picture cache cleared."
-msgstr "Đã dọn dẹp bộ nhớ đệm xử lý hình ảnh."
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
@@ -645,11 +668,6 @@ msgstr "Thêm các kết quả"
 msgid "Ok"
 msgstr "Đồng ý"
 
-#: qt/app.py:82 qt/preferences_dialog.py:116
-#: cocoa/en.lproj/Localizable.strings:0
-msgid "Options"
-msgstr "Tùy chọn"
-
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
 msgstr "Dán"
@@ -713,26 +731,6 @@ msgstr "Cửa sổ"
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
 msgstr "Phóng to"
-
-#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
-msgid "Application Mode:"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Music"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Picture"
-msgstr ""
-
-#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
-msgid "Standard"
-msgstr ""
-
-#: qt/directories_dialog.py:135
-msgid "More Options"
-msgstr ""
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
@@ -897,95 +895,3 @@ msgstr ""
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr ""
-
-#~ msgid "Removing dead tracks from your iTunes Library"
-#~ msgstr "Đang loại bỏ các track bị lỗi khỏi thư viện iTunes của bạn"
-
-#~ msgid "Scanning the iTunes Library"
-#~ msgstr "Đang quét thư viện iTunes"
-
-#~ msgid "Sending dupes to the Trash"
-#~ msgstr "Đang gửi các đối tượng bị lỗi đến Thùng Rác"
-
-#~ msgid "Talking to iTunes. Don't touch it!"
-#~ msgstr "Đang giao tiếp với iTunes. Đừng chạm vào!"
-
-#~ msgid ""
-#~ "Your iTunes Library contains %d dead tracks ready to be removed. Continue?"
-#~ msgstr ""
-#~ "Thư viện iTunes của bạn chứa %d các track bị lỗi và đang chuẩn bị được loại "
-#~ "bỏ. Tiếp tục?"
-
-#~ msgid "You have no dead tracks in your iTunes Library"
-#~ msgstr "Bạn không có track bị lỗi trong thư viện iTunes"
-
-#~ msgid "The iTunes application couldn't be found."
-#~ msgstr "Không tìm thấy ứng dụng iTunes."
-
-#~ msgid "Talking to iPhoto. Don't touch it!"
-#~ msgstr "Đang giao tiếp với iPhoto. Đừng chạm vào!"
-
-#~ msgid "Talking to Aperture. Don't touch it!"
-#~ msgstr "Đang giao tiếp với Aperture. Đừng chạm vào!"
-
-#~ msgid "Deleted Aperture photos were sent to a project called \"dupeGuru Trash\"."
-#~ msgstr ""
-#~ "Đã xóa các hình chụp thuộc Aperture và được gửi đến dự án có tên \"Thùng rác"
-#~ " dupeGuru\"."
-
-#~ msgid "The iPhoto application couldn't be found."
-#~ msgstr "Không tìm thấy ứng dụng iPhoto."
-
-#~ msgid "Preferences"
-#~ msgstr "Tùy biến"
-
-#~ msgid "Check for Update"
-#~ msgstr "Kiểm tra cập nhật"
-
-#~ msgid "Filename"
-#~ msgstr "Tên tập tin"
-
-#~ msgid "Filename - Fields"
-#~ msgstr "Tên tập tin - Khung thông tin"
-
-#~ msgid "Filename - Fields (No Order)"
-#~ msgstr "Tên tập tin - Khung thông tin (Không theo trật tự)"
-
-#~ msgid "Tags"
-#~ msgstr "Thẻ đánh dấu"
-
-#~ msgid "Contents"
-#~ msgstr "Nội dung"
-
-#~ msgid "Audio Contents"
-#~ msgstr "Nội dung audio"
-
-#~ msgid "EXIF Timestamp"
-#~ msgstr "EXIF Timestamp"
-
-#~ msgid "Folders"
-#~ msgstr "Thư mục"
-
-#~ msgid "Add Aperture Library"
-#~ msgstr "Thêm vào thư viện Aperture"
-
-#~ msgid "Add iPhoto Library"
-#~ msgstr "Thêm vào thư viện iPhoto"
-
-#~ msgid "Add iTunes Library"
-#~ msgstr "Thêm vào thư viện iTunes"
-
-#~ msgid "Audio Content"
-#~ msgstr "Nội dung audio"
-
-#~ msgid "Content"
-#~ msgstr "Nội dung"
-
-#~ msgid "dupeGuru ME Preferences"
-#~ msgstr "Tùy biến ME"
-
-#~ msgid "dupeGuru PE Preferences"
-#~ msgstr "Tùy biến PE"
-
-#~ msgid "Remove Dead Tracks in iTunes"
-#~ msgstr "Loại bỏ các track bị lỗi trong iTunes"

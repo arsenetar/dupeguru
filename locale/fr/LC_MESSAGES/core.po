@@ -1,12 +1,11 @@
 # Translators:
-# hsoft <hsoft@hardcoded.net>, 2013
-# hsoft <hsoft@hardcoded.net>, 2013
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-12-07 15:22+0000\n"
-"Last-Translator: hsoft <hsoft@hardcoded.net>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/dupeguru/language/fr/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: French (https://www.transifex.com/voltaicideas/teams/116153/fr/)\n"
 "Language: fr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -73,6 +72,10 @@ msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tous les fichiers marqués ont été correctement envoyés à la corbeille."
 
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr "Impossible d'ouvrir le fichier: {}"
+
 #: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}' est déjà dans la liste."
@@ -103,6 +106,10 @@ msgstr "Sélectionnez un dossier vers lequel {} les fichiers marqués."
 msgid "Select a destination for your exported CSV"
 msgstr "Choisissez une destination pour votre exportation CSV"
 
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr "Impossible d'écrire le fichier: {}"
+
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
@@ -116,13 +123,13 @@ msgstr "%d fichiers seront retirés des résultats. Continuer?"
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} groupes de doublons ont été modifiés par la re-prioritisation."
 
-#: core\app.py:835
-msgid "Collecting files to scan"
-msgstr "Collecte des fichiers à scanner"
-
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr "Les dossiers sélectionnés ne contiennent pas de fichiers valides."
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "Collecte des fichiers à scanner"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
@@ -136,19 +143,63 @@ msgstr "0 paires trouvées"
 msgid "%d matches found"
 msgstr "%d paires trouvées"
 
-#: core\scanner.py:85
-msgid "Read size of %d/%d files"
-msgstr "Lu la taille de %d/%d fichiers"
-
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Vous envoyez {} fichier(s) à la corbeille."
+
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
+msgstr "Expressions régulières"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
 "Voulez-vous vider la liste de fichiers ignorés des %d items qu'elle "
 "contient?"
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr "Nom de fichier"
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr "Nom de fichier - Champs"
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr "Nom de fichier - Champs (sans ordre)"
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr "Tags"
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr "Contenu"
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "Analyzé %d/%d images"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "%d/%d blocs d'images comparés"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "Préparation pour la comparaison"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "Vérifié %d/%d paires"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Lu l'EXIF de %d/%d images"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr "Date EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
@@ -194,85 +245,18 @@ msgstr "%d / %d (%s / %s) doublons marqués."
 msgid " filter: %s"
 msgstr " filtre: %s"
 
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "Lu la taille de %d/%d fichiers"
+
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "Lu les métadonnées de %d/%d fichiers"
 
-#: core\pe\matchblock.py:72
-msgid "Analyzed %d/%d pictures"
-msgstr "Analyzé %d/%d images"
-
-#: core\pe\matchblock.py:181
-msgid "Performed %d/%d chunk matches"
-msgstr "%d/%d blocs d'images comparés"
-
-#: core\pe\matchblock.py:191
-msgid "Preparing for matching"
-msgstr "Préparation pour la comparaison"
-
-#: core\pe\matchblock.py:244
-msgid "Verified %d/%d matches"
-msgstr "Vérifié %d/%d paires"
-
-#: core\pe\matchexif.py:19
-msgid "Read EXIF of %d/%d pictures"
-msgstr "Lu l'EXIF de %d/%d images"
-
-#: core\app.py:343
-msgid "Could not load file: {}"
-msgstr ""
-
-#: core\app.py:534 core\app.py:801 core\app.py:811
-msgid "Couldn't write to file: {}"
-msgstr ""
-
-#: core\me\scanner.py:20 core\se\scanner.py:16
-msgid "Filename"
-msgstr ""
-
-#: core\me\scanner.py:21
-msgid "Filename - Fields"
-msgstr ""
-
-#: core\me\scanner.py:22
-msgid "Filename - Fields (No Order)"
-msgstr ""
-
-#: core\me\scanner.py:23
-msgid "Tags"
-msgstr ""
-
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
-msgid "Contents"
-msgstr ""
-
-#: core\pe\scanner.py:22
-msgid "EXIF Timestamp"
-msgstr ""
-
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Bientôt terminé! Bidouille des résultats..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
-
-#: core\gui\exclude_list_table.py:15
-msgid "Regular Expressions"
-msgstr ""
-
-#~ msgid "Sending files to the recycle bin"
-#~ msgstr "Envoi de fichiers à la corbeille"
-
-#~ msgid "Grouped %d/%d matches"
-#~ msgstr "%d/%d paires groupées"
-
-#~ msgid "Removing false matches"
-#~ msgstr "Retrait des paires invalides"
-
-#~ msgid "Processed %d/%d matches against the ignore list"
-#~ msgstr "Vérification de %d/%d paires dans la ignore list"
-
-#~ msgid "Doing group prioritization"
-#~ msgstr "Prioritization des groupes"
+msgstr "Dossiers"

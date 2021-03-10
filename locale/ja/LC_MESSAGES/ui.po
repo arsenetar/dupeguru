@@ -1,0 +1,891 @@
+# Translators:
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
+msgid ""
+msgstr ""
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
+"Language: ja\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: utf-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: qt/app.py:81
+msgid "Quit"
+msgstr "終了"
+
+#: qt/app.py:82 qt/preferences_dialog.py:116
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Options"
+msgstr "オプション"
+
+#: qt/app.py:83 qt/ignore_list_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore List"
+msgstr "無視リスト"
+
+#: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear Picture Cache"
+msgstr "画像キャッシュをクリア"
+
+#: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
+msgid "dupeGuru Help"
+msgstr "dupeGuruヘルプ"
+
+#: qt/app.py:86 cocoa/en.lproj/Localizable.strings:0
+msgid "About dupeGuru"
+msgstr "dupeGuruついて"
+
+#: qt/app.py:87
+msgid "Open Debug Log"
+msgstr "デバッグログを開く"
+
+#: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
+msgid "Do you really want to remove all your cached picture analysis?"
+msgstr "キャッシュされた画像分析をすべて削除しますか？"
+
+#: qt/app.py:184
+msgid "Picture cache cleared."
+msgstr "画像キャッシュがクリアされました。"
+
+#: qt/app.py:251
+msgid "{} file (*.{})"
+msgstr "{} ファイル (*.{})"
+
+#: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Deletion Options"
+msgstr "削除オプション"
+
+#: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
+msgid "Link deleted files"
+msgstr "削除されたファイルをリンクする"
+
+#: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
+msgid ""
+"After having deleted a duplicate, place a link targeting the reference file "
+"to replace the deleted file."
+msgstr "重複を削除した後、参照ファイルをターゲットとするリンクを配置して、削除されたファイルを置き換えます。"
+
+#: qt/deletion_options.py:44
+msgid "Hardlink"
+msgstr "ハードリンク"
+
+#: qt/deletion_options.py:44
+msgid "Symlink"
+msgstr "シンボリックリンク"
+
+#: qt/deletion_options.py:48
+msgid " (unsupported)"
+msgstr "(非対応)"
+
+#: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
+msgid "Directly delete files"
+msgstr "ファイルを直接削除する"
+
+#: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
+msgid ""
+"Instead of sending files to trash, delete them directly. This option is "
+"usually used as a workaround when the normal deletion method doesn't work."
+msgstr ""
+"ファイルを直接削除するファイルをゴミ箱に送る代わりに、直接削除します。 このオプションは通常、通常の削除方法が機能しない場合の回避策として使用されます。"
+
+#: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Proceed"
+msgstr "続行"
+
+#: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
+msgid "Attribute"
+msgstr "アトリビュート"
+
+#: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
+msgid "Selected"
+msgstr "選択した"
+
+#: qt/details_table.py:16 qt/directories_model.py:24
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Reference"
+msgstr "参照"
+
+#: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
+msgid "Load Results..."
+msgstr "結果をロード..."
+
+#: qt/directories_dialog.py:65 cocoa/en.lproj/Localizable.strings:0
+msgid "Results Window"
+msgstr "結果ウィンドウ"
+
+#: qt/directories_dialog.py:66
+msgid "Add Folder..."
+msgstr "フォルダーを追加"
+
+#: qt/directories_dialog.py:74 qt/result_window.py:100
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "File"
+msgstr "ファイル"
+
+#: qt/directories_dialog.py:76 qt/result_window.py:108
+msgid "View"
+msgstr "ビュー"
+
+#: qt/directories_dialog.py:78 qt/result_window.py:110
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Help"
+msgstr "ヘルプ"
+
+#: qt/directories_dialog.py:80 cocoa/en.lproj/Localizable.strings:0
+msgid "Load Recent Results"
+msgstr "最近の結果を読み込む"
+
+#: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
+msgid "Application Mode:"
+msgstr "アプリケーションモード："
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Music"
+msgstr "音楽"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Picture"
+msgstr "画像"
+
+#: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
+msgid "Standard"
+msgstr "標準"
+
+#: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan Type:"
+msgstr "スキャンの種類："
+
+#: qt/directories_dialog.py:135
+msgid "More Options"
+msgstr "もっとオプション"
+
+#: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
+msgid "Select folders to scan and press \"Scan\"."
+msgstr "スキャンするフォルダを選択し、「スキャン」を押してください。"
+
+#: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
+msgid "Load Results"
+msgstr "結果を読み込む"
+
+#: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
+msgid "Scan"
+msgstr "スキャン"
+
+#: qt/directories_dialog.py:230
+msgid "Unsaved results"
+msgstr "保存されていない結果"
+
+#: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
+msgid "You have unsaved results, do you really want to quit?"
+msgstr "保存されていない結果がありますが、本当に終了しますか？"
+
+#: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
+msgid "Select a folder to add to the scanning list"
+msgstr "スキャンリストに追加するフォルダを選択してください"
+
+#: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
+msgid "Select a results file to load"
+msgstr "ロードする結果ファイルを選択してください"
+
+#: qt/directories_dialog.py:267
+msgid "All Files (*.*)"
+msgstr "すべてのファイル (*.*)"
+
+#: qt/directories_dialog.py:267 qt/result_window.py:311
+msgid "dupeGuru Results (*.dupeguru)"
+msgstr "dupeGuruの結果 (*.dupeguru)"
+
+#: qt/directories_dialog.py:278
+msgid "Start a new scan"
+msgstr "新しいスキャンを開始"
+
+#: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
+msgid "You have unsaved results, do you really want to continue?"
+msgstr "保存されていない結果がありますが、本当に続行しますか？"
+
+#: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
+msgid "Name"
+msgstr "名"
+
+#: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
+msgid "State"
+msgstr "状態"
+
+#: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
+msgid "Excluded"
+msgstr "除外"
+
+#: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
+msgid "Normal"
+msgstr "正常"
+
+#: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove Selected"
+msgstr "選択を削除"
+
+#: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Clear"
+msgstr "クリアー"
+
+#: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Close"
+msgstr "閉じる"
+
+#: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
+#: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details"
+msgstr "詳細"
+
+#: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
+msgid "Tags to scan:"
+msgstr "スキャンするタグ:"
+
+#: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Track"
+msgstr "トラック"
+
+#: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Artist"
+msgstr "アーティスト"
+
+#: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
+msgid "Album"
+msgstr "アルバム"
+
+#: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
+msgid "Title"
+msgstr "タイトル"
+
+#: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
+msgid "Genre"
+msgstr "ジャンル"
+
+#: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
+msgid "Year"
+msgstr "年"
+
+#: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Word weighting"
+msgstr "単語の重み付け"
+
+#: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Match similar words"
+msgstr "類似の単語に一致する"
+
+#: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
+#: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
+msgid "Can mix file kind"
+msgstr "ファイルの種類を混在させることができる"
+
+#: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
+#: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
+msgid "Use regular expressions when filtering"
+msgstr "フィルタリング時に正規表現を使用する"
+
+#: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
+#: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove empty folders on delete or move"
+msgstr "削除または移動時に空のフォルダを削除する"
+
+#: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
+#: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore duplicates hardlinking to the same file"
+msgstr "同じファイルへの重複ハードリンクを無視する"
+
+#: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
+#: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Debug mode (restart required)"
+msgstr "デバッグモード（再起動が必要）"
+
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different dimensions"
+msgstr "異なる寸法の写真を一致させる"
+
+#: qt/preferences_dialog.py:43
+msgid "Filter Hardness:"
+msgstr "フィルター硬度:"
+
+#: qt/preferences_dialog.py:69
+msgid "More Results"
+msgstr "より多くの結果"
+
+#: qt/preferences_dialog.py:74
+msgid "Fewer Results"
+msgstr "より少ない結果"
+
+#: qt/preferences_dialog.py:81
+msgid "Font size:"
+msgstr "フォントサイズ:"
+
+#: qt/preferences_dialog.py:85
+msgid "Language:"
+msgstr "言語:"
+
+#: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
+msgid "Copy and Move:"
+msgstr "コピーと移動："
+
+#: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
+msgid "Right in destination"
+msgstr "目的地で直接"
+
+#: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
+msgid "Recreate relative path"
+msgstr "相対パスを再作成"
+
+#: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
+msgid "Recreate absolute path"
+msgstr "絶対パスを再作成"
+
+#: qt/preferences_dialog.py:99
+msgid "Custom Command (arguments: %d for dupe, %r for ref):"
+msgstr "カスタムコマンド (引数：重複の場合は％d、参照の場合は％r）:"
+
+#: qt/preferences_dialog.py:174
+msgid "dupeGuru has to restart for language changes to take effect."
+msgstr "言語の変更を有効にするには、dupeGuruを再起動する必要があります。"
+
+#: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
+msgid "Re-Prioritize duplicates"
+msgstr "重複を再優先する"
+
+#: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
+msgid ""
+"Add criteria to the right box and click OK to send the dupes that correspond"
+" the best to these criteria to their respective group's reference position. "
+"Read the help file for more information."
+msgstr ""
+"右側のボックスに基準を追加し、[OK]をクリックして、これらの基準に最もよく対応する複製をそれぞれのグループの参照位置に送信します。 "
+"詳細については、ヘルプファイルをお読みください。"
+
+#: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
+msgid "Problems!"
+msgstr "問題！"
+
+#: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
+msgid ""
+"There were problems processing some (or all) of the files. The cause of "
+"these problems are described in the table below. Those files were not "
+"removed from your results."
+msgstr ""
+"一部（またはすべて）のファイルの処理に問題がありました。 これらの問題の原因を次の表に示します。 これらのファイルは結果から削除されませんでした。"
+
+#: qt/problem_dialog.py:56
+msgid "Reveal Selected"
+msgstr "選択したものを明らかにする"
+
+#: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
+#: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
+msgid "Actions"
+msgstr "作用"
+
+#: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
+msgid "Show Dupes Only"
+msgstr "複製のみを表示"
+
+#: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
+msgid "Show Delta Values"
+msgstr "デルタ値を表示"
+
+#: qt/result_window.py:60
+msgid "Send Marked to Recycle Bin..."
+msgstr "マークされたものをごみ箱に送る..."
+
+#: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
+msgid "Move Marked to..."
+msgstr "マークされたものを移動..."
+
+#: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
+msgid "Copy Marked to..."
+msgstr "マークされたものをコピー..."
+
+#: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove Marked from Results"
+msgstr "結果からマークされたものを削除"
+
+#: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
+msgid "Re-Prioritize Results..."
+msgstr "結果を再優先する..."
+
+#: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
+msgid "Remove Selected from Results"
+msgstr "結果から選択したアイテムを削除"
+
+#: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
+msgid "Add Selected to Ignore List"
+msgstr "選択したアイテムを無視リストに追加"
+
+#: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
+msgid "Make Selected into Reference"
+msgstr "選択したアイテムを参照にする"
+
+#: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
+msgid "Open Selected with Default Application"
+msgstr "デフォルトのアプリケーションで選択を開く"
+
+#: qt/result_window.py:80
+msgid "Open Containing Folder of Selected"
+msgstr "選択したアイテムのコンテナフォルダを開く"
+
+#: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
+msgid "Rename Selected"
+msgstr "選択したアイテムの名前を変更する"
+
+#: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
+msgid "Mark All"
+msgstr "すべてのアイテムをマークする"
+
+#: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
+msgid "Mark None"
+msgstr "何もマークしない"
+
+#: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
+msgid "Invert Marking"
+msgstr "マーキングを反転"
+
+#: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
+msgid "Mark Selected"
+msgstr "選択したアイテムにマークを付け"
+
+#: qt/result_window.py:87
+msgid "Export To HTML"
+msgstr "HTMLにエクスポート"
+
+#: qt/result_window.py:88
+msgid "Export To CSV"
+msgstr "CSVにエクスポート"
+
+#: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
+msgid "Save Results..."
+msgstr "結果を保存する"
+
+#: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
+msgid "Invoke Custom Command"
+msgstr "カスタムコマンドを呼び出す"
+
+#: qt/result_window.py:102
+msgid "Mark"
+msgstr "マーク"
+
+#: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
+msgid "Columns"
+msgstr "コラム"
+
+#: qt/result_window.py:163
+msgid "Reset to Defaults"
+msgstr "既定値にリセット"
+
+#: qt/result_window.py:185
+msgid "{} Results"
+msgstr "{}結果"
+
+#: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
+msgid "Dupes Only"
+msgstr "複製のみ"
+
+#: qt/result_window.py:194
+msgid "Delta Values"
+msgstr "デルタ値"
+
+#: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
+msgid "Select a file to save your results to"
+msgstr "結果を保存するファイルを選択してください"
+
+#: qt/se/preferences_dialog.py:41
+msgid "Ignore files smaller than"
+msgstr "より小さいファイルは無視"
+
+#: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
+msgid "KB"
+msgstr "KB"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "%@ Results"
+msgstr "%@ 結果"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Action"
+msgstr "作用"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Add New Folder..."
+msgstr "新しいフォルダを追加..."
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Advanced"
+msgstr "高度"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Automatically check for updates"
+msgstr "更新を自動的にチェック"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Basic"
+msgstr "基本"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Bring All to Front"
+msgstr "すべてを前面に出す"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Check for update..."
+msgstr "更新を確認..."
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Close Window"
+msgstr "ウィンドウを閉じる"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Copy"
+msgstr "コピー"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Custom command (arguments: %d for dupe, %r for ref):"
+msgstr "カスタムコマンド (引数：重複の場合は％d、参照の場合は％r）:"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Cut"
+msgstr "カット"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Delta"
+msgstr "デルタ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details of Selected File"
+msgstr "選択したファイルの詳細"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Details Panel"
+msgstr "詳細パネル"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Directories"
+msgstr "ディレクトリ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "dupeGuru"
+msgstr "dupeGuru"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "dupeGuru Preferences"
+msgstr "dupeGuruの設定"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "dupeGuru Results"
+msgstr "dupeGuruの結果"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "dupeGuru Website"
+msgstr "dupeGuruウェブサイト"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Edit"
+msgstr "編集"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Export Results to CSV"
+msgstr "結果をCSVにエクスポート"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Export Results to XHTML"
+msgstr "結果をXHTMLにエクスポート"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Fewer results"
+msgstr "より少ない結果"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Filter"
+msgstr "フィルタ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Filter hardness:"
+msgstr "フィルター硬度:"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Filter Results..."
+msgstr "結果のフィルタリング"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Folder Selection Window"
+msgstr "フォルダ選択ウィンドウ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Font Size:"
+msgstr "フォントサイズ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Hide dupeGuru"
+msgstr "dupeGuruを隠す"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Hide Others"
+msgstr "他を隠す"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Ignore files smaller than:"
+msgstr "以下よりも小さいファイルは無視:"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Load from file..."
+msgstr "ファイルからロード..."
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Minimize"
+msgstr "最小化する"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Mode"
+msgstr "モード"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "More results"
+msgstr "より多くの結果"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Ok"
+msgstr "Ok"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Paste"
+msgstr "ペースト"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Preferences..."
+msgstr "環境設定"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Quick Look"
+msgstr "クイックルック"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Quit dupeGuru"
+msgstr "dupeGuruを終了"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Reset to Default"
+msgstr "デフォルトにリセット"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Reset To Defaults"
+msgstr "既定値にリセット"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Reveal"
+msgstr "表す"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Reveal Selected in Finder"
+msgstr "Finderで選択したものを表示"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Select All"
+msgstr "すべて選択"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Send Marked to Trash..."
+msgstr "マークされたアイテムをゴミ箱に送る..."
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Services"
+msgstr "サービス"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Show All"
+msgstr "すべて表示"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Start Duplicate Scan"
+msgstr "重複スキャンを開始"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "The name '%@' already exists."
+msgstr "'％@'名はすでに存在します。"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Window"
+msgstr "ウィンドウ"
+
+#: cocoa/en.lproj/Localizable.strings:0
+msgid "Zoom"
+msgstr "ズーム"
+
+#: qt\app.py:158
+msgid "Exclusion Filters"
+msgstr "除外フィルター"
+
+#: qt\directories_dialog.py:91
+msgid "Scan Results"
+msgstr "スキャン結果"
+
+#: qt\directories_dialog.py:95
+msgid "Load Directories..."
+msgstr "ディレクトリをロード..."
+
+#: qt\directories_dialog.py:96
+msgid "Save Directories..."
+msgstr "ディレクトリを保存..."
+
+#: qt\directories_dialog.py:337
+msgid "Select a directories file to load"
+msgstr "ロードするディレクトリファイルを選択してください"
+
+#: qt\directories_dialog.py:338
+msgid "dupeGuru Results (*.dupegurudirs)"
+msgstr "dupeGuruのディレクトリファイル (*.dupegurudirs)"
+
+#: qt\directories_dialog.py:347
+msgid "Select a file to save your directories to"
+msgstr "ディレクトリを保存するファイルを選択してください。"
+
+#: qt\directories_dialog.py:348
+msgid "dupeGuru Directories (*.dupegurudirs)"
+msgstr "dupeGuruのディレクトリファイル (*.dupegurudirs)"
+
+#: qt\exclude_list_dialog.py:44
+msgid "Add"
+msgstr "追加"
+
+#: qt\exclude_list_dialog.py:46
+msgid "Restore defaults"
+msgstr "デフォルトに戻す"
+
+#: qt\exclude_list_dialog.py:47
+msgid "Test string"
+msgstr "テスト文字列"
+
+#: qt\exclude_list_dialog.py:83
+msgid "Type a python regular expression here..."
+msgstr "ここではPythonの正規表現を入力して..."
+
+#: qt\exclude_list_dialog.py:85
+msgid "Type a file system path or filename here..."
+msgstr "ここにファイルシステムのパスまたはファイル名を入力してください..."
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happen to match one of the regular expressions.<br>For each file collected two tests are perfomed on each of them to determine whether or not to filter them out:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with no path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"これらの（大文字と小文字を区別する）Python正規表現は、スキャン中にファイルを除外します。 <br>ディレクターの名前が正規表現の1つと一致する場合、ディレクトリの<strong>デフォルト状態</strong>は[ディレクトリ]タブで[除外]に設定されます。 <br>収集されたファイルごとに、2つのテストがそれぞれに対して実行され、それらをフィルターで除外するかどうかが決定されます:<br><li>1.パス区切り文字が含まれていない正規表現は、ファイル名のみと比較されます。</li>\n"
+"<li>2.パス区切り文字が含まれていない正規表現は、ファイルへのフルパスと比較されます。</li>\n"
+"例：「My Pictures」ディレクトリからのみ.PNGファイルを除外する場合：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>偽のパスを貼り付けることで、テスト文字列機能を使用して正規表現をテストできます:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"一致する正規表現が強調表示されます。<br>ハイライトが少なくとも1つある場合、テストされたパスはスキャン中に無視されます。<br><br>ピリオド「。」で始まるディレクトリとファイル デフォルトでは除外されます。<br><br>"
+
+#: qt\exclude_list_table.py:36
+msgid "Compilation error: "
+msgstr "コンパイルエラー:"
+
+#: qt\pe\image_viewer.py:56
+msgid "Increase zoom"
+msgstr "ズーム増やす"
+
+#: qt\pe\image_viewer.py:66
+msgid "Decrease zoom"
+msgstr "ズームを小さく"
+
+#: qt\pe\image_viewer.py:71
+msgid "Ctrl+/"
+msgstr "Ctrl+/"
+
+#: qt\pe\image_viewer.py:76
+msgid "Normal size"
+msgstr "通常サイズ"
+
+#: qt\pe\image_viewer.py:81
+msgid "Ctrl+*"
+msgstr "Ctrl+*"
+
+#: qt\pe\image_viewer.py:86
+msgid "Best fit"
+msgstr "最適"
+
+#: qt\pe\preferences_dialog.py:49
+msgid "Picture cache mode:"
+msgstr "画像キャッシュモード："
+
+#: qt\pe\preferences_dialog.py:56
+msgid "Override theme icons in viewer toolbar"
+msgstr "ビューアツールバーのテーマアイコンを上書きする"
+
+#: qt\pe\preferences_dialog.py:58
+msgid ""
+"Use our own internal icons instead of those provided by the theme engine"
+msgstr "テーマエンジンによって提供されるアイコンの代わりに、独自の内部アイコンを使用します。"
+
+#: qt\pe\preferences_dialog.py:66
+msgid "Show scrollbars in image viewers"
+msgstr "画像ビューアにスクロールバーを表示する"
+
+#: qt\pe\preferences_dialog.py:68
+msgid ""
+"When the image displayed doesn't fit the viewport, show scrollbars to span "
+"the view around"
+msgstr "表示された画像がビューポートに適合しない場合に、ビュー全体にスクロールバーを表示する。"
+
+#: qt\preferences_dialog.py:156
+msgid "Use default position for tab bar (requires restart)"
+msgstr "タブバーのデフォルトの位置を使用する（再起動が必要）"
+
+#: qt\preferences_dialog.py:158
+msgid ""
+"Place the tab bar below the main menu instead of next to it\n"
+"On MacOS, the tab bar will fill up the window's width instead."
+msgstr ""
+"タブバーをメインメニューの横ではなく下に配置する。\n"
+"MacOSでは、代わりにタブバーがウィンドウの幅を埋める。"
+
+#: qt\preferences_dialog.py:172
+msgid "Use bold font for references"
+msgstr "参照のために太字を使用する"
+
+#: qt\preferences_dialog.py:176
+msgid "Reference foreground color:"
+msgstr "参照の前景色："
+
+#: qt\preferences_dialog.py:179
+msgid "Reference background color:"
+msgstr "参照の背景色："
+
+#: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
+msgid "Delta foreground color:"
+msgstr "デルタ値の背景色："
+
+#: qt\preferences_dialog.py:195
+msgid "Show the title bar and can be docked"
+msgstr "タイトルバーを表示し、ドッキングできます。"
+
+#: qt\preferences_dialog.py:197
+msgid ""
+"While the title bar is hidden, use the modifier key to drag the floating "
+"window around"
+msgstr "タイトルバーが非表示になっているときに、修飾キーを使用してフローティングウィンドウをドラッグできます。"
+
+#: qt\preferences_dialog.py:199
+msgid "The title bar can only be disabled while the window is docked"
+msgstr "タイトルバーは、ウィンドウがドッキングされている間のみ無効にできます。"
+
+#: qt\preferences_dialog.py:202
+msgid "Vertical title bar"
+msgstr "垂直タイトルバー"
+
+#: qt\preferences_dialog.py:204
+msgid ""
+"Change the title bar from horizontal on top, to vertical on the left side"
+msgstr "タイトルバーを上部の水平から左側の垂直に変更する"
+
+#: qt\tabbed_window.py:44
+msgid "Show tab bar"
+msgstr "タブバーを表示"

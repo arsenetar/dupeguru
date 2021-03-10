@@ -1,15 +1,14 @@
 # Translators:
-# Kyrill Detinov <lazy.kent@opensuse.org>, 2013
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2013-11-20 11:53+0000\n"
-"Last-Translator: Kyrill Detinov <lazy.kent@opensuse.org>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/dupeguru/language/ru/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Language-Team: Russian (https://www.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
@@ -19,30 +18,6 @@ msgstr "Путь к файлу"
 #: core\gui\problem_table.py:19
 msgid "Error Message"
 msgstr "Сообщение об ошибке"
-
-#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
-#: core\se\result_table.py:22
-msgid "Kind"
-msgstr "Тип"
-
-#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
-#: core\se\result_table.py:20
-msgid "Folder"
-msgstr "Каталог"
-
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
-#: core\se\result_table.py:19
-msgid "Filename"
-msgstr "Имя файла"
-
-#: core\prioritize.py:156
-msgid "Size"
-msgstr "Размер"
-
-#: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
-msgid "Modification"
-msgstr "Время изменения"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
@@ -56,6 +31,16 @@ msgstr "Битрейт"
 msgid "Samplerate"
 msgstr "Частота оцифровки"
 
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "Имя файла"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "Каталог"
+
 #: core\me\result_table.py:21
 msgid "Size (MB)"
 msgstr "Размер (МБ)"
@@ -67,6 +52,16 @@ msgstr "Время"
 #: core\me\result_table.py:24
 msgid "Sample Rate"
 msgstr "Частота"
+
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "Тип"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "Время изменения"
 
 #: core\me\result_table.py:27
 msgid "Title"
@@ -121,3 +116,7 @@ msgstr "Размер (КБ)"
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
 msgstr "Временная отметка EXIF"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "Размер"

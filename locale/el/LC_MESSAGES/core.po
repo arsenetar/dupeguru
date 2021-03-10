@@ -1,9 +1,11 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2016-07-22 11:30+0000\n"
-"Last-Translator: 1kakarot\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -70,6 +72,10 @@ msgstr "Όλα τα επιλεγμένα αρχεία μετακινήθηκαν
 msgid "All marked files were successfully sent to Trash."
 msgstr "Όλα τα επιλεγμένα αρχεία στάλθηκαν με επιτυχία στον κάδο."
 
+#: core\app.py:343
+msgid "Could not load file: {}"
+msgstr "Δεν ήταν δυνατή η φόρτωση του αρχείου: {}"
+
 #: core\app.py:399
 msgid "'{}' already is in the list."
 msgstr "'{}' υπάρχει ήδη στη λίστα."
@@ -101,6 +107,10 @@ msgstr "Επιλέξτε ένα φάκελο {} για τα μαρκαρισμέ
 msgid "Select a destination for your exported CSV"
 msgstr "Επιλέξτε έναν προορισμό για το εξαγόμενο CSV σας"
 
+#: core\app.py:534 core\app.py:801 core\app.py:811
+msgid "Couldn't write to file: {}"
+msgstr "Δεν ήταν δυνατή η εγγραφή στο αρχείο: {}"
+
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Δεν έχετε ορίσει ειδική εντολή. Ρυθμίστε τη στις προτιμήσεις σας. "
@@ -113,13 +123,13 @@ msgstr "Πρόκειται να αφαιρέσετε %d αρχεία από τα
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} ομάδες διπλοτύπων άλλαξαν από το επαναπροσδιορισμό."
 
-#: core\app.py:835
-msgid "Collecting files to scan"
-msgstr "Συλλογή αρχείων για σάρωση"
-
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
 msgstr "Οι επιλεγμένοι φάκελοι δεν περιέχουν σαρώσιμα αρχεία."
+
+#: core\app.py:835
+msgid "Collecting files to scan"
+msgstr "Συλλογή αρχείων για σάρωση"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
@@ -133,17 +143,61 @@ msgstr "0 διπλότυπα βρέθηκαν"
 msgid "%d matches found"
 msgstr "Βρέθηκαν %d διπλότυπα"
 
-#: core\scanner.py:85
-msgid "Read size of %d/%d files"
-msgstr "Ανάγνωση μεγέθους %d/%d αρχείων"
-
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Στέλνετε {} αρχεία στα σκουπίδια."
 
+#: core\gui\exclude_list_table.py:15
+msgid "Regular Expressions"
+msgstr "Κανονικές εκφράσεις"
+
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Θέλετε να αφαιρέσετε όλα τα %d στοιχεία από τη λίστα αγνόησης; "
+
+#: core\me\scanner.py:20 core\se\scanner.py:16
+msgid "Filename"
+msgstr "Ονομα αρχείου"
+
+#: core\me\scanner.py:21
+msgid "Filename - Fields"
+msgstr "Όνομα αρχείου - Πεδία"
+
+#: core\me\scanner.py:22
+msgid "Filename - Fields (No Order)"
+msgstr "Όνομα αρχείου - Πεδία (Χωρίς παραγγελία)"
+
+#: core\me\scanner.py:23
+msgid "Tags"
+msgstr "ετικέτα"
+
+#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+msgid "Contents"
+msgstr "Περιεχόμενα"
+
+#: core\pe\matchblock.py:72
+msgid "Analyzed %d/%d pictures"
+msgstr "Ανάλυση %d/%d εικόνων"
+
+#: core\pe\matchblock.py:181
+msgid "Performed %d/%d chunk matches"
+msgstr "Εκτέλεση %d/%d μερικής ταυτοποίησης"
+
+#: core\pe\matchblock.py:191
+msgid "Preparing for matching"
+msgstr "Προετοιμασία για σύγκριση"
+
+#: core\pe\matchblock.py:244
+msgid "Verified %d/%d matches"
+msgstr "Πιστοποίηση %d/%d ταυτόσημων"
+
+#: core\pe\matchexif.py:19
+msgid "Read EXIF of %d/%d pictures"
+msgstr "Ανάγνωση EXIF %d/%d εικόνες"
+
+#: core\pe\scanner.py:22
+msgid "EXIF Timestamp"
+msgstr "Χρονική σήμανση EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
@@ -189,85 +243,18 @@ msgstr "%d / %d (%s / %s) επιλεγμένα διπλότυπα."
 msgid " filter: %s"
 msgstr " φίλτρο: %s"
 
+#: core\scanner.py:85
+msgid "Read size of %d/%d files"
+msgstr "Ανάγνωση μεγέθους %d/%d αρχείων"
+
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
 msgstr "Ανάγνωση μεταδεδομένων των %d/%d αρχείων"
 
-#: core\pe\matchblock.py:72
-msgid "Analyzed %d/%d pictures"
-msgstr "Ανάλυση %d/%d εικόνων"
-
-#: core\pe\matchblock.py:181
-msgid "Performed %d/%d chunk matches"
-msgstr "Εκτέλεση %d/%d μερικής ταυτοποίησης"
-
-#: core\pe\matchblock.py:191
-msgid "Preparing for matching"
-msgstr "Προετοιμασία για σύγκριση"
-
-#: core\pe\matchblock.py:244
-msgid "Verified %d/%d matches"
-msgstr "Πιστοποίηση %d/%d ταυτόσημων"
-
-#: core\pe\matchexif.py:19
-msgid "Read EXIF of %d/%d pictures"
-msgstr "Ανάγνωση EXIF %d/%d εικόνες"
-
-#: core\app.py:343
-msgid "Could not load file: {}"
-msgstr ""
-
-#: core\app.py:534 core\app.py:801 core\app.py:811
-msgid "Couldn't write to file: {}"
-msgstr ""
-
-#: core\me\scanner.py:20 core\se\scanner.py:16
-msgid "Filename"
-msgstr ""
-
-#: core\me\scanner.py:21
-msgid "Filename - Fields"
-msgstr ""
-
-#: core\me\scanner.py:22
-msgid "Filename - Fields (No Order)"
-msgstr ""
-
-#: core\me\scanner.py:23
-msgid "Tags"
-msgstr ""
-
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
-msgid "Contents"
-msgstr ""
-
-#: core\pe\scanner.py:22
-msgid "EXIF Timestamp"
-msgstr ""
-
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Σχεδόν τελείωσα! Παιχνίδι με αποτελέσματα ..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
-
-#: core\gui\exclude_list_table.py:15
-msgid "Regular Expressions"
-msgstr ""
-
-#~ msgid "Sending files to the recycle bin"
-#~ msgstr "Αποστολή στον κάδο ανακύκλωσης"
-
-#~ msgid "Grouped %d/%d matches"
-#~ msgstr "Ομαδοποιημένα %d/%d διπλότυπα"
-
-#~ msgid "Removing false matches"
-#~ msgstr "Αφαίρεση ψευδών διπλοτύπων"
-
-#~ msgid "Processed %d/%d matches against the ignore list"
-#~ msgstr "Επεξεργάσία %d/%d διπλοτύπων σε σχέση με τη λίστα αγνόησης"
-
-#~ msgid "Doing group prioritization"
-#~ msgstr "Εργασία ομαδοποιημένης προτεραιότητας"
+msgstr "ντοσιέ"
