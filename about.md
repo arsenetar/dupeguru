@@ -7,8 +7,4 @@ permalink: /about/
 
 [Get Involved](https://github.com/arsenetar/dupeguru/wiki/Get-involved)
 
-[Linux Notes]()
-
 [Changelog](../help/en/changelog)
-
-[Screenshots?]()
