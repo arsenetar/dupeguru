@@ -482,9 +482,9 @@ class DupeGuru(Broadcaster):
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
-        opname = tr("copy") if copy else tr("move")
-        prompt = tr("Select a directory to {} marked files to").format(opname)
-        destination = self.view.select_dest_folder(prompt)
+        destination = self.view.select_dest_folder(
+            tr("Select a directory to copy marked files to") if copy
+            else tr("Select a directory to move marked files to"))
         if destination:
             desttype = self.options["copymove_dest_type"]
             jobid = JobType.Copy if copy else JobType.Move
