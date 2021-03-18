@@ -1,11 +1,11 @@
 # Translators:
-# YF <yfdyh000@gmail.com>, 2015
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Chris Ocelot, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: dupeGuru\n"
-"PO-Revision-Date: 2015-05-01 14:03+0000\n"
-"Last-Translator: YF <yfdyh000@gmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/p/dupeguru/language/zh_CN/)\n"
+"Last-Translator: Chris Ocelot, 2021\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/voltaicideas/teams/116153/zh_CN/)\n"
 "Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -20,30 +20,6 @@ msgstr "文件路径"
 msgid "Error Message"
 msgstr "错误信息"
 
-#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
-#: core\se\result_table.py:22
-msgid "Kind"
-msgstr "类型"
-
-#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
-#: core\se\result_table.py:20
-msgid "Folder"
-msgstr "文件夹"
-
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
-#: core\se\result_table.py:19
-msgid "Filename"
-msgstr "文件名称"
-
-#: core\prioritize.py:156
-msgid "Size"
-msgstr "大小"
-
-#: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
-msgid "Modification"
-msgstr "编辑日期"
-
 #: core\me\prioritize.py:23
 msgid "Duration"
 msgstr "持续时间"
@@ -55,6 +31,16 @@ msgstr "比特率"
 #: core\me\prioritize.py:37
 msgid "Samplerate"
 msgstr "采样率"
+
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\se\result_table.py:19
+msgid "Filename"
+msgstr "文件名称"
+
+#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
+#: core\se\result_table.py:20
+msgid "Folder"
+msgstr "文件夹"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
@@ -68,13 +54,23 @@ msgstr "时间"
 msgid "Sample Rate"
 msgstr "采样率"
 
+#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
+#: core\se\result_table.py:22
+msgid "Kind"
+msgstr "类型"
+
+#: core\me\result_table.py:26 core\pe\result_table.py:25
+#: core\prioritize.py:163 core\se\result_table.py:23
+msgid "Modification"
+msgstr "编辑日期"
+
 #: core\me\result_table.py:27
 msgid "Title"
 msgstr "歌曲名"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr "演唱者"
+msgstr "作者"
 
 #: core\me\result_table.py:29
 msgid "Album"
@@ -121,3 +117,7 @@ msgstr "大小 (KB)"
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
 msgstr "EXIF 时间戳"
+
+#: core\prioritize.py:156
+msgid "Size"
+msgstr "大小"

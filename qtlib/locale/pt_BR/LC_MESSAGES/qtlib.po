@@ -1,11 +1,11 @@
 # Translators:
-# Victor Figueiredo <contact@brlingo.com>, 2013-2014
+# Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan Karl <jcfrt@posteo.net>, 2021
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: hscommon\n"
-"PO-Revision-Date: 2014-04-30 18:58+0000\n"
-"Last-Translator: Victor Figueiredo <contact@brlingo.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/hsoft/hscommon/language/pt_BR/)\n"
+"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/voltaicideas/teams/116153/pt_BR/)\n"
 "Language: pt_BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -21,7 +21,7 @@ msgstr "Versão {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Licenciado sob GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
@@ -30,6 +30,24 @@ msgstr "Relatório de Erro"
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
 msgstr "Algo deu errado. Deseja relatar o erro?"
+
+#: qtlib\error_report_dialog.py:59
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Os relatórios de erros devem ser relatados como problemas do Github. Você pode copiar o rastreamento do erro acima e colá-lo em uma nova edição.\n"
+"\n"
+"Por favor, certifique-se de executar uma pesquisa de qualquer problema já existente com antecedência. Certifique-se também de testar a versão mais recente disponível no repositório, uma vez que o bug que você está enfrentando pode já ter sido corrigido.\n"
+"\n"
+"O que geralmente ajuda muito é adicionar uma descrição de como o erro ocorreu. Obrigado!\n"
+"\n"
+"Embora o aplicativo deva continuar a ser executado após esse erro, ele pode estar em um estado instável, portanto, é recomendável reiniciar o aplicativo."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
@@ -53,7 +71,7 @@ msgstr "Alemão"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "Grega"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
@@ -73,7 +91,7 @@ msgstr "Armênio"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
@@ -88,9 +106,8 @@ msgid "Dutch"
 msgstr "Holandês"
 
 #: qtlib\preferences.py:35
-#, fuzzy
 msgid "Polish"
-msgstr "Inglês"
+msgstr "Polonês"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
@@ -111,26 +128,3 @@ msgstr "Limpar Lista"
 #: qtlib\search_edit.py:78
 msgid "Search..."
 msgstr "Buscar…"
-
-#: qtlib\error_report_dialog.py:59
-msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
-"\n"
-"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
-"\n"
-"What usually really helps is if you add a description of how you got the error. Thanks!\n"
-"\n"
-"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-msgstr ""
-
-#~ msgid ""
-#~ "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue (bonus point if you run a search to make sure the issue doesn't already exist). What usually really helps is if you add a description of how you got the error. Thanks!\n"
-#~ "\n"
-#~ "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
-#~ msgstr ""
-#~ "Os erros devem ser relatados como problemas no Github. Copie o código de rastreamento acima e cole-o em um problema novo (pontos bônus caso você busque o erro, certificando-se de que ele ainda não exista). O que mais ajuda é adicionar uma descrição de como o erro ocorreu. Obrigado!\n"
-#~ "\n"
-#~ "Embora o aplicativo continue a funcionar após esse erro, ele pode estar “instável”. É recomendável reiniciá-lo."
-
-#~ msgid "Copyright Hardcoded Software 2014"
-#~ msgstr "Copyright Hardcoded Software 2014"
