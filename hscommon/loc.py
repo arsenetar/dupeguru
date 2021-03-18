@@ -45,7 +45,10 @@ def generate_pot(folders, outpath, keywords, merge=False):
     pygettext.main(pyfiles, outpath=genpath, keywords=keywords)
     if merge:
         merge_po_and_preserve(genpath, outpath)
-        os.remove(genpath)
+        try:
+            os.remove(genpath)
+        except Exception:
+            print("Exception while removing temporary folder %s\n", genpath)
 
 
 def compile_all_po(base_folder):

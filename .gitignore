@@ -19,6 +19,7 @@ cocoa/autogen
 /qt/*_rc.py
 /help/*/conf.py
 /help/*/changelog.rst
+/transifex
 
 *.pyd
 *.exe

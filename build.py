@@ -8,6 +8,7 @@ import os
 import os.path as op
 from optparse import OptionParser
 import shutil
+from pathlib import Path
 
 from setuptools import setup, Extension
 
@@ -59,6 +60,12 @@ def parse_args():
         action="store_true",
         dest="modules",
         help="Build the python modules.",
+    )
+    parser.add_option(
+        "--importpo",
+        action="store_true",
+        dest="importpo",
+        help="Import all PO files downloaded from transifex.",
     )
     (options, args) = parser.parse_args()
     return options
@@ -120,13 +127,40 @@ def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos("locale")
     loc.merge_pots_into_pos(op.join("qtlib", "locale"))
-    loc.merge_pots_into_pos(op.join("cocoalib", "locale"))
+    # loc.merge_pots_into_pos(op.join("cocoalib", "locale"))
 
 
 def build_normpo():
     loc.normalize_all_pos("locale")
     loc.normalize_all_pos(op.join("qtlib", "locale"))
-    loc.normalize_all_pos(op.join("cocoalib", "locale"))
+    # loc.normalize_all_pos(op.join("cocoalib", "locale"))
+
+
+def build_importpo():
+    basePath = Path.cwd()
+    # expect a folder named transifex with all the .po files from the exports
+    translationsPath = basePath.joinpath("transifex")
+    # locations where the translation files go
+    qtlibPath = basePath.joinpath("qtlib", "locale")
+    localePath = basePath.joinpath("locale")
+    for translation in translationsPath.iterdir():
+        # transifex files are named resource_lang.po so split on first '_'
+        parts = translation.stem.split("_", 1)
+        resource = parts[0]
+        language = parts[1]
+        # make sure qtlib resources go to dedicated folder
+        if resource == "qtlib":
+            outputPath = qtlibPath
+        else:
+            outputPath = localePath
+        outputFolder = outputPath.joinpath(language, "LC_MESSAGES")
+        # create the language folder if it is new
+        if not outputFolder.exists():
+            outputFolder.mkdir(parents=True)
+        # copy the po file over
+        shutil.copy(translation, outputFolder.joinpath(resource + ".po"))
+    # normalize files after complete
+    build_normpo()
 
 
 def build_pe_modules():
@@ -149,7 +183,8 @@ def build_pe_modules():
     ]
     exts.append(Extension("_block_qt", [op.join("qt", "pe", "modules", "block.c")]))
     setup(
-        script_args=["build_ext", "--inplace"], ext_modules=exts,
+        script_args=["build_ext", "--inplace"],
+        ext_modules=exts,
     )
     move_all("_block_qt*", op.join("qt", "pe"))
     move_all("_block*", op.join("core", "pe"))
@@ -190,6 +225,8 @@ def main():
         build_normpo()
     elif options.modules:
         build_pe_modules()
+    elif options.importpo:
+        build_importpo()
     else:
         build_normal()
 
