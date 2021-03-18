@@ -57,11 +57,13 @@ SUPPORTED_LANGUAGES = [
     "ko",
     "es",
     "nl",
+    "ja",
 ]
 
 
 class Sections(Flag):
     """Filter blocks of preferences when reset or loaded"""
+
     GENERAL = auto()
     DISPLAY = auto()
     ALL = GENERAL | DISPLAY
@@ -145,18 +147,25 @@ class PreferencesDialogBase(QDialog):
         self.widgetsVLayout.addWidget(self.customCommandEdit)
 
     def _setupDisplayPage(self):
-        self.ui_groupbox = QGroupBox("&General Interface")
+        self.ui_groupbox = QGroupBox("&" + tr("General Interface"))
         layout = QVBoxLayout()
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
             self.languageComboBox.addItem(get_langnames()[lang])
-        layout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
-        self._setupAddCheckbox("tabs_default_pos",
-                               tr("Use default position for tab bar (requires restart)"))
+        layout.addLayout(
+            horizontalWrap([self.languageLabel, self.languageComboBox, None])
+        )
+        self._setupAddCheckbox(
+            "tabs_default_pos",
+            tr("Use default position for tab bar (requires restart)"),
+        )
         self.tabs_default_pos.setToolTip(
-            tr("Place the tab bar below the main menu instead of next to it\n\
-On MacOS, the tab bar will fill up the window's width instead."))
+            tr(
+                "Place the tab bar below the main menu instead of next to it\n\
+On MacOS, the tab bar will fill up the window's width instead."
+            )
+        )
         layout.addWidget(self.tabs_default_pos)
         self.ui_groupbox.setLayout(layout)
         self.displayVLayout.addWidget(self.ui_groupbox)
@@ -164,23 +173,27 @@ On MacOS, the tab bar will fill up the window's width instead."))
         gridlayout = QGridLayout()
         gridlayout.setColumnStretch(2, 2)
         formlayout = QFormLayout()
-        result_groupbox = QGroupBox("&Result Table")
+        result_groupbox = QGroupBox("&" + tr("Result Table"))
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
         formlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
-        self._setupAddCheckbox("reference_bold_font",
-                               tr("Use bold font for references"))
+        self._setupAddCheckbox(
+            "reference_bold_font", tr("Use bold font for references")
+        )
         formlayout.addRow(self.reference_bold_font)
 
         self.result_table_ref_foreground_color = ColorPickerButton(self)
-        formlayout.addRow(tr("Reference foreground color:"),
-                          self.result_table_ref_foreground_color)
+        formlayout.addRow(
+            tr("Reference foreground color:"), self.result_table_ref_foreground_color
+        )
         self.result_table_ref_background_color = ColorPickerButton(self)
-        formlayout.addRow(tr("Reference background color:"),
-                          self.result_table_ref_background_color)
+        formlayout.addRow(
+            tr("Reference background color:"), self.result_table_ref_background_color
+        )
         self.result_table_delta_foreground_color = ColorPickerButton(self)
-        formlayout.addRow(tr("Delta foreground color:"),
-                          self.result_table_delta_foreground_color)
+        formlayout.addRow(
+            tr("Delta foreground color:"), self.result_table_delta_foreground_color
+        )
         formlayout.setLabelAlignment(Qt.AlignLeft)
 
         # Keep same vertical spacing as parent layout for consistency
@@ -189,31 +202,45 @@ On MacOS, the tab bar will fill up the window's width instead."))
         result_groupbox.setLayout(gridlayout)
         self.displayVLayout.addWidget(result_groupbox)
 
-        details_groupbox = QGroupBox("&Details Window")
+        details_groupbox = QGroupBox("&" + tr("Details Window"))
         self.details_groupbox_layout = QVBoxLayout()
-        self._setupAddCheckbox("details_dialog_titlebar_enabled",
-                               tr("Show the title bar and can be docked"))
+        self._setupAddCheckbox(
+            "details_dialog_titlebar_enabled",
+            tr("Show the title bar and can be docked"),
+        )
         self.details_dialog_titlebar_enabled.setToolTip(
-            tr("While the title bar is hidden, \
-use the modifier key to drag the floating window around") if ISLINUX else
-            tr("The title bar can only be disabled while the window is docked"))
+            tr(
+                "While the title bar is hidden, \
+use the modifier key to drag the floating window around"
+            )
+            if ISLINUX
+            else tr("The title bar can only be disabled while the window is docked")
+        )
         self.details_groupbox_layout.addWidget(self.details_dialog_titlebar_enabled)
-        self._setupAddCheckbox("details_dialog_vertical_titlebar",
-                               tr("Vertical title bar"))
+        self._setupAddCheckbox(
+            "details_dialog_vertical_titlebar", tr("Vertical title bar")
+        )
         self.details_dialog_vertical_titlebar.setToolTip(
-            tr("Change the title bar from horizontal on top, to vertical on the left side"))
+            tr(
+                "Change the title bar from horizontal on top, to vertical on the left side"
+            )
+        )
         self.details_groupbox_layout.addWidget(self.details_dialog_vertical_titlebar)
         self.details_dialog_vertical_titlebar.setEnabled(
-            self.details_dialog_titlebar_enabled.isChecked())
+            self.details_dialog_titlebar_enabled.isChecked()
+        )
         self.details_dialog_titlebar_enabled.stateChanged.connect(
-            self.details_dialog_vertical_titlebar.setEnabled)
+            self.details_dialog_vertical_titlebar.setEnabled
+        )
         gridlayout = QGridLayout()
         formlayout = QFormLayout()
         self.details_table_delta_foreground_color = ColorPickerButton(self)
         # Padding on the right side and space between label and widget to keep it somewhat consistent across themes
         gridlayout.setColumnStretch(1, 1)
         formlayout.setHorizontalSpacing(50)
-        formlayout.addRow(tr("Delta foreground color:"), self.details_table_delta_foreground_color)
+        formlayout.addRow(
+            tr("Delta foreground color:"), self.details_table_delta_foreground_color
+        )
         gridlayout.addLayout(formlayout, 0, 0)
         self.details_groupbox_layout.addLayout(gridlayout)
         details_groupbox.setLayout(self.details_groupbox_layout)
@@ -255,8 +282,8 @@ use the modifier key to drag the floating window around") if ISLINUX else
         self.mainVLayout.addWidget(self.tabwidget)
         self.mainVLayout.addWidget(self.buttonBox)
         self.layout().setSizeConstraint(QLayout.SetFixedSize)
-        self.tabwidget.addTab(self.page_general, "General")
-        self.tabwidget.addTab(self.page_display, "Display")
+        self.tabwidget.addTab(self.page_general, tr("General"))
+        self.tabwidget.addTab(self.page_display, tr("Display"))
         self.displayVLayout.addStretch(0)
         self.widgetsVLayout.addStretch(0)
 
@@ -285,19 +312,27 @@ use the modifier key to drag the floating window around") if ISLINUX else
         if section & Sections.DISPLAY:
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
             setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
-            setchecked(self.details_dialog_titlebar_enabled,
-                       prefs.details_dialog_titlebar_enabled)
-            setchecked(self.details_dialog_vertical_titlebar,
-                       prefs.details_dialog_vertical_titlebar)
+            setchecked(
+                self.details_dialog_titlebar_enabled,
+                prefs.details_dialog_titlebar_enabled,
+            )
+            setchecked(
+                self.details_dialog_vertical_titlebar,
+                prefs.details_dialog_vertical_titlebar,
+            )
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
             self.details_table_delta_foreground_color.setColor(
-                prefs.details_table_delta_foreground_color)
+                prefs.details_table_delta_foreground_color
+            )
             self.result_table_ref_foreground_color.setColor(
-                prefs.result_table_ref_foreground_color)
+                prefs.result_table_ref_foreground_color
+            )
             self.result_table_ref_background_color.setColor(
-                prefs.result_table_ref_background_color)
+                prefs.result_table_ref_background_color
+            )
             self.result_table_delta_foreground_color.setColor(
-                prefs.result_table_delta_foreground_color)
+                prefs.result_table_delta_foreground_color
+            )
             try:
                 langindex = self.supportedLanguages.index(self.app.prefs.language)
             except ValueError:
@@ -315,12 +350,24 @@ use the modifier key to drag the floating window around") if ISLINUX else
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
-        prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
-        prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
-        prefs.details_table_delta_foreground_color = self.details_table_delta_foreground_color.color
-        prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
-        prefs.result_table_ref_background_color = self.result_table_ref_background_color.color
-        prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color
+        prefs.details_dialog_titlebar_enabled = ischecked(
+            self.details_dialog_titlebar_enabled
+        )
+        prefs.details_dialog_vertical_titlebar = ischecked(
+            self.details_dialog_vertical_titlebar
+        )
+        prefs.details_table_delta_foreground_color = (
+            self.details_table_delta_foreground_color.color
+        )
+        prefs.result_table_ref_foreground_color = (
+            self.result_table_ref_foreground_color.color
+        )
+        prefs.result_table_ref_background_color = (
+            self.result_table_ref_background_color.color
+        )
+        prefs.result_table_delta_foreground_color = (
+            self.result_table_delta_foreground_color.color
+        )
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
@@ -364,8 +411,8 @@ class ColorPickerButton(QPushButton):
     @pyqtSlot()
     def onClicked(self):
         color = QColorDialog.getColor(
-            self.color if self.color is not None else Qt.white,
-            self.parent)
+            self.color if self.color is not None else Qt.white, self.parent
+        )
         self.setColor(color)
 
     def setColor(self, color):

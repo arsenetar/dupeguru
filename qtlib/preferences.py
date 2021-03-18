@@ -36,6 +36,7 @@ def get_langnames():
         "pt_BR": tr("Brazilian"),
         "es": tr("Spanish"),
         "vi": tr("Vietnamese"),
+        "ja": tr("Japanese"),
     }
 
 

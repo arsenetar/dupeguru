@@ -75,7 +75,7 @@ class DupeGuru(QObject):
                 "DirectoriesDialog", app=self
             )
             self.main_window.addTab(
-                self.directories_dialog, "Directories", switch=False
+                self.directories_dialog, tr("Directories"), switch=False
             )
             self.actionDirectoriesWindow.setEnabled(False)
         else:  # floating windows only
@@ -252,7 +252,9 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             if self.use_tabs:
                 if self.main_window.indexOfWidget(self.resultWindow) < 0:
-                    self.main_window.addTab(self.resultWindow, "Results", switch=True)
+                    self.main_window.addTab(
+                        self.resultWindow, tr("Results"), switch=True
+                    )
                     return
                 self.main_window.showTab(self.resultWindow)
             else:
@@ -300,13 +302,15 @@ class DupeGuru(QObject):
 
     def ignoreListTriggered(self):
         if self.use_tabs:
-            self.showTriggeredTabbedDialog(self.ignoreListDialog, "Ignore List")
+            self.showTriggeredTabbedDialog(self.ignoreListDialog, tr("Ignore List"))
         else:  # floating windows
             self.model.ignore_list_dialog.show()
 
     def excludeListTriggered(self):
         if self.use_tabs:
-            self.showTriggeredTabbedDialog(self.excludeListDialog, "Exclusion Filters")
+            self.showTriggeredTabbedDialog(
+                self.excludeListDialog, tr("Exclusion Filters")
+            )
         else:  # floating windows
             self.model.exclude_list_dialog.show()
 

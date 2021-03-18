@@ -881,3 +881,27 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+
+#: qt\app.py:256
+msgid "Results"
+msgstr ""
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr ""
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr ""
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr ""
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr ""
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr ""
