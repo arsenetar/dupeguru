@@ -3,9 +3,9 @@ oses:
     icon: windows 
     packages: 
       - arch: x64
-        link: https://github.com/arsenetar/dupeguru/releases/download/4.1.0/dupeGuru_win64_4.1.0.exe
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.1.1/dupeGuru_win64_4.1.1.exe
       - arch: x32
-        link: https://github.com/arsenetar/dupeguru/releases/download/4.1.0/dupeGuru_win32_4.1.0.exe
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.1.1/dupeGuru_win32_4.1.1.exe
   - name: Ubuntu
     icon: linux
     packages:
@@ -21,7 +21,7 @@ oses:
     icon: github
     packages:
       - arch: zip
-        link: https://github.com/arsenetar/dupeguru/archive/4.1.0.zip
+        link: https://github.com/arsenetar/dupeguru/archive/4.1.1.zip
       - arch: tar.gz
-        link: https://github.com/arsenetar/dupeguru/archive/4.1.0.tar.gz
+        link: https://github.com/arsenetar/dupeguru/archive/4.1.1.tar.gz
     
