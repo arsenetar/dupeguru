@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/voltaicideas/teams/116153/uk/)\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,11 +17,11 @@ msgstr "Про {}"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "Версія {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Ліцензовано згідно з GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
@@ -40,78 +41,89 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Звіти про помилки слід повідомляти як проблеми Github. Ви можете скопіювати помилку відстеження помилки вище та вставити її в нове видання.\n"
+"\n"
+"Будь ласка, не забудьте заздалегідь здійснити пошук уже існуючих проблем. Також не забудьте протестувати найновішу версію, доступну зі сховища, оскільки виправлена помилка, можливо, вже виправлена.\n"
+"\n"
+"Зазвичай справді допомагає, якщо ви додаєте опис того, як ви отримали помилку. Дякую!\n"
+"\n"
+"Незважаючи на те, що програма повинна продовжувати працювати після цієї помилки, вона може бути в нестабільному стані, тому рекомендується перезапустити програму."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 #: qtlib\error_report_dialog.py:79
 msgid "Go to Github"
-msgstr ""
+msgstr "Перейдіть до Github"
 
 #: qtlib\preferences.py:23
 msgid "English"
-msgstr ""
+msgstr "Англійська"
 
 #: qtlib\preferences.py:24
 msgid "French"
-msgstr ""
+msgstr "Французька"
 
 #: qtlib\preferences.py:25
 msgid "German"
-msgstr ""
+msgstr "Німецька"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "Німецька"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Китайська (спрощена)"
 
 #: qtlib\preferences.py:28
 msgid "Czech"
-msgstr ""
+msgstr "Чеська"
 
 #: qtlib\preferences.py:29
 msgid "Italian"
-msgstr ""
+msgstr "Італійська"
 
 #: qtlib\preferences.py:30
 msgid "Armenian"
-msgstr ""
+msgstr "Вірменська"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "Корейська"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
-msgstr ""
+msgstr "Російська"
 
 #: qtlib\preferences.py:33
 msgid "Ukrainian"
-msgstr ""
+msgstr "Українська"
 
 #: qtlib\preferences.py:34
 msgid "Dutch"
-msgstr ""
+msgstr "Голландська"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "Польська"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
-msgstr ""
+msgstr "Бразильська"
 
 #: qtlib\preferences.py:37
 msgid "Spanish"
-msgstr ""
+msgstr "Іспанська"
 
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
-msgstr ""
+msgstr "В'єтнамська"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "Японський"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

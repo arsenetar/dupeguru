@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr "Ընտրանքներ"
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr ""
+msgstr "անտեսել ցուցակ"
 
 #: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
@@ -50,47 +51,52 @@ msgstr "Նկարի պահոցը մաքրվել է:"
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "{} ֆայլ (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr ""
+msgstr "Ջնջումների Ընտրանքներ"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "Կապել ջնջված ֆայլերը"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
+"րկնօրինակը ջնջելուց հետո տեղադրեք հղում, տեղադրել հղում նպատակային հղվող "
+"ֆայլը փոխարինել ջնջված ֆայլը."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
-msgstr ""
+msgstr "Hardlink"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr ""
+msgstr "Symlink"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
-msgstr ""
+msgstr " (չաջակցվող)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr ""
+msgstr "Ուղղակիորեն ջնջեք ֆայլերը"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
+"Ֆայլերը աղբարկղ ուղարկելու փոխարեն, դրանք ուղղակիորեն ջնջեք: Այս տարբերակը "
+"սովորաբար օգտագործվում է որպես լուծում, երբ ջնջման սովորական մեթոդը չի "
+"գործում:"
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr ""
+msgstr "Շարունակել"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
@@ -141,19 +147,19 @@ msgstr "Բացել Վերջին արդյունքները"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr ""
+msgstr "Դիմումի ռեժիմ"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr ""
+msgstr "Երաժշտություն"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr ""
+msgstr "Նկար"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr ""
+msgstr "Ստանդարտ"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
@@ -161,7 +167,7 @@ msgstr "Ստուգելու տեսակը."
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr ""
+msgstr "Լրացուցիչ ընտրանքներ"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
@@ -225,11 +231,11 @@ msgstr "Նորմալ"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr ""
+msgstr "Հեռացնել ընտրվածը"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr ""
+msgstr "Մաքրել"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
@@ -427,7 +433,7 @@ msgstr "Ավելացնել ընտրվածը Անտեսումների ցանկ"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr ""
+msgstr "Ընտրված նյութը դարձրեք տեղեկատու նյութ:"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
@@ -463,7 +469,7 @@ msgstr "Արտածել HTML-ով"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr ""
+msgstr "Արտահանել CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
@@ -495,7 +501,7 @@ msgstr "Միայն կրկ."
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr ""
+msgstr "Դելտա արժեքներ"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -511,7 +517,7 @@ msgstr "ԿԲ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr ""
+msgstr "%@ Արդյունքներ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
@@ -575,7 +581,7 @@ msgstr "Թղթապանակներ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
-msgstr ""
+msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
@@ -595,7 +601,7 @@ msgstr "Խմբագրել"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "Արտահանել արդյունքները CSV ձևաչափով:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
@@ -615,7 +621,7 @@ msgstr "Ֆիլտրի կարգը."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr ""
+msgstr "Զտել արդյունքները:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
@@ -623,7 +629,7 @@ msgstr "Թղթապանակը ընտրելու պատուհանը"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "Տառատեսակի չափը ՝"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
@@ -667,7 +673,7 @@ msgstr "Կարգավորումներ..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr ""
+msgstr "Quick Look"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
@@ -679,11 +685,11 @@ msgstr "Ետարկել ծրագրայինի"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "Զրոյացնել լռելյայն"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "Բացահայտել"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
@@ -691,7 +697,7 @@ msgstr "Ցուցադրել ընտրվածը Գտնվածում"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "Ընտրել բոլորը"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
@@ -699,7 +705,7 @@ msgstr "Ուղարկել նշվածները Աղբարկղ..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "Առայություններ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
@@ -723,47 +729,47 @@ msgstr "Չափը"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "Բացառման ֆիլտրեր"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "Սկան արդյունքներ"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "բեռնվածքի տեղեկագրքեր..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "Պահել գրացուցակները..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "Ընտրեք գրացուցակների ֆայլ `բեռնելու համար"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru տեղեկատուներ (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "Ընտրեք ֆայլ, ձեր գրացուցակները պահելու համար"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru տեղեկատուներ (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "Ավելացնել"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "Վերականգնել Նախնականը"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "Թեստային լարային"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
@@ -811,7 +817,7 @@ msgstr ""
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "Նկարի քեշի ռեժիմ:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
@@ -884,3 +890,35 @@ msgstr ""
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr ""
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Արդյունքներ"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Ընդհանուր միջերես"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Արդյունքների աղյուսակ"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Մանրամասներ Պատուհան"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "Գեներալ"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Ցուցադրման"

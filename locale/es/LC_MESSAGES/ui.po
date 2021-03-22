@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/voltaicideas/teams/116153/es/)\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -911,3 +911,39 @@ msgstr ""
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr "Mostrar barra de pestañas"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"Estas expresiones regulares de Python (sensibles a mayúsculas y minúsculas) filtrarán los archivos durante los escaneos.<br> Carpetas también tendrá su <strong>establecido en Excluido</strong> en la pestaña Carpetas si su nombre coincide con una de las expresiones regulares seleccionadas.<br>Para cada archivo recopilado, se realizan dos pruebas para determinar si se debe ignorar por completo o no.<br><li>1. Las expresiones regulares sin separador de ruta se compararán solo con el nombre del archivo.</li>\n"
+"<li>2. Las expresiones regulares con al menos un separador de ruta en ellas se compararán con la ruta completa al archivo.</li><br>\n"
+"Ejemplo: si desea filtrar archivos .PNG solo del directorio \"Mis imágenes\":<br><code>.*Mis\\sImágenes\\\\.*\\.png</code><br><br>Puede probar la expresión regular con el botón \"cadena de prueba\" después de pegar una ruta falsa en el campo de prueba:<br><code>C:\\\\Usario\\Mis Imágenes\\test.png</code><br><br>\n"
+"Se resaltarán las expresiones regulares coincidentes.<br>Si hay al menos un resaltado, la ruta o el nombre de archivo probado se ignorará durante los escaneos.<br><br>Directorios y archivos que comienzan con un punto '.' se ignoran de forma predeterminada.<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Resultados"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Interfaz general"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Tabla de resultados"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Ventana de detalles"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "General"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Visualización"

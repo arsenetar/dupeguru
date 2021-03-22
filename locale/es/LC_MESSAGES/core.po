@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/voltaicideas/teams/116153/es/)\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,17 +92,13 @@ msgstr ""
 "Todas las %d coincidencias seleccionadas van a ser ignoradas en las "
 "subsiguientes exploraciones. ¿Continuar?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "copiar"
-
-#: core\app.py:485
-msgid "move"
-msgstr "mover"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Seleccionar un directorio al que {} enviar los ficheros seleccionados"
+msgid "Select a directory to copy marked files to"
+msgstr "Seleccione un directorio donde desee copiar los archivos marcados"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Seleccione un directorio al que desee mover los archivos marcados"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

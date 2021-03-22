@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/voltaicideas/teams/116153/uk/)\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +24,8 @@ msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
+"Ви збираєтеся відкрити багато файлів одночасно.\n"
+"Залежно від того, з чим відкриваються ці файли, це може створити неабияку халепу. Продовжити?"
 
 #: core\app.py:71
 msgid "Scanning for duplicates"
@@ -70,7 +73,7 @@ msgstr "Усі позначені файли були успішно відпр�
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Не вдалося завантажити файл: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
@@ -88,25 +91,21 @@ msgstr ""
 "Усі обрані %d результатів будуть ігноруватися під час усіх наступних "
 "пошуків. Продовжити?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "копіювання"
-
-#: core\app.py:485
-msgid "move"
-msgstr "переміщення"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Оберіть цільову папку для {} позначених файлів"
+msgid "Select a directory to copy marked files to"
+msgstr "Виберіть каталог для копіювання позначених файлів"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Виберіть каталог, куди ви хочете перемістити позначені файли"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Виберіть каталог, куди потрібно скопіювати позначені файли"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Не вдалося записати у файл: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -119,6 +118,8 @@ msgstr "Ви збираєтеся видалити %d файлів з резул
 #: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
+"{} повторюваних груп було змінено шляхом повторного встановлення "
+"пріоритетів."
 
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
@@ -142,11 +143,11 @@ msgstr "%d результатів знайдено"
 
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Ви надсилаєте {} файлів у Кошик."
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Регулярні вирази"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -154,23 +155,23 @@ msgstr "Ви дійсно хочете видалити всі %d елемент
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "Ім'я файлу"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Назва файлу - поля"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Назва файлу - поля (без замовлення)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr ""
+msgstr "Теги"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr ""
+msgstr "Зміст"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
@@ -194,7 +195,7 @@ msgstr "Прочитано EXIF з %d/%d фотографій"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Відмітка часу EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
@@ -210,27 +211,27 @@ msgstr "Не закінчується номером"
 
 #: core\prioritize.py:102
 msgid "Longest"
-msgstr ""
+msgstr "Найдовший"
 
 #: core\prioritize.py:103
 msgid "Shortest"
-msgstr ""
+msgstr "Найкоротший"
 
 #: core\prioritize.py:140
 msgid "Highest"
-msgstr ""
+msgstr "Найвища"
 
 #: core\prioritize.py:140
 msgid "Lowest"
-msgstr ""
+msgstr "Найнижча"
 
 #: core\prioritize.py:169
 msgid "Newest"
-msgstr ""
+msgstr "Найновіші"
 
 #: core\prioritize.py:169
 msgid "Oldest"
-msgstr ""
+msgstr "Найдавніший"
 
 #: core\results.py:142
 msgid "%d / %d (%s / %s) duplicates marked."
@@ -250,8 +251,8 @@ msgstr "Прочитано метаданих з %d/%d файлів"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Майже зроблено! Возився з результатами..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
+msgstr "Папки"

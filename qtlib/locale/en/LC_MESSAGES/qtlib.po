@@ -114,6 +114,10 @@ msgstr "Spanish"
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "Japanese"
+
 #: qtlib\recent.py:54
 msgid "Clear List"
 msgstr "Clear List"

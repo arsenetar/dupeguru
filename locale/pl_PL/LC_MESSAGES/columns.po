@@ -1,6 +1,9 @@
+# Translators:
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Polish (Poland) (https://www.transifex.com/voltaicideas/teams/116153/pl_PL/)\n"
 "Language: pl_PL\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10,110 +13,110 @@ msgstr ""
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
 msgid "File Path"
-msgstr ""
+msgstr "Ścieżka pliku"
 
 #: core\gui\problem_table.py:19
 msgid "Error Message"
-msgstr ""
+msgstr "Komunikat o błędzie"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
-msgstr ""
+msgstr "Trwanie"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr ""
+msgstr "Szybkość transmisji"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr ""
+msgstr "Samplerate"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
 #: core\se\result_table.py:19
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
 #: core\se\result_table.py:20
 msgid "Folder"
-msgstr ""
+msgstr "Katalog"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr ""
+msgstr "Rozmiar (MB)"
 
 #: core\me\result_table.py:22
 msgid "Time"
-msgstr ""
+msgstr "Czas"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr ""
+msgstr "Częstotliwość próbkowania"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
 msgid "Kind"
-msgstr ""
+msgstr "Rodzaj"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
 #: core\prioritize.py:163 core\se\result_table.py:23
 msgid "Modification"
-msgstr ""
+msgstr "Modyfikacja"
 
 #: core\me\result_table.py:27
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr ""
+msgstr "Artysta"
 
 #: core\me\result_table.py:29
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: core\me\result_table.py:30
 msgid "Genre"
-msgstr ""
+msgstr "Gatunek"
 
 #: core\me\result_table.py:31
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr ""
+msgstr "Numer utworu"
 
 #: core\me\result_table.py:33
 msgid "Comment"
-msgstr ""
+msgstr "Komentarz"
 
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr ""
+msgstr "Mecz %"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr ""
+msgstr "Użyte słowa"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr ""
+msgstr "Liczba duplikatów"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
-msgstr ""
+msgstr "Wymiary"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr ""
+msgstr "Rozmiar (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Sygnatura czasowa EXIF"
 
 #: core\prioritize.py:156
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"

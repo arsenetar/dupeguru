@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: German (https://www.transifex.com/voltaicideas/teams/116153/de/)\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -910,3 +910,39 @@ msgstr "Ändern Sie die Titelleiste von horizontal oben in vertikal links"
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr "Registerkartenleiste anzeigen"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"Diese regulären Python-Ausdrücke (Groß- und Kleinschreibung beachten) filtern Dateien während des Scannens heraus.<br>Der <strong>Standardstatus</strong> von Verzeichnissen wird auf der Registerkarte \"Verzeichnisse\" auf \"Ausgeschlossen\" gesetzt, wenn ihr Name zufällig mit einem der ausgewählten regulären Ausdrücke übereinstimmt.<br>Für jede gesammelte Datei werden zwei Tests durchgeführt, um festzustellen, ob sie vollständig ignoriert werden soll oder nicht:<br><li>1. Reguläre Ausdrücke ohne Pfadtrennzeichen werden nur mit dem Dateinamen verglichen.</li>\n"
+"<li>2. Reguläre Ausdrücke mit mindestens einem Pfadtrennzeichen werden mit dem vollständigen Pfad zur Datei verglichen.</li><br>\n"
+"Beispiel: Wenn Sie PNG-Dateien nur aus dem Verzeichnis \"Meine Bilder\" herausfiltern möchten:<br><code>.*Meine\\sBilder\\\\.*\\.png</code><br><br>Sie können den regulären Ausdruck mit der Schaltfläche \"Testzeichenfolge\" testen, nachdem Sie einen falschen Pfad in das Testfeld eingefügt haben:<br><code>C:\\\\Nutzer\\Meine Bilder\\test.png</code><br><br>\n"
+"Übereinstimmende reguläre Ausdrücke werden hervorgehoben.<br>Wenn mindestens eine Markierung vorhanden ist, wird der getestete Pfad oder Dateiname beim Scannen ignoriert.<br><br>Verzeichnisse und Dateien, die mit einem Punkt '.' Beginnen. werden standardmäßig herausgefiltert.<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Allgemeine Schnittstelle"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Ergebnistabelle"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Detailfenster"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "Allgemeines"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Anzeige"

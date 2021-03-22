@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Polish (Poland) (https://www.transifex.com/voltaicideas/teams/116153/pl_PL/)\n"
 "Language: pl_PL\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,32 +24,37 @@ msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
+"Masz zamiar otworzyć wiele plików jednocześnie. W zależności od tego, za "
+"pomocą czego te pliki są otwierane, może to spowodować spory bałagan. "
+"Kontyntynuj?"
 
 #: core\app.py:71
 msgid "Scanning for duplicates"
-msgstr ""
+msgstr "Wyszukiwanie duplikatów"
 
 #: core\app.py:72
 msgid "Loading"
-msgstr ""
+msgstr "Ładuję"
 
 #: core\app.py:73
 msgid "Moving"
-msgstr ""
+msgstr "Przenoszę"
 
 #: core\app.py:74
 msgid "Copying"
-msgstr ""
+msgstr "Kopiowanie"
 
 #: core\app.py:75
 msgid "Sending to Trash"
-msgstr ""
+msgstr "Wysyłam do kosza"
 
 #: core\app.py:308
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
+"Wciąż wisi tam poprzednia akcja. Nie możesz jeszcze rozpocząć nowego. "
+"Poczekaj kilka sekund i spróbuj ponownie."
 
 #: core\app.py:318
 msgid "No duplicates found."
@@ -56,19 +62,19 @@ msgstr "Nie znaleziono duplikatów."
 
 #: core\app.py:333
 msgid "All marked files were copied successfully."
-msgstr ""
+msgstr "Wszystkie zaznaczone pliki zostały pomyślnie skopiowane."
 
 #: core\app.py:334
 msgid "All marked files were moved successfully."
-msgstr ""
+msgstr "Wszystkie zaznaczone pliki zostały pomyślnie przeniesione."
 
 #: core\app.py:335
 msgid "All marked files were successfully sent to Trash."
-msgstr ""
+msgstr "Wszystkie zaznaczone pliki zostały pomyślnie wysłane do kosza."
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Nie udało się załadować pliku: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
@@ -86,170 +92,168 @@ msgstr ""
 "Wszystkie zaznaczone %d duplikaty będą ignorowane w kolejnych skanach. "
 "Kontynuować?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "kopiuj"
-
-#: core\app.py:485
-msgid "move"
-msgstr "przenieś"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Wybierz katalog do {} duplikatów"
+msgid "Select a directory to copy marked files to"
+msgstr "Wybierz katalog, do którego chcesz skopiować zaznaczone pliki"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Wybierz katalog, do którego chcesz przenieść zaznaczone pliki"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Wybierz miejsce docelowe dla eksportowanego pliku CSV"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Nie udało się zapisać do pliku: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
+"Nie masz skonfigurowanego polecenia niestandardowego. Ustaw to w swoich "
+"preferencjach."
 
 #: core\app.py:727 core\app.py:740
 msgid "You are about to remove %d files from results. Continue?"
-msgstr ""
+msgstr "Zamierzasz usunąć %d plików z wyników. Kontyntynuj?"
 
 #: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} zduplikowanych grup zmieniono przez ponowne ustalenie priorytetów."
 
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
-msgstr ""
+msgstr "Wybrane katalogi nie zawierają plik skanowalną."
 
 #: core\app.py:835
 msgid "Collecting files to scan"
-msgstr ""
+msgstr "Zbieranie plików do skanowania"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
-msgstr ""
+msgstr "%s(%d odrzucone)"
 
 #: core\engine.py:244 core\engine.py:288
 msgid "0 matches found"
-msgstr ""
+msgstr "Znaleziono 0 pasujących wyników"
 
 #: core\engine.py:262 core\engine.py:296
 msgid "%d matches found"
-msgstr ""
+msgstr "Znaleziono %d pasujących wyników"
 
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Wysyłasz {} plików do Kosza"
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Wyrażenia regularne"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć wszystkie %d pozycji z listy ignorowanych?"
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Nazwa pliku - pola"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Nazwa pliku - pola (bez kolejności)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr ""
+msgstr "Tagi"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr ""
+msgstr "Treść"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
-msgstr ""
+msgstr "Analizowane %d/%d zdjęć"
 
 #: core\pe\matchblock.py:181
 msgid "Performed %d/%d chunk matches"
-msgstr ""
+msgstr "Wykonano %d/%d dopasowań fragmentów"
 
 #: core\pe\matchblock.py:191
 msgid "Preparing for matching"
-msgstr ""
+msgstr "Przygotowanie do dopasowania"
 
 #: core\pe\matchblock.py:244
 msgid "Verified %d/%d matches"
-msgstr ""
+msgstr "Zweryfikowane %d/%d meczów"
 
 #: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "Przeczytaj EXIF z %d/%d zdjęć"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Sygnatura czasowa EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
-msgstr ""
+msgstr "Nie"
 
 #: core\prioritize.py:100
 msgid "Ends with number"
-msgstr ""
+msgstr "Kończy się numerem"
 
 #: core\prioritize.py:101
 msgid "Doesn't end with number"
-msgstr ""
+msgstr "Nie kończy się liczbą"
 
 #: core\prioritize.py:102
 msgid "Longest"
-msgstr ""
+msgstr "Najdłużej"
 
 #: core\prioritize.py:103
 msgid "Shortest"
-msgstr ""
+msgstr "Najkrótsza"
 
 #: core\prioritize.py:140
 msgid "Highest"
-msgstr ""
+msgstr "Najwyższa"
 
 #: core\prioritize.py:140
 msgid "Lowest"
-msgstr ""
+msgstr "Najniższa"
 
 #: core\prioritize.py:169
 msgid "Newest"
-msgstr ""
+msgstr "Najnowsza"
 
 #: core\prioritize.py:169
 msgid "Oldest"
-msgstr ""
+msgstr "Najstarszy"
 
 #: core\results.py:142
 msgid "%d / %d (%s / %s) duplicates marked."
-msgstr ""
+msgstr "%d / %d (%s / %s) duplikaty oznakowane."
 
 #: core\results.py:149
 msgid " filter: %s"
-msgstr ""
+msgstr " filtr: %s"
 
 #: core\scanner.py:85
 msgid "Read size of %d/%d files"
-msgstr ""
+msgstr "Odczytaj rozmiar %d/%d plików"
 
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
-msgstr ""
+msgstr "Przeczytaj metadane %d/%d plików"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Prawie skończone! Porządkowanie wyników..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
+msgstr "Katalogi"

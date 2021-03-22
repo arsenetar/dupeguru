@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Chris Ocelot, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/voltaicideas/teams/116153/zh_CN/)\n"
 "Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,17 +86,13 @@ msgid ""
 "Continue?"
 msgstr "目前已选的 %d 个匹配项将在后续的扫描中被忽略。是否继续？"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "复制"
-
-#: core\app.py:485
-msgid "move"
-msgstr "移动"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "选择一个目录，将已标记的文件 {} 至此"
+msgid "Select a directory to copy marked files to"
+msgstr "请选择要将标记文件复制到的目录"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "请选择要将标记文件移动到的目录"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

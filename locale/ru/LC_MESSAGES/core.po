@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,17 +92,13 @@ msgstr ""
 "Все выбранные %d совпадений будут игнорироваться при всех последующих "
 "проверках. Продолжить?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "копирование"
-
-#: core\app.py:485
-msgid "move"
-msgstr "перемещение"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Выберите каталог {} для отмеченных файлов"
+msgid "Select a directory to copy marked files to"
+msgstr "Выберите каталог, в который вы хотите скопировать отмеченные файлы"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Выберите каталог, в который вы хотите переместить отмеченные файлы"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

@@ -1,9 +1,9 @@
 # Translators:
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,17 +84,13 @@ msgid ""
 "Continue?"
 msgstr "選択した%d個の一致は、以降のすべてのスキャンで無視されます。 継続する？"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "をコピーする"
-
-#: core\app.py:485
-msgid "move"
-msgstr "の移動先の"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "マークされたファイル{}ディレクトリを選択します。"
+msgid "Select a directory to copy marked files to"
+msgstr "マークされたファイルをコピーするディレクトリを選択してください"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "マークされたファイルを移動するディレクトリを選択してください"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

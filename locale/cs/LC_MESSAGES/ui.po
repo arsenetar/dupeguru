@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/voltaicideas/teams/116153/cs/)\n"
 "Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,7 +13,7 @@ msgstr ""
 
 #: qt/app.py:81
 msgid "Quit"
-msgstr ""
+msgstr "Ukončete"
 
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
@@ -22,7 +23,7 @@ msgstr "Možnosti"
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr ""
+msgstr "Seznam ignorovaných"
 
 #: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
@@ -38,7 +39,7 @@ msgstr "O aplikaci"
 
 #: qt/app.py:87
 msgid "Open Debug Log"
-msgstr ""
+msgstr "Otevřete protokol ladění"
 
 #: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
@@ -50,47 +51,51 @@ msgstr "Picture cache cleared."
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "{} soubor (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr ""
+msgstr "Možnosti mazání"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "Propojte odstraněné soubory"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
+"Po smazán duplikát, umístit odkaz cílení referenční soubor nahradit "
+"odstraněný soubor."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
-msgstr ""
+msgstr "Pevný odkaz"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr ""
+msgstr "Symbolický odkaz"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
-msgstr ""
+msgstr " (nepodporovaný)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr ""
+msgstr "Přímo smazání souborů"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
+"Místo odesílání souborů do koše je přímo odstraňte. Tato možnost se obvykle "
+"používá jako řešení, když nefunguje normální metoda odstranění."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr ""
+msgstr "Pokračovat"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
@@ -119,7 +124,7 @@ msgstr "Okno s výsledky"
 
 #: qt/directories_dialog.py:66
 msgid "Add Folder..."
-msgstr ""
+msgstr "Přidat složku..."
 
 #: qt/directories_dialog.py:74 qt/result_window.py:100
 #: cocoa/en.lproj/Localizable.strings:0
@@ -128,7 +133,7 @@ msgstr "Soubor"
 
 #: qt/directories_dialog.py:76 qt/result_window.py:108
 msgid "View"
-msgstr ""
+msgstr "Zobrazit"
 
 #: qt/directories_dialog.py:78 qt/result_window.py:110
 #: cocoa/en.lproj/Localizable.strings:0
@@ -141,27 +146,27 @@ msgstr "Nahrát nedávné výsledky"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr ""
+msgstr "Aplikační režim:"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr ""
+msgstr "Muzika"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr ""
+msgstr "Obrázek"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr ""
+msgstr "Typ skenování:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr ""
+msgstr "Více možností"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
@@ -177,7 +182,7 @@ msgstr "Prohledat"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr ""
+msgstr "Neuložené výsledky"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
@@ -193,15 +198,15 @@ msgstr "Vyberte soubor s výsledky, který chcete nahrát"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
-msgstr ""
+msgstr "Všechny soubory (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr ""
+msgstr "dupeGuru Výsledek (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
-msgstr ""
+msgstr "Spusťte nové skenování"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
@@ -225,11 +230,11 @@ msgstr "Normální"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr ""
+msgstr "Odebrat vybrané"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr ""
+msgstr "Vyprázdnit"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
@@ -311,15 +316,15 @@ msgstr "Porovnávat snímky s různými rozměry"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr ""
+msgstr "Tvrdost filtru:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr ""
+msgstr "Více výsledků"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr ""
+msgstr "Méně výsledků"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
@@ -327,7 +332,7 @@ msgstr "Velikost písma:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr ""
+msgstr "Jazyk:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
@@ -400,7 +405,7 @@ msgstr "Zobrazit rozdíly"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr ""
+msgstr "Odeslat označené položky do koše..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
@@ -428,7 +433,7 @@ msgstr "Přidat výběr na seznam výjimek"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr ""
+msgstr "Označit jako referenční"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
@@ -436,7 +441,7 @@ msgstr "Vybrané otevřít výchozí aplikací"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr ""
+msgstr "Otevřete složku obsahující vybrané"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
@@ -460,11 +465,11 @@ msgstr "Označit vybrané"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
-msgstr ""
+msgstr "Export do HTML"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr ""
+msgstr "Export do CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
@@ -476,7 +481,7 @@ msgstr "Spustit vlastní příkaz"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr ""
+msgstr "Označit"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
@@ -488,7 +493,7 @@ msgstr "Výchozí nastavení"
 
 #: qt/result_window.py:185
 msgid "{} Results"
-msgstr ""
+msgstr "{} Výsledky"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
@@ -496,7 +501,7 @@ msgstr "Jen duplicity"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr ""
+msgstr "Hodnoty Delta"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
@@ -512,7 +517,7 @@ msgstr "KB"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr ""
+msgstr "%@ Výsledky"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
@@ -576,7 +581,7 @@ msgstr "Adresáře"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
-msgstr ""
+msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
@@ -596,7 +601,7 @@ msgstr "Upravit"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "Export výsledků do CSV"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
@@ -616,7 +621,7 @@ msgstr "Tvrdost filtru:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr ""
+msgstr "Filtrovat výsledky..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
@@ -624,7 +629,7 @@ msgstr "Výběr složky"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "Velikost písma:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
@@ -668,7 +673,7 @@ msgstr "Předvolby..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr ""
+msgstr "Rychlý pohled"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
@@ -680,11 +685,11 @@ msgstr "Výchozí nastavení"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "Obnovit výchozí"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "Odhalit"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
@@ -692,7 +697,7 @@ msgstr "Vybrané otevřít ve Finderu"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "Vybrat vše"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
@@ -700,7 +705,7 @@ msgstr "Vyhodit označené do koše..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "Služby"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
@@ -724,55 +729,55 @@ msgstr "Zoom"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "Vyloučení Filtry"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "Výsledky skenování"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "Načíst složky..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "Uložit složky..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "Vyberte soubor složky, kterou chcete načíst"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru Složky (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "Vyberte soubor, do kterého chcete uložit své složky"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru Složky (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "obnovit výchozí"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "Testovací řetězec"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "Zadejte python regulární výraz zde..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "Sem zadejte cestu k systému souborů nebo název souboru..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -781,107 +786,154 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Tyto regulární výrazy pythonů (rozlišují velká a malá písmena) odfiltrují soubory během skenování.<br>Pokud se jejich název shoduje s jedním z vybraných regulárních výrazů, bude mít jejich <strong>výchozí stav</strong> na kartě „Složky“ nastaven na „Vyloučeno“.<br>U každého shromážděného souboru se provedou dva testy, aby se zjistilo, zda jej zcela ignorovat nebo ne:<br><li>1. Regulární výrazy bez oddělovače cesty budou porovnávány pouze s názvem souboru.</li>\n"
+"<li>2. Regulární výrazy s alespoň jedním oddělovačem cesty budou porovnány s úplnou cestou k souboru.</li><br>\n"
+"Příklad: pokud chcete odfiltrovat soubory PNG pouze z složky „My Pictures“:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Regulární výraz můžete vyzkoušet pomocí tlačítka „testovací řetězec“ po vložení falešné cesty do testovacího pole:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Odpovídající regulární výrazy budou zvýrazněny.<br>Pokud existuje alespoň jedno zvýraznění, bude testovaná cesta nebo název souboru během skenování ignorována.<br><br>Složky a soubory začínající tečkou \".\" jsou ve výchozím nastavení odfiltrovány.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "Chyba kompilace:"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "zvýšení zoom"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "zmenšit zoom"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "Normální velikost"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "Nejlépe fit"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "Režim mezipaměti obrázků:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr ""
+msgstr "Přepsat ikony motivů na panelu nástrojů prohlížeče obrázků"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
+"Využít naše vlastní vnitřní ikony namísto ty, které poskytují téma motorem"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "Zobrazit posuvníky v prohlížečích obrázků"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
+"Pokud se zobrazený obrázek nevejde do výřezu, zobrazte posuvníky tak, aby se"
+" pohled pohyboval."
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr ""
+msgstr "Použít výchozí pozici pro panel karet (vyžaduje restart)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"Umístěte panel karet pod hlavní nabídku namísto vedle ní.\n"
+"V systému MacOS místo toho vyplní panel karet šířku okna."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "Pro reference použijte tučné písmo"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "Referenční barva popředí:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "Referenční barva pozadí:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "Barva popředí Delta:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "Zobrazit záhlaví a lze jej ukotvit"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
+"Zatímco je záhlaví skryto, přetáhněte plovoucí okno pomocí modifikační "
+"klávesy"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
-msgstr ""
+msgstr "Záhlaví lze deaktivovat, pouze když je okno ukotveno"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "Vertikální záhlaví"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr ""
+msgstr "Změňte záhlaví z vodorovné nahoře na svislou na levé straně"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
+msgstr "Zobrazit panel karet"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Tyto regulární výrazy pythonů (rozlišují velká a malá písmena) odfiltrují soubory během skenování.<br>Pokud se jejich název shoduje s jedním z vybraných regulárních výrazů, bude mít jejich <strong>výchozí stav</strong> na kartě „Složky“ nastaven na „Vyloučeno“.<br>U každého shromážděného souboru se provedou dva testy, aby se zjistilo, zda jej zcela ignorovat nebo ne:<br><li>1. Regulární výrazy bez oddělovače cesty budou porovnávány pouze s názvem souboru.</li>\n"
+"<li>2. Regulární výrazy s alespoň jedním oddělovačem cesty budou porovnány s úplnou cestou k souboru.</li><br>\n"
+"Příklad: pokud chcete odfiltrovat soubory PNG pouze z složky „My Pictures“:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Regulární výraz můžete vyzkoušet pomocí tlačítka „testovací řetězec“ po vložení falešné cesty do testovacího pole:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Odpovídající regulární výrazy budou zvýrazněny.<br>Pokud existuje alespoň jedno zvýraznění, bude testovaná cesta nebo název souboru během skenování ignorována.<br><br>Složky a soubory začínající tečkou \".\" jsou ve výchozím nastavení odfiltrovány.<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Výsledky"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Obecné rozhraní"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Tabulka výsledků"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Okno podrobností"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "Všeobecné"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Zobrazit"

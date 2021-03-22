@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/voltaicideas/teams/116153/cs/)\n"
 "Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr "Bitrate"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr ""
+msgstr "Vzorkovací frekvence"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
 #: core\se\result_table.py:19
@@ -115,7 +116,7 @@ msgstr "Velikost (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Časové razítko EXIF"
 
 #: core\prioritize.py:156
 msgid "Size"

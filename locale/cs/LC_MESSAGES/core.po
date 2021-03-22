@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/voltaicideas/teams/116153/cs/)\n"
 "Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,17 +13,19 @@ msgstr ""
 
 #: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "Neexistují žádné označené duplikáty. Nic se nestalo."
 
 #: core\app.py:43
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "Nejsou k dispozici žádné vybrané duplikáty. Nic se nestalo."
 
 #: core\app.py:44
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
+"Chystáte se otevřít více souborů najednou. V závislosti na tom, s čím jsou "
+"tyto soubory otevřeny, to může způsobit docela nepořádek. Pokračovat?"
 
 #: core\app.py:71
 msgid "Scanning for duplicates"
@@ -58,27 +61,27 @@ msgstr "Nebyli nalezeny žádné duplicity."
 
 #: core\app.py:333
 msgid "All marked files were copied successfully."
-msgstr ""
+msgstr "Všechny označené soubory byly úspěšně zkopírovány."
 
 #: core\app.py:334
 msgid "All marked files were moved successfully."
-msgstr ""
+msgstr "Všechny označené soubory byly úspěšně přesunuty."
 
 #: core\app.py:335
 msgid "All marked files were successfully sent to Trash."
-msgstr ""
+msgstr "Všechny označené soubory byly úspěšně odeslány do koše."
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Soubor se nepodařilo načíst: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
-msgstr ""
+msgstr "'{}' již je v seznamu."
 
 #: core\app.py:401
 msgid "'{}' does not exist."
-msgstr ""
+msgstr "'{}' neexistuje."
 
 #: core\app.py:410
 msgid ""
@@ -88,25 +91,21 @@ msgstr ""
 "Všech %d vybraných shod bude v následujících hledáních ignorováno. "
 "Pokračovat?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr ""
-
-#: core\app.py:485
-msgid "move"
-msgstr ""
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr ""
+msgid "Select a directory to copy marked files to"
+msgstr "Vyberte adresář, do kterého chcete zkopírovat označené soubory"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Vyberte adresář, kam chcete přesunout označené soubory"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Vyberte cíl pro exportovaný soubor CSV"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Nelze zapisovat do souboru: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -119,7 +118,7 @@ msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
 #: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} duplicitní skupiny byly změněny změně priorit."
 
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
@@ -143,11 +142,11 @@ msgstr "Nalezeno %d shod"
 
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Posíláte-{} soubory do koše."
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Regulární výrazy"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -155,23 +154,23 @@ msgstr "Opravdu chcete odstranit všech %d položek ze seznamu výjimek?"
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "Název souboru"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Název souboru - pole"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Název souboru - pole (bez objednávky)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr ""
+msgstr "Tagy"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr ""
+msgstr "Obsah"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
@@ -191,15 +190,15 @@ msgstr "Ověřeno %d/%d shod"
 
 #: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
-msgstr ""
+msgstr "Přečetl EXIF %d/%d obrázků"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Časové razítko EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
-msgstr ""
+msgstr "Zádný"
 
 #: core\prioritize.py:100
 msgid "Ends with number"
@@ -211,11 +210,11 @@ msgstr "Nekončí číslem"
 
 #: core\prioritize.py:102
 msgid "Longest"
-msgstr ""
+msgstr "Nejdelší"
 
 #: core\prioritize.py:103
 msgid "Shortest"
-msgstr ""
+msgstr "Nejkratší"
 
 #: core\prioritize.py:140
 msgid "Highest"
@@ -251,8 +250,8 @@ msgstr "Načtena metadata %d/%d souborů"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Skoro hotovo! Fidlování s výsledky..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
+msgstr "Složky"

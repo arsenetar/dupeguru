@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,23 +13,23 @@ msgstr ""
 
 #: qtlib\about_box.py:43
 msgid "About {}"
-msgstr ""
+msgstr "{}- ի մասին"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "{}-րդ տարբերակ"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "իցենզավորված տակ GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
-msgstr "Սխալի զեկույցը"
+msgstr "Սխալների մասին հաղորդագրություն"
 
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
-msgstr ""
+msgstr "Ինչ որ բան այնպես չգնաց. Հաղորդել սխալը?"
 
 #: qtlib\error_report_dialog.py:59
 msgid ""
@@ -40,14 +41,21 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Error հաշվետվությունները պետք է հրապարակվեն որպես Github հարցերի շուրջ: Կարող եք վերևում պատճենել սխալի հետևումը և տեղադրել այն նոր համարում:\n"
+"\n"
+"Խնդրում ենք համոզվեք, որ նախապես փնտրեք արդեն գոյություն ունեցող ցանկացած խնդիր: Նաեւ համոզվեք, որ ստուգել են հենց վերջին տարբերակը մատչելի շտեմարան, քանի որ Bug դուք ապրում գուցե արդեն patched.\n"
+"\n"
+"Սովորաբար այն, ինչ օգնում է իրականում, այն է, եթե ավելացնեք նկարագրությունը, թե ինչպես եք ստացել սխալը: Շնորհակալություն\n"
+"\n"
+"Չնայած այս սխալից հետո ծրագիրը պետք է շարունակի գործել, այն կարող է լինել անկայուն վիճակում, ուստի խորհուրդ է տրվում վերագործարկել ծրագիրը:"
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
-msgstr ""
+msgstr "Փակել"
 
 #: qtlib\error_report_dialog.py:79
 msgid "Go to Github"
-msgstr ""
+msgstr "Գնացեք Գիթուբ"
 
 #: qtlib\preferences.py:23
 msgid "English"
@@ -63,7 +71,7 @@ msgstr "Գերմաներեն"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "հունարեն"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
@@ -79,39 +87,43 @@ msgstr "Իտալերեն"
 
 #: qtlib\preferences.py:30
 msgid "Armenian"
-msgstr ""
+msgstr "հայերեն"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "կորեերեն"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
-msgstr ""
+msgstr "ռուսերեն"
 
 #: qtlib\preferences.py:33
 msgid "Ukrainian"
-msgstr ""
+msgstr "ուկրաիներեն"
 
 #: qtlib\preferences.py:34
 msgid "Dutch"
-msgstr ""
+msgstr "հոլանդերեն"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "լեհերեն"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
-msgstr ""
+msgstr "բրազիլական"
 
 #: qtlib\preferences.py:37
 msgid "Spanish"
-msgstr ""
+msgstr "Իսպաներեն"
 
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
-msgstr ""
+msgstr "վիետնամերեն"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "ճապոներեն"
 
 #: qtlib\recent.py:54
 msgid "Clear List"
@@ -119,4 +131,4 @@ msgstr "Մաքրել ցանկը"
 
 #: qtlib\search_edit.py:78
 msgid "Search..."
-msgstr ""
+msgstr "Որոնել..."

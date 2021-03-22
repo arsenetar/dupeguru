@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,17 +91,13 @@ msgid ""
 msgstr ""
 "Όλα τα επιλεγμένα %d στοιχεία θα αγνοηθούν σε μελλοντικές σαρώσεις.Συνέχεια;"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "αντιγραφή"
-
-#: core\app.py:485
-msgid "move"
-msgstr "μετακίνηση"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Επιλέξτε ένα φάκελο {} για τα μαρκαρισμένα αρχεία"
+msgid "Select a directory to copy marked files to"
+msgstr "Επιλέξτε έναν κατάλογο για να αντιγράψετε επισημασμένα αρχεία."
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Επιλέξτε έναν κατάλογο για να μετακινήσετε τα επισημασμένα αρχεία."
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

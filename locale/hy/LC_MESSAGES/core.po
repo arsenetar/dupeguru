@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,17 +13,20 @@ msgstr ""
 
 #: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr ""
+msgstr "Նշված կրկնօրինակներ չկան: Ոչինչ չի արվել."
 
 #: core\app.py:43
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr ""
+msgstr "Ընտրված կրկնօրինակներ չկան: Ոչինչ չի արվել."
 
 #: core\app.py:44
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
+"Դուք պատրաստվում եք միանգամից շատ ֆայլեր բացել: Կախված այն բանից, թե ինչով "
+"են բացվում այդ ֆայլերը, դա անելը կարող է բավականին խառնաշփոթ ստեղծել: "
+"Շարունակել?"
 
 #: core\app.py:71
 msgid "Scanning for duplicates"
@@ -70,7 +74,7 @@ msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվե
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Հնարավոր չէ բեռնել ֆայլը: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
@@ -87,25 +91,22 @@ msgid ""
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "պատճենել"
-
-#: core\app.py:485
-msgid "move"
-msgstr "տեղափոխել"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Ընտրել թղթապանակ՝ {} նշված ֆայլերի համար"
+msgid "Select a directory to copy marked files to"
+msgstr "Ընտրեք գրացուցակ, որտեղ ցանկանում եք պատճենել նշված ֆայլերը"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr ""
+"Խնդրում ենք ընտրել գրացուցակ, որտեղ ցանկանում եք տեղափոխել նշված ֆայլերը"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
-msgstr ""
+msgstr "Ընտրեք նպատակակետ ձեր արտահանված CSV- ի համար"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Չէր կարող գրել է ֆայլը: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -117,7 +118,7 @@ msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շ�
 
 #: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
+msgstr "{} կրկնօրինակ խմբերը փոխվել են առաջնահերթության կարգով:"
 
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
@@ -141,11 +142,11 @@ msgstr "%d համընկնում է գտնվել"
 
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
-msgstr ""
+msgstr "Դուք {} ֆայլ եք ուղարկում աղբարկղ:"
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Կանոնավոր արտահայտություններ"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -153,23 +154,23 @@ msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը 
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "Ֆայլի անունը"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Ֆայլի անվանումը - Դաշտեր"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Ֆայլի անուն - դաշտեր (պատվեր չկա)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr ""
+msgstr "Բովանդակություն"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
@@ -193,7 +194,7 @@ msgstr "Կարդալ EXIF-ը d/%d նկարներից"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "EXIF Timestamp"
 
 #: core\prioritize.py:70
 msgid "None"
@@ -209,11 +210,11 @@ msgstr "Չի ավարտվում է թվով"
 
 #: core\prioritize.py:102
 msgid "Longest"
-msgstr ""
+msgstr "Ամենաերկար"
 
 #: core\prioritize.py:103
 msgid "Shortest"
-msgstr ""
+msgstr "Ամենակարճը"
 
 #: core\prioritize.py:140
 msgid "Highest"
@@ -249,8 +250,8 @@ msgstr "Կարդալ %d/%d ֆայլերի մետատվյալները"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Գրեթե արված է! Արդյունքների կազմակերպում..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
+msgstr "Թղթապանակներ"

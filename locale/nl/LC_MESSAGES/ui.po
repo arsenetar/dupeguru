@@ -1,10 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -790,107 +790,157 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Deze (hoofdlettergevoelige) reguliere expressies van Python filteren bestanden uit tijdens scans.<br>Mappen hebben ook hun <strong>standaardstatus</strong> ingesteld op \"Uitgesloten\" in het tabblad Mappen als hun naam overeenkomt met een van de reguliere expressies. <br>Voor elk verzameld bestand worden twee tests uitgevoerd op elk van hen om te bepalen of ze al dan niet moeten worden uitgefilterd:<br><li>1. Reguliere expressies zonder padscheidingsteken worden alleen vergeleken met de bestandsnaam.</li>\n"
+"<li>2. Reguliere expressies zonder padscheidingsteken worden vergeleken met het volledige pad naar het bestand.</li><br>\n"
+"Voorbeeld: als u de PNG-bestanden alleen uit de map \"My Pictures\" wilt filteren:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>U kunt de reguliere expressie testen met de functie teststring door er een neppad in te plakken:<br><code> C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Overeenkomende reguliere expressies worden gemarkeerd.<br>Als er ten minste één highlight is, wordt het geteste pad genegeerd tijdens scans.<br><br>Mappen en bestanden die beginnen met een punt '.' worden standaard uitgefilterd.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "Compilatiefout:"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "Zoom vergroten"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "Zoom verkleinen"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "Normale grootte"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "Beste pasvorm"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "Fotocachemodus:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr ""
+msgstr "Overschrijf themapictogrammen in de werkbalk van de viewer"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
+"Gebruik onze eigen interne pictogrammen in plaats van die van de thema-"
+"engine"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "Toon schuifbalken in afbeeldingsviewers"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
+"Als de weergegeven afbeelding niet in de viewport past, laat dan "
+"schuifbalken zien om de weergave rondom te omspannen"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
 msgstr ""
+"Gebruik de standaardpositie voor de tabbalk (opnieuw opstarten vereist)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"Plaats de tabbalk onder het hoofdmenu in plaats van ernaast.\n"
+"Op MacOS vult de tabbalk in plaats daarvan de breedte van het venster."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "Gebruik vet lettertype voor referenties"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "Referentie voorgrondkleur:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "Referentie achtergrondkleur:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "Delta voorgrondkleur:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "Toon de titelbalk en kan worden gedokt"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
+"Terwijl de titelbalk verborgen is, gebruik maken van de speciale toets op "
+"het zwevende venster slepen"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
 msgstr ""
+"De titelbalk kan alleen worden uitgeschakeld terwijl het venster is gedokt"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "Verticale titelbalk"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr ""
+msgstr "Wijzig de titelbalk van horizontaal geplaatst, verticale links"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
+msgstr "Tabbladbalk weergeven"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Deze (hoofdlettergevoelige) reguliere expressies van Python filteren bestanden uit tijdens scans.<br>Mappen hebben ook hun <strong>standaardstatus</strong> ingesteld op Uitgesloten in het tabblad Mappen als hun naam toevallig overeenkomt met een van de geselecteerde reguliere expressies. <br>Voor elk verzameld bestand worden twee tests uitgevoerd om te bepalen of het al dan niet volledig moet worden genegeerd:<br><li>1. Reguliere expressies zonder padscheidingsteken worden alleen vergeleken met de bestandsnaam.</li>\n"
+"<li>2. Reguliere expressies met ten minste één padscheidingsteken worden vergeleken met het volledige pad naar het bestand.</li><br>\n"
+"<br>Voorbeeld: als u .PNG-bestanden alleen uit de map \"My Pictures\" wilt filteren:<code>.*My\\sPictures\\\\.*\\.png</code><br><br>U kunt de reguliere expressie testen met de \"test string\" -knop nadat u een neppad in het testveld hebt geplakt:<br><code> C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Overeenkomende reguliere expressies worden gemarkeerd. <br>Als er ten minste één markering is, wordt het geteste pad of de bestandsnaam genegeerd tijdens het scannen.<br><br>Mappen en bestanden die beginnen met een punt '.' worden standaard uitgefilterd.<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Resultaten"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Algemene interface"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Resultaattabel"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Details Venster"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "Algemeen"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Scherm"

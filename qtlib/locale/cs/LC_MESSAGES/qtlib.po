@@ -1,6 +1,9 @@
+# Translators:
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/voltaicideas/teams/116153/cs/)\n"
 "Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9,23 +12,23 @@ msgstr ""
 
 #: qtlib\about_box.py:43
 msgid "About {}"
-msgstr ""
+msgstr "O {}"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "Verze {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Licencován pod GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
-msgstr ""
+msgstr "Chybové hlášení"
 
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
-msgstr ""
+msgstr "Něco se pokazilo. Co takhle nahlásit chybu?"
 
 #: qtlib\error_report_dialog.py:59
 msgid ""
@@ -37,83 +40,94 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Chybové zprávy by měly být vykázáno jako emise GitHub. Můžete zkopírovat chybovou TraceBack výše a vložit ji do nové emise.\n"
+"\n"
+"Prosím, ujistěte se, že ke spuštění hledání jakýchkoli již existujících otázek předem. Také se ujistěte, vyzkoušet nejnovější dostupnou verzi z úložiště, protože chyba jste se setkali již mohla být oprava.\n"
+"\n"
+"To, co obvykle opravdu pomáhá, je přidat popis toho, jak jste se dostali k chybě. Dík!\n"
+"\n"
+"Přestože by aplikace měla po této chybě pokračovat, může být v nestabilním stavu, proto se doporučuje aplikaci restartovat."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: qtlib\error_report_dialog.py:79
 msgid "Go to Github"
-msgstr ""
+msgstr "Přejít na Github"
 
 #: qtlib\preferences.py:23
 msgid "English"
-msgstr ""
+msgstr "Anglicky."
 
 #: qtlib\preferences.py:24
 msgid "French"
-msgstr ""
+msgstr "Francouzsky"
 
 #: qtlib\preferences.py:25
 msgid "German"
-msgstr ""
+msgstr "Německy"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "řecky"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "čínsky (zjednodušeně)"
 
 #: qtlib\preferences.py:28
 msgid "Czech"
-msgstr ""
+msgstr "česky"
 
 #: qtlib\preferences.py:29
 msgid "Italian"
-msgstr ""
+msgstr "italsky"
 
 #: qtlib\preferences.py:30
 msgid "Armenian"
-msgstr ""
+msgstr "arménsky"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "korejsky"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
-msgstr ""
+msgstr "rusky"
 
 #: qtlib\preferences.py:33
 msgid "Ukrainian"
-msgstr ""
+msgstr "ukrajinsky"
 
 #: qtlib\preferences.py:34
 msgid "Dutch"
-msgstr ""
+msgstr "holandsky"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "polsky"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
-msgstr ""
+msgstr "brazilsky"
 
 #: qtlib\preferences.py:37
 msgid "Spanish"
-msgstr ""
+msgstr "španělsky"
 
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
-msgstr ""
+msgstr "vietnamsky"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "Japonština"
 
 #: qtlib\recent.py:54
 msgid "Clear List"
-msgstr ""
+msgstr "Vymazání seznamu"
 
 #: qtlib\search_edit.py:78
 msgid "Search..."
-msgstr ""
+msgstr "Hledat..."

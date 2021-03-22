@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Chris Ocelot, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/voltaicideas/teams/116153/zh_CN/)\n"
 "Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,6 +121,10 @@ msgstr "西班牙语"
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
 msgstr "越南语"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "日语"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

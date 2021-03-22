@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/voltaicideas/teams/116153/vi/)\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +76,7 @@ msgstr ""
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr ""
+msgstr "Không thể tải tệp: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
@@ -93,17 +94,15 @@ msgstr ""
 "Các phần được chọn %d khớp với nhau sẽ được bỏ qua trong các lần quét sau. "
 "Tiếp tục?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "sao chép"
-
-#: core\app.py:485
-msgid "move"
-msgstr "di chuyển"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Chọn một thư mục để {} các tập tin được đánh dấu đến"
+msgid "Select a directory to copy marked files to"
+msgstr ""
+"Vui lòng chọn một thư mục mà bạn muốn sao chép các tệp đã đánh dấu vào"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr ""
+"Vui lòng chọn một thư mục mà bạn muốn di chuyển các tệp đã đánh dấu đến"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
@@ -111,7 +110,7 @@ msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr ""
+msgstr "Không thể ghi vào tệp: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
@@ -153,7 +152,7 @@ msgstr "Bạn sắp sửa gửi {} (các)tập tin đến Thùng Rác."
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Biểu thức chính quy"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -161,23 +160,23 @@ msgstr "Bạn có thực sự muốn loại bỏ tất cả %d đối tượng t
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "Tên tệp"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr ""
+msgstr "Tên tệp - Trường"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr ""
+msgstr "Tên tệp - Trường (Không có thứ tự)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr ""
+msgstr "Nội dung"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
@@ -201,7 +200,7 @@ msgstr "Đọc thông tin EXIF của %d/%d hình ảnh"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "Dấu thời gian EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
@@ -257,8 +256,8 @@ msgstr "Đọc thông tin chi tiết của %d/%d tập tin"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr ""
+msgstr "Sắp xong! Loay hoay với kết quả..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr ""
+msgstr "Thư mục"

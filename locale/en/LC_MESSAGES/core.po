@@ -84,17 +84,13 @@ msgstr ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 
-#: core\app.py:485
-msgid "copy"
-msgstr "copy"
-
-#: core\app.py:485
-msgid "move"
-msgstr "move"
-
 #: core\app.py:486
-msgid "Select a directory to {} marked files to"
-msgstr "Select a directory to {} marked files to"
+msgid "Select a directory to copy marked files to"
+msgstr "Select a directory to copy marked files to"
+
+#: core\app.py:487
+msgid "Select a directory to move marked files to"
+msgstr "Select a directory to move marked files to"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"

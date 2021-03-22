@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +116,7 @@ msgstr "Չափը (ԿԲ)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "EXIF Timestamp"
 
 #: core\prioritize.py:156
 msgid "Size"

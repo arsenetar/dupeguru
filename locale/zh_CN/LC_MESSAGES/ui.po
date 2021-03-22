@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Chris Ocelot, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/voltaicideas/teams/116153/zh_CN/)\n"
 "Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -886,3 +887,39 @@ msgstr "把标题栏从顶部横向改为左侧竖直"
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
 msgstr "显示 Tab Bar"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"这些（大小写敏感）的python正则表达式会在扫描过程中对结果进行过滤。<br>除非目录名称和正则表达式匹配，它们的<strong>默认状态</strong>会被设成从目录标签排除。<br>每一个文件都会经过两种测试，以确定它是否会被完全忽略：<br><li>1. 没有路径分隔符的正则表达式，仅用于和文件名进行比较。</li>\n"
+"<li>2. 至少有一个路径分隔符的正则表达式，会被用于和文件的完整路径进行比较。</li><br>\n"
+"例如：如果你想要仅在“图片”目录中排除所有.PNG文件：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>你可以使用“测试字符串”按钮来测试你的正则表达式，只需要将虚拟的路径输入测试框即可：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"匹配的正则表达式会被高亮。<br>假如有至少一个高亮，测试文件的文件名或者路径就会在扫描中被忽略。<br><br>以“.”开头的目录或文件默认会被忽略。<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "结果"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "通用介面"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "结果表"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "详细信息窗口"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "一般"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "展示"

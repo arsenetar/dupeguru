@@ -1,9 +1,9 @@
 # Translators:
-# Fuan Karl <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan Karl <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,6 +119,10 @@ msgstr "スペイン語"
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
 msgstr "ベトナム語"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "日本語"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

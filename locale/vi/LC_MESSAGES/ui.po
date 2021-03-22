@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/voltaicideas/teams/116153/vi/)\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,19 +149,19 @@ msgstr "Tải các kết quả gần đây"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr ""
+msgstr "Chế độ ứng dụng:"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr ""
+msgstr "Âm nhạc"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr ""
+msgstr "Hình ảnh"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr ""
+msgstr "Tiêu chuẩn"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
@@ -168,7 +169,7 @@ msgstr "Loại thao tác quét:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr ""
+msgstr "Các tùy chọn khác"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
@@ -702,7 +703,7 @@ msgstr "Biểu hiện các phần được chọn trong phần Tìm Kiếm"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "Chọn tất cả"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
@@ -734,55 +735,55 @@ msgstr "Phóng to"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "Bộ lọc Loại trừ"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "Quét kết quả"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "Nạp Thư mục..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "Lưu các thư mục..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "Chọn một tập tin thư mục để tải"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru Thư mục (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "Chọn một tệp để lưu các thư mục của bạn vào"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru Thư mục (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "Thêm vào"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "Khôi phục mặc định"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "Thử nghiệm chuỗi ký tự"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "Nhập một biểu thức chính quy python tại đây..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "Nhập đường dẫn hệ thống tệp hoặc tên tệp tại đây..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -791,107 +792,155 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Các biểu thức chính quy python (phân biệt chữ hoa chữ thường) này sẽ lọc ra các tệp trong quá trình quét.<br>Các thư mục cũng sẽ có <strong>trạng thái mặc định</strong> được đặt thành \"Bị loại trừ\" trong tab \"Thư mục\" nếu tên của chúng khớp với một trong các biểu thức chính quy đã chọn.<br>Đối với mỗi tệp được thu thập, hai bài kiểm tra được thực hiện để xác định xem có bỏ qua hoàn toàn tệp đó hay không:<br><li>1. Biểu thức chính quy không có dấu phân tách đường dẫn sẽ chỉ được so sánh với tên tệp.</li>\n"
+"<li>2. Biểu thức chính quy có ít nhất một dấu phân cách đường dẫn sẽ được so sánh với đường dẫn đầy đủ đến tệp.</li><br>\n"
+"Ví dụ: nếu bạn chỉ muốn lọc các tệp PNG từ thư mục \"Ảnh của tôi\":<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Bạn có thể kiểm tra biểu thức chính quy bằng nút \"chuỗi kiểm tra\" sau khi dán đường dẫn giả vào trường kiểm tra:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Các cụm từ thông dụng phù hợp sẽ được đánh dấu.<br>Nếu có ít nhất một điểm đánh dấu, đường dẫn hoặc tên tệp được kiểm tra sẽ bị bỏ qua trong quá trình quét.<br><br>Các thư mục và tệp bắt đầu bằng dấu chấm '.' được lọc ra theo mặc định.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "Lỗi biên dịch"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "Tăng thu phóng"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "Giảm thu phóng"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "Kích thước bình thường"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "Phù hợp nhất"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "Chế độ bộ nhớ cache hình ảnh:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr ""
+msgstr "Ghi đè các biểu tượng chủ đề trong thanh công cụ của trình xem"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
+"Sử dụng các biểu tượng nội bộ của riêng chúng tôi thay vì những biểu tượng "
+"được cung cấp bởi công cụ chủ đề"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "Hiển thị thanh cuộn trong trình xem hình ảnh"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
+"Khi hình ảnh được hiển thị không vừa với chế độ xem, hãy hiển thị các thanh "
+"cuộn để di chuyển chế độ xem xung quanh"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr ""
+msgstr "Sử dụng vị trí mặc định cho thanh tab (yêu cầu khởi động lại)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"Đặt thanh tab bên dưới menu chính thay vì bên cạnh nó.\n"
+"Trên MacOS, thay vào đó, thanh tab sẽ lấp đầy chiều rộng của cửa sổ."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "Sử dụng phông chữ đậm cho tài liệu tham khảo"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "Màu nền trước tham khảo:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "Màu nền tham chiếu"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "Màu nền trước Delta:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "Hiển thị thanh tiêu đề và có thể được cập cảng"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
+"Trong khi thanh tiêu đề bị ẩn, hãy sử dụng phím bổ trợ để kéo cửa sổ nổi "
+"xung quanh"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
-msgstr ""
+msgstr "Thanh tiêu đề chỉ có thể bị vô hiệu hóa khi cửa sổ được gắn vào đế"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "Thanh tiêu đề dọc"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr ""
+msgstr "Thay đổi thanh tiêu đề từ ngang ở trên, sang dọc ở bên trái"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
+msgstr "Hiển thị thanh tab"
+
+#: qt\exclude_list_dialog.py:152
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>\n"
+"Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"Các biểu thức chính quy python (phân biệt chữ hoa chữ thường) này sẽ lọc ra các tệp trong quá trình quét.<br>Các thư mục cũng sẽ có <strong>trạng thái mặc định</strong> được đặt thành \"Bị loại trừ\" trong tab \"Thư mục\" nếu tên của chúng khớp với một trong các biểu thức chính quy đã chọn.<br>Đối với mỗi tệp được thu thập, hai bài kiểm tra được thực hiện để xác định xem có bỏ qua hoàn toàn tệp đó hay không:<br><li>1. Biểu thức chính quy không có dấu phân tách đường dẫn sẽ chỉ được so sánh với tên tệp.</li>\n"
+"<li>2. Biểu thức chính quy có ít nhất một dấu phân cách đường dẫn sẽ được so sánh với đường dẫn đầy đủ đến tệp.</li><br>\n"
+"Ví dụ: nếu bạn chỉ muốn lọc các tệp PNG từ thư mục \"Ảnh của tôi\":<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Bạn có thể kiểm tra biểu thức chính quy bằng nút \"chuỗi kiểm tra\" sau khi dán đường dẫn giả vào trường kiểm tra:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Các cụm từ thông dụng phù hợp sẽ được đánh dấu.<br>Nếu có ít nhất một điểm đánh dấu, đường dẫn hoặc tên tệp được kiểm tra sẽ bị bỏ qua trong quá trình quét.<br><br>Các thư mục và tệp bắt đầu bằng dấu chấm '.' được lọc ra theo mặc định.<br><br>"
+
+#: qt\app.py:256
+msgid "Results"
+msgstr "Kết quả"
+
+#: qt\preferences_dialog.py:150
+msgid "General Interface"
+msgstr "Giao diện chung"
+
+#: qt\preferences_dialog.py:176
+msgid "Result Table"
+msgstr "Kết quả Bảng"
+
+#: qt\preferences_dialog.py:205
+msgid "Details Window"
+msgstr "Cửa sổ chi tiết"
+
+#: qt\preferences_dialog.py:285
+msgid "General"
+msgstr "Chung"
+
+#: qt\preferences_dialog.py:286
+msgid "Display"
+msgstr "Trưng bày"

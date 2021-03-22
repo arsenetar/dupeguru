@@ -1,6 +1,9 @@
+# Translators:
+# Fuan <jcfrt@posteo.net>, 2021
 #
 msgid ""
 msgstr ""
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
 "Language-Team: Polish (Poland) (https://www.transifex.com/voltaicideas/teams/116153/pl_PL/)\n"
 "Language: pl_PL\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9,23 +12,23 @@ msgstr ""
 
 #: qtlib\about_box.py:43
 msgid "About {}"
-msgstr ""
+msgstr "O {}"
 
 #: qtlib\about_box.py:65
 msgid "Version {}"
-msgstr ""
+msgstr "Wersja {}"
 
 #: qtlib\about_box.py:70
 msgid "Licensed under GPLv3"
-msgstr ""
+msgstr "Licencjonowany w ramach GPLv3"
 
 #: qtlib\error_report_dialog.py:49
 msgid "Error Report"
-msgstr ""
+msgstr "Raport błędów"
 
 #: qtlib\error_report_dialog.py:53
 msgid "Something went wrong. How about reporting the error?"
-msgstr ""
+msgstr "Coś poszło nie tak. Co powiesz na zgłoszenie błędu?"
 
 #: qtlib\error_report_dialog.py:59
 msgid ""
@@ -37,83 +40,94 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
+"Raporty o błędach powinny być zgłaszane jako problemy z Github. Możesz skopiować powyższy opis błędu i wkleić go w nowym zgłoszeniu.\n"
+"\n"
+"Upewnij się, że wcześniej wyszukałeś już istniejący bilet. Upewnij się również, że przetestowałeś najnowszą wersję dostępną w repozytorium, ponieważ napotkany błąd mógł już zostać załatany.\n"
+"\n"
+"To, co zwykle naprawdę pomaga, to dodanie opisu tego, w jaki sposób wystąpił błąd. Dzięki!\n"
+"\n"
+"Chociaż aplikacja powinna nadal działać po tym błędzie, może być w stanie niestabilnym, dlatego zaleca się ponowne uruchomienie aplikacji."
 
 #: qtlib\error_report_dialog.py:75
 msgid "Close"
-msgstr ""
+msgstr "Zamknij to"
 
 #: qtlib\error_report_dialog.py:79
 msgid "Go to Github"
-msgstr ""
+msgstr "Przejdź do Github"
 
 #: qtlib\preferences.py:23
 msgid "English"
-msgstr ""
+msgstr "Angielski"
 
 #: qtlib\preferences.py:24
 msgid "French"
-msgstr ""
+msgstr "Francuski"
 
 #: qtlib\preferences.py:25
 msgid "German"
-msgstr ""
+msgstr "Niemiecki"
 
 #: qtlib\preferences.py:26
 msgid "Greek"
-msgstr ""
+msgstr "Grecki"
 
 #: qtlib\preferences.py:27
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Chiński (uproszczony)"
 
 #: qtlib\preferences.py:28
 msgid "Czech"
-msgstr ""
+msgstr "Czech"
 
 #: qtlib\preferences.py:29
 msgid "Italian"
-msgstr ""
+msgstr "Włoski"
 
 #: qtlib\preferences.py:30
 msgid "Armenian"
-msgstr ""
+msgstr "Ormiański"
 
 #: qtlib\preferences.py:31
 msgid "Korean"
-msgstr ""
+msgstr "Koreański"
 
 #: qtlib\preferences.py:32
 msgid "Russian"
-msgstr ""
+msgstr "Rosyjski"
 
 #: qtlib\preferences.py:33
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraiński"
 
 #: qtlib\preferences.py:34
 msgid "Dutch"
-msgstr ""
+msgstr "Holenderski"
 
 #: qtlib\preferences.py:35
 msgid "Polish"
-msgstr ""
+msgstr "Polskie"
 
 #: qtlib\preferences.py:36
 msgid "Brazilian"
-msgstr ""
+msgstr "Brazylijski"
 
 #: qtlib\preferences.py:37
 msgid "Spanish"
-msgstr ""
+msgstr "Hiszpański"
 
 #: qtlib\preferences.py:38
 msgid "Vietnamese"
-msgstr ""
+msgstr "Wietnamski"
+
+#: qtlib\preferences.py:39
+msgid "Japanese"
+msgstr "Japońsku"
 
 #: qtlib\recent.py:54
 msgid "Clear List"
-msgstr ""
+msgstr "Wyczyść listę"
 
 #: qtlib\search_edit.py:78
 msgid "Search..."
-msgstr ""
+msgstr "Szukaj..."
