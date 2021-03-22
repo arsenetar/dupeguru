@@ -1,3 +1,12 @@
+=== 4.1.1 (2021-03-21)
+
+* Add Japanese 
+* Update internationalization and translations to be up to date with current UI.
+* Minor translation and UI language updates
+* Fix language selection issues on Windows (#760)
+* Add some additional notes about builds on Linux based systems
+* Add import from transifex export to build.py
+
 === 4.1.0 (2020-12-29)
 
 * Use tabs instead of separate windows (#688)
