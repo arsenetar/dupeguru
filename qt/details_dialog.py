@@ -51,7 +51,7 @@ class DetailsDialog(QDockWidget):
             if not self.titleBarWidget():  # default title bar
                 self.setTitleBarWidget(QWidget())  # disables title bar
                 # Windows (and MacOS?) users cannot move a floating window which
-                # has not native decoration so we force it to dock for now
+                # has no native decoration so we force it to dock for now
                 if not ISLINUX:
                     self.setFloating(False)
         elif self.titleBarWidget() is not None:  # title bar is disabled
