@@ -271,6 +271,9 @@ class DupeGuru(QObject):
         self.willSavePrefs.emit()
         self.prefs.save()
         self.model.save()
+        # Workaround for #857, hide() or close().
+        if self.details_dialog is not None:
+            self.details_dialog.close()
         QApplication.quit()
 
     # --- Signals
