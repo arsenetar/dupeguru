@@ -69,6 +69,10 @@ class TestCasegetwords:
         eq_(["a", "b", "c", "d"], getwords("a b c d"))
         eq_(["a", "b", "c", "d"], getwords(" a  b  c d "))
 
+    def test_unicode(self):
+        eq_(["e", "c", "0", "a", "o", "u", "e", "u"], getwords("é ç 0 à ö û è ¤ ù"))
+        eq_(["02", "君のこころは輝いてるかい？", "国木田花丸", "solo", "ver"], getwords("02 君のこころは輝いてるかい？ 国木田花丸 Solo Ver"))
+
     def test_splitter_chars(self):
         eq_(
             [chr(i) for i in range(ord("a"), ord("z") + 1)],
@@ -85,7 +89,7 @@ class TestCasegetwords:
         eq_(["foo", "bar"], getwords("FOO BAR"))
 
     def test_decompose_unicode(self):
-        eq_(getwords("foo\xe9bar"), ["fooebar"])
+        eq_(["fooebar"], getwords("foo\xe9bar"))
 
 
 class TestCasegetfields:
