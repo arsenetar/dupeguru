@@ -26,8 +26,19 @@ def getwords(s):
     # We decompose the string so that ascii letters with accents can be part of the word.
     s = normalize("NFD", s)
     s = multi_replace(s, "-_&+():;\\[]{}.,<>/?~!@#$*", " ").lower()
+    # logging.debug(f"DEBUG chars for: {s}\n"
+    #               f"{[c for c in s if ord(c) != 32]}\n"
+    #               f"{[ord(c) for c in s if ord(c) != 32]}")
+    # HACK We shouldn't ignore non-ascii characters altogether. Any Unicode char
+    # above common european characters that cannot be "sanitized" (ie. stripped
+    # of their accents, etc.) are preserved as is. The arbitrary limit is
+    # obtained from this one: ord("\u037e") GREEK QUESTION MARK
     s = "".join(
-        c for c in s if c in string.ascii_letters + string.digits + string.whitespace
+        c for c in s
+        if (ord(c) < 894
+            and c in string.ascii_letters + string.digits + string.whitespace
+            )
+        or ord(c) > 894
     )
     return [_f for _f in s.split(" ") if _f]  # remove empty elements
 
