@@ -35,7 +35,7 @@ def getwords(s):
     # obtained from this one: ord("\u037e") GREEK QUESTION MARK
     s = "".join(
         c for c in s
-        if (ord(c) < 894
+        if (ord(c) <= 894
             and c in string.ascii_letters + string.digits + string.whitespace
             )
         or ord(c) > 894
