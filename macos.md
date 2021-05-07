@@ -11,7 +11,7 @@
 1. Install Xcode if desired
 2. Install [Homebrew][homebrew], if not on the path after install (arm based Macs) create `~/.zshrc` 
 with `export PATH="/opt/homebrew/bin:$PATH"`. Will need to reload terminal or source the file to take 
-affect.
+effect.
 3. Install qt5 with `brew`. If you are using a version of macos without system python 3.6+ then you will 
 also need to install that via brew or with pyenv.
 
