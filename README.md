@@ -1,4 +1,4 @@
-**dupeGuru** is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in a system. It's written mostly in Python 3 and has the peculiarity of using multiple GUI toolkits, all using the same core Python code. On OS X, the UI layer is written in Objective-C and uses Cocoa. On Linux 7 Windows, it's written in Python and uses Qt5.
+**dupeGuru** is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in a system. It's written mostly in Python 3 and has the peculiarity of using multiple GUI toolkits, all using the same core Python code. On OS X, the UI layer is written in Objective-C and uses Cocoa. On Linux & Windows, it's written in Python and uses Qt5.
 
 **dupeGuru** is a tool to find duplicate files on your computer. It can scan either filenames or contents. The filename scan features a fuzzy matching algorithm that can find duplicate filenames even when they are not exactly the same. dupeGuru runs on Mac OS X and Linux.
 
