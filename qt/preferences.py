@@ -102,7 +102,7 @@ class Preferences(PreferencesBase):
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
         self.details_dialog_viewers_show_scrollbars = True
         self.result_table_ref_foreground_color = QColor(Qt.blue)
-        self.result_table_ref_background_color = QColor(Qt.darkGray)
+        self.result_table_ref_background_color = QColor(Qt.lightGray)
         self.result_table_delta_foreground_color = QColor(255, 142, 40)  # orange
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
