@@ -41,6 +41,8 @@ class DupeRow(Row):
             # table.DELTA_COLUMNS are always "delta"
             self._delta_columns = self.table.DELTA_COLUMNS.copy()
             dupe_info = self.data
+            if self._group.ref is None:
+                return False
             ref_info = self._group.ref.get_display_info(group=self._group, delta=False)
             for key, value in dupe_info.items():
                 if (key not in self._delta_columns) and (
