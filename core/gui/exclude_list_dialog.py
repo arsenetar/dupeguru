@@ -56,7 +56,7 @@ class ExcludeListDialogCore:
         matched = False
         for row in self.exclude_list_table.rows:
             compiled_regex = self.exclude_list.get_compiled(row.regex)
-            if compiled_regex and compiled_regex.match(test_string):
+            if compiled_regex and compiled_regex.fullmatch(test_string):
                 matched = True
                 row.highlight = True
             else:

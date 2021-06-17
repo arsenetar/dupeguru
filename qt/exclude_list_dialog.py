@@ -129,8 +129,7 @@ class ExcludeListDialog(QDialog):
         except re.error:
             self.reset_input_style()
             return
-        match = compiled.match(input_text)
-        if match:
+        if compiled.fullmatch(input_text):
             self._input_styled = True
             self.inputLine.setStyleSheet("background-color: rgb(10, 200, 10);")
         else:
