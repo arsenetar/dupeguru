@@ -108,24 +108,9 @@ class Directories:
                         found_files = []
                         # print(f"len of files: {len(files)} {files}")
                         for f in files:
-                            matched = False
-                            for expr in self._exclude_list.compiled_files:
-                                if expr.fullmatch(f):
-                                    logging.debug(f"{expr} matched {f}.")
-                                    matched = True
-                                    break
-                            if not matched:
-                                logging.debug(f"path {root + os.sep + f}")
-                                for expr in self._exclude_list.compiled_paths:
-                                    if expr.fullmatch(root + os.sep + f):
-                                        print(f"{expr} matched {root}{os.sep}{f}.")
-                                        matched = True
-                                        break
-                            if not matched:
-                                logging.debug(f"Not filtering: {f}.")
-                                found_files.append(fs.get_file(rootPath + f, fileclasses=fileclasses))
-                            else:
-                                logging.debug(f"Filtering: {f}")
+                            if not self._exclude_list.is_excluded(root, f):
+                                found_files.append(fs.get_file(rootPath + f,
+                                                               fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under

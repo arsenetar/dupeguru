@@ -116,30 +116,32 @@ class ExcludeListDialog(QDialog):
         if not input_text:
             self.reset_input_style()
             return
-        # if at least one row matched, we know whether table is highlighted or not
+        # If at least one row matched, we know whether table is highlighted or not
         self._row_matched = self.model.test_string(input_text)
         self.table.refresh()
 
+        # Test the string currently in the input text box as well
         input_regex = self.inputLine.text()
         if not input_regex:
             self.reset_input_style()
             return
+        compiled = None
         try:
             compiled = re.compile(input_regex)
         except re.error:
             self.reset_input_style()
             return
-        if compiled.fullmatch(input_text):
-            self._input_styled = True
+        if self.model.is_match(input_text, compiled):
             self.inputLine.setStyleSheet("background-color: rgb(10, 200, 10);")
+            self._input_styled = True
         else:
             self.reset_input_style()
 
     def reset_input_style(self):
         """Reset regex input line background"""
         if self._input_styled:
-            self._input_styled = False
             self.inputLine.setStyleSheet(self.styleSheet())
+            self._input_styled = False
 
     def reset_table_style(self):
         if self._row_matched:

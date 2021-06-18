@@ -36,7 +36,7 @@ class ExcludeListTable(GUITable, DupeGuruGUIObject):
         return ExcludeListRow(self, self.dialog.exclude_list.is_marked(regex), regex), 0
 
     def _do_delete(self):
-        self.dalog.exclude_list.remove(self.selected_row.regex)
+        self.dialog.exclude_list.remove(self.selected_row.regex)
 
     # --- Override
     def add(self, regex):
