@@ -187,7 +187,14 @@ class DupeGuru(QObject):
         )
         self.model.options["size_threshold"] = (
             threshold * 1024
-        )  # threshold is in KB. the scanner wants bytes
+        )  # threshold is in KB. The scanner wants bytes
+        big_file_size_threshold = (
+            self.prefs.big_file_size_threshold if self.prefs.big_file_partial_hashes else 0
+        )
+        self.model.options["big_file_size_threshold"] = (
+            big_file_size_threshold * 1024 * 1024
+            # threshold is in MiB. The scanner wants bytes
+        )
         scanned_tags = set()
         if self.prefs.scan_tag_track:
             scanned_tags.add("track")

@@ -72,6 +72,21 @@ class PreferencesDialog(PreferencesDialogBase):
         spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout_2b = QHBoxLayout()
+        self._setupAddCheckbox(
+            "bigFilePartialHashesBox", tr("Partially hash files bigger than"), self.widget
+        )
+        self.horizontalLayout_2b.addWidget(self.bigFilePartialHashesBox)
+        self.bigSizeThresholdEdit = QLineEdit(self.widget)
+        self.bigSizeThresholdEdit.setSizePolicy(sizePolicy)
+        self.bigSizeThresholdEdit.setMaximumSize(QSize(75, 16777215))
+        self.horizontalLayout_2b.addWidget(self.bigSizeThresholdEdit)
+        self.label_6b = QLabel(self.widget)
+        self.label_6b.setText(tr("MB"))
+        self.horizontalLayout_2b.addWidget(self.label_6b)
+        spacerItem2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout_2b.addItem(spacerItem2)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_2b)
         self._setupAddCheckbox(
             "ignoreHardlinkMatches",
             tr("Ignore duplicates hardlinking to the same file"),
@@ -90,6 +105,8 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
         self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
+        setchecked(self.bigFilePartialHashesBox, prefs.big_file_partial_hashes)
+        self.bigSizeThresholdEdit.setText(str(prefs.big_file_size_threshold))
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.Standard)
@@ -103,3 +120,5 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
         prefs.small_file_threshold = tryint(self.sizeThresholdEdit.text())
+        prefs.big_file_partial_hashes = ischecked(self.bigFilePartialHashesBox)
+        prefs.big_file_size_threshold = tryint(self.bigSizeThresholdEdit.text())

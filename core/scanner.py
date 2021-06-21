@@ -87,7 +87,11 @@ class Scanner:
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in {ScanType.Contents, ScanType.Folders}:
-            return engine.getmatches_by_contents(files, j=j)
+            return engine.getmatches_by_contents(
+                files,
+                bigsize=self.big_file_size_threshold if self.big_file_partial_hashes else 0,
+                j=j
+            )
         else:
             j = j.start_subjob([2, 8])
             kw = {}
@@ -218,4 +222,6 @@ class Scanner:
     scan_type = ScanType.Filename
     scanned_tags = {"artist", "title"}
     size_threshold = 0
+    big_file_partial_hashes = True
+    big_file_size_threshold = 100 * 1024 * 1024
     word_weighting = False
