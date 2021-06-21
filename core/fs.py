@@ -83,9 +83,9 @@ class File:
     INITIAL_INFO = {
         "size": 0,
         "mtime": 0,
-        "md5": "",
-        "md5partial": "",
-        "md5samples": []
+        "md5": b"",
+        "md5partial": b"",
+        "md5samples": b""
     }
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
@@ -104,7 +104,6 @@ class File:
         result = object.__getattribute__(self, attrname)
         if result is NOT_SET:
             try:
-                print(f"Try get attr for {self} {attrname}")
                 self._read_info(attrname)
             except Exception as e:
                 logging.warning(
@@ -121,12 +120,12 @@ class File:
         return (0x4000, 0x4000)  # 16Kb
 
     def _read_info(self, field):
+        # print(f"_read_info({field}) for {self}")
         if field in ("size", "mtime"):
             stats = self.path.stat()
             self.size = nonone(stats.st_size, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == "md5partial":
-            print(f"_read_info md5partial {self}")
             try:
                 with self.path.open("rb") as fp:
                     offset, size = self._get_md5partial_offset_and_size()
@@ -146,27 +145,24 @@ class File:
             except Exception:
                 pass
         elif field == "md5samples":
-            print(f"computing md5chunks for {self}, caller: {inspect.stack()[1][3]}")
             try:
                 with self.path.open("rb") as fp:
-                    md5chunks = []
+                    size = self.size
                     # Chunk at 25% of the file
-                    fp.seek(floor(self.size * 25 / 100), 0)
+                    fp.seek(floor(size * 25 / 100), 0)
                     filedata = fp.read(CHUNK_SIZE)
-                    md5chunks.append(hashlib.md5(filedata).hexdigest())
+                    md5 = hashlib.md5(filedata)
 
                     # Chunk at 60% of the file
-                    fp.seek(floor(self.size * 60 / 100), 0)
+                    fp.seek(floor(size * 60 / 100), 0)
                     filedata = fp.read(CHUNK_SIZE)
-                    md5chunks.append(hashlib.md5(filedata).hexdigest())
+                    md5.update(filedata)
 
                     # Last chunk of the file
                     fp.seek(-CHUNK_SIZE, 2)
                     filedata = fp.read(CHUNK_SIZE)
-                    md5chunks.append(hashlib.md5(filedata).hexdigest())
-
-                    # Use setattr to avoid circular (de)reference
-                    setattr(self, field, tuple(md5chunks))
+                    md5.update(filedata)
+                    setattr(self, field, md5.digest())
             except Exception as e:
                 logging.error(f"Error computing md5samples: {e}")
                 pass
@@ -239,16 +235,16 @@ class Folder(File):
         return folders + files
 
     def _read_info(self, field):
+        # print(f"_read_info({field}) for Folder {self}")
         if field in {"size", "mtime"}:
             size = sum((f.size for f in self._all_items()), 0)
             self.size = size
             stats = self.path.stat()
             self.mtime = nonone(stats.st_mtime, 0)
-        elif field in {"md5", "md5partial"}:
+        elif field in {"md5", "md5partial", "md5samples"}:
             # What's sensitive here is that we must make sure that subfiles'
             # md5 are always added up in the same order, but we also want a
             # different md5 if a file gets moved in a different subdirectory.
-            print(f"Getting {field} of folder {self}...")
 
             def get_dir_md5_concat():
                 items = self._all_items()
