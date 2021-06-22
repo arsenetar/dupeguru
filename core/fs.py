@@ -13,7 +13,6 @@
 
 import hashlib
 from math import floor
-import inspect
 import logging
 
 from hscommon.util import nonone, get_file_ext
