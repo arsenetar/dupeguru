@@ -770,6 +770,8 @@ class DupeGuru(Broadcaster):
         for group in self.results.groups:
             if group.prioritize(key_func=sort_key):
                 count += 1
+        if count:
+            self.results.refresh_required = True
         self._results_changed()
         msg = tr("{} duplicate groups were changed by the re-prioritization.").format(
             count
