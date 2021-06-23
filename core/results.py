@@ -94,22 +94,21 @@ class Results(Markable):
 
     # ---Private
     def __get_dupe_list(self):
-        if self.__dupes is None:
-            self.__dupes = flatten(group.dupes for group in self.groups)
-            if None in self.__dupes:
-                # This is debug logging to try to figure out #44
-                logging.warning(
-                    "There is a None value in the Results' dupe list. dupes: %r groups: %r",
-                    self.__dupes,
-                    self.groups,
-                )
-            if self.__filtered_dupes:
-                self.__dupes = [
-                    dupe for dupe in self.__dupes if dupe in self.__filtered_dupes
-                ]
-            sd = self.__dupes_sort_descriptor
-            if sd:
-                self.sort_dupes(sd[0], sd[1], sd[2])
+        self.__dupes = flatten(group.dupes for group in self.groups)
+        if None in self.__dupes:
+            # This is debug logging to try to figure out #44
+            logging.warning(
+                "There is a None value in the Results' dupe list. dupes: %r groups: %r",
+                self.__dupes,
+                self.groups,
+            )
+        if self.__filtered_dupes:
+            self.__dupes = [
+                dupe for dupe in self.__dupes if dupe in self.__filtered_dupes
+            ]
+        sd = self.__dupes_sort_descriptor
+        if sd:
+            self.sort_dupes(sd[0], sd[1], sd[2])
         return self.__dupes
 
     def __get_groups(self):
