@@ -7,6 +7,8 @@
 
 # from hscommon.trans import tr
 from .exclude_list_table import ExcludeListTable
+from core.exclude import has_sep
+from os import sep
 import logging
 
 
@@ -30,9 +32,10 @@ class ExcludeListDialogCore:
         self.refresh()
 
     def rename_selected(self, newregex):
-        """Renames the selected regex to ``newregex``.
-        If there's more than one selected row, the first one is used.
+        """Rename the selected regex to ``newregex``.
+        If there is more than one selected row, the first one is used.
         :param str newregex: The regex to rename the row's regex to.
+        :return bool: true if success, false if error.
         """
         try:
             r = self.exclude_list_table.selected_rows[0]
@@ -52,15 +55,35 @@ class ExcludeListDialogCore:
         self.exclude_list_table.add(regex)
 
     def test_string(self, test_string):
-        """Sets property on row to highlight if its regex matches test_string supplied."""
+        """Set the highlight property on each row when its regex matches the
+        test_string supplied. Return True if any row matched."""
         matched = False
         for row in self.exclude_list_table.rows:
             compiled_regex = self.exclude_list.get_compiled(row.regex)
-            if compiled_regex and compiled_regex.match(test_string):
-                matched = True
+
+            if self.is_match(test_string, compiled_regex):
                 row.highlight = True
+                matched = True
             else:
                 row.highlight = False
+        return matched
+
+    def is_match(self, test_string, compiled_regex):
+        # This method is like an inverted version of ExcludeList.is_excluded()
+        if not compiled_regex:
+            return False
+        matched = False
+
+        # Test only the filename portion of the path
+        if not has_sep(compiled_regex.pattern) and sep in test_string:
+            filename = test_string.rsplit(sep, 1)[1]
+            if compiled_regex.fullmatch(filename):
+                matched = True
+            return matched
+
+        # Test the entire path + filename
+        if compiled_regex.fullmatch(test_string):
+            matched = True
         return matched
 
     def reset_rows_highlight(self):

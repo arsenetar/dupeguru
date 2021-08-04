@@ -188,6 +188,28 @@ class TestCaseListEmpty:
         self.exclude_list.rename(regex_renamed_compilable, regex_compilable)
         eq_(self.exclude_list.is_marked(regex_compilable), True)
 
+    def test_rename_regex_file_to_path(self):
+        regex = r".*/one.*"
+        if ISWINDOWS:
+            regex = r".*\\one.*"
+        regex2 = r".*one.*"
+        self.exclude_list.add(regex)
+        self.exclude_list.mark(regex)
+        compiled_re = [x.pattern for x in self.exclude_list._excluded_compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex in compiled_re
+        assert regex not in files_re
+        assert regex in paths_re
+        self.exclude_list.rename(regex, regex2)
+        compiled_re = [x.pattern for x in self.exclude_list._excluded_compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex not in compiled_re
+        assert regex2 in compiled_re
+        assert regex2 in files_re
+        assert regex2 not in paths_re
+
     def test_restore_default(self):
         """Only unmark previously added regexes and mark the pre-defined ones"""
         regex = r"one"
@@ -213,12 +235,146 @@ class TestCaseListEmpty:
         eq_(len(default_regexes), len(self.exclude_list.compiled))
 
 
+class TestCaseListEmptyUnion(TestCaseListEmpty):
+    """Same but with union regex"""
+    def setup_method(self, method):
+        self.app = DupeGuru()
+        self.app.exclude_list = ExcludeList(union_regex=True)
+        self.exclude_list = self.app.exclude_list
+
+    def test_add_mark_and_remove_regex(self):
+        regex1 = r"one"
+        regex2 = r"two"
+        self.exclude_list.add(regex1)
+        assert(regex1 in self.exclude_list)
+        self.exclude_list.add(regex2)
+        self.exclude_list.mark(regex1)
+        self.exclude_list.mark(regex2)
+        eq_(len(self.exclude_list), 2)
+        eq_(len(self.exclude_list.compiled), 1)
+        compiled_files = [x for x in self.exclude_list.compiled_files]
+        eq_(len(compiled_files), 1)  # Two patterns joined together into one
+        assert "|" in compiled_files[0].pattern
+        self.exclude_list.remove(regex2)
+        assert(regex2 not in self.exclude_list)
+        eq_(len(self.exclude_list), 1)
+
+    def test_rename_regex_file_to_path(self):
+        regex = r".*/one.*"
+        if ISWINDOWS:
+            regex = r".*\\one.*"
+        regex2 = r".*one.*"
+        self.exclude_list.add(regex)
+        self.exclude_list.mark(regex)
+        eq_(len([x for x in self.exclude_list]), 1)
+        compiled_re = [x.pattern for x in self.exclude_list.compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex in compiled_re
+        assert regex not in files_re
+        assert regex in paths_re
+        self.exclude_list.rename(regex, regex2)
+        eq_(len([x for x in self.exclude_list]), 1)
+        compiled_re = [x.pattern for x in self.exclude_list.compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex not in compiled_re
+        assert regex2 in compiled_re
+        assert regex2 in files_re
+        assert regex2 not in paths_re
+
+    def test_restore_default(self):
+        """Only unmark previously added regexes and mark the pre-defined ones"""
+        regex = r"one"
+        self.exclude_list.add(regex)
+        self.exclude_list.mark(regex)
+        self.exclude_list.restore_defaults()
+        eq_(len(default_regexes), self.exclude_list.marked_count)
+        # added regex shouldn't be marked
+        eq_(self.exclude_list.is_marked(regex), False)
+        # added regex shouldn't be in compiled list either
+        compiled = [x for x in self.exclude_list.compiled]
+        assert regex not in compiled
+        # Need to escape both to get the same strings after compilation
+        compiled_escaped = set([x.encode('unicode-escape').decode() for x in compiled[0].pattern.split("|")])
+        default_escaped = set([x.encode('unicode-escape').decode() for x in default_regexes])
+        assert compiled_escaped == default_escaped
+        eq_(len(default_regexes), len(compiled[0].pattern.split("|")))
+
+
 class TestCaseDictEmpty(TestCaseListEmpty):
     """Same, but with dictionary implementation"""
     def setup_method(self, method):
         self.app = DupeGuru()
         self.app.exclude_list = ExcludeDict(union_regex=False)
         self.exclude_list = self.app.exclude_list
+
+
+class TestCaseDictEmptyUnion(TestCaseDictEmpty):
+    """Same, but with union regex"""
+    def setup_method(self, method):
+        self.app = DupeGuru()
+        self.app.exclude_list = ExcludeDict(union_regex=True)
+        self.exclude_list = self.app.exclude_list
+
+    def test_add_mark_and_remove_regex(self):
+        regex1 = r"one"
+        regex2 = r"two"
+        self.exclude_list.add(regex1)
+        assert(regex1 in self.exclude_list)
+        self.exclude_list.add(regex2)
+        self.exclude_list.mark(regex1)
+        self.exclude_list.mark(regex2)
+        eq_(len(self.exclude_list), 2)
+        eq_(len(self.exclude_list.compiled), 1)
+        compiled_files = [x for x in self.exclude_list.compiled_files]
+        # two patterns joined into one
+        eq_(len(compiled_files), 1)
+        self.exclude_list.remove(regex2)
+        assert(regex2 not in self.exclude_list)
+        eq_(len(self.exclude_list), 1)
+
+    def test_rename_regex_file_to_path(self):
+        regex = r".*/one.*"
+        if ISWINDOWS:
+            regex = r".*\\one.*"
+        regex2 = r".*one.*"
+        self.exclude_list.add(regex)
+        self.exclude_list.mark(regex)
+        marked_re = [x for marked, x in self.exclude_list if marked]
+        eq_(len(marked_re), 1)
+        compiled_re = [x.pattern for x in self.exclude_list.compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex in compiled_re
+        assert regex not in files_re
+        assert regex in paths_re
+        self.exclude_list.rename(regex, regex2)
+        compiled_re = [x.pattern for x in self.exclude_list.compiled]
+        files_re = [x.pattern for x in self.exclude_list.compiled_files]
+        paths_re = [x.pattern for x in self.exclude_list.compiled_paths]
+        assert regex not in compiled_re
+        assert regex2 in compiled_re
+        assert regex2 in files_re
+        assert regex2 not in paths_re
+
+    def test_restore_default(self):
+        """Only unmark previously added regexes and mark the pre-defined ones"""
+        regex = r"one"
+        self.exclude_list.add(regex)
+        self.exclude_list.mark(regex)
+        self.exclude_list.restore_defaults()
+        eq_(len(default_regexes), self.exclude_list.marked_count)
+        # added regex shouldn't be marked
+        eq_(self.exclude_list.is_marked(regex), False)
+        # added regex shouldn't be in compiled list either
+        compiled = [x for x in self.exclude_list.compiled]
+        assert regex not in compiled
+        # Need to escape both to get the same strings after compilation
+        compiled_escaped = set([x.encode('unicode-escape').decode() for x in compiled[0].pattern.split("|")])
+        default_escaped = set([x.encode('unicode-escape').decode() for x in default_regexes])
+        assert compiled_escaped == default_escaped
+        eq_(len(default_regexes), len(compiled[0].pattern.split("|")))
 
 
 def split_union(pattern_object):

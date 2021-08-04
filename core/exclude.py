@@ -81,7 +81,7 @@ class ExcludeList(Markable):
             yield self.is_marked(regex), regex
 
     def __contains__(self, item):
-        return self.isExcluded(item)
+        return self.has_entry(item)
 
     def __len__(self):
         """Returns the total number of regexes regardless of mark status."""
@@ -173,7 +173,9 @@ class ExcludeList(Markable):
                 [x for x in self._excluded_compiled if not has_sep(x.pattern)]
             self._cached_compiled_paths =\
                 [x for x in self._excluded_compiled if has_sep(x.pattern)]
+            self._dirty = False
             return
+
         marked_count = [x for marked, x in self if marked]
         # If there is no item, the compiled Pattern will be '' and match everything!
         if not marked_count:
@@ -197,14 +199,14 @@ class ExcludeList(Markable):
             else:
                 self._cached_compiled_union_paths =\
                     (re.compile('|'.join(paths_marked)),)
+        self._dirty = False
 
     @property
     def compiled(self):
         """Should be used by other classes to retrieve the up-to-date list of patterns."""
         if self._use_union:
             if self._dirty:
-                self.build_compiled_caches(True)
-                self._dirty = False
+                self.build_compiled_caches(self._use_union)
             return self._cached_compiled_union_all
         return self._excluded_compiled
 
@@ -215,8 +217,7 @@ class ExcludeList(Markable):
         The interface should be expected to be a generator, even if it returns only
         one item (one Pattern in the union case)."""
         if self._dirty:
-            self.build_compiled_caches(True if self._use_union else False)
-            self._dirty = False
+            self.build_compiled_caches(self._use_union)
         return self._cached_compiled_union_files if self._use_union\
             else self._cached_compiled_files
 
@@ -224,8 +225,7 @@ class ExcludeList(Markable):
     def compiled_paths(self):
         """Returns patterns with only separators in them, for more precise filtering."""
         if self._dirty:
-            self.build_compiled_caches(True if self._use_union else False)
-            self._dirty = False
+            self.build_compiled_caches(self._use_union)
         return self._cached_compiled_union_paths if self._use_union\
             else self._cached_compiled_paths
 
@@ -233,7 +233,7 @@ class ExcludeList(Markable):
     def add(self, regex, forced=False):
         """This interface should throw exceptions if there is an error during
         regex compilation"""
-        if self.isExcluded(regex):
+        if self.has_entry(regex):
             # This exception should never be ignored
             raise AlreadyThereException()
         if regex in forbidden_regexes:
@@ -256,11 +256,26 @@ class ExcludeList(Markable):
         """Returns the number of marked regexes only."""
         return len([x for marked, x in self if marked])
 
-    def isExcluded(self, regex):
+    def has_entry(self, regex):
         for item in self._excluded:
             if regex == item[0]:
                 return True
         return False
+
+    def is_excluded(self, dirname, filename):
+        """Return True if the file or the absolute path to file is supposed to be
+        filtered out, False otherwise."""
+        matched = False
+        for expr in self.compiled_files:
+            if expr.fullmatch(filename):
+                matched = True
+                break
+        if not matched:
+            for expr in self.compiled_paths:
+                if expr.fullmatch(dirname + sep + filename):
+                    matched = True
+                    break
+        return matched
 
     def remove(self, regex):
         for item in self._excluded:
@@ -286,9 +301,11 @@ class ExcludeList(Markable):
                 break
         if not found:
             return
-        if is_compilable and was_marked:
-            # Not marked by default when added, add it back
-            self.mark(newregex)
+        if is_compilable:
+            self._add_compiled(newregex)
+            if was_marked:
+                # Not marked by default when added, add it back
+                self.mark(newregex)
 
     # def change_index(self, regex, new_index):
     # """Internal list must be a list, not dict."""
@@ -300,7 +317,7 @@ class ExcludeList(Markable):
             if regex not in default_regexes:
                 self.unmark(regex)
         for default_regex in default_regexes:
-            if not self.isExcluded(default_regex):
+            if not self.has_entry(default_regex):
                 self.add(default_regex)
             self.mark(default_regex)
 
@@ -399,9 +416,9 @@ class ExcludeDict(ExcludeList):
         if self._use_union:
             return
         try:
-            self._excluded_compiled.add(self._excluded[regex]["compiled"])
+            self._excluded_compiled.add(self._excluded.get(regex).get("compiled"))
         except Exception as e:
-            logging.warning(f"Exception while adding regex {regex} to compiled set: {e}")
+            logging.error(f"Exception while adding regex {regex} to compiled set: {e}")
             return
 
     def is_compilable(self, regex):
@@ -425,7 +442,7 @@ class ExcludeDict(ExcludeList):
             "compiled": compiled
         }
 
-    def isExcluded(self, regex):
+    def has_entry(self, regex):
         if regex in self._excluded.keys():
             return True
         return False
@@ -451,14 +468,16 @@ class ExcludeDict(ExcludeList):
         previous = self._excluded.pop(regex)
         iscompilable, error, compiled = self.compile_re(newregex)
         self._excluded[newregex] = {
-            "index": previous["index"],
+            "index": previous.get('index'),
             "compilable": iscompilable,
             "error": error,
             "compiled": compiled
         }
         self._remove_compiled(regex)
-        if was_marked and iscompilable:
-            self.mark(newregex)
+        if iscompilable:
+            self._add_compiled(newregex)
+            if was_marked:
+                self.mark(newregex)
 
     def save_to_xml(self, outfile):
         """Create a XML file that can be used by load_from_xml.
@@ -492,8 +511,8 @@ def ordered_keys(_dict):
 
 
 if ISWINDOWS:
-    def has_sep(x):
-        return '\\' + sep in x
+    def has_sep(regexp):
+        return '\\' + sep in regexp
 else:
-    def has_sep(x):
-        return sep in x
+    def has_sep(regexp):
+        return sep in regexp

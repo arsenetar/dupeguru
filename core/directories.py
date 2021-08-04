@@ -108,18 +108,9 @@ class Directories:
                         found_files = []
                         # print(f"len of files: {len(files)} {files}")
                         for f in files:
-                            found = False
-                            for expr in self._exclude_list.compiled_files:
-                                if expr.match(f):
-                                    found = True
-                                    break
-                            if not found:
-                                for expr in self._exclude_list.compiled_paths:
-                                    if expr.match(root + os.sep + f):
-                                        found = True
-                                        break
-                            if not found:
-                                found_files.append(fs.get_file(rootPath + f, fileclasses=fileclasses))
+                            if not self._exclude_list.is_excluded(root, f):
+                                found_files.append(fs.get_file(rootPath + f,
+                                                               fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
