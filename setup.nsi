@@ -7,7 +7,7 @@
 ; NOTE:
 ; If SOURCEPATH is not set it will default to build (uses subdir based on app).
 ;==============================================================================
-
+Unicode true
 ; Compression Setting
 SetCompressor /SOLID lzma
 ; General Headers
