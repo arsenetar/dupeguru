@@ -44,71 +44,75 @@ msgid "Go to Github"
 msgstr ""
 
 #: qtlib\preferences.py:23
-msgid "English"
-msgstr ""
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr ""
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr ""
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr ""
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: qtlib\preferences.py:28
 msgid "Czech"
 msgstr ""
 
-#: qtlib\preferences.py:29
-msgid "Italian"
+#: qtlib\preferences.py:24
+msgid "German"
 msgstr ""
 
-#: qtlib\preferences.py:30
-msgid "Armenian"
+#: qtlib\preferences.py:25
+msgid "Greek"
 msgstr ""
 
-#: qtlib\preferences.py:31
-msgid "Korean"
+#: qtlib\preferences.py:26
+msgid "English"
 msgstr ""
 
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr ""
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr ""
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr ""
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr ""
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr ""
-
-#: qtlib\preferences.py:37
+#: qtlib\preferences.py:27
 msgid "Spanish"
 msgstr ""
 
+#: qtlib\preferences.py:28
+msgid "French"
+msgstr ""
+
+#: qtlib\preferences.py:29
+msgid "Armenian"
+msgstr ""
+
+#: qtlib\preferences.py:30
+msgid "Italian"
+msgstr ""
+
+#: qtlib\preferences.py:31
+msgid "Japanese"
+msgstr ""
+
+#: qtlib\preferences.py:32
+msgid "Korean"
+msgstr ""
+
+#: qtlib\preferences.py:33
+msgid "Dutch"
+msgstr ""
+
+#: qtlib\preferences.py:34
+msgid "Polish"
+msgstr ""
+
+#: qtlib\preferences.py:35
+msgid "Brazilian"
+msgstr ""
+
+#: qtlib\preferences.py:36
+msgid "Russian"
+msgstr ""
+
+#: qtlib\preferences.py:37
+msgid "Turkish"
+msgstr ""
+
 #: qtlib\preferences.py:38
-msgid "Vietnamese"
+msgid "Ukrainian"
 msgstr ""
 
 #: qtlib\preferences.py:39
-msgid "Japanese"
+msgid "Vietnamese"
+msgstr ""
+
+#: qtlib\preferences.py:40
+msgid "Chinese (Simplified)"
 msgstr ""
 
 #: qtlib\recent.py:54

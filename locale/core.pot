@@ -84,7 +84,7 @@ msgstr ""
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:534 core\app.py:803 core\app.py:813
 msgid "Couldn't write to file: {}"
 msgstr ""
 
@@ -96,27 +96,27 @@ msgstr ""
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:774
+#: core\app.py:776
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:821
+#: core\app.py:823
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:835
+#: core\app.py:837
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:891
+#: core\app.py:893
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\engine.py:244 core\engine.py:288
+#: core\engine.py:255 core\engine.py:299
 msgid "0 matches found"
 msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
+#: core\engine.py:273 core\engine.py:307
 msgid "%d matches found"
 msgstr ""
 
@@ -212,11 +212,11 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core\results.py:142
+#: core\results.py:144
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr ""
 
-#: core\results.py:149
+#: core\results.py:151
 msgid " filter: %s"
 msgstr ""
 
