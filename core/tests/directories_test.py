@@ -474,14 +474,17 @@ files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled
         assert "file_which_shouldnt_match" in files
 
         # This should match the directory only
-        regex6 = r".*/subdir.*"
+        regex6 = r".*/.*subdir.*/.*"
         if ISWINDOWS:
-            regex6 = r".*\\.*subdir.*"
+            regex6 = r".*\\.*subdir.*\\.*"
+        assert os.sep in regex6
         self.d._exclude_list.rename(regex5, regex6)
         self.d._exclude_list.remove(regex1)
+        eq_(len(self.d._exclude_list.compiled), 1)
         assert regex1 not in self.d._exclude_list
         assert regex5 not in self.d._exclude_list
         assert self.d._exclude_list.error(regex6) is None
+        assert regex6 in self.d._exclude_list
         # This still should not be affected
         eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)
         files = self.get_files_and_expect_num_result(5)
@@ -490,6 +493,8 @@ files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled
         assert "unwanted_subdirfile.gif" not in files
         # This file under "subdar" directory should not be filtered out
         assert "file_ending_with_subdir" in files
+        # This file is in a directory that should be filtered out
+        assert "file_which_shouldnt_match" not in files
 
     def test_japanese_unicode(self, tmpdir):
         p1 = Path(str(tmpdir))
