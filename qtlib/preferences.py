@@ -20,23 +20,24 @@ tr = trget("qtlib")
 
 def get_langnames():
     return {
-        "en": tr("English"),
-        "fr": tr("French"),
+        "cs": tr("Czech"),
         "de": tr("German"),
         "el": tr("Greek"),
-        "zh_CN": tr("Chinese (Simplified)"),
-        "cs": tr("Czech"),
-        "it": tr("Italian"),
+        "en": tr("English"),
+        "es": tr("Spanish"),
+        "fr": tr("French"),
         "hy": tr("Armenian"),
+        "it": tr("Italian"),
+        "ja": tr("Japanese"),
         "ko": tr("Korean"),
-        "ru": tr("Russian"),
-        "uk": tr("Ukrainian"),
         "nl": tr("Dutch"),
         "pl_PL": tr("Polish"),
         "pt_BR": tr("Brazilian"),
-        "es": tr("Spanish"),
+        "ru": tr("Russian"),
+        "tr": tr("Turkish"),
+        "uk": tr("Ukrainian"),
         "vi": tr("Vietnamese"),
-        "ja": tr("Japanese"),
+        "zh_CN": tr("Chinese (Simplified)"),
     }
 
 

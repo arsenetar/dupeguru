@@ -46,40 +46,27 @@ def set_tr(new_tr, new_trget=None):
 
 
 def get_locale_name(lang):
-    if ISWINDOWS:
-        # http://msdn.microsoft.com/en-us/library/39cwe7zf(vs.71).aspx
-        LANG2LOCALENAME = {
-            "cs": "czy",
-            "de": "deu",
-            "el": "grc",
-            "es": "esn",
-            "fr": "fra",
-            "it": "ita",
-            "ko": "korean",
-            "nl": "nld",
-            "pl_PL": "polish_poland",
-            "pt_BR": "ptb",
-            "ru": "rus",
-            "zh_CN": "chs",
-        }
-    else:
-        LANG2LOCALENAME = {
-            "cs": "cs_CZ",
-            "de": "de_DE",
-            "el": "el_GR",
-            "es": "es_ES",
-            "fr": "fr_FR",
-            "it": "it_IT",
-            "nl": "nl_NL",
-            "hy": "hy_AM",
-            "ko": "ko_KR",
-            "pl_PL": "pl_PL",
-            "pt_BR": "pt_BR",
-            "ru": "ru_RU",
-            "uk": "uk_UA",
-            "vi": "vi_VN",
-            "zh_CN": "zh_CN",
-        }
+    # Removed old conversion code as windows seems to support these
+    LANG2LOCALENAME = {
+        "cs": "cs_CZ",
+        "de": "de_DE",
+        "el": "el_GR",
+        "en": "en",
+        "es": "es_ES",
+        "fr": "fr_FR",
+        "hy": "hy_AM",
+        "it": "it_IT",
+        "ja": "ja_JP",
+        "ko": "ko_KR",
+        "nl": "nl_NL",
+        "pl_PL": "pl_PL",
+        "pt_BR": "pt_BR",
+        "ru": "ru_RU",
+        "tr": "tr_TR",
+        "uk": "uk_UA",
+        "vi": "vi_VN",
+        "zh_CN": "zh_CN",
+    }
     if lang not in LANG2LOCALENAME:
         return None
     result = LANG2LOCALENAME[lang]

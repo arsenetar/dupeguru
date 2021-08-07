@@ -41,23 +41,24 @@ from .preferences import Preferences
 tr = trget("ui")
 
 SUPPORTED_LANGUAGES = [
-    "en",
-    "fr",
+    "cs",
     "de",
     "el",
-    "zh_CN",
-    "cs",
-    "it",
-    "hy",
-    "ru",
-    "uk",
-    "pt_BR",
-    "vi",
-    "pl_PL",
-    "ko",
+    "en",
     "es",
-    "nl",
+    "fr",
+    "hy",
+    "it",
     "ja",
+    "ko",
+    "nl",
+    "pl_PL",
+    "pt_BR",
+    "ru",
+    "tr",
+    "uk",
+    "vi",
+    "zh_CN",
 ]
 
 

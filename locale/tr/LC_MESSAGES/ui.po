@@ -1,371 +1,371 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
-# Bas <duvel3@gmail.com>, 2021
+# Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Bas <duvel3@gmail.com>, 2021\n"
-"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
-"Language: nl\n"
+"Last-Translator: Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021\n"
+"Language-Team: Turkish (https://www.transifex.com/voltaicideas/teams/116153/tr/)\n"
+"Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: qt/app.py:81
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr "Çık"
 
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr "Opties"
+msgstr "Seçenekler"
 
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr "Overslaan lijst"
+msgstr "Yoksayılanlar Listesi"
 
 #: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
-msgstr "Afbeelding cache leegmaken"
+msgstr "Resim Önbelliğini Temizle"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
-msgstr "dupeGuru Help"
+msgstr "dupeGuru Yardımı"
 
 #: qt/app.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
-msgstr "Over dupeGuru"
+msgstr "dupeGuru Hakkında"
 
 #: qt/app.py:87
 msgid "Open Debug Log"
-msgstr "Debug Log openen"
+msgstr "Hata Ayıklama Günlüğünü Aç"
 
 #: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
-msgstr "Weet je zeker dat je de afbeeldings-analyse cache wilt verwijderen"
+msgstr ""
+"Önbelleğe alınmış tüm resim analizlerinizi gerçekten kaldırmak istiyor "
+"musunuz?"
 
 #: qt/app.py:184
 msgid "Picture cache cleared."
-msgstr "Afbeelding cache leeggemaakt."
+msgstr "Resim önbelleği temizlendi."
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr "{} bestand (*.{})"
+msgstr "{} dosya (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr "Verwijderopties"
+msgstr "Silme Seçenekleri"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr "link verwijderde bestanden"
+msgstr "Silinen dosyaları bağla"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
-"Na het verwijderen van een dubbeling, een link leggen tussen het verwijderde"
-" bestand en het referentie bestand"
+"Bir kopyayı sildikten sonra, silinen dosyayı değiştirmek için referans "
+"dosyayı hedefleyen bir bağlantı yerleştirin."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
-msgstr "harde link"
+msgstr "Hard link"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr "symbolische link"
+msgstr "Sembolik link"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
-msgstr "(niet ondersteund)"
+msgstr "(desteklenmiyor)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr "Bestanden direct verwijderen"
+msgstr "Doğrudan dosyaları sil"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"In plaats van de bestanden naar de prullenbak te verplaats worden ze direct "
-"verwijderd. Deze optie wordt normaal alleen gekozen als een oplossing als de"
-" normale verwijderings methode niet werkt."
+"Dosyaları Geri Dönüşüm Kutusuna göndermek yerine, onları doğrudan sil. Bu "
+"seçenek genellikle normal silme yöntemi çalışmadığında geçici bir çözüm "
+"olarak kullanılır."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr "Doorgaan"
+msgstr "Devam Et"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
-msgstr "Afbreken"
+msgstr "İptal Et"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
-msgstr "Attributen"
+msgstr "Özellik"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
-msgstr "Geselecteerd"
+msgstr "Seçili"
 
 #: qt/details_table.py:16 qt/directories_model.py:24
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
-msgstr "Referentie"
+msgstr "Referans"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
-msgstr "Resultaten inlezen..."
+msgstr "Sonuçları Yükle..."
 
 #: qt/directories_dialog.py:65 cocoa/en.lproj/Localizable.strings:0
 msgid "Results Window"
-msgstr "Resultaten venster"
+msgstr "Sonuç Penceresi"
 
 #: qt/directories_dialog.py:66
 msgid "Add Folder..."
-msgstr "Folder toevoegen..."
+msgstr "Dizini Ekle..."
 
 #: qt/directories_dialog.py:74 qt/result_window.py:100
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "File"
-msgstr "Bestand"
+msgstr "Dosya"
 
 #: qt/directories_dialog.py:76 qt/result_window.py:108
 msgid "View"
-msgstr "Beeld"
+msgstr "Görüntüle"
 
 #: qt/directories_dialog.py:78 qt/result_window.py:110
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Help"
-msgstr "Help"
+msgstr "Yardım"
 
 #: qt/directories_dialog.py:80 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
-msgstr "Recente resultaten inlezen"
+msgstr "Son Sonuçları Yükle"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr "Toepassingsmodus:"
+msgstr "Uygulama Modu:"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr "Muziek"
+msgstr "Müzik"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr "Beeld"
+msgstr "Resim"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr "Standaard"
+msgstr "Standart"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr "Onderzoeks type"
+msgstr "Tarama Türü:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr "Meer Opties"
+msgstr "Daha Fazla Seçenek"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr ""
-"Selecteer de folders die onderzocht moeten worden en druk op \"onderzoeken\""
+msgstr "Taranacak dizinleri seçin ve \"Tara\"ya basın."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
-msgstr "Resultaten laden"
+msgstr "Sonuçları Yükle"
 
 #: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
-msgstr "onderzoeken"
+msgstr "Tara"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr "niet opgeslagen resultaten"
+msgstr "Kaydedilmeyen sonuçlar"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr ""
-"Je hebt nog niet opgeslagen resultaten, weet je zeker dat je wilt afsluiten?"
+msgstr "Kaydedilmeyen sonuçlarınız var, gerçekten çıkmak istiyor musunuz?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr "Selecteer een folder die wil toevoegen aan de onderzoekslijst"
+msgstr "Tarama listesine eklemek için bir klasör seçin"
 
 #: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr "Selecteer een resultaat bestand om te openen"
+msgstr "Yüklenecek bir sonuç dosyası seçin"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
-msgstr "Alle bestanden (*.*)"
+msgstr "Tüm Dosyalar (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr "dupeGuru resultaten (*.dupeguru)"
+msgstr "dupeGuru Sonuçları (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
-msgstr "Nieuw onderzoek starten"
+msgstr "Yeni bir tarama başlat"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
 msgstr ""
-"Je hebt nog niet opgeslagen resultaten, weet je zeker dat je verder wilt?"
+"Kaydedilmeyen sonuçlarınız var, gerçekten devam etmek istiyor musunuz?"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
-msgstr "Naam"
+msgstr "İsim"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "State"
-msgstr "Status"
+msgstr "Durum"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr "Uitgesloten"
+msgstr "Hariç Tutulan"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
-msgstr "Normaal"
+msgstr "Normal"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr "Verwijder selectie"
+msgstr "Seçili Öğeyi Kaldır"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr "opheffen"
+msgstr "Temizle"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close"
-msgstr "sluiten"
+msgstr "Kapat"
 
 #: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
 #: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details"
-msgstr "details"
+msgstr "Ayrıntılar"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
-msgstr "Labels die onderzocht moeten worden"
+msgstr "Taranacak etiketler:"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
-msgstr "Nummer"
+msgstr "Parça"
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
-msgstr "Artiest"
+msgstr "Sanatçı"
 
 #: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
 msgid "Album"
-msgstr "Album"
+msgstr "Albüm"
 
 #: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
 msgid "Title"
-msgstr "Titel"
+msgstr "Başlık"
 
 #: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
 msgid "Genre"
-msgstr "Genre"
+msgstr "Tarz"
 
 #: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Year"
-msgstr "Jaar"
+msgstr "Yıl"
 
 #: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Word weighting"
-msgstr "Word gewicht"
+msgstr "Kelimeleri tartma"
 
 #: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
-msgstr "Vergelijk gelijkwaardige woorden"
+msgstr "Benzer kelimeleri eşleştir"
 
 #: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
 #: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
-msgstr "Bestandsformaten mogen doorelkaar gebruikt worden"
+msgstr "Dosya türünü karıştırabilir"
 
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
-msgstr "Gebruik \"reguliere expressies\" tijdens het filteren"
+msgstr "Filtrelerken normal ifadeler kullan"
 
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
-msgstr "Verwijder lege folders tijdens weggooien of verplaatsen"
+msgstr "Silme veya taşıma sırasında boş klasörleri kaldır"
 
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Negeer dubbelingen die hard gelinkt zijn aan het zelfde bestand"
+msgstr "Aynı dosyaya sabit bağlantı(hardlink) yapan kopyaları yoksay"
 
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
-msgstr "Debug stand (herstart is nodig)"
+msgstr "Hata ayıklama modu (yeniden başlatma gerektirir)"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr "Afbeeldingen met afwijkende afmetingen toch gebruiken bij onderzoek"
+msgstr "Farklı boyutlardaki resimleri eşleştir"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr "Filter sterkte"
+msgstr "Filtre Sertliği:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr "Meer resultaten"
+msgstr "Daha Fazla Sonuç"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr "Minder resultaten"
+msgstr "Daha Az Sonuç"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr "Font grote:"
+msgstr "Yazı boyutu:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr "Taal:"
+msgstr "Dil:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr "Kopieeren en verplaatsen"
+msgstr "Kopyala ve Taşı:"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
-msgstr "Direct in bestemming"
+msgstr "Doğrudan hedef klasöre"
 
 #: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
-msgstr "Hercreeer relatieve bestandslocatie"
+msgstr "Göreli yolu yeniden oluştur"
 
 #: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
-msgstr "Creer volledige bestands locatie"
+msgstr "Mutlak yolu yeniden oluştur"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "Aangepaste opdracht (opties: %d voor dubbeling, %r voor referentie):"
+msgstr "Özel Komut (argümanlar: %d kopya için, %r referans için):"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "dupeGuru moet herstart worden om de taal wijziging door te voeren"
+msgstr ""
+"Dil değişiklerinin etkili olması için dupeGuru'nun yeniden başlatılması "
+"gerekir."
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
-msgstr "Her-priotarisatie van dubbelingen"
+msgstr "Kopyaları yeniden önceliklendirin"
 
 #: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -373,13 +373,13 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Voeg criteria toe aan de rechter kant en klik op OK om dubbeligen die het "
-"meeste overeenkomen met deze criteria te verplaatsen naar de overeenkomende "
-"referentie groep. Lees het help bestand voor meer informatie. "
+"Sağdaki kutuya kriter ekleyin ve bu kriterlere en iyi uyan kopyaları ilgili "
+"grubun referans konumuna göndermek için Tamam'a tıklayın. Daha fazla bilgi "
+"için yardım dosyasını okuyun."
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "Problemen!"
+msgstr "Problemler!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -387,134 +387,134 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"Er waren problemen bij het verwerken van sommige (of alle) bestanden. De "
-"oorzaak hiervan staat beschreven in de tabel hieronder. Deze bestanden "
-"bestanden zijn niet verwijderd uit de resultaten."
+"Dosyaların bazılarını (veya tümünü) işlerken sorunlar oluştu. Bu sorunların "
+"nedeni aşağıdaki tabloda açıklanmıştır. Bu dosyalar sonuçlarınızdan "
+"kaldırılmadı."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
-msgstr "Toon selectie"
+msgstr "Seçili Öğeyi Göster"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
-msgstr "Acties"
+msgstr "Eylemler"
 
 #: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
-msgstr "Alleen dubbelingen tonen"
+msgstr "Sadece Kopyaları Göster"
 
 #: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
-msgstr "Alleen het verschil tonen"
+msgstr "Delta Değerlerini Göster"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "Verplaats de gemarkeerde bestanden naar de prullenbak"
+msgstr "İşaretlileri Geri Dönüşüm Kutusuna Gönder..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "Verplaats gemarkeerde naar ..."
+msgstr "İşaretlileri Şuraya Taşı..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "Kopieer gemarkeerde naar ..."
+msgstr "İşaretlileri Şuraya Kopyala..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr "Verwijder gemarkeerde regels uit het resultaat"
+msgstr "Sonuçlardan İşaretlileri Kaldır"
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr "Resultaat her-priotariseren"
+msgstr "Sonuçları yeniden önceliklendirin..."
 
 #: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
-msgstr "Verwijder geselecteerde uit het resultaat"
+msgstr "Sonuçlardan Seçili Öğeyi Kaldır"
 
 #: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
-msgstr "Voeg geselecteerde toe aan de overslaan lijst"
+msgstr "Seçili Öğeyi Yok Sayılanlar Listesine Ekle"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr "Maak van de selectie een referentie"
+msgstr "Seçili Öğeyi Referans Yap"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
-msgstr "Open de selectie met de standaard toepassing"
+msgstr "Seçili Öğeyi Varsayılan Uygulama ile Aç"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr "Open de folder van de selectie"
+msgstr "Seçili Öğenin Bulunduğu Klasörü Aç"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
-msgstr "Hernoem de selectie"
+msgstr "Seçili Öğeyi Yeniden Adlandır"
 
 #: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
-msgstr "Alles markeren"
+msgstr "Tümünü İşaretle"
 
 #: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
-msgstr "Niks markeren"
+msgstr "Hiçbirini İşaretleme"
 
 #: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
-msgstr "Markering omdraaien"
+msgstr "İşaretleri Tersine Çevir"
 
 #: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
-msgstr "Geselecteerde markeren"
+msgstr "Seçili Öğeyi İşaretle"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
-msgstr "Exporteer naar HTML"
+msgstr "HTML'ye Aktar"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr "Exporteer naar CSV"
+msgstr "CSV'ye Aktar"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr "Resultaten opslaan..."
+msgstr "Sonuçları Kaydet..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
-msgstr "Voer aangepaste opdracht uit"
+msgstr "Özel Komutu Çağır"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr "Markeer"
+msgstr "İşaret"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
-msgstr "Kolommen"
+msgstr "Sütunlar"
 
 #: qt/result_window.py:163
 msgid "Reset to Defaults"
-msgstr "Terug naar standaard instellingen"
+msgstr "Varsayılanlara Dön"
 
 #: qt/result_window.py:185
 msgid "{} Results"
-msgstr "{} resultaten"
+msgstr "{} Sonuçlar"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr "Alleen dubbelingen"
+msgstr "Sadece Kopyalar"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr "Verschillen"
+msgstr "Delta Değerleri"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr "Selecteerd een bestand om het resultaat op te slaan"
+msgstr "Sonuçlarınızı kaydetmek için bir dosya seçin"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr "Negeer bestanden kleiner dan"
+msgstr "Şu boyuttan küçük dosyaları yoksay"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
@@ -522,67 +522,67 @@ msgstr "KB"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr "%@ resultaten"
+msgstr "%@ Sonuçlar"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
-msgstr "Actie"
+msgstr "Eylem"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr "Nieuwe folder toevoegen..."
+msgstr "Yeni Klasör Ekle..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Advanced"
-msgstr "Geavanceerd"
+msgstr "Gelişmiş"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
-msgstr "automatisch controleren voor nieuwere versie"
+msgstr "Güncellemeleri otomatik olarak kontrol et"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Basic"
-msgstr "Basis"
+msgstr "Temel"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
-msgstr "Alles naar voren halen"
+msgstr "Tümünü Öne Getir"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr "Controleer  nieuwere versie"
+msgstr "Güncellemeleri kontrol et..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
-msgstr "Venster sluiten"
+msgstr "Pencereyi Kapat"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Copy"
-msgstr "kopieer"
+msgstr "Kopyala"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Aangepaste opdracht (opties: %d voor dubbeling, %r voor referentie):"
+msgstr "Özel komutlar (argümanlar: %d kopya için, %r referans için):"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
-msgstr "verwijder"
+msgstr "Kes"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Delta"
-msgstr "verschil"
+msgstr "Delta"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr "details van het geselecteerde bestand"
+msgstr "Seçili Dosyanın Ayrıntıları"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
-msgstr "details paneel"
+msgstr "Ayrıntılar Paneli"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr "Folders"
+msgstr "Dizinler"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
@@ -590,199 +590,199 @@ msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
-msgstr "dupeGuru voorkeuren"
+msgstr "dupeGuru Tercihleri"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr "dupeGuru resultaten"
+msgstr "dupeGuru Sonuçları"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr "dupeGuru website"
+msgstr "dupeGuru Websitesi"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "Düzenle"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr "Exporteer resultaat naar CSV"
+msgstr "Sonuçları CSV'ye Aktar"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
-msgstr "Exporteer resultaat naar XHTML"
+msgstr "Sonuçları XHTML'ye Aktar"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr "Minder resultaten"
+msgstr "Daha az sonuç"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
-msgstr "Filter"
+msgstr "Filtrele"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr "Filter sterkte"
+msgstr "Filtre sertliği:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr "Filter resultaten ..."
+msgstr "Sonuçları Filtrele..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
-msgstr "Folder selectie venster"
+msgstr "Klasör Seçim Penceresi"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr "Grootte lettertype:"
+msgstr "Yazı Tipi Boyutu:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
-msgstr "dupeGuru verbergen"
+msgstr "dupeGuru'yu Gizle"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide Others"
-msgstr "Overige verbergen"
+msgstr "Diğerlerini Gizle"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr "Negeer bestanden kleiner dan"
+msgstr "Şu boyuttan küçük dosyaları yoksay:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "laden vanuit bestand..."
+msgstr "Dosyadan yükle..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr "Minimaliseren"
+msgstr "Küçült"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
-msgstr "Modus"
+msgstr "Mod"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr "Meer resultaten"
+msgstr "Daha fazla sonuç"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
-msgstr "Ok"
+msgstr "Tamam"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr "Plakken"
+msgstr "Yapıştır"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr "Voorkeuren ..."
+msgstr "Tercihler..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr "Snel kijken"
+msgstr "Hızlı Bakış"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
-msgstr "dupeGuru afsluiten"
+msgstr "dupeGuru'dan Çık"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr "Terug naar standaard instellingen"
+msgstr "Varsayılana Dön"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr "Terug naar standaard instellingen"
+msgstr "Varsayılanlara Dön"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr "Toon bestand"
+msgstr "Ortaya Çıkar"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
-msgstr "Toon folder van bestand"
+msgstr "Seçili Öğeyi Finder'da Göster"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr "Alles selecteren"
+msgstr "Tümünü Seç"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "Verplaats de gemarkeerde bestanden naar de prullenbak"
+msgstr "İşaretlileri Geri Dönüşüm Kutusuna Gönder..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr "Services"
+msgstr "Hizmetler"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
-msgstr "Alles tonen"
+msgstr "Tümünü Göster"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
-msgstr "Start dubbelingen onderzoek"
+msgstr "Kopyaları Taramayı Başlat"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "de naam '%@\" bestaat al."
+msgstr "'%@' adı zaten var."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
-msgstr "Venster"
+msgstr "Pencere"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "Yakınlaştır"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr "Uitsluitingsfilters"
+msgstr "Harici Bırakma Filtreleri"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr "Scanresultaten"
+msgstr "Tarama Sonuçları"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr "Mappen laden ..."
+msgstr "Dizinleri Yükle..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr "Mappen opslaan ..."
+msgstr "Dizinleri Kaydet..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr "Selecteer een directory-bestand om te laden"
+msgstr "Yüklenecek bir dizin dosyası seçin"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "dupeGuru-mappen (*.dupegurudirs)"
+msgstr "dupeGuru Sonuçları  (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr "Selecteer een bestand om uw mappen in op te slaan"
+msgstr "Dizinlerinizi kaydetmek için bir dosya seçin"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr "dupeGuru-mappen (*.dupegurudirs)"
+msgstr "dupeGuru Dizinleri (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr "Toevoegen"
+msgstr "Ekle"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr "Herstel de standaardinstellingen"
+msgstr "Varsayılanları geri yükle"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr "Test tekenreeks"
+msgstr "Test dizisi"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr "Typ hier een reguliere expressie voor python..."
+msgstr "Buraya bir Python düzenli ifadesi yazın..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr "Typ hier een bestandssysteempad of bestandsnaam ..."
+msgstr "Buraya bir dosya sistemi yolu veya dosya adı yazın..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -791,22 +791,22 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Deze (hoofdlettergevoelige) reguliere expressies van Python filteren bestanden uit tijdens scans.<br>Mappen hebben ook hun <strong>standaardstatus</strong> ingesteld op \"Uitgesloten\" in het tabblad Mappen als hun naam overeenkomt met een van de reguliere expressies. <br>Voor elk verzameld bestand worden twee tests uitgevoerd op elk van hen om te bepalen of ze al dan niet moeten worden uitgefilterd:<br><li>1. Reguliere expressies zonder padscheidingsteken worden alleen vergeleken met de bestandsnaam.</li>\n"
-"<li>2. Reguliere expressies zonder padscheidingsteken worden vergeleken met het volledige pad naar het bestand.</li><br>\n"
-"Voorbeeld: als u de PNG-bestanden alleen uit de map \"My Pictures\" wilt filteren:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>U kunt de reguliere expressie testen met de functie teststring door er een neppad in te plakken:<br><code> C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
-"Overeenkomende reguliere expressies worden gemarkeerd.<br>Als er ten minste één highlight is, wordt het geteste pad genegeerd tijdens scans.<br><br>Mappen en bestanden die beginnen met een punt '.' worden standaard uitgefilterd.<br><br>"
+"Bu (büyük/küçük harfe duyarlı) python düzenli ifadeleri, taramalar sırasında dosyaları filtreleyecektir.<br>Dizinler ayrıca, adları seçilen düzenli ifadelerden biriyle eşleşirse, Dizinler sekmesinde<strong>varsayılan durumları</strong>Hariç Tutuldu olarak ayarlanır.<br>Toplanan her dosya için,  tamamen göz ardı edilip edilmeyeceğini belirlemek için dosyaların her birinin üzerinde iki test yapılır:<br><li>1. İçinde yol ayırıcı olmayan düzenli ifadeler yalnızca dosya adıyla karşılaştırılır.</li>\n"
+"<li>2. İçinde yol ayırıcı olmayan normal ifadeler, dosyanın tam yolu ile karşılaştırılacaktır.</li><br>\n"
+"Örnek: .PNG dosyalarını yalnızca \"My Pictures\" dizininden filtrelemek istiyorsanız:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Düzenli ifadeyi,  test dizesi özelliğinin içine sahte bir yol yapıştırarak test edebilirsiniz:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Eşleşen normal ifadeler vurgulanacaktır.<br>En az bir vurgu varsa, test edilen yol taramalar sırasında yok sayılır<br><br>Nokta '.' ile başlayan dizinler ve dosyalar varsayılan olarak filtrelenir.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr "Compilatiefout:"
+msgstr "Derleme hatası:"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr "Zoom vergroten"
+msgstr "Yakınlaştırmayı arttır"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr "Zoom verkleinen"
+msgstr "Yakınlaştırmayı azalt"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
@@ -814,7 +814,7 @@ msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr "Normale grootte"
+msgstr "Normal boyut"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
@@ -822,93 +822,93 @@ msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr "Beste pasvorm"
+msgstr "En uygun"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr "Fotocachemodus:"
+msgstr "Resim önbellek modu:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr "Overschrijf themapictogrammen in de werkbalk van de viewer"
+msgstr "Görüntüleyici araç çubuğundaki tema simgelerini geçersiz kıl"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
-"Gebruik onze eigen interne pictogrammen in plaats van die van de thema-"
-"engine"
+"Tema motoru tarafından sağlananlar yerine kendi dahili simgelerimizi "
+"kullanın"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr "Toon schuifbalken in afbeeldingsviewers"
+msgstr "Resim görüntüleyicilerde kaydırma çubuklarını göster"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
-"Als de weergegeven afbeelding niet in de viewport past, laat dan "
-"schuifbalken zien om de weergave rondom te omspannen"
+"Görüntülenen görüntü görünüm alanına sığmadığında, görünümü etrafa yaymak "
+"için kaydırma çubuklarını göster"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
 msgstr ""
-"Gebruik de standaardpositie voor de tabbalk (opnieuw opstarten vereist)"
+"Sekme çubuğu için varsayılan konumu kullan (yeniden başlatma gerektirir)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
-"Plaats de tabbalk onder het hoofdmenu in plaats van ernaast.\n"
-"Op MacOS vult de tabbalk in plaats daarvan de breedte van het venster."
+"Sekme çubuğunu ana menünün yanına değil altına yerleştirin\n"
+"MacOS'ta sekme çubuğu bunun yerine pencerenin genişliğini dolduracaktır."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr "Gebruik vet lettertype voor referenties"
+msgstr "Referanslar için kalın yazı tipi kullanın"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr "Referentie voorgrondkleur:"
+msgstr "Referans ön plan rengi:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr "Referentie achtergrondkleur:"
+msgstr "Referans arka plan rengi:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr "Delta voorgrondkleur:"
+msgstr "Delta ön plan rengi:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr "Toon de titelbalk en kan worden gedokt"
+msgstr "Başlık çubuğunu görüntüleyebilir ve sabitleyebilirsiniz."
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
-"Terwijl de titelbalk verborgen is, gebruik maken van de speciale toets op "
-"het zwevende venster slepen"
+"Başlık çubuğu gizliyken, kayan pencereyi etrafında sürüklemek için "
+"değiştirici tuşu kullanın."
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
 msgstr ""
-"De titelbalk kan alleen worden uitgeschakeld terwijl het venster is gedokt"
+"Başlık çubuğu yalnızca pencere sabitlendiğinde devre dışı bırakılabilir"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr "Verticale titelbalk"
+msgstr "Dikey başlık çubuğu"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr "Wijzig de titelbalk van horizontaal geplaatst, verticale links"
+msgstr "Başlık çubuğunu üstte yataydan sol tarafta dikey olarak değiştirin"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr "Tabbladbalk weergeven"
+msgstr "Sekme çubuğunu göster"
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -917,31 +917,31 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Deze (hoofdlettergevoelige) reguliere expressies van Python filteren bestanden uit tijdens scans.<br>Mappen hebben ook hun <strong>standaardstatus</strong> ingesteld op Uitgesloten in het tabblad Mappen als hun naam toevallig overeenkomt met een van de geselecteerde reguliere expressies. <br>Voor elk verzameld bestand worden twee tests uitgevoerd om te bepalen of het al dan niet volledig moet worden genegeerd:<br><li>1. Reguliere expressies zonder padscheidingsteken worden alleen vergeleken met de bestandsnaam.</li>\n"
-"<li>2. Reguliere expressies met ten minste één padscheidingsteken worden vergeleken met het volledige pad naar het bestand.</li><br>\n"
-"<br>Voorbeeld: als u .PNG-bestanden alleen uit de map \"My Pictures\" wilt filteren:<code>.*My\\sPictures\\\\.*\\.png</code><br><br>U kunt de reguliere expressie testen met de \"test string\" -knop nadat u een neppad in het testveld hebt geplakt:<br><code> C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
-"Overeenkomende reguliere expressies worden gemarkeerd. <br>Als er ten minste één markering is, wordt het geteste pad of de bestandsnaam genegeerd tijdens het scannen.<br><br>Mappen en bestanden die beginnen met een punt '.' worden standaard uitgefilterd.<br><br>"
+"Bu (büyük/küçük harfe duyarlı) python düzenli ifadeleri, taramalar sırasında dosyaları filtreleyecektir.<br>Dizinler ayrıca, adları seçilen düzenli ifadelerden biriyle eşleşirse, Dizinler sekmesinde <strong>varsayılan durumları</strong> Hariç Tutuldu olarak ayarlanır.<br>Toplanan her dosya için, tamamen göz ardı edilip edilmeyeceğini belirlemek için iki test yapılır:<br><li>1. İçinde yol ayırıcı olmayan düzenli ifadeler yalnızca dosya adıyla karşılaştırılacaktır.</li>\n"
+"<li>2. İçinde en az bir yol ayırıcı bulunan düzenli ifadeler, dosyanın tam yolu ile karşılaştırılacaktır.</li><br>\n"
+"<br>Örnek: .PNG dosyalarını yalnızca \"My Pictures\" dizininden filtrelemek istiyorsanız:<code>.*My\\sPictures\\\\.*\\.png</code><br><br>Test alanına sahte bir yol yapıştırdıktan sonra normal ifadeyi \"test dizesi\" düğmesiyle test edebilirsiniz:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Eşleşen normal ifadeler vurgulanacaktır.<br>En az bir vurgu varsa, test edilen yol veya dosya adı taramalar sırasında yok sayılır.<br><br>Nokta '.' ile başlayan dizinler ve dosyalar varsayılan olarak filtrelenir.<br><br>"
 
 #: qt\app.py:256
 msgid "Results"
-msgstr "Resultaten"
+msgstr "Sonuçlar"
 
 #: qt\preferences_dialog.py:150
 msgid "General Interface"
-msgstr "Algemene interface"
+msgstr "Genel Arayüz"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr "Resultaattabel"
+msgstr "Sonuç Tablosu"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
-msgstr "Details Venster"
+msgstr "Ayrıntı Penceresi"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
-msgstr "Algemeen"
+msgstr "Genel"
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
-msgstr "Scherm"
+msgstr "Görüntüle"

@@ -1,123 +1,122 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Bas <duvel3@gmail.com>, 2021
+# Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Bas <duvel3@gmail.com>, 2021\n"
-"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
-"Language: nl\n"
+"Last-Translator: Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021\n"
+"Language-Team: Turkish (https://www.transifex.com/voltaicideas/teams/116153/tr/)\n"
+"Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
 msgid "File Path"
-msgstr "Bestandspad"
+msgstr "Dosya Yolu"
 
 #: core\gui\problem_table.py:19
 msgid "Error Message"
-msgstr "Foutmelding"
+msgstr "Hata Mesajı"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
-msgstr "Tijdsduur"
+msgstr "Süre"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr "Bit hızı"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr "Sample frequentie"
+msgstr "Örnekleme hızı"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
 #: core\se\result_table.py:19
 msgid "Filename"
-msgstr "Bestandsnaam"
+msgstr "Dosya adı"
 
 #: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
 #: core\se\result_table.py:20
 msgid "Folder"
-msgstr "Map"
+msgstr "Dizin"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr "Grootte (MB)"
+msgstr "Boyut (MB)"
 
 #: core\me\result_table.py:22
 msgid "Time"
-msgstr "Tijd"
+msgstr "Zaman"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr "Sample Frequentie"
+msgstr "Örnekleme Hızı"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
 msgid "Kind"
-msgstr "Soort"
+msgstr "Tür"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
 #: core\prioritize.py:163 core\se\result_table.py:23
 msgid "Modification"
-msgstr "Aanpassing"
+msgstr "Düzenleme"
 
 #: core\me\result_table.py:27
 msgid "Title"
-msgstr "Titel"
+msgstr "Başlık"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr "Artiest"
+msgstr "Sanatçı"
 
 #: core\me\result_table.py:29
 msgid "Album"
-msgstr "Album"
+msgstr "Albüm"
 
 #: core\me\result_table.py:30
 msgid "Genre"
-msgstr "Genre"
+msgstr "Tarz"
 
 #: core\me\result_table.py:31
 msgid "Year"
-msgstr "Jaar"
+msgstr "Yıl"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr "Track nummer"
+msgstr "Parça Numarası"
 
 #: core\me\result_table.py:33
 msgid "Comment"
-msgstr "Commentaar"
+msgstr "Yorum"
 
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr "Zekerheid %"
+msgstr "Eşleşme oranı %"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr "Woorden gebruikt"
+msgstr "Kullanılan Kelimeler"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr "Dubbel telling"
+msgstr "Kopya Sayısı"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
-msgstr "Afmetingen"
+msgstr "Boyutlar"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr "Grootte (KB)"
+msgstr "Boyut (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr "EXIF Tijdstip"
+msgstr "EXIF Zaman damgası"
 
 #: core\prioritize.py:156
 msgid "Size"
-msgstr "Grootte"
+msgstr "Boyut"

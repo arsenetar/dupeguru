@@ -308,7 +308,7 @@ msgstr "Rimuovi le cartelle vuote dopo aver cancellato o spostato"
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Non creare gli hardlink per i duplicati verso il medesimo file"
+msgstr "Non considerare gli hardlink come duplicati"
 
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0

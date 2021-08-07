@@ -1,268 +1,258 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
-# Bas <duvel3@gmail.com>, 2021
+# Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Bas <duvel3@gmail.com>, 2021\n"
-"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
-"Language: nl\n"
+"Last-Translator: Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021\n"
+"Language-Team: Turkish (https://www.transifex.com/voltaicideas/teams/116153/tr/)\n"
+"Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: core\app.py:42
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr "Er zijn geen gemarkeerde dubbelingen. Er is niks gedaam"
+msgstr "İşaretlenmiş kopya yok. Hiçbir işlem yapılmadı."
 
 #: core\app.py:43
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr "Er zijn geen dubelingen geselecteerd. Er is niks gedaan"
+msgstr "Seçilmiş kopya yok. Hiçbir işlem yapılmadı."
 
 #: core\app.py:44
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
-"Je staat op het punt om zeer veel bestanden tegelijkertijd te openen. "
-"Afhankelijk met welke applicaties die bestanden worden geopened kan het best"
-" een rommeltje worden. Doorgaan?"
+"Aynı anda birçok dosyayı açmak üzeresiniz. Bu dosyaların neyle açıldığına "
+"bağlı olarak, bunu yapmak büyük karışıklık yaratabilir. Yine de devam "
+"edilsin mi?"
 
 #: core\app.py:71
 msgid "Scanning for duplicates"
-msgstr "Dubbelingen aan het opsporen"
+msgstr "Kopyalar için taranıyor"
 
 #: core\app.py:72
 msgid "Loading"
-msgstr "Laden"
+msgstr "Yükleniyor"
 
 #: core\app.py:73
 msgid "Moving"
-msgstr "Verplaatsen"
+msgstr "Taşınıyor"
 
 #: core\app.py:74
 msgid "Copying"
-msgstr "Kopiëren"
+msgstr "Kopyalanıyor"
 
 #: core\app.py:75
 msgid "Sending to Trash"
-msgstr "Naar de prullebak verplaatsen"
+msgstr "Geri Dönüşüm Kutusuna gönderiliyor"
 
 #: core\app.py:308
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
-"Er is nog een vorige actie bezig. Je kan nu nog geen nieuwe actie starten. "
-"Wacht een paar seconden en probeer het opnieuw"
+"Önceki eylem hala tamamlanmadı. Henüz yeni bir eylem başlatamazsınız. Birkaç"
+" saniye bekleyin, ardından tekrar deneyin."
 
 #: core\app.py:318
 msgid "No duplicates found."
-msgstr "Geen dubbelingen gevonden"
+msgstr "Hiç kopya bulunamadı."
 
 #: core\app.py:333
 msgid "All marked files were copied successfully."
-msgstr "Alle gemarkeerde bestanden zijn succesvol gekopieerd."
+msgstr "İşaretlenmiş tüm dosyalar başarıyla kopyalandı."
 
 #: core\app.py:334
 msgid "All marked files were moved successfully."
-msgstr "Alle gemarkeerde bestanden zijn succesvol verplaatst."
+msgstr "İşaretlenmiş tüm dosyalar başarıyla taşındı."
 
 #: core\app.py:335
 msgid "All marked files were successfully sent to Trash."
-msgstr "Alle gemarkeerde bestanden zijn met succes in de prullenbak gedaan."
+msgstr "İşaretlenmiş tüm dosyalar başarıyla Geri Dönüşüm Kutusuna gönderildi."
 
 #: core\app.py:343
 msgid "Could not load file: {}"
-msgstr "Kan bestand niet laden: {}"
+msgstr "Dosya yüklenemedi: {}"
 
 #: core\app.py:399
 msgid "'{}' already is in the list."
-msgstr "'{}' staat al in de lijst."
+msgstr "'{}' zaten listede."
 
 #: core\app.py:401
 msgid "'{}' does not exist."
-msgstr "'{}' bestaat niet."
+msgstr "'{}' mevcut değil."
 
 #: core\app.py:410
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
-"Alle geselecteerde %d overeenkomsten zullen in toekomstige onderzoeken "
-"worden overgslagen. Doorgaan?"
+"Tüm seçili %deşleşmeleri sonraki taramalarda yok sayılacaktır. Devam edilsin"
+" mi?"
 
 #: core\app.py:486
 msgid "Select a directory to copy marked files to"
-msgstr ""
-"Selecteer een map waar u de gemarkeerde bestanden naartoe wilt kopiëren"
+msgstr "İşaretlenmiş dosyaları kopyalamak için bir dizin seçin"
 
 #: core\app.py:487
 msgid "Select a directory to move marked files to"
-msgstr ""
-"Selecteer een map waar u de gemarkeerde bestanden naartoe wilt verplaatsen"
+msgstr "İşaretlenmiş dosyaları taşımak için bir dizin seçin"
 
 #: core\app.py:527
 msgid "Select a destination for your exported CSV"
-msgstr "Selecteer een locatie voor de CSV export"
+msgstr "Dışa aktarılacak CSV dosyası için bir hedef seçin"
 
 #: core\app.py:534 core\app.py:801 core\app.py:811
 msgid "Couldn't write to file: {}"
-msgstr "Kan niet schrijven naar bestand: {}"
+msgstr "Dosyaya yazılamadı: {}"
 
 #: core\app.py:559
 msgid "You have no custom command set up. Set it up in your preferences."
-msgstr ""
-"Er is nog geen \"aangepaste opdracht\" ingericht. Je kan dit doen bij de "
-"voorkeuren."
+msgstr "Özel bir komut ayarınız yok. Tercihlerinizden ayarlayabilirsiniz."
 
 #: core\app.py:727 core\app.py:740
 msgid "You are about to remove %d files from results. Continue?"
-msgstr ""
-"Je staat op het punt om %d bestanden te verwijderen uit de resultaten. "
-"Doorgaan?"
+msgstr "Sonuçlardan%ddosyaları çıkarmak üzeresiniz. Devam edilsin mi?"
 
 #: core\app.py:774
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr ""
-"{} dubbelingen groepen waren veranderd door de prioriteits verschuiving."
+msgstr "{} yinelenen gruplar, yeniden önceliklendirme ile değiştirildi."
 
 #: core\app.py:821
 msgid "The selected directories contain no scannable file."
-msgstr ""
-"De geselecteerde folders bevatten geen bestanden die onderzocht kunnen "
-"worden."
+msgstr "Seçili dizinler taranabilir dosya içermiyor."
 
 #: core\app.py:835
 msgid "Collecting files to scan"
-msgstr "Bestanden aan het verzamelen om te onderzoeken"
+msgstr "Taranacak dosyalar toplanıyor"
 
 #: core\app.py:891
 msgid "%s (%d discarded)"
-msgstr "%s (%d weggelaten)"
+msgstr "%s(%d atıldı)"
 
 #: core\engine.py:244 core\engine.py:288
 msgid "0 matches found"
-msgstr "0 overeenkomsten gevonden"
+msgstr "0 eşleşme bulundu"
 
 #: core\engine.py:262 core\engine.py:296
 msgid "%d matches found"
-msgstr "%d overeenkomsten gevonden"
+msgstr "%deşleşme bulundu"
 
 #: core\gui\deletion_options.py:73
 msgid "You are sending {} file(s) to the Trash."
-msgstr "Je verplaatst {} bestand(en) naar de prullenbak"
+msgstr "{} dosyayı/dosyaları Geri Dönüşüm Kutusuna gönderiyorsunuz."
 
 #: core\gui\exclude_list_table.py:15
 msgid "Regular Expressions"
-msgstr "Normale Uitdrukkingen"
+msgstr "Düzenli İfadeler"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
-"Weet je zeker dat je alle %d regels uit de overslaan lijst wilt verwijderen?"
+"Yok sayılanlar listesinden %d öğelerin tümünü çıkarmak istediğinize emin "
+"misiniz?"
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr "Bestandsnaam"
+msgstr "Dosya adı"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
-msgstr "Bestandsnaam - Velden"
+msgstr "Dosya adı - Alanlar"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr "Bestandsnaam - Velden (geen volgorde)"
+msgstr "Dosya Adı - Alanlar (Düzen Yok)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
-msgstr "Tags"
+msgstr "Etiketler"
 
 #: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
 msgid "Contents"
-msgstr "Inhoud"
+msgstr "İçindekiler"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
-msgstr "%d van de %d afbeeldingen aan het analyseren"
+msgstr " %d/%d resim analiz edildi."
 
 #: core\pe\matchblock.py:181
 msgid "Performed %d/%d chunk matches"
-msgstr "%d van de %d bulk overeenkomsten uitgevoerd"
+msgstr "%d/%d öbek eşleştirme gerçekleştirildi"
 
 #: core\pe\matchblock.py:191
 msgid "Preparing for matching"
-msgstr "Voorbereiden voor dubbelingen bepaling"
+msgstr "Eşleştirmek için hazırlanılıyor"
 
 #: core\pe\matchblock.py:244
 msgid "Verified %d/%d matches"
-msgstr "%d van de %d overeenkomsten nagekeken"
+msgstr "%d/%d eşleşmeler doğrulandı"
 
 #: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
-msgstr "EXIF informatie van %d van de %d afbeeldingen gelezen"
+msgstr "%d/%d resimlerin EXIF'i okunuyor"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr "EXIF-tijdstempel"
+msgstr "EXIF Zaman damgası"
 
 #: core\prioritize.py:70
 msgid "None"
-msgstr "Geen"
+msgstr "Hiçbiri"
 
 #: core\prioritize.py:100
 msgid "Ends with number"
-msgstr "Eindigt met nummer"
+msgstr "Sayıyla biter"
 
 #: core\prioritize.py:101
 msgid "Doesn't end with number"
-msgstr "Eindigt niet met een nummer"
+msgstr "Sayıyla bitmez"
 
 #: core\prioritize.py:102
 msgid "Longest"
-msgstr "langste"
+msgstr "En uzun"
 
 #: core\prioritize.py:103
 msgid "Shortest"
-msgstr "kortste"
+msgstr "En kısa"
 
 #: core\prioritize.py:140
 msgid "Highest"
-msgstr "hoogste"
+msgstr "En yüksek"
 
 #: core\prioritize.py:140
 msgid "Lowest"
-msgstr "laagste"
+msgstr "En düşük"
 
 #: core\prioritize.py:169
 msgid "Newest"
-msgstr "nieuwste"
+msgstr "En yeni"
 
 #: core\prioritize.py:169
 msgid "Oldest"
-msgstr "oudste"
+msgstr "En eski"
 
 #: core\results.py:142
 msgid "%d / %d (%s / %s) duplicates marked."
-msgstr "%d / %d (%s /%s) dubbelingen gemarkeerd"
+msgstr "%d/%d(%s/%s) kopyalar işaretlendi."
 
 #: core\results.py:149
 msgid " filter: %s"
-msgstr "filter: %s"
+msgstr "filtrele: %s"
 
 #: core\scanner.py:85
 msgid "Read size of %d/%d files"
-msgstr "Bestandsgrootte van %d/%d bestanden aan het lezen."
+msgstr "%d/%d dosyaların boyutunu oku"
 
 #: core\scanner.py:109
 msgid "Read metadata of %d/%d files"
-msgstr "Metadata van %d/%d bestanden gelezen"
+msgstr "%d/%d dosyaların üst verisini(metadata) oku"
 
 #: core\scanner.py:147
 msgid "Almost done! Fiddling with results..."
-msgstr "Bijna klaar! Gehannes met resultaten..."
+msgstr "Neredeyse bitti! Sonuçlarla uğraşılıyor..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
-msgstr "Mappen"
+msgstr "Dizinler"
