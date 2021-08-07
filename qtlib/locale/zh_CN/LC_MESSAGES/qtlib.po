@@ -59,72 +59,76 @@ msgid "Go to Github"
 msgstr "前往Github"
 
 #: qtlib\preferences.py:23
-msgid "English"
-msgstr "英语"
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr "法语"
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr "德语"
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr "希腊语"
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr "中文（简体）"
-
-#: qtlib\preferences.py:28
 msgid "Czech"
 msgstr "捷克语"
 
-#: qtlib\preferences.py:29
-msgid "Italian"
-msgstr "意大利语"
+#: qtlib\preferences.py:24
+msgid "German"
+msgstr "德语"
 
-#: qtlib\preferences.py:30
-msgid "Armenian"
-msgstr "亚美尼亚语"
+#: qtlib\preferences.py:25
+msgid "Greek"
+msgstr "希腊语"
 
-#: qtlib\preferences.py:31
-msgid "Korean"
-msgstr "韩语"
+#: qtlib\preferences.py:26
+msgid "English"
+msgstr "英语"
 
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr "俄语"
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr "乌克兰语"
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr "荷兰语"
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr "波兰语"
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr "巴西葡萄牙语"
-
-#: qtlib\preferences.py:37
+#: qtlib\preferences.py:27
 msgid "Spanish"
 msgstr "西班牙语"
 
+#: qtlib\preferences.py:28
+msgid "French"
+msgstr "法语"
+
+#: qtlib\preferences.py:29
+msgid "Armenian"
+msgstr "亚美尼亚语"
+
+#: qtlib\preferences.py:30
+msgid "Italian"
+msgstr "意大利语"
+
+#: qtlib\preferences.py:31
+msgid "Japanese"
+msgstr "日语"
+
+#: qtlib\preferences.py:32
+msgid "Korean"
+msgstr "韩语"
+
+#: qtlib\preferences.py:33
+msgid "Dutch"
+msgstr "荷兰语"
+
+#: qtlib\preferences.py:34
+msgid "Polish"
+msgstr "波兰语"
+
+#: qtlib\preferences.py:35
+msgid "Brazilian"
+msgstr "巴西葡萄牙语"
+
+#: qtlib\preferences.py:36
+msgid "Russian"
+msgstr "俄语"
+
+#: qtlib\preferences.py:37
+msgid "Turkish"
+msgstr ""
+
 #: qtlib\preferences.py:38
+msgid "Ukrainian"
+msgstr "乌克兰语"
+
+#: qtlib\preferences.py:39
 msgid "Vietnamese"
 msgstr "越南语"
 
-#: qtlib\preferences.py:39
-msgid "Japanese"
-msgstr "日语"
+#: qtlib\preferences.py:40
+msgid "Chinese (Simplified)"
+msgstr "中文（简体）"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
+# Bas <duvel3@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Bas <duvel3@gmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,76 +59,80 @@ msgid "Go to Github"
 msgstr "Ga naar Github"
 
 #: qtlib\preferences.py:23
-msgid "English"
-msgstr "Engels"
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr "Frans"
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr "Duits"
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr "Grieks"
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr "(Versimpeld) Chinees"
-
-#: qtlib\preferences.py:28
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: qtlib\preferences.py:29
-msgid "Italian"
-msgstr "Italiaans"
+#: qtlib\preferences.py:24
+msgid "German"
+msgstr "Duits"
 
-#: qtlib\preferences.py:30
-msgid "Armenian"
-msgstr "Armeens"
+#: qtlib\preferences.py:25
+msgid "Greek"
+msgstr "Grieks"
 
-#: qtlib\preferences.py:31
-msgid "Korean"
-msgstr "Koreaans"
+#: qtlib\preferences.py:26
+msgid "English"
+msgstr "Engels"
 
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr "Russisch"
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr "Oekraïens"
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr "Nederlands"
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr "Pools"
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr "Braziliaans"
-
-#: qtlib\preferences.py:37
+#: qtlib\preferences.py:27
 msgid "Spanish"
 msgstr "Spaans"
 
-#: qtlib\preferences.py:38
-msgid "Vietnamese"
-msgstr "Vietnamees"
+#: qtlib\preferences.py:28
+msgid "French"
+msgstr "Frans"
 
-#: qtlib\preferences.py:39
+#: qtlib\preferences.py:29
+msgid "Armenian"
+msgstr "Armeens"
+
+#: qtlib\preferences.py:30
+msgid "Italian"
+msgstr "Italiaans"
+
+#: qtlib\preferences.py:31
 msgid "Japanese"
 msgstr "Japans"
 
+#: qtlib\preferences.py:32
+msgid "Korean"
+msgstr "Koreaans"
+
+#: qtlib\preferences.py:33
+msgid "Dutch"
+msgstr "Nederlands"
+
+#: qtlib\preferences.py:34
+msgid "Polish"
+msgstr "Pools"
+
+#: qtlib\preferences.py:35
+msgid "Brazilian"
+msgstr "Braziliaans"
+
+#: qtlib\preferences.py:36
+msgid "Russian"
+msgstr "Russisch"
+
+#: qtlib\preferences.py:37
+msgid "Turkish"
+msgstr ""
+
+#: qtlib\preferences.py:38
+msgid "Ukrainian"
+msgstr "Oekraïens"
+
+#: qtlib\preferences.py:39
+msgid "Vietnamese"
+msgstr "Vietnamees"
+
+#: qtlib\preferences.py:40
+msgid "Chinese (Simplified)"
+msgstr "(Versimpeld) Chinees"
+
 #: qtlib\recent.py:54
 msgid "Clear List"
-msgstr "Duidelijke lijst"
+msgstr "Lijst leegmaken"
 
 #: qtlib\search_edit.py:78
 msgid "Search..."

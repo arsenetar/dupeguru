@@ -57,72 +57,76 @@ msgid "Go to Github"
 msgstr "Truy cập Github"
 
 #: qtlib\preferences.py:23
-msgid "English"
-msgstr "Ngôn ngữ tiếng anh"
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr "ngôn ngữ Pháp"
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr "Tiếng Đức"
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr "Ngôn ngữ Hy lạp"
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr "Ngôn ngữ Trung Quốc (giản thể)"
-
-#: qtlib\preferences.py:28
 msgid "Czech"
 msgstr "Tiếng Séc"
 
-#: qtlib\preferences.py:29
-msgid "Italian"
-msgstr "Ngôn ngữ Ý"
+#: qtlib\preferences.py:24
+msgid "German"
+msgstr "Tiếng Đức"
 
-#: qtlib\preferences.py:30
-msgid "Armenian"
-msgstr "ngôn ngữ Armenia"
+#: qtlib\preferences.py:25
+msgid "Greek"
+msgstr "Ngôn ngữ Hy lạp"
 
-#: qtlib\preferences.py:31
-msgid "Korean"
-msgstr "Ngôn ngữ Hàn Quốc"
+#: qtlib\preferences.py:26
+msgid "English"
+msgstr "Ngôn ngữ tiếng anh"
 
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr "Ngôn ngữ Nga"
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr "Tiếng Ukraina"
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr "Tiếng Hà Lan"
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr "Ngôn ngữ Ba Lan"
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr "Ngôn ngữ Brazil"
-
-#: qtlib\preferences.py:37
+#: qtlib\preferences.py:27
 msgid "Spanish"
 msgstr "Tiếng Tây Ban Nha"
 
+#: qtlib\preferences.py:28
+msgid "French"
+msgstr "ngôn ngữ Pháp"
+
+#: qtlib\preferences.py:29
+msgid "Armenian"
+msgstr "ngôn ngữ Armenia"
+
+#: qtlib\preferences.py:30
+msgid "Italian"
+msgstr "Ngôn ngữ Ý"
+
+#: qtlib\preferences.py:31
+msgid "Japanese"
+msgstr "tiếng Nhật"
+
+#: qtlib\preferences.py:32
+msgid "Korean"
+msgstr "Ngôn ngữ Hàn Quốc"
+
+#: qtlib\preferences.py:33
+msgid "Dutch"
+msgstr "Tiếng Hà Lan"
+
+#: qtlib\preferences.py:34
+msgid "Polish"
+msgstr "Ngôn ngữ Ba Lan"
+
+#: qtlib\preferences.py:35
+msgid "Brazilian"
+msgstr "Ngôn ngữ Brazil"
+
+#: qtlib\preferences.py:36
+msgid "Russian"
+msgstr "Ngôn ngữ Nga"
+
+#: qtlib\preferences.py:37
+msgid "Turkish"
+msgstr ""
+
 #: qtlib\preferences.py:38
+msgid "Ukrainian"
+msgstr "Tiếng Ukraina"
+
+#: qtlib\preferences.py:39
 msgid "Vietnamese"
 msgstr "Ngôn ngữ tiếng Việt"
 
-#: qtlib\preferences.py:39
-msgid "Japanese"
-msgstr "tiếng Nhật"
+#: qtlib\preferences.py:40
+msgid "Chinese (Simplified)"
+msgstr "Ngôn ngữ Trung Quốc (giản thể)"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

@@ -58,72 +58,76 @@ msgid "Go to Github"
 msgstr "Ir a Github"
 
 #: qtlib\preferences.py:23
-msgid "English"
-msgstr "Inglés"
-
-#: qtlib\preferences.py:24
-msgid "French"
-msgstr "Francés"
-
-#: qtlib\preferences.py:25
-msgid "German"
-msgstr "Alemán"
-
-#: qtlib\preferences.py:26
-msgid "Greek"
-msgstr "Griego"
-
-#: qtlib\preferences.py:27
-msgid "Chinese (Simplified)"
-msgstr "Chino (simplificado)"
-
-#: qtlib\preferences.py:28
 msgid "Czech"
 msgstr "Checo"
 
-#: qtlib\preferences.py:29
-msgid "Italian"
-msgstr "Italiano"
+#: qtlib\preferences.py:24
+msgid "German"
+msgstr "Alemán"
 
-#: qtlib\preferences.py:30
-msgid "Armenian"
-msgstr "Armenio"
+#: qtlib\preferences.py:25
+msgid "Greek"
+msgstr "Griego"
 
-#: qtlib\preferences.py:31
-msgid "Korean"
-msgstr "Coreano"
+#: qtlib\preferences.py:26
+msgid "English"
+msgstr "Inglés"
 
-#: qtlib\preferences.py:32
-msgid "Russian"
-msgstr "Ruso"
-
-#: qtlib\preferences.py:33
-msgid "Ukrainian"
-msgstr "Ucraniano"
-
-#: qtlib\preferences.py:34
-msgid "Dutch"
-msgstr "Holandés"
-
-#: qtlib\preferences.py:35
-msgid "Polish"
-msgstr "Polaco"
-
-#: qtlib\preferences.py:36
-msgid "Brazilian"
-msgstr "Brasileño"
-
-#: qtlib\preferences.py:37
+#: qtlib\preferences.py:27
 msgid "Spanish"
 msgstr "Español"
 
+#: qtlib\preferences.py:28
+msgid "French"
+msgstr "Francés"
+
+#: qtlib\preferences.py:29
+msgid "Armenian"
+msgstr "Armenio"
+
+#: qtlib\preferences.py:30
+msgid "Italian"
+msgstr "Italiano"
+
+#: qtlib\preferences.py:31
+msgid "Japanese"
+msgstr "Japonés"
+
+#: qtlib\preferences.py:32
+msgid "Korean"
+msgstr "Coreano"
+
+#: qtlib\preferences.py:33
+msgid "Dutch"
+msgstr "Holandés"
+
+#: qtlib\preferences.py:34
+msgid "Polish"
+msgstr "Polaco"
+
+#: qtlib\preferences.py:35
+msgid "Brazilian"
+msgstr "Brasileño"
+
+#: qtlib\preferences.py:36
+msgid "Russian"
+msgstr "Ruso"
+
+#: qtlib\preferences.py:37
+msgid "Turkish"
+msgstr ""
+
 #: qtlib\preferences.py:38
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: qtlib\preferences.py:39
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: qtlib\preferences.py:39
-msgid "Japanese"
-msgstr "Japonés"
+#: qtlib\preferences.py:40
+msgid "Chinese (Simplified)"
+msgstr "Chino (simplificado)"
 
 #: qtlib\recent.py:54
 msgid "Clear List"

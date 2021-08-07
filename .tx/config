@@ -18,3 +18,9 @@ file_filter = locale/<lang>/LC_MESSAGES/ui.po
 source_file = locale/ui.pot
 source_lang = en
 type = PO
+
+[dupeguru-1.qtlib]
+file_filter = qtlib/locale/<lang>/LC_MESSAGES/qtlib.po
+source_file = qtlib/locale/qtlib.pot
+source_lang = en
+type = PO
