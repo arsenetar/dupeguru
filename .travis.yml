@@ -1,27 +1,27 @@
 sudo: false
 language: python
 install: 
-        - pip3 install -r requirements.txt -r requirements-extra.txt
+  - pip3 install -r requirements.txt -r requirements-extra.txt
 script: tox
 matrix:
-        include:
-                - os: "linux"
-                  dist: "xenial"
-                  python: "3.6"
-                - os: "linux"
-                  dist: "xenial"
-                  python: "3.7"
-                - os: "linux"
-                  dist: "focal"
-                  python: "3.8"
-                - os: "linux"
-                  dist: "focal"
-                  python: "3.9"
-                - os: "windows"
-                  language: shell
-                  python: "3.8"
-                  env: "PATH=/c/python38:/c/python38/Scripts:$PATH"
-                  before_install:
-                          - choco install python --version=3.8.6
-                          - cp /c/python38/python.exe /c/python38/python3.exe
-                  script: tox -e py38
+  include:
+    - os: "linux"
+      dist: "xenial"
+      python: "3.6"
+    - os: "linux"
+      dist: "xenial"
+      python: "3.7"
+    - os: "linux"
+      dist: "focal"
+      python: "3.8"
+    - os: "linux"
+      dist: "focal"
+      python: "3.9"
+    - os: "windows"
+      language: shell
+      python: "3.9"
+      env: "PATH=/c/python39:/c/python39/Scripts:$PATH"
+      before_install:
+              - choco install python --version=3.9.6
+              - cp /c/python39/python.exe /c/python39/python3.exe
+      script: tox -e py39
