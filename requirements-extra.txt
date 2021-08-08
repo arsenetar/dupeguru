@@ -1,5 +1,5 @@
-pytest>=5,<6
+pytest>=6,<7
 flake8
 tox-travis
 black
-pyinstaller>=4.0,<5.0; sys_platform != 'linux'
+pyinstaller>=4.5,<5.0; sys_platform != 'linux'
