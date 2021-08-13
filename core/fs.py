@@ -36,6 +36,8 @@ NOT_SET = object()
 # CPU.
 CHUNK_SIZE = 1024 * 1024  # 1 MiB
 
+# Minimum size below which partial hashes don't need to be computed
+MIN_FILE_SIZE = 3 * CHUNK_SIZE  # 3MiB, because we take 3 samples
 
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
@@ -153,7 +155,7 @@ class File:
                 with self.path.open("rb") as fp:
                     size = self.size
                     # Might as well hash such small files entirely.
-                    if size <= CHUNK_SIZE * 3:  # 3MiB, because 3 samples
+                    if size <= MIN_FILE_SIZE:
                         setattr(self, field, self.md5)
                         return
 
