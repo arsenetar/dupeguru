@@ -147,6 +147,11 @@ class File:
             try:
                 with self.path.open("rb") as fp:
                     size = self.size
+                    # Might as well hash such small files entirely.
+                    if size <= CHUNK_SIZE * 3:  # 3MiB, because 3 samples
+                        setattr(self, field, self.md5)
+                        return
+
                     # Chunk at 25% of the file
                     fp.seek(floor(size * 25 / 100), 0)
                     filedata = fp.read(CHUNK_SIZE)
@@ -219,7 +224,7 @@ class File:
 class Folder(File):
     """A wrapper around a folder path.
 
-    It has the size/md5 info of a File, but it's value are the sum of its subitems.
+    It has the size/md5 info of a File, but its value is the sum of its subitems.
     """
 
     __slots__ = File.__slots__ + ("_subfolders",)
