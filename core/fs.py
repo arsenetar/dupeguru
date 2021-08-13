@@ -138,8 +138,13 @@ class File:
             try:
                 with self.path.open("rb") as fp:
                     md5 = hashlib.md5()
-                    while filedata := fp.read(CHUNK_SIZE):
+                    filedata = fp.read(CHUNK_SIZE)
+                    while filedata:
                         md5.update(filedata)
+                        filedata = fp.read(CHUNK_SIZE)
+                    # FIXME For python 3.8 and later
+                    # while filedata := fp.read(CHUNK_SIZE):
+                    #     md5.update(filedata)
                     self.md5 = md5.digest()
             except Exception:
                 pass
