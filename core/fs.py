@@ -39,6 +39,7 @@ CHUNK_SIZE = 1024 * 1024  # 1 MiB
 # Minimum size below which partial hashes don't need to be computed
 MIN_FILE_SIZE = 3 * CHUNK_SIZE  # 3MiB, because we take 3 samples
 
+
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
 
