@@ -15,7 +15,7 @@ oses:
     icon: apple
     packages:
       - arch: "10.12+"
-        link: ./2021/03/09/macOS_version_notes.html
+        link: ./2021/08/14/macOS_releases_going_forward.html
     icon: apple
   - name: Source
     icon: github
