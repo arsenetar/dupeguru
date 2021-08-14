@@ -88,6 +88,7 @@ class NamedObject:
         self.size = size
         self.md5partial = name
         self.md5 = name
+        self.md5samples = name
         if with_words:
             self.words = getwords(name)
         self.is_ref = False

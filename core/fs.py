@@ -12,6 +12,7 @@
 # and I'm doing it now.
 
 import hashlib
+from math import floor
 import logging
 
 from hscommon.util import nonone, get_file_ext
@@ -29,6 +30,14 @@ __all__ = [
 ]
 
 NOT_SET = object()
+
+# The goal here is to not run out of memory on really big files. However, the chunk
+# size has to be large enough so that the python loop isn't too costly in terms of
+# CPU.
+CHUNK_SIZE = 1024 * 1024  # 1 MiB
+
+# Minimum size below which partial hashes don't need to be computed
+MIN_FILE_SIZE = 3 * CHUNK_SIZE  # 3MiB, because we take 3 samples
 
 
 class FSError(Exception):
@@ -76,8 +85,9 @@ class File:
     INITIAL_INFO = {
         "size": 0,
         "mtime": 0,
-        "md5": "",
-        "md5partial": "",
+        "md5": b"",
+        "md5partial": b"",
+        "md5samples": b""
     }
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
@@ -112,36 +122,61 @@ class File:
         return (0x4000, 0x4000)  # 16Kb
 
     def _read_info(self, field):
+        # print(f"_read_info({field}) for {self}")
         if field in ("size", "mtime"):
             stats = self.path.stat()
             self.size = nonone(stats.st_size, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == "md5partial":
             try:
-                fp = self.path.open("rb")
-                offset, size = self._get_md5partial_offset_and_size()
-                fp.seek(offset)
-                partialdata = fp.read(size)
-                md5 = hashlib.md5(partialdata)
-                self.md5partial = md5.digest()
-                fp.close()
+                with self.path.open("rb") as fp:
+                    offset, size = self._get_md5partial_offset_and_size()
+                    fp.seek(offset)
+                    partialdata = fp.read(size)
+                    md5 = hashlib.md5(partialdata)
+                    self.md5partial = md5.digest()
             except Exception:
                 pass
         elif field == "md5":
             try:
-                fp = self.path.open("rb")
-                md5 = hashlib.md5()
-                # The goal here is to not run out of memory on really big files. However, the chunk
-                # size has to be large enough so that the python loop isn't too costly in terms of
-                # CPU.
-                CHUNK_SIZE = 1024 * 1024  # 1 mb
-                filedata = fp.read(CHUNK_SIZE)
-                while filedata:
-                    md5.update(filedata)
+                with self.path.open("rb") as fp:
+                    md5 = hashlib.md5()
                     filedata = fp.read(CHUNK_SIZE)
-                self.md5 = md5.digest()
-                fp.close()
+                    while filedata:
+                        md5.update(filedata)
+                        filedata = fp.read(CHUNK_SIZE)
+                    # FIXME For python 3.8 and later
+                    # while filedata := fp.read(CHUNK_SIZE):
+                    #     md5.update(filedata)
+                    self.md5 = md5.digest()
             except Exception:
+                pass
+        elif field == "md5samples":
+            try:
+                with self.path.open("rb") as fp:
+                    size = self.size
+                    # Might as well hash such small files entirely.
+                    if size <= MIN_FILE_SIZE:
+                        setattr(self, field, self.md5)
+                        return
+
+                    # Chunk at 25% of the file
+                    fp.seek(floor(size * 25 / 100), 0)
+                    filedata = fp.read(CHUNK_SIZE)
+                    md5 = hashlib.md5(filedata)
+
+                    # Chunk at 60% of the file
+                    fp.seek(floor(size * 60 / 100), 0)
+                    filedata = fp.read(CHUNK_SIZE)
+                    md5.update(filedata)
+
+                    # Last chunk of the file
+                    fp.seek(-CHUNK_SIZE, 2)
+                    filedata = fp.read(CHUNK_SIZE)
+                    md5.update(filedata)
+                    setattr(self, field, md5.digest())
+            except Exception as e:
+                logging.error(f"Error computing md5samples: {e}")
                 pass
 
     def _read_all_info(self, attrnames=None):
@@ -197,7 +232,7 @@ class File:
 class Folder(File):
     """A wrapper around a folder path.
 
-    It has the size/md5 info of a File, but it's value are the sum of its subitems.
+    It has the size/md5 info of a File, but its value is the sum of its subitems.
     """
 
     __slots__ = File.__slots__ + ("_subfolders",)
@@ -212,15 +247,17 @@ class Folder(File):
         return folders + files
 
     def _read_info(self, field):
+        # print(f"_read_info({field}) for Folder {self}")
         if field in {"size", "mtime"}:
             size = sum((f.size for f in self._all_items()), 0)
             self.size = size
             stats = self.path.stat()
             self.mtime = nonone(stats.st_mtime, 0)
-        elif field in {"md5", "md5partial"}:
+        elif field in {"md5", "md5partial", "md5samples"}:
             # What's sensitive here is that we must make sure that subfiles'
             # md5 are always added up in the same order, but we also want a
             # different md5 if a file gets moved in a different subdirectory.
+
             def get_dir_md5_concat():
                 items = self._all_items()
                 items.sort(key=lambda f: f.path)

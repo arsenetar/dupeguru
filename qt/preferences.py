@@ -73,6 +73,8 @@ class Preferences(PreferencesBase):
         self.match_similar = get("MatchSimilar", self.match_similar)
         self.ignore_small_files = get("IgnoreSmallFiles", self.ignore_small_files)
         self.small_file_threshold = get("SmallFileThreshold", self.small_file_threshold)
+        self.big_file_partial_hashes = get("BigFilePartialHashes", self.big_file_partial_hashes)
+        self.big_file_size_threshold = get("BigFileSizeThreshold", self.big_file_size_threshold)
         self.scan_tag_track = get("ScanTagTrack", self.scan_tag_track)
         self.scan_tag_artist = get("ScanTagArtist", self.scan_tag_artist)
         self.scan_tag_album = get("ScanTagAlbum", self.scan_tag_album)
@@ -117,6 +119,8 @@ class Preferences(PreferencesBase):
         self.match_similar = False
         self.ignore_small_files = True
         self.small_file_threshold = 10  # KB
+        self.big_file_partial_hashes = False
+        self.big_file_size_threshold = 100  # MB
         self.scan_tag_track = False
         self.scan_tag_artist = True
         self.scan_tag_album = True
@@ -161,6 +165,8 @@ class Preferences(PreferencesBase):
         set_("MatchSimilar", self.match_similar)
         set_("IgnoreSmallFiles", self.ignore_small_files)
         set_("SmallFileThreshold", self.small_file_threshold)
+        set_("BigFilePartialHashes", self.big_file_partial_hashes)
+        set_("BigFileSizeThreshold", self.big_file_size_threshold)
         set_("ScanTagTrack", self.scan_tag_track)
         set_("ScanTagArtist", self.scan_tag_artist)
         set_("ScanTagAlbum", self.scan_tag_album)

@@ -551,6 +551,28 @@ class TestCaseGetMatchesByContents:
         o1, o2 = no(size=0), no(size=0)
         assert not getmatches_by_contents([o1, o2])
 
+    def test_big_file_partial_hashes(self):
+        smallsize = 1
+        bigsize = 100 * 1024 * 1024  # 100MB
+        f = [no("bigfoo", size=bigsize), no("bigbar", size=bigsize),
+             no("smallfoo", size=smallsize), no("smallbar", size=smallsize)]
+        f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
+        f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
+        f[2].md5 = f[2].md5partial = "bleh"
+        f[3].md5 = f[3].md5partial = "bleh"
+        r = getmatches_by_contents(f, bigsize=bigsize)
+        eq_(len(r), 2)
+        # User disabled optimization for big files, compute hashes as usual
+        r = getmatches_by_contents(f, bigsize=0)
+        eq_(len(r), 2)
+        # Other file is now slightly different, md5partial is still the same
+        f[1].md5 = f[1].md5samples = "foobardiff"
+        r = getmatches_by_contents(f, bigsize=bigsize)
+        # Successfully filter it out
+        eq_(len(r), 1)
+        r = getmatches_by_contents(f, bigsize=0)
+        eq_(len(r), 1)
+
 
 class TestCaseGroup:
     def test_empy(self):
