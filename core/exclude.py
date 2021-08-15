@@ -4,6 +4,7 @@
 
 from .markable import Markable
 from xml.etree import ElementTree as ET
+
 # TODO: perhaps use regex module for better Unicode support? https://pypi.org/project/regex/
 # also https://pypi.org/project/re2/
 # TODO update the Result list with newly added regexes if possible
@@ -15,13 +16,14 @@ from hscommon.util import FileOrPath
 from hscommon.plat import ISWINDOWS
 import time
 
-default_regexes = [r"^thumbs\.db$",  # Obsolete after WindowsXP
-                   r"^desktop\.ini$",  # Windows metadata
-                   r"^\.DS_Store$",  # MacOS metadata
-                   r"^\.Trash\-.*",  # Linux trash directories
-                   r"^\$Recycle\.Bin$",  # Windows
-                   r"^\..*",  # Hidden files on Unix-like
-                   ]
+default_regexes = [
+    r"^thumbs\.db$",  # Obsolete after WindowsXP
+    r"^desktop\.ini$",  # Windows metadata
+    r"^\.DS_Store$",  # MacOS metadata
+    r"^\.Trash\-.*",  # Linux trash directories
+    r"^\$Recycle\.Bin$",  # Windows
+    r"^\..*",  # Hidden files on Unix-like
+]
 # These are too broad
 forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\\\\.*", r".*\..*"]
 
@@ -34,6 +36,7 @@ def timer(func):
         end = time.perf_counter_ns()
         print(f"DEBUG: func {func.__name__!r} took {end - start} ns.")
         return value
+
     return wrapper_timer
 
 
@@ -45,11 +48,13 @@ def memoize(func):
         if args not in func.cache:
             func.cache[args] = func(*args)
         return func.cache[args]
+
     return _memoize
 
 
 class AlreadyThereException(Exception):
     """Expression already in the list"""
+
     def __init__(self, arg="Expression is already in excluded list."):
         super().__init__(arg)
 
@@ -148,7 +153,7 @@ class ExcludeList(Markable):
         try:
             return re.compile(expr)
         except Exception as e:
-            raise(e)
+            raise (e)
 
     # @timer
     # @memoize  # probably not worth memoizing this one if we memoize the above
@@ -169,10 +174,8 @@ class ExcludeList(Markable):
 
     def build_compiled_caches(self, union=False):
         if not union:
-            self._cached_compiled_files =\
-                [x for x in self._excluded_compiled if not has_sep(x.pattern)]
-            self._cached_compiled_paths =\
-                [x for x in self._excluded_compiled if has_sep(x.pattern)]
+            self._cached_compiled_files = [x for x in self._excluded_compiled if not has_sep(x.pattern)]
+            self._cached_compiled_paths = [x for x in self._excluded_compiled if has_sep(x.pattern)]
             self._dirty = False
             return
 
@@ -185,20 +188,17 @@ class ExcludeList(Markable):
         else:
             # HACK returned as a tuple to get a free iterator and keep interface
             # the same regardless of whether the client asked for union or not
-            self._cached_compiled_union_all =\
-                (re.compile('|'.join(marked_count)),)
+            self._cached_compiled_union_all = (re.compile("|".join(marked_count)),)
             files_marked = [x for x in marked_count if not has_sep(x)]
             if not files_marked:
                 self._cached_compiled_union_files = tuple()
             else:
-                self._cached_compiled_union_files =\
-                    (re.compile('|'.join(files_marked)),)
+                self._cached_compiled_union_files = (re.compile("|".join(files_marked)),)
             paths_marked = [x for x in marked_count if has_sep(x)]
             if not paths_marked:
                 self._cached_compiled_union_paths = tuple()
             else:
-                self._cached_compiled_union_paths =\
-                    (re.compile('|'.join(paths_marked)),)
+                self._cached_compiled_union_paths = (re.compile("|".join(paths_marked)),)
         self._dirty = False
 
     @property
@@ -218,16 +218,14 @@ class ExcludeList(Markable):
         one item (one Pattern in the union case)."""
         if self._dirty:
             self.build_compiled_caches(self._use_union)
-        return self._cached_compiled_union_files if self._use_union\
-            else self._cached_compiled_files
+        return self._cached_compiled_union_files if self._use_union else self._cached_compiled_files
 
     @property
     def compiled_paths(self):
         """Returns patterns with only separators in them, for more precise filtering."""
         if self._dirty:
             self.build_compiled_caches(self._use_union)
-        return self._cached_compiled_union_paths if self._use_union\
-            else self._cached_compiled_paths
+        return self._cached_compiled_union_paths if self._use_union else self._cached_compiled_paths
 
     # ---Public
     def add(self, regex, forced=False):
@@ -295,8 +293,7 @@ class ExcludeList(Markable):
                 was_marked = self.is_marked(regex)
                 is_compilable, exception, compiled = self.compile_re(newregex)
                 # We overwrite the found entry
-                self._excluded[self._excluded.index(item)] =\
-                    [newregex, is_compilable, exception, compiled]
+                self._excluded[self._excluded.index(item)] = [newregex, is_compilable, exception, compiled]
                 self._remove_compiled(regex)
                 break
         if not found:
@@ -343,8 +340,10 @@ class ExcludeList(Markable):
                 # "forced" avoids compilation exceptions and adds anyway
                 self.add(regex_string, forced=True)
             except AlreadyThereException:
-                logging.error(f"Regex \"{regex_string}\" \
-loaded from XML was already present in the list.")
+                logging.error(
+                    f'Regex "{regex_string}" \
+loaded from XML was already present in the list.'
+                )
                 continue
             if exclude_item.get("marked") == "y":
                 marked.add(regex_string)
@@ -369,6 +368,7 @@ loaded from XML was already present in the list.")
 class ExcludeDict(ExcludeList):
     """Exclusion list holding a set of regular expressions as keys, the compiled
     Pattern, compilation error and compilable boolean as values."""
+
     # Implemntation around a dictionary instead of a list, which implies
     # to keep the index of each string-key as its sub-element and keep it updated
     # whenever insert/remove is done.
@@ -435,12 +435,7 @@ class ExcludeDict(ExcludeList):
         # and other indices should be pushed by one
         for value in self._excluded.values():
             value["index"] += 1
-        self._excluded[regex] = {
-            "index": 0,
-            "compilable": iscompilable,
-            "error": exception,
-            "compiled": compiled
-        }
+        self._excluded[regex] = {"index": 0, "compilable": iscompilable, "error": exception, "compiled": compiled}
 
     def has_entry(self, regex):
         if regex in self._excluded.keys():
@@ -468,10 +463,10 @@ class ExcludeDict(ExcludeList):
         previous = self._excluded.pop(regex)
         iscompilable, error, compiled = self.compile_re(newregex)
         self._excluded[newregex] = {
-            "index": previous.get('index'),
+            "index": previous.get("index"),
             "compilable": iscompilable,
             "error": error,
-            "compiled": compiled
+            "compiled": compiled,
         }
         self._remove_compiled(regex)
         if iscompilable:
@@ -511,8 +506,12 @@ def ordered_keys(_dict):
 
 
 if ISWINDOWS:
+
     def has_sep(regexp):
-        return '\\' + sep in regexp
+        return "\\" + sep in regexp
+
+
 else:
+
     def has_sep(regexp):
         return sep in regexp

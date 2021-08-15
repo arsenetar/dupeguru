@@ -76,15 +76,11 @@ class ComboboxModel(SelectableList):
 class ListviewModel(SelectableList):
     def __init__(self, model, view, **kwargs):
         super().__init__(model, view, **kwargs)
-        self.view.selectionModel().selectionChanged[
-            (QItemSelection, QItemSelection)
-        ].connect(self.selectionChanged)
+        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
 
     # --- Override
     def _updateSelection(self):
-        newIndexes = [
-            modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()
-        ]
+        newIndexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
         if newIndexes != self.model.selected_indexes:
             self.model.select(newIndexes)
 
@@ -92,14 +88,10 @@ class ListviewModel(SelectableList):
         newSelection = QItemSelection()
         for index in self.model.selected_indexes:
             newSelection.select(self.createIndex(index, 0), self.createIndex(index, 0))
-        self.view.selectionModel().select(
-            newSelection, QItemSelectionModel.ClearAndSelect
-        )
+        self.view.selectionModel().select(newSelection, QItemSelectionModel.ClearAndSelect)
         if len(newSelection.indexes()):
             currentIndex = newSelection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(
-                currentIndex, QItemSelectionModel.Current
-            )
+            self.view.selectionModel().setCurrentIndex(currentIndex, QItemSelectionModel.Current)
             self.view.scrollTo(currentIndex)
 
     # --- Events

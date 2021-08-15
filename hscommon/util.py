@@ -19,8 +19,7 @@ from .path import Path, pathify, log_io_error
 
 
 def nonone(value, replace_value):
-    """Returns ``value`` if ``value`` is not ``None``. Returns ``replace_value`` otherwise.
-    """
+    """Returns ``value`` if ``value`` is not ``None``. Returns ``replace_value`` otherwise."""
     if value is None:
         return replace_value
     else:
@@ -28,8 +27,7 @@ def nonone(value, replace_value):
 
 
 def tryint(value, default=0):
-    """Tries to convert ``value`` to in ``int`` and returns ``default`` if it fails.
-    """
+    """Tries to convert ``value`` to in ``int`` and returns ``default`` if it fails."""
     try:
         return int(value)
     except (TypeError, ValueError):
@@ -37,8 +35,7 @@ def tryint(value, default=0):
 
 
 def minmax(value, min_value, max_value):
-    """Returns `value` or one of the min/max bounds if `value` is not between them.
-    """
+    """Returns `value` or one of the min/max bounds if `value` is not between them."""
     return min(max(value, min_value), max_value)
 
 
@@ -75,8 +72,7 @@ def flatten(iterables, start_with=None):
 
 
 def first(iterable):
-    """Returns the first item of ``iterable``.
-    """
+    """Returns the first item of ``iterable``."""
     try:
         return next(iter(iterable))
     except StopIteration:
@@ -84,14 +80,12 @@ def first(iterable):
 
 
 def stripfalse(seq):
-    """Returns a sequence with all false elements stripped out of seq.
-    """
+    """Returns a sequence with all false elements stripped out of seq."""
     return [x for x in seq if x]
 
 
 def extract(predicate, iterable):
-    """Separates the wheat from the shaft (`predicate` defines what's the wheat), and returns both.
-    """
+    """Separates the wheat from the shaft (`predicate` defines what's the wheat), and returns both."""
     wheat = []
     shaft = []
     for item in iterable:
@@ -103,8 +97,7 @@ def extract(predicate, iterable):
 
 
 def allsame(iterable):
-    """Returns whether all elements of 'iterable' are the same.
-    """
+    """Returns whether all elements of 'iterable' are the same."""
     it = iter(iterable)
     try:
         first_item = next(it)
@@ -152,14 +145,12 @@ def iterconsume(seq, reverse=True):
 
 
 def escape(s, to_escape, escape_with="\\"):
-    """Returns ``s`` with characters in ``to_escape`` all prepended with ``escape_with``.
-    """
+    """Returns ``s`` with characters in ``to_escape`` all prepended with ``escape_with``."""
     return "".join((escape_with + c if c in to_escape else c) for c in s)
 
 
 def get_file_ext(filename):
-    """Returns the lowercase extension part of filename, without the dot.
-    """
+    """Returns the lowercase extension part of filename, without the dot."""
     pos = filename.rfind(".")
     if pos > -1:
         return filename[pos + 1 :].lower()
@@ -168,8 +159,7 @@ def get_file_ext(filename):
 
 
 def rem_file_ext(filename):
-    """Returns the filename without extension.
-    """
+    """Returns the filename without extension."""
     pos = filename.rfind(".")
     if pos > -1:
         return filename[:pos]
@@ -217,8 +207,7 @@ def format_time(seconds, with_hours=True):
 
 
 def format_time_decimal(seconds):
-    """Transforms seconds in a strings like '3.4 minutes'.
-    """
+    """Transforms seconds in a strings like '3.4 minutes'."""
     minus = seconds < 0
     if minus:
         seconds *= -1
@@ -320,8 +309,7 @@ ONE_DAY = timedelta(1)
 
 
 def iterdaterange(start, end):
-    """Yields every day between ``start`` and ``end``.
-    """
+    """Yields every day between ``start`` and ``end``."""
     date = start
     while date <= end:
         yield date
@@ -365,8 +353,7 @@ def find_in_path(name, paths=None):
 @log_io_error
 @pathify
 def delete_if_empty(path: Path, files_to_delete=[]):
-    """Deletes the directory at 'path' if it is empty or if it only contains files_to_delete.
-    """
+    """Deletes the directory at 'path' if it is empty or if it only contains files_to_delete."""
     if not path.exists() or not path.isdir():
         return
     contents = path.listdir()
@@ -411,8 +398,7 @@ def ensure_file(path):
 
 
 def delete_files_with_pattern(folder_path, pattern, recursive=True):
-    """Delete all files (or folders) in `folder_path` that match the glob `pattern`.
-    """
+    """Delete all files (or folders) in `folder_path` that match the glob `pattern`."""
     to_delete = glob.glob(op.join(folder_path, pattern))
     for fn in to_delete:
         if op.isdir(fn):

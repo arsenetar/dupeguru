@@ -50,7 +50,7 @@ class ExcludeListDialogCore:
         try:
             self.exclude_list.add(regex)
         except Exception as e:
-            raise(e)
+            raise (e)
         self.exclude_list.mark(regex)
         self.exclude_list_table.add(regex)
 

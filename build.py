@@ -30,12 +30,8 @@ def parse_args():
         dest="clean",
         help="Clean build folder before building",
     )
-    parser.add_option(
-        "--doc", action="store_true", dest="doc", help="Build only the help file"
-    )
-    parser.add_option(
-        "--loc", action="store_true", dest="loc", help="Build only localization"
-    )
+    parser.add_option("--doc", action="store_true", dest="doc", help="Build only the help file")
+    parser.add_option("--loc", action="store_true", dest="loc", help="Build only localization")
     parser.add_option(
         "--updatepot",
         action="store_true",
@@ -96,9 +92,7 @@ def build_localizations():
     locale_dest = op.join("build", "locale")
     if op.exists(locale_dest):
         shutil.rmtree(locale_dest)
-    shutil.copytree(
-        "locale", locale_dest, ignore=shutil.ignore_patterns("*.po", "*.pot")
-    )
+    shutil.copytree("locale", locale_dest, ignore=shutil.ignore_patterns("*.po", "*.pot"))
 
 
 def build_updatepot():
@@ -165,9 +159,7 @@ def build_normal():
     print("Building localizations")
     build_localizations()
     print("Building Qt stuff")
-    print_and_do(
-        "pyrcc5 {0} > {1}".format(op.join("qt", "dg.qrc"), op.join("qt", "dg_rc.py"))
-    )
+    print_and_do("pyrcc5 {0} > {1}".format(op.join("qt", "dg.qrc"), op.join("qt", "dg_rc.py")))
     fix_qt_resource_file(op.join("qt", "dg_rc.py"))
     build_help()
 

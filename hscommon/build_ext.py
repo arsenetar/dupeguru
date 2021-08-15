@@ -11,9 +11,7 @@ from setuptools import setup, Extension
 
 def get_parser():
     parser = argparse.ArgumentParser(description="Build an arbitrary Python extension.")
-    parser.add_argument(
-        "source_files", nargs="+", help="List of source files to compile"
-    )
+    parser.add_argument("source_files", nargs="+", help="List of source files to compile")
     parser.add_argument("name", nargs=1, help="Name of the resulting extension")
     return parser
 
@@ -23,7 +21,8 @@ def main():
     print("Building {}...".format(args.name[0]))
     ext = Extension(args.name[0], args.source_files)
     setup(
-        script_args=["build_ext", "--inplace"], ext_modules=[ext],
+        script_args=["build_ext", "--inplace"],
+        ext_modules=[ext],
     )
 
 

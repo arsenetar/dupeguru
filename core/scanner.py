@@ -87,11 +87,7 @@ class Scanner:
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
         if self.scan_type in {ScanType.Contents, ScanType.Folders}:
-            return engine.getmatches_by_contents(
-                files,
-                bigsize=self.big_file_size_threshold,
-                j=j
-            )
+            return engine.getmatches_by_contents(files, bigsize=self.big_file_size_threshold, j=j)
         else:
             j = j.start_subjob([2, 8])
             kw = {}
@@ -165,27 +161,13 @@ class Scanner:
                     toremove.add(p)
                 else:
                     last_parent_path = p
-            matches = [
-                m
-                for m in matches
-                if m.first.path not in toremove or m.second.path not in toremove
-            ]
+            matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
         if not self.mix_file_kind:
-            matches = [
-                m
-                for m in matches
-                if get_file_ext(m.first.name) == get_file_ext(m.second.name)
-            ]
-        matches = [
-            m for m in matches if m.first.path.exists() and m.second.path.exists()
-        ]
+            matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
+        matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
-            matches = [
-                m
-                for m in matches
-                if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))
-            ]
+            matches = [m for m in matches if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
         logging.info("Grouping matches")
         groups = engine.get_groups(matches)
         if self.scan_type in {
@@ -194,9 +176,7 @@ class Scanner:
             ScanType.FieldsNoOrder,
             ScanType.Tag,
         }:
-            matched_files = dedupe(
-                [m.first for m in matches] + [m.second for m in matches]
-            )
+            matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
             self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
         else:
             # Ticket #195

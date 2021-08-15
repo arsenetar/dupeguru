@@ -29,9 +29,7 @@ def add_fake_files_to_directories(directories, files):
 class TestCaseDupeGuru:
     def test_apply_filter_calls_results_apply_filter(self, monkeypatch):
         dgapp = TestApp().app
-        monkeypatch.setattr(
-            dgapp.results, "apply_filter", log_calls(dgapp.results.apply_filter)
-        )
+        monkeypatch.setattr(dgapp.results, "apply_filter", log_calls(dgapp.results.apply_filter))
         dgapp.apply_filter("foo")
         eq_(2, len(dgapp.results.apply_filter.calls))
         call = dgapp.results.apply_filter.calls[0]
@@ -41,15 +39,11 @@ class TestCaseDupeGuru:
 
     def test_apply_filter_escapes_regexp(self, monkeypatch):
         dgapp = TestApp().app
-        monkeypatch.setattr(
-            dgapp.results, "apply_filter", log_calls(dgapp.results.apply_filter)
-        )
+        monkeypatch.setattr(dgapp.results, "apply_filter", log_calls(dgapp.results.apply_filter))
         dgapp.apply_filter("()[]\\.|+?^abc")
         call = dgapp.results.apply_filter.calls[1]
         eq_("\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc", call["filter_str"])
-        dgapp.apply_filter(
-            "(*)"
-        )  # In "simple mode", we want the * to behave as a wilcard
+        dgapp.apply_filter("(*)")  # In "simple mode", we want the * to behave as a wilcard
         call = dgapp.results.apply_filter.calls[3]
         eq_(r"\(.*\)", call["filter_str"])
         dgapp.options["escape_filter_regexp"] = False
@@ -70,9 +64,7 @@ class TestCaseDupeGuru:
         )
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
         monkeypatch.setattr(app, "smart_copy", hscommon.conflict.smart_copy)
-        monkeypatch.setattr(
-            os, "makedirs", lambda path: None
-        )  # We don't want the test to create that fake directory
+        monkeypatch.setattr(os, "makedirs", lambda path: None)  # We don't want the test to create that fake directory
         dgapp = TestApp().app
         dgapp.directories.add_path(p)
         [f] = dgapp.directories.get_files()
@@ -320,9 +312,7 @@ class TestCaseDupeGuruWithResults:
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
 
-    def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(
-        self, do_setup
-    ):
+    def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups
@@ -404,9 +394,7 @@ class TestCaseDupeGuruWithResults:
         # results table.
         app = self.app
         app.JOB = Job(1, lambda *args, **kw: False)  # Cancels the task
-        add_fake_files_to_directories(
-            app.directories, self.objects
-        )  # We want the scan to at least start
+        add_fake_files_to_directories(app.directories, self.objects)  # We want the scan to at least start
         app.start_scanning()  # will be cancelled immediately
         eq_(len(app.result_table), 0)
 

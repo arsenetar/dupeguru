@@ -85,9 +85,7 @@ class Path(tuple):
     def __getitem__(self, key):
         if isinstance(key, slice):
             if isinstance(key.start, Path):
-                equal_elems = list(
-                    takewhile(lambda pair: pair[0] == pair[1], zip(self, key.start))
-                )
+                equal_elems = list(takewhile(lambda pair: pair[0] == pair[1], zip(self, key.start)))
                 key = slice(len(equal_elems), key.stop, key.step)
             if isinstance(key.stop, Path):
                 equal_elems = list(
@@ -226,9 +224,7 @@ def pathify(f):
     Calling ``foo('/bar', 0)`` will convert ``'/bar'`` to ``Path('/bar')``.
     """
     sig = signature(f)
-    pindexes = {
-        i for i, p in enumerate(sig.parameters.values()) if p.annotation is Path
-    }
+    pindexes = {i for i, p in enumerate(sig.parameters.values()) if p.annotation is Path}
     pkeys = {k: v for k, v in sig.parameters.items() if v.annotation is Path}
 
     def path_or_none(p):
@@ -236,9 +232,7 @@ def pathify(f):
 
     @wraps(f)
     def wrapped(*args, **kwargs):
-        args = tuple(
-            (path_or_none(a) if i in pindexes else a) for i, a in enumerate(args)
-        )
+        args = tuple((path_or_none(a) if i in pindexes else a) for i, a in enumerate(args))
         kwargs = {k: (path_or_none(v) if k in pkeys else v) for k, v in kwargs.items()}
         return f(*args, **kwargs)
 
@@ -246,8 +240,7 @@ def pathify(f):
 
 
 def log_io_error(func):
-    """ Catches OSError, IOError and WindowsError and log them
-    """
+    """Catches OSError, IOError and WindowsError and log them"""
 
     @wraps(func)
     def wrapper(path, *args, **kwargs):

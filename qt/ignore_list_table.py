@@ -10,7 +10,7 @@ from qtlib.table import Table
 
 
 class IgnoreListTable(Table):
-    """ Ignore list model"""
+    """Ignore list model"""
 
     COLUMNS = [
         Column("path1", defaultWidth=230),

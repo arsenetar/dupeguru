@@ -79,16 +79,9 @@ class OperationError(FSError):
 
 
 class File:
-    """Represents a file and holds metadata to be used for scanning.
-    """
+    """Represents a file and holds metadata to be used for scanning."""
 
-    INITIAL_INFO = {
-        "size": 0,
-        "mtime": 0,
-        "md5": b"",
-        "md5partial": b"",
-        "md5samples": b""
-    }
+    INITIAL_INFO = {"size": 0, "mtime": 0, "md5": b"", "md5partial": b"", "md5samples": b""}
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
     # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
@@ -108,9 +101,7 @@ class File:
             try:
                 self._read_info(attrname)
             except Exception as e:
-                logging.warning(
-                    "An error '%s' was raised while decoding '%s'", e, repr(self.path)
-                )
+                logging.warning("An error '%s' was raised while decoding '%s'", e, repr(self.path))
             result = object.__getattribute__(self, attrname)
             if result is NOT_SET:
                 result = self.INITIAL_INFO[attrname]
@@ -192,8 +183,7 @@ class File:
     # --- Public
     @classmethod
     def can_handle(cls, path):
-        """Returns whether this file wrapper class can handle ``path``.
-        """
+        """Returns whether this file wrapper class can handle ``path``."""
         return not path.islink() and path.isfile()
 
     def rename(self, newname):
@@ -211,8 +201,7 @@ class File:
         self.path = destpath
 
     def get_display_info(self, group, delta):
-        """Returns a display-ready dict of dupe's data.
-        """
+        """Returns a display-ready dict of dupe's data."""
         raise NotImplementedError()
 
     # --- Properties
@@ -271,9 +260,7 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subfolders = [
-                p for p in self.path.listdir() if not p.islink() and p.isdir()
-            ]
+            subfolders = [p for p in self.path.listdir() if not p.islink() and p.isdir()]
             self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
 

@@ -150,8 +150,7 @@ def test_big_file_partial_hashes(fake_fileexists):
     bigsize = 100 * 1024 * 1024  # 100MB
     s.big_file_size_threshold = bigsize
 
-    f = [no("bigfoo", bigsize), no("bigbar", bigsize),
-         no("smallfoo", smallsize), no("smallbar", smallsize)]
+    f = [no("bigfoo", bigsize), no("bigbar", bigsize), no("smallfoo", smallsize), no("smallbar", smallsize)]
     f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
     f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
     f[2].md5 = f[2].md5partial = "bleh"
@@ -193,10 +192,8 @@ def test_content_scan_doesnt_put_md5_in_words_at_the_end(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.Contents
     f = [no("foo"), no("bar")]
-    f[0].md5 = f[0].md5partial = f[0].md5samples =\
-        "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
-    f[1].md5 = f[1].md5partial = f[1].md5samples =\
-        "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+    f[0].md5 = f[0].md5partial = f[0].md5samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+    f[1].md5 = f[1].md5partial = f[1].md5samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
     r = s.get_dupe_groups(f)
     # FIXME looks like we are missing something here?
     r[0]

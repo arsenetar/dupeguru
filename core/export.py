@@ -131,15 +131,11 @@ def export_to_xhtml(colnames, rows):
             indented = "indented"
         filename = row[1]
         cells = "".join(CELL_TEMPLATE.format(value=value) for value in row[2:])
-        rendered_rows.append(
-            ROW_TEMPLATE.format(indented=indented, filename=filename, cells=cells)
-        )
+        rendered_rows.append(ROW_TEMPLATE.format(indented=indented, filename=filename, cells=cells))
         previous_group_id = row[0]
     rendered_rows = "".join(rendered_rows)
     # The main template can't use format because the css code uses {}
-    content = MAIN_TEMPLATE.replace("$colheaders", colheaders).replace(
-        "$rows", rendered_rows
-    )
+    content = MAIN_TEMPLATE.replace("$colheaders", colheaders).replace("$rows", rendered_rows)
     folder = mkdtemp()
     destpath = op.join(folder, "export.htm")
     fp = open(destpath, "wt", encoding="utf-8")

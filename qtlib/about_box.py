@@ -25,12 +25,7 @@ tr = trget("qtlib")
 
 class AboutBox(QDialog):
     def __init__(self, parent, app, **kwargs):
-        flags = (
-            Qt.CustomizeWindowHint
-            | Qt.WindowTitleHint
-            | Qt.WindowSystemMenuHint
-            | Qt.MSWindowsFixedSizeDialogHint
-        )
+        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.MSWindowsFixedSizeDialogHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
         self._setupUi()
@@ -39,9 +34,7 @@ class AboutBox(QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
     def _setupUi(self):
-        self.setWindowTitle(
-            tr("About {}").format(QCoreApplication.instance().applicationName())
-        )
+        self.setWindowTitle(tr("About {}").format(QCoreApplication.instance().applicationName()))
         self.resize(400, 290)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -61,9 +54,7 @@ class AboutBox(QDialog):
         self.nameLabel.setText(QCoreApplication.instance().applicationName())
         self.verticalLayout.addWidget(self.nameLabel)
         self.versionLabel = QLabel(self)
-        self.versionLabel.setText(
-            tr("Version {}").format(QCoreApplication.instance().applicationVersion())
-        )
+        self.versionLabel.setText(tr("Version {}").format(QCoreApplication.instance().applicationVersion()))
         self.verticalLayout.addWidget(self.versionLabel)
         self.label_3 = QLabel(self)
         self.verticalLayout.addWidget(self.label_3)

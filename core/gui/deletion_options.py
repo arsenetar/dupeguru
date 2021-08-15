@@ -29,8 +29,7 @@ class DeletionOptionsView:
     """
 
     def update_msg(self, msg: str):
-        """Update the dialog's prompt with ``str``.
-        """
+        """Update the dialog's prompt with ``str``."""
 
     def show(self):
         """Show the dialog in a modal fashion.
@@ -39,8 +38,7 @@ class DeletionOptionsView:
         """
 
     def set_hardlink_option_enabled(self, is_enabled: bool):
-        """Enable or disable the widget controlling :attr:`DeletionOptions.use_hardlinks`.
-        """
+        """Enable or disable the widget controlling :attr:`DeletionOptions.use_hardlinks`."""
 
 
 class DeletionOptions(GUIObject):
@@ -75,8 +73,7 @@ class DeletionOptions(GUIObject):
         return self.view.show()
 
     def supports_links(self):
-        """Returns whether our platform supports symlinks.
-        """
+        """Returns whether our platform supports symlinks."""
         # When on a platform that doesn't implement it, calling os.symlink() (with the wrong number
         # of arguments) raises NotImplementedError, which allows us to gracefully check for the
         # feature.

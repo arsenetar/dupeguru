@@ -5,6 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import io
+
 # import os.path as op
 
 from xml.etree import ElementTree as ET
@@ -104,7 +105,7 @@ class TestCaseListEmpty:
         regex1 = r"one"
         regex2 = r"two"
         self.exclude_list.add(regex1)
-        assert(regex1 in self.exclude_list)
+        assert regex1 in self.exclude_list
         self.exclude_list.add(regex2)
         self.exclude_list.mark(regex1)
         self.exclude_list.mark(regex2)
@@ -113,17 +114,17 @@ class TestCaseListEmpty:
         compiled_files = [x for x in self.exclude_list.compiled_files]
         eq_(len(compiled_files), 2)
         self.exclude_list.remove(regex2)
-        assert(regex2 not in self.exclude_list)
+        assert regex2 not in self.exclude_list
         eq_(len(self.exclude_list), 1)
 
     def test_add_duplicate(self):
         self.exclude_list.add(r"one")
-        eq_(1 , len(self.exclude_list))
+        eq_(1, len(self.exclude_list))
         try:
             self.exclude_list.add(r"one")
         except Exception:
             pass
-        eq_(1 , len(self.exclude_list))
+        eq_(1, len(self.exclude_list))
 
     def test_add_not_compilable(self):
         # Trying to add a non-valid regex should not work and raise exception
@@ -230,13 +231,14 @@ class TestCaseListEmpty:
                 if compiled_re.pattern == re:
                     found = True
             if not found:
-                raise(Exception(f"Default RE {re} not found in compiled list."))
+                raise (Exception(f"Default RE {re} not found in compiled list."))
             continue
         eq_(len(default_regexes), len(self.exclude_list.compiled))
 
 
 class TestCaseListEmptyUnion(TestCaseListEmpty):
     """Same but with union regex"""
+
     def setup_method(self, method):
         self.app = DupeGuru()
         self.app.exclude_list = ExcludeList(union_regex=True)
@@ -246,7 +248,7 @@ class TestCaseListEmptyUnion(TestCaseListEmpty):
         regex1 = r"one"
         regex2 = r"two"
         self.exclude_list.add(regex1)
-        assert(regex1 in self.exclude_list)
+        assert regex1 in self.exclude_list
         self.exclude_list.add(regex2)
         self.exclude_list.mark(regex1)
         self.exclude_list.mark(regex2)
@@ -256,7 +258,7 @@ class TestCaseListEmptyUnion(TestCaseListEmpty):
         eq_(len(compiled_files), 1)  # Two patterns joined together into one
         assert "|" in compiled_files[0].pattern
         self.exclude_list.remove(regex2)
-        assert(regex2 not in self.exclude_list)
+        assert regex2 not in self.exclude_list
         eq_(len(self.exclude_list), 1)
 
     def test_rename_regex_file_to_path(self):
@@ -296,14 +298,15 @@ class TestCaseListEmptyUnion(TestCaseListEmpty):
         compiled = [x for x in self.exclude_list.compiled]
         assert regex not in compiled
         # Need to escape both to get the same strings after compilation
-        compiled_escaped = set([x.encode('unicode-escape').decode() for x in compiled[0].pattern.split("|")])
-        default_escaped = set([x.encode('unicode-escape').decode() for x in default_regexes])
+        compiled_escaped = set([x.encode("unicode-escape").decode() for x in compiled[0].pattern.split("|")])
+        default_escaped = set([x.encode("unicode-escape").decode() for x in default_regexes])
         assert compiled_escaped == default_escaped
         eq_(len(default_regexes), len(compiled[0].pattern.split("|")))
 
 
 class TestCaseDictEmpty(TestCaseListEmpty):
     """Same, but with dictionary implementation"""
+
     def setup_method(self, method):
         self.app = DupeGuru()
         self.app.exclude_list = ExcludeDict(union_regex=False)
@@ -312,6 +315,7 @@ class TestCaseDictEmpty(TestCaseListEmpty):
 
 class TestCaseDictEmptyUnion(TestCaseDictEmpty):
     """Same, but with union regex"""
+
     def setup_method(self, method):
         self.app = DupeGuru()
         self.app.exclude_list = ExcludeDict(union_regex=True)
@@ -321,7 +325,7 @@ class TestCaseDictEmptyUnion(TestCaseDictEmpty):
         regex1 = r"one"
         regex2 = r"two"
         self.exclude_list.add(regex1)
-        assert(regex1 in self.exclude_list)
+        assert regex1 in self.exclude_list
         self.exclude_list.add(regex2)
         self.exclude_list.mark(regex1)
         self.exclude_list.mark(regex2)
@@ -331,7 +335,7 @@ class TestCaseDictEmptyUnion(TestCaseDictEmpty):
         # two patterns joined into one
         eq_(len(compiled_files), 1)
         self.exclude_list.remove(regex2)
-        assert(regex2 not in self.exclude_list)
+        assert regex2 not in self.exclude_list
         eq_(len(self.exclude_list), 1)
 
     def test_rename_regex_file_to_path(self):
@@ -371,8 +375,8 @@ class TestCaseDictEmptyUnion(TestCaseDictEmpty):
         compiled = [x for x in self.exclude_list.compiled]
         assert regex not in compiled
         # Need to escape both to get the same strings after compilation
-        compiled_escaped = set([x.encode('unicode-escape').decode() for x in compiled[0].pattern.split("|")])
-        default_escaped = set([x.encode('unicode-escape').decode() for x in default_regexes])
+        compiled_escaped = set([x.encode("unicode-escape").decode() for x in compiled[0].pattern.split("|")])
+        default_escaped = set([x.encode("unicode-escape").decode() for x in default_regexes])
         assert compiled_escaped == default_escaped
         eq_(len(default_regexes), len(compiled[0].pattern.split("|")))
 
@@ -382,8 +386,9 @@ def split_union(pattern_object):
     return [x for x in pattern_object.pattern.split("|")]
 
 
-class TestCaseCompiledList():
+class TestCaseCompiledList:
     """Test consistency between union or and separate versions."""
+
     def setup_method(self, method):
         self.e_separate = ExcludeList(union_regex=False)
         self.e_separate.restore_defaults()
@@ -431,6 +436,7 @@ class TestCaseCompiledList():
 
 class TestCaseCompiledDict(TestCaseCompiledList):
     """Test the dictionary version"""
+
     def setup_method(self, method):
         self.e_separate = ExcludeDict(union_regex=False)
         self.e_separate.restore_defaults()

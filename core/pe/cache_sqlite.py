@@ -13,8 +13,7 @@ from .cache import string_to_colors, colors_to_string
 
 
 class SqliteCache:
-    """A class to cache picture blocks in a sqlite backend.
-    """
+    """A class to cache picture blocks in a sqlite backend."""
 
     def __init__(self, db=":memory:", readonly=False):
         # readonly is not used in the sqlite version of the cache
@@ -71,18 +70,14 @@ class SqliteCache:
         except sqlite.OperationalError:
             logging.warning("Picture cache could not set value for key %r", path_str)
         except sqlite.DatabaseError as e:
-            logging.warning(
-                "DatabaseError while setting value for key %r: %s", path_str, str(e)
-            )
+            logging.warning("DatabaseError while setting value for key %r: %s", path_str, str(e))
 
     def _create_con(self, second_try=False):
         def create_tables():
             logging.debug("Creating picture cache tables.")
             self.con.execute("drop table if exists pictures")
             self.con.execute("drop index if exists idx_path")
-            self.con.execute(
-                "create table pictures(path TEXT, mtime INTEGER, blocks TEXT)"
-            )
+            self.con.execute("create table pictures(path TEXT, mtime INTEGER, blocks TEXT)")
             self.con.execute("create index idx_path on pictures (path)")
 
         self.con = sqlite.connect(self.dbname, isolation_level=None)
@@ -93,9 +88,7 @@ class SqliteCache:
         except sqlite.DatabaseError as e:  # corrupted db
             if second_try:
                 raise  # Something really strange is happening
-            logging.warning(
-                "Could not create picture cache because of an error: %s", str(e)
-            )
+            logging.warning("Could not create picture cache because of an error: %s", str(e))
             self.con.close()
             os.remove(self.dbname)
             self._create_con(second_try=True)
@@ -125,9 +118,7 @@ class SqliteCache:
             raise ValueError(path)
 
     def get_multiple(self, rowids):
-        sql = "select rowid, blocks from pictures where rowid in (%s)" % ",".join(
-            map(str, rowids)
-        )
+        sql = "select rowid, blocks from pictures where rowid in (%s)" % ",".join(map(str, rowids))
         cur = self.con.execute(sql)
         return ((rowid, string_to_colors(blocks)) for rowid, blocks in cur)
 
@@ -148,7 +139,5 @@ class SqliteCache:
                     continue
             todelete.append(rowid)
         if todelete:
-            sql = "delete from pictures where rowid in (%s)" % ",".join(
-                map(str, todelete)
-            )
+            sql = "delete from pictures where rowid in (%s)" % ",".join(map(str, todelete))
             self.con.execute(sql)

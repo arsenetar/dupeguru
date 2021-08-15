@@ -32,9 +32,7 @@ class DetailsPanel(GUIObject, DupeGuruGUIObject):
         # we don't want the two sides of the table to display the stats for the same file
         ref = group.ref if group is not None and group.ref is not dupe else None
         data2 = self.app.get_display_info(ref, group, False)
-        columns = self.app.result_table.COLUMNS[
-            1:
-        ]  # first column is the 'marked' column
+        columns = self.app.result_table.COLUMNS[1:]  # first column is the 'marked' column
         self._table = [(c.display, data1[c.name], data2[c.name]) for c in columns]
 
     # --- Public

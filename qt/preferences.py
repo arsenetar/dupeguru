@@ -20,9 +20,7 @@ class Preferences(PreferencesBase):
         get = self.get_value
         self.filter_hardness = get("FilterHardness", self.filter_hardness)
         self.mix_file_kind = get("MixFileKind", self.mix_file_kind)
-        self.ignore_hardlink_matches = get(
-            "IgnoreHardlinkMatches", self.ignore_hardlink_matches
-        )
+        self.ignore_hardlink_matches = get("IgnoreHardlinkMatches", self.ignore_hardlink_matches)
         self.use_regexp = get("UseRegexp", self.use_regexp)
         self.remove_empty_folders = get("RemoveEmptyFolders", self.remove_empty_folders)
         self.debug_mode = get("DebugMode", self.debug_mode)
@@ -34,37 +32,36 @@ class Preferences(PreferencesBase):
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
         self.reference_bold_font = get("ReferenceBoldFont", self.reference_bold_font)
-        self.details_dialog_titlebar_enabled = get("DetailsDialogTitleBarEnabled",
-                                                   self.details_dialog_titlebar_enabled)
-        self.details_dialog_vertical_titlebar = get("DetailsDialogVerticalTitleBar",
-                                                    self.details_dialog_vertical_titlebar)
+        self.details_dialog_titlebar_enabled = get("DetailsDialogTitleBarEnabled", self.details_dialog_titlebar_enabled)
+        self.details_dialog_vertical_titlebar = get(
+            "DetailsDialogVerticalTitleBar", self.details_dialog_vertical_titlebar
+        )
         # On Windows and MacOS, use internal icons by default
-        self.details_dialog_override_theme_icons =\
-            get("DetailsDialogOverrideThemeIcons",
-                self.details_dialog_override_theme_icons) if ISLINUX else True
-        self.details_table_delta_foreground_color =\
-            get("DetailsTableDeltaForegroundColor", self.details_table_delta_foreground_color)
-        self.details_dialog_viewers_show_scrollbars =\
-            get("DetailsDialogViewersShowScrollbars", self.details_dialog_viewers_show_scrollbars)
-
-        self.result_table_ref_foreground_color =\
-            get("ResultTableRefForegroundColor", self.result_table_ref_foreground_color)
-        self.result_table_ref_background_color =\
-            get("ResultTableRefBackgroundColor", self.result_table_ref_background_color)
-        self.result_table_delta_foreground_color =\
-            get("ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color)
-
-        self.resultWindowIsMaximized = get(
-            "ResultWindowIsMaximized", self.resultWindowIsMaximized
+        self.details_dialog_override_theme_icons = (
+            get("DetailsDialogOverrideThemeIcons", self.details_dialog_override_theme_icons) if ISLINUX else True
         )
+        self.details_table_delta_foreground_color = get(
+            "DetailsTableDeltaForegroundColor", self.details_table_delta_foreground_color
+        )
+        self.details_dialog_viewers_show_scrollbars = get(
+            "DetailsDialogViewersShowScrollbars", self.details_dialog_viewers_show_scrollbars
+        )
+
+        self.result_table_ref_foreground_color = get(
+            "ResultTableRefForegroundColor", self.result_table_ref_foreground_color
+        )
+        self.result_table_ref_background_color = get(
+            "ResultTableRefBackgroundColor", self.result_table_ref_background_color
+        )
+        self.result_table_delta_foreground_color = get(
+            "ResultTableDeltaForegroundColor", self.result_table_delta_foreground_color
+        )
+
+        self.resultWindowIsMaximized = get("ResultWindowIsMaximized", self.resultWindowIsMaximized)
         self.resultWindowRect = self.get_rect("ResultWindowRect", self.resultWindowRect)
-        self.mainWindowIsMaximized = get(
-            "MainWindowIsMaximized", self.mainWindowIsMaximized
-        )
+        self.mainWindowIsMaximized = get("MainWindowIsMaximized", self.mainWindowIsMaximized)
         self.mainWindowRect = self.get_rect("MainWindowRect", self.mainWindowRect)
-        self.directoriesWindowRect = self.get_rect(
-            "DirectoriesWindowRect", self.directoriesWindowRect
-        )
+        self.directoriesWindowRect = self.get_rect("DirectoriesWindowRect", self.directoriesWindowRect)
 
         self.recentResults = get("RecentResults", self.recentResults)
         self.recentFolders = get("RecentFolders", self.recentFolders)

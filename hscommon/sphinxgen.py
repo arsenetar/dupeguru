@@ -22,9 +22,7 @@ def tixgen(tixurl):
     """This is a filter *generator*. tixurl is a url pattern for the tix with a {0} placeholder
     for the tix #
     """
-    urlpattern = tixurl.format(
-        "\\1"
-    )  # will be replaced buy the content of the first group in re
+    urlpattern = tixurl.format("\\1")  # will be replaced buy the content of the first group in re
     R = re.compile(r"#(\d+)")
     repl = "`#\\1 <{}>`__".format(urlpattern)
     return lambda text: R.sub(repl, text)
@@ -61,9 +59,7 @@ def gen(
         # The format of the changelog descriptions is in markdown, but since we only use bulled list
         # and links, it's not worth depending on the markdown package. A simple regexp suffice.
         description = re.sub(r"\[(.*?)\]\((.*?)\)", "`\\1 <\\2>`__", description)
-        rendered = CHANGELOG_FORMAT.format(
-            version=log["version"], date=log["date_str"], description=description
-        )
+        rendered = CHANGELOG_FORMAT.format(version=log["version"], date=log["date_str"], description=description)
         rendered_logs.append(rendered)
     confrepl["version"] = changelog[0]["version"]
     changelog_out = op.join(basepath, "changelog.rst")
@@ -75,6 +71,4 @@ def gen(
     try:
         sphinx_build([basepath, destpath])
     except SystemExit:
-        print(
-            "Sphinx called sys.exit(), but we're cancelling it because we don't actually want to exit"
-        )
+        print("Sphinx called sys.exit(), but we're cancelling it because we don't actually want to exit")

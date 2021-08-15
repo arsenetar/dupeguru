@@ -6,14 +6,12 @@ from .base import DupeGuruGUIObject
 from hscommon.gui.table import GUITable, Row
 from hscommon.gui.column import Column, Columns
 from hscommon.trans import trget
+
 tr = trget("ui")
 
 
 class ExcludeListTable(GUITable, DupeGuruGUIObject):
-    COLUMNS = [
-        Column("marked", ""),
-        Column("regex", tr("Regular Expressions"))
-    ]
+    COLUMNS = [Column("marked", ""), Column("regex", tr("Regular Expressions"))]
 
     def __init__(self, exclude_list_dialog, app):
         GUITable.__init__(self)

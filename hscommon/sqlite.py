@@ -31,8 +31,8 @@ class FakeCursor(list):
 
 
 class _ActualThread(threading.Thread):
-    """ We can't use this class directly because thread object are not automatically freed when
-        nothing refers to it, making it hang the application if not explicitely closed.
+    """We can't use this class directly because thread object are not automatically freed when
+    nothing refers to it, making it hang the application if not explicitely closed.
     """
 
     def __init__(self, dbname, autocommit):

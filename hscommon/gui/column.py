@@ -80,8 +80,7 @@ class PrefAccessInterface:
         """
 
     def set_default(self, key, value):
-        """Set the value ``value`` for ``key`` in the currently running app's preference store.
-        """
+        """Set the value ``value`` for ``key`` in the currently running app's preference store."""
 
 
 class Columns(GUIObject):
@@ -140,33 +139,27 @@ class Columns(GUIObject):
 
     # --- Public
     def column_by_index(self, index):
-        """Return the :class:`Column` having the :attr:`~Column.logical_index` ``index``.
-        """
+        """Return the :class:`Column` having the :attr:`~Column.logical_index` ``index``."""
         return self.column_list[index]
 
     def column_by_name(self, name):
-        """Return the :class:`Column` having the :attr:`~Column.name` ``name``.
-        """
+        """Return the :class:`Column` having the :attr:`~Column.name` ``name``."""
         return self.coldata[name]
 
     def columns_count(self):
-        """Returns the number of columns in our set.
-        """
+        """Returns the number of columns in our set."""
         return len(self.column_list)
 
     def column_display(self, colname):
-        """Returns display name for column named ``colname``, or ``''`` if there's none.
-        """
+        """Returns display name for column named ``colname``, or ``''`` if there's none."""
         return self._get_colname_attr(colname, "display", "")
 
     def column_is_visible(self, colname):
-        """Returns visibility for column named ``colname``, or ``True`` if there's none.
-        """
+        """Returns visibility for column named ``colname``, or ``True`` if there's none."""
         return self._get_colname_attr(colname, "visible", True)
 
     def column_width(self, colname):
-        """Returns width for column named ``colname``, or ``0`` if there's none.
-        """
+        """Returns width for column named ``colname``, or ``0`` if there's none."""
         return self._get_colname_attr(colname, "width", 0)
 
     def columns_to_right(self, colname):
@@ -177,11 +170,7 @@ class Columns(GUIObject):
         """
         column = self.coldata[colname]
         index = column.ordered_index
-        return [
-            col.name
-            for col in self.column_list
-            if (col.visible and col.ordered_index > index)
-        ]
+        return [col.name for col in self.column_list if (col.visible and col.ordered_index > index)]
 
     def menu_items(self):
         """Returns a list of items convenient for quick visibility menu generation.
@@ -207,8 +196,7 @@ class Columns(GUIObject):
         self.set_column_order(colnames)
 
     def reset_to_defaults(self):
-        """Reset all columns' width and visibility to their default values.
-        """
+        """Reset all columns' width and visibility to their default values."""
         self.set_column_order([col.name for col in self.column_list])
         for col in self._optional_columns():
             col.visible = col.default_visible
@@ -216,13 +204,11 @@ class Columns(GUIObject):
         self.view.restore_columns()
 
     def resize_column(self, colname, newwidth):
-        """Set column ``colname``'s width to ``newwidth``.
-        """
+        """Set column ``colname``'s width to ``newwidth``."""
         self._set_colname_attr(colname, "width", newwidth)
 
     def restore_columns(self):
-        """Restore's column persistent attributes from the last :meth:`save_columns`.
-        """
+        """Restore's column persistent attributes from the last :meth:`save_columns`."""
         if not (self.prefaccess and self.savename and self.coldata):
             if (not self.savename) and (self.coldata):
                 # This is a table that will not have its coldata saved/restored. we should
@@ -241,8 +227,7 @@ class Columns(GUIObject):
         self.view.restore_columns()
 
     def save_columns(self):
-        """Save column attributes in persistent storage for restoration in :meth:`restore_columns`.
-        """
+        """Save column attributes in persistent storage for restoration in :meth:`restore_columns`."""
         if not (self.prefaccess and self.savename and self.coldata):
             return
         for col in self.column_list:
@@ -263,15 +248,13 @@ class Columns(GUIObject):
             col.ordered_index = i
 
     def set_column_visible(self, colname, visible):
-        """Set the visibility of column ``colname``.
-        """
+        """Set the visibility of column ``colname``."""
         self.table.save_edits()  # the table on the GUI side will stop editing when the columns change
         self._set_colname_attr(colname, "visible", visible)
         self.view.set_column_visible(colname, visible)
 
     def set_default_width(self, colname, width):
-        """Set the default width or column ``colname``.
-        """
+        """Set the default width or column ``colname``."""
         self._set_colname_attr(colname, "default_width", width)
 
     def toggle_menu_item(self, index):
@@ -289,14 +272,10 @@ class Columns(GUIObject):
     # --- Properties
     @property
     def ordered_columns(self):
-        """List of :class:`Column` in visible order.
-        """
-        return [
-            col for col in sorted(self.column_list, key=lambda col: col.ordered_index)
-        ]
+        """List of :class:`Column` in visible order."""
+        return [col for col in sorted(self.column_list, key=lambda col: col.ordered_index)]
 
     @property
     def colnames(self):
-        """List of column names in visible order.
-        """
+        """List of column names in visible order."""
         return [col.name for col in self.ordered_columns]

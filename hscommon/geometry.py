@@ -149,8 +149,7 @@ class Rect:
         return l1, l2, l3, l4
 
     def scaled_rect(self, dx, dy):
-        """Returns a rect that has the same borders at self, but grown/shrunk by dx/dy on each side.
-        """
+        """Returns a rect that has the same borders at self, but grown/shrunk by dx/dy on each side."""
         x, y, w, h = self
         x -= dx
         y -= dy
@@ -159,8 +158,7 @@ class Rect:
         return Rect(x, y, w, h)
 
     def united(self, other):
-        """Returns the bounding rectangle of this rectangle and `other`.
-        """
+        """Returns the bounding rectangle of this rectangle and `other`."""
         # ul=upper left lr=lower right
         ulcorner1, lrcorner1 = self.corners()
         ulcorner2, lrcorner2 = other.corners()

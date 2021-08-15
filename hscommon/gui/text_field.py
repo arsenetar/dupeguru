@@ -71,8 +71,7 @@ class TextField(GUIObject):
 
     # --- Public
     def refresh(self):
-        """Triggers a view :meth:`~TextFieldView.refresh`.
-        """
+        """Triggers a view :meth:`~TextFieldView.refresh`."""
         self.view.refresh()
 
     @property

@@ -5,13 +5,22 @@
 import re
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtWidgets import (
-    QPushButton, QLineEdit, QVBoxLayout, QGridLayout, QDialog,
-    QTableView, QAbstractItemView, QSpacerItem, QSizePolicy, QHeaderView
+    QPushButton,
+    QLineEdit,
+    QVBoxLayout,
+    QGridLayout,
+    QDialog,
+    QTableView,
+    QAbstractItemView,
+    QSpacerItem,
+    QSizePolicy,
+    QHeaderView,
 )
 from .exclude_list_table import ExcludeListTable
 
 from core.exclude import AlreadyThereException
 from hscommon.trans import trget
+
 tr = trget("ui")
 
 
@@ -51,9 +60,7 @@ class ExcludeListDialog(QDialog):
         self.testLine = QLineEdit()
         self.tableView = QTableView()
         triggers = (
-            QAbstractItemView.DoubleClicked
-            | QAbstractItemView.EditKeyPressed
-            | QAbstractItemView.SelectedClicked
+            QAbstractItemView.DoubleClicked | QAbstractItemView.EditKeyPressed | QAbstractItemView.SelectedClicked
         )
         self.tableView.setEditTriggers(triggers)
         self.tableView.setSelectionMode(QTableView.ExtendedSelection)
@@ -150,7 +157,9 @@ class ExcludeListDialog(QDialog):
         self.table.refresh()
 
     def display_help_message(self):
-        self.app.show_message(tr("""\
+        self.app.show_message(
+            tr(
+                """\
 These (case sensitive) python regular expressions will filter out files during scans.<br>\
 Directores will also have their <strong>default state</strong> set to Excluded \
 in the Directories tab if their name happens to match one of the selected regular expressions.<br>\
@@ -163,4 +172,6 @@ You can test the regular expression with the "test string" button after pasting 
 <code>C:\\\\User\\My Pictures\\test.png</code><br><br>
 Matching regular expressions will be highlighted.<br>\
 If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>\
-Directories and files starting with a period '.' are filtered out by default.<br><br>"""))
+Directories and files starting with a period '.' are filtered out by default.<br><br>"""
+            )
+        )

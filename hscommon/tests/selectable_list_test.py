@@ -44,9 +44,7 @@ def test_guicalls():
     # A GUISelectableList appropriately calls its view.
     sl = GUISelectableList(["foo", "bar"])
     sl.view = CallLogger()
-    sl.view.check_gui_calls(
-        ["refresh"]
-    )  # Upon setting the view, we get a call to refresh()
+    sl.view.check_gui_calls(["refresh"])  # Upon setting the view, we get a call to refresh()
     sl[1] = "baz"
     sl.view.check_gui_calls(["refresh"])
     sl.append("foo")

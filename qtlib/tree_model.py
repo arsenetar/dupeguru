@@ -84,9 +84,7 @@ class DummyNode(TreeNode):
 class TreeModel(QAbstractItemModel, NodeContainer):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._dummyNodes = (
-            set()
-        )  # dummy nodes' reference have to be kept to avoid segfault
+        self._dummyNodes = set()  # dummy nodes' reference have to be kept to avoid segfault
 
     # --- Private
     def _createDummyNode(self, parent, row):
@@ -98,8 +96,7 @@ class TreeModel(QAbstractItemModel, NodeContainer):
         return DummyNode(self, parent, row)
 
     def _lastIndex(self):
-        """Index of the very last item in the tree.
-        """
+        """Index of the very last item in the tree."""
         currentIndex = QModelIndex()
         rowCount = self.rowCount(currentIndex)
         while rowCount > 0:

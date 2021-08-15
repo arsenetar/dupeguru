@@ -254,7 +254,12 @@ def test_invalid_path():
 def test_set_state_on_invalid_path():
     d = Directories()
     try:
-        d.set_state(Path("foobar",), DirectoryState.Normal)
+        d.set_state(
+            Path(
+                "foobar",
+            ),
+            DirectoryState.Normal,
+        )
     except LookupError:
         assert False
 
@@ -345,15 +350,17 @@ def test_default_path_state_override(tmpdir):
     eq_(len(list(d.get_files())), 2)
 
 
-class TestExcludeList():
+class TestExcludeList:
     def setup_method(self, method):
         self.d = Directories(exclude_list=ExcludeList(union_regex=False))
 
     def get_files_and_expect_num_result(self, num_result):
         """Calls get_files(), get the filenames only, print for debugging.
         num_result is how many files are expected as a result."""
-        print(f"EXCLUDED REGEX: paths {self.d._exclude_list.compiled_paths} \
-files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled}")
+        print(
+            f"EXCLUDED REGEX: paths {self.d._exclude_list.compiled_paths} \
+files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled}"
+        )
         files = list(self.d.get_files())
         files = [file.name for file in files]
         print(f"FINAL FILES {files}")

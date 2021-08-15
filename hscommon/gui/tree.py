@@ -55,8 +55,7 @@ class Node(MutableSequence):
 
     # --- Public
     def clear(self):
-        """Clears the node of all its children.
-        """
+        """Clears the node of all its children."""
         del self[:]
 
     def find(self, predicate, include_self=True):
@@ -103,14 +102,12 @@ class Node(MutableSequence):
 
     @property
     def children_count(self):
-        """Same as ``len(self)``.
-        """
+        """Same as ``len(self)``."""
         return len(self)
 
     @property
     def name(self):
-        """Name for the node, supplied on init.
-        """
+        """Name for the node, supplied on init."""
         return self._name
 
     @property

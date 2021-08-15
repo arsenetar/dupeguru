@@ -27,9 +27,7 @@ class Selectable(Sequence):
             self._selected_indexes = []
         if not self._selected_indexes:
             return
-        self._selected_indexes = [
-            index for index in self._selected_indexes if index < len(self)
-        ]
+        self._selected_indexes = [index for index in self._selected_indexes if index < len(self)]
         if not self._selected_indexes:
             self._selected_indexes = [len(self) - 1]
 

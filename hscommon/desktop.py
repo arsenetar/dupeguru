@@ -16,20 +16,17 @@ class SpecialFolder:
 
 
 def open_url(url):
-    """Open ``url`` with the default browser.
-    """
+    """Open ``url`` with the default browser."""
     _open_url(url)
 
 
 def open_path(path):
-    """Open ``path`` with its associated application.
-    """
+    """Open ``path`` with its associated application."""
     _open_path(str(path))
 
 
 def reveal_path(path):
-    """Open the folder containing ``path`` with the default file browser.
-    """
+    """Open the folder containing ``path`` with the default file browser."""
     _reveal_path(str(path))
 
 

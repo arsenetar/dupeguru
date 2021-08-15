@@ -102,20 +102,14 @@ class SearchEdit(ClearableEdit):
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
             panel = QStyleOptionFrame()
             self.initStyleOption(panel)
-            textRect = self.style().subElementRect(
-                QStyle.SE_LineEditContents, panel, self
-            )
+            textRect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
             leftMargin = 2
             rightMargin = self._clearButton.iconSize().width()
             textRect.adjust(leftMargin, 0, -rightMargin, 0)
             painter = QPainter(self)
-            disabledColor = (
-                self.palette().brush(QPalette.Disabled, QPalette.Text).color()
-            )
+            disabledColor = self.palette().brush(QPalette.Disabled, QPalette.Text).color()
             painter.setPen(disabledColor)
-            painter.drawText(
-                textRect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText
-            )
+            painter.drawText(textRect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText)
 
     # --- Event Handlers
     def _returnPressed(self):
@@ -123,6 +117,4 @@ class SearchEdit(ClearableEdit):
             self.searchChanged.emit()
 
     # --- Signals
-    searchChanged = (
-        pyqtSignal()
-    )  # Emitted when return is pressed or when the test is cleared
+    searchChanged = pyqtSignal()  # Emitted when return is pressed or when the test is cleared

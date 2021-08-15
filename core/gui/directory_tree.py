@@ -36,9 +36,7 @@ class DirectoryNode(Node):
         self._loaded = True
 
     def update_all_states(self):
-        self._state = STATE_ORDER.index(
-            self._tree.app.directories.get_state(self._directory_path)
-        )
+        self._state = STATE_ORDER.index(self._tree.app.directories.get_state(self._directory_path))
         for node in self:
             node.update_all_states()
 

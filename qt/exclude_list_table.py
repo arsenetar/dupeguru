@@ -8,15 +8,14 @@ from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
 from qtlib.column import Column
 from qtlib.table import Table
 from hscommon.trans import trget
+
 tr = trget("ui")
 
 
 class ExcludeListTable(Table):
     """Model for exclude list"""
-    COLUMNS = [
-        Column("marked", defaultWidth=15),
-        Column("regex", defaultWidth=230)
-    ]
+
+    COLUMNS = [Column("marked", defaultWidth=15), Column("regex", defaultWidth=230)]
 
     def __init__(self, app, view, **kwargs):
         model = app.model.exclude_list_dialog.exclude_list_table  # pointer to GUITable

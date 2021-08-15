@@ -105,9 +105,7 @@ def test_iterconsume():
     # We just want to make sure that we return *all* items and that we're not mistakenly skipping
     # one.
     eq_(list(range(2500)), list(iterconsume(list(range(2500)))))
-    eq_(
-        list(reversed(range(2500))), list(iterconsume(list(range(2500)), reverse=False))
-    )
+    eq_(list(reversed(range(2500))), list(iterconsume(list(range(2500)), reverse=False)))
 
 
 # --- String

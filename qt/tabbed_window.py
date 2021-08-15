@@ -19,6 +19,7 @@ from .directories_dialog import DirectoriesDialog
 from .result_window import ResultWindow
 from .ignore_list_dialog import IgnoreListDialog
 from .exclude_list_dialog import ExcludeListDialog
+
 tr = trget("ui")
 
 
@@ -135,16 +136,15 @@ class TabWindow(QMainWindow):
                 action.setEnabled(True)
 
         self.app.directories_dialog.actionShowResultsWindow.setEnabled(
-            False if page_type == "ResultWindow"
-            else self.app.resultWindow is not None)
+            False if page_type == "ResultWindow" else self.app.resultWindow is not None
+        )
         self.app.actionIgnoreList.setEnabled(
-            True if self.app.ignoreListDialog is not None
-            and not page_type == "IgnoreListDialog" else False)
-        self.app.actionDirectoriesWindow.setEnabled(
-            False if page_type == "DirectoriesDialog" else True)
+            True if self.app.ignoreListDialog is not None and not page_type == "IgnoreListDialog" else False
+        )
+        self.app.actionDirectoriesWindow.setEnabled(False if page_type == "DirectoriesDialog" else True)
         self.app.actionExcludeList.setEnabled(
-            True if self.app.excludeListDialog is not None
-            and not page_type == "ExcludeListDialog" else False)
+            True if self.app.excludeListDialog is not None and not page_type == "ExcludeListDialog" else False
+        )
 
         self.previous_widget_actions = active_widget.specific_actions
         self.last_index = current_index
@@ -176,8 +176,7 @@ class TabWindow(QMainWindow):
         index = self.tabWidget.addTab(page, title)
         # index = self.tabWidget.insertTab(-1, page, title)
         if isinstance(page, DirectoriesDialog):
-            self.tabWidget.tabBar().setTabButton(
-                index, QTabBar.RightSide, None)
+            self.tabWidget.tabBar().setTabButton(index, QTabBar.RightSide, None)
         if switch:
             self.setCurrentIndex(index)
         return index
@@ -250,6 +249,7 @@ class TabWindow(QMainWindow):
 class TabBarWindow(TabWindow):
     """Implementation which uses a separate QTabBar and QStackedWidget.
     The Tab bar is placed next to the menu bar to save real estate."""
+
     def __init__(self, app, **kwargs):
         super().__init__(app, **kwargs)
 
@@ -286,8 +286,7 @@ class TabBarWindow(TabWindow):
         self.tabBar.insertTab(stack_index, title)
 
         if isinstance(page, DirectoriesDialog):
-            self.tabBar.setTabButton(
-                stack_index, QTabBar.RightSide, None)
+            self.tabBar.setTabButton(stack_index, QTabBar.RightSide, None)
         if switch:  # switch to the added tab immediately upon creation
             self.setTabIndex(stack_index)
         return stack_index

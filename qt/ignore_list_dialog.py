@@ -56,9 +56,7 @@ class IgnoreListDialog(QDialog):
         self.clearButton = QPushButton(tr("Clear"))
         self.closeButton = QPushButton(tr("Close"))
         self.verticalLayout.addLayout(
-            horizontalWrap(
-                [self.removeSelectedButton, self.clearButton, None, self.closeButton]
-            )
+            horizontalWrap([self.removeSelectedButton, self.clearButton, None, self.closeButton])
         )
 
     # --- model --> view

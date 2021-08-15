@@ -34,15 +34,11 @@ class PreferencesDialog(PreferencesDialogBase):
         self.verticalLayout_4 = QVBoxLayout(self.widget)
         self._setupAddCheckbox("wordWeightingBox", tr("Word weighting"), self.widget)
         self.verticalLayout_4.addWidget(self.wordWeightingBox)
-        self._setupAddCheckbox(
-            "matchSimilarBox", tr("Match similar words"), self.widget
-        )
+        self._setupAddCheckbox("matchSimilarBox", tr("Match similar words"), self.widget)
         self.verticalLayout_4.addWidget(self.matchSimilarBox)
         self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"), self.widget)
         self.verticalLayout_4.addWidget(self.mixFileKindBox)
-        self._setupAddCheckbox(
-            "useRegexpBox", tr("Use regular expressions when filtering"), self.widget
-        )
+        self._setupAddCheckbox("useRegexpBox", tr("Use regular expressions when filtering"), self.widget)
         self.verticalLayout_4.addWidget(self.useRegexpBox)
         self._setupAddCheckbox(
             "removeEmptyFoldersBox",
@@ -51,17 +47,13 @@ class PreferencesDialog(PreferencesDialogBase):
         )
         self.verticalLayout_4.addWidget(self.removeEmptyFoldersBox)
         self.horizontalLayout_2 = QHBoxLayout()
-        self._setupAddCheckbox(
-            "ignoreSmallFilesBox", tr("Ignore files smaller than"), self.widget
-        )
+        self._setupAddCheckbox("ignoreSmallFilesBox", tr("Ignore files smaller than"), self.widget)
         self.horizontalLayout_2.addWidget(self.ignoreSmallFilesBox)
         self.sizeThresholdSpinBox = QSpinBox(self.widget)
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.sizeThresholdSpinBox.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.sizeThresholdSpinBox.sizePolicy().hasHeightForWidth())
         self.sizeThresholdSpinBox.setSizePolicy(sizePolicy)
         self.sizeThresholdSpinBox.setMaximumSize(QSize(100, 16777215))
         self.sizeThresholdSpinBox.setRange(0, 1000000)
@@ -96,9 +88,7 @@ class PreferencesDialog(PreferencesDialogBase):
             self.widget,
         )
         self.verticalLayout_4.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox(
-            "debugModeBox", tr("Debug mode (restart required)"), self.widget
-        )
+        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"), self.widget)
         self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()

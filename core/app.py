@@ -132,9 +132,7 @@ class DupeGuru(Broadcaster):
             logging.debug("Debug mode enabled")
         Broadcaster.__init__(self)
         self.view = view
-        self.appdata = desktop.special_folder_path(
-            desktop.SpecialFolder.AppData, appname=self.NAME
-        )
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.Standard
@@ -182,17 +180,13 @@ class DupeGuru(Broadcaster):
 
     def _get_picture_cache_path(self):
         cache_type = self.options["picture_cache_type"]
-        cache_name = (
-            "cached_pictures.shelve" if cache_type == "shelve" else "cached_pictures.db"
-        )
+        cache_name = "cached_pictures.shelve" if cache_type == "shelve" else "cached_pictures.db"
         return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
         if self.app_mode in (AppMode.Music, AppMode.Picture):
             if key == "folder_path":
-                dupe_folder_path = getattr(
-                    dupe, "display_folder_path", dupe.folder_path
-                )
+                dupe_folder_path = getattr(dupe, "display_folder_path", dupe.folder_path)
                 return str(dupe_folder_path).lower()
         if self.app_mode == AppMode.Picture:
             if delta and key == "dimensions":
@@ -220,9 +214,7 @@ class DupeGuru(Broadcaster):
     def _get_group_sort_key(self, group, key):
         if self.app_mode in (AppMode.Music, AppMode.Picture):
             if key == "folder_path":
-                dupe_folder_path = getattr(
-                    group.ref, "display_folder_path", group.ref.folder_path
-                )
+                dupe_folder_path = getattr(group.ref, "display_folder_path", group.ref.folder_path)
                 return str(dupe_folder_path).lower()
         if key == "percentage":
             return group.percentage
@@ -235,9 +227,7 @@ class DupeGuru(Broadcaster):
     def _do_delete(self, j, link_deleted, use_hardlinks, direct_deletion):
         def op(dupe):
             j.add_progress()
-            return self._do_delete_dupe(
-                dupe, link_deleted, use_hardlinks, direct_deletion
-            )
+            return self._do_delete_dupe(dupe, link_deleted, use_hardlinks, direct_deletion)
 
         j.start_job(self.results.mark_count)
         self.results.perform_on_marked(op, True)
@@ -277,11 +267,7 @@ class DupeGuru(Broadcaster):
             return None
 
     def _get_export_data(self):
-        columns = [
-            col
-            for col in self.result_table.columns.ordered_columns
-            if col.visible and col.name != "marked"
-        ]
+        columns = [col for col in self.result_table.columns.ordered_columns if col.visible and col.name != "marked"]
         colnames = [col.display for col in columns]
         rows = []
         for group_id, group in enumerate(self.results.groups):
@@ -293,11 +279,7 @@ class DupeGuru(Broadcaster):
         return colnames, rows
 
     def _results_changed(self):
-        self.selected_dupes = [
-            d
-            for d in self.selected_dupes
-            if self.results.get_group_of_duplicate(d) is not None
-        ]
+        self.selected_dupes = [d for d in self.selected_dupes if self.results.get_group_of_duplicate(d) is not None]
         self.notify("results_changed")
 
     def _start_job(self, jobid, func, args=()):
@@ -332,9 +314,7 @@ class DupeGuru(Broadcaster):
                 msg = {
                     JobType.Copy: tr("All marked files were copied successfully."),
                     JobType.Move: tr("All marked files were moved successfully."),
-                    JobType.Delete: tr(
-                        "All marked files were successfully sent to Trash."
-                    ),
+                    JobType.Delete: tr("All marked files were successfully sent to Trash."),
                 }[jobid]
                 self.view.show_message(msg)
 
@@ -401,15 +381,12 @@ class DupeGuru(Broadcaster):
             self.view.show_message(tr("'{}' does not exist.").format(d))
 
     def add_selected_to_ignore_list(self):
-        """Adds :attr:`selected_dupes` to :attr:`ignore_list`.
-        """
+        """Adds :attr:`selected_dupes` to :attr:`ignore_list`."""
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             self.view.show_message(MSG_NO_SELECTED_DUPES)
             return
-        msg = tr(
-            "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
-        )
+        msg = tr("All selected %d matches are going to be ignored in all subsequent scans. Continue?")
         if not self.view.ask_yes_no(msg % len(dupes)):
             return
         for dupe in dupes:
@@ -483,16 +460,17 @@ class DupeGuru(Broadcaster):
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
         destination = self.view.select_dest_folder(
-            tr("Select a directory to copy marked files to") if copy
-            else tr("Select a directory to move marked files to"))
+            tr("Select a directory to copy marked files to")
+            if copy
+            else tr("Select a directory to move marked files to")
+        )
         if destination:
             desttype = self.options["copymove_dest_type"]
             jobid = JobType.Copy if copy else JobType.Move
             self._start_job(jobid, do)
 
     def delete_marked(self):
-        """Start an async job to send marked duplicates to the trash.
-        """
+        """Start an async job to send marked duplicates to the trash."""
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -523,9 +501,7 @@ class DupeGuru(Broadcaster):
         The columns and their order in the resulting CSV file is determined in the same way as in
         :meth:`export_to_xhtml`.
         """
-        dest_file = self.view.select_dest_file(
-            tr("Select a destination for your exported CSV"), "csv"
-        )
+        dest_file = self.view.select_dest_file(tr("Select a destination for your exported CSV"), "csv")
         if dest_file:
             colnames, rows = self._get_export_data()
             try:
@@ -542,9 +518,7 @@ class DupeGuru(Broadcaster):
         try:
             return dupe.get_display_info(group, delta)
         except Exception as e:
-            logging.warning(
-                "Exception (type: %s) on GetDisplayInfo for %s: %s",
-                type(e), str(dupe.path), str(e))
+            logging.warning("Exception (type: %s) on GetDisplayInfo for %s: %s", type(e), str(dupe.path), str(e))
             return empty_data()
 
     def invoke_custom_command(self):
@@ -556,9 +530,7 @@ class DupeGuru(Broadcaster):
         """
         cmd = self.view.get_default("CustomCommand")
         if not cmd:
-            msg = tr(
-                "You have no custom command set up. Set it up in your preferences."
-            )
+            msg = tr("You have no custom command set up. Set it up in your preferences.")
             self.view.show_message(msg)
             return
         if not self.selected_dupes:
@@ -634,9 +606,7 @@ class DupeGuru(Broadcaster):
         if not self.result_table.power_marker:
             if changed_groups:
                 self.selected_dupes = [
-                    d
-                    for d in self.selected_dupes
-                    if self.results.get_group_of_duplicate(d).ref is d
+                    d for d in self.selected_dupes if self.results.get_group_of_duplicate(d).ref is d
                 ]
             self.notify("results_changed")
         else:
@@ -648,20 +618,17 @@ class DupeGuru(Broadcaster):
             self.notify("results_changed_but_keep_selection")
 
     def mark_all(self):
-        """Set all dupes in the results as marked.
-        """
+        """Set all dupes in the results as marked."""
         self.results.mark_all()
         self.notify("marking_changed")
 
     def mark_none(self):
-        """Set all dupes in the results as unmarked.
-        """
+        """Set all dupes in the results as unmarked."""
         self.results.mark_none()
         self.notify("marking_changed")
 
     def mark_invert(self):
-        """Invert the marked state of all dupes in the results.
-        """
+        """Invert the marked state of all dupes in the results."""
         self.results.mark_invert()
         self.notify("marking_changed")
 
@@ -679,8 +646,7 @@ class DupeGuru(Broadcaster):
         self.notify("marking_changed")
 
     def open_selected(self):
-        """Open :attr:`selected_dupes` with their associated application.
-        """
+        """Open :attr:`selected_dupes` with their associated application."""
         if len(self.selected_dupes) > 10:
             if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
                 return
@@ -688,8 +654,7 @@ class DupeGuru(Broadcaster):
             desktop.open_path(dupe.path)
 
     def purge_ignore_list(self):
-        """Remove files that don't exist from :attr:`ignore_list`.
-        """
+        """Remove files that don't exist from :attr:`ignore_list`."""
         self.ignore_list.Filter(lambda f, s: op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
 
@@ -719,8 +684,7 @@ class DupeGuru(Broadcaster):
         self.notify("results_changed_but_keep_selection")
 
     def remove_marked(self):
-        """Removed marked duplicates from the results (without touching the files themselves).
-        """
+        """Removed marked duplicates from the results (without touching the files themselves)."""
         if not self.results.mark_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
@@ -731,8 +695,7 @@ class DupeGuru(Broadcaster):
         self._results_changed()
 
     def remove_selected(self):
-        """Removed :attr:`selected_dupes` from the results (without touching the files themselves).
-        """
+        """Removed :attr:`selected_dupes` from the results (without touching the files themselves)."""
         dupes = self.without_ref(self.selected_dupes)
         if not dupes:
             self.view.show_message(MSG_NO_SELECTED_DUPES)
@@ -773,9 +736,7 @@ class DupeGuru(Broadcaster):
         if count:
             self.results.refresh_required = True
         self._results_changed()
-        msg = tr("{} duplicate groups were changed by the re-prioritization.").format(
-            count
-        )
+        msg = tr("{} duplicate groups were changed by the re-prioritization.").format(count)
         self.view.show_message(msg)
 
     def reveal_selected(self):
@@ -819,9 +780,7 @@ class DupeGuru(Broadcaster):
         """
         scanner = self.SCANNER_CLASS()
         if not self.directories.has_any_file():
-            self.view.show_message(
-                tr("The selected directories contain no scannable file.")
-            )
+            self.view.show_message(tr("The selected directories contain no scannable file."))
             return
         # Send relevant options down to the scanner instance
         for k, v in self.options.items():
@@ -836,13 +795,9 @@ class DupeGuru(Broadcaster):
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.Folders:
-                files = list(
-                    self.directories.get_folders(folderclass=se.fs.Folder, j=j)
-                )
+                files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
             else:
-                files = list(
-                    self.directories.get_files(fileclasses=self.fileclasses, j=j)
-                )
+                files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
             if self.options["ignore_hardlink_matches"]:
                 files = self._remove_hardlink_dupes(files)
             logging.info("Scanning %d files" % len(files))
@@ -864,13 +819,8 @@ class DupeGuru(Broadcaster):
         self.notify("marking_changed")
 
     def without_ref(self, dupes):
-        """Returns ``dupes`` with all reference elements removed.
-        """
-        return [
-            dupe
-            for dupe in dupes
-            if self.results.get_group_of_duplicate(dupe).ref is not dupe
-        ]
+        """Returns ``dupes`` with all reference elements removed."""
+        return [dupe for dupe in dupes if self.results.get_group_of_duplicate(dupe).ref is not dupe]
 
     def get_default(self, key, fallback_value=None):
         result = nonone(self.view.get_default(key), fallback_value)

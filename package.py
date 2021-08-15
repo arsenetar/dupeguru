@@ -82,11 +82,7 @@ def package_debian_distribution(distribution):
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, "control"), op.join(debdest, "control"), **debopts)
     filereplace(op.join(debskel, "Makefile"), op.join(destpath, "Makefile"), **debopts)
-    filereplace(
-        op.join(debskel, "dupeguru.desktop"),
-        op.join(debdest, "dupeguru.desktop"),
-        **debopts
-    )
+    filereplace(op.join(debskel, "dupeguru.desktop"), op.join(debdest, "dupeguru.desktop"), **debopts)
     changelogpath = op.join("help", "changelog")
     changelog_dest = op.join(debdest, "changelog")
     project_name = debopts["pkgname"]
@@ -128,11 +124,7 @@ def package_arch():
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
-    filereplace(
-        op.join("pkg", "arch", "dupeguru.desktop"),
-        op.join(srcpath, "dupeguru.desktop"),
-        **debopts
-    )
+    filereplace(op.join("pkg", "arch", "dupeguru.desktop"), op.join(srcpath, "dupeguru.desktop"), **debopts)
 
 
 def package_source_txz():
@@ -173,11 +165,7 @@ def package_windows():
         version_info = version_template.read()
         version_template.close()
         version_info_file = open("win_version_info.txt", "w")
-        version_info_file.write(
-            version_info.format(
-                version_array[0], version_array[1], version_array[2], bits
-            )
-        )
+        version_info_file.write(version_info.format(version_array[0], version_array[1], version_array[2], bits))
         version_info_file.close()
     except Exception:
         print("Error creating version info file, exiting...")
@@ -195,9 +183,7 @@ def package_windows():
             "--add-data=build/locale;locale",
             "--add-data=build/help;help",
             "--version-file=win_version_info.txt",
-            "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(
-                arch
-            ),
+            "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(arch),
             "run.py",
         ]
     )

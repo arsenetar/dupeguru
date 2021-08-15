@@ -56,8 +56,7 @@ class Job:
 
     # ---Private
     def _subjob_callback(self, progress, desc=""):
-        """This is the callback passed to children jobs.
-        """
+        """This is the callback passed to children jobs."""
         self.set_progress(progress, desc)
         return True  # if JobCancelled has to be raised, it will be at the highest level
 

@@ -73,9 +73,7 @@ def test_save_to_xml():
     eq_(len(root), 2)
     eq_(len([c for c in root if c.tag == "file"]), 2)
     f1, f2 = root[:]
-    subchildren = [c for c in f1 if c.tag == "file"] + [
-        c for c in f2 if c.tag == "file"
-    ]
+    subchildren = [c for c in f1 if c.tag == "file"] + [c for c in f2 if c.tag == "file"]
     eq_(len(subchildren), 3)
 
 
@@ -96,9 +94,7 @@ def test_SaveThenLoad():
 
 def test_LoadXML_with_empty_file_tags():
     f = io.BytesIO()
-    f.write(
-        b'<?xml version="1.0" encoding="utf-8"?><ignore_list><file><file/></file></ignore_list>'
-    )
+    f.write(b'<?xml version="1.0" encoding="utf-8"?><ignore_list><file><file/></file></ignore_list>')
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)

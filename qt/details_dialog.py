@@ -31,8 +31,7 @@ class DetailsDialog(QDockWidget):
         self.model.view = self
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
         # self.setAttribute(Qt.WA_DeleteOnClose)
-        parent.addDockWidget(
-            area if self._wasDocked else Qt.BottomDockWidgetArea, self)
+        parent.addDockWidget(area if self._wasDocked else Qt.BottomDockWidgetArea, self)
 
     def _setupUi(self):  # Virtual
         pass

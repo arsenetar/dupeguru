@@ -79,12 +79,8 @@ class PrioritizeDialog(QDialog):
         super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.model = PrioritizeDialogModel(app=app.model)
-        self.categoryList = ComboboxModel(
-            model=self.model.category_list, view=self.categoryCombobox
-        )
-        self.criteriaList = ListviewModel(
-            model=self.model.criteria_list, view=self.criteriaListView
-        )
+        self.categoryList = ComboboxModel(model=self.model.category_list, view=self.categoryCombobox)
+        self.criteriaList = ListviewModel(model=self.model.criteria_list, view=self.criteriaListView)
         self.prioritizationList = PrioritizationList(
             model=self.model.prioritization_list, view=self.prioritizationListView
         )
@@ -112,12 +108,8 @@ class PrioritizeDialog(QDialog):
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
         self.criteriaListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.addCriteriaButton = QPushButton(
-            self.style().standardIcon(QStyle.SP_ArrowRight), ""
-        )
-        self.removeCriteriaButton = QPushButton(
-            self.style().standardIcon(QStyle.SP_ArrowLeft), ""
-        )
+        self.addCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowRight), "")
+        self.removeCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowLeft), "")
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
         self.prioritizationListView.setDragEnabled(True)

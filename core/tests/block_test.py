@@ -14,9 +14,7 @@ except ImportError:
     skip("Can't import the block module, probably hasn't been compiled.")
 
 
-def my_avgdiff(
-    first, second, limit=768, min_iter=3
-):  # this is so I don't have to re-write every call
+def my_avgdiff(first, second, limit=768, min_iter=3):  # this is so I don't have to re-write every call
     return avgdiff(first, second, limit, min_iter)
 
 

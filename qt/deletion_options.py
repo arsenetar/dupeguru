@@ -42,9 +42,7 @@ class DeletionOptions(QDialog):
         self.linkMessageLabel = QLabel(text)
         self.linkMessageLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.linkMessageLabel)
-        self.linkTypeRadio = RadioBox(
-            items=[tr("Symlink"), tr("Hardlink")], spread=False
-        )
+        self.linkTypeRadio = RadioBox(items=[tr("Symlink"), tr("Hardlink")], spread=False)
         self.verticalLayout.addWidget(self.linkTypeRadio)
         if not self.model.supports_links():
             self.linkCheckbox.setEnabled(False)

@@ -29,22 +29,16 @@ class Table(QAbstractTableModel):
         self.view.setModel(self)
         self.model.view = self
         if hasattr(self.model, "columns"):
-            self.columns = Columns(
-                self.model.columns, self.COLUMNS, view.horizontalHeader()
-            )
+            self.columns = Columns(self.model.columns, self.COLUMNS, view.horizontalHeader())
 
-        self.view.selectionModel().selectionChanged[
-            (QItemSelection, QItemSelection)
-        ].connect(self.selectionChanged)
+        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
 
     def _updateModelSelection(self):
         # Takes the selection on the view's side and update the model with it.
         # an _updateViewSelection() call will normally result in an _updateModelSelection() call.
         # to avoid infinite loops, we check that the selection will actually change before calling
         # model.select()
-        newIndexes = [
-            modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()
-        ]
+        newIndexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
         if newIndexes != self.model.selected_indexes:
             self.model.select(newIndexes)
 
@@ -53,17 +47,11 @@ class Table(QAbstractTableModel):
         newSelection = QItemSelection()
         columnCount = self.columnCount(QModelIndex())
         for index in self.model.selected_indexes:
-            newSelection.select(
-                self.createIndex(index, 0), self.createIndex(index, columnCount - 1)
-            )
-        self.view.selectionModel().select(
-            newSelection, QItemSelectionModel.ClearAndSelect
-        )
+            newSelection.select(self.createIndex(index, 0), self.createIndex(index, columnCount - 1))
+        self.view.selectionModel().select(newSelection, QItemSelectionModel.ClearAndSelect)
         if len(newSelection.indexes()):
             currentIndex = newSelection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(
-                currentIndex, QItemSelectionModel.Current
-            )
+            self.view.selectionModel().setCurrentIndex(currentIndex, QItemSelectionModel.Current)
             self.view.scrollTo(currentIndex)
 
     # --- Data Model methods

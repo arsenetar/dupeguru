@@ -5,14 +5,13 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import (
-    QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame)
+from PyQt5.QtWidgets import QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
 from PyQt5.QtGui import QResizeEvent
 from hscommon.trans import trget
 from ..details_dialog import DetailsDialog as DetailsDialogBase
 from ..details_table import DetailsTable
-from .image_viewer import (
-    ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController)
+from .image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
+
 tr = trget("ui")
 
 
@@ -70,8 +69,7 @@ class DetailsDialog(DetailsDialogBase):
         self.splitter.addWidget(self.tableView)
         self.splitter.setStretchFactor(1, 1)
         # Late population needed here for connections to the toolbar
-        self.vController.setupViewers(
-            self.selectedImageViewer, self.referenceImageViewer)
+        self.vController.setupViewers(self.selectedImageViewer, self.referenceImageViewer)
         # self.setCentralWidget(self.splitter)  # only as QMainWindow
         self.setWidget(self.splitter)  # only as QDockWidget
 
@@ -103,11 +101,11 @@ class DetailsDialog(DetailsDialogBase):
         # Give the splitter a maximum height to reach. This is assuming that
         # all rows below their headers have the same height
         self.tableView.setMaximumHeight(
-            self.tableView.rowHeight(1)
-            * self.tableModel.model.row_count()
+            self.tableView.rowHeight(1) * self.tableModel.model.row_count()
             + self.tableView.verticalHeader().sectionSize(0)
             # looks like the handle is taken into account by the splitter
-            + self.splitter.handle(1).size().height())
+            + self.splitter.handle(1).size().height()
+        )
         DetailsDialogBase.show(self)
         self.ensure_same_sizes()
         self._update()
@@ -138,6 +136,7 @@ class DetailsDialog(DetailsDialogBase):
 
 class EmittingFrame(QFrame):
     """Emits a signal whenever is resized"""
+
     resized = pyqtSignal(QResizeEvent)
 
     def resizeEvent(self, event):

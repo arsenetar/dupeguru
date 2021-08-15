@@ -105,9 +105,7 @@ def test_findall_dont_include_self():
     # When calling findall with include_self=False, the node itself is never evaluated.
     t = tree_with_some_nodes()
     del t._name  # so that if the predicate is called on `t`, we crash
-    r = t.findall(
-        lambda n: not n.name.startswith("sub"), include_self=False
-    )  # no crash
+    r = t.findall(lambda n: not n.name.startswith("sub"), include_self=False)  # no crash
     eq_(set(r), set([t[0], t[1], t[2]]))
 
 

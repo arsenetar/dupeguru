@@ -295,9 +295,7 @@ class ResultWindow(QMainWindow):
         if menu.actions():
             menu.clear()
         self._column_actions = []
-        for index, (display, visible) in enumerate(
-            self.app.model.result_table.columns.menu_items()
-        ):
+        for index, (display, visible) in enumerate(self.app.model.result_table.columns.menu_items()):
             action = menu.addAction(display)
             action.setCheckable(True)
             action.setChecked(visible)

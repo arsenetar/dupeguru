@@ -80,9 +80,7 @@ class TestCase_move_copy:
         assert self.path["baz"].exists()
         assert not self.path["foo"].exists()
 
-    def test_copy_no_conflict(
-        self, do_setup
-    ):  # No need to duplicate the rest of the tests... Let's just test on move
+    def test_copy_no_conflict(self, do_setup):  # No need to duplicate the rest of the tests... Let's just test on move
         smart_copy(self.path + "foo", self.path + "baz")
         assert self.path["baz"].exists()
         assert self.path["foo"].exists()

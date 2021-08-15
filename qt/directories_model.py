@@ -44,9 +44,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
             # On OS X (with Qt4.6.0), adding State_Enabled to the flags causes the whole drawing to
             # fail (draw nothing), but it's an OS X only glitch. On Windows, it works alright.
             cboption.state |= QStyle.State_Enabled
-            QApplication.style().drawComplexControl(
-                QStyle.CC_ComboBox, cboption, painter
-            )
+            QApplication.style().drawComplexControl(QStyle.CC_ComboBox, cboption, painter)
             painter.setBrush(option.palette.text())
             rect = QRect(option.rect)
             rect.setLeft(rect.left() + 4)
@@ -75,9 +73,7 @@ class DirectoriesModel(TreeModel):
         self.view = view
         self.view.setModel(self)
 
-        self.view.selectionModel().selectionChanged[
-            (QItemSelection, QItemSelection)
-        ].connect(self.selectionChanged)
+        self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
 
     def _createNode(self, ref, row):
         return RefNode(self, None, ref, row)
@@ -155,10 +151,7 @@ class DirectoriesModel(TreeModel):
 
     # --- Events
     def selectionChanged(self, selected, deselected):
-        newNodes = [
-            modelIndex.internalPointer().ref
-            for modelIndex in self.view.selectionModel().selectedRows()
-        ]
+        newNodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
         self.model.selected_nodes = newNodes
 
     # --- Signals

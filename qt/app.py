@@ -65,18 +65,10 @@ class DupeGuru(QObject):
         self.recentResults.mustOpenItem.connect(self.model.load_from)
         self.resultWindow = None
         if self.use_tabs:
-            self.main_window = (
-                TabBarWindow(self)
-                if not self.prefs.tabs_default_pos
-                else TabWindow(self)
-            )
+            self.main_window = TabBarWindow(self) if not self.prefs.tabs_default_pos else TabWindow(self)
             parent_window = self.main_window
-            self.directories_dialog = self.main_window.createPage(
-                "DirectoriesDialog", app=self
-            )
-            self.main_window.addTab(
-                self.directories_dialog, tr("Directories"), switch=False
-            )
+            self.directories_dialog = self.main_window.createPage("DirectoriesDialog", app=self)
+            self.main_window.addTab(self.directories_dialog, tr("Directories"), switch=False)
             self.actionDirectoriesWindow.setEnabled(False)
         else:  # floating windows only
             self.main_window = None
@@ -84,9 +76,7 @@ class DupeGuru(QObject):
             parent_window = self.directories_dialog
 
         self.progress_window = ProgressWindow(parent_window, self.model.progress_window)
-        self.problemDialog = ProblemDialog(
-            parent=parent_window, model=self.model.problem_dialog
-        )
+        self.problemDialog = ProblemDialog(parent=parent_window, model=self.model.problem_dialog)
         if self.use_tabs:
             self.ignoreListDialog = self.main_window.createPage(
                 "IgnoreListDialog",
@@ -101,16 +91,10 @@ class DupeGuru(QObject):
                 model=self.model.exclude_list_dialog,
             )
         else:
-            self.ignoreListDialog = IgnoreListDialog(
-                parent=parent_window, model=self.model.ignore_list_dialog
-            )
-            self.excludeDialog = ExcludeListDialog(
-                app=self, parent=parent_window, model=self.model.exclude_list_dialog
-            )
+            self.ignoreListDialog = IgnoreListDialog(parent=parent_window, model=self.model.ignore_list_dialog)
+            self.excludeDialog = ExcludeListDialog(app=self, parent=parent_window, model=self.model.exclude_list_dialog)
 
-        self.deletionOptions = DeletionOptions(
-            parent=parent_window, model=self.model.deletion_options
-        )
+        self.deletionOptions = DeletionOptions(parent=parent_window, model=self.model.deletion_options)
         self.about_box = AboutBox(parent_window, self)
 
         parent_window.show()
@@ -174,25 +158,19 @@ class DupeGuru(QObject):
         self.model.options["mix_file_kind"] = self.prefs.mix_file_kind
         self.model.options["escape_filter_regexp"] = not self.prefs.use_regexp
         self.model.options["clean_empty_dirs"] = self.prefs.remove_empty_folders
-        self.model.options[
-            "ignore_hardlink_matches"
-        ] = self.prefs.ignore_hardlink_matches
+        self.model.options["ignore_hardlink_matches"] = self.prefs.ignore_hardlink_matches
         self.model.options["copymove_dest_type"] = self.prefs.destination_type
         self.model.options["scan_type"] = self.prefs.get_scan_type(self.model.app_mode)
         self.model.options["min_match_percentage"] = self.prefs.filter_hardness
         self.model.options["word_weighting"] = self.prefs.word_weighting
         self.model.options["match_similar_words"] = self.prefs.match_similar
-        threshold = (
-            self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
-        )
-        self.model.options["size_threshold"] = (
-            threshold * 1024
-        )  # threshold is in KB. The scanner wants bytes
-        big_file_size_threshold = (
-            self.prefs.big_file_size_threshold if self.prefs.big_file_partial_hashes else 0
-        )
+        threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
+        self.model.options["size_threshold"] = threshold * 1024  # threshold is in KB. The scanner wants bytes
+        big_file_size_threshold = self.prefs.big_file_size_threshold if self.prefs.big_file_partial_hashes else 0
         self.model.options["big_file_size_threshold"] = (
-            big_file_size_threshold * 1024 * 1024
+            big_file_size_threshold
+            * 1024
+            * 1024
             # threshold is in MiB. The scanner wants bytes
         )
         scanned_tags = set()
@@ -259,9 +237,7 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             if self.use_tabs:
                 if self.main_window.indexOfWidget(self.resultWindow) < 0:
-                    self.main_window.addTab(
-                        self.resultWindow, tr("Results"), switch=True
-                    )
+                    self.main_window.addTab(self.resultWindow, tr("Results"), switch=True)
                     return
                 self.main_window.showTab(self.resultWindow)
             else:
@@ -318,9 +294,7 @@ class DupeGuru(QObject):
 
     def excludeListTriggered(self):
         if self.use_tabs:
-            self.showTriggeredTabbedDialog(
-                self.excludeListDialog, tr("Exclusion Filters")
-            )
+            self.showTriggeredTabbedDialog(self.excludeListDialog, tr("Exclusion Filters"))
         else:  # floating windows
             self.model.exclude_list_dialog.show()
 
@@ -328,9 +302,7 @@ class DupeGuru(QObject):
         """Add tab for dialog, name the tab with desc_string, then show it."""
         index = self.main_window.indexOfWidget(dialog)
         # Create the tab if it doesn't exist already
-        if (
-            index < 0
-        ):  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
+        if index < 0:  # or (not dialog.isVisible() and not self.main_window.isTabVisible(index)):
             index = self.main_window.addTab(dialog, desc_string, switch=True)
         # Show the tab for that widget
         self.main_window.setCurrentIndex(index)
@@ -402,13 +374,9 @@ class DupeGuru(QObject):
         if self.resultWindow is not None:
             self.resultWindow.close()
             # This is better for tabs, as it takes care of duplicate items in menu bar
-            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(
-                None
-            )
+            self.resultWindow.deleteLater() if self.use_tabs else self.resultWindow.setParent(None)
         if self.use_tabs:
-            self.resultWindow = self.main_window.createPage(
-                "ResultWindow", parent=self.main_window, app=self
-            )
+            self.resultWindow = self.main_window.createPage("ResultWindow", parent=self.main_window, app=self)
         else:  # We don't use a tab widget, regular floating QMainWindow
             self.resultWindow = ResultWindow(self.directories_dialog, self)
             self.directories_dialog._updateActionsState()
@@ -426,9 +394,7 @@ class DupeGuru(QObject):
 
     def select_dest_file(self, prompt, extension):
         files = tr("{} file (*.{})").format(extension.upper(), extension)
-        destination, chosen_filter = QFileDialog.getSaveFileName(
-            self.resultWindow, prompt, "", files
-        )
+        destination, chosen_filter = QFileDialog.getSaveFileName(self.resultWindow, prompt, "", files)
         if not destination.endswith(".{}".format(extension)):
             destination = "{}.{}".format(destination, extension)
         return destination

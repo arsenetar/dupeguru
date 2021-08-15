@@ -110,9 +110,7 @@ def install_gettext_trans(base_folder, lang):
         if not lang:
             return lambda s: s
         try:
-            return gettext.translation(
-                domain, localedir=base_folder, languages=[lang]
-            ).gettext
+            return gettext.translation(domain, localedir=base_folder, languages=[lang]).gettext
         except IOError:
             return lambda s: s
 

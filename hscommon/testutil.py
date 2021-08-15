@@ -86,9 +86,7 @@ class CallLogger:
             eq_(set(self.calls), set(expected))
         self.clear_calls()
 
-    def check_gui_calls_partial(
-        self, expected=None, not_expected=None, verify_order=False
-    ):
+    def check_gui_calls_partial(self, expected=None, not_expected=None, verify_order=False):
         """Checks that the expected calls have been made to 'self', then clears the log.
 
         `expected` is an iterable of strings representing method names. Order doesn't matter.
@@ -99,25 +97,17 @@ class CallLogger:
         __tracebackhide__ = True
         if expected is not None:
             not_called = set(expected) - set(self.calls)
-            assert not not_called, "These calls haven't been made: {0}".format(
-                not_called
-            )
+            assert not not_called, "These calls haven't been made: {0}".format(not_called)
             if verify_order:
                 max_index = 0
                 for call in expected:
                     index = self.calls.index(call)
                     if index < max_index:
-                        raise AssertionError(
-                            "The call {0} hasn't been made in the correct order".format(
-                                call
-                            )
-                        )
+                        raise AssertionError("The call {0} hasn't been made in the correct order".format(call))
                     max_index = index
         if not_expected is not None:
             called = set(not_expected) & set(self.calls)
-            assert not called, "These calls shouldn't have been made: {0}".format(
-                called
-            )
+            assert not called, "These calls shouldn't have been made: {0}".format(called)
         self.clear_calls()
 
 
@@ -193,27 +183,25 @@ def jointhreads():
 
 
 def _unify_args(func, args, kwargs, args_to_ignore=None):
-    """ Unify args and kwargs in the same dictionary.
+    """Unify args and kwargs in the same dictionary.
 
-        The result is kwargs with args added to it. func.func_code.co_varnames is used to determine
-        under what key each elements of arg will be mapped in kwargs.
+    The result is kwargs with args added to it. func.func_code.co_varnames is used to determine
+    under what key each elements of arg will be mapped in kwargs.
 
-        if you want some arguments not to be in the results, supply a list of arg names in
-        args_to_ignore.
+    if you want some arguments not to be in the results, supply a list of arg names in
+    args_to_ignore.
 
-        if f is a function that takes *args, func_code.co_varnames is empty, so args will be put
-        under 'args' in kwargs.
+    if f is a function that takes *args, func_code.co_varnames is empty, so args will be put
+    under 'args' in kwargs.
 
-        def foo(bar, baz)
-        _unifyArgs(foo, (42,), {'baz': 23}) --> {'bar': 42, 'baz': 23}
-        _unifyArgs(foo, (42,), {'baz': 23}, ['bar']) --> {'baz': 23}
+    def foo(bar, baz)
+    _unifyArgs(foo, (42,), {'baz': 23}) --> {'bar': 42, 'baz': 23}
+    _unifyArgs(foo, (42,), {'baz': 23}, ['bar']) --> {'baz': 23}
     """
     result = kwargs.copy()
     if hasattr(func, "__code__"):  # built-in functions don't have func_code
         args = list(args)
-        if (
-            getattr(func, "__self__", None) is not None
-        ):  # bound method, we have to add self to args list
+        if getattr(func, "__self__", None) is not None:  # bound method, we have to add self to args list
             args = [func.__self__] + args
         defaults = list(func.__defaults__) if func.__defaults__ is not None else []
         arg_count = func.__code__.co_argcount
@@ -234,11 +222,11 @@ def _unify_args(func, args, kwargs, args_to_ignore=None):
 
 
 def log_calls(func):
-    """ Logs all func calls' arguments under func.calls.
+    """Logs all func calls' arguments under func.calls.
 
-        func.calls is a list of _unify_args() result (dict).
+    func.calls is a list of _unify_args() result (dict).
 
-        Mostly used for unit testing.
+    Mostly used for unit testing.
     """
 
     def wrapper(*args, **kwargs):

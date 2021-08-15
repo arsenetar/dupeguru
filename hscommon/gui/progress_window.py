@@ -21,12 +21,10 @@ class ProgressWindowView:
     """
 
     def show(self):
-        """Show the dialog.
-        """
+        """Show the dialog."""
 
     def close(self):
-        """Close the dialog.
-        """
+        """Close the dialog."""
 
     def set_progress(self, progress):
         """Set the progress of the progress bar to ``progress``.
@@ -76,8 +74,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         self.jobid = None
 
     def cancel(self):
-        """Call for a user-initiated job cancellation.
-        """
+        """Call for a user-initiated job cancellation."""
         # The UI is sometimes a bit buggy and calls cancel() on self.view.close(). We just want to
         # make sure that this doesn't lead us to think that the user acually cancelled the task, so
         # we verify that the job is still running.

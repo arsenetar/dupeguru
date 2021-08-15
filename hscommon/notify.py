@@ -16,8 +16,7 @@ from collections import defaultdict
 
 
 class Broadcaster:
-    """Broadcasts messages that are received by all listeners.
-    """
+    """Broadcasts messages that are received by all listeners."""
 
     def __init__(self):
         self.listeners = set()
@@ -39,8 +38,7 @@ class Broadcaster:
 
 
 class Listener:
-    """A listener is initialized with the broadcaster it's going to listen to. Initially, it is not connected.
-    """
+    """A listener is initialized with the broadcaster it's going to listen to. Initially, it is not connected."""
 
     def __init__(self, broadcaster):
         self.broadcaster = broadcaster
@@ -57,13 +55,11 @@ class Listener:
             self._bound_notifications[message].append(func)
 
     def connect(self):
-        """Connects the listener to its broadcaster.
-        """
+        """Connects the listener to its broadcaster."""
         self.broadcaster.add_listener(self)
 
     def disconnect(self):
-        """Disconnects the listener from its broadcaster.
-        """
+        """Disconnects the listener from its broadcaster."""
         self.broadcaster.remove_listener(self)
 
     def dispatch(self, msg):

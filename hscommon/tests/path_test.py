@@ -87,8 +87,7 @@ def test_filename(force_ossep):
 
 
 def test_deal_with_empty_components(force_ossep):
-    """Keep ONLY a leading space, which means we want a leading slash.
-    """
+    """Keep ONLY a leading space, which means we want a leading slash."""
     eq_("foo//bar", str(Path(("foo", "", "bar"))))
     eq_("/foo/bar", str(Path(("", "foo", "bar"))))
     eq_("foo/bar", str(Path("foo/bar/")))
@@ -154,8 +153,7 @@ def test_path_slice(force_ossep):
 
 
 def test_add_with_root_path(force_ossep):
-    """if I perform /a/b/c + /d/e/f, I want /a/b/c/d/e/f, not /a/b/c//d/e/f
-    """
+    """if I perform /a/b/c + /d/e/f, I want /a/b/c/d/e/f, not /a/b/c//d/e/f"""
     eq_("/foo/bar", str(Path("/foo") + Path("/bar")))
 
 
@@ -166,8 +164,7 @@ def test_create_with_tuple_that_have_slash_inside(force_ossep, monkeypatch):
 
 
 def test_auto_decode_os_sep(force_ossep, monkeypatch):
-    """Path should decode any either / or os.sep, but always encode in os.sep.
-    """
+    """Path should decode any either / or os.sep, but always encode in os.sep."""
     eq_(("foo\\bar", "bleh"), Path("foo\\bar/bleh"))
     monkeypatch.setattr(os, "sep", "\\")
     eq_(("foo", "bar/bleh"), Path("foo\\bar/bleh"))

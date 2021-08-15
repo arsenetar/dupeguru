@@ -256,9 +256,7 @@ class TIFF_file:
                 for j in range(count):
                     if type in {5, 10}:
                         # The type is either 5 or 10
-                        value_j = Fraction(
-                            self.s2n(offset, 4, signed), self.s2n(offset + 4, 4, signed)
-                        )
+                        value_j = Fraction(self.s2n(offset, 4, signed), self.s2n(offset + 4, 4, signed))
                     else:
                         # Not a fraction
                         value_j = self.s2n(offset, typelen, signed)
@@ -296,9 +294,7 @@ def get_fields(fp):
     logging.debug("Exif header length: %d bytes", length)
     data = fp.read(length - 8)
     data_format = data[0]
-    logging.debug(
-        "%s format", {INTEL_ENDIAN: "Intel", MOTOROLA_ENDIAN: "Motorola"}[data_format]
-    )
+    logging.debug("%s format", {INTEL_ENDIAN: "Intel", MOTOROLA_ENDIAN: "Motorola"}[data_format])
     T = TIFF_file(data)
     # There may be more than one IFD per file, but we only read the first one because others are
     # most likely thumbnails.

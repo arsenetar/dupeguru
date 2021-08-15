@@ -95,9 +95,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
                     picture.unicode_path,
                     picture.size,
                 )
-                if (
-                    picture.size < 10 * 1024 * 1024
-                ):  # We're really running out of memory
+                if picture.size < 10 * 1024 * 1024:  # We're really running out of memory
                     raise
     except MemoryError:
         logging.warning("Ran out of memory while preparing pictures")
@@ -106,9 +104,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
 
 
 def get_chunks(pictures):
-    min_chunk_count = (
-        multiprocessing.cpu_count() * 2
-    )  # have enough chunks to feed all subprocesses
+    min_chunk_count = multiprocessing.cpu_count() * 2  # have enough chunks to feed all subprocesses
     chunk_count = len(pictures) // DEFAULT_CHUNK_SIZE
     chunk_count = max(min_chunk_count, chunk_count)
     chunk_size = (len(pictures) // chunk_count) + 1
@@ -185,9 +181,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(
-        pictures, cache_path, with_dimensions=not match_scaled, j=j
-    )
+    pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}
@@ -231,12 +225,8 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
             chunks,
             pictures,
         )  # some wiggle room for the next statements
-        logging.warning(
-            "Ran out of memory when scanning! We had %d matches.", len(matches)
-        )
-        del matches[
-            -len(matches) // 3 :
-        ]  # some wiggle room to ensure we don't run out of memory again.
+        logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches))
+        del matches[-len(matches) // 3 :]  # some wiggle room to ensure we don't run out of memory again.
     pool.close()
     result = []
     myiter = j.iter_with_progress(

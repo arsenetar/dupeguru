@@ -140,9 +140,7 @@ def GetTestGroups():
     matches = engine.getmatches(objects)  # we should have 5 matches
     groups = engine.get_groups(matches)  # We should have 2 groups
     for g in groups:
-        g.prioritize(
-            lambda x: objects.index(x)
-        )  # We want the dupes to be in the same order as the list is
+        g.prioritize(lambda x: objects.index(x))  # We want the dupes to be in the same order as the list is
     groups.sort(key=len, reverse=True)  # We want the group with 3 members to be first.
     return (objects, matches, groups)
 

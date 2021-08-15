@@ -34,9 +34,11 @@ class DetailsModel(QAbstractTableModel):
         row = index.row()
 
         ignored_fields = ["Dupe Count"]
-        if (self.model.row(row)[0] in ignored_fields
-                or self.model.row(row)[1] == "---"
-                or self.model.row(row)[2] == "---"):
+        if (
+            self.model.row(row)[0] in ignored_fields
+            or self.model.row(row)[1] == "---"
+            or self.model.row(row)[2] == "---"
+        ):
             if role != Qt.DisplayRole:
                 return None
             return self.model.row(row)[column]
@@ -52,17 +54,9 @@ class DetailsModel(QAbstractTableModel):
         return None  # QVariant()
 
     def headerData(self, section, orientation, role):
-        if (
-            orientation == Qt.Horizontal
-            and role == Qt.DisplayRole
-            and section < len(HEADER)
-        ):
+        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(HEADER):
             return HEADER[section]
-        elif (
-            orientation == Qt.Vertical
-            and role == Qt.DisplayRole
-            and section < self.model.row_count()
-        ):
+        elif orientation == Qt.Vertical and role == Qt.DisplayRole and section < self.model.row_count():
             # Read "Attribute" cell for horizontal header
             return self.model.row(section)[0]
         return None

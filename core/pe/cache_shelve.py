@@ -33,8 +33,7 @@ CacheRow = namedtuple("CacheRow", "id path blocks mtime")
 
 
 class ShelveCache:
-    """A class to cache picture blocks in a shelve backend.
-    """
+    """A class to cache picture blocks in a shelve backend."""
 
     def __init__(self, db=None, readonly=False):
         self.istmp = db is None
@@ -81,9 +80,7 @@ class ShelveCache:
         self.shelve[wrap_id(rowid)] = wrap_path(path_str)
 
     def _compute_maxid(self):
-        return max(
-            (unwrap_id(k) for k in self.shelve if k.startswith("id:")), default=1
-        )
+        return max((unwrap_id(k) for k in self.shelve if k.startswith("id:")), default=1)
 
     def _get_new_id(self):
         self.maxid += 1

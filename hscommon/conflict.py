@@ -48,15 +48,13 @@ def get_unconflicted_name(name):
 
 
 def is_conflicted(name):
-    """Returns whether ``name`` is prepended with a bracketed number.
-    """
+    """Returns whether ``name`` is prepended with a bracketed number."""
     return re_conflict.match(name) is not None
 
 
 @pathify
 def _smart_move_or_copy(operation, source_path: Path, dest_path: Path):
-    """Use move() or copy() to move and copy file with the conflict management.
-    """
+    """Use move() or copy() to move and copy file with the conflict management."""
     if dest_path.isdir() and not source_path.isdir():
         dest_path = dest_path[source_path.name]
     if dest_path.exists():
@@ -68,14 +66,12 @@ def _smart_move_or_copy(operation, source_path: Path, dest_path: Path):
 
 
 def smart_move(source_path, dest_path):
-    """Same as :func:`smart_copy`, but it moves files instead.
-    """
+    """Same as :func:`smart_copy`, but it moves files instead."""
     _smart_move_or_copy(shutil.move, source_path, dest_path)
 
 
 def smart_copy(source_path, dest_path):
-    """Copies ``source_path`` to ``dest_path``, recursively and with conflict resolution.
-    """
+    """Copies ``source_path`` to ``dest_path``, recursively and with conflict resolution."""
     try:
         _smart_move_or_copy(shutil.copy, source_path, dest_path)
     except IOError as e:

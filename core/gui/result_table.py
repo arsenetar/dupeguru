@@ -45,9 +45,7 @@ class DupeRow(Row):
                 return False
             ref_info = self._group.ref.get_display_info(group=self._group, delta=False)
             for key, value in dupe_info.items():
-                if (key not in self._delta_columns) and (
-                    ref_info[key].lower() != value.lower()
-                ):
+                if (key not in self._delta_columns) and (ref_info[key].lower() != value.lower()):
                     self._delta_columns.add(key)
         return column_name in self._delta_columns
 

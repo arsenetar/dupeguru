@@ -117,9 +117,7 @@ class TestCaseResultsWithSomeGroups:
         assert d is g.ref
 
     def test_sort_groups(self):
-        self.results.make_ref(
-            self.objects[1]
-        )  # We want to make the 1024 sized object to go ref.
+        self.results.make_ref(self.objects[1])  # We want to make the 1024 sized object to go ref.
         g1, g2 = self.groups
         self.results.sort_groups("size")
         assert self.results.groups[0] is g2
@@ -129,9 +127,7 @@ class TestCaseResultsWithSomeGroups:
         assert self.results.groups[1] is g2
 
     def test_set_groups_when_sorted(self):
-        self.results.make_ref(
-            self.objects[1]
-        )  # We want to make the 1024 sized object to go ref.
+        self.results.make_ref(self.objects[1])  # We want to make the 1024 sized object to go ref.
         self.results.sort_groups("size")
         objects, matches, groups = GetTestGroups()
         g1, g2 = groups
@@ -601,9 +597,7 @@ class TestCaseResultsXML:
         matches = engine.getmatches(objects)  # we should have 5 matches
         groups = engine.get_groups(matches)  # We should have 2 groups
         for g in groups:
-            g.prioritize(
-                lambda x: objects.index(x)
-            )  # We want the dupes to be in the same order as the list is
+            g.prioritize(lambda x: objects.index(x))  # We want the dupes to be in the same order as the list is
         app = DupeGuru()
         results = Results(app)
         results.groups = groups
@@ -807,9 +801,7 @@ class TestCaseResultsFilter:
         # Now the stats should display *2* markable dupes (instead of 1)
         expected = "0 / 2 (0.00 B / 2.00 B) duplicates marked. filter: foo"
         eq_(expected, self.results.stat_line)
-        self.results.apply_filter(
-            None
-        )  # Now let's make sure our unfiltered results aren't fucked up
+        self.results.apply_filter(None)  # Now let's make sure our unfiltered results aren't fucked up
         expected = "0 / 3 (0.00 B / 3.00 B) duplicates marked."
         eq_(expected, self.results.stat_line)
 

@@ -30,13 +30,15 @@ class File(PhotoBase):
         image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
         if type(orientation) == str:
-            logging.warning("Orientation for file '%s' was a str '%s', not an int.",
-                            str(self.path), orientation)
+            logging.warning("Orientation for file '%s' was a str '%s', not an int.", str(self.path), orientation)
             try:
                 orientation = int(orientation)
             except Exception as e:
-                logging.exception("Skipping transformation because could not \
-convert str to int. %s", e)
+                logging.exception(
+                    "Skipping transformation because could not \
+convert str to int. %s",
+                    e,
+                )
                 return getblocks(image, block_count_per_side)
         # MYSTERY TO SOLVE: For reasons I cannot explain, orientations 5 and 7 don't work for
         # duplicate scanning. The transforms seems to work fine (if I try to save the image after

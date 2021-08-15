@@ -34,9 +34,7 @@ class ErrorReportDialog(QDialog):
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
-        errorText = "Application Name: {}\nVersion: {}\n\n{}".format(
-            name, version, error
-        )
+        errorText = "Application Name: {}\nVersion: {}\n\n{}".format(name, version, error)
         # Under windows, we end up with an error report without linesep if we don't mangle it
         errorText = errorText.replace("\n", os.linesep)
         self.errorTextEdit.setPlainText(errorText)

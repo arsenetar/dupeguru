@@ -128,9 +128,7 @@ def test_repeater_with_repeated_notifications():
     r.connect()
     listener.connect()
     b.notify("hello")
-    b.notify(
-        "foo"
-    )  # if the repeater repeated this notif, we'd get a crash on HelloListener
+    b.notify("foo")  # if the repeater repeated this notif, we'd get a crash on HelloListener
     eq_(r.hello_count, 1)
     eq_(listener.hello_count, 1)
     eq_(r.foo_count, 1)
