@@ -76,14 +76,10 @@ class PreferencesDialogBase(QDialog):
         super().__init__(parent, flags, **kwargs)
         self.app = app
         all_languages = get_langnames()
-        self.supportedLanguages = sorted(
-            SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang]
-        )
+        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang])
         self._setupUi()
 
-        self.filterHardnessSlider.valueChanged["int"].connect(
-            self.filterHardnessLabel.setNum
-        )
+        self.filterHardnessSlider.valueChanged["int"].connect(self.filterHardnessLabel.setNum)
         self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -102,9 +98,7 @@ class PreferencesDialogBase(QDialog):
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.filterHardnessSlider.sizePolicy().hasHeightForWidth()
-        )
+        sizePolicy.setHeightForWidth(self.filterHardnessSlider.sizePolicy().hasHeightForWidth())
         self.filterHardnessSlider.setSizePolicy(sizePolicy)
         self.filterHardnessSlider.setMinimum(1)
         self.filterHardnessSlider.setMaximum(100)
@@ -140,9 +134,7 @@ class PreferencesDialogBase(QDialog):
         self.copyMoveDestinationComboBox.addItem(tr("Recreate absolute path"))
         self.widgetsVLayout.addWidget(self.copyMoveDestinationComboBox)
         self.customCommandLabel = QLabel(self)
-        self.customCommandLabel.setText(
-            tr("Custom Command (arguments: %d for dupe, %r for ref):")
-        )
+        self.customCommandLabel.setText(tr("Custom Command (arguments: %d for dupe, %r for ref):"))
         self.widgetsVLayout.addWidget(self.customCommandLabel)
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
@@ -154,9 +146,7 @@ class PreferencesDialogBase(QDialog):
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
             self.languageComboBox.addItem(get_langnames()[lang])
-        layout.addLayout(
-            horizontalWrap([self.languageLabel, self.languageComboBox, None])
-        )
+        layout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
         self._setupAddCheckbox(
             "tabs_default_pos",
             tr("Use default position for tab bar (requires restart)"),
@@ -178,23 +168,15 @@ On MacOS, the tab bar will fill up the window's width instead."
         self.fontSizeSpinBox = QSpinBox()
         self.fontSizeSpinBox.setMinimum(5)
         formlayout.addRow(tr("Font size:"), self.fontSizeSpinBox)
-        self._setupAddCheckbox(
-            "reference_bold_font", tr("Use bold font for references")
-        )
+        self._setupAddCheckbox("reference_bold_font", tr("Use bold font for references"))
         formlayout.addRow(self.reference_bold_font)
 
         self.result_table_ref_foreground_color = ColorPickerButton(self)
-        formlayout.addRow(
-            tr("Reference foreground color:"), self.result_table_ref_foreground_color
-        )
+        formlayout.addRow(tr("Reference foreground color:"), self.result_table_ref_foreground_color)
         self.result_table_ref_background_color = ColorPickerButton(self)
-        formlayout.addRow(
-            tr("Reference background color:"), self.result_table_ref_background_color
-        )
+        formlayout.addRow(tr("Reference background color:"), self.result_table_ref_background_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
-        formlayout.addRow(
-            tr("Delta foreground color:"), self.result_table_delta_foreground_color
-        )
+        formlayout.addRow(tr("Delta foreground color:"), self.result_table_delta_foreground_color)
         formlayout.setLabelAlignment(Qt.AlignLeft)
 
         # Keep same vertical spacing as parent layout for consistency
@@ -218,30 +200,20 @@ use the modifier key to drag the floating window around"
             else tr("The title bar can only be disabled while the window is docked")
         )
         self.details_groupbox_layout.addWidget(self.details_dialog_titlebar_enabled)
-        self._setupAddCheckbox(
-            "details_dialog_vertical_titlebar", tr("Vertical title bar")
-        )
+        self._setupAddCheckbox("details_dialog_vertical_titlebar", tr("Vertical title bar"))
         self.details_dialog_vertical_titlebar.setToolTip(
-            tr(
-                "Change the title bar from horizontal on top, to vertical on the left side"
-            )
+            tr("Change the title bar from horizontal on top, to vertical on the left side")
         )
         self.details_groupbox_layout.addWidget(self.details_dialog_vertical_titlebar)
-        self.details_dialog_vertical_titlebar.setEnabled(
-            self.details_dialog_titlebar_enabled.isChecked()
-        )
-        self.details_dialog_titlebar_enabled.stateChanged.connect(
-            self.details_dialog_vertical_titlebar.setEnabled
-        )
+        self.details_dialog_vertical_titlebar.setEnabled(self.details_dialog_titlebar_enabled.isChecked())
+        self.details_dialog_titlebar_enabled.stateChanged.connect(self.details_dialog_vertical_titlebar.setEnabled)
         gridlayout = QGridLayout()
         formlayout = QFormLayout()
         self.details_table_delta_foreground_color = ColorPickerButton(self)
         # Padding on the right side and space between label and widget to keep it somewhat consistent across themes
         gridlayout.setColumnStretch(1, 1)
         formlayout.setHorizontalSpacing(50)
-        formlayout.addRow(
-            tr("Delta foreground color:"), self.details_table_delta_foreground_color
-        )
+        formlayout.addRow(tr("Delta foreground color:"), self.details_table_delta_foreground_color)
         gridlayout.addLayout(formlayout, 0, 0)
         self.details_groupbox_layout.addLayout(gridlayout)
         details_groupbox.setLayout(self.details_groupbox_layout)
@@ -276,9 +248,7 @@ use the modifier key to drag the floating window around"
         # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
-            QDialogButtonBox.Cancel
-            | QDialogButtonBox.Ok
-            | QDialogButtonBox.RestoreDefaults
+            QDialogButtonBox.Cancel | QDialogButtonBox.Ok | QDialogButtonBox.RestoreDefaults
         )
         self.mainVLayout.addWidget(self.tabwidget)
         self.mainVLayout.addWidget(self.buttonBox)
@@ -299,7 +269,10 @@ use the modifier key to drag the floating window around"
     def load(self, prefs=None, section=Sections.ALL):
         if prefs is None:
             prefs = self.app.prefs
-        setchecked = lambda cb, b: cb.setCheckState(Qt.Checked if b else Qt.Unchecked)
+
+        def setchecked(cb, b):
+            cb.setCheckState(Qt.Checked if b else Qt.Unchecked)
+
         if section & Sections.GENERAL:
             self.filterHardnessSlider.setValue(prefs.filter_hardness)
             self.filterHardnessLabel.setNum(prefs.filter_hardness)
@@ -322,18 +295,10 @@ use the modifier key to drag the floating window around"
                 prefs.details_dialog_vertical_titlebar,
             )
             self.fontSizeSpinBox.setValue(prefs.tableFontSize)
-            self.details_table_delta_foreground_color.setColor(
-                prefs.details_table_delta_foreground_color
-            )
-            self.result_table_ref_foreground_color.setColor(
-                prefs.result_table_ref_foreground_color
-            )
-            self.result_table_ref_background_color.setColor(
-                prefs.result_table_ref_background_color
-            )
-            self.result_table_delta_foreground_color.setColor(
-                prefs.result_table_delta_foreground_color
-            )
+            self.details_table_delta_foreground_color.setColor(prefs.details_table_delta_foreground_color)
+            self.result_table_ref_foreground_color.setColor(prefs.result_table_ref_foreground_color)
+            self.result_table_ref_background_color.setColor(prefs.result_table_ref_background_color)
+            self.result_table_delta_foreground_color.setColor(prefs.result_table_delta_foreground_color)
             try:
                 langindex = self.supportedLanguages.index(self.app.prefs.language)
             except ValueError:
@@ -344,31 +309,22 @@ use the modifier key to drag the floating window around"
     def save(self):
         prefs = self.app.prefs
         prefs.filter_hardness = self.filterHardnessSlider.value()
-        ischecked = lambda cb: cb.checkState() == Qt.Checked
+
+        def ischecked(cb):
+            return cb.checkState() == Qt.Checked
+
         prefs.mix_file_kind = ischecked(self.mixFileKindBox)
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
-        prefs.details_dialog_titlebar_enabled = ischecked(
-            self.details_dialog_titlebar_enabled
-        )
-        prefs.details_dialog_vertical_titlebar = ischecked(
-            self.details_dialog_vertical_titlebar
-        )
-        prefs.details_table_delta_foreground_color = (
-            self.details_table_delta_foreground_color.color
-        )
-        prefs.result_table_ref_foreground_color = (
-            self.result_table_ref_foreground_color.color
-        )
-        prefs.result_table_ref_background_color = (
-            self.result_table_ref_background_color.color
-        )
-        prefs.result_table_delta_foreground_color = (
-            self.result_table_delta_foreground_color.color
-        )
+        prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
+        prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
+        prefs.details_table_delta_foreground_color = self.details_table_delta_foreground_color.color
+        prefs.result_table_ref_foreground_color = self.result_table_ref_foreground_color.color
+        prefs.result_table_ref_background_color = self.result_table_ref_background_color.color
+        prefs.result_table_delta_foreground_color = self.result_table_delta_foreground_color.color
         prefs.destination_type = self.copyMoveDestinationComboBox.currentIndex()
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
@@ -411,9 +367,7 @@ class ColorPickerButton(QPushButton):
 
     @pyqtSlot()
     def onClicked(self):
-        color = QColorDialog.getColor(
-            self.color if self.color is not None else Qt.white, self.parent
-        )
+        color = QColorDialog.getColor(self.color if self.color is not None else Qt.white, self.parent)
         self.setColor(color)
 
     def setColor(self, color):

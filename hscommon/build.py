@@ -30,8 +30,7 @@ from .util import ensure_folder, delete_files_with_pattern
 
 
 def print_and_do(cmd):
-    """Prints ``cmd`` and executes it in the shell.
-    """
+    """Prints ``cmd`` and executes it in the shell."""
     print(cmd)
     p = Popen(cmd, shell=True)
     return p.wait()
@@ -91,16 +90,14 @@ def copy_all(pattern, dst):
 
 
 def ensure_empty_folder(path):
-    """Make sure that the path exists and that it's an empty folder.
-    """
+    """Make sure that the path exists and that it's an empty folder."""
     if op.exists(path):
         shutil.rmtree(path)
     os.mkdir(path)
 
 
 def filereplace(filename, outfilename=None, **kwargs):
-    """Reads `filename`, replaces all {variables} in kwargs, and writes the result to `outfilename`.
-    """
+    """Reads `filename`, replaces all {variables} in kwargs, and writes the result to `outfilename`."""
     if outfilename is None:
         outfilename = filename
     fp = open(filename, "rt", encoding="utf-8")
@@ -152,9 +149,7 @@ def package_cocoa_app_in_dmg(app_path, destfolder, args):
     # a valid signature.
     if args.sign_identity:
         sign_identity = "Developer ID Application: {}".format(args.sign_identity)
-        result = print_and_do(
-            'codesign --force --deep --sign "{}" "{}"'.format(sign_identity, app_path)
-        )
+        result = print_and_do('codesign --force --deep --sign "{}" "{}"'.format(sign_identity, app_path))
         if result != 0:
             print("ERROR: Signing failed. Aborting packaging.")
             return
@@ -182,10 +177,7 @@ def build_dmg(app_path, destfolder):
     )
     print("Building %s" % dmgname)
     # UDBZ = bzip compression. UDZO (zip compression) was used before, but it compresses much less.
-    print_and_do(
-        'hdiutil create "%s" -format UDBZ -nocrossdev -srcdir "%s"'
-        % (op.join(destfolder, dmgname), dmgpath)
-    )
+    print_and_do('hdiutil create "%s" -format UDBZ -nocrossdev -srcdir "%s"' % (op.join(destfolder, dmgname), dmgpath))
     print("Build Complete")
 
 
@@ -207,8 +199,7 @@ sysconfig.get_config_h_filename = lambda: op.join(op.dirname(__file__), 'pyconfi
 
 
 def add_to_pythonpath(path):
-    """Adds ``path`` to both ``PYTHONPATH`` env and ``sys.path``.
-    """
+    """Adds ``path`` to both ``PYTHONPATH`` env and ``sys.path``."""
     abspath = op.abspath(path)
     pythonpath = os.environ.get("PYTHONPATH", "")
     pathsep = ";" if ISWINDOWS else ":"
@@ -231,9 +222,7 @@ def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
         create_links = False
     if not extra_ignores:
         extra_ignores = []
-    ignore = shutil.ignore_patterns(
-        ".hg*", "tests", "testdata", "modules", "docs", "locale", *extra_ignores
-    )
+    ignore = shutil.ignore_patterns(".hg*", "tests", "testdata", "modules", "docs", "locale", *extra_ignores)
     for package_name in packages_names:
         if op.exists(package_name):
             source_path = package_name
@@ -444,11 +433,10 @@ class OSXFrameworkStructure:
 
     def create_symlinks(self):
         # Only call this after create() and copy_executable()
-        rel = lambda path: op.relpath(path, self.dest)
         os.symlink("A", op.join(self.dest, "Versions", "Current"))
-        os.symlink(rel(self.executablepath), op.join(self.dest, self.executablename))
-        os.symlink(rel(self.headers), op.join(self.dest, "Headers"))
-        os.symlink(rel(self.resources), op.join(self.dest, "Resources"))
+        os.symlink(op.relpath(self.executablepath, self.dest), op.join(self.dest, self.executablename))
+        os.symlink(op.relpath(self.headers, self.dest), op.join(self.dest, "Headers"))
+        os.symlink(op.relpath(self.resources, self.dest), op.join(self.dest, "Resources"))
 
     def copy_executable(self, executable):
         copy(executable, self.executablepath)
@@ -481,9 +469,7 @@ def copy_embeddable_python_dylib(dst):
 def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
     sysprefix = sys.prefix  # could be a virtualenv
     basesysprefix = sys.base_prefix  # seems to be path to non-virtual sys
-    real_lib_prefix = sysconfig.get_config_var(
-        "LIBDEST"
-    )  # leaving this in case it is neede
+    real_lib_prefix = sysconfig.get_config_var("LIBDEST")  # leaving this in case it is neede
 
     def is_stdlib_path(path):
         # A module path is only a stdlib path if it's in either sys.prefix or
@@ -493,11 +479,7 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
             return False
         if "site-package" in path:
             return False
-        if not (
-            path.startswith(sysprefix)
-            or path.startswith(basesysprefix)
-            or path.startswith(real_lib_prefix)
-        ):
+        if not (path.startswith(sysprefix) or path.startswith(basesysprefix) or path.startswith(real_lib_prefix)):
             return False
         return True
 
@@ -511,9 +493,7 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
             relpath = op.relpath(p, real_lib_prefix)
         elif p.startswith(sysprefix):
             relpath = op.relpath(p, sysprefix)
-            assert relpath.startswith(
-                "lib/python3."
-            )  # we want to get rid of that lib/python3.x part
+            assert relpath.startswith("lib/python3.")  # we want to get rid of that lib/python3.x part
             relpath = relpath[len("lib/python3.X/") :]
         elif p.startswith(basesysprefix):
             relpath = op.relpath(p, basesysprefix)
@@ -521,9 +501,7 @@ def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
             relpath = relpath[len("lib/python3.X/") :]
         else:
             raise AssertionError()
-        if relpath.startswith(
-            "lib-dynload"
-        ):  # We copy .so files in lib-dynload directly in our dest
+        if relpath.startswith("lib-dynload"):  # We copy .so files in lib-dynload directly in our dest
             relpath = relpath[len("lib-dynload/") :]
         if relpath.startswith("encodings") or relpath.startswith("distutils"):
             # We force their inclusion later.
@@ -562,9 +540,7 @@ def fix_qt_resource_file(path):
         fp.write(b"\n".join(lines))
 
 
-def build_cocoa_ext(
-    extname, dest, source_files, extra_frameworks=(), extra_includes=()
-):
+def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
     extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
     for extra in extra_frameworks:
         extra_link_args += ["-framework", extra]

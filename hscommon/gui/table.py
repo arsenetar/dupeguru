@@ -97,8 +97,7 @@ class Table(MutableSequence, Selectable):
             self._rows.pop(0)
         if self._footer is not None:
             self._rows.pop()
-        key = lambda row: row.sort_key_for_column(column_name)
-        self._rows.sort(key=key, reverse=desc)
+        self._rows.sort(key=lambda row: row.sort_key_for_column(column_name), reverse=desc)
         if self._header is not None:
             self._rows.insert(0, self._header)
         if self._footer is not None:
@@ -277,8 +276,7 @@ class GUITable(Table, GUIObject):
         raise NotImplementedError()
 
     def _do_delete(self):
-        """(Virtual) Delete the selected rows.
-        """
+        """(Virtual) Delete the selected rows."""
         pass
 
     def _fill(self):

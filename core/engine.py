@@ -17,7 +17,11 @@ from hscommon.util import flatten, multi_replace
 from hscommon.trans import tr
 from hscommon.jobprogress import job
 
-(WEIGHT_WORDS, MATCH_SIMILAR_WORDS, NO_FIELD_ORDER,) = range(3)
+(
+    WEIGHT_WORDS,
+    MATCH_SIMILAR_WORDS,
+    NO_FIELD_ORDER,
+) = range(3)
 
 JOB_REFRESH_RATE = 100
 
@@ -34,11 +38,9 @@ def getwords(s):
     # of their accents, etc.) are preserved as is. The arbitrary limit is
     # obtained from this one: ord("\u037e") GREEK QUESTION MARK
     s = "".join(
-        c for c in s
-        if (ord(c) <= 894
-            and c in string.ascii_letters + string.digits + string.whitespace
-            )
-        or ord(c) > 894
+        c
+        for c in s
+        if (ord(c) <= 894 and c in string.ascii_letters + string.digits + string.whitespace) or ord(c) > 894
     )
     return [_f for _f in s.split(" ") if _f]  # remove empty elements
 
@@ -115,9 +117,7 @@ def compare_fields(first, second, flags=()):
             if matched_field:
                 second.remove(matched_field)
     else:
-        results = [
-            compare(field1, field2, flags) for field1, field2 in zip(first, second)
-        ]
+        results = [compare(field1, field2, flags) for field1, field2 in zip(first, second)]
     return min(results) if results else 0
 
 
@@ -130,9 +130,7 @@ def build_word_dict(objects, j=job.nulljob):
     The result will be a dict with words as keys, lists of objects as values.
     """
     result = defaultdict(set)
-    for object in j.iter_with_progress(
-        objects, "Prepared %d/%d files", JOB_REFRESH_RATE
-    ):
+    for object in j.iter_with_progress(objects, "Prepared %d/%d files", JOB_REFRESH_RATE):
         for word in unpack_fields(object.words):
             result[word].add(object)
     return result
@@ -167,9 +165,7 @@ def reduce_common_words(word_dict, threshold):
     The exception to this removal are the objects where all the words of the object are common.
     Because if we remove them, we will miss some duplicates!
     """
-    uncommon_words = set(
-        word for word, objects in word_dict.items() if len(objects) < threshold
-    )
+    uncommon_words = set(word for word, objects in word_dict.items() if len(objects) < threshold)
     for word, objects in list(word_dict.items()):
         if len(objects) < threshold:
             continue
@@ -275,10 +271,7 @@ def getmatches(
         # This is the place where the memory usage is at its peak during the scan.
         # Just continue the process with an incomplete list of matches.
         del compared  # This should give us enough room to call logging.
-        logging.warning(
-            "Memory Overflow. Matches: %d. Word dict: %d"
-            % (len(result), len(word_dict))
-        )
+        logging.warning("Memory Overflow. Matches: %d. Word dict: %d" % (len(result), len(word_dict)))
         return result
     return result
 
@@ -408,18 +401,13 @@ class Group:
 
         You can call this after the duplicate scanning process to free a bit of memory.
         """
-        discarded = set(
-            m
-            for m in self.matches
-            if not all(obj in self.unordered for obj in [m.first, m.second])
-        )
+        discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
         self.matches -= discarded
         self.candidates = defaultdict(set)
         return discarded
 
     def get_match_of(self, item):
-        """Returns the match pair between ``item`` and :attr:`ref`.
-        """
+        """Returns the match pair between ``item`` and :attr:`ref`."""
         if item is self.ref:
             return
         for m in self._get_matches_for_ref():
@@ -435,8 +423,7 @@ class Group:
         """
         # tie_breaker(ref, dupe) --> True if dupe should be ref
         # Returns True if anything changed during prioritization.
-        master_key_func = lambda x: (-x.is_ref, key_func(x))
-        new_order = sorted(self.ordered, key=master_key_func)
+        new_order = sorted(self.ordered, key=lambda x: (-x.is_ref, key_func(x)))
         changed = new_order != self.ordered
         self.ordered = new_order
         if tie_breaker is None:
@@ -459,9 +446,7 @@ class Group:
             self.unordered.remove(item)
             self._percentage = None
             self._matches_for_ref = None
-            if (len(self) > 1) and any(
-                not getattr(item, "is_ref", False) for item in self
-            ):
+            if (len(self) > 1) and any(not getattr(item, "is_ref", False) for item in self):
                 if discard_matches:
                     self.matches = set(m for m in self.matches if item not in m)
             else:
@@ -470,8 +455,7 @@ class Group:
             pass
 
     def switch_ref(self, with_dupe):
-        """Make the :attr:`ref` dupe of the group switch position with ``with_dupe``.
-        """
+        """Make the :attr:`ref` dupe of the group switch position with ``with_dupe``."""
         if self.ref.is_ref:
             return False
         try:
@@ -490,9 +474,7 @@ class Group:
         if self._percentage is None:
             if self.dupes:
                 matches = self._get_matches_for_ref()
-                self._percentage = sum(match.percentage for match in matches) // len(
-                    matches
-                )
+                self._percentage = sum(match.percentage for match in matches) // len(matches)
             else:
                 self._percentage = 0
         return self._percentage
@@ -547,12 +529,8 @@ def get_groups(matches):
     orphan_matches = []
     for group in groups:
         orphan_matches += {
-            m
-            for m in group.discard_matches()
-            if not any(obj in matched_files for obj in [m.first, m.second])
+            m for m in group.discard_matches() if not any(obj in matched_files for obj in [m.first, m.second])
         }
     if groups and orphan_matches:
-        groups += get_groups(
-            orphan_matches
-        )  # no job, as it isn't supposed to take a long time
+        groups += get_groups(orphan_matches)  # no job, as it isn't supposed to take a long time
     return groups

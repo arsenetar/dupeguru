@@ -177,9 +177,7 @@ class TestCaseWordCompareWithFields:
     def test_simple(self):
         eq_(
             67,
-            compare_fields(
-                [["a", "b"], ["c", "d", "e"]], [["a", "b"], ["c", "d", "f"]]
-            ),
+            compare_fields([["a", "b"], ["c", "d", "e"]], [["a", "b"], ["c", "d", "f"]]),
         )
 
     def test_empty(self):
@@ -265,9 +263,7 @@ class TestCasebuild_word_dict:
         j = job.Job(1, do_progress)
         self.log = []
         s = "foo bar"
-        build_word_dict(
-            [NamedObject(s, True), NamedObject(s, True), NamedObject(s, True)], j
-        )
+        build_word_dict([NamedObject(s, True), NamedObject(s, True), NamedObject(s, True)], j)
         # We don't have intermediate log because iter_with_progress is called with every > 1
         eq_(0, self.log[0])
         eq_(100, self.log[1])
@@ -297,10 +293,7 @@ class TestCasereduce_common_words:
 
     def test_dont_remove_objects_with_only_common_words(self):
         d = {
-            "common": set(
-                [NamedObject("common uncommon", True) for i in range(50)]
-                + [NamedObject("common", True)]
-            ),
+            "common": set([NamedObject("common uncommon", True) for i in range(50)] + [NamedObject("common", True)]),
             "uncommon": set([NamedObject("common uncommon", True)]),
         }
         reduce_common_words(d, 50)
@@ -309,10 +302,7 @@ class TestCasereduce_common_words:
 
     def test_values_still_are_set_instances(self):
         d = {
-            "common": set(
-                [NamedObject("common uncommon", True) for i in range(50)]
-                + [NamedObject("common", True)]
-            ),
+            "common": set([NamedObject("common uncommon", True) for i in range(50)] + [NamedObject("common", True)]),
             "uncommon": set([NamedObject("common uncommon", True)]),
         }
         reduce_common_words(d, 50)
@@ -352,12 +342,8 @@ class TestCasereduce_common_words:
         # would not stay in 'bar' because 'foo' is not a common word anymore.
         only_common = NamedObject("foo bar", True)
         d = {
-            "foo": set(
-                [NamedObject("foo bar baz", True) for i in range(49)] + [only_common]
-            ),
-            "bar": set(
-                [NamedObject("foo bar baz", True) for i in range(49)] + [only_common]
-            ),
+            "foo": set([NamedObject("foo bar baz", True) for i in range(49)] + [only_common]),
+            "bar": set([NamedObject("foo bar baz", True) for i in range(49)] + [only_common]),
             "baz": set([NamedObject("foo bar baz", True) for i in range(49)]),
         }
         reduce_common_words(d, 50)
@@ -386,9 +372,7 @@ class TestCaseget_match:
         assert object() not in m
 
     def test_word_weight(self):
-        m = get_match(
-            NamedObject("foo bar", True), NamedObject("bar bleh", True), (WEIGHT_WORDS,)
-        )
+        m = get_match(NamedObject("foo bar", True), NamedObject("bar bleh", True), (WEIGHT_WORDS,))
         eq_(m.percentage, int((6.0 / 13.0) * 100))
 
 
@@ -554,8 +538,12 @@ class TestCaseGetMatchesByContents:
     def test_big_file_partial_hashes(self):
         smallsize = 1
         bigsize = 100 * 1024 * 1024  # 100MB
-        f = [no("bigfoo", size=bigsize), no("bigbar", size=bigsize),
-             no("smallfoo", size=smallsize), no("smallbar", size=smallsize)]
+        f = [
+            no("bigfoo", size=bigsize),
+            no("bigbar", size=bigsize),
+            no("smallfoo", size=smallsize),
+            no("smallbar", size=smallsize),
+        ]
         f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
         f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
         f[2].md5 = f[2].md5partial = "bleh"
@@ -749,8 +737,7 @@ class TestCaseGroup:
         # if the ref has the same key as one or more of the dupe, run the tie_breaker func among them
         g = get_test_group()
         o1, o2, o3 = g.ordered
-        tie_breaker = lambda ref, dupe: dupe is o3
-        g.prioritize(lambda x: 0, tie_breaker)
+        g.prioritize(lambda x: 0, lambda ref, dupe: dupe is o3)
         assert g.ref is o3
 
     def test_prioritize_with_tie_breaker_runs_on_all_dupes(self):
@@ -761,8 +748,7 @@ class TestCaseGroup:
         o1.foo = 1
         o2.foo = 2
         o3.foo = 3
-        tie_breaker = lambda ref, dupe: dupe.foo > ref.foo
-        g.prioritize(lambda x: 0, tie_breaker)
+        g.prioritize(lambda x: 0, lambda ref, dupe: dupe.foo > ref.foo)
         assert g.ref is o3
 
     def test_prioritize_with_tie_breaker_runs_only_on_tie_dupes(self):
@@ -775,9 +761,7 @@ class TestCaseGroup:
         o1.bar = 1
         o2.bar = 2
         o3.bar = 3
-        key_func = lambda x: -x.foo
-        tie_breaker = lambda ref, dupe: dupe.bar > ref.bar
-        g.prioritize(key_func, tie_breaker)
+        g.prioritize(lambda x: -x.foo, lambda ref, dupe: dupe.bar > ref.bar)
         assert g.ref is o2
 
     def test_prioritize_with_ref_dupe(self):
@@ -909,9 +893,7 @@ class TestCaseget_groups:
         m1 = Match(A, B, 90)  # This is the strongest "A" match
         m2 = Match(A, C, 80)  # Because C doesn't match with B, it won't be in the group
         m3 = Match(A, D, 80)  # Same thing for D
-        m4 = Match(
-            C, D, 70
-        )  # However, because C and D match, they should have their own group.
+        m4 = Match(C, D, 70)  # However, because C and D match, they should have their own group.
         groups = get_groups([m1, m2, m3, m4])
         eq_(len(groups), 2)
         g1, g2 = groups
