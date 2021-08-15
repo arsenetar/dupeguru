@@ -6,17 +6,16 @@
 
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
+    QSpinBox,
     QVBoxLayout,
     QHBoxLayout,
     QLabel,
     QSizePolicy,
     QSpacerItem,
     QWidget,
-    QLineEdit,
 )
 
 from hscommon.trans import trget
-from hscommon.util import tryint
 
 from core.app import AppMode
 from core.scanner import ScanType
@@ -56,16 +55,17 @@ class PreferencesDialog(PreferencesDialogBase):
             "ignoreSmallFilesBox", tr("Ignore files smaller than"), self.widget
         )
         self.horizontalLayout_2.addWidget(self.ignoreSmallFilesBox)
-        self.sizeThresholdEdit = QLineEdit(self.widget)
+        self.sizeThresholdSpinBox = QSpinBox(self.widget)
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(
-            self.sizeThresholdEdit.sizePolicy().hasHeightForWidth()
+            self.sizeThresholdSpinBox.sizePolicy().hasHeightForWidth()
         )
-        self.sizeThresholdEdit.setSizePolicy(sizePolicy)
-        self.sizeThresholdEdit.setMaximumSize(QSize(50, 16777215))
-        self.horizontalLayout_2.addWidget(self.sizeThresholdEdit)
+        self.sizeThresholdSpinBox.setSizePolicy(sizePolicy)
+        self.sizeThresholdSpinBox.setMaximumSize(QSize(100, 16777215))
+        self.sizeThresholdSpinBox.setRange(0, 1000000)
+        self.horizontalLayout_2.addWidget(self.sizeThresholdSpinBox)
         self.label_6 = QLabel(self.widget)
         self.label_6.setText(tr("KB"))
         self.horizontalLayout_2.addWidget(self.label_6)
@@ -74,13 +74,16 @@ class PreferencesDialog(PreferencesDialogBase):
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_2b = QHBoxLayout()
         self._setupAddCheckbox(
-            "bigFilePartialHashesBox", tr("Partially hash files bigger than"), self.widget
+            "bigFilePartialHashesBox",
+            tr("Partially hash files bigger than"),
+            self.widget,
         )
         self.horizontalLayout_2b.addWidget(self.bigFilePartialHashesBox)
-        self.bigSizeThresholdEdit = QLineEdit(self.widget)
-        self.bigSizeThresholdEdit.setSizePolicy(sizePolicy)
-        self.bigSizeThresholdEdit.setMaximumSize(QSize(75, 16777215))
-        self.horizontalLayout_2b.addWidget(self.bigSizeThresholdEdit)
+        self.bigSizeThresholdSpinBox = QSpinBox(self.widget)
+        self.bigSizeThresholdSpinBox.setSizePolicy(sizePolicy)
+        self.bigSizeThresholdSpinBox.setMaximumSize(QSize(100, 16777215))
+        self.bigSizeThresholdSpinBox.setRange(0, 1000000)
+        self.horizontalLayout_2b.addWidget(self.bigSizeThresholdSpinBox)
         self.label_6b = QLabel(self.widget)
         self.label_6b.setText(tr("MB"))
         self.horizontalLayout_2b.addWidget(self.label_6b)
@@ -104,9 +107,9 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
-        self.sizeThresholdEdit.setText(str(prefs.small_file_threshold))
+        self.sizeThresholdSpinBox.setValue(prefs.small_file_threshold)
         setchecked(self.bigFilePartialHashesBox, prefs.big_file_partial_hashes)
-        self.bigSizeThresholdEdit.setText(str(prefs.big_file_size_threshold))
+        self.bigSizeThresholdSpinBox.setValue(prefs.big_file_size_threshold)
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.Standard)
@@ -119,6 +122,6 @@ class PreferencesDialog(PreferencesDialogBase):
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)
-        prefs.small_file_threshold = tryint(self.sizeThresholdEdit.text())
+        prefs.small_file_threshold = self.sizeThresholdSpinBox.value()
         prefs.big_file_partial_hashes = ischecked(self.bigFilePartialHashesBox)
-        prefs.big_file_size_threshold = tryint(self.bigSizeThresholdEdit.text())
+        prefs.big_file_size_threshold = self.bigSizeThresholdSpinBox.value()
