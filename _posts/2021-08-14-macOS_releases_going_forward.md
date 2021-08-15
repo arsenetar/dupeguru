@@ -7,7 +7,7 @@ Intel and M1 chips.  The latest downloads are as follows (see details below for 
 - Cocoa Version [https://github.com/arsenetar/dupeguru/releases/download/4.1.1/dupeguru_macOS_Cocoa_4.1.1.dmg](https://github.com/arsenetar/dupeguru/releases/download/4.1.1/dupeguru_macOS_Cocoa_4.1.1.dmg)
 
 ## History
-Awhile back we had detailed the state of issues with macOS versions in {% post_url 2021-03-09-macOS_Version_notes %}.  We have now been able to package both Qt and Cocoa versions successfully for distribution.  
+Awhile back we had detailed the state of issues with macOS versions in {% post_url 2021-03-09-macOS_version_notes %}.  We have now been able to package both Qt and Cocoa versions successfully for distribution.  
 These versions are also compatible with Intel and M1 chips.  The Qt version had previously 
 been held up due to issues with the packaging tools.  All the issues with packaging are now
 resolved.
