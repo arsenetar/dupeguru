@@ -24,9 +24,6 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 .
-    - name: Check format with black
-      run: |
-        black .
   format:
     runs-on: ubuntu-latest
     steps:
