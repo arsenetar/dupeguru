@@ -36,95 +36,95 @@ msgstr ""
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:308
+#: core\app.py:290
 msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:334
+#: core\app.py:316
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:335
+#: core\app.py:317
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:343
+#: core\app.py:323
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:399
+#: core\app.py:379
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:401
+#: core\app.py:381
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:410
+#: core\app.py:389
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:486
+#: core\app.py:463
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:487
+#: core\app.py:465
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:527
+#: core\app.py:504
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:534 core\app.py:803 core\app.py:813
+#: core\app.py:510 core\app.py:764 core\app.py:774
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:559
+#: core\app.py:533
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:691 core\app.py:703
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:776
+#: core\app.py:739
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:823
+#: core\app.py:783
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:837
+#: core\app.py:796
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:893
+#: core\app.py:843
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\engine.py:255 core\engine.py:299
+#: core\engine.py:251 core\engine.py:294
 msgid "0 matches found"
 msgstr ""
 
-#: core\engine.py:273 core\engine.py:307
+#: core\engine.py:269 core\engine.py:306
 msgid "%d matches found"
 msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr ""
 
@@ -156,15 +156,15 @@ msgstr ""
 msgid "Analyzed %d/%d pictures"
 msgstr ""
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr ""
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr ""
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr ""
 
@@ -212,11 +212,11 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core\results.py:144
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr ""
 
-#: core\results.py:151
+#: core\results.py:141
 msgid " filter: %s"
 msgstr ""
 

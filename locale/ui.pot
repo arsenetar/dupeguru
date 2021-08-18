@@ -905,3 +905,11 @@ msgstr ""
 #: qt\preferences_dialog.py:286
 msgid "Display"
 msgstr ""
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr ""
