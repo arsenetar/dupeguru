@@ -39,6 +39,7 @@ jobs:
     - if: matrix.language == 'cpp' 
       name: Build Cpp
       run: |
+        sudo apt-get update
         sudo apt-get install python3-pyqt5
         make modules
     - if: matrix.language == 'python'
