@@ -126,13 +126,13 @@ class DupeGuru(Broadcaster):
 
     PICTURE_CACHE_TYPE = "sqlite"  # set to 'shelve' for a ShelveCache
 
-    def __init__(self, view):
+    def __init__(self, view, portable=False):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
         Broadcaster.__init__(self)
         self.view = view
-        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME)
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME, portable=portable)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.Standard

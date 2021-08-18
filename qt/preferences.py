@@ -29,6 +29,7 @@ class Preferences(PreferencesBase):
         self.language = get("Language", self.language)
         if not self.language and trans.installed_lang:
             self.language = trans.installed_lang
+        self.portable = get("Portable", False)
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
         self.reference_bold_font = get("ReferenceBoldFont", self.reference_bold_font)
@@ -138,6 +139,7 @@ class Preferences(PreferencesBase):
         set_("DestinationType", self.destination_type)
         set_("CustomCommand", self.custom_command)
         set_("Language", self.language)
+        set_("Portable", self.portable)
 
         set_("TableFontSize", self.tableFontSize)
         set_("ReferenceBoldFont", self.reference_bold_font)

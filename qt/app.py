@@ -52,7 +52,7 @@ class DupeGuru(QObject):
         # Enable tabs instead of separate floating windows for each dialog
         # Could be passed as an argument to this class if we wanted
         self.use_tabs = True
-        self.model = DupeGuruModel(view=self)
+        self.model = DupeGuruModel(view=self, portable=self.prefs.portable)
         self._setup()
 
     # --- Private

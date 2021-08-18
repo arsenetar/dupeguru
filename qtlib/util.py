@@ -12,6 +12,7 @@ import os.path as op
 import os
 import logging
 
+from core.util import executable_folder
 from hscommon.util import first
 
 from PyQt5.QtCore import QStandardPaths
@@ -88,8 +89,11 @@ def setAccelKeys(menu):
         action.setText(newtext)
 
 
-def getAppData():
-    return QStandardPaths.standardLocations(QStandardPaths.DataLocation)[0]
+def getAppData(portable=False):
+    if portable:
+        return op.join(executable_folder(), "data")
+    else:
+        return QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)[0]
 
 
 class SysWrapper(io.IOBase):

@@ -5,6 +5,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import time
+import sys
+import os
 
 from hscommon.util import format_time_decimal
 
@@ -58,3 +60,7 @@ def fix_surrogate_encoding(s, encoding="utf-8"):
         return s.encode(encoding, "replace").decode(encoding)
     else:
         return s
+
+
+def executable_folder():
+    return os.path.dirname(os.path.abspath(sys.argv[0]))

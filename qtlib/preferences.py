@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QDockWidget
 from hscommon.trans import trget
 from hscommon.util import tryint
 from hscommon.plat import ISWINDOWS
+from core.util import executable_folder
 
 from os import path as op
 
@@ -68,18 +69,25 @@ def adjust_after_deserialization(v):
     return v
 
 
-def createQSettings():
+def create_qsettings():
     # Create a QSettings instance with the correct arguments.
-    # On windows use an ini file in the AppDataLocation instead of registry if possible as it
-    # makes it easier for a user to clear it out when there are issues.
-    if ISWINDOWS:
-        Locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
-        if Locations:
-            return QSettings(op.join(Locations[0], "settings.ini"), QSettings.IniFormat)
+    config_location = op.join(executable_folder(), "settings.ini")
+    if op.isfile(config_location):
+        settings = QSettings(config_location, QSettings.IniFormat)
+        settings.setValue("Portable", True)
+    elif ISWINDOWS:
+        # On windows use an ini file in the AppDataLocation instead of registry if possible as it
+        # makes it easier for a user to clear it out when there are issues.
+        locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+        if locations:
+            settings = QSettings(op.join(locations[0], "settings.ini"), QSettings.IniFormat)
         else:
-            return QSettings()
+            settings = QSettings()
+        settings.setValue("Portable", False)
     else:
-        return QSettings()
+        settings = QSettings()
+        settings.setValue("Portable", False)
+    return settings
 
 
 # About QRect conversion:
@@ -93,7 +101,7 @@ class Preferences(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.reset()
-        self._settings = createQSettings()
+        self._settings = create_qsettings()
 
     def _load_values(self, settings, get):
         pass

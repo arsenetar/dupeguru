@@ -30,7 +30,7 @@ def reveal_path(path):
     _reveal_path(str(path))
 
 
-def special_folder_path(special_folder, appname=None):
+def special_folder_path(special_folder, appname=None, portable=False):
     """Returns the path of ``special_folder``.
 
     ``special_folder`` is a SpecialFolder.* const. The result is the special folder for the current
@@ -38,7 +38,7 @@ def special_folder_path(special_folder, appname=None):
 
     You can override the application name with ``appname``. This argument is ingored under Qt.
     """
-    return _special_folder_path(special_folder, appname)
+    return _special_folder_path(special_folder, appname, portable=portable)
 
 
 try:
@@ -54,7 +54,7 @@ try:
     _open_path = proxy.openPath_
     _reveal_path = proxy.revealPath_
 
-    def _special_folder_path(special_folder, appname=None):
+    def _special_folder_path(special_folder, appname=None, portable=False):
         if special_folder == SpecialFolder.Cache:
             base = proxy.getCachePath()
         else:
@@ -68,6 +68,9 @@ except ImportError:
     try:
         from PyQt5.QtCore import QUrl, QStandardPaths
         from PyQt5.QtGui import QDesktopServices
+        from qtlib.util import getAppData
+        from core.util import executable_folder
+        from hscommon.plat import ISWINDOWS
 
         def _open_url(url):
             QDesktopServices.openUrl(QUrl(url))
@@ -79,12 +82,15 @@ except ImportError:
         def _reveal_path(path):
             _open_path(op.dirname(str(path)))
 
-        def _special_folder_path(special_folder, appname=None):
+        def _special_folder_path(special_folder, appname=None, portable=False):
             if special_folder == SpecialFolder.Cache:
-                qtfolder = QStandardPaths.CacheLocation
+                if ISWINDOWS and portable:
+                    folder = op.join(executable_folder(), "cache")
+                else:
+                    folder = QStandardPaths.standardLocations(QStandardPaths.CacheLocation)[0]
             else:
-                qtfolder = QStandardPaths.DataLocation
-            return QStandardPaths.standardLocations(qtfolder)[0]
+                folder = getAppData(portable)
+            return folder
 
     except ImportError:
         # We're either running tests, and these functions don't matter much or we're in a really
@@ -97,5 +103,5 @@ except ImportError:
         def _reveal_path(path):
             pass
 
-        def _special_folder_path(special_folder, appname=None):
+        def _special_folder_path(special_folder, appname=None, portable=False):
             return "/tmp"
