@@ -42,7 +42,7 @@ jobs:
         sudo apt-get install python3-pyqt5
         make modules
     - if: matrix.language == 'python'
-    - name: Autobuild
+      name: Autobuild
       uses: github/codeql-action/autobuild@v1
     # Analysis
     - name: Perform CodeQL Analysis
