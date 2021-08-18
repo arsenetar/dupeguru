@@ -1,5 +1,6 @@
 .DS_Store
 __pycache__
+*.egg-info
 *.so
 *.mo
 *.waf*
