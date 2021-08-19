@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hsaudiotag import auto
+import mutagen
 from hscommon.util import get_file_ext, format_size, format_time
 
 from core.util import format_timestamp, format_perc, format_words, format_dupe_count
@@ -25,6 +25,9 @@ TAG_FIELDS = {
     "track",
     "comment",
 }
+
+# This is a temporary workaround for migration from hsaudiotag for the can_handle method
+SUPPORTED_EXTS = {"mp3", "wma", "m4a", "m4p", "ogg", "flac", "aif", "aiff", "aifc"}
 
 
 class MusicFile(fs.File):
@@ -50,7 +53,7 @@ class MusicFile(fs.File):
     def can_handle(cls, path):
         if not fs.File.can_handle(path):
             return False
-        return get_file_ext(path.name) in auto.EXT2CLASS
+        return get_file_ext(path.name) in SUPPORTED_EXTS
 
     def get_display_info(self, group, delta):
         size = self.size
@@ -95,21 +98,23 @@ class MusicFile(fs.File):
         }
 
     def _get_md5partial_offset_and_size(self):
-        f = auto.File(str(self.path))
-        return (f.audio_offset, f.audio_size)
+        # No longer calculating the offset and audio size, just whole file
+        size = self.path.stat().st_size
+        return (0, size)
 
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field in TAG_FIELDS:
-            f = auto.File(str(self.path))
-            self.audiosize = f.audio_size
-            self.bitrate = f.bitrate
-            self.duration = f.duration
-            self.samplerate = f.sample_rate
-            self.artist = f.artist
-            self.album = f.album
-            self.title = f.title
-            self.genre = f.genre
-            self.comment = f.comment
-            self.year = f.year
-            self.track = f.track
+            # The various conversions here are to make this look like the previous implementation
+            file = mutagen.File(str(self.path), easy=True)
+            self.audiosize = self.path.stat().st_size
+            self.bitrate = file.info.bitrate / 1000
+            self.duration = file.info.length
+            self.samplerate = file.info.sample_rate
+            self.artist = ", ".join(file.tags.get("artist") or [])
+            self.album = ", ".join(file.tags.get("album") or [])
+            self.title = ", ".join(file.tags.get("title") or [])
+            self.genre = ", ".join(file.tags.get("genre") or [])
+            self.comment = ", ".join(file.tags.get("comment") or [""])
+            self.year = ", ".join(file.tags.get("date") or [])
+            self.track = (file.tags.get("tracknumber") or [""])[0]
