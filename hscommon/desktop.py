@@ -70,7 +70,8 @@ except ImportError:
         from PyQt5.QtGui import QDesktopServices
         from qtlib.util import getAppData
         from core.util import executable_folder
-        from hscommon.plat import ISWINDOWS
+        from hscommon.plat import ISWINDOWS, ISOSX
+        import subprocess
 
         def _open_url(url):
             QDesktopServices.openUrl(QUrl(url))
@@ -80,7 +81,12 @@ except ImportError:
             QDesktopServices.openUrl(url)
 
         def _reveal_path(path):
-            _open_path(op.dirname(str(path)))
+            if ISWINDOWS:
+                subprocess.run(["explorer", "/select,", op.abspath(path)])
+            elif ISOSX:
+                subprocess.run(["open", "-R", op.abspath(path)])
+            else:
+                _open_path(op.dirname(str(path)))
 
         def _special_folder_path(special_folder, appname=None, portable=False):
             if special_folder == SpecialFolder.Cache:
