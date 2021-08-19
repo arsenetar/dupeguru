@@ -277,6 +277,12 @@ class DupeGuru(QObject):
                 "Wrong Locale",
                 msg,
             )
+        # Load results on open if passed a .dupeguru file
+        if len(sys.argv) > 1:
+            results = sys.argv[1]
+            if results.endswith(".dupeguru"):
+                self.model.load_from(results)
+                self.recentResults.insertItem(results)
 
     def clearPictureCacheTriggered(self):
         title = tr("Clear Picture Cache")

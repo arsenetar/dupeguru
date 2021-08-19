@@ -184,6 +184,24 @@ Section "!Application" AppSec
   Pop $R1
   Pop $R0
 
+  ; Set file association
+  ReadRegStr $1 HKCR ".dupeguru" ""
+  StrCmp $1 "" NoBackup  ; is it empty
+  StrCmp $1 "${APPNAME}.File" NoBackup  ; is it our own
+  WriteRegStr HKCR ".dupeguru" "backup_val" "$1"  ; backup current value
+NoBackup:
+  WriteRegStr HKCR ".dupeguru" "" "${APPNAME}.File"  ; set our file association
+ 
+  ReadRegStr $0 HKCR "${APPNAME}.File" ""
+  StrCmp $0 "" 0 Skip
+    WriteRegStr HKCR "${APPNAME}.File" "" "${APPNAME} File"
+    WriteRegStr HKCR "${APPNAME}.File\shell" "" "open"
+    WriteRegStr HKCR "${APPNAME}.File\DefaultIcon" "" "$INSTDIR\${APPNAME}-win${BITS}.exe,0"
+Skip:
+  WriteRegStr HKCR "${APPNAME}.File\shell\open\command" "" '"$INSTDIR\${APPNAME}-win${BITS}.exe" "%1"'
+  WriteRegStr HKCR "${APPNAME}.File\shell\edit" "" "Edit ${APPNAME} File"
+  WriteRegStr HKCR "${APPNAME}.File\shell\edit\command" "" '"$INSTDIR\${APPNAME}-win${BITS}.exe" "%1"'
+
   ; Uninstall Entry 
   WriteRegStr SHCTX "${UNINSTALLREG}" "DisplayName" "${APPNAME} ${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONPATCH}"
   WriteRegStr SHCTX "${UNINSTALLREG}" "DisplayVersion" "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONPATCH}"
@@ -236,6 +254,19 @@ Section "Uninstall"
   
   ; Remove Install Folder if empty
   RMDir "$INSTDIR"
+
+ ReadRegStr $1 HKCR ".dupeguru" ""
+  StrCmp $1 "${APPNAME}.File" 0 NotOwn ; only do this if we own it
+  ReadRegStr $1 HKCR ".dupeguru" "backup_val"
+  StrCmp $1 "" 0 Restore ; if backup="" then delete the whole key
+  DeleteRegKey HKCR ".dupeGuru"
+  Goto NotOwn
+ 
+Restore:
+  WriteRegStr HKCR ".dupeguru" "" $1
+  DeleteRegValue HKCR ".dupeguru" "backup_val"
+NotOwn:
+  DeleteRegKey HKCR "${APPNAME}.File" ;Delete key with association name settings
 
   ; Remove registry keys and vendor keys (if empty)
   DeleteRegKey  SHCTX "${BASEREGKEY}"
