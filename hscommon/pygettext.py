@@ -167,10 +167,10 @@ def getFilesForName(name):
         # check for glob chars
         if containsAny(name, "*?[]"):
             files = glob.glob(name)
-            list = []
+            file_list = []
             for file in files:
-                list.extend(getFilesForName(file))
-            return list
+                file_list.extend(getFilesForName(file))
+            return file_list
 
         # try to find module or package
         name = _get_modpkg_path(name)
@@ -179,9 +179,9 @@ def getFilesForName(name):
 
     if os.path.isdir(name):
         # find all python files in directory
-        list = []
-        os.walk(name, _visit_pyfiles, list)
-        return list
+        file_list = []
+        os.walk(name, _visit_pyfiles, file_list)
+        return file_list
     elif os.path.exists(name):
         # a single file
         return [name]

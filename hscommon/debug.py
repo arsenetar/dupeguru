@@ -13,8 +13,8 @@ import traceback
 # Taken from http://bzimmer.ziclix.com/2008/12/17/python-thread-dumps/
 def stacktraces():
     code = []
-    for threadId, stack in sys._current_frames().items():
-        code.append("\n# ThreadID: %s" % threadId)
+    for thread_id, stack in sys._current_frames().items():
+        code.append("\n# ThreadID: %s" % thread_id)
         for filename, lineno, name, line in traceback.extract_stack(stack):
             code.append('File: "%s", line %d, in %s' % (filename, lineno, name))
             if line:

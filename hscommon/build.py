@@ -336,7 +336,6 @@ def read_changelog_file(filename):
     with open(filename, "rt", encoding="utf-8") as fp:
         contents = fp.read()
     splitted = re_changelog_header.split(contents)[1:]  # the first item is empty
-    # splitted = [version1, date1, desc1, version2, date2, ...]
     result = []
     for version, date_str, description in iter_by_three(iter(splitted)):
         date = datetime.strptime(date_str, "%Y-%m-%d").date()
@@ -399,8 +398,8 @@ def create_osx_app_structure(
     # `resources`: A list of paths of files or folders going in the "Resources" folder.
     # `frameworks`: Same as above for "Frameworks".
     # `symlink_resources`: If True, will symlink resources into the structure instead of copying them.
-    app = OSXAppStructure(dest, infoplist)
-    app.create()
+    app = OSXAppStructure(dest)
+    app.create(infoplist)
     app.copy_executable(executable)
     app.copy_resources(*resources, use_symlinks=symlink_resources)
     app.copy_frameworks(*frameworks)

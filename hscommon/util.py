@@ -177,13 +177,13 @@ def pluralize(number, word, decimals=0, plural_word=None):
     ``plural_word``: If the plural rule for word is more complex than adding a 's', specify a plural
     """
     number = round(number, decimals)
-    format = "%%1.%df %%s" % decimals
+    plural_format = "%%1.%df %%s" % decimals
     if number > 1:
         if plural_word is None:
             word += "s"
         else:
             word = plural_word
-    return format % (number, word)
+    return plural_format % (number, word)
 
 
 def format_time(seconds, with_hours=True):
@@ -252,7 +252,7 @@ def format_size(size, decimal=0, forcepower=-1, showdesc=True):
         div = SIZE_VALS[i - 1]
     else:
         div = 1
-    format = "%%%d.%df" % (decimal, decimal)
+    size_format = "%%%d.%df" % (decimal, decimal)
     negative = size < 0
     divided_size = (0.0 + abs(size)) / div
     if decimal == 0:
@@ -261,7 +261,7 @@ def format_size(size, decimal=0, forcepower=-1, showdesc=True):
         divided_size = ceil(divided_size * (10 ** decimal)) / (10 ** decimal)
     if negative:
         divided_size *= -1
-    result = format % divided_size
+    result = size_format % divided_size
     if showdesc:
         result += " " + SIZE_DESC[i]
     return result
@@ -292,7 +292,7 @@ def multi_replace(s, replace_from, replace_to=""):
     the same length as ``replace_from``, it will be transformed into a list.
     """
     if isinstance(replace_to, str) and (len(replace_from) != len(replace_to)):
-        replace_to = [replace_to for r in replace_from]
+        replace_to = [replace_to for _ in replace_from]
     if len(replace_from) != len(replace_to):
         raise ValueError("len(replace_from) must be equal to len(replace_to)")
     replace = list(zip(replace_from, replace_to))

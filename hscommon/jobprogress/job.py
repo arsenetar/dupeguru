@@ -146,24 +146,29 @@ class Job:
 
 class NullJob:
     def __init__(self, *args, **kwargs):
+        # Null job does nothing
         pass
 
     def add_progress(self, *args, **kwargs):
+        # Null job does nothing
         pass
 
     def check_if_cancelled(self):
+        # Null job does nothing
         pass
 
     def iter_with_progress(self, sequence, *args, **kwargs):
         return iter(sequence)
 
     def start_job(self, *args, **kwargs):
+        # Null job does nothing
         pass
 
     def start_subjob(self, *args, **kwargs):
         return NullJob()
 
     def set_progress(self, *args, **kwargs):
+        # Null job does nothing
         pass
 
 

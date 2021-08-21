@@ -11,8 +11,8 @@ import logging
 
 
 class SpecialFolder:
-    AppData = 1
-    Cache = 2
+    APPDATA = 1
+    CACHE = 2
 
 
 def open_url(url):
@@ -55,7 +55,7 @@ try:
     _reveal_path = proxy.revealPath_
 
     def _special_folder_path(special_folder, appname=None, portable=False):
-        if special_folder == SpecialFolder.Cache:
+        if special_folder == SpecialFolder.CACHE:
             base = proxy.getCachePath()
         else:
             base = proxy.getAppdataPath()
@@ -89,7 +89,7 @@ except ImportError:
                 _open_path(op.dirname(str(path)))
 
         def _special_folder_path(special_folder, appname=None, portable=False):
-            if special_folder == SpecialFolder.Cache:
+            if special_folder == SpecialFolder.CACHE:
                 if ISWINDOWS and portable:
                     folder = op.join(executable_folder(), "cache")
                 else:
@@ -104,9 +104,11 @@ except ImportError:
         logging.warning("Can't setup desktop functions!")
 
         def _open_path(path):
+            # Dummy for tests
             pass
 
         def _reveal_path(path):
+            # Dummy for tests
             pass
 
         def _special_folder_path(special_folder, appname=None, portable=False):

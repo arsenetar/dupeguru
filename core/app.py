@@ -132,7 +132,7 @@ class DupeGuru(Broadcaster):
             logging.debug("Debug mode enabled")
         Broadcaster.__init__(self)
         self.view = view
-        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.AppData, appname=self.NAME, portable=portable)
+        self.appdata = desktop.special_folder_path(desktop.SpecialFolder.APPDATA, appname=self.NAME, portable=portable)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.Standard

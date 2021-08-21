@@ -131,11 +131,11 @@ def install_gettext_trans(base_folder, lang):
 def install_gettext_trans_under_cocoa():
     from cocoa import proxy
 
-    resFolder = proxy.getResourcePath()
-    baseFolder = op.join(resFolder, "locale")
-    currentLang = proxy.systemLang()
-    install_gettext_trans(baseFolder, currentLang)
-    localename = get_locale_name(currentLang)
+    res_folder = proxy.getResourcePath()
+    base_folder = op.join(res_folder, "locale")
+    current_lang = proxy.systemLang()
+    install_gettext_trans(base_folder, current_lang)
+    localename = get_locale_name(current_lang)
     if localename is not None:
         locale.setlocale(locale.LC_ALL, localename)
 
