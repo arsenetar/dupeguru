@@ -6,6 +6,7 @@
 
 import os
 import os.path as op
+import sys
 from optparse import OptionParser
 import shutil
 
@@ -165,10 +166,11 @@ def build_normal():
 
 
 def main():
+    if sys.version_info < (3, 6):
+        sys.exit("Python < 3.6 is unsupported.")
     options = parse_args()
-    if options.clean:
-        if op.exists("build"):
-            shutil.rmtree("build")
+    if options.clean and op.exists("build"):
+        shutil.rmtree("build")
     if not op.exists("build"):
         os.mkdir("build")
     if options.doc:
