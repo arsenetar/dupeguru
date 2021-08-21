@@ -177,17 +177,17 @@ class Preferences(PreferencesBase):
 
     # scan_type is special because we save it immediately when we set it.
     def get_scan_type(self, app_mode):
-        if app_mode == AppMode.Picture:
-            return self.get_value("ScanTypePicture", ScanType.FuzzyBlock)
-        elif app_mode == AppMode.Music:
-            return self.get_value("ScanTypeMusic", ScanType.Tag)
+        if app_mode == AppMode.PICTURE:
+            return self.get_value("ScanTypePicture", ScanType.FUZZYBLOCK)
+        elif app_mode == AppMode.MUSIC:
+            return self.get_value("ScanTypeMusic", ScanType.TAG)
         else:
-            return self.get_value("ScanTypeStandard", ScanType.Contents)
+            return self.get_value("ScanTypeStandard", ScanType.CONTENTS)
 
     def set_scan_type(self, app_mode, value):
-        if app_mode == AppMode.Picture:
+        if app_mode == AppMode.PICTURE:
             self.set_value("ScanTypePicture", value)
-        elif app_mode == AppMode.Music:
+        elif app_mode == AppMode.MUSIC:
             self.set_value("ScanTypeMusic", value)
         else:
             self.set_value("ScanTypeStandard", value)

@@ -193,8 +193,8 @@ class TIFF_file:
         self.s2nfunc = s2n_intel if self.endian == INTEL_ENDIAN else s2n_motorola
 
     def s2n(self, offset, length, signed=0, debug=False):
-        slice = self.data[offset : offset + length]
-        val = self.s2nfunc(slice)
+        data_slice = self.data[offset : offset + length]
+        val = self.s2nfunc(data_slice)
         # Sign extension ?
         if signed:
             msb = 1 << (8 * length - 1)
@@ -206,7 +206,7 @@ class TIFF_file:
                 "Slice for offset %d length %d: %r and value: %d",
                 offset,
                 length,
-                slice,
+                data_slice,
                 val,
             )
         return val
@@ -236,10 +236,10 @@ class TIFF_file:
         for i in range(entries):
             entry = ifd + 2 + 12 * i
             tag = self.s2n(entry, 2)
-            type = self.s2n(entry + 2, 2)
-            if not 1 <= type <= 10:
+            entry_type = self.s2n(entry + 2, 2)
+            if not 1 <= entry_type <= 10:
                 continue  # not handled
-            typelen = [1, 1, 2, 4, 8, 1, 1, 2, 4, 8][type - 1]
+            typelen = [1, 1, 2, 4, 8, 1, 1, 2, 4, 8][entry_type - 1]
             count = self.s2n(entry + 4, 4)
             if count > MAX_COUNT:
                 logging.debug("Probably corrupt. Aborting.")
@@ -247,14 +247,14 @@ class TIFF_file:
             offset = entry + 8
             if count * typelen > 4:
                 offset = self.s2n(offset, 4)
-            if type == 2:
+            if entry_type == 2:
                 # Special case: nul-terminated ASCII string
                 values = str(self.data[offset : offset + count - 1], encoding="latin-1")
             else:
                 values = []
-                signed = type == 6 or type >= 8
-                for j in range(count):
-                    if type in {5, 10}:
+                signed = entry_type == 6 or entry_type >= 8
+                for _ in range(count):
+                    if entry_type in {5, 10}:
                         # The type is either 5 or 10
                         value_j = Fraction(self.s2n(offset, 4, signed), self.s2n(offset + 4, 4, signed))
                     else:
@@ -263,7 +263,7 @@ class TIFF_file:
                     values.append(value_j)
                     offset = offset + typelen
             # Now "values" is either a string or an array
-            a.append((tag, type, values))
+            a.append((tag, entry_type, values))
         return a
 
 
@@ -298,7 +298,7 @@ def get_fields(fp):
     T = TIFF_file(data)
     # There may be more than one IFD per file, but we only read the first one because others are
     # most likely thumbnails.
-    main_IFD_offset = T.first_IFD()
+    main_ifd_offset = T.first_IFD()
     result = {}
 
     def add_tag_to_result(tag, values):
@@ -310,8 +310,8 @@ def get_fields(fp):
             return  # don't overwrite data
         result[stag] = values
 
-    logging.debug("IFD at offset %d", main_IFD_offset)
-    IFD = T.dump_IFD(main_IFD_offset)
+    logging.debug("IFD at offset %d", main_ifd_offset)
+    IFD = T.dump_IFD(main_ifd_offset)
     exif_off = gps_off = 0
     for tag, type, values in IFD:
         if tag == 0x8769:

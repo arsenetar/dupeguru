@@ -30,9 +30,9 @@ class DirectoryState:
     * DirectoryState.Excluded: Don't scan this folder
     """
 
-    Normal = 0
-    Reference = 1
-    Excluded = 2
+    NORMAL = 0
+    REFERENCE = 1
+    EXCLUDED = 2
 
 
 class AlreadyThereError(Exception):
@@ -82,50 +82,49 @@ class Directories:
             # We iterate even if we only have one item here
             for denied_path_re in self._exclude_list.compiled:
                 if denied_path_re.match(str(path.name)):
-                    return DirectoryState.Excluded
+                    return DirectoryState.EXCLUDED
             # return # We still use the old logic to force state on hidden dirs
         # Override this in subclasses to specify the state of some special folders.
         if path.name.startswith("."):
-            return DirectoryState.Excluded
+            return DirectoryState.EXCLUDED
 
     def _get_files(self, from_path, fileclasses, j):
         for root, dirs, files in os.walk(str(from_path)):
             j.check_if_cancelled()
-            rootPath = Path(root)
-            state = self.get_state(rootPath)
-            if state == DirectoryState.Excluded:
+            root_path = Path(root)
+            state = self.get_state(root_path)
+            if state == DirectoryState.EXCLUDED and not any(p[: len(root_path)] == root_path for p in self.states):
                 # Recursively get files from folders with lots of subfolder is expensive. However, there
                 # might be a subfolder in this path that is not excluded. What we want to do is to skim
                 # through self.states and see if we must continue, or we can stop right here to save time
-                if not any(p[: len(rootPath)] == rootPath for p in self.states):
-                    del dirs[:]
+                del dirs[:]
             try:
-                if state != DirectoryState.Excluded:
+                if state != DirectoryState.EXCLUDED:
                     # Old logic
                     if self._exclude_list is None or not self._exclude_list.mark_count:
-                        found_files = [fs.get_file(rootPath + f, fileclasses=fileclasses) for f in files]
+                        found_files = [fs.get_file(root_path + f, fileclasses=fileclasses) for f in files]
                     else:
                         found_files = []
                         # print(f"len of files: {len(files)} {files}")
                         for f in files:
                             if not self._exclude_list.is_excluded(root, f):
-                                found_files.append(fs.get_file(rootPath + f, fileclasses=fileclasses))
+                                found_files.append(fs.get_file(root_path + f, fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
                     # OS X... In other situations, this forloop will do nothing.
                     for d in dirs[:]:
-                        f = fs.get_file(rootPath + d, fileclasses=fileclasses)
+                        f = fs.get_file(root_path + d, fileclasses=fileclasses)
                         if f is not None:
                             found_files.append(f)
                             dirs.remove(d)
                     logging.debug(
                         "Collected %d files in folder %s",
                         len(found_files),
-                        str(rootPath),
+                        str(root_path),
                     )
                     for file in found_files:
-                        file.is_ref = state == DirectoryState.Reference
+                        file.is_ref = state == DirectoryState.REFERENCE
                         yield file
             except (EnvironmentError, fs.InvalidPath):
                 pass
@@ -137,8 +136,8 @@ class Directories:
                 for folder in self._get_folders(subfolder, j):
                     yield folder
             state = self.get_state(from_folder.path)
-            if state != DirectoryState.Excluded:
-                from_folder.is_ref = state == DirectoryState.Reference
+            if state != DirectoryState.EXCLUDED:
+                from_folder.is_ref = state == DirectoryState.REFERENCE
                 logging.debug("Yielding Folder %r state: %d", from_folder, state)
                 yield from_folder
         except (EnvironmentError, fs.InvalidPath):
@@ -207,9 +206,9 @@ class Directories:
         # direct match? easy result.
         if path in self.states:
             return self.states[path]
-        state = self._default_state_for_path(path) or DirectoryState.Normal
+        state = self._default_state_for_path(path) or DirectoryState.NORMAL
         # Save non-default states in cache, necessary for _get_files()
-        if state != DirectoryState.Normal:
+        if state != DirectoryState.NORMAL:
             self.states[path] = state
             return state
 

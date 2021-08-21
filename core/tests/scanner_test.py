@@ -52,7 +52,7 @@ def test_empty(fake_fileexists):
 def test_default_settings(fake_fileexists):
     s = Scanner()
     eq_(s.min_match_percentage, 80)
-    eq_(s.scan_type, ScanType.Filename)
+    eq_(s.scan_type, ScanType.FILENAME)
     eq_(s.mix_file_kind, True)
     eq_(s.word_weighting, False)
     eq_(s.match_similar_words, False)
@@ -119,7 +119,7 @@ def test_prioritize(fake_fileexists):
 
 def test_content_scan(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     f = [no("foo"), no("bar"), no("bleh")]
     f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
     f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
@@ -137,14 +137,14 @@ def test_content_scan_compare_sizes_first(fake_fileexists):
             raise AssertionError()
 
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     f = [MyFile("foo", 1), MyFile("bar", 2)]
     eq_(len(s.get_dupe_groups(f)), 0)
 
 
 def test_big_file_partial_hashes(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
 
     smallsize = 1
     bigsize = 100 * 1024 * 1024  # 100MB
@@ -173,7 +173,7 @@ def test_big_file_partial_hashes(fake_fileexists):
 
 def test_min_match_perc_doesnt_matter_for_content_scan(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     f = [no("foo"), no("bar"), no("bleh")]
     f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
     f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
@@ -190,7 +190,7 @@ def test_min_match_perc_doesnt_matter_for_content_scan(fake_fileexists):
 
 def test_content_scan_doesnt_put_md5_in_words_at_the_end(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     f = [no("foo"), no("bar")]
     f[0].md5 = f[0].md5partial = f[0].md5samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
     f[1].md5 = f[1].md5partial = f[1].md5samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
@@ -256,7 +256,7 @@ def test_similar_words(fake_fileexists):
 
 def test_fields(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Fields
+    s.scan_type = ScanType.FIELDS
     f = [no("The White Stripes - Little Ghost"), no("The White Stripes - Little Acorn")]
     r = s.get_dupe_groups(f)
     eq_(len(r), 0)
@@ -264,7 +264,7 @@ def test_fields(fake_fileexists):
 
 def test_fields_no_order(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.FieldsNoOrder
+    s.scan_type = ScanType.FIELDSNOORDER
     f = [no("The White Stripes - Little Ghost"), no("Little Ghost - The White Stripes")]
     r = s.get_dupe_groups(f)
     eq_(len(r), 1)
@@ -272,7 +272,7 @@ def test_fields_no_order(fake_fileexists):
 
 def test_tag_scan(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     o1 = no("foo")
     o2 = no("bar")
     o1.artist = "The White Stripes"
@@ -285,7 +285,7 @@ def test_tag_scan(fake_fileexists):
 
 def test_tag_with_album_scan(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["artist", "album", "title"])
     o1 = no("foo")
     o2 = no("bar")
@@ -305,7 +305,7 @@ def test_tag_with_album_scan(fake_fileexists):
 
 def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["artist", "album", "title"])
     s.min_match_percentage = 50
     o1 = no("foo")
@@ -322,7 +322,7 @@ def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
 
 def test_tag_scan_with_different_scanned(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["track", "year"])
     o1 = no("foo")
     o2 = no("bar")
@@ -340,7 +340,7 @@ def test_tag_scan_with_different_scanned(fake_fileexists):
 
 def test_tag_scan_only_scans_existing_tags(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["artist", "foo"])
     o1 = no("foo")
     o2 = no("bar")
@@ -354,7 +354,7 @@ def test_tag_scan_only_scans_existing_tags(fake_fileexists):
 
 def test_tag_scan_converts_to_str(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["track"])
     o1 = no("foo")
     o2 = no("bar")
@@ -369,7 +369,7 @@ def test_tag_scan_converts_to_str(fake_fileexists):
 
 def test_tag_scan_non_ascii(fake_fileexists):
     s = Scanner()
-    s.scan_type = ScanType.Tag
+    s.scan_type = ScanType.TAG
     s.scanned_tags = set(["title"])
     o1 = no("foo")
     o2 = no("bar")
@@ -520,7 +520,7 @@ def test_dont_group_files_that_dont_exist(tmpdir):
     # In this test, we have to delete one of the files between the get_matches() part and the
     # get_groups() part.
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     p = Path(str(tmpdir))
     p["file1"].open("w").write("foo")
     p["file2"].open("w").write("foo")
@@ -539,7 +539,7 @@ def test_folder_scan_exclude_subfolder_matches(fake_fileexists):
     # when doing a Folders scan type, don't include matches for folders whose parent folder already
     # match.
     s = Scanner()
-    s.scan_type = ScanType.Folders
+    s.scan_type = ScanType.FOLDERS
     topf1 = no("top folder 1", size=42)
     topf1.md5 = topf1.md5partial = topf1.md5samples = b"some_md5_1"
     topf1.path = Path("/topf1")
@@ -574,7 +574,7 @@ def test_dont_count_ref_files_as_discarded(fake_fileexists):
     # However, this causes problems in "discarded" counting and we make sure here that we don't
     # report discarded matches in exact duplicate scans.
     s = Scanner()
-    s.scan_type = ScanType.Contents
+    s.scan_type = ScanType.CONTENTS
     o1 = no("foo", path="p1")
     o2 = no("foo", path="p2")
     o3 = no("foo", path="p3")

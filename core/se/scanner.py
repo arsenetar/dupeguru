@@ -13,7 +13,7 @@ class ScannerSE(ScannerBase):
     @staticmethod
     def get_scan_options():
         return [
-            ScanOption(ScanType.Filename, tr("Filename")),
-            ScanOption(ScanType.Contents, tr("Contents")),
-            ScanOption(ScanType.Folders, tr("Folders")),
+            ScanOption(ScanType.FILENAME, tr("Filename")),
+            ScanOption(ScanType.CONTENTS, tr("Contents")),
+            ScanOption(ScanType.FOLDERS, tr("Folders")),
         ]

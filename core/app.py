@@ -48,31 +48,31 @@ MSG_MANY_FILES_TO_OPEN = tr(
 
 
 class DestType:
-    Direct = 0
-    Relative = 1
-    Absolute = 2
+    DIRECT = 0
+    RELATIVE = 1
+    ABSOLUTE = 2
 
 
 class JobType:
-    Scan = "job_scan"
-    Load = "job_load"
-    Move = "job_move"
-    Copy = "job_copy"
-    Delete = "job_delete"
+    SCAN = "job_scan"
+    LOAD = "job_load"
+    MOVE = "job_move"
+    COPY = "job_copy"
+    DELETE = "job_delete"
 
 
 class AppMode:
-    Standard = 0
-    Music = 1
-    Picture = 2
+    STANDARD = 0
+    MUSIC = 1
+    PICTURE = 2
 
 
 JOBID2TITLE = {
-    JobType.Scan: tr("Scanning for duplicates"),
-    JobType.Load: tr("Loading"),
-    JobType.Move: tr("Moving"),
-    JobType.Copy: tr("Copying"),
-    JobType.Delete: tr("Sending to Trash"),
+    JobType.SCAN: tr("Scanning for duplicates"),
+    JobType.LOAD: tr("Loading"),
+    JobType.MOVE: tr("Moving"),
+    JobType.COPY: tr("Copying"),
+    JobType.DELETE: tr("Sending to Trash"),
 }
 
 
@@ -135,7 +135,7 @@ class DupeGuru(Broadcaster):
         self.appdata = desktop.special_folder_path(desktop.SpecialFolder.APPDATA, appname=self.NAME, portable=portable)
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
-        self.app_mode = AppMode.Standard
+        self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
         self.directories = directories.Directories(self.exclude_list)
@@ -148,7 +148,7 @@ class DupeGuru(Broadcaster):
             "escape_filter_regexp": True,
             "clean_empty_dirs": False,
             "ignore_hardlink_matches": False,
-            "copymove_dest_type": DestType.Relative,
+            "copymove_dest_type": DestType.RELATIVE,
             "picture_cache_type": self.PICTURE_CACHE_TYPE,
         }
         self.selected_dupes = []
@@ -169,9 +169,9 @@ class DupeGuru(Broadcaster):
     def _recreate_result_table(self):
         if self.result_table is not None:
             self.result_table.disconnect()
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             self.result_table = pe.result_table.ResultTable(self)
-        elif self.app_mode == AppMode.Music:
+        elif self.app_mode == AppMode.MUSIC:
             self.result_table = me.result_table.ResultTable(self)
         else:
             self.result_table = se.result_table.ResultTable(self)
@@ -184,15 +184,13 @@ class DupeGuru(Broadcaster):
         return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
-        if self.app_mode in (AppMode.Music, AppMode.Picture):
-            if key == "folder_path":
-                dupe_folder_path = getattr(dupe, "display_folder_path", dupe.folder_path)
-                return str(dupe_folder_path).lower()
-        if self.app_mode == AppMode.Picture:
-            if delta and key == "dimensions":
-                r = cmp_value(dupe, key)
-                ref_value = cmp_value(get_group().ref, key)
-                return get_delta_dimensions(r, ref_value)
+        if self.app_mode in (AppMode.MUSIC, AppMode.PICTURE) and key == "folder_path":
+            dupe_folder_path = getattr(dupe, "display_folder_path", dupe.folder_path)
+            return str(dupe_folder_path).lower()
+        if self.app_mode == AppMode.PICTURE and delta and key == "dimensions":
+            r = cmp_value(dupe, key)
+            ref_value = cmp_value(get_group().ref, key)
+            return get_delta_dimensions(r, ref_value)
         if key == "marked":
             return self.results.is_marked(dupe)
         if key == "percentage":
@@ -212,10 +210,9 @@ class DupeGuru(Broadcaster):
         return result
 
     def _get_group_sort_key(self, group, key):
-        if self.app_mode in (AppMode.Music, AppMode.Picture):
-            if key == "folder_path":
-                dupe_folder_path = getattr(group.ref, "display_folder_path", group.ref.folder_path)
-                return str(dupe_folder_path).lower()
+        if self.app_mode in (AppMode.MUSIC, AppMode.PICTURE) and key == "folder_path":
+            dupe_folder_path = getattr(group.ref, "display_folder_path", group.ref.folder_path)
+            return str(dupe_folder_path).lower()
         if key == "percentage":
             return group.percentage
         if key == "dupe_count":
@@ -294,32 +291,32 @@ class DupeGuru(Broadcaster):
             self.view.show_message(msg)
 
     def _job_completed(self, jobid):
-        if jobid == JobType.Scan:
+        if jobid == JobType.SCAN:
             self._results_changed()
             if not self.results.groups:
                 self.view.show_message(tr("No duplicates found."))
             else:
                 self.view.show_results_window()
-        if jobid in {JobType.Move, JobType.Delete}:
+        if jobid in {JobType.MOVE, JobType.DELETE}:
             self._results_changed()
-        if jobid == JobType.Load:
+        if jobid == JobType.LOAD:
             self._recreate_result_table()
             self._results_changed()
             self.view.show_results_window()
-        if jobid in {JobType.Copy, JobType.Move, JobType.Delete}:
+        if jobid in {JobType.COPY, JobType.MOVE, JobType.DELETE}:
             if self.results.problems:
                 self.problem_dialog.refresh()
                 self.view.show_problem_dialog()
             else:
                 msg = {
-                    JobType.Copy: tr("All marked files were copied successfully."),
-                    JobType.Move: tr("All marked files were moved successfully."),
-                    JobType.Delete: tr("All marked files were successfully sent to Trash."),
+                    JobType.COPY: tr("All marked files were copied successfully."),
+                    JobType.MOVE: tr("All marked files were moved successfully."),
+                    JobType.DELETE: tr("All marked files were successfully sent to Trash."),
                 }[jobid]
                 self.view.show_message(msg)
 
     def _job_error(self, jobid, err):
-        if jobid == JobType.Load:
+        if jobid == JobType.LOAD:
             msg = tr("Could not load file: {}").format(err)
             self.view.show_message(msg)
             return False
@@ -349,17 +346,17 @@ class DupeGuru(Broadcaster):
 
     # --- Protected
     def _get_fileclasses(self):
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             return [pe.photo.PLAT_SPECIFIC_PHOTO_CLASS]
-        elif self.app_mode == AppMode.Music:
+        elif self.app_mode == AppMode.MUSIC:
             return [me.fs.MusicFile]
         else:
             return [se.fs.File]
 
     def _prioritization_categories(self):
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             return pe.prioritize.all_categories()
-        elif self.app_mode == AppMode.Music:
+        elif self.app_mode == AppMode.MUSIC:
             return me.prioritize.all_categories()
         else:
             return prioritize.all_categories()
@@ -397,16 +394,16 @@ class DupeGuru(Broadcaster):
         self.remove_duplicates(dupes)
         self.ignore_list_dialog.refresh()
 
-    def apply_filter(self, filter):
+    def apply_filter(self, result_filter):
         """Apply a filter ``filter`` to the results so that it shows only dupe groups that match it.
 
         :param str filter: filter to apply
         """
         self.results.apply_filter(None)
         if self.options["escape_filter_regexp"]:
-            filter = escape(filter, set("()[]\\.|+?^"))
-            filter = escape(filter, "*", ".")
-        self.results.apply_filter(filter)
+            result_filter = escape(result_filter, set("()[]\\.|+?^"))
+            result_filter = escape(result_filter, "*", ".")
+        self.results.apply_filter(result_filter)
         self._results_changed()
 
     def clean_empty_dirs(self, path):
@@ -424,10 +421,10 @@ class DupeGuru(Broadcaster):
         source_path = dupe.path
         location_path = first(p for p in self.directories if dupe.path in p)
         dest_path = Path(destination)
-        if dest_type in {DestType.Relative, DestType.Absolute}:
+        if dest_type in {DestType.RELATIVE, DestType.ABSOLUTE}:
             # no filename, no windows drive letter
             source_base = source_path.remove_drive_letter().parent()
-            if dest_type == DestType.Relative:
+            if dest_type == DestType.RELATIVE:
                 source_base = source_base[location_path:]
             dest_path = dest_path[source_base]
         if not dest_path.exists():
@@ -466,7 +463,7 @@ class DupeGuru(Broadcaster):
         )
         if destination:
             desttype = self.options["copymove_dest_type"]
-            jobid = JobType.Copy if copy else JobType.Move
+            jobid = JobType.COPY if copy else JobType.MOVE
             self._start_job(jobid, do)
 
     def delete_marked(self):
@@ -482,7 +479,7 @@ class DupeGuru(Broadcaster):
             self.deletion_options.direct,
         ]
         logging.debug("Starting deletion job with args %r", args)
-        self._start_job(JobType.Delete, self._do_delete, args=args)
+        self._start_job(JobType.DELETE, self._do_delete, args=args)
 
     def export_to_xhtml(self):
         """Export current results to XHTML.
@@ -582,7 +579,7 @@ class DupeGuru(Broadcaster):
         def do(j):
             self.results.load_from_xml(filename, self._get_file, j)
 
-        self._start_job(JobType.Load, do)
+        self._start_job(JobType.LOAD, do)
 
     def make_selected_reference(self):
         """Promote :attr:`selected_dupes` to reference position within their respective groups.
@@ -786,7 +783,7 @@ class DupeGuru(Broadcaster):
         for k, v in self.options.items():
             if hasattr(scanner, k):
                 setattr(scanner, k, v)
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             scanner.cache_path = self._get_picture_cache_path()
         self.results.groups = []
         self._recreate_result_table()
@@ -794,7 +791,7 @@ class DupeGuru(Broadcaster):
 
         def do(j):
             j.set_progress(0, tr("Collecting files to scan"))
-            if scanner.scan_type == ScanType.Folders:
+            if scanner.scan_type == ScanType.FOLDERS:
                 files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
             else:
                 files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
@@ -804,7 +801,7 @@ class DupeGuru(Broadcaster):
             self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
             self.discarded_file_count = scanner.discarded_file_count
 
-        self._start_job(JobType.Scan, do)
+        self._start_job(JobType.SCAN, do)
 
     def toggle_selected_mark_state(self):
         selected = self.without_ref(self.selected_dupes)
@@ -849,18 +846,18 @@ class DupeGuru(Broadcaster):
 
     @property
     def SCANNER_CLASS(self):
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             return pe.scanner.ScannerPE
-        elif self.app_mode == AppMode.Music:
+        elif self.app_mode == AppMode.MUSIC:
             return me.scanner.ScannerME
         else:
             return se.scanner.ScannerSE
 
     @property
     def METADATA_TO_READ(self):
-        if self.app_mode == AppMode.Picture:
+        if self.app_mode == AppMode.PICTURE:
             return ["size", "mtime", "dimensions", "exif_timestamp"]
-        elif self.app_mode == AppMode.Music:
+        elif self.app_mode == AppMode.MUSIC:
             return [
                 "size",
                 "mtime",

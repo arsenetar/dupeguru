@@ -83,14 +83,14 @@ class PreferencesDialog(PreferencesDialogBase):
         setchecked(self.wordWeightingBox, prefs.word_weighting)
 
         # Update UI state based on selected scan type
-        scan_type = prefs.get_scan_type(AppMode.Music)
+        scan_type = prefs.get_scan_type(AppMode.MUSIC)
         word_based = scan_type in (
-            ScanType.Filename,
-            ScanType.Fields,
-            ScanType.FieldsNoOrder,
-            ScanType.Tag,
+            ScanType.FILENAME,
+            ScanType.FIELDS,
+            ScanType.FIELDSNOORDER,
+            ScanType.TAG,
         )
-        tag_based = scan_type == ScanType.Tag
+        tag_based = scan_type == ScanType.TAG
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)

@@ -102,8 +102,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.bigSizeThresholdSpinBox.setValue(prefs.big_file_size_threshold)
 
         # Update UI state based on selected scan type
-        scan_type = prefs.get_scan_type(AppMode.Standard)
-        word_based = scan_type == ScanType.Filename
+        scan_type = prefs.get_scan_type(AppMode.STANDARD)
+        word_based = scan_type == ScanType.FILENAME
         self.filterHardnessSlider.setEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)

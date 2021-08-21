@@ -75,10 +75,10 @@ class DirectoriesModel(TreeModel):
 
         self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
 
-    def _createNode(self, ref, row):
+    def _create_node(self, ref, row):
         return RefNode(self, None, ref, row)
 
-    def _getChildren(self):
+    def _get_children(self):
         return list(self.model)
 
     def columnCount(self, parent=QModelIndex()):

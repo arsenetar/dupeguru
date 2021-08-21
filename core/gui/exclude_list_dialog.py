@@ -5,7 +5,6 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-# from hscommon.trans import tr
 from .exclude_list_table import ExcludeListTable
 from core.exclude import has_sep
 from os import sep
@@ -47,10 +46,7 @@ class ExcludeListDialogCore:
         return False
 
     def add(self, regex):
-        try:
-            self.exclude_list.add(regex)
-        except Exception as e:
-            raise (e)
+        self.exclude_list.add(regex)
         self.exclude_list.mark(regex)
         self.exclude_list_table.add(regex)
 

@@ -296,11 +296,11 @@ class DirectoriesDialog(QMainWindow):
 
     def appModeButtonSelected(self, index):
         if index == 2:
-            mode = AppMode.Picture
+            mode = AppMode.PICTURE
         elif index == 1:
-            mode = AppMode.Music
+            mode = AppMode.MUSIC
         else:
-            mode = AppMode.Standard
+            mode = AppMode.STANDARD
         self.app.model.app_mode = mode
         self._updateScanTypeList()
 

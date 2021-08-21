@@ -150,10 +150,7 @@ class ExcludeList(Markable):
     # @timer
     @memoize
     def _do_compile(self, expr):
-        try:
-            return re.compile(expr)
-        except Exception as e:
-            raise (e)
+        return re.compile(expr)
 
     # @timer
     # @memoize  # probably not worth memoizing this one if we memoize the above
@@ -235,7 +232,7 @@ class ExcludeList(Markable):
             # This exception should never be ignored
             raise AlreadyThereException()
         if regex in forbidden_regexes:
-            raise Exception("Forbidden (dangerous) expression.")
+            raise ValueError("Forbidden (dangerous) expression.")
 
         iscompilable, exception, compiled = self.compile_re(regex)
         if not iscompilable and not forced:

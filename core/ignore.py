@@ -88,9 +88,8 @@ class IgnoreList:
             except KeyError:
                 return False
 
-        if not inner(first, second):
-            if not inner(second, first):
-                raise ValueError()
+        if not inner(first, second) and not inner(second, first):
+            raise ValueError()
 
     def load_from_xml(self, infile):
         """Loads the ignore list from a XML created with save_to_xml.

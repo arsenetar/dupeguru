@@ -17,9 +17,9 @@ class ScannerME(ScannerBase):
     @staticmethod
     def get_scan_options():
         return [
-            ScanOption(ScanType.Filename, tr("Filename")),
-            ScanOption(ScanType.Fields, tr("Filename - Fields")),
-            ScanOption(ScanType.FieldsNoOrder, tr("Filename - Fields (No Order)")),
-            ScanOption(ScanType.Tag, tr("Tags")),
-            ScanOption(ScanType.Contents, tr("Contents")),
+            ScanOption(ScanType.FILENAME, tr("Filename")),
+            ScanOption(ScanType.FIELDS, tr("Filename - Fields")),
+            ScanOption(ScanType.FIELDSNOORDER, tr("Filename - Fields (No Order)")),
+            ScanOption(ScanType.TAG, tr("Tags")),
+            ScanOption(ScanType.CONTENTS, tr("Contents")),
         ]

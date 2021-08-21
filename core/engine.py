@@ -106,14 +106,14 @@ def compare_fields(first, second, flags=()):
         # We don't want to remove field directly in the list. We must work on a copy.
         second = second[:]
         for field1 in first:
-            max = 0
+            max_score = 0
             matched_field = None
             for field2 in second:
                 r = compare(field1, field2, flags)
-                if r > max:
-                    max = r
+                if r > max_score:
+                    max_score = r
                     matched_field = field2
-            results.append(max)
+            results.append(max_score)
             if matched_field:
                 second.remove(matched_field)
     else:

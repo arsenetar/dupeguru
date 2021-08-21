@@ -195,17 +195,17 @@ class DupeGuru(QObject):
 
     # --- Private
     def _get_details_dialog_class(self):
-        if self.model.app_mode == AppMode.Picture:
+        if self.model.app_mode == AppMode.PICTURE:
             return DetailsDialogPicture
-        elif self.model.app_mode == AppMode.Music:
+        elif self.model.app_mode == AppMode.MUSIC:
             return DetailsDialogMusic
         else:
             return DetailsDialogStandard
 
     def _get_preferences_dialog_class(self):
-        if self.model.app_mode == AppMode.Picture:
+        if self.model.app_mode == AppMode.PICTURE:
             return PreferencesDialogPicture
-        elif self.model.app_mode == AppMode.Music:
+        elif self.model.app_mode == AppMode.MUSIC:
             return PreferencesDialogMusic
         else:
             return PreferencesDialogStandard

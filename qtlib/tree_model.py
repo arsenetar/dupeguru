@@ -17,11 +17,11 @@ class NodeContainer:
         self._ref2node = {}
 
     # --- Protected
-    def _createNode(self, ref, row):
+    def _create_node(self, ref, row):
         # This returns a TreeNode instance from ref
         raise NotImplementedError()
 
-    def _getChildren(self):
+    def _get_children(self):
         # This returns a list of ref instances, not TreeNode instances
         raise NotImplementedError()
 
@@ -34,14 +34,14 @@ class NodeContainer:
     @property
     def subnodes(self):
         if self._subnodes is None:
-            children = self._getChildren()
+            children = self._get_children()
             self._subnodes = []
             for index, child in enumerate(children):
                 if child in self._ref2node:
                     node = self._ref2node[child]
                     node.row = index
                 else:
-                    node = self._createNode(child, index)
+                    node = self._create_node(child, index)
                     self._ref2node[child] = node
                 self._subnodes.append(node)
         return self._subnodes
@@ -69,10 +69,10 @@ class RefNode(TreeNode):
         TreeNode.__init__(self, model, parent, row)
         self.ref = ref
 
-    def _createNode(self, ref, row):
+    def _create_node(self, ref, row):
         return RefNode(self.model, self, ref, row)
 
-    def _getChildren(self):
+    def _get_children(self):
         return list(self.ref)
 
 
@@ -84,10 +84,10 @@ class DummyNode(TreeNode):
 class TreeModel(QAbstractItemModel, NodeContainer):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._dummyNodes = set()  # dummy nodes' reference have to be kept to avoid segfault
+        self._dummy_nodes = set()  # dummy nodes' reference have to be kept to avoid segfault
 
     # --- Private
-    def _createDummyNode(self, parent, row):
+    def _create_dummy_node(self, parent, row):
         # In some cases (drag & drop row removal, to be precise), there's a temporary discrepancy
         # between a node's subnodes and what the model think it has. This leads to invalid indexes
         # being queried. Rather than going through complicated row removal crap, it's simpler to
@@ -95,14 +95,14 @@ class TreeModel(QAbstractItemModel, NodeContainer):
         # drop lasts. Override this to return a node of the correct type.
         return DummyNode(self, parent, row)
 
-    def _lastIndex(self):
+    def _last_index(self):
         """Index of the very last item in the tree."""
-        currentIndex = QModelIndex()
-        rowCount = self.rowCount(currentIndex)
-        while rowCount > 0:
-            currentIndex = self.index(rowCount - 1, 0, currentIndex)
-            rowCount = self.rowCount(currentIndex)
-        return currentIndex
+        current_index = QModelIndex()
+        row_count = self.rowCount(current_index)
+        while row_count > 0:
+            current_index = self.index(row_count - 1, 0, current_index)
+            row_count = self.rowCount(current_index)
+        return current_index
 
     # --- Overrides
     def index(self, row, column, parent):
@@ -118,9 +118,9 @@ class TreeModel(QAbstractItemModel, NodeContainer):
                 column,
                 node,
             )
-            parentNode = parent.internalPointer() if parent.isValid() else None
-            dummy = self._createDummyNode(parentNode, row)
-            self._dummyNodes.add(dummy)
+            parent_node = parent.internalPointer() if parent.isValid() else None
+            dummy = self._create_dummy_node(parent_node, row)
+            self._dummy_nodes.add(dummy)
             return self.createIndex(row, column, dummy)
 
     def parent(self, index):
@@ -136,7 +136,7 @@ class TreeModel(QAbstractItemModel, NodeContainer):
         super().beginResetModel()
         self.invalidate()
         self._ref2node = {}
-        self._dummyNodes = set()
+        self._dummy_nodes = set()
         super().endResetModel()
 
     def rowCount(self, parent=QModelIndex()):
@@ -144,24 +144,24 @@ class TreeModel(QAbstractItemModel, NodeContainer):
         return len(node.subnodes)
 
     # --- Public
-    def findIndex(self, rowPath):
-        """Returns the QModelIndex at `rowPath`
+    def findIndex(self, row_path):
+        """Returns the QModelIndex at `row_path`
 
-        `rowPath` is a sequence of node rows. For example, [1, 2, 1] is the 2nd child of the
+        `row_path` is a sequence of node rows. For example, [1, 2, 1] is the 2nd child of the
         3rd child of the 2nd child of the root.
         """
         result = QModelIndex()
-        for row in rowPath:
+        for row in row_path:
             result = self.index(row, 0, result)
         return result
 
     @staticmethod
     def pathForIndex(index):
-        reversedPath = []
+        reversed_path = []
         while index.isValid():
-            reversedPath.append(index.row())
+            reversed_path.append(index.row())
             index = index.parent()
-        return list(reversed(reversedPath))
+        return list(reversed(reversed_path))
 
     def refreshData(self):
         """Updates the data on all nodes, but without having to perform a full reset.
@@ -171,8 +171,8 @@ class TreeModel(QAbstractItemModel, NodeContainer):
         dataChanged() is better. But of course, Qt makes our life complicated by asking us topLeft
         and bottomRight indexes. This is a convenience method refreshing the whole tree.
         """
-        columnCount = self.columnCount()
-        topLeft = self.index(0, 0, QModelIndex())
-        bottomLeft = self._lastIndex()
-        bottomRight = self.sibling(bottomLeft.row(), columnCount - 1, bottomLeft)
-        self.dataChanged.emit(topLeft, bottomRight)
+        column_count = self.columnCount()
+        top_left = self.index(0, 0, QModelIndex())
+        bottom_left = self._last_index()
+        bottom_right = self.sibling(bottom_left.row(), column_count - 1, bottom_left)
+        self.dataChanged.emit(top_left, bottom_right)

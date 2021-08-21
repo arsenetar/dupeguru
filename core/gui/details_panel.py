@@ -44,5 +44,4 @@ class DetailsPanel(GUIObject, DupeGuruGUIObject):
 
     # --- Event Handlers
     def dupes_selected(self):
-        self._refresh()
-        self.view.refresh()
+        self._view_updated()

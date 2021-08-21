@@ -69,8 +69,8 @@ show scrollbars to span the view around"
         self.cacheTypeRadio.selected_index = 1 if prefs.picture_cache_type == "shelve" else 0
 
         # Update UI state based on selected scan type
-        scan_type = prefs.get_scan_type(AppMode.Picture)
-        fuzzy_scan = scan_type == ScanType.FuzzyBlock
+        scan_type = prefs.get_scan_type(AppMode.PICTURE)
+        fuzzy_scan = scan_type == ScanType.FUZZYBLOCK
         self.filterHardnessSlider.setEnabled(fuzzy_scan)
         setchecked(self.details_dialog_override_theme_icons, prefs.details_dialog_override_theme_icons)
         setchecked(self.details_dialog_viewers_show_scrollbars, prefs.details_dialog_viewers_show_scrollbars)

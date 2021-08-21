@@ -44,9 +44,9 @@ class ResultWindow(QMainWindow):
         self.app = app
         self.specific_actions = set()
         self._setupUi()
-        if app.model.app_mode == AppMode.Picture:
+        if app.model.app_mode == AppMode.PICTURE:
             MODEL_CLASS = ResultsModelPicture
-        elif app.model.app_mode == AppMode.Music:
+        elif app.model.app_mode == AppMode.MUSIC:
             MODEL_CLASS = ResultsModelMusic
         else:
             MODEL_CLASS = ResultsModelStandard

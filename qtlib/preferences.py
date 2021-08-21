@@ -103,7 +103,8 @@ class Preferences(QObject):
         self.reset()
         self._settings = create_qsettings()
 
-    def _load_values(self, settings, get):
+    def _load_values(self, settings):
+        # Implemented in subclasses
         pass
 
     def get_rect(self, name, default=None):
@@ -130,9 +131,11 @@ class Preferences(QObject):
         self._load_values(self._settings)
 
     def reset(self):
+        # Implemented in subclasses
         pass
 
-    def _save_values(self, settings, set_):
+    def _save_values(self, settings):
+        # Implemented in subclasses
         pass
 
     def save(self):
@@ -141,8 +144,8 @@ class Preferences(QObject):
 
     def set_rect(self, name, r):
         if isinstance(r, QRect):
-            rectAsList = [r.x(), r.y(), r.width(), r.height()]
-            self.set_value(name, rectAsList)
+            rect_as_list = [r.x(), r.y(), r.width(), r.height()]
+            self.set_value(name, rect_as_list)
 
     def set_value(self, name, value):
         self._settings.setValue(name, normalize_for_serialization(value))
@@ -156,8 +159,8 @@ class Preferences(QObject):
         d = 1 if isinstance(widget, QDockWidget) and not widget.isFloating() else 0
         area = widget.parent.dockWidgetArea(widget) if d else 0
         r = widget.geometry()
-        rectAsList = [r.x(), r.y(), r.width(), r.height()]
-        self.set_value(name, [m, d, area] + rectAsList)
+        rect_as_list = [r.x(), r.y(), r.width(), r.height()]
+        self.set_value(name, [m, d, area] + rect_as_list)
 
     def restoreGeometry(self, name, widget):
         geometry = self.get_value(name)

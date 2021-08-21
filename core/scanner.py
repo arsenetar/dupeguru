@@ -21,16 +21,16 @@ from . import engine
 
 
 class ScanType:
-    Filename = 0
-    Fields = 1
-    FieldsNoOrder = 2
-    Tag = 3
-    Folders = 4
-    Contents = 5
+    FILENAME = 0
+    FIELDS = 1
+    FIELDSNOORDER = 2
+    TAG = 3
+    FOLDERS = 4
+    CONTENTS = 5
 
     # PE
-    FuzzyBlock = 10
-    ExifTimestamp = 11
+    FUZZYBLOCK = 10
+    EXIFTIMESTAMP = 11
 
 
 ScanOption = namedtuple("ScanOption", "scan_type label")
@@ -78,15 +78,15 @@ class Scanner:
 
     def _getmatches(self, files, j):
         if self.size_threshold or self.scan_type in {
-            ScanType.Contents,
-            ScanType.Folders,
+            ScanType.CONTENTS,
+            ScanType.FOLDERS,
         }:
             j = j.start_subjob([2, 8])
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size  # pre-read, makes a smoother progress if read here (especially for bundles)
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
-        if self.scan_type in {ScanType.Contents, ScanType.Folders}:
+        if self.scan_type in {ScanType.CONTENTS, ScanType.FOLDERS}:
             return engine.getmatches_by_contents(files, bigsize=self.big_file_size_threshold, j=j)
         else:
             j = j.start_subjob([2, 8])
@@ -94,13 +94,13 @@ class Scanner:
             kw["match_similar_words"] = self.match_similar_words
             kw["weight_words"] = self.word_weighting
             kw["min_match_percentage"] = self.min_match_percentage
-            if self.scan_type == ScanType.FieldsNoOrder:
-                self.scan_type = ScanType.Fields
+            if self.scan_type == ScanType.FIELDSNOORDER:
+                self.scan_type = ScanType.FIELDS
                 kw["no_field_order"] = True
             func = {
-                ScanType.Filename: lambda f: engine.getwords(rem_file_ext(f.name)),
-                ScanType.Fields: lambda f: engine.getfields(rem_file_ext(f.name)),
-                ScanType.Tag: lambda f: [
+                ScanType.FILENAME: lambda f: engine.getwords(rem_file_ext(f.name)),
+                ScanType.FIELDS: lambda f: engine.getfields(rem_file_ext(f.name)),
+                ScanType.TAG: lambda f: [
                     engine.getwords(str(getattr(f, attrname)))
                     for attrname in SCANNABLE_TAGS
                     if attrname in self.scanned_tags
@@ -150,7 +150,7 @@ class Scanner:
         # "duplicated duplicates if you will). Then, we also don't want mixed file kinds if the
         # option isn't enabled, we want matches for which both files exist and, lastly, we don't
         # want matches with both files as ref.
-        if self.scan_type == ScanType.Folders and matches:
+        if self.scan_type == ScanType.FOLDERS and matches:
             allpath = {m.first.path for m in matches}
             allpath |= {m.second.path for m in matches}
             sortedpaths = sorted(allpath)
@@ -171,10 +171,10 @@ class Scanner:
         logging.info("Grouping matches")
         groups = engine.get_groups(matches)
         if self.scan_type in {
-            ScanType.Filename,
-            ScanType.Fields,
-            ScanType.FieldsNoOrder,
-            ScanType.Tag,
+            ScanType.FILENAME,
+            ScanType.FIELDS,
+            ScanType.FIELDSNOORDER,
+            ScanType.TAG,
         }:
             matched_files = dedupe([m.first for m in matches] + [m.second for m in matches])
             self.discarded_file_count = len(matched_files) - sum(len(g) for g in groups)
@@ -199,7 +199,7 @@ class Scanner:
     match_similar_words = False
     min_match_percentage = 80
     mix_file_kind = True
-    scan_type = ScanType.Filename
+    scan_type = ScanType.FILENAME
     scanned_tags = {"artist", "title"}
     size_threshold = 0
     big_file_size_threshold = 0

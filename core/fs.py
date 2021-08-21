@@ -168,7 +168,6 @@ class File:
                     setattr(self, field, md5.digest())
             except Exception as e:
                 logging.error(f"Error computing md5samples: {e}")
-                pass
 
     def _read_all_info(self, attrnames=None):
         """Cache all possible info.
