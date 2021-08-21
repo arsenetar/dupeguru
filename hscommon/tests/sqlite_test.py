@@ -91,7 +91,7 @@ def test_make_sure_theres_no_messup_between_queries():
     threads = []
     for i in range(1, 101):
         t = threading.Thread(target=run, args=(i,))
-        t.start
+        t.start()
         threads.append(t)
     while threads:
         time.sleep(0.1)

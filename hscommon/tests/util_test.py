@@ -236,49 +236,8 @@ def test_multi_replace():
 
 # --- Files
 
-# These test cases needed https://github.com/hsoft/pytest-monkeyplus/ which appears to not be compatible with latest
-# pytest, looking at where this is used only appears to be in hscommon.localize_all_stringfiles at top level.
-# Right now this repo does not seem to utilize any of that functionality so going to leave these tests out for now.
-# TODO decide if fixing these tests is worth it or not.
 
-# class TestCase_modified_after:
-#     def test_first_is_modified_after(self, monkeyplus):
-#         monkeyplus.patch_osstat("first", st_mtime=42)
-#         monkeyplus.patch_osstat("second", st_mtime=41)
-#         assert modified_after("first", "second")
-
-#     def test_second_is_modified_after(self, monkeyplus):
-#         monkeyplus.patch_osstat("first", st_mtime=42)
-#         monkeyplus.patch_osstat("second", st_mtime=43)
-#         assert not modified_after("first", "second")
-
-#     def test_same_mtime(self, monkeyplus):
-#         monkeyplus.patch_osstat("first", st_mtime=42)
-#         monkeyplus.patch_osstat("second", st_mtime=42)
-#         assert not modified_after("first", "second")
-
-#     def test_first_file_does_not_exist(self, monkeyplus):
-#         # when the first file doesn't exist, we return False
-#         monkeyplus.patch_osstat("second", st_mtime=42)
-#         assert not modified_after("does_not_exist", "second")  # no crash
-
-#     def test_second_file_does_not_exist(self, monkeyplus):
-#         # when the second file doesn't exist, we return True
-#         monkeyplus.patch_osstat("first", st_mtime=42)
-#         assert modified_after("first", "does_not_exist")  # no crash
-
-#     def test_first_file_is_none(self, monkeyplus):
-#         # when the first file is None, we return False
-#         monkeyplus.patch_osstat("second", st_mtime=42)
-#         assert not modified_after(None, "second")  # no crash
-
-#     def test_second_file_is_none(self, monkeyplus):
-#         # when the second file is None, we return True
-#         monkeyplus.patch_osstat("first", st_mtime=42)
-#         assert modified_after("first", None)  # no crash
-
-
-class TestCase_delete_if_empty:
+class TestCaseDeleteIfEmpty:
     def test_is_empty(self, tmpdir):
         testpath = Path(str(tmpdir))
         assert delete_if_empty(testpath)
@@ -330,7 +289,7 @@ class TestCase_delete_if_empty:
         delete_if_empty(Path(str(tmpdir)))  # no crash
 
 
-class TestCase_open_if_filename:
+class TestCaseOpenIfFilename:
     def test_file_name(self, tmpdir):
         filepath = str(tmpdir.join("test.txt"))
         open(filepath, "wb").write(b"test_data")
@@ -355,7 +314,7 @@ class TestCase_open_if_filename:
         file.close()
 
 
-class TestCase_FileOrPath:
+class TestCaseFileOrPath:
     def test_path(self, tmpdir):
         filepath = str(tmpdir.join("test.txt"))
         open(filepath, "wb").write(b"test_data")

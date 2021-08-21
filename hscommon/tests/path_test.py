@@ -51,7 +51,7 @@ def test_init_with_tuple_and_list(force_ossep):
 
 def test_init_with_invalid_value(force_ossep):
     try:
-        path = Path(42)  # noqa: F841
+        Path(42)
         assert False
     except TypeError:
         pass
@@ -142,8 +142,6 @@ def test_path_slice(force_ossep):
     eq_((), foobar[:foobar])
     abcd = Path("a/b/c/d")
     a = Path("a")
-    b = Path("b")  # noqa: #F841
-    c = Path("c")  # noqa: #F841
     d = Path("d")
     z = Path("z")
     eq_("b/c", abcd[a:d])
@@ -216,7 +214,7 @@ def test_str_repr_of_mix_between_non_ascii_str_and_unicode(force_ossep):
     eq_("foo\u00e9/bar".encode(sys.getfilesystemencoding()), p.tobytes())
 
 
-def test_Path_of_a_Path_returns_self(force_ossep):
+def test_path_of_a_path_returns_self(force_ossep):
     # if Path() is called with a path as value, just return value.
     p = Path("foo/bar")
     assert Path(p) is p

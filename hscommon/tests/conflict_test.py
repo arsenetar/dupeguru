@@ -19,7 +19,7 @@ from ..path import Path
 from ..testutil import eq_
 
 
-class TestCase_GetConflictedName:
+class TestCaseGetConflictedName:
     def test_simple(self):
         name = get_conflicted_name(["bar"], "bar")
         eq_("[000] bar", name)
@@ -46,7 +46,7 @@ class TestCase_GetConflictedName:
         eq_("[000] bar", name)
 
 
-class TestCase_GetUnconflictedName:
+class TestCaseGetUnconflictedName:
     def test_main(self):
         eq_("foobar", get_unconflicted_name("[000] foobar"))
         eq_("foobar", get_unconflicted_name("[9999] foobar"))
@@ -56,7 +56,7 @@ class TestCase_GetUnconflictedName:
         eq_("foo [000] bar", get_unconflicted_name("foo [000] bar"))
 
 
-class TestCase_IsConflicted:
+class TestCaseIsConflicted:
     def test_main(self):
         assert is_conflicted("[000] foobar")
         assert is_conflicted("[9999] foobar")
@@ -66,7 +66,7 @@ class TestCase_IsConflicted:
         assert not is_conflicted("foo [000] bar")
 
 
-class TestCase_move_copy:
+class TestCaseMoveCopy:
     @pytest.fixture
     def do_setup(self, request):
         tmpdir = request.getfixturevalue("tmpdir")

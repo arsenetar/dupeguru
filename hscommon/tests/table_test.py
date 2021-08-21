@@ -19,6 +19,7 @@ class TestRow(Row):
         self._index = index
 
     def load(self):
+        # Does nothing for test
         pass
 
     def save(self):
@@ -75,14 +76,17 @@ def test_allow_edit_when_attr_is_property_with_fset():
     class TestRow(Row):
         @property
         def foo(self):
+            # property only for existence checks
             pass
 
         @property
         def bar(self):
+            # property only for existence checks
             pass
 
         @bar.setter
         def bar(self, value):
+            # setter only for existence checks
             pass
 
     row = TestRow(Table())
@@ -97,10 +101,12 @@ def test_can_edit_prop_has_priority_over_fset_checks():
     class TestRow(Row):
         @property
         def bar(self):
+            # property only for existence checks
             pass
 
         @bar.setter
         def bar(self, value):
+            # setter only for existence checks
             pass
 
         can_edit_bar = False
