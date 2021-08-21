@@ -402,7 +402,7 @@ class TestCaseResultsMarkings:
         self.results.make_ref(d)
         eq_("0 / 3 (0.00 B / 3.00 B) duplicates marked.", self.results.stat_line)
 
-    def test_SaveXML(self):
+    def test_save_xml(self):
         self.results.mark(self.objects[1])
         self.results.mark_invert()
         f = io.BytesIO()
@@ -419,7 +419,7 @@ class TestCaseResultsMarkings:
         eq_("n", d1.get("marked"))
         eq_("y", d2.get("marked"))
 
-    def test_LoadXML(self):
+    def test_load_xml(self):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
 
@@ -485,7 +485,7 @@ class TestCaseResultsXML:
         eq_("ibabtu", d1.get("words"))
         eq_("ibabtu", d2.get("words"))
 
-    def test_LoadXML(self):
+    def test_load_xml(self):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
 
@@ -517,7 +517,7 @@ class TestCaseResultsXML:
         eq_(["ibabtu"], g2[0].words)
         eq_(["ibabtu"], g2[1].words)
 
-    def test_LoadXML_with_filename(self, tmpdir):
+    def test_load_xml_with_filename(self, tmpdir):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
 
@@ -529,7 +529,7 @@ class TestCaseResultsXML:
         r.load_from_xml(filename, get_file)
         eq_(2, len(r.groups))
 
-    def test_LoadXML_with_some_files_that_dont_exist_anymore(self):
+    def test_load_xml_with_some_files_that_dont_exist_anymore(self):
         def get_file(path):
             if path.endswith("ibabtu 2"):
                 return None
@@ -545,7 +545,7 @@ class TestCaseResultsXML:
         eq_(1, len(r.groups))
         eq_(3, len(r.groups[0]))
 
-    def test_LoadXML_missing_attributes_and_bogus_elements(self):
+    def test_load_xml_missing_attributes_and_bogus_elements(self):
         def get_file(path):
             return [f for f in self.objects if str(f.path) == path][0]
 

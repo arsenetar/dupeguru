@@ -77,7 +77,7 @@ def test_save_to_xml():
     eq_(len(subchildren), 3)
 
 
-def test_SaveThenLoad():
+def test_save_then_load():
     il = IgnoreList()
     il.Ignore("foo", "bar")
     il.Ignore("foo", "bleh")
@@ -92,7 +92,7 @@ def test_SaveThenLoad():
     assert il.AreIgnored("\u00e9", "bar")
 
 
-def test_LoadXML_with_empty_file_tags():
+def test_load_xml_with_empty_file_tags():
     f = io.BytesIO()
     f.write(b'<?xml version="1.0" encoding="utf-8"?><ignore_list><file><file/></file></ignore_list>')
     f.seek(0)
@@ -101,7 +101,7 @@ def test_LoadXML_with_empty_file_tags():
     eq_(0, len(il))
 
 
-def test_AreIgnore_works_when_a_child_is_a_key_somewhere_else():
+def test_are_ignore_works_when_a_child_is_a_key_somewhere_else():
     il = IgnoreList()
     il.Ignore("foo", "bar")
     il.Ignore("bar", "baz")

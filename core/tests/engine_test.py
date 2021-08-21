@@ -103,10 +103,9 @@ class TestCasegetfields:
         expected = [["a", "bc", "def"]]
         actual = getfields(" - a bc def")
         eq_(expected, actual)
-        expected = [["bc", "def"]]
 
 
-class TestCaseunpack_fields:
+class TestCaseUnpackFields:
     def test_with_fields(self):
         expected = ["a", "b", "c", "d", "e", "f"]
         actual = unpack_fields([["a"], ["b", "c"], ["d", "e", "f"]])
@@ -218,24 +217,24 @@ class TestCaseWordCompareWithFields:
         eq_([["c", "d", "f"], ["a", "b"]], second)
 
 
-class TestCasebuild_word_dict:
+class TestCaseBuildWordDict:
     def test_with_standard_words(self):
-        itemList = [NamedObject("foo bar", True)]
-        itemList.append(NamedObject("bar baz", True))
-        itemList.append(NamedObject("baz bleh foo", True))
-        d = build_word_dict(itemList)
+        item_list = [NamedObject("foo bar", True)]
+        item_list.append(NamedObject("bar baz", True))
+        item_list.append(NamedObject("baz bleh foo", True))
+        d = build_word_dict(item_list)
         eq_(4, len(d))
         eq_(2, len(d["foo"]))
-        assert itemList[0] in d["foo"]
-        assert itemList[2] in d["foo"]
+        assert item_list[0] in d["foo"]
+        assert item_list[2] in d["foo"]
         eq_(2, len(d["bar"]))
-        assert itemList[0] in d["bar"]
-        assert itemList[1] in d["bar"]
+        assert item_list[0] in d["bar"]
+        assert item_list[1] in d["bar"]
         eq_(2, len(d["baz"]))
-        assert itemList[1] in d["baz"]
-        assert itemList[2] in d["baz"]
+        assert item_list[1] in d["baz"]
+        assert item_list[2] in d["baz"]
         eq_(1, len(d["bleh"]))
-        assert itemList[2] in d["bleh"]
+        assert item_list[2] in d["bleh"]
 
     def test_unpack_fields(self):
         o = NamedObject("")
@@ -269,7 +268,7 @@ class TestCasebuild_word_dict:
         eq_(100, self.log[1])
 
 
-class TestCasemerge_similar_words:
+class TestCaseMergeSimilarWords:
     def test_some_similar_words(self):
         d = {
             "foobar": set([1]),
@@ -281,11 +280,11 @@ class TestCasemerge_similar_words:
         eq_(3, len(d["foobar"]))
 
 
-class TestCasereduce_common_words:
+class TestCaseReduceCommonWords:
     def test_typical(self):
         d = {
-            "foo": set([NamedObject("foo bar", True) for i in range(50)]),
-            "bar": set([NamedObject("foo bar", True) for i in range(49)]),
+            "foo": set([NamedObject("foo bar", True) for _ in range(50)]),
+            "bar": set([NamedObject("foo bar", True) for _ in range(49)]),
         }
         reduce_common_words(d, 50)
         assert "foo" not in d
@@ -293,7 +292,7 @@ class TestCasereduce_common_words:
 
     def test_dont_remove_objects_with_only_common_words(self):
         d = {
-            "common": set([NamedObject("common uncommon", True) for i in range(50)] + [NamedObject("common", True)]),
+            "common": set([NamedObject("common uncommon", True) for _ in range(50)] + [NamedObject("common", True)]),
             "uncommon": set([NamedObject("common uncommon", True)]),
         }
         reduce_common_words(d, 50)
@@ -302,20 +301,20 @@ class TestCasereduce_common_words:
 
     def test_values_still_are_set_instances(self):
         d = {
-            "common": set([NamedObject("common uncommon", True) for i in range(50)] + [NamedObject("common", True)]),
+            "common": set([NamedObject("common uncommon", True) for _ in range(50)] + [NamedObject("common", True)]),
             "uncommon": set([NamedObject("common uncommon", True)]),
         }
         reduce_common_words(d, 50)
         assert isinstance(d["common"], set)
         assert isinstance(d["uncommon"], set)
 
-    def test_dont_raise_KeyError_when_a_word_has_been_removed(self):
+    def test_dont_raise_keyerror_when_a_word_has_been_removed(self):
         # If a word has been removed by the reduce, an object in a subsequent common word that
         # contains the word that has been removed would cause a KeyError.
         d = {
-            "foo": set([NamedObject("foo bar baz", True) for i in range(50)]),
-            "bar": set([NamedObject("foo bar baz", True) for i in range(50)]),
-            "baz": set([NamedObject("foo bar baz", True) for i in range(49)]),
+            "foo": set([NamedObject("foo bar baz", True) for _ in range(50)]),
+            "bar": set([NamedObject("foo bar baz", True) for _ in range(50)]),
+            "baz": set([NamedObject("foo bar baz", True) for _ in range(49)]),
         }
         try:
             reduce_common_words(d, 50)
@@ -329,7 +328,7 @@ class TestCasereduce_common_words:
             o.words = [["foo", "bar"], ["baz"]]
             return o
 
-        d = {"foo": set([create_it() for i in range(50)])}
+        d = {"foo": set([create_it() for _ in range(50)])}
         try:
             reduce_common_words(d, 50)
         except TypeError:
@@ -342,9 +341,9 @@ class TestCasereduce_common_words:
         # would not stay in 'bar' because 'foo' is not a common word anymore.
         only_common = NamedObject("foo bar", True)
         d = {
-            "foo": set([NamedObject("foo bar baz", True) for i in range(49)] + [only_common]),
-            "bar": set([NamedObject("foo bar baz", True) for i in range(49)] + [only_common]),
-            "baz": set([NamedObject("foo bar baz", True) for i in range(49)]),
+            "foo": set([NamedObject("foo bar baz", True) for _ in range(49)] + [only_common]),
+            "bar": set([NamedObject("foo bar baz", True) for _ in range(49)] + [only_common]),
+            "baz": set([NamedObject("foo bar baz", True) for _ in range(49)]),
         }
         reduce_common_words(d, 50)
         eq_(1, len(d["foo"]))
@@ -352,7 +351,7 @@ class TestCasereduce_common_words:
         eq_(49, len(d["baz"]))
 
 
-class TestCaseget_match:
+class TestCaseGetMatch:
     def test_simple(self):
         o1 = NamedObject("foo bar", True)
         o2 = NamedObject("bar bleh", True)
@@ -381,12 +380,12 @@ class TestCaseGetMatches:
         eq_(getmatches([]), [])
 
     def test_simple(self):
-        itemList = [
+        item_list = [
             NamedObject("foo bar"),
             NamedObject("bar bleh"),
             NamedObject("a b c foo"),
         ]
-        r = getmatches(itemList)
+        r = getmatches(item_list)
         eq_(2, len(r))
         m = first(m for m in r if m.percentage == 50)  # "foo bar" and "bar bleh"
         assert_match(m, "foo bar", "bar bleh")
@@ -394,40 +393,40 @@ class TestCaseGetMatches:
         assert_match(m, "foo bar", "a b c foo")
 
     def test_null_and_unrelated_objects(self):
-        itemList = [
+        item_list = [
             NamedObject("foo bar"),
             NamedObject("bar bleh"),
             NamedObject(""),
             NamedObject("unrelated object"),
         ]
-        r = getmatches(itemList)
+        r = getmatches(item_list)
         eq_(len(r), 1)
         m = r[0]
         eq_(m.percentage, 50)
         assert_match(m, "foo bar", "bar bleh")
 
     def test_twice_the_same_word(self):
-        itemList = [NamedObject("foo foo bar"), NamedObject("bar bleh")]
-        r = getmatches(itemList)
+        item_list = [NamedObject("foo foo bar"), NamedObject("bar bleh")]
+        r = getmatches(item_list)
         eq_(1, len(r))
 
     def test_twice_the_same_word_when_preworded(self):
-        itemList = [NamedObject("foo foo bar", True), NamedObject("bar bleh", True)]
-        r = getmatches(itemList)
+        item_list = [NamedObject("foo foo bar", True), NamedObject("bar bleh", True)]
+        r = getmatches(item_list)
         eq_(1, len(r))
 
     def test_two_words_match(self):
-        itemList = [NamedObject("foo bar"), NamedObject("foo bar bleh")]
-        r = getmatches(itemList)
+        item_list = [NamedObject("foo bar"), NamedObject("foo bar bleh")]
+        r = getmatches(item_list)
         eq_(1, len(r))
 
     def test_match_files_with_only_common_words(self):
         # If a word occurs more than 50 times, it is excluded from the matching process
         # The problem with the common_word_threshold is that the files containing only common
         # words will never be matched together. We *should* match them.
-        # This test assumes that the common word threashold const is 50
-        itemList = [NamedObject("foo") for i in range(50)]
-        r = getmatches(itemList)
+        # This test assumes that the common word threshold const is 50
+        item_list = [NamedObject("foo") for _ in range(50)]
+        r = getmatches(item_list)
         eq_(1225, len(r))
 
     def test_use_words_already_there_if_there(self):
@@ -450,28 +449,28 @@ class TestCaseGetMatches:
         eq_(100, self.log[-1])
 
     def test_weight_words(self):
-        itemList = [NamedObject("foo bar"), NamedObject("bar bleh")]
-        m = getmatches(itemList, weight_words=True)[0]
+        item_list = [NamedObject("foo bar"), NamedObject("bar bleh")]
+        m = getmatches(item_list, weight_words=True)[0]
         eq_(int((6.0 / 13.0) * 100), m.percentage)
 
     def test_similar_word(self):
-        itemList = [NamedObject("foobar"), NamedObject("foobars")]
-        eq_(len(getmatches(itemList, match_similar_words=True)), 1)
-        eq_(getmatches(itemList, match_similar_words=True)[0].percentage, 100)
-        itemList = [NamedObject("foobar"), NamedObject("foo")]
-        eq_(len(getmatches(itemList, match_similar_words=True)), 0)  # too far
-        itemList = [NamedObject("bizkit"), NamedObject("bizket")]
-        eq_(len(getmatches(itemList, match_similar_words=True)), 1)
-        itemList = [NamedObject("foobar"), NamedObject("foosbar")]
-        eq_(len(getmatches(itemList, match_similar_words=True)), 1)
+        item_list = [NamedObject("foobar"), NamedObject("foobars")]
+        eq_(len(getmatches(item_list, match_similar_words=True)), 1)
+        eq_(getmatches(item_list, match_similar_words=True)[0].percentage, 100)
+        item_list = [NamedObject("foobar"), NamedObject("foo")]
+        eq_(len(getmatches(item_list, match_similar_words=True)), 0)  # too far
+        item_list = [NamedObject("bizkit"), NamedObject("bizket")]
+        eq_(len(getmatches(item_list, match_similar_words=True)), 1)
+        item_list = [NamedObject("foobar"), NamedObject("foosbar")]
+        eq_(len(getmatches(item_list, match_similar_words=True)), 1)
 
     def test_single_object_with_similar_words(self):
-        itemList = [NamedObject("foo foos")]
-        eq_(len(getmatches(itemList, match_similar_words=True)), 0)
+        item_list = [NamedObject("foo foos")]
+        eq_(len(getmatches(item_list, match_similar_words=True)), 0)
 
     def test_double_words_get_counted_only_once(self):
-        itemList = [NamedObject("foo bar foo bleh"), NamedObject("foo bar bleh bar")]
-        m = getmatches(itemList)[0]
+        item_list = [NamedObject("foo bar foo bleh"), NamedObject("foo bar bleh bar")]
+        m = getmatches(item_list)[0]
         eq_(75, m.percentage)
 
     def test_with_fields(self):
@@ -491,13 +490,13 @@ class TestCaseGetMatches:
         eq_(m.percentage, 50)
 
     def test_only_match_similar_when_the_option_is_set(self):
-        itemList = [NamedObject("foobar"), NamedObject("foobars")]
-        eq_(len(getmatches(itemList, match_similar_words=False)), 0)
+        item_list = [NamedObject("foobar"), NamedObject("foobars")]
+        eq_(len(getmatches(item_list, match_similar_words=False)), 0)
 
     def test_dont_recurse_do_match(self):
         # with nosetests, the stack is increased. The number has to be high enough not to be failing falsely
         sys.setrecursionlimit(200)
-        files = [NamedObject("foo bar") for i in range(201)]
+        files = [NamedObject("foo bar") for _ in range(201)]
         try:
             getmatches(files)
         except RuntimeError:
@@ -506,27 +505,27 @@ class TestCaseGetMatches:
             sys.setrecursionlimit(1000)
 
     def test_min_match_percentage(self):
-        itemList = [
+        item_list = [
             NamedObject("foo bar"),
             NamedObject("bar bleh"),
             NamedObject("a b c foo"),
         ]
-        r = getmatches(itemList, min_match_percentage=50)
+        r = getmatches(item_list, min_match_percentage=50)
         eq_(1, len(r))  # Only "foo bar" / "bar bleh" should match
 
-    def test_MemoryError(self, monkeypatch):
+    def test_memory_error(self, monkeypatch):
         @log_calls
         def mocked_match(first, second, flags):
             if len(mocked_match.calls) > 42:
                 raise MemoryError()
             return Match(first, second, 0)
 
-        objects = [NamedObject() for i in range(10)]  # results in 45 matches
+        objects = [NamedObject() for _ in range(10)]  # results in 45 matches
         monkeypatch.setattr(engine, "get_match", mocked_match)
         try:
             r = getmatches(objects)
         except MemoryError:
-            self.fail("MemorryError must be handled")
+            self.fail("MemoryError must be handled")
         eq_(42, len(r))
 
 
@@ -563,7 +562,7 @@ class TestCaseGetMatchesByContents:
 
 
 class TestCaseGroup:
-    def test_empy(self):
+    def test_empty(self):
         g = Group()
         eq_(None, g.ref)
         eq_([], g.dupes)
@@ -802,14 +801,14 @@ class TestCaseGroup:
         eq_(0, len(g.candidates))
 
 
-class TestCaseget_groups:
+class TestCaseGetGroups:
     def test_empty(self):
         r = get_groups([])
         eq_([], r)
 
     def test_simple(self):
-        itemList = [NamedObject("foo bar"), NamedObject("bar bleh")]
-        matches = getmatches(itemList)
+        item_list = [NamedObject("foo bar"), NamedObject("bar bleh")]
+        matches = getmatches(item_list)
         m = matches[0]
         r = get_groups(matches)
         eq_(1, len(r))
@@ -819,15 +818,15 @@ class TestCaseget_groups:
 
     def test_group_with_multiple_matches(self):
         # This results in 3 matches
-        itemList = [NamedObject("foo"), NamedObject("foo"), NamedObject("foo")]
-        matches = getmatches(itemList)
+        item_list = [NamedObject("foo"), NamedObject("foo"), NamedObject("foo")]
+        matches = getmatches(item_list)
         r = get_groups(matches)
         eq_(1, len(r))
         g = r[0]
         eq_(3, len(g))
 
     def test_must_choose_a_group(self):
-        itemList = [
+        item_list = [
             NamedObject("a b"),
             NamedObject("a b"),
             NamedObject("b c"),
@@ -836,13 +835,13 @@ class TestCaseget_groups:
         ]
         # There will be 2 groups here: group "a b" and group "c d"
         # "b c" can go either of them, but not both.
-        matches = getmatches(itemList)
+        matches = getmatches(item_list)
         r = get_groups(matches)
         eq_(2, len(r))
         eq_(5, len(r[0]) + len(r[1]))
 
     def test_should_all_go_in_the_same_group(self):
-        itemList = [
+        item_list = [
             NamedObject("a b"),
             NamedObject("a b"),
             NamedObject("a b"),
@@ -850,7 +849,7 @@ class TestCaseget_groups:
         ]
         # There will be 2 groups here: group "a b" and group "c d"
         # "b c" can fit in both, but it must be in only one of them
-        matches = getmatches(itemList)
+        matches = getmatches(item_list)
         r = get_groups(matches)
         eq_(1, len(r))
 
@@ -869,8 +868,8 @@ class TestCaseget_groups:
         assert o3 in g
 
     def test_four_sized_group(self):
-        itemList = [NamedObject("foobar") for i in range(4)]
-        m = getmatches(itemList)
+        item_list = [NamedObject("foobar") for _ in range(4)]
+        m = getmatches(item_list)
         r = get_groups(m)
         eq_(1, len(r))
         eq_(4, len(r[0]))

@@ -23,7 +23,7 @@ from ..scanner import ScanType
 
 def add_fake_files_to_directories(directories, files):
     directories.get_files = lambda j=None: iter(files)
-    directories._dirs.append("this is just so Scan() doesnt return 3")
+    directories._dirs.append("this is just so Scan() doesn't return 3")
 
 
 class TestCaseDupeGuru:
@@ -43,7 +43,7 @@ class TestCaseDupeGuru:
         dgapp.apply_filter("()[]\\.|+?^abc")
         call = dgapp.results.apply_filter.calls[1]
         eq_("\\(\\)\\[\\]\\\\\\.\\|\\+\\?\\^abc", call["filter_str"])
-        dgapp.apply_filter("(*)")  # In "simple mode", we want the * to behave as a wilcard
+        dgapp.apply_filter("(*)")  # In "simple mode", we want the * to behave as a wildcard
         call = dgapp.results.apply_filter.calls[3]
         eq_(r"\(.*\)", call["filter_str"])
         dgapp.options["escape_filter_regexp"] = False
@@ -88,14 +88,14 @@ class TestCaseDupeGuru:
         eq_(1, len(calls))
         eq_(sourcepath, calls[0]["path"])
 
-    def test_Scan_with_objects_evaluating_to_false(self):
+    def test_scan_with_objects_evaluating_to_false(self):
         class FakeFile(fs.File):
             def __bool__(self):
                 return False
 
         # At some point, any() was used in a wrong way that made Scan() wrongly return 1
         app = TestApp().app
-        f1, f2 = [FakeFile("foo") for i in range(2)]
+        f1, f2 = [FakeFile("foo") for _ in range(2)]
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
         add_fake_files_to_directories(app.directories, [f1, f2])
@@ -124,7 +124,7 @@ class TestCaseDupeGuru:
         assert not dgapp.result_table.rename_selected("foo")  # no crash
 
 
-class TestCaseDupeGuru_clean_empty_dirs:
+class TestCaseDupeGuruCleanEmptyDirs:
     @pytest.fixture
     def do_setup(self, request):
         monkeypatch = request.getfixturevalue("monkeypatch")
@@ -184,7 +184,7 @@ class TestCaseDupeGuruWithResults:
         tmppath["bar"].mkdir()
         self.app.directories.add_path(tmppath)
 
-    def test_GetObjects(self, do_setup):
+    def test_get_objects(self, do_setup):
         objects = self.objects
         groups = self.groups
         r = self.rtable[0]
@@ -197,7 +197,7 @@ class TestCaseDupeGuruWithResults:
         assert r._group is groups[1]
         assert r._dupe is objects[4]
 
-    def test_GetObjects_after_sort(self, do_setup):
+    def test_get_objects_after_sort(self, do_setup):
         objects = self.objects
         groups = self.groups[:]  # we need an un-sorted reference
         self.rtable.sort("name", False)
@@ -212,7 +212,7 @@ class TestCaseDupeGuruWithResults:
         # The first 2 dupes have been removed. The 3rd one is a ref. it stays there, in first pos.
         eq_(self.rtable.selected_indexes, [1])  # no exception
 
-    def test_selectResultNodePaths(self, do_setup):
+    def test_select_result_node_paths(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.select([1, 2])
@@ -220,7 +220,7 @@ class TestCaseDupeGuruWithResults:
         assert app.selected_dupes[0] is objects[1]
         assert app.selected_dupes[1] is objects[2]
 
-    def test_selectResultNodePaths_with_ref(self, do_setup):
+    def test_select_result_node_paths_with_ref(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.select([1, 2, 3])
@@ -229,7 +229,7 @@ class TestCaseDupeGuruWithResults:
         assert app.selected_dupes[1] is objects[2]
         assert app.selected_dupes[2] is self.groups[1].ref
 
-    def test_selectResultNodePaths_after_sort(self, do_setup):
+    def test_select_result_node_paths_after_sort(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups[:]  # To keep the old order in memory
@@ -256,7 +256,7 @@ class TestCaseDupeGuruWithResults:
         app.remove_selected()
         eq_(self.rtable.selected_indexes, [])  # no exception
 
-    def test_selectPowerMarkerRows_after_sort(self, do_setup):
+    def test_select_powermarker_rows_after_sort(self, do_setup):
         app = self.app
         objects = self.objects
         self.rtable.power_marker = True
@@ -295,7 +295,7 @@ class TestCaseDupeGuruWithResults:
         app.toggle_selected_mark_state()
         eq_(app.results.mark_count, 0)
 
-    def test_refreshDetailsWithSelected(self, do_setup):
+    def test_refresh_details_with_selected(self, do_setup):
         self.rtable.select([1, 4])
         eq_(self.dpanel.row(0), ("Filename", "bar bleh", "foo bar"))
         self.dpanel.view.check_gui_calls(["refresh"])
@@ -303,7 +303,7 @@ class TestCaseDupeGuruWithResults:
         eq_(self.dpanel.row(0), ("Filename", "---", "---"))
         self.dpanel.view.check_gui_calls(["refresh"])
 
-    def test_makeSelectedReference(self, do_setup):
+    def test_make_selected_reference(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups
@@ -312,7 +312,7 @@ class TestCaseDupeGuruWithResults:
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
 
-    def test_makeSelectedReference_by_selecting_two_dupes_in_the_same_group(self, do_setup):
+    def test_make_selected_reference_by_selecting_two_dupes_in_the_same_group(self, do_setup):
         app = self.app
         objects = self.objects
         groups = self.groups
@@ -322,7 +322,7 @@ class TestCaseDupeGuruWithResults:
         assert groups[0].ref is objects[1]
         assert groups[1].ref is objects[4]
 
-    def test_removeSelected(self, do_setup):
+    def test_remove_selected(self, do_setup):
         app = self.app
         self.rtable.select([1, 4])
         app.remove_selected()
@@ -330,7 +330,7 @@ class TestCaseDupeGuruWithResults:
         app.remove_selected()
         eq_(len(app.results.dupes), 0)
 
-    def test_addDirectory_simple(self, do_setup):
+    def test_add_directory_simple(self, do_setup):
         # There's already a directory in self.app, so adding another once makes 2 of em
         app = self.app
         # any other path that isn't a parent or child of the already added path
@@ -338,7 +338,7 @@ class TestCaseDupeGuruWithResults:
         app.add_directory(otherpath)
         eq_(len(app.directories), 2)
 
-    def test_addDirectory_already_there(self, do_setup):
+    def test_add_directory_already_there(self, do_setup):
         app = self.app
         otherpath = Path(op.dirname(__file__))
         app.add_directory(otherpath)
@@ -346,7 +346,7 @@ class TestCaseDupeGuruWithResults:
         eq_(len(app.view.messages), 1)
         assert "already" in app.view.messages[0]
 
-    def test_addDirectory_does_not_exist(self, do_setup):
+    def test_add_directory_does_not_exist(self, do_setup):
         app = self.app
         app.add_directory("/does_not_exist")
         eq_(len(app.view.messages), 1)
@@ -362,7 +362,7 @@ class TestCaseDupeGuruWithResults:
         # BOTH the ref and the other dupe should have been added
         eq_(len(app.ignore_list), 3)
 
-    def test_purgeIgnoreList(self, do_setup, tmpdir):
+    def test_purge_ignorelist(self, do_setup, tmpdir):
         app = self.app
         p1 = str(tmpdir.join("file1"))
         p2 = str(tmpdir.join("file2"))
@@ -378,14 +378,14 @@ class TestCaseDupeGuruWithResults:
         assert not app.ignore_list.AreIgnored(dne, p1)
 
     def test_only_unicode_is_added_to_ignore_list(self, do_setup):
-        def FakeIgnore(first, second):
+        def fake_ignore(first, second):
             if not isinstance(first, str):
                 self.fail()
             if not isinstance(second, str):
                 self.fail()
 
         app = self.app
-        app.ignore_list.Ignore = FakeIgnore
+        app.ignore_list.Ignore = fake_ignore
         self.rtable.select([4])
         app.add_selected_to_ignore_list()
 
@@ -419,7 +419,7 @@ class TestCaseDupeGuruWithResults:
         # don't crash
 
 
-class TestCaseDupeGuru_renameSelected:
+class TestCaseDupeGuruRenameSelected:
     @pytest.fixture
     def do_setup(self, request):
         tmpdir = request.getfixturevalue("tmpdir")
@@ -502,7 +502,6 @@ class TestAppWithDirectoriesInTree:
         # refreshed.
         node = self.dtree[0]
         eq_(len(node), 3)  # a len() call is required for subnodes to be loaded
-        subnode = node[0]
         node.state = 1  # the state property is a state index
         node = self.dtree[0]
         eq_(len(node), 3)

@@ -92,7 +92,7 @@ def test_add_path():
     assert p in d
 
 
-def test_AddPath_when_path_is_already_there():
+def test_add_path_when_path_is_already_there():
     d = Directories()
     p = testpath["onefile"]
     d.add_path(p)
@@ -112,7 +112,7 @@ def test_add_path_containing_paths_already_there():
     eq_(d[0], testpath)
 
 
-def test_AddPath_non_latin(tmpdir):
+def test_add_path_non_latin(tmpdir):
     p = Path(str(tmpdir))
     to_add = p["unicode\u201a"]
     os.mkdir(str(to_add))
@@ -376,7 +376,7 @@ files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled
         p1["$Recycle.Bin"]["subdir"].mkdir()
         self.d.add_path(p1)
         eq_(self.d.get_state(p1["$Recycle.Bin"]), DirectoryState.Excluded)
-        # By default, subdirs should be excluded too, but this can be overriden separately
+        # By default, subdirs should be excluded too, but this can be overridden separately
         eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Excluded)
         self.d.set_state(p1["$Recycle.Bin"]["subdir"], DirectoryState.Normal)
         eq_(self.d.get_state(p1["$Recycle.Bin"]["subdir"]), DirectoryState.Normal)

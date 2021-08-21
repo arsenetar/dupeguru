@@ -17,7 +17,7 @@ except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 
 
-class TestCasecolors_to_string:
+class TestCaseColorsToString:
     def test_no_color(self):
         eq_("", colors_to_string([]))
 
@@ -30,7 +30,7 @@ class TestCasecolors_to_string:
         eq_("000102030405", colors_to_string([(0, 1, 2), (3, 4, 5)]))
 
 
-class TestCasestring_to_colors:
+class TestCaseStringToColors:
     def test_empty(self):
         eq_([], string_to_colors(""))
 

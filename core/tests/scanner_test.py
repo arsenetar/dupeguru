@@ -98,7 +98,7 @@ def test_trim_all_ref_groups(fake_fileexists):
     eq_(s.discarded_file_count, 0)
 
 
-def test_priorize(fake_fileexists):
+def test_prioritize(fake_fileexists):
     s = Scanner()
     f = [
         no("foo", path="p1"),
@@ -133,7 +133,7 @@ def test_content_scan(fake_fileexists):
 def test_content_scan_compare_sizes_first(fake_fileexists):
     class MyFile(no):
         @property
-        def md5(file):
+        def md5(self):
             raise AssertionError()
 
     s = Scanner()
@@ -587,8 +587,8 @@ def test_dont_count_ref_files_as_discarded(fake_fileexists):
     eq_(s.discarded_file_count, 0)
 
 
-def test_priorize_me(fake_fileexists):
-    # in ScannerME, bitrate goes first (right after is_ref) in priorization
+def test_prioritize_me(fake_fileexists):
+    # in ScannerME, bitrate goes first (right after is_ref) in prioritization
     s = ScannerME()
     o1, o2 = no("foo", path="p1"), no("foo", path="p2")
     o1.bitrate = 1

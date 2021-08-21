@@ -5,12 +5,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import io
-
-# import os.path as op
-
 from xml.etree import ElementTree as ET
 
-# from pytest import raises
 from hscommon.testutil import eq_
 from hscommon.plat import ISWINDOWS
 
@@ -144,11 +140,7 @@ class TestCaseListEmpty:
     def test_force_add_not_compilable(self):
         """Used when loading from XML for example"""
         regex = r"one))"
-        try:
-            self.exclude_list.add(regex, forced=True)
-        except Exception as e:
-            # Should not get an exception here unless it's a duplicate regex
-            raise e
+        self.exclude_list.add(regex, forced=True)
         marked = self.exclude_list.mark(regex)
         eq_(marked, False)  # can't be marked since not compilable
         eq_(len(self.exclude_list), 1)
@@ -232,7 +224,6 @@ class TestCaseListEmpty:
                     found = True
             if not found:
                 raise (Exception(f"Default RE {re} not found in compiled list."))
-            continue
         eq_(len(default_regexes), len(self.exclude_list.compiled))
 
 

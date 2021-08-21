@@ -73,99 +73,6 @@ class TestCasegetblock:
         eq_((meanred, meangreen, meanblue), b)
 
 
-# class TCdiff(unittest.TestCase):
-#     def test_diff(self):
-#         b1 = (10, 20, 30)
-#         b2 = (1, 2, 3)
-#         eq_(9 + 18 + 27, diff(b1, b2))
-#
-#     def test_diff_negative(self):
-#         b1 = (10, 20, 30)
-#         b2 = (1, 2, 3)
-#         eq_(9 + 18 + 27, diff(b2, b1))
-#
-#     def test_diff_mixed_positive_and_negative(self):
-#         b1 = (1, 5, 10)
-#         b2 = (10, 1, 15)
-#         eq_(9 + 4 + 5, diff(b1, b2))
-#
-
-# class TCgetblocks(unittest.TestCase):
-#     def test_empty_image(self):
-#         im = empty()
-#         blocks = getblocks(im, 1)
-#         eq_(0, len(blocks))
-#
-#     def test_one_block_image(self):
-#         im = four_pixels()
-#         blocks = getblocks2(im, 1)
-#         eq_(1, len(blocks))
-#         block = blocks[0]
-#         meanred = (0xff + 0x80) // 4
-#         meangreen = (0x80 + 0x40) // 4
-#         meanblue = (0xff + 0x80) // 4
-#         eq_((meanred, meangreen, meanblue), block)
-#
-#     def test_not_enough_height_to_fit_a_block(self):
-#         im = FakeImage((2, 1), [BLACK, BLACK])
-#         blocks = getblocks(im, 2)
-#         eq_(0, len(blocks))
-#
-#     def xtest_dont_include_leftovers(self):
-#         # this test is disabled because getblocks is not used and getblock in cdeffed
-#         pixels = [
-#             RED,(0, 0x80, 0xff), BLACK,
-#             (0x80, 0, 0),(0, 0x40, 0x80), BLACK,
-#             BLACK, BLACK, BLACK
-#         ]
-#         im = FakeImage((3, 3), pixels)
-#         blocks = getblocks(im, 2)
-#         block = blocks[0]
-#         #Because the block is smaller than the image, only blocksize must be considered.
-#         meanred = (0xff + 0x80) // 4
-#         meangreen = (0x80 + 0x40) // 4
-#         meanblue = (0xff + 0x80) // 4
-#         eq_((meanred, meangreen, meanblue), block)
-#
-#     def xtest_two_blocks(self):
-#         # this test is disabled because getblocks is not used and getblock in cdeffed
-#         pixels = [BLACK for i in xrange(4 * 2)]
-#         pixels[0] = RED
-#         pixels[1] = (0, 0x80, 0xff)
-#         pixels[4] = (0x80, 0, 0)
-#         pixels[5] = (0, 0x40, 0x80)
-#         im = FakeImage((4, 2), pixels)
-#         blocks = getblocks(im, 2)
-#         eq_(2, len(blocks))
-#         block = blocks[0]
-#         #Because the block is smaller than the image, only blocksize must be considered.
-#         meanred = (0xff + 0x80) // 4
-#         meangreen = (0x80 + 0x40) // 4
-#         meanblue = (0xff + 0x80) // 4
-#         eq_((meanred, meangreen, meanblue), block)
-#         eq_(BLACK, blocks[1])
-#
-#     def test_four_blocks(self):
-#         pixels = [BLACK for i in xrange(4 * 4)]
-#         pixels[0] = RED
-#         pixels[1] = (0, 0x80, 0xff)
-#         pixels[4] = (0x80, 0, 0)
-#         pixels[5] = (0, 0x40, 0x80)
-#         im = FakeImage((4, 4), pixels)
-#         blocks = getblocks2(im, 2)
-#         eq_(4, len(blocks))
-#         block = blocks[0]
-#         #Because the block is smaller than the image, only blocksize must be considered.
-#         meanred = (0xff + 0x80) // 4
-#         meangreen = (0x80 + 0x40) // 4
-#         meanblue = (0xff + 0x80) // 4
-#         eq_((meanred, meangreen, meanblue), block)
-#         eq_(BLACK, blocks[1])
-#         eq_(BLACK, blocks[2])
-#         eq_(BLACK, blocks[3])
-#
-
-
 class TestCasegetblocks2:
     def test_empty_image(self):
         im = empty()
@@ -270,8 +177,8 @@ class TestCaseavgdiff:
     def test_return_at_least_1_at_the_slightest_difference(self):
         ref = (0, 0, 0)
         b1 = (1, 0, 0)
-        blocks1 = [ref for i in range(250)]
-        blocks2 = [ref for i in range(250)]
+        blocks1 = [ref for _ in range(250)]
+        blocks2 = [ref for _ in range(250)]
         blocks2[0] = b1
         eq_(1, my_avgdiff(blocks1, blocks2))
 
@@ -280,41 +187,3 @@ class TestCaseavgdiff:
         blocks1 = [ref, ref]
         blocks2 = [ref, ref]
         eq_(0, my_avgdiff(blocks1, blocks2))
-
-
-# class TCmaxdiff(unittest.TestCase):
-#     def test_empty(self):
-#         self.assertRaises(NoBlocksError, maxdiff,[],[])
-#
-#     def test_two_blocks(self):
-#         b1 = (5, 10, 15)
-#         b2 = (255, 250, 245)
-#         b3 = (0, 0, 0)
-#         b4 = (255, 0, 255)
-#         blocks1 = [b1, b2]
-#         blocks2 = [b3, b4]
-#         expected1 = 5 + 10 + 15
-#         expected2 = 0 + 250 + 10
-#         expected = max(expected1, expected2)
-#         eq_(expected, maxdiff(blocks1, blocks2))
-#
-#     def test_blocks_not_the_same_size(self):
-#         b = (0, 0, 0)
-#         self.assertRaises(DifferentBlockCountError, maxdiff,[b, b],[b])
-#
-#     def test_first_arg_is_empty_but_not_second(self):
-#         #Don't return 0 (as when the 2 lists are empty), raise!
-#         b = (0, 0, 0)
-#         self.assertRaises(DifferentBlockCountError, maxdiff,[],[b])
-#
-#     def test_limit(self):
-#         b1 = (5, 10, 15)
-#         b2 = (255, 250, 245)
-#         b3 = (0, 0, 0)
-#         b4 = (255, 0, 255)
-#         blocks1 = [b1, b2]
-#         blocks2 = [b3, b4]
-#         expected1 = 5 + 10 + 15
-#         expected2 = 0 + 250 + 10
-#         eq_(expected1, maxdiff(blocks1, blocks2, expected1 - 1))
-#
