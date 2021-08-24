@@ -6,8 +6,6 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import urllib.parse
-
 from PyQt5.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
 from PyQt5.QtWidgets import (
     QComboBox,
@@ -105,13 +103,11 @@ class DirectoriesModel(TreeModel):
         return None
 
     def dropMimeData(self, mime_data, action, row, column, parent_index):
-        # the data in mimeData is urlencoded **in utf-8**!!! What we do is to decode, the mime data
-        # with 'ascii', which works since it's urlencoded. Then, we pass that to urllib.
+        # the data in mimeData is urlencoded **in utf-8**
         if not mime_data.hasFormat("text/uri-list"):
             return False
         data = bytes(mime_data.data("text/uri-list")).decode("ascii")
-        unquoted = urllib.parse.unquote(data)
-        urls = unquoted.split("\r\n")
+        urls = data.split("\r\n")
         paths = [QUrl(url).toLocalFile() for url in urls if url]
         for path in paths:
             self.model.add_directory(path)
