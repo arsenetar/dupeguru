@@ -158,6 +158,16 @@ On MacOS, the tab bar will fill up the window's width instead."
             )
         )
         layout.addWidget(self.tabs_default_pos)
+        self._setupAddCheckbox(
+            "use_native_dialogs",
+            tr("Use native OS dialogs"),
+        )
+        self.use_native_dialogs.setToolTip(
+            tr(
+                "For actions such as file/folder selection use the OS native dialogs.\nSome native dialogs have limited functionality."
+            )
+        )
+        layout.addWidget(self.use_native_dialogs)
         self.ui_groupbox.setLayout(layout)
         self.displayVLayout.addWidget(self.ui_groupbox)
 
@@ -286,6 +296,7 @@ use the modifier key to drag the floating window around"
         if section & Sections.DISPLAY:
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
             setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
+            setchecked(self.use_native_dialogs, prefs.use_native_dialogs)
             setchecked(
                 self.details_dialog_titlebar_enabled,
                 prefs.details_dialog_titlebar_enabled,
@@ -329,6 +340,7 @@ use the modifier key to drag the floating window around"
         prefs.custom_command = str(self.customCommandEdit.text())
         prefs.tableFontSize = self.fontSizeSpinBox.value()
         prefs.tabs_default_pos = ischecked(self.tabs_default_pos)
+        prefs.use_native_dialogs = ischecked(self.use_native_dialogs)
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:

@@ -6,6 +6,7 @@
 
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (
+    QListView,
     QWidget,
     QFileDialog,
     QHeaderView,
@@ -285,14 +286,25 @@ class DirectoriesDialog(QMainWindow):
 
     # --- Events
     def addFolderTriggered(self):
+        no_native = not self.app.prefs.use_native_dialogs
         title = tr("Select a folder to add to the scanning list")
-        flags = QFileDialog.ShowDirsOnly
-        dirpath = str(QFileDialog.getExistingDirectory(self, title, self.lastAddedFolder, flags))
-        if not dirpath:
+        file_dialog = QFileDialog(self, title, self.lastAddedFolder)
+        file_dialog.setFileMode(QFileDialog.DirectoryOnly)
+        file_dialog.setOption(QFileDialog.DontUseNativeDialog, no_native)
+        if no_native:
+            file_view = file_dialog.findChild(QListView, "listView")
+            if file_view:
+                file_view.setSelectionMode(QAbstractItemView.MultiSelection)
+            f_tree_view = file_dialog.findChild(QTreeView)
+            if f_tree_view:
+                f_tree_view.setSelectionMode(QAbstractItemView.MultiSelection)
+        if not file_dialog.exec():
             return
-        self.lastAddedFolder = dirpath
-        self.app.model.add_directory(dirpath)
-        self.recentFolders.insertItem(dirpath)
+
+        paths = file_dialog.selectedFiles()
+        self.lastAddedFolder = paths[-1]
+        [self.app.model.add_directory(path) for path in paths]
+        [self.recentFolders.insertItem(path) for path in paths]
 
     def appModeButtonSelected(self, index):
         if index == 2:

@@ -30,6 +30,7 @@ class Preferences(PreferencesBase):
         if not self.language and trans.installed_lang:
             self.language = trans.installed_lang
         self.portable = get("Portable", False)
+        self.use_native_dialogs = get("UseNativeDialogs", True)
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
         self.reference_bold_font = get("ReferenceBoldFont", self.reference_bold_font)
@@ -92,6 +93,7 @@ class Preferences(PreferencesBase):
         self.destination_type = 1
         self.custom_command = ""
         self.language = trans.installed_lang if trans.installed_lang else ""
+        self.use_native_dialogs = True
 
         self.tableFontSize = QApplication.font().pointSize()
         self.reference_bold_font = True
@@ -140,6 +142,7 @@ class Preferences(PreferencesBase):
         set_("CustomCommand", self.custom_command)
         set_("Language", self.language)
         set_("Portable", self.portable)
+        set_("UseNativeDialogs", self.use_native_dialogs)
 
         set_("TableFontSize", self.tableFontSize)
         set_("ReferenceBoldFont", self.reference_bold_font)
