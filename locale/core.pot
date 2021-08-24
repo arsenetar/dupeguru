@@ -36,79 +36,79 @@ msgstr ""
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:290
+#: core\app.py:287
 msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:300
+#: core\app.py:297
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:315
+#: core\app.py:312
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:316
+#: core\app.py:313
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:317
+#: core\app.py:314
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:323
+#: core\app.py:320
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:379
+#: core\app.py:376
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:381
+#: core\app.py:378
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:389
+#: core\app.py:386
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:463
+#: core\app.py:460
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:465
+#: core\app.py:462
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:504
+#: core\app.py:501
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:510 core\app.py:764 core\app.py:774
+#: core\app.py:507 core\app.py:761 core\app.py:771
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:533
+#: core\app.py:530
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:691 core\app.py:703
+#: core\app.py:688 core\app.py:700
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:739
+#: core\app.py:736
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:783
+#: core\app.py:780
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:796
+#: core\app.py:793
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:843
+#: core\app.py:840
 msgid "%s (%d discarded)"
 msgstr ""
 

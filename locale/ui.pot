@@ -913,3 +913,13 @@ msgstr ""
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
 msgstr ""
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr ""
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
