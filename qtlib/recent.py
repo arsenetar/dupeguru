@@ -20,12 +20,12 @@ MenuEntry = namedtuple("MenuEntry", "menu fixedItemCount")
 
 
 class Recent(QObject):
-    def __init__(self, app, prefName, maxItemCount=10, **kwargs):
+    def __init__(self, app, pref_name, max_item_count=10, **kwargs):
         super().__init__(**kwargs)
         self._app = app
         self._menuEntries = []
-        self._prefName = prefName
-        self._maxItemCount = maxItemCount
+        self._prefName = pref_name
+        self._maxItemCount = max_item_count
         self._items = []
         self._loadFromPrefs()
 
@@ -41,9 +41,9 @@ class Recent(QObject):
     def _insertItem(self, item):
         self._items = dedupe([item] + self._items)[: self._maxItemCount]
 
-    def _refreshMenu(self, menuEntry):
-        menu, fixedItemCount = menuEntry
-        for action in menu.actions()[fixedItemCount:]:
+    def _refreshMenu(self, menu_entry):
+        menu, fixed_item_count = menu_entry
+        for action in menu.actions()[fixed_item_count:]:
             menu.removeAction(action)
         for item in self._items:
             action = QAction(item, menu)
@@ -56,17 +56,17 @@ class Recent(QObject):
         menu.addAction(action)
 
     def _refreshAllMenus(self):
-        for menuEntry in self._menuEntries:
-            self._refreshMenu(menuEntry)
+        for menu_entry in self._menuEntries:
+            self._refreshMenu(menu_entry)
 
     def _saveToPrefs(self):
         setattr(self._app.prefs, self._prefName, self._items)
 
     # --- Public
     def addMenu(self, menu):
-        menuEntry = MenuEntry(menu, len(menu.actions()))
-        self._menuEntries.append(menuEntry)
-        self._refreshMenu(menuEntry)
+        menu_entry = MenuEntry(menu, len(menu.actions()))
+        self._menuEntries.append(menu_entry)
+        self._refreshMenu(menu_entry)
 
     def clear(self):
         self._items = []

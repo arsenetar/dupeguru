@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
     QStackedWidget,
 )
 from hscommon.trans import trget
-from qtlib.util import moveToScreenCenter, createActions
+from qtlib.util import move_to_screen_center, create_actions
 from .directories_dialog import DirectoriesDialog
 from .result_window import ResultWindow
 from .ignore_list_dialog import IgnoreListDialog
@@ -46,7 +46,7 @@ class TabWindow(QMainWindow):
                 self.toggleTabBar,
             ),
         ]
-        createActions(ACTIONS, self)
+        create_actions(ACTIONS, self)
         self.actionToggleTabs.setCheckable(True)
         self.actionToggleTabs.setChecked(True)
 
@@ -78,7 +78,7 @@ class TabWindow(QMainWindow):
         if self.app.prefs.mainWindowRect is not None:
             self.setGeometry(self.app.prefs.mainWindowRect)
         else:
-            moveToScreenCenter(self)
+            move_to_screen_center(self)
 
     def _setupMenu(self):
         """Setup the menubar boiler plates which will be filled by the underlying
@@ -174,7 +174,6 @@ class TabWindow(QMainWindow):
     def addTab(self, page, title, switch=False):
         # Warning: this supposedly takes ownership of the page
         index = self.tabWidget.addTab(page, title)
-        # index = self.tabWidget.insertTab(-1, page, title)
         if isinstance(page, DirectoriesDialog):
             self.tabWidget.tabBar().setTabButton(index, QTabBar.RightSide, None)
         if switch:

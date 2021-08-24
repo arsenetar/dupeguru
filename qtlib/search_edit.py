@@ -36,9 +36,9 @@ class ClearableEdit(QLineEdit):
         self._is_clearable = is_clearable
         if is_clearable:
             self._clearButton = LineEditButton(self)
-            frameWidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
-            paddingRight = self._clearButton.sizeHint().width() + frameWidth + 1
-            stylesheet = "QLineEdit {{ padding-right:{0}px; }}".format(paddingRight)
+            frame_width = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
+            padding_right = self._clearButton.sizeHint().width() + frame_width + 1
+            stylesheet = "QLineEdit {{ padding-right:{0}px; }}".format(padding_right)
             self.setStyleSheet(stylesheet)
             self._updateClearButton()
 
@@ -58,12 +58,12 @@ class ClearableEdit(QLineEdit):
     # --- QLineEdit overrides
     def resizeEvent(self, event):
         if self._is_clearable:
-            frameWidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
+            frame_width = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
             rect = self.rect()
-            rightHint = self._clearButton.sizeHint()
-            rightX = rect.right() - frameWidth - rightHint.width()
-            rightY = (rect.bottom() - rightHint.height()) // 2
-            self._clearButton.move(rightX, rightY)
+            right_hint = self._clearButton.sizeHint()
+            right_x = rect.right() - frame_width - right_hint.width()
+            right_y = (rect.bottom() - right_hint.height()) // 2
+            self._clearButton.move(right_x, right_y)
 
     # --- Event Handlers
     def _textChanged(self, text):
@@ -102,14 +102,14 @@ class SearchEdit(ClearableEdit):
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
             panel = QStyleOptionFrame()
             self.initStyleOption(panel)
-            textRect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
-            leftMargin = 2
-            rightMargin = self._clearButton.iconSize().width()
-            textRect.adjust(leftMargin, 0, -rightMargin, 0)
+            text_rect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
+            left_margin = 2
+            right_margin = self._clearButton.iconSize().width()
+            text_rect.adjust(left_margin, 0, -right_margin, 0)
             painter = QPainter(self)
-            disabledColor = self.palette().brush(QPalette.Disabled, QPalette.Text).color()
-            painter.setPen(disabledColor)
-            painter.drawText(textRect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText)
+            disabled_color = self.palette().brush(QPalette.Disabled, QPalette.Text).color()
+            painter.setPen(disabled_color)
+            painter.drawText(text_rect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText)
 
     # --- Event Handlers
     def _returnPressed(self):

@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import (
 )
 
 from hscommon.trans import trget
-from qtlib.util import horizontalWrap
+from qtlib.util import horizontal_wrap
 from .ignore_list_table import IgnoreListTable
 
 tr = trget("ui")
@@ -56,7 +56,7 @@ class IgnoreListDialog(QDialog):
         self.clearButton = QPushButton(tr("Clear"))
         self.closeButton = QPushButton(tr("Close"))
         self.verticalLayout.addLayout(
-            horizontalWrap([self.removeSelectedButton, self.clearButton, None, self.closeButton])
+            horizontal_wrap([self.removeSelectedButton, self.clearButton, None, self.closeButton])
         )
 
     # --- model --> view

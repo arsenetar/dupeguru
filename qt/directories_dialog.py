@@ -28,7 +28,7 @@ from hscommon.trans import trget
 from core.app import AppMode
 from qtlib.radio_box import RadioBox
 from qtlib.recent import Recent
-from qtlib.util import moveToScreenCenter, createActions
+from qtlib.util import move_to_screen_center, create_actions
 
 from . import platform
 from .directories_model import DirectoriesModel, DirectoriesDelegate
@@ -93,7 +93,7 @@ class DirectoriesDialog(QMainWindow):
             ("actionLoadDirectories", "", "", tr("Load Directories..."), self.loadDirectoriesTriggered),
             ("actionSaveDirectories", "", "", tr("Save Directories..."), self.saveDirectoriesTriggered),
         ]
-        createActions(ACTIONS, self)
+        create_actions(ACTIONS, self)
         if self.app.use_tabs:
             # Keep track of actions which should only be accessible from this window
             self.specific_actions.add(self.actionLoadDirectories)
@@ -206,8 +206,8 @@ class DirectoriesDialog(QMainWindow):
         self.addFolderButton = QPushButton(self.centralwidget)
         self.addFolderButton.setIcon(QIcon(QPixmap(":/plus")))
         self.horizontalLayout.addWidget(self.addFolderButton)
-        spacerItem1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        spacer_item = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacer_item)
         self.loadResultsButton = QPushButton(self.centralwidget)
         self.loadResultsButton.setText(tr("Load Results"))
         self.horizontalLayout.addWidget(self.loadResultsButton)
@@ -224,7 +224,7 @@ class DirectoriesDialog(QMainWindow):
         if self.app.prefs.directoriesWindowRect is not None:
             self.setGeometry(self.app.prefs.directoriesWindowRect)
         else:
-            moveToScreenCenter(self)
+            move_to_screen_center(self)
 
     def _setupColumns(self):
         header = self.treeView.header()

@@ -50,9 +50,8 @@ class ResultsModel(Table):
             if self.prefs.reference_bold_font:
                 font.setBold(row.isref)
             return font
-        elif role == Qt.EditRole:
-            if column.name == "name":
-                return row.data[column.name]
+        elif role == Qt.EditRole and column.name == "name":
+            return row.data[column.name]
         return None
 
     def _getFlags(self, row, column):
@@ -69,9 +68,8 @@ class ResultsModel(Table):
             if column.name == "marked":
                 row.marked = bool(value)
                 return True
-        elif role == Qt.EditRole:
-            if column.name == "name":
-                return self.model.rename_selected(value)
+        elif role == Qt.EditRole and column.name == "name":
+            return self.model.rename_selected(value)
         return False
 
     def sort(self, column, order):

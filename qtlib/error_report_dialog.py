@@ -22,7 +22,7 @@ from PyQt5.QtWidgets import (
 
 from hscommon.trans import trget
 from hscommon.desktop import open_url
-from .util import horizontalSpacer
+from .util import horizontal_spacer
 
 tr = trget("qtlib")
 
@@ -34,10 +34,10 @@ class ErrorReportDialog(QDialog):
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
-        errorText = "Application Name: {}\nVersion: {}\n\n{}".format(name, version, error)
+        error_text = "Application Name: {}\nVersion: {}\n\n{}".format(name, version, error)
         # Under windows, we end up with an error report without linesep if we don't mangle it
-        errorText = errorText.replace("\n", os.linesep)
-        self.errorTextEdit.setPlainText(errorText)
+        error_text = error_text.replace("\n", os.linesep)
+        self.errorTextEdit.setPlainText(error_text)
         self.github_url = github_url
 
         self.sendButton.clicked.connect(self.goToGithub)
@@ -68,7 +68,7 @@ class ErrorReportDialog(QDialog):
         self.label2.setWordWrap(True)
         self.verticalLayout.addWidget(self.label2)
         self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.addItem(horizontalSpacer())
+        self.horizontalLayout.addItem(horizontal_spacer())
         self.dontSendButton = QPushButton(self)
         self.dontSendButton.setText(tr("Close"))
         self.dontSendButton.setMinimumSize(QSize(110, 0))

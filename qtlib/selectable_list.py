@@ -80,19 +80,19 @@ class ListviewModel(SelectableList):
 
     # --- Override
     def _updateSelection(self):
-        newIndexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
-        if newIndexes != self.model.selected_indexes:
-            self.model.select(newIndexes)
+        new_indexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
+        if new_indexes != self.model.selected_indexes:
+            self.model.select(new_indexes)
 
     def _restoreSelection(self):
-        newSelection = QItemSelection()
+        new_selection = QItemSelection()
         for index in self.model.selected_indexes:
-            newSelection.select(self.createIndex(index, 0), self.createIndex(index, 0))
-        self.view.selectionModel().select(newSelection, QItemSelectionModel.ClearAndSelect)
-        if len(newSelection.indexes()):
-            currentIndex = newSelection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(currentIndex, QItemSelectionModel.Current)
-            self.view.scrollTo(currentIndex)
+            new_selection.select(self.createIndex(index, 0), self.createIndex(index, 0))
+        self.view.selectionModel().select(new_selection, QItemSelectionModel.ClearAndSelect)
+        if len(new_selection.indexes()):
+            current_index = new_selection.indexes()[0]
+            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.Current)
+            self.view.scrollTo(current_index)
 
     # --- Events
     def selectionChanged(self, index):

@@ -104,12 +104,12 @@ class DirectoriesModel(TreeModel):
                 return QBrush(Qt.red)
         return None
 
-    def dropMimeData(self, mimeData, action, row, column, parentIndex):
+    def dropMimeData(self, mime_data, action, row, column, parent_index):
         # the data in mimeData is urlencoded **in utf-8**!!! What we do is to decode, the mime data
         # with 'ascii', which works since it's urlencoded. Then, we pass that to urllib.
-        if not mimeData.hasFormat("text/uri-list"):
+        if not mime_data.hasFormat("text/uri-list"):
             return False
-        data = bytes(mimeData.data("text/uri-list")).decode("ascii")
+        data = bytes(mime_data.data("text/uri-list")).decode("ascii")
         unquoted = urllib.parse.unquote(data)
         urls = unquoted.split("\r\n")
         paths = [QUrl(url).toLocalFile() for url in urls if url]
@@ -128,9 +128,8 @@ class DirectoriesModel(TreeModel):
         return result
 
     def headerData(self, section, orientation, role):
-        if orientation == Qt.Horizontal:
-            if role == Qt.DisplayRole and section < len(HEADERS):
-                return HEADERS[section]
+        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(HEADERS):
+            return HEADERS[section]
         return None
 
     def mimeTypes(self):
@@ -151,8 +150,8 @@ class DirectoriesModel(TreeModel):
 
     # --- Events
     def selectionChanged(self, selected, deselected):
-        newNodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
-        self.model.selected_nodes = newNodes
+        new_nodes = [modelIndex.internalPointer().ref for modelIndex in self.view.selectionModel().selectedRows()]
+        self.model.selected_nodes = new_nodes
 
     # --- Signals
     foldersAdded = pyqtSignal(list)

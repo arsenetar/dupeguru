@@ -38,21 +38,21 @@ class Table(QAbstractTableModel):
         # an _updateViewSelection() call will normally result in an _updateModelSelection() call.
         # to avoid infinite loops, we check that the selection will actually change before calling
         # model.select()
-        newIndexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
-        if newIndexes != self.model.selected_indexes:
-            self.model.select(newIndexes)
+        new_indexes = [modelIndex.row() for modelIndex in self.view.selectionModel().selectedRows()]
+        if new_indexes != self.model.selected_indexes:
+            self.model.select(new_indexes)
 
     def _updateViewSelection(self):
         # Takes the selection on the model's side and update the view with it.
-        newSelection = QItemSelection()
-        columnCount = self.columnCount(QModelIndex())
+        new_selection = QItemSelection()
+        column_count = self.columnCount(QModelIndex())
         for index in self.model.selected_indexes:
-            newSelection.select(self.createIndex(index, 0), self.createIndex(index, columnCount - 1))
-        self.view.selectionModel().select(newSelection, QItemSelectionModel.ClearAndSelect)
-        if len(newSelection.indexes()):
-            currentIndex = newSelection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(currentIndex, QItemSelectionModel.Current)
-            self.view.scrollTo(currentIndex)
+            new_selection.select(self.createIndex(index, 0), self.createIndex(index, column_count - 1))
+        self.view.selectionModel().select(new_selection, QItemSelectionModel.ClearAndSelect)
+        if len(new_selection.indexes()):
+            current_index = new_selection.indexes()[0]
+            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.Current)
+            self.view.scrollTo(current_index)
 
     # --- Data Model methods
     # Virtual

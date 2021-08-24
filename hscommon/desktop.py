@@ -68,7 +68,7 @@ except ImportError:
     try:
         from PyQt5.QtCore import QUrl, QStandardPaths
         from PyQt5.QtGui import QDesktopServices
-        from qtlib.util import getAppData
+        from qtlib.util import get_appdata
         from core.util import executable_folder
         from hscommon.plat import ISWINDOWS, ISOSX
         import subprocess
@@ -95,7 +95,7 @@ except ImportError:
                 else:
                     folder = QStandardPaths.standardLocations(QStandardPaths.CacheLocation)[0]
             else:
-                folder = getAppData(portable)
+                folder = get_appdata(portable)
             return folder
 
     except ImportError:

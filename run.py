@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import QApplication
 
 from hscommon.trans import install_gettext_trans_under_qt
 from qtlib.error_report_dialog import install_excepthook
-from qtlib.util import setupQtLogging
+from qtlib.util import setup_qt_logging
 from qtlib.preferences import create_qsettings
 from qt import dg_rc  # noqa: F401
 from qt.platform import BASE_PATH
@@ -33,7 +33,7 @@ global dgapp
 dgapp = None
 
 
-def signalHandler(sig, frame):
+def signal_handler(sig, frame):
     global dgapp
     if dgapp is None:
         return
@@ -41,10 +41,10 @@ def signalHandler(sig, frame):
         dgapp.SIGTERM.emit()
 
 
-def setUpSignals():
-    signal(SIGINT, signalHandler)
-    signal(SIGTERM, signalHandler)
-    signal(SIGQUIT, signalHandler)
+def setup_signals():
+    signal(SIGINT, signal_handler)
+    signal(SIGTERM, signal_handler)
+    signal(SIGQUIT, signal_handler)
 
 
 def main():
@@ -52,13 +52,13 @@ def main():
     QCoreApplication.setOrganizationName("Hardcoded Software")
     QCoreApplication.setApplicationName(__appname__)
     QCoreApplication.setApplicationVersion(__version__)
-    setupQtLogging()
+    setup_qt_logging()
     settings = create_qsettings()
     lang = settings.value("Language")
     locale_folder = op.join(BASE_PATH, "locale")
     install_gettext_trans_under_qt(locale_folder, lang)
     # Handle OS signals
-    setUpSignals()
+    setup_signals()
     # Let the Python interpreter runs every 500ms to handle signals.  This is
     # required because Python cannot handle signals while the Qt event loop is
     # running.

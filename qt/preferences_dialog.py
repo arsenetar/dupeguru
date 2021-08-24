@@ -32,7 +32,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-from qtlib.util import horizontalWrap
+from qtlib.util import horizontal_wrap
 from qtlib.preferences import get_langnames
 from enum import Flag, auto
 
@@ -95,11 +95,11 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessHLayoutSub1 = QHBoxLayout()
         self.filterHardnessHLayoutSub1.setSpacing(12)
         self.filterHardnessSlider = QSlider(self)
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.filterHardnessSlider.sizePolicy().hasHeightForWidth())
-        self.filterHardnessSlider.setSizePolicy(sizePolicy)
+        size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        size_policy.setHorizontalStretch(0)
+        size_policy.setVerticalStretch(0)
+        size_policy.setHeightForWidth(self.filterHardnessSlider.sizePolicy().hasHeightForWidth())
+        self.filterHardnessSlider.setSizePolicy(size_policy)
         self.filterHardnessSlider.setMinimum(1)
         self.filterHardnessSlider.setMaximum(100)
         self.filterHardnessSlider.setTracking(True)
@@ -115,8 +115,8 @@ class PreferencesDialogBase(QDialog):
         self.moreResultsLabel = QLabel(self)
         self.moreResultsLabel.setText(tr("More Results"))
         self.filterHardnessHLayoutSub2.addWidget(self.moreResultsLabel)
-        spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.filterHardnessHLayoutSub2.addItem(spacerItem)
+        spacer_item = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.filterHardnessHLayoutSub2.addItem(spacer_item)
         self.fewerResultsLabel = QLabel(self)
         self.fewerResultsLabel.setText(tr("Fewer Results"))
         self.filterHardnessHLayoutSub2.addWidget(self.fewerResultsLabel)
@@ -146,7 +146,7 @@ class PreferencesDialogBase(QDialog):
         self.languageComboBox = QComboBox(self)
         for lang in self.supportedLanguages:
             self.languageComboBox.addItem(get_langnames()[lang])
-        layout.addLayout(horizontalWrap([self.languageLabel, self.languageComboBox, None]))
+        layout.addLayout(horizontal_wrap([self.languageLabel, self.languageComboBox, None]))
         self._setupAddCheckbox(
             "tabs_default_pos",
             tr("Use default position for tab bar (requires restart)"),

@@ -16,7 +16,7 @@ from hscommon import desktop
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
-from qtlib.util import createActions
+from qtlib.util import create_actions
 from qtlib.progress_window import ProgressWindow
 
 from core.app import AppMode, DupeGuru as DupeGuruModel
@@ -152,7 +152,7 @@ class DupeGuru(QObject):
                 self.openDebugLogTriggered,
             ),
         ]
-        createActions(ACTIONS, self)
+        create_actions(ACTIONS, self)
 
     def _update_options(self):
         self.model.options["mix_file_kind"] = self.prefs.mix_file_kind
@@ -314,8 +314,8 @@ class DupeGuru(QObject):
         self.main_window.setCurrentIndex(index)
 
     def openDebugLogTriggered(self):
-        debugLogPath = op.join(self.model.appdata, "debug.log")
-        desktop.open_path(debugLogPath)
+        debug_log_path = op.join(self.model.appdata, "debug.log")
+        desktop.open_path(debug_log_path)
 
     def preferencesTriggered(self):
         preferences_dialog = self._get_preferences_dialog_class()(
