@@ -167,7 +167,7 @@ class Scanner:
         matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
-            matches = [m for m in matches if not ignore_list.AreIgnored(str(m.first.path), str(m.second.path))]
+            matches = [m for m in matches if not ignore_list.are_ignored(str(m.first.path), str(m.second.path))]
         logging.info("Grouping matches")
         groups = engine.get_groups(matches)
         if self.scan_type in {

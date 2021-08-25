@@ -20,8 +20,7 @@ class IgnoreList:
 
     # ---Override
     def __init__(self):
-        self._ignored = {}
-        self._count = 0
+        self.clear()
 
     def __iter__(self):
         for first, seconds in self._ignored.items():
@@ -32,7 +31,7 @@ class IgnoreList:
         return self._count
 
     # ---Public
-    def AreIgnored(self, first, second):
+    def are_ignored(self, first, second):
         def do_check(first, second):
             try:
                 matches = self._ignored[first]
@@ -42,23 +41,23 @@ class IgnoreList:
 
         return do_check(first, second) or do_check(second, first)
 
-    def Clear(self):
+    def clear(self):
         self._ignored = {}
         self._count = 0
 
-    def Filter(self, func):
+    def filter(self, func):
         """Applies a filter on all ignored items, and remove all matches where func(first,second)
         doesn't return True.
         """
         filtered = IgnoreList()
         for first, second in self:
             if func(first, second):
-                filtered.Ignore(first, second)
+                filtered.ignore(first, second)
         self._ignored = filtered._ignored
         self._count = filtered._count
 
-    def Ignore(self, first, second):
-        if self.AreIgnored(first, second):
+    def ignore(self, first, second):
+        if self.are_ignored(first, second):
             return
         try:
             matches = self._ignored[first]
@@ -109,7 +108,7 @@ class IgnoreList:
             for sfn in subfile_elems:
                 subfile_path = sfn.get("path")
                 if subfile_path:
-                    self.Ignore(file_path, subfile_path)
+                    self.ignore(file_path, subfile_path)
 
     def save_to_xml(self, outfile):
         """Create a XML file that can be used by load_from_xml.

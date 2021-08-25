@@ -15,16 +15,21 @@ class DupeGuruGUIObject(Listener):
         self.app = app
 
     def directories_changed(self):
+        # Implemented in child classes
         pass
 
     def dupes_selected(self):
+        # Implemented in child classes
         pass
 
     def marking_changed(self):
+        # Implemented in child classes
         pass
 
     def results_changed(self):
+        # Implemented in child classes
         pass
 
     def results_changed_but_keep_selection(self):
+        # Implemented in child classes
         pass

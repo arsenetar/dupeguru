@@ -24,7 +24,7 @@ class IgnoreListDialog:
             return
         msg = tr("Do you really want to remove all %d items from the ignore list?") % len(self.ignore_list)
         if self.app.view.ask_yes_no(msg):
-            self.ignore_list.Clear()
+            self.ignore_list.clear()
             self.refresh()
 
     def refresh(self):

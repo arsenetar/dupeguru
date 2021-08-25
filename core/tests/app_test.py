@@ -369,13 +369,13 @@ class TestCaseDupeGuruWithResults:
         open(p1, "w").close()
         open(p2, "w").close()
         dne = "/does_not_exist"
-        app.ignore_list.Ignore(dne, p1)
-        app.ignore_list.Ignore(p2, dne)
-        app.ignore_list.Ignore(p1, p2)
+        app.ignore_list.ignore(dne, p1)
+        app.ignore_list.ignore(p2, dne)
+        app.ignore_list.ignore(p1, p2)
         app.purge_ignore_list()
         eq_(1, len(app.ignore_list))
-        assert app.ignore_list.AreIgnored(p1, p2)
-        assert not app.ignore_list.AreIgnored(dne, p1)
+        assert app.ignore_list.are_ignored(p1, p2)
+        assert not app.ignore_list.are_ignored(dne, p1)
 
     def test_only_unicode_is_added_to_ignore_list(self, do_setup):
         def fake_ignore(first, second):
@@ -385,7 +385,7 @@ class TestCaseDupeGuruWithResults:
                 self.fail()
 
         app = self.app
-        app.ignore_list.Ignore = fake_ignore
+        app.ignore_list.ignore = fake_ignore
         self.rtable.select([4])
         app.add_selected_to_ignore_list()
 

@@ -16,54 +16,54 @@ from ..ignore import IgnoreList
 def test_empty():
     il = IgnoreList()
     eq_(0, len(il))
-    assert not il.AreIgnored("foo", "bar")
+    assert not il.are_ignored("foo", "bar")
 
 
 def test_simple():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    assert il.AreIgnored("foo", "bar")
-    assert il.AreIgnored("bar", "foo")
-    assert not il.AreIgnored("foo", "bleh")
-    assert not il.AreIgnored("bleh", "bar")
+    il.ignore("foo", "bar")
+    assert il.are_ignored("foo", "bar")
+    assert il.are_ignored("bar", "foo")
+    assert not il.are_ignored("foo", "bleh")
+    assert not il.are_ignored("bleh", "bar")
     eq_(1, len(il))
 
 
 def test_multiple():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("foo", "bleh")
-    il.Ignore("bleh", "bar")
-    il.Ignore("aybabtu", "bleh")
-    assert il.AreIgnored("foo", "bar")
-    assert il.AreIgnored("bar", "foo")
-    assert il.AreIgnored("foo", "bleh")
-    assert il.AreIgnored("bleh", "bar")
-    assert not il.AreIgnored("aybabtu", "bar")
+    il.ignore("foo", "bar")
+    il.ignore("foo", "bleh")
+    il.ignore("bleh", "bar")
+    il.ignore("aybabtu", "bleh")
+    assert il.are_ignored("foo", "bar")
+    assert il.are_ignored("bar", "foo")
+    assert il.are_ignored("foo", "bleh")
+    assert il.are_ignored("bleh", "bar")
+    assert not il.are_ignored("aybabtu", "bar")
     eq_(4, len(il))
 
 
 def test_clear():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Clear()
-    assert not il.AreIgnored("foo", "bar")
-    assert not il.AreIgnored("bar", "foo")
+    il.ignore("foo", "bar")
+    il.clear()
+    assert not il.are_ignored("foo", "bar")
+    assert not il.are_ignored("bar", "foo")
     eq_(0, len(il))
 
 
 def test_add_same_twice():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("bar", "foo")
+    il.ignore("foo", "bar")
+    il.ignore("bar", "foo")
     eq_(1, len(il))
 
 
 def test_save_to_xml():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("foo", "bleh")
-    il.Ignore("bleh", "bar")
+    il.ignore("foo", "bar")
+    il.ignore("foo", "bleh")
+    il.ignore("bleh", "bar")
     f = io.BytesIO()
     il.save_to_xml(f)
     f.seek(0)
@@ -79,17 +79,17 @@ def test_save_to_xml():
 
 def test_save_then_load():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("foo", "bleh")
-    il.Ignore("bleh", "bar")
-    il.Ignore("\u00e9", "bar")
+    il.ignore("foo", "bar")
+    il.ignore("foo", "bleh")
+    il.ignore("bleh", "bar")
+    il.ignore("\u00e9", "bar")
     f = io.BytesIO()
     il.save_to_xml(f)
     f.seek(0)
     il = IgnoreList()
     il.load_from_xml(f)
     eq_(4, len(il))
-    assert il.AreIgnored("\u00e9", "bar")
+    assert il.are_ignored("\u00e9", "bar")
 
 
 def test_load_xml_with_empty_file_tags():
@@ -103,16 +103,16 @@ def test_load_xml_with_empty_file_tags():
 
 def test_are_ignore_works_when_a_child_is_a_key_somewhere_else():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("bar", "baz")
-    assert il.AreIgnored("bar", "foo")
+    il.ignore("foo", "bar")
+    il.ignore("bar", "baz")
+    assert il.are_ignored("bar", "foo")
 
 
 def test_no_dupes_when_a_child_is_a_key_somewhere_else():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("bar", "baz")
-    il.Ignore("bar", "foo")
+    il.ignore("foo", "bar")
+    il.ignore("bar", "baz")
+    il.ignore("bar", "foo")
     eq_(2, len(il))
 
 
@@ -121,7 +121,7 @@ def test_iterate():
     il = IgnoreList()
     expected = [("foo", "bar"), ("bar", "baz"), ("foo", "baz")]
     for i in expected:
-        il.Ignore(i[0], i[1])
+        il.ignore(i[0], i[1])
     for i in il:
         expected.remove(i)  # No exception should be raised
     assert not expected  # expected should be empty
@@ -129,18 +129,18 @@ def test_iterate():
 
 def test_filter():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("bar", "baz")
-    il.Ignore("foo", "baz")
-    il.Filter(lambda f, s: f == "bar")
+    il.ignore("foo", "bar")
+    il.ignore("bar", "baz")
+    il.ignore("foo", "baz")
+    il.filter(lambda f, s: f == "bar")
     eq_(1, len(il))
-    assert not il.AreIgnored("foo", "bar")
-    assert il.AreIgnored("bar", "baz")
+    assert not il.are_ignored("foo", "bar")
+    assert il.are_ignored("bar", "baz")
 
 
 def test_save_with_non_ascii_items():
     il = IgnoreList()
-    il.Ignore("\xac", "\xbf")
+    il.ignore("\xac", "\xbf")
     f = io.BytesIO()
     try:
         il.save_to_xml(f)
@@ -151,29 +151,29 @@ def test_save_with_non_ascii_items():
 def test_len():
     il = IgnoreList()
     eq_(0, len(il))
-    il.Ignore("foo", "bar")
+    il.ignore("foo", "bar")
     eq_(1, len(il))
 
 
 def test_nonzero():
     il = IgnoreList()
     assert not il
-    il.Ignore("foo", "bar")
+    il.ignore("foo", "bar")
     assert il
 
 
 def test_remove():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("foo", "baz")
+    il.ignore("foo", "bar")
+    il.ignore("foo", "baz")
     il.remove("bar", "foo")
     eq_(len(il), 1)
-    assert not il.AreIgnored("foo", "bar")
+    assert not il.are_ignored("foo", "bar")
 
 
 def test_remove_non_existant():
     il = IgnoreList()
-    il.Ignore("foo", "bar")
-    il.Ignore("foo", "baz")
+    il.ignore("foo", "bar")
+    il.ignore("foo", "baz")
     with raises(ValueError):
         il.remove("foo", "bleh")

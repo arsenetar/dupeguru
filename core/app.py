@@ -390,7 +390,7 @@ class DupeGuru(Broadcaster):
             g = self.results.get_group_of_duplicate(dupe)
             for other in g:
                 if other is not dupe:
-                    self.ignore_list.Ignore(str(other.path), str(dupe.path))
+                    self.ignore_list.ignore(str(other.path), str(dupe.path))
         self.remove_duplicates(dupes)
         self.ignore_list_dialog.refresh()
 
@@ -592,9 +592,8 @@ class DupeGuru(Broadcaster):
         changed_groups = set()
         for dupe in dupes:
             g = self.results.get_group_of_duplicate(dupe)
-            if g not in changed_groups:
-                if self.results.make_ref(dupe):
-                    changed_groups.add(g)
+            if g not in changed_groups and self.results.make_ref(dupe):
+                changed_groups.add(g)
         # It's not always obvious to users what this action does, so to make it a bit clearer,
         # we change our selection to the ref of all changed groups. However, we also want to keep
         # the files that were ref before and weren't changed by the action. In effect, what this
@@ -644,15 +643,14 @@ class DupeGuru(Broadcaster):
 
     def open_selected(self):
         """Open :attr:`selected_dupes` with their associated application."""
-        if len(self.selected_dupes) > 10:
-            if not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
-                return
+        if len(self.selected_dupes) > 10 and not self.view.ask_yes_no(MSG_MANY_FILES_TO_OPEN):
+            return
         for dupe in self.selected_dupes:
             desktop.open_path(dupe.path)
 
     def purge_ignore_list(self):
         """Remove files that don't exist from :attr:`ignore_list`."""
-        self.ignore_list.Filter(lambda f, s: op.exists(f) and op.exists(s))
+        self.ignore_list.filter(lambda f, s: op.exists(f) and op.exists(s))
         self.ignore_list_dialog.refresh()
 
     def remove_directories(self, indexes):

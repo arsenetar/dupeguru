@@ -230,8 +230,8 @@ def log_calls(func):
     """
 
     def wrapper(*args, **kwargs):
-        unifiedArgs = _unify_args(func, args, kwargs)
-        wrapper.calls.append(unifiedArgs)
+        unified_args = _unify_args(func, args, kwargs)
+        wrapper.calls.append(unified_args)
         return func(*args, **kwargs)
 
     wrapper.calls = []

@@ -391,8 +391,8 @@ def test_ignore_list(fake_fileexists):
     f2.path = Path("dir2/foobar")
     f3.path = Path("dir3/foobar")
     ignore_list = IgnoreList()
-    ignore_list.Ignore(str(f1.path), str(f2.path))
-    ignore_list.Ignore(str(f1.path), str(f3.path))
+    ignore_list.ignore(str(f1.path), str(f2.path))
+    ignore_list.ignore(str(f1.path), str(f3.path))
     r = s.get_dupe_groups([f1, f2, f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
@@ -415,8 +415,8 @@ def test_ignore_list_checks_for_unicode(fake_fileexists):
     f2.path = Path("foo2\u00e9")
     f3.path = Path("foo3\u00e9")
     ignore_list = IgnoreList()
-    ignore_list.Ignore(str(f1.path), str(f2.path))
-    ignore_list.Ignore(str(f1.path), str(f3.path))
+    ignore_list.ignore(str(f1.path), str(f2.path))
+    ignore_list.ignore(str(f1.path), str(f3.path))
     r = s.get_dupe_groups([f1, f2, f3], ignore_list=ignore_list)
     eq_(len(r), 1)
     g = r[0]
