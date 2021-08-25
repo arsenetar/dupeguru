@@ -9,6 +9,7 @@
 import traceback
 import sys
 import os
+import platform
 
 from PyQt5.QtCore import Qt, QCoreApplication, QSize
 from PyQt5.QtWidgets import (
@@ -34,7 +35,9 @@ class ErrorReportDialog(QDialog):
         self._setupUi()
         name = QCoreApplication.applicationName()
         version = QCoreApplication.applicationVersion()
-        error_text = "Application Name: {}\nVersion: {}\n\n{}".format(name, version, error)
+        error_text = "Application Name: {}\nVersion: {}\nPython: {}\nOperating System: {}\n\n{}".format(
+            name, version, platform.python_version(), platform.platform(), error
+        )
         # Under windows, we end up with an error report without linesep if we don't mangle it
         error_text = error_text.replace("\n", os.linesep)
         self.errorTextEdit.setPlainText(error_text)
