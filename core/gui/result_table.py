@@ -82,7 +82,7 @@ class ResultTable(GUITable, DupeGuruGUIObject):
     def __init__(self, app):
         GUITable.__init__(self)
         DupeGuruGUIObject.__init__(self, app)
-        self.columns = Columns(self, prefaccess=app, savename="ResultTable")
+        self._columns = Columns(self, prefaccess=app, savename="ResultTable")
         self._power_marker = False
         self._delta_values = False
         self._sort_descriptors = ("name", True)
@@ -190,4 +190,4 @@ class ResultTable(GUITable, DupeGuruGUIObject):
         self.view.refresh()
 
     def save_session(self):
-        self.columns.save_columns()
+        self._columns.save_columns()

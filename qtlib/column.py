@@ -14,38 +14,38 @@ class Column:
     def __init__(
         self,
         attrname,
-        defaultWidth,
+        default_width,
         editor=None,
         alignment=Qt.AlignLeft,
-        cantTruncate=False,
+        cant_truncate=False,
         painter=None,
-        resizeToFit=False,
+        resize_to_fit=False,
     ):
         self.attrname = attrname
-        self.defaultWidth = defaultWidth
+        self.default_width = default_width
         self.editor = editor
         # See moneyguru #15. Painter attribute was added to allow custom painting of amount value and
         # currency information. Can be used as a pattern for custom painting of any column.
         self.painter = painter
         self.alignment = alignment
         # This is to indicate, during printing, that a column can't have its data truncated.
-        self.cantTruncate = cantTruncate
-        self.resizeToFit = resizeToFit
+        self.cant_truncate = cant_truncate
+        self.resize_to_fit = resize_to_fit
 
 
 class Columns:
-    def __init__(self, model, columns, headerView):
+    def __init__(self, model, columns, header_view):
         self.model = model
-        self._headerView = headerView
-        self._headerView.setDefaultAlignment(Qt.AlignLeft)
+        self._header_view = header_view
+        self._header_view.setDefaultAlignment(Qt.AlignLeft)
 
         def setspecs(col, modelcol):
-            modelcol.default_width = col.defaultWidth
+            modelcol.default_width = col.default_width
             modelcol.editor = col.editor
             modelcol.painter = col.painter
-            modelcol.resizeToFit = col.resizeToFit
+            modelcol.resize_to_fit = col.resize_to_fit
             modelcol.alignment = col.alignment
-            modelcol.cantTruncate = col.cantTruncate
+            modelcol.cant_truncate = col.cant_truncate
 
         if columns:
             for col in columns:
@@ -56,16 +56,16 @@ class Columns:
             for modelcol in self.model.column_list:
                 setspecs(col, modelcol)
         self.model.view = self
-        self._headerView.sectionMoved.connect(self.headerSectionMoved)
-        self._headerView.sectionResized.connect(self.headerSectionResized)
+        self._header_view.sectionMoved.connect(self.header_section_moved)
+        self._header_view.sectionResized.connect(self.header_section_resized)
 
         # See moneyguru #14 and #15.  This was added in order to allow automatic resizing of columns.
         for column in self.model.column_list:
-            if column.resizeToFit:
-                self._headerView.setSectionResizeMode(column.logical_index, QHeaderView.ResizeToContents)
+            if column.resize_to_fit:
+                self._header_view.setSectionResizeMode(column.logical_index, QHeaderView.ResizeToContents)
 
     # --- Public
-    def setColumnsWidth(self, widths):
+    def set_columns_width(self, widths):
         # `widths` can be None. If it is, then default widths are set.
         columns = self.model.column_list
         if not widths:
@@ -73,38 +73,38 @@ class Columns:
         for column, width in zip(columns, widths):
             if width == 0:  # column was hidden before.
                 width = column.default_width
-            self._headerView.resizeSection(column.logical_index, width)
+            self._header_view.resizeSection(column.logical_index, width)
 
-    def setColumnsOrder(self, columnIndexes):
-        if not columnIndexes:
+    def set_columns_order(self, column_indexes):
+        if not column_indexes:
             return
-        for destIndex, columnIndex in enumerate(columnIndexes):
+        for dest_index, column_index in enumerate(column_indexes):
             # moveSection takes 2 visual index arguments, so we have to get our visual index first
-            visualIndex = self._headerView.visualIndex(columnIndex)
-            self._headerView.moveSection(visualIndex, destIndex)
+            visual_index = self._header_view.visualIndex(column_index)
+            self._header_view.moveSection(visual_index, dest_index)
 
     # --- Events
-    def headerSectionMoved(self, logicalIndex, oldVisualIndex, newVisualIndex):
-        attrname = self.model.column_by_index(logicalIndex).name
-        self.model.move_column(attrname, newVisualIndex)
+    def header_section_moved(self, logical_index, old_visual_index, new_visual_index):
+        attrname = self.model.column_by_index(logical_index).name
+        self.model.move_column(attrname, new_visual_index)
 
-    def headerSectionResized(self, logicalIndex, oldSize, newSize):
-        attrname = self.model.column_by_index(logicalIndex).name
-        self.model.resize_column(attrname, newSize)
+    def header_section_resized(self, logical_index, old_size, new_size):
+        attrname = self.model.column_by_index(logical_index).name
+        self.model.resize_column(attrname, new_size)
 
     # --- model --> view
     def restore_columns(self):
         columns = self.model.ordered_columns
         indexes = [col.logical_index for col in columns]
-        self.setColumnsOrder(indexes)
+        self.set_columns_order(indexes)
         widths = [col.width for col in self.model.column_list]
         if not any(widths):
             widths = None
-        self.setColumnsWidth(widths)
+        self.set_columns_width(widths)
         for column in self.model.column_list:
             visible = self.model.column_is_visible(column.name)
-            self._headerView.setSectionHidden(column.logical_index, not visible)
+            self._header_view.setSectionHidden(column.logical_index, not visible)
 
     def set_column_visible(self, colname, visible):
         column = self.model.column_by_name(colname)
-        self._headerView.setSectionHidden(column.logical_index, not visible)
+        self._header_view.setSectionHidden(column.logical_index, not visible)

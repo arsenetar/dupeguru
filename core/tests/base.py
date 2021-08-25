@@ -151,8 +151,8 @@ class TestApp(TestAppBase):
     def __init__(self):
         def link_gui(gui):
             gui.view = self.make_logger()
-            if hasattr(gui, "columns"):  # tables
-                gui.columns.view = self.make_logger()
+            if hasattr(gui, "_columns"):  # tables
+                gui._columns.view = self.make_logger()
             return gui
 
         TestAppBase.__init__(self)

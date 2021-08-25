@@ -28,8 +28,8 @@ class Table(QAbstractTableModel):
         self.view = view
         self.view.setModel(self)
         self.model.view = self
-        if hasattr(self.model, "columns"):
-            self.columns = Columns(self.model.columns, self.COLUMNS, view.horizontalHeader())
+        if hasattr(self.model, "_columns"):
+            self._columns = Columns(self.model._columns, self.COLUMNS, view.horizontalHeader())
 
         self.view.selectionModel().selectionChanged[(QItemSelection, QItemSelection)].connect(self.selectionChanged)
 
@@ -82,28 +82,28 @@ class Table(QAbstractTableModel):
         return False
 
     def columnCount(self, index):
-        return self.model.columns.columns_count()
+        return self.model._columns.columns_count()
 
     def data(self, index, role):
         if not index.isValid():
             return None
         row = self.model[index.row()]
-        column = self.model.columns.column_by_index(index.column())
+        column = self.model._columns.column_by_index(index.column())
         return self._getData(row, column, role)
 
     def flags(self, index):
         if not index.isValid():
             return self.INVALID_INDEX_FLAGS
         row = self.model[index.row()]
-        column = self.model.columns.column_by_index(index.column())
+        column = self.model._columns.column_by_index(index.column())
         return self._getFlags(row, column)
 
     def headerData(self, section, orientation, role):
         if orientation != Qt.Horizontal:
             return None
-        if section >= self.model.columns.columns_count():
+        if section >= self.model._columns.columns_count():
             return None
-        column = self.model.columns.column_by_index(section)
+        column = self.model._columns.column_by_index(section)
         if role == Qt.DisplayRole:
             return column.display
         elif role == Qt.TextAlignmentRole:
@@ -123,11 +123,11 @@ class Table(QAbstractTableModel):
         if not index.isValid():
             return False
         row = self.model[index.row()]
-        column = self.model.columns.column_by_index(index.column())
+        column = self.model._columns.column_by_index(index.column())
         return self._setData(row, column, value, role)
 
     def sort(self, section, order):
-        column = self.model.columns.column_by_index(section)
+        column = self.model._columns.column_by_index(section)
         attrname = column.name
         self.model.sort_by(attrname, desc=order == Qt.DescendingOrder)
 

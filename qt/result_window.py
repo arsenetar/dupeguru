@@ -295,7 +295,7 @@ class ResultWindow(QMainWindow):
         if menu.actions():
             menu.clear()
         self._column_actions = []
-        for index, (display, visible) in enumerate(self.app.model.result_table.columns.menu_items()):
+        for index, (display, visible) in enumerate(self.app.model.result_table._columns.menu_items()):
             action = menu.addAction(display)
             action.setCheckable(True)
             action.setChecked(visible)
@@ -389,7 +389,7 @@ class ResultWindow(QMainWindow):
     # --- Private
     def _update_column_actions_status(self):
         # Update menu checked state
-        menu_items = self.app.model.result_table.columns.menu_items()
+        menu_items = self.app.model.result_table._columns.menu_items()
         for action, (display, visible) in zip(self._column_actions, menu_items):
             action.setChecked(visible)
 
@@ -483,16 +483,16 @@ class ResultWindow(QMainWindow):
     def columnToggled(self, action):
         index = action.item_index
         if index == -1:
-            self.app.model.result_table.columns.reset_to_defaults()
+            self.app.model.result_table._columns.reset_to_defaults()
             self._update_column_actions_status()
         else:
-            visible = self.app.model.result_table.columns.toggle_menu_item(index)
+            visible = self.app.model.result_table._columns.toggle_menu_item(index)
             action.setChecked(visible)
 
     def contextMenuEvent(self, event):
         self.actionActions.menu().exec_(event.globalPos())
 
-    def resultsDoubleClicked(self, modelIndex):
+    def resultsDoubleClicked(self, model_index):
         self.app.model.open_selected()
 
     def resultsSpacePressed(self):

@@ -12,8 +12,8 @@ from qtlib.table import Table
 
 class ProblemTable(Table):
     COLUMNS = [
-        Column("path", defaultWidth=150),
-        Column("msg", defaultWidth=150),
+        Column("path", default_width=150),
+        Column("msg", default_width=150),
     ]
 
     def __init__(self, model, view, **kwargs):

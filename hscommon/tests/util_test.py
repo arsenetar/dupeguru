@@ -290,8 +290,10 @@ class TestCaseDeleteIfEmpty:
 
 
 class TestCaseOpenIfFilename:
+    FILE_NAME = "test.txt"
+
     def test_file_name(self, tmpdir):
-        filepath = str(tmpdir.join("test.txt"))
+        filepath = str(tmpdir.join(self.FILE_NAME))
         open(filepath, "wb").write(b"test_data")
         file, close = open_if_filename(filepath)
         assert close
@@ -307,7 +309,7 @@ class TestCaseOpenIfFilename:
         eq_("test_data", file.read())
 
     def test_mode_is_passed_to_open(self, tmpdir):
-        filepath = str(tmpdir.join("test.txt"))
+        filepath = str(tmpdir.join(self.FILE_NAME))
         open(filepath, "w").close()
         file, close = open_if_filename(filepath, "a")
         eq_("a", file.mode)
@@ -315,8 +317,10 @@ class TestCaseOpenIfFilename:
 
 
 class TestCaseFileOrPath:
+    FILE_NAME = "test.txt"
+
     def test_path(self, tmpdir):
-        filepath = str(tmpdir.join("test.txt"))
+        filepath = str(tmpdir.join(self.FILE_NAME))
         open(filepath, "wb").write(b"test_data")
         with FileOrPath(filepath) as fp:
             eq_(b"test_data", fp.read())
@@ -329,7 +333,7 @@ class TestCaseFileOrPath:
             eq_("test_data", fp.read())
 
     def test_mode_is_passed_to_open(self, tmpdir):
-        filepath = str(tmpdir.join("test.txt"))
+        filepath = str(tmpdir.join(self.FILE_NAME))
         open(filepath, "w").close()
         with FileOrPath(filepath, "a") as fp:
             eq_("a", fp.mode)

@@ -21,7 +21,7 @@ class ProblemTable(GUITable):
 
     def __init__(self, problem_dialog):
         GUITable.__init__(self)
-        self.columns = Columns(self)
+        self._columns = Columns(self)
         self.dialog = problem_dialog
 
     # --- Override

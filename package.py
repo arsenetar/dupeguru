@@ -4,6 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from qt.platform import HELP_PATH
 import sys
 import os
 import os.path as op
@@ -26,11 +27,24 @@ from hscommon.build import (
     copy_all,
 )
 
+ENTRY_SCRIPT = "run.py"
+LOCALE_DIR = "build/locale"
+HELP_DIR = "build/help"
+
 
 def parse_args():
     parser = ArgumentParser()
     setup_package_argparser(parser)
     return parser.parse_args()
+
+
+def check_loc_doc():
+    if not op.exists(LOCALE_DIR):
+        print('Locale files are missing. Have you run "build.py --loc"?')
+    # include help files if they are built otherwise exit as they should be included?
+    if not op.exists(HELP_DIR):
+        print('Help files are missing. Have you run "build.py --doc"?')
+    return op.exists(LOCALE_DIR) and op.exists(HELP_DIR)
 
 
 def copy_files_to_package(destpath, packages, with_so):
@@ -40,17 +54,13 @@ def copy_files_to_package(destpath, packages, with_so):
     if op.exists(destpath):
         shutil.rmtree(destpath)
     os.makedirs(destpath)
-    shutil.copy("run.py", op.join(destpath, "run.py"))
+    shutil.copy(ENTRY_SCRIPT, op.join(destpath, ENTRY_SCRIPT))
     extra_ignores = ["*.so"] if not with_so else None
     copy_packages(packages, destpath, extra_ignores=extra_ignores)
     # include locale files if they are built otherwise exit as it will break
     # the localization
-    if not op.exists("build/locale"):
-        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
-        return
-    # include help files if they are built otherwise exit as they should be included?
-    if not op.exists("build/help"):
-        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
+    if not check_loc_doc():
+        print("Exiting...")
         return
     shutil.copytree(op.join("build", "help"), op.join(destpath, "help"))
     shutil.copytree(op.join("build", "locale"), op.join(destpath, "locale"))
@@ -152,12 +162,8 @@ def package_windows():
         arch = "x86"
     # include locale files if they are built otherwise exit as it will break
     # the localization
-    if not op.exists("build/locale"):
-        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
-        return
-    # include help files if they are built otherwise exit as they should be included?
-    if not op.exists("build/help"):
-        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
+    if not check_loc_doc():
+        print("Exiting...")
         return
     # create version information file from template
     try:
@@ -180,11 +186,11 @@ def package_windows():
             "--windowed",
             "--noconfirm",
             "--icon=images/dgse_logo.ico",
-            "--add-data=build/locale;locale",
-            "--add-data=build/help;help",
+            "--add-data={0};locale".format(LOCALE_DIR),
+            "--add-data={0};help".format(HELP_DIR),
             "--version-file=win_version_info.txt",
             "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(arch),
-            "run.py",
+            ENTRY_SCRIPT,
         ]
     )
     # remove version info file
@@ -200,12 +206,8 @@ def package_windows():
 def package_macos():
     # include locale files if they are built otherwise exit as it will break
     # the localization
-    if not op.exists("build/locale"):
-        print('Locale files are missing. Have you run "build.py --loc"? Exiting...')
-        return
-    # include help files if they are built otherwise exit as they should be included?
-    if not op.exists("build/help"):
-        print('Help files are missing. Have you run "build.py --doc"? Exiting...')
+    if not check_loc_doc():
+        print("Exiting")
         return
     # run pyinstaller from here:
     import PyInstaller.__main__
@@ -217,9 +219,9 @@ def package_macos():
             "--noconfirm",
             "--icon=images/dupeguru.icns",
             "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
-            "--add-data=build/locale:locale",
-            "--add-data=build/help:help",
-            "run.py",
+            "--add-data={0}:locale".format(LOCALE_DIR),
+            "--add-data={0}:help".format(HELP_DIR),
+            ENTRY_SCRIPT,
         ]
     )
 

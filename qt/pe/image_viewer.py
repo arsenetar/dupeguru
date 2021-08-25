@@ -201,16 +201,12 @@ class BaseController(QObject):
         # the SelectedImageViewer widget sometimes ends up being bigger
         # than the ReferenceImageViewer by one pixel, which distorts the
         # scaled down pixmap for the reference, hence we'll reuse its size here.
-        selected_size = self._updateImage(
-            self.selectedPixmap, self.scaledSelectedPixmap, self.selectedViewer, None, same_group
-        )
-        self._updateImage(
-            self.referencePixmap, self.scaledReferencePixmap, self.referenceViewer, selected_size, same_group
-        )
+        self._updateImage(self.selectedPixmap, self.selectedViewer, same_group)
+        self._updateImage(self.referencePixmap, self.referenceViewer, same_group)
         if ignore_update:
             self.selectedViewer.ignore_signal = False
 
-    def _updateImage(self, pixmap, scaledpixmap, viewer, target_size=None, same_group=False):
+    def _updateImage(self, pixmap, viewer, same_group=False):
         # WARNING this is called on every resize event, might need to split
         # into a separate function depending on the implementation used
         if pixmap.isNull():
@@ -340,8 +336,8 @@ class BaseController(QObject):
         self.selectedViewer.resetCenter()
         self.referenceViewer.resetCenter()
 
-        target_size = self._updateImage(self.selectedPixmap, self.scaledSelectedPixmap, self.selectedViewer, None, True)
-        self._updateImage(self.referencePixmap, self.scaledReferencePixmap, self.referenceViewer, target_size, True)
+        self._updateImage(self.selectedPixmap, self.selectedViewer, True)
+        self._updateImage(self.referencePixmap, self.referenceViewer, True)
         self.centerViews()
 
         self.parent.verticalToolBar.buttonZoomIn.setEnabled(False)

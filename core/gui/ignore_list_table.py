@@ -22,7 +22,7 @@ class IgnoreListTable(GUITable):
 
     def __init__(self, ignore_list_dialog):
         GUITable.__init__(self)
-        self.columns = Columns(self)
+        self._columns = Columns(self)
         self.view = None
         self.dialog = ignore_list_dialog
 

@@ -15,7 +15,7 @@ tr = trget("ui")
 class ExcludeListTable(Table):
     """Model for exclude list"""
 
-    COLUMNS = [Column("marked", defaultWidth=15), Column("regex", defaultWidth=230)]
+    COLUMNS = [Column("marked", default_width=15), Column("regex", default_width=230)]
 
     def __init__(self, app, view, **kwargs):
         model = app.model.exclude_list_dialog.exclude_list_table  # pointer to GUITable

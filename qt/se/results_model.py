@@ -10,13 +10,13 @@ from ..results_model import ResultsModel as ResultsModelBase
 
 class ResultsModel(ResultsModelBase):
     COLUMNS = [
-        Column("marked", defaultWidth=30),
-        Column("name", defaultWidth=200),
-        Column("folder_path", defaultWidth=180),
-        Column("size", defaultWidth=60),
-        Column("extension", defaultWidth=40),
-        Column("mtime", defaultWidth=120),
-        Column("percentage", defaultWidth=60),
-        Column("words", defaultWidth=120),
-        Column("dupe_count", defaultWidth=80),
+        Column("marked", default_width=30),
+        Column("name", default_width=200),
+        Column("folder_path", default_width=180),
+        Column("size", default_width=60),
+        Column("extension", default_width=40),
+        Column("mtime", default_width=120),
+        Column("percentage", default_width=60),
+        Column("words", default_width=120),
+        Column("dupe_count", default_width=80),
     ]

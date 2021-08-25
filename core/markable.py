@@ -17,9 +17,11 @@ class Markable:
     # in self.__marked, and is not affected by __inverted. Thus, self.mark while __inverted
     # is True will launch _DidUnmark.
     def _did_mark(self, o):
+        # Implemented in child classes
         pass
 
     def _did_unmark(self, o):
+        # Implemented in child classes
         pass
 
     def _get_markable_count(self):

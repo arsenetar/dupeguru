@@ -64,6 +64,8 @@ class DirectoriesDelegate(QStyledItemDelegate):
 
 
 class DirectoriesModel(TreeModel):
+    MIME_TYPE_FORMAT = "text/uri-list"
+
     def __init__(self, model, view, **kwargs):
         super().__init__(**kwargs)
         self.model = model
@@ -104,9 +106,9 @@ class DirectoriesModel(TreeModel):
 
     def dropMimeData(self, mime_data, action, row, column, parent_index):
         # the data in mimeData is urlencoded **in utf-8**
-        if not mime_data.hasFormat("text/uri-list"):
+        if not mime_data.hasFormat(self.MIME_TYPE_FORMAT):
             return False
-        data = bytes(mime_data.data("text/uri-list")).decode("ascii")
+        data = bytes(mime_data.data(self.MIME_TYPE_FORMAT)).decode("ascii")
         urls = data.split("\r\n")
         paths = [QUrl(url).toLocalFile() for url in urls if url]
         for path in paths:
@@ -129,7 +131,7 @@ class DirectoriesModel(TreeModel):
         return None
 
     def mimeTypes(self):
-        return ["text/uri-list"]
+        return [self.MIME_TYPE_FORMAT]
 
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.EditRole or index.column() != 1:

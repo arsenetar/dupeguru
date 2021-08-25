@@ -264,7 +264,7 @@ class DupeGuru(Broadcaster):
             return None
 
     def _get_export_data(self):
-        columns = [col for col in self.result_table.columns.ordered_columns if col.visible and col.name != "marked"]
+        columns = [col for col in self.result_table._columns.ordered_columns if col.visible and col.name != "marked"]
         colnames = [col.display for col in columns]
         rows = []
         for group_id, group in enumerate(self.results.groups):

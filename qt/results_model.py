@@ -95,7 +95,7 @@ class ResultsModel(Table):
 
     # --- Events
     def appWillSavePrefs(self):
-        self.model.columns.save_columns()
+        self.model._columns.save_columns()
 
     # --- model --> view
     def invalidate_markings(self):
