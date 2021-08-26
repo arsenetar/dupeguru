@@ -71,7 +71,7 @@ def package_debian_distribution(distribution):
     version = "{}~{}".format(app_version, distribution)
     destpath = op.join("build", "dupeguru-{}".format(version))
     srcpath = op.join(destpath, "src")
-    packages = ["hscommon", "core", "qtlib", "qt", "send2trash", "hsaudiotag"]
+    packages = ["hscommon", "core", "qtlib", "qt", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=False)
     os.mkdir(op.join(destpath, "modules"))
     copy_all(op.join("core", "pe", "modules", "*.*"), op.join(destpath, "modules"))
@@ -122,14 +122,7 @@ def package_arch():
     # need to include them).
     print("Packaging for Arch")
     srcpath = op.join("build", "dupeguru-arch")
-    packages = [
-        "hscommon",
-        "core",
-        "qtlib",
-        "qt",
-        "send2trash",
-        "hsaudiotag",
-    ]
+    packages = ["hscommon", "core", "qtlib", "qt", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
@@ -233,7 +226,8 @@ def main():
         return
     print("Packaging dupeGuru with UI qt")
     if sys.platform == "win32":
-        package_windows()
+        package_debian()
+        # package_windows()
     elif sys.platform == "darwin":
         package_macos()
     else:

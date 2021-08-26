@@ -3,7 +3,7 @@ from pathlib import Path
 
 exts = [
     Extension(
-        "_block",
+        "core.pe._block",
         [
             str(Path("core", "pe", "modules", "block.c")),
             str(Path("core", "pe", "modules", "common.c")),
@@ -11,19 +11,16 @@ exts = [
         include_dirs=[str(Path("core", "pe", "modules"))],
     ),
     Extension(
-        "_cache",
+        "core.pe._cache",
         [
             str(Path("core", "pe", "modules", "cache.c")),
             str(Path("core", "pe", "modules", "common.c")),
         ],
         include_dirs=[str(Path("core", "pe", "modules"))],
     ),
-    Extension("_block_qt", [str(Path("qt", "pe", "modules", "block.c"))]),
+    Extension("qt.pe._block_qt", [str(Path("qt", "pe", "modules", "block.c"))]),
 ]
 
 headers = [str(Path("core", "pe", "modules", "common.h"))]
 
-setup(
-    ext_modules=exts,
-    headers=headers,
-)
+setup(ext_modules=exts, headers=headers)

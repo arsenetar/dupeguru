@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import os.path as op
+from pathlib import Path
 import re
 
 from .build import read_changelog_file, filereplace
@@ -48,9 +48,9 @@ def gen(
     if confrepl is None:
         confrepl = {}
     if confpath is None:
-        confpath = op.join(basepath, "conf.tmpl")
+        confpath = Path(basepath, "conf.tmpl")
     if changelogtmpl is None:
-        changelogtmpl = op.join(basepath, "changelog.tmpl")
+        changelogtmpl = Path(basepath, "changelog.tmpl")
     changelog = read_changelog_file(changelogpath)
     tix = tixgen(tixurl)
     rendered_logs = []
@@ -62,13 +62,13 @@ def gen(
         rendered = CHANGELOG_FORMAT.format(version=log["version"], date=log["date_str"], description=description)
         rendered_logs.append(rendered)
     confrepl["version"] = changelog[0]["version"]
-    changelog_out = op.join(basepath, "changelog.rst")
+    changelog_out = Path(basepath, "changelog.rst")
     filereplace(changelogtmpl, changelog_out, changelog="\n".join(rendered_logs))
-    if op.exists(confpath):
-        conf_out = op.join(basepath, "conf.py")
+    if Path(confpath).exists():
+        conf_out = Path(basepath, "conf.py")
         filereplace(confpath, conf_out, **confrepl)
     # Call the sphinx_build function, which is the same as doing sphinx-build from cli
     try:
-        sphinx_build([basepath, destpath])
+        sphinx_build([str(basepath), str(destpath)])
     except SystemExit:
         print("Sphinx called sys.exit(), but we're cancelling it because we don't actually want to exit")
