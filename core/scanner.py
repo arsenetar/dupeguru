@@ -77,15 +77,22 @@ class Scanner:
         self.discarded_file_count = 0
 
     def _getmatches(self, files, j):
-        if self.size_threshold or self.scan_type in {
-            ScanType.CONTENTS,
-            ScanType.FOLDERS,
-        }:
+        if (
+            self.size_threshold
+            or self.large_size_threshold
+            or self.scan_type
+            in {
+                ScanType.CONTENTS,
+                ScanType.FOLDERS,
+            }
+        ):
             j = j.start_subjob([2, 8])
             for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
                 f.size  # pre-read, makes a smoother progress if read here (especially for bundles)
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
+            if self.large_size_threshold:
+                files = [f for f in files if f.size <= self.large_size_threshold]
         if self.scan_type in {ScanType.CONTENTS, ScanType.FOLDERS}:
             return engine.getmatches_by_contents(files, bigsize=self.big_file_size_threshold, j=j)
         else:
@@ -202,5 +209,6 @@ class Scanner:
     scan_type = ScanType.FILENAME
     scanned_tags = {"artist", "title"}
     size_threshold = 0
+    large_size_threshold = 0
     big_file_size_threshold = 0
     word_weighting = False

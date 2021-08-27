@@ -166,6 +166,10 @@ class DupeGuru(QObject):
         self.model.options["match_similar_words"] = self.prefs.match_similar
         threshold = self.prefs.small_file_threshold if self.prefs.ignore_small_files else 0
         self.model.options["size_threshold"] = threshold * 1024  # threshold is in KB. The scanner wants bytes
+        large_threshold = self.prefs.large_file_threshold if self.prefs.ignore_large_files else 0
+        self.model.options["large_size_threshold"] = (
+            large_threshold * 1024 * 1024
+        )  # threshold is in MB. The Scanner wants bytes
         big_file_size_threshold = self.prefs.big_file_size_threshold if self.prefs.big_file_partial_hashes else 0
         self.model.options["big_file_size_threshold"] = (
             big_file_size_threshold

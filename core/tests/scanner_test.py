@@ -56,6 +56,8 @@ def test_default_settings(fake_fileexists):
     eq_(s.mix_file_kind, True)
     eq_(s.word_weighting, False)
     eq_(s.match_similar_words, False)
+    eq_(s.size_threshold, 0)
+    eq_(s.large_size_threshold, 0)
     eq_(s.big_file_size_threshold, 0)
 
 
@@ -140,6 +142,50 @@ def test_content_scan_compare_sizes_first(fake_fileexists):
     s.scan_type = ScanType.CONTENTS
     f = [MyFile("foo", 1), MyFile("bar", 2)]
     eq_(len(s.get_dupe_groups(f)), 0)
+
+
+def test_ignore_file_size(fake_fileexists):
+    s = Scanner()
+    s.scan_type = ScanType.CONTENTS
+    small_size = 10  # 10KB
+    s.size_threshold = 0
+    large_size = 100 * 1024 * 1024  # 100MB
+    s.large_size_threshold = 0
+    f = [
+        no("smallignore1", small_size - 1),
+        no("smallignore2", small_size - 1),
+        no("small1", small_size),
+        no("small2", small_size),
+        no("large1", large_size),
+        no("large2", large_size),
+        no("largeignore1", large_size + 1),
+        no("largeignore2", large_size + 1),
+    ]
+    f[0].md5 = f[0].md5partial = f[0].md5samples = "smallignore"
+    f[1].md5 = f[1].md5partial = f[1].md5samples = "smallignore"
+    f[2].md5 = f[2].md5partial = f[2].md5samples = "small"
+    f[3].md5 = f[3].md5partial = f[3].md5samples = "small"
+    f[4].md5 = f[4].md5partial = f[4].md5samples = "large"
+    f[5].md5 = f[5].md5partial = f[5].md5samples = "large"
+    f[6].md5 = f[6].md5partial = f[6].md5samples = "largeignore"
+    f[7].md5 = f[7].md5partial = f[7].md5samples = "largeignore"
+
+    r = s.get_dupe_groups(f)
+    # No ignores
+    eq_(len(r), 4)
+    # Ignore smaller
+    s.size_threshold = small_size
+    r = s.get_dupe_groups(f)
+    eq_(len(r), 3)
+    # Ignore larger
+    s.size_threshold = 0
+    s.large_size_threshold = large_size
+    r = s.get_dupe_groups(f)
+    eq_(len(r), 3)
+    # Ignore both
+    s.size_threshold = small_size
+    r = s.get_dupe_groups(f)
+    eq_(len(r), 2)
 
 
 def test_big_file_partial_hashes(fake_fileexists):
