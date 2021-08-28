@@ -530,10 +530,6 @@ class TestCaseGetMatches:
 
 
 class TestCaseGetMatchesByContents:
-    def test_dont_compare_empty_files(self):
-        o1, o2 = no(size=0), no(size=0)
-        assert not getmatches_by_contents([o1, o2])
-
     def test_big_file_partial_hashes(self):
         smallsize = 1
         bigsize = 100 * 1024 * 1024  # 100MB

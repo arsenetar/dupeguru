@@ -288,8 +288,7 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     """
     size2files = defaultdict(set)
     for f in files:
-        if f.size:
-            size2files[f.size].add(f)
+        size2files[f.size].add(f)
     del files
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
@@ -300,6 +299,10 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
         for first, second in itertools.combinations(group, 2):
             if first.is_ref and second.is_ref:
                 continue  # Don't spend time comparing two ref pics together.
+            if first.size == 0 and second.size == 0:
+                # skip md5 for zero length files
+                result.append(Match(first, second, 100))
+                continue
             if first.md5partial == second.md5partial:
                 if bigsize > 0 and first.size > bigsize:
                     if first.md5samples == second.md5samples:
