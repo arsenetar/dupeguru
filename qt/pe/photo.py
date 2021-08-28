@@ -29,14 +29,16 @@ class File(PhotoBase):
     def _plat_get_blocks(self, block_count_per_side, orientation):
         image = QImage(str(self.path))
         image = image.convertToFormat(QImage.Format_RGB888)
-        if type(orientation) == str:
-            logging.warning("Orientation for file '%s' was a str '%s', not an int.", str(self.path), orientation)
+        if type(orientation) != int:
+            logging.warning(
+                "Orientation for file '%s' was a %s '%s', not an int.", str(self.path), type(orientation), orientation
+            )
             try:
                 orientation = int(orientation)
             except Exception as e:
                 logging.exception(
-                    "Skipping transformation because could not \
-convert str to int. %s",
+                    "Skipping transformation because could not convert %s to int. %s",
+                    type(orientation),
                     e,
                 )
                 return getblocks(image, block_count_per_side)
