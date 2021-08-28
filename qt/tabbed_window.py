@@ -2,7 +2,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QRect, pyqtSlot, Qt
+from PyQt5.QtCore import QRect, pyqtSlot, Qt, QEvent
 from PyQt5.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -77,8 +77,8 @@ class TabWindow(QMainWindow):
     def restoreGeometry(self):
         if self.app.prefs.mainWindowRect is not None:
             self.setGeometry(self.app.prefs.mainWindowRect)
-        else:
-            move_to_screen_center(self)
+        if self.app.prefs.mainWindowIsMaximized:
+            self.showMaximized()
 
     def _setupMenu(self):
         """Setup the menubar boiler plates which will be filled by the underlying
@@ -211,7 +211,19 @@ class TabWindow(QMainWindow):
         # QTabWidget will assign its geometry after restoring it
         prefs = self.app.prefs
         prefs.mainWindowIsMaximized = self.isMaximized()
-        prefs.mainWindowRect = self.geometry()
+        if not self.isMaximized():
+            prefs.mainWindowRect = self.geometry()
+
+    def showEvent(self, event):
+        if not self.isMaximized():
+            # have to do this here as the frameGeometry is not correct until shown
+            move_to_screen_center(self)
+        super().showEvent(event)
+
+    def changeEvent(self, event):
+        if event.type() == QEvent.Type.WindowStateChange and not self.isMaximized():
+            move_to_screen_center(self)
+        super().changeEvent(event)
 
     def closeEvent(self, close_event):
         # Force closing of our tabbed widgets in reverse order so that the

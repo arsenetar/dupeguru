@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import (
     QApplication,
 )
 
+from qtlib.util import move_to_screen_center
 from hscommon.trans import trget
 
 tr = trget("qtlib")
@@ -70,6 +71,11 @@ class AboutBox(QDialog):
         self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
         self.verticalLayout.addWidget(self.buttonBox)
         self.horizontalLayout.addLayout(self.verticalLayout)
+
+    def showEvent(self, event):
+        # have to do this here as the frameGeometry is not correct until shown
+        move_to_screen_center(self)
+        super().showEvent(event)
 
 
 if __name__ == "__main__":

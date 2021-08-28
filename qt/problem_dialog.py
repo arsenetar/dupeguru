@@ -19,6 +19,7 @@ from PyQt5.QtWidgets import (
     QAbstractItemView,
 )
 
+from qtlib.util import move_to_screen_center
 from hscommon.trans import trget
 from .problem_table import ProblemTable
 
@@ -70,3 +71,8 @@ class ProblemDialog(QDialog):
         self.closeButton.setDefault(True)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
+
+    def showEvent(self, event):
+        # have to do this here as the frameGeometry is not correct until shown
+        move_to_screen_center(self)
+        super().showEvent(event)

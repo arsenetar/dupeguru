@@ -9,6 +9,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDockWidget, QWidget
 
+from qtlib.util import move_to_screen_center
 from .details_table import DetailsModel
 from hscommon.plat import ISLINUX
 
@@ -73,3 +74,9 @@ class DetailsDialog(QDockWidget):
     def refresh(self):
         self.tableModel.beginResetModel()
         self.tableModel.endResetModel()
+
+    def showEvent(self, event):
+        if self._wasDocked is False:
+            # have to do this here as the frameGeometry is not correct until shown
+            move_to_screen_center(self)
+        super().showEvent(event)

@@ -32,7 +32,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-from qtlib.util import horizontal_wrap
+from qtlib.util import horizontal_wrap, move_to_screen_center
 from qtlib.preferences import get_langnames
 from enum import Flag, auto
 
@@ -368,6 +368,11 @@ use the modifier key to drag the floating window around"
             if current_tab is self.page_display:
                 section_to_update = Sections.DISPLAY
             self.resetToDefaults(section_to_update)
+
+    def showEvent(self, event):
+        # have to do this here as the frameGeometry is not correct until shown
+        move_to_screen_center(self)
+        super().showEvent(event)
 
 
 class ColorPickerButton(QPushButton):

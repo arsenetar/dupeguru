@@ -16,9 +16,8 @@ from core.util import executable_folder
 from hscommon.util import first
 
 from PyQt5.QtCore import QStandardPaths
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt5.QtWidgets import (
-    QDesktopWidget,
     QSpacerItem,
     QSizePolicy,
     QAction,
@@ -28,8 +27,19 @@ from PyQt5.QtWidgets import (
 
 def move_to_screen_center(widget):
     frame = widget.frameGeometry()
-    frame.moveCenter(QDesktopWidget().availableGeometry().center())
-    widget.move(frame.topLeft())
+    if QGuiApplication.screenAt(frame.center()) is None:
+        # if center not on any screen use default screen
+        screen = QGuiApplication.screens()[0].availableGeometry()
+    else:
+        screen = QGuiApplication.screenAt(frame.center()).availableGeometry()
+    # moves to center of screen if partially off screen
+    if screen.contains(frame) is False:
+        # make sure the frame is not larger than screen
+        # resize does not seem to take frame size into account (move does)
+        widget.resize(frame.size().boundedTo(screen.size() - (frame.size() - widget.size())))
+        frame = widget.frameGeometry()
+        frame.moveCenter(screen.center())
+        widget.move(frame.topLeft())
 
 
 def vertical_spacer(size=None):
