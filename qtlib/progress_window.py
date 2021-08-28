@@ -7,6 +7,8 @@
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QProgressDialog
 
+from hscommon.trans import tr
+
 
 class ProgressWindow:
     def __init__(self, parent, model):
@@ -27,11 +29,15 @@ class ProgressWindow:
 
     def set_progress(self, last_progress):
         if self._window is not None:
+            if last_progress < 0:
+                self._window.setRange(0, 0)
+            else:
+                self._window.setRange(0, 100)
             self._window.setValue(last_progress)
 
     def show(self):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        self._window = QProgressDialog("", "Cancel", 0, 100, self.parent, flags)
+        self._window = QProgressDialog("", tr("Cancel"), 0, 100, self.parent, flags)
         self._window.setModal(True)
         self._window.setAutoReset(False)
         self._window.setAutoClose(False)

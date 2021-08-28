@@ -11,6 +11,7 @@ import logging
 from hscommon.jobprogress import job
 from hscommon.path import Path
 from hscommon.util import FileOrPath
+from hscommon.trans import tr
 
 from . import fs
 
@@ -182,8 +183,12 @@ class Directories:
         """
         if fileclasses is None:
             fileclasses = [fs.File]
+        file_count = 0
         for path in self._dirs:
             for file in self._get_files(path, fileclasses=fileclasses, j=j):
+                file_count += 1
+                if type(j) != job.NullJob:
+                    j.set_progress(-1, tr("Collected {} files to scan").format(file_count))
                 yield file
 
     def get_folders(self, folderclass=None, j=job.nulljob):
@@ -193,9 +198,13 @@ class Directories:
         """
         if folderclass is None:
             folderclass = fs.Folder
+        folder_count = 0
         for path in self._dirs:
             from_folder = folderclass(path)
             for folder in self._get_folders(from_folder, j):
+                folder_count += 1
+                if type(j) != job.NullJob:
+                    j.set_progress(-1, tr("Collected {} folders to scan").format(folder_count))
                 yield folder
 
     def get_state(self, path):

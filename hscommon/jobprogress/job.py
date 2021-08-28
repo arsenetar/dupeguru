@@ -139,8 +139,6 @@ class Job:
         self._progress = progress
         if self._progress > self._currmax:
             self._progress = self._currmax
-        if self._progress < 0:
-            self._progress = 0
         self._do_update(desc)
 
 
