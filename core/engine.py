@@ -24,6 +24,7 @@ from hscommon.jobprogress import job
 ) = range(3)
 
 JOB_REFRESH_RATE = 100
+PROGRESS_MESSAGE = tr("%d matches found from %d groups")
 
 
 def getwords(s):
@@ -248,10 +249,11 @@ def getmatches(
         match_flags.append(MATCH_SIMILAR_WORDS)
     if no_field_order:
         match_flags.append(NO_FIELD_ORDER)
-    j.start_job(len(word_dict), tr("0 matches found"))
+    j.start_job(len(word_dict), PROGRESS_MESSAGE % (0, 0))
     compared = defaultdict(set)
     result = []
     try:
+        word_count = 0
         # This whole 'popping' thing is there to avoid taking too much memory at the same time.
         while word_dict:
             items = word_dict.popitem()[1]
@@ -266,7 +268,8 @@ def getmatches(
                         result.append(m)
                         if len(result) >= LIMIT:
                             return result
-            j.add_progress(desc=tr("%d matches found") % len(result))
+            word_count += 1
+            j.add_progress(desc=PROGRESS_MESSAGE % (len(result), word_count))
     except MemoryError:
         # This is the place where the memory usage is at its peak during the scan.
         # Just continue the process with an incomplete list of matches.
@@ -291,7 +294,8 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     possible_matches = [files for files in size2files.values() if len(files) > 1]
     del size2files
     result = []
-    j.start_job(len(possible_matches), tr("0 matches found"))
+    j.start_job(len(possible_matches), PROGRESS_MESSAGE % (0, 0))
+    group_count = 0
     for group in possible_matches:
         for first, second in itertools.combinations(group, 2):
             if first.is_ref and second.is_ref:
@@ -303,7 +307,8 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
                 else:
                     if first.md5 == second.md5:
                         result.append(Match(first, second, 100))
-        j.add_progress(desc=tr("%d matches found") % len(result))
+        group_count += 1
+        j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))
     return result
 
 
