@@ -308,11 +308,14 @@ class DupeGuru(Broadcaster):
                 self.problem_dialog.refresh()
                 self.view.show_problem_dialog()
             else:
-                msg = {
-                    JobType.COPY: tr("All marked files were copied successfully."),
-                    JobType.MOVE: tr("All marked files were moved successfully."),
-                    JobType.DELETE: tr("All marked files were successfully sent to Trash."),
-                }[jobid]
+                if jobid == JobType.COPY:
+                    msg = tr("All marked files were copied successfully.")
+                elif jobid == JobType.MOVE:
+                    msg = tr("All marked files were moved successfully.")
+                elif jobid == JobType.DELETE and self.deletion_options.direct:
+                    msg = tr("All marked files were deleted successfully.")
+                else:
+                    msg = tr("All marked files were successfully sent to Trash.")
                 self.view.show_message(msg)
 
     def _job_error(self, jobid, err):
