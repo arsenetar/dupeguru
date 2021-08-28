@@ -1,21 +1,13 @@
-﻿|appname| help
+﻿dupeGuru help
 ===============
 
 .. only:: edition_se
 
-    Цей документ також доступна на `французькому <http://www.hardcoded.net/dupeguru/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru/help/hy/>`__.
-
-.. only:: edition_me
-
-    Цей документ також доступна на `французькому  <http://www.hardcoded.net/dupeguru_me/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru_me/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru_me/help/hy/>`__.
-
-.. only:: edition_pe
-
-    Цей документ також доступна на `французькому <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__, `німецький <http://www.hardcoded.net/dupeguru_pe/help/de/>`__ і `Вірменський <http://www.hardcoded.net/dupeguru_pe/help/hy/>`__.
+    Цей документ також доступна на `французькому <http://dupeguru.voltaicideas.net/help/fr/>`__, `німецький <http://dupeguru.voltaicideas.net/help/de/>`__ і `Вірменський <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_se or edition_me
 
-    |appname| це інструмент для пошуку дублікатів файлів на вашому комп'ютері. Він може сканувати або імен файлів або вмісту. Файл функцій сканування нечіткого відповідності алгоритму, який дозволяє знайти однакові імена файлів, навіть якщо вони не зовсім те ж саме.
+    dupeGuru це інструмент для пошуку дублікатів файлів на вашому комп'ютері. Він може сканувати або імен файлів або вмісту. Файл функцій сканування нечіткого відповідності алгоритму, який дозволяє знайти однакові імена файлів, навіть якщо вони не зовсім те ж саме.
 
 .. only:: edition_pe
 
@@ -23,7 +15,7 @@
 
 Хоча dupeGuru може бути легко використана без документації, читання цього файлу допоможе вам освоїти його. Якщо ви шукаєте керівництво для вашої першої дублювати сканування, ви можете поглянути на: :doc:`Quick Start <quick_start>` 
 
-Це гарна ідея, щоб зберегти |appname| оновлено. Ви можете завантажити останню версію на своєму `homepage`_.
+Це гарна ідея, щоб зберегти dupeGuru оновлено. Ви можете завантажити останню версію на своєму http://dupeguru.voltaicideas.net.
 
 Contents:
 

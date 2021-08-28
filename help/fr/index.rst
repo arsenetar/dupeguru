@@ -1,21 +1,13 @@
-Aide |appname|
+Aide dupeGuru
 ===============
 
 .. only:: edition_se
 
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru/help/hy/>`__.
-
-.. only:: edition_me
-
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_me/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru_me/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru_me/help/hy/>`__.
-
-.. only:: edition_pe
-
-    Ce document est aussi disponible en `anglais <http://www.hardcoded.net/dupeguru_pe/help/en/>`__, en `allemand <http://www.hardcoded.net/dupeguru_pe/help/de/>`__ et en `arménien <http://www.hardcoded.net/dupeguru_pe/help/hy/>`__.
+    Ce document est aussi disponible en `anglais <http://dupeguru.voltaicideas.net/help/en/>`__, en `allemand <http://dupeguru.voltaicideas.net/help/de/>`__ et en `arménien <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_se or edition_me
 
-    |appname| est un outil pour trouver des doublons parmi vos fichiers. Il peut comparer soit les noms de fichiers, soit le contenu. Le comparateur de nom de fichier peut trouver des doublons même si les noms ne sont pas exactement pareils.
+    dupeGuru est un outil pour trouver des doublons parmi vos fichiers. Il peut comparer soit les noms de fichiers, soit le contenu. Le comparateur de nom de fichier peut trouver des doublons même si les noms ne sont pas exactement pareils.
 
 .. only:: edition_pe
 
@@ -23,7 +15,7 @@ Aide |appname|
 
 Bien que dupeGuru puisse être utilisé sans lire l'aide, une telle lecture vous permettra de bien comprendre comment l'application fonctionne. Pour un guide rapide pour une première utilisation, référez vous à la section :doc:`Démarrage Rapide <quick_start>`.
 
-C'est toujours une bonne idée de garder |appname| à jour. Vous pouvez télécharger la dernière version sur sa `page web`_.
+C'est toujours une bonne idée de garder dupeGuru à jour. Vous pouvez télécharger la dernière version sur sa http://dupeguru.voltaicideas.net.
 
 Contents:
 

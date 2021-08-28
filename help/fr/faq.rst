@@ -3,7 +3,7 @@ Foire aux questions
 
 .. contents::
 
-Qu'est-ce que |appname|?
+Qu'est-ce que dupeGuru?
 ------------------------
 
 .. only:: edition_se

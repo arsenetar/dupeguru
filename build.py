@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 from optparse import OptionParser
 import shutil
+from multiprocessing import Pool
 
 from setuptools import sandbox
 from hscommon import sphinxgen
@@ -28,7 +29,8 @@ def parse_args():
         dest="clean",
         help="Clean build folder before building",
     )
-    parser.add_option("--doc", action="store_true", dest="doc", help="Build only the help file")
+    parser.add_option("--doc", action="store_true", dest="doc", help="Build only the help file (en)")
+    parser.add_option("--alldoc", action="store_true", dest="all_doc", help="Build only the help file in all languages")
     parser.add_option("--loc", action="store_true", dest="loc", help="Build only localization")
     parser.add_option(
         "--updatepot",
@@ -58,16 +60,16 @@ def parse_args():
     return options
 
 
-def build_help():
-    print("Generating Help")
+def build_one_help(language):
+    print("Generating Help in {}".format(language))
     current_path = Path(".").absolute()
-    help_basepath = current_path.joinpath("help", "en")
-    help_destpath = current_path.joinpath("build", "help")
     changelog_path = current_path.joinpath("help", "changelog")
     tixurl = "https://github.com/arsenetar/dupeguru/issues/{}"
-    confrepl = {"language": "en"}
     changelogtmpl = current_path.joinpath("help", "changelog.tmpl")
     conftmpl = current_path.joinpath("help", "conf.tmpl")
+    help_basepath = current_path.joinpath("help", language)
+    help_destpath = current_path.joinpath("build", "help", language)
+    confrepl = {"language": language}
     sphinxgen.gen(
         help_basepath,
         help_destpath,
@@ -77,6 +79,13 @@ def build_help():
         conftmpl,
         changelogtmpl,
     )
+
+
+def build_help():
+    languages = ["en", "de", "fr", "hy", "ru", "uk"]
+    # Running with Pools as for some reason sphinx seems to cross contaminate the output otherwise
+    with Pool(len(languages)) as p:
+        p.map(build_one_help, languages)
 
 
 def build_qt_localizations():
@@ -149,6 +158,8 @@ def main():
     if not Path("build").exists():
         Path("build").mkdir()
     if options.doc:
+        build_one_help("en")
+    elif options.all_doc:
         build_help()
     elif options.loc:
         build_localizations()

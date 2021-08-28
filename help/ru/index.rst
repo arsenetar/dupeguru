@@ -1,21 +1,11 @@
-﻿|appname| help
+﻿dupeGuru help
 ===============
 
-.. only:: edition_se
-
-    Этот документ также доступна на `французском <http://www.hardcoded.net/dupeguru/help/fr/>`__, `немецком <http://www.hardcoded.net/dupeguru/help/de/>`__ и `армянский <http://www.hardcoded.net/dupeguru/help/hy/>`__.
-
-.. only:: edition_me
-
-    Этот документ также доступна на `французском <http://www.hardcoded.net/dupeguru_me/help/fr/>`__, `немецкий <http://www.hardcoded.net/dupeguru_me/help/de/>`__ и `армянский <http://www.hardcoded.net/dupeguru_me/help/hy/>`__.
-
-.. only:: edition_pe
-
-    Этот документ также доступна на `французском <http://www.hardcoded.net/dupeguru_pe/help/fr/>`__, `немецкий <http://www.hardcoded.net/dupeguru_pe/help/de/>`__ и `армянский <http://www.hardcoded.net/dupeguru_pe/help/hy/>`__.
+Этот документ также доступна на `французском <http://dupeguru.voltaicideas.net/help/fr/>`__, `немецком <http://dupeguru.voltaicideas.net/help/de/>`__ и `армянский <http://dupeguru.voltaicideas.net/help/hy/>`__.
 
 .. only:: edition_se or edition_me
 
-    |appname| есть инструмент для поиска дубликатов файлов на вашем компьютере. Он может сканировать либо имен файлов или содержимого.Имя файла функций сканирования нечеткого соответствия алгоритма, который позволяет найти одинаковые имена файлов, даже если они не совсем то же самое.
+    dupeGuru есть инструмент для поиска дубликатов файлов на вашем компьютере. Он может сканировать либо имен файлов или содержимого.Имя файла функций сканирования нечеткого соответствия алгоритма, который позволяет найти одинаковые имена файлов, даже если они не совсем то же самое.
 
 .. only:: edition_pe
 
@@ -23,7 +13,7 @@
 
 Хотя dupeGuru может быть легко использована без документации, чтение этого файла поможет вам освоить его. Если вы ищете руководство для вашей первой дублировать сканирования, вы можете взглянуть на раздел :doc:`Быстрый <quick_start>` Начало.
 
-Это хорошая идея, чтобы сохранить |appname| обновлен. Вы можете скачать последнюю версию на своей `homepage`_.
+Это хорошая идея, чтобы сохранить dupeGuru обновлен. Вы можете скачать последнюю версию на своей http://dupeguru.voltaicideas.net.
 Содержание:
 
 .. toctree::

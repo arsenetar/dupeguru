@@ -1,7 +1,7 @@
 Häufig gestellte Fragen
 ==========================
 
-.. topic:: What is |appname|?
+.. topic:: What is dupeGuru?
 
     .. only:: edition_se
 
@@ -25,7 +25,7 @@ Häufig gestellte Fragen
 
 .. topic:: Was sind die Demo-Einschränkungen von dupeGuru?
 
-    Keine, |appname| ist `Fairware <http://open.hardcoded.net/about/>`_.
+    Keine, dupeGuru ist `Fairware <http://open.hardcoded.net/about/>`_.
 
 .. topic:: Die Markierungsbox einer Datei, die ich löschen möchte, ist deaktiviert. Was muss ich tun?
 

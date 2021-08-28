@@ -226,8 +226,7 @@ def main():
         return
     print("Packaging dupeGuru with UI qt")
     if sys.platform == "win32":
-        package_debian()
-        # package_windows()
+        package_windows()
     elif sys.platform == "darwin":
         package_macos()
     else:

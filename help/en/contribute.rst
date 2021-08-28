@@ -83,9 +83,9 @@ dupeGuru. For more information about how to do that, you can refer to the `trans
 
 .. _been open source: https://www.hardcoded.net/articles/free-as-in-speech-fair-as-in-trade
 .. _let me know: mailto:hsoft@hardcoded.net
-.. _Source code repository: https://github.com/hsoft/dupeguru
-.. _Issue Tracker: https://github.com/hsoft/dupeguru/issues
-.. _Issue labels meaning: https://github.com/hsoft/dupeguru/wiki/issue-labels
+.. _Source code repository: https://github.com/arsenetar/dupeguru
+.. _Issue Tracker: https://github.com/hsoft/arsenetar/issues
+.. _Issue labels meaning: https://github.com/hsoft/arsenetar/wiki/issue-labels
 .. _Sphinx: http://sphinx-doc.org/
 .. _reST: http://en.wikipedia.org/wiki/ReStructuredText
-.. _translator guide: https://github.com/hsoft/dupeguru/wiki/Translator-Guide
+.. _translator guide: https://github.com/hsoft/arsenetar/wiki/Translator-Guide

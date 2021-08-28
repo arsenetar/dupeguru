@@ -151,8 +151,6 @@ delete files" option that is offered to you when you activate Send to Trash. Thi
 files to the Trash, but delete them immediately. In some cases, for example on network storage
 (NAS), this has been known to work when normal deletion didn't.
 
-If this fail, `HS forums`_ might be of some help.
-
 Why is Picture mode's contents scan so slow?
 --------------------------------------------
 
@@ -178,7 +176,6 @@ Preferences are stored elsewhere:
 * Linux: ``~/.config/Hardcoded Software/dupeGuru.conf``
 * Mac OS X: In the built-in ``defaults`` system, as ``com.hardcoded-software.dupeguru``
 
-.. _HS forums: https://forum.hardcoded.net/
-.. _Github: https://github.com/hsoft/dupeguru
-.. _open an issue: https://github.com/hsoft/dupeguru/wiki/issue-labels
+.. _Github: https://github.com/arsenetar/dupeguru
+.. _open an issue: https://github.com/arsenetar/dupeguru/wiki/issue-labels
 

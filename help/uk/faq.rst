@@ -1,7 +1,7 @@
 ﻿Часті питання
 ==========================
 
-.. topic:: Що таке |appname|?
+.. topic:: Що таке dupeGuru?
 
     .. only:: edition_se
 
