@@ -535,21 +535,21 @@ class DupeGuru(Broadcaster):
             return
         if not self.selected_dupes:
             return
-        dupe = self.selected_dupes[0]
-        group = self.results.get_group_of_duplicate(dupe)
-        ref = group.ref
-        cmd = cmd.replace("%d", str(dupe.path))
-        cmd = cmd.replace("%r", str(ref.path))
-        match = re.match(r'"([^"]+)"(.*)', cmd)
-        if match is not None:
-            # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
-            # executable paths with spaces in it, *even* when they're enclosed in "". So this is
-            # a workaround to make the damn thing work.
-            exepath, args = match.groups()
-            path, exename = op.split(exepath)
-            subprocess.Popen(exename + args, shell=True, cwd=path)
-        else:
-            subprocess.Popen(cmd, shell=True)
+        dupes = self.selected_dupes
+        refs = [self.results.get_group_of_duplicate(dupe).ref for dupe in dupes]
+        for dupe, ref in zip(dupes, refs):
+            dupe_cmd = cmd.replace("%d", str(dupe.path))
+            dupe_cmd = dupe_cmd.replace("%r", str(ref.path))
+            match = re.match(r'"([^"]+)"(.*)', dupe_cmd)
+            if match is not None:
+                # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
+                # executable paths with spaces in it, *even* when they're enclosed in "". So this is
+                # a workaround to make the damn thing work.
+                exepath, args = match.groups()
+                path, exename = op.split(exepath)
+                subprocess.Popen(exename + args, shell=True, cwd=path)
+            else:
+                subprocess.Popen(dupe_cmd, shell=True)
 
     def load(self):
         """Load directory selection and ignore list from files in appdata.
