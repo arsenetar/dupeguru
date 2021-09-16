@@ -923,3 +923,7 @@ msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
 msgstr ""
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr ""

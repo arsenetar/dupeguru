@@ -4,27 +4,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 
-#: qtlib\about_box.py:37
+#: qtlib\about_box.py:38
 msgid "About {}"
 msgstr ""
 
-#: qtlib\about_box.py:57
+#: qtlib\about_box.py:58
 msgid "Version {}"
 msgstr ""
 
-#: qtlib\about_box.py:61
+#: qtlib\about_box.py:62
 msgid "Licensed under GPLv3"
 msgstr ""
 
-#: qtlib\error_report_dialog.py:47
+#: qtlib\error_report_dialog.py:50
 msgid "Error Report"
 msgstr ""
 
-#: qtlib\error_report_dialog.py:51
+#: qtlib\error_report_dialog.py:54
 msgid "Something went wrong. How about reporting the error?"
 msgstr ""
 
-#: qtlib\error_report_dialog.py:57
+#: qtlib\error_report_dialog.py:60
 msgid ""
 "Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
@@ -35,11 +35,11 @@ msgid ""
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
 
-#: qtlib\error_report_dialog.py:73
+#: qtlib\error_report_dialog.py:76
 msgid "Close"
 msgstr ""
 
-#: qtlib\error_report_dialog.py:77
+#: qtlib\error_report_dialog.py:80
 msgid "Go to Github"
 msgstr ""
 
@@ -113,6 +113,10 @@ msgstr ""
 
 #: qtlib\preferences.py:41
 msgid "Chinese (Simplified)"
+msgstr ""
+
+#: qtlib\progress_window.py:40
+msgid "Cancel"
 msgstr ""
 
 #: qtlib\recent.py:54

@@ -48,76 +48,84 @@ msgstr ""
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:313
+#: core\app.py:314
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:314
+#: core\app.py:316
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:318
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:320
+#: core\app.py:323
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:376
+#: core\app.py:379
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:378
+#: core\app.py:381
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:386
+#: core\app.py:389
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:460
+#: core\app.py:463
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:462
+#: core\app.py:465
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:501
+#: core\app.py:504
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:507 core\app.py:761 core\app.py:771
+#: core\app.py:510 core\app.py:762 core\app.py:772
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:530
+#: core\app.py:533
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:688 core\app.py:700
+#: core\app.py:689 core\app.py:701
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:736
+#: core\app.py:737
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:780
+#: core\app.py:781
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:793
+#: core\app.py:794
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:840
+#: core\app.py:841
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\engine.py:251 core\engine.py:294
-msgid "0 matches found"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
 msgstr ""
 
-#: core\engine.py:269 core\engine.py:306
-msgid "%d matches found"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
+
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
 msgstr ""
 
 #: core\gui\deletion_options.py:71
@@ -220,15 +228,15 @@ msgstr ""
 msgid " filter: %s"
 msgstr ""
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr ""
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr ""
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr ""
 
