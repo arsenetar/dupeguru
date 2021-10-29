@@ -5,11 +5,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os
-import hashlib
-import sqlite3
 from xml.etree import ElementTree as ET
 import logging
-from threading import Lock
 
 from hscommon.jobprogress import job
 from hscommon.path import Path
@@ -47,117 +44,6 @@ class InvalidPathError(Exception):
     """The path being added is invalid"""
 
 
-def calc_md5(path):
-    # type: (Path, ) -> bytes
-
-    with path.open("rb") as fp:
-        md5 = hashlib.md5()
-        # The goal here is to not run out of memory on really big files. However, the chunk
-        # size has to be large enough so that the python loop isn't too costly in terms of
-        # CPU.
-        CHUNK_SIZE = 1024 * 1024  # 1 mb
-        filedata = fp.read(CHUNK_SIZE)
-        while filedata:
-            md5.update(filedata)
-            filedata = fp.read(CHUNK_SIZE)
-        return md5.digest()
-
-
-def calc_md5partial(path):
-    # type: (Path, ) -> bytes
-
-    # This offset is where we should start reading the file to get a partial md5
-    # For audio file, it should be where audio data starts
-    offset, size = (0x4000, 0x4000)
-
-    with path.open("rb") as fp:
-        fp.seek(offset)
-        partialdata = fp.read(size)
-        return hashlib.md5(partialdata).digest()
-
-
-class FilesDB:
-
-    create_table_query = "CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER, entry_dt DATETIME, md5 BLOB, md5partial BLOB)"
-    select_query = "SELECT md5, md5partial FROM files WHERE path=? AND size=? and mtime_ns=?"
-    insert_query = "REPLACE INTO files (path, size, mtime_ns, entry_dt, md5, md5partial) VALUES (?, ?, ?, datetime('now'), ?, ?)"
-
-    def __init__(self, path):
-        # type: (str, ) -> None
-
-        self.conn = sqlite3.connect(path, check_same_thread=False)
-        self.cur = self.conn.cursor()
-        self.setup()
-        self.lock = Lock()
-
-    def setup(self):
-        self.cur.execute(self.create_table_query)
-
-    def get_md5(self, path):
-        # type: (Path, ) -> bytes
-
-        stat = path.stat()
-        size = stat.st_size
-        mtime_ns = stat.st_mtime_ns
-
-        with self.lock:
-            self.cur.execute(self.select_query, (str(path), size, mtime_ns))
-            result = self.cur.fetchone()
-
-            md5 = None
-            md5partial = None
-
-            if result:
-                md5, md5partial = result
-                if md5:
-                    return md5
-
-            md5 = calc_md5(path)
-            self.cur.execute(self.insert_query, (str(path), size, mtime_ns, md5, md5partial))
-            return md5
-
-    def get_md5partial(self, path):
-        # type: (Path, ) -> bytes
-
-        stat = path.stat()
-        size = stat.st_size
-        mtime_ns = stat.st_mtime_ns
-
-        with self.lock:
-            self.cur.execute(self.select_query, (str(path), size, mtime_ns))
-            result = self.cur.fetchone()
-
-            md5 = None
-            md5partial = None
-
-            if result:
-                md5, md5partial = result
-                if md5partial:
-                    return md5partial
-
-            md5partial = calc_md5partial(path)
-            self.cur.execute(self.insert_query, (str(path), size, mtime_ns, md5, md5partial))
-            return md5partial
-
-    def close(self):
-        logging.debug("Closing FilesDB")
-
-        self.conn.commit()
-        self.conn.close()
-
-
-class FilesDBDummy:
-
-    def get_md5(self, path):
-        return calc_md5(path)
-
-    def get_md5partial(self, path):
-        return calc_md5partial(path)
-
-    def close(self):
-        pass
-
-
 class Directories:
     """Holds user folder selection.
 
@@ -169,15 +55,11 @@ class Directories:
     """
 
     # ---Override
-    def __init__(self, exclude_list=None, hash_cache_file=None):
+    def __init__(self, exclude_list=None):
         self._dirs = []
         # {path: state}
         self.states = {}
         self._exclude_list = exclude_list
-        if hash_cache_file:
-            self.filesdb = FilesDB(hash_cache_file)
-        else:
-            self.filesdb = FilesDBDummy()
 
     def __contains__(self, path):
         for p in self._dirs:
@@ -221,19 +103,19 @@ class Directories:
                 if state != DirectoryState.EXCLUDED:
                     # Old logic
                     if self._exclude_list is None or not self._exclude_list.mark_count:
-                        found_files = [fs.get_file(root_path + f, self.filesdb, fileclasses=fileclasses) for f in files]
+                        found_files = [fs.get_file(root_path + f, fileclasses=fileclasses) for f in files]
                     else:
                         found_files = []
                         # print(f"len of files: {len(files)} {files}")
                         for f in files:
                             if not self._exclude_list.is_excluded(root, f):
-                                found_files.append(fs.get_file(root_path + f, self.filesdb, fileclasses=fileclasses))
+                                found_files.append(fs.get_file(root_path + f, fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
                     # OS X... In other situations, this forloop will do nothing.
                     for d in dirs[:]:
-                        f = fs.get_file(root_path + d, self.filesdb, fileclasses=fileclasses)
+                        f = fs.get_file(root_path + d, fileclasses=fileclasses)
                         if f is not None:
                             found_files.append(f)
                             dirs.remove(d)
@@ -318,7 +200,7 @@ class Directories:
             folderclass = fs.Folder
         folder_count = 0
         for path in self._dirs:
-            from_folder = folderclass(path, self.filesdb)
+            from_folder = folderclass(path)
             for folder in self._get_folders(from_folder, j):
                 folder_count += 1
                 if type(j) != job.NullJob:
@@ -405,7 +287,7 @@ class Directories:
             tree.write(fp, encoding="utf-8")
 
     def save_hashes(self):
-        self.filesdb.close()
+        fs.filesdb.commit()
 
     def set_state(self, path, state):
         """Set the state of folder at ``path``.

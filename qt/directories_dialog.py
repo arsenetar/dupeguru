@@ -126,7 +126,7 @@ class DirectoriesDialog(QMainWindow):
         self.menuFile.addAction(self.actionLoadResults)
         self.menuFile.addAction(self.menuLoadRecent.menuAction())
         self.menuFile.addSeparator()
-        self.menuFile.addAction(self.app.actionClearPictureCache)
+        self.menuFile.addAction(self.app.actionClearCache)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionLoadDirectories)
         self.menuFile.addAction(self.actionSaveDirectories)
