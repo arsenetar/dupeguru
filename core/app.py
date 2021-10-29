@@ -138,7 +138,7 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        hash_cache_file = op.join(self.appdata, "hash.cache")
+        hash_cache_file = op.join(self.appdata, "hash_cache.db")
         self.directories = directories.Directories(self.exclude_list, hash_cache_file)
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
