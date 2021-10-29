@@ -286,9 +286,6 @@ class Directories:
             tree = ET.ElementTree(root)
             tree.write(fp, encoding="utf-8")
 
-    def save_hashes(self):
-        fs.filesdb.commit()
-
     def set_state(self, path, state):
         """Set the state of folder at ``path``.
 

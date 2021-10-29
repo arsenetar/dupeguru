@@ -295,7 +295,7 @@ class DupeGuru(Broadcaster):
     def _job_completed(self, jobid):
         if jobid == JobType.SCAN:
             self._results_changed()
-            self.directories.save_hashes()
+            fs.filesdb.commit()
             if not self.results.groups:
                 self.view.show_message(tr("No duplicates found."))
             else:
