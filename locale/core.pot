@@ -36,83 +36,83 @@ msgstr ""
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:287
+#: core\app.py:289
 msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:297
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:312
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:314
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:316
+#: core\app.py:319
 msgid "All marked files were deleted successfully."
 msgstr ""
 
-#: core\app.py:318
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:323
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:379
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:381
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:389
+#: core\app.py:392
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:463
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:465
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:504
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:510 core\app.py:762 core\app.py:772
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:533
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:689 core\app.py:701
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:737
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:781
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:794
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:841
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr ""
 

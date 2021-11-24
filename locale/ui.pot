@@ -927,3 +927,17 @@ msgstr ""
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
 msgstr ""
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
