@@ -7,6 +7,7 @@ __pycache__
 .lock-waf*
 .tox
 /tags
+*.eggs
 
 build
 dist

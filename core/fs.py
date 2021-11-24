@@ -14,7 +14,11 @@
 import hashlib
 from math import floor
 import logging
+import sqlite3
+from threading import Lock
+from typing import Any
 
+from hscommon.path import Path
 from hscommon.util import nonone, get_file_ext
 
 __all__ = [
@@ -78,6 +82,82 @@ class OperationError(FSError):
     cls_message = "Operation on '{name}' failed."
 
 
+class FilesDB:
+
+    create_table_query = "CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER, entry_dt DATETIME, md5 BLOB, md5partial BLOB)"
+    drop_table_query = "DROP TABLE files;"
+    select_query = "SELECT {key} FROM files WHERE path=:path AND size=:size and mtime_ns=:mtime_ns"
+    insert_query = """
+        INSERT INTO files (path, size, mtime_ns, entry_dt, {key}) VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
+        ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
+    """
+
+    def __init__(self):
+        self.conn = None
+        self.cur = None
+        self.lock = None
+
+    def connect(self, path):
+        # type: (str, ) -> None
+
+        self.conn = sqlite3.connect(path, check_same_thread=False)
+        self.cur = self.conn.cursor()
+        self.cur.execute(self.create_table_query)
+        self.lock = Lock()
+
+    def clear(self):
+        # type: () -> None
+
+        with self.lock:
+            self.cur.execute(self.drop_table_query)
+            self.cur.execute(self.create_table_query)
+
+    def get(self, path, key):
+        # type: (Path, str) -> bytes
+
+        stat = path.stat()
+        size = stat.st_size
+        mtime_ns = stat.st_mtime_ns
+
+        with self.lock:
+            self.cur.execute(self.select_query.format(key=key), {"path": str(path), "size": size, "mtime_ns": mtime_ns})
+            result = self.cur.fetchone()
+
+        if result:
+            return result[0]
+
+        return None
+
+    def put(self, path, key, value):
+        # type: (Path, str, Any) -> None
+
+        stat = path.stat()
+        size = stat.st_size
+        mtime_ns = stat.st_mtime_ns
+
+        with self.lock:
+            self.cur.execute(
+                self.insert_query.format(key=key),
+                {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
+            )
+
+    def commit(self):
+        # type: () -> None
+
+        with self.lock:
+            self.conn.commit()
+
+    def close(self):
+        # type: () -> None
+
+        with self.lock:
+            self.cur.close()
+            self.conn.close()
+
+
+filesdb = FilesDB()  # Singleton
+
+
 class File:
     """Represents a file and holds metadata to be used for scanning."""
 
@@ -107,10 +187,32 @@ class File:
                 result = self.INITIAL_INFO[attrname]
         return result
 
-    # This offset is where we should start reading the file to get a partial md5
-    # For audio file, it should be where audio data starts
-    def _get_md5partial_offset_and_size(self):
-        return (0x4000, 0x4000)  # 16Kb
+    def _calc_md5(self):
+        # type: () -> bytes
+
+        with self.path.open("rb") as fp:
+            md5 = hashlib.md5()
+            # The goal here is to not run out of memory on really big files. However, the chunk
+            # size has to be large enough so that the python loop isn't too costly in terms of
+            # CPU.
+            CHUNK_SIZE = 1024 * 1024  # 1 mb
+            filedata = fp.read(CHUNK_SIZE)
+            while filedata:
+                md5.update(filedata)
+                filedata = fp.read(CHUNK_SIZE)
+            return md5.digest()
+
+    def _calc_md5partial(self):
+        # type: () -> bytes
+
+        # This offset is where we should start reading the file to get a partial md5
+        # For audio file, it should be where audio data starts
+        offset, size = (0x4000, 0x4000)
+
+        with self.path.open("rb") as fp:
+            fp.seek(offset)
+            partialdata = fp.read(size)
+            return hashlib.md5(partialdata).digest()
 
     def _read_info(self, field):
         # print(f"_read_info({field}) for {self}")
@@ -120,28 +222,20 @@ class File:
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == "md5partial":
             try:
-                with self.path.open("rb") as fp:
-                    offset, size = self._get_md5partial_offset_and_size()
-                    fp.seek(offset)
-                    partialdata = fp.read(size)
-                    md5 = hashlib.md5(partialdata)
-                    self.md5partial = md5.digest()
-            except Exception:
-                pass
+                self.md5partial = filesdb.get(self.path, "md5partial")
+                if self.md5partial is None:
+                    self.md5partial = self._calc_md5partial()
+                    filesdb.put(self.path, "md5partial", self.md5partial)
+            except Exception as e:
+                logging.warning("Couldn't get md5partial for %s: %s", self.path, e)
         elif field == "md5":
             try:
-                with self.path.open("rb") as fp:
-                    md5 = hashlib.md5()
-                    filedata = fp.read(CHUNK_SIZE)
-                    while filedata:
-                        md5.update(filedata)
-                        filedata = fp.read(CHUNK_SIZE)
-                    # FIXME For python 3.8 and later
-                    # while filedata := fp.read(CHUNK_SIZE):
-                    #     md5.update(filedata)
-                    self.md5 = md5.digest()
-            except Exception:
-                pass
+                self.md5 = filesdb.get(self.path, "md5")
+                if self.md5 is None:
+                    self.md5 = self._calc_md5()
+                    filesdb.put(self.path, "md5", self.md5)
+            except Exception as e:
+                logging.warning("Couldn't get md5 for %s: %s", self.path, e)
         elif field == "md5samples":
             try:
                 with self.path.open("rb") as fp:

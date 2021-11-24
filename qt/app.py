@@ -129,11 +129,11 @@ class DupeGuru(QObject):
                 self.showDirectoriesWindow,
             ),
             (
-                "actionClearPictureCache",
+                "actionClearCache",
                 "Ctrl+Shift+P",
                 "",
-                tr("Clear Picture Cache"),
-                self.clearPictureCacheTriggered,
+                tr("Clear Cache"),
+                self.clearCacheTriggered,
             ),
             (
                 "actionExcludeList",
@@ -258,6 +258,7 @@ class DupeGuru(QObject):
         self.willSavePrefs.emit()
         self.prefs.save()
         self.model.save()
+        self.model.close()
         # Workaround for #857, hide() or close().
         if self.details_dialog is not None:
             self.details_dialog.close()
@@ -288,13 +289,14 @@ class DupeGuru(QObject):
                 self.model.load_from(results)
                 self.recentResults.insertItem(results)
 
-    def clearPictureCacheTriggered(self):
-        title = tr("Clear Picture Cache")
-        msg = tr("Do you really want to remove all your cached picture analysis?")
+    def clearCacheTriggered(self):
+        title = tr("Clear Cache")
+        msg = tr("Do you really want to clear the cache? This will remove all cached file hashes and picture analysis.")
         if self.confirm(title, msg, QMessageBox.No):
             self.model.clear_picture_cache()
+            self.model.clear_hash_cache()
             active = QApplication.activeWindow()
-            QMessageBox.information(active, title, tr("Picture cache cleared."))
+            QMessageBox.information(active, title, tr("Cache cleared."))
 
     def ignoreListTriggered(self):
         if self.use_tabs:

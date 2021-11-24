@@ -138,6 +138,8 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
+        hash_cache_file = op.join(self.appdata, "hash_cache.db")
+        fs.filesdb.connect(hash_cache_file)
         self.directories = directories.Directories(self.exclude_list)
         self.results = results.Results(self)
         self.ignore_list = IgnoreList()
@@ -293,6 +295,7 @@ class DupeGuru(Broadcaster):
     def _job_completed(self, jobid):
         if jobid == JobType.SCAN:
             self._results_changed()
+            fs.filesdb.commit()
             if not self.results.groups:
                 self.view.show_message(tr("No duplicates found."))
             else:
@@ -419,6 +422,9 @@ class DupeGuru(Broadcaster):
             os.remove(self._get_picture_cache_path())
         except FileNotFoundError:
             pass  # we don't care
+
+    def clear_hash_cache(self):
+        fs.filesdb.clear()
 
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
@@ -750,6 +756,9 @@ class DupeGuru(Broadcaster):
         p = op.join(self.appdata, "exclude_list.xml")
         self.exclude_list.save_to_xml(p)
         self.notify("save_session")
+
+    def close(self):
+        fs.filesdb.close()
 
     def save_as(self, filename):
         """Save results in ``filename``.
