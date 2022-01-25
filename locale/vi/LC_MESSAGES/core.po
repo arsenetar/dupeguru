@@ -49,7 +49,7 @@ msgstr "Đang sao chép"
 msgid "Sending to Trash"
 msgstr "Đang gửi vào thùng rác"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -57,36 +57,40 @@ msgstr ""
 "Hiện đã có một tiến trình đang được tiến hành. Bạn không thể bắt đầu một "
 "phần khác. Hãy đợi trong vài giây, và sau đó thử lại lần nữa."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Không tìm thấy thành phần trùng nhau."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Tất cả tập tin được đánh dấu đã được sao chép thành công."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Tất cả các tập tin được đánh dấu đã được di chuyển thành công."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tất cả các tập tin được đánh dấu đã được gửi đến Thùng Rác thành công."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Không thể tải tệp: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' đã tồn tại trong danh sách."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' không tồn tại."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -94,63 +98,67 @@ msgstr ""
 "Các phần được chọn %d khớp với nhau sẽ được bỏ qua trong các lần quét sau. "
 "Tiếp tục?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr ""
 "Vui lòng chọn một thư mục mà bạn muốn sao chép các tệp đã đánh dấu vào"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr ""
 "Vui lòng chọn một thư mục mà bạn muốn di chuyển các tệp đã đánh dấu đến"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Không thể ghi vào tệp: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Bạn vẫn chưa chỉnh sửa phần thiết lập dòng lệnh. Hãy sử dụng tính năng này "
 "trong phần tùy biến của bạn."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Tiếp tục?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Đang thu thập các tập tin để quét"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d bị bỏ qua)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "đã tìm thấy 0 phần khớp nhau"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "đã tìm thấy %d phần khớp nhau"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Bạn sắp sửa gửi {} (các)tập tin đến Thùng Rác."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Biểu thức chính quy"
 
@@ -182,15 +190,15 @@ msgstr "Nội dung"
 msgid "Analyzed %d/%d pictures"
 msgstr "Đã phân tích %d/%d hình ảnh"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "Đã thể thiện %d/%d các phần khớp nhau"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Đang chuẩn bị phần khớp nhau"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "Đã xác nhận %d/%d phần khớp nhau"
 
@@ -238,23 +246,23 @@ msgstr "Mới nhất"
 msgid "Oldest"
 msgstr "Cũ nhất"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) phần trùng nhau đã được đánh dấu."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr " bộ lọc: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Đọc kích thước của các tập tin %d/%d"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Đọc thông tin chi tiết của %d/%d tập tin"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Sắp xong! Loay hoay với kết quả..."
 

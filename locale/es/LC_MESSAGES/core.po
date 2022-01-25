@@ -47,7 +47,7 @@ msgstr "Copiando"
 msgid "Sending to Trash"
 msgstr "Enviando a la Papelera"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -55,36 +55,40 @@ msgstr ""
 "Una acción previa sigue ejecutándose. No puede abrir una nueva todavía. "
 "Espere unos segundos y vuelva a intentarlo."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "No se han encontrado duplicados."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr ""
 "Todos los ficheros seleccionados han sido copiados satisfactoriamente."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Todos los ficheros seleccionados se han movidos satisfactoriamente."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Todo los ficheros marcados se han enviado a la papelera exitosamente."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "No se pudo cargar el archivo: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' ya está en la lista."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' no existe."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -92,59 +96,63 @@ msgstr ""
 "Todas las %d coincidencias seleccionadas van a ser ignoradas en las "
 "subsiguientes exploraciones. ¿Continuar?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "Seleccione un directorio donde desee copiar los archivos marcados"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "Seleccione un directorio al que desee mover los archivos marcados"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Seleccionar un destino para el CSV seleccionado"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "No se pudo escribir en el archivo: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "No hay comandos configurados. Establézcalos en sus preferencias."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Está a punto de eliminar %d ficheros de resultados. ¿Continuar?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} grupos de duplicados han sido cambiados por la re-priorización"
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Las carpetas seleccionadas no contienen ficheros para explorar."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Recopilando ficheros a explorar"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d descartados)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "0 coincidencias"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "%d coincidencias encontradas"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Enviando {} fichero(s) a la Papelera"
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Expresiones regulares"
 
@@ -177,15 +185,15 @@ msgstr "Contenido"
 msgid "Analyzed %d/%d pictures"
 msgstr "Analizadas %d/%d imágenes"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "Realizado %d/%d trozos coincidentes"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Preparando para coincidencias"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "Verificadas %d/%d coincidencias"
 
@@ -233,23 +241,23 @@ msgstr "El más nuevo"
 msgid "Oldest"
 msgstr "El más antiguo"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) duplicados marcados."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr "filtro: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Tamaño de lectura de %d/%d ficheros"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Leyendo metadatos de %d/%d ficheros"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "¡Casi termino! Jugando con los resultados..."
 

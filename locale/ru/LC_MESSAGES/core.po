@@ -48,7 +48,7 @@ msgstr "Копирование"
 msgid "Sending to Trash"
 msgstr "Перемещение в Корзину"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,35 +56,39 @@ msgstr ""
 "Предыдущее действие до сих пор выполняется. Вы не можете начать новое. "
 "Подождите несколько секунд, затем повторите попытку."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Все отмеченные файлы были скопированы успешно."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Все отмеченные файлы были перемещены успешно."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Все отмеченные файлы были успешно отправлены в Корзину."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Не удалось загрузить файл: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' уже присутствует в списке."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' не существует."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -92,59 +96,63 @@ msgstr ""
 "Все выбранные %d совпадений будут игнорироваться при всех последующих "
 "проверках. Продолжить?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "Выберите каталог, в который вы хотите скопировать отмеченные файлы"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "Выберите каталог, в который вы хотите переместить отмеченные файлы"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Выберите назначение для экспортируемого "
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Не удалось записать в файл: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} групп дубликатов было изменено при реприоритезации."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "0 совпадений найдено"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "%d совпадений найдено"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Вы перемещаете {} файлов в Корзину."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Обычные выражения"
 
@@ -177,15 +185,15 @@ msgstr "Содержание"
 msgid "Analyzed %d/%d pictures"
 msgstr "Анализируется %d/%d изображений"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "Выполнено %d/%d совпадений блоков"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Подготовка для сравнения"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "Проверено %d/%d совпадений"
 
@@ -233,23 +241,23 @@ msgstr "Новейший"
 msgid "Oldest"
 msgstr "Старейшие"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) дубликатов отмечено."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr "фильтр: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Подсчитан размер %d/%d файлов"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитаны метаданные %d/%d файлов"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Почти готово! Возиться с результатами..."
 

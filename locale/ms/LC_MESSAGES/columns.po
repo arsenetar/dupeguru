@@ -1,123 +1,122 @@
 # Translators:
-# Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
-# Emin Tufan Çetin <etcetin@gmail.com>, 2021
+# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>, 2021\n"
-"Language-Team: Turkish (https://www.transifex.com/voltaicideas/teams/116153/tr/)\n"
-"Language: tr\n"
+"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021\n"
+"Language-Team: Malay (https://www.transifex.com/voltaicideas/teams/116153/ms/)\n"
+"Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
 msgid "File Path"
-msgstr "Dosya Konumu"
+msgstr "Laluan Fail"
 
 #: core\gui\problem_table.py:19
 msgid "Error Message"
-msgstr "Hata İletisi"
+msgstr "Mesej Ralat"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
-msgstr "Süre"
+msgstr "Tempoh"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr "Bit Oranı"
+msgstr "Kadar Bit"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr "Örnek Hızı"
+msgstr "Kadar Sampel"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
 #: core\se\result_table.py:19
 msgid "Filename"
-msgstr "Dosya Adı"
+msgstr "Nama Fail"
 
 #: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
 #: core\se\result_table.py:20
 msgid "Folder"
-msgstr "Klasör"
+msgstr "Folder"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr "Boyut (MB)"
+msgstr "Saiz (MB)"
 
 #: core\me\result_table.py:22
 msgid "Time"
-msgstr "Zaman"
+msgstr "Masa"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr "Örnek Hızı"
+msgstr "Kadar Sampel"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
 msgid "Kind"
-msgstr "Tür"
+msgstr "Jenis"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
 #: core\prioritize.py:163 core\se\result_table.py:23
 msgid "Modification"
-msgstr "Değişiklik"
+msgstr "Pengubahsuaian"
 
 #: core\me\result_table.py:27
 msgid "Title"
-msgstr "Başlık"
+msgstr "Tajuk"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr "Sanatçı"
+msgstr "Artis"
 
 #: core\me\result_table.py:29
 msgid "Album"
-msgstr "Albüm"
+msgstr "Album"
 
 #: core\me\result_table.py:30
 msgid "Genre"
-msgstr "Tür"
+msgstr "Genre"
 
 #: core\me\result_table.py:31
 msgid "Year"
-msgstr "Yıl"
+msgstr "Tahun"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr "Parça Numarası"
+msgstr "Nombor Runut"
 
 #: core\me\result_table.py:33
 msgid "Comment"
-msgstr "Yorum"
+msgstr "Komen"
 
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr "Eşleşme %"
+msgstr "% Padanan"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr "Kullanılan Sözcükler"
+msgstr "Perkataan Diguna"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr "Kopya Sayısı"
+msgstr "Jumlah Duplikasi"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
-msgstr "Ölçüler"
+msgstr "Dimensi"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr "Boyut (KB)"
+msgstr "Saiz (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr "EXIF Zaman Damgası"
+msgstr "Cap Masa EXIF"
 
 #: core\prioritize.py:156
 msgid "Size"
-msgstr "Boyut"
+msgstr "Saiz"

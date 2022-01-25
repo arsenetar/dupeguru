@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
+# Robert M, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Robert M, 2021\n"
 "Language-Team: German (https://www.transifex.com/voltaicideas/teams/116153/de/)\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +48,7 @@ msgstr "Kopiere"
 msgid "Sending to Trash"
 msgstr "Verschiebe in den Papierkorb"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -55,36 +56,40 @@ msgstr ""
 "Eine vorherige Aktion ist noch in der Bearbeitung. Sie können noch keine "
 "Neue starten. Warten Sie einige Sekunden und versuchen es erneut."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Keine Duplikate gefunden."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Alle markierten Dateien wurden erfolgreich kopiert."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Alle markierten Dateien wurden erfolgreich verschoben."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr "Alle markierten Dateien wurden erfolgreich gelöscht."
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Alle markierten Dateien wurden erfolgreich in den Papierkorb verschoben."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Konnte Datei {} nicht laden."
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' ist bereits in der Liste."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' existiert nicht."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -92,65 +97,69 @@ msgstr ""
 "Alle %d ausgewählten Dateien werden in zukünftigen Scans ignoriert. "
 "Fortfahren?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr ""
 "Wählen Sie ein Verzeichnis aus, in das markierte Dateien kopiert werden "
 "sollen"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr ""
 "Wählen Sie ein Verzeichnis aus, in das markierte Dateien verschoben werden "
 "sollen"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Zielverzeichnis für den CSV Export angeben"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Konnte Datei {} nicht schreiben."
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Sie haben noch keinen Befehl erstellt. Bitte dies in den Einstellungen vornehmen.\n"
 "Bsp.: \"C:\\Program Files\\Diff\\Diff.exe\" \"%d\" \"%r\""
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d Dateien werden aus der Ergebnisliste entfernt. Fortfahren?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} Duplikat-Gruppen wurden durch die Neu-Priorisierung geändert."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Ausgewählte Ordner enthalten keine scannbaren Dateien."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Sammle zu scannende Dateien..."
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d verworfen)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "0 Übereinstimmungen gefunden"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr "{} Dateien für Scan gesammelt"
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "%d Übereinstimmungen gefunden"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr "{} Ordner für Scan gesammelt"
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr "%d Treffer in %d Gruppen gefunden"
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Verschiebe {} Datei(en) in den Papierkorb."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Reguläre Ausdrücke"
 
@@ -182,15 +191,15 @@ msgstr "Inhalt"
 msgid "Analyzed %d/%d pictures"
 msgstr "Analysiere Bild %d/%d"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "%d/%d Chunk-Matches ausgeführt"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Bereite Matching vor"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "%d/%d verifizierte Übereinstimmungen"
 
@@ -238,23 +247,23 @@ msgstr "Neuste"
 msgid "Oldest"
 msgstr "Älterste"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) Duplikate markiert."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr " Filter: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Lese Größe von %d/%d Dateien"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Lese Metadaten von %d/%d Dateien"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Fast fertig! Arrangiere Ergebnisse..."
 

@@ -48,7 +48,7 @@ msgstr "Αντιγραφή"
 msgid "Sending to Trash"
 msgstr "Αποστολή στα σκουπίδια"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,94 +56,102 @@ msgstr ""
 "Μια προηγούμενη ενέργεια είναι σε εξέλιξη. Δεν μπορείτε να ξεκινήσετε "
 "καινούργια ακόμα. Περιμένετε λίγα δευτερόλεπτα, έπειτα προσπαθήστε ξανά."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Δεν βρέθηκαν διπλότυπα."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Όλα τα επιλεγμένα αρχεία αντιγράφηκαν επιτυχώς."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Όλα τα επιλεγμένα αρχεία μετακινήθηκαν επιτυχώς."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Όλα τα επιλεγμένα αρχεία στάλθηκαν με επιτυχία στον κάδο."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Δεν ήταν δυνατή η φόρτωση του αρχείου: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' υπάρχει ήδη στη λίστα."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' δεν υπάρχει."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Όλα τα επιλεγμένα %d στοιχεία θα αγνοηθούν σε μελλοντικές σαρώσεις.Συνέχεια;"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "Επιλέξτε έναν κατάλογο για να αντιγράψετε επισημασμένα αρχεία."
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "Επιλέξτε έναν κατάλογο για να μετακινήσετε τα επισημασμένα αρχεία."
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Επιλέξτε έναν προορισμό για το εξαγόμενο CSV σας"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Δεν ήταν δυνατή η εγγραφή στο αρχείο: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Δεν έχετε ορίσει ειδική εντολή. Ρυθμίστε τη στις προτιμήσεις σας. "
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Πρόκειται να αφαιρέσετε %d αρχεία από τα αποτελέσματα. Συνέχεια;"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} ομάδες διπλοτύπων άλλαξαν από το επαναπροσδιορισμό."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Οι επιλεγμένοι φάκελοι δεν περιέχουν σαρώσιμα αρχεία."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Συλλογή αρχείων για σάρωση"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d απορρίφθηκαν)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "0 διπλότυπα βρέθηκαν"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "Βρέθηκαν %d διπλότυπα"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Στέλνετε {} αρχεία στα σκουπίδια."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Κανονικές εκφράσεις"
 
@@ -175,15 +183,15 @@ msgstr "Περιεχόμενα"
 msgid "Analyzed %d/%d pictures"
 msgstr "Ανάλυση %d/%d εικόνων"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "Εκτέλεση %d/%d μερικής ταυτοποίησης"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Προετοιμασία για σύγκριση"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "Πιστοποίηση %d/%d ταυτόσημων"
 
@@ -231,23 +239,23 @@ msgstr "Νεώτερο"
 msgid "Oldest"
 msgstr "Παλαιότερο"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) επιλεγμένα διπλότυπα."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr " φίλτρο: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Ανάγνωση μεγέθους %d/%d αρχείων"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Ανάγνωση μεταδεδομένων των %d/%d αρχείων"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Σχεδόν τελείωσα! Παιχνίδι με αποτελέσματα ..."
 

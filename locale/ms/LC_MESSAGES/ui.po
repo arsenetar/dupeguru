@@ -1,267 +1,268 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
-# Robert M, 2021
+# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Robert M, 2021\n"
-"Language-Team: German (https://www.transifex.com/voltaicideas/teams/116153/de/)\n"
-"Language: de\n"
+"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021\n"
+"Language-Team: Malay (https://www.transifex.com/voltaicideas/teams/116153/ms/)\n"
+"Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: qt/app.py:81
 msgid "Quit"
-msgstr "Beenden"
+msgstr "Keluar"
 
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr "Optionen"
+msgstr "Pilihan"
 
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr "Ausnahme-Liste"
+msgstr "Senarai Abai"
 
 #: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
-msgstr "Bilder-Cache leeren"
+msgstr "Kosongkan Cache Gambar"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
-msgstr "dupeGuru Hilfe"
+msgstr "Bantuan dupeGuru"
 
 #: qt/app.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
-msgstr "Über dupeGuru"
+msgstr "Mengenai dupeGuru"
 
 #: qt/app.py:87
 msgid "Open Debug Log"
-msgstr "Debug Log öffnen"
+msgstr "Buka Log Nyahpepijat"
 
 #: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
 msgstr ""
-"Möchten Sie wirklich alle zwischengespeicherten Bildanalysen entfernen?"
+"Adakah anda pasti anda ingin alih keluar kesemua analisis gambar cache anda?"
 
 #: qt/app.py:184
 msgid "Picture cache cleared."
-msgstr "Bilder-Cache geleert."
+msgstr "Cache gambar dikosongkan."
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr "{} Datei (*.{})"
+msgstr "{} fail (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr "Lösch-Optionen"
+msgstr "Pilihan Pemadaman"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr "Verlinke gelöschte Dateien"
+msgstr "Pautkan fail dipadam"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
-"Doppelte Dateien werden gelöscht, an deren Stelle wird eine Verknüpfung auf "
-"die Referenz-Datei erstellt."
+"Setelah duplikasi dipadam, letak pautan menuju fail rujukan untuk "
+"menggantikan fail dipadam."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
-msgstr "Hardlink"
+msgstr "Pautan Keras"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr "Symlink"
+msgstr "Pautan Bersimbol"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
-msgstr "(nicht unterstützt)"
+msgstr " (tidak disokong)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr "Ohne Papierkorb löschen"
+msgstr "Padam fail secara terus"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Anstatt Dateien in den Papierkorb zu verschieben, können Sie diese direkt "
-"löschen. Diese Option wird in der Regel genutzt, falls die normale "
-"Löschmethode nicht funktioniert."
+"Padam fail secara terus dan bukannya hantar fail ke tong sampah. Pilihan ini"
+" selalunya digunakan sebagai penyelesaian apabila kaedah pemadaman biasa "
+"tidak berjaya."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr "Fortfahren"
+msgstr "Teruskan"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Batal"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
-msgstr "Attribut"
+msgstr "Atribut"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
-msgstr "Ausgewählt"
+msgstr "Dipilih"
 
 #: qt/details_table.py:16 qt/directories_model.py:24
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
-msgstr "Referenz"
+msgstr "Rujukan"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
-msgstr "Ergebnis laden..."
+msgstr "Muatkan Keputusan..."
 
 #: qt/directories_dialog.py:65 cocoa/en.lproj/Localizable.strings:0
 msgid "Results Window"
-msgstr "Ergebnisfenster"
+msgstr "Tetingkap Keputusan"
 
 #: qt/directories_dialog.py:66
 msgid "Add Folder..."
-msgstr "Ordner hinzufügen..."
+msgstr "Tambah Folder..."
 
 #: qt/directories_dialog.py:74 qt/result_window.py:100
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "File"
-msgstr "Datei"
+msgstr "Fail"
 
 #: qt/directories_dialog.py:76 qt/result_window.py:108
 msgid "View"
-msgstr "Ansicht"
+msgstr "Lihat"
 
 #: qt/directories_dialog.py:78 qt/result_window.py:110
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Help"
-msgstr "Hilfe"
+msgstr "Bantuan"
 
 #: qt/directories_dialog.py:80 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
-msgstr "Lade letztes Suchergebnis"
+msgstr "Muatkan Keputusan Baru-baru Ini"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr "Anwendungsmodus:"
+msgstr "Mod Aplikasi:"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr "Musik"
+msgstr "Muzik"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr "Bild"
+msgstr "Gambar"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr "Standard"
+msgstr "Piawai"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr "Scantyp:"
+msgstr "Jenis Imbasan:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr "Optionen"
+msgstr "Pilihan Lanjutan"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "Zu durchsuchende Ordner auswählen und \"Suche starten\" drücken."
+msgstr "Pilih folder untuk imbas dan tekan \"Imbas\"."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
-msgstr "Lade Ergebnisse"
+msgstr "Muatkan Keputusan"
 
 #: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
-msgstr "Suche starten"
+msgstr "Imbas"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr "Ungespeicherte Ergebnisse"
+msgstr "Keputusan belum disimpan"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
 msgstr ""
-"Sie haben ungespeicherte Ergebnisse. Wollen Sie wirklich dupeGuru beenden?"
+"Anda mempunyai keputusan yang belum disimpan, adakah anda pasti anda ingin "
+"keluar?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr "Wählen Sie einen Ordner aus, um ihn der Scanliste hinzuzufügen"
+msgstr "Pilih folder untuk tambah ke senarai imbasan"
 
 #: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr "Wählen Sie eine Ergebnisdatei zum Laden aus"
+msgstr "Pilih fail keputusan untuk dimuatkan"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
-msgstr "Alle Dateien (*.*)"
+msgstr "Semua Fail (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr "dupeGuru Suchergebnisse (*.dupeguru)"
+msgstr "Keputusan dupeGuru (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
-msgstr "Starte einen neuen Suchlauf"
+msgstr "Mulakan imbasan baharu"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "Sie haben ungespeicherte Ergebnisse. Möchten Sie wirklich fortfahren?"
+msgstr ""
+"Anda mempunyai keputusan yang belum disimpan, adakah anda pasti anda ingin "
+"teruskan?"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
-msgstr "Name"
+msgstr "Nama"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "State"
-msgstr "Zustand"
+msgstr "Keadaan"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr "Ausgeschlossen"
+msgstr "Dikecualikan"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
-msgstr "Normal"
+msgstr "Biasa"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr "Auswahl löschen"
+msgstr "Alih Keluar yang Dipilih"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr "Liste leeren"
+msgstr "Kosongkan"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close"
-msgstr "Schließen"
+msgstr "Tutup"
 
 #: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
 #: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details"
-msgstr "Details"
+msgstr "Maklumat"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
-msgstr "Folgende Tags scannen:"
+msgstr "Tag untuk diimbas:"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
-msgstr "Track"
+msgstr "Runut"
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
-msgstr "Künstler"
+msgstr "Artis"
 
 #: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
 msgid "Album"
@@ -269,7 +270,7 @@ msgstr "Album"
 
 #: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
 msgid "Title"
-msgstr "Titel"
+msgstr "Tajuk"
 
 #: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
 msgid "Genre"
@@ -277,94 +278,94 @@ msgstr "Genre"
 
 #: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Year"
-msgstr "Jahr"
+msgstr "Tahun"
 
 #: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Word weighting"
-msgstr "Wortgewichtung"
+msgstr "Pemberatan perkataan"
 
 #: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
-msgstr "Gleiche ähnliche Wörter ab"
+msgstr "Padan perkataan serupa"
 
 #: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
 #: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
-msgstr "Dateitypen dürfen gemischt werden"
+msgstr "Boleh campur jenis fail"
 
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
-msgstr "Nutze reguläre Ausdrücke beim Filtern"
+msgstr "Guna ungkapan nalar ketika menapis"
 
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
-msgstr "Entferne leere Ordner beim Löschen oder Verschieben"
+msgstr "Alih keluar folder kosong semasa pemadaman atau pemindahan"
 
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "Ignoriere Duplikate mit Hardlinks auf dieselbe Datei"
+msgstr "Abaikan duplikasi yang paut keras ke fail yang sama"
 
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
-msgstr "Debug Modus (Neustart nötig)"
+msgstr "Mod nyahpepijat (perlu mula semula)"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr "Gleiche Bilder mit unterschiedlicher Auflösung ab"
+msgstr "Padan gambar dengan dimensi berlainan"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr "Filter Empfindlichkeit:"
+msgstr "Kekuatan Penapis:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr "Mehr Ergebnisse"
+msgstr "Lebihkan Keputusan"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr "Weniger Ergebnisse"
+msgstr "Kurang Keputusan"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr "Schriftgröße:"
+msgstr "Saiz fon:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "Bahasa:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr "Kopieren und Verschieben:"
+msgstr "Salin dan Pindah:"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
-msgstr "Direkt ins Ziel"
+msgstr "Dalam tempat tujuan"
 
 #: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
-msgstr "Relativen Pfad neu erstellen"
+msgstr "Cipta semula laluan relatif"
 
 #: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
-msgstr "Absoluten Pfad neu erstellen"
+msgstr "Cipta semula laluan mutlak"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "Eigener Befehl (Variablen: %d für Duplikat, %r für Referenz):"
+msgstr "Perintah Tersuai (argumen: %d untuk duplikasi, %r untuk rujukan):"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "dupeGuru muss neustarten, um die Sprachänderung durchzuführen."
+msgstr "dupeGuru perlu mula semula untuk menerima kesan perubahan bahasa."
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
-msgstr "Re-priorisiere Duplikate"
+msgstr "Pengutamaan semula duplikasi"
 
 #: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -372,13 +373,13 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Fügen Sie Kriterien zur rechten Box hinzu. Klicken Sie OK, um die Duplikate,"
-" die diesen Kriterien am besten entsprechen, zur Referenzposition der "
-"entsprechenden Gruppe zu senden. Lesen Sie die Hilfe für mehr Informationen."
+"Tambah kriteria di kotak kanan dan klik OK untuk hantar duplikasi yang "
+"paling sepadan dengan kriteria tersebut ke kedudukan rujukan kumpulan "
+"masing-masing. Baca fail bantuan untuk maklumat lanjut."
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "Probleme!"
+msgstr "Masalah!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -386,134 +387,134 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"Es gab Probleme bei der Verarbeitung einiger (aller) Dateien. Der Ursache "
-"dieser Probleme ist unten genauer beschrieben. Diese Dateien wurden "
-"\"nicht\" aus Ihren Suchergebnissen entfernt."
+"Terdapat masalah semasa memproses sesetengah (atau kesemua) fail. Penyebab "
+"masalah ini diterangkan dalam jadual di bawah. Fail tersebut tidak dialih "
+"keluar dari keputusan anda."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
-msgstr "Zeige Markierte"
+msgstr "Dedahkan yang Dipilih"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "Tindakan"
 
 #: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
-msgstr "Nur Duplikate anzeigen"
+msgstr "Tunjuk Duplikasi Sahaja"
 
 #: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
-msgstr "Zeige Delta-Werte"
+msgstr "Tunjuk Nilai Delta"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "Verschiebe Markierte in den Papierkorb..."
+msgstr "Hantar yang Ditandai ke Tong Sampah..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "Verschiebe Markierte nach..."
+msgstr "Pindah yang Ditandai ke..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "Kopiere Markierte nach..."
+msgstr "Salin yang Ditandai ke..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr "Entferne Markierte aus den Ergebnissen"
+msgstr "Alih Keluar yang Ditandai dari Keputusan"
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr "Re-priorisiere Ergebnisse..."
+msgstr "Pengutamaan Semula Keputusan..."
 
 #: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
-msgstr "Entferne Auswahl aus den Ergebnissen"
+msgstr "Alih Keluar yang Dipilih dari Keputusan"
 
 #: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
-msgstr "Füge Auswahl der Ausnahmeliste hinzu"
+msgstr "Tambah yang Dipilih ke Senarai Abai"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr "Mache Auswahl zur Referenz"
+msgstr "Jadikan yang Dipilih menjadi Rujukan"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
-msgstr "Öffne Auswahl mit Standard-Anwendung"
+msgstr "Buka yang Dipilih dengan Aplikasi Lalai"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr "Öffne den Über-Ordner der Auswahl"
+msgstr "Buka Folder yang Mengandungi yang Dipilih"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
-msgstr "Auswahl umbenennen"
+msgstr "Namakan Semula yang Dipilih"
 
 #: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
-msgstr "Alles markieren"
+msgstr "Tanda Semua"
 
 #: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
-msgstr "Nichts markieren"
+msgstr "Tanda Kosong"
 
 #: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
-msgstr "Auswahl umkehren"
+msgstr "Terbalikkan Penandaan"
 
 #: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
-msgstr "Auswahl markieren"
+msgstr "Tanda yang Dipilih"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
-msgstr "Exportiere als HTML..."
+msgstr "Eksport ke HTML"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr "Exportiere als CSV..."
+msgstr "Eksport ke CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr "Speichere Ergebnisse..."
+msgstr "Simpan Keputusan..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
-msgstr "Eigenen Befehl ausführen"
+msgstr "Guna Perintah Tersuai"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr "Auswählen"
+msgstr "Tanda"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
-msgstr "Spalten"
+msgstr "Lajur"
 
 #: qt/result_window.py:163
 msgid "Reset to Defaults"
-msgstr "Auf Voreinstellung zurücksetzen"
+msgstr "Tetap Semula ke Lalai"
 
 #: qt/result_window.py:185
 msgid "{} Results"
-msgstr "{} (Ergebnisse)"
+msgstr "{} Keputusan"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr "Nur Duplikate anzeigen"
+msgstr "Duplikasi Sahaja"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr "Zeige Delta-Werte"
+msgstr "Nilai Delta"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr "Datei zum Speichern der Suchergebnisse auswählen"
+msgstr "Pilih fail untuk simpan keputusan anda"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr "Ignoriere Dateien kleiner als"
+msgstr "Abaikan fail lebih kecil dari"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
@@ -521,51 +522,51 @@ msgstr "KB"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr "%@ Ergebnisse"
+msgstr "%@ Keputusan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
-msgstr "Aktion"
+msgstr "Tindakan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr "Neuer Ordner..."
+msgstr "Tambah Folder Baharu..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Advanced"
-msgstr "Fortgeschritten"
+msgstr "Lanjutan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
-msgstr "Automatisch nach Updates suchen"
+msgstr "Periksa kemas kini secara automatik"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Basic"
-msgstr "Einfach"
+msgstr "Asas"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
-msgstr "Alle nach vorne bringen"
+msgstr "Bawa Semua ke Hadapan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr "Auf Updates prüfen..."
+msgstr "Periksa kemas kini..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
-msgstr "Fenster schließen"
+msgstr "Tutup Tetingkap"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Copy"
-msgstr "Kopieren"
+msgstr "Salin"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "Eigener Befehl (Variablen: %d für Duplikat, %r für Referenz):"
+msgstr "Perintah tersuai (argumen: %d untuk duplikasi, %r untuk rujukan):"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
-msgstr "Ausschneiden"
+msgstr "Potong"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Delta"
@@ -573,15 +574,15 @@ msgstr "Delta"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr "Details der ausgewählten Datei"
+msgstr "Maklumat Fail yang Dipilih"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
-msgstr "Details Panel"
+msgstr "Panel Maklumat"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr "Verzeichnisse"
+msgstr "Direktori"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
@@ -589,79 +590,79 @@ msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
-msgstr "dupeGuru Einstellungen"
+msgstr "Keutamaan dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr "dupeGuru Ergebnisse"
+msgstr "Keputusan dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr "dupeGuru Website"
+msgstr "Laman Sesawang dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Sunting"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr "Exportiere als CSV..."
+msgstr "Eksport Keputusan ke CSV"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
-msgstr "Exportiere als XHTML..."
+msgstr "Eksport Keputusan ke XHTML"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr "Weniger Suchergebnisse"
+msgstr "Kurangkan keputusan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
-msgstr "Filter"
+msgstr "Penapis"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr "Filter Empfindlichkeit:"
+msgstr "Kekuatan penapisan:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr "Filter Suchergebnisse..."
+msgstr "Tapis Keputusan..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
-msgstr "Ordner-Auswahlfenster"
+msgstr "Tetingkap Pemilihan Folder"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr "Schriftgröße:"
+msgstr "Saiz Fon:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
-msgstr "dupeGuru ausblenden"
+msgstr "Sembunyikan dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide Others"
-msgstr "Andere ausblenden"
+msgstr "Sembunyikan yang Lain"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr "Ignoriere Dateien kleiner als:"
+msgstr "Abaikan fail lebih kecil dari:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "Lade von Datei..."
+msgstr "Muatkan dari fail..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr "Minimieren"
+msgstr "Meminimumkan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
-msgstr "Modus"
+msgstr "Mod"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr "Mehr Suchergebnisse"
+msgstr "Lebihkan keputusan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
@@ -669,121 +670,119 @@ msgstr "Ok"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr "Einfügen"
+msgstr "Tampal"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr "Einstellungen..."
+msgstr "Keutamaan..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr "Quick Look"
+msgstr "Lihat Segera"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
-msgstr "dupeGuru beenden"
+msgstr "Keluar dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr "Auf Voreinstellung zurücksetzen"
+msgstr "Tetap Semula ke Lalai"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr "Auf Voreinstellungen zurücksetzen"
+msgstr "Tetap Semula ke Lalai"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr "Zeige"
+msgstr "Dedah"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
-msgstr "Zeige Auswahl im Finder"
+msgstr "Dedah yang Dipilih dalam Pencari"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr "Alles markieren"
+msgstr "Pilih Semua"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "Verschiebe Markierte in den Papierkorb..."
+msgstr "Hantar yang Ditandai ke Tong Sampah..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr "Services"
+msgstr "Perkhidmatan"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
-msgstr "Alle einblenden"
+msgstr "Tunjuk Semua"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
-msgstr "Starte Duplikat-Scan"
+msgstr "Mulakan Imbasan Duplikasi"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "Der Name '%@' existiert bereits."
+msgstr "Nama '%@' sudah wujud."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
-msgstr "Fenster"
+msgstr "Tetingkap"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "Zum"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr "Ausschlussfilter"
+msgstr "Penapis Pengecualian"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr "Scan-Ergebnisse"
+msgstr "Keputusan Imbasan"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr "Verzeichnisse laden..."
+msgstr "Muatkan Direktori..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr "Verzeichnisse speichern..."
+msgstr "Simpan Direktori..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr "Wählen Sie eine zu ladende Verzeichnisdatei aus"
+msgstr "Pilih fail direktori untuk dimuatkan"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "dupeGuru Verzeichnisse (*.dupegurudirs)"
+msgstr "Keputusan dupeGuru (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
-"Wählen Sie eine Datei aus, in der Ihre Verzeichnisse gespeichert werden "
-"sollen"
+msgstr "Pilih fail untuk simpan direktori anda"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr "dupeGuru Verzeichnisse (*.dupegurudirs)"
+msgstr "Direktori dupeGuru (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr "Addieren"
+msgstr "Tambah"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr "Standardeinstellungen wiederherstellen"
+msgstr "Tetap semula lalai"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr "Testzeichenfolge"
+msgstr "Cuba rentetan"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr "Geben Sie hier einen regulären Python-Ausdruck ein..."
+msgstr "Taipkan ungkapan nalar python di sini..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr "Geben Sie hier einen Dateisystempfad oder Dateinamen ein..."
+msgstr "Taipkan laluan sistem fail atau nama fail di sini..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -792,22 +791,22 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Diese regulären Python-Ausdrücke (Groß- und Kleinschreibung beachten) filtern Dateien während des Scannens heraus.<br>Der <strong>Standardstatus</strong> von Verzeichnissen wird auf der Registerkarte \"Verzeichnisse\" auf \"Ausgeschlossen\" gesetzt, wenn ihr Name zufällig mit einem der ausgewählten regulären Ausdrücke übereinstimmt.<br>Für jede gesammelte Datei werden zwei Tests durchgeführt, um festzustellen, ob sie vollständig ignoriert werden soll oder nicht:<br><li>1. Reguläre Ausdrücke ohne Pfadtrennzeichen werden nur mit dem Dateinamen verglichen.</li>\n"
-"<li>2. Reguläre Ausdrücke mit mindestens einem Pfadtrennzeichen werden mit dem vollständigen Pfad zur Datei verglichen.</li><br>\n"
-"Beispiel: Wenn Sie PNG-Dateien nur aus dem Verzeichnis \"Meine Bilder\" herausfiltern möchten:<br><code>.*Meine\\sBilder\\\\.*\\.png</code><br><br>Sie können den regulären Ausdruck mit der Schaltfläche \"Testzeichenfolge\" testen, nachdem Sie einen falschen Pfad in das Testfeld eingefügt haben:<br><code>C:\\\\Nutzer\\Meine Bilder\\test.png</code><br><br>\n"
-"Übereinstimmende reguläre Ausdrücke werden hervorgehoben.<br>Wenn mindestens eine Markierung vorhanden ist, wird der getestete Pfad oder Dateiname beim Scannen ignoriert.<br><br>Verzeichnisse und Dateien, die mit einem Punkt '.' Beginnen. werden standardmäßig herausgefiltert.<br><br>"
+"Ungkapan nalar python (sensitif huruf) ini akan menapis keluar fail ketika imbasan.<br>Direktori juga akan ada <strong>keadaan lalai</strong>sendiri ditetapkan kepada  Dikecualikan dalam tab Direktori jika nama tersebut sepadan dengan salah satu ungkapan nalar.<br>Untuk setiap fail yang terhimpun, dua percubaan akan dilaksanakan bagi setiap satu fail tersebut untuk menentukan sama ada fail tersebut perlu ditapis keluar:<br><li>1. Ungkapan nalar tanpa pemisah laluan di dalamnya akan dibandingkan dengan nama fail sahaja.</li>\n"
+"<li>2. Ungkapan nalar tanpa pemisah laluan di dalamnya akan dibandingkan dengan laluan penuh ke fail.</li><br>\n"
+"Contoh: jika anda ingin tapis keluar fail .PNG dari direktori \"My Pictures\" sahaja:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Anda boleh cuba ungkapan nalar dengan fungsi cuba rentetan dengan menampal laluan palsu di dalamnya:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Ungkapan nalar yang terpadan akan ditonjolkan.<br>Sekiranya ada sekurang-kurangnya satu tonjolan, laluan yang dicuba akan diabaikan ketika imbasan.<br><br>Direktori dan fail yang bermula dengan tanda titik '.' ditapis keluar secara lalainya.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr "Kompilierungsfehler:"
+msgstr "Ralat pengkompilan:"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr "Erhöhen Sie den Zoom"
+msgstr "Naikkan zum"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr "Verringern Sie den Zoom"
+msgstr "Turunkan zum"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
@@ -815,7 +814,7 @@ msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr "Normale Größe"
+msgstr "Saiz biasa"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
@@ -823,94 +822,92 @@ msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr "Beste Passform"
+msgstr "Suaian terbaik"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr "Bild-Cache-Modus:"
+msgstr "Mod cache gambar:"
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr "Überschreiben Sie Themensymbole in der Viewer-Symbolleiste"
+msgstr "Mengataskan ikon tema dalam bar alat pemidang"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
 msgstr ""
-"Verwenden Sie unsere eigenen internen Symbole anstelle der von der Theme "
-"Engine bereitgestellten"
+"Guna ikon dalaman kami sendiri menggantikan apa yang disediakan oleh enjin "
+"tema"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr "Bildlaufleisten in Bildbetrachtern anzeigen"
+msgstr "Tunjuk bar tatal dalam pemidang imej"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
 msgstr ""
-"Wenn das angezeigte Bild nicht zum Ansichtsfenster passt, zeigen Sie "
-"Bildlaufleisten an, um die Ansicht zu überspannen"
+"Apabila imej yang dipaparkan tidak muat dalam port pandang, tunjuk bar tatal"
+" untuk menggerakkan pemidang"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr ""
-"Standardposition für Registerkartenleiste verwenden (Neustart erforderlich)"
+msgstr "Guna kedudukan lalai untuk bar tab (perlu mula semula)"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
-"Platzieren Sie die Registerkartenleiste unter dem Hauptmenü und nicht daneben\n"
-"Unter MacOS füllt die Registerkartenleiste stattdessen die Fensterbreite aus."
+"Letak bar tab di bawah menu utama dan bukannya di sebelahnya\n"
+"Di MacOS, bar tab akan mengisi lebar tetingkap."
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr "Verwenden Sie Fettdruck als Referenz"
+msgstr "Guna fon tebal untuk rujukan"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr "Vordergrundfarbe für Referenzen:"
+msgstr "Warna latar depan rujukan:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr "Hintergrundfarbe für Referenzen:"
+msgstr "Warna latar belakang rujukan:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr "Vordergrundfarbe für Delta:"
+msgstr "Warna latar depan delta:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr "Zeigt die Titelleiste an und kann angedockt werden"
+msgstr "Tunjuk bar tajuk dan boleh dilimbungkan"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
-"Während die Titelleiste ausgeblendet ist, ziehen Sie das schwebende Fenster "
-"mit der Modifikatortaste herum"
+"Apabila bar tajuk disembunyikan, guna kekunci pengubah suai untuk seret "
+"tetingkap terapung"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
-msgstr ""
-"Die Titelleiste kann nur deaktiviert werden, während das Fenster angedockt "
-"ist"
+msgstr "Bar tajuk hanya boleh dilumpuhkan ketika tetingkap dilimbungkan"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr "Vertikale Titelleiste"
+msgstr "Bar tajuk menegak"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr "Ändern Sie die Titelleiste von horizontal oben in vertikal links"
+msgstr ""
+"Ubah bar tajuk daripada melintang di atas, kepada menegak di sisi kiri"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr "Registerkartenleiste anzeigen"
+msgstr "Tunjuk bar tab"
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -919,38 +916,38 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Diese regulären Python-Ausdrücke (Groß- und Kleinschreibung beachten) filtern Dateien während des Scannens heraus.<br>Der <strong>Standardstatus</strong> von Verzeichnissen wird auf der Registerkarte \"Verzeichnisse\" auf \"Ausgeschlossen\" gesetzt, wenn ihr Name zufällig mit einem der ausgewählten regulären Ausdrücke übereinstimmt.<br>Für jede gesammelte Datei werden zwei Tests durchgeführt, um festzustellen, ob sie vollständig ignoriert werden soll oder nicht:<br><li>1. Reguläre Ausdrücke ohne Pfadtrennzeichen werden nur mit dem Dateinamen verglichen.</li>\n"
-"<li>2. Reguläre Ausdrücke mit mindestens einem Pfadtrennzeichen werden mit dem vollständigen Pfad zur Datei verglichen.</li><br>\n"
-"Beispiel: Wenn Sie PNG-Dateien nur aus dem Verzeichnis \"Meine Bilder\" herausfiltern möchten:<br><code>.*Meine\\sBilder\\\\.*\\.png</code><br><br>Sie können den regulären Ausdruck mit der Schaltfläche \"Testzeichenfolge\" testen, nachdem Sie einen falschen Pfad in das Testfeld eingefügt haben:<br><code>C:\\\\Nutzer\\Meine Bilder\\test.png</code><br><br>\n"
-"Übereinstimmende reguläre Ausdrücke werden hervorgehoben.<br>Wenn mindestens eine Markierung vorhanden ist, wird der getestete Pfad oder Dateiname beim Scannen ignoriert.<br><br>Verzeichnisse und Dateien, die mit einem Punkt '.' Beginnen. werden standardmäßig herausgefiltert.<br><br>"
+"Ungkapan nalar python (sensitif huruf) ini akan menapis keluar fail ketika imbasan.<br>Direktori juga akan ada <strong>keadaan lalai</strong> sendiri ditetapkan kepada Dikecualikan dalam tab Direktori jika nama tersebut sepadan dengan salah satu daripada ungkapan nalar yang dipilih.<br>Untuk setiap fail yang terhimpun, dua percubaan akan dilaksanakan untuk menentukan sama ada fail tersebut perlu diabaikan sepenuhnya:<br><li>1. Ungkapan nalar tanpa pemisah laluan di dalamnya akan dibandingkan dengan nama fail sahaja.</li>\n"
+"<li>2. Ungkapan nalar dengan sekurang-kurangnya satu pemisah laluan di dalamnya akan dibandingkan dengan laluan penuh ke fail.</li><br>\n"
+"Contoh: jika anda ingin tapis keluar fail .PNG dari direktori \"My Pictures\" sahaja:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Anda boleh cuba ungkapan nalar dengan butang \"cuba rentetan\" selepas menampal laluan palsi dalam medan percubaan:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Ungkapan nalar yang terpadan akan ditonjolkan.<br>Sekiranya ada sekurang-kurangnya satu tonjolan, laluan atau nama fail yang dicuba akan diabaikan ketika imbasan.<br><br>Direktori dan fail yang bermula dengan tanda titik '.' ditapis keluar secara lalainya.<br><br>"
 
 #: qt\app.py:256
 msgid "Results"
-msgstr "Ergebnisse"
+msgstr "Keputusan"
 
 #: qt\preferences_dialog.py:150
 msgid "General Interface"
-msgstr "Allgemeine Schnittstelle"
+msgstr "Antara Muka Am"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr "Ergebnistabelle"
+msgstr "Jadual Keputusan"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
-msgstr "Detailfenster"
+msgstr "Tetingkap Maklumat"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
-msgstr "Allgemeines"
+msgstr "Am"
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
-msgstr "Anzeige"
+msgstr "Paparan"
 
 #: qt\se\preferences_dialog.py:70
 msgid "Partially hash files bigger than"
-msgstr "Dateien partiell hashen die größer sind als"
+msgstr "Fail cincang separa lebih besar dari"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
@@ -958,33 +955,35 @@ msgstr "MB"
 
 #: qt\preferences_dialog.py:163
 msgid "Use native OS dialogs"
-msgstr "Benutzer System-eigene Dialoge"
+msgstr "Guna dialog OS natif"
 
 #: qt\preferences_dialog.py:166
 msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
 msgstr ""
-"Benutzer System-eigene Dialoge für Aktionen wie Datei/Ordern-Auswahl\n"
-"Manche System-eigene Dialoge sind in ihren Funktionen limitiert."
+"Gunakan dialog natif OS untuk tindakan seperti pemilihan fail/folder.\n"
+"Sesetengah dialog natif mempunyai kefungsian yang terhad."
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
-msgstr "Ignoriere Dateien größer als"
+msgstr "Abaikan fail lebih besar dari"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
-msgstr ""
+msgstr "Kosongkan Cache"
 
 #: qt\app.py:294
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
 msgstr ""
+"Adakah anda pasti anda ingin kosongkan cache? Ini akan alih keluar semua "
+"cincang fail dan analisis gambar yang tercache."
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr ""
+msgstr "Cache dikosongkan."
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"

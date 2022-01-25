@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
+# Emanuele, 2021
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Emanuele, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/voltaicideas/teams/116153/it/)\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -951,3 +952,45 @@ msgstr "Generale"
 #: qt\preferences_dialog.py:286
 msgid "Display"
 msgstr "Schermo"
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr "Calcola hash parziale di file più grandi di"
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr "MB"
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr "Usa le finestre di dialogo native del Sistema Operativo"
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
+"Per azioni come selezione di file/cartelle usa le finestre di dialogo native del Sistema Operativo.\n"
+"Alcune finestre di dialogo native hanno funzionalità limitate."
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr "Ignora file più grandi di"
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
+msgstr ""

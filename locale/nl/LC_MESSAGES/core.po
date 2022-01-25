@@ -49,7 +49,7 @@ msgstr "Kopiëren"
 msgid "Sending to Trash"
 msgstr "Naar de prullebak verplaatsen"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -57,35 +57,39 @@ msgstr ""
 "Er is nog een vorige actie bezig. Je kan nu nog geen nieuwe actie starten. "
 "Wacht een paar seconden en probeer het opnieuw"
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Geen dubbelingen gevonden"
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Alle gemarkeerde bestanden zijn succesvol gekopieerd."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Alle gemarkeerde bestanden zijn succesvol verplaatst."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Alle gemarkeerde bestanden zijn met succes in de prullenbak gedaan."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Kan bestand niet laden: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' staat al in de lijst."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' bestaat niet."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -93,68 +97,72 @@ msgstr ""
 "Alle geselecteerde %d overeenkomsten zullen in toekomstige onderzoeken "
 "worden overgslagen. Doorgaan?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr ""
 "Selecteer een map waar u de gemarkeerde bestanden naartoe wilt kopiëren"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr ""
 "Selecteer een map waar u de gemarkeerde bestanden naartoe wilt verplaatsen"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Selecteer een locatie voor de CSV export"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Kan niet schrijven naar bestand: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Er is nog geen \"aangepaste opdracht\" ingericht. Je kan dit doen bij de "
 "voorkeuren."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 "Je staat op het punt om %d bestanden te verwijderen uit de resultaten. "
 "Doorgaan?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 "{} dubbelingen groepen waren veranderd door de prioriteits verschuiving."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr ""
 "De geselecteerde folders bevatten geen bestanden die onderzocht kunnen "
 "worden."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Bestanden aan het verzamelen om te onderzoeken"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d weggelaten)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "0 overeenkomsten gevonden"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "%d overeenkomsten gevonden"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Je verplaatst {} bestand(en) naar de prullenbak"
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Normale Uitdrukkingen"
 
@@ -187,15 +195,15 @@ msgstr "Inhoud"
 msgid "Analyzed %d/%d pictures"
 msgstr "%d van de %d afbeeldingen aan het analyseren"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "%d van de %d bulk overeenkomsten uitgevoerd"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Voorbereiden voor dubbelingen bepaling"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "%d van de %d overeenkomsten nagekeken"
 
@@ -243,23 +251,23 @@ msgstr "nieuwste"
 msgid "Oldest"
 msgstr "oudste"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s /%s) dubbelingen gemarkeerd"
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr "filter: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Bestandsgrootte van %d/%d bestanden aan het lezen."
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Metadata van %d/%d bestanden gelezen"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Bijna klaar! Gehannes met resultaten..."
 

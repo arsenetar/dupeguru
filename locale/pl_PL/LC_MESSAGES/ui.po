@@ -943,3 +943,43 @@ msgstr "Generał"
 #: qt\preferences_dialog.py:286
 msgid "Display"
 msgstr "Pokaz"
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr ""
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr ""
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr ""
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
+msgstr ""

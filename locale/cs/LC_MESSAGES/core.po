@@ -47,7 +47,7 @@ msgstr "Kopíruji"
 msgid "Sending to Trash"
 msgstr "Vyhazuji do koše"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -55,35 +55,39 @@ msgstr ""
 "Předchozí akce stále nebyla ukončena. Novou zatím nemůžete spustit. Počkejte"
 " pár sekund a zkuste to znovu."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Nebyli nalezeny žádné duplicity."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Všechny označené soubory byly úspěšně zkopírovány."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Všechny označené soubory byly úspěšně přesunuty."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Všechny označené soubory byly úspěšně odeslány do koše."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Soubor se nepodařilo načíst: {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' již je v seznamu."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' neexistuje."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -91,60 +95,64 @@ msgstr ""
 "Všech %d vybraných shod bude v následujících hledáních ignorováno. "
 "Pokračovat?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "Vyberte adresář, do kterého chcete zkopírovat označené soubory"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "Vyberte adresář, kam chcete přesunout označené soubory"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Vyberte cíl pro exportovaný soubor CSV"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "Nelze zapisovat do souboru: {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Nedefinoval jste žádný uživatelský příkaz. Nadefinujete ho v předvolbách."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Chystáte se z výsledků odstranit %d souborů. Pokračovat?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} duplicitní skupiny byly změněny změně priorit."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "Vybrané adresáře neobsahují žádné soubory vhodné k prohledávání."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "Shromažďuji prohlížené soubory"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d vyřazeno)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "Nalezeno 0 shod"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "Nalezeno %d shod"
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Posíláte-{} soubory do koše."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Regulární výrazy"
 
@@ -176,15 +184,15 @@ msgstr "Obsah"
 msgid "Analyzed %d/%d pictures"
 msgstr "Analyzováno %d/%d snímků"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "Provedeno %d/%d porovnání bloků"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "Připravuji porovnávání"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "Ověřeno %d/%d shod"
 
@@ -232,23 +240,23 @@ msgstr "Nejnovější"
 msgid "Oldest"
 msgstr "Nejstarší"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) duplicit označeno."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr " filtr: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "Read size of %d/%d files"
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "Načtena metadata %d/%d souborů"
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "Skoro hotovo! Fidlování s výsledky..."
 

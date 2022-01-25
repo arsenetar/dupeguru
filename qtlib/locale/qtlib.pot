@@ -84,34 +84,38 @@ msgid "Korean"
 msgstr ""
 
 #: qtlib\preferences.py:34
-msgid "Dutch"
+msgid "Malay"
 msgstr ""
 
 #: qtlib\preferences.py:35
-msgid "Polish"
+msgid "Dutch"
 msgstr ""
 
 #: qtlib\preferences.py:36
-msgid "Brazilian"
+msgid "Polish"
 msgstr ""
 
 #: qtlib\preferences.py:37
-msgid "Russian"
+msgid "Brazilian"
 msgstr ""
 
 #: qtlib\preferences.py:38
-msgid "Turkish"
+msgid "Russian"
 msgstr ""
 
 #: qtlib\preferences.py:39
-msgid "Ukrainian"
+msgid "Turkish"
 msgstr ""
 
 #: qtlib\preferences.py:40
-msgid "Vietnamese"
+msgid "Ukrainian"
 msgstr ""
 
 #: qtlib\preferences.py:41
+msgid "Vietnamese"
+msgstr ""
+
+#: qtlib\preferences.py:42
 msgid "Chinese (Simplified)"
 msgstr ""
 

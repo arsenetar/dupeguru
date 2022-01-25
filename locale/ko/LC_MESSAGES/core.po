@@ -45,99 +45,107 @@ msgstr "복사중"
 msgid "Sending to Trash"
 msgstr "휴지통으로 보내기"
 
-#: core\app.py:308
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr "이전 작업이 여전히 거기에 걸려 있습니다. 아직 새로운 것을 시작할 수 없습니다. 몇 초 후에 다시 시도하십시오."
 
-#: core\app.py:318
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "중복 파일이 없습니다."
 
-#: core\app.py:333
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "표시된 모든 파일이 성공적으로 복사되었습니다."
 
-#: core\app.py:334
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "표시된 모든 파일이 성공적으로 이동되었습니다."
 
-#: core\app.py:335
+#: core\app.py:319
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "표시된 모든 파일이 성공적으로 휴지통으로 전송되었습니다."
 
-#: core\app.py:343
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "파일을로드 할 수 없습니다 : {}"
 
-#: core\app.py:399
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' 는 이미 목록에 있습니다."
 
-#: core\app.py:401
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' 가 존재하지 않습니다."
 
-#: core\app.py:410
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "선택된 %d개의 일치 항목은 모든 후속 검색에서 무시됩니다. 계속하다?"
 
-#: core\app.py:486
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "표시된 파일을 복사 할 디렉토리를 선택하십시오"
 
-#: core\app.py:487
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "표시된 파일을 이동할 디렉토리를 선택하십시오"
 
-#: core\app.py:527
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "내 보낸 CSV의 대상을 선택하십시오"
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:516 core\app.py:771 core\app.py:781
 msgid "Couldn't write to file: {}"
 msgstr "파일에 쓸 수 없습니다 : {}"
 
-#: core\app.py:559
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "사용자 지정 명령을 설정하지 않았습니다. 기본 설정에서 설정하십시오."
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:695 core\app.py:707
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 계속하다?"
 
-#: core\app.py:774
+#: core\app.py:743
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} 개의 중복 그룹이 우선 순위 재 지정으로 변경되었습니다."
 
-#: core\app.py:821
+#: core\app.py:790
 msgid "The selected directories contain no scannable file."
 msgstr "선택한 디렉토리에 스캔 가능한 파일이 없습니다."
 
-#: core\app.py:835
+#: core\app.py:803
 msgid "Collecting files to scan"
 msgstr "스캔 할 파일 수집"
 
-#: core\app.py:891
+#: core\app.py:850
 msgid "%s (%d discarded)"
 msgstr "%s (%d 폐기)"
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
-msgstr "일치하는 항목이 없습니다"
+#: core\directories.py:191
+msgid "Collected {} files to scan"
+msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
-msgstr "%d개의 일치 항목을 찾았습니다."
+#: core\directories.py:207
+msgid "Collected {} folders to scan"
+msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "{}개의 파일을 휴지통으로 보내고 있습니다."
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "정규식"
 
@@ -169,15 +177,15 @@ msgstr "내용"
 msgid "Analyzed %d/%d pictures"
 msgstr "%d/%d 사진 분석"
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr "%d/%d 청크 매치 수행"
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr "매칭 준비"
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr "%d/%d 일치 확인"
 
@@ -225,23 +233,23 @@ msgstr "최신"
 msgid "Oldest"
 msgstr "가장 오래된"
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) 개의 중복이 표시되었습니다."
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr "필터: %s"
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr "%d/%d 개의 파일을 읽을 수 있습니다."
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr "%d/%d 개 파일의 메타 데이터를 읽었습니다."
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr "거의 완료되었습니다! 결과를 만지작 거리는 중..."
 
