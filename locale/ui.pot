@@ -941,3 +941,7 @@ msgstr ""
 #: qt\app.py:299
 msgid "Cache cleared."
 msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
+msgstr ""
