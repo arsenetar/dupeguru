@@ -52,6 +52,7 @@ SUPPORTED_LANGUAGES = [
     "it",
     "ja",
     "ko",
+    "ms",
     "nl",
     "pl_PL",
     "pt_BR",

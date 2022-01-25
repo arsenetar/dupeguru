@@ -31,6 +31,7 @@ def get_langnames():
         "it": tr("Italian"),
         "ja": tr("Japanese"),
         "ko": tr("Korean"),
+        "ms": tr("Malay"),
         "nl": tr("Dutch"),
         "pl_PL": tr("Polish"),
         "pt_BR": tr("Brazilian"),

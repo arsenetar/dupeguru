@@ -58,6 +58,7 @@ def get_locale_name(lang):
         "it": "it_IT",
         "ja": "ja_JP",
         "ko": "ko_KR",
+        "ms": "ms_MY",
         "nl": "nl_NL",
         "pl_PL": "pl_PL",
         "pt_BR": "pt_BR",
