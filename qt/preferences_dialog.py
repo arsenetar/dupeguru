@@ -302,7 +302,8 @@ use the modifier key to drag the floating window around"
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
             setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
             setchecked(self.use_native_dialogs, prefs.use_native_dialogs)
-            setchecked(self.use_dark_style, prefs.use_dark_style)
+            if plat.ISWINDOWS:
+                setchecked(self.use_dark_style, prefs.use_dark_style)
             setchecked(
                 self.details_dialog_titlebar_enabled,
                 prefs.details_dialog_titlebar_enabled,
@@ -347,7 +348,8 @@ use the modifier key to drag the floating window around"
         prefs.tableFontSize = self.fontSizeSpinBox.value()
         prefs.tabs_default_pos = ischecked(self.tabs_default_pos)
         prefs.use_native_dialogs = ischecked(self.use_native_dialogs)
-        prefs.use_dark_style = ischecked(self.use_dark_style)
+        if plat.ISWINDOWS:
+            prefs.use_dark_style = ischecked(self.use_dark_style)
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:
