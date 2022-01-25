@@ -30,6 +30,7 @@ class Preferences(PreferencesBase):
         if not self.language and trans.installed_lang:
             self.language = trans.installed_lang
         self.portable = get("Portable", False)
+        self.use_dark_style = get("UseDarkStyle", False)
         self.use_native_dialogs = get("UseNativeDialogs", True)
 
         self.tableFontSize = get("TableFontSize", self.tableFontSize)
@@ -95,6 +96,7 @@ class Preferences(PreferencesBase):
         self.destination_type = 1
         self.custom_command = ""
         self.language = trans.installed_lang if trans.installed_lang else ""
+        self.use_dark_style = False
         self.use_native_dialogs = True
 
         self.tableFontSize = QApplication.font().pointSize()
@@ -146,6 +148,7 @@ class Preferences(PreferencesBase):
         set_("CustomCommand", self.custom_command)
         set_("Language", self.language)
         set_("Portable", self.portable)
+        set_("UseDarkStyle", self.use_dark_style)
         set_("UseNativeDialogs", self.use_native_dialogs)
 
         set_("TableFontSize", self.tableFontSize)

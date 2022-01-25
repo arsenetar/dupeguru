@@ -29,6 +29,7 @@ from PyQt5.QtWidgets import (
     QFormLayout,
 )
 from PyQt5.QtGui import QPixmap, QIcon
+from hscommon import plat
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
@@ -168,6 +169,9 @@ On MacOS, the tab bar will fill up the window's width instead."
             )
         )
         layout.addWidget(self.use_native_dialogs)
+        if plat.ISWINDOWS:
+            self._setupAddCheckbox("use_dark_style", tr("Use dark style"))
+            layout.addWidget(self.use_dark_style)
         self.ui_groupbox.setLayout(layout)
         self.displayVLayout.addWidget(self.ui_groupbox)
 
@@ -297,6 +301,7 @@ use the modifier key to drag the floating window around"
             setchecked(self.reference_bold_font, prefs.reference_bold_font)
             setchecked(self.tabs_default_pos, prefs.tabs_default_pos)
             setchecked(self.use_native_dialogs, prefs.use_native_dialogs)
+            setchecked(self.use_dark_style, prefs.use_dark_style)
             setchecked(
                 self.details_dialog_titlebar_enabled,
                 prefs.details_dialog_titlebar_enabled,
@@ -341,6 +346,7 @@ use the modifier key to drag the floating window around"
         prefs.tableFontSize = self.fontSizeSpinBox.value()
         prefs.tabs_default_pos = ischecked(self.tabs_default_pos)
         prefs.use_native_dialogs = ischecked(self.use_native_dialogs)
+        prefs.use_dark_style = ischecked(self.use_dark_style)
         lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
         oldlang = self.app.prefs.language
         if oldlang not in self.supportedLanguages:

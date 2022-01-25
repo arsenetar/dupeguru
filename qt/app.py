@@ -8,11 +8,11 @@ import sys
 import os.path as op
 
 from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox
+from PyQt5.QtGui import QColor, QDesktopServices, QPalette
+from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QStyleFactory, QToolTip
 
 from hscommon.trans import trget
-from hscommon import desktop
+from hscommon import desktop, plat
 
 from qtlib.about_box import AboutBox
 from qtlib.recent import Recent
@@ -197,6 +197,8 @@ class DupeGuru(QObject):
         if self.details_dialog:
             self.details_dialog.update_options()
 
+        self._set_style("dark" if self.prefs.use_dark_style else "light")
+
     # --- Private
     def _get_details_dialog_class(self):
         if self.model.app_mode == AppMode.PICTURE:
@@ -213,6 +215,39 @@ class DupeGuru(QObject):
             return PreferencesDialogMusic
         else:
             return PreferencesDialogStandard
+
+    def _set_style(self, style="light"):
+        # Only support this feature on windows for now
+        if not plat.ISWINDOWS:
+            return
+        if style == "dark":
+            QApplication.setStyle(QStyleFactory.create("Fusion"))
+            palette = QApplication.style().standardPalette()
+            palette.setColor(QPalette.ColorRole.Window, QColor(53, 53, 53))
+            palette.setColor(QPalette.ColorRole.WindowText, Qt.white)
+            palette.setColor(QPalette.ColorRole.Base, QColor(25, 25, 25))
+            palette.setColor(QPalette.ColorRole.AlternateBase, QColor(53, 53, 53))
+            palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(53, 53, 53))
+            palette.setColor(QPalette.ColorRole.ToolTipText, Qt.white)
+            palette.setColor(QPalette.ColorRole.Text, Qt.white)
+            palette.setColor(QPalette.ColorRole.Button, QColor(53, 53, 53))
+            palette.setColor(QPalette.ColorRole.ButtonText, Qt.white)
+            palette.setColor(QPalette.ColorRole.BrightText, Qt.red)
+            palette.setColor(QPalette.ColorRole.Link, QColor(42, 130, 218))
+            palette.setColor(QPalette.ColorRole.Highlight, QColor(42, 130, 218))
+            palette.setColor(QPalette.ColorRole.HighlightedText, Qt.black)
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text, QColor(164, 166, 168))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.WindowText, QColor(164, 166, 168))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, QColor(164, 166, 168))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.HighlightedText, QColor(164, 166, 168))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, QColor(68, 68, 68))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Window, QColor(68, 68, 68))
+            palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Highlight, QColor(68, 68, 68))
+        else:
+            QApplication.setStyle(QStyleFactory.create("windowsvista" if plat.ISWINDOWS else "Fusion"))
+            palette = QApplication.style().standardPalette()
+        QToolTip.setPalette(palette)
+        QApplication.setPalette(palette)
 
     # --- Public
     def add_selected_to_ignore_list(self):
