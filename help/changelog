@@ -1,3 +1,32 @@
+=== 4.2.0 (2021-01-24)
+
+* Add Malay and Turkish
+* Add dark style for windows (#900)
+* Add caching md5 file hashes (#942)
+* Add feature to partially hash large files, with user adjustable preference (#908)
+* Add portable mode (store settings next to executable)
+* Add file association for .dupeguru files on windows
+* Add ability to pass .dupeguru file to load on startup (#902)
+* Add ability to reveal in explorer/finder (#895)
+* Switch audio tag processing from hsaudiotag to mutagen (#440)
+* Add ability to use Qt dialogs instead of native OS dialogs for some file selection operations
+* Add OS and Python details to error dialog to assist in troubleshooting
+* Add preference to ignore large files with threshold (#430)
+* Fix error on close from DetailsPanel (#857, #873)
+* Change reference background color (#894, #898)
+* Remove stripping of unicode characters when matching names (#879)
+* Fix exception when deleting in delta view (#863, #905)
+* Fix dupes only view not updating after re-prioritize results (#757, #910, #911)
+* Fix ability to drag'n'drop file/folder with certain characters in name (#897)
+* Fix window position opening partially offscreen (#653)
+* Fix TypeError is photo mode (#551)
+* Change message for when files are deleted directly (#904)
+* Add more feedback during scan (#700)
+* Add Python version check to build.py (#589)
+* General code cleanups
+* Improvements to using standardized build tooling
+* Moved CI/CD to github actions, added codeql, SonarCloud
+
 === 4.1.1 (2021-03-21)
 
 * Add Japanese 
