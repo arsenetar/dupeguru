@@ -53,7 +53,7 @@ pyc: | env
 	${VENV_PYTHON} -m compileall ${packages}
 
 reqs:
-ifneq ($(shell test $(PYTHON_VERSION_MINOR) -gt $(REQ_MINOR_VERSION); echo $$?),0)
+ifneq ($(shell test $(PYTHON_VERSION_MINOR) -ge $(REQ_MINOR_VERSION); echo $$?),0)
 	$(error "Python 3.${REQ_MINOR_VERSION}+ required. Aborting.")
 endif
 ifndef NO_VENV
