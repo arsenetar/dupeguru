@@ -213,7 +213,7 @@ def package_macos():
             "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
             "--add-data={0}:locale".format(LOCALE_DIR),
             "--add-data={0}:help".format(HELP_DIR),
-            ENTRY_SCRIPT,
+            "{0}".format(ENTRY_SCRIPT),
         ]
     )
 
