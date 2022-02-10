@@ -507,7 +507,6 @@ if ISWINDOWS:
     def has_sep(regexp):
         return "\\" + sep in regexp
 
-
 else:
 
     def has_sep(regexp):

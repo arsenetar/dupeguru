@@ -63,7 +63,6 @@ try:
             appname = proxy.bundleInfo_("CFBundleName")
         return op.join(base, appname)
 
-
 except ImportError:
     try:
         from PyQt5.QtCore import QUrl, QStandardPaths

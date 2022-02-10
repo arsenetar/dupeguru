@@ -226,7 +226,7 @@ def format_time_decimal(seconds):
 
 
 SIZE_DESC = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
-SIZE_VALS = tuple(1024 ** i for i in range(1, 9))
+SIZE_VALS = tuple(1024**i for i in range(1, 9))
 
 
 def format_size(size, decimal=0, forcepower=-1, showdesc=True):
@@ -258,7 +258,7 @@ def format_size(size, decimal=0, forcepower=-1, showdesc=True):
     if decimal == 0:
         divided_size = ceil(divided_size)
     else:
-        divided_size = ceil(divided_size * (10 ** decimal)) / (10 ** decimal)
+        divided_size = ceil(divided_size * (10**decimal)) / (10**decimal)
     if negative:
         divided_size *= -1
     result = size_format % divided_size
