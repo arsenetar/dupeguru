@@ -76,3 +76,9 @@ jobs:
     - name: Run tests
       run: |
         pytest core hscommon
+    - name: Upload Artifacts
+      if: matrix.os == 'ubuntu-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: modules ${{ matrix.python-version }}
+        path: ${{ github.workspace }}/**/*.so
