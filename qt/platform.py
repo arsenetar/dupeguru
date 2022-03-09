@@ -12,8 +12,12 @@ if op.exists(__file__):
     # inside qt/, so we just go back one level.
     BASE_PATH = op.abspath(op.join(op.dirname(__file__), ".."))
 else:
-    # We're under a freezed environment. Our base path is ''.
-    BASE_PATH = ""
+    # Should be a frozen environment
+    if ISOSX:
+        BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..', '..', 'Resources'))
+    else:
+        # For others our base path is ''.
+        BASE_PATH = ""
 HELP_PATH = op.join(BASE_PATH, "help")
 
 if ISWINDOWS:
