@@ -10,6 +10,8 @@
 #include "common.h"
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <ImageIO/ImageIO.h>
 
 #define RADIANS( degrees ) ( degrees * M_PI / 180 )
 
