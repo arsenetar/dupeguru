@@ -1041,26 +1041,44 @@ class ScrollAreaImageViewer(QScrollArea):
         """After scaling, no mouse position, default to center."""
         # scrollBar.setMaximum(scrollBar.maximum() - scrollBar.minimum() + scrollBar.pageStep())
         self._horizontalScrollBar.setValue(
-            int(factor * self._horizontalScrollBar.value() + ((factor - 1) * self._horizontalScrollBar.pageStep() / 2))
+            int(
+                factor * self._horizontalScrollBar.value()
+                + ((factor - 1) * self._horizontalScrollBar.pageStep() / 2)
+            )
         )
         self._verticalScrollBar.setValue(
-            int(factor * self._verticalScrollBar.value() + ((factor - 1) * self._verticalScrollBar.pageStep() / 2))
+            int(
+                factor * self._verticalScrollBar.value()
+                + ((factor - 1) * self._verticalScrollBar.pageStep() / 2)
+            )
         )
 
     def adjustScrollBarsScaled(self, delta):
         """After scaling with the mouse, update relative to mouse position."""
-        self._horizontalScrollBar.setValue(self._horizontalScrollBar.value() + delta.x())
-        self._verticalScrollBar.setValue(self._verticalScrollBar.value() + delta.y())
+        self._horizontalScrollBar.setValue(
+            int(self._horizontalScrollBar.value() + delta.x())
+        )
+        self._verticalScrollBar.setValue(
+            int(self._verticalScrollBar.value() + delta.y())
+        )
 
     def adjustScrollBarsAuto(self):
         """After panning, update accordingly."""
-        self.horizontalScrollBar().setValue(self.horizontalScrollBar().value() - self._mousePanningDelta.x())
-        self.verticalScrollBar().setValue(self.verticalScrollBar().value() - self._mousePanningDelta.y())
+        self.horizontalScrollBar().setValue(
+            int(self.horizontalScrollBar().value() - self._mousePanningDelta.x())
+        )
+        self.verticalScrollBar().setValue(
+            int(self.verticalScrollBar().value() - self._mousePanningDelta.y())
+        )
 
     def adjustScrollBarCentered(self):
         """Just center in the middle."""
-        self._horizontalScrollBar.setValue(int(self._horizontalScrollBar.maximum() / 2))
-        self._verticalScrollBar.setValue(int(self._verticalScrollBar.maximum() / 2))
+        self._horizontalScrollBar.setValue(
+            int(self._horizontalScrollBar.maximum() / 2)
+        )
+        self._verticalScrollBar.setValue(
+            int(self._verticalScrollBar.maximum() / 2)
+        )
 
     def resetCenter(self):
         """Resets origin"""
