@@ -150,11 +150,13 @@ def install_gettext_trans_under_qt(base_folder, lang=None):
     if not lang:
         lang = str(QLocale.system().name())[:2]
     localename = get_locale_name(lang)
-    if localename is not None:
-        try:
-            locale.setlocale(locale.LC_ALL, localename)
-        except locale.Error:
-            logging.warning("Couldn't set locale %s", localename)
+    if localename is None:
+        lang = "en"
+        localename = get_locale_name(lang)
+    try:
+        locale.setlocale(locale.LC_ALL, localename)
+    except locale.Error:
+        logging.warning("Couldn't set locale %s", localename)
     qmname = "qt_%s" % lang
     if ISLINUX:
         # Under linux, a full Qt installation is already available in the system, we didn't bundle
