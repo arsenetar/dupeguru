@@ -36,7 +36,7 @@ For windows instructions see the [Windows Instructions](Windows.md).
 For macos instructions (qt version) see the [macOS Instructions](macos.md).
 
 ### Prerequisites
-* [Python 3.6+][python]
+* [Python 3.7+][python]
 * PyQt5
 
 ### System Setup

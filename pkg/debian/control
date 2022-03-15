@@ -10,7 +10,7 @@ Vcs-Git: https://github.com/arsenetar/dupeguru.git
 
 Package: {pkgname}
 Architecture: {arch}
-Depends: ${shlibs:Depends}, python3 (>=3.6), python3-pyqt5, python3-mutagen
+Depends: ${shlibs:Depends}, python3 (>=3.7), python3-pyqt5, python3-mutagen
 Provides: dupeguru-se, dupeguru-me, dupeguru-pe
 Replaces: dupeguru-se, dupeguru-me, dupeguru-pe
 Conflicts: dupeguru-se, dupeguru-me, dupeguru-pe

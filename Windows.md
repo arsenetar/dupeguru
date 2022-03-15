@@ -2,7 +2,7 @@
 
 ### Prerequisites
 
-- [Python 3.6+][python]
+- [Python 3.7+][python]
 - [Visual Studio 2019][vs] or [Visual Studio Build Tools 2019][vsBuildTools] with the Windows 10 SDK
 - [nsis][nsis] (for installer creation)
 - [msys2][msys2] (for using makefile method)
@@ -16,7 +16,7 @@ After installing python it is recommended to update setuptools before compiling 
 More details on setting up python for compiling packages on windows can be found on the [python wiki][pythonWindowsCompilers] Take note of the required vc++ versions.
 
 ### With build.py (preferred)
-To build with a different python version 3.6 vs 3.8 or 32 bit vs 64 bit specify that version instead of -3.8 to the `py` command below.  If you want to build additional versions while keeping all virtual environments setup use a different location for each virtual environment.
+To build with a different python version 3.7 vs 3.8 or 32 bit vs 64 bit specify that version instead of -3.8 to the `py` command below.  If you want to build additional versions while keeping all virtual environments setup use a different location for each virtual environment.
 
     $ cd <dupeGuru directory>
     $ py -3.8 -m venv .\env
