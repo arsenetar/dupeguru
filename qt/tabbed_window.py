@@ -221,7 +221,7 @@ class TabWindow(QMainWindow):
         super().showEvent(event)
 
     def changeEvent(self, event):
-        if event.type() == QEvent.Type.WindowStateChange and not self.isMaximized():
+        if event.type() == QEvent.WindowStateChange and not self.isMaximized():
             move_to_screen_center(self)
         super().changeEvent(event)
 
