@@ -14,7 +14,7 @@ if op.exists(__file__):
 else:
     # Should be a frozen environment
     if ISOSX:
-        BASE_PATH = op.abspath(op.join(op.dirname(__file__), '..', '..', 'Resources'))
+        BASE_PATH = op.abspath(op.join(op.dirname(__file__), "..", "..", "Resources"))
     else:
         # For others our base path is ''.
         BASE_PATH = ""
