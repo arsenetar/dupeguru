@@ -12,7 +12,7 @@ a community around this project.
 
 So, whatever your skills, if you're interested in contributing to dupeGuru, please do so. Normally,
 this documentation should be enough to get you started, but if it isn't, then **please**,
-`let me know`_ because it's a problem that I'm committed to fix. If there's any situation where you'd
+open a discussion at https://github.com/arsenetar/dupeguru/discussions.  If there's any situation where you'd
 wish to contribute but some doubt you're having prevent you from going forward, please contact me.
 I'd much prefer to spend the time figuring out with you whether (and how) you can contribute than
 taking the chance of missing that opportunity.
@@ -82,10 +82,9 @@ agree on what should be added to the documentation.
 dupeGuru. For more information about how to do that, you can refer to the `translator guide`_.
 
 .. _been open source: https://www.hardcoded.net/articles/free-as-in-speech-fair-as-in-trade
-.. _let me know: mailto:hsoft@hardcoded.net
 .. _Source code repository: https://github.com/arsenetar/dupeguru
-.. _Issue Tracker: https://github.com/hsoft/arsenetar/issues
-.. _Issue labels meaning: https://github.com/hsoft/arsenetar/wiki/issue-labels
+.. _Issue Tracker: https://github.com/arsenetar/issues
+.. _Issue labels meaning: https://github.com/arsenetar/wiki/issue-labels
 .. _Sphinx: http://sphinx-doc.org/
 .. _reST: http://en.wikipedia.org/wiki/ReStructuredText
-.. _translator guide: https://github.com/hsoft/arsenetar/wiki/Translator-Guide
+.. _translator guide: https://github.com/arsenetar/wiki/Translator-Guide

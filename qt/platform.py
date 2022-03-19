@@ -18,7 +18,7 @@ else:
     else:
         # For others our base path is ''.
         BASE_PATH = ""
-HELP_PATH = op.join(BASE_PATH, "help")
+HELP_PATH = op.join(BASE_PATH, "help", "en")
 
 if ISWINDOWS:
     INITIAL_FOLDER_IN_DIALOGS = "C:\\"
