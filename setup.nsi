@@ -12,6 +12,8 @@ Unicode true
 SetCompressor /SOLID lzma
 ; General Headers
 !include "FileFunc.nsh"
+!include "WinVer.nsh"
+!include "LogicLib.nsh"
 
 ;==============================================================================
 ; Configuration Defines
@@ -279,6 +281,10 @@ SectionEnd
 ;==============================================================================
 
 Function .onInit
+  ${IfNot} ${AtLeastWin7}
+    MessageBox MB_OK "Windows 7 and above required"
+    Quit
+  ${EndIf}
   !if ${BITS} == "64"
     SetRegView 64
   !else
