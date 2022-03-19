@@ -45,7 +45,7 @@ class _ActualThread(threading.Thread):
         self._lock = threading.Lock()
         self._run = True
         self.lastrowid = -1
-        self.setDaemon(True)
+        self.daemon = True
         self.start()
 
     def _query(self, query):
