@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
 PYRCC5 ?= pyrcc5
-REQ_MINOR_VERSION = 6
+REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
 # Window compatability via Msys2 
