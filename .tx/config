@@ -1,26 +1,27 @@
 [main]
 host = https://www.transifex.com
 
-[dupeguru-1.core]
-file_filter = locale/<lang>/LC_MESSAGES/core.po
-source_file = locale/core.pot
-source_lang = en
-type = PO
-
-[dupeguru-1.columns]
+[o:voltaicideas:p:dupeguru-1:r:columns]
 file_filter = locale/<lang>/LC_MESSAGES/columns.po
 source_file = locale/columns.pot
 source_lang = en
-type = PO
+type        = PO
 
-[dupeguru-1.ui]
-file_filter = locale/<lang>/LC_MESSAGES/ui.po
-source_file = locale/ui.pot
+[o:voltaicideas:p:dupeguru-1:r:core]
+file_filter = locale/<lang>/LC_MESSAGES/core.po
+source_file = locale/core.pot
 source_lang = en
-type = PO
+type        = PO
 
-[dupeguru-1.qtlib]
+[o:voltaicideas:p:dupeguru-1:r:qtlib]
 file_filter = qtlib/locale/<lang>/LC_MESSAGES/qtlib.po
 source_file = qtlib/locale/qtlib.pot
 source_lang = en
-type = PO
+type        = PO
+
+[o:voltaicideas:p:dupeguru-1:r:ui]
+file_filter = locale/<lang>/LC_MESSAGES/ui.po
+source_file = locale/ui.pot
+source_lang = en
+type        = PO
+

@@ -1,10 +1,10 @@
 # Translators:
 # Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
-# Emin Tufan Çetin <etcetin@gmail.com>, 2021
+# Emin Tufan Çetin <etcetin@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>, 2021\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>, 2022\n"
 "Language-Team: Turkish (https://www.transifex.com/voltaicideas/teams/116153/tr/)\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -983,4 +983,4 @@ msgstr "Önbellek temizlendi."
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
-msgstr ""
+msgstr "Karanlık biçem kullan"

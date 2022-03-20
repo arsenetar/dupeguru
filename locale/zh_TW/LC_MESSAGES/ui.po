@@ -1,6 +1,9 @@
+# Translators:
+# 太子 VC <taiziccf@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
+"Last-Translator: 太子 VC <taiziccf@gmail.com>, 2021\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
 "Language: zh_TW\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9,53 +12,53 @@ msgstr ""
 
 #: qt/app.py:81
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore List"
-msgstr ""
+msgstr "忽略列表"
 
 #: qt/app.py:84 qt/app.py:179 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear Picture Cache"
-msgstr ""
+msgstr "清空图片缓存"
 
 #: qt/app.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Help"
-msgstr ""
+msgstr "dupeGuru 帮助"
 
 #: qt/app.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "About dupeGuru"
-msgstr ""
+msgstr "关于 dupeGuru"
 
 #: qt/app.py:87
 msgid "Open Debug Log"
-msgstr ""
+msgstr "打开调试记录"
 
 #: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
-msgstr ""
+msgstr "确定要移除所有缓存分析图片?"
 
 #: qt/app.py:184
 msgid "Picture cache cleared."
-msgstr ""
+msgstr "图片缓存已清空。"
 
 #: qt/app.py:251
 msgid "{} file (*.{})"
-msgstr ""
+msgstr "{} 文件 (*.{})"
 
 #: qt/deletion_options.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Deletion Options"
-msgstr ""
+msgstr "删除选项"
 
 #: qt/deletion_options.py:35 cocoa/en.lproj/Localizable.strings:0
 msgid "Link deleted files"
-msgstr ""
+msgstr "链接已删除的文件"
 
 #: qt/deletion_options.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -91,20 +94,20 @@ msgstr ""
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
-msgstr ""
+msgstr "属性"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
-msgstr ""
+msgstr "已选择"
 
 #: qt/details_table.py:16 qt/directories_model.py:24
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
-msgstr ""
+msgstr "源文件"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
@@ -907,4 +910,44 @@ msgstr ""
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr ""
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr ""
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr ""
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
 msgstr ""

@@ -1,9 +1,9 @@
 # Translators:
-# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021
+# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021\n"
+"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2022\n"
 "Language-Team: Malay (https://www.transifex.com/voltaicideas/teams/116153/ms/)\n"
 "Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -987,4 +987,4 @@ msgstr "Cache dikosongkan."
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
-msgstr ""
+msgstr "Guna gaya gelap"
