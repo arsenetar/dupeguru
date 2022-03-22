@@ -1,0 +1,10 @@
+{
+    // List of extensions which should be recommended for users of this workspace.
+    "recommendations": [
+        "redhat.vscode-yaml",
+        "ms-python.vscode-pylance",
+        "ms-python.python"
+    ],
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+    "unwantedRecommendations": []
+}
