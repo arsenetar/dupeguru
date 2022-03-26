@@ -1,11 +1,11 @@
 oses:
   - name: Windows
-    icon: windows 
-    packages: 
+    icon: windows
+    packages:
       - arch: x64
-        link: https://github.com/arsenetar/dupeguru/releases/download/4.2.0/dupeGuru_win64_4.2.0.exe
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.2.1/dupeGuru_win64_4.2.1.exe
       - arch: x32
-        link: https://github.com/arsenetar/dupeguru/releases/download/4.2.0/dupeGuru_win32_4.2.0.exe
+        link: https://github.com/arsenetar/dupeguru/releases/download/4.2.1/dupeGuru_win32_4.2.1.exe
   - name: Ubuntu
     icon: linux
     packages:
@@ -16,12 +16,10 @@ oses:
     packages:
       - arch: "10.12+"
         link: ./2022/03/09/macOS_cocoa_phase_out.html
-    icon: apple
   - name: Source
     icon: github
     packages:
       - arch: zip
-        link: https://github.com/arsenetar/dupeguru/archive/4.2.0.zip
+        link: https://github.com/arsenetar/dupeguru/archive/4.2.1.zip
       - arch: tar.gz
-        link: https://github.com/arsenetar/dupeguru/archive/4.2.0.tar.gz
-    
+        link: https://github.com/arsenetar/dupeguru/archive/4.2.1.tar.gz
