@@ -1,3 +1,13 @@
+=== 4.2.1 (2022-03-25)
+* Default to English on unsupported system language (#976)
+* Fix image viewer zoom datatype issue (#978)
+* Fix errors from window change event (#937, #980)
+* Fix deprecation warning from SQLite
+* Enforce minimum Windows version in installer (#983)
+* Fix help path for local files
+* Drop python 3.6 support
+* VS Code project settings added, yaml validation for GitHub actions
+
 === 4.2.0 (2021-01-24)
 
 * Add Malay and Turkish
