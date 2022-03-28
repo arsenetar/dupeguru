@@ -42,73 +42,50 @@ def special_folder_path(special_folder, appname=None, portable=False):
 
 
 try:
-    # Normally, we would simply do "from cocoa import proxy", but due to a bug in pytest (currently
-    # at v2.4.2), our test suite is broken when we do that. This below is a workaround until that
-    # bug is fixed.
-    import cocoa
+    from PyQt5.QtCore import QUrl, QStandardPaths
+    from PyQt5.QtGui import QDesktopServices
+    from qtlib.util import get_appdata
+    from core.util import executable_folder
+    from hscommon.plat import ISWINDOWS, ISOSX
+    import subprocess
 
-    if not hasattr(cocoa, "proxy"):
-        raise ImportError()
-    proxy = cocoa.proxy
-    _open_url = proxy.openURL_
-    _open_path = proxy.openPath_
-    _reveal_path = proxy.revealPath_
+    def _open_url(url):
+        QDesktopServices.openUrl(QUrl(url))
+
+    def _open_path(path):
+        url = QUrl.fromLocalFile(str(path))
+        QDesktopServices.openUrl(url)
+
+    def _reveal_path(path):
+        if ISWINDOWS:
+            subprocess.run(["explorer", "/select,", op.abspath(path)])
+        elif ISOSX:
+            subprocess.run(["open", "-R", op.abspath(path)])
+        else:
+            _open_path(op.dirname(str(path)))
 
     def _special_folder_path(special_folder, appname=None, portable=False):
         if special_folder == SpecialFolder.CACHE:
-            base = proxy.getCachePath()
+            if ISWINDOWS and portable:
+                folder = op.join(executable_folder(), "cache")
+            else:
+                folder = QStandardPaths.standardLocations(QStandardPaths.CacheLocation)[0]
         else:
-            base = proxy.getAppdataPath()
-        if not appname:
-            appname = proxy.bundleInfo_("CFBundleName")
-        return op.join(base, appname)
+            folder = get_appdata(portable)
+        return folder
 
 except ImportError:
-    try:
-        from PyQt5.QtCore import QUrl, QStandardPaths
-        from PyQt5.QtGui import QDesktopServices
-        from qtlib.util import get_appdata
-        from core.util import executable_folder
-        from hscommon.plat import ISWINDOWS, ISOSX
-        import subprocess
+    # We're either running tests, and these functions don't matter much or we're in a really
+    # weird situation. Let's just have dummy fallbacks.
+    logging.warning("Can't setup desktop functions!")
 
-        def _open_url(url):
-            QDesktopServices.openUrl(QUrl(url))
+    def _open_path(path):
+        # Dummy for tests
+        pass
 
-        def _open_path(path):
-            url = QUrl.fromLocalFile(str(path))
-            QDesktopServices.openUrl(url)
+    def _reveal_path(path):
+        # Dummy for tests
+        pass
 
-        def _reveal_path(path):
-            if ISWINDOWS:
-                subprocess.run(["explorer", "/select,", op.abspath(path)])
-            elif ISOSX:
-                subprocess.run(["open", "-R", op.abspath(path)])
-            else:
-                _open_path(op.dirname(str(path)))
-
-        def _special_folder_path(special_folder, appname=None, portable=False):
-            if special_folder == SpecialFolder.CACHE:
-                if ISWINDOWS and portable:
-                    folder = op.join(executable_folder(), "cache")
-                else:
-                    folder = QStandardPaths.standardLocations(QStandardPaths.CacheLocation)[0]
-            else:
-                folder = get_appdata(portable)
-            return folder
-
-    except ImportError:
-        # We're either running tests, and these functions don't matter much or we're in a really
-        # weird situation. Let's just have dummy fallbacks.
-        logging.warning("Can't setup desktop functions!")
-
-        def _open_path(path):
-            # Dummy for tests
-            pass
-
-        def _reveal_path(path):
-            # Dummy for tests
-            pass
-
-        def _special_folder_path(special_folder, appname=None, portable=False):
-            return "/tmp"
+    def _special_folder_path(special_folder, appname=None, portable=False):
+        return "/tmp"

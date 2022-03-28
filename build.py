@@ -109,10 +109,7 @@ def build_updatepot():
     print("Building columns.pot")
     loc.generate_pot(["core"], Path("locale", "columns.pot"), ["coltr"])
     print("Building ui.pot")
-    # When we're not under OS X, we don't want to overwrite ui.pot because it contains Cocoa locs
-    # We want to merge the generated pot with the old pot in the most preserving way possible.
-    ui_packages = ["qt", Path("cocoa", "inter")]
-    loc.generate_pot(ui_packages, Path("locale", "ui.pot"), ["tr"], merge=True)
+    loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
     print("Building qtlib.pot")
     loc.generate_pot(["qtlib"], Path("qtlib", "locale", "qtlib.pot"), ["tr"])
 
@@ -121,13 +118,11 @@ def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos("locale")
     loc.merge_pots_into_pos(Path("qtlib", "locale"))
-    # loc.merge_pots_into_pos(Path("cocoalib", "locale"))
 
 
 def build_normpo():
     loc.normalize_all_pos("locale")
     loc.normalize_all_pos(Path("qtlib", "locale"))
-    # loc.normalize_all_pos(Path("cocoalib", "locale"))
 
 
 def build_pe_modules():

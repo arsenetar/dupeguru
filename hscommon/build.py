@@ -20,13 +20,8 @@ import re
 import importlib
 from datetime import datetime
 import glob
-import sysconfig
-import modulefinder
-
-from setuptools import setup, Extension
 
 from .plat import ISWINDOWS
-from .util import ensure_folder, delete_files_with_pattern
 
 
 def print_and_do(cmd):
@@ -181,23 +176,6 @@ def build_dmg(app_path, destfolder):
     print("Build Complete")
 
 
-def copy_sysconfig_files_for_embed(destpath):
-    # This normally shouldn't be needed for Python 3.3+.
-    makefile = sysconfig.get_makefile_filename()
-    configh = sysconfig.get_config_h_filename()
-    shutil.copy(makefile, destpath)
-    shutil.copy(configh, destpath)
-    with open(op.join(destpath, "site.py"), "w") as fp:
-        fp.write(
-            """
-import os.path as op
-from distutils import sysconfig
-sysconfig.get_makefile_filename = lambda: op.join(op.dirname(__file__), 'Makefile')
-sysconfig.get_config_h_filename = lambda: op.join(op.dirname(__file__), 'pyconfig.h')
-"""
-        )
-
-
 def add_to_pythonpath(path):
     """Adds ``path`` to both ``PYTHONPATH`` env and ``sys.path``."""
     abspath = op.abspath(path)
@@ -246,20 +224,6 @@ def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
                 shutil.copytree(source_path, dest_path, ignore=ignore)
             else:
                 shutil.copy(source_path, dest_path)
-
-
-def copy_qt_plugins(folder_names, dest):  # This is only for Windows
-    from PyQt5.QtCore import QLibraryInfo
-
-    qt_plugin_dir = QLibraryInfo.location(QLibraryInfo.PluginsPath)
-
-    def ignore(path, names):
-        if path == qt_plugin_dir:
-            return [n for n in names if n not in folder_names]
-        else:
-            return [n for n in names if not n.endswith(".dll")]
-
-    shutil.copytree(qt_plugin_dir, dest, ignore=ignore)
 
 
 def build_debian_changelog(
@@ -349,183 +313,6 @@ def read_changelog_file(filename):
     return result
 
 
-class OSXAppStructure:
-    def __init__(self, dest):
-        self.dest = dest
-        self.contents = op.join(dest, "Contents")
-        self.macos = op.join(self.contents, "MacOS")
-        self.resources = op.join(self.contents, "Resources")
-        self.frameworks = op.join(self.contents, "Frameworks")
-        self.infoplist = op.join(self.contents, "Info.plist")
-
-    def create(self, infoplist):
-        ensure_empty_folder(self.dest)
-        os.makedirs(self.macos)
-        os.mkdir(self.resources)
-        os.mkdir(self.frameworks)
-        copy(infoplist, self.infoplist)
-        open(op.join(self.contents, "PkgInfo"), "wt").write("APPLxxxx")
-
-    def copy_executable(self, executable):
-        info = plistlib.readPlist(self.infoplist)
-        self.executablename = info["CFBundleExecutable"]
-        self.executablepath = op.join(self.macos, self.executablename)
-        copy(executable, self.executablepath)
-
-    def copy_resources(self, *resources, use_symlinks=False):
-        for path in resources:
-            resource_dest = op.join(self.resources, op.basename(path))
-            action = symlink if use_symlinks else copy
-            action(op.abspath(path), resource_dest)
-
-    def copy_frameworks(self, *frameworks):
-        for path in frameworks:
-            framework_dest = op.join(self.frameworks, op.basename(path))
-            copy(path, framework_dest)
-
-
-def create_osx_app_structure(
-    dest,
-    executable,
-    infoplist,
-    resources=None,
-    frameworks=None,
-    symlink_resources=False,
-):
-    # `dest`: A path to the destination .app folder
-    # `executable`: the path of the executable file that goes in "MacOS"
-    # `infoplist`: The path to your Info.plist file.
-    # `resources`: A list of paths of files or folders going in the "Resources" folder.
-    # `frameworks`: Same as above for "Frameworks".
-    # `symlink_resources`: If True, will symlink resources into the structure instead of copying them.
-    app = OSXAppStructure(dest)
-    app.create(infoplist)
-    app.copy_executable(executable)
-    app.copy_resources(*resources, use_symlinks=symlink_resources)
-    app.copy_frameworks(*frameworks)
-
-
-class OSXFrameworkStructure:
-    def __init__(self, dest):
-        self.dest = dest
-        self.contents = op.join(dest, "Versions", "A")
-        self.resources = op.join(self.contents, "Resources")
-        self.headers = op.join(self.contents, "Headers")
-        self.infoplist = op.join(self.resources, "Info.plist")
-        self._update_executable_path()
-
-    def _update_executable_path(self):
-        if not op.exists(self.infoplist):
-            self.executablename = self.executablepath = None
-            return
-        info = plistlib.readPlist(self.infoplist)
-        self.executablename = info["CFBundleExecutable"]
-        self.executablepath = op.join(self.contents, self.executablename)
-
-    def create(self, infoplist):
-        ensure_empty_folder(self.dest)
-        os.makedirs(self.contents)
-        os.mkdir(self.resources)
-        os.mkdir(self.headers)
-        copy(infoplist, self.infoplist)
-        self._update_executable_path()
-
-    def create_symlinks(self):
-        # Only call this after create() and copy_executable()
-        os.symlink("A", op.join(self.dest, "Versions", "Current"))
-        os.symlink(op.relpath(self.executablepath, self.dest), op.join(self.dest, self.executablename))
-        os.symlink(op.relpath(self.headers, self.dest), op.join(self.dest, "Headers"))
-        os.symlink(op.relpath(self.resources, self.dest), op.join(self.dest, "Resources"))
-
-    def copy_executable(self, executable):
-        copy(executable, self.executablepath)
-
-    def copy_resources(self, *resources, use_symlinks=False):
-        for path in resources:
-            resource_dest = op.join(self.resources, op.basename(path))
-            action = symlink if use_symlinks else copy
-            action(op.abspath(path), resource_dest)
-
-    def copy_headers(self, *headers, use_symlinks=False):
-        for path in headers:
-            header_dest = op.join(self.headers, op.basename(path))
-            action = symlink if use_symlinks else copy
-            action(op.abspath(path), header_dest)
-
-
-def copy_embeddable_python_dylib(dst):
-    runtime = op.join(
-        sysconfig.get_config_var("PYTHONFRAMEWORKPREFIX"),
-        sysconfig.get_config_var("LDLIBRARY"),
-    )
-    filedest = op.join(dst, "Python")
-    shutil.copy(runtime, filedest)
-    os.chmod(filedest, 0o774)  # We need write permission to use install_name_tool
-    cmd = "install_name_tool -id @rpath/Python %s" % filedest
-    print_and_do(cmd)
-
-
-def collect_stdlib_dependencies(script, dest_folder, extra_deps=None):
-    sysprefix = sys.prefix  # could be a virtualenv
-    basesysprefix = sys.base_prefix  # seems to be path to non-virtual sys
-    real_lib_prefix = sysconfig.get_config_var("LIBDEST")  # leaving this in case it is neede
-
-    def is_stdlib_path(path):
-        # A module path is only a stdlib path if it's in either sys.prefix or
-        # sysconfig.get_config_var('prefix') (the 2 are different if we are in a virtualenv) and if
-        # there's no "site-package in the path.
-        if not path:
-            return False
-        if "site-package" in path:
-            return False
-        if not (path.startswith(sysprefix) or path.startswith(basesysprefix) or path.startswith(real_lib_prefix)):
-            return False
-        return True
-
-    ensure_folder(dest_folder)
-    mf = modulefinder.ModuleFinder()
-    mf.run_script(script)
-    modpaths = [mod.__file__ for mod in mf.modules.values()]
-    modpaths = filter(is_stdlib_path, modpaths)
-    for p in modpaths:
-        if p.startswith(real_lib_prefix):
-            relpath = op.relpath(p, real_lib_prefix)
-        elif p.startswith(sysprefix):
-            relpath = op.relpath(p, sysprefix)
-            assert relpath.startswith("lib/python3.")  # we want to get rid of that lib/python3.x part
-            relpath = relpath[len("lib/python3.X/") :]
-        elif p.startswith(basesysprefix):
-            relpath = op.relpath(p, basesysprefix)
-            assert relpath.startswith("lib/python3.")
-            relpath = relpath[len("lib/python3.X/") :]
-        else:
-            raise AssertionError()
-        if relpath.startswith("lib-dynload"):  # We copy .so files in lib-dynload directly in our dest
-            relpath = relpath[len("lib-dynload/") :]
-        if relpath.startswith("encodings") or relpath.startswith("distutils"):
-            # We force their inclusion later.
-            continue
-        dest_path = op.join(dest_folder, relpath)
-        ensure_folder(op.dirname(dest_path))
-        copy(p, dest_path)
-    # stringprep is used by encodings.
-    # We use real_lib_prefix with distutils because virtualenv messes with it and we need to refer
-    # to the original distutils folder.
-    FORCED_INCLUSION = [
-        "encodings",
-        "stringprep",
-        op.join(real_lib_prefix, "distutils"),
-    ]
-    if extra_deps:
-        FORCED_INCLUSION += extra_deps
-    copy_packages(FORCED_INCLUSION, dest_folder)
-    # There's a couple of rather big exe files in the distutils folder that we absolutely don't
-    # need. Remove them.
-    delete_files_with_pattern(op.join(dest_folder, "distutils"), "*.exe")
-    # And, finally, create an empty "site.py" that Python needs around on startup.
-    open(op.join(dest_folder, "site.py"), "w").close()
-
-
 def fix_qt_resource_file(path):
     # pyrcc5 under Windows, if the locale is non-english, can produce a source file with a date
     # containing accented characters. If it does, the encoding is wrong and it prevents the file
@@ -537,21 +324,3 @@ def fix_qt_resource_file(path):
     lines = [line for line in lines if not line.startswith(b"#")]
     with open(path, "wb") as fp:
         fp.write(b"\n".join(lines))
-
-
-def build_cocoa_ext(extname, dest, source_files, extra_frameworks=(), extra_includes=()):
-    extra_link_args = ["-framework", "CoreFoundation", "-framework", "Foundation"]
-    for extra in extra_frameworks:
-        extra_link_args += ["-framework", extra]
-    ext = Extension(
-        extname,
-        source_files,
-        extra_link_args=extra_link_args,
-        include_dirs=extra_includes,
-    )
-    setup(script_args=["build_ext", "--inplace"], ext_modules=[ext])
-    # Our problem here is to get the fully qualified filename of the resulting .so but I couldn't
-    # find a documented way to do so. The only thing I could find is this below :(
-    fn = ext._file_name
-    assert op.exists(fn)
-    move(fn, op.join(dest, fn))

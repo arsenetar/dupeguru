@@ -129,18 +129,6 @@ def install_gettext_trans(base_folder, lang):
     installed_lang = lang
 
 
-def install_gettext_trans_under_cocoa():
-    from cocoa import proxy
-
-    res_folder = proxy.getResourcePath()
-    base_folder = op.join(res_folder, "locale")
-    current_lang = proxy.systemLang()
-    install_gettext_trans(base_folder, current_lang)
-    localename = get_locale_name(current_lang)
-    if localename is not None:
-        locale.setlocale(locale.LC_ALL, localename)
-
-
 def install_gettext_trans_under_qt(base_folder, lang=None):
     # So, we install the gettext locale, great, but we also should try to install qt_*.qm if
     # available so that strings that are inside Qt itself over which I have no control are in the
