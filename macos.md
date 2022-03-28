@@ -1,5 +1,7 @@
 ## How to build dupeGuru for macos
+These instructions are for the Qt version of the UI on macOS.
 
+*Note: The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa and is no longer "supported".*
 ### Prerequisites
 
 - [Python 3.7+][python]

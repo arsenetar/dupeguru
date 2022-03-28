@@ -1,16 +1,12 @@
 # dupeGuru
 
 [dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
-a system. It is written mostly in Python 3 and has the peculiarity of using
-[multiple GUI toolkits][cross-toolkit], all using the same core Python code. On OS X, the UI layer
-is written in Objective-C and uses Cocoa. On Linux, it is written in Python and uses Qt5.
-
-The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa
+a system. It is written mostly in Python 3 and uses [qt](https://www.qt.io/) for the UI.
 
 ## Current status
 Still looking for additional help especially with regards to:
-* OSX maintenance: reproducing bugs & cocoa version, building package with Cocoa UI.
-* Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package.
+* OSX maintenance: reproducing bugs, packaging verification.
+* Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package, rpm package.
 * Translations: updating missing strings, transifex project at https://www.transifex.com/voltaicideas/dupeguru-1
 * Documentation: keeping it up-to-date.
 
@@ -43,11 +39,9 @@ For macos instructions (qt version) see the [macOS Instructions](macos.md).
 When running in a linux based environment the following system packages or equivalents are needed to build:
 * python3-pyqt5
 * pyqt5-dev-tools (on some systems, see note)
-* python3-wheel (for hsaudiotag3k)
 * python3-venv (only if using a virtual environment)
 * python3-dev
 * build-essential
-
 
 Note: On some linux systems pyrcc5 is not put on the path when installing python3-pyqt5, this will cause some issues with the resource files (and icons). These systems should have a respective pyqt5-dev-tools package, which should also be installed. The presence of pyrcc5 can be checked with `which pyrcc5`.  Debian based systems need the extra package, and Arch does not.
 
