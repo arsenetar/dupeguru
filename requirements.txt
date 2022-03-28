@@ -5,3 +5,4 @@ mutagen>=1.44.0
 distro>=1.5.0
 PyQt5 >=5.14.1,<6.0; sys_platform != 'linux'
 pywin32>=228; sys_platform == 'win32'
+semantic-version>=2.0.0,<3.0.0

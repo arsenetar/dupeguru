@@ -6,18 +6,11 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtCore import Qt, QCoreApplication, QTimer
 from PyQt5.QtGui import QPixmap, QFont
-from PyQt5.QtWidgets import (
-    QDialog,
-    QDialogButtonBox,
-    QSizePolicy,
-    QHBoxLayout,
-    QVBoxLayout,
-    QLabel,
-    QApplication,
-)
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QLabel
 
+from core.util import check_for_update
 from qtlib.util import move_to_screen_center
 from hscommon.trans import trget
 
@@ -31,61 +24,56 @@ class AboutBox(QDialog):
         self.app = app
         self._setupUi()
 
-        self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.reject)
+        self.button_box.accepted.connect(self.accept)
+        self.button_box.rejected.connect(self.reject)
 
     def _setupUi(self):
         self.setWindowTitle(tr("About {}").format(QCoreApplication.instance().applicationName()))
-        self.resize(400, 290)
         size_policy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        size_policy.setHorizontalStretch(0)
-        size_policy.setVerticalStretch(0)
-        size_policy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
         self.setSizePolicy(size_policy)
-        self.horizontalLayout = QHBoxLayout(self)
-        self.logoLabel = QLabel(self)
-        self.logoLabel.setPixmap(QPixmap(":/%s_big" % self.app.LOGO_NAME))
-        self.horizontalLayout.addWidget(self.logoLabel)
-        self.verticalLayout = QVBoxLayout()
-        self.nameLabel = QLabel(self)
+        main_layout = QHBoxLayout(self)
+        logo_label = QLabel()
+        logo_label.setPixmap(QPixmap(":/%s_big" % self.app.LOGO_NAME))
+        main_layout.addWidget(logo_label)
+        detail_layout = QVBoxLayout()
+        name_label = QLabel()
         font = QFont()
         font.setWeight(75)
         font.setBold(True)
-        self.nameLabel.setFont(font)
-        self.nameLabel.setText(QCoreApplication.instance().applicationName())
-        self.verticalLayout.addWidget(self.nameLabel)
-        self.versionLabel = QLabel(self)
-        self.versionLabel.setText(tr("Version {}").format(QCoreApplication.instance().applicationVersion()))
-        self.verticalLayout.addWidget(self.versionLabel)
-        self.label_3 = QLabel(self)
-        self.verticalLayout.addWidget(self.label_3)
-        self.label_3.setText(tr("Licensed under GPLv3"))
-        self.label = QLabel(self)
-        font = QFont()
-        font.setWeight(75)
-        font.setBold(True)
-        self.label.setFont(font)
-        self.verticalLayout.addWidget(self.label)
-        self.buttonBox = QDialogButtonBox(self)
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
-        self.verticalLayout.addWidget(self.buttonBox)
-        self.horizontalLayout.addLayout(self.verticalLayout)
+        name_label.setFont(font)
+        name_label.setText(QCoreApplication.instance().applicationName())
+        detail_layout.addWidget(name_label)
+        version_label = QLabel()
+        version_label.setText(tr("Version {}").format(QCoreApplication.instance().applicationVersion()))
+        detail_layout.addWidget(version_label)
+        self.update_label = QLabel(tr("Checking for updates..."))
+        self.update_label.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.update_label.setOpenExternalLinks(True)
+        detail_layout.addWidget(self.update_label)
+        license_label = QLabel()
+        license_label.setText(tr("Licensed under GPLv3"))
+        detail_layout.addWidget(license_label)
+        spacer_label = QLabel()
+        spacer_label.setFont(font)
+        detail_layout.addWidget(spacer_label)
+        self.button_box = QDialogButtonBox()
+        self.button_box.setOrientation(Qt.Horizontal)
+        self.button_box.setStandardButtons(QDialogButtonBox.Ok)
+        detail_layout.addWidget(self.button_box)
+        main_layout.addLayout(detail_layout)
+
+    def _check_for_update(self):
+        update = check_for_update(QCoreApplication.instance().applicationVersion(), include_prerelease=False)
+        if update is None:
+            self.update_label.setText(tr("No update available."))
+        else:
+            self.update_label.setText(
+                tr('New version {} available, download <a href="{}">here</a>.').format(update["version"], update["url"])
+            )
 
     def showEvent(self, event):
+        self.update_label.setText(tr("Checking for updates..."))
         # have to do this here as the frameGeometry is not correct until shown
         move_to_screen_center(self)
         super().showEvent(event)
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication([])
-    QCoreApplication.setOrganizationName("Hardcoded Software")
-    QCoreApplication.setApplicationName("FooApp")
-    QCoreApplication.setApplicationVersion("1.2.3")
-    app.LOGO_NAME = ""
-    dialog = AboutBox(None, app)
-    dialog.show()
-    sys.exit(app.exec_())
+        QTimer.singleShot(0, self._check_for_update)

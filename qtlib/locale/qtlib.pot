@@ -4,16 +4,28 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 
-#: qtlib\about_box.py:38
+#: qtlib\about_box.py:31
 msgid "About {}"
 msgstr ""
 
-#: qtlib\about_box.py:58
+#: qtlib\about_box.py:47
 msgid "Version {}"
 msgstr ""
 
-#: qtlib\about_box.py:62
+#: qtlib\about_box.py:49 qtlib\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qtlib\about_box.py:54
 msgid "Licensed under GPLv3"
+msgstr ""
+
+#: qtlib\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qtlib\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
 msgstr ""
 
 #: qtlib\error_report_dialog.py:50

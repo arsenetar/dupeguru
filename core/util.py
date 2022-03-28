@@ -7,6 +7,12 @@
 import time
 import sys
 import os
+import urllib.request
+import urllib.error
+import json
+import semantic_version
+import logging
+from typing import Union
 
 from hscommon.util import format_time_decimal
 
@@ -64,3 +70,34 @@ def fix_surrogate_encoding(s, encoding="utf-8"):
 
 def executable_folder():
     return os.path.dirname(os.path.abspath(sys.argv[0]))
+
+
+def check_for_update(current_version: str, include_prerelease: bool = False) -> Union[None, dict]:
+    request = urllib.request.Request(
+        "https://api.github.com/repos/arsenetar/dupeguru/releases",
+        headers={"Accept": "application/vnd.github.v3+json"},
+    )
+    try:
+        with urllib.request.urlopen(request) as response:
+            if response.status != 200:
+                logging.warn(f"Error retriving updates. Status: {response.status}")
+                return None
+            try:
+                response_json = json.loads(response.read())
+            except json.JSONDecodeError as ex:
+                logging.warn(f"Error parsing updates. {ex.msg}")
+                return None
+    except urllib.error.URLError as ex:
+        logging.warn(f"Error retriving updates. {ex.reason}")
+        return None
+    new_version = semantic_version.Version(current_version)
+    new_url = None
+    for release in response_json:
+        release_version = semantic_version.Version(release["name"])
+        if new_version < release_version and (include_prerelease or not release_version.prerelease):
+            new_version = release_version
+            new_url = release["html_url"]
+    if new_url is not None:
+        return {"version": new_version, "url": new_url}
+    else:
+        return None
