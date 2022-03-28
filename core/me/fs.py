@@ -97,11 +97,6 @@ class MusicFile(fs.File):
             "dupe_count": format_dupe_count(dupe_count),
         }
 
-    def _get_md5partial_offset_and_size(self):
-        # No longer calculating the offset and audio size, just whole file
-        size = self.path.stat().st_size
-        return (0, size)
-
     def _read_info(self, field):
         fs.File._read_info(self, field)
         if field in TAG_FIELDS:

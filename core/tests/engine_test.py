@@ -530,7 +530,7 @@ class TestCaseGetMatches:
 
 
 class TestCaseGetMatchesByContents:
-    def test_big_file_partial_hashes(self):
+    def test_big_file_partial_hashing(self):
         smallsize = 1
         bigsize = 100 * 1024 * 1024  # 100MB
         f = [
@@ -539,17 +539,17 @@ class TestCaseGetMatchesByContents:
             no("smallfoo", size=smallsize),
             no("smallbar", size=smallsize),
         ]
-        f[0].md5 = f[0].md5partial = f[0].md5samples = "foobar"
-        f[1].md5 = f[1].md5partial = f[1].md5samples = "foobar"
-        f[2].md5 = f[2].md5partial = "bleh"
-        f[3].md5 = f[3].md5partial = "bleh"
+        f[0].digest = f[0].digest_partial = f[0].digest_samples = "foobar"
+        f[1].digest = f[1].digest_partial = f[1].digest_samples = "foobar"
+        f[2].digest = f[2].digest_partial = "bleh"
+        f[3].digest = f[3].digest_partial = "bleh"
         r = getmatches_by_contents(f, bigsize=bigsize)
         eq_(len(r), 2)
-        # User disabled optimization for big files, compute hashes as usual
+        # User disabled optimization for big files, compute digests as usual
         r = getmatches_by_contents(f, bigsize=0)
         eq_(len(r), 2)
-        # Other file is now slightly different, md5partial is still the same
-        f[1].md5 = f[1].md5samples = "foobardiff"
+        # Other file is now slightly different, digest_partial is still the same
+        f[1].digest = f[1].digest_samples = "foobardiff"
         r = getmatches_by_contents(f, bigsize=bigsize)
         # Successfully filter it out
         eq_(len(r), 1)

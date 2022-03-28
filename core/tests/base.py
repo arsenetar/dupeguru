@@ -86,9 +86,9 @@ class NamedObject:
             folder = "basepath"
         self._folder = Path(folder)
         self.size = size
-        self.md5partial = name
-        self.md5 = name
-        self.md5samples = name
+        self.digest_partial = name
+        self.digest = name
+        self.digest_samples = name
         if with_words:
             self.words = getwords(name)
         self.is_ref = False

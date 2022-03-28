@@ -6,7 +6,15 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import hashlib
+try:
+    import xxhash
+
+    hasher = xxhash.xxh128
+except ImportError:
+    import hashlib
+
+    hasher = hashlib.md5
+
 from os import urandom
 
 from hscommon.path import Path
@@ -52,54 +60,54 @@ def test_size_aggregates_subfiles(tmpdir):
     eq_(b.size, 12)
 
 
-def test_md5_aggregate_subfiles_sorted(tmpdir):
-    # dir.allfiles can return child in any order. Thus, bundle.md5 must aggregate
-    # all files' md5 it contains, but it must make sure that it does so in the
+def test_digest_aggregate_subfiles_sorted(tmpdir):
+    # dir.allfiles can return child in any order. Thus, bundle.digest must aggregate
+    # all files' digests it contains, but it must make sure that it does so in the
     # same order everytime.
     p = create_fake_fs_with_random_data(Path(str(tmpdir)))
     b = fs.Folder(p)
-    md51 = fs.File(p["dir1"]["file1.test"]).md5
-    md52 = fs.File(p["dir2"]["file2.test"]).md5
-    md53 = fs.File(p["dir3"]["file3.test"]).md5
-    md54 = fs.File(p["file1.test"]).md5
-    md55 = fs.File(p["file2.test"]).md5
-    md56 = fs.File(p["file3.test"]).md5
-    # The expected md5 is the md5 of md5s for folders and the direct md5 for files
-    folder_md51 = hashlib.md5(md51).digest()
-    folder_md52 = hashlib.md5(md52).digest()
-    folder_md53 = hashlib.md5(md53).digest()
-    md5 = hashlib.md5(folder_md51 + folder_md52 + folder_md53 + md54 + md55 + md56)
-    eq_(b.md5, md5.digest())
+    digest1 = fs.File(p["dir1"]["file1.test"]).digest
+    digest2 = fs.File(p["dir2"]["file2.test"]).digest
+    digest3 = fs.File(p["dir3"]["file3.test"]).digest
+    digest4 = fs.File(p["file1.test"]).digest
+    digest5 = fs.File(p["file2.test"]).digest
+    digest6 = fs.File(p["file3.test"]).digest
+    # The expected digest is the hash of digests for folders and the direct digest for files
+    folder_digest1 = hasher(digest1).digest()
+    folder_digest2 = hasher(digest2).digest()
+    folder_digest3 = hasher(digest3).digest()
+    digest = hasher(folder_digest1 + folder_digest2 + folder_digest3 + digest4 + digest5 + digest6).digest()
+    eq_(b.digest, digest)
 
 
-def test_partial_md5_aggregate_subfile_sorted(tmpdir):
+def test_partial_digest_aggregate_subfile_sorted(tmpdir):
     p = create_fake_fs_with_random_data(Path(str(tmpdir)))
     b = fs.Folder(p)
-    md51 = fs.File(p["dir1"]["file1.test"]).md5partial
-    md52 = fs.File(p["dir2"]["file2.test"]).md5partial
-    md53 = fs.File(p["dir3"]["file3.test"]).md5partial
-    md54 = fs.File(p["file1.test"]).md5partial
-    md55 = fs.File(p["file2.test"]).md5partial
-    md56 = fs.File(p["file3.test"]).md5partial
-    # The expected md5 is the md5 of md5s for folders and the direct md5 for files
-    folder_md51 = hashlib.md5(md51).digest()
-    folder_md52 = hashlib.md5(md52).digest()
-    folder_md53 = hashlib.md5(md53).digest()
-    md5 = hashlib.md5(folder_md51 + folder_md52 + folder_md53 + md54 + md55 + md56)
-    eq_(b.md5partial, md5.digest())
+    digest1 = fs.File(p["dir1"]["file1.test"]).digest_partial
+    digest2 = fs.File(p["dir2"]["file2.test"]).digest_partial
+    digest3 = fs.File(p["dir3"]["file3.test"]).digest_partial
+    digest4 = fs.File(p["file1.test"]).digest_partial
+    digest5 = fs.File(p["file2.test"]).digest_partial
+    digest6 = fs.File(p["file3.test"]).digest_partial
+    # The expected digest is the hash of digests for folders and the direct digest for files
+    folder_digest1 = hasher(digest1).digest()
+    folder_digest2 = hasher(digest2).digest()
+    folder_digest3 = hasher(digest3).digest()
+    digest = hasher(folder_digest1 + folder_digest2 + folder_digest3 + digest4 + digest5 + digest6).digest()
+    eq_(b.digest_partial, digest)
 
-    md51 = fs.File(p["dir1"]["file1.test"]).md5samples
-    md52 = fs.File(p["dir2"]["file2.test"]).md5samples
-    md53 = fs.File(p["dir3"]["file3.test"]).md5samples
-    md54 = fs.File(p["file1.test"]).md5samples
-    md55 = fs.File(p["file2.test"]).md5samples
-    md56 = fs.File(p["file3.test"]).md5samples
-    # The expected md5 is the md5 of md5s for folders and the direct md5 for files
-    folder_md51 = hashlib.md5(md51).digest()
-    folder_md52 = hashlib.md5(md52).digest()
-    folder_md53 = hashlib.md5(md53).digest()
-    md5 = hashlib.md5(folder_md51 + folder_md52 + folder_md53 + md54 + md55 + md56)
-    eq_(b.md5samples, md5.digest())
+    digest1 = fs.File(p["dir1"]["file1.test"]).digest_samples
+    digest2 = fs.File(p["dir2"]["file2.test"]).digest_samples
+    digest3 = fs.File(p["dir3"]["file3.test"]).digest_samples
+    digest4 = fs.File(p["file1.test"]).digest_samples
+    digest5 = fs.File(p["file2.test"]).digest_samples
+    digest6 = fs.File(p["file3.test"]).digest_samples
+    # The expected digest is the digest of digests for folders and the direct digest for files
+    folder_digest1 = hasher(digest1).digest()
+    folder_digest2 = hasher(digest2).digest()
+    folder_digest3 = hasher(digest3).digest()
+    digest = hasher(folder_digest1 + folder_digest2 + folder_digest3 + digest4 + digest5 + digest6).digest()
+    eq_(b.digest_samples, digest)
 
 
 def test_has_file_attrs(tmpdir):

@@ -283,7 +283,7 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     """Returns a list of :class:`Match` within ``files`` if their contents is the same.
 
     :param bigsize: The size in bytes over which we consider files big enough to
-                    justify taking samples of md5. If 0, compute md5 as usual.
+                    justify taking samples of the file for hashing. If 0, compute digest as usual.
     :param j: A :ref:`job progress instance <jobs>`.
     """
     size2files = defaultdict(set)
@@ -300,15 +300,15 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
             if first.is_ref and second.is_ref:
                 continue  # Don't spend time comparing two ref pics together.
             if first.size == 0 and second.size == 0:
-                # skip md5 for zero length files
+                # skip hashing for zero length files
                 result.append(Match(first, second, 100))
                 continue
-            if first.md5partial == second.md5partial:
+            if first.digest_partial == second.digest_partial:
                 if bigsize > 0 and first.size > bigsize:
-                    if first.md5samples == second.md5samples:
+                    if first.digest_samples == second.digest_samples:
                         result.append(Match(first, second, 100))
                 else:
-                    if first.md5 == second.md5:
+                    if first.digest == second.digest:
                         result.append(Match(first, second, 100))
         group_count += 1
         j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))

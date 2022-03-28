@@ -238,7 +238,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
     for ref_id, other_id, percentage in myiter:
         ref = id2picture[ref_id]
         other = id2picture[other_id]
-        if percentage == 100 and ref.md5 != other.md5:
+        if percentage == 100 and ref.digest != other.digest:
             percentage = 99
         if percentage >= threshold:
             ref.dimensions  # pre-read dimensions for display in results
