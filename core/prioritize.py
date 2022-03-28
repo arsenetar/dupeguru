@@ -82,10 +82,12 @@ class FolderCategory(ValueListCategory):
 
     def sort_key(self, dupe, crit_value):
         value = self.extract_value(dupe)
-        if value.is_relative_to(crit_value):
-            return 0
-        else:
+        # This is instead of using is_relative_to() which was added in py 3.9
+        try:
+            value.relative_to(crit_value)
+        except ValueError:
             return 1
+        return 0
 
 
 class FilenameCategory(CriterionCategory):
