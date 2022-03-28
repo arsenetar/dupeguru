@@ -14,7 +14,7 @@ import re
 import os
 import shutil
 
-from .path import Path, pathify
+from pathlib import Path
 
 # This matches [123], but not [12] (3 digits being the minimum).
 # It also matches [1234] [12345] etc..
@@ -52,16 +52,15 @@ def is_conflicted(name):
     return re_conflict.match(name) is not None
 
 
-@pathify
 def _smart_move_or_copy(operation, source_path: Path, dest_path: Path):
     """Use move() or copy() to move and copy file with the conflict management."""
-    if dest_path.isdir() and not source_path.isdir():
-        dest_path = dest_path[source_path.name]
+    if dest_path.is_dir() and not source_path.is_dir():
+        dest_path = dest_path.joinpath(source_path.name)
     if dest_path.exists():
         filename = dest_path.name
-        dest_dir_path = dest_path.parent()
+        dest_dir_path = dest_path.parent
         newname = get_conflicted_name(os.listdir(str(dest_dir_path)), filename)
-        dest_path = dest_dir_path[newname]
+        dest_path = dest_dir_path.joinpath(newname)
     operation(str(source_path), str(dest_path))
 
 

@@ -11,7 +11,7 @@ from io import StringIO
 from pytest import raises
 
 from ..testutil import eq_
-from ..path import Path
+from pathlib import Path
 from ..util import (
     nonone,
     tryint,
@@ -245,30 +245,30 @@ class TestCaseDeleteIfEmpty:
 
     def test_not_empty(self, tmpdir):
         testpath = Path(str(tmpdir))
-        testpath["foo"].mkdir()
+        testpath.joinpath("foo").mkdir()
         assert not delete_if_empty(testpath)
         assert testpath.exists()
 
     def test_with_files_to_delete(self, tmpdir):
         testpath = Path(str(tmpdir))
-        testpath["foo"].open("w")
-        testpath["bar"].open("w")
+        testpath.joinpath("foo").touch()
+        testpath.joinpath("bar").touch()
         assert delete_if_empty(testpath, ["foo", "bar"])
         assert not testpath.exists()
 
     def test_directory_in_files_to_delete(self, tmpdir):
         testpath = Path(str(tmpdir))
-        testpath["foo"].mkdir()
+        testpath.joinpath("foo").mkdir()
         assert not delete_if_empty(testpath, ["foo"])
         assert testpath.exists()
 
     def test_delete_files_to_delete_only_if_dir_is_empty(self, tmpdir):
         testpath = Path(str(tmpdir))
-        testpath["foo"].open("w")
-        testpath["bar"].open("w")
+        testpath.joinpath("foo").touch()
+        testpath.joinpath("bar").touch()
         assert not delete_if_empty(testpath, ["foo"])
         assert testpath.exists()
-        assert testpath["foo"].exists()
+        assert testpath.joinpath("foo").exists()
 
     def test_doesnt_exist(self):
         # When the 'path' doesn't exist, just do nothing.
@@ -276,8 +276,8 @@ class TestCaseDeleteIfEmpty:
 
     def test_is_file(self, tmpdir):
         # When 'path' is a file, do nothing.
-        p = Path(str(tmpdir)) + "filename"
-        p.open("w").close()
+        p = Path(str(tmpdir)).joinpath("filename")
+        p.touch()
         delete_if_empty(p)  # no crash
 
     def test_ioerror(self, tmpdir, monkeypatch):

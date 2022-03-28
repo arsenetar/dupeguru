@@ -9,7 +9,7 @@ import os.path as op
 import logging
 
 import pytest
-from hscommon.path import Path
+from pathlib import Path
 import hscommon.conflict
 import hscommon.util
 from hscommon.testutil import eq_, log_calls
@@ -56,7 +56,7 @@ class TestCaseDupeGuru:
         # for this unit is pathetic. What's done is done. My approach now is to add tests for
         # every change I want to make. The blowup was caused by a missing import.
         p = Path(str(tmpdir))
-        p["foo"].open("w").close()
+        p.joinpath("foo").touch()
         monkeypatch.setattr(
             hscommon.conflict,
             "smart_copy",
@@ -71,19 +71,19 @@ class TestCaseDupeGuru:
         dgapp.copy_or_move(f, True, "some_destination", 0)
         eq_(1, len(hscommon.conflict.smart_copy.calls))
         call = hscommon.conflict.smart_copy.calls[0]
-        eq_(call["dest_path"], op.join("some_destination", "foo"))
+        eq_(call["dest_path"], Path("some_destination", "foo"))
         eq_(call["source_path"], f.path)
 
     def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
         tmppath = Path(str(tmpdir))
-        sourcepath = tmppath["source"]
+        sourcepath = tmppath.joinpath("source")
         sourcepath.mkdir()
-        sourcepath["myfile"].open("w")
+        sourcepath.joinpath("myfile").touch()
         app = TestApp().app
         app.directories.add_path(tmppath)
         [myfile] = app.directories.get_files()
         monkeypatch.setattr(app, "clean_empty_dirs", log_calls(lambda path: None))
-        app.copy_or_move(myfile, False, tmppath["dest"], 0)
+        app.copy_or_move(myfile, False, tmppath.joinpath("dest"), 0)
         calls = app.clean_empty_dirs.calls
         eq_(1, len(calls))
         eq_(sourcepath, calls[0]["path"])
@@ -106,8 +106,8 @@ class TestCaseDupeGuru:
         # If the ignore_hardlink_matches option is set, don't match files hardlinking to the same
         # inode.
         tmppath = Path(str(tmpdir))
-        tmppath["myfile"].open("w").write("foo")
-        os.link(str(tmppath["myfile"]), str(tmppath["hardlink"]))
+        tmppath.joinpath("myfile").open("wt").write("foo")
+        os.link(str(tmppath.joinpath("myfile")), str(tmppath.joinpath("hardlink")))
         app = TestApp().app
         app.directories.add_path(tmppath)
         app.options["scan_type"] = ScanType.CONTENTS
@@ -153,7 +153,7 @@ class TestCaseDupeGuruCleanEmptyDirs:
         # delete_if_empty must be recursively called up in the path until it returns False
         @log_calls
         def mock_delete_if_empty(path, files_to_delete=[]):
-            return len(path) > 1
+            return len(path.parts) > 1
 
         monkeypatch.setattr(hscommon.util, "delete_if_empty", mock_delete_if_empty)
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
@@ -180,8 +180,8 @@ class TestCaseDupeGuruWithResults:
         self.rtable.refresh()
         tmpdir = request.getfixturevalue("tmpdir")
         tmppath = Path(str(tmpdir))
-        tmppath["foo"].mkdir()
-        tmppath["bar"].mkdir()
+        tmppath.joinpath("foo").mkdir()
+        tmppath.joinpath("bar").mkdir()
         self.app.directories.add_path(tmppath)
 
     def test_get_objects(self, do_setup):
@@ -424,12 +424,9 @@ class TestCaseDupeGuruRenameSelected:
     def do_setup(self, request):
         tmpdir = request.getfixturevalue("tmpdir")
         p = Path(str(tmpdir))
-        fp = open(str(p["foo bar 1"]), mode="w")
-        fp.close()
-        fp = open(str(p["foo bar 2"]), mode="w")
-        fp.close()
-        fp = open(str(p["foo bar 3"]), mode="w")
-        fp.close()
+        p.joinpath("foo bar 1").touch()
+        p.joinpath("foo bar 2").touch()
+        p.joinpath("foo bar 3").touch()
         files = fs.get_files(p)
         for f in files:
             f.is_ref = False
@@ -451,7 +448,7 @@ class TestCaseDupeGuruRenameSelected:
         g = self.groups[0]
         self.rtable.select([1])
         assert app.rename_selected("renamed")
-        names = [p.name for p in self.p.listdir()]
+        names = [p.name for p in self.p.glob("*")]
         assert "renamed" in names
         assert "foo bar 2" not in names
         eq_(g.dupes[0].name, "renamed")
@@ -464,7 +461,7 @@ class TestCaseDupeGuruRenameSelected:
         assert not app.rename_selected("renamed")
         msg = logging.warning.calls[0]["msg"]
         eq_("dupeGuru Warning: list index out of range", msg)
-        names = [p.name for p in self.p.listdir()]
+        names = [p.name for p in self.p.glob("*")]
         assert "renamed" not in names
         assert "foo bar 2" in names
         eq_(g.dupes[0].name, "foo bar 2")
@@ -477,7 +474,7 @@ class TestCaseDupeGuruRenameSelected:
         assert not app.rename_selected("foo bar 1")
         msg = logging.warning.calls[0]["msg"]
         assert msg.startswith("dupeGuru Warning: 'foo bar 1' already exists in")
-        names = [p.name for p in self.p.listdir()]
+        names = [p.name for p in self.p.glob("*")]
         assert "foo bar 1" in names
         assert "foo bar 2" in names
         eq_(g.dupes[0].name, "foo bar 2")
@@ -488,9 +485,9 @@ class TestAppWithDirectoriesInTree:
     def do_setup(self, request):
         tmpdir = request.getfixturevalue("tmpdir")
         p = Path(str(tmpdir))
-        p["sub1"].mkdir()
-        p["sub2"].mkdir()
-        p["sub3"].mkdir()
+        p.joinpath("sub1").mkdir()
+        p.joinpath("sub2").mkdir()
+        p.joinpath("sub3").mkdir()
         app = TestApp()
         self.app = app.app
         self.dtree = app.dtree

@@ -7,9 +7,9 @@
 import os
 from xml.etree import ElementTree as ET
 import logging
+from pathlib import Path
 
 from hscommon.jobprogress import job
-from hscommon.path import Path
 from hscommon.util import FileOrPath
 from hscommon.trans import tr
 
@@ -63,7 +63,7 @@ class Directories:
 
     def __contains__(self, path):
         for p in self._dirs:
-            if path in p:
+            if path == p or p in path.parents:
                 return True
         return False
 
@@ -94,7 +94,9 @@ class Directories:
             j.check_if_cancelled()
             root_path = Path(root)
             state = self.get_state(root_path)
-            if state == DirectoryState.EXCLUDED and not any(p[: len(root_path)] == root_path for p in self.states):
+            if state == DirectoryState.EXCLUDED and not any(
+                p.parts[: len(root_path.parts)] == root_path.parts for p in self.states
+            ):
                 # Recursively get files from folders with lots of subfolder is expensive. However, there
                 # might be a subfolder in this path that is not excluded. What we want to do is to skim
                 # through self.states and see if we must continue, or we can stop right here to save time
@@ -103,19 +105,19 @@ class Directories:
                 if state != DirectoryState.EXCLUDED:
                     # Old logic
                     if self._exclude_list is None or not self._exclude_list.mark_count:
-                        found_files = [fs.get_file(root_path + f, fileclasses=fileclasses) for f in files]
+                        found_files = [fs.get_file(root_path.joinpath(f), fileclasses=fileclasses) for f in files]
                     else:
                         found_files = []
                         # print(f"len of files: {len(files)} {files}")
                         for f in files:
                             if not self._exclude_list.is_excluded(root, f):
-                                found_files.append(fs.get_file(root_path + f, fileclasses=fileclasses))
+                                found_files.append(fs.get_file(root_path.joinpath(f), fileclasses=fileclasses))
                     found_files = [f for f in found_files if f is not None]
                     # In some cases, directories can be considered as files by dupeGuru, which is
                     # why we have this line below. In fact, there only one case: Bundle files under
                     # OS X... In other situations, this forloop will do nothing.
                     for d in dirs[:]:
-                        f = fs.get_file(root_path + d, fileclasses=fileclasses)
+                        f = fs.get_file(root_path.joinpath(d), fileclasses=fileclasses)
                         if f is not None:
                             found_files.append(f)
                             dirs.remove(d)
@@ -159,7 +161,7 @@ class Directories:
             raise AlreadyThereError()
         if not path.exists():
             raise InvalidPathError()
-        self._dirs = [p for p in self._dirs if p not in path]
+        self._dirs = [p for p in self._dirs if path not in p.parents]
         self._dirs.append(path)
 
     @staticmethod
@@ -170,7 +172,7 @@ class Directories:
         :rtype: list of Path
         """
         try:
-            subpaths = [p for p in path.listdir() if p.isdir()]
+            subpaths = [p for p in path.glob("*") if p.is_dir()]
             subpaths.sort(key=lambda x: x.name.lower())
             return subpaths
         except EnvironmentError:
@@ -225,8 +227,8 @@ class Directories:
         # we loop through the states to find the longest matching prefix
         # if the parent has a state in cache, return that state
         for p, s in self.states.items():
-            if p.is_parent_of(path) and len(p) > prevlen:
-                prevlen = len(p)
+            if p in path.parents and len(p.parts) > prevlen:
+                prevlen = len(p.parts)
                 state = s
         return state
 
@@ -296,6 +298,6 @@ class Directories:
         if self.get_state(path) == state:
             return
         for iter_path in list(self.states.keys()):
-            if path.is_parent_of(iter_path):
+            if path in iter_path.parents:
                 del self.states[iter_path]
         self.states[path] = state

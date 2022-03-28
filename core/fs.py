@@ -28,7 +28,7 @@ import sqlite3
 from threading import Lock
 from typing import Any, AnyStr, Union
 
-from hscommon.path import Path
+from pathlib import Path
 from hscommon.util import nonone, get_file_ext
 
 __all__ = [
@@ -302,14 +302,14 @@ class File:
     @classmethod
     def can_handle(cls, path):
         """Returns whether this file wrapper class can handle ``path``."""
-        return not path.islink() and path.isfile()
+        return not path.is_symlink() and path.is_file()
 
     def rename(self, newname):
         if newname == self.name:
             return
-        destpath = self.path.parent()[newname]
+        destpath = self.path.parent.joinpath(newname)
         if destpath.exists():
-            raise AlreadyExistsError(newname, self.path.parent())
+            raise AlreadyExistsError(newname, self.path.parent)
         try:
             self.path.rename(destpath)
         except EnvironmentError:
@@ -333,7 +333,7 @@ class File:
 
     @property
     def folder_path(self):
-        return self.path.parent()
+        return self.path.parent
 
 
 class Folder(File):
@@ -377,13 +377,13 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subfolders = [p for p in self.path.listdir() if not p.islink() and p.isdir()]
+            subfolders = [p for p in self.path.glob("*") if not p.is_symlink() and p.is_dir()]
             self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
 
     @classmethod
     def can_handle(cls, path):
-        return not path.islink() and path.isdir()
+        return not path.is_symlink() and path.is_dir()
 
 
 def get_file(path, fileclasses=[File]):
@@ -408,7 +408,7 @@ def get_files(path, fileclasses=[File]):
     assert all(issubclass(fileclass, File) for fileclass in fileclasses)
     try:
         result = []
-        for path in path.listdir():
+        for path in path.glob("*"):
             file = get_file(path, fileclasses=fileclasses)
             if file is not None:
                 result.append(file)

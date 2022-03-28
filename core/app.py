@@ -10,11 +10,11 @@ import logging
 import subprocess
 import re
 import shutil
+from pathlib import Path
 
 from send2trash import send2trash
 from hscommon.jobprogress import job
 from hscommon.notify import Broadcaster
-from hscommon.path import Path
 from hscommon.conflict import smart_move, smart_copy
 from hscommon.gui.progress_window import ProgressWindow
 from hscommon.util import delete_if_empty, first, escape, nonone, allsame
@@ -415,7 +415,7 @@ class DupeGuru(Broadcaster):
     def clean_empty_dirs(self, path):
         if self.options["clean_empty_dirs"]:
             while delete_if_empty(path, [".DS_Store"]):
-                path = path.parent()
+                path = path.parent
 
     def clear_picture_cache(self):
         try:
@@ -428,25 +428,25 @@ class DupeGuru(Broadcaster):
 
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
-        location_path = first(p for p in self.directories if dupe.path in p)
+        location_path = first(p for p in self.directories if p in dupe.path.parents)
         dest_path = Path(destination)
         if dest_type in {DestType.RELATIVE, DestType.ABSOLUTE}:
             # no filename, no windows drive letter
-            source_base = source_path.remove_drive_letter().parent()
+            source_base = source_path.relative_to(source_path.anchor).parent
             if dest_type == DestType.RELATIVE:
-                source_base = source_base[location_path:]
-            dest_path = dest_path[source_base]
+                source_base = source_base.relative_to(location_path.relative_to(location_path.anchor))
+            dest_path = dest_path.joinpath(source_base)
         if not dest_path.exists():
-            dest_path.makedirs()
+            dest_path.mkdir(parents=True)
         # Add filename to dest_path. For file move/copy, it's not required, but for folders, yes.
-        dest_path = dest_path[source_path.name]
+        dest_path = dest_path.joinpath(source_path.name)
         logging.debug("Copy/Move operation from '%s' to '%s'", source_path, dest_path)
         # Raises an EnvironmentError if there's a problem
         if copy:
             smart_copy(source_path, dest_path)
         else:
             smart_move(source_path, dest_path)
-            self.clean_empty_dirs(source_path.parent())
+            self.clean_empty_dirs(source_path.parent)
 
     def copy_or_move_marked(self, copy):
         """Start an async move (or copy) job on marked duplicates.

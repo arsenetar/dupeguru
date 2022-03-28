@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app  # noqa
-from hscommon.path import Path
+from pathlib import Path
 from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
 from hscommon.jobprogress.job import nulljob, JobCancelled
@@ -111,11 +111,11 @@ class NamedObject:
 
     @property
     def path(self):
-        return self._folder[self.name]
+        return self._folder.joinpath(self.name)
 
     @property
     def folder_path(self):
-        return self.path.parent()
+        return self.path.parent
 
     @property
     def extension(self):

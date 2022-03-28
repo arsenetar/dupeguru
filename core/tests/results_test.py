@@ -447,7 +447,7 @@ class TestCaseResultsXML:
         self.results.groups = self.groups
 
     def get_file(self, path):  # use this as a callback for load_from_xml
-        return [o for o in self.objects if o.path == path][0]
+        return [o for o in self.objects if str(o.path) == path][0]
 
     def test_save_to_xml(self):
         self.objects[0].is_ref = True

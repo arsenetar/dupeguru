@@ -7,7 +7,7 @@
 import pytest
 
 from hscommon.jobprogress import job
-from hscommon.path import Path
+from pathlib import Path
 from hscommon.testutil import eq_
 
 from .. import fs
@@ -22,7 +22,7 @@ class NamedObject:
         if path is None:
             path = Path(name)
         else:
-            path = Path(path)[name]
+            path = Path(path, name)
         self.name = name
         self.size = size
         self.path = path
@@ -572,12 +572,14 @@ def test_dont_group_files_that_dont_exist(tmpdir):
     s = Scanner()
     s.scan_type = ScanType.CONTENTS
     p = Path(str(tmpdir))
-    p["file1"].open("w").write("foo")
-    p["file2"].open("w").write("foo")
+    with p.joinpath("file1").open("w") as fp:
+        fp.write("foo")
+    with p.joinpath("file2").open("w") as fp:
+        fp.write("foo")
     file1, file2 = fs.get_files(p)
 
     def getmatches(*args, **kw):
-        file2.path.remove()
+        file2.path.unlink()
         return [Match(file1, file2, 100)]
 
     s._getmatches = getmatches

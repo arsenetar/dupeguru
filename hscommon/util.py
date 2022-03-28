@@ -15,7 +15,8 @@ import glob
 import shutil
 from datetime import timedelta
 
-from .path import Path, pathify, log_io_error
+from pathlib import Path
+from .path import pathify, log_io_error
 
 
 def nonone(value, replace_value):
@@ -354,13 +355,13 @@ def find_in_path(name, paths=None):
 @pathify
 def delete_if_empty(path: Path, files_to_delete=[]):
     """Deletes the directory at 'path' if it is empty or if it only contains files_to_delete."""
-    if not path.exists() or not path.isdir():
+    if not path.exists() or not path.is_dir():
         return
-    contents = path.listdir()
-    if any(p for p in contents if (p.name not in files_to_delete) or p.isdir()):
+    contents = list(path.glob("*"))
+    if any(p for p in contents if (p.name not in files_to_delete) or p.is_dir()):
         return False
     for p in contents:
-        p.remove()
+        p.unlink()
     path.rmdir()
     return True
 

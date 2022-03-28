@@ -134,7 +134,7 @@ class Scanner:
             return False
         if is_same_with_digit(refname, dupename):
             return True
-        return len(dupe.path) > len(ref.path)
+        return len(dupe.path.parts) > len(ref.path.parts)
 
     @staticmethod
     def get_scan_options():
@@ -164,7 +164,7 @@ class Scanner:
             toremove = set()
             last_parent_path = sortedpaths[0]
             for p in sortedpaths[1:]:
-                if p in last_parent_path:
+                if last_parent_path in p.parents:
                     toremove.add(p)
                 else:
                     last_parent_path = p

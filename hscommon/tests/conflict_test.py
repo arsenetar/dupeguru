@@ -15,7 +15,7 @@ from ..conflict import (
     smart_copy,
     smart_move,
 )
-from ..path import Path
+from pathlib import Path
 from ..testutil import eq_
 
 
@@ -71,43 +71,43 @@ class TestCaseMoveCopy:
     def do_setup(self, request):
         tmpdir = request.getfixturevalue("tmpdir")
         self.path = Path(str(tmpdir))
-        self.path["foo"].open("w").close()
-        self.path["bar"].open("w").close()
-        self.path["dir"].mkdir()
+        self.path.joinpath("foo").touch()
+        self.path.joinpath("bar").touch()
+        self.path.joinpath("dir").mkdir()
 
     def test_move_no_conflict(self, do_setup):
-        smart_move(self.path + "foo", self.path + "baz")
-        assert self.path["baz"].exists()
-        assert not self.path["foo"].exists()
+        smart_move(self.path.joinpath("foo"), self.path.joinpath("baz"))
+        assert self.path.joinpath("baz").exists()
+        assert not self.path.joinpath("foo").exists()
 
     def test_copy_no_conflict(self, do_setup):  # No need to duplicate the rest of the tests... Let's just test on move
-        smart_copy(self.path + "foo", self.path + "baz")
-        assert self.path["baz"].exists()
-        assert self.path["foo"].exists()
+        smart_copy(self.path.joinpath("foo"), self.path.joinpath("baz"))
+        assert self.path.joinpath("baz").exists()
+        assert self.path.joinpath("foo").exists()
 
     def test_move_no_conflict_dest_is_dir(self, do_setup):
-        smart_move(self.path + "foo", self.path + "dir")
-        assert self.path["dir"]["foo"].exists()
-        assert not self.path["foo"].exists()
+        smart_move(self.path.joinpath("foo"), self.path.joinpath("dir"))
+        assert self.path.joinpath("dir", "foo").exists()
+        assert not self.path.joinpath("foo").exists()
 
     def test_move_conflict(self, do_setup):
-        smart_move(self.path + "foo", self.path + "bar")
-        assert self.path["[000] bar"].exists()
-        assert not self.path["foo"].exists()
+        smart_move(self.path.joinpath("foo"), self.path.joinpath("bar"))
+        assert self.path.joinpath("[000] bar").exists()
+        assert not self.path.joinpath("foo").exists()
 
     def test_move_conflict_dest_is_dir(self, do_setup):
-        smart_move(self.path["foo"], self.path["dir"])
-        smart_move(self.path["bar"], self.path["foo"])
-        smart_move(self.path["foo"], self.path["dir"])
-        assert self.path["dir"]["foo"].exists()
-        assert self.path["dir"]["[000] foo"].exists()
-        assert not self.path["foo"].exists()
-        assert not self.path["bar"].exists()
+        smart_move(self.path.joinpath("foo"), self.path.joinpath("dir"))
+        smart_move(self.path.joinpath("bar"), self.path.joinpath("foo"))
+        smart_move(self.path.joinpath("foo"), self.path.joinpath("dir"))
+        assert self.path.joinpath("dir", "foo").exists()
+        assert self.path.joinpath("dir", "[000] foo").exists()
+        assert not self.path.joinpath("foo").exists()
+        assert not self.path.joinpath("bar").exists()
 
     def test_copy_folder(self, tmpdir):
         # smart_copy also works on folders
         path = Path(str(tmpdir))
-        path["foo"].mkdir()
-        path["bar"].mkdir()
-        smart_copy(path["foo"], path["bar"])  # no crash
-        assert path["[000] bar"].exists()
+        path.joinpath("foo").mkdir()
+        path.joinpath("bar").mkdir()
+        smart_copy(path.joinpath("foo"), path.joinpath("bar"))  # no crash
+        assert path.joinpath("[000] bar").exists()
