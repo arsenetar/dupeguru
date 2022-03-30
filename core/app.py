@@ -248,7 +248,7 @@ class DupeGuru(Broadcaster):
             ref = group.ref
             linkfunc = os.link if use_hardlinks else os.symlink
             linkfunc(str(ref.path), str_path)
-        self.clean_empty_dirs(dupe.path.parent())
+        self.clean_empty_dirs(dupe.path.parent)
 
     def _create_file(self, path):
         # We add fs.Folder to fileclasses in case the file we're loading contains folder paths.
