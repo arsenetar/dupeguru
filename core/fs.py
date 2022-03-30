@@ -379,7 +379,7 @@ class Folder(File):
         if self._subfolders is None:
             with os.scandir(self.path) as iter:
                 subfolders = [p.path for p in iter if not p.is_symlink() and p.is_dir()]
-            self._subfolders = [self.__class__(p) for p in subfolders]
+            self._subfolders = [self.__class__(Path(p)) for p in subfolders]
         return self._subfolders
 
     @classmethod
@@ -398,7 +398,7 @@ def get_file(path, fileclasses=[File]):
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
             if type(path) is os.DirEntry:
-                return fileclass(path.path)
+                return fileclass(Path(path.path))
             return fileclass(path)
 
 

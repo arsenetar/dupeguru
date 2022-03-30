@@ -90,47 +90,45 @@ class Directories:
             return DirectoryState.EXCLUDED
 
     def _get_files(self, from_path, fileclasses, j):
-        for root, dirs, files in os.walk(str(from_path)):
-            j.check_if_cancelled()
-            root_path = Path(root)
-            state = self.get_state(root_path)
-            if state == DirectoryState.EXCLUDED and not any(
-                p.parts[: len(root_path.parts)] == root_path.parts for p in self.states
-            ):
-                # Recursively get files from folders with lots of subfolder is expensive. However, there
-                # might be a subfolder in this path that is not excluded. What we want to do is to skim
-                # through self.states and see if we must continue, or we can stop right here to save time
-                del dirs[:]
-            try:
-                if state != DirectoryState.EXCLUDED:
-                    # Old logic
-                    if self._exclude_list is None or not self._exclude_list.mark_count:
-                        found_files = [fs.get_file(root_path.joinpath(f), fileclasses=fileclasses) for f in files]
-                    else:
-                        found_files = []
-                        # print(f"len of files: {len(files)} {files}")
-                        for f in files:
-                            if not self._exclude_list.is_excluded(root, f):
-                                found_files.append(fs.get_file(root_path.joinpath(f), fileclasses=fileclasses))
-                    found_files = [f for f in found_files if f is not None]
-                    # In some cases, directories can be considered as files by dupeGuru, which is
-                    # why we have this line below. In fact, there only one case: Bundle files under
-                    # OS X... In other situations, this forloop will do nothing.
-                    for d in dirs[:]:
-                        f = fs.get_file(root_path.joinpath(d), fileclasses=fileclasses)
-                        if f is not None:
-                            found_files.append(f)
-                            dirs.remove(d)
-                    logging.debug(
-                        "Collected %d files in folder %s",
-                        len(found_files),
-                        str(root_path),
-                    )
-                    for file in found_files:
-                        file.is_ref = state == DirectoryState.REFERENCE
-                        yield file
-            except (EnvironmentError, fs.InvalidPath):
-                pass
+        try:
+            with os.scandir(from_path) as iter:
+                root_path = Path(from_path)
+                state = self.get_state(root_path)
+                # if we have no un-excluded dirs under this directory skip going deeper
+                skip_dirs = state == DirectoryState.EXCLUDED and not any(
+                    p.parts[: len(root_path.parts)] == root_path.parts for p in self.states
+                )
+                count = 0
+                for item in iter:
+                    j.check_if_cancelled()
+                    try:
+                        if item.is_dir():
+                            if skip_dirs:
+                                continue
+                            yield from self._get_files(item.path, fileclasses, j)
+                            continue
+                        elif state == DirectoryState.EXCLUDED:
+                            continue
+                        # File excluding or not
+                        if (
+                            self._exclude_list is None
+                            or not self._exclude_list.mark_count
+                            or not self._exclude_list.is_excluded(str(from_path), item.name)
+                        ):
+                            file = fs.get_file(item, fileclasses=fileclasses)
+                            if file:
+                                file.is_ref = state == DirectoryState.REFERENCE
+                                count += 1
+                                yield file
+                    except (EnvironmentError, OSError, fs.InvalidPath):
+                        pass
+                logging.debug(
+                    "Collected %d files in folder %s",
+                    count,
+                    str(root_path),
+                )
+        except OSError:
+            pass
 
     def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
