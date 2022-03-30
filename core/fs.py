@@ -377,7 +377,8 @@ class Folder(File):
     @property
     def subfolders(self):
         if self._subfolders is None:
-            subfolders = [p for p in self.path.glob("*") if not p.is_symlink() and p.is_dir()]
+            with os.scandir(self.path) as iter:
+                subfolders = [p.path for p in iter if not p.is_symlink() and p.is_dir()]
             self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
 
@@ -410,10 +411,11 @@ def get_files(path, fileclasses=[File]):
     assert all(issubclass(fileclass, File) for fileclass in fileclasses)
     try:
         result = []
-        for path in path.glob("*"):
-            file = get_file(path, fileclasses=fileclasses)
-            if file is not None:
-                result.append(file)
+        with os.scandir(path) as iter:
+            for item in iter:
+                file = get_file(item, fileclasses=fileclasses)
+                if file is not None:
+                    result.append(file)
         return result
     except EnvironmentError:
         raise InvalidPath(path)
