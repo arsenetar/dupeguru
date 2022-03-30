@@ -222,14 +222,11 @@ class Directories:
         if state != DirectoryState.NORMAL:
             self.states[path] = state
             return state
-
-        prevlen = 0
-        # we loop through the states to find the longest matching prefix
-        # if the parent has a state in cache, return that state
-        for p, s in self.states.items():
-            if p in path.parents and len(p.parts) > prevlen:
-                prevlen = len(p.parts)
-                state = s
+        # find the longest parent path that is in states and return that state if found
+        # NOTE: path.parents is ordered longest to shortest
+        for parent_path in path.parents:
+            if parent_path in self.states:
+                return self.states[parent_path]
         return state
 
     def has_any_file(self):
