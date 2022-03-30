@@ -396,6 +396,8 @@ def get_file(path, fileclasses=[File]):
     """
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
+            if type(path) is os.DirEntry:
+                return fileclass(path.path)
             return fileclass(path)
 
 
