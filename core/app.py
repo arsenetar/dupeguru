@@ -4,6 +4,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import cProfile
+import datetime
 import os
 import os.path as op
 import logging
@@ -780,7 +782,7 @@ class DupeGuru(Broadcaster):
         except OSError as e:
             self.view.show_message(tr("Couldn't write to file: {}").format(str(e)))
 
-    def start_scanning(self):
+    def start_scanning(self, profile_scan=False):
         """Starts an async job to scan for duplicates.
 
         Scans folders selected in :attr:`directories` and put the results in :attr:`results`
@@ -800,6 +802,9 @@ class DupeGuru(Broadcaster):
         self._results_changed()
 
         def do(j):
+            if profile_scan:
+                pr = cProfile.Profile()
+                pr.enable()
             j.set_progress(0, tr("Collecting files to scan"))
             if scanner.scan_type == ScanType.FOLDERS:
                 files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
@@ -810,6 +815,9 @@ class DupeGuru(Broadcaster):
             logging.info("Scanning %d files" % len(files))
             self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
             self.discarded_file_count = scanner.discarded_file_count
+            if profile_scan:
+                pr.disable()
+                pr.dump_stats(op.join(self.appdata, f"{datetime.datetime.now():%Y-%m-%d_%H-%M-%S}.profile"))
 
         self._start_job(JobType.SCAN, do)
 

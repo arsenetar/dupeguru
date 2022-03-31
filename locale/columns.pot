@@ -25,7 +25,7 @@ msgstr ""
 msgid "Samplerate"
 msgstr ""
 
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
 #: core\se\result_table.py:19
 msgid "Filename"
 msgstr ""
@@ -53,7 +53,7 @@ msgid "Kind"
 msgstr ""
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
+#: core\prioritize.py:165 core\se\result_table.py:23
 msgid "Modification"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "EXIF Timestamp"
 msgstr ""
 
-#: core\prioritize.py:156
+#: core\prioritize.py:158
 msgid "Size"
 msgstr ""
 

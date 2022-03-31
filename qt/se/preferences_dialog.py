@@ -103,8 +103,6 @@ class PreferencesDialog(PreferencesDialogBase):
             self.widget,
         )
         self.verticalLayout_4.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"), self.widget)
-        self.verticalLayout_4.addWidget(self.debugModeBox)
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
 

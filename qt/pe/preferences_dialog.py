@@ -34,8 +34,6 @@ class PreferencesDialog(PreferencesDialogBase):
             tr("Ignore duplicates hardlinking to the same file"),
         )
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
-        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
-        self.widgetsVLayout.addWidget(self.debugModeBox)
 
         self.cacheTypeRadio = RadioBox(self, items=["Sqlite", "Shelve"], spread=False)
         cache_form = QFormLayout()

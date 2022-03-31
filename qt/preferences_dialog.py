@@ -29,7 +29,7 @@ from PyQt5.QtWidgets import (
     QFormLayout,
 )
 from PyQt5.QtGui import QPixmap, QIcon
-from hscommon import plat
+from hscommon import desktop, plat
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
@@ -69,7 +69,8 @@ class Sections(Flag):
 
     GENERAL = auto()
     DISPLAY = auto()
-    ALL = GENERAL | DISPLAY
+    DEBUG = auto()
+    ALL = GENERAL | DISPLAY | DEBUG
 
 
 class PreferencesDialogBase(QDialog):
@@ -82,6 +83,7 @@ class PreferencesDialogBase(QDialog):
         self._setupUi()
 
         self.filterHardnessSlider.valueChanged["int"].connect(self.filterHardnessLabel.setNum)
+        self.debug_location_label.linkActivated.connect(desktop.open_path)
         self.buttonBox.clicked.connect(self.buttonClicked)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -234,6 +236,18 @@ use the modifier key to drag the floating window around"
         details_groupbox.setLayout(self.details_groupbox_layout)
         self.displayVLayout.addWidget(details_groupbox)
 
+    def _setupDebugPage(self):
+        self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
+        self._setupAddCheckbox("profile_scan_box", tr("Profile scan operation"))
+        self.profile_scan_box.setToolTip(tr("Profile the scan operation and save logs for optimization."))
+        self.debugVLayout.addWidget(self.debugModeBox)
+        self.debugVLayout.addWidget(self.profile_scan_box)
+        self.debug_location_label = QLabel(
+            tr('Logs located in: <a href="{}">{}</a>').format(self.app.model.appdata, self.app.model.appdata),
+            wordWrap=True,
+        )
+        self.debugVLayout.addWidget(self.debug_location_label)
+
     def _setupAddCheckbox(self, name, label, parent=None):
         if parent is None:
             parent = self
@@ -253,13 +267,17 @@ use the modifier key to drag the floating window around"
         self.tabwidget = QTabWidget()
         self.page_general = QWidget()
         self.page_display = QWidget()
+        self.page_debug = QWidget()
         self.widgetsVLayout = QVBoxLayout()
         self.page_general.setLayout(self.widgetsVLayout)
         self.displayVLayout = QVBoxLayout()
         self.displayVLayout.setSpacing(5)  # arbitrary value, might conflict with style
         self.page_display.setLayout(self.displayVLayout)
+        self.debugVLayout = QVBoxLayout()
+        self.page_debug.setLayout(self.debugVLayout)
         self._setupPreferenceWidgets()
         self._setupDisplayPage()
+        self._setupDebugPage()
         # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
@@ -270,8 +288,10 @@ use the modifier key to drag the floating window around"
         self.layout().setSizeConstraint(QLayout.SetFixedSize)
         self.tabwidget.addTab(self.page_general, tr("General"))
         self.tabwidget.addTab(self.page_display, tr("Display"))
+        self.tabwidget.addTab(self.page_debug, tr("Debug"))
         self.displayVLayout.addStretch(0)
         self.widgetsVLayout.addStretch(0)
+        self.debugVLayout.addStretch(0)
 
     def _load(self, prefs, setchecked, section):
         # Edition-specific
@@ -295,7 +315,6 @@ use the modifier key to drag the floating window around"
             setchecked(self.useRegexpBox, prefs.use_regexp)
             setchecked(self.removeEmptyFoldersBox, prefs.remove_empty_folders)
             setchecked(self.ignoreHardlinkMatches, prefs.ignore_hardlink_matches)
-            setchecked(self.debugModeBox, prefs.debug_mode)
             self.copyMoveDestinationComboBox.setCurrentIndex(prefs.destination_type)
             self.customCommandEdit.setText(prefs.custom_command)
         if section & Sections.DISPLAY:
@@ -322,6 +341,9 @@ use the modifier key to drag the floating window around"
             except ValueError:
                 langindex = 0
             self.languageComboBox.setCurrentIndex(langindex)
+        if section & Sections.DEBUG:
+            setchecked(self.debugModeBox, prefs.debug_mode)
+            setchecked(self.profile_scan_box, prefs.profile_scan)
         self._load(prefs, setchecked, section)
 
     def save(self):
@@ -336,6 +358,7 @@ use the modifier key to drag the floating window around"
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.debug_mode = ischecked(self.debugModeBox)
+        prefs.profile_scan = ischecked(self.profile_scan_box)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
         prefs.details_dialog_titlebar_enabled = ischecked(self.details_dialog_titlebar_enabled)
         prefs.details_dialog_vertical_titlebar = ischecked(self.details_dialog_vertical_titlebar)
@@ -376,6 +399,8 @@ use the modifier key to drag the floating window around"
                 section_to_update = Sections.GENERAL
             if current_tab is self.page_display:
                 section_to_update = Sections.DISPLAY
+            if current_tab is self.page_debug:
+                section_to_update = Sections.DEBUG
             self.resetToDefaults(section_to_update)
 
     def showEvent(self, event):

@@ -4,115 +4,115 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core\app.py:44
+#: core\app.py:46
 msgid "You're about to open many files at once. Depending on what those files are opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr ""
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr ""
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr ""
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr ""
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:289
+#: core\app.py:291
 msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:300
+#: core\app.py:302
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:315
+#: core\app.py:317
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:317
+#: core\app.py:319
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:319
+#: core\app.py:321
 msgid "All marked files were deleted successfully."
 msgstr ""
 
-#: core\app.py:321
+#: core\app.py:323
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:326
+#: core\app.py:328
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:382
+#: core\app.py:384
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:384
+#: core\app.py:386
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:392
+#: core\app.py:394
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:469
+#: core\app.py:471
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:471
+#: core\app.py:473
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:510
+#: core\app.py:512
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:518 core\app.py:773 core\app.py:783
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:539
+#: core\app.py:541
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:697 core\app.py:709
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:743
+#: core\app.py:745
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:790
+#: core\app.py:792
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:803
+#: core\app.py:808
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:850
+#: core\app.py:858
 msgid "%s (%d discarded)"
 msgstr ""
 
@@ -188,35 +188,35 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr ""
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr ""
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr ""
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr ""
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr ""
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr ""
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr ""
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr ""
 
