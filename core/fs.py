@@ -187,9 +187,14 @@ class File:
     __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
-        self.path = path
         for attrname in self.INITIAL_INFO:
             setattr(self, attrname, NOT_SET)
+        if type(path) is os.DirEntry:
+            self.path = Path(path.path)
+            self.size = nonone(path.stat().st_size, 0)
+            self.mtime = nonone(path.stat().st_mtime, 0)
+        else:
+            self.path = path
 
     def __repr__(self):
         return "<{} {}>".format(self.__class__.__name__, str(self.path))
@@ -346,6 +351,7 @@ class Folder(File):
 
     def __init__(self, path):
         File.__init__(self, path)
+        self.size = NOT_SET
         self._subfolders = None
 
     def _all_items(self):
@@ -378,8 +384,8 @@ class Folder(File):
     def subfolders(self):
         if self._subfolders is None:
             with os.scandir(self.path) as iter:
-                subfolders = [p.path for p in iter if not p.is_symlink() and p.is_dir()]
-            self._subfolders = [self.__class__(Path(p)) for p in subfolders]
+                subfolders = [p for p in iter if not p.is_symlink() and p.is_dir()]
+            self._subfolders = [self.__class__(p) for p in subfolders]
         return self._subfolders
 
     @classmethod
@@ -397,8 +403,6 @@ def get_file(path, fileclasses=[File]):
     """
     for fileclass in fileclasses:
         if fileclass.can_handle(path):
-            if type(path) is os.DirEntry:
-                return fileclass(Path(path.path))
             return fileclass(path)
 
 
