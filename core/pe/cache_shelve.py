@@ -14,7 +14,7 @@ from .cache import string_to_colors, colors_to_string
 
 
 def wrap_path(path):
-    return "path:{}".format(path)
+    return f"path:{path}"
 
 
 def unwrap_path(key):
@@ -22,7 +22,7 @@ def unwrap_path(key):
 
 
 def wrap_id(path):
-    return "id:{}".format(path)
+    return f"id:{path}"
 
 
 def unwrap_id(key):

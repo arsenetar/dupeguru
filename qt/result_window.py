@@ -470,7 +470,7 @@ class ResultWindow(QMainWindow):
         destination, chosen_filter = QFileDialog.getSaveFileName(self, title, "", files)
         if destination:
             if not destination.endswith(".dupeguru"):
-                destination = "{}.dupeguru".format(destination)
+                destination = f"{destination}.dupeguru"
             self.app.model.save_as(destination)
             self.app.recentResults.insertItem(destination)
 

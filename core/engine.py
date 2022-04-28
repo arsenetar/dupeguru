@@ -166,7 +166,7 @@ def reduce_common_words(word_dict, threshold):
     The exception to this removal are the objects where all the words of the object are common.
     Because if we remove them, we will miss some duplicates!
     """
-    uncommon_words = set(word for word, objects in word_dict.items() if len(objects) < threshold)
+    uncommon_words = {word for word, objects in word_dict.items() if len(objects) < threshold}
     for word, objects in list(word_dict.items()):
         if len(objects) < threshold:
             continue
@@ -409,7 +409,7 @@ class Group:
 
         You can call this after the duplicate scanning process to free a bit of memory.
         """
-        discarded = set(m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second]))
+        discarded = {m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second])}
         self.matches -= discarded
         self.candidates = defaultdict(set)
         return discarded
@@ -456,7 +456,7 @@ class Group:
             self._matches_for_ref = None
             if (len(self) > 1) and any(not getattr(item, "is_ref", False) for item in self):
                 if discard_matches:
-                    self.matches = set(m for m in self.matches if item not in m)
+                    self.matches = {m for m in self.matches if item not in m}
             else:
                 self._clear()
         except ValueError:
@@ -529,7 +529,7 @@ def get_groups(matches):
         del dupe2group
         del matches
         # should free enough memory to continue
-        logging.warning("Memory Overflow. Groups: {0}".format(len(groups)))
+        logging.warning(f"Memory Overflow. Groups: {len(groups)}")
     # Now that we have a group, we have to discard groups' matches and see if there're any "orphan"
     # matches, that is, matches that were candidate in a group but that none of their 2 files were
     # accepted in the group. With these orphan groups, it's safe to build additional groups

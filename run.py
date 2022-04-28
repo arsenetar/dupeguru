@@ -71,7 +71,7 @@ def main():
     # has been installed
     from qt.app import DupeGuru
 
-    app.setWindowIcon(QIcon(QPixmap(":/{0}".format(DupeGuru.LOGO_NAME))))
+    app.setWindowIcon(QIcon(QPixmap(f":/{DupeGuru.LOGO_NAME}")))
     global dgapp
     dgapp = DupeGuru()
     install_excepthook("https://github.com/hsoft/dupeguru/issues")

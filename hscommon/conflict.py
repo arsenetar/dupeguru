@@ -73,7 +73,7 @@ def smart_copy(source_path, dest_path):
     """Copies ``source_path`` to ``dest_path``, recursively and with conflict resolution."""
     try:
         _smart_move_or_copy(shutil.copy, source_path, dest_path)
-    except IOError as e:
+    except OSError as e:
         if e.errno in {
             21,
             13,

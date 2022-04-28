@@ -98,7 +98,7 @@ def test_selection_override():
 def test_findall():
     t = tree_with_some_nodes()
     r = t.findall(lambda n: n.name.startswith("sub"))
-    eq_(set(r), set([t[0][0], t[0][1]]))
+    eq_(set(r), {t[0][0], t[0][1]})
 
 
 def test_findall_dont_include_self():
@@ -106,7 +106,7 @@ def test_findall_dont_include_self():
     t = tree_with_some_nodes()
     del t._name  # so that if the predicate is called on `t`, we crash
     r = t.findall(lambda n: not n.name.startswith("sub"), include_self=False)  # no crash
-    eq_(set(r), set([t[0], t[1], t[2]]))
+    eq_(set(r), {t[0], t[1], t[2]})
 
 
 def test_find_dont_include_self():

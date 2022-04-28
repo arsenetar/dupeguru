@@ -347,7 +347,7 @@ class DirectoriesDialog(QMainWindow):
         destination, chosen_filter = QFileDialog.getSaveFileName(self, title, "", files)
         if destination:
             if not destination.endswith(".dupegurudirs"):
-                destination = "{}.dupegurudirs".format(destination)
+                destination = f"{destination}.dupegurudirs"
             self.app.model.save_directories_as(destination)
 
     def scanButtonClicked(self):

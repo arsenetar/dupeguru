@@ -264,7 +264,7 @@ class DupeGuru(Broadcaster):
         try:
             f._read_all_info(attrnames=self.METADATA_TO_READ)
             return f
-        except EnvironmentError:
+        except OSError:
             return None
 
     def _get_export_data(self):

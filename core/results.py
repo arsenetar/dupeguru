@@ -191,7 +191,7 @@ class Results(Markable):
             self.__filters.append(filter_str)
             if self.__filtered_dupes is None:
                 self.__filtered_dupes = flatten(g[:] for g in self.groups)
-            self.__filtered_dupes = set(dupe for dupe in self.__filtered_dupes if filter_re.search(str(dupe.path)))
+            self.__filtered_dupes = {dupe for dupe in self.__filtered_dupes if filter_re.search(str(dupe.path))}
             filtered_groups = set()
             for dupe in self.__filtered_dupes:
                 filtered_groups.add(self.get_group_of_duplicate(dupe))
@@ -301,7 +301,7 @@ class Results(Markable):
             try:
                 func(dupe)
                 to_remove.append(dupe)
-            except (EnvironmentError, UnicodeEncodeError) as e:
+            except (OSError, UnicodeEncodeError) as e:
                 self.problems.append((dupe, str(e)))
         if remove_from_results:
             self.remove_duplicates(to_remove)
@@ -374,8 +374,8 @@ class Results(Markable):
 
         try:
             do_write(outfile)
-        except IOError as e:
-            # If our IOError is because dest is already a directory, we want to handle that. 21 is
+        except OSError as e:
+            # If our OSError is because dest is already a directory, we want to handle that. 21 is
             # the code we get on OS X and Linux, 13 is what we get on Windows.
             if e.errno in {21, 13}:
                 p = str(outfile)

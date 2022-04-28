@@ -13,7 +13,7 @@ def colors_to_string(colors):
     [(0,100,255)] --> 0064ff
     [(1,2,3),(4,5,6)] --> 010203040506
     """
-    return "".join("%02x%02x%02x" % (r, g, b) for r, g, b in colors)
+    return "".join("{:02x}{:02x}{:02x}".format(r, g, b) for r, g, b in colors)
 
 
 # This function is an important bottleneck of dupeGuru PE. It has been converted to C.

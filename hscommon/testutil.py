@@ -14,7 +14,7 @@ import py.path
 
 def eq_(a, b, msg=None):
     __tracebackhide__ = True
-    assert a == b, msg or "%r != %r" % (a, b)
+    assert a == b, msg or "{!r} != {!r}".format(a, b)
 
 
 def eq_sorted(a, b, msg=None):
@@ -97,17 +97,17 @@ class CallLogger:
         __tracebackhide__ = True
         if expected is not None:
             not_called = set(expected) - set(self.calls)
-            assert not not_called, "These calls haven't been made: {0}".format(not_called)
+            assert not not_called, f"These calls haven't been made: {not_called}"
             if verify_order:
                 max_index = 0
                 for call in expected:
                     index = self.calls.index(call)
                     if index < max_index:
-                        raise AssertionError("The call {0} hasn't been made in the correct order".format(call))
+                        raise AssertionError(f"The call {call} hasn't been made in the correct order")
                     max_index = index
         if not_expected is not None:
             called = set(not_expected) & set(self.calls)
-            assert not called, "These calls shouldn't have been made: {0}".format(called)
+            assert not called, f"These calls shouldn't have been made: {called}"
         self.clear_calls()
 
 
@@ -133,7 +133,7 @@ class TestApp:
             parent = self.default_parent
         if holder is None:
             holder = self
-        setattr(holder, "{0}_gui".format(name), view)
+        setattr(holder, f"{name}_gui", view)
         gui = class_(parent)
         gui.view = view
         setattr(holder, name, gui)

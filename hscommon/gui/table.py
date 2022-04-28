@@ -451,7 +451,7 @@ class Row:
     """
 
     def __init__(self, table):
-        super(Row, self).__init__()
+        super().__init__()
         self.table = table
 
     def _edit(self):

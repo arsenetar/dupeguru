@@ -271,9 +271,9 @@ class TestCaseBuildWordDict:
 class TestCaseMergeSimilarWords:
     def test_some_similar_words(self):
         d = {
-            "foobar": set([1]),
-            "foobar1": set([2]),
-            "foobar2": set([3]),
+            "foobar": {1},
+            "foobar1": {2},
+            "foobar2": {3},
         }
         merge_similar_words(d)
         eq_(1, len(d))
@@ -283,8 +283,8 @@ class TestCaseMergeSimilarWords:
 class TestCaseReduceCommonWords:
     def test_typical(self):
         d = {
-            "foo": set([NamedObject("foo bar", True) for _ in range(50)]),
-            "bar": set([NamedObject("foo bar", True) for _ in range(49)]),
+            "foo": {NamedObject("foo bar", True) for _ in range(50)},
+            "bar": {NamedObject("foo bar", True) for _ in range(49)},
         }
         reduce_common_words(d, 50)
         assert "foo" not in d
@@ -293,7 +293,7 @@ class TestCaseReduceCommonWords:
     def test_dont_remove_objects_with_only_common_words(self):
         d = {
             "common": set([NamedObject("common uncommon", True) for _ in range(50)] + [NamedObject("common", True)]),
-            "uncommon": set([NamedObject("common uncommon", True)]),
+            "uncommon": {NamedObject("common uncommon", True)},
         }
         reduce_common_words(d, 50)
         eq_(1, len(d["common"]))
@@ -302,7 +302,7 @@ class TestCaseReduceCommonWords:
     def test_values_still_are_set_instances(self):
         d = {
             "common": set([NamedObject("common uncommon", True) for _ in range(50)] + [NamedObject("common", True)]),
-            "uncommon": set([NamedObject("common uncommon", True)]),
+            "uncommon": {NamedObject("common uncommon", True)},
         }
         reduce_common_words(d, 50)
         assert isinstance(d["common"], set)
@@ -312,9 +312,9 @@ class TestCaseReduceCommonWords:
         # If a word has been removed by the reduce, an object in a subsequent common word that
         # contains the word that has been removed would cause a KeyError.
         d = {
-            "foo": set([NamedObject("foo bar baz", True) for _ in range(50)]),
-            "bar": set([NamedObject("foo bar baz", True) for _ in range(50)]),
-            "baz": set([NamedObject("foo bar baz", True) for _ in range(49)]),
+            "foo": {NamedObject("foo bar baz", True) for _ in range(50)},
+            "bar": {NamedObject("foo bar baz", True) for _ in range(50)},
+            "baz": {NamedObject("foo bar baz", True) for _ in range(49)},
         }
         try:
             reduce_common_words(d, 50)
@@ -328,7 +328,7 @@ class TestCaseReduceCommonWords:
             o.words = [["foo", "bar"], ["baz"]]
             return o
 
-        d = {"foo": set([create_it() for _ in range(50)])}
+        d = {"foo": {create_it() for _ in range(50)}}
         try:
             reduce_common_words(d, 50)
         except TypeError:
@@ -343,7 +343,7 @@ class TestCaseReduceCommonWords:
         d = {
             "foo": set([NamedObject("foo bar baz", True) for _ in range(49)] + [only_common]),
             "bar": set([NamedObject("foo bar baz", True) for _ in range(49)] + [only_common]),
-            "baz": set([NamedObject("foo bar baz", True) for _ in range(49)]),
+            "baz": {NamedObject("foo bar baz", True) for _ in range(49)},
         }
         reduce_common_words(d, 50)
         eq_(1, len(d["foo"]))
@@ -884,7 +884,7 @@ class TestCaseGetGroups:
         # If, with a (A, B, C, D) set, all match with A, but C and D don't match with B and that the
         # (A, B) match is the highest (thus resulting in an (A, B) group), still match C and D
         # in a separate group instead of discarding them.
-        A, B, C, D = [NamedObject() for _ in range(4)]
+        A, B, C, D = (NamedObject() for _ in range(4))
         m1 = Match(A, B, 90)  # This is the strongest "A" match
         m2 = Match(A, C, 80)  # Because C doesn't match with B, it won't be in the group
         m3 = Match(A, D, 80)  # Same thing for D

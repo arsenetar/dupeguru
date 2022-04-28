@@ -120,7 +120,7 @@ class Directories:
                                 file.is_ref = state == DirectoryState.REFERENCE
                                 count += 1
                                 yield file
-                    except (EnvironmentError, OSError, fs.InvalidPath):
+                    except (OSError, fs.InvalidPath):
                         pass
                 logging.debug(
                     "Collected %d files in folder %s",
@@ -134,14 +134,13 @@ class Directories:
         j.check_if_cancelled()
         try:
             for subfolder in from_folder.subfolders:
-                for folder in self._get_folders(subfolder, j):
-                    yield folder
+                yield from self._get_folders(subfolder, j)
             state = self.get_state(from_folder.path)
             if state != DirectoryState.EXCLUDED:
                 from_folder.is_ref = state == DirectoryState.REFERENCE
                 logging.debug("Yielding Folder %r state: %d", from_folder, state)
                 yield from_folder
-        except (EnvironmentError, fs.InvalidPath):
+        except (OSError, fs.InvalidPath):
             pass
 
     # ---Public
@@ -173,7 +172,7 @@ class Directories:
             subpaths = [p for p in path.glob("*") if p.is_dir()]
             subpaths.sort(key=lambda x: x.name.lower())
             return subpaths
-        except EnvironmentError:
+        except OSError:
             return []
 
     def get_files(self, fileclasses=None, j=job.nulljob):

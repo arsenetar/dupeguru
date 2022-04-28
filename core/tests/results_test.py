@@ -337,7 +337,7 @@ class TestCaseResultsMarkings:
         def log_object(o):
             log.append(o)
             if o is self.objects[1]:
-                raise EnvironmentError("foobar")
+                raise OSError("foobar")
 
         log = []
         self.results.mark_all()
@@ -464,7 +464,7 @@ class TestCaseResultsXML:
         eq_(6, len(g1))
         eq_(3, len([c for c in g1 if c.tag == "file"]))
         eq_(3, len([c for c in g1 if c.tag == "match"]))
-        d1, d2, d3 = [c for c in g1 if c.tag == "file"]
+        d1, d2, d3 = (c for c in g1 if c.tag == "file")
         eq_(op.join("basepath", "foo bar"), d1.get("path"))
         eq_(op.join("basepath", "bar bleh"), d2.get("path"))
         eq_(op.join("basepath", "foo bleh"), d3.get("path"))
@@ -477,7 +477,7 @@ class TestCaseResultsXML:
         eq_(3, len(g2))
         eq_(2, len([c for c in g2 if c.tag == "file"]))
         eq_(1, len([c for c in g2 if c.tag == "match"]))
-        d1, d2 = [c for c in g2 if c.tag == "file"]
+        d1, d2 = (c for c in g2 if c.tag == "file")
         eq_(op.join("basepath", "ibabtu"), d1.get("path"))
         eq_(op.join("basepath", "ibabtu"), d2.get("path"))
         eq_("n", d1.get("is_ref"))

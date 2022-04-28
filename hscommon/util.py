@@ -270,7 +270,7 @@ def format_size(size, decimal=0, forcepower=-1, showdesc=True):
 
 _valid_xml_range = "\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD"
 if sys.maxunicode > 0x10000:
-    _valid_xml_range += "%s-%s" % (chr(0x10000), chr(min(sys.maxunicode, 0x10FFFF)))
+    _valid_xml_range += "{}-{}".format(chr(0x10000), chr(min(sys.maxunicode, 0x10FFFF)))
 RE_INVALID_XML_SUB = re.compile("[^%s]" % _valid_xml_range, re.U).sub
 
 
@@ -328,11 +328,11 @@ def modified_after(first_path: Path, second_path: Path):
     """
     try:
         first_mtime = first_path.stat().st_mtime
-    except (EnvironmentError, AttributeError):
+    except (OSError, AttributeError):
         return False
     try:
         second_mtime = second_path.stat().st_mtime
-    except (EnvironmentError, AttributeError):
+    except (OSError, AttributeError):
         return True
     return first_mtime > second_mtime
 

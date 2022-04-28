@@ -22,7 +22,7 @@ class File(PhotoBase):
                 return (size.width(), size.height())
             else:
                 return (0, 0)
-        except EnvironmentError:
+        except OSError:
             logging.warning("Could not read image '%s'", str(self.path))
             return (0, 0)
 

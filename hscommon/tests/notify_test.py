@@ -113,7 +113,7 @@ def test_repeater_with_repeated_notifications():
     # If REPEATED_NOTIFICATIONS is not empty, only notifs in this set are repeated (but they're
     # still dispatched locally).
     class MyRepeater(HelloRepeater):
-        REPEATED_NOTIFICATIONS = set(["hello"])
+        REPEATED_NOTIFICATIONS = {"hello"}
 
         def __init__(self, broadcaster):
             HelloRepeater.__init__(self, broadcaster)

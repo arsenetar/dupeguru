@@ -216,7 +216,7 @@ class Columns(GUIObject):
                 self.view.restore_columns()
             return
         for col in self.column_list:
-            pref_name = "{}.Columns.{}".format(self.savename, col.name)
+            pref_name = f"{self.savename}.Columns.{col.name}"
             coldata = self.prefaccess.get_default(pref_name, fallback_value={})
             if "index" in coldata:
                 col.ordered_index = coldata["index"]
@@ -231,7 +231,7 @@ class Columns(GUIObject):
         if not (self.prefaccess and self.savename and self.coldata):
             return
         for col in self.column_list:
-            pref_name = "{}.Columns.{}".format(self.savename, col.name)
+            pref_name = f"{self.savename}.Columns.{col.name}"
             coldata = {"index": col.ordered_index, "width": col.width}
             if col.optional:
                 coldata["visible"] = col.visible

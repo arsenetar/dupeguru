@@ -43,7 +43,7 @@ class Criterion:
 
     @property
     def display(self):
-        return "{} ({})".format(self.category.NAME, self.display_value)
+        return f"{self.category.NAME} ({self.display_value})"
 
 
 class ValueListCategory(CriterionCategory):

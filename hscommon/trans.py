@@ -112,7 +112,7 @@ def install_gettext_trans(base_folder, lang):
             return lambda s: s
         try:
             return gettext.translation(domain, localedir=base_folder, languages=[lang]).gettext
-        except IOError:
+        except OSError:
             return lambda s: s
 
     default_gettext = gettext_trget("core")

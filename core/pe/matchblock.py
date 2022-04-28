@@ -87,7 +87,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
                     blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
-            except (IOError, ValueError) as e:
+            except (OSError, ValueError) as e:
                 logging.warning(str(e))
             except MemoryError:
                 logging.warning(

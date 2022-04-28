@@ -77,8 +77,7 @@ class Node(MutableSequence):
         if include_self and predicate(self):
             yield self
         for child in self:
-            for found in child.findall(predicate, include_self=True):
-                yield found
+            yield from child.findall(predicate, include_self=True)
 
     def get_node(self, index_path):
         """Returns the node at ``index_path``.

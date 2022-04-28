@@ -197,7 +197,7 @@ class File:
             self.path = path
 
     def __repr__(self):
-        return "<{} {}>".format(self.__class__.__name__, str(self.path))
+        return f"<{self.__class__.__name__} {str(self.path)}>"
 
     def __getattribute__(self, attrname):
         result = object.__getattribute__(self, attrname)
@@ -317,7 +317,7 @@ class File:
             raise AlreadyExistsError(newname, self.path.parent)
         try:
             self.path.rename(destpath)
-        except EnvironmentError:
+        except OSError:
             raise OperationError(self)
         if not destpath.exists():
             raise OperationError(self)
@@ -421,5 +421,5 @@ def get_files(path, fileclasses=[File]):
                 if file is not None:
                     result.append(file)
         return result
-    except EnvironmentError:
+    except OSError:
         raise InvalidPath(path)

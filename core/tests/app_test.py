@@ -95,7 +95,7 @@ class TestCaseDupeGuru:
 
         # At some point, any() was used in a wrong way that made Scan() wrongly return 1
         app = TestApp().app
-        f1, f2 = [FakeFile("foo") for _ in range(2)]
+        f1, f2 = (FakeFile("foo") for _ in range(2))
         f1.is_ref, f2.is_ref = (False, False)
         assert not (bool(f1) and bool(f2))
         add_fake_files_to_directories(app.directories, [f1, f2])

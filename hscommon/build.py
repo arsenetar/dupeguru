@@ -40,7 +40,7 @@ def _perform(src, dst, action, actionname):
             shutil.rmtree(dst)
         else:
             os.remove(dst)
-    print("%s %s --> %s" % (actionname, src, dst))
+    print("{} {} --> {}".format(actionname, src, dst))
     action(src, dst)
 
 
@@ -95,12 +95,12 @@ def filereplace(filename, outfilename=None, **kwargs):
     """Reads `filename`, replaces all {variables} in kwargs, and writes the result to `outfilename`."""
     if outfilename is None:
         outfilename = filename
-    fp = open(filename, "rt", encoding="utf-8")
+    fp = open(filename, encoding="utf-8")
     contents = fp.read()
     fp.close()
     # We can't use str.format() because in some files, there might be {} characters that mess with it.
     for key, item in kwargs.items():
-        contents = contents.replace("{{{}}}".format(key), item)
+        contents = contents.replace(f"{{{key}}}", item)
     fp = open(outfilename, "wt", encoding="utf-8")
     fp.write(contents)
     fp.close()
@@ -143,8 +143,8 @@ def package_cocoa_app_in_dmg(app_path, destfolder, args):
     # phase because running the app before packaging can modify it and we want to be sure to have
     # a valid signature.
     if args.sign_identity:
-        sign_identity = "Developer ID Application: {}".format(args.sign_identity)
-        result = print_and_do('codesign --force --deep --sign "{}" "{}"'.format(sign_identity, app_path))
+        sign_identity = f"Developer ID Application: {args.sign_identity}"
+        result = print_and_do(f'codesign --force --deep --sign "{sign_identity}" "{app_path}"')
         if result != 0:
             print("ERROR: Signing failed. Aborting packaging.")
             return
@@ -164,15 +164,15 @@ def build_dmg(app_path, destfolder):
     workpath = tempfile.mkdtemp()
     dmgpath = op.join(workpath, plist["CFBundleName"])
     os.mkdir(dmgpath)
-    print_and_do('cp -R "%s" "%s"' % (app_path, dmgpath))
+    print_and_do('cp -R "{}" "{}"'.format(app_path, dmgpath))
     print_and_do('ln -s /Applications "%s"' % op.join(dmgpath, "Applications"))
-    dmgname = "%s_osx_%s.dmg" % (
+    dmgname = "{}_osx_{}.dmg".format(
         plist["CFBundleName"].lower().replace(" ", "_"),
         plist["CFBundleVersion"].replace(".", "_"),
     )
     print("Building %s" % dmgname)
     # UDBZ = bzip compression. UDZO (zip compression) was used before, but it compresses much less.
-    print_and_do('hdiutil create "%s" -format UDBZ -nocrossdev -srcdir "%s"' % (op.join(destfolder, dmgname), dmgpath))
+    print_and_do('hdiutil create "{}" -format UDBZ -nocrossdev -srcdir "{}"'.format(op.join(destfolder, dmgname), dmgpath))
     print("Build Complete")
 
 
@@ -216,7 +216,7 @@ def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
                 os.unlink(dest_path)
             else:
                 shutil.rmtree(dest_path)
-        print("Copying package at {0} to {1}".format(source_path, dest_path))
+        print(f"Copying package at {source_path} to {dest_path}")
         if create_links:
             os.symlink(op.abspath(source_path), dest_path)
         else:
@@ -297,7 +297,7 @@ def read_changelog_file(filename):
                 return
             yield version, date, description
 
-    with open(filename, "rt", encoding="utf-8") as fp:
+    with open(filename, encoding="utf-8") as fp:
         contents = fp.read()
     splitted = re_changelog_header.split(contents)[1:]  # the first item is empty
     result = []

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Created By: Virgil Dupras
 # Created On: 2009-10-16
 # Copyright 2015 Hardcoded Software (http://www.hardcoded.net)

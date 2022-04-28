@@ -24,7 +24,7 @@ def tixgen(tixurl):
     """
     urlpattern = tixurl.format("\\1")  # will be replaced buy the content of the first group in re
     R = re.compile(r"#(\d+)")
-    repl = "`#\\1 <{}>`__".format(urlpattern)
+    repl = f"`#\\1 <{urlpattern}>`__"
     return lambda text: R.sub(repl, text)
 
 

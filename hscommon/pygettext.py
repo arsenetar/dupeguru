@@ -374,7 +374,7 @@ def main(source_files, outpath, keywords=None):
             fp = open(options.excludefilename, encoding="utf-8")
             options.toexclude = fp.readlines()
             fp.close()
-        except IOError:
+        except OSError:
             print(
                 "Can't read --exclude-file: %s" % options.excludefilename,
                 file=sys.stderr,

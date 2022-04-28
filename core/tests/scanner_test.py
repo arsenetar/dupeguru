@@ -29,7 +29,7 @@ class NamedObject:
         self.words = getwords(name)
 
     def __repr__(self):
-        return "<NamedObject %r %r>" % (self.name, self.path)
+        return "<NamedObject {!r} {!r}>".format(self.name, self.path)
 
 
 no = NamedObject
@@ -336,7 +336,7 @@ def test_tag_scan(fake_fileexists):
 def test_tag_with_album_scan(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["artist", "album", "title"])
+    s.scanned_tags = {"artist", "album", "title"}
     o1 = no("foo")
     o2 = no("bar")
     o3 = no("bleh")
@@ -356,7 +356,7 @@ def test_tag_with_album_scan(fake_fileexists):
 def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["artist", "album", "title"])
+    s.scanned_tags = {"artist", "album", "title"}
     s.min_match_percentage = 50
     o1 = no("foo")
     o2 = no("bar")
@@ -373,7 +373,7 @@ def test_that_dash_in_tags_dont_create_new_fields(fake_fileexists):
 def test_tag_scan_with_different_scanned(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["track", "year"])
+    s.scanned_tags = {"track", "year"}
     o1 = no("foo")
     o2 = no("bar")
     o1.artist = "The White Stripes"
@@ -391,7 +391,7 @@ def test_tag_scan_with_different_scanned(fake_fileexists):
 def test_tag_scan_only_scans_existing_tags(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["artist", "foo"])
+    s.scanned_tags = {"artist", "foo"}
     o1 = no("foo")
     o2 = no("bar")
     o1.artist = "The White Stripes"
@@ -405,7 +405,7 @@ def test_tag_scan_only_scans_existing_tags(fake_fileexists):
 def test_tag_scan_converts_to_str(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["track"])
+    s.scanned_tags = {"track"}
     o1 = no("foo")
     o2 = no("bar")
     o1.track = 42
@@ -420,7 +420,7 @@ def test_tag_scan_converts_to_str(fake_fileexists):
 def test_tag_scan_non_ascii(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.TAG
-    s.scanned_tags = set(["title"])
+    s.scanned_tags = {"title"}
     o1 = no("foo")
     o2 = no("bar")
     o1.title = "foobar\u00e9"

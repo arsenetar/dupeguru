@@ -61,7 +61,7 @@ def parse_args():
 
 
 def build_one_help(language):
-    print("Generating Help in {}".format(language))
+    print(f"Generating Help in {language}")
     current_path = Path(".").absolute()
     changelog_path = current_path.joinpath("help", "changelog")
     tixurl = "https://github.com/arsenetar/dupeguru/issues/{}"
@@ -139,7 +139,7 @@ def build_normal():
     print("Building localizations")
     build_localizations()
     print("Building Qt stuff")
-    print_and_do("pyrcc5 {0} > {1}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
+    print_and_do("pyrcc5 {} > {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
     fix_qt_resource_file(Path("qt", "dg_rc.py"))
     build_help()
 

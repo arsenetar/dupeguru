@@ -47,7 +47,7 @@ def log_io_error(func):
     def wrapper(path, *args, **kwargs):
         try:
             return func(path, *args, **kwargs)
-        except (IOError, OSError) as e:
+        except OSError as e:
             msg = 'Error "{0}" during operation "{1}" on "{2}": "{3}"'
             classname = e.__class__.__name__
             funcname = func.__name__

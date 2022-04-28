@@ -18,7 +18,7 @@ def get_parser():
 
 def main():
     args = get_parser().parse_args()
-    print("Building {}...".format(args.name[0]))
+    print(f"Building {args.name[0]}...")
     ext = Extension(args.name[0], args.source_files)
     setup(
         script_args=["build_ext", "--inplace"],

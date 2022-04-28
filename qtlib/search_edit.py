@@ -38,7 +38,7 @@ class ClearableEdit(QLineEdit):
             self._clearButton = LineEditButton(self)
             frame_width = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
             padding_right = self._clearButton.sizeHint().width() + frame_width + 1
-            stylesheet = "QLineEdit {{ padding-right:{0}px; }}".format(padding_right)
+            stylesheet = f"QLineEdit {{ padding-right:{padding_right}px; }}"
             self.setStyleSheet(stylesheet)
             self._updateClearButton()
 
