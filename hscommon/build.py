@@ -172,7 +172,9 @@ def build_dmg(app_path, destfolder):
     )
     print("Building %s" % dmgname)
     # UDBZ = bzip compression. UDZO (zip compression) was used before, but it compresses much less.
-    print_and_do('hdiutil create "{}" -format UDBZ -nocrossdev -srcdir "{}"'.format(op.join(destfolder, dmgname), dmgpath))
+    print_and_do(
+        'hdiutil create "{}" -format UDBZ -nocrossdev -srcdir "{}"'.format(op.join(destfolder, dmgname), dmgpath)
+    )
     print("Build Complete")
 
 
