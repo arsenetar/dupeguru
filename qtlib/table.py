@@ -6,6 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import typing
 from PyQt5.QtCore import (
     Qt,
     QAbstractTableModel,
@@ -14,13 +15,13 @@ from PyQt5.QtCore import (
     QItemSelection,
 )
 
-from .column import Columns
+from .column import Columns, Column
 
 
 class Table(QAbstractTableModel):
     # Flags you want when index.isValid() is False. In those cases, _getFlags() is never called.
-    INVALID_INDEX_FLAGS = Qt.ItemIsEnabled
-    COLUMNS = []
+    INVALID_INDEX_FLAGS = Qt.ItemFlag.ItemIsEnabled
+    COLUMNS: typing.List[Column] = []
 
     def __init__(self, model, view, **kwargs):
         super().__init__(**kwargs)

@@ -13,6 +13,16 @@
 
 import os
 
+from math import floor
+import logging
+import sqlite3
+from threading import Lock
+from typing import Any, AnyStr, Union, Callable
+
+from pathlib import Path
+from hscommon.util import nonone, get_file_ext
+
+hasher: Callable
 try:
     import xxhash
 
@@ -21,15 +31,6 @@ except ImportError:
     import hashlib
 
     hasher = hashlib.md5
-
-from math import floor
-import logging
-import sqlite3
-from threading import Lock
-from typing import Any, AnyStr, Union
-
-from pathlib import Path
-from hscommon.util import nonone, get_file_ext
 
 __all__ = [
     "File",

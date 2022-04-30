@@ -6,6 +6,16 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import typing
+from os import urandom
+
+from pathlib import Path
+from hscommon.testutil import eq_
+from core.tests.directories_test import create_fake_fs
+
+from .. import fs
+
+hasher: typing.Callable
 try:
     import xxhash
 
@@ -14,14 +24,6 @@ except ImportError:
     import hashlib
 
     hasher = hashlib.md5
-
-from os import urandom
-
-from pathlib import Path
-from hscommon.testutil import eq_
-from core.tests.directories_test import create_fake_fs
-
-from .. import fs
 
 
 def create_fake_fs_with_random_data(rootpath):
