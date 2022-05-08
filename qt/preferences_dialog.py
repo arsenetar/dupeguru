@@ -34,34 +34,12 @@ from hscommon import desktop, plat
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 from qtlib.util import horizontal_wrap, move_to_screen_center
-from qtlib.preferences import get_langnames
+from qt.preferences import get_langnames
 from enum import Flag, auto
 
 from .preferences import Preferences
 
 tr = trget("ui")
-
-SUPPORTED_LANGUAGES = [
-    "cs",
-    "de",
-    "el",
-    "en",
-    "es",
-    "fr",
-    "hy",
-    "it",
-    "ja",
-    "ko",
-    "ms",
-    "nl",
-    "pl_PL",
-    "pt_BR",
-    "ru",
-    "tr",
-    "uk",
-    "vi",
-    "zh_CN",
-]
 
 
 class Sections(Flag):
@@ -78,8 +56,7 @@ class PreferencesDialogBase(QDialog):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
-        all_languages = get_langnames()
-        self.supportedLanguages = sorted(SUPPORTED_LANGUAGES, key=lambda lang: all_languages[lang])
+        self.supportedLanguages = dict(sorted(get_langnames().items(), key=lambda item: item[1]))
         self._setupUi()
 
         self.filterHardnessSlider.valueChanged["int"].connect(self.filterHardnessLabel.setNum)
@@ -148,8 +125,8 @@ class PreferencesDialogBase(QDialog):
         layout = QVBoxLayout()
         self.languageLabel = QLabel(tr("Language:"), self)
         self.languageComboBox = QComboBox(self)
-        for lang in self.supportedLanguages:
-            self.languageComboBox.addItem(get_langnames()[lang])
+        for lang_code, lang_str in self.supportedLanguages.items():
+            self.languageComboBox.addItem(lang_str, userData=lang_code)
         layout.addLayout(horizontal_wrap([self.languageLabel, self.languageComboBox, None]))
         self._setupAddCheckbox(
             "tabs_default_pos",
@@ -337,10 +314,10 @@ use the modifier key to drag the floating window around"
             self.result_table_ref_background_color.setColor(prefs.result_table_ref_background_color)
             self.result_table_delta_foreground_color.setColor(prefs.result_table_delta_foreground_color)
             try:
-                langindex = self.supportedLanguages.index(self.app.prefs.language)
-            except ValueError:
-                langindex = 0
-            self.languageComboBox.setCurrentIndex(langindex)
+                selected_lang = self.supportedLanguages[self.app.prefs.language]
+            except KeyError:
+                selected_lang = self.supportedLanguages["en"]
+            self.languageComboBox.setCurrentText(selected_lang)
         if section & Sections.DEBUG:
             setchecked(self.debugModeBox, prefs.debug_mode)
             setchecked(self.profile_scan_box, prefs.profile_scan)
@@ -373,17 +350,17 @@ use the modifier key to drag the floating window around"
         prefs.use_native_dialogs = ischecked(self.use_native_dialogs)
         if plat.ISWINDOWS:
             prefs.use_dark_style = ischecked(self.use_dark_style)
-        lang = self.supportedLanguages[self.languageComboBox.currentIndex()]
-        oldlang = self.app.prefs.language
-        if oldlang not in self.supportedLanguages:
-            oldlang = "en"
-        if lang != oldlang:
+        lang_code = self.languageComboBox.currentData()
+        old_lang_code = self.app.prefs.language
+        if old_lang_code not in self.supportedLanguages.keys():
+            old_lang_code = "en"
+        if lang_code != old_lang_code:
             QMessageBox.information(
                 self,
                 "",
                 tr("dupeGuru has to restart for language changes to take effect."),
             )
-        self.app.prefs.language = lang
+        self.app.prefs.language = lang_code
         self._save(prefs, ischecked)
 
     def resetToDefaults(self, section_to_update):
