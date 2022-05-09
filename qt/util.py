@@ -14,8 +14,9 @@ import logging
 
 from core.util import executable_folder
 from hscommon.util import first
+from hscommon.plat import ISWINDOWS
 
-from PyQt5.QtCore import QStandardPaths
+from PyQt5.QtCore import QStandardPaths, QSettings
 from PyQt5.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt5.QtWidgets import (
     QSpacerItem,
@@ -137,3 +138,24 @@ def escape_amp(s):
     # Returns `s` with escaped ampersand (& --> &&). QAction text needs to have & escaped because
     # that character is used to define "accel keys".
     return s.replace("&", "&&")
+
+
+def create_qsettings():
+    # Create a QSettings instance with the correct arguments.
+    config_location = op.join(executable_folder(), "settings.ini")
+    if op.isfile(config_location):
+        settings = QSettings(config_location, QSettings.IniFormat)
+        settings.setValue("Portable", True)
+    elif ISWINDOWS:
+        # On windows use an ini file in the AppDataLocation instead of registry if possible as it
+        # makes it easier for a user to clear it out when there are issues.
+        locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+        if locations:
+            settings = QSettings(op.join(locations[0], "settings.ini"), QSettings.IniFormat)
+        else:
+            settings = QSettings()
+        settings.setValue("Portable", False)
+    else:
+        settings = QSettings()
+        settings.setValue("Portable", False)
+    return settings

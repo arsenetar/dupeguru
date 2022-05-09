@@ -5,17 +5,15 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtWidgets import QApplication, QDockWidget
-from PyQt5.QtCore import Qt, QSettings, QRect, QObject, pyqtSignal, QStandardPaths
+from PyQt5.QtCore import Qt, QRect, QObject, pyqtSignal
 from PyQt5.QtGui import QColor
 
 from hscommon import trans
-from hscommon.plat import ISLINUX, ISWINDOWS
+from hscommon.plat import ISLINUX
 from core.app import AppMode
 from core.scanner import ScanType
 from hscommon.util import tryint
-from core.util import executable_folder
-
-from os import path as op
+from qt.util import create_qsettings
 
 
 def get_langnames():
@@ -68,27 +66,6 @@ def _adjust_after_deserialization(v):
         else:
             return tryint(v, v)
     return v
-
-
-def create_qsettings():
-    # Create a QSettings instance with the correct arguments.
-    config_location = op.join(executable_folder(), "settings.ini")
-    if op.isfile(config_location):
-        settings = QSettings(config_location, QSettings.IniFormat)
-        settings.setValue("Portable", True)
-    elif ISWINDOWS:
-        # On windows use an ini file in the AppDataLocation instead of registry if possible as it
-        # makes it easier for a user to clear it out when there are issues.
-        locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
-        if locations:
-            settings = QSettings(op.join(locations[0], "settings.ini"), QSettings.IniFormat)
-        else:
-            settings = QSettings()
-        settings.setValue("Portable", False)
-    else:
-        settings = QSettings()
-        settings.setValue("Portable", False)
-    return settings
 
 
 class PreferencesBase(QObject):
