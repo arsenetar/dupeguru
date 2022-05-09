@@ -19,7 +19,7 @@ from os import path as op
 
 
 def get_langnames():
-    tr = trans.trget("qtlib")  # TODO migrate this to ui instead
+    tr = trans.trget("ui")
     return {
         "cs": tr("Czech"),
         "de": tr("German"),

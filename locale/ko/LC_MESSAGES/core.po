@@ -1,149 +1,150 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
+# Sangdon Lim, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Sangdon Lim, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "표시된 중복 항목이 없습니다. 아무것도하지 않았습니다."
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "선택한 중복 항목이 없습니다. 아무것도하지 않았습니다."
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
-msgstr "한 번에 많은 파일을 열려고합니다. 그 파일을 여는 것에 따라 그렇게하면 꽤 엉망이 될 수 있습니다. 계속하다?"
+msgstr "한 번에 많은 파일을 열려고 합니다. 시스템 설정에 따라 너무 많은 프로그램이 실행될 수도 있습니다. 진행할까요?"
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr "중복 검색"
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr "불러오는중"
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr "이동중"
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr "복사중"
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr "휴지통으로 보내기"
 
-#: core\app.py:289
+#: core\app.py:291
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
-msgstr "이전 작업이 여전히 거기에 걸려 있습니다. 아직 새로운 것을 시작할 수 없습니다. 몇 초 후에 다시 시도하십시오."
+msgstr "이전 작업이 아직 진행 중이어서 새 작업을 시작할 수 없습니다. 몇 초 후에 다시 시도해 보세요."
 
-#: core\app.py:300
+#: core\app.py:302
 msgid "No duplicates found."
 msgstr "중복 파일이 없습니다."
 
-#: core\app.py:315
+#: core\app.py:317
 msgid "All marked files were copied successfully."
 msgstr "표시된 모든 파일이 성공적으로 복사되었습니다."
 
-#: core\app.py:317
+#: core\app.py:319
 msgid "All marked files were moved successfully."
 msgstr "표시된 모든 파일이 성공적으로 이동되었습니다."
 
-#: core\app.py:319
-msgid "All marked files were deleted successfully."
-msgstr ""
-
 #: core\app.py:321
+msgid "All marked files were deleted successfully."
+msgstr "표시된 모든 파일이 성공적으로 제거되었습니다."
+
+#: core\app.py:323
 msgid "All marked files were successfully sent to Trash."
 msgstr "표시된 모든 파일이 성공적으로 휴지통으로 전송되었습니다."
 
-#: core\app.py:326
+#: core\app.py:328
 msgid "Could not load file: {}"
 msgstr "파일을로드 할 수 없습니다 : {}"
 
-#: core\app.py:382
+#: core\app.py:384
 msgid "'{}' already is in the list."
 msgstr "'{}' 는 이미 목록에 있습니다."
 
-#: core\app.py:384
+#: core\app.py:386
 msgid "'{}' does not exist."
 msgstr "'{}' 가 존재하지 않습니다."
 
-#: core\app.py:392
+#: core\app.py:394
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "선택된 %d개의 일치 항목은 모든 후속 검색에서 무시됩니다. 계속하다?"
 
-#: core\app.py:469
+#: core\app.py:471
 msgid "Select a directory to copy marked files to"
 msgstr "표시된 파일을 복사 할 디렉토리를 선택하십시오"
 
-#: core\app.py:471
+#: core\app.py:473
 msgid "Select a directory to move marked files to"
 msgstr "표시된 파일을 이동할 디렉토리를 선택하십시오"
 
-#: core\app.py:510
+#: core\app.py:512
 msgid "Select a destination for your exported CSV"
 msgstr "내 보낸 CSV의 대상을 선택하십시오"
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:518 core\app.py:773 core\app.py:783
 msgid "Couldn't write to file: {}"
 msgstr "파일에 쓸 수 없습니다 : {}"
 
-#: core\app.py:539
+#: core\app.py:541
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "사용자 지정 명령을 설정하지 않았습니다. 기본 설정에서 설정하십시오."
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:697 core\app.py:709
 msgid "You are about to remove %d files from results. Continue?"
-msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 계속하다?"
+msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 실행할까요?"
 
-#: core\app.py:743
+#: core\app.py:745
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} 개의 중복 그룹이 우선 순위 재 지정으로 변경되었습니다."
 
-#: core\app.py:790
+#: core\app.py:792
 msgid "The selected directories contain no scannable file."
 msgstr "선택한 디렉토리에 스캔 가능한 파일이 없습니다."
 
-#: core\app.py:803
+#: core\app.py:808
 msgid "Collecting files to scan"
 msgstr "스캔 할 파일 수집"
 
-#: core\app.py:850
+#: core\app.py:858
 msgid "%s (%d discarded)"
 msgstr "%s (%d 폐기)"
 
-#: core\directories.py:191
+#: core\directories.py:190
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "파일 목록 생성 중: {}개 파일"
 
-#: core\directories.py:207
+#: core\directories.py:206
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "폴더 목록 생성 중: {}개 폴더"
 
 #: core\engine.py:27
 msgid "%d matches found from %d groups"
-msgstr ""
+msgstr "중복 파일 %d개 확인됨: %d개 그룹"
 
 #: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
-msgstr "{}개의 파일을 휴지통으로 보내고 있습니다."
+msgstr "{}개 파일을 휴지통으로 보내려고 합니다."
 
 #: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
@@ -163,7 +164,7 @@ msgstr "파일 이름 - 필드"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr "파일 이름 - 필드 (주문 없음)"
+msgstr "파일 이름 - 필드 (순서 없음)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
@@ -191,7 +192,7 @@ msgstr "%d/%d 일치 확인"
 
 #: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
-msgstr "%d/%d 사진의 EXIF 읽기"
+msgstr "사진 EXIF 읽는 중: %d/%d"
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
@@ -201,35 +202,35 @@ msgstr "EXIF 타임 스탬프"
 msgid "None"
 msgstr "없음"
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr "숫자로 끝남"
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr "숫자로 끝나지 않음"
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr "최장"
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr "최단"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr "제일 높은"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr "최저"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr "최신"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr "가장 오래된"
 
@@ -243,15 +244,15 @@ msgstr "필터: %s"
 
 #: core\scanner.py:90
 msgid "Read size of %d/%d files"
-msgstr "%d/%d 개의 파일을 읽을 수 있습니다."
+msgstr "파일 크기 읽는 중: %d/%d"
 
 #: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
-msgstr "%d/%d 개 파일의 메타 데이터를 읽었습니다."
+msgstr "파일 메타데이터 읽는 중: %d/%d"
 
 #: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
-msgstr "거의 완료되었습니다! 결과를 만지작 거리는 중..."
+msgstr "거의 완료되었습니다! 결과를 취합하고 있습니다."
 
 #: core\se\scanner.py:18
 msgid "Folders"

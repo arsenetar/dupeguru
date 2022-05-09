@@ -1,4 +1,5 @@
 # Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 # Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2022
 #
 msgid ""
@@ -988,3 +989,157 @@ msgstr "Cache dikosongkan."
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
 msgstr "Guna gaya gelap"
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr "Bukah operasi imbasan"
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr "Membukah operasi imbasan dan simpan log untuk pengoptimuman."
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr "Log terletak di: <a href=\"{}\">{}</a>"
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr "Nyahpepijat"
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "Mengenai {}"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "Versi {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr "Memeriksa kemas kini..."
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "Dilesenkan bawah GPLv3"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr "Tiada kemas kini tersedia."
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr "Versi baharu {} tersedia, muat turun <a href=\"{}\">di sini</a>."
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "Laporan Ralat"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Terdapat kesulitan yang terjadi. Apa kata laporkan ralat tersebut?"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Laporan ralat patut dilaporkan sebagai isu Github. Anda boleh salin runut balik ralat di atas dan tampal dalam isu baharu.\n"
+"\n"
+"Sila pastikan anda menggelintar dahulu kalau-kalau isu sudah wujud. Juga pastikan untuk cuba versi paling terbaharu yang disediakan dari repositori, kerana pepijat yang anda alami mungkin sudah ditampung.\n"
+"\n"
+"Ia sangat membantu sekiranya anda tambah keterangan mengenai bagaimana anda dapat ralat tersebut. Terima kasih!\n"
+"\n"
+"Walaupun aplikasi sepatutnya masih boleh digunakan selepas ralat ini, ia mungkin berada dalam keadaan tidak stabil, jadi anda digalakkan untuk memulakan semula aplikasi ini."
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Pergi ke Github"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "Czech"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "Jerman"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "Yunani"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "Inggeris"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "Sepanyol"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "Perancis"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "Armenia"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "Itali"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "Jepun"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "Korea"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "Melayu"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "Belanda"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "Poland"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "Brazil"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "Rusia"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "Turki"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "Ukraine"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "Vietnam"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "Cina (Ringkas)"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "Kosongkan Senarai"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "Cari..."

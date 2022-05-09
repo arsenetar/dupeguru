@@ -1,10 +1,11 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2022
+# IlluminatiWave, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: IlluminatiWave, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/voltaicideas/teams/116153/es/)\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,7 +334,7 @@ msgstr "Tamaño de fuente:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr "Lenguaje:"
+msgstr "Idioma:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
@@ -950,40 +951,200 @@ msgstr "Visualización"
 
 #: qt\se\preferences_dialog.py:70
 msgid "Partially hash files bigger than"
-msgstr ""
+msgstr "Archivos de hash parcialmente mayores a"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: qt\preferences_dialog.py:163
 msgid "Use native OS dialogs"
-msgstr ""
+msgstr "Usar diálogos nativos del SO"
 
 #: qt\preferences_dialog.py:166
 msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
 msgstr ""
+"Para acciones como la selección de archivos/carpetas, utilice los diálogos nativos del SO\n"
+"Algunos diálogos nativos tienen una funcionalidad limitada."
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
-msgstr ""
+msgstr "Ignorar los ficheros mayores a"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
-msgstr ""
+msgstr "Borrar caché"
 
 #: qt\app.py:294
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
 msgstr ""
+"¿Seguro que quieres borrar la caché? Esto eliminará todos los hashes de "
+"ficheros y análisis de imágenes almacenados en la caché."
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr ""
+msgstr "Caché eliminada."
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
+msgstr "Usar tema oscuro"
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr "Perfilar operación de análisis"
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
 msgstr ""
+"Perfilar la operación de análisis y guardar los registros para su "
+"optimización."
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr "Registro guardado en: <a href=\"{}\">{}</a>"
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr "Depurar"
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "Acerca de {}"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "Versión {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr "Buscando actualizaciones..."
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "Licenciado en GPLv3"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr "Sin actualizaciones disponibles."
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr "Nueva versión disponible {}, descargar <a href=\"{}\">aquí</a> "
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "Informe de error"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Algo salió mal. ¿Qué tal informar el error?"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Los informes de errores deben notificarse en Problemas de Github. Puede copiar el seguimiento del error anterior y pegarlo en un nuevo número.\n"
+"\n"
+"Asegúrese de realizar una búsqueda de los problemas ya existentes de antemano. También asegúrese de probar la última versión disponible en el repositorio, ya que es posible que el error que está experimentando ya se haya corregido.\n"
+"\n"
+"Lo que generalmente ayuda es agregar una descripción de cómo obtuvo el error. ¡Gracias!\n"
+"\n"
+"Aunque la aplicación debería continuar ejecutándose después de este error, puede estar en un estado inestable, por lo que se recomienda que reinicie la aplicación."
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Ir a Github"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "Checo"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "Alemán"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "Griego"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "Inglés"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "Español"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "Francés"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "Armenio"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "Italiano"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "Japonés"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "Coreano"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "Malayo"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "Holandés"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "Polaco"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "Brasileño"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "Ruso"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "Turco"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "Chino (simplificado)"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "Limpiar lista"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "Búsqueda..."

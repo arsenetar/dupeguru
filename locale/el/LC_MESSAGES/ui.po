@@ -1,10 +1,10 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/voltaicideas/teams/116153/el/)\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -994,3 +994,157 @@ msgstr ""
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
 msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "Σχετικά {}"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "Έκδοση {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "Άδεια χρήσης βάσει GPLv3"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "Αναφορά σφάλματος"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Κάτι πήγε στραβά. Μήπως να αναφερθεί το σφάλμα;"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Οι αναφορές σφαλμάτων πρέπει να αναφέρονται ως ζητήματα Github. Μπορείτε να αντιγράψετε την ανίχνευση σφαλμάτων παραπάνω και να την επικολλήσετε σε ένα νέο ζήτημα.\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πραγματοποιήσει αναζήτηση για τυχόν υπάρχοντα ζητήματα εκ των προτέρων. Επίσης, φροντίστε να δοκιμάσετε την πιο πρόσφατη διαθέσιμη έκδοση από το αποθετήριο, καθώς το σφάλμα που αντιμετωπίζετε ενδέχεται να έχει ήδη διορθωθεί.\n"
+"\n"
+"Αυτό που συνήθως βοηθάει συνήθως είναι εάν προσθέσετε μια περιγραφή για το πώς λάβατε το σφάλμα. Ευχαριστώ!\n"
+"\n"
+"Παρόλο που η εφαρμογή θα πρέπει να συνεχίσει να εκτελείται μετά από αυτό το σφάλμα, ενδέχεται να βρίσκεται σε ασταθή κατάσταση, επομένως συνιστάται να κάνετε επανεκκίνηση της εφαρμογής."
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Επίσκεψη Github"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "Τσέχικα"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "Γερμανικά"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "Ελληνικά"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "Αγγλικά"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "Ισπανικά"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "Γαλλικά"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "Αρμένικα"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "Ιταλικά"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "Ιαπωνικά"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "Κορεάτικα"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "Μαλαϊκά"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "Γερμανικά"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "Πολωνικά"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "Βραζιλιάνικα"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "Ρώσικα"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "Τουρκικά"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "Ουκρανέζικα"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "Βιετναμέζικα"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "Κινέζικα (Απλοποιημένα)"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "Εκκαθάριση λίστας"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "Αναζήτηση..."

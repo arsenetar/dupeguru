@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import QAction
 from hscommon.trans import trget
 from hscommon.util import dedupe
 
-tr = trget("qtlib")  # TODO move to ui
+tr = trget("ui")
 
 MenuEntry = namedtuple("MenuEntry", "menu fixedItemCount")
 

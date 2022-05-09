@@ -1,10 +1,10 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# Andrew Senetar <arsenetar@gmail.com>, 2022
+# Fuan <jcfrt@posteo.net>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2022\n"
 "Language-Team: Armenian (https://www.transifex.com/voltaicideas/teams/116153/hy/)\n"
 "Language: hy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -922,3 +922,197 @@ msgstr "Գեներալ"
 #: qt\preferences_dialog.py:286
 msgid "Display"
 msgstr "Ցուցադրման"
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr ""
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr ""
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr ""
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
+msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "{}- ի մասին"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "{}-րդ տարբերակ"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "իցենզավորված տակ GPLv3"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "Սխալների մասին հաղորդագրություն"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Ինչ որ բան այնպես չգնաց. Հաղորդել սխալը?"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Error հաշվետվությունները պետք է հրապարակվեն որպես Github հարցերի շուրջ: Կարող եք վերևում պատճենել սխալի հետևումը և տեղադրել այն նոր համարում:\n"
+"\n"
+"Խնդրում ենք համոզվեք, որ նախապես փնտրեք արդեն գոյություն ունեցող ցանկացած խնդիր: Նաեւ համոզվեք, որ ստուգել են հենց վերջին տարբերակը մատչելի շտեմարան, քանի որ Bug դուք ապրում գուցե արդեն patched.\n"
+"\n"
+"Սովորաբար այն, ինչ օգնում է իրականում, այն է, եթե ավելացնեք նկարագրությունը, թե ինչպես եք ստացել սխալը: Շնորհակալություն\n"
+"\n"
+"Չնայած այս սխալից հետո ծրագիրը պետք է շարունակի գործել, այն կարող է լինել անկայուն վիճակում, ուստի խորհուրդ է տրվում վերագործարկել ծրագիրը:"
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Գնացեք Գիթուբ"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "Չեխերեն"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "Գերմաներեն"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "հունարեն"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "Անգլերեն"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "Իսպաներեն"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "Ֆրանսերեն"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "հայերեն"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "Իտալերեն"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "ճապոներեն"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "կորեերեն"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "Մալայերեն"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "հոլանդերեն"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "լեհերեն"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "բրազիլական"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "ռուսերեն"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "Թուրքերեն"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "ուկրաիներեն"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "վիետնամերեն"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "Չինարեն (Պարզեցված)"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "Մաքրել ցանկը"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "Որոնել..."

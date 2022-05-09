@@ -104,8 +104,6 @@ def build_updatepot():
     loc.generate_pot(["core"], Path("locale", "columns.pot"), ["coltr"])
     print("Building ui.pot")
     loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
-    print("Building qtlib.pot")
-    loc.generate_pot(["qtlib"], Path("locale", "qtlib.pot"), ["tr"])
 
 
 def build_mergepot():

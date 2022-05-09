@@ -1,9 +1,10 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# Sangdon Lim, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
+"Last-Translator: Sangdon Lim, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "비트레이트"
 msgid "Samplerate"
 msgstr "샘플레이트"
 
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
 #: core\se\result_table.py:19
 msgid "Filename"
 msgstr "폴더명"
@@ -59,7 +60,7 @@ msgid "Kind"
 msgstr "종류"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
+#: core\prioritize.py:165 core\se\result_table.py:23
 msgid "Modification"
 msgstr "수정날짜"
 
@@ -115,8 +116,8 @@ msgstr "크기 (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr "EXIF 타임스태프"
+msgstr "EXIF 타임스탬프"
 
-#: core\prioritize.py:156
+#: core\prioritize.py:158
 msgid "Size"
 msgstr "크기"

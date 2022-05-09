@@ -1,10 +1,10 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# Fuan <jcfrt@posteo.net>, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/voltaicideas/teams/116153/pt_BR/)\n"
 "Language: pt_BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -983,3 +983,157 @@ msgstr ""
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
 msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "Sobre o {}"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "Versão {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "Licenciado sob GPLv3"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "Relatório de Erro"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "Algo deu errado. Deseja relatar o erro?"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"Os relatórios de erros devem ser relatados como problemas do Github. Você pode copiar o rastreamento do erro acima e colá-lo em uma nova edição.\n"
+"\n"
+"Por favor, certifique-se de executar uma pesquisa de qualquer problema já existente com antecedência. Certifique-se também de testar a versão mais recente disponível no repositório, uma vez que o bug que você está enfrentando pode já ter sido corrigido.\n"
+"\n"
+"O que geralmente ajuda muito é adicionar uma descrição de como o erro ocorreu. Obrigado!\n"
+"\n"
+"Embora o aplicativo deva continuar a ser executado após esse erro, ele pode estar em um estado instável, portanto, é recomendável reiniciar o aplicativo."
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Ir para o Github"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "Tcheco"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "Alemão"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "Grega"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "Inglês"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "Francês"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "Armênio"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "Italiano"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "Japonês"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "Coreano"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "Malaio"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "Holandês"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "Polonês"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "Português Brasileiro"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "Russo"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "Turco"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "Chinês (Simplificado)"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "Limpar Lista"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "Buscar…"

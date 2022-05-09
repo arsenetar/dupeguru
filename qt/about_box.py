@@ -14,7 +14,7 @@ from core.util import check_for_update
 from qt.util import move_to_screen_center
 from hscommon.trans import trget
 
-tr = trget("qtlib")  # TODO change to ui
+tr = trget("ui")
 
 
 class AboutBox(QDialog):

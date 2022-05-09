@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
 from hscommon.trans import trget
 
-tr = trget("qtlib")  # TODO change to ui
+tr = trget("ui")
 
 # IMPORTANT: For this widget to work propertly, you have to add "search_clear_13" from the
 # "images" folder in your resources.

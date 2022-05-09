@@ -1,9 +1,10 @@
 # Translators:
-# Fuan <jcfrt@posteo.net>, 2021
+# Andrew Senetar <arsenetar@gmail.com>, 2022
+# Fuan <jcfrt@posteo.net>, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
+"Last-Translator: Fuan <jcfrt@posteo.net>, 2022\n"
 "Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -965,3 +966,157 @@ msgstr ""
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
 msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "{}について。"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "バージョン {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "GPLv3としてライセンス供与。"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "エラーレポート"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "何かがうまくいかなかった。 エラーを報告するのはどうですか？"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"エラーレポートはGithubの問題として報告する必要があります。 上記のエラートレースバックをコピーして、新しい問題に貼り付けることができます。\n"
+"\n"
+"事前に既存の問題を検索してください。 また、発生しているバグにはすでにパッチが適用されている可能性があるため、リポジトリから入手できる最新バージョンをテストしてください。\n"
+"\n"
+"通常本当に役立つのは、エラーが発生した方法の説明を追加することです。 ありがとう！\n"
+"\n"
+"このエラーの後もアプリケーションは実行を継続するはずですが、不安定な状態になっている可能性があるため、アプリケーションを再起動することをお勧めします。"
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "Githubに移動する"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "チェコ語"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "ドイツ語"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "ギリシャ語"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "英語"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "スペイン語"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "フランス語"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "アルメニア語"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "イタリア語"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "日本語"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "韓国語"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "マレー語"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "オランダ語"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "ポーランド語"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "ブラジル語"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "ロシア語"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "トルコ語"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "ウクライナ語"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "ベトナム語"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "中国語（簡体字）"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "リストをクリア"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "探索..."

@@ -1,6 +1,10 @@
+# Translators:
+# Chris Ocelot, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
 "Language: zh_TW\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10,110 +14,110 @@ msgstr ""
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
 msgid "File Path"
-msgstr ""
+msgstr "文件路径"
 
 #: core\gui\problem_table.py:19
 msgid "Error Message"
-msgstr ""
+msgstr "错误信息"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
-msgstr ""
+msgstr "持续时间"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr ""
+msgstr "比特率"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr ""
+msgstr "采样率"
 
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
 #: core\se\result_table.py:19
 msgid "Filename"
-msgstr ""
+msgstr "文件名"
 
 #: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
 #: core\se\result_table.py:20
 msgid "Folder"
-msgstr ""
+msgstr "文件夹"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr ""
+msgstr "大小 (MB)"
 
 #: core\me\result_table.py:22
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr ""
+msgstr "采样率"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
 msgid "Kind"
-msgstr ""
+msgstr "类型"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
+#: core\prioritize.py:165 core\se\result_table.py:23
 msgid "Modification"
-msgstr ""
+msgstr "编辑日期"
 
 #: core\me\result_table.py:27
 msgid "Title"
-msgstr ""
+msgstr "歌曲名"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr ""
+msgstr "作者"
 
 #: core\me\result_table.py:29
 msgid "Album"
-msgstr ""
+msgstr "专辑"
 
 #: core\me\result_table.py:30
 msgid "Genre"
-msgstr ""
+msgstr "音乐类型"
 
 #: core\me\result_table.py:31
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr ""
+msgstr "音轨号"
 
 #: core\me\result_table.py:33
 msgid "Comment"
-msgstr ""
+msgstr "注释"
 
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr ""
+msgstr "匹配度 %"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr ""
+msgstr "使用过的词语"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr ""
+msgstr "重复文件数"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
-msgstr ""
+msgstr "规格"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr ""
+msgstr "大小 (KB)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "EXIF 时间戳"
 
-#: core\prioritize.py:156
+#: core\prioritize.py:158
 msgid "Size"
-msgstr ""
+msgstr "大小"

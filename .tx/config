@@ -13,12 +13,6 @@ source_file = locale/core.pot
 source_lang = en
 type        = PO
 
-[o:voltaicideas:p:dupeguru-1:r:qtlib]
-file_filter = locale/<lang>/LC_MESSAGES/qtlib.po
-source_file = locale/qtlib.pot
-source_lang = en
-type        = PO
-
 [o:voltaicideas:p:dupeguru-1:r:ui]
 file_filter = locale/<lang>/LC_MESSAGES/ui.po
 source_file = locale/ui.pot

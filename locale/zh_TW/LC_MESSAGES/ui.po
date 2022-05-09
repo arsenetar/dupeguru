@@ -1,9 +1,12 @@
 # Translators:
-# 太子 VC <taiziccf@gmail.com>, 2021
+# Fuan <jcfrt@posteo.net>, 2022
+# 太子 VC <taiziccf@gmail.com>, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2022
+# Chris Ocelot, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: 太子 VC <taiziccf@gmail.com>, 2021\n"
+"Last-Translator: Chris Ocelot, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
 "Language: zh_TW\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,33 +67,33 @@ msgstr "链接已删除的文件"
 msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
-msgstr ""
+msgstr "在删除重复文件后，以源文件的链接来替代已删除的文件。"
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
-msgstr ""
+msgstr "硬链接"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr ""
+msgstr "符号链接"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
-msgstr ""
+msgstr " (不支持)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr ""
+msgstr "直接删除文件"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
-msgstr ""
+msgstr "直接将文件删除，而不是将其移至回收站。此选项通常作为普通删除方法不能正常使用时替代方案。"
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
-msgstr ""
+msgstr "继续"
 
 #: qt/deletion_options.py:60 cocoa/en.lproj/Localizable.strings:0
 msgid "Cancel"
@@ -111,662 +114,662 @@ msgstr "源文件"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
-msgstr ""
+msgstr "载入结果..."
 
 #: qt/directories_dialog.py:65 cocoa/en.lproj/Localizable.strings:0
 msgid "Results Window"
-msgstr ""
+msgstr "结果窗口"
 
 #: qt/directories_dialog.py:66
 msgid "Add Folder..."
-msgstr ""
+msgstr "添加文件夹..."
 
 #: qt/directories_dialog.py:74 qt/result_window.py:100
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: qt/directories_dialog.py:76 qt/result_window.py:108
 msgid "View"
-msgstr ""
+msgstr "视图"
 
 #: qt/directories_dialog.py:78 qt/result_window.py:110
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Help"
-msgstr ""
+msgstr "帮助"
 
 #: qt/directories_dialog.py:80 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Recent Results"
-msgstr ""
+msgstr "载入最近的结果"
 
 #: qt/directories_dialog.py:116 cocoa/en.lproj/Localizable.strings:0
 msgid "Application Mode:"
-msgstr ""
+msgstr "程序模式："
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr ""
+msgstr "图片"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr ""
+msgstr "标准"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr ""
+msgstr "扫描类型:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr ""
+msgstr "更多选项"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr ""
+msgstr "请选择要扫描的文件夹，然后点击 \"扫描\"。"
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
-msgstr ""
+msgstr "载入结果"
 
 #: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
-msgstr ""
+msgstr "扫描"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr ""
+msgstr "未保存的结果"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr ""
+msgstr "您还没有保存扫描结果，确定要退出吗?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
-msgstr ""
+msgstr "请选择一个文件夹以加入到扫描列表中"
 
 #: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr ""
+msgstr "选择一个结果文件以载入"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
-msgstr ""
+msgstr "所有文件 (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr ""
+msgstr "dupeGuru 结果 (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
-msgstr ""
+msgstr "开始新的扫描"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr ""
+msgstr "您还没有保存扫描结果，确定要继续吗？"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr ""
+msgstr "不包含"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
-msgstr ""
+msgstr "正常"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
-msgstr ""
+msgstr "移除已选择的文件"
 
 #: qt/ignore_list_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: qt/ignore_list_dialog.py:47 qt/problem_dialog.py:61
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: qt/me/details_dialog.py:18 qt/pe/details_dialog.py:24
 #: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details"
-msgstr ""
+msgstr "详细信息"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
-msgstr ""
+msgstr "扫描标签:"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
-msgstr ""
+msgstr "音轨"
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
-msgstr ""
+msgstr "作者"
 
 #: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
 msgid "Album"
-msgstr ""
+msgstr "专辑"
 
 #: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
 msgid "Title"
-msgstr ""
+msgstr "歌曲名"
 
 #: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
 msgid "Genre"
-msgstr ""
+msgstr "音乐类型"
 
 #: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Word weighting"
-msgstr ""
+msgstr "根据词语长度不同赋予不同权重"
 
 #: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
-msgstr ""
+msgstr "匹配近似词语"
 
 #: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
 #: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
-msgstr ""
+msgstr "允许混合文件类型"
 
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
-msgstr ""
+msgstr "过滤时使用正则表达式"
 
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
-msgstr ""
+msgstr "删除或移动时一并移除空文件夹"
 
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr ""
+msgstr "忽略硬链接到相同文件的重复文件"
 
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
-msgstr ""
+msgstr "调试模式 (需要重新启动)"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr ""
+msgstr "匹配不同尺寸的图像"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr ""
+msgstr "过滤强度:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr ""
+msgstr "较多结果"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr ""
+msgstr "较少结果"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr ""
+msgstr "字体大小:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr ""
+msgstr "语言:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr ""
+msgstr "复制并移动:"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
-msgstr ""
+msgstr "直接至目标文件夹"
 
 #: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
-msgstr ""
+msgstr "重建相对路径"
 
 #: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
-msgstr ""
+msgstr "重建绝对路径"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr ""
+msgstr "自定义命令 (参数: %d 指重复文件, %r 指源文件):"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr ""
+msgstr "dupeGuru需要重新启动以使语言修改生效。"
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
-msgstr ""
+msgstr "重新排列重复文件"
 
 #: qt/prioritize_dialog.py:79 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "Add criteria to the right box and click OK to send the dupes that correspond"
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
-msgstr ""
+msgstr "在右侧的框内添加规则然后点击确定，以将最符合规则的文件置于组内源文件的位置。阅读帮助文件获取更多信息。"
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr ""
+msgstr "有问题!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
 "There were problems processing some (or all) of the files. The cause of "
 "these problems are described in the table below. Those files were not "
 "removed from your results."
-msgstr ""
+msgstr "在处理部分（或全部）文件时出现问题。产生问题的原因如下。这些文件没有从结果中移除。"
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
-msgstr ""
+msgstr "显示已选择的文件"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
-msgstr ""
+msgstr "操作"
 
 #: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
-msgstr ""
+msgstr "仅显示重复文件"
 
 #: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
-msgstr ""
+msgstr "显示 Delta 值"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr ""
+msgstr "将已标记的文件移至回收站..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr ""
+msgstr "将已标记的文件移动到..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr ""
+msgstr "将已标记的文件复制到..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr ""
+msgstr "从结果中移除已标记的文件"
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr ""
+msgstr "重新排列结果..."
 
 #: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
-msgstr ""
+msgstr "从结果中移除所选文件"
 
 #: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
-msgstr ""
+msgstr "将所选文件添加到忽略列表中"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr ""
+msgstr "将所选文件作为源文件"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
-msgstr ""
+msgstr "使用默认程序打开所选文件"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr ""
+msgstr "打开所选文件所在的文件夹"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
-msgstr ""
+msgstr "重命名所选文件"
 
 #: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
-msgstr ""
+msgstr "全部标记"
 
 #: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
-msgstr ""
+msgstr "全部取消标记"
 
 #: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
-msgstr ""
+msgstr "反转文件标记"
 
 #: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
-msgstr ""
+msgstr "标记所选文件"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
-msgstr ""
+msgstr "导出为 HTML"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr ""
+msgstr "导出为 CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr ""
+msgstr "保存结果..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
-msgstr ""
+msgstr "调用自定义命令"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr ""
+msgstr "标记"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
-msgstr ""
+msgstr "显示列"
 
 #: qt/result_window.py:163
 msgid "Reset to Defaults"
-msgstr ""
+msgstr "重置为默认值"
 
 #: qt/result_window.py:185
 msgid "{} Results"
-msgstr ""
+msgstr "{} 个结果"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr ""
+msgstr "仅 Dupes"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
-msgstr ""
+msgstr "Delta 值"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr ""
+msgstr "选择一个文件来保存您的结果"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr ""
+msgstr "忽略文件当其小于"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
-msgstr ""
+msgstr "%@ 结果"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
-msgstr ""
+msgstr "操作"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
-msgstr ""
+msgstr "添加新文件夹..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Advanced"
-msgstr ""
+msgstr "高级"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Automatically check for updates"
-msgstr ""
+msgstr "自动检查更新"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Basic"
-msgstr ""
+msgstr "基本"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Bring All to Front"
-msgstr ""
+msgstr "全部前置"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr ""
+msgstr "检查更新..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
-msgstr ""
+msgstr "关闭窗口"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr ""
+msgstr "自定义命令 (参数: %d 指重复文件, %r 指源文件):"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
-msgstr ""
+msgstr "剪切"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Delta"
-msgstr ""
+msgstr "Delta"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr ""
+msgstr "所选文件的详细信息"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
-msgstr ""
+msgstr "详细信息面板"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr ""
+msgstr "目录"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
-msgstr ""
+msgstr "dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Preferences"
-msgstr ""
+msgstr "dupeGuru 设置"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr ""
+msgstr "dupeGuru 结果"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr ""
+msgstr "dupeGuru 网站"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to CSV"
-msgstr ""
+msgstr "导出结果到 CSV"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Export Results to XHTML"
-msgstr ""
+msgstr "导出结果到 XHTML"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr ""
+msgstr "较少结果"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
-msgstr ""
+msgstr "过滤器"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr ""
+msgstr "过滤强度:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr ""
+msgstr "过滤结果..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
-msgstr ""
+msgstr "文件夹选择窗口"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr ""
+msgstr "字体大小:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
-msgstr ""
+msgstr "隐藏 dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide Others"
-msgstr ""
+msgstr "隐藏其他"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr ""
+msgstr "忽略文件当其小于:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr ""
+msgstr "从文件载入..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr ""
+msgstr "最小化"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
-msgstr ""
+msgstr "模式"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr ""
+msgstr "更多结果"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr ""
+msgstr "粘贴"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr ""
+msgstr "设置..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr ""
+msgstr "快速查找"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
-msgstr ""
+msgstr "退出 dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr ""
+msgstr "重置为默认值"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
-msgstr ""
+msgstr "重置为默认值"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal"
-msgstr ""
+msgstr "显示"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reveal Selected in Finder"
-msgstr ""
+msgstr "在 Finder 中显示所选项"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Select All"
-msgstr ""
+msgstr "全选"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr ""
+msgstr "将已标记的文件移至回收站..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
-msgstr ""
+msgstr "服务"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Show All"
-msgstr ""
+msgstr "全部显示"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Start Duplicate Scan"
-msgstr ""
+msgstr "开始重复内容扫描"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr ""
+msgstr "名称 '%@' 已存在。"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
-msgstr ""
+msgstr "窗口"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr ""
+msgstr "缩放"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
-msgstr ""
+msgstr "排除过滤器"
 
 #: qt\directories_dialog.py:91
 msgid "Scan Results"
-msgstr ""
+msgstr "扫描结果"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr ""
+msgstr "载入目录..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr ""
+msgstr "保存目录..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr ""
+msgstr "选择一个目录文件以载入"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru 结果 （*.dupegurudirs）"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr ""
+msgstr "选择一个文件来保存您的目录"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr ""
+msgstr "dupeGuru 目录 （*.dupegurudirs）"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
-msgstr ""
+msgstr "还原至默认值"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr ""
+msgstr "测试字符串"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr ""
+msgstr "在此输入一个python正则表达式..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr ""
+msgstr "在此输入一个系统路径或者文件名..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -775,110 +778,116 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"这些（大小写敏感）的python正则表达式会在扫描过程中筛选文件。<br>如果目录的名称和某一个正则表达式匹配的话，它们的<strong>默认状态</strong>将为被设为排除状态。<br>每一个被采集的文件都会被进行两种不同的测试来决定它是否会被排除掉：<br><li>1. 没有路径分隔符的正则表达式只会和文件名作比较。</li>\n"
+"<li>2. 有路径分隔符的正则表达式，会和文件的完整路径作比较。</li><br>\n"
+"如：假如您想要仅从“我的图片”目录排除掉 .PNG 文件的话：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>您可以使用测试字符串功能来测试正则表达式，只需要在其中粘贴一个假的路径：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"匹配的正则表达式会被高亮。<br>假如至少有一个高亮的话，在扫描中这个路径将会被忽略。<br><br>以“.”开头的目录和文件默认就会被忽略。<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr ""
+msgstr "编译错误："
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr ""
+msgstr "放大"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr ""
+msgstr "缩小"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
-msgstr ""
+msgstr "Ctrl+/"
 
 #: qt\pe\image_viewer.py:76
 msgid "Normal size"
-msgstr ""
+msgstr "正常尺寸"
 
 #: qt\pe\image_viewer.py:81
 msgid "Ctrl+*"
-msgstr ""
+msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr ""
+msgstr "最佳结果"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
-msgstr ""
+msgstr "图片缓存模式："
 
 #: qt\pe\preferences_dialog.py:56
 msgid "Override theme icons in viewer toolbar"
-msgstr ""
+msgstr "在图片浏览器的工具栏里，覆盖默认图标设置"
 
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
-msgstr ""
+msgstr "使用程序自带的图标来替代系统默认图标。"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
-msgstr ""
+msgstr "在图片浏览器里显示滚动条"
 
 #: qt\pe\preferences_dialog.py:68
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
-msgstr ""
+msgstr "当图片尺寸大于显示窗口时，显示滚动条来移动图片。"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr ""
+msgstr "在默认位置显示Tab Bar（需要重启）"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
+"把Tab Bar放在主菜单下面而不是旁边\n"
+"在MacOS上，Tab Bar会填充满整个窗口的宽度。"
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr ""
+msgstr "源文件使用粗体"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr ""
+msgstr "源文件前景色："
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr ""
+msgstr "源文件背景色："
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr ""
+msgstr "Delta 前景色："
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
-msgstr ""
+msgstr "显示标题栏，并使其可被停靠"
 
 #: qt\preferences_dialog.py:197
 msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
-msgstr ""
+msgstr "标题栏隐藏时，使用修饰键来移动浮动窗口。"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
-msgstr ""
+msgstr "仅当窗口被停靠时，标题栏可被隐藏"
 
 #: qt\preferences_dialog.py:202
 msgid "Vertical title bar"
-msgstr ""
+msgstr "竖直标题栏"
 
 #: qt\preferences_dialog.py:204
 msgid ""
 "Change the title bar from horizontal on top, to vertical on the left side"
-msgstr ""
+msgstr "把标题栏从顶部横向改为左侧竖直"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr ""
+msgstr "显示 Tab Bar"
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -887,34 +896,38 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
+"这些（大小写敏感）的python正则表达式会在扫描过程中对结果进行过滤。<br>除非目录名称和正则表达式匹配，它们的<strong>默认状态</strong>会被设成从目录标签排除。<br>每一个文件都会经过两种测试，以确定它是否会被完全忽略：<br><li>1. 没有路径分隔符的正则表达式，仅用于和文件名进行比较。</li>\n"
+"<li>2. 至少有一个路径分隔符的正则表达式，会被用于和文件的完整路径进行比较。</li><br>\n"
+"例如：如果你想要仅在“图片”目录中排除所有.PNG文件：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>你可以使用“测试字符串”按钮来测试你的正则表达式，只需要将虚拟的路径输入测试框即可：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"匹配的正则表达式会被高亮。<br>假如有至少一个高亮，测试文件的文件名或者路径就会在扫描中被忽略。<br><br>以“.”开头的目录或文件默认会被忽略。<br><br>"
 
 #: qt\app.py:256
 msgid "Results"
-msgstr ""
+msgstr "结果"
 
 #: qt\preferences_dialog.py:150
 msgid "General Interface"
-msgstr ""
+msgstr "通用介面"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr ""
+msgstr "结果表"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
-msgstr ""
+msgstr "详细信息窗口"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
-msgstr ""
+msgstr "展示"
 
 #: qt\se\preferences_dialog.py:70
 msgid "Partially hash files bigger than"
-msgstr ""
+msgstr "只哈希部分如果文件大于"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
@@ -922,13 +935,13 @@ msgstr ""
 
 #: qt\preferences_dialog.py:163
 msgid "Use native OS dialogs"
-msgstr ""
+msgstr "使用操作系统原生对话窗口"
 
 #: qt\preferences_dialog.py:166
 msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
-msgstr ""
+msgstr "使用操作系统原生对话窗口选择文件、文件夹。部分系统的原生对话窗口功能可能有限制。"
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
@@ -951,3 +964,157 @@ msgstr ""
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
 msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr "关于 {}"
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr "版本 {}"
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr "本项目基于GPLv3开源协议发布"
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr "错误报告"
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr "发生错误，是否要报告错误？"
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+"错误报告应该以Github issue的形式进行提交。您可以把错误信息复制粘贴到新的issue中\n"
+"\n"
+"在提交新issue前，请搜索已经存在的issue，以确保没有其他人已经报告了相同的错误。同时请确保使用仓库中的最新版进行测试，因为您所遇到的bug可能已经被最新版修复。\n"
+"\n"
+"如果您能详细描述一下错误发生时的具体情况，将会更好的帮助我们解决问题，谢谢！\n"
+"\n"
+"虽然本程序在此错误后依然会继续运行，但是可能处于不稳定的状态，因此推荐重启本程序。"
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr "前往Github"
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr "捷克语"
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr "德语"
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr "希腊语"
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr "英语"
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr "法语"
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr "亚美尼亚语"
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr "意大利语"
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr "日语"
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr "韩语"
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr "马来语"
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr "荷兰语"
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr "波兰语"
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr "巴西葡萄牙语"
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr "俄语"
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr "土耳其"
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr "乌克兰语"
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr "越南语"
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr "中文（简体）"
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr "清空列表"
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr "搜索..."
