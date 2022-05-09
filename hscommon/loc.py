@@ -5,20 +5,9 @@ import tempfile
 
 import polib
 
-from . import pygettext
+from hscommon import pygettext
 
 LC_MESSAGES = "LC_MESSAGES"
-
-# There isn't a 1-on-1 exact fit between .po language codes and cocoa ones
-PO2COCOA = {
-    "pl_PL": "pl",
-    "pt_BR": "pt-BR",
-    "zh_CN": "zh-Hans",
-}
-
-COCOA2PO = {v: k for k, v in PO2COCOA.items()}
-
-STRING_EXT = ".strings"
 
 
 def get_langs(folder):

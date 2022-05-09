@@ -17,8 +17,8 @@ from hscommon.conflict import get_conflicted_name
 from hscommon.util import flatten, nonone, FileOrPath, format_size
 from hscommon.trans import tr
 
-from . import engine
-from .markable import Markable
+from core import engine
+from core.markable import Markable
 
 
 class Results(Markable):

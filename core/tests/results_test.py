@@ -12,10 +12,9 @@ from xml.etree import ElementTree as ET
 from pytest import raises
 from hscommon.testutil import eq_
 from hscommon.util import first
-
-from .. import engine
-from .base import NamedObject, GetTestGroups, DupeGuru
-from ..results import Results
+from core import engine
+from core.tests.base import NamedObject, GetTestGroups, DupeGuru
+from core.results import Results
 
 
 class TestCaseResultsEmpty:

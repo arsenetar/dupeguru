@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from qt.column import Column
-from ..results_model import ResultsModel as ResultsModelBase
+from qt.results_model import ResultsModel as ResultsModelBase
 
 
 class ResultsModel(ResultsModelBase):

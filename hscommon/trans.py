@@ -13,7 +13,7 @@ import locale
 import logging
 import os.path as op
 
-from .plat import ISLINUX
+from hscommon.plat import ISLINUX
 
 _trfunc = None
 _trget = None

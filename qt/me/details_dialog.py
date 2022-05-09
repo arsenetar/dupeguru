@@ -8,8 +8,8 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QAbstractItemView
 
 from hscommon.trans import trget
-from ..details_dialog import DetailsDialog as DetailsDialogBase
-from ..details_table import DetailsTable
+from qt.details_dialog import DetailsDialog as DetailsDialogBase
+from qt.details_table import DetailsTable
 
 tr = trget("ui")
 

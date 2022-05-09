@@ -9,7 +9,7 @@ from hscommon.util import get_file_ext, format_size
 
 from core.util import format_timestamp, format_perc, format_dupe_count
 from core import fs
-from . import exif
+from core.pe import exif
 
 # This global value is set by the platform-specific subclasser of the Photo base class
 PLAT_SPECIFIC_PHOTO_CLASS = None

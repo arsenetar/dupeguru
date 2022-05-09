@@ -37,7 +37,7 @@ from qt.util import horizontal_wrap, move_to_screen_center
 from qt.preferences import get_langnames
 from enum import Flag, auto
 
-from .preferences import Preferences
+from qt.preferences import Preferences
 
 tr = trget("ui")
 

@@ -10,7 +10,7 @@ import shelve
 import tempfile
 from collections import namedtuple
 
-from .cache import string_to_colors, colors_to_string
+from core.pe.cache import string_to_colors, colors_to_string
 
 
 def wrap_path(path):

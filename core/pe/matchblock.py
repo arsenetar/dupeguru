@@ -15,7 +15,7 @@ from hscommon.trans import tr
 from hscommon.jobprogress import job
 
 from core.engine import Match
-from .block import avgdiff, DifferentBlockCountError, NoBlocksError
+from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -51,11 +51,11 @@ except Exception:
 
 def get_cache(cache_path, readonly=False):
     if cache_path.endswith("shelve"):
-        from .cache_shelve import ShelveCache
+        from core.pe.cache_shelve import ShelveCache
 
         return ShelveCache(cache_path, readonly=readonly)
     else:
-        from .cache_sqlite import SqliteCache
+        from core.pe.cache_sqlite import SqliteCache
 
         return SqliteCache(cache_path, readonly=readonly)
 

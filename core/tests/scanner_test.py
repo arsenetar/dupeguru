@@ -10,11 +10,11 @@ from hscommon.jobprogress import job
 from pathlib import Path
 from hscommon.testutil import eq_
 
-from .. import fs
-from ..engine import getwords, Match
-from ..ignore import IgnoreList
-from ..scanner import Scanner, ScanType
-from ..me.scanner import ScannerME
+from core import fs
+from core.engine import getwords, Match
+from core.ignore import IgnoreList
+from core.scanner import Scanner, ScanType
+from core.me.scanner import ScannerME
 
 
 class NamedObject:

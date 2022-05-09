@@ -31,8 +31,8 @@ from qt.radio_box import RadioBox
 from qt.recent import Recent
 from qt.util import move_to_screen_center, create_actions
 
-from . import platform
-from .directories_model import DirectoriesModel, DirectoriesDelegate
+from qt import platform
+from qt.directories_model import DirectoriesModel, DirectoriesDelegate
 
 tr = trget("ui")
 

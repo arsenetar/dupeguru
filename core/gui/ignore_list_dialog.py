@@ -6,7 +6,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.trans import tr
-from .ignore_list_table import IgnoreListTable
+from core.gui.ignore_list_table import IgnoreListTable
 
 
 class IgnoreListDialog:

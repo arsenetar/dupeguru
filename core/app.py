@@ -23,20 +23,20 @@ from hscommon.util import delete_if_empty, first, escape, nonone, allsame
 from hscommon.trans import tr
 from hscommon import desktop
 
-from . import se, me, pe
-from .pe.photo import get_delta_dimensions
-from .util import cmp_value, fix_surrogate_encoding
-from . import directories, results, export, fs, prioritize
-from .ignore import IgnoreList
-from .exclude import ExcludeDict as ExcludeList
-from .scanner import ScanType
-from .gui.deletion_options import DeletionOptions
-from .gui.details_panel import DetailsPanel
-from .gui.directory_tree import DirectoryTree
-from .gui.ignore_list_dialog import IgnoreListDialog
-from .gui.exclude_list_dialog import ExcludeListDialogCore
-from .gui.problem_dialog import ProblemDialog
-from .gui.stats_label import StatsLabel
+from core import se, me, pe
+from core.pe.photo import get_delta_dimensions
+from core.util import cmp_value, fix_surrogate_encoding
+from core import directories, results, export, fs, prioritize
+from core.ignore import IgnoreList
+from core.exclude import ExcludeDict as ExcludeList
+from core.scanner import ScanType
+from core.gui.deletion_options import DeletionOptions
+from core.gui.details_panel import DetailsPanel
+from core.gui.directory_tree import DirectoryTree
+from core.gui.ignore_list_dialog import IgnoreListDialog
+from core.gui.exclude_list_dialog import ExcludeListDialogCore
+from core.gui.problem_dialog import ProblemDialog
+from core.gui.stats_label import StatsLabel
 
 HAD_FIRST_LAUNCH_PREFERENCE = "HadFirstLaunch"
 DEBUG_MODE_PREFERENCE = "DebugMode"

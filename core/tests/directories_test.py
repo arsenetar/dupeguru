@@ -14,14 +14,14 @@ from pathlib import Path
 from hscommon.testutil import eq_
 from hscommon.plat import ISWINDOWS
 
-from ..fs import File
-from ..directories import (
+from core.fs import File
+from core.directories import (
     Directories,
     DirectoryState,
     AlreadyThereError,
     InvalidPathError,
 )
-from ..exclude import ExcludeList, ExcludeDict
+from core.exclude import ExcludeList, ExcludeDict
 
 
 def create_fake_fs(rootpath):

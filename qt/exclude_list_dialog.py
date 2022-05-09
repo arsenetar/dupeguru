@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import (
     QSizePolicy,
     QHeaderView,
 )
-from .exclude_list_table import ExcludeListTable
+from qt.exclude_list_table import ExcludeListTable
 
 from core.exclude import AlreadyThereException
 from hscommon.trans import trget

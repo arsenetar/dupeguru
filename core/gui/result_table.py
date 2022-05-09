@@ -11,7 +11,7 @@ from operator import attrgetter
 from hscommon.gui.table import GUITable, Row
 from hscommon.gui.column import Columns
 
-from .base import DupeGuruGUIObject
+from core.gui.base import DupeGuruGUIObject
 
 
 class DupeRow(Row):

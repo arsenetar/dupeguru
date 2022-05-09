@@ -1,8 +1,7 @@
-from . import (  # noqa
+from core.pe import (  # noqa
     block,
     cache,
     exif,
-    iphoto_plist,
     matchblock,
     matchexif,
     photo,

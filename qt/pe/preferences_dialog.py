@@ -12,7 +12,7 @@ from qt.radio_box import RadioBox
 from core.scanner import ScanType
 from core.app import AppMode
 
-from ..preferences_dialog import PreferencesDialogBase
+from qt.preferences_dialog import PreferencesDialogBase
 
 tr = trget("ui")
 

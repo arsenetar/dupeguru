@@ -10,8 +10,8 @@ from xml.etree import ElementTree as ET
 from hscommon.testutil import eq_
 from hscommon.plat import ISWINDOWS
 
-from .base import DupeGuru
-from ..exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
+from core.tests.base import DupeGuru
+from core.exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
 
 from re import error
 

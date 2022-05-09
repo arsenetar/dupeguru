@@ -13,7 +13,7 @@ from hscommon.jobprogress import job
 from hscommon.util import dedupe, rem_file_ext, get_file_ext
 from hscommon.trans import tr
 
-from . import engine
+from core import engine
 
 # It's quite ugly to have scan types from all editions all put in the same class, but because there's
 # there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be

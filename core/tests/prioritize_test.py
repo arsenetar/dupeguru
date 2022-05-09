@@ -9,8 +9,8 @@
 import os.path as op
 from itertools import combinations
 
-from .base import TestApp, NamedObject, with_app, eq_
-from ..engine import Group, Match
+from core.tests.base import TestApp, NamedObject, with_app, eq_
+from core.engine import Group, Match
 
 no = NamedObject
 

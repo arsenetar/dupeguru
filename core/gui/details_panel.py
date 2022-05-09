@@ -7,7 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.gui.base import GUIObject
-from .base import DupeGuruGUIObject
+from core.gui.base import DupeGuruGUIObject
 
 
 class DetailsPanel(GUIObject, DupeGuruGUIObject):

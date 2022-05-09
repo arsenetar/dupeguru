@@ -15,10 +15,10 @@ from PyQt5.QtWidgets import (
 )
 from hscommon.trans import trget
 from qt.util import move_to_screen_center, create_actions
-from .directories_dialog import DirectoriesDialog
-from .result_window import ResultWindow
-from .ignore_list_dialog import IgnoreListDialog
-from .exclude_list_dialog import ExcludeListDialog
+from qt.directories_dialog import DirectoriesDialog
+from qt.result_window import ResultWindow
+from qt.ignore_list_dialog import IgnoreListDialog
+from qt.exclude_list_dialog import ExcludeListDialog
 
 tr = trget("ui")
 

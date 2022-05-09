@@ -13,7 +13,7 @@ from pathlib import Path
 from hscommon.testutil import eq_
 from core.tests.directories_test import create_fake_fs
 
-from .. import fs
+from core import fs
 
 hasher: typing.Callable
 try:

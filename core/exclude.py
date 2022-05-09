@@ -2,7 +2,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from .markable import Markable
+from core.markable import Markable
 from xml.etree import ElementTree as ET
 
 # TODO: perhaps use regex module for better Unicode support? https://pypi.org/project/regex/

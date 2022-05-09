@@ -15,10 +15,10 @@ import hscommon.util
 from hscommon.testutil import eq_, log_calls
 from hscommon.jobprogress.job import Job
 
-from .base import TestApp
-from .results_test import GetTestGroups
-from .. import app, fs, engine
-from ..scanner import ScanType
+from core.tests.base import TestApp
+from core.tests.results_test import GetTestGroups
+from core import app, fs, engine
+from core.scanner import ScanType
 
 
 def add_fake_files_to_directories(directories, files):

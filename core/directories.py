@@ -13,7 +13,7 @@ from hscommon.jobprogress import job
 from hscommon.util import FileOrPath
 from hscommon.trans import tr
 
-from . import fs
+from core import fs
 
 __all__ = [
     "Directories",

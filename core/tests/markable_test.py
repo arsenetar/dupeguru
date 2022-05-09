@@ -6,7 +6,7 @@
 
 from hscommon.testutil import eq_
 
-from ..markable import MarkableList, Markable
+from core.markable import MarkableList, Markable
 
 
 def gen():

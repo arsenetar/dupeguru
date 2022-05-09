@@ -10,12 +10,11 @@ from hscommon.util import get_file_ext, format_size
 from hscommon.gui.column import Column
 from hscommon.jobprogress.job import nulljob, JobCancelled
 
-from .. import engine
-from .. import prioritize
-from ..engine import getwords
-from ..app import DupeGuru as DupeGuruBase
-from ..gui.result_table import ResultTable as ResultTableBase
-from ..gui.prioritize_dialog import PrioritizeDialog
+from core import engine, prioritize
+from core.engine import getwords
+from core.app import DupeGuru as DupeGuruBase
+from core.gui.result_table import ResultTable as ResultTableBase
+from core.gui.prioritize_dialog import PrioritizeDialog
 
 
 class DupeGuruView:

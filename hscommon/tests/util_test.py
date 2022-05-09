@@ -10,9 +10,9 @@ from io import StringIO
 
 from pytest import raises
 
-from ..testutil import eq_
+from hscommon.testutil import eq_
 from pathlib import Path
-from ..util import (
+from hscommon.util import (
     nonone,
     tryint,
     first,

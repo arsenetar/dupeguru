@@ -8,26 +8,10 @@
 
 import pytest
 
-import threading
-import py.path
-
 
 def eq_(a, b, msg=None):
     __tracebackhide__ = True
     assert a == b, msg or "{!r} != {!r}".format(a, b)
-
-
-def eq_sorted(a, b, msg=None):
-    """If both a and b are iterable sort them and compare using eq_, otherwise just pass them through to eq_ anyway."""
-    try:
-        eq_(sorted(a), sorted(b), msg)
-    except TypeError:
-        eq_(a, b, msg)
-
-
-def assert_almost_equal(a, b, places=7):
-    __tracebackhide__ = True
-    assert round(a, ndigits=places) == round(b, ndigits=places)
 
 
 def callcounter():
@@ -36,23 +20,6 @@ def callcounter():
 
     f.callcount = 0
     return f
-
-
-class TestData:
-    def __init__(self, datadirpath):
-        self.datadirpath = py.path.local(datadirpath)
-
-    def filepath(self, relative_path, *args):
-        """Returns the path of a file in testdata.
-
-        'relative_path' can be anything that can be added to a Path
-        if args is not empty, it will be joined to relative_path
-        """
-        resultpath = self.datadirpath.join(relative_path)
-        if args:
-            resultpath = resultpath.join(*args)
-        assert resultpath.check()
-        return str(resultpath)
 
 
 class CallLogger:
@@ -166,20 +133,6 @@ def app(request):
         args = []
     app = setupfunc(*args)
     return app
-
-
-def jointhreads():
-    """Join all threads to the main thread"""
-    for thread in threading.enumerate():
-        if hasattr(thread, "BUGGY"):
-            continue
-        if thread.getName() != "MainThread" and thread.isAlive():
-            if hasattr(thread, "close"):
-                thread.close()
-            thread.join(1)
-            if thread.isAlive():
-                print("Thread problem. Some thread doesn't want to stop.")
-                thread.BUGGY = True
 
 
 def _unify_args(func, args, kwargs, args_to_ignore=None):

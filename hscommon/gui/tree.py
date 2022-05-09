@@ -6,7 +6,7 @@
 
 from collections.abc import MutableSequence
 
-from .base import GUIObject
+from hscommon.gui.base import GUIObject
 
 
 class Node(MutableSequence):

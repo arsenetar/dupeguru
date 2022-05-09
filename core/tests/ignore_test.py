@@ -10,7 +10,7 @@ from xml.etree import ElementTree as ET
 from pytest import raises
 from hscommon.testutil import eq_
 
-from ..ignore import IgnoreList
+from core.ignore import IgnoreList
 
 
 def test_empty():

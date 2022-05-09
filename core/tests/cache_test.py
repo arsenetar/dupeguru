@@ -10,9 +10,9 @@ from pytest import raises, skip
 from hscommon.testutil import eq_
 
 try:
-    from ..pe.cache import colors_to_string, string_to_colors
-    from ..pe.cache_sqlite import SqliteCache
-    from ..pe.cache_shelve import ShelveCache
+    from core.pe.cache import colors_to_string, string_to_colors
+    from core.pe.cache_sqlite import SqliteCache
+    from core.pe.cache_shelve import ShelveCache
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 

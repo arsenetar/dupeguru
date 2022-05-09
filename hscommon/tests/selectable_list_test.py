@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from ..testutil import eq_, callcounter, CallLogger
-from ..gui.selectable_list import SelectableList, GUISelectableList
+from hscommon.testutil import eq_, callcounter, CallLogger
+from hscommon.gui.selectable_list import SelectableList, GUISelectableList
 
 
 def test_in():

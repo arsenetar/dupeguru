@@ -2,7 +2,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from .base import DupeGuruGUIObject
+from core.gui.base import DupeGuruGUIObject
 from hscommon.gui.table import GUITable, Row
 from hscommon.gui.column import Column, Columns
 from hscommon.trans import trget

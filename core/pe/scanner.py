@@ -8,7 +8,7 @@ from hscommon.trans import tr
 
 from core.scanner import Scanner, ScanType, ScanOption
 
-from . import matchblock, matchexif
+from core.pe import matchblock, matchexif
 
 
 class ScannerPE(Scanner):

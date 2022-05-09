@@ -15,7 +15,7 @@ from PyQt5.QtCore import (
     QItemSelection,
 )
 
-from .column import Columns, Column
+from qt.column import Columns, Column
 
 
 class Table(QAbstractTableModel):

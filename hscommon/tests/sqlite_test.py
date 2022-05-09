@@ -13,8 +13,8 @@ import sqlite3 as sqlite
 
 from pytest import raises
 
-from ..testutil import eq_
-from ..sqlite import ThreadedConn
+from hscommon.testutil import eq_
+from hscommon.sqlite import ThreadedConn
 
 # Threading is hard to test. In a lot of those tests, a failure means that the test run will
 # hang forever. Well... I don't know a better alternative.

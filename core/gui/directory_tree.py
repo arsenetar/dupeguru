@@ -8,8 +8,8 @@
 
 from hscommon.gui.tree import Tree, Node
 
-from ..directories import DirectoryState
-from .base import DupeGuruGUIObject
+from core.directories import DirectoryState
+from core.gui.base import DupeGuruGUIObject
 
 STATE_ORDER = [DirectoryState.NORMAL, DirectoryState.REFERENCE, DirectoryState.EXCLUDED]
 

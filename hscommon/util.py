@@ -8,7 +8,7 @@
 
 from math import ceil
 from pathlib import Path
-from .path import pathify, log_io_error
+from hscommon.path import pathify, log_io_error
 
 from typing import IO, Any, Callable, Generator, Iterable, List, Tuple, Union
 

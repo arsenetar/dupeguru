@@ -9,7 +9,7 @@
 from threading import Thread
 import sys
 
-from .job import Job, JobInProgressError, JobCancelled
+from hscommon.jobprogress.job import Job, JobInProgressError, JobCancelled
 
 
 class ThreadedJobPerformer:

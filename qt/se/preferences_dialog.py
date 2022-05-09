@@ -20,7 +20,7 @@ from hscommon.trans import trget
 from core.app import AppMode
 from core.scanner import ScanType
 
-from ..preferences_dialog import PreferencesDialogBase
+from qt.preferences_dialog import PreferencesDialogBase
 
 tr = trget("ui")
 

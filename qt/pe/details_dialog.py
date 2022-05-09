@@ -8,9 +8,9 @@ from PyQt5.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
 from PyQt5.QtGui import QResizeEvent
 from hscommon.trans import trget
-from ..details_dialog import DetailsDialog as DetailsDialogBase
-from ..details_table import DetailsTable
-from .image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
+from qt.details_dialog import DetailsDialog as DetailsDialogBase
+from qt.details_table import DetailsTable
+from qt.pe.image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
 
 tr = trget("ui")
 

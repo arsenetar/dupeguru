@@ -21,7 +21,7 @@ import importlib
 from datetime import datetime
 import glob
 
-from .plat import ISWINDOWS
+from hscommon.plat import ISWINDOWS
 
 
 def print_and_do(cmd):

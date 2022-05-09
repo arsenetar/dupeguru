@@ -8,7 +8,7 @@
 
 from hscommon import desktop
 
-from .problem_table import ProblemTable
+from core.gui.problem_table import ProblemTable
 
 
 class ProblemDialog:

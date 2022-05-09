@@ -8,7 +8,7 @@
 
 import copy
 
-from .base import GUIObject
+from hscommon.gui.base import GUIObject
 
 
 class Column:

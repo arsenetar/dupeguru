@@ -9,7 +9,7 @@ import os.path as op
 import logging
 import sqlite3 as sqlite
 
-from .cache import string_to_colors, colors_to_string
+from core.pe.cache import string_to_colors, colors_to_string
 
 
 class SqliteCache:
