@@ -88,14 +88,8 @@ def build_help():
         p.map(build_one_help, languages)
 
 
-def build_qt_localizations():
-    loc.compile_all_po(Path("qtlib", "locale"))
-    loc.merge_locale_dir(Path("qtlib", "locale"), "locale")
-
-
 def build_localizations():
     loc.compile_all_po("locale")
-    build_qt_localizations()
     locale_dest = Path("build", "locale")
     if locale_dest.exists():
         shutil.rmtree(locale_dest)
@@ -111,18 +105,16 @@ def build_updatepot():
     print("Building ui.pot")
     loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
     print("Building qtlib.pot")
-    loc.generate_pot(["qtlib"], Path("qtlib", "locale", "qtlib.pot"), ["tr"])
+    loc.generate_pot(["qtlib"], Path("locale", "qtlib.pot"), ["tr"])
 
 
 def build_mergepot():
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos("locale")
-    loc.merge_pots_into_pos(Path("qtlib", "locale"))
 
 
 def build_normpo():
     loc.normalize_all_pos("locale")
-    loc.normalize_all_pos(Path("qtlib", "locale"))
 
 
 def build_pe_modules():

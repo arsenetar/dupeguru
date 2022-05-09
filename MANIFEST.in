@@ -3,4 +3,3 @@ recursive-include core *.m
 include run.py
 graft locale
 graft help
-graft qtlib/locale

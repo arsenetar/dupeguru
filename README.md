@@ -22,7 +22,6 @@ This folder contains the source for dupeGuru. Its documentation is in `help`, bu
 * help: Help document, written for Sphinx.
 * locale: .po files for localization.
 * hscommon: A collection of helpers used across HS applications.
-* qtlib: A collection of helpers used across Qt UI codebases of HS applications.
 
 ## How to build dupeGuru from source
 

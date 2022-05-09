@@ -35,7 +35,7 @@ endif
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 
-packages = hscommon qtlib core qt
+packages = hscommon core qt
 localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
 mofiles = $(patsubst %.po,%.mo,$(pofiles))
