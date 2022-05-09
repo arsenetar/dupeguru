@@ -15,18 +15,14 @@ from pathlib import Path
 from ..util import (
     nonone,
     tryint,
-    minmax,
     first,
     flatten,
     dedupe,
-    stripfalse,
     extract,
     allsame,
-    trailiter,
     format_time,
     format_time_decimal,
     format_size,
-    remove_invalid_xml,
     multi_replace,
     delete_if_empty,
     open_if_filename,
@@ -51,12 +47,6 @@ def test_tryint():
     eq_(42, tryint(None, 42))
 
 
-def test_minmax():
-    eq_(minmax(2, 1, 3), 2)
-    eq_(minmax(0, 1, 3), 1)
-    eq_(minmax(4, 1, 3), 3)
-
-
 # --- Sequence
 
 
@@ -75,10 +65,6 @@ def test_dedupe():
     eq_(dedupe(reflist), [0, 7, 1, 2, 3, 4, 5, 6])
 
 
-def test_stripfalse():
-    eq_([1, 2, 3], stripfalse([None, 0, 1, 2, 3, None]))
-
-
 def test_extract():
     wheat, shaft = extract(lambda n: n % 2 == 0, list(range(10)))
     eq_(wheat, [0, 2, 4, 6, 8])
@@ -91,14 +77,6 @@ def test_allsame():
     assert not allsame([43, 42, 42])
     # Works on non-sequence as well
     assert allsame(iter([42, 42, 42]))
-
-
-def test_trailiter():
-    eq_(list(trailiter([])), [])
-    eq_(list(trailiter(["foo"])), [(None, "foo")])
-    eq_(list(trailiter(["foo", "bar"])), [(None, "foo"), ("foo", "bar")])
-    eq_(list(trailiter(["foo", "bar"], skipfirst=True)), [("foo", "bar")])
-    eq_(list(trailiter([], skipfirst=True)), [])  # no crash
 
 
 def test_iterconsume():
@@ -211,14 +189,6 @@ def test_format_size():
     eq_(format_size(9999999999999999999999), "9 ZB")
     eq_(format_size(99999999999999999999999), "85 ZB")
     eq_(format_size(999999999999999999999999), "848 ZB")
-
-
-def test_remove_invalid_xml():
-    eq_(remove_invalid_xml("foo\0bar\x0bbaz"), "foo bar baz")
-    # surrogate blocks have to be replaced, but not the rest
-    eq_(remove_invalid_xml("foo\ud800bar\udfffbaz\ue000"), "foo bar baz\ue000")
-    # replace with something else
-    eq_(remove_invalid_xml("foo\0baz", replace_with="bar"), "foobarbaz")
 
 
 def test_multi_replace():
