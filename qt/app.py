@@ -14,10 +14,10 @@ from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QSt
 from hscommon.trans import trget
 from hscommon import desktop, plat
 
-from qtlib.about_box import AboutBox
-from qtlib.recent import Recent
-from qtlib.util import create_actions
-from qtlib.progress_window import ProgressWindow
+from qt.about_box import AboutBox
+from qt.recent import Recent
+from qt.util import create_actions
+from qt.progress_window import ProgressWindow
 
 from core.app import AppMode, DupeGuru as DupeGuruModel
 import core.pe.photo

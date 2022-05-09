@@ -23,9 +23,9 @@ from PyQt5.QtWidgets import (
 
 from hscommon.trans import trget
 from hscommon.desktop import open_url
-from .util import horizontal_spacer
+from qt.util import horizontal_spacer
 
-tr = trget("qtlib")
+tr = trget("qtlib")  # TODO change to ui
 
 
 class ErrorReportDialog(QDialog):

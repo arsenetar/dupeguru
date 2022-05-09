@@ -8,7 +8,7 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QRadioButton
 
-from .util import horizontal_spacer
+from qt.util import horizontal_spacer
 
 
 class RadioBox(QWidget):

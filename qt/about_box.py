@@ -11,10 +11,10 @@ from PyQt5.QtGui import QPixmap, QFont
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QLabel
 
 from core.util import check_for_update
-from qtlib.util import move_to_screen_center
+from qt.util import move_to_screen_center
 from hscommon.trans import trget
 
-tr = trget("qtlib")
+tr = trget("qtlib")  # TODO change to ui
 
 
 class AboutBox(QDialog):

@@ -44,7 +44,7 @@ def special_folder_path(special_folder, appname=None, portable=False):
 try:
     from PyQt5.QtCore import QUrl, QStandardPaths
     from PyQt5.QtGui import QDesktopServices
-    from qtlib.util import get_appdata
+    from qt.util import get_appdata
     from core.util import executable_folder
     from hscommon.plat import ISWINDOWS, ISOSX
     import subprocess

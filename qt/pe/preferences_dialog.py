@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QFormLayout
 from PyQt5.QtCore import Qt
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-from qtlib.radio_box import RadioBox
+from qt.radio_box import RadioBox
 from core.scanner import ScanType
 from core.app import AppMode
 

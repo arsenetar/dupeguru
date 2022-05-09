@@ -27,9 +27,9 @@ from PyQt5.QtGui import QPixmap, QIcon
 
 from hscommon.trans import trget
 from core.app import AppMode
-from qtlib.radio_box import RadioBox
-from qtlib.recent import Recent
-from qtlib.util import move_to_screen_center, create_actions
+from qt.radio_box import RadioBox
+from qt.recent import Recent
+from qt.util import move_to_screen_center, create_actions
 
 from . import platform
 from .directories_model import DirectoriesModel, DirectoriesDelegate

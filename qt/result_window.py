@@ -24,8 +24,8 @@ from PyQt5.QtWidgets import (
 )
 
 from hscommon.trans import trget
-from qtlib.util import move_to_screen_center, horizontal_wrap, create_actions
-from qtlib.search_edit import SearchEdit
+from qt.util import move_to_screen_center, horizontal_wrap, create_actions
+from qt.search_edit import SearchEdit
 
 from core.app import AppMode
 from .results_model import ResultsView

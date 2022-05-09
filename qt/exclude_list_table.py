@@ -5,8 +5,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
 
-from qtlib.column import Column
-from qtlib.table import Table
+from qt.column import Column
+from qt.table import Table
 from hscommon.trans import trget
 
 tr = trget("ui")

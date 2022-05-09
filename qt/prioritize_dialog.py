@@ -24,8 +24,8 @@ from PyQt5.QtWidgets import (
 )
 
 from hscommon.trans import trget
-from qtlib.selectable_list import ComboboxModel, ListviewModel
-from qtlib.util import vertical_spacer
+from qt.selectable_list import ComboboxModel, ListviewModel
+from qt.util import vertical_spacer
 from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 
 tr = trget("ui")

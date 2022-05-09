@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
 from PyQt5.QtGui import QBrush, QFont, QFontMetrics
 from PyQt5.QtWidgets import QTableView
 
-from qtlib.table import Table
+from qt.table import Table
 
 
 class ResultsModel(Table):

@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
 
 from hscommon.trans import trget
-from qtlib.radio_box import RadioBox
+from qt.radio_box import RadioBox
 
 tr = trget("ui")
 

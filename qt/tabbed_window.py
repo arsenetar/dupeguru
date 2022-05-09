@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
     QStackedWidget,
 )
 from hscommon.trans import trget
-from qtlib.util import move_to_screen_center, create_actions
+from qt.util import move_to_screen_center, create_actions
 from .directories_dialog import DirectoriesDialog
 from .result_window import ResultWindow
 from .ignore_list_dialog import IgnoreListDialog

@@ -33,7 +33,7 @@ from hscommon import desktop, plat
 
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-from qtlib.util import horizontal_wrap, move_to_screen_center
+from qt.util import horizontal_wrap, move_to_screen_center
 from qt.preferences import get_langnames
 from enum import Flag, auto
 
