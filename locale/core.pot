@@ -116,11 +116,11 @@ msgstr ""
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\directories.py:191
+#: core\directories.py:190
 msgid "Collected {} files to scan"
 msgstr ""
 
-#: core\directories.py:207
+#: core\directories.py:206
 msgid "Collected {} folders to scan"
 msgstr ""
 
