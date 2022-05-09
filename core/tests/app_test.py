@@ -7,6 +7,7 @@
 import os
 import os.path as op
 import logging
+import tempfile
 
 import pytest
 from pathlib import Path
@@ -68,11 +69,12 @@ class TestCaseDupeGuru:
         dgapp = TestApp().app
         dgapp.directories.add_path(p)
         [f] = dgapp.directories.get_files()
-        dgapp.copy_or_move(f, True, "some_destination", 0)
-        eq_(1, len(hscommon.conflict.smart_copy.calls))
-        call = hscommon.conflict.smart_copy.calls[0]
-        eq_(call["dest_path"], Path("some_destination", "foo"))
-        eq_(call["source_path"], f.path)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dgapp.copy_or_move(f, True, tmp_dir, 0)
+            eq_(1, len(hscommon.conflict.smart_copy.calls))
+            call = hscommon.conflict.smart_copy.calls[0]
+            eq_(call["dest_path"], Path(tmp_dir, "foo"))
+            eq_(call["source_path"], f.path)
 
     def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
         tmppath = Path(str(tmpdir))
