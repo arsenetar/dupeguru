@@ -13,6 +13,7 @@ the method with the same name as the broadcasted message is called on the listen
 """
 
 from collections import defaultdict
+from typing import Callable, DefaultDict, List
 
 
 class Broadcaster:
@@ -21,10 +22,10 @@ class Broadcaster:
     def __init__(self):
         self.listeners = set()
 
-    def add_listener(self, listener):
+    def add_listener(self, listener: "Listener") -> None:
         self.listeners.add(listener)
 
-    def notify(self, msg):
+    def notify(self, msg: str) -> None:
         """Notify all connected listeners of ``msg``.
 
         That means that each listeners will have their method with the same name as ``msg`` called.
@@ -33,18 +34,18 @@ class Broadcaster:
             if listener in self.listeners:  # disconnected during notification
                 listener.dispatch(msg)
 
-    def remove_listener(self, listener):
+    def remove_listener(self, listener: "Listener") -> None:
         self.listeners.discard(listener)
 
 
 class Listener:
     """A listener is initialized with the broadcaster it's going to listen to. Initially, it is not connected."""
 
-    def __init__(self, broadcaster):
+    def __init__(self, broadcaster: Broadcaster) -> None:
         self.broadcaster = broadcaster
-        self._bound_notifications = defaultdict(list)
+        self._bound_notifications: DefaultDict[str, List[Callable]] = defaultdict(list)
 
-    def bind_messages(self, messages, func):
+    def bind_messages(self, messages: str, func: Callable) -> None:
         """Binds multiple message to the same function.
 
         Often, we perform the same thing on multiple messages. Instead of having the same function
@@ -54,15 +55,15 @@ class Listener:
         for message in messages:
             self._bound_notifications[message].append(func)
 
-    def connect(self):
+    def connect(self) -> None:
         """Connects the listener to its broadcaster."""
         self.broadcaster.add_listener(self)
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         """Disconnects the listener from its broadcaster."""
         self.broadcaster.remove_listener(self)
 
-    def dispatch(self, msg):
+    def dispatch(self, msg: str) -> None:
         if msg in self._bound_notifications:
             for func in self._bound_notifications[msg]:
                 func()
@@ -74,14 +75,14 @@ class Listener:
 class Repeater(Broadcaster, Listener):
     REPEATED_NOTIFICATIONS = None
 
-    def __init__(self, broadcaster):
+    def __init__(self, broadcaster: Broadcaster) -> None:
         Broadcaster.__init__(self)
         Listener.__init__(self, broadcaster)
 
-    def _repeat_message(self, msg):
+    def _repeat_message(self, msg: str) -> None:
         if not self.REPEATED_NOTIFICATIONS or msg in self.REPEATED_NOTIFICATIONS:
             self.notify(msg)
 
-    def dispatch(self, msg):
+    def dispatch(self, msg: str) -> None:
         Listener.dispatch(self, msg)
         self._repeat_message(msg)

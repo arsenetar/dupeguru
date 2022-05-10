@@ -2,6 +2,7 @@ import os
 import os.path as op
 import shutil
 import tempfile
+from typing import Any, List
 
 import polib
 
@@ -10,15 +11,15 @@ from hscommon import pygettext
 LC_MESSAGES = "LC_MESSAGES"
 
 
-def get_langs(folder):
+def get_langs(folder: str) -> List[str]:
     return [name for name in os.listdir(folder) if op.isdir(op.join(folder, name))]
 
 
-def files_with_ext(folder, ext):
+def files_with_ext(folder: str, ext: str) -> List[str]:
     return [op.join(folder, fn) for fn in os.listdir(folder) if fn.endswith(ext)]
 
 
-def generate_pot(folders, outpath, keywords, merge=False):
+def generate_pot(folders: List[str], outpath: str, keywords: Any, merge: bool = False) -> None:
     if merge and not op.exists(outpath):
         merge = False
     if merge:
@@ -39,7 +40,7 @@ def generate_pot(folders, outpath, keywords, merge=False):
             print("Exception while removing temporary folder %s\n", genpath)
 
 
-def compile_all_po(base_folder):
+def compile_all_po(base_folder: str) -> None:
     langs = get_langs(base_folder)
     for lang in langs:
         pofolder = op.join(base_folder, lang, LC_MESSAGES)
@@ -49,7 +50,7 @@ def compile_all_po(base_folder):
             p.save_as_mofile(pofile[:-3] + ".mo")
 
 
-def merge_locale_dir(target, mergeinto):
+def merge_locale_dir(target: str, mergeinto: str) -> None:
     langs = get_langs(target)
     for lang in langs:
         if not op.exists(op.join(mergeinto, lang)):
@@ -60,7 +61,7 @@ def merge_locale_dir(target, mergeinto):
             shutil.copy(mofile, op.join(mergeinto, lang, LC_MESSAGES))
 
 
-def merge_pots_into_pos(folder):
+def merge_pots_into_pos(folder: str) -> None:
     # We're going to take all pot files in `folder` and for each lang, merge it with the po file
     # with the same name.
     potfiles = files_with_ext(folder, ".pot")
@@ -73,7 +74,7 @@ def merge_pots_into_pos(folder):
             po.save()
 
 
-def merge_po_and_preserve(source, dest):
+def merge_po_and_preserve(source: str, dest: str) -> None:
     # Merges source entries into dest, but keep old entries intact
     sourcepo = polib.pofile(source)
     destpo = polib.pofile(dest)
@@ -85,7 +86,7 @@ def merge_po_and_preserve(source, dest):
     destpo.save()
 
 
-def normalize_all_pos(base_folder):
+def normalize_all_pos(base_folder: str) -> None:
     """Normalize the format of .po files in base_folder.
 
     When getting POs from external sources, such as Transifex, we end up with spurious diffs because

@@ -9,6 +9,7 @@
 """This module is a collection of function to help in HS apps build process.
 """
 
+from argparse import ArgumentParser
 import os
 import sys
 import os.path as op
@@ -20,18 +21,19 @@ import re
 import importlib
 from datetime import datetime
 import glob
+from typing import Any, AnyStr, Callable, Dict, List, Union
 
 from hscommon.plat import ISWINDOWS
 
 
-def print_and_do(cmd):
+def print_and_do(cmd: str) -> int:
     """Prints ``cmd`` and executes it in the shell."""
     print(cmd)
     p = Popen(cmd, shell=True)
     return p.wait()
 
 
-def _perform(src, dst, action, actionname):
+def _perform(src: os.PathLike, dst: os.PathLike, action: Callable, actionname: str) -> None:
     if not op.lexists(src):
         print("Copying %s failed: it doesn't exist." % src)
         return
@@ -44,30 +46,22 @@ def _perform(src, dst, action, actionname):
     action(src, dst)
 
 
-def copy_file_or_folder(src, dst):
+def copy_file_or_folder(src: os.PathLike, dst: os.PathLike) -> None:
     if op.isdir(src):
         shutil.copytree(src, dst, symlinks=True)
     else:
         shutil.copy(src, dst)
 
 
-def move(src, dst):
+def move(src: os.PathLike, dst: os.PathLike) -> None:
     _perform(src, dst, os.rename, "Moving")
 
 
-def copy(src, dst):
+def copy(src: os.PathLike, dst: os.PathLike) -> None:
     _perform(src, dst, copy_file_or_folder, "Copying")
 
 
-def symlink(src, dst):
-    _perform(src, dst, os.symlink, "Symlinking")
-
-
-def hardlink(src, dst):
-    _perform(src, dst, os.link, "Hardlinking")
-
-
-def _perform_on_all(pattern, dst, action):
+def _perform_on_all(pattern: AnyStr, dst: os.PathLike, action: Callable) -> None:
     # pattern is a glob pattern, example "folder/foo*". The file is moved directly in dst, no folder
     # structure from src is kept.
     filenames = glob.glob(pattern)
@@ -76,22 +70,15 @@ def _perform_on_all(pattern, dst, action):
         action(fn, destpath)
 
 
-def move_all(pattern, dst):
+def move_all(pattern: AnyStr, dst: os.PathLike) -> None:
     _perform_on_all(pattern, dst, move)
 
 
-def copy_all(pattern, dst):
+def copy_all(pattern: AnyStr, dst: os.PathLike) -> None:
     _perform_on_all(pattern, dst, copy)
 
 
-def ensure_empty_folder(path):
-    """Make sure that the path exists and that it's an empty folder."""
-    if op.exists(path):
-        shutil.rmtree(path)
-    os.mkdir(path)
-
-
-def filereplace(filename, outfilename=None, **kwargs):
+def filereplace(filename: os.PathLike, outfilename: Union[os.PathLike, None] = None, **kwargs) -> None:
     """Reads `filename`, replaces all {variables} in kwargs, and writes the result to `outfilename`."""
     if outfilename is None:
         outfilename = filename
@@ -106,12 +93,12 @@ def filereplace(filename, outfilename=None, **kwargs):
     fp.close()
 
 
-def get_module_version(modulename):
+def get_module_version(modulename: str) -> str:
     mod = importlib.import_module(modulename)
     return mod.__version__
 
 
-def setup_package_argparser(parser):
+def setup_package_argparser(parser: ArgumentParser):
     parser.add_argument(
         "--sign",
         dest="sign_identity",
@@ -138,7 +125,7 @@ def setup_package_argparser(parser):
 
 
 # `args` come from an ArgumentParser updated with setup_package_argparser()
-def package_cocoa_app_in_dmg(app_path, destfolder, args):
+def package_cocoa_app_in_dmg(app_path: os.PathLike, destfolder: os.PathLike, args) -> None:
     # Rather than signing our app in XCode during the build phase, we sign it during the package
     # phase because running the app before packaging can modify it and we want to be sure to have
     # a valid signature.
@@ -154,13 +141,14 @@ def package_cocoa_app_in_dmg(app_path, destfolder, args):
     build_dmg(app_path, destfolder)
 
 
-def build_dmg(app_path, destfolder):
+def build_dmg(app_path: os.PathLike, destfolder: os.PathLike) -> None:
     """Builds a DMG volume with application at ``app_path`` and puts it in ``dest_path``.
 
     The name of the resulting DMG volume is determined by the app's name and version.
     """
     print(repr(op.join(app_path, "Contents", "Info.plist")))
-    plist = plistlib.readPlist(op.join(app_path, "Contents", "Info.plist"))
+    with open(op.join(app_path, "Contents", "Info.plist"), "rb") as fp:
+        plist = plistlib.load(fp)
     workpath = tempfile.mkdtemp()
     dmgpath = op.join(workpath, plist["CFBundleName"])
     os.mkdir(dmgpath)
@@ -178,7 +166,7 @@ def build_dmg(app_path, destfolder):
     print("Build Complete")
 
 
-def add_to_pythonpath(path):
+def add_to_pythonpath(path: os.PathLike) -> None:
     """Adds ``path`` to both ``PYTHONPATH`` env and ``sys.path``."""
     abspath = op.abspath(path)
     pythonpath = os.environ.get("PYTHONPATH", "")
@@ -191,7 +179,12 @@ def add_to_pythonpath(path):
 # This is a method to hack around those freakingly tricky data inclusion/exlusion rules
 # in setuptools. We copy the packages *without data* in a build folder and then build the plugin
 # from there.
-def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
+def copy_packages(
+    packages_names: List[str],
+    dest: os.PathLike,
+    create_links: bool = False,
+    extra_ignores: Union[List[str], None] = None,
+) -> None:
     """Copy python packages ``packages_names`` to ``dest``, spurious data.
 
     Copy will happen without tests, testdata, mercurial data or C extension module source with it.
@@ -229,13 +222,13 @@ def copy_packages(packages_names, dest, create_links=False, extra_ignores=None):
 
 
 def build_debian_changelog(
-    changelogpath,
-    destfile,
-    pkgname,
-    from_version=None,
-    distribution="precise",
-    fix_version=None,
-):
+    changelogpath: os.PathLike,
+    destfile: os.PathLike,
+    pkgname: str,
+    from_version: Union[str, None] = None,
+    distribution: str = "precise",
+    fix_version: Union[str, None] = None,
+) -> None:
     """Builds a debian changelog out of a YAML changelog.
 
     Use fix_version to patch the top changelog to that version (if, for example, there was a
@@ -288,7 +281,7 @@ def build_debian_changelog(
 re_changelog_header = re.compile(r"=== ([\d.b]*) \(([\d\-]*)\)")
 
 
-def read_changelog_file(filename):
+def read_changelog_file(filename: os.PathLike) -> List[Dict[str, Any]]:
     def iter_by_three(it):
         while True:
             try:
@@ -315,7 +308,7 @@ def read_changelog_file(filename):
     return result
 
 
-def fix_qt_resource_file(path):
+def fix_qt_resource_file(path: os.PathLike) -> None:
     # pyrcc5 under Windows, if the locale is non-english, can produce a source file with a date
     # containing accented characters. If it does, the encoding is wrong and it prevents the file
     # from being correctly frozen by cx_freeze. To work around that, we open the file, strip all

@@ -15,6 +15,7 @@ import os
 import shutil
 
 from pathlib import Path
+from typing import Callable, List
 
 # This matches [123], but not [12] (3 digits being the minimum).
 # It also matches [1234] [12345] etc..
@@ -22,7 +23,7 @@ from pathlib import Path
 re_conflict = re.compile(r"^\[\d{3}\d*\] ")
 
 
-def get_conflicted_name(other_names, name):
+def get_conflicted_name(other_names: List[str], name: str) -> str:
     """Returns name with a ``[000]`` number in front of it.
 
     The number between brackets depends on how many conlicted filenames
@@ -39,7 +40,7 @@ def get_conflicted_name(other_names, name):
         i += 1
 
 
-def get_unconflicted_name(name):
+def get_unconflicted_name(name: str) -> str:
     """Returns ``name`` without ``[]`` brackets.
 
     Brackets which, of course, might have been added by func:`get_conflicted_name`.
@@ -47,12 +48,12 @@ def get_unconflicted_name(name):
     return re_conflict.sub("", name, 1)
 
 
-def is_conflicted(name):
+def is_conflicted(name: str) -> bool:
     """Returns whether ``name`` is prepended with a bracketed number."""
     return re_conflict.match(name) is not None
 
 
-def _smart_move_or_copy(operation, source_path: Path, dest_path: Path):
+def _smart_move_or_copy(operation: Callable, source_path: Path, dest_path: Path) -> None:
     """Use move() or copy() to move and copy file with the conflict management."""
     if dest_path.is_dir() and not source_path.is_dir():
         dest_path = dest_path.joinpath(source_path.name)
@@ -64,12 +65,12 @@ def _smart_move_or_copy(operation, source_path: Path, dest_path: Path):
     operation(str(source_path), str(dest_path))
 
 
-def smart_move(source_path, dest_path):
+def smart_move(source_path: Path, dest_path: Path) -> None:
     """Same as :func:`smart_copy`, but it moves files instead."""
     _smart_move_or_copy(shutil.move, source_path, dest_path)
 
 
-def smart_copy(source_path, dest_path):
+def smart_copy(source_path: Path, dest_path: Path) -> None:
     """Copies ``source_path`` to ``dest_path``, recursively and with conflict resolution."""
     try:
         _smart_move_or_copy(shutil.copy, source_path, dest_path)
