@@ -8,6 +8,7 @@
 
 from collections.abc import MutableSequence
 from collections import namedtuple
+from typing import Any, List, Tuple, Union
 
 from hscommon.gui.base import GUIObject
 from hscommon.gui.selectable_list import Selectable
@@ -27,12 +28,16 @@ class Table(MutableSequence, Selectable):
     Subclasses :class:`.Selectable`.
     """
 
-    def __init__(self):
-        Selectable.__init__(self)
-        self._rows = []
-        self._header = None
-        self._footer = None
+    # Should be List[Column], but have circular import...
+    COLUMNS: List = []
 
+    def __init__(self) -> None:
+        Selectable.__init__(self)
+        self._rows: List["Row"] = []
+        self._header: Union["Row", None] = None
+        self._footer: Union["Row", None] = None
+
+    # TODO type hint for key
     def __delitem__(self, key):
         self._rows.__delitem__(key)
         if self._header is not None and ((not self) or (self[0] is not self._header)):
@@ -41,16 +46,18 @@ class Table(MutableSequence, Selectable):
             self._footer = None
         self._check_selection_range()
 
-    def __getitem__(self, key):
+    # TODO type hint for key
+    def __getitem__(self, key) -> Any:
         return self._rows.__getitem__(key)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._rows)
 
-    def __setitem__(self, key, value):
+    # TODO type hint for key
+    def __setitem__(self, key, value: Any) -> None:
         self._rows.__setitem__(key, value)
 
-    def append(self, item):
+    def append(self, item: "Row") -> None:
         """Appends ``item`` at the end of the table.
 
         If there's a footer, the item is inserted before it.
@@ -60,7 +67,7 @@ class Table(MutableSequence, Selectable):
         else:
             self._rows.append(item)
 
-    def insert(self, index, item):
+    def insert(self, index: int, item: "Row") -> None:
         """Inserts ``item`` at ``index`` in the table.
 
         If there's a header, will make sure we don't insert before it, and if there's a footer, will
@@ -72,7 +79,7 @@ class Table(MutableSequence, Selectable):
             index = len(self) - 1
         self._rows.insert(index, item)
 
-    def remove(self, row):
+    def remove(self, row: "Row") -> None:
         """Removes ``row`` from table.
 
         If ``row`` is a header or footer, that header or footer will be set to ``None``.
@@ -84,7 +91,7 @@ class Table(MutableSequence, Selectable):
         self._rows.remove(row)
         self._check_selection_range()
 
-    def sort_by(self, column_name, desc=False):
+    def sort_by(self, column_name: str, desc: bool = False) -> None:
         """Sort table by ``column_name``.
 
         Sort key for each row is computed from :meth:`Row.sort_key_for_column`.
@@ -105,7 +112,7 @@ class Table(MutableSequence, Selectable):
 
     # --- Properties
     @property
-    def footer(self):
+    def footer(self) -> Union["Row", None]:
         """If set, a row that always stay at the bottom of the table.
 
         :class:`Row`. *get/set*.
@@ -128,7 +135,7 @@ class Table(MutableSequence, Selectable):
         return self._footer
 
     @footer.setter
-    def footer(self, value):
+    def footer(self, value: Union["Row", None]) -> None:
         if self._footer is not None:
             self._rows.pop()
         if value is not None:
@@ -136,7 +143,7 @@ class Table(MutableSequence, Selectable):
         self._footer = value
 
     @property
-    def header(self):
+    def header(self) -> Union["Row", None]:
         """If set, a row that always stay at the bottom of the table.
 
         See :attr:`footer` for details.
@@ -144,7 +151,7 @@ class Table(MutableSequence, Selectable):
         return self._header
 
     @header.setter
-    def header(self, value):
+    def header(self, value: Union["Row", None]) -> None:
         if self._header is not None:
             self._rows.pop(0)
         if value is not None:
@@ -152,7 +159,7 @@ class Table(MutableSequence, Selectable):
         self._header = value
 
     @property
-    def row_count(self):
+    def row_count(self) -> int:
         """Number or rows in the table (without counting header and footer).
 
         *int*. *read-only*.
@@ -165,7 +172,7 @@ class Table(MutableSequence, Selectable):
         return result
 
     @property
-    def rows(self):
+    def rows(self) -> List["Row"]:
         """List of rows in the table, excluding header and footer.
 
         List of :class:`Row`. *read-only*.
@@ -179,7 +186,7 @@ class Table(MutableSequence, Selectable):
         return self[start:end]
 
     @property
-    def selected_row(self):
+    def selected_row(self) -> "Row":
         """Selected row according to :attr:`Selectable.selected_index`.
 
         :class:`Row`. *get/set*.
@@ -190,14 +197,14 @@ class Table(MutableSequence, Selectable):
         return self[self.selected_index] if self.selected_index is not None else None
 
     @selected_row.setter
-    def selected_row(self, value):
+    def selected_row(self, value: int) -> None:
         try:
             self.selected_index = self.index(value)
         except ValueError:
             pass
 
     @property
-    def selected_rows(self):
+    def selected_rows(self) -> List["Row"]:
         """List of selected rows based on :attr:`.selected_indexes`.
 
         List of :class:`Row`. *read-only*.
@@ -219,20 +226,20 @@ class GUITableView:
     Whenever the user changes the selection, we expect the view to call :meth:`Table.select`.
     """
 
-    def refresh(self):
+    def refresh(self) -> None:
         """Refreshes the contents of the table widget.
 
         Ensures that the contents of the table widget is synced with the model. This includes
         selection.
         """
 
-    def start_editing(self):
+    def start_editing(self) -> None:
         """Start editing the currently selected row.
 
         Begin whatever inline editing support that the view supports.
         """
 
-    def stop_editing(self):
+    def stop_editing(self) -> None:
         """Stop editing if there's an inline editing in effect.
 
         There's no "aborting" implied in this call, so it's appropriate to send whatever the user
@@ -260,33 +267,33 @@ class GUITable(Table, GUIObject):
     :class:`GUITableView`.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         GUIObject.__init__(self)
         Table.__init__(self)
         #: The row being currently edited by the user. ``None`` if no edit is taking place.
-        self.edited = None
-        self._sort_descriptor = None
+        self.edited: Union["Row", None] = None
+        self._sort_descriptor: Union[SortDescriptor, None] = None
 
     # --- Virtual
-    def _do_add(self):
+    def _do_add(self) -> Tuple["Row", int]:
         """(Virtual) Creates a new row, adds it in the table.
 
         Returns ``(row, insert_index)``.
         """
         raise NotImplementedError()
 
-    def _do_delete(self):
+    def _do_delete(self) -> None:
         """(Virtual) Delete the selected rows."""
         pass
 
-    def _fill(self):
+    def _fill(self) -> None:
         """(Virtual/Required) Fills the table with all the rows that this table is supposed to have.
 
         Called by :meth:`refresh`. Does nothing by default.
         """
         pass
 
-    def _is_edited_new(self):
+    def _is_edited_new(self) -> bool:
         """(Virtual) Returns whether the currently edited row should be considered "new".
 
         This is used in :meth:`cancel_edits` to know whether the cancellation of the edit means a
@@ -315,7 +322,7 @@ class GUITable(Table, GUIObject):
                 self.select([len(self) - 1])
 
     # --- Public
-    def add(self):
+    def add(self) -> None:
         """Add a new row in edit mode.
 
         Requires :meth:`do_add` to be implemented. The newly added row will be selected and in edit
@@ -334,7 +341,7 @@ class GUITable(Table, GUIObject):
         self.edited = row
         self.view.start_editing()
 
-    def can_edit_cell(self, column_name, row_index):
+    def can_edit_cell(self, column_name: str, row_index: int) -> bool:
         """Returns whether the cell at ``row_index`` and ``column_name`` can be edited.
 
         A row is, by default, editable as soon as it has an attr with the same name as `column`.
@@ -346,7 +353,7 @@ class GUITable(Table, GUIObject):
         row = self[row_index]
         return row.can_edit_cell(column_name)
 
-    def cancel_edits(self):
+    def cancel_edits(self) -> None:
         """Cancels the current edit operation.
 
         If there's an :attr:`edited` row, it will be re-initialized (with :meth:`Row.load`).
@@ -364,7 +371,7 @@ class GUITable(Table, GUIObject):
         self.edited = None
         self.view.refresh()
 
-    def delete(self):
+    def delete(self) -> None:
         """Delete the currently selected rows.
 
         Requires :meth:`_do_delete` for this to have any effect on the model. Cancels editing if
@@ -377,7 +384,7 @@ class GUITable(Table, GUIObject):
         if self:
             self._do_delete()
 
-    def refresh(self, refresh_view=True):
+    def refresh(self, refresh_view: bool = True) -> None:
         """Empty the table and re-create its rows.
 
         :meth:`_fill` is called after we emptied the table to create our rows. Previous sort order
@@ -399,7 +406,7 @@ class GUITable(Table, GUIObject):
         if refresh_view:
             self.view.refresh()
 
-    def save_edits(self):
+    def save_edits(self) -> None:
         """Commit user edits to the model.
 
         This is done by calling :meth:`Row.save`.
@@ -410,7 +417,7 @@ class GUITable(Table, GUIObject):
         self.edited = None
         row.save()
 
-    def sort_by(self, column_name, desc=False):
+    def sort_by(self, column_name: str, desc: bool = False) -> None:
         """Sort table by ``column_name``.
 
         Overrides :meth:`Table.sort_by`. After having performed sorting, calls
@@ -450,18 +457,18 @@ class Row:
     Of course, this is only default behavior. This can be overriden.
     """
 
-    def __init__(self, table):
+    def __init__(self, table: GUITable) -> None:
         super().__init__()
         self.table = table
 
-    def _edit(self):
+    def _edit(self) -> None:
         if self.table.edited is self:
             return
         assert self.table.edited is None
         self.table.edited = self
 
     # --- Virtual
-    def can_edit(self):
+    def can_edit(self) -> bool:
         """(Virtual) Whether the whole row can be edited.
 
         By default, always returns ``True``. This is for the *whole* row. For individual cells, it's
@@ -469,7 +476,7 @@ class Row:
         """
         return True
 
-    def load(self):
+    def load(self) -> None:
         """(Virtual/Required) Loads up values from the model to be presented in the table.
 
         Usually, our model instances contain values that are not quite ready for display. If you
@@ -478,7 +485,7 @@ class Row:
         """
         raise NotImplementedError()
 
-    def save(self):
+    def save(self) -> None:
         """(Virtual/Required) Saves user edits into your model.
 
         If your table is editable, this is called when the user commits his changes. Usually, these
@@ -487,7 +494,7 @@ class Row:
         """
         raise NotImplementedError()
 
-    def sort_key_for_column(self, column_name):
+    def sort_key_for_column(self, column_name: str) -> Any:
         """(Virtual) Return the value that is to be used to sort by column ``column_name``.
 
         By default, looks for an attribute with the same name as ``column_name``, but with an
@@ -500,7 +507,7 @@ class Row:
             return getattr(self, column_name)
 
     # --- Public
-    def can_edit_cell(self, column_name):
+    def can_edit_cell(self, column_name: str) -> bool:
         """Returns whether cell for column ``column_name`` can be edited.
 
         By the default, the check is done in many steps:
@@ -530,7 +537,7 @@ class Row:
             return False
         return bool(getattr(prop, "fset", None))
 
-    def get_cell_value(self, attrname):
+    def get_cell_value(self, attrname: str) -> Any:
         """Get cell value for ``attrname``.
 
         By default, does a simple ``getattr()``, but it is used to allow subclasses to have
@@ -540,7 +547,7 @@ class Row:
             attrname = "from_"
         return getattr(self, attrname)
 
-    def set_cell_value(self, attrname, value):
+    def set_cell_value(self, attrname: str, value: Any) -> None:
         """Set cell value to ``value`` for ``attrname``.
 
         By default, does a simple ``setattr()``, but it is used to allow subclasses to have

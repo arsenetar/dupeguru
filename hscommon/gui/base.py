@@ -36,11 +36,11 @@ class GUIObject:
     ``multibind`` flag to ``True`` and the safeguard will be disabled.
     """
 
-    def __init__(self, multibind=False):
+    def __init__(self, multibind: bool = False) -> None:
         self._view = None
         self._multibind = multibind
 
-    def _view_updated(self):
+    def _view_updated(self) -> None:
         """(Virtual) Called after :attr:`view` has been set.
 
         Doing nothing by default, this method is called after :attr:`view` has been set (it isn't
@@ -48,7 +48,7 @@ class GUIObject:
         (which is often the whole of the initialization code).
         """
 
-    def has_view(self):
+    def has_view(self) -> bool:
         return (self._view is not None) and (not isinstance(self._view, NoopGUI))
 
     @property
@@ -67,7 +67,7 @@ class GUIObject:
         return self._view
 
     @view.setter
-    def view(self, value):
+    def view(self, value) -> None:
         if self._view is None and value is None:
             # Initial view assignment
             return

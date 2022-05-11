@@ -4,6 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from typing import Callable, Tuple, Union
 from hscommon.jobprogress.performer import ThreadedJobPerformer
 from hscommon.gui.base import GUIObject
 from hscommon.gui.text_field import TextField
@@ -20,13 +21,13 @@ class ProgressWindowView:
     It's also expected to call :meth:`ProgressWindow.cancel` when the cancel button is clicked.
     """
 
-    def show(self):
+    def show(self) -> None:
         """Show the dialog."""
 
-    def close(self):
+    def close(self) -> None:
         """Close the dialog."""
 
-    def set_progress(self, progress):
+    def set_progress(self, progress: int) -> None:
         """Set the progress of the progress bar to ``progress``.
 
         Not all jobs are equally responsive on their job progress report and it is recommended that
@@ -60,7 +61,11 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
                        called as if the job terminated normally.
     """
 
-    def __init__(self, finish_func, error_func=None):
+    def __init__(
+        self,
+        finish_func: Callable[[Union[str, None]], None],
+        error_func: Callable[[Union[str, None], Exception], bool] = None,
+    ) -> None:
         # finish_func(jobid) is the function that is called when a job is completed.
         GUIObject.__init__(self)
         ThreadedJobPerformer.__init__(self)
@@ -71,9 +76,9 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         #: :class:`.TextField`. It contains the job textual update that the function might yield
         #: during its course.
         self.progressdesc_textfield = TextField()
-        self.jobid = None
+        self.jobid: Union[str, None] = None
 
-    def cancel(self):
+    def cancel(self) -> None:
         """Call for a user-initiated job cancellation."""
         # The UI is sometimes a bit buggy and calls cancel() on self.view.close(). We just want to
         # make sure that this doesn't lead us to think that the user acually cancelled the task, so
@@ -81,7 +86,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
         if self._job_running:
             self.job_cancelled = True
 
-    def pulse(self):
+    def pulse(self) -> None:
         """Update progress reports in the GUI.
 
         Call this regularly from the GUI main run loop. The values might change before
@@ -111,7 +116,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
             self.progressdesc_textfield.text = last_desc
         self.view.set_progress(last_progress)
 
-    def run(self, jobid, title, target, args=()):
+    def run(self, jobid: str, title: str, target: Callable, args: Tuple = ()):
         """Starts a threaded job.
 
         The ``target`` function will be sent, as its first argument, a :class:`.Job` instance which

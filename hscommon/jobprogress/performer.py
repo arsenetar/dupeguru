@@ -8,6 +8,7 @@
 
 from threading import Thread
 import sys
+from typing import Callable, Tuple, Union
 
 from hscommon.jobprogress.job import Job, JobInProgressError, JobCancelled
 
@@ -28,15 +29,15 @@ class ThreadedJobPerformer:
     last_error = None
 
     # --- Protected
-    def create_job(self):
+    def create_job(self) -> Job:
         if self._job_running:
             raise JobInProgressError()
-        self.last_progress = -1
+        self.last_progress: Union[int, None] = -1
         self.last_desc = ""
         self.job_cancelled = False
         return Job(1, self._update_progress)
 
-    def _async_run(self, *args):
+    def _async_run(self, *args) -> None:
         target = args[0]
         args = tuple(args[1:])
         self._job_running = True
@@ -52,7 +53,7 @@ class ThreadedJobPerformer:
             self._job_running = False
             self.last_progress = None
 
-    def reraise_if_error(self):
+    def reraise_if_error(self) -> None:
         """Reraises the error that happened in the thread if any.
 
         Call this after the caller of run_threaded detected that self._job_running returned to False
@@ -60,13 +61,13 @@ class ThreadedJobPerformer:
         if self.last_error is not None:
             raise self.last_error.with_traceback(self.last_traceback)
 
-    def _update_progress(self, newprogress, newdesc=""):
+    def _update_progress(self, newprogress: int, newdesc: str = "") -> bool:
         self.last_progress = newprogress
         if newdesc:
             self.last_desc = newdesc
         return not self.job_cancelled
 
-    def run_threaded(self, target, args=()):
+    def run_threaded(self, target: Callable, args: Tuple = ()) -> None:
         if self._job_running:
             raise JobInProgressError()
         args = (target,) + args
