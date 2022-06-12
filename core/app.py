@@ -555,9 +555,9 @@ class DupeGuru(Broadcaster):
                 # a workaround to make the damn thing work.
                 exepath, args = match.groups()
                 path, exename = op.split(exepath)
-                subprocess.Popen(exename + args, shell=True, cwd=path)
+                subprocess.Popen(exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             else:
-                subprocess.Popen(dupe_cmd, shell=True)
+                subprocess.Popen(dupe_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     def load(self):
         """Load directory selection and ignore list from files in appdata.
