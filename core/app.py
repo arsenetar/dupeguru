@@ -557,11 +557,11 @@ class DupeGuru(Broadcaster):
                 path, exename = op.split(exepath)
                 p = subprocess.Popen(exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output = p.stdout.read()
-                logging.info("Custom command %s %s:\n %s", exename, args, output)
+                logging.info("Custom command %s %s: %s", exename, args, output)
             else:
                 p = subprocess.Popen(dupe_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output = p.stdout.read()
-                logging.info("Custom command %s:\n %s", dupe_cmd, output)
+                logging.info("Custom command %s: %s", dupe_cmd, output)
 
     def load(self):
         """Load directory selection and ignore list from files in appdata.
