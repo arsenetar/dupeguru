@@ -4,10 +4,12 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
+from typing import Union
+from PyQt5.QtCore import Qt, QSize, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
 from PyQt5.QtGui import QResizeEvent
 from hscommon.trans import trget
+from qt import app
 from qt.details_dialog import DetailsDialog as DetailsDialogBase
 from qt.details_table import DetailsTable
 from qt.pe.image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
@@ -16,15 +18,15 @@ tr = trget("ui")
 
 
 class DetailsDialog(DetailsDialogBase):
-    def __init__(self, parent, app):
-        self.vController = None
+    def __init__(self, parent: QWidget, app: "app.DupeGuru") -> None:
+        self.vController: Union[ScrollAreaController, None] = None
         super().__init__(parent, app)
 
-    def _setupUi(self):
+    def _setupUi(self) -> None:
         self.setWindowTitle(tr("Details"))
         self.resize(502, 502)
         self.setMinimumSize(QSize(250, 250))
-        self.splitter = QSplitter(Qt.Vertical)
+        self.splitter = QSplitter(Qt.Orientation.Vertical)
         self.topFrame = EmittingFrame()
         self.topFrame.setFrameShape(QFrame.StyledPanel)
         self.horizontalLayout = QGridLayout()
@@ -47,8 +49,8 @@ class DetailsDialog(DetailsDialogBase):
         self.vController = ScrollAreaController(self)
 
         self.verticalToolBar = ViewerToolBar(self, self.vController)
-        self.verticalToolBar.setOrientation(Qt.Orientation(Qt.Vertical))
-        self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignCenter)
+        self.verticalToolBar.setOrientation(Qt.Orientation.Vertical)
+        self.horizontalLayout.addWidget(self.verticalToolBar, 1, 1, 1, 1, Qt.AlignmentFlag.AlignCenter)
 
         self.referenceImageViewer = ScrollAreaImageViewer(self, "referenceImage")
         self.horizontalLayout.addWidget(self.referenceImageViewer, 0, 2, 3, 1)
@@ -73,7 +75,7 @@ class DetailsDialog(DetailsDialogBase):
 
         self.topFrame.resized.connect(self.resizeEvent)
 
-    def _update(self):
+    def _update(self) -> None:
         if self.vController is None:  # Not yet constructed!
             return
         if not self.app.model.selected_dupes:
@@ -87,15 +89,14 @@ class DetailsDialog(DetailsDialogBase):
         self.vController.updateView(ref, dupe, group)
 
     # --- Override
-    @pyqtSlot(QResizeEvent)
-    def resizeEvent(self, event):
+    def resizeEvent(self, event: QResizeEvent) -> None:
         self.ensure_same_sizes()
         if self.vController is None or not self.vController.bestFit:
             return
         # Only update the scaled down pixmaps
         self.vController.updateBothImages()
 
-    def show(self):
+    def show(self) -> None:
         # Give the splitter a maximum height to reach. This is assuming that
         # all rows below their headers have the same height
         self.tableView.setMaximumHeight(
@@ -108,7 +109,7 @@ class DetailsDialog(DetailsDialogBase):
         self.ensure_same_sizes()
         self._update()
 
-    def ensure_same_sizes(self):
+    def ensure_same_sizes(self) -> None:
         # HACK This ensures same size while shrinking.
         # ReferenceViewer might be 1 pixel shorter in width
         # due to the toolbar in the middle keeping the same width,
@@ -126,7 +127,7 @@ class DetailsDialog(DetailsDialogBase):
             self.selectedImageViewer.resize(self.referenceImageViewer.size())
 
     # model --> view
-    def refresh(self):
+    def refresh(self) -> None:
         DetailsDialogBase.refresh(self)
         if self.isVisible():
             self._update()
@@ -137,5 +138,5 @@ class EmittingFrame(QFrame):
 
     resized = pyqtSignal(QResizeEvent)
 
-    def resizeEvent(self, event):
+    def resizeEvent(self, event: QResizeEvent) -> None:
         self.resized.emit(event)

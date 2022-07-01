@@ -2,6 +2,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from typing import Union, cast
 from PyQt5.QtCore import QObject, Qt, QSize, QRectF, QPointF, QPoint, pyqtSlot, pyqtSignal, QEvent
 from PyQt5.QtGui import QPixmap, QPainter, QPalette, QCursor, QIcon, QKeySequence
 from PyQt5.QtWidgets import (
@@ -17,6 +18,7 @@ from PyQt5.QtWidgets import (
     QAbstractScrollArea,
     QStyle,
 )
+from qt.details_dialog import DetailsDialog
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 
@@ -26,7 +28,7 @@ MAX_SCALE = 12.0
 MIN_SCALE = 0.1
 
 
-def create_actions(actions, target):
+def create_actions(actions: list, target: QObject) -> None:
     # actions are list of (name, shortcut, icon, desc, func)
     for name, shortcut, icon, desc, func in actions:
         action = QAction(target)
@@ -40,9 +42,9 @@ def create_actions(actions, target):
 
 
 class ViewerToolBar(QToolBar):
-    def __init__(self, parent, controller):
+    def __init__(self, parent: DetailsDialog, controller: "BaseController") -> None:
         super().__init__(parent)
-        self.parent = parent
+        self.setParent(parent)
         self.controller = controller
         self.setupActions(controller)
         self.createButtons()
@@ -52,24 +54,21 @@ class ViewerToolBar(QToolBar):
         self.buttonNormalSize.setEnabled(False)
         self.buttonBestFit.setEnabled(False)
 
-    def setupActions(self, controller):
+    def setupActions(self, controller: "BaseController") -> None:
+        override_icons = cast(DetailsDialog, self.parent()).app.prefs.details_dialog_override_theme_icons
         # actions are list of (name, shortcut, icon, desc, func)
         ACTIONS = [
             (
                 "actionZoomIn",
                 QKeySequence.ZoomIn,
-                QIcon.fromTheme("zoom-in")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_in")),
+                QIcon.fromTheme("zoom-in") if ISLINUX and not override_icons else QIcon(QPixmap(":/" + "zoom_in")),
                 tr("Increase zoom"),
                 controller.zoomIn,
             ),
             (
                 "actionZoomOut",
                 QKeySequence.ZoomOut,
-                QIcon.fromTheme("zoom-out")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_out")),
+                QIcon.fromTheme("zoom-out") if ISLINUX and not override_icons else QIcon(QPixmap(":/" + "zoom_out")),
                 tr("Decrease zoom"),
                 controller.zoomOut,
             ),
@@ -77,7 +76,7 @@ class ViewerToolBar(QToolBar):
                 "actionNormalSize",
                 tr("Ctrl+/"),
                 QIcon.fromTheme("zoom-original")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                if ISLINUX and not override_icons
                 else QIcon(QPixmap(":/" + "zoom_original")),
                 tr("Normal size"),
                 controller.zoomNormalSize,
@@ -86,7 +85,7 @@ class ViewerToolBar(QToolBar):
                 "actionBestFit",
                 tr("Ctrl+*"),
                 QIcon.fromTheme("zoom-best-fit")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                if ISLINUX and not override_icons
                 else QIcon(QPixmap(":/" + "zoom_best_fit")),
                 tr("Best fit"),
                 controller.zoomBestFit,
@@ -96,12 +95,12 @@ class ViewerToolBar(QToolBar):
         # the popup menu work in the toolbar (if resized below minimum height)
         create_actions(ACTIONS, self)
 
-    def createButtons(self):
+    def createButtons(self) -> None:
         self.buttonImgSwap = QToolButton(self)
-        self.buttonImgSwap.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonImgSwap.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.buttonImgSwap.setIcon(
-            QIcon.fromTheme("view-refresh", self.style().standardIcon(QStyle.SP_BrowserReload))
-            if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+            QIcon.fromTheme("view-refresh", self.style().standardIcon(QStyle.StandardPixmap.SP_BrowserReload))
+            if ISLINUX and not cast(DetailsDialog, self.parent()).app.prefs.details_dialog_override_theme_icons
             else QIcon(QPixmap(":/" + "exchange"))
         )
         self.buttonImgSwap.setText("Swap images")
@@ -110,22 +109,22 @@ class ViewerToolBar(QToolBar):
         self.buttonImgSwap.released.connect(self.controller.swapImages)
 
         self.buttonZoomIn = QToolButton(self)
-        self.buttonZoomIn.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonZoomIn.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.buttonZoomIn.setDefaultAction(self.actionZoomIn)
         self.buttonZoomIn.setEnabled(False)
 
         self.buttonZoomOut = QToolButton(self)
-        self.buttonZoomOut.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonZoomOut.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.buttonZoomOut.setDefaultAction(self.actionZoomOut)
         self.buttonZoomOut.setEnabled(False)
 
         self.buttonNormalSize = QToolButton(self)
-        self.buttonNormalSize.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonNormalSize.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.buttonNormalSize.setDefaultAction(self.actionNormalSize)
         self.buttonNormalSize.setEnabled(True)
 
         self.buttonBestFit = QToolButton(self)
-        self.buttonBestFit.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.buttonBestFit.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.buttonBestFit.setDefaultAction(self.actionBestFit)
         self.buttonBestFit.setEnabled(False)
 
@@ -141,10 +140,10 @@ class BaseController(QObject):
     Base proxy interface to keep image viewers synchronized.
     Relays function calls, keep tracks of things."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: QObject) -> None:
         super().__init__()
-        self.selectedViewer = None
-        self.referenceViewer = None
+        self.selectedViewer: Union[ScrollAreaImageViewer, None] = None
+        self.referenceViewer: Union[ScrollAreaImageViewer, None] = None
         # cached pixmaps
         self.selectedPixmap = QPixmap()
         self.referencePixmap = QPixmap()
@@ -152,22 +151,24 @@ class BaseController(QObject):
         self.scaledReferencePixmap = QPixmap()
         self.current_scale = 1.0
         self.bestFit = True
-        self.parent = parent  # To change buttons' states
+        self.setParent(parent)  # To change buttons' states
         self.cached_group = None
         self.same_dimensions = True
 
-    def setupViewers(self, selected_viewer, reference_viewer):
+    def setupViewers(self, selected_viewer: "ScrollAreaImageViewer", reference_viewer: "ScrollAreaImageViewer") -> None:
         self.selectedViewer = selected_viewer
         self.referenceViewer = reference_viewer
         self.selectedViewer.controller = self
         self.referenceViewer.controller = self
         self._setupConnections()
 
-    def _setupConnections(self):
-        self.selectedViewer.connectMouseSignals()
-        self.referenceViewer.connectMouseSignals()
+    def _setupConnections(self) -> None:
+        if self.selectedViewer is not None:
+            self.selectedViewer.connectMouseSignals()
+        if self.referenceViewer is not None:
+            self.referenceViewer.connectMouseSignals()
 
-    def updateView(self, ref, dupe, group):
+    def updateView(self, ref, dupe, group) -> None:
         # To keep current scale accross dupes from the same group
         previous_same_dimensions = self.same_dimensions
         self.same_dimensions = True
@@ -206,13 +207,15 @@ class BaseController(QObject):
         if ignore_update:
             self.selectedViewer.ignore_signal = False
 
-    def _updateImage(self, pixmap, viewer, same_group=False):
+    def _updateImage(
+        self, pixmap: QPixmap, viewer: "ScrollAreaImageViewer", same_group: bool = False
+    ) -> Union[QSize, None]:
         # WARNING this is called on every resize event, might need to split
         # into a separate function depending on the implementation used
         if pixmap.isNull():
             # This should disable the blank widget
             viewer.setImage(pixmap)
-            return
+            return None
         target_size = viewer.size()
         if not viewer.bestFit:
             if same_group:
@@ -220,14 +223,18 @@ class BaseController(QObject):
                 return target_size
             # zoomed in state, expand
             # only if not same_group, we need full update
-            scaledpixmap = pixmap.scaled(target_size, Qt.KeepAspectRatioByExpanding, Qt.FastTransformation)
+            scaledpixmap = pixmap.scaled(
+                target_size, Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.FastTransformation
+            )
         else:
             # best fit, keep ratio always
-            scaledpixmap = pixmap.scaled(target_size, Qt.KeepAspectRatio, Qt.FastTransformation)
+            scaledpixmap = pixmap.scaled(
+                target_size, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.FastTransformation
+            )
         viewer.setImage(scaledpixmap)
         return target_size
 
-    def resetState(self):
+    def resetState(self) -> None:
         """Only called when the group of dupes has changed. We reset our
         controller internal state and buttons, center view on viewers."""
         self.selectedPixmap = QPixmap()
@@ -248,7 +255,7 @@ class BaseController(QObject):
         self.parent.verticalToolBar.buttonNormalSize.setEnabled(True)
         self.parent.verticalToolBar.buttonBestFit.setEnabled(False)  # active mode by default
 
-    def resetViewersState(self):
+    def resetViewersState(self) -> None:
         """No item from the model, disable and clear everything."""
         # only called by the details dialog
         self.selectedPixmap = QPixmap()
@@ -277,36 +284,40 @@ class BaseController(QObject):
         self.referenceViewer.setEnabled(False)
 
     @pyqtSlot()
-    def zoomIn(self):
+    def zoomIn(self) -> None:
         self.scaleImagesBy(1.25)
 
     @pyqtSlot()
-    def zoomOut(self):
+    def zoomOut(self) -> None:
         self.scaleImagesBy(0.8)
 
     @pyqtSlot(float)
-    def scaleImagesBy(self, factor):
+    def scaleImagesBy(self, factor: float) -> None:
         """Compute new scale from factor and scale."""
         self.current_scale *= factor
-        self.selectedViewer.scaleBy(factor)
-        self.referenceViewer.scaleBy(factor)
+        if self.selectedViewer is not None:
+            self.selectedViewer.scaleBy(factor)
+        if self.referenceViewer is not None:
+            self.referenceViewer.scaleBy(factor)
         self.updateButtons()
 
     @pyqtSlot(float)
-    def scaleImagesAt(self, scale):
+    def scaleImagesAt(self, scale: float) -> None:
         """Scale at a pre-computed scale."""
         self.current_scale = scale
-        self.selectedViewer.scaleAt(scale)
-        self.referenceViewer.scaleAt(scale)
+        if self.selectedViewer is not None:
+            self.selectedViewer.scaleAt(scale)
+        if self.referenceViewer is not None:
+            self.referenceViewer.scaleAt(scale)
         self.updateButtons()
 
-    def updateButtons(self):
+    def updateButtons(self) -> None:
         self.parent.verticalToolBar.buttonZoomIn.setEnabled(self.current_scale < MAX_SCALE)
         self.parent.verticalToolBar.buttonZoomOut.setEnabled(self.current_scale > MIN_SCALE)
         self.parent.verticalToolBar.buttonNormalSize.setEnabled(round(self.current_scale, 1) != 1.0)
         self.parent.verticalToolBar.buttonBestFit.setEnabled(self.bestFit is False)
 
-    def updateButtonsAsPerDimensions(self, previous_same_dimensions):
+    def updateButtonsAsPerDimensions(self, previous_same_dimensions: bool) -> None:
         if not self.same_dimensions:
             self.parent.verticalToolBar.buttonZoomIn.setEnabled(False)
             self.parent.verticalToolBar.buttonZoomOut.setEnabled(False)
@@ -323,7 +334,7 @@ class BaseController(QObject):
                 self.parent.verticalToolBar.buttonImgSwap.setEnabled(False)
 
     @pyqtSlot()
-    def zoomBestFit(self):
+    def zoomBestFit(self) -> None:
         """Setup before scaling to bestfit"""
         self.setBestFit(True)
         self.current_scale = 1.0
@@ -352,7 +363,7 @@ class BaseController(QObject):
         self.referenceViewer.bestFit = value
 
     @pyqtSlot()
-    def zoomNormalSize(self):
+    def zoomNormalSize(self) -> None:
         self.setBestFit(False)
         self.current_scale = 1.0
 
@@ -373,14 +384,14 @@ class BaseController(QObject):
         self.parent.verticalToolBar.buttonNormalSize.setEnabled(False)
         self.parent.verticalToolBar.buttonBestFit.setEnabled(True)
 
-    def centerViews(self, only_selected=False):
+    def centerViews(self, only_selected: bool = False) -> None:
         self.selectedViewer.centerViewAndUpdate()
         if only_selected:
             return
         self.referenceViewer.centerViewAndUpdate()
 
     @pyqtSlot()
-    def swapImages(self):
+    def swapImages(self) -> None:
         # swap the columns in the details table as well
         self.parent.tableView.horizontalHeader().swapSections(0, 1)
 
@@ -388,17 +399,17 @@ class BaseController(QObject):
 class QWidgetController(BaseController):
     """Specialized version for QWidget-based viewers."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: QObject) -> None:
         super().__init__(parent)
 
-    def _updateImage(self, *args):
+    def _updateImage(self, *args) -> Union[QSize, None]:
         ret = super()._updateImage(*args)
         # Fix alignment when resizing window
         self.centerViews()
         return ret
 
     @pyqtSlot(QPointF)
-    def onDraggedMouse(self, delta):
+    def onDraggedMouse(self, delta) -> None:
         if not self.same_dimensions:
             return
         if self.sender() is self.referenceViewer:
@@ -407,7 +418,7 @@ class QWidgetController(BaseController):
             self.referenceViewer.onDraggedMouse(delta)
 
     @pyqtSlot()
-    def swapImages(self):
+    def swapImages(self) -> None:
         self.selectedViewer._pixmap.swap(self.referenceViewer._pixmap)
         self.selectedViewer.centerViewAndUpdate()
         self.referenceViewer.centerViewAndUpdate()
@@ -417,15 +428,15 @@ class QWidgetController(BaseController):
 class ScrollAreaController(BaseController):
     """Specialized version fro QLabel-based viewers."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: QObject) -> None:
         super().__init__(parent)
 
-    def _setupConnections(self):
+    def _setupConnections(self) -> None:
         super()._setupConnections()
         self.selectedViewer.connectScrollBars()
         self.referenceViewer.connectScrollBars()
 
-    def updateBothImages(self, same_group=False):
+    def updateBothImages(self, same_group: bool = False) -> None:
         super().updateBothImages(same_group)
         if not self.referenceViewer.isEnabled():
             return
@@ -433,7 +444,7 @@ class ScrollAreaController(BaseController):
         self.referenceViewer._verticalScrollBar.setValue(self.selectedViewer._verticalScrollBar.value())
 
     @pyqtSlot(QPoint)
-    def onDraggedMouse(self, delta):
+    def onDraggedMouse(self, delta) -> None:
         self.selectedViewer.ignore_signal = True
         self.referenceViewer.ignore_signal = True
 
@@ -450,21 +461,21 @@ class ScrollAreaController(BaseController):
         self.referenceViewer.ignore_signal = False
 
     @pyqtSlot()
-    def swapImages(self):
+    def swapImages(self) -> None:
         self.referenceViewer._pixmap.swap(self.selectedViewer._pixmap)
         self.referenceViewer.setCachedPixmap()
         self.selectedViewer.setCachedPixmap()
         super().swapImages()
 
     @pyqtSlot(float, QPointF)
-    def onMouseWheel(self, scale, delta):
+    def onMouseWheel(self, scale: float, delta: QPointF) -> None:
         self.scaleImagesAt(scale)
         self.selectedViewer.adjustScrollBarsScaled(delta)
         # Signal from scrollbars will automatically change the other:
         # self.referenceViewer.adjustScrollBarsScaled(delta)
 
     @pyqtSlot(int)
-    def onVScrollBarChanged(self, value):
+    def onVScrollBarChanged(self, value: int) -> None:
         if not self.same_dimensions:
             return
         if self.sender() is self.referenceViewer._verticalScrollBar:
@@ -475,7 +486,7 @@ class ScrollAreaController(BaseController):
                 self.referenceViewer._verticalScrollBar.setValue(value)
 
     @pyqtSlot(int)
-    def onHScrollBarChanged(self, value):
+    def onHScrollBarChanged(self, value: int) -> None:
         if not self.same_dimensions:
             return
         if self.sender() is self.referenceViewer._horizontalScrollBar:
@@ -486,13 +497,13 @@ class ScrollAreaController(BaseController):
                 self.referenceViewer._horizontalScrollBar.setValue(value)
 
     @pyqtSlot(float)
-    def scaleImagesBy(self, factor):
+    def scaleImagesBy(self, factor: float) -> None:
         super().scaleImagesBy(factor)
         # The other is automatically updated via sigals
         self.selectedViewer.adjustScrollBarsFactor(factor)
 
     @pyqtSlot()
-    def zoomBestFit(self):
+    def zoomBestFit(self) -> None:
         # Disable scrollbars to avoid GridLayout size rounding glitch
         super().zoomBestFit()
         if self.referencePixmap.isNull():

@@ -15,7 +15,7 @@ tr = trget("ui")
 
 
 class DetailsDialog(DetailsDialogBase):
-    def _setupUi(self):
+    def _setupUi(self) -> None:
         self.setWindowTitle(tr("Details"))
         self.resize(502, 295)
         self.setMinimumSize(QSize(250, 250))
