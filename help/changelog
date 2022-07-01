@@ -1,3 +1,16 @@
+=== 4.3.0 (2022-07-01)
+* Redirect stdout from custom command to the log files (#1008)
+* Update translations
+* Fix typo in debian control file (#989)
+* Add option to profile scans
+* Update fs.py to optimize stat() calls
+* Fix Error when delete after scan (#988)
+* Update directory scanning to use os.scandir() and DirEntry objects
+* Improve performance of Directories.get_state()
+* Migrate from hscommon.path to pathlib
+* Switch file hashing to xxhash with fallback to md5
+* Add update check feature to about box
+
 === 4.2.1 (2022-03-25)
 * Default to English on unsupported system language (#976)
 * Fix image viewer zoom datatype issue (#978)
