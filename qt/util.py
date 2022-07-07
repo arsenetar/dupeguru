@@ -11,22 +11,18 @@ import io
 import os.path as op
 import os
 import logging
+from typing import List, Union
 
 from core.util import executable_folder
 from hscommon.util import first
 from hscommon.plat import ISWINDOWS
 
-from PyQt5.QtCore import QStandardPaths, QSettings
-from PyQt5.QtGui import QPixmap, QIcon, QGuiApplication
-from PyQt5.QtWidgets import (
-    QSpacerItem,
-    QSizePolicy,
-    QAction,
-    QHBoxLayout,
-)
+from PyQt6.QtCore import QStandardPaths, QSettings
+from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication, QAction
+from PyQt6.QtWidgets import QSpacerItem, QSizePolicy, QHBoxLayout, QWidget
 
 
-def move_to_screen_center(widget):
+def move_to_screen_center(widget: QWidget) -> None:
     frame = widget.frameGeometry()
     if QGuiApplication.screenAt(frame.center()) is None:
         # if center not on any screen use default screen
@@ -43,21 +39,21 @@ def move_to_screen_center(widget):
         widget.move(frame.topLeft())
 
 
-def vertical_spacer(size=None):
+def vertical_spacer(size: Union[int, None] = None) -> QSpacerItem:
     if size:
-        return QSpacerItem(1, size, QSizePolicy.Fixed, QSizePolicy.Fixed)
+        return QSpacerItem(1, size, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
     else:
-        return QSpacerItem(1, 1, QSizePolicy.Fixed, QSizePolicy.MinimumExpanding)
+        return QSpacerItem(1, 1, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.MinimumExpanding)
 
 
-def horizontal_spacer(size=None):
+def horizontal_spacer(size: Union[int, None] = None) -> QSpacerItem:
     if size:
-        return QSpacerItem(size, 1, QSizePolicy.Fixed, QSizePolicy.Fixed)
+        return QSpacerItem(size, 1, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
     else:
-        return QSpacerItem(1, 1, QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        return QSpacerItem(1, 1, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
 
 
-def horizontal_wrap(widgets):
+def horizontal_wrap(widgets: List[Union[QWidget, int, None]]) -> QHBoxLayout:
     """Wrap all widgets in `widgets` in a horizontal layout.
 
     If, instead of placing a widget in your list, you place an int or None, an horizontal spacer
@@ -77,7 +73,7 @@ def create_actions(actions, target):
     for name, shortcut, icon, desc, func in actions:
         action = QAction(target)
         if icon:
-            action.setIcon(QIcon(QPixmap(":/" + icon)))
+            action.setIcon(QIcon(QPixmap(":/" + icon)))  # TODO stop using qrc file path
         if shortcut:
             action.setShortcut(shortcut)
         action.setText(desc)
@@ -100,11 +96,11 @@ def set_accel_keys(menu):
         action.setText(newtext)
 
 
-def get_appdata(portable=False):
+def get_appdata(portable: bool = False) -> str:
     if portable:
         return op.join(executable_folder(), "data")
     else:
-        return QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)[0]
+        return QStandardPaths.standardLocations(QStandardPaths.StandardLocation.AppDataLocation)[0]
 
 
 class SysWrapper(io.IOBase):
@@ -140,18 +136,18 @@ def escape_amp(s):
     return s.replace("&", "&&")
 
 
-def create_qsettings():
+def create_qsettings() -> QSettings:
     # Create a QSettings instance with the correct arguments.
     config_location = op.join(executable_folder(), "settings.ini")
     if op.isfile(config_location):
-        settings = QSettings(config_location, QSettings.IniFormat)
+        settings = QSettings(config_location, QSettings.Format.IniFormat)
         settings.setValue("Portable", True)
     elif ISWINDOWS:
         # On windows use an ini file in the AppDataLocation instead of registry if possible as it
         # makes it easier for a user to clear it out when there are issues.
-        locations = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)
+        locations = QStandardPaths.standardLocations(QStandardPaths.StandardLocation.AppDataLocation)
         if locations:
-            settings = QSettings(op.join(locations[0], "settings.ini"), QSettings.IniFormat)
+            settings = QSettings(op.join(locations[0], "settings.ini"), QSettings.Format.IniFormat)
         else:
             settings = QSettings()
         settings.setValue("Portable", False)

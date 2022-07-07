@@ -28,7 +28,7 @@ To build with a different python version 3.7 vs 3.8 or 32 bit vs 64 bit specify 
 ### With makefile
 It is possible to build dupeGuru with the makefile on windows using a compatable POSIX environment.  The following steps have been tested using [msys2][msys2]. Before running make:
 1. Install msys2 or other POSIX environment
-2. Install PyQt5 globally via pip
+2. Install PyQt6 globally via pip
 3. Use the respective console for msys2 it is `msys2 msys` 
 
 Then the following execution of the makefile should work.  Pass the correct value for PYTHON to the makefile if not on the path as python3.

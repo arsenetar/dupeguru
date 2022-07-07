@@ -7,19 +7,19 @@ These instructions are for the Qt version of the UI on macOS.
 - [Python 3.7+][python]
 - [Xcode 12.3][xcode] or just Xcode command line tools (older versions can be used if not interested in arm macs)
 - [Homebrew][homebrew]
-- [qt5](https://www.qt.io/)
+- [qt6](https://www.qt.io/)
 
 #### Prerequisite setup
 1. Install Xcode if desired
 2. Install [Homebrew][homebrew], if not on the path after install (arm based Macs) create `~/.zshrc` 
 with `export PATH="/opt/homebrew/bin:$PATH"`. Will need to reload terminal or source the file to take 
 effect.
-3. Install qt5 with `brew`. If you are using a version of macos without system python 3.7+ then you will 
+3. Install qt6 with `brew`. If you are using a version of macos without system python 3.7+ then you will 
 also need to install that via brew or with pyenv.
 
-        $ brew install qt5
+        $ brew install qt6
 
-    NOTE: Using `brew` to install qt5 is to allow pyqt5 to build without a native wheel
+    NOTE: Using `brew` to install qt6 is to allow pyqt6 to build without a native wheel
     available.  If you are using an intel based mac you can probably skip this step.
 
 4. May need to launch a new terminal to have everything working.
