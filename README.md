@@ -32,17 +32,14 @@ For macos instructions (qt version) see the [macOS Instructions](macos.md).
 
 ### Prerequisites
 * [Python 3.7+][python]
-* PyQt5
+* PyQt6
 
 ### System Setup
 When running in a linux based environment the following system packages or equivalents are needed to build:
-* python3-pyqt5
-* pyqt5-dev-tools (on some systems, see note)
+* python3-pyqt6
 * python3-venv (only if using a virtual environment)
 * python3-dev
 * build-essential
-
-Note: On some linux systems pyrcc5 is not put on the path when installing python3-pyqt5, this will cause some issues with the resource files (and icons). These systems should have a respective pyqt5-dev-tools package, which should also be installed. The presence of pyrcc5 can be checked with `which pyrcc5`.  Debian based systems need the extra package, and Arch does not.
 
 To create packages the following are also needed:
 * python3-setuptools
