@@ -1,5 +1,5 @@
 from typing import Tuple, List, Union
-from PyQt5.QtGui import QImage
+from PyQt6.QtGui import QImage
 
 _block = Tuple[int, int, int]
 
