@@ -144,13 +144,17 @@ class FilesDB:
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
+        try:
+            with self.lock:
+                self.cur.execute(
+                    self.select_query.format(key=key), {"path": str(path), "size": size, "mtime_ns": mtime_ns}
+                )
+                result = self.cur.fetchone()
 
-        with self.lock:
-            self.cur.execute(self.select_query.format(key=key), {"path": str(path), "size": size, "mtime_ns": mtime_ns})
-            result = self.cur.fetchone()
-
-        if result:
-            return result[0]
+            if result:
+                return result[0]
+        except Exception as ex:
+            logging.warning(f"Couldn't get {key} for {path} w/{size}, {mtime_ns}: {ex}")
 
         return None
 
@@ -158,12 +162,14 @@ class FilesDB:
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
-
-        with self.lock:
-            self.cur.execute(
-                self.insert_query.format(key=key),
-                {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
-            )
+        try:
+            with self.lock:
+                self.cur.execute(
+                    self.insert_query.format(key=key),
+                    {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
+                )
+        except Exception as ex:
+            logging.warning(f"Couldn't put {key} for {path} w/{size}, {mtime_ns}: {ex}")
 
     def commit(self) -> None:
         with self.lock:
@@ -265,34 +271,25 @@ class File:
             self.size = nonone(stats.st_size, 0)
             self.mtime = nonone(stats.st_mtime, 0)
         elif field == "digest_partial":
-            try:
-                self.digest_partial = filesdb.get(self.path, "digest_partial")
-                if self.digest_partial is None:
-                    self.digest_partial = self._calc_digest_partial()
-                    filesdb.put(self.path, "digest_partial", self.digest_partial)
-            except Exception as e:
-                logging.warning("Couldn't get digest_partial for %s: %s", self.path, e)
+            self.digest_partial = filesdb.get(self.path, "digest_partial")
+            if self.digest_partial is None:
+                self.digest_partial = self._calc_digest_partial()
+                filesdb.put(self.path, "digest_partial", self.digest_partial)
         elif field == "digest":
-            try:
-                self.digest = filesdb.get(self.path, "digest")
-                if self.digest is None:
-                    self.digest = self._calc_digest()
-                    filesdb.put(self.path, "digest", self.digest)
-            except Exception as e:
-                logging.warning("Couldn't get digest for %s: %s", self.path, e)
+            self.digest = filesdb.get(self.path, "digest")
+            if self.digest is None:
+                self.digest = self._calc_digest()
+                filesdb.put(self.path, "digest", self.digest)
         elif field == "digest_samples":
             size = self.size
             # Might as well hash such small files entirely.
             if size <= MIN_FILE_SIZE:
                 setattr(self, field, self.digest)
                 return
-            try:
-                self.digest_samples = filesdb.get(self.path, "digest_samples")
-                if self.digest_samples is None:
-                    self.digest_samples = self._calc_digest_samples()
-                    filesdb.put(self.path, "digest_samples", self.digest_samples)
-            except Exception as e:
-                logging.warning(f"Couldn't get digest_samples for {self.path}: {e}")
+            self.digest_samples = filesdb.get(self.path, "digest_samples")
+            if self.digest_samples is None:
+                self.digest_samples = self._calc_digest_samples()
+                filesdb.put(self.path, "digest_samples", self.digest_samples)
 
     def _read_all_info(self, attrnames=None):
         """Cache all possible info.
