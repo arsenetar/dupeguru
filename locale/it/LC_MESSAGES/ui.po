@@ -2,15 +2,16 @@
 # Andrew Senetar <arsenetar@gmail.com>, 2022
 # Emanuele, 2022
 # Fuan <jcfrt@posteo.net>, 2022
+# Giovanni, 2022
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2022\n"
+"Last-Translator: Giovanni, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/voltaicideas/teams/116153/it/)\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: qt/app.py:81
 msgid "Quit"
@@ -979,37 +980,40 @@ msgstr "Ignora file più grandi di"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
-msgstr ""
+msgstr "Svuota cache"
 
 #: qt\app.py:294
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
 msgstr ""
+"Vuoi davvero svuotare la cache? Ciò rimuoverà tutti gli hash dei file "
+"memorizzati nella cache e le analisi delle immagini."
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr ""
+msgstr "Cache svuotata"
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
-msgstr ""
+msgstr "Usa stile scuro"
 
 #: qt\preferences_dialog.py:241
 msgid "Profile scan operation"
-msgstr ""
+msgstr "Profila l'operazione di scansione"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
 msgstr ""
+"Profila l'operazione di scansione e salva i registri per l'ottimizzazione."
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
-msgstr ""
+msgstr "I log si trovano in: <a href=\"{}\">{}</a>"
 
 #: qt\preferences_dialog.py:291
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #: qt\about_box.py:31
 msgid "About {}"
@@ -1021,7 +1025,7 @@ msgstr "Versione {}"
 
 #: qt\about_box.py:49 qt\about_box.py:75
 msgid "Checking for updates..."
-msgstr ""
+msgstr "Controllo degli aggiornamenti..."
 
 #: qt\about_box.py:54
 msgid "Licensed under GPLv3"
@@ -1029,11 +1033,11 @@ msgstr "Distribuito sotto licenza GPLv3"
 
 #: qt\about_box.py:68
 msgid "No update available."
-msgstr ""
+msgstr "Nessun aggiornamento disponibile."
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr ""
+msgstr "È disponibile la nuova versione {}, scaricabile <a href=\"{}\">qui</a>."
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
