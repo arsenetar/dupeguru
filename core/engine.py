@@ -309,7 +309,7 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
                     if first.digest_samples == second.digest_samples and first.digest_samples is not None:
                         result.append(Match(first, second, 100))
                 else:
-                    if first.digest == second.digest and first.digest_samples is not None:
+                    if first.digest == second.digest and first.digest is not None:
                         result.append(Match(first, second, 100))
         group_count += 1
         j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))
