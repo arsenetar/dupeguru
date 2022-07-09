@@ -82,7 +82,7 @@ def get_locale_name(lang: str) -> Union[str, None]:
 
 # --- Qt
 def install_qt_trans(lang: str = None) -> None:
-    from PyQt5.QtCore import QCoreApplication, QTranslator, QLocale
+    from PyQt6.QtCore import QCoreApplication, QTranslator, QLocale
 
     if not lang:
         lang = str(QLocale.system().name())[:2]
@@ -139,7 +139,7 @@ def install_gettext_trans_under_qt(base_folder: os.PathLike, lang: str = None) -
     # So, we install the gettext locale, great, but we also should try to install qt_*.qm if
     # available so that strings that are inside Qt itself over which I have no control are in the
     # right language.
-    from PyQt5.QtCore import QCoreApplication, QTranslator, QLocale, QLibraryInfo
+    from PyQt6.QtCore import QCoreApplication, QTranslator, QLocale, QLibraryInfo
 
     if not lang:
         lang = str(QLocale.system().name())[:2]
@@ -155,7 +155,7 @@ def install_gettext_trans_under_qt(base_folder: os.PathLike, lang: str = None) -
     if ISLINUX:
         # Under linux, a full Qt installation is already available in the system, we didn't bundle
         # up the qm files in our package, so we have to load translations from the system.
-        qmpath = op.join(QLibraryInfo.location(QLibraryInfo.TranslationsPath), qmname)
+        qmpath = op.join(QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath), qmname)
     else:
         qmpath = op.join(base_folder, qmname)
     qtr = QTranslator(QCoreApplication.instance())

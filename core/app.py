@@ -555,7 +555,9 @@ class DupeGuru(Broadcaster):
                 # a workaround to make the damn thing work.
                 exepath, args = match.groups()
                 path, exename = op.split(exepath)
-                p = subprocess.Popen(exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                p = subprocess.Popen(
+                    exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                )
                 output = p.stdout.read()
                 logging.info("Custom command %s %s: %s", exename, args, output)
             else:

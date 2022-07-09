@@ -40,7 +40,7 @@ jobs:
         name: Build Cpp
         run: |
           sudo apt-get update
-          sudo apt-get install python3-pyqt5
+          sudo apt-get install python3-pyqt6
           make modules
       - if: matrix.language == 'python'
         name: Autobuild

@@ -27,7 +27,7 @@ also need to install that via brew or with pyenv.
 ### With build.py
 OSX comes with a version of python 3 by default in newer versions of OSX.  To produce universal 
 builds either the 3.8 version shipped in macos or 3.9.1 or newer needs to be used. If needing to
-build pyqt5 from source then the first line below is needed, else it may be omitted. (Path shown is 
+build pyqt6 from source then the first line below is needed, else it may be omitted. (Path shown is 
 for an arm mac.)
 
     $ export PATH="/opt/homebrew/opt/qt/bin:$PATH"

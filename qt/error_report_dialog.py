@@ -11,8 +11,8 @@ import sys
 import os
 import platform
 
-from PyQt5.QtCore import Qt, QCoreApplication, QSize
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QCoreApplication, QSize
+from PyQt6.QtWidgets import (
     QDialog,
     QVBoxLayout,
     QHBoxLayout,
@@ -30,7 +30,7 @@ tr = trget("ui")
 
 class ErrorReportDialog(QDialog):
     def __init__(self, parent, github_url, error, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
+        flags = Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self._setupUi()
         name = QCoreApplication.applicationName()
@@ -40,23 +40,23 @@ class ErrorReportDialog(QDialog):
         )
         # Under windows, we end up with an error report without linesep if we don't mangle it
         error_text = error_text.replace("\n", os.linesep)
-        self.errorTextEdit.setPlainText(error_text)
+        self.error_text_edit.setPlainText(error_text)
         self.github_url = github_url
-
-        self.sendButton.clicked.connect(self.goToGithub)
-        self.dontSendButton.clicked.connect(self.reject)
 
     def _setupUi(self):
         self.setWindowTitle(tr("Error Report"))
         self.resize(553, 349)
-        self.verticalLayout = QVBoxLayout(self)
-        self.label = QLabel(self)
-        self.label.setText(tr("Something went wrong. How about reporting the error?"))
-        self.label.setWordWrap(True)
-        self.verticalLayout.addWidget(self.label)
-        self.errorTextEdit = QPlainTextEdit(self)
-        self.errorTextEdit.setReadOnly(True)
-        self.verticalLayout.addWidget(self.errorTextEdit)
+        main_layout = QVBoxLayout(self)
+
+        title_label = QLabel(self)
+        title_label.setText(tr("Something went wrong. How about reporting the error?"))
+        title_label.setWordWrap(True)
+        main_layout.addWidget(title_label)
+
+        self.error_text_edit = QPlainTextEdit(self)
+        self.error_text_edit.setReadOnly(True)
+        main_layout.addWidget(self.error_text_edit)
+
         msg = tr(
             "Error reports should be reported as Github issues. You can copy the error traceback "
             "above and paste it in a new issue.\n\nPlease make sure to run a search for any already "
@@ -67,21 +67,28 @@ class ErrorReportDialog(QDialog):
             "Although the application should continue to run after this error, it may be in an "
             "unstable state, so it is recommended that you restart the application."
         )
-        self.label2 = QLabel(msg)
-        self.label2.setWordWrap(True)
-        self.verticalLayout.addWidget(self.label2)
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.addItem(horizontal_spacer())
-        self.dontSendButton = QPushButton(self)
-        self.dontSendButton.setText(tr("Close"))
-        self.dontSendButton.setMinimumSize(QSize(110, 0))
-        self.horizontalLayout.addWidget(self.dontSendButton)
-        self.sendButton = QPushButton(self)
-        self.sendButton.setText(tr("Go to Github"))
-        self.sendButton.setMinimumSize(QSize(110, 0))
-        self.sendButton.setDefault(True)
-        self.horizontalLayout.addWidget(self.sendButton)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        instructions_label = QLabel(msg)
+        instructions_label.setWordWrap(True)
+        main_layout.addWidget(instructions_label)
+
+        button_layout = QHBoxLayout()
+        button_layout.addItem(horizontal_spacer())
+
+        close_button = QPushButton(self)
+        close_button.setText(tr("Close"))
+        close_button.setMinimumSize(QSize(110, 0))
+        button_layout.addWidget(close_button)
+
+        report_button = QPushButton(self)
+        report_button.setText(tr("Go to Github"))
+        report_button.setMinimumSize(QSize(110, 0))
+        report_button.setDefault(True)
+        button_layout.addWidget(report_button)
+
+        main_layout.addLayout(button_layout)
+
+        report_button.clicked.connect(self.goToGithub)
+        close_button.clicked.connect(self.reject)
 
     def goToGithub(self):
         open_url(self.github_url)
@@ -91,6 +98,6 @@ def install_excepthook(github_url):
     def my_excepthook(exctype, value, tb):
         s = "".join(traceback.format_exception(exctype, value, tb))
         dialog = ErrorReportDialog(None, github_url, s)
-        dialog.exec_()
+        dialog.exec()
 
     sys.excepthook = my_excepthook

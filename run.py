@@ -9,8 +9,8 @@ import sys
 import os.path as op
 import gc
 
-from PyQt6.QtCore import QCoreApplication
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtCore import QDir
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QApplication
 
 from hscommon.trans import install_gettext_trans_under_qt
@@ -48,9 +48,10 @@ def setup_signals():
 
 def main():
     app = QApplication(sys.argv)
-    QCoreApplication.setOrganizationName("Hardcoded Software")
-    QCoreApplication.setApplicationName(__appname__)
-    QCoreApplication.setApplicationVersion(__version__)
+    QApplication.setOrganizationName("Hardcoded Software")
+    QApplication.setApplicationName(__appname__)
+    QApplication.setApplicationVersion(__version__)
+    QDir.addSearchPath("images", op.join(BASE_PATH, "images"))
     setup_qt_logging()
     settings = create_qsettings()
     lang = settings.value("Language")
@@ -70,7 +71,7 @@ def main():
     # has been installed
     from qt.app import DupeGuru
 
-    app.setWindowIcon(QIcon(QPixmap(f":/{DupeGuru.LOGO_NAME}")))
+    app.setWindowIcon(QIcon(f"images:{DupeGuru.LOGO_NAME}_32.png"))
     global dgapp
     dgapp = DupeGuru()
     install_excepthook("https://github.com/arsenetar/dupeguru/issues")
