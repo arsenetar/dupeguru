@@ -44,8 +44,8 @@ def special_folder_path(special_folder: SpecialFolder, portable: bool = False) -
 
 
 try:
-    from PyQt5.QtCore import QUrl, QStandardPaths
-    from PyQt5.QtGui import QDesktopServices
+    from PyQt6.QtCore import QUrl, QStandardPaths
+    from PyQt6.QtGui import QDesktopServices
     from qt.util import get_appdata
     from core.util import executable_folder
     from hscommon.plat import ISWINDOWS, ISOSX
@@ -71,7 +71,7 @@ try:
             if ISWINDOWS and portable:
                 folder = op.join(executable_folder(), "cache")
             else:
-                folder = QStandardPaths.standardLocations(QStandardPaths.CacheLocation)[0]
+                folder = QStandardPaths.standardLocations(QStandardPaths.StandardLocation.CacheLocation)[0]
         else:
             folder = get_appdata(portable)
         return folder
