@@ -4,27 +4,22 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import (
-    QVBoxLayout,
-    QHBoxLayout,
-    QLabel,
-    QSizePolicy,
-    QSpacerItem,
-    QWidget,
-)
+from typing import Callable
+from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QCheckBox
 
 from hscommon.trans import trget
 from core.app import AppMode
 from core.scanner import ScanType
+from qt.preferences import Preferences
 
-from qt.preferences_dialog import PreferencesDialogBase
+from qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")
 
 
 class PreferencesDialog(PreferencesDialogBase):
-    def _setupPreferenceWidgets(self):
+    def _setupPreferenceWidgets(self) -> None:
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -37,7 +32,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.verticalLayout_4.addWidget(self.label_6)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setSpacing(0)
-        spacer_item = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        spacer_item = QSpacerItem(15, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacer_item)
         self._setupAddCheckbox("tagTrackBox", tr("Track"), self.widget)
         self.horizontalLayout_2.addWidget(self.tagTrackBox)
@@ -70,7 +65,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
         self._setupBottomPart()
 
-    def _load(self, prefs, setchecked, section):
+    def _load(self, prefs: Preferences, setchecked: Callable[[QCheckBox, bool], None], section: Sections) -> None:
         setchecked(self.tagTrackBox, prefs.scan_tag_track)
         setchecked(self.tagArtistBox, prefs.scan_tag_artist)
         setchecked(self.tagAlbumBox, prefs.scan_tag_album)
@@ -99,7 +94,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.tagGenreBox.setEnabled(tag_based)
         self.tagYearBox.setEnabled(tag_based)
 
-    def _save(self, prefs, ischecked):
+    def _save(self, prefs: Preferences, ischecked: Callable[[QCheckBox], bool]) -> None:
         prefs.scan_tag_track = ischecked(self.tagTrackBox)
         prefs.scan_tag_artist = ischecked(self.tagArtistBox)
         prefs.scan_tag_album = ischecked(self.tagAlbumBox)
