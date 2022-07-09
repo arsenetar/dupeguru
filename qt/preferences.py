@@ -4,9 +4,10 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtWidgets import QApplication, QDockWidget
-from PyQt5.QtCore import Qt, QRect, QObject, pyqtSignal
-from PyQt5.QtGui import QColor
+from typing import Any, Tuple
+from PyQt6.QtWidgets import QApplication, QDockWidget
+from PyQt6.QtCore import Qt, QRect, QObject, pyqtSignal
+from PyQt6.QtGui import QColor
 
 from hscommon import trans
 from hscommon.plat import ISLINUX
@@ -126,7 +127,7 @@ class PreferencesBase(QObject):
     def set_value(self, name, value):
         self._settings.setValue(name, _normalize_for_serialization(value))
 
-    def saveGeometry(self, name, widget):
+    def saveGeometry(self, name, widget) -> None:
         # We save geometry under a 7-sized int array: first item is a flag
         # for whether the widget is maximized, second item is a flag for whether
         # the widget is docked, third item is a Qt::DockWidgetArea enum value,
@@ -138,12 +139,12 @@ class PreferencesBase(QObject):
         rect_as_list = [r.x(), r.y(), r.width(), r.height()]
         self.set_value(name, [m, d, area] + rect_as_list)
 
-    def restoreGeometry(self, name, widget):
+    def restoreGeometry(self, name, widget) -> Tuple[bool, Any]:
         geometry = self.get_value(name)
         if geometry and len(geometry) == 7:
             m, d, area, x, y, w, h = geometry
             if m:
-                widget.setWindowState(Qt.WindowMaximized)
+                widget.setWindowState(Qt.WindowState.WindowMaximized)
             else:
                 r = QRect(x, y, w, h)
                 widget.setGeometry(r)
@@ -154,7 +155,7 @@ class PreferencesBase(QObject):
 
 
 class Preferences(PreferencesBase):
-    def _load_values(self, settings):
+    def _load_values(self, settings) -> None:
         get = self.get_value
         self.filter_hardness = get("FilterHardness", self.filter_hardness)
         self.mix_file_kind = get("MixFileKind", self.mix_file_kind)
@@ -225,7 +226,7 @@ class Preferences(PreferencesBase):
         self.match_scaled = get("MatchScaled", self.match_scaled)
         self.picture_cache_type = get("PictureCacheType", self.picture_cache_type)
 
-    def reset(self):
+    def reset(self) -> None:
         self.filter_hardness = 95
         self.mix_file_kind = True
         self.use_regexp = False
@@ -247,8 +248,8 @@ class Preferences(PreferencesBase):
         # By default use internal icons on platforms other than Linux for now
         self.details_dialog_override_theme_icons = False if not ISLINUX else True
         self.details_dialog_viewers_show_scrollbars = True
-        self.result_table_ref_foreground_color = QColor(Qt.blue)
-        self.result_table_ref_background_color = QColor(Qt.lightGray)
+        self.result_table_ref_foreground_color = QColor(Qt.GlobalColor.blue)
+        self.result_table_ref_background_color = QColor(Qt.GlobalColor.lightGray)
         self.result_table_delta_foreground_color = QColor(255, 142, 40)  # orange
         self.resultWindowIsMaximized = False
         self.resultWindowRect = None
@@ -276,7 +277,7 @@ class Preferences(PreferencesBase):
         self.match_scaled = False
         self.picture_cache_type = "sqlite"
 
-    def _save_values(self, settings):
+    def _save_values(self, settings) -> None:
         set_ = self.set_value
         set_("FilterHardness", self.filter_hardness)
         set_("MixFileKind", self.mix_file_kind)

@@ -4,29 +4,23 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import (
-    QSpinBox,
-    QVBoxLayout,
-    QHBoxLayout,
-    QLabel,
-    QSizePolicy,
-    QSpacerItem,
-    QWidget,
-)
+from typing import Callable
+from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QSpinBox, QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QCheckBox
 
 from hscommon.trans import trget
 
 from core.app import AppMode
 from core.scanner import ScanType
+from qt.preferences import Preferences
 
-from qt.preferences_dialog import PreferencesDialogBase
+from qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")
 
 
 class PreferencesDialog(PreferencesDialogBase):
-    def _setupPreferenceWidgets(self):
+    def _setupPreferenceWidgets(self) -> None:
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self.widget = QWidget(self)
@@ -50,7 +44,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self._setupAddCheckbox("ignoreSmallFilesBox", tr("Ignore files smaller than"), self.widget)
         self.horizontalLayout_2.addWidget(self.ignoreSmallFilesBox)
         self.sizeThresholdSpinBox = QSpinBox(self.widget)
-        size_policy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(self.sizeThresholdSpinBox.sizePolicy().hasHeightForWidth())
@@ -61,14 +55,14 @@ class PreferencesDialog(PreferencesDialogBase):
         self.label_6 = QLabel(self.widget)
         self.label_6.setText(tr("KB"))
         self.horizontalLayout_2.addWidget(self.label_6)
-        spacer_item1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer_item1 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacer_item1)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_2a = QHBoxLayout()
         self._setupAddCheckbox("ignoreLargeFilesBox", tr("Ignore files larger than"), self.widget)
         self.horizontalLayout_2a.addWidget(self.ignoreLargeFilesBox)
         self.sizeSaturationSpinBox = QSpinBox(self.widget)
-        size_policy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         self.sizeSaturationSpinBox.setSizePolicy(size_policy)
         self.sizeSaturationSpinBox.setMaximumSize(QSize(300, 16777215))
         self.sizeSaturationSpinBox.setRange(0, 1000000)
@@ -76,7 +70,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.label_6a = QLabel(self.widget)
         self.label_6a.setText(tr("MB"))
         self.horizontalLayout_2a.addWidget(self.label_6a)
-        spacer_item3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer_item3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2a.addItem(spacer_item3)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2a)
         self.horizontalLayout_2b = QHBoxLayout()
@@ -94,7 +88,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.label_6b = QLabel(self.widget)
         self.label_6b.setText(tr("MB"))
         self.horizontalLayout_2b.addWidget(self.label_6b)
-        spacer_item2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer_item2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2b.addItem(spacer_item2)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2b)
         self._setupAddCheckbox(
@@ -106,7 +100,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.widget)
         self._setupBottomPart()
 
-    def _load(self, prefs, setchecked, section):
+    def _load(self, prefs: Preferences, setchecked: Callable[[QCheckBox, bool], None], section: Sections) -> None:
         setchecked(self.matchSimilarBox, prefs.match_similar)
         setchecked(self.wordWeightingBox, prefs.word_weighting)
         setchecked(self.ignoreSmallFilesBox, prefs.ignore_small_files)
@@ -123,7 +117,7 @@ class PreferencesDialog(PreferencesDialogBase):
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)
 
-    def _save(self, prefs, ischecked):
+    def _save(self, prefs: Preferences, ischecked: Callable[[QCheckBox], bool]) -> None:
         prefs.match_similar = ischecked(self.matchSimilarBox)
         prefs.word_weighting = ischecked(self.wordWeightingBox)
         prefs.ignore_small_files = ischecked(self.ignoreSmallFilesBox)

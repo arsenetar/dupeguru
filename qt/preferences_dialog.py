@@ -4,8 +4,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSlot
-from PyQt5.QtWidgets import (
+from typing import Union
+from PyQt6.QtCore import Qt, QSize, pyqtSlot
+from PyQt6.QtWidgets import (
     QDialog,
     QDialogButtonBox,
     QVBoxLayout,
@@ -28,7 +29,7 @@ from PyQt5.QtWidgets import (
     QGroupBox,
     QFormLayout,
 )
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt6.QtGui import QPixmap, QIcon, QShowEvent
 from hscommon import desktop, plat
 
 from hscommon.trans import trget
@@ -38,6 +39,11 @@ from qt.preferences import get_langnames
 from enum import Flag, auto
 
 from qt.preferences import Preferences
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from qt.app import DupeGuru
 
 tr = trget("ui")
 
@@ -52,8 +58,8 @@ class Sections(Flag):
 
 
 class PreferencesDialogBase(QDialog):
-    def __init__(self, parent, app, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
+    def __init__(self, parent: QWidget, app: "DupeGuru", **kwargs):
+        flags = Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
         self.supportedLanguages = dict(sorted(get_langnames().items(), key=lambda item: item[1]))
@@ -65,7 +71,7 @@ class PreferencesDialogBase(QDialog):
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
-    def _setupFilterHardnessBox(self):
+    def _setupFilterHardnessBox(self) -> None:
         self.filterHardnessHLayout = QHBoxLayout()
         self.filterHardnessLabel = QLabel(self)
         self.filterHardnessLabel.setText(tr("Filter Hardness:"))
@@ -76,7 +82,7 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessHLayoutSub1 = QHBoxLayout()
         self.filterHardnessHLayoutSub1.setSpacing(12)
         self.filterHardnessSlider = QSlider(self)
-        size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(self.filterHardnessSlider.sizePolicy().hasHeightForWidth())
@@ -84,7 +90,7 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessSlider.setMinimum(1)
         self.filterHardnessSlider.setMaximum(100)
         self.filterHardnessSlider.setTracking(True)
-        self.filterHardnessSlider.setOrientation(Qt.Horizontal)
+        self.filterHardnessSlider.setOrientation(Qt.Orientation.Horizontal)
         self.filterHardnessHLayoutSub1.addWidget(self.filterHardnessSlider)
         self.filterHardnessLabel = QLabel(self)
         self.filterHardnessLabel.setText("100")
@@ -96,7 +102,7 @@ class PreferencesDialogBase(QDialog):
         self.moreResultsLabel = QLabel(self)
         self.moreResultsLabel.setText(tr("More Results"))
         self.filterHardnessHLayoutSub2.addWidget(self.moreResultsLabel)
-        spacer_item = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer_item = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.filterHardnessHLayoutSub2.addItem(spacer_item)
         self.fewerResultsLabel = QLabel(self)
         self.fewerResultsLabel.setText(tr("Fewer Results"))
@@ -104,7 +110,7 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessVLayout.addLayout(self.filterHardnessHLayoutSub2)
         self.filterHardnessHLayout.addLayout(self.filterHardnessVLayout)
 
-    def _setupBottomPart(self):
+    def _setupBottomPart(self) -> None:
         # The bottom part of the pref panel is always the same in all editions.
         self.copyMoveLabel = QLabel(self)
         self.copyMoveLabel.setText(tr("Copy and Move:"))
@@ -120,7 +126,7 @@ class PreferencesDialogBase(QDialog):
         self.customCommandEdit = QLineEdit(self)
         self.widgetsVLayout.addWidget(self.customCommandEdit)
 
-    def _setupDisplayPage(self):
+    def _setupDisplayPage(self) -> None:
         self.ui_groupbox = QGroupBox("&" + tr("General Interface"))
         layout = QVBoxLayout()
         self.languageLabel = QLabel(tr("Language:"), self)
@@ -171,7 +177,7 @@ On MacOS, the tab bar will fill up the window's width instead."
         formlayout.addRow(tr("Reference background color:"), self.result_table_ref_background_color)
         self.result_table_delta_foreground_color = ColorPickerButton(self)
         formlayout.addRow(tr("Delta foreground color:"), self.result_table_delta_foreground_color)
-        formlayout.setLabelAlignment(Qt.AlignLeft)
+        formlayout.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
 
         # Keep same vertical spacing as parent layout for consistency
         formlayout.setVerticalSpacing(self.displayVLayout.spacing())
@@ -213,7 +219,7 @@ use the modifier key to drag the floating window around"
         details_groupbox.setLayout(self.details_groupbox_layout)
         self.displayVLayout.addWidget(details_groupbox)
 
-    def _setupDebugPage(self):
+    def _setupDebugPage(self) -> None:
         self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self._setupAddCheckbox("profile_scan_box", tr("Profile scan operation"))
         self.profile_scan_box.setToolTip(tr("Profile the scan operation and save logs for optimization."))
@@ -225,7 +231,7 @@ use the modifier key to drag the floating window around"
         )
         self.debugVLayout.addWidget(self.debug_location_label)
 
-    def _setupAddCheckbox(self, name, label, parent=None):
+    def _setupAddCheckbox(self, name: str, label: str, parent: Union[QWidget, None] = None) -> None:
         if parent is None:
             parent = self
         cb = QCheckBox(parent)
@@ -236,7 +242,7 @@ use the modifier key to drag the floating window around"
         # Edition-specific
         pass
 
-    def _setupUi(self):
+    def _setupUi(self) -> None:
         self.setWindowTitle(tr("Options"))
         self.setSizeGripEnabled(False)
         self.setModal(True)
@@ -258,11 +264,13 @@ use the modifier key to drag the floating window around"
         # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setStandardButtons(
-            QDialogButtonBox.Cancel | QDialogButtonBox.Ok | QDialogButtonBox.RestoreDefaults
+            QDialogButtonBox.StandardButton.Cancel
+            | QDialogButtonBox.StandardButton.Ok
+            | QDialogButtonBox.StandardButton.RestoreDefaults
         )
         self.mainVLayout.addWidget(self.tabwidget)
         self.mainVLayout.addWidget(self.buttonBox)
-        self.layout().setSizeConstraint(QLayout.SetFixedSize)
+        self.layout().setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
         self.tabwidget.addTab(self.page_general, tr("General"))
         self.tabwidget.addTab(self.page_display, tr("Display"))
         self.tabwidget.addTab(self.page_debug, tr("Debug"))
@@ -270,20 +278,20 @@ use the modifier key to drag the floating window around"
         self.widgetsVLayout.addStretch(0)
         self.debugVLayout.addStretch(0)
 
-    def _load(self, prefs, setchecked, section):
+    def _load(self, prefs, setchecked, section) -> None:
         # Edition-specific
         pass
 
-    def _save(self, prefs, ischecked):
+    def _save(self, prefs, ischecked) -> None:
         # Edition-specific
         pass
 
-    def load(self, prefs=None, section=Sections.ALL):
+    def load(self, prefs: Preferences = None, section: Sections = Sections.ALL) -> None:
         if prefs is None:
             prefs = self.app.prefs
 
-        def setchecked(cb, b):
-            cb.setCheckState(Qt.Checked if b else Qt.Unchecked)
+        def setchecked(cb: QCheckBox, b: bool) -> None:
+            cb.setCheckState(Qt.CheckState.Checked if b else Qt.CheckState.Unchecked)
 
         if section & Sections.GENERAL:
             self.filterHardnessSlider.setValue(prefs.filter_hardness)
@@ -323,12 +331,12 @@ use the modifier key to drag the floating window around"
             setchecked(self.profile_scan_box, prefs.profile_scan)
         self._load(prefs, setchecked, section)
 
-    def save(self):
+    def save(self) -> None:
         prefs = self.app.prefs
         prefs.filter_hardness = self.filterHardnessSlider.value()
 
-        def ischecked(cb):
-            return cb.checkState() == Qt.Checked
+        def ischecked(cb: QCheckBox) -> bool:
+            return cb.checkState() == Qt.CheckState.Checked
 
         prefs.mix_file_kind = ischecked(self.mixFileKindBox)
         prefs.use_regexp = ischecked(self.useRegexpBox)
@@ -363,13 +371,13 @@ use the modifier key to drag the floating window around"
         self.app.prefs.language = lang_code
         self._save(prefs, ischecked)
 
-    def resetToDefaults(self, section_to_update):
+    def resetToDefaults(self, section_to_update: Sections) -> None:
         self.load(Preferences(), section_to_update)
 
     # --- Events
-    def buttonClicked(self, button):
+    def buttonClicked(self, button: QPushButton) -> None:
         role = self.buttonBox.buttonRole(button)
-        if role == QDialogButtonBox.ResetRole:
+        if role == QDialogButtonBox.ButtonRole.ResetRole:
             current_tab = self.tabwidget.currentWidget()
             section_to_update = Sections.ALL
             if current_tab is self.page_general:
@@ -380,30 +388,31 @@ use the modifier key to drag the floating window around"
                 section_to_update = Sections.DEBUG
             self.resetToDefaults(section_to_update)
 
-    def showEvent(self, event):
+    def showEvent(self, event: QShowEvent) -> None:
         # have to do this here as the frameGeometry is not correct until shown
         move_to_screen_center(self)
         super().showEvent(event)
 
 
 class ColorPickerButton(QPushButton):
-    def __init__(self, parent):
+    def __init__(self, parent: QWidget) -> None:
         super().__init__(parent)
-        self.parent = parent
         self.color = None
         self.clicked.connect(self.onClicked)
 
     @pyqtSlot()
-    def onClicked(self):
-        color = QColorDialog.getColor(self.color if self.color is not None else Qt.white, self.parent)
+    def onClicked(self) -> None:
+        color = QColorDialog.getColor(
+            self.color if self.color is not None else Qt.GlobalColor.white, self.parentWidget()
+        )
         self.setColor(color)
 
-    def setColor(self, color):
+    def setColor(self, color) -> None:
         size = QSize(16, 16)
         px = QPixmap(size)
         if color is None:
-            size.width = 0
-            size.height = 0
+            size.setWidth(0)
+            size.setHeight(0)
         elif not color.isValid():
             return
         else:

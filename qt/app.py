@@ -6,15 +6,18 @@
 
 import sys
 import os.path as op
+from typing import Type
 
-from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
-from PyQt5.QtGui import QColor, QDesktopServices, QPalette
-from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QStyleFactory, QToolTip
+from PyQt6.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
+from PyQt6.QtGui import QColor, QDesktopServices, QPalette
+from PyQt6.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QStyleFactory, QToolTip
 
 from hscommon.trans import trget
 from hscommon import desktop, plat
 
 from qt.about_box import AboutBox
+from qt.details_dialog import DetailsDialog
+from qt.preferences_dialog import PreferencesDialogBase
 from qt.recent import Recent
 from qt.util import create_actions
 from qt.progress_window import ProgressWindow
@@ -42,10 +45,10 @@ tr = trget("ui")
 
 
 class DupeGuru(QObject):
-    LOGO_NAME = "logo_se"
+    LOGO_NAME = "dgse_logo"
     NAME = "dupeGuru"
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.prefs = Preferences()
         self.prefs.load()
@@ -56,7 +59,7 @@ class DupeGuru(QObject):
         self._setup()
 
     # --- Private
-    def _setup(self):
+    def _setup(self) -> None:
         core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
         self.details_dialog = None
@@ -108,7 +111,7 @@ class DupeGuru(QObject):
         # that the application haven't launched.
         QTimer.singleShot(0, self.finishedLaunching)
 
-    def _setupActions(self):
+    def _setupActions(self) -> None:
         # Setup actions that are common to both the directory dialog and the results window.
         # (name, shortcut, icon, desc, func)
         ACTIONS = [
@@ -154,7 +157,7 @@ class DupeGuru(QObject):
         ]
         create_actions(ACTIONS, self)
 
-    def _update_options(self):
+    def _update_options(self) -> None:
         self.model.options["mix_file_kind"] = self.prefs.mix_file_kind
         self.model.options["escape_filter_regexp"] = not self.prefs.use_regexp
         self.model.options["clean_empty_dirs"] = self.prefs.remove_empty_folders
@@ -200,7 +203,7 @@ class DupeGuru(QObject):
         self._set_style("dark" if self.prefs.use_dark_style else "light")
 
     # --- Private
-    def _get_details_dialog_class(self):
+    def _get_details_dialog_class(self) -> Type[DetailsDialog]:
         if self.model.app_mode == AppMode.PICTURE:
             return DetailsDialogPicture
         elif self.model.app_mode == AppMode.MUSIC:
@@ -208,7 +211,7 @@ class DupeGuru(QObject):
         else:
             return DetailsDialogStandard
 
-    def _get_preferences_dialog_class(self):
+    def _get_preferences_dialog_class(self) -> Type[PreferencesDialogBase]:
         if self.model.app_mode == AppMode.PICTURE:
             return PreferencesDialogPicture
         elif self.model.app_mode == AppMode.MUSIC:
@@ -216,7 +219,7 @@ class DupeGuru(QObject):
         else:
             return PreferencesDialogStandard
 
-    def _set_style(self, style="light"):
+    def _set_style(self, style: str = "light") -> None:
         # Only support this feature on windows for now
         if not plat.ISWINDOWS:
             return
@@ -224,18 +227,18 @@ class DupeGuru(QObject):
             QApplication.setStyle(QStyleFactory.create("Fusion"))
             palette = QApplication.style().standardPalette()
             palette.setColor(QPalette.ColorRole.Window, QColor(53, 53, 53))
-            palette.setColor(QPalette.ColorRole.WindowText, Qt.white)
+            palette.setColor(QPalette.ColorRole.WindowText, Qt.GlobalColor.white)
             palette.setColor(QPalette.ColorRole.Base, QColor(25, 25, 25))
             palette.setColor(QPalette.ColorRole.AlternateBase, QColor(53, 53, 53))
             palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(53, 53, 53))
-            palette.setColor(QPalette.ColorRole.ToolTipText, Qt.white)
-            palette.setColor(QPalette.ColorRole.Text, Qt.white)
+            palette.setColor(QPalette.ColorRole.ToolTipText, Qt.GlobalColor.white)
+            palette.setColor(QPalette.ColorRole.Text, Qt.GlobalColor.white)
             palette.setColor(QPalette.ColorRole.Button, QColor(53, 53, 53))
-            palette.setColor(QPalette.ColorRole.ButtonText, Qt.white)
-            palette.setColor(QPalette.ColorRole.BrightText, Qt.red)
+            palette.setColor(QPalette.ColorRole.ButtonText, Qt.GlobalColor.white)
+            palette.setColor(QPalette.ColorRole.BrightText, Qt.GlobalColor.red)
             palette.setColor(QPalette.ColorRole.Link, QColor(42, 130, 218))
             palette.setColor(QPalette.ColorRole.Highlight, QColor(42, 130, 218))
-            palette.setColor(QPalette.ColorRole.HighlightedText, Qt.black)
+            palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.black)
             palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text, QColor(164, 166, 168))
             palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.WindowText, QColor(164, 166, 168))
             palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, QColor(164, 166, 168))
@@ -250,29 +253,31 @@ class DupeGuru(QObject):
         QApplication.setPalette(palette)
 
     # --- Public
-    def add_selected_to_ignore_list(self):
+    def add_selected_to_ignore_list(self) -> None:
         self.model.add_selected_to_ignore_list()
 
-    def remove_selected(self):
-        self.model.remove_selected(self)
+    def remove_selected(self) -> None:
+        self.model.remove_selected()
 
-    def confirm(self, title, msg, default_button=QMessageBox.Yes):
+    def confirm(
+        self, title: str, msg: str, default_button: QMessageBox.StandardButton = QMessageBox.StandardButton.Yes
+    ) -> bool:
         active = QApplication.activeWindow()
-        buttons = QMessageBox.Yes | QMessageBox.No
+        buttons = QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         answer = QMessageBox.question(active, title, msg, buttons, default_button)
-        return answer == QMessageBox.Yes
+        return answer == QMessageBox.StandardButton.Yes
 
-    def invokeCustomCommand(self):
+    def invokeCustomCommand(self) -> None:
         self.model.invoke_custom_command()
 
-    def show_details(self):
+    def show_details(self) -> None:
         if self.details_dialog is not None:
             if not self.details_dialog.isVisible():
                 self.details_dialog.show()
             else:
                 self.details_dialog.hide()
 
-    def showResultsWindow(self):
+    def showResultsWindow(self) -> None:
         if self.resultWindow is not None:
             if self.use_tabs:
                 if self.main_window.indexOfWidget(self.resultWindow) < 0:
@@ -282,14 +287,14 @@ class DupeGuru(QObject):
             else:
                 self.resultWindow.show()
 
-    def showDirectoriesWindow(self):
+    def showDirectoriesWindow(self) -> None:
         if self.directories_dialog is not None:
             if self.use_tabs:
                 self.main_window.showTab(self.directories_dialog)
             else:
                 self.directories_dialog.show()
 
-    def shutdown(self):
+    def shutdown(self) -> None:
         self.willSavePrefs.emit()
         self.prefs.save()
         self.model.save()
@@ -304,7 +309,7 @@ class DupeGuru(QObject):
     SIGTERM = pyqtSignal()
 
     # --- Events
-    def finishedLaunching(self):
+    def finishedLaunching(self) -> None:
         if sys.getfilesystemencoding() == "ascii":
             # No need to localize this, it's a debugging message.
             msg = (
@@ -324,28 +329,28 @@ class DupeGuru(QObject):
                 self.model.load_from(results)
                 self.recentResults.insertItem(results)
 
-    def clearCacheTriggered(self):
+    def clearCacheTriggered(self) -> None:
         title = tr("Clear Cache")
         msg = tr("Do you really want to clear the cache? This will remove all cached file hashes and picture analysis.")
-        if self.confirm(title, msg, QMessageBox.No):
+        if self.confirm(title, msg, QMessageBox.StandardButton.No):
             self.model.clear_picture_cache()
             self.model.clear_hash_cache()
             active = QApplication.activeWindow()
             QMessageBox.information(active, title, tr("Cache cleared."))
 
-    def ignoreListTriggered(self):
+    def ignoreListTriggered(self) -> None:
         if self.use_tabs:
             self.showTriggeredTabbedDialog(self.ignoreListDialog, tr("Ignore List"))
         else:  # floating windows
             self.model.ignore_list_dialog.show()
 
-    def excludeListTriggered(self):
+    def excludeListTriggered(self) -> None:
         if self.use_tabs:
             self.showTriggeredTabbedDialog(self.excludeListDialog, tr("Exclusion Filters"))
         else:  # floating windows
             self.model.exclude_list_dialog.show()
 
-    def showTriggeredTabbedDialog(self, dialog, desc_string):
+    def showTriggeredTabbedDialog(self, dialog, desc_string: str) -> None:
         """Add tab for dialog, name the tab with desc_string, then show it."""
         index = self.main_window.indexOfWidget(dialog)
         # Create the tab if it doesn't exist already
@@ -354,23 +359,22 @@ class DupeGuru(QObject):
         # Show the tab for that widget
         self.main_window.setCurrentIndex(index)
 
-    def openDebugLogTriggered(self):
+    def openDebugLogTriggered(self) -> None:
         debug_log_path = op.join(self.model.appdata, "debug.log")
         desktop.open_path(debug_log_path)
 
-    def preferencesTriggered(self):
+    def preferencesTriggered(self) -> None:
         preferences_dialog = self._get_preferences_dialog_class()(
             self.main_window if self.main_window else self.directories_dialog, self
         )
         preferences_dialog.load()
         result = preferences_dialog.exec()
-        if result == QDialog.Accepted:
+        if result == QDialog.DialogCode.Accepted:
             preferences_dialog.save()
             self.prefs.save()
             self._update_options()
-        preferences_dialog.setParent(None)
 
-    def quitTriggered(self):
+    def quitTriggered(self) -> None:
         if self.details_dialog is not None:
             self.details_dialog.close()
 
@@ -379,10 +383,10 @@ class DupeGuru(QObject):
         else:
             self.directories_dialog.close()
 
-    def showAboutBoxTriggered(self):
+    def showAboutBoxTriggered(self) -> None:
         self.about_box.show()
 
-    def showHelpTriggered(self):
+    def showHelpTriggered(self) -> None:
         base_path = platform.HELP_PATH
         help_path = op.abspath(op.join(base_path, "index.html"))
         if op.exists(help_path):
@@ -391,7 +395,7 @@ class DupeGuru(QObject):
             url = QUrl("https://dupeguru.voltaicideas.net/help/en/")
         QDesktopServices.openUrl(url)
 
-    def handleSIGTERM(self):
+    def handleSIGTERM(self) -> None:
         self.shutdown()
 
     # --- model --> view
@@ -401,20 +405,20 @@ class DupeGuru(QObject):
     def set_default(self, key, value):
         self.prefs.set_value(key, value)
 
-    def show_message(self, msg):
+    def show_message(self, msg: str) -> None:
         window = QApplication.activeWindow()
         QMessageBox.information(window, "", msg)
 
-    def ask_yes_no(self, prompt):
+    def ask_yes_no(self, prompt: str) -> bool:
         return self.confirm("", prompt)
 
-    def create_results_window(self):
+    def create_results_window(self) -> None:
         """Creates resultWindow and details_dialog depending on the selected ``app_mode``."""
         if self.details_dialog is not None:
             # The object is not deleted entirely, avoid saving its geometry in the future
             # self.willSavePrefs.disconnect(self.details_dialog.appWillSavePrefs)
             # or simply delete it on close which is probably cleaner:
-            self.details_dialog.setAttribute(Qt.WA_DeleteOnClose)
+            self.details_dialog.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
             self.details_dialog.close()
             # if we don't do the following, Qt will crash when we recreate the Results dialog
             self.details_dialog.setParent(None)
@@ -429,17 +433,17 @@ class DupeGuru(QObject):
             self.directories_dialog._updateActionsState()
         self.details_dialog = self._get_details_dialog_class()(self.resultWindow, self)
 
-    def show_results_window(self):
+    def show_results_window(self) -> None:
         self.showResultsWindow()
 
-    def show_problem_dialog(self):
+    def show_problem_dialog(self) -> None:
         self.problemDialog.show()
 
-    def select_dest_folder(self, prompt):
-        flags = QFileDialog.ShowDirsOnly
+    def select_dest_folder(self, prompt: str) -> str:
+        flags = QFileDialog.Option.ShowDirsOnly
         return QFileDialog.getExistingDirectory(self.resultWindow, prompt, "", flags)
 
-    def select_dest_file(self, prompt, extension):
+    def select_dest_file(self, prompt: str, extension: str) -> str:
         files = tr("{} file (*.{})").format(extension.upper(), extension)
         destination, chosen_filter = QFileDialog.getSaveFileName(self.resultWindow, prompt, "", files)
         if not destination.endswith(f".{extension}"):
