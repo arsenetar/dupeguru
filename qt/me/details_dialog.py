@@ -4,8 +4,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QAbstractItemView
+from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QAbstractItemView
 
 from hscommon.trans import trget
 from qt.details_dialog import DetailsDialog as DetailsDialogBase
@@ -15,12 +15,12 @@ tr = trget("ui")
 
 
 class DetailsDialog(DetailsDialogBase):
-    def _setupUi(self):
+    def _setupUi(self) -> None:
         self.setWindowTitle(tr("Details"))
         self.resize(502, 295)
         self.setMinimumSize(QSize(250, 250))
         self.tableView = DetailsTable(self)
         self.tableView.setAlternatingRowColors(True)
-        self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableView.setShowGrid(False)
         self.setWidget(self.tableView)

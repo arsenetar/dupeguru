@@ -10,13 +10,13 @@ from hscommon.plat import ISLINUX
 from core.scanner import ScanType
 from core.app import AppMode
 
-from qt.preferences_dialog import PreferencesDialogBase
+from qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")
 
 
 class PreferencesDialog(PreferencesDialogBase):
-    def _setupPreferenceWidgets(self):
+    def _setupPreferenceWidgets(self) -> None:
         self._setupFilterHardnessBox()
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self._setupAddCheckbox("matchScaledBox", tr("Match pictures of different dimensions"))
@@ -37,7 +37,7 @@ class PreferencesDialog(PreferencesDialogBase):
 
         self._setupBottomPart()
 
-    def _setupDisplayPage(self):
+    def _setupDisplayPage(self) -> None:
         super()._setupDisplayPage()
         self._setupAddCheckbox("details_dialog_override_theme_icons", tr("Override theme icons in viewer toolbar"))
         self.details_dialog_override_theme_icons.setToolTip(
@@ -57,7 +57,7 @@ show scrollbars to span the view around"
         )
         self.details_groupbox_layout.insertWidget(index + 2, self.details_dialog_viewers_show_scrollbars)
 
-    def _load(self, prefs, setchecked, section):
+    def _load(self, prefs: Preferences, setchecked: Callable[[QCheckBox, bool], None], section: Sections) -> None:
         setchecked(self.matchScaledBox, prefs.match_scaled)
         setchecked(self.matchRotatedBox, prefs.match_rotated)
 
@@ -68,7 +68,7 @@ show scrollbars to span the view around"
         setchecked(self.details_dialog_override_theme_icons, prefs.details_dialog_override_theme_icons)
         setchecked(self.details_dialog_viewers_show_scrollbars, prefs.details_dialog_viewers_show_scrollbars)
 
-    def _save(self, prefs, ischecked):
+    def _save(self, prefs: Preferences, ischecked: Callable[[QCheckBox], bool]) -> None:
         prefs.match_scaled = ischecked(self.matchScaledBox)
         prefs.match_rotated = ischecked(self.matchRotatedBox)
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
