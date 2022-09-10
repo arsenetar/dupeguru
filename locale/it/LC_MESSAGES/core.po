@@ -150,7 +150,7 @@ msgstr "Raccolte {} cartelle da scansionare"
 
 #: core\engine.py:27
 msgid "%d matches found from %d groups"
-msgstr "%d corrispondeze trovate da %d gruppi"
+msgstr "%d corrispondenze trovate da %d gruppi"
 
 #: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
