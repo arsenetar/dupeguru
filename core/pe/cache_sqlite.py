@@ -9,7 +9,7 @@ import os.path as op
 import logging
 import sqlite3 as sqlite
 
-from core.pe.cache import string_to_colors, colors_to_string
+from core.pe.cache import bytes_to_colors, colors_to_bytes
 
 
 class SqliteCache:
@@ -40,7 +40,7 @@ class SqliteCache:
             sql = "select blocks from pictures where path = ?"
         result = self.con.execute(sql, [key]).fetchone()
         if result:
-            result = string_to_colors(result[0])
+            result = bytes_to_colors(result[0])
             return result
         else:
             raise KeyError(key)
@@ -56,7 +56,7 @@ class SqliteCache:
         return result[0][0]
 
     def __setitem__(self, path_str, blocks):
-        blocks = colors_to_string(blocks)
+        blocks = colors_to_bytes(blocks)
         if op.exists(path_str):
             mtime = int(os.stat(path_str).st_mtime)
         else:
@@ -77,7 +77,7 @@ class SqliteCache:
             logging.debug("Creating picture cache tables.")
             self.con.execute("drop table if exists pictures")
             self.con.execute("drop index if exists idx_path")
-            self.con.execute("create table pictures(path TEXT, mtime INTEGER, blocks TEXT)")
+            self.con.execute("create table pictures(path TEXT, mtime INTEGER, blocks BLOB)")
             self.con.execute("create index idx_path on pictures (path)")
 
         self.con = sqlite.connect(self.dbname, isolation_level=None)
@@ -120,7 +120,7 @@ class SqliteCache:
     def get_multiple(self, rowids):
         sql = "select rowid, blocks from pictures where rowid in (%s)" % ",".join(map(str, rowids))
         cur = self.con.execute(sql)
-        return ((rowid, string_to_colors(blocks)) for rowid, blocks in cur)
+        return ((rowid, bytes_to_colors(blocks)) for rowid, blocks in cur)
 
     def purge_outdated(self):
         """Go through the cache and purge outdated records.

@@ -10,7 +10,7 @@ import shelve
 import tempfile
 from collections import namedtuple
 
-from core.pe.cache import string_to_colors, colors_to_string
+from core.pe.cache import bytes_to_colors, colors_to_bytes
 
 
 def wrap_path(path):
@@ -57,7 +57,7 @@ class ShelveCache:
             skey = self.shelve[wrap_id(key)]
         else:
             skey = wrap_path(key)
-        return string_to_colors(self.shelve[skey].blocks)
+        return bytes_to_colors(self.shelve[skey].blocks)
 
     def __iter__(self):
         return (unwrap_path(k) for k in self.shelve if k.startswith("path:"))
@@ -66,7 +66,7 @@ class ShelveCache:
         return sum(1 for k in self.shelve if k.startswith("path:"))
 
     def __setitem__(self, path_str, blocks):
-        blocks = colors_to_string(blocks)
+        blocks = colors_to_bytes(blocks)
         if op.exists(path_str):
             mtime = int(os.stat(path_str).st_mtime)
         else:
@@ -114,7 +114,7 @@ class ShelveCache:
                 skey = self.shelve[wrap_id(rowid)]
             except KeyError:
                 continue
-            yield (rowid, string_to_colors(self.shelve[skey].blocks))
+            yield (rowid, bytes_to_colors(self.shelve[skey].blocks))
 
     def purge_outdated(self):
         """Go through the cache and purge outdated records.
