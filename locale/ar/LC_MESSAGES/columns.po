@@ -10,110 +10,110 @@ msgstr ""
 #: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
 #: core\gui\problem_table.py:18
 msgid "File Path"
-msgstr ""
+msgstr "مسار الملف"
 
 #: core\gui\problem_table.py:19
 msgid "Error Message"
-msgstr ""
+msgstr "رسالة خطأ"
 
 #: core\me\prioritize.py:23
 msgid "Duration"
-msgstr ""
+msgstr "مدة"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr ""
+msgstr "معدل البت"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr ""
+msgstr "معدل العينة"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
 #: core\se\result_table.py:19
 msgid "Filename"
-msgstr ""
+msgstr "اسم الملف"
 
 #: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
 #: core\se\result_table.py:20
 msgid "Folder"
-msgstr ""
+msgstr "مجلد"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr ""
+msgstr "الحجم (ميغا بايت)"
 
 #: core\me\result_table.py:22
 msgid "Time"
-msgstr ""
+msgstr "زمن"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr ""
+msgstr "معدل العينة"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
 msgid "Kind"
-msgstr ""
+msgstr "طيب القلب"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
 #: core\prioritize.py:163 core\se\result_table.py:23
 msgid "Modification"
-msgstr ""
+msgstr "تعديل"
 
 #: core\me\result_table.py:27
 msgid "Title"
-msgstr ""
+msgstr "عنوان"
 
 #: core\me\result_table.py:28
 msgid "Artist"
-msgstr ""
+msgstr "فنان"
 
 #: core\me\result_table.py:29
 msgid "Album"
-msgstr ""
+msgstr "البوم"
 
 #: core\me\result_table.py:30
 msgid "Genre"
-msgstr ""
+msgstr "النوع"
 
 #: core\me\result_table.py:31
 msgid "Year"
-msgstr ""
+msgstr "سنة"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr ""
+msgstr "رقم الشاحنة"
 
 #: core\me\result_table.py:33
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr ""
+msgstr "مباراة ٪"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr ""
+msgstr "الكلمات المستخدمة"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr ""
+msgstr "عدد المخادعين"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
-msgstr ""
+msgstr "أبعاد"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr ""
+msgstr "الحجم (كيلو بايت)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "الطابع الزمني EXIF"
 
 #: core\prioritize.py:156
 msgid "Size"
-msgstr ""
+msgstr "بحجم"
