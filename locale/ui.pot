@@ -1106,3 +1106,11 @@ msgstr ""
 #: qt\preferences_dialog.py:227
 msgid "Ignore difference in mtime when loading cached digests"
 msgstr ""
+
+#: qt\progress_window.py:64
+msgid "Cancel?"
+msgstr ""
+
+#: qt\progress_window.py:65
+msgid "Are you sure you want to cancel? All progress will be lost."
+msgstr ""
