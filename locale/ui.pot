@@ -1092,3 +1092,17 @@ msgstr ""
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr ""
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr ""
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr ""

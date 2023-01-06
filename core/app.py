@@ -154,6 +154,8 @@ class DupeGuru(Broadcaster):
             "ignore_hardlink_matches": False,
             "copymove_dest_type": DestType.RELATIVE,
             "picture_cache_type": self.PICTURE_CACHE_TYPE,
+            "include_exists_check": True,
+            "rehash_ignore_mtime": False,
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -555,7 +557,9 @@ class DupeGuru(Broadcaster):
                 # a workaround to make the damn thing work.
                 exepath, args = match.groups()
                 path, exename = op.split(exepath)
-                p = subprocess.Popen(exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                p = subprocess.Popen(
+                    exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                )
                 output = p.stdout.read()
                 logging.info("Custom command %s %s: %s", exename, args, output)
             else:
@@ -792,6 +796,7 @@ class DupeGuru(Broadcaster):
         Scans folders selected in :attr:`directories` and put the results in :attr:`results`
         """
         scanner = self.SCANNER_CLASS()
+        fs.filesdb.ignore_mtime = self.options["rehash_ignore_mtime"] is True
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return

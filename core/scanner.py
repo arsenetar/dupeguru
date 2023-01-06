@@ -171,7 +171,8 @@ class Scanner:
             matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
         if not self.mix_file_kind:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
-        matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
+        if self.include_exists_check:
+            matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
         matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
             matches = [m for m in matches if not ignore_list.are_ignored(str(m.first.path), str(m.second.path))]
@@ -212,3 +213,4 @@ class Scanner:
     large_size_threshold = 0
     big_file_size_threshold = 0
     word_weighting = False
+    include_exists_check = True
