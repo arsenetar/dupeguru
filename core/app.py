@@ -126,8 +126,6 @@ class DupeGuru(Broadcaster):
 
     NAME = PROMPT_NAME = "dupeGuru"
 
-    PICTURE_CACHE_TYPE = "sqlite"  # set to 'shelve' for a ShelveCache
-
     def __init__(self, view, portable=False):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
@@ -153,7 +151,6 @@ class DupeGuru(Broadcaster):
             "clean_empty_dirs": False,
             "ignore_hardlink_matches": False,
             "copymove_dest_type": DestType.RELATIVE,
-            "picture_cache_type": self.PICTURE_CACHE_TYPE,
             "include_exists_check": True,
             "rehash_ignore_mtime": False,
         }
@@ -185,8 +182,7 @@ class DupeGuru(Broadcaster):
         self.view.create_results_window()
 
     def _get_picture_cache_path(self):
-        cache_type = self.options["picture_cache_type"]
-        cache_name = "cached_pictures.shelve" if cache_type == "shelve" else "cached_pictures.db"
+        cache_name = "cached_pictures.db"
         return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
