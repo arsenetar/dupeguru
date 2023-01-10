@@ -243,4 +243,3 @@ msgstr ""
 #: core\se\scanner.py:18
 msgid "Folders"
 msgstr ""
-

@@ -37,7 +37,7 @@ VSVersionInfo(
         StringStruct(u'OriginalFilename', u'dupeguru-win{3}.exe'),
         StringStruct(u'ProductName', u'dupeGuru'),
         StringStruct(u'ProductVersion', u'{0}.{1}.{2}.0')])
-      ]), 
+      ]),
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]
 )

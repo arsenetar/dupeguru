@@ -63,7 +63,7 @@ dupeGuru comes with a makefile that can be used to build and run:
     $ python run.py
 
 ### Generating Debian/Ubuntu package
-To generate packages the extra requirements in requirements-extra.txt must be installed, the 
+To generate packages the extra requirements in requirements-extra.txt must be installed, the
 steps are as follows:
 
     $ cd <dupeGuru directory>

@@ -31,7 +31,10 @@ class File(PhotoBase):
         image = image.convertToFormat(QImage.Format_RGB888)
         if type(orientation) != int:
             logging.warning(
-                "Orientation for file '%s' was a %s '%s', not an int.", str(self.path), type(orientation), orientation
+                "Orientation for file '%s' was a %s '%s', not an int.",
+                str(self.path),
+                type(orientation),
+                orientation,
             )
             try:
                 orientation = int(orientation)

@@ -16,7 +16,7 @@ Jeder Ordner kann in einem von 3 Zuständen sein:
 * **Referenz:** Duplikate in diesem Ordner können **nicht** gelöscht werden. Dateien dieses Ordners können sich nur in der **Referenz** Position einer Duplikatgruppe befinden. Ist mehr als eine Datei des Referenzordners in derselben Duplikatgruppe, so wird nur Eine behalten. Die Anderen werden aus der Gruppe entfernt.
 * **Ausgeschlossen:** Dateien in diesem Verzeichnis sind nicht im Scan eingeschlossen.
 
-Der Standardzustand eines Ordners ist natürlich **Normal**. Sie können den **Referenz** Zustand für Ordner nutzen, in denen auf keinen Fall eine Datei gelöscht werden soll. 
+Der Standardzustand eines Ordners ist natürlich **Normal**. Sie können den **Referenz** Zustand für Ordner nutzen, in denen auf keinen Fall eine Datei gelöscht werden soll.
 
 Wenn sie einen Zustand für ein Verzeichnis setzen, erben alle Unterordner automatisch diesen Zustand, es sei denn Sie ändern den Zustand der Unterordner explizit.
 
