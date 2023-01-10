@@ -2,12 +2,12 @@ core.engine
 ===========
 
 .. automodule:: core.engine
-    
+
     .. autoclass:: Match
-    
+
     .. autoclass:: Group
         :members:
-    
+
     .. autofunction:: build_word_dict
     .. autofunction:: compare
     .. autofunction:: compare_fields
@@ -16,7 +16,7 @@ core.engine
     .. autofunction:: get_groups
     .. autofunction:: merge_similar_words
     .. autofunction:: reduce_common_words
-    
+
 .. _fields:
 
 Fields

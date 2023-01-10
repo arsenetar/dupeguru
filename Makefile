@@ -4,7 +4,7 @@ PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
-# Window compatability via Msys2 
+# Window compatability via Msys2
 # - venv creates Scripts instead of bin
 # - compile generates .pyd instead of .so
 # - venv with --sytem-site-packages has issues on windows as well...
@@ -12,7 +12,7 @@ PREFIX ?= /usr/local
 ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows)
 	BIN = Scripts
 	SO = *.pyd
-	VENV_OPTIONS = 
+	VENV_OPTIONS =
 else
 	BIN = bin
 	SO = *.so
@@ -43,7 +43,7 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-all: | env i18n modules qt/dg_rc.py 
+all: | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
@@ -82,7 +82,7 @@ qt/dg_rc.py: qt/dg.qrc
 i18n: $(mofiles)
 
 %.mo: %.po
-	msgfmt -o $@ $<	
+	msgfmt -o $@ $<
 
 modules: | env
 	$(VENV_PYTHON) build.py --modules

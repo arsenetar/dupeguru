@@ -2,18 +2,18 @@ hscommon.gui.table
 ==================
 
 .. automodule:: hscommon.gui.table
-    
+
     .. autosummary::
-        
+
         Table
         Row
         GUITable
         GUITableView
-    
+
     .. autoclass:: Table
         :members:
         :private-members:
-    
+
     .. autoclass:: Row
         :members:
         :private-members:
@@ -21,6 +21,6 @@ hscommon.gui.table
     .. autoclass:: GUITable
         :members:
         :private-members:
-    
+
     .. autoclass:: GUITableView
         :members:

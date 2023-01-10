@@ -71,7 +71,7 @@ Häufig gestellte Fragen
         * Klicken Sie **Markieren --> Alle Markieren**.
 
 .. only:: edition_me
-    
+
     .. topic:: Ich möchte alle Stücke markieren, die mehr als 3 Sekunden von ihrer Referenz verschieden sind. Was kann ich tun?
 
         * Aktivieren Sie den :doc:`Nur Duplikate <results>` Modus.
@@ -83,7 +83,7 @@ Häufig gestellte Fragen
         * Klicken Sie auf **Entferne Ausgewählte von den Ergebnissen**.
 
     .. topic:: Ich möchte meine Stücke mit der höchsten Bitrate zur Referenz machen. Was kann ich tun?
-    
+
         * Aktivieren Sie den :doc:`Nur Duplikate <results>` Modus.
         * Aktivieren Sie den **Deltawerte** Modus.
         * Klicken Sie auf die "Bitrate" Spalte, um nach Bitrate zu sortieren.
@@ -92,9 +92,9 @@ Häufig gestellte Fragen
         * Klicken Sie auf **Mache Ausgewählte zur Referenz**.
 
     .. topic:: Ich möchte nicht das [live] und [remix] Versionen meiner Stücke als Duplikate erkannt werden. Was kann ich tun?
-    
+
         Ist Ihre Vergleichsschwelle niedrig genug, werden möglicherweise die live und remix Versionen in der Ergebnisliste landen. Das kann nicht verhindert werden, aber es gibt die Möglichkeit die Ergebnisse nach dem Scan zu entfernen, mittels dem Filter. Möchten Sie jedes Stück mit irgendetwas in eckigen Klammern [] im Dateinamen entfernen, so:
-    
+
         * **Windows**: Klicken Sie auf **Aktionen --> Filter anwenden**, geben "[*]" ein und klicken OK.
         * **Mac OS X**: Geben Sie "[*]" in das "Filter" Feld der Werkzeugleiste ein.
         * Klicken Sie auf **Markieren --> Alle Markieren**.

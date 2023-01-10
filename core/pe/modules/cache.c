@@ -2,8 +2,8 @@
  * Created On: 2010-01-30
  * Copyright 2014 Hardcoded Software (http://www.hardcoded.net)
  *
- * This software is licensed under the "BSD" License as described in the "LICENSE" file, 
- * which should be included with this package. The terms are also available at 
+ * This software is licensed under the "BSD" License as described in the "LICENSE" file,
+ * which should be included with this package. The terms are also available at
  * http://www.hardcoded.net/licenses/bsd_license
  */
 
@@ -34,27 +34,27 @@ cache_string_to_colors(PyObject *self, PyObject *args)
     char *s;
     Py_ssize_t char_count, color_count, i;
     PyObject *result;
-    
+
     if (!PyArg_ParseTuple(args, "s#", &s, &char_count)) {
         return NULL;
     }
-    
+
     color_count = (char_count / 6);
     result = PyList_New(color_count);
     if (result == NULL) {
         return NULL;
     }
-    
+
     for (i=0; i<color_count; i++) {
         long r, g, b;
         Py_ssize_t ci;
         PyObject *color_tuple;
-        
+
         ci = i * 6;
         r = (xchar_to_long(s[ci]) << 4) + xchar_to_long(s[ci+1]);
         g = (xchar_to_long(s[ci+2]) << 4) + xchar_to_long(s[ci+3]);
         b = (xchar_to_long(s[ci+4]) << 4) + xchar_to_long(s[ci+5]);
-        
+
         color_tuple = inttuple(3, r, g, b);
         if (color_tuple == NULL) {
             Py_DECREF(result);
@@ -62,7 +62,7 @@ cache_string_to_colors(PyObject *self, PyObject *args)
         }
         PyList_SET_ITEM(result, i, color_tuple);
     }
-    
+
     return result;
 }
 

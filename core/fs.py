@@ -97,12 +97,14 @@ class FilesDB:
     schema_version = 1
     schema_version_description = "Changed from md5 to xxhash if available."
 
-    create_table_query = "CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER, entry_dt DATETIME, digest BLOB, digest_partial BLOB, digest_samples BLOB)"
+    create_table_query = """CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER,
+        entry_dt DATETIME, digest BLOB, digest_partial BLOB, digest_samples BLOB)"""
     drop_table_query = "DROP TABLE IF EXISTS files;"
     select_query = "SELECT {key} FROM files WHERE path=:path AND size=:size and mtime_ns=:mtime_ns"
     select_query_ignore_mtime = "SELECT {key} FROM files WHERE path=:path AND size=:size"
     insert_query = """
-        INSERT INTO files (path, size, mtime_ns, entry_dt, {key}) VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
+        INSERT INTO files (path, size, mtime_ns, entry_dt, {key})
+        VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
         ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
     """
 
@@ -153,7 +155,8 @@ class FilesDB:
                     self.cur.execute(self.select_query_ignore_mtime.format(key=key), {"path": str(path), "size": size})
                 else:
                     self.cur.execute(
-                        self.select_query.format(key=key), {"path": str(path), "size": size, "mtime_ns": mtime_ns}
+                        self.select_query.format(key=key),
+                        {"path": str(path), "size": size, "mtime_ns": mtime_ns},
                     )
                 result = self.cur.fetchone()
 

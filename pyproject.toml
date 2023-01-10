@@ -5,5 +5,5 @@ build-backend = "setuptools.build_meta"
 line-length = 120
 [tool.isort]
 # make it compatible with black
-profile = "black" 
+profile = "black"
 skip_gitignore = true
