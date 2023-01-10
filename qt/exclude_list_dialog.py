@@ -165,8 +165,8 @@ Directores will also have their <strong>default state</strong> set to Excluded \
 in the Directories tab if their name happens to match one of the selected regular expressions.<br>\
 For each file collected, two tests are performed to determine whether or not to completely ignore it:<br>\
 <li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>
-<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>
-Example: if you want to filter out .PNG files from the "My Pictures" directory only:<br>\
+<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li>\
+<br>Example: if you want to filter out .PNG files from the "My Pictures" directory only:<br>\
 <code>.*My\\sPictures\\\\.*\\.png</code><br><br>\
 You can test the regular expression with the "test string" button after pasting a fake path in the test field:<br>\
 <code>C:\\\\User\\My Pictures\\test.png</code><br><br>

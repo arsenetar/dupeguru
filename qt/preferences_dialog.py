@@ -146,7 +146,8 @@ On MacOS, the tab bar will fill up the window's width instead."
         )
         self.use_native_dialogs.setToolTip(
             tr(
-                "For actions such as file/folder selection use the OS native dialogs.\nSome native dialogs have limited functionality."
+                "For actions such as file/folder selection use the OS native dialogs.\n\
+Some native dialogs have limited functionality."
             )
         )
         layout.addWidget(self.use_native_dialogs)
@@ -217,7 +218,8 @@ use the modifier key to drag the floating window around"
     def _setup_advanced_page(self):
         tab_label = QLabel(
             tr(
-                "These options are for advanced users or for very specific situations, most users should not have to modify these."
+                "These options are for advanced users or for very specific situations, \
+most users should not have to modify these."
             ),
             wordWrap=True,
         )
