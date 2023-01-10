@@ -4,11 +4,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtWidgets import QFormLayout
-from PyQt5.QtCore import Qt
+
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
-from qt.radio_box import RadioBox
 from core.scanner import ScanType
 from core.app import AppMode
 
@@ -35,11 +33,6 @@ class PreferencesDialog(PreferencesDialogBase):
         )
         self.widgetsVLayout.addWidget(self.ignoreHardlinkMatches)
 
-        self.cacheTypeRadio = RadioBox(self, items=["Sqlite", "Shelve"], spread=False)
-        cache_form = QFormLayout()
-        cache_form.setLabelAlignment(Qt.AlignLeft)
-        cache_form.addRow(tr("Picture cache mode:"), self.cacheTypeRadio)
-        self.widgetsVLayout.addLayout(cache_form)
         self._setupBottomPart()
 
     def _setupDisplayPage(self):
@@ -64,7 +57,6 @@ show scrollbars to span the view around"
 
     def _load(self, prefs, setchecked, section):
         setchecked(self.matchScaledBox, prefs.match_scaled)
-        self.cacheTypeRadio.selected_index = 1 if prefs.picture_cache_type == "shelve" else 0
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.PICTURE)
@@ -75,6 +67,5 @@ show scrollbars to span the view around"
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
-        prefs.picture_cache_type = "shelve" if self.cacheTypeRadio.selected_index == 1 else "sqlite"
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
         prefs.details_dialog_viewers_show_scrollbars = ischecked(self.details_dialog_viewers_show_scrollbars)

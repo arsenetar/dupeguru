@@ -192,7 +192,6 @@ class DupeGuru(QObject):
             scanned_tags.add("year")
         self.model.options["scanned_tags"] = scanned_tags
         self.model.options["match_scaled"] = self.prefs.match_scaled
-        self.model.options["picture_cache_type"] = self.prefs.picture_cache_type
         self.model.options["include_exists_check"] = self.prefs.include_exists_check
         self.model.options["rehash_ignore_mtime"] = self.prefs.rehash_ignore_mtime
 

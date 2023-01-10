@@ -16,6 +16,7 @@ from hscommon.jobprogress import job
 
 from core.engine import Match
 from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
+from core.pe.cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -50,14 +51,7 @@ except Exception:
 
 
 def get_cache(cache_path, readonly=False):
-    if cache_path.endswith("shelve"):
-        from core.pe.cache_shelve import ShelveCache
-
-        return ShelveCache(cache_path, readonly=readonly)
-    else:
-        from core.pe.cache_sqlite import SqliteCache
-
-        return SqliteCache(cache_path, readonly=readonly)
+    return SqliteCache(cache_path, readonly=readonly)
 
 
 def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
