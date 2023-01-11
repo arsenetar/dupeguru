@@ -112,53 +112,53 @@ class FilesDB:
 
     def __init__(self):
         self.conn = None
-        self.cur = None
         self.lock = None
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         self.conn = sqlite3.connect(path, check_same_thread=False)
-        self.cur = self.conn.cursor()
         self.lock = Lock()
         self._check_upgrade()
 
     def _check_upgrade(self) -> None:
-        with self.lock:
-            has_schema = self.cur.execute(
+        with self.lock, self.conn as conn:
+            has_schema = conn.execute(
                 "SELECT NAME FROM sqlite_master WHERE type='table' AND name='schema_version'"
             ).fetchall()
             version = None
             if has_schema:
-                version = self.cur.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()[0]
+                version = conn.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()[0]
             else:
-                self.cur.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
+                conn.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
             if version != self.schema_version:
-                self.cur.execute(self.drop_table_query)
-                self.cur.execute(
+                conn.execute(self.drop_table_query)
+                conn.execute(
                     "INSERT OR REPLACE INTO schema_version VALUES (:version, :description)",
                     {"version": self.schema_version, "description": self.schema_version_description},
                 )
-            self.cur.execute(self.create_table_query)
-            self.conn.commit()
+            conn.execute(self.create_table_query)
 
     def clear(self) -> None:
-        with self.lock:
-            self.cur.execute(self.drop_table_query)
-            self.cur.execute(self.create_table_query)
+        with self.lock, self.conn as conn:
+            conn.execute(self.drop_table_query)
+            conn.execute(self.create_table_query)
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
-            with self.lock:
+            with self.conn as conn:
                 if self.ignore_mtime:
-                    self.cur.execute(self.select_query_ignore_mtime.format(key=key), {"path": str(path), "size": size})
+                    cursor = conn.execute(
+                        self.select_query_ignore_mtime.format(key=key), {"path": str(path), "size": size}
+                    )
                 else:
-                    self.cur.execute(
+                    cursor = conn.execute(
                         self.select_query.format(key=key),
                         {"path": str(path), "size": size, "mtime_ns": mtime_ns},
                     )
-                result = self.cur.fetchone()
+                result = cursor.fetchone()
+                cursor.close()
 
             if result:
                 return result[0]
@@ -172,8 +172,8 @@ class FilesDB:
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
-            with self.lock:
-                self.cur.execute(
+            with self.lock, self.conn as conn:
+                conn.execute(
                     self.insert_query.format(key=key),
                     {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
@@ -186,7 +186,6 @@ class FilesDB:
 
     def close(self) -> None:
         with self.lock:
-            self.cur.close()
             self.conn.close()
 
 
