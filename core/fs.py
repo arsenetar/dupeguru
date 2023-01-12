@@ -315,6 +315,14 @@ class File:
         """Returns whether this file wrapper class can handle ``path``."""
         return not path.is_symlink() and path.is_file()
 
+    def exists(self) -> bool:
+        """Safely check if the underlying file exists, treat error as non-existent"""
+        try:
+            return self.path.exists()
+        except OSError as ex:
+            logging.warning(f"Checking {self.path} raised: {ex}")
+            return False
+
     def rename(self, newname):
         if newname == self.name:
             return
