@@ -97,59 +97,68 @@ class FilesDB:
     schema_version = 1
     schema_version_description = "Changed from md5 to xxhash if available."
 
-    create_table_query = "CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER, entry_dt DATETIME, digest BLOB, digest_partial BLOB, digest_samples BLOB)"
+    create_table_query = """CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER,
+        entry_dt DATETIME, digest BLOB, digest_partial BLOB, digest_samples BLOB)"""
     drop_table_query = "DROP TABLE IF EXISTS files;"
     select_query = "SELECT {key} FROM files WHERE path=:path AND size=:size and mtime_ns=:mtime_ns"
+    select_query_ignore_mtime = "SELECT {key} FROM files WHERE path=:path AND size=:size"
     insert_query = """
-        INSERT INTO files (path, size, mtime_ns, entry_dt, {key}) VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
+        INSERT INTO files (path, size, mtime_ns, entry_dt, {key})
+        VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
         ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
     """
 
+    ignore_mtime = False
+
     def __init__(self):
         self.conn = None
-        self.cur = None
         self.lock = None
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         self.conn = sqlite3.connect(path, check_same_thread=False)
-        self.cur = self.conn.cursor()
         self.lock = Lock()
         self._check_upgrade()
 
     def _check_upgrade(self) -> None:
-        with self.lock:
-            has_schema = self.cur.execute(
+        with self.lock, self.conn as conn:
+            has_schema = conn.execute(
                 "SELECT NAME FROM sqlite_master WHERE type='table' AND name='schema_version'"
             ).fetchall()
             version = None
             if has_schema:
-                version = self.cur.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()[0]
+                version = conn.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()[0]
             else:
-                self.cur.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
+                conn.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
             if version != self.schema_version:
-                self.cur.execute(self.drop_table_query)
-                self.cur.execute(
+                conn.execute(self.drop_table_query)
+                conn.execute(
                     "INSERT OR REPLACE INTO schema_version VALUES (:version, :description)",
                     {"version": self.schema_version, "description": self.schema_version_description},
                 )
-            self.cur.execute(self.create_table_query)
-            self.conn.commit()
+            conn.execute(self.create_table_query)
 
     def clear(self) -> None:
-        with self.lock:
-            self.cur.execute(self.drop_table_query)
-            self.cur.execute(self.create_table_query)
+        with self.lock, self.conn as conn:
+            conn.execute(self.drop_table_query)
+            conn.execute(self.create_table_query)
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
-            with self.lock:
-                self.cur.execute(
-                    self.select_query.format(key=key), {"path": str(path), "size": size, "mtime_ns": mtime_ns}
-                )
-                result = self.cur.fetchone()
+            with self.conn as conn:
+                if self.ignore_mtime:
+                    cursor = conn.execute(
+                        self.select_query_ignore_mtime.format(key=key), {"path": str(path), "size": size}
+                    )
+                else:
+                    cursor = conn.execute(
+                        self.select_query.format(key=key),
+                        {"path": str(path), "size": size, "mtime_ns": mtime_ns},
+                    )
+                result = cursor.fetchone()
+                cursor.close()
 
             if result:
                 return result[0]
@@ -163,8 +172,8 @@ class FilesDB:
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
-            with self.lock:
-                self.cur.execute(
+            with self.lock, self.conn as conn:
+                conn.execute(
                     self.insert_query.format(key=key),
                     {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
@@ -177,7 +186,6 @@ class FilesDB:
 
     def close(self) -> None:
         with self.lock:
-            self.cur.close()
             self.conn.close()
 
 
@@ -306,6 +314,14 @@ class File:
     def can_handle(cls, path):
         """Returns whether this file wrapper class can handle ``path``."""
         return not path.is_symlink() and path.is_file()
+
+    def exists(self) -> bool:
+        """Safely check if the underlying file exists, treat error as non-existent"""
+        try:
+            return self.path.exists()
+        except OSError as ex:
+            logging.warning(f"Checking {self.path} raised: {ex}")
+            return False
 
     def rename(self, newname):
         if newname == self.name:

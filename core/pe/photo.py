@@ -29,7 +29,7 @@ class Photo(fs.File):
     __slots__ = fs.File.__slots__ + tuple(INITIAL_INFO.keys())
 
     # These extensions are supported on all platforms
-    HANDLED_EXTS = {"png", "jpg", "jpeg", "gif", "bmp", "tiff", "tif"}
+    HANDLED_EXTS = {"png", "jpg", "jpeg", "gif", "bmp", "tiff", "tif", "webp"}
 
     def _plat_get_dimensions(self):
         raise NotImplementedError()

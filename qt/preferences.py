@@ -161,6 +161,8 @@ class Preferences(PreferencesBase):
         self.ignore_hardlink_matches = get("IgnoreHardlinkMatches", self.ignore_hardlink_matches)
         self.use_regexp = get("UseRegexp", self.use_regexp)
         self.remove_empty_folders = get("RemoveEmptyFolders", self.remove_empty_folders)
+        self.rehash_ignore_mtime = get("RehashIgnoreMTime", self.rehash_ignore_mtime)
+        self.include_exists_check = get("IncludeExistsCheck", self.include_exists_check)
         self.debug_mode = get("DebugMode", self.debug_mode)
         self.profile_scan = get("ProfileScan", self.profile_scan)
         self.destination_type = get("DestinationType", self.destination_type)
@@ -223,7 +225,6 @@ class Preferences(PreferencesBase):
         self.scan_tag_genre = get("ScanTagGenre", self.scan_tag_genre)
         self.scan_tag_year = get("ScanTagYear", self.scan_tag_year)
         self.match_scaled = get("MatchScaled", self.match_scaled)
-        self.picture_cache_type = get("PictureCacheType", self.picture_cache_type)
 
     def reset(self):
         self.filter_hardness = 95
@@ -231,6 +232,8 @@ class Preferences(PreferencesBase):
         self.use_regexp = False
         self.ignore_hardlink_matches = False
         self.remove_empty_folders = False
+        self.rehash_ignore_mtime = False
+        self.include_exists_check = True
         self.debug_mode = False
         self.profile_scan = False
         self.destination_type = 1
@@ -274,7 +277,6 @@ class Preferences(PreferencesBase):
         self.scan_tag_genre = False
         self.scan_tag_year = False
         self.match_scaled = False
-        self.picture_cache_type = "sqlite"
 
     def _save_values(self, settings):
         set_ = self.set_value
@@ -283,6 +285,8 @@ class Preferences(PreferencesBase):
         set_("IgnoreHardlinkMatches", self.ignore_hardlink_matches)
         set_("UseRegexp", self.use_regexp)
         set_("RemoveEmptyFolders", self.remove_empty_folders)
+        set_("RehashIgnoreMTime", self.rehash_ignore_mtime)
+        set_("IncludeExistsCheck", self.include_exists_check)
         set_("DebugMode", self.debug_mode)
         set_("ProfileScan", self.profile_scan)
         set_("DestinationType", self.destination_type)
@@ -326,7 +330,6 @@ class Preferences(PreferencesBase):
         set_("ScanTagGenre", self.scan_tag_genre)
         set_("ScanTagYear", self.scan_tag_year)
         set_("MatchScaled", self.match_scaled)
-        set_("PictureCacheType", self.picture_cache_type)
 
     # scan_type is special because we save it immediately when we set it.
     def get_scan_type(self, app_mode):

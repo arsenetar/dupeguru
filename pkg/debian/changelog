@@ -348,4 +348,3 @@ dupeguru (2.9.2-1) unstable; urgency=low
   * Fixed selection glitches, especially while renaming. (#93)
 
  -- Virgil Dupras <hsoft@hardcoded.net>  Wed, 10 Feb 2010 00:00:00 +0000
-

@@ -31,7 +31,7 @@ How can I report a bug a suggest a feature?
 -------------------------------------------
 
 dupeGuru is hosted on `Github`_ and it's also where issues are tracked. The best way to report a
-bug or suggest a feature is to sign up on Github and `open an issue`_. 
+bug or suggest a feature is to sign up on Github and `open an issue`_.
 
 The mark box of a file I want to delete is disabled. What must I do?
 --------------------------------------------------------------------
@@ -178,4 +178,3 @@ Preferences are stored elsewhere:
 
 .. _Github: https://github.com/arsenetar/dupeguru
 .. _open an issue: https://github.com/arsenetar/dupeguru/wiki/issue-labels
-

@@ -131,7 +131,7 @@ s'exécute. La plupart du temps, ces options n'ont pas a être activées.
   liens (`symlink`_ ou `hardlink`_) vers leur fichiers de référence respectifs. Un symlink est un
   lien symbolique (qui devient caduque si l'original est supprimé) et un hardlink est un lien direct
   au contenu du fichier (même si l'original est supprimé, le lien reste valide).
-  
+
   Sur OS X et Linux, cette fonction est supportée pleinement, mais sur Windows, c'est un peu
   compliqué. Windows XP ne le supporte pas, mais Vista oui. De plus, cette fonction ne peut être
   utilisée que si dupeGuru roule avec les privilèges administratifs. Ouaip, Windows c'est la joie.

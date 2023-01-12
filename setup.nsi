@@ -51,7 +51,7 @@ SetCompressor /SOLID lzma
 !define APPICON "images\dgse_logo.ico" ; nor is the icon
 !define DISTDIR "dist"
 !define HELPURL "https://github.com/arsenetar/dupeguru/issues"
-!define UPDATEURL "https://dupeguru.voltaicideas.net/" 
+!define UPDATEURL "https://dupeguru.voltaicideas.net/"
 !define ABOUTURL "https://dupeguru.voltaicideas.net/"
 
 ; Static Defines
@@ -85,7 +85,7 @@ var InstallSize
   !define MULTIUSER_USE_PROGRAMFILES64
 !endif
 !include MultiUser.nsh
-    
+
 ; Modern UI 2
 !include MUI2.nsh
 !define MUI_ICON "${APPICON}"
@@ -111,8 +111,8 @@ Icon "${APPICON}"
 !insertmacro MUI_PAGE_DIRECTORY
 
 ; values for start menu page
-!define MUI_STARTMENUPAGE_REGISTRY_ROOT "SHCTX" ; uses shell context 
-!define MUI_STARTMENUPAGE_REGISTRY_KEY "${BASEREGKEY}" 
+!define MUI_STARTMENUPAGE_REGISTRY_ROOT "SHCTX" ; uses shell context
+!define MUI_STARTMENUPAGE_REGISTRY_KEY "${BASEREGKEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 
@@ -122,11 +122,11 @@ Icon "${APPICON}"
 ; uninstaller pages
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
-  
+
 ;==============================================================================
 ; Languages
 ;==============================================================================
- 
+
 !insertmacro MUI_LANGUAGE "English" ;first language is the default language
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "German"
@@ -147,24 +147,24 @@ Icon "${APPICON}"
 ;==============================================================================
 ; Reserve Files
 ;==============================================================================
- 
+
 ; If you are using solid compression, files that are required before
 ; the actual installation should be stored first in the data block,
 ; because this will make your installer start faster.
- 
+
 !insertmacro MUI_RESERVEFILE_LANGDLL
 ReserveFile /nonfatal "${NSISDIR}\Plugins\*.dll" ;reserve if needed
- 
+
 ;==============================================================================
 ; Installer Sections
 ;==============================================================================
 
 Section "!Application" AppSec
   SetOutPath "$INSTDIR" ; set from result of installer pages
-  
+
   ; Files to install
   File /r "${SOURCEPATH}\${APPNAME}-win${BITS}\*"
- 
+
   ; Create Start Menu Items
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
@@ -193,7 +193,7 @@ Section "!Application" AppSec
   WriteRegStr HKCR ".dupeguru" "backup_val" "$1"  ; backup current value
 NoBackup:
   WriteRegStr HKCR ".dupeguru" "" "${APPNAME}.File"  ; set our file association
- 
+
   ReadRegStr $0 HKCR "${APPNAME}.File" ""
   StrCmp $0 "" 0 Skip
     WriteRegStr HKCR "${APPNAME}.File" "" "${APPNAME} File"
@@ -204,7 +204,7 @@ Skip:
   WriteRegStr HKCR "${APPNAME}.File\shell\edit" "" "Edit ${APPNAME} File"
   WriteRegStr HKCR "${APPNAME}.File\shell\edit\command" "" '"$INSTDIR\${APPNAME}-win${BITS}.exe" "%1"'
 
-  ; Uninstall Entry 
+  ; Uninstall Entry
   WriteRegStr SHCTX "${UNINSTALLREG}" "DisplayName" "${APPNAME} ${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONPATCH}"
   WriteRegStr SHCTX "${UNINSTALLREG}" "DisplayVersion" "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONPATCH}"
   WriteRegStr SHCTX "${UNINSTALLREG}" "DisplayIcon" "$INSTDIR\${APPNAME}.exe"
@@ -253,7 +253,7 @@ Section "Uninstall"
   Delete "$INSTDIR\*.pyd"
   Delete "$INSTDIR\*.zip"
   Delete "$INSTDIR\*.manifest"
-  
+
   ; Remove Install Folder if empty
   RMDir "$INSTDIR"
 
@@ -263,7 +263,7 @@ Section "Uninstall"
   StrCmp $1 "" 0 Restore ; if backup="" then delete the whole key
   DeleteRegKey HKCR ".dupeGuru"
   Goto NotOwn
- 
+
 Restore:
   WriteRegStr HKCR ".dupeguru" "" $1
   DeleteRegValue HKCR ".dupeguru" "backup_val"
@@ -293,7 +293,7 @@ Function .onInit
   !insertmacro MULTIUSER_INIT
   ; it appears that the languages shown may not always be filtered correctly
   !define MUI_LANGDLL_ALLLANGUAGES
-  !insertmacro MUI_LANGDLL_DISPLAY 
+  !insertmacro MUI_LANGDLL_DISPLAY
 FunctionEnd
 
 Function un.onInit

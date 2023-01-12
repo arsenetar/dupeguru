@@ -6,5 +6,5 @@ core.gui
 
 .. toctree::
     :maxdepth: 2
-    
+
     deletion_options

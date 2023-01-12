@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtWidgets import QProgressDialog
+from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QLabel, QProgressBar, QPushButton
 
 from hscommon.trans import tr
 
@@ -25,27 +25,52 @@ class ProgressWindow:
     def refresh(self):  # Labels
         if self._window is not None:
             self._window.setWindowTitle(self.model.jobdesc_textfield.text)
-            self._window.setLabelText(self.model.progressdesc_textfield.text)
+            self._label.setText(self.model.progressdesc_textfield.text)
 
     def set_progress(self, last_progress):
         if self._window is not None:
             if last_progress < 0:
-                self._window.setRange(0, 0)
+                self._progress_bar.setRange(0, 0)
             else:
-                self._window.setRange(0, 100)
-            self._window.setValue(last_progress)
+                self._progress_bar.setRange(0, 100)
+            self._progress_bar.setValue(last_progress)
 
     def show(self):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
-        self._window = QProgressDialog("", tr("Cancel"), 0, 100, self.parent, flags)
+        self._window = QDialog(self.parent, flags)
+        self._setup_ui()
         self._window.setModal(True)
-        self._window.setAutoReset(False)
-        self._window.setAutoClose(False)
         self._timer = QTimer(self._window)
         self._timer.timeout.connect(self.model.pulse)
         self._window.show()
-        self._window.canceled.connect(self.model.cancel)
         self._timer.start(500)
+
+    def _setup_ui(self):
+        self._window.setWindowTitle(tr("Cancel"))
+        vertical_layout = QVBoxLayout(self._window)
+        self._label = QLabel("", self._window)
+        vertical_layout.addWidget(self._label)
+        self._progress_bar = QProgressBar(self._window)
+        self._progress_bar.setRange(0, 100)
+        vertical_layout.addWidget(self._progress_bar)
+        self._cancel_button = QPushButton(tr("Cancel"), self._window)
+        self._cancel_button.clicked.connect(self.cancel)
+        vertical_layout.addWidget(self._cancel_button)
+
+    def cancel(self):
+        if self._window is not None:
+            confirm_dialog = QMessageBox(
+                QMessageBox.Icon.Question,
+                tr("Cancel?"),
+                tr("Are you sure you want to cancel? All progress will be lost."),
+                QMessageBox.StandardButton.No | QMessageBox.StandardButton.Yes,
+                self._window,
+            )
+            confirm_dialog.setDefaultButton(QMessageBox.StandardButton.No)
+            result = confirm_dialog.exec_()
+            if result != QMessageBox.StandardButton.Yes:
+                return
+        self.close()
 
     def close(self):
         # it seems it is possible for close to be called without a corresponding
@@ -53,9 +78,7 @@ class ProgressWindow:
         if self._window is not None:
             self._timer.stop()
             del self._timer
-            # For some weird reason, canceled() signal is sent upon close, whether the user canceled
-            # or not. If we don't want a false cancellation, we have to disconnect it.
-            self._window.canceled.disconnect()
             self._window.close()
             self._window.setParent(None)
             self._window = None
+            self.model.cancel()
