@@ -28,7 +28,7 @@ from core.pe.cache_sqlite import SqliteCache
 # to files in other chunks. So chunkifying doesn't save us any actual comparison, but the advantage
 # is that instead of reading blocks from disk number_of_files**2 times, we read it
 # number_of_files*number_of_chunks times.
-# Determining the right chunk size is tricky, bceause if it's too big, too many blocks will be in
+# Determining the right chunk size is tricky, because if it's too big, too many blocks will be in
 # memory at the same time and we might end up with memory trashing, which is awfully slow. So,
 # because our *real* bottleneck is CPU, the chunk size must simply be enough so that the CPU isn't
 # starved by Disk IOs.

@@ -4,24 +4,13 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from core.pe._cache import string_to_colors  # noqa
+from core.pe._cache import bytes_to_colors  # noqa
 
 
-def colors_to_string(colors):
-    """Transform the 3 sized tuples 'colors' into a hex string.
+def colors_to_bytes(colors):
+    """Transform the 3 sized tuples 'colors' into a bytes string.
 
-    [(0,100,255)] --> 0064ff
-    [(1,2,3),(4,5,6)] --> 010203040506
+    [(0,100,255)] --> b'\x00d\xff'
+    [(1,2,3),(4,5,6)] --> b'\x01\x02\x03\x04\x05\x06'
     """
-    return "".join("{:02x}{:02x}{:02x}".format(r, g, b) for r, g, b in colors)
-
-
-# This function is an important bottleneck of dupeGuru PE. It has been converted to C.
-# def string_to_colors(s):
-#     """Transform the string 's' in a list of 3 sized tuples.
-#     """
-#     result = []
-#     for i in xrange(0, len(s), 6):
-#         number = int(s[i:i+6], 16)
-#         result.append((number >> 16, (number >> 8) & 0xff, number & 0xff))
-#     return result
+    return b"".join(map(bytes, colors))

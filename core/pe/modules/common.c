@@ -32,7 +32,7 @@ PyObject* inttuple(int n, ...)
     result = PyTuple_New(n);
 
     for (i=0; i<n; i++) {
-        pnumber = PyLong_FromLong(va_arg(numbers, long));
+        pnumber = PyLong_FromUnsignedLong(va_arg(numbers, long));
         if (pnumber == NULL) {
             Py_DECREF(result);
             return NULL;
