@@ -1017,7 +1017,7 @@ msgstr "不明な理由により失敗しました。問題を報告しません
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1025,7 +1025,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"エラーレポートはGithubの問題として報告する必要があります。 上記のエラートレースバックをコピーして、新しい問題に貼り付けることができます。\n"
+"エラーレポートはGitHubの問題として報告する必要があります。 上記のエラートレースバックをコピーして、新しい問題に貼り付けることができます。\n"
 "\n"
 "事前に既存の問題を検索してください。 また、発生しているバグにはすでにパッチが適用されている可能性があるため、リポジトリから入手できる最新バージョンをテストしてください。\n"
 "\n"
@@ -1034,8 +1034,8 @@ msgstr ""
 "このエラーの後もアプリケーションは実行を継続するはずですが、不安定な状態になっている可能性があるため、アプリケーションを再起動することをお勧めします。"
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Githubに移動"
+msgid "Go to GitHub"
+msgstr "GitHubに移動"
 
 #: qt\preferences.py:24
 msgid "Czech"

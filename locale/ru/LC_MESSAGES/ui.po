@@ -1034,7 +1034,7 @@ msgstr "Что-то пошло не так. Хотите отправить от
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1042,7 +1042,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Отчеты об ошибках следует сообщать как о проблемах Github. Вы можете скопировать трассировку ошибки выше и вставить ее в новый выпуск.\n"
+"Отчеты об ошибках следует сообщать как о проблемах GitHub. Вы можете скопировать трассировку ошибки выше и вставить ее в новый выпуск.\n"
 "\n"
 "Обязательно заранее выполните поиск любых уже существующих проблем. Также не забудьте протестировать самую последнюю версию, доступную в репозитории, поскольку ошибка, с которой вы столкнулись, могла уже быть исправлена.\n"
 "\n"
@@ -1051,8 +1051,8 @@ msgstr ""
 "Хотя приложение должно продолжить работу после этой ошибки, оно может находиться в нестабильном состоянии, поэтому рекомендуется перезапустить приложение."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Перейти на Github"
+msgid "Go to GitHub"
+msgstr "Перейти на GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"

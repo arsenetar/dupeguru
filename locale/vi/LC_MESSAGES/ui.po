@@ -1035,7 +1035,7 @@ msgstr "Đã xảy ra lỗi. Làm thế nào về việc báo cáo lỗi?"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1043,7 +1043,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Các báo cáo lỗi phải được báo cáo dưới dạng sự cố Github. Bạn có thể sao chép các traceback lỗi trên và dán nó vào một vấn đề mới.\n"
+"Các báo cáo lỗi phải được báo cáo dưới dạng sự cố GitHub. Bạn có thể sao chép các traceback lỗi trên và dán nó vào một vấn đề mới.\n"
 "\n"
 "Vui lòng đảm bảo chạy tìm kiếm bất kỳ vấn đề nào đã tồn tại trước đó. Ngoài ra, hãy đảm bảo kiểm tra phiên bản mới nhất có sẵn từ kho lưu trữ, vì lỗi bạn đang gặp phải có thể đã được vá.\n"
 "\n"
@@ -1052,8 +1052,8 @@ msgstr ""
 "Mặc dù ứng dụng sẽ tiếp tục chạy sau lỗi này, nhưng nó có thể ở trạng thái không ổn định, vì vậy bạn nên khởi động lại ứng dụng."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Truy cập Github"
+msgid "Go to GitHub"
+msgstr "Truy cập GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"

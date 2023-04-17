@@ -1013,7 +1013,7 @@ msgstr "Ինչ որ բան այնպես չգնաց. Հաղորդել սխալը?
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1021,7 +1021,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Error հաշվետվությունները պետք է հրապարակվեն որպես Github հարցերի շուրջ: Կարող եք վերևում պատճենել սխալի հետևումը և տեղադրել այն նոր համարում:\n"
+"Error հաշվետվությունները պետք է հրապարակվեն որպես GitHub հարցերի շուրջ: Կարող եք վերևում պատճենել սխալի հետևումը և տեղադրել այն նոր համարում:\n"
 "\n"
 "Խնդրում ենք համոզվեք, որ նախապես փնտրեք արդեն գոյություն ունեցող ցանկացած խնդիր: Նաեւ համոզվեք, որ ստուգել են հենց վերջին տարբերակը մատչելի շտեմարան, քանի որ Bug դուք ապրում գուցե արդեն patched.\n"
 "\n"
@@ -1030,7 +1030,7 @@ msgstr ""
 "Չնայած այս սխալից հետո ծրագիրը պետք է շարունակի գործել, այն կարող է լինել անկայուն վիճակում, ուստի խորհուրդ է տրվում վերագործարկել ծրագիրը:"
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
+msgid "Go to GitHub"
 msgstr "Գնացեք Գիթուբ"
 
 #: qt\preferences.py:24
