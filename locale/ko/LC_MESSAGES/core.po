@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Last-Translator: Sangdon Lim, 2022\n"
-"Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
+"Language-Team: Korean (https://app.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -14,11 +14,11 @@ msgstr ""
 
 #: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
-msgstr "표시된 중복 항목이 없습니다. 아무것도하지 않았습니다."
+msgstr "아무 파일도 마크되지 않아 작업을 수행하지 않았습니다."
 
 #: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
-msgstr "선택한 중복 항목이 없습니다. 아무것도하지 않았습니다."
+msgstr "아무 파일도 선택되지 않아 작업을 수행하지 않았습니다."
 
 #: core\app.py:46
 msgid ""
@@ -28,11 +28,11 @@ msgstr "한 번에 많은 파일을 열려고 합니다. 시스템 설정에 따
 
 #: core\app.py:73
 msgid "Scanning for duplicates"
-msgstr "중복 검색"
+msgstr "중복 파일 검색 중"
 
 #: core\app.py:74
 msgid "Loading"
-msgstr "불러오는중"
+msgstr "불러오는 중"
 
 #: core\app.py:75
 msgid "Moving"
@@ -46,87 +46,87 @@ msgstr "복사중"
 msgid "Sending to Trash"
 msgstr "휴지통으로 보내기"
 
-#: core\app.py:291
+#: core\app.py:293
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr "이전 작업이 아직 진행 중이어서 새 작업을 시작할 수 없습니다. 몇 초 후에 다시 시도해 보세요."
 
-#: core\app.py:302
+#: core\app.py:304
 msgid "No duplicates found."
 msgstr "중복 파일이 없습니다."
 
-#: core\app.py:317
-msgid "All marked files were copied successfully."
-msgstr "표시된 모든 파일이 성공적으로 복사되었습니다."
-
 #: core\app.py:319
-msgid "All marked files were moved successfully."
-msgstr "표시된 모든 파일이 성공적으로 이동되었습니다."
+msgid "All marked files were copied successfully."
+msgstr "마크한 모든 파일이 성공적으로 복사되었습니다."
 
 #: core\app.py:321
-msgid "All marked files were deleted successfully."
-msgstr "표시된 모든 파일이 성공적으로 제거되었습니다."
+msgid "All marked files were moved successfully."
+msgstr "마크한 모든 파일이 성공적으로 이동되었습니다."
 
 #: core\app.py:323
+msgid "All marked files were deleted successfully."
+msgstr "마크한 모든 파일이 성공적으로 삭제되었습니다."
+
+#: core\app.py:325
 msgid "All marked files were successfully sent to Trash."
-msgstr "표시된 모든 파일이 성공적으로 휴지통으로 전송되었습니다."
+msgstr "마크한 모든 파일을 휴지통으로 보냈습니다."
 
-#: core\app.py:328
+#: core\app.py:330
 msgid "Could not load file: {}"
-msgstr "파일을로드 할 수 없습니다 : {}"
+msgstr "파일을 불러올 수 없습니다: {}"
 
-#: core\app.py:384
+#: core\app.py:386
 msgid "'{}' already is in the list."
 msgstr "'{}' 는 이미 목록에 있습니다."
 
-#: core\app.py:386
+#: core\app.py:388
 msgid "'{}' does not exist."
 msgstr "'{}' 가 존재하지 않습니다."
 
-#: core\app.py:394
+#: core\app.py:396
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "선택된 %d개의 일치 항목은 모든 후속 검색에서 무시됩니다. 계속하다?"
-
-#: core\app.py:471
-msgid "Select a directory to copy marked files to"
-msgstr "표시된 파일을 복사 할 디렉토리를 선택하십시오"
+msgstr "선택한 %d개 항목을 앞으로 검색에서 무시합니다. 진행할까요?"
 
 #: core\app.py:473
+msgid "Select a directory to copy marked files to"
+msgstr "마크한 파일을 복사할 경로를 선택하세요:"
+
+#: core\app.py:475
 msgid "Select a directory to move marked files to"
-msgstr "표시된 파일을 이동할 디렉토리를 선택하십시오"
+msgstr "마크한 파일을 이동할 경로를 선택하세요:"
 
-#: core\app.py:512
+#: core\app.py:514
 msgid "Select a destination for your exported CSV"
-msgstr "내 보낸 CSV의 대상을 선택하십시오"
+msgstr "CSV 파일을 저장할 폴더를 선택하세요"
 
-#: core\app.py:518 core\app.py:773 core\app.py:783
+#: core\app.py:520 core\app.py:781 core\app.py:791
 msgid "Couldn't write to file: {}"
 msgstr "파일에 쓸 수 없습니다 : {}"
 
-#: core\app.py:541
+#: core\app.py:543
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "사용자 지정 명령을 설정하지 않았습니다. 기본 설정에서 설정하십시오."
 
-#: core\app.py:697 core\app.py:709
+#: core\app.py:705 core\app.py:717
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 실행할까요?"
 
-#: core\app.py:745
+#: core\app.py:753
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} 개의 중복 그룹이 우선 순위 재 지정으로 변경되었습니다."
 
-#: core\app.py:792
+#: core\app.py:801
 msgid "The selected directories contain no scannable file."
 msgstr "선택한 디렉토리에 스캔 가능한 파일이 없습니다."
 
-#: core\app.py:808
+#: core\app.py:817
 msgid "Collecting files to scan"
 msgstr "스캔 할 파일 수집"
 
-#: core\app.py:858
+#: core\app.py:867
 msgid "%s (%d discarded)"
 msgstr "%s (%d 폐기)"
 
@@ -176,7 +176,7 @@ msgstr "내용"
 
 #: core\pe\matchblock.py:72
 msgid "Analyzed %d/%d pictures"
-msgstr "%d/%d 사진 분석"
+msgstr "사진 %d/%d 개 분석됨"
 
 #: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
@@ -236,7 +236,7 @@ msgstr "가장 오래된"
 
 #: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
-msgstr "%d / %d (%s / %s) 개의 중복이 표시되었습니다."
+msgstr "%d / %d (%s / %s) 개의 중복 파일을 마크했습니다."
 
 #: core\results.py:141
 msgid " filter: %s"

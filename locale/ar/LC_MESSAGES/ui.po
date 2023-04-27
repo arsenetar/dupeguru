@@ -1,7 +1,10 @@
+# Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
-"Language-Team: Arabic (https://www.transifex.com/voltaicideas/teams/116153/ar/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
+"Language-Team: Arabic (https://app.transifex.com/voltaicideas/teams/116153/ar/)\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -249,23 +252,23 @@ msgstr ""
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
-msgstr ""
+msgstr "فنان"
 
 #: qt/me/preferences_dialog.py:40 cocoa/en.lproj/Localizable.strings:0
 msgid "Album"
-msgstr ""
+msgstr "البوم"
 
 #: qt/me/preferences_dialog.py:42 cocoa/en.lproj/Localizable.strings:0
 msgid "Title"
-msgstr ""
+msgstr "عنوان"
 
 #: qt/me/preferences_dialog.py:44 cocoa/en.lproj/Localizable.strings:0
 msgid "Genre"
-msgstr ""
+msgstr "النوع"
 
 #: qt/me/preferences_dialog.py:46 cocoa/en.lproj/Localizable.strings:0
 msgid "Year"
-msgstr ""
+msgstr "سنة"
 
 #: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
 #: cocoa/en.lproj/Localizable.strings:0
@@ -907,4 +910,205 @@ msgstr ""
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:70
+msgid "Partially hash files bigger than"
+msgstr ""
+
+#: qt\se\preferences_dialog.py:80
+msgid "MB"
+msgstr ""
+
+#: qt\preferences_dialog.py:163
+msgid "Use native OS dialogs"
+msgstr ""
+
+#: qt\preferences_dialog.py:166
+msgid ""
+"For actions such as file/folder selection use the OS native dialogs.\n"
+"Some native dialogs have limited functionality."
+msgstr ""
+
+#: qt\se\preferences_dialog.py:68
+msgid "Ignore files larger than"
+msgstr ""
+
+#: qt\app.py:135 qt\app.py:293
+msgid "Clear Cache"
+msgstr ""
+
+#: qt\app.py:294
+msgid ""
+"Do you really want to clear the cache? This will remove all cached file "
+"hashes and picture analysis."
+msgstr ""
+
+#: qt\app.py:299
+msgid "Cache cleared."
+msgstr ""
+
+#: qt\preferences_dialog.py:173
+msgid "Use dark style"
+msgstr ""
+
+#: qt\preferences_dialog.py:241
+msgid "Profile scan operation"
+msgstr ""
+
+#: qt\preferences_dialog.py:242
+msgid "Profile the scan operation and save logs for optimization."
+msgstr ""
+
+#: qt\preferences_dialog.py:246
+msgid "Logs located in: <a href=\"{}\">{}</a>"
+msgstr ""
+
+#: qt\preferences_dialog.py:291
+msgid "Debug"
+msgstr ""
+
+#: qt\about_box.py:31
+msgid "About {}"
+msgstr ""
+
+#: qt\about_box.py:47
+msgid "Version {}"
+msgstr ""
+
+#: qt\about_box.py:49 qt\about_box.py:75
+msgid "Checking for updates..."
+msgstr ""
+
+#: qt\about_box.py:54
+msgid "Licensed under GPLv3"
+msgstr ""
+
+#: qt\about_box.py:68
+msgid "No update available."
+msgstr ""
+
+#: qt\about_box.py:71
+msgid "New version {} available, download <a href=\"{}\">here</a>."
+msgstr ""
+
+#: qt\error_report_dialog.py:50
+msgid "Error Report"
+msgstr ""
+
+#: qt\error_report_dialog.py:54
+msgid "Something went wrong. How about reporting the error?"
+msgstr ""
+
+#: qt\error_report_dialog.py:60
+msgid ""
+"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"\n"
+"Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
+"\n"
+"What usually really helps is if you add a description of how you got the error. Thanks!\n"
+"\n"
+"Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
+msgstr ""
+
+#: qt\error_report_dialog.py:80
+msgid "Go to Github"
+msgstr ""
+
+#: qt\preferences.py:24
+msgid "Czech"
+msgstr ""
+
+#: qt\preferences.py:25
+msgid "German"
+msgstr ""
+
+#: qt\preferences.py:26
+msgid "Greek"
+msgstr ""
+
+#: qt\preferences.py:27
+msgid "English"
+msgstr ""
+
+#: qt\preferences.py:28
+msgid "Spanish"
+msgstr ""
+
+#: qt\preferences.py:29
+msgid "French"
+msgstr ""
+
+#: qt\preferences.py:30
+msgid "Armenian"
+msgstr ""
+
+#: qt\preferences.py:31
+msgid "Italian"
+msgstr ""
+
+#: qt\preferences.py:32
+msgid "Japanese"
+msgstr ""
+
+#: qt\preferences.py:33
+msgid "Korean"
+msgstr ""
+
+#: qt\preferences.py:34
+msgid "Malay"
+msgstr ""
+
+#: qt\preferences.py:35
+msgid "Dutch"
+msgstr ""
+
+#: qt\preferences.py:36
+msgid "Polish"
+msgstr ""
+
+#: qt\preferences.py:37
+msgid "Brazilian"
+msgstr ""
+
+#: qt\preferences.py:38
+msgid "Russian"
+msgstr ""
+
+#: qt\preferences.py:39
+msgid "Turkish"
+msgstr ""
+
+#: qt\preferences.py:40
+msgid "Ukrainian"
+msgstr ""
+
+#: qt\preferences.py:41
+msgid "Vietnamese"
+msgstr ""
+
+#: qt\preferences.py:42
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: qt\recent.py:54
+msgid "Clear List"
+msgstr ""
+
+#: qt\search_edit.py:78
+msgid "Search..."
+msgstr ""
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr ""
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
 msgstr ""
