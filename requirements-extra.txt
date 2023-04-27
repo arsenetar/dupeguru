@@ -1,4 +1,4 @@
-pytest>=6,<7
+pytest>=7,<8
 flake8
 black
-pyinstaller>=4.5,<5.0; sys_platform != 'linux'
+pyinstaller>=5.6,<6.0; sys_platform != 'linux'
