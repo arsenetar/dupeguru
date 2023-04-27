@@ -1045,7 +1045,7 @@ msgstr "Κάτι πήγε στραβά. Μήπως να αναφερθεί το 
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1053,7 +1053,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Οι αναφορές σφαλμάτων πρέπει να αναφέρονται ως ζητήματα Github. Μπορείτε να αντιγράψετε την ανίχνευση σφαλμάτων παραπάνω και να την επικολλήσετε σε ένα νέο ζήτημα.\n"
+"Οι αναφορές σφαλμάτων πρέπει να αναφέρονται ως ζητήματα GitHub. Μπορείτε να αντιγράψετε την ανίχνευση σφαλμάτων παραπάνω και να την επικολλήσετε σε ένα νέο ζήτημα.\n"
 "\n"
 "Βεβαιωθείτε ότι έχετε πραγματοποιήσει αναζήτηση για τυχόν υπάρχοντα ζητήματα εκ των προτέρων. Επίσης, φροντίστε να δοκιμάσετε την πιο πρόσφατη διαθέσιμη έκδοση από το αποθετήριο, καθώς το σφάλμα που αντιμετωπίζετε ενδέχεται να έχει ήδη διορθωθεί.\n"
 "\n"
@@ -1062,8 +1062,8 @@ msgstr ""
 "Παρόλο που η εφαρμογή θα πρέπει να συνεχίσει να εκτελείται μετά από αυτό το σφάλμα, ενδέχεται να βρίσκεται σε ασταθή κατάσταση, επομένως συνιστάται να κάνετε επανεκκίνηση της εφαρμογής."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Επίσκεψη Github"
+msgid "Go to GitHub"
+msgstr "Επίσκεψη GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"

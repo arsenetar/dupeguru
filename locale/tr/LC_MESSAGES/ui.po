@@ -1035,7 +1035,7 @@ msgstr "Bir şeyler yanlış gitti. Hatayı raporlamak ister misin?"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1043,7 +1043,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Hata raporları Github'da sorun (issue) olarak bildirilmelidir. Yukarıdaki hata kaynağını kopyalayabilir ve yeni sorun bildirimine yapıştırabilirsiniz\n"
+"Hata raporları GitHub'da sorun (issue) olarak bildirilmelidir. Yukarıdaki hata kaynağını kopyalayabilir ve yeni sorun bildirimine yapıştırabilirsiniz\n"
 "\n"
 "Lütfen yeni sorun bildirimi oluşturmadan önce var olan sorunları aradığınızdan emin olun. Ayrıca depoda bulunan en son sürümü sınadığınızdan emin olun, karşılaştığınız hata hâlihazırda düzeltilmiş olabilir.\n"
 "\n"
@@ -1052,8 +1052,8 @@ msgstr ""
 "Bu hatadan sonra uygulama çalışmaya sürdürebilse de kararsız durumda olabilir, bu nedenle uygulamayı yeniden başlatmanız önerilir."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Github'a Git"
+msgid "Go to GitHub"
+msgstr "GitHub'a Git"
 
 #: qt\preferences.py:24
 msgid "Czech"

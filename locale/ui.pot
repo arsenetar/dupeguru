@@ -996,7 +996,7 @@ msgstr ""
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1006,7 +1006,7 @@ msgid ""
 msgstr ""
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
+msgid "Go to GitHub"
 msgstr ""
 
 #: qt\preferences.py:24

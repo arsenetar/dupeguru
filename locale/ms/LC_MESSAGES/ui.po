@@ -1040,7 +1040,7 @@ msgstr "Terdapat kesulitan yang terjadi. Apa kata laporkan ralat tersebut?"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1048,7 +1048,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Laporan ralat patut dilaporkan sebagai isu Github. Anda boleh salin runut balik ralat di atas dan tampal dalam isu baharu.\n"
+"Laporan ralat patut dilaporkan sebagai isu GitHub. Anda boleh salin runut balik ralat di atas dan tampal dalam isu baharu.\n"
 "\n"
 "Sila pastikan anda menggelintar dahulu kalau-kalau isu sudah wujud. Juga pastikan untuk cuba versi paling terbaharu yang disediakan dari repositori, kerana pepijat yang anda alami mungkin sudah ditampung.\n"
 "\n"
@@ -1057,8 +1057,8 @@ msgstr ""
 "Walaupun aplikasi sepatutnya masih boleh digunakan selepas ralat ini, ia mungkin berada dalam keadaan tidak stabil, jadi anda digalakkan untuk memulakan semula aplikasi ini."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Pergi ke Github"
+msgid "Go to GitHub"
+msgstr "Pergi ke GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"
