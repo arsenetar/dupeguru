@@ -1,139 +1,150 @@
+# Translators:
+# Andrew Senetar <arsenetar@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
-"Language-Team: Arabic (https://www.transifex.com/voltaicideas/teams/116153/ar/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
+"Language-Team: Arabic (https://app.transifex.com/voltaicideas/teams/116153/ar/)\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
 msgstr ""
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr ""
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr ""
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr ""
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr ""
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:308
+#: core\app.py:293
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:318
+#: core\app.py:304
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:333
+#: core\app.py:319
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:334
+#: core\app.py:321
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:335
+#: core\app.py:323
+msgid "All marked files were deleted successfully."
+msgstr ""
+
+#: core\app.py:325
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:343
+#: core\app.py:330
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:399
+#: core\app.py:386
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:401
+#: core\app.py:388
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:410
+#: core\app.py:396
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 
-#: core\app.py:486
+#: core\app.py:473
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:487
+#: core\app.py:475
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:527
+#: core\app.py:514
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:534 core\app.py:801 core\app.py:811
+#: core\app.py:520 core\app.py:781 core\app.py:791
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:559
+#: core\app.py:543
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:727 core\app.py:740
+#: core\app.py:705 core\app.py:717
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:774
+#: core\app.py:753
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:821
+#: core\app.py:801
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:835
+#: core\app.py:817
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:891
+#: core\app.py:867
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\engine.py:244 core\engine.py:288
-msgid "0 matches found"
+#: core\directories.py:190
+msgid "Collected {} files to scan"
 msgstr ""
 
-#: core\engine.py:262 core\engine.py:296
-msgid "%d matches found"
+#: core\directories.py:206
+msgid "Collected {} folders to scan"
 msgstr ""
 
-#: core\gui\deletion_options.py:73
+#: core\engine.py:27
+msgid "%d matches found from %d groups"
+msgstr ""
+
+#: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr ""
 
-#: core\gui\exclude_list_table.py:15
+#: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr ""
 
@@ -143,7 +154,7 @@ msgstr ""
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
-msgstr ""
+msgstr "اسم الملف"
 
 #: core\me\scanner.py:21
 msgid "Filename - Fields"
@@ -165,15 +176,15 @@ msgstr ""
 msgid "Analyzed %d/%d pictures"
 msgstr ""
 
-#: core\pe\matchblock.py:181
+#: core\pe\matchblock.py:177
 msgid "Performed %d/%d chunk matches"
 msgstr ""
 
-#: core\pe\matchblock.py:191
+#: core\pe\matchblock.py:185
 msgid "Preparing for matching"
 msgstr ""
 
-#: core\pe\matchblock.py:244
+#: core\pe\matchblock.py:234
 msgid "Verified %d/%d matches"
 msgstr ""
 
@@ -183,61 +194,61 @@ msgstr ""
 
 #: core\pe\scanner.py:22
 msgid "EXIF Timestamp"
-msgstr ""
+msgstr "الطابع الزمني EXIF"
 
 #: core\prioritize.py:70
 msgid "None"
 msgstr ""
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr ""
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr ""
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr ""
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr ""
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr ""
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr ""
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr ""
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr ""
 
-#: core\results.py:142
+#: core\results.py:134
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr ""
 
-#: core\results.py:149
+#: core\results.py:141
 msgid " filter: %s"
 msgstr ""
 
-#: core\scanner.py:85
+#: core\scanner.py:90
 msgid "Read size of %d/%d files"
 msgstr ""
 
-#: core\scanner.py:109
+#: core\scanner.py:116
 msgid "Read metadata of %d/%d files"
 msgstr ""
 
-#: core\scanner.py:147
+#: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
 msgstr ""
 

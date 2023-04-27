@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Last-Translator: Sangdon Lim, 2022\n"
-"Language-Team: Korean (https://www.transifex.com/voltaicideas/teams/116153/ko/)\n"
+"Language-Team: Korean (https://app.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -104,12 +104,12 @@ msgstr "속성"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
-msgstr "선택됨"
+msgstr "선택한 파일"
 
 #: qt/details_table.py:16 qt/directories_model.py:24
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reference"
-msgstr "참조"
+msgstr "기준 파일"
 
 #: qt/directories_dialog.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results..."
@@ -159,15 +159,15 @@ msgstr "표준"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr "스캔 유형 :"
+msgstr "검색 방식:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr "더 많은 옵션"
+msgstr "설정"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "스캔 할 폴더를 선택하고 \"스캔\"을 누르십시오."
+msgstr "검색할 폴더들을 목록에 추가하고 오른쪽 아래의 \"스캔\" 버튼을 누르십시오."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -219,7 +219,7 @@ msgstr "상태"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr "제외된"
+msgstr "제외"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
@@ -242,7 +242,7 @@ msgstr "닫기"
 #: qt/result_window.py:56 qt/result_window.py:192 qt/se/details_dialog.py:18
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details"
-msgstr "세부사항"
+msgstr "파일 속성"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
@@ -275,17 +275,17 @@ msgstr "년"
 #: qt/me/preferences_dialog.py:50 qt/se/preferences_dialog.py:30
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Word weighting"
-msgstr "단어 가중치"
+msgstr "파일 이름 중 긴 단어에 가중치 적용"
 
 #: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
-msgstr "유사한 단어와 일치"
+msgstr "파일 이름 중 비슷한 단어도 중복으로 허용"
 
 #: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
 #: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
-msgstr "다른 확장자의 파일도 비교에 포함"
+msgstr "확장자가 다른 파일도 중복 여부 확인"
 
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
@@ -295,7 +295,7 @@ msgstr "필터링 할 때 정규식 사용"
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
-msgstr "삭제 또는 이동시 빈 폴더 제거"
+msgstr "삭제 또는 이동 후 폴더가 빈 폴더가 되면 폴더 삭제"
 
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
@@ -309,11 +309,11 @@ msgstr "디버그 모드 (다시 시작 필요)"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr "가로세로 크기가 다른 이미지도 비교"
+msgstr "가로세로 크기가 다른 이미지도 중복 여부 확인"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr "필터 경도 :"
+msgstr "필터 민감도:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
@@ -337,15 +337,15 @@ msgstr "복사 및 이동 :"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
-msgstr "목적지에 직접"
+msgstr "대상 폴더에"
 
 #: qt/preferences_dialog.py:95 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate relative path"
-msgstr "상대 경로 재생성"
+msgstr "대상 폴더를 시작으로 상대 경로를 재생성"
 
 #: qt/preferences_dialog.py:96 cocoa/en.lproj/Localizable.strings:0
 msgid "Recreate absolute path"
-msgstr "절대 경로 재생성"
+msgstr "대상 폴더를 시작으로 절대 경로를 재생성"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
@@ -388,7 +388,7 @@ msgstr "선택한 항목 표시"
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
 msgid "Actions"
-msgstr "행위"
+msgstr "작업"
 
 #: qt/result_window.py:58 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Dupes Only"
@@ -400,27 +400,27 @@ msgstr "델타 값만 보기"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "선택 항목을 휴지통으로 보내기..."
+msgstr "마크한 모든 파일을 휴지통으로 보내기"
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "선택항목을 이동..."
+msgstr "마크한 모든 파일을 이동..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "선택항목을 복사..."
+msgstr "마크한 모든 파일을 복사..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr "결과에서 표시된 항목을 제거하다."
+msgstr "결과 목록에서 마크한 모든 파일을 제외"
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
-msgstr "결과 우선 순위 재 지정..."
+msgstr "기준 파일 규칙 재설정"
 
 #: qt/result_window.py:67 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected from Results"
-msgstr "결과에서 선택한 항목 제거"
+msgstr "결과 목록에서 선택한 파일을 제외"
 
 #: qt/result_window.py:71 cocoa/en.lproj/Localizable.strings:0
 msgid "Add Selected to Ignore List"
@@ -428,35 +428,35 @@ msgstr "무시 목록에 선택 항목 추가"
 
 #: qt/result_window.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Make Selected into Reference"
-msgstr "선택한 항목을 참조 항목으로 만들기"
+msgstr "선택한 파일을 기준 파일로 설정"
 
 #: qt/result_window.py:77 cocoa/en.lproj/Localizable.strings:0
 msgid "Open Selected with Default Application"
-msgstr "기본 응용 프로그램으로 선택한 항목 열기"
+msgstr "선택한 파일을 기본 앱으로 열기"
 
 #: qt/result_window.py:80
 msgid "Open Containing Folder of Selected"
-msgstr "선택한 항목의 포함 폴더 열기"
+msgstr "선택한 파일의 폴더 열기"
 
 #: qt/result_window.py:82 cocoa/en.lproj/Localizable.strings:0
 msgid "Rename Selected"
-msgstr "선택한 이름 변경"
+msgstr "선택한 파일의 이름 변경"
 
 #: qt/result_window.py:83 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark All"
-msgstr "모두 표시"
+msgstr "모든 파일 마크"
 
 #: qt/result_window.py:84 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark None"
-msgstr "없음으로 표시"
+msgstr "모든 파일의 마크 해제"
 
 #: qt/result_window.py:85 cocoa/en.lproj/Localizable.strings:0
 msgid "Invert Marking"
-msgstr "마킹 반전"
+msgstr "마크 목록 반전"
 
 #: qt/result_window.py:86 cocoa/en.lproj/Localizable.strings:0
 msgid "Mark Selected"
-msgstr "선택한 항목 표시"
+msgstr "선택한 파일 마크"
 
 #: qt/result_window.py:87
 msgid "Export To HTML"
@@ -476,7 +476,7 @@ msgstr "사용자 지정 명령 호출"
 
 #: qt/result_window.py:102
 msgid "Mark"
-msgstr "표시"
+msgstr "마크"
 
 #: qt/result_window.py:106 cocoa/en.lproj/Localizable.strings:0
 msgid "Columns"
@@ -492,7 +492,7 @@ msgstr "{} 결과"
 
 #: qt/result_window.py:193 cocoa/en.lproj/Localizable.strings:0
 msgid "Dupes Only"
-msgstr "복제 만"
+msgstr "기준 파일 숨기기"
 
 #: qt/result_window.py:194
 msgid "Delta Values"
@@ -696,7 +696,7 @@ msgstr "모두 선택"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "표시된 항목을 휴지통으로 보내기 ..."
+msgstr "마크한 파일을 휴지통으로 보내기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
@@ -851,15 +851,15 @@ msgstr ""
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr "참조 용으로 굵은 글꼴 사용"
+msgstr "기준 파일을 굵게 표시"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr "참조 전경색 :"
+msgstr "기준 파일 이름의 색:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr "참조 배경색 :"
+msgstr "기준 파일 이름의 배경색:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
@@ -914,7 +914,7 @@ msgstr "일반 인터페이스"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr "결과표"
+msgstr "검색 결과"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
@@ -970,15 +970,15 @@ msgstr "다크 모드 사용"
 
 #: qt\preferences_dialog.py:241
 msgid "Profile scan operation"
-msgstr ""
+msgstr "검색 과정 프로파일"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
-msgstr ""
+msgstr "검색 과정을 프로파일하고 로그를 저장합니다."
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
-msgstr ""
+msgstr "로그 저장 경로: <a href=\"{}\">{}</a>"
 
 #: qt\preferences_dialog.py:291
 msgid "Debug"
@@ -1121,3 +1121,17 @@ msgstr "목록 지우기"
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr "검색.."
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr ""
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr ""
