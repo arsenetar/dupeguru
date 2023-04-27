@@ -30,7 +30,7 @@ VSVersionInfo(
       StringTable(
         u'040904B0',
         [StringStruct(u'CompanyName', u'Hardcoded Software'),
-        StringStruct(u'FileDescription', u'dupeGuru is a tool to find duplicate files on your computer.'),
+        StringStruct(u'FileDescription', u'dupeGuru'),
         StringStruct(u'FileVersion', u'{0}.{1}.{2}.0'),
         StringStruct(u'InternalName', u'dupeGuru'),
         StringStruct(u'LegalCopyright', u'© Hardcoded Software'),
