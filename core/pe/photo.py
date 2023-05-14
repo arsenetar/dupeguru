@@ -100,5 +100,8 @@ class Photo(fs.File):
         elif field == "exif_timestamp":
             self.exif_timestamp = self._get_exif_timestamp()
 
-    def get_blocks(self, block_count_per_side):
-        return self._plat_get_blocks(block_count_per_side, self._get_orientation())
+    def get_blocks(self, block_count_per_side, orientation: int = None):
+        if orientation is None:
+            return self._plat_get_blocks(block_count_per_side, self._get_orientation())
+        else:
+            return self._plat_get_blocks(block_count_per_side, orientation)

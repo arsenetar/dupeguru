@@ -15,10 +15,10 @@ from core.pe.cache import bytes_to_colors, colors_to_bytes
 class SqliteCache:
     """A class to cache picture blocks in a sqlite backend."""
 
-    schema_version = 1
-    schema_version_description = "Changed from string to bytes for blocks."
+    schema_version = 2
+    schema_version_description = "Added blocks for all 8 orientations."
 
-    create_table_query = "CREATE TABLE IF NOT EXISTS pictures(path TEXT, mtime_ns INTEGER, blocks BLOB)"
+    create_table_query = "CREATE TABLE IF NOT EXISTS pictures(path TEXT, mtime_ns INTEGER, blocks BLOB, blocks2 BLOB, blocks3 BLOB, blocks4 BLOB, blocks5 BLOB, blocks6 BLOB, blocks7 BLOB, blocks8 BLOB)"
     create_index_query = "CREATE INDEX IF NOT EXISTS idx_path on pictures (path)"
     drop_table_query = "DROP TABLE IF EXISTS pictures"
     drop_index_query = "DROP INDEX IF EXISTS idx_path"
@@ -43,12 +43,12 @@ class SqliteCache:
     # Optimized
     def __getitem__(self, key):
         if isinstance(key, int):
-            sql = "select blocks from pictures where rowid = ?"
+            sql = "select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 from pictures where rowid = ?"
         else:
-            sql = "select blocks from pictures where path = ?"
-        result = self.con.execute(sql, [key]).fetchone()
-        if result:
-            result = bytes_to_colors(result[0])
+            sql = "select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 from pictures where path = ?"
+        blocks = self.con.execute(sql, [key]).fetchone()
+        if blocks:
+            result = [bytes_to_colors(block) for block in blocks]
             return result
         else:
             raise KeyError(key)
@@ -64,17 +64,17 @@ class SqliteCache:
         return result[0][0]
 
     def __setitem__(self, path_str, blocks):
-        blocks = colors_to_bytes(blocks)
+        blocks = [colors_to_bytes(block) for block in blocks]
         if op.exists(path_str):
             mtime = int(os.stat(path_str).st_mtime)
         else:
             mtime = 0
         if path_str in self:
-            sql = "update pictures set blocks = ?, mtime_ns = ? where path = ?"
+            sql = "update pictures set blocks = ?, blocks2 = ?, blocks3 = ?, blocks4 = ?, blocks5 = ?, blocks6 = ?, blocks7 = ?, blocks8 = ?, mtime_ns = ? where path = ?"
         else:
-            sql = "insert into pictures(blocks,mtime_ns,path) values(?,?,?)"
+            sql = "insert into pictures(blocks,blocks2,blocks3,blocks4,blocks5,blocks6,blocks7,blocks8,mtime_ns,path) values(?,?,?,?,?,?,?,?,?,?)"
         try:
-            self.con.execute(sql, [blocks, mtime, path_str])
+            self.con.execute(sql, blocks + [mtime, path_str])
         except sqlite.OperationalError:
             logging.warning("Picture cache could not set value for key %r", path_str)
         except sqlite.DatabaseError as e:
@@ -136,9 +136,9 @@ class SqliteCache:
             raise ValueError(path)
 
     def get_multiple(self, rowids):
-        sql = "select rowid, blocks from pictures where rowid in (%s)" % ",".join(map(str, rowids))
+        sql = "select rowid, blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 from pictures where rowid in (%s)" % ",".join(map(str, rowids))
         cur = self.con.execute(sql)
-        return ((rowid, bytes_to_colors(blocks)) for rowid, blocks in cur)
+        return ((rowid, [bytes_to_colors(blocks), bytes_to_colors(blocks2), bytes_to_colors(blocks3), bytes_to_colors(blocks4), bytes_to_colors(blocks5), bytes_to_colors(blocks6), bytes_to_colors(blocks7), bytes_to_colors(blocks8)]) for rowid, blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 in cur)
 
     def purge_outdated(self):
         """Go through the cache and purge outdated records.

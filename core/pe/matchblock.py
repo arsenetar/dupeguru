@@ -72,13 +72,12 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
                 # entry in iPhoto library.
                 logging.warning("We have a picture with a null path here")
                 continue
-            picture.unicode_path = str(picture.path)
             logging.debug("Analyzing picture at %s", picture.unicode_path)
             if with_dimensions:
                 picture.dimensions  # pre-read dimensions
             try:
                 if picture.unicode_path not in cache:
-                    blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
+                    blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
             except (OSError, ValueError) as e:
@@ -125,7 +124,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
     # picinfo is a dictionary {pic_id: (dimensions, is_ref)}
     cache = get_cache(dbname, readonly=True)
     limit = 100 - threshold
-    ref_pairs = list(cache.get_multiple(ref_ids))
+    ref_pairs = list(cache.get_multiple(ref_ids))  # (rowid, [b, b2, ..., b8])
     if other_ids is not None:
         other_pairs = list(cache.get_multiple(other_ids))
         comparisons_to_do = [(r, o) for r in ref_pairs for o in other_pairs]
@@ -137,15 +136,22 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
         other_dimensions, other_is_ref = picinfo[other_id]
         if ref_is_ref and other_is_ref:
             continue
-        if ref_dimensions != other_dimensions:
+        rotated_ref_dimensions = (ref_dimensions[1], ref_dimensions[0])
+        if ref_dimensions != other_dimensions and rotated_ref_dimensions != other_dimensions:
             continue
-        try:
-            diff = avgdiff(ref_blocks, other_blocks, limit, MIN_ITERATIONS)
-            percentage = 100 - diff
-        except (DifferentBlockCountError, NoBlocksError):
-            percentage = 0
-        if percentage >= threshold:
-            results.append((ref_id, other_id, percentage))
+        for orientation_ref in range(8):
+            for orientation_other in range(8):
+                try:
+                    diff = avgdiff(ref_blocks[orientation_ref], other_blocks[orientation_other], limit, MIN_ITERATIONS)
+                    percentage = 100 - diff
+                except (DifferentBlockCountError, NoBlocksError):
+                    percentage = 0
+                if percentage >= threshold:
+                    results.append((ref_id, other_id, percentage))
+                    break
+            else:
+                continue
+            break
     cache.close()
     return results
 
@@ -153,7 +159,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
 def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
-            return (None, p.is_ref)
+            return ((None, None), p.is_ref)
         else:
             return (p.dimensions, p.is_ref)
 
