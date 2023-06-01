@@ -58,19 +58,19 @@ msgstr "중복 파일이 없습니다."
 
 #: core\app.py:319
 msgid "All marked files were copied successfully."
-msgstr "마크한 모든 파일이 성공적으로 복사되었습니다."
+msgstr "마크된 모든 파일이 성공적으로 복사되었습니다."
 
 #: core\app.py:321
 msgid "All marked files were moved successfully."
-msgstr "마크한 모든 파일이 성공적으로 이동되었습니다."
+msgstr "마크된 모든 파일이 성공적으로 이동되었습니다."
 
 #: core\app.py:323
 msgid "All marked files were deleted successfully."
-msgstr "마크한 모든 파일이 성공적으로 삭제되었습니다."
+msgstr "마크된 모든 파일이 성공적으로 삭제되었습니다."
 
 #: core\app.py:325
 msgid "All marked files were successfully sent to Trash."
-msgstr "마크한 모든 파일을 휴지통으로 보냈습니다."
+msgstr "마크된 모든 파일을 휴지통으로 보냈습니다."
 
 #: core\app.py:330
 msgid "Could not load file: {}"
@@ -88,19 +88,19 @@ msgstr "'{}' 가 존재하지 않습니다."
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
-msgstr "선택한 %d개 항목을 앞으로 검색에서 무시합니다. 진행할까요?"
+msgstr "선택한 %d개 항목을 검색에서 무시합니다. 진행하시겠습니까?"
 
 #: core\app.py:473
 msgid "Select a directory to copy marked files to"
-msgstr "마크한 파일을 복사할 경로를 선택하세요:"
+msgstr "마크하신 파일을 복사할 경로를 선택하세요:"
 
 #: core\app.py:475
 msgid "Select a directory to move marked files to"
-msgstr "마크한 파일을 이동할 경로를 선택하세요:"
+msgstr "마크하신 파일을 이동할 경로를 선택하세요:"
 
 #: core\app.py:514
 msgid "Select a destination for your exported CSV"
-msgstr "CSV 파일을 저장할 폴더를 선택하세요"
+msgstr "CSV 파일의 저장 경로를 지정해주세요"
 
 #: core\app.py:520 core\app.py:781 core\app.py:791
 msgid "Couldn't write to file: {}"
@@ -112,7 +112,7 @@ msgstr "사용자 지정 명령을 설정하지 않았습니다. 기본 설정�
 
 #: core\app.py:705 core\app.py:717
 msgid "You are about to remove %d files from results. Continue?"
-msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 실행할까요?"
+msgstr "결과에서 %d 개의 파일을 제거하려고합니다. 실행하시겠습니까?"
 
 #: core\app.py:753
 msgid "{} duplicate groups were changed by the re-prioritization."
@@ -120,11 +120,11 @@ msgstr "{} 개의 중복 그룹이 우선 순위 재 지정으로 변경되었�
 
 #: core\app.py:801
 msgid "The selected directories contain no scannable file."
-msgstr "선택한 디렉토리에 스캔 가능한 파일이 없습니다."
+msgstr "선택한 경로에 스캔 가능한 파일이 없습니다."
 
 #: core\app.py:817
 msgid "Collecting files to scan"
-msgstr "스캔 할 파일 수집"
+msgstr "스캔 가능 파일 수집중"
 
 #: core\app.py:867
 msgid "%s (%d discarded)"
@@ -220,7 +220,7 @@ msgstr "최단"
 
 #: core\prioritize.py:142
 msgid "Highest"
-msgstr "제일 높은"
+msgstr "최고"
 
 #: core\prioritize.py:142
 msgid "Lowest"

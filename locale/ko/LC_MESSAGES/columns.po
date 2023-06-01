@@ -26,11 +26,11 @@ msgstr "길이"
 
 #: core\me\prioritize.py:30 core\me\result_table.py:23
 msgid "Bitrate"
-msgstr "비트레이트"
+msgstr "비트전송률"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr "샘플레이트"
+msgstr "샘플전송률"
 
 #: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
 #: core\se\result_table.py:19
@@ -52,7 +52,7 @@ msgstr "시간"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr "샘플레이트"
+msgstr "샘플전송률"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22

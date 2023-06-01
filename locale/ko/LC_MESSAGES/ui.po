@@ -19,7 +19,7 @@ msgstr "나가기"
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr "옵션"
+msgstr "설정"
 
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
@@ -82,7 +82,7 @@ msgstr "(미지원)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr "즉시 삭제"
+msgstr "파일 직접삭제"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -159,7 +159,7 @@ msgstr "표준"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr "검색 방식:"
+msgstr "스캔 방식:"
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
@@ -167,7 +167,7 @@ msgstr "설정"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "검색할 폴더들을 목록에 추가하고 오른쪽 아래의 \"스캔\" 버튼을 누르십시오."
+msgstr "스캔할 폴더들을 목록에 추가하고 오른쪽 아래의 \"스캔\" 버튼을 누르십시오."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -183,7 +183,7 @@ msgstr "저장되지 않은 결과"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr "저장되지 않은 결과가 있습니다. 종료하시겠습니까?"
+msgstr "결과를 저장하지않고 종료하시겠습니까?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
@@ -191,7 +191,7 @@ msgstr "스캔 목록에 추가 할 폴더를 선택하십시오"
 
 #: qt/directories_dialog.py:266 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a results file to load"
-msgstr "로드 할 결과 파일을 선택하십시오"
+msgstr "불러올 결과 파일을 선택하십시오"
 
 #: qt/directories_dialog.py:267
 msgid "All Files (*.*)"
@@ -207,7 +207,7 @@ msgstr "새 스캔 시작"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "저장되지 않은 결과가 있습니다. 계속 하시겠습니까?"
+msgstr "결과를 저장하지않고 진행하시겠습니까?"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -246,7 +246,7 @@ msgstr "파일 속성"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
-msgstr "스캔 할 태그 :"
+msgstr "스캔 태그 :"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
@@ -317,11 +317,11 @@ msgstr "필터 민감도:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr "더 많은 결과"
+msgstr "결과 더보기"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
-msgstr "더 적은 결과"
+msgstr "결과 줄이기"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
@@ -353,7 +353,7 @@ msgstr "사용자 지정 명령 (인수: %d 은 중복, %r 은 참조):"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "언어 변경 사항을 적용하려면 dupeGuru를 다시 시작해야합니다."
+msgstr "언어 변경은 dupeGuru의 재시작이 필요합니다."
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
@@ -365,12 +365,12 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"오른쪽 상자에 기준을 추가하고 확인을 클릭하여 이러한 기준에 가장 적합한 복제를 해당 그룹의 참조 위치로 보냅니다. 자세한 정보는 도움말"
-" 파일을 읽으십시오."
+"오른쪽 박스에 기준을 추가하고 확인을 눌러 가장 기준에 해당되는 복제를 해당 그룹의 참조 위치로 보냅니다."
+" 상세한 정보는 도움말에 있습니다"
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "문제!"
+msgstr "문제 발생!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -378,12 +378,12 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"일부 (또는 전체) 파일을 처리하는 데 문제가 있습니다. 이러한 문제의 원인은 아래 표에 설명되어 있습니다. 해당 파일은 결과에서 "
+"일부 (또는 전체) 파일을 처리하는 데 문제가 있었습니다. 문제의 원인은 아래 표에 표시 되있습니다. 문제되는 파일들은 결과에서 "
 "제거되지 않았습니다."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
-msgstr "선택한 항목 표시"
+msgstr "선택 항목 표시"
 
 #: qt/result_window.py:57 qt/result_window.py:104 qt/result_window.py:167
 #: qt/result_window.py:191 cocoa/en.lproj/Localizable.strings:0
@@ -396,23 +396,23 @@ msgstr "중복파일만 보기"
 
 #: qt/result_window.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Show Delta Values"
-msgstr "델타 값만 보기"
+msgstr "델타 값 표시"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "마크한 모든 파일을 휴지통으로 보내기"
+msgstr "마크된 모든 파일을 휴지통으로 보내기"
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "마크한 모든 파일을 이동..."
+msgstr "마크된 모든 파일을 이동..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "마크한 모든 파일을 복사..."
+msgstr "마크된 모든 파일을 복사..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
-msgstr "결과 목록에서 마크한 모든 파일을 제외"
+msgstr "결과 목록에서 마크된 모든 파일을 제외"
 
 #: qt/result_window.py:64 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize Results..."
@@ -516,7 +516,7 @@ msgstr "%@ 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Action"
-msgstr "행위"
+msgstr "동작"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Add New Folder..."
@@ -564,7 +564,7 @@ msgstr "델타"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details of Selected File"
-msgstr "선택한 파일의 세부 정보"
+msgstr "선택 파일 세부 정보"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Details Panel"
@@ -572,7 +572,7 @@ msgstr "세부 정보 패널"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Directories"
-msgstr "디렉토리"
+msgstr "경로"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru"
@@ -588,7 +588,7 @@ msgstr "dupeGuru 결과"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
-msgstr "dupeGuru 웹 사이트"
+msgstr "dupeGuru 홈페이지"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Edit"
@@ -604,7 +604,7 @@ msgstr "XHTML로 결과 내보내기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Fewer results"
-msgstr "더 적은 결과"
+msgstr "결과 축소"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter"
@@ -640,7 +640,7 @@ msgstr "이보다 작은 파일 무시 :"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "파일에서로드..."
+msgstr "파일에서 불러오기..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
@@ -652,7 +652,7 @@ msgstr "모드"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "More results"
-msgstr "더 많은 결과"
+msgstr "결과 더보기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ok"
@@ -660,7 +660,7 @@ msgstr "확인"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Paste"
-msgstr "붙여 넣다"
+msgstr "붙여넣기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
@@ -668,7 +668,7 @@ msgstr "환경 설정..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
-msgstr "한눈에"
+msgstr "빠른보기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quit dupeGuru"
@@ -696,7 +696,7 @@ msgstr "모두 선택"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "마크한 파일을 휴지통으로 보내기"
+msgstr "마크된 파일을 휴지통으로 보내기"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
@@ -712,7 +712,7 @@ msgstr "중복 스캔 시작"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "'%@' 이름이 이미 존재합니다."
+msgstr "'%@' 의 이름이 이미 존재합니다."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
@@ -720,7 +720,7 @@ msgstr "창"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr "줌"
+msgstr "확대"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
@@ -732,27 +732,27 @@ msgstr "스캔 결과"
 
 #: qt\directories_dialog.py:95
 msgid "Load Directories..."
-msgstr "디렉토리로드 ..."
+msgstr "경로 불러오는중 ..."
 
 #: qt\directories_dialog.py:96
 msgid "Save Directories..."
-msgstr "디렉토리 저장 ..."
+msgstr "경로 저장중 ..."
 
 #: qt\directories_dialog.py:337
 msgid "Select a directories file to load"
-msgstr "로드 할 디렉토리 파일을 선택하십시오"
+msgstr "불러올 경로를 선택하십시오"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "dupeguru 디렉토리 파일 (*.dupegurudirs)"
+msgstr "dupeguru 경로 파일 (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr "디렉토리를 저장할 파일을 선택하십시오"
+msgstr "경로를 저장할 파일을 선택하십시오"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr "dupeguru 디렉토리 파일 (*.dupegurudirs)"
+msgstr "dupeguru 경로 파일 (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
@@ -768,11 +768,11 @@ msgstr "테스트 문자열"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr "여기에 파이썬 정규식을 입력하십시오 ..."
+msgstr "여기에 파이썬 정규식을 입력해주세요 ..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
-msgstr "여기에 파일 시스템 경로 또는 파일 이름을 입력하십시오 ..."
+msgstr "여기에 파일 시스템 경로 또는 파일 이름을 입력해주세요 ..."
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -792,11 +792,11 @@ msgstr "컴파일 오류 :"
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
-msgstr "줌을 증가"
+msgstr "확대 증가"
 
 #: qt\pe\image_viewer.py:66
 msgid "Decrease zoom"
-msgstr "줌을 감소"
+msgstr "확대 감소"
 
 #: qt\pe\image_viewer.py:71
 msgid "Ctrl+/"
@@ -812,7 +812,7 @@ msgstr "Ctrl+*"
 
 #: qt\pe\image_viewer.py:86
 msgid "Best fit"
-msgstr "최고로 잘 맞는"
+msgstr "최고 일치"
 
 #: qt\pe\preferences_dialog.py:49
 msgid "Picture cache mode:"
@@ -958,7 +958,7 @@ msgstr "캐시 제거"
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
-msgstr "캐시를 제거할까요? 캐시에는 파일 해시 및 이미지 분석 결과가 포함되어 있습니다."
+msgstr "캐시를 제거하시겠습니까? 캐시에는 파일 해시 및 이미지 분석 결과가 포함되어 있습니다."
 
 #: qt\app.py:299
 msgid "Cache cleared."
@@ -970,11 +970,11 @@ msgstr "다크 모드 사용"
 
 #: qt\preferences_dialog.py:241
 msgid "Profile scan operation"
-msgstr "검색 과정 프로파일"
+msgstr "프로파일 스캔 작업"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
-msgstr "검색 과정을 프로파일하고 로그를 저장합니다."
+msgstr "최적화를 위해 스캔 프로파일 작업과 로그를 저장합니다."
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
@@ -1014,7 +1014,7 @@ msgstr "오류보고"
 
 #: qt\error_report_dialog.py:54
 msgid "Something went wrong. How about reporting the error?"
-msgstr "문제가 발생했습니다. 오류를보고하는 것은 어떻습니까?"
+msgstr "예상치 못한 문제가 발생했습니다. 오류 보고를 추천드립니다."
 
 #: qt\error_report_dialog.py:60
 msgid ""
