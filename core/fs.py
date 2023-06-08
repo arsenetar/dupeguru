@@ -54,6 +54,9 @@ CHUNK_SIZE = 1024 * 1024  # 1 MiB
 # Minimum size below which partial hashing is not used
 MIN_FILE_SIZE = 3 * CHUNK_SIZE  # 3MiB, because we take 3 samples
 
+# Partial hashing offset and size
+PARTIAL_OFFSET_SIZE = (0x4000, 0x4000)
+
 
 class FSError(Exception):
     cls_message = "An error has occured on '{name}' in '{parent}'"
@@ -243,14 +246,9 @@ class File:
 
     def _calc_digest_partial(self):
         # type: () -> bytes
-
-        # This offset is where we should start reading the file to get a partial hash
-        # For audio file, it should be where audio data starts
-        offset, size = (0x4000, 0x4000)
-
         with self.path.open("rb") as fp:
-            fp.seek(offset)
-            partial_data = fp.read(size)
+            fp.seek(PARTIAL_OFFSET_SIZE[0])
+            partial_data = fp.read(PARTIAL_OFFSET_SIZE[1])
             return hasher(partial_data).digest()
 
     def _calc_digest_samples(self) -> bytes:
@@ -281,7 +279,11 @@ class File:
         elif field == "digest_partial":
             self.digest_partial = filesdb.get(self.path, "digest_partial")
             if self.digest_partial is None:
-                self.digest_partial = self._calc_digest_partial()
+                # If file is smaller than partial requirements just use the full digest
+                if self.size < PARTIAL_OFFSET_SIZE[0] + PARTIAL_OFFSET_SIZE[1]:
+                    self.digest_partial = self.digest
+                else:
+                    self.digest_partial = self._calc_digest_partial()
                 filesdb.put(self.path, "digest_partial", self.digest_partial)
         elif field == "digest":
             self.digest = filesdb.get(self.path, "digest")
@@ -292,7 +294,7 @@ class File:
             size = self.size
             # Might as well hash such small files entirely.
             if size <= MIN_FILE_SIZE:
-                setattr(self, field, self.digest)
+                self.digest_samples = self.digest
                 return
             self.digest_samples = filesdb.get(self.path, "digest_samples")
             if self.digest_samples is None:
