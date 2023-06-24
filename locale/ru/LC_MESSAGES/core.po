@@ -160,7 +160,7 @@ msgstr "Регулярные выражения"
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
-"Вы действительно хотите удалить все элементы %d  из списка игнорирования?"
+"Вы действительно хотите удалить все элементы %d из списка игнорирования?"
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
