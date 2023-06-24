@@ -99,15 +99,15 @@ msgstr ""
 
 #: core\app.py:473
 msgid "Select a directory to copy marked files to"
-msgstr "Выберите каталог, в который вы хотите скопировать отмеченные файлы"
+msgstr "Выберите каталог, в который Вы хотите скопировать отмеченные файлы"
 
 #: core\app.py:475
 msgid "Select a directory to move marked files to"
-msgstr "Выберите каталог, в который вы хотите переместить отмеченные файлы"
+msgstr "Выберите каталог для перемещения отмеченных файлов"
 
 #: core\app.py:514
 msgid "Select a destination for your exported CSV"
-msgstr "Выберите назначение для экспортируемого "
+msgstr "Выберите назначение для Вашего экспортируемого CSV"
 
 #: core\app.py:520 core\app.py:781 core\app.py:791
 msgid "Couldn't write to file: {}"
@@ -123,7 +123,7 @@ msgstr "Вы собираетесь удалить %d файлов из резу
 
 #: core\app.py:753
 msgid "{} duplicate groups were changed by the re-prioritization."
-msgstr "{} групп дубликатов было изменено при реприоритезации."
+msgstr "{} групп дубликатов было изменено при обновлении приоритета."
 
 #: core\app.py:801
 msgid "The selected directories contain no scannable file."
@@ -135,7 +135,7 @@ msgstr "Сбор файлов для сканирования"
 
 #: core\app.py:867
 msgid "%s (%d discarded)"
-msgstr "%s. (%d отменено)"
+msgstr "%s (%d отменено)"
 
 #: core\directories.py:190
 msgid "Collected {} files to scan"
@@ -147,7 +147,7 @@ msgstr "Собрано {} каталогов для сканирования"
 
 #: core\engine.py:27
 msgid "%d matches found from %d groups"
-msgstr "Найдено %d совпадений из %d групп"
+msgstr "%d совпадений найдено из %d групп"
 
 #: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
@@ -160,7 +160,7 @@ msgstr "Регулярные выражения"
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
-"Вы действительно хотите удалить все элементы %d из списка игнорирования?"
+"Вы действительно хотите удалить все элементы %d  из списка игнорирования?"
 
 #: core\me\scanner.py:20 core\se\scanner.py:16
 msgid "Filename"
@@ -248,7 +248,7 @@ msgstr "%d / %d (%s / %s) дубликатов отмечено."
 
 #: core\results.py:141
 msgid " filter: %s"
-msgstr "фильтр: %s"
+msgstr " фильтр: %s"
 
 #: core\scanner.py:90
 msgid "Read size of %d/%d files"
@@ -260,8 +260,9 @@ msgstr "Прочитаны метаданные %d/%d файлов"
 
 #: core\scanner.py:154
 msgid "Almost done! Fiddling with results..."
-msgstr "Почти готово! Возиться с результатами..."
+msgstr "Почти готово! Вожусь с результатами..."
 
 #: core\se\scanner.py:18
 msgid "Folders"
 msgstr "Папки"
+
