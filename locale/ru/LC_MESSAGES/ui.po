@@ -92,8 +92,8 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Удалить файлы с диска вместо отправки в Корзину. Используйте, если нормальный"
-" метод удаления не работает."
+"Удалить файлы с диска вместо отправки в Корзину. Используйте, если нормальный "
+"метод удаления не работает."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
