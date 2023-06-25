@@ -255,7 +255,7 @@ msgstr "Теги для проверки:"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
-msgstr "Трек"
+msgstr "Дорожка"
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
@@ -408,15 +408,15 @@ msgstr "Показать значения разницы"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "Переместить отмеченные в Корзину…"
+msgstr "Переместить отмеченные в Корзину..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "Переместить отмеченные в…"
+msgstr "Переместить отмеченные в..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "Скопировать отмеченные в…"
+msgstr "Скопировать отмеченные в..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
@@ -476,7 +476,7 @@ msgstr "Экспорт в CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr "Сохранить результаты…"
+msgstr "Сохранить результаты..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
@@ -508,7 +508,7 @@ msgstr "Значения разницы"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr "Выберите файл, чтобы сохранить Ваши результаты"
+msgstr "Выберите файл для сохранения Ваших результатов"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
@@ -548,7 +548,7 @@ msgstr "Все на передний план"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr "Проверка обновлений…"
+msgstr "Проверка обновлений..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
@@ -625,7 +625,7 @@ msgstr "Уровень фильтрации:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr "Отфильтровать результаты…"
+msgstr "Отфильтровать результаты..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
@@ -649,7 +649,7 @@ msgstr "Пропускать файлы меньше, чем:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "Загрузить из файла…"
+msgstr "Загрузить из файла..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
@@ -673,7 +673,7 @@ msgstr "Вставить"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr "Настройки…"
+msgstr "Настройки..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
@@ -705,7 +705,7 @@ msgstr "Выбрать все"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "Переместить отмеченные в Корзину…"
+msgstr "Переместить отмеченные в Корзину..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
@@ -757,7 +757,7 @@ msgstr "Результаты dupeGuru (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr "Выберите файл для сохранения каталогов"
+msgstr "Выберите файл для сохранения Ваших каталогов"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
