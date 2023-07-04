@@ -21,6 +21,8 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addLayout(self.filterHardnessHLayout)
         self._setupAddCheckbox("matchScaledBox", tr("Match pictures of different dimensions"))
         self.widgetsVLayout.addWidget(self.matchScaledBox)
+        self._setupAddCheckbox("matchRotatedBox", tr("Match pictures of different rotations"))
+        self.widgetsVLayout.addWidget(self.matchRotatedBox)
         self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"))
         self.widgetsVLayout.addWidget(self.mixFileKindBox)
         self._setupAddCheckbox("useRegexpBox", tr("Use regular expressions when filtering"))
@@ -57,6 +59,7 @@ show scrollbars to span the view around"
 
     def _load(self, prefs, setchecked, section):
         setchecked(self.matchScaledBox, prefs.match_scaled)
+        setchecked(self.matchRotatedBox, prefs.match_rotated)
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.PICTURE)
@@ -67,5 +70,6 @@ show scrollbars to span the view around"
 
     def _save(self, prefs, ischecked):
         prefs.match_scaled = ischecked(self.matchScaledBox)
+        prefs.match_rotated = ischecked(self.matchRotatedBox)
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
         prefs.details_dialog_viewers_show_scrollbars = ischecked(self.details_dialog_viewers_show_scrollbars)

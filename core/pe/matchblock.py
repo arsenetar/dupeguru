@@ -118,7 +118,7 @@ def get_match(first, second, percentage):
     return Match(first, second, percentage)
 
 
-def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
+def async_compare(ref_ids, other_ids, dbname, threshold, picinfo, match_rotated=False):
     # The list of ids in ref_ids have to be compared to the list of ids in other_ids. other_ids
     # can be None. In this case, ref_ids has to be compared with itself
     # picinfo is a dictionary {pic_id: (dimensions, is_ref)}
@@ -136,27 +136,33 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
         other_dimensions, other_is_ref = picinfo[other_id]
         if ref_is_ref and other_is_ref:
             continue
-        rotated_ref_dimensions = (ref_dimensions[1], ref_dimensions[0])
-        if ref_dimensions != other_dimensions and rotated_ref_dimensions != other_dimensions:
-            continue
-        for orientation_ref in range(8):
-            for orientation_other in range(8):
-                try:
-                    diff = avgdiff(ref_blocks[orientation_ref], other_blocks[orientation_other], limit, MIN_ITERATIONS)
-                    percentage = 100 - diff
-                except (DifferentBlockCountError, NoBlocksError):
-                    percentage = 0
-                if percentage >= threshold:
-                    results.append((ref_id, other_id, percentage))
-                    break
+        if ref_dimensions != other_dimensions:
+            if match_rotated:
+                rotated_ref_dimensions = (ref_dimensions[1], ref_dimensions[0])
+                if rotated_ref_dimensions != other_dimensions:
+                    continue
             else:
                 continue
-            break
+
+        orientation_range = 1
+        if match_rotated:
+            orientation_range = 8
+
+        for orientation_ref in range(orientation_range):
+            try:
+                diff = avgdiff(ref_blocks[orientation_ref], other_blocks[0], limit, MIN_ITERATIONS)
+                percentage = 100 - diff
+            except (DifferentBlockCountError, NoBlocksError):
+                percentage = 0
+            if percentage >= threshold:
+                results.append((ref_id, other_id, percentage))
+                break
+
     cache.close()
     return results
 
 
-def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljob):
+def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotated=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
             return ((None, None), p.is_ref)
@@ -211,7 +217,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
                 picinfo.update({p.cache_id: get_picinfo(p) for p in other_chunk})
             else:
                 other_ids = None
-            args = (ref_ids, other_ids, cache_path, threshold, picinfo)
+            args = (ref_ids, other_ids, cache_path, threshold, picinfo, match_rotated)
             async_results.append(pool.apply_async(async_compare, args))
             collect_results()
         collect_results(collect_all=True)
