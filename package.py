@@ -122,7 +122,7 @@ def package_arch():
     # need to include them).
     print("Packaging for Arch")
     srcpath = op.join("build", "dupeguru-arch")
-    packages = ["hscommon", "core", "qt", "send2trash"]
+    packages = ["hscommon", "core", "qt"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
