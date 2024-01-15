@@ -15,7 +15,7 @@
 #
 
 import os
-import imp
+import importlib
 import sys
 import glob
 import token
