@@ -14,7 +14,7 @@ import re
 import os
 import shutil
 
-rom errno import EISDIR, EACCES
+from errno import EISDIR, EACCES
 from pathlib import Path
 from typing import Callable, List
 
