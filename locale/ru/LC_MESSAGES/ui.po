@@ -1,11 +1,13 @@
 # Translators:
 # Fuan <jcfrt@posteo.net>, 2022
 # Andrew Senetar <arsenetar@gmail.com>, 2022
+# AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023
+# Captain Quake <elizabeth-keen.gardy@simplelogin.co>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2022\n"
-"Language-Team: Russian (https://www.transifex.com/voltaicideas/teams/116153/ru/)\n"
+"Last-Translator: Captain Quake <elizabeth-keen.gardy@simplelogin.co>, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -18,7 +20,7 @@ msgstr "Выйти"
 #: qt/app.py:82 qt/preferences_dialog.py:116
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Options"
-msgstr "Параметры"
+msgstr "Настройки"
 
 #: qt/app.py:83 qt/ignore_list_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
@@ -75,7 +77,7 @@ msgstr "Жёсткая ссылка"
 
 #: qt/deletion_options.py:44
 msgid "Symlink"
-msgstr "Символьная ссылка"
+msgstr "Символическая ссылка"
 
 #: qt/deletion_options.py:48
 msgid " (unsupported)"
@@ -90,8 +92,8 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Вместо отправки файлов в Корзину удалить их с диска. Этот параметр обычно "
-"используется как обходной путь, когда нормальный метод удаления не работает."
+"Удалить файлы с диска вместо отправки в Корзину. Используйте если нормальный"
+" метод удаления не работает."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
@@ -154,11 +156,11 @@ msgstr "Музыка"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Picture"
-msgstr "Рисунок"
+msgstr "Изображения"
 
 #: qt/directories_dialog.py:121 cocoa/en.lproj/Localizable.strings:0
 msgid "Standard"
-msgstr "Стандарт"
+msgstr "Обычный"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
@@ -170,7 +172,7 @@ msgstr "Больше вариантов"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "Выберите каталоги для поиска и нажмите \"Сканирование\"."
+msgstr "Выберите каталоги для поиска и нажмите \"Сканировать\"."
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -178,7 +180,7 @@ msgstr "Загрузить результаты"
 
 #: qt/directories_dialog.py:166 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan"
-msgstr "Сканирование"
+msgstr "Сканировать"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
@@ -222,11 +224,11 @@ msgstr "Состояние"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Excluded"
-msgstr "Исключённые"
+msgstr "Исключён"
 
 #: qt/directories_model.py:24 cocoa/en.lproj/Localizable.strings:0
 msgid "Normal"
-msgstr "Нормальный"
+msgstr "Обычный"
 
 #: qt/ignore_list_dialog.py:45 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Selected"
@@ -293,7 +295,7 @@ msgstr "Можно смешивать типы файлов"
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
-msgstr "Использование регулярных выражений при фильтрации"
+msgstr "Использовать регулярные выражения для фильтров"
 
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
@@ -312,7 +314,7 @@ msgstr "Режим отладки (требуется перезапуск)"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr "Совпадение рисунков разных размеров"
+msgstr "Искать дубликаты изображений разных размеров"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
@@ -357,8 +359,7 @@ msgstr ""
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr ""
-"dupeGuru необходимо перезапустить, чтобы языковые изменения вступили в силу."
+msgstr "Новый язык будет загружен при следующем запуске dupeGuru."
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
@@ -377,7 +378,7 @@ msgstr ""
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "Проблемы!"
+msgstr "Проблемка!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -471,7 +472,7 @@ msgstr "Экспорт в HTML"
 
 #: qt/result_window.py:88
 msgid "Export To CSV"
-msgstr "Экспорт в "
+msgstr "Экспорт в CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
@@ -644,7 +645,7 @@ msgstr "Скрыть остальные"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr "Игнорировать файлы меньше чем:"
+msgstr "Пропускать файлы меньше чем:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
@@ -652,7 +653,7 @@ msgstr "Загрузить из файла…"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
-msgstr "Минимизировать"
+msgstr "Свернуть"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Mode"
@@ -720,7 +721,7 @@ msgstr "Начать поиск дубликатов"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr " Имя '%@' уже существует."
+msgstr "Имя '%@' уже существует."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
@@ -752,7 +753,7 @@ msgstr "Выберите файл каталогов для загрузки"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "каталоги dupeGuru (*.dupegurudirs)"
+msgstr "Каталоги dupeGuru (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
@@ -760,11 +761,11 @@ msgstr "Выберите файл для сохранения каталогов
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr "каталоги dupeGuru (*.dupegurudirs)"
+msgstr "Каталоги dupeGuru (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
-msgstr "добавлять"
+msgstr "Добавить"
 
 #: qt\exclude_list_dialog.py:46
 msgid "Restore defaults"
@@ -772,7 +773,7 @@ msgstr "Восстановить значения по умолчанию"
 
 #: qt\exclude_list_dialog.py:47
 msgid "Test string"
-msgstr "Тестовая строка"
+msgstr "Проверить строку"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
@@ -789,10 +790,10 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Эти (чувствительные к регистру) регулярные выражения Python будут отфильтровывать файлы во время сканирования.<br>Директорам также будет установлено <strong>состояние по умолчанию</strong> «Исключено» на вкладке «Каталоги», если их имя совпадает с одним из выбранных регулярных выражений.<br>Для каждого собранного файла выполняется два теста, чтобы определить, следует ли его полностью игнорировать:<br><li>1. Регулярные выражения без разделителя пути будут сравниваться только с именем файла.</li>\n"
+"Эти (чувствительные к регистру) регулярные выражения Python будут отфильтровывать файлы во время сканирования.<br>Если имя каталога подходит под какое-либо из выбранных регулярных выражений, для него на вкладке «Каталоги» будет выставлено <strong>состояние по умолчанию</strong> «Исключено».<br>Для каждого файла выполняется две проверки, чтобы определить, следует ли его полностью игнорировать:<br><li>1. Регулярные выражения без разделителя пути будут сравниваться только с именем файла.</li>\n"
 "<li>2. Регулярные выражения, содержащие хотя бы один разделитель пути, будут сравниваться с полным путем к файлу.</li><br>\n"
-"Пример: если вы хотите отфильтровать файлы .PNG только из каталога «Мои изображения»:<br><code>.*Мои\\sизображения\\\\.*\\.png</code><br><br>Вы можете проверить регулярное выражение с помощью кнопки «тестовая строка» после вставки поддельного пути в тестовое поле:<br><code>C:\\\\Пользователь\\Мои изображения\\test.png</code><br><br>\n"
-"Соответствующие регулярные выражения будут выделены.<br>Если есть хотя бы одно выделение, проверенный путь или имя файла будет проигнорирован во время сканирования.<br><br>Каталоги и файлы, начинающиеся с точки \".\" по умолчанию отфильтрованы.<br><br>"
+"Пример: отфильтровать .PNG из каталога «Мои изображения»:<br><code>.*Мои\\sизображения\\\\.*\\.png</code><br><br>Вы можете проверить регулярное выражение с помощью кнопки «Проверить строку», указав, например, такой путь:<br><code>C:\\\\Пользователь\\Мои изображения\\test.png</code><br><br>\n"
+"Сработавшие регулярные выражения будут выделены.<br>Если есть хотя бы одно выделение, проверенный путь или имя файла будет проигнорирован во время сканирования.<br><br>Каталоги и файлы, начинающиеся с точки \".\" по умолчанию будут отфильтрованы.<br><br>"
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
@@ -833,9 +834,7 @@ msgstr "Переопределить значки темы на панели и�
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
-msgstr ""
-"Используйте наши собственные внутренние значки вместо тех, которые "
-"предоставляются движком темы."
+msgstr "Используйте внутренние значки вместо значков, встроенных в тему"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
@@ -845,9 +844,7 @@ msgstr "Показывать полосы прокрутки в средства
 msgid ""
 "When the image displayed doesn't fit the viewport, show scrollbars to span "
 "the view around"
-msgstr ""
-"Когда отображаемое изображение не умещается в области просмотра, покажите "
-"полосы прокрутки, чтобы охватить область просмотра"
+msgstr "Показывать полосы прокрутки для больших изображений"
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
@@ -864,19 +861,19 @@ msgstr ""
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
-msgstr "Используйте жирный шрифт для ссылок"
+msgstr "Использовать жирный шрифт для ссылок"
 
 #: qt\preferences_dialog.py:176
 msgid "Reference foreground color:"
-msgstr "Эталонный цвет переднего плана:"
+msgstr "Цвет шрифта для эталонных файлов:"
 
 #: qt\preferences_dialog.py:179
 msgid "Reference background color:"
-msgstr "Цвет фона справки:"
+msgstr "Цвет фона для эталонных файлов:"
 
 #: qt\preferences_dialog.py:182 qt\preferences_dialog.py:216
 msgid "Delta foreground color:"
-msgstr "Цвет переднего плана дельты:"
+msgstr "Цвет шрифта для дельты:"
 
 #: qt\preferences_dialog.py:195
 msgid "Show the title bar and can be docked"
@@ -887,8 +884,8 @@ msgid ""
 "While the title bar is hidden, use the modifier key to drag the floating "
 "window around"
 msgstr ""
-"Пока строка заголовка скрыта, используйте клавишу-модификатор, чтобы "
-"перетащить плавающее окно вокруг"
+"Если строка заголовка скрыта, перемещать плавающее окно с клавишей-"
+"модификатором"
 
 #: qt\preferences_dialog.py:199
 msgid "The title bar can only be disabled while the window is docked"
@@ -915,10 +912,10 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"Эти (чувствительные к регистру) регулярные выражения Python будут отфильтровывать файлы во время сканирования.<br>Директорам также будет установлено <strong>состояние по умолчанию</strong> «Исключено» на вкладке «Каталоги», если их имя совпадает с одним из выбранных регулярных выражений.<br>Для каждого собранного файла выполняется два теста, чтобы определить, следует ли его полностью игнорировать:<br><li>1. Регулярные выражения без разделителя пути будут сравниваться только с именем файла.</li>\n"
+"Эти (чувствительные к регистру) регулярные выражения Python будут отфильтровывать файлы во время сканирования.<br>Если имя каталога подходит под какое-либо из выбранных регулярных выражений, для него на вкладке «Каталоги» будет выставлено <strong>состояние по умолчанию</strong> «Исключено».<br>Для каждого файла выполняется две проверки, чтобы определить, следует ли его полностью игнорировать:<br><li>1. Регулярные выражения без разделителя пути будут сравниваться только с именем файла.</li>\n"
 "<li>2. Регулярные выражения, содержащие хотя бы один разделитель пути, будут сравниваться с полным путем к файлу.</li><br>\n"
-"Пример: если вы хотите отфильтровать файлы .PNG только из каталога «Мои изображения»:<br><code>.*Мои\\sизображения\\\\.*\\.png</code><br><br>Вы можете проверить регулярное выражение с помощью кнопки «тестовая строка» после вставки поддельного пути в тестовое поле:<br><code>C:\\\\Пользователь\\Мои изображения\\test.png</code><br><br>\n"
-"Соответствующие регулярные выражения будут выделены.<br>Если есть хотя бы одно выделение, проверенный путь или имя файла будет проигнорирован во время сканирования.<br><br>Каталоги и файлы, начинающиеся с точки \".\" по умолчанию отфильтрованы.<br><br>"
+"Пример: отфильтровать .PNG из каталога «Мои изображения»:<br><code>.*Мои\\sизображения\\\\.*\\.png</code><br><br>Вы можете проверить регулярное выражение с помощью кнопки «Проверить строку», указав, например, такой путь:<br><code>C:\\\\Пользователь\\Мои изображения\\test.png</code><br><br>\n"
+"Сработавшие регулярные выражения будут выделены.<br>Если есть хотя бы одно выделение, проверенный путь или имя файла будет проигнорирован во время сканирования.<br><br>Каталоги и файлы, начинающиеся с точки \".\" по умолчанию будут отфильтрованы.<br><br>"
 
 #: qt\app.py:256
 msgid "Results"
@@ -930,79 +927,86 @@ msgstr "Общий интерфейс"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr "Таблица результатов"
+msgstr "Таблица с результатами"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
-msgstr "Окно деталей"
+msgstr "Окно с подробностями"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
-msgstr "Общий"
+msgstr "Общие"
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
-msgstr "Отображать"
+msgstr "Внешний вид"
 
 #: qt\se\preferences_dialog.py:70
 msgid "Partially hash files bigger than"
-msgstr ""
+msgstr "Частично хешировать большие файлы, размером более"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
-msgstr ""
+msgstr "МБ"
 
 #: qt\preferences_dialog.py:163
 msgid "Use native OS dialogs"
-msgstr ""
+msgstr "Использовать системное окно выбора файлов и папок"
 
 #: qt\preferences_dialog.py:166
 msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
 msgstr ""
+"При выборе файлов или папок для добавления в список сканирования будет "
+"использоваться диалоговое окно системы, а не встроенное в dupeGuru. "
+"Некоторые системные диалоговые окна имеют ограниченную функциональность."
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
-msgstr ""
+msgstr "Игнорировать файлы больше чем"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
-msgstr ""
+msgstr "Очистить кэш"
 
 #: qt\app.py:294
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
 msgstr ""
+"Вы действительно хотите очистить кэш? Это удалит все кэшированные хеши "
+"файлов и анализ данных изображений."
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr ""
+msgstr "Кэш очищен "
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
-msgstr ""
+msgstr "Использовать темную тему"
 
 #: qt\preferences_dialog.py:241
 msgid "Profile scan operation"
-msgstr ""
+msgstr "Сохранить профиль сканирования"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
 msgstr ""
+"В папке установленной или портативной программы, есть папка Data в которую "
+"сохраняется логи и файл с раширением *.profile для оптимизации."
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
-msgstr ""
+msgstr "Сохранять отчеты в: <a href=\"{}\">{}</a>"
 
 #: qt\preferences_dialog.py:291
 msgid "Debug"
-msgstr ""
+msgstr "Отладка"
 
 #: qt\about_box.py:31
 msgid "About {}"
-msgstr "О {}"
+msgstr "О программе {}"
 
 #: qt\about_box.py:47
 msgid "Version {}"
@@ -1010,7 +1014,7 @@ msgstr "Версия {}"
 
 #: qt\about_box.py:49 qt\about_box.py:75
 msgid "Checking for updates..."
-msgstr ""
+msgstr "Проверка обновлений..."
 
 #: qt\about_box.py:54
 msgid "Licensed under GPLv3"
@@ -1018,11 +1022,11 @@ msgstr "Под лицензией GPLv3"
 
 #: qt\about_box.py:68
 msgid "No update available."
-msgstr ""
+msgstr "У вас самая свежая версия"
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr ""
+msgstr "Обнаружена новая {} версия, загружать <a href=\"{}\">тут</a>."
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
@@ -1034,7 +1038,7 @@ msgstr "Что-то пошло не так. Хотите отправить от
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1042,17 +1046,17 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Отчеты об ошибках следует сообщать как о проблемах Github. Вы можете скопировать трассировку ошибки выше и вставить ее в новый выпуск.\n"
+"Отчеты об ошибках следует сообщать в виде проблем (issues) на GitHub. Вы можете скопировать приведенный выше отчет об ошибке и сообщить о нем на GitHub.\n"
 "\n"
-"Обязательно заранее выполните поиск любых уже существующих проблем. Также не забудьте протестировать самую последнюю версию, доступную в репозитории, поскольку ошибка, с которой вы столкнулись, могла уже быть исправлена.\n"
+"Пожалуйста, предварительно сделайте поиск уже существующих проблем в репозитории программы на GitHub. Также убедитесь, что вы используете самую последнюю версию, доступную из репозитория, поскольку ошибка, с которой вы столкнулись, возможно, уже исправлена.\n"
 "\n"
-"Что обычно действительно помогает, так это то, что вы добавляете описание того, как вы получили ошибку. Благодаря!\n"
+"Чтобы быстро и качественно решить проблему, очень поможет пошаговое описание действий пришедших к ошибке. Спасибо!\n"
 "\n"
-"Хотя приложение должно продолжить работу после этой ошибки, оно может находиться в нестабильном состоянии, поэтому рекомендуется перезапустить приложение."
+"Приложение должно продолжать работу после ошибки, хотя и не стабильно. Рекомендуется перезапустить программу."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Перейти на Github"
+msgid "Go to GitHub"
+msgstr "Перейти на GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"
@@ -1137,3 +1141,34 @@ msgstr "Очистить список"
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr "Искать..."
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+"Опция для опытных пользователей для различных специфичных ситуаций. Если не "
+"знаете, что делаете, не трогайте!"
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr "Включить проверку после завершения сканирования"
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr "Игнорировать разницу во времени при загрузке кэшированных дайджестов"
+
+#: qt\progress_window.py:64
+msgid "Cancel?"
+msgstr "Отменить?"
+
+#: qt\progress_window.py:65
+msgid "Are you sure you want to cancel? All progress will be lost."
+msgstr "Вы уверены, что хотите отменить? Весь прогресс будет потерян."
+
+#: qt\exclude_list_dialog.py:161
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""

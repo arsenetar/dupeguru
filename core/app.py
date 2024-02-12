@@ -126,8 +126,6 @@ class DupeGuru(Broadcaster):
 
     NAME = PROMPT_NAME = "dupeGuru"
 
-    PICTURE_CACHE_TYPE = "sqlite"  # set to 'shelve' for a ShelveCache
-
     def __init__(self, view, portable=False):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
@@ -153,7 +151,8 @@ class DupeGuru(Broadcaster):
             "clean_empty_dirs": False,
             "ignore_hardlink_matches": False,
             "copymove_dest_type": DestType.RELATIVE,
-            "picture_cache_type": self.PICTURE_CACHE_TYPE,
+            "include_exists_check": True,
+            "rehash_ignore_mtime": False,
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -183,8 +182,7 @@ class DupeGuru(Broadcaster):
         self.view.create_results_window()
 
     def _get_picture_cache_path(self):
-        cache_type = self.options["picture_cache_type"]
-        cache_name = "cached_pictures.shelve" if cache_type == "shelve" else "cached_pictures.db"
+        cache_name = "cached_pictures.db"
         return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):
@@ -555,7 +553,9 @@ class DupeGuru(Broadcaster):
                 # a workaround to make the damn thing work.
                 exepath, args = match.groups()
                 path, exename = op.split(exepath)
-                p = subprocess.Popen(exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                p = subprocess.Popen(
+                    exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                )
                 output = p.stdout.read()
                 logging.info("Custom command %s %s: %s", exename, args, output)
             else:
@@ -792,6 +792,7 @@ class DupeGuru(Broadcaster):
         Scans folders selected in :attr:`directories` and put the results in :attr:`results`
         """
         scanner = self.SCANNER_CLASS()
+        fs.filesdb.ignore_mtime = self.options["rehash_ignore_mtime"] is True
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return

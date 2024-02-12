@@ -16,6 +16,7 @@ from hscommon.jobprogress import job
 
 from core.engine import Match
 from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
+from core.pe.cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -27,7 +28,7 @@ from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
 # to files in other chunks. So chunkifying doesn't save us any actual comparison, but the advantage
 # is that instead of reading blocks from disk number_of_files**2 times, we read it
 # number_of_files*number_of_chunks times.
-# Determining the right chunk size is tricky, bceause if it's too big, too many blocks will be in
+# Determining the right chunk size is tricky, because if it's too big, too many blocks will be in
 # memory at the same time and we might end up with memory trashing, which is awfully slow. So,
 # because our *real* bottleneck is CPU, the chunk size must simply be enough so that the CPU isn't
 # starved by Disk IOs.
@@ -50,14 +51,7 @@ except Exception:
 
 
 def get_cache(cache_path, readonly=False):
-    if cache_path.endswith("shelve"):
-        from core.pe.cache_shelve import ShelveCache
-
-        return ShelveCache(cache_path, readonly=readonly)
-    else:
-        from core.pe.cache_sqlite import SqliteCache
-
-        return SqliteCache(cache_path, readonly=readonly)
+    return SqliteCache(cache_path, readonly=readonly)
 
 
 def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):

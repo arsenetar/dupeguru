@@ -18,4 +18,3 @@ file_filter = locale/<lang>/LC_MESSAGES/ui.po
 source_file = locale/ui.pot
 source_lang = en
 type        = PO
-

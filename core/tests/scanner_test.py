@@ -17,6 +17,7 @@ from core.scanner import Scanner, ScanType
 from core.me.scanner import ScannerME
 
 
+# TODO update this to be able to inherit from fs.File
 class NamedObject:
     def __init__(self, name="foobar", size=1, path=None):
         if path is None:
@@ -30,6 +31,9 @@ class NamedObject:
 
     def __repr__(self):
         return "<NamedObject {!r} {!r}>".format(self.name, self.path)
+
+    def exists(self):
+        return self.path.exists()
 
 
 no = NamedObject

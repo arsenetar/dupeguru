@@ -4,9 +4,10 @@
         "Dupras",
         "hscommon"
     ],
+    "editor.rulers": [
+        88,
+        120
+    ],
     "python.languageServer": "Pylance",
     "yaml.schemaStore.enable": true,
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
-    }
 }

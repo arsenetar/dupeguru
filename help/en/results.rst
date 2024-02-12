@@ -180,7 +180,7 @@ any of them.
     the file's path. If the original file is deleted or moved, the link is broken. A hardlink is a
     link to the file *itself*. That link is as good as a "real" file. Only when *all* hardlinks to a
     file are deleted is the file itself deleted.
-  
+
     On OSX and Linux, this feature is supported fully, but under Windows, it's a bit complicated.
     Windows XP doesn't support it, but Vista and up support it. However, for the feature to work,
     dupeGuru has to run with administrative privileges.

@@ -24,7 +24,7 @@ Contents:
 
 .. toctree::
     :maxdepth: 2
-    
+
     contribute
     quick_start
     folders

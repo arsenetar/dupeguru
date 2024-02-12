@@ -30,8 +30,8 @@ that makes sure that you will **always** keep at least one member of the duplica
 How can I report a bug a suggest a feature?
 -------------------------------------------
 
-dupeGuru is hosted on `Github`_ and it's also where issues are tracked. The best way to report a
-bug or suggest a feature is to sign up on Github and `open an issue`_. 
+dupeGuru is hosted on `GitHub`_ and it's also where issues are tracked. The best way to report a
+bug or suggest a feature is to sign up on GitHub and `open an issue`_.
 
 The mark box of a file I want to delete is disabled. What must I do?
 --------------------------------------------------------------------
@@ -176,6 +176,5 @@ Preferences are stored elsewhere:
 * Linux: ``~/.config/Hardcoded Software/dupeGuru.conf``
 * Mac OS X: In the built-in ``defaults`` system, as ``com.hardcoded-software.dupeguru``
 
-.. _Github: https://github.com/arsenetar/dupeguru
+.. _GitHub: https://github.com/arsenetar/dupeguru
 .. _open an issue: https://github.com/arsenetar/dupeguru/wiki/issue-labels
-

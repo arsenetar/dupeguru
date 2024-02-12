@@ -1,10 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
+# AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2021\n"
-"Language-Team: Russian (https://www.transifex.com/voltaicideas/teams/116153/ru/)\n"
+"Last-Translator: AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -29,9 +30,9 @@ msgstr "Битрейт"
 
 #: core\me\prioritize.py:37
 msgid "Samplerate"
-msgstr "Частота оцифровки"
+msgstr "Частота дискретизации"
 
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:92
+#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
 #: core\se\result_table.py:19
 msgid "Filename"
 msgstr "Имя файла"
@@ -51,7 +52,7 @@ msgstr "Время"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr "Частота"
+msgstr "Частота дискретизации"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
@@ -59,7 +60,7 @@ msgid "Kind"
 msgstr "Тип"
 
 #: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:163 core\se\result_table.py:23
+#: core\prioritize.py:165 core\se\result_table.py:23
 msgid "Modification"
 msgstr "Время изменения"
 
@@ -117,6 +118,6 @@ msgstr "Размер (КБ)"
 msgid "EXIF Timestamp"
 msgstr "Временная отметка EXIF"
 
-#: core\prioritize.py:156
+#: core\prioritize.py:158
 msgid "Size"
 msgstr "Размер"
