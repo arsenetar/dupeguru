@@ -10,7 +10,7 @@ import logging
 import re
 import os
 import os.path as op
-from errno import EISDIR
+from errno import EISDIR, EACCES
 from xml.etree import ElementTree as ET
 
 from hscommon.jobprogress.job import nulljob
@@ -377,7 +377,7 @@ class Results(Markable):
             do_write(outfile)
         except OSError as e:
             # If our OSError is because dest is already a directory, we want to handle that.
-            if e.errno == EISDIR:
+            if e.errno in (EISDIR, EACCES):
                 p = str(outfile)
                 dirname, basename = op.split(p)
                 otherfiles = os.listdir(dirname)
