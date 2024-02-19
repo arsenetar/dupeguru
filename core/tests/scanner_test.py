@@ -242,12 +242,12 @@ def test_content_scan_doesnt_put_digest_in_words_at_the_end(fake_fileexists):
     s = Scanner()
     s.scan_type = ScanType.CONTENTS
     f = [no("foo"), no("bar")]
-    f[0].digest = f[0].digest_partial = f[
-        0
-    ].digest_samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
-    f[1].digest = f[1].digest_partial = f[
-        1
-    ].digest_samples = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+    f[0].digest = f[0].digest_partial = f[0].digest_samples = (
+        "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+    )
+    f[1].digest = f[1].digest_partial = f[1].digest_samples = (
+        "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+    )
     r = s.get_dupe_groups(f)
     # FIXME looks like we are missing something here?
     r[0]

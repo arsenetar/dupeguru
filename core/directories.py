@@ -187,7 +187,7 @@ class Directories:
         for path in self._dirs:
             for file in self._get_files(path, fileclasses=fileclasses, j=j):
                 file_count += 1
-                if type(j) != job.NullJob:
+                if not isinstance(j, job.NullJob):
                     j.set_progress(-1, tr("Collected {} files to scan").format(file_count))
                 yield file
 
@@ -203,7 +203,7 @@ class Directories:
             from_folder = folderclass(path)
             for folder in self._get_folders(from_folder, j):
                 folder_count += 1
-                if type(j) != job.NullJob:
+                if not isinstance(j, job.NullJob):
                     j.set_progress(-1, tr("Collected {} folders to scan").format(folder_count))
                 yield folder
 

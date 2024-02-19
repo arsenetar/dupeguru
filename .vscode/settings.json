@@ -1,5 +1,4 @@
 {
-    "python.formatting.provider": "black",
     "cSpell.words": [
         "Dupras",
         "hscommon"
@@ -10,4 +9,8 @@
     ],
     "python.languageServer": "Pylance",
     "yaml.schemaStore.enable": true,
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }

@@ -58,36 +58,44 @@ class ViewerToolBar(QToolBar):
             (
                 "actionZoomIn",
                 QKeySequence.ZoomIn,
-                QIcon.fromTheme("zoom-in")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_in")),
+                (
+                    QIcon.fromTheme("zoom-in")
+                    if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                    else QIcon(QPixmap(":/" + "zoom_in"))
+                ),
                 tr("Increase zoom"),
                 controller.zoomIn,
             ),
             (
                 "actionZoomOut",
                 QKeySequence.ZoomOut,
-                QIcon.fromTheme("zoom-out")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_out")),
+                (
+                    QIcon.fromTheme("zoom-out")
+                    if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                    else QIcon(QPixmap(":/" + "zoom_out"))
+                ),
                 tr("Decrease zoom"),
                 controller.zoomOut,
             ),
             (
                 "actionNormalSize",
                 tr("Ctrl+/"),
-                QIcon.fromTheme("zoom-original")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_original")),
+                (
+                    QIcon.fromTheme("zoom-original")
+                    if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                    else QIcon(QPixmap(":/" + "zoom_original"))
+                ),
                 tr("Normal size"),
                 controller.zoomNormalSize,
             ),
             (
                 "actionBestFit",
                 tr("Ctrl+*"),
-                QIcon.fromTheme("zoom-best-fit")
-                if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
-                else QIcon(QPixmap(":/" + "zoom_best_fit")),
+                (
+                    QIcon.fromTheme("zoom-best-fit")
+                    if ISLINUX and not self.parent.app.prefs.details_dialog_override_theme_icons
+                    else QIcon(QPixmap(":/" + "zoom_best_fit"))
+                ),
                 tr("Best fit"),
                 controller.zoomBestFit,
             ),
