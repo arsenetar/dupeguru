@@ -14,6 +14,10 @@ Preferences
     If you check this box, pictures of different dimensions will be allowed in the same
     duplicate group.
 
+**Match pictures of different rotations:**
+    If you check this box, pictures of different rotations will be allowed in the same
+    duplicate group.
+
 .. _filter-hardness:
 
 **Filter Hardness:**

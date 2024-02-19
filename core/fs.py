@@ -206,7 +206,7 @@ class File:
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
     # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
-    __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
+    __slots__ = ("path", "unicode_path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
         for attrname in self.INITIAL_INFO:
@@ -217,6 +217,8 @@ class File:
             self.mtime = nonone(path.stat().st_mtime, 0)
         else:
             self.path = path
+        if self.path:
+            self.unicode_path = str(self.path)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} {str(self.path)}>"

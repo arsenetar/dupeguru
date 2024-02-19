@@ -314,6 +314,10 @@ msgstr "Modo de Depuração (requer reinício)"
 msgid "Match pictures of different dimensions"
 msgstr "Coincidir fotos de dimensões diferentes"
 
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different rotations"
+msgstr "Coincidir fotos de rotações diferentes"
+
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
 msgstr "Pressão do Filtro:"
