@@ -1,10 +1,10 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
 # Sangdon Lim, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Sangdon Lim, 2022\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2023\n"
 "Language-Team: Korean (https://app.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"

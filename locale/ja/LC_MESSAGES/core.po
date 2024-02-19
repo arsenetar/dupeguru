@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Last-Translator: Fuan <jcfrt@posteo.net>, 2022\n"
-"Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
+"Language-Team: Japanese (https://app.transifex.com/voltaicideas/teams/116153/ja/)\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -45,95 +45,95 @@ msgstr "コピー中"
 msgid "Sending to Trash"
 msgstr "ごみ箱に送信します"
 
-#: core\app.py:291
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr "前のアクションはまだそこにぶら下がっています。 まだ新しいものを始めることはできません。 数秒待ってから、再試行してください。"
 
-#: core\app.py:302
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "重複は見つかりませんでした。"
 
-#: core\app.py:317
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "チェックを入れたファイルをすべてコピーしました。"
 
-#: core\app.py:319
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "チェックを入れたファイルをすべて移動しました。"
 
-#: core\app.py:321
+#: core\app.py:319
 msgid "All marked files were deleted successfully."
 msgstr "チェックを入れたファイルをすべて削除しました。"
 
-#: core\app.py:323
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "チェックを入れたファイルをすべてごみ箱に移動しました。"
 
-#: core\app.py:328
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "ファイルを読み込めませんでした：{}"
 
-#: core\app.py:384
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "「{}」既にリストに含まれています。"
 
-#: core\app.py:386
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' 存在しません。"
 
-#: core\app.py:394
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "選択した%d個の一致は、以降のすべてのスキャンで無視されます。 継続する？"
 
-#: core\app.py:471
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "マークされたファイルをコピーするディレクトリを選択してください"
 
-#: core\app.py:473
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "マークされたファイルを移動するディレクトリを選択してください"
 
-#: core\app.py:512
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "エクスポートしたCSVの宛先を選択します。"
 
-#: core\app.py:518 core\app.py:773 core\app.py:783
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "ファイルに書き込めませんでした：{}"
 
-#: core\app.py:541
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "カスタムコマンドは設定されていません。 お好みで設定してください。"
 
-#: core\app.py:697 core\app.py:709
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "結果から%d個のファイルを削除しようとしています。 継続する？"
 
-#: core\app.py:745
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{}重複するグループは、再優先順位付けによって変更されました。"
 
-#: core\app.py:792
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr "選択したディレクトリにはスキャン可能なファイルが含まれていません。"
 
-#: core\app.py:808
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "スキャンするファイルを収集しています"
 
-#: core\app.py:858
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s (%d 廃棄)"
 
-#: core\directories.py:190
+#: core\directories.py:191
 msgid "Collected {} files to scan"
 msgstr ""
 
-#: core\directories.py:206
+#: core\directories.py:207
 msgid "Collected {} folders to scan"
 msgstr ""
 
@@ -169,23 +169,23 @@ msgstr "ファイル名 - フィールド（順序なし）"
 msgid "Tags"
 msgstr "タグ"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "内容"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr "%d/%d 枚の写真を分析しました"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr "チャンクマッチを%d/%d回実行しました"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "マッチングの準備"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "%d/%d件の一致を確認"
 
@@ -193,7 +193,7 @@ msgstr "%d/%d件の一致を確認"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "%d/%d枚の写真のEXIFを読みました"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "EXIFタイムスタンプ"
 
@@ -233,23 +233,19 @@ msgstr "最新"
 msgid "Oldest"
 msgstr "最古"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s)マークされた重複。"
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr "フィルタ: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "%d/%dファイルのサイズを読み取った"
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "%d/%dファイルのメタデータを読み取った"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "ほぼ完了しました！ 結果をいじっています..."
 

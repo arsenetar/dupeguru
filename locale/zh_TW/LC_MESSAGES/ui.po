@@ -1,12 +1,12 @@
 # Translators:
 # Fuan <jcfrt@posteo.net>, 2022
 # 太子 VC <taiziccf@gmail.com>, 2022
-# Andrew Senetar <arsenetar@gmail.com>, 2022
 # Chris Ocelot, 2023
+# Andrew Senetar <arsenetar@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2023\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
 "Language: zh_TW\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1146,4 +1146,8 @@ msgid ""
 "These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
 "<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
 msgstr ""

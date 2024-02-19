@@ -2,10 +2,11 @@
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
 # AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023
+# Eugene Morozov <transifex@emorozov.net>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023\n"
+"Last-Translator: Eugene Morozov <transifex@emorozov.net>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr "Копирование"
 msgid "Sending to Trash"
 msgstr "Перемещение в Корзину"
 
-#: core\app.py:293
+#: core\app.py:289
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -57,39 +58,39 @@ msgstr ""
 "Предыдущее действие до сих пор выполняется. Вы не можете начать новое. "
 "Подождите несколько секунд, затем повторите попытку."
 
-#: core\app.py:304
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr "Дубликаты не найдены."
 
-#: core\app.py:319
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr "Все отмеченные файлы были скопированы успешно."
 
-#: core\app.py:321
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr "Все отмеченные файлы были перемещены успешно."
 
-#: core\app.py:323
+#: core\app.py:319
 msgid "All marked files were deleted successfully."
 msgstr "Все отмеченные файлы были удалены успешно."
 
-#: core\app.py:325
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr "Все отмеченные файлы были успешно отправлены в Корзину."
 
-#: core\app.py:330
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr "Не удалось загрузить файл: {}"
 
-#: core\app.py:386
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr "'{}' уже присутствует в списке."
 
-#: core\app.py:388
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr "'{}' не существует."
 
-#: core\app.py:396
+#: core\app.py:392
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -97,51 +98,51 @@ msgstr ""
 "Все выбранные %d совпадений будут игнорироваться при всех последующих "
 "проверках. Продолжить?"
 
-#: core\app.py:473
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr "Выберите каталог, в который вы хотите скопировать отмеченные файлы"
 
-#: core\app.py:475
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr "Выберите каталог, в который вы хотите переместить отмеченные файлы"
 
-#: core\app.py:514
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr "Выберите назначение для экспортируемого "
 
-#: core\app.py:520 core\app.py:781 core\app.py:791
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "Не удалось записать в файл: {}"
 
-#: core\app.py:543
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core\app.py:705 core\app.py:717
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core\app.py:753
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} групп дубликатов было изменено при реприоритезации."
 
-#: core\app.py:801
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core\app.py:817
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core\app.py:867
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
-#: core\directories.py:190
+#: core\directories.py:191
 msgid "Collected {} files to scan"
 msgstr "Собрано {} файлов для сканирования"
 
-#: core\directories.py:206
+#: core\directories.py:207
 msgid "Collected {} folders to scan"
 msgstr "Собрано {} каталогов для сканирования"
 
@@ -178,23 +179,23 @@ msgstr "Имя файла - Поля (без сортировки)"
 msgid "Tags"
 msgstr "Теги"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "Содержание"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr "Проанализировано %d из %d изображений"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr "Проверено %d/%d совпадений"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Подготовка для сравнения"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "Проверено %d/%d совпадений"
 
@@ -202,7 +203,7 @@ msgstr "Проверено %d/%d совпадений"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитана EXIF-информация %d/%d фотографий"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "Метка времени EXIF"
 
@@ -242,25 +243,21 @@ msgstr "Новейший"
 msgid "Oldest"
 msgstr "Старейший"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) дубликатов отмечено."
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr "фильтр: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "Подсчитан размер %d/%d файлов"
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитаны метаданные %d/%d файлов"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
-msgstr "Почти готово! Возиться с результатами..."
+msgstr "Почти готово! Вожусь с результатами..."
 
 #: core\se\scanner.py:18
 msgid "Folders"

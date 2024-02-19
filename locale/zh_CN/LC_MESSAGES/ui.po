@@ -1,12 +1,13 @@
 # Translators:
 # Fuan <jcfrt@posteo.net>, 2022
 # 太子 VC <taiziccf@gmail.com>, 2022
-# Andrew Senetar <arsenetar@gmail.com>, 2022
 # Chris Ocelot, 2023
+# Andrew Senetar <arsenetar@gmail.com>, 2023
+# Mèng yáo, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2023\n"
+"Last-Translator: Mèng yáo, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/voltaicideas/teams/116153/zh_CN/)\n"
 "Language: zh_CN\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +46,7 @@ msgstr "打开调试记录"
 
 #: qt/app.py:180 cocoa/en.lproj/Localizable.strings:0
 msgid "Do you really want to remove all your cached picture analysis?"
-msgstr "确定要移除所有缓存图片?"
+msgstr "确定要移除所有缓存的图片分析吗？"
 
 #: qt/app.py:184
 msgid "Picture cache cleared."
@@ -89,7 +90,7 @@ msgstr "直接删除文件"
 msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
-msgstr "直接将文件删除，而不是将其移至回收站。此选项通常作为普通删除方法不能正常使用时替代方案。"
+msgstr "直接将文件删除，而不是将其移至回收站。此选项通常作为常规删除方法不起作用时的替代方案。"
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
@@ -160,7 +161,7 @@ msgstr "标准"
 
 #: qt/directories_dialog.py:128 cocoa/en.lproj/Localizable.strings:0
 msgid "Scan Type:"
-msgstr "扫描类型:"
+msgstr "扫描类型："
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
@@ -168,7 +169,7 @@ msgstr "更多选项"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
-msgstr "请选择要扫描的文件夹，然后点击 \"扫描\"。"
+msgstr "请选择要扫描的文件夹，然后点击“扫描”。"
 
 #: qt/directories_dialog.py:163 cocoa/en.lproj/Localizable.strings:0
 msgid "Load Results"
@@ -184,7 +185,7 @@ msgstr "未保存的结果"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr "您还没有保存扫描结果，确定要退出吗?"
+msgstr "您还没有保存扫描结果，确定要退出吗？"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
@@ -247,7 +248,7 @@ msgstr "详细信息"
 
 #: qt/me/preferences_dialog.py:30 cocoa/en.lproj/Localizable.strings:0
 msgid "Tags to scan:"
-msgstr "扫描标签:"
+msgstr "扫描标签："
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
@@ -306,7 +307,7 @@ msgstr "忽略硬链接到相同文件的重复文件"
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Debug mode (restart required)"
-msgstr "调试模式 (需要重新启动)"
+msgstr "调试模式（需要重新启动）"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
@@ -314,7 +315,7 @@ msgstr "匹配不同尺寸的图像"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr "过滤强度:"
+msgstr "过滤强度："
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
@@ -326,15 +327,15 @@ msgstr "较少结果"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr "字体大小:"
+msgstr "字体大小："
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
-msgstr "语言:"
+msgstr "语言："
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr "复制并移动:"
+msgstr "复制并移动："
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
@@ -350,11 +351,11 @@ msgstr "重建绝对路径"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "自定义命令 (参数: %d 指重复文件, %r 指源文件):"
+msgstr "自定义命令（参数：%d 指重复文件，%r 指源文件）："
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
-msgstr "dupeGuru需要重新启动以使语言修改生效。"
+msgstr "dupeGuru 需要重新启动以使语言修改生效。"
 
 #: qt/prioritize_dialog.py:75 cocoa/en.lproj/Localizable.strings:0
 msgid "Re-Prioritize duplicates"
@@ -369,7 +370,7 @@ msgstr "在右侧的框内添加规则然后点击确定，以将最符合规则
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "有问题!"
+msgstr "有问题！"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -501,7 +502,7 @@ msgstr "选择一个文件来保存您的结果"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr "忽略文件当其小于"
+msgstr "忽略文件，当其小于"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
@@ -549,7 +550,7 @@ msgstr "复制"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Custom command (arguments: %d for dupe, %r for ref):"
-msgstr "自定义命令 (参数: %d 指重复文件, %r 指源文件):"
+msgstr "自定义命令（参数：%d 指重复文件，%r 指源文件）："
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Cut"
@@ -609,7 +610,7 @@ msgstr "过滤器"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter hardness:"
-msgstr "过滤强度:"
+msgstr "过滤强度："
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
@@ -621,7 +622,7 @@ msgstr "文件夹选择窗口"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Font Size:"
-msgstr "字体大小:"
+msgstr "字体大小："
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Hide dupeGuru"
@@ -633,7 +634,7 @@ msgstr "隐藏其他"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr "忽略文件当其小于:"
+msgstr "忽略文件，当其小于："
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
@@ -709,7 +710,7 @@ msgstr "开始重复内容扫描"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "The name '%@' already exists."
-msgstr "名称 '%@' 已存在。"
+msgstr "名称“%@”已存在。"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Window"
@@ -741,7 +742,7 @@ msgstr "选择一个目录文件以载入"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "dupeGuru 结果 （*.dupegurudirs）"
+msgstr "dupeGuru 结果 (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
@@ -749,7 +750,7 @@ msgstr "选择一个文件来保存您的目录"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
-msgstr "dupeGuru 目录 （*.dupegurudirs）"
+msgstr "dupeGuru 目录 (*.dupegurudirs)"
 
 #: qt\exclude_list_dialog.py:44
 msgid "Add"
@@ -765,7 +766,7 @@ msgstr "测试字符串"
 
 #: qt\exclude_list_dialog.py:83
 msgid "Type a python regular expression here..."
-msgstr "在此输入一个python正则表达式..."
+msgstr "在此输入一个 python 正则表达式..."
 
 #: qt\exclude_list_dialog.py:85
 msgid "Type a file system path or filename here..."
@@ -778,7 +779,7 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the test string feature by pasting a fake path in it:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"这些（大小写敏感）的python正则表达式会在扫描过程中筛选文件。<br>如果目录的名称和某一个正则表达式匹配的话，它们的<strong>默认状态</strong>将为被设为排除状态。<br>每一个被采集的文件都会被进行两种不同的测试来决定它是否会被排除掉：<br><li>1. 没有路径分隔符的正则表达式只会和文件名作比较。</li>\n"
+"这些（大小写敏感）的 python 正则表达式会在扫描过程中筛选文件。<br>如果目录的名称和某一个正则表达式匹配的话，它们的<strong>默认状态</strong>将为被设为排除状态。<br>每一个被采集的文件都会被进行两种不同的测试来决定它是否会被排除掉：<br><li>1. 没有路径分隔符的正则表达式只会和文件名作比较。</li>\n"
 "<li>2. 有路径分隔符的正则表达式，会和文件的完整路径作比较。</li><br>\n"
 "如：假如您想要仅从“我的图片”目录排除掉 .PNG 文件的话：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>您可以使用测试字符串功能来测试正则表达式，只需要在其中粘贴一个假的路径：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "匹配的正则表达式会被高亮。<br>假如至少有一个高亮的话，在扫描中这个路径将会被忽略。<br><br>以“.”开头的目录和文件默认就会被忽略。<br><br>"
@@ -836,15 +837,15 @@ msgstr "当图片尺寸大于显示窗口时，显示滚动条来移动图片。
 
 #: qt\preferences_dialog.py:156
 msgid "Use default position for tab bar (requires restart)"
-msgstr "在默认位置显示Tab Bar（需要重启）"
+msgstr "在默认位置显示标签栏（需要重启）"
 
 #: qt\preferences_dialog.py:158
 msgid ""
 "Place the tab bar below the main menu instead of next to it\n"
 "On MacOS, the tab bar will fill up the window's width instead."
 msgstr ""
-"把Tab Bar放在主菜单下面而不是旁边\n"
-"在MacOS上，Tab Bar会填充满整个窗口的宽度。"
+"把标签栏放在主菜单下面而不是旁边\n"
+"在 MacOS 上，标签栏会填充满整个窗口的宽度。"
 
 #: qt\preferences_dialog.py:172
 msgid "Use bold font for references"
@@ -887,7 +888,7 @@ msgstr "把标题栏从顶部横向改为左侧竖直"
 
 #: qt\tabbed_window.py:44
 msgid "Show tab bar"
-msgstr "显示 Tab Bar"
+msgstr "显示标签栏"
 
 #: qt\exclude_list_dialog.py:152
 msgid ""
@@ -896,10 +897,10 @@ msgid ""
 "Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
 msgstr ""
-"这些（大小写敏感）的python正则表达式会在扫描过程中对结果进行过滤。<br>除非目录名称和正则表达式匹配，它们的<strong>默认状态</strong>会被设成从目录标签排除。<br>每一个文件都会经过两种测试，以确定它是否会被完全忽略：<br><li>1. 没有路径分隔符的正则表达式，仅用于和文件名进行比较。</li>\n"
-"<li>2. 至少有一个路径分隔符的正则表达式，会被用于和文件的完整路径进行比较。</li><br>\n"
-"例如：如果你想要仅在“图片”目录中排除所有.PNG文件：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>你可以使用“测试字符串”按钮来测试你的正则表达式，只需要将虚拟的路径输入测试框即可：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
-"匹配的正则表达式会被高亮。<br>假如有至少一个高亮，测试文件的文件名或者路径就会在扫描中被忽略。<br><br>以“.”开头的目录或文件默认会被忽略。<br><br>"
+"这些 python 正则表达式（区分大小写）将在扫描期间过滤掉文件。<br>如果目录的名称恰好与某个选定的正则表达式匹配，则目录的<strong>默认状态</strong>也将在“目录”选项卡中设置为“已排除”。<br>对于收集的每个文件，将执行以下两个测试以确定是否完全忽略它：<br><li>1、没有路径分隔符的正则表达式将仅与文件名进行比较。</li>\n"
+"<li>2、包含至少一个路径分隔符的正则表达式将与文件的完整路径进行比较。</li><br>\n"
+"示例：如果只想从“我的图片”目录中过滤掉 .PNG 文件：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>那么在测试框中粘贴如下虚拟路径后，可以使用“测试字符串”按钮测试正则表达式：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"匹配的正则表达式将突出显示。<br>如果至少有一个突出显示，则在扫描过程中将忽略测试的路径或文件名。<br><br>默认情况下，以英文句点“.”开头的目录和文件将被过滤掉。<br><br>"
 
 #: qt\app.py:256
 msgid "Results"
@@ -907,7 +908,7 @@ msgstr "结果"
 
 #: qt\preferences_dialog.py:150
 msgid "General Interface"
-msgstr "通用介面"
+msgstr "通用界面"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
@@ -919,15 +920,15 @@ msgstr "详细信息窗口"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
-msgstr "一般"
+msgstr "常规"
 
 #: qt\preferences_dialog.py:286
 msgid "Display"
-msgstr "展示"
+msgstr "显示"
 
 #: qt\se\preferences_dialog.py:70
 msgid "Partially hash files bigger than"
-msgstr "只计算部分hash，如果文件大于"
+msgstr "只计算部分哈希值，如果文件大于"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
@@ -955,7 +956,10 @@ msgstr "清除缓存"
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
-msgstr "你确定要清除缓存吗？所有缓存的文件hash和图片分析都会被移除。"
+msgstr ""
+"确定要清除缓存吗？\n"
+"\n"
+"这将删除所有缓存的文件哈希和图片分析。"
 
 #: qt\app.py:299
 msgid "Cache cleared."
@@ -975,7 +979,7 @@ msgstr "将扫描操作保存为配置，并保存日志用于优化。"
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
-msgstr "日志位于：<a href=\"{}\">{}"
+msgstr "日志位于：<a href=\"{}\">{}</a>"
 
 #: qt\preferences_dialog.py:291
 msgid "Debug"
@@ -991,11 +995,11 @@ msgstr "版本 {}"
 
 #: qt\about_box.py:49 qt\about_box.py:75
 msgid "Checking for updates..."
-msgstr "检查更新..."
+msgstr "正在检查更新..."
 
 #: qt\about_box.py:54
 msgid "Licensed under GPLv3"
-msgstr "本项目基于GPLv3开源协议发布"
+msgstr "本项目基于 GPLv3 开源协议发布"
 
 #: qt\about_box.py:68
 msgid "No update available."
@@ -1003,7 +1007,7 @@ msgstr "没有新版本。"
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr "有新版本{}可用，在<a href=\"{}\">这里</a>下载。"
+msgstr "新版本 {} 可用，<a href=\"{}\">点这里</a>下载。"
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
@@ -1135,15 +1139,22 @@ msgstr "载入缓存摘要时忽略mtime的不同"
 
 #: qt\progress_window.py:64
 msgid "Cancel?"
-msgstr ""
+msgstr "取消？"
 
 #: qt\progress_window.py:65
 msgid "Are you sure you want to cancel? All progress will be lost."
-msgstr ""
+msgstr "确定要取消吗？这将会导致所有进展都付诸东流。"
 
 #: qt\exclude_list_dialog.py:161
 msgid ""
 "These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
 "<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"这些 python 正则表达式（区分大小写）将在扫描期间过滤掉文件。<br>如果目录的名称恰好与某个选定的正则表达式匹配，则目录的<strong>默认状态</strong>也将在“目录”选项卡中设置为“已排除”。<br>对于收集的每个文件，将执行以下两个测试以确定是否完全忽略它：<br><li>1、没有路径分隔符的正则表达式将仅与文件名进行比较。</li>\n"
+"<li>2、包含至少一个路径分隔符的正则表达式将与文件的完整路径进行比较。</li><br>示例：如果只想从“我的图片”目录中过滤掉 .PNG 文件：<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>那么在测试框中粘贴如下虚拟路径后，可以使用“测试字符串”按钮测试正则表达式：<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"匹配的正则表达式将突出显示。<br>如果至少有一个突出显示，则在扫描过程中将忽略测试的路径或文件名。<br><br>默认情况下，以英文句点“.”开头的目录和文件将被过滤掉。<br><br>"
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
 msgstr ""

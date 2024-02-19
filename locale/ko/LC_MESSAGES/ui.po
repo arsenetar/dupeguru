@@ -1,11 +1,11 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2022
 # Fuan <jcfrt@posteo.net>, 2022
 # Sangdon Lim, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Sangdon Lim, 2022\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2023\n"
 "Language-Team: Korean (https://app.transifex.com/voltaicideas/teams/116153/ko/)\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -365,8 +365,8 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"오른쪽 박스에 기준을 추가하고 확인을 눌러 가장 기준에 해당되는 복제를 해당 그룹의 참조 위치로 보냅니다."
-" 상세한 정보는 도움말에 있습니다"
+"오른쪽 박스에 기준을 추가하고 확인을 눌러 가장 기준에 해당되는 복제를 해당 그룹의 참조 위치로 보냅니다. 상세한 정보는 도움말에 "
+"있습니다"
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -378,8 +378,8 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"일부 (또는 전체) 파일을 처리하는 데 문제가 있었습니다. 문제의 원인은 아래 표에 표시 되있습니다. 문제되는 파일들은 결과에서 "
-"제거되지 않았습니다."
+"일부 (또는 전체) 파일을 처리하는 데 문제가 있었습니다. 문제의 원인은 아래 표에 표시 되있습니다. 문제되는 파일들은 결과에서 제거되지"
+" 않았습니다."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
@@ -1149,4 +1149,8 @@ msgid ""
 "These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
 "<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
 msgstr ""
