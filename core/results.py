@@ -376,7 +376,8 @@ class Results(Markable):
         try:
             do_write(outfile)
         except OSError as e:
-            # If our OSError is because dest is already a directory, we want to handle that.
+            # If our OSError is because dest is already a directory, we want to handle that. 21 is
+            # the code we get on OS X and Linux (EISDIR), 13 is what we get on Windows (EACCES).
             if e.errno in (EISDIR, EACCES):
                 p = str(outfile)
                 dirname, basename = op.split(p)

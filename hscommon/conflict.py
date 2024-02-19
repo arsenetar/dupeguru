@@ -76,7 +76,8 @@ def smart_copy(source_path: Path, dest_path: Path) -> None:
     try:
         _smart_move_or_copy(shutil.copy, source_path, dest_path)
     except OSError as e:
-        if e.errno in (EISDIR, EACCES):  # it's a directory
+        # It's a directory, code is 21 on OS X / Linux (EISDIR) and 13 on Windows (EACCES)
+        if e.errno in (EISDIR, EACCES):
             _smart_move_or_copy(shutil.copytree, source_path, dest_path)
         else:
             raise
