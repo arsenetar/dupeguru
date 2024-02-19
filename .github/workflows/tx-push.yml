@@ -9,7 +9,7 @@ on:
       - locale/*.pot
 
 env:
-  TX_VERSION: "1.6.10"
+  TX_VERSION: "v1.6.10"
 
 jobs:
   push-source:
