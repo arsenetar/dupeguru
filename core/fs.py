@@ -16,6 +16,7 @@ import os
 from math import floor
 import logging
 import sqlite3
+from sys import platform
 from threading import Lock
 from typing import Any, AnyStr, Union, Callable
 
@@ -118,7 +119,10 @@ class FilesDB:
         self.lock = None
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
-        self.conn = sqlite3.connect(path, check_same_thread=False)
+        if platform.startswith("gnu0"):
+            self.conn = sqlite3.connect(path, check_same_thread=False, isolation_level=None)
+        else:
+            self.conn = sqlite3.connect(path, check_same_thread=False)
         self.lock = Lock()
         self._check_upgrade()
 
