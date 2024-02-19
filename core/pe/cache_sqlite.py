@@ -18,9 +18,11 @@ class SqliteCache:
     schema_version = 2
     schema_version_description = "Added blocks for all 8 orientations."
 
-    create_table_query = ("CREATE TABLE IF NOT EXISTS "
-                          "pictures(path TEXT, mtime_ns INTEGER, blocks BLOB, blocks2 BLOB, blocks3 BLOB, "
-                          "blocks4 BLOB, blocks5 BLOB, blocks6 BLOB, blocks7 BLOB, blocks8 BLOB)")
+    create_table_query = (
+        "CREATE TABLE IF NOT EXISTS "
+        "pictures(path TEXT, mtime_ns INTEGER, blocks BLOB, blocks2 BLOB, blocks3 BLOB, "
+        "blocks4 BLOB, blocks5 BLOB, blocks6 BLOB, blocks7 BLOB, blocks8 BLOB)"
+    )
     create_index_query = "CREATE INDEX IF NOT EXISTS idx_path on pictures (path)"
     drop_table_query = "DROP TABLE IF EXISTS pictures"
     drop_index_query = "DROP INDEX IF EXISTS idx_path"
@@ -45,13 +47,17 @@ class SqliteCache:
     # Optimized
     def __getitem__(self, key):
         if isinstance(key, int):
-            sql = ("select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
-                   "from pictures "
-                   "where rowid = ?")
+            sql = (
+                "select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
+                "from pictures "
+                "where rowid = ?"
+            )
         else:
-            sql = ("select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
-                   "from pictures "
-                   "where path = ?")
+            sql = (
+                "select blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
+                "from pictures "
+                "where path = ?"
+            )
         blocks = self.con.execute(sql, [key]).fetchone()
         if blocks:
             result = [bytes_to_colors(block) for block in blocks]
@@ -76,12 +82,16 @@ class SqliteCache:
         else:
             mtime = 0
         if path_str in self:
-            sql = ("update pictures set blocks = ?, blocks2 = ?, blocks3 = ?, blocks4 = ?, blocks5 = ?, blocks6 = ?, "
-                   "blocks7 = ?, blocks8 = ?, mtime_ns = ?"
-                   "where path = ?")
+            sql = (
+                "update pictures set blocks = ?, blocks2 = ?, blocks3 = ?, blocks4 = ?, blocks5 = ?, blocks6 = ?, "
+                "blocks7 = ?, blocks8 = ?, mtime_ns = ?"
+                "where path = ?"
+            )
         else:
-            sql = ("insert into pictures(blocks,blocks2,blocks3,blocks4,blocks5,blocks6,blocks7,blocks8,mtime_ns,path) "
-                   "values(?,?,?,?,?,?,?,?,?,?)")
+            sql = (
+                "insert into pictures(blocks,blocks2,blocks3,blocks4,blocks5,blocks6,blocks7,blocks8,mtime_ns,path) "
+                "values(?,?,?,?,?,?,?,?,?,?)"
+            )
         try:
             self.con.execute(sql, blocks + [mtime, path_str])
         except sqlite.OperationalError:
@@ -145,9 +155,10 @@ class SqliteCache:
             raise ValueError(path)
 
     def get_multiple(self, rowids):
+        ids = ",".join(map(str, rowids))
         sql = (
             "select rowid, blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
-            f"from pictures where rowid in {",".join(map(str, rowids))}"
+            f"from pictures where rowid in {ids}"
         )
         cur = self.con.execute(sql)
         return (
