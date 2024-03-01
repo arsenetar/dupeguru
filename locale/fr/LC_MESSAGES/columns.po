@@ -44,7 +44,7 @@ msgstr "Dossier"
 
 #: core\me\result_table.py:21
 msgid "Size (MB)"
-msgstr "Taille (MB)"
+msgstr "Taille (Mo)"
 
 #: core\me\result_table.py:22
 msgid "Time"
@@ -52,7 +52,7 @@ msgstr "Temps"
 
 #: core\me\result_table.py:24
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr "Échantillonnage"
 
 #: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
 #: core\se\result_table.py:22
@@ -86,7 +86,7 @@ msgstr "Année"
 
 #: core\me\result_table.py:32
 msgid "Track Number"
-msgstr "Track"
+msgstr "Numéro de piste"
 
 #: core\me\result_table.py:33
 msgid "Comment"
@@ -95,16 +95,16 @@ msgstr "Commentaire"
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr "Match %"
+msgstr "Correspond à %"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
-msgstr "Mots"
+msgstr "Mots utilisés"
 
 #: core\me\result_table.py:36 core\pe\result_table.py:27
 #: core\se\result_table.py:26
 msgid "Dupe Count"
-msgstr "Nombre de Doublons"
+msgstr "Nombre de doublons"
 
 #: core\pe\prioritize.py:23 core\pe\result_table.py:23
 msgid "Dimensions"
@@ -112,7 +112,7 @@ msgstr "Dimensions"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr "Taille (KB)"
+msgstr "Taille (Ko)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"
