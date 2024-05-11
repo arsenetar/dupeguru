@@ -1,9 +1,79 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools >= 61.0.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "dupeGuru"
+description = "dupeGuru is a tool to find duplicate files on your computer."
+authors = [
+    {name = "Andrew Senetar", email = "arsenetar@voltaicideas.net"}
+]
+readme = "README.md"
+requires-python = ">=3.7, <3.13"
+keywords = ["deduplication"]
+license = {text = "GPLv3"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Desktop Environment :: File Managers",
+]
+
+dynamic = ["version"]
+
+dependencies = [
+    "distro>=1.8.0,<2.0.0",
+    "mutagen>=1.46.0,<2.0.0",
+    "polib>=1.1.0,<2.0.0",
+    "PyQt5 >=5.15.0,<6.0; sys_platform != 'linux'",
+    "pywin32>=304; sys_platform == 'win32'",
+    "semantic-version>=2.0.0,<3.0.0",
+    "Send2Trash>=1.8.2,<2.0.0",
+    "xxhash>=3.0.0,<4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7,<8",
+    "flake8",
+    "black",
+]
+build = [
+    "dupeGuru[dev]",
+    "sphinx>=5.3.0,<8.0.0",
+    "pyinstaller>=5.6,<6.0; sys_platform != 'linux'"
+]
+
+[project.urls]
+Homepage = "https://dupeguru.voltaicideas.net/"
+Documentation = "https://dupeguru.voltaicideas.net/help/en/"
+Repository = "https://github.com/arsenetar/dupeguru/"
+Issues = "https://github.com/arsenetar/dupeguru/issues"
+Releases = "https://github.com/arsenetar/dupeguru/releases"
+
+[project.gui-scripts]
+dupeguru = "dupeguru.__main__:main"
+
 [tool.black]
 line-length = 120
+
 [tool.isort]
 # make it compatible with black
 profile = "black"
 skip_gitignore = true
+
+[tool.setuptools.packages.find]
+include = ["core", "hscommon", "qt"]
+
+[tool.setuptools.dynamic]
+version = {attr = "core.__version__"}
