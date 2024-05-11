@@ -54,7 +54,7 @@ def get_cache(cache_path, readonly=False):
     return SqliteCache(cache_path, readonly=readonly)
 
 
-def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
+def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
     # there is enough memory left to carry on the operation because it is assumed that the
     # MemoryError happens when trying to read an image file, which is freed from memory by the
@@ -76,8 +76,14 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
             if with_dimensions:
                 picture.dimensions  # pre-read dimensions
             try:
-                if picture.unicode_path not in cache:
-                    blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
+                if picture.unicode_path not in cache or (
+                    match_rotated and any(block == [] for block in cache[picture.unicode_path])
+                ):
+                    if match_rotated:
+                        blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
+                    else:
+                        blocks = [[]] * 8
+                        blocks[max(picture.get_orientation() - 1, 0)] = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
             except (OSError, ValueError) as e:
@@ -187,7 +193,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotate
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
+    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}

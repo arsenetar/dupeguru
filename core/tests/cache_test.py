@@ -59,13 +59,13 @@ class BaseTestCaseCache:
 
     def test_set_then_retrieve_blocks(self):
         c = self.get_cache()
-        b = [(0, 0, 0), (1, 2, 3)]
+        b = [[(0, 0, 0), (1, 2, 3)]] * 8
         c["foo"] = b
         eq_(b, c["foo"])
 
     def test_delitem(self):
         c = self.get_cache()
-        c["foo"] = ""
+        c["foo"] = [[]] * 8
         del c["foo"]
         assert "foo" not in c
         with raises(KeyError):
@@ -74,16 +74,16 @@ class BaseTestCaseCache:
     def test_persistance(self, tmpdir):
         DBNAME = tmpdir.join("hstest.db")
         c = self.get_cache(str(DBNAME))
-        c["foo"] = [(1, 2, 3)]
+        c["foo"] = [[(1, 2, 3)]] * 8
         del c
         c = self.get_cache(str(DBNAME))
-        eq_([(1, 2, 3)], c["foo"])
+        eq_([[(1, 2, 3)]] * 8, c["foo"])
 
     def test_filter(self):
         c = self.get_cache()
-        c["foo"] = ""
-        c["bar"] = ""
-        c["baz"] = ""
+        c["foo"] = [[]] * 8
+        c["bar"] = [[]] * 8
+        c["baz"] = [[]] * 8
         c.filter(lambda p: p != "bar")  # only 'bar' is removed
         eq_(2, len(c))
         assert "foo" in c
@@ -92,9 +92,9 @@ class BaseTestCaseCache:
 
     def test_clear(self):
         c = self.get_cache()
-        c["foo"] = ""
-        c["bar"] = ""
-        c["baz"] = ""
+        c["foo"] = [[]] * 8
+        c["bar"] = [[]] * 8
+        c["baz"] = [[]] * 8
         c.clear()
         eq_(0, len(c))
         assert "foo" not in c
@@ -104,7 +104,7 @@ class BaseTestCaseCache:
     def test_by_id(self):
         # it's possible to use the cache by referring to the files by their row_id
         c = self.get_cache()
-        b = [(0, 0, 0), (1, 2, 3)]
+        b = [[(0, 0, 0), (1, 2, 3)]] * 8
         c["foo"] = b
         foo_id = c.get_id("foo")
         eq_(c[foo_id], b)
@@ -127,10 +127,10 @@ class TestCaseSqliteCache(BaseTestCaseCache):
         fp.write("invalid sqlite content")
         fp.close()
         c = self.get_cache(dbname)  # should not raise a DatabaseError
-        c["foo"] = [(1, 2, 3)]
+        c["foo"] = [[(1, 2, 3)]] * 8
         del c
         c = self.get_cache(dbname)
-        eq_(c["foo"], [(1, 2, 3)])
+        eq_(c["foo"], [[(1, 2, 3)]] * 8)
 
 
 class TestCaseCacheSQLEscape:
@@ -152,7 +152,7 @@ class TestCaseCacheSQLEscape:
 
     def test_delitem(self):
         c = self.get_cache()
-        c["foo'bar"] = []
+        c["foo'bar"] = [[]] * 8
         try:
             del c["foo'bar"]
         except KeyError:

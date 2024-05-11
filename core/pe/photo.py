@@ -37,7 +37,7 @@ class Photo(fs.File):
     def _plat_get_blocks(self, block_count_per_side, orientation):
         raise NotImplementedError()
 
-    def _get_orientation(self):
+    def get_orientation(self):
         if not hasattr(self, "_cached_orientation"):
             try:
                 with self.path.open("rb") as fp:
@@ -95,13 +95,13 @@ class Photo(fs.File):
         fs.File._read_info(self, field)
         if field == "dimensions":
             self.dimensions = self._plat_get_dimensions()
-            if self._get_orientation() in {5, 6, 7, 8}:
+            if self.get_orientation() in {5, 6, 7, 8}:
                 self.dimensions = (self.dimensions[1], self.dimensions[0])
         elif field == "exif_timestamp":
             self.exif_timestamp = self._get_exif_timestamp()
 
     def get_blocks(self, block_count_per_side, orientation: int = None):
         if orientation is None:
-            return self._plat_get_blocks(block_count_per_side, self._get_orientation())
+            return self._plat_get_blocks(block_count_per_side, self.get_orientation())
         else:
             return self._plat_get_blocks(block_count_per_side, orientation)

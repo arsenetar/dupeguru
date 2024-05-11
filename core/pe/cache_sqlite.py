@@ -158,7 +158,7 @@ class SqliteCache:
         ids = ",".join(map(str, rowids))
         sql = (
             "select rowid, blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
-            f"from pictures where rowid in {ids}"
+            f"from pictures where rowid in ({ids})"
         )
         cur = self.con.execute(sql)
         return (
