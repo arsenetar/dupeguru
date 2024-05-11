@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "DupuGuru",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "run.py",
             "console": "integratedTerminal",

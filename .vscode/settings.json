@@ -12,5 +12,6 @@
     "[python]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+    },
+    "python.testing.pytestEnabled": true
 }
