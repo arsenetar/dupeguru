@@ -52,4 +52,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: modules ${{ matrix.python-version }}
-          path: ${{ github.workspace }}/**/*.so
+          path: build/**/*.so
+  merge-artifacts:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: modules
+          pattern: modules*
+          delete-merged: true
