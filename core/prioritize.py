@@ -105,7 +105,7 @@ class FilenameCategory(CriterionCategory):
             self.DOESNT_END_WITH_NUMBER: tr("Doesn't end with number"),
             self.LONGEST: tr("Longest"),
             self.SHORTEST: tr("Shortest"),
-            self.SHORTEST_PATH: tr("Longest Path"),
+            self.LONGEST_PATH: tr("Longest Path"),
             self.SHORTEST_PATH: tr("Shortest Path"),
         }[value]
 
