@@ -36,91 +36,91 @@ msgstr ""
 msgid "Sending to Trash"
 msgstr ""
 
-#: core\app.py:291
+#: core\app.py:289
 msgid "A previous action is still hanging in there. You can't start a new one yet. Wait a few seconds, then try again."
 msgstr ""
 
-#: core\app.py:302
+#: core\app.py:300
 msgid "No duplicates found."
 msgstr ""
 
-#: core\app.py:317
+#: core\app.py:315
 msgid "All marked files were copied successfully."
 msgstr ""
 
-#: core\app.py:319
+#: core\app.py:317
 msgid "All marked files were moved successfully."
 msgstr ""
 
-#: core\app.py:321
+#: core\app.py:319
 msgid "All marked files were deleted successfully."
 msgstr ""
 
-#: core\app.py:323
+#: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 
-#: core\app.py:328
+#: core\app.py:326
 msgid "Could not load file: {}"
 msgstr ""
 
-#: core\app.py:384
+#: core\app.py:382
 msgid "'{}' already is in the list."
 msgstr ""
 
-#: core\app.py:386
+#: core\app.py:384
 msgid "'{}' does not exist."
 msgstr ""
 
-#: core\app.py:394
+#: core\app.py:392
 msgid "All selected %d matches are going to be ignored in all subsequent scans. Continue?"
 msgstr ""
 
-#: core\app.py:471
+#: core\app.py:469
 msgid "Select a directory to copy marked files to"
 msgstr ""
 
-#: core\app.py:473
+#: core\app.py:471
 msgid "Select a directory to move marked files to"
 msgstr ""
 
-#: core\app.py:512
+#: core\app.py:510
 msgid "Select a destination for your exported CSV"
 msgstr ""
 
-#: core\app.py:518 core\app.py:773 core\app.py:783
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr ""
 
-#: core\app.py:541
+#: core\app.py:539
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 
-#: core\app.py:697 core\app.py:709
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 
-#: core\app.py:745
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 
-#: core\app.py:792
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr ""
 
-#: core\app.py:808
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr ""
 
-#: core\app.py:858
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr ""
 
-#: core\directories.py:190
+#: core\directories.py:191
 msgid "Collected {} files to scan"
 msgstr ""
 
-#: core\directories.py:206
+#: core\directories.py:207
 msgid "Collected {} folders to scan"
 msgstr ""
 
@@ -156,23 +156,23 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr ""
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr ""
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr ""
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr ""
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Read EXIF of %d/%d pictures"
 msgstr ""
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr ""
 
@@ -220,27 +220,22 @@ msgstr ""
 msgid "Oldest"
 msgstr ""
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr ""
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr ""
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr ""
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr ""
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr ""
 
 #: core\se\scanner.py:18
 msgid "Folders"
 msgstr ""
-

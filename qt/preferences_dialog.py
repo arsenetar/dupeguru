@@ -49,8 +49,9 @@ class Sections(Flag):
 
     GENERAL = auto()
     DISPLAY = auto()
+    ADVANCED = auto()
     DEBUG = auto()
-    ALL = GENERAL | DISPLAY | DEBUG
+    ALL = GENERAL | DISPLAY | ADVANCED | DEBUG
 
 
 class PreferencesDialogBase(QDialog):
@@ -149,7 +150,8 @@ On MacOS, the tab bar will fill up the window's width instead."
         )
         self.use_native_dialogs.setToolTip(
             tr(
-                "For actions such as file/folder selection use the OS native dialogs.\nSome native dialogs have limited functionality."
+                "For actions such as file/folder selection use the OS native dialogs.\n\
+Some native dialogs have limited functionality."
             )
         )
         layout.addWidget(self.use_native_dialogs)
@@ -217,7 +219,25 @@ use the modifier key to drag the floating window around"
         details_groupbox.setLayout(self.details_groupbox_layout)
         self.displayVLayout.addWidget(details_groupbox)
 
+<<<<<<< HEAD
     def _setupDebugPage(self) -> None:
+=======
+    def _setup_advanced_page(self):
+        tab_label = QLabel(
+            tr(
+                "These options are for advanced users or for very specific situations, \
+most users should not have to modify these."
+            ),
+            wordWrap=True,
+        )
+        self.advanced_vlayout.addWidget(tab_label)
+        self._setupAddCheckbox("include_exists_check_box", tr("Include existence check after scan completion"))
+        self.advanced_vlayout.addWidget(self.include_exists_check_box)
+        self._setupAddCheckbox("rehash_ignore_mtime_box", tr("Ignore difference in mtime when loading cached digests"))
+        self.advanced_vlayout.addWidget(self.rehash_ignore_mtime_box)
+
+    def _setupDebugPage(self):
+>>>>>>> master
         self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self._setupAddCheckbox("profile_scan_box", tr("Profile scan operation"))
         self.profile_scan_box.setToolTip(tr("Profile the scan operation and save logs for optimization."))
@@ -248,16 +268,20 @@ use the modifier key to drag the floating window around"
         self.tabwidget = QTabWidget()
         self.page_general = QWidget()
         self.page_display = QWidget()
+        self.page_advanced = QWidget()
         self.page_debug = QWidget()
         self.widgetsVLayout = QVBoxLayout()
         self.page_general.setLayout(self.widgetsVLayout)
         self.displayVLayout = QVBoxLayout()
         self.displayVLayout.setSpacing(5)  # arbitrary value, might conflict with style
         self.page_display.setLayout(self.displayVLayout)
+        self.advanced_vlayout = QVBoxLayout()
+        self.page_advanced.setLayout(self.advanced_vlayout)
         self.debugVLayout = QVBoxLayout()
         self.page_debug.setLayout(self.debugVLayout)
         self._setupPreferenceWidgets()
         self._setupDisplayPage()
+        self._setup_advanced_page()
         self._setupDebugPage()
         # self.mainVLayout.addLayout(self.widgetsVLayout)
         self.buttonBox = QDialogButtonBox(self)
@@ -269,9 +293,11 @@ use the modifier key to drag the floating window around"
         self.layout().setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
         self.tabwidget.addTab(self.page_general, tr("General"))
         self.tabwidget.addTab(self.page_display, tr("Display"))
+        self.tabwidget.addTab(self.page_advanced, tr("Advanced"))
         self.tabwidget.addTab(self.page_debug, tr("Debug"))
         self.displayVLayout.addStretch(0)
         self.widgetsVLayout.addStretch(0)
+        self.advanced_vlayout.addStretch(0)
         self.debugVLayout.addStretch(0)
 
     def _load(self, prefs: Preferences, setchecked: Callable[[QCheckBox, bool], None], section: Sections) -> None:
@@ -322,6 +348,9 @@ use the modifier key to drag the floating window around"
             except KeyError:
                 selected_lang = self.supportedLanguages["en"]
             self.languageComboBox.setCurrentText(selected_lang)
+        if section & Sections.ADVANCED:
+            setchecked(self.rehash_ignore_mtime_box, prefs.rehash_ignore_mtime)
+            setchecked(self.include_exists_check_box, prefs.include_exists_check)
         if section & Sections.DEBUG:
             setchecked(self.debugModeBox, prefs.debug_mode)
             setchecked(self.profile_scan_box, prefs.profile_scan)
@@ -338,6 +367,8 @@ use the modifier key to drag the floating window around"
         prefs.use_regexp = ischecked(self.useRegexpBox)
         prefs.remove_empty_folders = ischecked(self.removeEmptyFoldersBox)
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
+        prefs.rehash_ignore_mtime = ischecked(self.rehash_ignore_mtime_box)
+        prefs.include_exists_check = ischecked(self.include_exists_check_box)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.profile_scan = ischecked(self.profile_scan_box)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)

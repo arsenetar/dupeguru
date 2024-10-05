@@ -96,6 +96,8 @@ class FilenameCategory(CriterionCategory):
     DOESNT_END_WITH_NUMBER = 1
     LONGEST = 2
     SHORTEST = 3
+    LONGEST_PATH = 4
+    SHORTEST_PATH = 5
 
     def format_criterion_value(self, value):
         return {
@@ -103,6 +105,8 @@ class FilenameCategory(CriterionCategory):
             self.DOESNT_END_WITH_NUMBER: tr("Doesn't end with number"),
             self.LONGEST: tr("Longest"),
             self.SHORTEST: tr("Shortest"),
+            self.LONGEST_PATH: tr("Longest Path"),
+            self.SHORTEST_PATH: tr("Shortest Path"),
         }[value]
 
     def extract_value(self, dupe):
@@ -116,6 +120,10 @@ class FilenameCategory(CriterionCategory):
                 return 0 if ends_with_digit else 1
             else:
                 return 1 if ends_with_digit else 0
+        elif crit_value == self.LONGEST_PATH:
+            return len(str(dupe.folder_path)) * -1
+        elif crit_value == self.SHORTEST_PATH:
+            return len(str(dupe.folder_path))
         else:
             value = len(value)
             if crit_value == self.LONGEST:
@@ -130,6 +138,8 @@ class FilenameCategory(CriterionCategory):
                 self.DOESNT_END_WITH_NUMBER,
                 self.LONGEST,
                 self.SHORTEST,
+                self.LONGEST_PATH,
+                self.SHORTEST_PATH,
             ]
         ]
 

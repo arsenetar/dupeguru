@@ -1,25 +1,27 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2021
 # Fuan <jcfrt@posteo.net>, 2021
+# AHOHNMYC <lqwh2h2cwa@protonmail.com>, 2023
+# Eugene Morozov <transifex@emorozov.net>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
-"Language-Team: Russian (https://www.transifex.com/voltaicideas/teams/116153/ru/)\n"
+"Last-Translator: Eugene Morozov <transifex@emorozov.net>, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/voltaicideas/teams/116153/ru/)\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Дубликаты не отмечены. Нечего выполнять."
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Дубликаты не выбраны. Нечего выполнять."
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -28,23 +30,23 @@ msgstr ""
 "файлы будут открыты, это действие может создать настоящий беспорядок. "
 "Продолжать?"
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr "Проверка на наличие дубликатов"
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr "Загрузка"
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr "Перемещение"
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr "Копирование"
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr "Перемещение в Корзину"
 
@@ -70,7 +72,7 @@ msgstr "Все отмеченные файлы были перемещены у�
 
 #: core\app.py:319
 msgid "All marked files were deleted successfully."
-msgstr ""
+msgstr "Все отмеченные файлы были удалены успешно."
 
 #: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
@@ -108,7 +110,7 @@ msgstr "Выберите каталог, в который вы хотите п�
 msgid "Select a destination for your exported CSV"
 msgstr "Выберите назначение для экспортируемого "
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "Не удалось записать в файл: {}"
 
@@ -116,37 +118,37 @@ msgstr "Не удалось записать в файл: {}"
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Вы не создали пользовательскую команду. Задайте её в настройках."
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Вы собираетесь удалить %d файлов из результата поиска. Продолжить?"
 
-#: core\app.py:743
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} групп дубликатов было изменено при реприоритезации."
 
-#: core\app.py:790
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr "Выбранные каталоги не содержат файлов для сканирования."
 
-#: core\app.py:803
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "Сбор файлов для сканирования"
 
-#: core\app.py:850
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s. (%d отменено)"
 
 #: core\directories.py:191
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "Собрано {} файлов для сканирования"
 
 #: core\directories.py:207
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "Собрано {} каталогов для сканирования"
 
 #: core\engine.py:27
 msgid "%d matches found from %d groups"
-msgstr ""
+msgstr "Найдено %d совпадений из %d групп"
 
 #: core\gui\deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
@@ -154,7 +156,7 @@ msgstr "Вы перемещаете {} файлов в Корзину."
 
 #: core\gui\exclude_list_table.py:14
 msgid "Regular Expressions"
-msgstr "Обычные выражения"
+msgstr "Регулярные выражения"
 
 #: core\gui\ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
@@ -171,29 +173,29 @@ msgstr "Имя файла - Поля"
 
 #: core\me\scanner.py:22
 msgid "Filename - Fields (No Order)"
-msgstr "Имя файла - поля (без порядка)"
+msgstr "Имя файла - Поля (без сортировки)"
 
 #: core\me\scanner.py:23
 msgid "Tags"
 msgstr "Теги"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "Содержание"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
-msgstr "Анализируется %d/%d изображений"
+msgstr "Проанализировано %d из %d изображений"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
-msgstr "Выполнено %d/%d совпадений блоков"
+msgstr "Проверено %d/%d совпадений"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Подготовка для сравнения"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "Проверено %d/%d совпадений"
 
@@ -201,7 +203,7 @@ msgstr "Проверено %d/%d совпадений"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Прочитана EXIF-информация %d/%d фотографий"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "Метка времени EXIF"
 
@@ -209,57 +211,53 @@ msgstr "Метка времени EXIF"
 msgid "None"
 msgstr "Ни один"
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr "Заканчивается номером"
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr "Не заканчивается номером"
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr "Самый длинный"
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr "Самый короткий"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr "Наивысший"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr "Самый низкий"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr "Новейший"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
-msgstr "Старейшие"
+msgstr "Старейший"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) дубликатов отмечено."
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr "фильтр: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "Подсчитан размер %d/%d файлов"
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Прочитаны метаданные %d/%d файлов"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
-msgstr "Почти готово! Возиться с результатами..."
+msgstr "Почти готово! Вожусь с результатами..."
 
 #: core\se\scanner.py:18
 msgid "Folders"

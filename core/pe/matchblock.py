@@ -16,6 +16,7 @@ from hscommon.jobprogress import job
 
 from core.engine import Match
 from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
+from core.pe.cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -27,7 +28,7 @@ from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
 # to files in other chunks. So chunkifying doesn't save us any actual comparison, but the advantage
 # is that instead of reading blocks from disk number_of_files**2 times, we read it
 # number_of_files*number_of_chunks times.
-# Determining the right chunk size is tricky, bceause if it's too big, too many blocks will be in
+# Determining the right chunk size is tricky, because if it's too big, too many blocks will be in
 # memory at the same time and we might end up with memory trashing, which is awfully slow. So,
 # because our *real* bottleneck is CPU, the chunk size must simply be enough so that the CPU isn't
 # starved by Disk IOs.
@@ -50,17 +51,10 @@ except Exception:
 
 
 def get_cache(cache_path, readonly=False):
-    if cache_path.endswith("shelve"):
-        from core.pe.cache_shelve import ShelveCache
-
-        return ShelveCache(cache_path, readonly=readonly)
-    else:
-        from core.pe.cache_sqlite import SqliteCache
-
-        return SqliteCache(cache_path, readonly=readonly)
+    return SqliteCache(cache_path, readonly=readonly)
 
 
-def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
+def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
     # there is enough memory left to carry on the operation because it is assumed that the
     # MemoryError happens when trying to read an image file, which is freed from memory by the
@@ -78,13 +72,18 @@ def prepare_pictures(pictures, cache_path, with_dimensions, j=job.nulljob):
                 # entry in iPhoto library.
                 logging.warning("We have a picture with a null path here")
                 continue
-            picture.unicode_path = str(picture.path)
             logging.debug("Analyzing picture at %s", picture.unicode_path)
             if with_dimensions:
                 picture.dimensions  # pre-read dimensions
             try:
-                if picture.unicode_path not in cache:
-                    blocks = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
+                if picture.unicode_path not in cache or (
+                    match_rotated and any(block == [] for block in cache[picture.unicode_path])
+                ):
+                    if match_rotated:
+                        blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
+                    else:
+                        blocks = [[]] * 8
+                        blocks[max(picture.get_orientation() - 1, 0)] = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
                     cache[picture.unicode_path] = blocks
                 prepared.append(picture)
             except (OSError, ValueError) as e:
@@ -125,13 +124,13 @@ def get_match(first, second, percentage):
     return Match(first, second, percentage)
 
 
-def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
+def async_compare(ref_ids, other_ids, dbname, threshold, picinfo, match_rotated=False):
     # The list of ids in ref_ids have to be compared to the list of ids in other_ids. other_ids
     # can be None. In this case, ref_ids has to be compared with itself
     # picinfo is a dictionary {pic_id: (dimensions, is_ref)}
     cache = get_cache(dbname, readonly=True)
     limit = 100 - threshold
-    ref_pairs = list(cache.get_multiple(ref_ids))
+    ref_pairs = list(cache.get_multiple(ref_ids))  # (rowid, [b, b2, ..., b8])
     if other_ids is not None:
         other_pairs = list(cache.get_multiple(other_ids))
         comparisons_to_do = [(r, o) for r in ref_pairs for o in other_pairs]
@@ -144,22 +143,35 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo):
         if ref_is_ref and other_is_ref:
             continue
         if ref_dimensions != other_dimensions:
-            continue
-        try:
-            diff = avgdiff(ref_blocks, other_blocks, limit, MIN_ITERATIONS)
-            percentage = 100 - diff
-        except (DifferentBlockCountError, NoBlocksError):
-            percentage = 0
-        if percentage >= threshold:
-            results.append((ref_id, other_id, percentage))
+            if match_rotated:
+                rotated_ref_dimensions = (ref_dimensions[1], ref_dimensions[0])
+                if rotated_ref_dimensions != other_dimensions:
+                    continue
+            else:
+                continue
+
+        orientation_range = 1
+        if match_rotated:
+            orientation_range = 8
+
+        for orientation_ref in range(orientation_range):
+            try:
+                diff = avgdiff(ref_blocks[orientation_ref], other_blocks[0], limit, MIN_ITERATIONS)
+                percentage = 100 - diff
+            except (DifferentBlockCountError, NoBlocksError):
+                percentage = 0
+            if percentage >= threshold:
+                results.append((ref_id, other_id, percentage))
+                break
+
     cache.close()
     return results
 
 
-def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljob):
+def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotated=False, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
-            return (None, p.is_ref)
+            return ((None, None), p.is_ref)
         else:
             return (p.dimensions, p.is_ref)
 
@@ -181,7 +193,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(pictures, cache_path, with_dimensions=not match_scaled, j=j)
+    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}
@@ -211,7 +223,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, j=job.nulljo
                 picinfo.update({p.cache_id: get_picinfo(p) for p in other_chunk})
             else:
                 other_ids = None
-            args = (ref_ids, other_ids, cache_path, threshold, picinfo)
+            args = (ref_ids, other_ids, cache_path, threshold, picinfo, match_rotated)
             async_results.append(pool.apply_async(async_compare, args))
             collect_results()
         collect_results(collect_all=True)

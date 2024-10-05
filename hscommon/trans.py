@@ -41,7 +41,8 @@ def trget(domain: str) -> Callable[[str], str]:
 
 
 def set_tr(
-    new_tr: Callable[[str, Union[str, None]], str], new_trget: Union[Callable[[str], Callable[[str], str]], None] = None
+    new_tr: Callable[[str, Union[str, None]], str],
+    new_trget: Union[Callable[[str], Callable[[str], str]], None] = None,
 ) -> None:
     global _trfunc, _trget
     _trfunc = new_tr

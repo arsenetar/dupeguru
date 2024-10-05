@@ -307,6 +307,10 @@ msgstr "Debug mode (restart required)"
 msgid "Match pictures of different dimensions"
 msgstr "Match pictures of different dimensions"
 
+#: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
+msgid "Match pictures of different rotations"
+msgstr "Match pictures of different rotations"
+
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
 msgstr "Filter Hardness:"

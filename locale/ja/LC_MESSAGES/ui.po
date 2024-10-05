@@ -1,11 +1,11 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2022
 # Fuan <jcfrt@posteo.net>, 2022
+# Andrew Senetar <arsenetar@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2022\n"
-"Language-Team: Japanese (https://www.transifex.com/voltaicideas/teams/116153/ja/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2023\n"
+"Language-Team: Japanese (https://app.transifex.com/voltaicideas/teams/116153/ja/)\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -81,7 +81,7 @@ msgstr "(非対応)"
 
 #: qt/deletion_options.py:49 cocoa/en.lproj/Localizable.strings:0
 msgid "Directly delete files"
-msgstr "ファイルを直接削除する"
+msgstr "ファイルを完全に削除"
 
 #: qt/deletion_options.py:51 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -100,7 +100,7 @@ msgstr "キャンセル"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Attribute"
-msgstr "アトリビュート"
+msgstr "属性"
 
 #: qt/details_table.py:16 cocoa/en.lproj/Localizable.strings:0
 msgid "Selected"
@@ -163,7 +163,7 @@ msgstr "スキャンの種類："
 
 #: qt/directories_dialog.py:135
 msgid "More Options"
-msgstr "もっとオプション"
+msgstr "詳細設定"
 
 #: qt/directories_dialog.py:139 cocoa/en.lproj/Localizable.strings:0
 msgid "Select folders to scan and press \"Scan\"."
@@ -179,7 +179,7 @@ msgstr "スキャン"
 
 #: qt/directories_dialog.py:230
 msgid "Unsaved results"
-msgstr "保存されていない結果"
+msgstr "未保存の結果"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
@@ -280,27 +280,27 @@ msgstr "単語の重み付け"
 #: qt/me/preferences_dialog.py:52 qt/se/preferences_dialog.py:32
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Match similar words"
-msgstr "類似の単語に一致する"
+msgstr "類似の単語を一致"
 
 #: qt/me/preferences_dialog.py:54 qt/pe/preferences_dialog.py:21
 #: qt/se/preferences_dialog.py:34 cocoa/en.lproj/Localizable.strings:0
 msgid "Can mix file kind"
-msgstr "ファイルの種類を混在させることができる"
+msgstr "ファイルの種類を混在"
 
 #: qt/me/preferences_dialog.py:56 qt/pe/preferences_dialog.py:23
 #: qt/se/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Use regular expressions when filtering"
-msgstr "フィルタリング時に正規表現を使用する"
+msgstr "フィルタに正規表現を使用"
 
 #: qt/me/preferences_dialog.py:58 qt/pe/preferences_dialog.py:25
 #: qt/se/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove empty folders on delete or move"
-msgstr "削除または移動時に空のフォルダを削除する"
+msgstr "削除や移動で空になったフォルダを削除"
 
 #: qt/me/preferences_dialog.py:60 qt/pe/preferences_dialog.py:27
 #: qt/se/preferences_dialog.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore duplicates hardlinking to the same file"
-msgstr "同じファイルへの重複ハードリンクを無視する"
+msgstr "同じファイルへの重複ハードリンクを無視"
 
 #: qt/me/preferences_dialog.py:62 qt/pe/preferences_dialog.py:29
 #: qt/se/preferences_dialog.py:62 cocoa/en.lproj/Localizable.strings:0
@@ -309,11 +309,11 @@ msgstr "デバッグモード（再起動が必要）"
 
 #: qt/pe/preferences_dialog.py:19 cocoa/en.lproj/Localizable.strings:0
 msgid "Match pictures of different dimensions"
-msgstr "異なる寸法の写真を一致させる"
+msgstr "異なるサイズの写真を一致"
 
 #: qt/preferences_dialog.py:43
 msgid "Filter Hardness:"
-msgstr "フィルター硬度:"
+msgstr "フィルタの強さ:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
@@ -325,7 +325,7 @@ msgstr "より少ない結果"
 
 #: qt/preferences_dialog.py:81
 msgid "Font size:"
-msgstr "フォントサイズ:"
+msgstr "文字サイズ:"
 
 #: qt/preferences_dialog.py:85
 msgid "Language:"
@@ -333,7 +333,7 @@ msgstr "言語:"
 
 #: qt/preferences_dialog.py:91 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy and Move:"
-msgstr "コピーと移動："
+msgstr "コピーと移動:"
 
 #: qt/preferences_dialog.py:94 cocoa/en.lproj/Localizable.strings:0
 msgid "Right in destination"
@@ -349,7 +349,7 @@ msgstr "絶対パスを再作成"
 
 #: qt/preferences_dialog.py:99
 msgid "Custom Command (arguments: %d for dupe, %r for ref):"
-msgstr "カスタムコマンド (引数：重複の場合は％d、参照の場合は％r）:"
+msgstr "カスタムコマンド (引数: ％dは重複・％rは参照）:"
 
 #: qt/preferences_dialog.py:174
 msgid "dupeGuru has to restart for language changes to take effect."
@@ -719,7 +719,7 @@ msgstr "ウィンドウ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Zoom"
-msgstr "ズーム"
+msgstr "拡大"
 
 #: qt\app.py:158
 msgid "Exclusion Filters"
@@ -909,15 +909,15 @@ msgstr "結果"
 
 #: qt\preferences_dialog.py:150
 msgid "General Interface"
-msgstr "一般的なインターフェイス"
+msgstr "一般"
 
 #: qt\preferences_dialog.py:176
 msgid "Result Table"
-msgstr "結果表"
+msgstr "結果"
 
 #: qt\preferences_dialog.py:205
 msgid "Details Window"
-msgstr "詳細ウィンドウ"
+msgstr "詳細画面"
 
 #: qt\preferences_dialog.py:285
 msgid "General"
@@ -985,7 +985,7 @@ msgstr ""
 
 #: qt\about_box.py:31
 msgid "About {}"
-msgstr "{}について。"
+msgstr "{}について"
 
 #: qt\about_box.py:47
 msgid "Version {}"
@@ -997,7 +997,7 @@ msgstr ""
 
 #: qt\about_box.py:54
 msgid "Licensed under GPLv3"
-msgstr "GPLv3としてライセンス供与。"
+msgstr "GPLv3のもとでライセンスされています"
 
 #: qt\about_box.py:68
 msgid "No update available."
@@ -1013,11 +1013,11 @@ msgstr "エラーレポート"
 
 #: qt\error_report_dialog.py:54
 msgid "Something went wrong. How about reporting the error?"
-msgstr "何かがうまくいかなかった。 エラーを報告するのはどうですか？"
+msgstr "不明な理由により失敗しました。問題を報告しませんか?"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1025,7 +1025,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"エラーレポートはGithubの問題として報告する必要があります。 上記のエラートレースバックをコピーして、新しい問題に貼り付けることができます。\n"
+"エラーレポートはGitHubの問題として報告する必要があります。 上記のエラートレースバックをコピーして、新しい問題に貼り付けることができます。\n"
 "\n"
 "事前に既存の問題を検索してください。 また、発生しているバグにはすでにパッチが適用されている可能性があるため、リポジトリから入手できる最新バージョンをテストしてください。\n"
 "\n"
@@ -1034,8 +1034,8 @@ msgstr ""
 "このエラーの後もアプリケーションは実行を継続するはずですが、不安定な状態になっている可能性があるため、アプリケーションを再起動することをお勧めします。"
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Githubに移動する"
+msgid "Go to GitHub"
+msgstr "GitHubに移動"
 
 #: qt\preferences.py:24
 msgid "Czech"
@@ -1120,3 +1120,36 @@ msgstr "リストをクリア"
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr "探索..."
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr ""
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr ""
+
+#: qt\progress_window.py:64
+msgid "Cancel?"
+msgstr ""
+
+#: qt\progress_window.py:65
+msgid "Are you sure you want to cancel? All progress will be lost."
+msgstr ""
+
+#: qt\exclude_list_dialog.py:161
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
+msgstr ""

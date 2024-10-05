@@ -14,6 +14,7 @@ import re
 import os
 import shutil
 
+from errno import EISDIR, EACCES
 from pathlib import Path
 from typing import Callable, List
 
@@ -75,10 +76,8 @@ def smart_copy(source_path: Path, dest_path: Path) -> None:
     try:
         _smart_move_or_copy(shutil.copy, source_path, dest_path)
     except OSError as e:
-        if e.errno in {
-            21,
-            13,
-        }:  # it's a directory, code is 21 on OS X / Linux and 13 on Windows
+        # It's a directory, code is 21 on OS X / Linux (EISDIR) and 13 on Windows (EACCES)
+        if e.errno in (EISDIR, EACCES):
             _smart_move_or_copy(shutil.copytree, source_path, dest_path)
         else:
             raise

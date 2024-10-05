@@ -1,12 +1,17 @@
 {
-    "python.formatting.provider": "black",
     "cSpell.words": [
         "Dupras",
         "hscommon"
     ],
+    "editor.rulers": [
+        88,
+        120
+    ],
     "python.languageServer": "Pylance",
     "yaml.schemaStore.enable": true,
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
-    }
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.testing.pytestEnabled": true
 }

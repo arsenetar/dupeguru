@@ -5,23 +5,23 @@
 msgid ""
 msgstr ""
 "Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
-"Language-Team: Vietnamese (https://www.transifex.com/voltaicideas/teams/116153/vi/)\n"
+"Language-Team: Vietnamese (https://app.transifex.com/voltaicideas/teams/116153/vi/)\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -29,23 +29,23 @@ msgstr ""
 "Bạn chuẩn bị mở nhiều tập tin cùng lúc. Dựa trên chương trình các tập tin "
 "được mở, thao tác này có thể gây ra trạng thái lộn xộn. Vẫn muốn tiếp tục?"
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr "Quét các phần trùng nhau"
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr "Đang tải"
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr "Đang di chuyển"
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr "Đang sao chép"
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr "Đang gửi vào thùng rác"
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "Không thể ghi vào tệp: {}"
 
@@ -122,23 +122,23 @@ msgstr ""
 "Bạn vẫn chưa chỉnh sửa phần thiết lập dòng lệnh. Hãy sử dụng tính năng này "
 "trong phần tùy biến của bạn."
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Tiếp tục?"
 
-#: core\app.py:743
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core\app.py:790
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
 
-#: core\app.py:803
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "Đang thu thập các tập tin để quét"
 
-#: core\app.py:850
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s (%d bị bỏ qua)"
 
@@ -182,23 +182,23 @@ msgstr "Tên tệp - Trường (Không có thứ tự)"
 msgid "Tags"
 msgstr "Tags"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "Nội dung"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr "Đã phân tích %d/%d hình ảnh"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr "Đã thể thiện %d/%d các phần khớp nhau"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Đang chuẩn bị phần khớp nhau"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "Đã xác nhận %d/%d phần khớp nhau"
 
@@ -206,7 +206,7 @@ msgstr "Đã xác nhận %d/%d phần khớp nhau"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Đọc thông tin EXIF của %d/%d hình ảnh"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "Dấu thời gian EXIF"
 
@@ -214,55 +214,51 @@ msgstr "Dấu thời gian EXIF"
 msgid "None"
 msgstr "Không "
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr "Tận cùng là số"
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr "Tận cùng không chứa số"
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr "Dài nhất"
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr "Ngắn nhất"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr "Cao nhất"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr "Thấp nhất"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr "Mới nhất"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr "Cũ nhất"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) phần trùng nhau đã được đánh dấu."
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr " bộ lọc: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "Đọc kích thước của các tập tin %d/%d"
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Đọc thông tin chi tiết của %d/%d tập tin"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Sắp xong! Loay hoay với kết quả..."
 

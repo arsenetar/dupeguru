@@ -1,13 +1,13 @@
 # Translators:
 # Fuan <jcfrt@posteo.net>, 2022
 # 太子 VC <taiziccf@gmail.com>, 2022
-# Andrew Senetar <arsenetar@gmail.com>, 2022
-# Chris Ocelot, 2022
+# Chris Ocelot, 2023
+# Andrew Senetar <arsenetar@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Chris Ocelot, 2022\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
+"Last-Translator: Andrew Senetar <arsenetar@gmail.com>, 2023\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/voltaicideas/teams/116153/zh_TW/)\n"
 "Language: zh_TW\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -931,7 +931,7 @@ msgstr "只哈希部分如果文件大于"
 
 #: qt\se\preferences_dialog.py:80
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: qt\preferences_dialog.py:163
 msgid "Use native OS dialogs"
@@ -945,41 +945,41 @@ msgstr "使用操作系统原生对话窗口选择文件、文件夹。部分系
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
-msgstr ""
+msgstr "忽略文件，如果大于"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
-msgstr ""
+msgstr "清除缓存"
 
 #: qt\app.py:294
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
-msgstr ""
+msgstr "你确定要清除缓存吗？所有缓存的文件hash和图片分析都会被移除。"
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr ""
+msgstr "缓存已清除。"
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
-msgstr ""
+msgstr "使用暗色主题"
 
 #: qt\preferences_dialog.py:241
 msgid "Profile scan operation"
-msgstr ""
+msgstr "将扫描操作保存为配置"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
-msgstr ""
+msgstr "将扫描操作保存为配置，并保存日志用于优化。"
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
-msgstr ""
+msgstr "日志位于：<a href=\"{}\">{}"
 
 #: qt\preferences_dialog.py:291
 msgid "Debug"
-msgstr ""
+msgstr "调试"
 
 #: qt\about_box.py:31
 msgid "About {}"
@@ -991,7 +991,7 @@ msgstr "版本 {}"
 
 #: qt\about_box.py:49 qt\about_box.py:75
 msgid "Checking for updates..."
-msgstr ""
+msgstr "检查更新..."
 
 #: qt\about_box.py:54
 msgid "Licensed under GPLv3"
@@ -999,11 +999,11 @@ msgstr "本项目基于GPLv3开源协议发布"
 
 #: qt\about_box.py:68
 msgid "No update available."
-msgstr ""
+msgstr "没有新版本。"
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr ""
+msgstr "有新版本{}可用，在<a href=\"{}\">这里</a>下载。"
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
@@ -1015,7 +1015,7 @@ msgstr "发生错误，是否要报告错误？"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1023,7 +1023,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"错误报告应该以Github issue的形式进行提交。您可以把错误信息复制粘贴到新的issue中\n"
+"错误报告应该以GitHub issue的形式进行提交。您可以把错误信息复制粘贴到新的issue中\n"
 "\n"
 "在提交新issue前，请搜索已经存在的issue，以确保没有其他人已经报告了相同的错误。同时请确保使用仓库中的最新版进行测试，因为您所遇到的bug可能已经被最新版修复。\n"
 "\n"
@@ -1032,8 +1032,8 @@ msgstr ""
 "虽然本程序在此错误后依然会继续运行，但是可能处于不稳定的状态，因此推荐重启本程序。"
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "前往Github"
+msgid "Go to GitHub"
+msgstr "前往GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"
@@ -1118,3 +1118,36 @@ msgstr "清空列表"
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr "搜索..."
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr "这些选项是供高级用户或者特定情况下使用，大多数用户不该修改它们。"
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr "在扫描结束后检查文件是否存在"
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr "载入缓存摘要时忽略mtime的不同"
+
+#: qt\progress_window.py:64
+msgid "Cancel?"
+msgstr ""
+
+#: qt\progress_window.py:65
+msgid "Are you sure you want to cancel? All progress will be lost."
+msgstr ""
+
+#: qt\exclude_list_dialog.py:161
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
+msgstr ""

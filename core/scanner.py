@@ -87,8 +87,6 @@ class Scanner:
             }
         ):
             j = j.start_subjob([2, 8])
-            for f in j.iter_with_progress(files, tr("Read size of %d/%d files")):
-                f.size  # pre-read, makes a smoother progress if read here (especially for bundles)
             if self.size_threshold:
                 files = [f for f in files if f.size >= self.size_threshold]
             if self.large_size_threshold:
@@ -171,8 +169,11 @@ class Scanner:
             matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
         if not self.mix_file_kind:
             matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
-        matches = [m for m in matches if m.first.path.exists() and m.second.path.exists()]
-        matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
+        if self.include_exists_check:
+            matches = [m for m in matches if m.first.exists() and m.second.exists()]
+        # Contents already handles ref checks, other scan types might not catch during scan
+        if self.scan_type != ScanType.CONTENTS:
+            matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
         if ignore_list:
             matches = [m for m in matches if not ignore_list.are_ignored(str(m.first.path), str(m.second.path))]
         logging.info("Grouping matches")
@@ -212,3 +213,4 @@ class Scanner:
     large_size_threshold = 0
     big_file_size_threshold = 0
     word_weighting = False
+    include_exists_check = True

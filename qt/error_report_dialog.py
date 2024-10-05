@@ -43,7 +43,7 @@ class ErrorReportDialog(QDialog):
         self.errorTextEdit.setPlainText(error_text)
         self.github_url = github_url
 
-        self.sendButton.clicked.connect(self.goToGithub)
+        self.sendButton.clicked.connect(self.goToGitHub)
         self.dontSendButton.clicked.connect(self.reject)
 
     def _setupUi(self):
@@ -58,7 +58,7 @@ class ErrorReportDialog(QDialog):
         self.errorTextEdit.setReadOnly(True)
         self.verticalLayout.addWidget(self.errorTextEdit)
         msg = tr(
-            "Error reports should be reported as Github issues. You can copy the error traceback "
+            "Error reports should be reported as GitHub issues. You can copy the error traceback "
             "above and paste it in a new issue.\n\nPlease make sure to run a search for any already "
             "existing issues beforehand. Also make sure to test the very latest version available from the repository, "
             "since the bug you are experiencing might have already been patched.\n\n"
@@ -77,13 +77,13 @@ class ErrorReportDialog(QDialog):
         self.dontSendButton.setMinimumSize(QSize(110, 0))
         self.horizontalLayout.addWidget(self.dontSendButton)
         self.sendButton = QPushButton(self)
-        self.sendButton.setText(tr("Go to Github"))
+        self.sendButton.setText(tr("Go to GitHub"))
         self.sendButton.setMinimumSize(QSize(110, 0))
         self.sendButton.setDefault(True)
         self.horizontalLayout.addWidget(self.sendButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-    def goToGithub(self):
+    def goToGitHub(self):
         open_url(self.github_url)
 
 

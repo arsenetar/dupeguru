@@ -1,0 +1,26 @@
+# Push translation source to Transifex
+name: Transifex Sync
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - locale/*.pot
+
+env:
+  TX_VERSION: "v1.6.10"
+
+jobs:
+  push-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get Transifex Client
+        run: |
+          curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash -s -- $TX_VERSION
+      - name: Update & Push Translation Sources
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          ./tx push -s --use-git-timestamps

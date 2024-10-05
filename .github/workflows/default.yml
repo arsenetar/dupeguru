@@ -4,71 +4,42 @@ name: Default CI/CD
 
 on:
   push:
-    branches: [master]
   pull_request:
     branches: [master]
 
 jobs:
-  lint:
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt -r requirements-extra.txt
-      - name: Lint with flake8
-        run: |
-          flake8 .
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.10"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt -r requirements-extra.txt
-      - name: Check format with black
-        run: |
-          black .
+          python-version: "3.12"
+      - uses: pre-commit/action@v3.0.1
   test:
-    needs: [lint, format]
+    needs: [pre-commit]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.7, 3.8, 3.9, "3.10"]
-        exclude:
-          - os: macos-latest
-            python-version: 3.7
-          - os: macos-latest
-            python-version: 3.8
-          - os: macos-latest
-            python-version: 3.9
+        os: [ubuntu-latest]
+        python-version: [3.7, 3.8, 3.9, "3.10", "3.11", "3.12"]
+        include:
           - os: windows-latest
-            python-version: 3.7
-          - os: windows-latest
-            python-version: 3.8
-          - os: windows-latest
-            python-version: 3.9
+            python-version: "3.12"
+          - os: macos-latest
+            python-version: "3.12"
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install setuptools
           pip install -r requirements.txt -r requirements-extra.txt
       - name: Build python modules
         run: |
@@ -78,7 +49,17 @@ jobs:
           pytest core hscommon
       - name: Upload Artifacts
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: modules ${{ matrix.python-version }}
-          path: ${{ github.workspace }}/**/*.so
+          path: build/**/*.so
+  merge-artifacts:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: modules
+          pattern: modules*
+          delete-merged: true

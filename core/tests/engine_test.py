@@ -71,7 +71,10 @@ class TestCasegetwords:
 
     def test_unicode(self):
         eq_(["e", "c", "0", "a", "o", "u", "e", "u"], getwords("é ç 0 à ö û è ¤ ù"))
-        eq_(["02", "君のこころは輝いてるかい？", "国木田花丸", "solo", "ver"], getwords("02 君のこころは輝いてるかい？ 国木田花丸 Solo Ver"))
+        eq_(
+            ["02", "君のこころは輝いてるかい？", "国木田花丸", "solo", "ver"],
+            getwords("02 君のこころは輝いてるかい？ 国木田花丸 Solo Ver"),
+        )
 
     def test_splitter_chars(self):
         eq_(
