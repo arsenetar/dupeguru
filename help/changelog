@@ -1,3 +1,21 @@
+=== 4.3.1 (2022-07-08)
+* Fix issue where cache db exceptions could prevent files being hashed (#1015)
+* Add extra guard for non-zero length files without digests to prevent false duplicates
+* Update Italian translations
+
+=== 4.3.0 (2022-07-01)
+* Redirect stdout from custom command to the log files (#1008)
+* Update translations
+* Fix typo in debian control file (#989)
+* Add option to profile scans
+* Update fs.py to optimize stat() calls
+* Fix Error when delete after scan (#988)
+* Update directory scanning to use os.scandir() and DirEntry objects
+* Improve performance of Directories.get_state()
+* Migrate from hscommon.path to pathlib
+* Switch file hashing to xxhash with fallback to md5
+* Add update check feature to about box
+
 === 4.2.1 (2022-03-25)
 * Default to English on unsupported system language (#976)
 * Fix image viewer zoom datatype issue (#978)
@@ -39,7 +57,7 @@
 
 === 4.1.1 (2021-03-21)
 
-* Add Japanese 
+* Add Japanese
 * Update internationalization and translations to be up to date with current UI.
 * Minor translation and UI language updates
 * Fix language selection issues on Windows (#760)
@@ -401,7 +419,7 @@
 
 === 2.6.1 (2009-03-27)
 * **Fixed** an occasional crash caused by permission issues.
-* **Fixed** a bug where the "X discarded" notice would show a too large number of discarded 
+* **Fixed** a bug where the "X discarded" notice would show a too large number of discarded
       duplicates.
 
 === 2.6.0 (2008-09-10)
@@ -435,14 +453,14 @@
 * **Added** the "Remove empty folders" option.
 * **Fixed** results load/save issues.
 * **Fixed** occasional status bar inaccuracies when the results are filtered.
-           
+
 
 === 2.5.0 (2007-09-15)
 
 * **Added** post scan filtering.
 * **Fixed** issues with the rename feature under Windows
 * **Fixed** some user interface annoyances under Windows
-                
+
 
 === 2.4.8 (2007-04-14)
 
@@ -458,7 +476,7 @@
 
 * **Added** Re-orderable columns. In fact, I re-added the feature which was lost in the C# conversion in 2.4.0 (Windows).
 * **Changed** the behavior of the scanning engine when setting the hardness to 100. It will now only match files that have their words in the same order.
-* **Fixed** a bug with all the Delete/Move/Copy actions with certain kinds of files.            
+* **Fixed** a bug with all the Delete/Move/Copy actions with certain kinds of files.
 
 === 2.4.5 (2007-01-11)
 
@@ -496,7 +514,7 @@
 
 === 2.3.4 (2006-11-07)
 
-* **Improved** speed and memory usage of the scanning engine, again. Does it mean there was a lot of improvements to be made? Nah...            
+* **Improved** speed and memory usage of the scanning engine, again. Does it mean there was a lot of improvements to be made? Nah...
 
 === 2.3.3 (2006-11-02)
 
@@ -554,7 +572,7 @@
 === 2.2.3 (2006-06-15)
 
 * **Improved** duplicate scanning speed.
-* **Added** a warning that a file couldn't be renamed if a file with the same name already exists.            
+* **Added** a warning that a file couldn't be renamed if a file with the same name already exists.
 
 === 2.2.2 (2006-06-07)
 
@@ -598,9 +616,9 @@
 
 === 2.0.0 (2006-03-17)
 
-* Complete rewrite.         
+* Complete rewrite.
 * Now runs on Mac OS X.
 
 === 1.0.0 (2004-09-24)
 
-* Initial release.     
+* Initial release.

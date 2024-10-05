@@ -1,11 +1,11 @@
 # Translators:
 # Andrew Senetar <arsenetar@gmail.com>, 2022
-# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2022
+# Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2023
 #
 msgid ""
 msgstr ""
-"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2022\n"
-"Language-Team: Malay (https://www.transifex.com/voltaicideas/teams/116153/ms/)\n"
+"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2023\n"
+"Language-Team: Malay (https://app.transifex.com/voltaicideas/teams/116153/ms/)\n"
 "Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -1040,7 +1040,7 @@ msgstr "Terdapat kesulitan yang terjadi. Apa kata laporkan ralat tersebut?"
 
 #: qt\error_report_dialog.py:60
 msgid ""
-"Error reports should be reported as Github issues. You can copy the error traceback above and paste it in a new issue.\n"
+"Error reports should be reported as GitHub issues. You can copy the error traceback above and paste it in a new issue.\n"
 "\n"
 "Please make sure to run a search for any already existing issues beforehand. Also make sure to test the very latest version available from the repository, since the bug you are experiencing might have already been patched.\n"
 "\n"
@@ -1048,7 +1048,7 @@ msgid ""
 "\n"
 "Although the application should continue to run after this error, it may be in an unstable state, so it is recommended that you restart the application."
 msgstr ""
-"Laporan ralat patut dilaporkan sebagai isu Github. Anda boleh salin runut balik ralat di atas dan tampal dalam isu baharu.\n"
+"Laporan ralat patut dilaporkan sebagai isu GitHub. Anda boleh salin runut balik ralat di atas dan tampal dalam isu baharu.\n"
 "\n"
 "Sila pastikan anda menggelintar dahulu kalau-kalau isu sudah wujud. Juga pastikan untuk cuba versi paling terbaharu yang disediakan dari repositori, kerana pepijat yang anda alami mungkin sudah ditampung.\n"
 "\n"
@@ -1057,8 +1057,8 @@ msgstr ""
 "Walaupun aplikasi sepatutnya masih boleh digunakan selepas ralat ini, ia mungkin berada dalam keadaan tidak stabil, jadi anda digalakkan untuk memulakan semula aplikasi ini."
 
 #: qt\error_report_dialog.py:80
-msgid "Go to Github"
-msgstr "Pergi ke Github"
+msgid "Go to GitHub"
+msgstr "Pergi ke GitHub"
 
 #: qt\preferences.py:24
 msgid "Czech"
@@ -1143,3 +1143,37 @@ msgstr "Kosongkan Senarai"
 #: qt\search_edit.py:78
 msgid "Search..."
 msgstr "Cari..."
+
+#: qt\preferences_dialog.py:219
+msgid ""
+"These options are for advanced users or for very specific situations, most "
+"users should not have to modify these."
+msgstr ""
+"Pilihan ini adalah untuk pengguna lanjutan atau untuk keadaan khas tertentu,"
+" kebanyakan pengguna tidak perlu mengubahsuai pilihan ini."
+
+#: qt\preferences_dialog.py:225
+msgid "Include existence check after scan completion"
+msgstr "Sertakan pemeriksaan kewujudan selepas selesai imbasan"
+
+#: qt\preferences_dialog.py:227
+msgid "Ignore difference in mtime when loading cached digests"
+msgstr "Abaikan perbezaan dalam masa ubahsuai ketika memuatkan cerna tercache"
+
+#: qt\progress_window.py:64
+msgid "Cancel?"
+msgstr "Batal?"
+
+#: qt\progress_window.py:65
+msgid "Are you sure you want to cancel? All progress will be lost."
+msgstr "Adakah anda pasti anda ingin batalkan? Semua kemajuan akan hilang."
+
+#: qt\exclude_list_dialog.py:161
+msgid ""
+"These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
+"<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
+msgstr ""
+"Ungkapan nalar python (sensitif huruf) ini akan menapis keluar fail ketika imbasan.<br>Direktori juga akan ada <strong>keadaan lalai</strong> sendiri ditetapkan kepada Dikecualikan dalam tab Direktori jika nama tersebut sepadan dengan salah satu daripada ungkapan nalar yang dipilih.<br>Untuk setiap fail yang terhimpun, dua percubaan akan dilaksanakan untuk menentukan sama ada fail tersebut perlu diabaikan sepenuhnya:<br><li>1. Ungkapan nalar tanpa pemisah laluan di dalamnya akan dibandingkan dengan nama fail sahaja.</li>\n"
+"<li>2. Ungkapan nalar dengan sekurang-kurangnya satu pemisah laluan di dalamnya akan dibandingkan dengan laluan penuh ke fail.</li><br>Contoh: jika anda ingin tapis keluar fail .PNG dari direktori \"My Pictures\" sahaja:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Anda boleh cuba ungkapan nalar dengan butang \"cuba rentetan\" selepas menampal laluan palsu dalam medan percubaan:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
+"Ungkapan nalar yang terpadan akan ditonjolkan.<br>Sekiranya ada sekurang-kurangnya satu tonjolan, laluan atau nama fail yang dicuba akan diabaikan ketika imbasan.<br><br>Direktori dan fail yang bermula dengan tanda titik '.' ditapis keluar secara lalainya.<br><br>"

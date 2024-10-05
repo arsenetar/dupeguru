@@ -6,21 +6,21 @@
 msgid ""
 msgstr ""
 "Last-Translator: Bas <duvel3@gmail.com>, 2021\n"
-"Language-Team: Dutch (https://www.transifex.com/voltaicideas/teams/116153/nl/)\n"
+"Language-Team: Dutch (https://app.transifex.com/voltaicideas/teams/116153/nl/)\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Er zijn geen gemarkeerde dubbelingen. Er is niks gedaam"
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Er zijn geen dubelingen geselecteerd. Er is niks gedaan"
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -29,23 +29,23 @@ msgstr ""
 "Afhankelijk met welke applicaties die bestanden worden geopened kan het best"
 " een rommeltje worden. Doorgaan?"
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr "Dubbelingen aan het opsporen"
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr "Laden"
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr "Verplaatsen"
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr "Kopiëren"
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr "Naar de prullebak verplaatsen"
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Select a destination for your exported CSV"
 msgstr "Selecteer een locatie voor de CSV export"
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "Kan niet schrijven naar bestand: {}"
 
@@ -121,28 +121,28 @@ msgstr ""
 "Er is nog geen \"aangepaste opdracht\" ingericht. Je kan dit doen bij de "
 "voorkeuren."
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr ""
 "Je staat op het punt om %d bestanden te verwijderen uit de resultaten. "
 "Doorgaan?"
 
-#: core\app.py:743
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr ""
 "{} dubbelingen groepen waren veranderd door de prioriteits verschuiving."
 
-#: core\app.py:790
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr ""
 "De geselecteerde folders bevatten geen bestanden die onderzocht kunnen "
 "worden."
 
-#: core\app.py:803
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "Bestanden aan het verzamelen om te onderzoeken"
 
-#: core\app.py:850
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s (%d weggelaten)"
 
@@ -187,23 +187,23 @@ msgstr "Bestandsnaam - Velden (geen volgorde)"
 msgid "Tags"
 msgstr "Tags"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "Inhoud"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr "%d van de %d afbeeldingen aan het analyseren"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr "%d van de %d bulk overeenkomsten uitgevoerd"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Voorbereiden voor dubbelingen bepaling"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "%d van de %d overeenkomsten nagekeken"
 
@@ -211,7 +211,7 @@ msgstr "%d van de %d overeenkomsten nagekeken"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF informatie van %d van de %d afbeeldingen gelezen"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "EXIF-tijdstempel"
 
@@ -219,55 +219,51 @@ msgstr "EXIF-tijdstempel"
 msgid "None"
 msgstr "Geen"
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr "Eindigt met nummer"
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr "Eindigt niet met een nummer"
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr "langste"
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr "kortste"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr "hoogste"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr "laagste"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr "nieuwste"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr "oudste"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s /%s) dubbelingen gemarkeerd"
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr "filter: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "Bestandsgrootte van %d/%d bestanden aan het lezen."
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Metadata van %d/%d bestanden gelezen"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Bijna klaar! Gehannes met resultaten..."
 

@@ -7,7 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 
-from typing import Any, Callable, Generator, Iterator, List, Union
+from typing import Any, Callable, Generator, List, Union
 
 
 class JobCancelled(Exception):
@@ -148,7 +148,7 @@ class Job:
         self._do_update(desc)
 
 
-class NullJob:
+class NullJob(Job):
     def __init__(self, *args, **kwargs) -> None:
         # Null job does nothing
         pass
@@ -160,9 +160,6 @@ class NullJob:
     def check_if_cancelled(self) -> None:
         # Null job does nothing
         pass
-
-    def iter_with_progress(self, sequence, *args, **kwargs) -> Iterator:
-        return iter(sequence)
 
     def start_job(self, *args, **kwargs) -> None:
         # Null job does nothing

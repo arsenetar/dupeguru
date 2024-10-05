@@ -14,6 +14,10 @@ Preferences
     If you check this box, pictures of different dimensions will be allowed in the same
     duplicate group.
 
+**Match pictures of different rotations:**
+    If you check this box, pictures of different rotations will be allowed in the same
+    duplicate group.
+
 .. _filter-hardness:
 
 **Filter Hardness:**
@@ -67,11 +71,11 @@ filename if the filename already exists in the destination.
 The format of the command is the same as what you would write in the command line, except that there
 are 2 placeholders: **%d** and **%r**. These placeholders will be replaced by the path of the
 selected dupe (%d) and the path of the selected dupe's reference file (%r).
-  
+
 If the path to your executable contains space characters, you should enclose it in "" quotes. You
 should also enclose placeholders in quotes because it's very possible that paths to dupes and refs
 will contain spaces. Here's an example custom command::
-  
+
     "C:\Program Files\SuperDiffProg\SuperDiffProg.exe" "%d" "%r"
 
 .. _inode: http://en.wikipedia.org/wiki/Inode

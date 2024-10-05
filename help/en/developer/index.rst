@@ -69,6 +69,6 @@ API
 
 .. toctree::
     :maxdepth: 2
-    
+
     core/index
     hscommon/index

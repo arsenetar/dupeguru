@@ -303,12 +303,13 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
                 # skip hashing for zero length files
                 result.append(Match(first, second, 100))
                 continue
-            if first.digest_partial == second.digest_partial:
+            # if digests are the same (and not None) then files match
+            if first.digest_partial is not None and first.digest_partial == second.digest_partial:
                 if bigsize > 0 and first.size > bigsize:
-                    if first.digest_samples == second.digest_samples:
+                    if first.digest_samples is not None and first.digest_samples == second.digest_samples:
                         result.append(Match(first, second, 100))
                 else:
-                    if first.digest == second.digest:
+                    if first.digest is not None and first.digest == second.digest:
                         result.append(Match(first, second, 100))
         group_count += 1
         j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))

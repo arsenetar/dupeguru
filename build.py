@@ -129,6 +129,7 @@ def build_normal():
     print("Building localizations")
     build_localizations()
     print("Building Qt stuff")
+    Path("qt", "dg_rc.py").unlink(missing_ok=True)
     print_and_do("pyrcc5 {} > {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
     fix_qt_resource_file(Path("qt", "dg_rc.py"))
     build_help()

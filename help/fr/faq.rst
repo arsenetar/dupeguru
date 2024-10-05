@@ -51,7 +51,7 @@ Tour groupe de doublons contient au moins un fichier dit "référence" et ce fic
 effacé. Par contre, ce que vous pouvez faire c'est de le remplacer par un autre fichier du groupe.
 Pour ce faire, sélectionnez un fichier du groupe et cliquez sur l'action **Transformer sélectionnés
 en références**.
-    
+
 Notez que si le fichier référence du groupe vient d'un dossier qui a été défini comme dossier
 référence, ce fichier ne peut pas être déplacé de sa position de référence du groupe.
 
@@ -71,7 +71,7 @@ doublons. Example: Nous avons 3 fichiers, A, B et C. Nous les comparons en utili
 de filtre. La comparaison détermine que A est un double de B, A est un double C, mais que B n'est
 **pas** un double de C. dupeGuru a ici un problème. Il ne peut pas créer un groupe avec A, B et C.
 Il décide donc de jeter C hors du groupe. C'est de là que vient la notice '(X hors-groupe)'.
-    
+
 Cette notice veut dire que si jamais vous effacez tout les doubles contenus dans vos résultats et
 que vous faites un nouveau scan, vous pourriez avoir de nouveaux résultats.
 

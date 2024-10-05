@@ -24,7 +24,7 @@ Development process
 * `Issue Tracker`_
 * `Issue labels meaning`_
 
-dupeGuru's source code is on Github and thus managed in a Git repository. At all times, you should
+dupeGuru's source code is on GitHub and thus managed in a Git repository. At all times, you should
 be able to build from source a fresh checkout of the ``master`` branch using instructions from the
 ``README.md`` file at the root of this project. If you can't, it's a bug. Please report it.
 
@@ -61,7 +61,7 @@ It's the same thing with feature requests. Description of a feature request, whe
 already been given to how such a feature would fit in the current design, are precious to developers
 and help them figure out a clear roadmap for the project.
 
-So, even if you're not a developer, you can always open a Github account and create/comment issues.
+So, even if you're not a developer, you can always open a GitHub account and create/comment issues.
 Your contribution will be much appreciated.
 
 **Documentation**. This is a bit trickier because dupeGuru's documentation is written with a rather

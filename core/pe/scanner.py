@@ -14,6 +14,7 @@ from core.pe import matchblock, matchexif
 class ScannerPE(Scanner):
     cache_path = None
     match_scaled = False
+    match_rotated = False
 
     @staticmethod
     def get_scan_options():
@@ -29,6 +30,7 @@ class ScannerPE(Scanner):
                 cache_path=self.cache_path,
                 threshold=self.min_match_percentage,
                 match_scaled=self.match_scaled,
+                match_rotated=self.match_rotated,
                 j=j,
             )
         elif self.scan_type == ScanType.EXIFTIMESTAMP:

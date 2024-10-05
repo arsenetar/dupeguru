@@ -326,6 +326,7 @@ def test_default_path_state_override(tmpdir):
         def _default_state_for_path(self, path):
             if "foobar" in path.parts:
                 return DirectoryState.EXCLUDED
+            return DirectoryState.NORMAL
 
     d = MyDirectories()
     p1 = Path(str(tmpdir))

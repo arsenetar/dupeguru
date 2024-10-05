@@ -4,9 +4,9 @@ Préférences
 .. only:: edition_se
 
     **Type de scan:** Cette option détermine quels aspects du fichier doit être comparé. Un scan par **Nom de fichier** compare les noms de fichiers mot-à-mot et, dépendant des autres préférences ci-dessous, déterminera si les noms se ressemblent assez pour être considérés comme doublons. Un scan par **Contenu** trouvera les doublons qui ont exactement le même contenu.
-    
+
     Le scan **Dossiers** est spécial. Si vous le sélectionnez, dupeGuru cherchera des doublons de *dossiers* plutôt que des doublons de fichiers. Pour déterminer si deux dossiers sont des doublons, dupeGuru regarde le contenu de tous les fichiers dans les dossiers, et si **tous** sont les mêmes, les dossiers sont considérés comme des doublons.
-    
+
     **Seuil du filtre:** Pour les scan de type **Nom de fichier**, cette option détermine le degré de similtude nécessaire afin de considérer deux noms comme doublons. Avec un seuil de 80, 80% des mots doivent être égaux. Pour déterminer ce pourcentage, dupeGuru compte le nombre de mots total des deux noms, puis compte le nombre de mots égaux, puis fait la division des deux. Un résultat égalisant ou dépassant le seuil sera considéré comme un doublon. Exemple: "a b c d" et "c d e" ont un pourcentage de 57 (4 mots égaux, 7 au total).
 
 .. only:: edition_me
@@ -33,7 +33,7 @@ Préférences
 .. only:: edition_pe
 
     **Type de scan:** Détermine le type de scan qui sera fait sur vos images. Le type **Contenu** compare le contenu des images de façon "fuzzy", rendant possible de trouver non seulement les doublons exactes, mais aussi les similaires. Le type **EXIF Timestamp** compare les métadonnées EXIF des images (si existantes) et détermine si le "timestamp" (moment de prise de la photo) est pareille. C'est beaucoup plus rapide que le scan par Contenu. **Attention:** Les photos modifiées gardent souvent le même timestamp, donc faites attention aux faux doublons si vous utilisez cette méthode.
-    
+
     **Seuil du filtre:** *Scan par Contenu seulement.* Plus il est élevé, plus les images doivent être similaires pour être considérées comme des doublons. Le défaut de 95% permet quelques petites différence, comme par exemple une différence de qualité ou bien une légère modification des couleurs.
 
     **Comparer les images de tailles différentes:** Le nom dit tout. Sans cette option, les images de tailles différentes ne sont pas comparées.
@@ -58,6 +58,6 @@ Dans tous les cas, dupeGuru résout les conflits de noms de fichier en ajoutant 
 
 Le format de la ligne de commande est la même que celle que vous écrireriez manuellement, excepté pour les arguments, **%d** et **%r**. L'endroit où vous placez ces deux arguments sera remplacé par le chemin du fichier sélectionné (%d) et le chemin de son fichier référence dans le groupe (%r).
 
-Si le chemin de votre executable contient un espace, vous devez le placer entre guillemets "". Vous devriez aussi placer vos arguments %d et %r entre guillemets parce qu'il est très possible d'avoir des chemins de fichier contenant des espaces. Voici un exemple de commande personnelle::  
-  
+Si le chemin de votre executable contient un espace, vous devez le placer entre guillemets "". Vous devriez aussi placer vos arguments %d et %r entre guillemets parce qu'il est très possible d'avoir des chemins de fichier contenant des espaces. Voici un exemple de commande personnelle::
+
     "C:\Program Files\SuperDiffProg\SuperDiffProg.exe" "%d" "%r"

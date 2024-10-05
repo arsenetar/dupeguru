@@ -4,21 +4,21 @@
 msgid ""
 msgstr ""
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat Yasuyoshi (MNH48) <admin@mnh48.moe>, 2021\n"
-"Language-Team: Malay (https://www.transifex.com/voltaicideas/teams/116153/ms/)\n"
+"Language-Team: Malay (https://app.transifex.com/voltaicideas/teams/116153/ms/)\n"
 "Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core\app.py:42
+#: core\app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Tiada duplikasi yang ditandai. Tiada apa yang dilakukan."
 
-#: core\app.py:43
+#: core\app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Tiada duplikasi yang dipilih. Tiada apa yang dilakukan."
 
-#: core\app.py:44
+#: core\app.py:46
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -27,23 +27,23 @@ msgstr ""
 "digunakan untuk membuka fail tersebut, ia mungkin menyebabkan sepah. Ingin "
 "teruskan?"
 
-#: core\app.py:71
+#: core\app.py:73
 msgid "Scanning for duplicates"
 msgstr "Mengimbas untuk duplikasi"
 
-#: core\app.py:72
+#: core\app.py:74
 msgid "Loading"
 msgstr "Memuatkan"
 
-#: core\app.py:73
+#: core\app.py:75
 msgid "Moving"
 msgstr "Memindahkan"
 
-#: core\app.py:74
+#: core\app.py:76
 msgid "Copying"
 msgstr "Menyalinkan"
 
-#: core\app.py:75
+#: core\app.py:77
 msgid "Sending to Trash"
 msgstr "Menghantarkan ke Tong Sampah"
 
@@ -107,7 +107,7 @@ msgstr "Pilih direktori dituju untuk pindah fail yang ditandai"
 msgid "Select a destination for your exported CSV"
 msgstr "Pilih tempat tujuan untuk eksport CSV anda"
 
-#: core\app.py:516 core\app.py:771 core\app.py:781
+#: core\app.py:516 core\app.py:777 core\app.py:787
 msgid "Couldn't write to file: {}"
 msgstr "Tidak mampu menulis ke fail: {}"
 
@@ -117,23 +117,23 @@ msgstr ""
 "Anda tidak ada perintah tersuai ditetapkan. Tetapkannya melalui menu "
 "keutamaan anda."
 
-#: core\app.py:695 core\app.py:707
+#: core\app.py:701 core\app.py:713
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Anda bakal mengalih keluar %d fail dari keputusan. Ingin teruskan?"
 
-#: core\app.py:743
+#: core\app.py:749
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} kumpulan duplikasi telah diubah oleh pengutamaan semula."
 
-#: core\app.py:790
+#: core\app.py:797
 msgid "The selected directories contain no scannable file."
 msgstr "Direktori yang dipilih tidak mempunyai fail yang boleh diimbas."
 
-#: core\app.py:803
+#: core\app.py:813
 msgid "Collecting files to scan"
 msgstr "Mengumpulkan fail untuk diimbas"
 
-#: core\app.py:850
+#: core\app.py:863
 msgid "%s (%d discarded)"
 msgstr "%s (%d dibuang)"
 
@@ -178,23 +178,23 @@ msgstr "Nama Fail - Medan (Tiada Tertib)"
 msgid "Tags"
 msgstr "Tag"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:21 core\se\scanner.py:17
+#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
 msgid "Contents"
 msgstr "Kandungan"
 
-#: core\pe\matchblock.py:72
+#: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
 msgstr "%d / %d gambar dianalisis"
 
-#: core\pe\matchblock.py:177
+#: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
 msgstr "%d / %d padanan ketulan dilaksanakan"
 
-#: core\pe\matchblock.py:185
+#: core\pe\matchblock.py:191
 msgid "Preparing for matching"
 msgstr "Membuat persediaan untuk pemadanan"
 
-#: core\pe\matchblock.py:234
+#: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
 msgstr "%d / %d padanan disahkan"
 
@@ -202,7 +202,7 @@ msgstr "%d / %d padanan disahkan"
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF bagi %d / %d gambar dibaca"
 
-#: core\pe\scanner.py:22
+#: core\pe\scanner.py:23
 msgid "EXIF Timestamp"
 msgstr "Cap masa EXIF"
 
@@ -210,55 +210,51 @@ msgstr "Cap masa EXIF"
 msgid "None"
 msgstr "Tiada"
 
-#: core\prioritize.py:100
+#: core\prioritize.py:102
 msgid "Ends with number"
 msgstr "Tamat dengan nombor"
 
-#: core\prioritize.py:101
+#: core\prioritize.py:103
 msgid "Doesn't end with number"
 msgstr "Tidak tamat dengan nombor"
 
-#: core\prioritize.py:102
+#: core\prioritize.py:104
 msgid "Longest"
 msgstr "Terpanjang"
 
-#: core\prioritize.py:103
+#: core\prioritize.py:105
 msgid "Shortest"
 msgstr "Terpendek"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Highest"
 msgstr "Tertinggi"
 
-#: core\prioritize.py:140
+#: core\prioritize.py:142
 msgid "Lowest"
 msgstr "Terendah"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Newest"
 msgstr "Terbaru"
 
-#: core\prioritize.py:169
+#: core\prioritize.py:171
 msgid "Oldest"
 msgstr "Terlama"
 
-#: core\results.py:134
+#: core\results.py:135
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) duplikasi ditandai."
 
-#: core\results.py:141
+#: core\results.py:142
 msgid " filter: %s"
 msgstr "penapis: %s"
 
-#: core\scanner.py:90
-msgid "Read size of %d/%d files"
-msgstr "Saiz bagi %d / %d gambar dibaca"
-
-#: core\scanner.py:116
+#: core\scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Metadata bagi %d / %d gambar dibaca"
 
-#: core\scanner.py:154
+#: core\scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Hampir selesai! Menyusun keputusan..."
 
