@@ -196,7 +196,7 @@ msgstr "Przygotowanie do dopasowania"
 
 #: core\pe\matchblock.py:240
 msgid "Verified %d/%d matches"
-msgstr "Zweryfikowane %d/%d meczów"
+msgstr "Zweryfikowane %d/%d dopasowań"
 
 #: core\pe\matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
