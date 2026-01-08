@@ -183,7 +183,7 @@ msgstr "Contenu"
 
 #: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
-msgstr "Analyzé %d/%d images"
+msgstr "Analysé %d/%d images"
 
 #: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
