@@ -14,6 +14,7 @@
 # Made docstring fit in 80 chars wide displays using pydoc.
 #
 
+import ast
 import os
 import importlib.machinery
 import importlib.util
@@ -81,7 +82,7 @@ def escape(s):
 
 def safe_eval(s):
     # unwrap quotes, safely
-    return eval(s, {"__builtins__": {}}, {})
+    return ast.literal_eval(s)
 
 
 def normalize(s):
