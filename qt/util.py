@@ -11,6 +11,7 @@ import io
 import os.path as op
 import os
 import logging
+from logging.handlers import RotatingFileHandler
 
 from core.util import executable_folder
 from hscommon.util import first
@@ -124,7 +125,7 @@ def setup_qt_logging(level=logging.WARNING, log_to_stdout=False):
     # Have to use full configuration over basicConfig as FileHandler encoding was not being set.
     filename = op.join(appdata, "debug.log") if not log_to_stdout else None
     log = logging.getLogger()
-    handler = logging.FileHandler(filename, "a", "utf-8")
+    handler = RotatingFileHandler(filename, maxBytes=5_000_000, backupCount=3, encoding="utf-8")
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
     log.addHandler(handler)

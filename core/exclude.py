@@ -23,6 +23,16 @@ default_regexes = [
     r"^\.Trash\-.*",  # Linux trash directories
     r"^\$Recycle\.Bin$",  # Windows
     r"^\..*",  # Hidden files on Unix-like
+    # Sensitive files (non-hidden)
+    r"^id_rsa.*",  # SSH private keys
+    r"^id_dsa.*",
+    r"^id_ecdsa.*",
+    r"^id_ed25519.*",
+    r".*\.pem$",  # SSL/TLS certificates and keys
+    r".*\.key$",  # Private key files
+    r".*\.p12$",  # PKCS#12 certificate bundles
+    r".*\.pfx$",
+    r".*\.kdbx$",  # KeePass password databases
 ]
 # These are too broad
 forbidden_regexes = [r".*", r"\/.*", r".*\/.*", r".*\\\\.*", r".*\..*"]

@@ -137,6 +137,7 @@ class DupeGuru(Broadcaster):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
+        self._last_export_temp_dir = None
         self.exclude_list = ExcludeList()
         hash_cache_file = op.join(self.appdata, "hash_cache.db")
         fs.filesdb.connect(hash_cache_file)
@@ -497,8 +498,11 @@ class DupeGuru(Broadcaster):
         determine how the data is presented in the export. In other words, the exported table in
         the resulting XHTML will look just like the results table.
         """
+        if self._last_export_temp_dir and op.exists(self._last_export_temp_dir):
+            shutil.rmtree(self._last_export_temp_dir, ignore_errors=True)
         colnames, rows = self._get_export_data()
         export_path = export.export_to_xhtml(colnames, rows)
+        self._last_export_temp_dir = op.dirname(export_path)
         desktop.open_path(export_path)
 
     def export_to_csv(self):
@@ -764,6 +768,8 @@ class DupeGuru(Broadcaster):
         self.notify("save_session")
 
     def close(self):
+        if self._last_export_temp_dir and op.exists(self._last_export_temp_dir):
+            shutil.rmtree(self._last_export_temp_dir, ignore_errors=True)
         fs.filesdb.close()
 
     def save_as(self, filename):
