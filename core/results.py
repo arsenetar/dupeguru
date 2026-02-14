@@ -12,6 +12,7 @@ import os
 import os.path as op
 from errno import EISDIR, EACCES
 from xml.etree import ElementTree as ET
+from defusedxml.ElementTree import parse as safe_parse
 
 from hscommon.jobprogress.job import nulljob
 from hscommon.conflict import get_conflicted_name
@@ -228,7 +229,7 @@ class Results(Markable):
             do_match(other_files[0], other_files[1:], group)
 
         self.apply_filter(None)
-        root = ET.parse(infile).getroot()
+        root = safe_parse(infile).getroot()
         group_elems = list(root.iter("group"))
         groups = []
         marked = set()
