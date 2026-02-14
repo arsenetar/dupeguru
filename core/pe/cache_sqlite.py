@@ -156,12 +156,12 @@ class SqliteCache:
             raise ValueError(path)
 
     def get_multiple(self, rowids):
-        ids = ",".join(map(str, rowids))
+        placeholders = ",".join("?" * len(rowids))
         sql = (
             "select rowid, blocks, blocks2, blocks3, blocks4, blocks5, blocks6, blocks7, blocks8 "
-            f"from pictures where rowid in ({ids})"
+            f"from pictures where rowid in ({placeholders})"
         )
-        cur = self.con.execute(sql)
+        cur = self.con.execute(sql, list(rowids))
         return (
             (
                 rowid,
@@ -196,5 +196,6 @@ class SqliteCache:
                     continue
             todelete.append(rowid)
         if todelete:
-            sql = "delete from pictures where rowid in (%s)" % ",".join(map(str, todelete))
-            self.con.execute(sql)
+            placeholders = ",".join("?" * len(todelete))
+            sql = f"delete from pictures where rowid in ({placeholders})"
+            self.con.execute(sql, todelete)
