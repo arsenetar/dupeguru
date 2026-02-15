@@ -8,6 +8,8 @@
 
 import logging
 import multiprocessing
+import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from itertools import combinations
 
 from hscommon.util import extract, iterconsume
@@ -54,50 +56,71 @@ def get_cache(cache_path, readonly=False):
     return SqliteCache(cache_path, readonly=readonly)
 
 
+def _extract_blocks(picture, with_dimensions, match_rotated):
+    """Extract blocks for one picture. Returns (picture, blocks) or (picture, None) on error."""
+    if not picture.path:
+        logging.warning("We have a picture with a null path here")
+        return (picture, None)
+    logging.debug("Analyzing picture at %s", picture.unicode_path)
+    if with_dimensions:
+        picture.dimensions  # pre-read dimensions
+    try:
+        if match_rotated:
+            blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
+        else:
+            blocks = [[]] * 8
+            blocks[max(picture.get_orientation() - 1, 0)] = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
+        return (picture, blocks)
+    except (OSError, ValueError) as e:
+        logging.warning(str(e))
+        return (picture, None)
+    except MemoryError:
+        logging.warning(
+            "Ran out of memory while reading %s of size %d",
+            picture.unicode_path,
+            picture.size,
+        )
+        if picture.size < 10 * 1024 * 1024:
+            raise
+        return (picture, None)
+
+
 def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job.nulljob):
-    # The MemoryError handlers in there use logging without first caring about whether or not
-    # there is enough memory left to carry on the operation because it is assumed that the
-    # MemoryError happens when trying to read an image file, which is freed from memory by the
-    # time that MemoryError is raised.
     cache = get_cache(cache_path)
     cache.purge_outdated()
-    prepared = []  # only pictures for which there was no error getting blocks
-    try:
-        for picture in j.iter_with_progress(pictures, tr("Analyzed %d/%d pictures")):
-            if not picture.path:
-                # XXX Find the root cause of this. I've received reports of crashes where we had
-                # "Analyzing picture at " (without a path) in the debug log. It was an iPhoto scan.
-                # For now, I'm simply working around the crash by ignoring those, but it would be
-                # interesting to know exactly why this happens. I'm suspecting a malformed
-                # entry in iPhoto library.
-                logging.warning("We have a picture with a null path here")
-                continue
-            logging.debug("Analyzing picture at %s", picture.unicode_path)
-            if with_dimensions:
-                picture.dimensions  # pre-read dimensions
-            try:
-                if picture.unicode_path not in cache or (
-                    match_rotated and any(block == [] for block in cache[picture.unicode_path])
-                ):
-                    if match_rotated:
-                        blocks = [picture.get_blocks(BLOCK_COUNT_PER_SIDE, orientation) for orientation in range(1, 9)]
-                    else:
-                        blocks = [[]] * 8
-                        blocks[max(picture.get_orientation() - 1, 0)] = picture.get_blocks(BLOCK_COUNT_PER_SIDE)
-                    cache[picture.unicode_path] = blocks
+    prepared = []
+    needs_extraction = []
+    for picture in pictures:
+        if not picture.path:
+            continue
+        try:
+            if picture.unicode_path not in cache or (
+                match_rotated and any(block == [] for block in cache[picture.unicode_path])
+            ):
+                needs_extraction.append(picture)
+            else:
                 prepared.append(picture)
-            except (OSError, ValueError) as e:
-                logging.warning(str(e))
-            except MemoryError:
-                logging.warning(
-                    "Ran out of memory while reading %s of size %d",
-                    picture.unicode_path,
-                    picture.size,
-                )
-                if picture.size < 10 * 1024 * 1024:  # We're really running out of memory
-                    raise
-    except MemoryError:
-        logging.warning("Ran out of memory while preparing pictures")
+        except (OSError, KeyError):
+            needs_extraction.append(picture)
+    if needs_extraction:
+        try:
+            with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+                futures = {
+                    executor.submit(_extract_blocks, pic, with_dimensions, match_rotated): pic
+                    for pic in needs_extraction
+                }
+                total = len(futures)
+                for i, future in enumerate(as_completed(futures)):
+                    j.set_progress(
+                        (i + 1) * 100 // total,
+                        tr("Analyzed %d/%d pictures") % (i + 1, total),
+                    )
+                    picture, blocks = future.result()
+                    if blocks is not None:
+                        cache[picture.unicode_path] = blocks
+                        prepared.append(picture)
+        except MemoryError:
+            logging.warning("Ran out of memory while preparing pictures")
     cache.close()
     return prepared
 
