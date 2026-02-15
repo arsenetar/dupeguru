@@ -39,6 +39,7 @@ MIN_ITERATIONS = 3
 BLOCK_COUNT_PER_SIDE = 15
 DEFAULT_CHUNK_SIZE = 1000
 MIN_CHUNK_SIZE = 100
+PRESCALE_MULTIPLIERS = [0, 30, 10]  # 0 = no scaling, 30 = 450px, 10 = 150px
 
 # Enough so that we're sure that the main thread will not wait after a result.get() call
 # cpucount+1 should be enough to be sure that the spawned process will not wait after the results
@@ -56,8 +57,9 @@ def get_cache(cache_path, readonly=False):
     return SqliteCache(cache_path, readonly=readonly)
 
 
-def _extract_blocks(picture, with_dimensions, match_rotated):
+def _extract_blocks(picture, with_dimensions, match_rotated, prescale_multiplier):
     """Extract blocks for one picture. Returns (picture, blocks) or (picture, None) on error."""
+    picture._prescale_multiplier = prescale_multiplier
     if not picture.path:
         logging.warning("We have a picture with a null path here")
         return (picture, None)
@@ -85,7 +87,8 @@ def _extract_blocks(picture, with_dimensions, match_rotated):
         return (picture, None)
 
 
-def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job.nulljob):
+def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, picture_prescale=1, j=job.nulljob):
+    prescale_multiplier = PRESCALE_MULTIPLIERS[picture_prescale]
     cache = get_cache(cache_path)
     cache.purge_outdated()
     prepared = []
@@ -106,7 +109,7 @@ def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job
         try:
             with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
                 futures = {
-                    executor.submit(_extract_blocks, pic, with_dimensions, match_rotated): pic
+                    executor.submit(_extract_blocks, pic, with_dimensions, match_rotated, prescale_multiplier): pic
                     for pic in needs_extraction
                 }
                 total = len(futures)
@@ -191,7 +194,7 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo, match_rotated=
     return results
 
 
-def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotated=False, j=job.nulljob):
+def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotated=False, picture_prescale=1, j=job.nulljob):
     def get_picinfo(p):
         if match_scaled:
             return ((None, None), p.is_ref)
@@ -216,7 +219,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotate
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, j=j)
+    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, picture_prescale, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}
