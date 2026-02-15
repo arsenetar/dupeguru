@@ -6,6 +6,7 @@
 
 import logging
 
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QImageReader, QTransform
 
 from core.pe.photo import Photo as PhotoBase
@@ -69,4 +70,7 @@ class File(PhotoBase):
             elif orientation == 8:
                 t.rotate(270)
             image = image.transformed(t)
+        target_size = block_count_per_side * 30
+        if image.width() > target_size or image.height() > target_size:
+            image = image.scaled(target_size, target_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         return getblocks(image, block_count_per_side)
