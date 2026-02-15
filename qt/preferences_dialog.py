@@ -74,10 +74,10 @@ class PreferencesDialogBase(QDialog):
 
     def _setupFilterHardnessBox(self) -> None:
         self.filterHardnessHLayout = QHBoxLayout()
-        self.filterHardnessLabel = QLabel(self)
-        self.filterHardnessLabel.setText(tr("Filter Hardness:"))
-        self.filterHardnessLabel.setMinimumSize(QSize(0, 0))
-        self.filterHardnessHLayout.addWidget(self.filterHardnessLabel)
+        self.filterHardnessTitleLabel = QLabel(self)
+        self.filterHardnessTitleLabel.setText(tr("Filter Hardness:"))
+        self.filterHardnessTitleLabel.setMinimumSize(QSize(0, 0))
+        self.filterHardnessHLayout.addWidget(self.filterHardnessTitleLabel)
         self.filterHardnessVLayout = QVBoxLayout()
         self.filterHardnessVLayout.setSpacing(0)
         self.filterHardnessHLayoutSub1 = QHBoxLayout()
@@ -110,6 +110,13 @@ class PreferencesDialogBase(QDialog):
         self.filterHardnessHLayoutSub2.addWidget(self.fewerResultsLabel)
         self.filterHardnessVLayout.addLayout(self.filterHardnessHLayoutSub2)
         self.filterHardnessHLayout.addLayout(self.filterHardnessVLayout)
+
+    def _setFilterHardnessEnabled(self, enabled):
+        self.filterHardnessSlider.setEnabled(enabled)
+        self.filterHardnessLabel.setEnabled(enabled)
+        self.filterHardnessTitleLabel.setEnabled(enabled)
+        self.moreResultsLabel.setEnabled(enabled)
+        self.fewerResultsLabel.setEnabled(enabled)
 
     def _setupBottomPart(self) -> None:
         # The bottom part of the pref panel is always the same in all editions.

@@ -15,6 +15,7 @@ class ScannerPE(Scanner):
     cache_path = None
     match_scaled = False
     match_rotated = False
+    picture_prescale = 1
 
     @staticmethod
     def get_scan_options():
@@ -31,6 +32,7 @@ class ScannerPE(Scanner):
                 threshold=self.min_match_percentage,
                 match_scaled=self.match_scaled,
                 match_rotated=self.match_rotated,
+                picture_prescale=self.picture_prescale,
                 j=j,
             )
         elif self.scan_type == ScanType.EXIFTIMESTAMP:

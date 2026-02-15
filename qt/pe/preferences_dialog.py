@@ -9,6 +9,8 @@ from typing import Callable
 
 from PyQt6.QtWidgets import QCheckBox
 
+from PyQt6.QtWidgets import QLabel, QComboBox
+
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 from core.scanner import ScanType
@@ -28,6 +30,13 @@ class PreferencesDialog(PreferencesDialogBase):
         self.widgetsVLayout.addWidget(self.matchScaledBox)
         self._setupAddCheckbox("matchRotatedBox", tr("Match pictures of different rotations"))
         self.widgetsVLayout.addWidget(self.matchRotatedBox)
+        self.prescaleLabel = QLabel(tr("Scan speed:"))
+        self.widgetsVLayout.addWidget(self.prescaleLabel)
+        self.prescaleComboBox = QComboBox(self)
+        self.prescaleComboBox.addItem(tr("Accurate (slow)"))
+        self.prescaleComboBox.addItem(tr("Balanced (recommended)"))
+        self.prescaleComboBox.addItem(tr("Turbo"))
+        self.widgetsVLayout.addWidget(self.prescaleComboBox)
         self._setupAddCheckbox("mixFileKindBox", tr("Can mix file kind"))
         self.widgetsVLayout.addWidget(self.mixFileKindBox)
         self._setupAddCheckbox("useRegexpBox", tr("Use regular expressions when filtering"))
@@ -65,16 +74,18 @@ show scrollbars to span the view around"
     def _load(self, prefs: Preferences, setchecked: Callable[[QCheckBox, bool], None], section: Sections) -> None:
         setchecked(self.matchScaledBox, prefs.match_scaled)
         setchecked(self.matchRotatedBox, prefs.match_rotated)
+        self.prescaleComboBox.setCurrentIndex(prefs.picture_prescale)
 
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.PICTURE)
         fuzzy_scan = scan_type == ScanType.FUZZYBLOCK
-        self.filterHardnessSlider.setEnabled(fuzzy_scan)
+        self._setFilterHardnessEnabled(fuzzy_scan)
         setchecked(self.details_dialog_override_theme_icons, prefs.details_dialog_override_theme_icons)
         setchecked(self.details_dialog_viewers_show_scrollbars, prefs.details_dialog_viewers_show_scrollbars)
 
     def _save(self, prefs: Preferences, ischecked: Callable[[QCheckBox], bool]) -> None:
         prefs.match_scaled = ischecked(self.matchScaledBox)
         prefs.match_rotated = ischecked(self.matchRotatedBox)
+        prefs.picture_prescale = self.prescaleComboBox.currentIndex()
         prefs.details_dialog_override_theme_icons = ischecked(self.details_dialog_override_theme_icons)
         prefs.details_dialog_viewers_show_scrollbars = ischecked(self.details_dialog_viewers_show_scrollbars)

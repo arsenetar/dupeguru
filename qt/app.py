@@ -196,6 +196,7 @@ class DupeGuru(QObject):
         self.model.options["scanned_tags"] = scanned_tags
         self.model.options["match_scaled"] = self.prefs.match_scaled
         self.model.options["match_rotated"] = self.prefs.match_rotated
+        self.model.options["picture_prescale"] = self.prefs.picture_prescale
         self.model.options["include_exists_check"] = self.prefs.include_exists_check
         self.model.options["rehash_ignore_mtime"] = self.prefs.rehash_ignore_mtime
 

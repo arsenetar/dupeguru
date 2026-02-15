@@ -227,6 +227,7 @@ class Preferences(PreferencesBase):
         self.scan_tag_year = get("ScanTagYear", self.scan_tag_year)
         self.match_scaled = get("MatchScaled", self.match_scaled)
         self.match_rotated = get("MatchRotated", self.match_rotated)
+        self.picture_prescale = get("PicturePrescale", self.picture_prescale)
 
     def reset(self) -> None:
         self.filter_hardness = 95
@@ -280,6 +281,7 @@ class Preferences(PreferencesBase):
         self.scan_tag_year = False
         self.match_scaled = False
         self.match_rotated = False
+        self.picture_prescale = 1  # 0=accurate, 1=balanced, 2=turbo
 
     def _save_values(self, settings) -> None:
         set_ = self.set_value
@@ -334,6 +336,7 @@ class Preferences(PreferencesBase):
         set_("ScanTagYear", self.scan_tag_year)
         set_("MatchScaled", self.match_scaled)
         set_("MatchRotated", self.match_rotated)
+        set_("PicturePrescale", self.picture_prescale)
 
     # scan_type is special because we save it immediately when we set it.
     def get_scan_type(self, app_mode):

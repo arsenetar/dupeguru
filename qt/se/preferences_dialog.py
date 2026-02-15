@@ -113,7 +113,7 @@ class PreferencesDialog(PreferencesDialogBase):
         # Update UI state based on selected scan type
         scan_type = prefs.get_scan_type(AppMode.STANDARD)
         word_based = scan_type == ScanType.FILENAME
-        self.filterHardnessSlider.setEnabled(word_based)
+        self._setFilterHardnessEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)
 
