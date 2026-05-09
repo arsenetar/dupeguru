@@ -244,6 +244,10 @@ use the modifier key to drag the floating window around"
         # Edition-specific
         pass
 
+    def _setup_advanced_page(self) -> None:
+        # Edition-specific
+        pass
+
     def _setupUi(self) -> None:
         self.setWindowTitle(tr("Options"))
         self.setSizeGripEnabled(False)

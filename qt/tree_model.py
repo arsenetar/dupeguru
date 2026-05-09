@@ -8,7 +8,7 @@
 
 import logging
 
-from PyQt5.QtCore import QAbstractItemModel, QModelIndex
+from PyQt6.QtCore import QAbstractItemModel, QModelIndex
 
 
 class NodeContainer:

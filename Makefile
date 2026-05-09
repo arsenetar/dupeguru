@@ -1,6 +1,6 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
-PYRCC5 ?= pyrcc5
+RCC ?= rcc
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
@@ -77,7 +77,8 @@ build/help: | env
 	$(VENV_PYTHON) build.py --doc
 
 qt/dg_rc.py: qt/dg.qrc
-	$(PYRCC5) qt/dg.qrc > qt/dg_rc.py
+	$(RCC) -g python qt/dg.qrc -o qt/dg_rc.py
+	sed -i 's/from PySide6/from PyQt6/' qt/dg_rc.py
 
 i18n: $(mofiles)
 

@@ -90,7 +90,7 @@ class ErrorReportDialog(QDialog):
 
         main_layout.addLayout(button_layout)
 
-        report_button.clicked.connect(self.goToGithub)
+        report_button.clicked.connect(self.goToGitHub)
         close_button.clicked.connect(self.reject)
 
     def goToGitHub(self):
