@@ -7,7 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import typing
-from PyQt5.QtCore import (
+from PyQt6.QtCore import (
     Qt,
     QAbstractTableModel,
     QModelIndex,
@@ -49,32 +49,32 @@ class Table(QAbstractTableModel):
         column_count = self.columnCount(QModelIndex())
         for index in self.model.selected_indexes:
             new_selection.select(self.createIndex(index, 0), self.createIndex(index, column_count - 1))
-        self.view.selectionModel().select(new_selection, QItemSelectionModel.ClearAndSelect)
+        self.view.selectionModel().select(new_selection, QItemSelectionModel.SelectionFlag.ClearAndSelect)
         if len(new_selection.indexes()):
             current_index = new_selection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.Current)
+            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.SelectionFlag.Current)
             self.view.scrollTo(current_index)
 
     # --- Data Model methods
     # Virtual
     def _getData(self, row, column, role):
-        if role in (Qt.DisplayRole, Qt.EditRole):
+        if role in (Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole):
             attrname = column.name
             return row.get_cell_value(attrname)
-        elif role == Qt.TextAlignmentRole:
+        elif role == Qt.ItemDataRole.TextAlignmentRole:
             return column.alignment
         return None
 
     # Virtual
     def _getFlags(self, row, column):
-        flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        flags = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
         if row.can_edit_cell(column.name):
-            flags |= Qt.ItemIsEditable
+            flags |= Qt.ItemFlag.ItemIsEditable
         return flags
 
     # Virtual
     def _setData(self, row, column, value, role):
-        if role == Qt.EditRole:
+        if role == Qt.ItemDataRole.EditRole:
             attrname = column.name
             if attrname == "from":
                 attrname = "from_"
@@ -100,14 +100,14 @@ class Table(QAbstractTableModel):
         return self._getFlags(row, column)
 
     def headerData(self, section, orientation, role):
-        if orientation != Qt.Horizontal:
+        if orientation != Qt.Orientation.Horizontal:
             return None
         if section >= self.model._columns.columns_count():
             return None
         column = self.model._columns.column_by_index(section)
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             return column.display
-        elif role == Qt.TextAlignmentRole:
+        elif role == Qt.ItemDataRole.TextAlignmentRole:
             return column.alignment
         else:
             return None
@@ -130,7 +130,7 @@ class Table(QAbstractTableModel):
     def sort(self, section, order):
         column = self.model._columns.column_by_index(section)
         attrname = column.name
-        self.model.sort_by(attrname, desc=order == Qt.DescendingOrder)
+        self.model.sort_by(attrname, desc=order == Qt.SortOrder.DescendingOrder)
 
     def submit(self):
         self.model.save_edits()

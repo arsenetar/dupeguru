@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
+from PyQt6.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
 
 
 class SelectableList(QAbstractListModel):
@@ -23,7 +23,7 @@ class SelectableList(QAbstractListModel):
         if not index.isValid():
             return None
         # We need EditRole for QComboBoxes with setEditable(True)
-        if role in {Qt.DisplayRole, Qt.EditRole}:
+        if role in {Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole}:
             return self.model[index.row()]
         return None
 
@@ -88,10 +88,10 @@ class ListviewModel(SelectableList):
         new_selection = QItemSelection()
         for index in self.model.selected_indexes:
             new_selection.select(self.createIndex(index, 0), self.createIndex(index, 0))
-        self.view.selectionModel().select(new_selection, QItemSelectionModel.ClearAndSelect)
+        self.view.selectionModel().select(new_selection, QItemSelectionModel.SelectionFlag.ClearAndSelect)
         if len(new_selection.indexes()):
             current_index = new_selection.indexes()[0]
-            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.Current)
+            self.view.selectionModel().setCurrentIndex(current_index, QItemSelectionModel.SelectionFlag.Current)
             self.view.scrollTo(current_index)
 
     # --- Events

@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
-from PyQt5.QtGui import QBrush, QFont, QFontMetrics
-from PyQt5.QtWidgets import QTableView
+from PyQt6.QtCore import Qt, pyqtSignal, QModelIndex
+from PyQt6.QtGui import QBrush, QFont, QFontMetrics
+from PyQt6.QtWidgets import QTableView
 
 from qt.table import Table
 
@@ -17,7 +17,7 @@ class ResultsModel(Table):
     def __init__(self, app, view, **kwargs):
         model = app.model.result_table
         super().__init__(model, view, **kwargs)
-        view.horizontalHeader().setSortIndicator(1, Qt.AscendingOrder)
+        view.horizontalHeader().setSortIndicator(1, Qt.SortOrder.AscendingOrder)
         font = view.font()
         font.setPointSize(app.prefs.tableFontSize)
         view.setFont(font)
@@ -29,52 +29,52 @@ class ResultsModel(Table):
 
     def _getData(self, row, column, role):
         if column.name == "marked":
-            if role == Qt.BackgroundRole and row.isref:
+            if role == Qt.ItemDataRole.BackgroundRole and row.isref:
                 return QBrush(self.prefs.result_table_ref_background_color)
-            if role == Qt.CheckStateRole and row.markable:
-                return Qt.Checked if row.marked else Qt.Unchecked
+            if role == Qt.ItemDataRole.CheckStateRole and row.markable:
+                return Qt.CheckState.Checked if row.marked else Qt.CheckState.Unchecked
             return None
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             data = row.data_delta if self.model.delta_values else row.data
             return data[column.name]
-        elif role == Qt.ForegroundRole:
+        elif role == Qt.ItemDataRole.ForegroundRole:
             if row.isref:
                 return QBrush(self.prefs.result_table_ref_foreground_color)
             elif row.is_cell_delta(column.name):
                 return QBrush(self.prefs.result_table_delta_foreground_color)
-        elif role == Qt.BackgroundRole:
+        elif role == Qt.ItemDataRole.BackgroundRole:
             if row.isref:
                 return QBrush(self.prefs.result_table_ref_background_color)
-        elif role == Qt.FontRole:
+        elif role == Qt.ItemDataRole.FontRole:
             font = QFont(self.view.font())
             if self.prefs.reference_bold_font:
                 font.setBold(row.isref)
             return font
-        elif role == Qt.EditRole and column.name == "name":
+        elif role == Qt.ItemDataRole.EditRole and column.name == "name":
             return row.data[column.name]
         return None
 
     def _getFlags(self, row, column):
-        flags = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        flags = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
         if column.name == "marked":
             if row.markable:
-                flags |= Qt.ItemIsUserCheckable
+                flags |= Qt.ItemFlag.ItemIsUserCheckable
         elif column.name == "name":
-            flags |= Qt.ItemIsEditable
+            flags |= Qt.ItemFlag.ItemIsEditable
         return flags
 
     def _setData(self, row, column, value, role):
-        if role == Qt.CheckStateRole:
+        if role == Qt.ItemDataRole.CheckStateRole:
             if column.name == "marked":
                 row.marked = bool(value)
                 return True
-        elif role == Qt.EditRole and column.name == "name":
+        elif role == Qt.ItemDataRole.EditRole and column.name == "name":
             return self.model.rename_selected(value)
         return False
 
     def sort(self, column, order):
         column = self.model.COLUMNS[column]
-        self.model.sort(column.name, order == Qt.AscendingOrder)
+        self.model.sort(column.name, order == Qt.SortOrder.AscendingOrder)
 
     # --- Properties
     @property

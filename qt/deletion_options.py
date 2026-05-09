@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
 
 from hscommon.trans import trget
 from qt.radio_box import RadioBox
@@ -17,7 +17,7 @@ tr = trget("ui")
 
 class DeletionOptions(QDialog):
     def __init__(self, parent, model, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
+        flags = Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.model = model
         self._setupUi()
@@ -57,8 +57,8 @@ class DeletionOptions(QDialog):
         self.directMessageLabel.setWordWrap(True)
         self.verticalLayout.addWidget(self.directMessageLabel)
         self.buttonBox = QDialogButtonBox()
-        self.buttonBox.addButton(tr("Proceed"), QDialogButtonBox.AcceptRole)
-        self.buttonBox.addButton(tr("Cancel"), QDialogButtonBox.RejectRole)
+        self.buttonBox.addButton(tr("Proceed"), QDialogButtonBox.ButtonRole.AcceptRole)
+        self.buttonBox.addButton(tr("Cancel"), QDialogButtonBox.ButtonRole.RejectRole)
         self.verticalLayout.addWidget(self.buttonBox)
 
     # --- Signals
@@ -77,7 +77,7 @@ class DeletionOptions(QDialog):
         self.model.link_deleted = self.linkCheckbox.isChecked()
         self.model.use_hardlinks = self.linkTypeRadio.selected_index == 1
         self.model.direct = self.directCheckbox.isChecked()
-        return result == QDialog.Accepted
+        return result == QDialog.DialogCode.Accepted
 
     def set_hardlink_option_enabled(self, is_enabled: bool):
         self.linkTypeRadio.setEnabled(is_enabled)

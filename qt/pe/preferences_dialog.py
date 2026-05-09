@@ -5,11 +5,16 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 
+from typing import Callable
+
+from PyQt6.QtWidgets import QCheckBox
+
 from hscommon.trans import trget
 from hscommon.plat import ISLINUX
 from core.scanner import ScanType
 from core.app import AppMode
 
+from qt.preferences import Preferences
 from qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")

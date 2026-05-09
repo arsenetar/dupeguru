@@ -2,8 +2,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont, QFontMetrics, QIcon, QColor
 
 from qt.column import Column
 from qt.table import Table
@@ -28,38 +28,43 @@ class ExcludeListTable(Table):
 
     def _getData(self, row, column, role):
         if column.name == "marked":
-            if role == Qt.CheckStateRole and row.markable:
-                return Qt.Checked if row.marked else Qt.Unchecked
-            if role == Qt.ToolTipRole and not row.markable:
+            if role == Qt.ItemDataRole.CheckStateRole and row.markable:
+                return Qt.CheckState.Checked if row.marked else Qt.CheckState.Unchecked
+            if role == Qt.ItemDataRole.ToolTipRole and not row.markable:
                 return tr("Compilation error: ") + row.get_cell_value("error")
-            if role == Qt.DecorationRole and not row.markable:
+            if role == Qt.ItemDataRole.DecorationRole and not row.markable:
                 return QIcon.fromTheme("dialog-error", QIcon(":/error"))
             return None
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             return row.data[column.name]
-        elif role == Qt.FontRole:
+        elif role == Qt.ItemDataRole.FontRole:
             return QFont(self.view.font())
-        elif role == Qt.BackgroundRole and column.name == "regex":
+        elif role == Qt.ItemDataRole.BackgroundRole and column.name == "regex":
             if row.highlight:
                 return QColor(10, 200, 10)  # green
-        elif role == Qt.EditRole and column.name == "regex":
+        elif role == Qt.ItemDataRole.EditRole and column.name == "regex":
             return row.data[column.name]
         return None
 
     def _getFlags(self, row, column):
-        flags = Qt.ItemIsEnabled
+        flags = Qt.ItemFlag.ItemIsEnabled
         if column.name == "marked":
             if row.markable:
-                flags |= Qt.ItemIsUserCheckable
+                flags |= Qt.ItemFlag.ItemIsUserCheckable
         elif column.name == "regex":
-            flags |= Qt.ItemIsEditable | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled | Qt.ItemIsDropEnabled
+            flags |= (
+                Qt.ItemFlag.ItemIsEditable
+                | Qt.ItemFlag.ItemIsSelectable
+                | Qt.ItemFlag.ItemIsDragEnabled
+                | Qt.ItemFlag.ItemIsDropEnabled
+            )
         return flags
 
     def _setData(self, row, column, value, role):
-        if role == Qt.CheckStateRole:
+        if role == Qt.ItemDataRole.CheckStateRole:
             if column.name == "marked":
                 row.marked = bool(value)
                 return True
-        elif role == Qt.EditRole and column.name == "regex":
+        elif role == Qt.ItemDataRole.EditRole and column.name == "regex":
             return self.model.rename_selected(value)
         return False
