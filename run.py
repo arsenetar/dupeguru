@@ -48,6 +48,7 @@ def setup_signals():
 
 def main():
     app = QApplication(sys.argv)
+    app.setDesktopFileName("dupeguru")
     QCoreApplication.setOrganizationName("Hardcoded Software")
     QCoreApplication.setApplicationName(__appname__)
     QCoreApplication.setApplicationVersion(__version__)
