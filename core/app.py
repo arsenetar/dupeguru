@@ -433,7 +433,7 @@ class DupeGuru(Broadcaster):
         if dest_type in {DestType.RELATIVE, DestType.ABSOLUTE}:
             # no filename, no windows drive letter
             source_base = source_path.relative_to(source_path.anchor).parent
-            if dest_type == DestType.RELATIVE:
+            if dest_type == DestType.RELATIVE and location_path is not None:
                 source_base = source_base.relative_to(location_path.relative_to(location_path.anchor))
             dest_path = dest_path.joinpath(source_base)
         if not dest_path.exists():
