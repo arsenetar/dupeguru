@@ -245,7 +245,7 @@ Section "Uninstall"
   ; Remove Files & Folders in Install Folder
   RMDir /r "$INSTDIR\core"
   RMDir /r "$INSTDIR\help"
-  RMDir /r "$INSTDIR\PyQt5"
+  RMDir /r "$INSTDIR\PyQt6"
   RMDir /r "$INSTDIR\qt"
   RMDir /r "$INSTDIR\locale"
   Delete "$INSTDIR\*.exe"

@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
+from PyQt6.QtWidgets import (
     QComboBox,
     QStyledItemDelegate,
     QStyle,
@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import (
     QStyleOptionViewItem,
     QApplication,
 )
-from PyQt5.QtGui import QBrush
+from PyQt6.QtGui import QBrush
 
 from hscommon.trans import trget
 from qt.tree_model import RefNode, TreeModel
@@ -36,28 +36,28 @@ class DirectoriesDelegate(QStyledItemDelegate):
         self.initStyleOption(option, index)
         # No idea why, but this cast is required if we want to have access to the V4 valuess
         option = QStyleOptionViewItem(option)
-        if (index.column() == 1) and (option.state & QStyle.State_Selected):
+        if (index.column() == 1) and (option.state & QStyle.StateFlag.State_Selected):
             cboption = QStyleOptionComboBox()
             cboption.rect = option.rect
             # On OS X (with Qt4.6.0), adding State_Enabled to the flags causes the whole drawing to
             # fail (draw nothing), but it's an OS X only glitch. On Windows, it works alright.
-            cboption.state |= QStyle.State_Enabled
-            QApplication.style().drawComplexControl(QStyle.CC_ComboBox, cboption, painter)
+            cboption.state |= QStyle.StateFlag.State_Enabled
+            QApplication.style().drawComplexControl(QStyle.ComplexControl.CC_ComboBox, cboption, painter)
             painter.setBrush(option.palette.text())
             rect = QRect(option.rect)
             rect.setLeft(rect.left() + 4)
-            painter.drawText(rect, Qt.AlignLeft, option.text)
+            painter.drawText(rect, Qt.AlignmentFlag.AlignLeft, option.text)
         else:
             super().paint(painter, option, index)
 
     def setEditorData(self, editor, index):
-        value = index.model().data(index, Qt.EditRole)
+        value = index.model().data(index, Qt.ItemDataRole.EditRole)
         editor.setCurrentIndex(value)
         editor.showPopup()
 
     def setModelData(self, editor, model, index):
         value = editor.currentIndex()
-        model.setData(index, value, Qt.EditRole)
+        model.setData(index, value, Qt.ItemDataRole.EditRole)
 
     def updateEditorGeometry(self, editor, option, index):
         editor.setGeometry(option.rect)
@@ -89,19 +89,19 @@ class DirectoriesModel(TreeModel):
             return None
         node = index.internalPointer()
         ref = node.ref
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             if index.column() == 0:
                 return ref.name
             else:
                 return STATES[ref.state]
-        elif role == Qt.EditRole and index.column() == 1:
+        elif role == Qt.ItemDataRole.EditRole and index.column() == 1:
             return ref.state
-        elif role == Qt.ForegroundRole:
+        elif role == Qt.ItemDataRole.ForegroundRole:
             state = ref.state
             if state == 1:
-                return QBrush(Qt.blue)
+                return QBrush(Qt.GlobalColor.blue)
             elif state == 2:
-                return QBrush(Qt.red)
+                return QBrush(Qt.GlobalColor.red)
         return None
 
     def dropMimeData(self, mime_data, action, row, column, parent_index):
@@ -119,14 +119,14 @@ class DirectoriesModel(TreeModel):
 
     def flags(self, index):
         if not index.isValid():
-            return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
-        result = Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDropEnabled
+            return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsDropEnabled
+        result = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsDropEnabled
         if index.column() == 1:
-            result |= Qt.ItemIsEditable
+            result |= Qt.ItemFlag.ItemIsEditable
         return result
 
     def headerData(self, section, orientation, role):
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(HEADERS):
+        if orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole and section < len(HEADERS):
             return HEADERS[section]
         return None
 
@@ -134,7 +134,7 @@ class DirectoriesModel(TreeModel):
         return [self.MIME_TYPE_FORMAT]
 
     def setData(self, index, value, role):
-        if not index.isValid() or role != Qt.EditRole or index.column() != 1:
+        if not index.isValid() or role != Qt.ItemDataRole.EditRole or index.column() != 1:
             return False
         node = index.internalPointer()
         ref = node.ref
@@ -144,7 +144,7 @@ class DirectoriesModel(TreeModel):
     def supportedDropActions(self):
         # Normally, the correct action should be ActionLink, but the drop doesn't work. It doesn't
         # work with ActionMove either. So screw that, and accept anything.
-        return Qt.ActionMask
+        return Qt.DropAction.ActionMask
 
     # --- Events
     def selectionChanged(self, selected, deselected):

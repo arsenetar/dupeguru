@@ -3,8 +3,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import re
-from PyQt5.QtCore import Qt, pyqtSlot
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, pyqtSlot
+from PyQt6.QtWidgets import (
     QPushButton,
     QLineEdit,
     QVBoxLayout,
@@ -26,7 +26,7 @@ tr = trget("ui")
 
 class ExcludeListDialog(QDialog):
     def __init__(self, app, parent, model, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
+        flags = Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self.app = app
         self.specific_actions = frozenset()
@@ -60,29 +60,31 @@ class ExcludeListDialog(QDialog):
         self.testLine = QLineEdit()
         self.tableView = QTableView()
         triggers = (
-            QAbstractItemView.DoubleClicked | QAbstractItemView.EditKeyPressed | QAbstractItemView.SelectedClicked
+            QAbstractItemView.EditTrigger.DoubleClicked
+            | QAbstractItemView.EditTrigger.EditKeyPressed
+            | QAbstractItemView.EditTrigger.SelectedClicked
         )
         self.tableView.setEditTriggers(triggers)
-        self.tableView.setSelectionMode(QTableView.ExtendedSelection)
-        self.tableView.setSelectionBehavior(QTableView.SelectRows)
+        self.tableView.setSelectionMode(QTableView.SelectionMode.ExtendedSelection)
+        self.tableView.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.tableView.setShowGrid(False)
         vheader = self.tableView.verticalHeader()
         vheader.setSectionsMovable(True)
         vheader.setVisible(False)
         hheader = self.tableView.horizontalHeader()
         hheader.setSectionsMovable(False)
-        hheader.setSectionResizeMode(QHeaderView.Fixed)
+        hheader.setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
         hheader.setStretchLastSection(True)
         hheader.setHighlightSections(False)
         hheader.setVisible(True)
         gridlayout.addWidget(self.inputLine, 0, 0)
-        gridlayout.addWidget(self.buttonAdd, 0, 1, Qt.AlignLeft)
-        gridlayout.addWidget(self.buttonRemove, 1, 1, Qt.AlignLeft)
-        gridlayout.addWidget(self.buttonRestore, 2, 1, Qt.AlignLeft)
-        gridlayout.addWidget(self.buttonHelp, 3, 1, Qt.AlignLeft)
+        gridlayout.addWidget(self.buttonAdd, 0, 1, Qt.AlignmentFlag.AlignLeft)
+        gridlayout.addWidget(self.buttonRemove, 1, 1, Qt.AlignmentFlag.AlignLeft)
+        gridlayout.addWidget(self.buttonRestore, 2, 1, Qt.AlignmentFlag.AlignLeft)
+        gridlayout.addWidget(self.buttonHelp, 3, 1, Qt.AlignmentFlag.AlignLeft)
         gridlayout.addWidget(self.buttonClose, 4, 1)
         gridlayout.addWidget(self.tableView, 1, 0, 6, 1)
-        gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 4, 1)
+        gridlayout.addItem(QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding), 4, 1)
         gridlayout.addWidget(self.buttonTestString, 6, 1)
         gridlayout.addWidget(self.testLine, 6, 0)
 

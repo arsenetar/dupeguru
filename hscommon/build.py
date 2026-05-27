@@ -309,12 +309,16 @@ def read_changelog_file(filename: os.PathLike) -> List[Dict[str, Any]]:
 
 
 def fix_qt_resource_file(path: os.PathLike) -> None:
-    # pyrcc5 under Windows, if the locale is non-english, can produce a source file with a date
+    # rcc under Windows, if the locale is non-english, can produce a source file with a date
     # containing accented characters. If it does, the encoding is wrong and it prevents the file
     # from being correctly frozen by cx_freeze. To work around that, we open the file, strip all
     # comments, and save.
     with open(path, "rb") as fp:
         contents = fp.read()
+    # Depending on the Qt toolchain version, rcc can generate imports for
+    # either PySide2 or PySide6. dupeGuru uses PyQt6 at runtime.
+    contents = contents.replace(b"PySide2", b"PyQt6")
+    contents = contents.replace(b"PySide6", b"PyQt6")
     lines = contents.split(b"\n")
     lines = [line for line in lines if not line.startswith(b"#")]
     with open(path, "wb") as fp:

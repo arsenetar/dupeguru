@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QAbstractTableModel
-from PyQt5.QtWidgets import QHeaderView, QTableView
-from PyQt5.QtGui import QFont, QBrush
+from PyQt6.QtCore import Qt, QAbstractTableModel
+from PyQt6.QtWidgets import QHeaderView, QTableView
+from PyQt6.QtGui import QFont, QBrush
 
 from hscommon.trans import trget
 
@@ -39,24 +39,28 @@ class DetailsModel(QAbstractTableModel):
             or self.model.row(row)[1] == "---"
             or self.model.row(row)[2] == "---"
         ):
-            if role != Qt.DisplayRole:
+            if role != Qt.ItemDataRole.DisplayRole:
                 return None
             return self.model.row(row)[column]
 
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             return self.model.row(row)[column]
-        if role == Qt.ForegroundRole and self.model.row(row)[1] != self.model.row(row)[2]:
+        if role == Qt.ItemDataRole.ForegroundRole and self.model.row(row)[1] != self.model.row(row)[2]:
             return QBrush(self.prefs.details_table_delta_foreground_color)
-        if role == Qt.FontRole and self.model.row(row)[1] != self.model.row(row)[2]:
+        if role == Qt.ItemDataRole.FontRole and self.model.row(row)[1] != self.model.row(row)[2]:
             font = QFont(self.model.view.font())  # or simply QFont()
             font.setBold(True)
             return font
         return None  # QVariant()
 
     def headerData(self, section, orientation, role):
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole and section < len(HEADER):
+        if orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole and section < len(HEADER):
             return HEADER[section]
-        elif orientation == Qt.Vertical and role == Qt.DisplayRole and section < self.model.row_count():
+        elif (
+            orientation == Qt.Orientation.Vertical
+            and role == Qt.ItemDataRole.DisplayRole
+            and section < self.model.row_count()
+        ):
             # Read "Attribute" cell for horizontal header
             return self.model.row(section)[0]
         return None
@@ -69,8 +73,8 @@ class DetailsTable(QTableView):
     def __init__(self, *args):
         QTableView.__init__(self, *args)
         self.setAlternatingRowColors(True)
-        self.setSelectionBehavior(QTableView.SelectRows)
-        self.setSelectionMode(QTableView.NoSelection)
+        self.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
+        self.setSelectionMode(QTableView.SelectionMode.NoSelection)
         self.setShowGrid(False)
         self.setWordWrap(False)
         self.setCornerButtonEnabled(False)
@@ -80,12 +84,12 @@ class DetailsTable(QTableView):
         # The model needs to be set to set header stuff
         hheader = self.horizontalHeader()
         hheader.setHighlightSections(False)
-        hheader.setSectionResizeMode(0, QHeaderView.Stretch)
-        hheader.setSectionResizeMode(1, QHeaderView.Stretch)
+        hheader.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        hheader.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         vheader = self.verticalHeader()
         vheader.setVisible(True)
         vheader.setDefaultSectionSize(18)
         # hardcoded value above is not ideal, perhaps resize to contents first?
         # vheader.setSectionResizeMode(QHeaderView.ResizeToContents)
-        vheader.setSectionResizeMode(QHeaderView.Fixed)
+        vheader.setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
         vheader.setSectionsMovable(True)

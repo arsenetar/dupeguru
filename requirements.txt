@@ -1,7 +1,7 @@
 distro>=1.8.0,<2.0.0
 mutagen>=1.46.0,<2.0.0
 polib>=1.1.0,<2.0.0
-PyQt5 >=5.15.0,<6.0; sys_platform != 'linux'
+PyQt6 >=6.3,<7.0
 pywin32>=304; sys_platform == 'win32'
 semantic-version>=2.0.0,<3.0.0
 Send2Trash>=1.8.2,<2.0.0

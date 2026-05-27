@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QIcon, QPixmap, QPainter, QPalette
-from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtGui import QIcon, QPixmap, QPainter, QPalette
+from PyQt6.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
 from hscommon.trans import trget
 
@@ -24,8 +24,8 @@ class LineEditButton(QToolButton):
         pixmap = QPixmap(":/search_clear_13")
         self.setIcon(QIcon(pixmap))
         self.setIconSize(pixmap.size())
-        self.setCursor(Qt.ArrowCursor)
-        self.setPopupMode(QToolButton.InstantPopup)
+        self.setCursor(Qt.CursorShape.ArrowCursor)
+        self.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
         stylesheet = "QToolButton { border: none; padding: 0px; }"
         self.setStyleSheet(stylesheet)
 
@@ -36,7 +36,7 @@ class ClearableEdit(QLineEdit):
         self._is_clearable = is_clearable
         if is_clearable:
             self._clearButton = LineEditButton(self)
-            frame_width = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
+            frame_width = self.style().pixelMetric(QStyle.PixelMetric.PM_DefaultFrameWidth)
             padding_right = self._clearButton.sizeHint().width() + frame_width + 1
             stylesheet = f"QLineEdit {{ padding-right:{padding_right}px; }}"
             self.setStyleSheet(stylesheet)
@@ -58,7 +58,7 @@ class ClearableEdit(QLineEdit):
     # --- QLineEdit overrides
     def resizeEvent(self, event):
         if self._is_clearable:
-            frame_width = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth)
+            frame_width = self.style().pixelMetric(QStyle.PixelMetric.PM_DefaultFrameWidth)
             rect = self.rect()
             right_hint = self._clearButton.sizeHint()
             right_x = rect.right() - frame_width - right_hint.width()
@@ -92,7 +92,7 @@ class SearchEdit(ClearableEdit):
 
     def keyPressEvent(self, event):
         key = event.key()
-        if key == Qt.Key_Escape:
+        if key == Qt.Key.Key_Escape:
             self._clearSearch()
         else:
             ClearableEdit.keyPressEvent(self, event)
@@ -102,14 +102,14 @@ class SearchEdit(ClearableEdit):
         if not bool(self.text()) and self.inactiveText and not self.hasFocus():
             panel = QStyleOptionFrame()
             self.initStyleOption(panel)
-            text_rect = self.style().subElementRect(QStyle.SE_LineEditContents, panel, self)
+            text_rect = self.style().subElementRect(QStyle.SubElement.SE_LineEditContents, panel, self)
             left_margin = 2
             right_margin = self._clearButton.iconSize().width()
             text_rect.adjust(left_margin, 0, -right_margin, 0)
             painter = QPainter(self)
-            disabled_color = self.palette().brush(QPalette.Disabled, QPalette.Text).color()
+            disabled_color = self.palette().brush(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text).color()
             painter.setPen(disabled_color)
-            painter.drawText(text_rect, Qt.AlignLeft | Qt.AlignVCenter, self.inactiveText)
+            painter.drawText(text_rect, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter, self.inactiveText)
 
     # --- Event Handlers
     def _returnPressed(self):

@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QMimeData, QByteArray
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QMimeData, QByteArray
+from PyQt6.QtWidgets import (
     QDialog,
     QVBoxLayout,
     QHBoxLayout,
@@ -36,8 +36,8 @@ MIME_INDEXES = "application/dupeguru.rowindexes"
 class PrioritizationList(ListviewModel):
     def flags(self, index):
         if not index.isValid():
-            return Qt.ItemIsEnabled | Qt.ItemIsDropEnabled
-        return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled
+            return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsDropEnabled
+        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsDragEnabled
 
     # --- Drag & Drop
     def dropMimeData(self, mime_data, action, row, column, parent_index):
@@ -70,12 +70,12 @@ class PrioritizationList(ListviewModel):
         return [MIME_INDEXES]
 
     def supportedDropActions(self):
-        return Qt.MoveAction
+        return Qt.DropAction.MoveAction
 
 
 class PrioritizeDialog(QDialog):
     def __init__(self, parent, app, **kwargs):
-        flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
+        flags = Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
         self._setupUi()
         self.model = PrioritizeDialogModel(app=app.model)
@@ -107,24 +107,24 @@ class PrioritizeDialog(QDialog):
         self.promptLabel.setWordWrap(True)
         self.categoryCombobox = QComboBox()
         self.criteriaListView = QListView()
-        self.criteriaListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.addCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowRight), "")
-        self.removeCriteriaButton = QPushButton(self.style().standardIcon(QStyle.SP_ArrowLeft), "")
+        self.criteriaListView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.addCriteriaButton = QPushButton(self.style().standardIcon(QStyle.StandardPixmap.SP_ArrowRight), "")
+        self.removeCriteriaButton = QPushButton(self.style().standardIcon(QStyle.StandardPixmap.SP_ArrowLeft), "")
         self.prioritizationListView = QListView()
         self.prioritizationListView.setAcceptDrops(True)
         self.prioritizationListView.setDragEnabled(True)
-        self.prioritizationListView.setDragDropMode(QAbstractItemView.InternalMove)
-        self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.prioritizationListView.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.prioritizationListView.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
+        self.prioritizationListView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.prioritizationListView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.buttonBox = QDialogButtonBox()
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel | QDialogButtonBox.StandardButton.Ok)
 
         # layout
         self.mainLayout = QVBoxLayout(self)
         self.mainLayout.addWidget(self.promptLabel)
         self.splitter = QSplitter()
         sp = self.splitter.sizePolicy()
-        sp.setVerticalPolicy(QSizePolicy.Expanding)
+        sp.setVerticalPolicy(QSizePolicy.Policy.Expanding)
         self.splitter.setSizePolicy(sp)
         self.leftSide = QWidget()
         self.leftWidgetsLayout = QVBoxLayout()

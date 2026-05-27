@@ -6,8 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QRect
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QRect
+from PyQt6.QtWidgets import (
     QMainWindow,
     QMenu,
     QLabel,
@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import (
     QDialog,
     QPushButton,
     QCheckBox,
-    QDesktopWidget,
+    QApplication,
 )
 
 from hscommon.trans import trget
@@ -170,7 +170,7 @@ class ResultWindow(QMainWindow):
             ),
             (
                 "actionMarkSelected",
-                Qt.Key_Space,
+                Qt.Key.Key_Space,
                 "",
                 tr("Mark Selected"),
                 self.markSelectedTriggered,
@@ -350,8 +350,8 @@ class ResultWindow(QMainWindow):
         self.horizontalLayout.setSpacing(8)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.resultsView = ResultsView(self.centralwidget)
-        self.resultsView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.resultsView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.resultsView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.resultsView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.resultsView.setSortingEnabled(True)
         self.resultsView.setWordWrap(False)
         self.resultsView.verticalHeader().setVisible(False)
@@ -359,7 +359,7 @@ class ResultWindow(QMainWindow):
         h.setHighlightSections(False)
         h.setSectionsMovable(True)
         h.setStretchLastSection(False)
-        h.setDefaultAlignment(Qt.AlignLeft)
+        h.setDefaultAlignment(Qt.AlignmentFlag.AlignLeft)
         self.verticalLayout.addWidget(self.resultsView)
         self.setCentralWidget(self.centralwidget)
         self._setupActions()
@@ -371,17 +371,18 @@ class ResultWindow(QMainWindow):
         self.statusbar.addPermanentWidget(self.statusLabel, 1)
 
         if self.app.prefs.resultWindowIsMaximized:
-            self.setWindowState(self.windowState() | Qt.WindowMaximized)
+            self.setWindowState(self.windowState() | Qt.WindowState.WindowMaximized)
         else:
             if self.app.prefs.resultWindowRect is not None:
                 self.setGeometry(self.app.prefs.resultWindowRect)
                 # if not on any screen move to center of default screen
                 # moves to center of closest screen if partially off screen
                 frame = self.frameGeometry()
-                if QDesktopWidget().screenNumber(self) == -1:
+                screen = QApplication.screenAt(self.geometry().center())
+                if screen is None:
                     move_to_screen_center(self)
-                elif QDesktopWidget().availableGeometry(self).contains(frame) is False:
-                    frame.moveCenter(QDesktopWidget().availableGeometry(self).center())
+                elif screen.availableGeometry().contains(frame) is False:
+                    frame.moveCenter(screen.availableGeometry().center())
                     self.move(frame.topLeft())
             else:
                 move_to_screen_center(self)
@@ -458,7 +459,7 @@ class ResultWindow(QMainWindow):
     def reprioritizeTriggered(self):
         dlg = PrioritizeDialog(self, self.app)
         result = dlg.exec()
-        if result == QDialog.Accepted:
+        if result == QDialog.DialogCode.Accepted:
             dlg.model.perform_reprioritization()
 
     def revealTriggered(self):
@@ -490,7 +491,7 @@ class ResultWindow(QMainWindow):
             action.setChecked(visible)
 
     def contextMenuEvent(self, event):
-        self.actionActions.menu().exec_(event.globalPos())
+        self.actionActions.menu().exec(event.globalPos())
 
     def resultsDoubleClicked(self, model_index):
         self.app.model.open_selected()
