@@ -60,10 +60,11 @@ class DetailsDialog(QDockWidget):
             self.setTitleBarWidget(QWidget())
 
         features = self.features()
+        vertical_titlebar_feature = QDockWidget.DockWidgetFeature.DockWidgetVerticalTitleBar
         if self.app.prefs.details_dialog_vertical_titlebar:
-            self.setFeatures(features | QDockWidget.DockWidgetVerticalTitleBar)
-        elif features & QDockWidget.DockWidgetVerticalTitleBar:
-            self.setFeatures(features ^ QDockWidget.DockWidgetVerticalTitleBar)
+            self.setFeatures(features | vertical_titlebar_feature)
+        elif features & vertical_titlebar_feature:
+            self.setFeatures(features ^ vertical_titlebar_feature)
 
     # --- Events
     def appWillSavePrefs(self):
