@@ -245,8 +245,24 @@ use the modifier key to drag the floating window around"
         pass
 
     def _setup_advanced_page(self) -> None:
-        # Edition-specific
-        pass
+        tab_label = QLabel(
+            tr(
+                "These options are for advanced users or for very specific situations, \
+most users should not have to modify these."
+            ),
+            wordWrap=True,
+        )
+        self.advanced_vlayout.addWidget(tab_label)
+        self._setupAddCheckbox(
+            "rehash_ignore_mtime_box",
+            tr("Ignore difference in mtime when loading cached digests"),
+        )
+        self.advanced_vlayout.addWidget(self.rehash_ignore_mtime_box)
+        self._setupAddCheckbox(
+            "include_exists_check_box",
+            tr("Include existence check after scan completion"),
+        )
+        self.advanced_vlayout.addWidget(self.include_exists_check_box)
 
     def _setupUi(self) -> None:
         self.setWindowTitle(tr("Options"))
