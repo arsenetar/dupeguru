@@ -32,7 +32,15 @@ class DetailsDialog(QDockWidget):
         self.model.view = self
         self.app.willSavePrefs.connect(self.appWillSavePrefs)
         # self.setAttribute(Qt.WA_DeleteOnClose)
-        parent.addDockWidget(area if self._wasDocked else Qt.DockWidgetArea.BottomDockWidgetArea, self)
+        dock_area = Qt.DockWidgetArea.BottomDockWidgetArea
+        if self._wasDocked:
+            # PyQt6 is strict here: addDockWidget() requires Qt.DockWidgetArea,
+            # while persisted prefs can deserialize as int/str.
+            try:
+                dock_area = Qt.DockWidgetArea(int(area))
+            except (TypeError, ValueError):
+                dock_area = Qt.DockWidgetArea.BottomDockWidgetArea
+        parent.addDockWidget(dock_area, self)
 
     def _setupUi(self):  # Virtual
         pass
