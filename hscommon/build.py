@@ -6,21 +6,20 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-"""This module is a collection of function to help in HS apps build process.
-"""
+"""This module is a collection of function to help in HS apps build process."""
 
-from argparse import ArgumentParser
-import os
-import sys
-import os.path as op
-import shutil
-import tempfile
-import plistlib
-from subprocess import Popen
-import re
-import importlib
-from datetime import datetime
 import glob
+import importlib
+import os
+import os.path as op
+import plistlib
+import re
+import shutil
+import sys
+import tempfile
+from argparse import ArgumentParser
+from datetime import datetime
+from subprocess import Popen
 from typing import Any, AnyStr, Callable, Dict, List, Union
 
 from hscommon.plat import ISWINDOWS

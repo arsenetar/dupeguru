@@ -2,23 +2,24 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QObject, Qt, QSize, QRectF, QPointF, QPoint, pyqtSlot, pyqtSignal, QEvent
-from PyQt5.QtGui import QPixmap, QPainter, QPalette, QCursor, QIcon, QKeySequence
+from PyQt5.QtCore import QEvent, QObject, QPoint, QPointF, QRectF, QSize, Qt, pyqtSignal, pyqtSlot
+from PyQt5.QtGui import QCursor, QIcon, QKeySequence, QPainter, QPalette, QPixmap
 from PyQt5.QtWidgets import (
-    QGraphicsView,
-    QGraphicsScene,
+    QAbstractScrollArea,
+    QAction,
+    QApplication,
     QGraphicsPixmapItem,
+    QGraphicsScene,
+    QGraphicsView,
+    QScrollArea,
+    QStyle,
     QToolBar,
     QToolButton,
-    QAction,
     QWidget,
-    QScrollArea,
-    QApplication,
-    QAbstractScrollArea,
-    QStyle,
 )
-from hscommon.trans import trget
+
 from hscommon.plat import ISLINUX
+from hscommon.trans import trget
 
 tr = trget("ui")
 

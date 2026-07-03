@@ -1,5 +1,6 @@
-from setuptools import setup, Extension
 from pathlib import Path
+
+from setuptools import Extension, setup
 
 exts = [
     Extension(

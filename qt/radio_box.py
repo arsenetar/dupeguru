@@ -6,7 +6,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QRadioButton
+from PyQt5.QtWidgets import QHBoxLayout, QRadioButton, QWidget
 
 from qt.util import horizontal_spacer
 

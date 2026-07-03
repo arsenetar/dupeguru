@@ -6,10 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.util import format_size
-
 from core import fs
-from core.util import format_timestamp, format_perc, format_words, format_dupe_count
+from core.util import format_dupe_count, format_perc, format_timestamp, format_words
+from hscommon.util import format_size
 
 
 def get_display_info(dupe, group, delta):

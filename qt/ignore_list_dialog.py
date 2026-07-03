@@ -8,16 +8,16 @@
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
+    QAbstractItemView,
     QDialog,
-    QVBoxLayout,
     QPushButton,
     QTableView,
-    QAbstractItemView,
+    QVBoxLayout,
 )
 
 from hscommon.trans import trget
-from qt.util import horizontal_wrap
 from qt.ignore_list_table import IgnoreListTable
+from qt.util import horizontal_wrap
 
 tr = trget("ui")
 

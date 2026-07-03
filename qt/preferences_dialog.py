@@ -4,40 +4,39 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSlot
-from PyQt5.QtWidgets import (
-    QDialog,
-    QDialogButtonBox,
-    QVBoxLayout,
-    QHBoxLayout,
-    QGridLayout,
-    QLabel,
-    QComboBox,
-    QSlider,
-    QSizePolicy,
-    QSpacerItem,
-    QCheckBox,
-    QLineEdit,
-    QMessageBox,
-    QSpinBox,
-    QLayout,
-    QTabWidget,
-    QWidget,
-    QColorDialog,
-    QPushButton,
-    QGroupBox,
-    QFormLayout,
-)
-from PyQt5.QtGui import QPixmap, QIcon
-from hscommon import desktop, plat
-
-from hscommon.trans import trget
-from hscommon.plat import ISLINUX
-from qt.util import horizontal_wrap, move_to_screen_center
-from qt.preferences import get_langnames
 from enum import Flag, auto
 
-from qt.preferences import Preferences
+from PyQt5.QtCore import QSize, Qt, pyqtSlot
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import (
+    QCheckBox,
+    QColorDialog,
+    QComboBox,
+    QDialog,
+    QDialogButtonBox,
+    QFormLayout,
+    QGridLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QLayout,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QSizePolicy,
+    QSlider,
+    QSpacerItem,
+    QSpinBox,
+    QTabWidget,
+    QVBoxLayout,
+    QWidget,
+)
+
+from hscommon import desktop, plat
+from hscommon.plat import ISLINUX
+from hscommon.trans import trget
+from qt.preferences import Preferences, get_langnames
+from qt.util import horizontal_wrap, move_to_screen_center
 
 tr = trget("ui")
 
@@ -229,6 +228,18 @@ most users should not have to modify these."
         self._setupAddCheckbox("rehash_ignore_mtime_box", tr("Ignore difference in mtime when loading cached digests"))
         self.advanced_vlayout.addWidget(self.rehash_ignore_mtime_box)
 
+        checkpoint_layout = QHBoxLayout()
+        checkpoint_label = QLabel(tr("Checkpoint frequency (files):"), self)
+        self.checkpoint_spinbox = QSpinBox(self)
+        self.checkpoint_spinbox.setMinimum(0)
+        self.checkpoint_spinbox.setMaximum(10000)
+        self.checkpoint_spinbox.setSingleStep(10)
+        self.checkpoint_spinbox.setSpecialValueText(tr("Never"))
+        checkpoint_layout.addWidget(checkpoint_label)
+        checkpoint_layout.addWidget(self.checkpoint_spinbox)
+        checkpoint_layout.addStretch(1)
+        self.advanced_vlayout.addLayout(checkpoint_layout)
+
     def _setupDebugPage(self):
         self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
         self._setupAddCheckbox("profile_scan_box", tr("Profile scan operation"))
@@ -343,6 +354,7 @@ most users should not have to modify these."
         if section & Sections.ADVANCED:
             setchecked(self.rehash_ignore_mtime_box, prefs.rehash_ignore_mtime)
             setchecked(self.include_exists_check_box, prefs.include_exists_check)
+            self.checkpoint_spinbox.setValue(prefs.checkpoint_frequency)
         if section & Sections.DEBUG:
             setchecked(self.debugModeBox, prefs.debug_mode)
             setchecked(self.profile_scan_box, prefs.profile_scan)
@@ -361,6 +373,7 @@ most users should not have to modify these."
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.rehash_ignore_mtime = ischecked(self.rehash_ignore_mtime_box)
         prefs.include_exists_check = ischecked(self.include_exists_check_box)
+        prefs.checkpoint_frequency = self.checkpoint_spinbox.value()
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.profile_scan = ischecked(self.profile_scan_box)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)

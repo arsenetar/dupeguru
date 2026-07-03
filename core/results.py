@@ -7,19 +7,18 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import logging
-import re
 import os
 import os.path as op
-from errno import EISDIR, EACCES
+import re
+from errno import EACCES, EISDIR
 from xml.etree import ElementTree as ET
-
-from hscommon.jobprogress.job import nulljob
-from hscommon.conflict import get_conflicted_name
-from hscommon.util import flatten, nonone, FileOrPath, format_size
-from hscommon.trans import tr
 
 from core import engine
 from core.markable import Markable
+from hscommon.conflict import get_conflicted_name
+from hscommon.jobprogress.job import nulljob
+from hscommon.trans import tr
+from hscommon.util import FileOrPath, flatten, format_size, nonone
 
 
 class Results(Markable):

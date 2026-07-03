@@ -4,20 +4,19 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from pathlib import Path
-import sys
-from optparse import OptionParser
 import shutil
+import subprocess
+import sys
 from multiprocessing import Pool
+from optparse import OptionParser
+from pathlib import Path
 
-from hscommon import sphinxgen
+from hscommon import loc, sphinxgen
 from hscommon.build import (
     add_to_pythonpath,
-    print_and_do,
     fix_qt_resource_file,
+    print_and_do,
 )
-from hscommon import loc
-import subprocess
 
 
 def parse_args():
@@ -136,8 +135,8 @@ def build_normal():
 
 
 def main():
-    if sys.version_info < (3, 7):
-        sys.exit("Python < 3.7 is unsupported.")
+    if sys.version_info < (3, 8):
+        sys.exit("Python < 3.8 is unsupported.")
     options = parse_args()
     if options.clean and Path("build").exists():
         shutil.rmtree("build")

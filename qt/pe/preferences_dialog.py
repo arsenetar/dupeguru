@@ -5,11 +5,10 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 
-from hscommon.trans import trget
-from hscommon.plat import ISLINUX
-from core.scanner import ScanType
 from core.app import AppMode
-
+from core.scanner import ScanType
+from hscommon.plat import ISLINUX
+from hscommon.trans import trget
 from qt.preferences_dialog import PreferencesDialogBase
 
 tr = trget("ui")

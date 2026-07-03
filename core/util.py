@@ -4,15 +4,16 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import time
-import sys
-import os
-import urllib.request
-import urllib.error
 import json
-import semantic_version
 import logging
+import os
+import sys
+import time
+import urllib.error
+import urllib.request
 from typing import Union
+
+import semantic_version
 
 from hscommon.util import format_time_decimal
 

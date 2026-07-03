@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
+from PyQt5.QtCore import QModelIndex, Qt, pyqtSignal
 from PyQt5.QtGui import QBrush, QFont, QFontMetrics
 from PyQt5.QtWidgets import QTableView
 

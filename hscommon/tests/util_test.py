@@ -7,31 +7,31 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from io import StringIO
+from pathlib import Path
 
 from pytest import raises
 
 from hscommon.testutil import eq_
-from pathlib import Path
 from hscommon.util import (
-    nonone,
-    tryint,
+    FileOrPath,
+    allsame,
+    dedupe,
+    delete_if_empty,
+    escape,
+    extract,
     first,
     flatten,
-    dedupe,
-    extract,
-    allsame,
+    format_size,
     format_time,
     format_time_decimal,
-    format_size,
-    multi_replace,
-    delete_if_empty,
-    open_if_filename,
-    FileOrPath,
-    iterconsume,
-    escape,
     get_file_ext,
-    rem_file_ext,
+    iterconsume,
+    multi_replace,
+    nonone,
+    open_if_filename,
     pluralize,
+    rem_file_ext,
+    tryint,
 )
 
 

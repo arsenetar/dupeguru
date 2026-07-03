@@ -4,16 +4,15 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import os
-from xml.etree import ElementTree as ET
 import logging
+import os
 from pathlib import Path
-
-from hscommon.jobprogress import job
-from hscommon.util import FileOrPath
-from hscommon.trans import tr
+from xml.etree import ElementTree as ET
 
 from core import fs
+from hscommon.jobprogress import job
+from hscommon.trans import tr
+from hscommon.util import FileOrPath
 
 __all__ = [
     "Directories",

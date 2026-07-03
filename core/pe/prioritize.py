@@ -5,16 +5,15 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.trans import trget
-
 from core.prioritize import (
-    KindCategory,
-    FolderCategory,
     FilenameCategory,
+    FolderCategory,
+    KindCategory,
+    MtimeCategory,
     NumericalCategory,
     SizeCategory,
-    MtimeCategory,
 )
+from hscommon.trans import trget
 
 coltr = trget("columns")
 

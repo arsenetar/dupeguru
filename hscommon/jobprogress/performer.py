@@ -6,11 +6,11 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from threading import Thread
 import sys
+from threading import Thread
 from typing import Callable, Tuple, Union
 
-from hscommon.jobprogress.job import Job, JobInProgressError, JobCancelled
+from hscommon.jobprogress.job import Job, JobCancelled, JobInProgressError
 
 
 class ThreadedJobPerformer:

@@ -6,20 +6,18 @@
 
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (
-    QSpinBox,
-    QVBoxLayout,
     QHBoxLayout,
     QLabel,
     QSizePolicy,
     QSpacerItem,
+    QSpinBox,
+    QVBoxLayout,
     QWidget,
 )
 
-from hscommon.trans import trget
-
 from core.app import AppMode
 from core.scanner import ScanType
-
+from hscommon.trans import trget
 from qt.preferences_dialog import PreferencesDialogBase
 
 tr = trget("ui")

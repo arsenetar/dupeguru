@@ -6,23 +6,23 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import traceback
-import sys
 import os
 import platform
+import sys
+import traceback
 
-from PyQt5.QtCore import Qt, QCoreApplication, QSize
+from PyQt5.QtCore import QCoreApplication, QSize, Qt
 from PyQt5.QtWidgets import (
     QDialog,
-    QVBoxLayout,
     QHBoxLayout,
     QLabel,
     QPlainTextEdit,
     QPushButton,
+    QVBoxLayout,
 )
 
-from hscommon.trans import trget
 from hscommon.desktop import open_url
+from hscommon.trans import trget
 from qt.util import horizontal_spacer
 
 tr = trget("ui")

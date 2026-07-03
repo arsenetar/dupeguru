@@ -4,9 +4,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import logging
 import os
 import os.path as op
-import logging
 import sqlite3 as sqlite
 
 from core.pe.cache import bytes_to_colors, colors_to_bytes
@@ -31,6 +31,8 @@ class SqliteCache:
         # readonly is not used in the sqlite version of the cache
         self.dbname = db
         self.con = None
+        self.checkpoint_frequency = 100
+        self._checkpoint_counter = 0
         self._create_con()
 
     def __contains__(self, key):
@@ -43,6 +45,7 @@ class SqliteCache:
             raise KeyError(key)
         sql = "delete from pictures where path = ?"
         self.con.execute(sql, [key])
+        self.con.commit()
 
     # Optimized
     def __getitem__(self, key):
@@ -94,6 +97,10 @@ class SqliteCache:
             )
         try:
             self.con.execute(sql, blocks + [mtime, path_str])
+            self._checkpoint_counter += 1
+            if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
+                self.con.commit()
+                self._checkpoint_counter = 0
         except sqlite.OperationalError:
             logging.warning("Picture cache could not set value for key %r", path_str)
         except sqlite.DatabaseError as e:
@@ -101,7 +108,7 @@ class SqliteCache:
 
     def _create_con(self, second_try=False):
         try:
-            self.con = sqlite.connect(self.dbname, isolation_level=None)
+            self.con = sqlite.connect(self.dbname)
             self._check_upgrade()
         except sqlite.DatabaseError as e:  # corrupted db
             if second_try:
@@ -138,8 +145,15 @@ class SqliteCache:
 
     def close(self):
         if self.con is not None:
+            try:
+                self.con.commit()
+            except Exception:
+                pass
             self.con.close()
         self.con = None
+
+    def __del__(self):
+        self.close()
 
     def filter(self, func):
         to_delete = [key for key in self if not func(key)]
@@ -197,3 +211,4 @@ class SqliteCache:
         if todelete:
             sql = "delete from pictures where rowid in (%s)" % ",".join(map(str, todelete))
             self.con.execute(sql)
+            self.con.commit()

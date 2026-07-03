@@ -5,23 +5,23 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os
-import time
-import tempfile
 import shutil
+import tempfile
+import time
+from pathlib import Path
 
 from pytest import raises
-from pathlib import Path
-from hscommon.testutil import eq_
-from hscommon.plat import ISWINDOWS
 
-from core.fs import File
 from core.directories import (
+    AlreadyThereError,
     Directories,
     DirectoryState,
-    AlreadyThereError,
     InvalidPathError,
 )
-from core.exclude import ExcludeList, ExcludeDict
+from core.exclude import ExcludeDict, ExcludeList
+from core.fs import File
+from hscommon.plat import ISWINDOWS
+from hscommon.testutil import eq_
 
 
 def create_fake_fs(rootpath):

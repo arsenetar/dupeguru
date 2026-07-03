@@ -7,10 +7,11 @@
 import logging
 
 from pytest import raises, skip
+
 from hscommon.testutil import eq_
 
 try:
-    from core.pe.cache import colors_to_bytes, bytes_to_colors
+    from core.pe.cache import bytes_to_colors, colors_to_bytes
     from core.pe.cache_sqlite import SqliteCache
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
@@ -131,6 +132,23 @@ class TestCaseSqliteCache(BaseTestCaseCache):
         del c
         c = self.get_cache(dbname)
         eq_(c["foo"], [[(1, 2, 3)]] * 8)
+
+    def test_checkpointing(self, tmpdir):
+        dbname = str(tmpdir.join("checkpoint.db"))
+        c = self.get_cache(dbname)
+        c.checkpoint_frequency = 2
+        c["foo"] = [[(1, 2, 3)]] * 8
+
+        import sqlite3 as sqlite
+
+        con2 = sqlite.connect(dbname)
+        res = con2.execute("select count(*) from pictures where path = 'foo'").fetchone()[0]
+        eq_(res, 0)
+
+        c["bar"] = [[(4, 5, 6)]] * 8
+        res = con2.execute("select count(*) from pictures").fetchone()[0]
+        eq_(res, 2)
+        con2.close()
 
 
 class TestCaseCacheSQLEscape:

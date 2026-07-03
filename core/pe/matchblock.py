@@ -10,13 +10,12 @@ import logging
 import multiprocessing
 from itertools import combinations
 
-from hscommon.util import extract, iterconsume
-from hscommon.trans import tr
-from hscommon.jobprogress import job
-
 from core.engine import Match
-from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
+from core.pe.block import DifferentBlockCountError, NoBlocksError, avgdiff
 from core.pe.cache_sqlite import SqliteCache
+from hscommon.jobprogress import job
+from hscommon.trans import tr
+from hscommon.util import extract, iterconsume
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another
@@ -54,12 +53,13 @@ def get_cache(cache_path, readonly=False):
     return SqliteCache(cache_path, readonly=readonly)
 
 
-def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, j=job.nulljob):
+def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, checkpoint_frequency=100, j=job.nulljob):
     # The MemoryError handlers in there use logging without first caring about whether or not
     # there is enough memory left to carry on the operation because it is assumed that the
     # MemoryError happens when trying to read an image file, which is freed from memory by the
     # time that MemoryError is raised.
     cache = get_cache(cache_path)
+    cache.checkpoint_frequency = checkpoint_frequency
     cache.purge_outdated()
     prepared = []  # only pictures for which there was no error getting blocks
     try:
@@ -168,7 +168,9 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo, match_rotated=
     return results
 
 
-def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotated=False, j=job.nulljob):
+def getmatches(
+    pictures, cache_path, threshold, match_scaled=False, match_rotated=False, checkpoint_frequency=100, j=job.nulljob
+):
     def get_picinfo(p):
         if match_scaled:
             return ((None, None), p.is_ref)
@@ -193,7 +195,7 @@ def getmatches(pictures, cache_path, threshold, match_scaled=False, match_rotate
         j.set_progress(comparison_count, progress_msg)
 
     j = j.start_subjob([3, 7])
-    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, j=j)
+    pictures = prepare_pictures(pictures, cache_path, not match_scaled, match_rotated, checkpoint_frequency, j=j)
     j = j.start_subjob([9, 1], tr("Preparing for matching"))
     cache = get_cache(cache_path)
     id2picture = {}

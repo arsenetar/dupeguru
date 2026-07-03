@@ -6,10 +6,11 @@
 # The commented out tests are tests for function that have been converted to pure C for speed
 
 from pytest import raises, skip
+
 from hscommon.testutil import eq_
 
 try:
-    from core.pe.block import avgdiff, getblocks2, NoBlocksError, DifferentBlockCountError
+    from core.pe.block import DifferentBlockCountError, NoBlocksError, avgdiff, getblocks2
 except ImportError:
     skip("Can't import the block module, probably hasn't been compiled.")
 

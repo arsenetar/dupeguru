@@ -4,11 +4,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.trans import tr
-
-from core.scanner import Scanner, ScanType, ScanOption
-
 from core.pe import matchblock, matchexif
+from core.scanner import Scanner, ScanOption, ScanType
+from hscommon.trans import tr
 
 
 class ScannerPE(Scanner):
@@ -31,6 +29,7 @@ class ScannerPE(Scanner):
                 threshold=self.min_match_percentage,
                 match_scaled=self.match_scaled,
                 match_rotated=self.match_rotated,
+                checkpoint_frequency=self.checkpoint_frequency,
                 j=j,
             )
         elif self.scan_type == ScanType.EXIFTIMESTAMP:

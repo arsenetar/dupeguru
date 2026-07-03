@@ -1,10 +1,7 @@
-import sys
-import os
 import os.path as op
-import shutil
-import importlib
+import sys
 
-from setuptools import setup, Extension
+from setuptools import Extension, setup
 
 sys.path.insert(1, op.abspath("src"))
 

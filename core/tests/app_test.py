@@ -4,22 +4,22 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import logging
 import os
 import os.path as op
-import logging
 import tempfile
+from pathlib import Path
 
 import pytest
-from pathlib import Path
+
 import hscommon.conflict
 import hscommon.util
-from hscommon.testutil import eq_, log_calls
-from hscommon.jobprogress.job import Job
-
+from core import app, engine, fs
+from core.scanner import ScanType
 from core.tests.base import TestApp
 from core.tests.results_test import GetTestGroups
-from core import app, fs, engine
-from core.scanner import ScanType
+from hscommon.jobprogress.job import Job
+from hscommon.testutil import eq_, log_calls
 
 
 def add_fake_files_to_directories(directories, files):

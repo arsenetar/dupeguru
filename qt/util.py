@@ -6,24 +6,24 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
 import io
-import os.path as op
-import os
 import logging
+import os
+import os.path as op
+import sys
 
-from core.util import executable_folder
-from hscommon.util import first
-from hscommon.plat import ISWINDOWS
-
-from PyQt5.QtCore import QStandardPaths, QSettings
-from PyQt5.QtGui import QPixmap, QIcon, QGuiApplication
+from PyQt5.QtCore import QSettings, QStandardPaths
+from PyQt5.QtGui import QGuiApplication, QIcon, QPixmap
 from PyQt5.QtWidgets import (
-    QSpacerItem,
-    QSizePolicy,
     QAction,
     QHBoxLayout,
+    QSizePolicy,
+    QSpacerItem,
 )
+
+from core.util import executable_folder
+from hscommon.plat import ISWINDOWS
+from hscommon.util import first
 
 
 def move_to_screen_center(widget):

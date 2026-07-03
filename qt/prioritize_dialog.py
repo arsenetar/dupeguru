@@ -6,27 +6,27 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QMimeData, QByteArray
+from PyQt5.QtCore import QByteArray, QMimeData, Qt
 from PyQt5.QtWidgets import (
-    QDialog,
-    QVBoxLayout,
-    QHBoxLayout,
-    QPushButton,
-    QComboBox,
-    QListView,
-    QDialogButtonBox,
     QAbstractItemView,
+    QComboBox,
+    QDialog,
+    QDialogButtonBox,
+    QHBoxLayout,
     QLabel,
-    QStyle,
-    QSplitter,
-    QWidget,
+    QListView,
+    QPushButton,
     QSizePolicy,
+    QSplitter,
+    QStyle,
+    QVBoxLayout,
+    QWidget,
 )
 
+from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 from hscommon.trans import trget
 from qt.selectable_list import ComboboxModel, ListviewModel
 from qt.util import vertical_spacer
-from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 
 tr = trget("ui")
 

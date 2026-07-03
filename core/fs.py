@@ -11,17 +11,16 @@
 # resulting needless complexity and memory usage. It's been a while since I wanted to do that fork,
 # and I'm doing it now.
 
-import os
-
-from math import floor
 import logging
+import os
 import sqlite3
+from math import floor
+from pathlib import Path
 from sys import platform
 from threading import Lock
-from typing import Any, AnyStr, Union, Callable
+from typing import Any, AnyStr, Callable, Union
 
-from pathlib import Path
-from hscommon.util import nonone, get_file_ext
+from hscommon.util import get_file_ext, nonone
 
 hasher: Callable
 try:
@@ -76,11 +75,13 @@ class FSError(Exception):
 
 class AlreadyExistsError(FSError):
     "The directory or file name we're trying to add already exists"
+
     cls_message = "'{name}' already exists in '{parent}'"
 
 
 class InvalidPath(FSError):
     "The path of self is invalid, and cannot be worked with."
+
     cls_message = "'{name}' is invalid."
 
 
@@ -117,6 +118,8 @@ class FilesDB:
     def __init__(self):
         self.conn = None
         self.lock = None
+        self.checkpoint_frequency = 100
+        self._checkpoint_counter = 0
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         if platform.startswith("gnu0"):
@@ -179,21 +182,32 @@ class FilesDB:
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
-            with self.lock, self.conn as conn:
-                conn.execute(
+            with self.lock:
+                self.conn.execute(
                     self.insert_query.format(key=key),
                     {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
+                self._checkpoint_counter += 1
+                if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
+                    self.conn.commit()
+                    self._checkpoint_counter = 0
         except Exception as ex:
             logging.warning(f"Couldn't put {key} for {path} w/{size}, {mtime_ns}: {ex}")
 
     def commit(self) -> None:
         with self.lock:
-            self.conn.commit()
+            if self.conn:
+                self.conn.commit()
+            self._checkpoint_counter = 0
 
     def close(self) -> None:
         with self.lock:
-            self.conn.close()
+            if self.conn:
+                try:
+                    self.conn.commit()
+                except Exception:
+                    pass
+                self.conn.close()
 
 
 filesdb = FilesDB()  # Singleton

@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QLabel, QProgressBar, QPushButton
+from PyQt5.QtWidgets import QDialog, QLabel, QMessageBox, QProgressBar, QPushButton, QVBoxLayout
 
 from hscommon.trans import tr
 

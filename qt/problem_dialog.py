@@ -8,20 +8,20 @@
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QDialog,
-    QVBoxLayout,
-    QHBoxLayout,
-    QPushButton,
-    QSpacerItem,
-    QSizePolicy,
-    QLabel,
-    QTableView,
     QAbstractItemView,
+    QDialog,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QSizePolicy,
+    QSpacerItem,
+    QTableView,
+    QVBoxLayout,
 )
 
-from qt.util import move_to_screen_center
 from hscommon.trans import trget
 from qt.problem_table import ProblemTable
+from qt.util import move_to_screen_center
 
 tr = trget("ui")
 

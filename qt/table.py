@@ -7,15 +7,16 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import typing
+
 from PyQt5.QtCore import (
-    Qt,
     QAbstractTableModel,
-    QModelIndex,
-    QItemSelectionModel,
     QItemSelection,
+    QItemSelectionModel,
+    QModelIndex,
+    Qt,
 )
 
-from qt.column import Columns, Column
+from qt.column import Column, Columns
 
 
 class Table(QAbstractTableModel):

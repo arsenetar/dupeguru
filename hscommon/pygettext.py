@@ -14,11 +14,11 @@
 # Made docstring fit in 80 chars wide displays using pydoc.
 #
 
-import os
+import glob
 import importlib.machinery
 import importlib.util
+import os
 import sys
-import glob
 import token
 import tokenize
 

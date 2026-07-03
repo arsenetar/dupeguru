@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import csv
 import os.path as op
 from tempfile import mkdtemp
-import csv
 
 # Yes, this is a very low-tech solution, but at least it doesn't have all these annoying dependency
 # and resource problems.

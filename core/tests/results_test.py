@@ -6,15 +6,15 @@
 
 import io
 import os.path as op
-
 from xml.etree import ElementTree as ET
 
 from pytest import raises
+
+from core import engine
+from core.results import Results
+from core.tests.base import DupeGuru, GetTestGroups, NamedObject
 from hscommon.testutil import eq_
 from hscommon.util import first
-from core import engine
-from core.tests.base import NamedObject, GetTestGroups, DupeGuru
-from core.results import Results
 
 
 class TestCaseResultsEmpty:

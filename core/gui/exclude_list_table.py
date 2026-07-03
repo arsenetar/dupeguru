@@ -3,8 +3,8 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from core.gui.base import DupeGuruGUIObject
-from hscommon.gui.table import GUITable, Row
 from hscommon.gui.column import Column, Columns
+from hscommon.gui.table import GUITable, Row
 from hscommon.trans import trget
 
 tr = trget("ui")

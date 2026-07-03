@@ -6,10 +6,10 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import logging
+import os.path as op
 from enum import Enum
 from os import PathLike
-import os.path as op
-import logging
 
 
 class SpecialFolder(Enum):
@@ -44,12 +44,14 @@ def special_folder_path(special_folder: SpecialFolder, portable: bool = False) -
 
 
 try:
-    from PyQt5.QtCore import QUrl, QStandardPaths
-    from PyQt5.QtGui import QDesktopServices
-    from qt.util import get_appdata
-    from core.util import executable_folder
-    from hscommon.plat import ISWINDOWS, ISOSX
     import subprocess
+
+    from PyQt5.QtCore import QStandardPaths, QUrl
+    from PyQt5.QtGui import QDesktopServices
+
+    from core.util import executable_folder
+    from hscommon.plat import ISOSX, ISWINDOWS
+    from qt.util import get_appdata
 
     def _open_url(url: str) -> None:
         QDesktopServices.openUrl(QUrl(url))

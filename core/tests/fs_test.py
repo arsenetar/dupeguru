@@ -8,12 +8,11 @@
 
 import typing
 from os import urandom
-
 from pathlib import Path
-from hscommon.testutil import eq_
-from core.tests.directories_test import create_fake_fs
 
 from core import fs
+from core.tests.directories_test import create_fake_fs
+from hscommon.testutil import eq_
 
 hasher: typing.Callable
 try:

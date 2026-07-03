@@ -4,17 +4,17 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from pathlib import Path
+
 import pytest
 
-from hscommon.jobprogress import job
-from pathlib import Path
-from hscommon.testutil import eq_
-
 from core import fs
-from core.engine import getwords, Match
+from core.engine import Match, getwords
 from core.ignore import IgnoreList
-from core.scanner import Scanner, ScanType
 from core.me.scanner import ScannerME
+from core.scanner import Scanner, ScanType
+from hscommon.jobprogress import job
+from hscommon.testutil import eq_
 
 
 # TODO update this to be able to inherit from fs.File

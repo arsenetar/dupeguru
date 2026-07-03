@@ -1,9 +1,78 @@
+[project]
+name = "dupeGuru"
+dynamic = ["version"]
+description = "dupeGuru is a tool to find duplicate files on your computer."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-3.0-only"
+authors = [
+    { name = "Andrew Senetar", email = "arsenetar@voltaicideas.net" }
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Desktop Environment :: File Managers",
+]
+dependencies = [
+    "Send2Trash>=1.8.2,<2.0.0",
+    "mutagen>=1.46.0,<2.0.0",
+    "distro>=1.8.0,<2.0.0",
+    "PyQt5>=5.15.0,<6.0; sys_platform != 'linux'",
+    "pywin32>=228; sys_platform == 'win32'",
+    "semantic-version>=2.0.0,<3.0.0",
+    "xxhash>=3.0.0,<4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7,<8",
+    "flake8",
+    "black",
+    "pyinstaller>=5.6,<6.0; sys_platform != 'linux'",
+    "sphinx>=5.3.0,<8.0.0",
+    "polib>=1.1.0,<2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/arsenetar/dupeguru"
+"Bug Reports" = "https://github.com/arsenetar/dupeguru/issues"
+
+[project.scripts]
+dupeguru = "run:main"
+
+[tool.setuptools]
+packages = ["core", "hscommon", "qt"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "core.__version__" }
+
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
 [tool.black]
 line-length = 120
+
 [tool.isort]
-# make it compatible with black
 profile = "black"
 skip_gitignore = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I"]
+ignore = ["E501"]

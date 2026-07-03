@@ -5,28 +5,28 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
-import os.path as op
 import gc
+import os.path as op
+import sys
 
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication
 
+from core import __appname__, __version__
 from hscommon.trans import install_gettext_trans_under_qt
-from qt.error_report_dialog import install_excepthook
-from qt.util import setup_qt_logging, create_qsettings
 from qt import dg_rc  # noqa: F401
+from qt.error_report_dialog import install_excepthook
 from qt.platform import BASE_PATH
-from core import __version__, __appname__
+from qt.util import create_qsettings, setup_qt_logging
 
 # SIGQUIT is not defined on Windows
 if sys.platform == "win32":
-    from signal import signal, SIGINT, SIGTERM
+    from signal import SIGINT, SIGTERM, signal
 
     SIGQUIT = SIGTERM
 else:
-    from signal import signal, SIGINT, SIGTERM, SIGQUIT
+    from signal import SIGINT, SIGQUIT, SIGTERM, signal
 
 global dgapp
 dgapp = None

@@ -13,9 +13,9 @@ import string
 from collections import defaultdict, namedtuple
 from unicodedata import normalize
 
-from hscommon.util import flatten, multi_replace
-from hscommon.trans import tr
 from hscommon.jobprogress import job
+from hscommon.trans import tr
+from hscommon.util import flatten, multi_replace
 
 (
     WEIGHT_WORDS,

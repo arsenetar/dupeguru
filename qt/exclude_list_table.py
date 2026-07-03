@@ -3,11 +3,11 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QFontMetrics, QIcon, QColor
+from PyQt5.QtGui import QColor, QFont, QFontMetrics, QIcon
 
+from hscommon.trans import trget
 from qt.column import Column
 from qt.table import Table
-from hscommon.trans import trget
 
 tr = trget("ui")
 

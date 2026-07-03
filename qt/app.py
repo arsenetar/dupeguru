@@ -4,39 +4,38 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
 import os.path as op
+import sys
 
-from PyQt5.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
+from PyQt5.QtCore import QObject, Qt, QTimer, QUrl, pyqtSignal
 from PyQt5.QtGui import QColor, QDesktopServices, QPalette
-from PyQt5.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QStyleFactory, QToolTip
+from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog, QMessageBox, QStyleFactory, QToolTip
 
-from hscommon.trans import trget
-from hscommon import desktop, plat
-
-from qt.about_box import AboutBox
-from qt.recent import Recent
-from qt.util import create_actions
-from qt.progress_window import ProgressWindow
-
-from core.app import AppMode, DupeGuru as DupeGuruModel
 import core.pe.photo
+from core.app import AppMode
+from core.app import DupeGuru as DupeGuruModel
+from hscommon import desktop, plat
+from hscommon.trans import trget
 from qt import platform
-from qt.preferences import Preferences
-from qt.result_window import ResultWindow
-from qt.directories_dialog import DirectoriesDialog
-from qt.problem_dialog import ProblemDialog
-from qt.ignore_list_dialog import IgnoreListDialog
-from qt.exclude_list_dialog import ExcludeListDialog
+from qt.about_box import AboutBox
 from qt.deletion_options import DeletionOptions
-from qt.se.details_dialog import DetailsDialog as DetailsDialogStandard
+from qt.directories_dialog import DirectoriesDialog
+from qt.exclude_list_dialog import ExcludeListDialog
+from qt.ignore_list_dialog import IgnoreListDialog
 from qt.me.details_dialog import DetailsDialog as DetailsDialogMusic
-from qt.pe.details_dialog import DetailsDialog as DetailsDialogPicture
-from qt.se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
 from qt.me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
-from qt.pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from qt.pe.details_dialog import DetailsDialog as DetailsDialogPicture
 from qt.pe.photo import File as PlatSpecificPhoto
+from qt.pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from qt.preferences import Preferences
+from qt.problem_dialog import ProblemDialog
+from qt.progress_window import ProgressWindow
+from qt.recent import Recent
+from qt.result_window import ResultWindow
+from qt.se.details_dialog import DetailsDialog as DetailsDialogStandard
+from qt.se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
 from qt.tabbed_window import TabBarWindow, TabWindow
+from qt.util import create_actions
 
 tr = trget("ui")
 
@@ -157,6 +156,7 @@ class DupeGuru(QObject):
     def _update_options(self):
         self.model.options["mix_file_kind"] = self.prefs.mix_file_kind
         self.model.options["escape_filter_regexp"] = not self.prefs.use_regexp
+        self.model.options["checkpoint_frequency"] = self.prefs.checkpoint_frequency
         self.model.options["clean_empty_dirs"] = self.prefs.remove_empty_folders
         self.model.options["ignore_hardlink_matches"] = self.prefs.ignore_hardlink_matches
         self.model.options["copymove_dest_type"] = self.prefs.destination_type
@@ -172,9 +172,7 @@ class DupeGuru(QObject):
         )  # threshold is in MB. The Scanner wants bytes
         big_file_size_threshold = self.prefs.big_file_size_threshold if self.prefs.big_file_partial_hashes else 0
         self.model.options["big_file_size_threshold"] = (
-            big_file_size_threshold
-            * 1024
-            * 1024
+            big_file_size_threshold * 1024 * 1024
             # threshold is in MiB. The scanner wants bytes
         )
         scanned_tags = set()

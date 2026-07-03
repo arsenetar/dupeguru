@@ -6,6 +6,8 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from pathlib import Path
+
 import pytest
 
 from hscommon.conflict import (
@@ -15,7 +17,6 @@ from hscommon.conflict import (
     smart_copy,
     smart_move,
 )
-from pathlib import Path
 from hscommon.testutil import eq_
 
 

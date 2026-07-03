@@ -4,13 +4,14 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
+from PyQt5.QtCore import QSize, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QResizeEvent
+from PyQt5.QtWidgets import QAbstractItemView, QFrame, QGridLayout, QSizePolicy, QSplitter
+
 from hscommon.trans import trget
 from qt.details_dialog import DetailsDialog as DetailsDialogBase
 from qt.details_table import DetailsTable
-from qt.pe.image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
+from qt.pe.image_viewer import ScrollAreaController, ScrollAreaImageViewer, ViewerToolBar
 
 tr = trget("ui")
 

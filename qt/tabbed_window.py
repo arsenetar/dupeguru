@@ -2,23 +2,24 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import QRect, pyqtSlot, Qt, QEvent
+from PyQt5.QtCore import QEvent, QRect, Qt, pyqtSlot
 from PyQt5.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
     QHBoxLayout,
     QMainWindow,
-    QTabWidget,
     QMenu,
-    QTabBar,
     QStackedWidget,
+    QTabBar,
+    QTabWidget,
+    QVBoxLayout,
+    QWidget,
 )
+
 from hscommon.trans import trget
-from qt.util import move_to_screen_center, create_actions
 from qt.directories_dialog import DirectoriesDialog
-from qt.result_window import ResultWindow
-from qt.ignore_list_dialog import IgnoreListDialog
 from qt.exclude_list_dialog import ExcludeListDialog
+from qt.ignore_list_dialog import IgnoreListDialog
+from qt.result_window import ResultWindow
+from qt.util import create_actions, move_to_screen_center
 
 tr = trget("ui")
 

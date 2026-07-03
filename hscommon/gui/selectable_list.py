@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from collections.abc import Sequence, MutableSequence
+from collections.abc import MutableSequence, Sequence
 
 from hscommon.gui.base import GUIObject
 

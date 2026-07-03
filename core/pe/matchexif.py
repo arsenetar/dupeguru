@@ -9,9 +9,8 @@
 from collections import defaultdict
 from itertools import combinations
 
-from hscommon.trans import tr
-
 from core.engine import Match
+from hscommon.trans import tr
 
 
 def getmatches(files, match_scaled, j):

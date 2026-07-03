@@ -2,19 +2,20 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from core.markable import Markable
-from xml.etree import ElementTree as ET
+import functools
+import logging
 
 # TODO: perhaps use regex module for better Unicode support? https://pypi.org/project/regex/
 # also https://pypi.org/project/re2/
 # TODO update the Result list with newly added regexes if possible
 import re
-from os import sep
-import logging
-import functools
-from hscommon.util import FileOrPath
-from hscommon.plat import ISWINDOWS
 import time
+from os import sep
+from xml.etree import ElementTree as ET
+
+from core.markable import Markable
+from hscommon.plat import ISWINDOWS
+from hscommon.util import FileOrPath
 
 default_regexes = [
     r"^thumbs\.db$",  # Obsolete after WindowsXP

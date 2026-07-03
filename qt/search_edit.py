@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QIcon, QPixmap, QPainter, QPalette
-from PyQt5.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QIcon, QPainter, QPalette, QPixmap
+from PyQt5.QtWidgets import QLineEdit, QStyle, QStyleOptionFrame, QToolButton
 
 from hscommon.trans import trget
 

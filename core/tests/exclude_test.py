@@ -5,16 +5,13 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import io
+from re import error
 from xml.etree import ElementTree as ET
 
-from hscommon.testutil import eq_
-from hscommon.plat import ISWINDOWS
-
+from core.exclude import AlreadyThereException, ExcludeDict, ExcludeList, default_regexes
 from core.tests.base import DupeGuru
-from core.exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
-
-from re import error
-
+from hscommon.plat import ISWINDOWS
+from hscommon.testutil import eq_
 
 # Two slightly different implementations here, one around a list of lists,
 # and another around a dictionary.

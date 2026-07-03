@@ -6,37 +6,36 @@
 
 import cProfile
 import datetime
+import logging
 import os
 import os.path as op
-import logging
-import subprocess
 import re
 import shutil
+import subprocess
 from pathlib import Path
 
 from send2trash import send2trash
-from hscommon.jobprogress import job
-from hscommon.notify import Broadcaster
-from hscommon.conflict import smart_move, smart_copy
-from hscommon.gui.progress_window import ProgressWindow
-from hscommon.util import delete_if_empty, first, escape, nonone, allsame
-from hscommon.trans import tr
-from hscommon import desktop
 
-from core import se, me, pe
-from core.pe.photo import get_delta_dimensions
-from core.util import cmp_value, fix_surrogate_encoding
-from core import directories, results, export, fs, prioritize
-from core.ignore import IgnoreList
+from core import directories, export, fs, me, pe, prioritize, results, se
 from core.exclude import ExcludeDict as ExcludeList
-from core.scanner import ScanType
 from core.gui.deletion_options import DeletionOptions
 from core.gui.details_panel import DetailsPanel
 from core.gui.directory_tree import DirectoryTree
-from core.gui.ignore_list_dialog import IgnoreListDialog
 from core.gui.exclude_list_dialog import ExcludeListDialogCore
+from core.gui.ignore_list_dialog import IgnoreListDialog
 from core.gui.problem_dialog import ProblemDialog
 from core.gui.stats_label import StatsLabel
+from core.ignore import IgnoreList
+from core.pe.photo import get_delta_dimensions
+from core.scanner import ScanType
+from core.util import cmp_value, fix_surrogate_encoding
+from hscommon import desktop
+from hscommon.conflict import smart_copy, smart_move
+from hscommon.gui.progress_window import ProgressWindow
+from hscommon.jobprogress import job
+from hscommon.notify import Broadcaster
+from hscommon.trans import tr
+from hscommon.util import allsame, delete_if_empty, escape, first, nonone
 
 HAD_FIRST_LAUNCH_PREFERENCE = "HadFirstLaunch"
 DEBUG_MODE_PREFERENCE = "DebugMode"
@@ -153,6 +152,7 @@ class DupeGuru(Broadcaster):
             "copymove_dest_type": DestType.RELATIVE,
             "include_exists_check": True,
             "rehash_ignore_mtime": False,
+            "checkpoint_frequency": 100,
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -793,6 +793,7 @@ class DupeGuru(Broadcaster):
         """
         scanner = self.SCANNER_CLASS()
         fs.filesdb.ignore_mtime = self.options["rehash_ignore_mtime"] is True
+        fs.filesdb.checkpoint_frequency = self.options.get("checkpoint_frequency", 100)
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return

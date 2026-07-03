@@ -3,23 +3,24 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import re
+
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtWidgets import (
-    QPushButton,
-    QLineEdit,
-    QVBoxLayout,
-    QGridLayout,
-    QDialog,
-    QTableView,
     QAbstractItemView,
-    QSpacerItem,
-    QSizePolicy,
+    QDialog,
+    QGridLayout,
     QHeaderView,
+    QLineEdit,
+    QPushButton,
+    QSizePolicy,
+    QSpacerItem,
+    QTableView,
+    QVBoxLayout,
 )
-from qt.exclude_list_table import ExcludeListTable
 
 from core.exclude import AlreadyThereException
 from hscommon.trans import trget
+from qt.exclude_list_table import ExcludeListTable
 
 tr = trget("ui")
 

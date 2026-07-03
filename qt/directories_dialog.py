@@ -5,34 +5,33 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import (
-    QListView,
-    QWidget,
-    QFileDialog,
-    QHeaderView,
-    QVBoxLayout,
-    QHBoxLayout,
-    QTreeView,
     QAbstractItemView,
-    QSpacerItem,
-    QSizePolicy,
-    QPushButton,
-    QMainWindow,
-    QMenuBar,
-    QMenu,
-    QLabel,
     QComboBox,
+    QFileDialog,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QListView,
+    QMainWindow,
+    QMenu,
+    QMenuBar,
+    QPushButton,
+    QSizePolicy,
+    QSpacerItem,
+    QTreeView,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtGui import QPixmap, QIcon
 
-from hscommon.trans import trget
 from core.app import AppMode
+from hscommon.trans import trget
+from qt import platform
+from qt.directories_model import DirectoriesDelegate, DirectoriesModel
 from qt.radio_box import RadioBox
 from qt.recent import Recent
-from qt.util import move_to_screen_center, create_actions
-
-from qt import platform
-from qt.directories_model import DirectoriesModel, DirectoriesDelegate
+from qt.util import create_actions, move_to_screen_center
 
 tr = trget("ui")
 

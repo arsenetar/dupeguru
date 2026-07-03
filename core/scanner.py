@@ -5,15 +5,14 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import logging
-import re
 import os.path as op
+import re
 from collections import namedtuple
 
-from hscommon.jobprogress import job
-from hscommon.util import dedupe, rem_file_ext, get_file_ext
-from hscommon.trans import tr
-
 from core import engine
+from hscommon.jobprogress import job
+from hscommon.trans import tr
+from hscommon.util import dedupe, get_file_ext, rem_file_ext
 
 # It's quite ugly to have scan types from all editions all put in the same class, but because there's
 # there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be
@@ -214,3 +213,4 @@ class Scanner:
     big_file_size_threshold = 0
     word_weighting = False
     include_exists_check = True
+    checkpoint_frequency = 100

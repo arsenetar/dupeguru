@@ -6,31 +6,30 @@
 
 import sys
 
-from hscommon.jobprogress import job
-from hscommon.util import first
-from hscommon.testutil import eq_, log_calls
-
-from core.tests.base import NamedObject
 from core import engine
 from core.engine import (
-    get_match,
-    getwords,
-    Group,
-    getfields,
-    unpack_fields,
-    compare_fields,
-    compare,
-    WEIGHT_WORDS,
     MATCH_SIMILAR_WORDS,
     NO_FIELD_ORDER,
-    build_word_dict,
-    get_groups,
-    getmatches,
+    WEIGHT_WORDS,
+    Group,
     Match,
+    build_word_dict,
+    compare,
+    compare_fields,
+    get_groups,
+    get_match,
+    getfields,
+    getmatches,
     getmatches_by_contents,
+    getwords,
     merge_similar_words,
     reduce_common_words,
+    unpack_fields,
 )
+from core.tests.base import NamedObject
+from hscommon.jobprogress import job
+from hscommon.testutil import eq_, log_calls
+from hscommon.util import first
 
 no = NamedObject
 

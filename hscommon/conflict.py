@@ -10,11 +10,10 @@
 this module that deals with conflicts by prepending unique numbers in ``[]`` brackets to the name.
 """
 
-import re
 import os
+import re
 import shutil
-
-from errno import EISDIR, EACCES
+from errno import EACCES, EISDIR
 from pathlib import Path
 from typing import Callable, List
 

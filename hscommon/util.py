@@ -8,9 +8,9 @@
 
 from math import ceil
 from pathlib import Path
-from hscommon.path import pathify, log_io_error
-
 from typing import IO, Any, Callable, Generator, Iterable, List, Tuple, Union
+
+from hscommon.path import log_io_error, pathify
 
 
 def nonone(value: Any, replace_value: Any) -> Any:

@@ -5,11 +5,11 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import logging
-from hscommon.util import get_file_ext, format_size
 
-from core.util import format_timestamp, format_perc, format_dupe_count
 from core import fs
 from core.pe import exif
+from core.util import format_dupe_count, format_perc, format_timestamp
+from hscommon.util import format_size, get_file_ext
 
 # This global value is set by the platform-specific subclasser of the Photo base class
 PLAT_SPECIFIC_PHOTO_CLASS = None

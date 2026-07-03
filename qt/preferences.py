@@ -4,14 +4,14 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtWidgets import QApplication, QDockWidget
-from PyQt5.QtCore import Qt, QRect, QObject, pyqtSignal
+from PyQt5.QtCore import QObject, QRect, Qt, pyqtSignal
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication, QDockWidget
 
-from hscommon import trans
-from hscommon.plat import ISLINUX
 from core.app import AppMode
 from core.scanner import ScanType
+from hscommon import trans
+from hscommon.plat import ISLINUX
 from hscommon.util import tryint
 from qt.util import create_qsettings
 
@@ -163,6 +163,7 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = get("RemoveEmptyFolders", self.remove_empty_folders)
         self.rehash_ignore_mtime = get("RehashIgnoreMTime", self.rehash_ignore_mtime)
         self.include_exists_check = get("IncludeExistsCheck", self.include_exists_check)
+        self.checkpoint_frequency = get("CheckpointFrequency", self.checkpoint_frequency)
         self.debug_mode = get("DebugMode", self.debug_mode)
         self.profile_scan = get("ProfileScan", self.profile_scan)
         self.destination_type = get("DestinationType", self.destination_type)
@@ -235,6 +236,7 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = False
         self.rehash_ignore_mtime = False
         self.include_exists_check = True
+        self.checkpoint_frequency = 100
         self.debug_mode = False
         self.profile_scan = False
         self.destination_type = 1
@@ -289,6 +291,7 @@ class Preferences(PreferencesBase):
         set_("RemoveEmptyFolders", self.remove_empty_folders)
         set_("RehashIgnoreMTime", self.rehash_ignore_mtime)
         set_("IncludeExistsCheck", self.include_exists_check)
+        set_("CheckpointFrequency", self.checkpoint_frequency)
         set_("DebugMode", self.debug_mode)
         set_("ProfileScan", self.profile_scan)
         set_("DestinationType", self.destination_type)

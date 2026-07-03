@@ -5,10 +5,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+from core.gui.result_table import ResultTable as ResultTableBase
 from hscommon.gui.column import Column
 from hscommon.trans import trget
-
-from core.gui.result_table import ResultTable as ResultTableBase
 
 coltr = trget("columns")
 

@@ -43,6 +43,21 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
+.DEFAULT_GOAL := help
+
+help:
+	@echo "Available targets:"
+	@echo "  help         Print this help message"
+	@echo "  all          Build all components (virtualenv, i18n, C modules, Qt resources)"
+	@echo "  run          Run the dupeGuru application in the virtual environment"
+	@echo "  pyc          Compile Python source code to bytecode"
+	@echo "  env          Create the virtual environment and install dependencies using uv"
+	@echo "  modules      Compile high-performance C extension modules"
+	@echo "  i18n         Compile all localization (.po to .mo) files"
+	@echo "  clean        Clean up build files, compiled extensions, and localizations"
+	@echo "  install      Install dupeGuru to the system (controlled by PREFIX/DESTDIR)"
+	@echo "  uninstall    Uninstall dupeGuru from the system"
+
 all: | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
@@ -56,22 +71,14 @@ reqs:
 ifneq ($(shell test $(PYTHON_VERSION_MINOR) -ge $(REQ_MINOR_VERSION); echo $$?),0)
 	$(error "Python 3.${REQ_MINOR_VERSION}+ required. Aborting.")
 endif
-ifndef NO_VENV
-	@${PYTHON} -m venv -h > /dev/null || \
-		echo "Creation of our virtualenv failed. If you're on Ubuntu, you probably need python3-venv."
-endif
-	@${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 || \
-		{ echo "PyQt 5.4+ required. Install it and try again. Aborting"; exit 1; }
 
 env: | reqs
 ifndef NO_VENV
-	@echo "Creating our virtualenv"
-	${PYTHON} -m venv env
-	$(VENV_PYTHON) -m pip install -r requirements.txt
-# We can't use the "--system-site-packages" flag on creation because otherwise we end up with
-# the system's pip and that messes up things in some cases (notably in Gentoo).
-	${PYTHON} -m venv --upgrade ${VENV_OPTIONS} env
+	@echo "Creating virtualenv with uv"
+	uv venv env
+	VIRTUAL_ENV=env uv pip install -e .[dev]
 endif
+
 
 build/help: | env
 	$(VENV_PYTHON) build.py --doc
@@ -120,4 +127,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: clean normpo mergepot modules i18n reqs run pyc install uninstall all
+.PHONY: help clean normpo mergepot modules i18n reqs run pyc install uninstall all

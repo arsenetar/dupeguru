@@ -1,4 +1,4 @@
-from typing import Union, Tuple, List
+from typing import List, Tuple, Union
 
 _block = Tuple[int, int, int]
 

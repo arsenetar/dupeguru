@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QAbstractListModel, QItemSelection, QItemSelectionModel
+from PyQt5.QtCore import QAbstractListModel, QItemSelection, QItemSelectionModel, Qt
 
 
 class SelectableList(QAbstractListModel):

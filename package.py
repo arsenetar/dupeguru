@@ -4,26 +4,27 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import sys
+import compileall
+import json
 import os
 import os.path as op
-import compileall
-import shutil
-import json
-from argparse import ArgumentParser
 import platform
-import distro
 import re
+import shutil
+import sys
+from argparse import ArgumentParser
+
+import distro
 
 from hscommon.build import (
-    print_and_do,
-    copy_packages,
     build_debian_changelog,
-    get_module_version,
-    filereplace,
     copy,
-    setup_package_argparser,
     copy_all,
+    copy_packages,
+    filereplace,
+    get_module_version,
+    print_and_do,
+    setup_package_argparser,
 )
 
 ENTRY_SCRIPT = "run.py"

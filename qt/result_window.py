@@ -6,34 +6,33 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (
-    QMainWindow,
-    QMenu,
-    QLabel,
-    QFileDialog,
-    QMenuBar,
-    QWidget,
-    QVBoxLayout,
     QAbstractItemView,
-    QStatusBar,
-    QDialog,
-    QPushButton,
     QCheckBox,
     QDesktopWidget,
+    QDialog,
+    QFileDialog,
+    QLabel,
+    QMainWindow,
+    QMenu,
+    QMenuBar,
+    QPushButton,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
 
-from hscommon.trans import trget
-from qt.util import move_to_screen_center, horizontal_wrap, create_actions
-from qt.search_edit import SearchEdit
-
 from core.app import AppMode
-from qt.results_model import ResultsView
-from qt.stats_label import StatsLabel
-from qt.prioritize_dialog import PrioritizeDialog
-from qt.se.results_model import ResultsModel as ResultsModelStandard
+from hscommon.trans import trget
 from qt.me.results_model import ResultsModel as ResultsModelMusic
 from qt.pe.results_model import ResultsModel as ResultsModelPicture
+from qt.prioritize_dialog import PrioritizeDialog
+from qt.results_model import ResultsView
+from qt.se.results_model import ResultsModel as ResultsModelStandard
+from qt.search_edit import SearchEdit
+from qt.stats_label import StatsLabel
+from qt.util import create_actions, horizontal_wrap, move_to_screen_center
 
 tr = trget("ui")
 

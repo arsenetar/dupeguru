@@ -4,12 +4,13 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import Callable, Dict, Union
 
-from hscommon.build import read_changelog_file, filereplace
 from sphinx.cmd.build import build_main as sphinx_build
+
+from hscommon.build import filereplace, read_changelog_file
 
 CHANGELOG_FORMAT = """
 {version} ({date})
