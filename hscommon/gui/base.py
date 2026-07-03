@@ -37,7 +37,7 @@ class GUIObject:
     """
 
     def __init__(self, multibind: bool = False) -> None:
-        self._view = None
+        self._view = NoopGUI()
         self._multibind = multibind
 
     def _view_updated(self) -> None:
@@ -68,10 +68,10 @@ class GUIObject:
 
     @view.setter
     def view(self, value) -> None:
-        if self._view is None and value is None:
+        if isinstance(self._view, NoopGUI) and value is None:
             # Initial view assignment
             return
-        if self._view is None or self._multibind:
+        if isinstance(self._view, NoopGUI) or self._view is None or self._multibind:
             if value is None:
                 value = NoopGUI()
             self._view = value

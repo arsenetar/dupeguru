@@ -58,6 +58,7 @@ help:
 	@echo "  clean        Clean up build files, compiled extensions, and localizations"
 	@echo "  install      Install dupeGuru to the system (controlled by PREFIX/DESTDIR)"
 	@echo "  uninstall    Uninstall dupeGuru from the system"
+	@echo "  package      Create a standalone native executable package for the current OS"
 
 all: | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
@@ -65,8 +66,11 @@ all: | env i18n modules qt/dg_rc.py
 run:
 	$(VENV_PYTHON) run.py
 
-web:
+web: | all
 	$(VENV_PYTHON) run_web.py
+
+package: | all
+	$(VENV_PYTHON) package.py
 
 pyc: | env
 	${VENV_PYTHON} -m compileall ${packages}
@@ -106,11 +110,14 @@ normpo: | env
 
 install: all pyc
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf ${packages} locale ${DESTDIR}${PREFIX}/share/dupeguru
+	cp -rf ${packages} locale web ${DESTDIR}${PREFIX}/share/dupeguru
 	cp -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	cp -f run_web.py ${DESTDIR}${PREFIX}/share/dupeguru/run_web.py
 	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run_web.py
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	ln -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
+	ln -sf ${PREFIX}/share/dupeguru/run_web.py ${DESTDIR}${PREFIX}/bin/dupeguru-web
 	mkdir -p ${DESTDIR}${PREFIX}/share/applications
 	cp -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
 	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
@@ -123,6 +130,7 @@ installdocs: build/help
 uninstall:
 	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
 	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru"
+	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru-web"
 	rm -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
 	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
 
@@ -131,4 +139,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: help clean normpo mergepot modules i18n reqs run web pyc install uninstall all
+.PHONY: help clean normpo mergepot modules i18n reqs run web package pyc install uninstall all

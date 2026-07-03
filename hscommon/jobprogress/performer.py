@@ -27,6 +27,9 @@ class ThreadedJobPerformer:
 
     _job_running = False
     last_error = None
+    last_progress = None
+    last_desc = ""
+    job_cancelled = False
 
     # --- Protected
     def create_job(self) -> Job:

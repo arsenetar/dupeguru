@@ -13,7 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from core.app import AppMode, DupeGuruModel
+from core.app import AppMode, DupeGuru
 from hscommon.gui.base import CompositeView, NoopGUI
 from hscommon.trans import install_gettext_trans_under_qt
 
@@ -37,6 +37,23 @@ class WebProgressView:
 class WebViewAdapter:
     def __init__(self, state):
         self.state = state
+        self.preferences = {
+            "FilterHardness": 95,
+            "MixFileKind": True,
+            "UseRegexp": False,
+            "IgnoreHardlinkMatches": False,
+            "RemoveEmptyFolders": False,
+            "RehashIgnoreMTime": False,
+            "IncludeExistsCheck": True,
+            "DebugMode": False,
+            "CheckpointFrequency": 100,
+        }
+
+    def get_default(self, key_name, default=None):
+        return self.preferences.get(key_name, default)
+
+    def set_default(self, key_name, value):
+        self.preferences[key_name] = value
 
     def show_message(self, msg):
         self.state["messages"].append(msg)
@@ -79,13 +96,14 @@ app_state = {
     "messages": [],
 }
 
-# Initialize model
-model = DupeGuruModel()
+# Initialize view adapter first
 web_view = WebViewAdapter(app_state)
-progress_view = WebProgressView(app_state)
 
-# Bind views
-model.view = web_view
+# Initialize model with the view
+model = DupeGuru(web_view)
+
+# Bind progress view
+progress_view = WebProgressView(app_state)
 model.progress_window.view = progress_view
 
 # Setup basic logging
@@ -173,7 +191,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/directories":
             dirs = []
             for d in model.directories:
-                dirs.append({"path": str(d.path), "state": d.state})
+                dirs.append({"path": str(d), "state": model.directories.get_state(d)})
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/browse":
@@ -229,9 +247,23 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/directories":
             path_str = data.get("path")
-            if path_str and os.path.exists(path_str):
-                model.directories.add_path(path_str)
-                self.wfile.write(json.dumps({"success": True}).encode())
+            if path_str:
+                path_str = path_str.strip().strip("'\"")
+                try:
+                    from core.directories import AlreadyThereError, InvalidPathError
+                    model.directories.add_path(Path(path_str))
+                    self.wfile.write(json.dumps({"success": True}).encode())
+                except AlreadyThereError:
+                    self.wfile.write(json.dumps({"success": False, "error": "Directory is already in the list"}).encode())
+                except InvalidPathError:
+                    import traceback
+                    print(f"InvalidPathError: path_str={repr(path_str)} exists={os.path.exists(path_str)} isdir={os.path.isdir(path_str)}")
+                    traceback.print_exc()
+                    self.wfile.write(json.dumps({"success": False, "error": "Invalid or non-existent path"}).encode())
+                except Exception as e:
+                    import traceback
+                    traceback.print_exc()
+                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
             else:
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid path"}).encode())
 

@@ -7,12 +7,24 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from hscommon.notify import Listener
+from hscommon.gui.base import NoopGUI
 
 
 class DupeGuruGUIObject(Listener):
     def __init__(self, app):
         Listener.__init__(self, app)
         self.app = app
+        self._view = NoopGUI()
+
+    @property
+    def view(self):
+        return self._view
+
+    @view.setter
+    def view(self, value):
+        if value is None:
+            value = NoopGUI()
+        self._view = value
 
     def directories_changed(self):
         # Implemented in child classes
