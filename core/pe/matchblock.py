@@ -98,7 +98,8 @@ def prepare_pictures(pictures, cache_path, with_dimensions, match_rotated, check
                     raise
     except MemoryError:
         logging.warning("Ran out of memory while preparing pictures")
-    cache.close()
+    finally:
+        cache.close()
     return prepared
 
 

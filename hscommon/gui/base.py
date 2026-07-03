@@ -81,3 +81,32 @@ class GUIObject:
             # Instead of None, we put a NoopGUI() there to avoid rogue view callback raising an
             # exception.
             self._view = NoopGUI()
+
+
+class CompositeView:
+    """A proxy view that forwards all method calls to multiple registered views.
+
+    This allows presenters to communicate with multiple UI representations
+    (e.g., Qt desktop view and a Web interface view) simultaneously.
+    """
+
+    def __init__(self, views=None):
+        self.views = list(views) if views else []
+
+    def add_view(self, view):
+        if view and view not in self.views:
+            self.views.append(view)
+
+    def remove_view(self, view):
+        if view in self.views:
+            self.views.remove(view)
+
+    def __getattr__(self, name):
+        def method_proxy(*args, **kwargs):
+            result = None
+            for v in self.views:
+                if hasattr(v, name):
+                    # Execute on each view and save the last result
+                    result = getattr(v, name)(*args, **kwargs)
+            return result
+        return method_proxy

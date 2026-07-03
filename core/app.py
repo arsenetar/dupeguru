@@ -808,22 +808,25 @@ class DupeGuru(Broadcaster):
         self._results_changed()
 
         def do(j):
-            if profile_scan:
-                pr = cProfile.Profile()
-                pr.enable()
-            j.set_progress(0, tr("Collecting files to scan"))
-            if scanner.scan_type == ScanType.FOLDERS:
-                files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
-            else:
-                files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
-            if self.options["ignore_hardlink_matches"]:
-                files = self._remove_hardlink_dupes(files)
-            logging.info("Scanning %d files" % len(files))
-            self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
-            self.discarded_file_count = scanner.discarded_file_count
-            if profile_scan:
-                pr.disable()
-                pr.dump_stats(op.join(self.appdata, f"{datetime.datetime.now():%Y-%m-%d_%H-%M-%S}.profile"))
+            try:
+                if profile_scan:
+                    pr = cProfile.Profile()
+                    pr.enable()
+                j.set_progress(0, tr("Collecting files to scan"))
+                if scanner.scan_type == ScanType.FOLDERS:
+                    files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
+                else:
+                    files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
+                if self.options["ignore_hardlink_matches"]:
+                    files = self._remove_hardlink_dupes(files)
+                logging.info("Scanning %d files" % len(files))
+                self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
+                self.discarded_file_count = scanner.discarded_file_count
+                if profile_scan:
+                    pr.disable()
+                    pr.dump_stats(op.join(self.appdata, f"{datetime.datetime.now():%Y-%m-%d_%H-%M-%S}.profile"))
+            finally:
+                fs.filesdb.commit()
 
         self._start_job(JobType.SCAN, do)
 

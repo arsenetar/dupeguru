@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dupeGuru Web Console</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Directories & Browser -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg class="logo" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    <path d="M2 12h20"></path>
+                </svg>
+                <h2>dupeGuru Web</h2>
+            </div>
+
+            <!-- Path Selection/File Browser -->
+            <div class="section-card">
+                <h3>Add Directory</h3>
+                <div class="input-group">
+                    <input type="text" id="manual-path-input" placeholder="Type or paste absolute path...">
+                    <button id="add-manual-path-btn" class="btn primary-btn">+</button>
+                </div>
+                
+                <h4 class="sub-heading">Browse Folders</h4>
+                <div class="file-browser">
+                    <div class="browser-nav">
+                        <button id="browser-up-btn" class="btn text-btn">↑ Up</button>
+                        <span id="current-dir-span">Loading folders...</span>
+                    </div>
+                    <ul id="folder-list" class="folder-list">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Added directories -->
+            <div class="section-card expand">
+                <h3>Target Directories</h3>
+                <ul id="directories-list" class="directories-list">
+                    <!-- Loaded dynamically -->
+                </ul>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="action-footer">
+                <button id="start-scan-btn" class="btn accent-btn large-btn">Start Duplicate Scan</button>
+            </div>
+        </aside>
+
+        <!-- Main Content: Progress & Results -->
+        <main class="main-content">
+            <!-- Progress Screen -->
+            <div id="progress-container" class="progress-container hidden">
+                <div class="progress-card">
+                    <div class="spinner"></div>
+                    <h3 id="progress-desc">Scanning folders...</h3>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                    </div>
+                    <span id="progress-percent">0%</span>
+                    <button id="cancel-scan-btn" class="btn danger-btn" style="margin-top: 16px; width: 140px; padding: 10px;">Stop Scan</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="results-container" class="results-container hidden">
+                <header class="results-header">
+                    <div>
+                        <h1>Scan Results</h1>
+                        <p id="results-summary">No duplicates found yet.</p>
+                    </div>
+                    <div class="results-actions">
+                        <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
+                    </div>
+                </header>
+
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th width="60">Marked</th>
+                                <th width="100">Match %</th>
+                                <th>File Name</th>
+                                <th>Folder Path</th>
+                                <th width="120">Size</th>
+                                <th width="150">Modification Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Welcome Screen (Default) -->
+            <div id="welcome-container" class="welcome-container">
+                <div class="welcome-card">
+                    <svg class="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 2.253M12 3a9.003 9.003 0 0 0-8.716 2.253M21 9.75c0 1.11-.89 2.25-2.25 2.25M3 9.75c0 1.11.89 2.25 2.25 2.25" />
+                    </svg>
+                    <h2>Find duplicate files in style</h2>
+                    <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -50,6 +50,7 @@ help:
 	@echo "  help         Print this help message"
 	@echo "  all          Build all components (virtualenv, i18n, C modules, Qt resources)"
 	@echo "  run          Run the dupeGuru application in the virtual environment"
+	@echo "  web          Run the dupeGuru HTML Web Console interface"
 	@echo "  pyc          Compile Python source code to bytecode"
 	@echo "  env          Create the virtual environment and install dependencies using uv"
 	@echo "  modules      Compile high-performance C extension modules"
@@ -63,6 +64,9 @@ all: | env i18n modules qt/dg_rc.py
 
 run:
 	$(VENV_PYTHON) run.py
+
+web:
+	$(VENV_PYTHON) run_web.py
 
 pyc: | env
 	${VENV_PYTHON} -m compileall ${packages}
@@ -127,4 +131,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: help clean normpo mergepot modules i18n reqs run pyc install uninstall all
+.PHONY: help clean normpo mergepot modules i18n reqs run web pyc install uninstall all
