@@ -156,6 +156,12 @@ def create_qsettings():
             settings = QSettings()
         settings.setValue("Portable", False)
     else:
-        settings = QSettings()
+        config_dir = op.expanduser("~/.config/dupeGuru")
+        if not op.exists(config_dir):
+            try:
+                os.makedirs(config_dir)
+            except Exception:
+                pass
+        settings = QSettings(op.join(config_dir, "settings.ini"), QSettings.IniFormat)
         settings.setValue("Portable", False)
     return settings
