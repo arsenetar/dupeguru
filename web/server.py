@@ -56,6 +56,26 @@ class WebViewAdapter:
         self.preferences[key_name] = value
 
     def load_preferences(self, appdata_dir):
+        # Try loading from QSettings (shared with Qt UI)
+        try:
+            from qt.util import create_qsettings
+            settings = create_qsettings()
+            for key in self.preferences.keys():
+                val = settings.value(key)
+                if val is not None:
+                    if val == "true" or val is True:
+                        self.preferences[key] = True
+                    elif val == "false" or val is False:
+                        self.preferences[key] = False
+                    elif str(val).isdigit():
+                        self.preferences[key] = int(val)
+                    else:
+                        self.preferences[key] = val
+            logging.info("Preferences successfully loaded from QSettings (shared with Qt UI).")
+            return
+        except Exception as e:
+            logging.warning(f"Could not load preferences from QSettings: {e}. Falling back to web_settings.json.")
+
         self.prefs_file = os.path.join(appdata_dir, "web_settings.json")
         if os.path.exists(self.prefs_file):
             try:
@@ -66,6 +86,18 @@ class WebViewAdapter:
                 logging.error(f"Failed to load preferences: {e}")
 
     def save_preferences(self):
+        # Try saving to QSettings (shared with Qt UI)
+        try:
+            from qt.util import create_qsettings
+            settings = create_qsettings()
+            for key, val in self.preferences.items():
+                settings.setValue(key, val)
+            settings.sync()
+            logging.info("Preferences successfully saved to QSettings (shared with Qt UI).")
+            return
+        except Exception as e:
+            logging.warning(f"Could not save preferences to QSettings: {e}. Falling back to web_settings.json.")
+
         if hasattr(self, "prefs_file"):
             try:
                 with open(self.prefs_file, "w") as f:
