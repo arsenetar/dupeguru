@@ -28,7 +28,10 @@ class WebProgressView:
 
     def close(self):
         self.state["scanning"] = False
-        self.state["status"] = "completed"
+        if model.progress_window.job_cancelled:
+            self.state["status"] = "idle"
+        else:
+            self.state["status"] = "completed"
 
     def set_progress(self, progress):
         self.state["progress"] = progress
@@ -373,6 +376,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/scan":
             if not app_state["scanning"]:
+                if not model.directories.has_any_file():
+                    self.wfile.write(json.dumps({"success": False, "error": "The selected directories contain no scannable file."}).encode())
+                    return
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True
                 app_state["progress"] = 0
@@ -385,8 +391,6 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/scan/cancel":
             model.progress_window.cancel()
-            app_state["status"] = "idle"
-            app_state["scanning"] = False
             self.wfile.write(json.dumps({"success": True}).encode())
 
         elif path == "/api/results/mark":
