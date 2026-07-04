@@ -76,7 +76,7 @@ function setupEventListeners() {
 // 1. Directory List Management
 async function loadDirectories() {
     try {
-        const response = await fetch(`${API_BASE}/api/directories`);
+        const response = await fetch(`${API_BASE}/api/directories?_t=${Date.now()}`);
         const dirs = await response.json();
         
         addedPaths = dirs.map(d => d.path);
@@ -140,7 +140,7 @@ async function removeDirectory(index) {
 // 2. Folder Browser
 async function browseFolders(path = "") {
     try {
-        const url = path ? `${API_BASE}/api/browse?path=${encodeURIComponent(path)}` : `${API_BASE}/api/browse`;
+        const url = path ? `${API_BASE}/api/browse?path=${encodeURIComponent(path)}&_t=${Date.now()}` : `${API_BASE}/api/browse?_t=${Date.now()}`;
         const response = await fetch(url);
         const data = await response.json();
         
@@ -201,7 +201,7 @@ async function checkScanStatus() {
     // Light status checks to sync UI
     if (isScanning) return;
     try {
-        const response = await fetch(`${API_BASE}/api/status`);
+        const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
         if (state.status === "scanning") {
             isScanning = true;
@@ -218,7 +218,7 @@ async function checkScanStatus() {
 async function pollProgress() {
     if (!isScanning) return;
     try {
-        const response = await fetch(`${API_BASE}/api/status`);
+        const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
         
         if (state.status === "scanning") {
@@ -249,7 +249,7 @@ async function pollProgress() {
 // 4. Results Management
 async function loadResults() {
     try {
-        const response = await fetch(`${API_BASE}/api/results`);
+        const response = await fetch(`${API_BASE}/api/results?_t=${Date.now()}`);
         resultsData = await response.json();
         
         renderResults();
@@ -392,7 +392,7 @@ function escapeJS(str) {
 // Configuration Management
 async function loadConfig() {
     try {
-        const response = await fetch(`${API_BASE}/api/config`);
+        const response = await fetch(`${API_BASE}/api/config?_t=${Date.now()}`);
         const config = await response.json();
         
         document.getElementById("pref-hardness").value = config.FilterHardness;

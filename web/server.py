@@ -175,7 +175,7 @@ def sync_preferences_to_model():
 sync_preferences_to_model()
 
 def save_selected_directories():
-    paths = [str(d.path) for d in model.directories]
+    paths = [str(d) for d in model.directories]
     web_view.set_default("SelectedDirectories", paths)
     web_view.save_preferences()
 
@@ -264,10 +264,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         # REST API endpoints
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
         self.end_headers()
 
         if path == "/api/status":
-            targets = [str(d.path) for d in model.directories]
+            targets = [str(d) for d in model.directories]
             response = {
                 "status": app_state["status"],
                 "scanning": app_state["scanning"],
