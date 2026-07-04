@@ -29,6 +29,7 @@ const saveResultsBtn = document.getElementById("save-results-btn");
 let currentBrowserPath = "";
 let isScanning = false;
 let resultsData = [];
+let addedPaths = [];
 
 // Initialize Application
 document.addEventListener("DOMContentLoaded", () => {
@@ -78,6 +79,7 @@ async function loadDirectories() {
         const response = await fetch(`${API_BASE}/api/directories`);
         const dirs = await response.json();
         
+        addedPaths = dirs.map(d => d.path);
         directoriesList.innerHTML = "";
         if (dirs.length === 0) {
             directoriesList.innerHTML = `<li class="path-text" style="justify-content: center; opacity: 0.5;">No folders added yet</li>`;
@@ -108,7 +110,9 @@ async function addDirectory(path) {
         });
         const result = await response.json();
         if (result.success) {
-            loadDirectories();
+            await loadDirectories();
+            await browseFolders(currentBrowserPath);
+            showToast("Directory added successfully!");
         } else {
             alert("Error adding path: " + (result.error || "Invalid path"));
         }
@@ -124,7 +128,9 @@ async function removeDirectory(index) {
         });
         const result = await response.json();
         if (result.success) {
-            loadDirectories();
+            await loadDirectories();
+            await browseFolders(currentBrowserPath);
+            showToast("Directory removed.");
         }
     } catch (err) {
         console.error("Failed to remove directory:", err);
@@ -149,10 +155,19 @@ async function browseFolders(path = "") {
 
         folderList.innerHTML = "";
         data.folders.forEach(f => {
+            const isAdded = addedPaths.includes(f.path);
             const li = document.createElement("li");
+            
+            let actionHtml = "";
+            if (isAdded) {
+                actionHtml = `<span class="folder-status added">✓ Added</span>`;
+            } else {
+                actionHtml = `<span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}')">Add</span>`;
+            }
+            
             li.innerHTML = `
                 <span class="folder-name" onclick="browseFolders('${escapeJS(f.path)}')">📁 ${f.name}</span>
-                <span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}')">Add</span>
+                ${actionHtml}
             `;
             folderList.appendChild(li);
         });
@@ -475,4 +490,14 @@ async function saveResults() {
     } catch (err) {
         console.error("Save results failed:", err);
     }
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+    setTimeout(() => {
+        toast.classList.add("hidden");
+    }, 3000);
 }
