@@ -187,7 +187,7 @@ class Directories:
             for file in self._get_files(path, fileclasses=fileclasses, j=j):
                 file_count += 1
                 if not isinstance(j, job.NullJob):
-                    j.set_progress(-1, tr("Collected {} files to scan").format(file_count))
+                    j.set_progress(-1, tr("Scanning {}: Collected {} files...").format(path.name, file_count))
                 yield file
 
     def get_folders(self, folderclass=None, j=job.nulljob):
@@ -203,7 +203,7 @@ class Directories:
             for folder in self._get_folders(from_folder, j):
                 folder_count += 1
                 if not isinstance(j, job.NullJob):
-                    j.set_progress(-1, tr("Collected {} folders to scan").format(folder_count))
+                    j.set_progress(-1, tr("Scanning {}: Collected {} folders...").format(path.name, folder_count))
                 yield folder
 
     def get_state(self, path):

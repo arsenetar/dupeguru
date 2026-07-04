@@ -244,12 +244,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         if path == "/api/status":
+            targets = [str(d.path) for d in model.directories]
             response = {
                 "status": app_state["status"],
                 "scanning": app_state["scanning"],
                 "progress": app_state["progress"],
                 "progress_msg": app_state["progress_msg"],
                 "messages": app_state["messages"],
+                "targets": targets,
             }
             self.wfile.write(json.dumps(response).encode())
 

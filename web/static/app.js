@@ -210,6 +210,14 @@ async function pollProgress() {
             progressBarFill.style.width = `${state.progress}%`;
             progressPercent.textContent = `${state.progress}%`;
             progressDesc.textContent = state.progress_msg || "Scanning...";
+            
+            const targetsDiv = document.getElementById("progress-targets");
+            if (targetsDiv && state.targets && state.targets.length > 0) {
+                targetsDiv.innerHTML = `<strong>Scanning Target(s):</strong><br><span style="opacity: 0.85;">${state.targets.join("<br>")}</span>`;
+            } else if (targetsDiv) {
+                targetsDiv.innerHTML = "";
+            }
+            
             setTimeout(pollProgress, 300);
         } else {
             isScanning = false;
