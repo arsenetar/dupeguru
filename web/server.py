@@ -55,6 +55,24 @@ class WebViewAdapter:
     def set_default(self, key_name, value):
         self.preferences[key_name] = value
 
+    def load_preferences(self, appdata_dir):
+        self.prefs_file = os.path.join(appdata_dir, "web_settings.json")
+        if os.path.exists(self.prefs_file):
+            try:
+                with open(self.prefs_file, "r") as f:
+                    saved = json.load(f)
+                    self.preferences.update(saved)
+            except Exception as e:
+                logging.error(f"Failed to load preferences: {e}")
+
+    def save_preferences(self):
+        if hasattr(self, "prefs_file"):
+            try:
+                with open(self.prefs_file, "w") as f:
+                    json.dump(self.preferences, f, indent=4)
+            except Exception as e:
+                logging.error(f"Failed to save preferences: {e}")
+
     def show_message(self, msg):
         self.state["messages"].append(msg)
         print(f"[Web UI Message]: {msg}")
@@ -105,6 +123,21 @@ model = DupeGuru(web_view)
 # Bind progress view
 progress_view = WebProgressView(app_state)
 model.progress_window.view = progress_view
+
+# Load and synchronize configuration
+web_view.load_preferences(model.appdata)
+
+def sync_preferences_to_model():
+    model.options["mix_file_kind"] = web_view.get_default("MixFileKind", True)
+    model.options["escape_filter_regexp"] = not web_view.get_default("UseRegexp", False)
+    model.options["checkpoint_frequency"] = int(web_view.get_default("CheckpointFrequency", 100))
+    model.options["clean_empty_dirs"] = web_view.get_default("RemoveEmptyFolders", False)
+    model.options["ignore_hardlink_matches"] = web_view.get_default("IgnoreHardlinkMatches", False)
+    model.options["min_match_percentage"] = int(web_view.get_default("FilterHardness", 95))
+    model.options["rehash_ignore_mtime"] = web_view.get_default("RehashIgnoreMTime", False)
+    model.options["include_exists_check"] = web_view.get_default("IncludeExistsCheck", True)
+
+sync_preferences_to_model()
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
@@ -188,6 +221,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             }
             self.wfile.write(json.dumps(response).encode())
 
+        elif path == "/api/config":
+            self.wfile.write(json.dumps(web_view.preferences).encode())
+
         elif path == "/api/directories":
             dirs = []
             for d in model.directories:
@@ -245,7 +281,20 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.end_headers()
 
-        if path == "/api/directories":
+        if path == "/api/config":
+            for k, v in data.items():
+                if k in web_view.preferences:
+                    if isinstance(web_view.preferences[k], bool):
+                        web_view.preferences[k] = bool(v)
+                    elif isinstance(web_view.preferences[k], int):
+                        web_view.preferences[k] = int(v)
+                    else:
+                        web_view.preferences[k] = v
+            web_view.save_preferences()
+            sync_preferences_to_model()
+            self.wfile.write(json.dumps({"success": True, "config": web_view.preferences}).encode())
+
+        elif path == "/api/directories":
             path_str = data.get("path")
             if path_str:
                 path_str = path_str.strip().strip("'\"")
@@ -310,6 +359,29 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             ]
             model._start_job(model.JobType.DELETE, model._do_delete, args=args)
             self.wfile.write(json.dumps({"success": True}).encode())
+
+        elif path == "/api/results/save":
+            filename = data.get("path")
+            if filename:
+                try:
+                    model.save_as(filename)
+                    self.wfile.write(json.dumps({"success": True}).encode())
+                except Exception as e:
+                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+            else:
+                self.wfile.write(json.dumps({"success": False, "error": "Missing filename"}).encode())
+
+        elif path == "/api/results/load":
+            filename = data.get("path")
+            if filename and os.path.exists(filename):
+                try:
+                    model.load_from(filename)
+                    app_state["status"] = "completed"
+                    self.wfile.write(json.dumps({"success": True}).encode())
+                except Exception as e:
+                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+            else:
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing file"}).encode())
 
     def do_DELETE(self):
         parsed_url = urllib.parse.urlparse(self.path)

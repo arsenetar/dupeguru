@@ -22,6 +22,8 @@ const resultsSummary = document.getElementById("results-summary");
 const resultsBody = document.getElementById("results-body");
 const deleteMarkedBtn = document.getElementById("delete-marked-btn");
 const cancelScanBtn = document.getElementById("cancel-scan-btn");
+const loadScanBtn = document.getElementById("load-scan-btn");
+const saveResultsBtn = document.getElementById("save-results-btn");
 
 // Global states
 let currentBrowserPath = "";
@@ -32,6 +34,7 @@ let resultsData = [];
 document.addEventListener("DOMContentLoaded", () => {
     loadDirectories();
     browseFolders();
+    loadConfig();
     setupEventListeners();
     // Regular status polling (for progress sync)
     setInterval(checkScanStatus, 1000);
@@ -64,6 +67,9 @@ function setupEventListeners() {
     startScanBtn.addEventListener("click", startScan);
     deleteMarkedBtn.addEventListener("click", deleteMarked);
     cancelScanBtn.addEventListener("click", cancelScan);
+    loadScanBtn.addEventListener("click", loadScan);
+    saveResultsBtn.addEventListener("click", saveResults);
+    setupConfigListeners();
 }
 
 // 1. Directory List Management
@@ -358,4 +364,107 @@ async function cancelScan() {
 // Helpers
 function escapeJS(str) {
     return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+// Configuration Management
+async function loadConfig() {
+    try {
+        const response = await fetch(`${API_BASE}/api/config`);
+        const config = await response.json();
+        
+        document.getElementById("pref-hardness").value = config.FilterHardness;
+        document.getElementById("pref-hardness-val").innerText = config.FilterHardness + "%";
+        document.getElementById("pref-mix-file-kind").checked = config.MixFileKind;
+        document.getElementById("pref-use-regexp").checked = config.UseRegexp;
+        document.getElementById("pref-ignore-hardlink").checked = config.IgnoreHardlinkMatches;
+        document.getElementById("pref-remove-empty").checked = config.RemoveEmptyFolders;
+        document.getElementById("pref-rehash-ignore-mtime").checked = config.RehashIgnoreMTime;
+        document.getElementById("pref-include-exists").checked = config.IncludeExistsCheck;
+        document.getElementById("pref-checkpoint").value = config.CheckpointFrequency;
+    } catch (err) {
+        console.error("Failed to load config:", err);
+    }
+}
+
+async function saveConfig() {
+    const config = {
+        FilterHardness: parseInt(document.getElementById("pref-hardness").value),
+        MixFileKind: document.getElementById("pref-mix-file-kind").checked,
+        UseRegexp: document.getElementById("pref-use-regexp").checked,
+        IgnoreHardlinkMatches: document.getElementById("pref-ignore-hardlink").checked,
+        RemoveEmptyFolders: document.getElementById("pref-remove-empty").checked,
+        RehashIgnoreMTime: document.getElementById("pref-rehash-ignore-mtime").checked,
+        IncludeExistsCheck: document.getElementById("pref-include-exists").checked,
+        CheckpointFrequency: parseInt(document.getElementById("pref-checkpoint").value) || 100
+    };
+    
+    try {
+        await fetch(`${API_BASE}/api/config`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(config)
+        });
+    } catch (err) {
+        console.error("Failed to save config:", err);
+    }
+}
+
+function setupConfigListeners() {
+    const hardnessSlider = document.getElementById("pref-hardness");
+    const hardnessVal = document.getElementById("pref-hardness-val");
+    hardnessSlider.addEventListener("input", (e) => {
+        hardnessVal.innerText = e.target.value + "%";
+    });
+
+    hardnessSlider.addEventListener("change", saveConfig);
+    document.getElementById("pref-mix-file-kind").addEventListener("change", saveConfig);
+    document.getElementById("pref-use-regexp").addEventListener("change", saveConfig);
+    document.getElementById("pref-ignore-hardlink").addEventListener("change", saveConfig);
+    document.getElementById("pref-remove-empty").addEventListener("change", saveConfig);
+    document.getElementById("pref-rehash-ignore-mtime").addEventListener("change", saveConfig);
+    document.getElementById("pref-include-exists").addEventListener("change", saveConfig);
+    document.getElementById("pref-checkpoint").addEventListener("change", saveConfig);
+}
+
+async function loadScan() {
+    const path = prompt("Enter the absolute file path to a saved .dupegururesults file to load:");
+    if (!path) return;
+    try {
+        const response = await fetch(`${API_BASE}/api/results/load`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ path: path.trim() })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Scan results loaded successfully!");
+            welcomeContainer.classList.add("hidden");
+            resultsContainer.classList.remove("hidden");
+            loadResults();
+        } else {
+            alert("Error loading scan: " + result.error);
+        }
+    } catch (err) {
+        console.error("Load scan failed:", err);
+    }
+}
+
+async function saveResults() {
+    const path = prompt("Enter the absolute file path where you want to save the results (e.g. /path/to/results.dupegururesults):");
+    if (!path) return;
+    try {
+        const response = await fetch(`${API_BASE}/api/results/save`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ path: path.trim() })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Results saved successfully!");
+        } else {
+            alert("Error saving results: " + result.error);
+        }
+    } catch (err) {
+        console.error("Save results failed:", err);
+    }
 }

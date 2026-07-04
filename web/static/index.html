@@ -51,9 +51,58 @@
                 </ul>
             </div>
 
+            <!-- Scan Preferences -->
+            <div class="section-card">
+                <h3>Scan Preferences</h3>
+                <div class="preferences-form">
+                    <div class="pref-group">
+                        <label for="pref-hardness">Filter Hardness</label>
+                        <div class="range-value-container">
+                            <input type="range" id="pref-hardness" min="1" max="100" value="95">
+                            <span id="pref-hardness-val">95%</span>
+                        </div>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-mix-file-kind"> Mix File Kind
+                        </label>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-use-regexp"> Use Regular Expressions
+                        </label>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-ignore-hardlink"> Ignore Hardlinks
+                        </label>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-remove-empty"> Remove Empty Folders
+                        </label>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-rehash-ignore-mtime"> Rehash Ignore MTime
+                        </label>
+                    </div>
+                    <div class="pref-checkbox-group">
+                        <label class="pref-checkbox-label">
+                            <input type="checkbox" id="pref-include-exists"> Exists Check
+                        </label>
+                    </div>
+                    <div class="pref-group">
+                        <label for="pref-checkpoint">Checkpoint Frequency (Files)</label>
+                        <input type="number" id="pref-checkpoint" min="10" max="10000" value="100" class="input-field">
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Controls -->
-            <div class="action-footer">
-                <button id="start-scan-btn" class="btn accent-btn large-btn">Start Duplicate Scan</button>
+            <div class="action-footer" style="display: flex; gap: 8px; width: 100%;">
+                <button id="start-scan-btn" class="btn accent-btn large-btn" style="flex: 1;">Start Duplicate Scan</button>
+                <button id="load-scan-btn" class="btn secondary-btn" style="padding: 10px 16px;">Load Scan</button>
             </div>
         </aside>
 
@@ -79,7 +128,8 @@
                         <h1>Scan Results</h1>
                         <p id="results-summary">No duplicates found yet.</p>
                     </div>
-                    <div class="results-actions">
+                    <div class="results-actions" style="display: flex; gap: 8px;">
+                        <button id="save-results-btn" class="btn secondary-btn" style="padding: 10px 16px;">Save Results</button>
                         <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
                     </div>
                 </header>

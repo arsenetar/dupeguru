@@ -611,3 +611,80 @@ input[type="text"]:focus {
 .hidden {
     display: none !important;
 }
+
+/* Preferences Forms */
+.preferences-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pref-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pref-group label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.range-value-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.range-value-container input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent);
+}
+
+.range-value-container span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 36px;
+    text-align: right;
+}
+
+.pref-checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.pref-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+}
+
+.pref-checkbox-label input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-field {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}

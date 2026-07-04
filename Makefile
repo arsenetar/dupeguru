@@ -59,6 +59,7 @@ help:
 	@echo "  install      Install dupeGuru to the system (controlled by PREFIX/DESTDIR)"
 	@echo "  uninstall    Uninstall dupeGuru from the system"
 	@echo "  package      Create a standalone native executable package for the current OS"
+	@echo "  release-status Show current release version status and changelog alignment"
 
 all: | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
@@ -71,6 +72,9 @@ web: | all
 
 package: | all
 	$(VENV_PYTHON) package.py
+
+release-status:
+	$(VENV_PYTHON) scripts/release_helper.py status
 
 pyc: | env
 	${VENV_PYTHON} -m compileall ${packages}
@@ -139,4 +143,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: help clean normpo mergepot modules i18n reqs run web package pyc install uninstall all
+.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status pyc install uninstall all

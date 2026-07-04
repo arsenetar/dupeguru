@@ -49,9 +49,38 @@ To create packages the following are also needed:
 * debhelper
 
 ### Building with Make
-dupeGuru comes with a makefile that can be used to build and run:
+dupeGuru comes with a Makefile that can be used to build, run, and package the application:
 
-    $ make && make run
+    $ make          # Build all components (C modules, virtualenv, resources)
+    $ make run      # Run the standard Qt Desktop application
+    $ make web      # Start the local REST server and open the Web UI in your browser
+    $ make package  # Build a standalone native executable package for your OS
+    $ make release-status   # View release version alignment status
+
+### Running the HTML Web UI Console
+dupeGuru includes a responsive, dark-mode Web UI that runs a local REST server. To launch the Web Console:
+
+    $ make web
+
+The server starts by default on `http://localhost:8080` and launches your system browser. To start the server manually on a custom port:
+
+    $ ./env/bin/python run_web.py --port 9090
+
+If you install dupeGuru globally using `sudo make install`, you can start the Web UI from anywhere in your terminal by running:
+
+    $ dupeguru-web
+
+### Key Features
+
+#### 1. HTML Web UI Console
+- **Glassmorphic UI**: Clean desktop-like interface optimized for browsers.
+- **Direct Directory Browser**: Walk local paths and target directories for duplicate detection.
+- **Config Management**: Toggle preferences (Filter Hardness, Regexp matching, Ignored Hardlinks, Checkpoints) directly in the sidebar panel.
+- **Save & Load Scans**: Save current results or load previous `.dupegururesults` files.
+
+#### 2. SQLite Database Checkpoints & Resumption
+- **Regular Checkpoints**: dupeGuru flushes metadata to the SQLite cache database at a user-configurable frequency (default: 100 files). This prevents filesystem corruption, particularly on network-mounted drives.
+- **Stop & Resume**: Stopping a scan commits all progress to the cache. Running the scan again on the same folders instantly skips already scanned files and resumes where you left off.
 
 ### Building without Make
 
