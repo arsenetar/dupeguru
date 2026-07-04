@@ -171,6 +171,26 @@ def sync_preferences_to_model():
 
 sync_preferences_to_model()
 
+def save_selected_directories():
+    paths = [str(d.path) for d in model.directories]
+    web_view.set_default("SelectedDirectories", paths)
+    web_view.save_preferences()
+
+def load_selected_directories():
+    stored = web_view.get_default("SelectedDirectories")
+    if stored and isinstance(stored, list):
+        for path_str in stored:
+            if os.path.exists(path_str):
+                try:
+                    from core.directories import AlreadyThereError
+                    model.directories.add_path(Path(path_str))
+                except AlreadyThereError:
+                    pass
+                except Exception as e:
+                    logging.error(f"Failed to restore directory {path_str}: {e}")
+
+load_selected_directories()
+
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
 
@@ -335,6 +355,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 try:
                     from core.directories import AlreadyThereError, InvalidPathError
                     model.directories.add_path(Path(path_str))
+                    save_selected_directories()
                     self.wfile.write(json.dumps({"success": True}).encode())
                 except AlreadyThereError:
                     self.wfile.write(json.dumps({"success": False, "error": "Directory is already in the list"}).encode())
@@ -430,6 +451,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             index = int(query.get("index", [-1])[0])
             if 0 <= index < len(model.directories):
                 del model.directories[index]
+                save_selected_directories()
                 self.wfile.write(json.dumps({"success": True}).encode())
             else:
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid index"}).encode())
