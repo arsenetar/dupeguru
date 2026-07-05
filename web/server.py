@@ -13,9 +13,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from core.app import AppMode, DupeGuru
-from hscommon.gui.base import CompositeView, NoopGUI
-from hscommon.trans import install_gettext_trans_under_qt
+from core.app import DupeGuru  # noqa: E402
+from hscommon.trans import install_gettext_trans_under_qt  # noqa: E402
 
 
 class WebProgressView:
@@ -62,6 +61,7 @@ class WebViewAdapter:
         # Try loading from QSettings (shared with Qt UI)
         try:
             from qt.util import create_qsettings
+
             settings = create_qsettings()
             for key in self.preferences.keys():
                 val = settings.value(key)
@@ -92,6 +92,7 @@ class WebViewAdapter:
         # Try saving to QSettings (shared with Qt UI)
         try:
             from qt.util import create_qsettings
+
             settings = create_qsettings()
             for key, val in self.preferences.items():
                 settings.setValue(key, val)
@@ -162,6 +163,7 @@ model.progress_window.view = progress_view
 # Load and synchronize configuration
 web_view.load_preferences(model.appdata)
 
+
 def sync_preferences_to_model():
     model.options["mix_file_kind"] = web_view.get_default("MixFileKind", True)
     model.options["escape_filter_regexp"] = not web_view.get_default("UseRegexp", False)
@@ -172,12 +174,15 @@ def sync_preferences_to_model():
     model.options["rehash_ignore_mtime"] = web_view.get_default("RehashIgnoreMTime", False)
     model.options["include_exists_check"] = web_view.get_default("IncludeExistsCheck", True)
 
+
 sync_preferences_to_model()
+
 
 def save_selected_directories():
     paths = [str(d) for d in model.directories]
     web_view.set_default("SelectedDirectories", paths)
     web_view.save_preferences()
+
 
 def load_selected_directories():
     stored = web_view.get_default("SelectedDirectories")
@@ -186,11 +191,13 @@ def load_selected_directories():
             if os.path.exists(path_str):
                 try:
                     from core.directories import AlreadyThereError
+
                     model.directories.add_path(Path(path_str))
                 except AlreadyThereError:
                     pass
                 except Exception as e:
                     logging.error(f"Failed to restore directory {path_str}: {e}")
+
 
 load_selected_directories()
 
@@ -299,11 +306,15 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     if entry.is_dir() and not entry.name.startswith("."):
                         contents.append({"name": entry.name, "path": str(entry)})
                 contents.sort(key=lambda x: x["name"].lower())
-                self.wfile.write(json.dumps({
-                    "current": str(p),
-                    "parent": str(p.parent) if p.parent != p else None,
-                    "folders": contents,
-                }).encode())
+                self.wfile.write(
+                    json.dumps(
+                        {
+                            "current": str(p),
+                            "parent": str(p.parent) if p.parent != p else None,
+                            "folders": contents,
+                        }
+                    ).encode()
+                )
             except Exception as e:
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
 
@@ -313,22 +324,26 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 files_data = []
                 for d in g:
                     display_info = model.get_display_info(d, g, delta=False)
-                    files_data.append({
-                        "path": str(d.path),
-                        "name": display_info.get("name", d.name),
-                        "folder": display_info.get("folder_path", str(d.folder_path)),
-                        "size": display_info.get("size", ""),
-                        "mtime": display_info.get("mtime", ""),
-                        "percentage": display_info.get("percentage", ""),
-                        "is_ref": d is g.ref,
-                        "marked": model.results.is_marked(d),
-                        "markable": model.results.is_markable(d),
-                    })
-                groups_data.append({
-                    "id": g_idx,
-                    "percentage": g.percentage,
-                    "files": files_data,
-                })
+                    files_data.append(
+                        {
+                            "path": str(d.path),
+                            "name": display_info.get("name", d.name),
+                            "folder": display_info.get("folder_path", str(d.folder_path)),
+                            "size": display_info.get("size", ""),
+                            "mtime": display_info.get("mtime", ""),
+                            "percentage": display_info.get("percentage", ""),
+                            "is_ref": d is g.ref,
+                            "marked": model.results.is_marked(d),
+                            "markable": model.results.is_markable(d),
+                        }
+                    )
+                groups_data.append(
+                    {
+                        "id": g_idx,
+                        "percentage": g.percentage,
+                        "files": files_data,
+                    }
+                )
             self.wfile.write(json.dumps(groups_data).encode())
 
     def do_POST(self):
@@ -360,18 +375,27 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 path_str = path_str.strip().strip("'\"")
                 try:
                     from core.directories import AlreadyThereError, InvalidPathError
+
                     model.directories.add_path(Path(path_str))
                     save_selected_directories()
                     self.wfile.write(json.dumps({"success": True}).encode())
                 except AlreadyThereError:
-                    self.wfile.write(json.dumps({"success": False, "error": "Directory is already in the list"}).encode())
+                    self.wfile.write(
+                        json.dumps({"success": False, "error": "Directory is already in the list"}).encode()
+                    )
                 except InvalidPathError:
                     import traceback
-                    print(f"InvalidPathError: path_str={repr(path_str)} exists={os.path.exists(path_str)} isdir={os.path.isdir(path_str)}")
+
+                    print(
+                        f"InvalidPathError: path_str={repr(path_str)} "
+                        f"exists={os.path.exists(path_str)} "
+                        f"isdir={os.path.isdir(path_str)}"
+                    )
                     traceback.print_exc()
                     self.wfile.write(json.dumps({"success": False, "error": "Invalid or non-existent path"}).encode())
                 except Exception as e:
                     import traceback
+
                     traceback.print_exc()
                     self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
             else:
@@ -380,7 +404,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/scan":
             if not app_state["scanning"]:
                 if not model.directories.has_any_file():
-                    self.wfile.write(json.dumps({"success": False, "error": "The selected directories contain no scannable file."}).encode())
+                    self.wfile.write(
+                        json.dumps(
+                            {"success": False, "error": "The selected directories contain no scannable file."}
+                        ).encode()
+                    )
                     return
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True
@@ -417,7 +445,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             args = [
                 False,  # link_deleted
                 False,  # use_hardlinks
-                True,   # direct delete (no trash dialog required)
+                True,  # direct delete (no trash dialog required)
             ]
             model._start_job(model.JobType.DELETE, model._do_delete, args=args)
             self.wfile.write(json.dumps({"success": True}).encode())

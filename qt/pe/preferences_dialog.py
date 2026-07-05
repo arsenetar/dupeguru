@@ -48,12 +48,8 @@ class PreferencesDialog(PreferencesDialogBase):
         index = self.details_groupbox_layout.indexOf(self.details_dialog_vertical_titlebar)
         self.details_groupbox_layout.insertWidget(index + 1, self.details_dialog_override_theme_icons)
         self._setupAddCheckbox("details_dialog_viewers_show_scrollbars", tr("Show scrollbars in image viewers"))
-        self.details_dialog_viewers_show_scrollbars.setToolTip(
-            tr(
-                "When the image displayed doesn't fit the viewport, \
-show scrollbars to span the view around"
-            )
-        )
+        self.details_dialog_viewers_show_scrollbars.setToolTip(tr("When the image displayed doesn't fit the viewport, \
+show scrollbars to span the view around"))
         self.details_groupbox_layout.insertWidget(index + 2, self.details_dialog_viewers_show_scrollbars)
 
     def _load(self, prefs, setchecked, section):

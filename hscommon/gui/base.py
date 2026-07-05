@@ -109,4 +109,5 @@ class CompositeView:
                     # Execute on each view and save the last result
                     result = getattr(v, name)(*args, **kwargs)
             return result
+
         return method_proxy

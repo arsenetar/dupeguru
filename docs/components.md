@@ -85,7 +85,7 @@ The [qt/](file:///Users/tinle/src/tinle/opensource/dupeguru/qt) package contains
 The [web/](file:///Users/tinle/src/tinle/opensource/dupeguru/web) package contains the standalone web server and responsive Web Console components.
 
 - **[run_web.py](file:///Users/tinle/src/tinle/opensource/dupeguru/run_web.py)**: The entry point to start the headless HTTP REST server. Parses port configurations and invokes the web listener.
-- **[web/server.py](file:///Users/tinle/src/tinle/opensource/dupeguru/web/server.py)**: Built using the standard library's `http.server.BaseHTTPRequestHandler`. 
+- **[web/server.py](file:///Users/tinle/src/tinle/opensource/dupeguru/web/server.py)**: Built using the standard library's `http.server.BaseHTTPRequestHandler`.
   - Exposes REST API endpoints (`GET /api/status`, `POST /api/scan`, `GET/POST /api/config`, `GET/POST/DELETE /api/directories`).
   - Embeds `WebViewAdapter` representing the core presentation layer.
   - Implements browser non-caching HTTP response headers (`Cache-Control`, `Pragma`, `Expires`).

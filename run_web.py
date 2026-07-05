@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from web.server import start_server
+from web.server import start_server  # noqa: E402
 
 
 def open_browser(url):
@@ -37,7 +37,7 @@ def main():
     args = parser.parse_args()
 
     url = f"http://localhost:{args.port}"
-    
+
     # Spawn browser launcher in a daemon thread so it doesn't block the server boot
     launcher_thread = threading.Thread(target=open_browser, args=(url,), daemon=True)
     launcher_thread.start()

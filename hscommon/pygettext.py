@@ -51,7 +51,6 @@ escapes = []
 
 
 def make_escapes(pass_iso8859):
-    global escapes
     if pass_iso8859:
         # Allow iso-8859 characters to pass through so that e.g. 'msgid
         # "H?he"' would result not result in 'msgid "H\366he"'.  Otherwise we
@@ -72,7 +71,6 @@ def make_escapes(pass_iso8859):
 
 
 def escape(s):
-    global escapes
     s = list(s)
     for i in range(len(s)):
         s[i] = escapes[ord(s[i])]
@@ -302,7 +300,6 @@ class TokenEater:
 
 
 def main(source_files, outpath, keywords=None):
-    global default_keywords
 
     # for holding option values
     class Options:

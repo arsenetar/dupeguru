@@ -33,7 +33,6 @@ dgapp = None
 
 
 def signal_handler(sig, frame):
-    global dgapp
     if dgapp is None:
         return
     if sig in (SIGINT, SIGTERM, SIGQUIT):

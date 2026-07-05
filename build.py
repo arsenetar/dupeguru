@@ -55,7 +55,7 @@ def parse_args():
         dest="modules",
         help="Build the python modules.",
     )
-    (options, args) = parser.parse_args()
+    options, args = parser.parse_args()
     return options
 
 

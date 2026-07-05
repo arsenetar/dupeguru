@@ -9,6 +9,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION_FILE = os.path.join(PROJECT_ROOT, "core", "__init__.py")
 CHANGELOG_FILE = os.path.join(PROJECT_ROOT, "help", "changelog")
 
+
 def get_current_version():
     with open(VERSION_FILE, "r") as f:
         content = f.read()
@@ -17,17 +18,19 @@ def get_current_version():
         raise ValueError("Could not find version in core/__init__.py")
     return match.group(1)
 
+
 def get_changelog_latest_version():
     with open(CHANGELOG_FILE, "r") as f:
         first_line = f.readline().strip()
-    match = re.match(r'===\s*([^\s(]+)', first_line)
+    match = re.match(r"===\s*([^\s(]+)", first_line)
     if not match:
         return None
     return match.group(1)
 
+
 def bump_version(new_version):
     # Validate version format (e.g. 4.3.2)
-    if not re.match(r'^\d+\.\d+\.\d+$', new_version):
+    if not re.match(r"^\d+\.\d+\.\d+$", new_version):
         print(f"Error: version '{new_version}' is not in semantic versioning format (e.g. 4.3.2)")
         sys.exit(1)
 
@@ -42,10 +45,10 @@ def bump_version(new_version):
     # 2. Update help/changelog
     with open(CHANGELOG_FILE, "r") as f:
         changelog_lines = f.readlines()
-    
+
     today = date.today().strftime("%Y-%m-%d")
     header = f"=== {new_version} ({today})\n* New release\n\n"
-    
+
     # Check if the latest version in changelog is already the new version
     latest_version = get_changelog_latest_version()
     if latest_version == new_version:
@@ -55,6 +58,7 @@ def bump_version(new_version):
         with open(CHANGELOG_FILE, "w") as f:
             f.writelines(changelog_lines)
         print(f"Prepended header for {new_version} to help/changelog")
+
 
 def run_checks():
     # 1. Run tests
@@ -69,6 +73,7 @@ def run_checks():
     res = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
     if res.stdout.strip():
         print("Warning: Git working directory is not clean. Commit or stash changes first.")
+
 
 def git_release(new_version):
     # Ensure git workspace is clean
@@ -97,6 +102,7 @@ def git_release(new_version):
     print(f"Release v{new_version} committed and tagged successfully!")
     print("To push to remote, run: git push origin main --tags")
 
+
 def print_help():
     print("dupeGuru Release Helper")
     print("Usage:")
@@ -104,11 +110,12 @@ def print_help():
     print("  python scripts/release_helper.py bump <version>   - Bump version files and prep changelog")
     print("  python scripts/release_helper.py release <version> - Verify tests, bump, commit and tag git release")
 
+
 def main():
     if len(sys.argv) < 2:
         print_help()
         sys.exit(1)
-    
+
     cmd = sys.argv[1]
     if cmd == "status":
         curr = get_current_version()
@@ -131,6 +138,7 @@ def main():
         git_release(sys.argv[2])
     else:
         print_help()
+
 
 if __name__ == "__main__":
     main()

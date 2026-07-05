@@ -127,7 +127,8 @@ def analyze_db(db_path, fmt):
         print("| --- | --- | --- | --- | --- |")
         for ext, stat in sorted(ext_stats.items(), key=lambda x: x[1]["size"], reverse=True)[:15]:
             print(
-                f"| `{ext}` | {stat['count']:,} | {format_size(stat['size'])} | {stat['dupes']:,} | {format_size(stat['reclaimable'])} |"
+                f"| `{ext}` | {stat['count']:,} | {format_size(stat['size'])} | "
+                f"{stat['dupes']:,} | {format_size(stat['reclaimable'])} |"
             )
         print("\n*Showing top 15 extensions by size.*\n")
 

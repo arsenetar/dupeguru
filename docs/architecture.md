@@ -38,7 +38,7 @@ The codebase is divided into three distinct layers:
 Decoupling the Core engine from the PyQt view is done through a dual-layered mechanism:
 
 ### Decoupling Level 1: App Model to Presenters (Pub-Sub)
-The core application state ([core/app.py:DupeGuru](file:///Users/tinle/src/tinle/opensource/dupeguru/core/app.py#L81)) subclasses [hscommon.notify.Broadcaster](file:///Users/tinle/src/tinle/opensource/dupeguru/hscommon/notify.py#L19). 
+The core application state ([core/app.py:DupeGuru](file:///Users/tinle/src/tinle/opensource/dupeguru/core/app.py#L81)) subclasses [hscommon.notify.Broadcaster](file:///Users/tinle/src/tinle/opensource/dupeguru/hscommon/notify.py#L19).
 
 GUI presenter classes (such as [DirectoryTree](file:///Users/tinle/src/tinle/opensource/dupeguru/core/gui/directory_tree.py) and [ResultTable](file:///Users/tinle/src/tinle/opensource/dupeguru/core/gui/result_table.py)) subclass [hscommon.notify.Listener](file:///Users/tinle/src/tinle/opensource/dupeguru/hscommon/notify.py#L41).
 - Presenters register themselves with the core application.
@@ -71,7 +71,7 @@ sequenceDiagram
     QM->>QP: super().__init__(model=ResultTable)
     QP->>QV: setModel(self)
     QP->>RT: view = self (Binds as Presenter View)
-    
+
     Note over QV,DG: 2. View requests data to render cells
     QV->>QM: data(index, role)
     QM->>QP: data(index, role)

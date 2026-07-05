@@ -5,7 +5,7 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --text-primary: #e6e8f0;
     --text-secondary: #9aa0b9;
-    
+
     --primary: #5c67f2;
     --primary-hover: #4b55e3;
     --accent: #00cec9;
@@ -13,7 +13,7 @@
     --danger: #ff7675;
     --danger-hover: #e17055;
     --success: #55efc4;
-    
+
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.35);
     --radius-sm: 6px;

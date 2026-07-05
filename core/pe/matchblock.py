@@ -172,15 +172,18 @@ def async_compare(ref_ids, other_ids, dbname, threshold, picinfo, match_rotated=
 def getmatches(
     pictures, cache_path, threshold, match_scaled=False, match_rotated=False, checkpoint_frequency=100, j=job.nulljob
 ):
+    async_results = []
+    comparisons_to_do = []
+
     def get_picinfo(p):
         if match_scaled:
             return ((None, None), p.is_ref)
         else:
             return (p.dimensions, p.is_ref)
 
-    def collect_results(collect_all=False):
+    def collect_results(total_comparisons, collect_all=False):
         # collect results and wait until the queue is small enough to accomodate a new results.
-        nonlocal async_results, matches, comparison_count, comparisons_to_do
+        nonlocal matches, comparison_count
         limit = 0 if collect_all else RESULTS_QUEUE_LIMIT
         while len(async_results) > limit:
             ready, working = extract(lambda r: r.ready(), async_results)
@@ -191,7 +194,7 @@ def getmatches(
         # About the NOQA below: I think there's a bug in pyflakes. To investigate...
         progress_msg = tr("Performed %d/%d chunk matches") % (
             comparison_count,
-            len(comparisons_to_do),
+            total_comparisons,
         )  # NOQA
         j.set_progress(comparison_count, progress_msg)
 
@@ -228,8 +231,8 @@ def getmatches(
                 other_ids = None
             args = (ref_ids, other_ids, cache_path, threshold, picinfo, match_rotated)
             async_results.append(pool.apply_async(async_compare, args))
-            collect_results()
-        collect_results(collect_all=True)
+            collect_results(len(comparisons_to_do))
+        collect_results(len(comparisons_to_do), collect_all=True)
     except MemoryError:
         # Rare, but possible, even in 64bit situations (ref #264). What do we do now? We free us
         # some wiggle room, log about the incident, and stop matching right here. We then process

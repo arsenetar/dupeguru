@@ -78,7 +78,7 @@ async function loadDirectories() {
     try {
         const response = await fetch(`${API_BASE}/api/directories?_t=${Date.now()}`);
         const dirs = await response.json();
-        
+
         addedPaths = dirs.map(d => d.path);
         directoriesList.innerHTML = "";
         if (dirs.length === 0) {
@@ -143,7 +143,7 @@ async function browseFolders(path = "") {
         const url = path ? `${API_BASE}/api/browse?path=${encodeURIComponent(path)}&_t=${Date.now()}` : `${API_BASE}/api/browse?_t=${Date.now()}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data.error) {
             console.error("Browse error:", data.error);
             return;
@@ -157,14 +157,14 @@ async function browseFolders(path = "") {
         data.folders.forEach(f => {
             const isAdded = addedPaths.includes(f.path);
             const li = document.createElement("li");
-            
+
             let actionHtml = "";
             if (isAdded) {
                 actionHtml = `<span class="folder-status added">✓ Added</span>`;
             } else {
                 actionHtml = `<span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}')">Add</span>`;
             }
-            
+
             li.innerHTML = `
                 <span class="folder-name" onclick="browseFolders('${escapeJS(f.path)}')">📁 ${f.name}</span>
                 ${actionHtml}
@@ -220,19 +220,19 @@ async function pollProgress() {
     try {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
-        
+
         if (state.status === "scanning") {
             progressBarFill.style.width = `${state.progress}%`;
             progressPercent.textContent = `${state.progress}%`;
             progressDesc.textContent = state.progress_msg || "Scanning...";
-            
+
             const targetsDiv = document.getElementById("progress-targets");
             if (targetsDiv && state.targets && state.targets.length > 0) {
                 targetsDiv.innerHTML = `<strong>Scanning Target(s):</strong><br><span style="opacity: 0.85;">${state.targets.join("<br>")}</span>`;
             } else if (targetsDiv) {
                 targetsDiv.innerHTML = "";
             }
-            
+
             setTimeout(pollProgress, 300);
         } else {
             isScanning = false;
@@ -251,7 +251,7 @@ async function loadResults() {
     try {
         const response = await fetch(`${API_BASE}/api/results?_t=${Date.now()}`);
         resultsData = await response.json();
-        
+
         renderResults();
     } catch (err) {
         console.error("Load results failed:", err);
@@ -266,7 +266,7 @@ function renderResults() {
     let totalGroups = resultsData.length;
     let totalFiles = 0;
     let markedCount = 0;
-    
+
     if (totalGroups === 0) {
         resultsSummary.textContent = "No duplicates found.";
         resultsBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 40px; color: var(--text-secondary);">Your scan completed. No duplicate files were found!</td></tr>`;
@@ -292,7 +292,7 @@ function renderResults() {
                 row.className = "ref-row";
             }
 
-            const checkboxHtml = file.is_ref 
+            const checkboxHtml = file.is_ref
                 ? `<span style="font-size: 0.75rem; padding: 2px 6px; background: rgba(85, 239, 196, 0.15); border-radius: 4px;">REF</span>`
                 : `
                     <label class="checkbox-container">
@@ -394,7 +394,7 @@ async function loadConfig() {
     try {
         const response = await fetch(`${API_BASE}/api/config?_t=${Date.now()}`);
         const config = await response.json();
-        
+
         document.getElementById("pref-hardness").value = config.FilterHardness;
         document.getElementById("pref-hardness-val").innerText = config.FilterHardness + "%";
         document.getElementById("pref-mix-file-kind").checked = config.MixFileKind;
@@ -420,7 +420,7 @@ async function saveConfig() {
         IncludeExistsCheck: document.getElementById("pref-include-exists").checked,
         CheckpointFrequency: parseInt(document.getElementById("pref-checkpoint").value) || 100
     };
-    
+
     try {
         await fetch(`${API_BASE}/api/config`, {
             method: "POST",

@@ -192,7 +192,7 @@ graph TD
     end
 ```
 
-1. **Exporting (Save)**: 
+1. **Exporting (Save)**:
    - Invoking "Save Results" calls `model.results.export_to_file(destination_path)`.
    - The engine serializes the matching scan configuration (active options, filter criteria) and the lists of duplicate groups into a `.dupegururesults` file.
 2. **Importing (Load)**:

@@ -158,9 +158,7 @@ class ExcludeListDialog(QDialog):
         self.table.refresh()
 
     def display_help_message(self):
-        self.app.show_message(
-            tr(
-                """\
+        self.app.show_message(tr("""\
 These (case sensitive) python regular expressions will filter out files during scans.<br>\
 Directores will also have their <strong>default state</strong> set to Excluded \
 in the Directories tab if their name happens to match one of the selected regular expressions.<br>\
@@ -173,6 +171,4 @@ You can test the regular expression with the "test string" button after pasting 
 <code>C:\\\\User\\My Pictures\\test.png</code><br><br>
 Matching regular expressions will be highlighted.<br>\
 If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>\
-Directories and files starting with a period '.' are filtered out by default.<br><br>"""
-            )
-        )
+Directories and files starting with a period '.' are filtered out by default.<br><br>"""))

@@ -193,10 +193,7 @@ def package_windows():
     hardcoded = "C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe"
     if op.exists(hardcoded):
         makensis = f'"{hardcoded}"'
-    cmd = (
-        f"{makensis} "
-        "/DVERSIONMAJOR={0} /DVERSIONMINOR={1} /DVERSIONPATCH={2} /DBITS={3} setup.nsi"
-    )
+    cmd = f"{makensis} " "/DVERSIONMAJOR={0} /DVERSIONMINOR={1} /DVERSIONPATCH={2} /DBITS={3} setup.nsi"
     print_and_do(cmd.format(version_array[0], version_array[1], version_array[2], bits))
 
 
