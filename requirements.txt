@@ -2,8 +2,8 @@
 #    uv pip compile pyproject.toml -o requirements.txt
 distro==1.9.0
     # via dupeguru (pyproject.toml)
-mutagen==1.47.0; python_version < '3.9'
-mutagen==1.48.1; python_version >= '3.9'
+mutagen==1.47.0; python_version < '3.10'
+mutagen==1.48.1; python_version >= '3.10'
     # via dupeguru (pyproject.toml)
 pyqt5==5.15.11
     # via dupeguru (pyproject.toml)

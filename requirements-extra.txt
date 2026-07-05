@@ -36,8 +36,8 @@ markupsafe==3.0.3
     # via jinja2
 mccabe==0.7.0
     # via flake8
-mutagen==1.47.0; python_version < '3.9'
-mutagen==1.48.1; python_version >= '3.9'
+mutagen==1.47.0; python_version < '3.10'
+mutagen==1.48.1; python_version >= '3.10'
     # via dupeguru (pyproject.toml)
 mypy-extensions==1.1.0
     # via black
