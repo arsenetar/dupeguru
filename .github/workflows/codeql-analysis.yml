@@ -3,9 +3,10 @@ name: "CodeQL"
 on:
   push:
     branches: [master]
+    tags: ['v*']
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [master]
+  workflow_dispatch:
   schedule:
     - cron: "24 20 * * 2"
 
@@ -47,3 +48,18 @@ jobs:
       # Analysis
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # v4.31.9
+
+  dependency-audit:
+    name: Dependency Audit (SCA)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
+          pip-audit -r requirements.txt -r requirements-extra.txt
