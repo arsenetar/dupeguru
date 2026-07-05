@@ -1,7 +1,10 @@
-# dupeGuru
+# dupeGuru (Fork)
+
+> [!NOTE]
+> This repository is a customized fork of the original [dupeGuru](https://github.com/arsenetar/dupeguru). It introduces cross-platform configuration file standardization, a robust headless server, and a fully responsive HTML Web Console client for headless/remote execution.
 
 [dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
-a system. It is written mostly in Python 3 and uses [qt](https://www.qt.io/) for the UI.
+a system. It is written mostly in Python 3 and uses [qt](https://www.qt.io/) for the UI or a modern HTML Web client for server execution.
 
 ## Current status
 Still looking for additional help especially with regards to:
