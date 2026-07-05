@@ -59,6 +59,7 @@ help:
 	@echo "  install      Install dupeGuru to the system (controlled by PREFIX/DESTDIR)"
 	@echo "  uninstall    Uninstall dupeGuru from the system"
 	@echo "  package      Create a standalone native executable package for the current OS"
+	@echo "  tag          Create tag for a release; Example: make tag TAG=1.2.3"
 	@echo "  release-status Show current release version status and changelog alignment"
 
 all: | env i18n modules qt/dg_rc.py
