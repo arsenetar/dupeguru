@@ -12,13 +12,13 @@ Still looking for additional help especially with regards to:
 
 ## Contents of this folder
 
-This folder contains the source for dupeGuru. Its documentation is in `help`, but is also
-[available online][documentation] in its built form. Here's how this source tree is organized:
+This folder contains the source for dupeGuru. Its user documentation is in `help`, and its system-level developer documentation is in `docs`. Here's how this source tree is organized:
 
 * core: Contains the core logic code for dupeGuru. It's Python code.
 * qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
+* docs: Contains system-level developer documentation. See the **[Getting Started Guide](file:///Users/tinle/src/tinle/opensource/dupeguru/docs/getting_started.md)** or the **[System Documentation Index](file:///Users/tinle/src/tinle/opensource/dupeguru/docs/index.md)**.
 * images: Images used by the different UI codebases.
-* pkg: Skeleton files required to create different packages
+* pkg: Skeleton files required to create different packages.
 * help: Help document, written for Sphinx.
 * locale: .po files for localization.
 * hscommon: A collection of helpers used across HS applications.
