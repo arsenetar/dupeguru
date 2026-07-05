@@ -60,7 +60,8 @@ pyflakes==3.4.0
     # via flake8
 pygments==2.20.0
     # via sphinx
-pyinstaller==5.13.2
+pyinstaller>=5.13.2; python_version < '3.13'
+pyinstaller>=6.10.0; python_version >= '3.13'
     # via dupeguru (pyproject.toml)
 pyinstaller-hooks-contrib==2026.6
     # via pyinstaller

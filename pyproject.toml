@@ -39,7 +39,7 @@ dev = [
     "pytest>=7,<8",
     "flake8",
     "black",
-    "pyinstaller>=5.6,<6.0; sys_platform != 'linux'",
+    "pyinstaller>=5.6; sys_platform != 'linux'",
     "sphinx>=5.3.0,<8.0.0",
     "polib>=1.1.0,<2.0.0",
 ]
