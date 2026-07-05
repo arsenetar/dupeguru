@@ -76,6 +76,19 @@ package: | all
 release-status:
 	$(VENV_PYTHON) scripts/release_helper.py status
 
+tag:
+	@if [ -z "$(TAG)" ]; then \
+		printf "Enter version for release tag (e.g., 4.3.2): "; \
+		read tag_val; \
+	else \
+		tag_val="$(TAG)"; \
+	fi; \
+	if [ -z "$$tag_val" ]; then \
+		echo "Error: Release version cannot be empty."; \
+		exit 1; \
+	fi; \
+	$(VENV_PYTHON) scripts/release_helper.py release $$tag_val
+
 pyc: | env
 	${VENV_PYTHON} -m compileall ${packages}
 
@@ -143,4 +156,4 @@ clean:
 	-rm locale/*/LC_MESSAGES/*.mo
 	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status pyc install uninstall all
+.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all
