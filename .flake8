@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    env,
+    .tox,
+    help,
+    qt/dg_rc.py,
+    pkg
