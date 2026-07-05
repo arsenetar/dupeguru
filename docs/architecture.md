@@ -106,3 +106,44 @@ While business logic remains abstract, certain operations require toolkit-specif
    core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
    ```
 3. The core engine is then free to instantiate `PLAT_SPECIFIC_PHOTO_CLASS` to leverage Qt-based image codecs (`QImageReader`, `QImage`) without directly importing any GUI libraries inside the `core` layer.
+
+---
+
+## 5. Headless Presenter Adaptation & MRO Safety
+
+To support running in remote or headless environments without PyQt5 dependencies loaded (such as via the Web Console server), dupeGuru has been refactored to support **headless execution mode**:
+
+1. **Diamond MRO Mismatches**: Python's Method Resolution Order (MRO) can trigger crashes if multiple inheritance trees attempt to resolve PyQt-reliant parent classes in a non-GUI execution thread. Presenters like `DupeGuruGUIObject` in [core/gui/base.py](file:///Users/tinle/src/tinle/opensource/dupeguru/core/gui/base.py) dynamically delegate view attributes.
+2. **Fallback to NoopGUI**: When running headlessly, the view object is injected as an instance of `NoopGUI` (or `WebViewAdapter`). Any GUI protocol method invoked by core presenters (e.g. `self.view.refresh()`) is intercepted and bypassed cleanly rather than throwing `AttributeError`.
+
+---
+
+## 6. HTML Web UI & REST Server Architecture
+
+The Web Console introduces a lightweight, robust client-server architecture built on top of the generic `Presenter` layer:
+
+```
+┌──────────────────────────────────────────────┐
+│                  HTML Web UI                 │
+│      (HTML, Vanilla CSS, JS in web/static/)  │
+└──────────────────────┬───────────────────────┘
+                       │ (Ajax / Fetch API with cache busters)
+                       ▼
+┌──────────────────────────────────────────────┐
+│               HTTP REST Server               │
+│       (Python Web Server in web/server.py)   │
+└──────────────────────┬───────────────────────┘
+                       │ (WebViewAdapter and pulse_loop)
+                       ▼
+┌──────────────────────────────────────────────┐
+│             Generic Presenters               │
+│         (core/app.py & core/gui/)            │
+└──────────────────────────────────────────────┘
+```
+
+### Component Structure
+1. **REST API Handler (`web/server.py`)**: Runs a standard library HTTP server that handles API routes (`GET /api/status`, `POST /api/scan`, `GET/POST /api/config`, `POST /api/directories`).
+2. **WebViewAdapter**: Implements the Core View Protocol, translating core notifications (e.g., scan progress, file list changes) into structured JSON updates written to a global `app_state` dictionary.
+3. **Background Pulse Loop**: A background thread continuously runs `model.progress_window.pulse()` during scans, updating the active thread states and resetting the job runner cleanly to `idle` upon completion or cancellation.
+4. **Cache-Buster Strategy**: Both HTTP header controls (`Cache-Control: no-store`) and client-side epoch queries (`?_t=timestamp`) are implemented to prevent web browsers from caching dynamic status or target directory updates.
+5. **Static Web UI Client (`web/static/`)**: A responsive UI using Vanilla CSS and JavaScript. It queries the REST API, lists scannable directories with real-time `✓ Added` badges, renders progress bars, and displays glassmorphic toast alerts.

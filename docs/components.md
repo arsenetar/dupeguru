@@ -77,3 +77,25 @@ The [qt/](file:///Users/tinle/src/tinle/opensource/dupeguru/qt) package contains
 - **[qt/tree_model.py](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/tree_model.py)**: Adapts core presenter tree structures (`GUITree`) to Qt's `QAbstractItemModel` interface.
 - **[qt/results_model.py](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/results_model.py)**: Connects standard duplicate list presenters to the `ResultWindow` `QTableView`.
 - **[qt/directories_dialog.py](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/directories_dialog.py)**: Dialog widget displaying scannable paths, allowing folders to be dragged-and-dropped and scan modes to be configured.
+
+---
+
+## 5. HTML Web Console & REST Server Components (`web/`)
+
+The [web/](file:///Users/tinle/src/tinle/opensource/dupeguru/web) package contains the standalone web server and responsive Web Console components.
+
+- **[run_web.py](file:///Users/tinle/src/tinle/opensource/dupeguru/run_web.py)**: The entry point to start the headless HTTP REST server. Parses port configurations and invokes the web listener.
+- **[web/server.py](file:///Users/tinle/src/tinle/opensource/dupeguru/web/server.py)**: Built using the standard library's `http.server.BaseHTTPRequestHandler`. 
+  - Exposes REST API endpoints (`GET /api/status`, `POST /api/scan`, `GET/POST /api/config`, `GET/POST/DELETE /api/directories`).
+  - Embeds `WebViewAdapter` representing the core presentation layer.
+  - Implements browser non-caching HTTP response headers (`Cache-Control`, `Pragma`, `Expires`).
+- **[web/static/index.html](file:///Users/tinle/src/tinle/opensource/dupeguru/web/static/index.html)**: The modern Web Console layout, containing the folders browser, targets sidebar list, scan progress tracker, preference forms, results table, and the glassmorphic toast notification container.
+- **[web/static/app.css](file:///Users/tinle/src/tinle/opensource/dupeguru/web/static/app.css)**: A custom Vanilla CSS styling system. Implements colors, dark-mode styling, cards layout, glassmorphism, responsive grids, and fade/slide animations.
+- **[web/static/app.js](file:///Users/tinle/src/tinle/opensource/dupeguru/web/static/app.js)**: Client-side JS application coordinating AJAX network fetch calls with cache busters (`?_t=timestamp`), rendering dynamic folder checkmarks (`✓ Added`), polling status updates, updating progress bars, and rendering duplicate matches.
+
+---
+
+## 6. Automation & Maintenance Scripts (`scripts/`)
+
+- **[scripts/release_helper.py](file:///Users/tinle/src/tinle/opensource/dupeguru/scripts/release_helper.py)**: An automated release utility to check release readiness, run unit tests, bump metadata versions, update the changelog with today's date, and compile Git tags.
+- **[scripts/migrate_config.py](file:///Users/tinle/src/tinle/opensource/dupeguru/scripts/migrate_config.py)**: A migration script designed to read legacy macOS defaults lists and web settings JSON files, merge them, write them to the new standard location (`~/.config/dupeGuru/settings.ini`), and cleanly delete old files.

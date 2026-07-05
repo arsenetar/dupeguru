@@ -6,29 +6,40 @@ This document traces the data pipelines, control flow, and lifecycles of **dupeG
 
 ## 1. Application Bootstrap & Initialization
 
-When dupeGuru starts, control flows from the command line wrapper into the PyQt user interface and then sets up the core engine.
+dupeGuru supports two independent boot paths depending on the desired interface mode:
 
 ```mermaid
 graph TD
-    A[run.py: main] --> B[Create QApplication]
-    B --> C[Load QSettings & Locale]
-    C --> D[Instantiate qt/app.py: DupeGuru]
-    D --> E[Instantiate core/app.py: DupeGuruModel]
-    E --> F[Connect core/fs.py: FilesDB to hash_cache.db]
-    E --> G[Register core/gui UI Presenters]
-    D --> H[Show Directories Dialog]
+    subgraph PyQt Desktop Bootstrap
+        A1[run.py: main] --> B1[Create QApplication]
+        B1 --> C1[Load QSettings from ~/.config/dupeGuru/settings.ini]
+        C1 --> D1[Instantiate qt/app.py: DupeGuru]
+        D1 --> E1[Instantiate core/app.py: DupeGuruModel]
+        E1 --> F1[Connect core/fs.py: FilesDB to hash_cache.db]
+        D1 --> G1[Show Qt Directories Dialog]
+    end
+
+    subgraph Web Console Bootstrap
+        A2[run_web.py: main] --> B2[Instantiate web/server.py: WebServer]
+        B2 --> C2[Load QSettings from ~/.config/dupeGuru/settings.ini]
+        C2 --> D2[Instantiate core/app.py: DupeGuruModel]
+        D2 --> E2[Connect core/fs.py: FilesDB to hash_cache.db]
+        D2 --> F2[Bind WebViewAdapter and load SelectedDirectories]
+        B2 --> G2[Start HTTP Listener & Background pulse_loop]
+    end
 ```
 
-1. **Bootstrap (`run.py`)**:
-   - Instantiates `QApplication`.
-   - Sets organization properties and loads local settings using [create_qsettings()](file:///Users/tinle/src/tinle/opensource/dupeguru/run.py#L55).
-   - Installs localized text maps using [install_gettext_trans_under_qt()](file:///Users/tinle/src/tinle/opensource/dupeguru/run.py#L58).
-   - Instantiates the main Qt application class [qt/app.py:DupeGuru](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/app.py#L44).
-2. **Core Binding**:
-   - `qt/app.py:DupeGuru` instantiates [core/app.py:DupeGuru](file:///Users/tinle/src/tinle/opensource/dupeguru/core/app.py#L81) (known as the `model`).
-   - The core application initializes the file cache SQLite connection: `fs.filesdb.connect(hash_cache_file)`.
-   - The core registers UI presenter listeners (e.g. `DirectoryTree`, `StatsLabel`, `DetailsPanel`).
-   - PyQt creates the layout, mapping presenters to views (e.g., [DirectoriesDialog](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/directories_dialog.py) and [ResultWindow](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/result_window.py)).
+### 1.1 PyQt Desktop Bootstrap (`run.py`)
+1. **Application Init**: Instantiates a PyQt `QApplication`, registers organization settings, and installs translation maps.
+2. **Presenter Connection**: Instantiates the core model class [core/app.py:DupeGuru](file:///Users/tinle/src/tinle/opensource/dupeguru/core/app.py#L81) which boots the SQLite filesystem database (`hash_cache.db`).
+3. **Presenter-View Mapping**: Instantiates and binds GUI presenter listeners (e.g. `DirectoryTree`, `ResultTable`) to concrete Qt views.
+
+### 1.2 Web Console Bootstrap (`run_web.py` & `web/server.py`)
+1. **Server Setup**: Starts an HTTP server listening on the configured port.
+2. **Decoupled View Injection**: Instantiates the core model. Because we are headlessly booting:
+   - Presenter classes fall back to the Diamond-MRO safe `NoopGUI` interface to avoid PyQt errors in worker threads.
+   - The `/api` router registers a custom `WebViewAdapter` to capture model notifications.
+3. **Configuration & Restore**: Reads the standard macOS/Unix config file (`~/.config/dupeGuru/settings.ini`), restores any directories previously saved in `SelectedDirectories`, and starts the async progress `pulse_loop` daemon thread.
 
 ---
 
@@ -36,17 +47,41 @@ graph TD
 
 Before scanning, the user adds target folders and configures their directory states:
 
-1. **Path Addition**:
-   - Dragging a folder into the UI triggers `self.app.model.add_directory(path)`.
-   - The path is validated and appended to [core/directories.py:Directories](file:///Users/tinle/src/tinle/opensource/dupeguru/core/directories.py#L47).
+```mermaid
+graph TD
+    subgraph Config Migration & Load
+        M1[Legacy Plist / JSON Files] --> M2[scripts/migrate_config.py]
+        M2 --> M3[Write unified settings.ini to ~/.config/dupeGuru/]
+    end
+
+    subgraph Directory Addition & Sync
+        D1[User selects folder in UI / Web Console] --> D2[model.directories.add_path]
+        D2 --> D3[Calculate default state: Exclude checks]
+        D2 --> D4[save_selected_directories: Write key to settings.ini]
+        D2 --> D5[Broadcast directories_changed]
+        D5 --> D6[Web UI updates addedPaths list & toggles ✓ Added indicator]
+    end
+```
+
+### 2.1 Configuration Migration & Standard Path
+To achieve multi-platform consistency and dry configuration principles:
+1. On Unix/macOS operating systems, dupeGuru stores preferences inside `~/.config/dupeGuru/settings.ini`.
+2. A startup script `migrate_config.py` merges native Apple plist defaults and old web settings JSON configurations into the new INI path, deleting legacy backups upon completion.
+
+### 2.2 Path Addition & Validation
+1. **Model Registration**: Adding a path (via UI drag-and-drop or Web Console selection) calls `model.directories.add_path(path)`:
+   - Validates existence (raises `InvalidPathError` if path doesn't exist).
+   - Prevents nested duplication (raises `AlreadyThereError` if path is already included or has a parent in the list).
 2. **Default State Evaluation**:
    - For each added path, the system assigns a default [DirectoryState](file:///Users/tinle/src/tinle/opensource/dupeguru/core/directories.py#L26):
      - If the path matches any regular expression in the [ExcludeList](file:///Users/tinle/src/tinle/opensource/dupeguru/core/exclude.py#L62) (e.g. `.git/`, `$Recycle.Bin`, `.DS_Store`), its state is set to `EXCLUDED`.
      - Otherwise, its state is set to `NORMAL`.
-   - The user can manually toggle a folder's state to `REFERENCE` (meaning files in this folder are scannable but cannot be deleted) or `EXCLUDED` (skipped entirely).
-3. **Change Notification**:
-   - The core broadcasts a `directories_changed` message.
-   - Presenter updates its tree state and refreshes the [DirectoriesModel](file:///Users/tinle/src/tinle/opensource/dupeguru/qt/directories_model.py) in PyQt to re-render the paths.
+   - The user can manually toggle a folder's state to `REFERENCE` (scannable but protected from deletion) or `EXCLUDED` (skipped).
+
+### 2.3 Selected Directories Persistence & UI Toggle
+1. **Settings Sync**: When paths are added or removed, `save_selected_directories()` serializes the active list of strings to `SelectedDirectories` inside `QSettings` and writes it to disk.
+2. **Change Broadcast**: The core broadcasts a `directories_changed` message.
+3. **Web UI Indicators**: The Web client receives the update, recalculates its active target directories flow, and immediately updates the folder browser to render a green `✓ Added` status badge, disabling further duplicate addition actions for that directory.
 
 ---
 
@@ -135,3 +170,32 @@ When the user interacts with the duplicates (e.g. deleting them):
      - If `link_deleted` is active, it creates a link pointing from the deleted path to the reference file (`os.link` or `os.symlink`).
    - If an error occurs, it is logged and appended to `self.problem_dialog` for user notification.
    - Once complete, results are refreshed, and the UI updates to show the remaining files.
+
+---
+
+## 5. Results Serialization Flow (Save & Load Scans)
+
+Both the PyQt UI and the Web Console support saving scan results to disk and reloading them later:
+
+```mermaid
+graph TD
+    subgraph Exporting Scan Results
+        E1[User triggers Save Results] --> E2[model.results.export_to_file]
+        E2 --> E3[Serialize duplicate groups to .dupegururesults file]
+    end
+
+    subgraph Importing Scan Results
+        I1[User selects .dupegururesults file] --> I2[model.results.import_from_file]
+        I2 --> I3[Parse and rebuild duplicate groups structures]
+        I3 --> I4[Broadcast results_changed]
+        I4 --> I5[Web UI / Qt Table view updates with loaded matches]
+    end
+```
+
+1. **Exporting (Save)**: 
+   - Invoking "Save Results" calls `model.results.export_to_file(destination_path)`.
+   - The engine serializes the matching scan configuration (active options, filter criteria) and the lists of duplicate groups into a `.dupegururesults` file.
+2. **Importing (Load)**:
+   - Invoking "Load Scan" calls `model.results.import_from_file(source_path)`.
+   - The engine validates and parses the scan results file, repopulates `model.results.groups`, and broadcasts `results_changed`.
+   - The View layer (either Qt `ResultWindow` or Web UI) picks up the broadcast and immediately renders the loaded scan duplicate table.
