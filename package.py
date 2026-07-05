@@ -188,9 +188,13 @@ def package_windows():
     )
     # remove version info file
     os.remove("win_version_info.txt")
-    # Call NSIS (TODO update to not use hardcoded path)
+    # Call NSIS
+    makensis = "makensis"
+    hardcoded = "C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe"
+    if op.exists(hardcoded):
+        makensis = f'"{hardcoded}"'
     cmd = (
-        '"C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe" '
+        f"{makensis} "
         "/DVERSIONMAJOR={0} /DVERSIONMINOR={1} /DVERSIONPATCH={2} /DBITS={3} setup.nsi"
     )
     print_and_do(cmd.format(version_array[0], version_array[1], version_array[2], bits))
