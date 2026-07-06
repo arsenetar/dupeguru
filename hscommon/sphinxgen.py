@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 from typing import Callable, Dict, Union
 
-from sphinx.cmd.build import build_main as sphinx_build
+# sphinx import deferred to gen() function
 
 from hscommon.build import filereplace, read_changelog_file
 
@@ -70,6 +70,8 @@ def gen(
         conf_out = Path(basepath, "conf.py")
         filereplace(confpath, conf_out, **confrepl)
     # Call the sphinx_build function, which is the same as doing sphinx-build from cli
+    from sphinx.cmd.build import build_main as sphinx_build
+
     try:
         sphinx_build([str(basepath), str(destpath)])
     except SystemExit:
