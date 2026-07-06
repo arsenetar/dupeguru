@@ -23,7 +23,8 @@ distro==1.9.0
     # via dupeguru (pyproject.toml)
 docutils==0.21.2; python_version >= '3.9'
     # via sphinx
-flake8==7.3.0
+flake8==7.1.2; python_version < '3.9'
+flake8==7.3.0; python_version >= '3.9'
     # via dupeguru (pyproject.toml)
 idna==3.18; python_version >= '3.9'
     # via requests
