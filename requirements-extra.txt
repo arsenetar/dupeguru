@@ -78,7 +78,8 @@ pyinstaller-hooks-contrib==2026.6
     # via pyinstaller
 pyqt5==5.15.11; sys_platform != 'linux'
     # via dupeguru (pyproject.toml)
-pyqt5-qt5==5.15.19; sys_platform != 'linux'
+pyqt5-qt5==5.15.2; sys_platform == 'win32'
+pyqt5-qt5==5.15.19; sys_platform == 'darwin'
     # via pyqt5
 pyqt5-sip==12.15.0; python_version < '3.10' and sys_platform != 'linux'
 pyqt5-sip==12.18.0; python_version >= '3.10' and sys_platform != 'linux'
