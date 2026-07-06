@@ -70,7 +70,7 @@ pyqt5==5.15.11
     # via dupeguru (pyproject.toml)
 pyqt5-qt5==5.15.19
     # via pyqt5
-pyqt5-sip==12.17.1; python_version < '3.10'
+pyqt5-sip==12.15.0; python_version < '3.10'
 pyqt5-sip==12.18.0; python_version >= '3.10'
     # via pyqt5
 pytest==7.4.4
