@@ -30,7 +30,8 @@ idna==3.18; python_version >= '3.9'
     # via requests
 imagesize==2.0.0; python_version >= '3.9'
     # via sphinx
-iniconfig==2.3.0
+iniconfig==2.0.0; python_version < '3.9'
+iniconfig==2.3.0; python_version >= '3.9'
     # via pytest
 jinja2==3.1.6; python_version >= '3.9'
     # via sphinx
