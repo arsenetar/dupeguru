@@ -52,7 +52,8 @@ packaging==26.2
     #   pyinstaller-hooks-contrib
     #   pytest
     #   sphinx
-pathspec==1.1.1
+pathspec==0.12.1; python_version < '3.9'
+pathspec==1.1.1; python_version >= '3.9'
     # via black
 platformdirs==4.10.0
     # via black
