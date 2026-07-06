@@ -55,8 +55,8 @@ packaging==26.2
 pathspec==0.12.1; python_version < '3.9'
 pathspec==1.1.1; python_version >= '3.9'
     # via black
-platformdirs==4.3.6; python_version < '3.9'
-platformdirs==4.10.0; python_version >= '3.9'
+platformdirs==4.3.6; python_version < '3.10'
+platformdirs==4.10.0; python_version >= '3.10'
     # via black
 pluggy==1.5.0; python_version < '3.9'
 pluggy==1.6.0; python_version >= '3.9'
@@ -66,9 +66,10 @@ polib==1.2.0
 pycodestyle==2.12.1; python_version < '3.9'
 pycodestyle==2.14.0; python_version >= '3.9'
     # via flake8
-pyflakes==3.4.0
+pyflakes==3.2.0; python_version < '3.9'
+pyflakes==3.4.0; python_version >= '3.9'
     # via flake8
-pygments==2.20.0
+pygments==2.20.0; python_version >= '3.10'
     # via sphinx
 pyinstaller>=5.13.2; python_version < '3.13'
 pyinstaller>=6.10.0; python_version >= '3.13'
@@ -92,7 +93,8 @@ semantic-version==2.10.0
     # via dupeguru (pyproject.toml)
 send2trash==1.8.3
     # via dupeguru (pyproject.toml)
-setuptools==82.0.1
+setuptools==68.0.0; python_version < '3.9'
+setuptools==82.0.1; python_version >= '3.9'
     # via pyinstaller
 snowballstemmer==3.1.1; python_version >= '3.10'
     # via sphinx
