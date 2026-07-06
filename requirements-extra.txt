@@ -8,7 +8,8 @@ altgraph==0.17.5
     #   pyinstaller
 babel==2.18.0; python_version >= '3.9'
     # via sphinx
-black==25.11.0; python_version < '3.10'
+black==24.8.0; python_version < '3.9'
+black==25.11.0; python_version == '3.9'
 black==26.5.1; python_version >= '3.10'
     # via dupeguru (pyproject.toml)
 certifi==2026.6.17; python_version >= '3.9'
