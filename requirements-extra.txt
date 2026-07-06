@@ -63,7 +63,8 @@ pluggy==1.6.0; python_version >= '3.9'
     # via pytest
 polib==1.2.0
     # via dupeguru (pyproject.toml)
-pycodestyle==2.14.0
+pycodestyle==2.12.1; python_version < '3.9'
+pycodestyle==2.14.0; python_version >= '3.9'
     # via flake8
 pyflakes==3.4.0
     # via flake8
