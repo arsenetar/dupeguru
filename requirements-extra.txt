@@ -55,7 +55,8 @@ packaging==26.2
 pathspec==0.12.1; python_version < '3.9'
 pathspec==1.1.1; python_version >= '3.9'
     # via black
-platformdirs==4.10.0
+platformdirs==4.3.6; python_version < '3.9'
+platformdirs==4.10.0; python_version >= '3.9'
     # via black
 pluggy==1.6.0
     # via pytest
