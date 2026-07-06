@@ -5,12 +5,12 @@ distro==1.9.0
 mutagen==1.47.0; python_version < '3.10'
 mutagen==1.48.1; python_version >= '3.10'
     # via dupeguru (pyproject.toml)
-pyqt5==5.15.11
+pyqt5==5.15.11; sys_platform != 'linux'
     # via dupeguru (pyproject.toml)
-pyqt5-qt5==5.15.19
+pyqt5-qt5==5.15.19; sys_platform != 'linux'
     # via pyqt5
-pyqt5-sip==12.15.0; python_version < '3.10'
-pyqt5-sip==12.18.0; python_version >= '3.10'
+pyqt5-sip==12.15.0; python_version < '3.10' and sys_platform != 'linux'
+pyqt5-sip==12.18.0; python_version >= '3.10' and sys_platform != 'linux'
     # via pyqt5
 semantic-version==2.10.0
     # via dupeguru (pyproject.toml)
