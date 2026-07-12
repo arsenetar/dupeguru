@@ -4,7 +4,7 @@ PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
-# Window compatability via Msys2
+# Window compatibility via Msys2
 # - venv creates Scripts instead of bin
 # - compile generates .pyd instead of .so
 # - venv with --sytem-site-packages has issues on windows as well...
@@ -101,7 +101,7 @@ endif
 env: | reqs
 ifndef NO_VENV
 	@echo "Creating virtualenv with uv"
-	uv venv env
+	uv venv $(VENV_OPTIONS) --allow-existing env
 	VIRTUAL_ENV=env uv pip install -e .[dev]
 endif
 
@@ -154,7 +154,8 @@ uninstall:
 
 clean:
 	-rm -rf build
-	-rm locale/*/LC_MESSAGES/*.mo
-	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
+	-rm -rf .venv env
+	-rm -f locale/*/LC_MESSAGES/*.mo
+	-rm -f core/pe/*.$(SO) qt/pe/*.$(SO)
 
 .PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all
