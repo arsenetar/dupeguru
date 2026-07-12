@@ -73,6 +73,7 @@ hscommon.desktop._special_folder_path = special_folder_path_pure_python
 from core.app import DupeGuru  # noqa: E402
 from core import fs  # noqa: E402
 from hscommon.trans import install_gettext_trans_under_qt  # noqa: E402
+from hscommon.util import format_size  # noqa: E402
 
 
 class WebProgressView:
@@ -345,6 +346,55 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 )
             except Exception as e:
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
+
+        elif path == "/api/cache/files":
+            search = query.get("search", [""])[0]
+            limit = int(query.get("limit", [100])[0])
+            offset = int(query.get("offset", [0])[0])
+
+            files_list = []
+            total_count = 0
+            try:
+                with fs.filesdb.lock:
+                    if search:
+                        count_row = fs.filesdb.conn.execute(
+                            "SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",)
+                        ).fetchone()
+                        rows = fs.filesdb.conn.execute(
+                            "SELECT path, size, entry_dt FROM files WHERE path LIKE ? "
+                            "ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
+                            (f"%{search}%", limit, offset),
+                        ).fetchall()
+                    else:
+                        count_row = fs.filesdb.conn.execute("SELECT COUNT(*) FROM files").fetchone()
+                        rows = fs.filesdb.conn.execute(
+                            "SELECT path, size, entry_dt FROM files ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
+                            (limit, offset),
+                        ).fetchall()
+
+                    total_count = count_row[0] if count_row else 0
+                    for row in rows:
+                        files_list.append(
+                            {
+                                "path": row[0],
+                                "size": format_size(row[1], 0, 1, False) if row[1] is not None else "0 B",
+                                "entry_dt": row[2],
+                            }
+                        )
+            except Exception as e:
+                logging.error(f"Error querying cache files: {e}")
+
+            self.wfile.write(
+                json.dumps(
+                    {
+                        "success": True,
+                        "files": files_list,
+                        "total": total_count,
+                        "limit": limit,
+                        "offset": offset,
+                    }
+                ).encode()
+            )
 
         elif path == "/api/results":
             groups_data = []

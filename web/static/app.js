@@ -31,6 +31,12 @@ let isScanning = false;
 let resultsData = [];
 let addedPaths = [];
 
+// Cache Viewer state
+let cacheSearch = "";
+let cacheLimit = 20;
+let cacheOffset = 0;
+let cacheTotal = 0;
+
 // Initialize Application
 document.addEventListener("DOMContentLoaded", () => {
     loadDirectories();
@@ -107,6 +113,65 @@ function setupEventListeners() {
             toast.classList.add("hidden");
         });
     }
+
+    // Navigation Tabs and Cache controls
+    const tabScan = document.getElementById("tab-scan");
+    const tabCache = document.getElementById("tab-cache");
+    const scanViewContent = document.getElementById("scan-view-content");
+    const cacheContainer = document.getElementById("cache-container");
+
+    if (tabScan && tabCache && scanViewContent && cacheContainer) {
+        tabScan.addEventListener("click", () => {
+            tabScan.classList.add("active");
+            tabCache.classList.remove("active");
+            scanViewContent.classList.remove("hidden");
+            cacheContainer.classList.add("hidden");
+        });
+
+        tabCache.addEventListener("click", () => {
+            tabScan.classList.remove("active");
+            tabCache.classList.add("active");
+            scanViewContent.classList.add("hidden");
+            cacheContainer.classList.remove("hidden");
+            cacheOffset = 0;
+            loadCache();
+        });
+    }
+
+    const cachePrevBtn = document.getElementById("cache-prev-btn");
+    const cacheNextBtn = document.getElementById("cache-next-btn");
+    const cacheSearchInput = document.getElementById("cache-search");
+
+    if (cachePrevBtn) {
+        cachePrevBtn.addEventListener("click", () => {
+            if (cacheOffset >= cacheLimit) {
+                cacheOffset -= cacheLimit;
+                loadCache();
+            }
+        });
+    }
+
+    if (cacheNextBtn) {
+        cacheNextBtn.addEventListener("click", () => {
+            if (cacheOffset + cacheLimit < cacheTotal) {
+                cacheOffset += cacheLimit;
+                loadCache();
+            }
+        });
+    }
+
+    if (cacheSearchInput) {
+        let searchTimeout = null;
+        cacheSearchInput.addEventListener("input", () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                cacheOffset = 0;
+                cacheSearch = cacheSearchInput.value.trim();
+                loadCache();
+            }, 300);
+        });
+    }
+
     setupConfigListeners();
 }
 
@@ -574,4 +639,71 @@ function showToast(message, persistent = false) {
             toast.timeoutId = null;
         }, 3000);
     }
+}
+
+// 6. Cache Database Viewer Management
+async function loadCache() {
+    try {
+        const response = await fetch(`${API_BASE}/api/cache/files?search=${encodeURIComponent(cacheSearch)}&limit=${cacheLimit}&offset=${cacheOffset}`);
+        const result = await response.json();
+        if (result.success) {
+            cacheTotal = result.total;
+            renderCacheTable(result.files);
+            renderCachePagination();
+        }
+    } catch (err) {
+        console.error("Load cache failed:", err);
+    }
+}
+
+function renderCacheTable(files) {
+    const tbody = document.getElementById("cache-body");
+    const totalEl = document.getElementById("cache-total");
+    if (!tbody) return;
+
+    totalEl.textContent = cacheTotal;
+    tbody.innerHTML = "";
+
+    if (files.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 32px; color: var(--text-secondary);">No cached files found.</td></tr>`;
+        return;
+    }
+
+    files.forEach(f => {
+        const row = document.createElement("tr");
+
+        // Path
+        const pathTd = document.createElement("td");
+        pathTd.className = "path-cell";
+        pathTd.textContent = f.path;
+        pathTd.title = f.path;
+
+        // Size
+        const sizeTd = document.createElement("td");
+        sizeTd.textContent = f.size;
+
+        // Date
+        const dateTd = document.createElement("td");
+        dateTd.textContent = f.entry_dt || "Unknown";
+
+        row.appendChild(pathTd);
+        row.appendChild(sizeTd);
+        row.appendChild(dateTd);
+
+        tbody.appendChild(row);
+    });
+}
+
+function renderCachePagination() {
+    const info = document.getElementById("cache-page-info");
+    const prevBtn = document.getElementById("cache-prev-btn");
+    const nextBtn = document.getElementById("cache-next-btn");
+    if (!info || !prevBtn || !nextBtn) return;
+
+    const currentPage = Math.floor(cacheOffset / cacheLimit) + 1;
+    const totalPages = Math.ceil(cacheTotal / cacheLimit) || 1;
+
+    info.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
 }

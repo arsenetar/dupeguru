@@ -108,30 +108,80 @@
 
         <!-- Main Content: Progress & Results -->
         <main class="main-content">
-            <!-- Progress Screen -->
-            <div id="progress-container" class="progress-container hidden">
-                <div class="progress-card">
-                    <div class="spinner"></div>
-                    <h3 id="progress-desc">Scanning folders...</h3>
-                    <div id="progress-targets" style="margin-top: 4px; margin-bottom: 12px; font-size: 0.85rem; color: var(--text-secondary); text-align: center; word-break: break-all; max-width: 90%;"></div>
-                    <div class="progress-bar-bg">
-                        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button id="tab-scan" class="tab-btn active">Scan Console</button>
+                <button id="tab-cache" class="tab-btn">Cache Database Viewer</button>
+            </nav>
+
+            <div id="scan-view-content" class="scan-view-content">
+                <!-- Progress Screen -->
+                <div id="progress-container" class="progress-container hidden">
+                    <div class="progress-card">
+                        <div class="spinner"></div>
+                        <h3 id="progress-desc">Scanning folders...</h3>
+                        <div id="progress-targets" style="margin-top: 4px; margin-bottom: 12px; font-size: 0.85rem; color: var(--text-secondary); text-align: center; word-break: break-all; max-width: 90%;"></div>
+                        <div class="progress-bar-bg">
+                            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                        </div>
+                        <span id="progress-percent">0%</span>
+                        <button id="cancel-scan-btn" class="btn danger-btn" style="margin-top: 16px; width: 140px; padding: 10px;">Stop Scan</button>
                     </div>
-                    <span id="progress-percent">0%</span>
-                    <button id="cancel-scan-btn" class="btn danger-btn" style="margin-top: 16px; width: 140px; padding: 10px;">Stop Scan</button>
+                </div>
+
+                <!-- Results Screen -->
+                <div id="results-container" class="results-container hidden">
+                    <header class="results-header">
+                        <div>
+                            <h1>Scan Results</h1>
+                            <p id="results-summary">No duplicates found yet.</p>
+                        </div>
+                        <div class="results-actions" style="display: flex; gap: 8px;">
+                            <button id="save-results-btn" class="btn secondary-btn" style="padding: 10px 16px;">Save Results</button>
+                            <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
+                        </div>
+                    </header>
+
+                    <div class="table-wrapper">
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th width="60">Marked</th>
+                                    <th width="100">Match %</th>
+                                    <th>File Name</th>
+                                    <th>Folder Path</th>
+                                    <th width="120">Size</th>
+                                    <th width="150">Modification Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Welcome Screen (Default) -->
+                <div id="welcome-container" class="welcome-container">
+                    <div class="welcome-card">
+                        <svg class="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 2.253M12 3a9.003 9.003 0 0 0-8.716 2.253M21 9.75c0 1.11-.89 2.25-2.25 2.25M3 9.75c0 1.11.89 2.25 2.25 2.25" />
+                        </svg>
+                        <h2>Find duplicate files in style</h2>
+                        <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Results Screen -->
-            <div id="results-container" class="results-container hidden">
-                <header class="results-header">
-                    <div>
-                        <h1>Scan Results</h1>
-                        <p id="results-summary">No duplicates found yet.</p>
+            <!-- Cache Database Viewer -->
+            <div id="cache-container" class="cache-container hidden">
+                <header class="cache-header">
+                    <div class="cache-header-left">
+                        <h1>Cache Database Viewer</h1>
+                        <p><span id="cache-total">0</span> files currently cached in SQLite database</p>
                     </div>
-                    <div class="results-actions" style="display: flex; gap: 8px;">
-                        <button id="save-results-btn" class="btn secondary-btn" style="padding: 10px 16px;">Save Results</button>
-                        <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
+                    <div class="cache-controls">
+                        <input type="text" id="cache-search" class="cache-search-input" placeholder="Search file path...">
                     </div>
                 </header>
 
@@ -139,29 +189,21 @@
                     <table class="results-table">
                         <thead>
                             <tr>
-                                <th width="60">Marked</th>
-                                <th width="100">Match %</th>
-                                <th>File Name</th>
-                                <th>Folder Path</th>
+                                <th>Cached File Path</th>
                                 <th width="120">Size</th>
-                                <th width="150">Modification Date</th>
+                                <th width="200">Date Cached</th>
                             </tr>
                         </thead>
-                        <tbody id="results-body">
+                        <tbody id="cache-body">
                             <!-- Populated dynamically -->
                         </tbody>
                     </table>
                 </div>
-            </div>
 
-            <!-- Welcome Screen (Default) -->
-            <div id="welcome-container" class="welcome-container">
-                <div class="welcome-card">
-                    <svg class="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 2.253M12 3a9.003 9.003 0 0 0-8.716 2.253M21 9.75c0 1.11-.89 2.25-2.25 2.25M3 9.75c0 1.11.89 2.25 2.25 2.25" />
-                    </svg>
-                    <h2>Find duplicate files in style</h2>
-                    <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
+                <div class="pagination">
+                    <button id="cache-prev-btn" class="btn secondary-btn" disabled>Previous</button>
+                    <span id="cache-page-info" class="pagination-info">Page 1 of 1</span>
+                    <button id="cache-next-btn" class="btn secondary-btn" disabled>Next</button>
                 </div>
             </div>
         </main>
