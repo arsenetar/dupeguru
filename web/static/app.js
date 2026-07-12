@@ -387,6 +387,7 @@ async function cancelScan() {
             progressContainer.classList.add("hidden");
             welcomeContainer.classList.remove("hidden");
             loadDirectories();
+            showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
         }
     } catch (err) {
         console.error("Cancel scan failed:", err);

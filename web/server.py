@@ -49,6 +49,7 @@ class WebViewAdapter:
             "IncludeExistsCheck": True,
             "DebugMode": False,
             "CheckpointFrequency": 100,
+            "ScanType": 5,
         }
 
     def get_default(self, key_name, default=None):
@@ -173,6 +174,7 @@ def sync_preferences_to_model():
     model.options["min_match_percentage"] = int(web_view.get_default("FilterHardness", 95))
     model.options["rehash_ignore_mtime"] = web_view.get_default("RehashIgnoreMTime", False)
     model.options["include_exists_check"] = web_view.get_default("IncludeExistsCheck", True)
+    model.options["scan_type"] = int(web_view.get_default("ScanType", 5))
 
 
 sync_preferences_to_model()
