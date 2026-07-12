@@ -61,6 +61,7 @@ help:
 	@echo "  package      Create a standalone native executable package for the current OS"
 	@echo "  tag          Create tag for a release; Example: make tag TAG=1.2.3"
 	@echo "  release-status Show current release version status and changelog alignment"
+	@echo "  dev-setup    Setup the development environment (interactive)"
 
 all: | env i18n modules qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
@@ -158,4 +159,50 @@ clean:
 	-rm -f locale/*/LC_MESSAGES/*.mo
 	-rm -f core/pe/*.$(SO) qt/pe/*.$(SO)
 
-.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all
+dev-setup:
+	@echo "Setting up development environment..."
+	@if ! command -v uv >/dev/null 2>&1; then \
+		printf "uv is not installed. Do you want to install it from https://astral.sh? [y/N]: "; \
+		read answer; \
+		if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+			echo "Installing uv..."; \
+			curl -LsSf https://astral.sh/uv/install.sh | sh; \
+		else \
+			echo "Skipping uv installation. Please install uv manually to continue."; \
+			exit 1; \
+		fi; \
+	else \
+		echo "uv is already installed."; \
+	fi
+	@if [ "$$(uname)" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then \
+		missing=""; \
+		if ! command -v pyrcc5 >/dev/null 2>&1; then missing="$$missing python3-pyqt5 pyqt5-dev-tools"; fi; \
+		if ! dpkg -s python3-dev >/dev/null 2>&1; then missing="$$missing python3-dev"; fi; \
+		if ! dpkg -s build-essential >/dev/null 2>&1; then missing="$$missing build-essential"; fi; \
+		if [ -n "$$missing" ]; then \
+			echo "The following system packages are missing:$$missing"; \
+			printf "Do you want to install them via apt? (Requires sudo) [y/N]: "; \
+			read answer; \
+			if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+				sudo apt-get update && sudo apt-get install -y $$missing; \
+			else \
+				echo "Skipping system packages installation. Some build steps may fail."; \
+			fi; \
+		fi; \
+	fi
+	@$(MAKE) env
+	@if [ -f ./env/bin/pre-commit ]; then \
+		printf "Do you want to install the pre-commit git hooks? [y/N]: "; \
+		read answer; \
+		if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+			echo "Installing pre-commit hooks..."; \
+			./env/bin/pre-commit install; \
+		else \
+			echo "Skipping pre-commit hooks installation."; \
+		fi; \
+	else \
+		echo "pre-commit was not found in the virtual environment. Skipping hooks setup."; \
+	fi
+	@echo "Development environment setup complete!"
+
+.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all dev-setup
