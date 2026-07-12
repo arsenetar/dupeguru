@@ -705,6 +705,8 @@ input[type="text"]:focus {
     transition: opacity 0.3s ease, transform 0.3s ease;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: pre-wrap;
+    cursor: pointer;
 }
 .toast.hidden {
     opacity: 0;

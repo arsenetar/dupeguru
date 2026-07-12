@@ -70,6 +70,12 @@ function setupEventListeners() {
     cancelScanBtn.addEventListener("click", cancelScan);
     loadScanBtn.addEventListener("click", loadScan);
     saveResultsBtn.addEventListener("click", saveResults);
+    const toast = document.getElementById("toast");
+    if (toast) {
+        toast.addEventListener("click", () => {
+            toast.classList.add("hidden");
+        });
+    }
     setupConfigListeners();
 }
 
@@ -392,20 +398,17 @@ async function cancelScan() {
             const scanned = result.scanned_count || 0;
             const reused = result.reused_count || 0;
             if (scanned > 0 || reused > 0) {
-                if (scanned > 0) {
-                    msg += ` Saved ${scanned} new file hashes.`;
-                }
-                if (reused > 0) {
-                    msg += ` Reused ${reused} cached file hashes.`;
-                }
+                msg += `\n- Saved ${scanned} new file hashes to cache.`;
+                msg += `\n- Reused ${reused} cached file hashes.`;
                 if (result.last_file) {
                     const filename = result.last_file.split("/").pop();
-                    msg += ` Last scanned file: ${filename}`;
+                    msg += `\n- Last scanned file: ${filename}`;
                 }
             } else {
-                msg += " No files were processed.";
+                msg += "\n- No files were processed.";
             }
-            showToast(msg);
+            msg += "\n\n(Click this message to dismiss)";
+            showToast(msg, true);
         }
     } catch (err) {
         console.error("Cancel scan failed:", err);
@@ -519,12 +522,21 @@ async function saveResults() {
     }
 }
 
-function showToast(message) {
+function showToast(message, persistent = false) {
     const toast = document.getElementById("toast");
     if (!toast) return;
     toast.textContent = message;
     toast.classList.remove("hidden");
-    setTimeout(() => {
-        toast.classList.add("hidden");
-    }, 3000);
+
+    if (toast.timeoutId) {
+        clearTimeout(toast.timeoutId);
+        toast.timeoutId = null;
+    }
+
+    if (!persistent) {
+        toast.timeoutId = setTimeout(() => {
+            toast.classList.add("hidden");
+            toast.timeoutId = null;
+        }, 3000);
+    }
 }
