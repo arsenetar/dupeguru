@@ -420,6 +420,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         ).encode()
                     )
                     return
+
+                # Clear cache if requested
+                if data.get("clear_cache", False):
+                    model.clear_hash_cache()
+
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True
                 app_state["progress"] = 0

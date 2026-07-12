@@ -65,7 +65,38 @@ function setupEventListeners() {
         }
     });
 
-    startScanBtn.addEventListener("click", startScan);
+    startScanBtn.addEventListener("click", () => {
+        const scanModal = document.getElementById("scan-modal");
+        if (scanModal) {
+            scanModal.classList.remove("hidden");
+        }
+    });
+
+    const modeResume = document.getElementById("mode-resume");
+    const modeFresh = document.getElementById("mode-fresh");
+    const cancelModalBtn = document.getElementById("cancel-modal-btn");
+    const scanModal = document.getElementById("scan-modal");
+
+    if (modeResume) {
+        modeResume.addEventListener("click", () => {
+            if (scanModal) scanModal.classList.add("hidden");
+            startScan(false);
+        });
+    }
+
+    if (modeFresh) {
+        modeFresh.addEventListener("click", () => {
+            if (scanModal) scanModal.classList.add("hidden");
+            startScan(true);
+        });
+    }
+
+    if (cancelModalBtn) {
+        cancelModalBtn.addEventListener("click", () => {
+            if (scanModal) scanModal.classList.add("hidden");
+        });
+    }
+
     deleteMarkedBtn.addEventListener("click", deleteMarked);
     cancelScanBtn.addEventListener("click", cancelScan);
     loadScanBtn.addEventListener("click", loadScan);
@@ -183,10 +214,14 @@ async function browseFolders(path = "") {
 }
 
 // 3. Scan & Progress Management
-async function startScan() {
+async function startScan(clearCache = false) {
     try {
         const response = await fetch(`${API_BASE}/api/scan`, {
-            method: "POST"
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ clear_cache: clearCache })
         });
         const result = await response.json();
         if (result.success) {

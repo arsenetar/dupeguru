@@ -725,3 +725,101 @@ input[type="text"]:focus {
     border: 1px solid rgba(16, 185, 129, 0.25);
     user-select: none;
 }
+
+/* Modal Backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+.modal-backdrop.hidden {
+    display: none;
+}
+
+/* Modal Card */
+.modal-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 28px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    color: #f8fafc;
+}
+.modal-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+.modal-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+/* Scan Mode Options */
+.scan-mode-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+.scan-mode-option:hover {
+    background: #1e293b;
+    border-color: #06b6d4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.option-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+.option-icon svg {
+    width: 20px;
+    height: 20px;
+}
+.option-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.option-details strong {
+    font-size: 0.95rem;
+    color: #f1f5f9;
+}
+.option-details span {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
