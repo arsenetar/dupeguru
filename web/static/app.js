@@ -387,7 +387,18 @@ async function cancelScan() {
             progressContainer.classList.add("hidden");
             welcomeContainer.classList.remove("hidden");
             loadDirectories();
-            showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
+
+            let msg = "Scan was stopped. Hashing progress saved to database checkpoints.";
+            if (result.scanned_count > 0) {
+                msg += ` Saved ${result.scanned_count} new file hashes.`;
+                if (result.last_file) {
+                    const filename = result.last_file.split("/").pop();
+                    msg += ` Last scanned file: ${filename}`;
+                }
+            } else {
+                msg += " No new files needed to be hashed (all were already cached).";
+            }
+            showToast(msg);
         }
     } catch (err) {
         console.error("Cancel scan failed:", err);

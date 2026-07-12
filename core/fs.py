@@ -120,6 +120,9 @@ class FilesDB:
         self.lock = None
         self.checkpoint_frequency = 100
         self._checkpoint_counter = 0
+        self.scanned_count = 0
+        self.last_scanned_path = None
+        self.scanned_paths = set()
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         if platform.startswith("gnu0"):
@@ -187,6 +190,11 @@ class FilesDB:
                     self.insert_query.format(key=key),
                     {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
+                path_str = str(path)
+                self.last_scanned_path = path_str
+                if path_str not in self.scanned_paths:
+                    self.scanned_paths.add(path_str)
+                    self.scanned_count += 1
                 self._checkpoint_counter += 1
                 if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
                     self.conn.commit()

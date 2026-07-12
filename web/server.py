@@ -14,6 +14,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from core.app import DupeGuru  # noqa: E402
+from core import fs  # noqa: E402
 from hscommon.trans import install_gettext_trans_under_qt  # noqa: E402
 
 
@@ -423,8 +424,18 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "Scan in progress"}).encode())
 
         elif path == "/api/scan/cancel":
+            scanned_count = fs.filesdb.scanned_count
+            last_file = fs.filesdb.last_scanned_path
             model.progress_window.cancel()
-            self.wfile.write(json.dumps({"success": True}).encode())
+            self.wfile.write(
+                json.dumps(
+                    {
+                        "success": True,
+                        "scanned_count": scanned_count,
+                        "last_file": last_file,
+                    }
+                ).encode()
+            )
 
         elif path == "/api/results/mark":
             file_path = data.get("path")

@@ -795,6 +795,9 @@ class DupeGuru(Broadcaster):
         scanner = self.SCANNER_CLASS()
         fs.filesdb.ignore_mtime = self.options["rehash_ignore_mtime"] is True
         fs.filesdb.checkpoint_frequency = self.options.get("checkpoint_frequency", 100)
+        fs.filesdb.scanned_count = 0
+        fs.filesdb.last_scanned_path = None
+        fs.filesdb.scanned_paths = set()
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return
