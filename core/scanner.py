@@ -146,35 +146,42 @@ class Scanner:
             f.is_ref = False
         files = remove_dupe_paths(files)
         logging.info("Getting matches. Scan type: %d", self.scan_type)
-        matches = self._getmatches(files, j)
-        logging.info("Found %d matches" % len(matches))
-        j.set_progress(100, tr("Almost done! Fiddling with results..."))
-        # In removing what we call here "false matches", we first want to remove, if we scan by
-        # folders, we want to remove folder matches for which the parent is also in a match (they're
-        # "duplicated duplicates if you will). Then, we also don't want mixed file kinds if the
-        # option isn't enabled, we want matches for which both files exist and, lastly, we don't
-        # want matches with both files as ref.
-        if self.scan_type == ScanType.FOLDERS and matches:
-            allpath = {m.first.path for m in matches}
-            allpath |= {m.second.path for m in matches}
-            sortedpaths = sorted(allpath)
-            toremove = set()
-            last_parent_path = sortedpaths[0]
-            for p in sortedpaths[1:]:
-                if last_parent_path in p.parents:
-                    toremove.add(p)
-                else:
-                    last_parent_path = p
-            matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
-        if not self.mix_file_kind:
-            matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
-        if self.include_exists_check:
-            matches = [m for m in matches if m.first.exists() and m.second.exists()]
-        # Contents already handles ref checks, other scan types might not catch during scan
-        if self.scan_type != ScanType.CONTENTS:
-            matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
-        if ignore_list:
-            matches = [m for m in matches if not ignore_list.are_ignored(str(m.first.path), str(m.second.path))]
+        matches = []
+        try:
+            matches = self._getmatches(files, j)
+            logging.info("Found %d matches" % len(matches))
+            try:
+                j.set_progress(100, tr("Almost done! Fiddling with results..."))
+            except job.JobCancelled:
+                pass
+            # In removing what we call here "false matches", we first want to remove, if we scan by
+            # folders, we want to remove folder matches for which the parent is also in a match (they're
+            # "duplicated duplicates if you will). Then, we also don't want mixed file kinds if the
+            # option isn't enabled, we want matches for which both files exist and, lastly, we don't
+            # want matches with both files as ref.
+            if self.scan_type == ScanType.FOLDERS and matches:
+                allpath = {m.first.path for m in matches}
+                allpath |= {m.second.path for m in matches}
+                sortedpaths = sorted(allpath)
+                toremove = set()
+                last_parent_path = sortedpaths[0]
+                for p in sortedpaths[1:]:
+                    if last_parent_path in p.parents:
+                        toremove.add(p)
+                    else:
+                        last_parent_path = p
+                matches = [m for m in matches if m.first.path not in toremove or m.second.path not in toremove]
+            if not self.mix_file_kind:
+                matches = [m for m in matches if get_file_ext(m.first.name) == get_file_ext(m.second.name)]
+            if self.include_exists_check:
+                matches = [m for m in matches if m.first.exists() and m.second.exists()]
+            # Contents already handles ref checks, other scan types might not catch during scan
+            if self.scan_type != ScanType.CONTENTS:
+                matches = [m for m in matches if not (m.first.is_ref and m.second.is_ref)]
+            if ignore_list:
+                matches = [m for m in matches if not ignore_list.are_ignored(str(m.first.path), str(m.second.path))]
+        except job.JobCancelled:
+            logging.info("Scan cancelled. Processing partial matches.")
         logging.info("Grouping matches")
         groups = engine.get_groups(matches)
         if self.scan_type in {

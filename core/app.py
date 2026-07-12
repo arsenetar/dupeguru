@@ -297,7 +297,8 @@ class DupeGuru(Broadcaster):
             self._results_changed()
             fs.filesdb.commit()
             if not self.results.groups:
-                self.view.show_message(tr("No duplicates found."))
+                if not self.progress_window.job_cancelled:
+                    self.view.show_message(tr("No duplicates found."))
             else:
                 self.view.show_results_window()
         if jobid in {JobType.MOVE, JobType.DELETE}:

@@ -450,6 +450,20 @@ class TestCaseGetMatches:
         eq_(0, self.log[0])
         eq_(100, self.log[-1])
 
+    def test_job_cancelled(self):
+        self.call_count = 0
+
+        def do_progress(p, d=""):
+            self.call_count += 1
+            if self.call_count > 1:
+                return False
+            return True
+
+        j = job.Job(1, do_progress)
+        s = "foo bar"
+        r = getmatches([NamedObject(s), NamedObject(s), NamedObject(s)], j=j)
+        assert len(r) < 3
+
     def test_weight_words(self):
         item_list = [NamedObject("foo bar"), NamedObject("bar bleh")]
         m = getmatches(item_list, weight_words=True)[0]

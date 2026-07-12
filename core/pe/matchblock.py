@@ -245,24 +245,30 @@ def getmatches(
         )  # some wiggle room for the next statements
         logging.warning("Ran out of memory when scanning! We had %d matches.", len(matches))
         del matches[-len(matches) // 3 :]  # some wiggle room to ensure we don't run out of memory again.
+    except job.JobCancelled:
+        logging.info("Scan cancelled during matching. Matches collected so far: %d", len(matches))
     pool.close()
     result = []
-    myiter = j.iter_with_progress(
-        iterconsume(matches, reverse=False),
-        tr("Verified %d/%d matches"),
-        every=10,
-        count=len(matches),
-    )
-    for ref_id, other_id, percentage in myiter:
-        ref = id2picture[ref_id]
-        other = id2picture[other_id]
-        if percentage == 100 and ref.digest != other.digest:
-            percentage = 99
-        if percentage >= threshold:
-            ref.dimensions  # pre-read dimensions for display in results
-            other.dimensions
-            result.append(get_match(ref, other, percentage))
-    pool.join()
+    try:
+        myiter = j.iter_with_progress(
+            iterconsume(matches, reverse=False),
+            tr("Verified %d/%d matches"),
+            every=10,
+            count=len(matches),
+        )
+        for ref_id, other_id, percentage in myiter:
+            ref = id2picture[ref_id]
+            other = id2picture[other_id]
+            if percentage == 100 and ref.digest != other.digest:
+                percentage = 99
+            if percentage >= threshold:
+                ref.dimensions  # pre-read dimensions for display in results
+                other.dimensions
+                result.append(get_match(ref, other, percentage))
+    except job.JobCancelled:
+        logging.info("Scan cancelled during verification. Matches verified: %d", len(result))
+    finally:
+        pool.join()
     return result
 
 

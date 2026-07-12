@@ -108,7 +108,7 @@ class ProgressWindow(GUIObject, ThreadedJobPerformer):
                     should_continue = self._error_func(self.jobid, err)
                 else:
                     raise err
-            if not self.job_cancelled and should_continue:
+            if (not self.job_cancelled or self.jobid == "job_scan") and should_continue:
                 self._finish_func(self.jobid)
             return
         if self.job_cancelled:
