@@ -237,12 +237,20 @@ async function pollProgress() {
         } else {
             isScanning = false;
             progressContainer.classList.add("hidden");
-            loadResults();
+            if (state.status === "completed") {
+                loadResults();
+            } else {
+                welcomeContainer.classList.remove("hidden");
+                resultsContainer.classList.add("hidden");
+                showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
+            }
         }
     } catch (err) {
         console.error("Poll progress failed:", err);
         isScanning = false;
         progressContainer.classList.add("hidden");
+        welcomeContainer.classList.remove("hidden");
+        resultsContainer.classList.add("hidden");
     }
 }
 

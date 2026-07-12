@@ -452,7 +452,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/results/save":
             filename = data.get("path")
-            if filename:
+            if app_state["status"] != "completed":
+                self.wfile.write(
+                    json.dumps(
+                        {
+                            "success": False,
+                            "error": "No scan results available to save. Run a scan to completion first.",
+                        }
+                    ).encode()
+                )
+            elif filename:
                 try:
                     model.save_as(filename)
                     self.wfile.write(json.dumps({"success": True}).encode())
