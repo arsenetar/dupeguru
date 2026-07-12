@@ -123,6 +123,7 @@ class FilesDB:
         self.scanned_count = 0
         self.last_scanned_path = None
         self.scanned_paths = set()
+        self.hit_paths = set()
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         if platform.startswith("gnu0"):
@@ -174,6 +175,7 @@ class FilesDB:
                 cursor.close()
 
             if result:
+                self.hit_paths.add(str(path))
                 return result[0]
         except Exception as ex:
             logging.warning(f"Couldn't get {key} for {path} w/{size}, {mtime_ns}: {ex}")

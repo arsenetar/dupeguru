@@ -389,14 +389,21 @@ async function cancelScan() {
             loadDirectories();
 
             let msg = "Scan was stopped. Hashing progress saved to database checkpoints.";
-            if (result.scanned_count > 0) {
-                msg += ` Saved ${result.scanned_count} new file hashes.`;
+            const scanned = result.scanned_count || 0;
+            const reused = result.reused_count || 0;
+            if (scanned > 0 || reused > 0) {
+                if (scanned > 0) {
+                    msg += ` Saved ${scanned} new file hashes.`;
+                }
+                if (reused > 0) {
+                    msg += ` Reused ${reused} cached file hashes.`;
+                }
                 if (result.last_file) {
                     const filename = result.last_file.split("/").pop();
                     msg += ` Last scanned file: ${filename}`;
                 }
             } else {
-                msg += " No new files needed to be hashed (all were already cached).";
+                msg += " No files were processed.";
             }
             showToast(msg);
         }

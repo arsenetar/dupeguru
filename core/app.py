@@ -798,6 +798,7 @@ class DupeGuru(Broadcaster):
         fs.filesdb.scanned_count = 0
         fs.filesdb.last_scanned_path = None
         fs.filesdb.scanned_paths = set()
+        fs.filesdb.hit_paths = set()
         if not self.directories.has_any_file():
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return
