@@ -493,6 +493,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 if data.get("clear_cache", False):
                     model.clear_hash_cache()
 
+                # Enable directory snapshotting and resumption
+                fs.filesdb.enable_directory_cache = True
+
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True
                 app_state["progress"] = 0

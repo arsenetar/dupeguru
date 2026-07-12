@@ -90,9 +90,23 @@ class Directories:
         return DirectoryState.NORMAL
 
     def _get_files(self, from_path, fileclasses, j):
+        root_path = Path(from_path)
+        if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(root_path):
+            logging.info("Directory %s already scanned. Loading files from cache database.", root_path)
+            cached_files = fs.filesdb.get_files_in_directory(root_path)
+            for f_data in cached_files:
+                p = fs.Path(f_data["path"])
+                file = fs.get_file(p, fileclasses=fileclasses)
+                if file:
+                    file.size = f_data["size"]
+                    file.mtime = f_data["mtime_ns"] / 1e9
+                    state = self.get_state(root_path)
+                    file.is_ref = state == DirectoryState.REFERENCE
+                    yield file
+            return
+
         try:
             with os.scandir(from_path) as iter:
-                root_path = Path(from_path)
                 state = self.get_state(root_path)
                 # if we have no un-excluded dirs under this directory skip going deeper
                 skip_dirs = state == DirectoryState.EXCLUDED and not any(
@@ -118,10 +132,15 @@ class Directories:
                             file = fs.get_file(item, fileclasses=fileclasses)
                             if file:
                                 file.is_ref = state == DirectoryState.REFERENCE
+                                if fs.filesdb.enable_directory_cache:
+                                    fs.filesdb.snapshot_file(file.path, file.size, file.mtime)
                                 count += 1
                                 yield file
                     except (OSError, fs.InvalidPath):
                         pass
+
+                if fs.filesdb.enable_directory_cache:
+                    fs.filesdb.mark_directory_scanned(root_path)
                 logging.debug(
                     "Collected %d files in folder %s",
                     count,

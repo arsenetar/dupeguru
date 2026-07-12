@@ -105,6 +105,10 @@ class FilesDB:
     create_table_query = """CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, size INTEGER, mtime_ns INTEGER,
         entry_dt DATETIME, digest BLOB, digest_partial BLOB, digest_samples BLOB)"""
     drop_table_query = "DROP TABLE IF EXISTS files;"
+    create_dir_table_query = (
+        """CREATE TABLE IF NOT EXISTS scanned_directories (path TEXT PRIMARY KEY, scan_dt DATETIME)"""
+    )
+    drop_dir_table_query = "DROP TABLE IF EXISTS scanned_directories;"
     select_query = "SELECT {key} FROM files WHERE path=:path AND size=:size and mtime_ns=:mtime_ns"
     select_query_ignore_mtime = "SELECT {key} FROM files WHERE path=:path AND size=:size"
     insert_query = """
@@ -114,6 +118,7 @@ class FilesDB:
     """
 
     ignore_mtime = False
+    enable_directory_cache = False
 
     def __init__(self):
         self.conn = None
@@ -145,16 +150,70 @@ class FilesDB:
                 conn.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
             if version != self.schema_version:
                 conn.execute(self.drop_table_query)
+                conn.execute(self.drop_dir_table_query)
                 conn.execute(
                     "INSERT OR REPLACE INTO schema_version VALUES (:version, :description)",
                     {"version": self.schema_version, "description": self.schema_version_description},
                 )
             conn.execute(self.create_table_query)
+            conn.execute(self.create_dir_table_query)
 
     def clear(self) -> None:
         with self.lock, self.conn as conn:
             conn.execute(self.drop_table_query)
+            conn.execute(self.drop_dir_table_query)
             conn.execute(self.create_table_query)
+            conn.execute(self.create_dir_table_query)
+
+    def mark_directory_scanned(self, dir_path: Path) -> None:
+        try:
+            with self.lock, self.conn as conn:
+                conn.execute(
+                    "INSERT OR REPLACE INTO scanned_directories (path, scan_dt) VALUES (?, datetime('now'))",
+                    (str(dir_path),),
+                )
+        except Exception as e:
+            logging.error(f"Error marking directory scanned: {e}")
+
+    def is_directory_scanned(self, dir_path: Path) -> bool:
+        try:
+            with self.lock, self.conn as conn:
+                row = conn.execute("SELECT 1 FROM scanned_directories WHERE path = ?", (str(dir_path),)).fetchone()
+                return row is not None
+        except Exception:
+            return False
+
+    def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
+        try:
+            mtime_ns = int(mtime * 1e9)
+            with self.lock, self.conn as conn:
+                conn.execute(
+                    """INSERT INTO files (path, size, mtime_ns, entry_dt)
+                       VALUES (:path, :size, :mtime_ns, datetime('now'))
+                       ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns""",
+                    {"path": str(path), "size": size, "mtime_ns": mtime_ns},
+                )
+                self._checkpoint_counter += 1
+                if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
+                    conn.commit()
+                    self._checkpoint_counter = 0
+        except Exception as e:
+            logging.error(f"Error snapshotting file: {e}")
+
+    def get_files_in_directory(self, dir_path: Path) -> list:
+        prefix = str(dir_path) + os.sep
+        files = []
+        try:
+            with self.lock, self.conn as conn:
+                rows = conn.execute(
+                    "SELECT path, size, mtime_ns FROM files WHERE path = ? OR path LIKE ?",
+                    (str(dir_path), prefix + "%"),
+                ).fetchall()
+                for row in rows:
+                    files.append({"path": row[0], "size": row[1], "mtime_ns": row[2]})
+        except Exception as e:
+            logging.error(f"Error getting cached files in directory: {e}")
+        return files
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         stat = path.stat()
