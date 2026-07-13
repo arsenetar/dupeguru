@@ -562,3 +562,53 @@ class TestExcludeListunion(TestExcludeList):
 class TestExcludeDictunion(TestExcludeList):
     def setup_method(self, method):
         self.d = Directories(exclude_list=ExcludeDict(union_regex=True))
+
+
+def test_directory_cache_yield_resumption(tmpdir):
+    from core import fs
+
+    # Setup database
+    db_path = Path(str(tmpdir)).joinpath("test_cache.db")
+    fs.filesdb.connect(db_path)
+    fs.filesdb.clear()
+
+    # Enable directory cache
+    fs.filesdb.enable_directory_cache = True
+
+    try:
+        # Create temp folder structure
+        p = Path(str(tmpdir)).joinpath("resumption_test")
+        p.mkdir()
+        file1 = p.joinpath("file1.txt")
+        file2 = p.joinpath("file2.txt")
+        file1.write_text("hello")
+        file2.write_text("world")
+
+        # Scan folder first time to populate cache
+        d = Directories()
+        d.add_path(p)
+        files1 = list(d.get_files())
+        assert len(files1) == 2
+
+        # Verify it was added to database and scanned_directories
+        assert fs.filesdb.is_directory_scanned(p)
+        assert len(fs.filesdb.get_files_in_directory(p)) == 2
+
+        # Modify size in database to prove next call reads from database cache
+        fs.filesdb.conn.execute("UPDATE files SET size = 9999 WHERE path = ?", (str(file1),))
+        fs.filesdb.conn.commit()
+
+        # Yield again - it should load from cache since the directory is marked scanned!
+        files2 = list(d.get_files())
+        assert len(files2) == 2
+        file1_scanned = next(f for f in files2 if f.path == file1)
+        assert file1_scanned.size == 9999
+
+        # If directory cache is disabled, it should check on disk and find the original size (5)
+        fs.filesdb.enable_directory_cache = False
+        files3 = list(d.get_files())
+        assert len(files3) == 2
+        file1_disk = next(f for f in files3 if f.path == file1)
+        assert file1_disk.size == 5
+    finally:
+        fs.filesdb.enable_directory_cache = False

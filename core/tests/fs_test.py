@@ -110,3 +110,43 @@ def test_has_file_attrs(tmpdir):
     b = fs.Folder(Path(str(tmpdir)))
     assert b.mtime > 0
     eq_(b.extension, "")
+
+
+def test_filesdb_directory_cache(tmpdir):
+    db_path = Path(str(tmpdir)).joinpath("test_cache.db")
+    db = fs.FilesDB()
+    db.connect(db_path)
+
+    # Test directory mark & check
+    path1 = Path("/some/scanned/dir")
+    path2 = Path("/another/unscanned/dir")
+
+    assert not db.is_directory_scanned(path1)
+    db.mark_directory_scanned(path1)
+    assert db.is_directory_scanned(path1)
+    assert not db.is_directory_scanned(path2)
+
+    # Test snapshot file and get_files_in_directory
+    file1 = path1.joinpath("file1.txt")
+    file2 = path1.joinpath("file2.txt")
+    file3 = path2.joinpath("file3.txt")
+
+    db.snapshot_file(file1, 1024, 1234567.89)
+    db.snapshot_file(file2, 2048, 9876543.21)
+    db.snapshot_file(file3, 512, 1111111.11)
+
+    files = db.get_files_in_directory(path1)
+    assert len(files) == 2
+    paths = {f["path"] for f in files}
+    assert str(file1) in paths
+    assert str(file2) in paths
+
+    # Check sizes and mtimes
+    file1_data = next(f for f in files if f["path"] == str(file1))
+    assert file1_data["size"] == 1024
+    assert file1_data["mtime_ns"] == int(1234567.89 * 1e9)
+
+    # Test clearing DB
+    db.clear()
+    assert not db.is_directory_scanned(path1)
+    assert len(db.get_files_in_directory(path1)) == 0

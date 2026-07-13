@@ -22,7 +22,13 @@ Before building dupeGuru, ensure your development environment satisfies the requ
 
 dupeGuru is equipped with a self-bootstrapping `Makefile` that automatically handles virtual environment creation, C modules compilation, and dependencies installation.
 
-### Step 1: Clone and Compile
+### Step 1: Set Up Development Environment (Optional)
+If you plan to contribute, run the interactive setup helper to configure pre-commit hooks, `uv`, and OS-level package dependencies:
+```bash
+make dev-setup
+```
+
+### Step 2: Clone and Compile
 Navigate to the root directory and build the project:
 ```bash
 make
@@ -69,8 +75,12 @@ Before initiating a scan, customize parameters in the **Scan Preferences** sideb
 - **Mix File Kind**: Toggles whether standard files of different file extensions (like `.jpg` and `.png`) should be matched.
 
 ### 3. Hashing, Checkpoints & Resumption
-During scanning, file hashes are written and committed to the SQLite database (`hash_cache.db`).
-- **Resuming Scans**: If you cancel or stop a scan, all hashing progress made up to that point is committed immediately. Running the scan again on the same folders queries the cache and skips already processed files in $O(1)$ time, picking up where you left off.
+During scanning, file metadata and hashes are written and committed to the SQLite database (`hash_cache.db` at `~/.local/share/dupeGuru/hash_cache.db` on Linux).
+- **Directory Walk Snapshotting**: As the scanner recursively walks directories (Phase 1 & 2), discovered file metadata is snapshotted immediately into the database. Once a subdirectory walk completes, it is flagged as scanned. If the scan is interrupted, you don't need to re-walk completed directories on disk next time.
+- **Choose Scan Mode Dialog**: When starting a scan, you are prompted to choose:
+  - **Resume Scan (Use Cache)**: Reuses existing checkpoints for both the directory walk and file content hashes, resuming the scan near-instantaneously from where it was stopped.
+  - **Start Fresh (Clear Cache)**: Clears the cache database completely and scans all folders and files from the beginning.
+- **Cache Database Viewer**: Click the **Cache Database Viewer** tab in the Web UI to view, search, and paginate through all file metadata currently cached in the SQLite database.
 
 ### 4. Review & Delete Matches
 Once the duplicate scan completes, the results are listed:
