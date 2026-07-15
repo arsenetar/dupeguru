@@ -72,7 +72,7 @@ hscommon.desktop._special_folder_path = special_folder_path_pure_python
 
 from core.app import DupeGuru  # noqa: E402
 from core import fs  # noqa: E402
-from hscommon.trans import install_gettext_trans_under_qt  # noqa: E402
+from hscommon.trans import install_gettext_trans  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
 
 
@@ -602,7 +602,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 def start_server(port=8080):
     # Ensure locales and other config directories exist
     locale_folder = PROJECT_ROOT / "locale"
-    install_gettext_trans_under_qt(str(locale_folder), "")
+    import locale as py_locale
+
+    try:
+        lang = py_locale.getdefaultlocale()[0]
+        lang = lang[:2] if lang else "en"
+    except Exception:
+        lang = "en"
+    install_gettext_trans(str(locale_folder), lang)
 
     server = HTTPServer(("localhost", port), DupeGuruHTTPHandler)
     print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}")
