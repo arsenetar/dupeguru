@@ -8,6 +8,13 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
+# Prevent PyQt5 from being imported to avoid loading C-extensions in a multi-threaded
+# web server context, which can cause C-level segmentation faults.
+sys.modules["PyQt5"] = None
+sys.modules["PyQt5.QtCore"] = None
+sys.modules["PyQt5.QtGui"] = None
+sys.modules["PyQt5.QtWidgets"] = None
+
 # Add project root to sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
@@ -61,9 +68,12 @@ def special_folder_path_pure_python(special_folder, portable=False):
 
 
 # Apply monkey patches to bypass PyQt5 AppDataLocation resolution in server
-import qt.util  # noqa: E402
+try:
+    import qt.util  # noqa: E402
 
-qt.util.get_appdata = get_appdata_pure_python
+    qt.util.get_appdata = get_appdata_pure_python
+except ImportError:
+    pass
 
 import hscommon.desktop  # noqa: E402
 
