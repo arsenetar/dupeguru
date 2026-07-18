@@ -104,7 +104,12 @@ def get_appdata(portable=False):
     if portable:
         return op.join(executable_folder(), "data")
     else:
-        return QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)[0]
+        path = QStandardPaths.standardLocations(QStandardPaths.AppDataLocation)[0]
+        if "Hardcoded Software" in path:
+            path = path.replace("Hardcoded Software/dupeGuru", "dupeGuru")
+            path = path.replace("Hardcoded Software/dupeGuru.app", "dupeGuru.app")
+            path = path.replace("Hardcoded Software", "dupeGuru")
+        return path
 
 
 class SysWrapper(io.IOBase):

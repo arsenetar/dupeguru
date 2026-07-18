@@ -132,6 +132,12 @@ class DupeGuru(Broadcaster):
         Broadcaster.__init__(self)
         self.view = view
         self.appdata = desktop.special_folder_path(desktop.SpecialFolder.APPDATA, portable=portable)
+        import sys
+
+        if "pytest" in sys.modules:
+            import tempfile
+
+            self.appdata = os.path.join(tempfile.gettempdir(), "dupeGuru_test_appdata")
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.STANDARD
