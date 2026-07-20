@@ -7,7 +7,6 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import difflib
-import itertools
 import logging
 import string
 from collections import defaultdict, namedtuple
@@ -288,36 +287,52 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
                     justify taking samples of the file for hashing. If 0, compute digest as usual.
     :param j: A :ref:`job progress instance <jobs>`.
     """
-    size2files = defaultdict(set)
+    size2files = defaultdict(list)
     for f in files:
-        size2files[f.size].add(f)
+        size2files[f.size].append(f)
     del files
-    possible_matches = [files for files in size2files.values() if len(files) > 1]
+    possible_matches = [g for g in size2files.values() if len(g) > 1]
     del size2files
     result = []
     j.start_job(len(possible_matches), PROGRESS_MESSAGE % (0, 0))
     group_count = 0
     try:
         for group in possible_matches:
-            for first, second in itertools.combinations(group, 2):
-                if first.is_ref and second.is_ref:
-                    continue  # Don't spend time comparing two ref pics together.
-                if first.size == 0 and second.size == 0:
-                    # skip hashing for zero length files
-                    result.append(Match(first, second, 100))
-                    continue
-                # if digests are the same (and not None) then files match
-                if first.digest_partial is not None and first.digest_partial == second.digest_partial:
-                    if bigsize > 0 and first.size > bigsize:
-                        if first.digest_samples is not None and first.digest_samples == second.digest_samples:
-                            result.append(Match(first, second, 100))
+            # Handle 0-size files directly without quadratic combinations
+            if group[0].size == 0:
+                pivot = group[0]
+                for other in group[1:]:
+                    if not (pivot.is_ref and other.is_ref):
+                        result.append(Match(pivot, other, 100))
+                group_count += 1
+                j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))
+                continue
+
+            # Group files sharing the same size by their hash digests
+            digest_groups = defaultdict(list)
+            for f in group:
+                d = f.digest_partial
+                if d is not None:
+                    if bigsize > 0 and f.size > bigsize:
+                        s = f.digest_samples
+                        if s is not None:
+                            digest_groups[(d, s)].append(f)
                     else:
-                        if first.digest is not None and first.digest == second.digest:
-                            result.append(Match(first, second, 100))
+                        dig = f.digest
+                        if dig is not None:
+                            digest_groups[(d, dig)].append(f)
+
+            for sub_group in digest_groups.values():
+                if len(sub_group) > 1:
+                    pivot = sub_group[0]
+                    for other in sub_group[1:]:
+                        if not (pivot.is_ref and other.is_ref):
+                            result.append(Match(pivot, other, 100))
+
             group_count += 1
             j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))
-    except job.JobCancelled:
-        logging.info("Scan cancelled. Matches found so far: %d", len(result))
+    except (MemoryError, job.JobCancelled):
+        logging.info("Scan cancelled or memory cap reached. Matches found so far: %d", len(result))
     return result
 
 

@@ -838,6 +838,11 @@ class DupeGuru(Broadcaster):
                     pr.dump_stats(op.join(self.appdata, f"{datetime.datetime.now():%Y-%m-%d_%H-%M-%S}.profile"))
             finally:
                 fs.filesdb.commit()
+                fs.filesdb.scanned_paths.clear()
+                fs.filesdb.hit_paths.clear()
+                import gc
+
+                gc.collect()
 
         self._start_job(JobType.SCAN, do)
 
