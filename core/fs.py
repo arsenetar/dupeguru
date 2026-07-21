@@ -200,20 +200,18 @@ class FilesDB:
         except Exception as e:
             logging.error(f"Error snapshotting file: {e}")
 
-    def get_files_in_directory(self, dir_path: Path) -> list:
+    def get_files_in_directory(self, dir_path: Path):
         prefix = str(dir_path) + os.sep
-        files = []
         try:
-            with self.lock, self.conn as conn:
-                rows = conn.execute(
+            with self.lock:
+                cursor = self.conn.execute(
                     "SELECT path, size, mtime_ns FROM files WHERE path = ? OR path LIKE ?",
                     (str(dir_path), prefix + "%"),
-                ).fetchall()
-                for row in rows:
-                    files.append({"path": row[0], "size": row[1], "mtime_ns": row[2]})
+                )
+                for row in cursor:
+                    yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
         except Exception as e:
             logging.error(f"Error getting cached files in directory: {e}")
-        return files
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         stat = path.stat()
@@ -289,7 +287,7 @@ class File:
     # Slots for File make us save quite a bit of memory. In a memory test I've made with a lot of
     # files, I saved 35% memory usage with "unread" files (no _read_info() call) and gains become
     # even greater when we take into account read attributes (70%!). Yeah, it's worth it.
-    __slots__ = ("path", "unicode_path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
+    __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
         for attrname in self.INITIAL_INFO:
@@ -300,8 +298,10 @@ class File:
             self.mtime = nonone(path.stat().st_mtime, 0)
         else:
             self.path = path
-        if self.path:
-            self.unicode_path = str(self.path)
+
+    @property
+    def unicode_path(self):
+        return str(self.path) if self.path else ""
 
     def __repr__(self):
         return f"<{self.__class__.__name__} {str(self.path)}>"

@@ -135,7 +135,7 @@ def test_filesdb_directory_cache(tmpdir):
     db.snapshot_file(file2, 2048, 9876543.21)
     db.snapshot_file(file3, 512, 1111111.11)
 
-    files = db.get_files_in_directory(path1)
+    files = list(db.get_files_in_directory(path1))
     assert len(files) == 2
     paths = {f["path"] for f in files}
     assert str(file1) in paths
@@ -149,4 +149,4 @@ def test_filesdb_directory_cache(tmpdir):
     # Test clearing DB
     db.clear()
     assert not db.is_directory_scanned(path1)
-    assert len(db.get_files_in_directory(path1)) == 0
+    assert len(list(db.get_files_in_directory(path1))) == 0

@@ -592,7 +592,7 @@ def test_directory_cache_yield_resumption(tmpdir):
 
         # Verify it was added to database and scanned_directories
         assert fs.filesdb.is_directory_scanned(p)
-        assert len(fs.filesdb.get_files_in_directory(p)) == 2
+        assert len(list(fs.filesdb.get_files_in_directory(p))) == 2
 
         # Modify size in database to prove next call reads from database cache
         fs.filesdb.conn.execute("UPDATE files SET size = 9999 WHERE path = ?", (str(file1),))
