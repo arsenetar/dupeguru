@@ -420,7 +420,18 @@ class Group:
         if match in self.matches:
             return
         self.matches.add(match)
-        first, second, _ = match
+        first, second, percentage = match
+        if percentage == 100:
+            if first not in self.unordered:
+                self.ordered.append(first)
+                self.unordered.add(first)
+            if second not in self.unordered:
+                self.ordered.append(second)
+                self.unordered.add(second)
+            self._percentage = None
+            self._matches_for_ref = None
+            return
+
         if first not in self.unordered:
             add_candidate(first, second)
         if second not in self.unordered:
@@ -435,6 +446,15 @@ class Group:
         """
         discarded = {m for m in self.matches if not all(obj in self.unordered for obj in [m.first, m.second])}
         self.matches -= discarded
+
+        # For exact scans, only keep matches containing the reference file
+        if self.matches and all(m.percentage == 100 for m in self.matches):
+            ref = self.ref
+            if ref is not None:
+                ref_discarded = {m for m in self.matches if ref not in (m.first, m.second)}
+                self.matches -= ref_discarded
+                discarded.update(ref_discarded)
+
         self.candidates = defaultdict(set)
         return discarded
 

@@ -812,6 +812,31 @@ class TestCaseGroup:
         eq_(1, len(g.matches))
         eq_(0, len(g.candidates))
 
+    def test_exact_scan_discard_matches(self):
+        from core.engine import Match
+
+        g = Group()
+        o1 = NamedObject("foo", True)
+        o2 = NamedObject("bar", True)
+        o3 = NamedObject("baz", True)
+
+        g.add_match(Match(o1, o2, 100))
+        g.add_match(Match(o1, o3, 100))
+
+        # Should bypass candidates completely
+        eq_(0, len(g.candidates))
+        eq_(3, len(g.unordered))
+
+        g.discard_matches()
+        # Should retain only the matches containing the ref (o1)
+        eq_(2, len(g.matches))
+
+        # Duplicate-to-duplicate match (o2 to o3) should be discarded
+        g.add_match(Match(o2, o3, 100))
+        eq_(3, len(g.matches))
+        g.discard_matches()
+        eq_(2, len(g.matches))
+
 
 class TestCaseGetGroups:
     def test_empty(self):
