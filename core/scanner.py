@@ -68,6 +68,8 @@ def remove_dupe_paths(files):
         else:
             path2file[normalized] = f
         result.append(f)
+    path2file.clear()
+    del path2file
     return result
 
 

@@ -251,17 +251,20 @@ def getmatches(
         if no_field_order:
             match_flags.append(NO_FIELD_ORDER)
         j.start_job(len(word_dict), PROGRESS_MESSAGE % (0, 0))
-        compared = defaultdict(set)
+        compared_pairs = set()
         word_count = 0
         # This whole 'popping' thing is there to avoid taking too much memory at the same time.
         while word_dict:
             items = word_dict.popitem()[1]
             while items:
                 ref = items.pop()
-                compared_already = compared[ref]
-                to_compare = items - compared_already
-                compared_already |= to_compare
-                for other in to_compare:
+                id_ref = id(ref)
+                for other in items:
+                    id_other = id(other)
+                    pair = (id_ref, id_other) if id_ref < id_other else (id_other, id_ref)
+                    if pair in compared_pairs:
+                        continue
+                    compared_pairs.add(pair)
                     m = get_match(ref, other, match_flags)
                     if m.percentage >= min_match_percentage:
                         result.append(m)
@@ -272,8 +275,8 @@ def getmatches(
     except (MemoryError, job.JobCancelled):
         # This is the place where the memory usage is at its peak or the user cancelled the scan.
         # Just continue the process with an incomplete list of matches.
-        if "compared" in locals():
-            del compared  # This should give us enough room to call logging.
+        if "compared_pairs" in locals():
+            del compared_pairs  # This should give us enough room to call logging.
         wd_len = len(word_dict) if "word_dict" in locals() else 0
         logging.warning("Scan interrupted (Memory/Cancel). Matches: %d. Word dict: %d" % (len(result), wd_len))
         return result
