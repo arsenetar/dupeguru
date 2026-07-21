@@ -649,7 +649,7 @@ def start_server(port=8080):
     install_gettext_trans(str(locale_folder), lang)
 
     server = HTTPServer(("localhost", port), DupeGuruHTTPHandler)
-    print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}")
+    print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}", flush=True)
 
     stop_event = threading.Event()
     pulse_thread = threading.Thread(target=pulse_loop, args=(stop_event,), daemon=True)
@@ -663,7 +663,7 @@ def start_server(port=8080):
         stop_event.set()
         pulse_thread.join(timeout=1.0)
         server.server_close()
-        print("Server stopped.")
+        print("Server stopped.", flush=True)
 
 
 if __name__ == "__main__":

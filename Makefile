@@ -70,7 +70,7 @@ run:
 	$(VENV_PYTHON) run.py
 
 web: | all
-	$(VENV_PYTHON) run_web.py
+	$(VENV_PYTHON) -u run_web.py
 
 package: | all
 	$(VENV_PYTHON) package.py

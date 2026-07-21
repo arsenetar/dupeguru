@@ -22,7 +22,7 @@ from web.server import start_server  # noqa: E402
 def open_browser(url):
     """Wait for server to boot and open default web browser."""
     time.sleep(1.0)
-    print(f"Opening web browser at {url}...")
+    print(f"Opening web browser at {url}...", flush=True)
     webbrowser.open(url)
 
 
