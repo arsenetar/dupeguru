@@ -213,6 +213,32 @@ class FilesDB:
         except Exception as e:
             logging.error(f"Error getting cached files in directory: {e}")
 
+    def get_candidate_sizes(self):
+        try:
+            with self.lock:
+                rows = self.conn.execute(
+                    "SELECT size FROM files GROUP BY size HAVING COUNT(*) > 1 AND size > 0"
+                ).fetchall()
+                return [row[0] for row in rows]
+        except Exception as e:
+            logging.error(f"Error getting candidate sizes: {e}")
+            return []
+
+    def get_files_by_sizes(self, sizes):
+        if not sizes:
+            return
+        placeholders = ",".join("?" for _ in sizes)
+        try:
+            with self.lock:
+                cursor = self.conn.execute(
+                    f"SELECT path, size, mtime_ns FROM files WHERE size IN ({placeholders})",
+                    sizes,
+                )
+                for row in cursor:
+                    yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
+        except Exception as e:
+            logging.error(f"Error getting files by sizes: {e}")
+
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         stat = path.stat()
         size = stat.st_size

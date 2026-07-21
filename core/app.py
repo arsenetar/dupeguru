@@ -823,16 +823,64 @@ class DupeGuru(Broadcaster):
                 if profile_scan:
                     pr = cProfile.Profile()
                     pr.enable()
-                j.set_progress(0, tr("Collecting files to scan"))
-                if scanner.scan_type == ScanType.FOLDERS:
-                    files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
+
+                # Check if this is a content-based scan and cache is enabled
+                is_contents_scan = scanner.scan_type == ScanType.CONTENTS
+                if is_contents_scan and fs.filesdb.enable_directory_cache:
+                    j.set_progress(0, tr("Collecting files to scan (populating cache)"))
+                    # Populate the cache database without holding file objects in RAM
+                    for _ in self.directories.get_files(fileclasses=self.fileclasses, j=j):
+                        pass
+
+                    candidate_sizes = fs.filesdb.get_candidate_sizes()
+                    logging.info("Found %d candidate duplicate sizes in cache", len(candidate_sizes))
+
+                    batch_size = 2000
+                    all_groups = []
+
+                    # Process in size batches
+                    for idx in range(0, len(candidate_sizes), batch_size):
+                        j.check_if_cancelled()
+                        size_batch = candidate_sizes[idx : idx + batch_size]
+
+                        batch_files = []
+                        for f_data in fs.filesdb.get_files_by_sizes(size_batch):
+                            p = fs.Path(f_data["path"])
+                            file = fs.get_file(p, fileclasses=self.fileclasses)
+                            if file:
+                                file.size = f_data["size"]
+                                file.mtime = f_data["mtime_ns"] / 1e9
+                                state = self.directories.get_state(p.parent)
+                                file.is_ref = state == directories.DirectoryState.REFERENCE
+                                batch_files.append(file)
+
+                        if self.options["ignore_hardlink_matches"]:
+                            batch_files = self._remove_hardlink_dupes(batch_files)
+
+                        if batch_files:
+                            batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
+                            all_groups.extend(batch_groups)
+
+                        # Clean up memory immediately for the batch
+                        del batch_files
+                        import gc
+
+                        gc.collect()
+
+                    self.results.groups = all_groups
+                    self.discarded_file_count = 0
                 else:
-                    files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
-                if self.options["ignore_hardlink_matches"]:
-                    files = self._remove_hardlink_dupes(files)
-                logging.info("Scanning %d files" % len(files))
-                self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
-                self.discarded_file_count = scanner.discarded_file_count
+                    j.set_progress(0, tr("Collecting files to scan"))
+                    if scanner.scan_type == ScanType.FOLDERS:
+                        files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
+                    else:
+                        files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
+                    if self.options["ignore_hardlink_matches"]:
+                        files = self._remove_hardlink_dupes(files)
+                    logging.info("Scanning %d files" % len(files))
+                    self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
+                    self.discarded_file_count = scanner.discarded_file_count
+
                 if profile_scan:
                     pr.disable()
                     pr.dump_stats(op.join(self.appdata, f"{datetime.datetime.now():%Y-%m-%d_%H-%M-%S}.profile"))

@@ -612,3 +612,57 @@ def test_directory_cache_yield_resumption(tmpdir):
         assert file1_disk.size == 5
     finally:
         fs.filesdb.enable_directory_cache = False
+
+
+def test_streamed_batch_scanning(tmpdir):
+    from core import fs
+    from core.tests.base import TestApp
+
+    p = Path(str(tmpdir)).joinpath("batch_test")
+    p.mkdir()
+    file1 = p.joinpath("file1.txt")
+    file2 = p.joinpath("file2.txt")
+    file3 = p.joinpath("file3.txt")
+    # file1 and file2 are identical duplicates (size 5, content "hello")
+    file1.write_text("hello")
+    file2.write_text("hello")
+    # file3 has different size (10)
+    file3.write_text("hellohello")
+
+    app = TestApp().app
+    app.appdata = str(tmpdir)
+    db_path = Path(str(tmpdir)).joinpath("hash_cache.db")
+    fs.filesdb.connect(db_path)
+    fs.filesdb.clear()
+
+    # Enable directory cache
+    fs.filesdb.enable_directory_cache = True
+
+    try:
+        from core.app import ScanType
+
+        app.view.show_results_window = lambda: None
+        app.directories.add_path(p)
+        app.options["scan_type"] = ScanType.CONTENTS
+        app.start_scanning()
+
+        # Wait for the background scanner thread to finish
+        import time
+
+        for _ in range(200):
+            if not app.progress_window._job_running:
+                break
+            time.sleep(0.01)
+
+        # Pulse progress window to trigger completion callback
+        app.progress_window.pulse()
+
+        # There should be exactly 1 duplicate group with 2 files (file1, file2)
+        assert len(app.results.groups) == 1
+        group = app.results.groups[0]
+        assert len(group) == 2
+        paths = {f.path for f in group}
+        assert file1 in paths
+        assert file2 in paths
+    finally:
+        fs.filesdb.enable_directory_cache = False
