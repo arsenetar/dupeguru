@@ -37,6 +37,11 @@ let cacheLimit = 20;
 let cacheOffset = 0;
 let cacheTotal = 0;
 
+// Scan results pagination state
+let resultsLimit = 50;
+let resultsOffset = 0;
+let resultsTotal = 0;
+
 // Initialize Application
 document.addEventListener("DOMContentLoaded", () => {
     loadDirectories();
@@ -169,6 +174,27 @@ function setupEventListeners() {
                 cacheSearch = cacheSearchInput.value.trim();
                 loadCache();
             }, 300);
+        });
+    }
+
+    const resultsPrevBtn = document.getElementById("results-prev-btn");
+    const resultsNextBtn = document.getElementById("results-next-btn");
+
+    if (resultsPrevBtn) {
+        resultsPrevBtn.addEventListener("click", () => {
+            if (resultsOffset >= resultsLimit) {
+                resultsOffset -= resultsLimit;
+                loadResults();
+            }
+        });
+    }
+
+    if (resultsNextBtn) {
+        resultsNextBtn.addEventListener("click", () => {
+            if (resultsOffset + resultsLimit < resultsTotal) {
+                resultsOffset += resultsLimit;
+                loadResults();
+            }
         });
     }
 
@@ -363,30 +389,36 @@ async function pollProgress() {
 // 4. Results Management
 async function loadResults() {
     try {
-        const response = await fetch(`${API_BASE}/api/results?_t=${Date.now()}`);
-        resultsData = await response.json();
+        const response = await fetch(`${API_BASE}/api/results?limit=${resultsLimit}&offset=${resultsOffset}&_t=${Date.now()}`);
+        const data = await response.json();
 
-        renderResults();
+        resultsData = data.groups;
+        resultsTotal = data.total;
+
+        renderResults(data.total_marked);
     } catch (err) {
         console.error("Load results failed:", err);
     }
 }
 
-function renderResults() {
+function renderResults(totalMarkedCount) {
     resultsBody.innerHTML = "";
     welcomeContainer.classList.add("hidden");
     resultsContainer.classList.remove("hidden");
 
-    let totalGroups = resultsData.length;
+    let totalGroups = resultsTotal;
     let totalFiles = 0;
-    let markedCount = 0;
+    const paginationContainer = document.getElementById("results-pagination");
 
     if (totalGroups === 0) {
         resultsSummary.textContent = "No duplicates found.";
         resultsBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 40px; color: var(--text-secondary);">Your scan completed. No duplicate files were found!</td></tr>`;
         deleteMarkedBtn.disabled = true;
+        if (paginationContainer) paginationContainer.classList.add("hidden");
         return;
     }
+
+    if (paginationContainer) paginationContainer.classList.remove("hidden");
 
     resultsData.forEach(group => {
         // Group Header separating rows
@@ -399,7 +431,6 @@ function renderResults() {
 
         group.files.forEach(file => {
             totalFiles++;
-            if (file.marked) markedCount++;
 
             const row = document.createElement("tr");
             if (file.is_ref) {
@@ -427,9 +458,22 @@ function renderResults() {
         });
     });
 
-    resultsSummary.textContent = `Found ${totalGroups} duplicate groups (${totalFiles} total files). ${markedCount} files currently marked for deletion.`;
-    deleteMarkedBtn.disabled = markedCount === 0;
-    deleteMarkedBtn.textContent = `Delete ${markedCount} Marked File(s)`;
+    // Update pagination info
+    const resultsPrevBtn = document.getElementById("results-prev-btn");
+    const resultsNextBtn = document.getElementById("results-next-btn");
+    const resultsPageInfo = document.getElementById("results-page-info");
+
+    const currentPage = Math.floor(resultsOffset / resultsLimit) + 1;
+    const totalPages = Math.max(1, Math.ceil(resultsTotal / resultsLimit));
+
+    if (resultsPageInfo) resultsPageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    if (resultsPrevBtn) resultsPrevBtn.disabled = resultsOffset === 0;
+    if (resultsNextBtn) resultsNextBtn.disabled = resultsOffset + resultsLimit >= resultsTotal;
+
+    const overallMarked = totalMarkedCount !== undefined ? totalMarkedCount : 0;
+    resultsSummary.textContent = `Found ${totalGroups} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;
+    deleteMarkedBtn.disabled = overallMarked === 0;
+    deleteMarkedBtn.textContent = `Delete ${overallMarked} Marked File(s)`;
 }
 
 async function toggleMark(path, isChecked) {
@@ -449,16 +493,12 @@ async function toggleMark(path, isChecked) {
                     }
                 });
             });
-            // Recount and update texts
-            let markedCount = 0;
-            resultsData.forEach(group => {
-                group.files.forEach(file => {
-                    if (file.marked) markedCount++;
-                });
-            });
-            resultsSummary.textContent = `Found ${resultsData.length} duplicate groups. ${markedCount} files currently marked for deletion.`;
-            deleteMarkedBtn.disabled = markedCount === 0;
-            deleteMarkedBtn.textContent = `Delete ${markedCount} Marked File(s)`;
+            const overallMarked = result.total_marked !== undefined ? result.total_marked : 0;
+            const currentPage = Math.floor(resultsOffset / resultsLimit) + 1;
+            const totalPages = Math.max(1, Math.ceil(resultsTotal / resultsLimit));
+            resultsSummary.textContent = `Found ${resultsTotal} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;
+            deleteMarkedBtn.disabled = overallMarked === 0;
+            deleteMarkedBtn.textContent = `Delete ${overallMarked} Marked File(s)`;
         }
     } catch (err) {
         console.error("Toggle mark failed:", err);

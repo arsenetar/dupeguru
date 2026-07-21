@@ -406,9 +406,27 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 ).encode()
             )
 
-        elif path == "/api/results":
+        elif path == "/api/results" or path.startswith("/api/results?"):
+            limit = 50
+            offset = 0
+            if "?" in path:
+                try:
+                    from urllib.parse import urlparse, parse_qs
+
+                    query = urlparse(path).query
+                    params = parse_qs(query)
+                    if "limit" in params:
+                        limit = int(params["limit"][0])
+                    if "offset" in params:
+                        offset = int(params["offset"][0])
+                except Exception:
+                    pass
+
             groups_data = []
-            for g_idx, g in enumerate(model.results.groups):
+            total_groups = len(model.results.groups)
+            batch_groups = model.results.groups[offset : offset + limit]
+
+            for g_idx, g in enumerate(batch_groups):
                 files_data = []
                 for d in g:
                     display_info = model.get_display_info(d, g, delta=False)
@@ -427,12 +445,21 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     )
                 groups_data.append(
                     {
-                        "id": g_idx,
+                        "id": offset + g_idx,
                         "percentage": g.percentage,
                         "files": files_data,
                     }
                 )
-            self.wfile.write(json.dumps(groups_data).encode())
+            total_marked = sum(1 for d in model.results.dupes if model.results.is_marked(d))
+            response_data = {
+                "success": True,
+                "groups": groups_data,
+                "total": total_groups,
+                "total_marked": total_marked,
+                "limit": limit,
+                "offset": offset,
+            }
+            self.wfile.write(json.dumps(response_data).encode())
 
     def do_POST(self):
         path = self.path
@@ -542,10 +569,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     if str(file_entry.path) == file_path:
                         model.results.set_marked(file_entry, marked)
                         found = True
-                        break
                 if found:
                     break
-            self.wfile.write(json.dumps({"success": found}).encode())
+            total_marked = sum(1 for d in model.results.dupes if model.results.is_marked(d))
+            self.wfile.write(json.dumps({"success": found, "total_marked": total_marked}).encode())
 
         elif path == "/api/results/delete":
             # Direct delete or send to trash depending on backend
