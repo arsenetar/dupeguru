@@ -136,6 +136,24 @@ class FilesDB:
         else:
             self.conn = sqlite3.connect(path, check_same_thread=False)
         self.lock = Lock()
+
+        # Check if the index needs to be created on a large database and warn the user
+        try:
+            cursor = self.conn.execute("SELECT name FROM sqlite_master WHERE type='index' AND name='idx_files_size'")
+            if not cursor.fetchone():
+                db_size_mb = 0
+                if os.path.exists(path):
+                    db_size_mb = os.path.getsize(path) / (1024 * 1024)
+                if db_size_mb > 50:
+                    print(
+                        f"[dupeGuru] Optimizing database cache index (size: {db_size_mb:.1f} MB) "
+                        "for the first time. Please wait...",
+                        flush=True,
+                    )
+                    logging.info(f"Optimizing database cache index (size: {db_size_mb:.1f} MB) for the first time.")
+        except Exception:
+            pass
+
         self._check_upgrade()
 
     def _check_upgrade(self) -> None:
