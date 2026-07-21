@@ -157,6 +157,7 @@ class FilesDB:
                 )
             conn.execute(self.create_table_query)
             conn.execute(self.create_dir_table_query)
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
 
     def clear(self) -> None:
         with self.lock, self.conn as conn:
@@ -164,6 +165,7 @@ class FilesDB:
             conn.execute(self.drop_dir_table_query)
             conn.execute(self.create_table_query)
             conn.execute(self.create_dir_table_query)
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
 
     def mark_directory_scanned(self, dir_path: Path) -> None:
         try:
