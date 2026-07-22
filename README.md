@@ -85,6 +85,12 @@ If you install dupeGuru globally using `sudo make install`, you can start the We
 - **Regular Checkpoints**: dupeGuru flushes metadata to the SQLite cache database at a user-configurable frequency (default: 100 files). This prevents filesystem corruption, particularly on network-mounted drives.
 - **Stop & Resume**: Stopping a scan commits all progress to the cache. Running the scan again on the same folders instantly skips already scanned files and resumes where you left off.
 
+#### 3. High-Scale Low-Memory Pipeline
+- **Generator-Streamed Discovery**: Avoids loading millions of file paths into memory at once, using memory-efficient SQLite indexing and custom generators to handle scans of any size in $O(1)$ memory.
+- **Size-Batching Hashing**: Groups and processes candidates in size batches of 2,000 to keep the memory footprint under 150 MB even when scanning millions of files.
+- **Transitive Exact Match Optimizations**: Drastically reduces grouping set operations and prunes redundant duplicate-to-duplicate matches, shrinking memory overhead from $O(N^2)$ to $O(N)$.
+- **Paginated UI API**: Server-side pagination limits network data transfer and browser rendering stress by loading results in small pages of 50 groups.
+
 ### Building without Make
 
     $ cd <dupeGuru directory>
