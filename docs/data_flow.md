@@ -118,17 +118,21 @@ sequenceDiagram
     DG-->>UI: Broadcast results_changed / Refresh ResultWindow
 ```
 
-### Phase 1: Collection & Lazy Loading
+### Phase 1: Streamed Collection & Lazy Loading
 - [Directories.get_files()](file:///Users/tinle/src/tinle/opensource/dupeguru/core/directories.py#L125) recursively crawls the filesystem under the target directories.
 - It skips `EXCLUDED` subfolders.
-- Files are collected as lazy-loading instances of [File](file:///Users/tinle/src/tinle/opensource/dupeguru/core/fs.py#L202) (or `MusicFile`/`Photo` depending on the active edition). No file content is read at this stage.
+- **Memory Optimization:** During Content scans with caching enabled, the directory crawler runs as a generator directly populating the cache DB in $O(1)$ memory instead of eagerly loading all discovered file objects into a Python list.
 
-### Phase 2: SQLite Metadata Cache Hook
+### Phase 2: SQLite Metadata Cache & Batching
 - The scanner iterates over files to check sizes and modification times.
 - If a property like `digest` or `digest_partial` is accessed, Python's `__getattribute__` triggers `_read_info()`.
 - `_read_info()` queries [FilesDB](file:///Users/tinle/src/tinle/opensource/dupeguru/core/fs.py#L100) using the file's path, size, and modification time (`st_mtime_ns`):
   - **Cache Hit**: Returns the cached digest. No disk read is performed.
   - **Cache Miss**: Reads the file and calculates the digest. The new digest is written back to `hash_cache.db`.
+- **Candidate Size Index & Batching:**
+  - Files are processed in size-based batches of `2000` size groups.
+  - SQLite uses index `idx_files_size` on the `size` column of the `files` table to instantly lookup size groups and fetch batch files without scanning the entire database.
+  - `gc.collect()` is run after each size batch to immediately free RAM.
 - **Digests used**:
   - `digest_partial`: Hashed value of the first 16KB of the file at a 16KB offset.
   - `digest`: Full file hash (used for smaller files).
@@ -138,6 +142,8 @@ sequenceDiagram
 The engine uses specific algorithms depending on the scan type:
 1. **Filename Scan**: Normalizes names, splits them into word blocks, and uses Python's `difflib` to match similar names.
 2. **Content Scan**: Grouped by file size. Candidates are matched by comparing `digest_partial` first. If matching, full `digest` (or `digest_samples` for large files) is compared.
+   - **Pivot Grouping:** Uses linear pivot comparisons ($M-1$ comparisons) rather than $O(N^2)$ combinations.
+   - **Bypass Candidate Checks:** For exact content matches (`percentage == 100`), the engine bypasses `defaultdict(set)` candidate mapping entirely.
 3. **Fuzzy Photo Scan**:
    - Loads the image via Qt codecs and handles orientation rotation.
    - Computes average colors for a 15x15 block grid.
@@ -147,6 +153,7 @@ The engine uses specific algorithms depending on the scan type:
 ### Phase 4: Transitive Grouping & Prioritization
 - All matched pairs `Match(first, second, percentage)` are compiled.
 - [engine.get_groups()](file:///Users/tinle/src/tinle/opensource/dupeguru/core/engine.py#L452) builds transitive groups: if File A matches File B, and File B matches File C, they are merged into a single `Group`.
+- **Match Pruning:** For exact scans, all duplicate-to-duplicate matches that do not involve the reference file `Group.ref` are pruned, reducing matches memory from $O(N^2)$ to $O(N)$.
 - [Group.prioritize()](file:///Users/tinle/src/tinle/opensource/dupeguru/core/engine.py#L426) orders the duplicate list inside the group using user-defined criteria. The top-ranked file is set as the `Group.ref` (Reference File) and is protected from deletion, while the remaining files (`Group.dupes`) are marked.
 
 ---

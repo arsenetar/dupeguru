@@ -143,7 +143,8 @@ The Web Console introduces a lightweight, robust client-server architecture buil
 
 ### Component Structure
 1. **REST API Handler (`web/server.py`)**: Runs a standard library HTTP server that handles API routes (`GET /api/status`, `POST /api/scan`, `GET/POST /api/config`, `POST /api/directories`).
+   - **Paginated Results endpoint (`GET /api/results`)**: Supports `limit` and `offset` query parameters to fetch results in slices, reducing network payload and browser rendering memory. Returns global `total_marked` counts for deletion synchronizations.
 2. **WebViewAdapter**: Implements the Core View Protocol, translating core notifications (e.g., scan progress, file list changes) into structured JSON updates written to a global `app_state` dictionary.
 3. **Background Pulse Loop**: A background thread continuously runs `model.progress_window.pulse()` during scans, updating the active thread states and resetting the job runner cleanly to `idle` upon completion or cancellation.
 4. **Cache-Buster Strategy**: Both HTTP header controls (`Cache-Control: no-store`) and client-side epoch queries (`?_t=timestamp`) are implemented to prevent web browsers from caching dynamic status or target directory updates.
-5. **Static Web UI Client (`web/static/`)**: A responsive UI using Vanilla CSS and JavaScript. It queries the REST API, lists scannable directories with real-time `✓ Added` badges, renders progress bars, and displays glassmorphic toast alerts.
+5. **Static Web UI Client (`web/static/`)**: A responsive UI using Vanilla CSS and JavaScript. It queries the REST API, lists scannable directories with real-time `✓ Added` badges, renders progress bars, displays glassmorphic toast alerts, and provides pagination controls (`Next`/`Previous` page navigation) for results.
