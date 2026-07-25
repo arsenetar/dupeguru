@@ -366,29 +366,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             total_count = 0
             try:
                 with fs.filesdb.lock:
-                    if search:
-                        count_row = fs.filesdb.conn.execute(
-                            "SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",)
-                        ).fetchone()
-                        rows = fs.filesdb.conn.execute(
-                            "SELECT path, size, entry_dt FROM files WHERE path LIKE ? "
-                            "ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
-                            (f"%{search}%", limit, offset),
-                        ).fetchall()
-                    else:
-                        count_row = fs.filesdb.conn.execute("SELECT COUNT(*) FROM files").fetchone()
-                        rows = fs.filesdb.conn.execute(
-                            "SELECT path, size, entry_dt FROM files ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
-                            (limit, offset),
-                        ).fetchall()
-
-                    total_count = count_row[0] if count_row else 0
+                    total_count, rows = fs.filesdb.get_cache_viewer_files(search, limit, offset)
                     for row in rows:
                         files_list.append(
                             {
-                                "path": row[0],
-                                "size": format_size(row[1], 0, 1, False) if row[1] is not None else "0 B",
-                                "entry_dt": row[2],
+                                "path": row["path"],
+                                "size": format_size(row["size"], 0, 1, False) if row["size"] is not None else "0 B",
+                                "entry_dt": row["entry_dt"],
                             }
                         )
             except Exception as e:

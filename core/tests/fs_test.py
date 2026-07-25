@@ -150,3 +150,90 @@ def test_filesdb_directory_cache(tmpdir):
     db.clear()
     assert not db.is_directory_scanned(path1)
     assert len(list(db.get_files_in_directory(path1))) == 0
+
+
+def test_valkey_cache_engine():
+    import pytest
+
+    try:
+        import redis  # noqa: F401
+    except ImportError:
+        pytest.skip("redis library is not installed")
+
+    # Connect to a local test redis instance or skip
+    db = fs.FilesDB()
+    try:
+        db.connect("redis://localhost:6379/15")
+        # Ping to check if server is responsive
+        db.engine.client.ping()
+    except Exception:
+        pytest.skip("Redis server is not running on localhost:6379/15")
+
+    try:
+        # Clean up database partition before run
+        db.clear()
+
+        # Test directory mark & check
+        path1 = Path("/some/scanned/dir")
+        path2 = Path("/another/unscanned/dir")
+
+        assert not db.is_directory_scanned(path1)
+        db.mark_directory_scanned(path1)
+        assert db.is_directory_scanned(path1)
+        assert not db.is_directory_scanned(path2)
+
+        # Test snapshot file and get_files_in_directory
+        file1 = path1.joinpath("file1.txt")
+        file2 = path1.joinpath("file2.txt")
+        file3 = path2.joinpath("file3.txt")
+
+        db.snapshot_file(file1, 1024, 1234567.89)
+        db.snapshot_file(file2, 2048, 9876543.21)
+        db.snapshot_file(file3, 512, 1111111.11)
+
+        files = list(db.get_files_in_directory(path1))
+        assert len(files) == 2
+        paths = {f["path"] for f in files}
+        assert str(file1) in paths
+        assert str(file2) in paths
+
+        # Check sizes and mtimes
+        file1_data = next(f for f in files if f["path"] == str(file1))
+        assert file1_data["size"] == 1024
+        assert file1_data["mtime_ns"] == int(1234567.89 * 1e9)
+
+        # Test Candidate sizes & get_files_by_sizes
+        assert db.get_candidate_sizes() == []  # All unique sizes (1024, 2048, 512)
+
+        # Add another file of size 1024 to trigger duplicate size
+        file4 = path2.joinpath("file4.txt")
+        db.snapshot_file(file4, 1024, 1234567.89)
+        eq_(db.get_candidate_sizes(), [1024])
+
+        by_sizes = list(db.get_files_by_sizes([1024]))
+        assert len(by_sizes) == 2
+        by_sizes_paths = {f["path"] for f in by_sizes}
+        assert str(file1) in by_sizes_paths
+        assert str(file4) in by_sizes_paths
+
+        # Test put/get operations
+        db.put(file1, "digest", b"fake_digest_bytes")
+        eq_(db.get(file1, "digest"), b"fake_digest_bytes")
+
+        # Test get_cache_viewer_files
+        total, rows = db.get_cache_viewer_files(limit=10)
+        assert total == 4  # file1, file2, file3, file4
+        assert len(rows) == 4
+
+        total_search, rows_search = db.get_cache_viewer_files(search="file1", limit=10)
+        assert total_search == 1
+        assert rows_search[0]["path"] == str(file1)
+
+        # Test clearing DB
+        db.clear()
+        assert not db.is_directory_scanned(path1)
+        assert len(list(db.get_files_in_directory(path1))) == 0
+    finally:
+        # Flush DB to leave it clean
+        db.clear()
+        db.close()
