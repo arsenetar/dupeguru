@@ -143,7 +143,8 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        hash_cache_file = op.join(self.appdata, "hash_cache.db")
+        cache_url = view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
+        hash_cache_file = cache_url or op.join(self.appdata, "hash_cache.db")
         fs.filesdb.connect(hash_cache_file)
         self.directories = directories.Directories(self.exclude_list)
         self.results = results.Results(self)

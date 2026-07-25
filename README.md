@@ -81,9 +81,10 @@ If you install dupeGuru globally using `sudo make install`, you can start the We
 - **Config Management**: Toggle preferences (Filter Hardness, Regexp matching, Ignored Hardlinks, Checkpoints) directly in the sidebar panel.
 - **Save & Load Scans**: Save current results or load previous `.dupegururesults` files.
 
-#### 2. SQLite Database Checkpoints & Resumption
-- **Regular Checkpoints**: dupeGuru flushes metadata to the SQLite cache database at a user-configurable frequency (default: 100 files). This prevents filesystem corruption, particularly on network-mounted drives.
-- **Stop & Resume**: Stopping a scan commits all progress to the cache. Running the scan again on the same folders instantly skips already scanned files and resumes where you left off.
+#### 2. Pluggable Cache Database (SQLite vs. Valkey/Redis)
+- **Database Checkpoints & Resumption**: Stopping a scan commits all progress to the cache database. Subdirectories already scanned are automatically skipped on resumption, dramatically speeding up subsequent runs.
+- **Scalable Key-Value Backends**: Set the `DUPEGURU_CACHE_URL` environment variable or the `CacheURL` configuration key in `settings.ini` to connect to a high-speed Redis or Valkey instance (e.g., `redis://localhost:6379/0`).
+- **Bidirectional Cache Converter**: Migrate files and directory scans cache between local SQLite databases and Valkey/Redis servers using `python scripts/convert_cache.py <source> <destination>`.
 
 #### 3. High-Scale Low-Memory Pipeline
 - **Generator-Streamed Discovery**: Avoids loading millions of file paths into memory at once, using memory-efficient SQLite indexing and custom generators to handle scans of any size in $O(1)$ memory.

@@ -103,6 +103,39 @@ Configuration parameters are stored in the following standardized directories:
 
 ---
 
+## 5. Configuring Cache Database Backends (SQLite vs. Valkey/Redis)
+
+dupeGuru supports pluggable cache engines. By default, it uses a local SQLite database, but for massive scans, network drives, or distributed environments, you can configure it to use Valkey or Redis.
+
+### Cache Options:
+1. **SQLite (Default):** Zero dependencies, stored locally at `~/.local/share/dupeGuru/hash_cache.db`.
+2. **Valkey / Redis:** Extremely fast, supports parallel lock-free writes and distributed caching. Requires the `redis` library (`pip install redis`).
+
+### How to Configure:
+You can specify the cache database location using either:
+- **Environment Variable:** Set the `DUPEGURU_CACHE_URL` environment variable:
+  ```bash
+  export DUPEGURU_CACHE_URL="redis://localhost:6379/0"
+  make web
+  ```
+- **Configuration File:** Add the `CacheURL` key to your `settings.ini` under the default section:
+  ```ini
+  CacheURL=redis://localhost:6379/0
+  ```
+
+### Converting Between Databases:
+To migrate metadata between SQLite and Redis/Valkey without losing your scanned hashes cache, use the `convert_cache.py` utility script:
+```bash
+# Convert local SQLite database to Redis
+./env/bin/python scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db redis://localhost:6379/0
+
+# Convert Redis cache back to a local SQLite database
+./env/bin/python scripts/convert_cache.py redis://localhost:6379/0 ~/.local/share/dupeGuru/hash_cache_new.db
+```
+Use the `--clear-destination` flag to wipe the target database before starting the conversion.
+
+---
+
 ## 5. Release & Maintenance Workflows
 
 For project maintainers, a release automation script is available:
