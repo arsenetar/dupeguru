@@ -6,6 +6,9 @@
 
 import logging
 import os
+import queue
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -195,19 +198,146 @@ class Directories:
             return []
 
     def get_files(self, fileclasses=None, j=job.nulljob):
-        """Returns a list of all files that are not excluded.
-
-        Returned files also have their ``is_ref`` attr set if applicable.
-        """
+        """Returns a list of all files that are not excluded, walking directories in parallel."""
         if fileclasses is None:
             fileclasses = [fs.File]
-        file_count = 0
+
+        dirs_to_crawl = []
         for path in self._dirs:
-            for file in self._get_files(path, fileclasses=fileclasses, j=j):
-                file_count += 1
-                if not isinstance(j, job.NullJob):
-                    j.set_progress(-1, tr("Scanning {}: Collected {} files...").format(path.name, file_count))
-                yield file
+            if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(path):
+                logging.info("Directory %s already scanned. Loading files from cache database.", path)
+                for f_data in fs.filesdb.get_files_in_directory(path):
+                    p = fs.Path(f_data["path"])
+                    file = fs.get_file(p, fileclasses=fileclasses)
+                    if file:
+                        file.size = f_data["size"]
+                        file.mtime = f_data["mtime_ns"] / 1e9
+                        file.is_ref = self.get_state(path) == DirectoryState.REFERENCE
+                        yield file
+            else:
+                dirs_to_crawl.append(path)
+
+        if not dirs_to_crawl:
+            return
+
+        dir_queue = queue.Queue()
+        for p in dirs_to_crawl:
+            dir_queue.put(p)
+
+        db_queue = queue.Queue()
+        files_queue = queue.Queue()
+
+        active_crawlers = 0
+        crawler_lock = threading.Lock()
+        crawling_done = threading.Event()
+        stop_workers = threading.Event()
+
+        def crawler_worker():
+            nonlocal active_crawlers
+            while not stop_workers.is_set():
+                try:
+                    from_path = dir_queue.get(timeout=0.05)
+                except queue.Empty:
+                    with crawler_lock:
+                        if active_crawlers == 0:
+                            crawling_done.set()
+                            break
+                    continue
+
+                with crawler_lock:
+                    active_crawlers += 1
+
+                try:
+                    root_path = Path(from_path)
+                    state = self.get_state(root_path)
+
+                    if state == DirectoryState.EXCLUDED:
+                        if not any(p.parts[: len(root_path.parts)] == root_path.parts for p in self.states):
+                            dir_queue.task_done()
+                            continue
+
+                    with os.scandir(from_path) as it:
+                        for item in it:
+                            if stop_workers.is_set():
+                                break
+                            try:
+                                if item.is_dir():
+                                    dir_queue.put(item.path)
+                                else:
+                                    if state == DirectoryState.EXCLUDED:
+                                        continue
+                                    if (
+                                        self._exclude_list is None
+                                        or not self._exclude_list.mark_count
+                                        or not self._exclude_list.is_excluded(str(from_path), item.name)
+                                    ):
+                                        file = fs.get_file(item, fileclasses=fileclasses)
+                                        if file:
+                                            file.is_ref = state == DirectoryState.REFERENCE
+                                            if fs.filesdb.enable_directory_cache:
+                                                db_queue.put((file.path, file.size, file.mtime))
+                                            files_queue.put(file)
+                            except Exception:
+                                pass
+
+                    if fs.filesdb.enable_directory_cache:
+                        db_queue.put(("DIR_SCANNED", root_path))
+                except Exception:
+                    pass
+                finally:
+                    with crawler_lock:
+                        active_crawlers -= 1
+                    dir_queue.task_done()
+
+        db_writer_done = threading.Event()
+
+        def db_writer_worker():
+            while True:
+                item = db_queue.get()
+                if item is None:
+                    db_queue.task_done()
+                    break
+                try:
+                    if item[0] == "DIR_SCANNED":
+                        fs.filesdb.mark_directory_scanned(item[1])
+                    else:
+                        fs.filesdb.snapshot_file(item[0], item[1], item[2])
+                except Exception as e:
+                    logging.error(f"Error in parallel db writer: {e}")
+                db_queue.task_done()
+            db_writer_done.set()
+
+        writer_thread = threading.Thread(target=db_writer_worker, daemon=True)
+        writer_thread.start()
+
+        num_workers = 8
+        pool = ThreadPoolExecutor(max_workers=num_workers)
+        for _ in range(num_workers):
+            pool.submit(crawler_worker)
+
+        try:
+            file_count = 0
+            while not crawling_done.is_set() or not files_queue.empty():
+                j.check_if_cancelled()
+                try:
+                    file = files_queue.get(timeout=0.05)
+                    file_count += 1
+                    if not isinstance(j, job.NullJob) and file_count % 100 == 0:
+                        j.set_progress(-1, tr("Scanning: Collected {} files...").format(file_count))
+                    yield file
+                    files_queue.task_done()
+                except queue.Empty:
+                    continue
+        except Exception:
+            stop_workers.set()
+            crawling_done.set()
+            raise
+        finally:
+            stop_workers.set()
+            pool.shutdown(wait=True)
+            db_queue.put(None)
+            db_writer_done.wait()
+            fs.filesdb.commit()
 
     def get_folders(self, folderclass=None, j=job.nulljob):
         """Returns a list of all folders that are not excluded.

@@ -296,6 +296,32 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     del files
     possible_matches = [g for g in size2files.values() if len(g) > 1]
     del size2files
+
+    # Pre-hash all candidate files in parallel using a thread pool
+    from concurrent.futures import ThreadPoolExecutor
+
+    all_files_to_hash = [f for g in possible_matches for f in g if f.size > 0]
+
+    if all_files_to_hash:
+
+        def prehash_file(f):
+            try:
+                j.check_if_cancelled()
+                d = f.digest_partial
+                if d is not None:
+                    if bigsize > 0 and f.size > bigsize:
+                        _ = f.digest_samples
+                    else:
+                        _ = f.digest
+            except job.JobCancelled:
+                raise
+            except Exception:
+                pass
+
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            # list() forces evaluation and waits for all threads to finish
+            list(executor.map(prehash_file, all_files_to_hash))
+
     result = []
     j.start_job(len(possible_matches), PROGRESS_MESSAGE % (0, 0))
     group_count = 0
