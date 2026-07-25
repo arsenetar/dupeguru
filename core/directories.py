@@ -262,7 +262,18 @@ class Directories:
                                 break
                             try:
                                 if item.is_dir():
-                                    dir_queue.put(item.path)
+                                    sub_path = Path(item.path)
+                                    if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(sub_path):
+                                        for f_data in fs.filesdb.get_files_in_directory(sub_path):
+                                            p = fs.Path(f_data["path"])
+                                            file = fs.get_file(p, fileclasses=fileclasses)
+                                            if file:
+                                                file.size = f_data["size"]
+                                                file.mtime = f_data["mtime_ns"] / 1e9
+                                                file.is_ref = self.get_state(sub_path) == DirectoryState.REFERENCE
+                                                files_queue.put(file)
+                                    else:
+                                        dir_queue.put(item.path)
                                 else:
                                     if state == DirectoryState.EXCLUDED:
                                         continue
