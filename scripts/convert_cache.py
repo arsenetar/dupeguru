@@ -111,10 +111,14 @@ def main():
         count += 1
         if count % 2000 == 0:
             dst_db.commit()
+            dst_db.scanned_paths.clear()
+            dst_db.hit_paths.clear()
             gc.collect()
             print(f"Progress: Converted {count}/{total_files} files...", flush=True)
 
     dst_db.commit()
+    dst_db.scanned_paths.clear()
+    dst_db.hit_paths.clear()
     gc.collect()
     print(f"Conversion complete! Converted total of {count} files.")
 
