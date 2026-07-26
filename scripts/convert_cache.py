@@ -57,23 +57,33 @@ def main():
 
     # 2. Copy cached files and metadata
     print("Converting cached files (this may take a moment)...")
-    files_to_copy = []
+
+    total_files = 0
     if hasattr(src_db.engine, "conn") and src_db.engine.conn:
-        # SQLite
-        cursor = src_db.engine.conn.execute(
-            "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples FROM files"
-        )
-        files_to_copy = cursor.fetchall()
+        cursor = src_db.engine.conn.execute("SELECT COUNT(*) FROM files")
+        total_files = cursor.fetchone()[0]
     elif hasattr(src_db.engine, "client") and src_db.engine.client:
-        # Redis
-        for key in src_db.engine.client.scan_iter("dg:file:*"):
-            path_str = key.decode("utf-8").replace("dg:file:", "", 1)
-            meta = src_db.engine.client.hmget(
-                key, ["size", "mtime_ns", "entry_dt", "digest", "digest_partial", "digest_samples"]
+        total_files = src_db.engine.client.zcard("dg:files_by_path")
+
+    print(f"Total files to convert: {total_files}")
+
+    def get_source_files():
+        if hasattr(src_db.engine, "conn") and src_db.engine.conn:
+            # SQLite: iterate over cursor directly to avoid fetchall() memory spikes
+            cursor = src_db.engine.conn.execute(
+                "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples FROM files"
             )
-            if meta[0] is not None:
-                files_to_copy.append(
-                    (
+            for row in cursor:
+                yield row
+        elif hasattr(src_db.engine, "client") and src_db.engine.client:
+            # Redis: scan keys lazily to avoid holding millions of items in memory
+            for key in src_db.engine.client.scan_iter("dg:file:*"):
+                path_str = key.decode("utf-8").replace("dg:file:", "", 1)
+                meta = src_db.engine.client.hmget(
+                    key, ["size", "mtime_ns", "entry_dt", "digest", "digest_partial", "digest_samples"]
+                )
+                if meta[0] is not None:
+                    yield (
                         path_str,
                         int(meta[0]),
                         int(meta[1]) if meta[1] is not None else 0,
@@ -82,11 +92,11 @@ def main():
                         meta[4],  # digest_partial bytes
                         meta[5],  # digest_samples bytes
                     )
-                )
 
-    # Write files to destination
     count = 0
-    for item in files_to_copy:
+    import gc
+
+    for item in get_source_files():
         path_str, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples = item
 
         dst_db.snapshot_file(Path(path_str), size, mtime_ns / 1e9)
@@ -99,10 +109,13 @@ def main():
             dst_db.put(Path(path_str), "digest_samples", digest_samples)
 
         count += 1
-        if count % 1000 == 0:
-            print(f"Progress: Converted {count}/{len(files_to_copy)} files...", flush=True)
+        if count % 2000 == 0:
+            dst_db.commit()
+            gc.collect()
+            print(f"Progress: Converted {count}/{total_files} files...", flush=True)
 
     dst_db.commit()
+    gc.collect()
     print(f"Conversion complete! Converted total of {count} files.")
 
 
