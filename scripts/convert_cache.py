@@ -69,12 +69,24 @@ def main():
 
     def get_source_files():
         if hasattr(src_db.engine, "conn") and src_db.engine.conn:
-            # SQLite: iterate over cursor directly to avoid fetchall() memory spikes
-            cursor = src_db.engine.conn.execute(
-                "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples FROM files"
-            )
-            for row in cursor:
-                yield row
+            # SQLite: use keyset pagination to prevent python-sqlite3 from loading the whole table
+            limit = 5000
+            last_path = ""
+            while True:
+                cursor = src_db.engine.conn.execute(
+                    """SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                       FROM files
+                       WHERE path > ?
+                       ORDER BY path
+                       LIMIT ?""",
+                    (last_path, limit),
+                )
+                rows = cursor.fetchall()
+                if not rows:
+                    break
+                for row in rows:
+                    yield row
+                last_path = rows[-1][0]
         elif hasattr(src_db.engine, "client") and src_db.engine.client:
             # Redis: scan keys lazily to avoid holding millions of items in memory
             for key in src_db.engine.client.scan_iter("dg:file:*"):
