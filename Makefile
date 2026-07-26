@@ -183,11 +183,11 @@ clean:
 
 db-to-redis:
 	@echo "Converting SQLite DB to Redis/Valkey at $(REDIS_URL)..."
-	$(VENV_PYTHON) scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db $(REDIS_URL)
+	$(VENV_PYTHON) scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db $(REDIS_URL) $(FLAGS)
 
 redis-to-db:
 	@echo "Converting Redis/Valkey at $(REDIS_URL) to SQLite DB..."
-	$(VENV_PYTHON) scripts/convert_cache.py $(REDIS_URL) ~/.local/share/dupeGuru/hash_cache_new.db
+	$(VENV_PYTHON) scripts/convert_cache.py $(REDIS_URL) ~/.local/share/dupeGuru/hash_cache_new.db $(FLAGS)
 
 dev-setup:
 	@echo "Setting up development environment..."
