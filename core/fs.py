@@ -167,9 +167,9 @@ class SQLiteCacheEngine(CacheEngine):
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         if platform.startswith("gnu0"):
-            self.conn = sqlite3.connect(path, check_same_thread=False, isolation_level=None)
+            self.conn = sqlite3.connect(path, check_same_thread=False, isolation_level=None, timeout=30.0)
         else:
-            self.conn = sqlite3.connect(path, check_same_thread=False)
+            self.conn = sqlite3.connect(path, check_same_thread=False, timeout=30.0)
 
         # Check if the index needs to be created on a large database and warn the user
         try:
@@ -385,6 +385,33 @@ class SQLiteCacheEngine(CacheEngine):
             return total_count, files_list
 
 
+def valkey_retry(func):
+    def wrapper(self, *args, **kwargs):
+        import time
+        import redis.exceptions
+
+        retries = 8
+        backoff = 0.5
+        for attempt in range(retries):
+            try:
+                return func(self, *args, **kwargs)
+            except (
+                redis.exceptions.ConnectionError,
+                redis.exceptions.TimeoutError,
+                redis.exceptions.BusyLoadingError,
+            ) as e:
+                if attempt == retries - 1:
+                    logging.error(f"Valkey operation failed after {retries} retries: {e}")
+                    raise
+                logging.warning(
+                    f"Valkey connection/loading error: {e}. Retrying in {backoff}s (attempt {attempt + 1}/{retries})..."
+                )
+                time.sleep(backoff)
+                backoff = min(backoff * 2, 4.0)
+
+    return wrapper
+
+
 class ValkeyCacheEngine(CacheEngine):
     def __init__(self, url: str, outer_db):
         self.url = url
@@ -406,6 +433,7 @@ class ValkeyCacheEngine(CacheEngine):
     def close(self) -> None:
         pass
 
+    @valkey_retry
     def clear(self) -> None:
         with self.lock:
             # Safely clear namespace keys to avoid impacting other apps sharing Redis
@@ -421,6 +449,7 @@ class ValkeyCacheEngine(CacheEngine):
     def commit(self) -> None:
         pass
 
+    @valkey_retry
     def mark_directory_scanned(self, dir_path: Path) -> None:
         try:
             with self.lock:
@@ -428,6 +457,7 @@ class ValkeyCacheEngine(CacheEngine):
         except Exception as e:
             logging.error(f"Error marking directory scanned in Valkey: {e}")
 
+    @valkey_retry
     def is_directory_scanned(self, dir_path: Path) -> bool:
         try:
             with self.lock:
@@ -435,6 +465,7 @@ class ValkeyCacheEngine(CacheEngine):
         except Exception:
             return False
 
+    @valkey_retry
     def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
         try:
             path_str = str(path)
@@ -469,28 +500,36 @@ class ValkeyCacheEngine(CacheEngine):
     def get_files_in_directory(self, dir_path: Path):
         dir_str = str(dir_path)
         prefix = dir_str + os.sep
-        try:
+
+        @valkey_retry
+        def fetch_paths(self):
             with self.lock:
-                # Lexicographically search for paths starting with prefix
                 path_bytes_list = self.client.zrangebylex("dg:files_by_path", f"[{prefix}", f"[{prefix}\xff")
                 paths = [p.decode("utf-8") for p in path_bytes_list]
-
-                # Check if the directory itself is cached as a file
                 if self.client.exists(f"dg:file:{dir_str}"):
                     paths.append(dir_str)
+                return paths
 
-                for path_str in paths:
-                    file_key = f"dg:file:{path_str}"
-                    meta = self.client.hmget(file_key, ["size", "mtime_ns"])
-                    if meta and meta[0] is not None:
-                        yield {
-                            "path": path_str,
-                            "size": int(meta[0]),
-                            "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
-                        }
+        try:
+            paths = fetch_paths(self)
+            for path_str in paths:
+
+                @valkey_retry
+                def fetch_meta(self, p_str):
+                    with self.lock:
+                        return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+
+                meta = fetch_meta(self, path_str)
+                if meta and meta[0] is not None:
+                    yield {
+                        "path": path_str,
+                        "size": int(meta[0]),
+                        "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                    }
         except Exception as e:
             logging.error(f"Error getting cached files in Valkey: {e}")
 
+    @valkey_retry
     def get_candidate_sizes(self):
         try:
             with self.lock:
@@ -503,23 +542,34 @@ class ValkeyCacheEngine(CacheEngine):
     def get_files_by_sizes(self, sizes):
         if not sizes:
             return
+
         try:
-            with self.lock:
-                for size in sizes:
-                    path_bytes_list = self.client.smembers(f"dg:size_files:{size}")
-                    for path_bytes in path_bytes_list:
-                        path_str = path_bytes.decode("utf-8")
-                        file_key = f"dg:file:{path_str}"
-                        meta = self.client.hmget(file_key, ["size", "mtime_ns"])
-                        if meta and meta[0] is not None:
-                            yield {
-                                "path": path_str,
-                                "size": int(meta[0]),
-                                "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
-                            }
+            for size in sizes:
+
+                @valkey_retry
+                def fetch_size_paths(self, sz):
+                    with self.lock:
+                        return [p.decode("utf-8") for p in self.client.smembers(f"dg:size_files:{sz}")]
+
+                paths = fetch_size_paths(self, size)
+                for path_str in paths:
+
+                    @valkey_retry
+                    def fetch_meta(self, p_str):
+                        with self.lock:
+                            return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+
+                    meta = fetch_meta(self, path_str)
+                    if meta and meta[0] is not None:
+                        yield {
+                            "path": path_str,
+                            "size": int(meta[0]),
+                            "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                        }
         except Exception as e:
             logging.error(f"Error getting files by sizes in Valkey: {e}")
 
+    @valkey_retry
     def get(self, path: Path, key: str, ignore_mtime: bool) -> Union[bytes, None]:
         path_str = str(path)
         file_key = f"dg:file:{path_str}"
@@ -546,6 +596,7 @@ class ValkeyCacheEngine(CacheEngine):
             logging.warning(f"Couldn't get {key} for {path} in Valkey: {ex}")
         return None
 
+    @valkey_retry
     def put(self, path: Path, key: str, value: Any) -> None:
         path_str = str(path)
         stat = path.stat()
@@ -570,6 +621,7 @@ class ValkeyCacheEngine(CacheEngine):
         except Exception as ex:
             logging.warning(f"Couldn't put {key} for {path} in Valkey: {ex}")
 
+    @valkey_retry
     def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         with self.lock:
             if search:
