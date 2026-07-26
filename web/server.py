@@ -191,15 +191,16 @@ app_state = {
 # Initialize view adapter first
 web_view = WebViewAdapter(app_state)
 
-# Initialize model with the view
+# Load preferences first to get the CacheURL from web_settings.json
+appdata_dir = get_appdata_pure_python()
+web_view.load_preferences(appdata_dir)
+
+# Initialize model with the view (which now has CacheURL populated!)
 model = DupeGuru(web_view)
 
 # Bind progress view
 progress_view = WebProgressView(app_state)
 model.progress_window.view = progress_view
-
-# Load and synchronize configuration
-web_view.load_preferences(model.appdata)
 
 
 def sync_preferences_to_model():
@@ -502,6 +503,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/scan":
             if not app_state["scanning"]:
+                if model.progress_window._job_running:
+                    self.wfile.write(
+                        json.dumps(
+                            {
+                                "success": False,
+                                "error": "Previous job still running. Please wait a few seconds.",
+                            }
+                        ).encode()
+                    )
+                    return
+
                 if not model.directories.has_any_file():
                     self.wfile.write(
                         json.dumps(
