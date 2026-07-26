@@ -13,6 +13,17 @@ else
 	REDIS_URL = redis://:$(REDIS_PASS)@$(REDIS_HOST)/$(REDIS_DB)
 endif
 
+USE_REDIS ?=
+ifneq ($(USE_REDIS),)
+	WEB_ENV = DUPEGURU_CACHE_URL="$(REDIS_URL)"
+else
+	ifneq ($(REDIS_PASS),)
+		WEB_ENV = DUPEGURU_CACHE_URL="$(REDIS_URL)"
+	else
+		WEB_ENV =
+	endif
+endif
+
 # Window compatibility via Msys2
 # - venv creates Scripts instead of bin
 # - compile generates .pyd instead of .so
@@ -81,7 +92,7 @@ run:
 	$(VENV_PYTHON) run.py
 
 web: | all
-	$(VENV_PYTHON) -u run_web.py
+	$(WEB_ENV) $(VENV_PYTHON) -u run_web.py
 
 package: | all
 	$(VENV_PYTHON) package.py
