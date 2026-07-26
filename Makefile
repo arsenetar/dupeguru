@@ -3,6 +3,15 @@ PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info
 PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
+REDIS_HOST ?= 192.168.2.249:6379
+REDIS_DB ?= 1
+REDIS_PASS ?=
+
+ifeq ($(REDIS_PASS),)
+	REDIS_URL = redis://$(REDIS_HOST)/$(REDIS_DB)
+else
+	REDIS_URL = redis://:$(REDIS_PASS)@$(REDIS_HOST)/$(REDIS_DB)
+endif
 
 # Window compatibility via Msys2
 # - venv creates Scripts instead of bin
@@ -53,6 +62,8 @@ help:
 	@echo "  web          Run the dupeGuru HTML Web Console interface"
 	@echo "  pyc          Compile Python source code to bytecode"
 	@echo "  env          Create the virtual environment and install dependencies using uv"
+	@echo "  db-to-redis  Convert SQLite DB to Redis"
+	@echo "  redis-to-db  Convert Redis to SQLite DB"
 	@echo "  modules      Compile high-performance C extension modules"
 	@echo "  i18n         Compile all localization (.po to .mo) files"
 	@echo "  clean        Clean up build files, compiled extensions, and localizations"
@@ -159,6 +170,14 @@ clean:
 	-rm -f locale/*/LC_MESSAGES/*.mo
 	-rm -f core/pe/*.$(SO) qt/pe/*.$(SO)
 
+db-to-redis:
+	@echo "Converting SQLite DB to Redis/Valkey at $(REDIS_URL)..."
+	$(VENV_PYTHON) scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db $(REDIS_URL)
+
+redis-to-db:
+	@echo "Converting Redis/Valkey at $(REDIS_URL) to SQLite DB..."
+	$(VENV_PYTHON) scripts/convert_cache.py $(REDIS_URL) ~/.local/share/dupeGuru/hash_cache_new.db
+
 dev-setup:
 	@echo "Setting up development environment..."
 	@if ! command -v uv >/dev/null 2>&1; then \
@@ -205,4 +224,4 @@ dev-setup:
 	fi
 	@echo "Development environment setup complete!"
 
-.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all dev-setup
+.PHONY: help clean normpo mergepot modules i18n reqs run web package release-status tag pyc install uninstall all dev-setup db-to-redis redis-to-db

@@ -123,16 +123,33 @@ You can specify the cache database location using either:
   CacheURL=redis://localhost:6379/0
   ```
 
+#### Password Authentication & Database Isolation:
+If your Valkey/Redis instance requires a password or is shared by another application, you can specify authentication details and isolate the namespace by selecting a different database partition (Redis supports database indices `0` to `15` by default):
+* **URL Format:** `redis://:password@host:port/db_index`
+* **Example:** `redis://:mysecurepassword@192.168.2.249:6379/1` (this connects to Valkey at `192.168.2.249`, authenticates with `mysecurepassword`, and writes only to database index `/1`, isolating dupeGuru's cache completely from index `/0`).
+
 ### Converting Between Databases:
-To migrate metadata between SQLite and Redis/Valkey without losing your scanned hashes cache, use the `convert_cache.py` utility script:
+To migrate metadata between SQLite and Redis/Valkey without losing your scanned hashes cache, you can use the `convert_cache.py` utility script or run tasks directly using the Makefile.
+
+#### Option A: Using Makefile Targets (Recommended)
+The Makefile includes target actions that support configurable parameters: `REDIS_HOST`, `REDIS_DB`, and `REDIS_PASS`.
+```bash
+# Convert local SQLite database to a password-protected Redis DB 1 partition:
+make db-to-redis REDIS_HOST=192.168.2.249:6379 REDIS_DB=1 REDIS_PASS=yourpassword
+
+# Convert Redis DB 1 partition back to local SQLite:
+make redis-to-db REDIS_HOST=192.168.2.249:6379 REDIS_DB=1 REDIS_PASS=yourpassword
+```
+
+#### Option B: Running the Python Script Directly
 ```bash
 # Convert local SQLite database to Redis
-./env/bin/python scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db redis://localhost:6379/0
+./env/bin/python scripts/convert_cache.py ~/.local/share/dupeGuru/hash_cache.db redis://:yourpassword@192.168.2.249:6379/1
 
 # Convert Redis cache back to a local SQLite database
-./env/bin/python scripts/convert_cache.py redis://localhost:6379/0 ~/.local/share/dupeGuru/hash_cache_new.db
+./env/bin/python scripts/convert_cache.py redis://:yourpassword@192.168.2.249:6379/1 ~/.local/share/dupeGuru/hash_cache_new.db
 ```
-Use the `--clear-destination` flag to wipe the target database before starting the conversion.
+Use the `--clear-destination` flag when running the script directly to wipe the target database partition before starting the conversion.
 
 ---
 
