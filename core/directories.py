@@ -269,6 +269,8 @@ class Directories:
                                     sub_path = Path(item.path)
                                     if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(sub_path):
                                         for f_data in fs.filesdb.get_files_in_directory(sub_path):
+                                            if stop_workers.is_set():
+                                                break
                                             p = fs.Path(f_data["path"])
                                             file = fs.get_file(p, fileclasses=fileclasses)
                                             if file:
@@ -308,10 +310,18 @@ class Directories:
 
         def db_writer_worker():
             while True:
-                item = db_queue.get()
+                try:
+                    item = db_queue.get(timeout=0.05)
+                except queue.Empty:
+                    if stop_workers.is_set():
+                        break
+                    continue
                 if item is None:
                     db_queue.task_done()
                     break
+                if stop_workers.is_set():
+                    db_queue.task_done()
+                    continue
                 try:
                     if item[0] == "DIR_SCANNED":
                         fs.filesdb.mark_directory_scanned(item[1])
