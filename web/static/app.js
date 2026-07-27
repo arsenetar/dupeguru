@@ -28,6 +28,8 @@ const saveResultsBtn = document.getElementById("save-results-btn");
 // Global states
 let currentBrowserPath = "";
 let isScanning = false;
+let isStopping = false;
+let cancelStats = null;
 let resultsData = [];
 let addedPaths = [];
 
@@ -331,7 +333,7 @@ async function startScan(clearCache = false) {
 
 async function checkScanStatus() {
     // Light status checks to sync UI
-    if (isScanning) return;
+    if (isScanning || isStopping) return;
     try {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
@@ -356,7 +358,11 @@ async function pollProgress() {
         if (state.status === "scanning") {
             progressBarFill.style.width = `${state.progress}%`;
             progressPercent.textContent = `${state.progress}%`;
-            progressDesc.textContent = state.progress_msg || "Scanning...";
+            if (isStopping) {
+                progressDesc.textContent = "Stopping scan, writing database checkpoints...";
+            } else {
+                progressDesc.textContent = state.progress_msg || "Scanning...";
+            }
 
             const targetsDiv = document.getElementById("progress-targets");
             if (targetsDiv && state.targets && state.targets.length > 0) {
@@ -368,18 +374,42 @@ async function pollProgress() {
             setTimeout(pollProgress, 300);
         } else {
             isScanning = false;
+            isStopping = false;
+            cancelScanBtn.disabled = false;
             progressContainer.classList.add("hidden");
             if (state.status === "completed") {
                 loadResults();
             } else {
                 welcomeContainer.classList.remove("hidden");
                 resultsContainer.classList.add("hidden");
-                showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
+
+                if (cancelStats) {
+                    let msg = "Scan was stopped. Hashing progress saved to database checkpoints.";
+                    const scanned = cancelStats.scanned_count || 0;
+                    const reused = cancelStats.reused_count || 0;
+                    if (scanned > 0 || reused > 0) {
+                        msg += `\n- Saved ${scanned} new file hashes to cache.`;
+                        msg += `\n- Reused ${reused} cached file hashes.`;
+                        if (cancelStats.last_file) {
+                            const filename = cancelStats.last_file.split("/").pop();
+                            msg += `\n- Last scanned file: ${filename}`;
+                        }
+                    } else {
+                        msg += "\n- No files were processed.";
+                    }
+                    msg += "\n\n(Click this message to dismiss)";
+                    showToast(msg, true);
+                    cancelStats = null;
+                } else {
+                    showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
+                }
             }
         }
     } catch (err) {
         console.error("Poll progress failed:", err);
         isScanning = false;
+        isStopping = false;
+        cancelScanBtn.disabled = false;
         progressContainer.classList.add("hidden");
         welcomeContainer.classList.remove("hidden");
         resultsContainer.classList.add("hidden");
@@ -524,34 +554,28 @@ async function deleteMarked() {
 }
 async function cancelScan() {
     try {
+        isStopping = true;
+        cancelScanBtn.disabled = true;
+        progressDesc.textContent = "Stopping scan, writing database checkpoints...";
         const response = await fetch(`${API_BASE}/api/scan/cancel`, {
             method: "POST"
         });
         const result = await response.json();
         if (result.success) {
-            isScanning = false;
-            progressContainer.classList.add("hidden");
-            welcomeContainer.classList.remove("hidden");
-            loadDirectories();
-
-            let msg = "Scan was stopped. Hashing progress saved to database checkpoints.";
-            const scanned = result.scanned_count || 0;
-            const reused = result.reused_count || 0;
-            if (scanned > 0 || reused > 0) {
-                msg += `\n- Saved ${scanned} new file hashes to cache.`;
-                msg += `\n- Reused ${reused} cached file hashes.`;
-                if (result.last_file) {
-                    const filename = result.last_file.split("/").pop();
-                    msg += `\n- Last scanned file: ${filename}`;
-                }
-            } else {
-                msg += "\n- No files were processed.";
-            }
-            msg += "\n\n(Click this message to dismiss)";
-            showToast(msg, true);
+            cancelStats = {
+                scanned_count: result.scanned_count,
+                reused_count: result.reused_count,
+                last_file: result.last_file
+            };
+        } else {
+            isStopping = false;
+            cancelScanBtn.disabled = false;
+            alert("Could not stop scan: " + (result.error || "Unknown error"));
         }
     } catch (err) {
         console.error("Cancel scan failed:", err);
+        isStopping = false;
+        cancelScanBtn.disabled = false;
     }
 }
 // Helpers
