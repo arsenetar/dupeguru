@@ -785,7 +785,14 @@ class FilesDB:
     def get_files_in_directory(self, dir_path: Path):
         if self.engine:
             if self._is_rust:
-                yield from self.engine.get_files_in_directory(str(dir_path))
+                last_path = ""
+                limit = 5000
+                while True:
+                    page = self.engine.get_files_in_directory_page(str(dir_path), last_path, limit)
+                    if not page:
+                        break
+                    yield from page
+                    last_path = page[-1]["path"]
             else:
                 yield from self.engine.get_files_in_directory(dir_path)
 
@@ -797,7 +804,14 @@ class FilesDB:
     def get_files_by_sizes(self, sizes):
         if self.engine:
             if self._is_rust:
-                yield from self.engine.get_files_by_sizes(sizes)
+                last_path = ""
+                limit = 5000
+                while True:
+                    page = self.engine.get_files_by_sizes_page(sizes, last_path, limit)
+                    if not page:
+                        break
+                    yield from page
+                    last_path = page[-1]["path"]
             else:
                 yield from self.engine.get_files_by_sizes(sizes)
 

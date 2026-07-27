@@ -2,6 +2,7 @@ use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use pyo3::types::{PyBytes, PyDict};
 use rusqlite::{params, Connection};
+use std::ops::Bound::{Excluded, Unbounded};
 use std::sync::Mutex;
 
 pub struct FileMetadata {
@@ -47,9 +48,19 @@ pub trait CacheEngine {
     fn mark_directory_scanned(&self, dir_path: &str) -> Result<(), String>;
     fn is_directory_scanned(&self, dir_path: &str) -> Result<bool, String>;
     fn snapshot_file(&self, path: &str, size: u64, mtime: f64) -> Result<(), String>;
-    fn get_files_in_directory(&self, dir_path: &str) -> Result<Vec<FileMetadata>, String>;
+    fn get_files_in_directory_page(
+        &self,
+        dir_path: &str,
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String>;
     fn get_candidate_sizes(&self) -> Result<Vec<u64>, String>;
-    fn get_files_by_sizes(&self, sizes: &[u64]) -> Result<Vec<FileMetadata>, String>;
+    fn get_files_by_sizes_page(
+        &self,
+        sizes: &[u64],
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String>;
     fn get(
         &self,
         path: &str,
@@ -157,12 +168,10 @@ impl CacheEngine for RustSQLiteCacheEngine {
     }
 
     fn close(&self) -> Result<(), String> {
-        // Connection drops and closes cleanly in Rust
         Ok(())
     }
 
     fn commit(&self) -> Result<(), String> {
-        // autocommit is active by default in WAL mode
         Ok(())
     }
 
@@ -200,54 +209,46 @@ impl CacheEngine for RustSQLiteCacheEngine {
         Ok(())
     }
 
-    fn get_files_in_directory(&self, dir_path: &str) -> Result<Vec<FileMetadata>, String> {
+    fn get_files_in_directory_page(
+        &self,
+        dir_path: &str,
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String> {
         let conn = self.conn.lock().unwrap();
         let prefix = format!("{}{}", dir_path, std::path::MAIN_SEPARATOR);
-        let limit = 5000;
-        let mut last_path = String::new();
+
+        let mut stmt = conn
+            .prepare(
+                "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                 FROM files
+                 WHERE (path = ?1 OR path LIKE ?2) AND path > ?3
+                 ORDER BY path
+                 LIMIT ?4",
+            )
+            .map_err(|e| e.to_string())?;
+
+        let rows = stmt
+            .query_map(
+                params![dir_path, format!("{}%", prefix), last_path, limit],
+                |row| {
+                    Ok(FileMetadata {
+                        path: row.get(0)?,
+                        size: row.get(1)?,
+                        mtime_ns: row.get(2)?,
+                        entry_dt: row.get(3)?,
+                        digest: row.get(4)?,
+                        digest_partial: row.get(5)?,
+                        digest_samples: row.get(6)?,
+                    })
+                },
+            )
+            .map_err(|e| e.to_string())?;
+
         let mut results = Vec::new();
-
-        loop {
-            let mut stmt = conn
-                .prepare(
-                    "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-                     FROM files
-                     WHERE (path = ?1 OR path LIKE ?2) AND path > ?3
-                     ORDER BY path
-                     LIMIT ?4",
-                )
-                .map_err(|e| e.to_string())?;
-
-            let rows = stmt
-                .query_map(
-                    params![dir_path, format!("{}%", prefix), last_path, limit],
-                    |row| {
-                        Ok(FileMetadata {
-                            path: row.get(0)?,
-                            size: row.get(1)?,
-                            mtime_ns: row.get(2)?,
-                            entry_dt: row.get(3)?,
-                            digest: row.get(4)?,
-                            digest_partial: row.get(5)?,
-                            digest_samples: row.get(6)?,
-                        })
-                    },
-                )
-                .map_err(|e| e.to_string())?;
-
-            let mut page = Vec::new();
-            for r in rows {
-                page.push(r.map_err(|e| e.to_string())?);
-            }
-
-            if page.is_empty() {
-                break;
-            }
-
-            last_path = page.last().unwrap().path.clone();
-            results.extend(page);
+        for r in rows {
+            results.push(r.map_err(|e| e.to_string())?);
         }
-
         Ok(results)
     }
 
@@ -269,7 +270,12 @@ impl CacheEngine for RustSQLiteCacheEngine {
         Ok(sizes)
     }
 
-    fn get_files_by_sizes(&self, sizes: &[u64]) -> Result<Vec<FileMetadata>, String> {
+    fn get_files_by_sizes_page(
+        &self,
+        sizes: &[u64],
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String> {
         if sizes.is_empty() {
             return Ok(Vec::new());
         }
@@ -277,13 +283,19 @@ impl CacheEngine for RustSQLiteCacheEngine {
         let placeholders: Vec<String> = (0..sizes.len()).map(|_| "?".to_string()).collect();
         let sql = format!(
             "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-             FROM files WHERE size IN ({})",
+             FROM files WHERE size IN ({}) AND path > ? ORDER BY path LIMIT ?",
             placeholders.join(",")
         );
         let mut stmt = conn.prepare(&sql).map_err(|e| e.to_string())?;
 
-        let params_vec: Vec<i64> = sizes.iter().map(|&s| s as i64).collect();
-        let params_refs: Vec<&dyn rusqlite::ToSql> = params_vec.iter().map(|p| p as &dyn rusqlite::ToSql).collect();
+        let mut params_vec: Vec<Box<dyn rusqlite::ToSql>> = Vec::new();
+        for &s in sizes {
+            params_vec.push(Box::new(s as i64));
+        }
+        params_vec.push(Box::new(last_path.to_string()));
+        params_vec.push(Box::new(limit as i64));
+
+        let params_refs: Vec<&dyn rusqlite::ToSql> = params_vec.iter().map(|p| p.as_ref()).collect();
 
         let rows = stmt
             .query_map(&*params_refs, |row| {
@@ -570,78 +582,28 @@ impl CacheEngine for RustValkeyCacheEngine {
         Ok(())
     }
 
-    fn get_files_in_directory(&self, dir_path: &str) -> Result<Vec<FileMetadata>, String> {
+    fn get_files_in_directory_page(
+        &self,
+        dir_path: &str,
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String> {
         let mut conn_guard = self.conn.lock().unwrap();
         let conn = &mut *conn_guard;
         let prefix = format!("{}{}", dir_path, std::path::MAIN_SEPARATOR);
 
         let mut results = Vec::new();
 
-        let dir_key = format!("dg:file:{}", dir_path);
-        let dir_exists: bool = redis::cmd("EXISTS")
-            .arg(&dir_key)
-            .query(conn)
-            .map_err(|e| e.to_string())?;
-
-        if dir_exists {
-            let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
+        if last_path.is_empty() {
+            let dir_key = format!("dg:file:{}", dir_path);
+            let dir_exists: bool = redis::cmd("EXISTS")
                 .arg(&dir_key)
-                .arg("size")
-                .arg("mtime_ns")
-                .arg("entry_dt")
-                .arg("digest")
-                .arg("digest_partial")
-                .arg("digest_samples")
-                .query(conn)
-                .map_err(|e| e.to_string())?;
-            if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
-                let size = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
-                let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
-                results.push(FileMetadata {
-                    path: dir_path.to_string(),
-                    size,
-                    mtime_ns,
-                    entry_dt: meta[2]
-                        .as_ref()
-                        .map(|b| String::from_utf8_lossy(b).into_owned())
-                        .unwrap_or_default(),
-                    digest: meta[3].clone(),
-                    digest_partial: meta[4].clone(),
-                    digest_samples: meta[5].clone(),
-                });
-            }
-        }
-
-        let limit = 5000;
-        let mut offset = 0;
-        loop {
-            let mut min_bound = vec![b'['];
-            min_bound.extend_from_slice(prefix.as_bytes());
-
-            let mut max_bound = vec![b'['];
-            max_bound.extend_from_slice(prefix.as_bytes());
-            max_bound.push(0xff);
-
-            let path_bytes_list: Vec<Vec<u8>> = redis::cmd("ZRANGEBYLEX")
-                .arg("dg:files_by_path")
-                .arg(min_bound)
-                .arg(max_bound)
-                .arg("LIMIT")
-                .arg(offset)
-                .arg(limit)
                 .query(conn)
                 .map_err(|e| e.to_string())?;
 
-            if path_bytes_list.is_empty() {
-                break;
-            }
-
-            let len = path_bytes_list.len();
-            for p_bytes in path_bytes_list {
-                let p_str = String::from_utf8_lossy(&p_bytes).into_owned();
-                let file_key = format!("dg:file:{}", p_str);
+            if dir_exists {
                 let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
-                    .arg(&file_key)
+                    .arg(&dir_key)
                     .arg("size")
                     .arg("mtime_ns")
                     .arg("entry_dt")
@@ -654,7 +616,7 @@ impl CacheEngine for RustValkeyCacheEngine {
                     let size = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
                     let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
                     results.push(FileMetadata {
-                        path: p_str,
+                        path: dir_path.to_string(),
                         size,
                         mtime_ns,
                         entry_dt: meta[2]
@@ -667,8 +629,61 @@ impl CacheEngine for RustValkeyCacheEngine {
                     });
                 }
             }
+        }
 
-            offset += len;
+        let min_bound = if last_path.is_empty() {
+            let mut b = vec![b'['];
+            b.extend_from_slice(prefix.as_bytes());
+            b
+        } else {
+            let mut b = vec![b'('];
+            b.extend_from_slice(last_path.as_bytes());
+            b
+        };
+
+        let mut max_bound = vec![b'['];
+        max_bound.extend_from_slice(prefix.as_bytes());
+        max_bound.push(0xff);
+
+        let path_bytes_list: Vec<Vec<u8>> = redis::cmd("ZRANGEBYLEX")
+            .arg("dg:files_by_path")
+            .arg(min_bound)
+            .arg(max_bound)
+            .arg("LIMIT")
+            .arg(0)
+            .arg(limit)
+            .query(conn)
+            .map_err(|e| e.to_string())?;
+
+        for p_bytes in path_bytes_list {
+            let p_str = String::from_utf8_lossy(&p_bytes).into_owned();
+            let file_key = format!("dg:file:{}", p_str);
+            let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
+                .arg(&file_key)
+                .arg("size")
+                .arg("mtime_ns")
+                .arg("entry_dt")
+                .arg("digest")
+                .arg("digest_partial")
+                .arg("digest_samples")
+                .query(conn)
+                .map_err(|e| e.to_string())?;
+            if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
+                let size = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
+                let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
+                results.push(FileMetadata {
+                    path: p_str,
+                    size,
+                    mtime_ns,
+                    entry_dt: meta[2]
+                        .as_ref()
+                        .map(|b| String::from_utf8_lossy(b).into_owned())
+                        .unwrap_or_default(),
+                    digest: meta[3].clone(),
+                    digest_partial: meta[4].clone(),
+                    digest_samples: meta[5].clone(),
+                });
+            }
         }
 
         Ok(results)
@@ -685,43 +700,59 @@ impl CacheEngine for RustValkeyCacheEngine {
         Ok(res)
     }
 
-    fn get_files_by_sizes(&self, sizes: &[u64]) -> Result<Vec<FileMetadata>, String> {
+    fn get_files_by_sizes_page(
+        &self,
+        sizes: &[u64],
+        last_path: &str,
+        limit: usize,
+    ) -> Result<Vec<FileMetadata>, String> {
         let mut conn_guard = self.conn.lock().unwrap();
         let conn = &mut *conn_guard;
-        let mut results = Vec::new();
+        let mut all_paths = std::collections::BTreeSet::new();
         for &size in sizes {
             let paths: std::collections::HashSet<String> = redis::cmd("SMEMBERS")
                 .arg(format!("dg:size_files:{}", size))
                 .query(conn)
                 .map_err(|e| e.to_string())?;
-            for path in paths {
-                let file_key = format!("dg:file:{}", path);
-                let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
-                    .arg(&file_key)
-                    .arg("size")
-                    .arg("mtime_ns")
-                    .arg("entry_dt")
-                    .arg("digest")
-                    .arg("digest_partial")
-                    .arg("digest_samples")
-                    .query(conn)
-                    .map_err(|e| e.to_string())?;
-                if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
-                    let size_val = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
-                    let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
-                    results.push(FileMetadata {
-                        path,
-                        size: size_val,
-                        mtime_ns,
-                        entry_dt: meta[2]
-                            .as_ref()
-                            .map(|b| String::from_utf8_lossy(b).into_owned())
-                            .unwrap_or_default(),
-                        digest: meta[3].clone(),
-                        digest_partial: meta[4].clone(),
-                        digest_samples: meta[5].clone(),
-                    });
-                }
+            all_paths.extend(paths);
+        }
+
+        let mut results = Vec::new();
+        let range = if last_path.is_empty() {
+            all_paths.range::<str, _>(..).take(limit)
+        } else {
+            all_paths
+                .range::<str, _>((Excluded(last_path), Unbounded))
+                .take(limit)
+        };
+
+        for path in range {
+            let file_key = format!("dg:file:{}", path);
+            let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
+                .arg(&file_key)
+                .arg("size")
+                .arg("mtime_ns")
+                .arg("entry_dt")
+                .arg("digest")
+                .arg("digest_partial")
+                .arg("digest_samples")
+                .query(conn)
+                .map_err(|e| e.to_string())?;
+            if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
+                let size_val = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
+                let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
+                results.push(FileMetadata {
+                    path: path.clone(),
+                    size: size_val,
+                    mtime_ns,
+                    entry_dt: meta[2]
+                        .as_ref()
+                        .map(|b| String::from_utf8_lossy(b).into_owned())
+                        .unwrap_or_default(),
+                    digest: meta[3].clone(),
+                    digest_partial: meta[4].clone(),
+                    digest_samples: meta[5].clone(),
+                });
             }
         }
         Ok(results)
@@ -941,10 +972,16 @@ impl RustFilesDB {
             .map_err(PyValueError::new_err)
     }
 
-    pub fn get_files_in_directory<'py>(&self, py: Python<'py>, dir_path: &str) -> PyResult<Vec<Bound<'py, PyDict>>> {
+    pub fn get_files_in_directory_page<'py>(
+        &self,
+        py: Python<'py>,
+        dir_path: &str,
+        last_path: &str,
+        limit: usize,
+    ) -> PyResult<Vec<Bound<'py, PyDict>>> {
         let files = self
             .engine
-            .get_files_in_directory(dir_path)
+            .get_files_in_directory_page(dir_path, last_path, limit)
             .map_err(PyValueError::new_err)?;
         let mut py_files = Vec::with_capacity(files.len());
         for f in files {
@@ -957,10 +994,16 @@ impl RustFilesDB {
         self.engine.get_candidate_sizes().map_err(PyValueError::new_err)
     }
 
-    pub fn get_files_by_sizes<'py>(&self, py: Python<'py>, sizes: Vec<u64>) -> PyResult<Vec<Bound<'py, PyDict>>> {
+    pub fn get_files_by_sizes_page<'py>(
+        &self,
+        py: Python<'py>,
+        sizes: Vec<u64>,
+        last_path: &str,
+        limit: usize,
+    ) -> PyResult<Vec<Bound<'py, PyDict>>> {
         let files = self
             .engine
-            .get_files_by_sizes(&sizes)
+            .get_files_by_sizes_page(&sizes, last_path, limit)
             .map_err(PyValueError::new_err)?;
         let mut py_files = Vec::with_capacity(files.len());
         for f in files {
