@@ -171,6 +171,12 @@ class SQLiteCacheEngine(CacheEngine):
         else:
             self.conn = sqlite3.connect(path, check_same_thread=False, timeout=30.0)
 
+        # Enable Write-Ahead Log (WAL) mode for concurrent read/write resilience
+        try:
+            self.conn.execute("PRAGMA journal_mode=WAL;")
+        except Exception:
+            pass
+
         # Check if the index needs to be created on a large database and warn the user
         try:
             cursor = self.conn.execute("SELECT name FROM sqlite_master WHERE type='index' AND name='idx_files_size'")
@@ -273,14 +279,25 @@ class SQLiteCacheEngine(CacheEngine):
 
     def get_files_in_directory(self, dir_path: Path):
         prefix = str(dir_path) + os.sep
+        dir_str = str(dir_path)
         try:
-            with self.lock:
-                cursor = self.conn.execute(
-                    "SELECT path, size, mtime_ns FROM files WHERE path = ? OR path LIKE ?",
-                    (str(dir_path), prefix + "%"),
-                )
-                for row in cursor:
+            limit = 5000
+            last_path = ""
+            while True:
+                with self.lock:
+                    cursor = self.conn.execute(
+                        """SELECT path, size, mtime_ns FROM files
+                           WHERE (path = ? OR path LIKE ?) AND path > ?
+                           ORDER BY path
+                           LIMIT ?""",
+                        (dir_str, prefix + "%", last_path, limit),
+                    )
+                    rows = cursor.fetchall()
+                if not rows:
+                    break
+                for row in rows:
                     yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
+                last_path = rows[-1][0]
         except Exception as e:
             logging.error(f"Error getting cached files in directory: {e}")
 
@@ -501,31 +518,59 @@ class ValkeyCacheEngine(CacheEngine):
         dir_str = str(dir_path)
         prefix = dir_str + os.sep
 
+        # Check the directory itself
         @valkey_retry
-        def fetch_paths(self):
+        def check_dir(self):
             with self.lock:
-                path_bytes_list = self.client.zrangebylex("dg:files_by_path", f"[{prefix}", f"[{prefix}\xff")
-                paths = [p.decode("utf-8") for p in path_bytes_list]
-                if self.client.exists(f"dg:file:{dir_str}"):
-                    paths.append(dir_str)
-                return paths
+                return self.client.exists(f"dg:file:{dir_str}")
 
         try:
-            paths = fetch_paths(self)
-            for path_str in paths:
+            if check_dir(self):
 
                 @valkey_retry
-                def fetch_meta(self, p_str):
+                def fetch_meta_dir(self):
                     with self.lock:
-                        return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+                        return self.client.hmget(f"dg:file:{dir_str}", ["size", "mtime_ns"])
 
-                meta = fetch_meta(self, path_str)
+                meta = fetch_meta_dir(self)
                 if meta and meta[0] is not None:
                     yield {
-                        "path": path_str,
+                        "path": dir_str,
                         "size": int(meta[0]),
                         "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
                     }
+
+            limit = 5000
+            offset = 0
+            while True:
+
+                @valkey_retry
+                def fetch_paths_page(self, off):
+                    with self.lock:
+                        path_bytes_list = self.client.zrangebylex(
+                            "dg:files_by_path", f"[{prefix}", f"[{prefix}\xff", start=off, num=limit
+                        )
+                        return [p.decode("utf-8") for p in path_bytes_list]
+
+                paths = fetch_paths_page(self, offset)
+                if not paths:
+                    break
+
+                for path_str in paths:
+
+                    @valkey_retry
+                    def fetch_meta(self, p_str):
+                        with self.lock:
+                            return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+
+                    meta = fetch_meta(self, path_str)
+                    if meta and meta[0] is not None:
+                        yield {
+                            "path": path_str,
+                            "size": int(meta[0]),
+                            "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                        }
+                offset += len(paths)
         except Exception as e:
             logging.error(f"Error getting cached files in Valkey: {e}")
 
