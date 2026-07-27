@@ -205,8 +205,12 @@ class Directories:
         dirs_to_crawl = []
         for path in self._dirs:
             if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(path):
-                logging.info("Directory %s already scanned. Loading files from cache database.", path)
+                cache_count = 0
                 for f_data in fs.filesdb.get_files_in_directory(path):
+                    cache_count += 1
+                    if cache_count % 1000 == 0:
+                        j.check_if_cancelled()
+                        j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
                     p = fs.Path(f_data["path"])
                     file = fs.get_file(p, fileclasses=fileclasses)
                     if file:
