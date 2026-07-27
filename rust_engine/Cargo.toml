@@ -1,0 +1,14 @@
+[package]
+name = "dupeguru_rust"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "dupeguru_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21.2", features = ["extension-module"] }
+rusqlite = { version = "0.31.0", features = ["bundled"] }
+redis = "0.25.4"
+chrono = { version = "0.4.38", default-features = false, features = ["clock", "std"] }

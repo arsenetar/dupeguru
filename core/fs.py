@@ -20,6 +20,19 @@ from sys import platform
 from threading import Lock
 from typing import Any, AnyStr, Callable, Union
 
+try:
+    from .dupeguru_rust import RustFilesDB
+
+    HAS_RUST = True
+except ImportError:
+    try:
+        from dupeguru_rust import RustFilesDB
+
+        HAS_RUST = True
+    except ImportError:
+        HAS_RUST = False
+
+
 from hscommon.util import get_file_ext, nonone
 
 hasher: Callable
@@ -710,9 +723,20 @@ class FilesDB:
         self.scanned_paths = set()
         self.hit_paths = set()
         self.lock = Lock()
+        self._is_rust = False
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         path_str = str(path)
+        if HAS_RUST:
+            try:
+                self.engine = RustFilesDB(path_str)
+                self._is_rust = True
+                logging.info("Using high-performance Rust cache database engine.")
+                return
+            except Exception as e:
+                logging.warning(f"Failed to load Rust engine: {e}. Falling back to Python engine.")
+
+        self._is_rust = False
         if path_str.startswith("redis://") or path_str.startswith("valkey://"):
             self.engine = ValkeyCacheEngine(path_str, self)
         else:
@@ -720,7 +744,7 @@ class FilesDB:
 
     @property
     def conn(self):
-        if hasattr(self.engine, "conn"):
+        if not self._is_rust and hasattr(self.engine, "conn"):
             return self.engine.conn
         return None
 
@@ -738,20 +762,32 @@ class FilesDB:
 
     def mark_directory_scanned(self, dir_path: Path) -> None:
         if self.engine:
-            self.engine.mark_directory_scanned(dir_path)
+            if self._is_rust:
+                self.engine.mark_directory_scanned(str(dir_path))
+            else:
+                self.engine.mark_directory_scanned(dir_path)
 
     def is_directory_scanned(self, dir_path: Path) -> bool:
         if self.engine:
-            return self.engine.is_directory_scanned(dir_path)
-        return False
+            if self._is_rust:
+                return self.engine.is_directory_scanned(str(dir_path))
+            else:
+                return self.engine.is_directory_scanned(dir_path)
+            return False
 
     def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
         if self.engine:
-            self.engine.snapshot_file(path, size, mtime)
+            if self._is_rust:
+                self.engine.snapshot_file(str(path), size, mtime)
+            else:
+                self.engine.snapshot_file(path, size, mtime)
 
     def get_files_in_directory(self, dir_path: Path):
         if self.engine:
-            yield from self.engine.get_files_in_directory(dir_path)
+            if self._is_rust:
+                yield from self.engine.get_files_in_directory(str(dir_path))
+            else:
+                yield from self.engine.get_files_in_directory(dir_path)
 
     def get_candidate_sizes(self):
         if self.engine:
@@ -760,16 +796,33 @@ class FilesDB:
 
     def get_files_by_sizes(self, sizes):
         if self.engine:
-            yield from self.engine.get_files_by_sizes(sizes)
+            if self._is_rust:
+                yield from self.engine.get_files_by_sizes(sizes)
+            else:
+                yield from self.engine.get_files_by_sizes(sizes)
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
         if self.engine:
-            return self.engine.get(path, key, self.ignore_mtime)
+            if self._is_rust:
+                try:
+                    stat = path.stat()
+                    return self.engine.get(str(path), key, stat.st_size, stat.st_mtime_ns, self.ignore_mtime)
+                except Exception:
+                    return None
+            else:
+                return self.engine.get(path, key, self.ignore_mtime)
         return None
 
     def put(self, path: Path, key: str, value: Any) -> None:
         if self.engine:
-            self.engine.put(path, key, value)
+            if self._is_rust:
+                try:
+                    stat = path.stat()
+                    self.engine.put(str(path), stat.st_size, stat.st_mtime_ns, key, value)
+                except Exception:
+                    pass
+            else:
+                self.engine.put(path, key, value)
 
     def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         if self.engine:

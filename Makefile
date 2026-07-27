@@ -85,7 +85,7 @@ help:
 	@echo "  release-status Show current release version status and changelog alignment"
 	@echo "  dev-setup    Setup the development environment (interactive)"
 
-all: | env i18n modules qt/dg_rc.py
+all: | env i18n modules qt/dg_rc.py rust
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
@@ -143,6 +143,15 @@ i18n: $(mofiles)
 modules: | env
 	$(VENV_PYTHON) build.py --modules
 
+rust:
+	cd rust_engine && cargo build --release
+ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows)
+	cp rust_engine/target/release/dupeguru_rust.dll core/dupeguru_rust.pyd
+else
+	cp rust_engine/target/release/libdupeguru_rust.so core/dupeguru_rust.so
+endif
+
+
 mergepot: | env
 	$(VENV_PYTHON) build.py --mergepot
 
@@ -180,6 +189,8 @@ clean:
 	-rm -rf .venv env
 	-rm -f locale/*/LC_MESSAGES/*.mo
 	-rm -f core/pe/*.$(SO) qt/pe/*.$(SO)
+	-rm -f core/dupeguru_rust.$(SO)
+	-cd rust_engine && cargo clean
 
 db-to-redis:
 	@echo "Converting SQLite DB to Redis/Valkey at $(REDIS_URL)..."
