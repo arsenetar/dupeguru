@@ -12,3 +12,7 @@ pyo3 = { version = "0.21.2", features = ["extension-module"] }
 rusqlite = { version = "0.31.0", features = ["bundled"] }
 redis = "0.25.4"
 chrono = { version = "0.4.38", default-features = false, features = ["clock", "std"] }
+rayon = "1.10"
+walkdir = "2.5"
+md5 = "0.7"
+sha1 = "0.10"

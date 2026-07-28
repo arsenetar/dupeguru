@@ -1183,8 +1183,103 @@ impl RustFilesDB {
     }
 }
 
+// ==========================================
+// Phase 2: Parallel Crawler & Hasher Engine
+// ==========================================
+
+#[pyfunction]
+#[pyo3(signature = (roots, min_size=0, max_size=None))]
+pub fn collect_files_parallel(
+    roots: Vec<String>,
+    min_size: u64,
+    max_size: Option<u64>,
+) -> PyResult<Vec<(String, u64, f64)>> {
+    use rayon::prelude::*;
+    use walkdir::WalkDir;
+
+    let results: Vec<(String, u64, f64)> = roots
+        .into_par_iter()
+        .flat_map(|root| {
+            let mut files = Vec::new();
+            for entry in WalkDir::new(root).into_iter().filter_map(|e| e.ok()) {
+                if entry.file_type().is_file() {
+                    if let Ok(meta) = entry.metadata() {
+                        let size = meta.len();
+                        if size >= min_size && max_size.map_or(true, |max| size <= max) {
+                            let path_str = entry.path().to_string_lossy().to_string();
+                            let mtime = meta
+                                .modified()
+                                .ok()
+                                .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+                                .map(|d| d.as_secs_f64())
+                                .unwrap_or(0.0);
+                            files.push((path_str, size, mtime));
+                        }
+                    }
+                }
+            }
+            files
+        })
+        .collect();
+    Ok(results)
+}
+
+#[pyfunction]
+#[pyo3(signature = (paths_and_sizes, sample_size=0))]
+pub fn hash_files_parallel(
+    paths_and_sizes: Vec<(String, u64)>,
+    sample_size: usize,
+) -> PyResult<Vec<(String, String)>> {
+    use rayon::prelude::*;
+    use std::fs::File;
+    use std::io::{BufReader, Read, Seek};
+
+    let results: Vec<(String, String)> = paths_and_sizes
+        .into_par_iter()
+        .map(|(path, size)| {
+            let digest = match File::open(&path) {
+                Ok(file) => {
+                    let mut reader = BufReader::new(file);
+                    if sample_size > 0 && (size as usize) > sample_size * 2 {
+                        let mut head_buf = vec![0u8; sample_size];
+                        let mut tail_buf = vec![0u8; sample_size];
+                        let mut combined = Vec::with_capacity(sample_size * 2);
+                        if reader.read_exact(&mut head_buf).is_ok() {
+                            combined.extend_from_slice(&head_buf);
+                        }
+                        if (size as usize) >= sample_size {
+                            if reader.seek(std::io::SeekFrom::End(-(sample_size as i64))).is_ok() {
+                                if reader.read_exact(&mut tail_buf).is_ok() {
+                                    combined.extend_from_slice(&tail_buf);
+                                }
+                            }
+                        }
+                        format!("{:x}", md5::compute(&combined))
+                    } else {
+                        let mut context = md5::Context::new();
+                        let mut buf = vec![0u8; 65536];
+                        loop {
+                            match reader.read(&mut buf) {
+                                Ok(0) => break,
+                                Ok(n) => context.consume(&buf[..n]),
+                                Err(_) => break,
+                            }
+                        }
+                        format!("{:x}", context.compute())
+                    }
+                }
+                Err(_) => String::new(),
+            };
+            (path, digest)
+        })
+        .collect();
+    Ok(results)
+}
+
 #[pymodule]
 fn dupeguru_rust(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RustFilesDB>()?;
+    m.add_function(wrap_pyfunction!(collect_files_parallel, m)?)?;
+    m.add_function(wrap_pyfunction!(hash_files_parallel, m)?)?;
     Ok(())
 }
