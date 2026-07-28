@@ -712,6 +712,11 @@ class ValkeyCacheEngine(CacheEngine):
             return total_count, files_list
 
 
+def _clean_path_str(path) -> str:
+    s = str(path)
+    return s.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
+
+
 class FilesDB:
     ignore_mtime = False
     enable_directory_cache = False
@@ -728,7 +733,7 @@ class FilesDB:
         self._is_rust = False
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
-        path_str = str(path)
+        path_str = _clean_path_str(path)
         if HAS_RUST:
             try:
                 self.engine = RustFilesDB(path_str)
@@ -765,14 +770,14 @@ class FilesDB:
     def mark_directory_scanned(self, dir_path: Path) -> None:
         if self.engine:
             if self._is_rust:
-                self.engine.mark_directory_scanned(str(dir_path))
+                self.engine.mark_directory_scanned(_clean_path_str(dir_path))
             else:
                 self.engine.mark_directory_scanned(dir_path)
 
     def is_directory_scanned(self, dir_path: Path) -> bool:
         if self.engine:
             if self._is_rust:
-                return self.engine.is_directory_scanned(str(dir_path))
+                return self.engine.is_directory_scanned(_clean_path_str(dir_path))
             else:
                 return self.engine.is_directory_scanned(dir_path)
             return False
@@ -780,14 +785,14 @@ class FilesDB:
     def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
         if self.engine:
             if self._is_rust:
-                self.engine.snapshot_file(str(path), size, mtime)
+                self.engine.snapshot_file(_clean_path_str(path), size, mtime)
             else:
                 self.engine.snapshot_file(path, size, mtime)
 
     def snapshot_files_batch(self, batch) -> None:
         if self.engine:
             if self._is_rust:
-                rust_batch = [(str(item[0]), item[1], item[2]) for item in batch]
+                rust_batch = [(_clean_path_str(item[0]), item[1], item[2]) for item in batch]
                 self.engine.snapshot_files_batch(rust_batch)
             else:
                 for path, size, mtime in batch:
@@ -798,9 +803,9 @@ class FilesDB:
         if self.engine:
             if self._is_rust:
                 last_path = ""
-                limit = 5000
+                clean_dir = _clean_path_str(dir_path)
                 while True:
-                    page = self.engine.get_files_in_directory_page(str(dir_path), last_path, limit)
+                    page = self.engine.get_files_in_directory_page(clean_dir, last_path, 2000)
                     if not page:
                         break
                     yield from page
@@ -832,23 +837,25 @@ class FilesDB:
             if self._is_rust:
                 try:
                     stat = path.stat()
-                    return self.engine.get(str(path), key, stat.st_size, stat.st_mtime_ns, self.ignore_mtime)
-                except Exception:
+                    return self.engine.get(
+                        _clean_path_str(path), key, stat.st_size, stat.st_mtime_ns, self.ignore_mtime
+                    )
+                except (OSError, InvalidPath):
                     return None
             else:
                 return self.engine.get(path, key, self.ignore_mtime)
         return None
 
-    def put(self, path: Path, key: str, value: Any) -> None:
+    def set(self, path: Path, key: str, value: bytes) -> None:
         if self.engine:
             if self._is_rust:
                 try:
                     stat = path.stat()
-                    self.engine.put(str(path), stat.st_size, stat.st_mtime_ns, key, value)
-                except Exception:
+                    self.engine.set(_clean_path_str(path), key, value, stat.st_size, stat.st_mtime_ns)
+                except (OSError, InvalidPath):
                     pass
             else:
-                self.engine.put(path, key, value)
+                self.engine.set(path, key, value)
 
     def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         if self.engine:
