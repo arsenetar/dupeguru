@@ -215,20 +215,33 @@ def sync_preferences_to_model():
     model.options["scan_type"] = int(web_view.get_default("ScanType", 5))
 
 
-sync_preferences_to_model()
-
-
 def save_selected_directories():
     paths = [str(d) for d in model.directories]
     web_view.set_default("SelectedDirectories", paths)
     web_view.save_preferences()
 
 
+def safe_path_exists(path_str, timeout=1.0):
+    """Check path existence in a thread with a strict timeout to prevent hangs on stale network mounts."""
+    result = [False]
+
+    def check():
+        try:
+            result[0] = os.path.exists(path_str)
+        except Exception:
+            result[0] = False
+
+    t = threading.Thread(target=check, daemon=True)
+    t.start()
+    t.join(timeout=timeout)
+    return result[0]
+
+
 def load_selected_directories():
     stored = web_view.get_default("SelectedDirectories")
     if stored and isinstance(stored, list):
         for path_str in stored:
-            if os.path.exists(path_str):
+            if safe_path_exists(path_str, timeout=1.0):
                 try:
                     from core.directories import AlreadyThereError
 
@@ -238,8 +251,6 @@ def load_selected_directories():
                 except Exception as e:
                     logging.error(f"Failed to restore directory {path_str}: {e}")
 
-
-load_selected_directories()
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
@@ -638,7 +649,7 @@ def start_server(port=8080):
     import locale as py_locale
 
     try:
-        lang = py_locale.getdefaultlocale()[0]
+        lang = py_locale.getlocale()[0] or py_locale.getdefaultlocale()[0]
         lang = lang[:2] if lang else "en"
     except Exception:
         lang = "en"
@@ -646,6 +657,10 @@ def start_server(port=8080):
 
     server = HTTPServer(("localhost", port), DupeGuruHTTPHandler)
     print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}", flush=True)
+
+    # Restore selected directories asynchronously in background so server binds immediately
+    restore_thread = threading.Thread(target=load_selected_directories, daemon=True)
+    restore_thread.start()
 
     stop_event = threading.Event()
     pulse_thread = threading.Thread(target=pulse_loop, args=(stop_event,), daemon=True)
