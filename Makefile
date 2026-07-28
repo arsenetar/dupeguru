@@ -146,13 +146,21 @@ i18n: $(mofiles)
 modules: | env
 	$(VENV_PYTHON) build.py --modules
 
-rust:
-	cd rust_engine && cargo build --release
+RUST_SRCS = $(wildcard rust_engine/src/*.rs) rust_engine/Cargo.toml
+
 ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows)
-	cp rust_engine/target/release/dupeguru_rust.dll core/dupeguru_rust.pyd
+RUST_SO = core/dupeguru_rust.pyd
+RUST_TARGET_SO = rust_engine/target/release/dupeguru_rust.dll
 else
-	cp rust_engine/target/release/libdupeguru_rust.so core/dupeguru_rust.so
+RUST_SO = core/dupeguru_rust.so
+RUST_TARGET_SO = rust_engine/target/release/libdupeguru_rust.so
 endif
+
+$(RUST_SO): $(RUST_SRCS)
+	cd rust_engine && cargo build --release
+	cp $(RUST_TARGET_SO) $(RUST_SO)
+
+rust: $(RUST_SO)
 
 
 mergepot: | env
