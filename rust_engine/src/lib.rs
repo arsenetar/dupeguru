@@ -217,20 +217,28 @@ impl CacheEngine for RustSQLiteCacheEngine {
     ) -> Result<Vec<FileMetadata>, String> {
         let conn = self.conn.lock().unwrap();
         let prefix = format!("{}{}", dir_path, std::path::MAIN_SEPARATOR);
+        let prefix_end = format!("{}\u{10ffff}", prefix);
 
         let mut stmt = conn
             .prepare(
                 "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-                 FROM files
-                 WHERE (path = ?1 OR path LIKE ?2) AND path > ?3
+                 FROM (
+                     SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                     FROM files
+                     WHERE path = ?1 AND path > ?3
+                     UNION ALL
+                     SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                     FROM files
+                     WHERE path >= ?2 AND path < ?4 AND path > ?3
+                 )
                  ORDER BY path
-                 LIMIT ?4",
+                 LIMIT ?5",
             )
             .map_err(|e| e.to_string())?;
 
         let rows = stmt
             .query_map(
-                params![dir_path, format!("{}%", prefix), last_path, limit],
+                params![dir_path, prefix, last_path, prefix_end, limit],
                 |row| {
                     Ok(FileMetadata {
                         path: row.get(0)?,

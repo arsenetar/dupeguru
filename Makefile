@@ -3,7 +3,10 @@ PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info
 PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
-REDIS_HOST ?= 192.168.2.249:6379
+# REDIS_HOST ?= 192.168.2.249:6379
+# REDIS_DB ?= 1
+# REDIS_PASS ?=
+REDIS_HOST ?=
 REDIS_DB ?= 1
 REDIS_PASS ?=
 
