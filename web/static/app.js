@@ -407,12 +407,9 @@ async function pollProgress() {
         }
     } catch (err) {
         console.error("Poll progress failed:", err);
-        isScanning = false;
-        isStopping = false;
-        cancelScanBtn.disabled = false;
-        progressContainer.classList.add("hidden");
-        welcomeContainer.classList.remove("hidden");
-        resultsContainer.classList.add("hidden");
+        if (isScanning) {
+            setTimeout(pollProgress, 1000);
+        }
     }
 }
 
