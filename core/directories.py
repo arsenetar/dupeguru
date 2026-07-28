@@ -89,11 +89,12 @@ class Directories:
             return DirectoryState.EXCLUDED
         return DirectoryState.NORMAL
 
-    def _get_files(self, from_path, fileclasses, j=job.nulljob, batch_buf=None):
+    def _get_files(self, from_path, fileclasses, j=job.nulljob, batch_buf=None, counter_buf=None):
         root_path = Path(from_path)
         is_top_level = batch_buf is None
         if is_top_level:
             batch_buf = []
+            counter_buf = [0]
 
         def flush_batch():
             if batch_buf:
@@ -131,7 +132,9 @@ class Directories:
                         if item.is_dir():
                             if skip_dirs:
                                 continue
-                            yield from self._get_files(item.path, fileclasses, j, batch_buf=batch_buf)
+                            yield from self._get_files(
+                                item.path, fileclasses, j, batch_buf=batch_buf, counter_buf=counter_buf
+                            )
                             continue
                         elif state == DirectoryState.EXCLUDED:
                             continue
@@ -149,6 +152,9 @@ class Directories:
                                     if len(batch_buf) >= 1000:
                                         flush_batch()
                                 count += 1
+                                counter_buf[0] += 1
+                                if counter_buf[0] % 1000 == 0:
+                                    j.set_progress(-1, tr("Scanning: Collected {} files...").format(counter_buf[0]))
                                 yield file
                     except (OSError, fs.InvalidPath):
                         pass
