@@ -135,7 +135,25 @@ impl CacheEngine for RustSQLiteCacheEngine {
         let conn = self.conn.lock().unwrap();
         let mut attempts = 0;
         loop {
-            match conn.execute_batch("DELETE FROM files; DELETE FROM scanned_directories;") {
+            let sql = "
+                DROP TABLE IF EXISTS files;
+                DROP TABLE IF EXISTS scanned_directories;
+                CREATE TABLE IF NOT EXISTS files (
+                    path TEXT PRIMARY KEY,
+                    size INTEGER,
+                    mtime_ns INTEGER,
+                    entry_dt DATETIME,
+                    digest BLOB,
+                    digest_partial BLOB,
+                    digest_samples BLOB
+                );
+                CREATE TABLE IF NOT EXISTS scanned_directories (
+                    path TEXT PRIMARY KEY,
+                    scan_dt DATETIME
+                );
+                CREATE INDEX IF NOT EXISTS idx_files_size ON files (size);
+            ";
+            match conn.execute_batch(sql) {
                 Ok(_) => break,
                 Err(e) => {
                     attempts += 1;
