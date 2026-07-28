@@ -541,10 +541,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 clear_cache_requested = data.get("clear_cache", False)
 
                 def run_scan_async():
-                    if clear_cache_requested:
-                        model.clear_hash_cache()
-                    fs.filesdb.enable_directory_cache = True
-                    model.start_scanning()
+                    try:
+                        if clear_cache_requested:
+                            model.clear_hash_cache()
+                        fs.filesdb.enable_directory_cache = True
+                        model.start_scanning()
+                    except Exception as e:
+                        logging.error(f"Error in run_scan_async: {e}", exc_info=True)
+                        app_state["scanning"] = False
+                        app_state["status"] = "error"
+                        app_state["error"] = str(e)
 
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True

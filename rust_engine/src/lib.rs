@@ -90,6 +90,7 @@ pub struct RustSQLiteCacheEngine {
 impl RustSQLiteCacheEngine {
     pub fn new(path: &str) -> Result<Self, String> {
         let conn = Connection::open(path).map_err(|e| e.to_string())?;
+        let _ = conn.execute("PRAGMA busy_timeout = 30000;", []);
         let _ = conn.busy_timeout(std::time::Duration::from_secs(30));
         // Enable WAL mode for high concurrency
         let _ = conn.execute("PRAGMA journal_mode=WAL;", []);
@@ -132,8 +133,19 @@ impl RustSQLiteCacheEngine {
 impl CacheEngine for RustSQLiteCacheEngine {
     fn clear(&self) -> Result<(), String> {
         let conn = self.conn.lock().unwrap();
-        conn.execute_batch("DELETE FROM files; DELETE FROM scanned_directories;")
-            .map_err(|e| e.to_string())?;
+        let mut attempts = 0;
+        loop {
+            match conn.execute_batch("DELETE FROM files; DELETE FROM scanned_directories;") {
+                Ok(_) => break,
+                Err(e) => {
+                    attempts += 1;
+                    if attempts >= 10 {
+                        return Err(e.to_string());
+                    }
+                    std::thread::sleep(std::time::Duration::from_millis(200));
+                }
+            }
+        }
         Ok(())
     }
 
