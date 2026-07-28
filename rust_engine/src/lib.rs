@@ -655,34 +655,41 @@ impl CacheEngine for RustValkeyCacheEngine {
             .query(conn)
             .map_err(|e| e.to_string())?;
 
-        for p_bytes in path_bytes_list {
-            let p_str = String::from_utf8_lossy(&p_bytes).into_owned();
+        let mut pipe = redis::pipe();
+        for p_bytes in &path_bytes_list {
+            let p_str = String::from_utf8_lossy(p_bytes);
             let file_key = format!("dg:file:{}", p_str);
-            let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
+            pipe.cmd("HMGET")
                 .arg(&file_key)
                 .arg("size")
                 .arg("mtime_ns")
                 .arg("entry_dt")
                 .arg("digest")
                 .arg("digest_partial")
-                .arg("digest_samples")
-                .query(conn)
-                .map_err(|e| e.to_string())?;
-            if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
-                let size = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
-                let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
-                results.push(FileMetadata {
-                    path: p_str,
-                    size,
-                    mtime_ns,
-                    entry_dt: meta[2]
-                        .as_ref()
-                        .map(|b| String::from_utf8_lossy(b).into_owned())
-                        .unwrap_or_default(),
-                    digest: meta[3].clone(),
-                    digest_partial: meta[4].clone(),
-                    digest_samples: meta[5].clone(),
-                });
+                .arg("digest_samples");
+        }
+
+        let pipeline_results: Vec<Vec<Option<Vec<u8>>>> = pipe.query(conn).map_err(|e| e.to_string())?;
+
+        for (p_bytes, meta) in path_bytes_list.iter().zip(pipeline_results) {
+            let p_str = String::from_utf8_lossy(p_bytes).into_owned();
+            if meta.len() >= 2 {
+                if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
+                    let size = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
+                    let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
+                    results.push(FileMetadata {
+                        path: p_str,
+                        size,
+                        mtime_ns,
+                        entry_dt: meta[2]
+                            .as_ref()
+                            .map(|b| String::from_utf8_lossy(b).into_owned())
+                            .unwrap_or_default(),
+                        digest: meta[3].clone(),
+                        digest_partial: meta[4].clone(),
+                        digest_samples: meta[5].clone(),
+                    });
+                }
             }
         }
 
@@ -726,33 +733,40 @@ impl CacheEngine for RustValkeyCacheEngine {
                 .take(limit)
         };
 
-        for path in range {
+        let mut pipe = redis::pipe();
+        let paths_vec: Vec<String> = range.cloned().collect();
+        for path in &paths_vec {
             let file_key = format!("dg:file:{}", path);
-            let meta: Vec<Option<Vec<u8>>> = redis::cmd("HMGET")
+            pipe.cmd("HMGET")
                 .arg(&file_key)
                 .arg("size")
                 .arg("mtime_ns")
                 .arg("entry_dt")
                 .arg("digest")
                 .arg("digest_partial")
-                .arg("digest_samples")
-                .query(conn)
-                .map_err(|e| e.to_string())?;
-            if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
-                let size_val = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
-                let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
-                results.push(FileMetadata {
-                    path: path.clone(),
-                    size: size_val,
-                    mtime_ns,
-                    entry_dt: meta[2]
-                        .as_ref()
-                        .map(|b| String::from_utf8_lossy(b).into_owned())
-                        .unwrap_or_default(),
-                    digest: meta[3].clone(),
-                    digest_partial: meta[4].clone(),
-                    digest_samples: meta[5].clone(),
-                });
+                .arg("digest_samples");
+        }
+
+        let pipeline_results: Vec<Vec<Option<Vec<u8>>>> = pipe.query(conn).map_err(|e| e.to_string())?;
+
+        for (path, meta) in paths_vec.into_iter().zip(pipeline_results) {
+            if meta.len() >= 2 {
+                if let (Some(size_bytes), Some(mtime_bytes)) = (&meta[0], &meta[1]) {
+                    let size_val = String::from_utf8_lossy(size_bytes).parse::<u64>().unwrap_or(0);
+                    let mtime_ns = String::from_utf8_lossy(mtime_bytes).parse::<u64>().unwrap_or(0);
+                    results.push(FileMetadata {
+                        path,
+                        size: size_val,
+                        mtime_ns,
+                        entry_dt: meta[2]
+                            .as_ref()
+                            .map(|b| String::from_utf8_lossy(b).into_owned())
+                            .unwrap_or_default(),
+                        digest: meta[3].clone(),
+                        digest_partial: meta[4].clone(),
+                        digest_samples: meta[5].clone(),
+                    });
+                }
             }
         }
         Ok(results)
