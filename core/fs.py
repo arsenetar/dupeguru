@@ -1065,7 +1065,7 @@ class Folder(File):
         return not path.is_symlink() and path.is_dir()
 
 
-def get_file(path, fileclasses=[File]):
+def get_file(path, fileclasses=[File], skip_disk_check=False):
     """Wraps ``path`` around its appropriate :class:`File` class.
 
     Whether a class is "appropriate" is decided by :meth:`File.can_handle`
@@ -1074,8 +1074,19 @@ def get_file(path, fileclasses=[File]):
     :param fileclasses: List of candidate :class:`File` classes
     """
     for fileclass in fileclasses:
-        if fileclass.can_handle(path):
-            return fileclass(path)
+        if skip_disk_check:
+            if hasattr(fileclass, "HANDLED_EXTS"):
+                if get_file_ext(path.name) in fileclass.HANDLED_EXTS:
+                    return fileclass(path)
+            elif hasattr(fileclass, "SUPPORTED_EXTS"):
+                if get_file_ext(path.name) in fileclass.SUPPORTED_EXTS:
+                    return fileclass(path)
+            else:
+                if fileclass.__name__ == "File" or len(fileclasses) == 1:
+                    return fileclass(path)
+        else:
+            if fileclass.can_handle(path):
+                return fileclass(path)
 
 
 def get_files(path, fileclasses=[File]):

@@ -212,7 +212,7 @@ class Directories:
                         j.check_if_cancelled()
                         j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
                     p = fs.Path(f_data["path"])
-                    file = fs.get_file(p, fileclasses=fileclasses)
+                    file = fs.get_file(p, fileclasses=fileclasses, skip_disk_check=True)
                     if file:
                         file.size = f_data["size"]
                         file.mtime = f_data["mtime_ns"] / 1e9
