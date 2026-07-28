@@ -274,7 +274,7 @@ class Directories:
                 return self.states[parent_path]
         return state
 
-    def has_any_file(self):
+    def has_any_file(self, fileclasses=None):
         """Returns whether selected folders contain any file.
 
         Because it stops at the first file it finds, it's much faster than get_files().
@@ -282,7 +282,13 @@ class Directories:
         :rtype: bool
         """
         try:
-            next(self.get_files())
+            try:
+                if fileclasses is not None:
+                    next(self.get_files(fileclasses=fileclasses))
+                else:
+                    next(self.get_files())
+            except TypeError:
+                next(self.get_files())
             return True
         except StopIteration:
             return False
