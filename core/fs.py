@@ -466,15 +466,17 @@ class ValkeyCacheEngine(CacheEngine):
     @valkey_retry
     def clear(self) -> None:
         with self.lock:
-            # Safely clear namespace keys to avoid impacting other apps sharing Redis
-            keys = []
-            for key in self.client.scan_iter("dg:*"):
-                keys.append(key)
-                if len(keys) >= 1000:
+            try:
+                self.client.flushdb()
+            except Exception:
+                keys = []
+                for key in self.client.scan_iter("dg:*"):
+                    keys.append(key)
+                    if len(keys) >= 1000:
+                        self.client.delete(*keys)
+                        keys = []
+                if keys:
                     self.client.delete(*keys)
-                    keys = []
-            if keys:
-                self.client.delete(*keys)
 
     def commit(self) -> None:
         pass

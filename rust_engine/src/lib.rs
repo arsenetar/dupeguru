@@ -526,24 +526,38 @@ impl CacheEngine for RustValkeyCacheEngine {
     fn clear(&self) -> Result<(), String> {
         let mut conn_guard = self.conn.lock().unwrap();
         let conn = &mut *conn_guard;
-        let keys: Vec<String> = {
-            let iter: redis::Iter<String> = redis::cmd("SCAN")
-                .arg(0)
+
+        if redis::cmd("FLUSHDB").query::<()>(conn).is_ok()
+            || redis::cmd("FLUSHDB").arg("ASYNC").query::<()>(conn).is_ok()
+        {
+            return Ok(());
+        }
+
+        let mut cursor: u64 = 0;
+        loop {
+            let res: Result<(u64, Vec<String>), _> = redis::cmd("SCAN")
+                .arg(cursor)
                 .arg("MATCH")
                 .arg("dg:*")
                 .arg("COUNT")
                 .arg(1000)
-                .clone()
-                .iter(conn)
-                .map_err(|e| e.to_string())?;
-            iter.collect()
-        };
+                .query(conn);
 
-        for chunk in keys.chunks(1000) {
-            let _: () = redis::cmd("DEL")
-                .arg(chunk)
-                .query(conn)
-                .map_err(|e| e.to_string())?;
+            match res {
+                Ok((next_cursor, keys)) => {
+                    if !keys.is_empty() {
+                        let _: () = redis::cmd("DEL")
+                            .arg(&keys)
+                            .query(conn)
+                            .map_err(|e| e.to_string())?;
+                    }
+                    cursor = next_cursor;
+                    if cursor == 0 {
+                        break;
+                    }
+                }
+                Err(e) => return Err(e.to_string()),
+            }
         }
         Ok(())
     }
@@ -1033,7 +1047,10 @@ impl RustFilesDB {
     #[new]
     pub fn new(cache_url: &str) -> PyResult<Self> {
         let engine: Box<dyn CacheEngine + Send + Sync> =
-            if cache_url.starts_with("redis://") || cache_url.starts_with("rediss://") {
+            if cache_url.starts_with("redis://")
+                || cache_url.starts_with("valkey://")
+                || cache_url.starts_with("rediss://")
+            {
                 let eng = RustValkeyCacheEngine::new(cache_url)
                     .map_err(|e| PyValueError::new_err(format!("Redis connection error: {}", e)))?;
                 Box::new(eng)
