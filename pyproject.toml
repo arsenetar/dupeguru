@@ -1,11 +1,12 @@
 [project]
-name = "dupeGuru"
+name = "de-dup"
 dynamic = ["version"]
-description = "dupeGuru is a tool to find duplicate files on your computer."
+description = "de-dup is a high-performance cross-platform duplicate file scanner forked from dupeGuru, featuring a Rust engine and HTML Web Console."
 readme = "README.md"
 requires-python = ">=3.8"
 license = "GPL-3.0-only"
 authors = [
+    { name = "Tin Le", email = "tin@example.com" },
     { name = "Andrew Senetar", email = "arsenetar@voltaicideas.net" }
 ]
 classifiers = [

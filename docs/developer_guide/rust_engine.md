@@ -1,0 +1,47 @@
+# Rust Engine & Native Pipeline
+
+The **Rust Engine** (`rust_engine/`) provides high-performance, multithreaded backend primitives compiled directly into a native shared module (`dupeguru_rust.so`).
+
+---
+
+## Engine Modules
+
+### 1. `RustFilesDB`
+Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
+* **SQLite WAL Engine**: Utilizes `rusqlite` with `PRAGMA busy_timeout = 30000` and thread-safe Mutex synchronization.
+* **Valkey/Redis Engine**: Connects via `redis-rs` and executes 5ms `FLUSHDB` operations for instant database clearing.
+
+### 2. Parallel Directory Crawler (`collect_files_parallel`)
+* **Crate Stack**: `walkdir` + `rayon`.
+* **Execution**: Walks multi-root directory trees across all available CPU logical cores concurrently without acquiring Python GIL locks.
+* **Signature**:
+  ```rust
+  pub fn collect_files_parallel(
+      roots: Vec<String>,
+      min_size: u64,
+      max_size: Option<u64>,
+  ) -> PyResult<Vec<(String, u64, f64)>>
+  ```
+
+### 3. Parallel File Hasher (`hash_files_parallel`)
+* **Crate Stack**: `md5` + `rayon` + `std::io::BufReader`.
+* **Execution**: Computes partial sampling or full MD5 checksums across thousands of candidate files in parallel.
+* **Signature**:
+  ```rust
+  pub fn hash_files_parallel(
+      paths_and_sizes: Vec<(String, u64)>,
+      sample_size: usize,
+  ) -> PyResult<Vec<(String, String)>>
+  ```
+
+---
+
+## PyO3 Interoperability & Path Safety
+
+Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
+```python
+def _clean_path_str(path) -> str:
+    s = str(path)
+    return s.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
+```
+This guarantees `PyUnicode_AsUTF8AndSize` string conversions never throw `UnicodeEncodeError`.

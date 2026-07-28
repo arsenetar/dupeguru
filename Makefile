@@ -97,6 +97,12 @@ run:
 web: all
 	$(WEB_ENV) $(VENV_PYTHON) -u run_web.py
 
+docs-serve:
+	$(VENV_PYTHON) -m mkdocs serve
+
+docs-build:
+	$(VENV_PYTHON) -m mkdocs build
+
 package: | all
 	$(VENV_PYTHON) package.py
 
