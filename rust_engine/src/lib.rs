@@ -219,44 +219,78 @@ impl CacheEngine for RustSQLiteCacheEngine {
         let prefix = format!("{}{}", dir_path, std::path::MAIN_SEPARATOR);
         let prefix_end = format!("{}\u{10ffff}", prefix);
 
-        let mut stmt = conn
-            .prepare(
-                "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-                 FROM (
-                     SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-                     FROM files
-                     WHERE path = ?1 AND path > ?3
-                     UNION ALL
-                     SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
-                     FROM files
-                     WHERE path >= ?2 AND path < ?4 AND path > ?3
-                 )
-                 ORDER BY path
-                 LIMIT ?5",
-            )
-            .map_err(|e| e.to_string())?;
-
-        let rows = stmt
-            .query_map(
-                params![dir_path, prefix, last_path, prefix_end, limit],
-                |row| {
-                    Ok(FileMetadata {
-                        path: row.get(0)?,
-                        size: row.get(1)?,
-                        mtime_ns: row.get(2)?,
-                        entry_dt: row.get(3)?,
-                        digest: row.get(4)?,
-                        digest_partial: row.get(5)?,
-                        digest_samples: row.get(6)?,
-                    })
-                },
-            )
-            .map_err(|e| e.to_string())?;
-
         let mut results = Vec::new();
-        for r in rows {
-            results.push(r.map_err(|e| e.to_string())?);
+        if last_path.is_empty() {
+            let mut stmt = conn
+                .prepare(
+                    "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                     FROM (
+                         SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                         FROM files
+                         WHERE path = ?1
+                         UNION ALL
+                         SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                         FROM files
+                         WHERE path >= ?2 AND path < ?3
+                     )
+                     ORDER BY path
+                     LIMIT ?4",
+                )
+                .map_err(|e| e.to_string())?;
+
+            let rows = stmt
+                .query_map(
+                    params![dir_path, prefix, prefix_end, limit],
+                    |row| {
+                        Ok(FileMetadata {
+                            path: row.get(0)?,
+                            size: row.get(1)?,
+                            mtime_ns: row.get(2)?,
+                            entry_dt: row.get(3)?,
+                            digest: row.get(4)?,
+                            digest_partial: row.get(5)?,
+                            digest_samples: row.get(6)?,
+                        })
+                    },
+                )
+                .map_err(|e| e.to_string())?;
+
+            for r in rows {
+                results.push(r.map_err(|e| e.to_string())?);
+            }
+        } else {
+            let mut stmt = conn
+                .prepare(
+                    "SELECT path, size, mtime_ns, entry_dt, digest, digest_partial, digest_samples
+                     FROM files
+                     WHERE path > ?1 AND path < ?2
+                     ORDER BY path
+                     LIMIT ?3",
+                )
+                .map_err(|e| e.to_string())?;
+
+            let rows = stmt
+                .query_map(
+                    params![last_path, prefix_end, limit],
+                    |row| {
+                        Ok(FileMetadata {
+                            path: row.get(0)?,
+                            size: row.get(1)?,
+                            mtime_ns: row.get(2)?,
+                            entry_dt: row.get(3)?,
+                            digest: row.get(4)?,
+                            digest_partial: row.get(5)?,
+                            digest_samples: row.get(6)?,
+                        })
+                    },
+                )
+                .map_err(|e| e.to_string())?;
+
+            for r in rows {
+                results.push(r.map_err(|e| e.to_string())?);
+            }
         }
+
         Ok(results)
     }
 
