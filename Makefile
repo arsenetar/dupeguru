@@ -118,10 +118,16 @@ run:
 web: all
 	$(WEB_ENV) $(VENV_PYTHON) -u run_web.py
 
-docs-serve:
+docs-env: | env
+	@if ! $(VENV_PYTHON) -c "import mkdocs" >/dev/null 2>&1; then \
+		echo "Installing mkdocs and mkdocs-material into virtual environment..."; \
+		VIRTUAL_ENV=env uv pip install mkdocs mkdocs-material; \
+	fi
+
+docs-serve: docs-env
 	$(VENV_PYTHON) -m mkdocs serve
 
-docs-build:
+docs-build: docs-env
 	$(VENV_PYTHON) -m mkdocs build
 
 package: | all
