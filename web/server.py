@@ -253,6 +253,19 @@ def load_selected_directories():
                     logging.error(f"Failed to restore directory {path_str}: {e}")
 
 
+def sanitize_utf8(obj):
+    """Recursively clean surrogate escapes and non-UTF-8 characters in strings, lists, and dicts."""
+    if isinstance(obj, str):
+        return obj.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
+    elif isinstance(obj, dict):
+        return {sanitize_utf8(k): sanitize_utf8(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_utf8(x) for x in obj]
+    elif isinstance(obj, tuple):
+        return tuple(sanitize_utf8(x) for x in obj)
+    return obj
+
+
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
 
@@ -266,7 +279,8 @@ def pulse_loop(stop_event):
                 if model.progress_window._job_running:
                     has_job_started = True
                     model.progress_window.pulse()
-                    app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
+                    raw_msg = model.progress_window.progressdesc_textfield.value or "Processing..."
+                    app_state["progress_msg"] = sanitize_utf8(raw_msg)
                 elif has_job_started:
                     has_job_started = False
                     model.progress_window.pulse()
@@ -274,7 +288,7 @@ def pulse_loop(stop_event):
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
                 app_state["status"] = "error"
-                app_state["error"] = str(e)
+                app_state["error"] = sanitize_utf8(str(e))
         else:
             has_job_started = False
         time.sleep(0.1)
@@ -352,7 +366,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 "messages": app_state["messages"],
                 "targets": targets,
             }
-            self.wfile.write(json.dumps(response).encode())
+            sanitized = sanitize_utf8(response)
+            self.wfile.write(json.dumps(sanitized).encode("utf-8", errors="replace"))
 
         elif path == "/api/config":
             self.wfile.write(json.dumps(web_view.preferences).encode())
