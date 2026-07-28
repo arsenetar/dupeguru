@@ -259,16 +259,24 @@ logging.basicConfig(level=logging.INFO)
 
 def pulse_loop(stop_event):
     """Background loop to pulse the job progress window."""
+    has_job_started = False
     while not stop_event.is_set():
         if app_state["scanning"]:
             try:
-                model.progress_window.pulse()
-                app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
+                if model.progress_window._job_running:
+                    has_job_started = True
+                    model.progress_window.pulse()
+                    app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
+                elif has_job_started:
+                    has_job_started = False
+                    model.progress_window.pulse()
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
                 app_state["status"] = "error"
                 app_state["error"] = str(e)
+        else:
+            has_job_started = False
         time.sleep(0.1)
 
 
@@ -520,6 +528,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid path"}).encode())
 
         elif path == "/api/scan":
+            if not model.progress_window._job_running:
+                app_state["scanning"] = False
+                app_state["status"] = "idle"
+
             if not app_state["scanning"]:
                 if model.progress_window._job_running:
                     self.wfile.write(
