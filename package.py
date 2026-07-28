@@ -28,6 +28,7 @@ from hscommon.build import (
 )
 
 ENTRY_SCRIPT = "run.py"
+WEB_ENTRY_SCRIPT = "run_web.py"
 LOCALE_DIR = "build/locale"
 HELP_DIR = "build/help"
 
@@ -55,6 +56,8 @@ def copy_files_to_package(destpath, packages, with_so):
         shutil.rmtree(destpath)
     os.makedirs(destpath)
     shutil.copy(ENTRY_SCRIPT, op.join(destpath, ENTRY_SCRIPT))
+    if op.exists(WEB_ENTRY_SCRIPT):
+        shutil.copy(WEB_ENTRY_SCRIPT, op.join(destpath, WEB_ENTRY_SCRIPT))
     extra_ignores = ["*.so"] if not with_so else None
     copy_packages(packages, destpath, extra_ignores=extra_ignores)
     # include locale files if they are built otherwise exit as it will break
@@ -72,7 +75,7 @@ def package_debian_distribution(distribution):
     version = "{}~{}".format(app_version, distribution)
     destpath = op.join("build", "dupeguru-{}".format(version))
     srcpath = op.join(destpath, "src")
-    packages = ["hscommon", "core", "qt", "send2trash"]
+    packages = ["hscommon", "core", "qt", "web", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=False)
     os.mkdir(op.join(destpath, "modules"))
     copy_all(op.join("core", "pe", "modules", "*.*"), op.join(destpath, "modules"))
@@ -123,7 +126,7 @@ def package_arch():
     # need to include them).
     print("Packaging for Arch")
     srcpath = op.join("build", "dupeguru-arch")
-    packages = ["hscommon", "core", "qt"]
+    packages = ["hscommon", "core", "qt", "web"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
@@ -181,6 +184,7 @@ def package_windows():
             "--icon=images/dgse_logo.ico",
             "--add-data={0};locale".format(LOCALE_DIR),
             "--add-data={0};help".format(HELP_DIR),
+            "--add-data=web;web",
             "--version-file=win_version_info.txt",
             "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(arch),
             ENTRY_SCRIPT,
@@ -215,6 +219,7 @@ def package_macos():
             "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
             "--add-data={0}:locale".format(LOCALE_DIR),
             "--add-data={0}:help".format(HELP_DIR),
+            "--add-data=web:web",
             "{0}".format(ENTRY_SCRIPT),
         ]
     )
