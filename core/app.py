@@ -432,7 +432,22 @@ class DupeGuru(Broadcaster):
             pass  # we don't care
 
     def clear_hash_cache(self):
-        fs.filesdb.clear()
+        cache_url = self.view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
+        if not cache_url or not (
+            cache_url.startswith("redis://") or cache_url.startswith("valkey://") or cache_url.startswith("rediss://")
+        ):
+            hash_cache_file = cache_url or os.path.join(self.appdata, "hash_cache.db")
+            fs.filesdb.close()
+            for ext in ["", "-wal", "-shm"]:
+                target_f = hash_cache_file + ext
+                if os.path.exists(target_f):
+                    try:
+                        os.remove(target_f)
+                    except Exception as e:
+                        logging.warning(f"Could not remove {target_f}: {e}")
+            fs.filesdb.connect(hash_cache_file)
+        else:
+            fs.filesdb.clear()
 
     def copy_or_move(self, dupe, copy: bool, destination: str, dest_type: DestType):
         source_path = dupe.path
