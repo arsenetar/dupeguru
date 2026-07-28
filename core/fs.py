@@ -782,6 +782,16 @@ class FilesDB:
             else:
                 self.engine.snapshot_file(path, size, mtime)
 
+    def snapshot_files_batch(self, batch) -> None:
+        if self.engine:
+            if self._is_rust:
+                rust_batch = [(str(item[0]), item[1], item[2]) for item in batch]
+                self.engine.snapshot_files_batch(rust_batch)
+            else:
+                for path, size, mtime in batch:
+                    self.engine.snapshot_file(path, size, mtime)
+                self.engine.commit()
+
     def get_files_in_directory(self, dir_path: Path):
         if self.engine:
             if self._is_rust:

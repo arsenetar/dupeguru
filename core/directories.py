@@ -6,9 +6,6 @@
 
 import logging
 import os
-import queue
-import threading
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -92,14 +89,26 @@ class Directories:
             return DirectoryState.EXCLUDED
         return DirectoryState.NORMAL
 
-    def _get_files(self, from_path, fileclasses, j):
+    def _get_files(self, from_path, fileclasses, j=job.nulljob, batch_buf=None):
         root_path = Path(from_path)
+        is_top_level = batch_buf is None
+        if is_top_level:
+            batch_buf = []
+
+        def flush_batch():
+            if batch_buf:
+                fs.filesdb.snapshot_files_batch(batch_buf)
+                batch_buf.clear()
+
         if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(root_path):
-            logging.info("Directory %s already scanned. Loading files from cache database.", root_path)
-            cached_files = fs.filesdb.get_files_in_directory(root_path)
-            for f_data in cached_files:
+            cache_count = 0
+            for f_data in fs.filesdb.get_files_in_directory(root_path):
+                cache_count += 1
+                if cache_count % 1000 == 0:
+                    j.check_if_cancelled()
+                    j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
                 p = fs.Path(f_data["path"])
-                file = fs.get_file(p, fileclasses=fileclasses)
+                file = fs.get_file(p, fileclasses=fileclasses, skip_disk_check=True)
                 if file:
                     file.size = f_data["size"]
                     file.mtime = f_data["mtime_ns"] / 1e9
@@ -122,7 +131,7 @@ class Directories:
                         if item.is_dir():
                             if skip_dirs:
                                 continue
-                            yield from self._get_files(item.path, fileclasses, j)
+                            yield from self._get_files(item.path, fileclasses, j, batch_buf=batch_buf)
                             continue
                         elif state == DirectoryState.EXCLUDED:
                             continue
@@ -136,11 +145,16 @@ class Directories:
                             if file:
                                 file.is_ref = state == DirectoryState.REFERENCE
                                 if fs.filesdb.enable_directory_cache:
-                                    fs.filesdb.snapshot_file(file.path, file.size, file.mtime)
+                                    batch_buf.append((file.path, file.size, file.mtime))
+                                    if len(batch_buf) >= 1000:
+                                        flush_batch()
                                 count += 1
                                 yield file
                     except (OSError, fs.InvalidPath):
                         pass
+
+                if is_top_level:
+                    flush_batch()
 
                 if fs.filesdb.enable_directory_cache:
                     fs.filesdb.mark_directory_scanned(root_path)
@@ -151,6 +165,9 @@ class Directories:
                 )
         except OSError:
             pass
+        finally:
+            if is_top_level:
+                flush_batch()
 
     def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
@@ -198,11 +215,10 @@ class Directories:
             return []
 
     def get_files(self, fileclasses=None, j=job.nulljob):
-        """Returns a list of all files that are not excluded, walking directories in parallel."""
+        """Returns a list of all files that are not excluded."""
         if fileclasses is None:
             fileclasses = [fs.File]
 
-        dirs_to_crawl = []
         for path in self._dirs:
             if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(path):
                 cache_count = 0
@@ -219,150 +235,8 @@ class Directories:
                         file.is_ref = self.get_state(path) == DirectoryState.REFERENCE
                         yield file
             else:
-                dirs_to_crawl.append(path)
-
-        if not dirs_to_crawl:
-            return
-
-        dir_queue = queue.Queue()
-        for p in dirs_to_crawl:
-            dir_queue.put(p)
-
-        db_queue = queue.Queue()
-        files_queue = queue.Queue()
-
-        active_crawlers = 0
-        crawler_lock = threading.Lock()
-        crawling_done = threading.Event()
-        stop_workers = threading.Event()
-
-        def crawler_worker():
-            nonlocal active_crawlers
-            while not stop_workers.is_set():
-                try:
-                    from_path = dir_queue.get(timeout=0.05)
-                except queue.Empty:
-                    with crawler_lock:
-                        if active_crawlers == 0:
-                            crawling_done.set()
-                            break
-                    continue
-
-                with crawler_lock:
-                    active_crawlers += 1
-
-                try:
-                    root_path = Path(from_path)
-                    state = self.get_state(root_path)
-
-                    if state == DirectoryState.EXCLUDED:
-                        if not any(p.parts[: len(root_path.parts)] == root_path.parts for p in self.states):
-                            dir_queue.task_done()
-                            continue
-
-                    with os.scandir(from_path) as it:
-                        for item in it:
-                            if stop_workers.is_set():
-                                break
-                            try:
-                                if item.is_dir():
-                                    sub_path = Path(item.path)
-                                    if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(sub_path):
-                                        for f_data in fs.filesdb.get_files_in_directory(sub_path):
-                                            if stop_workers.is_set():
-                                                break
-                                            p = fs.Path(f_data["path"])
-                                            file = fs.get_file(p, fileclasses=fileclasses)
-                                            if file:
-                                                file.size = f_data["size"]
-                                                file.mtime = f_data["mtime_ns"] / 1e9
-                                                file.is_ref = self.get_state(sub_path) == DirectoryState.REFERENCE
-                                                files_queue.put(file)
-                                    else:
-                                        dir_queue.put(item.path)
-                                else:
-                                    if state == DirectoryState.EXCLUDED:
-                                        continue
-                                    if (
-                                        self._exclude_list is None
-                                        or not self._exclude_list.mark_count
-                                        or not self._exclude_list.is_excluded(str(from_path), item.name)
-                                    ):
-                                        file = fs.get_file(item, fileclasses=fileclasses)
-                                        if file:
-                                            file.is_ref = state == DirectoryState.REFERENCE
-                                            if fs.filesdb.enable_directory_cache:
-                                                db_queue.put((file.path, file.size, file.mtime))
-                                            files_queue.put(file)
-                            except Exception:
-                                pass
-
-                    if fs.filesdb.enable_directory_cache:
-                        db_queue.put(("DIR_SCANNED", root_path))
-                except Exception:
-                    pass
-                finally:
-                    with crawler_lock:
-                        active_crawlers -= 1
-                    dir_queue.task_done()
-
-        db_writer_done = threading.Event()
-
-        def db_writer_worker():
-            while True:
-                try:
-                    item = db_queue.get(timeout=0.05)
-                except queue.Empty:
-                    if stop_workers.is_set():
-                        break
-                    continue
-                if item is None:
-                    db_queue.task_done()
-                    break
-                if stop_workers.is_set():
-                    db_queue.task_done()
-                    continue
-                try:
-                    if item[0] == "DIR_SCANNED":
-                        fs.filesdb.mark_directory_scanned(item[1])
-                    else:
-                        fs.filesdb.snapshot_file(item[0], item[1], item[2])
-                except Exception as e:
-                    logging.error(f"Error in parallel db writer: {e}")
-                db_queue.task_done()
-            db_writer_done.set()
-
-        writer_thread = threading.Thread(target=db_writer_worker, daemon=True)
-        writer_thread.start()
-
-        num_workers = 8
-        pool = ThreadPoolExecutor(max_workers=num_workers)
-        for _ in range(num_workers):
-            pool.submit(crawler_worker)
-
-        try:
-            file_count = 0
-            while not crawling_done.is_set() or not files_queue.empty():
-                j.check_if_cancelled()
-                try:
-                    file = files_queue.get(timeout=0.05)
-                    file_count += 1
-                    if not isinstance(j, job.NullJob) and file_count % 100 == 0:
-                        j.set_progress(-1, tr("Scanning: Collected {} files...").format(file_count))
+                for file in self._get_files(path, fileclasses=fileclasses, j=j):
                     yield file
-                    files_queue.task_done()
-                except queue.Empty:
-                    continue
-        except Exception:
-            stop_workers.set()
-            crawling_done.set()
-            raise
-        finally:
-            stop_workers.set()
-            pool.shutdown(wait=True)
-            db_queue.put(None)
-            db_writer_done.wait()
-            fs.filesdb.commit()
 
     def get_folders(self, folderclass=None, j=job.nulljob):
         """Returns a list of all folders that are not excluded.

@@ -48,6 +48,7 @@ pub trait CacheEngine {
     fn mark_directory_scanned(&self, dir_path: &str) -> Result<(), String>;
     fn is_directory_scanned(&self, dir_path: &str) -> Result<bool, String>;
     fn snapshot_file(&self, path: &str, size: u64, mtime: f64) -> Result<(), String>;
+    fn snapshot_files_batch(&self, batch: &[(String, u64, f64)]) -> Result<(), String>;
     fn get_files_in_directory_page(
         &self,
         dir_path: &str,
@@ -206,6 +207,28 @@ impl CacheEngine for RustSQLiteCacheEngine {
             params![path, size as i64, mtime_ns],
         )
         .map_err(|e| e.to_string())?;
+        Ok(())
+    }
+
+    fn snapshot_files_batch(&self, batch: &[(String, u64, f64)]) -> Result<(), String> {
+        let mut conn = self.conn.lock().unwrap();
+        let tx = conn.transaction().map_err(|e| e.to_string())?;
+        {
+            let mut stmt = tx
+                .prepare(
+                    "INSERT INTO files (path, size, mtime_ns, entry_dt)
+                     VALUES (?1, ?2, ?3, datetime('now'))
+                     ON CONFLICT(path) DO UPDATE SET size=?2, mtime_ns=?3, entry_dt=datetime('now')",
+                )
+                .map_err(|e| e.to_string())?;
+
+            for (path, size, mtime) in batch {
+                let mtime_ns = (mtime * 1e9) as i64;
+                stmt.execute(params![path, *size as i64, mtime_ns])
+                    .map_err(|e| e.to_string())?;
+            }
+        }
+        tx.commit().map_err(|e| e.to_string())?;
         Ok(())
     }
 
@@ -587,13 +610,13 @@ impl CacheEngine for RustValkeyCacheEngine {
                     .arg(path)
                     .query(conn)
                     .map_err(|e| e.to_string())?;
-                let new_count: i64 = redis::cmd("HINCRBY")
+                let dec_count: i64 = redis::cmd("HINCRBY")
                     .arg("dg:size_counts")
                     .arg(os.to_string())
                     .arg(-1)
                     .query(conn)
                     .map_err(|e| e.to_string())?;
-                if new_count < 2 {
+                if dec_count < 2 {
                     let _: () = redis::cmd("SREM")
                         .arg("dg:candidate_sizes")
                         .arg(os)
@@ -606,13 +629,13 @@ impl CacheEngine for RustValkeyCacheEngine {
                 .arg(path)
                 .query(conn)
                 .map_err(|e| e.to_string())?;
-            let new_count: i64 = redis::cmd("HINCRBY")
+            let inc_count: i64 = redis::cmd("HINCRBY")
                 .arg("dg:size_counts")
                 .arg(size.to_string())
                 .arg(1)
                 .query(conn)
                 .map_err(|e| e.to_string())?;
-            if new_count >= 2 {
+            if inc_count >= 2 {
                 let _: () = redis::cmd("SADD")
                     .arg("dg:candidate_sizes")
                     .arg(size)
@@ -621,6 +644,31 @@ impl CacheEngine for RustValkeyCacheEngine {
             }
         }
 
+        Ok(())
+    }
+
+    fn snapshot_files_batch(&self, batch: &[(String, u64, f64)]) -> Result<(), String> {
+        let mut conn_guard = self.conn.lock().unwrap();
+        let conn = &mut *conn_guard;
+        let mut pipe = redis::pipe();
+        let now_str = chrono::Utc::now().to_rfc3339();
+
+        for (path, size, mtime) in batch {
+            let mtime_ns = (mtime * 1e9) as u64;
+            let file_key = format!("dg:file:{}", path);
+            pipe.cmd("HMSET")
+                .arg(&file_key)
+                .arg("size")
+                .arg(size)
+                .arg("mtime_ns")
+                .arg(mtime_ns)
+                .arg("entry_dt")
+                .arg(&now_str);
+            pipe.cmd("ZADD").arg("dg:files_by_path").arg(0).arg(path);
+            pipe.cmd("SADD").arg(format!("dg:size_files:{}", size)).arg(path);
+        }
+
+        let _: () = pipe.query(conn).map_err(|e| e.to_string())?;
         Ok(())
     }
 
@@ -1025,6 +1073,12 @@ impl RustFilesDB {
     pub fn snapshot_file(&self, path: &str, size: u64, mtime: f64) -> PyResult<()> {
         self.engine
             .snapshot_file(path, size, mtime)
+            .map_err(PyValueError::new_err)
+    }
+
+    pub fn snapshot_files_batch(&self, batch: Vec<(String, u64, f64)>) -> PyResult<()> {
+        self.engine
+            .snapshot_files_batch(&batch)
             .map_err(PyValueError::new_err)
     }
 
