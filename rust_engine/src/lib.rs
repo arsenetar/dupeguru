@@ -90,6 +90,7 @@ pub struct RustSQLiteCacheEngine {
 impl RustSQLiteCacheEngine {
     pub fn new(path: &str) -> Result<Self, String> {
         let conn = Connection::open(path).map_err(|e| e.to_string())?;
+        let _ = conn.busy_timeout(std::time::Duration::from_secs(30));
         // Enable WAL mode for high concurrency
         let _ = conn.execute("PRAGMA journal_mode=WAL;", []);
 
@@ -131,40 +132,8 @@ impl RustSQLiteCacheEngine {
 impl CacheEngine for RustSQLiteCacheEngine {
     fn clear(&self) -> Result<(), String> {
         let conn = self.conn.lock().unwrap();
-        conn.execute("DROP TABLE IF EXISTS files;", [])
+        conn.execute_batch("DELETE FROM files; DELETE FROM scanned_directories;")
             .map_err(|e| e.to_string())?;
-        conn.execute("DROP TABLE IF EXISTS scanned_directories;", [])
-            .map_err(|e| e.to_string())?;
-
-        conn.execute(
-            "CREATE TABLE IF NOT EXISTS files (
-                path TEXT PRIMARY KEY,
-                size INTEGER,
-                mtime_ns INTEGER,
-                entry_dt DATETIME,
-                digest BLOB,
-                digest_partial BLOB,
-                digest_samples BLOB
-            )",
-            [],
-        )
-        .map_err(|e| e.to_string())?;
-
-        conn.execute(
-            "CREATE TABLE IF NOT EXISTS scanned_directories (
-                path TEXT PRIMARY KEY,
-                scan_dt DATETIME
-            )",
-            [],
-        )
-        .map_err(|e| e.to_string())?;
-
-        conn.execute(
-            "CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)",
-            [],
-        )
-        .map_err(|e| e.to_string())?;
-
         Ok(())
     }
 

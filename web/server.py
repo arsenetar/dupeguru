@@ -525,27 +525,28 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     )
                     return
 
-                if not model.directories.has_any_file():
+                if not model.directories or len(model.directories) == 0:
                     self.wfile.write(
-                        json.dumps(
-                            {"success": False, "error": "The selected directories contain no scannable file."}
-                        ).encode()
+                        json.dumps({"success": False, "error": "No directories selected to scan."}).encode()
                     )
                     return
 
-                # Clear cache if requested
-                if data.get("clear_cache", False):
-                    model.clear_hash_cache()
+                clear_cache_requested = data.get("clear_cache", False)
 
-                # Enable directory snapshotting and resumption
-                fs.filesdb.enable_directory_cache = True
+                def run_scan_async():
+                    if clear_cache_requested:
+                        model.clear_hash_cache()
+                    fs.filesdb.enable_directory_cache = True
+                    model.start_scanning()
 
                 app_state["status"] = "scanning"
                 app_state["scanning"] = True
                 app_state["progress"] = 0
                 app_state["progress_msg"] = "Starting scan..."
-                # Run scan in model (which handles threads itself)
-                model.start_scanning()
+
+                scan_thread = threading.Thread(target=run_scan_async, daemon=True)
+                scan_thread.start()
+
                 self.wfile.write(json.dumps({"success": True}).encode())
             else:
                 self.wfile.write(json.dumps({"success": False, "error": "Scan in progress"}).encode())
