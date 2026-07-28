@@ -554,11 +554,21 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
                 def run_scan_async():
                     try:
+                        print("[Web Server] Starting scan thread...", flush=True)
                         if clear_cache_requested:
+                            print("[Web Server] Clearing database hash cache...", flush=True)
+                            t0 = time.time()
                             model.clear_hash_cache()
+                            print(
+                                f"[Web Server] Database cache cleared in {(time.time() - t0) * 1000:.2f} ms.",
+                                flush=True,
+                            )
                         fs.filesdb.enable_directory_cache = True
+                        print("[Web Server] Launching duplicate scan engine...", flush=True)
                         model.start_scanning()
+                        print("[Web Server] Scan engine execution completed.", flush=True)
                     except Exception as e:
+                        print(f"[Web Server ERROR] Scan thread failed: {e}", flush=True)
                         logging.error(f"Error in run_scan_async: {e}", exc_info=True)
                         app_state["scanning"] = False
                         app_state["status"] = "error"

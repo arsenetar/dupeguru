@@ -94,7 +94,7 @@ all: | env i18n modules qt/dg_rc.py rust
 run:
 	$(VENV_PYTHON) run.py
 
-web: | all
+web: all
 	$(WEB_ENV) $(VENV_PYTHON) -u run_web.py
 
 package: | all
