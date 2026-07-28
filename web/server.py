@@ -6,6 +6,7 @@ import threading
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ThreadingMixIn
 from pathlib import Path
 
 # Prevent PyQt5 from being imported to avoid loading C-extensions in a multi-threaded
@@ -260,8 +261,14 @@ def pulse_loop(stop_event):
     """Background loop to pulse the job progress window."""
     while not stop_event.is_set():
         if app_state["scanning"]:
-            model.progress_window.pulse()
-            app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
+            try:
+                model.progress_window.pulse()
+                app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
+            except Exception as e:
+                logging.error(f"Error in pulse_loop: {e}")
+                app_state["scanning"] = False
+                app_state["status"] = "error"
+                app_state["error"] = str(e)
         time.sleep(0.1)
 
 
@@ -644,6 +651,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid index"}).encode())
 
 
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+
 def start_server(port=8080):
     # Ensure locales and other config directories exist
     locale_folder = PROJECT_ROOT / "locale"
@@ -656,7 +668,7 @@ def start_server(port=8080):
         lang = "en"
     install_gettext_trans(str(locale_folder), lang)
 
-    server = HTTPServer(("localhost", port), DupeGuruHTTPHandler)
+    server = ThreadedHTTPServer(("localhost", port), DupeGuruHTTPHandler)
     print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}", flush=True)
 
     # Restore selected directories asynchronously in background so server binds immediately
