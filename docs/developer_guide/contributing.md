@@ -29,3 +29,15 @@ PATH="./env/bin:$PATH" pre-commit run --all-files
   - `perf`: Performance optimization.
   - `docs`: Documentation updates.
   - `refactor`: Structural refactoring without behavior change.
+
+---
+
+## Performance & Robustness Guidelines
+
+1. **Cache Database Resetting**:
+   - For Redis/Valkey cache resetting, invoke `FLUSHDB` / `FLUSHDB ASYNC` directly instead of iterating keys via `SCAN` + `DEL`.
+   - For resetting large local SQLite cache files, close the connection, unlink the file on disk (`os.remove`), and reconnect to achieve sub-20ms reset times and instant disk space reclamation.
+
+2. **Linux Non-UTF-8 Filename Safety**:
+   - Always sanitize string file paths containing potential surrogate escapes (`\udc00`–`\udfff`) before passing them to PyO3 Rust bindings or serializing to JSON.
+   - Use `s.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")` to prevent `UnicodeEncodeError` crashes.
