@@ -303,6 +303,14 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     all_files_to_hash = [f for g in possible_matches for f in g if f.size > 0]
 
     if all_files_to_hash:
+        try:
+            from core import dupeguru_rust, fs
+
+            if fs.filesdb._is_rust:
+                targets = [(str(f.path), f.size) for f in all_files_to_hash]
+                _ = dupeguru_rust.hash_files_parallel(targets, 0)
+        except Exception as e:
+            logging.warning(f"Rust parallel hashing fallback: {e}")
 
         def prehash_file(f):
             try:
