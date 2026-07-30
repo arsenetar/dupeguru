@@ -36,6 +36,15 @@ Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
 
 ---
 
+## 4. Scanner Pipeline Integration (Phase 4)
+
+* **Directory Crawling Integration ([core/directories.py](file:///home/tin/src/opensource/dupeguru/core/directories.py#L104-L128))**:
+  When `HAS_RUST` is active, `_get_files` delegates top-level directory discovery directly to `dupeguru_rust.collect_files_parallel()`, populating `fs.filesdb` and yielding scannable files in parallel.
+* **Pre-Hashing Candidate Integration ([core/engine.py](file:///home/tin/src/opensource/dupeguru/core/engine.py#L305-L314))**:
+  `getmatches_by_contents()` invokes `dupeguru_rust.hash_files_parallel()` to pre-calculate MD5 checksums across all logical CPU cores via Rayon SIMD processing before match grouping.
+
+---
+
 ## PyO3 Interoperability & Path Safety
 
 Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
