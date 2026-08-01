@@ -45,7 +45,7 @@ let resultsOffset = 0;
 let resultsTotal = 0;
 
 // Initialize Application
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
     loadDirectories();
     browseFolders();
     loadConfig();
@@ -54,7 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
     checkInitialResults();
     // Regular status polling (for progress sync)
     setInterval(checkScanStatus, 1000);
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+} else {
+    init();
+}
 
 async function checkInitialResults() {
     try {
