@@ -114,10 +114,27 @@ def build_normpo():
     loc.normalize_all_pos("locale")
 
 
+def build_rust_engine():
+    print("Building Rust Engine")
+    cargo_cmd = shutil.which("cargo")
+    if cargo_cmd and Path("rust_engine", "Cargo.toml").exists():
+        subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine")
+        target_so = "dupeguru_rust.dll" if sys.platform == "win32" else "libdupeguru_rust.so"
+        dest_so = "dupeguru_rust.pyd" if sys.platform == "win32" else "dupeguru_rust.so"
+        src_path = Path("rust_engine", "target", "release", target_so)
+        dest_path = Path("core", dest_so)
+        if src_path.exists():
+            shutil.copy2(src_path, dest_path)
+            print(f"Copied {src_path} -> {dest_path}")
+    else:
+        print("Cargo not found or rust_engine missing, skipping Rust engine build.")
+
+
 def build_pe_modules():
     print("Building PE Modules")
     # Leverage setup.py to build modules
     subprocess.check_call([sys.executable, "setup.py", "build_ext", "--inplace"])
+    build_rust_engine()
 
 
 def build_normal():
