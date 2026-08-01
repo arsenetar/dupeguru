@@ -153,17 +153,41 @@ class ScanTaskRegistry:
             return True
 
     def _scan_storage_refresh(self):
-        """Scans storage directory for existing .db files and registers them."""
+        """Scans storage directories for existing .db files and registers them."""
         with self._lock:
-            if not os.path.exists(self.scans_dir):
-                return
-            for fname in os.listdir(self.scans_dir):
-                if fname.endswith(".db"):
-                    db_path = os.path.join(self.scans_dir, fname)
-                    existing = any(t.db_path == db_path for t in self.tasks.values())
-                    if not existing:
-                        task_id = fname.replace(".db", "")
-                        name = task_id.rsplit("_", 1)[0] if "_" in task_id else task_id
-                        task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=[])
-                        task.status = ScanTaskStatus.COMPLETED
-                        self.tasks[task_id] = task
+            candidate_dirs = [self.scans_dir]
+            home = os.path.expanduser("~")
+            fallback_dir = os.path.join(home, ".local/share", "dupeGuru", "scans")
+            if os.path.exists(fallback_dir) and fallback_dir not in candidate_dirs:
+                candidate_dirs.append(fallback_dir)
+
+            for scans_directory in candidate_dirs:
+                if not os.path.exists(scans_directory):
+                    continue
+                try:
+                    for fname in os.listdir(scans_directory):
+                        if fname.endswith(".db"):
+                            db_path = os.path.join(scans_directory, fname)
+                            existing = any(t.db_path == db_path for t in self.tasks.values())
+                            if not existing:
+                                task_id = fname.replace(".db", "")
+                                name = task_id.rsplit("_", 1)[0] if "_" in task_id else task_id
+                                task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=[])
+                                task.status = ScanTaskStatus.COMPLETED
+
+                                try:
+                                    import sqlite3
+
+                                    conn = sqlite3.connect(db_path)
+                                    cur = conn.cursor()
+                                    cur.execute("SELECT COUNT(*) FROM files")
+                                    task.file_count = cur.fetchone()[0]
+                                    conn.close()
+                                except Exception:
+                                    pass
+
+                                self.tasks[task_id] = task
+                except Exception as e:
+                    import logging
+
+                    logging.error(f"Error refreshing scan storage in {scans_directory}: {e}")
