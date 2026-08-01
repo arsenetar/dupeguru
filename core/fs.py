@@ -273,6 +273,27 @@ class SQLiteCacheEngine(CacheEngine):
         except Exception as e:
             logging.error(f"Error marking directory scanned: {e}")
 
+    def set_metadata(self, key: str, value: Any) -> None:
+        try:
+            with self.lock, self.conn as conn:
+                conn.execute("CREATE TABLE IF NOT EXISTS scan_metadata (key TEXT PRIMARY KEY, value TEXT)")
+                conn.execute("INSERT OR REPLACE INTO scan_metadata (key, value) VALUES (?, ?)", (key, str(value)))
+        except Exception as e:
+            logging.error(f"Error setting metadata {key}={value}: {e}")
+
+    def get_metadata(self, key: str, default: Any = None) -> Any:
+        try:
+            with self.lock, self.conn as conn:
+                has_table = conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name='scan_metadata'"
+                ).fetchone()
+                if not has_table:
+                    return default
+                row = conn.execute("SELECT value FROM scan_metadata WHERE key = ?", (key,)).fetchone()
+                return row[0] if row else default
+        except Exception:
+            return default
+
     def is_directory_scanned(self, dir_path: Path) -> bool:
         try:
             with self.lock, self.conn as conn:
@@ -784,6 +805,15 @@ class FilesDB:
     def commit(self) -> None:
         if self.engine:
             self.engine.commit()
+
+    def set_metadata(self, key: str, value: Any) -> None:
+        if self.engine and hasattr(self.engine, "set_metadata"):
+            self.engine.set_metadata(key, value)
+
+    def get_metadata(self, key: str, default: Any = None) -> Any:
+        if self.engine and hasattr(self.engine, "get_metadata"):
+            return self.engine.get_metadata(key, default)
+        return default
 
     def mark_directory_scanned(self, dir_path: Path) -> None:
         if self.engine:

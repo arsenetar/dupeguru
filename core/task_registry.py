@@ -49,11 +49,23 @@ class ScanTask:
         self._thread = None
 
     def save_metadata(self) -> None:
+        try:
+            from core import fs
+
+            if fs.filesdb and fs.filesdb.engine and getattr(fs.filesdb.engine, "db_path", None) == self.db_path:
+                status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
+                fs.filesdb.set_metadata("match_count", self.match_count)
+                fs.filesdb.set_metadata("dupe_count", self.dupe_count)
+                fs.filesdb.set_metadata("status", status_str)
+                return
+        except Exception:
+            pass
+
         if os.path.exists(self.db_path):
             try:
                 import sqlite3
 
-                conn = sqlite3.connect(self.db_path)
+                conn = sqlite3.connect(self.db_path, timeout=10.0)
                 cur = conn.cursor()
                 cur.execute("CREATE TABLE IF NOT EXISTS scan_metadata (key TEXT PRIMARY KEY, value TEXT)")
                 cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('match_count', ?)", (str(self.match_count),))
