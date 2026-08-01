@@ -307,10 +307,11 @@ def pulse_loop(stop_event):
                         if task:
                             task.status = ScanTaskStatus.COMPLETED
                             task.completed_at = time.time()
-                            task.file_count = model.discarded_file_count
+                            task.file_count = len(model.results) if model.results else task.file_count
                             task.match_count = len(model.results.groups)
                             task.dupe_count = len(model.results.dupes)
                             task.results_groups = model.results.groups
+                            task.is_loaded = True
                 else:
                     wait_ticks += 1
                     if wait_ticks > 30:  # 3 seconds fallback
@@ -323,10 +324,11 @@ def pulse_loop(stop_event):
                             if task:
                                 task.status = ScanTaskStatus.COMPLETED if model.results.groups else ScanTaskStatus.IDLE
                                 task.completed_at = time.time()
-                                task.file_count = model.discarded_file_count
+                                task.file_count = len(model.results) if model.results else task.file_count
                                 task.match_count = len(model.results.groups)
                                 task.dupe_count = len(model.results.dupes)
                                 task.results_groups = model.results.groups
+                                task.is_loaded = True
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
@@ -701,20 +703,36 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                                 pass
                         model.start_scanning()
                         start_wait = time.time()
-                        while model.progress_window._job_running and (time.time() - start_wait < 10.0):
+                        while model.progress_window._job_running and (time.time() - start_wait < 1.5):
                             time.sleep(0.05)
-                        try:
-                            if fs.filesdb and fs.filesdb.conn:
-                                fs.filesdb.conn.commit()
-                        except Exception:
-                            pass
-                        task.results_groups = model.results.groups
-                        task.match_count = len(model.results.groups) if model.results else 0
-                        task.dupe_count = len(model.results.dupes) if model.results else 0
-                        task.status = ScanTaskStatus.COMPLETED
-                        task.is_loaded = True
 
-                    self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
+                        is_still_running = model.progress_window._job_running
+                        if is_still_running:
+                            app_state["status"] = "scanning"
+                            app_state["scanning"] = True
+                            app_state["progress"] = int(model.progress_window.progress)
+                            app_state["progress_msg"] = (
+                                model.progress_window.message or f"Hashing & scanning files for '{task.name}'..."
+                            )
+                        else:
+                            try:
+                                if fs.filesdb and fs.filesdb.conn:
+                                    fs.filesdb.conn.commit()
+                            except Exception:
+                                pass
+                            task.results_groups = model.results.groups
+                            task.match_count = len(model.results.groups) if model.results else 0
+                            task.dupe_count = len(model.results.dupes) if model.results else 0
+                            task.status = ScanTaskStatus.COMPLETED
+                            task.is_loaded = True
+
+                        self.wfile.write(
+                            json.dumps(
+                                sanitize_utf8(
+                                    {"success": True, "is_scanning": is_still_running, "task": task.to_dict()}
+                                )
+                            ).encode()
+                        )
                 except Exception as e:
                     self.wfile.write(json.dumps(sanitize_utf8({"success": False, "error": str(e)})).encode())
             else:

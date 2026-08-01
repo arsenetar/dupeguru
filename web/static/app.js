@@ -1065,11 +1065,20 @@ async function viewTaskResults(taskId) {
         });
         const res = await response.json();
         if (res.success) {
-            await loadResults();
-            await loadMultiScans();
-            if (resultsContainer) resultsContainer.classList.remove("hidden");
-            if (welcomeContainer) welcomeContainer.classList.add("hidden");
-            if (progressContainer) progressContainer.classList.add("hidden");
+            if (res.is_scanning) {
+                isScanning = true;
+                if (progressContainer) progressContainer.classList.remove("hidden");
+                if (welcomeContainer) welcomeContainer.classList.add("hidden");
+                if (resultsContainer) resultsContainer.classList.add("hidden");
+                showToast(`Hashing & scanning candidate files for '${res.task.name}'... Please wait.`, true);
+                pollProgress();
+            } else {
+                await loadResults();
+                await loadMultiScans();
+                if (resultsContainer) resultsContainer.classList.remove("hidden");
+                if (welcomeContainer) welcomeContainer.classList.add("hidden");
+                if (progressContainer) progressContainer.classList.add("hidden");
+            }
         } else {
             showToast(`Error loading scan: ${res.error}`);
         }
