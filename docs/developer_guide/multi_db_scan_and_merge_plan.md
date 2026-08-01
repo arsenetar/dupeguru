@@ -105,19 +105,21 @@ For Valkey/Redis or mixed backends:
 
 ---
 
-## 4. Implementation Steps
+## 4. Implementation Status
 
-### Phase 1: Multi-Task Registry & Per-Scan Database Isolation
-* Refactor `core/app.py` and `web/server.py` to accept custom `db_path` per `DupeGuru` instance.
-* Update `/api/scan` to support multi-task concurrency (`POST /api/scans/start`).
+### Phase 1: Multi-Task Registry & Per-Scan Database Isolation [COMPLETE ✅]
+* Created `ScanTaskRegistry` ([core/task_registry.py](file:///home/tin/src/opensource/dupeguru/core/task_registry.py)).
+* Updated `DupeGuru` ([core/app.py](file:///home/tin/src/opensource/dupeguru/core/app.py#L125)) to accept custom `db_path` per instance.
+* Added `/api/scans` REST endpoints in `web/server.py`.
 
-### Phase 2: Cross-DB Deduplication Engine (`core/cross_db.py` & Rust)
-* Implement `CrossDBMatcher` using SQLite `ATTACH DATABASE` SQL joins and Rust streaming.
-* Expose `/api/cross_scan` REST endpoint accepting a list of database IDs to compare.
+### Phase 2: Cross-DB Deduplication Engine [COMPLETE ✅]
+* Implemented `CrossDBMatcher` ([core/cross_db.py](file:///home/tin/src/opensource/dupeguru/core/cross_db.py)) using SQLite `ATTACH DATABASE` SQL joins.
+* Implemented Rust acceleration `cross_db_compare` ([rust_engine/src/lib.rs](file:///home/tin/src/opensource/dupeguru/rust_engine/src/lib.rs#L1279-L1328)) using `rusqlite` + `rayon`.
+* Added `POST /api/cross_scan` REST endpoint in `web/server.py`.
 
-### Phase 3: Web UI Dashboard & Cross-DB UI Integration
-* Build HTML/JS Scans Dashboard with active scan cards and Cross-DB database selector.
-* Add source database badges to result tables.
+### Phase 3: Web UI Dashboard & Cross-DB UI Integration [COMPLETE ✅]
+* Added **Multi-DB Dashboard** tab and **Cross-DB Deduplication** tab in `web/static/index.html`.
+* Implemented card grid, Launch New Scan modal, database checkbox selector, and source database badges in `web/static/app.js`.
 
 ---
 
