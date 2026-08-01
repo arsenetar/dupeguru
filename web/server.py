@@ -35,15 +35,15 @@ def get_appdata_pure_python(portable=False):
     if system == "Windows":
         appdata = os.environ.get("APPDATA")
         if appdata:
-            return os.path.join(appdata, "dupeGuru")
-        return os.path.join(home, "AppData", "Roaming", "dupeGuru")
+            return os.path.join(appdata, "de-dup")
+        return os.path.join(home, "AppData", "Roaming", "de-dup")
     elif system == "Darwin":
-        return os.path.join(home, "Library", "Application Support", "dupeGuru")
+        return os.path.join(home, "Library", "Application Support", "de-dup")
     else:
         data_home = os.environ.get("XDG_DATA_HOME")
         if data_home:
-            return os.path.join(data_home, "dupeGuru")
-        return os.path.join(home, ".local/share", "dupeGuru")
+            return os.path.join(data_home, "de-dup")
+        return os.path.join(home, ".local/share", "de-dup")
 
 
 def special_folder_path_pure_python(special_folder, portable=False):
@@ -55,15 +55,15 @@ def special_folder_path_pure_python(special_folder, portable=False):
         if system == "Windows":
             localappdata = os.environ.get("LOCALAPPDATA")
             if localappdata:
-                return os.path.join(localappdata, "dupeGuru", "cache")
-            return os.path.join(home, "AppData", "Local", "dupeGuru", "cache")
+                return os.path.join(localappdata, "de-dup", "cache")
+            return os.path.join(home, "AppData", "Local", "de-dup", "cache")
         elif system == "Darwin":
-            return os.path.join(home, "Library", "Caches", "dupeGuru")
+            return os.path.join(home, "Library", "Caches", "de-dup")
         else:
             cache_home = os.environ.get("XDG_CACHE_HOME")
             if cache_home:
-                return os.path.join(cache_home, "dupeGuru")
-            return os.path.join(home, ".cache", "dupeGuru")
+                return os.path.join(cache_home, "de-dup")
+            return os.path.join(home, ".cache", "de-dup")
     else:
         return get_appdata_pure_python(portable)
 
@@ -784,7 +784,7 @@ def start_server(port=8080):
     install_gettext_trans(str(locale_folder), lang)
 
     server = ThreadedHTTPServer(("localhost", port), DupeGuruHTTPHandler)
-    print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}", flush=True)
+    print(f"Starting de-dup HTML Web Server on http://localhost:{port}", flush=True)
 
     # Restore selected directories asynchronously in background so server binds immediately
     restore_thread = threading.Thread(target=load_selected_directories, daemon=True)

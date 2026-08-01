@@ -123,7 +123,7 @@ class DupeGuru(Broadcaster):
     # select_dest_folder(prompt: str) --> str
     # select_dest_file(prompt: str, ext: str) --> str
 
-    NAME = PROMPT_NAME = "dupeGuru"
+    NAME = PROMPT_NAME = "de-dup"
 
     def __init__(self, view, portable=False, db_path=None):
         if view.get_default(DEBUG_MODE_PREFERENCE):
@@ -137,13 +137,18 @@ class DupeGuru(Broadcaster):
         if "pytest" in sys.modules:
             import tempfile
 
-            self.appdata = os.path.join(tempfile.gettempdir(), "dupeGuru_test_appdata")
+            self.appdata = os.path.join(tempfile.gettempdir(), "de-dup_test_appdata")
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        cache_url = db_path or view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
+        cache_url = (
+            db_path
+            or view.get_default("CacheURL")
+            or os.environ.get("DEDUP_CACHE_URL")
+            or os.environ.get("DUPEGURU_CACHE_URL")
+        )
         hash_cache_file = cache_url or op.join(self.appdata, "hash_cache.db")
         fs.filesdb.connect(hash_cache_file)
         self.directories = directories.Directories(self.exclude_list)
@@ -432,7 +437,11 @@ class DupeGuru(Broadcaster):
             pass  # we don't care
 
     def clear_hash_cache(self):
-        cache_url = self.view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
+        cache_url = (
+            self.view.get_default("CacheURL")
+            or os.environ.get("DEDUP_CACHE_URL")
+            or os.environ.get("DUPEGURU_CACHE_URL")
+        )
         if not cache_url or not (
             cache_url.startswith("redis://") or cache_url.startswith("valkey://") or cache_url.startswith("rediss://")
         ):

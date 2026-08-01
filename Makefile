@@ -203,30 +203,30 @@ normpo: | env
 	$(VENV_PYTHON) build.py --normpo
 
 install: all pyc
-	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf ${packages} locale web ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
-	cp -f run_web.py ${DESTDIR}${PREFIX}/share/dupeguru/run_web.py
-	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
-	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run_web.py
+	mkdir -p ${DESTDIR}${PREFIX}/share/de-dup
+	cp -rf ${packages} locale web ${DESTDIR}${PREFIX}/share/de-dup
+	cp -f run.py ${DESTDIR}${PREFIX}/share/de-dup/run.py
+	cp -f run_web.py ${DESTDIR}${PREFIX}/share/de-dup/run_web.py
+	chmod 755 ${DESTDIR}${PREFIX}/share/de-dup/run.py
+	chmod 755 ${DESTDIR}${PREFIX}/share/de-dup/run_web.py
 	mkdir -p ${DESTDIR}${PREFIX}/bin
-	ln -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
-	ln -sf ${PREFIX}/share/dupeguru/run_web.py ${DESTDIR}${PREFIX}/bin/dupeguru-web
+	ln -sf ${PREFIX}/share/de-dup/run.py ${DESTDIR}${PREFIX}/bin/de-dup
+	ln -sf ${PREFIX}/share/de-dup/run_web.py ${DESTDIR}${PREFIX}/bin/de-dup-web
 	mkdir -p ${DESTDIR}${PREFIX}/share/applications
-	cp -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
+	cp -f pkg/de-dup.desktop ${DESTDIR}${PREFIX}/share/applications/de-dup.desktop
 	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
-	cp -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
+	cp -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/de-dup.png
 
 installdocs: build/help
-	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
+	mkdir -p ${DESTDIR}${PREFIX}/share/de-dup
+	cp -rf build/help ${DESTDIR}${PREFIX}/share/de-dup
 
 uninstall:
-	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
-	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru"
-	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru-web"
-	rm -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
-	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
+	rm -rf "${DESTDIR}${PREFIX}/share/de-dup"
+	rm -f "${DESTDIR}${PREFIX}/bin/de-dup"
+	rm -f "${DESTDIR}${PREFIX}/bin/de-dup-web"
+	rm -f "${DESTDIR}${PREFIX}/share/applications/de-dup.desktop"
+	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/de-dup.png"
 
 clean:
 	-rm -rf build

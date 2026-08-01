@@ -19,7 +19,7 @@ MAIN_TEMPLATE = """
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-        <title>dupeGuru Results</title>
+        <title>de-dup Results</title>
         <style type="text/css">
 BODY
 {
@@ -95,7 +95,7 @@ H1
 </style>
 </head>
 <body>
-<h1>dupeGuru Results</h1>
+<h1>de-dup Results</h1>
 <table>
 <tr>$colheaders</tr>
 $rows

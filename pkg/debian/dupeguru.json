@@ -1,7 +1,7 @@
 {
-	"pkgname": "dupeguru",
-	"longname": "dupeGuru",
-	"execname": "dupeguru",
+	"pkgname": "de-dup",
+	"longname": "de-dup",
+	"execname": "de-dup",
 	"arch": "any",
-	"iconpath": "dupeguru"
+	"iconpath": "de-dup"
 }

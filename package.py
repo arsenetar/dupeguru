@@ -73,7 +73,7 @@ def copy_files_to_package(destpath, packages, with_so):
 def package_debian_distribution(distribution):
     app_version = get_module_version("core")
     version = "{}~{}".format(app_version, distribution)
-    destpath = op.join("build", "dupeguru-{}".format(version))
+    destpath = op.join("build", "de-dup-{}".format(version))
     srcpath = op.join(destpath, "src")
     packages = ["hscommon", "core", "qt", "web", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=False)
@@ -95,7 +95,7 @@ def package_debian_distribution(distribution):
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, "control"), op.join(debdest, "control"), **debopts)
     filereplace(op.join(debskel, "Makefile"), op.join(destpath, "Makefile"), **debopts)
-    filereplace(op.join(debskel, "dupeguru.desktop"), op.join(debdest, "dupeguru.desktop"), **debopts)
+    filereplace(op.join(debskel, "de-dup.desktop"), op.join(debdest, "de-dup.desktop"), **debopts)
     changelogpath = op.join("help", "changelog")
     changelog_dest = op.join(debdest, "changelog")
     project_name = debopts["pkgname"]
@@ -125,18 +125,18 @@ def package_arch():
     # than package_debian because there are more python packages available in Arch (so we don't
     # need to include them).
     print("Packaging for Arch")
-    srcpath = op.join("build", "dupeguru-arch")
+    srcpath = op.join("build", "de-dup-arch")
     packages = ["hscommon", "core", "qt", "web"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
-    filereplace(op.join("pkg", "arch", "dupeguru.desktop"), op.join(srcpath, "dupeguru.desktop"), **debopts)
+    filereplace(op.join("pkg", "arch", "de-dup.desktop"), op.join(srcpath, "de-dup.desktop"), **debopts)
 
 
 def package_source_txz():
     print("Creating git archive")
     app_version = get_module_version("core")
-    name = "dupeguru-src-{}.tar".format(app_version)
+    name = "de-dup-src-{}.tar".format(app_version)
     base_path = os.getcwd()
     build_path = op.join(base_path, "build")
     dest = op.join(build_path, name)
@@ -178,7 +178,7 @@ def package_windows():
     # UCRT dlls are included if the system has the windows kit installed
     PyInstaller.__main__.run(
         [
-            "--name=dupeguru-win{0}".format(bits),
+            "--name=de-dup-win{0}".format(bits),
             "--windowed",
             "--noconfirm",
             "--icon=images/dgse_logo.ico",
@@ -212,11 +212,11 @@ def package_macos():
 
     PyInstaller.__main__.run(
         [
-            "--name=dupeguru",
+            "--name=de-dup",
             "--windowed",
             "--noconfirm",
             "--icon=images/dupeguru.icns",
-            "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
+            "--osx-bundle-identifier=com.tinle.de-dup",
             "--add-data={0}:locale".format(LOCALE_DIR),
             "--add-data={0}:help".format(HELP_DIR),
             "--add-data=web:web",
@@ -228,10 +228,10 @@ def package_macos():
 def main():
     args = parse_args()
     if args.src_pkg:
-        print("Creating source package for dupeGuru")
+        print("Creating source package for de-dup")
         package_source_txz()
         return
-    print("Packaging dupeGuru with UI qt")
+    print("Packaging de-dup with UI qt")
     if sys.platform == "win32":
         package_windows()
     elif sys.platform == "darwin":

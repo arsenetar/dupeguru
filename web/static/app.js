@@ -1,4 +1,4 @@
-// dupeGuru Web Console Frontend
+// de-dup Web Console Frontend
 
 const API_BASE = "";
 
