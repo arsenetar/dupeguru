@@ -39,13 +39,31 @@ class ScanTask:
 
     def to_dict(self) -> Dict[str, Any]:
         db_size = 0
+        hashed_count = 0
+        total_files = self.file_count
         if os.path.exists(self.db_path):
             try:
                 db_size = os.path.getsize(self.db_path)
-            except OSError:
-                db_size = 0
+                import sqlite3
+
+                conn = sqlite3.connect(self.db_path)
+                cur = conn.cursor()
+                row_files = cur.execute("SELECT COUNT(*) FROM files").fetchone()
+                if row_files and row_files[0] > 0:
+                    total_files = row_files[0]
+                    self.file_count = total_files
+                row_hashed = cur.execute(
+                    "SELECT COUNT(*) FROM files WHERE digest IS NOT NULL AND digest != ''"
+                ).fetchone()
+                if row_hashed:
+                    hashed_count = row_hashed[0]
+                conn.close()
+            except Exception:
+                pass
 
         status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
+        if status_str == "completed" and total_files > 0 and hashed_count < total_files:
+            status_str = "needs_hashing"
 
         return {
             "task_id": self.task_id,
@@ -58,7 +76,8 @@ class ScanTask:
             "error_message": self.error_message,
             "created_at": self.created_at,
             "completed_at": self.completed_at,
-            "file_count": self.file_count,
+            "file_count": total_files,
+            "hashed_count": hashed_count,
             "match_count": self.match_count,
             "dupe_count": self.dupe_count,
             "db_size_bytes": db_size,

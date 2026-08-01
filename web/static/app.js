@@ -957,6 +957,8 @@ async function loadMultiScans() {
             let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
             if (task.status === "completed") {
                 statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
+            } else if (task.status === "needs_hashing") {
+                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">UNHASHED (${task.hashed_count || 0}/${task.file_count || 0})</span>`;
             } else if (task.status === "failed") {
                 statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(239, 68, 68, 0.2); color: #f87171;">FAILED</span>`;
             }
@@ -980,8 +982,9 @@ async function loadMultiScans() {
                         ${foldersHtml}
                     </div>
                 </div>
-                <div style="display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: auto; padding-top: 4px;">
-                    <span><strong style="color: var(--text-primary);">Scanned Files:</strong> ${task.file_count || 0}</span>
+                <div style="display: flex; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); margin-top: auto; padding-top: 4px; flex-wrap: wrap;">
+                    <span><strong style="color: var(--text-primary);">Total Files:</strong> ${task.file_count || 0}</span>
+                    <span><strong style="color: var(--text-primary);">Hashed:</strong> ${task.hashed_count !== undefined ? task.hashed_count : task.file_count || 0}</span>
                     <span><strong style="color: var(--text-primary);">Matches:</strong> ${task.match_count || 0}</span>
                 </div>
                 <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border-color);">
