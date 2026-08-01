@@ -837,10 +837,8 @@ class DupeGuru(Broadcaster):
                     ScanType.EXIFTIMESTAMP,
                 )
                 if fs.filesdb.enable_directory_cache:
-                    j.set_progress(0, tr("Collecting files to scan (populating cache)"))
-                    # Populate the cache database without holding file objects in RAM
-                    for _ in self.directories.get_files(fileclasses=self.fileclasses, j=j):
-                        pass
+                    j.set_progress(0, tr("Collecting files to scan across target directories"))
+                    self.directories.populate_cache(j=j)
 
                     if is_size_compatible_scan:
                         candidate_sizes = fs.filesdb.get_candidate_sizes()

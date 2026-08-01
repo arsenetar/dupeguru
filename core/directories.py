@@ -6,6 +6,7 @@
 
 import logging
 import os
+import time
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -254,6 +255,42 @@ class Directories:
             else:
                 for file in self._get_files(path, fileclasses=fileclasses, j=j):
                     yield file
+
+    def populate_cache(self, j=job.nulljob):
+        """Populate SQLite database cache for all target directories in parallel using Rust."""
+        if not fs.filesdb.enable_directory_cache:
+            return
+
+        unscanned_dirs = [str(d) for d in self._dirs if not fs.filesdb.is_directory_scanned(d)]
+        if not unscanned_dirs:
+            return
+
+        j.set_progress(-1, tr("Collecting files in parallel across {} directories...").format(len(unscanned_dirs)))
+        if fs.filesdb._is_rust:
+            try:
+                from core import dupeguru_rust
+
+                t0 = time.time()
+                rust_files = dupeguru_rust.collect_files_parallel(unscanned_dirs, 0, None)
+                if rust_files:
+                    fs.filesdb.snapshot_files_batch(rust_files)
+                    for d in self._dirs:
+                        fs.filesdb.mark_directory_scanned(d)
+                    logging.info(
+                        "Parallel collected %d files across %d dirs in %.2fs",
+                        len(rust_files),
+                        len(unscanned_dirs),
+                        time.time() - t0,
+                    )
+                    return
+            except Exception as e:
+                logging.warning(f"Rust multi-dir parallel crawler fallback: {e}")
+
+        # Fallback python collection
+        for path in self._dirs:
+            if not fs.filesdb.is_directory_scanned(path):
+                for _ in self._get_files(path, fileclasses=[fs.File], j=j):
+                    pass
 
     def get_folders(self, folderclass=None, j=job.nulljob):
         """Returns a list of all folders that are not excluded.
