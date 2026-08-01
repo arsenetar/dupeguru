@@ -49,6 +49,7 @@ nav:
       - Data Flow & Lifecycles: developer_guide/data_flow.md
       - Building from Source: developer_guide/building.md
       - Contributing Standards: developer_guide/contributing.md
+      - Multi-DB & Cross-DB Plan: developer_guide/multi_db_scan_and_merge_plan.md
 
 markdown_extensions:
   - admonition
