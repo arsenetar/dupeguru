@@ -952,8 +952,25 @@ async function launchNewDBScan() {
 }
 
 async function viewTaskResults(taskId) {
-    showToast("Loading results for database task...");
-    await loadResults();
+    try {
+        showToast("Loading results for database task...");
+        const response = await fetch(`${API_BASE}/api/scans/load`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ task_id: taskId }),
+        });
+        const res = await response.json();
+        if (res.success) {
+            await loadResults();
+            if (resultsContainer) resultsContainer.classList.remove("hidden");
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (progressContainer) progressContainer.classList.add("hidden");
+        } else {
+            showToast(`Error loading scan: ${res.error}`);
+        }
+    } catch (err) {
+        showToast(`Failed to load scan: ${err.message}`);
+    }
 }
 
 async function deleteScanTask(taskId) {

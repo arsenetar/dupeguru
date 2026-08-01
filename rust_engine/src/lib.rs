@@ -1297,7 +1297,7 @@ pub fn cross_db_compare(
                     Ok((
                         row.get::<_, String>(0)?,
                         row.get::<_, u64>(1)?,
-                        (row.get::<_, i64>(2).unwrap_or(0) as f64) / 1e9,
+                        (row.get::<_, f64>(2).or_else(|_| row.get::<_, i64>(2).map(|v| v as f64)).unwrap_or(0.0)) / 1e9,
                         row.get::<_, String>(3).unwrap_or_default(),
                     ))
                 })

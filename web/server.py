@@ -578,10 +578,26 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             self.wfile.write(json.dumps({"success": True, "task": task.to_dict()}).encode())
 
+        elif path == "/api/scans/load":
+            task_id = data.get("task_id")
+            task = task_registry.get_task(task_id)
+            if task and os.path.exists(task.db_path):
+                try:
+                    fs.filesdb.connect(task.db_path)
+                    fs.filesdb.enable_directory_cache = True
+                    model._recreate_result_table()
+                    self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
+                except Exception as e:
+                    self.wfile.write(json.dumps(sanitize_utf8({"success": False, "error": str(e)})).encode())
+            else:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": False, "error": "Database task not found"})).encode()
+                )
+
         elif path == "/api/scans/delete":
             task_id = data.get("task_id")
             deleted = task_registry.delete_task(task_id, delete_db_file=True)
-            self.wfile.write(json.dumps({"success": deleted}).encode())
+            self.wfile.write(json.dumps(sanitize_utf8({"success": deleted})).encode())
 
         elif path == "/api/cross_scan":
             db_paths = data.get("db_paths", [])
