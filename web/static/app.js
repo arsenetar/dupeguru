@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadDirectories();
     browseFolders();
     loadConfig();
+    loadMultiScans();
     setupEventListeners();
     // Regular status polling (for progress sync)
     setInterval(checkScanStatus, 1000);
@@ -194,9 +195,12 @@ function setupEventListeners() {
         submitNewScanBtn.addEventListener("click", launchNewDBScan);
     }
 
-    const runCrossMatchBtn = document.getElementById("run-cross-match-btn");
-    if (runCrossMatchBtn) {
-        runCrossMatchBtn.addEventListener("click", runCrossMatch);
+    const refreshScansBtn = document.getElementById("refresh-scans-btn");
+    if (refreshScansBtn) {
+        refreshScansBtn.addEventListener("click", () => {
+            loadMultiScans();
+            showToast("Scan database tasks refreshed.");
+        });
     }
 
     const cachePrevBtn = document.getElementById("cache-prev-btn");
@@ -848,7 +852,7 @@ async function loadMultiScans() {
         scansGrid.innerHTML = "";
 
         if (!tasks || tasks.length === 0) {
-            scansGrid.innerHTML = `<div class="welcome-card" style="grid-column: 1 / -1; padding: 48px; text-align: center;"><p style="color: var(--text-secondary);">No isolated database scan tasks found. Click '+ Launch New DB Scan' to start one.</p></div>`;
+            scansGrid.innerHTML = `<div style="grid-column: 1 / -1; color: var(--text-secondary); font-size: 0.9rem; padding: 12px 0;">No scan databases created yet. Add directories in the sidebar and click <strong>Start Duplicate Scan</strong>.</div>`;
             return;
         }
 
@@ -858,7 +862,7 @@ async function loadMultiScans() {
             card.style.position = "relative";
             card.style.display = "flex";
             card.style.flexDirection = "column";
-            card.style.gap = "12px";
+            card.style.gap = "10px";
 
             let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
             if (task.status === "completed") {
@@ -871,21 +875,22 @@ async function loadMultiScans() {
 
             card.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
+                    <h3 style="margin: 0; font-size: 1rem; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
                     ${statusBadge}
                 </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); word-break: break-all;">
-                    <strong>DB File:</strong> ${escapeHtml(task.db_path)} (${sizeMb} MB)
+                <div style="font-size: 0.8rem; color: var(--text-secondary); word-break: break-all;">
+                    <strong>DB:</strong> ${escapeHtml(task.db_path)} (${sizeMb} MB)
                 </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                    <strong>Directories:</strong> ${task.directories && task.directories.length ? task.directories.map(d => escapeHtml(d)).join(", ") : "All"}
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                    <strong>Folders:</strong> ${task.directories && task.directories.length ? task.directories.map(d => escapeHtml(d)).join(", ") : "All"}
                 </div>
-                <div style="display: flex; gap: 16px; font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+                <div style="display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">
                     <span><strong>Matches:</strong> ${task.match_count || 0}</span>
                     <span><strong>Dupes:</strong> ${task.dupe_count || 0}</span>
                 </div>
-                <div style="margin-top: 8px; display: flex; justify-content: flex-end;">
-                    <button class="btn danger-btn text-btn" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
+                <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end;">
+                    <button class="btn secondary-btn text-btn" style="font-size: 0.8rem;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                    <button class="btn danger-btn text-btn" style="font-size: 0.8rem;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
                 </div>
             `;
 
@@ -928,6 +933,11 @@ async function launchNewDBScan() {
     } catch (err) {
         showToast(`Error: ${err.message}`);
     }
+}
+
+async function viewTaskResults(taskId) {
+    showToast("Loading results for database task...");
+    await loadResults();
 }
 
 async function deleteScanTask(taskId) {

@@ -116,13 +116,23 @@
         <main class="main-content">
             <!-- Navigation Tabs -->
             <nav class="nav-tabs">
-                <button id="tab-scan" class="tab-btn active">Scan Console</button>
-                <button id="tab-multiscan" class="tab-btn">Multi-DB Dashboard</button>
+                <button id="tab-scan" class="tab-btn active">Scan Console & Tasks</button>
                 <button id="tab-cross-db" class="tab-btn">Cross-DB Deduplication</button>
                 <button id="tab-cache" class="tab-btn">Cache Database Viewer</button>
             </nav>
 
             <div id="scan-view-content" class="scan-view-content">
+                <!-- Recent Scan Databases Bar -->
+                <div id="multiscan-section" class="section-card" style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Scan Database Tasks</h3>
+                        <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄 Refresh List</button>
+                    </div>
+                    <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                        <!-- Rendered dynamically as cards -->
+                    </div>
+                </div>
+
                 <!-- Progress Screen -->
                 <div id="progress-container" class="progress-container hidden">
                     <div class="progress-card">
@@ -181,25 +191,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 2.253M12 3a9.003 9.003 0 0 0-8.716 2.253M21 9.75c0 1.11-.89 2.25-2.25 2.25M3 9.75c0 1.11.89 2.25 2.25 2.25" />
                         </svg>
                         <h2>Find duplicate files in style</h2>
-                        <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
+                        <p>Select folders from the sidebar folder browser, name your scan, and click <strong>Start Duplicate Scan</strong> to find duplicates instantly.</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Multi-DB Scans Dashboard -->
-            <div id="multiscan-container" class="multiscan-container hidden">
-                <header class="cache-header">
-                    <div class="cache-header-left">
-                        <h1>Multi-Database Scans Dashboard</h1>
-                        <p>Manage isolated concurrent database scans</p>
-                    </div>
-                    <div class="cache-controls">
-                        <button id="new-scan-task-btn" class="btn primary-btn">+ Launch New DB Scan</button>
-                    </div>
-                </header>
-
-                <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
-                    <!-- Rendered dynamically as cards -->
                 </div>
             </div>
 
