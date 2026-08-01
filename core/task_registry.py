@@ -53,7 +53,8 @@ class ScanTask:
                     total_files = row_files[0]
                     self.file_count = total_files
                 row_hashed = cur.execute(
-                    "SELECT COUNT(*) FROM files WHERE digest IS NOT NULL AND digest != ''"
+                    "SELECT COUNT(*) FROM files WHERE (digest IS NOT NULL AND length(digest) > 0) "
+                    "OR (digest_partial IS NOT NULL AND length(digest_partial) > 0)"
                 ).fetchone()
                 if row_hashed:
                     hashed_count = row_hashed[0]

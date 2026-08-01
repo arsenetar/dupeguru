@@ -589,11 +589,11 @@ function renderResults(totalMarkedCount) {
     if (paginationContainer) paginationContainer.classList.remove("hidden");
 
     resultsData.forEach(group => {
-        // Group Header separating rows
+        const groupNum = group.id !== undefined ? group.id + 1 : "";
         const headerRow = document.createElement("tr");
         headerRow.className = "group-header-row";
         headerRow.innerHTML = `
-            <td colspan="6">Duplicate Group (Max Match: ${group.percentage}%)</td>
+            <td colspan="6" style="font-weight: 600;">Duplicate Group ${groupNum} of ${resultsTotal} (Max Match: ${group.percentage}%)</td>
         `;
         resultsBody.appendChild(headerRow);
 

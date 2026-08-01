@@ -504,21 +504,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 ).encode()
             )
 
-        elif path == "/api/results" or path.startswith("/api/results?"):
+        elif path == "/api/results":
             limit = 50
             offset = 0
-            if "?" in path:
-                try:
-                    from urllib.parse import urlparse, parse_qs
-
-                    query = urlparse(path).query
-                    params = parse_qs(query)
-                    if "limit" in params:
-                        limit = int(params["limit"][0])
-                    if "offset" in params:
-                        offset = int(params["offset"][0])
-                except Exception:
-                    pass
+            try:
+                if "limit" in query:
+                    limit = int(query["limit"][0])
+                if "offset" in query:
+                    offset = int(query["offset"][0])
+            except Exception:
+                pass
 
             groups_data = []
             total_groups = len(model.results.groups)
@@ -708,6 +703,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         start_wait = time.time()
                         while model.progress_window._job_running and (time.time() - start_wait < 10.0):
                             time.sleep(0.05)
+                        try:
+                            if fs.filesdb and fs.filesdb.conn:
+                                fs.filesdb.conn.commit()
+                        except Exception:
+                            pass
                         task.results_groups = model.results.groups
 
                     self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
