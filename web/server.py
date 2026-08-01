@@ -710,10 +710,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         if is_still_running:
                             app_state["status"] = "scanning"
                             app_state["scanning"] = True
-                            app_state["progress"] = int(model.progress_window.progress)
-                            app_state["progress_msg"] = (
-                                model.progress_window.message or f"Hashing & scanning files for '{task.name}'..."
+                            prog_val = getattr(model.progress_window, "last_progress", 0) or 0
+                            prog_msg = (
+                                getattr(model.progress_window.progressdesc_textfield, "text", "")
+                                or f"Hashing & scanning files for '{task.name}'..."
                             )
+                            app_state["progress"] = int(prog_val)
+                            app_state["progress_msg"] = prog_msg
                         else:
                             try:
                                 if fs.filesdb and fs.filesdb.conn:
