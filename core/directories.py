@@ -307,23 +307,16 @@ class Directories:
         return state
 
     def has_any_file(self, fileclasses=None):
-        """Returns whether selected folders contain any file.
-
-        Because it stops at the first file it finds, it's much faster than get_files().
-
-        :rtype: bool
-        """
-        try:
+        """Returns whether selected folders contain any file quickly without triggering full directory crawls."""
+        for path in self._dirs:
             try:
-                if fileclasses is not None:
-                    next(self.get_files(fileclasses=fileclasses))
-                else:
-                    next(self.get_files())
-            except TypeError:
-                next(self.get_files())
-            return True
-        except StopIteration:
-            return False
+                with os.scandir(path) as it:
+                    for entry in it:
+                        if entry.is_file() or entry.is_dir():
+                            return True
+            except OSError:
+                pass
+        return False
 
     def load_from_file(self, infile):
         """Load folder selection from ``infile``.
