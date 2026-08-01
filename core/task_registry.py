@@ -1,0 +1,134 @@
+# Copyright 2026 Tin Le (https://github.com/TinLe/de-dup)
+#
+# This software is licensed under the "GPLv3" License as described in the "LICENSE" file,
+# which should be included with this package. The terms are also available at
+# http://www.gnu.org/licenses/gpl-3.0.html
+
+import os
+import threading
+import time
+import uuid
+from typing import Any, Dict, List, Optional
+
+
+class ScanTaskStatus:
+    IDLE = "idle"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
+    FAILED = "failed"
+
+
+class ScanTask:
+    def __init__(self, task_id: str, name: str, db_path: str, directories: List[str]):
+        self.task_id = task_id
+        self.name = name
+        self.db_path = db_path
+        self.directories = directories
+        self.status = ScanTaskStatus.IDLE
+        self.progress_percentage = 0
+        self.progress_message = ""
+        self.error_message = None
+        self.created_at = time.time()
+        self.completed_at = None
+        self.file_count = 0
+        self.match_count = 0
+        self.dupe_count = 0
+        self.app_instance = None
+        self._thread = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        db_size = 0
+        if os.path.exists(self.db_path):
+            try:
+                db_size = os.path.getsize(self.db_path)
+            except OSError:
+                db_size = 0
+
+        return {
+            "task_id": self.task_id,
+            "name": self.name,
+            "db_path": self.db_path,
+            "directories": self.directories,
+            "status": self.status,
+            "progress_percentage": self.progress_percentage,
+            "progress_message": self.progress_message,
+            "error_message": self.error_message,
+            "created_at": self.created_at,
+            "completed_at": self.completed_at,
+            "file_count": self.file_count,
+            "match_count": self.match_count,
+            "dupe_count": self.dupe_count,
+            "db_size_bytes": db_size,
+        }
+
+
+class ScanTaskRegistry:
+    def __init__(self, scans_dir: str):
+        self.scans_dir = os.path.abspath(scans_dir)
+        os.makedirs(self.scans_dir, exist_ok=True)
+        self.tasks: Dict[str, ScanTask] = {}
+        self._lock = threading.Lock()
+        self._scan_storage_refresh()
+
+    def create_task(self, name: str, directories: List[str], db_filename: Optional[str] = None) -> ScanTask:
+        with self._lock:
+            task_id = str(uuid.uuid4())[:8]
+            safe_name = name.replace(" ", "_").replace("/", "_")
+            if not db_filename:
+                db_filename = f"{safe_name}_{task_id}.db"
+            if not db_filename.endswith(".db"):
+                db_filename += ".db"
+
+            db_path = os.path.join(self.scans_dir, db_filename)
+            task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=directories)
+            self.tasks[task_id] = task
+            return task
+
+    def get_task(self, task_id: str) -> Optional[ScanTask]:
+        with self._lock:
+            return self.tasks.get(task_id)
+
+    def list_tasks(self) -> List[Dict[str, Any]]:
+        self._scan_storage_refresh()
+        with self._lock:
+            return [task.to_dict() for task in self.tasks.values()]
+
+    def delete_task(self, task_id: str, delete_db_file: bool = True) -> bool:
+        with self._lock:
+            task = self.tasks.pop(task_id, None)
+            if not task:
+                return False
+            if task.status == ScanTaskStatus.RUNNING and task.app_instance:
+                try:
+                    task.app_instance.cancel_job()
+                except Exception:
+                    pass
+            if delete_db_file and os.path.exists(task.db_path):
+                try:
+                    os.remove(task.db_path)
+                    shutil_wal = task.db_path + "-wal"
+                    shutil_shm = task.db_path + "-shm"
+                    if os.path.exists(shutil_wal):
+                        os.remove(shutil_wal)
+                    if os.path.exists(shutil_shm):
+                        os.remove(shutil_shm)
+                except OSError:
+                    pass
+            return True
+
+    def _scan_storage_refresh(self):
+        """Scans storage directory for existing .db files and registers them."""
+        with self._lock:
+            if not os.path.exists(self.scans_dir):
+                return
+            for fname in os.listdir(self.scans_dir):
+                if fname.endswith(".db"):
+                    db_path = os.path.join(self.scans_dir, fname)
+                    existing = any(t.db_path == db_path for t in self.tasks.values())
+                    if not existing:
+                        task_id = fname.replace(".db", "")
+                        name = task_id.rsplit("_", 1)[0] if "_" in task_id else task_id
+                        task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=[])
+                        task.status = ScanTaskStatus.COMPLETED
+                        self.tasks[task_id] = task

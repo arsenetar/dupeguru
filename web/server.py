@@ -83,6 +83,7 @@ hscommon.desktop._special_folder_path = special_folder_path_pure_python
 
 from core.app import DupeGuru  # noqa: E402
 from core import fs  # noqa: E402
+from core.task_registry import ScanTaskRegistry, ScanTaskStatus  # noqa: E402
 from hscommon.trans import install_gettext_trans  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
 
@@ -195,6 +196,10 @@ web_view = WebViewAdapter(app_state)
 # Load preferences first to get the CacheURL from web_settings.json
 appdata_dir = get_appdata_pure_python()
 web_view.load_preferences(appdata_dir)
+
+# Initialize multi-scan task registry
+scans_dir = os.path.join(appdata_dir, "scans")
+task_registry = ScanTaskRegistry(scans_dir)
 
 # Initialize model with the view (which now has CacheURL populated!)
 model = DupeGuru(web_view)
@@ -372,6 +377,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/config":
             self.wfile.write(json.dumps(web_view.preferences).encode())
 
+        elif path == "/api/scans":
+            self.wfile.write(json.dumps(task_registry.list_tasks()).encode())
+
+        elif path.startswith("/api/scans/"):
+            task_id = path.replace("/api/scans/", "")
+            task = task_registry.get_task(task_id)
+            if task:
+                self.wfile.write(json.dumps(task.to_dict()).encode())
+            else:
+                self.wfile.write(json.dumps({"error": "Task not found"}).encode())
+
         elif path == "/api/directories":
             dirs = []
             for d in model.directories:
@@ -509,6 +525,45 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             web_view.save_preferences()
             sync_preferences_to_model()
             self.wfile.write(json.dumps({"success": True, "config": web_view.preferences}).encode())
+
+        elif path == "/api/scans/create":
+            name = data.get("name", "Scan")
+            directories_list = data.get("directories", [])
+            if not directories_list and model.directories:
+                directories_list = [str(d) for d in model.directories]
+
+            task = task_registry.create_task(name, directories_list)
+
+            def run_isolated_scan(task_obj):
+                task_obj.status = ScanTaskStatus.RUNNING
+                try:
+                    scan_view = WebViewAdapter({"status": "idle", "progress": 0, "messages": []})
+                    scan_app = DupeGuru(scan_view, db_path=task_obj.db_path)
+                    task_obj.app_instance = scan_app
+                    for d_path in task_obj.directories:
+                        scan_app.directories.add_path(Path(d_path))
+
+                    scan_app.start_scanning()
+                    task_obj.status = ScanTaskStatus.COMPLETED
+                    task_obj.completed_at = time.time()
+                    task_obj.file_count = scan_app.discarded_file_count
+                    task_obj.match_count = len(scan_app.results.groups)
+                    task_obj.dupe_count = len(scan_app.results.dupes)
+                except Exception as e:
+                    task_obj.status = ScanTaskStatus.FAILED
+                    task_obj.error_message = str(e)
+                    logging.error(f"Isolated scan failed: {e}")
+
+            t = threading.Thread(target=run_isolated_scan, args=(task,), daemon=True)
+            task._thread = t
+            t.start()
+
+            self.wfile.write(json.dumps({"success": True, "task": task.to_dict()}).encode())
+
+        elif path == "/api/scans/delete":
+            task_id = data.get("task_id")
+            deleted = task_registry.delete_task(task_id, delete_db_file=True)
+            self.wfile.write(json.dumps({"success": deleted}).encode())
 
         elif path == "/api/directories":
             path_str = data.get("path")

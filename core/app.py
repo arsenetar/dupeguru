@@ -125,7 +125,7 @@ class DupeGuru(Broadcaster):
 
     NAME = PROMPT_NAME = "dupeGuru"
 
-    def __init__(self, view, portable=False):
+    def __init__(self, view, portable=False, db_path=None):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
@@ -143,7 +143,7 @@ class DupeGuru(Broadcaster):
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        cache_url = view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
+        cache_url = db_path or view.get_default("CacheURL") or os.environ.get("DUPEGURU_CACHE_URL")
         hash_cache_file = cache_url or op.join(self.appdata, "hash_cache.db")
         fs.filesdb.connect(hash_cache_file)
         self.directories = directories.Directories(self.exclude_list)
