@@ -719,19 +719,18 @@ input[type="text"]:focus {
 /* Toast notifications */
 .toast {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: rgba(6, 182, 212, 0.95);
-    color: #fff;
-    padding: 12px 24px;
+    bottom: 28px;
+    right: 28px;
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #06b6d4;
+    padding: 14px 22px;
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 0.9rem;
-    box-shadow: var(--shadow-lg);
-    z-index: 1000;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    transition: opacity 0.25s ease, transform 0.25s ease;
     white-space: pre-wrap;
     cursor: pointer;
 }

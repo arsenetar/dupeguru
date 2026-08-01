@@ -187,6 +187,13 @@ function setupEventListeners() {
     if (newScanBtn) {
         newScanBtn.addEventListener("click", () => {
             if (newScanModal) newScanModal.classList.remove("hidden");
+            if (newScanPathInput && !newScanPathInput.value.trim()) {
+                if (addedPaths && addedPaths.length > 0) {
+                    newScanPathInput.value = addedPaths[0];
+                } else if (currentBrowserPath) {
+                    newScanPathInput.value = currentBrowserPath;
+                }
+            }
         });
     }
     if (cancelNewScanBtn) {
@@ -927,9 +934,12 @@ async function launchNewDBScan() {
     const path = pathInput.value.trim();
 
     if (!path) {
-        showToast("Please enter a valid directory path.");
+        pathInput.style.borderColor = "#ef4444";
+        pathInput.focus();
+        showToast("⚠️ Target directory path is required. Please select or enter a folder path.");
         return;
     }
+    pathInput.style.borderColor = "";
 
     try {
         const response = await fetch(`${API_BASE}/api/scans/create`, {
