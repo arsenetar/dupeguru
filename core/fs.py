@@ -277,7 +277,14 @@ class SQLiteCacheEngine(CacheEngine):
         try:
             with self.lock, self.conn as conn:
                 row = conn.execute("SELECT 1 FROM scanned_directories WHERE path = ?", (str(dir_path),)).fetchone()
-                return row is not None
+                if not row:
+                    return False
+                prefix = str(dir_path) + os.sep
+                unhashed = conn.execute(
+                    "SELECT 1 FROM files WHERE (path = ? OR path LIKE ?) AND (digest IS NULL OR digest = '') LIMIT 1",
+                    (str(dir_path), prefix + "%"),
+                ).fetchone()
+                return unhashed is None
         except Exception:
             return False
 

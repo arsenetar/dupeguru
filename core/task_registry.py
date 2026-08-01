@@ -184,6 +184,12 @@ class ScanTaskRegistry:
                                     cur = conn.cursor()
                                     cur.execute("SELECT COUNT(*) FROM files")
                                     task.file_count = cur.fetchone()[0]
+
+                                    cur.execute("SELECT path FROM scanned_directories")
+                                    saved_dirs = [r[0] for r in cur.fetchall()]
+                                    if saved_dirs:
+                                        task.directories = saved_dirs
+
                                     conn.close()
                                 except Exception:
                                     pass

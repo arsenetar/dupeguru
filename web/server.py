@@ -682,6 +682,18 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     fs.filesdb.enable_directory_cache = True
                     app_state["active_task_id"] = task.task_id
 
+                    if not task.directories:
+                        try:
+                            import sqlite3
+
+                            conn = sqlite3.connect(task.db_path)
+                            cur = conn.cursor()
+                            cur.execute("SELECT path FROM scanned_directories")
+                            task.directories = [r[0] for r in cur.fetchall()]
+                            conn.close()
+                        except Exception:
+                            pass
+
                     if hasattr(task, "results_groups") and task.results_groups is not None:
                         model.results.groups = task.results_groups
                         model._recreate_result_table()
@@ -693,6 +705,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             except Exception:
                                 pass
                         model.start_scanning()
+                        start_wait = time.time()
+                        while model.progress_window._job_running and (time.time() - start_wait < 10.0):
+                            time.sleep(0.05)
                         task.results_groups = model.results.groups
 
                     self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
