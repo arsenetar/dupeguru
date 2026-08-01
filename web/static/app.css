@@ -475,15 +475,17 @@ input[type="text"]:focus {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 32px;
-    overflow: hidden;
-    gap: 24px;
+    padding: 24px;
+    overflow: auto;
+    gap: 16px;
+    flex: 1;
 }
 
 .results-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .results-header h1 {
@@ -501,40 +503,43 @@ input[type="text"]:focus {
 .results-actions {
     display: flex;
     gap: 12px;
-    width: 260px;
 }
 
 /* Table Design */
 .table-wrapper {
     flex: 1;
-    overflow-y: auto;
+    overflow: auto;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     background: var(--card-bg);
+    min-height: 300px;
 }
 
 .results-table {
     width: 100%;
+    min-width: 950px;
     border-collapse: collapse;
     font-size: 0.9rem;
     text-align: left;
 }
 
 .results-table th {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: #0f172a;
     color: var(--text-secondary);
     font-weight: 600;
-    padding: 14px 18px;
+    padding: 14px 16px;
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 10;
+    white-space: nowrap;
 }
 
 .results-table td {
-    padding: 14px 18px;
+    padding: 12px 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 /* Group separating headers */
