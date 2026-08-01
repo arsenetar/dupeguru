@@ -45,6 +45,13 @@ Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
 
 ---
 
+## 5. CI/CD & Automated Packaging (Phase 5)
+
+* **Automated Module Build ([build.py](file:///home/tin/src/opensource/dupeguru/build.py#L117-L130))**: `python build.py --modules` automatically compiles `rust_engine` in release mode (`cargo build --release`) and copies `libdupeguru_rust.so` / `dupeguru_rust.pyd` into `core/`.
+* **Multi-Platform CI/CD ([.github/workflows/build_rust_wheels.yml](file:///home/tin/src/opensource/dupeguru/.github/workflows/build_rust_wheels.yml))**: Automated GitHub Actions workflows compile and verify Rust native modules across Linux (x86_64), macOS (Apple Silicon & Intel), and Windows (x64).
+
+---
+
 ## PyO3 Interoperability & Path Safety
 
 Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
