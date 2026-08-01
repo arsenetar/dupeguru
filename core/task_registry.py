@@ -37,6 +37,23 @@ class ScanTask:
         self.app_instance = None
         self._thread = None
 
+    def save_metadata(self) -> None:
+        if os.path.exists(self.db_path):
+            try:
+                import sqlite3
+
+                conn = sqlite3.connect(self.db_path)
+                cur = conn.cursor()
+                cur.execute("CREATE TABLE IF NOT EXISTS scan_metadata (key TEXT PRIMARY KEY, value TEXT)")
+                cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('match_count', ?)", (str(self.match_count),))
+                cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('dupe_count', ?)", (str(self.dupe_count),))
+                status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
+                cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('status', ?)", (status_str,))
+                conn.commit()
+                conn.close()
+            except Exception:
+                pass
+
     def to_dict(self) -> Dict[str, Any]:
         db_size = 0
         hashed_count = 0
@@ -213,6 +230,19 @@ class ScanTaskRegistry:
                                     saved_dirs = [r[0] for r in cur.fetchall()]
                                     if saved_dirs:
                                         task.directories = saved_dirs
+
+                                    try:
+                                        cur.execute("SELECT key, value FROM scan_metadata")
+                                        meta = dict(cur.fetchall())
+                                        if "match_count" in meta:
+                                            task.match_count = int(meta["match_count"])
+                                        if "dupe_count" in meta:
+                                            task.dupe_count = int(meta["dupe_count"])
+                                        if "status" in meta and meta["status"] == "completed":
+                                            task.status = ScanTaskStatus.COMPLETED
+                                            task.is_loaded = True
+                                    except Exception:
+                                        pass
 
                                     conn.close()
                                 except Exception:

@@ -312,6 +312,7 @@ def pulse_loop(stop_event):
                             task.dupe_count = len(model.results.dupes)
                             task.results_groups = model.results.groups
                             task.is_loaded = True
+                            task.save_metadata()
                 else:
                     wait_ticks += 1
                     if wait_ticks > 30:  # 3 seconds fallback
@@ -329,6 +330,7 @@ def pulse_loop(stop_event):
                                 task.dupe_count = len(model.results.dupes)
                                 task.results_groups = model.results.groups
                                 task.is_loaded = True
+                                task.save_metadata()
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
@@ -728,6 +730,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             task.dupe_count = len(model.results.dupes) if model.results else 0
                             task.status = ScanTaskStatus.COMPLETED
                             task.is_loaded = True
+                            task.save_metadata()
 
                         self.wfile.write(
                             json.dumps(
