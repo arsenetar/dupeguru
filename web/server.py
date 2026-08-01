@@ -647,10 +647,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     return
 
                 clear_cache_requested = data.get("clear_cache", False)
+                scan_name = data.get("name", "").strip() or f"Scan_{time.strftime('%Y%m%d_%H%M%S')}"
+                directories_list = [str(d) for d in model.directories]
+
+                # Create task in registry for tracking
+                task = task_registry.create_task(scan_name, directories_list)
 
                 def run_scan_async():
+                    task.status = ScanTaskStatus.RUNNING
                     try:
-                        print("[Web Server] Starting scan thread...", flush=True)
+                        print(f"[Web Server] Starting scan thread for task '{scan_name}'...", flush=True)
                         if clear_cache_requested:
                             print("[Web Server] Clearing database hash cache...", flush=True)
                             t0 = time.time()
@@ -663,9 +669,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         print("[Web Server] Launching duplicate scan engine...", flush=True)
                         model.start_scanning()
                         print("[Web Server] Scan engine execution completed.", flush=True)
+
+                        task.status = ScanTaskStatus.COMPLETED
+                        task.completed_at = time.time()
+                        task.file_count = model.discarded_file_count
+                        task.match_count = len(model.results.groups)
+                        task.dupe_count = len(model.results.dupes)
                     except Exception as e:
                         print(f"[Web Server ERROR] Scan thread failed: {e}", flush=True)
                         logging.error(f"Error in run_scan_async: {e}", exc_info=True)
+                        task.status = ScanTaskStatus.FAILED
+                        task.error_message = str(e)
                         app_state["scanning"] = False
                         app_state["status"] = "error"
                         app_state["error"] = str(e)
@@ -676,9 +690,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 app_state["progress_msg"] = "Starting scan..."
 
                 scan_thread = threading.Thread(target=run_scan_async, daemon=True)
+                task._thread = scan_thread
                 scan_thread.start()
 
-                self.wfile.write(json.dumps({"success": True}).encode())
+                self.wfile.write(json.dumps({"success": True, "task_id": task.task_id}).encode())
             else:
                 self.wfile.write(json.dumps({"success": False, "error": "Scan in progress"}).encode())
 

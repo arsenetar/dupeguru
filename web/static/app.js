@@ -177,6 +177,19 @@ function setupEventListeners() {
             if (newScanModal) newScanModal.classList.add("hidden");
         });
     }
+    const useSidebarPathsBtn = document.getElementById("use-sidebar-paths-btn");
+    const newScanPathInput = document.getElementById("new-scan-path-input");
+
+    if (useSidebarPathsBtn && newScanPathInput) {
+        useSidebarPathsBtn.addEventListener("click", () => {
+            if (addedPaths && addedPaths.length > 0) {
+                newScanPathInput.value = addedPaths[0];
+            } else if (currentBrowserPath) {
+                newScanPathInput.value = currentBrowserPath;
+            }
+        });
+    }
+
     if (submitNewScanBtn) {
         submitNewScanBtn.addEventListener("click", launchNewDBScan);
     }
@@ -350,12 +363,14 @@ async function browseFolders(path = "") {
 // 3. Scan & Progress Management
 async function startScan(clearCache = false) {
     try {
+        const scanNameInput = document.getElementById("sidebar-scan-name-input");
+        const scanName = scanNameInput ? scanNameInput.value.trim() : "";
         const response = await fetch(`${API_BASE}/api/scan`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ clear_cache: clearCache })
+            body: JSON.stringify({ clear_cache: clearCache, name: scanName })
         });
         const result = await response.json();
         if (result.success) {

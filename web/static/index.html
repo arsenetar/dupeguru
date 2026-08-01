@@ -51,6 +51,12 @@
                 </ul>
             </div>
 
+            <!-- Scan / DB Name -->
+            <div class="section-card">
+                <h3>Scan / DB Name</h3>
+                <input type="text" id="sidebar-scan-name-input" class="input-field" placeholder="e.g. Photos_2024" style="width: 100%;">
+            </div>
+
             <!-- Scan Preferences -->
             <div class="section-card">
                 <h3>Scan Preferences</h3>
@@ -315,9 +321,9 @@
 
     <!-- Launch New DB Scan Modal -->
     <div id="new-scan-modal" class="modal-backdrop hidden">
-        <div class="modal-card">
+        <div class="modal-card" style="max-width: 540px;">
             <h3>Launch New Isolated DB Scan</h3>
-            <p style="margin-bottom: 16px; color: var(--text-secondary);">Specify scan name and target directory path:</p>
+            <p style="margin-bottom: 16px; color: var(--text-secondary);">Specify scan name and select target directory:</p>
 
             <div style="margin-bottom: 16px;">
                 <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Scan / DB Name</label>
@@ -326,7 +332,10 @@
 
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Target Directory Path</label>
-                <input type="text" id="new-scan-path-input" class="input-field" placeholder="/path/to/scan" style="width: 100%;">
+                <div class="input-group">
+                    <input type="text" id="new-scan-path-input" class="input-field" placeholder="Type path or click 'Use Selected'..." style="width: 100%;">
+                    <button id="use-sidebar-paths-btn" class="btn secondary-btn" type="button" style="white-space: nowrap;">Use Selected</button>
+                </div>
             </div>
 
             <div class="modal-actions" style="display: flex; gap: 8px; justify-content: flex-end;">
