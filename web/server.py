@@ -286,9 +286,13 @@ def pulse_loop(stop_event):
                     model.progress_window.pulse()
                     raw_msg = model.progress_window.progressdesc_textfield.value or "Processing..."
                     app_state["progress_msg"] = sanitize_utf8(raw_msg)
+                    app_state["progress"] = model.progress_window.last_progress
                 elif has_job_started:
                     has_job_started = False
                     model.progress_window.pulse()
+                    app_state["scanning"] = False
+                    if app_state.get("status") == "scanning":
+                        app_state["status"] = "completed"
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
