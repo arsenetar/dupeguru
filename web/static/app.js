@@ -630,8 +630,6 @@ function renderResults(totalMarkedCount) {
     const resultsPrevBtn = document.getElementById("results-prev-btn");
     const resultsNextBtn = document.getElementById("results-next-btn");
     const resultsPageInfo = document.getElementById("results-page-info");
-
-    const resultsPageInfo = document.getElementById("results-page-info");
     const resultsPrevBtnTop = document.getElementById("results-prev-btn-top");
     const resultsNextBtnTop = document.getElementById("results-next-btn-top");
     const resultsPageInfoTop = document.getElementById("results-page-info-top");
