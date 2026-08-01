@@ -952,6 +952,7 @@ async function loadMultiScans() {
             card.style.display = "flex";
             card.style.flexDirection = "column";
             card.style.gap = "10px";
+            card.style.overflow = "hidden";
 
             let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
             if (task.status === "completed") {
@@ -961,25 +962,31 @@ async function loadMultiScans() {
             }
 
             const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
+            const foldersHtml = task.directories && task.directories.length
+                ? task.directories.map(d => `<div style="padding: 2px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);">${escapeHtml(d)}</div>`).join("")
+                : "<em>All target directories</em>";
 
             card.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; font-size: 1rem; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
+                    <h3 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
                     ${statusBadge}
                 </div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary); word-break: break-all;">
-                    <strong>DB:</strong> ${escapeHtml(task.db_path)} (${sizeMb} MB)
+                <div style="font-size: 0.78rem; color: var(--text-secondary); word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.15); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                    <strong style="color: var(--text-primary);">DB:</strong> ${escapeHtml(task.db_path)} <span style="color: var(--accent); margin-left: 4px;">(${sizeMb} MB)</span>
                 </div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                    <strong>Folders:</strong> ${task.directories && task.directories.length ? task.directories.map(d => escapeHtml(d)).join(", ") : "All"}
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Folders:</span>
+                    <div style="max-height: 70px; overflow-y: auto; font-size: 0.78rem; font-family: monospace; color: var(--text-secondary); background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 6px; word-break: break-all; border: 1px solid rgba(255,255,255,0.05);">
+                        ${foldersHtml}
+                    </div>
                 </div>
-                <div style="display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">
-                    <span><strong>Matches:</strong> ${task.match_count || 0}</span>
-                    <span><strong>Dupes:</strong> ${task.dupe_count || 0}</span>
+                <div style="display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: auto; padding-top: 4px;">
+                    <span><strong style="color: var(--text-primary);">Scanned Files:</strong> ${task.file_count || 0}</span>
+                    <span><strong style="color: var(--text-primary);">Matches:</strong> ${task.match_count || 0}</span>
                 </div>
-                <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end;">
-                    <button class="btn secondary-btn text-btn" style="font-size: 0.8rem;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
-                    <button class="btn danger-btn text-btn" style="font-size: 0.8rem;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
+                <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border-color);">
+                    <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                    <button class="btn danger-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
                 </div>
             `;
 
