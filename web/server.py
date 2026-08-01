@@ -665,7 +665,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 def run_scan_async():
                     task.status = ScanTaskStatus.RUNNING
                     try:
-                        print(f"[Web Server] Starting scan thread for task '{scan_name}'...", flush=True)
+                        print(
+                            f"[Web Server] Starting scan thread for task '{scan_name}' on DB '{task.db_path}'...",
+                            flush=True,
+                        )
+                        fs.filesdb.connect(task.db_path)
                         if clear_cache_requested:
                             print("[Web Server] Clearing database hash cache...", flush=True)
                             t0 = time.time()
