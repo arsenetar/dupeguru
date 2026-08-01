@@ -73,35 +73,43 @@ async function checkInitialResults() {
 }
 
 function setupEventListeners() {
-    addManualPathBtn.addEventListener("click", () => {
-        const path = manualPathInput.value.trim();
-        if (path) {
-            addDirectory(path);
-            manualPathInput.value = "";
-        }
-    });
+    if (addManualPathBtn) {
+        addManualPathBtn.addEventListener("click", () => {
+            const path = manualPathInput ? manualPathInput.value.trim() : "";
+            if (path) {
+                addDirectory(path);
+                if (manualPathInput) manualPathInput.value = "";
+            }
+        });
+    }
 
-    manualPathInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            addManualPathBtn.click();
-        }
-    });
+    if (manualPathInput) {
+        manualPathInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && addManualPathBtn) {
+                addManualPathBtn.click();
+            }
+        });
+    }
 
-    browserUpBtn.addEventListener("click", () => {
-        if (currentBrowserPath && currentBrowserPath.includes("/")) {
-            const parts = currentBrowserPath.split("/");
-            parts.pop();
-            const parent = parts.join("/") || "/";
-            browseFolders(parent);
-        }
-    });
+    if (browserUpBtn) {
+        browserUpBtn.addEventListener("click", () => {
+            if (currentBrowserPath && currentBrowserPath.includes("/")) {
+                const parts = currentBrowserPath.split("/");
+                parts.pop();
+                const parent = parts.join("/") || "/";
+                browseFolders(parent);
+            }
+        });
+    }
 
-    startScanBtn.addEventListener("click", () => {
-        const scanModal = document.getElementById("scan-modal");
-        if (scanModal) {
-            scanModal.classList.remove("hidden");
-        }
-    });
+    if (startScanBtn) {
+        startScanBtn.addEventListener("click", () => {
+            const scanModal = document.getElementById("scan-modal");
+            if (scanModal) {
+                scanModal.classList.remove("hidden");
+            }
+        });
+    }
 
     const modeResume = document.getElementById("mode-resume");
     const modeFresh = document.getElementById("mode-fresh");
@@ -128,10 +136,10 @@ function setupEventListeners() {
         });
     }
 
-    deleteMarkedBtn.addEventListener("click", deleteMarked);
-    cancelScanBtn.addEventListener("click", cancelScan);
-    loadScanBtn.addEventListener("click", loadScan);
-    saveResultsBtn.addEventListener("click", saveResults);
+    if (deleteMarkedBtn) deleteMarkedBtn.addEventListener("click", deleteMarked);
+    if (cancelScanBtn) cancelScanBtn.addEventListener("click", cancelScan);
+    if (loadScanBtn) loadScanBtn.addEventListener("click", loadScan);
+    if (saveResultsBtn) saveResultsBtn.addEventListener("click", saveResults);
     const toast = document.getElementById("toast");
     if (toast) {
         toast.addEventListener("click", () => {
@@ -200,6 +208,8 @@ function setupEventListeners() {
     const newScanModal = document.getElementById("new-scan-modal");
     const cancelNewScanBtn = document.getElementById("cancel-new-scan-btn");
     const submitNewScanBtn = document.getElementById("submit-new-scan-btn");
+    const useSidebarPathsBtn = document.getElementById("use-sidebar-paths-btn");
+    const newScanPathInput = document.getElementById("new-scan-path-input");
 
     if (newScanBtn) {
         newScanBtn.addEventListener("click", () => {
@@ -218,8 +228,6 @@ function setupEventListeners() {
             if (newScanModal) newScanModal.classList.add("hidden");
         });
     }
-    const useSidebarPathsBtn = document.getElementById("use-sidebar-paths-btn");
-    const newScanPathInput = document.getElementById("new-scan-path-input");
 
     if (useSidebarPathsBtn && newScanPathInput) {
         useSidebarPathsBtn.addEventListener("click", () => {
