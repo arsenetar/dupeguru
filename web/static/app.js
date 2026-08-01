@@ -51,9 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
     loadConfig();
     loadMultiScans();
     setupEventListeners();
+    checkInitialResults();
     // Regular status polling (for progress sync)
     setInterval(checkScanStatus, 1000);
 });
+
+async function checkInitialResults() {
+    try {
+        const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
+        const state = await response.json();
+        if (state.active_task_id) {
+            await viewTaskResults(state.active_task_id);
+        } else if (state.has_results) {
+            await loadResults();
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (resultsContainer) resultsContainer.classList.remove("hidden");
+        }
+    } catch (err) {
+        console.error("Initial results check failed:", err);
+    }
+}
 
 function setupEventListeners() {
     addManualPathBtn.addEventListener("click", () => {
@@ -930,7 +947,7 @@ async function loadMultiScans() {
     }
 }
 
-async function launchNewDBScan() {
+async function launchNewDBScan(overwrite = false) {
     const nameInput = document.getElementById("new-scan-name-input");
     const pathInput = document.getElementById("new-scan-path-input");
     const modal = document.getElementById("new-scan-modal");
@@ -950,9 +967,21 @@ async function launchNewDBScan() {
         const response = await fetch(`${API_BASE}/api/scans/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: name, directories: [path] }),
+            body: JSON.stringify({ name: name, directories: [path], overwrite: overwrite }),
         });
         const result = await response.json();
+
+        if (result.exists && !overwrite) {
+            const doOverwrite = confirm(
+                `A database scan named '${name}' already exists.\n\n` +
+                `Click OK to re-run the scan (overwriting existing data), or Cancel to choose a different name.`
+            );
+            if (doOverwrite) {
+                launchNewDBScan(true);
+            }
+            return;
+        }
+
         if (result.success) {
             showToast(`Launched isolated scan: ${name}`);
             if (modal) modal.classList.add("hidden");

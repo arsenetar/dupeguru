@@ -400,6 +400,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/status":
             targets = [str(d) for d in model.directories]
+            active_id = app_state.get("active_task_id")
+            if not active_id:
+                all_tasks = task_registry.list_tasks()
+                if all_tasks:
+                    active_id = all_tasks[-1]["task_id"]
+
             response = {
                 "status": app_state["status"],
                 "scanning": app_state["scanning"],
@@ -407,6 +413,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 "progress_msg": app_state["progress_msg"],
                 "messages": app_state["messages"],
                 "targets": targets,
+                "active_task_id": active_id,
+                "has_results": len(model.results.groups) > 0,
             }
             sanitized = sanitize_utf8(response)
             self.wfile.write(json.dumps(sanitized).encode("utf-8", errors="replace"))
@@ -589,7 +597,25 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             save_selected_directories()
 
-            task = task_registry.create_task(name, directories_list)
+            overwrite = data.get("overwrite", False)
+            existing_task = task_registry.get_task_by_name(name)
+            if existing_task and not overwrite:
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": False,
+                                "exists": True,
+                                "task_name": name,
+                                "existing_task": existing_task.to_dict(),
+                                "error": f"A scan database named '{name}' already exists.",
+                            }
+                        )
+                    ).encode()
+                )
+                return
+
+            task = task_registry.create_task(name, directories_list, overwrite=overwrite)
             app_state["active_task_id"] = task.task_id
 
             def run_scan_async():

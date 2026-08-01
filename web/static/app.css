@@ -361,6 +361,7 @@ input[type="text"]:focus {
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    min-height: 0;
 }
 
 /* Welcome Screen */
@@ -479,6 +480,7 @@ input[type="text"]:focus {
     overflow: auto;
     gap: 16px;
     flex: 1;
+    min-height: 0;
 }
 
 .results-header {
@@ -512,7 +514,7 @@ input[type="text"]:focus {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     background: var(--card-bg);
-    min-height: 300px;
+    min-height: 0;
 }
 
 .results-table {

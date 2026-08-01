@@ -68,19 +68,54 @@ class ScanTaskRegistry:
         self.scans_dir = os.path.abspath(scans_dir)
         os.makedirs(self.scans_dir, exist_ok=True)
         self.tasks: Dict[str, ScanTask] = {}
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
         self._scan_storage_refresh()
 
-    def create_task(self, name: str, directories: List[str], db_filename: Optional[str] = None) -> ScanTask:
+    def get_task_by_name(self, name: str) -> Optional[ScanTask]:
+        self._scan_storage_refresh()
+        safe_name = name.strip().replace(" ", "_").replace("/", "_").lower()
         with self._lock:
-            task_id = str(uuid.uuid4())[:8]
+            for task in self.tasks.values():
+                if task.name.strip().replace(" ", "_").replace("/", "_").lower() == safe_name:
+                    return task
+            return None
+
+    def create_task(
+        self,
+        name: str,
+        directories: List[str],
+        db_filename: Optional[str] = None,
+        overwrite: bool = False,
+    ) -> ScanTask:
+        with self._lock:
+            existing = self.get_task_by_name(name)
+            if existing and not overwrite:
+                return existing
+
+            task_id = existing.task_id if (existing and overwrite) else str(uuid.uuid4())[:8]
             safe_name = name.replace(" ", "_").replace("/", "_")
             if not db_filename:
-                db_filename = f"{safe_name}_{task_id}.db"
-            if not db_filename.endswith(".db"):
-                db_filename += ".db"
+                db_filename = (
+                    existing.db_path
+                    if (existing and overwrite)
+                    else os.path.join(self.scans_dir, f"{safe_name}_{task_id}.db")
+                )
+            else:
+                if not db_filename.endswith(".db"):
+                    db_filename += ".db"
+                db_filename = os.path.join(self.scans_dir, db_filename)
 
-            db_path = os.path.join(self.scans_dir, db_filename)
+            db_path = db_filename
+            if overwrite and os.path.exists(db_path):
+                try:
+                    os.remove(db_path)
+                    if os.path.exists(db_path + "-wal"):
+                        os.remove(db_path + "-wal")
+                    if os.path.exists(db_path + "-shm"):
+                        os.remove(db_path + "-shm")
+                except OSError:
+                    pass
+
             task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=directories)
             self.tasks[task_id] = task
             return task
