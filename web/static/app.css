@@ -518,7 +518,8 @@ input[type="text"]:focus {
 /* Table Design */
 .table-wrapper {
     flex: 1;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: scroll;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     background: var(--card-bg);

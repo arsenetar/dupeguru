@@ -539,8 +539,17 @@ async function loadResults() {
 
 function renderResults(totalMarkedCount) {
     resultsBody.innerHTML = "";
-    welcomeContainer.classList.add("hidden");
-    resultsContainer.classList.remove("hidden");
+    if (welcomeContainer) welcomeContainer.classList.add("hidden");
+    if (resultsContainer) resultsContainer.classList.remove("hidden");
+
+    // Force layout reflow so scrollbars render immediately without page refresh
+    const wrapper = document.querySelector(".table-wrapper");
+    if (wrapper) {
+        wrapper.scrollTop = 0;
+        wrapper.style.display = "none";
+        wrapper.offsetHeight; // Trigger DOM layout repaint
+        wrapper.style.display = "";
+    }
 
     let totalGroups = resultsTotal;
     let totalFiles = 0;
