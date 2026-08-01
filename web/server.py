@@ -283,11 +283,13 @@ logging.basicConfig(level=logging.INFO)
 def pulse_loop(stop_event):
     """Background loop to pulse the job progress window."""
     has_job_started = False
+    wait_ticks = 0
     while not stop_event.is_set():
         if app_state["scanning"]:
             try:
                 if model.progress_window._job_running:
                     has_job_started = True
+                    wait_ticks = 0
                     model.progress_window.pulse()
                     raw_msg = model.progress_window.progressdesc_textfield.value or "Processing..."
                     app_state["progress_msg"] = sanitize_utf8(raw_msg)
@@ -298,6 +300,12 @@ def pulse_loop(stop_event):
                     app_state["scanning"] = False
                     if app_state.get("status") == "scanning":
                         app_state["status"] = "completed"
+                else:
+                    wait_ticks += 1
+                    if wait_ticks > 30:  # 3 seconds fallback
+                        app_state["scanning"] = False
+                        if app_state.get("status") == "scanning":
+                            app_state["status"] = "completed" if model.results.groups else "idle"
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
@@ -305,6 +313,7 @@ def pulse_loop(stop_event):
                 app_state["error"] = sanitize_utf8(str(e))
         else:
             has_job_started = False
+            wait_ticks = 0
         time.sleep(0.1)
 
 
@@ -675,6 +684,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         task.file_count = model.discarded_file_count
                         task.match_count = len(model.results.groups)
                         task.dupe_count = len(model.results.dupes)
+
+                        # If background job finished immediately (e.g. no files or quick scan)
+                        if not model.progress_window._job_running:
+                            app_state["scanning"] = False
+                            if app_state.get("status") == "scanning":
+                                app_state["status"] = "completed" if model.results.groups else "idle"
                     except Exception as e:
                         print(f"[Web Server ERROR] Scan thread failed: {e}", flush=True)
                         logging.error(f"Error in run_scan_async: {e}", exc_info=True)
