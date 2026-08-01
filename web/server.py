@@ -681,14 +681,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     fs.filesdb.enable_directory_cache = True
                     app_state["active_task_id"] = task.task_id
 
-                    if not task.directories:
+                    if not task.directories or len(task.directories) > 10:
                         try:
                             import sqlite3
+                            from core.task_registry import minimize_directories
 
                             conn = sqlite3.connect(task.db_path)
                             cur = conn.cursor()
                             cur.execute("SELECT path FROM scanned_directories")
-                            task.directories = [r[0] for r in cur.fetchall()]
+                            saved_dirs = [r[0] for r in cur.fetchall()]
+                            if saved_dirs:
+                                task.directories = minimize_directories(saved_dirs)
                             conn.close()
                         except Exception:
                             pass

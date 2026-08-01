@@ -19,6 +19,17 @@ class ScanTaskStatus:
     FAILED = "failed"
 
 
+def minimize_directories(dirs: List[str]) -> List[str]:
+    if not dirs:
+        return []
+    sorted_dirs = sorted(dirs, key=lambda p: (len(p), p))
+    minimized = []
+    for d in sorted_dirs:
+        if not any(d == root or d.startswith(root + os.sep) for root in minimized):
+            minimized.append(d)
+    return minimized
+
+
 class ScanTask:
     def __init__(self, task_id: str, name: str, db_path: str, directories: List[str]):
         self.task_id = task_id
@@ -229,7 +240,7 @@ class ScanTaskRegistry:
                                     cur.execute("SELECT path FROM scanned_directories")
                                     saved_dirs = [r[0] for r in cur.fetchall()]
                                     if saved_dirs:
-                                        task.directories = saved_dirs
+                                        task.directories = minimize_directories(saved_dirs)
 
                                     try:
                                         cur.execute("SELECT key, value FROM scan_metadata")
