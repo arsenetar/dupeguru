@@ -1066,6 +1066,7 @@ async function viewTaskResults(taskId) {
         const res = await response.json();
         if (res.success) {
             await loadResults();
+            await loadMultiScans();
             if (resultsContainer) resultsContainer.classList.remove("hidden");
             if (welcomeContainer) welcomeContainer.classList.add("hidden");
             if (progressContainer) progressContainer.classList.add("hidden");

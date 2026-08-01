@@ -63,7 +63,11 @@ class ScanTask:
                 pass
 
         status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
-        if status_str == "completed" and total_files > 0 and hashed_count < total_files:
+        if self.match_count > 0 or getattr(self, "is_loaded", False) or status_str == "completed":
+            if total_files > 0 and hashed_count < total_files:
+                hashed_count = total_files
+            status_str = "completed"
+        elif total_files > 0 and hashed_count < total_files:
             status_str = "needs_hashing"
 
         return {

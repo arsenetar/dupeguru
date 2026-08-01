@@ -709,6 +709,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         except Exception:
                             pass
                         task.results_groups = model.results.groups
+                        task.match_count = len(model.results.groups) if model.results else 0
+                        task.dupe_count = len(model.results.dupes) if model.results else 0
+                        task.status = ScanTaskStatus.COMPLETED
+                        task.is_loaded = True
 
                     self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
                 except Exception as e:
