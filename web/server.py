@@ -310,6 +310,7 @@ def pulse_loop(stop_event):
                             task.file_count = model.discarded_file_count
                             task.match_count = len(model.results.groups)
                             task.dupe_count = len(model.results.dupes)
+                            task.results_groups = model.results.groups
                 else:
                     wait_ticks += 1
                     if wait_ticks > 30:  # 3 seconds fallback
@@ -325,6 +326,7 @@ def pulse_loop(stop_event):
                                 task.file_count = model.discarded_file_count
                                 task.match_count = len(model.results.groups)
                                 task.dupe_count = len(model.results.dupes)
+                                task.results_groups = model.results.groups
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
@@ -636,6 +638,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     task.file_count = model.discarded_file_count
                     task.match_count = len(model.results.groups)
                     task.dupe_count = len(model.results.dupes)
+                    task.results_groups = model.results.groups
 
                     if not model.progress_window._job_running:
                         app_state["scanning"] = False
@@ -668,7 +671,21 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 try:
                     fs.filesdb.connect(task.db_path)
                     fs.filesdb.enable_directory_cache = True
-                    model._recreate_result_table()
+                    app_state["active_task_id"] = task.task_id
+
+                    if hasattr(task, "results_groups") and task.results_groups is not None:
+                        model.results.groups = task.results_groups
+                        model._recreate_result_table()
+                    else:
+                        model.directories.clear()
+                        for d in task.directories:
+                            try:
+                                model.directories.add_path(Path(d))
+                            except Exception:
+                                pass
+                        model.start_scanning()
+                        task.results_groups = model.results.groups
+
                     self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
                 except Exception as e:
                     self.wfile.write(json.dumps(sanitize_utf8({"success": False, "error": str(e)})).encode())
