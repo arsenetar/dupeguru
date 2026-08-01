@@ -51,10 +51,11 @@
                 </ul>
             </div>
 
-            <!-- Scan / DB Name -->
+            <!-- Database & Scan Name -->
             <div class="section-card">
-                <h3>Scan / DB Name</h3>
+                <h3>Scan Database Name</h3>
                 <input type="text" id="sidebar-scan-name-input" class="input-field" placeholder="e.g. Photos_2024" style="width: 100%;">
+                <div id="db-preview-label" style="margin-top: 6px; font-size: 0.75rem; color: var(--text-secondary);">Saves scan to isolated SQLite database file.</div>
             </div>
 
             <!-- Scan Preferences -->
@@ -107,7 +108,7 @@
 
             <!-- Action Controls -->
             <div class="action-footer" style="display: flex; gap: 8px; width: 100%;">
-                <button id="start-scan-btn" class="btn accent-btn large-btn" style="flex: 1;">Start Duplicate Scan</button>
+                <button id="start-scan-btn" class="btn accent-btn large-btn" style="flex: 1;">🚀 Launch Isolated DB Scan</button>
                 <button id="load-scan-btn" class="btn secondary-btn" style="padding: 10px 16px;">Load Scan</button>
             </div>
         </aside>
@@ -124,9 +125,15 @@
             <div id="scan-view-content" class="scan-view-content">
                 <!-- Recent Scan Databases Bar -->
                 <div id="multiscan-section" class="section-card" style="margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Scan Database Tasks</h3>
-                        <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄 Refresh List</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Isolated Database Scans</h3>
+                            <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-secondary);">Each scan creates its own SQLite database file for independent processing & deduplication.</p>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button id="new-scan-task-btn" class="btn primary-btn" style="font-size: 0.85rem;">+ Launch New DB Scan</button>
+                            <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄 Refresh</button>
+                        </div>
                     </div>
                     <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
                         <!-- Rendered dynamically as cards -->

@@ -162,6 +162,22 @@ function setupEventListeners() {
         });
     }
 
+    // Live DB name preview listener
+    const sidebarScanNameInput = document.getElementById("sidebar-scan-name-input");
+    const dbPreviewLabel = document.getElementById("db-preview-label");
+    if (sidebarScanNameInput && dbPreviewLabel) {
+        sidebarScanNameInput.addEventListener("input", () => {
+            const val = sidebarScanNameInput.value.trim();
+            if (val) {
+                dbPreviewLabel.textContent = `Saves scan to isolated file: ${val}.db`;
+                dbPreviewLabel.style.color = "var(--accent-color)";
+            } else {
+                dbPreviewLabel.textContent = "Saves scan to isolated SQLite database file.";
+                dbPreviewLabel.style.color = "var(--text-secondary)";
+            }
+        });
+    }
+
     // New Scan Modal listeners
     const newScanBtn = document.getElementById("new-scan-task-btn");
     const newScanModal = document.getElementById("new-scan-modal");
