@@ -284,24 +284,27 @@ function setupEventListeners() {
 
     const resultsPrevBtn = document.getElementById("results-prev-btn");
     const resultsNextBtn = document.getElementById("results-next-btn");
+    const resultsPrevBtnTop = document.getElementById("results-prev-btn-top");
+    const resultsNextBtnTop = document.getElementById("results-next-btn-top");
 
-    if (resultsPrevBtn) {
-        resultsPrevBtn.addEventListener("click", () => {
-            if (resultsOffset >= resultsLimit) {
-                resultsOffset -= resultsLimit;
-                loadResults();
-            }
-        });
-    }
+    const goPrevPage = () => {
+        if (resultsOffset >= resultsLimit) {
+            resultsOffset -= resultsLimit;
+            loadResults();
+        }
+    };
 
-    if (resultsNextBtn) {
-        resultsNextBtn.addEventListener("click", () => {
-            if (resultsOffset + resultsLimit < resultsTotal) {
-                resultsOffset += resultsLimit;
-                loadResults();
-            }
-        });
-    }
+    const goNextPage = () => {
+        if (resultsOffset + resultsLimit < resultsTotal) {
+            resultsOffset += resultsLimit;
+            loadResults();
+        }
+    };
+
+    if (resultsPrevBtn) resultsPrevBtn.addEventListener("click", goPrevPage);
+    if (resultsNextBtn) resultsNextBtn.addEventListener("click", goNextPage);
+    if (resultsPrevBtnTop) resultsPrevBtnTop.addEventListener("click", goPrevPage);
+    if (resultsNextBtnTop) resultsNextBtnTop.addEventListener("click", goNextPage);
 
     setupConfigListeners();
 }
@@ -596,12 +599,22 @@ function renderResults(totalMarkedCount) {
     const resultsNextBtn = document.getElementById("results-next-btn");
     const resultsPageInfo = document.getElementById("results-page-info");
 
+    const resultsPageInfo = document.getElementById("results-page-info");
+    const resultsPrevBtnTop = document.getElementById("results-prev-btn-top");
+    const resultsNextBtnTop = document.getElementById("results-next-btn-top");
+    const resultsPageInfoTop = document.getElementById("results-page-info-top");
+
     const currentPage = Math.floor(resultsOffset / resultsLimit) + 1;
     const totalPages = Math.max(1, Math.ceil(resultsTotal / resultsLimit));
+    const isFirstPage = resultsOffset === 0;
+    const isLastPage = resultsOffset + resultsLimit >= resultsTotal;
 
     if (resultsPageInfo) resultsPageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-    if (resultsPrevBtn) resultsPrevBtn.disabled = resultsOffset === 0;
-    if (resultsNextBtn) resultsNextBtn.disabled = resultsOffset + resultsLimit >= resultsTotal;
+    if (resultsPageInfoTop) resultsPageInfoTop.textContent = `Page ${currentPage} of ${totalPages}`;
+    if (resultsPrevBtn) resultsPrevBtn.disabled = isFirstPage;
+    if (resultsNextBtn) resultsNextBtn.disabled = isLastPage;
+    if (resultsPrevBtnTop) resultsPrevBtnTop.disabled = isFirstPage;
+    if (resultsNextBtnTop) resultsNextBtnTop.disabled = isLastPage;
 
     const overallMarked = totalMarkedCount !== undefined ? totalMarkedCount : 0;
     resultsSummary.textContent = `Found ${totalGroups} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;

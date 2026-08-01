@@ -161,8 +161,13 @@
                             <h1>Scan Results</h1>
                             <p id="results-summary">No duplicates found yet.</p>
                         </div>
-                        <div class="results-actions" style="display: flex; gap: 8px;">
-                            <button id="save-results-btn" class="btn secondary-btn" style="padding: 10px 16px;">Save Results</button>
+                        <div class="results-actions" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <div class="pagination-top" style="display: flex; align-items: center; gap: 8px; margin-right: 8px;">
+                                <button id="results-prev-btn-top" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.85rem;" disabled>Prev</button>
+                                <span id="results-page-info-top" class="pagination-info" style="font-size: 0.85rem; font-weight: 600; color: var(--accent);">Page 1 of 1</span>
+                                <button id="results-next-btn-top" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.85rem;" disabled>Next</button>
+                            </div>
+                            <button id="save-results-btn" class="btn secondary-btn" style="padding: 8px 14px;">Save Results</button>
                             <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
                         </div>
                     </header>
