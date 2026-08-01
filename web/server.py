@@ -565,6 +565,23 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             deleted = task_registry.delete_task(task_id, delete_db_file=True)
             self.wfile.write(json.dumps({"success": deleted}).encode())
 
+        elif path == "/api/cross_scan":
+            db_paths = data.get("db_paths", [])
+            if not db_paths:
+                db_paths = [t["db_path"] for t in task_registry.list_tasks()]
+
+            try:
+                from core.cross_db import CrossDBMatcher
+
+                matcher = CrossDBMatcher(db_paths)
+                results = matcher.find_cross_duplicates()
+                self.wfile.write(
+                    json.dumps({"success": True, "groups": results, "total_groups": len(results)}).encode()
+                )
+            except Exception as e:
+                logging.error(f"Error in cross_scan endpoint: {e}")
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+
         elif path == "/api/directories":
             path_str = data.get("path")
             if path_str:

@@ -1276,10 +1276,63 @@ pub fn hash_files_parallel(
     Ok(results)
 }
 
+#[pyfunction]
+#[pyo3(signature = (db_paths))]
+pub fn cross_db_compare(
+    db_paths: Vec<String>,
+) -> PyResult<Vec<Vec<(String, u64, f64, String, String)>>> {
+    use rayon::prelude::*;
+    use rusqlite::{Connection, OpenFlags};
+    use std::collections::HashMap;
+
+    let db_files: Vec<(String, Vec<(String, u64, f64, String)>)> = db_paths
+        .into_par_iter()
+        .filter_map(|db_path| {
+            let conn = Connection::open_with_flags(&db_path, OpenFlags::SQLITE_OPEN_READ_ONLY).ok()?;
+            let mut stmt = conn
+                .prepare("SELECT path, size, mtime_ns, hex(COALESCE(digest, digest_partial)) FROM files WHERE size > 0 AND (digest IS NOT NULL OR digest_partial IS NOT NULL)")
+                .ok()?;
+            let file_rows = stmt
+                .query_map([], |row| {
+                    Ok((
+                        row.get::<_, String>(0)?,
+                        row.get::<_, u64>(1)?,
+                        (row.get::<_, i64>(2).unwrap_or(0) as f64) / 1e9,
+                        row.get::<_, String>(3).unwrap_or_default(),
+                    ))
+                })
+                .ok()?
+                .filter_map(|r| r.ok())
+                .collect();
+            Some((db_path, file_rows))
+        })
+        .collect();
+
+    let mut checksum_groups: HashMap<(u64, String), Vec<(String, u64, f64, String, String)>> = HashMap::new();
+    for (db_path, files) in db_files {
+        for (path, size, mtime, checksum) in files {
+            if !checksum.is_empty() {
+                checksum_groups
+                    .entry((size, checksum.clone()))
+                    .or_default()
+                    .push((path, size, mtime, checksum, db_path.clone()));
+            }
+        }
+    }
+
+    let dupe_groups: Vec<Vec<(String, u64, f64, String, String)>> = checksum_groups
+        .into_iter()
+        .filter_map(|(_, group)| if group.len() > 1 { Some(group) } else { None })
+        .collect();
+
+    Ok(dupe_groups)
+}
+
 #[pymodule]
 fn dupeguru_rust(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RustFilesDB>()?;
     m.add_function(wrap_pyfunction!(collect_files_parallel, m)?)?;
     m.add_function(wrap_pyfunction!(hash_files_parallel, m)?)?;
+    m.add_function(wrap_pyfunction!(cross_db_compare, m)?)?;
     Ok(())
 }
