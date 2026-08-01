@@ -943,6 +943,12 @@ async function launchNewDBScan() {
             if (modal) modal.classList.add("hidden");
             nameInput.value = "";
             pathInput.value = "";
+            isScanning = true;
+            if (progressContainer) progressContainer.classList.remove("hidden");
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (resultsContainer) resultsContainer.classList.add("hidden");
+            pollProgress();
+            await loadDirectories();
             loadMultiScans();
         } else {
             showToast(`Error: ${result.error || "Failed to launch scan"}`);

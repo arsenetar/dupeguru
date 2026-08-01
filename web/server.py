@@ -564,38 +564,76 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"success": True, "config": web_view.preferences}).encode())
 
         elif path == "/api/scans/create":
-            name = data.get("name", "Scan")
+            name = data.get("name", "Scan").strip() or f"Scan_{time.strftime('%Y%m%d_%H%M%S')}"
             directories_list = data.get("directories", [])
             if not directories_list and model.directories:
                 directories_list = [str(d) for d in model.directories]
 
-            task = task_registry.create_task(name, directories_list)
+            if not directories_list:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": False, "error": "No directory path specified"})).encode()
+                )
+                return
 
-            def run_isolated_scan(task_obj):
-                task_obj.status = ScanTaskStatus.RUNNING
+            # Clear existing model directories and set target paths
+            model.directories.clear()
+            for d_path in directories_list:
                 try:
-                    scan_view = WebViewAdapter({"status": "idle", "progress": 0, "messages": []})
-                    scan_app = DupeGuru(scan_view, db_path=task_obj.db_path)
-                    task_obj.app_instance = scan_app
-                    for d_path in task_obj.directories:
-                        scan_app.directories.add_path(Path(d_path))
+                    from core.directories import AlreadyThereError
 
-                    scan_app.start_scanning()
-                    task_obj.status = ScanTaskStatus.COMPLETED
-                    task_obj.completed_at = time.time()
-                    task_obj.file_count = scan_app.discarded_file_count
-                    task_obj.match_count = len(scan_app.results.groups)
-                    task_obj.dupe_count = len(scan_app.results.dupes)
+                    model.directories.add_path(Path(d_path))
+                except AlreadyThereError:
+                    pass
                 except Exception as e:
-                    task_obj.status = ScanTaskStatus.FAILED
-                    task_obj.error_message = str(e)
-                    logging.error(f"Isolated scan failed: {e}")
+                    logging.warning(f"Error adding path {d_path}: {e}")
 
-            t = threading.Thread(target=run_isolated_scan, args=(task,), daemon=True)
-            task._thread = t
-            t.start()
+            save_selected_directories()
 
-            self.wfile.write(json.dumps({"success": True, "task": task.to_dict()}).encode())
+            task = task_registry.create_task(name, directories_list)
+            app_state["active_task_id"] = task.task_id
+
+            def run_scan_async():
+                task.status = ScanTaskStatus.RUNNING
+                try:
+                    print(
+                        f"[Web Server] Starting scan thread for task '{name}' on DB '{task.db_path}'...",
+                        flush=True,
+                    )
+                    fs.filesdb.connect(task.db_path)
+                    fs.filesdb.enable_directory_cache = True
+                    print("[Web Server] Launching duplicate scan engine...", flush=True)
+                    model.start_scanning()
+                    print("[Web Server] Scan engine execution completed.", flush=True)
+
+                    task.status = ScanTaskStatus.COMPLETED
+                    task.completed_at = time.time()
+                    task.file_count = model.discarded_file_count
+                    task.match_count = len(model.results.groups)
+                    task.dupe_count = len(model.results.dupes)
+
+                    if not model.progress_window._job_running:
+                        app_state["scanning"] = False
+                        if app_state.get("status") == "scanning":
+                            app_state["status"] = "completed" if model.results.groups else "idle"
+                except Exception as e:
+                    print(f"[Web Server ERROR] Scan thread failed: {e}", flush=True)
+                    logging.error(f"Error in run_scan_async: {e}", exc_info=True)
+                    task.status = ScanTaskStatus.FAILED
+                    task.error_message = str(e)
+                    app_state["scanning"] = False
+                    app_state["status"] = "error"
+                    app_state["error"] = str(e)
+
+            app_state["status"] = "scanning"
+            app_state["scanning"] = True
+            app_state["progress"] = 0
+            app_state["progress_msg"] = f"Starting scan for '{name}'..."
+
+            scan_thread = threading.Thread(target=run_scan_async, daemon=True)
+            task._thread = scan_thread
+            scan_thread.start()
+
+            self.wfile.write(json.dumps(sanitize_utf8({"success": True, "task": task.to_dict()})).encode())
 
         elif path == "/api/scans/load":
             task_id = data.get("task_id")
