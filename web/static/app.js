@@ -382,6 +382,7 @@ async function browseFolders(path = "") {
 
         if (data.error) {
             console.error("Browse error:", data.error);
+            folderList.innerHTML = `<li style="color: var(--text-secondary); text-align: center; padding: 12px; font-size: 0.85rem;">⚠️ Cannot access folder</li>`;
             return;
         }
 
@@ -390,6 +391,11 @@ async function browseFolders(path = "") {
         currentDirSpan.title = currentBrowserPath;
 
         folderList.innerHTML = "";
+        if (!data.folders || data.folders.length === 0) {
+            folderList.innerHTML = `<li style="color: var(--text-secondary); text-align: center; padding: 12px; font-size: 0.85rem;">No subfolders found</li>`;
+            return;
+        }
+
         data.folders.forEach(f => {
             const isAdded = addedPaths.includes(f.path);
             const li = document.createElement("li");
@@ -409,6 +415,9 @@ async function browseFolders(path = "") {
         });
     } catch (err) {
         console.error("Browse folders failed:", err);
+        if (folderList) {
+            folderList.innerHTML = `<li style="color: var(--text-secondary); text-align: center; padding: 12px; font-size: 0.85rem;">Failed to load folders</li>`;
+        }
     }
 }
 

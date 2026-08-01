@@ -45,12 +45,14 @@ class ScanTask:
             except OSError:
                 db_size = 0
 
+        status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
+
         return {
             "task_id": self.task_id,
             "name": self.name,
             "db_path": self.db_path,
             "directories": self.directories,
-            "status": self.status,
+            "status": status_str,
             "progress_percentage": self.progress_percentage,
             "progress_message": self.progress_message,
             "error_message": self.error_message,

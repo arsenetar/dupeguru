@@ -446,21 +446,27 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             try:
                 p = Path(target_dir).expanduser().resolve()
                 contents = []
-                for entry in p.iterdir():
-                    if entry.is_dir() and not entry.name.startswith("."):
-                        contents.append({"name": entry.name, "path": str(entry)})
+                with os.scandir(str(p)) as it:
+                    for entry in it:
+                        try:
+                            if entry.is_dir(follow_symlinks=False) and not entry.name.startswith("."):
+                                contents.append({"name": entry.name, "path": entry.path})
+                        except Exception:
+                            pass
                 contents.sort(key=lambda x: x["name"].lower())
                 self.wfile.write(
                     json.dumps(
-                        {
-                            "current": str(p),
-                            "parent": str(p.parent) if p.parent != p else None,
-                            "folders": contents,
-                        }
+                        sanitize_utf8(
+                            {
+                                "current": str(p),
+                                "parent": str(p.parent) if p.parent != p else None,
+                                "folders": contents,
+                            }
+                        )
                     ).encode()
                 )
             except Exception as e:
-                self.wfile.write(json.dumps({"error": str(e)}).encode())
+                self.wfile.write(json.dumps(sanitize_utf8({"error": str(e)})).encode())
 
         elif path == "/api/cache/files":
             search = query.get("search", [""])[0]
