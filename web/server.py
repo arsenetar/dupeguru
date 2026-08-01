@@ -300,12 +300,31 @@ def pulse_loop(stop_event):
                     app_state["scanning"] = False
                     if app_state.get("status") == "scanning":
                         app_state["status"] = "completed"
+
+                    active_task_id = app_state.get("active_task_id")
+                    if active_task_id:
+                        task = task_registry.get_task(active_task_id)
+                        if task:
+                            task.status = ScanTaskStatus.COMPLETED
+                            task.completed_at = time.time()
+                            task.file_count = model.discarded_file_count
+                            task.match_count = len(model.results.groups)
+                            task.dupe_count = len(model.results.dupes)
                 else:
                     wait_ticks += 1
                     if wait_ticks > 30:  # 3 seconds fallback
                         app_state["scanning"] = False
                         if app_state.get("status") == "scanning":
                             app_state["status"] = "completed" if model.results.groups else "idle"
+                        active_task_id = app_state.get("active_task_id")
+                        if active_task_id:
+                            task = task_registry.get_task(active_task_id)
+                            if task:
+                                task.status = ScanTaskStatus.COMPLETED if model.results.groups else ScanTaskStatus.IDLE
+                                task.completed_at = time.time()
+                                task.file_count = model.discarded_file_count
+                                task.match_count = len(model.results.groups)
+                                task.dupe_count = len(model.results.dupes)
             except Exception as e:
                 logging.error(f"Error in pulse_loop: {e}")
                 app_state["scanning"] = False
@@ -677,6 +696,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
                 # Create task in registry for tracking
                 task = task_registry.create_task(scan_name, directories_list)
+                app_state["active_task_id"] = task.task_id
 
                 def run_scan_async():
                     task.status = ScanTaskStatus.RUNNING

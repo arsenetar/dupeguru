@@ -453,6 +453,7 @@ async function pollProgress() {
             isStopping = false;
             cancelScanBtn.disabled = false;
             progressContainer.classList.add("hidden");
+            loadMultiScans();
             if (state.status === "completed") {
                 loadResults();
             } else {
