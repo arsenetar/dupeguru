@@ -218,6 +218,11 @@ class Directories:
         self._dirs = [p for p in self._dirs if path not in p.parents]
         self._dirs.append(path)
 
+    def clear(self):
+        """Removes all directories and reset state mappings."""
+        self._dirs = []
+        self._states = {}
+
     @staticmethod
     def get_subfolders(path):
         """Returns a sorted list of paths corresponding to subfolders in ``path``.

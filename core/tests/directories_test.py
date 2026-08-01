@@ -674,3 +674,12 @@ def test_streamed_batch_scanning(tmpdir):
         assert file2 in paths
     finally:
         fs.filesdb.enable_directory_cache = False
+
+
+def test_directories_clear():
+    dirs = Directories()
+    p = Path(tempfile.gettempdir())
+    dirs.add_path(p)
+    assert len(dirs) == 1
+    dirs.clear()
+    assert len(dirs) == 0
