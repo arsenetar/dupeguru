@@ -121,28 +121,69 @@ function setupEventListeners() {
         });
     }
 
-    // Navigation Tabs and Cache controls
+    // Navigation Tabs setup
     const tabScan = document.getElementById("tab-scan");
+    const tabMultiscan = document.getElementById("tab-multiscan");
+    const tabCrossDb = document.getElementById("tab-cross-db");
     const tabCache = document.getElementById("tab-cache");
+
     const scanViewContent = document.getElementById("scan-view-content");
+    const multiscanContainer = document.getElementById("multiscan-container");
+    const crossDbContainer = document.getElementById("cross-db-container");
     const cacheContainer = document.getElementById("cache-container");
 
-    if (tabScan && tabCache && scanViewContent && cacheContainer) {
-        tabScan.addEventListener("click", () => {
-            tabScan.classList.add("active");
-            tabCache.classList.remove("active");
-            scanViewContent.classList.remove("hidden");
-            cacheContainer.classList.add("hidden");
-        });
+    function activateTab(activeTab, activeContainer) {
+        [tabScan, tabMultiscan, tabCrossDb, tabCache].forEach(t => t && t.classList.remove("active"));
+        [scanViewContent, multiscanContainer, crossDbContainer, cacheContainer].forEach(c => c && c.classList.add("hidden"));
+        if (activeTab) activeTab.classList.add("active");
+        if (activeContainer) activeContainer.classList.remove("hidden");
+    }
 
+    if (tabScan) {
+        tabScan.addEventListener("click", () => activateTab(tabScan, scanViewContent));
+    }
+    if (tabMultiscan) {
+        tabMultiscan.addEventListener("click", () => {
+            activateTab(tabMultiscan, multiscanContainer);
+            loadMultiScans();
+        });
+    }
+    if (tabCrossDb) {
+        tabCrossDb.addEventListener("click", () => {
+            activateTab(tabCrossDb, crossDbContainer);
+            loadCrossDBSelectionList();
+        });
+    }
+    if (tabCache) {
         tabCache.addEventListener("click", () => {
-            tabScan.classList.remove("active");
-            tabCache.classList.add("active");
-            scanViewContent.classList.add("hidden");
-            cacheContainer.classList.remove("hidden");
-            cacheOffset = 0;
+            activateTab(tabCache, cacheContainer);
             loadCache();
         });
+    }
+
+    // New Scan Modal listeners
+    const newScanBtn = document.getElementById("new-scan-task-btn");
+    const newScanModal = document.getElementById("new-scan-modal");
+    const cancelNewScanBtn = document.getElementById("cancel-new-scan-btn");
+    const submitNewScanBtn = document.getElementById("submit-new-scan-btn");
+
+    if (newScanBtn) {
+        newScanBtn.addEventListener("click", () => {
+            if (newScanModal) newScanModal.classList.remove("hidden");
+        });
+    }
+    if (cancelNewScanBtn) {
+        cancelNewScanBtn.addEventListener("click", () => {
+            if (newScanModal) newScanModal.classList.add("hidden");
+        });
+    }
+    if (submitNewScanBtn) {
+        submitNewScanBtn.addEventListener("click", launchNewDBScan);
+    }
+
+    const runCrossMatchBtn = document.getElementById("run-cross-match-btn");
+    if (runCrossMatchBtn) {
+        runCrossMatchBtn.addEventListener("click", runCrossMatch);
     }
 
     const cachePrevBtn = document.getElementById("cache-prev-btn");
@@ -767,4 +808,258 @@ function renderCachePagination() {
     info.textContent = `Page ${currentPage} of ${totalPages}`;
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
+}
+
+// Helper to escape HTML characters
+function escapeHtml(text) {
+    if (!text) return "";
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// 7. Multi-DB Dashboard Management
+async function loadMultiScans() {
+    const scansGrid = document.getElementById("scans-grid");
+    if (!scansGrid) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/scans`);
+        const tasks = await response.json();
+
+        scansGrid.innerHTML = "";
+
+        if (!tasks || tasks.length === 0) {
+            scansGrid.innerHTML = `<div class="welcome-card" style="grid-column: 1 / -1; padding: 48px; text-align: center;"><p style="color: var(--text-secondary);">No isolated database scan tasks found. Click '+ Launch New DB Scan' to start one.</p></div>`;
+            return;
+        }
+
+        tasks.forEach(task => {
+            const card = document.createElement("div");
+            card.className = "section-card";
+            card.style.position = "relative";
+            card.style.display = "flex";
+            card.style.flexDirection = "column";
+            card.style.gap = "12px";
+
+            let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
+            if (task.status === "completed") {
+                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
+            } else if (task.status === "failed") {
+                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(239, 68, 68, 0.2); color: #f87171;">FAILED</span>`;
+            }
+
+            const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
+
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
+                    ${statusBadge}
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); word-break: break-all;">
+                    <strong>DB File:</strong> ${escapeHtml(task.db_path)} (${sizeMb} MB)
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                    <strong>Directories:</strong> ${task.directories && task.directories.length ? task.directories.map(d => escapeHtml(d)).join(", ") : "All"}
+                </div>
+                <div style="display: flex; gap: 16px; font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+                    <span><strong>Matches:</strong> ${task.match_count || 0}</span>
+                    <span><strong>Dupes:</strong> ${task.dupe_count || 0}</span>
+                </div>
+                <div style="margin-top: 8px; display: flex; justify-content: flex-end;">
+                    <button class="btn danger-btn text-btn" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
+                </div>
+            `;
+
+            scansGrid.appendChild(card);
+        });
+    } catch (err) {
+        console.error("Failed to load multi-scans:", err);
+    }
+}
+
+async function launchNewDBScan() {
+    const nameInput = document.getElementById("new-scan-name-input");
+    const pathInput = document.getElementById("new-scan-path-input");
+    const modal = document.getElementById("new-scan-modal");
+
+    const name = nameInput.value.trim() || "Scan";
+    const path = pathInput.value.trim();
+
+    if (!path) {
+        showToast("Please enter a valid directory path.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/api/scans/create`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name, directories: [path] }),
+        });
+        const result = await response.json();
+        if (result.success) {
+            showToast(`Launched isolated scan: ${name}`);
+            if (modal) modal.classList.add("hidden");
+            nameInput.value = "";
+            pathInput.value = "";
+            loadMultiScans();
+        } else {
+            showToast(`Error: ${result.error || "Failed to launch scan"}`);
+        }
+    } catch (err) {
+        showToast(`Error: ${err.message}`);
+    }
+}
+
+async function deleteScanTask(taskId) {
+    if (!confirm("Are you sure you want to delete this database scan task?")) return;
+    try {
+        const response = await fetch(`${API_BASE}/api/scans/delete`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ task_id: taskId }),
+        });
+        const result = await response.json();
+        if (result.success) {
+            showToast("Database scan deleted.");
+            loadMultiScans();
+        }
+    } catch (err) {
+        showToast(`Failed to delete: ${err.message}`);
+    }
+}
+
+// 8. Cross-DB Deduplication Management
+async function loadCrossDBSelectionList() {
+    const listEl = document.getElementById("cross-db-selection-list");
+    const btn = document.getElementById("run-cross-match-btn");
+    if (!listEl) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/scans`);
+        const tasks = await response.json();
+
+        listEl.innerHTML = "";
+
+        if (!tasks || tasks.length === 0) {
+            listEl.innerHTML = `<p style="color: var(--text-secondary);">No database files found. Create scans first in the Multi-DB Dashboard.</p>`;
+            if (btn) btn.disabled = true;
+            return;
+        }
+
+        tasks.forEach(t => {
+            const label = document.createElement("label");
+            label.className = "pref-checkbox-label";
+            label.style.display = "flex";
+            label.style.alignItems = "center";
+            label.style.gap = "12px";
+            label.style.padding = "10px 14px";
+            label.style.background = "var(--bg-secondary)";
+            label.style.borderRadius = "8px";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = t.db_path;
+            checkbox.className = "cross-db-checkbox";
+
+            checkbox.addEventListener("change", updateCrossMatchButton);
+
+            const sizeMb = (t.db_size_bytes / (1024 * 1024)).toFixed(2);
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(` ${t.name} (${t.db_path}) — ${sizeMb} MB`));
+
+            listEl.appendChild(label);
+        });
+
+        updateCrossMatchButton();
+    } catch (err) {
+        console.error("Failed to load cross-DB selection:", err);
+    }
+}
+
+function updateCrossMatchButton() {
+    const btn = document.getElementById("run-cross-match-btn");
+    const checked = document.querySelectorAll(".cross-db-checkbox:checked");
+    if (btn) {
+        btn.disabled = checked.length < 2;
+    }
+}
+
+async function runCrossMatch() {
+    const checked = Array.from(document.querySelectorAll(".cross-db-checkbox:checked")).map(c => c.value);
+    const resultsWrapper = document.getElementById("cross-results-wrapper");
+    const resultsSummary = document.getElementById("cross-results-summary");
+
+    if (checked.length < 2) return;
+
+    try {
+        showToast("Comparing hashes across selected databases...");
+        const response = await fetch(`${API_BASE}/api/cross_scan`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ db_paths: checked }),
+        });
+        const result = await response.json();
+
+        if (result.success) {
+            resultsWrapper.classList.remove("hidden");
+            resultsSummary.textContent = `Found ${result.total_groups} duplicate groups matching across databases.`;
+            renderCrossResultsTable(result.groups);
+        } else {
+            showToast(`Error: ${result.error}`);
+        }
+    } catch (err) {
+        showToast(`Cross match error: ${err.message}`);
+    }
+}
+
+function renderCrossResultsTable(groups) {
+    const tbody = document.getElementById("cross-results-body");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    if (!groups || groups.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 32px; color: var(--text-secondary);">No cross-database duplicate matches found.</td></tr>`;
+        return;
+    }
+
+    groups.forEach(g => {
+        g.files.forEach((f, fIdx) => {
+            const row = document.createElement("tr");
+            if (fIdx === 0) {
+                row.style.borderTop = "2px solid var(--border-color)";
+            }
+
+            const groupTd = document.createElement("td");
+            groupTd.textContent = fIdx === 0 ? `#${g.group_id}` : "";
+
+            const dbTd = document.createElement("td");
+            dbTd.innerHTML = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${escapeHtml(f.db_name)}</span>`;
+
+            const pathTd = document.createElement("td");
+            pathTd.className = "path-cell";
+            pathTd.textContent = f.path;
+
+            const sizeTd = document.createElement("td");
+            sizeTd.textContent = (f.size / 1024).toFixed(1) + " KB";
+
+            const hashTd = document.createElement("td");
+            hashTd.style.fontFamily = "monospace";
+            hashTd.style.fontSize = "0.8rem";
+            hashTd.textContent = f.checksum ? f.checksum.substring(0, 16) + "..." : "N/A";
+
+            row.appendChild(groupTd);
+            row.appendChild(dbTd);
+            row.appendChild(pathTd);
+            row.appendChild(sizeTd);
+            row.appendChild(hashTd);
+
+            tbody.appendChild(row);
+        });
+    });
 }

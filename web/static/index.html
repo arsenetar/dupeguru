@@ -111,6 +111,8 @@
             <!-- Navigation Tabs -->
             <nav class="nav-tabs">
                 <button id="tab-scan" class="tab-btn active">Scan Console</button>
+                <button id="tab-multiscan" class="tab-btn">Multi-DB Dashboard</button>
+                <button id="tab-cross-db" class="tab-btn">Cross-DB Deduplication</button>
                 <button id="tab-cache" class="tab-btn">Cache Database Viewer</button>
             </nav>
 
@@ -175,6 +177,67 @@
                         <h2>Find duplicate files in style</h2>
                         <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Multi-DB Scans Dashboard -->
+            <div id="multiscan-container" class="multiscan-container hidden">
+                <header class="cache-header">
+                    <div class="cache-header-left">
+                        <h1>Multi-Database Scans Dashboard</h1>
+                        <p>Manage isolated concurrent database scans</p>
+                    </div>
+                    <div class="cache-controls">
+                        <button id="new-scan-task-btn" class="btn primary-btn">+ Launch New DB Scan</button>
+                    </div>
+                </header>
+
+                <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
+                    <!-- Rendered dynamically as cards -->
+                </div>
+            </div>
+
+            <!-- Cross-DB Deduplication -->
+            <div id="cross-db-container" class="cross-db-container hidden">
+                <header class="cache-header">
+                    <div class="cache-header-left">
+                        <h1>Cross-Database Deduplication</h1>
+                        <p>Compare file hashes across multiple isolated databases without re-reading files from disk</p>
+                    </div>
+                    <div class="cache-controls">
+                        <button id="run-cross-match-btn" class="btn accent-btn" disabled>Compare Selected Databases</button>
+                    </div>
+                </header>
+
+                <div class="section-card" style="margin-bottom: 24px;">
+                    <h3>Select Databases to Compare</h3>
+                    <div id="cross-db-selection-list" class="cross-db-selection-list" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Cross-DB Results Table -->
+                <div id="cross-results-wrapper" class="table-wrapper hidden">
+                    <header class="results-header" style="margin-bottom: 16px;">
+                        <div>
+                            <h2>Cross-DB Duplicate Groups</h2>
+                            <p id="cross-results-summary">Select 2 or more databases and click 'Compare Selected Databases'.</p>
+                        </div>
+                    </header>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th width="80">Group #</th>
+                                <th>Database Origin</th>
+                                <th>File Path</th>
+                                <th width="120">Size</th>
+                                <th width="200">Hash Checksum</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cross-results-body">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -246,6 +309,29 @@
 
             <div class="modal-actions">
                 <button id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Launch New DB Scan Modal -->
+    <div id="new-scan-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <h3>Launch New Isolated DB Scan</h3>
+            <p style="margin-bottom: 16px; color: var(--text-secondary);">Specify scan name and target directory path:</p>
+
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Scan / DB Name</label>
+                <input type="text" id="new-scan-name-input" class="input-field" placeholder="e.g. Photos_2024" style="width: 100%;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Target Directory Path</label>
+                <input type="text" id="new-scan-path-input" class="input-field" placeholder="/path/to/scan" style="width: 100%;">
+            </div>
+
+            <div class="modal-actions" style="display: flex; gap: 8px; justify-content: flex-end;">
+                <button id="cancel-new-scan-btn" class="btn secondary-btn">Cancel</button>
+                <button id="submit-new-scan-btn" class="btn primary-btn">Launch Scan</button>
             </div>
         </div>
     </div>
