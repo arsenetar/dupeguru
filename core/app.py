@@ -851,8 +851,16 @@ class DupeGuru(Broadcaster):
 
                         # Process in size batches
                         try:
-                            for idx in range(0, len(candidate_sizes), batch_size):
+                            total_sizes = len(candidate_sizes)
+                            for idx in range(0, total_sizes, batch_size):
                                 j.check_if_cancelled()
+                                progress = int((idx / max(total_sizes, 1)) * 100)
+                                j.set_progress(
+                                    progress,
+                                    tr("Hashing & comparing duplicate candidates ({}/{} size groups)...").format(
+                                        idx, total_sizes
+                                    ),
+                                )
                                 size_batch = candidate_sizes[idx : idx + batch_size]
 
                                 batch_files = []

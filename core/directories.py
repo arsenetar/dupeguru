@@ -109,21 +109,6 @@ class Directories:
                 if rust_files:
                     fs.filesdb.snapshot_files_batch(rust_files)
                     fs.filesdb.mark_directory_scanned(root_path)
-                    cache_count = 0
-                    for f_data in fs.filesdb.get_files_in_directory(root_path):
-                        cache_count += 1
-                        if cache_count % 1000 == 0:
-                            j.check_if_cancelled()
-                            j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
-                        p = fs.Path(f_data["path"])
-                        file = fs.get_file(p, fileclasses=fileclasses, skip_disk_check=True)
-                        if file:
-                            file.size = f_data["size"]
-                            file.mtime = f_data["mtime_ns"] / 1e9
-                            state = self.get_state(root_path)
-                            file.is_ref = state == DirectoryState.REFERENCE
-                            yield file
-                    return
             except Exception as e:
                 logging.warning(f"Rust parallel crawler fallback: {e}")
 

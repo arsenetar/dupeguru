@@ -240,12 +240,23 @@ class SQLiteCacheEngine(CacheEngine):
                 self.conn.close()
 
     def clear(self) -> None:
-        with self.lock, self.conn as conn:
-            conn.execute(self.drop_table_query)
-            conn.execute(self.drop_dir_table_query)
-            conn.execute(self.create_table_query)
-            conn.execute(self.create_dir_table_query)
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
+        with self.lock:
+            if self.conn:
+                try:
+                    self.conn.execute("DELETE FROM files;")
+                    self.conn.execute("DELETE FROM scanned_directories;")
+                    self.conn.execute("VACUUM;")
+                    self.conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
+                except Exception as e:
+                    logging.warning(f"Error clearing SQLite cache via VACUUM: {e}")
+                    try:
+                        self.conn.execute(self.drop_table_query)
+                        self.conn.execute(self.drop_dir_table_query)
+                        self.conn.execute(self.create_table_query)
+                        self.conn.execute(self.create_dir_table_query)
+                        self.conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
+                    except Exception:
+                        pass
 
     def commit(self) -> None:
         with self.lock:

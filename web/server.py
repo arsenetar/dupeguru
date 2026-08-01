@@ -34,16 +34,21 @@ def get_appdata_pure_python(portable=False):
     home = os.path.expanduser("~")
     if system == "Windows":
         appdata = os.environ.get("APPDATA")
-        if appdata:
-            return os.path.join(appdata, "de-dup")
-        return os.path.join(home, "AppData", "Roaming", "de-dup")
+        base = os.path.join(appdata, "de-dup") if appdata else os.path.join(home, "AppData", "Roaming", "de-dup")
+        old_base = (
+            os.path.join(appdata, "dupeGuru") if appdata else os.path.join(home, "AppData", "Roaming", "dupeGuru")
+        )
     elif system == "Darwin":
-        return os.path.join(home, "Library", "Application Support", "de-dup")
+        base = os.path.join(home, "Library", "Application Support", "de-dup")
+        old_base = os.path.join(home, "Library", "Application Support", "dupeGuru")
     else:
         data_home = os.environ.get("XDG_DATA_HOME")
-        if data_home:
-            return os.path.join(data_home, "de-dup")
-        return os.path.join(home, ".local/share", "de-dup")
+        base = os.path.join(data_home, "de-dup") if data_home else os.path.join(home, ".local/share", "de-dup")
+        old_base = os.path.join(data_home, "dupeGuru") if data_home else os.path.join(home, ".local/share", "dupeGuru")
+
+    if not os.path.exists(base) and os.path.exists(old_base):
+        return old_base
+    return base
 
 
 def special_folder_path_pure_python(special_folder, portable=False):
