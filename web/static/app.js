@@ -226,6 +226,11 @@ function setupEventListeners() {
         });
     }
 
+    const runCrossMatchBtn = document.getElementById("run-cross-match-btn");
+    if (runCrossMatchBtn) {
+        runCrossMatchBtn.addEventListener("click", runCrossMatch);
+    }
+
     const cachePrevBtn = document.getElementById("cache-prev-btn");
     const cacheNextBtn = document.getElementById("cache-next-btn");
     const cacheSearchInput = document.getElementById("cache-search");
@@ -1069,7 +1074,10 @@ async function runCrossMatch() {
     const resultsWrapper = document.getElementById("cross-results-wrapper");
     const resultsSummary = document.getElementById("cross-results-summary");
 
-    if (checked.length < 2) return;
+    if (checked.length < 2) {
+        showToast("Please select at least 2 database files to compare.");
+        return;
+    }
 
     try {
         showToast("Comparing hashes across selected databases...");
@@ -1081,8 +1089,18 @@ async function runCrossMatch() {
         const result = await response.json();
 
         if (result.success) {
-            resultsWrapper.classList.remove("hidden");
-            resultsSummary.textContent = `Found ${result.total_groups} duplicate groups matching across databases.`;
+            if (resultsWrapper) resultsWrapper.classList.remove("hidden");
+            if (result.total_groups > 0) {
+                if (resultsSummary) {
+                    resultsSummary.textContent = `Completed cross-DB comparison: Found ${result.total_groups} duplicate groups matching across ${checked.length} databases.`;
+                }
+                showToast(`Found ${result.total_groups} cross-database duplicate groups.`);
+            } else {
+                if (resultsSummary) {
+                    resultsSummary.textContent = `Completed cross-DB comparison across ${checked.length} databases: No matching duplicate files found.`;
+                }
+                showToast("Comparison complete: No cross-database duplicates found.");
+            }
             renderCrossResultsTable(result.groups);
         } else {
             showToast(`Error: ${result.error}`);
