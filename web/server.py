@@ -251,7 +251,11 @@ def safe_path_exists(path_str, timeout=1.0):
 def load_selected_directories():
     stored = web_view.get_default("SelectedDirectories")
     if stored and isinstance(stored, list):
-        for path_str in stored:
+        from core.task_registry import minimize_directories
+
+        min_stored = minimize_directories(stored)
+        model.directories.clear()
+        for path_str in min_stored:
             if safe_path_exists(path_str, timeout=1.0):
                 try:
                     from core.directories import AlreadyThereError
@@ -261,6 +265,7 @@ def load_selected_directories():
                     pass
                 except Exception as e:
                     logging.error(f"Failed to restore directory {path_str}: {e}")
+        save_selected_directories()
 
 
 def sanitize_utf8(obj):
@@ -816,6 +821,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         model.directories.clear()
 
                     model.directories.add_path(Path(path_str))
+
+                    from core.task_registry import minimize_directories
+
+                    min_dirs = minimize_directories([str(d) for d in model.directories])
+                    model.directories.clear()
+                    for md in min_dirs:
+                        try:
+                            model.directories.add_path(Path(md))
+                        except Exception:
+                            pass
+
                     save_selected_directories()
                     self.wfile.write(json.dumps({"success": True}).encode())
                 except AlreadyThereError:
