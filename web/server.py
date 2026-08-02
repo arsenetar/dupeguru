@@ -701,6 +701,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     fs.filesdb.enable_directory_cache = True
                     app_state["active_task_id"] = task.task_id
                     app_state["progress_msg"] = f"Loading results for '{task.name}'..."
+                    if hasattr(model, "progress_window") and hasattr(model.progress_window, "progressdesc_textfield"):
+                        model.progress_window.progressdesc_textfield.value = f"Loading results for '{task.name}'..."
 
                     if not task.directories or len(task.directories) > 10:
                         try:
