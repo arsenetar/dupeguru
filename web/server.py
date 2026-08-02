@@ -433,6 +433,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         if path == "/api/status":
+            is_job_active = app_state["scanning"] or getattr(model.progress_window, "_job_running", False)
+            if not is_job_active and app_state["status"] == "scanning":
+                app_state["status"] = (
+                    "completed"
+                    if (model.results and hasattr(model.results, "groups") and model.results.groups)
+                    else "idle"
+                )
+
             targets = [str(d) for d in model.directories]
             active_id = app_state.get("active_task_id")
             if not active_id:
@@ -833,6 +841,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             pass
 
                     save_selected_directories()
+                    if not getattr(model.progress_window, "_job_running", False):
+                        app_state["scanning"] = False
+                        if app_state["status"] == "scanning":
+                            app_state["status"] = "idle"
                     self.wfile.write(json.dumps({"success": True}).encode())
                 except AlreadyThereError:
                     self.wfile.write(
