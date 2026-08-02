@@ -463,9 +463,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Task not found"}).encode())
 
         elif path == "/api/directories":
+            from core.task_registry import minimize_directories
+
             dirs = []
-            for d in model.directories:
-                dirs.append({"path": str(d), "state": model.directories.get_state(d)})
+            min_paths = minimize_directories([str(d) for d in model.directories])
+            for d in min_paths:
+                dirs.append({"path": d, "state": model.directories.get_state(Path(d))})
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/browse":
