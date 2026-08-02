@@ -552,9 +552,15 @@ async function pollProgress() {
             isStopping = false;
             cancelScanBtn.disabled = false;
             progressContainer.classList.add("hidden");
+            hideToast();
             loadMultiScans();
             if (state.status === "completed") {
-                loadResults();
+                await loadResults();
+                if (resultsContainer) {
+                    resultsContainer.classList.remove("hidden");
+                    resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                if (welcomeContainer) welcomeContainer.classList.add("hidden");
             } else {
                 welcomeContainer.classList.remove("hidden");
                 resultsContainer.classList.add("hidden");
@@ -885,12 +891,21 @@ function showToast(message, persistent = false) {
         toast.timeoutId = null;
     }
 
-    if (!persistent) {
-        toast.timeoutId = setTimeout(() => {
-            toast.classList.add("hidden");
-            toast.timeoutId = null;
-        }, 3000);
+    const duration = persistent ? 8000 : 3500;
+    toast.timeoutId = setTimeout(() => {
+        toast.classList.add("hidden");
+        toast.timeoutId = null;
+    }, duration);
+}
+
+function hideToast() {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    if (toast.timeoutId) {
+        clearTimeout(toast.timeoutId);
+        toast.timeoutId = null;
     }
+    toast.classList.add("hidden");
 }
 
 // 6. Cache Database Viewer Management
@@ -1129,6 +1144,7 @@ async function viewTaskResults(taskId) {
             } else {
                 await loadResults();
                 await loadMultiScans();
+                hideToast();
                 if (resultsContainer) {
                     resultsContainer.classList.remove("hidden");
                     resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
