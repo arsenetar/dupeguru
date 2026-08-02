@@ -97,6 +97,11 @@ function setupEventListeners() {
         });
     }
 
+    const clearAllDirsBtn = document.getElementById("clear-all-dirs-btn");
+    if (clearAllDirsBtn) {
+        clearAllDirsBtn.addEventListener("click", clearAllDirectories);
+    }
+
     if (browserUpBtn) {
         browserUpBtn.addEventListener("click", () => {
             if (currentBrowserPath && currentBrowserPath.includes("/")) {
@@ -428,6 +433,25 @@ async function removeDirectory(index) {
         }
     } catch (err) {
         console.error("Failed to remove directory:", err);
+    }
+}
+
+async function clearAllDirectories() {
+    if (!confirm("Are you sure you want to remove all target directories from the list?")) return;
+    try {
+        const response = await fetch(`${API_BASE}/api/directories?clear_all=true`, {
+            method: "DELETE",
+        });
+        const result = await response.json();
+        if (result.success) {
+            await loadDirectories();
+            await browseFolders(currentBrowserPath);
+            showToast("All target directories removed.");
+        } else {
+            showToast(`Failed to clear directories: ${result.error}`);
+        }
+    } catch (err) {
+        showToast(`Failed to clear directories: ${err.message}`);
     }
 }
 

@@ -45,7 +45,10 @@
 
             <!-- Added directories -->
             <div class="section-card">
-                <h3>Target Directories</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h3 style="margin: 0;">Target Directories</h3>
+                    <button id="clear-all-dirs-btn" class="btn text-btn danger-btn" style="font-size: 0.78rem; padding: 2px 8px;" title="Remove all target directories">🗑️ Clear All</button>
+                </div>
                 <ul id="directories-list" class="directories-list">
                     <!-- Loaded dynamically -->
                 </ul>

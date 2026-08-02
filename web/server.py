@@ -1006,7 +1006,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         if path == "/api/directories":
             index = int(query.get("index", [-1])[0])
-            if 0 <= index < len(model.directories):
+            clear_all = query.get("clear_all", ["false"])[0].lower() == "true"
+            if clear_all:
+                model.directories.clear()
+                save_selected_directories()
+                self.wfile.write(json.dumps({"success": True}).encode())
+            elif 0 <= index < len(model.directories):
                 del model.directories[index]
                 save_selected_directories()
                 self.wfile.write(json.dumps({"success": True}).encode())
