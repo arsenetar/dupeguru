@@ -400,23 +400,23 @@ async function loadDirectories() {
     }
 }
 
-async function addDirectory(path) {
+async function addDirectory(path, clearExisting = true) {
     try {
         const response = await fetch(`${API_BASE}/api/directories`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ path: path })
+            body: JSON.stringify({ path: path, clear_existing: clearExisting })
         });
         const result = await response.json();
         if (result.success) {
             await loadDirectories();
             await browseFolders(currentBrowserPath);
-            showToast("Directory added successfully!");
+            showToast("Target directory set successfully!");
         } else {
-            alert("Error adding path: " + (result.error || "Invalid path"));
+            alert("Error setting target path: " + (result.error || "Invalid path"));
         }
     } catch (err) {
-        console.error("Failed to add directory:", err);
+        console.error("Failed to set target directory:", err);
     }
 }
 
@@ -486,7 +486,12 @@ async function browseFolders(path = "") {
             if (isAdded) {
                 actionHtml = `<span class="folder-status added">✓ Added</span>`;
             } else {
-                actionHtml = `<span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}')">Add</span>`;
+                actionHtml = `
+                    <div style="display: flex; gap: 4px; align-items: center;">
+                        <span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}', true)" title="Set as main target directory">Add</span>
+                        <span class="folder-select" onclick="addDirectory('${escapeJS(f.path)}', false)" title="Append to target directories list" style="padding: 2px 6px; font-weight: bold;">+</span>
+                    </div>
+                `;
             }
 
             li.innerHTML = `
