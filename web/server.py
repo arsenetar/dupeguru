@@ -741,6 +741,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         app_state["status"] = "completed"
                         app_state["scanning"] = False
                         app_state["progress_msg"] = ""
+                        self.wfile.write(
+                            json.dumps(
+                                sanitize_utf8({"success": True, "is_scanning": False, "task": task.to_dict()})
+                            ).encode()
+                        )
                     else:
                         model.directories.clear()
                         for d in task.directories:
