@@ -117,6 +117,50 @@ function setupEventListeners() {
         });
     }
 
+    const viewCardsBtn = document.getElementById("scans-view-cards-btn");
+    const viewTableBtn = document.getElementById("scans-view-table-btn");
+    const toggleScansBtn = document.getElementById("toggle-multiscan-btn");
+    const searchScansInput = document.getElementById("search-scans-input");
+    const scansWrapper = document.getElementById("scans-content-wrapper");
+
+    if (viewCardsBtn && viewTableBtn) {
+        viewCardsBtn.addEventListener("click", () => {
+            scansViewMode = "cards";
+            viewCardsBtn.style.background = "var(--accent)";
+            viewCardsBtn.style.color = "#fff";
+            viewTableBtn.style.background = "transparent";
+            viewTableBtn.style.color = "var(--text-secondary)";
+            loadMultiScans();
+        });
+        viewTableBtn.addEventListener("click", () => {
+            scansViewMode = "table";
+            viewTableBtn.style.background = "var(--accent)";
+            viewTableBtn.style.color = "#fff";
+            viewCardsBtn.style.background = "transparent";
+            viewCardsBtn.style.color = "var(--text-secondary)";
+            loadMultiScans();
+        });
+    }
+
+    if (toggleScansBtn && scansWrapper) {
+        toggleScansBtn.addEventListener("click", () => {
+            isScansSectionCollapsed = !isScansSectionCollapsed;
+            if (isScansSectionCollapsed) {
+                scansWrapper.style.display = "none";
+                toggleScansBtn.textContent = "▲ Show DBs";
+            } else {
+                scansWrapper.style.display = "block";
+                toggleScansBtn.textContent = "▼ Hide DBs";
+            }
+        });
+    }
+
+    if (searchScansInput) {
+        searchScansInput.addEventListener("input", () => {
+            loadMultiScans();
+        });
+    }
+
     const modeResume = document.getElementById("mode-resume");
     const modeFresh = document.getElementById("mode-fresh");
     const cancelModalBtn = document.getElementById("cancel-modal-btn");
@@ -929,74 +973,176 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
+// Multi-DB View Mode & Collapse State
+let scansViewMode = "cards";
+let isScansSectionCollapsed = false;
+
 // 7. Multi-DB Dashboard Management
 async function loadMultiScans() {
     const scansGrid = document.getElementById("scans-grid");
+    const scansTableContainer = document.getElementById("scans-table-container");
+    const scansTableBody = document.getElementById("scans-table-body");
+    const countBadge = document.getElementById("scans-count-badge");
+    const searchInput = document.getElementById("search-scans-input");
+
     if (!scansGrid) return;
 
     try {
-        const response = await fetch(`${API_BASE}/api/scans`);
+        const response = await fetch(`${API_BASE}/api/scans?_t=${Date.now()}`);
         const tasks = await response.json();
 
-        scansGrid.innerHTML = "";
+        if (countBadge) countBadge.textContent = tasks ? tasks.length : 0;
 
-        if (!tasks || tasks.length === 0) {
-            scansGrid.innerHTML = `<div style="grid-column: 1 / -1; color: var(--text-secondary); font-size: 0.9rem; padding: 12px 0;">No scan databases created yet. Add directories in the sidebar and click <strong>Start Duplicate Scan</strong>.</div>`;
-            return;
-        }
+        const filterQuery = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        const filteredTasks = (tasks || []).filter(t => {
+            if (!filterQuery) return true;
+            return (
+                (t.name && t.name.toLowerCase().includes(filterQuery)) ||
+                (t.db_path && t.db_path.toLowerCase().includes(filterQuery)) ||
+                (t.directories && t.directories.some(d => d.toLowerCase().includes(filterQuery)))
+            );
+        });
 
-        tasks.forEach(task => {
-            const card = document.createElement("div");
-            card.className = "section-card";
-            card.style.position = "relative";
-            card.style.display = "flex";
-            card.style.flexDirection = "column";
-            card.style.gap = "10px";
-            card.style.overflow = "hidden";
+        if (scansViewMode === "cards") {
+            scansGrid.classList.remove("hidden");
+            if (scansTableContainer) scansTableContainer.classList.add("hidden");
+            scansGrid.innerHTML = "";
 
-            let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
-            if (task.status === "completed") {
-                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
-            } else if (task.status === "needs_hashing") {
-                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">UNHASHED (${task.hashed_count || 0}/${task.file_count || 0})</span>`;
-            } else if (task.status === "failed") {
-                statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(239, 68, 68, 0.2); color: #f87171;">FAILED</span>`;
+            if (!filteredTasks || filteredTasks.length === 0) {
+                scansGrid.innerHTML = `<div style="grid-column: 1 / -1; color: var(--text-secondary); font-size: 0.9rem; padding: 12px 0;">${filterQuery ? "No matching scan databases found." : "No scan databases created yet."} Add directories in the sidebar and click <strong>Start Duplicate Scan</strong>.</div>`;
+                return;
             }
 
-            const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
-            const foldersHtml = task.directories && task.directories.length
-                ? task.directories.map(d => `<div style="padding: 2px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);">${escapeHtml(d)}</div>`).join("")
-                : "<em>All target directories</em>";
+            filteredTasks.forEach(task => {
+                const card = document.createElement("div");
+                card.className = "section-card";
+                card.style.position = "relative";
+                card.style.display = "flex";
+                card.style.flexDirection = "column";
+                card.style.gap = "10px";
+                card.style.overflow = "hidden";
 
-            card.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
-                    ${statusBadge}
-                </div>
-                <div style="font-size: 0.78rem; color: var(--text-secondary); word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.15); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color);">
-                    <strong style="color: var(--text-primary);">DB:</strong> ${escapeHtml(task.db_path)} <span style="color: var(--accent); margin-left: 4px;">(${sizeMb} MB)</span>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Folders:</span>
-                    <div style="max-height: 70px; overflow-y: auto; font-size: 0.78rem; font-family: monospace; color: var(--text-secondary); background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 6px; word-break: break-all; border: 1px solid rgba(255,255,255,0.05);">
-                        ${foldersHtml}
+                let statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
+                if (task.status === "completed") {
+                    statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
+                } else if (task.status === "needs_hashing") {
+                    statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">UNHASHED (${task.hashed_count || 0}/${task.file_count || 0})</span>`;
+                } else if (task.status === "failed") {
+                    statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: rgba(239, 68, 68, 0.2); color: #f87171;">FAILED</span>`;
+                }
+
+                const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
+                const foldersHtml = task.directories && task.directories.length
+                    ? task.directories.map(d => `<div style="padding: 2px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);">${escapeHtml(d)}</div>`).join("")
+                    : "<em>All target directories</em>";
+
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">${escapeHtml(task.name)}</h3>
+                        ${statusBadge}
                     </div>
-                </div>
-                <div style="display: flex; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); margin-top: auto; padding-top: 4px; flex-wrap: wrap;">
-                    <span><strong style="color: var(--text-primary);">Total Files:</strong> ${task.file_count || 0}</span>
-                    <span><strong style="color: var(--text-primary);">Hashed:</strong> ${task.hashed_count !== undefined ? task.hashed_count : task.file_count || 0}</span>
-                    <span><strong style="color: var(--text-primary);">Matches:</strong> ${task.match_count || 0}</span>
-                </div>
-                <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border-color);">
-                    <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
-                    <button class="btn danger-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
-                </div>
-            `;
+                    <div style="font-size: 0.78rem; color: var(--text-secondary); word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.15); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <strong style="color: var(--text-primary);">DB:</strong> ${escapeHtml(task.db_path)} <span style="color: var(--accent); margin-left: 4px;">(${sizeMb} MB)</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">Folders:</span>
+                        <div style="max-height: 70px; overflow-y: auto; font-size: 0.78rem; font-family: monospace; color: var(--text-secondary); background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 6px; word-break: break-all; border: 1px solid rgba(255,255,255,0.05);">
+                            ${foldersHtml}
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); margin-top: auto; padding-top: 4px; flex-wrap: wrap;">
+                        <span><strong style="color: var(--text-primary);">Total Files:</strong> ${task.file_count || 0}</span>
+                        <span><strong style="color: var(--text-primary);">Hashed:</strong> ${task.hashed_count !== undefined ? task.hashed_count : task.file_count || 0}</span>
+                        <span><strong style="color: var(--text-primary);">Matches:</strong> ${task.match_count || 0}</span>
+                    </div>
+                    <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border-color);">
+                        <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                        <button class="btn danger-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
+                    </div>
+                `;
 
-            scansGrid.appendChild(card);
-        });
+                scansGrid.appendChild(card);
+            });
+        } else {
+            // Table View Mode
+            scansGrid.classList.add("hidden");
+            if (scansTableContainer) scansTableContainer.classList.remove("hidden");
+            if (scansTableBody) {
+                scansTableBody.innerHTML = "";
+
+                if (!filteredTasks || filteredTasks.length === 0) {
+                    scansTableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px; color: var(--text-secondary);">${filterQuery ? "No matching scan databases found." : "No scan databases created yet."}</td></tr>`;
+                    return;
+                }
+
+                filteredTasks.forEach(task => {
+                    const row = document.createElement("tr");
+                    row.style.borderBottom = "1px solid var(--border-color)";
+
+                    let statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${task.status}</span>`;
+                    if (task.status === "completed") {
+                        statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
+                    } else if (task.status === "needs_hashing") {
+                        statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">UNHASHED</span>`;
+                    }
+
+                    const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
+                    const folderText = task.directories && task.directories.length ? task.directories.join(", ") : "All";
+
+                    row.innerHTML = `
+                        <td style="padding: 8px 12px; font-weight: 600; color: var(--text-primary);">${escapeHtml(task.name)}</td>
+                        <td style="padding: 8px 12px;">${statusBadge}</td>
+                        <td style="padding: 8px 12px; text-align: right; font-family: monospace;">${task.file_count || 0}</td>
+                        <td style="padding: 8px 12px; text-align: right; font-family: monospace;">${task.hashed_count !== undefined ? task.hashed_count : task.file_count || 0}</td>
+                        <td style="padding: 8px 12px; text-align: right; font-family: monospace; color: var(--accent); font-weight: 600;">${task.match_count || 0}</td>
+                        <td style="padding: 8px 12px; text-align: right; font-family: monospace;">${sizeMb} MB</td>
+                        <td style="padding: 8px 12px; font-family: monospace; font-size: 0.78rem; color: var(--text-secondary); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHtml(folderText)}">${escapeHtml(folderText)}</td>
+                        <td style="padding: 8px 12px; text-align: right;">
+                            <button class="btn secondary-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                            <button class="btn danger-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px; margin-left: 4px;" onclick="deleteScanTask('${task.task_id}')">Delete</button>
+                        </td>
+                    `;
+                    scansTableBody.appendChild(row);
+                });
+            }
+        }
     } catch (err) {
         console.error("Failed to load multi-scans:", err);
+    }
+}
+
+async function viewTaskResults(taskId) {
+    try {
+        showToast("Loading results for database task...");
+        const response = await fetch(`${API_BASE}/api/scans/load`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ task_id: taskId }),
+        });
+        const res = await response.json();
+        if (res.success) {
+            if (res.is_scanning) {
+                isScanning = true;
+                if (progressContainer) progressContainer.classList.remove("hidden");
+                if (welcomeContainer) welcomeContainer.classList.add("hidden");
+                if (resultsContainer) resultsContainer.classList.add("hidden");
+                showToast(`Hashing & scanning candidate files for '${res.task.name}'... Please wait.`, true);
+                pollProgress();
+            } else {
+                await loadResults();
+                await loadMultiScans();
+                if (resultsContainer) {
+                    resultsContainer.classList.remove("hidden");
+                    resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                if (welcomeContainer) welcomeContainer.classList.add("hidden");
+                if (progressContainer) progressContainer.classList.add("hidden");
+            }
+        } else {
+            showToast(`Error loading scan: ${res.error}`);
+        }
+    } catch (err) {
+        showToast(`Failed to load scan: ${err.message}`);
     }
 }
 

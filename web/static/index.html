@@ -123,20 +123,50 @@
             </nav>
 
             <div id="scan-view-content" class="scan-view-content">
-                <!-- Recent Scan Databases Bar -->
+                <!-- Recent Scan Databases Section -->
                 <div id="multiscan-section" class="section-card" style="margin-bottom: 20px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                         <div>
-                            <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Isolated Database Scans</h3>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Isolated Database Scans</h3>
+                                <span id="scans-count-badge" style="font-size: 0.75rem; background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 600;">0</span>
+                            </div>
                             <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-secondary);">Each scan creates its own SQLite database file for independent processing & deduplication.</p>
                         </div>
-                        <div style="display: flex; gap: 8px; align-items: center;">
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input id="search-scans-input" type="text" placeholder="🔍 Search DBs..." style="font-size: 0.8rem; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.25); color: var(--text-primary); width: 140px;" />
+                            <div style="display: flex; background: rgba(0,0,0,0.25); padding: 2px; border-radius: 6px; border: 1px solid var(--border-color);">
+                                <button id="scans-view-cards-btn" class="btn text-btn" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; background: var(--accent); color: #fff;">🎴 Cards</button>
+                                <button id="scans-view-table-btn" class="btn text-btn" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; color: var(--text-secondary);">≡ Table</button>
+                            </div>
+                            <button id="toggle-multiscan-btn" class="btn text-btn" style="font-size: 0.82rem; padding: 5px 10px;" title="Collapse or expand section">▼ Hide DBs</button>
                             <button id="new-scan-task-btn" class="btn primary-btn" style="font-size: 0.85rem;">+ Launch New DB Scan</button>
-                            <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄 Refresh</button>
+                            <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄</button>
                         </div>
                     </div>
-                    <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
-                        <!-- Rendered dynamically as cards -->
+                    <div id="scans-content-wrapper" style="max-height: 320px; overflow-y: auto; transition: max-height 0.3s ease;">
+                        <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                            <!-- Rendered dynamically as cards -->
+                        </div>
+                        <div id="scans-table-container" class="table-wrapper hidden" style="max-height: 280px; overflow-y: auto;">
+                            <table class="results-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                                <thead>
+                                    <tr style="background: rgba(0,0,0,0.2); color: var(--text-secondary); text-align: left;">
+                                        <th style="padding: 8px 12px;">Scan Name</th>
+                                        <th style="padding: 8px 12px;">Status</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Files</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Hashed</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Matches</th>
+                                        <th style="padding: 8px 12px; text-align: right;">DB Size</th>
+                                        <th style="padding: 8px 12px;">Target Folder(s)</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scans-table-body">
+                                    <!-- Rendered dynamically as table rows -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -351,6 +381,6 @@
     </div>
 
     <div id="toast" class="toast hidden"></div>
-    <script src="/static/app.js?v=10"></script>
+    <script src="/static/app.js?v=11"></script>
 </body>
 </html>
