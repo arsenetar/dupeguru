@@ -7,6 +7,7 @@
 
 import sys
 import os.path as op
+import os
 import gc
 
 from PyQt6.QtCore import QDir
@@ -31,6 +32,10 @@ else:
 global dgapp
 dgapp = None
 
+# force Qt6 to use the X11 interfaces since Fedora now runs wayland
+# and under wayland, Qt6 application window does not use the proper
+# styling.
+os.environ["QT_QPA_PLATFORM"] = "xcb"
 
 def signal_handler(sig, frame):
     global dgapp
