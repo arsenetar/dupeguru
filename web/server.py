@@ -680,6 +680,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     fs.filesdb.connect(task.db_path)
                     fs.filesdb.enable_directory_cache = True
                     app_state["active_task_id"] = task.task_id
+                    app_state["progress_msg"] = f"Loading results for '{task.name}'..."
 
                     if not task.directories or len(task.directories) > 10:
                         try:
@@ -699,6 +700,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     if hasattr(task, "results_groups") and task.results_groups is not None:
                         model.results.groups = task.results_groups
                         model._recreate_result_table()
+                        app_state["status"] = "completed"
+                        app_state["scanning"] = False
+                        app_state["progress_msg"] = ""
                     else:
                         model.directories.clear()
                         for d in task.directories:
@@ -735,6 +739,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             task.status = ScanTaskStatus.COMPLETED
                             task.is_loaded = True
                             task.save_metadata()
+                            app_state["status"] = "completed"
+                            app_state["scanning"] = False
+                            app_state["progress_msg"] = ""
 
                         self.wfile.write(
                             json.dumps(
