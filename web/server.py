@@ -806,10 +806,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/directories":
             path_str = data.get("path")
+            clear_existing = data.get("clear_existing", False)
             if path_str:
                 path_str = path_str.strip().strip("'\"")
                 try:
                     from core.directories import AlreadyThereError, InvalidPathError
+
+                    if clear_existing:
+                        model.directories.clear()
 
                     model.directories.add_path(Path(path_str))
                     save_selected_directories()
