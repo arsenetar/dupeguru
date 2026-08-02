@@ -6,10 +6,10 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.gui.tree import Tree, Node
+from dupeguru.hscommon.gui.tree import Tree, Node
 
-from core.directories import DirectoryState
-from core.gui.base import DupeGuruGUIObject
+from dupeguru.core.directories import DirectoryState
+from dupeguru.core.gui.base import DupeGuruGUIObject
 
 STATE_ORDER = [DirectoryState.NORMAL, DirectoryState.REFERENCE, DirectoryState.EXCLUDED]
 

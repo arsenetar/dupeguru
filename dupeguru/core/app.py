@@ -15,28 +15,28 @@ import shutil
 from pathlib import Path
 
 from send2trash import send2trash
-from hscommon.jobprogress import job
-from hscommon.notify import Broadcaster
-from hscommon.conflict import smart_move, smart_copy
-from hscommon.gui.progress_window import ProgressWindow
-from hscommon.util import delete_if_empty, first, escape, nonone, allsame
-from hscommon.trans import tr
-from hscommon import desktop
+from dupeguru.hscommon.jobprogress import job
+from dupeguru.hscommon.notify import Broadcaster
+from dupeguru.hscommon.conflict import smart_move, smart_copy
+from dupeguru.hscommon.gui.progress_window import ProgressWindow
+from dupeguru.hscommon.util import delete_if_empty, first, escape, nonone, allsame
+from dupeguru.hscommon.trans import tr
+from dupeguru.hscommon import desktop
 
-from core import se, me, pe
-from core.pe.photo import get_delta_dimensions
-from core.util import cmp_value, fix_surrogate_encoding
-from core import directories, results, export, fs, prioritize
-from core.ignore import IgnoreList
-from core.exclude import ExcludeDict as ExcludeList
-from core.scanner import ScanType
-from core.gui.deletion_options import DeletionOptions
-from core.gui.details_panel import DetailsPanel
-from core.gui.directory_tree import DirectoryTree
-from core.gui.ignore_list_dialog import IgnoreListDialog
-from core.gui.exclude_list_dialog import ExcludeListDialogCore
-from core.gui.problem_dialog import ProblemDialog
-from core.gui.stats_label import StatsLabel
+from dupeguru.core import se, me, pe
+from dupeguru.core.pe.photo import get_delta_dimensions
+from dupeguru.core.util import cmp_value, fix_surrogate_encoding
+from dupeguru.core import directories, results, export, fs, prioritize
+from dupeguru.core.ignore import IgnoreList
+from dupeguru.core.exclude import ExcludeDict as ExcludeList
+from dupeguru.core.scanner import ScanType
+from dupeguru.core.gui.deletion_options import DeletionOptions
+from dupeguru.core.gui.details_panel import DetailsPanel
+from dupeguru.core.gui.directory_tree import DirectoryTree
+from dupeguru.core.gui.ignore_list_dialog import IgnoreListDialog
+from dupeguru.core.gui.exclude_list_dialog import ExcludeListDialogCore
+from dupeguru.core.gui.problem_dialog import ProblemDialog
+from dupeguru.core.gui.stats_label import StatsLabel
 
 HAD_FIRST_LAUNCH_PREFERENCE = "HadFirstLaunch"
 DEBUG_MODE_PREFERENCE = "DebugMode"

@@ -6,13 +6,13 @@
 
 import sys
 
-from hscommon.jobprogress import job
-from hscommon.util import first
-from hscommon.testutil import eq_, log_calls
+from dupeguru.hscommon.jobprogress import job
+from dupeguru.hscommon.util import first
+from dupeguru.hscommon.testutil import eq_, log_calls
 
-from core.tests.base import NamedObject
-from core import engine
-from core.engine import (
+from dupeguru.core.tests.base import NamedObject
+from dupeguru.core import engine
+from dupeguru.core.engine import (
     get_match,
     getwords,
     Group,

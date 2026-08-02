@@ -15,7 +15,7 @@ from PyQt6.QtCore import (
     QItemSelection,
 )
 
-from qt.column import Columns, Column
+from dupeguru.qt.column import Columns, Column
 
 
 class Table(QAbstractTableModel):

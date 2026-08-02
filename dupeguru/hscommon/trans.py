@@ -15,7 +15,7 @@ import os
 import os.path as op
 from typing import Callable, Union
 
-from hscommon.plat import ISLINUX
+from dupeguru.hscommon.plat import ISLINUX
 
 _trfunc = None
 _trget = None

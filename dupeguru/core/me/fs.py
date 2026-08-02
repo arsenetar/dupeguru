@@ -7,10 +7,10 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import mutagen
-from hscommon.util import get_file_ext, format_size, format_time
+from dupeguru.hscommon.util import get_file_ext, format_size, format_time
 
-from core.util import format_timestamp, format_perc, format_words, format_dupe_count
-from core import fs
+from dupeguru.core.util import format_timestamp, format_perc, format_words, format_dupe_count
+from dupeguru.core import fs
 
 TAG_FIELDS = {
     "audiosize",

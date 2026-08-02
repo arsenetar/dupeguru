@@ -13,9 +13,9 @@ import os
 import logging
 from typing import List, Union
 
-from core.util import executable_folder
-from hscommon.util import first
-from hscommon.plat import ISWINDOWS
+from dupeguru.core.util import executable_folder
+from dupeguru.hscommon.util import first
+from dupeguru.hscommon.plat import ISWINDOWS
 
 from PyQt6.QtCore import QStandardPaths, QSettings
 from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication, QAction

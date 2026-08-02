@@ -10,7 +10,7 @@ from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QIcon, QPixmap, QPainter, QPalette
 from PyQt6.QtWidgets import QToolButton, QLineEdit, QStyle, QStyleOptionFrame
 
-from hscommon.trans import trget
+from dupeguru.hscommon.trans import trget
 
 tr = trget("ui")
 

@@ -21,9 +21,9 @@ from PyQt6.QtWidgets import (
     QPushButton,
 )
 
-from hscommon.trans import trget
-from hscommon.desktop import open_url
-from qt.util import horizontal_spacer
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon.desktop import open_url
+from dupeguru.qt.util import horizontal_spacer
 
 tr = trget("ui")
 

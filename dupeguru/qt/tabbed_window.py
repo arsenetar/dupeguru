@@ -13,12 +13,12 @@ from PyQt6.QtWidgets import (
     QTabBar,
     QStackedWidget,
 )
-from hscommon.trans import trget
-from qt.util import move_to_screen_center, create_actions
-from qt.directories_dialog import DirectoriesDialog
-from qt.result_window import ResultWindow
-from qt.ignore_list_dialog import IgnoreListDialog
-from qt.exclude_list_dialog import ExcludeListDialog
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.util import move_to_screen_center, create_actions
+from dupeguru.qt.directories_dialog import DirectoriesDialog
+from dupeguru.qt.result_window import ResultWindow
+from dupeguru.qt.ignore_list_dialog import IgnoreListDialog
+from dupeguru.qt.exclude_list_dialog import ExcludeListDialog
 
 tr = trget("ui")
 

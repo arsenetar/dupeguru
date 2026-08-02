@@ -9,9 +9,9 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QDockWidget, QWidget
 
-from qt.util import move_to_screen_center
-from qt.details_table import DetailsModel
-from hscommon.plat import ISLINUX
+from dupeguru.qt.util import move_to_screen_center
+from dupeguru.qt.details_table import DetailsModel
+from dupeguru.hscommon.plat import ISLINUX
 
 
 class DetailsDialog(QDockWidget):

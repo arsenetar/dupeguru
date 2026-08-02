@@ -11,8 +11,8 @@ from collections import namedtuple
 from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtGui import QAction
 
-from hscommon.trans import trget
-from hscommon.util import dedupe
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon.util import dedupe
 
 tr = trget("ui")
 

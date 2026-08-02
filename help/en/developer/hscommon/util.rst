@@ -1,5 +1,5 @@
 hscommon.util
 =============
 
-.. automodule:: hscommon.util
+.. automodule:: dupeguru.hscommon.util
     :members:

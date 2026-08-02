@@ -30,20 +30,20 @@ from PyQt6.QtWidgets import (
     QFormLayout,
 )
 from PyQt6.QtGui import QPixmap, QIcon, QShowEvent
-from hscommon import desktop, plat
+from dupeguru.hscommon import desktop, plat
 
-from hscommon.trans import trget
-from hscommon.plat import ISLINUX
-from qt.util import horizontal_wrap, move_to_screen_center
-from qt.preferences import get_langnames
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon.plat import ISLINUX
+from dupeguru.qt.util import horizontal_wrap, move_to_screen_center
+from dupeguru.qt.preferences import get_langnames
 from enum import Flag, auto
 
-from qt.preferences import Preferences
+from dupeguru.qt.preferences import Preferences
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from qt.app import DupeGuru
+    from dupeguru.qt.app import DupeGuru
 
 tr = trget("ui")
 

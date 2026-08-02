@@ -7,10 +7,10 @@
 from PyQt6.QtCore import Qt, QSize, pyqtSignal, pyqtSlot
 from PyQt6.QtWidgets import QAbstractItemView, QSizePolicy, QGridLayout, QSplitter, QFrame
 from PyQt6.QtGui import QResizeEvent
-from hscommon.trans import trget
-from qt.details_dialog import DetailsDialog as DetailsDialogBase
-from qt.details_table import DetailsTable
-from qt.pe.image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.details_dialog import DetailsDialog as DetailsDialogBase
+from dupeguru.qt.details_table import DetailsTable
+from dupeguru.qt.pe.image_viewer import ViewerToolBar, ScrollAreaImageViewer, ScrollAreaController
 
 tr = trget("ui")
 

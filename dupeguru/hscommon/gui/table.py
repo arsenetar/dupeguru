@@ -10,8 +10,8 @@ from collections.abc import MutableSequence
 from collections import namedtuple
 from typing import Any, List, Tuple, Union
 
-from hscommon.gui.base import GUIObject
-from hscommon.gui.selectable_list import Selectable
+from dupeguru.hscommon.gui.base import GUIObject
+from dupeguru.hscommon.gui.selectable_list import Selectable
 
 
 # We used to directly subclass list, but it caused problems at some point with deepcopy

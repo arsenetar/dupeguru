@@ -11,13 +11,13 @@ from PyQt6.QtWidgets import QCheckBox
 
 from PyQt6.QtWidgets import QLabel, QComboBox
 
-from hscommon.trans import trget
-from hscommon.plat import ISLINUX
-from core.scanner import ScanType
-from core.app import AppMode
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon.plat import ISLINUX
+from dupeguru.core.scanner import ScanType
+from dupeguru.core.app import AppMode
 
-from qt.preferences import Preferences
-from qt.preferences_dialog import PreferencesDialogBase, Sections
+from dupeguru.qt.preferences import Preferences
+from dupeguru.qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")
 

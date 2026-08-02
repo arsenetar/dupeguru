@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from typing import Callable, Dict, Union
 
-from hscommon.build import read_changelog_file, filereplace
+from dupeguru.hscommon.build import read_changelog_file, filereplace
 from sphinx.cmd.build import build_main as sphinx_build
 
 CHANGELOG_FORMAT = """

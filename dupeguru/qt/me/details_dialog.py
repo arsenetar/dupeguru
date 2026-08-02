@@ -7,9 +7,9 @@
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QAbstractItemView
 
-from hscommon.trans import trget
-from qt.details_dialog import DetailsDialog as DetailsDialogBase
-from qt.details_table import DetailsTable
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.details_dialog import DetailsDialog as DetailsDialogBase
+from dupeguru.qt.details_table import DetailsTable
 
 tr = trget("ui")
 

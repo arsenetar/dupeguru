@@ -46,9 +46,9 @@ def special_folder_path(special_folder: SpecialFolder, portable: bool = False) -
 try:
     from PyQt6.QtCore import QUrl, QStandardPaths
     from PyQt6.QtGui import QDesktopServices
-    from qt.util import get_appdata
-    from core.util import executable_folder
-    from hscommon.plat import ISWINDOWS, ISOSX
+    from dupeguru.qt.util import get_appdata
+    from dupeguru.core.util import executable_folder
+    from dupeguru.hscommon.plat import ISWINDOWS, ISOSX
     import subprocess
 
     def _open_url(url: str) -> None:

@@ -8,12 +8,12 @@ from typing import Callable
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, QWidget, QCheckBox
 
-from hscommon.trans import trget
-from core.app import AppMode
-from core.scanner import ScanType
-from qt.preferences import Preferences
+from dupeguru.hscommon.trans import trget
+from dupeguru.core.app import AppMode
+from dupeguru.core.scanner import ScanType
+from dupeguru.qt.preferences import Preferences
 
-from qt.preferences_dialog import PreferencesDialogBase, Sections
+from dupeguru.qt.preferences_dialog import PreferencesDialogBase, Sections
 
 tr = trget("ui")
 

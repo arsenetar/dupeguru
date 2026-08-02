@@ -1,5 +1,5 @@
 core.fs
 =======
 
-.. automodule:: core.fs
+.. automodule:: dupeguru.core.fs
     :members:

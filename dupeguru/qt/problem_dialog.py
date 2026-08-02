@@ -21,10 +21,10 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from core.gui.problem_dialog import ProblemDialog as ProblemDiaglogModel
-from qt.util import move_to_screen_center
-from hscommon.trans import trget
-from qt.problem_table import ProblemTable
+from dupeguru.core.gui.problem_dialog import ProblemDialog as ProblemDiaglogModel
+from dupeguru.qt.util import move_to_screen_center
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.problem_table import ProblemTable
 
 tr = trget("ui")
 

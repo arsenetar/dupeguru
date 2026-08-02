@@ -10,9 +10,9 @@ from io import StringIO
 
 from pytest import raises
 
-from hscommon.testutil import eq_
+from dupeguru.hscommon.testutil import eq_
 from pathlib import Path
-from hscommon.util import (
+from dupeguru.hscommon.util import (
     nonone,
     tryint,
     first,

@@ -12,13 +12,13 @@ import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from itertools import combinations
 
-from hscommon.util import extract, iterconsume
-from hscommon.trans import tr
-from hscommon.jobprogress import job
+from dupeguru.hscommon.util import extract, iterconsume
+from dupeguru.hscommon.trans import tr
+from dupeguru.hscommon.jobprogress import job
 
-from core.engine import Match
-from core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
-from core.pe.cache_sqlite import SqliteCache
+from dupeguru.core.engine import Match
+from dupeguru.core.pe.block import avgdiff, DifferentBlockCountError, NoBlocksError
+from dupeguru.core.pe.cache_sqlite import SqliteCache
 
 # OPTIMIZATION NOTES:
 # The bottleneck of the matching phase is CPU, which is why we use multiprocessing. However, another

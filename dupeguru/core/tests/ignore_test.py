@@ -8,9 +8,9 @@ import io
 from xml.etree import ElementTree as ET
 
 from pytest import raises
-from hscommon.testutil import eq_
+from dupeguru.hscommon.testutil import eq_
 
-from core.ignore import IgnoreList
+from dupeguru.core.ignore import IgnoreList
 
 
 def test_empty():

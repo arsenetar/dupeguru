@@ -10,11 +10,11 @@ from defusedxml.ElementTree import parse as safe_parse
 import logging
 from pathlib import Path
 
-from hscommon.jobprogress import job
-from hscommon.util import FileOrPath
-from hscommon.trans import tr
+from dupeguru.hscommon.jobprogress import job
+from dupeguru.hscommon.util import FileOrPath
+from dupeguru.hscommon.trans import tr
 
-from core import fs
+from dupeguru.core import fs
 
 __all__ = [
     "Directories",

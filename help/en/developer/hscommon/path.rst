@@ -1,5 +1,5 @@
 hscommon.path
 =============
 
-.. automodule:: hscommon.path
+.. automodule:: dupeguru.hscommon.path
     :members:

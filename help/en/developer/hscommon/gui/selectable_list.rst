@@ -1,7 +1,7 @@
 hscommon.gui.selectable_list
 ============================
 
-.. automodule:: hscommon.gui.selectable_list
+.. automodule:: dupeguru.hscommon.gui.selectable_list
 
     .. autosummary::
 

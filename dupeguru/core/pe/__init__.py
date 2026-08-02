@@ -1,4 +1,4 @@
-from core.pe import (  # noqa
+from dupeguru.core.pe import (  # noqa
     block,
     cache,
     exif,

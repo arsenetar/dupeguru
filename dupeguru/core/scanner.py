@@ -9,11 +9,11 @@ import re
 import os.path as op
 from collections import namedtuple
 
-from hscommon.jobprogress import job
-from hscommon.util import dedupe, rem_file_ext, get_file_ext
-from hscommon.trans import tr
+from dupeguru.hscommon.jobprogress import job
+from dupeguru.hscommon.util import dedupe, rem_file_ext, get_file_ext
+from dupeguru.hscommon.trans import tr
 
-from core import engine
+from dupeguru.core import engine
 
 # It's quite ugly to have scan types from all editions all put in the same class, but because there's
 # there will be some nasty bugs popping up (ScanType is used in core when in should exclusively be

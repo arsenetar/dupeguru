@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from core.tests.base import TestApp, GetTestGroups
+from dupeguru.core.tests.base import TestApp, GetTestGroups
 
 
 def app_with_results():

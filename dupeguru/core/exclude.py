@@ -2,7 +2,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from core.markable import Markable
+from dupeguru.core.markable import Markable
 from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import parse as safe_parse
 
@@ -13,8 +13,8 @@ import re
 from os import sep
 import logging
 import functools
-from hscommon.util import FileOrPath
-from hscommon.plat import ISWINDOWS
+from dupeguru.hscommon.util import FileOrPath
+from dupeguru.hscommon.plat import ISWINDOWS
 import time
 
 default_regexes = [

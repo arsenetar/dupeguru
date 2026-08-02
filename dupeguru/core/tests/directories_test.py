@@ -11,17 +11,17 @@ import shutil
 
 from pytest import raises
 from pathlib import Path
-from hscommon.testutil import eq_
-from hscommon.plat import ISWINDOWS
+from dupeguru.hscommon.testutil import eq_
+from dupeguru.hscommon.plat import ISWINDOWS
 
-from core.fs import File
-from core.directories import (
+from dupeguru.core.fs import File
+from dupeguru.core.directories import (
     Directories,
     DirectoryState,
     AlreadyThereError,
     InvalidPathError,
 )
-from core.exclude import ExcludeList, ExcludeDict
+from dupeguru.core.exclude import ExcludeList, ExcludeDict
 
 
 def create_fake_fs(rootpath):

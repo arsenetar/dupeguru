@@ -25,14 +25,14 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QPixmap, QIcon
 
-from hscommon.trans import trget
-from core.app import AppMode
-from qt.radio_box import RadioBox
-from qt.recent import Recent
-from qt.util import move_to_screen_center, create_actions
+from dupeguru.hscommon.trans import trget
+from dupeguru.core.app import AppMode
+from dupeguru.qt.radio_box import RadioBox
+from dupeguru.qt.recent import Recent
+from dupeguru.qt.util import move_to_screen_center, create_actions
 
-from qt import platform
-from qt.directories_model import DirectoriesModel, DirectoriesDelegate
+from dupeguru.qt import platform
+from dupeguru.qt.directories_model import DirectoriesModel, DirectoriesDelegate
 
 tr = trget("ui")
 

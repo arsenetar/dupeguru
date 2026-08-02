@@ -15,9 +15,9 @@ from PyQt6.QtWidgets import (
     QAbstractItemView,
 )
 
-from hscommon.trans import trget
-from qt.util import horizontal_wrap
-from qt.ignore_list_table import IgnoreListTable
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.util import horizontal_wrap
+from dupeguru.qt.ignore_list_table import IgnoreListTable
 
 tr = trget("ui")
 

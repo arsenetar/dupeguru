@@ -7,11 +7,11 @@
 import logging
 
 from pytest import raises, skip
-from hscommon.testutil import eq_
+from dupeguru.hscommon.testutil import eq_
 
 try:
-    from core.pe.cache import colors_to_bytes, bytes_to_colors
-    from core.pe.cache_sqlite import SqliteCache
+    from dupeguru.core.pe.cache import colors_to_bytes, bytes_to_colors
+    from dupeguru.core.pe.cache_sqlite import SqliteCache
 except ImportError:
     skip("Can't import the cache module, probably hasn't been compiled.")
 

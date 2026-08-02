@@ -9,8 +9,8 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
 
-from hscommon.trans import trget
-from qt.radio_box import RadioBox
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.radio_box import RadioBox
 
 tr = trget("ui")
 

@@ -1,5 +1,5 @@
 core.results
 ============
 
-.. automodule:: core.results
+.. automodule:: dupeguru.core.results
     :members:

@@ -10,11 +10,11 @@ import os.path as op
 from xml.etree import ElementTree as ET
 
 from pytest import raises
-from hscommon.testutil import eq_
-from hscommon.util import first
-from core import engine
-from core.tests.base import NamedObject, GetTestGroups, DupeGuru
-from core.results import Results
+from dupeguru.hscommon.testutil import eq_
+from dupeguru.hscommon.util import first
+from dupeguru.core import engine
+from dupeguru.core.tests.base import NamedObject, GetTestGroups, DupeGuru
+from dupeguru.core.results import Results
 
 
 class TestCaseResultsEmpty:

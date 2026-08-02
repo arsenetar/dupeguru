@@ -1,7 +1,7 @@
 hscommon.gui.column
 ============================
 
-.. automodule:: hscommon.gui.column
+.. automodule:: dupeguru.hscommon.gui.column
 
     .. autosummary::
 

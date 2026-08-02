@@ -6,9 +6,9 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon import desktop
+from dupeguru.hscommon import desktop
 
-from core.gui.problem_table import ProblemTable
+from dupeguru.core.gui.problem_table import ProblemTable
 
 
 class ProblemDialog:

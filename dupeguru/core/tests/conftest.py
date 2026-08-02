@@ -1,1 +1,1 @@
-from hscommon.testutil import app  # noqa
+from dupeguru.hscommon.testutil import app  # noqa

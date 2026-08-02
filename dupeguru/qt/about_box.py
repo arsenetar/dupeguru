@@ -10,14 +10,14 @@ from PyQt6.QtCore import Qt, QCoreApplication, QTimer
 from PyQt6.QtGui import QPixmap, QFont, QShowEvent
 from PyQt6.QtWidgets import QDialog, QDialogButtonBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QLabel, QWidget
 
-from core.util import check_for_update
-from qt.util import move_to_screen_center
-from hscommon.trans import trget
+from dupeguru.core.util import check_for_update
+from dupeguru.qt.util import move_to_screen_center
+from dupeguru.hscommon.trans import trget
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from qt.app import DupeGuru
+    from dupeguru.qt.app import DupeGuru
 
 tr = trget("ui")
 

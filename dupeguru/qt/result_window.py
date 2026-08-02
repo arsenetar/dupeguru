@@ -23,17 +23,17 @@ from PyQt6.QtWidgets import (
     QApplication,
 )
 
-from hscommon.trans import trget
-from qt.util import move_to_screen_center, horizontal_wrap, create_actions
-from qt.search_edit import SearchEdit
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.util import move_to_screen_center, horizontal_wrap, create_actions
+from dupeguru.qt.search_edit import SearchEdit
 
-from core.app import AppMode
-from qt.results_model import ResultsView
-from qt.stats_label import StatsLabel
-from qt.prioritize_dialog import PrioritizeDialog
-from qt.se.results_model import ResultsModel as ResultsModelStandard
-from qt.me.results_model import ResultsModel as ResultsModelMusic
-from qt.pe.results_model import ResultsModel as ResultsModelPicture
+from dupeguru.core.app import AppMode
+from dupeguru.qt.results_model import ResultsView
+from dupeguru.qt.stats_label import StatsLabel
+from dupeguru.qt.prioritize_dialog import PrioritizeDialog
+from dupeguru.qt.se.results_model import ResultsModel as ResultsModelStandard
+from dupeguru.qt.me.results_model import ResultsModel as ResultsModelMusic
+from dupeguru.qt.pe.results_model import ResultsModel as ResultsModelPicture
 
 tr = trget("ui")
 

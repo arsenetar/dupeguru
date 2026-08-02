@@ -23,10 +23,10 @@ from PyQt6.QtWidgets import (
     QSizePolicy,
 )
 
-from hscommon.trans import trget
-from qt.selectable_list import ComboboxModel, ListviewModel
-from qt.util import vertical_spacer
-from core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.selectable_list import ComboboxModel, ListviewModel
+from dupeguru.qt.util import vertical_spacer
+from dupeguru.core.gui.prioritize_dialog import PrioritizeDialog as PrioritizeDialogModel
 
 tr = trget("ui")
 

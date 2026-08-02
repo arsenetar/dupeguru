@@ -9,8 +9,8 @@
 import copy
 from typing import Any, List, Tuple, Union
 
-from hscommon.gui.base import GUIObject
-from hscommon.gui.table import GUITable
+from dupeguru.hscommon.gui.base import GUIObject
+from dupeguru.hscommon.gui.table import GUITable
 
 
 class Column:

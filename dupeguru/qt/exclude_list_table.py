@@ -5,9 +5,9 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QFontMetrics, QIcon, QColor
 
-from qt.column import Column
-from qt.table import Table
-from hscommon.trans import trget
+from dupeguru.qt.column import Column
+from dupeguru.qt.table import Table
+from dupeguru.hscommon.trans import trget
 
 tr = trget("ui")
 

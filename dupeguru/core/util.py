@@ -14,7 +14,7 @@ import semantic_version
 import logging
 from typing import Union
 
-from hscommon.util import format_time_decimal
+from dupeguru.hscommon.util import format_time_decimal
 
 
 def format_timestamp(t, delta):

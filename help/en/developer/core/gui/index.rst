@@ -1,7 +1,7 @@
 core.gui
 ========
 
-.. automodule:: core.gui
+.. automodule:: dupeguru.core.gui
     :members:
 
 .. toctree::

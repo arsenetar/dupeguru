@@ -9,9 +9,9 @@ import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QImage, QImageReader, QTransform
 
-from core.pe.photo import Photo as PhotoBase
+from dupeguru.core.pe.photo import Photo as PhotoBase
 
-from qt.pe.block import getblocks
+from dupeguru.qt.pe.block import getblocks
 
 
 class File(PhotoBase):

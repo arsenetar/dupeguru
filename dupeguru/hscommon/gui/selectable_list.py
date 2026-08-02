@@ -8,7 +8,7 @@
 
 from collections.abc import Sequence, MutableSequence
 
-from hscommon.gui.base import GUIObject
+from dupeguru.hscommon.gui.base import GUIObject
 
 
 class Selectable(Sequence):

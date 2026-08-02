@@ -16,8 +16,8 @@ from PyQt6.QtWidgets import (
     QAbstractScrollArea,
     QStyle,
 )
-from hscommon.trans import trget
-from hscommon.plat import ISLINUX
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon.plat import ISLINUX
 
 tr = trget("ui")
 

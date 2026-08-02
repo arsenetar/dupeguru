@@ -6,15 +6,15 @@
 
 import pytest
 
-from hscommon.jobprogress import job
+from dupeguru.hscommon.jobprogress import job
 from pathlib import Path
-from hscommon.testutil import eq_
+from dupeguru.hscommon.testutil import eq_
 
-from core import fs
-from core.engine import getwords, Match
-from core.ignore import IgnoreList
-from core.scanner import Scanner, ScanType
-from core.me.scanner import ScannerME
+from dupeguru.core import fs
+from dupeguru.core.engine import getwords, Match
+from dupeguru.core.ignore import IgnoreList
+from dupeguru.core.scanner import Scanner, ScanType
+from dupeguru.core.me.scanner import ScannerME
 
 
 # TODO update this to be able to inherit from fs.File

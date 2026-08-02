@@ -10,7 +10,7 @@ from PyQt6.QtCore import Qt, QAbstractTableModel
 from PyQt6.QtWidgets import QHeaderView, QTableView
 from PyQt6.QtGui import QFont, QBrush
 
-from hscommon.trans import trget
+from dupeguru.hscommon.trans import trget
 
 tr = trget("ui")
 

@@ -8,7 +8,7 @@
 
 import pytest
 
-from hscommon.conflict import (
+from dupeguru.hscommon.conflict import (
     get_conflicted_name,
     get_unconflicted_name,
     is_conflicted,
@@ -16,7 +16,7 @@ from hscommon.conflict import (
     smart_move,
 )
 from pathlib import Path
-from hscommon.testutil import eq_
+from dupeguru.hscommon.testutil import eq_
 
 
 class TestCaseGetConflictedName:

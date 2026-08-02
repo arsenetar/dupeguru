@@ -9,8 +9,8 @@
 import os.path as op
 from itertools import combinations
 
-from core.tests.base import TestApp, NamedObject, with_app, eq_
-from core.engine import Group, Match
+from dupeguru.core.tests.base import TestApp, NamedObject, with_app, eq_
+from dupeguru.core.engine import Group, Match
 
 no = NamedObject
 

@@ -8,10 +8,10 @@
 
 from operator import attrgetter
 
-from hscommon.gui.table import GUITable, Row
-from hscommon.gui.column import Columns
+from dupeguru.hscommon.gui.table import GUITable, Row
+from dupeguru.hscommon.gui.column import Columns
 
-from core.gui.base import DupeGuruGUIObject
+from dupeguru.core.gui.base import DupeGuruGUIObject
 
 
 class DupeRow(Row):

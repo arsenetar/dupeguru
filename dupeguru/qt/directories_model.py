@@ -17,8 +17,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QBrush
 
-from hscommon.trans import trget
-from qt.tree_model import RefNode, TreeModel
+from dupeguru.hscommon.trans import trget
+from dupeguru.qt.tree_model import RefNode, TreeModel
 
 tr = trget("ui")
 

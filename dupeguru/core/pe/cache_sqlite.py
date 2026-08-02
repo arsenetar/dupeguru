@@ -9,7 +9,7 @@ import os.path as op
 import logging
 import sqlite3 as sqlite
 
-from core.pe.cache import bytes_to_colors, colors_to_bytes
+from dupeguru.core.pe.cache import bytes_to_colors, colors_to_bytes
 
 
 class SqliteCache:

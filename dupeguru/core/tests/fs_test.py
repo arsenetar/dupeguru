@@ -10,10 +10,10 @@ import typing
 from os import urandom
 
 from pathlib import Path
-from hscommon.testutil import eq_
-from core.tests.directories_test import create_fake_fs
+from dupeguru.hscommon.testutil import eq_
+from dupeguru.core.tests.directories_test import create_fake_fs
 
-from core import fs
+from dupeguru.core import fs
 
 hasher: typing.Callable
 try:

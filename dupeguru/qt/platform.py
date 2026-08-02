@@ -5,7 +5,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import os.path as op
-from hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
+from dupeguru.hscommon.plat import ISWINDOWS, ISOSX, ISLINUX
 
 if op.exists(__file__):
     # We want to get the absolute path or our root folder. We know that in that folder we're

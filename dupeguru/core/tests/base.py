@@ -4,17 +4,17 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app  # noqa
+from dupeguru.hscommon.testutil import TestApp as TestAppBase, CallLogger, eq_, with_app  # noqa
 from pathlib import Path
-from hscommon.util import get_file_ext, format_size
-from hscommon.gui.column import Column
-from hscommon.jobprogress.job import nulljob, JobCancelled
+from dupeguru.hscommon.util import get_file_ext, format_size
+from dupeguru.hscommon.gui.column import Column
+from dupeguru.hscommon.jobprogress.job import nulljob, JobCancelled
 
-from core import engine, prioritize
-from core.engine import getwords
-from core.app import DupeGuru as DupeGuruBase
-from core.gui.result_table import ResultTable as ResultTableBase
-from core.gui.prioritize_dialog import PrioritizeDialog
+from dupeguru.core import engine, prioritize
+from dupeguru.core.engine import getwords
+from dupeguru.core.app import DupeGuru as DupeGuruBase
+from dupeguru.core.gui.result_table import ResultTable as ResultTableBase
+from dupeguru.core.gui.prioritize_dialog import PrioritizeDialog
 
 
 class DupeGuruView:

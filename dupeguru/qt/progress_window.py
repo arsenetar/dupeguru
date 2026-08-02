@@ -7,7 +7,7 @@
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QLabel, QProgressBar, QPushButton
 
-from hscommon.trans import tr
+from dupeguru.hscommon.trans import tr
 
 
 class ProgressWindow:

@@ -10,7 +10,7 @@ from PyQt6.QtCore import Qt, pyqtSignal, QModelIndex
 from PyQt6.QtGui import QBrush, QFont, QFontMetrics
 from PyQt6.QtWidgets import QTableView
 
-from qt.table import Table
+from dupeguru.qt.table import Table
 
 
 class ResultsModel(Table):

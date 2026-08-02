@@ -21,7 +21,7 @@ from threading import Lock
 from typing import Any, AnyStr, Union, Callable
 
 from pathlib import Path
-from hscommon.util import nonone, get_file_ext
+from dupeguru.hscommon.util import nonone, get_file_ext
 
 hasher: Callable
 try:

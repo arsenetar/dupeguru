@@ -9,9 +9,9 @@
 from collections import defaultdict
 from itertools import combinations
 
-from hscommon.trans import tr
+from dupeguru.hscommon.trans import tr
 
-from core.engine import Match
+from dupeguru.core.engine import Match
 
 
 def getmatches(files, match_scaled, j):

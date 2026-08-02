@@ -10,7 +10,7 @@ from threading import Thread
 import sys
 from typing import Callable, Tuple, Union
 
-from hscommon.jobprogress.job import Job, JobInProgressError, JobCancelled
+from dupeguru.hscommon.jobprogress.job import Job, JobInProgressError, JobCancelled
 
 
 class ThreadedJobPerformer:

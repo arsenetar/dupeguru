@@ -5,9 +5,9 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from typing import Callable, Tuple, Union
-from hscommon.jobprogress.performer import ThreadedJobPerformer
-from hscommon.gui.base import GUIObject
-from hscommon.gui.text_field import TextField
+from dupeguru.hscommon.jobprogress.performer import ThreadedJobPerformer
+from dupeguru.hscommon.gui.base import GUIObject
+from dupeguru.hscommon.gui.text_field import TextField
 
 
 class ProgressWindowView:

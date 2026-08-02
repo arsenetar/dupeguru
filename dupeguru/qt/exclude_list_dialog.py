@@ -16,10 +16,10 @@ from PyQt6.QtWidgets import (
     QSizePolicy,
     QHeaderView,
 )
-from qt.exclude_list_table import ExcludeListTable
+from dupeguru.qt.exclude_list_table import ExcludeListTable
 
-from core.exclude import AlreadyThereException
-from hscommon.trans import trget
+from dupeguru.core.exclude import AlreadyThereException
+from dupeguru.hscommon.trans import trget
 
 tr = trget("ui")
 

@@ -4,7 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from core.pe._cache import bytes_to_colors  # noqa
+from dupeguru.core.pe._cache import bytes_to_colors  # noqa
 
 
 def colors_to_bytes(colors):

@@ -7,8 +7,8 @@
 
 import os
 
-from hscommon.gui.base import GUIObject
-from hscommon.trans import tr
+from dupeguru.hscommon.gui.base import GUIObject
+from dupeguru.hscommon.trans import tr
 
 
 class DeletionOptionsView:

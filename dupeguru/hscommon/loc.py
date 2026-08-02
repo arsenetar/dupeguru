@@ -6,7 +6,7 @@ from typing import Any, List
 
 import polib
 
-from hscommon import pygettext
+from dupeguru.hscommon import pygettext
 
 LC_MESSAGES = "LC_MESSAGES"
 

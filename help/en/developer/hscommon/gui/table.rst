@@ -1,7 +1,7 @@
 hscommon.gui.table
 ==================
 
-.. automodule:: hscommon.gui.table
+.. automodule:: dupeguru.hscommon.gui.table
 
     .. autosummary::
 

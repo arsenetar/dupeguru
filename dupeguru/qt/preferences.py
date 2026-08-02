@@ -9,12 +9,12 @@ from PyQt6.QtWidgets import QApplication, QDockWidget
 from PyQt6.QtCore import Qt, QRect, QObject, pyqtSignal
 from PyQt6.QtGui import QColor
 
-from hscommon import trans
-from hscommon.plat import ISLINUX
-from core.app import AppMode
-from core.scanner import ScanType
-from hscommon.util import tryint
-from qt.util import create_qsettings
+from dupeguru.hscommon import trans
+from dupeguru.hscommon.plat import ISLINUX
+from dupeguru.core.app import AppMode
+from dupeguru.core.scanner import ScanType
+from dupeguru.hscommon.util import tryint
+from dupeguru.qt.util import create_qsettings
 
 
 def get_langnames():

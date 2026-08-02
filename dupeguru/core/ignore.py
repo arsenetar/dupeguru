@@ -9,7 +9,7 @@
 from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import parse as safe_parse
 
-from hscommon.util import FileOrPath
+from dupeguru.hscommon.util import FileOrPath
 
 
 class IgnoreList:

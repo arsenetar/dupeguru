@@ -7,11 +7,11 @@
 import io
 from xml.etree import ElementTree as ET
 
-from hscommon.testutil import eq_
-from hscommon.plat import ISWINDOWS
+from dupeguru.hscommon.testutil import eq_
+from dupeguru.hscommon.plat import ISWINDOWS
 
-from core.tests.base import DupeGuru
-from core.exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
+from dupeguru.core.tests.base import DupeGuru
+from dupeguru.core.exclude import ExcludeList, ExcludeDict, default_regexes, AlreadyThereException
 
 from re import error
 

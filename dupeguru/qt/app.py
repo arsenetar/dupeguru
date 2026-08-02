@@ -12,34 +12,34 @@ from PyQt6.QtCore import QTimer, QObject, QUrl, pyqtSignal, Qt
 from PyQt6.QtGui import QColor, QDesktopServices, QPalette
 from PyQt6.QtWidgets import QApplication, QFileDialog, QDialog, QMessageBox, QStyleFactory, QToolTip
 
-from hscommon.trans import trget
-from hscommon import desktop, plat
+from dupeguru.hscommon.trans import trget
+from dupeguru.hscommon import desktop, plat
 
-from qt.about_box import AboutBox
-from qt.details_dialog import DetailsDialog
-from qt.preferences_dialog import PreferencesDialogBase
-from qt.recent import Recent
-from qt.util import create_actions
-from qt.progress_window import ProgressWindow
+from dupeguru.qt.about_box import AboutBox
+from dupeguru.qt.details_dialog import DetailsDialog
+from dupeguru.qt.preferences_dialog import PreferencesDialogBase
+from dupeguru.qt.recent import Recent
+from dupeguru.qt.util import create_actions
+from dupeguru.qt.progress_window import ProgressWindow
 
-from core.app import AppMode, DupeGuru as DupeGuruModel
-import core.pe.photo
-from qt import platform
-from qt.preferences import Preferences
-from qt.result_window import ResultWindow
-from qt.directories_dialog import DirectoriesDialog
-from qt.problem_dialog import ProblemDialog
-from qt.ignore_list_dialog import IgnoreListDialog
-from qt.exclude_list_dialog import ExcludeListDialog
-from qt.deletion_options import DeletionOptions
-from qt.se.details_dialog import DetailsDialog as DetailsDialogStandard
-from qt.me.details_dialog import DetailsDialog as DetailsDialogMusic
-from qt.pe.details_dialog import DetailsDialog as DetailsDialogPicture
-from qt.se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
-from qt.me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
-from qt.pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
-from qt.pe.photo import File as PlatSpecificPhoto
-from qt.tabbed_window import TabBarWindow, TabWindow
+from dupeguru.core.app import AppMode, DupeGuru as DupeGuruModel
+import dupeguru.core.pe.photo
+from dupeguru.qt import platform
+from dupeguru.qt.preferences import Preferences
+from dupeguru.qt.result_window import ResultWindow
+from dupeguru.qt.directories_dialog import DirectoriesDialog
+from dupeguru.qt.problem_dialog import ProblemDialog
+from dupeguru.qt.ignore_list_dialog import IgnoreListDialog
+from dupeguru.qt.exclude_list_dialog import ExcludeListDialog
+from dupeguru.qt.deletion_options import DeletionOptions
+from dupeguru.qt.se.details_dialog import DetailsDialog as DetailsDialogStandard
+from dupeguru.qt.me.details_dialog import DetailsDialog as DetailsDialogMusic
+from dupeguru.qt.pe.details_dialog import DetailsDialog as DetailsDialogPicture
+from dupeguru.qt.se.preferences_dialog import PreferencesDialog as PreferencesDialogStandard
+from dupeguru.qt.me.preferences_dialog import PreferencesDialog as PreferencesDialogMusic
+from dupeguru.qt.pe.preferences_dialog import PreferencesDialog as PreferencesDialogPicture
+from dupeguru.qt.pe.photo import File as PlatSpecificPhoto
+from dupeguru.qt.tabbed_window import TabBarWindow, TabWindow
 
 tr = trget("ui")
 
@@ -60,7 +60,7 @@ class DupeGuru(QObject):
 
     # --- Private
     def _setup(self) -> None:
-        core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
+        dupeguru.core.pe.photo.PLAT_SPECIFIC_PHOTO_CLASS = PlatSpecificPhoto
         self._setupActions()
         self.details_dialog = None
         self._update_options()

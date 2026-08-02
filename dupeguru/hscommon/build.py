@@ -23,7 +23,7 @@ from datetime import datetime
 import glob
 from typing import Any, AnyStr, Callable, Dict, List, Union
 
-from hscommon.plat import ISWINDOWS
+from dupeguru.hscommon.plat import ISWINDOWS
 
 
 def print_and_do(cmd: str) -> int:

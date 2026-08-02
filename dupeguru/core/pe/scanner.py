@@ -4,11 +4,11 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from hscommon.trans import tr
+from dupeguru.hscommon.trans import tr
 
-from core.scanner import Scanner, ScanType, ScanOption
+from dupeguru.core.scanner import Scanner, ScanType, ScanOption
 
-from core.pe import matchblock, matchexif
+from dupeguru.core.pe import matchblock, matchexif
 
 
 class ScannerPE(Scanner):

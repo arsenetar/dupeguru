@@ -11,15 +11,15 @@ import tempfile
 
 import pytest
 from pathlib import Path
-import hscommon.conflict
-import hscommon.util
-from hscommon.testutil import eq_, log_calls
-from hscommon.jobprogress.job import Job
+import dupeguru.hscommon.conflict
+import dupeguru.hscommon.util
+from dupeguru.hscommon.testutil import eq_, log_calls
+from dupeguru.hscommon.jobprogress.job import Job
 
-from core.tests.base import TestApp
-from core.tests.results_test import GetTestGroups
-from core import app, fs, engine
-from core.scanner import ScanType
+from dupeguru.core.tests.base import TestApp
+from dupeguru.core.tests.results_test import GetTestGroups
+from dupeguru.core import app, fs, engine
+from dupeguru.core.scanner import ScanType
 
 
 def add_fake_files_to_directories(directories, files):
@@ -59,20 +59,20 @@ class TestCaseDupeGuru:
         p = Path(str(tmpdir))
         p.joinpath("foo").touch()
         monkeypatch.setattr(
-            hscommon.conflict,
+            dupeguru.hscommon.conflict,
             "smart_copy",
             log_calls(lambda source_path, dest_path: None),
         )
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
-        monkeypatch.setattr(app, "smart_copy", hscommon.conflict.smart_copy)
+        monkeypatch.setattr(app, "smart_copy", dupeguru.hscommon.conflict.smart_copy)
         monkeypatch.setattr(os, "makedirs", lambda path: None)  # We don't want the test to create that fake directory
         dgapp = TestApp().app
         dgapp.directories.add_path(p)
         [f] = dgapp.directories.get_files()
         with tempfile.TemporaryDirectory() as tmp_dir:
             dgapp.copy_or_move(f, True, tmp_dir, 0)
-            eq_(1, len(hscommon.conflict.smart_copy.calls))
-            call = hscommon.conflict.smart_copy.calls[0]
+            eq_(1, len(dupeguru.hscommon.conflict.smart_copy.calls))
+            call = dupeguru.hscommon.conflict.smart_copy.calls[0]
             eq_(call["dest_path"], Path(tmp_dir, "foo"))
             eq_(call["source_path"], f.path)
 
@@ -96,11 +96,11 @@ class TestCaseDupeGuru:
         p = Path(str(tmpdir))
         p.joinpath("foo").touch()
         monkeypatch.setattr(
-            hscommon.conflict,
+            dupeguru.hscommon.conflict,
             "smart_copy",
             log_calls(lambda source_path, dest_path: None),
         )
-        monkeypatch.setattr(app, "smart_copy", hscommon.conflict.smart_copy)
+        monkeypatch.setattr(app, "smart_copy", dupeguru.hscommon.conflict.smart_copy)
         monkeypatch.setattr(os, "makedirs", lambda path: None)
         dgapp = TestApp().app
         dgapp.directories.add_path(p)
@@ -108,7 +108,7 @@ class TestCaseDupeGuru:
         dgapp.directories._dirs.clear()
         with tempfile.TemporaryDirectory() as tmp_dir:
             dgapp.copy_or_move(f, True, tmp_dir, 1)
-            eq_(1, len(hscommon.conflict.smart_copy.calls))
+            eq_(1, len(dupeguru.hscommon.conflict.smart_copy.calls))
 
     def test_scan_with_objects_evaluating_to_false(self):
         class FakeFile(fs.File):
@@ -151,22 +151,22 @@ class TestCaseDupeGuruCleanEmptyDirs:
     def do_setup(self, request):
         monkeypatch = request.getfixturevalue("monkeypatch")
         monkeypatch.setattr(
-            hscommon.util,
+            dupeguru.hscommon.util,
             "delete_if_empty",
             log_calls(lambda path, files_to_delete=[]: None),
         )
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
-        monkeypatch.setattr(app, "delete_if_empty", hscommon.util.delete_if_empty)
+        monkeypatch.setattr(app, "delete_if_empty", dupeguru.hscommon.util.delete_if_empty)
         self.app = TestApp().app
 
     def test_option_off(self, do_setup):
         self.app.clean_empty_dirs(Path("/foo/bar"))
-        eq_(0, len(hscommon.util.delete_if_empty.calls))
+        eq_(0, len(dupeguru.hscommon.util.delete_if_empty.calls))
 
     def test_option_on(self, do_setup):
         self.app.options["clean_empty_dirs"] = True
         self.app.clean_empty_dirs(Path("/foo/bar"))
-        calls = hscommon.util.delete_if_empty.calls
+        calls = dupeguru.hscommon.util.delete_if_empty.calls
         eq_(1, len(calls))
         eq_(Path("/foo/bar"), calls[0]["path"])
         eq_([".DS_Store"], calls[0]["files_to_delete"])
@@ -177,12 +177,12 @@ class TestCaseDupeGuruCleanEmptyDirs:
         def mock_delete_if_empty(path, files_to_delete=[]):
             return len(path.parts) > 1
 
-        monkeypatch.setattr(hscommon.util, "delete_if_empty", mock_delete_if_empty)
+        monkeypatch.setattr(dupeguru.hscommon.util, "delete_if_empty", mock_delete_if_empty)
         # XXX This monkeypatch is temporary. will be fixed in a better monkeypatcher.
         monkeypatch.setattr(app, "delete_if_empty", mock_delete_if_empty)
         self.app.options["clean_empty_dirs"] = True
         self.app.clean_empty_dirs(Path("not-empty/empty/empty"))
-        calls = hscommon.util.delete_if_empty.calls
+        calls = dupeguru.hscommon.util.delete_if_empty.calls
         eq_(3, len(calls))
         eq_(Path("not-empty/empty/empty"), calls[0]["path"])
         eq_(Path("not-empty/empty"), calls[1]["path"])

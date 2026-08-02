@@ -14,13 +14,13 @@ from errno import EISDIR, EACCES
 from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import parse as safe_parse
 
-from hscommon.jobprogress.job import nulljob
-from hscommon.conflict import get_conflicted_name
-from hscommon.util import flatten, nonone, FileOrPath, format_size
-from hscommon.trans import tr
+from dupeguru.hscommon.jobprogress.job import nulljob
+from dupeguru.hscommon.conflict import get_conflicted_name
+from dupeguru.hscommon.util import flatten, nonone, FileOrPath, format_size
+from dupeguru.hscommon.trans import tr
 
-from core import engine
-from core.markable import Markable
+from dupeguru.core import engine
+from dupeguru.core.markable import Markable
 
 
 class Results(Markable):
