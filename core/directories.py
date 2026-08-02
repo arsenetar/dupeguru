@@ -335,6 +335,14 @@ class Directories:
 
     def has_any_file(self, fileclasses=None):
         """Returns whether selected folders contain any file quickly without triggering full directory crawls."""
+        if fs.filesdb.enable_directory_cache:
+            try:
+                with fs.filesdb.lock, fs.filesdb.conn as conn:
+                    row = conn.execute("SELECT 1 FROM files LIMIT 1").fetchone()
+                    if row:
+                        return True
+            except Exception:
+                pass
         for path in self._dirs:
             try:
                 with os.scandir(path) as it:

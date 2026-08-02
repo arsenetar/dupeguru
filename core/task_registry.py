@@ -114,12 +114,14 @@ class ScanTask:
                 pass
 
         status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
-        if self.match_count > 0 or getattr(self, "is_loaded", False) or status_str == "completed":
+        if self.match_count > 0:
+            status_str = "completed"
+        elif total_files > 0 and hashed_count == 0:
+            status_str = "needs_hashing"
+        elif getattr(self, "is_loaded", False) or status_str == "completed":
             if total_files > 0 and hashed_count < total_files:
                 hashed_count = total_files
             status_str = "completed"
-        elif total_files > 0 and hashed_count < total_files:
-            status_str = "needs_hashing"
 
         return {
             "task_id": self.task_id,
@@ -259,6 +261,17 @@ class ScanTaskRegistry:
                                     cur = conn.cursor()
                                     cur.execute("SELECT COUNT(*) FROM files")
                                     task.file_count = cur.fetchone()[0]
+
+                                    cur.execute(
+                                        "SELECT COUNT(*) FROM files WHERE (digest IS NOT NULL AND length(digest) > 0) "
+                                        "OR (digest_partial IS NOT NULL AND length(digest_partial) > 0)"
+                                    )
+                                    row_h = cur.fetchone()
+                                    h_count = row_h[0] if row_h else 0
+                                    if h_count == 0 and task.file_count > 0:
+                                        task.status = ScanTaskStatus.NEEDS_HASHING
+                                    else:
+                                        task.status = ScanTaskStatus.COMPLETED
 
                                     cur.execute("SELECT path FROM scanned_directories")
                                     saved_dirs = [r[0] for r in cur.fetchall()]
