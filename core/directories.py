@@ -215,7 +215,10 @@ class Directories:
             raise AlreadyThereError()
         if not path.exists():
             raise InvalidPathError()
-        self._dirs = [p for p in self._dirs if path not in p.parents]
+        removed = [p for p in self._dirs if path in p.parents]
+        self._dirs = [p for p in self._dirs if p not in removed]
+        for r in removed:
+            self.states.pop(r, None)
         self._dirs.append(path)
 
     def clear(self):

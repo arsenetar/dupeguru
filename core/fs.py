@@ -332,18 +332,28 @@ class SQLiteCacheEngine(CacheEngine):
     def get_files_in_directory(self, dir_path: Path):
         prefix = str(dir_path) + os.sep
         dir_str = str(dir_path)
+        safe_prefix = prefix.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
         try:
             limit = 5000
-            last_path = ""
+            last_path = None
             while True:
                 with self.lock:
-                    cursor = self.conn.execute(
-                        """SELECT path, size, mtime_ns FROM files
-                           WHERE (path = ? OR path LIKE ?) AND path > ?
-                           ORDER BY path
-                           LIMIT ?""",
-                        (dir_str, prefix + "%", last_path, limit),
-                    )
+                    if last_path is None:
+                        cursor = self.conn.execute(
+                            """SELECT path, size, mtime_ns FROM files
+                               WHERE path = ? OR path LIKE ? ESCAPE '\\'
+                               ORDER BY path
+                               LIMIT ?""",
+                            (dir_str, safe_prefix, limit),
+                        )
+                    else:
+                        cursor = self.conn.execute(
+                            """SELECT path, size, mtime_ns FROM files
+                               WHERE (path = ? OR path LIKE ? ESCAPE '\\') AND path > ?
+                               ORDER BY path
+                               LIMIT ?""",
+                            (dir_str, safe_prefix, last_path, limit),
+                        )
                     rows = cursor.fetchall()
                 if not rows:
                     break
@@ -772,21 +782,29 @@ class FilesDB:
         self._is_rust = False
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
-        path_str = _clean_path_str(path)
-        if HAS_RUST:
-            try:
-                self.engine = RustFilesDB(path_str)
-                self._is_rust = True
-                logging.info("Using high-performance Rust cache database engine.")
-                return
-            except Exception as e:
-                logging.warning(f"Failed to load Rust engine: {e}. Falling back to Python engine.")
+        with self.lock:
+            if self.engine:
+                try:
+                    self.engine.close()
+                except Exception as e:
+                    logging.warning(f"Error closing previous engine in connect: {e}")
+                self.engine = None
 
-        self._is_rust = False
-        if path_str.startswith("redis://") or path_str.startswith("valkey://"):
-            self.engine = ValkeyCacheEngine(path_str, self)
-        else:
-            self.engine = SQLiteCacheEngine(path_str, self)
+            path_str = _clean_path_str(path)
+            if HAS_RUST:
+                try:
+                    self.engine = RustFilesDB(path_str)
+                    self._is_rust = True
+                    logging.info("Using high-performance Rust cache database engine.")
+                    return
+                except Exception as e:
+                    logging.warning(f"Failed to load Rust engine: {e}. Falling back to Python engine.")
+
+            self._is_rust = False
+            if path_str.startswith("redis://") or path_str.startswith("valkey://"):
+                self.engine = ValkeyCacheEngine(path_str, self)
+            else:
+                self.engine = SQLiteCacheEngine(path_str, self)
 
     @property
     def conn(self):

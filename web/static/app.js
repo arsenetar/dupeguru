@@ -193,8 +193,8 @@ function setupEventListeners() {
 
     if (deleteMarkedBtn) deleteMarkedBtn.addEventListener("click", deleteMarked);
     if (cancelScanBtn) cancelScanBtn.addEventListener("click", cancelScan);
-    if (loadScanBtn) loadScanBtn.addEventListener("click", loadScan);
-    if (saveResultsBtn) saveResultsBtn.addEventListener("click", saveResults);
+    if (loadScanBtn) loadScanBtn.addEventListener("click", loadResultsFromFile);
+    if (saveResultsBtn) saveResultsBtn.addEventListener("click", saveResultsToFile);
     const toast = document.getElementById("toast");
     if (toast) {
         toast.addEventListener("click", () => {
@@ -618,8 +618,12 @@ async function pollProgress() {
         }
     } catch (err) {
         console.error("Poll progress failed:", err);
-        if (isScanning) {
+        pollErrorCount = (window.pollErrorCount || 0) + 1;
+        if (isScanning && pollErrorCount < 10) {
             setTimeout(pollProgress, 1000);
+        } else if (pollErrorCount >= 10) {
+            isScanning = false;
+            showToast("Connection to server lost. Polling stopped.");
         }
     }
 }
@@ -805,7 +809,8 @@ async function cancelScan() {
 }
 // Helpers
 function escapeJS(str) {
-    return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+    if (!str) return "";
+    return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
 // Configuration Management
@@ -1244,37 +1249,7 @@ async function launchNewDBScan(overwrite = false) {
     }
 }
 
-async function viewTaskResults(taskId) {
-    try {
-        showToast("Loading results for database task...");
-        const response = await fetch(`${API_BASE}/api/scans/load`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ task_id: taskId }),
-        });
-        const res = await response.json();
-        if (res.success) {
-            if (res.is_scanning) {
-                isScanning = true;
-                if (progressContainer) progressContainer.classList.remove("hidden");
-                if (welcomeContainer) welcomeContainer.classList.add("hidden");
-                if (resultsContainer) resultsContainer.classList.add("hidden");
-                showToast(`Hashing & scanning candidate files for '${res.task.name}'... Please wait.`, true);
-                pollProgress();
-            } else {
-                await loadResults();
-                await loadMultiScans();
-                if (resultsContainer) resultsContainer.classList.remove("hidden");
-                if (welcomeContainer) welcomeContainer.classList.add("hidden");
-                if (progressContainer) progressContainer.classList.add("hidden");
-            }
-        } else {
-            showToast(`Error loading scan: ${res.error}`);
-        }
-    } catch (err) {
-        showToast(`Failed to load scan: ${err.message}`);
-    }
-}
+
 
 async function deleteScanTask(taskId) {
     if (!confirm("Are you sure you want to delete this database scan task?")) return;
