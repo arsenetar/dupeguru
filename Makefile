@@ -35,7 +35,7 @@ endif
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 
-packages = hscommon core qt
+packages = dupeguru/hscommon dupeguru/core dupeguru/qt
 localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
 mofiles = $(patsubst %.po,%.mo,$(pofiles))
@@ -43,7 +43,7 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-all: | env i18n modules qt/dg_rc.py
+all: | env i18n modules dupeguru/qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
@@ -76,10 +76,10 @@ endif
 build/help: | env
 	$(VENV_PYTHON) build.py --doc
 
-qt/dg_rc.py: qt/dg.qrc
-	$(RCC) -g python qt/dg.qrc -o qt/dg_rc.py
-	sed -i 's/from PySide2/from PyQt6/' qt/dg_rc.py
-	sed -i 's/from PySide6/from PyQt6/' qt/dg_rc.py
+dupeguru/qt/dg_rc.py: dupeguru/qt/dg.qrc
+	$(RCC) -g python dupeguru/qt/dg.qrc -o dupeguru/qt/dg_rc.py
+	sed -i 's/from PySide2/from PyQt6/' dupeguru/qt/dg_rc.py
+	sed -i 's/from PySide6/from PyQt6/' dupeguru/qt/dg_rc.py
 
 i18n: $(mofiles)
 
@@ -120,6 +120,6 @@ uninstall:
 clean:
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
-	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
+	-rm dupeguru/core/pe/*.$(SO) dupeguru/qt/pe/*.$(SO)
 
 .PHONY: clean normpo mergepot modules i18n reqs run pyc install uninstall all
