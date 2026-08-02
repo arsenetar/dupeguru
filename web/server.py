@@ -307,10 +307,15 @@ def pulse_loop(stop_event):
                         if task:
                             task.status = ScanTaskStatus.COMPLETED
                             task.completed_at = time.time()
-                            task.file_count = len(model.results) if model.results else task.file_count
-                            task.match_count = len(model.results.groups)
-                            task.dupe_count = len(model.results.dupes)
-                            task.results_groups = model.results.groups
+                            task.match_count = (
+                                len(model.results.groups) if model.results and hasattr(model.results, "groups") else 0
+                            )
+                            task.dupe_count = (
+                                len(model.results.dupes) if model.results and hasattr(model.results, "dupes") else 0
+                            )
+                            task.results_groups = (
+                                model.results.groups if model.results and hasattr(model.results, "groups") else []
+                            )
                             task.is_loaded = True
                             task.save_metadata()
                 else:
@@ -318,17 +323,32 @@ def pulse_loop(stop_event):
                     if wait_ticks > 30:  # 3 seconds fallback
                         app_state["scanning"] = False
                         if app_state.get("status") == "scanning":
-                            app_state["status"] = "completed" if model.results.groups else "idle"
+                            app_state["status"] = (
+                                "completed"
+                                if (model.results and hasattr(model.results, "groups") and model.results.groups)
+                                else "idle"
+                            )
                         active_task_id = app_state.get("active_task_id")
                         if active_task_id:
                             task = task_registry.get_task(active_task_id)
                             if task:
-                                task.status = ScanTaskStatus.COMPLETED if model.results.groups else ScanTaskStatus.IDLE
+                                task.status = (
+                                    ScanTaskStatus.COMPLETED
+                                    if (model.results and hasattr(model.results, "groups") and model.results.groups)
+                                    else ScanTaskStatus.IDLE
+                                )
                                 task.completed_at = time.time()
-                                task.file_count = len(model.results) if model.results else task.file_count
-                                task.match_count = len(model.results.groups)
-                                task.dupe_count = len(model.results.dupes)
-                                task.results_groups = model.results.groups
+                                task.match_count = (
+                                    len(model.results.groups)
+                                    if model.results and hasattr(model.results, "groups")
+                                    else 0
+                                )
+                                task.dupe_count = (
+                                    len(model.results.dupes) if model.results and hasattr(model.results, "dupes") else 0
+                                )
+                                task.results_groups = (
+                                    model.results.groups if model.results and hasattr(model.results, "groups") else []
+                                )
                                 task.is_loaded = True
                                 task.save_metadata()
             except Exception as e:
