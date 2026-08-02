@@ -1007,7 +1007,7 @@ class ScrollAreaImageViewer(QScrollArea):
         if old_scale == self.current_scale:
             return
 
-        delta_to_pos = (event.position() / old_scale) - (self.label.pos() / old_scale)
+        delta_to_pos = (event.position() / old_scale) - (QPointF(self.label.pos()) / old_scale)
         delta = (delta_to_pos * self.current_scale) - (delta_to_pos * old_scale)
         self.mouseWheeled.emit(self.current_scale, delta)
 

@@ -43,9 +43,6 @@ class ErrorReportDialog(QDialog):
         self.error_text_edit.setPlainText(error_text)
         self.github_url = github_url
 
-        self.sendButton.clicked.connect(self.goToGitHub)
-        self.dontSendButton.clicked.connect(self.reject)
-
     def _setupUi(self):
         self.setWindowTitle(tr("Error Report"))
         self.resize(553, 349)

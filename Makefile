@@ -78,6 +78,7 @@ build/help: | env
 
 qt/dg_rc.py: qt/dg.qrc
 	$(RCC) -g python qt/dg.qrc -o qt/dg_rc.py
+	sed -i 's/from PySide2/from PyQt6/' qt/dg_rc.py
 	sed -i 's/from PySide6/from PyQt6/' qt/dg_rc.py
 
 i18n: $(mofiles)

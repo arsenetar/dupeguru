@@ -315,6 +315,9 @@ def fix_qt_resource_file(path: os.PathLike) -> None:
     # comments, and save.
     with open(path, "rb") as fp:
         contents = fp.read()
+    # Depending on the Qt toolchain version, rcc can generate imports for
+    # either PySide2 or PySide6. dupeGuru uses PyQt6 at runtime.
+    contents = contents.replace(b"PySide2", b"PyQt6")
     contents = contents.replace(b"PySide6", b"PyQt6")
     lines = contents.split(b"\n")
     lines = [line for line in lines if not line.startswith(b"#")]
