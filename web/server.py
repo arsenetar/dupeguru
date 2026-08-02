@@ -738,6 +738,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     if hasattr(task, "results_groups") and task.results_groups is not None:
                         model.results.groups = task.results_groups
                         model._recreate_result_table()
+                        task.match_count = (
+                            len(model.results.groups)
+                            if model.results and hasattr(model.results, "groups")
+                            else task.match_count
+                        )
+                        task.dupe_count = (
+                            len(model.results.dupes)
+                            if model.results and hasattr(model.results, "dupes")
+                            else task.dupe_count
+                        )
+                        task.save_metadata()
                         app_state["status"] = "completed"
                         app_state["scanning"] = False
                         app_state["progress_msg"] = ""
@@ -777,8 +788,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             except Exception:
                                 pass
                             task.results_groups = model.results.groups
-                            task.match_count = len(model.results.groups) if model.results else 0
-                            task.dupe_count = len(model.results.dupes) if model.results else 0
+                            task.match_count = (
+                                len(model.results.groups) if model.results and hasattr(model.results, "groups") else 0
+                            )
+                            task.dupe_count = (
+                                len(model.results.dupes) if model.results and hasattr(model.results, "dupes") else 0
+                            )
                             task.status = ScanTaskStatus.COMPLETED
                             task.is_loaded = True
                             task.save_metadata()

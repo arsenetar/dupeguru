@@ -98,6 +98,17 @@ class ScanTask:
                 ).fetchone()
                 if row_hashed:
                     hashed_count = row_hashed[0]
+
+                try:
+                    cur.execute("SELECT key, value FROM scan_metadata")
+                    meta = dict(cur.fetchall())
+                    if "match_count" in meta and meta["match_count"]:
+                        self.match_count = int(meta["match_count"])
+                    if "dupe_count" in meta and meta["dupe_count"]:
+                        self.dupe_count = int(meta["dupe_count"])
+                except Exception:
+                    pass
+
                 conn.close()
             except Exception:
                 pass
