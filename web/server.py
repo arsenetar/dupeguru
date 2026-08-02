@@ -708,7 +708,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                                 pass
                         model.start_scanning()
                         start_wait = time.time()
-                        while model.progress_window._job_running and (time.time() - start_wait < 1.5):
+                        # Allow up to 10 seconds for cached database scan to finish in memory
+                        while model.progress_window._job_running and (time.time() - start_wait < 10.0):
                             time.sleep(0.05)
 
                         is_still_running = model.progress_window._job_running
