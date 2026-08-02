@@ -137,10 +137,12 @@ def build_pe_modules():
     build_rust_engine()
 
 
-def build_normal():
-    print("Building dupeGuru with UI qt")
+def build_normal(ui="qt"):
+    if ui == "qt":
+        print("Building de-dup with UI qt")
+    else:
+        print("Building de-dup")
     add_to_pythonpath(".")
-    print("Building dupeGuru")
     build_pe_modules()
     print("Building localizations")
     build_localizations()

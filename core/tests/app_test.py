@@ -462,7 +462,7 @@ class TestCaseDupeGuruRenameSelected:
         monkeypatch.setattr(logging, "warning", log_calls(lambda msg: None))
         assert not app.rename_selected("renamed")
         msg = logging.warning.calls[0]["msg"]
-        eq_("dupeGuru Warning: list index out of range", msg)
+        eq_("de-dup Warning: list index out of range", msg)
         names = [p.name for p in self.p.glob("*")]
         assert "renamed" not in names
         assert "foo bar 2" in names
@@ -475,7 +475,7 @@ class TestCaseDupeGuruRenameSelected:
         monkeypatch.setattr(logging, "warning", log_calls(lambda msg: None))
         assert not app.rename_selected("foo bar 1")
         msg = logging.warning.calls[0]["msg"]
-        assert msg.startswith("dupeGuru Warning: 'foo bar 1' already exists in")
+        assert msg.startswith("de-dup Warning: 'foo bar 1' already exists in")
         names = [p.name for p in self.p.glob("*")]
         assert "foo bar 1" in names
         assert "foo bar 2" in names

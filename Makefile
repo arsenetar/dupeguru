@@ -110,7 +110,7 @@ help:
 	@echo ""
 
 all: | env i18n modules qt/dg_rc.py rust
-	@echo "Build complete! You can run dupeGuru with 'make run'"
+	@echo "Build complete! You can run de-dup with 'make run'"
 
 run:
 	$(VENV_PYTHON) run.py

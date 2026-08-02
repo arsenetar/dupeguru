@@ -833,31 +833,29 @@ function setupConfigListeners() {
     document.getElementById("pref-checkpoint").addEventListener("change", saveConfig);
 }
 
-async function loadScan() {
-    const path = prompt("Enter the absolute file path to a saved .dupegururesults file to load:");
+async function loadResultsFromFile() {
+    const path = prompt("Enter the absolute file path to a saved .dedupresults file to load:");
     if (!path) return;
     try {
         const response = await fetch(`${API_BASE}/api/results/load`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ path: path.trim() })
+            body: JSON.stringify({ path: path }),
         });
-        const result = await response.json();
-        if (result.success) {
-            alert("Scan results loaded successfully!");
-            welcomeContainer.classList.add("hidden");
-            resultsContainer.classList.remove("hidden");
-            loadResults();
+        const res = await response.json();
+        if (res.success) {
+            showToast("Results loaded successfully!");
+            await loadResults();
         } else {
-            alert("Error loading scan: " + result.error);
+            showToast(`Failed to load results: ${res.error}`);
         }
     } catch (err) {
-        console.error("Load scan failed:", err);
+        showToast(`Error loading results: ${err.message}`);
     }
 }
 
-async function saveResults() {
-    const path = prompt("Enter the absolute file path where you want to save the results (e.g. /path/to/results.dupegururesults):");
+async function saveResultsToFile() {
+    const path = prompt("Enter the absolute file path where you want to save the results (e.g. /path/to/results.dedupresults):");
     if (!path) return;
     try {
         const response = await fetch(`${API_BASE}/api/results/save`, {

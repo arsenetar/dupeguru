@@ -199,7 +199,7 @@ class SQLiteCacheEngine(CacheEngine):
                     db_size_mb = os.path.getsize(path) / (1024 * 1024)
                 if db_size_mb > 50:
                     print(
-                        f"[dupeGuru] Optimizing database cache index (size: {db_size_mb:.1f} MB) "
+                        f"[de-dup] Optimizing database cache index (size: {db_size_mb:.1f} MB) "
                         "for the first time. Please wait...",
                         flush=True,
                     )

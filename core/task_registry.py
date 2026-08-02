@@ -223,8 +223,8 @@ class ScanTaskRegistry:
         with self._lock:
             candidate_dirs = [self.scans_dir]
             home = os.path.expanduser("~")
-            fallback_dir = os.path.join(home, ".local/share", "dupeGuru", "scans")
-            if os.path.exists(fallback_dir) and fallback_dir not in candidate_dirs:
+            fallback_dir = os.path.join(home, ".local/share", "de-dup", "scans")
+            if "de-dup" in self.scans_dir and os.path.exists(fallback_dir) and fallback_dir not in candidate_dirs:
                 candidate_dirs.append(fallback_dir)
 
             for scans_directory in candidate_dirs:

@@ -740,7 +740,7 @@ class DupeGuru(Broadcaster):
             d.rename(newname)
             return True
         except (IndexError, fs.FSError) as e:
-            logging.warning("dupeGuru Warning: %s" % str(e))
+            logging.warning("de-dup Warning: %s" % str(e))
         return False
 
     def reprioritize_groups(self, sort_key):
