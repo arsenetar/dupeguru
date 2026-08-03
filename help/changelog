@@ -1,3 +1,17 @@
+=== 4.3.1^20260802git (2026-08-02)
+* guard copy_or_move when no location path matches dupe parent
+* the application name in the dock is "dupeguru"
+* use Qt6 rather than Qt5
+* fix to show dupeguru icon in the launcher
+* configurable scan speed for picture mode (up to 16x faster)
+* fix SQL injection in cache modules
+* fix XXE vulnerabilities in XML parsing
+* fix command injection in Custom Command
+* updated Polish, French, Russian translations
+* force Qt6 to use the X11 interfaces since Fedora now runs wayland
+  and under wayland, Qt6 application window does not use the proper
+  styling.
+
 === 4.3.1 (2022-07-08)
 * Fix issue where cache db exceptions could prevent files being hashed (#1015)
 * Add extra guard for non-zero length files without digests to prevent false duplicates
