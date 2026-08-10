@@ -184,6 +184,15 @@ class TestWebServerEndpoints(unittest.TestCase):
         time.sleep(0.2)
         self.assertFalse(os.path.exists(dummy_file))
 
+    def test_server_rest_api_cache_files_endpoint(self):
+        """Tests GET /api/cache/files executes valid SQL without file_mtime column errors."""
+        cache_url = f"{self.base_url}/api/cache/files?search=&limit=20&offset=0"
+        with urllib.request.urlopen(cache_url) as response:
+            self.assertEqual(response.status, 200)
+            res = json.loads(response.read().decode("utf-8"))
+            self.assertTrue(res.get("success"))
+            self.assertIsInstance(res.get("files"), list)
+
 
 if __name__ == "__main__":
     unittest.main()

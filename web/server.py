@@ -303,13 +303,18 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         cur.execute("SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",))
                         total_count = cur.fetchone()[0]
                         cur.execute(
-                            "SELECT path, size, file_mtime FROM files WHERE path LIKE ? LIMIT ? OFFSET ?",
+                            "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
+                            "FROM files WHERE path LIKE ? LIMIT ? OFFSET ?",
                             (f"%{search}%", limit, offset),
                         )
                     else:
                         cur.execute("SELECT COUNT(*) FROM files")
                         total_count = cur.fetchone()[0]
-                        cur.execute("SELECT path, size, file_mtime FROM files LIMIT ? OFFSET ?", (limit, offset))
+                        cur.execute(
+                            "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
+                            "FROM files LIMIT ? OFFSET ?",
+                            (limit, offset),
+                        )
                     rows = cur.fetchall()
                     for r in rows:
                         files_list.append(
