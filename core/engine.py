@@ -349,15 +349,17 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
             digest_groups = defaultdict(list)
             for f in group:
                 d = f.digest_partial
-                if d is not None:
+                if d:
                     if bigsize > 0 and f.size > bigsize:
                         s = f.digest_samples
-                        if s is not None:
+                        if s:
                             digest_groups[(d, s)].append(f)
+                        else:
+                            digest_groups[d].append(f)
                     else:
                         dig = f.digest
-                        if dig is not None:
-                            digest_groups[(d, dig)].append(f)
+                        key = (d, dig) if dig else d
+                        digest_groups[key].append(f)
 
             for sub_group in digest_groups.values():
                 if len(sub_group) > 1:

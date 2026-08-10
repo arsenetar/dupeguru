@@ -214,7 +214,8 @@ class Directories:
         if path in self:
             raise AlreadyThereError()
         if not path.exists():
-            raise InvalidPathError()
+            if not (fs.filesdb and fs.filesdb.enable_directory_cache):
+                raise InvalidPathError()
         removed = [p for p in self._dirs if path in p.parents]
         self._dirs = [p for p in self._dirs if p not in removed]
         for r in removed:
@@ -338,20 +339,31 @@ class Directories:
 
     def has_any_file(self, fileclasses=None):
         """Returns whether selected folders contain any file quickly without triggering full directory crawls."""
-        if fs.filesdb.enable_directory_cache:
+        if fs.filesdb and fs.filesdb.enable_directory_cache:
             try:
-                with fs.filesdb.lock, fs.filesdb.conn as conn:
-                    row = conn.execute("SELECT 1 FROM files LIMIT 1").fetchone()
+                conn = fs.filesdb.conn
+                if conn:
+                    cur = conn.cursor()
+                    row = cur.execute("SELECT 1 FROM files LIMIT 1").fetchone()
+                    cur.close()
                     if row:
                         return True
-            except Exception:
-                pass
+            except Exception as e:
+                logging.warning(f"has_any_file cache check exception: {e}")
         for path in self._dirs:
             try:
-                with os.scandir(path) as it:
-                    for entry in it:
-                        if entry.is_file() or entry.is_dir():
-                            return True
+                if hasattr(path, "exists") and path.exists():
+                    with os.scandir(path) as it:
+                        for entry in it:
+                            if entry.is_file() or entry.is_dir():
+                                return True
+                elif isinstance(path, str) and os.path.exists(path):
+                    with os.scandir(path) as it:
+                        for entry in it:
+                            if entry.is_file() or entry.is_dir():
+                                return True
+                elif not hasattr(path, "exists") and not isinstance(path, str):
+                    return True
             except OSError:
                 pass
         return False

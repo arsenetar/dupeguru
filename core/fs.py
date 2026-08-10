@@ -168,7 +168,11 @@ class SQLiteCacheEngine(CacheEngine):
     insert_query = """
         INSERT INTO files (path, size, mtime_ns, entry_dt, {key})
         VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
-        ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
+        ON CONFLICT(path) DO UPDATE SET
+            size = CASE WHEN :size > 0 THEN :size ELSE files.size END,
+            mtime_ns = CASE WHEN :mtime_ns > 0 THEN :mtime_ns ELSE files.mtime_ns END,
+            entry_dt = datetime('now'),
+            {key} = :value;
     """
 
     def __init__(self, db_path: Union[AnyStr, os.PathLike], outer_db):
@@ -381,11 +385,17 @@ class SQLiteCacheEngine(CacheEngine):
         try:
             with self.lock:
                 cursor = self.conn.execute(
-                    f"SELECT path, size, mtime_ns FROM files WHERE size IN ({placeholders})",
+                    f"SELECT path, size, mtime_ns, digest, digest_partial FROM files WHERE size IN ({placeholders})",
                     sizes,
                 )
                 for row in cursor:
-                    yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
+                    yield {
+                        "path": row[0],
+                        "size": row[1],
+                        "mtime_ns": row[2],
+                        "digest": row[3],
+                        "digest_partial": row[4],
+                    }
         except Exception as e:
             logging.error(f"Error getting files by sizes: {e}")
 
@@ -416,16 +426,22 @@ class SQLiteCacheEngine(CacheEngine):
         return None
 
     def put(self, path: Path, key: str, value: Any) -> None:
-        stat = path.stat()
-        size = stat.st_size
-        mtime_ns = stat.st_mtime_ns
+        path_str = str(path)
+        size = 0
+        mtime_ns = 0
+        try:
+            stat = path.stat()
+            size = stat.st_size
+            mtime_ns = stat.st_mtime_ns
+        except Exception:
+            pass
+
         try:
             with self.lock:
                 self.conn.execute(
                     self.insert_query.format(key=key),
-                    {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
+                    {"path": path_str, "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
-                path_str = str(path)
                 self.outer_db.last_scanned_path = path_str
                 if path_str not in self.outer_db.scanned_paths:
                     self.outer_db.scanned_paths.add(path_str)
@@ -438,7 +454,10 @@ class SQLiteCacheEngine(CacheEngine):
                     self.conn.commit()
                     self.outer_db._checkpoint_counter = 0
         except Exception as ex:
-            logging.warning(f"Couldn't put {key} for {path} w/{size}, {mtime_ns}: {ex}")
+            logging.warning(f"Couldn't put {key} for {path}: {ex}")
+
+    def set(self, path: Path, key: str, value: Any) -> None:
+        self.put(path, key, value)
 
     def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         with self.lock:
@@ -914,14 +933,20 @@ class FilesDB:
 
     def set(self, path: Path, key: str, value: bytes) -> None:
         if self.engine:
+            clean_p = _clean_path_str(path)
             if self._is_rust:
                 try:
-                    stat = path.stat()
-                    self.engine.set(_clean_path_str(path), key, value, stat.st_size, stat.st_mtime_ns)
-                except (OSError, InvalidPath):
-                    pass
+                    self.engine.put(clean_p, 0, 0, key, value)
+                except Exception as e:
+                    logging.warning(f"Rust engine put failed for {clean_p}: {e}")
             else:
-                self.engine.set(path, key, value)
+                try:
+                    self.engine.set(path, key, value)
+                except Exception as e:
+                    logging.warning(f"Engine set failed for {path}: {e}")
+
+    def put(self, path: Path, key: str, value: bytes) -> None:
+        self.set(path, key, value)
 
     def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         if self.engine:
@@ -942,6 +967,7 @@ class File:
     __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
+        self.is_ref = False
         for attrname in self.INITIAL_INFO:
             setattr(self, attrname, NOT_SET)
         if type(path) is os.DirEntry:
@@ -1060,6 +1086,8 @@ class File:
 
     def exists(self) -> bool:
         """Safely check if the underlying file exists, treat error as non-existent"""
+        if filesdb and filesdb.enable_directory_cache:
+            return True
         try:
             return self.path.exists()
         except OSError as ex:

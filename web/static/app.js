@@ -32,6 +32,7 @@ let isStopping = false;
 let cancelStats = null;
 let resultsData = [];
 let addedPaths = [];
+let activeTaskId = "";
 
 // Cache Viewer state
 let cacheSearch = "";
@@ -66,14 +67,20 @@ async function checkInitialResults() {
     try {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
-        if (state.active_task_id) {
-            await viewTaskResults(state.active_task_id);
-        } else if (state.has_results) {
-            await loadResults();
+
+        const isCurrentlyScanning = state.scanning || ["discovering", "hashing", "scanning", "running"].includes(state.status);
+
+        if (isCurrentlyScanning) {
+            isScanning = true;
+            if (progressContainer) progressContainer.classList.remove("hidden");
             if (welcomeContainer) welcomeContainer.classList.add("hidden");
-            if (resultsContainer) resultsContainer.classList.remove("hidden");
+            if (resultsContainer) resultsContainer.classList.add("hidden");
+            pollProgress();
+        } else {
+            hideToast();
         }
     } catch (err) {
+        hideToast();
         console.error("Initial results check failed:", err);
     }
 }
@@ -204,18 +211,18 @@ function setupEventListeners() {
 
     // Navigation Tabs setup
     const tabScan = document.getElementById("tab-scan");
-    const tabMultiscan = document.getElementById("tab-multiscan");
+    const tabResultsStudio = document.getElementById("tab-results-studio");
     const tabCrossDb = document.getElementById("tab-cross-db");
     const tabCache = document.getElementById("tab-cache");
 
     const scanViewContent = document.getElementById("scan-view-content");
-    const multiscanContainer = document.getElementById("multiscan-container");
+    const resultsStudioContainer = document.getElementById("results-studio-container");
     const crossDbContainer = document.getElementById("cross-db-container");
     const cacheContainer = document.getElementById("cache-container");
 
     function activateTab(activeTab, activeContainer) {
-        [tabScan, tabMultiscan, tabCrossDb, tabCache].forEach(t => t && t.classList.remove("active"));
-        [scanViewContent, multiscanContainer, crossDbContainer, cacheContainer].forEach(c => c && c.classList.add("hidden"));
+        [tabScan, tabResultsStudio, tabCrossDb, tabCache].forEach(t => t && t.classList.remove("active"));
+        [scanViewContent, resultsStudioContainer, crossDbContainer, cacheContainer].forEach(c => c && c.classList.add("hidden"));
         if (activeTab) activeTab.classList.add("active");
         if (activeContainer) activeContainer.classList.remove("hidden");
     }
@@ -223,10 +230,10 @@ function setupEventListeners() {
     if (tabScan) {
         tabScan.addEventListener("click", () => activateTab(tabScan, scanViewContent));
     }
-    if (tabMultiscan) {
-        tabMultiscan.addEventListener("click", () => {
-            activateTab(tabMultiscan, multiscanContainer);
-            loadMultiScans();
+    if (tabResultsStudio) {
+        tabResultsStudio.addEventListener("click", () => {
+            activateTab(tabResultsStudio, resultsStudioContainer);
+            renderResultsStudio();
         });
     }
     if (tabCrossDb) {
@@ -240,6 +247,118 @@ function setupEventListeners() {
             activateTab(tabCache, cacheContainer);
             loadCache();
         });
+    }
+
+    // Results Studio Event Listeners
+    const studioSearch = document.getElementById("studio-search-input");
+    if (studioSearch) {
+        studioSearch.addEventListener("input", renderResultsStudio);
+    }
+
+    const prevGroupBtn = document.getElementById("studio-prev-group-btn");
+    const nextGroupBtn = document.getElementById("studio-next-group-btn");
+    if (prevGroupBtn) {
+        prevGroupBtn.addEventListener("click", () => {
+            if (studioCurrentGroupIndex > 0) {
+                studioCurrentGroupIndex--;
+                renderResultsStudio();
+            }
+        });
+    }
+    if (nextGroupBtn) {
+        nextGroupBtn.addEventListener("click", () => {
+            if (resultsData && studioCurrentGroupIndex < resultsData.length - 1) {
+                studioCurrentGroupIndex++;
+                renderResultsStudio();
+            }
+        });
+    }
+
+    const compactBtn = document.getElementById("density-compact-btn");
+    const standardBtn = document.getElementById("density-standard-btn");
+    if (compactBtn && standardBtn) {
+        compactBtn.addEventListener("click", () => {
+            studioDensity = "compact";
+            compactBtn.classList.add("active");
+            standardBtn.classList.remove("active");
+            renderResultsStudio();
+        });
+        standardBtn.addEventListener("click", () => {
+            studioDensity = "standard";
+            standardBtn.classList.add("active");
+            compactBtn.classList.remove("active");
+            renderResultsStudio();
+        });
+    }
+
+    const toggleSidebarBtn = document.getElementById("toggle-sidebar-collapse-btn");
+    const sidebarToggleBtn = document.getElementById("sidebar-toggle-btn");
+    const sidebar = document.querySelector(".sidebar");
+
+    function updateSidebarCollapseUI(collapsed) {
+        if (!sidebar) return;
+        isSidebarCollapsed = collapsed;
+        if (isSidebarCollapsed) {
+            sidebar.classList.add("collapsed");
+            if (toggleSidebarBtn) toggleSidebarBtn.textContent = "🔍 Exit Focus";
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.textContent = "▶";
+                sidebarToggleBtn.title = "Expand Sidebar";
+            }
+        } else {
+            sidebar.classList.remove("collapsed");
+            if (toggleSidebarBtn) toggleSidebarBtn.textContent = "⤢ Focus Workspace";
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.textContent = "◀";
+                sidebarToggleBtn.title = "Minimize Sidebar";
+            }
+        }
+    }
+
+    if (toggleSidebarBtn) {
+        toggleSidebarBtn.addEventListener("click", () => updateSidebarCollapseUI(!isSidebarCollapsed));
+    }
+    if (sidebarToggleBtn) {
+        sidebarToggleBtn.addEventListener("click", () => updateSidebarCollapseUI(!isSidebarCollapsed));
+    }
+
+    const markAllBtn = document.getElementById("studio-mark-all-dupes-btn");
+    const unmarkAllBtn = document.getElementById("studio-unmark-all-btn");
+    const invertBtn = document.getElementById("studio-invert-selection-btn");
+    const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+
+    if (markAllBtn) {
+        markAllBtn.addEventListener("click", () => {
+            resultsData.forEach(group => {
+                group.files.forEach(file => {
+                    if (!file.is_ref) file.marked = true;
+                });
+            });
+            renderResultsStudio();
+        });
+    }
+    if (unmarkAllBtn) {
+        unmarkAllBtn.addEventListener("click", () => {
+            resultsData.forEach(group => {
+                group.files.forEach(file => {
+                    file.marked = false;
+                });
+            });
+            renderResultsStudio();
+        });
+    }
+    if (invertBtn) {
+        invertBtn.addEventListener("click", () => {
+            resultsData.forEach(group => {
+                group.files.forEach(file => {
+                    if (!file.is_ref) file.marked = !file.marked;
+                });
+            });
+            renderResultsStudio();
+        });
+    }
+    if (studioDeleteBtn) {
+        studioDeleteBtn.addEventListener("click", deleteMarked);
     }
 
     // Live DB name preview listener
@@ -541,11 +660,12 @@ async function checkScanStatus() {
     try {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
-        if (state.status === "scanning") {
+        const isCurrentlyScanning = state.scanning || ["discovering", "hashing", "scanning", "running"].includes(state.status);
+        if (isCurrentlyScanning) {
             isScanning = true;
-            progressContainer.classList.remove("hidden");
-            welcomeContainer.classList.add("hidden");
-            resultsContainer.classList.add("hidden");
+            if (progressContainer) progressContainer.classList.remove("hidden");
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (resultsContainer) resultsContainer.classList.add("hidden");
             pollProgress();
         }
     } catch (err) {
@@ -559,13 +679,19 @@ async function pollProgress() {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
 
-        if (state.status === "scanning") {
-            progressBarFill.style.width = `${state.progress}%`;
-            progressPercent.textContent = `${state.progress}%`;
+        const isCurrentlyScanning = state.scanning || ["discovering", "hashing", "scanning", "running"].includes(state.status);
+
+        if (isCurrentlyScanning) {
+            if (progressContainer) progressContainer.classList.remove("hidden");
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (resultsContainer) resultsContainer.classList.add("hidden");
+
+            progressBarFill.style.width = `${state.progress || 0}%`;
+            progressPercent.textContent = `${state.progress || 0}%`;
             if (isStopping) {
                 progressDesc.textContent = "Stopping scan, writing database checkpoints...";
             } else {
-                progressDesc.textContent = state.progress_msg || "Scanning...";
+                progressDesc.textContent = state.progress_msg || "Processing scan task...";
             }
 
             const targetsDiv = document.getElementById("progress-targets");
@@ -575,7 +701,8 @@ async function pollProgress() {
                 targetsDiv.innerHTML = "";
             }
 
-            setTimeout(pollProgress, 300);
+            loadMultiScans();
+            setTimeout(pollProgress, 500);
         } else {
             isScanning = false;
             isStopping = false;
@@ -584,10 +711,11 @@ async function pollProgress() {
             hideToast();
             loadMultiScans();
             if (state.status === "completed") {
+                showToast("Scan completed! Rendering duplicate results...", true);
                 await loadResults();
+                hideToast();
                 if (resultsContainer) {
                     resultsContainer.classList.remove("hidden");
-                    resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
                 if (welcomeContainer) welcomeContainer.classList.add("hidden");
             } else {
@@ -595,36 +723,17 @@ async function pollProgress() {
                 resultsContainer.classList.add("hidden");
 
                 if (cancelStats) {
-                    let msg = "Scan was stopped. Hashing progress saved to database checkpoints.";
-                    const scanned = cancelStats.scanned_count || 0;
-                    const reused = cancelStats.reused_count || 0;
-                    if (scanned > 0 || reused > 0) {
-                        msg += `\n- Saved ${scanned} new file hashes to cache.`;
-                        msg += `\n- Reused ${reused} cached file hashes.`;
-                        if (cancelStats.last_file) {
-                            const filename = cancelStats.last_file.split("/").pop();
-                            msg += `\n- Last scanned file: ${filename}`;
-                        }
-                    } else {
-                        msg += "\n- No files were processed.";
-                    }
-                    msg += "\n\n(Click this message to dismiss)";
+                    let msg = "Scan was stopped. Progress saved to database.";
                     showToast(msg, true);
                     cancelStats = null;
                 } else {
-                    showToast("Scan was stopped. Hashing progress saved to database checkpoints.");
+                    showToast("Scan reached idle or stopped state.");
                 }
             }
         }
     } catch (err) {
         console.error("Poll progress failed:", err);
-        pollErrorCount = (window.pollErrorCount || 0) + 1;
-        if (isScanning && pollErrorCount < 10) {
-            setTimeout(pollProgress, 1000);
-        } else if (pollErrorCount >= 10) {
-            isScanning = false;
-            showToast("Connection to server lost. Polling stopped.");
-        }
+        showToast("Connection to server lost. Polling stopped.");
     }
 }
 
@@ -733,6 +842,115 @@ function renderResults(totalMarkedCount) {
     resultsSummary.textContent = `Found ${totalGroups} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;
     deleteMarkedBtn.disabled = overallMarked === 0;
     deleteMarkedBtn.textContent = `Delete ${overallMarked} Marked File(s)`;
+
+    renderResultsStudio();
+}
+
+// Results Studio State & Renderer
+let studioCurrentGroupIndex = 0;
+let studioDensity = "compact";
+let isSidebarCollapsed = false;
+
+function renderResultsStudio() {
+    const studioBadge = document.getElementById("studio-summary-badge");
+    const studioBody = document.getElementById("studio-results-body");
+    const studioCounter = document.getElementById("studio-group-counter");
+    const studioSearch = document.getElementById("studio-search-input");
+    const studioMarkedStats = document.getElementById("studio-marked-stats");
+    const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+
+    if (!studioBody) return;
+
+    const filterQuery = studioSearch ? studioSearch.value.trim().toLowerCase() : "";
+    const filteredGroups = (resultsData || []).filter(group => {
+        if (!filterQuery) return true;
+        return group.files.some(f =>
+            (f.name && f.name.toLowerCase().includes(filterQuery)) ||
+            (f.folder && f.folder.toLowerCase().includes(filterQuery)) ||
+            (f.path && f.path.toLowerCase().includes(filterQuery))
+        );
+    });
+
+    if (studioBadge) studioBadge.textContent = `${filteredGroups.length} Duplicate Groups`;
+    if (studioCounter) {
+        if (filteredGroups.length === 0) {
+            studioCounter.textContent = "Group 0 of 0";
+        } else {
+            studioCounter.textContent = `Group ${studioCurrentGroupIndex + 1} of ${filteredGroups.length}`;
+        }
+    }
+
+    studioBody.innerHTML = "";
+
+    if (!filteredGroups || filteredGroups.length === 0) {
+        studioBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 48px; color: var(--text-secondary);">No duplicate results found. Launch a scan or select a scan database to view duplicates.</td></tr>`;
+        if (studioMarkedStats) studioMarkedStats.textContent = "0 files marked for deletion (0 B)";
+        if (studioDeleteBtn) studioDeleteBtn.disabled = true;
+        return;
+    }
+
+    let markedCount = 0;
+    let markedBytes = 0;
+
+    filteredGroups.forEach((group, gIdx) => {
+        const groupHeader = document.createElement("tr");
+        groupHeader.className = "studio-group-header";
+        const groupNum = group.id !== undefined ? group.id + 1 : gIdx + 1;
+        groupHeader.innerHTML = `
+            <td colspan="7">
+                📁 Duplicate Group #${groupNum} &nbsp;•&nbsp; ${group.files.length} Files &nbsp;•&nbsp; Match Score: ${group.percentage}%
+            </td>
+        `;
+        studioBody.appendChild(groupHeader);
+
+        group.files.forEach(file => {
+            if (file.marked && !file.is_ref) {
+                markedCount++;
+                markedBytes += (file.size_bytes || 0);
+            }
+
+            const row = document.createElement("tr");
+            if (studioDensity === "compact") row.classList.add("compact-row");
+
+            const checkboxHtml = file.is_ref
+                ? `<span style="font-size: 0.72rem; padding: 2px 6px; background: rgba(85, 239, 196, 0.15); color: var(--success); border-radius: 4px; font-weight: 600;">PIVOT</span>`
+                : `
+                    <label class="checkbox-container">
+                        <input type="checkbox" ${file.marked ? "checked" : ""} onchange="toggleMark('${escapeJS(file.path)}', this.checked)">
+                        <span class="checkmark"></span>
+                    </label>
+                `;
+
+            const ext = file.name ? file.name.split('.').pop().toUpperCase() : "FILE";
+
+            row.innerHTML = `
+                <td style="text-align: center;">${checkboxHtml}</td>
+                <td style="text-align: center; color: var(--accent); font-weight: 600;">${file.is_ref ? "-" : file.percentage + "%"}</td>
+                <td style="text-align: center;"><span style="font-size: 0.72rem; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">${ext}</span></td>
+                <td class="expandable-cell" style="font-weight: 500;" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</td>
+                <td class="expandable-cell" style="font-size: 0.8rem; font-family: monospace; color: var(--text-secondary);" title="${escapeHtml(file.folder)}">${escapeHtml(file.folder)}</td>
+                <td style="text-align: right; font-weight: 500;">${file.size}</td>
+                <td style="color: var(--text-secondary); font-size: 0.8rem;">${file.mtime}</td>
+            `;
+            studioBody.appendChild(row);
+        });
+    });
+
+    const formatBytesStr = (bytes) => {
+        if (!bytes) return "0 B";
+        const k = 1024;
+        const sizes = ["B", "KB", "MB", "GB", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+    };
+
+    if (studioMarkedStats) {
+        studioMarkedStats.textContent = `${markedCount} file(s) marked for deletion (${formatBytesStr(markedBytes)})`;
+    }
+    if (studioDeleteBtn) {
+        studioDeleteBtn.disabled = markedCount === 0;
+        studioDeleteBtn.textContent = `🗑️ Delete ${markedCount} Marked File(s)`;
+    }
 }
 
 async function toggleMark(path, isChecked) {
@@ -765,20 +983,45 @@ async function toggleMark(path, isChecked) {
 }
 
 async function deleteMarked() {
-    if (!confirm("Are you sure you want to permanently delete the marked duplicate files? This cannot be undone.")) {
+    const markedPaths = [];
+    (resultsData || []).forEach(group => {
+        group.files.forEach(file => {
+            if (file.marked && !file.is_ref) {
+                markedPaths.push(file.path);
+            }
+        });
+    });
+
+    if (markedPaths.length === 0) {
+        showToast("No marked files selected for deletion.");
         return;
     }
+
+    if (!confirm(`Are you sure you want to permanently delete ${markedPaths.length} marked duplicate file(s)? This cannot be undone.`)) {
+        return;
+    }
+
     try {
+        showToast(`Deleting ${markedPaths.length} marked duplicate file(s)...`);
         const response = await fetch(`${API_BASE}/api/results/delete`, {
-            method: "POST"
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                task_id: activeTaskId,
+                paths: markedPaths,
+            }),
         });
         const result = await response.json();
         if (result.success) {
-            alert("Marked files deleted successfully!");
-            loadResults();
+            showToast(`Successfully deleted ${result.deleted_count || markedPaths.length} duplicate file(s).`);
+            await loadResults();
+            await loadMultiScans();
+        } else {
+            showToast(`Error deleting files: ${result.error}`);
         }
     } catch (err) {
         console.error("Delete marked failed:", err);
+        showToast(`Error deleting files: ${err.message}`);
     }
 }
 async function cancelScan() {
@@ -1081,7 +1324,7 @@ async function loadMultiScans() {
                 const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
                 const foldersHtml = task.directories && task.directories.length
                     ? task.directories.map(d => `<div style="padding: 2px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);">${escapeHtml(d)}</div>`).join("")
-                    : "<em>All target directories</em>";
+                    : `<em>Target: ${escapeHtml(task.name)}</em>`;
 
                 card.innerHTML = `
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1103,7 +1346,8 @@ async function loadMultiScans() {
                         <span><strong style="color: var(--text-primary);">Matches:</strong> ${task.match_count || 0}</span>
                     </div>
                     <div style="margin-top: 6px; display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border-color);">
-                        <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                        <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="viewTaskResults('${task.task_id}', this)">View Results</button>
+                        <button class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="rescanTaskDatabase('${task.task_id}', this)">Refresh Scan</button>
                         <button class="btn danger-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;" onclick="deleteScanTask('${task.task_id}')">Delete DB</button>
                     </div>
                 `;
@@ -1131,10 +1375,12 @@ async function loadMultiScans() {
                         statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(16, 185, 129, 0.2); color: #34d399;">COMPLETED</span>`;
                     } else if (task.status === "needs_hashing") {
                         statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">UNHASHED</span>`;
+                    } else if (task.status === "failed") {
+                        statusBadge = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(239, 68, 68, 0.2); color: #f87171;">FAILED</span>`;
                     }
 
-                    const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(2);
-                    const folderText = task.directories && task.directories.length ? task.directories.join(", ") : "All";
+                    const folderText = (task.directories || []).join(", ") || "None";
+                    const sizeMb = (task.db_size_bytes / (1024 * 1024)).toFixed(1);
 
                     row.innerHTML = `
                         <td style="padding: 8px 12px; font-weight: 600; color: var(--text-primary);">${escapeHtml(task.name)}</td>
@@ -1145,7 +1391,8 @@ async function loadMultiScans() {
                         <td style="padding: 8px 12px; text-align: right; font-family: monospace;">${sizeMb} MB</td>
                         <td style="padding: 8px 12px; font-family: monospace; font-size: 0.78rem; color: var(--text-secondary); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHtml(folderText)}">${escapeHtml(folderText)}</td>
                         <td style="padding: 8px 12px; text-align: right;">
-                            <button class="btn secondary-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px;" onclick="viewTaskResults('${task.task_id}')">View Results</button>
+                            <button class="btn secondary-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px;" onclick="viewTaskResults('${task.task_id}', this)">View Results</button>
+                            <button class="btn secondary-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px; margin-left: 4px;" onclick="rescanTaskDatabase('${task.task_id}', this)">Refresh Scan</button>
                             <button class="btn danger-btn text-btn" style="font-size: 0.75rem; padding: 3px 8px; margin-left: 4px;" onclick="deleteScanTask('${task.task_id}')">Delete</button>
                         </td>
                     `;
@@ -1158,9 +1405,51 @@ async function loadMultiScans() {
     }
 }
 
-async function viewTaskResults(taskId) {
+async function rescanTaskDatabase(taskId, btn) {
+    let originalHtml = "";
+    if (btn) {
+        originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "🔄 Refreshing...";
+    }
     try {
-        showToast("Loading results for database task...");
+        showToast("Initiating Refresh Scan across target directories...", true);
+        const response = await fetch(`${API_BASE}/api/scans/rescan`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ task_id: taskId }),
+        });
+        const res = await response.json();
+        if (res.success) {
+            isScanning = true;
+            if (progressContainer) progressContainer.classList.remove("hidden");
+            if (welcomeContainer) welcomeContainer.classList.add("hidden");
+            if (resultsContainer) resultsContainer.classList.add("hidden");
+            showToast(`Re-scanning directory paths for '${res.task.name}'... Please wait.`, true);
+            pollProgress();
+        } else {
+            showToast(`Error refreshing scan: ${res.error}`);
+        }
+    } catch (err) {
+        showToast(`Failed to refresh scan: ${err.message}`);
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        }
+    }
+}
+
+async function viewTaskResults(taskId, btn) {
+    activeTaskId = taskId;
+    let originalHtml = "";
+    if (btn) {
+        originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "⏳ Loading...";
+    }
+    try {
+        showToast("Loading scan results from database...", true);
         const response = await fetch(`${API_BASE}/api/scans/load`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -1176,12 +1465,12 @@ async function viewTaskResults(taskId) {
                 showToast(`Hashing & scanning candidate files for '${res.task.name}'... Please wait.`, true);
                 pollProgress();
             } else {
+                showToast("Rendering duplicate matches...", true);
                 await loadResults();
                 await loadMultiScans();
                 hideToast();
                 if (resultsContainer) {
                     resultsContainer.classList.remove("hidden");
-                    resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
                 if (welcomeContainer) welcomeContainer.classList.add("hidden");
                 if (progressContainer) progressContainer.classList.add("hidden");
@@ -1191,6 +1480,11 @@ async function viewTaskResults(taskId) {
         }
     } catch (err) {
         showToast(`Failed to load scan: ${err.message}`);
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        }
     }
 }
 

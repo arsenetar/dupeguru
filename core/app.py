@@ -844,7 +844,7 @@ class DupeGuru(Broadcaster):
                         candidate_sizes = fs.filesdb.get_candidate_sizes()
                         logging.info("Found %d candidate duplicate sizes in cache", len(candidate_sizes))
 
-                        batch_size = 2000
+                        batch_size = 500
                         all_groups = []
 
                         # Process in size batches
@@ -855,7 +855,7 @@ class DupeGuru(Broadcaster):
                                 progress = int((idx / max(total_sizes, 1)) * 100)
                                 j.set_progress(
                                     progress,
-                                    tr("Hashing & comparing duplicate candidates ({}/{} size groups)...").format(
+                                    tr("Hashing & comparing duplicate candidates ({:,}/{:,} size groups)...").format(
                                         idx, total_sizes
                                     ),
                                 )
@@ -868,6 +868,10 @@ class DupeGuru(Broadcaster):
                                     if file:
                                         file.size = f_data["size"]
                                         file.mtime = f_data["mtime_ns"] / 1e9
+                                        if f_data.get("digest"):
+                                            file._digest = f_data["digest"]
+                                        if f_data.get("digest_partial"):
+                                            file._digest_partial = f_data["digest_partial"]
                                         state = self.directories.get_state(p.parent)
                                         file.is_ref = state == directories.DirectoryState.REFERENCE
                                         batch_files.append(file)
@@ -878,6 +882,8 @@ class DupeGuru(Broadcaster):
                                 if batch_files:
                                     batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
                                     all_groups.extend(batch_groups)
+
+                                fs.filesdb.commit()
 
                                 del batch_files
                                 import gc

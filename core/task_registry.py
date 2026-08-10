@@ -49,14 +49,18 @@ class ScanTask:
         self._thread = None
 
     def save_metadata(self) -> None:
+        import json
+
+        status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
         try:
             from core import fs
 
             if fs.filesdb and fs.filesdb.engine and getattr(fs.filesdb.engine, "db_path", None) == self.db_path:
-                status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
                 fs.filesdb.set_metadata("match_count", self.match_count)
                 fs.filesdb.set_metadata("dupe_count", self.dupe_count)
                 fs.filesdb.set_metadata("status", status_str)
+                if self.directories:
+                    fs.filesdb.set_metadata("directories", json.dumps(self.directories))
                 return
         except Exception:
             pass
@@ -70,8 +74,12 @@ class ScanTask:
                 cur.execute("CREATE TABLE IF NOT EXISTS scan_metadata (key TEXT PRIMARY KEY, value TEXT)")
                 cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('match_count', ?)", (str(self.match_count),))
                 cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('dupe_count', ?)", (str(self.dupe_count),))
-                status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
                 cur.execute("INSERT OR REPLACE INTO scan_metadata VALUES ('status', ?)", (status_str,))
+                if self.directories:
+                    cur.execute(
+                        "INSERT OR REPLACE INTO scan_metadata VALUES ('directories', ?)",
+                        (json.dumps(self.directories),),
+                    )
                 conn.commit()
                 conn.close()
             except Exception:
@@ -102,6 +110,12 @@ class ScanTask:
                 try:
                     cur.execute("SELECT key, value FROM scan_metadata")
                     meta = dict(cur.fetchall())
+                    if "directories" in meta and meta["directories"]:
+                        import json
+
+                        d_list = json.loads(meta["directories"])
+                        if d_list:
+                            self.directories = d_list
                     if "match_count" in meta and meta["match_count"]:
                         self.match_count = int(meta["match_count"])
                     if "dupe_count" in meta and meta["dupe_count"]:
@@ -114,13 +128,13 @@ class ScanTask:
                 pass
 
         status_str = self.status.value if isinstance(self.status, ScanTaskStatus) else str(self.status)
-        if self.match_count > 0:
+        if self.status == ScanTaskStatus.RUNNING:
+            status_str = "running"
+        elif self.match_count > 0:
             status_str = "completed"
-        elif total_files > 0 and hashed_count == 0:
+        elif total_files > 0 and hashed_count == 0 and not getattr(self, "is_loaded", False):
             status_str = "needs_hashing"
         elif getattr(self, "is_loaded", False) or status_str == "completed":
-            if total_files > 0 and hashed_count < total_files:
-                hashed_count = total_files
             status_str = "completed"
 
         return {
@@ -247,53 +261,85 @@ class ScanTaskRegistry:
                     for fname in os.listdir(scans_directory):
                         if fname.endswith(".db"):
                             db_path = os.path.join(scans_directory, fname)
-                            existing = any(t.db_path == db_path for t in self.tasks.values())
-                            if not existing:
-                                task_id = fname.replace(".db", "")
+                            task_id = fname.replace(".db", "")
+                            existing_task = next(
+                                (t for t in self.tasks.values() if t.db_path == db_path or t.task_id == task_id), None
+                            )
+                            if existing_task:
+                                task = existing_task
+                            else:
                                 name = task_id.rsplit("_", 1)[0] if "_" in task_id else task_id
                                 task = ScanTask(task_id=task_id, name=name, db_path=db_path, directories=[])
-                                task.status = ScanTaskStatus.COMPLETED
+                                self.tasks[task_id] = task
+
+                            try:
+                                import sqlite3
+
+                                conn = sqlite3.connect(db_path)
+                                cur = conn.cursor()
+                                cur.execute("SELECT COUNT(*) FROM files")
+                                task.file_count = cur.fetchone()[0]
+
+                                cur.execute(
+                                    "SELECT COUNT(*) FROM files WHERE (digest IS NOT NULL AND length(digest) > 0) "
+                                    "OR (digest_partial IS NOT NULL AND length(digest_partial) > 0)"
+                                )
+                                row_h = cur.fetchone()
+                                h_count = row_h[0] if row_h else 0
+                                if h_count == 0 and task.file_count > 0 and task.match_count == 0:
+                                    task.status = ScanTaskStatus.NEEDS_HASHING
+                                else:
+                                    task.status = ScanTaskStatus.COMPLETED
 
                                 try:
-                                    import sqlite3
+                                    cur.execute("SELECT key, value FROM scan_metadata")
+                                    meta = dict(cur.fetchall())
+                                    if "directories" in meta:
+                                        try:
+                                            import json
 
-                                    conn = sqlite3.connect(db_path)
-                                    cur = conn.cursor()
-                                    cur.execute("SELECT COUNT(*) FROM files")
-                                    task.file_count = cur.fetchone()[0]
-
-                                    cur.execute(
-                                        "SELECT COUNT(*) FROM files WHERE (digest IS NOT NULL AND length(digest) > 0) "
-                                        "OR (digest_partial IS NOT NULL AND length(digest_partial) > 0)"
-                                    )
-                                    row_h = cur.fetchone()
-                                    h_count = row_h[0] if row_h else 0
-                                    if h_count == 0 and task.file_count > 0:
-                                        task.status = ScanTaskStatus.NEEDS_HASHING
-                                    else:
+                                            loaded_dirs = json.loads(meta["directories"])
+                                            if loaded_dirs and isinstance(loaded_dirs, list):
+                                                task.directories = loaded_dirs
+                                        except Exception:
+                                            pass
+                                    if "match_count" in meta:
+                                        task.match_count = int(meta["match_count"])
+                                    if "dupe_count" in meta:
+                                        task.dupe_count = int(meta["dupe_count"])
+                                    if "status" in meta and meta["status"] == "completed":
                                         task.status = ScanTaskStatus.COMPLETED
+                                        task.is_loaded = True
+                                except Exception:
+                                    pass
 
+                                if not task.directories:
                                     cur.execute("SELECT path FROM scanned_directories")
                                     saved_dirs = [r[0] for r in cur.fetchall()]
                                     if saved_dirs:
-                                        task.directories = minimize_directories(saved_dirs)
+                                        try:
+                                            cp = os.path.commonpath(saved_dirs)
+                                            task.directories = [cp]
+                                        except Exception:
+                                            task.directories = minimize_directories(saved_dirs)
 
-                                    try:
-                                        cur.execute("SELECT key, value FROM scan_metadata")
-                                        meta = dict(cur.fetchall())
-                                        if "match_count" in meta:
-                                            task.match_count = int(meta["match_count"])
-                                        if "dupe_count" in meta:
-                                            task.dupe_count = int(meta["dupe_count"])
-                                        if "status" in meta and meta["status"] == "completed":
-                                            task.status = ScanTaskStatus.COMPLETED
-                                            task.is_loaded = True
-                                    except Exception:
-                                        pass
+                                if not task.directories:
+                                    clean_name = task.name.lower().replace("_", "").replace("-", "")
+                                    clients_base = "/mnt/backup/image/clients"
+                                    if os.path.exists(clients_base):
+                                        for cand in os.listdir(clients_base):
+                                            cand_clean = cand.lower().replace("_", "").replace("-", "")
+                                            if clean_name == cand_clean or (
+                                                clean_name.startswith("mash") and cand_clean == "ml"
+                                            ):
+                                                full_cand = os.path.join(clients_base, cand)
+                                                if os.path.isdir(full_cand):
+                                                    task.directories = [full_cand]
+                                                    break
 
-                                    conn.close()
-                                except Exception:
-                                    pass
+                                conn.close()
+                            except Exception:
+                                pass
 
                                 self.tasks[task_id] = task
                 except Exception as e:

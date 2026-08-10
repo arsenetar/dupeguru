@@ -110,3 +110,6 @@ cocoa/autogen
 *.waf*
 .lock-waf*
 /tags
+rust_engine/target/
+manifest.json
+report.md

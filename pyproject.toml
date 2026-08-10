@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = "GPL-3.0-only"
 authors = [
-    { name = "Tin Le", email = "tin@example.com" },
+    { name = "Tin Le", email = "tin@le.org" },
     { name = "Andrew Senetar", email = "arsenetar@voltaicideas.net" }
 ]
 classifiers = [
