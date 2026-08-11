@@ -226,6 +226,7 @@ function setupEventListeners() {
         if (activeTab) activeTab.classList.add("active");
         if (activeContainer) activeContainer.classList.remove("hidden");
     }
+    window.activateTab = activateTab;
 
     if (tabScan) {
         tabScan.addEventListener("click", () => activateTab(tabScan, scanViewContent));
@@ -1854,7 +1855,14 @@ function transferCrossToStudio() {
 
     const tabResultsStudio = document.getElementById("tab-results-studio");
     const resultsStudioContainer = document.getElementById("results-studio-container");
-    activateTab(tabResultsStudio, resultsStudioContainer);
+    if (typeof window.activateTab === "function") {
+        window.activateTab(tabResultsStudio, resultsStudioContainer);
+    } else {
+        [document.getElementById("tab-scan"), tabResultsStudio, document.getElementById("tab-cross-db"), document.getElementById("tab-cache")].forEach(t => t && t.classList.remove("active"));
+        [document.getElementById("scan-view-content"), resultsStudioContainer, document.getElementById("cross-db-container"), document.getElementById("cache-container")].forEach(c => c && c.classList.add("hidden"));
+        if (tabResultsStudio) tabResultsStudio.classList.add("active");
+        if (resultsStudioContainer) resultsStudioContainer.classList.remove("hidden");
+    }
     renderResultsStudio();
     showToast("Transferred cross-database duplicate groups into Results Studio.");
 }
