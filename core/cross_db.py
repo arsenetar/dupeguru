@@ -4,6 +4,7 @@ import logging
 import os
 import sqlite3
 import time
+import zlib
 from collections import defaultdict
 from typing import Any, Dict, List, Optional
 
@@ -24,7 +25,7 @@ class CrossDBMatcher:
                     CREATE TABLE IF NOT EXISTS cross_scan_cache (
                         set_key TEXT PRIMARY KEY,
                         fingerprint TEXT NOT NULL,
-                        results_json TEXT NOT NULL,
+                        results_json BLOB NOT NULL,
                         total_groups INTEGER NOT NULL,
                         updated_at REAL NOT NULL
                     );
@@ -52,15 +53,24 @@ class CrossDBMatcher:
                 ).fetchone()
                 if row and row[0] == current_fingerprint:
                     logging.info(f"Cross-DB cache HIT for DB set ({len(self.db_paths)} DBs).")
-                    return json.loads(row[1])
+                    blob = row[1]
+                    if isinstance(blob, bytes):
+                        try:
+                            decompressed = zlib.decompress(blob).decode("utf-8")
+                            return json.loads(decompressed)
+                        except zlib.error:
+                            return json.loads(blob.decode("utf-8"))
+                    else:
+                        return json.loads(blob)
         except Exception as e:
             logging.warning(f"Error reading cross-DB cache: {e}")
         return None
 
     def _save_cached_results(self, set_key: str, fingerprint: str, results: List[Dict[str, Any]]):
         try:
+            raw_bytes = json.dumps(results).encode("utf-8")
+            compressed_blob = zlib.compress(raw_bytes, level=6)
             with sqlite3.connect(self.cache_db_path) as conn:
-                results_json = json.dumps(results)
                 conn.execute(
                     """
                     INSERT INTO cross_scan_cache (set_key, fingerprint, results_json, total_groups, updated_at)
@@ -71,7 +81,7 @@ class CrossDBMatcher:
                         total_groups=excluded.total_groups,
                         updated_at=excluded.updated_at
                     """,
-                    (set_key, fingerprint, results_json, len(results), time.time()),
+                    (set_key, fingerprint, sqlite3.Binary(compressed_blob), len(results), time.time()),
                 )
         except Exception as e:
             logging.error(f"Failed to save cross-DB cache: {e}")
