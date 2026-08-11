@@ -322,15 +322,21 @@
 
                 <!-- Cross-DB Results Table -->
                 <div id="cross-results-wrapper" class="table-wrapper hidden">
-                    <header class="results-header" style="margin-bottom: 16px;">
+                    <header class="results-header" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                         <div>
                             <h2>Cross-DB Duplicate Groups</h2>
                             <p id="cross-results-summary">Select 2 or more databases and click 'Compare Selected Databases'.</p>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button id="cross-mark-all-btn" class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;">Mark All Duplicates</button>
+                            <button id="cross-unmark-all-btn" class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;">Unmark All</button>
+                            <button id="cross-transfer-studio-btn" class="btn accent-btn" style="font-size: 0.8rem; padding: 6px 12px;">📊 Open in Duplicate Results Studio</button>
                         </div>
                     </header>
                     <table class="results-table">
                         <thead>
                             <tr>
+                                <th width="60" style="text-align: center;">Mark</th>
                                 <th width="80">Group #</th>
                                 <th>Database Origin</th>
                                 <th>File Path</th>
@@ -342,6 +348,11 @@
                             <!-- Rendered dynamically -->
                         </tbody>
                     </table>
+
+                    <div id="cross-action-bar" class="studio-action-bar" style="margin-top: 16px; border-radius: 8px;">
+                        <span id="cross-marked-stats" style="font-weight: 500; font-size: 0.9rem; color: var(--text-primary);">0 file(s) marked for deletion (0 B)</span>
+                        <button id="cross-delete-marked-btn" class="btn primary-btn danger-btn" disabled>🗑️ Delete Marked Files Across Databases</button>
+                    </div>
                 </div>
             </div>
 

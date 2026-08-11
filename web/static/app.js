@@ -1619,8 +1619,49 @@ function updateCrossMatchButton() {
     }
 }
 
+let crossDbResultsData = [];
+let crossDbSelectedDBs = [];
+
+function toggleCrossMark(groupIndex, fileIndex, isChecked) {
+    if (crossDbResultsData[groupIndex] && crossDbResultsData[groupIndex].files[fileIndex]) {
+        crossDbResultsData[groupIndex].files[fileIndex].marked = isChecked;
+        updateCrossStats();
+    }
+}
+
+function updateCrossStats() {
+    let markedCount = 0;
+    let markedBytes = 0;
+    (crossDbResultsData || []).forEach(g => {
+        g.files.forEach(f => {
+            if (f.marked) {
+                markedCount++;
+                markedBytes += (f.size || 0);
+            }
+        });
+    });
+
+    const formatBytesStr = (bytes) => {
+        if (!bytes) return "0 B";
+        const k = 1024;
+        const sizes = ["B", "KB", "MB", "GB", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+    };
+
+    const statsEl = document.getElementById("cross-marked-stats");
+    const deleteBtn = document.getElementById("cross-delete-marked-btn");
+
+    if (statsEl) statsEl.textContent = `${markedCount} file(s) marked for deletion (${formatBytesStr(markedBytes)})`;
+    if (deleteBtn) {
+        deleteBtn.disabled = markedCount === 0;
+        deleteBtn.textContent = `🗑️ Delete ${markedCount} Marked File(s) Across Databases`;
+    }
+}
+
 async function runCrossMatch() {
     const checked = Array.from(document.querySelectorAll(".cross-db-checkbox:checked")).map(c => c.value);
+    crossDbSelectedDBs = checked;
     const resultsWrapper = document.getElementById("cross-results-wrapper");
     const resultsSummary = document.getElementById("cross-results-summary");
 
@@ -1661,22 +1702,37 @@ async function runCrossMatch() {
 }
 
 function renderCrossResultsTable(groups) {
+    crossDbResultsData = groups || [];
     const tbody = document.getElementById("cross-results-body");
     if (!tbody) return;
 
     tbody.innerHTML = "";
 
-    if (!groups || groups.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 32px; color: var(--text-secondary);">No cross-database duplicate matches found.</td></tr>`;
+    if (!crossDbResultsData || crossDbResultsData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 32px; color: var(--text-secondary);">No cross-database duplicate matches found.</td></tr>`;
+        updateCrossStats();
         return;
     }
 
-    groups.forEach(g => {
+    crossDbResultsData.forEach((g, gIdx) => {
         g.files.forEach((f, fIdx) => {
+            if (f.marked === undefined) {
+                f.marked = fIdx > 0;
+            }
+
             const row = document.createElement("tr");
             if (fIdx === 0) {
                 row.style.borderTop = "2px solid var(--border-color)";
             }
+
+            const checkTd = document.createElement("td");
+            checkTd.style.textAlign = "center";
+            checkTd.innerHTML = fIdx === 0
+                ? `<span style="font-size: 0.72rem; padding: 2px 6px; background: rgba(85, 239, 196, 0.15); color: var(--success); border-radius: 4px; font-weight: 600;">PIVOT</span>`
+                : `<label class="checkbox-container">
+                        <input type="checkbox" class="cross-dupe-file-checkbox" ${f.marked ? "checked" : ""} onchange="toggleCrossMark(${gIdx}, ${fIdx}, this.checked)">
+                        <span class="checkmark"></span>
+                   </label>`;
 
             const groupTd = document.createElement("td");
             groupTd.textContent = fIdx === 0 ? `#${g.group_id}` : "";
@@ -1685,7 +1741,8 @@ function renderCrossResultsTable(groups) {
             dbTd.innerHTML = `<span style="padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; background: rgba(99, 102, 241, 0.2); color: #818cf8;">${escapeHtml(f.db_name)}</span>`;
 
             const pathTd = document.createElement("td");
-            pathTd.className = "path-cell";
+            pathTd.className = "expandable-cell";
+            pathTd.title = escapeHtml(f.path);
             pathTd.textContent = f.path;
 
             const sizeTd = document.createElement("td");
@@ -1696,6 +1753,7 @@ function renderCrossResultsTable(groups) {
             hashTd.style.fontSize = "0.8rem";
             hashTd.textContent = f.checksum ? f.checksum.substring(0, 16) + "..." : "N/A";
 
+            row.appendChild(checkTd);
             row.appendChild(groupTd);
             row.appendChild(dbTd);
             row.appendChild(pathTd);
@@ -1705,4 +1763,130 @@ function renderCrossResultsTable(groups) {
             tbody.appendChild(row);
         });
     });
+
+    updateCrossStats();
+}
+
+async function deleteCrossMarked() {
+    const markedPaths = [];
+    (crossDbResultsData || []).forEach(g => {
+        g.files.forEach(f => {
+            if (f.marked) {
+                markedPaths.push(f.path);
+            }
+        });
+    });
+
+    if (markedPaths.length === 0) {
+        showToast("No files selected for deletion.");
+        return;
+    }
+
+    if (!confirm(`Are you sure you want to permanently delete ${markedPaths.length} marked duplicate file(s) across selected databases? This cannot be undone.`)) {
+        return;
+    }
+
+    try {
+        showToast(`Deleting ${markedPaths.length} cross-database duplicate file(s)...`);
+        const response = await fetch(`${API_BASE}/api/results/delete`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                db_paths: crossDbSelectedDBs,
+                paths: markedPaths,
+            }),
+        });
+        const result = await response.json();
+        if (result.success) {
+            showToast(`Successfully deleted ${result.deleted_count || markedPaths.length} duplicate file(s) across databases.`);
+            crossDbResultsData.forEach(g => {
+                g.files = g.files.filter(f => !markedPaths.includes(f.path));
+            });
+            crossDbResultsData = crossDbResultsData.filter(g => g.files.length > 1);
+            renderCrossResultsTable(crossDbResultsData);
+            loadMultiScans();
+        } else {
+            showToast(`Error deleting files: ${result.error}`);
+        }
+    } catch (err) {
+        console.error("Cross delete failed:", err);
+        showToast(`Error deleting files: ${err.message}`);
+    }
+}
+
+function transferCrossToStudio() {
+    if (!crossDbResultsData || crossDbResultsData.length === 0) {
+        showToast("No cross-database results available to open in Results Studio.");
+        return;
+    }
+
+    resultsData = crossDbResultsData.map((g, idx) => {
+        const pivotFile = g.files[0] || {};
+        const dupeFiles = g.files.slice(1);
+        const pivotDTO = {
+            path: pivotFile.path,
+            name: pivotFile.path.split("/").pop(),
+            folder: pivotFile.path.substring(0, pivotFile.path.lastIndexOf("/")),
+            size: (pivotFile.size / 1024).toFixed(1) + " KB",
+            size_bytes: pivotFile.size,
+            mtime: "N/A",
+            percentage: 100,
+            is_ref: true,
+            marked: false,
+        };
+        const dupeDTOs = dupeFiles.map(df => ({
+            path: df.path,
+            name: df.path.split("/").pop(),
+            folder: df.path.substring(0, df.path.lastIndexOf("/")),
+            size: (df.size / 1024).toFixed(1) + " KB",
+            size_bytes: df.size,
+            mtime: "N/A",
+            percentage: 100,
+            is_ref: false,
+            marked: df.marked !== undefined ? df.marked : true,
+        }));
+        return {
+            id: idx,
+            percentage: 100,
+            files: [pivotDTO, ...dupeDTOs],
+        };
+    });
+
+    const tabResultsStudio = document.getElementById("tab-results-studio");
+    const resultsStudioContainer = document.getElementById("results-studio-container");
+    activateTab(tabResultsStudio, resultsStudioContainer);
+    renderResultsStudio();
+    showToast("Transferred cross-database duplicate groups into Results Studio.");
+}
+
+const crossMarkAllBtn = document.getElementById("cross-mark-all-btn");
+const crossUnmarkAllBtn = document.getElementById("cross-unmark-all-btn");
+const crossTransferBtn = document.getElementById("cross-transfer-studio-btn");
+const crossDeleteBtn = document.getElementById("cross-delete-marked-btn");
+
+if (crossMarkAllBtn) {
+    crossMarkAllBtn.addEventListener("click", () => {
+        (crossDbResultsData || []).forEach(g => {
+            g.files.forEach((f, idx) => {
+                if (idx > 0) f.marked = true;
+            });
+        });
+        renderCrossResultsTable(crossDbResultsData);
+    });
+}
+if (crossUnmarkAllBtn) {
+    crossUnmarkAllBtn.addEventListener("click", () => {
+        (crossDbResultsData || []).forEach(g => {
+            g.files.forEach(f => {
+                f.marked = false;
+            });
+        });
+        renderCrossResultsTable(crossDbResultsData);
+    });
+}
+if (crossTransferBtn) {
+    crossTransferBtn.addEventListener("click", transferCrossToStudio);
+}
+if (crossDeleteBtn) {
+    crossDeleteBtn.addEventListener("click", deleteCrossMarked);
 }

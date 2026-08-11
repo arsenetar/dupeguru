@@ -693,6 +693,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 else:
                     successful_paths.append(p)
 
+            db_paths = data.get("db_paths", [])
+
             if task_id and successful_paths:
                 task_exec = task_runner.get_or_create_execution(task_id)
                 if task_exec and task_exec.db_engine:
@@ -714,6 +716,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                                     )
                                 )
                         task_exec.results_groups = filtered_groups
+
+            if db_paths and successful_paths:
+                from core.storage.db_engine import DBEngine
+
+                for db_p in db_paths:
+                    if os.path.exists(db_p):
+                        try:
+                            engine = DBEngine(db_p)
+                            engine.delete_files_by_paths(successful_paths)
+                        except Exception as e:
+                            logging.error(f"Failed to purge deleted files from DB '{db_p}': {e}")
 
             logging.info(f"Deletion complete: removed {count} files for task '{task_id}'.")
 
