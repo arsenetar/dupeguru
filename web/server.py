@@ -227,9 +227,18 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     progress_msg = dto.progress_message
                     has_results = dto.match_count > 0
 
+            is_deleting = app_state.get("deleting", False)
+            if is_deleting:
+                status_str = "deleting"
+                progress = app_state.get("delete_progress", 0)
+                progress_msg = app_state.get("progress_msg", "Deleting duplicate files...")
+
             response = {
                 "status": status_str,
                 "scanning": scanning,
+                "deleting": is_deleting,
+                "delete_progress": app_state.get("delete_progress", 0),
+                "delete_total": app_state.get("delete_total", 0),
                 "progress": progress,
                 "progress_msg": progress_msg,
                 "messages": app_state.get("messages", []),
