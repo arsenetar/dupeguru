@@ -33,6 +33,7 @@ let cancelStats = null;
 let resultsData = [];
 let addedPaths = [];
 let activeTaskId = "";
+let totalMarkedFilesCount = 0;
 
 // Cache Viewer state
 let cacheSearch = "";
@@ -757,6 +758,7 @@ async function loadResults() {
 }
 
 function renderResults(totalMarkedCount) {
+    totalMarkedFilesCount = totalMarkedCount || 0;
     resultsBody.innerHTML = "";
     if (welcomeContainer) welcomeContainer.classList.add("hidden");
     if (resultsContainer) resultsContainer.classList.remove("hidden");
