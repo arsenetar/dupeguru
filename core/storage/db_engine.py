@@ -232,12 +232,15 @@ class DBEngine:
             # Fallback if duplicate_entries table is missing or empty
             query = """
             WITH candidate_dupes AS (
-                SELECT path, size, COALESCE(digest, digest_partial) as chk,
-                       ROW_NUMBER() OVER (PARTITION BY size, COALESCE(digest, digest_partial) ORDER BY path ASC) as rn
+                SELECT path, size, hex(COALESCE(digest, digest_partial)) as chk,
+                       ROW_NUMBER() OVER (
+                           PARTITION BY size, hex(COALESCE(digest, digest_partial))
+                           ORDER BY path ASC
+                       ) as rn
                 FROM files
                 WHERE size > 0 AND (digest IS NOT NULL OR digest_partial IS NOT NULL)
             )
-            SELECT path FROM candidate_dupes WHERE rn > 1 AND chk IS NOT NULL AND chk != ''
+            SELECT path FROM candidate_dupes WHERE rn > 1 AND chk IS NOT NULL AND length(chk) > 0
             """
             rows = cur.execute(query).fetchall()
             return [r[0] for r in rows if r[0]]
