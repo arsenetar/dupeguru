@@ -688,18 +688,29 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 if collected_paths:
                     paths_to_del = collected_paths
 
-            count = 0
-            successful_paths = []
-            for p in paths_to_del:
+            from concurrent.futures import ThreadPoolExecutor
+
+            def process_file_deletion(p):
                 if os.path.exists(p):
                     try:
                         os.remove(p)
-                        count += 1
-                        successful_paths.append(p)
+                        return (True, p, True)
                     except OSError as e:
                         logging.error(f"Failed to delete file {p}: {e}")
+                        return (False, p, False)
                 else:
-                    successful_paths.append(p)
+                    return (True, p, False)
+
+            successful_paths = []
+            count = 0
+            if paths_to_del:
+                workers = min(64, max(4, len(paths_to_del) // 100))
+                with ThreadPoolExecutor(max_workers=workers) as executor:
+                    for ok, p, physical in executor.map(process_file_deletion, paths_to_del):
+                        if ok:
+                            successful_paths.append(p)
+                            if physical:
+                                count += 1
 
             db_paths = data.get("db_paths", [])
 
