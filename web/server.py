@@ -671,10 +671,15 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         elif path == "/api/results/delete":
             task_id = data.get("task_id") or app_state.get("active_task_id")
             paths_to_del = data.get("paths", [])
+            delete_all_marked = data.get("delete_all_marked", False)
 
             execution = task_runner.get_or_create_execution(task_id) if task_id else None
 
-            if not paths_to_del and execution and execution.results_groups:
+            if (delete_all_marked or not paths_to_del) and execution and execution.db_engine:
+                all_db_paths = execution.db_engine.get_all_duplicate_file_paths()
+                if all_db_paths:
+                    paths_to_del = all_db_paths
+            elif not paths_to_del and execution and execution.results_groups:
                 for g in execution.results_groups:
                     for d in g.duplicates:
                         if getattr(d, "marked", False) and os.path.exists(d.path):

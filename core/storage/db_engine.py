@@ -2,6 +2,7 @@
 #
 # This software is licensed under the "GPLv3" License as described in the "LICENSE" file.
 
+import logging
 import os
 import sqlite3
 import threading
@@ -215,12 +216,32 @@ class DBEngine:
         except Exception:
             return False
 
+    def get_all_duplicate_file_paths(self) -> List[str]:
+        conn = self.get_connection()
+        cur = conn.cursor()
+        try:
+            table_check = cur.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='duplicate_entries'"
+            ).fetchone()
+            if not table_check:
+                return []
+            rows = cur.execute("SELECT file_path FROM duplicate_entries WHERE is_pivot = 0").fetchall()
+            return [r[0] for r in rows if r[0]]
+        except Exception as e:
+            logging.error(f"Failed to fetch duplicate file paths: {e}")
+            return []
+
     def delete_files_by_paths(self, paths: List[str]) -> int:
         if not paths:
             return 0
+        chunk_size = 900
         with self.transaction() as conn:
-            conn.executemany("DELETE FROM duplicate_entries WHERE file_path = ?", [(p,) for p in paths])
-            conn.executemany("DELETE FROM files WHERE path = ?", [(p,) for p in paths])
+            for i in range(0, len(paths), chunk_size):
+                chunk = paths[i : i + chunk_size]
+                placeholders = ",".join("?" for _ in chunk)
+                conn.execute(f"DELETE FROM duplicate_entries WHERE file_path IN ({placeholders})", chunk)
+                conn.execute(f"DELETE FROM files WHERE path IN ({placeholders})", chunk)
+
             conn.execute(
                 "DELETE FROM duplicate_groups WHERE group_id NOT IN ("
                 "SELECT group_id FROM duplicate_entries WHERE is_pivot = 0"

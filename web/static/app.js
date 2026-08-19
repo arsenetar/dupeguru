@@ -993,28 +993,33 @@ async function deleteMarked() {
         });
     });
 
-    if (markedPaths.length === 0) {
+    const targetCount = totalMarkedFilesCount || markedPaths.length;
+
+    if (targetCount === 0 && markedPaths.length === 0) {
         showToast("No marked files selected for deletion.");
         return;
     }
 
-    if (!confirm(`Are you sure you want to permanently delete ${markedPaths.length} marked duplicate file(s)? This cannot be undone.`)) {
+    const displayCount = targetCount > 0 ? targetCount : markedPaths.length;
+
+    if (!confirm(`Are you sure you want to permanently delete all ${displayCount} marked duplicate file(s)? This cannot be undone.`)) {
         return;
     }
 
     try {
-        showToast(`Deleting ${markedPaths.length} marked duplicate file(s)...`);
+        showToast(`Deleting ${displayCount} marked duplicate file(s)... Please wait.`, true);
         const response = await fetch(`${API_BASE}/api/results/delete`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 task_id: activeTaskId,
+                delete_all_marked: true,
                 paths: markedPaths,
             }),
         });
         const result = await response.json();
         if (result.success) {
-            showToast(`Successfully deleted ${result.deleted_count || markedPaths.length} duplicate file(s).`);
+            showToast(`Successfully deleted ${result.deleted_count || displayCount} duplicate file(s).`);
             await loadResults();
             await loadMultiScans();
         } else {
