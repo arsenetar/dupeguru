@@ -29,6 +29,7 @@ const saveResultsBtn = document.getElementById("save-results-btn");
 let currentBrowserPath = "";
 let isScanning = false;
 let isStopping = false;
+let isDeleting = false;
 let cancelStats = null;
 let resultsData = [];
 let addedPaths = [];
@@ -657,11 +658,32 @@ async function startScan(clearCache = false) {
 }
 
 async function checkScanStatus() {
-    // Light status checks to sync UI
-    if (isScanning || isStopping) return;
     try {
         const response = await fetch(`${API_BASE}/api/status?_t=${Date.now()}`);
         const state = await response.json();
+
+        // Handle live background deletion state
+        if (state.deleting) {
+            isDeleting = true;
+            if (deleteMarkedBtn) {
+                deleteMarkedBtn.disabled = true;
+                deleteMarkedBtn.textContent = `⏳ Deleting... (${state.delete_progress || 0}%)`;
+            }
+            const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+            if (studioDeleteBtn) {
+                studioDeleteBtn.disabled = true;
+                studioDeleteBtn.textContent = `⏳ Deleting... (${state.delete_progress || 0}%)`;
+            }
+            showToast(state.progress_msg || "Deleting duplicate files in background...", true);
+        } else if (isDeleting) {
+            isDeleting = false;
+            showToast("✅ Duplicate files successfully deleted!");
+            await loadResults();
+            await loadMultiScans();
+        }
+
+        if (isScanning || isStopping) return;
+
         const isCurrentlyScanning = state.scanning || ["discovering", "hashing", "scanning", "running"].includes(state.status);
         if (isCurrentlyScanning) {
             isScanning = true;
@@ -1012,7 +1034,11 @@ async function deleteMarked() {
     }
 
     try {
-        showToast(`Deleting ${displayCount} marked duplicate file(s)... Please wait.`, true);
+        if (deleteMarkedBtn) {
+            deleteMarkedBtn.disabled = true;
+            deleteMarkedBtn.textContent = "⏳ Deleting...";
+        }
+        showToast(`Starting deletion of ${displayCount} marked duplicate file(s)...`, true);
         const response = await fetch(`${API_BASE}/api/results/delete`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -1024,15 +1050,17 @@ async function deleteMarked() {
         });
         const result = await response.json();
         if (result.success) {
-            showToast(`Successfully deleted ${result.deleted_count || displayCount} duplicate file(s).`);
-            await loadResults();
-            await loadMultiScans();
+            isDeleting = true;
+            showToast(result.message || `Deleting ${displayCount} duplicate files in background...`, true);
+            checkScanStatus();
         } else {
             showToast(`Error deleting files: ${result.error}`);
+            if (deleteMarkedBtn) deleteMarkedBtn.disabled = false;
         }
     } catch (err) {
         console.error("Delete marked failed:", err);
         showToast(`Error deleting files: ${err.message}`);
+        if (deleteMarkedBtn) deleteMarkedBtn.disabled = false;
     }
 }
 async function cancelScan() {
