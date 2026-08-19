@@ -207,10 +207,6 @@ class DBEngine:
             if not table_check:
                 return False
 
-            status_val = self.get_metadata("status")
-            if status_val == "completed":
-                return True
-
             row = cur.execute("SELECT COUNT(*) FROM duplicate_groups").fetchone()
             return bool(row and row[0] > 0)
         except Exception:

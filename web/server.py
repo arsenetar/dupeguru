@@ -355,9 +355,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             if active_id:
                 execution = task_runner.get_or_create_execution(active_id)
                 if execution:
-                    if not execution.results_groups:
+                    if execution.results_groups is None:
                         if execution.db_engine.has_saved_duplicate_groups():
                             execution.results_groups = execution.db_engine.load_duplicate_groups()
+                        else:
+                            execution.results_groups = []
                     groups = execution.results_groups or []
 
             total_groups = len(groups)
