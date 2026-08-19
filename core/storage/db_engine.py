@@ -223,9 +223,23 @@ class DBEngine:
             table_check = cur.execute(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='duplicate_entries'"
             ).fetchone()
-            if not table_check:
-                return []
-            rows = cur.execute("SELECT file_path FROM duplicate_entries WHERE is_pivot = 0").fetchall()
+            if table_check:
+                rows = cur.execute("SELECT file_path FROM duplicate_entries WHERE is_pivot = 0").fetchall()
+                paths = [r[0] for r in rows if r[0]]
+                if paths:
+                    return paths
+
+            # Fallback if duplicate_entries table is missing or empty
+            query = """
+            WITH candidate_dupes AS (
+                SELECT path, size, COALESCE(digest, digest_partial) as chk,
+                       ROW_NUMBER() OVER (PARTITION BY size, COALESCE(digest, digest_partial) ORDER BY path ASC) as rn
+                FROM files
+                WHERE size > 0 AND (digest IS NOT NULL OR digest_partial IS NOT NULL)
+            )
+            SELECT path FROM candidate_dupes WHERE rn > 1 AND chk IS NOT NULL AND chk != ''
+            """
+            rows = cur.execute(query).fetchall()
             return [r[0] for r in rows if r[0]]
         except Exception as e:
             logging.error(f"Failed to fetch duplicate file paths: {e}")

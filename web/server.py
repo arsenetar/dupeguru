@@ -349,7 +349,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 pass
 
             groups_data = []
-            active_id = app_state.get("active_task_id")
+            active_id = query.get("task_id", [None])[0] or app_state.get("active_task_id")
             groups = []
 
             if active_id:
@@ -675,15 +675,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             execution = task_runner.get_or_create_execution(task_id) if task_id else None
 
-            if (delete_all_marked or not paths_to_del) and execution and execution.db_engine:
-                all_db_paths = execution.db_engine.get_all_duplicate_file_paths()
-                if all_db_paths:
-                    paths_to_del = all_db_paths
-            elif not paths_to_del and execution and execution.results_groups:
-                for g in execution.results_groups:
-                    for d in g.duplicates:
-                        if getattr(d, "marked", False) and os.path.exists(d.path):
-                            paths_to_del.append(d.path)
+            if delete_all_marked or not paths_to_del:
+                collected_paths = []
+                if execution and execution.db_engine:
+                    collected_paths = execution.db_engine.get_all_duplicate_file_paths()
+                if not collected_paths and execution and execution.results_groups:
+                    for g in execution.results_groups:
+                        for d in g.duplicates:
+                            collected_paths.append(d.path)
+                if collected_paths:
+                    paths_to_del = collected_paths
 
             count = 0
             successful_paths = []

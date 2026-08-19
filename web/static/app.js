@@ -741,7 +741,10 @@ async function pollProgress() {
 // 4. Results Management
 async function loadResults() {
     try {
-        const response = await fetch(`${API_BASE}/api/results?limit=${resultsLimit}&offset=${resultsOffset}&_t=${Date.now()}`);
+        const url = activeTaskId
+            ? `${API_BASE}/api/results?task_id=${encodeURIComponent(activeTaskId)}&limit=${resultsLimit}&offset=${resultsOffset}&_t=${Date.now()}`
+            : `${API_BASE}/api/results?limit=${resultsLimit}&offset=${resultsOffset}&_t=${Date.now()}`;
+        const response = await fetch(url);
         const data = await response.json();
 
         resultsData = data.groups;
