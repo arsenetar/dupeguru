@@ -739,13 +739,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 total_len = len(target_paths)
                 workers = min(64, max(4, total_len // 100))
 
+                step = max(1, min(100, total_len // 50))
                 with ThreadPoolExecutor(max_workers=workers) as executor:
                     for idx, (ok, p, physical) in enumerate(executor.map(process_file_deletion, target_paths), start=1):
                         if ok:
                             successful_paths.append(p)
                             if physical:
                                 count += 1
-                        if idx % 500 == 0 or idx == total_len:
+                        if idx % step == 0 or idx == total_len:
                             pct = int((idx / total_len) * 100)
                             app_state["delete_progress"] = pct
                             app_state["progress_msg"] = f"Deleting {idx:,} / {total_len:,} duplicate files ({pct}%)..."

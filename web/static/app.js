@@ -674,11 +674,20 @@ async function checkScanStatus() {
                 studioDeleteBtn.disabled = true;
                 studioDeleteBtn.textContent = `⏳ Deleting... (${state.delete_progress || 0}%)`;
             }
-            showToast(state.progress_msg || "Deleting duplicate files in background...", true);
         } else if (isDeleting) {
             isDeleting = false;
+            if (deleteMarkedBtn) {
+                deleteMarkedBtn.disabled = false;
+                deleteMarkedBtn.textContent = "Delete Marked File(s)";
+            }
+            const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+            if (studioDeleteBtn) {
+                studioDeleteBtn.disabled = false;
+                studioDeleteBtn.textContent = "Delete Marked Files";
+            }
             showToast("✅ Duplicate files successfully deleted!");
             await loadResults();
+            renderResultsStudio();
             await loadMultiScans();
         }
 
@@ -1038,6 +1047,11 @@ async function deleteMarked() {
             deleteMarkedBtn.disabled = true;
             deleteMarkedBtn.textContent = "⏳ Deleting...";
         }
+        const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+        if (studioDeleteBtn) {
+            studioDeleteBtn.disabled = true;
+            studioDeleteBtn.textContent = "⏳ Deleting...";
+        }
         showToast(`Starting deletion of ${displayCount} marked duplicate file(s)...`, true);
         const response = await fetch(`${API_BASE}/api/results/delete`, {
             method: "POST",
@@ -1056,11 +1070,14 @@ async function deleteMarked() {
         } else {
             showToast(`Error deleting files: ${result.error}`);
             if (deleteMarkedBtn) deleteMarkedBtn.disabled = false;
+            if (studioDeleteBtn) studioDeleteBtn.disabled = false;
         }
     } catch (err) {
         console.error("Delete marked failed:", err);
         showToast(`Error deleting files: ${err.message}`);
         if (deleteMarkedBtn) deleteMarkedBtn.disabled = false;
+        const studioDeleteBtn = document.getElementById("studio-delete-marked-btn");
+        if (studioDeleteBtn) studioDeleteBtn.disabled = false;
     }
 }
 async function cancelScan() {
