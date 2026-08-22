@@ -21,6 +21,7 @@ __all__ = [
     "DirectoryState",
     "AlreadyThereError",
     "InvalidPathError",
+    "UnreachablePathError",
 ]
 
 
@@ -43,6 +44,14 @@ class AlreadyThereError(Exception):
 
 class InvalidPathError(Exception):
     """The path being added is invalid"""
+
+
+class UnreachablePathError(InvalidPathError):
+    """The path being added can't be probed at all
+
+    We don't know whether it exists: it might be a disconnected network share, or a folder
+    we don't have the permission to access.
+    """
 
 
 class Directories:
@@ -152,14 +161,21 @@ class Directories:
         Raises :exc:`AlreadyThereError` if ``path`` is already in self. If path is a directory
         containing some of the directories already present in self, ``path`` will be added, but all
         directories under it will be removed. Can also raise :exc:`InvalidPathError` if ``path``
-        does not exist.
+        does not exist, or its :exc:`UnreachablePathError` subclass if we can't even tell whether
+        it exists.
 
         :param Path path: path to add
         """
         if path in self:
             raise AlreadyThereError()
-        if not path.exists():
-            raise InvalidPathError()
+        try:
+            if not path.exists():
+                raise InvalidPathError(f"'{path}' does not exist")
+        except OSError as e:
+            # Path.exists() only swallows a handful of "not found" errors. Anything else
+            # (unreachable network share, unauthenticated SMB guest access, permission
+            # denied, ...) propagates and would otherwise crash our callers.
+            raise UnreachablePathError(f"'{path}' could not be probed: {e}") from e
         self._dirs = [p for p in self._dirs if path not in p.parents]
         self._dirs.append(path)
 
@@ -257,8 +273,15 @@ class Directories:
             path = attrib["path"]
             try:
                 self.add_path(Path(path))
-            except (AlreadyThereError, InvalidPathError):
-                pass
+            except AlreadyThereError:
+                # Not a failure: the file we're loading has both a folder and one of its
+                # subfolders in it, and add_path() legitimately keeps only the parent.
+                logging.debug("Directory %s is already covered by another one", path)
+            except (InvalidPathError, OSError, ValueError) as e:
+                # Don't let a folder that became unavailable since the last session
+                # (unplugged drive, disconnected network share, malformed path, ...)
+                # prevent the rest of the selection from loading.
+                logging.warning("Could not load directory %s from the last session: %s", path, e)
         for sn in root.iter("state"):
             attrib = sn.attrib
             if not ("path" in attrib and "value" in attrib):
