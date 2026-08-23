@@ -30,6 +30,7 @@ let currentBrowserPath = "";
 let isScanning = false;
 let isStopping = false;
 let isDeleting = false;
+let isCrossDbStudioMode = false;
 let cancelStats = null;
 let resultsData = [];
 let addedPaths = [];
@@ -236,7 +237,11 @@ function setupEventListeners() {
     if (tabResultsStudio) {
         tabResultsStudio.addEventListener("click", () => {
             activateTab(tabResultsStudio, resultsStudioContainer);
-            renderResultsStudio();
+            if (crossDbResultsData && crossDbResultsData.length > 0 && (!resultsData || resultsData.length === 0)) {
+                transferCrossToStudio();
+            } else {
+                renderResultsStudio();
+            }
         });
     }
     if (tabCrossDb) {
@@ -337,6 +342,13 @@ function setupEventListeners() {
                     if (!file.is_ref) file.marked = true;
                 });
             });
+            if (crossDbResultsData) {
+                crossDbResultsData.forEach(g => {
+                    g.files.forEach((f, idx) => {
+                        if (idx > 0) f.marked = true;
+                    });
+                });
+            }
             renderResultsStudio();
         });
     }
@@ -347,6 +359,13 @@ function setupEventListeners() {
                     file.marked = false;
                 });
             });
+            if (crossDbResultsData) {
+                crossDbResultsData.forEach(g => {
+                    g.files.forEach(f => {
+                        f.marked = false;
+                    });
+                });
+            }
             renderResultsStudio();
         });
     }
@@ -357,6 +376,13 @@ function setupEventListeners() {
                     if (!file.is_ref) file.marked = !file.marked;
                 });
             });
+            if (crossDbResultsData) {
+                crossDbResultsData.forEach(g => {
+                    g.files.forEach((f, idx) => {
+                        if (idx > 0) f.marked = !f.marked;
+                    });
+                });
+            }
             renderResultsStudio();
         });
     }
@@ -686,8 +712,25 @@ async function checkScanStatus() {
                 studioDeleteBtn.textContent = "Delete Marked Files";
             }
             showToast("✅ Duplicate files successfully deleted!");
-            await loadResults();
-            renderResultsStudio();
+            if (isCrossDbStudioMode) {
+                if (resultsData) {
+                    resultsData.forEach(g => {
+                        g.files = g.files.filter(f => !f.marked || f.is_ref);
+                    });
+                    resultsData = resultsData.filter(g => g.files.length > 1);
+                }
+                if (crossDbResultsData) {
+                    crossDbResultsData.forEach(g => {
+                        g.files = g.files.filter(f => !f.marked);
+                    });
+                    crossDbResultsData = crossDbResultsData.filter(g => g.files.length > 1);
+                    renderCrossResultsTable(crossDbResultsData);
+                }
+                renderResultsStudio();
+            } else {
+                await loadResults();
+                renderResultsStudio();
+            }
             await loadMultiScans();
         }
 
@@ -991,31 +1034,52 @@ function renderResultsStudio() {
 }
 
 async function toggleMark(path, isChecked) {
-    try {
-        const response = await fetch(`${API_BASE}/api/results/mark`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ path: path, marked: isChecked })
+    // Update local state in resultsData
+    (resultsData || []).forEach(group => {
+        group.files.forEach(file => {
+            if (file.path === path) {
+                file.marked = isChecked;
+            }
         });
-        const result = await response.json();
-        if (result.success) {
-            // Update local state to save load requests
-            resultsData.forEach(group => {
-                group.files.forEach(file => {
-                    if (file.path === path) {
-                        file.marked = isChecked;
-                    }
-                });
+    });
+
+    // Update local state in crossDbResultsData if present
+    if (crossDbResultsData) {
+        crossDbResultsData.forEach(group => {
+            group.files.forEach(file => {
+                if (file.path === path) {
+                    file.marked = isChecked;
+                }
             });
-            const overallMarked = result.total_marked !== undefined ? result.total_marked : 0;
-            const currentPage = Math.floor(resultsOffset / resultsLimit) + 1;
-            const totalPages = Math.max(1, Math.ceil(resultsTotal / resultsLimit));
-            resultsSummary.textContent = `Found ${resultsTotal} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;
-            deleteMarkedBtn.disabled = overallMarked === 0;
-            deleteMarkedBtn.textContent = `Delete ${overallMarked} Marked File(s)`;
+        });
+    }
+
+    // Refresh Results Studio live counters and delete button
+    renderResultsStudio();
+
+    if (!isCrossDbStudioMode && activeTaskId) {
+        try {
+            const response = await fetch(`${API_BASE}/api/results/mark`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ task_id: activeTaskId, path: path, marked: isChecked })
+            });
+            const result = await response.json();
+            if (result.success) {
+                const overallMarked = result.total_marked !== undefined ? result.total_marked : 0;
+                const currentPage = Math.floor(resultsOffset / resultsLimit) + 1;
+                const totalPages = Math.max(1, Math.ceil(resultsTotal / resultsLimit));
+                if (resultsSummary) {
+                    resultsSummary.textContent = `Found ${resultsTotal} duplicate groups. Showing page ${currentPage} of ${totalPages}. ${overallMarked} files marked for deletion.`;
+                }
+                if (deleteMarkedBtn) {
+                    deleteMarkedBtn.disabled = overallMarked === 0;
+                    deleteMarkedBtn.textContent = `Delete ${overallMarked} Marked File(s)`;
+                }
+            }
+        } catch (err) {
+            console.error("Toggle mark failed:", err);
         }
-    } catch (err) {
-        console.error("Toggle mark failed:", err);
     }
 }
 
@@ -1029,7 +1093,7 @@ async function deleteMarked() {
         });
     });
 
-    const targetCount = totalMarkedFilesCount || markedPaths.length;
+    const targetCount = isCrossDbStudioMode ? markedPaths.length : (totalMarkedFilesCount || markedPaths.length);
 
     if (targetCount === 0 && markedPaths.length === 0) {
         showToast("No marked files selected for deletion.");
@@ -1037,8 +1101,9 @@ async function deleteMarked() {
     }
 
     const displayCount = targetCount > 0 ? targetCount : markedPaths.length;
+    const contextMsg = isCrossDbStudioMode ? " across compared databases" : "";
 
-    if (!confirm(`Are you sure you want to permanently delete all ${displayCount} marked duplicate file(s)? This cannot be undone.`)) {
+    if (!confirm(`Are you sure you want to permanently delete all ${displayCount} marked duplicate file(s)${contextMsg}? This cannot be undone.`)) {
         return;
     }
 
@@ -1057,8 +1122,9 @@ async function deleteMarked() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                task_id: activeTaskId,
-                delete_all_marked: true,
+                task_id: isCrossDbStudioMode ? null : activeTaskId,
+                db_paths: isCrossDbStudioMode ? crossDbSelectedDBs : [],
+                delete_all_marked: isCrossDbStudioMode ? false : true,
                 paths: markedPaths,
             }),
         });
@@ -1498,6 +1564,7 @@ async function rescanTaskDatabase(taskId, btn) {
 
 async function viewTaskResults(taskId, btn) {
     activeTaskId = taskId;
+    isCrossDbStudioMode = false;
     let originalHtml = "";
     if (btn) {
         originalHtml = btn.innerHTML;
@@ -1875,6 +1942,9 @@ function transferCrossToStudio() {
         showToast("No cross-database results available to open in Results Studio.");
         return;
     }
+
+    isCrossDbStudioMode = true;
+    activeTaskId = "";
 
     resultsData = crossDbResultsData.map((g, idx) => {
         const pivotFile = g.files[0] || {};
