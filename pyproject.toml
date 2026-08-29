@@ -3,7 +3,7 @@ name = "de-dup"
 dynamic = ["version"]
 description = "de-dup is a high-performance cross-platform duplicate file scanner forked from dupeGuru, featuring a Rust engine and HTML Web Console."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "GPL-3.0-only"
 authors = [
     { name = "Tin Le", email = "tin@le.org" },
@@ -17,8 +17,6 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -77,7 +75,7 @@ skip_gitignore = true
 
 [tool.ruff]
 line-length = 120
-target-version = "py38"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "B", "I"]

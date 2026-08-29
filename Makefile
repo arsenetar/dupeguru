@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
 PYRCC5 ?= pyrcc5
-REQ_MINOR_VERSION = 7
+REQ_MINOR_VERSION = 10
 PREFIX ?= /usr/local
 # REDIS_HOST ?= 192.168.2.249:6379
 # REDIS_DB ?= 1

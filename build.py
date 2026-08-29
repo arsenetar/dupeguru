@@ -154,8 +154,8 @@ def build_normal(ui="qt"):
 
 
 def main():
-    if sys.version_info < (3, 8):
-        sys.exit("Python < 3.8 is unsupported.")
+    if sys.version_info < (3, 10):
+        sys.exit("Python < 3.10 is unsupported.")
     options = parse_args()
     if options.clean and Path("build").exists():
         shutil.rmtree("build")

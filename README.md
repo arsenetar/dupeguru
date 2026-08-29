@@ -42,7 +42,7 @@ make docs-build    # Builds static HTML site to site/ directory
 ## ⚡ Quick Start
 
 ### Prerequisites
-* **Python 3.8+**
+* **Python 3.10+**
 * **Rust & Cargo** (for compiling the native Rust shared library)
 * **PyQt5** (for Desktop GUI mode)
 
