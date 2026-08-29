@@ -4,7 +4,7 @@ These instructions are for the Qt version of the UI on macOS.
 *Note: The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa and is no longer "supported".*
 ### Prerequisites
 
-- [Python 3.7+][python]
+- [Python 3.10+][python]
 - [Xcode 12.3][xcode] or just Xcode command line tools (older versions can be used if not interested in arm macs)
 - [Homebrew][homebrew]
 - [qt5](https://www.qt.io/)
@@ -14,7 +14,7 @@ These instructions are for the Qt version of the UI on macOS.
 2. Install [Homebrew][homebrew], if not on the path after install (arm based Macs) create `~/.zshrc`
 with `export PATH="/opt/homebrew/bin:$PATH"`. Will need to reload terminal or source the file to take
 effect.
-3. Install qt5 with `brew`. If you are using a version of macos without system python 3.7+ then you will
+3. Install qt5 with `brew`. If you are using a version of macos without system python 3.10+ then you will
 also need to install that via brew or with pyenv.
 
         $ brew install qt5
@@ -25,8 +25,7 @@ also need to install that via brew or with pyenv.
 4. May need to launch a new terminal to have everything working.
 
 ### With build.py
-OSX comes with a version of python 3 by default in newer versions of OSX.  To produce universal
-builds either the 3.8 version shipped in macos or 3.9.1 or newer needs to be used. If needing to
+OSX comes with a version of python 3 by default in newer versions of OSX. Python 3.10 or newer needs to be used. If needing to
 build pyqt5 from source then the first line below is needed, else it may be omitted. (Path shown is
 for an arm mac.)
 
