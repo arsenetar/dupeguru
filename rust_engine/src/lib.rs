@@ -17,24 +17,24 @@ pub struct FileMetadata {
 
 // Helper to convert FileMetadata to a Python dict
 fn file_metadata_to_dict<'py>(py: Python<'py>, meta: &FileMetadata) -> PyResult<Bound<'py, PyDict>> {
-    let dict = PyDict::new_bound(py);
+    let dict = PyDict::new(py);
     dict.set_item("path", &meta.path)?;
     dict.set_item("size", meta.size)?;
     dict.set_item("mtime_ns", meta.mtime_ns)?;
     dict.set_item("entry_dt", &meta.entry_dt)?;
 
     if let Some(ref d) = meta.digest {
-        dict.set_item("digest", PyBytes::new_bound(py, d))?;
+        dict.set_item("digest", PyBytes::new(py, d))?;
     } else {
         dict.set_item("digest", py.None())?;
     }
     if let Some(ref dp) = meta.digest_partial {
-        dict.set_item("digest_partial", PyBytes::new_bound(py, dp))?;
+        dict.set_item("digest_partial", PyBytes::new(py, dp))?;
     } else {
         dict.set_item("digest_partial", py.None())?;
     }
     if let Some(ref ds) = meta.digest_samples {
-        dict.set_item("digest_samples", PyBytes::new_bound(py, ds))?;
+        dict.set_item("digest_samples", PyBytes::new(py, ds))?;
     } else {
         dict.set_item("digest_samples", py.None())?;
     }
@@ -1045,17 +1045,17 @@ pub struct RustFilesDB {
 #[pymethods]
 impl RustFilesDB {
     #[new]
-    pub fn new(cache_url: &str) -> PyResult<Self> {
+    pub fn new(cache_url: String) -> PyResult<Self> {
         let engine: Box<dyn CacheEngine + Send + Sync> =
             if cache_url.starts_with("redis://")
                 || cache_url.starts_with("valkey://")
                 || cache_url.starts_with("rediss://")
             {
-                let eng = RustValkeyCacheEngine::new(cache_url)
+                let eng = RustValkeyCacheEngine::new(&cache_url)
                     .map_err(|e| PyValueError::new_err(format!("Redis connection error: {}", e)))?;
                 Box::new(eng)
             } else {
-                let eng = RustSQLiteCacheEngine::new(cache_url)
+                let eng = RustSQLiteCacheEngine::new(&cache_url)
                     .map_err(|e| PyValueError::new_err(format!("SQLite connection error: {}", e)))?;
                 Box::new(eng)
             };
@@ -1074,21 +1074,21 @@ impl RustFilesDB {
         self.engine.commit().map_err(PyValueError::new_err)
     }
 
-    pub fn mark_directory_scanned(&self, dir_path: &str) -> PyResult<()> {
+    pub fn mark_directory_scanned(&self, dir_path: String) -> PyResult<()> {
         self.engine
-            .mark_directory_scanned(dir_path)
+            .mark_directory_scanned(&dir_path)
             .map_err(PyValueError::new_err)
     }
 
-    pub fn is_directory_scanned(&self, dir_path: &str) -> PyResult<bool> {
+    pub fn is_directory_scanned(&self, dir_path: String) -> PyResult<bool> {
         self.engine
-            .is_directory_scanned(dir_path)
+            .is_directory_scanned(&dir_path)
             .map_err(PyValueError::new_err)
     }
 
-    pub fn snapshot_file(&self, path: &str, size: u64, mtime: f64) -> PyResult<()> {
+    pub fn snapshot_file(&self, path: String, size: u64, mtime: f64) -> PyResult<()> {
         self.engine
-            .snapshot_file(path, size, mtime)
+            .snapshot_file(&path, size, mtime)
             .map_err(PyValueError::new_err)
     }
 
@@ -1101,13 +1101,13 @@ impl RustFilesDB {
     pub fn get_files_in_directory_page<'py>(
         &self,
         py: Python<'py>,
-        dir_path: &str,
-        last_path: &str,
+        dir_path: String,
+        last_path: String,
         limit: usize,
     ) -> PyResult<Vec<Bound<'py, PyDict>>> {
         let files = self
             .engine
-            .get_files_in_directory_page(dir_path, last_path, limit)
+            .get_files_in_directory_page(&dir_path, &last_path, limit)
             .map_err(PyValueError::new_err)?;
         let mut py_files = Vec::with_capacity(files.len());
         for f in files {
@@ -1124,12 +1124,12 @@ impl RustFilesDB {
         &self,
         py: Python<'py>,
         sizes: Vec<u64>,
-        last_path: &str,
+        last_path: String,
         limit: usize,
     ) -> PyResult<Vec<Bound<'py, PyDict>>> {
         let files = self
             .engine
-            .get_files_by_sizes_page(&sizes, last_path, limit)
+            .get_files_by_sizes_page(&sizes, &last_path, limit)
             .map_err(PyValueError::new_err)?;
         let mut py_files = Vec::with_capacity(files.len());
         for f in files {
@@ -1141,25 +1141,25 @@ impl RustFilesDB {
     pub fn get<'py>(
         &self,
         py: Python<'py>,
-        path: &str,
-        key: &str,
+        path: String,
+        key: String,
         size: u64,
         mtime_ns: u64,
         ignore_mtime: bool,
     ) -> PyResult<Option<Bound<'py, PyBytes>>> {
         let bytes_opt = self
             .engine
-            .get(path, key, size, mtime_ns, ignore_mtime)
+            .get(&path, &key, size, mtime_ns, ignore_mtime)
             .map_err(PyValueError::new_err)?;
         match bytes_opt {
-            Some(b) => Ok(Some(PyBytes::new_bound(py, &b))),
+            Some(b) => Ok(Some(PyBytes::new(py, &b))),
             None => Ok(None),
         }
     }
 
-    pub fn put(&self, path: &str, size: u64, mtime_ns: u64, key: &str, value: &Bound<'_, PyBytes>) -> PyResult<()> {
+    pub fn put(&self, path: String, size: u64, mtime_ns: u64, key: String, value: &Bound<'_, PyBytes>) -> PyResult<()> {
         self.engine
-            .put(path, size, mtime_ns, key, value.as_bytes())
+            .put(&path, size, mtime_ns, &key, value.as_bytes())
             .map_err(PyValueError::new_err)
     }
 
@@ -1167,13 +1167,13 @@ impl RustFilesDB {
     pub fn get_cache_viewer_files<'py>(
         &self,
         py: Python<'py>,
-        search: Option<&str>,
+        search: Option<String>,
         limit: usize,
         offset: usize,
     ) -> PyResult<(usize, Vec<Bound<'py, PyDict>>)> {
         let (total, files) = self
             .engine
-            .get_cache_viewer_files(search, limit, offset)
+            .get_cache_viewer_files(search.as_deref(), limit, offset)
             .map_err(PyValueError::new_err)?;
         let mut py_files = Vec::with_capacity(files.len());
         for f in files {

@@ -190,7 +190,7 @@ RUST_TARGET_SO = rust_engine/target/release/libdupeguru_rust.so
 endif
 
 $(RUST_SO): $(RUST_SRCS)
-	cd rust_engine && cargo build --release
+	cd rust_engine && PYO3_PYTHON="$(CURDIR)/env/bin/python" cargo build --release
 	cp $(RUST_TARGET_SO) $(RUST_SO)
 
 rust: $(RUST_SO)

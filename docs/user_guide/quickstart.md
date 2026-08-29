@@ -6,7 +6,7 @@ This page covers installation, prerequisites, building from source, and running 
 
 ## Prerequisites
 
-* **Python 3.8+** (Python 3.12 or 3.13 recommended)
+* **Python 3.8+** (Python 3.12, 3.13, or 3.14 recommended)
 * **Rust & Cargo** (for compiling the high-performance native Rust pipeline)
 * **PyQt5** (required for the Desktop GUI mode)
 
