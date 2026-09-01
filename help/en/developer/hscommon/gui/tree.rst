@@ -1,7 +1,7 @@
 hscommon.gui.tree
 =================
 
-.. automodule:: hscommon.gui.tree
+.. automodule:: dupeguru.hscommon.gui.tree
 
     .. autosummary::
 

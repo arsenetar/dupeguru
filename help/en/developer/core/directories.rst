@@ -1,5 +1,5 @@
 core.directories
 ================
 
-.. automodule:: core.directories
+.. automodule:: dupeguru.core.directories
     :members:

@@ -1,7 +1,7 @@
 hscommon.gui.progress_window
 ============================
 
-.. automodule:: hscommon.gui.progress_window
+.. automodule:: dupeguru.hscommon.gui.progress_window
 
     .. autosummary::
 

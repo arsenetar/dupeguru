@@ -1,7 +1,7 @@
 core.engine
 ===========
 
-.. automodule:: core.engine
+.. automodule:: dupeguru.core.engine
 
     .. autoclass:: Match
 

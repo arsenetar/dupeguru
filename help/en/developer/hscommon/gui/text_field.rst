@@ -1,7 +1,7 @@
 hscommon.gui.text_field
 =======================
 
-.. automodule:: hscommon.gui.text_field
+.. automodule:: dupeguru.hscommon.gui.text_field
 
     .. autosummary::
 

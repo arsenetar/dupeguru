@@ -1,7 +1,7 @@
 hscommon.jobprogress.job
 ========================
 
-.. automodule:: hscommon.jobprogress.job
+.. automodule:: dupeguru.hscommon.jobprogress.job
 
     .. autosummary::
 

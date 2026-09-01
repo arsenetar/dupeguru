@@ -1,5 +1,5 @@
 hscommon.desktop
 ================
 
-.. automodule:: hscommon.desktop
+.. automodule:: dupeguru.hscommon.desktop
     :members:

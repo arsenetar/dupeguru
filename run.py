@@ -7,18 +7,19 @@
 
 import sys
 import os.path as op
+import os
 import gc
 
-from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QApplication
+from PyQt6.QtCore import QDir
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QApplication
 
-from hscommon.trans import install_gettext_trans_under_qt
-from qt.error_report_dialog import install_excepthook
-from qt.util import setup_qt_logging, create_qsettings
-from qt import dg_rc  # noqa: F401
-from qt.platform import BASE_PATH
-from core import __version__, __appname__
+from dupeguru.hscommon.trans import install_gettext_trans_under_qt
+from dupeguru.qt.error_report_dialog import install_excepthook
+from dupeguru.qt.util import setup_qt_logging, create_qsettings
+from dupeguru.qt import dg_rc  # noqa: F401
+from dupeguru.qt.platform import BASE_PATH
+from dupeguru.core import __version__, __appname__
 
 # SIGQUIT is not defined on Windows
 if sys.platform == "win32":
@@ -31,6 +32,10 @@ else:
 global dgapp
 dgapp = None
 
+# force Qt6 to use the X11 interfaces since Fedora now runs wayland
+# and under wayland, Qt6 application window does not use the proper
+# styling.
+os.environ["QT_QPA_PLATFORM"] = "xcb"
 
 def signal_handler(sig, frame):
     global dgapp
@@ -48,9 +53,11 @@ def setup_signals():
 
 def main():
     app = QApplication(sys.argv)
-    QCoreApplication.setOrganizationName("Hardcoded Software")
-    QCoreApplication.setApplicationName(__appname__)
-    QCoreApplication.setApplicationVersion(__version__)
+    app.setDesktopFileName("dupeguru")
+    QApplication.setOrganizationName("Hardcoded Software")
+    QApplication.setApplicationName(__appname__)
+    QApplication.setApplicationVersion(__version__)
+    QDir.addSearchPath("images", op.join(BASE_PATH, "images"))
     setup_qt_logging()
     settings = create_qsettings()
     lang = settings.value("Language")
@@ -61,16 +68,16 @@ def main():
     # Let the Python interpreter runs every 500ms to handle signals.  This is
     # required because Python cannot handle signals while the Qt event loop is
     # running.
-    from PyQt5.QtCore import QTimer
+    from PyQt6.QtCore import QTimer
 
     timer = QTimer()
     timer.start(500)
     timer.timeout.connect(lambda: None)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
-    from qt.app import DupeGuru
+    from dupeguru.qt.app import DupeGuru
 
-    app.setWindowIcon(QIcon(QPixmap(f":/{DupeGuru.LOGO_NAME}")))
+    app.setWindowIcon(QIcon(f"images:{DupeGuru.LOGO_NAME}_32.png"))
     global dgapp
     dgapp = DupeGuru()
     install_excepthook("https://github.com/arsenetar/dupeguru/issues")

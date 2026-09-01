@@ -112,7 +112,7 @@ msgstr "Размеры"
 
 #: core\pe\result_table.py:21 core\se\result_table.py:21
 msgid "Size (KB)"
-msgstr "Размер (КБ)"
+msgstr "Размер (кБ)"
 
 #: core\pe\result_table.py:24
 msgid "EXIF Timestamp"

@@ -1,7 +1,7 @@
 hscommon.gui.base
 =================
 
-.. automodule:: hscommon.gui.base
+.. automodule:: dupeguru.hscommon.gui.base
 
     .. autosummary::
 

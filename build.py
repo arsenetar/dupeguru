@@ -10,13 +10,13 @@ from optparse import OptionParser
 import shutil
 from multiprocessing import Pool
 
-from hscommon import sphinxgen
-from hscommon.build import (
+from dupeguru.hscommon import sphinxgen
+from dupeguru.hscommon.build import (
     add_to_pythonpath,
     print_and_do,
     fix_qt_resource_file,
 )
-from hscommon import loc
+from dupeguru.hscommon import loc
 import subprocess
 
 
@@ -130,7 +130,7 @@ def build_normal():
     build_localizations()
     print("Building Qt stuff")
     Path("qt", "dg_rc.py").unlink(missing_ok=True)
-    print_and_do("pyrcc5 {} > {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
+    print_and_do("rcc -g python {} -o {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
     fix_qt_resource_file(Path("qt", "dg_rc.py"))
     build_help()
 
