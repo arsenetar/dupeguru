@@ -1,3 +1,6 @@
+=== 4.3.1^20260901git (2026-09-01)
+* Don't crash on startup when a saved folder is unreachable
+
 === 4.3.1^20260802git (2026-08-02)
 * guard copy_or_move when no location path matches dupe parent
 * the application name in the dock is "dupeguru"
@@ -11,6 +14,8 @@
 * force Qt6 to use the X11 interfaces since Fedora now runs wayland
   and under wayland, Qt6 application window does not use the proper
   styling.
+* allow send2trash 2.1.0 which is in Fedora 45
+* move core,hscommon,qt down one level to add dupeguru namespace
 
 === 4.3.1 (2022-07-08)
 * Fix issue where cache db exceptions could prevent files being hashed (#1015)
