@@ -111,8 +111,8 @@ class CrossDBMatcher:
 
             if hasattr(dupeguru_rust, "cross_db_compare"):
                 rust_results = dupeguru_rust.cross_db_compare(self.db_paths)
-                if rust_results:
-                    return self._format_rust_results(rust_results)
+                if rust_results is not None:
+                    return rust_results
         except Exception as e:
             logging.warning(f"Rust cross-db matcher fallback: {e}")
 

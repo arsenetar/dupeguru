@@ -1278,12 +1278,14 @@ pub fn hash_files_parallel(
 
 #[pyfunction]
 #[pyo3(signature = (db_paths))]
-pub fn cross_db_compare(
+pub fn cross_db_compare<'py>(
+    py: Python<'py>,
     db_paths: Vec<String>,
-) -> PyResult<Vec<Vec<(String, u64, f64, String, String)>>> {
+) -> PyResult<Vec<Bound<'py, PyDict>>> {
     use rayon::prelude::*;
     use rusqlite::{Connection, OpenFlags};
-    use std::collections::HashMap;
+    use std::collections::{HashMap, HashSet};
+    use pyo3::types::PyList;
 
     let db_files: Vec<(String, Vec<(String, u64, f64, String)>)> = db_paths
         .into_par_iter()
@@ -1320,10 +1322,43 @@ pub fn cross_db_compare(
         }
     }
 
-    let dupe_groups: Vec<Vec<(String, u64, f64, String, String)>> = checksum_groups
-        .into_iter()
-        .filter_map(|(_, group)| if group.len() > 1 { Some(group) } else { None })
-        .collect();
+    let mut dupe_groups = Vec::new();
+    let mut group_id = 0;
+
+    for ((size, checksum), files) in checksum_groups {
+        if files.len() > 1 {
+            group_id += 1;
+            let mut db_sources = HashSet::new();
+            let py_files = PyList::empty(py);
+
+            for (path, file_size, mtime, file_checksum, db_path) in &files {
+                db_sources.insert(db_path.clone());
+                let db_name = std::path::Path::new(db_path)
+                    .file_stem()
+                    .and_then(|s| s.to_str())
+                    .unwrap_or("");
+
+                let file_dict = PyDict::new(py);
+                file_dict.set_item("path", path)?;
+                file_dict.set_item("size", *file_size)?;
+                file_dict.set_item("mtime_ns", (*mtime * 1e9) as u64)?;
+                file_dict.set_item("checksum", file_checksum)?;
+                file_dict.set_item("db_path", db_path)?;
+                file_dict.set_item("db_name", db_name)?;
+                py_files.append(file_dict)?;
+            }
+
+            let group_dict = PyDict::new(py);
+            group_dict.set_item("group_id", group_id)?;
+            group_dict.set_item("size", size)?;
+            group_dict.set_item("checksum", &checksum)?;
+            group_dict.set_item("match_count", files.len())?;
+            group_dict.set_item("db_count", db_sources.len())?;
+            group_dict.set_item("files", py_files)?;
+
+            dupe_groups.push(group_dict);
+        }
+    }
 
     Ok(dupe_groups)
 }
