@@ -7,7 +7,7 @@ import os
 import sqlite3
 import threading
 from contextlib import contextmanager
-from typing import Any, Dict, Generator, List, Tuple
+from typing import Any, Dict, Generator, List, Optional, Tuple
 
 
 class DBEngine:
@@ -361,3 +361,29 @@ class DBEngine:
             return result
         except Exception:
             return []
+
+    def get_files_page(
+        self, search: Optional[str] = None, limit: int = 100, offset: int = 0
+    ) -> Tuple[int, List[Dict[str, Any]]]:
+        """Fetch paginated file records with optional path filtering."""
+        conn = self.get_connection()
+        cur = conn.cursor()
+        if search:
+            cur.execute("SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",))
+            total_count = cur.fetchone()[0]
+            cur.execute(
+                "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
+                "FROM files WHERE path LIKE ? LIMIT ? OFFSET ?",
+                (f"%{search}%", limit, offset),
+            )
+        else:
+            cur.execute("SELECT COUNT(*) FROM files")
+            total_count = cur.fetchone()[0]
+            cur.execute(
+                "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
+                "FROM files LIMIT ? OFFSET ?",
+                (limit, offset),
+            )
+        rows = cur.fetchall()
+        files_list = [{"path": r[0], "size": r[1], "entry_dt": r[2] or ""} for r in rows]
+        return total_count, files_list

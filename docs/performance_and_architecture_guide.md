@@ -14,8 +14,10 @@ This document outlines core architectural patterns, SQLite optimization guidelin
 * **Requirement**: The web console polls `GET /api/status` every 500ms. Polling must NEVER trigger full-table SQL scans (`SELECT COUNT(*) FROM files`) or un-cached disk reads.
 * **Implementation**: `TaskExecution` tracks progress percentages, file counts, and hashed counts in memory (`self._hashed_count_cache`). While a background worker thread is active, `get_dto()` serves values directly from memory, eliminating database lock contention between background writes and status checks.
 
-### Rule 1.3: Thread Safety for Shared State
-* **Requirement**: Shared global state (e.g. `app_state`, `selected_directories`) accessed across concurrent request threads spawned by `ThreadedHTTPServer` must be protected by thread locks (`threading.Lock`) or atomic updates.
+### Rule 1.3: Thread Safety for Shared State (`ServerState`)
+* **Requirement**: Shared global state (`app_state`, `selected_directories`) accessed across concurrent request threads spawned by `ThreadedHTTPServer` must be managed by an encapsulated, thread-safe manager (`ServerState`) using re-entrant lock guards (`threading.RLock`).
+* **Implementation**: `ServerState` in `web/server.py` guards reading/updating state keys, while providing thread-safe operations on `selected_directories` (`get_directories()`, `add_directory()`, `remove_directory_by_path()`, `clear_directories()`).
+* **Path Normalization**: All directory operations automatically apply `os.path.normpath()` and strip quotes/trailing whitespace to eliminate redundant discovery sweeps and path duplication (e.g., preventing `/data/` and `/data` from both being registered).
 
 ---
 

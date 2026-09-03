@@ -193,6 +193,21 @@ class TestWebServerEndpoints(unittest.TestCase):
             self.assertTrue(res.get("success"))
             self.assertIsInstance(res.get("files"), list)
 
+    def test_server_state_thread_safety_and_path_normalization(self):
+        """Verifies ServerState normalizes trailing slashes and deduplicates targets."""
+        from web.server import server_state
+
+        server_state.clear_directories()
+        server_state.add_directory("/path/to/dir/")
+        server_state.add_directory("/path/to/dir")
+        dirs = server_state.get_directories()
+        self.assertEqual(len(dirs), 1)
+        self.assertEqual(dirs[0], "/path/to/dir")
+
+        server_state.set("active_task_id", "test_id_123")
+        self.assertEqual(server_state.get("active_task_id"), "test_id_123")
+        self.assertEqual(server_state["active_task_id"], "test_id_123")
+
 
 if __name__ == "__main__":
     unittest.main()

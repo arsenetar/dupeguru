@@ -8,6 +8,7 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
 from pathlib import Path
+from typing import Any, Dict, List
 
 # Prevent PyQt5 from being imported to avoid loading C-extensions in a multi-threaded
 # web server context, which can cause C-level segmentation faults.
@@ -91,23 +92,92 @@ from core.service.task_runner import TaskRunner  # noqa: E402
 from core.storage.task_repo import TaskRepository  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
 
-# Global state and synchronization lock
-state_lock = threading.Lock()
 
-app_state = {
-    "status": "idle",  # idle, scanning, completed
-    "scanning": False,
-    "progress": 0,
-    "progress_msg": "",
-    "messages": [],
-    "active_task_id": None,
-}
+# Thread-safe server state manager
+class ServerState:
+    """Thread-safe synchronization wrapper for server execution state and target directories."""
+
+    def __init__(self):
+        self._lock = threading.RLock()
+        self._state = {
+            "status": "idle",
+            "scanning": False,
+            "progress": 0,
+            "progress_msg": "",
+            "messages": [],
+            "active_task_id": None,
+            "deleting": False,
+            "delete_progress": 0,
+            "delete_total": 0,
+        }
+        self._directories: List[str] = []
+
+    def __getitem__(self, key: str) -> Any:
+        with self._lock:
+            return self._state[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        with self._lock:
+            self._state[key] = value
+
+    def get(self, key: str, default: Any = None) -> Any:
+        with self._lock:
+            return self._state.get(key, default)
+
+    def set(self, key: str, value: Any) -> None:
+        with self._lock:
+            self._state[key] = value
+
+    def update(self, *args, **kwargs) -> None:
+        with self._lock:
+            if args:
+                self._state.update(args[0])
+            self._state.update(kwargs)
+
+    def get_snapshot(self) -> Dict[str, Any]:
+        with self._lock:
+            return dict(self._state)
+
+    def get_directories(self) -> List[str]:
+        with self._lock:
+            return list(self._directories)
+
+    def add_directory(self, path_str: str, clear_existing: bool = False) -> List[str]:
+        with self._lock:
+            norm_path = os.path.normpath(path_str.strip().strip("'\""))
+            if clear_existing:
+                self._directories.clear()
+            if norm_path and norm_path not in self._directories:
+                self._directories.append(norm_path)
+            return list(self._directories)
+
+    def remove_directory_by_path(self, path_str: str) -> List[str]:
+        with self._lock:
+            norm_path = os.path.normpath(path_str.strip().strip("'\""))
+            if norm_path in self._directories:
+                self._directories.remove(norm_path)
+            return list(self._directories)
+
+    def remove_directory_by_index(self, index: int) -> List[str]:
+        with self._lock:
+            if 0 <= index < len(self._directories):
+                self._directories.pop(index)
+            return list(self._directories)
+
+    def clear_directories(self) -> List[str]:
+        with self._lock:
+            self._directories.clear()
+            return list(self._directories)
+
+
+server_state = ServerState()
+# Backward-compatibility alias
+app_state = server_state
 
 appdata_dir = get_appdata_pure_python()
 scans_dir = os.path.join(appdata_dir, "scans")
 task_repository = TaskRepository(scans_dir)
 task_runner = TaskRunner(task_repository)
-selected_directories = []
 
 
 def safe_path_exists(path_str, timeout=1.0):
@@ -242,7 +312,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 "progress": progress,
                 "progress_msg": progress_msg,
                 "messages": app_state.get("messages", []),
-                "targets": selected_directories,
+                "targets": server_state.get_directories(),
                 "active_task_id": active_id,
                 "has_results": has_results,
             }
@@ -265,7 +335,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Task not found"}).encode())
 
         elif path == "/api/directories":
-            dirs = [{"path": d, "state": 0} for d in selected_directories]
+            dirs = [{"path": d, "state": 0} for d in server_state.get_directories()]
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/browse":
@@ -305,32 +375,16 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             active_id = app_state.get("active_task_id")
             if active_id:
                 execution = task_runner.get_or_create_execution(active_id)
-                if execution:
-                    conn = execution.db_engine.get_connection()
-                    cur = conn.cursor()
-                    if search:
-                        cur.execute("SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",))
-                        total_count = cur.fetchone()[0]
-                        cur.execute(
-                            "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
-                            "FROM files WHERE path LIKE ? LIMIT ? OFFSET ?",
-                            (f"%{search}%", limit, offset),
-                        )
-                    else:
-                        cur.execute("SELECT COUNT(*) FROM files")
-                        total_count = cur.fetchone()[0]
-                        cur.execute(
-                            "SELECT path, size, COALESCE(entry_dt, datetime(mtime_ns/1000000000, 'unixepoch')) "
-                            "FROM files LIMIT ? OFFSET ?",
-                            (limit, offset),
-                        )
-                    rows = cur.fetchall()
-                    for r in rows:
+                if execution and execution.db_engine:
+                    total_count, raw_files = execution.db_engine.get_files_page(
+                        search=search if search else None, limit=limit, offset=offset
+                    )
+                    for r in raw_files:
                         files_list.append(
                             {
-                                "path": r[0],
-                                "size": format_size(r[1], 0, 1, False) if r[1] is not None else "0 B",
-                                "entry_dt": r[2] or "",
+                                "path": r["path"],
+                                "size": format_size(r["size"], 0, 1, False) if r["size"] is not None else "0 B",
+                                "entry_dt": r["entry_dt"] or "",
                             }
                         )
 
@@ -451,9 +505,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/scans/create":
             name = data.get("name", "Scan").strip() or f"Scan_{time.strftime('%Y%m%d_%H%M%S')}"
-            directories_list = data.get("directories", [])
-            if not directories_list:
-                directories_list = list(selected_directories)
+            raw_dirs = data.get("directories", [])
+            if not raw_dirs:
+                raw_dirs = server_state.get_directories()
+
+            directories_list = [os.path.normpath(d.strip().strip("'\"")) for d in raw_dirs if d and d.strip()]
 
             if not directories_list:
                 self.wfile.write(
@@ -640,20 +696,19 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             path_str = data.get("path")
             clear_existing = data.get("clear_existing", False)
             if path_str:
-                path_str = path_str.strip().strip("'\"")
-                if clear_existing:
-                    selected_directories.clear()
-                if path_str not in selected_directories:
-                    selected_directories.append(path_str)
-
-            dirs = [{"path": d, "state": 0} for d in selected_directories]
+                current_dirs = server_state.add_directory(path_str, clear_existing=clear_existing)
+            else:
+                current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/directories/remove":
             path_str = data.get("path")
-            if path_str and path_str in selected_directories:
-                selected_directories.remove(path_str)
-            dirs = [{"path": d, "state": 0} for d in selected_directories]
+            if path_str:
+                current_dirs = server_state.remove_directory_by_path(path_str)
+            else:
+                current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/scan":
@@ -845,16 +900,15 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         if path == "/api/directories":
             clear_all = query.get("clear_all", ["false"])[0].lower() == "true"
             if clear_all:
-                selected_directories.clear()
+                current_dirs = server_state.clear_directories()
             else:
                 index_str = query.get("index", ["-1"])[0]
                 try:
                     idx = int(index_str)
-                    if 0 <= idx < len(selected_directories):
-                        selected_directories.pop(idx)
+                    current_dirs = server_state.remove_directory_by_index(idx)
                 except ValueError:
-                    pass
-            dirs = [{"path": d, "state": 0} for d in selected_directories]
+                    current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
             self.wfile.write(json.dumps(dirs).encode())
         else:
             self.wfile.write(json.dumps({"success": False, "error": "Endpoint not found"}).encode())
