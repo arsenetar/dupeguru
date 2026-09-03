@@ -88,6 +88,38 @@ class TestPhase1DomainStorage(unittest.TestCase):
             self.assertEqual(loaded_task.hashed_count, 1)
             self.assertEqual(loaded_task.match_count, 1)
 
+    def test_duplicate_groups_pagination(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            db_path = os.path.join(temp_dir, "page_test.db")
+            engine = DBEngine(db_path)
+            engine.init_schema()
+
+            f1 = FileDTO(path="/tmp/f1.txt", size=1000)
+            f2 = FileDTO(path="/tmp/f2.txt", size=1000)
+            f3 = FileDTO(path="/tmp/f3.txt", size=2000)
+            f4 = FileDTO(path="/tmp/f4.txt", size=2000)
+
+            with engine.transaction() as conn:
+                for f in [f1, f2, f3, f4]:
+                    conn.execute("INSERT INTO files (path, size) VALUES (?, ?)", (f.path, f.size))
+
+            group1 = DuplicateGroupDTO(group_id=1, pivot=f1, duplicates=[f2], saved_bytes=1000)
+            group2 = DuplicateGroupDTO(group_id=2, pivot=f3, duplicates=[f4], saved_bytes=2000)
+            engine.save_duplicate_groups([group1, group2])
+
+            total_groups, total_marked, page1 = engine.get_duplicate_groups_page(limit=1, offset=0)
+            self.assertEqual(total_groups, 2)
+            self.assertEqual(total_marked, 2)
+            self.assertEqual(len(page1), 1)
+            self.assertEqual(page1[0].group_id, 1)
+            self.assertEqual(page1[0].pivot.path, "/tmp/f1.txt")
+            self.assertEqual(len(page1[0].duplicates), 1)
+
+            _, _, page2 = engine.get_duplicate_groups_page(limit=1, offset=1)
+            self.assertEqual(len(page2), 1)
+            self.assertEqual(page2[0].group_id, 2)
+            self.assertEqual(page2[0].pivot.path, "/tmp/f3.txt")
+
 
 if __name__ == "__main__":
     unittest.main()

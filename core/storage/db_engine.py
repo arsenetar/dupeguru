@@ -387,3 +387,95 @@ class DBEngine:
         rows = cur.fetchall()
         files_list = [{"path": r[0], "size": r[1], "entry_dt": r[2] or ""} for r in rows]
         return total_count, files_list
+
+    def get_duplicate_groups_page(self, limit: int = 50, offset: int = 0) -> Tuple[int, int, List[Any]]:
+        """Fetch a paginated page of DuplicateGroupDTOs along with total group and total marked counts.
+
+        Returns:
+            (total_groups, total_marked, groups_page)
+        """
+        from core.domain.models import DuplicateGroupDTO, FileDTO
+
+        conn = self.get_connection()
+        cur = conn.cursor()
+        try:
+            # Check table existence
+            table_check = cur.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='duplicate_groups'"
+            ).fetchone()
+            if not table_check:
+                return 0, 0, []
+
+            # 1. Total group count
+            row_total = cur.execute("SELECT COUNT(*) FROM duplicate_groups").fetchone()
+            total_groups = row_total[0] if row_total else 0
+            if total_groups == 0:
+                return 0, 0, []
+
+            # 2. Total duplicates (marked) count across all groups
+            row_marked = cur.execute("SELECT COUNT(*) FROM duplicate_entries WHERE is_pivot = 0").fetchone()
+            total_marked = row_marked[0] if row_marked else 0
+
+            # 3. Paginated group IDs
+            g_rows = cur.execute(
+                "SELECT group_id, pivot_path, saved_bytes FROM duplicate_groups "
+                "ORDER BY group_id ASC LIMIT ? OFFSET ?",
+                (limit, offset),
+            ).fetchall()
+            if not g_rows:
+                return total_groups, total_marked, []
+
+            group_ids = [r["group_id"] for r in g_rows]
+            placeholders = ",".join("?" for _ in group_ids)
+
+            # 4. Fetch entries for this page of group IDs only
+            query = f"""
+            SELECT de.group_id, de.is_pivot, f.path, f.size, f.mtime_ns, f.digest_partial, f.digest
+            FROM duplicate_entries de
+            JOIN files f ON de.file_path = f.path
+            WHERE de.group_id IN ({placeholders})
+            ORDER BY de.group_id ASC, de.is_pivot DESC
+            """
+            e_rows = cur.execute(query, group_ids).fetchall()
+
+            groups_map = {}
+            for r in g_rows:
+                groups_map[r["group_id"]] = {
+                    "group_id": r["group_id"],
+                    "saved_bytes": r["saved_bytes"],
+                    "pivot": None,
+                    "duplicates": [],
+                }
+
+            for r in e_rows:
+                g_id = r["group_id"]
+                if g_id in groups_map:
+                    dto = FileDTO(
+                        path=r["path"],
+                        size=r["size"],
+                        mtime_ns=r["mtime_ns"] if r["mtime_ns"] else 0,
+                        digest_partial=r["digest_partial"],
+                        digest=r["digest"],
+                    )
+                    if r["is_pivot"] == 1:
+                        groups_map[g_id]["pivot"] = dto
+                    else:
+                        groups_map[g_id]["duplicates"].append(dto)
+
+            result = []
+            for r in g_rows:
+                g_id = r["group_id"]
+                gdata = groups_map.get(g_id)
+                if gdata and gdata["pivot"]:
+                    result.append(
+                        DuplicateGroupDTO(
+                            group_id=gdata["group_id"],
+                            pivot=gdata["pivot"],
+                            duplicates=gdata["duplicates"],
+                            saved_bytes=gdata["saved_bytes"],
+                        )
+                    )
+            return total_groups, total_marked, result
+        except Exception as e:
+            logging.error(f"Error fetching duplicate groups page: {e}")
+            return 0, 0, []

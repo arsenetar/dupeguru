@@ -420,20 +420,28 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             groups_data = []
             active_id = query.get("task_id", [None])[0] or app_state.get("active_task_id")
-            groups = []
+            total_groups = 0
+            total_marked = 0
+            batch_groups = []
 
             if active_id:
                 execution = task_runner.get_or_create_execution(active_id)
-                if execution:
-                    if execution.results_groups is None:
-                        if execution.db_engine.has_saved_duplicate_groups():
-                            execution.results_groups = execution.db_engine.load_duplicate_groups()
-                        else:
-                            execution.results_groups = []
-                    groups = execution.results_groups or []
-
-            total_groups = len(groups)
-            batch_groups = groups[offset : offset + limit]
+                if execution and execution.db_engine:
+                    if execution.results_groups is not None:
+                        # Scan just finished in memory or results already cached in RAM
+                        groups = execution.results_groups
+                        total_groups = len(groups)
+                        batch_groups = groups[offset : offset + limit]
+                        total_marked = (
+                            sum(len(g.duplicates) for g in groups if hasattr(g, "duplicates"))
+                            if groups and hasattr(groups[0], "duplicates")
+                            else 0
+                        )
+                    else:
+                        # Lazy paginated load directly from SQLite index
+                        total_groups, total_marked, batch_groups = execution.db_engine.get_duplicate_groups_page(
+                            limit=limit, offset=offset
+                        )
 
             for g_idx, g in enumerate(batch_groups):
                 files_data = []
@@ -475,11 +483,6 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     }
                 )
 
-            total_marked = (
-                sum(len(g.duplicates) for g in groups if hasattr(g, "duplicates"))
-                if groups and hasattr(groups[0], "duplicates")
-                else 0
-            )
             response_data = {
                 "success": True,
                 "total": total_groups,
