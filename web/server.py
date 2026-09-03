@@ -109,6 +109,8 @@ class ServerState:
             "deleting": False,
             "delete_progress": 0,
             "delete_total": 0,
+            "cross_matching": False,
+            "cross_scan_msg": "",
         }
         self._directories: List[str] = []
 
@@ -298,15 +300,20 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     has_results = dto.match_count > 0
 
             is_deleting = app_state.get("deleting", False)
+            is_cross_matching = app_state.get("cross_matching", False)
             if is_deleting:
                 status_str = "deleting"
                 progress = app_state.get("delete_progress", 0)
                 progress_msg = app_state.get("progress_msg", "Deleting duplicate files...")
+            elif is_cross_matching:
+                status_str = "cross_matching"
+                progress_msg = app_state.get("cross_scan_msg", "Comparing cross-database duplicate matches...")
 
             response = {
                 "status": status_str,
-                "scanning": scanning,
+                "scanning": scanning or is_cross_matching,
                 "deleting": is_deleting,
+                "cross_matching": is_cross_matching,
                 "delete_progress": app_state.get("delete_progress", 0),
                 "delete_total": app_state.get("delete_total", 0),
                 "progress": progress,
@@ -659,6 +666,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             if not db_paths:
                 db_paths = [t.db_path for t in task_repository.refresh()]
 
+            server_state.update(
+                cross_matching=True,
+                cross_scan_msg=f"Comparing cross-database duplicate matches across {len(db_paths)} databases...",
+            )
             try:
                 from core.cross_db import CrossDBMatcher
 
@@ -679,6 +690,8 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             except Exception as e:
                 logging.error(f"Error in cross_scan endpoint: {e}")
                 self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+            finally:
+                server_state.update(cross_matching=False, cross_scan_msg="")
 
         elif path == "/api/directories":
             path_str = data.get("path")
