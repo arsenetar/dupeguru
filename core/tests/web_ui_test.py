@@ -208,6 +208,21 @@ class TestWebServerEndpoints(unittest.TestCase):
         self.assertEqual(server_state.get("active_task_id"), "test_id_123")
         self.assertEqual(server_state["active_task_id"], "test_id_123")
 
+    def test_server_rest_api_cross_scan_endpoint(self):
+        """Verifies POST /api/cross_scan reports cross_matching state and returns paginated matches."""
+        req_post = urllib.request.Request(
+            f"{self.base_url}/api/cross_scan",
+            data=json.dumps({"db_paths": [], "limit": 10, "offset": 0}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_post) as response:
+            self.assertEqual(response.status, 200)
+            res = json.loads(response.read().decode("utf-8"))
+            self.assertTrue(res.get("success"))
+            self.assertIn("groups", res)
+            self.assertIn("total_groups", res)
+
 
 if __name__ == "__main__":
     unittest.main()

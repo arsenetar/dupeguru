@@ -30,6 +30,7 @@ let currentBrowserPath = "";
 let isScanning = false;
 let isStopping = false;
 let isDeleting = false;
+let isCrossMatching = false;
 let isCrossDbStudioMode = false;
 let cancelStats = null;
 let resultsData = [];
@@ -732,6 +733,22 @@ async function checkScanStatus() {
                 renderResultsStudio();
             }
             await loadMultiScans();
+        }
+
+        // Handle live cross-database matching state
+        const crossMatchBtn = document.getElementById("run-cross-match-btn");
+        if (state.cross_matching) {
+            isCrossMatching = true;
+            if (crossMatchBtn) {
+                crossMatchBtn.disabled = true;
+                crossMatchBtn.textContent = "⏳ Comparing across databases...";
+            }
+        } else if (isCrossMatching) {
+            isCrossMatching = false;
+            if (crossMatchBtn) {
+                crossMatchBtn.disabled = false;
+                crossMatchBtn.textContent = "⚡ Run Cross-Database Scan";
+            }
         }
 
         if (isScanning || isStopping) return;
