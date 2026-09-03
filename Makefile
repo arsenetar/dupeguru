@@ -110,7 +110,7 @@ help:
 	@echo "  tag            Create release git tag (e.g. make tag TAG=1.2.3)"
 	@echo ""
 
-all: | env i18n modules qt/dg_rc.py rust
+all: | env i18n modules rust
 	@echo "Build complete! You can run de-dup with 'make run'"
 
 run:

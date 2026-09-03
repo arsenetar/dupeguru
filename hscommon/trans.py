@@ -83,7 +83,11 @@ def get_locale_name(lang: str) -> Union[str, None]:
 
 # --- Qt
 def install_qt_trans(lang: str = None) -> None:
-    from PyQt5.QtCore import QCoreApplication, QLocale, QTranslator
+    try:
+        from PyQt5.QtCore import QCoreApplication, QLocale, QTranslator
+    except (ImportError, TypeError):
+        logging.warning("Qt is not available. Skipping install_qt_trans.")
+        return
 
     if not lang:
         lang = str(QLocale.system().name())[:2]
@@ -140,26 +144,27 @@ def install_gettext_trans_under_qt(base_folder: os.PathLike, lang: str = None) -
     # So, we install the gettext locale, great, but we also should try to install qt_*.qm if
     # available so that strings that are inside Qt itself over which I have no control are in the
     # right language.
-    from PyQt5.QtCore import QCoreApplication, QLibraryInfo, QLocale, QTranslator
-
-    if not lang:
-        lang = str(QLocale.system().name())[:2]
-    localename = get_locale_name(lang)
-    if localename is None:
-        lang = "en"
-        localename = get_locale_name(lang)
     try:
-        locale.setlocale(locale.LC_ALL, localename)
-    except locale.Error:
-        logging.warning("Couldn't set locale %s", localename)
-    qmname = "qt_%s" % lang
-    if ISLINUX:
-        # Under linux, a full Qt installation is already available in the system, we didn't bundle
-        # up the qm files in our package, so we have to load translations from the system.
-        qmpath = op.join(QLibraryInfo.location(QLibraryInfo.TranslationsPath), qmname)
-    else:
-        qmpath = op.join(base_folder, qmname)
-    qtr = QTranslator(QCoreApplication.instance())
-    qtr.load(qmpath)
-    QCoreApplication.installTranslator(qtr)
+        from PyQt5.QtCore import QCoreApplication, QLibraryInfo, QLocale, QTranslator
+
+        if not lang:
+            lang = str(QLocale.system().name())[:2]
+        localename = get_locale_name(lang)
+        if localename is None:
+            lang = "en"
+            localename = get_locale_name(lang)
+        try:
+            locale.setlocale(locale.LC_ALL, localename)
+        except locale.Error:
+            logging.warning("Couldn't set locale %s", localename)
+        qmname = "qt_%s" % lang
+        if ISLINUX:
+            qmpath = op.join(QLibraryInfo.location(QLibraryInfo.TranslationsPath), qmname)
+        else:
+            qmpath = op.join(base_folder, qmname)
+        qtr = QTranslator(QCoreApplication.instance())
+        qtr.load(qmpath)
+        QCoreApplication.installTranslator(qtr)
+    except (ImportError, TypeError):
+        pass
     install_gettext_trans(base_folder, lang)
