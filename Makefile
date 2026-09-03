@@ -76,6 +76,7 @@ help:
 	@echo "Primary Targets:"
 	@echo "  help           Print this help message"
 	@echo "  all            Build all components (virtualenv, i18n, C modules, Qt resources, Rust engine)"
+	@echo "  desktop        Run the de-dup native desktop application (pywebview native shell)"
 	@echo "  run            Run the de-dup Qt desktop application"
 	@echo "  web            Run the de-dup HTML Web Console REST server and launch browser"
 	@echo "  rust           Compile the Rust parallel engine shared library (dupeguru_rust.so)"
@@ -114,6 +115,9 @@ all: | env i18n modules qt/dg_rc.py rust
 
 run:
 	$(VENV_PYTHON) run.py
+
+desktop: all
+	$(WEB_ENV) $(VENV_PYTHON) -u run_desktop.py
 
 web: all
 	$(WEB_ENV) $(VENV_PYTHON) -u run_web.py
