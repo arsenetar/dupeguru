@@ -6,7 +6,6 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-import logging
 import os.path as op
 from enum import Enum
 from os import PathLike
@@ -79,21 +78,22 @@ try:
         return folder
 
 except ImportError:
-    # We're either running tests, and these functions don't matter much or we're in a really
-    # weird situation. Let's just have dummy fallbacks.
-    logging.warning("Can't setup desktop functions!")
+    # Fallback for headless, web server, or environments without PyQt5
+    from core.paths import get_appdata_path, get_cache_path
 
     def _open_url(url: str) -> None:
-        # Dummy for tests
+        # Dummy for tests/headless
         pass
 
     def _open_path(path: str) -> None:
-        # Dummy for tests
+        # Dummy for tests/headless
         pass
 
     def _reveal_path(path: str) -> None:
-        # Dummy for tests
+        # Dummy for tests/headless
         pass
 
     def _special_folder_path(special_folder: SpecialFolder, portable: bool = False) -> str:
-        return "/tmp"
+        if special_folder == SpecialFolder.CACHE:
+            return get_cache_path(portable=portable)
+        return get_appdata_path(portable=portable)

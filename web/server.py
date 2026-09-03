@@ -22,76 +22,16 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import platform  # noqa: E402
-
-
-# Pure Python fallback for AppData and Cache paths to avoid instantiating PyQt5
-# QCoreApplication in a multi-threaded web server context, which causes segfaults.
-def get_appdata_pure_python(portable=False):
-    if portable:
-        return os.path.join(str(PROJECT_ROOT), "data")
-
-    system = platform.system()
-    home = os.path.expanduser("~")
-    if system == "Windows":
-        appdata = os.environ.get("APPDATA")
-        base = os.path.join(appdata, "de-dup") if appdata else os.path.join(home, "AppData", "Roaming", "de-dup")
-        old_base = (
-            os.path.join(appdata, "dupeGuru") if appdata else os.path.join(home, "AppData", "Roaming", "dupeGuru")
-        )
-    elif system == "Darwin":
-        base = os.path.join(home, "Library", "Application Support", "de-dup")
-        old_base = os.path.join(home, "Library", "Application Support", "dupeGuru")
-    else:
-        data_home = os.environ.get("XDG_DATA_HOME")
-        base = os.path.join(data_home, "de-dup") if data_home else os.path.join(home, ".local/share", "de-dup")
-        old_base = os.path.join(data_home, "dupeGuru") if data_home else os.path.join(home, ".local/share", "dupeGuru")
-
-    if not os.path.exists(base) and os.path.exists(old_base):
-        return old_base
-    return base
-
-
-def special_folder_path_pure_python(special_folder, portable=False):
-    from hscommon.desktop import SpecialFolder
-
-    if special_folder == SpecialFolder.CACHE:
-        system = platform.system()
-        home = os.path.expanduser("~")
-        if system == "Windows":
-            localappdata = os.environ.get("LOCALAPPDATA")
-            if localappdata:
-                return os.path.join(localappdata, "de-dup", "cache")
-            return os.path.join(home, "AppData", "Local", "de-dup", "cache")
-        elif system == "Darwin":
-            return os.path.join(home, "Library", "Caches", "de-dup")
-        else:
-            cache_home = os.environ.get("XDG_CACHE_HOME")
-            if cache_home:
-                return os.path.join(cache_home, "de-dup")
-            return os.path.join(home, ".cache", "de-dup")
-    else:
-        return get_appdata_pure_python(portable)
-
-
-# Apply monkey patches to bypass PyQt5 AppDataLocation resolution in server
-try:
-    import qt.util  # noqa: E402
-
-    qt.util.get_appdata = get_appdata_pure_python
-except ImportError:
-    pass
-
-import hscommon.desktop  # noqa: E402
-
-hscommon.desktop.special_folder_path = special_folder_path_pure_python
-hscommon.desktop._special_folder_path = special_folder_path_pure_python
-
 from core.domain.models import TaskStatus  # noqa: E402
+from core.paths import get_appdata_path, get_cache_path  # noqa: E402
 from core.service.deletion import FileDeletionService  # noqa: E402
 from core.service.task_runner import TaskRunner  # noqa: E402
 from core.storage.task_repo import TaskRepository  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
+
+# Backward-compatibility alias
+get_appdata_pure_python = get_appdata_path
+special_folder_path_pure_python = get_cache_path
 
 
 # Thread-safe server state manager
