@@ -110,7 +110,6 @@ class TaskExecution:
 
             matcher = DuplicateMatcher(self.db_engine)
             groups = matcher.find_duplicates(progress_callback=self._on_matching_progress)
-            self.db_engine.save_duplicate_groups(groups)
 
             with self._lock:
                 self.results_groups = groups

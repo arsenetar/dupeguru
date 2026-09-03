@@ -81,6 +81,8 @@ class ContentHasher:
             for future in as_completed(futures):
                 if stop_checker and stop_checker():
                     logging.info("ContentHasher cancelled by stop_checker.")
+                    for f in futures:
+                        f.cancel()
                     break
                 processed += 1
                 try:

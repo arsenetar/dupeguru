@@ -80,6 +80,17 @@ class TestPhase2Pipeline(unittest.TestCase):
         self.assertEqual(group.duplicates[0].path, "/tmp/fileB.txt")
         self.assertEqual(group.saved_bytes, 1000)
 
+    def test_content_hasher_cancellation(self):
+        engine = DBEngine(":memory:")
+        engine.init_schema()
+
+        hasher = ContentHasher(engine)
+        dtos = [FileDTO(path=f"/fake/path_{i}.txt", size=100) for i in range(20)]
+
+        # stop_checker returns True immediately
+        hashed = hasher.hash_candidate_files(dtos, stop_checker=lambda: True)
+        self.assertTrue(len(hashed) < len(dtos))
+
 
 if __name__ == "__main__":
     unittest.main()

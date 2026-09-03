@@ -88,6 +88,7 @@ hscommon.desktop.special_folder_path = special_folder_path_pure_python
 hscommon.desktop._special_folder_path = special_folder_path_pure_python
 
 from core.domain.models import TaskStatus  # noqa: E402
+from core.service.deletion import FileDeletionService  # noqa: E402
 from core.service.task_runner import TaskRunner  # noqa: E402
 from core.storage.task_repo import TaskRepository  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
@@ -180,6 +181,7 @@ appdata_dir = get_appdata_pure_python()
 scans_dir = os.path.join(appdata_dir, "scans")
 task_repository = TaskRepository(scans_dir)
 task_runner = TaskRunner(task_repository)
+file_deletion_service = FileDeletionService()
 
 
 def safe_path_exists(path_str, timeout=1.0):
@@ -774,81 +776,55 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 return
 
             def _run_deletion_pipeline(target_task_id, target_paths, target_db_paths):
-                app_state["status"] = "deleting"
-                app_state["deleting"] = True
-                app_state["delete_progress"] = 0
-                app_state["delete_total"] = len(target_paths)
-                app_state["progress_msg"] = f"Deleting 0 / {len(target_paths):,} marked duplicate files..."
+                server_state.update(
+                    status="deleting",
+                    deleting=True,
+                    delete_progress=0,
+                    delete_total=len(target_paths),
+                    progress_msg=f"Deleting 0 / {len(target_paths):,} marked duplicate files...",
+                )
 
-                from concurrent.futures import ThreadPoolExecutor
+                def on_delete_progress(current, total, msg):
+                    pct = int((current / total) * 100) if total else 100
+                    server_state.update(delete_progress=pct, progress_msg=msg)
 
-                def process_file_deletion(p):
-                    if os.path.exists(p):
-                        try:
-                            os.remove(p)
-                            return (True, p, True)
-                        except OSError as e:
-                            logging.error(f"Failed to delete file {p}: {e}")
-                            return (False, p, False)
-                    else:
-                        return (True, p, False)
-
-                successful_paths = []
-                count = 0
-                total_len = len(target_paths)
-                workers = min(64, max(4, total_len // 100))
-
-                step = max(1, min(100, total_len // 50))
-                with ThreadPoolExecutor(max_workers=workers) as executor:
-                    for idx, (ok, p, physical) in enumerate(executor.map(process_file_deletion, target_paths), start=1):
-                        if ok:
-                            successful_paths.append(p)
-                            if physical:
-                                count += 1
-                        if idx % step == 0 or idx == total_len:
-                            pct = int((idx / total_len) * 100)
-                            app_state["delete_progress"] = pct
-                            app_state["progress_msg"] = f"Deleting {idx:,} / {total_len:,} duplicate files ({pct}%)..."
-
-                if target_task_id and successful_paths:
-                    task_exec = task_runner.get_or_create_execution(target_task_id)
+                try:
+                    db_engines = []
+                    task_exec = task_runner.get_or_create_execution(target_task_id) if target_task_id else None
                     if task_exec and task_exec.db_engine:
-                        task_exec.db_engine.delete_files_by_paths(successful_paths)
-                        if task_exec.results_groups:
-                            from core.domain.models import DuplicateGroupDTO
+                        db_engines.append(task_exec.db_engine)
 
-                            filtered_groups = []
-                            for g in task_exec.results_groups:
-                                rem_dupes = [d for d in g.duplicates if d.path not in successful_paths]
-                                if rem_dupes:
-                                    new_saved = sum(d.size for d in rem_dupes)
-                                    filtered_groups.append(
-                                        DuplicateGroupDTO(
-                                            group_id=g.group_id,
-                                            pivot=g.pivot,
-                                            duplicates=rem_dupes,
-                                            saved_bytes=new_saved,
-                                        )
-                                    )
-                            task_exec.results_groups = filtered_groups
+                    if target_db_paths:
+                        from core.storage.db_engine import DBEngine
 
-                if target_db_paths and successful_paths:
-                    from core.storage.db_engine import DBEngine
+                        for db_p in target_db_paths:
+                            if os.path.exists(db_p) and not any(e.db_path == db_p for e in db_engines):
+                                try:
+                                    db_engines.append(DBEngine(db_p))
+                                except Exception as e:
+                                    logging.error(f"Failed to load DB '{db_p}' for deletion purge: {e}")
 
-                    for db_p in target_db_paths:
-                        if os.path.exists(db_p):
-                            try:
-                                engine = DBEngine(db_p)
-                                engine.delete_files_by_paths(successful_paths)
-                            except Exception as e:
-                                logging.error(f"Failed to purge deleted files from DB '{db_p}': {e}")
+                    active_groups = task_exec.results_groups if task_exec else None
 
-                logging.info(f"Deletion complete: removed {count} files for task '{target_task_id}'.")
-                app_state["status"] = "idle"
-                app_state["deleting"] = False
-                app_state["delete_progress"] = 100
-                app_state["progress_msg"] = ""
-                return count
+                    count, _, updated_groups = file_deletion_service.delete_files(
+                        target_paths=target_paths,
+                        progress_callback=on_delete_progress,
+                        db_engines=db_engines,
+                        active_duplicate_groups=active_groups,
+                    )
+
+                    if task_exec and active_groups is not None:
+                        task_exec.results_groups = updated_groups
+
+                    logging.info(f"Deletion complete: removed {count} files for task '{target_task_id}'.")
+                    return count
+                finally:
+                    server_state.update(
+                        status="idle",
+                        deleting=False,
+                        delete_progress=100,
+                        progress_msg="",
+                    )
 
             if len(paths_to_del) <= 50:
                 count = _run_deletion_pipeline(task_id, paths_to_del, db_paths)

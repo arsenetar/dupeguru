@@ -119,6 +119,65 @@ class TestPhase3Service(unittest.TestCase):
             dto = execution.get_dto()
             self.assertEqual(dto.status, TaskStatus.CANCELLED)
 
+    def test_file_deletion_service(self):
+        from core.domain.models import DuplicateGroupDTO, FileDTO
+        from core.service.deletion import FileDeletionService
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            f1 = os.path.join(temp_dir, "file1.txt")
+            f2 = os.path.join(temp_dir, "file2.txt")
+            f3 = os.path.join(temp_dir, "file3.txt")
+
+            for f, content in [(f1, "aaa"), (f2, "aaa"), (f3, "bbb")]:
+                with open(f, "w") as fp:
+                    fp.write(content)
+
+            db_path = os.path.join(temp_dir, "deletion_test.db")
+            engine = DBEngine(db_path)
+            engine.init_schema()
+
+            with engine.transaction() as conn:
+                conn.execute("INSERT INTO files (path, size) VALUES (?, ?)", (f1, 3))
+                conn.execute("INSERT INTO files (path, size) VALUES (?, ?)", (f2, 3))
+                conn.execute("INSERT INTO files (path, size) VALUES (?, ?)", (f3, 3))
+
+            service = FileDeletionService()
+
+            active_groups = [
+                DuplicateGroupDTO(
+                    group_id=1,
+                    pivot=FileDTO(path=f1, size=3, mtime_ns=0),
+                    duplicates=[FileDTO(path=f2, size=3, mtime_ns=0)],
+                    saved_bytes=3,
+                )
+            ]
+
+            progress_reports = []
+
+            def on_progress(cur, tot, msg):
+                progress_reports.append((cur, tot, msg))
+
+            # Delete f2 (the duplicate file)
+            deleted_count, succ_paths, rem_groups = service.delete_files(
+                target_paths=[f2],
+                progress_callback=on_progress,
+                db_engines=[engine],
+                active_duplicate_groups=active_groups,
+            )
+
+            self.assertEqual(deleted_count, 1)
+            self.assertEqual(succ_paths, [f2])
+            self.assertFalse(os.path.exists(f2))
+            self.assertTrue(os.path.exists(f1))
+            self.assertEqual(len(rem_groups), 0)
+            self.assertTrue(len(progress_reports) > 0)
+
+            # Check DB engine purged f2
+            _, remaining_files = engine.get_files_page()
+            all_paths = [f["path"] for f in remaining_files]
+            self.assertIn(f1, all_paths)
+            self.assertNotIn(f2, all_paths)
+
 
 if __name__ == "__main__":
     unittest.main()
