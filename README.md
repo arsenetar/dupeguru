@@ -66,14 +66,17 @@ make run
 
 ## 🚀 Key Features
 
-### 1. HTML Web UI Console
-- **Glassmorphic UI**: Responsive dark-mode interface designed for web browsers.
-- **Remote / Headless Server Support**: Run scans on a remote Linux server or NAS and access results via browser.
+### 1. HTML Web UI Console & Duplicate Results Studio
+- **Glassmorphic UI**: Responsive dark-mode interface designed for web browsers and headless servers.
+- **Duplicate Results Studio**: Dedicated high-density duplicate management studio with interactive path previews, directory hierarchy tags, and one-click batch marking.
+- **Cross-Database Deduplication**: Compare duplicate sets across multiple isolated scan databases without merging or altering original scan metadata.
+- **Remote / Headless Server Support**: Run scans on remote servers or NAS devices with non-blocking REST APIs and background progress polling.
 - **Config Management**: Adjust similarity thresholds, regex matching, and ignored hardlinks dynamically.
 
 ### 2. Lock-Free Rust Engine & Cache Scaling
 - **Rayon Parallel Crawler**: Multi-threaded directory walker collects files in parallel across all CPU cores.
 - **SIMD Hasher**: Parallel block checksum calculator processes candidates without Python GIL lock delays.
+- **Direct PyO3 FFI Dictionary Mapping**: Zero-copy structured data marshaling across Python 3.10 through 3.14.7.
 - **Instant Cache Reset**: 18ms SQLite file unlinking and 5ms Valkey/Redis `FLUSHDB` operations.
 
 ---

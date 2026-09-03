@@ -34,9 +34,20 @@ Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
   ) -> PyResult<Vec<(String, String)>>
   ```
 
+### 4. Zero-Copy Cross-DB Deduplication (`cross_db_compare`)
+* **Crate Stack**: `rusqlite` + `rayon` + `pyo3::types::{PyDict, PyList}`.
+* **Execution**: Attaches or reads multiple isolated scan SQLite databases in parallel across CPU threads, groups matches by checksum, and constructs structured Python `PyDict` objects directly without intermediate tuple unpacking.
+* **Signature**:
+  ```rust
+  pub fn cross_db_compare<'py>(
+      py: Python<'py>,
+      db_paths: Vec<String>,
+  ) -> PyResult<Vec<Bound<'py, PyDict>>>
+  ```
+
 ---
 
-## 4. Scanner Pipeline Integration (Phase 4)
+## 5. Scanner Pipeline Integration (Phase 4)
 
 * **Directory Crawling Integration ([core/directories.py](file:///home/tin/src/opensource/dupeguru/core/directories.py#L104-L128))**:
   When `HAS_RUST` is active, `_get_files` delegates top-level directory discovery directly to `dupeguru_rust.collect_files_parallel()`, populating `fs.filesdb` and yielding scannable files in parallel.
@@ -45,16 +56,18 @@ Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
 
 ---
 
-## 5. CI/CD & Automated Packaging (Phase 5)
+## 6. CI/CD & Automated Packaging (Phase 5)
 
 * **Automated Module Build ([build.py](file:///home/tin/src/opensource/dupeguru/build.py#L117-L130))**: `python build.py --modules` automatically compiles `rust_engine` in release mode (`cargo build --release`) and copies `libdupeguru_rust.so` / `dupeguru_rust.pyd` into `core/`.
 * **Multi-Platform CI/CD ([.github/workflows/build_rust_wheels.yml](file:///home/tin/src/opensource/dupeguru/.github/workflows/build_rust_wheels.yml))**: Automated GitHub Actions workflows compile and verify Rust native modules across Linux (x86_64), macOS (Apple Silicon & Intel), and Windows (x64).
 
 ---
 
-## PyO3 Interoperability & Path Safety
+## 7. PyO3 0.29 Interoperability & Path Safety
 
-Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
+The Rust engine targets **PyO3 0.29.2**, supporting Python 3.10 through Python 3.14.7.
+* **Build Python Binding**: `Makefile` sets `PYO3_PYTHON="$(CURDIR)/env/bin/python"` to ensure `cargo` compiles against the active virtual environment ABI.
+* **Path Sanitization**: Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
 ```python
 def _clean_path_str(path) -> str:
     s = str(path)

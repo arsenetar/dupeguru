@@ -6,11 +6,15 @@ This guide explains how to set up your development environment, build native C/R
 
 ## Environment Setup
 
-### 1. Create Virtual Environment
+### 1. Create Virtual Environment with uv (Python 3.10+)
 ```bash
-python3 -m venv --system-site-packages ./env
-source ./env/bin/activate
-pip install -r requirements.txt -r requirements-extra.txt
+# Recommended with uv (e.g. Python 3.14.7):
+uv venv --python 3.14.7 env
+source env/bin/activate
+uv pip install -e .[dev]
+
+# Or standard Makefile build:
+make
 ```
 
 ---
@@ -23,7 +27,7 @@ pip install -r requirements.txt -r requirements-extra.txt
 | `make rust` | `cd rust_engine && cargo build --release` | Compiles the Rust engine library (`core/dupeguru_rust.so`). |
 | `make run` | `./env/bin/python run.py` | Launches the PyQt5 desktop GUI application. |
 | `make web` | `./env/bin/python -u run_web.py` | Launches the HTML Web Console server. |
-| `make test` | `./env/bin/pytest` | Runs the 520+ automated unit tests. |
+| `make test` | `./env/bin/pytest` | Runs the 546+ automated unit tests. |
 
 ---
 
