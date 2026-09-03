@@ -5,6 +5,7 @@
 import json
 import logging
 import os
+import uuid
 from typing import Dict, List, Optional, Tuple
 
 from core.domain.models import ScanTaskDTO, TaskStatus
@@ -112,6 +113,11 @@ class TaskRepository:
                     self._mtime_cache[db_path] = (mtime, task)
                     tasks[task_id] = task
 
+        # Preserve any in-memory created tasks whose database files are not yet created on disk
+        for tid, t in self._tasks.items():
+            if tid not in tasks and not os.path.exists(t.db_path):
+                tasks[tid] = t
+
         self._tasks = tasks
         return list(self._tasks.values())
 
@@ -150,3 +156,47 @@ class TaskRepository:
                 logging.error(f"Failed to delete DB file {task.db_path}: {e}")
                 return False
         return True
+
+    def create_task(
+        self,
+        name: str,
+        directories: List[str],
+        db_filename: Optional[str] = None,
+        overwrite: bool = False,
+    ) -> ScanTaskDTO:
+        """Create and register a new ScanTaskDTO instance."""
+        existing = self.get_task(name)
+        if existing and not overwrite:
+            return existing
+
+        safe_name = name.strip().replace(" ", "_").replace("/", "_")
+        task_id = existing.task_id if (existing and overwrite) else f"{safe_name}_{uuid.uuid4().hex[:8]}"
+
+        if not db_filename:
+            db_path = existing.db_path if (existing and overwrite) else os.path.join(self.scans_dir, f"{task_id}.db")
+        else:
+            if not db_filename.endswith(".db"):
+                db_filename += ".db"
+            db_path = os.path.join(self.scans_dir, db_filename)
+
+        if overwrite and os.path.exists(db_path):
+            try:
+                os.remove(db_path)
+                for ext in ["-wal", "-shm"]:
+                    extra = db_path + ext
+                    if os.path.exists(extra):
+                        os.remove(extra)
+            except OSError:
+                pass
+
+        normalized_dirs = [os.path.normpath(d.strip().strip("'\"")) for d in directories if d and d.strip()]
+        task_dto = ScanTaskDTO(
+            task_id=task_id,
+            name=name,
+            db_path=db_path,
+            directories=normalized_dirs,
+            status=TaskStatus.IDLE,
+        )
+        self.save_task_metadata(task_dto)
+        self._tasks[task_id] = task_dto
+        return task_dto

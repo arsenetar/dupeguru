@@ -87,7 +87,7 @@ import hscommon.desktop  # noqa: E402
 hscommon.desktop.special_folder_path = special_folder_path_pure_python
 hscommon.desktop._special_folder_path = special_folder_path_pure_python
 
-from core.domain.models import ScanTaskDTO, TaskStatus  # noqa: E402
+from core.domain.models import TaskStatus  # noqa: E402
 from core.service.task_runner import TaskRunner  # noqa: E402
 from core.storage.task_repo import TaskRepository  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
@@ -535,22 +535,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 )
                 return
 
-            import uuid
+            task_dto = task_repository.create_task(name=name, directories=directories_list, overwrite=overwrite)
+            app_state["active_task_id"] = task_dto.task_id
 
-            task_id = f"{name}_{uuid.uuid4().hex[:8]}"
-            db_path = os.path.join(scans_dir, f"{task_id}.db")
-
-            task_dto = ScanTaskDTO(
-                task_id=task_id,
-                name=name,
-                db_path=db_path,
-                directories=directories_list,
-                status=TaskStatus.IDLE,
-            )
-            task_repository.save_task_metadata(task_dto)
-            app_state["active_task_id"] = task_id
-
-            execution = task_runner.start_task(task_id)
+            execution = task_runner.start_task(task_dto.task_id)
             if execution:
                 self.wfile.write(
                     json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
