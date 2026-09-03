@@ -3,9 +3,11 @@
 de-dup Desktop Application (pywebview Native Shell)
 Launches the background HTTP engine and displays the HTML/CSS/JS UI inside
 a lightweight native desktop window across macOS, Windows 11, and Linux.
+Provides native file dialogs and OS desktop integrations via pywebview JS-API.
 """
 
 import argparse
+import os
 import socket
 import sys
 import threading
@@ -24,6 +26,7 @@ sys.modules["PyQt5.QtGui"] = None
 sys.modules["PyQt5.QtWidgets"] = None
 
 from core import __appname__, __version__  # noqa: E402
+from hscommon.desktop import open_path, reveal_path  # noqa: E402
 from web.server import ThreadedHTTPServer, DupeGuruHTTPHandler  # noqa: E402
 
 
@@ -38,10 +41,67 @@ def find_available_port(start_port=8080):
     return start_port
 
 
+class DesktopBridgeAPI:
+    """JS-to-Python Native Bridge exposed to frontend via window.pywebview.api."""
+
+    def __init__(self, app):
+        self.app = app
+
+    def select_folder(self, initial_dir=None):
+        """Open native OS folder selection dialog."""
+        import webview
+
+        if not self.app.window:
+            return None
+        res = self.app.window.create_file_dialog(
+            webview.FOLDER_DIALOG,
+            directory=initial_dir or os.path.expanduser("~"),
+            allow_multiple=False,
+        )
+        if res and len(res) > 0:
+            return res[0]
+        return None
+
+    def select_multiple_folders(self, initial_dir=None):
+        """Open native OS multiple folder selection dialog."""
+        import webview
+
+        if not self.app.window:
+            return []
+        res = self.app.window.create_file_dialog(
+            webview.FOLDER_DIALOG,
+            directory=initial_dir or os.path.expanduser("~"),
+            allow_multiple=True,
+        )
+        return list(res) if res else []
+
+    def reveal_in_file_manager(self, path):
+        """Open folder and highlight file in native file browser (Explorer/Finder/Nautilus)."""
+        reveal_path(path)
+        return True
+
+    def open_in_default_app(self, path):
+        """Open file using system default application."""
+        open_path(path)
+        return True
+
+    def get_system_info(self):
+        """Return runtime platform information."""
+        import platform
+
+        return {
+            "appname": __appname__,
+            "version": __version__,
+            "system": platform.system(),
+            "release": platform.release(),
+            "machine": platform.machine(),
+        }
+
+
 class DesktopApp:
     """Desktop shell embedding the de-dup web console using native OS WebViews."""
 
-    def __init__(self, port=None, width=1200, height=800, debug=False):
+    def __init__(self, port=None, width=1280, height=850, debug=False):
         self.port = port or find_available_port()
         self.width = width
         self.height = height
@@ -49,6 +109,7 @@ class DesktopApp:
         self.server = None
         self.server_thread = None
         self.window = None
+        self.api = DesktopBridgeAPI(self)
 
     def start_backend(self):
         """Starts the backend HTTP server in a daemon thread."""
@@ -76,6 +137,7 @@ class DesktopApp:
             self.window = webview.create_window(
                 title=f"{__appname__} v{__version__}",
                 url=url,
+                js_api=self.api,
                 width=self.width,
                 height=self.height,
                 min_size=(900, 600),

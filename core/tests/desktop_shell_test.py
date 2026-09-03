@@ -20,6 +20,21 @@ class TestDesktopShell(unittest.TestCase):
         finally:
             app.stop_backend()
 
+    def test_desktop_bridge_api(self):
+        from run_desktop import DesktopBridgeAPI
+
+        app = DesktopApp()
+        bridge = DesktopBridgeAPI(app)
+
+        sys_info = bridge.get_system_info()
+        self.assertIn("appname", sys_info)
+        self.assertIn("version", sys_info)
+        self.assertIn("system", sys_info)
+
+        # When window is None (headless/test mode), folder dialog returns None/empty list safely
+        self.assertIsNone(bridge.select_folder())
+        self.assertEqual(bridge.select_multiple_folders(), [])
+
 
 if __name__ == "__main__":
     unittest.main()

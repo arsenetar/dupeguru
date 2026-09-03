@@ -100,6 +100,34 @@ function setupEventListeners() {
         });
     }
 
+    // pywebview Native Desktop Integration
+    const nativeBrowseBtn = document.getElementById("native-browse-btn");
+    const checkNativeBridge = () => {
+        if (window.pywebview && window.pywebview.api) {
+            if (nativeBrowseBtn) {
+                nativeBrowseBtn.style.display = "inline-flex";
+            }
+        }
+    };
+    checkNativeBridge();
+    window.addEventListener("pywebviewready", checkNativeBridge);
+
+    if (nativeBrowseBtn) {
+        nativeBrowseBtn.addEventListener("click", async () => {
+            if (window.pywebview && window.pywebview.api) {
+                try {
+                    const selected = await window.pywebview.api.select_folder(manualPathInput ? manualPathInput.value : "");
+                    if (selected) {
+                        if (manualPathInput) manualPathInput.value = selected;
+                        addDirectory(selected);
+                    }
+                } catch (err) {
+                    console.error("Native folder dialog error:", err);
+                }
+            }
+        });
+    }
+
     if (manualPathInput) {
         manualPathInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && addManualPathBtn) {
