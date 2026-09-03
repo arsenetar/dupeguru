@@ -1,6 +1,5 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
-PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 10
 PREFIX ?= /usr/local
 # REDIS_HOST ?= 192.168.2.249:6379
@@ -58,7 +57,7 @@ endif
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 
-packages = hscommon core qt
+packages = hscommon core
 localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
 mofiles = $(patsubst %.po,%.mo,$(pofiles))
@@ -172,9 +171,6 @@ endif
 build/help: | env
 	$(VENV_PYTHON) build.py --doc
 
-qt/dg_rc.py: qt/dg.qrc
-	$(PYRCC5) qt/dg.qrc > qt/dg_rc.py
-
 i18n: $(mofiles)
 
 %.mo: %.po
@@ -236,7 +232,7 @@ clean:
 	-rm -rf build
 	-rm -rf .venv env
 	-rm -f locale/*/LC_MESSAGES/*.mo
-	-rm -f core/pe/*.$(SO) qt/pe/*.$(SO)
+	-rm -f core/pe/*.$(SO)
 	-rm -f core/dupeguru_rust.$(SO)
 	-cd rust_engine && cargo clean
 

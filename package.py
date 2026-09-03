@@ -75,14 +75,10 @@ def package_debian_distribution(distribution):
     version = "{}~{}".format(app_version, distribution)
     destpath = op.join("build", "de-dup-{}".format(version))
     srcpath = op.join(destpath, "src")
-    packages = ["hscommon", "core", "qt", "web", "send2trash"]
+    packages = ["hscommon", "core", "web", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=False)
     os.mkdir(op.join(destpath, "modules"))
     copy_all(op.join("core", "pe", "modules", "*.*"), op.join(destpath, "modules"))
-    copy(
-        op.join("qt", "pe", "modules", "block.c"),
-        op.join(destpath, "modules", "block_qt.c"),
-    )
     copy(
         op.join("pkg", "debian", "build_pe_modules.py"),
         op.join(destpath, "build_pe_modules.py"),
@@ -126,7 +122,7 @@ def package_arch():
     # need to include them).
     print("Packaging for Arch")
     srcpath = op.join("build", "de-dup-arch")
-    packages = ["hscommon", "core", "qt", "web"]
+    packages = ["hscommon", "core", "web"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
