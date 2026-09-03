@@ -616,7 +616,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 cross_scan_msg=f"Comparing cross-database duplicate matches across {len(db_paths)} databases...",
             )
             try:
-                from core.cross_db import CrossDBMatcher
+                from core.pipeline.cross_matcher import CrossDBMatcher
 
                 matcher = CrossDBMatcher(db_paths)
                 results = matcher.find_cross_duplicates()

@@ -93,3 +93,11 @@ def test_cross_db_matcher_caching_and_invalidation():
 
         g3 = matcher.find_cross_duplicates()
         assert len(g3) == 1
+
+
+def test_cross_db_matcher_default_cache_dir():
+    from core.paths import get_appdata_path
+
+    matcher = CrossDBMatcher([])
+    expected_cache_db = os.path.join(get_appdata_path(), "cross_scan_cache.db")
+    assert matcher.cache_db_path == expected_cache_db
