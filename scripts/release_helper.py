@@ -92,19 +92,27 @@ def git_release(new_version):
 
     # Commit
     print("Committing release changes...")
-    subprocess.run(["git", "add", VERSION_FILE, CHANGELOG_FILE])
-    subprocess.run(["git", "commit", "-m", f"release: bump version to {new_version}"])
+    env_vars = os.environ.copy()
+    env_bin = os.path.join(PROJECT_ROOT, "env", "bin")
+    if os.path.exists(env_bin):
+        env_vars["PATH"] = f"{env_bin}:{env_vars.get('PATH', '')}"
+
+    subprocess.run(["git", "add", VERSION_FILE, CHANGELOG_FILE], env=env_vars)
+    res = subprocess.run(["git", "commit", "-m", f"release: bump version to {new_version}"], env=env_vars)
+    if res.returncode != 0:
+        print("Error: Git commit failed.")
+        sys.exit(1)
 
     # Tag
     tag_name = f"v{new_version}"
     print(f"Creating Git tag {tag_name}...")
-    subprocess.run(["git", "tag", "-a", tag_name, "-m", f"Release {tag_name}"])
+    subprocess.run(["git", "tag", "-a", tag_name, "-m", f"Release {tag_name}"], env=env_vars)
     print(f"Release v{new_version} committed and tagged successfully!")
-    print("To push to remote, run: git push origin main --tags")
+    print("To push to remote, run: git push origin --tags")
 
 
 def print_help():
-    print("dupeGuru Release Helper")
+    print("de-dup Release Helper")
     print("Usage:")
     print("  python scripts/release_helper.py status           - Show current version and check alignment")
     print("  python scripts/release_helper.py bump <version>   - Bump version files and prep changelog")

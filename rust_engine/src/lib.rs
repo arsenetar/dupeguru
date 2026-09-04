@@ -1045,8 +1045,8 @@ pub struct RustFilesDB {
 #[pymethods]
 impl RustFilesDB {
     #[new]
-    #[pyo3(signature = (cache_url))]
-    pub fn new(cache_url: &str) -> PyResult<Self> {
+    pub fn new(obj: &Bound<'_, PyAny>) -> PyResult<Self> {
+        let cache_url: String = obj.extract()?;
         let engine: Box<dyn CacheEngine + Send + Sync> =
             if cache_url.starts_with("redis://")
                 || cache_url.starts_with("valkey://")
