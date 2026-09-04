@@ -25,9 +25,10 @@ make
 | :--- | :--- | :--- |
 | `make` | `make all` | Builds all components (Rust engine, C modules, virtualenv). |
 | `make rust` | `cd rust_engine && cargo build --release` | Compiles the Rust engine library (`core/dupeguru_rust.so`). |
-| `make run` | `./env/bin/python run.py` | Launches the PyQt5 desktop GUI application. |
-| `make web` | `./env/bin/python -u run_web.py` | Launches the HTML Web Console server. |
-| `make test` | `./env/bin/pytest` | Runs the 546+ automated unit tests. |
+| `make run` | `./env/bin/python run.py` | Launches the native desktop application (`pywebview` shell). |
+| `make desktop` | `./env/bin/python -u run_desktop.py` | Launches the native desktop application (`pywebview` shell). |
+| `make web` | `./env/bin/python -u run_web.py` | Launches the standalone HTML Web Console server. |
+| `make test` | `./env/bin/pytest` | Runs the 560+ automated unit tests. |
 
 ---
 

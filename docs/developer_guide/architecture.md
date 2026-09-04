@@ -9,36 +9,30 @@
 ```mermaid
 graph TD
     subgraph Frontend Interfaces
-        QtUI[PyQt5 Desktop UI]
+        DesktopShell[pywebview Native Desktop Shell]
         WebConsole[HTML Web Console]
-        RESTServer[REST HTTP Server]
+        RESTServer[REST HTTP Server - web/server.py]
     end
 
-    subgraph Presenter Layer
-        Adapter[WebViewAdapter / Qt Presenter]
-        Broadcaster[hscommon Broadcaster]
+    subgraph Service & Pipeline Layer
+        TaskRunner[TaskRunner / Service Orchestrator]
+        Pipeline[Discovery / Hasher / Matcher Pipeline]
+        DeletionService[FileDeletionService]
     end
 
-    subgraph Business Logic Core
-        App[core/app.py - DupeGuru Core]
-        Scanner[core/scanner.py - Matching Engine]
-        DirTree[core/directories.py - Directory Model]
-    end
-
-    subgraph Native Engine & Database
+    subgraph Native Engine & Storage
         PyO3[PyO3 Bridge]
         RustEngine[Rust Parallel Rayon Engine]
-        CacheDB[(SQLite WAL / Valkey Redis)]
+        CacheDB[(SQLite WAL DBEngine / Valkey Redis)]
     end
 
-    QtUI --> Adapter
+    DesktopShell --> RESTServer
     WebConsole --> RESTServer
-    RESTServer --> Adapter
-    Adapter --> Broadcaster
-    Broadcaster --> App
-    App --> Scanner
-    App --> DirTree
-    DirTree --> PyO3
+    RESTServer --> TaskRunner
+    RESTServer --> DeletionService
+    TaskRunner --> Pipeline
+    Pipeline --> PyO3
+    Pipeline --> CacheDB
     PyO3 --> RustEngine
     RustEngine --> CacheDB
 ```
@@ -47,6 +41,6 @@ graph TD
 
 ## Key Design Principles
 
-1. **Double Decoupling**: Frontend UI implementations (PyQt5, Web UI, CLI) never interact directly with low-level data structures. They communicate through `hscommon.gui` presenter contracts and `Broadcaster` notifications.
+1. **Decoupled Architecture**: Frontend UI implementations (`pywebview` desktop window, web browsers, CLI) never interact directly with low-level SQLite tables or C-extensions. They communicate through clean REST endpoints and service layer contracts.
 2. **Native Extension Layer (PyO3)**: Heavy CPU-bound and disk-bound tasks (file crawling, checksum calculation, database persistence) delegate to compiled Rust shared libraries (`dupeguru_rust.so`).
-3. **Headless Execution Compatibility**: The core application logic (`core/app.py`) can run in headless server environments without requiring X11, Wayland, or Qt display servers.
+3. **Headless & Embedded Compatibility**: The core application logic and pipelines operate independently of GUI display servers, allowing seamless execution on servers, NAS appliances, or desktop windows.

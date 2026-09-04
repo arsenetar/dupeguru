@@ -8,17 +8,17 @@ Repository: [https://github.com/TinLe/de-dup.git](https://github.com/TinLe/de-du
 
 ## What is de-dup?
 
-**de-dup** is a high-performance, cross-platform duplicate file finder and deduplication tool. It features a lock-free **Rust parallel engine** for directory crawling and file hashing, a responsive **HTML Web Console UI** for remote/headless execution, and a traditional **PyQt5 Desktop GUI**.
+**de-dup** is a high-performance, cross-platform duplicate file finder and deduplication tool. It features a lock-free **Rust parallel engine** for directory crawling and file hashing, a responsive **HTML Web Console UI** for remote/headless execution, and a native **pywebview Desktop Shell**.
 
 ```mermaid
 graph TD
     User([User]) --> Choice{Execution Mode}
+    Choice -->|Desktop App| DesktopUI[pywebview Native Desktop Window]
     Choice -->|Browser / Remote| WebUI[HTML Web Console]
-    Choice -->|Desktop GUI| QtUI[PyQt5 Desktop App]
 
-    WebUI --> Server[REST Web Server]
-    QtUI --> Core[de-dup Core Engine]
-    Server --> Core
+    DesktopUI --> Server[REST Web Server]
+    WebUI --> Server
+    Server --> Core[de-dup Core Pipeline & Services]
 
     Core --> RustEngine[Rust Parallel Rayon Engine]
     RustEngine --> Cache[(SQLite / Valkey Cache)]
