@@ -227,7 +227,7 @@ def main():
         print("Creating source package for de-dup")
         package_source_txz()
         return
-    print("Packaging de-dup with UI qt")
+    print("Packaging de-dup with pywebview desktop shell")
     if sys.platform == "win32":
         package_windows()
     elif sys.platform == "darwin":
