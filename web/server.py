@@ -668,15 +668,31 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     json.dumps({"success": False, "error": "db_paths must be a list of registered database paths"}).encode()
                 )
                 return
+
+            # Build canonical allowlist from server-side registered tasks
+            registered_canonical_paths = {}
+            for t in task_repository.refresh():
+                try:
+                    canonical = str(Path(t.db_path).resolve(strict=True))
+                    if canonical.endswith(".db"):
+                        registered_canonical_paths[canonical] = canonical
+                except (OSError, ValueError, TypeError):
+                    continue
+
             if not raw_db_paths:
-                db_paths = [t.db_path for t in task_repository.refresh()]
+                db_paths = list(registered_canonical_paths.values())
             else:
-                # Sanitize and validate that requested db_paths are known registered task databases
                 validated_db_paths = []
                 for p in raw_db_paths:
-                    sanitized = sanitize_registered_db_path(p)
-                    if sanitized:
-                        validated_db_paths.append(sanitized)
+                    if not isinstance(p, str) or "\0" in p or not p:
+                        continue
+                    try:
+                        requested = str(Path(p).resolve(strict=True))
+                    except (OSError, ValueError, TypeError):
+                        continue
+                    canonical = registered_canonical_paths.get(requested)
+                    if canonical:
+                        validated_db_paths.append(canonical)
                 db_paths = validated_db_paths
 
             server_state.update(
