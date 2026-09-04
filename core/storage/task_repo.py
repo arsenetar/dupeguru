@@ -186,12 +186,15 @@ class TaskRepository:
 
         resolved_db_path = Path(db_path).resolve()
         try:
-            resolved_db_path.relative_to(scans_dir_path)
+                resolved_db_path = Path(db_path).resolve()
+                resolved_db_path.relative_to(scans_dir_path)
+                if resolved_db_path.exists():
+                    os.remove(str(resolved_db_path))
         except ValueError:
-            raise ValueError("Invalid database path: path escapes scans directory")
+                    extra = str(resolved_db_path) + ext
         db_path = str(resolved_db_path)
 
-        if overwrite and os.path.exists(db_path):
+            except (OSError, ValueError):
             try:
                 scans_root = Path(self.scans_dir).resolve()
                 resolved_db = Path(db_path).resolve()
