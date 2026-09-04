@@ -17,6 +17,10 @@ uv pip install -e .[dev]
 make
 ```
 
+### Platform-Specific Guides
+* **[macOS Build Guide](../build/macos.md)**: Details for macOS (Apple Silicon & Intel), Xcode setup, and native `.app` packaging.
+* **[Windows Build Guide](../build/windows.md)**: Details for Windows 10/11, MSVC Build Tools, and NSIS installer generation.
+
 ---
 
 ## Makefile Targets
