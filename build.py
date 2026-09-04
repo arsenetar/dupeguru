@@ -153,8 +153,8 @@ def build_normal(ui=None):
 
 
 def main():
-    if sys.version_info < (3, 10):
-        sys.exit("Python < 3.10 is unsupported.")
+    if sys.version_info < (3, 12):
+        sys.exit("Python < 3.12 is unsupported.")
     options = parse_args()
     if options.clean and Path("build").exists():
         shutil.rmtree("build")

@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-24.04, macos-15, windows-2025]
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
@@ -32,7 +32,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies (Ubuntu)
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-24.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y gettext python3-venv build-essential libwebkit2gtk-4.1-dev
@@ -40,13 +40,13 @@ jobs:
           pip install -r requirements.txt -r requirements-extra.txt PyInstaller
 
       - name: Install dependencies (macOS/Windows)
-        if: matrix.os != 'ubuntu-latest'
+        if: matrix.os != 'ubuntu-24.04'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r requirements-extra.txt PyInstaller
 
       - name: Setup NSIS (Windows)
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'windows-2025'
         run: |
           echo "C:\Program Files (x86)\NSIS" >> $GITHUB_PATH
 
@@ -57,20 +57,20 @@ jobs:
           python build.py --doc
 
       - name: Build macOS bundle
-        if: matrix.os == 'macos-latest'
+        if: matrix.os == 'macos-15'
         run: |
           python package.py
           cd dist
           zip -r ../de-dup-mac.zip de-dup.app
 
       - name: Build Windows setup installer
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'windows-2025'
         run: |
           python package.py
           mv dist/de-dup_*.exe de-dup-windows-installer.exe
 
       - name: Build Linux source archive
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-24.04'
         run: |
           python package.py --src
           mv build/de-dup-src-*.tar.xz de-dup-src.tar.xz

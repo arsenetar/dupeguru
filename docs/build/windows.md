@@ -1,12 +1,13 @@
-# Building de-dup for Windows 10 & 11
+# Building de-dup for Windows 11
 
-This guide explains how to build **de-dup** and run its native `pywebview` desktop UI on Windows.
+This guide explains how to build **de-dup** and run its native `pywebview` desktop UI on Windows 11 or newer.
 
 ---
 
 ## Prerequisites
 
-* **[Python 3.10+](https://www.python.org/downloads/)** (Python 3.12, 3.13, or 3.14 recommended)
+* **Windows 11 or newer**
+* **[Python 3.12+](https://www.python.org/downloads/)** (Python 3.12, 3.13, or 3.14 recommended)
 * **[Rust & Cargo](https://rustup.rs/)** (for compiling the native parallel engine `dupeguru_rust`)
 * **[Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)** (C++ Build Tools workload with Windows 10/11 SDK)
 * **[NSIS](https://nsis.sourceforge.io/)** (optional, for creating Windows installer executables)

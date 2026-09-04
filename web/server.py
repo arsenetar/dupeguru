@@ -665,7 +665,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 raw_db_paths = []
             if not isinstance(raw_db_paths, list):
                 self.wfile.write(
-                    json.dumps({"success": False, "error": "db_paths must be a list of registered database paths"}).encode()
+                    json.dumps(
+                        {"success": False, "error": "db_paths must be a list of registered database paths"}
+                    ).encode()
                 )
                 return
 

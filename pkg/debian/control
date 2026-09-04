@@ -10,7 +10,7 @@ Vcs-Git: https://github.com/arsenetar/dupeguru.git
 
 Package: {pkgname}
 Architecture: {arch}
-Depends: ${shlibs:Depends}, python3 (>=3.10), python3-mutagen, python3-semantic-version, gir1.2-webkit2-4.1
+Depends: ${shlibs:Depends}, python3 (>=3.12), python3-mutagen, python3-semantic-version, gir1.2-webkit2-4.1
 Provides: dupeguru-se, dupeguru-me, dupeguru-pe
 Replaces: dupeguru-se, dupeguru-me, dupeguru-pe
 Conflicts: dupeguru-se, dupeguru-me, dupeguru-pe

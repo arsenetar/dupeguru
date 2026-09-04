@@ -42,7 +42,7 @@ make docs-build    # Builds static HTML site to site/ directory
 ## ⚡ Quick Start
 
 ### Prerequisites
-* **Python 3.10+**
+* **Python 3.12+**
 * **Rust & Cargo** (for compiling the native Rust shared library)
 
 ### Build & Launch
@@ -76,7 +76,7 @@ make web
 ### 2. Lock-Free Rust Engine & Cache Scaling
 - **Rayon Parallel Crawler**: Multi-threaded directory walker collects files in parallel across all CPU cores.
 - **SIMD Hasher**: Parallel block checksum calculator processes candidates without Python GIL lock delays.
-- **Direct PyO3 FFI Dictionary Mapping**: Zero-copy structured data marshaling across Python 3.10 through 3.14.7.
+- **Direct PyO3 FFI Dictionary Mapping**: Zero-copy structured data marshaling across Python 3.12 through 3.14.7.
 - **Instant Cache Reset**: 18ms SQLite file unlinking and 5ms Valkey/Redis `FLUSHDB` operations.
 
 ---

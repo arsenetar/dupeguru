@@ -65,8 +65,8 @@ Implements the high-speed cache interface for SQLite and Valkey/Redis backends.
 
 ## 7. PyO3 0.29 Interoperability & Path Safety
 
-The Rust engine targets **PyO3 0.29.2**, supporting Python 3.10 through Python 3.14.7.
-* **Build Python Binding**: `Makefile` sets `PYO3_PYTHON="$(CURDIR)/env/bin/python"` to ensure `cargo` compiles against the active virtual environment ABI.
+The Rust engine targets **PyO3 0.29.2**, supporting Python 3.12 through Python 3.14.7.
+* **Build Python Binding**: `build.py` and `Makefile` set `PYO3_PYTHON` to ensure `cargo` compiles against the active virtual environment ABI.
 * **Path Sanitization**: Python paths containing non-UTF-8 bytes (surrogate escapes like `\udce0` on Linux) are sanitized prior to PyO3 function calls using:
 ```python
 def _clean_path_str(path) -> str:

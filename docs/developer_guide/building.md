@@ -6,7 +6,7 @@ This guide explains how to set up your development environment, build native C/R
 
 ## Environment Setup
 
-### 1. Create Virtual Environment with uv (Python 3.10+)
+### 1. Create Virtual Environment with uv (Python 3.12+)
 ```bash
 # Recommended with uv (e.g. Python 3.14.7):
 uv venv --python 3.14.7 env

@@ -6,7 +6,7 @@ This page covers installation, prerequisites, building from source, and running 
 
 ## Prerequisites
 
-* **Python 3.10+** (Python 3.12, 3.13, or 3.14 recommended)
+* **Python 3.12+** (Python 3.12, 3.13, or 3.14 recommended)
 * **Rust & Cargo** (for compiling the high-performance native Rust pipeline)
 
 ### Linux Dependencies (Debian / Ubuntu / Arch)

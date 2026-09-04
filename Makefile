@@ -1,6 +1,6 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
-REQ_MINOR_VERSION = 10
+REQ_MINOR_VERSION = 12
 PREFIX ?= /usr/local
 # REDIS_HOST ?= 192.168.2.249:6379
 # REDIS_DB ?= 1
