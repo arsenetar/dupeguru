@@ -193,12 +193,15 @@ class TaskRepository:
 
         if overwrite and os.path.exists(db_path):
             try:
-                os.remove(db_path)
+                scans_root = Path(self.scans_dir).resolve()
+                resolved_db = Path(db_path).resolve()
+                resolved_db.relative_to(scans_root)
+                os.remove(str(resolved_db))
                 for ext in ["-wal", "-shm"]:
-                    extra = db_path + ext
+                    extra = str(resolved_db) + ext
                     if os.path.exists(extra):
                         os.remove(extra)
-            except OSError:
+            except (OSError, ValueError):
                 pass
 
         normalized_dirs = [os.path.normpath(d.strip().strip("'\"")) for d in directories if d and d.strip()]
