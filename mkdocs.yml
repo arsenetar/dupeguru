@@ -1,0 +1,63 @@
+site_name: de-dup Documentation
+site_description: High-performance cross-platform duplicate file scanner with Rust parallel pipeline and HTML Web Console.
+site_author: Tin Le
+site_url: https://github.com/TinLe/de-dup
+
+repo_name: TinLe/de-dup
+repo_url: https://github.com/TinLe/de-dup.git
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - User Guide:
+      - Overview: user_guide/index.md
+      - Quick Start & Installation: user_guide/quickstart.md
+      - HTML Web Console: user_guide/web_console.md
+      - Scanning Modes & Algorithms: user_guide/scan_modes.md
+      - Database & Caching: user_guide/caching_and_database.md
+      - FAQ & Troubleshooting: user_guide/faq.md
+  - Developer Guide:
+      - Overview: developer_guide/index.md
+      - System Architecture: developer_guide/architecture.md
+      - Rust Engine Pipeline: developer_guide/rust_engine.md
+      - Component Catalog: developer_guide/components.md
+      - Data Flow & Lifecycles: developer_guide/data_flow.md
+      - Building from Source: developer_guide/building.md
+      - macOS Build Guide: build/macos.md
+      - Windows Build Guide: build/windows.md
+      - Contributing Standards: developer_guide/contributing.md
+      - Multi-DB & Cross-DB Plan: developer_guide/multi_db_scan_and_merge_plan.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - tables
+  - attr_list

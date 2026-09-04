@@ -11,12 +11,7 @@ from multiprocessing import Pool
 from optparse import OptionParser
 from pathlib import Path
 
-from hscommon import loc, sphinxgen
-from hscommon.build import (
-    add_to_pythonpath,
-    fix_qt_resource_file,
-    print_and_do,
-)
+from hscommon.build import add_to_pythonpath
 
 
 def parse_args():
@@ -60,6 +55,8 @@ def parse_args():
 
 
 def build_one_help(language):
+    from hscommon import sphinxgen
+
     print(f"Generating Help in {language}")
     current_path = Path(".").absolute()
     changelog_path = current_path.joinpath("help", "changelog")
@@ -88,6 +85,8 @@ def build_help():
 
 
 def build_localizations():
+    from hscommon import loc
+
     loc.compile_all_po("locale")
     locale_dest = Path("build", "locale")
     if locale_dest.exists():
@@ -96,47 +95,63 @@ def build_localizations():
 
 
 def build_updatepot():
+    from hscommon import loc
+
     print("Building .pot files from source files")
     print("Building core.pot")
     loc.generate_pot(["core"], Path("locale", "core.pot"), ["tr"])
     print("Building columns.pot")
     loc.generate_pot(["core"], Path("locale", "columns.pot"), ["coltr"])
-    print("Building ui.pot")
-    loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
 
 
 def build_mergepot():
+    from hscommon import loc
+
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos("locale")
 
 
 def build_normpo():
+    from hscommon import loc
+
     loc.normalize_all_pos("locale")
+
+
+def build_rust_engine():
+    print("Building Rust Engine")
+    cargo_cmd = shutil.which("cargo")
+    if cargo_cmd and Path("rust_engine", "Cargo.toml").exists():
+        subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine")
+        target_so = "dupeguru_rust.dll" if sys.platform == "win32" else "libdupeguru_rust.so"
+        dest_so = "dupeguru_rust.pyd" if sys.platform == "win32" else "dupeguru_rust.so"
+        src_path = Path("rust_engine", "target", "release", target_so)
+        dest_path = Path("core", dest_so)
+        if src_path.exists():
+            shutil.copy2(src_path, dest_path)
+            print(f"Copied {src_path} -> {dest_path}")
+    else:
+        print("Cargo not found or rust_engine missing, skipping Rust engine build.")
 
 
 def build_pe_modules():
     print("Building PE Modules")
     # Leverage setup.py to build modules
     subprocess.check_call([sys.executable, "setup.py", "build_ext", "--inplace"])
+    build_rust_engine()
 
 
-def build_normal():
-    print("Building dupeGuru with UI qt")
+def build_normal(ui=None):
+    print("Building de-dup with pywebview desktop shell")
     add_to_pythonpath(".")
-    print("Building dupeGuru")
     build_pe_modules()
     print("Building localizations")
     build_localizations()
-    print("Building Qt stuff")
-    Path("qt", "dg_rc.py").unlink(missing_ok=True)
-    print_and_do("pyrcc5 {} > {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
-    fix_qt_resource_file(Path("qt", "dg_rc.py"))
     build_help()
 
 
 def main():
-    if sys.version_info < (3, 8):
-        sys.exit("Python < 3.8 is unsupported.")
+    if sys.version_info < (3, 10):
+        sys.exit("Python < 3.10 is unsupported.")
     options = parse_args()
     if options.clean and Path("build").exists():
         shutil.rmtree("build")

@@ -6,6 +6,7 @@
 
 import logging
 import os
+import time
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -89,14 +90,38 @@ class Directories:
             return DirectoryState.EXCLUDED
         return DirectoryState.NORMAL
 
-    def _get_files(self, from_path, fileclasses, j):
+    def _get_files(self, from_path, fileclasses, j=job.nulljob, batch_buf=None, counter_buf=None):
         root_path = Path(from_path)
+        is_top_level = batch_buf is None
+        if is_top_level:
+            batch_buf = []
+            counter_buf = [0]
+
+        def flush_batch():
+            if batch_buf:
+                fs.filesdb.snapshot_files_batch(batch_buf)
+                batch_buf.clear()
+
+        if is_top_level and fs.filesdb._is_rust and fs.filesdb.enable_directory_cache:
+            try:
+                from core import dupeguru_rust
+
+                rust_files = dupeguru_rust.collect_files_parallel([str(from_path)], 0, None)
+                if rust_files:
+                    fs.filesdb.snapshot_files_batch(rust_files)
+                    fs.filesdb.mark_directory_scanned(root_path)
+            except Exception as e:
+                logging.warning(f"Rust parallel crawler fallback: {e}")
+
         if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(root_path):
-            logging.info("Directory %s already scanned. Loading files from cache database.", root_path)
-            cached_files = fs.filesdb.get_files_in_directory(root_path)
-            for f_data in cached_files:
+            cache_count = 0
+            for f_data in fs.filesdb.get_files_in_directory(root_path):
+                cache_count += 1
+                if cache_count % 1000 == 0:
+                    j.check_if_cancelled()
+                    j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
                 p = fs.Path(f_data["path"])
-                file = fs.get_file(p, fileclasses=fileclasses)
+                file = fs.get_file(p, fileclasses=fileclasses, skip_disk_check=True)
                 if file:
                     file.size = f_data["size"]
                     file.mtime = f_data["mtime_ns"] / 1e9
@@ -119,7 +144,9 @@ class Directories:
                         if item.is_dir():
                             if skip_dirs:
                                 continue
-                            yield from self._get_files(item.path, fileclasses, j)
+                            yield from self._get_files(
+                                item.path, fileclasses, j, batch_buf=batch_buf, counter_buf=counter_buf
+                            )
                             continue
                         elif state == DirectoryState.EXCLUDED:
                             continue
@@ -133,11 +160,19 @@ class Directories:
                             if file:
                                 file.is_ref = state == DirectoryState.REFERENCE
                                 if fs.filesdb.enable_directory_cache:
-                                    fs.filesdb.snapshot_file(file.path, file.size, file.mtime)
+                                    batch_buf.append((file.path, file.size, file.mtime))
+                                    if len(batch_buf) >= 1000:
+                                        flush_batch()
                                 count += 1
+                                counter_buf[0] += 1
+                                if counter_buf[0] % 1000 == 0:
+                                    j.set_progress(-1, tr("Scanning: Collected {} files...").format(counter_buf[0]))
                                 yield file
                     except (OSError, fs.InvalidPath):
                         pass
+
+                if is_top_level:
+                    flush_batch()
 
                 if fs.filesdb.enable_directory_cache:
                     fs.filesdb.mark_directory_scanned(root_path)
@@ -148,6 +183,9 @@ class Directories:
                 )
         except OSError:
             pass
+        finally:
+            if is_top_level:
+                flush_batch()
 
     def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
@@ -176,9 +214,18 @@ class Directories:
         if path in self:
             raise AlreadyThereError()
         if not path.exists():
-            raise InvalidPathError()
-        self._dirs = [p for p in self._dirs if path not in p.parents]
+            if not (fs.filesdb and fs.filesdb.enable_directory_cache):
+                raise InvalidPathError()
+        removed = [p for p in self._dirs if path in p.parents]
+        self._dirs = [p for p in self._dirs if p not in removed]
+        for r in removed:
+            self.states.pop(r, None)
         self._dirs.append(path)
+
+    def clear(self):
+        """Removes all directories and reset state mappings."""
+        self._dirs = []
+        self._states = {}
 
     @staticmethod
     def get_subfolders(path):
@@ -195,19 +242,64 @@ class Directories:
             return []
 
     def get_files(self, fileclasses=None, j=job.nulljob):
-        """Returns a list of all files that are not excluded.
-
-        Returned files also have their ``is_ref`` attr set if applicable.
-        """
+        """Returns a list of all files that are not excluded."""
         if fileclasses is None:
             fileclasses = [fs.File]
-        file_count = 0
+
         for path in self._dirs:
-            for file in self._get_files(path, fileclasses=fileclasses, j=j):
-                file_count += 1
-                if not isinstance(j, job.NullJob):
-                    j.set_progress(-1, tr("Scanning {}: Collected {} files...").format(path.name, file_count))
-                yield file
+            if fs.filesdb.enable_directory_cache and fs.filesdb.is_directory_scanned(path):
+                cache_count = 0
+                for f_data in fs.filesdb.get_files_in_directory(path):
+                    cache_count += 1
+                    if cache_count % 1000 == 0:
+                        j.check_if_cancelled()
+                        j.set_progress(-1, tr("Loading cached files: {}...").format(cache_count))
+                    p = fs.Path(f_data["path"])
+                    file = fs.get_file(p, fileclasses=fileclasses, skip_disk_check=True)
+                    if file:
+                        file.size = f_data["size"]
+                        file.mtime = f_data["mtime_ns"] / 1e9
+                        file.is_ref = self.get_state(path) == DirectoryState.REFERENCE
+                        yield file
+            else:
+                for file in self._get_files(path, fileclasses=fileclasses, j=j):
+                    yield file
+
+    def populate_cache(self, j=job.nulljob):
+        """Populate SQLite database cache for all target directories in parallel using Rust."""
+        if not fs.filesdb.enable_directory_cache:
+            return
+
+        unscanned_dirs = [str(d) for d in self._dirs if not fs.filesdb.is_directory_scanned(d)]
+        if not unscanned_dirs:
+            return
+
+        j.set_progress(-1, tr("Collecting files in parallel across {} directories...").format(len(unscanned_dirs)))
+        if fs.filesdb._is_rust:
+            try:
+                from core import dupeguru_rust
+
+                t0 = time.time()
+                rust_files = dupeguru_rust.collect_files_parallel(unscanned_dirs, 0, None)
+                if rust_files:
+                    fs.filesdb.snapshot_files_batch(rust_files)
+                    for d in self._dirs:
+                        fs.filesdb.mark_directory_scanned(d)
+                    logging.info(
+                        "Parallel collected %d files across %d dirs in %.2fs",
+                        len(rust_files),
+                        len(unscanned_dirs),
+                        time.time() - t0,
+                    )
+                    return
+            except Exception as e:
+                logging.warning(f"Rust multi-dir parallel crawler fallback: {e}")
+
+        # Fallback python collection
+        for path in self._dirs:
+            if not fs.filesdb.is_directory_scanned(path):
+                for _ in self._get_files(path, fileclasses=[fs.File], j=j):
+                    pass
 
     def get_folders(self, folderclass=None, j=job.nulljob):
         """Returns a list of all folders that are not excluded.
@@ -245,18 +337,36 @@ class Directories:
                 return self.states[parent_path]
         return state
 
-    def has_any_file(self):
-        """Returns whether selected folders contain any file.
-
-        Because it stops at the first file it finds, it's much faster than get_files().
-
-        :rtype: bool
-        """
-        try:
-            next(self.get_files())
-            return True
-        except StopIteration:
-            return False
+    def has_any_file(self, fileclasses=None):
+        """Returns whether selected folders contain any file quickly without triggering full directory crawls."""
+        if fs.filesdb and fs.filesdb.enable_directory_cache:
+            try:
+                conn = fs.filesdb.conn
+                if conn:
+                    cur = conn.cursor()
+                    row = cur.execute("SELECT 1 FROM files LIMIT 1").fetchone()
+                    cur.close()
+                    if row:
+                        return True
+            except Exception as e:
+                logging.warning(f"has_any_file cache check exception: {e}")
+        for path in self._dirs:
+            try:
+                if hasattr(path, "exists") and path.exists():
+                    with os.scandir(path) as it:
+                        for entry in it:
+                            if entry.is_file() or entry.is_dir():
+                                return True
+                elif isinstance(path, str) and os.path.exists(path):
+                    with os.scandir(path) as it:
+                        for entry in it:
+                            if entry.is_file() or entry.is_dir():
+                                return True
+                elif not hasattr(path, "exists") and not isinstance(path, str):
+                    return True
+            except OSError:
+                pass
+        return False
 
     def load_from_file(self, infile):
         """Load folder selection from ``infile``.

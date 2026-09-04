@@ -296,6 +296,40 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     del files
     possible_matches = [g for g in size2files.values() if len(g) > 1]
     del size2files
+
+    # Pre-hash all candidate files in parallel using a thread pool
+    from concurrent.futures import ThreadPoolExecutor
+
+    all_files_to_hash = [f for g in possible_matches for f in g if f.size > 0]
+
+    if all_files_to_hash:
+        try:
+            from core import dupeguru_rust, fs
+
+            if fs.filesdb._is_rust:
+                targets = [(str(f.path), f.size) for f in all_files_to_hash]
+                _ = dupeguru_rust.hash_files_parallel(targets, 0)
+        except Exception as e:
+            logging.warning(f"Rust parallel hashing fallback: {e}")
+
+        def prehash_file(f):
+            try:
+                j.check_if_cancelled()
+                d = f.digest_partial
+                if d is not None:
+                    if bigsize > 0 and f.size > bigsize:
+                        _ = f.digest_samples
+                    else:
+                        _ = f.digest
+            except job.JobCancelled:
+                raise
+            except Exception:
+                pass
+
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            # list() forces evaluation and waits for all threads to finish
+            list(executor.map(prehash_file, all_files_to_hash))
+
     result = []
     j.start_job(len(possible_matches), PROGRESS_MESSAGE % (0, 0))
     group_count = 0
@@ -315,15 +349,17 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
             digest_groups = defaultdict(list)
             for f in group:
                 d = f.digest_partial
-                if d is not None:
+                if d:
                     if bigsize > 0 and f.size > bigsize:
                         s = f.digest_samples
-                        if s is not None:
+                        if s:
                             digest_groups[(d, s)].append(f)
+                        else:
+                            digest_groups[d].append(f)
                     else:
                         dig = f.digest
-                        if dig is not None:
-                            digest_groups[(d, dig)].append(f)
+                        key = (d, dig) if dig else d
+                        digest_groups[key].append(f)
 
             for sub_group in digest_groups.values():
                 if len(sub_group) > 1:

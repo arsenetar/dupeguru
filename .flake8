@@ -9,5 +9,4 @@ exclude =
     env,
     .tox,
     help,
-    qt/dg_rc.py,
     pkg

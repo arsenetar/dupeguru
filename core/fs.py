@@ -20,6 +20,20 @@ from sys import platform
 from threading import Lock
 from typing import Any, AnyStr, Callable, Union
 
+try:
+    from .dupeguru_rust import RustFilesDB, create_files_db
+
+    HAS_RUST = True
+except ImportError:
+    try:
+        from dupeguru_rust import RustFilesDB, create_files_db
+
+        HAS_RUST = True
+    except ImportError:
+        HAS_RUST = False
+        create_files_db = None
+
+
 from hscommon.util import get_file_ext, nonone
 
 hasher: Callable
@@ -98,7 +112,48 @@ class OperationError(FSError):
     cls_message = "Operation on '{name}' failed."
 
 
-class FilesDB:
+class CacheEngine:
+    def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
+        raise NotImplementedError()
+
+    def close(self) -> None:
+        raise NotImplementedError()
+
+    def clear(self) -> None:
+        raise NotImplementedError()
+
+    def commit(self) -> None:
+        raise NotImplementedError()
+
+    def mark_directory_scanned(self, dir_path: Path) -> None:
+        raise NotImplementedError()
+
+    def is_directory_scanned(self, dir_path: Path) -> bool:
+        raise NotImplementedError()
+
+    def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
+        raise NotImplementedError()
+
+    def get_files_in_directory(self, dir_path: Path):
+        raise NotImplementedError()
+
+    def get_candidate_sizes(self):
+        raise NotImplementedError()
+
+    def get_files_by_sizes(self, sizes):
+        raise NotImplementedError()
+
+    def get(self, path: Path, key: str, ignore_mtime: bool) -> Union[bytes, None]:
+        raise NotImplementedError()
+
+    def put(self, path: Path, key: str, value: Any) -> None:
+        raise NotImplementedError()
+
+    def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
+        raise NotImplementedError()
+
+
+class SQLiteCacheEngine(CacheEngine):
     schema_version = 1
     schema_version_description = "Changed from md5 to xxhash if available."
 
@@ -114,28 +169,31 @@ class FilesDB:
     insert_query = """
         INSERT INTO files (path, size, mtime_ns, entry_dt, {key})
         VALUES (:path, :size, :mtime_ns, datetime('now'), :value)
-        ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
+        ON CONFLICT(path) DO UPDATE SET
+            size = CASE WHEN :size > 0 THEN :size ELSE files.size END,
+            mtime_ns = CASE WHEN :mtime_ns > 0 THEN :mtime_ns ELSE files.mtime_ns END,
+            entry_dt = datetime('now'),
+            {key} = :value;
     """
 
-    ignore_mtime = False
-    enable_directory_cache = False
-
-    def __init__(self):
+    def __init__(self, db_path: Union[AnyStr, os.PathLike], outer_db):
+        self.db_path = db_path
+        self.outer_db = outer_db
         self.conn = None
-        self.lock = None
-        self.checkpoint_frequency = 100
-        self._checkpoint_counter = 0
-        self.scanned_count = 0
-        self.last_scanned_path = None
-        self.scanned_paths = set()
-        self.hit_paths = set()
+        self.lock = Lock()
+        self.connect(db_path)
 
     def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
         if platform.startswith("gnu0"):
-            self.conn = sqlite3.connect(path, check_same_thread=False, isolation_level=None)
+            self.conn = sqlite3.connect(path, check_same_thread=False, isolation_level=None, timeout=30.0)
         else:
-            self.conn = sqlite3.connect(path, check_same_thread=False)
-        self.lock = Lock()
+            self.conn = sqlite3.connect(path, check_same_thread=False, timeout=30.0)
+
+        # Enable Write-Ahead Log (WAL) mode for concurrent read/write resilience
+        try:
+            self.conn.execute("PRAGMA journal_mode=WAL;")
+        except Exception:
+            pass
 
         # Check if the index needs to be created on a large database and warn the user
         try:
@@ -146,7 +204,7 @@ class FilesDB:
                     db_size_mb = os.path.getsize(path) / (1024 * 1024)
                 if db_size_mb > 50:
                     print(
-                        f"[dupeGuru] Optimizing database cache index (size: {db_size_mb:.1f} MB) "
+                        f"[de-dup] Optimizing database cache index (size: {db_size_mb:.1f} MB) "
                         "for the first time. Please wait...",
                         flush=True,
                     )
@@ -177,13 +235,38 @@ class FilesDB:
             conn.execute(self.create_dir_table_query)
             conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
 
+    def close(self) -> None:
+        with self.lock:
+            if self.conn:
+                try:
+                    self.conn.commit()
+                except Exception:
+                    pass
+                self.conn.close()
+
     def clear(self) -> None:
-        with self.lock, self.conn as conn:
-            conn.execute(self.drop_table_query)
-            conn.execute(self.drop_dir_table_query)
-            conn.execute(self.create_table_query)
-            conn.execute(self.create_dir_table_query)
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
+        with self.lock:
+            if self.conn:
+                try:
+                    self.conn.execute("DELETE FROM files;")
+                    self.conn.execute("DELETE FROM scanned_directories;")
+                    self.conn.execute("VACUUM;")
+                    self.conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
+                except Exception as e:
+                    logging.warning(f"Error clearing SQLite cache via VACUUM: {e}")
+                    try:
+                        self.conn.execute(self.drop_table_query)
+                        self.conn.execute(self.drop_dir_table_query)
+                        self.conn.execute(self.create_table_query)
+                        self.conn.execute(self.create_dir_table_query)
+                        self.conn.execute("CREATE INDEX IF NOT EXISTS idx_files_size ON files (size)")
+                    except Exception:
+                        pass
+
+    def commit(self) -> None:
+        with self.lock:
+            if self.conn:
+                self.conn.commit()
 
     def mark_directory_scanned(self, dir_path: Path) -> None:
         try:
@@ -195,11 +278,39 @@ class FilesDB:
         except Exception as e:
             logging.error(f"Error marking directory scanned: {e}")
 
+    def set_metadata(self, key: str, value: Any) -> None:
+        try:
+            with self.lock, self.conn as conn:
+                conn.execute("CREATE TABLE IF NOT EXISTS scan_metadata (key TEXT PRIMARY KEY, value TEXT)")
+                conn.execute("INSERT OR REPLACE INTO scan_metadata (key, value) VALUES (?, ?)", (key, str(value)))
+        except Exception as e:
+            logging.error(f"Error setting metadata {key}={value}: {e}")
+
+    def get_metadata(self, key: str, default: Any = None) -> Any:
+        try:
+            with self.lock, self.conn as conn:
+                has_table = conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name='scan_metadata'"
+                ).fetchone()
+                if not has_table:
+                    return default
+                row = conn.execute("SELECT value FROM scan_metadata WHERE key = ?", (key,)).fetchone()
+                return row[0] if row else default
+        except Exception:
+            return default
+
     def is_directory_scanned(self, dir_path: Path) -> bool:
         try:
             with self.lock, self.conn as conn:
                 row = conn.execute("SELECT 1 FROM scanned_directories WHERE path = ?", (str(dir_path),)).fetchone()
-                return row is not None
+                if not row:
+                    return False
+                prefix = str(dir_path) + os.sep
+                unhashed = conn.execute(
+                    "SELECT 1 FROM files WHERE (path = ? OR path LIKE ?) AND (digest IS NULL OR digest = '') LIMIT 1",
+                    (str(dir_path), prefix + "%"),
+                ).fetchone()
+                return unhashed is None
         except Exception:
             return False
 
@@ -213,23 +324,47 @@ class FilesDB:
                        ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns""",
                     {"path": str(path), "size": size, "mtime_ns": mtime_ns},
                 )
-                self._checkpoint_counter += 1
-                if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
+                self.outer_db._checkpoint_counter += 1
+                if (
+                    self.outer_db.checkpoint_frequency > 0
+                    and self.outer_db._checkpoint_counter >= self.outer_db.checkpoint_frequency
+                ):
                     conn.commit()
-                    self._checkpoint_counter = 0
+                    self.outer_db._checkpoint_counter = 0
         except Exception as e:
             logging.error(f"Error snapshotting file: {e}")
 
     def get_files_in_directory(self, dir_path: Path):
         prefix = str(dir_path) + os.sep
+        dir_str = str(dir_path)
+        safe_prefix = prefix.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
         try:
-            with self.lock:
-                cursor = self.conn.execute(
-                    "SELECT path, size, mtime_ns FROM files WHERE path = ? OR path LIKE ?",
-                    (str(dir_path), prefix + "%"),
-                )
-                for row in cursor:
+            limit = 5000
+            last_path = None
+            while True:
+                with self.lock:
+                    if last_path is None:
+                        cursor = self.conn.execute(
+                            """SELECT path, size, mtime_ns FROM files
+                               WHERE path = ? OR path LIKE ? ESCAPE '\\'
+                               ORDER BY path
+                               LIMIT ?""",
+                            (dir_str, safe_prefix, limit),
+                        )
+                    else:
+                        cursor = self.conn.execute(
+                            """SELECT path, size, mtime_ns FROM files
+                               WHERE (path = ? OR path LIKE ? ESCAPE '\\') AND path > ?
+                               ORDER BY path
+                               LIMIT ?""",
+                            (dir_str, safe_prefix, last_path, limit),
+                        )
+                    rows = cursor.fetchall()
+                if not rows:
+                    break
+                for row in rows:
                     yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
+                last_path = rows[-1][0]
         except Exception as e:
             logging.error(f"Error getting cached files in directory: {e}")
 
@@ -251,21 +386,27 @@ class FilesDB:
         try:
             with self.lock:
                 cursor = self.conn.execute(
-                    f"SELECT path, size, mtime_ns FROM files WHERE size IN ({placeholders})",
+                    f"SELECT path, size, mtime_ns, digest, digest_partial FROM files WHERE size IN ({placeholders})",
                     sizes,
                 )
                 for row in cursor:
-                    yield {"path": row[0], "size": row[1], "mtime_ns": row[2]}
+                    yield {
+                        "path": row[0],
+                        "size": row[1],
+                        "mtime_ns": row[2],
+                        "digest": row[3],
+                        "digest_partial": row[4],
+                    }
         except Exception as e:
             logging.error(f"Error getting files by sizes: {e}")
 
-    def get(self, path: Path, key: str) -> Union[bytes, None]:
+    def get(self, path: Path, key: str, ignore_mtime: bool) -> Union[bytes, None]:
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
         try:
             with self.conn as conn:
-                if self.ignore_mtime:
+                if ignore_mtime:
                     cursor = conn.execute(
                         self.select_query_ignore_mtime.format(key=key), {"path": str(path), "size": size}
                     )
@@ -278,7 +419,7 @@ class FilesDB:
                 cursor.close()
 
             if result:
-                self.hit_paths.add(str(path))
+                self.outer_db.hit_paths.add(str(path))
                 return result[0]
         except Exception as ex:
             logging.warning(f"Couldn't get {key} for {path} w/{size}, {mtime_ns}: {ex}")
@@ -286,41 +427,537 @@ class FilesDB:
         return None
 
     def put(self, path: Path, key: str, value: Any) -> None:
-        stat = path.stat()
-        size = stat.st_size
-        mtime_ns = stat.st_mtime_ns
+        path_str = str(path)
+        size = 0
+        mtime_ns = 0
+        try:
+            stat = path.stat()
+            size = stat.st_size
+            mtime_ns = stat.st_mtime_ns
+        except Exception:
+            pass
+
         try:
             with self.lock:
                 self.conn.execute(
                     self.insert_query.format(key=key),
-                    {"path": str(path), "size": size, "mtime_ns": mtime_ns, "value": value},
+                    {"path": path_str, "size": size, "mtime_ns": mtime_ns, "value": value},
                 )
-                path_str = str(path)
-                self.last_scanned_path = path_str
-                if path_str not in self.scanned_paths:
-                    self.scanned_paths.add(path_str)
-                    self.scanned_count += 1
-                self._checkpoint_counter += 1
-                if self.checkpoint_frequency > 0 and self._checkpoint_counter >= self.checkpoint_frequency:
+                self.outer_db.last_scanned_path = path_str
+                if path_str not in self.outer_db.scanned_paths:
+                    self.outer_db.scanned_paths.add(path_str)
+                    self.outer_db.scanned_count += 1
+                self.outer_db._checkpoint_counter += 1
+                if (
+                    self.outer_db.checkpoint_frequency > 0
+                    and self.outer_db._checkpoint_counter >= self.outer_db.checkpoint_frequency
+                ):
                     self.conn.commit()
-                    self._checkpoint_counter = 0
+                    self.outer_db._checkpoint_counter = 0
         except Exception as ex:
-            logging.warning(f"Couldn't put {key} for {path} w/{size}, {mtime_ns}: {ex}")
+            logging.warning(f"Couldn't put {key} for {path}: {ex}")
 
-    def commit(self) -> None:
+    def set(self, path: Path, key: str, value: Any) -> None:
+        self.put(path, key, value)
+
+    def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
         with self.lock:
-            if self.conn:
-                self.conn.commit()
-            self._checkpoint_counter = 0
+            if search:
+                count_row = self.conn.execute(
+                    "SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",)
+                ).fetchone()
+                rows = self.conn.execute(
+                    "SELECT path, size, entry_dt FROM files WHERE path LIKE ? "
+                    "ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
+                    (f"%{search}%", limit, offset),
+                ).fetchall()
+            else:
+                count_row = self.conn.execute("SELECT COUNT(*) FROM files").fetchone()
+                rows = self.conn.execute(
+                    "SELECT path, size, entry_dt FROM files ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
+                    (limit, offset),
+                ).fetchall()
+            total_count = count_row[0] if count_row else 0
+            files_list = []
+            for row in rows:
+                files_list.append({"path": row[0], "size": row[1], "entry_dt": row[2]})
+            return total_count, files_list
+
+
+def valkey_retry(func):
+    def wrapper(self, *args, **kwargs):
+        import time
+        import redis.exceptions
+
+        retries = 8
+        backoff = 0.5
+        for attempt in range(retries):
+            try:
+                return func(self, *args, **kwargs)
+            except (
+                redis.exceptions.ConnectionError,
+                redis.exceptions.TimeoutError,
+                redis.exceptions.BusyLoadingError,
+            ) as e:
+                if attempt == retries - 1:
+                    logging.error(f"Valkey operation failed after {retries} retries: {e}")
+                    raise
+                logging.warning(
+                    f"Valkey connection/loading error: {e}. Retrying in {backoff}s (attempt {attempt + 1}/{retries})..."
+                )
+                time.sleep(backoff)
+                backoff = min(backoff * 2, 4.0)
+
+    return wrapper
+
+
+class ValkeyCacheEngine(CacheEngine):
+    def __init__(self, url: str, outer_db):
+        self.url = url
+        self.outer_db = outer_db
+        try:
+            import redis
+        except ImportError:
+            raise ImportError(
+                "The 'redis' package is required to use Valkey/Redis caching. "
+                "Please install it using 'pip install redis' to continue."
+            )
+        # Note: Do not decode_responses=True to preserve raw bytes for digest blobs
+        self.client = redis.Redis.from_url(url)
+        self.lock = Lock()
+
+    def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
+        pass
 
     def close(self) -> None:
+        pass
+
+    @valkey_retry
+    def clear(self) -> None:
         with self.lock:
-            if self.conn:
+            try:
+                self.client.flushdb()
+            except Exception:
+                keys = []
+                for key in self.client.scan_iter("dg:*"):
+                    keys.append(key)
+                    if len(keys) >= 1000:
+                        self.client.delete(*keys)
+                        keys = []
+                if keys:
+                    self.client.delete(*keys)
+
+    def commit(self) -> None:
+        pass
+
+    @valkey_retry
+    def mark_directory_scanned(self, dir_path: Path) -> None:
+        try:
+            with self.lock:
+                self.client.sadd("dg:scanned_dirs", str(dir_path))
+        except Exception as e:
+            logging.error(f"Error marking directory scanned in Valkey: {e}")
+
+    @valkey_retry
+    def is_directory_scanned(self, dir_path: Path) -> bool:
+        try:
+            with self.lock:
+                return bool(self.client.sismember("dg:scanned_dirs", str(dir_path)))
+        except Exception:
+            return False
+
+    @valkey_retry
+    def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
+        try:
+            path_str = str(path)
+            mtime_ns = int(mtime * 1e9)
+            file_key = f"dg:file:{path_str}"
+            import datetime
+
+            with self.lock:
+                # Track size change to keep indices accurate
+                old_size_bytes = self.client.hget(file_key, "size")
+                old_size = int(old_size_bytes) if old_size_bytes is not None else None
+
+                now_str = datetime.datetime.now().isoformat()
+                self.client.hset(file_key, mapping={"size": size, "mtime_ns": mtime_ns, "entry_dt": now_str})
+                self.client.zadd("dg:files_by_path", {path_str: 0})
+                self.client.zadd("dg:files_by_entry_dt", {path_str: mtime})
+
+                if old_size != size:
+                    if old_size is not None:
+                        self.client.srem(f"dg:size_files:{old_size}", path_str)
+                        new_count = self.client.hincrby("dg:size_counts", str(old_size), -1)
+                        if new_count < 2:
+                            self.client.srem("dg:candidate_sizes", str(old_size))
+
+                    self.client.sadd(f"dg:size_files:{size}", path_str)
+                    new_count = self.client.hincrby("dg:size_counts", str(size), 1)
+                    if new_count >= 2:
+                        self.client.sadd("dg:candidate_sizes", str(size))
+        except Exception as e:
+            logging.error(f"Error snapshotting file in Valkey: {e}")
+
+    def get_files_in_directory(self, dir_path: Path):
+        dir_str = str(dir_path)
+        prefix = dir_str + os.sep
+
+        # Check the directory itself
+        @valkey_retry
+        def check_dir(self):
+            with self.lock:
+                return self.client.exists(f"dg:file:{dir_str}")
+
+        try:
+            if check_dir(self):
+
+                @valkey_retry
+                def fetch_meta_dir(self):
+                    with self.lock:
+                        return self.client.hmget(f"dg:file:{dir_str}", ["size", "mtime_ns"])
+
+                meta = fetch_meta_dir(self)
+                if meta and meta[0] is not None:
+                    yield {
+                        "path": dir_str,
+                        "size": int(meta[0]),
+                        "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                    }
+
+            limit = 5000
+            offset = 0
+            while True:
+
+                @valkey_retry
+                def fetch_paths_page(self, off):
+                    with self.lock:
+                        path_bytes_list = self.client.zrangebylex(
+                            "dg:files_by_path", f"[{prefix}", f"[{prefix}\xff", start=off, num=limit
+                        )
+                        return [p.decode("utf-8") for p in path_bytes_list]
+
+                paths = fetch_paths_page(self, offset)
+                if not paths:
+                    break
+
+                for path_str in paths:
+
+                    @valkey_retry
+                    def fetch_meta(self, p_str):
+                        with self.lock:
+                            return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+
+                    meta = fetch_meta(self, path_str)
+                    if meta and meta[0] is not None:
+                        yield {
+                            "path": path_str,
+                            "size": int(meta[0]),
+                            "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                        }
+                offset += len(paths)
+        except Exception as e:
+            logging.error(f"Error getting cached files in Valkey: {e}")
+
+    @valkey_retry
+    def get_candidate_sizes(self):
+        try:
+            with self.lock:
+                sizes = self.client.smembers("dg:candidate_sizes")
+                return [int(s) for s in sizes]
+        except Exception as e:
+            logging.error(f"Error getting candidate sizes in Valkey: {e}")
+            return []
+
+    def get_files_by_sizes(self, sizes):
+        if not sizes:
+            return
+
+        try:
+            for size in sizes:
+
+                @valkey_retry
+                def fetch_size_paths(self, sz):
+                    with self.lock:
+                        return [p.decode("utf-8") for p in self.client.smembers(f"dg:size_files:{sz}")]
+
+                paths = fetch_size_paths(self, size)
+                for path_str in paths:
+
+                    @valkey_retry
+                    def fetch_meta(self, p_str):
+                        with self.lock:
+                            return self.client.hmget(f"dg:file:{p_str}", ["size", "mtime_ns"])
+
+                    meta = fetch_meta(self, path_str)
+                    if meta and meta[0] is not None:
+                        yield {
+                            "path": path_str,
+                            "size": int(meta[0]),
+                            "mtime_ns": int(meta[1]) if meta[1] is not None else 0,
+                        }
+        except Exception as e:
+            logging.error(f"Error getting files by sizes in Valkey: {e}")
+
+    @valkey_retry
+    def get(self, path: Path, key: str, ignore_mtime: bool) -> Union[bytes, None]:
+        path_str = str(path)
+        file_key = f"dg:file:{path_str}"
+        try:
+            with self.lock:
+                meta = self.client.hmget(file_key, ["size", "mtime_ns", key])
+                if not meta or meta[0] is None:
+                    return None
+
+                size = int(meta[0])
+                mtime_ns = int(meta[1]) if meta[1] is not None else 0
+                val = meta[2]
+
+                stat = path.stat()
+                if stat.st_size != size:
+                    return None
+                if not ignore_mtime and stat.st_mtime_ns != mtime_ns:
+                    return None
+
+                if val:
+                    self.outer_db.hit_paths.add(path_str)
+                    return val
+        except Exception as ex:
+            logging.warning(f"Couldn't get {key} for {path} in Valkey: {ex}")
+        return None
+
+    @valkey_retry
+    def put(self, path: Path, key: str, value: Any) -> None:
+        path_str = str(path)
+        stat = path.stat()
+        size = stat.st_size
+        mtime_ns = stat.st_mtime_ns
+        file_key = f"dg:file:{path_str}"
+        import datetime
+
+        try:
+            with self.lock:
+                now_str = datetime.datetime.now().isoformat()
+                self.client.hset(
+                    file_key, mapping={"size": size, "mtime_ns": mtime_ns, "entry_dt": now_str, key: value}
+                )
+                self.client.zadd("dg:files_by_path", {path_str: 0})
+                self.client.zadd("dg:files_by_entry_dt", {path_str: stat.st_mtime})
+
+                self.outer_db.last_scanned_path = path_str
+                if path_str not in self.outer_db.scanned_paths:
+                    self.outer_db.scanned_paths.add(path_str)
+                    self.outer_db.scanned_count += 1
+        except Exception as ex:
+            logging.warning(f"Couldn't put {key} for {path} in Valkey: {ex}")
+
+    @valkey_retry
+    def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
+        with self.lock:
+            if search:
+                all_paths_bytes = self.client.zrange("dg:files_by_entry_dt", 0, -1, desc=True)
+                matched_paths = []
+                for p in all_paths_bytes:
+                    path_str = p.decode("utf-8")
+                    if search in path_str:
+                        matched_paths.append(path_str)
+                total_count = len(matched_paths)
+                batch = matched_paths[offset : offset + limit]
+            else:
+                total_count = self.client.zcard("dg:files_by_entry_dt")
+                path_bytes_list = self.client.zrange("dg:files_by_entry_dt", offset, offset + limit - 1, desc=True)
+                batch = [p.decode("utf-8") for p in path_bytes_list]
+
+            files_list = []
+            for path_str in batch:
+                file_key = f"dg:file:{path_str}"
+                meta = self.client.hmget(file_key, ["size", "entry_dt"])
+                files_list.append(
+                    {
+                        "path": path_str,
+                        "size": int(meta[0]) if meta[0] is not None else 0,
+                        "entry_dt": meta[1].decode("utf-8") if meta[1] is not None else "",
+                    }
+                )
+            return total_count, files_list
+
+
+def _clean_path_str(path) -> str:
+    s = str(path)
+    return s.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
+
+
+class FilesDB:
+    ignore_mtime = False
+    enable_directory_cache = False
+
+    def __init__(self):
+        self.engine = None
+        self.checkpoint_frequency = 100
+        self._checkpoint_counter = 0
+        self.scanned_count = 0
+        self.last_scanned_path = None
+        self.scanned_paths = set()
+        self.hit_paths = set()
+        self.lock = Lock()
+        self._is_rust = False
+
+    def connect(self, path: Union[AnyStr, os.PathLike]) -> None:
+        with self.lock:
+            if self.engine:
                 try:
-                    self.conn.commit()
-                except Exception:
-                    pass
-                self.conn.close()
+                    self.engine.close()
+                except Exception as e:
+                    logging.warning(f"Error closing previous engine in connect: {e}")
+                self.engine = None
+
+            path_str = _clean_path_str(path)
+            if HAS_RUST:
+                try:
+                    if create_files_db is not None:
+                        self.engine = create_files_db(path_str)
+                    elif hasattr(RustFilesDB, "open"):
+                        self.engine = RustFilesDB.open(path_str)
+                    else:
+                        self.engine = RustFilesDB(path_str)
+                    self._is_rust = True
+                    logging.info("Using high-performance Rust cache database engine.")
+                    return
+                except Exception as e:
+                    logging.warning(f"Failed to load Rust engine: {e}. Falling back to Python engine.")
+
+            self._is_rust = False
+            if path_str.startswith("redis://") or path_str.startswith("valkey://"):
+                self.engine = ValkeyCacheEngine(path_str, self)
+            else:
+                self.engine = SQLiteCacheEngine(path_str, self)
+
+    @property
+    def conn(self):
+        if not self._is_rust and hasattr(self.engine, "conn"):
+            return self.engine.conn
+        return None
+
+    def close(self) -> None:
+        if self.engine:
+            self.engine.close()
+
+    def clear(self) -> None:
+        if self.engine:
+            self.engine.clear()
+
+    def commit(self) -> None:
+        if self.engine:
+            self.engine.commit()
+
+    def set_metadata(self, key: str, value: Any) -> None:
+        if self.engine and hasattr(self.engine, "set_metadata"):
+            self.engine.set_metadata(key, value)
+
+    def get_metadata(self, key: str, default: Any = None) -> Any:
+        if self.engine and hasattr(self.engine, "get_metadata"):
+            return self.engine.get_metadata(key, default)
+        return default
+
+    def mark_directory_scanned(self, dir_path: Path) -> None:
+        if self.engine:
+            if self._is_rust:
+                self.engine.mark_directory_scanned(_clean_path_str(dir_path))
+            else:
+                self.engine.mark_directory_scanned(dir_path)
+
+    def is_directory_scanned(self, dir_path: Path) -> bool:
+        if self.engine:
+            if self._is_rust:
+                return self.engine.is_directory_scanned(_clean_path_str(dir_path))
+            else:
+                return self.engine.is_directory_scanned(dir_path)
+            return False
+
+    def snapshot_file(self, path: Path, size: int, mtime: float) -> None:
+        if self.engine:
+            if self._is_rust:
+                self.engine.snapshot_file(_clean_path_str(path), size, mtime)
+            else:
+                self.engine.snapshot_file(path, size, mtime)
+
+    def snapshot_files_batch(self, batch) -> None:
+        if self.engine:
+            if self._is_rust:
+                rust_batch = [(_clean_path_str(item[0]), item[1], item[2]) for item in batch]
+                self.engine.snapshot_files_batch(rust_batch)
+            else:
+                for path, size, mtime in batch:
+                    self.engine.snapshot_file(path, size, mtime)
+                self.engine.commit()
+
+    def get_files_in_directory(self, dir_path: Path):
+        if self.engine:
+            if self._is_rust:
+                last_path = ""
+                clean_dir = _clean_path_str(dir_path)
+                while True:
+                    page = self.engine.get_files_in_directory_page(clean_dir, last_path, 2000)
+                    if not page:
+                        break
+                    yield from page
+                    last_path = page[-1]["path"]
+            else:
+                yield from self.engine.get_files_in_directory(dir_path)
+
+    def get_candidate_sizes(self):
+        if self.engine:
+            return self.engine.get_candidate_sizes()
+        return []
+
+    def get_files_by_sizes(self, sizes):
+        if self.engine:
+            if self._is_rust:
+                last_path = ""
+                limit = 5000
+                while True:
+                    page = self.engine.get_files_by_sizes_page(sizes, last_path, limit)
+                    if not page:
+                        break
+                    yield from page
+                    last_path = page[-1]["path"]
+            else:
+                yield from self.engine.get_files_by_sizes(sizes)
+
+    def get(self, path: Path, key: str) -> Union[bytes, None]:
+        if self.engine:
+            if self._is_rust:
+                try:
+                    stat = path.stat()
+                    return self.engine.get(
+                        _clean_path_str(path), key, stat.st_size, stat.st_mtime_ns, self.ignore_mtime
+                    )
+                except (OSError, InvalidPath):
+                    return None
+            else:
+                return self.engine.get(path, key, self.ignore_mtime)
+        return None
+
+    def set(self, path: Path, key: str, value: bytes) -> None:
+        if self.engine:
+            clean_p = _clean_path_str(path)
+            if self._is_rust:
+                try:
+                    self.engine.put(clean_p, 0, 0, key, value)
+                except Exception as e:
+                    logging.warning(f"Rust engine put failed for {clean_p}: {e}")
+            else:
+                try:
+                    self.engine.set(path, key, value)
+                except Exception as e:
+                    logging.warning(f"Engine set failed for {path}: {e}")
+
+    def put(self, path: Path, key: str, value: bytes) -> None:
+        self.set(path, key, value)
+
+    def get_cache_viewer_files(self, search: str = None, limit: int = 20, offset: int = 0):
+        if self.engine:
+            return self.engine.get_cache_viewer_files(search, limit, offset)
+        return 0, []
 
 
 filesdb = FilesDB()  # Singleton
@@ -336,6 +973,7 @@ class File:
     __slots__ = ("path", "is_ref", "words") + tuple(INITIAL_INFO.keys())
 
     def __init__(self, path):
+        self.is_ref = False
         for attrname in self.INITIAL_INFO:
             setattr(self, attrname, NOT_SET)
         if type(path) is os.DirEntry:
@@ -454,6 +1092,8 @@ class File:
 
     def exists(self) -> bool:
         """Safely check if the underlying file exists, treat error as non-existent"""
+        if filesdb and filesdb.enable_directory_cache:
+            return True
         try:
             return self.path.exists()
         except OSError as ex:
@@ -544,7 +1184,7 @@ class Folder(File):
         return not path.is_symlink() and path.is_dir()
 
 
-def get_file(path, fileclasses=[File]):
+def get_file(path, fileclasses=[File], skip_disk_check=False):
     """Wraps ``path`` around its appropriate :class:`File` class.
 
     Whether a class is "appropriate" is decided by :meth:`File.can_handle`
@@ -553,8 +1193,19 @@ def get_file(path, fileclasses=[File]):
     :param fileclasses: List of candidate :class:`File` classes
     """
     for fileclass in fileclasses:
-        if fileclass.can_handle(path):
-            return fileclass(path)
+        if skip_disk_check:
+            if hasattr(fileclass, "HANDLED_EXTS"):
+                if get_file_ext(path.name) in fileclass.HANDLED_EXTS:
+                    return fileclass(path)
+            elif hasattr(fileclass, "SUPPORTED_EXTS"):
+                if get_file_ext(path.name) in fileclass.SUPPORTED_EXTS:
+                    return fileclass(path)
+            else:
+                if fileclass.__name__ == "File" or len(fileclasses) == 1:
+                    return fileclass(path)
+        else:
+            if fileclass.can_handle(path):
+                return fileclass(path)
 
 
 def get_files(path, fileclasses=[File]):

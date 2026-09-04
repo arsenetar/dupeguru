@@ -8,7 +8,9 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+/build/
+!docs/build/
+site/
 develop-eggs/
 dist/
 downloads/
@@ -99,7 +101,6 @@ cython_debug/
 *.vsix
 
 # dupeGuru Specific
-/qt/*_rc.py
 /help/*/conf.py
 /help/*/changelog.rst
 cocoa/autogen
@@ -109,3 +110,6 @@ cocoa/autogen
 *.waf*
 .lock-waf*
 /tags
+rust_engine/target/
+manifest.json
+report.md

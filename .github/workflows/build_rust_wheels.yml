@@ -1,0 +1,45 @@
+name: Build Rust Native Engine & Wheels
+
+on:
+  push:
+    branches: [ master, main, 'feat/*' ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ master, main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build_rust_engine:
+    name: Build Rust Engine (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools
+          pip install -r requirements.txt -r requirements-extra.txt
+
+      - name: Build Rust engine release binary
+        run: |
+          cd rust_engine
+          cargo build --release
+
+      - name: Test dupeguru_rust PyO3 module
+        run: |
+          python build.py --modules
+          python -c "from core import dupeguru_rust; print('Loaded PyO3 Rust module:', dupeguru_rust)"

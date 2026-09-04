@@ -67,6 +67,8 @@ class ThreadedJobPerformer:
     def _update_progress(self, newprogress: int, newdesc: str = "") -> bool:
         self.last_progress = newprogress
         if newdesc:
+            if isinstance(newdesc, str):
+                newdesc = newdesc.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
             self.last_desc = newdesc
         return not self.job_cancelled
 

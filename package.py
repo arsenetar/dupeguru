@@ -28,6 +28,7 @@ from hscommon.build import (
 )
 
 ENTRY_SCRIPT = "run.py"
+WEB_ENTRY_SCRIPT = "run_web.py"
 LOCALE_DIR = "build/locale"
 HELP_DIR = "build/help"
 
@@ -55,6 +56,8 @@ def copy_files_to_package(destpath, packages, with_so):
         shutil.rmtree(destpath)
     os.makedirs(destpath)
     shutil.copy(ENTRY_SCRIPT, op.join(destpath, ENTRY_SCRIPT))
+    if op.exists(WEB_ENTRY_SCRIPT):
+        shutil.copy(WEB_ENTRY_SCRIPT, op.join(destpath, WEB_ENTRY_SCRIPT))
     extra_ignores = ["*.so"] if not with_so else None
     copy_packages(packages, destpath, extra_ignores=extra_ignores)
     # include locale files if they are built otherwise exit as it will break
@@ -70,16 +73,12 @@ def copy_files_to_package(destpath, packages, with_so):
 def package_debian_distribution(distribution):
     app_version = get_module_version("core")
     version = "{}~{}".format(app_version, distribution)
-    destpath = op.join("build", "dupeguru-{}".format(version))
+    destpath = op.join("build", "de-dup-{}".format(version))
     srcpath = op.join(destpath, "src")
-    packages = ["hscommon", "core", "qt", "send2trash"]
+    packages = ["hscommon", "core", "web", "send2trash"]
     copy_files_to_package(srcpath, packages, with_so=False)
     os.mkdir(op.join(destpath, "modules"))
     copy_all(op.join("core", "pe", "modules", "*.*"), op.join(destpath, "modules"))
-    copy(
-        op.join("qt", "pe", "modules", "block.c"),
-        op.join(destpath, "modules", "block_qt.c"),
-    )
     copy(
         op.join("pkg", "debian", "build_pe_modules.py"),
         op.join(destpath, "build_pe_modules.py"),
@@ -92,7 +91,7 @@ def package_debian_distribution(distribution):
         copy(op.join(debskel, fn), op.join(debdest, fn))
     filereplace(op.join(debskel, "control"), op.join(debdest, "control"), **debopts)
     filereplace(op.join(debskel, "Makefile"), op.join(destpath, "Makefile"), **debopts)
-    filereplace(op.join(debskel, "dupeguru.desktop"), op.join(debdest, "dupeguru.desktop"), **debopts)
+    filereplace(op.join(debskel, "de-dup.desktop"), op.join(debdest, "de-dup.desktop"), **debopts)
     changelogpath = op.join("help", "changelog")
     changelog_dest = op.join(debdest, "changelog")
     project_name = debopts["pkgname"]
@@ -122,18 +121,18 @@ def package_arch():
     # than package_debian because there are more python packages available in Arch (so we don't
     # need to include them).
     print("Packaging for Arch")
-    srcpath = op.join("build", "dupeguru-arch")
-    packages = ["hscommon", "core", "qt"]
+    srcpath = op.join("build", "de-dup-arch")
+    packages = ["hscommon", "core", "web"]
     copy_files_to_package(srcpath, packages, with_so=True)
     shutil.copy(op.join("images", "dgse_logo_128.png"), srcpath)
     debopts = json.load(open(op.join("pkg", "arch", "dupeguru.json")))
-    filereplace(op.join("pkg", "arch", "dupeguru.desktop"), op.join(srcpath, "dupeguru.desktop"), **debopts)
+    filereplace(op.join("pkg", "arch", "de-dup.desktop"), op.join(srcpath, "de-dup.desktop"), **debopts)
 
 
 def package_source_txz():
     print("Creating git archive")
     app_version = get_module_version("core")
-    name = "dupeguru-src-{}.tar".format(app_version)
+    name = "de-dup-src-{}.tar".format(app_version)
     base_path = os.getcwd()
     build_path = op.join(base_path, "build")
     dest = op.join(build_path, name)
@@ -175,12 +174,13 @@ def package_windows():
     # UCRT dlls are included if the system has the windows kit installed
     PyInstaller.__main__.run(
         [
-            "--name=dupeguru-win{0}".format(bits),
+            "--name=de-dup-win{0}".format(bits),
             "--windowed",
             "--noconfirm",
             "--icon=images/dgse_logo.ico",
             "--add-data={0};locale".format(LOCALE_DIR),
             "--add-data={0};help".format(HELP_DIR),
+            "--add-data=web;web",
             "--version-file=win_version_info.txt",
             "--paths=C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\{0}".format(arch),
             ENTRY_SCRIPT,
@@ -208,13 +208,14 @@ def package_macos():
 
     PyInstaller.__main__.run(
         [
-            "--name=dupeguru",
+            "--name=de-dup",
             "--windowed",
             "--noconfirm",
             "--icon=images/dupeguru.icns",
-            "--osx-bundle-identifier=com.hardcoded-software.dupeguru",
+            "--osx-bundle-identifier=com.tinle.de-dup",
             "--add-data={0}:locale".format(LOCALE_DIR),
             "--add-data={0}:help".format(HELP_DIR),
+            "--add-data=web:web",
             "{0}".format(ENTRY_SCRIPT),
         ]
     )
@@ -223,10 +224,10 @@ def package_macos():
 def main():
     args = parse_args()
     if args.src_pkg:
-        print("Creating source package for dupeGuru")
+        print("Creating source package for de-dup")
         package_source_txz()
         return
-    print("Packaging dupeGuru with UI qt")
+    print("Packaging de-dup with pywebview desktop shell")
     if sys.platform == "win32":
         package_windows()
     elif sys.platform == "darwin":

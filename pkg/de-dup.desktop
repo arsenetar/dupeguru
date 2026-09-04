@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=de-dup
+Comment=Find duplicate files.
+Exec=de-dup
+Icon=de-dup
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=file manager;gui;

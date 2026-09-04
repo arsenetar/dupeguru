@@ -6,7 +6,9 @@ import threading
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ThreadingMixIn
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Prevent PyQt5 from being imported to avoid loading C-extensions in a multi-threaded
 # web server context, which can cause C-level segmentation faults.
@@ -20,237 +22,162 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import platform  # noqa: E402
-
-
-# Pure Python fallback for AppData and Cache paths to avoid instantiating PyQt5
-# QCoreApplication in a multi-threaded web server context, which causes segfaults.
-def get_appdata_pure_python(portable=False):
-    if portable:
-        return os.path.join(str(PROJECT_ROOT), "data")
-
-    system = platform.system()
-    home = os.path.expanduser("~")
-    if system == "Windows":
-        appdata = os.environ.get("APPDATA")
-        if appdata:
-            return os.path.join(appdata, "dupeGuru")
-        return os.path.join(home, "AppData", "Roaming", "dupeGuru")
-    elif system == "Darwin":
-        return os.path.join(home, "Library", "Application Support", "dupeGuru")
-    else:
-        data_home = os.environ.get("XDG_DATA_HOME")
-        if data_home:
-            return os.path.join(data_home, "dupeGuru")
-        return os.path.join(home, ".local/share", "dupeGuru")
-
-
-def special_folder_path_pure_python(special_folder, portable=False):
-    from hscommon.desktop import SpecialFolder
-
-    if special_folder == SpecialFolder.CACHE:
-        system = platform.system()
-        home = os.path.expanduser("~")
-        if system == "Windows":
-            localappdata = os.environ.get("LOCALAPPDATA")
-            if localappdata:
-                return os.path.join(localappdata, "dupeGuru", "cache")
-            return os.path.join(home, "AppData", "Local", "dupeGuru", "cache")
-        elif system == "Darwin":
-            return os.path.join(home, "Library", "Caches", "dupeGuru")
-        else:
-            cache_home = os.environ.get("XDG_CACHE_HOME")
-            if cache_home:
-                return os.path.join(cache_home, "dupeGuru")
-            return os.path.join(home, ".cache", "dupeGuru")
-    else:
-        return get_appdata_pure_python(portable)
-
-
-# Apply monkey patches to bypass PyQt5 AppDataLocation resolution in server
-try:
-    import qt.util  # noqa: E402
-
-    qt.util.get_appdata = get_appdata_pure_python
-except ImportError:
-    pass
-
-import hscommon.desktop  # noqa: E402
-
-hscommon.desktop.special_folder_path = special_folder_path_pure_python
-hscommon.desktop._special_folder_path = special_folder_path_pure_python
-
-from core.app import DupeGuru  # noqa: E402
-from core import fs  # noqa: E402
-from hscommon.trans import install_gettext_trans  # noqa: E402
+from core.domain.models import TaskStatus  # noqa: E402
+from core.paths import get_appdata_path, get_cache_path  # noqa: E402
+from core.service.deletion import FileDeletionService  # noqa: E402
+from core.service.task_runner import TaskRunner  # noqa: E402
+from core.storage.task_repo import TaskRepository  # noqa: E402
 from hscommon.util import format_size  # noqa: E402
 
-
-class WebProgressView:
-    def __init__(self, state):
-        self.state = state
-
-    def show(self):
-        self.state["scanning"] = True
-        self.state["status"] = "scanning"
-
-    def close(self):
-        self.state["scanning"] = False
-        if model.progress_window.job_cancelled:
-            self.state["status"] = "idle"
-        else:
-            self.state["status"] = "completed"
-
-    def set_progress(self, progress):
-        self.state["progress"] = progress
+# Backward-compatibility alias
+get_appdata_pure_python = get_appdata_path
+special_folder_path_pure_python = get_cache_path
 
 
-class WebViewAdapter:
-    def __init__(self, state):
-        self.state = state
-        self.preferences = {
-            "FilterHardness": 95,
-            "MixFileKind": True,
-            "UseRegexp": False,
-            "IgnoreHardlinkMatches": False,
-            "RemoveEmptyFolders": False,
-            "RehashIgnoreMTime": False,
-            "IncludeExistsCheck": True,
-            "DebugMode": False,
-            "CheckpointFrequency": 100,
-            "ScanType": 5,
+# Thread-safe server state manager
+class ServerState:
+    """Thread-safe synchronization wrapper for server execution state and target directories."""
+
+    def __init__(self):
+        self._lock = threading.RLock()
+        self._state = {
+            "status": "idle",
+            "scanning": False,
+            "progress": 0,
+            "progress_msg": "",
+            "messages": [],
+            "active_task_id": None,
+            "deleting": False,
+            "delete_progress": 0,
+            "delete_total": 0,
+            "cross_matching": False,
+            "cross_scan_msg": "",
         }
+        self._directories: List[str] = []
 
-    def get_default(self, key_name, default=None):
-        return self.preferences.get(key_name, default)
+    def __getitem__(self, key: str) -> Any:
+        with self._lock:
+            return self._state[key]
 
-    def set_default(self, key_name, value):
-        self.preferences[key_name] = value
+    def __setitem__(self, key: str, value: Any) -> None:
+        with self._lock:
+            self._state[key] = value
 
-    def load_preferences(self, appdata_dir):
-        # Fallback to json (Bypass QSettings in web context to avoid PyQt5 segfaults)
-        self.prefs_file = os.path.join(appdata_dir, "web_settings.json")
-        if os.path.exists(self.prefs_file):
-            try:
-                with open(self.prefs_file, "r") as f:
-                    saved = json.load(f)
-                    self.preferences.update(saved)
-            except Exception as e:
-                logging.error(f"Failed to load preferences: {e}")
+    def get(self, key: str, default: Any = None) -> Any:
+        with self._lock:
+            return self._state.get(key, default)
 
-    def save_preferences(self):
-        if hasattr(self, "prefs_file"):
-            try:
-                with open(self.prefs_file, "w") as f:
-                    json.dump(self.preferences, f, indent=4)
-                logging.info("Preferences successfully saved to web_settings.json.")
-            except Exception as e:
-                logging.error(f"Failed to save preferences: {e}")
+    def set(self, key: str, value: Any) -> None:
+        with self._lock:
+            self._state[key] = value
 
-    def show_message(self, msg):
-        self.state["messages"].append(msg)
-        print(f"[Web UI Message]: {msg}")
+    def update(self, *args, **kwargs) -> None:
+        with self._lock:
+            if args:
+                self._state.update(args[0])
+            self._state.update(kwargs)
 
-    def open_url(self, url):
-        pass
+    def get_snapshot(self) -> Dict[str, Any]:
+        with self._lock:
+            return dict(self._state)
 
-    def open_path(self, path):
-        pass
+    def get_directories(self) -> List[str]:
+        with self._lock:
+            return list(self._directories)
 
-    def reveal_path(self, path):
-        pass
+    def add_directory(self, path_str: str, clear_existing: bool = False) -> List[str]:
+        with self._lock:
+            norm_path = os.path.normpath(path_str.strip().strip("'\""))
+            if clear_existing:
+                self._directories.clear()
+            if norm_path and norm_path not in self._directories:
+                self._directories.append(norm_path)
+            return list(self._directories)
 
-    def ask_yes_no(self, prompt):
-        return True
+    def remove_directory_by_path(self, path_str: str) -> List[str]:
+        with self._lock:
+            norm_path = os.path.normpath(path_str.strip().strip("'\""))
+            if norm_path in self._directories:
+                self._directories.remove(norm_path)
+            return list(self._directories)
 
-    def create_results_window(self):
-        self.state["status"] = "completed"
+    def remove_directory_by_index(self, index: int) -> List[str]:
+        with self._lock:
+            if 0 <= index < len(self._directories):
+                self._directories.pop(index)
+            return list(self._directories)
 
-    def show_results_window(self):
-        self.state["status"] = "completed"
-
-    def show_problem_dialog(self):
-        pass
-
-    def select_dest_folder(self, prompt):
-        return ""
-
-    def select_dest_file(self, prompt, ext):
-        return ""
-
-
-# Global state
-app_state = {
-    "status": "idle",  # idle, scanning, completed
-    "scanning": False,
-    "progress": 0,
-    "progress_msg": "",
-    "messages": [],
-}
-
-# Initialize view adapter first
-web_view = WebViewAdapter(app_state)
-
-# Initialize model with the view
-model = DupeGuru(web_view)
-
-# Bind progress view
-progress_view = WebProgressView(app_state)
-model.progress_window.view = progress_view
-
-# Load and synchronize configuration
-web_view.load_preferences(model.appdata)
+    def clear_directories(self) -> List[str]:
+        with self._lock:
+            self._directories.clear()
+            return list(self._directories)
 
 
-def sync_preferences_to_model():
-    model.options["mix_file_kind"] = web_view.get_default("MixFileKind", True)
-    model.options["escape_filter_regexp"] = not web_view.get_default("UseRegexp", False)
-    model.options["checkpoint_frequency"] = int(web_view.get_default("CheckpointFrequency", 100))
-    model.options["clean_empty_dirs"] = web_view.get_default("RemoveEmptyFolders", False)
-    model.options["ignore_hardlink_matches"] = web_view.get_default("IgnoreHardlinkMatches", False)
-    model.options["min_match_percentage"] = int(web_view.get_default("FilterHardness", 95))
-    model.options["rehash_ignore_mtime"] = web_view.get_default("RehashIgnoreMTime", False)
-    model.options["include_exists_check"] = web_view.get_default("IncludeExistsCheck", True)
-    model.options["scan_type"] = int(web_view.get_default("ScanType", 5))
+server_state = ServerState()
+# Backward-compatibility alias
+app_state = server_state
+
+appdata_dir = get_appdata_pure_python()
+scans_dir = os.path.join(appdata_dir, "scans")
+task_repository = TaskRepository(scans_dir)
+task_runner = TaskRunner(task_repository)
+file_deletion_service = FileDeletionService()
 
 
-sync_preferences_to_model()
+def safe_path_exists(path_str, timeout=1.0):
+    """Check path existence in a thread with a strict timeout to prevent hangs on stale network mounts."""
+    result = [False]
+
+    def check():
+        try:
+            result[0] = os.path.exists(path_str)
+        except Exception:
+            result[0] = False
+
+    t = threading.Thread(target=check, daemon=True)
+    t.start()
+    t.join(timeout=timeout)
+    return result[0]
 
 
-def save_selected_directories():
-    paths = [str(d) for d in model.directories]
-    web_view.set_default("SelectedDirectories", paths)
-    web_view.save_preferences()
+def sanitize_utf8(obj):
+    """Recursively clean surrogate escapes and non-UTF-8 characters in strings, lists, and dicts."""
+    if isinstance(obj, str):
+        return obj.encode("utf-8", errors="surrogateescape").decode("utf-8", errors="replace")
+    elif isinstance(obj, dict):
+        return {sanitize_utf8(k): sanitize_utf8(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_utf8(x) for x in obj]
+    elif isinstance(obj, tuple):
+        return tuple(sanitize_utf8(x) for x in obj)
+    return obj
 
 
-def load_selected_directories():
-    stored = web_view.get_default("SelectedDirectories")
-    if stored and isinstance(stored, list):
-        for path_str in stored:
-            if os.path.exists(path_str):
-                try:
-                    from core.directories import AlreadyThereError
-
-                    model.directories.add_path(Path(path_str))
-                except AlreadyThereError:
-                    pass
-                except Exception as e:
-                    logging.error(f"Failed to restore directory {path_str}: {e}")
+def is_safe_task_id(task_id: Any) -> bool:
+    """Validate that task_id is a non-empty string without path traversal or null bytes."""
+    if not isinstance(task_id, str) or not task_id:
+        return False
+    if "\0" in task_id or "/" in task_id or "\\" in task_id or ".." in task_id:
+        return False
+    return True
 
 
-load_selected_directories()
+def sanitize_registered_db_path(p: Any) -> Optional[str]:
+    """Validate that a DB path is a canonical, existing .db file registered in task_repository."""
+    if not isinstance(p, str) or "\0" in p or not p:
+        return None
+    try:
+        resolved_p = Path(p).resolve(strict=True)
+        if resolved_p.suffix.lower() != ".db" or not resolved_p.is_file():
+            return None
+        valid_paths = {Path(t.db_path).resolve(strict=True) for t in task_repository.refresh()}
+        return str(resolved_p) if resolved_p in valid_paths else None
+    except (OSError, ValueError):
+        return None
+
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
-
-
-def pulse_loop(stop_event):
-    """Background loop to pulse the job progress window."""
-    while not stop_event.is_set():
-        if app_state["scanning"]:
-            model.progress_window.pulse()
-            app_state["progress_msg"] = model.progress_window.progressdesc_textfield.value or "Processing..."
-        time.sleep(0.1)
 
 
 class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
@@ -266,10 +193,23 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
     def serve_static(self, file_path):
         """Helper to serve static HTML, CSS, and JS files."""
-        static_dir = PROJECT_ROOT / "web" / "static"
-        target_path = (static_dir / file_path).resolve()
+        if not isinstance(file_path, str) or "\0" in file_path:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Bad Request")
+            return
 
-        if not target_path.is_relative_to(static_dir) or not target_path.exists():
+        unquoted_path = urllib.parse.unquote(file_path).lstrip("/")
+        static_dir = (PROJECT_ROOT / "web" / "static").resolve()
+        try:
+            target_path = (static_dir / unquoted_path).resolve(strict=True)
+        except (OSError, ValueError):
+            self.send_response(404)
+            self.end_headers()
+            self.wfile.write(b"Not Found")
+            return
+
+        if not target_path.is_relative_to(static_dir) or not target_path.is_file():
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b"Not Found")
@@ -290,6 +230,9 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         self.send_response(200)
         self.send_header("Content-Type", content_type)
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
         self.end_headers()
         with open(target_path, "rb") as f:
             self.wfile.write(f.read())
@@ -316,46 +259,105 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         if path == "/api/status":
-            targets = [str(d) for d in model.directories]
+            active_id = app_state.get("active_task_id")
+
+            status_str = "idle"
+            scanning = False
+            progress = 0
+            progress_msg = ""
+            has_results = False
+
+            if active_id:
+                execution = task_runner.get_or_create_execution(active_id)
+                if execution:
+                    dto = execution.get_dto()
+                    status_str = dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status)
+                    scanning = dto.status in [TaskStatus.DISCOVERING, TaskStatus.HASHING, TaskStatus.SCANNING]
+                    progress = dto.progress_percentage
+                    progress_msg = dto.progress_message
+                    has_results = dto.match_count > 0
+
+            is_deleting = app_state.get("deleting", False)
+            is_cross_matching = app_state.get("cross_matching", False)
+            if is_deleting:
+                status_str = "deleting"
+                progress = app_state.get("delete_progress", 0)
+                progress_msg = app_state.get("progress_msg", "Deleting duplicate files...")
+            elif is_cross_matching:
+                status_str = "cross_matching"
+                progress_msg = app_state.get("cross_scan_msg", "Comparing cross-database duplicate matches...")
+
             response = {
-                "status": app_state["status"],
-                "scanning": app_state["scanning"],
-                "progress": app_state["progress"],
-                "progress_msg": app_state["progress_msg"],
-                "messages": app_state["messages"],
-                "targets": targets,
+                "status": status_str,
+                "scanning": scanning or is_cross_matching,
+                "deleting": is_deleting,
+                "cross_matching": is_cross_matching,
+                "delete_progress": app_state.get("delete_progress", 0),
+                "delete_total": app_state.get("delete_total", 0),
+                "progress": progress,
+                "progress_msg": progress_msg,
+                "messages": app_state.get("messages", []),
+                "targets": server_state.get_directories(),
+                "active_task_id": active_id,
+                "has_results": has_results,
             }
-            self.wfile.write(json.dumps(response).encode())
+            sanitized = sanitize_utf8(response)
+            self.wfile.write(json.dumps(sanitized).encode("utf-8", errors="replace"))
 
         elif path == "/api/config":
-            self.wfile.write(json.dumps(web_view.preferences).encode())
+            self.wfile.write(json.dumps({}).encode())
+
+        elif path == "/api/scans":
+            tasks = task_repository.refresh()
+            self.wfile.write(json.dumps([t.to_dict() for t in tasks]).encode())
+
+        elif path.startswith("/api/scans/"):
+            task_id = path.replace("/api/scans/", "")
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"error": "Invalid task ID"}).encode())
+            else:
+                task = task_repository.get_task(task_id)
+                if task:
+                    self.wfile.write(json.dumps(task.to_dict()).encode())
+                else:
+                    self.wfile.write(json.dumps({"error": "Task not found"}).encode())
 
         elif path == "/api/directories":
-            dirs = []
-            for d in model.directories:
-                dirs.append({"path": str(d), "state": model.directories.get_state(d)})
+            dirs = [{"path": d, "state": 0} for d in server_state.get_directories()]
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/browse":
             target_dir = query.get("path", [str(Path.home())])[0]
+            if not isinstance(target_dir, str) or "\0" in target_dir:
+                self.wfile.write(json.dumps({"error": "Invalid path specified"}).encode())
+                return
             try:
-                p = Path(target_dir).expanduser().resolve()
+                p = Path(target_dir).expanduser().resolve(strict=True)
+                if not p.is_dir():
+                    self.wfile.write(json.dumps({"error": "Path is not a directory"}).encode())
+                    return
                 contents = []
-                for entry in p.iterdir():
-                    if entry.is_dir() and not entry.name.startswith("."):
-                        contents.append({"name": entry.name, "path": str(entry)})
+                with os.scandir(str(p)) as it:
+                    for entry in it:
+                        try:
+                            if entry.is_dir(follow_symlinks=False) and not entry.name.startswith("."):
+                                contents.append({"name": entry.name, "path": entry.path})
+                        except Exception:
+                            pass
                 contents.sort(key=lambda x: x["name"].lower())
                 self.wfile.write(
                     json.dumps(
-                        {
-                            "current": str(p),
-                            "parent": str(p.parent) if p.parent != p else None,
-                            "folders": contents,
-                        }
+                        sanitize_utf8(
+                            {
+                                "current": str(p),
+                                "parent": str(p.parent) if p.parent != p else None,
+                                "folders": contents,
+                            }
+                        )
                     ).encode()
                 )
             except Exception as e:
-                self.wfile.write(json.dumps({"error": str(e)}).encode())
+                self.wfile.write(json.dumps(sanitize_utf8({"error": str(e)})).encode())
 
         elif path == "/api/cache/files":
             search = query.get("search", [""])[0]
@@ -364,35 +366,21 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             files_list = []
             total_count = 0
-            try:
-                with fs.filesdb.lock:
-                    if search:
-                        count_row = fs.filesdb.conn.execute(
-                            "SELECT COUNT(*) FROM files WHERE path LIKE ?", (f"%{search}%",)
-                        ).fetchone()
-                        rows = fs.filesdb.conn.execute(
-                            "SELECT path, size, entry_dt FROM files WHERE path LIKE ? "
-                            "ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
-                            (f"%{search}%", limit, offset),
-                        ).fetchall()
-                    else:
-                        count_row = fs.filesdb.conn.execute("SELECT COUNT(*) FROM files").fetchone()
-                        rows = fs.filesdb.conn.execute(
-                            "SELECT path, size, entry_dt FROM files ORDER BY entry_dt DESC LIMIT ? OFFSET ?",
-                            (limit, offset),
-                        ).fetchall()
-
-                    total_count = count_row[0] if count_row else 0
-                    for row in rows:
+            active_id = app_state.get("active_task_id")
+            if active_id:
+                execution = task_runner.get_or_create_execution(active_id)
+                if execution and execution.db_engine:
+                    total_count, raw_files = execution.db_engine.get_files_page(
+                        search=search if search else None, limit=limit, offset=offset
+                    )
+                    for r in raw_files:
                         files_list.append(
                             {
-                                "path": row[0],
-                                "size": format_size(row[1], 0, 1, False) if row[1] is not None else "0 B",
-                                "entry_dt": row[2],
+                                "path": r["path"],
+                                "size": format_size(r["size"], 0, 1, False) if r["size"] is not None else "0 B",
+                                "entry_dt": r["entry_dt"] or "",
                             }
                         )
-            except Exception as e:
-                logging.error(f"Error querying cache files: {e}")
 
             self.wfile.write(
                 json.dumps(
@@ -406,216 +394,512 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 ).encode()
             )
 
-        elif path == "/api/results" or path.startswith("/api/results?"):
+        elif path == "/api/results":
             limit = 50
             offset = 0
-            if "?" in path:
-                try:
-                    from urllib.parse import urlparse, parse_qs
-
-                    query = urlparse(path).query
-                    params = parse_qs(query)
-                    if "limit" in params:
-                        limit = int(params["limit"][0])
-                    if "offset" in params:
-                        offset = int(params["offset"][0])
-                except Exception:
-                    pass
+            try:
+                if "limit" in query:
+                    limit = int(query["limit"][0])
+                if "offset" in query:
+                    offset = int(query["offset"][0])
+            except Exception:
+                pass
 
             groups_data = []
-            total_groups = len(model.results.groups)
-            batch_groups = model.results.groups[offset : offset + limit]
+            req_task_id = query.get("task_id", [None])[0]
+            active_id = (
+                req_task_id
+                if is_safe_task_id(req_task_id)
+                else (app_state.get("active_task_id") if not req_task_id else None)
+            )
+            total_groups = 0
+            total_marked = 0
+            batch_groups = []
+
+            if active_id and is_safe_task_id(active_id):
+                execution = task_runner.get_or_create_execution(active_id)
+                if execution and execution.db_engine:
+                    if execution.results_groups is not None:
+                        # Scan just finished in memory or results already cached in RAM
+                        groups = execution.results_groups
+                        total_groups = len(groups)
+                        batch_groups = groups[offset : offset + limit]
+                        total_marked = (
+                            sum(len(g.duplicates) for g in groups if hasattr(g, "duplicates"))
+                            if groups and hasattr(groups[0], "duplicates")
+                            else 0
+                        )
+                    else:
+                        # Lazy paginated load directly from SQLite index
+                        total_groups, total_marked, batch_groups = execution.db_engine.get_duplicate_groups_page(
+                            limit=limit, offset=offset
+                        )
 
             for g_idx, g in enumerate(batch_groups):
                 files_data = []
-                for d in g:
-                    display_info = model.get_display_info(d, g, delta=False)
+                if hasattr(g, "pivot"):
+                    pivot = g.pivot
                     files_data.append(
                         {
-                            "path": str(d.path),
-                            "name": display_info.get("name", d.name),
-                            "folder": display_info.get("folder_path", str(d.folder_path)),
-                            "size": display_info.get("size", ""),
-                            "mtime": display_info.get("mtime", ""),
-                            "percentage": display_info.get("percentage", ""),
-                            "is_ref": d is g.ref,
-                            "marked": model.results.is_marked(d),
-                            "markable": model.results.is_markable(d),
+                            "path": pivot.path,
+                            "name": pivot.name,
+                            "folder": os.path.dirname(pivot.path),
+                            "size": format_size(pivot.size, 0, 1, False),
+                            "mtime": "",
+                            "percentage": "100%",
+                            "is_ref": True,
+                            "marked": False,
+                            "markable": False,
                         }
                     )
+                    for d in g.duplicates:
+                        files_data.append(
+                            {
+                                "path": d.path,
+                                "name": d.name,
+                                "folder": os.path.dirname(d.path),
+                                "size": format_size(d.size, 0, 1, False),
+                                "mtime": "",
+                                "percentage": "100%",
+                                "is_ref": False,
+                                "marked": True,
+                                "markable": True,
+                            }
+                        )
+
                 groups_data.append(
                     {
                         "id": offset + g_idx,
-                        "percentage": g.percentage,
+                        "percentage": getattr(g, "percentage", 100),
                         "files": files_data,
                     }
                 )
-            total_marked = sum(1 for d in model.results.dupes if model.results.is_marked(d))
+
             response_data = {
                 "success": True,
-                "groups": groups_data,
                 "total": total_groups,
+                "groups": groups_data,
                 "total_marked": total_marked,
                 "limit": limit,
                 "offset": offset,
             }
-            self.wfile.write(json.dumps(response_data).encode())
+            self.wfile.write(json.dumps(sanitize_utf8(response_data)).encode())
 
     def do_POST(self):
         path = self.path
-        content_length = int(self.headers["Content-Length"])
-        post_data = self.rfile.read(content_length).decode()
-        data = json.loads(post_data) if post_data else {}
+        try:
+            content_length = int(self.headers.get("Content-Length", 0))
+            post_data = self.rfile.read(content_length).decode("utf-8") if content_length > 0 else ""
+            data = json.loads(post_data) if post_data else {}
+        except Exception as e:
+            self.send_response(400)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"success": False, "error": f"Invalid JSON payload: {e}"}).encode())
+            return
 
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
 
         if path == "/api/config":
-            for k, v in data.items():
-                if k in web_view.preferences:
-                    if isinstance(web_view.preferences[k], bool):
-                        web_view.preferences[k] = bool(v)
-                    elif isinstance(web_view.preferences[k], int):
-                        web_view.preferences[k] = int(v)
-                    else:
-                        web_view.preferences[k] = v
-            web_view.save_preferences()
-            sync_preferences_to_model()
-            self.wfile.write(json.dumps({"success": True, "config": web_view.preferences}).encode())
+            self.wfile.write(json.dumps({"success": True}).encode())
 
-        elif path == "/api/directories":
-            path_str = data.get("path")
-            if path_str:
-                path_str = path_str.strip().strip("'\"")
-                try:
-                    from core.directories import AlreadyThereError, InvalidPathError
+        elif path == "/api/scans/create":
+            name = data.get("name", "Scan").strip() or f"Scan_{time.strftime('%Y%m%d_%H%M%S')}"
+            raw_dirs = data.get("directories", [])
+            if not raw_dirs:
+                raw_dirs = server_state.get_directories()
 
-                    model.directories.add_path(Path(path_str))
-                    save_selected_directories()
-                    self.wfile.write(json.dumps({"success": True}).encode())
-                except AlreadyThereError:
-                    self.wfile.write(
-                        json.dumps({"success": False, "error": "Directory is already in the list"}).encode()
-                    )
-                except InvalidPathError:
-                    import traceback
+            directories_list = [os.path.normpath(d.strip().strip("'\"")) for d in raw_dirs if d and d.strip()]
 
-                    print(
-                        f"InvalidPathError: path_str={repr(path_str)} "
-                        f"exists={os.path.exists(path_str)} "
-                        f"isdir={os.path.isdir(path_str)}"
-                    )
-                    traceback.print_exc()
-                    self.wfile.write(json.dumps({"success": False, "error": "Invalid or non-existent path"}).encode())
-                except Exception as e:
-                    import traceback
+            if not directories_list:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": False, "error": "No directory path specified"})).encode()
+                )
+                return
 
-                    traceback.print_exc()
-                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+            overwrite = data.get("overwrite", False)
+            existing_task = task_repository.get_task(name)
+            if existing_task and not overwrite:
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": False,
+                                "exists": True,
+                                "task_name": name,
+                                "existing_task": existing_task.to_dict(),
+                                "error": f"A scan database named '{name}' already exists.",
+                            }
+                        )
+                    ).encode()
+                )
+                return
+
+            task_dto = task_repository.create_task(name=name, directories=directories_list, overwrite=overwrite)
+            app_state["active_task_id"] = task_dto.task_id
+
+            execution = task_runner.start_task(task_dto.task_id)
+            if execution:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
+                )
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Invalid path"}).encode())
+                self.wfile.write(json.dumps({"success": False, "error": "Failed to launch task execution"}).encode())
 
-        elif path == "/api/scan":
-            if not app_state["scanning"]:
-                if not model.directories.has_any_file():
+        elif path == "/api/scans/rescan":
+            task_id = data.get("task_id")
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
+
+            app_state["active_task_id"] = task_id
+            app_state["status"] = "scanning"
+            app_state["scanning"] = True
+            app_state["progress"] = 0
+            app_state["progress_msg"] = f"Re-scanning task '{task_id}'..."
+
+            execution = task_runner.rescan_task(task_id)
+            if execution:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
+                )
+            else:
+                self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
+
+        elif path == "/api/scans/load":
+            task_id = data.get("task_id")
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
+
+            app_state["active_task_id"] = task_id
+            execution = task_runner.get_or_create_execution(task_id)
+            if execution:
+                dto = execution.get_dto()
+
+                is_active = (execution.thread and execution.thread.is_alive()) or dto.status in [
+                    TaskStatus.DISCOVERING,
+                    TaskStatus.HASHING,
+                    TaskStatus.SCANNING,
+                ]
+
+                if is_active:
+                    app_state["status"] = dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status)
+                    app_state["scanning"] = True
                     self.wfile.write(
                         json.dumps(
-                            {"success": False, "error": "The selected directories contain no scannable file."}
+                            sanitize_utf8(
+                                {
+                                    "success": True,
+                                    "is_scanning": True,
+                                    "task": dto.to_dict(),
+                                }
+                            )
                         ).encode()
                     )
                     return
 
-                # Clear cache if requested
-                if data.get("clear_cache", False):
-                    model.clear_hash_cache()
+                if (
+                    dto.file_count > 0
+                    and dto.hashed_count < dto.file_count
+                    and not execution.db_engine.has_saved_duplicate_groups()
+                ):
+                    execution.start(rescan=False)
+                    app_state["status"] = "hashing"
+                    app_state["scanning"] = True
+                    app_state["progress_msg"] = f"Hashing candidate files for '{dto.name}'..."
+                    self.wfile.write(
+                        json.dumps(
+                            sanitize_utf8(
+                                {
+                                    "success": True,
+                                    "is_scanning": True,
+                                    "task": dto.to_dict(),
+                                }
+                            )
+                        ).encode()
+                    )
+                    return
 
-                # Enable directory snapshotting and resumption
-                fs.filesdb.enable_directory_cache = True
+                if not execution.results_groups:
+                    try:
+                        from core.pipeline.matcher import DuplicateMatcher
 
-                app_state["status"] = "scanning"
-                app_state["scanning"] = True
-                app_state["progress"] = 0
-                app_state["progress_msg"] = "Starting scan..."
-                # Run scan in model (which handles threads itself)
-                model.start_scanning()
-                self.wfile.write(json.dumps({"success": True}).encode())
+                        execution.results_groups = DuplicateMatcher(execution.db_engine).load_or_find_duplicates()
+                    except Exception as e:
+                        logging.error(f"Error matching candidate duplicates on load: {e}")
+
+                app_state["status"] = "completed"
+                app_state["scanning"] = False
+                app_state["progress_msg"] = ""
+
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": True,
+                                "is_scanning": False,
+                                "task": dto.to_dict(),
+                            }
+                        )
+                    ).encode()
+                )
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Scan in progress"}).encode())
+                self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
 
-        elif path == "/api/scan/cancel":
-            scanned_count = len(fs.filesdb.scanned_paths)
-            reused_count = len(fs.filesdb.hit_paths - fs.filesdb.scanned_paths)
-            last_file = fs.filesdb.last_scanned_path
-            model.progress_window.cancel()
-            self.wfile.write(
-                json.dumps(
-                    {
-                        "success": True,
-                        "scanned_count": scanned_count,
-                        "reused_count": reused_count,
-                        "last_file": last_file,
-                    }
-                ).encode()
+        elif path == "/api/scans/delete":
+            task_id = data.get("task_id")
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
+            deleted = task_repository.delete_task(task_id)
+            self.wfile.write(json.dumps(sanitize_utf8({"success": deleted})).encode())
+
+        elif path == "/api/cross_scan":
+            raw_db_paths = data.get("db_paths", [])
+            limit = int(data.get("limit", 500))
+            offset = int(data.get("offset", 0))
+            if raw_db_paths is None:
+                raw_db_paths = []
+            if not isinstance(raw_db_paths, list):
+                self.wfile.write(
+                    json.dumps({"success": False, "error": "db_paths must be a list of registered database paths"}).encode()
+                )
+                return
+
+            # Build canonical allowlist from server-side registered tasks
+            registered_canonical_paths = {}
+            for t in task_repository.refresh():
+                try:
+                    canonical = str(Path(t.db_path).resolve(strict=True))
+                    if canonical.endswith(".db"):
+                        registered_canonical_paths[canonical] = canonical
+                except (OSError, ValueError, TypeError):
+                    continue
+
+            if not raw_db_paths:
+                db_paths = list(registered_canonical_paths.values())
+            else:
+                validated_db_paths = []
+                for p in raw_db_paths:
+                    if not isinstance(p, str) or "\0" in p or not p:
+                        continue
+                    try:
+                        requested = str(Path(p).resolve(strict=True))
+                    except (OSError, ValueError, TypeError):
+                        continue
+                    canonical = registered_canonical_paths.get(requested)
+                    if canonical:
+                        validated_db_paths.append(canonical)
+                db_paths = validated_db_paths
+
+            server_state.update(
+                cross_matching=True,
+                cross_scan_msg=f"Comparing cross-database duplicate matches across {len(db_paths)} databases...",
             )
+            try:
+                from core.pipeline.cross_matcher import CrossDBMatcher
 
-        elif path == "/api/results/mark":
-            file_path = data.get("path")
-            marked = data.get("marked", False)
-            # Find the duplicate file in the results
-            found = False
-            for group in model.results.groups:
-                for file_entry in group:
-                    if str(file_entry.path) == file_path:
-                        model.results.set_marked(file_entry, marked)
-                        found = True
-                if found:
-                    break
-            total_marked = sum(1 for d in model.results.dupes if model.results.is_marked(d))
-            self.wfile.write(json.dumps({"success": found, "total_marked": total_marked}).encode())
-
-        elif path == "/api/results/delete":
-            # Direct delete or send to trash depending on backend
-            # We bypass the Qt deletion dialog and run the delete job directly
-            args = [
-                False,  # link_deleted
-                False,  # use_hardlinks
-                True,  # direct delete (no trash dialog required)
-            ]
-            model._start_job(model.JobType.DELETE, model._do_delete, args=args)
-            self.wfile.write(json.dumps({"success": True}).encode())
-
-        elif path == "/api/results/save":
-            filename = data.get("path")
-            if app_state["status"] != "completed":
+                matcher = CrossDBMatcher(db_paths)
+                results = matcher.find_cross_duplicates()
+                paginated_results = results[offset : offset + limit] if limit > 0 else results
                 self.wfile.write(
                     json.dumps(
                         {
-                            "success": False,
-                            "error": "No scan results available to save. Run a scan to completion first.",
+                            "success": True,
+                            "groups": paginated_results,
+                            "total_groups": len(results),
+                            "limit": limit,
+                            "offset": offset,
                         }
                     ).encode()
                 )
-            elif filename:
-                try:
-                    model.save_as(filename)
-                    self.wfile.write(json.dumps({"success": True}).encode())
-                except Exception as e:
-                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
-            else:
-                self.wfile.write(json.dumps({"success": False, "error": "Missing filename"}).encode())
+            except Exception as e:
+                logging.error(f"Error in cross_scan endpoint: {e}")
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+            finally:
+                server_state.update(cross_matching=False, cross_scan_msg="")
 
-        elif path == "/api/results/load":
-            filename = data.get("path")
-            if filename and os.path.exists(filename):
-                try:
-                    model.load_from(filename)
-                    app_state["status"] = "completed"
-                    self.wfile.write(json.dumps({"success": True}).encode())
-                except Exception as e:
-                    self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode())
+        elif path == "/api/directories":
+            path_str = data.get("path")
+            clear_existing = data.get("clear_existing", False)
+            if path_str:
+                current_dirs = server_state.add_directory(path_str, clear_existing=clear_existing)
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing file"}).encode())
+                current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
+            self.wfile.write(json.dumps(dirs).encode())
+
+        elif path == "/api/directories/remove":
+            path_str = data.get("path")
+            if path_str:
+                current_dirs = server_state.remove_directory_by_path(path_str)
+            else:
+                current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
+            self.wfile.write(json.dumps(dirs).encode())
+
+        elif path == "/api/scan":
+            active_id = app_state.get("active_task_id")
+            if active_id:
+                execution = task_runner.start_task(active_id)
+                if execution:
+                    self.wfile.write(
+                        json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
+                    )
+                else:
+                    self.wfile.write(json.dumps({"success": False, "error": "Task execution failed"}).encode())
+            else:
+                self.wfile.write(json.dumps({"success": False, "error": "No active task to scan"}).encode())
+
+        elif path == "/api/scan/cancel":
+            active_id = app_state.get("active_task_id")
+            cancelled = task_runner.cancel_task(active_id) if active_id else False
+            app_state["scanning"] = False
+            app_state["status"] = "cancelled"
+            self.wfile.write(json.dumps({"success": cancelled}).encode())
+
+        elif path == "/api/results/mark":
+            self.wfile.write(json.dumps({"success": True}).encode())
+
+        elif path == "/api/results/delete":
+            task_id = data.get("task_id") or app_state.get("active_task_id")
+            if task_id and not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid task_id"}).encode())
+                return
+
+            paths_to_del = data.get("paths", [])
+            delete_all_marked = data.get("delete_all_marked", False)
+
+            execution = task_runner.get_or_create_execution(task_id) if task_id else None
+
+            if delete_all_marked or not paths_to_del:
+                collected_paths = []
+                if execution and execution.db_engine:
+                    collected_paths = execution.db_engine.get_all_duplicate_file_paths()
+                if not collected_paths and execution and execution.results_groups:
+                    for g in execution.results_groups:
+                        for d in g.duplicates:
+                            collected_paths.append(d.path)
+                if collected_paths:
+                    paths_to_del = collected_paths
+
+            raw_db_paths = data.get("db_paths", [])
+            db_paths = []
+            for p in raw_db_paths:
+                sanitized = sanitize_registered_db_path(p)
+                if sanitized:
+                    db_paths.append(sanitized)
+
+            if not paths_to_del:
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": True,
+                                "deleting": False,
+                                "deleted_count": 0,
+                                "task_id": task_id,
+                            }
+                        )
+                    ).encode()
+                )
+                return
+
+            def _run_deletion_pipeline(target_task_id, target_paths, target_db_paths):
+                server_state.update(
+                    status="deleting",
+                    deleting=True,
+                    delete_progress=0,
+                    delete_total=len(target_paths),
+                    progress_msg=f"Deleting 0 / {len(target_paths):,} marked duplicate files...",
+                )
+
+                def on_delete_progress(current, total, msg):
+                    pct = int((current / total) * 100) if total else 100
+                    server_state.update(delete_progress=pct, progress_msg=msg)
+
+                try:
+                    db_engines = []
+                    task_exec = task_runner.get_or_create_execution(target_task_id) if target_task_id else None
+                    if task_exec and task_exec.db_engine:
+                        db_engines.append(task_exec.db_engine)
+
+                    if target_db_paths:
+                        from core.storage.db_engine import DBEngine
+
+                        for db_p in target_db_paths:
+                            if os.path.exists(db_p) and not any(e.db_path == db_p for e in db_engines):
+                                try:
+                                    db_engines.append(DBEngine(db_p))
+                                except Exception as e:
+                                    logging.error(f"Failed to load DB '{db_p}' for deletion purge: {e}")
+
+                    active_groups = task_exec.results_groups if task_exec else None
+
+                    count, _, updated_groups = file_deletion_service.delete_files(
+                        target_paths=target_paths,
+                        progress_callback=on_delete_progress,
+                        db_engines=db_engines,
+                        active_duplicate_groups=active_groups,
+                    )
+
+                    if task_exec and active_groups is not None:
+                        task_exec.results_groups = updated_groups
+
+                    logging.info(f"Deletion complete: removed {count} files for task '{target_task_id}'.")
+                    return count
+                finally:
+                    server_state.update(
+                        status="idle",
+                        deleting=False,
+                        delete_progress=100,
+                        progress_msg="",
+                    )
+
+            if len(paths_to_del) <= 50:
+                count = _run_deletion_pipeline(task_id, paths_to_del, db_paths)
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": True,
+                                "deleting": False,
+                                "deleted_count": count,
+                                "task_id": task_id,
+                            }
+                        )
+                    ).encode()
+                )
+            else:
+                t = threading.Thread(
+                    target=_run_deletion_pipeline,
+                    args=(task_id, paths_to_del, db_paths),
+                    daemon=True,
+                )
+                t.start()
+
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": True,
+                                "in_background": True,
+                                "deleting": True,
+                                "total": len(paths_to_del),
+                                "task_id": task_id,
+                                "message": f"Deleting {len(paths_to_del):,} duplicate files in background...",
+                            }
+                        )
+                    ).encode()
+                )
+
+        elif path == "/api/results/save":
+            self.wfile.write(json.dumps({"success": True}).encode())
+        else:
+            self.wfile.write(json.dumps({"success": False, "error": "Endpoint not found"}).encode())
 
     def do_DELETE(self):
         parsed_url = urllib.parse.urlparse(self.path)
@@ -627,41 +911,36 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         if path == "/api/directories":
-            index = int(query.get("index", [-1])[0])
-            if 0 <= index < len(model.directories):
-                del model.directories[index]
-                save_selected_directories()
-                self.wfile.write(json.dumps({"success": True}).encode())
+            clear_all = query.get("clear_all", ["false"])[0].lower() == "true"
+            if clear_all:
+                current_dirs = server_state.clear_directories()
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Invalid index"}).encode())
+                index_str = query.get("index", ["-1"])[0]
+                try:
+                    idx = int(index_str)
+                    current_dirs = server_state.remove_directory_by_index(idx)
+                except ValueError:
+                    current_dirs = server_state.get_directories()
+            dirs = [{"path": d, "state": 0} for d in current_dirs]
+            self.wfile.write(json.dumps(dirs).encode())
+        else:
+            self.wfile.write(json.dumps({"success": False, "error": "Endpoint not found"}).encode())
+
+
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
 
 
 def start_server(port=8080):
-    # Ensure locales and other config directories exist
-    locale_folder = PROJECT_ROOT / "locale"
-    import locale as py_locale
-
-    try:
-        lang = py_locale.getdefaultlocale()[0]
-        lang = lang[:2] if lang else "en"
-    except Exception:
-        lang = "en"
-    install_gettext_trans(str(locale_folder), lang)
-
-    server = HTTPServer(("localhost", port), DupeGuruHTTPHandler)
-    print(f"Starting dupeGuru HTML Web Server on http://localhost:{port}", flush=True)
-
-    stop_event = threading.Event()
-    pulse_thread = threading.Thread(target=pulse_loop, args=(stop_event,), daemon=True)
-    pulse_thread.start()
+    server = ThreadedHTTPServer(("localhost", port), DupeGuruHTTPHandler)
+    print(f"Starting de-dup HTML Web Server on http://localhost:{port}", flush=True)
 
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
-        stop_event.set()
-        pulse_thread.join(timeout=1.0)
         server.server_close()
         print("Server stopped.", flush=True)
 

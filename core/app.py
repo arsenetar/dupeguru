@@ -123,9 +123,9 @@ class DupeGuru(Broadcaster):
     # select_dest_folder(prompt: str) --> str
     # select_dest_file(prompt: str, ext: str) --> str
 
-    NAME = PROMPT_NAME = "dupeGuru"
+    NAME = PROMPT_NAME = "de-dup"
 
-    def __init__(self, view, portable=False):
+    def __init__(self, view, portable=False, db_path=None):
         if view.get_default(DEBUG_MODE_PREFERENCE):
             logging.getLogger().setLevel(logging.DEBUG)
             logging.debug("Debug mode enabled")
@@ -137,13 +137,19 @@ class DupeGuru(Broadcaster):
         if "pytest" in sys.modules:
             import tempfile
 
-            self.appdata = os.path.join(tempfile.gettempdir(), "dupeGuru_test_appdata")
+            self.appdata = os.path.join(tempfile.gettempdir(), "de-dup_test_appdata")
         if not op.exists(self.appdata):
             os.makedirs(self.appdata)
         self.app_mode = AppMode.STANDARD
         self.discarded_file_count = 0
         self.exclude_list = ExcludeList()
-        hash_cache_file = op.join(self.appdata, "hash_cache.db")
+        cache_url = (
+            db_path
+            or view.get_default("CacheURL")
+            or os.environ.get("DEDUP_CACHE_URL")
+            or os.environ.get("DUPEGURU_CACHE_URL")
+        )
+        hash_cache_file = cache_url or op.join(self.appdata, "hash_cache.db")
         fs.filesdb.connect(hash_cache_file)
         self.directories = directories.Directories(self.exclude_list)
         self.results = results.Results(self)
@@ -734,7 +740,7 @@ class DupeGuru(Broadcaster):
             d.rename(newname)
             return True
         except (IndexError, fs.FSError) as e:
-            logging.warning("dupeGuru Warning: %s" % str(e))
+            logging.warning("de-dup Warning: %s" % str(e))
         return False
 
     def reprioritize_groups(self, sort_key):
@@ -805,7 +811,7 @@ class DupeGuru(Broadcaster):
         fs.filesdb.last_scanned_path = None
         fs.filesdb.scanned_paths = set()
         fs.filesdb.hit_paths = set()
-        if not self.directories.has_any_file():
+        if not self.directories.has_any_file(fileclasses=self.fileclasses):
             self.view.show_message(tr("The selected directories contain no scannable file."))
             return
         # Send relevant options down to the scanner instance
@@ -824,62 +830,134 @@ class DupeGuru(Broadcaster):
                     pr = cProfile.Profile()
                     pr.enable()
 
-                # Check if this is a content-based scan and cache is enabled
-                is_contents_scan = scanner.scan_type == ScanType.CONTENTS
-                if is_contents_scan and fs.filesdb.enable_directory_cache:
-                    j.set_progress(0, tr("Collecting files to scan (populating cache)"))
-                    # Populate the cache database without holding file objects in RAM
-                    for _ in self.directories.get_files(fileclasses=self.fileclasses, j=j):
-                        pass
+                # Memory-safe scan dispatch with streaming/batching across all scan modes
+                is_size_compatible_scan = scanner.scan_type in (
+                    ScanType.CONTENTS,
+                    ScanType.FUZZYBLOCK,
+                    ScanType.EXIFTIMESTAMP,
+                )
+                if fs.filesdb.enable_directory_cache:
+                    j.set_progress(0, tr("Collecting files to scan across target directories"))
+                    self.directories.populate_cache(j=j)
 
-                    candidate_sizes = fs.filesdb.get_candidate_sizes()
-                    logging.info("Found %d candidate duplicate sizes in cache", len(candidate_sizes))
+                    if is_size_compatible_scan:
+                        candidate_sizes = fs.filesdb.get_candidate_sizes()
+                        logging.info("Found %d candidate duplicate sizes in cache", len(candidate_sizes))
 
-                    batch_size = 2000
-                    all_groups = []
+                        batch_size = 500
+                        all_groups = []
 
-                    # Process in size batches
-                    for idx in range(0, len(candidate_sizes), batch_size):
-                        j.check_if_cancelled()
-                        size_batch = candidate_sizes[idx : idx + batch_size]
+                        # Process in size batches
+                        try:
+                            total_sizes = len(candidate_sizes)
+                            for idx in range(0, total_sizes, batch_size):
+                                j.check_if_cancelled()
+                                progress = int((idx / max(total_sizes, 1)) * 100)
+                                j.set_progress(
+                                    progress,
+                                    tr("Hashing & comparing duplicate candidates ({:,}/{:,} size groups)...").format(
+                                        idx, total_sizes
+                                    ),
+                                )
+                                size_batch = candidate_sizes[idx : idx + batch_size]
 
+                                batch_files = []
+                                for f_data in fs.filesdb.get_files_by_sizes(size_batch):
+                                    p = fs.Path(f_data["path"])
+                                    file = fs.get_file(p, fileclasses=self.fileclasses, skip_disk_check=True)
+                                    if file:
+                                        file.size = f_data["size"]
+                                        file.mtime = f_data["mtime_ns"] / 1e9
+                                        if f_data.get("digest"):
+                                            file._digest = f_data["digest"]
+                                        if f_data.get("digest_partial"):
+                                            file._digest_partial = f_data["digest_partial"]
+                                        state = self.directories.get_state(p.parent)
+                                        file.is_ref = state == directories.DirectoryState.REFERENCE
+                                        batch_files.append(file)
+
+                                if self.options["ignore_hardlink_matches"]:
+                                    batch_files = self._remove_hardlink_dupes(batch_files)
+
+                                if batch_files:
+                                    batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
+                                    all_groups.extend(batch_groups)
+
+                                fs.filesdb.commit()
+
+                                del batch_files
+                                import gc
+
+                                gc.collect()
+                        except (MemoryError, job.JobCancelled):
+                            logging.info("Scan cancelled or memory cap reached. Retaining partial results.")
+
+                        self.results.groups = all_groups
+                        self.discarded_file_count = 0
+                    else:
+                        j.set_progress(0, tr("Collecting files to scan"))
+                        batch_size = 50000
+                        all_groups = []
                         batch_files = []
-                        for f_data in fs.filesdb.get_files_by_sizes(size_batch):
-                            p = fs.Path(f_data["path"])
-                            file = fs.get_file(p, fileclasses=self.fileclasses)
-                            if file:
-                                file.size = f_data["size"]
-                                file.mtime = f_data["mtime_ns"] / 1e9
-                                state = self.directories.get_state(p.parent)
-                                file.is_ref = state == directories.DirectoryState.REFERENCE
-                                batch_files.append(file)
 
-                        if self.options["ignore_hardlink_matches"]:
-                            batch_files = self._remove_hardlink_dupes(batch_files)
+                        for path in self.directories._dirs:
+                            for f_data in fs.filesdb.get_files_in_directory(path):
+                                j.check_if_cancelled()
+                                p = fs.Path(f_data["path"])
+                                file = fs.get_file(p, fileclasses=self.fileclasses, skip_disk_check=True)
+                                if file:
+                                    file.size = f_data["size"]
+                                    file.mtime = f_data["mtime_ns"] / 1e9
+                                    state = self.directories.get_state(p.parent)
+                                    file.is_ref = state == directories.DirectoryState.REFERENCE
+                                    batch_files.append(file)
+
+                                if len(batch_files) >= batch_size:
+                                    if self.options["ignore_hardlink_matches"]:
+                                        batch_files = self._remove_hardlink_dupes(batch_files)
+                                    batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
+                                    all_groups.extend(batch_groups)
+                                    batch_files.clear()
+                                    import gc
+
+                                    gc.collect()
 
                         if batch_files:
+                            if self.options["ignore_hardlink_matches"]:
+                                batch_files = self._remove_hardlink_dupes(batch_files)
                             batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
                             all_groups.extend(batch_groups)
+                            batch_files.clear()
 
-                        # Clean up memory immediately for the batch
-                        del batch_files
-                        import gc
+                        self.results.groups = all_groups
+                        self.discarded_file_count = 0
+                else:
+                    j.set_progress(0, tr("Collecting files to scan"))
+                    batch_size = 50000
+                    all_groups = []
+                    batch_files = []
 
-                        gc.collect()
+                    for file in self.directories.get_files(fileclasses=self.fileclasses, j=j):
+                        batch_files.append(file)
+                        if len(batch_files) >= batch_size:
+                            if self.options["ignore_hardlink_matches"]:
+                                batch_files = self._remove_hardlink_dupes(batch_files)
+                            batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
+                            all_groups.extend(batch_groups)
+                            batch_files.clear()
+                            import gc
+
+                            gc.collect()
+
+                    if batch_files:
+                        if self.options["ignore_hardlink_matches"]:
+                            batch_files = self._remove_hardlink_dupes(batch_files)
+                        batch_groups = scanner.get_dupe_groups(batch_files, self.ignore_list, j)
+                        all_groups.extend(batch_groups)
+                        batch_files.clear()
 
                     self.results.groups = all_groups
                     self.discarded_file_count = 0
-                else:
-                    j.set_progress(0, tr("Collecting files to scan"))
-                    if scanner.scan_type == ScanType.FOLDERS:
-                        files = list(self.directories.get_folders(folderclass=se.fs.Folder, j=j))
-                    else:
-                        files = list(self.directories.get_files(fileclasses=self.fileclasses, j=j))
-                    if self.options["ignore_hardlink_matches"]:
-                        files = self._remove_hardlink_dupes(files)
-                    logging.info("Scanning %d files" % len(files))
-                    self.results.groups = scanner.get_dupe_groups(files, self.ignore_list, j)
-                    self.discarded_file_count = scanner.discarded_file_count
 
                 if profile_scan:
                     pr.disable()

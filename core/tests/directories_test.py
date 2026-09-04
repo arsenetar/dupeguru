@@ -595,8 +595,16 @@ def test_directory_cache_yield_resumption(tmpdir):
         assert len(list(fs.filesdb.get_files_in_directory(p))) == 2
 
         # Modify size in database to prove next call reads from database cache
-        fs.filesdb.conn.execute("UPDATE files SET size = 9999 WHERE path = ?", (str(file1),))
-        fs.filesdb.conn.commit()
+        if hasattr(fs.filesdb, "_is_rust") and fs.filesdb._is_rust:
+            import sqlite3
+
+            conn = sqlite3.connect(str(db_path))
+            conn.execute("UPDATE files SET size = 9999 WHERE path = ?", (str(file1),))
+            conn.commit()
+            conn.close()
+        else:
+            fs.filesdb.conn.execute("UPDATE files SET size = 9999 WHERE path = ?", (str(file1),))
+            fs.filesdb.conn.commit()
 
         # Yield again - it should load from cache since the directory is marked scanned!
         files2 = list(d.get_files())
@@ -666,3 +674,12 @@ def test_streamed_batch_scanning(tmpdir):
         assert file2 in paths
     finally:
         fs.filesdb.enable_directory_cache = False
+
+
+def test_directories_clear():
+    dirs = Directories()
+    p = Path(tempfile.gettempdir())
+    dirs.add_path(p)
+    assert len(dirs) == 1
+    dirs.clear()
+    assert len(dirs) == 0

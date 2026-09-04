@@ -44,15 +44,15 @@ SetCompressor /SOLID lzma
 !verbose pop
 
 ; Application Specific Defines
-!define APPNAME "dupeGuru"
-!define COMPANYNAME "Hardcoded Software"
-!define DESCRIPTION "dupeGuru is a tool to find duplicate files on your computer."
+!define APPNAME "de-dup"
+!define COMPANYNAME "Tin Le"
+!define DESCRIPTION "de-dup is a high-performance cross-platform duplicate file scanner."
 !define APPLICENSE "LICENSE"           ; License is not in build directory
 !define APPICON "images\dgse_logo.ico" ; nor is the icon
 !define DISTDIR "dist"
-!define HELPURL "https://github.com/arsenetar/dupeguru/issues"
-!define UPDATEURL "https://dupeguru.voltaicideas.net/"
-!define ABOUTURL "https://dupeguru.voltaicideas.net/"
+!define HELPURL "https://github.com/TinLe/de-dup/issues"
+!define UPDATEURL "https://github.com/TinLe/de-dup"
+!define ABOUTURL "https://github.com/TinLe/de-dup"
 
 ; Static Defines
 !define UNINSTALLREGBASE "Software\Microsoft\Windows\CurrentVersion\Uninstall"
@@ -245,8 +245,7 @@ Section "Uninstall"
   ; Remove Files & Folders in Install Folder
   RMDir /r "$INSTDIR\core"
   RMDir /r "$INSTDIR\help"
-  RMDir /r "$INSTDIR\PyQt5"
-  RMDir /r "$INSTDIR\qt"
+  RMDir /r "$INSTDIR\web"
   RMDir /r "$INSTDIR\locale"
   Delete "$INSTDIR\*.exe"
   Delete "$INSTDIR\*.dll"

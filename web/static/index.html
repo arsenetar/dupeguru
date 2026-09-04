@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dupeGuru Web Console</title>
+    <title>de-dup Web Console</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/app.css?v=10">
 </head>
 <body>
     <div class="app-container">
         <!-- Sidebar: Directories & Browser -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <svg class="logo" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    <path d="M2 12h20"></path>
-                </svg>
-                <h2>dupeGuru Web</h2>
+            <div class="sidebar-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <svg class="logo" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2" fill="none">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        <path d="M2 12h20"></path>
+                    </svg>
+                    <h2 class="sidebar-title" style="margin: 0;">de-dup Web</h2>
+                </div>
+                <button id="sidebar-toggle-btn" class="btn text-btn sidebar-toggle-btn" style="padding: 4px 8px; font-size: 0.85rem;" title="Minimize/Expand Sidebar">◀</button>
             </div>
 
             <!-- Path Selection/File Browser -->
@@ -28,7 +31,8 @@
                 <h3>Add Directory</h3>
                 <div class="input-group">
                     <input type="text" id="manual-path-input" placeholder="Type or paste absolute path...">
-                    <button id="add-manual-path-btn" class="btn primary-btn">+</button>
+                    <button id="native-browse-btn" class="btn text-btn" title="Open native OS folder dialog" style="display: none; padding: 4px 8px; border: 1px solid var(--border-color); font-size: 0.85rem;">📁 Browse</button>
+                    <button id="add-manual-path-btn" class="btn primary-btn" title="Add path">+</button>
                 </div>
 
                 <h4 class="sub-heading">Browse Folders</h4>
@@ -45,10 +49,20 @@
 
             <!-- Added directories -->
             <div class="section-card">
-                <h3>Target Directories</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h3 style="margin: 0;">Target Directories</h3>
+                    <button id="clear-all-dirs-btn" class="btn text-btn danger-btn" style="font-size: 0.78rem; padding: 2px 8px;" title="Remove all target directories">🗑️ Clear All</button>
+                </div>
                 <ul id="directories-list" class="directories-list">
                     <!-- Loaded dynamically -->
                 </ul>
+            </div>
+
+            <!-- Database & Scan Name -->
+            <div class="section-card">
+                <h3>Scan Database Name</h3>
+                <input type="text" id="sidebar-scan-name-input" class="input-field" placeholder="e.g. Photos_2024" style="width: 100%;">
+                <div id="db-preview-label" style="margin-top: 6px; font-size: 0.75rem; color: var(--text-secondary);">Saves scan to isolated SQLite database file.</div>
             </div>
 
             <!-- Scan Preferences -->
@@ -101,7 +115,7 @@
 
             <!-- Action Controls -->
             <div class="action-footer" style="display: flex; gap: 8px; width: 100%;">
-                <button id="start-scan-btn" class="btn accent-btn large-btn" style="flex: 1;">Start Duplicate Scan</button>
+                <button id="start-scan-btn" class="btn accent-btn large-btn" style="flex: 1;">🚀 Launch Isolated DB Scan</button>
                 <button id="load-scan-btn" class="btn secondary-btn" style="padding: 10px 16px;">Load Scan</button>
             </div>
         </aside>
@@ -110,11 +124,60 @@
         <main class="main-content">
             <!-- Navigation Tabs -->
             <nav class="nav-tabs">
-                <button id="tab-scan" class="tab-btn active">Scan Console</button>
+                <button id="tab-scan" class="tab-btn active">Scan Console & Tasks</button>
+                <button id="tab-results-studio" class="tab-btn">📊 Duplicate Results Studio</button>
+                <button id="tab-cross-db" class="tab-btn">Cross-DB Deduplication</button>
                 <button id="tab-cache" class="tab-btn">Cache Database Viewer</button>
             </nav>
 
             <div id="scan-view-content" class="scan-view-content">
+                <!-- Recent Scan Databases Section -->
+                <div id="multiscan-section" class="section-card" style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Isolated Database Scans</h3>
+                                <span id="scans-count-badge" style="font-size: 0.75rem; background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 600;">0</span>
+                            </div>
+                            <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-secondary);">Each scan creates its own SQLite database file for independent processing & deduplication.</p>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input id="search-scans-input" type="text" placeholder="🔍 Search DBs..." style="font-size: 0.8rem; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.25); color: var(--text-primary); width: 140px;" />
+                            <div style="display: flex; background: rgba(0,0,0,0.25); padding: 2px; border-radius: 6px; border: 1px solid var(--border-color);">
+                                <button id="scans-view-cards-btn" class="btn text-btn" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; background: var(--accent); color: #fff;">🎴 Cards</button>
+                                <button id="scans-view-table-btn" class="btn text-btn" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; color: var(--text-secondary);">≡ Table</button>
+                            </div>
+                            <button id="toggle-multiscan-btn" class="btn text-btn" style="font-size: 0.82rem; padding: 5px 10px;" title="Collapse or expand section">▼ Hide DBs</button>
+                            <button id="new-scan-task-btn" class="btn primary-btn" style="font-size: 0.85rem;">+ Launch New DB Scan</button>
+                            <button id="refresh-scans-btn" class="btn text-btn" style="font-size: 0.85rem;">🔄</button>
+                        </div>
+                    </div>
+                    <div id="scans-content-wrapper" style="max-height: 320px; overflow-y: auto; transition: max-height 0.3s ease;">
+                        <div class="scans-grid" id="scans-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                            <!-- Rendered dynamically as cards -->
+                        </div>
+                        <div id="scans-table-container" class="table-wrapper hidden" style="max-height: 280px; overflow-y: auto;">
+                            <table class="results-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                                <thead>
+                                    <tr style="background: rgba(0,0,0,0.2); color: var(--text-secondary); text-align: left;">
+                                        <th style="padding: 8px 12px;">Scan Name</th>
+                                        <th style="padding: 8px 12px;">Status</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Files</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Hashed</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Matches</th>
+                                        <th style="padding: 8px 12px; text-align: right;">DB Size</th>
+                                        <th style="padding: 8px 12px;">Target Folder(s)</th>
+                                        <th style="padding: 8px 12px; text-align: right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scans-table-body">
+                                    <!-- Rendered dynamically as table rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Progress Screen -->
                 <div id="progress-container" class="progress-container hidden">
                     <div class="progress-card">
@@ -136,8 +199,13 @@
                             <h1>Scan Results</h1>
                             <p id="results-summary">No duplicates found yet.</p>
                         </div>
-                        <div class="results-actions" style="display: flex; gap: 8px;">
-                            <button id="save-results-btn" class="btn secondary-btn" style="padding: 10px 16px;">Save Results</button>
+                        <div class="results-actions" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <div class="pagination-top" style="display: flex; align-items: center; gap: 8px; margin-right: 8px;">
+                                <button id="results-prev-btn-top" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.85rem;" disabled>Prev</button>
+                                <span id="results-page-info-top" class="pagination-info" style="font-size: 0.85rem; font-weight: 600; color: var(--accent);">Page 1 of 1</span>
+                                <button id="results-next-btn-top" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.85rem;" disabled>Next</button>
+                            </div>
+                            <button id="save-results-btn" class="btn secondary-btn" style="padding: 8px 14px;">Save Results</button>
                             <button id="delete-marked-btn" class="btn danger-btn large-btn" disabled>Delete Marked Files</button>
                         </div>
                     </header>
@@ -173,7 +241,118 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 2.253M12 3a9.003 9.003 0 0 0-8.716 2.253M21 9.75c0 1.11-.89 2.25-2.25 2.25M3 9.75c0 1.11.89 2.25 2.25 2.25" />
                         </svg>
                         <h2>Find duplicate files in style</h2>
-                        <p>Add folders from the sidebar and start a scan to locate duplicate files, reclaim disk space, and manage hardlinks or symbolic links.</p>
+                        <p>Select folders from the sidebar folder browser, name your scan, and click <strong>Start Duplicate Scan</strong> to find duplicates instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full-Viewport Duplicate Results Studio Workspace -->
+            <div id="results-studio-container" class="results-studio-container hidden">
+                <div class="studio-toolbar">
+                    <div class="toolbar-left">
+                        <h2 style="margin: 0; font-size: 1.15rem; color: var(--text-primary);">📊 Duplicate Results Studio</h2>
+                        <span id="studio-summary-badge" class="studio-badge">No active results</span>
+                    </div>
+                    <div class="toolbar-controls" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="studio-search-input" class="studio-search-input" placeholder="🔍 Filter path or name...">
+                        <div class="group-jump-container" style="display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.25); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border-color);">
+                            <button id="studio-prev-group-btn" class="btn text-btn" title="Previous Group" style="padding: 2px 8px;">◀</button>
+                            <span id="studio-group-counter" style="font-size: 0.8rem; font-weight: 600; min-width: 90px; text-align: center;">Group 0 of 0</span>
+                            <button id="studio-next-group-btn" class="btn text-btn" title="Next Group" style="padding: 2px 8px;">▶</button>
+                        </div>
+                        <div class="density-picker" style="display: flex; background: rgba(0,0,0,0.25); padding: 2px; border-radius: 6px; border: 1px solid var(--border-color);">
+                            <button id="density-compact-btn" class="btn text-btn active" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px;">Compact</button>
+                            <button id="density-standard-btn" class="btn text-btn" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 4px;">Standard</button>
+                        </div>
+                        <button id="toggle-sidebar-collapse-btn" class="btn secondary-btn" style="font-size: 0.8rem; padding: 6px 12px;" title="Toggle Focus Mode">⤢ Focus Workspace</button>
+                    </div>
+                </div>
+
+                <!-- Dual-Axis Scrollable Results Grid -->
+                <div id="studio-grid-wrapper" class="studio-grid-wrapper">
+                    <table id="studio-results-table" class="studio-results-table">
+                        <thead>
+                            <tr>
+                                <th width="60" style="text-align: center;">Mark</th>
+                                <th width="90" style="text-align: center;">Match %</th>
+                                <th width="80" style="text-align: center;">Kind</th>
+                                <th>File Name</th>
+                                <th>Folder Location</th>
+                                <th width="130" style="text-align: right;">Size</th>
+                                <th width="180">Modification Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studio-results-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Sticky Reclaim Action Bar -->
+                <div id="studio-action-bar" class="studio-action-bar">
+                    <div class="action-bar-left">
+                        <span id="studio-marked-stats" style="font-weight: 600; color: var(--accent); font-size: 0.9rem;">0 files marked for deletion (0 B)</span>
+                    </div>
+                    <div class="action-bar-right" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button id="studio-mark-all-dupes-btn" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.82rem;">Mark All Duplicates</button>
+                        <button id="studio-unmark-all-btn" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.82rem;">Unmark All</button>
+                        <button id="studio-invert-selection-btn" class="btn secondary-btn" style="padding: 6px 12px; font-size: 0.82rem;">Invert Selection</button>
+                        <button id="studio-delete-marked-btn" class="btn danger-btn large-btn" disabled style="padding: 8px 16px;">🗑️ Delete Marked Files</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-DB Deduplication -->
+            <div id="cross-db-container" class="cross-db-container hidden">
+                <header class="cache-header">
+                    <div class="cache-header-left">
+                        <h1>Cross-Database Deduplication</h1>
+                        <p>Compare file hashes across multiple isolated databases without re-reading files from disk</p>
+                    </div>
+                    <div class="cache-controls">
+                        <button id="run-cross-match-btn" class="btn accent-btn" disabled>Compare Selected Databases</button>
+                    </div>
+                </header>
+
+                <div class="section-card" style="margin-bottom: 24px;">
+                    <h3>Select Databases to Compare</h3>
+                    <div id="cross-db-selection-list" class="cross-db-selection-list" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Cross-DB Results Table -->
+                <div id="cross-results-wrapper" class="table-wrapper hidden">
+                    <header class="results-header" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h2>Cross-DB Duplicate Groups</h2>
+                            <p id="cross-results-summary">Select 2 or more databases and click 'Compare Selected Databases'.</p>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button id="cross-mark-all-btn" class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;">Mark All Duplicates</button>
+                            <button id="cross-unmark-all-btn" class="btn secondary-btn text-btn" style="font-size: 0.8rem; padding: 6px 12px;">Unmark All</button>
+                            <button id="cross-transfer-studio-btn" class="btn accent-btn" style="font-size: 0.8rem; padding: 6px 12px;">📊 Open in Duplicate Results Studio</button>
+                        </div>
+                    </header>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th width="60" style="text-align: center;">Mark</th>
+                                <th width="80">Group #</th>
+                                <th>Database Origin</th>
+                                <th>File Path</th>
+                                <th width="120">Size</th>
+                                <th width="200">Hash Checksum</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cross-results-body">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+
+                    <div id="cross-action-bar" class="studio-action-bar" style="margin-top: 16px; border-radius: 8px;">
+                        <span id="cross-marked-stats" style="font-weight: 500; font-size: 0.9rem; color: var(--text-primary);">0 file(s) marked for deletion (0 B)</span>
+                        <button id="cross-delete-marked-btn" class="btn primary-btn danger-btn" disabled>🗑️ Delete Marked Files Across Databases</button>
                     </div>
                 </div>
             </div>
@@ -250,7 +429,33 @@
         </div>
     </div>
 
+    <!-- Launch New DB Scan Modal -->
+    <div id="new-scan-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="max-width: 540px;">
+            <h3>Launch New Isolated DB Scan</h3>
+            <p style="margin-bottom: 16px; color: var(--text-secondary);">Specify scan name and select target directory:</p>
+
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Scan / DB Name</label>
+                <input type="text" id="new-scan-name-input" class="input-field" placeholder="e.g. Photos_2024" style="width: 100%;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 500; text-align: left;">Target Directory Path</label>
+                <div class="input-group">
+                    <input type="text" id="new-scan-path-input" class="input-field" placeholder="Type path or click 'Use Selected'..." style="width: 100%;">
+                    <button id="use-sidebar-paths-btn" class="btn secondary-btn" type="button" style="white-space: nowrap;">Use Selected</button>
+                </div>
+            </div>
+
+            <div class="modal-actions" style="display: flex; gap: 8px; justify-content: flex-end;">
+                <button id="cancel-new-scan-btn" class="btn secondary-btn">Cancel</button>
+                <button id="submit-new-scan-btn" class="btn primary-btn">Launch Scan</button>
+            </div>
+        </div>
+    </div>
+
     <div id="toast" class="toast hidden"></div>
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js?v=11"></script>
 </body>
 </html>

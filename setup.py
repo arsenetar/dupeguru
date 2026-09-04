@@ -19,7 +19,6 @@ exts = [
         ],
         include_dirs=[str(Path("core", "pe", "modules"))],
     ),
-    Extension("qt.pe._block_qt", [str(Path("qt", "pe", "modules", "block.c"))]),
 ]
 
 headers = [str(Path("core", "pe", "modules", "common.h"))]

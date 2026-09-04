@@ -1,11 +1,12 @@
 [project]
-name = "dupeGuru"
+name = "de-dup"
 dynamic = ["version"]
-description = "dupeGuru is a tool to find duplicate files on your computer."
+description = "de-dup is a high-performance cross-platform duplicate file scanner forked from dupeGuru, featuring a Rust engine and HTML Web Console."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "GPL-3.0-only"
 authors = [
+    { name = "Tin Le", email = "tin@le.org" },
     { name = "Andrew Senetar", email = "arsenetar@voltaicideas.net" }
 ]
 classifiers = [
@@ -16,22 +17,22 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Desktop Environment :: File Managers",
 ]
 dependencies = [
     "Send2Trash>=1.8.2,<2.0.0",
     "mutagen>=1.46.0,<2.0.0",
     "distro>=1.8.0,<2.0.0",
-    "PyQt5>=5.15.0,<6.0",
     "pywin32>=228; sys_platform == 'win32'",
     "semantic-version>=2.0.0,<3.0.0",
     "xxhash>=3.0.0,<4.0.0",
+    "redis>=5.0.0,<6.0.0",
+    "pywebview>=5.0.0",
 ]
 
 [project.optional-dependencies]
@@ -54,7 +55,7 @@ Homepage = "https://github.com/arsenetar/dupeguru"
 dupeguru = "run:main"
 
 [tool.setuptools]
-packages = ["core", "hscommon", "qt"]
+packages = ["core", "hscommon", "web"]
 include-package-data = true
 
 [tool.setuptools.dynamic]
@@ -74,7 +75,7 @@ skip_gitignore = true
 
 [tool.ruff]
 line-length = 120
-target-version = "py38"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "B", "I"]

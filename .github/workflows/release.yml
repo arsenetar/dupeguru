@@ -23,16 +23,19 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Set up Python
-        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: 'pip'
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y gettext python3-venv build-essential
+          sudo apt-get install -y gettext python3-venv build-essential libwebkit2gtk-4.1-dev
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r requirements-extra.txt PyInstaller
 
@@ -58,25 +61,25 @@ jobs:
         run: |
           python package.py
           cd dist
-          zip -r ../dupeguru-mac.zip dupeguru.app
+          zip -r ../de-dup-mac.zip de-dup.app
 
       - name: Build Windows setup installer
         if: matrix.os == 'windows-latest'
         run: |
           python package.py
-          mv dist/dupeGuru_*.exe dupeguru-windows-installer.exe
+          mv dist/de-dup_*.exe de-dup-windows-installer.exe
 
       - name: Build Linux source archive
         if: matrix.os == 'ubuntu-latest'
         run: |
           python package.py --src
-          mv build/dupeguru-src-*.tar.xz dupeguru-src.tar.xz
+          mv build/de-dup-src-*.tar.xz de-dup-src.tar.xz
 
       - name: Publish Release Assets
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dupeguru-mac.zip
-            dupeguru-windows-installer.exe
-            dupeguru-src.tar.xz
+            de-dup-mac.zip
+            de-dup-windows-installer.exe
+            de-dup-src.tar.xz
           fail_on_unsupported_file: false
