@@ -223,6 +223,46 @@ class TestWebServerEndpoints(unittest.TestCase):
             self.assertIn("groups", res)
             self.assertIn("total_groups", res)
 
+    def test_security_static_path_traversal_blocked(self):
+        """Verifies that directory traversal attacks via static file requests are rejected with 404."""
+        import urllib.error
+
+        traversal_urls = [
+            f"{self.base_url}/static/../../../../etc/passwd",
+            f"{self.base_url}/static/%2e%2e/%2e%2e/build.py",
+        ]
+        for url in traversal_urls:
+            with self.assertRaises(urllib.error.HTTPError) as cm:
+                urllib.request.urlopen(url)
+            self.assertEqual(cm.exception.code, 404)
+
+    def test_security_task_id_validation(self):
+        """Verifies that malicious or path-traversing task IDs are rejected."""
+        # /api/scans/<malicious>
+        bad_task_url = f"{self.base_url}/api/scans/../../etc/passwd"
+        with urllib.request.urlopen(bad_task_url) as response:
+            self.assertEqual(response.status, 200)
+            res = json.loads(response.read().decode("utf-8"))
+            self.assertIn("error", res)
+
+        # POST /api/scans/delete with path traversal
+        req_del = urllib.request.Request(
+            f"{self.base_url}/api/scans/delete",
+            data=json.dumps({"task_id": "../sensitive"}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_del) as response:
+            res = json.loads(response.read().decode("utf-8"))
+            self.assertFalse(res.get("success"))
+
+    def test_security_browse_invalid_dir(self):
+        """Verifies that /api/browse rejects non-existent or invalid paths gracefully."""
+        browse_url = f"{self.base_url}/api/browse?path=/nonexistent_directory_12345"
+        with urllib.request.urlopen(browse_url) as response:
+            res = json.loads(response.read().decode("utf-8"))
+            self.assertIn("error", res)
+
 
 if __name__ == "__main__":
     unittest.main()

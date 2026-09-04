@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import uuid
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from core.domain.models import ScanTaskDTO, TaskStatus
@@ -137,6 +138,8 @@ class TaskRepository:
         self._tasks[task.task_id] = task
 
     def delete_task(self, task_id: str) -> bool:
+        if not task_id or "/" in task_id or "\\" in task_id or ".." in task_id or "\0" in task_id:
+            return False
         task = self.get_task(task_id)
         if not task:
             return False
@@ -144,17 +147,17 @@ class TaskRepository:
         if task_id in self._tasks:
             del self._tasks[task_id]
 
-        if os.path.exists(task.db_path):
-            try:
-                os.remove(task.db_path)
+        try:
+            resolved_db = Path(task.db_path).resolve(strict=True)
+            if resolved_db.is_file():
+                os.remove(str(resolved_db))
                 for ext in ["-wal", "-shm"]:
-                    extra = task.db_path + ext
+                    extra = str(resolved_db) + ext
                     if os.path.exists(extra):
                         os.remove(extra)
                 return True
-            except OSError as e:
-                logging.error(f"Failed to delete DB file {task.db_path}: {e}")
-                return False
+        except (OSError, ValueError):
+            return False
         return True
 
     def create_task(
@@ -169,15 +172,17 @@ class TaskRepository:
         if existing and not overwrite:
             return existing
 
-        safe_name = name.strip().replace(" ", "_").replace("/", "_")
+        safe_name = name.strip().replace(" ", "_").replace("/", "_").replace("\\", "_").replace("..", "_")
         task_id = existing.task_id if (existing and overwrite) else f"{safe_name}_{uuid.uuid4().hex[:8]}"
 
+        scans_dir_path = Path(self.scans_dir).resolve()
         if not db_filename:
-            db_path = existing.db_path if (existing and overwrite) else os.path.join(self.scans_dir, f"{task_id}.db")
+            db_path = existing.db_path if (existing and overwrite) else str(scans_dir_path / f"{task_id}.db")
         else:
-            if not db_filename.endswith(".db"):
-                db_filename += ".db"
-            db_path = os.path.join(self.scans_dir, db_filename)
+            safe_filename = os.path.basename(db_filename.strip().replace("/", "_").replace("\\", "_"))
+            if not safe_filename.endswith(".db"):
+                safe_filename += ".db"
+            db_path = str(scans_dir_path / safe_filename)
 
         if overwrite and os.path.exists(db_path):
             try:

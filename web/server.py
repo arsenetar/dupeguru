@@ -8,7 +8,7 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 # Prevent PyQt5 from being imported to avoid loading C-extensions in a multi-threaded
 # web server context, which can cause C-level segmentation faults.
@@ -153,6 +153,29 @@ def sanitize_utf8(obj):
     return obj
 
 
+def is_safe_task_id(task_id: Any) -> bool:
+    """Validate that task_id is a non-empty string without path traversal or null bytes."""
+    if not isinstance(task_id, str) or not task_id:
+        return False
+    if "\0" in task_id or "/" in task_id or "\\" in task_id or ".." in task_id:
+        return False
+    return True
+
+
+def sanitize_registered_db_path(p: Any) -> Optional[str]:
+    """Validate that a DB path is a canonical, existing .db file registered in task_repository."""
+    if not isinstance(p, str) or "\0" in p or not p:
+        return None
+    try:
+        abs_p = str(Path(p).resolve(strict=True))
+        if not abs_p.endswith(".db") or not os.path.isfile(abs_p):
+            return None
+        valid_paths = {str(Path(t.db_path).resolve()) for t in task_repository.refresh()}
+        return abs_p if abs_p in valid_paths else None
+    except (OSError, ValueError):
+        return None
+
+
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
 
@@ -170,10 +193,23 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
     def serve_static(self, file_path):
         """Helper to serve static HTML, CSS, and JS files."""
-        static_dir = PROJECT_ROOT / "web" / "static"
-        target_path = (static_dir / file_path).resolve()
+        if not isinstance(file_path, str) or "\0" in file_path:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Bad Request")
+            return
 
-        if not target_path.is_relative_to(static_dir) or not target_path.exists():
+        unquoted_path = urllib.parse.unquote(file_path).lstrip("/")
+        static_dir = (PROJECT_ROOT / "web" / "static").resolve()
+        try:
+            target_path = (static_dir / unquoted_path).resolve(strict=True)
+        except (OSError, ValueError):
+            self.send_response(404)
+            self.end_headers()
+            self.wfile.write(b"Not Found")
+            return
+
+        if not target_path.is_relative_to(static_dir) or not target_path.is_file():
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b"Not Found")
@@ -277,11 +313,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path.startswith("/api/scans/"):
             task_id = path.replace("/api/scans/", "")
-            task = task_repository.get_task(task_id)
-            if task:
-                self.wfile.write(json.dumps(task.to_dict()).encode())
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"error": "Invalid task ID"}).encode())
             else:
-                self.wfile.write(json.dumps({"error": "Task not found"}).encode())
+                task = task_repository.get_task(task_id)
+                if task:
+                    self.wfile.write(json.dumps(task.to_dict()).encode())
+                else:
+                    self.wfile.write(json.dumps({"error": "Task not found"}).encode())
 
         elif path == "/api/directories":
             dirs = [{"path": d, "state": 0} for d in server_state.get_directories()]
@@ -289,8 +328,14 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/browse":
             target_dir = query.get("path", [str(Path.home())])[0]
+            if not isinstance(target_dir, str) or "\0" in target_dir:
+                self.wfile.write(json.dumps({"error": "Invalid path specified"}).encode())
+                return
             try:
-                p = Path(target_dir).expanduser().resolve()
+                p = Path(target_dir).expanduser().resolve(strict=True)
+                if not p.is_dir():
+                    self.wfile.write(json.dumps({"error": "Path is not a directory"}).encode())
+                    return
                 contents = []
                 with os.scandir(str(p)) as it:
                     for entry in it:
@@ -361,12 +406,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 pass
 
             groups_data = []
-            active_id = query.get("task_id", [None])[0] or app_state.get("active_task_id")
+            req_task_id = query.get("task_id", [None])[0]
+            active_id = (
+                req_task_id
+                if is_safe_task_id(req_task_id)
+                else (app_state.get("active_task_id") if not req_task_id else None)
+            )
             total_groups = 0
             total_marked = 0
             batch_groups = []
 
-            if active_id:
+            if active_id and is_safe_task_id(active_id):
                 execution = task_runner.get_or_create_execution(active_id)
                 if execution and execution.db_engine:
                     if execution.results_groups is not None:
@@ -500,126 +550,126 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/scans/rescan":
             task_id = data.get("task_id")
-            if task_id:
-                app_state["active_task_id"] = task_id
-                app_state["status"] = "scanning"
-                app_state["scanning"] = True
-                app_state["progress"] = 0
-                app_state["progress_msg"] = f"Re-scanning task '{task_id}'..."
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
 
-                execution = task_runner.rescan_task(task_id)
-                if execution:
-                    self.wfile.write(
-                        json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
-                    )
-                else:
-                    self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
+            app_state["active_task_id"] = task_id
+            app_state["status"] = "scanning"
+            app_state["scanning"] = True
+            app_state["progress"] = 0
+            app_state["progress_msg"] = f"Re-scanning task '{task_id}'..."
+
+            execution = task_runner.rescan_task(task_id)
+            if execution:
+                self.wfile.write(
+                    json.dumps(sanitize_utf8({"success": True, "task": execution.get_dto().to_dict()})).encode()
+                )
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Missing task_id"}).encode())
+                self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
 
         elif path == "/api/scans/load":
             task_id = data.get("task_id")
-            if task_id:
-                app_state["active_task_id"] = task_id
-                execution = task_runner.get_or_create_execution(task_id)
-                if execution:
-                    dto = execution.get_dto()
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
 
-                    is_active = (execution.thread and execution.thread.is_alive()) or dto.status in [
-                        TaskStatus.DISCOVERING,
-                        TaskStatus.HASHING,
-                        TaskStatus.SCANNING,
-                    ]
+            app_state["active_task_id"] = task_id
+            execution = task_runner.get_or_create_execution(task_id)
+            if execution:
+                dto = execution.get_dto()
 
-                    if is_active:
-                        app_state["status"] = (
-                            dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status)
-                        )
-                        app_state["scanning"] = True
-                        self.wfile.write(
-                            json.dumps(
-                                sanitize_utf8(
-                                    {
-                                        "success": True,
-                                        "is_scanning": True,
-                                        "task": dto.to_dict(),
-                                    }
-                                )
-                            ).encode()
-                        )
-                        return
+                is_active = (execution.thread and execution.thread.is_alive()) or dto.status in [
+                    TaskStatus.DISCOVERING,
+                    TaskStatus.HASHING,
+                    TaskStatus.SCANNING,
+                ]
 
-                    if (
-                        dto.file_count > 0
-                        and dto.hashed_count < dto.file_count
-                        and not execution.db_engine.has_saved_duplicate_groups()
-                    ):
-                        execution.start(rescan=False)
-                        app_state["status"] = "hashing"
-                        app_state["scanning"] = True
-                        app_state["progress_msg"] = f"Hashing candidate files for '{dto.name}'..."
-                        self.wfile.write(
-                            json.dumps(
-                                sanitize_utf8(
-                                    {
-                                        "success": True,
-                                        "is_scanning": True,
-                                        "task": dto.to_dict(),
-                                    }
-                                )
-                            ).encode()
-                        )
-                        return
-
-                    if not execution.results_groups:
-                        try:
-                            from core.pipeline.matcher import DuplicateMatcher
-
-                            execution.results_groups = DuplicateMatcher(execution.db_engine).load_or_find_duplicates()
-                        except Exception as e:
-                            logging.error(f"Error matching candidate duplicates on load: {e}")
-
-                    app_state["status"] = "completed"
-                    app_state["scanning"] = False
-                    app_state["progress_msg"] = ""
-
+                if is_active:
+                    app_state["status"] = dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status)
+                    app_state["scanning"] = True
                     self.wfile.write(
                         json.dumps(
                             sanitize_utf8(
                                 {
                                     "success": True,
-                                    "is_scanning": False,
+                                    "is_scanning": True,
                                     "task": dto.to_dict(),
                                 }
                             )
                         ).encode()
                     )
-                else:
-                    self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
+                    return
+
+                if (
+                    dto.file_count > 0
+                    and dto.hashed_count < dto.file_count
+                    and not execution.db_engine.has_saved_duplicate_groups()
+                ):
+                    execution.start(rescan=False)
+                    app_state["status"] = "hashing"
+                    app_state["scanning"] = True
+                    app_state["progress_msg"] = f"Hashing candidate files for '{dto.name}'..."
+                    self.wfile.write(
+                        json.dumps(
+                            sanitize_utf8(
+                                {
+                                    "success": True,
+                                    "is_scanning": True,
+                                    "task": dto.to_dict(),
+                                }
+                            )
+                        ).encode()
+                    )
+                    return
+
+                if not execution.results_groups:
+                    try:
+                        from core.pipeline.matcher import DuplicateMatcher
+
+                        execution.results_groups = DuplicateMatcher(execution.db_engine).load_or_find_duplicates()
+                    except Exception as e:
+                        logging.error(f"Error matching candidate duplicates on load: {e}")
+
+                app_state["status"] = "completed"
+                app_state["scanning"] = False
+                app_state["progress_msg"] = ""
+
+                self.wfile.write(
+                    json.dumps(
+                        sanitize_utf8(
+                            {
+                                "success": True,
+                                "is_scanning": False,
+                                "task": dto.to_dict(),
+                            }
+                        )
+                    ).encode()
+                )
             else:
-                self.wfile.write(json.dumps({"success": False, "error": "Missing task_id"}).encode())
+                self.wfile.write(json.dumps({"success": False, "error": "Task not found"}).encode())
 
         elif path == "/api/scans/delete":
             task_id = data.get("task_id")
+            if not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
+                return
             deleted = task_repository.delete_task(task_id)
             self.wfile.write(json.dumps(sanitize_utf8({"success": deleted})).encode())
 
         elif path == "/api/cross_scan":
-            db_paths = data.get("db_paths", [])
+            raw_db_paths = data.get("db_paths", [])
             limit = int(data.get("limit", 500))
             offset = int(data.get("offset", 0))
-            if not db_paths:
+            if not raw_db_paths:
                 db_paths = [t.db_path for t in task_repository.refresh()]
             else:
                 # Sanitize and validate that requested db_paths are known registered task databases
-                valid_task_db_paths = {os.path.abspath(t.db_path) for t in task_repository.refresh()}
                 validated_db_paths = []
-                for p in db_paths:
-                    if not isinstance(p, str) or "\0" in p:
-                        continue
-                    abs_p = os.path.abspath(p)
-                    if abs_p in valid_task_db_paths and os.path.isfile(abs_p):
-                        validated_db_paths.append(abs_p)
+                for p in raw_db_paths:
+                    sanitized = sanitize_registered_db_path(p)
+                    if sanitized:
+                        validated_db_paths.append(sanitized)
                 db_paths = validated_db_paths
 
             server_state.update(
@@ -693,6 +743,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
         elif path == "/api/results/delete":
             task_id = data.get("task_id") or app_state.get("active_task_id")
+            if task_id and not is_safe_task_id(task_id):
+                self.wfile.write(json.dumps({"success": False, "error": "Invalid task_id"}).encode())
+                return
+
             paths_to_del = data.get("paths", [])
             delete_all_marked = data.get("delete_all_marked", False)
 
@@ -709,7 +763,12 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 if collected_paths:
                     paths_to_del = collected_paths
 
-            db_paths = data.get("db_paths", [])
+            raw_db_paths = data.get("db_paths", [])
+            db_paths = []
+            for p in raw_db_paths:
+                sanitized = sanitize_registered_db_path(p)
+                if sanitized:
+                    db_paths.append(sanitized)
 
             if not paths_to_del:
                 self.wfile.write(
