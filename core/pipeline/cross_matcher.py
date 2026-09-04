@@ -15,12 +15,15 @@ from core.paths import get_appdata_path
 
 class CrossDBMatcher:
     def __init__(self, db_paths: List[str], cache_dir: Optional[str] = None):
+        trusted_root = Path(get_appdata_path()).resolve()
+
         sanitized_paths = []
         for p in db_paths:
             if not isinstance(p, (str, bytes, os.PathLike)) or not p:
                 continue
             try:
                 resolved = Path(p).resolve(strict=True)
+                resolved.relative_to(trusted_root)
                 if resolved.is_file() and resolved.suffix == ".db":
                     sanitized_paths.append(str(resolved))
             except (OSError, ValueError):
@@ -28,9 +31,14 @@ class CrossDBMatcher:
         self.db_paths = sorted(set(sanitized_paths))
 
         if cache_dir is None:
-            resolved_cache_dir = Path(get_appdata_path()).resolve()
+            resolved_cache_dir = trusted_root
         else:
-            resolved_cache_dir = Path(cache_dir).resolve()
+            try:
+                candidate_cache_dir = Path(cache_dir).resolve()
+                candidate_cache_dir.relative_to(trusted_root)
+                resolved_cache_dir = candidate_cache_dir
+            except (OSError, ValueError):
+                resolved_cache_dir = trusted_root
         resolved_cache_dir.mkdir(parents=True, exist_ok=True)
         self.cache_db_path = str(resolved_cache_dir / "cross_scan_cache.db")
         self._init_cache_db()
