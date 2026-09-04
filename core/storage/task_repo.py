@@ -184,6 +184,13 @@ class TaskRepository:
                 safe_filename += ".db"
             db_path = str(scans_dir_path / safe_filename)
 
+        resolved_db_path = Path(db_path).resolve()
+        try:
+            resolved_db_path.relative_to(scans_dir_path)
+        except ValueError:
+            raise ValueError("Invalid database path: path escapes scans directory")
+        db_path = str(resolved_db_path)
+
         if overwrite and os.path.exists(db_path):
             try:
                 os.remove(db_path)
