@@ -8,16 +8,31 @@ import zlib
 from collections import defaultdict
 from typing import Any, Dict, List, Optional
 
+from pathlib import Path
+
 from core.paths import get_appdata_path
 
 
 class CrossDBMatcher:
     def __init__(self, db_paths: List[str], cache_dir: Optional[str] = None):
-        self.db_paths = sorted([os.path.abspath(p) for p in db_paths if os.path.exists(p)])
+        sanitized_paths = []
+        for p in db_paths:
+            if not isinstance(p, (str, bytes, os.PathLike)) or not p:
+                continue
+            try:
+                resolved = Path(p).resolve(strict=True)
+                if resolved.is_file() and resolved.suffix == ".db":
+                    sanitized_paths.append(str(resolved))
+            except (OSError, ValueError):
+                continue
+        self.db_paths = sorted(set(sanitized_paths))
+
         if cache_dir is None:
-            cache_dir = get_appdata_path()
-        os.makedirs(cache_dir, exist_ok=True)
-        self.cache_db_path = os.path.join(cache_dir, "cross_scan_cache.db")
+            resolved_cache_dir = Path(get_appdata_path()).resolve()
+        else:
+            resolved_cache_dir = Path(cache_dir).resolve()
+        resolved_cache_dir.mkdir(parents=True, exist_ok=True)
+        self.cache_db_path = str(resolved_cache_dir / "cross_scan_cache.db")
         self._init_cache_db()
 
     def _init_cache_db(self):

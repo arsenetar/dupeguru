@@ -101,3 +101,17 @@ def test_cross_db_matcher_default_cache_dir():
     matcher = CrossDBMatcher([])
     expected_cache_db = os.path.join(get_appdata_path(), "cross_scan_cache.db")
     assert matcher.cache_db_path == expected_cache_db
+
+
+def test_cross_db_matcher_path_validation():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        valid_db = os.path.join(tmpdir, "valid.db")
+        not_db = os.path.join(tmpdir, "invalid.txt")
+        non_existent = os.path.join(tmpdir, "does_not_exist.db")
+        with open(valid_db, "w") as f:
+            f.write("db")
+        with open(not_db, "w") as f:
+            f.write("txt")
+
+        matcher = CrossDBMatcher([valid_db, not_db, non_existent, "../traversal.db", None, 123])  # type: ignore
+        assert matcher.db_paths == [os.path.realpath(valid_db)]

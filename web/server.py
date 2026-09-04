@@ -610,6 +610,17 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             offset = int(data.get("offset", 0))
             if not db_paths:
                 db_paths = [t.db_path for t in task_repository.refresh()]
+            else:
+                # Sanitize and validate that requested db_paths are known registered task databases
+                valid_task_db_paths = {os.path.abspath(t.db_path) for t in task_repository.refresh()}
+                validated_db_paths = []
+                for p in db_paths:
+                    if not isinstance(p, str) or "\0" in p:
+                        continue
+                    abs_p = os.path.abspath(p)
+                    if abs_p in valid_task_db_paths and os.path.isfile(abs_p):
+                        validated_db_paths.append(abs_p)
+                db_paths = validated_db_paths
 
             server_state.update(
                 cross_matching=True,
