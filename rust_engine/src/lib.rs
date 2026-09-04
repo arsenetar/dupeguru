@@ -1063,6 +1063,24 @@ impl RustFilesDB {
         Ok(Self { engine })
     }
 
+    #[staticmethod]
+    pub fn open(cache_url: &str) -> PyResult<Self> {
+        let engine: Box<dyn CacheEngine + Send + Sync> =
+            if cache_url.starts_with("redis://")
+                || cache_url.starts_with("valkey://")
+                || cache_url.starts_with("rediss://")
+            {
+                let eng = RustValkeyCacheEngine::new(cache_url)
+                    .map_err(|e| PyValueError::new_err(format!("Redis connection error: {}", e)))?;
+                Box::new(eng)
+            } else {
+                let eng = RustSQLiteCacheEngine::new(cache_url)
+                    .map_err(|e| PyValueError::new_err(format!("SQLite connection error: {}", e)))?;
+                Box::new(eng)
+            };
+        Ok(Self { engine })
+    }
+
     pub fn clear(&self) -> PyResult<()> {
         self.engine.clear().map_err(PyValueError::new_err)
     }
@@ -1364,9 +1382,15 @@ pub fn cross_db_compare<'py>(
     Ok(dupe_groups)
 }
 
+#[pyfunction]
+fn create_files_db(cache_url: &str) -> PyResult<RustFilesDB> {
+    RustFilesDB::open(cache_url)
+}
+
 #[pymodule]
 fn dupeguru_rust(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RustFilesDB>()?;
+    m.add_function(wrap_pyfunction!(create_files_db, m)?)?;
     m.add_function(wrap_pyfunction!(collect_files_parallel, m)?)?;
     m.add_function(wrap_pyfunction!(hash_files_parallel, m)?)?;
     m.add_function(wrap_pyfunction!(cross_db_compare, m)?)?;

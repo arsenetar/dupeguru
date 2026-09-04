@@ -11,12 +11,7 @@ from multiprocessing import Pool
 from optparse import OptionParser
 from pathlib import Path
 
-from hscommon import loc, sphinxgen
-from hscommon.build import (
-    add_to_pythonpath,
-    fix_qt_resource_file,
-    print_and_do,
-)
+from hscommon.build import add_to_pythonpath
 
 
 def parse_args():
@@ -60,6 +55,8 @@ def parse_args():
 
 
 def build_one_help(language):
+    from hscommon import sphinxgen
+
     print(f"Generating Help in {language}")
     current_path = Path(".").absolute()
     changelog_path = current_path.joinpath("help", "changelog")
@@ -88,6 +85,8 @@ def build_help():
 
 
 def build_localizations():
+    from hscommon import loc
+
     loc.compile_all_po("locale")
     locale_dest = Path("build", "locale")
     if locale_dest.exists():
@@ -96,21 +95,25 @@ def build_localizations():
 
 
 def build_updatepot():
+    from hscommon import loc
+
     print("Building .pot files from source files")
     print("Building core.pot")
     loc.generate_pot(["core"], Path("locale", "core.pot"), ["tr"])
     print("Building columns.pot")
     loc.generate_pot(["core"], Path("locale", "columns.pot"), ["coltr"])
-    print("Building ui.pot")
-    loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
 
 
 def build_mergepot():
+    from hscommon import loc
+
     print("Updating .po files using .pot files")
     loc.merge_pots_into_pos("locale")
 
 
 def build_normpo():
+    from hscommon import loc
+
     loc.normalize_all_pos("locale")
 
 
@@ -137,19 +140,12 @@ def build_pe_modules():
     build_rust_engine()
 
 
-def build_normal(ui="qt"):
-    if ui == "qt":
-        print("Building de-dup with UI qt")
-    else:
-        print("Building de-dup")
+def build_normal(ui=None):
+    print("Building de-dup with pywebview desktop shell")
     add_to_pythonpath(".")
     build_pe_modules()
     print("Building localizations")
     build_localizations()
-    print("Building Qt stuff")
-    Path("qt", "dg_rc.py").unlink(missing_ok=True)
-    print_and_do("pyrcc5 {} > {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
-    fix_qt_resource_file(Path("qt", "dg_rc.py"))
     build_help()
 
 

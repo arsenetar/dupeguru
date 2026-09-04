@@ -21,16 +21,17 @@ from threading import Lock
 from typing import Any, AnyStr, Callable, Union
 
 try:
-    from .dupeguru_rust import RustFilesDB
+    from .dupeguru_rust import RustFilesDB, create_files_db
 
     HAS_RUST = True
 except ImportError:
     try:
-        from dupeguru_rust import RustFilesDB
+        from dupeguru_rust import RustFilesDB, create_files_db
 
         HAS_RUST = True
     except ImportError:
         HAS_RUST = False
+        create_files_db = None
 
 
 from hscommon.util import get_file_ext, nonone
@@ -812,7 +813,12 @@ class FilesDB:
             path_str = _clean_path_str(path)
             if HAS_RUST:
                 try:
-                    self.engine = RustFilesDB(path_str)
+                    if create_files_db is not None:
+                        self.engine = create_files_db(path_str)
+                    elif hasattr(RustFilesDB, "open"):
+                        self.engine = RustFilesDB.open(path_str)
+                    else:
+                        self.engine = RustFilesDB(path_str)
                     self._is_rust = True
                     logging.info("Using high-performance Rust cache database engine.")
                     return
