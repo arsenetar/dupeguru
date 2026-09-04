@@ -167,11 +167,11 @@ def sanitize_registered_db_path(p: Any) -> Optional[str]:
     if not isinstance(p, str) or "\0" in p or not p:
         return None
     try:
-        abs_p = str(Path(p).resolve(strict=True))
-        if not abs_p.endswith(".db") or not os.path.isfile(abs_p):
+        resolved_p = Path(p).resolve(strict=True)
+        if resolved_p.suffix.lower() != ".db" or not resolved_p.is_file():
             return None
-        valid_paths = {str(Path(t.db_path).resolve()) for t in task_repository.refresh()}
-        return abs_p if abs_p in valid_paths else None
+        valid_paths = {Path(t.db_path).resolve(strict=True) for t in task_repository.refresh()}
+        return str(resolved_p) if resolved_p in valid_paths else None
     except (OSError, ValueError):
         return None
 
@@ -661,6 +661,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             raw_db_paths = data.get("db_paths", [])
             limit = int(data.get("limit", 500))
             offset = int(data.get("offset", 0))
+            if raw_db_paths is None:
+                raw_db_paths = []
+            if not isinstance(raw_db_paths, list):
+                self.wfile.write(
+                    json.dumps({"success": False, "error": "db_paths must be a list of registered database paths"}).encode()
+                )
+                return
             if not raw_db_paths:
                 db_paths = [t.db_path for t in task_repository.refresh()]
             else:
