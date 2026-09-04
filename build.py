@@ -4,6 +4,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import os
 import shutil
 import subprocess
 import sys
@@ -121,7 +122,9 @@ def build_rust_engine():
     print("Building Rust Engine")
     cargo_cmd = shutil.which("cargo")
     if cargo_cmd and Path("rust_engine", "Cargo.toml").exists():
-        subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine")
+        cargo_env = os.environ.copy()
+        cargo_env["PYO3_PYTHON"] = sys.executable
+        subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine", env=cargo_env)
         target_so = "dupeguru_rust.dll" if sys.platform == "win32" else "libdupeguru_rust.so"
         dest_so = "dupeguru_rust.pyd" if sys.platform == "win32" else "dupeguru_rust.so"
         src_path = Path("rust_engine", "target", "release", target_so)

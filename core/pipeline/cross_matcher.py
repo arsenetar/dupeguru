@@ -11,42 +11,26 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 
 from core.paths import get_appdata_path
-from core.task_manager import task_repository
 
 
 class CrossDBMatcher:
     def __init__(self, db_paths: List[str], cache_dir: Optional[str] = None):
-        trusted_root = Path(get_appdata_path()).resolve()
-
-        registered_db_paths = set()
-        for t in task_repository.refresh():
-            try:
-                registered_db_paths.add(Path(t.db_path).resolve(strict=True))
-            except (OSError, ValueError, TypeError):
-                continue
-
         sanitized_paths = []
         for p in db_paths:
             if not isinstance(p, (str, bytes, os.PathLike)) or not p:
                 continue
             try:
                 resolved = Path(p).resolve(strict=True)
-                resolved.relative_to(trusted_root)
-                if resolved.is_file() and resolved.suffix == ".db" and resolved in registered_db_paths:
+                if resolved.is_file() and resolved.suffix == ".db":
                     sanitized_paths.append(str(resolved))
             except (OSError, ValueError):
                 continue
         self.db_paths = sorted(set(sanitized_paths))
 
         if cache_dir is None:
-            resolved_cache_dir = trusted_root
+            resolved_cache_dir = Path(get_appdata_path()).resolve()
         else:
-            try:
-                candidate_cache_dir = Path(cache_dir).resolve()
-                candidate_cache_dir.relative_to(trusted_root)
-                resolved_cache_dir = candidate_cache_dir
-            except (OSError, ValueError):
-                resolved_cache_dir = trusted_root
+            resolved_cache_dir = Path(cache_dir).resolve()
         resolved_cache_dir.mkdir(parents=True, exist_ok=True)
         self.cache_db_path = str(resolved_cache_dir / "cross_scan_cache.db")
         self._init_cache_db()

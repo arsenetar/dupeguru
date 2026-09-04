@@ -184,26 +184,16 @@ class TaskRepository:
                 safe_filename += ".db"
             db_path = str(scans_dir_path / safe_filename)
 
-        resolved_db_path = Path(db_path).resolve()
-        try:
-                resolved_db_path = Path(db_path).resolve()
-                resolved_db_path.relative_to(scans_dir_path)
-                if resolved_db_path.exists():
-                    os.remove(str(resolved_db_path))
-        except ValueError:
-                    extra = str(resolved_db_path) + ext
-        db_path = str(resolved_db_path)
-
-            except (OSError, ValueError):
+        if overwrite:
             try:
-                scans_root = Path(self.scans_dir).resolve()
                 resolved_db = Path(db_path).resolve()
-                resolved_db.relative_to(scans_root)
-                os.remove(str(resolved_db))
-                for ext in ["-wal", "-shm"]:
-                    extra = str(resolved_db) + ext
-                    if os.path.exists(extra):
-                        os.remove(extra)
+                resolved_db.relative_to(scans_dir_path)
+                if resolved_db.exists():
+                    os.remove(str(resolved_db))
+                    for ext in ["-wal", "-shm"]:
+                        extra = str(resolved_db) + ext
+                        if os.path.exists(extra):
+                            os.remove(extra)
             except (OSError, ValueError):
                 pass
 
