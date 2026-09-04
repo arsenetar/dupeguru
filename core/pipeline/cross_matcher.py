@@ -11,11 +11,19 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 
 from core.paths import get_appdata_path
+from core.task_manager import task_repository
 
 
 class CrossDBMatcher:
     def __init__(self, db_paths: List[str], cache_dir: Optional[str] = None):
         trusted_root = Path(get_appdata_path()).resolve()
+
+        registered_db_paths = set()
+        for t in task_repository.refresh():
+            try:
+                registered_db_paths.add(Path(t.db_path).resolve(strict=True))
+            except (OSError, ValueError, TypeError):
+                continue
 
         sanitized_paths = []
         for p in db_paths:
@@ -24,7 +32,7 @@ class CrossDBMatcher:
             try:
                 resolved = Path(p).resolve(strict=True)
                 resolved.relative_to(trusted_root)
-                if resolved.is_file() and resolved.suffix == ".db":
+                if resolved.is_file() and resolved.suffix == ".db" and resolved in registered_db_paths:
                     sanitized_paths.append(str(resolved))
             except (OSError, ValueError):
                 continue
