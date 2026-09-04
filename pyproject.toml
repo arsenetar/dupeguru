@@ -55,7 +55,7 @@ Homepage = "https://github.com/arsenetar/dupeguru"
 dupeguru = "run:main"
 
 [tool.setuptools]
-packages = ["core", "hscommon", "qt"]
+packages = ["core", "hscommon", "web"]
 include-package-data = true
 
 [tool.setuptools.dynamic]

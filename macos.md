@@ -1,45 +1,26 @@
-## How to build dupeGuru for macos
-These instructions are for the Qt version of the UI on macOS.
+## How to build de-dup for macOS
+These instructions are for building de-dup and running its native `pywebview` desktop UI on macOS.
 
-*Note: The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/arsenetar/dupeguru-cocoa and is no longer "supported".*
 ### Prerequisites
 
 - [Python 3.10+][python]
-- [Xcode 12.3][xcode] or just Xcode command line tools (older versions can be used if not interested in arm macs)
-- [Homebrew][homebrew]
-- [qt5](https://www.qt.io/)
+- [Xcode 12.3][xcode] or Xcode command line tools
+- [Rust & Cargo](https://rustup.rs/) (for compiling the native parallel engine)
 
 #### Prerequisite setup
-1. Install Xcode if desired
-2. Install [Homebrew][homebrew], if not on the path after install (arm based Macs) create `~/.zshrc`
-with `export PATH="/opt/homebrew/bin:$PATH"`. Will need to reload terminal or source the file to take
-effect.
-3. Install qt5 with `brew`. If you are using a version of macos without system python 3.10+ then you will
-also need to install that via brew or with pyenv.
+1. Install Xcode command line tools: `xcode-select --install`
+2. Install Python 3.10+ (via Homebrew or python.org)
 
-        $ brew install qt5
+### Build & Run
+de-dup uses standard Python virtual environments and compiles the native Rust extension automatically via `make`:
 
-    NOTE: Using `brew` to install qt5 is to allow pyqt5 to build without a native wheel
-    available.  If you are using an intel based mac you can probably skip this step.
+    $ cd <de-dup directory>
+    $ make
+    $ make run
 
-4. May need to launch a new terminal to have everything working.
-
-### With build.py
-OSX comes with a version of python 3 by default in newer versions of OSX. Python 3.10 or newer needs to be used. If needing to
-build pyqt5 from source then the first line below is needed, else it may be omitted. (Path shown is
-for an arm mac.)
-
-    $ export PATH="/opt/homebrew/opt/qt/bin:$PATH"
-    $ cd <dupeGuru directory>
-    $ python3 -m venv ./env
-    $ source ./env/bin/activate
-    $ pip install -r requirements.txt
-    $ python build.py
-    $ python run.py
-
-### Generate OSX Packages
+### Generate macOS Packages
 The extra requirements need to be installed to run packaging: `pip install -r requirements-extra.txt`.
-Run the following in the respective virtual environment.
+Run the following in the respective virtual environment:
 
     $ python package.py
 

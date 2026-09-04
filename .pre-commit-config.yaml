@@ -15,7 +15,7 @@ repos:
     rev: 7.3.0
     hooks:
       - id: flake8
-        exclude: ^(.tox|env|build|dist|help|qt/dg_rc.py|pkg).*
+        exclude: ^(.tox|env|build|dist|help|pkg).*
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.26.0
     hooks:

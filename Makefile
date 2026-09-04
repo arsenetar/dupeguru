@@ -261,7 +261,6 @@ dev-setup:
 	fi
 	@if [ "$$(uname)" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then \
 		missing=""; \
-		if ! command -v pyrcc5 >/dev/null 2>&1; then missing="$$missing python3-pyqt5 pyqt5-dev-tools"; fi; \
 		if ! dpkg -s python3-dev >/dev/null 2>&1; then missing="$$missing python3-dev"; fi; \
 		if ! dpkg -s build-essential >/dev/null 2>&1; then missing="$$missing build-essential"; fi; \
 		if [ -n "$$missing" ]; then \

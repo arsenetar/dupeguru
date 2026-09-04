@@ -6,6 +6,8 @@ babel==2.18.0
     # via sphinx
 black==26.5.1
     # via de-dup (pyproject.toml)
+bottle==0.13.4
+    # via pywebview
 certifi==2026.6.17
     # via requests
 cfgv==3.5.0
@@ -63,6 +65,8 @@ polib==1.2.0
     # via de-dup (pyproject.toml)
 pre-commit==4.6.2
     # via de-dup (pyproject.toml)
+proxy-tools==0.1.0
+    # via pywebview
 pycodestyle==2.14.0
     # via flake8
 pyflakes==3.4.0
@@ -71,18 +75,14 @@ pygments==2.20.0
     # via sphinx
 pyjwt==2.13.0
     # via redis
-pyqt5==5.15.11
-    # via de-dup (pyproject.toml)
-pyqt5-qt5==5.15.19
-    # via pyqt5
-pyqt5-sip==12.19.0
-    # via pyqt5
 pytest==7.4.4
     # via de-dup (pyproject.toml)
 python-discovery==1.6.0
     # via virtualenv
 pytokens==0.4.1
     # via black
+pywebview==6.2.1
+    # via de-dup (pyproject.toml)
 pyyaml==6.0.3
     # via pre-commit
 redis==5.3.1
@@ -111,6 +111,8 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
+typing-extensions==4.16.0
+    # via pywebview
 urllib3==2.7.0
     # via requests
 virtualenv==21.7.7
