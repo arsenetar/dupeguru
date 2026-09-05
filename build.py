@@ -125,8 +125,15 @@ def build_rust_engine():
         cargo_env = os.environ.copy()
         cargo_env["PYO3_PYTHON"] = sys.executable
         subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine", env=cargo_env)
-        target_so = "dupeguru_rust.dll" if sys.platform == "win32" else "libdupeguru_rust.so"
-        dest_so = "dupeguru_rust.pyd" if sys.platform == "win32" else "dupeguru_rust.so"
+        if sys.platform == "win32":
+            target_so = "dupeguru_rust.dll"
+            dest_so = "dupeguru_rust.pyd"
+        elif sys.platform == "darwin":
+            target_so = "libdupeguru_rust.dylib"
+            dest_so = "dupeguru_rust.so"
+        else:
+            target_so = "libdupeguru_rust.so"
+            dest_so = "dupeguru_rust.so"
         src_path = Path("rust_engine", "target", "release", target_so)
         dest_path = Path("core", dest_so)
         if src_path.exists():

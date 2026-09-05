@@ -87,7 +87,7 @@ class TestWebUIIntegrity(unittest.TestCase):
 class TestWebServerEndpoints(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp_dir = tempfile.mkdtemp()
+        cls.temp_dir = os.path.realpath(tempfile.mkdtemp())
         cls.server = ThreadedHTTPServer(("127.0.0.1", 0), DupeGuruHTTPHandler)
         cls.port = cls.server.server_address[1]
         cls.base_url = f"http://127.0.0.1:{cls.port}"
@@ -150,7 +150,7 @@ class TestWebServerEndpoints(unittest.TestCase):
         with urllib.request.urlopen(browse_url) as response:
             self.assertEqual(response.status, 200)
             browse_data = json.loads(response.read().decode("utf-8"))
-            self.assertEqual(browse_data.get("current"), self.temp_dir)
+            self.assertEqual(os.path.realpath(browse_data.get("current", "")), os.path.realpath(self.temp_dir))
 
         req_del = urllib.request.Request(
             f"{self.base_url}/api/directories?clear_all=true",

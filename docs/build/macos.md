@@ -6,7 +6,7 @@ This guide explains how to build **de-dup** and run its native `pywebview` deskt
 
 ## Prerequisites
 
-* **macOS 15 (Sequoia) or newer**
+* **OS X / macOS 26.x or newer (macOS 15+ / Darwin 24+)**
 * **Python 3.12+** (Python 3.12, 3.13, or 3.14 recommended via Homebrew or [python.org](https://www.python.org/))
 * **Xcode Command Line Tools** or full Xcode:
   ```bash
