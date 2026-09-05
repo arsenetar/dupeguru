@@ -181,10 +181,7 @@ modules: | env
 
 RUST_SRCS = $(wildcard rust_engine/src/*.rs) rust_engine/Cargo.toml
 
-ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Windows)
-RUST_SO = core/dupeguru_rust.pyd
-RUST_TARGET_SO = rust_engine/target/release/dupeguru_rust.dll
-else ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Darwin)
+ifeq ($(shell ${PYTHON} -c "import platform; print(platform.system())"), Darwin)
 RUST_SO = core/dupeguru_rust.so
 RUST_TARGET_SO = rust_engine/target/release/libdupeguru_rust.dylib
 else
