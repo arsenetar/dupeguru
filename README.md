@@ -8,7 +8,7 @@
 > - **HTML Web Console**: Responsive dark-mode web application for headless/remote server deployment.
 > - **Scalable Cache Database**: Instant 18ms SQLite file unlinking and 5ms Valkey/Redis cache scaling.
 
-**de-dup** is a cross-platform (Linux, macOS, Windows) tool to find and remove duplicate files on your computer. It includes a modern HTML Web UI Console as well as a native desktop shell powered by `pywebview`.
+**de-dup** is a cross-platform (Linux, macOS / OS X) tool to find and remove duplicate files on your computer. It includes a modern HTML Web UI Console as well as a native desktop shell powered by `pywebview`.
 
 ---
 
@@ -66,7 +66,7 @@ make web
 ## 🚀 Key Features
 
 ### 1. Native Desktop Shell & HTML Web Console
-- **pywebview Native Shell**: Native window frame on Windows 11 (WebView2), macOS (WebKit), and Linux (WebKitGTK) with native OS file dialogs.
+- **pywebview Native Shell**: Native window frame on macOS / OS X (WebKit) and Linux (WebKitGTK) with native OS file dialogs.
 - **Glassmorphic UI**: Responsive dark-mode interface designed for web browsers, desktop windows, and headless servers.
 - **Duplicate Results Studio**: Dedicated high-density duplicate management studio with interactive path previews, directory hierarchy tags, and one-click batch marking.
 - **Cross-Database Deduplication**: Compare duplicate sets across multiple isolated scan databases without merging or altering original scan metadata.
