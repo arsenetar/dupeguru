@@ -2,7 +2,7 @@
 """
 de-dup Desktop Application (pywebview Native Shell)
 Launches the background HTTP engine and displays the HTML/CSS/JS UI inside
-a lightweight native desktop window across macOS, Windows 11, and Linux.
+a lightweight native desktop window across macOS / OS X and Linux.
 Provides native file dialogs and OS desktop integrations via pywebview JS-API.
 """
 

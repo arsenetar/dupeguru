@@ -227,9 +227,9 @@ def main():
         print("Creating source package for de-dup")
         package_source_txz()
         return
-    print("Packaging de-dup with pywebview desktop shell")
     if sys.platform == "win32":
-        package_windows()
+        print("Windows is no longer supported.")
+        sys.exit(1)
     elif sys.platform == "darwin":
         package_macos()
     else:

@@ -14,7 +14,6 @@ classifiers = [
     "Intended Audience :: End Users/Desktop",
 
     "Operating System :: MacOS :: MacOS X",
-    "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
@@ -26,7 +25,6 @@ dependencies = [
     "Send2Trash>=1.8.2,<2.0.0",
     "mutagen>=1.46.0,<2.0.0",
     "distro>=1.8.0,<2.0.0",
-    "pywin32>=228; sys_platform == 'win32'",
     "semantic-version>=2.0.0,<3.0.0",
     "xxhash>=3.0.0,<4.0.0",
     "redis>=5.0.0,<6.0.0",
