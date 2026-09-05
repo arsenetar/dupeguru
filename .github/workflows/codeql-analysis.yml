@@ -36,10 +36,15 @@ jobs:
           # By default, queries listed here will override any specified in a config file.
           # Prefix the list here with "+" to use these queries and those in the config file.
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - if: matrix.language == 'cpp'
         name: Build Cpp
         run: |
-          make modules
+          python -m pip install --upgrade pip setuptools
+          python setup.py build_ext --inplace
       - if: matrix.language == 'python'
         name: Autobuild
         uses: github/codeql-action/autobuild@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # v4.31.9
