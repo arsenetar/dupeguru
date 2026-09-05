@@ -7,7 +7,7 @@ Welcome to the **de-dup User Guide**. This guide helps you set up, configure, an
 ## Guide Topics
 
 * **[Quick Start & Installation](quickstart.md)**
-  Install dependencies, build native binaries, and launch de-dup on Linux, macOS, or Windows.
+  Install dependencies, build native binaries, and launch de-dup on Linux or macOS / OS X.
 * **[HTML Web Console](web_console.md)**
   Use the responsive Web Console for browser-based, headless, or server execution.
 * **[Scanning Modes & Algorithms](scan_modes.md)**
