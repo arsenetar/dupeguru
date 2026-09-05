@@ -126,8 +126,7 @@ def build_rust_engine():
         cargo_env["PYO3_PYTHON"] = sys.executable
         subprocess.check_call([cargo_cmd, "build", "--release"], cwd="rust_engine", env=cargo_env)
         if sys.platform == "win32":
-            target_so = "dupeguru_rust.dll"
-            dest_so = "dupeguru_rust.pyd"
+            raise RuntimeError("Windows is not supported.")
         elif sys.platform == "darwin":
             target_so = "libdupeguru_rust.dylib"
             dest_so = "dupeguru_rust.so"

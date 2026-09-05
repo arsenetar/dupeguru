@@ -75,6 +75,24 @@ class TestPhase4WebAPI(unittest.TestCase):
             self.assertEqual(status_response["progress"], 0)
             self.assertEqual(status_response["active_task_id"], "status_test")
 
+    def test_duplicate_group_dto_serialization(self):
+        from core.domain.models import DuplicateGroupDTO, FileDTO
+
+        pivot = FileDTO(path="/path/to/pivot.txt", size=1024)
+        dup = FileDTO(path="/path/to/dup.txt", size=1024)
+        group = DuplicateGroupDTO(group_id=1, pivot=pivot, duplicates=[dup], saved_bytes=1024)
+
+        serialized = group.serialize_to_dict(group_index=5)
+        self.assertEqual(serialized["id"], 5)
+        self.assertEqual(serialized["percentage"], 100)
+        self.assertEqual(len(serialized["files"]), 2)
+        self.assertTrue(serialized["files"][0]["is_ref"])
+        self.assertFalse(serialized["files"][0]["marked"])
+        self.assertEqual(serialized["files"][0]["path"], "/path/to/pivot.txt")
+        self.assertFalse(serialized["files"][1]["is_ref"])
+        self.assertTrue(serialized["files"][1]["marked"])
+        self.assertEqual(serialized["files"][1]["path"], "/path/to/dup.txt")
+
 
 if __name__ == "__main__":
     unittest.main()

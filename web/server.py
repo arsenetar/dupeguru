@@ -259,7 +259,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         if path == "/api/status":
-            active_id = app_state.get("active_task_id")
+            active_id = server_state.get("active_task_id")
 
             status_str = "idle"
             scanning = False
@@ -277,26 +277,26 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     progress_msg = dto.progress_message
                     has_results = dto.match_count > 0
 
-            is_deleting = app_state.get("deleting", False)
-            is_cross_matching = app_state.get("cross_matching", False)
+            is_deleting = server_state.get("deleting", False)
+            is_cross_matching = server_state.get("cross_matching", False)
             if is_deleting:
                 status_str = "deleting"
-                progress = app_state.get("delete_progress", 0)
-                progress_msg = app_state.get("progress_msg", "Deleting duplicate files...")
+                progress = server_state.get("delete_progress", 0)
+                progress_msg = server_state.get("progress_msg", "Deleting duplicate files...")
             elif is_cross_matching:
                 status_str = "cross_matching"
-                progress_msg = app_state.get("cross_scan_msg", "Comparing cross-database duplicate matches...")
+                progress_msg = server_state.get("cross_scan_msg", "Comparing cross-database duplicate matches...")
 
             response = {
                 "status": status_str,
                 "scanning": scanning or is_cross_matching,
                 "deleting": is_deleting,
                 "cross_matching": is_cross_matching,
-                "delete_progress": app_state.get("delete_progress", 0),
-                "delete_total": app_state.get("delete_total", 0),
+                "delete_progress": server_state.get("delete_progress", 0),
+                "delete_total": server_state.get("delete_total", 0),
                 "progress": progress,
                 "progress_msg": progress_msg,
-                "messages": app_state.get("messages", []),
+                "messages": server_state.get("messages", []),
                 "targets": server_state.get_directories(),
                 "active_task_id": active_id,
                 "has_results": has_results,
@@ -366,7 +366,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
 
             files_list = []
             total_count = 0
-            active_id = app_state.get("active_task_id")
+            active_id = server_state.get("active_task_id")
             if active_id:
                 execution = task_runner.get_or_create_execution(active_id)
                 if execution and execution.db_engine:
@@ -410,7 +410,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             active_id = (
                 req_task_id
                 if is_safe_task_id(req_task_id)
-                else (app_state.get("active_task_id") if not req_task_id else None)
+                else (server_state.get("active_task_id") if not req_task_id else None)
             )
             total_groups = 0
             total_marked = 0
@@ -436,10 +436,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                         )
 
             for g_idx, g in enumerate(batch_groups):
-                files_data = []
-                if hasattr(g, "pivot"):
+                if hasattr(g, "serialize_to_dict"):
+                    groups_data.append(g.serialize_to_dict(group_index=offset + g_idx))
+                elif hasattr(g, "pivot"):
                     pivot = g.pivot
-                    files_data.append(
+                    files_data = [
                         {
                             "path": pivot.path,
                             "name": pivot.name,
@@ -451,7 +452,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                             "marked": False,
                             "markable": False,
                         }
-                    )
+                    ]
                     for d in g.duplicates:
                         files_data.append(
                             {
@@ -466,14 +467,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                                 "markable": True,
                             }
                         )
-
-                groups_data.append(
-                    {
-                        "id": offset + g_idx,
-                        "percentage": getattr(g, "percentage", 100),
-                        "files": files_data,
-                    }
-                )
+                    groups_data.append(
+                        {
+                            "id": offset + g_idx,
+                            "percentage": getattr(g, "percentage", 100),
+                            "files": files_data,
+                        }
+                    )
 
             response_data = {
                 "success": True,
@@ -538,7 +538,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 return
 
             task_dto = task_repository.create_task(name=name, directories=directories_list, overwrite=overwrite)
-            app_state["active_task_id"] = task_dto.task_id
+            server_state["active_task_id"] = task_dto.task_id
 
             execution = task_runner.start_task(task_dto.task_id)
             if execution:
@@ -554,11 +554,13 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
                 return
 
-            app_state["active_task_id"] = task_id
-            app_state["status"] = "scanning"
-            app_state["scanning"] = True
-            app_state["progress"] = 0
-            app_state["progress_msg"] = f"Re-scanning task '{task_id}'..."
+            server_state.update(
+                active_task_id=task_id,
+                status=TaskStatus.SCANNING.value,
+                scanning=True,
+                progress=0,
+                progress_msg=f"Re-scanning task '{task_id}'...",
+            )
 
             execution = task_runner.rescan_task(task_id)
             if execution:
@@ -574,7 +576,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid or missing task_id"}).encode())
                 return
 
-            app_state["active_task_id"] = task_id
+            server_state["active_task_id"] = task_id
             execution = task_runner.get_or_create_execution(task_id)
             if execution:
                 dto = execution.get_dto()
@@ -586,8 +588,10 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 ]
 
                 if is_active:
-                    app_state["status"] = dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status)
-                    app_state["scanning"] = True
+                    server_state.update(
+                        status=dto.status.value if isinstance(dto.status, TaskStatus) else str(dto.status),
+                        scanning=True,
+                    )
                     self.wfile.write(
                         json.dumps(
                             sanitize_utf8(
@@ -607,9 +611,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     and not execution.db_engine.has_saved_duplicate_groups()
                 ):
                     execution.start(rescan=False)
-                    app_state["status"] = "hashing"
-                    app_state["scanning"] = True
-                    app_state["progress_msg"] = f"Hashing candidate files for '{dto.name}'..."
+                    server_state.update(
+                        status=TaskStatus.HASHING.value,
+                        scanning=True,
+                        progress_msg=f"Hashing candidate files for '{dto.name}'...",
+                    )
                     self.wfile.write(
                         json.dumps(
                             sanitize_utf8(
@@ -631,9 +637,11 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                     except Exception as e:
                         logging.error(f"Error matching candidate duplicates on load: {e}")
 
-                app_state["status"] = "completed"
-                app_state["scanning"] = False
-                app_state["progress_msg"] = ""
+                server_state.update(
+                    status=TaskStatus.COMPLETED.value,
+                    scanning=False,
+                    progress_msg="",
+                )
 
                 self.wfile.write(
                     json.dumps(
@@ -744,7 +752,7 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(dirs).encode())
 
         elif path == "/api/scan":
-            active_id = app_state.get("active_task_id")
+            active_id = server_state.get("active_task_id")
             if active_id:
                 execution = task_runner.start_task(active_id)
                 if execution:
@@ -757,17 +765,19 @@ class DupeGuruHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": "No active task to scan"}).encode())
 
         elif path == "/api/scan/cancel":
-            active_id = app_state.get("active_task_id")
+            active_id = server_state.get("active_task_id")
             cancelled = task_runner.cancel_task(active_id) if active_id else False
-            app_state["scanning"] = False
-            app_state["status"] = "cancelled"
+            server_state.update(
+                scanning=False,
+                status=TaskStatus.CANCELLED.value,
+            )
             self.wfile.write(json.dumps({"success": cancelled}).encode())
 
         elif path == "/api/results/mark":
             self.wfile.write(json.dumps({"success": True}).encode())
 
         elif path == "/api/results/delete":
-            task_id = data.get("task_id") or app_state.get("active_task_id")
+            task_id = data.get("task_id") or server_state.get("active_task_id")
             if task_id and not is_safe_task_id(task_id):
                 self.wfile.write(json.dumps({"success": False, "error": "Invalid task_id"}).encode())
                 return

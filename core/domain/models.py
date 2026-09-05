@@ -43,6 +43,44 @@ class DuplicateGroupDTO:
     def total_files(self) -> int:
         return 1 + len(self.duplicates)
 
+    def serialize_to_dict(self, group_index: int = 0) -> Dict[str, Any]:
+        from hscommon.util import format_size
+        import os
+
+        files_data = [
+            {
+                "path": self.pivot.path,
+                "name": self.pivot.name,
+                "folder": os.path.dirname(self.pivot.path),
+                "size": format_size(self.pivot.size, 0, 1, False),
+                "mtime": "",
+                "percentage": "100%",
+                "is_ref": True,
+                "marked": False,
+                "markable": False,
+            }
+        ]
+        for d in self.duplicates:
+            files_data.append(
+                {
+                    "path": d.path,
+                    "name": d.name,
+                    "folder": os.path.dirname(d.path),
+                    "size": format_size(d.size, 0, 1, False),
+                    "mtime": "",
+                    "percentage": "100%",
+                    "is_ref": False,
+                    "marked": True,
+                    "markable": True,
+                }
+            )
+
+        return {
+            "id": group_index,
+            "percentage": 100,
+            "files": files_data,
+        }
+
 
 @dataclass
 class ScanTaskDTO:
