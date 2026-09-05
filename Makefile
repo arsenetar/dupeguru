@@ -162,9 +162,16 @@ endif
 
 env: | reqs
 ifndef NO_VENV
-	@echo "Creating virtualenv with uv"
-	uv venv $(VENV_OPTIONS) --allow-existing env
-	VIRTUAL_ENV=env uv pip install -e .[dev]
+	@if command -v uv >/dev/null 2>&1; then \
+		echo "Creating virtualenv with uv"; \
+		uv venv $(VENV_OPTIONS) --allow-existing env; \
+		VIRTUAL_ENV=env uv pip install -e .[dev]; \
+	else \
+		echo "uv not found; creating virtualenv with $(PYTHON) -m venv"; \
+		$(PYTHON) -m venv $(VENV_OPTIONS) env; \
+		./env/$(BIN)/python -m pip install --upgrade pip; \
+		./env/$(BIN)/python -m pip install -e .[dev]; \
+	fi
 endif
 
 
@@ -190,7 +197,7 @@ RUST_TARGET_SO = rust_engine/target/release/libdupeguru_rust.so
 endif
 
 $(RUST_SO): $(RUST_SRCS)
-	cd rust_engine && PYO3_PYTHON="$(CURDIR)/env/bin/python" cargo build --release
+	cd rust_engine && PYO3_PYTHON="$(CURDIR)/env/$(BIN)/python" cargo build --release
 	cp $(RUST_TARGET_SO) $(RUST_SO)
 
 rust: $(RUST_SO)

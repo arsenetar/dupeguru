@@ -33,13 +33,13 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7,<8",
+    "pytest>=9.1.1",
     "flake8",
     "black",
     "pyinstaller>=5.6; sys_platform != 'linux'",
     "sphinx>=5.3.0,<8.0.0",
     "polib>=1.1.0,<2.0.0",
-    "setuptools",
+    "setuptools>=84.0.0",
     "pre-commit",
 ]
 

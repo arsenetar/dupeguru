@@ -72,10 +72,12 @@ pycodestyle==2.14.0
 pyflakes==3.4.0
     # via flake8
 pygments==2.20.0
-    # via sphinx
+    # via
+    #   pytest
+    #   sphinx
 pyjwt==2.13.0
     # via redis
-pytest==7.4.4
+pytest==9.1.1
     # via de-dup (pyproject.toml)
 python-discovery==1.6.0
     # via virtualenv
@@ -93,7 +95,7 @@ semantic-version==2.10.0
     # via de-dup (pyproject.toml)
 send2trash==1.8.3
     # via de-dup (pyproject.toml)
-setuptools==82.0.1
+setuptools==84.0.0
     # via de-dup (pyproject.toml)
 snowballstemmer==3.1.1
     # via sphinx
