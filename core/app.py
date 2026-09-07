@@ -335,10 +335,14 @@ class DupeGuru(Broadcaster):
         result = []
         for file in files:
             try:
-                inode = file.path.stat().st_ino
+                stats = file.path.stat()
             except OSError:
                 # The file was probably deleted or something
                 continue
+            # An inode number is only unique within its filesystem, so two files on
+            # different devices can share one without being hardlinks. Keying on the
+            # inode alone dropped those from the scan.
+            inode = (stats.st_dev, stats.st_ino)
             if inode not in seen_inodes:
                 seen_inodes.add(inode)
                 result.append(file)
