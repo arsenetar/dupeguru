@@ -76,6 +76,21 @@ class TestCaseDupeGuru:
             eq_(call["dest_path"], Path(tmp_dir, "foo"))
             eq_(call["source_path"], f.path)
 
+    def test_copy_or_move_relative_outside_directories(self, tmpdir, monkeypatch):
+        # A dupe loaded from a results file can live outside every folder in the Directories panel.
+        # Recreating its relative path is then impossible: report a problem for that dupe instead of
+        # crashing the whole job (#1334, #1352).
+        p = Path(str(tmpdir))
+        p.joinpath("foo").touch()
+        monkeypatch.setattr(app, "smart_copy", log_calls(lambda source_path, dest_path: None))
+        dgapp = TestApp().app
+        f = fs.File(p.joinpath("foo"))
+        dest = p.joinpath("dest")
+        with pytest.raises(OSError):
+            dgapp.copy_or_move(f, True, str(dest), app.DestType.RELATIVE)
+        eq_(0, len(app.smart_copy.calls))
+        assert not dest.exists()
+
     def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
         tmppath = Path(str(tmpdir))
         sourcepath = tmppath.joinpath("source")
