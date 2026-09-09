@@ -380,6 +380,13 @@ class DupeGuru(Broadcaster):
             self.notify("directories_changed")
         except directories.AlreadyThereError:
             self.view.show_message(tr("'{}' already is in the list.").format(d))
+        except directories.UnreachablePathError:
+            self.view.show_message(
+                tr(
+                    "'{}' could not be read. It might be on a disconnected network share, "
+                    "or you might not have the permission to access it."
+                ).format(d)
+            )
         except directories.InvalidPathError:
             self.view.show_message(tr("'{}' does not exist.").format(d))
 
