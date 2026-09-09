@@ -1,3 +1,7 @@
+=== 4.3.1^20260909git (2026-09-09)
+* Only treat files as hardlinks when the device matches too
+* fix: Report a problem instead of crashing on relative copy/move
+
 === 4.3.1^20260901git (2026-09-01)
 * Don't crash on startup when a saved folder is unreachable
 
