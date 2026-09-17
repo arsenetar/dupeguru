@@ -102,6 +102,7 @@ class SqliteCache:
     def _create_con(self, second_try=False):
         try:
             self.con = sqlite.connect(self.dbname, isolation_level=None)
+            self.con.execute("PRAGMA journal_mode=WAL")
             self._check_upgrade()
         except sqlite.DatabaseError as e:  # corrupted db
             if second_try:
