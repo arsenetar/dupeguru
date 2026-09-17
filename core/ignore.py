@@ -7,6 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from xml.etree import ElementTree as ET
+from defusedxml.ElementTree import parse as safe_parse
 
 from hscommon.util import FileOrPath
 
@@ -96,7 +97,7 @@ class IgnoreList:
         infile can be a file object or a filename.
         """
         try:
-            root = ET.parse(infile).getroot()
+            root = safe_parse(infile).getroot()
         except Exception:
             return
         file_elems = (e for e in root if e.tag == "file")

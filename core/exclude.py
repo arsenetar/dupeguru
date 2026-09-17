@@ -4,6 +4,7 @@
 
 from core.markable import Markable
 from xml.etree import ElementTree as ET
+from defusedxml.ElementTree import parse as safe_parse
 
 # TODO: perhaps use regex module for better Unicode support? https://pypi.org/project/regex/
 # also https://pypi.org/project/re2/
@@ -321,7 +322,7 @@ class ExcludeList(Markable):
         infile can be a file object or a filename.
         """
         try:
-            root = ET.parse(infile).getroot()
+            root = safe_parse(infile).getroot()
         except Exception as e:
             logging.warning(f"Error while loading {infile}: {e}")
             self.restore_defaults()

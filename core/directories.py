@@ -6,6 +6,7 @@
 
 import os
 from xml.etree import ElementTree as ET
+from defusedxml.ElementTree import parse as safe_parse
 import logging
 from pathlib import Path
 
@@ -246,7 +247,7 @@ class Directories:
         :param file infile: path or file pointer to XML generated through :meth:`save_to_file`
         """
         try:
-            root = ET.parse(infile).getroot()
+            root = safe_parse(infile).getroot()
         except Exception:
             return
         for rdn in root.iter("root_directory"):
