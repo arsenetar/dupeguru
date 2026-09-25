@@ -90,6 +90,26 @@ class TestCaseDupeGuru:
         eq_(1, len(calls))
         eq_(sourcepath, calls[0]["path"])
 
+    def test_copy_or_move_no_location_path(self, tmpdir, monkeypatch):
+        # dupe path has no parent in self.directories (e.g. directory removed
+        # between scan and copy); previously raised AttributeError on None
+        p = Path(str(tmpdir))
+        p.joinpath("foo").touch()
+        monkeypatch.setattr(
+            hscommon.conflict,
+            "smart_copy",
+            log_calls(lambda source_path, dest_path: None),
+        )
+        monkeypatch.setattr(app, "smart_copy", hscommon.conflict.smart_copy)
+        monkeypatch.setattr(os, "makedirs", lambda path: None)
+        dgapp = TestApp().app
+        dgapp.directories.add_path(p)
+        [f] = dgapp.directories.get_files()
+        dgapp.directories._dirs.clear()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dgapp.copy_or_move(f, True, tmp_dir, 1)
+            eq_(1, len(hscommon.conflict.smart_copy.calls))
+
     def test_scan_with_objects_evaluating_to_false(self):
         class FakeFile(fs.File):
             def __bool__(self):
