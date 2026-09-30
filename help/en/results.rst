@@ -162,8 +162,8 @@ Action Menu
 **Reveal Selected in Finder:**
     Open the folder containing selected file.
 **Invoke Custom Command:**
-    Invokes the external application you've set up in your preferences using the current selection
-    as arguments in the invocation.
+    Invokes the external application you've set up in your preferences once for each marked
+    duplicate. Marked means the delete checkmark, not the blue row selection.
 **Rename Selected:**
     Prompts you for a new name, and then rename the selected file.
 

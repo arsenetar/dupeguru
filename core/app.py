@@ -530,22 +530,26 @@ class DupeGuru(Broadcaster):
     def invoke_custom_command(self):
         """Calls command in ``CustomCommand`` pref with ``%d`` and ``%r`` placeholders replaced.
 
-        Using the current selection, ``%d`` is replaced with the currently selected dupe and ``%r``
-        is replaced with that dupe's ref file. If there's no selection, the command is not invoked.
-        If the dupe is a ref, ``%d`` and ``%r`` will be the same.
+        Walks marked duplicates (the delete checkmarks), not the blue row selection. ``%d`` is
+        replaced with each marked duplicate and ``%r`` with that duplicate's reference. Reference
+        rows are never passed as ``%d``. If nothing is marked, the command is not invoked.
+
+        Rows stay in the result list. A non-zero exit, or a failure to start the command, is
+        logged and does not stop the remaining marked duplicates.
         """
         cmd = self.view.get_default("CustomCommand")
         if not cmd:
             msg = tr("You have no custom command set up. Set it up in your preferences.")
             self.view.show_message(msg)
             return
-        if not self.selected_dupes:
+        # Same set as delete: non-reference dupes with the checkmark. is_marked honors mark-all
+        # (inverted), which is not the same as the internal marked set.
+        dupes = [dupe for dupe in self.results.dupes if self.results.is_marked(dupe)]
+        if not dupes:
+            self.view.show_message(MSG_NO_MARKED_DUPES)
             return
-        dupes = self.selected_dupes
-        refs = [self.results.get_group_of_duplicate(dupe).ref for dupe in dupes]
-        for dupe, ref in zip(dupes, refs):
-            dupe_cmd = cmd.replace("%d", str(dupe.path))
-            dupe_cmd = dupe_cmd.replace("%r", str(ref.path))
+
+        def run_one(dupe_cmd):
             match = re.match(r'"([^"]+)"(.*)', dupe_cmd)
             if match is not None:
                 # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
@@ -553,15 +557,41 @@ class DupeGuru(Broadcaster):
                 # a workaround to make the damn thing work.
                 exepath, args = match.groups()
                 path, exename = op.split(exepath)
-                p = subprocess.Popen(
+                proc = subprocess.Popen(
                     exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
                 )
-                output = p.stdout.read()
-                logging.info("Custom command %s %s: %s", exename, args, output)
+                label = "{} {}".format(exename, args)
             else:
-                p = subprocess.Popen(dupe_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                output = p.stdout.read()
-                logging.info("Custom command %s: %s", dupe_cmd, output)
+                proc = subprocess.Popen(dupe_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                label = dupe_cmd
+            output = proc.stdout.read()
+            returncode = proc.wait()
+            if returncode:
+                logging.warning("Custom command %s exited %s: %s", label, returncode, output)
+            else:
+                logging.info("Custom command %s: %s", label, output)
+            return returncode
+
+        failed = 0
+        for dupe in dupes:
+            group = self.results.get_group_of_duplicate(dupe)
+            if group is None or group.ref is dupe:
+                continue
+            dupe_cmd = cmd.replace("%d", str(dupe.path))
+            dupe_cmd = dupe_cmd.replace("%r", str(group.ref.path))
+            try:
+                if run_one(dupe_cmd):
+                    failed += 1
+            except OSError as e:
+                failed += 1
+                logging.warning("Custom command failed for %s: %s", dupe.path, e)
+        if failed:
+            self.view.show_message(
+                tr(
+                    "The custom command failed for {} of {} marked files. "
+                    "The others were still processed, and nothing was removed from the results."
+                ).format(failed, len(dupes))
+            )
 
     def load(self):
         """Load directory selection and ignore list from files in appdata.
