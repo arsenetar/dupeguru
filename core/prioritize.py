@@ -6,10 +6,43 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
+import re
+from functools import total_ordering
+from typing import Any, List, Union
+
 from hscommon.util import dedupe, flatten, rem_file_ext
 from hscommon.trans import trget, tr
 
 coltr = trget("columns")
+
+
+@total_ordering
+class Descending:
+    """Sort key wrapper that reverses the order of the key it wraps.
+
+    Numbers can be negated to sort them in descending order, but strings and lists can't.
+    """
+
+    def __init__(self, key: Any) -> None:
+        self.key = key
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, Descending) and self.key == other.key
+
+    def __lt__(self, other: "Descending") -> bool:
+        return self.key > other.key
+
+
+def natural_sort_key(text: str) -> List[Union[str, int]]:
+    """Sort key that compares runs of digits by their value, so that "file9" comes before "file10".
+
+    Everything else compares case-insensitively.
+    """
+    # With a capturing group, re.split() alternates text and digit runs: the digit runs are always
+    # at the odd indexes, so two keys never compare a number with a string. \d only matches the
+    # decimal digits int() accepts, unlike str.isdigit(), which also accepts "²".
+    parts = re.split(r"(\d+)", text.casefold())
+    return [int(part) if i % 2 else part for i, part in enumerate(parts)]
 
 
 class CriterionCategory:
@@ -98,6 +131,10 @@ class FilenameCategory(CriterionCategory):
     SHORTEST = 3
     LONGEST_PATH = 4
     SHORTEST_PATH = 5
+    A_TO_Z = 6
+    Z_TO_A = 7
+    NATURAL_A_TO_Z = 8
+    NATURAL_Z_TO_A = 9
 
     def format_criterion_value(self, value):
         return {
@@ -107,6 +144,10 @@ class FilenameCategory(CriterionCategory):
             self.SHORTEST: tr("Shortest"),
             self.LONGEST_PATH: tr("Longest Path"),
             self.SHORTEST_PATH: tr("Shortest Path"),
+            self.A_TO_Z: tr("A to Z"),
+            self.Z_TO_A: tr("Z to A"),
+            self.NATURAL_A_TO_Z: tr("A to Z, natural order"),
+            self.NATURAL_Z_TO_A: tr("Z to A, natural order"),
         }[value]
 
     def extract_value(self, dupe):
@@ -124,6 +165,12 @@ class FilenameCategory(CriterionCategory):
             return len(str(dupe.folder_path)) * -1
         elif crit_value == self.SHORTEST_PATH:
             return len(str(dupe.folder_path))
+        elif crit_value in {self.A_TO_Z, self.Z_TO_A}:
+            key = value.casefold()
+            return key if crit_value == self.A_TO_Z else Descending(key)
+        elif crit_value in {self.NATURAL_A_TO_Z, self.NATURAL_Z_TO_A}:
+            key = natural_sort_key(value)
+            return key if crit_value == self.NATURAL_A_TO_Z else Descending(key)
         else:
             value = len(value)
             if crit_value == self.LONGEST:
@@ -140,6 +187,10 @@ class FilenameCategory(CriterionCategory):
                 self.SHORTEST,
                 self.LONGEST_PATH,
                 self.SHORTEST_PATH,
+                self.A_TO_Z,
+                self.Z_TO_A,
+                self.NATURAL_A_TO_Z,
+                self.NATURAL_Z_TO_A,
             ]
         ]
 
