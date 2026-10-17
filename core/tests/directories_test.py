@@ -46,6 +46,28 @@ def create_fake_fs(rootpath):
     return rootpath
 
 
+def create_dir_link(target, link):
+    """Creates a directory link, preferring symlinks, falling back to junctions on Windows.
+
+    Junctions don't require the privileges that symlinks do, so this works on stock
+    Windows. Returns False when the platform can't create either kind of link.
+    """
+    try:
+        os.symlink(str(target), str(link), target_is_directory=True)
+        return True
+    except (OSError, NotImplementedError, AttributeError):
+        pass
+    if ISWINDOWS:
+        try:
+            import _winapi
+
+            _winapi.CreateJunction(str(target), str(link))
+            return True
+        except (OSError, AttributeError):
+            pass
+    return False
+
+
 testpath = None
 
 
@@ -306,6 +328,44 @@ def test_get_files_does_not_choke_on_non_existing_directories(tmpdir):
     d.add_path(p)
     shutil.rmtree(str(p))
     eq_([], list(d.get_files()))
+
+
+def test_get_files_handles_links_looping_back_into_the_scanned_tree(tmpdir):
+    # A link pointing back into one of its own parents used to make _get_files() recurse
+    # until the interpreter stack overflowed. (#1188, #1275, #1430)
+    rootpath = Path(str(tmpdir))
+    subpath = rootpath.joinpath("subdir")
+    subpath.mkdir()
+    rootpath.joinpath("rootfile.test").touch()
+    subpath.joinpath("subfile.test").touch()
+    linkpath = subpath.joinpath("loop")
+    if not create_dir_link(rootpath, linkpath):
+        # Nothing to test when the platform can't create directory links.
+        return
+    d = Directories()
+    d.add_path(rootpath)
+    files = [file.name for file in d.get_files()]
+    # The loop is skipped and each file is yielded once.
+    eq_(sorted(files), ["rootfile.test", "subfile.test"])
+
+
+def test_get_files_handles_deeply_nested_directories(tmpdir):
+    # The directory walk used to recurse, which overflowed the stack on deeply nested
+    # trees. (#1188, #1275, #1430)
+    rootpath = Path(str(tmpdir)).joinpath("deep")
+    if ISWINDOWS:
+        # The extended-length prefix leaves room for the nested path beyond MAX_PATH.
+        rootpath = Path("\\\\?\\" + str(rootpath))
+    currentpath = rootpath
+    currentpath.mkdir(parents=True)
+    for _ in range(1200):
+        currentpath = currentpath.joinpath("d")
+        currentpath.mkdir()
+    currentpath.joinpath("deepfile.test").touch()
+    d = Directories()
+    d.add_path(rootpath)
+    files = [file.name for file in d.get_files()]
+    eq_(files, ["deepfile.test"])
 
 
 def test_get_state_returns_excluded_by_default_for_hidden_directories(tmpdir):
