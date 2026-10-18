@@ -43,6 +43,12 @@ Preferences
     When this option is enabled, folders are deleted after a file is deleted or moved and the folder
     is empty.
 
+**Partially hash files bigger than:**
+    Only used by the **Contents** and **Folders** scan types. Files bigger than this size are first
+    compared by samples taken from a few places in them, so files that differ there are never read
+    in full. This saves time on big files of the same size. Files whose samples match are still
+    compared in full.
+
 **Copy and Move:**
     Determines how the Copy and Move operations (in the Action menu) will behave.
 

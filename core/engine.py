@@ -282,8 +282,10 @@ def getmatches(
 def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
     """Returns a list of :class:`Match` within ``files`` if their contents is the same.
 
-    :param bigsize: The size in bytes over which we consider files big enough to
-                    justify taking samples of the file for hashing. If 0, compute digest as usual.
+    :param bigsize: The size in bytes over which files are first compared by samples taken at a
+                    few places in them, so that big files that differ there are never read in full.
+                    Files whose samples match are still fully hashed before they can match. If 0,
+                    files are fully hashed as soon as their partial digests match.
     :param j: A :ref:`job progress instance <jobs>`.
     """
     size2files = defaultdict(set)
@@ -306,11 +308,12 @@ def getmatches_by_contents(files, bigsize=0, j=job.nulljob):
             # if digests are the same (and not None) then files match
             if first.digest_partial is not None and first.digest_partial == second.digest_partial:
                 if bigsize > 0 and first.size > bigsize:
-                    if first.digest_samples is not None and first.digest_samples == second.digest_samples:
-                        result.append(Match(first, second, 100))
-                else:
-                    if first.digest is not None and first.digest == second.digest:
-                        result.append(Match(first, second, 100))
+                    # Samples can only tell that big files differ: files that differ outside the
+                    # sampled parts have the same samples, so a match still needs the full digest.
+                    if first.digest_samples is None or first.digest_samples != second.digest_samples:
+                        continue
+                if first.digest is not None and first.digest == second.digest:
+                    result.append(Match(first, second, 100))
         group_count += 1
         j.add_progress(desc=PROGRESS_MESSAGE % (len(result), group_count))
     return result
