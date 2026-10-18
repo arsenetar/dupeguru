@@ -5,8 +5,9 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 import logging
+import sqlite3
 
-from pytest import raises, skip
+from pytest import mark, raises, skip
 from hscommon.testutil import eq_
 
 try:
@@ -116,6 +117,53 @@ class TestCaseSqliteCache(BaseTestCaseCache):
             return SqliteCache(dbname)
         else:
             return SqliteCache()
+
+    @mark.parametrize("version", [None, 1, SqliteCache.schema_version])
+    def test_legacy_schema(self, tmpdir, version):
+        dbname = str(tmpdir.join("legacy.db"))
+        with sqlite3.connect(dbname) as conn:
+            conn.execute("CREATE TABLE pictures(path TEXT, mtime INTEGER, blocks TEXT)")
+            conn.execute("CREATE INDEX idx_path ON pictures(path)")
+            conn.execute("INSERT INTO pictures VALUES ('old.png', 123, 'old blocks')")
+            if version is not None:
+                conn.execute("CREATE TABLE schema_version(version int PRIMARY KEY, description TEXT)")
+                conn.execute("INSERT INTO schema_version VALUES (?, 'old schema')", [version])
+
+        c = self.get_cache(dbname)
+        try:
+            c.purge_outdated()  # Used to raise 'no such column: mtime_ns'.
+            assert "old.png" not in c
+            blocks = [[(1, 2, 3)]] * 8
+            c["new.png"] = blocks
+            eq_(c["new.png"], blocks)
+        finally:
+            c.close()
+
+    def test_missing_orientation_columns(self, tmpdir):
+        dbname = str(tmpdir.join("orientations.db"))
+        c = self.get_cache(dbname)
+        c.con.execute("DROP TABLE pictures")
+        c.con.execute("CREATE TABLE pictures(path TEXT, mtime_ns INTEGER, blocks BLOB)")
+        c.close()
+
+        c = self.get_cache(dbname)
+        try:
+            blocks = [[(1, 2, 3)]] * 8
+            c["new.png"] = blocks
+            eq_(c["new.png"], blocks)
+        finally:
+            c.close()
+
+    def test_empty_schema_version(self, tmpdir):
+        dbname = str(tmpdir.join("empty_version.db"))
+        with sqlite3.connect(dbname) as conn:
+            conn.execute("CREATE TABLE schema_version(version int PRIMARY KEY, description TEXT)")
+        c = self.get_cache(dbname)
+        try:
+            c.purge_outdated()
+            eq_(len(c), 0)
+        finally:
+            c.close()
 
     def test_corrupted_db(self, tmpdir, monkeypatch):
         # If we don't do this monkeypatching, we get a weird exception about trying to flush a
