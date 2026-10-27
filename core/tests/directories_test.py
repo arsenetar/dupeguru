@@ -9,7 +9,7 @@ import time
 import tempfile
 import shutil
 
-from pytest import raises
+from pytest import raises, skip
 from pathlib import Path
 from hscommon.testutil import eq_
 from hscommon.plat import ISWINDOWS
@@ -44,6 +44,23 @@ def create_fake_fs(rootpath):
     with rootpath.joinpath("dir3", "file3.test").open("wt") as fp:
         fp.write("123")
     return rootpath
+
+
+def create_directory_link(target, link):
+    """Create a directory symlink or Windows junction for an isolated test fixture."""
+    try:
+        os.symlink(str(target), str(link), target_is_directory=True)
+        return True
+    except (OSError, NotImplementedError, AttributeError):
+        if not ISWINDOWS:
+            return False
+    try:
+        import _winapi
+
+        _winapi.CreateJunction(str(target), str(link))
+        return True
+    except (OSError, ImportError, AttributeError):
+        return False
 
 
 testpath = None
@@ -306,6 +323,19 @@ def test_get_files_does_not_choke_on_non_existing_directories(tmpdir):
     d.add_path(p)
     shutil.rmtree(str(p))
     eq_([], list(d.get_files()))
+
+
+def test_get_files_handles_directory_link_loop(tmpdir):
+    rootpath = Path(str(tmpdir))
+    subpath = rootpath.joinpath("subdir")
+    subpath.mkdir()
+    rootpath.joinpath("rootfile.test").touch()
+    subpath.joinpath("subfile.test").touch()
+    if not create_directory_link(rootpath, subpath.joinpath("loop")):
+        skip("platform does not permit creating a directory link in the task fixture")
+    d = Directories()
+    d.add_path(rootpath)
+    eq_(sorted(file.name for file in d.get_files()), ["rootfile.test", "subfile.test"])
 
 
 def test_get_state_returns_excluded_by_default_for_hidden_directories(tmpdir):
