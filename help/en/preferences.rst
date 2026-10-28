@@ -63,6 +63,11 @@ Preferences
 In all cases, dupeGuru nicely handles naming conflicts by prepending a number to the destination
 filename if the filename already exists in the destination.
 
+**Allow marking reference files:**
+    On the Advanced tab. When this option is enabled, reference files get a mark box too, so that
+    every file of a group can be deleted, moved or copied. See :doc:`results` for how marked
+    references behave and how dupeGuru protects them.
+
 **Custom Command:**
     This preference determines the command that will be invoked by the "Invoke Custom Command"
     action. You can invoke any external application through this action. This can be useful if,

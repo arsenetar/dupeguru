@@ -47,6 +47,12 @@ MSG_MANY_FILES_TO_OPEN = tr(
     "You're about to open many files at once. Depending on what those "
     "files are opened with, doing so can create quite a mess. Continue?"
 )
+MSG_MARKED_REFERENCES = tr("{} of the {} marked files are reference files!")
+MSG_SELECTED_REFERENCES = tr("{} of the {} selected files are reference files!")
+MSG_NO_LINKS_TO_MARKED_REFERENCES = tr(
+    "Deleted files can't be replaced with links while reference files are marked: "
+    "the links would point to files being deleted. Nothing has been done."
+)
 
 
 class DestType:
@@ -118,6 +124,7 @@ class DupeGuru(Broadcaster):
     # open_path(path)
     # reveal_path(path)
     # ask_yes_no(prompt) --> bool
+    # ask_proceed_cancel(prompt) --> bool, a warning with Proceed and Cancel, Cancel the default
     # create_results_window()
     # show_results_window()
     # show_problem_dialog()
@@ -153,6 +160,7 @@ class DupeGuru(Broadcaster):
             "copymove_dest_type": DestType.RELATIVE,
             "include_exists_check": True,
             "rehash_ignore_mtime": False,
+            "allow_marking_refs": False,
         }
         self.selected_dupes = []
         self.details_panel = DetailsPanel(self)
@@ -228,7 +236,7 @@ class DupeGuru(Broadcaster):
             j.add_progress()
             return self._do_delete_dupe(dupe, link_deleted, use_hardlinks, direct_deletion)
 
-        j.start_job(self.results.mark_count)
+        j.start_job(self.results.marked_file_count)
         self.results.perform_on_marked(op, True)
 
     def _do_delete_dupe(self, dupe, link_deleted, use_hardlinks, direct_deletion):
@@ -350,6 +358,13 @@ class DupeGuru(Broadcaster):
         self.selected_dupes = dupes
         self.notify("dupes_selected")
 
+    def _confirm_references(self, ref_count: int, file_count: int, msg: str) -> bool:
+        """Asks before an action on files proceeds with ``ref_count`` references among its
+        ``file_count`` files. True when there are none."""
+        if not ref_count:
+            return True
+        return self.view.ask_proceed_cancel(msg.format(ref_count, file_count))
+
     # --- Protected
     def _get_fileclasses(self):
         if self.app_mode == AppMode.PICTURE:
@@ -459,11 +474,14 @@ class DupeGuru(Broadcaster):
                 j.add_progress()
                 self.copy_or_move(dupe, copy, destination, desttype)
 
-            j.start_job(self.results.mark_count)
+            j.start_job(self.results.marked_file_count)
             self.results.perform_on_marked(op, not copy)
 
-        if not self.results.mark_count:
+        file_count = self.results.marked_file_count
+        if not file_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
+            return
+        if not self._confirm_references(len(self.results.marked_refs), file_count, MSG_MARKED_REFERENCES):
             return
         destination = self.view.select_dest_folder(
             tr("Select a directory to copy marked files to")
@@ -477,10 +495,17 @@ class DupeGuru(Broadcaster):
 
     def delete_marked(self):
         """Start an async job to send marked duplicates to the trash."""
-        if not self.results.mark_count:
+        file_count = self.results.marked_file_count
+        if not file_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
-        if not self.deletion_options.show(self.results.mark_count):
+        ref_count = len(self.results.marked_refs)
+        if not self._confirm_references(ref_count, file_count, MSG_MARKED_REFERENCES):
+            return
+        if not self.deletion_options.show(file_count):
+            return
+        if ref_count and self.deletion_options.link_deleted:
+            self.view.show_message(MSG_NO_LINKS_TO_MARKED_REFERENCES)
             return
         args = [
             self.deletion_options.link_deleted,
@@ -532,7 +557,8 @@ class DupeGuru(Broadcaster):
 
         Using the current selection, ``%d`` is replaced with the currently selected dupe and ``%r``
         is replaced with that dupe's ref file. If there's no selection, the command is not invoked.
-        If the dupe is a ref, ``%d`` and ``%r`` will be the same.
+        If the dupe is a ref, ``%d`` and ``%r`` will be the same, so the user is asked first when
+        the selection holds references.
         """
         cmd = self.view.get_default("CustomCommand")
         if not cmd:
@@ -543,6 +569,9 @@ class DupeGuru(Broadcaster):
             return
         dupes = self.selected_dupes
         refs = [self.results.get_group_of_duplicate(dupe).ref for dupe in dupes]
+        ref_count = sum(1 for dupe, ref in zip(dupes, refs) if dupe is ref)
+        if not self._confirm_references(ref_count, len(dupes), MSG_SELECTED_REFERENCES):
+            return
         for dupe, ref in zip(dupes, refs):
             dupe_cmd = cmd.replace("%d", str(dupe.path))
             dupe_cmd = dupe_cmd.replace("%r", str(ref.path))
@@ -646,11 +675,16 @@ class DupeGuru(Broadcaster):
     def mark_dupe(self, dupe, marked):
         """Change marked status of ``dupe``.
 
-        :param dupe: dupe to mark/unmark
+        :param dupe: dupe to mark/unmark, or a reference when references can be marked
         :type dupe: :class:`~core.fs.File`
         :param bool marked: True = mark, False = unmark
         """
-        if marked:
+        if self.results.is_ref_markable(dupe):
+            if marked:
+                self.results.mark_ref(dupe)
+            else:
+                self.results.unmark_ref(dupe)
+        elif marked:
             self.results.mark(dupe)
         else:
             self.results.unmark(dupe)
@@ -695,11 +729,12 @@ class DupeGuru(Broadcaster):
 
     def remove_marked(self):
         """Removed marked duplicates from the results (without touching the files themselves)."""
-        if not self.results.mark_count:
+        file_count = self.results.marked_file_count
+        if not file_count:
             self.view.show_message(MSG_NO_MARKED_DUPES)
             return
         msg = tr("You are about to remove %d files from results. Continue?")
-        if not self.view.ask_yes_no(msg % self.results.mark_count):
+        if not self.view.ask_yes_no(msg % file_count):
             return
         self.results.perform_on_marked(lambda x: None, True)
         self._results_changed()
@@ -745,6 +780,7 @@ class DupeGuru(Broadcaster):
                 count += 1
         if count:
             self.results.refresh_required = True
+            self.results.forget_moved_ref_marks()
         self._results_changed()
         msg = tr("{} duplicate groups were changed by the re-prioritization.").format(count)
         self.view.show_message(msg)
@@ -827,15 +863,31 @@ class DupeGuru(Broadcaster):
         self._start_job(JobType.SCAN, do)
 
     def toggle_selected_mark_state(self):
-        selected = self.without_ref(self.selected_dupes)
+        """Toggle the mark of :attr:`selected_dupes`, or mark them all if their marks differ.
+
+        Selected references are included when they can be marked: the warning before acting on
+        marked references is what guards against marking them by accident.
+        """
+        results = self.results
+        refs = [d for d in self.selected_dupes if results.is_ref_markable(d)]
+        selected = self.without_ref(self.selected_dupes) + refs
+
+        def is_marked(dupe):
+            return results.is_ref_marked(dupe) if dupe in refs else results.is_marked(dupe)
+
         if not selected:
             return
-        if allsame(self.results.is_marked(d) for d in selected):
-            markfunc = self.results.mark_toggle
-        else:
-            markfunc = self.results.mark
+        mark = not is_marked(selected[0]) if allsame(is_marked(d) for d in selected) else True
         for dupe in selected:
-            markfunc(dupe)
+            if dupe in refs:
+                if mark:
+                    results.mark_ref(dupe)
+                else:
+                    results.unmark_ref(dupe)
+            elif mark:
+                results.mark(dupe)
+            else:
+                results.unmark(dupe)
         self.notify("marking_changed")
 
     def without_ref(self, dupes):

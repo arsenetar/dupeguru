@@ -195,6 +195,7 @@ class DupeGuru(QObject):
         self.model.options["match_rotated"] = self.prefs.match_rotated
         self.model.options["include_exists_check"] = self.prefs.include_exists_check
         self.model.options["rehash_ignore_mtime"] = self.prefs.rehash_ignore_mtime
+        self.model.options["allow_marking_refs"] = self.prefs.allow_marking_refs
 
         if self.details_dialog:
             self.details_dialog.update_options()
@@ -409,6 +410,13 @@ class DupeGuru(QObject):
 
     def ask_yes_no(self, prompt):
         return self.confirm("", prompt)
+
+    def ask_proceed_cancel(self, prompt: str) -> bool:
+        box = QMessageBox(QMessageBox.Warning, "", prompt, parent=QApplication.activeWindow())
+        proceed = box.addButton(tr("Proceed"), QMessageBox.AcceptRole)
+        box.setDefaultButton(box.addButton(QMessageBox.Cancel))
+        box.exec()
+        return box.clickedButton() == proceed
 
     def create_results_window(self):
         """Creates resultWindow and details_dialog depending on the selected ``app_mode``."""

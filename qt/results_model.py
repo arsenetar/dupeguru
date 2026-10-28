@@ -49,6 +49,8 @@ class ResultsModel(Table):
             font = QFont(self.view.font())
             if self.prefs.reference_bold_font:
                 font.setBold(row.isref)
+            # A reference about to be acted on must not look like the ones being kept
+            font.setStrikeOut(row.isref and row.marked)
             return font
         elif role == Qt.EditRole and column.name == "name":
             return row.data[column.name]

@@ -19,6 +19,7 @@ from core.gui.prioritize_dialog import PrioritizeDialog
 
 class DupeGuruView:
     JOB = nulljob
+    proceed = True  # the answer of ask_proceed_cancel()
 
     def __init__(self):
         self.messages = []
@@ -40,6 +41,10 @@ class DupeGuruView:
 
     def ask_yes_no(self, prompt):
         return True  # always answer yes
+
+    def ask_proceed_cancel(self, prompt):
+        self.messages.append(prompt)
+        return self.proceed
 
     def create_results_window(self):
         pass

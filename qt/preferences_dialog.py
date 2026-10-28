@@ -228,6 +228,15 @@ most users should not have to modify these."
         self.advanced_vlayout.addWidget(self.include_exists_check_box)
         self._setupAddCheckbox("rehash_ignore_mtime_box", tr("Ignore difference in mtime when loading cached digests"))
         self.advanced_vlayout.addWidget(self.rehash_ignore_mtime_box)
+        self._setupAddCheckbox("allow_marking_refs_box", tr("Allow marking reference files"))
+        self.allow_marking_refs_box.setToolTip(
+            tr(
+                "Reference files get a mark box too, so that a whole group can be deleted.\n\
+Mark All and Invert Marking still leave them alone, files in reference folders \
+can never be marked, and acting on marked references asks first."
+            )
+        )
+        self.advanced_vlayout.addWidget(self.allow_marking_refs_box)
 
     def _setupDebugPage(self):
         self._setupAddCheckbox("debugModeBox", tr("Debug mode (restart required)"))
@@ -343,6 +352,7 @@ most users should not have to modify these."
         if section & Sections.ADVANCED:
             setchecked(self.rehash_ignore_mtime_box, prefs.rehash_ignore_mtime)
             setchecked(self.include_exists_check_box, prefs.include_exists_check)
+            setchecked(self.allow_marking_refs_box, prefs.allow_marking_refs)
         if section & Sections.DEBUG:
             setchecked(self.debugModeBox, prefs.debug_mode)
             setchecked(self.profile_scan_box, prefs.profile_scan)
@@ -361,6 +371,7 @@ most users should not have to modify these."
         prefs.ignore_hardlink_matches = ischecked(self.ignoreHardlinkMatches)
         prefs.rehash_ignore_mtime = ischecked(self.rehash_ignore_mtime_box)
         prefs.include_exists_check = ischecked(self.include_exists_check_box)
+        prefs.allow_marking_refs = ischecked(self.allow_marking_refs_box)
         prefs.debug_mode = ischecked(self.debugModeBox)
         prefs.profile_scan = ischecked(self.profile_scan_box)
         prefs.reference_bold_font = ischecked(self.reference_bold_font)
