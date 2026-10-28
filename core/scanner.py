@@ -201,6 +201,11 @@ class Scanner:
         groups = [g for g in groups if any(not f.is_ref for f in g)]
         logging.info("Created %d groups" % len(groups))
         for g in groups:
+            # Matches come in an order that can change from run to run (contents scans collect
+            # files in sets), and files that tie on every rule below keep that order. Putting each
+            # group in path order first makes the reference of such files the same in every scan:
+            # the first of them by path.
+            g.prioritize(lambda f: str(f.path))
             g.prioritize(self._key_func, self._tie_breaker)
         return groups
 

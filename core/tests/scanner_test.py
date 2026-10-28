@@ -550,6 +550,20 @@ def test_tie_breaker_same_name_plus_digit(fake_fileexists):
     assert group.ref is o5
 
 
+@pytest.mark.parametrize("scan_type", [ScanType.FILENAME, ScanType.CONTENTS])
+def test_tie_breaker_path_order(fake_fileexists, scan_type):
+    # Files that tie on every rule get the same reference whatever order they come in: the first
+    # by path. Their order in the group follows their paths too.
+    s = Scanner()
+    s.scan_type = scan_type
+    files = [no("foo", size=10, path=p) for p in ("c", "a", "b")]
+    for f in files:
+        f.digest = f.digest_partial = f.digest_samples = b"same"
+    for order in ([0, 1, 2], [2, 1, 0], [1, 2, 0]):
+        [group] = s.get_dupe_groups([files[i] for i in order])
+        eq_([str(f.path.parent) for f in group], ["a", "b", "c"])
+
+
 def test_partial_group_match(fake_fileexists):
     # Count the number of discarded matches (when a file doesn't match all other dupes of the
     # group) in Scanner.discarded_file_count
