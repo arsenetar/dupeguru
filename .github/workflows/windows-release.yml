@@ -51,6 +51,7 @@ jobs:
         run: |
           New-Item -ItemType Directory release
           Copy-Item dist/dupeguru_win64_4.3.2.exe release/dupeguru-4.3.2-windows-x64-setup.exe
+          New-Item -ItemType File dist/dupeguru-win64/settings.ini
           Compress-Archive -Path dist/dupeguru-win64 -DestinationPath release/dupeguru-4.3.2-windows-x64-portable.zip
           Get-ChildItem release -File | ForEach-Object {
             $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
