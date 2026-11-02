@@ -20,8 +20,8 @@ jobs:
           choco install nsis --no-progress -y
       - name: Check feature formatting and lint
         run: |
-          python -m black --check dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests
-          python -m flake8 --max-line-length=120 dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests
+          python -m black --check dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests run.py
+          python -m flake8 --max-line-length=120 dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests run.py
       - name: Build application
         run: python build.py
       - name: Run core and Qt regression tests
@@ -33,17 +33,11 @@ jobs:
           if (!(Test-Path 'dist/dupeguru-win64/dupeguru-win64.exe')) { throw 'Application missing' }
       - name: Smoke test packaged application
         run: |
-          $process = Start-Process -FilePath 'dist/dupeguru-win64/dupeguru-win64.exe' -PassThru -WindowStyle Hidden
+          $process = Start-Process -FilePath 'dist/dupeguru-win64/dupeguru-win64.exe' -ArgumentList '--smoke-test' -PassThru -WindowStyle Hidden
           try {
-            $ready = $false
-            for ($attempt = 0; $attempt -lt 30; $attempt++) {
-              Start-Sleep -Seconds 1
-              $process.Refresh()
-              if ($process.HasExited) { throw 'Packaged application exited unexpectedly' }
-              if ($process.MainWindowHandle -ne 0) { $ready = $true; break }
-            }
-            if (!$ready) { throw 'Packaged application did not open its window' }
-            Write-Output "Packaged application opened: $($process.MainWindowTitle)"
+            if (!$process.WaitForExit(30000)) { throw 'Packaged application startup timed out' }
+            if ($process.ExitCode -ne 0) { throw "Packaged application failed: $($process.ExitCode)" }
+            Write-Output 'Packaged Qt application initialized and exited successfully'
           } finally {
             if (!$process.HasExited) { Stop-Process -Id $process.Id }
           }

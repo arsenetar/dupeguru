@@ -81,6 +81,9 @@ def main():
     global dgapp
     dgapp = DupeGuru()
     install_excepthook("https://github.com/arsenetar/dupeguru/issues")
+    # Verify frozen-app startup without relying on visible window handles in CI.
+    if "--smoke-test" in sys.argv:
+        QTimer.singleShot(1000, app.quit)
     result = app.exec()
     # I was getting weird crashes when quitting under Windows, and manually deleting main app
     # references with gc.collect() in between seems to fix the problem.

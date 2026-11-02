@@ -43,6 +43,9 @@ You need to use the respective x86 or x64 version of python to build the 32 bit 
     $ python package.py
 
 ### Running tests
+The packaged executable accepts `--smoke-test` to initialize the application, run its Qt event
+loop briefly, and exit. The Windows release workflow checks its exit code before publishing.
+
 The complete test suite can be run with tox just like on linux. NOTE: The extra requirements need to be installed to run unit tests: `pip install -r requirements-extra.txt`.
 
 [python]: http://www.python.org/
